@@ -83,7 +83,7 @@ update_status Application::Update()
 	
 	while(item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = item->data->PreUpdate();
+		ret = item->data->PreUpdate(dt);
 		item = item->next;
 	}
 
@@ -91,7 +91,7 @@ update_status Application::Update()
 
 	while(item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = item->data->Update();
+		ret = item->data->Update(dt);
 		item = item->next;
 	}
 

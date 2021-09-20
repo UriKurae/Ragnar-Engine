@@ -22,7 +22,8 @@ public:
 	ModuleCamera3D* camera;
 
 private:
-
+	Timer	ms_timer;
+	float	dt;
 	p2List<Module*> list_modules;
 
 public:
