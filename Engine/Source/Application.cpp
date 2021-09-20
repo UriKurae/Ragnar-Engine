@@ -74,14 +74,14 @@ void Application::FinishUpdate()
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
-update_status Application::Update()
+UpdateStatus Application::Update()
 {
-	update_status ret = UPDATE_CONTINUE;
+	UpdateStatus ret = UpdateStatus::UPDATE_CONTINUE;
 	PrepareUpdate();
 	
 	p2List_item<Module*>* item = list_modules.getFirst();
 	
-	while(item != NULL && ret == UPDATE_CONTINUE)
+	while(item != NULL && ret == UpdateStatus::UPDATE_CONTINUE)
 	{
 		ret = item->data->PreUpdate(dt);
 		item = item->next;
@@ -89,7 +89,7 @@ update_status Application::Update()
 
 	item = list_modules.getFirst();
 
-	while(item != NULL && ret == UPDATE_CONTINUE)
+	while(item != NULL && ret == UpdateStatus::UPDATE_CONTINUE)
 	{
 		ret = item->data->Update(dt);
 		item = item->next;
@@ -97,7 +97,7 @@ update_status Application::Update()
 
 	item = list_modules.getFirst();
 
-	while(item != NULL && ret == UPDATE_CONTINUE)
+	while(item != NULL && ret == UpdateStatus::UPDATE_CONTINUE)
 	{
 		ret = item->data->PostUpdate();
 		item = item->next;

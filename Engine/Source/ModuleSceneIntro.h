@@ -15,7 +15,7 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
-	update_status Update(float dt) override;
+	UpdateStatus Update(float dt) override;
 	bool CleanUp();
 
 public:

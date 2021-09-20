@@ -32,7 +32,7 @@ public:
 	~Application();
 
 	bool Init();
-	update_status Update();
+	UpdateStatus Update();
 	bool CleanUp();
 
 private:
