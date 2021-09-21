@@ -55,7 +55,8 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -74,7 +75,8 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -87,6 +89,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dependencies\Imgui\imconfig.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl2.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\Color.h" />
     <ClInclude Include="Engine\Source\glmath.h" />
@@ -106,6 +116,13 @@
     <ClInclude Include="Engine\Source\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Engine\Source\Application.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />

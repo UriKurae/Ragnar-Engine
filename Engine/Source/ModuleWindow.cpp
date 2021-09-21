@@ -2,6 +2,10 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_sdl.h"
+#include "Imgui/imgui_impl_opengl2.h"
+
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	window = NULL;
@@ -70,6 +74,12 @@ bool ModuleWindow::Init()
 	}
 
 	return ret;
+}
+
+UpdateStatus ModuleWindow::Update(float dt)
+{
+
+	return UpdateStatus::UPDATE_CONTINUE;
 }
 
 // Called before quitting

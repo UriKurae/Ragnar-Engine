@@ -3,6 +3,10 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_opengl2.h"
+#include "Imgui/imgui_impl_sdl.h"
+
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -37,6 +41,24 @@ UpdateStatus ModuleSceneIntro::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
+
+	return UpdateStatus::UPDATE_CONTINUE;
+}
+
+UpdateStatus ModuleSceneIntro::PostUpdate()
+{
+	ImGui::Begin("Ragnar Engine");
+	if (ImGui::Button("Close", ImVec2(0,0)))
+	{
+		return UpdateStatus::UPDATE_STOP;
+	}
+	
+	//if (ImGui::CollapsingHeader("Tab"))
+	//{
+	//	ImGui::TreeNode("Close");
+	//}
+
+	ImGui::End();
 
 	return UpdateStatus::UPDATE_CONTINUE;
 }

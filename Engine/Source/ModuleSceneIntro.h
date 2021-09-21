@@ -16,6 +16,7 @@ public:
 
 	bool Start();
 	UpdateStatus Update(float dt) override;
+	UpdateStatus PostUpdate() override;
 	bool CleanUp();
 
 public:
