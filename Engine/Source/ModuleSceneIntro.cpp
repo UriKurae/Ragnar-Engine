@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
+#include "ModuleInput.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_opengl2.h"
@@ -47,18 +48,25 @@ UpdateStatus ModuleSceneIntro::Update(float dt)
 
 UpdateStatus ModuleSceneIntro::PostUpdate()
 {
-	ImGui::Begin("Ragnar Engine");
-	if (ImGui::Button("Close", ImVec2(0,0)))
-	{
-		return UpdateStatus::UPDATE_STOP;
-	}
-	
-	//if (ImGui::CollapsingHeader("Tab"))
-	//{
-	//	ImGui::TreeNode("Close");
-	//}
+	if (app->input->GetKey(SDL_SCANCODE_P) == KeyState::KEY_UP) isPaused = !isPaused;
 
-	ImGui::End();
+	if (!isPaused)
+	{
+		ImGui::ShowDemoWindow();
+
+		ImGui::Begin("Ragnar Engine");
+		if (ImGui::Button("Close", ImVec2(0, 0)))
+		{
+			return UpdateStatus::UPDATE_STOP;
+		}
+
+		//if (ImGui::CollapsingHeader("Tab"))
+		//{
+		//	ImGui::TreeNode("Close");
+		//}
+
+		ImGui::End();
+	}
 
 	return UpdateStatus::UPDATE_CONTINUE;
 }

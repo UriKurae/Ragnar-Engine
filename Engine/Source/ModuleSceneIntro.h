@@ -19,5 +19,7 @@ public:
 	UpdateStatus PostUpdate() override;
 	bool CleanUp();
 
+	bool isPaused = false;
+
 public:
 };
