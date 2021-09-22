@@ -11,7 +11,7 @@ class Cube;
 class ModuleSceneIntro : public Module
 {
 public:
-	ModuleSceneIntro(Application* app, bool start_enabled = true);
+	ModuleSceneIntro(Application* app, bool startEnabled = true);
 	~ModuleSceneIntro();
 
 	bool Start();

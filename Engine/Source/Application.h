@@ -14,20 +14,6 @@
 class Application
 {
 public:
-	ModuleWindow* window;
-	ModuleInput* input;
-	ModuleAudio* audio;
-	ModuleSceneIntro* scene_intro;
-	ModuleRenderer3D* renderer3D;
-	ModuleCamera3D* camera;
-
-private:
-	Timer	ms_timer;
-	float	dt;
-	p2List<Module*> list_modules;
-
-public:
-
 	Application();
 	~Application();
 
@@ -36,8 +22,20 @@ public:
 	bool CleanUp();
 
 private:
-
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
+public:
+	ModuleWindow* window;
+	ModuleInput* input;
+	ModuleAudio* audio;
+	ModuleSceneIntro* sceneIntro;
+	ModuleRenderer3D* renderer3D;
+	ModuleCamera3D* camera;
+
+private:
+	Timer	msTimer;
+	float	dt;
+	p2List<Module*> listModules;
 };

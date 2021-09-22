@@ -500,7 +500,7 @@ vec4 operator * (const mat4x4 &Matrix, const vec4 &u)
 
 mat4x4 BiasMatrix = mat4x4(0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.5f, 0.5f, 0.5f, 1.0f);
 mat4x4 BiasMatrixInverse = mat4x4(2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, -1.0f, -1.0f, -1.0f, 1.0f);
-mat4x4 IdentityMatrix = mat4x4(
+mat4x4 identityMatrix = mat4x4(
 	1.0f, 0.0f, 0.0f, 0.0f, 
 	0.0f, 1.0f, 0.0f, 0.0f,
 	0.0f, 0.0f, 1.0f, 0.0f, 

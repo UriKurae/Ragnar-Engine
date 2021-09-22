@@ -6,16 +6,16 @@
 class ModuleCamera3D : public Module
 {
 public:
-	ModuleCamera3D(Application* app, bool start_enabled = true);
+	ModuleCamera3D(Application* app, bool startEnabled = true);
 	~ModuleCamera3D();
 
 	bool Start();
 	UpdateStatus Update(float dt) override;
 	bool CleanUp();
 
-	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3 &Spot);
-	void Move(const vec3 &Movement);
+	void Look(const vec3 &pos, const vec3 &ref, bool rotateAroundReference = false);
+	void LookAt(const vec3 &spot);
+	void Move(const vec3 &movement);
 	float* GetViewMatrix();
 
 private:
@@ -24,9 +24,9 @@ private:
 
 public:
 	
-	vec3 X, Y, Z, Position, Reference;
+	vec3 x, y, z, position, reference;
 
 private:
 
-	mat4x4 ViewMatrix, ViewMatrixInverse;
+	mat4x4 viewMatrix, viewMatrixInverse;
 };

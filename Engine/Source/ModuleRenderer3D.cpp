@@ -9,8 +9,9 @@
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl2.h"
 
-ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleRenderer3D::ModuleRenderer3D(Application* app, bool startEnabled) : Module(app, startEnabled)
 {
+	context = NULL;
 }
 
 // Destructor
@@ -122,7 +123,7 @@ UpdateStatus ModuleRenderer3D::PreUpdate(float dt)
 	glLoadMatrixf(app->camera->GetViewMatrix());
 
 	// light 0 on cam pos
-	lights[0].SetPos(app->camera->Position.x, app->camera->Position.y, app->camera->Position.z);
+	lights[0].SetPos(app->camera->position.x, app->camera->position.y, app->camera->position.z);
 
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
@@ -165,8 +166,8 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
-	glLoadMatrixf(&ProjectionMatrix);
+	projectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
+	glLoadMatrixf(&projectionMatrix);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

@@ -504,7 +504,7 @@ public:
 
 extern mat4x4 BiasMatrix;
 extern mat4x4 BiasMatrixInverse;
-extern mat4x4 IdentityMatrix;
+extern mat4x4 identityMatrix;
 
 // ----------------------------------------------------------------------------------------------------------------------------
 

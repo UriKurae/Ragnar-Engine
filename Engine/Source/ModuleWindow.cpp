@@ -1,15 +1,11 @@
 #include "Globals.h"
-#include "Application.h"
 #include "ModuleWindow.h"
+#include "Application.h"
 
-#include "Imgui/imgui.h"
-#include "Imgui/imgui_impl_sdl.h"
-#include "Imgui/imgui_impl_opengl2.h"
-
-ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleWindow::ModuleWindow(Application* app, bool startEnabled) : Module(app, startEnabled)
 {
 	window = NULL;
-	screen_surface = NULL;
+	screenSurface = NULL;
 }
 
 // Destructor
@@ -69,17 +65,11 @@ bool ModuleWindow::Init()
 		else
 		{
 			//Get window surface
-			screen_surface = SDL_GetWindowSurface(window);
+			screenSurface = SDL_GetWindowSurface(window);
 		}
 	}
 
 	return ret;
-}
-
-UpdateStatus ModuleWindow::Update(float dt)
-{
-
-	return UpdateStatus::UPDATE_CONTINUE;
 }
 
 // Called before quitting

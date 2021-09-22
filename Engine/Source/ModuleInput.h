@@ -16,7 +16,7 @@ class ModuleInput : public Module
 {
 public:
 	
-	ModuleInput(Application* app, bool start_enabled = true);
+	ModuleInput(Application* app, bool startEnabled = true);
 	~ModuleInput();
 
 	bool Init();
@@ -30,7 +30,7 @@ public:
 
 	KeyState GetMouseButton(int id) const
 	{
-		return mouse_buttons[id];
+		return mouseButtons[id];
 	}
 
 	int GetMouseX() const
@@ -60,11 +60,11 @@ public:
 
 private:
 	KeyState* keyboard;
-	KeyState mouse_buttons[MAX_MOUSE_BUTTONS];
+	KeyState mouseButtons[MAX_MOUSE_BUTTONS];
 	int mouseX;
 	int mouseY;
 	int mouseZ;
 	int mouseXMotion;
 	int mouseYMotion;
-	//int mouse_z_motion;
+	int mouseZMotion;
 };

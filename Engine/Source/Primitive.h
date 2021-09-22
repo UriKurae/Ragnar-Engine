@@ -1,16 +1,16 @@
-
 #pragma once
+
 #include "glmath.h"
 #include "Color.h"
 
-enum PrimitiveTypes
+enum class PrimitiveTypes
 {
-	Primitive_Point,
-	Primitive_Line,
-	Primitive_Plane,
-	Primitive_Cube,
-	Primitive_Sphere,
-	Primitive_Cylinder
+	PRIMITIVE_POINT,
+	PRIMITIVE_LINE,
+	PRIMITIVE_PLANE,
+	PRIMITIVE_CUBE,
+	PRIMITIVE_SPHERE,
+	PRIMITIVE_CYLINDER
 };
 
 class Primitive
@@ -19,12 +19,14 @@ public:
 
 	Primitive();
 
-	virtual void	Render() const;
-	virtual void	InnerRender() const;
-	void			SetPos(float x, float y, float z);
-	void			SetRotation(float angle, const vec3 &u);
-	void			Scale(float x, float y, float z);
-	PrimitiveTypes	GetType() const;
+	virtual void Render() const;
+	virtual void InnerRender() const;
+
+	void SetPos(float x, float y, float z);
+	void SetRotation(float angle, const vec3 &u);
+	void Scale(float x, float y, float z);
+
+	PrimitiveTypes GetType() const;
 
 public:
 	

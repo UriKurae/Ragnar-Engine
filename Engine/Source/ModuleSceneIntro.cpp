@@ -8,7 +8,7 @@
 #include "Imgui/imgui_impl_opengl2.h"
 #include "Imgui/imgui_impl_sdl.h"
 
-ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleSceneIntro::ModuleSceneIntro(Application* app, bool startEnabled) : Module(app, startEnabled)
 {
 }
 
@@ -59,13 +59,36 @@ UpdateStatus ModuleSceneIntro::PostUpdate()
 		{
 			return UpdateStatus::UPDATE_STOP;
 		}
+		ImGui::End();
+
+		//ImGui::Button("File", ImVec2(0, 0));
+		//ImGui::Button("Edit", ImVec2(0, 0));
+
+		if (ImGui::BeginMainMenuBar())
+		{
+			bool ret = false;
+			if (ImGui::BeginMenu("File"))
+			{
+				ImGui::MenuItem("Save", "Ctrl + S", &ret);
+				if (ImGui::MenuItem("Exit", "Alt + F4", &ret))
+				{
+					return UpdateStatus::UPDATE_STOP;
+				}
+				ImGui::EndMenu();
+			}
+			if (ImGui::BeginMenu("Edit"))
+			{
+				ImGui::MenuItem("Undo", "Ctrl + Z", &ret);
+				ImGui::MenuItem("Redo", "Ctrl + Y", &ret);
+				ImGui::EndMenu();
+			}
+			ImGui::EndMainMenuBar();
+		}
 
 		//if (ImGui::CollapsingHeader("Tab"))
 		//{
 		//	ImGui::TreeNode("Close");
 		//}
-
-		ImGui::End();
 	}
 
 	return UpdateStatus::UPDATE_CONTINUE;

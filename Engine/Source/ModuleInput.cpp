@@ -4,7 +4,7 @@
 
 #define MAX_KEYS 300
 
-ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleInput::ModuleInput(Application* app, bool startEnabled) : Module(app, startEnabled)
 {
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, (int)KeyState::KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
@@ -67,17 +67,17 @@ UpdateStatus ModuleInput::PreUpdate(float dt)
 	{
 		if(buttons & SDL_BUTTON(i))
 		{
-			if(mouse_buttons[i] == KeyState::KEY_IDLE)
-				mouse_buttons[i] = KeyState::KEY_DOWN;
+			if(mouseButtons[i] == KeyState::KEY_IDLE)
+				mouseButtons[i] = KeyState::KEY_DOWN;
 			else
-				mouse_buttons[i] = KeyState::KEY_REPEAT;
+				mouseButtons[i] = KeyState::KEY_REPEAT;
 		}
 		else
 		{
-			if(mouse_buttons[i] == KeyState::KEY_REPEAT || mouse_buttons[i] == KeyState::KEY_DOWN)
-				mouse_buttons[i] = KeyState::KEY_UP;
+			if(mouseButtons[i] == KeyState::KEY_REPEAT || mouseButtons[i] == KeyState::KEY_DOWN)
+				mouseButtons[i] = KeyState::KEY_UP;
 			else
-				mouse_buttons[i] = KeyState::KEY_IDLE;
+				mouseButtons[i] = KeyState::KEY_IDLE;
 		}
 	}
 

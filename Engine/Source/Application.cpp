@@ -5,7 +5,7 @@ Application::Application()
 	window = new ModuleWindow(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
-	scene_intro = new ModuleSceneIntro(this);
+	sceneIntro = new ModuleSceneIntro(this);
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 
@@ -20,14 +20,14 @@ Application::Application()
 	AddModule(audio);
 	
 	// Scenes
-	AddModule(scene_intro);
+	AddModule(sceneIntro);
 
 	AddModule(renderer3D);
 }
 
 Application::~Application()
 {
-	p2List_item<Module*>* item = list_modules.getLast();
+	p2List_item<Module*>* item = listModules.getLast();
 
 	while(item != NULL)
 	{
@@ -41,7 +41,7 @@ bool Application::Init()
 	bool ret = true;
 
 	// Call Init() in all modules
-	p2List_item<Module*>* item = list_modules.getFirst();
+	p2List_item<Module*>* item = listModules.getFirst();
 
 	while(item != NULL && ret == true)
 	{
@@ -51,7 +51,7 @@ bool Application::Init()
 
 	// After all Init calls we call Start() in all modules
 	LOG("Application Start --------------");
-	item = list_modules.getFirst();
+	item = listModules.getFirst();
 
 	while(item != NULL && ret == true)
 	{
@@ -79,7 +79,7 @@ UpdateStatus Application::Update()
 	UpdateStatus ret = UpdateStatus::UPDATE_CONTINUE;
 	PrepareUpdate();
 	
-	p2List_item<Module*>* item = list_modules.getFirst();
+	p2List_item<Module*>* item = listModules.getFirst();
 	
 	while(item != NULL && ret == UpdateStatus::UPDATE_CONTINUE)
 	{
@@ -87,7 +87,7 @@ UpdateStatus Application::Update()
 		item = item->next;
 	}
 
-	item = list_modules.getFirst();
+	item = listModules.getFirst();
 
 	while(item != NULL && ret == UpdateStatus::UPDATE_CONTINUE)
 	{
@@ -95,7 +95,7 @@ UpdateStatus Application::Update()
 		item = item->next;
 	}
 
-	item = list_modules.getFirst();
+	item = listModules.getFirst();
 
 	while(item != NULL && ret == UpdateStatus::UPDATE_CONTINUE)
 	{
@@ -110,7 +110,7 @@ UpdateStatus Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
-	p2List_item<Module*>* item = list_modules.getLast();
+	p2List_item<Module*>* item = listModules.getLast();
 
 	while(item != NULL && ret == true)
 	{
@@ -122,5 +122,5 @@ bool Application::CleanUp()
 
 void Application::AddModule(Module* mod)
 {
-	list_modules.add(mod);
+	listModules.add(mod);
 }
