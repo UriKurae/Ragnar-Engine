@@ -2,41 +2,41 @@
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-float dot(const vec2 &u, const vec2 &v)
+float Dot(const Vec2 &u, const Vec2 &v)
 {
 	return u.x * v.x + u.y * v.y;
 }
 
-float length(const vec2 &u)
+float Length(const Vec2 &u)
 {
 	return sqrt(u.x * u.x + u.y * u.y);
 }
 
-float length2(const vec2 &u)
+float Length2(const Vec2 &u)
 {
 	return u.x * u.x + u.y * u.y;
 }
 
-vec2 mix(const vec2 &u, const vec2 &v, float a)
+Vec2 Mix(const Vec2 &u, const Vec2 &v, float a)
 {
 	return u * (1.0f - a) + v * a;
 }
 
-vec2 normalize(const vec2 &u)
+Vec2 Normalize(const Vec2 &u)
 {
 	return u / sqrt(u.x * u.x + u.y * u.y);
 }
 
-vec2 reflect(const vec2 &i, const vec2 &n)
+Vec2 Reflect(const Vec2 &i, const Vec2 &n)
 {
-	return i - 2.0f * dot(n, i) * n;
+	return i - 2.0f * Dot(n, i) * n;
 }
 
-vec2 refract(const vec2 &i, const vec2 &n, float eta)
+Vec2 Refract(const Vec2 &i, const Vec2 &n, float eta)
 {
-	vec2 r;
+	Vec2 r;
 
-	float ndoti = dot(n, i), k = 1.0f - eta * eta * (1.0f - ndoti * ndoti);
+	float ndoti = Dot(n, i), k = 1.0f - eta * eta * (1.0f - ndoti * ndoti);
 
 	if(k >= 0.0f)
 	{
@@ -46,57 +46,57 @@ vec2 refract(const vec2 &i, const vec2 &n, float eta)
 	return r;
 }
 
-vec2 rotate(const vec2 &u, float angle)
+Vec2 Rotate(const Vec2 &u, float angle)
 {
 	angle = angle / 180.0f * (float)M_PI;
 
 	float c = cos(angle), s = sin(angle);
 
-	return vec2(u.x * c - u.y * s, u.x * s + u.y * c);
+	return Vec2(u.x * c - u.y * s, u.x * s + u.y * c);
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-vec3 cross(const vec3 &u, const vec3 &v)
+Vec3 Cross(const Vec3 &u, const Vec3 &v)
 {
-	return vec3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x);
+	return Vec3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x);
 }
 
-float dot(const vec3 &u, const vec3 &v)
+float Dot(const Vec3 &u, const Vec3 &v)
 {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
-float length(const vec3 &u)
+float Length(const Vec3 &u)
 {
 	return sqrt(u.x * u.x + u.y * u.y + u.z * u.z);
 }
 
-float length2(const vec3 &u)
+float Length2(const Vec3 &u)
 {
 	return u.x * u.x + u.y * u.y + u.z * u.z;
 }
 
-vec3 mix(const vec3 &u, const vec3 &v, float a)
+Vec3 Mix(const Vec3 &u, const Vec3 &v, float a)
 {
 	return u * (1.0f - a) + v * a;
 }
 
-vec3 normalize(const vec3 &u)
+Vec3 Normalize(const Vec3 &u)
 {
 	return u / sqrt(u.x * u.x + u.y * u.y + u.z * u.z);
 }
 
-vec3 reflect(const vec3 &i, const vec3 &n)
+Vec3 Reflect(const Vec3 &i, const Vec3 &n)
 {
-	return i - 2.0f * dot(n, i) * n;
+	return i - 2.0f * Dot(n, i) * n;
 }
 
-vec3 refract(const vec3 &i, const vec3 &n, float eta)
+Vec3 Refract(const Vec3 &i, const Vec3 &n, float eta)
 {
-	vec3 r;
+	Vec3 r;
 
-	float ndoti = dot(n, i), k = 1.0f - eta * eta * (1.0f - ndoti * ndoti);
+	float ndoti = Dot(n, i), k = 1.0f - eta * eta * (1.0f - ndoti * ndoti);
 
 	if(k >= 0.0f)
 	{
@@ -106,92 +106,92 @@ vec3 refract(const vec3 &i, const vec3 &n, float eta)
 	return r;
 }
 
-vec3 rotate(const vec3 &u, float angle, const vec3 &v)
+Vec3 Rotate(const Vec3 &u, float angle, const Vec3 &v)
 {
-	return *(vec3*)&(rotate(angle, v) * vec4(u, 1.0f));
+	return *(Vec3*)&(Rotate(angle, v) * Vec4(u, 1.0f));
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-mat2x2::mat2x2()
+Mat2x2::Mat2x2()
 {
-	M[0] = 1.0f; M[2] = 0.0f;
-	M[1] = 0.0f; M[3] = 1.0f;
+	m[0] = 1.0f; m[2] = 0.0f;
+	m[1] = 0.0f; m[3] = 1.0f;
 }
 
-mat2x2::~mat2x2()
+Mat2x2::~Mat2x2()
 {}
 
-mat2x2::mat2x2(const mat2x2 &Matrix)
+Mat2x2::Mat2x2(const Mat2x2 &matrix)
 {
 	for(int i = 0; i < 4; i++)
 	{
-		M[i] = Matrix.M[i];
+		m[i] = matrix.m[i];
 	}
 }
 
-mat2x2::mat2x2(const vec2 &col1, const vec2 &col2)
+Mat2x2::Mat2x2(const Vec2 &col1, const Vec2 &col2)
 {
-	M[0] = col1.x; M[2] = col2.x;
-	M[1] = col1.y; M[3] = col2.y;
+	m[0] = col1.x; m[2] = col2.x;
+	m[1] = col1.y; m[3] = col2.y;
 }
 
-mat2x2::mat2x2(float c1r1, float c1r2, float c2r1, float c2r2)
+Mat2x2::Mat2x2(float c1r1, float c1r2, float c2r1, float c2r2)
 {
-	M[0] = c1r1; M[2] = c2r1;
-	M[1] = c1r2; M[3] = c2r2;
+	m[0] = c1r1; m[2] = c2r1;
+	m[1] = c1r2; m[3] = c2r2;
 }
 
-mat2x2::mat2x2(const mat3x3 &Matrix)
+Mat2x2::Mat2x2(const Mat3x3 &matrix)
 {
-	M[0] = Matrix.M[0]; M[2] = Matrix.M[3];
-	M[1] = Matrix.M[1]; M[3] = Matrix.M[4];
+	m[0] = matrix.m[0]; m[2] = matrix.m[3];
+	m[1] = matrix.m[1]; m[3] = matrix.m[4];
 }
 
-mat2x2::mat2x2(const mat4x4 &Matrix)
+Mat2x2::Mat2x2(const Mat4x4 &matrix)
 {
-	M[0] = Matrix.M[0]; M[2] = Matrix.M[4];
-	M[1] = Matrix.M[1]; M[3] = Matrix.M[5];
+	m[0] = matrix.m[0]; m[2] = matrix.m[4];
+	m[1] = matrix.m[1]; m[3] = matrix.m[5];
 }
 
-mat2x2& mat2x2::operator = (const mat2x2 &Matrix)
+Mat2x2& Mat2x2::operator=(const Mat2x2 &matrix)
 {
 	for(int i = 0; i < 4; i++)
 	{
-		M[i] = Matrix.M[i];
+		m[i] = matrix.m[i];
 	}
 
 	return *this;
 }
 
-float& mat2x2::operator [] (int i)
+float& Mat2x2::operator[](int i)
 {
-	return M[i];
+	return m[i];
 }
 
-float* mat2x2::operator & ()
+float* Mat2x2::operator&()
 {
 	return (float*)this;
 }
 
-mat2x2 operator * (const mat2x2 &Matrix1, const mat2x2 &Matrix2)
+Mat2x2 operator*(const Mat2x2 &matrix1, const Mat2x2 &matrix2)
 {
-	mat2x2 Matrix3;
+	Mat2x2 matrix3;
 
-	Matrix3.M[0] = Matrix1.M[0] * Matrix2.M[0] + Matrix1.M[2] * Matrix2.M[1];
-	Matrix3.M[1] = Matrix1.M[1] * Matrix2.M[0] + Matrix1.M[3] * Matrix2.M[1];
-	Matrix3.M[2] = Matrix1.M[0] * Matrix2.M[2] + Matrix1.M[2] * Matrix2.M[3];
-	Matrix3.M[3] = Matrix1.M[1] * Matrix2.M[2] + Matrix1.M[3] * Matrix2.M[3];
+	matrix3.m[0] = matrix1.m[0] * matrix2.m[0] + matrix1.m[2] * matrix2.m[1];
+	matrix3.m[1] = matrix1.m[1] * matrix2.m[0] + matrix1.m[3] * matrix2.m[1];
+	matrix3.m[2] = matrix1.m[0] * matrix2.m[2] + matrix1.m[2] * matrix2.m[3];
+	matrix3.m[3] = matrix1.m[1] * matrix2.m[2] + matrix1.m[3] * matrix2.m[3];
 
-	return Matrix3;
+	return matrix3;
 }
 
-vec2 operator * (const mat2x2 &Matrix, const vec2 &u)
+Vec2 operator*(const Mat2x2 &matrix, const Vec2 &u)
 {
-	vec2 v;
+	Vec2 v;
 
-	v.x = Matrix.M[0] * u.x + Matrix.M[2] * u.y;
-	v.y = Matrix.M[1] * u.x + Matrix.M[3] * u.y;
+	v.x = matrix.m[0] * u.x + matrix.m[2] * u.y;
+	v.y = matrix.m[1] * u.x + matrix.m[3] * u.y;
 
 	return v;
 }
@@ -203,126 +203,126 @@ vec2 operator * (const mat2x2 &Matrix, const vec2 &u)
 //
 // ----------------------------------------------------------------------------------------------------------------------------
 
-mat2x2 inverse(const mat2x2 &Matrix)
+Mat2x2 Inverse(const Mat2x2 &matrix)
 {
-	const float *m = Matrix.M;
+	const float *m = matrix.m;
 
 	float det = m[0] * m[3] - m[2] * m[1];
 
-	mat2x2 Inverse;
+	Mat2x2 inverse;
 
-	Inverse.M[0] = m[3] / det;
-	Inverse.M[1] = -m[1] / det;
-	Inverse.M[2] = -m[2] / det;
-	Inverse.M[3] = m[0] / det;
+	inverse.m[0] = m[3] / det;
+	inverse.m[1] = -m[1] / det;
+	inverse.m[2] = -m[2] / det;
+	inverse.m[3] = m[0] / det;
 
-	return Inverse;
+	return inverse;
 }
 
-mat2x2 transpose(const mat2x2 &Matrix)
+Mat2x2 Transpose(const Mat2x2 &matrix)
 {
-	mat2x2 Transpose;
+	Mat2x2 transpose;
 
-	Transpose.M[0] = Matrix.M[0];
-	Transpose.M[1] = Matrix.M[2];
-	Transpose.M[2] = Matrix.M[1];
-	Transpose.M[3] = Matrix.M[3];
+	transpose.m[0] = matrix.m[0];
+	transpose.m[1] = matrix.m[2];
+	transpose.m[2] = matrix.m[1];
+	transpose.m[3] = matrix.m[3];
 
-	return Transpose;
+	return transpose;
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-mat3x3::mat3x3()
+Mat3x3::Mat3x3()
 {
-	M[0] = 1.0f; M[3] = 0.0f; M[6] = 0.0f;
-	M[1] = 0.0f; M[4] = 1.0f; M[7] = 0.0f;
-	M[2] = 0.0f; M[5] = 0.0f; M[8] = 1.0f;
+	m[0] = 1.0f; m[3] = 0.0f; m[6] = 0.0f;
+	m[1] = 0.0f; m[4] = 1.0f; m[7] = 0.0f;
+	m[2] = 0.0f; m[5] = 0.0f; m[8] = 1.0f;
 }
 
-mat3x3::~mat3x3()
+Mat3x3::~Mat3x3()
 {}
 
-mat3x3::mat3x3(const mat3x3 &Matrix)
+Mat3x3::Mat3x3(const Mat3x3 &matrix)
 {
 	for(int i = 0; i < 9; i++)
 	{
-		M[i] = Matrix.M[i];
+		m[i] = matrix.m[i];
 	}
 }
 
-mat3x3::mat3x3(const vec3 &col1, const vec3 &col2, const vec3 &col3)
+Mat3x3::Mat3x3(const Vec3 &col1, const Vec3 &col2, const Vec3 &col3)
 {
-	M[0] = col1.x; M[3] = col2.x; M[6] = col3.x;
-	M[1] = col1.y; M[4] = col2.y; M[7] = col3.y;
-	M[2] = col1.z; M[5] = col2.z; M[8] = col3.z;
+	m[0] = col1.x; m[3] = col2.x; m[6] = col3.x;
+	m[1] = col1.y; m[4] = col2.y; m[7] = col3.y;
+	m[2] = col1.z; m[5] = col2.z; m[8] = col3.z;
 }
 
-mat3x3::mat3x3(float c1r1, float c1r2, float c1r3, float c2r1, float c2r2, float c2r3, float c3r1, float c3r2, float c3r3)
+Mat3x3::Mat3x3(float c1r1, float c1r2, float c1r3, float c2r1, float c2r2, float c2r3, float c3r1, float c3r2, float c3r3)
 {
-	M[0] = c1r1; M[3] = c2r1; M[6] = c3r1;
-	M[1] = c1r2; M[4] = c2r2; M[7] = c3r2;
-	M[2] = c1r3; M[5] = c2r3; M[8] = c3r3;
+	m[0] = c1r1; m[3] = c2r1; m[6] = c3r1;
+	m[1] = c1r2; m[4] = c2r2; m[7] = c3r2;
+	m[2] = c1r3; m[5] = c2r3; m[8] = c3r3;
 }
 
-mat3x3::mat3x3(const mat2x2 &Matrix)
+Mat3x3::Mat3x3(const Mat2x2 &matrix)
 {
-	M[0] = Matrix.M[0]; M[3] = Matrix.M[2]; M[6] = 0.0f;
-	M[1] = Matrix.M[1]; M[4] = Matrix.M[3]; M[7] = 0.0f;
-	M[2] = 0.0f; M[5] = 0.0f; M[8] = 1.0f;
+	m[0] = matrix.m[0]; m[3] = matrix.m[2]; m[6] = 0.0f;
+	m[1] = matrix.m[1]; m[4] = matrix.m[3]; m[7] = 0.0f;
+	m[2] = 0.0f; m[5] = 0.0f; m[8] = 1.0f;
 }
 
-mat3x3::mat3x3(const mat4x4 &Matrix)
+Mat3x3::Mat3x3(const Mat4x4 &matrix)
 {
-	M[0] = Matrix.M[0]; M[3] = Matrix.M[4]; M[6] = Matrix.M[8];
-	M[1] = Matrix.M[1]; M[4] = Matrix.M[5]; M[7] = Matrix.M[9];
-	M[2] = Matrix.M[2]; M[5] = Matrix.M[6]; M[8] = Matrix.M[10];
+	m[0] = matrix.m[0]; m[3] = matrix.m[4]; m[6] = matrix.m[8];
+	m[1] = matrix.m[1]; m[4] = matrix.m[5]; m[7] = matrix.m[9];
+	m[2] = matrix.m[2]; m[5] = matrix.m[6]; m[8] = matrix.m[10];
 }
 
-mat3x3& mat3x3::operator = (const mat3x3 &Matrix)
+Mat3x3& Mat3x3::operator=(const Mat3x3 &matrix)
 {
 	for(int i = 0; i < 9; i++)
 	{
-		M[i] = Matrix.M[i];
+		m[i] = matrix.m[i];
 	}
 
 	return *this;
 }
 
-float& mat3x3::operator [] (int i)
+float& Mat3x3::operator[](int i)
 {
-	return M[i];
+	return m[i];
 }
 
-float* mat3x3::operator & ()
+float* Mat3x3::operator&()
 {
 	return (float*)this;
 }
 
-mat3x3 operator * (const mat3x3 &Matrix1, const mat3x3 &Matrix2)
+Mat3x3 operator*(const Mat3x3 &matrix1, const Mat3x3 &matrix2)
 {
-	mat3x3 Matrix3;
+	Mat3x3 matrix3;
 
-	Matrix3.M[0] = Matrix1.M[0] * Matrix2.M[0] + Matrix1.M[3] * Matrix2.M[1] + Matrix1.M[6] * Matrix2.M[2];
-	Matrix3.M[1] = Matrix1.M[1] * Matrix2.M[0] + Matrix1.M[4] * Matrix2.M[1] + Matrix1.M[7] * Matrix2.M[2];
-	Matrix3.M[2] = Matrix1.M[2] * Matrix2.M[0] + Matrix1.M[5] * Matrix2.M[1] + Matrix1.M[8] * Matrix2.M[2];
-	Matrix3.M[3] = Matrix1.M[0] * Matrix2.M[3] + Matrix1.M[3] * Matrix2.M[4] + Matrix1.M[6] * Matrix2.M[5];
-	Matrix3.M[4] = Matrix1.M[1] * Matrix2.M[3] + Matrix1.M[4] * Matrix2.M[4] + Matrix1.M[7] * Matrix2.M[5];
-	Matrix3.M[5] = Matrix1.M[2] * Matrix2.M[3] + Matrix1.M[5] * Matrix2.M[4] + Matrix1.M[8] * Matrix2.M[5];
-	Matrix3.M[6] = Matrix1.M[0] * Matrix2.M[6] + Matrix1.M[3] * Matrix2.M[7] + Matrix1.M[6] * Matrix2.M[8];
-	Matrix3.M[7] = Matrix1.M[1] * Matrix2.M[6] + Matrix1.M[4] * Matrix2.M[7] + Matrix1.M[7] * Matrix2.M[8];
-	Matrix3.M[8] = Matrix1.M[2] * Matrix2.M[6] + Matrix1.M[5] * Matrix2.M[7] + Matrix1.M[8] * Matrix2.M[8];
+	matrix3.m[0] = matrix1.m[0] * matrix2.m[0] + matrix1.m[3] * matrix2.m[1] + matrix1.m[6] * matrix2.m[2];
+	matrix3.m[1] = matrix1.m[1] * matrix2.m[0] + matrix1.m[4] * matrix2.m[1] + matrix1.m[7] * matrix2.m[2];
+	matrix3.m[2] = matrix1.m[2] * matrix2.m[0] + matrix1.m[5] * matrix2.m[1] + matrix1.m[8] * matrix2.m[2];
+	matrix3.m[3] = matrix1.m[0] * matrix2.m[3] + matrix1.m[3] * matrix2.m[4] + matrix1.m[6] * matrix2.m[5];
+	matrix3.m[4] = matrix1.m[1] * matrix2.m[3] + matrix1.m[4] * matrix2.m[4] + matrix1.m[7] * matrix2.m[5];
+	matrix3.m[5] = matrix1.m[2] * matrix2.m[3] + matrix1.m[5] * matrix2.m[4] + matrix1.m[8] * matrix2.m[5];
+	matrix3.m[6] = matrix1.m[0] * matrix2.m[6] + matrix1.m[3] * matrix2.m[7] + matrix1.m[6] * matrix2.m[8];
+	matrix3.m[7] = matrix1.m[1] * matrix2.m[6] + matrix1.m[4] * matrix2.m[7] + matrix1.m[7] * matrix2.m[8];
+	matrix3.m[8] = matrix1.m[2] * matrix2.m[6] + matrix1.m[5] * matrix2.m[7] + matrix1.m[8] * matrix2.m[8];
 
-	return Matrix3;
+	return matrix3;
 }
 
-vec3 operator * (const mat3x3 &Matrix, const vec3 &u)
+Vec3 operator*(const Mat3x3 &matrix, const Vec3 &u)
 {
-	vec3 v;
+	Vec3 v;
 
-	v.x = Matrix.M[0] * u.x + Matrix.M[3] * u.y + Matrix.M[6] * u.z;
-	v.y = Matrix.M[1] * u.x + Matrix.M[4] * u.y + Matrix.M[7] * u.z;
-	v.z = Matrix.M[2] * u.x + Matrix.M[5] * u.y + Matrix.M[8] * u.z;
+	v.x = matrix.m[0] * u.x + matrix.m[3] * u.y + matrix.m[6] * u.z;
+	v.y = matrix.m[1] * u.x + matrix.m[4] * u.y + matrix.m[7] * u.z;
+	v.z = matrix.m[2] * u.x + matrix.m[5] * u.y + matrix.m[8] * u.z;
 
 	return v;
 }
@@ -335,172 +335,172 @@ vec3 operator * (const mat3x3 &Matrix, const vec3 &u)
 //
 // ----------------------------------------------------------------------------------------------------------------------------
 
-float det2x2sub(const float *m, int i0, int i1, int i2, int i3)
+float Det2x2sub(const float *m, int i0, int i1, int i2, int i3)
 {
 	return m[i0] * m[i3] - m[i2] * m[i1];
 }
 
-mat3x3 inverse(const mat3x3 &Matrix)
+Mat3x3 Inverse(const Mat3x3 &matrix)
 {
-	const float *m = Matrix.M;
+	const float *m = matrix.m;
 
 	float det = 0.0f;
 
-	det += m[0] * det2x2sub(m, 4, 5, 7, 8);
-	det -= m[3] * det2x2sub(m, 1, 2, 7, 8);
-	det += m[6] * det2x2sub(m, 1, 2, 4, 5);
+	det += m[0] * Det2x2sub(m, 4, 5, 7, 8);
+	det -= m[3] * Det2x2sub(m, 1, 2, 7, 8);
+	det += m[6] * Det2x2sub(m, 1, 2, 4, 5);
 
-	mat3x3 Inverse;
+	Mat3x3 inverse;
 
-	Inverse.M[0] = det2x2sub(m, 4, 5, 7, 8) / det;
-	Inverse.M[1] = -det2x2sub(m, 1, 2, 7, 8) / det;
-	Inverse.M[2] = det2x2sub(m, 1, 2, 4, 5) / det;
-	Inverse.M[3] = -det2x2sub(m, 3, 5, 6, 8) / det;
-	Inverse.M[4] = det2x2sub(m, 0, 2, 6, 8) / det;
-	Inverse.M[5] = -det2x2sub(m, 0, 2, 3, 5) / det;
-	Inverse.M[6] = det2x2sub(m, 3, 4, 6, 7) / det;
-	Inverse.M[7] = -det2x2sub(m, 0, 1, 6, 7) / det;
-	Inverse.M[8] = det2x2sub(m, 0, 1, 3, 4) / det;
+	inverse.m[0] = Det2x2sub(m, 4, 5, 7, 8) / det;
+	inverse.m[1] = -Det2x2sub(m, 1, 2, 7, 8) / det;
+	inverse.m[2] = Det2x2sub(m, 1, 2, 4, 5) / det;
+	inverse.m[3] = -Det2x2sub(m, 3, 5, 6, 8) / det;
+	inverse.m[4] = Det2x2sub(m, 0, 2, 6, 8) / det;
+	inverse.m[5] = -Det2x2sub(m, 0, 2, 3, 5) / det;
+	inverse.m[6] = Det2x2sub(m, 3, 4, 6, 7) / det;
+	inverse.m[7] = -Det2x2sub(m, 0, 1, 6, 7) / det;
+	inverse.m[8] = Det2x2sub(m, 0, 1, 3, 4) / det;
 
-	return Inverse;
+	return inverse;
 }
 
-mat3x3 transpose(const mat3x3 &Matrix)
+Mat3x3 Transpose(const Mat3x3 &matrix)
 {
-	mat3x3 Transpose;
+	Mat3x3 transpose;
 
-	Transpose.M[0] = Matrix.M[0];
-	Transpose.M[1] = Matrix.M[3];
-	Transpose.M[2] = Matrix.M[6];
-	Transpose.M[3] = Matrix.M[1];
-	Transpose.M[4] = Matrix.M[4];
-	Transpose.M[5] = Matrix.M[7];
-	Transpose.M[6] = Matrix.M[2];
-	Transpose.M[7] = Matrix.M[5];
-	Transpose.M[8] = Matrix.M[8];
+	transpose.m[0] = matrix.m[0];
+	transpose.m[1] = matrix.m[3];
+	transpose.m[2] = matrix.m[6];
+	transpose.m[3] = matrix.m[1];
+	transpose.m[4] = matrix.m[4];
+	transpose.m[5] = matrix.m[7];
+	transpose.m[6] = matrix.m[2];
+	transpose.m[7] = matrix.m[5];
+	transpose.m[8] = matrix.m[8];
 
-	return Transpose;
+	return transpose;
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-mat4x4::mat4x4()
+Mat4x4::Mat4x4()
 {
-	M[0] = 1.0f; M[4] = 0.0f; M[8] = 0.0f; M[12] = 0.0f;
-	M[1] = 0.0f; M[5] = 1.0f; M[9] = 0.0f; M[13] = 0.0f;
-	M[2] = 0.0f; M[6] = 0.0f; M[10] = 1.0f; M[14] = 0.0f;
-	M[3] = 0.0f; M[7] = 0.0f; M[11] = 0.0f; M[15] = 1.0f;
+	m[0] = 1.0f; m[4] = 0.0f; m[8] = 0.0f; m[12] = 0.0f;
+	m[1] = 0.0f; m[5] = 1.0f; m[9] = 0.0f; m[13] = 0.0f;
+	m[2] = 0.0f; m[6] = 0.0f; m[10] = 1.0f; m[14] = 0.0f;
+	m[3] = 0.0f; m[7] = 0.0f; m[11] = 0.0f; m[15] = 1.0f;
 }
 
-mat4x4::~mat4x4()
+Mat4x4::~Mat4x4()
 {}
 
-mat4x4::mat4x4(const mat4x4 &Matrix)
+Mat4x4::Mat4x4(const Mat4x4 &matrix)
 {
 	for(int i = 0; i < 16; i++)
 	{
-		M[i] = Matrix.M[i];
+		m[i] = matrix.m[i];
 	}
 }
 
-mat4x4::mat4x4(const vec4 &col1, const vec4 &col2, const vec4 &col3, const vec4 &col4)
+Mat4x4::Mat4x4(const Vec4 &col1, const Vec4 &col2, const Vec4 &col3, const Vec4 &col4)
 {
-	M[0] = col1.x; M[4] = col2.x; M[8] = col3.x; M[12] = col4.x;
-	M[1] = col1.y; M[5] = col2.y; M[9] = col3.y; M[13] = col4.y;
-	M[2] = col1.z; M[6] = col2.z; M[10] = col3.z; M[14] = col4.z;
-	M[3] = col1.w; M[7] = col2.w; M[11] = col3.w; M[15] = col4.w;
+	m[0] = col1.x; m[4] = col2.x; m[8] = col3.x; m[12] = col4.x;
+	m[1] = col1.y; m[5] = col2.y; m[9] = col3.y; m[13] = col4.y;
+	m[2] = col1.z; m[6] = col2.z; m[10] = col3.z; m[14] = col4.z;
+	m[3] = col1.w; m[7] = col2.w; m[11] = col3.w; m[15] = col4.w;
 }
 
-mat4x4::mat4x4(float c1r1, float c1r2, float c1r3, float c1r4, float c2r1, float c2r2, float c2r3, float c2r4, float c3r1, float c3r2, float c3r3, float c3r4, float c4r1, float c4r2, float c4r3, float c4r4)
+Mat4x4::Mat4x4(float c1r1, float c1r2, float c1r3, float c1r4, float c2r1, float c2r2, float c2r3, float c2r4, float c3r1, float c3r2, float c3r3, float c3r4, float c4r1, float c4r2, float c4r3, float c4r4)
 {
-	M[0] = c1r1; M[4] = c2r1; M[8] = c3r1; M[12] = c4r1;
-	M[1] = c1r2; M[5] = c2r2; M[9] = c3r2; M[13] = c4r2;
-	M[2] = c1r3; M[6] = c2r3; M[10] = c3r3; M[14] = c4r3;
-	M[3] = c1r4; M[7] = c2r4; M[11] = c3r4; M[15] = c4r4;
+	m[0] = c1r1; m[4] = c2r1; m[8] = c3r1; m[12] = c4r1;
+	m[1] = c1r2; m[5] = c2r2; m[9] = c3r2; m[13] = c4r2;
+	m[2] = c1r3; m[6] = c2r3; m[10] = c3r3; m[14] = c4r3;
+	m[3] = c1r4; m[7] = c2r4; m[11] = c3r4; m[15] = c4r4;
 }
 
-mat4x4::mat4x4(const mat2x2 &Matrix)
+Mat4x4::Mat4x4(const Mat2x2 &matrix)
 {
-	M[0] = Matrix.M[0]; M[4] = Matrix.M[2]; M[8] = 0.0f; M[12] = 0.0f;
-	M[1] = Matrix.M[1]; M[5] = Matrix.M[3]; M[9] = 0.0f; M[13] = 0.0f;
-	M[2] = 0.0f; M[6] = 0.0f; M[10] = 1.0f; M[14] = 0.0f;
-	M[3] = 0.0f; M[7] = 0.0f; M[11] = 0.0f; M[15] = 1.0f;
+	m[0] = matrix.m[0]; m[4] = matrix.m[2]; m[8] = 0.0f; m[12] = 0.0f;
+	m[1] = matrix.m[1]; m[5] = matrix.m[3]; m[9] = 0.0f; m[13] = 0.0f;
+	m[2] = 0.0f; m[6] = 0.0f; m[10] = 1.0f; m[14] = 0.0f;
+	m[3] = 0.0f; m[7] = 0.0f; m[11] = 0.0f; m[15] = 1.0f;
 }
 
-mat4x4::mat4x4(const mat3x3 &Matrix)
+Mat4x4::Mat4x4(const Mat3x3 &matrix)
 {
-	M[0] = Matrix.M[0]; M[4] = Matrix.M[3]; M[8] = Matrix.M[6]; M[12] = 0.0f;
-	M[1] = Matrix.M[1]; M[5] = Matrix.M[4]; M[9] = Matrix.M[7]; M[13] = 0.0f;
-	M[2] = Matrix.M[2]; M[6] = Matrix.M[5]; M[10] = Matrix.M[8]; M[14] = 0.0f;
-	M[3] = 0.0f; M[7] = 0.0f; M[11] = 0.0f; M[15] = 1.0f;
+	m[0] = matrix.m[0]; m[4] = matrix.m[3]; m[8] = matrix.m[6]; m[12] = 0.0f;
+	m[1] = matrix.m[1]; m[5] = matrix.m[4]; m[9] = matrix.m[7]; m[13] = 0.0f;
+	m[2] = matrix.m[2]; m[6] = matrix.m[5]; m[10] = matrix.m[8]; m[14] = 0.0f;
+	m[3] = 0.0f; m[7] = 0.0f; m[11] = 0.0f; m[15] = 1.0f;
 }
 
-mat4x4& mat4x4::operator = (const mat4x4 &Matrix)
+Mat4x4& Mat4x4::operator=(const Mat4x4 &matrix)
 {
 	for(int i = 0; i < 16; i++)
 	{
-		M[i] = Matrix.M[i];
+		m[i] = matrix.m[i];
 	}
 
 	return *this;
 }
 
-float& mat4x4::operator [] (int i)
+float& Mat4x4::operator[](int i)
 {
-	return M[i];
+	return m[i];
 }
 
-float* mat4x4::operator & ()
+float* Mat4x4::operator&()
 {
 	return (float*)this;
 }
 
-const float* mat4x4::operator & () const
+const float* Mat4x4::operator&() const
 {
 	return (float*)this;
 }
 
-mat4x4 operator * (const mat4x4 &Matrix1, const mat4x4 &Matrix2)
+Mat4x4 operator*(const Mat4x4 &matrix1, const Mat4x4 &matrix2)
 {
-	mat4x4 Matrix3;
+	Mat4x4 matrix3;
 
-	Matrix3.M[0] = Matrix1.M[0] * Matrix2.M[0] + Matrix1.M[4] * Matrix2.M[1] + Matrix1.M[8] * Matrix2.M[2] + Matrix1.M[12] * Matrix2.M[3];
-	Matrix3.M[1] = Matrix1.M[1] * Matrix2.M[0] + Matrix1.M[5] * Matrix2.M[1] + Matrix1.M[9] * Matrix2.M[2] + Matrix1.M[13] * Matrix2.M[3];
-	Matrix3.M[2] = Matrix1.M[2] * Matrix2.M[0] + Matrix1.M[6] * Matrix2.M[1] + Matrix1.M[10] * Matrix2.M[2] + Matrix1.M[14] * Matrix2.M[3];
-	Matrix3.M[3] = Matrix1.M[3] * Matrix2.M[0] + Matrix1.M[7] * Matrix2.M[1] + Matrix1.M[11] * Matrix2.M[2] + Matrix1.M[15] * Matrix2.M[3];
-	Matrix3.M[4] = Matrix1.M[0] * Matrix2.M[4] + Matrix1.M[4] * Matrix2.M[5] + Matrix1.M[8] * Matrix2.M[6] + Matrix1.M[12] * Matrix2.M[7];
-	Matrix3.M[5] = Matrix1.M[1] * Matrix2.M[4] + Matrix1.M[5] * Matrix2.M[5] + Matrix1.M[9] * Matrix2.M[6] + Matrix1.M[13] * Matrix2.M[7];
-	Matrix3.M[6] = Matrix1.M[2] * Matrix2.M[4] + Matrix1.M[6] * Matrix2.M[5] + Matrix1.M[10] * Matrix2.M[6] + Matrix1.M[14] * Matrix2.M[7];
-	Matrix3.M[7] = Matrix1.M[3] * Matrix2.M[4] + Matrix1.M[7] * Matrix2.M[5] + Matrix1.M[11] * Matrix2.M[6] + Matrix1.M[15] * Matrix2.M[7];
-	Matrix3.M[8] = Matrix1.M[0] * Matrix2.M[8] + Matrix1.M[4] * Matrix2.M[9] + Matrix1.M[8] * Matrix2.M[10] + Matrix1.M[12] * Matrix2.M[11];
-	Matrix3.M[9] = Matrix1.M[1] * Matrix2.M[8] + Matrix1.M[5] * Matrix2.M[9] + Matrix1.M[9] * Matrix2.M[10] + Matrix1.M[13] * Matrix2.M[11];
-	Matrix3.M[10] = Matrix1.M[2] * Matrix2.M[8] + Matrix1.M[6] * Matrix2.M[9] + Matrix1.M[10] * Matrix2.M[10] + Matrix1.M[14] * Matrix2.M[11];
-	Matrix3.M[11] = Matrix1.M[3] * Matrix2.M[8] + Matrix1.M[7] * Matrix2.M[9] + Matrix1.M[11] * Matrix2.M[10] + Matrix1.M[15] * Matrix2.M[11];
-	Matrix3.M[12] = Matrix1.M[0] * Matrix2.M[12] + Matrix1.M[4] * Matrix2.M[13] + Matrix1.M[8] * Matrix2.M[14] + Matrix1.M[12] * Matrix2.M[15];
-	Matrix3.M[13] = Matrix1.M[1] * Matrix2.M[12] + Matrix1.M[5] * Matrix2.M[13] + Matrix1.M[9] * Matrix2.M[14] + Matrix1.M[13] * Matrix2.M[15];
-	Matrix3.M[14] = Matrix1.M[2] * Matrix2.M[12] + Matrix1.M[6] * Matrix2.M[13] + Matrix1.M[10] * Matrix2.M[14] + Matrix1.M[14] * Matrix2.M[15];
-	Matrix3.M[15] = Matrix1.M[3] * Matrix2.M[12] + Matrix1.M[7] * Matrix2.M[13] + Matrix1.M[11] * Matrix2.M[14] + Matrix1.M[15] * Matrix2.M[15];
+	matrix3.m[0] = matrix1.m[0] * matrix2.m[0] + matrix1.m[4] * matrix2.m[1] + matrix1.m[8] * matrix2.m[2] + matrix1.m[12] * matrix2.m[3];
+	matrix3.m[1] = matrix1.m[1] * matrix2.m[0] + matrix1.m[5] * matrix2.m[1] + matrix1.m[9] * matrix2.m[2] + matrix1.m[13] * matrix2.m[3];
+	matrix3.m[2] = matrix1.m[2] * matrix2.m[0] + matrix1.m[6] * matrix2.m[1] + matrix1.m[10] * matrix2.m[2] + matrix1.m[14] * matrix2.m[3];
+	matrix3.m[3] = matrix1.m[3] * matrix2.m[0] + matrix1.m[7] * matrix2.m[1] + matrix1.m[11] * matrix2.m[2] + matrix1.m[15] * matrix2.m[3];
+	matrix3.m[4] = matrix1.m[0] * matrix2.m[4] + matrix1.m[4] * matrix2.m[5] + matrix1.m[8] * matrix2.m[6] + matrix1.m[12] * matrix2.m[7];
+	matrix3.m[5] = matrix1.m[1] * matrix2.m[4] + matrix1.m[5] * matrix2.m[5] + matrix1.m[9] * matrix2.m[6] + matrix1.m[13] * matrix2.m[7];
+	matrix3.m[6] = matrix1.m[2] * matrix2.m[4] + matrix1.m[6] * matrix2.m[5] + matrix1.m[10] * matrix2.m[6] + matrix1.m[14] * matrix2.m[7];
+	matrix3.m[7] = matrix1.m[3] * matrix2.m[4] + matrix1.m[7] * matrix2.m[5] + matrix1.m[11] * matrix2.m[6] + matrix1.m[15] * matrix2.m[7];
+	matrix3.m[8] = matrix1.m[0] * matrix2.m[8] + matrix1.m[4] * matrix2.m[9] + matrix1.m[8] * matrix2.m[10] + matrix1.m[12] * matrix2.m[11];
+	matrix3.m[9] = matrix1.m[1] * matrix2.m[8] + matrix1.m[5] * matrix2.m[9] + matrix1.m[9] * matrix2.m[10] + matrix1.m[13] * matrix2.m[11];
+	matrix3.m[10] = matrix1.m[2] * matrix2.m[8] + matrix1.m[6] * matrix2.m[9] + matrix1.m[10] * matrix2.m[10] + matrix1.m[14] * matrix2.m[11];
+	matrix3.m[11] = matrix1.m[3] * matrix2.m[8] + matrix1.m[7] * matrix2.m[9] + matrix1.m[11] * matrix2.m[10] + matrix1.m[15] * matrix2.m[11];
+	matrix3.m[12] = matrix1.m[0] * matrix2.m[12] + matrix1.m[4] * matrix2.m[13] + matrix1.m[8] * matrix2.m[14] + matrix1.m[12] * matrix2.m[15];
+	matrix3.m[13] = matrix1.m[1] * matrix2.m[12] + matrix1.m[5] * matrix2.m[13] + matrix1.m[9] * matrix2.m[14] + matrix1.m[13] * matrix2.m[15];
+	matrix3.m[14] = matrix1.m[2] * matrix2.m[12] + matrix1.m[6] * matrix2.m[13] + matrix1.m[10] * matrix2.m[14] + matrix1.m[14] * matrix2.m[15];
+	matrix3.m[15] = matrix1.m[3] * matrix2.m[12] + matrix1.m[7] * matrix2.m[13] + matrix1.m[11] * matrix2.m[14] + matrix1.m[15] * matrix2.m[15];
 
-	return Matrix3;
+	return matrix3;
 }
 
-vec4 operator * (const mat4x4 &Matrix, const vec4 &u)
+Vec4 operator*(const Mat4x4 &matrix, const Vec4 &u)
 {
-	vec4 v;
+	Vec4 v;
 
-	v.x = Matrix.M[0] * u.x + Matrix.M[4] * u.y + Matrix.M[8] * u.z + Matrix.M[12] * u.w;
-	v.y = Matrix.M[1] * u.x + Matrix.M[5] * u.y + Matrix.M[9] * u.z + Matrix.M[13] * u.w;
-	v.z = Matrix.M[2] * u.x + Matrix.M[6] * u.y + Matrix.M[10] * u.z + Matrix.M[14] * u.w;
-	v.w = Matrix.M[3] * u.x + Matrix.M[7] * u.y + Matrix.M[11] * u.z + Matrix.M[15] * u.w;
+	v.x = matrix.m[0] * u.x + matrix.m[4] * u.y + matrix.m[8] * u.z + matrix.m[12] * u.w;
+	v.y = matrix.m[1] * u.x + matrix.m[5] * u.y + matrix.m[9] * u.z + matrix.m[13] * u.w;
+	v.z = matrix.m[2] * u.x + matrix.m[6] * u.y + matrix.m[10] * u.z + matrix.m[14] * u.w;
+	v.w = matrix.m[3] * u.x + matrix.m[7] * u.y + matrix.m[11] * u.z + matrix.m[15] * u.w;
 
 	return v;
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-mat4x4 BiasMatrix = mat4x4(0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.5f, 0.5f, 0.5f, 1.0f);
-mat4x4 BiasMatrixInverse = mat4x4(2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, -1.0f, -1.0f, -1.0f, 1.0f);
-mat4x4 identityMatrix = mat4x4(
+Mat4x4 biasMatrix = Mat4x4(0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f, 0.5f, 0.5f, 0.5f, 1.0f);
+Mat4x4 biasMatrixInverse = Mat4x4(2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, -1.0f, -1.0f, -1.0f, 1.0f);
+Mat4x4 identityMatrix = Mat4x4(
 	1.0f, 0.0f, 0.0f, 0.0f, 
 	0.0f, 1.0f, 0.0f, 0.0f,
 	0.0f, 0.0f, 1.0f, 0.0f, 
@@ -515,323 +515,323 @@ mat4x4 identityMatrix = mat4x4(
 //
 // ----------------------------------------------------------------------------------------------------------------------------
 
-float det3x3sub(const float *m, int i0, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8)
+float Det3x3sub(const float *m, int i0, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8)
 {
 	float det = 0.0f;
 
-	det += m[i0] * det2x2sub(m, i4, i5, i7, i8);
-	det -= m[i3] * det2x2sub(m, i1, i2, i7, i8);
-	det += m[i6] * det2x2sub(m, i1, i2, i4, i5);
+	det += m[i0] * Det2x2sub(m, i4, i5, i7, i8);
+	det -= m[i3] * Det2x2sub(m, i1, i2, i7, i8);
+	det += m[i6] * Det2x2sub(m, i1, i2, i4, i5);
 
 	return det;
 }
 
-mat4x4& mat4x4::inverse()
+Mat4x4& Mat4x4::Inverse()
 {
-	const float *m = M;
+	const float *m = m;
 
 	float det = 0.0f;
 
-	det += m[0] * det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15);
-	det -= m[4] * det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15);
-	det += m[8] * det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15);
-	det -= m[12] * det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11);
+	det += m[0] * Det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15);
+	det -= m[4] * Det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15);
+	det += m[8] * Det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15);
+	det -= m[12] * Det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11);
 
-	mat4x4 Inverse;
+	Mat4x4 inverse;
 
-	Inverse.M[0] = det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15) / det;
-	Inverse.M[1] = -det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15) / det;
-	Inverse.M[2] = det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15) / det;
-	Inverse.M[3] = -det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11) / det;
-	Inverse.M[4] = -det3x3sub(m, 4, 6, 7, 8, 10, 11, 12, 14, 15) / det;
-	Inverse.M[5] = det3x3sub(m, 0, 2, 3, 8, 10, 11, 12, 14, 15) / det;
-	Inverse.M[6] = -det3x3sub(m, 0, 2, 3, 4, 6, 7, 12, 14, 15) / det;
-	Inverse.M[7] = det3x3sub(m, 0, 2, 3, 4, 6, 7, 8, 10, 11) / det;
-	Inverse.M[8] = det3x3sub(m, 4, 5, 7, 8, 9, 11, 12, 13, 15) / det;
-	Inverse.M[9] = -det3x3sub(m, 0, 1, 3, 8, 9, 11, 12, 13, 15) / det;
-	Inverse.M[10] = det3x3sub(m, 0, 1, 3, 4, 5, 7, 12, 13, 15) / det;
-	Inverse.M[11] = -det3x3sub(m, 0, 1, 3, 4, 5, 7, 8, 9, 11) / det;
-	Inverse.M[12] = -det3x3sub(m, 4, 5, 6, 8, 9, 10, 12, 13, 14) / det;
-	Inverse.M[13] = det3x3sub(m, 0, 1, 2, 8, 9, 10, 12, 13, 14) / det;
-	Inverse.M[14] = -det3x3sub(m, 0, 1, 2, 4, 5, 6, 12, 13, 14) / det;
-	Inverse.M[15] = det3x3sub(m, 0, 1, 2, 4, 5, 6, 8, 9, 10) / det;
+	inverse.m[0] = Det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15) / det;
+	inverse.m[1] = -Det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15) / det;
+	inverse.m[2] = Det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15) / det;
+	inverse.m[3] = -Det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11) / det;
+	inverse.m[4] = -Det3x3sub(m, 4, 6, 7, 8, 10, 11, 12, 14, 15) / det;
+	inverse.m[5] = Det3x3sub(m, 0, 2, 3, 8, 10, 11, 12, 14, 15) / det;
+	inverse.m[6] = -Det3x3sub(m, 0, 2, 3, 4, 6, 7, 12, 14, 15) / det;
+	inverse.m[7] = Det3x3sub(m, 0, 2, 3, 4, 6, 7, 8, 10, 11) / det;
+	inverse.m[8] = Det3x3sub(m, 4, 5, 7, 8, 9, 11, 12, 13, 15) / det;
+	inverse.m[9] = -Det3x3sub(m, 0, 1, 3, 8, 9, 11, 12, 13, 15) / det;
+	inverse.m[10] = Det3x3sub(m, 0, 1, 3, 4, 5, 7, 12, 13, 15) / det;
+	inverse.m[11] = -Det3x3sub(m, 0, 1, 3, 4, 5, 7, 8, 9, 11) / det;
+	inverse.m[12] = -Det3x3sub(m, 4, 5, 6, 8, 9, 10, 12, 13, 14) / det;
+	inverse.m[13] = Det3x3sub(m, 0, 1, 2, 8, 9, 10, 12, 13, 14) / det;
+	inverse.m[14] = -Det3x3sub(m, 0, 1, 2, 4, 5, 6, 12, 13, 14) / det;
+	inverse.m[15] = Det3x3sub(m, 0, 1, 2, 4, 5, 6, 8, 9, 10) / det;
 
-	operator=(Inverse);
+	operator=(inverse);
 
 	return *this;
 }
 
-mat4x4& mat4x4::look(const vec3 &eye, const vec3 &center, const vec3 &up)
+Mat4x4& Mat4x4::Look(const Vec3 &eye, const Vec3 &center, const Vec3 &up)
 {
-	vec3 Z = normalize(eye - center);
-	vec3 X = normalize(cross(up, Z));
-	vec3 Y = cross(Z, X);
+	Vec3 Z = Normalize(eye - center);
+	Vec3 X = Normalize(Cross(up, Z));
+	Vec3 Y = Cross(Z, X);
 
-	M[0] = X.x;
-	M[1] = Y.x;
-	M[2] = Z.x;
-	M[4] = X.y;
-	M[5] = Y.y;
-	M[6] = Z.y;
-	M[8] = X.z;
-	M[9] = Y.z;
-	M[10] = Z.z;
-	M[12] = -dot(X, eye);
-	M[13] = -dot(Y, eye);
-	M[14] = -dot(Z, eye);
+	m[0] = X.x;
+	m[1] = Y.x;
+	m[2] = Z.x;
+	m[4] = X.y;
+	m[5] = Y.y;
+	m[6] = Z.y;
+	m[8] = X.z;
+	m[9] = Y.z;
+	m[10] = Z.z;
+	m[12] = -Dot(X, eye);
+	m[13] = -Dot(Y, eye);
+	m[14] = -Dot(Z, eye);
 
 	return *this;
 }
 
-mat4x4& mat4x4::ortho(float left, float right, float bottom, float top, float n, float f)
+Mat4x4& Mat4x4::Ortho(float left, float right, float bottom, float top, float n, float f)
 {
-	M[0] = 2.0f / (right - left);
-	M[5] = 2.0f / (top - bottom);
-	M[10] = -2.0f / (f - n);
-	M[12] = -(right + left) / (right - left);
-	M[13] = -(top + bottom) / (top - bottom);
-	M[14] = -(f + n) / (f - n);
+	m[0] = 2.0f / (right - left);
+	m[5] = 2.0f / (top - bottom);
+	m[10] = -2.0f / (f - n);
+	m[12] = -(right + left) / (right - left);
+	m[13] = -(top + bottom) / (top - bottom);
+	m[14] = -(f + n) / (f - n);
 
 	return *this;
 }
 
-mat4x4& mat4x4::perspective(float fovy, float aspect, float n, float f)
+Mat4x4& Mat4x4::Perspective(float fovy, float aspect, float n, float f)
 {
 	float coty = 1.0f / tan(fovy * (float)M_PI / 360.0f);
 
-	M[0] = coty / aspect;
-	M[5] = coty;
-	M[10] = (n + f) / (n - f);
-	M[11] = -1.0f;
-	M[14] = 2.0f * n * f / (n - f);
-	M[15] = 0.0f;
+	m[0] = coty / aspect;
+	m[5] = coty;
+	m[10] = (n + f) / (n - f);
+	m[11] = -1.0f;
+	m[14] = 2.0f * n * f / (n - f);
+	m[15] = 0.0f;
 
 	return *this;
 }
 
-mat4x4& mat4x4::rotate(float angle, const vec3 &u)
+Mat4x4& Mat4x4::Rotate(float angle, const Vec3 &u)
 {
 	angle = angle / 180.0f * (float)M_PI;
 
-	vec3 v = normalize(u);
+	Vec3 v = Normalize(u);
 
 	float c = 1.0f - cos(angle), s = sin(angle);
 
-	M[0] = 1.0f + c * (v.x * v.x - 1.0f);
-	M[1] = c * v.x * v.y + v.z * s;
-	M[2] = c * v.x * v.z - v.y * s;
-	M[4] = c * v.x * v.y - v.z * s;
-	M[5] = 1.0f + c * (v.y * v.y - 1.0f);
-	M[6] = c * v.y * v.z + v.x * s;
-	M[8] = c * v.x * v.z + v.y * s;
-	M[9] = c * v.y * v.z - v.x * s;
-	M[10] = 1.0f + c * (v.z * v.z - 1.0f);
+	m[0] = 1.0f + c * (v.x * v.x - 1.0f);
+	m[1] = c * v.x * v.y + v.z * s;
+	m[2] = c * v.x * v.z - v.y * s;
+	m[4] = c * v.x * v.y - v.z * s;
+	m[5] = 1.0f + c * (v.y * v.y - 1.0f);
+	m[6] = c * v.y * v.z + v.x * s;
+	m[8] = c * v.x * v.z + v.y * s;
+	m[9] = c * v.y * v.z - v.x * s;
+	m[10] = 1.0f + c * (v.z * v.z - 1.0f);
 
 	return *this;
 }
 
-mat4x4& mat4x4::scale(float x, float y, float z)
+Mat4x4& Mat4x4::Scale(float x, float y, float z)
 {
-	M[0] = x;
-	M[5] = y;
-	M[10] = z;
+	m[0] = x;
+	m[5] = y;
+	m[10] = z;
 
 	return *this;
 }
 
-mat4x4& mat4x4::translate(float x, float y, float z)
+Mat4x4& Mat4x4::Translate(float x, float y, float z)
 {
-	M[12] = x;
-	M[13] = y;
-	M[14] = z;
+	m[12] = x;
+	m[13] = y;
+	m[14] = z;
 
 	return *this;
 }
 
-mat4x4& mat4x4::transpose()
+Mat4x4& Mat4x4::Transpose()
 {
-	mat4x4 Transpose;
+	Mat4x4 transpose;
 
-	Transpose.M[0] = M[0];
-	Transpose.M[1] = M[4];
-	Transpose.M[2] = M[8];
-	Transpose.M[3] = M[12];
-	Transpose.M[4] = M[1];
-	Transpose.M[5] = M[5];
-	Transpose.M[6] = M[9];
-	Transpose.M[7] = M[13];
-	Transpose.M[8] = M[2];
-	Transpose.M[9] = M[6];
-	Transpose.M[10] = M[10];
-	Transpose.M[11] = M[14];
-	Transpose.M[12] = M[3];
-	Transpose.M[13] = M[7];
-	Transpose.M[14] = M[11];
-	Transpose.M[15] = M[15];
+	transpose.m[0] = m[0];
+	transpose.m[1] = m[4];
+	transpose.m[2] = m[8];
+	transpose.m[3] = m[12];
+	transpose.m[4] = m[1];
+	transpose.m[5] = m[5];
+	transpose.m[6] = m[9];
+	transpose.m[7] = m[13];
+	transpose.m[8] = m[2];
+	transpose.m[9] = m[6];
+	transpose.m[10] = m[10];
+	transpose.m[11] = m[14];
+	transpose.m[12] = m[3];
+	transpose.m[13] = m[7];
+	transpose.m[14] = m[11];
+	transpose.m[15] = m[15];
 
-	operator=(Transpose);
+	operator=(transpose);
 
 	return *this;
 }
 
-vec3 mat4x4::translation() const
+Vec3 Mat4x4::Translation() const
 {
-	return(vec3(M[12], M[13], M[14]));
+	return(Vec3(m[12], m[13], m[14]));
 }
 
 
-mat4x4 inverse(const mat4x4 &Matrix)
+Mat4x4 Inverse(const Mat4x4 &matrix)
 {
-	const float *m = Matrix.M;
+	const float *m = matrix.m;
 
 	float det = 0.0f;
 
-	det += m[0] * det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15);
-	det -= m[4] * det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15);
-	det += m[8] * det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15);
-	det -= m[12] * det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11);
+	det += m[0] * Det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15);
+	det -= m[4] * Det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15);
+	det += m[8] * Det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15);
+	det -= m[12] * Det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11);
 
-	mat4x4 Inverse;
+	Mat4x4 inverse;
 
-	Inverse.M[0] = det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15) / det;
-	Inverse.M[1] = -det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15) / det;
-	Inverse.M[2] = det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15) / det;
-	Inverse.M[3] = -det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11) / det;
-	Inverse.M[4] = -det3x3sub(m, 4, 6, 7, 8, 10, 11, 12, 14, 15) / det;
-	Inverse.M[5] = det3x3sub(m, 0, 2, 3, 8, 10, 11, 12, 14, 15) / det;
-	Inverse.M[6] = -det3x3sub(m, 0, 2, 3, 4, 6, 7, 12, 14, 15) / det;
-	Inverse.M[7] = det3x3sub(m, 0, 2, 3, 4, 6, 7, 8, 10, 11) / det;
-	Inverse.M[8] = det3x3sub(m, 4, 5, 7, 8, 9, 11, 12, 13, 15) / det;
-	Inverse.M[9] = -det3x3sub(m, 0, 1, 3, 8, 9, 11, 12, 13, 15) / det;
-	Inverse.M[10] = det3x3sub(m, 0, 1, 3, 4, 5, 7, 12, 13, 15) / det;
-	Inverse.M[11] = -det3x3sub(m, 0, 1, 3, 4, 5, 7, 8, 9, 11) / det;
-	Inverse.M[12] = -det3x3sub(m, 4, 5, 6, 8, 9, 10, 12, 13, 14) / det;
-	Inverse.M[13] = det3x3sub(m, 0, 1, 2, 8, 9, 10, 12, 13, 14) / det;
-	Inverse.M[14] = -det3x3sub(m, 0, 1, 2, 4, 5, 6, 12, 13, 14) / det;
-	Inverse.M[15] = det3x3sub(m, 0, 1, 2, 4, 5, 6, 8, 9, 10) / det;
+	inverse.m[0] = Det3x3sub(m, 5, 6, 7, 9, 10, 11, 13, 14, 15) / det;
+	inverse.m[1] = -Det3x3sub(m, 1, 2, 3, 9, 10, 11, 13, 14, 15) / det;
+	inverse.m[2] = Det3x3sub(m, 1, 2, 3, 5, 6, 7, 13, 14, 15) / det;
+	inverse.m[3] = -Det3x3sub(m, 1, 2, 3, 5, 6, 7, 9, 10, 11) / det;
+	inverse.m[4] = -Det3x3sub(m, 4, 6, 7, 8, 10, 11, 12, 14, 15) / det;
+	inverse.m[5] = Det3x3sub(m, 0, 2, 3, 8, 10, 11, 12, 14, 15) / det;
+	inverse.m[6] = -Det3x3sub(m, 0, 2, 3, 4, 6, 7, 12, 14, 15) / det;
+	inverse.m[7] = Det3x3sub(m, 0, 2, 3, 4, 6, 7, 8, 10, 11) / det;
+	inverse.m[8] = Det3x3sub(m, 4, 5, 7, 8, 9, 11, 12, 13, 15) / det;
+	inverse.m[9] = -Det3x3sub(m, 0, 1, 3, 8, 9, 11, 12, 13, 15) / det;
+	inverse.m[10] = Det3x3sub(m, 0, 1, 3, 4, 5, 7, 12, 13, 15) / det;
+	inverse.m[11] = -Det3x3sub(m, 0, 1, 3, 4, 5, 7, 8, 9, 11) / det;
+	inverse.m[12] = -Det3x3sub(m, 4, 5, 6, 8, 9, 10, 12, 13, 14) / det;
+	inverse.m[13] = Det3x3sub(m, 0, 1, 2, 8, 9, 10, 12, 13, 14) / det;
+	inverse.m[14] = -Det3x3sub(m, 0, 1, 2, 4, 5, 6, 12, 13, 14) / det;
+	inverse.m[15] = Det3x3sub(m, 0, 1, 2, 4, 5, 6, 8, 9, 10) / det;
 
-	return Inverse;
+	return inverse;
 }
 
-mat4x4 look(const vec3 &eye, const vec3 &center, const vec3 &up)
+Mat4x4 Look(const Vec3 &eye, const Vec3 &center, const Vec3 &up)
 {
-	vec3 Z = normalize(eye - center);
-	vec3 X = normalize(cross(up, Z));
-	vec3 Y = cross(Z, X);
+	Vec3 Z = Normalize(eye - center);
+	Vec3 X = Normalize(Cross(up, Z));
+	Vec3 Y = Cross(Z, X);
 
-	mat4x4 View;
+	Mat4x4 view;
 
-	View.M[0] = X.x;
-	View.M[1] = Y.x;
-	View.M[2] = Z.x;
-	View.M[4] = X.y;
-	View.M[5] = Y.y;
-	View.M[6] = Z.y;
-	View.M[8] = X.z;
-	View.M[9] = Y.z;
-	View.M[10] = Z.z;
-	View.M[12] = -dot(X, eye);
-	View.M[13] = -dot(Y, eye);
-	View.M[14] = -dot(Z, eye);
+	view.m[0] = X.x;
+	view.m[1] = Y.x;
+	view.m[2] = Z.x;
+	view.m[4] = X.y;
+	view.m[5] = Y.y;
+	view.m[6] = Z.y;
+	view.m[8] = X.z;
+	view.m[9] = Y.z;
+	view.m[10] = Z.z;
+	view.m[12] = -Dot(X, eye);
+	view.m[13] = -Dot(Y, eye);
+	view.m[14] = -Dot(Z, eye);
 
-	return View;
+	return view;
 }
 
-mat4x4 ortho(float left, float right, float bottom, float top, float n, float f)
+Mat4x4 Ortho(float left, float right, float bottom, float top, float n, float f)
 {
-	mat4x4 Ortho;
+	Mat4x4 ortho;
 
-	Ortho.M[0] = 2.0f / (right - left);
-	Ortho.M[5] = 2.0f / (top - bottom);
-	Ortho.M[10] = -2.0f / (f - n);
-	Ortho.M[12] = -(right + left) / (right - left);
-	Ortho.M[13] = -(top + bottom) / (top - bottom);
-	Ortho.M[14] = -(f + n) / (f - n);
+	ortho.m[0] = 2.0f / (right - left);
+	ortho.m[5] = 2.0f / (top - bottom);
+	ortho.m[10] = -2.0f / (f - n);
+	ortho.m[12] = -(right + left) / (right - left);
+	ortho.m[13] = -(top + bottom) / (top - bottom);
+	ortho.m[14] = -(f + n) / (f - n);
 
-	return Ortho;
+	return ortho;
 }
 
-mat4x4 perspective(float fovy, float aspect, float n, float f)
+Mat4x4 Perspective(float fovy, float aspect, float n, float f)
 {
-	mat4x4 Perspective;
+	Mat4x4 perspective;
 
 	float coty = 1.0f / tan(fovy * (float)M_PI / 360.0f);
 
-	Perspective.M[0] = coty / aspect;
-	Perspective.M[5] = coty;
-	Perspective.M[10] = (n + f) / (n - f);
-	Perspective.M[11] = -1.0f;
-	Perspective.M[14] = 2.0f * n * f / (n - f);
-	Perspective.M[15] = 0.0f;
+	perspective.m[0] = coty / aspect;
+	perspective.m[5] = coty;
+	perspective.m[10] = (n + f) / (n - f);
+	perspective.m[11] = -1.0f;
+	perspective.m[14] = 2.0f * n * f / (n - f);
+	perspective.m[15] = 0.0f;
 
-	return Perspective;
+	return perspective;
 }
 
-mat4x4 rotate(float angle, const vec3 &u)
+Mat4x4 Rotate(float angle, const Vec3 &u)
 {
-	mat4x4 Rotate;
+	Mat4x4 rotate;
 
 	angle = angle / 180.0f * (float)M_PI;
 
-	vec3 v = normalize(u);
+	Vec3 v = Normalize(u);
 
 	float c = 1.0f - cos(angle), s = sin(angle);
 
-	Rotate.M[0] = 1.0f + c * (v.x * v.x - 1.0f);
-	Rotate.M[1] = c * v.x * v.y + v.z * s;
-	Rotate.M[2] = c * v.x * v.z - v.y * s;
-	Rotate.M[4] = c * v.x * v.y - v.z * s;
-	Rotate.M[5] = 1.0f + c * (v.y * v.y - 1.0f);
-	Rotate.M[6] = c * v.y * v.z + v.x * s;
-	Rotate.M[8] = c * v.x * v.z + v.y * s;
-	Rotate.M[9] = c * v.y * v.z - v.x * s;
-	Rotate.M[10] = 1.0f + c * (v.z * v.z - 1.0f);
+	rotate.m[0] = 1.0f + c * (v.x * v.x - 1.0f);
+	rotate.m[1] = c * v.x * v.y + v.z * s;
+	rotate.m[2] = c * v.x * v.z - v.y * s;
+	rotate.m[4] = c * v.x * v.y - v.z * s;
+	rotate.m[5] = 1.0f + c * (v.y * v.y - 1.0f);
+	rotate.m[6] = c * v.y * v.z + v.x * s;
+	rotate.m[8] = c * v.x * v.z + v.y * s;
+	rotate.m[9] = c * v.y * v.z - v.x * s;
+	rotate.m[10] = 1.0f + c * (v.z * v.z - 1.0f);
 
-	return Rotate;
+	return rotate;
 }
 
-mat4x4 scale(float x, float y, float z)
+Mat4x4 Scale(float x, float y, float z)
 {
-	mat4x4 Scale;
+	Mat4x4 scale;
 
-	Scale.M[0] = x;
-	Scale.M[5] = y;
-	Scale.M[10] = z;
+	scale.m[0] = x;
+	scale.m[5] = y;
+	scale.m[10] = z;
 
-	return Scale;
+	return scale;
 }
 
-mat4x4 translate(float x, float y, float z)
+Mat4x4 Translate(float x, float y, float z)
 {
-	mat4x4 Translate;
+	Mat4x4 translate;
 
-	Translate.M[12] = x;
-	Translate.M[13] = y;
-	Translate.M[14] = z;
+	translate.m[12] = x;
+	translate.m[13] = y;
+	translate.m[14] = z;
 
-	return Translate;
+	return translate;
 }
 
-mat4x4 transpose(const mat4x4 &Matrix)
+Mat4x4 Transpose(const Mat4x4 &matrix)
 {
-	mat4x4 Transpose;
+	Mat4x4 transpose;
 
-	Transpose.M[0] = Matrix.M[0];
-	Transpose.M[1] = Matrix.M[4];
-	Transpose.M[2] = Matrix.M[8];
-	Transpose.M[3] = Matrix.M[12];
-	Transpose.M[4] = Matrix.M[1];
-	Transpose.M[5] = Matrix.M[5];
-	Transpose.M[6] = Matrix.M[9];
-	Transpose.M[7] = Matrix.M[13];
-	Transpose.M[8] = Matrix.M[2];
-	Transpose.M[9] = Matrix.M[6];
-	Transpose.M[10] = Matrix.M[10];
-	Transpose.M[11] = Matrix.M[14];
-	Transpose.M[12] = Matrix.M[3];
-	Transpose.M[13] = Matrix.M[7];
-	Transpose.M[14] = Matrix.M[11];
-	Transpose.M[15] = Matrix.M[15];
+	transpose.m[0] = matrix.m[0];
+	transpose.m[1] = matrix.m[4];
+	transpose.m[2] = matrix.m[8];
+	transpose.m[3] = matrix.m[12];
+	transpose.m[4] = matrix.m[1];
+	transpose.m[5] = matrix.m[5];
+	transpose.m[6] = matrix.m[9];
+	transpose.m[7] = matrix.m[13];
+	transpose.m[8] = matrix.m[2];
+	transpose.m[9] = matrix.m[6];
+	transpose.m[10] = matrix.m[10];
+	transpose.m[11] = matrix.m[14];
+	transpose.m[12] = matrix.m[3];
+	transpose.m[13] = matrix.m[7];
+	transpose.m[14] = matrix.m[11];
+	transpose.m[15] = matrix.m[15];
 
-	return Transpose;
+	return transpose;
 }

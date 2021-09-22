@@ -23,6 +23,6 @@ public:
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
-	mat3x3 normalMatrix;
-	mat4x4 modelMatrix, viewMatrix, projectionMatrix;
+	Mat3x3 normalMatrix;
+	Mat4x4 modelMatrix, viewMatrix, projectionMatrix;
 };

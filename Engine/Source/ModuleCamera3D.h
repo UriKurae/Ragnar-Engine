@@ -13,9 +13,9 @@ public:
 	UpdateStatus Update(float dt) override;
 	bool CleanUp();
 
-	void Look(const vec3 &pos, const vec3 &ref, bool rotateAroundReference = false);
-	void LookAt(const vec3 &spot);
-	void Move(const vec3 &movement);
+	void Look(const Vec3 &pos, const Vec3 &ref, bool rotateAroundReference = false);
+	void LookAt(const Vec3 &spot);
+	void Move(const Vec3 &movement);
 	float* GetViewMatrix();
 
 private:
@@ -24,9 +24,9 @@ private:
 
 public:
 	
-	vec3 x, y, z, position, reference;
+	Vec3 x, y, z, position, reference;
 
 private:
 
-	mat4x4 viewMatrix, viewMatrixInverse;
+	Mat4x4 viewMatrix, viewMatrixInverse;
 };

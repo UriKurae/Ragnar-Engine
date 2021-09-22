@@ -18,7 +18,7 @@ PrimitiveTypes Primitive::GetType() const
 void Primitive::Render() const
 {
 	glPushMatrix();
-	glMultMatrixf(transform.M);
+	glMultMatrixf(transform.m);
 
 	if(axis == true)
 	{
@@ -81,19 +81,19 @@ void Primitive::InnerRender() const
 // ------------------------------------------------------------
 void Primitive::SetPos(float x, float y, float z)
 {
-	transform.translate(x, y, z);
+	transform.Translate(x, y, z);
 }
 
 // ------------------------------------------------------------
-void Primitive::SetRotation(float angle, const vec3 &u)
+void Primitive::SetRotation(float angle, const Vec3 &u)
 {
-	transform.rotate(angle, u);
+	transform.Rotate(angle, u);
 }
 
 // ------------------------------------------------------------
 void Primitive::Scale(float x, float y, float z)
 {
-	transform.scale(x, y, z);
+	transform.Scale(x, y, z);
 }
 
 // CUBE ============================================

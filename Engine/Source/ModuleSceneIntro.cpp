@@ -22,8 +22,8 @@ bool ModuleSceneIntro::Start()
 	
 	bool ret = true;
 
-	app->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	app->camera->LookAt(vec3(0, 0, 0));
+	app->camera->Move(Vec3(1.0f, 1.0f, 0.0f));
+	app->camera->LookAt(Vec3(0, 0, 0));
 
 	return ret;
 }

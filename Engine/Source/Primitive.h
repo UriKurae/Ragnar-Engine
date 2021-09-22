@@ -23,7 +23,7 @@ public:
 	virtual void InnerRender() const;
 
 	void SetPos(float x, float y, float z);
-	void SetRotation(float angle, const vec3 &u);
+	void SetRotation(float angle, const Vec3 &u);
 	void Scale(float x, float y, float z);
 
 	PrimitiveTypes GetType() const;
@@ -31,7 +31,7 @@ public:
 public:
 	
 	Color color;
-	mat4x4 transform;
+	Mat4x4 transform;
 	bool axis,wire;
 
 protected:
@@ -46,7 +46,7 @@ public :
 	Cube(float sizeX, float sizeY, float sizeZ);
 	void InnerRender() const;
 public:
-	vec3 size;
+	Vec3 size;
 };
 
 // ============================================
@@ -80,8 +80,8 @@ public:
 	Line(float x, float y, float z);
 	void InnerRender() const;
 public:
-	vec3 origin;
-	vec3 destination;
+	Vec3 origin;
+	Vec3 destination;
 };
 
 // ============================================
@@ -92,6 +92,6 @@ public:
 	Plane(float x, float y, float z, float d);
 	void InnerRender() const;
 public:
-	vec3 normal;
+	Vec3 normal;
 	float constant;
 };
