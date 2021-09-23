@@ -66,6 +66,8 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
+	dt = (float)msTimer.Read() / 1000.0f;
+	msTimer.Start();
 }
 
 // ---------------------------------------------

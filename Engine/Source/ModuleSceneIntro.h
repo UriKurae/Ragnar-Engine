@@ -19,7 +19,8 @@ public:
 	UpdateStatus PostUpdate() override;
 	bool CleanUp();
 
-	bool isPaused = false;
+	bool showMenu = true;
+	bool showHelpMenu = false;
 
 public:
 };

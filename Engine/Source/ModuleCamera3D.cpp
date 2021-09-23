@@ -39,6 +39,7 @@ UpdateStatus ModuleCamera3D::Update(float dt)
 {
 	Vec3 newPos(0, 0, 0);
 	float speed = 3.0f * dt;
+	
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
 		speed = 8.0f * dt;
 
