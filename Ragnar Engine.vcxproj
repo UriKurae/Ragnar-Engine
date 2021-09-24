@@ -14,7 +14,7 @@
     <ProjectGuid>{04FA9777-0911-49B2-9F45-5FA5C639F2AB}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>Ragnar Engine</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -62,8 +62,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glut;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\SDL_mixer\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;SDL2main.lib;SDL2_mixer.lib;SDL2.lib;glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\SDL_mixer\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;SDL2main.lib;SDL2_mixer.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,8 +84,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glut;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\SDL_mixer\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;SDL2main.lib;SDL2_mixer.lib;SDL2.lib;glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\SDL_mixer\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;SDL2main.lib;SDL2_mixer.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -103,16 +103,11 @@
     <ClInclude Include="Engine\Source\Globals.h" />
     <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\Module.h" />
-    <ClInclude Include="Engine\Source\ModuleAudio.h" />
     <ClInclude Include="Engine\Source\ModuleCamera3D.h" />
     <ClInclude Include="Engine\Source\ModuleInput.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleSceneIntro.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
-    <ClInclude Include="Engine\Source\p2DynArray.h" />
-    <ClInclude Include="Engine\Source\p2List.h" />
-    <ClInclude Include="Engine\Source\p2Point.h" />
-    <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -129,13 +124,11 @@
     <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
-    <ClCompile Include="Engine\Source\ModuleAudio.cpp" />
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
-    <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

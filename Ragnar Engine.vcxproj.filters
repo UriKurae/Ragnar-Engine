@@ -27,9 +27,6 @@
     <ClInclude Include="Engine\Source\Module.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ModuleAudio.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\ModuleCamera3D.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -54,19 +51,7 @@
     <ClInclude Include="Engine\Source\Color.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\p2DynArray.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\p2List.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\p2Point.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Light.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\glmath.h">
@@ -84,9 +69,6 @@
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
       <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\ModuleAudio.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
       <Filter>Sources\Modules</Filter>
@@ -116,9 +98,6 @@
       <Filter>Sources\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Light.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\glmath.cpp">

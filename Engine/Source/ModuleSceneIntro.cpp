@@ -1,7 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
-#include "Primitive.h"
 #include "ModuleInput.h"
 
 #include "Imgui/imgui.h"
@@ -39,10 +38,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 UpdateStatus ModuleSceneIntro::Update(float dt)
 {
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
-
 	return UpdateStatus::UPDATE_CONTINUE;
 }
 
