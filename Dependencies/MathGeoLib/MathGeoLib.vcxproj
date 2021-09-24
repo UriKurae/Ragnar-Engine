@@ -239,189 +239,134 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\CMakeLists.txt">
-      <StdOutEncoding>UTF-8</StdOutEncoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master -BC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build --check-stamp-file C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.20\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\CommonOptions.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfig.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfigVersion.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master -BC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build --check-stamp-file C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.20\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\CommonOptions.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfig.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfigVersion.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master -BC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build --check-stamp-file C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.20\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\CommonOptions.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfig.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfigVersion.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master -BC:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build --check-stamp-file C:/Users/lucas/Downloads/MathGeoLib-master/MathGeoLib-master/build/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.20\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\CommonOptions.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfig.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\MathGeoLibConfigVersion.cmake.in;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK2D.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\Random\LCG.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\SAT.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\AABB.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Capsule.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle2D.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Frustum.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Line.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment2D.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\OBB.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\PBVolume.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Plane.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polygon.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polyhedron.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Ray.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Sphere.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle2D.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\TriangleMesh.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\BitOps.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Callstack.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathFunc.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathLog.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathOps.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MiniFloat.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Polynomial.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Quat.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\SSEMath.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\TransformOps.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float2.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float3.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float3x3.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float3x4.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4d.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\grisu3.c" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\grisu3_cpp.cpp" />
-    <ClCompile Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Time\Clock.cpp" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK2D.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\Random\LCG.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Algorithm\SAT.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\AABB.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\AABB2D.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Capsule.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle2D.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Frustum.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\GeomType.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\GeometryAll.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\HitInfo.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\KDTree.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Line.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment2D.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\OBB.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\OBB2D.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\PBVolume.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Plane.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polygon.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polygon2DRef.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polyhedron.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\QuadTree.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Ray.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Sphere.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle2D.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Geometry\TriangleMesh.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\BitFuncs.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\BitOps.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Callstack.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\FixedPoint.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\FloatCmp.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\InclWindows.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Interpolate.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathAll.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathConstants.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathFunc.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathLog.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathNamespace.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MathTypes.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MatrixProxy.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MiniFloat.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\MultiLineMacro.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Polynomial.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Quat.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Rect.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Reinterpret.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\SSEMath.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\Swap.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\TransformOps.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\assume.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float2.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float3.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float3x3.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float3x4.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4_neon.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4_sse.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4d.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4_neon.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4_sse.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\grisu3.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\myassert.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\quat_simd.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\simd.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\sse_mathfun.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Math\vec2d.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\MathBuildConfig.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\MathGeoLib.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\MathGeoLibFwd.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\Time\Clock.h" />
-    <ClInclude Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\src\emscripten\library_system.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="C:\Users\lucas\Downloads\MathGeoLib-master\MathGeoLib-master\build\ZERO_CHECK.vcxproj">
       <Project>{8A95B7FE-BDD1-3AB6-AA2F-1D2EF7DD5455}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Algorithm\GJK.h" />
+    <ClInclude Include="src\Algorithm\GJK2D.h" />
+    <ClInclude Include="src\Algorithm\Random\LCG.h" />
+    <ClInclude Include="src\Algorithm\SAT.h" />
+    <ClInclude Include="src\emscripten\library_system.h" />
+    <ClInclude Include="src\Geometry\AABB.h" />
+    <ClInclude Include="src\Geometry\AABB2D.h" />
+    <ClInclude Include="src\Geometry\Capsule.h" />
+    <ClInclude Include="src\Geometry\Circle.h" />
+    <ClInclude Include="src\Geometry\Circle2D.h" />
+    <ClInclude Include="src\Geometry\Frustum.h" />
+    <ClInclude Include="src\Geometry\GeometryAll.h" />
+    <ClInclude Include="src\Geometry\GeomType.h" />
+    <ClInclude Include="src\Geometry\HitInfo.h" />
+    <ClInclude Include="src\Geometry\KDTree.h" />
+    <ClInclude Include="src\Geometry\Line.h" />
+    <ClInclude Include="src\Geometry\LineSegment.h" />
+    <ClInclude Include="src\Geometry\LineSegment2D.h" />
+    <ClInclude Include="src\Geometry\OBB.h" />
+    <ClInclude Include="src\Geometry\OBB2D.h" />
+    <ClInclude Include="src\Geometry\PBVolume.h" />
+    <ClInclude Include="src\Geometry\Plane.h" />
+    <ClInclude Include="src\Geometry\Polygon.h" />
+    <ClInclude Include="src\Geometry\Polygon2DRef.h" />
+    <ClInclude Include="src\Geometry\Polyhedron.h" />
+    <ClInclude Include="src\Geometry\QuadTree.h" />
+    <ClInclude Include="src\Geometry\Ray.h" />
+    <ClInclude Include="src\Geometry\Sphere.h" />
+    <ClInclude Include="src\Geometry\Triangle.h" />
+    <ClInclude Include="src\Geometry\Triangle2D.h" />
+    <ClInclude Include="src\Geometry\TriangleMesh.h" />
+    <ClInclude Include="src\MathBuildConfig.h" />
+    <ClInclude Include="src\MathGeoLib.h" />
+    <ClInclude Include="src\MathGeoLibFwd.h" />
+    <ClInclude Include="src\Math\assume.h" />
+    <ClInclude Include="src\Math\BitFuncs.h" />
+    <ClInclude Include="src\Math\BitOps.h" />
+    <ClInclude Include="src\Math\Callstack.h" />
+    <ClInclude Include="src\Math\FixedPoint.h" />
+    <ClInclude Include="src\Math\float2.h" />
+    <ClInclude Include="src\Math\float3.h" />
+    <ClInclude Include="src\Math\float3x3.h" />
+    <ClInclude Include="src\Math\float3x4.h" />
+    <ClInclude Include="src\Math\float4.h" />
+    <ClInclude Include="src\Math\float4d.h" />
+    <ClInclude Include="src\Math\float4x4.h" />
+    <ClInclude Include="src\Math\float4x4_neon.h" />
+    <ClInclude Include="src\Math\float4x4_sse.h" />
+    <ClInclude Include="src\Math\float4_neon.h" />
+    <ClInclude Include="src\Math\float4_sse.h" />
+    <ClInclude Include="src\Math\FloatCmp.h" />
+    <ClInclude Include="src\Math\grisu3.h" />
+    <ClInclude Include="src\Math\InclWindows.h" />
+    <ClInclude Include="src\Math\Interpolate.h" />
+    <ClInclude Include="src\Math\MathAll.h" />
+    <ClInclude Include="src\Math\MathConstants.h" />
+    <ClInclude Include="src\Math\MathFunc.h" />
+    <ClInclude Include="src\Math\MathLog.h" />
+    <ClInclude Include="src\Math\MathNamespace.h" />
+    <ClInclude Include="src\Math\MathTypes.h" />
+    <ClInclude Include="src\Math\MatrixProxy.h" />
+    <ClInclude Include="src\Math\MiniFloat.h" />
+    <ClInclude Include="src\Math\MultiLineMacro.h" />
+    <ClInclude Include="src\Math\myassert.h" />
+    <ClInclude Include="src\Math\Polynomial.h" />
+    <ClInclude Include="src\Math\Quat.h" />
+    <ClInclude Include="src\Math\quat_simd.h" />
+    <ClInclude Include="src\Math\Rect.h" />
+    <ClInclude Include="src\Math\Reinterpret.h" />
+    <ClInclude Include="src\Math\simd.h" />
+    <ClInclude Include="src\Math\SSEMath.h" />
+    <ClInclude Include="src\Math\sse_mathfun.h" />
+    <ClInclude Include="src\Math\Swap.h" />
+    <ClInclude Include="src\Math\TransformOps.h" />
+    <ClInclude Include="src\Math\vec2d.h" />
+    <ClInclude Include="src\Time\Clock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Algorithm\GJK.cpp" />
+    <ClCompile Include="src\Algorithm\GJK2D.cpp" />
+    <ClCompile Include="src\Algorithm\Random\LCG.cpp" />
+    <ClCompile Include="src\Algorithm\SAT.cpp" />
+    <ClCompile Include="src\Geometry\AABB.cpp" />
+    <ClCompile Include="src\Geometry\Capsule.cpp" />
+    <ClCompile Include="src\Geometry\Circle.cpp" />
+    <ClCompile Include="src\Geometry\Circle2D.cpp" />
+    <ClCompile Include="src\Geometry\Frustum.cpp" />
+    <ClCompile Include="src\Geometry\Line.cpp" />
+    <ClCompile Include="src\Geometry\LineSegment.cpp" />
+    <ClCompile Include="src\Geometry\LineSegment2D.cpp" />
+    <ClCompile Include="src\Geometry\OBB.cpp" />
+    <ClCompile Include="src\Geometry\PBVolume.cpp" />
+    <ClCompile Include="src\Geometry\Plane.cpp" />
+    <ClCompile Include="src\Geometry\Polygon.cpp" />
+    <ClCompile Include="src\Geometry\Polyhedron.cpp" />
+    <ClCompile Include="src\Geometry\Ray.cpp" />
+    <ClCompile Include="src\Geometry\Sphere.cpp" />
+    <ClCompile Include="src\Geometry\Triangle.cpp" />
+    <ClCompile Include="src\Geometry\Triangle2D.cpp" />
+    <ClCompile Include="src\Geometry\TriangleMesh.cpp" />
+    <ClCompile Include="src\Math\BitOps.cpp" />
+    <ClCompile Include="src\Math\Callstack.cpp" />
+    <ClCompile Include="src\Math\float2.cpp" />
+    <ClCompile Include="src\Math\float3.cpp" />
+    <ClCompile Include="src\Math\float3x3.cpp" />
+    <ClCompile Include="src\Math\float3x4.cpp" />
+    <ClCompile Include="src\Math\float4.cpp" />
+    <ClCompile Include="src\Math\float4d.cpp" />
+    <ClCompile Include="src\Math\float4x4.cpp" />
+    <ClCompile Include="src\Math\grisu3.c" />
+    <ClCompile Include="src\Math\grisu3_cpp.cpp" />
+    <ClCompile Include="src\Math\MathFunc.cpp" />
+    <ClCompile Include="src\Math\MathLog.cpp" />
+    <ClCompile Include="src\Math\MathOps.cpp" />
+    <ClCompile Include="src\Math\MiniFloat.cpp" />
+    <ClCompile Include="src\Math\Polynomial.cpp" />
+    <ClCompile Include="src\Math\Quat.cpp" />
+    <ClCompile Include="src\Math\SSEMath.cpp" />
+    <ClCompile Include="src\Math\TransformOps.cpp" />
+    <ClCompile Include="src\Time\Clock.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
