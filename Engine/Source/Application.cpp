@@ -1,6 +1,8 @@
 #include "Application.h"
 #include <list>
 
+#include "MathGeoLib/src/MathGeoLib.h"
+
 Application::Application()
 {
 	window = new ModuleWindow(this);
@@ -8,7 +10,6 @@ Application::Application()
 	sceneIntro = new ModuleSceneIntro(this);
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
-
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
