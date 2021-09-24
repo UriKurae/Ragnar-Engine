@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\Random\LCG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\SAT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\AABB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Capsule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Frustum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\OBB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\PBVolume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polyhedron.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\TriangleMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\BitOps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Callstack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathOps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MiniFloat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Polynomial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Quat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\SSEMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\TransformOps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float3x4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\grisu3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\grisu3_cpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Time\Clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\GJK2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\Random\LCG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Algorithm\SAT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\AABB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\AABB2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Capsule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Circle2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Frustum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\GeomType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\GeometryAll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\HitInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\KDTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\LineSegment2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\OBB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\OBB2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\PBVolume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polygon2DRef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Polyhedron.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\QuadTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\Triangle2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Geometry\TriangleMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\BitFuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\BitOps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Callstack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\FixedPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\FloatCmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\InclWindows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Interpolate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathAll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathNamespace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MathTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MatrixProxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MiniFloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\MultiLineMacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Polynomial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Quat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Rect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Reinterpret.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\SSEMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\Swap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\TransformOps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\assume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float3x4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4_neon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4_sse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4_neon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\float4x4_sse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\grisu3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\myassert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\quat_simd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\simd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\sse_mathfun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Math\vec2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\MathBuildConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\MathGeoLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\MathGeoLibFwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\Time\Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\src\emscripten\library_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Uni\3 any\Motors\Librerias\MathGeoLib-master\MathGeoLib-master\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2B6D370C-D534-34E8-8DB8-6FA06D9D8DDA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6B644CB3-15C8-3D70-B269-71384759A77B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

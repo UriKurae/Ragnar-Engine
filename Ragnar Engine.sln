@@ -5,16 +5,32 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ragnar Engine", "Ragnar Engine.vcxproj", "{04FA9777-0911-49B2-9F45-5FA5C639F2AB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathGeoLib", "Dependencies\MathGeoLib\MathGeoLib.vcxproj", "{3448D04A-83C4-3716-B0CE-47D82D2BA82A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		MinSizeRel|Win32 = MinSizeRel|Win32
 		Release|Win32 = Release|Win32
+		RelWithDebInfo|Win32 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.Debug|Win32.ActiveCfg = Debug|Win32
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.Debug|Win32.Build.0 = Debug|Win32
+		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.MinSizeRel|Win32.ActiveCfg = Release|Win32
+		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.MinSizeRel|Win32.Build.0 = Release|Win32
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.Release|Win32.ActiveCfg = Release|Win32
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.Release|Win32.Build.0 = Release|Win32
+		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
+		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.RelWithDebInfo|Win32.Build.0 = Release|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.Debug|Win32.Build.0 = Debug|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.MinSizeRel|Win32.ActiveCfg = MinSizeRel|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.MinSizeRel|Win32.Build.0 = MinSizeRel|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.Release|Win32.ActiveCfg = Release|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.Release|Win32.Build.0 = Release|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|Win32
+		{3448D04A-83C4-3716-B0CE-47D82D2BA82A}.RelWithDebInfo|Win32.Build.0 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
