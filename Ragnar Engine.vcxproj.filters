@@ -65,6 +65,10 @@
     <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
+    <ClInclude Include="Dependencies\glew\include\GL\eglew.h" />
+    <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
+    <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
+    <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
