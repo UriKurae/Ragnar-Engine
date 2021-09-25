@@ -31,6 +31,13 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Compiled Static libraries
+!Dependencies/glew/lib/glew32s.lib
+!Dependencies/glew/lib/glew32.lib
+!Dependencies/SDL/libx86/SDL2.lib
+!Dependencies/SDL/libx86/SDL2main.lib
+!Dependencies/MathGeoLib/lib/MathGeoLib.lib
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
