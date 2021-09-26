@@ -112,6 +112,7 @@
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleSceneIntro.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +134,7 @@
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
+    <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

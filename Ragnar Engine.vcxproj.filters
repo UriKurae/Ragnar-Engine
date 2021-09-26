@@ -69,6 +69,9 @@
     <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
+    <ClInclude Include="Engine\Source\Primitive.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -114,5 +117,8 @@
     <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Engine\Source\Primitive.cpp">
+      <Filter>Sources\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
+#include "Primitive.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_opengl2.h"
@@ -43,6 +44,10 @@ UpdateStatus ModuleSceneIntro::Update(float dt)
 
 UpdateStatus ModuleSceneIntro::PostUpdate()
 {
+	Plane p(0, 0, 0, 0);
+	p.axis = true;
+	p.Render();
+
 	if (ImGui::BeginMainMenuBar())
 	{
 		bool ret = false;
