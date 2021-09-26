@@ -1,4 +1,3 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
@@ -37,12 +36,12 @@ bool ModuleSceneIntro::CleanUp()
 }
 
 // Update: draw background
-UpdateStatus ModuleSceneIntro::Update(float dt)
+bool ModuleSceneIntro::Update(float dt)
 {
-	return UpdateStatus::UPDATE_CONTINUE;
+	return true;
 }
 
-UpdateStatus ModuleSceneIntro::PostUpdate()
+bool ModuleSceneIntro::PostUpdate()
 {
 	Plane p(0, 0, 0, 0);
 	p.axis = true;
@@ -63,7 +62,7 @@ UpdateStatus ModuleSceneIntro::PostUpdate()
 			ImGui::MenuItem("Save", "Ctrl + S", &ret);
 			if (ImGui::MenuItem("Exit", "Alt + F4", &ret))
 			{
-				return UpdateStatus::UPDATE_STOP;
+				return false;
 			}
 			ImGui::EndMenu();
 		}
@@ -96,7 +95,7 @@ UpdateStatus ModuleSceneIntro::PostUpdate()
 		ImGui::Begin("Ragnar Engine", &showMenu);
 		if (ImGui::Button("Close", ImVec2(0, 0)))
 		{
-			return UpdateStatus::UPDATE_STOP;
+			return false;
 		}
 		ImGui::End();
 
@@ -123,5 +122,5 @@ UpdateStatus ModuleSceneIntro::PostUpdate()
 		ImGui::End();
 	}
 
-	return UpdateStatus::UPDATE_CONTINUE;
+	return true;
 }

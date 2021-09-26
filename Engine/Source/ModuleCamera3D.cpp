@@ -1,4 +1,3 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
 
@@ -35,7 +34,7 @@ bool ModuleCamera3D::CleanUp()
 }
 
 // -----------------------------------------------------------------
-UpdateStatus ModuleCamera3D::Update(float dt)
+bool ModuleCamera3D::Update(float dt)
 {
 	Vec3 newPos(0, 0, 0);
 	float speed = 3.0f * dt;
@@ -96,7 +95,7 @@ UpdateStatus ModuleCamera3D::Update(float dt)
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
-	return UpdateStatus::UPDATE_CONTINUE;
+	return true;
 }
 
 // -----------------------------------------------------------------

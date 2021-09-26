@@ -1,4 +1,3 @@
-#include "Globals.h"
 #include "ModuleWindow.h"
 #include "Application.h"
 

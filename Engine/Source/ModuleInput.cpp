@@ -1,4 +1,3 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
 
@@ -33,7 +32,7 @@ bool ModuleInput::Init()
 }
 
 // Called every draw update
-UpdateStatus ModuleInput::PreUpdate(float dt)
+bool ModuleInput::PreUpdate(float dt)
 {
 	SDL_PumpEvents();
 
@@ -114,9 +113,9 @@ UpdateStatus ModuleInput::PreUpdate(float dt)
 	}
 
 	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KeyState::KEY_UP)
-		return UpdateStatus::UPDATE_STOP;
+		return false;
 
-	return UpdateStatus::UPDATE_CONTINUE;
+	return true;
 }
 
 // Called before quitting

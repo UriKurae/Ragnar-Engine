@@ -71,26 +71,26 @@ void Application::FinishUpdate()
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
-UpdateStatus Application::Update()
+bool Application::Update()
 {
-	UpdateStatus ret = UpdateStatus::UPDATE_CONTINUE;
+	bool ret = true;
 	PrepareUpdate();
 	
 	std::list<Module*>::iterator item = listModules.begin();
 	
-	for (item = listModules.begin(); item != listModules.end() && ret == UpdateStatus::UPDATE_CONTINUE; ++item)
+	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
 		ret = (*item)->PreUpdate(dt);
 	}
 
 
-	for (item = listModules.begin(); item != listModules.end() && ret == UpdateStatus::UPDATE_CONTINUE; ++item)
+	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
 		ret = (*item)->Update(dt);
 	}
 
 
-	for (item = listModules.begin(); item != listModules.end() && ret == UpdateStatus::UPDATE_CONTINUE; ++item)
+	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
 		ret = (*item)->PostUpdate();
 	}

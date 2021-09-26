@@ -1,6 +1,5 @@
 #pragma once
 #include "Module.h"
-#include "Globals.h"
 
 #define BOUNCER_TIME 200
 
@@ -14,8 +13,8 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
-	UpdateStatus Update(float dt) override;
-	UpdateStatus PostUpdate() override;
+	bool Update(float dt) override;
+	bool PostUpdate() override;
 	bool CleanUp();
 
 private:

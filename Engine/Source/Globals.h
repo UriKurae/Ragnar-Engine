@@ -15,13 +15,6 @@ void log(const char file[], int line, const char* format, ...);
 
 typedef unsigned int uint;
 
-enum class UpdateStatus
-{
-	UPDATE_CONTINUE = 1,
-	UPDATE_STOP,
-	UPDATE_ERROR
-};
-
 // Configuration -----------
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 768

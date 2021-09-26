@@ -1,6 +1,6 @@
 #pragma once
 #include "Module.h"
-#include "Globals.h"
+
 #include "glmath.h"
 #include "Light.h"
 
@@ -13,8 +13,8 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
-	UpdateStatus PreUpdate(float dt) override;
-	UpdateStatus PostUpdate();
+	bool PreUpdate(float dt) override;
+	bool PostUpdate();
 	bool CleanUp();
 
 	void OnResize(int width, int height);

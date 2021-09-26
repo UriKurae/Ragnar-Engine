@@ -1,6 +1,5 @@
 #pragma once
 #include "Module.h"
-#include "Globals.h"
 #include "glmath.h"
 
 class ModuleCamera3D : public Module
@@ -10,7 +9,7 @@ public:
 	~ModuleCamera3D();
 
 	bool Start();
-	UpdateStatus Update(float dt) override;
+	bool Update(float dt) override;
 	bool CleanUp();
 
 	void Look(const Vec3 &pos, const Vec3 &ref, bool rotateAroundReference = false);

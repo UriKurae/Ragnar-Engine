@@ -1,7 +1,5 @@
 #pragma once
 
-#include <list>
-#include "Globals.h"
 #include "Timer.h"
 #include "Module.h"
 #include "ModuleWindow.h"
@@ -10,6 +8,8 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 
+#include <list>
+
 class Application
 {
 public:
@@ -17,7 +17,7 @@ public:
 	~Application();
 
 	bool Init();
-	UpdateStatus Update();
+	bool Update();
 	bool CleanUp();
 
 private:

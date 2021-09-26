@@ -1,4 +1,3 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "glew/include/GL/glew.h"
@@ -121,7 +120,7 @@ bool ModuleRenderer3D::Init()
 }
 
 // PreUpdate: clear buffer
-UpdateStatus ModuleRenderer3D::PreUpdate(float dt)
+bool ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -139,18 +138,18 @@ UpdateStatus ModuleRenderer3D::PreUpdate(float dt)
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
-	return UpdateStatus::UPDATE_CONTINUE;
+	return true;
 }
 
 // PostUpdate present buffer to screen
-UpdateStatus ModuleRenderer3D::PostUpdate()
+bool ModuleRenderer3D::PostUpdate()
 {
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
 	SDL_GL_SwapWindow(app->window->window);
 
-	return UpdateStatus::UPDATE_CONTINUE;
+	return true;
 }
 
 // Called before quitting

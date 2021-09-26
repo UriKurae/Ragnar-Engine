@@ -1,17 +1,16 @@
 #include <stdlib.h>
 #include "Application.h"
-#include "Globals.h"
 
 #include "SDL/include/SDL.h"
 
-
-enum class MainStates
+enum class MainState
 {
-	MAIN_CREATION,
-	MAIN_START,
-	MAIN_UPDATE,
-	MAIN_FINISH,
-	MAIN_EXIT
+	CREATE = 1,
+	INIT,
+	UPDATE,
+	CLEAN,
+	FAIL,
+	EXIT
 };
 
 int main(int argc, char ** argv)
@@ -19,69 +18,69 @@ int main(int argc, char ** argv)
 	LOG("Starting game '%s'...", TITLE);
 
 	int mainReturn = EXIT_FAILURE;
-	MainStates state = MainStates::MAIN_CREATION;
+	MainState state = MainState::CREATE;
 	Application* app = NULL;
 
-	while (state != MainStates::MAIN_EXIT)
+	while (state != MainState::EXIT)
 	{
 		switch (state)
 		{
-		case MainStates::MAIN_CREATION:
+		case MainState::CREATE:
+			LOG("CREATION PHASE ===============================");
 
-			LOG("-------------- Application Creation --------------");
 			app = new Application();
-			state = MainStates::MAIN_START;
+
+			if (app != NULL)
+				state = MainState::INIT;
+			else
+				state = MainState::FAIL;
+
 			break;
 
-		case MainStates::MAIN_START:
-
-			LOG("-------------- Application Init --------------");
-			if (app->Init() == false)
-			{
-				LOG("Application Init exits with ERROR");
-				state = MainStates::MAIN_EXIT;
-			}
+			// Awake all modules -----------------------------------------------
+		case MainState::INIT:
+			LOG("AWAKE PHASE ===============================");
+			if (app->Init() == true)
+				state = MainState::UPDATE;
 			else
 			{
-				state = MainStates::MAIN_UPDATE;
-				LOG("-------------- Application Update --------------");
+				LOG("ERROR: Awake failed");
+				state = MainState::FAIL;
 			}
 
 			break;
 
-		case MainStates::MAIN_UPDATE:
+			// Loop all modules until we are asked to leave ---------------------
+		case MainState::UPDATE:
 		{
-			UpdateStatus updateReturn = app->Update();
-
-			if (updateReturn == UpdateStatus::UPDATE_ERROR)
-			{
-				LOG("Application Update exits with ERROR");
-				state = MainStates::MAIN_EXIT;
-			}
-
-			if (updateReturn == UpdateStatus::UPDATE_STOP)
-				state = MainStates::MAIN_FINISH;
+			if (app->Update() == false)
+				state = MainState::CLEAN;
 		}
-			break;
+		break;
 
-		case MainStates::MAIN_FINISH:
-
-			LOG("-------------- Application CleanUp --------------");
-			if (app->CleanUp() == false)
+		// Cleanup allocated memory -----------------------------------------
+		case MainState::CLEAN:
+			LOG("CLEANUP PHASE ===============================");
+			if (app->CleanUp() == true)
 			{
-				LOG("Application CleanUp exits with ERROR");
+				delete app;
+				mainReturn = EXIT_SUCCESS;
+				state = MainState::EXIT;
 			}
 			else
-				mainReturn = EXIT_SUCCESS;
-
-			state = MainStates::MAIN_EXIT;
+				state = MainState::FAIL;
 
 			break;
 
+			// Exit with errors and shame ---------------------------------------
+		case MainState::FAIL:
+			LOG("Exiting with errors :(");
+			mainReturn = EXIT_FAILURE;
+			state = MainState::EXIT;
+			break;
 		}
 	}
 
-	delete app;
 	LOG("Exiting game '%s'...\n", TITLE);
 	return mainReturn;
 }
