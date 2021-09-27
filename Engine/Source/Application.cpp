@@ -8,6 +8,7 @@ Application::Application()
 	sceneIntro = new ModuleSceneIntro(this);
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
+	editor = new ModuleEditor(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -20,6 +21,7 @@ Application::Application()
 	
 	// Scenes
 	AddModule(sceneIntro);
+	AddModule(editor);
 
 	AddModule(renderer3D);
 }
@@ -116,4 +118,9 @@ bool Application::CleanUp()
 void Application::AddModule(Module* mod)
 {
 	listModules.push_back(mod);
+}
+
+void Application::RequestBrowser(const char* path)
+{
+	ShellExecute(NULL, "open", path, NULL, NULL, SW_SHOWNORMAL);
 }

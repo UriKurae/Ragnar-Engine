@@ -72,6 +72,9 @@
     <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleEditor.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -119,6 +122,9 @@
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleEditor.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

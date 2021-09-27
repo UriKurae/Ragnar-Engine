@@ -108,6 +108,7 @@
     <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\Module.h" />
     <ClInclude Include="Engine\Source\ModuleCamera3D.h" />
+    <ClInclude Include="Engine\Source\ModuleEditor.h" />
     <ClInclude Include="Engine\Source\ModuleInput.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleSceneIntro.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp" />
+    <ClCompile Include="Engine\Source\ModuleEditor.cpp" />
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp" />

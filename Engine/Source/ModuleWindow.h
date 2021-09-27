@@ -19,6 +19,8 @@ public:
 	bool CleanUp();
 
 	void SetTitle(const char* title);
+	void SetFullscreen();
+	void SetResizable();
 
 public:
 	//The window we'll be rendering to
@@ -26,6 +28,9 @@ public:
 
 	//The surface contained by the window
 	SDL_Surface* screenSurface;
+
+	bool fullscreen;
+	bool resizable;
 };
 
 #endif // __ModuleWindow_H__

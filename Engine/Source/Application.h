@@ -7,6 +7,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
 
 #include <list>
 
@@ -19,6 +20,7 @@ public:
 	bool Init();
 	bool Update();
 	bool CleanUp();
+	void RequestBrowser(const char* path);
 
 private:
 	void AddModule(Module* mod);
@@ -31,6 +33,7 @@ public:
 	ModuleSceneIntro* sceneIntro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
+	ModuleEditor* editor;
 
 private:
 	Timer	msTimer;
