@@ -5,8 +5,16 @@ ModuleWindow::ModuleWindow(Application* app, bool startEnabled) : Module(app, st
 {
 	window = NULL;
 	screenSurface = NULL;
+
 	fullscreen = false;
 	resizable = false;
+	borderless = true;
+	fullscreenDesktop = false;
+
+	width = 0;
+	height = 0;
+
+	brightness = 0;
 }
 
 // Destructor
@@ -28,8 +36,8 @@ bool ModuleWindow::Init()
 	else
 	{
 		//Create window
-		int width = SCREEN_WIDTH * SCREEN_SIZE;
-		int height = SCREEN_HEIGHT * SCREEN_SIZE;
+		width = SCREEN_WIDTH * SCREEN_SIZE;
+		height = SCREEN_HEIGHT * SCREEN_SIZE;
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
 		//Use OpenGL 2.1
@@ -67,6 +75,11 @@ bool ModuleWindow::Init()
 		{
 			//Get window surface
 			screenSurface = SDL_GetWindowSurface(window);
+			brightness = SDL_GetWindowBrightness(window);
+			SDL_DisplayMode* display = new SDL_DisplayMode();
+			SDL_GetWindowDisplayMode(window, display);
+			refreshRate = display->refresh_rate;
+			delete display;
 		}
 	}
 
@@ -89,19 +102,78 @@ bool ModuleWindow::CleanUp()
 	return true;
 }
 
-void ModuleWindow::SetTitle(const char* title)
+void ModuleWindow::SetTitle(const char* title) const
 {
 	SDL_SetWindowTitle(window, title);
 }
 
-void ModuleWindow::SetFullscreen()
+void ModuleWindow::SetFullscreen() const
 {
-	fullscreen = !fullscreen;
 	SDL_SetWindowFullscreen(window, fullscreen);
 }
 
-void ModuleWindow::SetResizable()
+void ModuleWindow::SetFullscreenDesktop() const
 {
-	resizable = !resizable;
-	SDL_SetWindowBordered(window, (SDL_bool)resizable);
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+}
+
+void ModuleWindow::SetResizable() const
+{
+}
+
+void ModuleWindow::SetBorderless() const
+{
+	SDL_SetWindowBordered(window, (SDL_bool)borderless);
+}
+
+void ModuleWindow::SetBrightness() const
+{
+	SDL_SetWindowBrightness(window, brightness);
+}
+
+void ModuleWindow::SetWindowSize() const
+{
+	SDL_SetWindowSize(window, width, height);
+}
+
+float* ModuleWindow::GetWindowBrightness()
+{
+	return &brightness;
+}
+
+int* ModuleWindow::GetWindowWidth()
+{
+	SDL_GetWindowSize(window, &width, &height);
+	return &width;
+}
+
+int* ModuleWindow::GetWindowHeight()
+{
+	SDL_GetWindowSize(window, &width, &height);
+	return &height;
+}
+
+bool* ModuleWindow::GetWindowFullscreen()
+{
+	return &fullscreen;
+}
+
+bool* ModuleWindow::GetWindowFullscreenDesktop()
+{
+	return &fullscreenDesktop;
+}
+
+bool* ModuleWindow::GetWindowResizable()
+{
+	return &resizable;
+}
+
+bool* ModuleWindow::GetWindowBorderless()
+{
+	return &borderless;
+}
+
+int ModuleWindow::GetRefreshRate() const
+{
+	return refreshRate;
 }
