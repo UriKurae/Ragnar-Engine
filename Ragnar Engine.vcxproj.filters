@@ -78,6 +78,7 @@
     <ClInclude Include="Engine\Source\ConsoleMenu.h">
       <Filter>Sources</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\json\parson.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -132,5 +133,6 @@
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Dependencies\json\parson.c" />
   </ItemGroup>
 </Project>

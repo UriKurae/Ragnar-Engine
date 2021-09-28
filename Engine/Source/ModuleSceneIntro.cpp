@@ -6,6 +6,7 @@
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_opengl2.h"
 #include "Imgui/imgui_impl_sdl.h"
+#include <json\parson.h>
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool startEnabled) : Module(app, startEnabled)
 {
@@ -18,7 +19,7 @@ ModuleSceneIntro::~ModuleSceneIntro()
 bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
-	
+
 	bool ret = true;
 
 	app->camera->Move(Vec3(1.0f, 1.0f, 0.0f));
