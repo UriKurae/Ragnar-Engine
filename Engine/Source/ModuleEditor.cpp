@@ -179,6 +179,9 @@ bool ModuleEditor::Update(float dt)
 
 		ImGui::Separator();
 		
+		ImGui::BeginChild("Input");
+		
+			
 		for (int i = 0; i < 300; ++i)
 		{
 			switch ((KeyState)app->input->GetKey(i))
@@ -207,6 +210,8 @@ bool ModuleEditor::Update(float dt)
 		{
 			ImGui::Text(strings[i].c_str());
 		}
+		
+		ImGui::EndChild();
 	}
 	if (ImGui::CollapsingHeader("Hardware"))
 	{

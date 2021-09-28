@@ -14,7 +14,8 @@ public:
 	bool Update(float dt) override;
 
 private:
-	bool showMenu;
+
+    bool showMenu;
 	bool showHelpMenu;
 
 	std::string string;
