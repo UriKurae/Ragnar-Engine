@@ -75,6 +75,9 @@
     <ClInclude Include="Engine\Source\ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ConsoleMenu.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -125,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ConsoleMenu.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

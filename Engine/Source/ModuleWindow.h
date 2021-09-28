@@ -26,14 +26,14 @@ public:
 	void SetBrightness() const;
 	void SetWindowSize() const;
 
-	float* GetWindowBrightness();
+	inline float* GetWindowBrightness() { return &brightness; }
 	int* GetWindowWidth();
 	int* GetWindowHeight();
-	bool* GetWindowFullscreen();
-	bool* GetWindowFullscreenDesktop();
-	bool* GetWindowResizable();
-	bool* GetWindowBorderless();
-	int GetRefreshRate() const;
+	inline bool* GetWindowFullscreen() { return &fullscreen; }
+	inline bool* GetWindowFullscreenDesktop() { return &fullscreenDesktop; }
+	inline bool* GetWindowResizable() { return &resizable; }
+	inline bool* GetWindowBorderless() { return &borderless; }
+	inline int GetRefreshRate() const { return refreshRate; }
 
 
 public:

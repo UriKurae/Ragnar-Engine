@@ -1,6 +1,9 @@
 #pragma once
 #include "Module.h"
 
+#include <vector>
+#include <string>
+
 #define MAX_MOUSE_BUTTONS 5
 
 enum class KeyState
@@ -22,39 +25,44 @@ public:
 	bool PreUpdate(float dt) override;
 	bool CleanUp();
 
-	KeyState GetKey(int id) const
+	inline KeyState GetKey(int id) const
 	{
 		return keyboard[id];
 	}
 
-	KeyState GetMouseButton(int id) const
+	inline KeyState GetMouseButton(int id) const
 	{
 		return mouseButtons[id];
 	}
 
-	int GetMouseX() const
+	inline int GetMouseX() const
 	{
 		return mouseX;
 	}
 
-	int GetMouseY() const
+	inline int GetMouseY() const
 	{
 		return mouseY;
 	}
 
-	int GetMouseZ() const
+	inline int GetMouseZ() const
 	{
 		return mouseZ;
 	}
 
-	int GetMouseXMotion() const
+	inline int GetMouseXMotion() const
 	{
 		return mouseXMotion;
 	}
 
-	int GetMouseYMotion() const
+	inline int GetMouseYMotion() const
 	{
 		return mouseYMotion;
+	}
+
+	inline std::vector<std::string> GetInputList() const
+	{
+		return strings;
 	}
 
 private:
@@ -66,4 +74,8 @@ private:
 	int mouseXMotion;
 	int mouseYMotion;
 	int mouseZMotion;
+
+	std::vector<std::string> strings;
+
+	bool repeated = true;
 };

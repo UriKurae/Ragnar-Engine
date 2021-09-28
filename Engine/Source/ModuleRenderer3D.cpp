@@ -4,6 +4,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include "ConsoleMenu.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
@@ -41,7 +42,9 @@ bool ModuleRenderer3D::Init()
 			LOG("Error: %s\n", glewGetErrorString(err));
 			
 		}
+
 		LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+		app->editor->console->AddLog("Status: Using GLEW %s\n");
 
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)

@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ConsoleMenu.h"
 
 #define MAX_KEYS 300
 
@@ -7,6 +8,7 @@ ModuleInput::ModuleInput(Application* app, bool startEnabled) : Module(app, star
 {
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, (int)KeyState::KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
+	repeated = false;
 }
 
 // Destructor
@@ -19,6 +21,8 @@ ModuleInput::~ModuleInput()
 bool ModuleInput::Init()
 {
 	LOG("Init SDL input event system");
+	app->editor->console->AddLog("Init SDL input event system\n");
+
 	bool ret = true;
 	SDL_Init(0);
 
@@ -40,17 +44,35 @@ bool ModuleInput::PreUpdate(float dt)
 	
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
+		std::string string;
 		if(keys[i] == 1)
 		{
-			if(keyboard[i] == KeyState::KEY_IDLE)
+			if (keyboard[i] == KeyState::KEY_IDLE)
+			{
 				keyboard[i] = KeyState::KEY_DOWN;
+				string = "Keybr :" + std::to_string(i) + " - DOWN";
+				strings.push_back(string);
+			}
 			else
+			{
 				keyboard[i] = KeyState::KEY_REPEAT;
+				if (!repeated)
+				{
+					repeated = true;
+					string = "Keybr :" + std::to_string(i) + " - REPEAT";
+					strings.push_back(string);
+				}
+			}
 		}
 		else
 		{
-			if(keyboard[i] == KeyState::KEY_REPEAT || keyboard[i] == KeyState::KEY_DOWN)
+			if (keyboard[i] == KeyState::KEY_REPEAT || keyboard[i] == KeyState::KEY_DOWN)
+			{
+				repeated = false;
 				keyboard[i] = KeyState::KEY_UP;
+				string = "Keybr :" + std::to_string(i) + " - UP";
+				strings.push_back(string);
+			}
 			else
 				keyboard[i] = KeyState::KEY_IDLE;
 		}

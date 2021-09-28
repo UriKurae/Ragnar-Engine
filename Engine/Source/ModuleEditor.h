@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+class ConsoleMenu;
+
 class ModuleEditor : public Module
 {
 public:
@@ -13,17 +15,18 @@ public:
 
 	bool Update(float dt) override;
 
+public:
+	ConsoleMenu* console;
+
 private:
 
     bool showMenu;
 	bool showHelpMenu;
-
-	std::string string;
+	bool showConfiguration;
+	bool showConsole;
 
 	std::vector<float> fps;
 	std::vector<float> ms;
-
-	std::vector<std::string> strings;
 
 	bool activeWindow;
 	bool activeInput;

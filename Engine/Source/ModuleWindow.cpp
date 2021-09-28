@@ -136,11 +136,6 @@ void ModuleWindow::SetWindowSize() const
 	SDL_SetWindowSize(window, width, height);
 }
 
-float* ModuleWindow::GetWindowBrightness()
-{
-	return &brightness;
-}
-
 int* ModuleWindow::GetWindowWidth()
 {
 	SDL_GetWindowSize(window, &width, &height);
@@ -151,29 +146,4 @@ int* ModuleWindow::GetWindowHeight()
 {
 	SDL_GetWindowSize(window, &width, &height);
 	return &height;
-}
-
-bool* ModuleWindow::GetWindowFullscreen()
-{
-	return &fullscreen;
-}
-
-bool* ModuleWindow::GetWindowFullscreenDesktop()
-{
-	return &fullscreenDesktop;
-}
-
-bool* ModuleWindow::GetWindowResizable()
-{
-	return &resizable;
-}
-
-bool* ModuleWindow::GetWindowBorderless()
-{
-	return &borderless;
-}
-
-int ModuleWindow::GetRefreshRate() const
-{
-	return refreshRate;
 }

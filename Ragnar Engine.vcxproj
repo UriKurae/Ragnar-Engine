@@ -103,6 +103,7 @@
     <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\Color.h" />
+    <ClInclude Include="Engine\Source\ConsoleMenu.h" />
     <ClInclude Include="Engine\Source\glmath.h" />
     <ClInclude Include="Engine\Source\Globals.h" />
     <ClInclude Include="Engine\Source\Light.h" />
@@ -126,6 +127,7 @@
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Engine\Source\Application.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
+    <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />
     <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
