@@ -1,16 +1,13 @@
 #pragma once
 
-class Application;
-
 class Module
 {
 private :
 	bool enabled;
 
 public:
-	Application* app;
 
-	Module(Application* parent, bool startEnabled = true) : app(parent), enabled(startEnabled)
+	Module(bool startEnabled = true) : enabled(startEnabled)
 	{}
 
 	virtual ~Module()

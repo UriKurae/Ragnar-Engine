@@ -1,7 +1,8 @@
-#include "ModuleWindow.h"
 #include "Application.h"
 
-ModuleWindow::ModuleWindow(Application* app, bool startEnabled) : Module(app, startEnabled)
+#include "ModuleWindow.h"
+
+ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
 {
 	window = NULL;
 	screenSurface = NULL;
@@ -13,6 +14,7 @@ ModuleWindow::ModuleWindow(Application* app, bool startEnabled) : Module(app, st
 
 	width = 0;
 	height = 0;
+	refreshRate = 0;
 
 	brightness = 0;
 }
@@ -79,7 +81,7 @@ bool ModuleWindow::Init()
 			SDL_DisplayMode* display = new SDL_DisplayMode();
 			SDL_GetWindowDisplayMode(window, display);
 			refreshRate = display->refresh_rate;
-			delete display;
+			RELEASE(display);
 		}
 	}
 

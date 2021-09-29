@@ -13,13 +13,14 @@ enum class MainState
 	EXIT
 };
 
+Application* app = nullptr;
+
 int main(int argc, char ** argv)
 {
 	LOG("Starting game '%s'...", TITLE);
 
 	int mainReturn = EXIT_FAILURE;
 	MainState state = MainState::CREATE;
-	Application* app = NULL;
 
 	while (state != MainState::EXIT)
 	{
@@ -63,7 +64,7 @@ int main(int argc, char ** argv)
 			LOG("CLEANUP PHASE ===============================");
 			if (app->CleanUp() == true)
 			{
-				delete app;
+				RELEASE(app);
 				mainReturn = EXIT_SUCCESS;
 				state = MainState::EXIT;
 			}

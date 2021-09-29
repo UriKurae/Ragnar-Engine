@@ -1,7 +1,9 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 
-ModuleCamera3D::ModuleCamera3D(Application* app, bool startEnabled) : Module(app, startEnabled)
+#include "ModuleInput.h"
+
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
 {
 	CalculateViewMatrix();
 
@@ -47,7 +49,6 @@ bool ModuleCamera3D::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos -= z * speed;
 	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos += z * speed;
-
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos -= x * speed;
 	if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos += x * speed;

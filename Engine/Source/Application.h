@@ -2,14 +2,15 @@
 
 #include "Timer.h"
 #include "Module.h"
-#include "ModuleWindow.h"
-#include "ModuleInput.h"
-#include "ModuleSceneIntro.h"
-#include "ModuleRenderer3D.h"
-#include "ModuleCamera3D.h"
-#include "ModuleEditor.h"
 
 #include <list>
+
+class ModuleWindow;
+class ModuleInput;
+class ModuleSceneIntro;
+class ModuleRenderer3D;
+class ModuleCamera3D;
+class ModuleEditor;
 
 class Application
 {
@@ -20,7 +21,9 @@ public:
 	bool Init();
 	bool Update();
 	bool CleanUp();
+
 	void RequestBrowser(const char* path);
+	void LogConsole(const char* string);
 
 private:
 	void AddModule(Module* mod);
@@ -40,3 +43,5 @@ private:
 	float	dt;
 	std::list<Module*> listModules;
 };
+
+extern Application* app;

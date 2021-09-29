@@ -1,10 +1,11 @@
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ConsoleMenu.h"
+
+#include "ModuleRenderer3D.h"
 
 #define MAX_KEYS 300
 
-ModuleInput::ModuleInput(Application* app, bool startEnabled) : Module(app, startEnabled)
+ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
 {
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, (int)KeyState::KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
@@ -14,14 +15,13 @@ ModuleInput::ModuleInput(Application* app, bool startEnabled) : Module(app, star
 // Destructor
 ModuleInput::~ModuleInput()
 {
-	delete[] keyboard;
+	RELEASE_ARRAY(keyboard);
 }
 
 // Called before render is available
 bool ModuleInput::Init()
 {
 	LOG("Init SDL input event system");
-	app->editor->console->AddLog("Init SDL input event system\n");
 
 	bool ret = true;
 	SDL_Init(0);

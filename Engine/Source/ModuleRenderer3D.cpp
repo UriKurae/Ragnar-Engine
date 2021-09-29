@@ -1,16 +1,18 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+
+#include "ModuleWindow.h"
+#include "ModuleCamera3D.h"
 #include "glew/include/GL/glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "ConsoleMenu.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl2.h"
 
-ModuleRenderer3D::ModuleRenderer3D(Application* app, bool startEnabled) : Module(app, startEnabled)
+ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
 {
 	context = NULL;
 }
@@ -44,7 +46,6 @@ bool ModuleRenderer3D::Init()
 		}
 
 		LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-		app->editor->console->AddLog("Status: Using GLEW %s\n");
 
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)

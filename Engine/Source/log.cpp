@@ -1,7 +1,8 @@
 #pragma once
 #include "Globals.h"
+#include "Application.h"
 
-void log(const char file[], int line, const char* format, ...)
+void Log(const char file[], int line, const char* format, ...)
 {
 	static char tmpString[4096];
 	static char tmpString2[4096];
@@ -13,4 +14,6 @@ void log(const char file[], int line, const char* format, ...)
 	va_end(ap);
 	sprintf_s(tmpString2, 4096, "\n%s(%d) : %s", file, line, tmpString);
 	OutputDebugString(tmpString2);
+
+	if (app) app->LogConsole(tmpString2);
 }

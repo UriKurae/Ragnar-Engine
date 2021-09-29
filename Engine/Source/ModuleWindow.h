@@ -10,7 +10,7 @@ class ModuleWindow : public Module
 {
 public:
 
-	ModuleWindow(Application* app, bool startEnabled = true);
+	ModuleWindow(bool startEnabled = true);
 
 	// Destructor
 	virtual ~ModuleWindow();

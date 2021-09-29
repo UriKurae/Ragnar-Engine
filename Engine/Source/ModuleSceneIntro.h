@@ -9,7 +9,7 @@ class Cube;
 class ModuleSceneIntro : public Module
 {
 public:
-	ModuleSceneIntro(Application* app, bool startEnabled = true);
+	ModuleSceneIntro(bool startEnabled = true);
 	~ModuleSceneIntro();
 
 	bool Start();

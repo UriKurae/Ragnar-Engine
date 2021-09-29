@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
+
 #include "ModuleInput.h"
+#include "ModuleCamera3D.h"
 #include "Primitive.h"
 
 #include "Imgui/imgui.h"
@@ -8,7 +10,7 @@
 #include "Imgui/imgui_impl_sdl.h"
 #include <json\parson.h>
 
-ModuleSceneIntro::ModuleSceneIntro(Application* app, bool startEnabled) : Module(app, startEnabled)
+ModuleSceneIntro::ModuleSceneIntro(bool startEnabled) : Module(startEnabled)
 {
 }
 

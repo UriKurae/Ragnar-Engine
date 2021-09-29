@@ -5,7 +5,7 @@
 class ModuleCamera3D : public Module
 {
 public:
-	ModuleCamera3D(Application* app, bool startEnabled = true);
+	ModuleCamera3D(bool startEnabled = true);
 	~ModuleCamera3D();
 
 	bool Start();

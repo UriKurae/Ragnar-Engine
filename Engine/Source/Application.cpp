@@ -1,14 +1,19 @@
 #include "Application.h"
-#include <list>
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
 
 Application::Application()
 {
-	window = new ModuleWindow(this);
-	input = new ModuleInput(this);
-	sceneIntro = new ModuleSceneIntro(this);
-	renderer3D = new ModuleRenderer3D(this);
-	camera = new ModuleCamera3D(this);
-	editor = new ModuleEditor(this);
+	window = new ModuleWindow();
+	input = new ModuleInput();
+	sceneIntro = new ModuleSceneIntro();
+	renderer3D = new ModuleRenderer3D();
+	camera = new ModuleCamera3D();
+	editor = new ModuleEditor();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -32,7 +37,7 @@ Application::~Application()
 
 	for (item = --listModules.end(); item != listModules.begin(); --item)
 	{
-		delete *item;
+		RELEASE(*item);
 	}
 }
 
@@ -123,4 +128,9 @@ void Application::AddModule(Module* mod)
 void Application::RequestBrowser(const char* path)
 {
 	ShellExecute(NULL, "open", path, NULL, NULL, SW_SHOWNORMAL);
+}
+
+void Application::LogConsole(const char* string)
+{
+	editor->LogConsole(string);
 }

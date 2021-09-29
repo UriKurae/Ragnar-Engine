@@ -9,16 +9,16 @@ class ConsoleMenu;
 class ModuleEditor : public Module
 {
 public:
-	ModuleEditor(Application* a);
+	ModuleEditor();
 
 	~ModuleEditor();
 
 	bool Update(float dt) override;
 
-public:
-	ConsoleMenu* console;
+	void LogConsole(const char* string);
 
 private:
+	ConsoleMenu* console;
 
     bool showMenu;
 	bool showHelpMenu;

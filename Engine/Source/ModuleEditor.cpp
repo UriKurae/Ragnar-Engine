@@ -9,9 +9,10 @@
 #include "Imgui/imgui.h"
 #include <GL/glew.h>
 
-ModuleEditor::ModuleEditor(Application* a) : Module(a)
+ModuleEditor::ModuleEditor() : Module()
 {
 	console = new ConsoleMenu();
+
 	showMenu = false;
 	showHelpMenu = false;
 	showConfiguration = true;
@@ -382,4 +383,9 @@ bool ModuleEditor::Update(float dt)
 	}
 
 	return true;
+}
+
+void ModuleEditor::LogConsole(const char* string)
+{
+	console->AddLog(string);
 }
