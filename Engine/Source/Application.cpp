@@ -45,6 +45,30 @@ bool Application::Init()
 {
 	bool ret = true;
 
+	JSON_Value* root_value = LoadConfig(CONFIG_FILENAME);
+
+	if (root_value == NULL)
+	{
+		LOG("No config file was found, creating one...");
+
+		root_value = json_value_init_object();
+
+		if (root_value != NULL)
+		{
+			LOG("File initialized");
+		}
+		else
+		{
+			LOG("Couldn't initialize the json file");
+		}
+
+		JSON_Object* root_object = json_value_get_object(root_value);
+	
+		json_object_set_value(root_object, "Window", json_value_init_object());
+		JSON_Object* window = json_object_get_object(root_object, "Window");
+		json_object_set_string(window, "Height", "1024");
+	}
+
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
 
@@ -60,7 +84,9 @@ bool Application::Init()
 	{
 		ret = (*item)->Start();
 	}
-	
+
+	json_serialize_to_file(root_value, CONFIG_FILENAME);
+
 	return ret;
 }
 
@@ -133,4 +159,11 @@ void Application::RequestBrowser(const char* path)
 void Application::LogConsole(const char* string)
 {
 	editor->LogConsole(string);
+}
+
+JSON_Value* Application::LoadConfig(std::string fileName) const
+{
+	JSON_Value* config = json_parse_file(fileName.c_str());
+
+	return config;
 }

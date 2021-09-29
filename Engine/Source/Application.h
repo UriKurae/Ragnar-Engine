@@ -4,6 +4,9 @@
 #include "Module.h"
 
 #include <list>
+#include <string>
+
+#include "json/parson.h"
 
 class ModuleWindow;
 class ModuleInput;
@@ -11,6 +14,8 @@ class ModuleSceneIntro;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
+
+#define CONFIG_FILENAME	"config.json"
 
 class Application
 {
@@ -24,6 +29,8 @@ public:
 
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
+
+	JSON_Value* LoadConfig(std::string fileName) const;
 
 private:
 	void AddModule(Module* mod);
