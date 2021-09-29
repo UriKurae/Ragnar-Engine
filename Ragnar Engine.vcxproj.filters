@@ -79,6 +79,7 @@
       <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\json\parson.h" />
+    <ClInclude Include="Engine\Source\JsonParsing.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -134,5 +135,7 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\json\parson.c" />
+    <ClCompile Include="Engine\Source\JasonParsing.cpp" />
+    <ClCompile Include="Engine\Source\JsonParsing.cpp" />
   </ItemGroup>
 </Project>
