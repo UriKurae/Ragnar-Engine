@@ -42,6 +42,11 @@ public:
 		return true; 
 	}
 
+	virtual bool LoadConfig(JsonParsing& node)
+	{
+		return true;
+	}
+
 	virtual bool SaveConfig(JsonParsing& node) const
 	{
 		return true;

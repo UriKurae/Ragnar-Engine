@@ -30,14 +30,19 @@ public:
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
 
+	void SetFPSLimit(const float fps);
+	inline int GetFPSLimit() const { return ((1.0f / (float)cappedMs) * 1000.0f); }
+
 	inline void SaveConfigRequest() { saveRequested = true; }
-	void SaveConfig();
+	inline void LoadConfigRequest() { loadRequested = true; }
 
 private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
 
+	void SaveConfig();
+	void LoadConfig();
 public:
 	ModuleWindow* window;
 	ModuleInput* input;
@@ -49,11 +54,19 @@ public:
 	JsonParsing jsonFile;
 
 private:
-	Timer	msTimer;
-	float	dt;
 	std::list<Module*> listModules;
 
+	Timer msTimer;
+	Timer lastSecFrameTime;
+	unsigned int lastSecFrameCount = 0;
+	unsigned int prevLastSecFrameCount = 0;
+	unsigned int frameCount = 0;
+
+	float dt;
+	int cappedMs = -1;
+
 	bool saveRequested;
+	bool loadRequested;
 };
 
 extern Application* app;

@@ -2,7 +2,8 @@
 
 ConsoleMenu::ConsoleMenu()
 {
-	buf.clear();
+	scrollToBottom = false;
+	console = true;
 }
 
 ConsoleMenu::~ConsoleMenu()
@@ -12,12 +13,15 @@ ConsoleMenu::~ConsoleMenu()
 
 bool ConsoleMenu::Update()
 {
-	ImGui::Begin("Console");
-	ImGui::TextUnformatted(buf.begin());
-	if (scrollToBottom)
-		ImGui::SetScrollHereY(1.0f);
-	scrollToBottom = false;
-	ImGui::End();
+	if (console)
+	{
+		ImGui::Begin("Console", &console);
+		ImGui::TextUnformatted(buf.begin());
+		if (scrollToBottom)
+			ImGui::SetScrollHereY(1.0f);
+		scrollToBottom = false;
+		ImGui::End();
+	}
 
 	return true;
 }

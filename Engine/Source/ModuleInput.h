@@ -24,6 +24,8 @@ public:
 	bool Init(JsonParsing& node) override;
 	bool PreUpdate(float dt) override;
 	bool CleanUp();
+
+	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 	inline KeyState GetKey(int id) const

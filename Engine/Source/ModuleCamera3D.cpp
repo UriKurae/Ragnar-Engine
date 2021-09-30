@@ -37,6 +37,11 @@ bool ModuleCamera3D::CleanUp()
 	return true;
 }
 
+bool ModuleCamera3D::LoadConfig(JsonParsing& node)
+{
+	return true;
+}
+
 bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
 {
 	return true;

@@ -87,19 +87,39 @@ bool ModuleInput::PreUpdate(float dt)
 
 	for(int i = 0; i < 5; ++i)
 	{
+		std::string string;
 		if(buttons & SDL_BUTTON(i))
 		{
-			if(mouseButtons[i] == KeyState::KEY_IDLE)
+			if (mouseButtons[i] == KeyState::KEY_IDLE)
+			{
 				mouseButtons[i] = KeyState::KEY_DOWN;
+				string = "Mouse :" + std::to_string(i) + " - DOWN";
+				strings.push_back(string);
+			}
 			else
+			{
 				mouseButtons[i] = KeyState::KEY_REPEAT;
+				if (!repeated)
+				{
+					repeated = true;
+					string = "Mouse :" + std::to_string(i) + " - REPEAT";
+					strings.push_back(string);
+				}
+			}
 		}
 		else
 		{
-			if(mouseButtons[i] == KeyState::KEY_REPEAT || mouseButtons[i] == KeyState::KEY_DOWN)
+			if (mouseButtons[i] == KeyState::KEY_REPEAT || mouseButtons[i] == KeyState::KEY_DOWN)
+			{
+				repeated = false;
 				mouseButtons[i] = KeyState::KEY_UP;
+				string = "Mouse :" + std::to_string(i) + " - UP";
+				strings.push_back(string);
+			}
 			else
+			{
 				mouseButtons[i] = KeyState::KEY_IDLE;
+			}
 		}
 	}
 
@@ -146,6 +166,11 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+	return true;
+}
+
+bool ModuleInput::LoadConfig(JsonParsing& node)
+{
 	return true;
 }
 

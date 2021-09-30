@@ -11,6 +11,8 @@ public:
 	bool Start();
 	bool Update(float dt) override;
 	bool CleanUp();
+
+	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void Look(const Vec3 &pos, const Vec3 &ref, bool rotateAroundReference = false);

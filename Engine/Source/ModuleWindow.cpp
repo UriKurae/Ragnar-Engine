@@ -41,6 +41,11 @@ bool ModuleWindow::Init(JsonParsing& node)
 		//Create window
 		width = (int)node.GetJsonNumber("width") * SCREEN_SIZE;
 		height = (int)node.GetJsonNumber("height") * SCREEN_SIZE;
+		brightness = (float)node.GetJsonNumber("brightness");
+
+		fullscreen = node.GetJsonBool("fullscreen");
+		fullscreenDesktop = node.GetJsonBool("fullscreen desktop");
+		borderless = node.GetJsonBool("borderless");
 		
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
@@ -48,7 +53,7 @@ bool ModuleWindow::Init(JsonParsing& node)
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-		if(WIN_FULLSCREEN == true)
+		if(fullscreen)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
@@ -58,12 +63,12 @@ bool ModuleWindow::Init(JsonParsing& node)
 			flags |= SDL_WINDOW_RESIZABLE;
 		}
 
-		if(WIN_BORDERLESS == true)
+		if(borderless)
 		{
 			flags |= SDL_WINDOW_BORDERLESS;
 		}
 
-		if(WIN_FULLSCREEN_DESKTOP == true)
+		if(fullscreenDesktop)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
@@ -79,7 +84,7 @@ bool ModuleWindow::Init(JsonParsing& node)
 		{
 			//Get window surface
 			screenSurface = SDL_GetWindowSurface(window);
-			brightness = SDL_GetWindowBrightness(window);
+			SDL_SetWindowBrightness(window, brightness);
 			SDL_DisplayMode* display = new SDL_DisplayMode();
 			SDL_GetWindowDisplayMode(window, display);
 			refreshRate = display->refresh_rate;
@@ -110,6 +115,32 @@ bool ModuleWindow::SaveConfig(JsonParsing& node) const
 {
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "width", width);
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "height", height);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "brightness", brightness);
+
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "fullscreen", fullscreen);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "fullscreen desktop", fullscreenDesktop);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "borderless", borderless);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "resizable", resizable);
+	
+	return true;
+}
+
+bool ModuleWindow::LoadConfig(JsonParsing& node)
+{
+	width = (int)node.GetJsonNumber("width") * SCREEN_SIZE;
+	height = (int)node.GetJsonNumber("height") * SCREEN_SIZE;
+	brightness = (float)node.GetJsonNumber("brightness");
+
+	fullscreen = node.GetJsonBool("fullscreen");
+	fullscreenDesktop = node.GetJsonBool("fullscreen desktop");
+	borderless = node.GetJsonBool("borderless");
+
+	if (fullscreen) SetFullscreen();
+	else if (fullscreenDesktop) SetFullscreenDesktop();
+	if (borderless) SetBorderless();
+	
+	SetWindowSize();
+
 	return true;
 }
 
@@ -120,16 +151,28 @@ void ModuleWindow::SetTitle(const char* title) const
 
 void ModuleWindow::SetFullscreen() const
 {
-	SDL_SetWindowFullscreen(window, fullscreen);
+	if (fullscreen) 
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+	else 
+		SDL_SetWindowFullscreen(window, 0);
 }
 
 void ModuleWindow::SetFullscreenDesktop() const
 {
-	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	if (fullscreenDesktop) 
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	else 
+		SDL_SetWindowFullscreen(window, 0);
 }
 
 void ModuleWindow::SetResizable() const
 {
+	// TODO
+
+	/*if (resizable)
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_RESIZABLE);
+	else
+		SDL_SetWindowFullscreen(window, 0);*/
 }
 
 void ModuleWindow::SetBorderless() const

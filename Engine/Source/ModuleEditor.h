@@ -15,6 +15,7 @@ public:
 
 	bool Update(float dt) override;
 
+	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void LogConsole(const char* string);
@@ -26,6 +27,8 @@ private:
 	bool showHelpMenu;
 	bool showConfiguration;
 	bool showConsole;
+
+	bool openOptions;
 
 	std::vector<float> fps;
 	std::vector<float> ms;

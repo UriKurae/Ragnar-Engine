@@ -37,6 +37,11 @@ JSON_Status JsonParsing::SetNewJsonNumber(JSON_Object* node, const char* name, d
 	return json_object_set_number(node, name, number);
 }
 
+JSON_Status JsonParsing::SetNewJsonBool(JSON_Object* node, const char* name, bool boolean) const
+{
+	return json_object_set_boolean(node, name, boolean);
+}
+
 JsonParsing JsonParsing::SetChild(JSON_Value* parent, const char* name)
 {
 	json_object_set_value(ValueToObject(parent), name, json_value_init_object());
@@ -81,7 +86,12 @@ const char* JsonParsing::GetJsonString(const char* name) const
 
 double JsonParsing::GetJsonNumber(const char* name) const
 {
-	return json_object_get_number(ValueToObject(rootObject), name);;
+	return json_object_get_number(ValueToObject(rootObject), name);
+}
+
+bool JsonParsing::GetJsonBool(const char* name) const
+{
+	return json_object_get_boolean(ValueToObject(rootObject), name);
 }
 
 JsonParsing JsonParsing::GetChild(JSON_Value* parent, const char* name)

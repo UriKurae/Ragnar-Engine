@@ -44,7 +44,7 @@ bool ModuleEditor::Update(float dt)
 			ImGui::Separator();
 
 			ImGui::MenuItem("Save", "Ctrl + S", &ret);
-			if (ImGui::MenuItem("Exit", "Alt + F4", &ret))
+			if (ImGui::MenuItem("Exit", "ESC", &ret))
 			{
 				return false;
 			}
@@ -64,12 +64,8 @@ bool ModuleEditor::Update(float dt)
 
 		if (ImGui::BeginMenu("Window"))
 		{
-			ImGui::MenuItem("Console", NULL, &showConsole);
+			ImGui::MenuItem("Console", NULL, &console->GetActive());
 			ImGui::MenuItem("Configuration", NULL, &showConfiguration);
-			if (ImGui::MenuItem("Fullscreen", "Alt+Enter", &ret))
-			{
-				app->window->SetFullscreen();
-			}
 			ImGui::EndMenu();
 		}
 
@@ -115,22 +111,54 @@ bool ModuleEditor::Update(float dt)
 		//}
 	}
 
-	fps.emplace_back(ImGui::GetIO().Framerate);
-	ms.emplace_back(1000.0f / ImGui::GetIO().Framerate);
+	if (fps.size() >= 100)
+	{
+		for (int i = 0; i < fps.size() - 1; ++i)
+		{
+			fps[i] = fps[i + 1];
+			ms[i] = ms[i + 1];
+		}
+		fps[fps.size() - 1] = app->GetFPSLimit();
+		ms[ms.size() - 1] = 1000.0f / app->GetFPSLimit();
+	}
+	else
+	{
+		fps.emplace_back(app->GetFPSLimit());
+		ms.emplace_back(1000.0f / app->GetFPSLimit());
+	}
 
 	bool r = true;
 
 	if (showConfiguration)
 	{
 		ImGui::Begin("Configuration", &showConfiguration);
+
+		if (ImGui::BeginMenu("Options", &openOptions))
+		{
+			if (ImGui::MenuItem("Load"))
+			{
+				app->LoadConfigRequest();
+			}
+			if (ImGui::MenuItem("Save"))
+			{
+				app->SaveConfigRequest();
+			}
+			ImGui::EndMenu();
+		}
 		if (ImGui::CollapsingHeader("Application"))
 		{
 			char* name = "Ragnar Engine";
 			ImGui::InputText("App name", name, 25);
 			char* organization = "UPC CITM";
 			ImGui::InputText("Organization", organization, 25);
-			int framerate = (int)ImGui::GetIO().Framerate;
-			ImGui::SliderInt("Max FPS", &framerate, 1, 144);
+			
+			int framerate = app->GetFPSLimit();
+
+			if (ImGui::SliderInt("Max FPS", &framerate, 1, 144))
+			{
+				app->SetFPSLimit(framerate);
+			}
+
 			char title[25];
 			sprintf_s(title, 25, "Framerate %.1f", fps[fps.size() - 1]);
 			ImGui::PlotHistogram("##framerate", &fps[0], fps.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
@@ -384,6 +412,11 @@ bool ModuleEditor::Update(float dt)
 		ImGui::End();
 	}
 
+	return true;
+}
+
+bool ModuleEditor::LoadConfig(JsonParsing& node)
+{
 	return true;
 }
 

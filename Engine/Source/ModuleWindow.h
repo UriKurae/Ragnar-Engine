@@ -18,6 +18,7 @@ public:
 	bool Init(JsonParsing& node) override;
 	bool CleanUp();
 
+	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void SetTitle(const char* title) const;

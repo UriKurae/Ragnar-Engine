@@ -1,1 +1,1 @@
-{"Window":{"width":1920,"height":1080},"Camera3D":{},"Input":{},"SceneIntro":{},"Editor":{},"Renderer":{"test":5}}
+{"App":{"FPS":16},"Window":{"width":1080,"height":720,"brightness":1,"fullscreen":false,"fullscreen desktop":false,"borderless":false,"resizable":false},"Camera3D":{},"Input":{},"SceneIntro":{},"Editor":{},"Renderer":{}}

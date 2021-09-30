@@ -30,6 +30,7 @@ Application::Application()
 
 	AddModule(renderer3D);
 
+	loadRequested = false;
 	saveRequested = false;
 }
 
@@ -55,6 +56,10 @@ bool Application::Init()
 		ret = false;
 	}
 
+	JsonParsing application = jsonFile.GetChild(root, "App");
+
+	cappedMs = application.GetJsonNumber("FPS");
+
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
 
@@ -78,6 +83,9 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
+	frameCount++;
+	lastSecFrameCount++;
+
 	dt = (float)msTimer.Read() / 1000.0f;
 	msTimer.Start();
 }
@@ -85,7 +93,22 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (loadRequested) LoadConfig();
 	if (saveRequested) SaveConfig();
+
+	if (lastSecFrameTime.Read() > 1000)
+	{
+		prevLastSecFrameCount = lastSecFrameCount;
+		lastSecFrameCount = 0;
+		lastSecFrameTime.Start();
+	}
+
+	unsigned int lastFrameMs = msTimer.Read();
+
+	if ((cappedMs > 0) && (lastFrameMs < cappedMs))
+	{
+		SDL_Delay(cappedMs - lastFrameMs);
+	}
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -146,9 +169,21 @@ void Application::LogConsole(const char* string)
 	editor->LogConsole(string);
 }
 
+void Application::SetFPSLimit(const float fps)
+{
+	if (fps > 0) cappedMs = 1000 / fps;
+	else cappedMs = 0;
+}
+
 void Application::SaveConfig()
 {
+	LOG("Saving configuration");
+
 	JSON_Value* root = jsonFile.GetRootValue();
+
+	JsonParsing application = jsonFile.SetChild(root, "App");
+
+	application.SetNewJsonNumber(application.ValueToObject(application.GetRootValue()), "FPS", cappedMs);
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
@@ -160,4 +195,25 @@ void Application::SaveConfig()
 
 	jsonFile.SerializeFile(root, CONFIG_FILENAME);
 	saveRequested = false;
+}
+
+void Application::LoadConfig()
+{
+	LOG("Loading configuration");
+
+	JSON_Value* root = jsonFile.GetRootValue();
+
+	JsonParsing application = jsonFile.GetChild(root, "App");
+
+	cappedMs = application.GetJsonNumber("FPS");
+
+	// Call Init() in all modules
+	std::list<Module*>::iterator item;
+
+	for (item = listModules.begin(); item != listModules.end(); ++item)
+	{
+		(*item)->LoadConfig(jsonFile.GetChild(root, (*item)->name));
+	}
+
+	loadRequested = false;
 }

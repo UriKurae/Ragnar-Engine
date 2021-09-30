@@ -119,7 +119,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	}
 
 	// Projection matrix for
-	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
 	return ret;
 }
@@ -168,6 +168,11 @@ bool ModuleRenderer3D::CleanUp()
 
 	SDL_GL_DeleteContext(context);
 
+	return true;
+}
+
+bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
+{
 	return true;
 }
 

@@ -16,6 +16,8 @@ public:
 	bool PreUpdate(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
+
+	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void OnResize(int width, int height);
