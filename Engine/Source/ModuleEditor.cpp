@@ -11,6 +11,8 @@
 
 ModuleEditor::ModuleEditor() : Module()
 {
+	name = "Editor";
+
 	console = new ConsoleMenu();
 
 	showMenu = false;
@@ -382,6 +384,11 @@ bool ModuleEditor::Update(float dt)
 		ImGui::End();
 	}
 
+	return true;
+}
+
+bool ModuleEditor::SaveConfig(JsonParsing& node) const
+{
 	return true;
 }
 

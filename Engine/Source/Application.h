@@ -6,7 +6,7 @@
 #include <list>
 #include <string>
 
-#include "json/parson.h"
+#include "JsonParsing.h"
 
 class ModuleWindow;
 class ModuleInput;
@@ -30,7 +30,8 @@ public:
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
 
-	JSON_Value* LoadConfig(std::string fileName) const;
+	inline void SaveConfigRequest() { saveRequested = true; }
+	void SaveConfig();
 
 private:
 	void AddModule(Module* mod);
@@ -45,10 +46,14 @@ public:
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
 
+	JsonParsing jsonFile;
+
 private:
 	Timer	msTimer;
 	float	dt;
 	std::list<Module*> listModules;
+
+	bool saveRequested;
 };
 
 extern Application* app;

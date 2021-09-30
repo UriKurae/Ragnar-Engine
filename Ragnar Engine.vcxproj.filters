@@ -135,7 +135,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\json\parson.c" />
-    <ClCompile Include="Engine\Source\JasonParsing.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
   </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool startEnabled) : Module(startEnabled)
 {
+	name = "SceneIntro";
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -41,6 +42,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 bool ModuleSceneIntro::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP) app->SaveConfigRequest();
 	return true;
 }
 

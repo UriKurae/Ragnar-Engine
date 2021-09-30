@@ -1,10 +1,9 @@
 #pragma once
 
+class JsonParsing;
+
 class Module
 {
-private :
-	bool enabled;
-
 public:
 
 	Module(bool startEnabled = true) : enabled(startEnabled)
@@ -13,7 +12,7 @@ public:
 	virtual ~Module()
 	{}
 
-	virtual bool Init() 
+	virtual bool Init(JsonParsing& node)
 	{
 		return true; 
 	}
@@ -42,4 +41,15 @@ public:
 	{ 
 		return true; 
 	}
+
+	virtual bool SaveConfig(JsonParsing& node) const
+	{
+		return true;
+	}
+
+public:
+	const char* name;
+
+private:
+	bool enabled;
 };

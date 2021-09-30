@@ -21,9 +21,10 @@ public:
 	ModuleInput(bool startEnabled = true);
 	~ModuleInput();
 
-	bool Init();
+	bool Init(JsonParsing& node) override;
 	bool PreUpdate(float dt) override;
 	bool CleanUp();
+	bool SaveConfig(JsonParsing& node) const override;
 
 	inline KeyState GetKey(int id) const
 	{

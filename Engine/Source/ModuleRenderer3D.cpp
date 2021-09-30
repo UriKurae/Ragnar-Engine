@@ -14,6 +14,7 @@
 
 ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
 {
+	name = "Renderer";
 	context = NULL;
 }
 
@@ -22,7 +23,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 {}
 
 // Called before render is available
-bool ModuleRenderer3D::Init()
+bool ModuleRenderer3D::Init(JsonParsing& node)
 {
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
@@ -167,6 +168,11 @@ bool ModuleRenderer3D::CleanUp()
 
 	SDL_GL_DeleteContext(context);
 
+	return true;
+}
+
+bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
+{
 	return true;
 }
 

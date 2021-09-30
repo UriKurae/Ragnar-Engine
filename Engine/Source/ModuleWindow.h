@@ -15,8 +15,10 @@ public:
 	// Destructor
 	virtual ~ModuleWindow();
 
-	bool Init();
+	bool Init(JsonParsing& node) override;
 	bool CleanUp();
+
+	bool SaveConfig(JsonParsing& node) const override;
 
 	void SetTitle(const char* title) const;
 	void SetFullscreen() const;

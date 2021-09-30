@@ -4,6 +4,7 @@
 
 ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
 {
+	name = "Window";
 	window = NULL;
 	screenSurface = NULL;
 
@@ -25,7 +26,7 @@ ModuleWindow::~ModuleWindow()
 }
 
 // Called before render is available
-bool ModuleWindow::Init()
+bool ModuleWindow::Init(JsonParsing& node)
 {
 	LOG("Init SDL window & surface");
 	bool ret = true;
@@ -38,8 +39,9 @@ bool ModuleWindow::Init()
 	else
 	{
 		//Create window
-		width = SCREEN_WIDTH * SCREEN_SIZE;
-		height = SCREEN_HEIGHT * SCREEN_SIZE;
+		width = (int)node.GetJsonNumber("width") * SCREEN_SIZE;
+		height = (int)node.GetJsonNumber("height") * SCREEN_SIZE;
+		
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
 		//Use OpenGL 2.1
@@ -101,6 +103,13 @@ bool ModuleWindow::CleanUp()
 
 	//Quit SDL subsystems
 	SDL_Quit();
+	return true;
+}
+
+bool ModuleWindow::SaveConfig(JsonParsing& node) const
+{
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "width", width);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "height", height);
 	return true;
 }
 

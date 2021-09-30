@@ -5,6 +5,8 @@
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
 {
+	name = "Camera3D";
+
 	CalculateViewMatrix();
 
 	x = Vec3(1.0f, 0.0f, 0.0f);
@@ -32,6 +34,11 @@ bool ModuleCamera3D::CleanUp()
 {
 	LOG("Cleaning camera");
 
+	return true;
+}
+
+bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
+{
 	return true;
 }
 

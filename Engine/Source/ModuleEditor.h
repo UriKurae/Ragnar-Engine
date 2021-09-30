@@ -15,6 +15,8 @@ public:
 
 	bool Update(float dt) override;
 
+	bool SaveConfig(JsonParsing& node) const override;
+
 	void LogConsole(const char* string);
 
 private:

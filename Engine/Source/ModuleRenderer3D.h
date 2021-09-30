@@ -12,10 +12,11 @@ public:
 	ModuleRenderer3D(bool startEnabled = true);
 	~ModuleRenderer3D();
 
-	bool Init();
+	bool Init(JsonParsing& node) override;
 	bool PreUpdate(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
+	bool SaveConfig(JsonParsing& node) const override;
 
 	void OnResize(int width, int height);
 

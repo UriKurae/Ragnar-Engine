@@ -7,6 +7,7 @@
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
 {
+	name = "Input";
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, (int)KeyState::KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
 	repeated = false;
@@ -19,7 +20,7 @@ ModuleInput::~ModuleInput()
 }
 
 // Called before render is available
-bool ModuleInput::Init()
+bool ModuleInput::Init(JsonParsing& node)
 {
 	LOG("Init SDL input event system");
 
@@ -145,5 +146,10 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+	return true;
+}
+
+bool ModuleInput::SaveConfig(JsonParsing& node) const
+{
 	return true;
 }

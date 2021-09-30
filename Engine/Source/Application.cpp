@@ -29,6 +29,8 @@ Application::Application()
 	AddModule(editor);
 
 	AddModule(renderer3D);
+
+	saveRequested = false;
 }
 
 Application::~Application()
@@ -45,28 +47,12 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	JSON_Value* root_value = LoadConfig(CONFIG_FILENAME);
+	JSON_Value* root = jsonFile.ParseFile(CONFIG_FILENAME);
 
-	if (root_value == NULL)
+	if (jsonFile.GetRootValue() == NULL)
 	{
-		LOG("No config file was found, creating one...");
-
-		root_value = json_value_init_object();
-
-		if (root_value != NULL)
-		{
-			LOG("File initialized");
-		}
-		else
-		{
-			LOG("Couldn't initialize the json file");
-		}
-
-		JSON_Object* root_object = json_value_get_object(root_value);
-	
-		json_object_set_value(root_object, "Window", json_value_init_object());
-		JSON_Object* window = json_object_get_object(root_object, "Window");
-		json_object_set_string(window, "Height", "1024");
+		LOG("Couldn't load %s", CONFIG_FILENAME);
+		ret = false;
 	}
 
 	// Call Init() in all modules
@@ -74,7 +60,7 @@ bool Application::Init()
 
 	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
-		ret = (*item)->Init();
+		ret = (*item)->Init(jsonFile.GetChild(root, (*item)->name));
 	}
 
 	// After all Init calls we call Start() in all modules
@@ -84,8 +70,6 @@ bool Application::Init()
 	{
 		ret = (*item)->Start();
 	}
-
-	json_serialize_to_file(root_value, CONFIG_FILENAME);
 
 	return ret;
 }
@@ -101,6 +85,7 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (saveRequested) SaveConfig();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -161,9 +146,18 @@ void Application::LogConsole(const char* string)
 	editor->LogConsole(string);
 }
 
-JSON_Value* Application::LoadConfig(std::string fileName) const
+void Application::SaveConfig()
 {
-	JSON_Value* config = json_parse_file(fileName.c_str());
+	JSON_Value* root = jsonFile.GetRootValue();
 
-	return config;
+	// Call Init() in all modules
+	std::list<Module*>::iterator item;
+
+	for (item = listModules.begin(); item != listModules.end(); ++item)
+	{
+		(*item)->SaveConfig(jsonFile.SetChild(root, (*item)->name));
+	}
+
+	jsonFile.SerializeFile(root, CONFIG_FILENAME);
+	saveRequested = false;
 }
