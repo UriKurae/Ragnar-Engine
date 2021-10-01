@@ -371,12 +371,13 @@ bool ModuleEditor::Update(float dt)
 			ImGui::NewLine();
 
 			ImGui::TextWrapped("3rd Party Libraries used:");
-			
-			ImGui::TextWrapped("-SDL 2.0.16");
-			ImGui::TextWrapped("-Glew 2.1.0");
-			ImGui::TextWrapped("-ImGui 1.85");
+			SDL_version sdlVer;
+			SDL_GetVersion(&sdlVer);
+			ImGui::TextWrapped("-SDL %d.%d.%d", sdlVer.major, sdlVer.minor, sdlVer.patch);
+			ImGui::TextWrapped("-Glew %s", glewGetString(GLEW_VERSION));
+			ImGui::TextWrapped("-ImGui %s", ImGui::GetVersion());
 			ImGui::TextWrapped("-MathGeoLib 1.5");
-			ImGui::TextWrapped("-OpenGL 2.1");
+			ImGui::TextWrapped("-OpenGl version %s", glGetString(GL_VERSION));
 
 			ImGui::NewLine();
 			ImGui::TextWrapped("License:");

@@ -95,7 +95,8 @@
     <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
     <ClInclude Include="Dependencies\Imgui\imconfig.h" />
     <ClInclude Include="Dependencies\Imgui\imgui.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl2.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
@@ -123,7 +124,7 @@
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />

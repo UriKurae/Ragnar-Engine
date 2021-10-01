@@ -10,7 +10,7 @@
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
-#include "Imgui/imgui_impl_opengl2.h"
+#include "Imgui/imgui_impl_opengl3.h"
 
 ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
 {
@@ -59,7 +59,12 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		ImGui::StyleColorsDark();
 		
 		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
-		ImGui_ImplOpenGL2_Init();
+		ImGui_ImplOpenGL3_Init();
+
+		LOG("Vendor: %s", glGetString(GL_VENDOR));
+		LOG("Renderer: %s", glGetString(GL_RENDERER));
+		LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+		LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 		//Initialize Projection Matrix
 		glMatrixMode(GL_PROJECTION);
@@ -88,7 +93,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		
 		//Initialize clear color
 		glClearColor(0.f, 0.f, 0.f, 1.f);
-
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
 		//Check for error
 		error = glGetError();
 		if(error != GL_NO_ERROR)
@@ -116,6 +122,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		lights[0].Active(true);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
+		glEnable(GL_TEXTURE_2D);
 	}
 
 	// Projection matrix for
@@ -129,6 +136,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+	app->camera
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->GetViewMatrix());
@@ -139,7 +147,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
-	ImGui_ImplOpenGL2_NewFrame();
+	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
@@ -150,7 +158,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 bool ModuleRenderer3D::PostUpdate()
 {
 	ImGui::Render();
-	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 	SDL_GL_SwapWindow(app->window->window);
 
@@ -162,7 +170,7 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 
-	ImGui_ImplOpenGL2_Shutdown();
+	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 

@@ -57,14 +57,6 @@
     <ClInclude Include="Engine\Source\glmath.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Imgui\imconfig.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl2.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
-    <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
-    <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
-    <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
     <ClInclude Include="Dependencies\glew\include\GL\eglew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
@@ -80,6 +72,15 @@
     </ClInclude>
     <ClInclude Include="Dependencies\json\parson.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
+    <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
+    <ClInclude Include="Dependencies\Imgui\imconfig.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -118,13 +119,6 @@
     <ClCompile Include="Engine\Source\glmath.cpp">
       <Filter>Sources\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl2.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
@@ -136,5 +130,12 @@
     </ClCompile>
     <ClCompile Include="Dependencies\json\parson.c" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
   </ItemGroup>
 </Project>
