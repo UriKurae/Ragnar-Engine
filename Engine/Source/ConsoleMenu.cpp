@@ -1,5 +1,7 @@
 #include "ConsoleMenu.h"
 
+#include "mmgr/mmgr.h"
+
 ConsoleMenu::ConsoleMenu()
 {
 	scrollToBottom = false;

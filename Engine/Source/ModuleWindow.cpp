@@ -2,6 +2,8 @@
 
 #include "ModuleWindow.h"
 
+#include "mmgr/mmgr.h"
+
 ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
 {
 	name = "Window";

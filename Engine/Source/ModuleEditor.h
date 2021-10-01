@@ -14,6 +14,8 @@ public:
 	~ModuleEditor();
 
 	bool Update(float dt) override;
+	bool Draw();
+	bool CleanUp() override;
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;

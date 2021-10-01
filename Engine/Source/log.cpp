@@ -2,6 +2,8 @@
 #include "Globals.h"
 #include "Application.h"
 
+#include "mmgr/mmgr.h"
+
 void Log(const char file[], int line, const char* format, ...)
 {
 	static char tmpString[4096];

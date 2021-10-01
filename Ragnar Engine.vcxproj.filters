@@ -81,6 +81,8 @@
     <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\mmgr\mmgr.h" />
+    <ClInclude Include="Dependencies\mmgr\nommgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -137,5 +139,6 @@
     <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Dependencies\mmgr\mmgr.cpp" />
   </ItemGroup>
 </Project>

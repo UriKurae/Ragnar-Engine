@@ -1,8 +1,9 @@
-
 #include "Globals.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "Primitive.h"
+
+#include "mmgr/mmgr.h"
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(identityMatrix), color(white), wire(false), axis(false), type(PrimitiveTypes::PRIMITIVE_POINT)
@@ -52,7 +53,7 @@ void Primitive::Render() const
 		glLineWidth(1.0f);
 	}
 
-	glColor3f(color.r, color.g, color.b);
+	glColor4f(color.r, color.g, color.b, color.a);
 
 	if (wire)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

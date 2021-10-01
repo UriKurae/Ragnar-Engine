@@ -1,6 +1,7 @@
 #include "Globals.h"
-
 #include "JsonParsing.h"
+
+#include "mmgr/mmgr.h"
 
 JsonParsing::JsonParsing()
 {
@@ -64,7 +65,7 @@ JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const
 	if(object != NULL)
 		return object;
 
-	LOG("Couldn't retrieve the object")
+	LOG("Couldn't retrieve the object");
 
 	return nullptr;
 }

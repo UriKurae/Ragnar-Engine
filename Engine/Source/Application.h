@@ -36,6 +36,8 @@ public:
 	inline void SaveConfigRequest() { saveRequested = true; }
 	inline void LoadConfigRequest() { loadRequested = true; }
 
+	inline void ResizeRequest() { resizeRequested = true; }
+
 private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
@@ -67,6 +69,7 @@ private:
 
 	bool saveRequested;
 	bool loadRequested;
+	bool resizeRequested;
 };
 
 extern Application* app;

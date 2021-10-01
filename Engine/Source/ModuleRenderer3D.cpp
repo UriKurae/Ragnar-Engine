@@ -3,6 +3,7 @@
 
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
 #include "glew/include/GL/glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -12,10 +13,22 @@
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 
+#include "mmgr/mmgr.h"
+
 ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
 {
 	name = "Renderer";
 	context = NULL;
+
+	depthTest = true;
+	cullFace = true;
+	colorMaterial = true;
+	lighting = true;
+	texture2D = true;
+	stencil = false;
+	blending = false;
+
+	wireMode = false;
 }
 
 // Destructor
@@ -43,7 +56,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		{
 			/* Problem: glewInit failed, something is seriously wrong. */
 			LOG("Error: %s\n", glewGetErrorString(err));
-			
 		}
 
 		LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
@@ -156,8 +168,12 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	for (int i = 0; i < primitives.size(); ++i)
+	{
+		primitives[i]->Render();
+	}
+
+	app->editor->Draw();
 
 	SDL_GL_SwapWindow(app->window->window);
 
@@ -168,6 +184,11 @@ bool ModuleRenderer3D::PostUpdate()
 bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
+
+	for (int i = 0; i < primitives.size(); ++i)
+	{
+		RELEASE(primitives[i]);
+	}
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -199,4 +220,59 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void ModuleRenderer3D::SetDepthTest()
+{
+	if (depthTest) glEnable(GL_DEPTH_TEST);
+	else glDisable(GL_DEPTH_TEST);
+}
+
+void ModuleRenderer3D::SetCullFace()
+{
+	if (cullFace) glEnable(GL_CULL_FACE);
+	else glDisable(GL_CULL_FACE);
+}
+
+void ModuleRenderer3D::SetLighting()
+{
+	if (lighting) glEnable(GL_LIGHTING);
+	else glDisable(GL_LIGHTING);
+}
+
+void ModuleRenderer3D::SetColorMaterial()
+{
+	if (colorMaterial) glEnable(GL_COLOR_MATERIAL);
+	else glDisable(GL_COLOR_MATERIAL);
+}
+
+void ModuleRenderer3D::SetTexture2D()
+{
+	if (texture2D) glEnable(GL_TEXTURE_2D);
+	else glDisable(GL_TEXTURE_2D);
+}
+
+void ModuleRenderer3D::SetStencil()
+{
+	if (stencil) glEnable(GL_STENCIL_TEST);
+	else glDisable(GL_STENCIL_TEST);
+}
+
+void ModuleRenderer3D::SetBlending()
+{
+	if (blending) glEnable(GL_BLEND);
+	else glDisable(GL_BLEND);
+}
+
+void ModuleRenderer3D::SetWireMode()
+{
+	for (int i = 0; i < primitives.size(); ++i)
+	{
+		primitives[i]->wire = wireMode;
+	}
+}
+
+void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
+{
+	primitives.push_back(primitive);
 }

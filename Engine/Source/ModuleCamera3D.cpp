@@ -3,6 +3,8 @@
 
 #include "ModuleInput.h"
 
+#include "mmgr/mmgr.h"
+
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
 {
 	name = "Camera3D";

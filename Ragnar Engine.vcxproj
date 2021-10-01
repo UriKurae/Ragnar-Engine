@@ -103,6 +103,8 @@
     <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
     <ClInclude Include="Dependencies\json\parson.h" />
+    <ClInclude Include="Dependencies\mmgr\mmgr.h" />
+    <ClInclude Include="Dependencies\mmgr\nommgr.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\Color.h" />
     <ClInclude Include="Engine\Source\ConsoleMenu.h" />
@@ -129,6 +131,7 @@
     <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\json\parson.c" />
+    <ClCompile Include="Dependencies\mmgr\mmgr.cpp" />
     <ClCompile Include="Engine\Source\Application.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />

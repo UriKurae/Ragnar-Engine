@@ -3,6 +3,8 @@
 
 #include "SDL/include/SDL.h"
 
+#include "mmgr/mmgr.h"
+
 enum class MainState
 {
 	CREATE = 1,

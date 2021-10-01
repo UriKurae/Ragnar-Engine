@@ -3,11 +3,16 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
+#include "ModuleRenderer3D.h"
 
 #include "ConsoleMenu.h"
 
 #include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_opengl3.h"
+
 #include <GL/glew.h>
+
+#include "mmgr/mmgr.h"
 
 ModuleEditor::ModuleEditor() : Module()
 {
@@ -19,6 +24,7 @@ ModuleEditor::ModuleEditor() : Module()
 	showHelpMenu = false;
 	showConfiguration = true;
 	showConsole = true;
+	openOptions = false;
 
 	activeInput = true;
 	activeWindow = true;
@@ -66,6 +72,44 @@ bool ModuleEditor::Update(float dt)
 		{
 			ImGui::MenuItem("Console", NULL, &console->GetActive());
 			ImGui::MenuItem("Configuration", NULL, &showConfiguration);
+
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("View"))
+		{
+			if (ImGui::MenuItem("Depth Test", NULL, app->renderer3D->GetDepthTest()))
+			{
+				app->renderer3D->SetDepthTest();
+			}
+			if (ImGui::MenuItem("Cull Face", NULL, app->renderer3D->GetCullFace()))
+			{
+				app->renderer3D->SetCullFace();
+			}
+			if (ImGui::MenuItem("Lighting", NULL, app->renderer3D->GetLighting()))
+			{
+				app->renderer3D->SetLighting();
+			}
+			if (ImGui::MenuItem("Color Material", NULL, app->renderer3D->GetColorMaterial()))
+			{
+				app->renderer3D->SetColorMaterial();
+			}
+			if (ImGui::MenuItem("Texture 2D", NULL, app->renderer3D->GetTexture2D()))
+			{
+				app->renderer3D->SetTexture2D();
+			}
+			if (ImGui::MenuItem("Stencil", NULL, app->renderer3D->GetStencil()))
+			{
+				app->renderer3D->SetStencil();
+			}
+			if (ImGui::MenuItem("Blending", NULL, app->renderer3D->GetBlending()))
+			{
+				app->renderer3D->SetBlending();
+			}
+			if (ImGui::MenuItem("Wire", NULL, app->renderer3D->GetWireMode()))
+			{
+				app->renderer3D->SetWireMode();
+			}
 			ImGui::EndMenu();
 		}
 
@@ -416,6 +460,21 @@ bool ModuleEditor::Update(float dt)
 	return true;
 }
 
+bool ModuleEditor::Draw()
+{
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	return true;
+}
+
+bool ModuleEditor::CleanUp()
+{
+	RELEASE(console);
+
+	return true;
+}
+
 bool ModuleEditor::LoadConfig(JsonParsing& node)
 {
 	return true;
@@ -428,5 +487,5 @@ bool ModuleEditor::SaveConfig(JsonParsing& node) const
 
 void ModuleEditor::LogConsole(const char* string)
 {
-	console->AddLog(string);
+	if (console) console->AddLog(string);
 }

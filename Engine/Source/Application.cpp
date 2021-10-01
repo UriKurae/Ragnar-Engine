@@ -6,6 +6,8 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 
+#include "mmgr/mmgr.h"
+
 Application::Application()
 {
 	window = new ModuleWindow();
@@ -36,9 +38,9 @@ Application::Application()
 
 Application::~Application()
 {
-	std::list<Module*>::iterator item;
+	std::list<Module*>::reverse_iterator item;
 
-	for (item = --listModules.end(); item != listModules.begin(); --item)
+	for (item = listModules.rbegin(); item != listModules.rend(); ++item)
 	{
 		RELEASE(*item);
 	}
@@ -88,6 +90,12 @@ void Application::PrepareUpdate()
 
 	dt = (float)msTimer.Read() / 1000.0f;
 	msTimer.Start();
+
+	if (resizeRequested)
+	{
+		renderer3D->OnResize(*window->GetWindowWidth(), *window->GetWindowHeight());
+		resizeRequested = false;
+	}
 }
 
 // ---------------------------------------------
@@ -124,18 +132,15 @@ bool Application::Update()
 		ret = (*item)->PreUpdate(dt);
 	}
 
-
 	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
 		ret = (*item)->Update(dt);
 	}
 
-
 	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
 		ret = (*item)->PostUpdate();
 	}
-
 
 	FinishUpdate();
 	return ret;
@@ -144,9 +149,9 @@ bool Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
-	std::list<Module*>::iterator item;
+	std::list<Module*>::reverse_iterator item;
 
-	for (item = --listModules.end(); item != listModules.begin() && ret; --item)
+	for (item = listModules.rbegin(); item != listModules.rend(); ++item)
 	{
 		ret = (*item)->CleanUp();
 	}
@@ -166,7 +171,7 @@ void Application::RequestBrowser(const char* path)
 
 void Application::LogConsole(const char* string)
 {
-	editor->LogConsole(string);
+	if (editor) editor->LogConsole(string);
 }
 
 void Application::SetFPSLimit(const float fps)

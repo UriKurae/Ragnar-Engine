@@ -3,6 +3,8 @@
 
 #include "ModuleRenderer3D.h"
 
+#include "mmgr/mmgr.h"
+
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
@@ -150,7 +152,7 @@ bool ModuleInput::PreUpdate(float dt)
 			case SDL_WINDOWEVENT:
 			{
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
-					app->renderer3D->OnResize(e.window.data1, e.window.data2);
+					app->ResizeRequest();
 			}
 		}
 	}
