@@ -1,1 +1,19 @@
-{"App":{"FPS":16},"Window":{"width":1080,"height":720,"brightness":1,"fullscreen":false,"fullscreen desktop":false,"borderless":false,"resizable":false},"Camera3D":{},"Input":{},"SceneIntro":{},"Editor":{},"Renderer":{}}
+{
+    "App": {
+        "FPS": 16
+    },
+    "Window": {
+        "width": 1080,
+        "height": 720,
+        "brightness": 1,
+        "fullscreen": false,
+        "fullscreen desktop": false,
+        "borderless": false,
+        "resizable": false
+    },
+    "Camera3D": {},
+    "Input": {},
+    "SceneIntro": {},
+    "Editor": {},
+    "Renderer": {}
+}

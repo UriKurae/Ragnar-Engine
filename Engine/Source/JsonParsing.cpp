@@ -71,7 +71,7 @@ JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const
 
 JSON_Status JsonParsing::SerializeFile(JSON_Value* value, const char* fileName) const
 {
-	return json_serialize_to_file(value, fileName);
+	return json_serialize_to_file_pretty(value, fileName);
 }
 
 JSON_Value* JsonParsing::GetRootValue() const
