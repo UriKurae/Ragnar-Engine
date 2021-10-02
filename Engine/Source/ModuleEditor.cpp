@@ -25,7 +25,9 @@ ModuleEditor::~ModuleEditor()
 
 bool ModuleEditor::Update(float dt)
 {
-	mainMenuBar.Update(dt);
+	bool ret = true;
+
+	ret = mainMenuBar.Update(dt);
 
 	if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN)
@@ -33,7 +35,7 @@ bool ModuleEditor::Update(float dt)
 		app->window->SetFullscreen();
 	}
 
-	return true;
+	return ret;
 }
 
 bool ModuleEditor::Draw()
