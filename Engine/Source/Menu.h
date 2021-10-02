@@ -11,7 +11,7 @@ public:
 	virtual bool Update(float dt) { return true; }
 	virtual bool CleanUp() { return true; }
 	
-	inline bool* GetActive() { return &active; }
+	bool* GetActive() { return &active; }
 public:
 	bool active;
 };

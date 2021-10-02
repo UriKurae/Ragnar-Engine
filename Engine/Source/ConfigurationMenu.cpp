@@ -12,7 +12,6 @@ ConfigurationMenu::ConfigurationMenu() : Menu(true)
 	memoryCount = 0;
 
 	activeWindow = false;
-	showConfiguration = false;
 	openOptions = false;
 	activeInput = false;
 	activeHardware = false;
@@ -59,7 +58,7 @@ bool ConfigurationMenu::Update(float dt)
 		ms.emplace_back(1000.0f / app->GetFPSLimit());
 	}
 
-	ImGui::Begin("Configuration", &showConfiguration);
+	ImGui::Begin("Configuration", &active);
 
 	if (ImGui::BeginMenu("Options", &openOptions))
 	{

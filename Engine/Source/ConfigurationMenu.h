@@ -21,7 +21,6 @@ private:
 	int memoryCount;
 
 	bool activeWindow;
-	bool showConfiguration;
 	bool openOptions;
 	bool activeInput;
 	bool activeHardware;
