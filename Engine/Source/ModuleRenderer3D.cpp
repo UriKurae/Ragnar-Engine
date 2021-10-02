@@ -190,6 +190,8 @@ bool ModuleRenderer3D::CleanUp()
 		RELEASE(primitives[i]);
 	}
 
+	primitives.clear();
+
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();

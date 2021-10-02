@@ -34,8 +34,11 @@ private:
 
 	std::vector<float> fps;
 	std::vector<float> ms;
+	std::vector<float> memory;
 
 	bool activeWindow;
 	bool activeInput;
 	bool activeHardware;
+
+	int memoryCount;
 };

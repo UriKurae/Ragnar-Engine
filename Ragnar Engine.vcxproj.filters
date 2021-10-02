@@ -19,6 +19,24 @@
     <Filter Include="Sources\Modules\Game">
       <UniqueIdentifier>{83f46af7-e02f-40c0-9e56-41d76082527b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries">
+      <UniqueIdentifier>{4151a58e-da1f-404e-9562-e6bafb6439cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\Glew">
+      <UniqueIdentifier>{f1442131-92ee-444c-a2b8-4b277525dbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\Imgui">
+      <UniqueIdentifier>{e7ffaeb1-b797-4a6b-b5d0-e5c512547ed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\Json">
+      <UniqueIdentifier>{d663f6c4-7d79-4712-b249-d682a75cbce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\Mmgr">
+      <UniqueIdentifier>{74524c20-a52e-44fb-92b8-1afadfd99e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Menus">
+      <UniqueIdentifier>{c485172c-6561-4cb6-a863-2a63fdf06e04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\ModuleSceneIntro.h">
@@ -42,9 +60,6 @@
     <ClInclude Include="Engine\Source\Application.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Globals.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Timer.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
@@ -57,32 +72,69 @@
     <ClInclude Include="Engine\Source\glmath.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\glew\include\GL\eglew.h" />
-    <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
-    <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
-    <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
     <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ConsoleMenu.h">
-      <Filter>Sources</Filter>
+    <ClInclude Include="Dependencies\glew\include\GL\eglew.h">
+      <Filter>Sources\Libraries\Glew</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\json\parson.h" />
-    <ClInclude Include="Engine\Source\JsonParsing.h" />
-    <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
-    <ClInclude Include="Dependencies\Imgui\imconfig.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
-    <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
-    <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
-    <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
-    <ClInclude Include="Dependencies\mmgr\mmgr.h" />
-    <ClInclude Include="Dependencies\mmgr\nommgr.h" />
+    <ClInclude Include="Dependencies\glew\include\GL\glew.h">
+      <Filter>Sources\Libraries\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\glew\include\GL\glxew.h">
+      <Filter>Sources\Libraries\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imstb_truetype.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_internal.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imstb_textedit.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\json\parson.h">
+      <Filter>Sources\Libraries\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imconfig.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\glew\include\GL\wglew.h">
+      <Filter>Sources\Libraries\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\mmgr\mmgr.h">
+      <Filter>Sources\Libraries\Mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\mmgr\nommgr.h">
+      <Filter>Sources\Libraries\Mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\JsonParsing.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ConsoleMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Globals.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -127,18 +179,38 @@
     <ClCompile Include="Engine\Source\ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\ConsoleMenu.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="Dependencies\Imgui\imgui.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\json\parson.c" />
-    <ClCompile Include="Engine\Source\JsonParsing.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
-    <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Dependencies\mmgr\mmgr.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl3.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\json\parson.c">
+      <Filter>Sources\Libraries\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\mmgr\mmgr.cpp">
+      <Filter>Sources\Libraries\Mmgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\JsonParsing.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ConsoleMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

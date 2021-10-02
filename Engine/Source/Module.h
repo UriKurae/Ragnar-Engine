@@ -6,7 +6,7 @@ class Module
 {
 public:
 
-	Module(bool startEnabled = true) : enabled(startEnabled)
+	Module(bool startEnabled = true) : enabled(startEnabled), name("")
 	{}
 
 	virtual ~Module()

@@ -47,6 +47,7 @@ public:
 
 public:
 	std::vector<Primitive*> primitives;
+
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	Mat3x3 normalMatrix;

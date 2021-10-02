@@ -44,6 +44,8 @@ Application::~Application()
 	{
 		RELEASE(*item);
 	}
+
+	listModules.clear();
 }
 
 bool Application::Init()
