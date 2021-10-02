@@ -2,7 +2,7 @@
 
 #include "mmgr/mmgr.h"
 
-ConsoleMenu::ConsoleMenu()
+ConsoleMenu::ConsoleMenu() : Menu(true)
 {
 	scrollToBottom = false;
 	console = true;
@@ -13,17 +13,16 @@ ConsoleMenu::~ConsoleMenu()
 	buf.clear();
 }
 
-bool ConsoleMenu::Update()
+bool ConsoleMenu::Update(float dt)
 {
-	if (console)
-	{
-		ImGui::Begin("Console", &console);
-		ImGui::TextUnformatted(buf.begin());
-		if (scrollToBottom)
-			ImGui::SetScrollHereY(1.0f);
-		scrollToBottom = false;
-		ImGui::End();
-	}
+
+	ImGui::Begin("Console", &active);
+	ImGui::TextUnformatted(buf.begin());
+	if (scrollToBottom)
+		ImGui::SetScrollHereY(1.0f);
+	scrollToBottom = false;
+	ImGui::End();
+
 
 	return true;
 }

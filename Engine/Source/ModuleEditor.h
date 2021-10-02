@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Module.h"
+#include "MainMenuBar.h"
+
 #include <vector>
 #include <string>
-
-class ConsoleMenu;
 
 class ModuleEditor : public Module
 {
@@ -23,22 +23,6 @@ public:
 	void LogConsole(const char* string);
 
 private:
-	ConsoleMenu* console;
 
-    bool showMenu;
-	bool showHelpMenu;
-	bool showConfiguration;
-	bool showConsole;
-
-	bool openOptions;
-
-	std::vector<float> fps;
-	std::vector<float> ms;
-	std::vector<float> memory;
-
-	bool activeWindow;
-	bool activeInput;
-	bool activeHardware;
-
-	int memoryCount;
+	MainMenuBar mainMenuBar;
 };

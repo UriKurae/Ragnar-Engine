@@ -1,15 +1,17 @@
 #pragma once
 
+#include "Menu.h"
+
 #include "Imgui/imgui.h"
 
-class ConsoleMenu
+class ConsoleMenu : public Menu
 {
 public:
 	ConsoleMenu();
 
 	~ConsoleMenu();
 
-	bool Update();
+	bool Update(float dt) override;
 
 	void AddLog(const char* fmt);
 

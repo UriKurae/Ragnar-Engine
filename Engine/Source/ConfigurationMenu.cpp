@@ -1,0 +1,280 @@
+#include "Application.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ConfigurationMenu.h"
+
+#include <GL\glew.h>
+#include <SDL.h>
+#include <mmgr\mmgr.h>
+
+ConfigurationMenu::ConfigurationMenu() : Menu(true)
+{
+	memoryCount = 0;
+
+	activeWindow = false;
+	showConfiguration = false;
+	openOptions = false;
+	activeInput = false;
+	activeHardware = false;
+}
+
+ConfigurationMenu::~ConfigurationMenu()
+{
+}
+
+bool ConfigurationMenu::Update(float dt)
+{
+	static sMStats stats = m_getMemoryStatistics();
+	++memoryCount;
+	if (memoryCount > 15)
+	{
+		memoryCount = 0;
+		if (memory.size() >= 100)
+		{
+			for (int i = 0; i < memory.size() - 1; ++i)
+			{
+				memory[i] = memory[i + 1];
+			}
+			memory[memory.size() - 1] = (float)stats.totalReportedMemory;
+		}
+		else
+		{
+			memory.push_back((float)stats.totalReportedMemory);
+		}
+	}
+
+	if (fps.size() >= 100)
+	{
+		for (int i = 0; i < fps.size() - 1; ++i)
+		{
+			fps[i] = fps[i + 1];
+			ms[i] = ms[i + 1];
+		}
+		fps[fps.size() - 1] = app->GetFPSLimit();
+		ms[ms.size() - 1] = 1000.0f / app->GetFPSLimit();
+	}
+	else
+	{
+		fps.emplace_back(app->GetFPSLimit());
+		ms.emplace_back(1000.0f / app->GetFPSLimit());
+	}
+
+	ImGui::Begin("Configuration", &showConfiguration);
+
+	if (ImGui::BeginMenu("Options", &openOptions))
+	{
+		if (ImGui::MenuItem("Load"))
+		{
+			app->LoadConfigRequest();
+		}
+		if (ImGui::MenuItem("Save"))
+		{
+			app->SaveConfigRequest();
+		}
+		ImGui::EndMenu();
+	}
+	if (ImGui::CollapsingHeader("Application"))
+	{
+		char* name = "Ragnar Engine";
+		ImGui::InputText("App name", name, 25);
+		char* organization = "UPC CITM";
+		ImGui::InputText("Organization", organization, 25);
+
+		int framerate = app->GetFPSLimit();
+
+		if (ImGui::SliderInt("Max FPS", &framerate, 1, 144))
+		{
+			app->SetFPSLimit(framerate);
+		}
+
+		char title[25];
+		sprintf_s(title, 25, "Framerate %.1f", fps[fps.size() - 1]);
+		ImGui::PlotHistogram("##framerate", &fps[0], fps.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+
+		sprintf_s(title, 25, "Milliseconds %0.1f", ms[ms.size() - 1]);
+		ImGui::PlotHistogram("##milliseconds", &ms[0], ms.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
+
+		ImGui::PlotHistogram("##memory", &memory[0], memory.size(), 0, "Memory Consumption", 0.0f, (float)stats.peakReportedMemory * 1.2f, ImVec2(310, 100));
+
+		ImGui::Text("Total Reported Mem: %d", m_getMemoryStatistics().totalReportedMemory);
+		ImGui::Text("Total Actual Mem: %d", m_getMemoryStatistics().totalActualMemory);
+		ImGui::Text("Peak Reported Mem: %d", m_getMemoryStatistics().peakReportedMemory);
+		ImGui::Text("Peak Actual Mem: %d", m_getMemoryStatistics().peakActualMemory);
+		ImGui::Text("Accumulated Reported Mem: %d", m_getMemoryStatistics().accumulatedReportedMemory);
+		ImGui::Text("Accumulated Actual Mem: %d", m_getMemoryStatistics().accumulatedActualMemory);
+		ImGui::Text("Accumulated Alloc Unit Count: %d", m_getMemoryStatistics().accumulatedAllocUnitCount);
+		ImGui::Text("Total Alloc Unit Count: %d", m_getMemoryStatistics().totalAllocUnitCount);
+		ImGui::Text("Peak Alloc Unit Count: %d", m_getMemoryStatistics().peakAllocUnitCount);
+	}
+	if (ImGui::CollapsingHeader("Window"))
+	{
+		ImGui::Checkbox("Active", &activeWindow);
+		if (ImGui::SliderFloat("Brightness", app->window->GetWindowBrightness(), 0.0f, 1.0f, "%f", 0))
+		{
+			app->window->SetBrightness();
+		}
+
+		if (ImGui::SliderInt("Width", app->window->GetWindowWidth(), 640, 1920, "%d", 0))
+		{
+			app->window->SetWindowSize();
+		}
+
+		if (ImGui::SliderInt("Height", app->window->GetWindowHeight(), 480, 1080, "%d", 0))
+		{
+			app->window->SetWindowSize();
+		}
+
+		ImGui::Text("Refresh Rate:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", app->window->GetRefreshRate());
+
+		if (ImGui::Checkbox("Fullscreen", app->window->GetWindowFullscreen()))
+		{
+			app->window->SetFullscreen();
+		}
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Resizable", app->window->GetWindowResizable()))
+		{
+			app->window->SetResizable();
+		}
+		if (ImGui::Checkbox("Borderless", app->window->GetWindowBorderless()))
+		{
+			app->window->SetBorderless();
+		}
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Full desktop", app->window->GetWindowFullscreenDesktop()))
+		{
+			app->window->SetFullscreenDesktop();
+		}
+	}
+	if (ImGui::CollapsingHeader("Input"))
+	{
+		ImGui::Checkbox("Active", &activeInput);
+		ImGui::Text("Mouse position : ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d %d", app->input->GetMouseX(), app->input->GetMouseY());
+
+		ImGui::Text("Mouse motion : ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d %d", app->input->GetMouseXMotion(), app->input->GetMouseYMotion());
+
+		ImGui::Text("Mouse wheel : ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", app->input->GetMouseZ());
+
+		ImGui::Separator();
+
+		ImGui::BeginChild("Input");
+
+		for (int i = 0; i < app->input->GetInputList().size(); ++i)
+		{
+			ImGui::Text(app->input->GetInputList()[i].c_str());
+		}
+
+		ImGui::EndChild();
+	}
+	if (ImGui::CollapsingHeader("Hardware"))
+	{
+		ImGui::Checkbox("Active", &activeHardware);
+		SDL_version version;
+		SDL_GetVersion(&version);
+		ImGui::Text("SDL Version:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d.%d.%d", version.major, version.minor, version.patch);
+		ImGui::Separator();
+		ImGui::Text("CPU:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d(Cache: %dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
+		ImGui::Text("System RAM:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.1f", (float)(SDL_GetSystemRAM() / 1024));
+		ImGui::Text("Caps: ");
+
+		if (SDL_HasRDTSC() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "RDTSC,");
+		}
+
+		if (SDL_HasMMX() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "MMX,");
+		}
+
+		if (SDL_HasSSE() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "SSE,");
+		}
+
+		if (SDL_HasSSE2() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "SSE2,");
+		}
+
+		if (SDL_HasSSE3() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "SSE3,");
+		}
+
+		if (SDL_HasSSE41() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "SSE41,");
+		}
+
+		if (SDL_HasSSE42() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "SSE41,");
+		}
+
+		if (SDL_HasAVX() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "AVX,");
+		}
+
+		if (SDL_HasAVX2() == SDL_bool::SDL_TRUE)
+		{
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "AVX2");
+		}
+
+		ImGui::Separator();
+
+		const GLubyte* vendor = glGetString(GL_VENDOR);
+		const GLubyte* renderer = glGetString(GL_RENDERER);
+
+		ImGui::Text("GPU:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", vendor);
+
+		ImGui::Text("Brand:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", renderer);
+
+		GLint parameter = 0;
+		ImGui::Text("VRAM budget:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%dMB", parameter / 1024);
+
+		ImGui::Text("VRAM usage:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%dMB", parameter / 1024);
+
+		glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &parameter);
+		ImGui::Text("VRAM available:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%dMB", parameter / 1024);
+
+		ImGui::Text("VRAM reserved:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%dMB", parameter / 1024);
+	}
+	ImGui::End();
+
+	return true;
+}
