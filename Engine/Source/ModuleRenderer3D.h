@@ -59,6 +59,8 @@ public:
 	Mat4x4 modelMatrix, viewMatrix, projectionMatrix;
 
 	GLuint cubeId;
+	GLuint index;
+
 
 	bool depthTest;
 	bool cullFace;

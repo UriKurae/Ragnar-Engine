@@ -141,6 +141,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
+	cubeId = 0;
+	glGenBuffers(1, &cubeId);
+
+	index = 0;
+	glGenBuffers(1, &index);
 
 	return ret;
 }
@@ -169,122 +174,123 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 
 bool ModuleRenderer3D::Update(float dt)
 {
-	// Uncomment for direct mode
+	// Uncomment for direct mode Opengl Cube
 	//DrawCubeDirectMode();
 
-	//// Uncomment for Modern opengl mode
+	// Uncomment for Vertex Array
+	//GLfloat vertices[108] =
+	//{
+	//	// Front
+	//	1.0f, 1.0f, 0.0f,
+	//	0.0f, 1.0f, 0.0f,
+	//	0.0f, 0.0f, 0.0f,
 
-	/*float positions[108] =
+	//	0.0f, 0.0f, 0.0f,
+	//	1.0f, 0.0f, 0.0f,
+	//	1.0f, 1.0f, 0.0f,
+
+	//	// Right
+	//	1.0f, 1.0f, 0.0f,
+	//	1.0f, 0.0f, 0.0f,
+	//	1.0f, 0.0f,-1.0f,
+
+	//	1.0f, 0.0f,-1.0f,
+	//	1.0f, 1.0f,-1.0f,
+	//	1.0f, 1.0f, 0.0f,
+
+	//	// top
+	//	1.0f, 1.0f, 0.0f,
+	//	1.0f, 1.0f,-1.0f,
+	//	0.0f, 1.0f,-1.0f,
+
+	//	0.0f, 1.0f,-1.0f,
+	//	0.0f, 1.0f, 0.0f,
+	//	1.0f, 1.0f, 0.0f,
+
+	//	// Back
+	//	0.0f, 0.0f,-1.0f,
+	//	1.0f, 0.0f,-1.0f,
+	//	1.0f, 0.0f, 0.0f,
+
+	//	1.0f, 0.0f, 0.0f,
+	//	0.0f, 0.0f, 0.0f,
+	//	0.0f, 0.0f,-1.0f,
+
+	//	// Left
+	//	0.0f, 0.0f,-1.0f,
+	//	0.0f, 0.0f, 0.0f,
+	//	0.0f, 1.0f, 0.0f,
+
+	//	0.0f, 1.0f, 0.0f,
+	//	0.0f, 1.0f,-1.0f,
+	//	0.0f, 0.0f,-1.0f,
+
+	//	// Bottom
+	//	0.0f, 0.0f,-1.0f,
+	//	1.0f, 0.0f,-1.0f,
+	//	1.0f, 0.0f, 0.0f,
+
+	//	1.0f, 0.0f, 0.0f,
+	//	0.0f, 0.0f, 0.0f,
+	//	0.0f, 0.0f,-1.0f
+	//};
+
+	//
+	//// Bind Buffer and store data
+	//glBindBuffer(GL_ARRAY_BUFFER, cubeId);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 36 * 3, vertices, GL_STATIC_DRAW);
+
+	//glEnableClientState(GL_VERTEX_ARRAY);
+
+	//glBindBuffer(GL_ARRAY_BUFFER, cubeId);
+	//glVertexPointer(3, GL_FLOAT, 0, NULL);
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	
+	// Uncomment for Index array	
+	/*GLfloat indexVertex[24] =
 	{
-		-1.0f, 1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
 		0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f,
-
-		0.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 1.0f, 0.0f,
-
-		-1.0f, 1.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, -1.0f,
-
-		-1.0f, 0.0f, -1.0f,
-		-1.0f, 1.0f, -1.0f,
-		-1.0f, 1.0f, 0.0f,
-
-		-1.0f, 1.0f, 0.0f,
-		-1.0f, 1.0f, -1.0f,
-		0.0f, 1.0f, -1.0f,
-
-		0.0f, 1.0f, -1.0f,
-		0.0f, 1.0f, 0.0f,
-		-1.0f, 1.0f, 0.0f,
-
-		0.0f, 1.0f, -1.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f,
-
-		0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, -1.0f,
-		0.0f, 1.0f, -1.0f,
-
-		-1.0f, 1.0f, -1.0f,
-		0.0f, 1.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-
-		0.0f, 0.0f, -1.0f,
-		-1.0f, 0.0f, -1.0f,
-		-1.0f, 1.0f, -1.0f,
-
-		0.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, -1.0f,
-
-		-1.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, 0.0f
+		1.0f, 0.0f, 0.0f,
+		1.0f, 0.0f,-1.0f,
+		1.0f, 1.0f,-1.0f,
+		0.0f, 1.0f,-1.0f,
+		0.0f, 0.0f,-1.0f
 	};
 
-	cubeId = 0;
-	glGenBuffers(1, &cubeId);
-	glBindBuffer(GL_ARRAY_BUFFER, cubeId);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9 * 12, positions, GL_STATIC_DRAW);
+	GLuint indices[36] =
+	{
+		0,1,2,
+		2,3,0,
 
+		0,3,4,
+		4,5,0,
+
+		0,5,6,
+		6,1,0,
+
+		7,6,5,
+		5,4,7,
+
+		7,2,1,
+		1,6,7,
+
+		7,4,3,
+		3,2,7
+	};
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 36, indices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glBindBuffer(GL_ARRAY_BUFFER, cubeId);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glVertexPointer(3, GL_FLOAT, 0, &indexVertex);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 	glDisableClientState(GL_VERTEX_ARRAY);*/
 
-
-	// Uncomment for modern opengl Indices mode
-	//float positions[24] =
-	//{
-	//	-1.0f, 1.0f, 0.0f, // 0
-	//	0.0f, 1.0f, 0.0f, // 1
-	//	0.0f, 0.0f, 0.0f, // 2
-
-	//	-1.0f, 0.0f, 0.0f, // 3
-	//	-1.0f, 0.0f, -1.0f, // 4
-	//	-1.0f, 1.0f, -1.0f, // 5
-
-	//	0.0f, 1.0f, -1.0f, // 6
-	//	0.0f, 0.0f, -1.0f, // 7
-	//};
-
-	//unsigned int orderIndices[36]
-	//{
-	//	0, 1, 2,
-	//	2, 3, 0,
-
-	//	0, 3, 4,
-	//	4, 5, 0,
-
-	//	0, 5, 6,
-	//	6, 1, 0,
-
-	//	6, 1, 2,
-	//	2, 7, 6,
-
-	//	5, 6, 7,
-	//	7, 4, 5,
-
-	//	2, 3, 4,
-	//	4, 7, 2
-
-	//};
-
-	//glEnableClientState(GL_INDEX_ARRAY);
-	//unsigned int myIndices = 0;
-	//glGenBuffers(1, &myIndices);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, myIndices);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 12 * 3, orderIndices, GL_STATIC_DRAW);
-
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, myIndices);
-	//glVertexPointer(3, GL_FLOAT, 0, positions);
-
-	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, orderIndices);
-	//glDisableClientState(GL_INDEX_ARRAY);
 
 	return true;
 }
@@ -400,56 +406,70 @@ void ModuleRenderer3D::SetWireMode()
 
 void ModuleRenderer3D::DrawCubeDirectMode()
 {
-	// Cube Direct Mode
+	GLfloat v0[3] = { 1.0f, 1.0f, 0.0f };
+	GLfloat v1[3] = { 0.0f, 1.0f, 0.0f };
+	GLfloat v2[3] = { 0.0f, 0.0f, 0.0f };
+	GLfloat v3[3] = { 1.0f, 0.0f, 0.0f };
+	GLfloat v4[3] = { 1.0f, 0.0f,-1.0f };
+	GLfloat v5[3] = { 1.0f, 1.0f,-1.0f };
+	GLfloat v6[3] = { 0.0f, 1.0f,-1.0f };
+	GLfloat v7[3] = { 0.0f, 0.0f,-1.0f };
+
 	glBegin(GL_TRIANGLES);
 
-	glVertex3f(-1.0f, 1.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
+	// Front
+	glVertex3fv(v0);
+	glVertex3fv(v1);
+	glVertex3fv(v2);
 
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3fv(v2);
+	glVertex3fv(v3);
+	glVertex3fv(v0);
 
-	glVertex3f(-1.0f, 1.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, -1.0f);
+	// Right
+	glVertex3fv(v0);
+	glVertex3fv(v3);
+	glVertex3fv(v4);
 
-	glVertex3f(-1.0f, 0.0f, -1.0f);
-	glVertex3f(-1.0f, 1.0f, -1.0f);
-	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3fv(v4);
+	glVertex3fv(v5);
+	glVertex3fv(v0);
 
-	glVertex3f(-1.0f, 1.0f, 0.0f);
-	glVertex3f(-1.0f, 1.0f, -1.0f);
-	glVertex3f(0.0f, 1.0f, -1.0f);
+	// Top
+	glVertex3fv(v0);
+	glVertex3fv(v5);
+	glVertex3fv(v6);
 
-	glVertex3f(0.0f, 1.0f, -1.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3fv(v6);
+	glVertex3fv(v1);
+	glVertex3fv(v0);
 
-	glVertex3f(0.0f, 1.0f, -1.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
+	// Back
+	glVertex3fv(v7);
+	glVertex3fv(v6);
+	glVertex3fv(v5);
 
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(0.0f, 1.0f, -1.0f);
+	glVertex3fv(v5);
+	glVertex3fv(v4);
+	glVertex3fv(v7);
 
-	glVertex3f(-1.0f, 1.0f, -1.0f);
-	glVertex3f(0.0f, 1.0f, -1.0f);
-	glVertex3f(0.0f, 0.0f, -1.0f);
+	// Left
+	glVertex3fv(v7);
+	glVertex3fv(v2);
+	glVertex3fv(v1);
 
-	glVertex3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(-1.0f, 0.0f, -1.0f);
-	glVertex3f(-1.0f, 1.0f, -1.0f);
+	glVertex3fv(v1);
+	glVertex3fv(v6);
+	glVertex3fv(v7);
 
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, -1.0f);
+	// Bottom
+	glVertex3fv(v7);
+	glVertex3fv(v4);
+	glVertex3fv(v3);
 
-	glVertex3f(-1.0f, 0.0f, -1.0f);
-	glVertex3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3fv(v3);
+	glVertex3fv(v2);
+	glVertex3fv(v7);
 
 	glEnd();
 }
