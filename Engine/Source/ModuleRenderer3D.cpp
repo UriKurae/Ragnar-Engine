@@ -131,6 +131,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
 		lights[0].Active(true);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
@@ -139,6 +140,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 	// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
+
 
 	return ret;
 }
@@ -161,6 +163,128 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
+
+	return true;
+}
+
+bool ModuleRenderer3D::Update(float dt)
+{
+	// Uncomment for direct mode
+	//DrawCubeDirectMode();
+
+	//// Uncomment for Modern opengl mode
+
+	/*float positions[108] =
+	{
+		-1.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f,
+
+		0.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f,
+
+		-1.0f, 1.0f, 0.0f,
+		-1.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, -1.0f,
+
+		-1.0f, 0.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+		-1.0f, 1.0f, 0.0f,
+
+		-1.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, -1.0f,
+		0.0f, 1.0f, -1.0f,
+
+		0.0f, 1.0f, -1.0f,
+		0.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f,
+
+		0.0f, 1.0f, -1.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f,
+
+		0.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, -1.0f,
+		0.0f, 1.0f, -1.0f,
+
+		-1.0f, 1.0f, -1.0f,
+		0.0f, 1.0f, -1.0f,
+		0.0f, 0.0f, -1.0f,
+
+		0.0f, 0.0f, -1.0f,
+		-1.0f, 0.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+
+		0.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, -1.0f,
+
+		-1.0f, 0.0f, -1.0f,
+		0.0f, 0.0f, -1.0f,
+		0.0f, 0.0f, 0.0f
+	};
+
+	cubeId = 0;
+	glGenBuffers(1, &cubeId);
+	glBindBuffer(GL_ARRAY_BUFFER, cubeId);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9 * 12, positions, GL_STATIC_DRAW);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, cubeId);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glDisableClientState(GL_VERTEX_ARRAY);*/
+
+
+	// Uncomment for modern opengl Indices mode
+	//float positions[24] =
+	//{
+	//	-1.0f, 1.0f, 0.0f, // 0
+	//	0.0f, 1.0f, 0.0f, // 1
+	//	0.0f, 0.0f, 0.0f, // 2
+
+	//	-1.0f, 0.0f, 0.0f, // 3
+	//	-1.0f, 0.0f, -1.0f, // 4
+	//	-1.0f, 1.0f, -1.0f, // 5
+
+	//	0.0f, 1.0f, -1.0f, // 6
+	//	0.0f, 0.0f, -1.0f, // 7
+	//};
+
+	//unsigned int orderIndices[36]
+	//{
+	//	0, 1, 2,
+	//	2, 3, 0,
+
+	//	0, 3, 4,
+	//	4, 5, 0,
+
+	//	0, 5, 6,
+	//	6, 1, 0,
+
+	//	6, 1, 2,
+	//	2, 7, 6,
+
+	//	5, 6, 7,
+	//	7, 4, 5,
+
+	//	2, 3, 4,
+	//	4, 7, 2
+
+	//};
+
+	//glEnableClientState(GL_INDEX_ARRAY);
+	//unsigned int myIndices = 0;
+	//glGenBuffers(1, &myIndices);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, myIndices);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 12 * 3, orderIndices, GL_STATIC_DRAW);
+
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, myIndices);
+	//glVertexPointer(3, GL_FLOAT, 0, positions);
+
+	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, orderIndices);
+	//glDisableClientState(GL_INDEX_ARRAY);
 
 	return true;
 }
@@ -272,6 +396,62 @@ void ModuleRenderer3D::SetWireMode()
 	{
 		primitives[i]->wire = wireMode;
 	}
+}
+
+void ModuleRenderer3D::DrawCubeDirectMode()
+{
+	// Cube Direct Mode
+	glBegin(GL_TRIANGLES);
+
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-1.0f, 0.0f, -1.0f);
+
+	glVertex3f(-1.0f, 0.0f, -1.0f);
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, -1.0f);
+
+	glVertex3f(0.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+
+	glVertex3f(0.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, -1.0f);
+
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 0.0f, -1.0f);
+
+	glVertex3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(-1.0f, 0.0f, -1.0f);
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-1.0f, 0.0f, -1.0f);
+
+	glVertex3f(-1.0f, 0.0f, -1.0f);
+	glVertex3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+
+	glEnd();
 }
 
 void ModuleRenderer3D::AddPrimitive(Primitive* primitive)

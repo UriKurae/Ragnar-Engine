@@ -31,16 +31,16 @@ bool ModuleSceneIntro::Start()
 	Plane* p = new Plane(0, 0, 0, 0);
 	p->axis = true;
 
-	Cube* c = new Cube(1, 1, 1);
+	/*Cube* c = new Cube(1, 1, 1);
 	c->SetPos(4.5, 0, 0);
-	c->color = Color(1.0f, 0.0f, 0.0f, 0.2f);
+	c->color = Color(1.0f, 0.0f, 0.0f, 0.2f);*/
 
 	Cube* d = new Cube(1, 1, 1);
 	d->SetPos(5, 0, 0);
-	d->color = Color(0.0f, 0.0f, 1.0f, 0.1f);
+	d->color = Color(0.0f, 1.0f, 0.0f, 0.1f);
 
 	app->renderer3D->AddPrimitive(p);
-	app->renderer3D->AddPrimitive(c);
+	//app->renderer3D->AddPrimitive(c);
 	app->renderer3D->AddPrimitive(d);
 
 	return ret;

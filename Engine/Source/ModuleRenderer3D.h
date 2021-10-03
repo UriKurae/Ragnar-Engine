@@ -9,6 +9,8 @@
 
 #define MAX_LIGHTS 8
 
+typedef unsigned int GLuint;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -17,6 +19,7 @@ public:
 
 	bool Init(JsonParsing& node) override;
 	bool PreUpdate(float dt) override;
+	bool Update(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
 
@@ -43,6 +46,8 @@ public:
 	inline bool* GetBlending() { return &blending; }
 	inline bool* GetWireMode() { return &wireMode; }
 
+	void DrawCubeDirectMode();
+
 	void AddPrimitive(Primitive* primitive);
 
 public:
@@ -52,6 +57,8 @@ public:
 	SDL_GLContext context;
 	Mat3x3 normalMatrix;
 	Mat4x4 modelMatrix, viewMatrix, projectionMatrix;
+
+	GLuint cubeId;
 
 	bool depthTest;
 	bool cullFace;
