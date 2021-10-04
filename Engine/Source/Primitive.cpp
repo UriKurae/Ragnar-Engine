@@ -173,51 +173,55 @@ void Sphere::InnerRender() const
 
 
 // CYLINDER ============================================
-Cylinder::Cylinder() : Primitive(), radius(1.0f), height(1.0f)
-{
-	type = PrimitiveTypes::PRIMITIVE_CYLINDER;
-}
-
-Cylinder::Cylinder(float radius, float height) : Primitive(), radius(radius), height(height)
-{
-	type = PrimitiveTypes::PRIMITIVE_CYLINDER;
-}
-
-void Cylinder::InnerRender() const
-{
-	int n = 30;
-
-	// Cylinder Bottom
-	glBegin(GL_POLYGON);
-	
-	for(int i = 360; i >= 0; i -= (360 / n))
-	{
-		float a = i * M_PI / 180; // degrees to radians
-		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a));
-	}
-	glEnd();
-
-	// Cylinder Top
-	glBegin(GL_POLYGON);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	for(int i = 0; i <= 360; i += (360 / n))
-	{
-		float a = i * M_PI / 180; // degrees to radians
-		glVertex3f(height * 0.5f, radius * cos(a), radius * sin(a));
-	}
-	glEnd();
-
-	// Cylinder "Cover"
-	glBegin(GL_QUAD_STRIP);
-	for(int i = 0; i < 480; i += (360 / n))
-	{
-		float a = i * M_PI / 180; // degrees to radians
-
-		glVertex3f(height*0.5f,  radius * cos(a), radius * sin(a) );
-		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a) );
-	}
-	glEnd();
-}
+//Cylinder::Cylinder() : Primitive(), radius(1.0f), height(1.0f)
+//{
+//	type = PrimitiveTypes::PRIMITIVE_CYLINDER;
+//}
+//
+//Cylinder::~Cylinder()
+//{
+//}
+//
+//Cylinder::Cylinder(float radius, float height) : Primitive(), radius(radius), height(height)
+//{
+//	type = PrimitiveTypes::PRIMITIVE_CYLINDER;
+//}
+//
+//void Cylinder::InnerRender() const
+//{
+//	int n = 30;
+//
+//	// Cylinder Bottom
+//	glBegin(GL_POLYGON);
+//	
+//	for(int i = 360; i >= 0; i -= (360 / n))
+//	{
+//		float a = i * M_PI / 180; // degrees to radians
+//		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a));
+//	}
+//	glEnd();
+//
+//	// Cylinder Top
+//	glBegin(GL_POLYGON);
+//	glNormal3f(0.0f, 0.0f, 1.0f);
+//	for(int i = 0; i <= 360; i += (360 / n))
+//	{
+//		float a = i * M_PI / 180; // degrees to radians
+//		glVertex3f(height * 0.5f, radius * cos(a), radius * sin(a));
+//	}
+//	glEnd();
+//
+//	// Cylinder "Cover"
+//	glBegin(GL_QUAD_STRIP);
+//	for(int i = 0; i < 480; i += (360 / n))
+//	{
+//		float a = i * M_PI / 180; // degrees to radians
+//
+//		glVertex3f(height*0.5f,  radius * cos(a), radius * sin(a) );
+//		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a) );
+//	}
+//	glEnd();
+//}
 
 // LINE ==================================================
 Line::Line() : Primitive(), origin(0, 0, 0), destination(1, 1, 1)

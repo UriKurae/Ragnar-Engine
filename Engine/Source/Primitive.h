@@ -59,16 +59,16 @@ public:
 };
 
 // ============================================
-class Cylinder : public Primitive
-{
-public:
-	Cylinder();
-	Cylinder(float radius, float height);
-	void InnerRender() const;
-public:
-	float radius;
-	float height;
-};
+//class Cylinder : public Primitive
+//{
+//public:
+//	Cylinder();
+//	Cylinder(float radius, float height);
+//	void InnerRender() const;
+//public:
+//	float radius;
+//	float height;
+//};
 
 // ============================================
 class Line : public Primitive

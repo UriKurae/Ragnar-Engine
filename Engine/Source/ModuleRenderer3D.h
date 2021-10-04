@@ -1,11 +1,13 @@
 #pragma once
 #include "Module.h"
+#include "Cylinder.h"
 
 #include "glmath.h"
 #include "Light.h"
 
 #include <vector>
 #include "Primitive.h"
+#include "glew/include/GL/glew.h"
 
 #define MAX_LIGHTS 8
 
@@ -47,7 +49,7 @@ public:
 	inline bool* GetWireMode() { return &wireMode; }
 
 	void DrawCubeDirectMode();
-	void DrawSphere();
+	void DrawSphere(float radius, unsigned int rings, unsigned int sectors);
 	void DrawPyramid();
 
 	void AddPrimitive(Primitive* primitive);
@@ -55,8 +57,10 @@ public:
 public:
 	std::vector<Primitive*> primitives;
 
-	std::vector<float> indices;
-	std::vector<float> vertices;
+	std::vector<GLushort> indices;
+	std::vector<GLfloat> normals;
+	std::vector<GLfloat> texcoords;
+	std::vector<GLfloat> vertices;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
@@ -65,6 +69,10 @@ public:
 
 	GLuint cubeId;
 	GLuint index;
+	GLuint sphere;
+	GLuint cylinder;
+
+	Cylinder *cyl;
 
 
 	bool depthTest;

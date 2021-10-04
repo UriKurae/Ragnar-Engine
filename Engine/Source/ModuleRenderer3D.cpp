@@ -147,6 +147,20 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	index = 0;
 	glGenBuffers(1, &index);
 
+	cyl = new Cylinder(50, 2.0f, 1.0f);
+	// Bind cylinder
+	glGenBuffers(1, &cylinder);
+	glBindBuffer(GL_VERTEX_ARRAY, cylinder);
+	cyl->buildVerticesSmooth();
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* cyl->indices.size(), &cyl->indices, GL_STATIC_DRAW);
+
+	// Bind Sphere buffer and add data for it
+	sphere = 0;
+	glGenBuffers(1, &sphere);
+	DrawSphere(1.0f, 20, 20);
+	glBindBuffer(GL_VERTEX_ARRAY, sphere);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices, GL_STATIC_DRAW);
+
 	return ret;
 }
 
@@ -291,9 +305,37 @@ bool ModuleRenderer3D::Update(float dt)
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 	glDisableClientState(GL_VERTEX_ARRAY);*/
 	
-	//DrawSphere();
 
-	DrawPyramid();
+	// Uncomment for Sphere
+	/*glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+	glNormalPointer(GL_FLOAT, 0, &normals[0]);
+	glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
+	glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glVertexPointer(3, GL_FLOAT, 0, &cyl->vertices[0]);
+	glNormalPointer(GL_FLOAT, 0, &cyl->normals[0]);
+	glTexCoordPointer(2, GL_FLOAT, 0, &cyl->texCoords[0]);
+	glDrawElements(GL_TRIANGLES, cyl->indices.size(), GL_UNSIGNED_INT, &cyl->indices[0]);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+
+	// Uncomment for Pyramid
+	//DrawPyramid();
 
 	return true;
 }
@@ -477,53 +519,61 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glEnd();
 }
 
-void ModuleRenderer3D::DrawSphere()
+void ModuleRenderer3D::DrawSphere(float radius, unsigned int rings, unsigned int sectors)
 {
-	unsigned int sectors = 8;
-	unsigned int rings = 6;
-	float radius = 0.5f;
-	float const R = 1. / (float)(6 - 1);
-	float const S = 1. / (float)(8 - 1);
+	float const R = 1. / (float)(rings - 1);
+	float const S = 1. / (float)(sectors - 1);
 	int r, s;
 
 	vertices.resize(rings * sectors * 3);
+	normals.resize(rings * sectors * 3);
+	texcoords.resize(rings * sectors * 3);
 
 	std::vector<GLfloat>::iterator v = vertices.begin();
-
-	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) 
-	{
+	std::vector<GLfloat>::iterator n = normals.begin();
+	std::vector<GLfloat>::iterator t = texcoords.begin();
+	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) {
 		float const y = sin(-M_PI_2 + M_PI * r * R);
 		float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
 		float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
 
+	/*	texcoords.push_back(s * S);
+		texcoords.push_back(r * R);
+
+		vertices.push_back(x * radius);
+		vertices.push_back(y * radius);
+		vertices.push_back(z * radius);
+
+		normals.push_back(x);
+		normals.push_back(y);
+		normals.push_back(z);*/
+	
+		*t++ = s * S;
+		*t++ = r * R;
+
 		*v++ = x * radius;
 		*v++ = y * radius;
 		*v++ = z * radius;
+
+		*n++ = x;
+		*n++ = y;
+		*n++ = z;
 	}
 
 	indices.resize(rings * sectors * 4);
-	std::vector<float>::iterator i = indices.begin();
-	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) 
-	{
+	std::vector<GLushort>::iterator i = indices.begin();
+	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) {
+		
+		/*indices.push_back(r * sectors + s);
+		indices.push_back(r * sectors + (s + 1));
+		indices.push_back((r + 1) * sectors + (s + 1));
+		indices.push_back((r + 1) * sectors + s);*/
+		
 		*i++ = r * sectors + s;
 		*i++ = r * sectors + (s + 1);
 		*i++ = (r + 1) * sectors + (s + 1);
 		*i++ = (r + 1) * sectors + s;
 	}
-
-	//index = 0;
-	//glGenBuffers(1, &index);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indices.size(), &indices, GL_STATIC_DRAW);
-
-	glPushMatrix();
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(4, GL_FLOAT, 0, &vertices);
-	glDrawElements(GL_QUADS, indices.size(), GL_FLOAT, &indices);
-	glDisableClientState(GL_VERTEX_ARRAY);
-
-	glPopMatrix();
 }
 
 void ModuleRenderer3D::DrawPyramid()

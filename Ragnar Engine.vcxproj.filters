@@ -147,6 +147,9 @@
     <ClInclude Include="Engine\Source\AboutMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Cylinder.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -232,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AboutMenu.cpp">
       <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Cylinder.cpp">
+      <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
