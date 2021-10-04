@@ -284,13 +284,16 @@ bool ModuleRenderer3D::Update(float dt)
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 36, indices, GL_STATIC_DRAW);
+	glVertexPointer(3, GL_FLOAT, 0, &indexVertex);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, &indexVertex);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 	glDisableClientState(GL_VERTEX_ARRAY);*/
+	
+	//DrawSphere();
 
+	DrawPyramid();
 
 	return true;
 }
@@ -472,6 +475,106 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
+}
+
+void ModuleRenderer3D::DrawSphere()
+{
+	unsigned int sectors = 8;
+	unsigned int rings = 6;
+	float radius = 0.5f;
+	float const R = 1. / (float)(6 - 1);
+	float const S = 1. / (float)(8 - 1);
+	int r, s;
+
+	vertices.resize(rings * sectors * 3);
+
+	std::vector<GLfloat>::iterator v = vertices.begin();
+
+	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) 
+	{
+		float const y = sin(-M_PI_2 + M_PI * r * R);
+		float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
+		float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
+
+		*v++ = x * radius;
+		*v++ = y * radius;
+		*v++ = z * radius;
+	}
+
+	indices.resize(rings * sectors * 4);
+	std::vector<float>::iterator i = indices.begin();
+	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) 
+	{
+		*i++ = r * sectors + s;
+		*i++ = r * sectors + (s + 1);
+		*i++ = (r + 1) * sectors + (s + 1);
+		*i++ = (r + 1) * sectors + s;
+	}
+
+	//index = 0;
+	//glGenBuffers(1, &index);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indices.size(), &indices, GL_STATIC_DRAW);
+
+	glPushMatrix();
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(4, GL_FLOAT, 0, &vertices);
+	glDrawElements(GL_QUADS, indices.size(), GL_FLOAT, &indices);
+	glDisableClientState(GL_VERTEX_ARRAY);
+
+	glPopMatrix();
+}
+
+void ModuleRenderer3D::DrawPyramid()
+{
+	float vertices[15] =
+	{
+		0.0f, 0.0f, 0.0f,  //0
+		1.0f, 0.0f, 0.0f,  //1
+		0.0f, 0.0f, -1.0f, //2
+		1.0f, 0.0f, -1.0f,  //3
+		0.5f, 1.0f, -0.5f  //4
+	};
+
+	int indices[18] =
+	{
+		1,0,2,
+
+		2,3,1,
+
+		0,1,4,
+
+		1,3,4,
+
+		3,2,4,
+
+		2,0,4
+	};	
+	
+	/*int indices[18] =
+	{
+		0,2,3,
+		
+		3,1,2,
+		
+		0,1,4,
+		
+		1,3,4,
+		
+		3,2,4,
+		
+		2,0,4
+	};*/
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 18, indices, GL_STATIC_DRAW);
+	glVertexPointer(3, GL_FLOAT, 0, &vertices);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, NULL);
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void ModuleRenderer3D::AddPrimitive(Primitive* primitive)

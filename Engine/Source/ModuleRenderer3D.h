@@ -47,11 +47,16 @@ public:
 	inline bool* GetWireMode() { return &wireMode; }
 
 	void DrawCubeDirectMode();
+	void DrawSphere();
+	void DrawPyramid();
 
 	void AddPrimitive(Primitive* primitive);
 
 public:
 	std::vector<Primitive*> primitives;
+
+	std::vector<float> indices;
+	std::vector<float> vertices;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
