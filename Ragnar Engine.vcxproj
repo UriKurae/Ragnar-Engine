@@ -110,7 +110,6 @@
     <ClInclude Include="Engine\Source\Color.h" />
     <ClInclude Include="Engine\Source\ConfigurationMenu.h" />
     <ClInclude Include="Engine\Source\ConsoleMenu.h" />
-    <ClInclude Include="Engine\Source\Cylinder.h" />
     <ClInclude Include="Engine\Source\glmath.h" />
     <ClInclude Include="Engine\Source\Globals.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
@@ -142,7 +141,6 @@
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
-    <ClCompile Include="Engine\Source\Cylinder.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
     <ClCompile Include="Engine\Source\Light.cpp" />

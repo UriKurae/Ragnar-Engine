@@ -147,12 +147,20 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	index = 0;
 	glGenBuffers(1, &index);
 
-	cyl = new Cylinder(50, 2.0f, 1.0f);
+	PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
+	primitives.push_back(cube);
+
+	PPyramid* pyramid = new PPyramid({ 4,0,0 }, { 0,0,0 }, { 1,1,1 });
+	primitives.push_back(pyramid);
+	
+	cyl = new PCylinder(50, 2.0f, 1.0f);
+	//primitives.push_back(cyl);
+	
 	// Bind cylinder
-	glGenBuffers(1, &cylinder);
-	glBindBuffer(GL_VERTEX_ARRAY, cylinder);
-	cyl->buildVerticesSmooth();
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* cyl->indices.size(), &cyl->indices, GL_STATIC_DRAW);
+	//glGenBuffers(1, &cylinder);
+	//glBindBuffer(GL_VERTEX_ARRAY, cyl->GetIndexBuffer());
+	//cyl->BuildVerticesSmooth();
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* cyl->indices.size(), &cyl->indices, GL_STATIC_DRAW);
 
 	// Bind Sphere buffer and add data for it
 	sphere = 0;
@@ -160,7 +168,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	DrawSphere(1.0f, 20, 20);
 	glBindBuffer(GL_VERTEX_ARRAY, sphere);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices, GL_STATIC_DRAW);
-
+	
 	return ret;
 }
 
@@ -333,20 +341,16 @@ bool ModuleRenderer3D::Update(float dt)
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-
-	// Uncomment for Pyramid
-	//DrawPyramid();
-
 	return true;
 }
 
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	for (int i = 0; i < primitives.size(); ++i)
-	{
-		primitives[i]->Render();
-	}
+	//for (int i = 0; i < primitives.size(); ++i)
+	//{
+	//	primitives[i]->Draw();
+	//}
 
 	app->editor->Draw();
 
@@ -443,10 +447,10 @@ void ModuleRenderer3D::SetBlending()
 
 void ModuleRenderer3D::SetWireMode()
 {
-	for (int i = 0; i < primitives.size(); ++i)
-	{
-		primitives[i]->wire = wireMode;
-	}
+	//for (int i = 0; i < primitives.size(); ++i)
+	//{
+	//	primitives[i]->wire = wireMode;
+	//}
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()
@@ -574,57 +578,6 @@ void ModuleRenderer3D::DrawSphere(float radius, unsigned int rings, unsigned int
 		*i++ = (r + 1) * sectors + (s + 1);
 		*i++ = (r + 1) * sectors + s;
 	}
-}
-
-void ModuleRenderer3D::DrawPyramid()
-{
-	float vertices[15] =
-	{
-		0.0f, 0.0f, 0.0f,  //0
-		1.0f, 0.0f, 0.0f,  //1
-		0.0f, 0.0f, -1.0f, //2
-		1.0f, 0.0f, -1.0f,  //3
-		0.5f, 1.0f, -0.5f  //4
-	};
-
-	int indices[18] =
-	{
-		1,0,2,
-
-		2,3,1,
-
-		0,1,4,
-
-		1,3,4,
-
-		3,2,4,
-
-		2,0,4
-	};	
-	
-	/*int indices[18] =
-	{
-		0,2,3,
-		
-		3,1,2,
-		
-		0,1,4,
-		
-		1,3,4,
-		
-		3,2,4,
-		
-		2,0,4
-	};*/
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 18, indices, GL_STATIC_DRAW);
-	glVertexPointer(3, GL_FLOAT, 0, &vertices);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, NULL);
-	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void ModuleRenderer3D::AddPrimitive(Primitive* primitive)

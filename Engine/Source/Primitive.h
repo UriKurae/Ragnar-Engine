@@ -1,95 +1,93 @@
-
 #pragma once
-#include "glmath.h"
-#include "Color.h"
 
-enum PrimitiveTypes
-{
-	PRIMITIVE_POINT,
-	PRIMITIVE_LINE,
-	PRIMITIVE_PLANE,
-	PRIMITIVE_CUBE,
-	PRIMITIVE_SPHERE,
-	PRIMITIVE_CYLINDER
-};
+#include "MathGeoLib/src/MathGeoLib.h"
+
+typedef unsigned int GLuint;
+typedef float GLfloat;
 
 class Primitive
 {
 public:
+	Primitive() {}
+	virtual ~Primitive() {}
 
-	Primitive();
+	virtual void Draw() {}
 
-	virtual void	Render() const;
-	virtual void	InnerRender() const;
-	void			SetPos(float x, float y, float z);
-	void			SetRotation(float angle, const Vec3 &u);
-	void			Scale(float x, float y, float z);
-	PrimitiveTypes	GetType() const;
-
-public:
-	
-	Color color;
-	Mat4x4 transform;
-	bool axis, wire;
+	inline GLuint GetIndexBuffer() { return indexBuffer; }
 
 protected:
-	PrimitiveTypes type;
+	float3 transform;
+	float3 rotate;
+	float3 scale;
+
+	GLuint indexBuffer;
 };
 
-// ============================================
-class Cube : public Primitive
+class PCube : public Primitive
 {
-public :
-	Cube();
-	Cube(float sizeX, float sizeY, float sizeZ);
-	void InnerRender() const;
 public:
-	Vec3 size;
+	PCube(float3 t, float3 r, float3 s);
+
+	~PCube();
+
+	void Draw() override;
+
+private:
+	std::vector<GLfloat> indexVertex;
+	std::vector<GLuint> indices;
 };
 
-// ============================================
-class Sphere : public Primitive
+class PPlane : public Primitive
 {
 public:
-	Sphere();
-	Sphere(float radius);
-	void InnerRender() const;
+	PPlane(float3 t, float3 r, float3 s);
+
+	~PPlane();
+
+	void Draw() override;
+};
+
+class PCylinder : public Primitive
+{
 public:
+
+	PCylinder(int sectCount, float h, float rad);
+	~PCylinder();
+
+	std::vector<float> GetUnitCircleVertices();
+
+	void Draw() override;
+
+	void BuildVerticesSmooth();
+
+public:
+
+	int sectorCount;
+	float height;
 	float radius;
+
+	std::vector<GLfloat> vertices;
+	std::vector<GLfloat> normals;
+	std::vector<GLfloat> texCoords;
+	std::vector<GLuint> indices;
 };
 
-// ============================================
-//class Cylinder : public Primitive
-//{
-//public:
-//	Cylinder();
-//	Cylinder(float radius, float height);
-//	void InnerRender() const;
-//public:
-//	float radius;
-//	float height;
-//};
-
-// ============================================
-class Line : public Primitive
+class PPyramid : public Primitive
 {
 public:
-	Line();
-	Line(float x, float y, float z);
-	void InnerRender() const;
-public:
-	Vec3 origin;
-	Vec3 destination;
+	PPyramid(float3 t, float3 r, float3 s);
+
+	~PPyramid();
+
+	void Draw() override;
 };
 
-// ============================================
-class Plane : public Primitive
+class PSphere : public Primitive
 {
 public:
-	Plane();
-	Plane(float x, float y, float z, float d);
-	void InnerRender() const;
-public:
-	Vec3 normal;
-	float constant;
+	PSphere();
+
+	~PSphere();
+
+	void Draw() override;
 };

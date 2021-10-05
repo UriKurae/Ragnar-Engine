@@ -1,6 +1,5 @@
 #pragma once
 #include "Module.h"
-#include "Cylinder.h"
 
 #include "glmath.h"
 #include "Light.h"
@@ -50,7 +49,6 @@ public:
 
 	void DrawCubeDirectMode();
 	void DrawSphere(float radius, unsigned int rings, unsigned int sectors);
-	void DrawPyramid();
 
 	void AddPrimitive(Primitive* primitive);
 
@@ -72,8 +70,7 @@ public:
 	GLuint sphere;
 	GLuint cylinder;
 
-	Cylinder *cyl;
-
+	PCylinder* cyl;
 
 	bool depthTest;
 	bool cullFace;

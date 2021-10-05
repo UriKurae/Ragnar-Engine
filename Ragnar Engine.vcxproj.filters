@@ -72,9 +72,6 @@
     <ClInclude Include="Engine\Source\glmath.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Primitive.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -147,7 +144,7 @@
     <ClInclude Include="Engine\Source\AboutMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Cylinder.h">
+    <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -187,9 +184,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\glmath.cpp">
       <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Primitive.cpp">
-      <Filter>Sources\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
@@ -236,7 +230,7 @@
     <ClCompile Include="Engine\Source\AboutMenu.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Cylinder.cpp">
+    <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>

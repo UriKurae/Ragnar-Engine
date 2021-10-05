@@ -29,10 +29,10 @@ bool ModuleSceneIntro::Start()
 	app->camera->position = Vec3(0.0f, 1.0f, -5.0f);
 	app->camera->LookAt(Vec3(0, 0, 0));
 
-	Plane* p = new Plane(0, 0, 0, 0);
-	p->axis = true;
+	//Plane* p = new Plane(0, 0, 0, 0);
+	//p->axis = true;
 
-	app->renderer3D->AddPrimitive(p);
+	//app->renderer3D->AddPrimitive(p);
 
 
 	return ret;
