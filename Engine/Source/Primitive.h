@@ -3,6 +3,7 @@
 #include "MathGeoLib/src/MathGeoLib.h"
 
 typedef unsigned int GLuint;
+typedef unsigned short GLushort;
 typedef float GLfloat;
 
 class Primitive
@@ -80,14 +81,24 @@ public:
 	~PPyramid();
 
 	void Draw() override;
+
+private:
+	std::vector<GLfloat> vertices;
+	std::vector<GLuint> indices;
 };
 
 class PSphere : public Primitive
 {
 public:
-	PSphere();
+	PSphere(float radius, unsigned int rings, unsigned int sectors);
 
 	~PSphere();
 
 	void Draw() override;
+
+private:
+	std::vector<GLushort> indices;
+	std::vector<GLfloat> vertices;
+	std::vector<GLfloat> normals;
+	std::vector<GLfloat> texCoords;
 };

@@ -6,8 +6,7 @@
 #include "ModuleEditor.h"
 #include "glew/include/GL/glew.h"
 #include "SDL\include\SDL_opengl.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
+
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
@@ -114,8 +113,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 			ret = false;
 		}
 		
-		GLfloat LightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
+		GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
 		
 		lights[0].ref = GL_LIGHT0;
 		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
@@ -123,11 +122,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		lights[0].SetPos(0.0f, 0.0f, 2.5f);
 		lights[0].Init();
 		
-		GLfloat MaterialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
+		GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
 
-		GLfloat MaterialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
+		GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
 		
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
@@ -137,6 +136,27 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		glEnable(GL_COLOR_MATERIAL);
 		glEnable(GL_TEXTURE_2D);
 	}
+
+	// Uncomment for using framebuffer
+	//glGenFramebuffers(1, &framebuffer);
+	//glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+	//GLuint texColorBuffer;
+	//glGenTextures(1, &texColorBuffer);
+	//glBindTexture(GL_TEXTURE_2D, texColorBuffer);
+
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
+
+	//GLuint rboDepthStencil;
+	//glGenRenderbuffers(1, &rboDepthStencil);
+	//glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
+	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+	//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
 
 	// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
@@ -150,24 +170,14 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
 	primitives.push_back(cube);
 
-	PPyramid* pyramid = new PPyramid({ 4,0,0 }, { 0,0,0 }, { 1,1,1 });
-	primitives.push_back(pyramid);
+	//PPyramid* pyramid = new PPyramid({ 0,0,0 }, { 0,0,0 }, { 1,1,1 });
+	//primitives.push_back(pyramid);
 	
-	cyl = new PCylinder(50, 2.0f, 1.0f);
+	//PCylinder* cyl = new PCylinder(50, 2.0f, 1.0f);
 	//primitives.push_back(cyl);
 	
-	// Bind cylinder
-	//glGenBuffers(1, &cylinder);
-	//glBindBuffer(GL_VERTEX_ARRAY, cyl->GetIndexBuffer());
-	//cyl->BuildVerticesSmooth();
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* cyl->indices.size(), &cyl->indices, GL_STATIC_DRAW);
-
-	// Bind Sphere buffer and add data for it
-	sphere = 0;
-	glGenBuffers(1, &sphere);
-	DrawSphere(1.0f, 20, 20);
-	glBindBuffer(GL_VERTEX_ARRAY, sphere);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices, GL_STATIC_DRAW);
+	//PSphere* sphere = new PSphere(1.0f, 20, 20);
+	//primitives.push_back(sphere);
 	
 	return ret;
 }
@@ -269,77 +279,6 @@ bool ModuleRenderer3D::Update(float dt)
 	//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	//glDisableClientState(GL_VERTEX_ARRAY);
-	
-	// Uncomment for Index array	
-	/*GLfloat indexVertex[24] =
-	{
-		1.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		0.0f, 1.0f,-1.0f,
-		0.0f, 0.0f,-1.0f
-	};
-
-	GLuint indices[36] =
-	{
-		0,1,2,
-		2,3,0,
-
-		0,3,4,
-		4,5,0,
-
-		0,5,6,
-		6,1,0,
-
-		7,6,5,
-		5,4,7,
-
-		7,2,1,
-		1,6,7,
-
-		7,4,3,
-		3,2,7
-	};
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 36, indices, GL_STATIC_DRAW);
-	glVertexPointer(3, GL_FLOAT, 0, &indexVertex);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-	glDisableClientState(GL_VERTEX_ARRAY);*/
-	
-
-	// Uncomment for Sphere
-	/*glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
-	glNormalPointer(GL_FLOAT, 0, &normals[0]);
-	glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
-	glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	glVertexPointer(3, GL_FLOAT, 0, &cyl->vertices[0]);
-	glNormalPointer(GL_FLOAT, 0, &cyl->normals[0]);
-	glTexCoordPointer(2, GL_FLOAT, 0, &cyl->texCoords[0]);
-	glDrawElements(GL_TRIANGLES, cyl->indices.size(), GL_UNSIGNED_INT, &cyl->indices[0]);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	return true;
 }
@@ -347,11 +286,15 @@ bool ModuleRenderer3D::Update(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	//for (int i = 0; i < primitives.size(); ++i)
-	//{
-	//	primitives[i]->Draw();
-	//}
+	//glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
+	for (int i = 0; i < primitives.size(); ++i)
+	{
+		primitives[i]->Draw();
+	}
+
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	
 	app->editor->Draw();
 
 	SDL_GL_SwapWindow(app->window->window);
@@ -368,6 +311,8 @@ bool ModuleRenderer3D::CleanUp()
 	{
 		RELEASE(primitives[i]);
 	}
+
+	glDeleteFramebuffers(1, &framebuffer);
 
 	primitives.clear();
 
@@ -521,63 +466,6 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
-}
-
-void ModuleRenderer3D::DrawSphere(float radius, unsigned int rings, unsigned int sectors)
-{
-	float const R = 1. / (float)(rings - 1);
-	float const S = 1. / (float)(sectors - 1);
-	int r, s;
-
-	vertices.resize(rings * sectors * 3);
-	normals.resize(rings * sectors * 3);
-	texcoords.resize(rings * sectors * 3);
-
-	std::vector<GLfloat>::iterator v = vertices.begin();
-	std::vector<GLfloat>::iterator n = normals.begin();
-	std::vector<GLfloat>::iterator t = texcoords.begin();
-	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) {
-		float const y = sin(-M_PI_2 + M_PI * r * R);
-		float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
-		float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
-
-	/*	texcoords.push_back(s * S);
-		texcoords.push_back(r * R);
-
-		vertices.push_back(x * radius);
-		vertices.push_back(y * radius);
-		vertices.push_back(z * radius);
-
-		normals.push_back(x);
-		normals.push_back(y);
-		normals.push_back(z);*/
-	
-		*t++ = s * S;
-		*t++ = r * R;
-
-		*v++ = x * radius;
-		*v++ = y * radius;
-		*v++ = z * radius;
-
-		*n++ = x;
-		*n++ = y;
-		*n++ = z;
-	}
-
-	indices.resize(rings * sectors * 4);
-	std::vector<GLushort>::iterator i = indices.begin();
-	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) {
-		
-		/*indices.push_back(r * sectors + s);
-		indices.push_back(r * sectors + (s + 1));
-		indices.push_back((r + 1) * sectors + (s + 1));
-		indices.push_back((r + 1) * sectors + s);*/
-		
-		*i++ = r * sectors + s;
-		*i++ = r * sectors + (s + 1);
-		*i++ = (r + 1) * sectors + (s + 1);
-		*i++ = (r + 1) * sectors + s;
-	}
 }
 
 void ModuleRenderer3D::AddPrimitive(Primitive* primitive)

@@ -48,7 +48,6 @@ public:
 	inline bool* GetWireMode() { return &wireMode; }
 
 	void DrawCubeDirectMode();
-	void DrawSphere(float radius, unsigned int rings, unsigned int sectors);
 
 	void AddPrimitive(Primitive* primitive);
 
@@ -67,10 +66,8 @@ public:
 
 	GLuint cubeId;
 	GLuint index;
-	GLuint sphere;
-	GLuint cylinder;
 
-	PCylinder* cyl;
+	GLuint framebuffer;
 
 	bool depthTest;
 	bool cullFace;
