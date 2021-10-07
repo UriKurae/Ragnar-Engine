@@ -3,137 +3,141 @@
 #include "glew/include/GL/glew.h"
 #include "glmath.h"
 
-PCube::PCube(float3 t, float3 r, float3 s)
+PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 {
 	transform = t;
 	rotate = r;
 	scale = s;
 
-	indexVertex.push_back(transform.x + scale.x);
-	indexVertex.push_back(transform.y + scale.y);
-	indexVertex.push_back(transform.z);
+	//indexVertex.push_back(transform.x + scale.x);
+	//indexVertex.push_back(transform.y + scale.y);
+	//indexVertex.push_back(transform.z);
+	//
+	//indexVertex.push_back(transform.x);
+	//indexVertex.push_back(transform.y + scale.y);
+	//indexVertex.push_back(transform.z);
+	//
+	//indexVertex.push_back(transform.x);
+	//indexVertex.push_back(transform.y);
+	//indexVertex.push_back(transform.z);
+	//
+	//indexVertex.push_back(transform.x + scale.x);
+	//indexVertex.push_back(transform.y);
+	//indexVertex.push_back(transform.z);
+	//	
+	//indexVertex.push_back(transform.x + scale.x);
+	//indexVertex.push_back(transform.y);
+	//indexVertex.push_back(-(transform.z + scale.z));
+	//	
+	//indexVertex.push_back(transform.x + scale.x);
+	//indexVertex.push_back(transform.y + scale.y);
+	//indexVertex.push_back(-(transform.z + scale.z));
+	//		
+	//indexVertex.push_back(transform.x);
+	//indexVertex.push_back(transform.y + scale.y);
+	//indexVertex.push_back(-(transform.z + scale.z));
+	//			
+	//indexVertex.push_back(transform.x);
+	//indexVertex.push_back(transform.y);
+	//indexVertex.push_back(-(transform.z + scale.z));
+
+
+	//indices.push_back(0);
+	//indices.push_back(1);
+	//indices.push_back(2);
+	//indices.push_back(2);
+	//indices.push_back(3);
+	//indices.push_back(0);
+	//indices.push_back(0);
+	//indices.push_back(3);
+	//indices.push_back(4);
+	//indices.push_back(4);
+	//indices.push_back(5);
+	//indices.push_back(0);
+	//indices.push_back(0);
+	//indices.push_back(5);
+	//indices.push_back(6);
+	//indices.push_back(6);
+	//indices.push_back(1);
+	//indices.push_back(0);
+	//indices.push_back(7);
+	//indices.push_back(6);
+	//indices.push_back(5);
+	//indices.push_back(5);
+	//indices.push_back(4);
+	//indices.push_back(7);
+	//indices.push_back(7);
+	//indices.push_back(2);
+	//indices.push_back(1);
+	//indices.push_back(1);
+	//indices.push_back(6);
+	//indices.push_back(7);
+	//indices.push_back(7);
+	//indices.push_back(4);
+	//indices.push_back(3);
+	//indices.push_back(3);
+	//indices.push_back(2);
+	//indices.push_back(7);
+
+	GLfloat indexVertex[24] =
+	{
+		1.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		1.0f, 0.0f,-1.0f,
+		1.0f, 1.0f,-1.0f,
+		0.0f, 1.0f,-1.0f,
+		0.0f, 0.0f,-1.0f
+	};
+
+	GLuint indices[36] =
+	{
+		0,1,2,
+		2,3,0,
+
+		0,3,4,
+		4,5,0,
+
+		0,5,6,
+		6,1,0,
+
+		7,6,5,
+		5,4,7,
+
+		7,2,1,
+		1,6,7,
+
+		7,4,3,
+		3,2,7
+	};
+
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
 	
-	indexVertex.push_back(transform.x);
-	indexVertex.push_back(transform.y + scale.y);
-	indexVertex.push_back(transform.z);
+	vertex = new VertexBuffer(indexVertex, 24 * sizeof(GLfloat));
 	
-	indexVertex.push_back(transform.x);
-	indexVertex.push_back(transform.y);
-	indexVertex.push_back(transform.z);
-	
-	indexVertex.push_back(transform.x + scale.x);
-	indexVertex.push_back(transform.y);
-	indexVertex.push_back(transform.z);
-		
-	indexVertex.push_back(transform.x + scale.x);
-	indexVertex.push_back(transform.y);
-	indexVertex.push_back(-(transform.z + scale.z));
-		
-	indexVertex.push_back(transform.x + scale.x);
-	indexVertex.push_back(transform.y + scale.y);
-	indexVertex.push_back(-(transform.z + scale.z));
-			
-	indexVertex.push_back(transform.x);
-	indexVertex.push_back(transform.y + scale.y);
-	indexVertex.push_back(-(transform.z + scale.z));
-				
-	indexVertex.push_back(transform.x);
-	indexVertex.push_back(transform.y);
-	indexVertex.push_back(-(transform.z + scale.z));
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
 
-
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(2);
-	indices.push_back(3);
-	indices.push_back(0);
-	indices.push_back(0);
-	indices.push_back(3);
-	indices.push_back(4);
-	indices.push_back(4);
-	indices.push_back(5);
-	indices.push_back(0);
-	indices.push_back(0);
-	indices.push_back(5);
-	indices.push_back(6);
-	indices.push_back(6);
-	indices.push_back(1);
-	indices.push_back(0);
-	indices.push_back(7);
-	indices.push_back(6);
-	indices.push_back(5);
-	indices.push_back(5);
-	indices.push_back(4);
-	indices.push_back(7);
-	indices.push_back(7);
-	indices.push_back(2);
-	indices.push_back(1);
-	indices.push_back(1);
-	indices.push_back(6);
-	indices.push_back(7);
-	indices.push_back(7);
-	indices.push_back(4);
-	indices.push_back(3);
-	indices.push_back(3);
-	indices.push_back(2);
-	indices.push_back(7);
-
-	indexBuffer = 0;
-    glGenBuffers(1, &indexBuffer);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(indices[0]), indices.data(), GL_STATIC_DRAW);
-    glVertexPointer(3, GL_FLOAT, 0, &indexVertex[0]);
+	index = new IndexBuffer(indices, 36);
 }
 
 PCube::~PCube()
 {
-    glDeleteBuffers(1, &indexBuffer);
 }
 
 void PCube::Draw()
 {
-	//GLfloat indexVertex[24] =
-	//{
-	//	1.0f, 1.0f, 0.0f,
-	//	0.0f, 1.0f, 0.0f,
-	//	0.0f, 0.0f, 0.0f,
-	//	1.0f, 0.0f, 0.0f,
-	//	1.0f, 0.0f,-1.0f,
-	//	1.0f, 1.0f,-1.0f,
-	//	0.0f, 1.0f,-1.0f,
-	//	0.0f, 0.0f,-1.0f
-	//};
-
-	//GLuint indices[36] =
-	//{
-	//	0,1,2,
-	//	2,3,0,
-
-	//	0,3,4,
-	//	4,5,0,
-
-	//	0,5,6,
-	//	6,1,0,
-
-	//	7,6,5,
-	//	5,4,7,
-
-	//	7,2,1,
-	//	1,6,7,
-
-	//	7,4,3,
-	//	3,2,7
-	//};
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, NULL);
+	glBindVertexArray(vao);
+	index->Bind();
+	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	index->Unbind();
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-PPlane::PPlane(float3 t, float3 r, float3 s)
+PPlane::PPlane(float3 t, float3 r, float3 s) : Primitive()
 {
 	transform = t;
 	rotate = r;
@@ -142,7 +146,7 @@ PPlane::PPlane(float3 t, float3 r, float3 s)
 
 PPlane::~PPlane()
 {
-    glDeleteBuffers(1, &indexBuffer);
+    /*glDeleteBuffers(1, &indexBuffer);*/
 }
 
 void PPlane::Draw()
@@ -152,20 +156,26 @@ void PPlane::Draw()
 
 PCylinder::PCylinder(int sectCount, float h, float rad) : sectorCount(sectCount), height(h), radius(rad)
 {
-    indexBuffer = 0;
-    glGenBuffers(1, &indexBuffer);
-
-	glBindBuffer(GL_VERTEX_ARRAY, indexBuffer);
 	BuildVerticesSmooth();
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(indices[0]), indices.data(), GL_STATIC_DRAW);
-	glVertexPointer(3, GL_FLOAT, 0, vertices.data());
-	glNormalPointer(GL_FLOAT, 0, normals.data());
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoords.data());
+	
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	vertex = new VertexBuffer(vertices.data(), vertices.size() * sizeof(GLfloat));
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+
+	index = new IndexBuffer(indices.data(), indices.size());
+
+	//glVertexPointer(3, GL_FLOAT, 0, vertices.data());
+	//glNormalPointer(GL_FLOAT, 0, normals.data());
+	//glTexCoordPointer(2, GL_FLOAT, 0, texCoords.data());
 }
 
 PCylinder::~PCylinder()
 {
-    glDeleteBuffers(1, &indexBuffer);
+/*   glDeleteBuffers(1, &indexBuffer);*/
 }
 
 std::vector<float> PCylinder::GetUnitCircleVertices()
@@ -188,13 +198,15 @@ std::vector<float> PCylinder::GetUnitCircleVertices()
 
 void PCylinder::Draw()
 {
-	glBindBuffer(GL_VERTEX_ARRAY, indexBuffer);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, NULL);
-
+	
+	glBindVertexArray(vao);
+	index->Bind();
+	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	index->Unbind();
+	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -325,13 +337,37 @@ void PCylinder::BuildVerticesSmooth()
     }
 }
 
-PPyramid::PPyramid(float3 t, float3 r, float3 s)
+PPyramid::PPyramid(float3 t, float3 r, float3 s) : Primitive()
 {
 	transform = t;
 	rotate = r;
 	scale = s;
 
-	vertices.push_back(transform.x);
+	float vertices[15] =
+	{
+		transform.x, transform.y, transform.z,  //0
+		transform.x + scale.x, transform.y, transform.z,  //1
+		transform.x, transform.y, -(transform.z + scale.z), //2
+		transform.x + scale.x, transform.y, -(transform.z + scale.z),  //3
+		transform.x + (scale.x / 2), transform.y + scale.y, -(transform.z + (scale.z / 2))  //4
+	};
+
+	unsigned int indices[18] =
+	{
+		1,0,2,
+
+		2,3,1,
+
+		0,1,4,
+
+		1,3,4,
+
+		3,2,4,
+
+		2,0,4
+	};
+
+	/*vertices.push_back(transform.x);
 	vertices.push_back(transform.y);
 	vertices.push_back(transform.z);
 
@@ -374,52 +410,36 @@ PPyramid::PPyramid(float3 t, float3 r, float3 s)
 
 	indices.push_back(2);
 	indices.push_back(0);
-	indices.push_back(4);
+	indices.push_back(4);*/
 
-    glGenBuffers(1, &indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(indices[0]), indices.data(), GL_STATIC_DRAW);
-	glVertexPointer(3, GL_FLOAT, 0, vertices.data());
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	vertex = new VertexBuffer(vertices, 15 * sizeof(GLfloat));
+
+	//glVertexPointer(3, GL_FLOAT, 0, vertices);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+	
+	index = new IndexBuffer(indices, 18);
 }
 
 PPyramid::~PPyramid()
 {
-    glDeleteBuffers(1, &indexBuffer);
+    //glDeleteBuffers(1, &indexBuffer);
 }
 
 void PPyramid::Draw()
 {
-	//float vertices[15] =
-	//{
-	//	transform.x, transform.y, transform.z,  //0
-	//	transform.x + scale.x, transform.y, transform.z,  //1
-	//	transform.x, transform.y, -(transform.z + scale.z), //2
-	//	transform.x + scale.x, transform.y, -(transform.z + scale.z),  //3
-	//	transform.x + (scale.x / 2), transform.y + scale.y, -(transform.z + (scale.z / 2))  //4
-	//};
-
-	//int indices[18] =
-	//{
-	//	1,0,2,
-
-	//	2,3,1,
-
-	//	0,1,4,
-
-	//	1,3,4,
-
-	//	3,2,4,
-
-	//	2,0,4
-	//};
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, NULL);
+	glBindVertexArray(vao);
+	index->Bind();
+	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	index->Unbind();
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-PSphere::PSphere(float radius, unsigned int rings, unsigned int sectors)
+PSphere::PSphere(float radius, unsigned int rings, unsigned int sectors) : Primitive() 
 {
 	float const R = 1. / (float)(rings - 1);
 	float const S = 1. / (float)(sectors - 1);
@@ -466,19 +486,30 @@ PSphere::PSphere(float radius, unsigned int rings, unsigned int sectors)
 		}
 	}
 
-	indexBuffer = 0;
-	glGenBuffers(1, &indexBuffer);
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
 
-	glBindBuffer(GL_VERTEX_ARRAY, indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), indices.data(), GL_STATIC_DRAW);
-	glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
-	glNormalPointer(GL_FLOAT, 0, &normals[0]);
-	glTexCoordPointer(2, GL_FLOAT, 0, &texCoords[0]);
+	vertex = new VertexBuffer(vertices.data(), vertices.size() * sizeof(GLfloat));
+
+	//glVertexPointer(3, GL_FLOAT, 0, vertices);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+
+	index = new IndexBuffer(indices.data(), indices.size());
+
+	//indexBuffer = 0;
+	//glGenBuffers(1, &indexBuffer);
+
+	//glBindBuffer(GL_VERTEX_ARRAY, indexBuffer);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), indices.data(), GL_STATIC_DRAW);
+	//glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+	//glNormalPointer(GL_FLOAT, 0, &normals[0]);
+	//glTexCoordPointer(2, GL_FLOAT, 0, &texCoords[0]);
 }
 
 PSphere::~PSphere()
 {
-	glDeleteBuffers(1, &indexBuffer);
+	//glDeleteBuffers(1, &indexBuffer);
 }
 
 void PSphere::Draw()
@@ -487,8 +518,10 @@ void PSphere::Draw()
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glBindBuffer(GL_VERTEX_ARRAY, indexBuffer);
-	glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
+	glBindVertexArray(vao);
+	index->Bind();
+	glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, indices.data());
+	index->Unbind();
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);

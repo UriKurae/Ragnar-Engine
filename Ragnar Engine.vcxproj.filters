@@ -147,6 +147,8 @@
     <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\VertexBuffer.h" />
+    <ClInclude Include="Engine\Source\IndexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -233,5 +235,7 @@
     <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
+    <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
   </ItemGroup>
 </Project>

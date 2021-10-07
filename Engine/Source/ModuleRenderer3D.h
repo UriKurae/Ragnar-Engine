@@ -68,6 +68,7 @@ public:
 	GLuint index;
 
 	GLuint framebuffer;
+	GLuint rboDepthStencil;
 
 	bool depthTest;
 	bool cullFace;

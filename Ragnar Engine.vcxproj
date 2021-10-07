@@ -112,6 +112,7 @@
     <ClInclude Include="Engine\Source\ConsoleMenu.h" />
     <ClInclude Include="Engine\Source\glmath.h" />
     <ClInclude Include="Engine\Source\Globals.h" />
+    <ClInclude Include="Engine\Source\IndexBuffer.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
     <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
+    <ClInclude Include="Engine\Source\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
@@ -142,6 +144,7 @@
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />
+    <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
     <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
@@ -155,6 +158,7 @@
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
+    <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

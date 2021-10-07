@@ -1,6 +1,8 @@
 #pragma once
 
 #include "MathGeoLib/src/MathGeoLib.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 typedef unsigned int GLuint;
 typedef unsigned short GLushort;
@@ -9,19 +11,22 @@ typedef float GLfloat;
 class Primitive
 {
 public:
-	Primitive() {}
+	Primitive() : vao(0) {}
 	virtual ~Primitive() {}
 
 	virtual void Draw() {}
 
-	inline GLuint GetIndexBuffer() { return indexBuffer; }
+	//inline GLuint GetIndexBuffer() { return indexBuffer; }
 
 protected:
 	float3 transform;
 	float3 rotate;
 	float3 scale;
 
-	GLuint indexBuffer;
+	VertexBuffer* vertex;
+	IndexBuffer* index;
+
+	unsigned int vao;
 };
 
 class PCube : public Primitive
@@ -46,6 +51,8 @@ public:
 	~PPlane();
 
 	void Draw() override;
+
+private:
 };
 
 class PCylinder : public Primitive
@@ -85,6 +92,7 @@ public:
 private:
 	std::vector<GLfloat> vertices;
 	std::vector<GLuint> indices;
+
 };
 
 class PSphere : public Primitive
@@ -101,4 +109,5 @@ private:
 	std::vector<GLfloat> vertices;
 	std::vector<GLfloat> normals;
 	std::vector<GLfloat> texCoords;
+
 };
