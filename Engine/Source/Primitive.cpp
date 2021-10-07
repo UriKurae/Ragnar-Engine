@@ -117,10 +117,10 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	
 	vertex = new VertexBuffer(indexVertex, 24 * sizeof(GLfloat));
 	
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
-
 	index = new IndexBuffer(indices, 36);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+	glEnableVertexAttribArray(0);
 }
 
 PCube::~PCube()
@@ -129,12 +129,16 @@ PCube::~PCube()
 
 void PCube::Draw()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
+	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glBindVertexArray(vao);
 	index->Bind();
 	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
 	index->Unbind();
-	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);*/
+
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	glBindVertexArray(0);
 }
 
 PPlane::PPlane(float3 t, float3 r, float3 s) : Primitive()
@@ -162,11 +166,10 @@ PCylinder::PCylinder(int sectCount, float h, float rad) : sectorCount(sectCount)
 	glBindVertexArray(vao);
 
 	vertex = new VertexBuffer(vertices.data(), vertices.size() * sizeof(GLfloat));
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
-
 	index = new IndexBuffer(indices.data(), indices.size());
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+	glEnableVertexAttribArray(0);
 
 	//glVertexPointer(3, GL_FLOAT, 0, vertices.data());
 	//glNormalPointer(GL_FLOAT, 0, normals.data());
@@ -198,18 +201,9 @@ std::vector<float> PCylinder::GetUnitCircleVertices()
 
 void PCylinder::Draw()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	
 	glBindVertexArray(vao);
-	index->Bind();
 	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
-	index->Unbind();
-	
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glBindVertexArray(0);
 }
 
 void PCylinder::BuildVerticesSmooth()
@@ -416,12 +410,12 @@ PPyramid::PPyramid(float3 t, float3 r, float3 s) : Primitive()
 	glBindVertexArray(vao);
 
 	vertex = new VertexBuffer(vertices, 15 * sizeof(GLfloat));
-
-	//glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
-	
 	index = new IndexBuffer(indices, 18);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+	glEnableVertexAttribArray(0);
+	
+	
 }
 
 PPyramid::~PPyramid()
@@ -431,12 +425,16 @@ PPyramid::~PPyramid()
 
 void PPyramid::Draw()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
+	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glBindVertexArray(vao);
 	index->Bind();
 	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
 	index->Unbind();
-	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);*/
+
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	glBindVertexArray(0);
 }
 
 PSphere::PSphere(float radius, unsigned int rings, unsigned int sectors) : Primitive() 
@@ -490,12 +488,11 @@ PSphere::PSphere(float radius, unsigned int rings, unsigned int sectors) : Primi
 	glBindVertexArray(vao);
 
 	vertex = new VertexBuffer(vertices.data(), vertices.size() * sizeof(GLfloat));
-
-	//glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
-
 	index = new IndexBuffer(indices.data(), indices.size());
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+	glEnableVertexAttribArray(0);
+
 
 	//indexBuffer = 0;
 	//glGenBuffers(1, &indexBuffer);
@@ -514,7 +511,7 @@ PSphere::~PSphere()
 
 void PSphere::Draw()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
+	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
@@ -525,5 +522,9 @@ void PSphere::Draw()
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
+
+	glBindVertexArray(vao);
+	glDrawElements(GL_QUADS, indices.size(), GL_UNSIGNED_SHORT, NULL);
+	glBindVertexArray(0);
 }

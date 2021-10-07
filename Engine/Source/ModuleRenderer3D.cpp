@@ -177,11 +177,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
 	primitives.push_back(pyramid);
 	
-	//PCylinder* cyl = new PCylinder(50, 2.0f, 1.0f);
-	//primitives.push_back(cyl);
+	PCylinder* cyl = new PCylinder(50, 2.0f, 1.0f);
+	primitives.push_back(cyl);
 	
-	//PSphere* sphere = new PSphere(1.0f, 20, 20);
-	//primitives.push_back(sphere);
+	PSphere* sphere = new PSphere(1.0f, 20, 20);
+	primitives.push_back(sphere);
 	
 	return ret;
 }
@@ -396,10 +396,8 @@ void ModuleRenderer3D::SetBlending()
 
 void ModuleRenderer3D::SetWireMode()
 {
-	//for (int i = 0; i < primitives.size(); ++i)
-	//{
-	//	primitives[i]->wire = wireMode;
-	//}
+	if (wireMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()
