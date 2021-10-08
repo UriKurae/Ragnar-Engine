@@ -2,6 +2,7 @@
 
 #include "glew/include/GL/glew.h"
 #include "glmath.h"
+#include "Globals.h"
 
 PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 {
@@ -121,6 +122,7 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
 	glEnableVertexAttribArray(0);
+
 }
 
 PCube::~PCube()

@@ -32,8 +32,10 @@ bool ModuleInput::Init(JsonParsing& node)
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
-		ret = false;
+		return false;
 	}
+
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 
 	return ret;
 }
@@ -129,6 +131,7 @@ bool ModuleInput::PreUpdate(float dt)
 
 	bool quit = false;
 	SDL_Event e;
+	
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
@@ -143,6 +146,14 @@ bool ModuleInput::PreUpdate(float dt)
 
 			mouseXMotion = e.motion.xrel / SCREEN_SIZE;
 			mouseYMotion = e.motion.yrel / SCREEN_SIZE;
+			break;
+
+			case SDL_DROPFILE:
+			{
+				const char* filePath = e.drop.file;
+				app->renderer3D->InitMesh(filePath);
+				SDL_free(&filePath);
+			}	
 			break;
 
 			case SDL_QUIT:

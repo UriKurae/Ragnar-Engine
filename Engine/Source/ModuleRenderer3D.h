@@ -53,7 +53,7 @@ public:
 
 	void AddPrimitive(Primitive* primitive);
 
-	void InitMesh();
+	void InitMesh(const char* filePath);
 	void DrawMesh();
 
 public:

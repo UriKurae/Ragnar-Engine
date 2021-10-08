@@ -183,7 +183,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//PSphere* sphere = new PSphere(1.0f, 20, 20);
 	//primitives.push_back(sphere);
 
-	InitMesh();
+	//InitMesh();
 	
 	return ret;
 }
@@ -479,9 +479,9 @@ void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
 	primitives.push_back(primitive);
 }
 
-void ModuleRenderer3D::InitMesh()
+void ModuleRenderer3D::InitMesh(const char* filePath)
 {
-	fbx.LoadMesh("Assets/warrior.fbx");
+	fbx.LoadMesh(filePath);
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -492,6 +492,8 @@ void ModuleRenderer3D::InitMesh()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
+	glEnableVertexAttribArray(1);
 }
 
 void ModuleRenderer3D::DrawMesh()
