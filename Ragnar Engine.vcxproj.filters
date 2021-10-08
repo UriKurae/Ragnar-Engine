@@ -149,6 +149,7 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
+    <ClInclude Include="Engine\Source\LoadFBX.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
@@ -237,5 +238,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
+    <ClCompile Include="Engine\Source\LoadFBX.cpp" />
   </ItemGroup>
 </Project>

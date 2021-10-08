@@ -171,17 +171,19 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//index = 0;
 	//glGenBuffers(1, &index);
 
-	PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
-	primitives.push_back(cube);
+	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
+	//primitives.push_back(cube);
 
-	PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
-	primitives.push_back(pyramid);
-	
-	PCylinder* cyl = new PCylinder(50, 2.0f, 1.0f);
-	primitives.push_back(cyl);
-	
-	PSphere* sphere = new PSphere(1.0f, 20, 20);
-	primitives.push_back(sphere);
+	//PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
+	//primitives.push_back(pyramid);
+	//
+	//PCylinder* cyl = new PCylinder(50, 2.0f, 1.0f);
+	//primitives.push_back(cyl);
+	//
+	//PSphere* sphere = new PSphere(1.0f, 20, 20);
+	//primitives.push_back(sphere);
+
+	InitMesh();
 	
 	return ret;
 }
@@ -296,6 +298,8 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		primitives[i]->Draw();
 	}
+
+	DrawMesh();
 
 	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	
@@ -473,4 +477,26 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
 {
 	primitives.push_back(primitive);
+}
+
+void ModuleRenderer3D::InitMesh()
+{
+	fbx.LoadMesh("Assets/warrior.fbx");
+
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	fbxVertex = new VertexBuffer(fbx.GetMesh().vertices, fbx.GetMesh().numVertex * sizeof(float3));
+
+	fbxIndex = new IndexBuffer(fbx.GetMesh().indices, fbx.GetMesh().numIndex);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
+	glEnableVertexAttribArray(0);
+}
+
+void ModuleRenderer3D::DrawMesh()
+{
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, fbx.GetMesh().numIndex, GL_UNSIGNED_INT, NULL);
+	glBindVertexArray(0);
 }

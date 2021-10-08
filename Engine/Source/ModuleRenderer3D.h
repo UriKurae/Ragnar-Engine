@@ -8,6 +8,8 @@
 #include "Primitive.h"
 #include "glew/include/GL/glew.h"
 
+#include "LoadFBX.h"
+
 #define MAX_LIGHTS 8
 
 typedef unsigned int GLuint;
@@ -51,6 +53,9 @@ public:
 
 	void AddPrimitive(Primitive* primitive);
 
+	void InitMesh();
+	void DrawMesh();
+
 public:
 	std::vector<Primitive*> primitives;
 
@@ -63,6 +68,12 @@ public:
 	SDL_GLContext context;
 	Mat3x3 normalMatrix;
 	Mat4x4 modelMatrix, viewMatrix, projectionMatrix;
+
+	LoadFBX fbx;
+
+	GLuint vao;
+	IndexBuffer* fbxIndex;
+	VertexBuffer* fbxVertex;
 
 	GLuint cubeId;
 	GLuint index;
