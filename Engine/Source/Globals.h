@@ -22,6 +22,11 @@ void Log(const char file[], int line, const char* format, ...);
        }\
     }
 
+// Folders defines
+#define ASSETS_FOLDER "/Assets/"
+#define SETTINGS_FOLDER "/Settings/"
+#define MODELS_FOLDER "/Models/"
+
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\
 	{\

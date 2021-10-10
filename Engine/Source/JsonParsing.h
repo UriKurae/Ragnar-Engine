@@ -6,7 +6,10 @@ class JsonParsing
 {
 public:
 	JsonParsing();
+	JsonParsing(const char* string);
 	~JsonParsing();
+
+	size_t Save(char** buf);
 
 	JSON_Object* SetNewJsonNode(JSON_Object* parent, const char* nodeName) const;
 	JSON_Status SetNewJsonString(JSON_Object* node, const char* name, const char* string) const;

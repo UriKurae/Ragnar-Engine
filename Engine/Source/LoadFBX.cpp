@@ -7,14 +7,10 @@
 
 LoadFBX::LoadFBX()
 {
-	aiLogStream stream;
-	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
-	aiAttachLogStream(&stream);
 }
 
 LoadFBX::~LoadFBX()
 {
-	aiDetachAllLogStreams();
 }
 
 void LoadFBX::LoadMesh(const char* path)

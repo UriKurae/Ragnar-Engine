@@ -22,6 +22,8 @@ MainMenuBar::~MainMenuBar()
 
 bool MainMenuBar::Update(float dt)
 {
+	ImGui::DockSpaceOverViewport();
+
 	if (ImGui::BeginMainMenuBar())
 	{
 		bool ret = false;
@@ -52,6 +54,10 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem("Redo", "Ctrl + Y", &ret);
 			ImGui::EndMenu();
 		}
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip("Opens the edit menu");
+		}
 
 		if (ImGui::BeginMenu("Window"))
 		{
@@ -59,6 +65,10 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem("Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
 
 			ImGui::EndMenu();
+		}
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip("Opens the window menu");
 		}
 
 		if (ImGui::BeginMenu("View"))
@@ -97,6 +107,10 @@ bool MainMenuBar::Update(float dt)
 			}
 			ImGui::EndMenu();
 		}
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip("Opens the view menu");
+		}
 
 		if (ImGui::BeginMenu("Help"))
 		{
@@ -115,6 +129,10 @@ bool MainMenuBar::Update(float dt)
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/releases");
 			}
 			ImGui::EndMenu();
+		}
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip("Opens the help menu");
 		}
 
 		ImGui::EndMainMenuBar();

@@ -1,4 +1,7 @@
 #include "ConsoleMenu.h"
+#include "Application.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
 
 #include "mmgr/mmgr.h"
 
@@ -6,6 +9,7 @@ ConsoleMenu::ConsoleMenu() : Menu(true)
 {
 	scrollToBottom = false;
 	console = true;
+	collapsed = false;
 }
 
 ConsoleMenu::~ConsoleMenu()
@@ -15,6 +19,14 @@ ConsoleMenu::~ConsoleMenu()
 
 bool ConsoleMenu::Update(float dt)
 {
+	bool ret = false;
+
+	//if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && 
+	//	app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+	//{
+	//	collapsed = !collapsed;
+	//	ImGui::SetNextWindowCollapsed(collapsed);
+	//}
 
 	ImGui::Begin("Console", &active);
 	ImGui::TextUnformatted(buf.begin());

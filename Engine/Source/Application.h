@@ -14,8 +14,11 @@ class ModuleSceneIntro;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
+class FileSystem;
 
 #define CONFIG_FILENAME	"config.json"
+#define APPLICATION_NAME "Ragnar Engine"
+#define ORGANIZATION_NAME "Yggdrasil Studios"
 
 class Application
 {
@@ -38,10 +41,16 @@ public:
 
 	inline void ResizeRequest() { resizeRequested = true; }
 
+	inline const char* GetAppName() const { return APPLICATION_NAME; }
+	inline const char* GetOrganizationName() const { return ORGANIZATION_NAME; }
+
 private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
+	void ReadConfiguration(JsonParsing& node);
+	void SaveConfiguration(JsonParsing& node);
 
 	void SaveConfig();
 	void LoadConfig();
@@ -52,6 +61,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
+	FileSystem* fs;
 
 	JsonParsing jsonFile;
 

@@ -5,11 +5,27 @@
 
 JsonParsing::JsonParsing()
 {
-	rootObject = nullptr;
+	rootObject = json_value_init_object();
+}
+
+JsonParsing::JsonParsing(const char* string)
+{
+	if (string != nullptr)
+	{
+		rootObject = json_parse_string(string);
+	}
 }
 
 JsonParsing::~JsonParsing()
 {
+}
+
+size_t JsonParsing::Save(char** buf)
+{
+	size_t written = json_serialization_size(rootObject);
+	*buf = new char[written];
+	json_serialize_to_buffer(rootObject, *buf, written);
+	return written;
 }
 
 JSON_Value* JsonParsing::InitObject()

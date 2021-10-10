@@ -5,6 +5,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "FileSystem.h"
 
 #include "mmgr/mmgr.h"
 
@@ -16,6 +17,8 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	editor = new ModuleEditor();
+
+	fs = new FileSystem(ASSETS_FOLDER);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -52,25 +55,45 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	JSON_Value* root = jsonFile.ParseFile(CONFIG_FILENAME);
+	char* buffer = nullptr;
+	fs->Load(SETTINGS_FOLDER "config.json", &buffer);
 
-	if (jsonFile.GetRootValue() == NULL)
+	if (buffer != nullptr)
 	{
-		LOG("Couldn't load %s", CONFIG_FILENAME);
-		ret = false;
+		JsonParsing jsonFile((const char*)buffer);
+		jsonFile.ValueToObject(jsonFile.GetRootValue());
+
+		ReadConfiguration(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
+
+		std::list<Module*>::iterator item;
+
+		for (item = listModules.begin(); item != listModules.end() && ret; ++item)
+		{
+			ret = (*item)->Init(jsonFile.GetChild(jsonFile.GetRootValue(), (*item)->name));
+		}
 	}
 
-	JsonParsing application = jsonFile.GetChild(root, "App");
+	//JSON_Value* root = jsonFile.ParseFile(CONFIG_FILENAME);
 
-	cappedMs = application.GetJsonNumber("FPS");
+	//if (jsonFile.GetRootValue() == NULL)
+	//{
+	//	LOG("Couldn't load %s", CONFIG_FILENAME);
+	//	ret = false;
+	//}
+	
+	//fs.Init();
 
-	// Call Init() in all modules
+	//JsonParsing application = jsonFile.GetChild(root, "App");
+
+	//cappedMs = application.GetJsonNumber("FPS");
+
+	//// Call Init() in all modules
 	std::list<Module*>::iterator item;
 
-	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
-	{
-		ret = (*item)->Init(jsonFile.GetChild(root, (*item)->name));
-	}
+	//for (item = listModules.begin(); item != listModules.end() && ret; ++item)
+	//{
+	//	ret = (*item)->Init(jsonFile.GetChild(root, (*item)->name));
+	//}
 
 	// After all Init calls we call Start() in all modules
 	LOG("Application Start --------------");
@@ -119,6 +142,16 @@ void Application::FinishUpdate()
 	{
 		SDL_Delay(cappedMs - lastFrameMs);
 	}
+}
+
+void Application::ReadConfiguration(JsonParsing& node)
+{
+	cappedMs = node.GetJsonNumber("FPS");
+}
+
+void Application::SaveConfiguration(JsonParsing& node)
+{
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "FPS", cappedMs);
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -186,21 +219,29 @@ void Application::SaveConfig()
 {
 	LOG("Saving configuration");
 
-	JSON_Value* root = jsonFile.GetRootValue();
+	/*JSON_Value* root = jsonFile.GetRootValue();
 
-	JsonParsing application = jsonFile.SetChild(root, "App");
+	JsonParsing application = jsonFile.SetChild(root, "App");*/
 
-	application.SetNewJsonNumber(application.ValueToObject(application.GetRootValue()), "FPS", cappedMs);
+	JsonParsing jsonFile;
+
+	SaveConfiguration(jsonFile.SetChild(jsonFile.GetRootValue(), "App"));
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
 
 	for (item = listModules.begin(); item != listModules.end(); ++item)
 	{
-		(*item)->SaveConfig(jsonFile.SetChild(root, (*item)->name));
+		(*item)->SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), (*item)->name));
 	}
 
-	jsonFile.SerializeFile(root, CONFIG_FILENAME);
+	char* buf;
+	uint size = jsonFile.Save(&buf);
+
+	if (fs->Save(SETTINGS_FOLDER CONFIG_FILENAME, buf, size) > 0)
+		LOG("Saved Engine Preferences");
+
+	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
 	saveRequested = false;
 }
 

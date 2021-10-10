@@ -22,4 +22,6 @@ private:
 	bool scrollToBottom;
 
 	bool console;
+	bool collapsed;
+	ImVec2 size;
 };
