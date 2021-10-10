@@ -9,6 +9,7 @@
 #include "glew/include/GL/glew.h"
 
 #include "LoadFBX.h"
+#include "Model.h"
 
 #define MAX_LIGHTS 8
 
@@ -69,7 +70,8 @@ public:
 	Mat3x3 normalMatrix;
 	Mat4x4 modelMatrix, viewMatrix, projectionMatrix;
 
-	LoadFBX fbx;
+	//LoadFBX fbx;
+	std::vector<Model> fbx;
 
 	GLuint vao;
 	IndexBuffer* fbxIndex;

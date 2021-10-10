@@ -66,7 +66,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 		ImGui::StyleColorsDark();
 		
@@ -300,7 +300,11 @@ bool ModuleRenderer3D::PostUpdate()
 		primitives[i]->Draw();
 	}
 
-	DrawMesh();
+	//DrawMesh();
+	for (int i = 0; i < fbx.size(); ++i)
+	{
+		fbx[i].Draw();
+	}
 
 	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	
@@ -482,7 +486,9 @@ void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
 
 void ModuleRenderer3D::InitMesh(const char* filePath)
 {
-	fbx.LoadMesh(filePath);
+	fbx.push_back(Model(filePath));
+	// TODO
+	/*fbx.LoadMesh(filePath);
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -494,12 +500,13 @@ void ModuleRenderer3D::InitMesh(const char* filePath)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
-	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(1);*/
 }
 
 void ModuleRenderer3D::DrawMesh()
 {
-	glBindVertexArray(vao);
+	// TODO
+	/*glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, fbx.GetMesh().numIndex, GL_UNSIGNED_INT, NULL);
-	glBindVertexArray(0);
+	glBindVertexArray(0);*/
 }

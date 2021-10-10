@@ -22,7 +22,7 @@ MainMenuBar::~MainMenuBar()
 
 bool MainMenuBar::Update(float dt)
 {
-	ImGui::DockSpaceOverViewport();
+//	ImGui::DockSpaceOverViewport();
 
 	if (ImGui::BeginMainMenuBar())
 	{
