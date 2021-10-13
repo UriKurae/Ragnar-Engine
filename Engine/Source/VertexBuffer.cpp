@@ -2,6 +2,8 @@
 
 #include "glew/include/GL/glew.h"
 
+#include "mmgr/mmgr.h"
+
 VertexBuffer::VertexBuffer(const void* data, unsigned int size)
 {
 	glGenBuffers(1, &buffer);

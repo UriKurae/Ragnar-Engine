@@ -6,6 +6,8 @@
 #include "MainMenuBar.h"
 #include "AboutMenu.h"
 
+#include "mmgr/mmgr.h"
+
 MainMenuBar::MainMenuBar() : Menu(true)
 {
 	showMenu = false;

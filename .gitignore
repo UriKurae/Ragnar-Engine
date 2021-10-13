@@ -31,8 +31,10 @@
 !Dependencies/MathGeoLib/lib/MathGeoLib.lib
 !Dependencies/Assimp/lib/assimp-vc142-mt.lib
 !Dependencies/PhysFS/lib/physfs.lib
+!Dependencies/Optick/lib/OptickCore.lib
 
 # Executables
+!Dependencies/Optick/Optick.exe
 *.exe
 *.out
 *.app

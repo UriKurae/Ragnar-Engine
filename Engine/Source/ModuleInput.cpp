@@ -3,6 +3,8 @@
 
 #include "ModuleRenderer3D.h"
 
+#include "Optick/include/optick.h"
+
 #include "mmgr/mmgr.h"
 
 #define MAX_KEYS 300

@@ -12,6 +12,8 @@
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 
+#include "Optick/include/optick.h"
+
 #include "mmgr/mmgr.h"
 
 ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
@@ -293,6 +295,7 @@ bool ModuleRenderer3D::Update(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
+	OPTICK_EVENT("Rendering");
 	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
 
 	for (int i = 0; i < primitives.size(); ++i)
@@ -300,11 +303,7 @@ bool ModuleRenderer3D::PostUpdate()
 		primitives[i]->Draw();
 	}
 
-	//DrawMesh();
-	for (int i = 0; i < fbx.size(); ++i)
-	{
-		fbx[i].Draw();
-	}
+	DrawMeshes();
 
 	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	
@@ -479,6 +478,16 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glEnd();
 }
 
+void ModuleRenderer3D::DrawMeshes()
+{
+	OPTICK_EVENT("Drawing all FBX");
+	//DrawMesh();
+	for (int i = 0; i < fbx.size(); ++i)
+	{
+		fbx[i].Draw();
+	}
+}
+
 void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
 {
 	primitives.push_back(primitive);
@@ -486,6 +495,7 @@ void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
 
 void ModuleRenderer3D::InitMesh(const char* filePath)
 {
+	OPTICK_EVENT("Loading FBX");
 	fbx.push_back(Model(filePath));
 	// TODO
 	/*fbx.LoadMesh(filePath);

@@ -3,6 +3,8 @@
 
 #include "ModuleInput.h"
 
+#include "Optick/include/optick.h"
+
 #include "mmgr/mmgr.h"
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
@@ -52,6 +54,7 @@ bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Update(float dt)
 {
+	OPTICK_EVENT("Updating Camera 3D");
 	Vec3 newPos(0, 0, 0);
 	float speed = 3.0f * dt;
 	

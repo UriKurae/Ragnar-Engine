@@ -7,6 +7,8 @@
 #include "ModuleEditor.h"
 #include "FileSystem.h"
 
+#include "Optick/include/optick.h"
+
 #include "mmgr/mmgr.h"
 
 Application::Application()
@@ -48,6 +50,8 @@ Application::~Application()
 		RELEASE(*item);
 	}
 
+	RELEASE(fs);
+
 	listModules.clear();
 }
 
@@ -71,6 +75,8 @@ bool Application::Init()
 		{
 			ret = (*item)->Init(jsonFile.GetChild(jsonFile.GetRootValue(), (*item)->name));
 		}
+
+		RELEASE_ARRAY(buffer);
 	}
 
 	//JSON_Value* root = jsonFile.ParseFile(CONFIG_FILENAME);
@@ -126,6 +132,8 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	OPTICK_EVENT("Finishing Update");
+
 	if (loadRequested) LoadConfig();
 	if (saveRequested) SaveConfig();
 

@@ -6,6 +6,8 @@
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
 
+#include "mmgr/mmgr.h"
+
 FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 {
 	char* basePath = SDL_GetBasePath();

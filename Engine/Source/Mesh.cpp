@@ -3,6 +3,8 @@
 #include "glew/include/GL/glew.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
+#include "mmgr/mmgr.h"
+
 Mesh::Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind, std::vector<Texture> text) : vertices(vert), indices(ind), textures(text), vao(0), vbo(0), ebo(0)
 {
 	SetupMesh();

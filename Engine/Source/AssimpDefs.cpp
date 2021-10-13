@@ -1,5 +1,7 @@
 #include "AssimpDefs.h"
 
+#include "mmgr/mmgr.h"
+
 size_t AssimpWrite(aiFile* file, const char* data, size_t size, size_t chunks)
 {
 	PHYSFS_sint64 ret = PHYSFS_write((PHYSFS_File*)file->UserData, (void*)data, size, chunks);

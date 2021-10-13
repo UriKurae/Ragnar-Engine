@@ -12,6 +12,7 @@
 
 #include <GL/glew.h>
 
+#include "Optick/include/optick.h"
 #include "mmgr/mmgr.h"
 
 ModuleEditor::ModuleEditor() : Module()
@@ -25,6 +26,7 @@ ModuleEditor::~ModuleEditor()
 
 bool ModuleEditor::Update(float dt)
 {
+	OPTICK_EVENT("Updating Module Editor");
 	bool ret = true;
 
 	ret = mainMenuBar.Update(dt);
@@ -40,6 +42,7 @@ bool ModuleEditor::Update(float dt)
 
 bool ModuleEditor::Draw()
 {
+	OPTICK_EVENT("Drawing Module Editor");
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

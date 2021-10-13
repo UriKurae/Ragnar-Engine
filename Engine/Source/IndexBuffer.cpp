@@ -2,6 +2,8 @@
 
 #include "glew/include/GL/glew.h"
 
+#include "mmgr/mmgr.h"
+
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int s) : size(s)
 {
 	glGenBuffers(1, &buffer);

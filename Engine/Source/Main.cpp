@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "Application.h"
 
+#include "Optick/include/optick.h"
+
 #include "SDL/include/SDL.h"
 
 #include "mmgr/mmgr.h"
@@ -56,6 +58,7 @@ int main(int argc, char ** argv)
 			// Loop all modules until we are asked to leave ---------------------
 		case MainState::UPDATE:
 		{
+			OPTICK_FRAME("MainThread");
 			if (app->Update() == false)
 				state = MainState::CLEAN;
 		}

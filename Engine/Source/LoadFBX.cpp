@@ -5,6 +5,8 @@
 #include "Assimp/include/assimp/scene.h"
 #include "Assimp/include/assimp/postprocess.h"
 
+#include "mmgr/mmgr.h"
+
 LoadFBX::LoadFBX()
 {
 }

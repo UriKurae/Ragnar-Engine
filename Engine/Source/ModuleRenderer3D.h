@@ -51,6 +51,7 @@ public:
 	inline bool* GetWireMode() { return &wireMode; }
 
 	void DrawCubeDirectMode();
+	void DrawMeshes();
 
 	void AddPrimitive(Primitive* primitive);
 
