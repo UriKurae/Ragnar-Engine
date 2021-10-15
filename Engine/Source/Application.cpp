@@ -102,7 +102,7 @@ bool Application::Init()
 	//}
 
 	// After all Init calls we call Start() in all modules
-	LOG("Application Start --------------");
+	DEBUG_LOG("Application Start --------------");
 
 	for (item = listModules.begin(); item != listModules.end() && ret; ++item)
 	{
@@ -217,7 +217,7 @@ void Application::LogConsole(const char* string)
 	if (editor) editor->LogConsole(string);
 }
 
-void Application::SetFPSLimit(const float fps)
+void Application::SetFPSLimit(const int fps)
 {
 	if (fps > 0) cappedMs = 1000 / fps;
 	else cappedMs = 0;
@@ -225,7 +225,7 @@ void Application::SetFPSLimit(const float fps)
 
 void Application::SaveConfig()
 {
-	LOG("Saving configuration");
+	DEBUG_LOG("Saving configuration");
 
 	/*JSON_Value* root = jsonFile.GetRootValue();
 
@@ -247,7 +247,7 @@ void Application::SaveConfig()
 	uint size = jsonFile.Save(&buf);
 
 	if (fs->Save(SETTINGS_FOLDER CONFIG_FILENAME, buf, size) > 0)
-		LOG("Saved Engine Preferences");
+		DEBUG_LOG("Saved Engine Preferences");
 
 	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
 	saveRequested = false;
@@ -255,7 +255,7 @@ void Application::SaveConfig()
 
 void Application::LoadConfig()
 {
-	LOG("Loading configuration");
+	DEBUG_LOG("Loading configuration");
 
 	JSON_Value* root = jsonFile.GetRootValue();
 

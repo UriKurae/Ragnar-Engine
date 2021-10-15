@@ -34,8 +34,8 @@
 !Dependencies/Optick/lib/OptickCore.lib
 
 # Executables
-!Dependencies/Optick/Optick.exe
 *.exe
+!Dependencies/Optick/Optick.exe
 *.out
 *.app
 

@@ -23,7 +23,6 @@ public:
 
 	bool Init(JsonParsing& node) override;
 	bool PreUpdate(float dt) override;
-	bool Update(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
 
@@ -73,13 +72,6 @@ public:
 
 	//LoadFBX fbx;
 	std::vector<Model> fbx;
-
-	GLuint vao;
-	IndexBuffer* fbxIndex;
-	VertexBuffer* fbxVertex;
-
-	GLuint cubeId;
-	GLuint index;
 
 	GLuint framebuffer;
 	GLuint rboDepthStencil;

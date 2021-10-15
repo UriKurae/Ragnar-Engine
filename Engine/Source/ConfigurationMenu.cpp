@@ -30,7 +30,7 @@ bool ConfigurationMenu::Update(float dt)
 		memoryCount = 0;
 		if (memory.size() >= 100)
 		{
-			for (int i = 0; i < memory.size() - 1; ++i)
+			for (unsigned int i = 0; i < memory.size() - 1; ++i)
 			{
 				memory[i] = memory[i + 1];
 			}
@@ -44,7 +44,7 @@ bool ConfigurationMenu::Update(float dt)
 
 	if (fps.size() >= 100)
 	{
-		for (int i = 0; i < fps.size() - 1; ++i)
+		for (unsigned int i = 0; i < fps.size() - 1; ++i)
 		{
 			fps[i] = fps[i + 1];
 			ms[i] = ms[i + 1];
@@ -165,7 +165,7 @@ bool ConfigurationMenu::Update(float dt)
 
 		ImGui::BeginChild("Input");
 
-		for (int i = 0; i < app->input->GetInputList().size(); ++i)
+		for (unsigned int i = 0; i < app->input->GetInputList().size(); ++i)
 		{
 			ImGui::Text(app->input->GetInputList()[i].c_str());
 		}

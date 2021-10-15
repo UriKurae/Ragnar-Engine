@@ -1,5 +1,7 @@
 #include "Model.h"
 
+#include "Globals.h"
+
 #include "mmgr/mmgr.h"
 
 Model::Model(const char* path)
@@ -27,7 +29,7 @@ void Model::LoadModel(std::string path)
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
-		LOG("ERROR ASSIMP %s", import.GetErrorString());
+		DEBUG_LOG("ERROR ASSIMP %s", import.GetErrorString());
 		return;
 	}
 	directory = path.substr(0, path.find_last_of('/'));
@@ -75,7 +77,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		vertices.push_back(vertex);
 	}
 
-	for (int i = 0; i < mesh->mNumFaces; ++i)
+	for (unsigned int i = 0; i < mesh->mNumFaces; ++i)
 	{
 		aiFace face = mesh->mFaces[i];
 		for (unsigned int j = 0; j < face.mNumIndices; ++j)

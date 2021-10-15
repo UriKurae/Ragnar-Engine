@@ -16,7 +16,7 @@
 
 #include "mmgr/mmgr.h"
 
-ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
+ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : framebuffer(0), rboDepthStencil(0), Module(startEnabled)
 {
 	name = "Renderer";
 	context = NULL;
@@ -39,14 +39,14 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init(JsonParsing& node)
 {
-	LOG("Creating 3D Renderer context");
+	DEBUG_LOG("Creating 3D Renderer context");
 	bool ret = true;
 	
 	//Create context
 	context = SDL_GL_CreateContext(app->window->window);
 	if(context == NULL)
 	{
-		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
+		DEBUG_LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	
@@ -56,14 +56,14 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (GLEW_OK != err)
 		{
 			/* Problem: glewInit failed, something is seriously wrong. */
-			LOG("Error: %s\n", glewGetErrorString(err));
+			DEBUG_LOG("Error: %s\n", glewGetErrorString(err));
 		}
 
-		LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+		DEBUG_LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
-			LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+			DEBUG_LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -75,10 +75,10 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
 		ImGui_ImplOpenGL3_Init();
 
-		LOG("Vendor: %s", glGetString(GL_VENDOR));
-		LOG("Renderer: %s", glGetString(GL_RENDERER));
-		LOG("OpenGL version supported %s", glGetString(GL_VERSION));
-		LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+		DEBUG_LOG("Vendor: %s", glGetString(GL_VENDOR));
+		DEBUG_LOG("Renderer: %s", glGetString(GL_RENDERER));
+		DEBUG_LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+		DEBUG_LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 		//Initialize Projection Matrix
 		glMatrixMode(GL_PROJECTION);
@@ -168,12 +168,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
-	//cubeId = 0;
-	//glGenBuffers(1, &cubeId);
-
-	//index = 0;
-	//glGenBuffers(1, &index);
-
 	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
 	//primitives.push_back(cube);
 
@@ -213,92 +207,13 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	return true;
 }
 
-bool ModuleRenderer3D::Update(float dt)
-{
-	// Uncomment for direct mode Opengl Cube
-	//DrawCubeDirectMode();
-
-	// Uncomment for Vertex Array
-	//GLfloat vertices[108] =
-	//{
-	//	// Front
-	//	1.0f, 1.0f, 0.0f,
-	//	0.0f, 1.0f, 0.0f,
-	//	0.0f, 0.0f, 0.0f,
-
-	//	0.0f, 0.0f, 0.0f,
-	//	1.0f, 0.0f, 0.0f,
-	//	1.0f, 1.0f, 0.0f,
-
-	//	// Right
-	//	1.0f, 1.0f, 0.0f,
-	//	1.0f, 0.0f, 0.0f,
-	//	1.0f, 0.0f,-1.0f,
-
-	//	1.0f, 0.0f,-1.0f,
-	//	1.0f, 1.0f,-1.0f,
-	//	1.0f, 1.0f, 0.0f,
-
-	//	// top
-	//	1.0f, 1.0f, 0.0f,
-	//	1.0f, 1.0f,-1.0f,
-	//	0.0f, 1.0f,-1.0f,
-
-	//	0.0f, 1.0f,-1.0f,
-	//	0.0f, 1.0f, 0.0f,
-	//	1.0f, 1.0f, 0.0f,
-
-	//	// Back
-	//	0.0f, 0.0f,-1.0f,
-	//	1.0f, 0.0f,-1.0f,
-	//	1.0f, 0.0f, 0.0f,
-
-	//	1.0f, 0.0f, 0.0f,
-	//	0.0f, 0.0f, 0.0f,
-	//	0.0f, 0.0f,-1.0f,
-
-	//	// Left
-	//	0.0f, 0.0f,-1.0f,
-	//	0.0f, 0.0f, 0.0f,
-	//	0.0f, 1.0f, 0.0f,
-
-	//	0.0f, 1.0f, 0.0f,
-	//	0.0f, 1.0f,-1.0f,
-	//	0.0f, 0.0f,-1.0f,
-
-	//	// Bottom
-	//	0.0f, 0.0f,-1.0f,
-	//	1.0f, 0.0f,-1.0f,
-	//	1.0f, 0.0f, 0.0f,
-
-	//	1.0f, 0.0f, 0.0f,
-	//	0.0f, 0.0f, 0.0f,
-	//	0.0f, 0.0f,-1.0f
-	//};
-
-	//
-	//// Bind Buffer and store data
-	//glBindBuffer(GL_ARRAY_BUFFER, cubeId);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 36 * 3, vertices, GL_STATIC_DRAW);
-
-	//glEnableClientState(GL_VERTEX_ARRAY);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, cubeId);
-	//glVertexPointer(3, GL_FLOAT, 0, NULL);
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
-
-	//glDisableClientState(GL_VERTEX_ARRAY);
-
-	return true;
-}
-
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
 	OPTICK_EVENT("Rendering");
 	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
 
-	for (int i = 0; i < primitives.size(); ++i)
+	for (unsigned int i = 0; i < primitives.size(); ++i)
 	{
 		primitives[i]->Draw();
 	}
@@ -317,9 +232,9 @@ bool ModuleRenderer3D::PostUpdate()
 // Called before quitting
 bool ModuleRenderer3D::CleanUp()
 {
-	LOG("Destroying 3D Renderer");
+	DEBUG_LOG("Destroying 3D Renderer");
 
-	for (int i = 0; i < primitives.size(); ++i)
+	for (unsigned int i = 0; i < primitives.size(); ++i)
 	{
 		RELEASE(primitives[i]);
 	}
@@ -482,7 +397,7 @@ void ModuleRenderer3D::DrawMeshes()
 {
 	OPTICK_EVENT("Drawing all FBX");
 	//DrawMesh();
-	for (int i = 0; i < fbx.size(); ++i)
+	for (unsigned int i = 0; i < fbx.size(); ++i)
 	{
 		fbx[i].Draw();
 	}
@@ -497,20 +412,6 @@ void ModuleRenderer3D::InitMesh(const char* filePath)
 {
 	OPTICK_EVENT("Loading FBX");
 	fbx.push_back(Model(filePath));
-	// TODO
-	/*fbx.LoadMesh(filePath);
-
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	fbxVertex = new VertexBuffer(fbx.GetMesh().vertices, fbx.GetMesh().numVertex * sizeof(float3));
-
-	fbxIndex = new IndexBuffer(fbx.GetMesh().indices, fbx.GetMesh().numIndex);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
-	glEnableVertexAttribArray(1);*/
 }
 
 void ModuleRenderer3D::DrawMesh()

@@ -146,7 +146,7 @@ bool MainMenuBar::Update(float dt)
 		ImGui::ShowMetricsWindow(&showMenu);
 	}
 
-	for (int i = 0; i < menus.size(); ++i)
+	for (unsigned int i = 0; i < menus.size(); ++i)
 	{
 		if (menus[i]->active) menus[i]->Update(dt);
 	}
@@ -156,7 +156,7 @@ bool MainMenuBar::Update(float dt)
 
 bool MainMenuBar::CleanUp()
 {
-	for (int i = 0; i < menus.size(); ++i)
+	for (unsigned int i = 0; i < menus.size(); ++i)
 	{
 		RELEASE(menus[i]);
 	}

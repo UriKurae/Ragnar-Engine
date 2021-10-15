@@ -21,7 +21,7 @@ Application* app = nullptr;
 
 int main(int argc, char ** argv)
 {
-	LOG("Starting game '%s'...", TITLE);
+	DEBUG_LOG("Starting game '%s'...", TITLE);
 
 	int mainReturn = EXIT_FAILURE;
 	MainState state = MainState::CREATE;
@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
 		switch (state)
 		{
 		case MainState::CREATE:
-			LOG("CREATION PHASE ===============================");
+			DEBUG_LOG("CREATION PHASE ===============================");
 
 			app = new Application();
 
@@ -44,12 +44,12 @@ int main(int argc, char ** argv)
 
 			// Awake all modules -----------------------------------------------
 		case MainState::INIT:
-			LOG("AWAKE PHASE ===============================");
+			DEBUG_LOG("AWAKE PHASE ===============================");
 			if (app->Init() == true)
 				state = MainState::UPDATE;
 			else
 			{
-				LOG("ERROR: Awake failed");
+				DEBUG_LOG("ERROR: Awake failed");
 				state = MainState::FAIL;
 			}
 
@@ -66,7 +66,7 @@ int main(int argc, char ** argv)
 
 		// Cleanup allocated memory -----------------------------------------
 		case MainState::CLEAN:
-			LOG("CLEANUP PHASE ===============================");
+			DEBUG_LOG("CLEANUP PHASE ===============================");
 			if (app->CleanUp() == true)
 			{
 				RELEASE(app);
@@ -80,13 +80,13 @@ int main(int argc, char ** argv)
 
 			// Exit with errors and shame ---------------------------------------
 		case MainState::FAIL:
-			LOG("Exiting with errors :(");
+			DEBUG_LOG("Exiting with errors :(");
 			mainReturn = EXIT_FAILURE;
 			state = MainState::EXIT;
 			break;
 		}
 	}
 
-	LOG("Exiting game '%s'...\n", TITLE);
+	DEBUG_LOG("Exiting game '%s'...\n", TITLE);
 	return mainReturn;
 }

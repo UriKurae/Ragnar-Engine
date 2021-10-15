@@ -252,7 +252,7 @@ void PCylinder::BuildVerticesSmooth()
     for (int i = 0; i < 2; ++i)
     {
         float h = -height / 2.0f + i * height;           // z value; -h/2 to h/2
-        float nz = -1 + i * 2;                           // z value of normal; -1 to 1
+        float nz = -1.0f + i * 2.0f;                           // z value of normal; -1 to 1
 
         // center point
         vertices.push_back(0);     vertices.push_back(0);     vertices.push_back(h);
@@ -443,7 +443,7 @@ PSphere::PSphere(float radius, unsigned int rings, unsigned int sectors) : Primi
 {
 	float const R = 1. / (float)(rings - 1);
 	float const S = 1. / (float)(sectors - 1);
-	int r, s;
+	unsigned int r, s;
 
 	vertices.resize(rings * sectors * 3);
 	normals.resize(rings * sectors * 3);

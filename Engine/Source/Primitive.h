@@ -11,7 +11,7 @@ typedef float GLfloat;
 class Primitive
 {
 public:
-	Primitive() : vao(0) {}
+	Primitive() : vao(0), index(0), vertex(0) {}
 	virtual ~Primitive() {}
 
 	virtual void Draw() {}

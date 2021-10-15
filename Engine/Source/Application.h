@@ -33,7 +33,7 @@ public:
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
 
-	void SetFPSLimit(const float fps);
+	void SetFPSLimit(const int fps);
 	inline int GetFPSLimit() const { return ((1.0f / (float)cappedMs) * 1000.0f); }
 
 	inline void SaveConfigRequest() { saveRequested = true; }

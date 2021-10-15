@@ -21,12 +21,12 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 		AddPath(assetsPath);
 
 	// Dump list of paths
-	LOG("FileSystem Operations base is [%s] plus:", GetBasePath());
-	LOG(GetReadPaths());
+	DEBUG_LOG("FileSystem Operations base is [%s] plus:", GetBasePath());
+	DEBUG_LOG(GetReadPaths());
 
 	// enable us to write in the game's dir area
 	if (PHYSFS_setWriteDir(".") == 0)
-		LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
+		DEBUG_LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
@@ -52,7 +52,7 @@ FileSystem::~FileSystem()
 
 bool FileSystem::Init(JsonParsing& node)
 {
-	LOG("Loading File System");
+	DEBUG_LOG("Loading File System");
 	bool ret = true;
 
 	// Ask SDL for a write dir
@@ -78,7 +78,7 @@ bool FileSystem::AddPath(const char* path)
 	bool ret = false;
 
 	if (PHYSFS_mount(path, nullptr, 1) == 0)
-		LOG("File System error while adding a path or zip: %s\n", PHYSFS_getLastError());
+		DEBUG_LOG("File System error while adding a path or zip: %s\n", PHYSFS_getLastError());
 	else
 		ret = true;
 
@@ -101,7 +101,7 @@ uint FileSystem::Load(const char* file, char** buffer)
 			uint readed = (uint)PHYSFS_read(fsFile, *buffer, 1, size);
 			if (readed != size)
 			{
-				LOG("File System error while reading from file %s: %s\n", file, PHYSFS_getLastError());
+				DEBUG_LOG("File System error while reading from file %s: %s\n", file, PHYSFS_getLastError());
 				RELEASE(buffer);
 			}
 			else
@@ -109,10 +109,10 @@ uint FileSystem::Load(const char* file, char** buffer)
 		}
 
 		if (PHYSFS_close(fsFile) == 0)
-			LOG("File System error while closing file %s: %s\n", file, PHYSFS_getLastError());
+			DEBUG_LOG("File System error while closing file %s: %s\n", file, PHYSFS_getLastError());
 	}
 	else
-		LOG("File System error while opening file %s: %s\n", file, PHYSFS_getLastError());
+		DEBUG_LOG("File System error while opening file %s: %s\n", file, PHYSFS_getLastError());
 
 	return ret;
 }
@@ -128,22 +128,22 @@ uint FileSystem::Save(const char* file, const void* buffer, unsigned int size, b
 	{
 		uint written = (uint)PHYSFS_write(fsFile, (const void*)buffer, 1, size);
 		if (written != size)
-			LOG("File System error while writing to file %s: %s", file, PHYSFS_getLastError());
+			DEBUG_LOG("File System error while writing to file %s: %s", file, PHYSFS_getLastError());
 		else
 		{
 			if (append == true)
-				LOG("Added %u data to [%s%s]", size, PHYSFS_getWriteDir(), file);
+				DEBUG_LOG("Added %u data to [%s%s]", size, PHYSFS_getWriteDir(), file);
 			else if (overWrite == false)
-				LOG("New file created [%s%s] of %u bytes", PHYSFS_getWriteDir(), file, size);
+				DEBUG_LOG("New file created [%s%s] of %u bytes", PHYSFS_getWriteDir(), file, size);
 
 			ret = written;
 		}
 
 		if (PHYSFS_close(fsFile) == 0)
-			LOG("File System error while closing file %s: %s", file, PHYSFS_getLastError());
+			DEBUG_LOG("File System error while closing file %s: %s", file, PHYSFS_getLastError());
 	}
 	else
-		LOG("File System error while opening file %s: %s", file, PHYSFS_getLastError());
+		DEBUG_LOG("File System error while opening file %s: %s", file, PHYSFS_getLastError());
 
 	return ret;
 }

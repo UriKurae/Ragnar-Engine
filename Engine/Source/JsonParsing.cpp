@@ -81,7 +81,7 @@ JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const
 	if(object != NULL)
 		return object;
 
-	LOG("Couldn't retrieve the object");
+	DEBUG_LOG("Couldn't retrieve the object");
 
 	return nullptr;
 }
@@ -126,6 +126,6 @@ JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* n
 
 	if (object) return object;
 
-	LOG("Could not find node object");
+	DEBUG_LOG("Could not find node object");
 	return nullptr;
 }
