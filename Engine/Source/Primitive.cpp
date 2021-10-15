@@ -113,16 +113,72 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 		3,2,7
 	};
 
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
+
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
+
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
+
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
+
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
+
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
+
+	CreateCheckerImage();
+
+	//glGenVertexArrays(1, &vao);
+	//glBindVertexArray(vao);
+	glGenBuffers(1, &tbo);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &texId);
 	
 	vertex = new VertexBuffer(indexVertex, 24 * sizeof(GLfloat));
 	
 	index = new IndexBuffer(indices, 36);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
-	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_TEXTURE_COORD_ARRAY, tbo);
+	glBufferData(GL_TEXTURE_COORD_ARRAY, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
 
+	glBindTexture(GL_TEXTURE_2D, texId);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 64, 64, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
+
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+	//glEnableVertexAttribArray(0);
 }
 
 PCube::~PCube()
@@ -131,16 +187,47 @@ PCube::~PCube()
 
 void PCube::Draw()
 {
-	/*glEnableClientState(GL_VERTEX_ARRAY);
-	glBindVertexArray(vao);
-	index->Bind();
-	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
-	index->Unbind();
-	glDisableClientState(GL_VERTEX_ARRAY);*/
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glBindVertexArray(vao);
 
-	glBindVertexArray(vao);
+	vertex->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_TEXTURE_COORD_ARRAY, tbo);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
+	glBindTexture(GL_TEXTURE_2D, texId);
+	index->Bind();
+
 	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
-	glBindVertexArray(0);
+
+	index->Unbind();
+	vertex->Unbind();
+	glBindBuffer(GL_TEXTURE_COORD_ARRAY, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	//glBindVertexArray(vao);
+	//glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	//glBindVertexArray(0);
+}
+
+void PCube::CreateCheckerImage()
+{
+	for (int i = 0; i < 64; ++i)
+	{
+		for (int j = 0; j < 64; ++j)
+		{
+			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
+			checkerImage[i][j][0] = (GLubyte)c;
+			checkerImage[i][j][1] = (GLubyte)c;
+			checkerImage[i][j][2] = (GLubyte)c;
+			checkerImage[i][j][3] = (GLubyte)255;
+		}
+	}
 }
 
 PPlane::PPlane(float3 t, float3 r, float3 s) : Primitive()

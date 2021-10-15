@@ -59,6 +59,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
+	std::vector<float2> texCoords;
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; ++i)
 	{
@@ -70,11 +71,13 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		vertex.normal.x = mesh->mNormals[i].x;
 		vertex.normal.y = mesh->mNormals[i].y;
 		vertex.normal.z = mesh->mNormals[i].z;
-	
-		vertex.texCoords.x = mesh->mTextureCoords[0][i].x;
-		vertex.texCoords.y = mesh->mTextureCoords[0][i].y;
+		
+		float2 coords;
+		coords.x = mesh->mTextureCoords[0][i].x;
+		coords.y = mesh->mTextureCoords[0][i].y;
 		
 		vertices.push_back(vertex);
+		texCoords.push_back(coords);
 	}
 
 	for (unsigned int i = 0; i < mesh->mNumFaces; ++i)
@@ -86,7 +89,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		}
 	}
 
-	return Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textures, texCoords);
 }
 
 std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)

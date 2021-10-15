@@ -7,6 +7,7 @@
 typedef unsigned int GLuint;
 typedef unsigned short GLushort;
 typedef float GLfloat;
+typedef unsigned char GLubyte;
 
 class Primitive
 {
@@ -15,7 +16,6 @@ public:
 	virtual ~Primitive() {}
 
 	virtual void Draw() {}
-
 	//inline GLuint GetIndexBuffer() { return indexBuffer; }
 
 protected:
@@ -37,10 +37,16 @@ public:
 	~PCube();
 
 	void Draw() override;
+	void CreateCheckerImage();
 
 private:
 	std::vector<GLfloat> indexVertex;
 	std::vector<GLuint> indices;
+	std::vector<float2> texCoords;
+
+	GLubyte checkerImage[64][64][4];
+	unsigned int texId;
+	unsigned int tbo;
 };
 
 class PPlane : public Primitive
