@@ -257,18 +257,24 @@ void Application::LoadConfig()
 {
 	DEBUG_LOG("Loading configuration");
 
-	JSON_Value* root = jsonFile.GetRootValue();
+	char* buffer = nullptr;
+	fs->Load(SETTINGS_FOLDER "config.json", &buffer);
 
-	JsonParsing application = jsonFile.GetChild(root, "App");
-
-	cappedMs = application.GetJsonNumber("FPS");
-
-	// Call Init() in all modules
-	std::list<Module*>::iterator item;
-
-	for (item = listModules.begin(); item != listModules.end(); ++item)
+	if (buffer != nullptr)
 	{
-		(*item)->LoadConfig(jsonFile.GetChild(root, (*item)->name));
+		JsonParsing jsonFile((const char*)buffer);
+		jsonFile.ValueToObject(jsonFile.GetRootValue());
+
+		ReadConfiguration(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
+
+		std::list<Module*>::iterator item;
+
+		for (item = listModules.begin(); item != listModules.end(); ++item)
+		{
+			(*item)->LoadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), (*item)->name));
+		}
+
+		RELEASE_ARRAY(buffer);
 	}
 
 	loadRequested = false;

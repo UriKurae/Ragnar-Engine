@@ -120,41 +120,6 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	texCoords.push_back(float2(1, 0));
 	texCoords.push_back(float2(1, 1));
 
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
-
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
-
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
-
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
-
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
-
 	CreateCheckerImage();
 
 	//glGenVertexArrays(1, &vao);
@@ -198,6 +163,7 @@ void PCube::Draw()
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
 	glBindTexture(GL_TEXTURE_2D, texId);
+
 	index->Bind();
 
 	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
