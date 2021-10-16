@@ -1,7 +1,8 @@
 #include "Model.h"
 
+#include "IL/il.h"
+#include "IL/ilut.h"
 #include "Globals.h"
-
 #include "mmgr/mmgr.h"
 
 Model::Model(const char* path)
@@ -89,10 +90,35 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		}
 	}
 
-	return Mesh(vertices, indices, textures, texCoords);
+	Texture diffuse;
+	if (mesh->mMaterialIndex >= 0)
+	{
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		diffuse = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		
+		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		//textures.insert(textures.end(), specular.begin(), specular.end());
+	}
+
+	return Mesh(vertices, indices, diffuse, texCoords);
 }
 
-std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
+Texture Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
 {
-	return std::vector<Texture>();
+	Texture texture = {};
+	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+	{
+		aiString str;
+		mat->GetTexture(type, i, &str);
+		ILuint image;
+		ilGenImages(1, &image);
+		ilBindImage(image);
+		//ILboolean boolean = ilLoadImage(ASSETS_FOLDER"Lenna.png");
+		texture.data = ilGetData();
+		texture.id = ilutGLLoadImage(ASSETS_FOLDER "Lenna.png");
+		texture.width = ilGetInteger(IL_IMAGE_WIDTH);
+		texture.height = ilGetInteger(IL_IMAGE_HEIGHT);
+	}
+
+	return texture;
 }

@@ -12,6 +12,8 @@
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 
+#include "IL/ilut.h"
+
 #include "Optick/include/optick.h"
 
 #include "mmgr/mmgr.h"
@@ -28,8 +30,8 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : framebuffer(0), rboDepth
 	texture2D = true;
 	stencil = false;
 	blending = false;
-
 	wireMode = false;
+	vsync = false;
 }
 
 // Destructor
@@ -61,8 +63,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		DEBUG_LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
+		ilutRenderer(ILUT_OPENGL);
+
 		//Use Vsync
-		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
+		vsync = node.GetJsonBool("vsync");
+		if(SDL_GL_SetSwapInterval(vsync) < 0)
 			DEBUG_LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 
 		IMGUI_CHECKVERSION();
@@ -131,13 +136,25 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
 		
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
+		depthTest = node.GetJsonBool("depth test");
+		cullFace = node.GetJsonBool("cull face");
+		lighting = node.GetJsonBool("lighting");
+		colorMaterial = node.GetJsonBool("color material");
+		texture2D = node.GetJsonBool("texture 2D");
+		stencil = node.GetJsonBool("stencil");
+		blending = node.GetJsonBool("blending");
+		wireMode = node.GetJsonBool("wire mode");
+
 		lights[0].Active(true);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_COLOR_MATERIAL);
-		glEnable(GL_TEXTURE_2D);
+		
+		if (depthTest) SetDepthTest();
+		if (cullFace) SetCullFace();
+		if (lighting) SetLighting();
+		if (colorMaterial) SetColorMaterial();
+		if (texture2D) SetTexture2D();
+		if (stencil) SetStencil();
+		if (blending) SetBlending();
+		if (wireMode) SetWireMode();
 	}
 
 	// Uncomment for using framebuffer
@@ -168,8 +185,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
-	PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
-	primitives.push_back(cube);
+	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
+	//primitives.push_back(cube);
 
 	//PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
 	//primitives.push_back(pyramid);
@@ -254,11 +271,41 @@ bool ModuleRenderer3D::CleanUp()
 
 bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 {
+	vsync = node.GetJsonBool("vsync");
+	depthTest = node.GetJsonBool("depth test");
+	cullFace = node.GetJsonBool("cull face");
+	lighting = node.GetJsonBool("lighting");
+	colorMaterial = node.GetJsonBool("color material");
+	texture2D = node.GetJsonBool("texture 2D");
+	stencil = node.GetJsonBool("stencil");
+	blending = node.GetJsonBool("blending");
+	wireMode = node.GetJsonBool("wire mode");
+
+	SetVsync();
+	SetDepthTest();
+	SetCullFace();
+	SetLighting();
+	SetColorMaterial();
+	SetTexture2D();
+	SetStencil();
+	SetBlending();
+	SetWireMode();
+
 	return true;
 }
 
 bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
 {
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "vsync", vsync);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "depth test", depthTest);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "cull face", cullFace);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "lighting", lighting);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "color material", colorMaterial);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "texture 2D", texture2D);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "stencil", stencil);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "blending", blending);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wire mode", wireMode);
+
 	return true;
 }
 
@@ -321,6 +368,11 @@ void ModuleRenderer3D::SetWireMode()
 {
 	if (wireMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void ModuleRenderer3D::SetVsync()
+{
+	SDL_GL_SetSwapInterval(vsync);
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()

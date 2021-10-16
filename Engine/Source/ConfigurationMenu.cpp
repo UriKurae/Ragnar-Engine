@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ConfigurationMenu.h"
 
@@ -144,6 +145,13 @@ bool ConfigurationMenu::Update(float dt)
 		if (ImGui::Checkbox("Full desktop", app->window->GetWindowFullscreenDesktop()))
 		{
 			app->window->SetFullscreenDesktop();
+		}
+	}
+	if (ImGui::CollapsingHeader("Renderer"))
+	{
+		if (ImGui::Checkbox("VSync", app->renderer3D->GetVsync()))
+		{
+			app->renderer3D->SetVsync();
 		}
 	}
 	if (ImGui::CollapsingHeader("Input"))

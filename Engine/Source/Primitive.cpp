@@ -4,6 +4,8 @@
 #include "glmath.h"
 #include "Globals.h"
 
+#include "mmgr/mmgr.h"
+
 PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 {
 	transform = t;
@@ -113,34 +115,34 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 		3,2,7
 	};
 
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
+	//texCoords.push_back(float2(1, 1));
+	//texCoords.push_back(float2(0, 1));
+	//texCoords.push_back(float2(0, 0));
+
+	//texCoords.push_back(float2(0, 0));
+	//texCoords.push_back(float2(1, 0));
+	//texCoords.push_back(float2(1, 1));
 
 	CreateCheckerImage();
 
 	//glGenVertexArrays(1, &vao);
 	//glBindVertexArray(vao);
 	glGenBuffers(1, &tbo);
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glGenTextures(1, &texId);
 	
 	vertex = new VertexBuffer(indexVertex, 24 * sizeof(GLfloat));
 	
 	index = new IndexBuffer(indices, 36);
 
-	glBindBuffer(GL_TEXTURE_COORD_ARRAY, tbo);
-	glBufferData(GL_TEXTURE_COORD_ARRAY, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
 
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 64, 64, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
 
 	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
 	//glEnableVertexAttribArray(0);
@@ -148,6 +150,8 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 
 PCube::~PCube()
 {
+	RELEASE(vertex);
+	RELEASE(index);
 }
 
 void PCube::Draw()
@@ -159,7 +163,7 @@ void PCube::Draw()
 	vertex->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glBindBuffer(GL_TEXTURE_COORD_ARRAY, tbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
 	glBindTexture(GL_TEXTURE_2D, texId);
@@ -170,7 +174,7 @@ void PCube::Draw()
 
 	index->Unbind();
 	vertex->Unbind();
-	glBindBuffer(GL_TEXTURE_COORD_ARRAY, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
@@ -183,9 +187,9 @@ void PCube::Draw()
 
 void PCube::CreateCheckerImage()
 {
-	for (int i = 0; i < 64; ++i)
+	for (int i = 0; i < 128; ++i)
 	{
-		for (int j = 0; j < 64; ++j)
+		for (int j = 0; j < 128; ++j)
 		{
 			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
 			checkerImage[i][j][0] = (GLubyte)c;

@@ -5,6 +5,7 @@
 #include "SDL/include/SDL_filesystem.h"
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
+#include "IL/il.h"
 
 #include "mmgr/mmgr.h"
 
@@ -41,6 +42,8 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Generate IO interfaces
 	CreateAssimpIO();
+
+	ilInit();
 }
 
 FileSystem::~FileSystem()

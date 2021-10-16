@@ -249,6 +249,8 @@ void Application::SaveConfig()
 	if (fs->Save(SETTINGS_FOLDER CONFIG_FILENAME, buf, size) > 0)
 		DEBUG_LOG("Saved Engine Preferences");
 
+	RELEASE_ARRAY(buf);
+
 	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
 	saveRequested = false;
 }

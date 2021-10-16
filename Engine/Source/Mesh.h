@@ -2,6 +2,9 @@
 
 #include "MathGeoLib/src/MathGeoLib.h"
 
+typedef unsigned char GLubyte;
+typedef unsigned int GLuint;
+
 struct Vertex
 {
 	float3 position;
@@ -11,17 +14,19 @@ struct Vertex
 
 struct Texture
 {
-	unsigned int id;
+	GLuint id;
 	const char* type;
+	int width;
+	int height;
+	GLubyte* data;
 };
 
-typedef unsigned char GLubyte;
 
 class Mesh
 {
 public:
 	Mesh() : vao(0), vbo(0), ebo(0){}
-	Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind, std::vector<Texture> text, std::vector<float2> texCoord);
+	Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind, Texture text, std::vector<float2> texCoord);
 
 	void Draw();
 
@@ -29,7 +34,7 @@ public:
 	// mesh data
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<Texture> textures;
+	Texture textures;
 	std::vector<float2> texCoords;
 
 private:

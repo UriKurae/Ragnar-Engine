@@ -44,7 +44,7 @@ private:
 	std::vector<GLuint> indices;
 	std::vector<float2> texCoords;
 
-	GLubyte checkerImage[64][64][4];
+	GLubyte checkerImage[128][128][4];
 	unsigned int texId;
 	unsigned int tbo;
 };

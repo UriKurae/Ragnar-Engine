@@ -39,6 +39,7 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
+	void SetVsync();
 
 	inline bool* GetDepthTest() { return &depthTest; }
 	inline bool* GetCullFace() { return &cullFace; }
@@ -48,6 +49,7 @@ public:
 	inline bool* GetStencil() { return &stencil; }
 	inline bool* GetBlending() { return &blending; }
 	inline bool* GetWireMode() { return &wireMode; }
+	inline bool* GetVsync() { return &vsync; }
 
 	void DrawCubeDirectMode();
 	void DrawMeshes();
@@ -83,6 +85,6 @@ public:
 	bool texture2D;
 	bool stencil;
 	bool blending;
-	
 	bool wireMode;
+	bool vsync;
 };

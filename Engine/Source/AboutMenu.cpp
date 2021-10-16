@@ -2,6 +2,8 @@
 #include <SDL_syswm.h>
 #include <GL\glew.h>
 
+#include "mmgr/mmgr.h"
+
 AboutMenu::AboutMenu() : Menu(false)
 {
 }

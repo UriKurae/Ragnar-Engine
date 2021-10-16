@@ -10,6 +10,7 @@ JsonParsing::JsonParsing()
 
 JsonParsing::JsonParsing(const char* string)
 {
+	rootObject = nullptr;
 	if (string != nullptr)
 	{
 		rootObject = json_parse_string(string);

@@ -23,7 +23,7 @@ void Log(const char file[], int line, const char* format, ...);
     }
 
 // Folders defines
-#define ASSETS_FOLDER "/Assets/"
+#define ASSETS_FOLDER "Assets/"
 #define SETTINGS_FOLDER "/Settings/"
 #define MODELS_FOLDER "/Models/"
 
