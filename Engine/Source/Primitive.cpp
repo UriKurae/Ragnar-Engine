@@ -11,7 +11,7 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	transform = t;
 	rotate = r;
 	scale = s;
-
+	/*
 	indexVertex.push_back(transform.x + scale.x);
 	indexVertex.push_back(transform.y + scale.y);
 	indexVertex.push_back(transform.z);
@@ -43,6 +43,7 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	indexVertex.push_back(transform.x);
 	indexVertex.push_back(transform.y);
 	indexVertex.push_back((transform.z + scale.z));
+	*/
 
 	/*GLfloat indexVertex[24] =
 	{
@@ -55,7 +56,7 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 		0.0f, 1.0f, 1.0f,
 		0.0f, 0.0f, 1.0f
 	};*/
-
+	/*
 	GLuint indices[36] =
 	{
 		0,1,2,
@@ -76,15 +77,62 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 		7,4,3,
 		3,2,7
 	};
+	*/
 
-	texCoords.push_back(float2(1, 1));
-	texCoords.push_back(float2(0, 1));
-	texCoords.push_back(float2(0, 0));
+	/*
+	texCoords.push_back(float2(1.f, 1.f));
+	texCoords.push_back(float2(0.f, 1.f));
+	texCoords.push_back(float2(0.f, 0.f));
 
-	texCoords.push_back(float2(0, 0));
-	texCoords.push_back(float2(1, 0));
-	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0.f, 0.f));
+	texCoords.push_back(float2(1.f, 0.f));
+	texCoords.push_back(float2(1.f, 1.f));
+	*/
 
+	//////////////////////////////////// TEST
+	/*
+		Aqui teniais un buen follon. Teniais 24 vertices y solo 6 coordenadas de texturas. Tiene que haver una coordenada por vertice.
+		De todas maneras, usando indices solo necesitais 8 vertices y reusarlos en todas las caras.
+		Es decir:
+		Un cubo tiene:
+
+			8 vertices(float3)
+			8 coords de texture(float2)
+			36 indices
+
+		Os he hecho una cara para comprobar que la textura se aplica correctamente, extendedlo vosotros.
+
+		Si quereis hacerlo parametrico pasadle la longitud por parametro y en lugar de 0.5 usad longitud/2
+	*/
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(0.f);
+
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(0.f);
+
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(0.f);
+
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(0.f);
+
+	texCoords.push_back(float2(0.f, 1.f));
+	texCoords.push_back(float2(0.f, 0.f));
+	texCoords.push_back(float2(1.f, 0.f));
+	texCoords.push_back(float2(1.f, 1.f));
+
+
+	GLuint indices[6] =
+	{
+		0,1,2,
+		2,3,0
+	};
+
+	//////////////////////////////////// 
 	CreateCheckerImage();
 
 	//glGenVertexArrays(1, &vao);
@@ -94,7 +142,8 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	
 	vertex = new VertexBuffer(indexVertex.data(), indexVertex.size() * sizeof(GLfloat));
 	
-	index = new IndexBuffer(indices, 36);
+	//index = new IndexBuffer(indices, 36);
+	index = new IndexBuffer(indices, 6);
 
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
@@ -132,7 +181,7 @@ void PCube::Draw()
 
 	index->Bind();
 
-	glDrawElements(GL_TRIANGLES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
 	index->Unbind();
 	vertex->Unbind();
@@ -149,11 +198,15 @@ void PCube::Draw()
 
 void PCube::CreateCheckerImage()
 {
+	bool toggle = false;
 	for (int i = 0; i < 128; ++i)
 	{
 		for (int j = 0; j < 128; ++j)
 		{
-			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
+			if (i % 2 == 0)
+				toggle = !toggle;
+
+			GLubyte c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
 			checkerImage[i][j][0] = (GLubyte)c;
 			checkerImage[i][j][1] = (GLubyte)c;
 			checkerImage[i][j][2] = (GLubyte)c;
