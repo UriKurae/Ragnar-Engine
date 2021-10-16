@@ -32,6 +32,9 @@
 !Dependencies/Assimp/lib/assimp-vc142-mt.lib
 !Dependencies/PhysFS/lib/physfs.lib
 !Dependencies/Optick/lib/OptickCore.lib
+!Dependencies/DevIL/lib/DevIL.lib
+!Dependencies/DevIL/lib/ILU.lib
+!Dependencies/DevIL/lib/ILUT.lib
 
 # Executables
 *.exe

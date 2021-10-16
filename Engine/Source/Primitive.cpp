@@ -115,13 +115,13 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 		3,2,7
 	};
 
-	//texCoords.push_back(float2(1, 1));
-	//texCoords.push_back(float2(0, 1));
-	//texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 1));
+	texCoords.push_back(float2(0, 0));
 
-	//texCoords.push_back(float2(0, 0));
-	//texCoords.push_back(float2(1, 0));
-	//texCoords.push_back(float2(1, 1));
+	texCoords.push_back(float2(0, 0));
+	texCoords.push_back(float2(1, 0));
+	texCoords.push_back(float2(1, 1));
 
 	CreateCheckerImage();
 

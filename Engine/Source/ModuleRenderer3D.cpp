@@ -185,8 +185,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
-	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
-	//primitives.push_back(cube);
+	PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
+	primitives.push_back(cube);
 
 	//PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
 	//primitives.push_back(pyramid);
