@@ -104,13 +104,14 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 
 		Si quereis hacerlo parametrico pasadle la longitud por parametro y en lugar de 0.5 usad longitud/2
 	*/
+	// Frontal vertices
 	indexVertex.push_back(-0.5f);
 	indexVertex.push_back(0.5f);
-	indexVertex.push_back(0.f);
+	indexVertex.push_back(0.0f);
 
 	indexVertex.push_back(-0.5f);
 	indexVertex.push_back(-0.5f);
-	indexVertex.push_back(0.f);
+	indexVertex.push_back(0.0f);
 
 	indexVertex.push_back(0.5f);
 	indexVertex.push_back(-0.5f);
@@ -118,18 +119,57 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 
 	indexVertex.push_back(0.5f);
 	indexVertex.push_back(0.5f);
-	indexVertex.push_back(0.f);
+	indexVertex.push_back(0.0f);
 
-	texCoords.push_back(float2(0.f, 1.f));
-	texCoords.push_back(float2(0.f, 0.f));
-	texCoords.push_back(float2(1.f, 0.f));
-	texCoords.push_back(float2(1.f, 1.f));
+	// Back vertices
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(-1.0f);
+
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(-1.0f);
+
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(-1.0f);
+
+	indexVertex.push_back(-0.5f);
+	indexVertex.push_back(0.5f);
+	indexVertex.push_back(-1.0f);
+
+	texCoords.push_back(float2(0.0f, 1.0f)); // 0 
+	texCoords.push_back(float2(0.0f, 0.0f)); // 1
+	texCoords.push_back(float2(1.0f, 0.0f)); // 2
+	texCoords.push_back(float2(1.0f, 1.0f)); // 3
+
+	texCoords.push_back(float2(0.0f, 1.0f)); // 5
+	texCoords.push_back(float2(0.0f, 0.0f)); // 4
+	texCoords.push_back(float2(1.0f, 0.0f)); // 6
+	texCoords.push_back(float2(1.0f, 1.0f)); // 7
 
 
-	GLuint indices[6] =
+
+	GLuint indices[36] =
 	{
 		0,1,2,
-		2,3,0
+		2,3,0,
+
+		3,2,4,
+		4,5,3,
+
+		5,4,6,
+		6,7,5,
+
+		7,6,1,
+		1,0,7,
+
+		3,5,7,
+		7,0,3, 
+
+		1,6,4,
+		4,2,1
+
 	};
 
 	//////////////////////////////////// 
@@ -142,8 +182,8 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	
 	vertex = new VertexBuffer(indexVertex.data(), indexVertex.size() * sizeof(GLfloat));
 	
-	//index = new IndexBuffer(indices, 36);
-	index = new IndexBuffer(indices, 6);
+	index = new IndexBuffer(indices, 36);
+	//index = new IndexBuffer(indices, 6);
 
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
@@ -181,7 +221,7 @@ void PCube::Draw()
 
 	index->Bind();
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 
 	index->Unbind();
 	vertex->Unbind();
