@@ -198,14 +198,10 @@ void PCube::Draw()
 
 void PCube::CreateCheckerImage()
 {
-	bool toggle = false;
 	for (int i = 0; i < 128; ++i)
 	{
 		for (int j = 0; j < 128; ++j)
 		{
-			if (i % 2 == 0)
-				toggle = !toggle;
-
 			GLubyte c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
 			checkerImage[i][j][0] = (GLubyte)c;
 			checkerImage[i][j][1] = (GLubyte)c;
