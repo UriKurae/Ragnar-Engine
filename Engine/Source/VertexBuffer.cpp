@@ -4,11 +4,11 @@
 
 #include "mmgr/mmgr.h"
 
-VertexBuffer::VertexBuffer(const void* data, unsigned int size)
+VertexBuffer::VertexBuffer(const void* data, unsigned int s) : size (s)
 {
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, s, data, GL_STATIC_DRAW);
 }
 
 VertexBuffer::~VertexBuffer()
