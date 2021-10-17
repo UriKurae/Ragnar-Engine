@@ -110,14 +110,17 @@ Texture Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const c
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
+		std::string path = ASSETS_FOLDER;
+		path += str.C_Str();
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		//ILboolean boolean = ilLoadImage(ASSETS_FOLDER"Lenna.png");
-		texture.data = ilGetData();
-		texture.id = ilutGLLoadImage(ASSETS_FOLDER "Lenna.png");
+		ilLoadImage(ASSETS_FOLDER "Lenna.png");
+		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+		//texture.id = ilutGLLoadImage(ASSETS_FOLDER "Lenna.png");
 		texture.width = ilGetInteger(IL_IMAGE_WIDTH);
 		texture.height = ilGetInteger(IL_IMAGE_HEIGHT);
+		texture.id = image;
 	}
 
 	return texture;

@@ -5,8 +5,6 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "glew/include/GL/glew.h"
-#include "SDL\include\SDL_opengl.h"
-
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
@@ -54,6 +52,14 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	
 	if(ret == true)
 	{
+		//Use OpenGL 3.1
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
 		GLenum err = glewInit();
 		if (GLEW_OK != err)
 		{

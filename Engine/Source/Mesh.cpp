@@ -3,6 +3,8 @@
 #include "glew/include/GL/glew.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
+#include "IL/il.h"
+
 #include "mmgr/mmgr.h"
 
 Mesh::Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind, Texture text, std::vector<float2> texCoord) : vertices(vert), indices(ind), textures(text), texCoords(texCoord), vao(0), vbo(0), ebo(0)
@@ -46,7 +48,6 @@ void Mesh::Draw()
 
 	//glBindVertexArray(0);
 
-
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
@@ -76,6 +77,7 @@ void Mesh::SetupMesh()
 	glGenBuffers(1, &ebo);
 	glGenBuffers(1, &tbo);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	//glGenTextures(1, &textures.id);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
@@ -91,7 +93,7 @@ void Mesh::SetupMesh()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textures.width, textures.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textures.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textures.width, textures.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
 
 	// Generate VAO, VBO and EBO
 	//glGenVertexArrays(1, &vao);
