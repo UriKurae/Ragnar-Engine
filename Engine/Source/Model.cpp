@@ -106,6 +106,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 Texture Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
 {
 	Texture texture = {};
+	// Carefull with multiple textures as it affects imgui
 	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;

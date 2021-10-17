@@ -177,14 +177,14 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 
 	//glGenVertexArrays(1, &vao);
 	//glBindVertexArray(vao);
+
+	// Generate all buffers and setup them
 	glGenBuffers(1, &tbo);
 	glGenTextures(1, &texId);
-	
-	vertex = new VertexBuffer(indexVertex.data(), indexVertex.size() * sizeof(GLfloat));
-	
-	index = new IndexBuffer(indices, 36);
-	//index = new IndexBuffer(indices, 6);
 
+	vertex = new VertexBuffer(indexVertex.data(), indexVertex.size() * sizeof(GLfloat));
+	index = new IndexBuffer(indices, 36);
+	
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
 
@@ -194,6 +194,13 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
+
+
+	// Unbind all buffers
+	glBindTexture(GL_TEXTURE_2D, 0);
+	index->Unbind();
+	vertex->Unbind();
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
 	//glEnableVertexAttribArray(0);

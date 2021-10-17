@@ -73,12 +73,14 @@ void Mesh::Draw()
 
 void Mesh::SetupMesh()
 {
+	// Generate everything
 	glGenBuffers(1, &vbo);
 	glGenBuffers(1, &ebo);
 	glGenBuffers(1, &tbo);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	//glGenTextures(1, &textures.id);
+	glGenTextures(1, &textures.id);
 
+	// Make the setup for each buffer
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
@@ -94,6 +96,12 @@ void Mesh::SetupMesh()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textures.width, textures.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
+
+	// Unbind everything
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// Generate VAO, VBO and EBO
 	//glGenVertexArrays(1, &vao);
