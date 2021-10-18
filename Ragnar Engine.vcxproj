@@ -123,6 +123,7 @@
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
     <ClInclude Include="Engine\Source\Menu.h" />
     <ClInclude Include="Engine\Source\Mesh.h" />
+    <ClInclude Include="Engine\Source\MeshComponent.h" />
     <ClInclude Include="Engine\Source\Model.h" />
     <ClInclude Include="Engine\Source\Module.h" />
     <ClInclude Include="Engine\Source\ModuleCamera3D.h" />
@@ -130,7 +131,6 @@
     <ClInclude Include="Engine\Source\ModuleInput.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
-    <ClInclude Include="Engine\Source\ModuleSceneIntro.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
@@ -164,13 +164,13 @@
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
     <ClCompile Include="Engine\Source\Mesh.cpp" />
+    <ClCompile Include="Engine\Source\MeshComponent.cpp" />
     <ClCompile Include="Engine\Source\Model.cpp" />
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleEditor.cpp" />
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
-    <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />

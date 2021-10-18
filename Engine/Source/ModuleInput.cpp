@@ -153,6 +153,7 @@ bool ModuleInput::PreUpdate(float dt)
 			case SDL_DROPFILE:
 			{
 				const char* filePath = e.drop.file;
+				//app->scene->CreateGameObject();
 				app->renderer3D->InitMesh(filePath);
 				SDL_free(&filePath);
 			}	

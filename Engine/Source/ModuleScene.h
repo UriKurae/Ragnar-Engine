@@ -15,6 +15,8 @@ public:
 	bool Update(float dt) override;
 	bool PostUpdate() override;
 
+	GameObject* CreateGameObject();
+
 private:
 	std::vector<GameObject*> gameObjects;
 };

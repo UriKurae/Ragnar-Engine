@@ -16,9 +16,6 @@
     <Filter Include="Sources\Helpers">
       <UniqueIdentifier>{121f8e6b-df36-4ab0-be0d-601ddfc9e503}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Modules\Game">
-      <UniqueIdentifier>{83f46af7-e02f-40c0-9e56-41d76082527b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Libraries">
       <UniqueIdentifier>{4151a58e-da1f-404e-9562-e6bafb6439cc}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\Source\ModuleSceneIntro.h">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Module.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -180,11 +174,11 @@
     <ClInclude Include="Engine\Source\TransformComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\MeshComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\Source\ModuleSceneIntro.cpp">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -288,6 +282,9 @@
       <Filter>Sources\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\TransformComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MeshComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>

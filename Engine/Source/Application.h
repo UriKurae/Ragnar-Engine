@@ -10,7 +10,7 @@
 
 class ModuleWindow;
 class ModuleInput;
-class ModuleSceneIntro;
+class ModuleScene;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
@@ -57,10 +57,10 @@ private:
 public:
 	ModuleWindow* window;
 	ModuleInput* input;
-	ModuleSceneIntro* sceneIntro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
+	ModuleScene* scene;
 	FileSystem* fs;
 
 	JsonParsing jsonFile;
