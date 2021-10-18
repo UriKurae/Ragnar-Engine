@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include "Component.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
 class GameObject
 {
@@ -11,11 +13,20 @@ public:
 	~GameObject();
 
 	bool Update(float dt);
+	void Draw();
 
 	Component* CreateComponent(ComponentType type);
+	void AddComponent(Component* component);
+	void AddChild(GameObject* object);
+
+	inline void SetParent(GameObject* object) { parent = object; }
 
 	inline const char* GetName() const { return name.c_str(); }
+	inline const GameObject* GetParent() const { return parent; }
 	inline bool GetActive() const { return active; }
+	inline std::vector<GameObject*> GetChilds() const { return children; }
+
+	inline void SetName(const char* n) { name = n; }
 
 	template<typename T>
 	T* GetComponent();

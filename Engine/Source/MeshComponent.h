@@ -7,19 +7,31 @@
 
 #include <vector>
 
+typedef unsigned int GLuint;
+typedef unsigned char GLubyte;
+
+struct Texture
+{
+	GLuint id;
+	const char* type;
+	int width;
+	int height;
+	GLubyte* data;
+};
+
 class MeshComponent : public Component
 {
 public:
-	MeshComponent() : ebo(nullptr), vbo(nullptr), texId(0), tbo(0) {}
-	MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, std::vector<float2> texCoord);
+	MeshComponent() : ebo(nullptr), vbo(nullptr), tbo(0), texture({}) {}
+	MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, Texture tex, std::vector<float2> texCoord);
 	~MeshComponent();
 
-	void Draw();
+	void Draw() override;
 
 private:
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
-	unsigned int texId;
+	Texture texture;
 	unsigned int tbo;
 
 	std::vector<float3> vertices;

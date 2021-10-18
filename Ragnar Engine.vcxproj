@@ -119,7 +119,7 @@
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
     <ClInclude Include="Engine\Source\Light.h" />
-    <ClInclude Include="Engine\Source\LoadFBX.h" />
+    <ClInclude Include="Engine\Source\LoadModel.h" />
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
     <ClInclude Include="Engine\Source\Menu.h" />
     <ClInclude Include="Engine\Source\Mesh.h" />
@@ -159,7 +159,7 @@
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
     <ClCompile Include="Engine\Source\Light.cpp" />
-    <ClCompile Include="Engine\Source\LoadFBX.cpp" />
+    <ClCompile Include="Engine\Source\LoadModel.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />

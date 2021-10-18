@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MathGeoLib/src/MathGeoLib.h"
+#include "MeshComponent.h"
 
 typedef unsigned char GLubyte;
 typedef unsigned int GLuint;
@@ -12,15 +13,14 @@ struct Vertex
 	float2 texCoords;
 };
 
-struct Texture
-{
-	GLuint id;
-	const char* type;
-	int width;
-	int height;
-	GLubyte* data;
-};
-
+//struct Texture
+//{
+//	GLuint id;
+//	const char* type;
+//	int width;
+//	int height;
+//	GLubyte* data;
+//};
 
 class Mesh
 {

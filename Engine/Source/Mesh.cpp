@@ -78,7 +78,7 @@ void Mesh::SetupMesh()
 	glGenBuffers(1, &ebo);
 	glGenBuffers(1, &tbo);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &textures.id);
+	//glGenTextures(1, &textures.id);
 
 	// Make the setup for each buffer
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);

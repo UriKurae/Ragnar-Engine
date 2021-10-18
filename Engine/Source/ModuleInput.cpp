@@ -5,6 +5,8 @@
 
 #include "Optick/include/optick.h"
 
+#include "LoadModel.h"
+
 #include "mmgr/mmgr.h"
 
 #define MAX_KEYS 300
@@ -154,7 +156,8 @@ bool ModuleInput::PreUpdate(float dt)
 			{
 				const char* filePath = e.drop.file;
 				//app->scene->CreateGameObject();
-				app->renderer3D->InitMesh(filePath);
+				LoadModel::GetInstance()->LoadingModel(filePath);
+				//app->renderer3D->InitMesh(filePath);
 				SDL_free(&filePath);
 			}	
 			break;

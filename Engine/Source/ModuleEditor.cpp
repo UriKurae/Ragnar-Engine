@@ -4,6 +4,8 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleScene.h"
+#include "GameObject.h"
 
 #include "ConsoleMenu.h"
 
@@ -36,6 +38,38 @@ bool ModuleEditor::Update(float dt)
 	{
 		app->window->SetFullscreen();
 	}
+
+	ImGui::Begin("Hierarchy");
+	for (int i = 0; i < app->scene->GetGameObjectsList().size(); ++i)
+	{
+		GameObject& object = (*app->scene->GetGameObjectsList()[i]);
+		if (object.GetParent() == nullptr)
+		{
+			if (ImGui::TreeNode(object.GetName()))
+			{
+				for (int i = 0; i < object.GetChilds().size(); ++i)
+				{
+					GameObject& obj = (*object.GetChilds()[i]);
+					if (ImGui::TreeNode(obj.GetName()))
+					{
+						ImGui::TreePop();
+					}
+				}
+				ImGui::TreePop();
+			}
+		}
+	}
+	ImGui::End();
+
+	//for (int i = 0; i < app->scene->GetGameObjectsList().size(); i++)
+	//{
+	//	GameObject& object = (*app->scene->GetGameObjectsList()[i]);
+	//	if (ImGui::TreeNodeEx(object.GetName()))
+	//	{
+	//		ImGui::TreePop();
+	//	}
+	//}
+	//ImGui::End();
 
 	return ret;
 }

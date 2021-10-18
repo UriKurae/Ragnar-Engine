@@ -8,7 +8,6 @@
 #include "Primitive.h"
 #include "glew/include/GL/glew.h"
 
-#include "LoadFBX.h"
 #include "Model.h"
 
 #define MAX_LIGHTS 8

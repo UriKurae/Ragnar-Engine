@@ -19,8 +19,11 @@ public:
 	virtual void Enable() {}
 	virtual bool Update(float dt) { return true; }
 	virtual void Disable() {}
+	virtual void Draw() {}
 
 	virtual void OnEditor() {}
+
+	inline void SetOwner(GameObject* own) { owner = own; }
 
 protected:
 	ComponentType type;

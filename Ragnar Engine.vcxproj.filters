@@ -149,7 +149,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
-    <ClInclude Include="Engine\Source\LoadFBX.h" />
     <ClInclude Include="Engine\Source\FileSystem.h">
       <Filter>Sources</Filter>
     </ClInclude>
@@ -176,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\MeshComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\LoadModel.h">
+      <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,7 +264,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
-    <ClCompile Include="Engine\Source\LoadFBX.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -286,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\MeshComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\LoadModel.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

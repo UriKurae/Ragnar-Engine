@@ -16,6 +16,7 @@ public:
 	bool PostUpdate() override;
 
 	GameObject* CreateGameObject();
+	inline std::vector<GameObject*> GetGameObjectsList() const { return gameObjects; }
 
 private:
 	std::vector<GameObject*> gameObjects;
