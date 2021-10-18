@@ -9,6 +9,8 @@
 
 #include <vector>
 
+class GameObject;
+
 class Model
 {
 public:
@@ -20,7 +22,7 @@ public:
 
 private:
 	void LoadModel(std::string path);
-	void ProcessNode(aiNode* node, const aiScene* scene);
+	void ProcessNode(aiNode* node, const aiScene* scene, GameObject* object);
 	Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 	Texture LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName);
 

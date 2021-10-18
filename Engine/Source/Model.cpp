@@ -5,6 +5,9 @@
 #include "Globals.h"
 #include "mmgr/mmgr.h"
 
+#include "GameObject.h"
+#include "TransformComponent.h"
+
 Model::Model(const char* path)
 {
 	LoadModel(path);
@@ -35,14 +38,17 @@ void Model::LoadModel(std::string path)
 	}
 	directory = path.substr(0, path.find_last_of('/'));
 
-	ProcessNode(scene->mRootNode, scene);
+	GameObject* object = new GameObject();
+
+	ProcessNode(scene->mRootNode, scene, object);
 }
 
-void Model::ProcessNode(aiNode* node, const aiScene* scene)
+void Model::ProcessNode(aiNode* node, const aiScene* scene, GameObject* object)
 {
 	// Process first all the meshes in our current root node
 	for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 	{
+		object->CreateComponent(ComponentType::MESH_RENDERER);
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		meshes.push_back(ProcessMesh(mesh, scene));
 	}
@@ -50,9 +56,9 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene)
 	// Repeat the process until there's no more children
 	for (unsigned int i = 0; i < node->mNumChildren; ++i)
 	{
-		ProcessNode(node->mChildren[i], scene);
+		// TODO: Uncomment this for loading the mesh
+		//ProcessNode(node->mChildren[i], scene);
 	}
-
 }
 
 Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
@@ -116,7 +122,7 @@ Texture Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const c
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage(ASSETS_FOLDER "Lenna.png");
+		ilLoadImage(str.C_Str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		//texture.id = ilutGLLoadImage(ASSETS_FOLDER "Lenna.png");
 		texture.width = ilGetInteger(IL_IMAGE_WIDTH);

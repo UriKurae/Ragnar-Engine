@@ -148,8 +148,6 @@ PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 	texCoords.push_back(float2(1.0f, 0.0f)); // 6
 	texCoords.push_back(float2(1.0f, 1.0f)); // 7
 
-
-
 	GLuint indices[36] =
 	{
 		0,1,2,
