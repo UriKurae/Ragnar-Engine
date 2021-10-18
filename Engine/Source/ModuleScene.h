@@ -14,6 +14,7 @@ public:
 	bool Start() override;
 	bool Update(float dt) override;
 	bool PostUpdate() override;
+	bool CleanUp() override;
 
 	GameObject* CreateGameObject();
 	inline std::vector<GameObject*> GetGameObjectsList() const { return gameObjects; }

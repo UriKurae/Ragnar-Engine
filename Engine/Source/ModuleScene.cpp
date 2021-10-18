@@ -43,6 +43,16 @@ bool ModuleScene::PostUpdate()
 	return true;
 }
 
+bool ModuleScene::CleanUp()
+{
+	for (int i = 0; i < gameObjects.size(); ++i)
+	{
+		RELEASE(gameObjects[i]);
+	}
+
+	return true;
+}
+
 GameObject* ModuleScene::CreateGameObject()
 {
 	OPTICK_EVENT("Creating Game Object");

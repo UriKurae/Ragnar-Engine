@@ -1,7 +1,9 @@
 #include "MeshComponent.h"
+#include "Globals.h"
 
 #include "glew/include/GL/glew.h"
-#include "IL/il.h"
+
+#include "mmgr/mmgr.h"
 
 MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, Texture tex,std::vector<float2> texCoord) : vertices(vert), indices(ind), texture(tex), texCoords(texCoord)
 {
@@ -11,15 +13,9 @@ MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int>
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
 
-	glGenTextures(1, &texture.id);
-	glBindTexture(GL_TEXTURE_2D, texture.id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
+	texBuffer = new TextureBuffer(texture);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	texBuffer->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	vbo->Unbind();
 	ebo->Unbind();
@@ -27,6 +23,9 @@ MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int>
 
 MeshComponent::~MeshComponent()
 {
+	RELEASE(vbo);
+	RELEASE(ebo);
+	RELEASE(texBuffer);
 }
 
 void MeshComponent::Draw()
@@ -40,7 +39,7 @@ void MeshComponent::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-	glBindTexture(GL_TEXTURE_2D, texture.id);
+	texBuffer->Bind();
 	ebo->Bind();
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
@@ -48,7 +47,7 @@ void MeshComponent::Draw()
 	ebo->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	vbo->Unbind();
-	glBindTexture(GL_TEXTURE_2D, 0);
+	texBuffer->Unbind();
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
