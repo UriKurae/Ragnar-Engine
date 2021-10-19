@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 
+class GameObject;
+
 class ModuleEditor : public Module
 {
 public:
@@ -24,5 +26,10 @@ public:
 
 private:
 
+	bool test = false;
+	int testeo = 0;
 	MainMenuBar mainMenuBar;
+
+	GameObject* selected;
+	GameObject* selectedParent;
 };

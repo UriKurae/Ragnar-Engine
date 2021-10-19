@@ -34,6 +34,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 
 		break;
 	case ComponentType::MATERIAL:
+
 		break;
 	}
 
@@ -49,4 +50,36 @@ void GameObject::AddComponent(Component* component)
 void GameObject::AddChild(GameObject* object)
 {
 	children.emplace_back(object);
+}
+
+void GameObject::MoveChildrenUp(GameObject* child)
+{
+	if (child == children[0]) return;
+
+	for (int i = 0; i < children.size(); ++i)
+	{
+		if (children[i] == child)
+		{
+			GameObject* aux = child;
+
+			children[i] = children[i - 1];
+			children[i - 1] = aux;
+		}
+	}
+}
+
+void GameObject::MoveChildrenDown(GameObject* child)
+{
+	if (child == children[children.size()-1]) return;
+
+	for (int i = children.size()-1; i >= 0; --i)
+	{
+		if (children[i] == child)
+		{
+			GameObject* aux = child;
+
+			children[i] = children[i + 1];
+			children[i + 1] = aux;
+		}
+	}
 }

@@ -17,7 +17,10 @@ public:
 	bool CleanUp() override;
 
 	GameObject* CreateGameObject();
-	inline std::vector<GameObject*> GetGameObjectsList() const { return gameObjects; }
+	inline std::vector<GameObject*> GetGameObjectsList() const 
+	{ 
+		return gameObjects; 
+	}
 
 private:
 	std::vector<GameObject*> gameObjects;

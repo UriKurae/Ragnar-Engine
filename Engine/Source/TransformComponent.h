@@ -11,6 +11,8 @@ public:
 
 	bool Update(float dt) override;
 
+	void OnEditor() override;
+
 	void SetTransform(float3 pos, Quat rot, float3 sca);
 private:
 	float3 position;

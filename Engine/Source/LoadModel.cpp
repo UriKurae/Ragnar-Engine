@@ -49,8 +49,8 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		obj->AddComponent(ProcessMesh(mesh, scene));
+		obj->AddComponent(LoadingTransform(node));
 		obj->SetName(node->mName.C_Str());
-		//meshes.push_back(ProcessMesh(mesh, scene));
 	}
 
 	// Repeat the process until there's no more children
@@ -133,4 +133,23 @@ Texture LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, con
 	}
 
 	return texture;
+}
+
+TransformComponent* LoadModel::LoadingTransform(aiNode* node)
+{
+	TransformComponent* transform = new TransformComponent();
+
+	aiVector3D pos;
+	aiQuaternion quat;
+	aiVector3D scale;
+
+	node->mTransformation.Decompose(scale, quat, pos);
+
+	float3 p = { pos.x, pos.y, pos.z };
+	Quat q = { quat.w, quat.x, quat.y, quat.z };
+	float3 s = { scale.x, scale.y, scale.z };
+
+	transform->SetTransform(p, q, s);
+
+	return transform;
 }

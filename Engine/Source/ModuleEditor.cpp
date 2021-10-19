@@ -17,7 +17,7 @@
 #include "Optick/include/optick.h"
 #include "mmgr/mmgr.h"
 
-ModuleEditor::ModuleEditor() : Module()
+ModuleEditor::ModuleEditor() : selected(nullptr), Module()
 {
 	name = "Editor";
 }
@@ -52,12 +52,71 @@ bool ModuleEditor::Update(float dt)
 					GameObject& obj = (*object.GetChilds()[i]);
 					if (ImGui::TreeNode(obj.GetName()))
 					{
+						
 						ImGui::TreePop();
+					}			
+					if (ImGui::IsItemHovered() && !test)
+					{
+						if (ImGui::GetIO().MouseReleased[1])
+						{
+							test = true;
+							selected = &obj;
+							selectedParent = &object;
+						}	
 					}
+					/*else
+					{
+						if (ImGui::GetIO().MouseDown[0] || ImGui::GetIO().MouseDown[1])
+						{
+							test = false;
+						}
+					}*/
 				}
 				ImGui::TreePop();
 			}
 		}
+		
+	}
+
+	if (test)
+	{
+		ImGui::OpenPopup("GameObject");
+		if (ImGui::BeginPopup("GameObject"))
+		{		
+			if (ImGui::Button("Move Up", ImVec2(100.0f, 30.0f)))
+			{
+				selectedParent->MoveChildrenUp(selected);
+				test = false;
+			}
+			if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
+			{
+				selectedParent->MoveChildrenDown(selected);
+				test = false;
+			}
+			ImGui::EndPopup();
+			/*if (!ImGui::IsItemHovered() && (ImGui::GetIO().MouseReleased[0] || ImGui::GetIO().MouseReleased[1]))
+			{
+				test = false;
+			}*/
+		}	
+	}
+	ImGui::End();
+
+	
+
+	ImGui::Begin("Inspector");
+	if (!app->scene->GetGameObjectsList().empty())
+	{
+		GameObject& object = (*app->scene->GetGameObjectsList()[1]);
+
+		if (ImGui::BeginMenu(object.GetName()))
+		{
+			object.GetComponent<TransformComponent>()->OnEditor();
+
+			ImGui::EndMenu();
+		}
+
+	
 	}
 	ImGui::End();
 

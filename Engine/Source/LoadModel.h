@@ -9,6 +9,7 @@
 #include "MeshComponent.h"
 
 class GameObject;
+class TransformComponent;
 
 class LoadModel
 {
@@ -17,6 +18,7 @@ public:
 	~LoadModel();
 
 	void LoadingModel(std::string path);
+	TransformComponent* LoadingTransform(aiNode* node);
 
 	void ProcessNode(aiNode* node, const aiScene* scene, GameObject* object);
 	MeshComponent* ProcessMesh(aiMesh* mesh, const aiScene* scene);
