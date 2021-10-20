@@ -6,6 +6,8 @@
 #include "MeshComponent.h"
 #include "Optick/include/optick.h"
 
+#include "mmgr/mmgr.h"
+
 ModuleScene::ModuleScene()
 {
 }
@@ -58,6 +60,7 @@ GameObject* ModuleScene::CreateGameObject()
 	OPTICK_EVENT("Creating Game Object");
 
 	GameObject* object = new GameObject();
+	object->CreateComponent(ComponentType::TRANSFORM);
 	gameObjects.emplace_back(object);
 	
 	return object;

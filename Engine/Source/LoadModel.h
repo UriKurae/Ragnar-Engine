@@ -15,10 +15,11 @@ class LoadModel
 {
 public:
 	static LoadModel* GetInstance();
+	static void ReleaseInstance();
 	~LoadModel();
 
 	void LoadingModel(std::string path);
-	TransformComponent* LoadingTransform(aiNode* node);
+	void LoadingTransform(aiNode* node, GameObject* obj);
 
 	void ProcessNode(aiNode* node, const aiScene* scene, GameObject* object);
 	MeshComponent* ProcessMesh(aiMesh* mesh, const aiScene* scene);

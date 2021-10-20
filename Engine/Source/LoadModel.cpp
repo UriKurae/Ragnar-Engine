@@ -19,9 +19,13 @@ LoadModel* LoadModel::GetInstance()
 	return instance;
 }
 
-LoadModel::~LoadModel()
+void LoadModel::ReleaseInstance()
 {
 	RELEASE(instance);
+}
+
+LoadModel::~LoadModel()
+{
 }
 
 void LoadModel::LoadingModel(std::string path)
@@ -45,21 +49,30 @@ void LoadModel::LoadingModel(std::string path)
 
 void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 {
+	LoadingTransform(node, obj);
 	for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		obj->AddComponent(ProcessMesh(mesh, scene));
-		obj->AddComponent(LoadingTransform(node));
+		MeshComponent* m = ProcessMesh(mesh, scene);
+		m->SetTransform(obj->GetComponent<TransformComponent>());
+		obj->AddComponent(m);
 		obj->SetName(node->mName.C_Str());
 	}
 
 	// Repeat the process until there's no more children
 	for (unsigned int i = 0; i < node->mNumChildren; ++i)
 	{
-		GameObject* object = app->scene->CreateGameObject();
-		object->SetParent(obj);
-		if (obj != nullptr) obj->AddChild(object);
-		ProcessNode(node->mChildren[i], scene, object);
+		if (node->mChildren[i]->mNumMeshes > 0)
+		{
+			GameObject* object = app->scene->CreateGameObject();
+			object->SetParent(obj);
+			if (obj != nullptr) obj->AddChild(object);
+			ProcessNode(node->mChildren[i], scene, object);
+		}
+		else
+		{
+			ProcessNode(node->mChildren[i], scene, obj);
+		}
 	}
 }
 
@@ -106,9 +119,9 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		//textures.insert(textures.end(), specular.begin(), specular.end());
 	}
+	MeshComponent* m = new MeshComponent(vertices, indices, diffuse, texCoords);
 
-	//return &MeshComponent(vertices, indices, texCoords);
-	return new MeshComponent(vertices, indices, diffuse, texCoords);
+	return m;
 }
 
 Texture LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
@@ -135,10 +148,8 @@ Texture LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, con
 	return texture;
 }
 
-TransformComponent* LoadModel::LoadingTransform(aiNode* node)
+void LoadModel::LoadingTransform(aiNode* node, GameObject* obj)
 {
-	TransformComponent* transform = new TransformComponent();
-
 	aiVector3D pos;
 	aiQuaternion quat;
 	aiVector3D scale;
@@ -149,7 +160,5 @@ TransformComponent* LoadModel::LoadingTransform(aiNode* node)
 	Quat q = { quat.w, quat.x, quat.y, quat.z };
 	float3 s = { scale.x, scale.y, scale.z };
 
-	transform->SetTransform(p, q, s);
-
-	return transform;
+	obj->GetComponent<TransformComponent>()->SetTransform(p, q, s);
 }

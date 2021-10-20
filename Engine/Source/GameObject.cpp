@@ -1,4 +1,7 @@
 #include "GameObject.h"
+#include "Globals.h"
+
+#include "mmgr/mmgr.h"
 
 GameObject::GameObject() : active(true), parent(nullptr)
 {
@@ -6,6 +9,10 @@ GameObject::GameObject() : active(true), parent(nullptr)
 
 GameObject::~GameObject()
 {
+	for (int i = 0; i < components.size(); ++i)
+	{
+		RELEASE(components[i]);
+	}
 }
 
 bool GameObject::Update(float dt)
@@ -18,6 +25,14 @@ void GameObject::Draw()
 	for (int i = 0; i < components.size(); ++i)
 	{
 		components[i]->Draw();
+	}
+}
+
+void GameObject::DrawEditor()
+{
+	for (int i = 0; i < components.size(); ++i)
+	{
+		components[i]->OnEditor();
 	}
 }
 
@@ -37,6 +52,8 @@ Component* GameObject::CreateComponent(ComponentType type)
 
 		break;
 	}
+
+	if (component != nullptr) components.push_back(component);
 
 	return component;
 }

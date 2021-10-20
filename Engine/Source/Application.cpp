@@ -6,6 +6,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "FileSystem.h"
+#include "LoadModel.h"
 
 #include "Optick/include/optick.h"
 
@@ -51,6 +52,7 @@ Application::~Application()
 	}
 
 	RELEASE(fs);
+	LoadModel::ReleaseInstance();
 
 	listModules.clear();
 }

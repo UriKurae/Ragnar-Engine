@@ -1,11 +1,12 @@
 #include "MeshComponent.h"
+#include "TransformComponent.h"
 #include "Globals.h"
 
 #include "glew/include/GL/glew.h"
 
 #include "mmgr/mmgr.h"
 
-MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, Texture tex,std::vector<float2> texCoord) : vertices(vert), indices(ind), texture(tex), texCoords(texCoord)
+MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, Texture tex,std::vector<float2> texCoord) : vertices(vert), indices(ind), texture(tex), texCoords(texCoord), transform(nullptr)
 {
 	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
 	ebo = new IndexBuffer(indices.data(), indices.size());
@@ -33,6 +34,9 @@ void MeshComponent::Draw()
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
+	glPushMatrix();
+	glMultMatrixf(transform->GetTransform());
+
 	vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
@@ -48,6 +52,8 @@ void MeshComponent::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	vbo->Unbind();
 	texBuffer->Unbind();
+
+	glPopMatrix();
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);

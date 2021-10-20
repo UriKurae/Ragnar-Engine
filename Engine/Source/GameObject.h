@@ -14,6 +14,7 @@ public:
 
 	bool Update(float dt);
 	void Draw();
+	void DrawEditor();
 
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
@@ -26,7 +27,6 @@ public:
 	inline const GameObject* GetParent() const { return parent; }
 	inline bool GetActive() const { return active; }
 	inline std::vector<GameObject*> GetChilds() const { return children; }
-	inline ComponentType GetType() const { return type; }
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
@@ -40,8 +40,6 @@ private:
 
 	GameObject* parent;
 	std::vector<GameObject*> children;
-
-	ComponentType type;
 };
 
 template<typename T>

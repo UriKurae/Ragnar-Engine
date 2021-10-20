@@ -4,6 +4,8 @@
 #include "glew/include/GL/glew.h"
 #include "IL/il.h"
 
+#include "mmgr/mmgr.h"
+
 TextureBuffer::TextureBuffer(Texture texture) : id(texture.id)
 {
 	glGenTextures(1, &id);

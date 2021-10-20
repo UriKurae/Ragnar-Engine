@@ -186,8 +186,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	PGrid* grid = new PGrid(200, 200);
 	primitives.push_back(grid);
 
-	PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
-	primitives.push_back(cube);
+	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
+	//primitives.push_back(cube);
 
 	//PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
 	//primitives.push_back(pyramid);

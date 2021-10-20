@@ -10,6 +10,7 @@
 
 typedef unsigned int GLuint;
 typedef unsigned char GLubyte;
+class TransformComponent;
 
 struct Texture
 {
@@ -28,6 +29,8 @@ public:
 	~MeshComponent();
 
 	void Draw() override;
+	
+	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 
 private:
 	VertexBuffer* vbo;
@@ -39,4 +42,6 @@ private:
 	std::vector<float3> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
+
+	TransformComponent* transform;
 };

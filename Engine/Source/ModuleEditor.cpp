@@ -107,16 +107,14 @@ bool ModuleEditor::Update(float dt)
 	ImGui::Begin("Inspector");
 	if (!app->scene->GetGameObjectsList().empty())
 	{
-		GameObject& object = (*app->scene->GetGameObjectsList()[1]);
+		GameObject& object = (*app->scene->GetGameObjectsList()[0]);
 
 		if (ImGui::BeginMenu(object.GetName()))
 		{
-			object.GetComponent<TransformComponent>()->OnEditor();
+			object.DrawEditor();
 
 			ImGui::EndMenu();
 		}
-
-	
 	}
 	ImGui::End();
 

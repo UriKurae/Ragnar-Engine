@@ -653,6 +653,7 @@ PGrid::PGrid(float w, float h) : width(w), height(h), Primitive()
 
 PGrid::~PGrid()
 {
+	RELEASE(vertex);
 }
 
 void PGrid::Draw()

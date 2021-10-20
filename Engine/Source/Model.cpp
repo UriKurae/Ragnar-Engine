@@ -3,10 +3,10 @@
 #include "IL/il.h"
 #include "IL/ilut.h"
 #include "Globals.h"
-#include "mmgr/mmgr.h"
-
 #include "GameObject.h"
 #include "TransformComponent.h"
+
+#include "mmgr/mmgr.h"
 
 Model::Model(const char* path)
 {
