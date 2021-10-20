@@ -26,8 +26,7 @@ public:
 
 private:
 
-	bool test = false;
-	int testeo = 0;
+	bool gameObjectOptions = false;
 	MainMenuBar mainMenuBar;
 
 	GameObject* selected;

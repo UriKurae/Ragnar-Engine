@@ -17,7 +17,7 @@
 #include "Optick/include/optick.h"
 #include "mmgr/mmgr.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), Module()
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), Module()
 {
 	name = "Editor";
 }
@@ -55,50 +55,48 @@ bool ModuleEditor::Update(float dt)
 						
 						ImGui::TreePop();
 					}			
-					if (ImGui::IsItemHovered() && !test)
+					if (ImGui::IsItemHovered() && !gameObjectOptions)
 					{
 						if (ImGui::GetIO().MouseReleased[1])
 						{
-							test = true;
+							gameObjectOptions = true;
 							selected = &obj;
 							selectedParent = &object;
-						}	
-					}
-					/*else
-					{
-						if (ImGui::GetIO().MouseDown[0] || ImGui::GetIO().MouseDown[1])
-						{
-							test = false;
 						}
-					}*/
+						else if (ImGui::GetIO().MouseReleased[0])
+						{
+							selected = &obj;
+							selectedParent = &object;
+						}
+					}
 				}
 				ImGui::TreePop();
 			}
-		}
-		
+		}	
 	}
 
-	if (test)
+	if (gameObjectOptions)
 	{
 		ImGui::OpenPopup("GameObject");
+
 		if (ImGui::BeginPopup("GameObject"))
-		{		
+		{
 			if (ImGui::Button("Move Up", ImVec2(100.0f, 30.0f)))
 			{
 				selectedParent->MoveChildrenUp(selected);
-				test = false;
+				gameObjectOptions = false;
 			}
-			if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
 			{
 				selectedParent->MoveChildrenDown(selected);
-				test = false;
+				gameObjectOptions = false;
+			}
+			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
+			{
+				gameObjectOptions = false;
 			}
 			ImGui::EndPopup();
-			/*if (!ImGui::IsItemHovered() && (ImGui::GetIO().MouseReleased[0] || ImGui::GetIO().MouseReleased[1]))
-			{
-				test = false;
-			}*/
-		}	
+		}
 	}
 	ImGui::End();
 
@@ -107,14 +105,24 @@ bool ModuleEditor::Update(float dt)
 	ImGui::Begin("Inspector");
 	if (!app->scene->GetGameObjectsList().empty())
 	{
-		GameObject& object = (*app->scene->GetGameObjectsList()[0]);
+		//GameObject& object = (*app->scene->GetGameObjectsList()[0]);
 
-		if (ImGui::BeginMenu(object.GetName()))
+		// TODO: Uncomment if you want
+		/*if (ImGui::BeginMenu(object.GetName()))
+		{*/
+		if (selected)
 		{
-			object.DrawEditor();
+			ImGui::SetNextTreeNodeOpen(true);
+			// This line below draws in the inspector only the selected object, Unity style
+			selected->DrawEditor();
 
-			ImGui::EndMenu();
+
+			// TODO: The line below is not necessary anymore, it's "HardCoded", does not function like unity's inspector
+			//object.DrawEditor();
 		}
+
+		//	ImGui::EndMenu();
+		//}
 	}
 	ImGui::End();
 

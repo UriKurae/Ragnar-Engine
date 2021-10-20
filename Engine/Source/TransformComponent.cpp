@@ -27,14 +27,12 @@ void TransformComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Transform"))
 	{
+		ImGui::PushItemWidth(90);
 		std::string test = std::to_string(position.x);
 		char* pos = new char[test.length()];
 		strcpy(pos, test.c_str());
-		ImGui::InputText("Position", pos, 20);
-		position.x = atof(pos);
-		//ImGui::InputFloat("Position", &position.x, 1);
-		/*float *test[3] = { &position.x, &position.y, &position.z };
-		ImGui::DragFloat3("Pos", *test);*/
+		
+		ShowTransformationInfo();
 	}
 }
 
@@ -73,4 +71,54 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	//transform[13] = trans.shearWy;
 	//transform[14] = trans.shearWz;
 	//transform[15] = trans.w;
+}
+
+void TransformComponent::ShowTransformationInfo()
+{
+	// Show Position
+	ImGui::Text("Position");
+	ImGui::SameLine();
+	ImGui::Text("X");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &position.x);
+	ImGui::SameLine();
+	ImGui::Text("Y");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &position.y);
+	ImGui::SameLine();
+	ImGui::Text("Z");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &position.z);
+
+	// Show Rotation
+	ImGui::Text("Rotation");
+	ImGui::SameLine();
+	ImGui::Text("X");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &rotation.x);
+	ImGui::SameLine();
+	ImGui::Text("Y");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &rotation.y);
+	ImGui::SameLine();
+	ImGui::Text("Z");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &rotation.z);
+
+
+	// Show Scale
+	ImGui::Text("Scale");
+	ImGui::SameLine(72.5f);
+	ImGui::Text("X");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &scale.x);
+	ImGui::SameLine();
+	ImGui::Text("Y");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &scale.y);
+	ImGui::SameLine();
+	ImGui::Text("Z");
+	ImGui::SameLine();
+	ImGui::InputFloat("", &scale.z);
+
 }

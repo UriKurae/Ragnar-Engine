@@ -16,7 +16,10 @@ public:
 	void OnEditor() override;
 
 	void SetTransform(float3 pos, Quat rot, float3 sca);
+
 	GLfloat* GetTransform() const { return transform; }
+
+	void ShowTransformationInfo();
 private:
 	float3 position;
 	Quat rotation;

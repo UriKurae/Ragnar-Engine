@@ -4,6 +4,7 @@
 #include "ModuleRenderer3D.h"
 
 #include "Optick/include/optick.h"
+#include "Imgui/imgui.h"
 
 #include "LoadModel.h"
 
@@ -135,7 +136,7 @@ bool ModuleInput::PreUpdate(float dt)
 
 	bool quit = false;
 	SDL_Event e;
-	
+
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
