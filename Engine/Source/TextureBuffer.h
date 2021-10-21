@@ -1,12 +1,12 @@
 #pragma once
 
-struct Texture;
+class MaterialComponent;
 
 class TextureBuffer
 {
 public:
 	TextureBuffer() : id(0) {}
-	TextureBuffer(Texture texture);
+	TextureBuffer(MaterialComponent* material);
 	~TextureBuffer();
 
 	void Bind();

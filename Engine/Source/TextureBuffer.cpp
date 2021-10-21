@@ -1,12 +1,13 @@
 #include "TextureBuffer.h"
 #include "MeshComponent.h"
+#include "MaterialComponent.h"
 
 #include "glew/include/GL/glew.h"
 #include "IL/il.h"
 
 #include "mmgr/mmgr.h"
 
-TextureBuffer::TextureBuffer(Texture texture) : id(texture.id)
+TextureBuffer::TextureBuffer(MaterialComponent* material) : id(material->GetId())
 {
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
@@ -14,7 +15,7 @@ TextureBuffer::TextureBuffer(Texture texture) : id(texture.id)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, material->GetWidth(), material->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
 }
 
 TextureBuffer::~TextureBuffer()

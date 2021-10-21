@@ -22,6 +22,9 @@ public:
 		return gameObjects; 
 	}
 
+	void MoveGameObjectUp(GameObject* object);
+	void MoveGameObjectDown(GameObject* object);
+
 private:
 	std::vector<GameObject*> gameObjects;
 };

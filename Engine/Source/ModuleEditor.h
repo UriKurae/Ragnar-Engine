@@ -25,8 +25,8 @@ public:
 	void LogConsole(const char* string);
 
 private:
-
-	bool gameObjectOptions = false;
+	bool createGameObject;
+	bool gameObjectOptions;
 	MainMenuBar mainMenuBar;
 
 	GameObject* selected;

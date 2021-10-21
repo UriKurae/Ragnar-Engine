@@ -40,6 +40,8 @@ private:
 
 	GameObject* parent;
 	std::vector<GameObject*> children;
+
+	bool newComponent;
 };
 
 template<typename T>

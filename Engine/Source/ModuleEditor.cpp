@@ -17,7 +17,7 @@
 #include "Optick/include/optick.h"
 #include "mmgr/mmgr.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), Module()
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), createGameObject(false), gameObjectOptions(false), Module()
 {
 	name = "Editor";
 }
@@ -40,6 +40,10 @@ bool ModuleEditor::Update(float dt)
 	}
 
 	ImGui::Begin("Hierarchy");
+	if (ImGui::Button("+"))
+	{
+		createGameObject = true;
+	}
 	for (int i = 0; i < app->scene->GetGameObjectsList().size(); ++i)
 	{
 		GameObject& object = (*app->scene->GetGameObjectsList()[i]);
@@ -47,12 +51,25 @@ bool ModuleEditor::Update(float dt)
 		{
 			if (ImGui::TreeNode(object.GetName()))
 			{
+				if (ImGui::IsItemHovered() && !gameObjectOptions)
+				{
+					if (ImGui::GetIO().MouseReleased[1])
+					{
+						gameObjectOptions = true;
+						selected = &object;
+						selectedParent = nullptr;
+					}
+					else if (ImGui::GetIO().MouseReleased[0])
+					{
+						selected = &object;
+						selectedParent = nullptr;
+					}
+				}
 				for (int i = 0; i < object.GetChilds().size(); ++i)
 				{
 					GameObject& obj = (*object.GetChilds()[i]);
 					if (ImGui::TreeNode(obj.GetName()))
 					{
-						
 						ImGui::TreePop();
 					}			
 					if (ImGui::IsItemHovered() && !gameObjectOptions)
@@ -72,6 +89,20 @@ bool ModuleEditor::Update(float dt)
 				}
 				ImGui::TreePop();
 			}
+			else if (ImGui::IsItemHovered() && !gameObjectOptions)
+			{
+				if (ImGui::GetIO().MouseReleased[1])
+				{
+					gameObjectOptions = true;
+					selected = &object;
+					selectedParent = nullptr;
+				}
+				else if (ImGui::GetIO().MouseReleased[0])
+				{
+					selected = &object;
+					selectedParent = nullptr;
+				}
+			}
 		}	
 	}
 
@@ -83,24 +114,56 @@ bool ModuleEditor::Update(float dt)
 		{
 			if (ImGui::Button("Move Up", ImVec2(100.0f, 30.0f)))
 			{
-				selectedParent->MoveChildrenUp(selected);
+				if (selectedParent != nullptr)
+				{
+					selectedParent->MoveChildrenUp(selected);
+				}
+				else
+				{
+					app->scene->MoveGameObjectUp(selected);
+				}
 				gameObjectOptions = false;
 			}
 			else if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
 			{
-				selectedParent->MoveChildrenDown(selected);
+				if (selectedParent != nullptr)
+				{
+					selectedParent->MoveChildrenDown(selected);
+				}
+				else
+				{
+					app->scene->MoveGameObjectDown(selected);
+				}
 				gameObjectOptions = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
+				selected = nullptr;
+				selectedParent = nullptr;
 				gameObjectOptions = false;
 			}
 			ImGui::EndPopup();
 		}
 	}
-	ImGui::End();
+	else if (createGameObject)
+	{
+		ImGui::OpenPopup("Create GameObject");
+		if (ImGui::BeginPopup("Create GameObject"))
+		{
+			if (ImGui::Button("Create Empty Object"))
+			{
+				app->scene->CreateGameObject();
+				createGameObject = false;
+			}
+			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
+			{
+				createGameObject = false;
+			}
+			ImGui::EndPopup();
+		}
+	}
 
-	
+	ImGui::End();
 
 	ImGui::Begin("Inspector");
 	if (!app->scene->GetGameObjectsList().empty())
@@ -112,7 +175,7 @@ bool ModuleEditor::Update(float dt)
 		{*/
 		if (selected)
 		{
-			ImGui::SetNextTreeNodeOpen(true);
+			//ImGui::SetNextTreeNodeOpen(true);
 			// This line below draws in the inspector only the selected object, Unity style
 			selected->DrawEditor();
 

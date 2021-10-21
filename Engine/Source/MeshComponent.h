@@ -11,6 +11,7 @@
 typedef unsigned int GLuint;
 typedef unsigned char GLubyte;
 class TransformComponent;
+class MaterialComponent;
 
 struct Texture
 {
@@ -24,19 +25,22 @@ struct Texture
 class MeshComponent : public Component
 {
 public:
-	MeshComponent() : ebo(nullptr), vbo(nullptr), texBuffer(nullptr), tbo(0), texture({}) {}
-	MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, Texture tex, std::vector<float2> texCoord);
+	MeshComponent() : ebo(nullptr), vbo(nullptr), texBuffer(nullptr), tbo(0), material(nullptr), transform(nullptr) {}
+	MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, MaterialComponent* material, std::vector<float2> texCoord);
+	//MeshComponent(TransformComponent* trans) : transform(trans) {}
 	~MeshComponent();
 
 	void Draw() override;
+	void OnEditor() override;
 	
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
+	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 
 private:
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
 	TextureBuffer* texBuffer;
-	Texture texture;
+	//Texture texture;
 	unsigned int tbo;
 
 	std::vector<float3> vertices;
@@ -44,4 +48,5 @@ private:
 	std::vector<float2> texCoords;
 
 	TransformComponent* transform;
+	MaterialComponent* material;
 };

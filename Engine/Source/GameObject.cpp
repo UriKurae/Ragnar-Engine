@@ -1,9 +1,11 @@
 #include "GameObject.h"
 #include "Globals.h"
 
+#include "Imgui/imgui.h"
+
 #include "mmgr/mmgr.h"
 
-GameObject::GameObject() : active(true), parent(nullptr)
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false)
 {
 }
 
@@ -34,6 +36,32 @@ void GameObject::DrawEditor()
 	{
 		components[i]->OnEditor();
 	}
+
+	ImGui::NewLine();
+	float x = ImGui::GetWindowSize().x;
+	ImGui::SameLine((x / 2) - 50);
+	if (ImGui::Button("New Component", ImVec2(100, 20)))
+	{
+		newComponent = true;
+	}
+
+	if (newComponent)
+	{
+		ImGui::OpenPopup("New Component");
+		if (ImGui::BeginPopup("New Component"))
+		{
+			if (ImGui::Button("Mesh Component"))
+			{
+				CreateComponent(ComponentType::MESH_RENDERER);
+				newComponent = false;
+			}
+			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
+			{
+				newComponent = false;
+			}
+			ImGui::EndPopup();
+		}
+	}
 }
 
 Component* GameObject::CreateComponent(ComponentType type)
@@ -46,7 +74,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component = new TransformComponent();
 		break;
 	case ComponentType::MESH_RENDERER:
-
+		/*component = new MeshComponent(GetComponent<TransformComponent>());*/
 		break;
 	case ComponentType::MATERIAL:
 
@@ -73,7 +101,8 @@ void GameObject::MoveChildrenUp(GameObject* child)
 {
 	if (child == children[0]) return;
 
-	for (int i = 0; i < children.size(); ++i)
+	int size = children.size();
+	for (int i = 0; i < size; ++i)
 	{
 		if (children[i] == child)
 		{
@@ -81,15 +110,17 @@ void GameObject::MoveChildrenUp(GameObject* child)
 
 			children[i] = children[i - 1];
 			children[i - 1] = aux;
+			break;
 		}
 	}
 }
 
 void GameObject::MoveChildrenDown(GameObject* child)
 {
-	if (child == children[children.size()-1]) return;
+	int size = children.size() - 1;
+	if (child == children[size]) return;
 
-	for (int i = children.size()-1; i >= 0; --i)
+	for (int i = size; i >= 0; --i)
 	{
 		if (children[i] == child)
 		{
@@ -97,6 +128,7 @@ void GameObject::MoveChildrenDown(GameObject* child)
 
 			children[i] = children[i + 1];
 			children[i + 1] = aux;
+			break;
 		}
 	}
 }

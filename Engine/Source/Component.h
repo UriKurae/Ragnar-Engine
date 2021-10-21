@@ -13,7 +13,7 @@ enum class ComponentType
 class Component
 {
 public:
-	Component() :active(true), type(ComponentType::NONE), owner(nullptr) {}
+	Component() : active(true), type(ComponentType::NONE), owner(nullptr), collapsed(false) {}
 	virtual ~Component() {}
 
 	virtual void Enable() {}
@@ -30,4 +30,6 @@ protected:
 	ComponentType type;
 	bool active;
 	GameObject* owner;
+
+	bool collapsed;
 };

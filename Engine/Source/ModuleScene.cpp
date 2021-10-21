@@ -65,3 +65,39 @@ GameObject* ModuleScene::CreateGameObject()
 	
 	return object;
 }
+
+void ModuleScene::MoveGameObjectUp(GameObject* object)
+{
+	if (object == gameObjects[0]) return;
+
+	int size = gameObjects.size();
+	for (int i = 0; i < size; ++i)
+	{
+		if (gameObjects[i] == object)
+		{
+			GameObject* aux = gameObjects[i];
+
+			gameObjects[i] = gameObjects[i - 1];
+			gameObjects[i - 1] = aux;
+			break;
+		}
+	}
+}
+
+void ModuleScene::MoveGameObjectDown(GameObject* object)
+{
+	int size = gameObjects.size() - 1;
+	if (object == gameObjects[size]) return;
+
+	for (int i = size; i >= 0; --i)
+	{
+		if (gameObjects[i] == object)
+		{
+			GameObject* aux = gameObjects[i];
+
+			gameObjects[i] = gameObjects[i + 1];
+			gameObjects[i + 1] = aux;
+			break;
+		}
+	}
+}

@@ -25,6 +25,7 @@ bool TransformComponent::Update(float dt)
 
 void TransformComponent::OnEditor()
 {
+	ImGui::SetNextTreeNodeOpen(true);
 	if (ImGui::CollapsingHeader("Transform"))
 	{
 		ImGui::PushItemWidth(90);
@@ -33,6 +34,8 @@ void TransformComponent::OnEditor()
 		strcpy(pos, test.c_str());
 		
 		ShowTransformationInfo();
+
+		ImGui::Separator();
 	}
 }
 

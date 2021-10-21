@@ -121,6 +121,7 @@
     <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\LoadModel.h" />
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
+    <ClInclude Include="Engine\Source\MaterialComponent.h" />
     <ClInclude Include="Engine\Source\Menu.h" />
     <ClInclude Include="Engine\Source\Mesh.h" />
     <ClInclude Include="Engine\Source\MeshComponent.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
+    <ClCompile Include="Engine\Source\MaterialComponent.cpp" />
     <ClCompile Include="Engine\Source\Mesh.cpp" />
     <ClCompile Include="Engine\Source\MeshComponent.cpp" />
     <ClCompile Include="Engine\Source\Model.cpp" />

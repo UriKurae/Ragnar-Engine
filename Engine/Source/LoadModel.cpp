@@ -53,9 +53,7 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 	for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		MeshComponent* m = ProcessMesh(mesh, scene);
-		m->SetTransform(obj->GetComponent<TransformComponent>());
-		obj->AddComponent(m);
+		MeshComponent* m = ProcessMesh(mesh, scene, obj);
 		obj->SetName(node->mName.C_Str());
 	}
 
@@ -76,7 +74,7 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 	}
 }
 
-MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameObject* object)
 {
 	std::vector<float3> vertices;
 	std::vector<unsigned int> indices;
@@ -110,25 +108,29 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		}
 	}
 
-	Texture diffuse;
+	MaterialComponent* diffuse = nullptr;
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		diffuse = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-
+		
 		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		//textures.insert(textures.end(), specular.begin(), specular.end());
 	}
 	MeshComponent* m = new MeshComponent(vertices, indices, diffuse, texCoords);
+	
+	m->SetTransform(object->GetComponent<TransformComponent>());
+	object->AddComponent(m);
+	object->AddComponent(diffuse);
 
 	return m;
 }
 
-Texture LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
+MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
 {
-	Texture texture = {};
+	MaterialComponent* material = new MaterialComponent();
 	// Carefull with multiple textures as it affects imgui
-	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+	for (unsigned int i = 0; i < 1; i++)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
@@ -140,12 +142,13 @@ Texture LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, con
 		ilLoadImage(ASSETS_FOLDER "Lenna.png");
 		//ilLoadImage(str.C_Str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-		texture.width = ilGetInteger(IL_IMAGE_WIDTH);
-		texture.height = ilGetInteger(IL_IMAGE_HEIGHT);
-		texture.id = image;
+		material->SetWidth(ilGetInteger(IL_IMAGE_WIDTH));
+		material->SetHeight(ilGetInteger(IL_IMAGE_HEIGHT));
+		material->SetId(image);
+		material->SetPath(path.c_str());
 	}
 
-	return texture;
+	return material;
 }
 
 void LoadModel::LoadingTransform(aiNode* node, GameObject* obj)

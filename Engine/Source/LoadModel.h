@@ -7,6 +7,7 @@
 #include "assimp/scene.h"
 #include "assimp/postProcess.h"
 #include "MeshComponent.h"
+#include "MaterialComponent.h"
 
 class GameObject;
 class TransformComponent;
@@ -22,8 +23,8 @@ public:
 	void LoadingTransform(aiNode* node, GameObject* obj);
 
 	void ProcessNode(aiNode* node, const aiScene* scene, GameObject* object);
-	MeshComponent* ProcessMesh(aiMesh* mesh, const aiScene* scene);
-	Texture LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName);
+	MeshComponent* ProcessMesh(aiMesh* mesh, const aiScene* scene, GameObject* object);
+	MaterialComponent* LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName);
 
 private:
 	LoadModel() {}
