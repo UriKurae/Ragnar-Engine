@@ -25,7 +25,7 @@ struct Texture
 class MeshComponent : public Component
 {
 public:
-	MeshComponent() : ebo(nullptr), vbo(nullptr), texBuffer(nullptr), tbo(0), material(nullptr), transform(nullptr) {}
+	MeshComponent() : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(nullptr) {}
 	MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, MaterialComponent* material, std::vector<float2> texCoord);
 	//MeshComponent(TransformComponent* trans) : transform(trans) {}
 	~MeshComponent();
@@ -39,7 +39,6 @@ public:
 private:
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
-	TextureBuffer* texBuffer;
 	//Texture texture;
 	unsigned int tbo;
 

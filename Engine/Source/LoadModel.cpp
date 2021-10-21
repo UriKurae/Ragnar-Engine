@@ -3,10 +3,13 @@
 #include "ModuleScene.h"
 #include "GameObject.h"
 #include "Globals.h"
+#include "TextureLoader.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 #include "IL/il.h"
 #include "IL/ilut.h"
+
+#include "Optick/include/optick.h"
 
 #include "mmgr/mmgr.h"
 
@@ -76,9 +79,14 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 
 MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameObject* object)
 {
+	OPTICK_EVENT("Process Mesh");
 	std::vector<float3> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
+
+	vertices.reserve(mesh->mNumVertices);
+	indices.reserve(mesh->mNumFaces * 3);
+	texCoords.reserve(mesh->mNumVertices);
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; ++i)
 	{
@@ -121,14 +129,14 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 	
 	m->SetTransform(object->GetComponent<TransformComponent>());
 	object->AddComponent(m);
-	object->AddComponent(diffuse);
+	if (diffuse) object->AddComponent(diffuse);
 
 	return m;
 }
 
 MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
 {
-	MaterialComponent* material = new MaterialComponent();
+	MaterialComponent* material = nullptr;
 	// Carefull with multiple textures as it affects imgui
 	for (unsigned int i = 0; i < 1; i++)
 	{
@@ -136,16 +144,7 @@ MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureTyp
 		mat->GetTexture(type, i, &str);
 		std::string path = ASSETS_FOLDER;
 		path += str.C_Str();
-		ILuint image;
-		ilGenImages(1, &image);
-		ilBindImage(image);
-		ilLoadImage(ASSETS_FOLDER "Lenna.png");
-		//ilLoadImage(str.C_Str());
-		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-		material->SetWidth(ilGetInteger(IL_IMAGE_WIDTH));
-		material->SetHeight(ilGetInteger(IL_IMAGE_HEIGHT));
-		material->SetId(image);
-		material->SetPath(path.c_str());
+		material = TextureLoader::GetInstance()->LoadTexture(path);
 	}
 
 	return material;

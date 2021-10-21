@@ -1,12 +1,13 @@
 #pragma once
 
 class MaterialComponent;
+typedef unsigned int GLuint;
 
 class TextureBuffer
 {
 public:
 	TextureBuffer() : id(0) {}
-	TextureBuffer(MaterialComponent* material);
+	TextureBuffer(GLuint i, int width, int height);
 	~TextureBuffer();
 
 	void Bind();

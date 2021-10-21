@@ -1,11 +1,15 @@
 #include "FileSystem.h"
 #include "Application.h"
 #include "Globals.h"
+#include "LoadModel.h"
+#include "TextureLoader.h"
 
 #include "SDL/include/SDL_filesystem.h"
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
 #include "IL/il.h"
+
+#include <vector>
 
 #include "mmgr/mmgr.h"
 
@@ -44,6 +48,9 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 	CreateAssimpIO();
 
 	ilInit();
+	
+	texExtension = { ".png", ".jpg", ".dds" };
+	modelExtension = { ".obj", ".fbx", ".3DS"};
 }
 
 FileSystem::~FileSystem()
@@ -165,6 +172,33 @@ const char* FileSystem::GetReadPaths() const
 	}
 
 	return paths;
+}
+
+void FileSystem::LoadFile(std::string path)
+{
+	std::string extension = path.substr(path.find_last_of(".", path.length()));
+	std::list<std::string>::iterator s;
+	std::list<std::string>::iterator end = modelExtension.end();
+	
+	for (s = modelExtension.begin(); s != end; ++s)
+	{
+		if (*s == extension)
+		{
+			LoadModel::GetInstance()->LoadingModel(path);
+			return;
+		}
+	}
+
+	end = texExtension.end();
+
+	for (s = texExtension.begin(); s != end; ++s)
+	{
+		if (*s == extension)
+		{
+			TextureLoader::GetInstance()->LoadTextureToSelected(path);
+			return;
+		}
+	}
 }
 
 void FileSystem::CreateAssimpIO()

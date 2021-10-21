@@ -7,7 +7,7 @@
 
 #include "mmgr/mmgr.h"
 
-TextureBuffer::TextureBuffer(MaterialComponent* material) : id(material->GetId())
+TextureBuffer::TextureBuffer(GLuint i, int width, int height) : id(i)
 {
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
@@ -15,7 +15,7 @@ TextureBuffer::TextureBuffer(MaterialComponent* material) : id(material->GetId()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, material->GetWidth(), material->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
 }
 
 TextureBuffer::~TextureBuffer()

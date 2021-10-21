@@ -1,5 +1,6 @@
 #include "MeshComponent.h"
 #include "TransformComponent.h"
+#include "MaterialComponent.h"
 #include "Globals.h"
 
 #include "Imgui/imgui.h"
@@ -18,9 +19,6 @@ MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int>
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
 
-	texBuffer = new TextureBuffer(material);
-
-	texBuffer->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	vbo->Unbind();
 	ebo->Unbind();
@@ -30,7 +28,6 @@ MeshComponent::~MeshComponent()
 {
 	RELEASE(vbo);
 	RELEASE(ebo);
-	RELEASE(texBuffer);
 }
 
 void MeshComponent::Draw()
@@ -47,7 +44,7 @@ void MeshComponent::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-	texBuffer->Bind();
+	material->BindTexture();
 	ebo->Bind();
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
@@ -55,7 +52,7 @@ void MeshComponent::Draw()
 	ebo->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	vbo->Unbind();
-	texBuffer->Unbind();
+	material->UnbindTexture();
 
 	glPopMatrix();
 
@@ -65,9 +62,9 @@ void MeshComponent::Draw()
 
 void MeshComponent::OnEditor()
 {
-	//if (ImGui::CollapsingHeader("Mesh Renderer"))
-	//{
-	//	ImGui::SameLine();
-	//	ImGui::Checkbox("", &active);
-	//}
+	if (ImGui::CollapsingHeader("Mesh Renderer"))
+	{
+		ImGui::SameLine();
+		ImGui::Checkbox("", &active);
+	}
 }

@@ -7,6 +7,7 @@
 #include "ModuleEditor.h"
 #include "FileSystem.h"
 #include "LoadModel.h"
+#include "TextureLoader.h"
 
 #include "Optick/include/optick.h"
 
@@ -53,6 +54,7 @@ Application::~Application()
 
 	RELEASE(fs);
 	LoadModel::ReleaseInstance();
+	TextureLoader::ReleaseInstance();
 
 	listModules.clear();
 }

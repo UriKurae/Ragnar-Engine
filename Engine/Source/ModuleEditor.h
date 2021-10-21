@@ -19,6 +19,8 @@ public:
 	bool Draw();
 	bool CleanUp() override;
 
+	inline GameObject* GetSelected() { return selected; }
+
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 

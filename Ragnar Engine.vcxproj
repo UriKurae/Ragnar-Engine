@@ -135,6 +135,7 @@
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
+    <ClInclude Include="Engine\Source\TextureLoader.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
+    <ClCompile Include="Engine\Source\TextureLoader.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />

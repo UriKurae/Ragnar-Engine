@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleInput.h"
+#include "FileSystem.h"
 
 #include "ModuleRenderer3D.h"
 
@@ -157,7 +158,8 @@ bool ModuleInput::PreUpdate(float dt)
 			{
 				const char* filePath = e.drop.file;
 				//app->scene->CreateGameObject();
-				LoadModel::GetInstance()->LoadingModel(filePath);
+				app->fs->LoadFile(filePath);
+				//LoadModel::GetInstance()->LoadingModel(filePath);
 				//app->renderer3D->InitMesh(filePath);
 				SDL_free(&filePath);
 			}	

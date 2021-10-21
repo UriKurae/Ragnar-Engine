@@ -24,6 +24,15 @@ bool GameObject::Update(float dt)
 
 void GameObject::Draw()
 {
+	// TODO: Check this in the future
+	//if (!GetAllComponent<MeshComponent>().empty())
+	//{
+	//	for (int i = 0; i < GetAllComponent<MeshComponent>().size(); ++i)
+	//	{
+	//		GetAllComponent<MeshComponent>()[i]->Draw();
+	//	}
+	//}
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		components[i]->Draw();
