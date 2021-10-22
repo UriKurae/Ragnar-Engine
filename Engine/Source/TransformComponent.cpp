@@ -50,16 +50,16 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	transform = float4x4::FromTRS(position, rotation, scale);
 }
 
-Quat TransformComponent::AngleToQuat(float angle)
+Quat TransformComponent::AngleToQuat(float angle, int x, int y, int z)
 {
 	Quat quaternion;
 
 	float rad = math::DegToRad(angle);
 
 	float newQuaternionW = math::Cos(rad / 2);
-	float newQuaternionX = rotations[0] * math::Sin(rad / 2);
-	float newQuaternionY = rotations[1] * math::Sin(rad / 2);
-	float newQuaternionZ = rotations[2] * math::Sin(rad / 2);
+	float newQuaternionX = x * math::Sin(rad / 2);
+	float newQuaternionY = y * math::Sin(rad / 2);
+	float newQuaternionZ = z * math::Sin(rad / 2);
 	quaternion.x = newQuaternionX;
 	quaternion.y = newQuaternionY;
 	quaternion.z = newQuaternionZ;
@@ -83,22 +83,13 @@ void TransformComponent::ShowTransformationInfo()
 
 	ImGui::Text("Rotation: ");
 	ImGui::SameLine();
-	float aux[3] = {rotations[0], rotations[1], rotations[2]};
 	if (ImGui::DragFloat3(" ", rotations))
-	{
-		Quat finalQuaternion = {};
-			Quat quaternionX = AngleToQuat(rotations[0]);
-			Quat quaternionY = AngleToQuat(rotations[1]);
-			Quat quaternionZ = AngleToQuat(rotations[2]);
-			if (rotations[0] != aux[0])
-				finalQuaternion = quaternionX;
-			else if (rotations[1] != aux[1])
-				finalQuaternion = quaternionY;
-			else if (rotations[2] != aux[2])
-				finalQuaternion = quaternionZ;
+	{	
+		Quat quaternionX = AngleToQuat(rotations[0], 1, 0, 0);
+		Quat quaternionY = AngleToQuat(rotations[1], 0, 1, 0);
+		Quat quaternionZ = AngleToQuat(rotations[2], 0, 0, 1);
 
-				
-		DEBUG_LOG("QUATX IS %f %f %f %f ", finalQuaternion.x, finalQuaternion.y, finalQuaternion.z, finalQuaternion.w);
+		Quat finalQuaternion = quaternionX * quaternionY * quaternionZ;
 		
 		SetTransform(position, finalQuaternion, scale);	
 	}

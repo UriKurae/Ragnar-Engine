@@ -19,7 +19,7 @@ public:
 
 	float4x4 GetTransform() const { return transform; }
 
-	Quat AngleToQuat(float angle);
+	Quat AngleToQuat(float angle, int x, int y, int z);
 
 	void ShowTransformationInfo();
 private:
