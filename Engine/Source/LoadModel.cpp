@@ -159,7 +159,7 @@ void LoadModel::LoadingTransform(aiNode* node, GameObject* obj)
 	node->mTransformation.Decompose(scale, quat, pos);
 
 	float3 p = { pos.x, pos.y, pos.z };
-	Quat q = { quat.w, quat.x, quat.y, quat.z };
+	Quat q = { 0, quat.x, quat.y, quat.z };
 	float3 s = { scale.x, scale.y, scale.z };
 
 	obj->GetComponent<TransformComponent>()->SetTransform(p, q, s);

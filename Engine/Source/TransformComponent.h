@@ -19,11 +19,13 @@ public:
 
 	float4x4 GetTransform() const { return transform; }
 
+	Quat AngleToQuat(float angle);
+
 	void ShowTransformationInfo();
 private:
 	float3 position;
 	Quat rotation;
 	float3 scale;
-
+	float rotations[3];
 	float4x4 transform;
 };

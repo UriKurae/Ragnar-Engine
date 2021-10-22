@@ -36,6 +36,7 @@ void MeshComponent::Draw()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glPushMatrix();
+	/*glMultTransposeMatrixf(transform->GetTransform().ptr());*/
 	glMultMatrixf(transform->GetTransform().Transposed().ptr());
 
 	vbo->Bind();
