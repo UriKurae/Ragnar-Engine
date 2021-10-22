@@ -17,7 +17,7 @@ public:
 
 	void SetTransform(float3 pos, Quat rot, float3 sca);
 
-	GLfloat* GetTransform() const { return transform; }
+	float4x4 GetTransform() const { return transform; }
 
 	void ShowTransformationInfo();
 private:
@@ -25,5 +25,5 @@ private:
 	Quat rotation;
 	float3 scale;
 
-	GLfloat* transform;
+	float4x4 transform;
 };

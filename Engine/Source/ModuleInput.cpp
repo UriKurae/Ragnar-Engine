@@ -6,6 +6,7 @@
 
 #include "Optick/include/optick.h"
 #include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_sdl.h"
 
 #include "LoadModel.h"
 
@@ -140,6 +141,7 @@ bool ModuleInput::PreUpdate(float dt)
 
 	while(SDL_PollEvent(&e))
 	{
+		ImGui_ImplSDL2_ProcessEvent(&e);
 		switch(e.type)
 		{
 			case SDL_MOUSEWHEEL:

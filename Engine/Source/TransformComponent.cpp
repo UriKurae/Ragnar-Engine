@@ -10,12 +10,10 @@ TransformComponent::TransformComponent()
 	position = { 0.0f, 0.0f, 0.0f }; 
 	rotation = { 0.0f, 1.0f, 1.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
-	transform = new GLfloat[16];
 }
 
 TransformComponent::~TransformComponent()
 {
-	RELEASE_ARRAY(transform);
 }
 
 bool TransformComponent::Update(float dt)
@@ -45,83 +43,32 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	rotation = rot;
 	scale = sca;
 
-	float4x4 trans = float4x4::FromTRS(position, rotation, scale);
-
-	for (int j = 0; j < 4; ++j)
-	{
-		for (int i = 0; i < 4; ++i)
-		{
-			transform[(j * 4) + i] = trans[i][j];
-		}
-	}
-
-	//transform[0] = trans.scaleX;
-	//transform[1] = trans.shearXy;
-	//transform[2] = trans.shearXz;
-	//transform[3] = trans.x;
-	
-	//transform[4] = trans.shearYx;
-	//transform[5] = trans.scaleY;
-	//transform[6] = trans.shearYz;
-	//transform[7] = trans.y;
-
-	//transform[8] = trans.shearZx;
-	//transform[9] = trans.shearZy;
-	//transform[10] = trans.scaleZ;
-	//transform[11] = trans.z;
-
-	//transform[12] = trans.shearWx;
-	//transform[13] = trans.shearWy;
-	//transform[14] = trans.shearWz;
-	//transform[15] = trans.w;
+	transform = float4x4::FromTRS(position, rotation, scale);
 }
 
 void TransformComponent::ShowTransformationInfo()
 {
-	// Show Position
-	ImGui::Text("Position");
-	ImGui::SameLine();
-	ImGui::Text("X");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &position.x);
-	ImGui::SameLine();
-	ImGui::Text("Y");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &position.y);
-	ImGui::SameLine();
-	ImGui::Text("Z");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &position.z);
+	ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.50f);
 
-	// Show Rotation
-	ImGui::Text("Rotation");
+	ImGui::Text("Position: ");
 	ImGui::SameLine();
-	ImGui::Text("X");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &rotation.x);
-	ImGui::SameLine();
-	ImGui::Text("Y");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &rotation.y);
-	ImGui::SameLine();
-	ImGui::Text("Z");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &rotation.z);
+	if (ImGui::DragFloat3(".", position.ptr()))
+	{
+		SetTransform(position, rotation, scale);
+	}
 
+	ImGui::Text("Rotation: ");
+	ImGui::SameLine();
+	if (ImGui::DragFloat3(" ", rotation.ptr()))
+	{
+		SetTransform(position, rotation, scale);
+	}
 
-	// Show Scale
-	ImGui::Text("Scale");
-	ImGui::SameLine(72.5f);
-	ImGui::Text("X");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &scale.x);
-	ImGui::SameLine();
-	ImGui::Text("Y");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &scale.y);
-	ImGui::SameLine();
-	ImGui::Text("Z");
-	ImGui::SameLine();
-	ImGui::InputFloat("", &scale.z);
+	ImGui::Text("Scale: ");
+	ImGui::SameLine(86.0f);
+	if (ImGui::DragFloat3("-", scale.ptr()))
+	{
+		SetTransform(position, rotation, scale);
+	}
 
 }

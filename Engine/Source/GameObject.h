@@ -23,6 +23,7 @@ public:
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }
 
+	char* GetNameBuffer();
 	inline const char* GetName() const { return name.c_str(); }
 	inline const GameObject* GetParent() const { return parent; }
 	inline bool GetActive() const { return active; }

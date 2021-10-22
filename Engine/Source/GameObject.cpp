@@ -106,6 +106,11 @@ void GameObject::AddChild(GameObject* object)
 	children.emplace_back(object);
 }
 
+char* GameObject::GetNameBuffer()
+{	
+	return &name[0];
+}
+
 void GameObject::MoveChildrenUp(GameObject* child)
 {
 	if (child == children[0]) return;
