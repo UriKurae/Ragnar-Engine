@@ -27,7 +27,7 @@ public:
 	inline const char* GetName() const { return name.c_str(); }
 	inline const GameObject* GetParent() const { return parent; }
 	inline bool GetActive() const { return active; }
-	inline std::vector<GameObject*> GetChilds() const { return children; }
+	inline std::vector<GameObject*>& GetChilds() { return children; }
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);

@@ -26,7 +26,7 @@ private:
 
 public:
 	
-	Vec3 x, y, z, position, reference;
+	Vec3 x, y, z, position, reference, objectSelected;
 
 private:
 

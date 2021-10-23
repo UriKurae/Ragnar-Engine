@@ -81,6 +81,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 	{
 	case ComponentType::TRANSFORM:
 		component = new TransformComponent();
+		component->SetOwner(this);
 		break;
 	case ComponentType::MESH_RENDERER:
 		/*component = new MeshComponent(GetComponent<TransformComponent>());*/

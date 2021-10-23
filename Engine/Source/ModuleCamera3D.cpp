@@ -2,6 +2,9 @@
 #include "ModuleCamera3D.h"
 
 #include "ModuleInput.h"
+#include "ModuleEditor.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
 
 #include "Optick/include/optick.h"
 
@@ -59,16 +62,19 @@ bool ModuleCamera3D::Update(float dt)
 	float speed = 3.0f * dt;
 	
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
-		speed = 8.0f * dt;
+		speed = 25.0f * dt;
 
 	if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_REPEAT) newPos.y += speed;
 	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_REPEAT) newPos.y -= speed;
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos -= z * speed;
-	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos += z * speed;
+	if ((app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= z * speed;
+	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += z * speed;
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos -= x * speed;
-	if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos += x * speed;
+	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= x * speed;
+	if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += x * speed;
+	
+	if (app->input->GetMouseZ() == 1) newPos -= z * speed * 9.0f;
+	if (app->input->GetMouseZ() == -1) newPos += z * speed * 9.0f;
 
 	position += newPos;
 	reference += newPos;
@@ -108,6 +114,15 @@ bool ModuleCamera3D::Update(float dt)
 		}
 
 		position = reference + z * Length(position);
+
+		if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT && app->editor->GetSelected() != nullptr)
+		{
+			Vec3 target;
+			target.x = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().x;
+			target.y = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().y;
+			target.z =app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().z;
+			LookAt(target);
+		}
 	}
 
 	// Recalculate matrix -------------

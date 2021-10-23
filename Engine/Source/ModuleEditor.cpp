@@ -65,28 +65,7 @@ bool ModuleEditor::Update(float dt)
 						selectedParent = nullptr;
 					}
 				}
-				for (int i = 0; i < object.GetChilds().size(); ++i)
-				{
-					GameObject& obj = (*object.GetChilds()[i]);
-					if (ImGui::TreeNode(obj.GetName()))
-					{
-						ImGui::TreePop();
-					}			
-					if (ImGui::IsItemHovered() && !gameObjectOptions)
-					{
-						if (ImGui::GetIO().MouseReleased[1])
-						{
-							gameObjectOptions = true;
-							selected = &obj;
-							selectedParent = &object;
-						}
-						else if (ImGui::GetIO().MouseReleased[0])
-						{
-							selected = &obj;
-							selectedParent = &object;
-						}
-					}
-				}
+				ShowChildren(&object);
 				ImGui::TreePop();
 			}
 			else if (ImGui::IsItemHovered() && !gameObjectOptions)
@@ -231,4 +210,31 @@ bool ModuleEditor::SaveConfig(JsonParsing& node) const
 void ModuleEditor::LogConsole(const char* string)
 {
 	if (mainMenuBar.GetConsole()) mainMenuBar.GetConsole()->AddLog(string);
+}
+
+void ModuleEditor::ShowChildren(GameObject* parent)
+{
+	for (int i = 0; i < parent->GetChilds().size(); ++i)
+	{
+		GameObject* obj = parent->GetChilds()[i];
+		if (ImGui::TreeNode(obj->GetName()))
+		{
+			ShowChildren(obj);
+			ImGui::TreePop();
+		}
+		if (ImGui::IsItemHovered() && !gameObjectOptions)
+		{
+			if (ImGui::GetIO().MouseReleased[1])
+			{
+				gameObjectOptions = true;
+				selected = obj;
+				selectedParent = parent;
+			}
+			else if (ImGui::GetIO().MouseReleased[0])
+			{
+				selected = obj;
+				selectedParent = parent;
+			}
+		}	
+	}
 }

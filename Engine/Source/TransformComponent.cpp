@@ -1,3 +1,4 @@
+#include "GameObject.h"
 #include "TransformComponent.h"
 #include "Globals.h"
 
@@ -10,10 +11,6 @@ TransformComponent::TransformComponent()
 	position = { 0.0f, 0.0f, 0.0f }; 
 	rotation = { 0.0f, 1.0f, 1.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
-	for (int i = 0; i < 3; ++i)
-	{
-		rotations[i] = 0.0f;
-	}
 }
 
 TransformComponent::~TransformComponent()
@@ -50,6 +47,24 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	transform = float4x4::FromTRS(position, rotation, scale);
 }
 
+void TransformComponent::SetTranslation(float3 pos)
+{
+	position = pos;
+	SetTransform(position, rotation, scale);
+}
+
+void TransformComponent::SetRotation(Quat rot)
+{
+	rotation = rot;
+	SetTransform(position, rotation, scale);
+}
+
+void TransformComponent::SetScale(float3 sca)
+{
+	scale = sca;
+	SetTransform(position, rotation, scale);
+}
+
 Quat TransformComponent::AngleToQuat(float angle, int x, int y, int z)
 {
 	Quat quaternion;
@@ -79,26 +94,43 @@ void TransformComponent::ShowTransformationInfo()
 	if (ImGui::DragFloat3(".", position.ptr()))
 	{
 		SetTransform(position, rotation, scale);
+		SetTranslation(position);
+		std::vector<GameObject*> children = owner->GetChilds();
+		for (int i = 0; i < children.size(); ++i)
+		{
+			children[i]->GetComponent<TransformComponent>()->SetTranslation(position);
+		}
 	}
 
+	static float rotations[3] = { 0,0,0 };
 	ImGui::Text("Rotation: ");
 	ImGui::SameLine();
 	if (ImGui::DragFloat3(" ", rotations))
 	{	
-		Quat quaternionX = AngleToQuat(rotations[0], 1, 0, 0);
-		Quat quaternionY = AngleToQuat(rotations[1], 0, 1, 0);
-		Quat quaternionZ = AngleToQuat(rotations[2], 0, 0, 1);
-
+		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotations[0]));
+		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotations[1]));
+		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotations[2]));
 		Quat finalQuaternion = quaternionX * quaternionY * quaternionZ;
 		
-		SetTransform(position, finalQuaternion, scale);	
+		SetRotation(finalQuaternion);
+
+		std::vector<GameObject*> children = owner->GetChilds();
+		for (int i = 0; i < children.size(); ++i)
+		{
+			children[i]->GetComponent<TransformComponent>()->SetRotation(finalQuaternion);
+		}
 	}
 
 	ImGui::Text("Scale: ");
 	ImGui::SameLine(86.0f);
 	if (ImGui::DragFloat3("-", scale.ptr()))
 	{
-		SetTransform(position, rotation, scale);
+		SetScale(scale);
+		std::vector<GameObject*> children = owner->GetChilds();
+		for (int i = 0; i < children.size(); ++i)
+		{
+			children[i]->GetComponent<TransformComponent>()->SetScale(scale);
+		}
 	}
 
 }

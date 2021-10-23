@@ -16,16 +16,20 @@ public:
 	void OnEditor() override;
 
 	void SetTransform(float3 pos, Quat rot, float3 sca);
+	void SetTranslation(float3 pos);
+	void SetRotation(Quat rot);
+	void SetScale(float3 sca);
 
-	float4x4 GetTransform() const { return transform; }
+	inline float4x4 GetTransform() const { return transform; }
+	inline float3 GetPosition() const { return position; }
 
 	Quat AngleToQuat(float angle, int x, int y, int z);
+
 
 	void ShowTransformationInfo();
 private:
 	float3 position;
 	Quat rotation;
 	float3 scale;
-	float rotations[3];
 	float4x4 transform;
 };

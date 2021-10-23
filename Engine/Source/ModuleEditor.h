@@ -26,6 +26,8 @@ public:
 
 	void LogConsole(const char* string);
 
+	void ShowChildren(GameObject* parent);
+
 private:
 	bool createGameObject;
 	bool gameObjectOptions;
