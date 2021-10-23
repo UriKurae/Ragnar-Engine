@@ -44,7 +44,8 @@ bool ModuleEditor::Update(float dt)
 	{
 		createGameObject = true;
 	}
-	for (int i = 0; i < app->scene->GetGameObjectsList().size(); ++i)
+	int size = app->scene->GetGameObjectsList().size();
+	for (int i = 0; i < size; ++i)
 	{
 		GameObject& object = (*app->scene->GetGameObjectsList()[i]);
 		if (object.GetParent() == nullptr)
@@ -134,6 +135,26 @@ bool ModuleEditor::Update(float dt)
 				app->scene->CreateGameObject();
 				createGameObject = false;
 			}
+			else if (ImGui::Button("Create Cube"))
+			{
+				app->scene->CreateCube();
+				createGameObject = false;
+			}
+			else if (ImGui::Button("Create Pyramide"))
+			{
+				app->scene->CreatePyramide();
+				createGameObject = false;
+			}
+			else if (ImGui::Button("Create Sphere"))
+			{
+				app->scene->CreateSphere();
+				createGameObject = false;
+			}
+			else if (ImGui::Button("Create Cylinder"))
+			{
+				app->scene->CreateCylinder();
+				createGameObject = false;
+			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
 				createGameObject = false;
@@ -214,7 +235,8 @@ void ModuleEditor::LogConsole(const char* string)
 
 void ModuleEditor::ShowChildren(GameObject* parent)
 {
-	for (int i = 0; i < parent->GetChilds().size(); ++i)
+	int size = parent->GetChilds().size();
+	for (int i = 0; i < size; ++i)
 	{
 		GameObject* obj = parent->GetChilds()[i];
 		if (ImGui::TreeNode(obj->GetName()))

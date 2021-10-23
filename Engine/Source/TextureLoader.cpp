@@ -23,7 +23,7 @@ void TextureLoader::ReleaseInstance()
 	RELEASE(instance);
 }
 
-MaterialComponent* TextureLoader::LoadTexture(std::string path)
+MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 {
 	ILuint image;
 	ilGenImages(1, &image);
@@ -37,7 +37,7 @@ MaterialComponent* TextureLoader::LoadTexture(std::string path)
 	return new MaterialComponent(image, w, h, path);
 }
 
-void TextureLoader::LoadTextureToSelected(std::string path)
+void TextureLoader::LoadTextureToSelected(std::string& path)
 {
 	ILuint image;
 	ilGenImages(1, &image);

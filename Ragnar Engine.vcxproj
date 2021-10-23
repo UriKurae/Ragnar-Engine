@@ -134,6 +134,7 @@
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
+    <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureLoader.h" />
     <ClInclude Include="Engine\Source\Timer.h" />

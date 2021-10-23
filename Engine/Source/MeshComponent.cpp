@@ -9,7 +9,22 @@
 
 #include "mmgr/mmgr.h"
 
-MeshComponent::MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, MaterialComponent* mat, std::vector<float2> texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat)
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat)
+{
+	type = ComponentType::MESH_RENDERER;
+
+	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
+	ebo = new IndexBuffer(indices.data(), indices.size());
+	glGenBuffers(1, &tbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	vbo->Unbind();
+	ebo->Unbind();
+}
+
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr)
 {
 	type = ComponentType::MESH_RENDERER;
 
@@ -45,7 +60,7 @@ void MeshComponent::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-	material->BindTexture();
+	if (material != nullptr) material->BindTexture();
 	ebo->Bind();
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
@@ -53,7 +68,7 @@ void MeshComponent::Draw()
 	ebo->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	vbo->Unbind();
-	material->UnbindTexture();
+	if (material != nullptr) material->UnbindTexture();
 
 	glPopMatrix();
 

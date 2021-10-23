@@ -33,7 +33,7 @@ public:
 	inline const char* GetWritePath() const { return PHYSFS_getWriteDir(); }
 	const char* GetReadPaths() const;
 
-	void LoadFile(std::string path);
+	void LoadFile(std::string& path);
 
 private:
 	void CreateAssimpIO();

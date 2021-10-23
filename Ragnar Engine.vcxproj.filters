@@ -188,6 +188,7 @@
     <ClInclude Include="Engine\Source\TextureLoader.h">
       <Filter>Sources</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Primitives.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

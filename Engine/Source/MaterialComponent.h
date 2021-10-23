@@ -11,11 +11,12 @@ class MaterialComponent : public Component
 {
 public:
 	MaterialComponent() : id(0), width(0), height(0), path(""), texBuffer(nullptr) {}
-	MaterialComponent(int i, int w, int h, std::string p);
+	MaterialComponent(int i, int w, int h, std::string& p);
+	MaterialComponent(int i, int w, int h, GLubyte* data);
 	~MaterialComponent();
 
 	void OnEditor() override;
-	void SetNewMaterial(int i, int w, int h, std::string p);
+	void SetNewMaterial(int i, int w, int h, std::string& p);
 
 	void BindTexture();
 	void UnbindTexture();

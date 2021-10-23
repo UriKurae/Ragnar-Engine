@@ -19,7 +19,7 @@ public:
 	static void ReleaseInstance();
 	~LoadModel();
 
-	void LoadingModel(std::string path);
+	void LoadingModel(std::string& path);
 	void LoadingTransform(aiNode* node, GameObject* obj);
 
 	void ProcessNode(aiNode* node, const aiScene* scene, GameObject* object);

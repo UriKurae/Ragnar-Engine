@@ -158,7 +158,7 @@ bool ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 			{
-				const char* filePath = e.drop.file;
+				std::string filePath = e.drop.file;
 				//app->scene->CreateGameObject();
 				app->fs->LoadFile(filePath);
 				//LoadModel::GetInstance()->LoadingModel(filePath);

@@ -37,6 +37,9 @@ public:
 
 	template<typename T>
 	std::vector<T*> GetAllComponent();
+
+	template<typename T>
+	T* CreateComponent();
 private:
 	std::string name;
 	bool active;

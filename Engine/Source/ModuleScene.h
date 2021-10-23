@@ -22,6 +22,11 @@ public:
 		return gameObjects; 
 	}
 
+	void CreateCube();
+	void CreatePyramide();
+	void CreateSphere();
+	void CreateCylinder();
+
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
 

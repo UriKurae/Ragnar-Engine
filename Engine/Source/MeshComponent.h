@@ -26,7 +26,8 @@ class MeshComponent : public Component
 {
 public:
 	MeshComponent() : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(nullptr) {}
-	MeshComponent(std::vector<float3> vert, std::vector<unsigned int> ind, MaterialComponent* material, std::vector<float2> texCoord);
+	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* material, std::vector<float2>& texCoord);
+	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
 	//MeshComponent(TransformComponent* trans) : transform(trans) {}
 	~MeshComponent();
 

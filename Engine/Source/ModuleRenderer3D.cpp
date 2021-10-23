@@ -463,7 +463,6 @@ void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
 
 void ModuleRenderer3D::InitMesh(const char* filePath)
 {
-	OPTICK_EVENT("Loading FBX");
 	fbx.push_back(Model(filePath));
 }
 

@@ -4,9 +4,16 @@
 
 #include "mmgr/mmgr.h"
 
-MaterialComponent::MaterialComponent(int i, int w, int h, std::string p) : id(i), width(w), height(h), path(p)
+MaterialComponent::MaterialComponent(int i, int w, int h, std::string& p) : id(i), width(w), height(h), path(p)
 {
 	texBuffer = new TextureBuffer(i, w, h);
+
+	texBuffer->Unbind();
+}
+
+MaterialComponent::MaterialComponent(int i, int w, int h, GLubyte* data) : id(i), width(w), height(h)
+{
+	texBuffer = new TextureBuffer(i, w, h, data);
 
 	texBuffer->Unbind();
 }
@@ -27,11 +34,12 @@ void MaterialComponent::OnEditor()
 	}
 }
 
-void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string p)
+void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
 {
 	RELEASE(texBuffer);
 
 	texBuffer = new TextureBuffer(i, w, h);
+	path = p;
 
 	texBuffer->Unbind();
 }

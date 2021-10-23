@@ -31,7 +31,7 @@ LoadModel::~LoadModel()
 {
 }
 
-void LoadModel::LoadingModel(std::string path)
+void LoadModel::LoadingModel(std::string& path)
 {
 	Assimp::Importer import;
 	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);

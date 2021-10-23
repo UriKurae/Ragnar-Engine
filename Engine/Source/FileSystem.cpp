@@ -9,6 +9,8 @@
 #include "AssimpDefs.h"
 #include "IL/il.h"
 
+#include "Optick/include/optick.h"
+
 #include <vector>
 
 #include "mmgr/mmgr.h"
@@ -174,7 +176,7 @@ const char* FileSystem::GetReadPaths() const
 	return paths;
 }
 
-void FileSystem::LoadFile(std::string path)
+void FileSystem::LoadFile(std::string& path)
 {
 	std::string extension = path.substr(path.find_last_of(".", path.length()));
 	std::list<std::string>::iterator s;
@@ -184,6 +186,7 @@ void FileSystem::LoadFile(std::string path)
 	{
 		if (*s == extension)
 		{
+			OPTICK_EVENT("Loading Model");
 			LoadModel::GetInstance()->LoadingModel(path);
 			return;
 		}
@@ -195,6 +198,7 @@ void FileSystem::LoadFile(std::string path)
 	{
 		if (*s == extension)
 		{
+			OPTICK_EVENT("Loading Texture");
 			TextureLoader::GetInstance()->LoadTextureToSelected(path);
 			return;
 		}
