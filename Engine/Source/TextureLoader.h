@@ -14,7 +14,7 @@ public:
 	static void ReleaseInstance();
 
 	void ImportTexture(const aiMaterial* material, MaterialComponent** component, aiTextureType type, const char* typeName);
-	Uint64 SaveTexture(MaterialComponent* component, char** fileBuffer);
+	Uint64 SaveTexture(MaterialComponent* component, std::string& fileName);
 	MaterialComponent* LoadTexture(std::string& path);
 	void LoadTextureToSelected(std::string& path);
 private:

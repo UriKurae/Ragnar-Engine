@@ -26,7 +26,7 @@ void TextureLoader::ReleaseInstance()
 
 void TextureLoader::ImportTexture(const aiMaterial* material, MaterialComponent** component, aiTextureType type, const char* typeName)
 {
-	for (unsigned int i = 0; i < material->GetTextureCount(type); ++i)
+	for (unsigned int i = 0; i < 1; ++i)
 	{
 		aiString str;
 		material->GetTexture(type, i, &str);
@@ -39,22 +39,20 @@ void TextureLoader::ImportTexture(const aiMaterial* material, MaterialComponent*
 		ilGenImages(1, &image);
 		ilBindImage(image);
 		ilLoadImage(path.c_str());
-		//ilLoadImage(str.C_Str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		int w = ilGetInteger(IL_IMAGE_WIDTH);
 		int h = ilGetInteger(IL_IMAGE_HEIGHT);
 
+		path = path.substr(path.find_last_of("/") + 1, path.length());
+		path = path.substr(0, path.find_last_of("."));
+		path = path.insert(0, LIBRARY_FOLDER);
+		path += ".dds";
 		*component = new MaterialComponent(image, w, h, path);
-		char* buffer = nullptr;
-		Uint64 size = SaveTexture(*component, &buffer);
-		if (app->fs->Save(path.c_str(), &buffer, size) > 0)
-			DEBUG_LOG("Texture saved!");
-		
-		RELEASE_ARRAY(buffer);
+		Uint64 size = SaveTexture(*component, path);
 	}
 }
 
-Uint64 TextureLoader::SaveTexture(MaterialComponent* component, char** fileBuffer)
+Uint64 TextureLoader::SaveTexture(MaterialComponent* component, std::string& fileName)
 {
 	ILuint size;
 	ILubyte* data;
@@ -66,9 +64,11 @@ Uint64 TextureLoader::SaveTexture(MaterialComponent* component, char** fileBuffe
 		data = new ILubyte[size];
 		if (ilSaveL(IL_DDS, data, size) > 0)
 		{
-			*fileBuffer = (char*)data;
+			if (app->fs->Save(fileName.c_str(), data, size) > 0)
+				DEBUG_LOG("Texture saved!");
 		}
-		//RELEASE_ARRAY(data);
+		
+		RELEASE_ARRAY(data);
 	}
 
 	return size;
@@ -80,7 +80,6 @@ MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 	ilGenImages(1, &image);
 	ilBindImage(image);
 	ilLoadImage(path.c_str());
-	//ilLoadImage(str.C_Str());
 	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 	int w = ilGetInteger(IL_IMAGE_WIDTH);
 	int h = ilGetInteger(IL_IMAGE_HEIGHT);

@@ -8,9 +8,10 @@
 
 TransformComponent::TransformComponent()
 {
-	position = { 5.0f, 0.0f, 0.0f }; 
-	rotation = { 1.0f, 1.0f, 1.0f, 1.0f };
+	position = { 0.0f, 0.0f, 0.0f }; 
+	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
+	transform = float4x4::FromTRS(position, rotation, scale);
 }
 
 TransformComponent::~TransformComponent()
@@ -102,7 +103,7 @@ void TransformComponent::ShowTransformationInfo()
 		}
 	}
 
-	static float rotations[3] = { 0,0,0 };
+	static float rotations[3] = { rotation.x,rotation.y, rotation.z };
 	ImGui::Text("Rotation: ");
 	ImGui::SameLine();
 	if (ImGui::DragFloat3(" ", rotations))
