@@ -8,6 +8,8 @@
 #include "Primitives.h"
 #include "Optick/include/optick.h"
 
+#include "LoadModel.h"
+
 #include "mmgr/mmgr.h"
 
 ModuleScene::ModuleScene()
@@ -24,6 +26,8 @@ bool ModuleScene::Start()
 
 	app->camera->position = Vec3(0.0f, 1.0f, -5.0f);
 	app->camera->LookAt(Vec3(0, 0, 0));
+
+	LoadModel::GetInstance()->LoadingModel(std::string("Assets/BakerHouse.fbx"));
 
 	return true;
 }
@@ -68,57 +72,93 @@ GameObject* ModuleScene::CreateGameObject()
 	return object;
 }
 
-void ModuleScene::CreateCube()
+GameObject* ModuleScene::Create3DObject(Object3D type)
 {
 	GameObject* object = CreateGameObject();
-	object->SetName("Cube");
-	MeshComponent* mesh = new MeshComponent(RCube::GetVertices(), RCube::GetIndices(), RCube::GetTexCoords());
+	MeshComponent* mesh = nullptr;
+
+	switch (type)
+	{
+	case Object3D::CUBE:
+		object->SetName("Cube");
+		mesh = new MeshComponent(RCube::GetVertices(), RCube::GetIndices(), RCube::GetTexCoords());
+		break;
+	case Object3D::PYRAMIDE:
+		object->SetName("Pyramide");
+		mesh = new MeshComponent(RPyramide::GetVertices(), RPyramide::GetIndices(), RPyramide::GetTexCoords());
+		break;
+	case Object3D::SPHERE:
+		object->SetName("Sphere");
+		mesh = new MeshComponent(RSphere::GetVertices(), RSphere::GetIndices(), RSphere::GetTexCoords());
+		break;
+	case Object3D::CYLINDER:
+		object->SetName("Cylinder");
+		mesh = new MeshComponent(RCylinder::GetVertices(), RCylinder::GetIndices(), RCylinder::GetTexCoords());
+		break;
+	}
+
 	mesh->SetOwner(object);
 	mesh->SetTransform(object->GetComponent<TransformComponent>());
 	Checker::CheckerImage checker = Checker::CreateChecker();
 	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
 	mesh->SetMaterial(material);
 	object->AddComponent(mesh);
+	object->AddComponent(material);
+
+	return object;
 }
 
-void ModuleScene::CreatePyramide()
-{
-	GameObject* object = CreateGameObject();
-	object->SetName("Pyramide");
-	MeshComponent* mesh = new MeshComponent(RPyramide::GetVertices(), RPyramide::GetIndices(), RPyramide::GetTexCoords());
-	mesh->SetOwner(object);
-	mesh->SetTransform(object->GetComponent<TransformComponent>());
-	Checker::CheckerImage checker = Checker::CreateChecker();
-	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
-	mesh->SetMaterial(material);
-	object->AddComponent(mesh);
-}
-
-void ModuleScene::CreateSphere()
-{
-	GameObject* object = CreateGameObject();
-	object->SetName("Sphere");
-	MeshComponent* mesh = new MeshComponent(RSphere::GetVertices(), RSphere::GetIndices(), RSphere::GetTexCoords());
-	mesh->SetOwner(object);
-	mesh->SetTransform(object->GetComponent<TransformComponent>());
-	Checker::CheckerImage checker = Checker::CreateChecker();
-	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
-	mesh->SetMaterial(material);
-	object->AddComponent(mesh);
-}
-
-void ModuleScene::CreateCylinder()
-{
-	GameObject* object = CreateGameObject();
-	object->SetName("Cylinder");
-	MeshComponent* mesh = new MeshComponent(RCylinder::GetVertices(), RCylinder::GetIndices(), RCylinder::GetTexCoords());
-	mesh->SetOwner(object);
-	mesh->SetTransform(object->GetComponent<TransformComponent>());
-	Checker::CheckerImage checker = Checker::CreateChecker();
-	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
-	mesh->SetMaterial(material);
-	object->AddComponent(mesh);
-}
+//void ModuleScene::CreateCube()
+//{
+//	GameObject* object = CreateGameObject();
+//	object->SetName("Cube");
+//	MeshComponent* mesh = new MeshComponent(RCube::GetVertices(), RCube::GetIndices(), RCube::GetTexCoords());
+//	mesh->SetOwner(object);
+//	mesh->SetTransform(object->GetComponent<TransformComponent>());
+//	Checker::CheckerImage checker = Checker::CreateChecker();
+//	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
+//	mesh->SetMaterial(material);
+//	object->AddComponent(mesh);
+//}
+//
+//void ModuleScene::CreatePyramide()
+//{
+//	GameObject* object = CreateGameObject();
+//	object->SetName("Pyramide");
+//	MeshComponent* mesh = new MeshComponent(RPyramide::GetVertices(), RPyramide::GetIndices(), RPyramide::GetTexCoords());
+//	mesh->SetOwner(object);
+//	mesh->SetTransform(object->GetComponent<TransformComponent>());
+//	Checker::CheckerImage checker = Checker::CreateChecker();
+//	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
+//	mesh->SetMaterial(material);
+//	object->AddComponent(mesh);
+//}
+//
+//void ModuleScene::CreateSphere()
+//{
+//	GameObject* object = CreateGameObject();
+//	object->SetName("Sphere");
+//	MeshComponent* mesh = new MeshComponent(RSphere::GetVertices(), RSphere::GetIndices(), RSphere::GetTexCoords());
+//	mesh->SetOwner(object);
+//	mesh->SetTransform(object->GetComponent<TransformComponent>());
+//	Checker::CheckerImage checker = Checker::CreateChecker();
+//	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
+//	mesh->SetMaterial(material);
+//	object->AddComponent(mesh);
+//}
+//
+//void ModuleScene::CreateCylinder()
+//{
+//	GameObject* object = CreateGameObject();
+//	object->SetName("Cylinder");
+//	MeshComponent* mesh = new MeshComponent(RCylinder::GetVertices(), RCylinder::GetIndices(), RCylinder::GetTexCoords());
+//	mesh->SetOwner(object);
+//	mesh->SetTransform(object->GetComponent<TransformComponent>());
+//	Checker::CheckerImage checker = Checker::CreateChecker();
+//	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
+//	mesh->SetMaterial(material);
+//	object->AddComponent(mesh);
+//}
 
 void ModuleScene::MoveGameObjectUp(GameObject* object)
 {

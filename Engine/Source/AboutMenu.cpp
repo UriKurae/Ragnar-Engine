@@ -2,6 +2,10 @@
 #include <SDL_syswm.h>
 #include <GL\glew.h>
 
+#include "assimp/version.h"
+#include "DevIL/include/IL/il.h"
+#include "PhysFS/include/physfs.h"
+
 #include "mmgr/mmgr.h"
 
 AboutMenu::AboutMenu() : Menu(false)
@@ -33,6 +37,9 @@ bool AboutMenu::Update(float dt)
 		ImGui::TextWrapped("-ImGui %s", ImGui::GetVersion());
 		ImGui::TextWrapped("-MathGeoLib 1.5");
 		ImGui::TextWrapped("-OpenGl version %s", glGetString(GL_VERSION));
+		ImGui::TextWrapped("-Assimp version %d.%d", aiGetVersionMajor(), aiGetVersionMinor());
+		ImGui::TextWrapped("-DevIL version 1.8.0");
+		ImGui::TextWrapped("-PhysFS version %d.%d.%d", PHYSFS_VER_MAJOR, PHYSFS_VER_MINOR, PHYSFS_VER_PATCH);
 
 		ImGui::NewLine();
 		ImGui::TextWrapped("License:");

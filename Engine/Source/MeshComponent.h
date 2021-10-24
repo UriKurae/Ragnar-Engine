@@ -49,4 +49,7 @@ private:
 
 	TransformComponent* transform;
 	MaterialComponent* material;
+
+	bool faceNormals;
+	bool verticesNormals;
 };

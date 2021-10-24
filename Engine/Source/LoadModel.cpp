@@ -84,11 +84,14 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
 
-	vertices.reserve(mesh->mNumVertices);
-	indices.reserve(mesh->mNumFaces * 3);
-	texCoords.reserve(mesh->mNumVertices);
+	int numVertices = mesh->mNumVertices;
+	int numFaces = mesh->mNumFaces;
 
-	for (unsigned int i = 0; i < mesh->mNumVertices; ++i)
+	vertices.reserve(numVertices);
+	indices.reserve(numFaces * 3);
+	texCoords.reserve(numVertices);
+
+	for (unsigned int i = 0; i < numVertices; ++i)
 	{
 		float3 vertex;
 		vertex.x = mesh->mVertices[i].x;
@@ -107,7 +110,7 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 		texCoords.push_back(coords);
 	}
 
-	for (unsigned int i = 0; i < mesh->mNumFaces; ++i)
+	for (unsigned int i = 0; i < numFaces; ++i)
 	{
 		aiFace face = mesh->mFaces[i];
 		for (unsigned int j = 0; j < face.mNumIndices; ++j)
@@ -138,12 +141,14 @@ MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureTyp
 {
 	MaterialComponent* material = nullptr;
 	// Carefull with multiple textures as it affects imgui
-	for (unsigned int i = 0; i < 1; i++)
+	for (unsigned int i = 0; i < mat->GetTextureCount(type); ++i)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
+		std::string aux = str.C_Str();
+		aux = aux.substr(aux.find_last_of("\\") + 1, aux.length());
 		std::string path = ASSETS_FOLDER;
-		path += str.C_Str();
+		path += aux;
 		material = TextureLoader::GetInstance()->LoadTexture(path);
 	}
 

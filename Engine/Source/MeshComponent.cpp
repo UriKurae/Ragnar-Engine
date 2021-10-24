@@ -12,6 +12,8 @@
 MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat)
 {
 	type = ComponentType::MESH_RENDERER;
+	verticesNormals = false;
+	faceNormals = false;
 
 	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
 	ebo = new IndexBuffer(indices.data(), indices.size());
@@ -27,6 +29,8 @@ MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int
 MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr)
 {
 	type = ComponentType::MESH_RENDERER;
+	verticesNormals = false;
+	faceNormals = false;
 
 	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
 	ebo = new IndexBuffer(indices.data(), indices.size());
@@ -80,7 +84,13 @@ void MeshComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Mesh Renderer"))
 	{
+		ImGui::Text("Number of vertices: ");
 		ImGui::SameLine();
-		ImGui::Checkbox("", &active);
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", vertices.size());
+		ImGui::Text("Number of indices: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", indices.size());
+		ImGui::Checkbox("Vertices normals", &verticesNormals);
+		ImGui::Checkbox("Face normals", &faceNormals);
 	}
 }

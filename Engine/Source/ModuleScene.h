@@ -3,6 +3,14 @@
 #include "Module.h"
 #include <vector>
 
+enum class Object3D
+{
+	CUBE = 0,
+	PYRAMIDE,
+	SPHERE,
+	CYLINDER
+};
+
 class GameObject;
 
 class ModuleScene : public Module
@@ -22,10 +30,11 @@ public:
 		return gameObjects; 
 	}
 
-	void CreateCube();
-	void CreatePyramide();
-	void CreateSphere();
-	void CreateCylinder();
+	GameObject* Create3DObject(Object3D type);
+	//void CreateCube();
+	//void CreatePyramide();
+	//void CreateSphere();
+	//void CreateCylinder();
 
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);

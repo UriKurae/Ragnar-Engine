@@ -30,6 +30,12 @@ void MaterialComponent::OnEditor()
 		ImGui::Text("Path: ");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", path.c_str());
+		ImGui::Text("Width: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", width);
+		ImGui::Text("Height: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", height);
 		ImGui::Separator();
 	}
 }

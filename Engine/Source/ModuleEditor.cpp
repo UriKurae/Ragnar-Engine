@@ -137,22 +137,22 @@ bool ModuleEditor::Update(float dt)
 			}
 			else if (ImGui::Button("Create Cube"))
 			{
-				app->scene->CreateCube();
+				app->scene->Create3DObject(Object3D::CUBE);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Pyramide"))
 			{
-				app->scene->CreatePyramide();
+				app->scene->Create3DObject(Object3D::PYRAMIDE);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Sphere"))
 			{
-				app->scene->CreateSphere();
+				app->scene->Create3DObject(Object3D::SPHERE);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Cylinder"))
 			{
-				app->scene->CreateCylinder();
+				//app->scene->Create3DObject(Object3D::CYLINDER);
 				createGameObject = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
