@@ -37,7 +37,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		SETTINGS_FOLDER, ASSETS_FOLDER, MODELS_FOLDER
+		ASSETS_FOLDER, SETTINGS_FOLDER, MODELS_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -114,7 +114,7 @@ uint FileSystem::Load(const char* file, char** buffer)
 			if (readed != size)
 			{
 				DEBUG_LOG("File System error while reading from file %s: %s\n", file, PHYSFS_getLastError());
-				RELEASE(buffer);
+				RELEASE_ARRAY(buffer);
 			}
 			else
 				ret = readed;

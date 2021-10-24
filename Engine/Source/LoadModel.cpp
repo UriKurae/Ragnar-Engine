@@ -123,7 +123,8 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		diffuse = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		TextureLoader::GetInstance()->ImportTexture(material, diffuse, aiTextureType_DIFFUSE, "texture_diffuse");
+		//diffuse = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		
 		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		//textures.insert(textures.end(), specular.begin(), specular.end());
