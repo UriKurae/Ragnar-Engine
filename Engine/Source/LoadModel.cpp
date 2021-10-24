@@ -123,7 +123,7 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		TextureLoader::GetInstance()->ImportTexture(material, diffuse, aiTextureType_DIFFUSE, "texture_diffuse");
+		TextureLoader::GetInstance()->ImportTexture(material, &diffuse, aiTextureType_DIFFUSE, "texture_diffuse");
 		//diffuse = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		
 		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
@@ -142,7 +142,7 @@ MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureTyp
 {
 	MaterialComponent* material = nullptr;
 	// Carefull with multiple textures as it affects imgui
-	for (unsigned int i = 0; i < mat->GetTextureCount(type); ++i)
+	for (unsigned int i = 0; i < 1; ++i)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
