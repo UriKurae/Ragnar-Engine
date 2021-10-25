@@ -15,6 +15,12 @@ GameObject::~GameObject()
 	{
 		RELEASE(components[i]);
 	}
+
+	// TODO THIS MUST BE CHECKED BECAUSE IT CAUSES THE PROGRAM TO CRASH
+	/*for (int i = 0; i < children.size(); ++i)
+	{
+		RELEASE(children[i]);
+	}*/
 }
 
 bool GameObject::Update(float dt)
@@ -110,6 +116,13 @@ void GameObject::AddChild(GameObject* object)
 char* GameObject::GetNameBuffer()
 {	
 	return &name[0];
+}
+
+void GameObject::SetAABB(std::vector<float3>& vertices)
+{
+	boundingBox.SetNegativeInfinity();
+
+	boundingBox.Enclose(vertices.data(), vertices.size());
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)

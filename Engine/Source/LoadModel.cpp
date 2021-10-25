@@ -130,7 +130,8 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 		//textures.insert(textures.end(), specular.begin(), specular.end());
 	}
 	MeshComponent* m = new MeshComponent(vertices, indices, diffuse, texCoords);
-	
+	m->SetOwner(object);
+	m->CreateAABB();
 	m->SetTransform(object->GetComponent<TransformComponent>());
 	object->AddComponent(m);
 	if (diffuse) object->AddComponent(diffuse);

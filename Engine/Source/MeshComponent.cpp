@@ -1,6 +1,7 @@
 #include "MeshComponent.h"
 #include "TransformComponent.h"
 #include "MaterialComponent.h"
+#include "GameObject.h"
 #include "Globals.h"
 
 #include "Imgui/imgui.h"
@@ -93,4 +94,9 @@ void MeshComponent::OnEditor()
 		ImGui::Checkbox("Vertices normals", &verticesNormals);
 		ImGui::Checkbox("Face normals", &faceNormals);
 	}
+}
+
+void MeshComponent::CreateAABB()
+{
+	owner->SetAABB(vertices);
 }

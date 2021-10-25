@@ -6,6 +6,8 @@
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 
+#include "MathGeoLib/src/MathGeoLib.h"
+
 class GameObject
 {
 public:
@@ -28,6 +30,8 @@ public:
 	inline const GameObject* GetParent() const { return parent; }
 	inline bool GetActive() const { return active; }
 	inline std::vector<GameObject*>& GetChilds() { return children; }
+	void SetAABB(std::vector<float3>& vertices);
+	inline AABB GetAABB() { return boundingBox; }
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
@@ -46,6 +50,8 @@ private:
 	std::vector<GameObject*> children;
 
 	bool newComponent;
+
+	AABB boundingBox;
 };
 
 template<typename T>

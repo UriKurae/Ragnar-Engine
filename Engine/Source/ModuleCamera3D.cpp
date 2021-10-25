@@ -79,6 +79,15 @@ bool ModuleCamera3D::Update(float dt)
 	position += newPos;
 	reference += newPos;
 
+	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
+	{
+		float3 maxPoint = app->editor->GetSelected()->GetAABB().maxPoint;
+		float3 minPoint = app->editor->GetSelected()->GetAABB().minPoint;
+
+		float3 result = (maxPoint - minPoint) / 2;
+		
+	}
+
 	// Mouse motion ----------------
 
 	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)

@@ -45,14 +45,33 @@ bool ModuleEditor::Update(float dt)
 		createGameObject = true;
 	}
 	int size = app->scene->GetGameObjectsList().size();
-	for (int i = 0; i < size; ++i)
+	if (ImGui::TreeNode(app->scene->GetRoot()->GetName()))
 	{
-		GameObject& object = (*app->scene->GetGameObjectsList()[i]);
-		if (object.GetParent() == nullptr)
+		for (int i = 0; i < size; ++i)
 		{
-			if (ImGui::TreeNode(object.GetName()))
+			GameObject& object = (*app->scene->GetGameObjectsList()[i]);
+			if (object.GetParent() == nullptr)
 			{
-				if (ImGui::IsItemHovered() && !gameObjectOptions)
+				if (ImGui::TreeNode(object.GetName()))
+				{
+					if (ImGui::IsItemHovered() && !gameObjectOptions)
+					{
+						if (ImGui::GetIO().MouseReleased[1])
+						{
+							gameObjectOptions = true;
+							selected = &object;
+							selectedParent = nullptr;
+						}
+						else if (ImGui::GetIO().MouseReleased[0])
+						{
+							selected = &object;
+							selectedParent = nullptr;
+						}
+					}
+					ShowChildren(&object);
+					ImGui::TreePop();
+				}
+				else if (ImGui::IsItemHovered() && !gameObjectOptions)
 				{
 					if (ImGui::GetIO().MouseReleased[1])
 					{
@@ -66,24 +85,9 @@ bool ModuleEditor::Update(float dt)
 						selectedParent = nullptr;
 					}
 				}
-				ShowChildren(&object);
-				ImGui::TreePop();
 			}
-			else if (ImGui::IsItemHovered() && !gameObjectOptions)
-			{
-				if (ImGui::GetIO().MouseReleased[1])
-				{
-					gameObjectOptions = true;
-					selected = &object;
-					selectedParent = nullptr;
-				}
-				else if (ImGui::GetIO().MouseReleased[0])
-				{
-					selected = &object;
-					selectedParent = nullptr;
-				}
-			}
-		}	
+		}
+		ImGui::TreePop();
 	}
 
 	if (gameObjectOptions)

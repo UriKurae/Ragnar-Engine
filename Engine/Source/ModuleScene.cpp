@@ -14,6 +14,8 @@
 
 ModuleScene::ModuleScene()
 {
+	root = new GameObject();
+	root->SetName("Scene");
 }
 
 ModuleScene::~ModuleScene()
@@ -43,9 +45,9 @@ bool ModuleScene::PostUpdate()
 {
 	OPTICK_EVENT("Scene PostUpdate");
 
-	for (int i = 0; i < gameObjects.size(); ++i)
+	for (int i = 0; i < root->GetChilds().size(); ++i)
 	{
-		gameObjects[i]->Draw();
+		root->GetChilds()[i]->Draw();
 	}
 
 	return true;
@@ -53,10 +55,7 @@ bool ModuleScene::PostUpdate()
 
 bool ModuleScene::CleanUp()
 {
-	for (int i = 0; i < gameObjects.size(); ++i)
-	{
-		RELEASE(gameObjects[i]);
-	}
+	RELEASE(root);
 
 	return true;
 }
@@ -67,7 +66,8 @@ GameObject* ModuleScene::CreateGameObject()
 
 	GameObject* object = new GameObject();
 	object->CreateComponent(ComponentType::TRANSFORM);
-	gameObjects.emplace_back(object);
+	//gameObjects.emplace_back(object);
+	root->AddChild(object);
 	
 	return object;
 }
@@ -110,17 +110,17 @@ GameObject* ModuleScene::Create3DObject(Object3D type)
 
 void ModuleScene::MoveGameObjectUp(GameObject* object)
 {
-	if (object == gameObjects[0]) return;
+	if (object == root->GetChilds()[0]) return;
 
-	int size = gameObjects.size();
+	int size = root->GetChilds().size();
 	for (int i = 0; i < size; ++i)
 	{
-		if (gameObjects[i] == object)
+		if (root->GetChilds()[i] == object)
 		{
-			GameObject* aux = gameObjects[i];
+			GameObject* aux = root->GetChilds()[i];
 
-			gameObjects[i] = gameObjects[i - 1];
-			gameObjects[i - 1] = aux;
+			root->GetChilds()[i] = root->GetChilds()[i - 1];
+			root->GetChilds()[i - 1] = aux;
 			break;
 		}
 	}
@@ -128,17 +128,17 @@ void ModuleScene::MoveGameObjectUp(GameObject* object)
 
 void ModuleScene::MoveGameObjectDown(GameObject* object)
 {
-	int size = gameObjects.size() - 1;
-	if (object == gameObjects[size]) return;
+	int size = root->GetChilds().size() - 1;
+	if (object == root->GetChilds()[size]) return;
 
 	for (int i = size; i >= 0; --i)
 	{
-		if (gameObjects[i] == object)
+		if (root->GetChilds()[i] == object)
 		{
-			GameObject* aux = gameObjects[i];
+			GameObject* aux = root->GetChilds()[i];
 
-			gameObjects[i] = gameObjects[i + 1];
-			gameObjects[i + 1] = aux;
+			root->GetChilds()[i] = root->GetChilds()[i + 1];
+			root->GetChilds()[i + 1] = aux;
 			break;
 		}
 	}

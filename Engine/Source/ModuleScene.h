@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Module.h"
+#include "GameObject.h"
 #include <vector>
 
 enum class Object3D
@@ -10,8 +11,6 @@ enum class Object3D
 	SPHERE,
 	CYLINDER
 };
-
-class GameObject;
 
 class ModuleScene : public Module
 {
@@ -27,18 +26,16 @@ public:
 	GameObject* CreateGameObject();
 	inline std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
-		return gameObjects; 
+		return root->GetChilds(); 
 	}
 
+	inline GameObject* GetRoot() const { return root; }
+
 	GameObject* Create3DObject(Object3D type);
-	//void CreateCube();
-	//void CreatePyramide();
-	//void CreateSphere();
-	//void CreateCylinder();
 
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
 
 private:
-	std::vector<GameObject*> gameObjects;
+	GameObject* root;
 };

@@ -33,6 +33,8 @@ public:
 
 	void Draw() override;
 	void OnEditor() override;
+
+	void CreateAABB();
 	
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
