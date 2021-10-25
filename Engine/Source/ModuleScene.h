@@ -23,7 +23,7 @@ public:
 	bool PostUpdate() override;
 	bool CleanUp() override;
 
-	GameObject* CreateGameObject();
+	GameObject* CreateGameObject(GameObject* parent);
 	inline std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
 		return root->GetChilds(); 
@@ -31,7 +31,7 @@ public:
 
 	inline GameObject* GetRoot() const { return root; }
 
-	GameObject* Create3DObject(Object3D type);
+	GameObject* Create3DObject(Object3D type, GameObject* parent);
 
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);

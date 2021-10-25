@@ -50,28 +50,9 @@ bool ModuleEditor::Update(float dt)
 		for (int i = 0; i < size; ++i)
 		{
 			GameObject& object = (*app->scene->GetGameObjectsList()[i]);
-			if (object.GetParent() == nullptr)
+			if (ImGui::TreeNode(object.GetName()))
 			{
-				if (ImGui::TreeNode(object.GetName()))
-				{
-					if (ImGui::IsItemHovered() && !gameObjectOptions)
-					{
-						if (ImGui::GetIO().MouseReleased[1])
-						{
-							gameObjectOptions = true;
-							selected = &object;
-							selectedParent = nullptr;
-						}
-						else if (ImGui::GetIO().MouseReleased[0])
-						{
-							selected = &object;
-							selectedParent = nullptr;
-						}
-					}
-					ShowChildren(&object);
-					ImGui::TreePop();
-				}
-				else if (ImGui::IsItemHovered() && !gameObjectOptions)
+				if (ImGui::IsItemHovered() && !gameObjectOptions)
 				{
 					if (ImGui::GetIO().MouseReleased[1])
 					{
@@ -84,6 +65,22 @@ bool ModuleEditor::Update(float dt)
 						selected = &object;
 						selectedParent = nullptr;
 					}
+				}
+				ShowChildren(&object);
+				ImGui::TreePop();
+			}
+			else if (ImGui::IsItemHovered() && !gameObjectOptions)
+			{
+				if (ImGui::GetIO().MouseReleased[1])
+				{
+					gameObjectOptions = true;
+					selected = &object;
+					selectedParent = nullptr;
+				}
+				else if (ImGui::GetIO().MouseReleased[0])
+				{
+					selected = &object;
+					selectedParent = nullptr;
 				}
 			}
 		}
@@ -136,22 +133,26 @@ bool ModuleEditor::Update(float dt)
 		{
 			if (ImGui::Button("Create Empty Object"))
 			{
-				app->scene->CreateGameObject();
+				if (selected != nullptr) app->scene->CreateGameObject(selected);
+				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Cube"))
 			{
-				app->scene->Create3DObject(Object3D::CUBE);
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
+				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Pyramide"))
 			{
-				app->scene->Create3DObject(Object3D::PYRAMIDE);
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
+				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Sphere"))
 			{
-				app->scene->Create3DObject(Object3D::SPHERE);
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
+				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Cylinder"))

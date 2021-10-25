@@ -25,7 +25,7 @@ struct Texture
 class MeshComponent : public Component
 {
 public:
-	MeshComponent() : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(nullptr) {}
+	MeshComponent(TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false) {}
 	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* material, std::vector<float2>& texCoord);
 	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
 	//MeshComponent(TransformComponent* trans) : transform(trans) {}
@@ -35,6 +35,7 @@ public:
 	void OnEditor() override;
 
 	void CreateAABB();
+	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
 	
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }

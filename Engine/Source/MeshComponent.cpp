@@ -59,20 +59,20 @@ void MeshComponent::Draw()
 	/*glMultTransposeMatrixf(transform->GetTransform().ptr());*/
 	glMultMatrixf(transform->GetTransform().Transposed().ptr());
 
-	vbo->Bind();
+	if (vbo != nullptr) vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
 	if (material != nullptr) material->BindTexture();
-	ebo->Bind();
+	if (ebo != nullptr) ebo->Bind();
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
-	ebo->Unbind();
+	if (ebo != nullptr) ebo->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	vbo->Unbind();
+	if (vbo != nullptr) vbo->Unbind();
 	if (material != nullptr) material->UnbindTexture();
 
 	glPopMatrix();
@@ -93,10 +93,34 @@ void MeshComponent::OnEditor()
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", indices.size());
 		ImGui::Checkbox("Vertices normals", &verticesNormals);
 		ImGui::Checkbox("Face normals", &faceNormals);
+		ImGui::Separator();
 	}
 }
 
 void MeshComponent::CreateAABB()
 {
+	owner->SetAABB(vertices);
+}
+
+void MeshComponent::SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord)
+{
+	type = ComponentType::MESH_RENDERER;
+	verticesNormals = false;
+	faceNormals = false;
+
+	vertices = vert;
+	indices = ind;
+	texCoords = texCoord;
+
+	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
+	ebo = new IndexBuffer(indices.data(), indices.size());
+	glGenBuffers(1, &tbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	vbo->Unbind();
+	ebo->Unbind();
+
 	owner->SetAABB(vertices);
 }

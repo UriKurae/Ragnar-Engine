@@ -60,21 +60,29 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-GameObject* ModuleScene::CreateGameObject()
+GameObject* ModuleScene::CreateGameObject(GameObject* parent)
 {
 	OPTICK_EVENT("Creating Game Object");
 
 	GameObject* object = new GameObject();
 	object->CreateComponent(ComponentType::TRANSFORM);
-	//gameObjects.emplace_back(object);
-	root->AddChild(object);
+	if (parent != nullptr)
+	{
+		parent->AddChild(object);
+		object->SetParent(parent);
+	}
+	else
+	{
+		root->AddChild(object);
+		object->SetParent(root);
+	}
 	
 	return object;
 }
 
-GameObject* ModuleScene::Create3DObject(Object3D type)
+GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 {
-	GameObject* object = CreateGameObject();
+	GameObject* object = CreateGameObject(parent);
 	MeshComponent* mesh = nullptr;
 
 	switch (type)

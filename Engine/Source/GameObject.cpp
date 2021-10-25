@@ -17,10 +17,10 @@ GameObject::~GameObject()
 	}
 
 	// TODO THIS MUST BE CHECKED BECAUSE IT CAUSES THE PROGRAM TO CRASH
-	/*for (int i = 0; i < children.size(); ++i)
+	for (int i = 0; i < children.size(); ++i)
 	{
 		RELEASE(children[i]);
-	}*/
+	}
 }
 
 bool GameObject::Update(float dt)
@@ -38,10 +38,14 @@ void GameObject::Draw()
 	//		GetAllComponent<MeshComponent>()[i]->Draw();
 	//	}
 	//}
-
 	for (int i = 0; i < components.size(); ++i)
 	{
 		components[i]->Draw();
+	}
+
+	for (int i = 0; i < children.size(); ++i)
+	{
+		children[i]->Draw();
 	}
 }
 
@@ -70,6 +74,11 @@ void GameObject::DrawEditor()
 				CreateComponent(ComponentType::MESH_RENDERER);
 				newComponent = false;
 			}
+			if (ImGui::Button("Material Component"))
+			{
+				CreateComponent(ComponentType::MATERIAL);
+				newComponent = false;
+			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
 				newComponent = false;
@@ -90,14 +99,18 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component->SetOwner(this);
 		break;
 	case ComponentType::MESH_RENDERER:
-		/*component = new MeshComponent(GetComponent<TransformComponent>());*/
+		component = new MeshComponent(GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
-
+		component = new MaterialComponent();
 		break;
 	}
 
-	if (component != nullptr) components.push_back(component);
+	if (component != nullptr)
+	{
+		component->SetOwner(this);
+		components.push_back(component);
+	}
 
 	return component;
 }

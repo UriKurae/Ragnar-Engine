@@ -45,7 +45,7 @@ void LoadModel::LoadingModel(std::string& path)
 	
 	std::string p = path.substr(0, path.find_last_of('.'));
 	p = p.substr(path.find_last_of('\\') + 1, p.size());
-	GameObject* object = app->scene->CreateGameObject();
+	GameObject* object = app->scene->CreateGameObject(nullptr);
 	object->SetName(p.c_str());
 	ProcessNode(scene->mRootNode, scene, object);
 }
@@ -65,9 +65,7 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 	{
 		if (node->mChildren[i]->mNumMeshes > 0)
 		{
-			GameObject* object = app->scene->CreateGameObject();
-			object->SetParent(obj);
-			if (obj != nullptr) obj->AddChild(object);
+			GameObject* object = app->scene->CreateGameObject(obj);
 			ProcessNode(node->mChildren[i], scene, object);
 		}
 		else
@@ -129,12 +127,14 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		//textures.insert(textures.end(), specular.begin(), specular.end());
 	}
-	MeshComponent* m = new MeshComponent(vertices, indices, diffuse, texCoords);
-	m->SetOwner(object);
-	m->CreateAABB();
-	m->SetTransform(object->GetComponent<TransformComponent>());
-	object->AddComponent(m);
-	if (diffuse) object->AddComponent(diffuse);
+	MeshComponent* m = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);
+	m->SetMesh(vertices, indices, texCoords);
+	//m->CreateAABB();
+	if (diffuse)
+	{
+		m->SetMaterial(diffuse);
+		object->AddComponent(diffuse);
+	}
 
 	return m;
 }
