@@ -210,12 +210,13 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 
 	// Ruben : Aqui he probado mil cosas, he probado computeViewMatrix(), ComputeProjectionMatrix(), tambien las he 
 	// dado invertidas, etc..
+	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(app->camera->cameraFrustum->ProjectionMatrix().ptr());
-	glLoadIdentity();
+	//glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->cameraFrustum->ViewMatrix().ptr());
-
+	glPopMatrix();
 	// light 0 on cam pos
 	lights[0].SetPos(app->camera->position.x, app->camera->position.y, app->camera->position.z);
 
