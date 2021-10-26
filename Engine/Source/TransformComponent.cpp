@@ -133,5 +133,4 @@ void TransformComponent::ShowTransformationInfo()
 			children[i]->GetComponent<TransformComponent>()->SetScale(scale);
 		}
 	}
-
 }

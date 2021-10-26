@@ -32,6 +32,13 @@ bool ModuleCamera3D::Start()
 {
 	DEBUG_LOG("Setting up the camera");
 	bool ret = true;
+	// Ruben : Setup de la camara frustum
+	cameraFrustum = new Frustum();
+	cameraFrustum->SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+	cameraFrustum->SetViewPlaneDistances(1.0f, 300.0f);
+	cameraFrustum->SetFrame(math::vec(0.0f, 0.0f, 0.0f), math::vec(0.0f, 0.0, 1.0f), math::vec(0.0f, 1.0f, 0.0f));
+	cameraFrustum->SetPerspective(90.0f, 59.0f);
+	
 
 	return ret;
 }
@@ -67,11 +74,25 @@ bool ModuleCamera3D::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_REPEAT) newPos.y += speed;
 	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_REPEAT) newPos.y -= speed;
 
-	if ((app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= z * speed;
-	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += z * speed;
+	if (app->editor->GetSelected())
+	{
+		cameraFrustum->SetFront(app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition());
+		
+	}
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= x * speed;
-	if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += x * speed;
+	// Ruben : Aqui muevo la camaraFrustum con el Translate que da mathgeolib frustum
+	if ((app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT))
+	{
+		cameraFrustum->Translate(math::vec(0.0f, 0.0f, speed * 9.0f));
+
+		DEBUG_LOG("CAMERA IS %f %f %f", cameraFrustum->Pos().x, cameraFrustum->Pos().y, cameraFrustum->Pos().z);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT))
+	{
+		cameraFrustum->Translate(math::vec(0.0f, 0.0f, -speed * 9.0f));
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) cameraFrustum->Translate(math::vec(speed * 9.0f, 0.0f, 0.0f));
+	if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) cameraFrustum->Translate(math::vec(-speed * 9.0f, 0.0f, 0.0f));
 	
 	if (app->input->GetMouseZ() == 1) newPos -= z * speed * 9.0f;
 	if (app->input->GetMouseZ() == -1) newPos += z * speed * 9.0f;
@@ -135,7 +156,12 @@ bool ModuleCamera3D::Update(float dt)
 	}
 
 	// Recalculate matrix -------------
-	CalculateViewMatrix();
+	//CalculateViewMatrix();
+
+	// Ruben : Aqui probe a calcular las matrices a cada frame.
+	/*projectionMatrix = cameraFrustum->ComputeProjectionMatrix();
+	frustumViewMatrix = cameraFrustum->ComputeViewMatrix();*/
+	
 
 	return true;
 }
