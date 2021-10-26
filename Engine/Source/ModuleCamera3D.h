@@ -2,8 +2,6 @@
 #include "Module.h"
 #include "glmath.h"
 
-#include "MathGeoLib/src/Geometry/Frustum.h"
-
 class ModuleCamera3D : public Module
 {
 public:
@@ -27,13 +25,8 @@ private:
 	void CalculateViewMatrix();
 
 public:
-
+	
 	Vec3 x, y, z, position, reference, objectSelected;
-
-	// Ruben : aqui creo las matrices y la camara para tenerlas, la de view es 3x4 pero he probado tambien con 4x4
-	Frustum* cameraFrustum;
-	math::float4x4 projectionMatrix;
-	math::float3x4 frustumViewMatrix;
 
 private:
 
