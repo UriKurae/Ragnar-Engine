@@ -207,24 +207,10 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-<<<<<<< HEAD
-
-	// Ruben : Aqui he probado mil cosas, he probado computeViewMatrix(), ComputeProjectionMatrix(), tambien las he 
-	// dado invertidas, etc..
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->camera->cameraFrustum->ProjectionMatrix().ptr());
-	//glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->cameraFrustum->ViewMatrix().ptr());
-	glPopMatrix();
-=======
-	glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->GetViewMatrix());
 
->>>>>>> parent of bef6021 (Camera Frustum not working)
 	// light 0 on cam pos
 	lights[0].SetPos(app->camera->position.x, app->camera->position.y, app->camera->position.z);
 
