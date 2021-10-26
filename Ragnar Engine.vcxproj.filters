@@ -189,6 +189,9 @@
       <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Primitives.h" />
+    <ClInclude Include="Engine\Source\Viewport.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -309,6 +312,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\TextureLoader.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Viewport.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include "MainMenuBar.h"
+#include "Viewport.h"
 
 #include <vector>
 #include <string>
@@ -35,4 +36,6 @@ private:
 
 	GameObject* selected;
 	GameObject* selectedParent;
+
+	Viewport* viewport;
 };

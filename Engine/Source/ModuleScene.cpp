@@ -41,7 +41,7 @@ bool ModuleScene::Update(float dt)
 	return true;
 }
 
-bool ModuleScene::PostUpdate()
+bool ModuleScene::Draw()
 {
 	OPTICK_EVENT("Scene PostUpdate");
 
@@ -83,35 +83,44 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent)
 GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 {
 	GameObject* object = CreateGameObject(parent);
+	std::vector<float3> vertices;
+	std::vector<unsigned int> indices;
+	std::vector<float2> texCoords;
+
 	MeshComponent* mesh = nullptr;
 
 	switch (type)
 	{
 	case Object3D::CUBE:
 		object->SetName("Cube");
-		mesh = new MeshComponent(RCube::GetVertices(), RCube::GetIndices(), RCube::GetTexCoords());
+		RCube::CreateCube(vertices, indices, texCoords);
 		break;
 	case Object3D::PYRAMIDE:
 		object->SetName("Pyramide");
-		mesh = new MeshComponent(RPyramide::GetVertices(), RPyramide::GetIndices(), RPyramide::GetTexCoords());
+		RPyramide::CreatePyramide(vertices, indices, texCoords);
 		break;
 	case Object3D::SPHERE:
 		object->SetName("Sphere");
-		mesh = new MeshComponent(RSphere::GetVertices(), RSphere::GetIndices(), RSphere::GetTexCoords());
+		RSphere::CreateSphere(vertices, indices, texCoords);
 		break;
 	case Object3D::CYLINDER:
 		object->SetName("Cylinder");
-		mesh = new MeshComponent(RCylinder::GetVertices(), RCylinder::GetIndices(), RCylinder::GetTexCoords());
+		RCylinder::CreateCylinder(vertices, indices, texCoords);
 		break;
 	}
 
-	mesh->SetOwner(object);
-	mesh->SetTransform(object->GetComponent<TransformComponent>());
-	Checker::CheckerImage checker = Checker::CreateChecker();
-	MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
-	mesh->SetMaterial(material);
-	object->AddComponent(mesh);
-	object->AddComponent(material);
+	if (!vertices.empty())
+	{
+		mesh = new MeshComponent(vertices, indices, texCoords);
+
+		mesh->SetOwner(object);
+		mesh->SetTransform(object->GetComponent<TransformComponent>());
+		Checker::CheckerImage checker = Checker::CreateChecker();
+		MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
+		mesh->SetMaterial(material);
+		object->AddComponent(mesh);
+		object->AddComponent(material);
+	}
 
 	return object;
 }

@@ -66,6 +66,8 @@ public:
 	std::vector<GLfloat> texcoords;
 	std::vector<GLfloat> vertices;
 
+	PGrid* grid;
+
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	Mat3x3 normalMatrix;
@@ -76,6 +78,7 @@ public:
 
 	GLuint framebuffer;
 	GLuint rboDepthStencil;
+	GLuint textureColorbuffer;
 
 	bool depthTest;
 	bool cullFace;

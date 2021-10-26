@@ -95,14 +95,13 @@ Component* GameObject::CreateComponent(ComponentType type)
 	switch (type)
 	{
 	case ComponentType::TRANSFORM:
-		component = new TransformComponent();
-		component->SetOwner(this);
+		component = new TransformComponent(this);
 		break;
 	case ComponentType::MESH_RENDERER:
-		component = new MeshComponent(GetComponent<TransformComponent>());
+		component = new MeshComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
-		component = new MaterialComponent();
+		component = new MaterialComponent(this);
 		break;
 	}
 

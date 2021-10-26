@@ -20,7 +20,7 @@ public:
 
 	bool Start() override;
 	bool Update(float dt) override;
-	bool PostUpdate() override;
+	bool Draw();
 	bool CleanUp() override;
 
 	GameObject* CreateGameObject(GameObject* parent);

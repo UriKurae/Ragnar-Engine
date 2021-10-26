@@ -20,6 +20,8 @@
 ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), createGameObject(false), gameObjectOptions(false), Module()
 {
 	name = "Editor";
+
+	viewport = new Viewport();
 }
 
 ModuleEditor::~ModuleEditor()
@@ -38,6 +40,8 @@ bool ModuleEditor::Update(float dt)
 	{
 		app->window->SetFullscreen();
 	}
+
+	ImGui::DockSpaceOverViewport();
 
 	ImGui::Begin("Hierarchy");
 	if (ImGui::Button("+"))
@@ -140,24 +144,25 @@ bool ModuleEditor::Update(float dt)
 			else if (ImGui::Button("Create Cube"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
-				else app->scene->CreateGameObject(nullptr);
+				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Pyramide"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
-				else app->scene->CreateGameObject(nullptr);
+				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Sphere"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
-				else app->scene->CreateGameObject(nullptr);
+				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
 				createGameObject = false;
 			}
 			else if (ImGui::Button("Create Cylinder"))
 			{
-				//app->scene->Create3DObject(Object3D::CYLINDER);
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
+				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
 				createGameObject = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -210,6 +215,8 @@ bool ModuleEditor::Update(float dt)
 bool ModuleEditor::Draw()
 {
 	OPTICK_EVENT("Drawing Module Editor");
+	
+	viewport->Draw(app->renderer3D->framebuffer);
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -219,6 +226,8 @@ bool ModuleEditor::Draw()
 bool ModuleEditor::CleanUp()
 {
 	mainMenuBar.CleanUp();
+
+	RELEASE(viewport);
 
 	return true;
 }

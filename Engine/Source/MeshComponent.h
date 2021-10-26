@@ -25,7 +25,7 @@ struct Texture
 class MeshComponent : public Component
 {
 public:
-	MeshComponent(TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false) {}
+	MeshComponent(GameObject* own, TransformComponent* trans);
 	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* material, std::vector<float2>& texCoord);
 	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
 	//MeshComponent(TransformComponent* trans) : transform(trans) {}

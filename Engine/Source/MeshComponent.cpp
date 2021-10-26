@@ -10,6 +10,11 @@
 
 #include "mmgr/mmgr.h"
 
+MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false)
+{
+	owner = own;
+}
+
 MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat)
 {
 	type = ComponentType::MESH_RENDERER;

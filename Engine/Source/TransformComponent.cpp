@@ -6,12 +6,19 @@
 
 #include "mmgr/mmgr.h"
 
-TransformComponent::TransformComponent()
+TransformComponent::TransformComponent(GameObject* own)
 {
 	position = { 0.0f, 0.0f, 0.0f }; 
 	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
-	transform = float4x4::FromTRS(position, rotation, scale);
+	globalMatrix = float4x4::FromTRS(position, rotation, scale);
+
+	owner = own;
+
+	for (int i = 0; i < 3; ++i)
+		rotationEditor[i] = 0;
+
+	changeTransform = false;
 }
 
 TransformComponent::~TransformComponent()
@@ -20,6 +27,7 @@ TransformComponent::~TransformComponent()
 
 bool TransformComponent::Update(float dt)
 {
+
 	return true;
 }
 
@@ -45,25 +53,50 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	rotation = rot;
 	scale = sca;
 
-	transform = float4x4::FromTRS(position, rotation, scale);
+
+	globalMatrix = float4x4::FromTRS(position, rotation, scale);
 }
 
 void TransformComponent::SetTranslation(float3 pos)
 {
-	position = pos;
-	SetTransform(position, rotation, scale);
+	SetTransform(pos, rotation, scale);
 }
 
 void TransformComponent::SetRotation(Quat rot)
 {
-	rotation = rot;
-	SetTransform(position, rotation, scale);
+	SetTransform(position, rot, scale);
 }
 
 void TransformComponent::SetScale(float3 sca)
 {
-	scale = sca;
-	SetTransform(position, rotation, scale);
+	SetTransform(position, rotation, sca);
+}
+
+void TransformComponent::SetChildTransform(float3 pos, Quat rot, float3 sca)
+{
+	float3 scaleParent(scale.x * sca.x, scale.y * sca.y, scale.z * sca.z);
+	globalMatrix = float4x4::FromTRS(position + pos, rotation * rot, scaleParent);
+}
+
+void TransformComponent::SetParentTransform(TransformComponent* component)
+{
+	float3 pos = position + component->GetPosition();
+	float3 scaleParent;
+	scaleParent.x = scale.x * component->GetScale().x;
+	scaleParent.y = scale.y * component->GetScale().y;
+	scaleParent.z = scale.z * component->GetScale().z;
+	Quat rot = rotation * component->GetRotation();
+	globalMatrix = float4x4::FromTRS(pos, rot, scaleParent);
+}
+
+void TransformComponent::RecursiveTransform(GameObject* parent)
+{
+	std::vector<GameObject*> children = parent->GetChilds();
+	for (int i = 0; i < children.size(); ++i)
+	{
+		children[i]->GetComponent<TransformComponent>()->SetChildTransform(position, rotation, scale);
+		RecursiveTransform(children[i]);
+	}
 }
 
 Quat TransformComponent::AngleToQuat(float angle, int x, int y, int z)
@@ -94,44 +127,46 @@ void TransformComponent::ShowTransformationInfo()
 	ImGui::SameLine();
 	if (ImGui::DragFloat3(".", position.ptr()))
 	{
-		SetTransform(position, rotation, scale);
-		SetTranslation(position);
-		std::vector<GameObject*> children = owner->GetChilds();
-		for (int i = 0; i < children.size(); ++i)
+		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
 		{
-			children[i]->GetComponent<TransformComponent>()->SetTranslation(position);
+			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
 		}
+		else
+			SetTranslation(position);
+
+		RecursiveTransform(owner);
 	}
 
-	static float rotations[3] = { rotation.x,rotation.y, rotation.z };
 	ImGui::Text("Rotation: ");
 	ImGui::SameLine();
-	if (ImGui::DragFloat3(" ", rotations))
+	if (ImGui::DragFloat3(" ", rotationEditor))
 	{	
-		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotations[0]));
-		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotations[1]));
-		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotations[2]));
+		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotationEditor[0]));
+		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotationEditor[1]));
+		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor[2]));
 		Quat finalQuaternion = quaternionX * quaternionY * quaternionZ;
-		
-		SetRotation(finalQuaternion);
-
-		std::vector<GameObject*> children = owner->GetChilds();
-		for (int i = 0; i < children.size(); ++i)
+		rotation = finalQuaternion;
+		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
 		{
-			children[i]->GetComponent<TransformComponent>()->SetRotation(finalQuaternion);
+			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
 		}
+		else
+			SetRotation(finalQuaternion);
+
+		RecursiveTransform(owner);
 	}
 
 	ImGui::Text("Scale: ");
 	ImGui::SameLine(86.0f);
 	if (ImGui::DragFloat3("-", scale.ptr()))
 	{
-		SetScale(scale);
-		std::vector<GameObject*> children = owner->GetChilds();
-		for (int i = 0; i < children.size(); ++i)
+		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
 		{
-			children[i]->GetComponent<TransformComponent>()->SetScale(scale);
+			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
 		}
-	}
+		else
+			SetScale(scale);
 
+		RecursiveTransform(owner);
+	}
 }

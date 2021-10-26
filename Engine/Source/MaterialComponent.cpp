@@ -4,6 +4,11 @@
 
 #include "mmgr/mmgr.h"
 
+MaterialComponent::MaterialComponent(GameObject* own) : id(0), width(0), height(0), path(""), texBuffer(nullptr)
+{
+	owner = own;
+}
+
 MaterialComponent::MaterialComponent(int i, int w, int h, std::string& p) : id(i), width(w), height(h), path(p)
 {
 	texBuffer = new TextureBuffer(i, w, h);

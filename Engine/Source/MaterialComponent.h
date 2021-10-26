@@ -10,7 +10,7 @@ typedef unsigned char GLubyte;
 class MaterialComponent : public Component
 {
 public:
-	MaterialComponent() : id(0), width(0), height(0), path(""), texBuffer(nullptr) {}
+	MaterialComponent(GameObject* own);
 	MaterialComponent(int i, int w, int h, std::string& p);
 	MaterialComponent(int i, int w, int h, GLubyte* data);
 	~MaterialComponent();

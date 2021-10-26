@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "ModuleScene.h"
 #include "glew/include/GL/glew.h"
 
 #include "Imgui/imgui.h"
@@ -71,7 +72,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 		ImGui::StyleColorsDark();
 		
@@ -156,35 +157,39 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	}
 
 	// Uncomment for using framebuffer
-	//glGenFramebuffers(1, &framebuffer);
-	//glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	glGenFramebuffers(1, &framebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
-	//unsigned int textureColorbuffer;
-	//glGenTextures(1, &textureColorbuffer);
-	//glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1080, 720, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	glGenTextures(1, &textureColorbuffer);
+	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1080, 720, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-	//// attach it to currently bound framebuffer object
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
-	//
-	//unsigned int rbo;
-	//glGenRenderbuffers(1, &rbo);
-	//glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+	// attach it to currently bound framebuffer object
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+	
+	//glGenRenderbuffers(1, &rboDepthStencil);
+	glGenTextures(1, &rboDepthStencil);
+	glBindTexture(GL_TEXTURE_2D, rboDepthStencil);
+	//glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 1080, 720, 0, GL_DEPTH24_STENCIL8, GL_UNSIGNED_INT_24_8, 0);
 	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-	//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil, 0);
 
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	if (framebuffer)
+		DEBUG_LOG("Framebuffer is completed");
 
 	//// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
-	PGrid* grid = new PGrid(200, 200);
-	primitives.push_back(grid);
+	grid = new PGrid(200, 200);
 
 	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
 	//primitives.push_back(cube);
@@ -228,16 +233,16 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 bool ModuleRenderer3D::PostUpdate()
 {
 	OPTICK_EVENT("Rendering");
-	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
 
-	for (unsigned int i = 0; i < primitives.size(); ++i)
-	{
-		primitives[i]->Draw();
-	}
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
+	glViewport(0, 0, 1080, 720);
+	glClearColor(0.0f, 0.0f, 0.0f, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	DrawMeshes();
+	grid->Draw();
+	app->scene->Draw();
 
-	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	
 	app->editor->Draw();
 
@@ -257,6 +262,7 @@ bool ModuleRenderer3D::CleanUp()
 	}
 
 	glDeleteFramebuffers(1, &framebuffer);
+	RELEASE(grid);
 
 	primitives.clear();
 

@@ -140,6 +140,7 @@
     <ClInclude Include="Engine\Source\Timer.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
+    <ClInclude Include="Engine\Source\Viewport.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Engine\Source\Timer.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
+    <ClCompile Include="Engine\Source\Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
