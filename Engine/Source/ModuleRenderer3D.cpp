@@ -162,49 +162,38 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 	glGenTextures(1, &textureColorbuffer);
 	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1080, 720, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 1080, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// attach it to currently bound framebuffer object
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	
-	//glGenRenderbuffers(1, &rboDepthStencil);
 	glGenTextures(1, &rboDepthStencil);
 	glBindTexture(GL_TEXTURE_2D, rboDepthStencil);
-	//glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 1080, 720, 0, GL_DEPTH24_STENCIL8, GL_UNSIGNED_INT_24_8, 0);
-	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 1080, 720, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, rboDepthStencil, 0);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	if (framebuffer)
-		DEBUG_LOG("Framebuffer is completed");
+	GLenum err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	if (err != GL_FRAMEBUFFER_COMPLETE)
+	{
+		DEBUG_LOG("Framebuffer is Incomplete. Error %s", glGetString(err));
+	}
+	else DEBUG_LOG("Framebuffer is Complete");
 
 	//// Projection matrix for
 	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
 
 	grid = new PGrid(200, 200);
 
-	//PCube* cube = new PCube({0,0,0}, {0,0,0}, {1,1,1});
-	//primitives.push_back(cube);
-
-	//PPyramid* pyramid = new PPyramid({ 2,0,0 }, { 0,0,0 }, { 1,1,1 });
-	//primitives.push_back(pyramid);
-	//
-	//PCylinder* cyl = new PCylinder(50, 2.0f, 1.0f);
-	//primitives.push_back(cyl);
-	//
-	//PSphere* sphere = new PSphere(1.0f, 20, 20);
-	//primitives.push_back(sphere);
-
-	//InitMesh();
-	
 	return ret;
 }
 
@@ -234,7 +223,7 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	OPTICK_EVENT("Rendering");
 
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	glViewport(0, 0, 1080, 720);
 	glClearColor(0.0f, 0.0f, 0.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -242,7 +231,7 @@ bool ModuleRenderer3D::PostUpdate()
 	grid->Draw();
 	app->scene->Draw();
 
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	
 	app->editor->Draw();
 
@@ -449,32 +438,4 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
-}
-
-void ModuleRenderer3D::DrawMeshes()
-{
-	OPTICK_EVENT("Drawing all FBX");
-	//DrawMesh();
-	for (unsigned int i = 0; i < fbx.size(); ++i)
-	{
-		fbx[i].Draw();
-	}
-}
-
-void ModuleRenderer3D::AddPrimitive(Primitive* primitive)
-{
-	primitives.push_back(primitive);
-}
-
-void ModuleRenderer3D::InitMesh(const char* filePath)
-{
-	fbx.push_back(Model(filePath));
-}
-
-void ModuleRenderer3D::DrawMesh()
-{
-	// TODO
-	/*glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, fbx.GetMesh().numIndex, GL_UNSIGNED_INT, NULL);
-	glBindVertexArray(0);*/
 }

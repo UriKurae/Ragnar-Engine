@@ -51,12 +51,6 @@ public:
 	inline bool* GetVsync() { return &vsync; }
 
 	void DrawCubeDirectMode();
-	void DrawMeshes();
-
-	void AddPrimitive(Primitive* primitive);
-
-	void InitMesh(const char* filePath);
-	void DrawMesh();
 
 public:
 	std::vector<Primitive*> primitives;
