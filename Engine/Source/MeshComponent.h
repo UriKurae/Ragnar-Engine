@@ -58,6 +58,8 @@ private:
 	TransformComponent* transform;
 	MaterialComponent* material;
 
+	float normalLength;
+	float3 colorNormal;
 	
 	bool faceNormals;
 	bool verticesNormals;

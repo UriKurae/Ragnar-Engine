@@ -10,12 +10,12 @@
 
 #include "mmgr/mmgr.h"
 
-MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normals({})
+MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normals({}), normalLength(1.0f), colorNormal(0.30f, 0.0f, 0.5f)
 {
 	owner = own;
 }
 
-MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat), normals({})
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat), normals({}), normalLength(1.0f), colorNormal(0.30f, 0.0f, 0.5f)
 {
 	type = ComponentType::MESH_RENDERER;
 	verticesNormals = false;
@@ -32,7 +32,7 @@ MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int
 	ebo->Unbind();
 }
 
-MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr), normals({})
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr), normals({}), normalLength(1.0f), colorNormal(0.30f, 0.0f, 0.5f)
 {
 	type = ComponentType::MESH_RENDERER;
 	verticesNormals = false;
@@ -104,6 +104,8 @@ void MeshComponent::OnEditor()
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", indices.size());
 		ImGui::Checkbox("Vertices normals", &verticesNormals);
 		ImGui::Checkbox("Face normals", &faceNormals);
+		ImGui::DragFloat("Normal Length", &normalLength, 0.200f);
+		ImGui::DragFloat3("Normal Color", colorNormal.ptr(), 1.0f, 0.0f, 255.0f);
 		ImGui::Separator();
 	}
 }
@@ -118,14 +120,14 @@ void MeshComponent::ShowVertexNormals()
 	if (!normals.empty())
 	{
 		glBegin(GL_LINES);
-		glColor3f(75, 0, 130);
+		glColor3f(colorNormal.x/255, colorNormal.y/255, colorNormal.z/255);
 		for (int i = 0; i < vertices.size(); ++i)
 		{
 			glVertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
 			float3 vertexNorm;
-			vertexNorm.x = (vertices[i].x + normals[i].x);
-			vertexNorm.y = (vertices[i].y + normals[i].y);
-			vertexNorm.z = (vertices[i].z + normals[i].z);
+			vertexNorm.x = (vertices[i].x + (normals[i].x * normalLength));
+			vertexNorm.y = (vertices[i].y + (normals[i].y * normalLength));
+			vertexNorm.z = (vertices[i].z + (normals[i].z * normalLength));
 			glVertex3f(vertexNorm.x, vertexNorm.y, vertexNorm.z);
 		}
 		glColor3f(1, 1, 1);
@@ -136,7 +138,7 @@ void MeshComponent::ShowVertexNormals()
 void MeshComponent::ShowFaceNormals()
 {
 	glBegin(GL_LINES);
-	glColor3f(75, 0, 130);
+	glColor3f(colorNormal.x / 255, colorNormal.y / 255, colorNormal.z / 255);
 	for (int i = 0; i < vertices.size(); i += 3)
 	{
 		float3 line1 = -(vertices[i] - vertices[i + 1]);
@@ -150,7 +152,7 @@ void MeshComponent::ShowFaceNormals()
 		center.z = (vertices[i].z + vertices[i + 1].z + vertices[i + 2].z) / 3;
 
 		glVertex3f(center.x, center.y, center.z);
-		glVertex3f(center.x + normalVector.x, center.y + normalVector.y, center.z + normalVector.z);
+		glVertex3f(center.x + (normalVector.x * normalLength), center.y + (normalVector.y * normalLength), center.z + (normalVector.z * normalLength));
 	}
 	glColor3f(1, 1, 1);
 	glEnd();
