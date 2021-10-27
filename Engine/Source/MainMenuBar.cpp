@@ -5,6 +5,8 @@
 #include "ConfigurationMenu.h"
 #include "MainMenuBar.h"
 #include "AboutMenu.h"
+#include "InspectorMenu.h"
+#include "HierarchyMenu.h"
 
 #include "mmgr/mmgr.h"
 
@@ -16,6 +18,8 @@ MainMenuBar::MainMenuBar() : Menu(true)
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
+	menus.emplace_back(new InspectorMenu());
+	menus.emplace_back(new HierarchyMenu());
 }
 
 MainMenuBar::~MainMenuBar()
@@ -65,6 +69,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::MenuItem("Console", NULL, &GetConsole()->active);
 			ImGui::MenuItem("Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
+			ImGui::MenuItem("Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
+			ImGui::MenuItem("Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 
 			ImGui::EndMenu();
 		}

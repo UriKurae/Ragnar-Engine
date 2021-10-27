@@ -9,7 +9,9 @@ enum class Menus
 {
 	CONSOLE = 0,
 	CONFIGURATION = 1,
-	ABOUT = 2
+	ABOUT = 2,
+	INSPECTOR = 3,
+	HIERARCHY = 4
 };
 
 class MainMenuBar : public Menu

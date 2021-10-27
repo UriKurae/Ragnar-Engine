@@ -21,6 +21,8 @@ public:
 	void BindTexture();
 	void UnbindTexture();
 
+	void CreateChecker();
+
 	inline void SetWidth(int w) { width = w; }
 	inline void SetHeight(int h) { height = h; }
 	inline void SetId(int i) { id = i; }
@@ -37,5 +39,9 @@ private:
 	int width;
 	int height;
 
+	bool checker;
+
+	static TextureBuffer* checkerBuffer;
 	TextureBuffer* texBuffer;
+	GLubyte checkerImage[64][64][4];
 };

@@ -6,17 +6,27 @@
 
 Viewport::Viewport()
 {
-	width = 1080;
-	height = 720;
+	sizeViewport = float2(0,0);
 }
 
 Viewport::~Viewport()
 {
 }
 
-void Viewport::Draw(const unsigned int& framebuffer)
+void Viewport::Draw(Framebuffer* framebuffer)
 {
 	ImGui::Begin("Scene");
-	ImGui::Image((ImTextureID)framebuffer, ImVec2(width, height), ImVec2(0, 1), ImVec2(1, 0));
+
+	ImVec2 size = ImGui::GetContentRegionAvail();
+	
+	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
+	{
+		sizeViewport.x = size.x;
+		sizeViewport.y = size.y;
+		framebuffer->ResizeFramebuffer(size.x, size.y);
+		app->renderer3D->OnResize(size.x, size.y);
+	}
+
+	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 	ImGui::End();
 }

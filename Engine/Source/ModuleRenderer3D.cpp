@@ -157,40 +157,44 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	}
 
 	// Uncomment for using framebuffer
-	glGenFramebuffers(1, &framebuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	//glGenFramebuffers(1, &framebuffer);
+	//glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
-	glGenTextures(1, &textureColorbuffer);
-	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 1080, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glGenTextures(1, &textureColorbuffer);
+	//glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 1165, 641, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// attach it to currently bound framebuffer object
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+	//// attach it to currently bound framebuffer object
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
-	
-	glGenTextures(1, &rboDepthStencil);
-	glBindTexture(GL_TEXTURE_2D, rboDepthStencil);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 1080, 720, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, rboDepthStencil, 0);
+	//
+	//glGenTextures(1, &rboDepthStencil);
+	//glBindTexture(GL_TEXTURE_2D, rboDepthStencil);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 1165, 641, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, rboDepthStencil, 0);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	GLenum err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	if (err != GL_FRAMEBUFFER_COMPLETE)
-	{
-		DEBUG_LOG("Framebuffer is Incomplete. Error %s", glGetString(err));
-	}
-	else DEBUG_LOG("Framebuffer is Complete");
+	//GLenum err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	//if (err != GL_FRAMEBUFFER_COMPLETE)
+	//{
+	//	DEBUG_LOG("Framebuffer is Incomplete. Error %s", glGetString(err));
+	//}
+	//else DEBUG_LOG("Framebuffer is Complete");
 
 	//// Projection matrix for
-	OnResize(*app->window->GetWindowWidth(), *app->window->GetWindowHeight());
+	int w = *app->window->GetWindowWidth();
+	int h = *app->window->GetWindowHeight();
+	OnResize(w, h);
+
+	fbo = new Framebuffer(w, h);
 
 	grid = new PGrid(200, 200);
 
@@ -211,10 +215,6 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-
 	return true;
 }
 
@@ -223,17 +223,16 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	OPTICK_EVENT("Rendering");
 
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-	glViewport(0, 0, 1080, 720);
+	fbo->Bind();
 	glClearColor(0.0f, 0.0f, 0.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	grid->Draw();
 	app->scene->Draw();
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	fbo->Unbind();
 	
-	app->editor->Draw();
+	app->editor->Draw(fbo);
 
 	SDL_GL_SwapWindow(app->window->window);
 
@@ -252,6 +251,7 @@ bool ModuleRenderer3D::CleanUp()
 
 	glDeleteFramebuffers(1, &framebuffer);
 	RELEASE(grid);
+	RELEASE(fbo);
 
 	primitives.clear();
 

@@ -17,10 +17,14 @@ public:
 	~ModuleEditor();
 
 	bool Update(float dt) override;
-	bool Draw();
+	bool Draw(Framebuffer* framebuffer);
 	bool CleanUp() override;
 
 	inline GameObject* GetSelected() { return selected; }
+	inline GameObject* GetSelectedParent() { return selectedParent; }
+	
+	inline void SetSelected(GameObject* obj) { selected = obj; }
+	inline void SetSelectedParent(GameObject* obj) { selectedParent = obj; }
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;

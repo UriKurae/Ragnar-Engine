@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include "Framebuffer.h"
+#include "MathGeoLib/src/Math/float2.h"
 
 class Viewport
 {
@@ -9,9 +10,8 @@ public:
 
 	~Viewport();
 
-	void Draw(const unsigned int& framebuffer);
+	void Draw(Framebuffer* framebuffer);
 
 private:
-	int width;
-	int height;
+	float2 sizeViewport;
 };

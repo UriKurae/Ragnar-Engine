@@ -7,6 +7,7 @@
 #include <vector>
 #include "Primitive.h"
 #include "glew/include/GL/glew.h"
+#include "Framebuffer.h"
 
 #include "Model.h"
 
@@ -69,6 +70,8 @@ public:
 
 	//LoadFBX fbx;
 	std::vector<Model> fbx;
+
+	Framebuffer* fbo;
 
 	GLuint framebuffer;
 	GLuint rboDepthStencil;

@@ -113,10 +113,13 @@
     <ClInclude Include="Engine\Source\ConfigurationMenu.h" />
     <ClInclude Include="Engine\Source\ConsoleMenu.h" />
     <ClInclude Include="Engine\Source\FileSystem.h" />
+    <ClInclude Include="Engine\Source\Framebuffer.h" />
     <ClInclude Include="Engine\Source\GameObject.h" />
     <ClInclude Include="Engine\Source\glmath.h" />
     <ClInclude Include="Engine\Source\Globals.h" />
+    <ClInclude Include="Engine\Source\HierarchyMenu.h" />
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
+    <ClInclude Include="Engine\Source\InspectorMenu.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
     <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\LoadModel.h" />
@@ -159,9 +162,12 @@
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp" />
+    <ClCompile Include="Engine\Source\Framebuffer.cpp" />
     <ClCompile Include="Engine\Source\GameObject.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />
+    <ClCompile Include="Engine\Source\HierarchyMenu.cpp" />
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
+    <ClCompile Include="Engine\Source\InspectorMenu.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
     <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\LoadModel.cpp" />

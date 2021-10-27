@@ -40,6 +40,9 @@
     <Filter Include="Sources\GameObject\Components">
       <UniqueIdentifier>{42270041-6858-44b8-a2a6-b4fae0477f9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Buffers">
+      <UniqueIdentifier>{2caa784c-4ed5-42a4-9742-39ce57bcd3cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -147,8 +150,6 @@
     <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\VertexBuffer.h" />
-    <ClInclude Include="Engine\Source\IndexBuffer.h" />
     <ClInclude Include="Engine\Source\FileSystem.h">
       <Filter>Sources</Filter>
     </ClInclude>
@@ -179,9 +180,6 @@
     <ClInclude Include="Engine\Source\LoadModel.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\TextureBuffer.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\MaterialComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
@@ -191,6 +189,24 @@
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Viewport.h">
       <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\InspectorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\HierarchyMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\IndexBuffer.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextureBuffer.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\VertexBuffer.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Framebuffer.h">
+      <Filter>Sources\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -275,8 +291,6 @@
     <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
-    <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -304,9 +318,6 @@
     <ClCompile Include="Engine\Source\LoadModel.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\TextureBuffer.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\MaterialComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
@@ -315,6 +326,24 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Viewport.cpp">
       <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\InspectorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\HierarchyMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\IndexBuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextureBuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\VertexBuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Framebuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,61 +1,32 @@
-﻿#include "ModuleEditor.h"
+#include "HierarchyMenu.h"
 
 #include "Application.h"
-#include "ModuleWindow.h"
-#include "ModuleInput.h"
-#include "ModuleRenderer3D.h"
+#include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "GameObject.h"
 
-#include "ConsoleMenu.h"
-
-#include "Imgui/imgui.h"
-#include "Imgui/imgui_impl_opengl3.h"
-#include "Imgui/imgui_impl_sdl.h"
-
-#include <GL/glew.h>
-
-#include "Optick/include/optick.h"
-#include "mmgr/mmgr.h"
-
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), createGameObject(false), gameObjectOptions(false), Module()
+HierarchyMenu::HierarchyMenu() : Menu(true)
 {
-	name = "Editor";
-
-	viewport = new Viewport();
+	hierarchy = false;
+	gameObjectOptions = false;
+	createGameObject = false;
 }
 
-ModuleEditor::~ModuleEditor()
+HierarchyMenu::~HierarchyMenu()
 {
 }
 
-bool ModuleEditor::Update(float dt)
+bool HierarchyMenu::Update(float dt)
 {
-	OPTICK_EVENT("Updating Module Editor");
-	bool ret = true;
-
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-
-	ImGui::DockSpaceOverViewport();
-	
-	ret = mainMenuBar.Update(dt);
-
-	if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN)
-	{
-		app->window->SetFullscreen();
-	}
-
-
-	/*ImGui::Begin("Hierarchy");
+	ImGui::Begin("Hierarchy", &hierarchy);
 	if (ImGui::Button("+"))
 	{
 		createGameObject = true;
 	}
 	int size = app->scene->GetGameObjectsList().size();
 	GameObject* root = app->scene->GetRoot();
+	GameObject* selected = app->editor->GetSelected();
+	GameObject* selectedParent = app->editor->GetSelectedParent();
 	ImGuiTreeNodeFlags flags = ((selected == root) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
 	if (ImGui::TreeNodeEx(root, flags, root->GetName()))
 	{
@@ -95,8 +66,8 @@ bool ModuleEditor::Update(float dt)
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
-				selected = nullptr;
-				selectedParent = nullptr;
+				app->editor->SetSelected(nullptr);
+				app->editor->SetSelectedParent(nullptr);
 				gameObjectOptions = false;
 			}
 			ImGui::EndPopup();
@@ -145,60 +116,15 @@ bool ModuleEditor::Update(float dt)
 		}
 	}
 
-	ImGui::End();*/
-
-	//for (int i = 0; i < app->scene->GetGameObjectsList().size(); i++)
-	//{
-	//	GameObject& object = (*app->scene->GetGameObjectsList()[i]);
-	//	if (ImGui::TreeNodeEx(object.GetName()))
-	//	{
-	//		ImGui::TreePop();
-	//	}
-	//}
-	//ImGui::End();
-
-	return ret;
-}
-
-bool ModuleEditor::Draw(Framebuffer* framebuffer)
-{
-	OPTICK_EVENT("Drawing Module Editor");
-	
-	viewport->Draw(framebuffer);
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	ImGui::End();
 
 	return true;
 }
 
-bool ModuleEditor::CleanUp()
-{
-	mainMenuBar.CleanUp();
-
-	RELEASE(viewport);
-
-	return true;
-}
-
-bool ModuleEditor::LoadConfig(JsonParsing& node)
-{
-	return true;
-}
-
-bool ModuleEditor::SaveConfig(JsonParsing& node) const
-{
-	return true;
-}
-
-void ModuleEditor::LogConsole(const char* string)
-{
-	if (mainMenuBar.GetConsole()) mainMenuBar.GetConsole()->AddLog(string);
-}
-
-void ModuleEditor::ShowChildren(GameObject* parent)
+void HierarchyMenu::ShowChildren(GameObject* parent)
 {
 	int size = parent->GetChilds().size();
+	GameObject* selected = app->editor->GetSelected();
 	for (int i = 0; i < size; ++i)
 	{
 		GameObject* obj = parent->GetChilds()[i];
@@ -207,13 +133,13 @@ void ModuleEditor::ShowChildren(GameObject* parent)
 		if (obj != nullptr) opened = ImGui::TreeNodeEx((void*)obj, flags, obj->GetName());
 		if (ImGui::IsItemClicked())
 		{
-			selected = obj;
-			selectedParent = parent;
+			app->editor->SetSelected(obj);
+			app->editor->SetSelectedParent(parent);
 		}
 		else if (ImGui::IsItemClicked(1))
 		{
-			selected = obj;
-			selectedParent = parent;
+			app->editor->SetSelected(obj);
+			app->editor->SetSelectedParent(parent);
 			gameObjectOptions = true;
 		}
 
@@ -225,8 +151,8 @@ void ModuleEditor::ShowChildren(GameObject* parent)
 
 		if (!ImGui::IsAnyItemHovered() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
 		{
-			selected = nullptr;
-			selectedParent = nullptr;
+			app->editor->SetSelected(nullptr);
+			app->editor->SetSelectedParent(nullptr);
 		}
 	}
 }
