@@ -79,6 +79,7 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 {
 	OPTICK_EVENT("Process Mesh");
 	std::vector<float3> vertices;
+	std::vector<float3> norms;
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
 
@@ -96,14 +97,19 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 		vertex.y = mesh->mVertices[i].y;
 		vertex.z = mesh->mVertices[i].z;
 
-		//vertex.normal.x = mesh->mNormals[i].x;
-		//vertex.normal.y = mesh->mNormals[i].y;
-		//vertex.normal.z = mesh->mNormals[i].z;
+		float3 normals;
+		if (mesh->HasNormals())
+		{
+			normals.x = mesh->mNormals[i].x;
+			normals.y = mesh->mNormals[i].y;
+			normals.z = mesh->mNormals[i].z;
+		}
 
 		float2 coords;
 		coords.x = mesh->mTextureCoords[0][i].x;
 		coords.y = mesh->mTextureCoords[0][i].y;
 
+		norms.push_back(normals);
 		vertices.push_back(vertex);
 		texCoords.push_back(coords);
 	}
@@ -128,7 +134,12 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 		//textures.insert(textures.end(), specular.begin(), specular.end());
 	}
 	MeshComponent* m = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);
-	m->SetMesh(vertices, indices, texCoords);
+
+	if (mesh->HasNormals())
+		m->SetMesh(vertices, indices, texCoords, norms);
+	else
+		m->SetMesh(vertices, indices, texCoords);
+
 	//m->CreateAABB();
 	if (diffuse)
 	{

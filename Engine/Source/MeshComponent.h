@@ -35,8 +35,12 @@ public:
 	void OnEditor() override;
 
 	void CreateAABB();
-	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
 	
+	void ShowVertexNormals();
+	void ShowFaceNormals();
+
+	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3>& norm);
+	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 
@@ -47,12 +51,14 @@ private:
 	unsigned int tbo;
 
 	std::vector<float3> vertices;
+	std::vector<float3> normals;
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
 
 	TransformComponent* transform;
 	MaterialComponent* material;
 
+	
 	bool faceNormals;
 	bool verticesNormals;
 };

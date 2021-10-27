@@ -10,12 +10,12 @@
 
 #include "mmgr/mmgr.h"
 
-MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false)
+MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normals({})
 {
 	owner = own;
 }
 
-MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat)
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat), normals({})
 {
 	type = ComponentType::MESH_RENDERER;
 	verticesNormals = false;
@@ -32,7 +32,7 @@ MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int
 	ebo->Unbind();
 }
 
-MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr)
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr), normals({})
 {
 	type = ComponentType::MESH_RENDERER;
 	verticesNormals = false;
@@ -63,7 +63,7 @@ void MeshComponent::Draw()
 	glPushMatrix();
 	/*glMultTransposeMatrixf(transform->GetTransform().ptr());*/
 	glMultMatrixf(transform->GetTransform().Transposed().ptr());
-
+	
 	if (vbo != nullptr) vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
@@ -72,6 +72,12 @@ void MeshComponent::Draw()
 
 	if (material != nullptr) material->BindTexture();
 	if (ebo != nullptr) ebo->Bind();
+
+	// Debug normals
+	if (verticesNormals)
+		ShowVertexNormals();
+	else if (faceNormals)
+		ShowFaceNormals();
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
@@ -104,6 +110,73 @@ void MeshComponent::OnEditor()
 
 void MeshComponent::CreateAABB()
 {
+	owner->SetAABB(vertices);
+}
+
+void MeshComponent::ShowVertexNormals()
+{
+	if (!normals.empty())
+	{
+		glBegin(GL_LINES);
+		glColor3f(75, 0, 130);
+		for (int i = 0; i < vertices.size(); ++i)
+		{
+			glVertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
+			float3 vertexNorm;
+			vertexNorm.x = (vertices[i].x + normals[i].x);
+			vertexNorm.y = (vertices[i].y + normals[i].y);
+			vertexNorm.z = (vertices[i].z + normals[i].z);
+			glVertex3f(vertexNorm.x, vertexNorm.y, vertexNorm.z);
+		}
+		glColor3f(1, 1, 1);
+		glEnd();
+	}
+}
+
+void MeshComponent::ShowFaceNormals()
+{
+	glBegin(GL_LINES);
+	glColor3f(75, 0, 130);
+	for (int i = 0; i < vertices.size(); i += 3)
+	{
+		float3 line1 = -(vertices[i] - vertices[i + 1]);
+		float3 line2 = (vertices[i + 1] - vertices[i + 2]);
+		float3 normalVector = math::Cross(line1, line2);
+		normalVector.Normalize();
+
+		float3 center;
+		center.x = (vertices[i].x + vertices[i + 1].x + vertices[i + 2].x) / 3;
+		center.y = (vertices[i].y + vertices[i + 1].y + vertices[i + 2].y) / 3;
+		center.z = (vertices[i].z + vertices[i + 1].z + vertices[i + 2].z) / 3;
+
+		glVertex3f(center.x, center.y, center.z);
+		glVertex3f(center.x + normalVector.x, center.y + normalVector.y, center.z + normalVector.z);
+	}
+	glColor3f(1, 1, 1);
+	glEnd();
+}
+
+void MeshComponent::SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3>& norm)
+{
+	type = ComponentType::MESH_RENDERER;
+	verticesNormals = false;
+	faceNormals = false;
+
+	normals = norm;
+	vertices = vert;
+	indices = ind;
+	texCoords = texCoord;
+
+	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
+	ebo = new IndexBuffer(indices.data(), indices.size());
+	glGenBuffers(1, &tbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	vbo->Unbind();
+	ebo->Unbind();
+
 	owner->SetAABB(vertices);
 }
 
