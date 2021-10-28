@@ -84,6 +84,7 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 {
 	GameObject* object = CreateGameObject(parent);
 	std::vector<float3> vertices;
+	std::vector<float3> normals;
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
 
@@ -101,18 +102,18 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 		break;
 	case Object3D::SPHERE:
 		object->SetName("Sphere");
-		RSphere::CreateSphere(vertices, indices, texCoords);
+		RSphere::CreateSphere(vertices, normals, indices, texCoords);
 		break;
 	case Object3D::CYLINDER:
 		object->SetName("Cylinder");
-		RCylinder::CreateCylinder(vertices, indices, texCoords);
+		RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
 		break;
 	}
 
 	if (!vertices.empty())
 	{
-		mesh = new MeshComponent(vertices, indices, texCoords);
-
+		mesh = new MeshComponent(object, object->GetComponent<TransformComponent>());
+		mesh->SetMesh(vertices, indices, texCoords, normals);
 		mesh->SetOwner(object);
 		mesh->SetTransform(object->GetComponent<TransformComponent>());
 		Checker::CheckerImage checker = Checker::CreateChecker();

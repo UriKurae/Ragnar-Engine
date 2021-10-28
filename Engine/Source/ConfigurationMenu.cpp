@@ -61,7 +61,7 @@ bool ConfigurationMenu::Update(float dt)
 
 	ImGui::Begin("Configuration", &active);
 
-	if (ImGui::BeginMenu("Options", &openOptions))
+	if (ImGui::BeginMenu("Options"))
 	{
 		if (ImGui::MenuItem("Load"))
 		{

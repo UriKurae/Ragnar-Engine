@@ -186,7 +186,6 @@
     <ClInclude Include="Engine\Source\TextureLoader.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Viewport.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
@@ -207,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\Framebuffer.h">
       <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Primitives.h">
+      <Filter>Sources\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

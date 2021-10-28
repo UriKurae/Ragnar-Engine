@@ -99,37 +99,80 @@ namespace RPyramide
 
 namespace RSphere
 {
-	void CreateSphere(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	void CreateSphere(std::vector<float3>& vertices, std::vector<float3>& normals, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
 	{
-		float const R = 1. / (float)(20 - 1);
-		float const S = 1. / (float)(20 - 1);
-		unsigned int r, s;
-		int radius = 1;
+		float x, y, z, xy;                              // vertex position
+		float nx, ny, nz, lengthInv = 1.0f / 1.0f;    // vertex normal
+		float s, t;                                     // vertex texCoord
 
-		vertices.reserve(20 * 20 * 3);
-		indices.reserve(20 * 20 * 4);
-		texCoords.reserve(20 * 20 * 3);
+		float sectorStep = 2 * M_PI / 20;
+		float stackStep = M_PI / 20;
+		float sectorAngle, stackAngle;
 
-		for (r = 0; r < 20; ++r)
+		for (int i = 0; i <= 20; ++i)
 		{
-			for (s = 0; s < 20; ++s)
+			stackAngle = M_PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
+			xy = 1.0f * cosf(stackAngle);             // r * cos(u)
+			z = 1.0f * sinf(stackAngle);              // r * sin(u)
+
+			// add (sectorCount+1) vertices per stack
+			// the first and last vertices have same position and normal, but different tex coords
+			for (int j = 0; j <= 20; ++j)
 			{
-				float const y = sin(-M_PI_2 + M_PI * r * R);
-				float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
-				float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
+				sectorAngle = j * sectorStep;           // starting from 0 to 2pi
 
-				vertices.emplace_back(x * radius);
-				vertices.emplace_back(y * radius);
-				vertices.emplace_back(z * radius);
+				// vertex position (x, y, z)
+				x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
+				y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
+				vertices.emplace_back(x, y, z);
 
-				indices.emplace_back(r * 20 + s);
-				indices.emplace_back(r * 20 + (s + 1));
-				indices.emplace_back((r + 1) * 20 + (s + 1));
-				indices.emplace_back((r + 1) * 20 + s);
+				// normalized vertex normal (nx, ny, nz)
+				nx = x * lengthInv;
+				ny = y * lengthInv;
+				nz = z * lengthInv;
+				normals.emplace_back(nx, ny, nz);
 
-				texCoords.emplace_back(x * radius);
-				texCoords.emplace_back(y * radius);
-				texCoords.emplace_back(z * radius);
+				// vertex tex coord (s, t) range between [0, 1]
+				s = (float)j / 20;
+				t = (float)i / 20;
+				texCoords.emplace_back(s, t);
+			}
+		}
+
+		int k1, k2;
+		for (int i = 0; i < 20; ++i)
+		{
+			k1 = i * (20 + 1);     // beginning of current stack
+			k2 = k1 + 20 + 1;      // beginning of next stack
+
+			for (int j = 0; j < 20; ++j, ++k1, ++k2)
+			{
+				// 2 triangles per sector excluding first and last stacks
+				// k1 => k2 => k1+1
+				if (i != 0)
+				{
+					indices.push_back(k1);
+					indices.push_back(k2);
+					indices.push_back(k1 + 1);
+				}
+
+				// k1+1 => k2 => k2+1
+				if (i != (20 - 1))
+				{
+					indices.push_back(k1 + 1);
+					indices.push_back(k2);
+					indices.push_back(k2 + 1);
+				}
+
+				// store indices for lines
+				// vertical lines for all stacks, k1 => k2
+				//lineIndices.push_back(k1);
+				//lineIndices.push_back(k2);
+				//if (i != 0)  // horizontal lines except 1st stack, k1 => k+1
+				//{
+				//	lineIndices.push_back(k1);
+				//	lineIndices.push_back(k1 + 1);
+				//}
 			}
 		}
 	}
@@ -137,78 +180,75 @@ namespace RSphere
 
 namespace RCylinder
 {
-	void CreateCylinder(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	void CreateCylinder(std::vector<float3>& vertices, std::vector<float3>& normals, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
 	{
-		// get unit circle vectors on XY-plane
-		std::vector<float> unitVertices;
-
 		const float PI = 3.1415926f;
 		float sectorStep = 2 * PI / 50;
 		float sectorAngle;  // radian
 
+		std::vector<float3> unitVertices;
 		for (int i = 0; i <= 50; ++i)
 		{
 			sectorAngle = i * sectorStep;
-			unitVertices.push_back(cos(sectorAngle)); // x
-			unitVertices.push_back(sin(sectorAngle)); // y
-			unitVertices.push_back(0);                // z
+			unitVertices.emplace_back(cos(sectorAngle), sin(sectorAngle), 0); // x
 		}
 
-		// put side vertices to arrays
+		vertices.reserve(204);
+		texCoords.reserve(204);
+		normals.reserve(204);
+		indices.reserve(600);
+
 		for (int i = 0; i < 2; ++i)
 		{
 			float h = -2.0f / 2.0f + i * 2.0f;           // z value; -h/2 to h/2
 			float t = 1.0f - i;                              // vertical tex coord; 1 to 0
 
-			for (int j = 0, k = 0; j <= 50; ++j, k += 3)
+			for (int j = 0, k = 0; j <= 50; ++j, ++k)
 			{
-				float ux = unitVertices[k];
-				float uy = unitVertices[k + 1];
-				float uz = unitVertices[k + 2];
+				float ux = unitVertices[k].x;
+				float uy = unitVertices[k].y;
+				float uz = unitVertices[k].z;
 				// position vector
-				vertices.push_back(float3(ux * 1.0f, uy * 1.0f, h));
-                   
+				vertices.emplace_back(ux * 1.0f, uy * 1.0f, h);
+
 				// normal vector
-				//normals.push_back(float3(ux, uy, uz));                    
-				
+				normals.emplace_back(ux, uy, uz);
+
 				// texture coordinate
-				texCoords.push_back(float2((float)j / 50, t));
+				texCoords.emplace_back((float)j / 50, t);
 			}
 		}
 
-		// the starting index for the base/top surface
-		//NOTE: it is used for generating indices later
-		int baseCenterIndex = (int)vertices.size() / 3;
+		int baseCenterIndex = (int)vertices.size();
 		int topCenterIndex = baseCenterIndex + 50 + 1; // include center vertex
 
 		// put base and top vertices to arrays
 		for (int i = 0; i < 2; ++i)
 		{
 			float h = -2.0f / 2.0f + i * 2.0f;           // z value; -h/2 to h/2
-			float nz = -1.0f + i * 2.0f;                           // z value of normal; -1 to 1
+			float nz = -1 + i * 2;                           // z value of normal; -1 to 1
 
 			// center point
-			vertices.push_back(float3(0.0f, 0.0f, h));
-			//normals.push_back(float3(0, 0, nz));
-			texCoords.push_back(float2(0.5f, 0.5f));
+			vertices.emplace_back(0, 0, h);
+			normals.emplace_back(0, 0, nz);
+			texCoords.emplace_back(0.5f, 0.5f);
 
-			for (int j = 0, k = 0; j < 50; ++j, k += 3)
+			for (int j = 0, k = 0; j < 50; ++j, ++k)
 			{
-				float ux = unitVertices[k];
-				float uy = unitVertices[k + 1];
+				float ux = unitVertices[k].x;
+				float uy = unitVertices[k].y;
 				// position vector
-				vertices.push_back(float3(ux * 1.0f, uy * 1.0f, h));
-				
+				vertices.emplace_back(ux * 1.0f, uy * 1.0f, h);
+
 				// normal vector
-				//normals.push_back(float3(0.0f, 0.0f, nz));
+				normals.emplace_back(0, 0, nz);
 
 				// texture coordinate
-				texCoords.push_back(float2(-ux * 0.5f + 0.5f, -uy * 0.5f + 0.5f));
+				texCoords.emplace_back(-ux * 0.5f + 0.5f, -uy * 0.5f + 0.5f);
 			}
 		}
 
-		// generate CCW index list of cylinder triangles
-		int k1 = 0;                         // 1st vertex index at base
+		int k1 = 0;                 // 1st vertex index at base
 		int k2 = 50 + 1;           // 1st vertex index at top
 
 		// indices for the side surface
@@ -216,32 +256,32 @@ namespace RCylinder
 		{
 			// 2 triangles per sector
 			// k1 => k1+1 => k2
-			indices.push_back(k1);
-			indices.push_back(k1 + 1);
-			indices.push_back(k2);
+			indices.emplace_back(k1);
+			indices.emplace_back(k1 + 1);
+			indices.emplace_back(k2);
 
 			// k2 => k1+1 => k2+1
-			indices.push_back(k2);
-			indices.push_back(k1 + 1);
-			indices.push_back(k2 + 1);
+			indices.emplace_back(k2);
+			indices.emplace_back(k1 + 1);
+			indices.emplace_back(k2 + 1);
 		}
 
-		// indices for the base surface
-		//NOTE: baseCenterIndex and topCenterIndices are pre-computed during vertex generation
-		//      please see the previous code snippet
+		//// indices for the base surface
+		////NOTE: baseCenterIndex and topCenterIndices are pre-computed during vertex generation
+		////      please see the previous code snippet
 		for (int i = 0, k = baseCenterIndex + 1; i < 50; ++i, ++k)
 		{
 			if (i < 50 - 1)
 			{
-				indices.push_back(baseCenterIndex);
-				indices.push_back(k + 1);
-				indices.push_back(k);
+				indices.emplace_back(baseCenterIndex);
+				indices.emplace_back(k + 1);
+				indices.emplace_back(k);
 			}
 			else // last triangle
 			{
-				indices.push_back(baseCenterIndex);
-				indices.push_back(baseCenterIndex + 1);
-				indices.push_back(k);
+				indices.emplace_back(baseCenterIndex);
+				indices.emplace_back(baseCenterIndex + 1);
+				indices.emplace_back(k);
 			}
 		}
 
@@ -250,15 +290,15 @@ namespace RCylinder
 		{
 			if (i < 50 - 1)
 			{
-				indices.push_back(topCenterIndex);
-				indices.push_back(k);
-				indices.push_back(k + 1);
+				indices.emplace_back(topCenterIndex);
+				indices.emplace_back(k);
+				indices.emplace_back(k + 1);
 			}
 			else // last triangle
 			{
-				indices.push_back(topCenterIndex);
-				indices.push_back(k);
-				indices.push_back(topCenterIndex + 1);
+				indices.emplace_back(topCenterIndex);
+				indices.emplace_back(k);
+				indices.emplace_back(topCenterIndex + 1);
 			}
 		}
 	}

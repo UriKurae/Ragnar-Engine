@@ -1,5 +1,6 @@
 #include "MaterialComponent.h"
 #include "Globals.h"
+#include "GameObject.h"
 #include "Imgui/imgui.h"
 
 #include "mmgr/mmgr.h"
@@ -9,6 +10,7 @@ TextureBuffer* MaterialComponent::checkerBuffer = nullptr;
 MaterialComponent::MaterialComponent(GameObject* own) : id(0), width(0), height(0), path(""), texBuffer(nullptr)
 {
 	owner = own;
+	owner->GetComponent<MeshComponent>()->SetMaterial(this);
 	checker = false;
 	CreateChecker();
 

@@ -5,6 +5,7 @@
 #include "ModuleEditor.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "MathGeolib/src/Math/float4.h"
 
 #include "Optick/include/optick.h"
 
@@ -61,76 +62,85 @@ bool ModuleCamera3D::Update(float dt)
 	Vec3 newPos(0, 0, 0);
 	float speed = 3.0f * dt;
 	
-	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
-		speed = 25.0f * dt;
-
-	if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_REPEAT) newPos.y += speed;
-	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_REPEAT) newPos.y -= speed;
-
-	if ((app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= z * speed;
-	if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += z * speed;
-
-	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= x * speed;
-	if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += x * speed;
-	
-	if (app->input->GetMouseZ() == 1) newPos -= z * speed * 9.0f;
-	if (app->input->GetMouseZ() == -1) newPos += z * speed * 9.0f;
-
-	position += newPos;
-	reference += newPos;
-
-	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
+	if (app->editor->GetViewport()->GetState())
 	{
-		float3 maxPoint = app->editor->GetSelected()->GetAABB().maxPoint;
-		float3 minPoint = app->editor->GetSelected()->GetAABB().minPoint;
-
-		float3 result = (maxPoint - minPoint) / 2;
-		
-	}
-
-	// Mouse motion ----------------
-
-	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
-	{
-		int dX = -app->input->GetMouseXMotion();
-		int dY = -app->input->GetMouseYMotion();
-
-		float sensitivity = 0.25f;
-
-		position -= reference;
-
-		if (dX != 0)
+		float4 viewSize = app->editor->GetViewport()->GetBounds();
+		float2 mouse(ImGui::GetMousePos().x, ImGui::GetMousePos().y);
+		if (mouse.x > viewSize.x && mouse.x < viewSize.x + viewSize.z &&
+			mouse.y > viewSize.y && mouse.y < viewSize.y + viewSize.w)
 		{
-			float deltaX = (float)dX * sensitivity;
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+				speed = 25.0f * dt;
 
-			x = Rotate(x, deltaX, Vec3(0.0f, 1.0f, 0.0f));
-			y = Rotate(y, deltaX, Vec3(0.0f, 1.0f, 0.0f));
-			z = Rotate(z, deltaX, Vec3(0.0f, 1.0f, 0.0f));
-		}
+			if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_REPEAT) newPos.y += speed;
+			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_REPEAT) newPos.y -= speed;
 
-		if (dY != 0)
-		{
-			float DeltaY = (float)dY * sensitivity;
+			if ((app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= z * speed;
+			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += z * speed;
 
-			y = Rotate(y, DeltaY, x);
-			z = Rotate(z, DeltaY, x);
+			if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos -= x * speed;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT && (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)) newPos += x * speed;
 
-			if (y.y < 0.0f)
+			if (app->input->GetMouseZ() == 1) newPos -= z * speed * 9.0f;
+			if (app->input->GetMouseZ() == -1) newPos += z * speed * 9.0f;
+
+			position += newPos;
+			reference += newPos;
+
+			/*if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
 			{
-				z = Vec3(0.0f, z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				y = Cross(z, x);
+				float3 maxPoint = app->editor->GetSelected()->GetAABB().maxPoint;
+				float3 minPoint = app->editor->GetSelected()->GetAABB().minPoint;
+
+				float3 result = (maxPoint - minPoint) / 2;
+
+			}*/
+
+			// Mouse motion ----------------
+
+			if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
+			{
+				int dX = -app->input->GetMouseXMotion();
+				int dY = -app->input->GetMouseYMotion();
+
+				float sensitivity = 0.25f;
+
+				position -= reference;
+
+				if (dX != 0)
+				{
+					float deltaX = (float)dX * sensitivity;
+
+					x = Rotate(x, deltaX, Vec3(0.0f, 1.0f, 0.0f));
+					y = Rotate(y, deltaX, Vec3(0.0f, 1.0f, 0.0f));
+					z = Rotate(z, deltaX, Vec3(0.0f, 1.0f, 0.0f));
+				}
+
+				if (dY != 0)
+				{
+					float DeltaY = (float)dY * sensitivity;
+
+					y = Rotate(y, DeltaY, x);
+					z = Rotate(z, DeltaY, x);
+
+					if (y.y < 0.0f)
+					{
+						z = Vec3(0.0f, z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+						y = Cross(z, x);
+					}
+				}
+
+				position = reference + z * Length(position);
+
+				if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT && app->editor->GetSelected() != nullptr)
+				{
+					Vec3 target;
+					target.x = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().x;
+					target.y = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().y;
+					target.z = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().z;
+					LookAt(target);
+				}
 			}
-		}
-
-		position = reference + z * Length(position);
-
-		if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT && app->editor->GetSelected() != nullptr)
-		{
-			Vec3 target;
-			target.x = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().x;
-			target.y = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().y;
-			target.z =app->editor->GetSelected()->GetComponent<TransformComponent>()->GetPosition().z;
-			LookAt(target);
 		}
 	}
 

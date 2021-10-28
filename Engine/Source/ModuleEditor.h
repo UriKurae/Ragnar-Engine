@@ -33,6 +33,8 @@ public:
 
 	void ShowChildren(GameObject* parent);
 
+	inline Viewport* GetViewport() { return viewport; }
+
 private:
 	bool createGameObject;
 	bool gameObjectOptions;
