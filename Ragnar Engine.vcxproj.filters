@@ -147,9 +147,6 @@
     <ClInclude Include="Engine\Source\AboutMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Primitive.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\FileSystem.h">
       <Filter>Sources</Filter>
     </ClInclude>
@@ -208,6 +205,9 @@
       <Filter>Sources\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Primitives.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -290,9 +290,6 @@
     <ClCompile Include="Engine\Source\AboutMenu.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Primitive.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\FileSystem.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -346,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Framebuffer.cpp">
       <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Primitive.cpp">
+      <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

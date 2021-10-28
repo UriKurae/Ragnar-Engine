@@ -10,12 +10,12 @@
 
 #include "mmgr/mmgr.h"
 
-MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normals({}), normalLength(1.0f), colorNormal(0.30f, 0.0f, 0.5f)
+MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normals({}), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
 {
 	owner = own;
 }
 
-MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat), normals({}), normalLength(1.0f), colorNormal(0.30f, 0.0f, 0.5f)
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* mat, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(mat), normals({}), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
 {
 	type = ComponentType::MESH_RENDERER;
 	verticesNormals = false;
@@ -32,7 +32,7 @@ MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int
 	ebo->Unbind();
 }
 
-MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr), normals({}), normalLength(1.0f), colorNormal(0.30f, 0.0f, 0.5f)
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord) : vertices(vert), indices(ind), texCoords(texCoord), transform(nullptr), material(nullptr), normals({}), normalLength(1.0f), colorNormal(75.0f, 0.0f, 127.0f)
 {
 	type = ComponentType::MESH_RENDERER;
 	verticesNormals = false;

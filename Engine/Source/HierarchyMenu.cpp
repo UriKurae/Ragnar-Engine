@@ -64,6 +64,20 @@ bool HierarchyMenu::Update(float dt)
 				}
 				gameObjectOptions = false;
 			}
+			else if (ImGui::Button("Delete", ImVec2(100.0f, 30.0f)))
+			{
+				for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
+				{
+					if (selected == (*i))
+					{
+						selectedParent->GetChilds().erase(i);
+						RELEASE(selected);
+						break;
+					}
+				}
+				app->editor->SetSelected(nullptr);
+				gameObjectOptions = false;
+			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
 				app->editor->SetSelected(nullptr);

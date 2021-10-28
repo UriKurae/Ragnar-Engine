@@ -15,12 +15,14 @@ GameObject::~GameObject()
 	{
 		RELEASE(components[i]);
 	}
+	components.clear();
 
 	// TODO THIS MUST BE CHECKED BECAUSE IT CAUSES THE PROGRAM TO CRASH
 	for (int i = 0; i < children.size(); ++i)
 	{
 		RELEASE(children[i]);
 	}
+	children.clear();
 }
 
 bool GameObject::Update(float dt)
