@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "glmath.h"
+#include "MathGeoLib/src/Geometry/Frustum.h"
 
 class ModuleCamera3D : public Module
 {
@@ -15,18 +16,16 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
-	void Look(const Vec3 &pos, const Vec3 &ref, bool rotateAroundReference = false);
-	void LookAt(const Vec3 &spot);
-	void Move(const Vec3 &movement);
-	float* GetViewMatrix();
-
-private:
-
-	void CalculateViewMatrix();
+	void LookAt(float3& target);
 
 public:
 	
 	Vec3 x, y, z, position, reference, objectSelected;
+
+	Frustum cameraFrustum;
+
+	float4x4 matrixViewFrustum;
+	float4x4 matrixProjectionFrustum;
 
 private:
 

@@ -26,9 +26,6 @@ bool ModuleScene::Start()
 {
 	OPTICK_EVENT("Starting Scene");
 
-	app->camera->position = Vec3(0.0f, 1.0f, -5.0f);
-	app->camera->LookAt(Vec3(0, 0, 0));
-
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/BakerHouse.fbx"));
 
 	return true;

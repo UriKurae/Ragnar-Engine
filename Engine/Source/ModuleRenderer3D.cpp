@@ -207,13 +207,8 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->GetViewMatrix());
-
-	// light 0 on cam pos
-	lights[0].SetPos(app->camera->position.x, app->camera->position.y, app->camera->position.z);
-
-	for(uint i = 0; i < MAX_LIGHTS; ++i)
-		lights[i].Render();
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+	glPopMatrix();
 
 	return true;
 }

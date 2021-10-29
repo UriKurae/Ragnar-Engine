@@ -85,7 +85,7 @@ void MeshComponent::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	if (vbo != nullptr) vbo->Unbind();
 	if (material != nullptr) material->UnbindTexture();
-
+	
 	glPopMatrix();
 
 	glDisableClientState(GL_VERTEX_ARRAY);

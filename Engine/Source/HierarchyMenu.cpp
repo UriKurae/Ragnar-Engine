@@ -80,8 +80,8 @@ bool HierarchyMenu::Update(float dt)
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
-				app->editor->SetSelected(nullptr);
-				app->editor->SetSelectedParent(nullptr);
+				/*app->editor->SetSelected(nullptr);
+				app->editor->SetSelectedParent(nullptr);*/
 				gameObjectOptions = false;
 			}
 			ImGui::EndPopup();
@@ -165,8 +165,8 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 
 		if (!ImGui::IsAnyItemHovered() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
 		{
-			app->editor->SetSelected(nullptr);
-			app->editor->SetSelectedParent(nullptr);
+			/*app->editor->SetSelected(nullptr);
+			app->editor->SetSelectedParent(nullptr);*/
 		}
 	}
 }
