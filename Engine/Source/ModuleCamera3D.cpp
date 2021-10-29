@@ -62,14 +62,14 @@ bool ModuleCamera3D::Update(float dt)
 		int dX = -app->input->GetMouseXMotion();
 		int dY = -app->input->GetMouseYMotion();
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos.z -= 9.0f * dt;
-		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos.z += 9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Front() * 9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Front() * -9.0f * dt;
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos.x -= 9.0f * dt;
-		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos.x += 9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.WorldRight() * -9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.WorldRight() * 9.0f * dt;
 
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos.y += 9.0f * dt;
-		if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos.y -= 9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Up() * 9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Up() * -9.0f * dt;
 
 		if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
 		{
@@ -78,14 +78,15 @@ bool ModuleCamera3D::Update(float dt)
 			if (dX != 0)
 			{
 				Quat rotateHorizontal;
-				rotateHorizontal = rotateHorizontal.RotateY(math::DegToRad(-dX * 0.5f));
+				rotateHorizontal = rotateHorizontal.RotateY(math::DegToRad(-dX));
 				rotateHorizontal.Normalize();
-				cameraFrustum.Transform(rotateHorizontal);
+
+				
 			}
 			if (dY != 0)
 			{
 				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateX(math::DegToRad(-dY * 0.5f));
+				rotateVertical = rotateVertical.RotateX(math::DegToRad(-dY));
 				rotateVertical.Normalize();
 				cameraFrustum.Transform(rotateVertical);
 			}
