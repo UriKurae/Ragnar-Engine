@@ -208,6 +208,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+	glPopMatrix();
 
 	return true;
 }

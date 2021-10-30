@@ -76,25 +76,32 @@ bool ModuleCamera3D::Update(float dt)
 			if (dY != 0)
 			{
 				float3 frontAxis = cameraFrustum.Front();
+				float3 newUp = cameraFrustum.Up();
 				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), math::DegToRad(-dY));
-				float3 right = cameraFrustum.WorldRight();
+				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
 				frontAxis = rotateVertical * frontAxis;
-				right = cameraFrustum.WorldRight();
+				newUp = rotateVertical * newUp;
+				frontAxis.Normalize();
+				newUp.Normalize();
+				float3::Orthonormalize(frontAxis, newUp);
 				cameraFrustum.SetFront(frontAxis);
-				float3 newUp = math::Cross(-cameraFrustum.Front(), right);
 				cameraFrustum.SetUp(newUp);
 			}
 			if (dX != 0)
 			{
 				float3 frontAxis = cameraFrustum.Front();
+				float3 newUp = cameraFrustum.Up();
 				Quat rotateHorizontal;
-				rotateHorizontal = rotateHorizontal.RotateAxisAngle(cameraFrustum.Up().Normalized(), math::DegToRad(-dX));
-				rotateHorizontal.Normalize();
+				rotateHorizontal = rotateHorizontal.RotateY(dX * dt);
 				frontAxis = rotateHorizontal * frontAxis;
-				cameraFrustum.SetFront(frontAxis);	
+				newUp = rotateHorizontal * newUp;
+				frontAxis.Normalize();
+				newUp.Normalize();
+				float3::Orthonormalize(frontAxis, newUp);
+				cameraFrustum.SetFront(frontAxis);
+				cameraFrustum.SetUp(newUp);
 			}
-			
+		
 			/*if (target != nullptr)
 			{
 				float3 distanceTarget = cameraFrustum.Pos() - target->GetComponent<TransformComponent>()->GetPosition();
