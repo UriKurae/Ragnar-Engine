@@ -34,6 +34,12 @@ bool HierarchyMenu::Update(float dt)
 		ImGui::TreePop();
 	}
 
+	if (ImGui::IsWindowHovered() && ImGui::IsWindowFocused() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
+	{
+		app->editor->SetSelected(nullptr);
+		app->editor->SetSelectedParent(nullptr);
+	}
+
 	if (gameObjectOptions)
 	{
 		ImGui::OpenPopup("GameObject");

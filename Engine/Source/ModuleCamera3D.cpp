@@ -55,65 +55,72 @@ bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
 bool ModuleCamera3D::Update(float dt)
 {
 	float3 newPos = cameraFrustum.Pos();
+	float3 newFront = cameraFrustum.Front();
+	float3 newUp = cameraFrustum.Up();
+	float speed = 9.0f * dt;
+
+	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+		speed *= 2;
+
+	float dX = -app->input->GetMouseXMotion();
+	float dY = -app->input->GetMouseYMotion();
 
 	// Inputs for the camera
 	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
 	{
-		float dX = -app->input->GetMouseXMotion();
-		float dY = -app->input->GetMouseYMotion();
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Front() * speed;
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Front() * speed;
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Front() * 9.0f * dt;
-		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Front() * -9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.WorldRight() * speed;
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos += cameraFrustum.WorldRight() * speed;
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.WorldRight() * -9.0f * dt;
-		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.WorldRight() * 9.0f * dt;
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Up() * speed;
+		if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Up() * speed;
 
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Up() * 9.0f * dt;
-		if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Up() * -9.0f * dt;
+		GameObject* target = app->editor->GetSelected();
 
-		if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
+		if (dY != 0)
 		{
-			if (dY != 0)
-			{
-				float3 frontAxis = cameraFrustum.Front();
-				float3 newUp = cameraFrustum.Up();
-				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
-				frontAxis = rotateVertical * frontAxis;
-				newUp = rotateVertical * newUp;
-				frontAxis.Normalize();
-				newUp.Normalize();
-				float3::Orthonormalize(frontAxis, newUp);
-				cameraFrustum.SetFront(frontAxis);
-				cameraFrustum.SetUp(newUp);
-			}
-			if (dX != 0)
-			{
-				float3 frontAxis = cameraFrustum.Front();
-				float3 newUp = cameraFrustum.Up();
-				Quat rotateHorizontal;
-				rotateHorizontal = rotateHorizontal.RotateY(dX * dt);
-				frontAxis = rotateHorizontal * frontAxis;
-				newUp = rotateHorizontal * newUp;
-				frontAxis.Normalize();
-				newUp.Normalize();
-				float3::Orthonormalize(frontAxis, newUp);
-				cameraFrustum.SetFront(frontAxis);
-				cameraFrustum.SetUp(newUp);
-			}
-		
-			/*if (target != nullptr)
-			{
-				float3 distanceTarget = cameraFrustum.Pos() - target->GetComponent<TransformComponent>()->GetPosition();
+			Quat rotateVertical;
+			rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+			newFront = rotateVertical * newFront;
+			newUp = rotateVertical * newUp;
+			newFront.Normalize();
+			newUp.Normalize();
+			float3::Orthonormalize(newFront, newUp);
+		}
+		if (dX != 0)
+		{
+			Quat rotateHorizontal;
+			rotateHorizontal = rotateHorizontal.RotateY(-dX * dt);
+			newFront = rotateHorizontal * newFront;
+			newUp = rotateHorizontal * newUp;
+			newFront.Normalize();
+			newUp.Normalize();
+			float3::Orthonormalize(newFront, newUp);
+		}
+	}
 
-				Quat quatX(cameraFrustum.WorldRight(), dY);
-				Quat quatY(cameraFrustum.Up(), dX);
-				
-				distanceTarget = quatX.Transform(distanceTarget);
-				distanceTarget = quatY.Transform(distanceTarget);
-				cameraFrustum.SetPos(distanceTarget + target->GetComponent<TransformComponent>()->GetPosition());*/
-				//LookAt(target->GetComponent<TransformComponent>()->GetPosition());
-		
+	if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT && 
+		app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
+	{
+		GameObject* target = app->editor->GetSelected();
+		if (target != nullptr)
+		{
+			float3 distanceTarget = cameraFrustum.Pos() - target->GetComponent<TransformComponent>()->GetPosition();
+
+			Quat rotateOrbitY;
+			rotateOrbitY = rotateOrbitY.RotateY(-dX * dt);
+			//distanceTarget = rotateOrbitY * distanceTarget;
+
+			Quat rotateOrbitX;
+			rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+			newUp = rotateOrbitY * rotateOrbitX * newUp;
+			newUp.Normalize();
+			distanceTarget = rotateOrbitY * rotateOrbitX * distanceTarget;
+			newFront = distanceTarget.Normalized().Neg();
+			newPos = distanceTarget;
+			float3::Orthonormalize(newFront, newUp);
 		}
 	}
 
@@ -125,21 +132,23 @@ bool ModuleCamera3D::Update(float dt)
 			float3 maxPoint = target->GetAABB().maxPoint;
 			float3 minPoint = target->GetAABB().minPoint;
 			
-			float3 h = (maxPoint - minPoint)/2;
+			float3 h = (maxPoint - minPoint) / 2.0f;
 
-			float angle = cameraFrustum.VerticalFov() / 2;
+			float angle = DegToRad(cameraFrustum.VerticalFov()) / 2;
 
-			float3 distance = h / Atan(angle);
+			float3 distance = h / Tan(angle);
 
-			newPos.z = target->GetComponent<TransformComponent>()->GetPosition().z - distance.z;
-			newPos.y = h.y;
+			distance.x = (distance.x + 2.5f) * cameraFrustum.Front().x;
+			distance.y = distance.y * cameraFrustum.Front().y;
+			distance.z = (distance.z + 2.5f) * cameraFrustum.Front().z;
+			newPos = target->GetAABB().CenterPoint() - distance;
 		}
 	}
 	
 	if (app->input->GetMouseZ() == 1) newPos.z -= 9.0f * dt;
 	if (app->input->GetMouseZ() == -1) newPos.z += 9.0f * dt;
 
-	cameraFrustum.SetPos(newPos);
+	cameraFrustum.SetFrame(newPos, newFront, newUp);
 
 	matrixViewFrustum = cameraFrustum.ViewMatrix();
 	matrixProjectionFrustum = cameraFrustum.ProjectionMatrix();

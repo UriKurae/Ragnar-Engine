@@ -27,6 +27,7 @@ bool ModuleScene::Start()
 	OPTICK_EVENT("Starting Scene");
 
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/BakerHouse.fbx"));
+	LoadModel::GetInstance()->LoadingModel(std::string("Assets/soraFbx.fbx"));
 
 	return true;
 }
@@ -113,11 +114,7 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 		mesh->SetMesh(vertices, indices, texCoords, normals);
 		mesh->SetOwner(object);
 		mesh->SetTransform(object->GetComponent<TransformComponent>());
-		Checker::CheckerImage checker = Checker::CreateChecker();
-		MaterialComponent* material = new MaterialComponent(checker.id, checker.width, checker.height, checker.checkerImage);
-		mesh->SetMaterial(material);
 		object->AddComponent(mesh);
-		object->AddComponent(material);
 	}
 
 	return object;

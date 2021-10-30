@@ -18,7 +18,7 @@ void Viewport::Draw(Framebuffer* framebuffer)
 	ImGui::Begin("Scene");
 
 	ImVec2 size = ImGui::GetContentRegionAvail();
-	
+
 	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
 	{
 		sizeViewport.x = size.x;
