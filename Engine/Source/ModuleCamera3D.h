@@ -21,7 +21,6 @@ public:
 public:
 	
 	Vec3 x, y, z, position, reference, objectSelected;
-
 	Frustum cameraFrustum;
 
 	float4x4 matrixViewFrustum;

@@ -18,7 +18,7 @@ ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
 	cameraFrustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	cameraFrustum.SetViewPlaneDistances(1.0f, 5.0f);
 	cameraFrustum.SetPerspective(90.0f, 60.0f);
-	cameraFrustum.SetFrame(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
+	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -59,8 +59,8 @@ bool ModuleCamera3D::Update(float dt)
 	// Inputs for the camera
 	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
 	{
-		int dX = -app->input->GetMouseXMotion();
-		int dY = -app->input->GetMouseYMotion();
+		float dX = -app->input->GetMouseXMotion();
+		float dY = -app->input->GetMouseYMotion();
 
 		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Front() * 9.0f * dt;
 		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos = cameraFrustum.Pos() + cameraFrustum.Front() * -9.0f * dt;
@@ -73,24 +73,28 @@ bool ModuleCamera3D::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
 		{
-			//GameObject* target = app->editor->GetSelected();
-
-			if (dX != 0)
-			{
-				Quat rotateHorizontal;
-				rotateHorizontal = rotateHorizontal.RotateY(math::DegToRad(-dX));
-				rotateHorizontal.Normalize();
-
-				
-			}
 			if (dY != 0)
 			{
+				float3 frontAxis = cameraFrustum.Front();
 				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateX(math::DegToRad(-dY));
-				rotateVertical.Normalize();
-				cameraFrustum.Transform(rotateVertical);
+				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), math::DegToRad(-dY));
+				float3 right = cameraFrustum.WorldRight();
+				frontAxis = rotateVertical * frontAxis;
+				right = cameraFrustum.WorldRight();
+				cameraFrustum.SetFront(frontAxis);
+				float3 newUp = math::Cross(-cameraFrustum.Front(), right);
+				cameraFrustum.SetUp(newUp);
 			}
-
+			if (dX != 0)
+			{
+				float3 frontAxis = cameraFrustum.Front();
+				Quat rotateHorizontal;
+				rotateHorizontal = rotateHorizontal.RotateAxisAngle(cameraFrustum.Up().Normalized(), math::DegToRad(-dX));
+				rotateHorizontal.Normalize();
+				frontAxis = rotateHorizontal * frontAxis;
+				cameraFrustum.SetFront(frontAxis);	
+			}
+			
 			/*if (target != nullptr)
 			{
 				float3 distanceTarget = cameraFrustum.Pos() - target->GetComponent<TransformComponent>()->GetPosition();
