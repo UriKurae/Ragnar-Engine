@@ -170,8 +170,7 @@ bool ModuleCamera3D::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
 	{
 		GameObject* target = app->editor->GetSelected();
-		std::string name = "Scene";
-		if (target != nullptr && target->GetParent()->GetName() != name)
+		if (target != nullptr)
 		{
 			float3 maxPoint = target->GetAABB().maxPoint;
 			float3 minPoint = target->GetAABB().minPoint;

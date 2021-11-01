@@ -24,9 +24,9 @@ bool ModuleScene::Start()
 {
 	RG_PROFILING_FUNCTION("Starting Scene");
 
-	LoadModel::GetInstance()->LoadingModel(std::string("Assets/BakerHouse.fbx"));
-	LoadModel::GetInstance()->LoadingModel(std::string("Assets/soraFbx.fbx"));
-	LoadModel::GetInstance()->LoadingModel(std::string("Assets/WolfLink.fbx"));
+	LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/BakerHouse.fbx"));
+	LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/soraFbx.fbx"));
+	LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/WolfLink.fbx"));
 
 	return true;
 }

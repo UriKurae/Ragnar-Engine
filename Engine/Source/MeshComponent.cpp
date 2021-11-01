@@ -70,7 +70,7 @@ void MeshComponent::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, tbo);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-	if (material != nullptr) material->BindTexture();
+	if (material != nullptr && material->GetActive()) material->BindTexture();
 	if (ebo != nullptr) ebo->Bind();
 
 	// Debug normals
@@ -84,7 +84,7 @@ void MeshComponent::Draw()
 	if (ebo != nullptr) ebo->Unbind();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	if (vbo != nullptr) vbo->Unbind();
-	if (material != nullptr) material->UnbindTexture();
+	if (material != nullptr && material->GetActive()) material->UnbindTexture();
 	
 	glPopMatrix();
 
@@ -96,7 +96,7 @@ void MeshComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Mesh Renderer"))
 	{
-		ImGui::Checkbox("Active", &active);
+		Checkbox(this, "Active", active);
 		ImGui::Text("Number of vertices: ");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", vertices.size());

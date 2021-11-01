@@ -7,6 +7,7 @@
 
 GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false)
 {
+	boundingBox.SetNegativeInfinity();
 }
 
 GameObject::~GameObject()
@@ -142,9 +143,16 @@ char* GameObject::GetNameBuffer()
 
 void GameObject::SetAABB(std::vector<float3>& vertices)
 {
-	boundingBox.SetNegativeInfinity();
-	
 	boundingBox.Enclose(vertices.data(), vertices.size());
+}
+
+void GameObject::SetTotalAABB()
+{
+	for (int i = 0; i < children.size(); ++i)
+	{
+		children[i]->SetTotalAABB();
+		boundingBox.Enclose(children[i]->GetAABB());
+	}
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)

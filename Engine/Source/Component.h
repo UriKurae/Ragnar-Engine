@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Imgui/imgui.h"
+
 class GameObject;
 
 enum class ComponentType
@@ -24,6 +26,15 @@ public:
 	virtual void OnEditor() {}
 
 	inline void SetOwner(GameObject* own) { owner = own; }
+
+	void Checkbox(Component* component, const char* name, bool& act)
+	{
+		ImGui::PushID((void*)component);
+
+		ImGui::Checkbox(name, &act);
+
+		ImGui::PopID();
+	}
 
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }

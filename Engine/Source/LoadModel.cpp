@@ -46,6 +46,7 @@ void LoadModel::LoadingModel(std::string& path)
 	GameObject* object = app->scene->CreateGameObject(nullptr);
 	object->SetName(p.c_str());
 	ProcessNode(scene->mRootNode, scene, object);
+	object->SetTotalAABB();
 }
 
 void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
@@ -76,6 +77,7 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameObject* object)
 {
 	RG_PROFILING_FUNCTION("Process Mesh");
+	DEBUG_LOG("Processing mesh...");
 	std::vector<float3> vertices;
 	std::vector<float3> norms;
 	std::vector<unsigned int> indices;
@@ -124,12 +126,14 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 	MaterialComponent* diffuse = nullptr;
 	if (mesh->mMaterialIndex >= 0)
 	{
+		DEBUG_LOG("Processing material...");
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		TextureLoader::GetInstance()->ImportTexture(material, &diffuse, aiTextureType_DIFFUSE, "texture_diffuse");
 		//diffuse = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		
 		//std::vector<Texture> specular = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		//textures.insert(textures.end(), specular.begin(), specular.end());
+		DEBUG_LOG("Material loading completed!");
 	}
 	MeshComponent* m = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);
 
@@ -145,6 +149,7 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 		object->AddComponent(diffuse);
 	}
 
+	DEBUG_LOG("Mesh loading completed!");
 	return m;
 }
 

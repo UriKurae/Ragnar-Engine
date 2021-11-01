@@ -51,7 +51,7 @@ void MaterialComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Material"))
 	{
-		ImGui::Checkbox("Active", &active);
+		Checkbox(this, "Active", active);
 		if (checker)
 		{
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "Default checker's texture");

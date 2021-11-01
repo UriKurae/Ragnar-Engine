@@ -32,7 +32,9 @@ public:
 	inline const bool& GetActive() const { return active; }
 	inline std::vector<GameObject*>& GetChilds() { return children; }
 	void SetAABB(std::vector<float3>& vertices);
+	void GameObject::SetTotalAABB();
 	inline AABB GetAABB() { return boundingBox; }
+	inline void SetAABB(AABB newAABB) { boundingBox = newAABB; }
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
