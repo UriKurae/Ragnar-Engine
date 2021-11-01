@@ -153,12 +153,6 @@
     <ClInclude Include="Engine\Source\AssimpDefs.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Mesh.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Model.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\ModuleScene.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -301,12 +295,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AssimpDefs.cpp">
       <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Mesh.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Model.cpp">
-      <Filter>Sources\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\ModuleScene.cpp">
       <Filter>Sources\Modules</Filter>

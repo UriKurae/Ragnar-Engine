@@ -19,14 +19,8 @@ public:
 	void LookAt(float3& target);
 
 public:
-	
-	Vec3 x, y, z, position, reference, objectSelected;
 	Frustum cameraFrustum;
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
-
-private:
-
-	Mat4x4 viewMatrix, viewMatrixInverse;
 };

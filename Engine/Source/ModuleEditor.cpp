@@ -17,7 +17,7 @@
 
 #include "Profiling.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), createGameObject(false), gameObjectOptions(false), Module()
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), Module()
 {
 	name = "Editor";
 
@@ -193,39 +193,4 @@ bool ModuleEditor::SaveConfig(JsonParsing& node) const
 void ModuleEditor::LogConsole(const char* string)
 {
 	if (mainMenuBar.GetConsole()) mainMenuBar.GetConsole()->AddLog(string);
-}
-
-void ModuleEditor::ShowChildren(GameObject* parent)
-{
-	int size = parent->GetChilds().size();
-	for (int i = 0; i < size; ++i)
-	{
-		GameObject* obj = parent->GetChilds()[i];
-		ImGuiTreeNodeFlags flags = ((selected == obj) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
-		bool opened = false;
-		if (obj != nullptr) opened = ImGui::TreeNodeEx((void*)obj, flags, obj->GetName());
-		if (ImGui::IsItemClicked())
-		{
-			selected = obj;
-			selectedParent = parent;
-		}
-		else if (ImGui::IsItemClicked(1))
-		{
-			selected = obj;
-			selectedParent = parent;
-			gameObjectOptions = true;
-		}
-
-		if (opened)
-		{
-			ShowChildren(obj);
-			ImGui::TreePop();
-		}
-
-		if (!ImGui::IsAnyItemHovered() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
-		{
-			selected = nullptr;
-			selectedParent = nullptr;
-		}
-	}
 }

@@ -7,9 +7,6 @@
 
 ConsoleMenu::ConsoleMenu() : Menu(true)
 {
-	scrollToBottom = false;
-	console = true;
-	collapsed = false;
 }
 
 ConsoleMenu::~ConsoleMenu()
@@ -48,7 +45,6 @@ void ConsoleMenu::AddLog(const char* fmt)
 	va_start(args, fmt);
 	buf.appendfv(fmt, args);
 	va_end(args);
-	scrollToBottom = true;
 }
 
 void ConsoleMenu::ClearConsole()

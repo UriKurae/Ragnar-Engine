@@ -9,8 +9,6 @@
 #include "glew/include/GL/glew.h"
 #include "Framebuffer.h"
 
-#include "Model.h"
-
 #define MAX_LIGHTS 8
 
 typedef unsigned int GLuint;
@@ -54,28 +52,13 @@ public:
 	void DrawCubeDirectMode();
 
 public:
-	std::vector<Primitive*> primitives;
-
-	std::vector<GLushort> indices;
-	std::vector<GLfloat> normals;
-	std::vector<GLfloat> texcoords;
-	std::vector<GLfloat> vertices;
-
 	PGrid* grid;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
-	Mat3x3 normalMatrix;
-	Mat4x4 modelMatrix, viewMatrix, projectionMatrix;
-
-	//LoadFBX fbx;
-	std::vector<Model> fbx;
+	Mat4x4 projectionMatrix;
 
 	Framebuffer* fbo;
-
-	GLuint framebuffer;
-	GLuint rboDepthStencil;
-	GLuint textureColorbuffer;
 
 	bool depthTest;
 	bool cullFace;

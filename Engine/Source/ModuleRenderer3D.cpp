@@ -17,10 +17,12 @@
 
 #include "Profiling.h"
 
-ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : framebuffer(0), rboDepthStencil(0), Module(startEnabled)
+ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
 {
 	name = "Renderer";
 	context = NULL;
+	fbo = nullptr;
+	grid = nullptr;
 
 	depthTest = true;
 	cullFace = true;
@@ -240,16 +242,8 @@ bool ModuleRenderer3D::CleanUp()
 {
 	DEBUG_LOG("Destroying 3D Renderer");
 
-	for (unsigned int i = 0; i < primitives.size(); ++i)
-	{
-		RELEASE(primitives[i]);
-	}
-
-	glDeleteFramebuffers(1, &framebuffer);
 	RELEASE(grid);
 	RELEASE(fbo);
-
-	primitives.clear();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();

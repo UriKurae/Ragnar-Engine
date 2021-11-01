@@ -31,13 +31,9 @@ public:
 
 	void LogConsole(const char* string);
 
-	void ShowChildren(GameObject* parent);
-
 	inline Viewport* GetViewport() { return viewport; }
 
 private:
-	bool createGameObject;
-	bool gameObjectOptions;
 	MainMenuBar mainMenuBar;
 
 	GameObject* selected;

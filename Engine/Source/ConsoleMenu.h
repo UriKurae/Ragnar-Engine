@@ -17,13 +17,10 @@ public:
 
 	void ClearConsole();
 
-	inline bool& GetActive() { return console; }
+	inline bool& GetActive() { return active; }
 
 private:
 	ImGuiTextBuffer buf;
-	bool scrollToBottom;
 
-	bool console;
-	bool collapsed;
 	ImVec2 size;
 };
