@@ -96,6 +96,11 @@ bool ModuleCamera3D::Update(float dt)
 	float dY = -app->input->GetMouseYMotion();
 
 	// Inputs for the camera
+	if (app->input->GetKey(SDL_SCANCODE_T) == KeyState::KEY_UP)
+	{
+		newUp = float3::unitY;
+		newFront = -float3::unitZ;
+	}
 	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Front() * speed;
@@ -137,19 +142,27 @@ bool ModuleCamera3D::Update(float dt)
 		GameObject* target = app->editor->GetSelected();
 		if (target != nullptr)
 		{
-			float3 distanceTarget = cameraFrustum.Pos() - target->GetComponent<TransformComponent>()->GetPosition();
+			float3 targetPos = {};
+			Quat targetRot = {};
+			float3 targetSize = {};
+			target->GetComponent<TransformComponent>()->GetTransform().Decompose(targetPos, targetRot, targetSize);
+			float3 distanceTarget = cameraFrustum.Pos() - targetPos;
 
 			Quat rotateOrbitY;
 			rotateOrbitY = rotateOrbitY.RotateY(-dX * dt);
+			rotateOrbitY.Normalize();
 			//distanceTarget = rotateOrbitY * distanceTarget;
 
 			Quat rotateOrbitX;
 			rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
-			newUp = rotateOrbitY * rotateOrbitX * newUp;
+			rotateOrbitX.Normalize();
+			newUp =  rotateOrbitX * newUp;
 			newUp.Normalize();
-			distanceTarget = rotateOrbitY * rotateOrbitX * distanceTarget;
+			newUp = rotateOrbitY * newUp;
+			newUp.Normalize();
+			distanceTarget = rotateOrbitX * rotateOrbitY * distanceTarget;
 			newFront = distanceTarget.Normalized().Neg();
-			newPos = distanceTarget;
+			newPos = distanceTarget + targetPos;
 			float3::Orthonormalize(newFront, newUp);
 		}
 	}

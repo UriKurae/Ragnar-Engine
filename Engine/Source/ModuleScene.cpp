@@ -26,6 +26,7 @@ bool ModuleScene::Start()
 
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/BakerHouse.fbx"));
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/soraFbx.fbx"));
+	LoadModel::GetInstance()->LoadingModel(std::string("Assets/WolfLink.fbx"));
 
 	return true;
 }

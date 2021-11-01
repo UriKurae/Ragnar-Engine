@@ -143,7 +143,7 @@ char* GameObject::GetNameBuffer()
 void GameObject::SetAABB(std::vector<float3>& vertices)
 {
 	boundingBox.SetNegativeInfinity();
-
+	
 	boundingBox.Enclose(vertices.data(), vertices.size());
 }
 
