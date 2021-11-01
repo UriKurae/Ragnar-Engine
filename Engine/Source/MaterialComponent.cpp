@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Imgui/imgui.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 TextureBuffer* MaterialComponent::checkerBuffer = nullptr;
 
@@ -15,6 +15,7 @@ MaterialComponent::MaterialComponent(GameObject* own) : id(0), width(0), height(
 	CreateChecker();
 
 	checkerBuffer = new TextureBuffer(0, 64, 64, *checkerImage[0]);
+	active = true;
 }
 
 MaterialComponent::MaterialComponent(int i, int w, int h, std::string& p) : id(i), width(w), height(h), path(p)
@@ -26,6 +27,7 @@ MaterialComponent::MaterialComponent(int i, int w, int h, std::string& p) : id(i
 	checkerBuffer = new TextureBuffer(0, 64, 64, *checkerImage[0]);
 
 	texBuffer->Unbind();
+	active = true;
 }
 
 MaterialComponent::MaterialComponent(int i, int w, int h, GLubyte* data) : id(i), width(w), height(h)
@@ -37,6 +39,7 @@ MaterialComponent::MaterialComponent(int i, int w, int h, GLubyte* data) : id(i)
 	checkerBuffer = new TextureBuffer(0, 64, 64, *checkerImage[0]);
 
 	texBuffer->Unbind();
+	active = true;
 }
 
 MaterialComponent::~MaterialComponent()
@@ -48,16 +51,44 @@ void MaterialComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Material"))
 	{
-		ImGui::Text("Path: ");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", path.c_str());
-		ImGui::Text("Width: ");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", width);
-		ImGui::Text("Height: ");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", height);
-		ImGui::Checkbox("Checker Image", &checker);
+		ImGui::Checkbox("Active", &active);
+		if (checker)
+		{
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "Default checker's texture");
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 64);
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 64);
+			ImGui::Checkbox("Checker Image", &checker);
+			ImGui::Image((ImTextureID)checkerBuffer->GetID(), ImVec2(128, 128));
+		}
+		else if (texBuffer != nullptr)
+		{
+			ImGui::Text("Path: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", path.c_str());
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", width);
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", height);
+			ImGui::Checkbox("Checker Image", &checker);
+			ImGui::Image((ImTextureID)texBuffer->GetID(), ImVec2(128, 128));
+		}
+		else
+		{
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+			ImGui::Checkbox("Checker Image", &checker);
+		}
 		ImGui::Separator();
 	}
 }

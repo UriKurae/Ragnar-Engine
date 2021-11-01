@@ -4,7 +4,7 @@
 #include "glmath.h"
 #include "Globals.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 PCube::PCube(float3 t, float3 r, float3 s) : Primitive()
 {

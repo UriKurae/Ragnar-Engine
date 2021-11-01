@@ -7,7 +7,6 @@
 
 HierarchyMenu::HierarchyMenu() : Menu(true)
 {
-	hierarchy = false;
 	gameObjectOptions = false;
 	createGameObject = false;
 }
@@ -18,7 +17,7 @@ HierarchyMenu::~HierarchyMenu()
 
 bool HierarchyMenu::Update(float dt)
 {
-	ImGui::Begin("Hierarchy", &hierarchy);
+	ImGui::Begin("Hierarchy", &active);
 	if (ImGui::Button("+"))
 	{
 		createGameObject = true;

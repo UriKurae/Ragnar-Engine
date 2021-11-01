@@ -3,8 +3,9 @@
 #include "Globals.h"
 
 #include "Imgui/imgui.h"
+#include "Imgui/imgui_internal.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 TransformComponent::TransformComponent(GameObject* own)
 {
@@ -18,7 +19,8 @@ TransformComponent::TransformComponent(GameObject* own)
 	for (int i = 0; i < 3; ++i)
 		rotationEditor[i] = 0;
 
-	changeTransform = false;
+	collapsed = false;
+	active = true;
 }
 
 TransformComponent::~TransformComponent()
@@ -119,11 +121,67 @@ Quat TransformComponent::AngleToQuat(float angle, int x, int y, int z)
 	return quaternion;
 }
 
+bool TransformComponent::DrawVec3(std::string& name, float3& vec)
+{
+	float3 lastVec = vec;
+	ImGui::PushID(name.c_str());
+
+	ImGui::Columns(2);
+	ImGui::SetColumnWidth(0, 100.0f);
+	ImGui::Text(name.c_str());
+	ImGui::NextColumn();
+
+	ImGui::PushMultiItemsWidths(3, ImGui::CalcItemWidth());
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 0,0 });
+
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.8f, 0.1f, 0.15f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.8f, 0.1f, 0.15f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.8f, 0.1f, 0.15f, 1.0f));
+	ImGui::Button("X");
+	ImGui::PopStyleColor(3);
+
+	ImGui::SameLine();
+	ImGui::DragFloat("##X", &vec.x, 0.1f, 0.0f, 0.0f, "%.2f");
+	ImGui::PopItemWidth();
+	ImGui::SameLine();
+
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.2f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.7f, 0.2f, 1.0f));
+	ImGui::Button("Y");
+	ImGui::PopStyleColor(3);
+
+	ImGui::SameLine();
+	ImGui::DragFloat("##Y", &vec.y, 0.1f, 0.0f, 0.0f, "%.2f");
+	ImGui::PopItemWidth();
+	ImGui::SameLine();
+
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.8f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.1f, 0.25f, 0.8f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.1f, 0.25f, 0.8f, 1.0f));
+	ImGui::Button("Z");
+	ImGui::PopStyleColor(3);
+
+	ImGui::SameLine();
+	ImGui::DragFloat("##Z", &vec.z, 0.1f, 0.0f, 0.0f, "%.2f");
+	ImGui::PopItemWidth();
+
+	ImGui::PopStyleVar();
+
+	ImGui::Columns(1);
+
+	ImGui::PopID();
+
+	if (lastVec.x != vec.x || lastVec.y != vec.y || lastVec.z != vec.z) return true;
+	else return false;
+}
+
 void TransformComponent::ShowTransformationInfo()
 {
-	ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.50f);
-
-	ImGui::Text("Position: ");
+	float3 pos = position;
+	float3 rot;
+	float3 sca;
+	/*ImGui::Text("Position: ");
 	ImGui::SameLine();
 	if (ImGui::DragFloat3(".", position.ptr()))
 	{
@@ -135,15 +193,36 @@ void TransformComponent::ShowTransformationInfo()
 			SetTranslation(position);
 
 		RecursiveTransform(owner);
-	}
+	}*/
 
-	ImGui::Text("Rotation: ");
-	ImGui::SameLine();
-	if (ImGui::DragFloat3(" ", rotationEditor))
+	
+	if (DrawVec3(std::string("Position: "), position))
+	{
+		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+		{
+			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
+		}
+		else
+			SetTranslation(position);
+
+		RecursiveTransform(owner);
+	}
+	//{
+	//	if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+	//	{
+	//		SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
+	//	}
+	//	else
+	//		SetTranslation(position);
+
+	//	RecursiveTransform(owner);
+	//}
+
+	if (DrawVec3(std::string("Rotation: "), rotationEditor))
 	{	
-		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotationEditor[0]));
-		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotationEditor[1]));
-		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor[2]));
+		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotationEditor.x));
+		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotationEditor.y));
+		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor.z));
 		Quat finalQuaternion = quaternionX * quaternionY * quaternionZ;
 		rotation = finalQuaternion;
 		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
@@ -156,9 +235,7 @@ void TransformComponent::ShowTransformationInfo()
 		RecursiveTransform(owner);
 	}
 
-	ImGui::Text("Scale: ");
-	ImGui::SameLine(86.0f);
-	if (ImGui::DragFloat3("-", scale.ptr()))
+	if (DrawVec3(std::string("Scale: "), scale))
 	{
 		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
 		{

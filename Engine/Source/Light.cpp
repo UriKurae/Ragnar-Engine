@@ -2,7 +2,7 @@
 #include "Light.h"
 #include <gl/GL.h>
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 Light::Light() : ref(-1), on(false), position(0.0f, 0.0f, 0.0f)
 {}

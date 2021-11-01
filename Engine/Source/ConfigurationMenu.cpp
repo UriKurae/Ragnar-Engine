@@ -6,16 +6,17 @@
 
 #include <GL\glew.h>
 #include <SDL.h>
-#include <mmgr\mmgr.h>
+
+#include "Profiling.h"
 
 ConfigurationMenu::ConfigurationMenu() : Menu(true)
 {
 	memoryCount = 0;
 
-	activeWindow = false;
+	activeWindow = true;
 	openOptions = false;
-	activeInput = false;
-	activeHardware = false;
+	activeInput = true;
+	activeHardware = true;
 }
 
 ConfigurationMenu::~ConfigurationMenu()
@@ -75,10 +76,8 @@ bool ConfigurationMenu::Update(float dt)
 	}
 	if (ImGui::CollapsingHeader("Application"))
 	{
-		char* name = "Ragnar Engine";
-		ImGui::InputText("App name", name, 25);
-		char* organization = "UPC CITM";
-		ImGui::InputText("Organization", organization, 25);
+		ImGui::Text("Ragnar Engine");
+		ImGui::Text("UPC CITM");
 
 		int framerate = app->GetFPSLimit();
 

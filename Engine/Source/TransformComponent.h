@@ -31,7 +31,7 @@ public:
 
 	Quat AngleToQuat(float angle, int x, int y, int z);
 
-
+	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();
 private:
 	float3 position;
@@ -39,6 +39,5 @@ private:
 	float3 scale;
 	float4x4 globalMatrix;
 
-	bool changeTransform;
-	float rotationEditor[3];
+	float3 rotationEditor;
 };

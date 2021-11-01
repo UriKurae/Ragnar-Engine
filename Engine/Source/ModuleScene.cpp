@@ -6,11 +6,9 @@
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
 #include "Primitives.h"
-#include "Optick/include/optick.h"
-
 #include "LoadModel.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 ModuleScene::ModuleScene()
 {
@@ -24,7 +22,7 @@ ModuleScene::~ModuleScene()
 
 bool ModuleScene::Start()
 {
-	OPTICK_EVENT("Starting Scene");
+	RG_PROFILING_FUNCTION("Starting Scene");
 
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/BakerHouse.fbx"));
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/soraFbx.fbx"));
@@ -34,18 +32,20 @@ bool ModuleScene::Start()
 
 bool ModuleScene::Update(float dt)
 {
-	OPTICK_EVENT("Updating Scene");
+	RG_PROFILING_FUNCTION("Updating Scene");
 
 	return true;
 }
 
 bool ModuleScene::Draw()
 {
-	OPTICK_EVENT("Scene PostUpdate");
+	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
 	{
-		root->GetChilds()[i]->Draw();
+		GameObject* go = root->GetChilds()[i];
+		if (go->GetActive())
+			go->Draw();
 	}
 
 	return true;
@@ -60,7 +60,7 @@ bool ModuleScene::CleanUp()
 
 GameObject* ModuleScene::CreateGameObject(GameObject* parent)
 {
-	OPTICK_EVENT("Creating Game Object");
+	RG_PROFILING_FUNCTION("Creating Game Object");
 
 	GameObject* object = new GameObject();
 	object->CreateComponent(ComponentType::TRANSFORM);

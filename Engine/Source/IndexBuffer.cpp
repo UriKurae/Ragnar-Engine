@@ -2,7 +2,7 @@
 
 #include "glew/include/GL/glew.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int s) : size(s)
 {

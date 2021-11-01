@@ -1,11 +1,9 @@
 #include <stdlib.h>
 #include "Application.h"
 
-#include "Optick/include/optick.h"
-
 #include "SDL/include/SDL.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 enum class MainState
 {
@@ -58,7 +56,7 @@ int main(int argc, char ** argv)
 			// Loop all modules until we are asked to leave ---------------------
 		case MainState::UPDATE:
 		{
-			OPTICK_FRAME("MainThread");
+			RG_PROFILING_FRAME("MainThread");
 			if (app->Update() == false)
 				state = MainState::CLEAN;
 		}

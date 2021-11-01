@@ -9,9 +9,7 @@
 #include "LoadModel.h"
 #include "TextureLoader.h"
 
-#include "Optick/include/optick.h"
-
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 Application::Application()
 {
@@ -136,7 +134,7 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
-	OPTICK_EVENT("Finishing Update");
+	RG_PROFILING_FUNCTION("Finishing Update");
 
 	if (loadRequested) LoadConfig();
 	if (saveRequested) SaveConfig();

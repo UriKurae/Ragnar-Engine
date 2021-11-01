@@ -7,6 +7,7 @@
 Viewport::Viewport()
 {
 	sizeViewport = float2(0,0);
+	active = true;
 }
 
 Viewport::~Viewport()
@@ -15,8 +16,8 @@ Viewport::~Viewport()
 
 void Viewport::Draw(Framebuffer* framebuffer)
 {
-	ImGui::Begin("Scene");
-
+	ImGui::Begin("Scene", &active);
+	
 	ImVec2 size = ImGui::GetContentRegionAvail();
 
 	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
@@ -25,7 +26,6 @@ void Viewport::Draw(Framebuffer* framebuffer)
 		sizeViewport.y = size.y;
 		framebuffer->ResizeFramebuffer(size.x, size.y);
 		app->renderer3D->OnResize(size.x, size.y);
-
 	}
 	bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
 	selected = ImGui::IsWindowFocused();

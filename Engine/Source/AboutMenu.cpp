@@ -6,7 +6,7 @@
 #include "DevIL/include/IL/il.h"
 #include "PhysFS/include/physfs.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 AboutMenu::AboutMenu() : Menu(false)
 {

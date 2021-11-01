@@ -4,13 +4,11 @@
 
 #include "ModuleRenderer3D.h"
 
-#include "Optick/include/optick.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
-
 #include "LoadModel.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 #define MAX_KEYS 300
 

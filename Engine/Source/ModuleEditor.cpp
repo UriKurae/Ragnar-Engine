@@ -15,8 +15,7 @@
 
 #include <GL/glew.h>
 
-#include "Optick/include/optick.h"
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), createGameObject(false), gameObjectOptions(false), Module()
 {
@@ -31,7 +30,7 @@ ModuleEditor::~ModuleEditor()
 
 bool ModuleEditor::Update(float dt)
 {
-	OPTICK_EVENT("Updating Module Editor");
+	RG_PROFILING_FUNCTION("Updating Module Editor");
 	bool ret = true;
 
 	ImGui_ImplOpenGL3_NewFrame();
@@ -162,7 +161,7 @@ bool ModuleEditor::Update(float dt)
 
 bool ModuleEditor::Draw(Framebuffer* framebuffer)
 {
-	OPTICK_EVENT("Drawing Module Editor");
+	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
 	viewport->Draw(framebuffer);
 	ImGui::EndFrame();

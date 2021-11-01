@@ -28,7 +28,8 @@
 !Dependencies/glew/lib/glew32.lib
 !Dependencies/SDL/libx86/SDL2.lib
 !Dependencies/SDL/libx86/SDL2main.lib
-!Dependencies/MathGeoLib/lib/MathGeoLib.lib
+!Dependencies/MathGeoLib/lib/Release/MathGeoLib.lib
+!Dependencies/MathGeoLib/lib/Deb/MathGeoLib.lib
 !Dependencies/Assimp/lib/assimp-vc142-mt.lib
 !Dependencies/PhysFS/lib/physfs.lib
 !Dependencies/Optick/lib/OptickCore.lib

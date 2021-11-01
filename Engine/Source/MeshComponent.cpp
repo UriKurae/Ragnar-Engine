@@ -8,7 +8,7 @@
 
 #include "glew/include/GL/glew.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : ebo(nullptr), vbo(nullptr), tbo(0), material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normals({}), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
 {
@@ -96,6 +96,7 @@ void MeshComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Mesh Renderer"))
 	{
+		ImGui::Checkbox("Active", &active);
 		ImGui::Text("Number of vertices: ");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", vertices.size());

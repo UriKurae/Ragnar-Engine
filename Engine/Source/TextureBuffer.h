@@ -13,8 +13,9 @@ public:
 	~TextureBuffer();
 
 	void Bind();
-
 	void Unbind();
+
+	inline const unsigned int GetID() const { return id; }
 
 private:
 	unsigned int id;

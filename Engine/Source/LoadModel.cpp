@@ -9,9 +9,7 @@
 #include "IL/il.h"
 #include "IL/ilut.h"
 
-#include "Optick/include/optick.h"
-
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 LoadModel* LoadModel::instance = nullptr;
 
@@ -77,7 +75,7 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 
 MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameObject* object)
 {
-	OPTICK_EVENT("Process Mesh");
+	RG_PROFILING_FUNCTION("Process Mesh");
 	std::vector<float3> vertices;
 	std::vector<float3> norms;
 	std::vector<unsigned int> indices;

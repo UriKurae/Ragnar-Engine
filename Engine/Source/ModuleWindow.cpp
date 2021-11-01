@@ -2,7 +2,7 @@
 
 #include "ModuleWindow.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
 {

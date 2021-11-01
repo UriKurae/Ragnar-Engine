@@ -15,6 +15,8 @@ public:
 
 	void AddLog(const char* fmt);
 
+	void ClearConsole();
+
 	inline bool& GetActive() { return console; }
 
 private:

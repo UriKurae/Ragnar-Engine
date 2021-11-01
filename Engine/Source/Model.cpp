@@ -6,7 +6,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 Model::Model(const char* path)
 {

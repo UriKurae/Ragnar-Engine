@@ -210,6 +210,12 @@
     <ClInclude Include="Engine\Source\Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Profiling.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\ImguiStyle.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

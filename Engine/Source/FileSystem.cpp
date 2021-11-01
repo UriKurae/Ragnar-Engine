@@ -9,11 +9,9 @@
 #include "AssimpDefs.h"
 #include "IL/il.h"
 
-#include "Optick/include/optick.h"
-
 #include <vector>
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 {
@@ -186,7 +184,7 @@ void FileSystem::LoadFile(std::string& path)
 	{
 		if (*s == extension)
 		{
-			OPTICK_EVENT("Loading Model");
+			RG_PROFILING_FUNCTION("Loading Model");
 			LoadModel::GetInstance()->LoadingModel(path);
 			return;
 		}
@@ -198,7 +196,7 @@ void FileSystem::LoadFile(std::string& path)
 	{
 		if (*s == extension)
 		{
-			OPTICK_EVENT("Loading Texture");
+			RG_PROFILING_FUNCTION("Loading Texture");
 			TextureLoader::GetInstance()->LoadTextureToSelected(path);
 			return;
 		}

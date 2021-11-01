@@ -8,7 +8,7 @@
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 MainMenuBar::MainMenuBar() : Menu(true)
 {

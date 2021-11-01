@@ -25,7 +25,8 @@ public:
 
 	inline void SetOwner(GameObject* own) { owner = own; }
 
-	inline ComponentType GetType() const { return type; }
+	inline const ComponentType& GetType() const { return type; }
+	inline const bool& GetActive() const { return active; }
 
 public:
 	ComponentType type;

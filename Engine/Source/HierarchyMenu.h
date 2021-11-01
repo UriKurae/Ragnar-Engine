@@ -16,7 +16,6 @@ public:
 	void ShowChildren(GameObject* parent);
 
 private:
-	bool hierarchy;
 	bool gameObjectOptions;
 
 	bool createGameObject;

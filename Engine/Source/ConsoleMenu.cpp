@@ -3,7 +3,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 ConsoleMenu::ConsoleMenu() : Menu(true)
 {
@@ -29,12 +29,15 @@ bool ConsoleMenu::Update(float dt)
 	//}
 
 	ImGui::Begin("Console", &active);
+	if (ImGui::Button("Clear console"))
+	{
+		ClearConsole();
+	}
+	ImGui::Separator();
+	ImGui::BeginChild("LOG");
 	ImGui::TextUnformatted(buf.begin());
-	if (scrollToBottom)
-		ImGui::SetScrollHereY(1.0f);
-	scrollToBottom = false;
+	ImGui::EndChild();
 	ImGui::End();
-
 
 	return true;
 }
@@ -46,4 +49,9 @@ void ConsoleMenu::AddLog(const char* fmt)
 	buf.appendfv(fmt, args);
 	va_end(args);
 	scrollToBottom = true;
+}
+
+void ConsoleMenu::ClearConsole()
+{
+	buf.clear();
 }

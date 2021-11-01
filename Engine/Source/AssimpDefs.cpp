@@ -1,6 +1,6 @@
 #include "AssimpDefs.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 size_t AssimpWrite(aiFile* file, const char* data, size_t size, size_t chunks)
 {

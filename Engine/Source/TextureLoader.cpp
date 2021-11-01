@@ -8,7 +8,7 @@
 
 #include "IL/il.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 TextureLoader* TextureLoader::instance = nullptr;
 

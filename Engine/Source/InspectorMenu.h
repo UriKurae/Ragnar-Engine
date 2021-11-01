@@ -10,7 +10,4 @@ public:
 	~InspectorMenu();
 
 	bool Update(float dt);
-
-private:
-	bool inspector;
 };

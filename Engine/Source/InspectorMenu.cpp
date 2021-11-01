@@ -7,7 +7,6 @@
 
 InspectorMenu::InspectorMenu() : Menu(true)
 {
-	inspector = false;
 }
 
 InspectorMenu::~InspectorMenu()
@@ -16,7 +15,7 @@ InspectorMenu::~InspectorMenu()
 
 bool InspectorMenu::Update(float dt)
 {
-	ImGui::Begin("Inspector", &inspector);
+	ImGui::Begin("Inspector", &active);
 	if (!app->scene->GetRoot()->GetChilds().empty())
 	{
 		//GameObject& object = (*app->scene->GetGameObjectsList()[0]);

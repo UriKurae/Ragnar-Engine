@@ -5,7 +5,7 @@
 #include "glew/include/GL/glew.h"
 #include "IL/il.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 TextureBuffer::TextureBuffer(GLuint i, int width, int height) : id(i)
 {

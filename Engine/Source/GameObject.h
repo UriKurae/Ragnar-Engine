@@ -29,7 +29,7 @@ public:
 	char* GetNameBuffer();
 	inline const char* GetName() const { return name.c_str(); }
 	inline GameObject* GetParent() const { return parent; }
-	inline bool GetActive() const { return active; }
+	inline const bool& GetActive() const { return active; }
 	inline std::vector<GameObject*>& GetChilds() { return children; }
 	void SetAABB(std::vector<float3>& vertices);
 	inline AABB GetAABB() { return boundingBox; }

@@ -2,7 +2,7 @@
 
 #include "glew/include/GL/glew.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 VertexBuffer::VertexBuffer(const void* data, unsigned int s) : size (s)
 {

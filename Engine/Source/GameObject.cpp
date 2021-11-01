@@ -3,7 +3,7 @@
 
 #include "Imgui/imgui.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false)
 {
@@ -42,17 +42,25 @@ void GameObject::Draw()
 	//}
 	for (int i = 0; i < components.size(); ++i)
 	{
-		components[i]->Draw();
+		Component* component = components[i];
+		if (component->GetActive())
+			component->Draw();
 	}
 
 	for (int i = 0; i < children.size(); ++i)
 	{
-		children[i]->Draw();
+		GameObject* go = children[i];
+		if (go->GetActive())
+			go->Draw();
 	}
 }
 
 void GameObject::DrawEditor()
 {
+	ImGui::Checkbox("Active", &active);
+	ImGui::SameLine();
+	ImGui::InputText("Name", &name[0], 20);
+	ImGui::Separator();
 	for (int i = 0; i < components.size(); ++i)
 	{
 		components[i]->OnEditor();

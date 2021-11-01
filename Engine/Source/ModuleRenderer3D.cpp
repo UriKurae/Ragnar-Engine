@@ -11,11 +11,11 @@
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 
+#include "Imgui/ImguiStyle.h"
+
 #include "IL/ilut.h"
 
-#include "Optick/include/optick.h"
-
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : framebuffer(0), rboDepthStencil(0), Module(startEnabled)
 {
@@ -74,8 +74,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
-		ImGui::StyleColorsDark();
-		
+		//ImGui::StyleColorsDark();
+		ImGui::DarkTheme();
+
 		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
 		ImGui_ImplOpenGL3_Init();
 
@@ -216,7 +217,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	OPTICK_EVENT("Rendering");
+	RG_PROFILING_FUNCTION("Rendering");
 
 	fbo->Bind();
 	glClearColor(0.0f, 0.0f, 0.0f, 1);

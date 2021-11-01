@@ -5,7 +5,7 @@
 
 #include "Timer.h"
 
-#include "mmgr/mmgr.h"
+#include "Profiling.h"
 
 // ---------------------------------------------
 Timer::Timer()
