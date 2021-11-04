@@ -7,6 +7,7 @@
 #include "FileSystem.h"
 
 #include "IL/il.h"
+#include "glew/include/GL/glew.h"
 
 #include "Profiling.h"
 
@@ -45,10 +46,11 @@ void TextureLoader::ImportTexture(const aiMaterial* material, MaterialComponent*
 
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 		path = path.substr(0, path.find_last_of("."));
-		path = path.insert(0, LIBRARY_FOLDER);
+		path = path.insert(0, LIBRARY_FOLDER MATERIALS_FOLDER);
 		path += ".dds";
-		*component = new MaterialComponent(image, w, h, path);
+		//*component = new MaterialComponent(image, w, h, path);
 		Uint64 size = SaveTexture(*component, path);
+		*component = LoadTexture(path);
 	}
 }
 
@@ -76,10 +78,13 @@ Uint64 TextureLoader::SaveTexture(MaterialComponent* component, std::string& fil
 
 MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 {
+	char* buffer = nullptr;
+	unsigned int size = app->fs->Load(path.c_str(), &buffer);
+
 	ILuint image;
 	ilGenImages(1, &image);
 	ilBindImage(image);
-	ilLoadImage(path.c_str());
+	ilLoadL(IL_DDS, buffer, size);
 	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 	int w = ilGetInteger(IL_IMAGE_WIDTH);
 	int h = ilGetInteger(IL_IMAGE_HEIGHT);

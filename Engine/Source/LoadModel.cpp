@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Globals.h"
 #include "TextureLoader.h"
+#include "FileSystem.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 #include "IL/il.h"
@@ -27,6 +28,24 @@ void LoadModel::ReleaseInstance()
 
 LoadModel::~LoadModel()
 {
+}
+
+void LoadModel::ImportModel(std::string& path)
+{
+	Assimp::Importer import;
+	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	{
+		DEBUG_LOG("ERROR ASSIMP %s", import.GetErrorString());
+		return;
+	}
+	directory = path.substr(5, path.find_last_of('\\'));
+
+	std::string p = path.substr(0, path.find_last_of('.'));
+	p = p.substr(path.find_last_of('\\') + 1, p.size());
+
+	ProcessNode2(scene->mRootNode, scene);
 }
 
 void LoadModel::LoadingModel(std::string& path)
@@ -55,7 +74,9 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 	for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		MeshComponent* m = ProcessMesh(mesh, scene, obj);
+		MeshComponent* component;
+		LoadMesh(mesh->mName.C_Str(), &component);
+		obj->AddComponent(component);
 		obj->SetName(node->mName.C_Str());
 	}
 
@@ -71,6 +92,21 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 		{
 			ProcessNode(node->mChildren[i], scene, obj);
 		}
+	}
+}
+
+void LoadModel::ProcessNode2(aiNode* node, const aiScene* scene)
+{
+	for (unsigned int i = 0; i < node->mNumMeshes; ++i)
+	{
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		ProcessMesh2(mesh, scene);
+	}
+
+	// Repeat the process until there's no more children
+	for (unsigned int i = 0; i < node->mNumChildren; ++i)
+	{
+		ProcessNode2(node->mChildren[i], scene);
 	}
 }
 
@@ -153,6 +189,58 @@ MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameOb
 	return m;
 }
 
+void LoadModel::ProcessMesh2(aiMesh* mesh, const aiScene* scene)
+{
+	RG_PROFILING_FUNCTION("Process Mesh");
+	DEBUG_LOG("Processing mesh...");
+	std::vector<float3> vertices;
+	std::vector<float3> norms;
+	std::vector<unsigned int> indices;
+	std::vector<float2> texCoords;
+	
+	int numVertices = mesh->mNumVertices;
+	int numFaces = mesh->mNumFaces;
+
+	vertices.reserve(numVertices);
+	indices.reserve(numFaces * 3);
+	texCoords.reserve(numVertices);
+
+	for (unsigned int i = 0; i < numVertices; ++i)
+	{
+		float3 vertex;
+		vertex.x = mesh->mVertices[i].x;
+		vertex.y = mesh->mVertices[i].y;
+		vertex.z = mesh->mVertices[i].z;
+
+		float3 normals;
+		if (mesh->HasNormals())
+		{
+			normals.x = mesh->mNormals[i].x;
+			normals.y = mesh->mNormals[i].y;
+			normals.z = mesh->mNormals[i].z;
+		}
+
+		float2 coords;
+		coords.x = mesh->mTextureCoords[0][i].x;
+		coords.y = mesh->mTextureCoords[0][i].y;
+
+		norms.push_back(normals);
+		vertices.push_back(vertex);
+		texCoords.push_back(coords);
+	}
+
+	for (unsigned int i = 0; i < numFaces; ++i)
+	{
+		aiFace face = mesh->mFaces[i];
+		for (unsigned int j = 0; j < face.mNumIndices; ++j)
+		{
+			indices.push_back(face.mIndices[j]);
+		}
+	}
+
+	SaveMesh(mesh->mName.C_Str(), vertices, indices, norms, texCoords);
+}
+
 MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
 {
 	MaterialComponent* material = nullptr;
@@ -169,6 +257,99 @@ MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureTyp
 	}
 
 	return material;
+}
+
+Uint64 LoadModel::SaveMesh(const char* name, std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords)
+{
+	unsigned int header[4] = { vertices.size(), indices.size(), normals.size(), texCoords.size() };
+
+	uint size = sizeof(header) + sizeof(float3) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(float3) * normals.size() + sizeof(float2) * texCoords.size();
+
+	char* buffer = new char[size];
+	char* cursor = buffer;
+
+	uint bytes = sizeof(header);
+	memcpy(cursor, header, bytes);
+	cursor += bytes;
+
+	bytes = sizeof(vertices);
+	memcpy(cursor, vertices.data(), bytes);
+	cursor += bytes;
+
+	bytes = sizeof(indices);
+	memcpy(cursor, indices.data(), bytes);
+	cursor += bytes;
+
+	bytes = sizeof(normals);
+	memcpy(cursor, normals.data(), bytes);
+	cursor += bytes;
+
+	bytes = sizeof(texCoords);
+	memcpy(cursor, texCoords.data(), bytes);
+	cursor += bytes;
+
+	std::string meshName = LIBRARY_FOLDER MESHES_FOLDER;
+	meshName += name;
+	meshName += ".rgmesh";
+	
+	if (app->fs->Save(meshName.c_str(), cursor, size) > 0)
+		DEBUG_LOG("Mesh %s saved succesfully", meshName);
+
+	return size;
+}
+
+void LoadModel::LoadMesh(const char* name, MeshComponent** mesh)
+{
+	char* buffer = nullptr;
+
+	std::string meshPath = LIBRARY_FOLDER MESHES_FOLDER;
+	meshPath += name;
+	meshPath += ".rgmesh";
+	
+	if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
+	{
+		std::vector<float3> vertices;
+		std::vector<unsigned int> indices;
+		std::vector<float3> normals;
+		std::vector<float2> texCoords;
+
+		char* cursor = buffer;
+		unsigned int* header = new unsigned int[4];
+
+		// Loading header information
+		uint bytes = sizeof(header) * sizeof(unsigned int);
+		memcpy(header, buffer, bytes);
+		cursor += bytes;
+
+		// Setting information
+		vertices.reserve(header[0]);
+		indices.reserve(header[1]);
+		normals.reserve(header[2]);
+		texCoords.reserve(header[3]);
+
+		// Loading vertices
+		bytes = sizeof(float3) * vertices.size();
+		memcpy(vertices.data(), cursor, bytes);
+		cursor += bytes;
+
+		// Loading indices
+		bytes = sizeof(unsigned int) * indices.size();
+		memcpy(indices.data(), cursor, bytes);
+		cursor += bytes;
+
+		// Loading normals
+		bytes = sizeof(float3) * normals.size();
+		memcpy(normals.data(), cursor, bytes);
+		cursor += bytes;
+
+		// Loading texture coordinates
+		bytes = sizeof(float2) * texCoords.size();
+		memcpy(texCoords.data(), cursor, bytes);
+		
+		*mesh = new MeshComponent(vertices, indices, texCoords, normals);
+	}
+	else
+		DEBUG_LOG("Mesh file not found!");
 }
 
 void LoadModel::LoadingTransform(aiNode* node, GameObject* obj)

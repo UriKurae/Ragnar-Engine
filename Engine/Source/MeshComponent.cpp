@@ -49,6 +49,14 @@ MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int
 	ebo->Unbind();
 }
 
+MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3>& norm)
+{
+	vertices = vert;
+	indices = ind;
+	normals = norm;
+	texCoords = texCoord;
+}
+
 MeshComponent::~MeshComponent()
 {
 	RELEASE(vbo);

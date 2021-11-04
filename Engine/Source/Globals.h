@@ -28,6 +28,7 @@ void Log(const char file[], int line, const char* format, ...);
 #define LIBRARY_FOLDER "Library/"
 #define MODELS_FOLDER "Models/"
 #define MESHES_FOLDER "Meshes/"
+#define MATERIALS_FOLDER "Materials/"
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\

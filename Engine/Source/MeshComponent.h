@@ -28,7 +28,7 @@ public:
 	MeshComponent(GameObject* own, TransformComponent* trans);
 	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* material, std::vector<float2>& texCoord);
 	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
-	//MeshComponent(TransformComponent* trans) : transform(trans) {}
+	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3>& norm);
 	~MeshComponent();
 
 	void Draw() override;
