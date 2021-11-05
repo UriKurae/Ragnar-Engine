@@ -55,9 +55,42 @@ JSON_Status JsonParsing::SetNewJsonNumber(JSON_Object* node, const char* name, d
 	return json_object_set_number(node, name, number);
 }
 
+JSON_Status JsonParsing::SetNewJson3Number(JsonParsing& node, const char* name, float3 number) const
+{
+	JSON_Array* array = SetNewJsonArray(node.GetRootValue(), name);
+
+	json_array_append_number(array, number.x);
+	json_array_append_number(array, number.y);
+	
+	return json_array_append_number(array, number.z);
+}
+
+JSON_Status JsonParsing::SetNewJson4Number(JsonParsing& node, const char* name, Quat number) const
+{
+	JSON_Array* array = SetNewJsonArray(node.GetRootValue(), name);
+
+	json_array_append_number(array, number.x);
+	json_array_append_number(array, number.y);
+	json_array_append_number(array, number.z);
+
+	return json_array_append_number(array, number.w);
+}
+
 JSON_Status JsonParsing::SetNewJsonBool(JSON_Object* node, const char* name, bool boolean) const
 {
 	return json_object_set_boolean(node, name, boolean);
+}
+
+JSON_Array* JsonParsing::SetNewJsonArray(JSON_Value* parent, const char* name) const
+{
+	json_object_dotset_value(ValueToObject(parent), name, json_value_init_array());
+
+	return json_object_dotget_array(ValueToObject(parent), name);
+}
+
+JSON_Status JsonParsing::SetValueToArray(JSON_Array* jsonArray, JSON_Value* value)
+{
+	return json_array_append_value(jsonArray, value);
 }
 
 JsonParsing JsonParsing::SetChild(JSON_Value* parent, const char* name)

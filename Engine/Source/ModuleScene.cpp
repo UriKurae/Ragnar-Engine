@@ -7,6 +7,7 @@
 #include "MaterialComponent.h"
 #include "Primitives.h"
 #include "LoadModel.h"
+#include "FileSystem.h"
 
 #include "Profiling.h"
 
@@ -156,4 +157,30 @@ void ModuleScene::MoveGameObjectDown(GameObject* object)
 			break;
 		}
 	}
+}
+
+bool ModuleScene::LoadScene()
+{
+	return true;
+}
+
+bool ModuleScene::SaveScene()
+{
+	DEBUG_LOG("Saving Scene");
+
+	JsonParsing sceneFile;
+
+	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Scene");
+	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Game Objects");
+	root->OnSave(sceneFile, array);
+
+	char* buf;
+	uint size = sceneFile.Save(&buf);
+	
+	if (app->fs->Save(SCENES_FOLDER "scene.json", buf, size) > 0)
+		DEBUG_LOG("Scene saved succesfully");
+
+	RELEASE_ARRAY(buf);
+
+	return true;
 }

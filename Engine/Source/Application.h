@@ -54,6 +54,7 @@ private:
 
 	void SaveConfig();
 	void LoadConfig();
+
 public:
 	ModuleWindow* window;
 	ModuleInput* input;

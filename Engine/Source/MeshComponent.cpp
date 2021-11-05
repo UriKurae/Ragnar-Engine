@@ -133,6 +133,22 @@ void MeshComponent::OnEditor()
 	}
 }
 
+bool MeshComponent::OnLoad(JsonParsing& node, JSON_Array* array)
+{
+	return true;
+}
+
+bool MeshComponent::OnSave(JsonParsing& node, JSON_Array* array)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	return true;
+}
+
 void MeshComponent::CreateAABB()
 {
 	owner->SetAABB(vertices);

@@ -3,11 +3,17 @@
 #include <string>
 #include <vector>
 #include "Component.h"
+
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
+
+typedef unsigned int uint;
+
+typedef json_array_t JSON_Array;
+class JsonParsing;
 
 class GameObject
 {
@@ -27,6 +33,7 @@ public:
 	inline void SetName(const char* n) { name = n; }
 
 	char* GetNameBuffer();
+	inline uint const GetUUID() const { return uuid; }
 	inline const char* GetName() const { return name.c_str(); }
 	inline GameObject* GetParent() const { return parent; }
 	inline const bool& GetActive() const { return active; }
@@ -38,6 +45,9 @@ public:
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
+
+	void OnLoad(JsonParsing& node);
+	void OnSave(JsonParsing& node, JSON_Array* array);
 
 	template<typename T>
 	T* GetComponent();
@@ -55,6 +65,7 @@ private:
 	bool newComponent;
 
 	AABB boundingBox;
+	uint uuid;
 };
 
 template<typename T>

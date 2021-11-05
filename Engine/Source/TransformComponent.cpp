@@ -9,6 +9,7 @@
 
 TransformComponent::TransformComponent(GameObject* own)
 {
+	type = ComponentType::TRANSFORM;
 	position = { 0.0f, 0.0f, 0.0f }; 
 	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
@@ -72,6 +73,25 @@ void TransformComponent::SetRotation(Quat rot)
 void TransformComponent::SetScale(float3 sca)
 {
 	SetTransform(position, rotation, sca);
+}
+
+bool TransformComponent::OnLoad(JsonParsing& node, JSON_Array* array)
+{
+	return true;
+}
+
+bool TransformComponent::OnSave(JsonParsing& node, JSON_Array* array)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJson3Number(file, "Position", position);
+	file.SetNewJson4Number(file, "Quaternion", rotation);
+	file.SetNewJson3Number(file, "Scale", scale);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	return true;
 }
 
 void TransformComponent::SetChildTransform(float3 pos, Quat rot, float3 sca)

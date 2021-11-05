@@ -4,6 +4,7 @@
 #include "ModuleEditor.h"
 
 #include "GameObject.h"
+#include "MeshComponent.h"
 #include "FileSystem.h"
 
 #include "IL/il.h"
@@ -46,7 +47,7 @@ void TextureLoader::ImportTexture(const aiMaterial* material, aiTextureType type
 
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 		path = path.substr(0, path.find_last_of("."));
-		path = path.insert(0, LIBRARY_FOLDER MATERIALS_FOLDER);
+		path = path.insert(0, MATERIALS_FOLDER);
 		path += ".dds";
 		//*component = new MaterialComponent(image, w, h, path);
 		Uint64 size = SaveTexture(path);
@@ -82,7 +83,7 @@ MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 	path = path.substr(path.find_last_of("\\") + 1, path.length());
 	path = path.substr(0, path.find_last_of("."));
 
-	std::string p = LIBRARY_FOLDER MATERIALS_FOLDER + path;
+	std::string p = MATERIALS_FOLDER + path;
 	p += ".dds";
 
 	unsigned int size = app->fs->Load(p.c_str(), &buffer);

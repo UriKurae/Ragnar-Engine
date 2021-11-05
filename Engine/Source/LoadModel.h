@@ -1,16 +1,20 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "assimp/cimport.h"
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
 #include "assimp/postProcess.h"
-#include "MeshComponent.h"
-#include "MaterialComponent.h"
+
+#include "MathGeoLib/src/Math/float2.h"
+#include "MathGeoLib/src/Math/float3.h"
 
 class GameObject;
 class TransformComponent;
+class MeshComponent;
+class MaterialComponent;
 
 typedef uint64_t Uint64;
 

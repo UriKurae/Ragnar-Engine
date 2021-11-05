@@ -34,6 +34,9 @@ public:
 	void Draw() override;
 	void OnEditor() override;
 
+	bool OnLoad(JsonParsing& node, JSON_Array* array) override;
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
+
 	void CreateAABB();
 	
 	void ShowVertexNormals();

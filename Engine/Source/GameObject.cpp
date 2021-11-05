@@ -1,6 +1,11 @@
 #include "GameObject.h"
 #include "Globals.h"
 
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "MaterialComponent.h"
+#include "JsonParsing.h"
+
 #include "Imgui/imgui.h"
 
 #include "Profiling.h"
@@ -8,6 +13,9 @@
 GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false)
 {
 	boundingBox.SetNegativeInfinity();
+
+	LCG lcg;
+	uuid = lcg.IntFast();
 }
 
 GameObject::~GameObject()
@@ -188,5 +196,37 @@ void GameObject::MoveChildrenDown(GameObject* child)
 			children[i + 1] = aux;
 			break;
 		}
+	}
+}
+
+void GameObject::OnLoad(JsonParsing& node)
+{
+}
+
+void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "UUID", uuid);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
+
+	for (int i = 0; i < components.size(); ++i)
+	{
+		components[i]->OnSave(file, newArray);
+	}
+
+	node.SetValueToArray(array, file.GetRootValue());
+	//jsonFile = jsonFile.SetChild(jsonFile.GetRootValue(), "");
+	//
+	//jsonFile.SetNewJsonNumber(jsonFile.ValueToObject(jsonFile.GetRootValue()), "UUID", uuid);
+	//jsonFile.SetNewJsonNumber(jsonFile.ValueToObject(jsonFile.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
+	//jsonFile.SetNewJsonString(jsonFile.ValueToObject(jsonFile.GetRootValue()), "Name", name.c_str());
+
+	for (int i = 0; i < children.size(); ++i)
+	{
+		children[i]->OnSave(node, array);
 	}
 }

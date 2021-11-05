@@ -36,6 +36,9 @@ public:
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
 
+	bool LoadScene();
+	bool SaveScene();
+
 private:
 	GameObject* root;
 };
