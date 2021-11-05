@@ -32,7 +32,7 @@ public:
 	MaterialComponent* LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName);
 
 	Uint64 SaveMesh(const char* name, std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords);
-	void LoadMesh(const char* name, MeshComponent** mesh);
+	void LoadMesh(const char* name, MeshComponent* mesh);
 private:
 	LoadModel() {}
 	LoadModel(const LoadModel&) {}

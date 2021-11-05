@@ -55,6 +55,20 @@ MeshComponent::MeshComponent(std::vector<float3>& vert, std::vector<unsigned int
 	indices = ind;
 	normals = norm;
 	texCoords = texCoord;
+
+	type = ComponentType::MESH_RENDERER;
+	verticesNormals = false;
+	faceNormals = false;
+
+	vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
+	ebo = new IndexBuffer(indices.data(), indices.size());
+	glGenBuffers(1, &tbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	vbo->Unbind();
+	ebo->Unbind();
 }
 
 MeshComponent::~MeshComponent()
