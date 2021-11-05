@@ -25,7 +25,7 @@ void TextureLoader::ReleaseInstance()
 	RELEASE(instance);
 }
 
-void TextureLoader::ImportTexture(const aiMaterial* material, MaterialComponent** component, aiTextureType type, const char* typeName)
+void TextureLoader::ImportTexture(const aiMaterial* material, aiTextureType type, const char* typeName)
 {
 	for (unsigned int i = 0; i < 1; ++i)
 	{
@@ -49,12 +49,11 @@ void TextureLoader::ImportTexture(const aiMaterial* material, MaterialComponent*
 		path = path.insert(0, LIBRARY_FOLDER MATERIALS_FOLDER);
 		path += ".dds";
 		//*component = new MaterialComponent(image, w, h, path);
-		Uint64 size = SaveTexture(*component, path);
-		*component = LoadTexture(path);
+		Uint64 size = SaveTexture(path);
 	}
 }
 
-Uint64 TextureLoader::SaveTexture(MaterialComponent* component, std::string& fileName)
+Uint64 TextureLoader::SaveTexture(std::string& fileName)
 {
 	ILuint size;
 	ILubyte* data;
@@ -79,7 +78,14 @@ Uint64 TextureLoader::SaveTexture(MaterialComponent* component, std::string& fil
 MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 {
 	char* buffer = nullptr;
-	unsigned int size = app->fs->Load(path.c_str(), &buffer);
+
+	path = path.substr(path.find_last_of("\\") + 1, path.length());
+	path = path.substr(0, path.find_last_of("."));
+
+	std::string p = LIBRARY_FOLDER MATERIALS_FOLDER + path;
+	p += ".dds";
+
+	unsigned int size = app->fs->Load(p.c_str(), &buffer);
 
 	ILuint image;
 	ilGenImages(1, &image);
@@ -89,7 +95,7 @@ MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 	int w = ilGetInteger(IL_IMAGE_WIDTH);
 	int h = ilGetInteger(IL_IMAGE_HEIGHT);
 
-	return new MaterialComponent(image, w, h, path);
+	return new MaterialComponent(image, w, h, p);
 }
 
 void TextureLoader::LoadTextureToSelected(std::string& path)

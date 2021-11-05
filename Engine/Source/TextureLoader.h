@@ -13,8 +13,8 @@ public:
 	static TextureLoader* GetInstance();
 	static void ReleaseInstance();
 
-	void ImportTexture(const aiMaterial* material, MaterialComponent** component, aiTextureType type, const char* typeName);
-	Uint64 SaveTexture(MaterialComponent* component, std::string& fileName);
+	void ImportTexture(const aiMaterial* material, aiTextureType type, const char* typeName);
+	Uint64 SaveTexture(std::string& fileName);
 	MaterialComponent* LoadTexture(std::string& path);
 	void LoadTextureToSelected(std::string& path);
 private:
