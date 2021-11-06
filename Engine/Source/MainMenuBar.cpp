@@ -43,6 +43,10 @@ bool MainMenuBar::Update(float dt)
 
 			ImGui::Separator();
 
+			if (ImGui::MenuItem("Load", "Ctrl + L", &ret))
+			{
+				app->scene->LoadScene("Assets/Scenes/scene.json");
+			}
 			if (ImGui::MenuItem("Save", "Ctrl + S", &ret))
 			{
 				app->scene->SaveScene();

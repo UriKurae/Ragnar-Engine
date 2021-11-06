@@ -201,6 +201,18 @@ void GameObject::MoveChildrenDown(GameObject* child)
 
 void GameObject::OnLoad(JsonParsing& node)
 {
+	uuid = node.GetJsonNumber("UUID");
+	name = node.GetJsonString("Name");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
+
+	size_t size = node.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		Component* component = CreateComponent((ComponentType)c.GetJsonNumber("Type"));
+		component->OnLoad(c);
+	}
 }
 
 void GameObject::OnSave(JsonParsing& node, JSON_Array* array)

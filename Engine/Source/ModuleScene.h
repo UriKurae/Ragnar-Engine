@@ -36,7 +36,7 @@ public:
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
 
-	bool LoadScene();
+	bool LoadScene(const char* name);
 	bool SaveScene();
 
 private:

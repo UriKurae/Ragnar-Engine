@@ -40,7 +40,7 @@ public:
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }
 
-	virtual bool OnLoad(JsonParsing& node, JSON_Array* array) { return true; }
+	virtual bool OnLoad(JsonParsing& node) { return true; }
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) { return true; }
 
 public:

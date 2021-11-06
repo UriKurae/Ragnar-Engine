@@ -133,7 +133,7 @@ void MeshComponent::OnEditor()
 	}
 }
 
-bool MeshComponent::OnLoad(JsonParsing& node, JSON_Array* array)
+bool MeshComponent::OnLoad(JsonParsing& node)
 {
 	return true;
 }

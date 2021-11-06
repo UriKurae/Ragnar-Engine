@@ -108,8 +108,10 @@ void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
 	texBuffer->Unbind();
 }
 
-bool MaterialComponent::OnLoad(JsonParsing& node, JSON_Array* array)
+bool MaterialComponent::OnLoad(JsonParsing& node)
 {
+	
+
 	return true;
 }
 

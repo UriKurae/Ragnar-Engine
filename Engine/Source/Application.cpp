@@ -81,27 +81,8 @@ bool Application::Init()
 		RELEASE_ARRAY(buffer);
 	}
 
-	//JSON_Value* root = jsonFile.ParseFile(CONFIG_FILENAME);
-
-	//if (jsonFile.GetRootValue() == NULL)
-	//{
-	//	LOG("Couldn't load %s", CONFIG_FILENAME);
-	//	ret = false;
-	//}
-	
-	//fs.Init();
-
-	//JsonParsing application = jsonFile.GetChild(root, "App");
-
-	//cappedMs = application.GetJsonNumber("FPS");
-
 	//// Call Init() in all modules
 	std::list<Module*>::iterator item;
-
-	//for (item = listModules.begin(); item != listModules.end() && ret; ++item)
-	//{
-	//	ret = (*item)->Init(jsonFile.GetChild(root, (*item)->name));
-	//}
 
 	// After all Init calls we call Start() in all modules
 	DEBUG_LOG("Application Start --------------");

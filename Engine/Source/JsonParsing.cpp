@@ -17,6 +17,11 @@ JsonParsing::JsonParsing(const char* string)
 	}
 }
 
+JsonParsing::JsonParsing(JSON_Value* value)
+{
+	rootObject = value;
+}
+
 JsonParsing::~JsonParsing()
 {
 }
@@ -154,6 +159,34 @@ JsonParsing JsonParsing::GetChild(JSON_Value* parent, const char* name)
 	return child;
 }
 
+JsonParsing JsonParsing::GetJsonArrayValue(JSON_Array* array, int index) const
+{
+	return JsonParsing(json_array_get_value(array, index));
+}
+
+float3 JsonParsing::GetJson3Number(JsonParsing& node, const char* name)
+{
+	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
+
+	float x = json_array_get_number(array, 0);
+	float y = json_array_get_number(array, 1);
+	float z = json_array_get_number(array, 2);
+
+	return float3(x,y,z);
+}
+
+float4 JsonParsing::GetJson4Number(JsonParsing& node, const char* name)
+{
+	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
+
+	float x = json_array_get_number(array, 0);
+	float y = json_array_get_number(array, 1);
+	float z = json_array_get_number(array, 2);
+	float w = json_array_get_number(array, 3);
+
+	return float4(x, y, z, w);
+}
+
 JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* node) const
 {
 	JSON_Object* object = json_object_get_object(parentObject, node);
@@ -162,4 +195,14 @@ JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* n
 
 	DEBUG_LOG("Could not find node object");
 	return nullptr;
+}
+
+JSON_Array* JsonParsing::GetJsonArray(JSON_Object* parentObject, const char* node) const
+{
+	return json_object_dotget_array(parentObject, node);
+}
+
+size_t JsonParsing::GetJsonArrayCount(JSON_Array* array) const
+{
+	return json_array_get_count(array);
 }

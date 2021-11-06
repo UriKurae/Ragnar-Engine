@@ -75,8 +75,15 @@ void TransformComponent::SetScale(float3 sca)
 	SetTransform(position, rotation, sca);
 }
 
-bool TransformComponent::OnLoad(JsonParsing& node, JSON_Array* array)
+bool TransformComponent::OnLoad(JsonParsing& node)
 {
+	position = node.GetJson3Number(node, "Position");
+	float4 quat = node.GetJson4Number(node, "Quaternion");
+	rotation = Quat(quat.x, quat.y, quat.z, quat.w);
+	scale = node.GetJson3Number(node, "Scale");
+
+	SetTransform(position, rotation, scale);
+
 	return true;
 }
 

@@ -159,8 +159,54 @@ void ModuleScene::MoveGameObjectDown(GameObject* object)
 	}
 }
 
-bool ModuleScene::LoadScene()
+bool ModuleScene::LoadScene(const char* name)
 {
+	DEBUG_LOG("Loading Scene");
+
+	RELEASE(root);
+
+	char* buffer = nullptr;
+
+	app->fs->Load(name, &buffer);
+
+	if (buffer != nullptr)
+	{
+		JsonParsing sceneFile = JsonParsing(buffer);
+
+		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Game Objects");
+		
+		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
+		for (int i = 0; i < size; ++i)
+		{
+			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
+			if (go.GetJsonNumber("Parent UUID") == 0)
+			{
+				root = new GameObject();
+				root->OnLoad(go);
+			}
+			else if (go.GetJsonNumber("Parent UUID") == root->GetUUID())
+			{
+				GameObject* object = CreateGameObject(root);
+				object->OnLoad(go);
+			}
+			else
+			{
+				for (int i = 0; i < root->GetChilds().size(); ++i)
+				{
+					if (go.GetJsonNumber("Parent UUID") == root->GetChilds()[i]->GetUUID())
+					{
+						GameObject* object = CreateGameObject(root->GetChilds()[i]);
+						object->OnLoad(go);
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		DEBUG_LOG("Scene couldn't be loaded");
+	}
+
 	return true;
 }
 
@@ -179,6 +225,8 @@ bool ModuleScene::SaveScene()
 	
 	if (app->fs->Save(SCENES_FOLDER "scene.json", buf, size) > 0)
 		DEBUG_LOG("Scene saved succesfully");
+	else
+		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
 

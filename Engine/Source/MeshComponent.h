@@ -34,7 +34,7 @@ public:
 	void Draw() override;
 	void OnEditor() override;
 
-	bool OnLoad(JsonParsing& node, JSON_Array* array) override;
+	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void CreateAABB();
