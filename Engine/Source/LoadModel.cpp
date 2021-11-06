@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "TextureLoader.h"
 #include "FileSystem.h"
+#include "Mesh.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -84,9 +85,12 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 		LoadMesh(mesh->mName.C_Str(), component);
 		aiString str;
 		scene->mMaterials[mesh->mMaterialIndex]->GetTexture(aiTextureType_DIFFUSE, 0, &str);
-		MaterialComponent* material = TextureLoader::GetInstance()->LoadTexture(std::string(str.C_Str()));
-		component->SetMaterial(material);
-		obj->AddComponent(material);
+		obj->CreateComponent(ComponentType::MATERIAL);
+		MaterialComponent* material = obj->GetComponent<MaterialComponent>();
+		material->SetTexture(TextureLoader::GetInstance()->LoadTexture(std::string(str.C_Str())));
+		//MaterialComponent* material = TextureLoader::GetInstance()->LoadTexture(std::string(str.C_Str()));
+		//component->SetMaterial(material);
+		//obj->AddComponent(material);
 		obj->SetName(node->mName.C_Str());
 	}
 
@@ -273,7 +277,7 @@ MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureTyp
 		aux = aux.substr(aux.find_last_of("\\") + 1, aux.length());
 		std::string path = ASSETS_FOLDER;
 		path += aux;
-		material = TextureLoader::GetInstance()->LoadTexture(path);
+		//material = TextureLoader::GetInstance()->LoadTexture(path);
 	}
 
 	return material;
@@ -322,9 +326,13 @@ void LoadModel::LoadMesh(const char* name, MeshComponent* mesh)
 {
 	char* buffer = nullptr;
 
-	std::string meshPath = MESHES_FOLDER;
-	meshPath += name;
-	meshPath += ".rgmesh";
+	std::string meshPath(name);
+	if (meshPath.find(".rgmesh") == std::string::npos)
+	{
+		meshPath = MESHES_FOLDER;
+		meshPath += name;
+		meshPath += ".rgmesh";
+	}
 	
 	if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
 	{
@@ -366,7 +374,8 @@ void LoadModel::LoadMesh(const char* name, MeshComponent* mesh)
 		bytes = sizeof(float2) * texCoords.size();
 		memcpy(texCoords.data(), cursor, bytes);
 		
-		mesh->SetMesh(vertices, indices, texCoords, normals);
+		Mesh* m = new Mesh(vertices, indices, normals, texCoords, std::string(name));
+		mesh->SetMesh(m);
 	}
 	else
 		DEBUG_LOG("Mesh file not found!");

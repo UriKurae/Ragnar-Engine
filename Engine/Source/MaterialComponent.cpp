@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "GameObject.h"
 #include "Imgui/imgui.h"
+#include "TextureLoader.h"
 
 #include "MeshComponent.h"
 
@@ -110,7 +111,7 @@ void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
 
 bool MaterialComponent::OnLoad(JsonParsing& node)
 {
-	
+	diffuse = TextureLoader::GetInstance()->LoadTexture(std::string(node.GetJsonString("Path")));
 
 	return true;
 }

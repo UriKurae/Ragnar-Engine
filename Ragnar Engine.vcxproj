@@ -127,6 +127,7 @@
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
     <ClInclude Include="Engine\Source\MaterialComponent.h" />
     <ClInclude Include="Engine\Source\Menu.h" />
+    <ClInclude Include="Engine\Source\Mesh.h" />
     <ClInclude Include="Engine\Source\MeshComponent.h" />
     <ClInclude Include="Engine\Source\Module.h" />
     <ClInclude Include="Engine\Source\ModuleCamera3D.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Profiling.h" />
+    <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureLoader.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
@@ -175,6 +177,7 @@
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
     <ClCompile Include="Engine\Source\MaterialComponent.cpp" />
+    <ClCompile Include="Engine\Source\Mesh.cpp" />
     <ClCompile Include="Engine\Source\MeshComponent.cpp" />
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleEditor.cpp" />
@@ -183,6 +186,7 @@
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
+    <ClCompile Include="Engine\Source\Texture.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
     <ClCompile Include="Engine\Source\TextureLoader.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />

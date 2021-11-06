@@ -61,12 +61,12 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-GameObject* ModuleScene::CreateGameObject(GameObject* parent)
+GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransform)
 {
 	RG_PROFILING_FUNCTION("Creating Game Object");
 
 	GameObject* object = new GameObject();
-	object->CreateComponent(ComponentType::TRANSFORM);
+	if (createTransform) object->CreateComponent(ComponentType::TRANSFORM);
 	if (parent != nullptr)
 	{
 		parent->AddChild(object);
@@ -186,7 +186,7 @@ bool ModuleScene::LoadScene(const char* name)
 			}
 			else if (go.GetJsonNumber("Parent UUID") == root->GetUUID())
 			{
-				GameObject* object = CreateGameObject(root);
+				GameObject* object = CreateGameObject(root, false);
 				object->OnLoad(go);
 			}
 			else
@@ -195,7 +195,7 @@ bool ModuleScene::LoadScene(const char* name)
 				{
 					if (go.GetJsonNumber("Parent UUID") == root->GetChilds()[i]->GetUUID())
 					{
-						GameObject* object = CreateGameObject(root->GetChilds()[i]);
+						GameObject* object = CreateGameObject(root->GetChilds()[i], false);
 						object->OnLoad(go);
 					}
 				}

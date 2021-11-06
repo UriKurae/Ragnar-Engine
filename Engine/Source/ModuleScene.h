@@ -23,7 +23,7 @@ public:
 	bool Draw();
 	bool CleanUp() override;
 
-	GameObject* CreateGameObject(GameObject* parent);
+	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true);
 	inline std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
 		return root->GetChilds(); 

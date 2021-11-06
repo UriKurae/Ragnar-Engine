@@ -2,6 +2,7 @@
 #include "MaterialComponent.h"
 #include "Application.h"
 #include "ModuleEditor.h"
+#include "Texture.h"
 
 #include "GameObject.h"
 #include "MeshComponent.h"
@@ -76,11 +77,12 @@ Uint64 TextureLoader::SaveTexture(std::string& fileName)
 	return size;
 }
 
-MaterialComponent* TextureLoader::LoadTexture(std::string& path)
+Texture* TextureLoader::LoadTexture(std::string& path)
 {
 	char* buffer = nullptr;
 
 	path = path.substr(path.find_last_of("\\") + 1, path.length());
+	path = path.substr(path.find_last_of("/") + 1, path.length());
 	path = path.substr(0, path.find_last_of("."));
 
 	std::string p = MATERIALS_FOLDER + path;
@@ -96,7 +98,7 @@ MaterialComponent* TextureLoader::LoadTexture(std::string& path)
 	int w = ilGetInteger(IL_IMAGE_WIDTH);
 	int h = ilGetInteger(IL_IMAGE_HEIGHT);
 
-	return new MaterialComponent(image, w, h, p);
+	return new Texture(image, w, h, p);
 }
 
 void TextureLoader::LoadTextureToSelected(std::string& path)

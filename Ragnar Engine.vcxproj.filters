@@ -43,6 +43,9 @@
     <Filter Include="Sources\Buffers">
       <UniqueIdentifier>{2caa784c-4ed5-42a4-9742-39ce57bcd3cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Resources">
+      <UniqueIdentifier>{26d5840f-16b5-46f9-9d16-8f4c7e057a77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -210,6 +213,12 @@
     <ClInclude Include="Dependencies\Imgui\ImguiStyle.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Mesh.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Texture.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -340,6 +349,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Mesh.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Texture.cpp">
+      <Filter>Sources\Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

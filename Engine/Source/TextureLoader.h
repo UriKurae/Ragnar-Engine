@@ -6,6 +6,7 @@
 typedef uint64_t Uint64;
 
 class MaterialComponent;
+class Texture;
 
 class TextureLoader
 {
@@ -15,7 +16,7 @@ public:
 
 	void ImportTexture(const aiMaterial* material, aiTextureType type, const char* typeName);
 	Uint64 SaveTexture(std::string& fileName);
-	MaterialComponent* LoadTexture(std::string& path);
+	Texture* LoadTexture(std::string& path);
 	void LoadTextureToSelected(std::string& path);
 private:
 	TextureLoader() {}
