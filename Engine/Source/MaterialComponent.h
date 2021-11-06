@@ -34,6 +34,7 @@ public:
 	inline void SetId(int i) { id = i; }
 	inline void SetPath(const char* p) { path = p; }
 
+	inline Texture* GetTexture() const { return diffuse; }
 	inline const GLuint GetId() const { return id; }
 	inline const int GetWidth() const { return width; }
 	inline const int GetHeight() const { return height; }

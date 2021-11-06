@@ -81,8 +81,18 @@ bool TransformComponent::OnLoad(JsonParsing& node)
 	float4 quat = node.GetJson4Number(node, "Quaternion");
 	rotation = Quat(quat.x, quat.y, quat.z, quat.w);
 	scale = node.GetJson3Number(node, "Scale");
+	rotationEditor = node.GetJson3Number(node, "RotationEditor");
 
-	SetTransform(position, rotation, scale);
+	if (owner->GetParent() && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+	{
+		SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
+	}
+	else
+	{
+		SetTransform(position, rotation, scale);
+	}
+
+	RecursiveTransform(owner);
 
 	return true;
 }
@@ -94,6 +104,7 @@ bool TransformComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJson3Number(file, "Position", position);
 	file.SetNewJson4Number(file, "Quaternion", rotation);
+	file.SetNewJson3Number(file, "RotationEditor", rotationEditor);
 	file.SetNewJson3Number(file, "Scale", scale);
 
 	node.SetValueToArray(array, file.GetRootValue());
@@ -128,25 +139,6 @@ void TransformComponent::RecursiveTransform(GameObject* parent)
 	}
 }
 
-Quat TransformComponent::AngleToQuat(float angle, int x, int y, int z)
-{
-	Quat quaternion;
-
-	float rad = math::DegToRad(angle);
-
-	float newQuaternionW = math::Cos(rad / 2);
-	float newQuaternionX = x * math::Sin(rad / 2);
-	float newQuaternionY = y * math::Sin(rad / 2);
-	float newQuaternionZ = z * math::Sin(rad / 2);
-	quaternion.x = newQuaternionX;
-	quaternion.y = newQuaternionY;
-	quaternion.z = newQuaternionZ;
-	quaternion.w = newQuaternionW;
-
-	quaternion.Normalize();
-
-	return quaternion;
-}
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 {

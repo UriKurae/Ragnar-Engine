@@ -12,6 +12,10 @@ public:
 	void Bind();
 	void Unbind();
 
+	inline const std::string& GetPath() const { return path; }
+	inline const int& GetWidth() const { return width; }
+	inline const int& GetHeight() const { return height; }
+
 private:
 	unsigned int id;
 	int width;

@@ -32,8 +32,6 @@ public:
 	inline Quat GetRotation() const { return rotation; }
 	inline float3 GetScale() const { return scale; }
 
-	Quat AngleToQuat(float angle, int x, int y, int z);
-
 	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();
 private:
