@@ -14,7 +14,7 @@ ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
 	name = "Camera3D";
 
 	cameraFrustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-	cameraFrustum.SetViewPlaneDistances(1.0f, 5.0f);
+	cameraFrustum.SetViewPlaneDistances(1.0f, 100.0f);
 	cameraFrustum.SetPerspective(90.0f, 60.0f);
 	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
 }
@@ -214,35 +214,19 @@ void ModuleCamera3D::LookAt(float3& target)
 
 int ModuleCamera3D::ContainsAaBox(const AABB& boundingBox)
 {
-	float3 vCorner[8];
-
-	int iTotalIn = 0;
-	boundingBox.GetCornerPoints(vCorner);
-
-	for (int p = 0; p < 6; ++p)
+	
+	if (boundingBox.IsFinite())
 	{
-		int iInCount = 8;
-		int iPtIn = 1;
+		if (cameraFrustum.Contains(boundingBox))
+		{
+			return 1;
 
-		for (int i = 0; i < 8; ++i) {
-			// test this point against the planes
-
-			if (boundingBox.FacePlane(p).IsOnPositiveSide(vCorner[i]) == false)
-			{ //<-- “IsOnPositiveSide” from MathGeoLib
-				iPtIn = 0;
-				--iInCount;
-			}
 		}
-
-		if(iInCount == 0)
-			return 0;
-
-		// check if they were all on the right side of the plane
-		iTotalIn += iPtIn;
+		else if (cameraFrustum.Intersects(boundingBox))
+		{
+			return 2;
+		}
+		return 0;
 	}
-
-	if (iTotalIn == 6)
-		return 1;
-
-	return 2;
+	return -1;
 }

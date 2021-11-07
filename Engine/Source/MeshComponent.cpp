@@ -16,7 +16,7 @@
 
 #include "Profiling.h"
 
-MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
+MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f), vboAabb(nullptr), eboAabb(nullptr)
 {
 	type = ComponentType::MESH_RENDERER;
 	owner = own;
@@ -39,17 +39,20 @@ void MeshComponent::Draw()
 
 	if (material != nullptr) material->BindTexture();
 	
-	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+	if (mesh != nullptr && app->camera->ContainsAaBox(localBoundingBox) == 1 || app->camera->ContainsAaBox(localBoundingBox) == 2) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	if (material != nullptr) material->UnbindTexture();
 	
-	vboAabb->Bind();
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	eboAabb->Bind();
-	glLineWidth(2.0f);
-	glDrawElements(GL_LINES, eboAabb->GetSize(), GL_UNSIGNED_INT, NULL);
-	glLineWidth(1.0f);
-	vboAabb->Unbind();
-	eboAabb->Unbind();
+	if (vboAabb && eboAabb)
+	{
+		vboAabb->Bind();
+		glVertexPointer(3, GL_FLOAT, 0, NULL);
+		eboAabb->Bind();
+		glLineWidth(2.0f);
+		glDrawElements(GL_LINES, eboAabb->GetSize(), GL_UNSIGNED_INT, NULL);
+		glLineWidth(1.0f);
+		vboAabb->Unbind();
+		eboAabb->Unbind();
+	}
 
 	glPopMatrix();
 
