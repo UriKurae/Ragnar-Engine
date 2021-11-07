@@ -14,22 +14,10 @@ class TransformComponent;
 class MaterialComponent;
 class Mesh;
 
-//struct Texture
-//{
-//	GLuint id;
-//	const char* type;
-//	int width;
-//	int height;
-//	GLubyte* data;
-//};
-
 class MeshComponent : public Component
 {
 public:
 	MeshComponent(GameObject* own, TransformComponent* trans);
-	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, MaterialComponent* material, std::vector<float2>& texCoord);
-	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
-	MeshComponent(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3>& norm);
 	~MeshComponent();
 
 	void Draw() override;
@@ -39,27 +27,13 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void CreateAABB();
-	
-	void ShowVertexNormals();
-	void ShowFaceNormals();
 
-	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3>& norm);
 	void SetMesh(Mesh* m) { mesh = m; }
-	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord);
+	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3> norm, std::string& path);
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 
 private:
-	VertexBuffer* vbo;
-	IndexBuffer* ebo;
-	//Texture texture;
-	unsigned int tbo;
-
-	std::vector<float3> vertices;
-	std::vector<float3> normals;
-	std::vector<unsigned int> indices;
-	std::vector<float2> texCoords;
-
 	TransformComponent* transform;
 	MaterialComponent* material;
 

@@ -34,6 +34,7 @@ Mesh::~Mesh()
 
 	RELEASE(vbo);
 	RELEASE(ebo);
+	glDeleteBuffers(1, &tbo);
 }
 
 void Mesh::Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, float& colorLength)

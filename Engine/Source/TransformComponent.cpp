@@ -77,6 +77,7 @@ void TransformComponent::SetScale(float3 sca)
 
 bool TransformComponent::OnLoad(JsonParsing& node)
 {
+	active = node.GetJsonBool("Active");
 	position = node.GetJson3Number(node, "Position");
 	float4 quat = node.GetJson4Number(node, "Quaternion");
 	rotation = Quat(quat.x, quat.y, quat.z, quat.w);
@@ -102,6 +103,7 @@ bool TransformComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJson3Number(file, "Position", position);
 	file.SetNewJson4Number(file, "Quaternion", rotation);
 	file.SetNewJson3Number(file, "RotationEditor", rotationEditor);

@@ -121,7 +121,8 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);
-		GetComponent<MeshComponent>()->SetMaterial((MaterialComponent*)component);
+		MeshComponent* m = GetComponent<MeshComponent>();
+		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
 		break;
 	}
 
@@ -204,6 +205,7 @@ void GameObject::OnLoad(JsonParsing& node)
 {
 	uuid = node.GetJsonNumber("UUID");
 	name = node.GetJsonString("Name");
+	active = node.GetJsonBool("Active");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
 
@@ -223,6 +225,7 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "UUID", uuid);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
 

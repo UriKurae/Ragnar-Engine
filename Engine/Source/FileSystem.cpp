@@ -3,6 +3,9 @@
 #include "Globals.h"
 #include "LoadModel.h"
 #include "TextureLoader.h"
+#include "ModuleEditor.h"
+#include "GameObject.h"
+#include "MaterialComponent.h"
 
 #include "SDL/include/SDL_filesystem.h"
 #include "assimp/cimport.h"
@@ -197,7 +200,7 @@ void FileSystem::LoadFile(std::string& path)
 		if (*s == extension)
 		{
 			RG_PROFILING_FUNCTION("Loading Texture");
-			TextureLoader::GetInstance()->LoadTextureToSelected(path);
+			TextureLoader::GetInstance()->LoadTexture(path, app->editor->GetSelected()->GetComponent<MaterialComponent>());
 			return;
 		}
 	}

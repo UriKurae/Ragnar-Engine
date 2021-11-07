@@ -9,73 +9,50 @@
 
 #include "Profiling.h"
 
-TextureBuffer* MaterialComponent::checkerBuffer = nullptr;
-
-MaterialComponent::MaterialComponent(GameObject* own) : id(0), width(0), height(0), path(""), texBuffer(nullptr)
+MaterialComponent::MaterialComponent(GameObject* own)
 {
 	type = ComponentType::MATERIAL;
+	diffuse = nullptr;
+	checkerImage = nullptr;
 	owner = own;
-	owner->GetComponent<MeshComponent>()->SetMaterial(this);
 	checker = false;
-	CreateChecker();
 
-	checkerBuffer = new TextureBuffer(0, 64, 64, *checkerImage[0]);
-	active = true;
-}
-
-MaterialComponent::MaterialComponent(int i, int w, int h, std::string& p) : id(i), width(w), height(h), path(p)
-{
-	type = ComponentType::MATERIAL;
-	texBuffer = new TextureBuffer(i, w, h);
-	checker = false;
-	CreateChecker();
-
-	checkerBuffer = new TextureBuffer(0, 64, 64, *checkerImage[0]);
-
-	texBuffer->Unbind();
-	active = true;
-}
-
-MaterialComponent::MaterialComponent(int i, int w, int h, GLubyte* data) : id(i), width(w), height(h)
-{
-	type = ComponentType::MATERIAL;
-	texBuffer = new TextureBuffer(i, w, h, data);
-	checker = false;
-	CreateChecker();
-
-	checkerBuffer = new TextureBuffer(0, 64, 64, *checkerImage[0]);
-
-	texBuffer->Unbind();
+	TextureLoader::GetInstance()->LoadTexture(std::string("Checker"), &checkerImage);
 	active = true;
 }
 
 MaterialComponent::~MaterialComponent()
 {
-	RELEASE(texBuffer);
+	RELEASE(diffuse);
+	RELEASE(checkerImage);
 }
 
 void MaterialComponent::OnEditor()
 {
+	ImGui::PushID(this);
+
 	if (ImGui::CollapsingHeader("Material"))
 	{
 		Checkbox(this, "Active", active);
 		if (checker)
 		{
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "Default checker's texture");
+			ImGui::Text("Path: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", checkerImage->GetPath().c_str());
 			ImGui::Text("Width: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 64);
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", checkerImage->GetWidth());
 			ImGui::Text("Height: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 64);
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", checkerImage->GetHeight());
 			ImGui::Checkbox("Checker Image", &checker);
-			ImGui::Image((ImTextureID)checkerBuffer->GetID(), ImVec2(128, 128));
+			ImGui::Image((ImTextureID)checkerImage->GetId(), ImVec2(128, 128));
 		}
-		else if (texBuffer != nullptr)
+		else if (diffuse != nullptr)
 		{
 			ImGui::Text("Path: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diffuse->GetPath());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diffuse->GetPath().c_str());
 			ImGui::Text("Width: ");
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diffuse->GetWidth());
@@ -83,7 +60,7 @@ void MaterialComponent::OnEditor()
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diffuse->GetHeight());
 			ImGui::Checkbox("Checker Image", &checker);
-			ImGui::Image((ImTextureID)texBuffer->GetID(), ImVec2(128, 128));
+			ImGui::Image((ImTextureID)diffuse->GetId(), ImVec2(128, 128));
 		}
 		else
 		{
@@ -98,6 +75,8 @@ void MaterialComponent::OnEditor()
 		}
 		ImGui::Separator();
 	}
+
+	ImGui::PopID();
 }
 
 void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
@@ -112,7 +91,9 @@ void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
 
 bool MaterialComponent::OnLoad(JsonParsing& node)
 {
-	diffuse = TextureLoader::GetInstance()->LoadTexture(std::string(node.GetJsonString("Path")));
+	RELEASE(diffuse);
+	TextureLoader::GetInstance()->LoadTexture(std::string(node.GetJsonString("Path")), this);
+	active = node.GetJsonBool("Active");
 
 	return true;
 }
@@ -123,9 +104,9 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", diffuse->GetPath().c_str());
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	
 	node.SetValueToArray(array, file.GetRootValue());
-	
 
 	return true;
 }
@@ -134,11 +115,11 @@ void MaterialComponent::BindTexture()
 {
 	if (checker)
 	{
-		if (checkerBuffer) checkerBuffer->Bind();
+		if (checkerImage) checkerImage->Bind();
 	}
 	else
 	{
-		if (texBuffer) texBuffer->Bind();
+		if (diffuse) diffuse->Bind();
 	}
 }
 
@@ -146,25 +127,10 @@ void MaterialComponent::UnbindTexture()
 {
 	if (checker)
 	{
-		if (checkerBuffer) checkerBuffer->Unbind();
+		if (checkerImage) checkerImage->Unbind();
 	}
 	else
 	{
-		if (texBuffer) texBuffer->Unbind();
-	}
-}
-
-void MaterialComponent::CreateChecker()
-{
-	for (int i = 0; i < 64; ++i)
-	{
-		for (int j = 0; j < 64; ++j)
-		{
-			GLubyte c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
-			checkerImage[i][j][0] = (GLubyte)c;
-			checkerImage[i][j][1] = (GLubyte)c;
-			checkerImage[i][j][2] = (GLubyte)c;
-			checkerImage[i][j][3] = (GLubyte)255;
-		}
+		if (diffuse) diffuse->Unbind();
 	}
 }

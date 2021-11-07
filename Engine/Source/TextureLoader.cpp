@@ -43,8 +43,6 @@ void TextureLoader::ImportTexture(const aiMaterial* material, aiTextureType type
 		ilBindImage(image);
 		ilLoadImage(path.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-		int w = ilGetInteger(IL_IMAGE_WIDTH);
-		int h = ilGetInteger(IL_IMAGE_HEIGHT);
 
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 		path = path.substr(0, path.find_last_of("."));
@@ -52,7 +50,25 @@ void TextureLoader::ImportTexture(const aiMaterial* material, aiTextureType type
 		path += ".dds";
 		//*component = new MaterialComponent(image, w, h, path);
 		Uint64 size = SaveTexture(path);
+		ilDeleteImages(1, &image);
 	}
+}
+
+void TextureLoader::ImportTexture(std::string& path)
+{
+	ILuint image;
+	ilGenImages(1, &image);
+	ilBindImage(image);
+	ilLoadImage(path.c_str());
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+	path = path.substr(path.find_last_of("/") + 1, path.length());
+	path = path.substr(0, path.find_last_of("."));
+	path = path.insert(0, MATERIALS_FOLDER);
+	path += ".dds";
+
+	Uint64 size = SaveTexture(path);
+	ilDeleteImages(1, &image);
 }
 
 Uint64 TextureLoader::SaveTexture(std::string& fileName)
@@ -77,7 +93,7 @@ Uint64 TextureLoader::SaveTexture(std::string& fileName)
 	return size;
 }
 
-Texture* TextureLoader::LoadTexture(std::string& path)
+void TextureLoader::LoadTexture(std::string& path, MaterialComponent* material)
 {
 	char* buffer = nullptr;
 
@@ -90,43 +106,81 @@ Texture* TextureLoader::LoadTexture(std::string& path)
 
 	unsigned int size = app->fs->Load(p.c_str(), &buffer);
 
-	ILuint image;
-	ilGenImages(1, &image);
-	ilBindImage(image);
-	ilLoadL(IL_DDS, buffer, size);
-	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-	int w = ilGetInteger(IL_IMAGE_WIDTH);
-	int h = ilGetInteger(IL_IMAGE_HEIGHT);
-
-	return new Texture(image, w, h, p);
-}
-
-void TextureLoader::LoadTextureToSelected(std::string& path)
-{
-	if (app->editor->GetSelected() != nullptr)
+	if (size > 0)
 	{
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage(path.c_str());
-		//ilLoadImage(str.C_Str());
+		ilLoadL(IL_DDS, buffer, size);
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		int w = ilGetInteger(IL_IMAGE_WIDTH);
 		int h = ilGetInteger(IL_IMAGE_HEIGHT);
 
-		if (app->editor->GetSelected()->GetComponent<MaterialComponent>() != nullptr)
-		{
-			app->editor->GetSelected()->GetComponent<MaterialComponent>()->SetNewMaterial(image, w, h, path);
-		}
-		else
-		{
-			MaterialComponent* material = new MaterialComponent(image, w, h, path);
-			app->editor->GetSelected()->GetComponent<MeshComponent>()->SetMaterial(material);
-			app->editor->GetSelected()->AddComponent(material);
-		}
+		GLubyte* data = ilGetData();
+
+		material->SetTexture(new Texture(image, w, h, data, p));
+
+		ilDeleteImages(1, &image);
 	}
-	else
-	{
-		DEBUG_LOG("There's no game object selected");
-	}
+
+	RELEASE_ARRAY(buffer);
 }
+
+void TextureLoader::LoadTexture(std::string& path, Texture** checker)
+{
+	char* buffer = nullptr;
+
+	std::string p = MATERIALS_FOLDER + path;
+	p += ".dds";
+
+	unsigned int size = app->fs->Load(p.c_str(), &buffer);
+
+	if (size > 0)
+	{
+		ILuint image;
+		ilGenImages(1, &image);
+		ilBindImage(image);
+		ilLoadL(IL_DDS, buffer, size);
+		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+		int w = ilGetInteger(IL_IMAGE_WIDTH);
+		int h = ilGetInteger(IL_IMAGE_HEIGHT);
+
+		GLubyte* data = ilGetData();
+
+		*checker = new Texture(image, w, h, data, p);
+
+		ilDeleteImages(1, &image);
+	}
+
+	RELEASE_ARRAY(buffer);
+}
+
+//void TextureLoader::LoadTextureToSelected(std::string& path)
+//{
+//	if (app->editor->GetSelected() != nullptr)
+//	{
+//		ILuint image;
+//		ilGenImages(1, &image);
+//		ilBindImage(image);
+//		ilLoadImage(path.c_str());
+//		//ilLoadImage(str.C_Str());
+//		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+//		int w = ilGetInteger(IL_IMAGE_WIDTH);
+//		int h = ilGetInteger(IL_IMAGE_HEIGHT);
+//
+//		if (app->editor->GetSelected()->GetComponent<MaterialComponent>() != nullptr)
+//		{
+//			app->editor->GetSelected()->GetComponent<MaterialComponent>()->SetNewMaterial(image, w, h, path);
+//		}
+//		else
+//		{
+//			MaterialComponent* material = new MaterialComponent(image, w, h, path);
+//			app->editor->GetSelected()->GetComponent<MeshComponent>()->SetMaterial(material);
+//			app->editor->GetSelected()->AddComponent(material);
+//		}
+//	}
+//	else
+//	{
+//		DEBUG_LOG("There's no game object selected");
+//	}
+//}

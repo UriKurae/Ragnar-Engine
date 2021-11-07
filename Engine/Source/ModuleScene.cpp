@@ -8,6 +8,7 @@
 #include "Primitives.h"
 #include "LoadModel.h"
 #include "FileSystem.h"
+#include "TextureLoader.h"
 
 #include "Profiling.h"
 
@@ -89,35 +90,36 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 	std::vector<unsigned int> indices;
 	std::vector<float2> texCoords;
 
-	MeshComponent* mesh = nullptr;
+	std::string path;
 
 	switch (type)
 	{
 	case Object3D::CUBE:
 		object->SetName("Cube");
 		RCube::CreateCube(vertices, indices, texCoords);
+		path = MESHES_FOLDER + std::string("Cube.rgmesh");
 		break;
 	case Object3D::PYRAMIDE:
 		object->SetName("Pyramide");
 		RPyramide::CreatePyramide(vertices, indices, texCoords);
+		path = MESHES_FOLDER + std::string("Pyramide.rgmesh");
 		break;
 	case Object3D::SPHERE:
 		object->SetName("Sphere");
 		RSphere::CreateSphere(vertices, normals, indices, texCoords);
+		path = MESHES_FOLDER + std::string("Sphere.rgmesh");
 		break;
 	case Object3D::CYLINDER:
 		object->SetName("Cylinder");
 		RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
+		path = MESHES_FOLDER + std::string("Cylinder.rgmesh");
 		break;
 	}
 
 	if (!vertices.empty())
 	{
-		mesh = new MeshComponent(object, object->GetComponent<TransformComponent>());
-		mesh->SetMesh(vertices, indices, texCoords, normals);
-		mesh->SetOwner(object);
-		mesh->SetTransform(object->GetComponent<TransformComponent>());
-		object->AddComponent(mesh);
+		MeshComponent* mesh = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);;
+		mesh->SetMesh(vertices, indices, texCoords, normals, path);
 	}
 
 	return object;
@@ -206,6 +208,8 @@ bool ModuleScene::LoadScene(const char* name)
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
+
+	RELEASE_ARRAY(buffer);
 
 	return true;
 }
