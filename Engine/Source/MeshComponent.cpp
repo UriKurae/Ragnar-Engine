@@ -1,8 +1,10 @@
+#include "Application.h"
 #include "MeshComponent.h"
 #include "TransformComponent.h"
 #include "MaterialComponent.h"
 #include "GameObject.h"
 #include "Globals.h"
+#include "ModuleCamera3D.h"
 
 #include "Mesh.h"
 #include "LoadModel.h"
@@ -34,13 +36,21 @@ void MeshComponent::Draw()
 	glPushMatrix();
 	/*glMultTransposeMatrixf(transform->GetTransform().ptr());*/
 	glMultMatrixf(transform->GetTransform().Transposed().ptr());
-	
+
 	if (material != nullptr) material->BindTexture();
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
-	
 	if (material != nullptr) material->UnbindTexture();
 	
+	vboAabb->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	eboAabb->Bind();
+	glLineWidth(2.0f);
+	glDrawElements(GL_LINES, eboAabb->GetSize(), GL_UNSIGNED_INT, NULL);
+	glLineWidth(1.0f);
+	vboAabb->Unbind();
+	eboAabb->Unbind();
+
 	glPopMatrix();
 
 	glDisableClientState(GL_VERTEX_ARRAY);
@@ -93,15 +103,76 @@ bool MeshComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void MeshComponent::CreateAABB()
+void MeshComponent::SetMesh(Mesh* m)
 {
-	//owner->SetAABB(vertices);
+	mesh = m;
+	localBoundingBox.SetNegativeInfinity();
+	localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
+
+	owner->SetAABB(localBoundingBox);
+
+	float3 corners[8];
+	localBoundingBox.GetCornerPoints(corners);
+
+	unsigned int indices[24] = {
+	0,1,
+	1,3,
+	3,2,
+	2,0,
+
+	1,5,
+	4,6,
+	7,3,
+
+	6,7,
+	6,2,
+	
+	7,5,
+	4,5,
+
+	4,0
+	};
+
+	eboAabb = new IndexBuffer(indices, 24);
+	vboAabb = new VertexBuffer(corners, sizeof(float3) * 8);
+	eboAabb->Unbind();
+	vboAabb->Unbind();
+
 }
 
 void MeshComponent::SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3> norm, std::string& path)
 {
 	RELEASE(mesh);
 	mesh = new Mesh(vert, ind, norm, texCoord, path);
+	localBoundingBox.SetNegativeInfinity();
+	localBoundingBox.Enclose(vert.data(), vert.size());
 
-	//owner->SetAABB(vertices);
+	owner->SetAABB(localBoundingBox);
+
+	float3 corners[8];
+	localBoundingBox.GetCornerPoints(corners);
+
+	unsigned int indices[24] = {
+	0,1,
+	1,3,
+	3,2,
+	2,0,
+
+	1,5,
+	4,6,
+	7,3,
+
+	6,7,
+	6,2,
+
+	7,5,
+	4,5,
+
+	4,0
+	};
+
+	eboAabb = new IndexBuffer(indices, 24);
+	vboAabb = new VertexBuffer(corners, sizeof(float3) * 8);
+	eboAabb->Unbind();
+	vboAabb->Unbind();
 }

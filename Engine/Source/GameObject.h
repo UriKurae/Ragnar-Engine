@@ -7,6 +7,7 @@
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
+#include "CameraComponent.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 
@@ -39,9 +40,9 @@ public:
 	inline const bool& GetActive() const { return active; }
 	inline std::vector<GameObject*>& GetChilds() { return children; }
 	void SetAABB(std::vector<float3>& vertices);
-	void GameObject::SetTotalAABB();
-	inline AABB GetAABB() { return boundingBox; }
-	inline void SetAABB(AABB newAABB) { boundingBox = newAABB; }
+	void SetTotalAABB();
+	inline AABB GetAABB() { return globalAabb; }
+	void SetAABB(AABB newAABB);
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
@@ -64,7 +65,9 @@ private:
 
 	bool newComponent;
 
-	AABB boundingBox;
+	AABB globalAabb;
+	OBB globalObb;
+
 	uint uuid;
 };
 

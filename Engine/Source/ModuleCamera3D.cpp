@@ -211,3 +211,38 @@ void ModuleCamera3D::LookAt(float3& target)
 	cameraFrustum.SetFront(lookAt.MulDir(cameraFrustum.Front()).Normalized());
 	cameraFrustum.SetUp(lookAt.MulDir(cameraFrustum.Up()).Normalized());
 }
+
+int ModuleCamera3D::ContainsAaBox(const AABB& boundingBox)
+{
+	float3 vCorner[8];
+
+	int iTotalIn = 0;
+	boundingBox.GetCornerPoints(vCorner);
+
+	for (int p = 0; p < 6; ++p)
+	{
+		int iInCount = 8;
+		int iPtIn = 1;
+
+		for (int i = 0; i < 8; ++i) {
+			// test this point against the planes
+
+			if (boundingBox.FacePlane(p).IsOnPositiveSide(vCorner[i]) == false)
+			{ //<-- “IsOnPositiveSide” from MathGeoLib
+				iPtIn = 0;
+				--iInCount;
+			}
+		}
+
+		if(iInCount == 0)
+			return 0;
+
+		// check if they were all on the right side of the plane
+		iTotalIn += iPtIn;
+	}
+
+	if (iTotalIn == 6)
+		return 1;
+
+	return 2;
+}

@@ -12,7 +12,7 @@
 
 GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false)
 {
-	boundingBox.SetNegativeInfinity();
+	globalAabb.SetNegativeInfinity();
 
 	LCG lcg;
 	uuid = lcg.IntFast();
@@ -119,6 +119,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::CAMERA:
+		component = new CameraComponent(this);
+		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);
 		MeshComponent* m = GetComponent<MeshComponent>();
@@ -153,7 +156,7 @@ char* GameObject::GetNameBuffer()
 
 void GameObject::SetAABB(std::vector<float3>& vertices)
 {
-	boundingBox.Enclose(vertices.data(), vertices.size());
+	globalAabb.Enclose(vertices.data(), vertices.size());
 }
 
 void GameObject::SetTotalAABB()
@@ -161,8 +164,17 @@ void GameObject::SetTotalAABB()
 	for (int i = 0; i < children.size(); ++i)
 	{
 		children[i]->SetTotalAABB();
-		boundingBox.Enclose(children[i]->GetAABB());
+		globalAabb.Enclose(children[i]->GetAABB());
 	}
+}
+
+void GameObject::SetAABB(AABB newAABB)
+{
+	globalObb = newAABB;
+	globalObb.Transform(GetComponent<TransformComponent>()->GetTransform());
+
+	globalAabb.SetNegativeInfinity();
+	globalAabb.Enclose(globalObb);
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)

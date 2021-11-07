@@ -26,9 +26,7 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void CreateAABB();
-
-	void SetMesh(Mesh* m) { mesh = m; }
+	void SetMesh(Mesh* m);
 	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3> norm, std::string& path);
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
@@ -44,4 +42,9 @@ private:
 	bool verticesNormals;
 
 	Mesh* mesh;
+
+	AABB localBoundingBox;
+
+	VertexBuffer* vboAabb;
+	IndexBuffer* eboAabb;
 };

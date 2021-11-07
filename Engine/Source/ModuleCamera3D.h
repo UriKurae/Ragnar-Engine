@@ -17,6 +17,7 @@ public:
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void LookAt(float3& target);
+	int ContainsAaBox(const AABB& boundingBox);
 
 public:
 	Frustum cameraFrustum;

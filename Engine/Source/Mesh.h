@@ -20,6 +20,7 @@ public:
 
 	inline const char* GetPath() const { return path.c_str(); }
 	inline const int& GetVerticesSize() const { return vertices.size(); }
+	inline const float3* GetVerticesData() const { return vertices.data(); }
 	inline const int& GetIndicesSize() const { return indices.size(); }
 
 
