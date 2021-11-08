@@ -226,6 +226,7 @@ void TransformComponent::ShowTransformationInfo()
 		else
 			SetTranslation(position);
 
+		RG_PROFILING_FUNCTION("Recursive");
 		RecursiveTransform(owner);
 	}
 	//{

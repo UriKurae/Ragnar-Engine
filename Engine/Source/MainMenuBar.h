@@ -11,7 +11,8 @@ enum class Menus
 	CONFIGURATION = 1,
 	ABOUT = 2,
 	INSPECTOR = 3,
-	HIERARCHY = 4
+	HIERARCHY = 4,
+	CONTENT_BROWSER = 5,
 };
 
 class MainMenuBar : public Menu

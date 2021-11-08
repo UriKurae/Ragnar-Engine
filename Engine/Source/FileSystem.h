@@ -35,6 +35,9 @@ public:
 
 	void LoadFile(std::string& path);
 
+	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
+	inline const bool IsDirectory(const char* file) const { return PHYSFS_isDirectory(file) != 0; }
+
 private:
 	void CreateAssimpIO();
 

@@ -57,6 +57,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,6 +115,7 @@
     <ClInclude Include="Engine\Source\Component.h" />
     <ClInclude Include="Engine\Source\ConfigurationMenu.h" />
     <ClInclude Include="Engine\Source\ConsoleMenu.h" />
+    <ClInclude Include="Engine\Source\ContentBrowserMenu.h" />
     <ClInclude Include="Engine\Source\FileSystem.h" />
     <ClInclude Include="Engine\Source\Framebuffer.h" />
     <ClInclude Include="Engine\Source\GameObject.h" />
@@ -165,6 +167,7 @@
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
+    <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp" />
     <ClCompile Include="Engine\Source\Framebuffer.cpp" />
     <ClCompile Include="Engine\Source\GameObject.cpp" />

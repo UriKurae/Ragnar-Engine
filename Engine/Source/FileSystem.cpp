@@ -206,6 +206,24 @@ void FileSystem::LoadFile(std::string& path)
 	}
 }
 
+void FileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList)
+{
+	char** rc = PHYSFS_enumerateFiles(directory);
+	char** i;
+
+	std::string dir(directory);
+
+	for (i = rc; *i != nullptr; ++i)
+	{
+		if (PHYSFS_isDirectory((dir + *i).c_str()))
+			dirList.push_back(dir + *i + "/");
+		else
+			fileList.push_back(dir + *i);
+	}
+
+	PHYSFS_freeList(rc);
+}
+
 void FileSystem::CreateAssimpIO()
 {
 	assimpIO = new aiFileIO;

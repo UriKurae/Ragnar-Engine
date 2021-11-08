@@ -9,7 +9,7 @@
 
 #include "Profiling.h"
 
-ConfigurationMenu::ConfigurationMenu() : Menu(true)
+ConfigurationMenu::ConfigurationMenu() : Menu(false)
 {
 	memoryCount = 0;
 

@@ -222,6 +222,9 @@
     <ClInclude Include="Engine\Source\CameraComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ContentBrowserMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -361,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CameraComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

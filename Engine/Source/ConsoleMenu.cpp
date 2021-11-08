@@ -5,7 +5,7 @@
 
 #include "Profiling.h"
 
-ConsoleMenu::ConsoleMenu() : Menu(true)
+ConsoleMenu::ConsoleMenu() : Menu(false)
 {
 }
 
