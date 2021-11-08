@@ -1,3 +1,5 @@
+#include "Application.h"
+#include "ModuleScene.h"
 #include "GameObject.h"
 #include "Globals.h"
 
@@ -5,15 +7,18 @@
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
 #include "JsonParsing.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
+#include "glew/include/GL/glew.h"
 #include "Imgui/imgui.h"
 
 #include "Profiling.h"
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false)
+
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false)
 {
 	globalAabb.SetNegativeInfinity();
-
 	LCG lcg;
 	uuid = lcg.IntFast();
 }
@@ -32,6 +37,9 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
+
+	RELEASE(vertex);
+	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -62,6 +70,11 @@ void GameObject::Draw()
 		if (go->GetActive())
 			go->Draw();
 	}
+
+	if (index && vertex && colliders)
+	{
+		DebugColliders();
+	}
 }
 
 void GameObject::DrawEditor()
@@ -69,6 +82,7 @@ void GameObject::DrawEditor()
 	ImGui::Checkbox("Active", &active);
 	ImGui::SameLine();
 	ImGui::InputText("Name", &name[0], 20);
+	ImGui::Checkbox("Colliders", &colliders);
 	ImGui::Separator();
 	for (int i = 0; i < components.size(); ++i)
 	{
@@ -107,6 +121,22 @@ void GameObject::DrawEditor()
 	}
 }
 
+void GameObject::DebugColliders()
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	vertex->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	index->Bind();
+	glLineWidth(2.0f);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glDrawElements(GL_LINES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
+	vertex->Unbind();
+	index->Unbind();
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
 Component* GameObject::CreateComponent(ComponentType type)
 {
 	Component* component = nullptr;
@@ -121,6 +151,8 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this);
+		app->scene->SetMainCamera((CameraComponent*)component);
+		
 		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);
@@ -174,8 +206,44 @@ void GameObject::SetAABB(AABB newAABB)
 	globalObb = newAABB;
 	globalObb.Transform(GetComponent<TransformComponent>()->GetTransform());
 
-	globalAabb.SetNegativeInfinity();
 	globalAabb.Enclose(globalObb);
+
+	if (parent != nullptr && parent != app->scene->GetRoot())
+	{
+		parent->SetAABB(globalAabb);
+		
+	}
+
+	// Configure buffers
+	float3 corners[8];
+	globalAabb.GetCornerPoints(corners);
+
+	unsigned int indices[24] = 
+	{
+		0,1,
+		1,3,
+		3,2,
+		2,0,
+
+		1,5,
+		4,6,
+		7,3,
+
+		6,7,
+		6,2,
+
+		7,5,
+		4,5,
+
+		4,0
+	};
+
+	if (index) RELEASE(index);
+	if (vertex) RELEASE(vertex);
+	index = new IndexBuffer(indices, 24);
+	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
+	index->Unbind();
+	vertex->Unbind();
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)

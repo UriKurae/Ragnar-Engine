@@ -10,6 +10,7 @@ public:
 	~CameraComponent();
 
 	void OnEditor() override;
+	bool Update(float dt) override;
 
 	void SetPlanes();
 	void SetFov();

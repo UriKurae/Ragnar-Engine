@@ -12,6 +12,8 @@ enum class Object3D
 	CYLINDER
 };
 
+class CameraComponent;
+
 class ModuleScene : public Module
 {
 public:
@@ -31,6 +33,8 @@ public:
 
 	inline GameObject* GetRoot() const { return root; }
 
+	void SetMainCamera(CameraComponent* camComponent) { mainCamera = camComponent; }
+
 	GameObject* Create3DObject(Object3D type, GameObject* parent);
 
 	void MoveGameObjectUp(GameObject* object);
@@ -41,4 +45,6 @@ public:
 
 private:
 	GameObject* root;
+
+	CameraComponent* mainCamera;
 };

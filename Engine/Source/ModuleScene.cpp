@@ -13,7 +13,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene()
+ModuleScene::ModuleScene() : mainCamera(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Scene");
@@ -56,6 +56,7 @@ bool ModuleScene::Draw()
 		if (go->GetActive())
 			go->Draw();
 	}
+
 
 	return true;
 }

@@ -45,6 +45,12 @@ void CameraComponent::OnEditor()
 	ImGui::PopID();
 }
 
+bool CameraComponent::Update(float dt)
+{
+
+	return false;
+}
+
 void CameraComponent::SetPlanes()
 {
 	camera.SetViewPlaneDistances(nearPlane, farPlane);

@@ -15,6 +15,8 @@ typedef unsigned int uint;
 
 typedef json_array_t JSON_Array;
 class JsonParsing;
+class VertexBuffer;
+class IndexBuffer;
 
 class GameObject
 {
@@ -25,6 +27,8 @@ public:
 	bool Update(float dt);
 	void Draw();
 	void DrawEditor();
+
+	void DebugColliders();
 
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
@@ -58,6 +62,7 @@ public:
 private:
 	std::string name;
 	bool active;
+	bool colliders;
 	std::vector<Component*> components;
 
 	GameObject* parent;
@@ -67,6 +72,9 @@ private:
 
 	AABB globalAabb;
 	OBB globalObb;
+
+	VertexBuffer* vertex;
+	IndexBuffer* index;
 
 	uint uuid;
 };

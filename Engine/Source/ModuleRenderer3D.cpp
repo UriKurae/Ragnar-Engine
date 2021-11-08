@@ -5,6 +5,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
+#include "Framebuffer.h"
 #include "glew/include/GL/glew.h"
 
 #include "Imgui/imgui.h"
@@ -17,7 +18,7 @@
 
 #include "Profiling.h"
 
-ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
+ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), mainCameraFbo(nullptr)
 {
 	name = "Renderer";
 	context = NULL;
@@ -37,7 +38,9 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled)
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
-{}
+{
+	RELEASE(mainCameraFbo);
+}
 
 // Called before render is available
 bool ModuleRenderer3D::Init(JsonParsing& node)
@@ -198,6 +201,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	OnResize(w, h);
 
 	fbo = new Framebuffer(w, h);
+	mainCameraFbo = new Framebuffer(200, 100);
 
 	grid = new PGrid(200, 200);
 
@@ -221,6 +225,7 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
+	// Editor Camera FBO
 	fbo->Bind();
 	glClearColor(0.0f, 0.0f, 0.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -231,6 +236,15 @@ bool ModuleRenderer3D::PostUpdate()
 	fbo->Unbind();
 	
 	app->editor->Draw(fbo);
+
+	//// Camera Component FBO
+	//mainCameraFbo->Bind();
+
+	//glClearColor(0.0f, 0.0f, 0.0f, 1);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//app->editor->Draw(mainCameraFbo);
+	//mainCameraFbo->Unbind();
 
 	SDL_GL_SwapWindow(app->window->window);
 
