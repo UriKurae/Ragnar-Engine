@@ -58,10 +58,27 @@ void CameraComponent::SetFov()
 
 bool CameraComponent::OnLoad(JsonParsing& node)
 {
-	return false;
+	nearPlane = node.GetJsonNumber("Near Plane");
+	farPlane = node.GetJsonNumber("Far Plane");
+	verticalFov = node.GetJsonNumber("Vertical Fov");
+	horizontalFov = node.GetJsonNumber("Horizontal Fov");
+	camera.SetPos(node.GetJson3Number(node, "Camera Pos"));
+
+	return true;
 }
 
 bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
-	return false;
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Near Plane", nearPlane);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Far Plane", farPlane);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Vertical Fov", verticalFov);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Horizontal Fov", horizontalFov);
+	file.SetNewJson3Number(file, "Camera Pos", camera.Pos());
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	return true;
 }

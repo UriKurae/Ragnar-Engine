@@ -1,6 +1,7 @@
 #include "ModuleScene.h"
 
 #include "Application.h"
+#include "ModuleEditor.h"
 #include "ModuleCamera3D.h"
 #include "GameObject.h"
 #include "MeshComponent.h"
@@ -212,6 +213,8 @@ bool ModuleScene::LoadScene(const char* name)
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
+
+	app->editor->SetSelected(nullptr);
 
 	RELEASE_ARRAY(buffer);
 

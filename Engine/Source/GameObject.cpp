@@ -157,6 +157,7 @@ char* GameObject::GetNameBuffer()
 void GameObject::SetAABB(std::vector<float3>& vertices)
 {
 	globalAabb.Enclose(vertices.data(), vertices.size());
+
 }
 
 void GameObject::SetTotalAABB()
