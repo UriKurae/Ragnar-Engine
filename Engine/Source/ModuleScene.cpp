@@ -30,7 +30,7 @@ bool ModuleScene::Start()
 	GameObject* camera = CreateGameObject(nullptr);
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
-
+	
 	LoadModel::GetInstance()->ImportModel(std::string("Assets/Resources/BakerHouse.fbx"));
 	LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/BakerHouse.fbx"));
 	//LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/soraFbx.fbx"));

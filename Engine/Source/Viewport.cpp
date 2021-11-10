@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 
+#include "FileSystem.h"
+
 #include "Imgui/imgui.h"
 
 Viewport::Viewport()
@@ -31,5 +33,16 @@ void Viewport::Draw(Framebuffer* framebuffer)
 	selected = ImGui::IsWindowFocused();
 
 	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+
+	if (ImGui::BeginDragDropTarget())
+	{
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content Browser"))
+		{
+			const char* path = (const char*)payload->Data;
+			app->fs->LoadFile(std::string(path));
+		}
+		ImGui::EndDragDropTarget();
+	}
+
 	ImGui::End();
 }

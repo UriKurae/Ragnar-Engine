@@ -16,6 +16,7 @@ public:
 
 	~ModuleEditor();
 
+	bool Start() override;
 	bool Update(float dt) override;
 	bool Draw(Framebuffer* framebuffer);
 	bool CleanUp() override;

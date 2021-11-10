@@ -21,6 +21,7 @@ public:
 	MainMenuBar();
 	~MainMenuBar();
 
+	bool Start() override;
 	bool Update(float dt) override;
 	bool CleanUp() override;
 

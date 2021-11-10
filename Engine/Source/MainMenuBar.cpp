@@ -29,6 +29,16 @@ MainMenuBar::~MainMenuBar()
 {
 }
 
+bool MainMenuBar::Start()
+{
+	for (int i = 0; i < menus.size(); ++i)
+	{
+		menus[i]->Start();
+	}
+
+	return true;
+}
+
 bool MainMenuBar::Update(float dt)
 {
 //	ImGui::DockSpaceOverViewport();

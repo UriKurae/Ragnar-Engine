@@ -38,7 +38,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		ASSETS_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, MATERIALS_FOLDER, MESHES_FOLDER, SCENES_FOLDER
+		ASSETS_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, MATERIALS_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -222,6 +222,11 @@ void FileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& 
 	}
 
 	PHYSFS_freeList(rc);
+}
+
+void FileSystem::CreateDir(const char* directory)
+{
+	PHYSFS_mkdir(directory);
 }
 
 void FileSystem::CreateAssimpIO()

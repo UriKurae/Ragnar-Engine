@@ -28,6 +28,13 @@ ModuleEditor::~ModuleEditor()
 {
 }
 
+bool ModuleEditor::Start()
+{
+	mainMenuBar.Start();
+
+	return true;
+}
+
 bool ModuleEditor::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Module Editor");
