@@ -5,6 +5,7 @@
 #include "ModuleEditor.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "ModuleScene.h"
 #include "MathGeolib/src/Math/float4.h"
 
 #include "Profiling.h"
@@ -15,7 +16,7 @@ ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
 
 	cameraFrustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	cameraFrustum.SetViewPlaneDistances(1.0f, 100.0f);
-	cameraFrustum.SetPerspective(90.0f, 60.0f);
+	cameraFrustum.SetPerspective(1.0f, 1.0f);
 	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
 }
 
@@ -193,11 +194,40 @@ bool ModuleCamera3D::Update(float dt)
 	{
 		if (app->input->GetMouseZ() == 1) newPos += newFront * speed;
 		if (app->input->GetMouseZ() == -1) newPos -= newFront * speed;
+
+		if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+		{
+			float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
+			
+			mousePos.x -= size.x;
+			mousePos.y -= size.y;
+			mousePos.x = -1.0f + 2.0f * mousePos.x / size.z;
+			mousePos.y = 1.0f - 2.0f * mousePos.y / size.w;
+			LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
+			Ray rayCast = picking.ToRay();
+			DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
+			bool hit = false;
+			std::vector<GameObject*>::iterator it = app->scene->GetRoot()->GetChilds().begin();
+			for (; it < app->scene->GetRoot()->GetChilds().end(); ++it)
+			{
+				if ((*it)->GetAABB().IsFinite())
+				{
+					rayCast.Transform((*it)->GetComponent<TransformComponent>()->GetTransform().Transposed());
+					AABB test = (*it)->GetAABB();
+					hit = rayCast.Intersects(test);
+					//hit = picking.Intersects((*it)->GetAABB());
+
+					if (hit)
+					{
+						app->editor->SetSelected((*it));
+					}
+				}
+			}
+		}
 	}
 	cameraFrustum.SetFrame(newPos, newFront, newUp);
 
 	matrixViewFrustum = cameraFrustum.ViewMatrix();
-	matrixProjectionFrustum = cameraFrustum.ProjectionMatrix();
 
 	return true;
 }
