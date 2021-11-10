@@ -127,7 +127,7 @@ bool ModuleCamera3D::Update(float dt)
 		if (dX != 0)
 		{
 			Quat rotateHorizontal;
-			rotateHorizontal = rotateHorizontal.RotateY(-dX * dt);
+			rotateHorizontal = rotateHorizontal.RotateY(dX * dt);
 			newFront = rotateHorizontal * newFront;
 			newUp = rotateHorizontal * newUp;
 			newFront.Normalize();

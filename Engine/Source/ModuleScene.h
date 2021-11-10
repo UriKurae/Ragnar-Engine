@@ -43,8 +43,8 @@ public:
 	bool LoadScene(const char* name);
 	bool SaveScene();
 
+	CameraComponent* mainCamera;
 private:
 	GameObject* root;
 
-	CameraComponent* mainCamera;
 };

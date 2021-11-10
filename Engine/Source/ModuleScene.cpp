@@ -42,7 +42,7 @@ bool ModuleScene::Start()
 bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
-
+	mainCamera->Update(dt);
 	return true;
 }
 

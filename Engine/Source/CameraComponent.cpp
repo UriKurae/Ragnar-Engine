@@ -1,14 +1,23 @@
-#include "CameraComponent.h"
-#include "GameObject.h"
+#include "Globals.h"
 
-CameraComponent::CameraComponent(GameObject* own) : horizontalFov(90.0f), verticalFov(60.0f), nearPlane(1.0f), farPlane(5.0f)
+#include "CameraComponent.h"
+#include "TransformComponent.h"
+#include "GameObject.h"
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
+
+#include "glew/include/GL/glew.h"
+
+CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(1.0f), verticalFov(1.0f), nearPlane(1.0f), farPlane(20.0f), transform(trans), currentRotation(0,0,0,1)
 {
 	type = ComponentType::CAMERA;
 	owner = own;
 	camera.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	camera.SetViewPlaneDistances(nearPlane, farPlane);
 	camera.SetPerspective(horizontalFov, verticalFov);
-	camera.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
+	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
+
+	CompileBuffers();
 }
 
 CameraComponent::~CameraComponent()
@@ -47,8 +56,52 @@ void CameraComponent::OnEditor()
 
 bool CameraComponent::Update(float dt)
 {
+	
+	camera.SetPos(transform->GetPosition());
+	
+	if (!CompareRotations(currentRotation, transform->GetRotation()))
+	{
+		currentRotation = transform->GetRotation();
+	
+		float3 newUp = float3::unitY;
+		float3 newFront = float3::unitZ;
+		
+		newUp = transform->GetRotation() * newUp;
+		
+		newUp.Normalize();
+		newFront = transform->GetRotation() * newFront;
+		newFront.Normalize();
 
-	return false;
+		float3::Orthonormalize(newUp, newFront);
+		
+		camera.SetUp(newUp);
+		camera.SetFront(newFront);
+	}
+
+
+	matrixViewFrustum = camera.ViewMatrix();
+
+	return true;
+}
+
+void CameraComponent::Draw()
+{
+	glPushMatrix();
+
+	glMultMatrixf(transform->GetTransform().Transposed().ptr());
+	glEnableClientState(GL_VERTEX_ARRAY);
+	vbo->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	ebo->Bind();
+	glLineWidth(2.0f);
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
+	vbo->Unbind();
+	ebo->Unbind();
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glPopMatrix();
 }
 
 void CameraComponent::SetPlanes()
@@ -60,6 +113,44 @@ void CameraComponent::SetFov()
 {
 	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * camera.AspectRatio());
 	camera.SetHorizontalFovAndAspectRatio(horizontalFov, camera.AspectRatio());
+}
+
+void CameraComponent::CompileBuffers()
+{
+	// Configure buffers
+	float3 corners[8];
+	camera.GetCornerPoints(corners);
+	unsigned int indices[24] =
+	{
+		0,1,
+		1,3,
+		3,2,
+		2,0,
+
+		1,5,
+		4,6,
+		7,3,
+
+		6,7,
+		6,2,
+
+		7,5,
+		4,5,
+
+		4,0
+	};
+
+	ebo = new IndexBuffer(indices, 24);
+	vbo = new VertexBuffer(corners, sizeof(float3) * 8);
+	ebo->Unbind();
+	vbo->Unbind();
+}
+
+bool CameraComponent::CompareRotations(Quat& quat1, Quat& quat2)
+{
+	if (quat1.x == quat2.x && quat1.y == quat2.y && quat1.z == quat2.z && quat1.w == quat2.w) return true;
+
+	return false;
 }
 
 bool CameraComponent::OnLoad(JsonParsing& node)

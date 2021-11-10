@@ -20,6 +20,7 @@ Framebuffer::~Framebuffer()
 
 void Framebuffer::Bind()
 {
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	glViewport(0, 0, width, height);
 }
@@ -31,6 +32,7 @@ void Framebuffer::Unbind()
 
 void Framebuffer::SetFramebuffer()
 {
+	
 	if (framebuffer > 0)
 	{
 		glDeleteFramebuffers(1, &framebuffer);
