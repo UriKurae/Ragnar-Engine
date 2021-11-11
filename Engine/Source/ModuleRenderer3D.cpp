@@ -18,7 +18,7 @@
 
 #include "Profiling.h"
 
-ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), mainCameraFbo(nullptr)
+ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), mainCameraFbo(nullptr), currentView(CurrentView::EDITOR)
 {
 	name = "Renderer";
 	context = NULL;
@@ -214,7 +214,19 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 
+	switch (currentView)
+	{
+	case CurrentView::EDITOR :
+		glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		break;
+	case CurrentView::GAME:
+		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+		break;
+	}
+
+	glPopMatrix();
 	/*glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	glPopMatrix();*/

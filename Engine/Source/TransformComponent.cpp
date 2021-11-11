@@ -1,9 +1,12 @@
+#include "Application.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "Globals.h"
 
+#include "ModuleCamera3D.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
+#include "Imgui/ImGuizmo.h"
 
 #include "Profiling.h"
 
@@ -30,7 +33,7 @@ TransformComponent::~TransformComponent()
 
 bool TransformComponent::Update(float dt)
 {
-
+	
 	return true;
 }
 
@@ -57,7 +60,15 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	scale = sca;
 
 
-	globalMatrix = float4x4::FromTRS(position, rotation, scale);
+	globalMatrix = float4x4::FromTRS(position, rotation, scale);	
+}
+
+void TransformComponent::SetTransform(float4x4 trMatrix)
+{
+	globalMatrix = trMatrix;
+	globalMatrix.Decompose(position, rotation, scale);
+	
+	RecursiveTransform(owner);
 }
 
 void TransformComponent::SetTranslation(float3 pos)
@@ -141,7 +152,6 @@ void TransformComponent::RecursiveTransform(GameObject* parent)
 	}
 }
 
-
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 {
 	float3 lastVec = vec;
@@ -202,6 +212,7 @@ void TransformComponent::ShowTransformationInfo()
 	float3 pos = position;
 	float3 rot;
 	float3 sca;
+	
 	/*ImGui::Text("Position: ");
 	ImGui::SameLine();
 	if (ImGui::DragFloat3(".", position.ptr()))

@@ -25,6 +25,8 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
+	int CameraComponent::ContainsAaBox(const AABB& boundingBox);
+
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
 private:

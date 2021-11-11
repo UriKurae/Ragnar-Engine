@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <string>
+#include "Imgui/ImGuizmo.h"
 
 class GameObject;
 
@@ -41,4 +42,5 @@ private:
 	GameObject* selectedParent;
 
 	Viewport* viewport;
+	ImGuizmo::OPERATION currentOperation;
 };

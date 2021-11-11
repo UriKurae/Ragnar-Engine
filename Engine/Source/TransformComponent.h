@@ -3,6 +3,19 @@
 #include "Component.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
+enum OPERATION
+{
+	TRANSLATE,
+	ROTATE,
+	SCALE
+};
+
+enum MODE
+{
+	LOCAL,
+	WORLD
+};
+
 typedef float GLfloat;
 
 class TransformComponent : public Component
@@ -16,6 +29,7 @@ public:
 	void OnEditor() override;
 
 	void SetTransform(float3 pos, Quat rot, float3 sca);
+	void SetTransform(float4x4 trMatrix);
 	void SetTranslation(float3 pos);
 	void SetRotation(Quat rot);
 	void SetScale(float3 sca);

@@ -56,7 +56,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -77,7 +77,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -97,6 +97,7 @@
     <ClInclude Include="Dependencies\Imgui\imconfig.h" />
     <ClInclude Include="Dependencies\Imgui\imgui.h" />
     <ClInclude Include="Dependencies\Imgui\ImguiStyle.h" />
+    <ClInclude Include="Dependencies\Imgui\ImGuizmo.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
+    <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl3.cpp" />

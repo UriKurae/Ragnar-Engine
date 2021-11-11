@@ -8,14 +8,14 @@
 
 #include "glew/include/GL/glew.h"
 
-CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(1.0f), verticalFov(1.0f), nearPlane(1.0f), farPlane(20.0f), transform(trans), currentRotation(0,0,0,1)
+CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(1.0f), verticalFov(1.0f), nearPlane(0.1f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1)
 {
 	type = ComponentType::CAMERA;
 	owner = own;
 	camera.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	camera.SetViewPlaneDistances(nearPlane, farPlane);
 	camera.SetPerspective(horizontalFov, verticalFov);
-	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
+	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 
 	CompileBuffers();
 }
@@ -178,4 +178,24 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
+}
+
+
+int CameraComponent::ContainsAaBox(const AABB& boundingBox)
+{
+
+	if (boundingBox.IsFinite())
+	{
+		if (camera.Contains(boundingBox))
+		{
+			return 1;
+
+		}
+		else if (camera.Intersects(boundingBox))
+		{
+			return 2;
+		}
+		return 0;
+	}
+	return -1;
 }

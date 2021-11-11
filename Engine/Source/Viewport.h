@@ -12,7 +12,7 @@ public:
 
 	~Viewport();
 
-	void Draw(Framebuffer* framebuffer);
+	void Draw(Framebuffer* framebuffer, int currentOperation);
 
 	inline float4 GetBounds() { return bounds; }
 	inline const bool GetState() const { return selected; }

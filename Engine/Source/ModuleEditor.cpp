@@ -13,11 +13,12 @@
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/imgui_impl_sdl.h"
 
+
 #include <GL/glew.h>
 
 #include "Profiling.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), Module()
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), currentOperation(ImGuizmo::OPERATION::TRANSLATE), Module()
 {
 	name = "Editor";
 
@@ -43,6 +44,15 @@ bool ModuleEditor::Update(float dt)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
+	ImGuizmo::BeginFrame();
+	
+	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_IDLE && selected)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::TRANSLATE;
+		else if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::ROTATE;
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::SCALE;
+	}
+
 
 	ImGui::DockSpaceOverViewport();
 	
@@ -61,7 +71,7 @@ bool ModuleEditor::Draw(Framebuffer* framebuffer)
 {
 	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
-	viewport->Draw(framebuffer);
+	viewport->Draw(framebuffer, currentOperation);
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

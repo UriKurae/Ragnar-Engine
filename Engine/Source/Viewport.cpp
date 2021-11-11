@@ -1,13 +1,14 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
 #include "Viewport.h"
 #include "ModuleRenderer3D.h"
-#include "CameraComponent.h"
 #include "ModuleScene.h"
 
 #include "FileSystem.h"
 
 #include "Imgui/imgui.h"
+#include "Imgui/ImGuizmo.h"
 
 Viewport::Viewport()
 {
@@ -19,11 +20,11 @@ Viewport::~Viewport()
 {
 }
 
-void Viewport::Draw(Framebuffer* framebuffer)
+void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 {
 
-	ImGui::Begin("Scene", &active);
-	
+	ImGui::Begin("Game", &active);
+	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::GAME;
 	ImVec2 size = ImGui::GetContentRegionAvail();
 
 	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
@@ -46,25 +47,34 @@ void Viewport::Draw(Framebuffer* framebuffer)
 		ImGui::EndDragDropTarget();
 	}
 
-
-	if (selected)
-	{
-		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-		glPopMatrix();
-		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
-	}
+	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 	ImGui::End();
 
-	ImGui::Begin("Game");
-	if (!selected)
+
+	ImGui::Begin("Scene");
+	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::EDITOR;
+	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+
+
+	if (app->editor->GetSelected())
 	{
-		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
-		glPopMatrix();
-		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+		ImGuizmo::Enable(true);
+		ImGuizmo::SetGizmoSizeClipSpace(0.3f);
+		ImGuizmo::SetRect(bounds.x, bounds.y, bounds.z, bounds.w);
+		ImGuizmo::SetDrawlist();
+		
+		math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
+		view.Transpose();
+
+		math::float4x4 tr = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetTransform().Transposed();
+		ImGuizmo::Manipulate(view.ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+		if (ImGuizmo::IsUsing())
+		{
+			app->editor->GetSelected()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+		}
 	}
+
 	ImGui::End();
 	
 	

@@ -225,6 +225,7 @@
     <ClInclude Include="Engine\Source\ContentBrowserMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\ImGuizmo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -368,5 +369,6 @@
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp" />
   </ItemGroup>
 </Project>

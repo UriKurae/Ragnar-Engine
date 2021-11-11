@@ -5,6 +5,8 @@
 #include "GameObject.h"
 #include "Globals.h"
 #include "ModuleCamera3D.h"
+#include "ModuleScene.h"
+#include "CameraComponent.h"
 
 #include "Mesh.h"
 #include "LoadModel.h"
@@ -39,7 +41,8 @@ void MeshComponent::Draw()
 
 	if (material != nullptr) material->BindTexture();
 	
-	if (mesh != nullptr && app->camera->ContainsAaBox(localBoundingBox) == 1 || app->camera->ContainsAaBox(localBoundingBox) == 2) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+	
+	if (mesh != nullptr && app->scene->mainCamera->ContainsAaBox(localBoundingBox) == 1 || app->scene->mainCamera->ContainsAaBox(localBoundingBox) == 2) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	if (material != nullptr) material->UnbindTexture();
 	
 	glPopMatrix();
