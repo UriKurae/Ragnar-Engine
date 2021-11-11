@@ -203,3 +203,10 @@ ConsoleMenu* MainMenuBar::GetConsole()
 
 	return nullptr;
 }
+
+std::string& MainMenuBar::GetCurrentDir()
+{
+	ContentBrowserMenu* content = (ContentBrowserMenu*)menus[(int)Menus::CONTENT_BROWSER];
+
+	return content->GetCurrentDir();
+}

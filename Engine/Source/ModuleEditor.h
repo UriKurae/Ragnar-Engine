@@ -32,6 +32,7 @@ public:
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void LogConsole(const char* string);
+	inline std::string& GetCurrentDir() { return mainMenuBar.GetCurrentDir(); }
 
 	inline Viewport* GetViewport() { return viewport; }
 

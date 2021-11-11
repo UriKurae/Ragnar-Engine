@@ -2,6 +2,7 @@
 
 #include "Menu.h"
 #include <vector>
+#include <string>
 
 class ConsoleMenu;
 
@@ -26,6 +27,7 @@ public:
 	bool CleanUp() override;
 
 	ConsoleMenu* GetConsole();
+	std::string& GetCurrentDir();
 
 private:
 	bool showMenu;

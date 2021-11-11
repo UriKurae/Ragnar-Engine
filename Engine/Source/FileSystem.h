@@ -35,6 +35,7 @@ public:
 
 	void LoadFile(std::string& path);
 	void ImportFiles(std::string& path);
+	void ImportFromOutside(std::string& source, std::string& destination);
 	void CheckExtension(std::string& path);
 
 	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);

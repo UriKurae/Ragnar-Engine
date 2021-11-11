@@ -16,6 +16,8 @@ public:
 
 	bool Update(float dt) override;
 
+	inline std::string& GetCurrentDir() { return currentDirectory; }
+
 private:
 	std::string currentDirectory;
 

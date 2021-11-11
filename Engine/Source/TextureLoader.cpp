@@ -33,7 +33,7 @@ void TextureLoader::ImportTexture(const aiMaterial* material, aiTextureType type
 		material->GetTexture(type, i, &str);
 		std::string aux = str.C_Str();
 		aux = aux.substr(aux.find_last_of("\\") + 1, aux.length());
-		std::string path = ASSETS_FOLDER;
+		std::string path = RESOURCES_FOLDER;
 		path += aux;
 
 		ILuint image;
@@ -44,7 +44,7 @@ void TextureLoader::ImportTexture(const aiMaterial* material, aiTextureType type
 
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 		path = path.substr(0, path.find_last_of("."));
-		path = path.insert(0, MATERIALS_FOLDER);
+		path = path.insert(0, TEXTURES_FOLDER);
 		path += ".dds";
 		
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
@@ -65,7 +65,7 @@ void TextureLoader::ImportTexture(std::string& path)
 
 	path = path.substr(path.find_last_of("/") + 1, path.length());
 	path = path.substr(0, path.find_last_of("."));
-	path = path.insert(0, MATERIALS_FOLDER);
+	path = path.insert(0, TEXTURES_FOLDER);
 	path += ".dds";
 
 	Uint64 size = SaveTexture(path);
@@ -102,7 +102,7 @@ Texture* TextureLoader::LoadTexture(std::string& path)
 	path = path.substr(path.find_last_of("/") + 1, path.length());
 	path = path.substr(0, path.find_last_of("."));
 
-	std::string p = MATERIALS_FOLDER + path;
+	std::string p = TEXTURES_FOLDER + path;
 	p += ".dds";
 
 	Texture* tex = ResourceManager::GetInstance()->IsTextureLoaded(p);

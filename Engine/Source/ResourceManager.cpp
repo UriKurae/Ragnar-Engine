@@ -53,7 +53,7 @@ Texture* ResourceManager::IsTextureLoaded(std::string path)
 	{
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 		path = path.substr(0, path.find_last_of("."));
-		path = MATERIALS_FOLDER + path + ".dds";
+		path = TEXTURES_FOLDER + path + ".dds";
 	}
 
 	for (int i = 0; i < textures.size(); ++i)

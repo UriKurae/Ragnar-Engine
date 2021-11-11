@@ -23,11 +23,13 @@ void Log(const char file[], int line, const char* format, ...);
     }
 
 // Folders defines
-#define ASSETS_FOLDER "Assets/Resources/"
+#define ASSETS_FOLDER "Assets/"
+#define RESOURCES_FOLDER "Assets/Resources/"
 #define SETTINGS_FOLDER "Settings/"
 #define LIBRARY_FOLDER "Library/"
 #define MODELS_FOLDER "Library/Models/"
 #define MESHES_FOLDER "Library/Meshes/"
+#define TEXTURES_FOLDER "Library/Textures/"
 #define MATERIALS_FOLDER "Library/Materials/"
 #define SCENES_FOLDER "Assets/Scenes/"
 

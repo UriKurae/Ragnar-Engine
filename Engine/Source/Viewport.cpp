@@ -37,16 +37,6 @@ void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 	bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
 	selected = ImGui::IsWindowFocused();
 
-	if (ImGui::BeginDragDropTarget())
-	{
-		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content Browser"))
-		{
-			const char* path = (const char*)payload->Data;
-			app->fs->LoadFile(std::string(path));
-		}
-		ImGui::EndDragDropTarget();
-	}
-
 	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 	ImGui::End();
@@ -71,6 +61,16 @@ void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 		{
 			app->editor->GetSelected()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 		}
+	}
+
+	if (ImGui::BeginDragDropTarget())
+	{
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content Browser"))
+		{
+			const char* path = (const char*)payload->Data;
+			app->fs->LoadFile(std::string(path));
+		}
+		ImGui::EndDragDropTarget();
 	}
 
 	ImGui::End();

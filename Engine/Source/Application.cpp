@@ -21,7 +21,7 @@ Application::Application()
 	camera = new ModuleCamera3D();
 	editor = new ModuleEditor();
 
-	fs = new FileSystem(ASSETS_FOLDER);
+	fs = new FileSystem(RESOURCES_FOLDER);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
