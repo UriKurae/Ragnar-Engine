@@ -1,11 +1,9 @@
+#include "GameObject.h"
+
 #include "Application.h"
 #include "ModuleScene.h"
-#include "GameObject.h"
 #include "Globals.h"
 
-#include "TransformComponent.h"
-#include "MeshComponent.h"
-#include "MaterialComponent.h"
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -216,7 +214,6 @@ void GameObject::SetAABB(AABB newAABB)
 	if (parent != nullptr && parent != app->scene->GetRoot())
 	{
 		parent->SetAABB(globalAabb);
-		
 	}
 
 	// Configure buffers
@@ -321,11 +318,6 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	}
 
 	node.SetValueToArray(array, file.GetRootValue());
-	//jsonFile = jsonFile.SetChild(jsonFile.GetRootValue(), "");
-	//
-	//jsonFile.SetNewJsonNumber(jsonFile.ValueToObject(jsonFile.GetRootValue()), "UUID", uuid);
-	//jsonFile.SetNewJsonNumber(jsonFile.ValueToObject(jsonFile.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
-	//jsonFile.SetNewJsonString(jsonFile.ValueToObject(jsonFile.GetRootValue()), "Name", name.c_str());
 
 	for (int i = 0; i < children.size(); ++i)
 	{

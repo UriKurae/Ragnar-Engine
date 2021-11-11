@@ -51,11 +51,9 @@ void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 
 	ImGui::End();
 
-
 	ImGui::Begin("Scene");
 	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::EDITOR;
 	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
-
 
 	if (app->editor->GetSelected())
 	{
@@ -76,6 +74,4 @@ void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 	}
 
 	ImGui::End();
-	
-	
 }

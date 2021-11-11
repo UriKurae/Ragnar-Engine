@@ -1,5 +1,4 @@
 #include "MaterialComponent.h"
-#include "Globals.h"
 #include "GameObject.h"
 #include "Imgui/imgui.h"
 #include "TextureLoader.h"
@@ -17,14 +16,12 @@ MaterialComponent::MaterialComponent(GameObject* own)
 	owner = own;
 	checker = false;
 
-	TextureLoader::GetInstance()->LoadTexture(std::string("Checker"), &checkerImage);
+	checkerImage = TextureLoader::GetInstance()->LoadTexture(std::string("Library/Materials/Checker.dds"));
 	active = true;
 }
 
 MaterialComponent::~MaterialComponent()
 {
-	RELEASE(diffuse);
-	RELEASE(checkerImage);
 }
 
 void MaterialComponent::OnEditor()
@@ -91,8 +88,7 @@ void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
 
 bool MaterialComponent::OnLoad(JsonParsing& node)
 {
-	RELEASE(diffuse);
-	TextureLoader::GetInstance()->LoadTexture(std::string(node.GetJsonString("Path")), this);
+	diffuse = TextureLoader::GetInstance()->LoadTexture(std::string(node.GetJsonString("Path")));
 	active = node.GetJsonBool("Active");
 
 	return true;

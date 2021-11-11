@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "TextureLoader.h"
 #include "FileSystem.h"
+#include "ResourceManager.h"
 #include "Mesh.h"
 
 #include "TransformComponent.h"
@@ -38,7 +39,7 @@ LoadModel::~LoadModel()
 void LoadModel::ImportModel(std::string& path)
 {
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -111,11 +112,22 @@ void LoadModel::CreatingModel(JsonParsing& json, JSON_Array* array, GameObject* 
 		
 		for (int j = 0; j < s; ++j)
 		{
-			JsonParsing components = parsing.GetJsonArrayValue(arr, j);
-			MeshComponent* mesh = (MeshComponent*)newGo->CreateComponent(ComponentType::MESH_RENDERER);
-			LoadMesh(components.GetJsonString("Mesh Path"), mesh);
-			MaterialComponent* material = (MaterialComponent*)newGo->CreateComponent(ComponentType::MATERIAL);
-			TextureLoader::GetInstance()->LoadTexture(std::string(components.GetJsonString("Texture Path")), material);
+			JsonParsing component = parsing.GetJsonArrayValue(arr, j);
+			switch ((ComponentType)component.GetJsonNumber("Type"))
+			{
+			case ComponentType::MESH_RENDERER:
+			{
+				MeshComponent* mesh = (MeshComponent*)newGo->CreateComponent(ComponentType::MESH_RENDERER);
+				LoadMesh(component.GetJsonString("Mesh Path"), mesh);
+				break;
+			}
+			case ComponentType::MATERIAL:
+			{
+				MaterialComponent* material = (MaterialComponent*)newGo->CreateComponent(ComponentType::MATERIAL);
+				material->SetTexture(TextureLoader::GetInstance()->LoadTexture(std::string(component.GetJsonString("Texture Path"))));
+				break;
+			}
+			}
 		}
 
 		name = "Childs" + name;
@@ -136,7 +148,7 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 		scene->mMaterials[mesh->mMaterialIndex]->GetTexture(aiTextureType_DIFFUSE, 0, &str);
 		obj->CreateComponent(ComponentType::MATERIAL);
 		MaterialComponent* material = obj->GetComponent<MaterialComponent>();
-		TextureLoader::GetInstance()->LoadTexture(std::string(str.C_Str()), material);
+		material->SetTexture(TextureLoader::GetInstance()->LoadTexture(std::string(str.C_Str())));
 		//MaterialComponent* material = TextureLoader::GetInstance()->LoadTexture(std::string(str.C_Str()));
 		//component->SetMaterial(material);
 		//obj->AddComponent(material);
@@ -160,22 +172,33 @@ void LoadModel::ProcessNode(aiNode* node, const aiScene* scene, GameObject* obj)
 
 void LoadModel::ProcessNode2(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json)
 {
-	JsonParsing jsonValue = JsonParsing();
-	jsonValue.SetNewJsonString(jsonValue.ValueToObject(jsonValue.GetRootValue()), "Name", node->mName.C_Str());
-	for (unsigned int i = 0; i < node->mNumMeshes; ++i)
+	if (node == scene->mRootNode || node->mNumMeshes > 0)
 	{
-		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		ProcessMesh2(mesh, scene, jsonValue);
-	}
+		JsonParsing jsonValue = JsonParsing();
+		jsonValue.SetNewJsonString(jsonValue.ValueToObject(jsonValue.GetRootValue()), "Name", node->mName.C_Str());
 
-	std::string name = "Childs" + std::string(node->mName.C_Str());
-	JSON_Array* array = jsonValue.SetNewJsonArray(jsonValue.GetRootValue(), name.c_str());
-	// Repeat the process until there's no more children
-	for (unsigned int i = 0; i < node->mNumChildren; ++i)
-	{
-		ProcessNode2(node->mChildren[i], scene, jsonValue, array);
+		for (unsigned int i = 0; i < node->mNumMeshes; ++i)
+		{
+			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+			ProcessMesh2(mesh, scene, jsonValue);
+		}
+
+		std::string name = "Childs" + std::string(node->mName.C_Str());
+		JSON_Array* array = jsonValue.SetNewJsonArray(jsonValue.GetRootValue(), name.c_str());
+		// Repeat the process until there's no more children
+		for (unsigned int i = 0; i < node->mNumChildren; ++i)
+		{
+			ProcessNode2(node->mChildren[i], scene, jsonValue, array);
+		}
+		nodeJ.SetValueToArray(json, jsonValue.GetRootValue());
 	}
-	nodeJ.SetValueToArray(json, jsonValue.GetRootValue());
+	else
+	{
+		for (unsigned int i = 0; i < node->mNumChildren; ++i)
+		{
+			ProcessNode2(node->mChildren[i], scene, nodeJ, json);
+		}
+	}
 }
 
 MeshComponent* LoadModel::ProcessMesh(aiMesh* mesh, const aiScene* scene, GameObject* object)
@@ -314,19 +337,21 @@ void LoadModel::ProcessMesh2(aiMesh* mesh, const aiScene* scene, JsonParsing& js
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
+	parse.SetNewJsonNumber(parse.ValueToObject(parse.GetRootValue()), "Type", (int)ComponentType::MESH_RENDERER);
 	parse.SetNewJsonString(parse.ValueToObject(parse.GetRootValue()), "Mesh Path", meshName.c_str());
 
+	json.SetValueToArray(array, parse.GetRootValue());
+	
 	if (mesh->mMaterialIndex >= 0)
 	{
 		DEBUG_LOG("Processing material...");
 
+		JsonParsing mat = JsonParsing();
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		TextureLoader::GetInstance()->ImportTexture(material, aiTextureType_DIFFUSE, "texture_diffuse", parse);
-		json.SetValueToArray(array, parse.GetRootValue());
+		TextureLoader::GetInstance()->ImportTexture(material, aiTextureType_DIFFUSE, "texture_diffuse", mat);
 		DEBUG_LOG("Material loading completed!");
+		json.SetValueToArray(array, mat.GetRootValue());
 	}
-	
-	json.SetValueToArray(array, parse.GetRootValue());
 }
 
 MaterialComponent* LoadModel::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, const char* typeName)
@@ -396,55 +421,64 @@ void LoadModel::LoadMesh(const char* name, MeshComponent* mesh)
 		meshPath += ".rgmesh";
 	}
 	
-	if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
+	Mesh* m = ResourceManager::GetInstance()->IsMeshLoaded(meshPath);
+	if (m == nullptr)
 	{
-		std::vector<float3> vertices;
-		std::vector<unsigned int> indices;
-		std::vector<float3> normals;
-		std::vector<float2> texCoords;
+		if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
+		{
+			std::vector<float3> vertices;
+			std::vector<unsigned int> indices;
+			std::vector<float3> normals;
+			std::vector<float2> texCoords;
 
-		char* cursor = buffer;
-		unsigned int* header = new unsigned int[4];
+			char* cursor = buffer;
+			unsigned int* header = new unsigned int[4];
 
-		// Loading header information
-		uint bytes = sizeof(header) * sizeof(unsigned int);
-		memcpy(header, buffer, bytes);
-		cursor += bytes;
+			// Loading header information
+			uint bytes = sizeof(header) * sizeof(unsigned int);
+			memcpy(header, buffer, bytes);
+			cursor += bytes;
 
-		// Setting information
-		vertices.resize(header[0]);
-		indices.resize(header[1]);
-		normals.resize(header[2]);
-		texCoords.resize(header[3]);
+			// Setting information
+			vertices.resize(header[0]);
+			indices.resize(header[1]);
+			normals.resize(header[2]);
+			texCoords.resize(header[3]);
 
-		// Loading vertices
-		bytes = sizeof(float3) * vertices.size();
-		memcpy(&vertices[0], cursor, bytes);
-		cursor += bytes;
+			// Loading vertices
+			bytes = sizeof(float3) * vertices.size();
+			memcpy(&vertices[0], cursor, bytes);
+			cursor += bytes;
 
-		// Loading indices
-		bytes = sizeof(unsigned int) * indices.size();
-		memcpy(indices.data(), cursor, bytes);
-		cursor += bytes;
+			// Loading indices
+			bytes = sizeof(unsigned int) * indices.size();
+			memcpy(indices.data(), cursor, bytes);
+			cursor += bytes;
 
-		// Loading normals
-		bytes = sizeof(float3) * normals.size();
-		memcpy(normals.data(), cursor, bytes);
-		cursor += bytes;
+			// Loading normals
+			bytes = sizeof(float3) * normals.size();
+			memcpy(normals.data(), cursor, bytes);
+			cursor += bytes;
 
-		// Loading texture coordinates
-		bytes = sizeof(float2) * texCoords.size();
-		memcpy(texCoords.data(), cursor, bytes);
+			// Loading texture coordinates
+			bytes = sizeof(float2) * texCoords.size();
+			memcpy(texCoords.data(), cursor, bytes);
+
+			m = new Mesh(vertices, indices, normals, texCoords, std::string(name));
+			ResourceManager::GetInstance()->AddMesh(m);
+			mesh->SetMesh(m);
+
+			RELEASE_ARRAY(header);
+		}
+		else
+			DEBUG_LOG("Mesh file not found!");
 		
-		Mesh* m = new Mesh(vertices, indices, normals, texCoords, std::string(name));
-		mesh->SetMesh(m);
-
-		RELEASE_ARRAY(header);
+		RELEASE_ARRAY(buffer);
 	}
 	else
-		DEBUG_LOG("Mesh file not found!");
-
-	RELEASE_ARRAY(buffer);
+	{
+		mesh->SetMesh(m);
+	}
 }
 
 void LoadModel::LoadingTransform(aiNode* node, GameObject* obj)

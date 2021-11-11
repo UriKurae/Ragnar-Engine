@@ -13,6 +13,7 @@
 #include "IL/il.h"
 
 #include <vector>
+#include <stack>
 
 #include "Profiling.h"
 
@@ -200,7 +201,71 @@ void FileSystem::LoadFile(std::string& path)
 		if (*s == extension)
 		{
 			RG_PROFILING_FUNCTION("Loading Texture");
-			TextureLoader::GetInstance()->LoadTexture(path, app->editor->GetSelected()->GetComponent<MaterialComponent>());
+			app->editor->GetSelected()->GetComponent<MaterialComponent>()->SetTexture(TextureLoader::GetInstance()->LoadTexture(path));
+			return;
+		}
+	}
+}
+
+void FileSystem::ImportFiles(std::string& path)
+{
+	//DiscoverFiles("Assets", files, dirs);
+	std::stack<std::string> dirsStack;
+	dirsStack.push(path);
+
+	while (!dirsStack.empty())
+	{
+		// First we get the item at the top of the stack
+		std::string dir = dirsStack.top();
+		
+		// Then we create the vectors of files and dirs
+		std::vector<std::string> files;
+		std::vector<std::string> dirs;
+
+		// We get the files and dirs of the current directory, that it's the top of the stack
+		DiscoverFiles(dir.c_str(), files, dirs);
+
+		// We iterate all the files on the current directory
+		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+		{
+			CheckExtension(*it);
+		}
+
+		// Now we pop the current directory we don't need it anymore
+		dirsStack.pop();
+
+		// Finally we iterate all the dirs on the current directory and we push them to the stack
+		for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
+		{
+			dirsStack.push(*it);
+		}
+	}
+}
+
+void FileSystem::CheckExtension(std::string& path)
+{
+	std::string extension = path.substr(path.find_last_of(".", path.length()));
+	std::list<std::string>::iterator s;
+	std::list<std::string>::iterator end = modelExtension.end();
+
+	for (s = modelExtension.begin(); s != end; ++s)
+	{
+		if (*s == extension)
+		{
+			RG_PROFILING_FUNCTION("Importing Model");
+			LoadModel::GetInstance()->ImportModel(path);
+			return;
+		}
+	}
+
+	end = texExtension.end();
+
+	for (s = texExtension.begin(); s != end; ++s)
+	{
+		if (*s == extension)
+		{
+			RG_PROFILING_FUNCTION("Importing Texture");
+			TextureLoader::GetInstance()->ImportTexture(path);
 			return;
 		}
 	}

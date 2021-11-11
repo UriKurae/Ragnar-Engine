@@ -225,7 +225,12 @@
     <ClInclude Include="Engine\Source\ContentBrowserMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Dependencies\Imgui\ImGuizmo.h" />
+    <ClInclude Include="Engine\Source\ResourceManager.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\ImGuizmo.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -369,6 +374,11 @@
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp" />
+    <ClCompile Include="Engine\Source\ResourceManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
