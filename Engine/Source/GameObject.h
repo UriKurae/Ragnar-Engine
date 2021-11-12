@@ -44,9 +44,10 @@ public:
 	inline const bool& GetActive() const { return active; }
 	inline std::vector<GameObject*>& GetChilds() { return children; }
 	void SetAABB(std::vector<float3>& vertices);
+	void SetAABB(AABB newAABB);
+	void SetAABB(OBB newOBB);
 	void SetTotalAABB();
 	inline AABB GetAABB() { return globalAabb; }
-	void SetAABB(AABB newAABB);
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);

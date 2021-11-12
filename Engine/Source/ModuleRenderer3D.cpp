@@ -212,30 +212,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	return ret;
 }
 
-// PreUpdate: clear buffer
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
-	
-
-	/*switch (currentView)
-	{
-	case CurrentView::EDITOR :
-		glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-		break;
-	case CurrentView::GAME:
-		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
-		break;
-	}*/
-
-	
-	/*glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-	glPopMatrix();*/
-
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
-	//glPopMatrix();
-
 	return true;
 }
 

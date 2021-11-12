@@ -10,13 +10,14 @@
 
 #include "Profiling.h"
 
-ModuleCamera3D::ModuleCamera3D(bool startEnabled) : Module(startEnabled)
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(60.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), Module(startEnabled)
 {
 	name = "Camera3D";
 
 	cameraFrustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-	cameraFrustum.SetViewPlaneDistances(1.0f, 100.0f);
-	cameraFrustum.SetPerspective(1.0f, 1.0f);
+	cameraFrustum.SetViewPlaneDistances(nearPlane, farPlane);
+	CalculateVerticalFov(horizontalFov, SCREEN_WIDTH, SCREEN_HEIGHT);
+	cameraFrustum.SetPerspective(horizontalFov, verticalFov);
 	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
 }
 
@@ -38,6 +39,28 @@ bool ModuleCamera3D::CleanUp()
 	DEBUG_LOG("Cleaning camera");
 
 	return true;
+}
+
+void ModuleCamera3D::CalculateVerticalFov(float horizontalFovRadians, float width, float height)
+{
+	verticalFov = 2 * Atan((Tan(horizontalFovRadians / 2)) * (height / width));
+	cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
+	currentScreenHeight = height;
+	currentScreenWidth = width;
+}
+
+void ModuleCamera3D::UpdateFovAndScreen(float width, float height)
+{
+	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (height / width));
+	cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
+	currentScreenHeight = height;
+	currentScreenWidth = width;
+}
+
+void ModuleCamera3D::UpdateFov()
+{
+	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (currentScreenHeight / currentScreenWidth));
+	cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (currentScreenWidth / currentScreenHeight));
 }
 
 bool ModuleCamera3D::LoadConfig(JsonParsing& node)

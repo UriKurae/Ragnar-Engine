@@ -34,6 +34,8 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		sizeViewport.y = size.y;
 		framebuffer->ResizeFramebuffer(size.x, size.y);
 		app->renderer3D->OnResize(size.x, size.y);
+		app->camera->UpdateFovAndScreen(size.x, size.y);
+		
 	}
 	bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
 	selected = ImGui::IsWindowFocused();
@@ -68,12 +70,21 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		}
 		ImGui::EndDragDropTarget();
 	}
+	
 
-	ImGui::Begin("Game Preview");
+	GameObject* camera = app->editor->GetSelected();
+	if (camera && camera->GetComponent<CameraComponent>())
+	{
+		ImGui::SetNextWindowSize(ImVec2(225, 150));
+		ImGui::SetNextWindowPos(ImVec2((bounds.x + bounds.z) - 225, (bounds.y + bounds.w) - 150));
 
-	ImGui::Image((ImTextureID)gameBuffer->GetId(), ImVec2(200, 100), ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Begin("Game Preview");
 
-	ImGui::End();
+		ImGui::Image((ImTextureID)gameBuffer->GetId(), ImVec2(200, 120), ImVec2(0, 1), ImVec2(1, 0));
+
+		ImGui::End();
+	}
+	
 
 	ImGui::End();
 }

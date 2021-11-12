@@ -121,9 +121,9 @@ void GameObject::DrawEditor()
 
 void GameObject::DebugColliders()
 {
-	glPushMatrix();
-	
-	glMultMatrixf(GetComponent<TransformComponent>()->GetTransform().Transposed().ptr());
+	//glPushMatrix();
+	//
+	//glMultMatrixf(GetComponent<TransformComponent>()->GetTransform().Transposed().ptr());
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	vertex->Bind();
@@ -137,7 +137,40 @@ void GameObject::DebugColliders()
 	vertex->Unbind();
 	index->Unbind();
 	glDisableClientState(GL_VERTEX_ARRAY);
-	glPopMatrix();
+	/*glPopMatrix();*/
+
+	// TODO delete this when done
+
+	// Configure buffers
+	float3 corners[8];
+	globalAabb.GetCornerPoints(corners);
+
+	unsigned int indices[24] =
+	{
+		0,1,
+		1,3,
+		3,2,
+		2,0,
+
+		1,5,
+		4,6,
+		7,3,
+
+		6,7,
+		6,2,
+
+		7,5,
+		4,5,
+
+		4,0
+	};
+
+	if (index) RELEASE(index);
+	if (vertex) RELEASE(vertex);
+	index = new IndexBuffer(indices, 24);
+	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
+	index->Unbind();
+	vertex->Unbind();
 }
 
 Component* GameObject::CreateComponent(ComponentType type)
@@ -246,6 +279,14 @@ void GameObject::SetAABB(AABB newAABB)
 	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
 	index->Unbind();
 	vertex->Unbind();
+}
+
+void GameObject::SetAABB(OBB newOBB)
+{
+	
+	globalAabb.SetNegativeInfinity();
+	globalAabb.Enclose(newOBB);
+	
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)

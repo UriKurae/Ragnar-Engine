@@ -1,5 +1,7 @@
+#include "Application.h"
 #include "Globals.h"
 
+#include "ModuleEditor.h"
 #include "CameraComponent.h"
 #include "TransformComponent.h"
 #include "GameObject.h"
@@ -8,12 +10,13 @@
 
 #include "glew/include/GL/glew.h"
 
-CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(1.0f), verticalFov(1.0f), nearPlane(0.1f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1)
+CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(60.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
 {
 	type = ComponentType::CAMERA;
 	owner = own;
 	camera.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	camera.SetViewPlaneDistances(nearPlane, farPlane);
+	CalculateVerticalFov(horizontalFov, currentScreenWidth, currentScreenHeight);
 	camera.SetPerspective(horizontalFov, verticalFov);
 	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 
@@ -33,14 +36,20 @@ void CameraComponent::OnEditor()
 	{
 		ImGui::Text("Field of view");
 		ImGui::SameLine();
-		if (ImGui::DragFloat("", &horizontalFov, 0.5f, 0.1f, 179.0f)) SetFov();
+		static float horizontalFovEditor = RadToDeg(horizontalFov);
+		if (ImGui::DragFloat("", &horizontalFovEditor, 1.0f, 1.0f, 179.0f))
+		{
+			horizontalFov = DegToRad(horizontalFovEditor);
+			UpdateFov();
+			CompileBuffers();
+		}
 
 		ImGui::Text("Clipping planes");
 
 		ImGui::Text("Near");
 		ImGui::SameLine();
 		ImGui::PushID("NearPlane");
-		if (ImGui::DragFloat("", &nearPlane, 0.5f)) SetPlanes();
+		if (ImGui::DragFloat("", &nearPlane, 0.5f, 0.1f)) SetPlanes();
 		ImGui::PopID();
 
 		ImGui::PushID("farPlane");
@@ -107,12 +116,29 @@ void CameraComponent::Draw()
 void CameraComponent::SetPlanes()
 {
 	camera.SetViewPlaneDistances(nearPlane, farPlane);
+	CompileBuffers();
 }
 
-void CameraComponent::SetFov()
+void CameraComponent::CalculateVerticalFov(float horizontalFovRadians, float width, float height)
 {
-	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * camera.AspectRatio());
-	camera.SetHorizontalFovAndAspectRatio(horizontalFov, camera.AspectRatio());
+	verticalFov = 2 * Atan((Tan(horizontalFovRadians / 2)) * (height / width));
+	camera.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
+	currentScreenHeight = height;
+	currentScreenWidth = width;
+}
+
+void CameraComponent::UpdateFovAndScreen(float width, float height)
+{
+	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (height / width));
+	camera.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
+	currentScreenHeight = height;
+	currentScreenWidth = width;
+}
+
+void CameraComponent::UpdateFov()
+{
+	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (currentScreenHeight / currentScreenWidth));
+	camera.SetVerticalFovAndAspectRatio(verticalFov, (currentScreenWidth / currentScreenHeight));
 }
 
 void CameraComponent::CompileBuffers()
@@ -140,6 +166,11 @@ void CameraComponent::CompileBuffers()
 		4,0
 	};
 
+	if (vbo)
+	{
+		vbo->Unbind();
+		RELEASE(vbo);
+	}
 	ebo = new IndexBuffer(indices, 24);
 	vbo = new VertexBuffer(corners, sizeof(float3) * 8);
 	ebo->Unbind();
@@ -189,7 +220,6 @@ int CameraComponent::ContainsAaBox(const AABB& boundingBox)
 		if (camera.Contains(boundingBox))
 		{
 			return 1;
-
 		}
 		else if (camera.Intersects(boundingBox))
 		{

@@ -150,6 +150,7 @@ void TransformComponent::RecursiveTransform(GameObject* parent)
 		children[i]->GetComponent<TransformComponent>()->SetChildTransform(position, rotation, scale);
 		RecursiveTransform(children[i]);
 	}
+
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
@@ -212,22 +213,7 @@ void TransformComponent::ShowTransformationInfo()
 	float3 pos = position;
 	float3 rot;
 	float3 sca;
-	
-	/*ImGui::Text("Position: ");
-	ImGui::SameLine();
-	if (ImGui::DragFloat3(".", position.ptr()))
-	{
-		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-		{
-			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-		}
-		else
-			SetTranslation(position);
-
-		RecursiveTransform(owner);
-	}*/
-
-	
+		
 	if (DrawVec3(std::string("Position: "), position))
 	{
 		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
@@ -240,16 +226,6 @@ void TransformComponent::ShowTransformationInfo()
 		RG_PROFILING_FUNCTION("Recursive");
 		RecursiveTransform(owner);
 	}
-	//{
-	//	if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-	//	{
-	//		SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-	//	}
-	//	else
-	//		SetTranslation(position);
-
-	//	RecursiveTransform(owner);
-	//}
 
 	if (DrawVec3(std::string("Rotation: "), rotationEditor))
 	{	

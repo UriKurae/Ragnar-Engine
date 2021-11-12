@@ -17,7 +17,9 @@ public:
 	void Draw() override;
 
 	void SetPlanes();
-	void SetFov();
+	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
+	void UpdateFovAndScreen(float width, float height);
+	void UpdateFov();
 	
 	void CompileBuffers();
 	bool CompareRotations(Quat& quat1, Quat& quat2);
@@ -40,6 +42,8 @@ private:
 	float farPlane;
 	float verticalFov;
 	float horizontalFov;
+	float currentScreenWidth;
+	float currentScreenHeight;
 
 	IndexBuffer* ebo;
 	VertexBuffer* vbo;

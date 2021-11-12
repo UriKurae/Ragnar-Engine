@@ -116,7 +116,7 @@ void LoadModel::CreatingModel(JsonParsing& json, JSON_Array* array, GameObject* 
 		for (int j = 0; j < s; ++j)
 		{
 			JsonParsing component = parsing.GetJsonArrayValue(arr, j);
-			switch ((ComponentType)component.GetJsonNumber("Type"))
+			switch ((ComponentType)(int)component.GetJsonNumber("Type"))
 			{
 			case ComponentType::MESH_RENDERER:
 			{
