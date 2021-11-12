@@ -167,7 +167,7 @@ bool ModuleCamera3D::Update(float dt)
 			float3 targetPos = {};
 			Quat targetRot = {};
 			float3 targetSize = {};
-			target->GetComponent<TransformComponent>()->GetTransform().Decompose(targetPos, targetRot, targetSize);
+			target->GetComponent<TransformComponent>()->GetGlobalTransform().Decompose(targetPos, targetRot, targetSize);
 			float3 distanceTarget = cameraFrustum.Pos() - targetPos;
 
 			Quat rotateOrbitY;
@@ -233,7 +233,7 @@ bool ModuleCamera3D::Update(float dt)
 			{
 				if ((*it)->GetAABB().IsFinite())
 				{
-					rayCast.Transform((*it)->GetComponent<TransformComponent>()->GetTransform().Transposed());
+					rayCast.Transform((*it)->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed());
 					//OBB asObb = (*it)->GetAABB().Transform((*it)->GetComponent<TransformComponent>()->GetTransform());
 					hit = rayCast.Intersects((*it)->GetAABB());
 					

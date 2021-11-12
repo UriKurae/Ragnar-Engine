@@ -1,23 +1,37 @@
 #include "Application.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "ModuleScene.h"
 #include "Globals.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
 #include "Imgui/ImGuizmo.h"
 
+#include <stack>
+
 #include "Profiling.h"
 
 TransformComponent::TransformComponent(GameObject* own)
 {
 	type = ComponentType::TRANSFORM;
+	owner = own;
+
 	position = { 0.0f, 0.0f, 0.0f }; 
 	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
-	globalMatrix = float4x4::FromTRS(position, rotation, scale);
-
-	owner = own;
+	localMatrix = float4x4::FromTRS(position, rotation, scale);
+	
+	if (owner->GetParent() != nullptr)
+	{
+		TransformComponent* tr = owner->GetParent()->GetComponent<TransformComponent>();
+		if (tr != nullptr)
+			globalMatrix = localMatrix * tr->GetGlobalTransform();
+	}
+	else
+	{
+		globalMatrix = localMatrix;
+	}
 
 	for (int i = 0; i < 3; ++i)
 		rotationEditor[i] = 0;
@@ -32,7 +46,28 @@ TransformComponent::~TransformComponent()
 
 bool TransformComponent::Update(float dt)
 {
-	
+	if (changeTransform)
+	{
+		std::stack<GameObject*> stack;
+		stack.push(owner);
+
+		while (!stack.empty())
+		{
+			GameObject* go = stack.top();
+
+			UpdateTransform(go);
+
+			stack.pop();
+
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+				stack.push(go->GetChilds()[i]);
+		}
+
+		SetAABB();
+
+		changeTransform = false;
+	}
+
 	return true;
 }
 
@@ -159,6 +194,45 @@ void TransformComponent::RecursiveTransform(GameObject* parent)
 	}
 }
 
+void TransformComponent::UpdateTransform(GameObject* go)
+{
+	TransformComponent* transform = go->GetComponent<TransformComponent>();
+
+	if (transform)
+	{
+		transform->localMatrix = float4x4::FromTRS(position, rotation, scale);
+		
+		if (go->GetParent() && go->GetParent() != app->scene->GetRoot())
+		{
+			TransformComponent* parentTr = go->GetParent()->GetComponent<TransformComponent>();
+			if (parentTr) transform->globalMatrix = transform->localMatrix * parentTr->globalMatrix;
+		}
+		else
+		{
+			transform->globalMatrix = transform->localMatrix;
+		}
+	}
+}
+
+void TransformComponent::SetAABB()
+{
+	std::vector<GameObject*> goList = owner->GetChilds();
+	owner->ClearAABB();
+	for (int i = 0; i < goList.size(); ++i)
+	{
+		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
+		tr->SetAABB();
+	}
+	if (owner->GetComponent<MeshComponent>())
+	{
+		/*OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB();
+		newObb.Transform(globalMatrix);
+
+		owner->SetAABB(newObb);*/
+		owner->SetAABB(owner->GetComponent<MeshComponent>()->GetLocalAABB());
+	}
+}
+
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 {
 	float3 lastVec = vec;
@@ -222,15 +296,17 @@ void TransformComponent::ShowTransformationInfo()
 		
 	if (DrawVec3(std::string("Position: "), position))
 	{
-		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-		{
-			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-		}
-		else
-			SetTranslation(position);
+		//if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+		//{
+		//	SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
+		//}
+		//else
+		//	SetTranslation(position);
 
-		RG_PROFILING_FUNCTION("Recursive");
-		RecursiveTransform(owner);
+		//RG_PROFILING_FUNCTION("Recursive");
+		//RecursiveTransform(owner);
+
+		changeTransform = true;
 	}
 
 	if (DrawVec3(std::string("Rotation: "), rotationEditor))
@@ -240,25 +316,27 @@ void TransformComponent::ShowTransformationInfo()
 		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor.z));
 		Quat finalQuaternion = quaternionX * quaternionY * quaternionZ;
 		rotation = finalQuaternion;
-		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+		/*if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
 		{
 			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
 		}
 		else
 			SetRotation(finalQuaternion);
 
-		RecursiveTransform(owner);
+		RecursiveTransform(owner);*/
+		changeTransform = true;
 	}
 
 	if (DrawVec3(std::string("Scale: "), scale))
 	{
-		if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-		{
-			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-		}
-		else
-			SetScale(scale);
+		//if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+		//{
+		//	SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
+		//}
+		//else
+		//	SetScale(scale);
 
-		RecursiveTransform(owner);
+		//RecursiveTransform(owner);
+		changeTransform = true;
 	}
 }

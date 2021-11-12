@@ -41,7 +41,11 @@ public:
 	void SetParentTransform(TransformComponent* component);
 	void RecursiveTransform(GameObject* parent);
 
-	inline float4x4 GetTransform() const { return globalMatrix; }
+	void UpdateTransform(GameObject* go);
+	void SetAABB();
+
+	inline float4x4 GetLocalTransform() const { return localMatrix; }
+	inline float4x4 GetGlobalTransform() const { return globalMatrix; }
 	inline float3 GetPosition() const { return position; }
 	inline Quat GetRotation() const { return rotation; }
 	inline float3 GetScale() const { return scale; }
@@ -54,6 +58,9 @@ private:
 	Quat rotation;
 	float3 scale;
 	float4x4 globalMatrix;
+	float4x4 localMatrix;
 
 	float3 rotationEditor;
+
+	bool changeTransform;
 };

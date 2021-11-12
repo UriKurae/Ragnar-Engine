@@ -93,7 +93,7 @@ void CameraComponent::Draw()
 {
 	glPushMatrix();
 
-	glMultMatrixf(transform->GetTransform().Transposed().ptr());
+	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	glEnableClientState(GL_VERTEX_ARRAY);
 	vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);

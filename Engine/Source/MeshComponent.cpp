@@ -34,7 +34,7 @@ void MeshComponent::Draw()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glPushMatrix();
-	glMultMatrixf(transform->GetTransform().Transposed().ptr());
+	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 
 	if (material != nullptr) material->BindTexture();
 	

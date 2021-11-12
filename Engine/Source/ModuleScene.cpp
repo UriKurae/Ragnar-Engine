@@ -38,6 +38,10 @@ bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 	mainCamera->Update(dt);
+
+	for (int i = 0; i < root->GetChilds().size(); ++i)
+		root->GetChilds()[i]->Update(dt);
+
 	return true;
 }
 
