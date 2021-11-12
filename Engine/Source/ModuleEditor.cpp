@@ -23,6 +23,7 @@ ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), curre
 	name = "Editor";
 
 	viewport = new Viewport();
+	gameView = new GameView();
 }
 
 ModuleEditor::~ModuleEditor()
@@ -67,11 +68,12 @@ bool ModuleEditor::Update(float dt)
 	return ret;
 }
 
-bool ModuleEditor::Draw(Framebuffer* framebuffer)
+bool ModuleEditor::Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer)
 {
 	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
-	viewport->Draw(framebuffer, currentOperation);
+	viewport->Draw(editorBuffer, gameBuffer, currentOperation);
+	gameView->Draw(gameBuffer);
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

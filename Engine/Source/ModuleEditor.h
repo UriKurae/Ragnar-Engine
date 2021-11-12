@@ -3,6 +3,7 @@
 #include "Module.h"
 #include "MainMenuBar.h"
 #include "Viewport.h"
+#include "GameView.h"
 
 #include <vector>
 #include <string>
@@ -19,7 +20,7 @@ public:
 
 	bool Start() override;
 	bool Update(float dt) override;
-	bool Draw(Framebuffer* framebuffer);
+	bool Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer);
 	bool CleanUp() override;
 
 	inline GameObject* GetSelected() { return selected; }
@@ -43,5 +44,6 @@ private:
 	GameObject* selectedParent;
 
 	Viewport* viewport;
+	GameView* gameView;
 	ImGuizmo::OPERATION currentOperation;
 };

@@ -201,8 +201,10 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	OnResize(w, h);
 
 	
-	//mainCameraFbo = new Framebuffer(w, h);
-	fbo = new Framebuffer(w, h);
+	fbo = new Framebuffer(w, h, 1);
+	fbo->Unbind();
+	mainCameraFbo = new Framebuffer(w, h, 0);
+	mainCameraFbo->Unbind();
 	
 
 	grid = new PGrid(200, 200);
@@ -213,10 +215,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 // PreUpdate: clear buffer
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
+	
 
-	switch (currentView)
+	/*switch (currentView)
 	{
 	case CurrentView::EDITOR :
 		glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
@@ -224,9 +225,9 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	case CurrentView::GAME:
 		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 		break;
-	}
+	}*/
 
-	glPopMatrix();
+	
 	/*glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	glPopMatrix();*/
@@ -243,28 +244,39 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
-	
 	fbo->Bind();
-	glClearColor(0.0f, 0.0f, 0.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
 	app->scene->Draw();
 
+	glPopMatrix();
+
 	fbo->Unbind();
-	
-	app->editor->Draw(fbo);
 
-	//// Camera Component FBO
+	// Camera Component FBO
 
-	/*mainCameraFbo->Bind();
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1);
+	mainCameraFbo->Bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	app->editor->Draw(mainCameraFbo);
-	mainCameraFbo->Unbind();*/
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+
+	grid->Draw();
+	app->scene->Draw();
+
+	glPopMatrix();
+
+	mainCameraFbo->Unbind();
+
+	// Draw both buffers
+	app->editor->Draw(fbo, mainCameraFbo);
 
 
 	SDL_GL_SwapWindow(app->window->window);

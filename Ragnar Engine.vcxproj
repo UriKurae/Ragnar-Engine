@@ -120,6 +120,7 @@
     <ClInclude Include="Engine\Source\FileSystem.h" />
     <ClInclude Include="Engine\Source\Framebuffer.h" />
     <ClInclude Include="Engine\Source\GameObject.h" />
+    <ClInclude Include="Engine\Source\GameView.h" />
     <ClInclude Include="Engine\Source\glmath.h" />
     <ClInclude Include="Engine\Source\Globals.h" />
     <ClInclude Include="Engine\Source\HierarchyMenu.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Engine\Source\FileSystem.cpp" />
     <ClCompile Include="Engine\Source\Framebuffer.cpp" />
     <ClCompile Include="Engine\Source\GameObject.cpp" />
+    <ClCompile Include="Engine\Source\GameView.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />
     <ClCompile Include="Engine\Source\HierarchyMenu.cpp" />
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />

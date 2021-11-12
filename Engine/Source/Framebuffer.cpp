@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-Framebuffer::Framebuffer(int w, int h) : width(w), height(h)
+Framebuffer::Framebuffer(int w, int h, int channel) : width(w), height(h), channelId(channel)
 {
 	framebuffer = 0;
 	textureColorbuffer = 0;
@@ -15,12 +15,11 @@ Framebuffer::~Framebuffer()
 {
 	glDeleteFramebuffers(1, &framebuffer);
 	glDeleteTextures(1, &textureColorbuffer);
-	glDeleteTextures(1, &rboDepthStencil);
+	glDeleteRenderbuffers(1, &rboDepthStencil);
 }
 
 void Framebuffer::Bind()
 {
-	
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	glViewport(0, 0, width, height);
 }
@@ -37,7 +36,7 @@ void Framebuffer::SetFramebuffer()
 	{
 		glDeleteFramebuffers(1, &framebuffer);
 		glDeleteTextures(1, &textureColorbuffer);
-		glDeleteTextures(1, &rboDepthStencil);
+		glDeleteRenderbuffers(1, &rboDepthStencil);
 	}
 
 	glGenFramebuffers(1, &framebuffer);
@@ -54,12 +53,12 @@ void Framebuffer::SetFramebuffer()
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	glGenTextures(1, &rboDepthStencil);
-	glBindTexture(GL_TEXTURE_2D, rboDepthStencil);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, rboDepthStencil, 0);
+	glGenRenderbuffers(1, &rboDepthStencil);
+	glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

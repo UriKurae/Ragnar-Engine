@@ -20,11 +20,12 @@ Viewport::~Viewport()
 {
 }
 
-void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
+void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int currentOperation)
 {
+	ImGui::Begin("Scene");
+	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::EDITOR;
+	
 
-	ImGui::Begin("Game", &active);
-	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::GAME;
 	ImVec2 size = ImGui::GetContentRegionAvail();
 
 	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
@@ -39,11 +40,6 @@ void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 
 	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
-	ImGui::End();
-
-	ImGui::Begin("Scene");
-	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::EDITOR;
-	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 	if (app->editor->GetSelected())
 	{
@@ -72,6 +68,12 @@ void Viewport::Draw(Framebuffer* framebuffer, int currentOperation)
 		}
 		ImGui::EndDragDropTarget();
 	}
+
+	ImGui::Begin("Game Preview");
+
+	ImGui::Image((ImTextureID)gameBuffer->GetId(), ImVec2(200, 100), ImVec2(0, 1), ImVec2(1, 0));
+
+	ImGui::End();
 
 	ImGui::End();
 }

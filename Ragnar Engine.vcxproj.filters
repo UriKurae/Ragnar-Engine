@@ -231,6 +231,9 @@
     <ClInclude Include="Dependencies\Imgui\ImGuizmo.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\GameView.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -379,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp">
       <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\GameView.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

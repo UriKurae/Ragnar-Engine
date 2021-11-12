@@ -5,14 +5,14 @@
 #include "MathGeoLib/src/Math/float4.h"
 
 
-class Viewport
+class GameView
 {
 public:
-	Viewport();
+	GameView();
 
-	~Viewport();
+	~GameView();
 
-	void Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int currentOperation);
+	void Draw(Framebuffer* framebuffer);
 
 	inline float4 GetBounds() { return bounds; }
 	inline const bool GetState() const { return selected; }

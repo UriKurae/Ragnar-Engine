@@ -5,7 +5,7 @@ typedef unsigned int GLuint;
 class Framebuffer
 {
 public:
-	Framebuffer(int w, int h);
+	Framebuffer(int w, int h, int channel);
 
 	~Framebuffer();
 
@@ -21,6 +21,7 @@ public:
 private:
 	int width;
 	int height;
+	int channelId;
 
 	GLuint framebuffer;
 	GLuint rboDepthStencil;
