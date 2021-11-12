@@ -3,13 +3,13 @@
 #include "Component.h"
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
-#include "TextureBuffer.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
 #include <vector>
 
 typedef unsigned int GLuint;
 typedef unsigned char GLubyte;
+
 class TransformComponent;
 class MaterialComponent;
 class Mesh;
@@ -31,6 +31,8 @@ public:
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 
+	inline AABB GetLocalAABB() { return localBoundingBox; }
+
 private:
 	TransformComponent* transform;
 	MaterialComponent* material;
@@ -47,4 +49,6 @@ private:
 
 	VertexBuffer* vboAabb;
 	IndexBuffer* eboAabb;
+
+	bool showMeshMenu;
 };

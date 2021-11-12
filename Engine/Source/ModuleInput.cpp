@@ -5,7 +5,6 @@
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
-#include "LoadModel.h"
 
 #include "Profiling.h"
 

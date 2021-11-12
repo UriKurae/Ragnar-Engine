@@ -3,7 +3,6 @@
 #include "TransformComponent.h"
 #include "Globals.h"
 
-#include "ModuleCamera3D.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
 #include "Imgui/ImGuizmo.h"
@@ -151,6 +150,13 @@ void TransformComponent::RecursiveTransform(GameObject* parent)
 		RecursiveTransform(children[i]);
 	}
 
+	if (owner->GetComponent<MeshComponent>())
+	{
+		//OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB();
+		//newObb.Transform(globalMatrix);
+		//owner->SetAABB(newObb);
+		owner->SetAABB(owner->GetComponent<MeshComponent>()->GetLocalAABB());
+	}
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)

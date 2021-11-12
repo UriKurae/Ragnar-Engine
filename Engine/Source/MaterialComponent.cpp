@@ -1,10 +1,9 @@
 #include "MaterialComponent.h"
 #include "GameObject.h"
-#include "Imgui/imgui.h"
 #include "TextureLoader.h"
 #include "Texture.h"
 
-#include "MeshComponent.h"
+#include "Imgui/imgui.h"
 
 #include "Profiling.h"
 

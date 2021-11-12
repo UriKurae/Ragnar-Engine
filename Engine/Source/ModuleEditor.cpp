@@ -3,8 +3,6 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleRenderer3D.h"
-#include "ModuleScene.h"
 #include "GameObject.h"
 
 #include "ConsoleMenu.h"
@@ -12,9 +10,6 @@
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/imgui_impl_sdl.h"
-
-
-#include <GL/glew.h>
 
 #include "Profiling.h"
 

@@ -1,6 +1,4 @@
 #include "TextureBuffer.h"
-#include "MeshComponent.h"
-#include "MaterialComponent.h"
 
 #include "glew/include/GL/glew.h"
 #include "IL/il.h"

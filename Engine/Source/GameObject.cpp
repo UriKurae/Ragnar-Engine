@@ -237,8 +237,9 @@ void GameObject::SetTotalAABB()
 	}
 }
 
-void GameObject::SetAABB(AABB newAABB)
+void GameObject::SetAABB(AABB newAABB, bool needToClean)
 {
+	if (needToClean) globalAabb.SetNegativeInfinity();
 	globalObb = newAABB;
 	globalObb.Transform(GetComponent<TransformComponent>()->GetTransform());
 
@@ -283,10 +284,13 @@ void GameObject::SetAABB(AABB newAABB)
 
 void GameObject::SetAABB(OBB newOBB)
 {
-	
 	globalAabb.SetNegativeInfinity();
 	globalAabb.Enclose(newOBB);
-	
+
+	if (parent != nullptr && parent != app->scene->GetRoot())
+	{
+		parent->SetAABB(globalAabb);
+	}
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)

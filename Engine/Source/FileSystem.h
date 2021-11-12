@@ -35,10 +35,13 @@ public:
 
 	void LoadFile(std::string& path);
 	void ImportFiles(std::string& path);
+	void LoadFiles();
 	void ImportFromOutside(std::string& source, std::string& destination);
 	void CheckExtension(std::string& path);
 
 	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
+	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList);
+	void DiscoverDirs(const char* directory, std::vector<std::string>& dirList);
 	inline const bool IsDirectory(const char* file) const { return PHYSFS_isDirectory(file) != 0; }
 	
 	void CreateDir(const char* directory);

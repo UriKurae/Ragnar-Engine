@@ -1,7 +1,5 @@
 #include "ConsoleMenu.h"
 #include "Application.h"
-#include "ModuleWindow.h"
-#include "ModuleInput.h"
 
 #include "Profiling.h"
 
@@ -17,13 +15,6 @@ ConsoleMenu::~ConsoleMenu()
 bool ConsoleMenu::Update(float dt)
 {
 	bool ret = false;
-
-	//if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && 
-	//	app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-	//{
-	//	collapsed = !collapsed;
-	//	ImGui::SetNextWindowCollapsed(collapsed);
-	//}
 
 	ImGui::Begin("Console", &active);
 	if (ImGui::Button("Clear console"))

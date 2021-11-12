@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Component.h"
-#include "TextureBuffer.h"
 #include <string>
 
 typedef unsigned int GLuint;

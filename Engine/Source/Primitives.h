@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "MathGeoLib/src/MathGeoLib.h"
+#include "glmath.h"
 
 typedef unsigned char GLubyte;
 

@@ -3,8 +3,8 @@
 #include "Application.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "Component.h"
 
-#include "GameObject.h"
 #include "FileSystem.h"
 
 #include "IL/il.h"

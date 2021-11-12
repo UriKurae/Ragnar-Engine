@@ -1,12 +1,10 @@
 #pragma once
 #include "Module.h"
 
-#include "glmath.h"
 #include "Light.h"
 
 #include <vector>
 #include "Primitive.h"
-#include "glew/include/GL/glew.h"
 
 #define MAX_LIGHTS 8
 

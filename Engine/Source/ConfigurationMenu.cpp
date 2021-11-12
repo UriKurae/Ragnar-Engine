@@ -5,7 +5,6 @@
 #include "ConfigurationMenu.h"
 
 #include <GL\glew.h>
-#include <SDL.h>
 
 #include "Profiling.h"
 

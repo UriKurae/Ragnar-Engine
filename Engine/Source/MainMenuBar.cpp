@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleEditor.h"
 #include "ModuleScene.h"
+
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
 #include "MainMenuBar.h"

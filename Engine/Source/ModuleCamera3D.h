@@ -1,6 +1,7 @@
 #pragma once
+
 #include "Module.h"
-#include "glmath.h"
+
 #include "MathGeoLib/src/Geometry/Frustum.h"
 
 class ModuleCamera3D : public Module

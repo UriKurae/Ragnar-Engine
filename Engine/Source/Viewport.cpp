@@ -3,7 +3,7 @@
 #include "ModuleEditor.h"
 #include "Viewport.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleScene.h"
+#include "GameObject.h"
 
 #include "FileSystem.h"
 

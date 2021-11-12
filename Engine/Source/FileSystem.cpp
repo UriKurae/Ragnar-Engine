@@ -5,9 +5,7 @@
 #include "TextureLoader.h"
 #include "ModuleEditor.h"
 #include "GameObject.h"
-#include "MaterialComponent.h"
 
-#include "SDL/include/SDL_filesystem.h"
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
 #include "IL/il.h"
@@ -241,6 +239,41 @@ void FileSystem::ImportFiles(std::string& path)
 	}
 }
 
+void FileSystem::LoadFiles()
+{
+	std::stack<std::string> dirsStack;
+	dirsStack.push(std::string("Library/"));
+
+	while (!dirsStack.empty())
+	{
+		std::string dir = dirsStack.top();
+
+		std::vector<std::string> files;
+		std::vector<std::string> dirs;
+
+		DiscoverFiles(dir.c_str(), files, dirs);
+
+		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+		{
+			if ((*it).find(".rgmesh") != std::string::npos)
+			{
+				
+			}
+			else if ((*it).find(".dds") != std::string::npos)
+			{
+
+			}
+		}
+
+		dirsStack.pop();
+
+		for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
+		{
+			dirsStack.push(*it);
+		}
+	}
+}
+
 void FileSystem::ImportFromOutside(std::string& source, std::string& destination)
 {
 	char buffer[8192];
@@ -309,6 +342,38 @@ void FileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& 
 			dirList.push_back(dir + *i + "/");
 		else
 			fileList.push_back(dir + *i);
+	}
+
+	PHYSFS_freeList(rc);
+}
+
+void FileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& fileList)
+{
+	char** rc = PHYSFS_enumerateFiles(directory);
+	char** i;
+
+	std::string dir(directory);
+
+	for (i = rc; *i != nullptr; ++i)
+	{
+		if (!PHYSFS_isDirectory((dir + *i).c_str()))
+			fileList.push_back(*i);
+	}
+
+	PHYSFS_freeList(rc);
+}
+
+void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& dirList)
+{
+	char** rc = PHYSFS_enumerateFiles(directory);
+	char** i;
+
+	std::string dir(directory);
+
+	for (i = rc; *i != nullptr; ++i)
+	{
+		if (PHYSFS_isDirectory((dir + *i).c_str()))
+			dirList.push_back(dir + *i + "/");
 	}
 
 	PHYSFS_freeList(rc);

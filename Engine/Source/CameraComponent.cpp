@@ -1,12 +1,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleEditor.h"
 #include "CameraComponent.h"
-#include "TransformComponent.h"
 #include "GameObject.h"
-#include "IndexBuffer.h"
-#include "VertexBuffer.h"
 
 #include "glew/include/GL/glew.h"
 

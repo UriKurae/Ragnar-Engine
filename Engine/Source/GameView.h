@@ -4,7 +4,6 @@
 #include "MathGeoLib/src/Math/float2.h"
 #include "MathGeoLib/src/Math/float4.h"
 
-
 class GameView
 {
 public:
