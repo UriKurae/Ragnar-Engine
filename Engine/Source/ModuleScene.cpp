@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "Primitives.h"
-#include "LoadModel.h"
+#include "ModelImporter.h"
 #include "FileSystem.h"
 
 #include "Profiling.h"
@@ -26,8 +26,9 @@ bool ModuleScene::Start()
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
 	
-	app->fs->ImportFiles(std::string("Assets/"));
-	LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/BakerHouse.fbx"));
+	ModelImporter::ImportModel(std::string("Assets/Resources/BakerHouse.fbx"));
+	//app->fs->ImportFiles(std::string("Assets/"));
+	ModelImporter::LoadModel(std::string("Assets/Resources/BakerHouse.fbx"));
 	//LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/soraFbx.fbx"));
 	//LoadModel::GetInstance()->LoadingModel(std::string("Assets/Resources/WolfLink.fbx"));
 
@@ -55,7 +56,6 @@ bool ModuleScene::Draw()
 		if (go->GetActive())
 			go->Draw();
 	}
-
 
 	return true;
 }

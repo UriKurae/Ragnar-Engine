@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "FileSystem.h"
 #include "Globals.h"
+#include "TextureImporter.h"
 
 #include "Texture.h"
 #include "Mesh.h"
@@ -61,7 +62,8 @@ Texture* ResourceManager::IsTextureLoaded(std::string path)
 		if (textures[i]->GetPath() == path)
 			return textures[i];
 	}
-	return nullptr;
+	
+	return TextureImporter::LoadTexture(path.c_str());
 }
 
 void ResourceManager::RemoveTexture(Texture* tex)

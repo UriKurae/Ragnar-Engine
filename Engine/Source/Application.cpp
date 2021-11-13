@@ -6,8 +6,6 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "FileSystem.h"
-#include "LoadModel.h"
-#include "TextureLoader.h"
 #include "ResourceManager.h"
 
 #include "Profiling.h"
@@ -52,8 +50,6 @@ Application::~Application()
 	}
 
 	RELEASE(fs);
-	LoadModel::ReleaseInstance();
-	TextureLoader::ReleaseInstance();
 	ResourceManager::ReleaseInstance();
 
 	listModules.clear();

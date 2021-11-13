@@ -1,8 +1,8 @@
 #include "FileSystem.h"
 #include "Application.h"
 #include "Globals.h"
-#include "LoadModel.h"
-#include "TextureLoader.h"
+#include "ModelImporter.h"
+#include "ResourceManager.h"
 #include "ModuleEditor.h"
 #include "GameObject.h"
 
@@ -187,7 +187,7 @@ void FileSystem::LoadFile(std::string& path)
 		if (*s == extension)
 		{
 			RG_PROFILING_FUNCTION("Loading Model");
-			LoadModel::GetInstance()->LoadingModel(path);
+			ModelImporter::LoadModel(path);
 			return;
 		}
 	}
@@ -199,7 +199,8 @@ void FileSystem::LoadFile(std::string& path)
 		if (*s == extension)
 		{
 			RG_PROFILING_FUNCTION("Loading Texture");
-			app->editor->GetSelected()->GetComponent<MaterialComponent>()->SetTexture(TextureLoader::GetInstance()->LoadTexture(path));
+			// When mouse picking fixed, this will work correctly
+			app->editor->GetSelected()->GetComponent<MaterialComponent>()->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(path));
 			return;
 		}
 	}
@@ -310,7 +311,7 @@ void FileSystem::CheckExtension(std::string& path)
 		if (*s == extension)
 		{
 			RG_PROFILING_FUNCTION("Importing Model");
-			LoadModel::GetInstance()->ImportModel(path);
+			ModelImporter::ImportModel(path);
 			return;
 		}
 	}
@@ -322,8 +323,7 @@ void FileSystem::CheckExtension(std::string& path)
 		if (*s == extension)
 		{
 			RG_PROFILING_FUNCTION("Importing Texture");
-			TextureLoader::GetInstance()->ImportTexture(path);
-			TextureLoader::GetInstance()->LoadTexture(path);
+			//TextureImporter::ImportTexture(path);
 			return;
 		}
 	}

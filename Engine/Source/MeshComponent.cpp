@@ -7,7 +7,6 @@
 #include "ResourceManager.h"
 
 #include "Mesh.h"
-#include "LoadModel.h"
 
 #include "Imgui/imgui.h"
 
@@ -98,7 +97,7 @@ void MeshComponent::OnEditor()
 
 bool MeshComponent::OnLoad(JsonParsing& node)
 {
-	LoadModel::GetInstance()->LoadMesh(node.GetJsonString("Path"), this);
+	ResourceManager::GetInstance()->IsMeshLoaded(std::string(node.GetJsonString("Path")));
 
 	active = node.GetJsonBool("Active");
 

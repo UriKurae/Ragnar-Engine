@@ -171,14 +171,8 @@
     <ClInclude Include="Engine\Source\MeshComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\LoadModel.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\MaterialComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\TextureLoader.h">
-      <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Viewport.h">
       <Filter>Sources\Menus</Filter>
@@ -233,6 +227,13 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\GameView.h">
       <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModelImporter.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\MeshImporter.h" />
+    <ClInclude Include="Engine\Source\TextureImporter.h">
+      <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -332,14 +333,8 @@
     <ClCompile Include="Engine\Source\MeshComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\LoadModel.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\MaterialComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\TextureLoader.cpp">
-      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Viewport.cpp">
       <Filter>Sources\Menus</Filter>
@@ -385,6 +380,13 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\GameView.cpp">
       <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModelImporter.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MeshImporter.cpp" />
+    <ClCompile Include="Engine\Source\TextureImporter.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
