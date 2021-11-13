@@ -222,7 +222,7 @@ void FileSystem::ImportFiles(std::string& path)
 		std::vector<std::string> dirs;
 
 		// We get the files and dirs of the current directory, that it's the top of the stack
-		DiscoverFiles(dir.c_str(), files, dirs);
+		DiscoverFilesAndDirs(dir.c_str(), files, dirs);
 
 		// We iterate all the files on the current directory
 		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -253,7 +253,7 @@ void FileSystem::LoadFiles()
 		std::vector<std::string> files;
 		std::vector<std::string> dirs;
 
-		DiscoverFiles(dir.c_str(), files, dirs);
+		DiscoverFilesAndDirs(dir.c_str(), files, dirs);
 
 		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 		{
@@ -284,7 +284,8 @@ void FileSystem::ImportFromOutside(std::string& source, std::string& destination
 	FILE* file = nullptr;
 	fopen_s(&file, source.c_str(), "rb");
 	
-	std::string name = source.substr(source.find_last_of("\\") + 1, source.length());
+	std::string name = source;
+	GetFilenameWithExtension(name);
 
 	name = destination + name;
 	PHYSFS_file* dest = PHYSFS_openWrite(name.c_str());
@@ -330,7 +331,7 @@ void FileSystem::CheckExtension(std::string& path)
 	}
 }
 
-void FileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList)
+void FileSystem::DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList)
 {
 	char** rc = PHYSFS_enumerateFiles(directory);
 	char** i;
@@ -378,6 +379,60 @@ void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& d
 	}
 
 	PHYSFS_freeList(rc);
+}
+
+void FileSystem::NormalizePath(std::string& path)
+{
+	for (int i = 0; i < path.length(); ++i)
+		if (path[i] == '\\') path[i] = '/';
+}
+
+void FileSystem::GetRelativeDirectory(std::string& path)
+{
+	NormalizePath(path);
+
+	if (path.find("/") != std::string::npos)
+	{
+		path = path.substr(0, path.length() - 1);
+		path = path.substr(path.find_last_of("/") + 1, path.length());
+	}
+}
+
+void FileSystem::GetFilenameWithExtension(std::string& path)
+{
+	NormalizePath(path);
+
+	if (path.find("/") != std::string::npos)
+		path = path.substr(path.find_last_of("/") + 1, path.length());
+}
+
+void FileSystem::GetFilenameWithoutExtension(std::string& path)
+{
+	NormalizePath(path);
+
+	if (path.find("/") != std::string::npos)
+	{
+		path = path.substr(path.find_last_of("/") + 1, path.length());
+		path = path.substr(0, path.find_last_of("."));
+	}
+}
+
+bool FileSystem::RemoveFile(const char* file)
+{
+	bool ret = false;
+
+	if (file != nullptr)
+	{
+		if (PHYSFS_delete(file) == 0)
+		{
+			LOG("File deleted: [%s]", file);
+			ret = true;
+		}
+		else
+			LOG("File System error while trying to delete [%s]: ", file, PHYSFS_getLastError());
+	}
+
+	return ret;
 }
 
 void FileSystem::CreateDir(const char* directory)

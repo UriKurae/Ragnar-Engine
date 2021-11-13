@@ -1,6 +1,7 @@
 #include "ModuleScene.h"
 
 #include "Application.h"
+#include "Globals.h"
 #include "ModuleEditor.h"
 #include "Primitives.h"
 #include "ModelImporter.h"

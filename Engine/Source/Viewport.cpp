@@ -35,13 +35,12 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		framebuffer->ResizeFramebuffer(size.x, size.y);
 		app->renderer3D->OnResize(size.x, size.y);
 		app->camera->UpdateFovAndScreen(size.x, size.y);
-		
 	}
+
 	bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
 	selected = ImGui::IsWindowFocused();
 
 	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
-
 
 	if (app->editor->GetSelected())
 	{
@@ -53,7 +52,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
 		view.Transpose();
 
-		math::float4x4 tr = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
+		math::float4x4 tr = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetLocalTransform().Transposed();
 		ImGuizmo::Manipulate(view.ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
 		if (ImGuizmo::IsUsing())
 		{

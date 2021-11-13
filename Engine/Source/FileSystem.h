@@ -39,10 +39,17 @@ public:
 	void ImportFromOutside(std::string& source, std::string& destination);
 	void CheckExtension(std::string& path);
 
-	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
+	void DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
 	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList);
 	void DiscoverDirs(const char* directory, std::vector<std::string>& dirList);
 	inline const bool IsDirectory(const char* file) const { return PHYSFS_isDirectory(file) != 0; }
+
+	void NormalizePath(std::string& path);
+	void GetRelativeDirectory(std::string& path);
+	void GetFilenameWithExtension(std::string& path);
+	void GetFilenameWithoutExtension(std::string& path);
+
+	bool RemoveFile(const char* file);
 	
 	void CreateDir(const char* directory);
 private:

@@ -18,7 +18,7 @@ public:
 	void RemoveTexture(Texture* tex);
 
 	void AddMesh(Mesh* mesh);
-	Mesh* IsMeshLoaded(std::string& path);
+	Mesh* IsMeshLoaded(std::string path);
 	void RemoveMesh(Mesh* mesh);
 
 private:

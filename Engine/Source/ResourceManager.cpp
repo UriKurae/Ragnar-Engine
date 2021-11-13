@@ -4,6 +4,7 @@
 #include "FileSystem.h"
 #include "Globals.h"
 #include "TextureImporter.h"
+#include "MeshImporter.h"
 
 #include "Texture.h"
 #include "Mesh.h"
@@ -50,20 +51,20 @@ void ResourceManager::AddTexture(Texture* tex)
 
 Texture* ResourceManager::IsTextureLoaded(std::string path)
 {
-	if (path.find(".dds") == std::string::npos)
+	std::string p = path;
+	if (p.find(".dds") == std::string::npos)
 	{
-		path = path.substr(path.find_last_of("/") + 1, path.length());
-		path = path.substr(0, path.find_last_of("."));
-		path = TEXTURES_FOLDER + path + ".dds";
+		app->fs->GetFilenameWithoutExtension(p);
+		p = TEXTURES_FOLDER + p + ".dds";
 	}
 
 	for (int i = 0; i < textures.size(); ++i)
 	{
-		if (textures[i]->GetPath() == path)
+		if (textures[i]->GetPath() == p)
 			return textures[i];
 	}
 	
-	return TextureImporter::LoadTexture(path.c_str());
+	return TextureImporter::LoadTexture(p.c_str());
 }
 
 void ResourceManager::RemoveTexture(Texture* tex)
@@ -85,14 +86,21 @@ void ResourceManager::AddMesh(Mesh* mesh)
 	meshes.emplace_back(mesh);
 }
 
-Mesh* ResourceManager::IsMeshLoaded(std::string& path)
+Mesh* ResourceManager::IsMeshLoaded(std::string path)
 {
+	std::string p = path;
+	if (p.find(".rgmesh") == std::string::npos)
+	{
+		app->fs->GetFilenameWithoutExtension(p);
+		p = MESHES_FOLDER + p + ".dds";
+	}
+
 	for (int i = 0; i < meshes.size(); ++i)
 	{
-		if (meshes[i]->GetPath() == path)
+		if (meshes[i]->GetPath() == p)
 			return meshes[i];
 	}
-	return nullptr;
+	return MeshImporter::LoadMesh(p.c_str());
 }
 
 void ResourceManager::RemoveMesh(Mesh* mesh)

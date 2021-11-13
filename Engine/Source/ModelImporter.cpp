@@ -7,6 +7,7 @@
 #include "Globals.h"
 #include "MeshImporter.h"
 #include "TextureImporter.h"
+#include "ResourceManager.h"
 
 #include <stack>
 
@@ -25,9 +26,8 @@ void ModelImporter::ImportModel(std::string& path)
 		return;
 	}
 
-	std::string p = path.substr(0, path.find_last_of('.'));
-	p = p.substr(path.find_last_of('\\') + 1, p.length());
-	p = p.substr(path.find_last_of('/') + 1, p.length());
+	std::string p = path;
+	app->fs->GetFilenameWithoutExtension(p);
 
 	JsonParsing json = JsonParsing();
 	JsonParsing child = json.SetChild(json.GetRootValue(), "Model");
@@ -55,11 +55,11 @@ void ModelImporter::LoadModel(std::string& path)
 	RG_PROFILING_FUNCTION("Loading Model");
 	char* buffer = nullptr;
 
-	path = path.substr(0, path.find_last_of("."));
-	path = path.substr(path.find_last_of("/") + 1, path.length());
-	path = MODELS_FOLDER + path + ".rgmodel";
+	std::string p = path;
+	app->fs->GetFilenameWithoutExtension(p);
+	p = MODELS_FOLDER + p + ".rgmodel";
 
-	app->fs->Load(path.c_str(), &buffer);
+	app->fs->Load(p.c_str(), &buffer);
 
 	if (buffer != nullptr)
 	{
@@ -133,13 +133,13 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 			{
 				MeshComponent* mesh = (MeshComponent*)newGo->CreateComponent(ComponentType::MESH_RENDERER);
 				//LoadMesh(component.GetJsonString("Mesh Path"), mesh);
-				mesh->SetMesh(MeshImporter::LoadMesh(component.GetJsonString("Mesh Path")));
+				mesh->SetMesh(ResourceManager::GetInstance()->IsMeshLoaded(component.GetJsonString("Mesh Path")));
 				break;
 			}
 			case ComponentType::MATERIAL:
 			{
 				MaterialComponent* material = (MaterialComponent*)newGo->CreateComponent(ComponentType::MATERIAL);
-				material->SetTexture(TextureImporter::LoadTexture(component.GetJsonString("Texture Path")));
+				material->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(component.GetJsonString("Texture Path")));
 				break;
 			}
 			}

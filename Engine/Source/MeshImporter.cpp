@@ -127,63 +127,60 @@ Mesh* MeshImporter::LoadMesh(const char* path)
 		meshPath += path;
 		meshPath += ".rgmesh";
 	}
-	
-	Mesh* mesh = ResourceManager::GetInstance()->IsMeshLoaded(meshPath);
 
-	if (mesh == nullptr)
+	char* buffer = nullptr;
+
+	Mesh* mesh = nullptr;
+
+	if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
 	{
-		char* buffer = nullptr;
+		std::vector<float3> vertices;
+		std::vector<unsigned int> indices;
+		std::vector<float3> normals;
+		std::vector<float2> texCoords;
 
-		if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
-		{
-			std::vector<float3> vertices;
-			std::vector<unsigned int> indices;
-			std::vector<float3> normals;
-			std::vector<float2> texCoords;
+		char* cursor = buffer;
+		unsigned int* header = new unsigned int[4];
 
-			char* cursor = buffer;
-			unsigned int* header = new unsigned int[4];
+		// Loading header information
+		uint bytes = sizeof(header) * sizeof(unsigned int);
+		memcpy(header, buffer, bytes);
+		cursor += bytes;
 
-			// Loading header information
-			uint bytes = sizeof(header) * sizeof(unsigned int);
-			memcpy(header, buffer, bytes);
-			cursor += bytes;
+		// Setting information
+		vertices.resize(header[0]);
+		indices.resize(header[1]);
+		normals.resize(header[2]);
+		texCoords.resize(header[3]);
 
-			// Setting information
-			vertices.resize(header[0]);
-			indices.resize(header[1]);
-			normals.resize(header[2]);
-			texCoords.resize(header[3]);
+		// Loading vertices
+		bytes = sizeof(float3) * vertices.size();
+		memcpy(&vertices[0], cursor, bytes);
+		cursor += bytes;
 
-			// Loading vertices
-			bytes = sizeof(float3) * vertices.size();
-			memcpy(&vertices[0], cursor, bytes);
-			cursor += bytes;
+		// Loading indices
+		bytes = sizeof(unsigned int) * indices.size();
+		memcpy(indices.data(), cursor, bytes);
+		cursor += bytes;
 
-			// Loading indices
-			bytes = sizeof(unsigned int) * indices.size();
-			memcpy(indices.data(), cursor, bytes);
-			cursor += bytes;
+		// Loading normals
+		bytes = sizeof(float3) * normals.size();
+		memcpy(normals.data(), cursor, bytes);
+		cursor += bytes;
 
-			// Loading normals
-			bytes = sizeof(float3) * normals.size();
-			memcpy(normals.data(), cursor, bytes);
-			cursor += bytes;
+		// Loading texture coordinates
+		bytes = sizeof(float2) * texCoords.size();
+		memcpy(texCoords.data(), cursor, bytes);
 
-			// Loading texture coordinates
-			bytes = sizeof(float2) * texCoords.size();
-			memcpy(texCoords.data(), cursor, bytes);
+		mesh = new Mesh(vertices, indices, normals, texCoords, meshPath);
+		ResourceManager::GetInstance()->AddMesh(mesh);
 
-			mesh = new Mesh(vertices, indices, normals, texCoords, meshPath);
-			ResourceManager::GetInstance()->AddMesh(mesh);
-
-			RELEASE_ARRAY(header);
-		}
-		else
-			DEBUG_LOG("Mesh file not found!");
-
-		RELEASE_ARRAY(buffer);
+		RELEASE_ARRAY(header);
 	}
+	else
+		DEBUG_LOG("Mesh file not found!");
+
+	RELEASE_ARRAY(buffer);
 
 	return mesh;
 }

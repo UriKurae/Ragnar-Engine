@@ -46,6 +46,9 @@
     <Filter Include="Sources\Resources">
       <UniqueIdentifier>{26d5840f-16b5-46f9-9d16-8f4c7e057a77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Resources\Importers">
+      <UniqueIdentifier>{3c644c45-199c-460f-9c95-bb1da2fa630e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -219,24 +222,26 @@
     <ClInclude Include="Engine\Source\ContentBrowserMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ResourceManager.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="Dependencies\Imgui\ImGuizmo.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\GameView.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ModelImporter.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\MeshImporter.h" />
-    <ClInclude Include="Engine\Source\TextureImporter.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\EngineTimer.h">
       <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModelImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextureImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\MeshImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ResourceManager.h">
+      <Filter>Sources\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -375,24 +380,26 @@
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\ResourceManager.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\GameView.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\ModelImporter.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\MeshImporter.cpp" />
-    <ClCompile Include="Engine\Source\TextureImporter.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\EngineTimer.cpp">
       <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModelImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextureImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MeshImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ResourceManager.cpp">
+      <Filter>Sources\Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

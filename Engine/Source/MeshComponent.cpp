@@ -98,7 +98,7 @@ void MeshComponent::OnEditor()
 
 bool MeshComponent::OnLoad(JsonParsing& node)
 {
-	ResourceManager::GetInstance()->IsMeshLoaded(std::string(node.GetJsonString("Path")));
+	mesh = ResourceManager::GetInstance()->IsMeshLoaded(std::string(node.GetJsonString("Path")));
 
 	active = node.GetJsonBool("Active");
 

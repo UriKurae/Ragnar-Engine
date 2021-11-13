@@ -1,6 +1,7 @@
 #include "HierarchyMenu.h"
 
 #include "Application.h"
+#include "Globals.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "GameObject.h"
@@ -33,7 +34,7 @@ bool HierarchyMenu::Update(float dt)
 		ImGui::TreePop();
 	}
 
-	if (ImGui::IsWindowHovered() && ImGui::IsWindowFocused() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
+	if (!gameObjectOptions && ImGui::IsWindowHovered() && ImGui::IsWindowFocused() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
 	{
 		app->editor->SetSelected(nullptr);
 		app->editor->SetSelectedParent(nullptr);
@@ -71,6 +72,15 @@ bool HierarchyMenu::Update(float dt)
 			}
 			else if (ImGui::Button("Delete", ImVec2(100.0f, 30.0f)))
 			{
+				/*for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
+				{
+					if (selected == (*i))
+					{
+						selectedParent->GetChilds().erase(i);
+						RELEASE(selected);
+						break;
+					}
+				}*/
 				for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
 				{
 					if (selected == (*i))

@@ -102,7 +102,7 @@ void TransformComponent::SetTransform(float4x4 trMatrix)
 	globalMatrix = trMatrix;
 	globalMatrix.Decompose(position, rotation, scale);
 	
-	RecursiveTransform(owner);
+	changeTransform = true;
 }
 
 void TransformComponent::SetTranslation(float3 pos)

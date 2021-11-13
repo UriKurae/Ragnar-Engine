@@ -18,7 +18,7 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		aiString str;
 		material->GetTexture(type, i, &str);
 		std::string aux = str.C_Str();
-		aux = aux.substr(aux.find_last_of("\\") + 1, aux.length());
+		app->fs->GetFilenameWithExtension(aux);
 		std::string path = RESOURCES_FOLDER;
 		path += aux;
 
@@ -28,10 +28,8 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		ilLoadImage(path.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
-		path = path.substr(path.find_last_of("/") + 1, path.length());
-		path = path.substr(0, path.find_last_of("."));
-		path = path.insert(0, TEXTURES_FOLDER);
-		path += ".dds";
+		app->fs->GetFilenameWithoutExtension(path);
+		path = TEXTURES_FOLDER + path + ".dds";
 
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
 		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", path.c_str());

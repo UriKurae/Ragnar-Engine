@@ -25,5 +25,7 @@ private:
 	std::string currentDirectory;
 	std::string mainDirectory;
 
+	std::string currentFile;
+
 	Texture* dirIcon;
 };

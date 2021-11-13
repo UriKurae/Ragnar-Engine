@@ -1,6 +1,7 @@
 #include "ContentBrowserMenu.h"
 
 #include "Application.h"
+#include "ModuleInput.h"
 #include "FileSystem.h"
 #include "ResourceManager.h"
 
@@ -32,7 +33,7 @@ bool ContentBrowserMenu::Update(float dt)
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
-	app->fs->DiscoverFiles("Assets/", files, dirs);
+	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
 	ImGui::Begin("Content Browser", &active);
 	ImGui::Columns(2);
@@ -52,19 +53,11 @@ bool ContentBrowserMenu::Update(float dt)
 	}
 
 	ImGui::NextColumn();
-	//if (currentDirectory != "Assets/")
-	//{
-	//	if (ImGui::Button("<-"))
-	//	{
-	//		currentDirectory = currentDirectory.substr(0, currentDirectory.length() - 1);
-	//		currentDirectory = currentDirectory.substr(0, currentDirectory.find_last_of("/") + 1);
-	//	}
-	//}
 
 	std::vector<std::string> files2;
 	std::vector<std::string> dirs2;
 
-	app->fs->DiscoverFiles(currentDirectory.c_str(), files2, dirs2);
+	app->fs->DiscoverFilesAndDirs(currentDirectory.c_str(), files2, dirs2);
 	
 	ImGui::BeginChild("Assets");
 
@@ -84,10 +77,14 @@ bool ContentBrowserMenu::Update(float dt)
 
 	for (std::vector<std::string>::const_iterator it = dirs2.begin(); it != dirs2.end(); ++it)
 	{
-		std::string item = (*it).substr(0, (*it).find_last_of("/"));
-		item = item.substr(item.find_last_of("/") + 1, item.length());
+		std::string item = (*it);
+		app->fs->GetRelativeDirectory(item);
 		
 		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, cell });
+		if (ImGui::IsItemClicked())
+		{
+			currentFile = (*it);
+		}
 		if (ImGui::BeginDragDropSource())
 		{
 			const wchar_t* path = (const wchar_t*)(*it).c_str();
@@ -109,11 +106,16 @@ bool ContentBrowserMenu::Update(float dt)
 	for (std::vector<std::string>::const_iterator it = files2.begin(); it != files2.end(); ++it)
 	{
 		ImGui::PushID(i++);
-		std::string item = (*it).substr((*it).find_last_of("/") + 1, (*it).length());
+		std::string item = (*it);
+		
+		app->fs->GetFilenameWithExtension(item);
 		
 		Texture* texture = ResourceManager::GetInstance()->IsTextureLoaded(item);
 		ImGui::ImageButton(texture ? (ImTextureID)texture->GetId() : "", {cell, cell});
-
+		if (ImGui::IsItemClicked())
+		{
+			currentFile = (*it);
+		}
 		if (ImGui::BeginDragDropSource())
 		{
 			const wchar_t* path = (const wchar_t*)(*it).c_str();
@@ -125,6 +127,12 @@ bool ContentBrowserMenu::Update(float dt)
 		ImGui::NextColumn();
 
 		ImGui::PopID();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_DELETE) == KeyState::KEY_UP)
+	{
+		app->fs->RemoveFile(currentFile.c_str());
+		currentFile.clear();
 	}
 
 	ImGui::Columns(1);
@@ -143,8 +151,9 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 {
 	for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
 	{
-		std::string name = (*it).substr(0, (*it).length() - 1);
-		name = name.substr(name.find_last_of("/") + 1, name.length());
+		std::string name = (*it);
+		app->fs->GetRelativeDirectory(name);
+
 		ImGuiTreeNodeFlags flags = (currentDirectory == (*it) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
 		
 		bool opened = ImGui::TreeNodeEx(name.c_str(), flags);
@@ -157,7 +166,7 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 		{
 			std::vector<std::string> file;
 			std::vector<std::string> dir;
-			app->fs->DiscoverFiles((*it).c_str(), file, dir);
+			app->fs->DiscoverFilesAndDirs((*it).c_str(), file, dir);
 
 			DrawRecursive(dir);
 			ImGui::TreePop();
