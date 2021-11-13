@@ -5,6 +5,7 @@
 
 #include <vector>
 #include "Primitive.h"
+#include "SDL.h"
 
 #define MAX_LIGHTS 8
 

@@ -1,6 +1,7 @@
 ﻿#include "ModuleEditor.h"
 
 #include "Application.h"
+#include "Globals.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "GameObject.h"

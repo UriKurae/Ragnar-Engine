@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Globals.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleScene.h"
 

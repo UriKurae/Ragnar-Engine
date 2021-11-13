@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Timer.h"
+#include "EngineTimer.h"
 #include "Module.h"
 
 #include <list>
@@ -34,7 +34,7 @@ public:
 	void LogConsole(const char* string);
 
 	void SetFPSLimit(const int fps);
-	inline int GetFPSLimit() const { return ((1.0f / (float)cappedMs) * 1000.0f); }
+	inline int GetFPSLimit() const { return engineTimer.GetFps(); }
 
 	inline void SaveConfigRequest() { saveRequested = true; }
 	inline void LoadConfigRequest() { loadRequested = true; }
@@ -48,9 +48,6 @@ private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
-
-	void ReadConfiguration(JsonParsing& node);
-	void SaveConfiguration(JsonParsing& node);
 
 	void SaveConfig();
 	void LoadConfig();
@@ -69,14 +66,7 @@ public:
 private:
 	std::list<Module*> listModules;
 
-	Timer msTimer;
-	Timer lastSecFrameTime;
-	unsigned int lastSecFrameCount = 0;
-	unsigned int prevLastSecFrameCount = 0;
-	unsigned int frameCount = 0;
-
-	float dt;
-	int cappedMs = -1;
+	EngineTimer engineTimer;
 
 	bool saveRequested;
 	bool loadRequested;

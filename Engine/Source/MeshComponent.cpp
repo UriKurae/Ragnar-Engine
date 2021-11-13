@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Globals.h"
 #include "MeshComponent.h"
 
 #include "ModuleScene.h"

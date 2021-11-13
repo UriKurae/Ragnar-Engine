@@ -235,6 +235,9 @@
     <ClInclude Include="Engine\Source\TextureImporter.h">
       <Filter>Sources</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\EngineTimer.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -387,6 +390,9 @@
     <ClCompile Include="Engine\Source\MeshImporter.cpp" />
     <ClCompile Include="Engine\Source\TextureImporter.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\EngineTimer.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

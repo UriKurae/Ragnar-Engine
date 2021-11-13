@@ -17,7 +17,7 @@ public:
 	Uint32 Read();
 
 private:
-
+	
 	bool	running;
 	Uint32	startedAt;
 	Uint32	stoppedAt;

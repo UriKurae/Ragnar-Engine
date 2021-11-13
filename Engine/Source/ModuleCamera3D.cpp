@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Globals.h"
 #include "ModuleCamera3D.h"
 
 #include "ModuleInput.h"
@@ -6,7 +7,9 @@
 #include "GameObject.h"
 #include "ModuleScene.h"
 
+#include "SDL.h"
 #include "Profiling.h"
+
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(60.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), Module(startEnabled)
 {
