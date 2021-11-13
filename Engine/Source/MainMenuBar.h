@@ -5,7 +5,7 @@
 #include <string>
 
 class ConsoleMenu;
-
+class Texture;
 enum class Menus
 {
 	CONSOLE = 0,
@@ -31,6 +31,9 @@ public:
 
 private:
 	bool showMenu;
+	Texture* buttonPlay;
+	Texture* buttonStop;
+	Texture* buttonNextFrame;
 
 	std::vector<Menu*> menus;
 };

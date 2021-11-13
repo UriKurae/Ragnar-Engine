@@ -10,10 +10,12 @@
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "Texture.h"
+#include "ResourceManager.h"
 
 #include "Profiling.h"
 
-MainMenuBar::MainMenuBar() : Menu(true)
+MainMenuBar::MainMenuBar() : Menu(true), buttonPlay(nullptr), buttonStop(nullptr), buttonNextFrame(nullptr)
 {
 	showMenu = false;
 
@@ -163,7 +165,21 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::SetTooltip("Opens the help menu");
 		}
+		
+		ImGui::SameLine(320.0f);
+		if (ImGui::Button("Play", { 80,20 }))
+		{
+			if (!app->scene->GetGameState()) app->scene->Play();
+			else (app->scene->Stop());
+		}
+		if (ImGui::Button("Stop", { 80,20 }))
+		{
+			if (app->scene->GetGameState()) app->scene->Stop();
+		}
+		if (ImGui::Button("Next", { 80,20 }))
+		{
 
+		}
 		ImGui::EndMainMenuBar();
 	}
 

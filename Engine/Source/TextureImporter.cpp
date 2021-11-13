@@ -39,6 +39,20 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 	}
 }
 
+void TextureImporter::ImportTexture(std::string& fileName)
+{
+	ILuint image;
+	ilGenImages(1, &image);
+	ilBindImage(image);
+	ilLoadImage(fileName.c_str());
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	app->fs->GetFilenameWithoutExtension(fileName);
+	fileName = TEXTURES_FOLDER + fileName + ".dds";
+
+	SaveTexture(fileName);
+	ilDeleteImages(1, &image);
+}
+
 void TextureImporter::SaveTexture(std::string& fileName)
 {
 	ILuint size;

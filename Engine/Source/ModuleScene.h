@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include "GameObject.h"
+#include "EngineTimer.h"
 #include <vector>
 
 enum class Object3D
@@ -21,7 +22,9 @@ public:
 	~ModuleScene();
 
 	bool Start() override;
+	bool PreUpdate(float dt) override;
 	bool Update(float dt) override;
+	bool PostUpdate() override;
 	bool Draw();
 	bool CleanUp() override;
 
@@ -32,8 +35,11 @@ public:
 	}
 
 	inline GameObject* GetRoot() const { return root; }
+	inline bool GetGameState() const { return isPlaying; }
 
 	void SetMainCamera(CameraComponent* camComponent) { mainCamera = camComponent; }
+	void Play();
+	void Stop();
 
 	GameObject* Create3DObject(Object3D type, GameObject* parent);
 
@@ -46,5 +52,7 @@ public:
 	CameraComponent* mainCamera;
 private:
 	GameObject* root;
+	bool isPlaying;
 
+	EngineTimer time;
 };

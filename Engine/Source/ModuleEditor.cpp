@@ -52,7 +52,6 @@ bool ModuleEditor::Update(float dt)
 
 
 	ImGui::DockSpaceOverViewport();
-	
 	ret = mainMenuBar.Update(dt);
 
 	if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT &&

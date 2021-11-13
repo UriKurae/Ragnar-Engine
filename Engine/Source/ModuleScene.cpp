@@ -9,7 +9,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : mainCamera(nullptr)
+ModuleScene::ModuleScene() : mainCamera(nullptr), isPlaying(false)
 {
 	root = new GameObject();
 	root->SetName("Scene");
@@ -36,14 +36,30 @@ bool ModuleScene::Start()
 	return true;
 }
 
+bool ModuleScene::PreUpdate(float dt)
+{
+	// TODO: When cleared the idea of the delays, uncomment or delete this.
+	//time.Start();
+
+	return true;
+}
+
 bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
+
 	mainCamera->Update(dt);
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
 		root->GetChilds()[i]->Update(dt);
 
+	return true;
+}
+
+bool ModuleScene::PostUpdate()
+{
+	// TODO: When cleared the idea of the delays, uncomment or delete this.
+	//time.FinishUpdate();
 	return true;
 }
 
@@ -243,4 +259,33 @@ bool ModuleScene::SaveScene()
 	RELEASE_ARRAY(buf);
 
 	return true;
+}
+
+void ModuleScene::Play()
+{
+	DEBUG_LOG("Saving Scene");
+
+	JsonParsing sceneFile;
+
+	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Scene");
+	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Game Objects");
+	root->OnSave(sceneFile, array);
+
+	char* buf;
+	uint size = sceneFile.Save(&buf);
+
+	if (app->fs->Save(SCENES_FOLDER "scenePlay.json", buf, size) > 0)
+		DEBUG_LOG("Scene saved succesfully");
+	else
+		DEBUG_LOG("Scene couldn't be saved");
+
+	RELEASE_ARRAY(buf);
+	
+	isPlaying = true;
+}
+
+void ModuleScene::Stop()
+{
+	LoadScene("Assets/Scenes/scenePlay.json");
+	isPlaying = false;
 }
