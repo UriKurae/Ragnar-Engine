@@ -36,6 +36,7 @@ public:
 
 	inline GameObject* GetRoot() const { return root; }
 	inline bool GetGameState() const { return isPlaying; }
+	GameObject* GetGoByUuid(double uuid) const;
 
 	void SetMainCamera(CameraComponent* camComponent) { mainCamera = camComponent; }
 	void Play();
@@ -45,6 +46,7 @@ public:
 
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
+	void ReparentGameObjects(uint uuid, GameObject* go);
 
 	bool LoadScene(const char* name);
 	bool SaveScene();

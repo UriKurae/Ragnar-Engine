@@ -33,6 +33,7 @@ public:
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
 	void AddChild(GameObject* object);
+	void RemoveChild(GameObject* object);
 
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }

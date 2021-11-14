@@ -223,6 +223,18 @@ void GameObject::AddChild(GameObject* object)
 	children.emplace_back(object);
 }
 
+void GameObject::RemoveChild(GameObject* object)
+{
+	for (std::vector<GameObject*>::iterator i = children.begin(); i != children.end(); ++i)
+	{
+		if ((*i) == object)
+		{
+			children.erase(i);
+			break;
+		}
+	}
+}
+
 char* GameObject::GetNameBuffer()
 {	
 	return &name[0];
