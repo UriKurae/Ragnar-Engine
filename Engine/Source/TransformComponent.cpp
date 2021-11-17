@@ -93,7 +93,6 @@ void TransformComponent::SetTransform(float3 pos, Quat rot, float3 sca)
 	rotation = rot;
 	scale = sca;
 
-
 	globalMatrix = float4x4::FromTRS(position, rotation, scale);	
 }
 
@@ -225,11 +224,9 @@ void TransformComponent::SetAABB()
 	}
 	if (owner->GetComponent<MeshComponent>())
 	{
-		/*OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB();
+		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
-
-		owner->SetAABB(newObb);*/
-		owner->SetAABB(owner->GetComponent<MeshComponent>()->GetLocalAABB());
+		owner->SetAABB(newObb);
 	}
 }
 
