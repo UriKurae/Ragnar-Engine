@@ -29,6 +29,8 @@ bool ModuleScene::Start()
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
 	
+	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+	
 	ModelImporter::ImportModel(std::string("Assets/Resources/BakerHouse.fbx"));
 	//app->fs->ImportFiles(std::string("Assets/"));
 	ModelImporter::LoadModel(std::string("Assets/Resources/BakerHouse.fbx"));
@@ -68,6 +70,8 @@ bool ModuleScene::PostUpdate()
 bool ModuleScene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
+
+	qTree.DebugDraw();
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
 	{
@@ -193,7 +197,6 @@ void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
 	parentObj->RemoveChild(gameObj);
 	gameObj->SetParent(go);
 	go->AddChild(gameObj);
-
 }
 
 bool ModuleScene::LoadScene(const char* name)
@@ -286,6 +289,16 @@ bool ModuleScene::SaveScene()
 	return true;
 }
 
+void ModuleScene::AddToQuadtree(GameObject* go)
+{
+	qTree.Insert(go);
+}
+
+void ModuleScene::RemoveFromQuadtree(GameObject* go)
+{
+	qTree.Remove(go);
+}
+
 void ModuleScene::Play()
 {
 	DEBUG_LOG("Saving Scene");
@@ -312,5 +325,8 @@ void ModuleScene::Play()
 void ModuleScene::Stop()
 {
 	LoadScene("Assets/Scenes/scenePlay.json");
+	app->fs->RemoveFile("Assets/Scenes/scenePlay.json");
+	qTree.Clear();
+	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	isPlaying = false;
 }

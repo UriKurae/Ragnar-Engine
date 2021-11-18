@@ -243,6 +243,9 @@
     <ClInclude Include="Engine\Source\ResourceManager.h">
       <Filter>Sources\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Quadtree.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -400,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ResourceManager.cpp">
       <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Quadtree.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

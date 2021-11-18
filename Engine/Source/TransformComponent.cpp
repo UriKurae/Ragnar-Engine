@@ -228,6 +228,8 @@ void TransformComponent::SetAABB()
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 	}
+	app->scene->RemoveFromQuadtree(owner);
+	app->scene->AddToQuadtree(owner);
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)

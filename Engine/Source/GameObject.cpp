@@ -14,7 +14,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false)
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true)
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -194,7 +194,6 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
 		app->scene->SetMainCamera((CameraComponent*)component);
-		
 		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);

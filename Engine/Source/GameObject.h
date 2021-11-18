@@ -66,6 +66,7 @@ public:
 private:
 	std::string name;
 	bool active;
+	bool staticObj;
 	bool colliders;
 	std::vector<Component*> components;
 

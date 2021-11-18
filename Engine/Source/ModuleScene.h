@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include "GameObject.h"
+#include "Quadtree.h"
 #include "EngineTimer.h"
 #include <vector>
 
@@ -51,10 +52,16 @@ public:
 	bool LoadScene(const char* name);
 	bool SaveScene();
 
+	void AddToQuadtree(GameObject* go);
+	void RemoveFromQuadtree(GameObject* go);
+
+	Quadtree& GetQuadtree() { return qTree; }
+
 	CameraComponent* mainCamera;
 private:
 	GameObject* root;
 	bool isPlaying;
+	Quadtree qTree;
 
 	EngineTimer time;
 };
