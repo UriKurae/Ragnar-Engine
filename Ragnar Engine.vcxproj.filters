@@ -246,6 +246,9 @@
     <ClInclude Include="Engine\Source\Quadtree.h">
       <Filter>Sources</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Resource.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

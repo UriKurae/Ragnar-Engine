@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Resource.h"
+
 #include <vector>
 #include "MathGeoLib/src/Math/float3.h"
 #include "MathGeoLib/src/Math/float2.h"
@@ -7,7 +9,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-class Mesh
+class Mesh : public Resource
 {
 public:
 	Mesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float3>& norm, std::vector<float2>& texCoord, std::string& p);

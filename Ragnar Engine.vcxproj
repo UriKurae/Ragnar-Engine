@@ -146,6 +146,7 @@
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Profiling.h" />
     <ClInclude Include="Engine\Source\Quadtree.h" />
+    <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />

@@ -1,10 +1,11 @@
 #pragma once
 
+#include "Resource.h"
 #include <string>
 
 typedef unsigned char GLubyte;
 
-class Texture
+class Texture : public Resource
 {
 public:
 	Texture(unsigned int& i, int& w, int& h, GLubyte* d, std::string& p);
