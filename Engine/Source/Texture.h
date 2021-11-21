@@ -8,6 +8,7 @@ typedef unsigned char GLubyte;
 class Texture : public Resource
 {
 public:
+	Texture(uint uid) : Resource(uid, ResourceType::TEXTURE) {}
 	Texture(unsigned int& i, int& w, int& h, GLubyte* d, std::string& p);
 
 	~Texture();

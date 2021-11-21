@@ -59,7 +59,6 @@ void Framebuffer::SetFramebuffer()
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	GLenum err = glCheckFramebufferStatus(GL_FRAMEBUFFER);

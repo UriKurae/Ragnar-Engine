@@ -210,7 +210,6 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 int CameraComponent::ContainsAaBox(const AABB& boundingBox)
 {
-
 	if (boundingBox.IsFinite())
 	{
 		if (camera.Contains(boundingBox))

@@ -4,6 +4,7 @@
 #include "MathGeoLib/src/Geometry/Frustum.h"
 
 class GameObject;
+class CameraComponent;
 class VertexBuffer;
 class IndexBuffer;
 
@@ -13,14 +14,13 @@ public:
 	QuadtreeNode(AABB limits);
 	~QuadtreeNode();
 
-	bool IsSlotAvailable();
+	inline bool IsSlotAvailable() { return childs[0] == nullptr; }
 
 	void Insert(GameObject* go);
-	void Remove(GameObject* go);
+	inline void InsertGO(GameObject* go) { gameObjects.push_back(go); }
+	inline void Remove(std::vector<GameObject*>::const_iterator it) { gameObjects.erase(it); }
 	void CreateChilds();
 	void RedistributeChilds();
-	void Intersect(std::vector<GameObject*>& gos, Ray ray);
-	void CollectGo(std::vector<GameObject*>& gos);
 	void DebugDraw();
 
 	inline const AABB& GetBox() const { return box; }
@@ -46,7 +46,10 @@ public:
 	void Clear();
 	void Insert(GameObject* go);
 	void Remove(GameObject* go);
-	void Intersect(std::vector<GameObject*>& gos, Ray ray);
+	
+	void Intersect(std::vector<GameObject*>& gos, Ray primitive);
+	
+	void Intersect(std::vector<GameObject*>& gos, CameraComponent* frustum);
 	void CollectGo(std::vector<GameObject*>& gos);
 	void DebugDraw();
 

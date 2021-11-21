@@ -9,6 +9,7 @@
 class Texture;
 class Mesh;
 class Resource;
+enum class ResourceType;
 
 class ResourceManager
 {
@@ -16,6 +17,8 @@ public:
 	static ResourceManager* GetInstance();
 	static void ReleaseInstance();
 	~ResourceManager();
+
+	Resource* CreateResource(ResourceType type);
 
 	void AddTexture(Texture* tex);
 	Texture* IsTextureLoaded(std::string path);

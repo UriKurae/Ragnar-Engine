@@ -13,6 +13,8 @@
 
 void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json)
 {
+	RG_PROFILING_FUNCTION("Importing mesh");
+
 	std::vector<float3> vertices;
 	std::vector<float3> norms;
 	std::vector<unsigned int> indices;
@@ -41,8 +43,11 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 
 		float2 coords;
-		coords.x = mesh->mTextureCoords[0][i].x;
-		coords.y = mesh->mTextureCoords[0][i].y;
+		if (mesh->HasTextureCoords(mesh->mMaterialIndex))
+		{
+			coords.x = mesh->mTextureCoords[0][i].x;
+			coords.y = mesh->mTextureCoords[0][i].y;
+		}
 
 		norms.push_back(normals);
 		vertices.push_back(vertex);

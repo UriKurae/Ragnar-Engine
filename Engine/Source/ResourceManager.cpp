@@ -44,6 +44,31 @@ ResourceManager::~ResourceManager()
 	meshes.clear();
 }
 
+Resource* ResourceManager::CreateResource(ResourceType type)
+{
+	std::shared_ptr<Resource> resource = nullptr;
+	uint id = 0;
+
+	switch (type)
+	{
+	case ResourceType::NONE:
+		break;
+	case ResourceType::TEXTURE:
+		resource = std::make_shared<Texture>(id);
+		break;
+	case ResourceType::MESH:
+		resource = std::make_shared<Mesh>(id);
+		break;
+	case ResourceType::MODEL:
+		//resource = std::make_shared<>();
+		break;
+	}
+
+	//if (resource != nullptr) map[0] = resource;
+
+	return resource.get();
+}
+
 void ResourceManager::AddTexture(Texture* tex)
 {
 	textures.emplace_back(tex);

@@ -6,6 +6,7 @@
 #include "IndexBuffer.h"
 
 #include "glew/include/GL/glew.h"
+#include "CameraComponent.h"
 
 #include <stack>
 
@@ -43,15 +44,85 @@ void Quadtree::Insert(GameObject* go)
 
 void Quadtree::Remove(GameObject* go)
 {
-	if (root != nullptr)
+	std::stack<QuadtreeNode*> nodes;
+	nodes.push(root);
+
+	while (!nodes.empty())
 	{
-		root->Remove(go);
+		QuadtreeNode* node = nodes.top();
+
+		std::vector<GameObject*>::const_iterator it = std::find(node->GetObjects().begin(), node->GetObjects().end(), go);
+		if (it != node->GetObjects().end())
+			node->Remove(it);
+
+		nodes.pop();
+
+		if (node->IsSlotAvailable() == false)
+		{
+			for (int i = 0; i < 4; ++i)
+				nodes.push(node->GetChild(i));
+		}
 	}
 }
 
 void Quadtree::Intersect(std::vector<GameObject*>& gos, Ray ray)
 {
-	if (root != nullptr) root->Intersect(gos, ray);
+	if (root != nullptr)
+	{
+		std::stack<QuadtreeNode*> nodes;
+		nodes.push(root);
+
+		while (!nodes.empty())
+		{
+			QuadtreeNode* node = nodes.top();
+			nodes.pop();
+
+			if (ray.Intersects(node->GetBox()))
+			{
+				for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+				{
+					if (ray.Intersects((*it)->GetAABB()))
+						gos.push_back(*it);
+				}
+
+				for (int i = 0; i < 4; ++i)
+				{
+					if (node->GetChild(i) != nullptr) nodes.push(node->GetChild(i));
+				}
+			}
+		}
+	}
+}
+
+void Quadtree::Intersect(std::vector<GameObject*>& gos, CameraComponent* frustum)
+{
+	if (root != nullptr)
+	{
+		std::stack<QuadtreeNode*> nodes;
+		nodes.push(root);
+
+		while (!nodes.empty())
+		{
+			QuadtreeNode* node = nodes.top();
+			nodes.pop();
+
+			int intersect = frustum->ContainsAaBox(node->GetBox());
+			if (intersect == 1 || intersect == 2)
+			{
+				for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+				{
+					intersect = frustum->ContainsAaBox((*it)->GetAABB());
+					if (intersect == 1 || intersect == 2)
+						gos.push_back(*it);
+				}
+
+				for (int i = 0; i < 4; ++i)
+				{
+					if (node->GetChild(i) != nullptr) nodes.push(node->GetChild(i));
+				}
+			}
+		}
+	}
 }
 
 void Quadtree::CollectGo(std::vector<GameObject*>& gos)
@@ -62,8 +133,8 @@ void Quadtree::CollectGo(std::vector<GameObject*>& gos)
 	while (!stack.empty())
 	{
 		QuadtreeNode* node = stack.top();
-		for (int i = 0; i < node->GetObjects().size(); ++i)
-			gos.push_back(node->GetObjects()[i]);
+		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+			gos.push_back(*it);
 
 		stack.pop();
 
@@ -127,14 +198,11 @@ QuadtreeNode::~QuadtreeNode()
 	RELEASE(ebo);
 }
 
-bool QuadtreeNode::IsSlotAvailable()
-{
-	return childs[0] == nullptr;
-}
-
 void QuadtreeNode::Insert(GameObject* go)
 {
-	if (IsSlotAvailable() && gameObjects.size() < 4)
+	RG_PROFILING_FUNCTION("Quadtree Insert GameObject");
+
+	if (IsSlotAvailable() && (gameObjects.size() < 4 || box.HalfSize().LengthSq() <= 20.0f * 20.0f))
 	{
 		gameObjects.push_back(go);
 	}
@@ -144,19 +212,6 @@ void QuadtreeNode::Insert(GameObject* go)
 
 		gameObjects.push_back(go);
 		RedistributeChilds();
-	}
-}
-
-void QuadtreeNode::Remove(GameObject* go)
-{
-	std::vector<GameObject*>::iterator it = std::find(gameObjects.begin(), gameObjects.end(), go);
-	if (it != gameObjects.end())
-		gameObjects.erase(it);
-
-	if (IsSlotAvailable() == false)
-	{
-		for (int i = 0; i < 4; ++i)
-			childs[i]->Remove(go);
 	}
 }
 
@@ -170,32 +225,34 @@ void QuadtreeNode::CreateChilds()
 	AABB childAABB;
 
 	// Upper left
-	childCenter.x = center.x - (childsSize.x * 0.25f);
-	childCenter.z = center.z + (childsSize.z * 0.25f);
+	childCenter.x = center.x - (boxSize.x * 0.25f);
+	childCenter.z = center.z + (boxSize.z * 0.25f);
 	childAABB.SetFromCenterAndSize(childCenter, childsSize);
 	childs[0] = new QuadtreeNode(childAABB);
 
 	// Upper right
-	childCenter.x = center.x + (childsSize.x * 0.25f);
-	childCenter.z = center.z + (childsSize.z * 0.25f);
+	childCenter.x = center.x + (boxSize.x * 0.25f);
+	childCenter.z = center.z + (boxSize.z * 0.25f);
 	childAABB.SetFromCenterAndSize(childCenter, childsSize);
 	childs[1] = new QuadtreeNode(childAABB);
 
 	// Bottom left
-	childCenter.x = center.x - (childsSize.x * 0.25f);
-	childCenter.z = center.z - (childsSize.z * 0.25f);
+	childCenter.x = center.x - (boxSize.x * 0.25f);
+	childCenter.z = center.z - (boxSize.z * 0.25f);
 	childAABB.SetFromCenterAndSize(childCenter, childsSize);
 	childs[2] = new QuadtreeNode(childAABB);
 
 	// Bottom right
-	childCenter.x = center.x + (childsSize.x * 0.25f);
-	childCenter.z = center.z - (childsSize.z * 0.25f);
+	childCenter.x = center.x + (boxSize.x * 0.25f);
+	childCenter.z = center.z - (boxSize.z * 0.25f);
 	childAABB.SetFromCenterAndSize(childCenter, childsSize);
 	childs[3] = new QuadtreeNode(childAABB);
 }
 
 void QuadtreeNode::RedistributeChilds()
 {
+	RG_PROFILING_FUNCTION("Quadtree Redistribute GameObjects");
+
 	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end();)
 	{
 		GameObject* go = *it;
@@ -210,39 +267,10 @@ void QuadtreeNode::RedistributeChilds()
 			++it;
 		else
 		{
-			gameObjects.erase(it);
+			it = gameObjects.erase(it);
 			for (int i = 0; i < 4; ++i)
 				if (intersection[i]) childs[i]->Insert(go);
 		}
-	}
-}
-
-void QuadtreeNode::Intersect(std::vector<GameObject*>& gos, Ray ray)
-{
-	if (ray.Intersects(box))
-	{
-		for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
-		{
-			if (ray.Intersects((*it)->GetAABB()))
-				gos.push_back(*it);
-		}
-
-		for (int i = 0; i < 4; ++i)
-		{
-			if (childs[i] != nullptr) childs[i]->Intersect(gos, ray);
-		}
-	}
-}
-
-void QuadtreeNode::CollectGo(std::vector<GameObject*>& gos)
-{
-	for (int i = 0; i < gameObjects.size(); ++i)
-		gos.push_back(gameObjects[i]);
-
-	if (childs[0] != nullptr)
-	{
-		for (int i = 0; i < 4; ++i)
-			childs[i]->CollectGo(gos);
 	}
 }
 

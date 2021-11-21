@@ -83,6 +83,18 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		JsonParsing jsonValue = JsonParsing();
 		jsonValue.SetNewJsonString(jsonValue.ValueToObject(jsonValue.GetRootValue()), "Name", node->mName.C_Str());
 
+		aiVector3D pos;
+		aiQuaternion quat;
+		aiVector3D sca;
+		node->mTransformation.Decompose(sca, quat, pos);
+		float3 position(pos.x, pos.y, pos.z);
+		Quat quaternion(quat.x, quat.y, quat.z, quat.w);
+		float3 scale(sca.x, sca.y, sca.z);
+
+		jsonValue.SetNewJson3Number(jsonValue, "Position", position);
+		jsonValue.SetNewJson4Number(jsonValue, "Rotation", quaternion);
+		jsonValue.SetNewJson3Number(jsonValue, "Scale", scale);
+
 		for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
@@ -113,12 +125,17 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 	for (int i = 0; i < size; ++i)
 	{
 		GameObject* newGo = new GameObject();
-		newGo->CreateComponent(ComponentType::TRANSFORM);
+		TransformComponent* transform = (TransformComponent*)newGo->CreateComponent(ComponentType::TRANSFORM);
 		newGo->SetParent(go);
 		go->AddChild(newGo);
 
 		JsonParsing parsing = json.GetJsonArrayValue(array, i);
 		std::string name = parsing.GetJsonString("Name");
+		
+		float4 quat = parsing.GetJson4Number(parsing, "Rotation");
+		transform->SetTranslation(parsing.GetJson3Number(parsing, "Position"));
+		transform->SetRotation(Quat(quat.x, quat.y, quat.z, quat.w));
+		transform->SetScale(parsing.GetJson3Number(parsing, "Scale"));
 
 		newGo->SetName(name.c_str());
 		JSON_Array* arr = parsing.GetJsonArray(parsing.ValueToObject(parsing.GetRootValue()), "Components");

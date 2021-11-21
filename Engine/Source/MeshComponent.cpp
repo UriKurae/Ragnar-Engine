@@ -38,7 +38,7 @@ void MeshComponent::Draw()
 	
 	if (material != nullptr) material->BindTexture();
 	
-	if (mesh != nullptr && (app->scene->mainCamera->ContainsAaBox(localBoundingBox) == 1 || app->scene->mainCamera->ContainsAaBox(localBoundingBox) == 2)) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
 	if (material != nullptr) material->UnbindTexture();
 	

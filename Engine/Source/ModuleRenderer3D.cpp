@@ -256,7 +256,14 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
-	app->scene->Draw();
+	//app->scene->Draw();
+	std::vector<GameObject*> objects;
+	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
+
+	for (int i = 0; i < objects.size(); ++i)
+	{
+		objects[i]->Draw();
+	}
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

@@ -68,13 +68,6 @@ void GameObject::Draw()
 			component->Draw();
 	}
 
-	for (int i = 0; i < children.size(); ++i)
-	{
-		GameObject* go = children[i];
-		if (go->GetActive())
-			go->Draw();
-	}
-
 	if (index && vertex && colliders)
 	{
 		DebugColliders();

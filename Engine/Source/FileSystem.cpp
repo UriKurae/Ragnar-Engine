@@ -52,7 +52,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	ilInit();
 	
-	texExtension = { ".png", ".jpg", ".dds" };
+	texExtension = { ".png", ".jpg", ".dds", ".tga"};
 	modelExtension = { ".obj", ".fbx", ".3DS", ".FBX"};
 }
 
