@@ -35,7 +35,7 @@ void MeshComponent::Draw()
 
 	glPushMatrix();
 	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
-
+	
 	if (material != nullptr) material->BindTexture();
 	
 	if (mesh != nullptr && (app->scene->mainCamera->ContainsAaBox(localBoundingBox) == 1 || app->scene->mainCamera->ContainsAaBox(localBoundingBox) == 2)) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);

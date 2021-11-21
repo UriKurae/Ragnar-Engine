@@ -228,14 +228,19 @@ bool ModuleRenderer3D::PostUpdate()
 	// Editor Camera FBO
 	fbo->Bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
 	app->scene->Draw();
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 	glPopMatrix();
 
 	fbo->Unbind();
@@ -245,12 +250,18 @@ bool ModuleRenderer3D::PostUpdate()
 	mainCameraFbo->Bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
 	app->scene->Draw();
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 	glPopMatrix();
 
 	mainCameraFbo->Unbind();

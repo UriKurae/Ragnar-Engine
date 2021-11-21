@@ -6,7 +6,7 @@
 
 #include "glew/include/GL/glew.h"
 
-CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(60.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
+CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
 {
 	type = ComponentType::CAMERA;
 	owner = own;
@@ -83,8 +83,8 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
-
-	matrixViewFrustum = camera.ViewMatrix();
+	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
+	matrixViewFrustum = camera.ComputeViewMatrix();
 
 	return true;
 }

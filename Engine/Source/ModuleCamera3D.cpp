@@ -11,7 +11,7 @@
 #include "Profiling.h"
 
 
-ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(60.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), Module(startEnabled)
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), Module(startEnabled)
 {
 	name = "Camera3D";
 
@@ -256,8 +256,10 @@ bool ModuleCamera3D::Update(float dt)
 		}
 	}
 	cameraFrustum.SetFrame(newPos, newFront, newUp);
-
-	matrixViewFrustum = cameraFrustum.ViewMatrix();
+	
+	//matrixViewFrustum = cameraFrustum.ViewMatrix();
+	matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
+	matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
 
 	return true;
 }

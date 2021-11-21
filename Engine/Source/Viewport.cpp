@@ -46,14 +46,13 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	{
 		ImGuizmo::Enable(true);
 		ImGuizmo::SetGizmoSizeClipSpace(0.3f);
-		ImGuizmo::SetRect(bounds.x, bounds.y, bounds.z, bounds.w);
+		ImGuizmo::SetRect(bounds.x, bounds.y, size.x, size.y);
 		ImGuizmo::SetDrawlist();
 		
 		math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
-		view.Transpose();
 
 		math::float4x4 tr = app->editor->GetSelected()->GetComponent<TransformComponent>()->GetLocalTransform().Transposed();
-		ImGuizmo::Manipulate(view.ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+		ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
 		if (ImGuizmo::IsUsing())
 		{
 			app->editor->GetSelected()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
