@@ -179,26 +179,27 @@ bool MainMenuBar::Update(float dt)
 	ImGui::PushStyleColor(ImGuiCol_Border, { 0, 0, 0, 0 });
 	ImGui::PushStyleColor(ImGuiCol_BorderShadow, { 0, 0, 0, 0 });
 	ImGui::SameLine(ImGui::GetWindowSize().x * 0.5f - 81);
-	if (ImGui::ImageButton((ImTextureID)buttonPlay->GetId(), { 27,18 }))
-	{
-		if (app->scene->GetGameState() == GameState::NOT_PLAYING) app->scene->Play();
-		else app->scene->Stop();
-	}
-	ImGui::SameLine();
-	if (ImGui::ImageButton((ImTextureID)buttonStop->GetId(), { 27,18 }))
-	{
-		if (app->scene->GetGameState() == GameState::PLAYING) app->scene->Pause();
-		else if (app->scene->GetGameState() != GameState::NOT_PLAYING) app->scene->Resume();
-	}
-	ImGui::SameLine();
-	if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 }))
-	{
-		if (app->scene->GetGameState() == GameState::PAUSE) app->scene->NextFrame();
-	}
+	
+	// TODO: Hay que arreglar esto, y Oriol aqui es donde se hacen los botones.
+	//if (ImGui::ImageButton((ImTextureID)buttonPlay->GetId(), { 27,18 }))
+	//{
+	//	if (app->scene->GetGameState() == GameState::NOT_PLAYING) app->scene->Play();
+	//	else app->scene->Stop();
+	//}
+	//ImGui::SameLine();
+	//if (ImGui::ImageButton((ImTextureID)buttonStop->GetId(), { 27,18 }))
+	//{
+	//	if (app->scene->GetGameState() == GameState::PLAYING) app->scene->Pause();
+	//	else if (app->scene->GetGameState() != GameState::NOT_PLAYING) app->scene->Resume();
+	//}
+	//ImGui::SameLine();
+	//if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 }))
+	//{
+	//	if (app->scene->GetGameState() == GameState::PAUSE) app->scene->NextFrame();
+	//}
+
 	ImGui::PopStyleColor(3);
 	ImGui::End();
-	
-
 
 	if (showMenu)
 	{

@@ -4,7 +4,7 @@
 
 #include "Profiling.h"
 
-VertexBuffer::VertexBuffer(const void* data, unsigned int s) : size (s)
+VertexBuffer::VertexBuffer(const void* data, unsigned int s) : size (s), buffer(0)
 {
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
@@ -13,7 +13,7 @@ VertexBuffer::VertexBuffer(const void* data, unsigned int s) : size (s)
 
 VertexBuffer::~VertexBuffer()
 {
-	glDeleteBuffers(1, &buffer);
+	if (buffer != 0) glDeleteBuffers(1, &buffer);
 }
 
 void VertexBuffer::Bind() const

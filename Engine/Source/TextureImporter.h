@@ -4,12 +4,12 @@
 #include <assimp/material.h>
 #include "JsonParsing.h"
 
-class Texture;
+typedef unsigned char GLubyte;
 
 namespace TextureImporter
 {
 	void ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json, std::string& path);
 	void ImportTexture(std::string& fileName);
 	void SaveTexture(std::string& fileName);
-	Texture* LoadTexture(const char* path);
+	void LoadTexture(const char* path, unsigned int& id, int& width, int& height, GLubyte* data);
 }

@@ -130,12 +130,3 @@ void MeshComponent::SetMesh(Mesh* m)
 		owner->SetAABB(localBoundingBox);
 	}
 }
-
-void MeshComponent::SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3> norm, std::string& path)
-{
-	mesh = new Mesh(vert, ind, norm, texCoord, path);
-	localBoundingBox.SetNegativeInfinity();
-	localBoundingBox.Enclose(vert.data(), vert.size());
-
-	owner->SetAABB(localBoundingBox);
-}

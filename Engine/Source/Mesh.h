@@ -12,9 +12,10 @@
 class Mesh : public Resource
 {
 public:
-	Mesh(uint uid) : Resource(uid, ResourceType::MESH){}
-	Mesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float3>& norm, std::vector<float2>& texCoord, std::string& p);
+	Mesh(uint uid, std::string& assets, std::string& library);
 	~Mesh();
+
+	void Load() override;
 
 	void Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, float &colorLength);
 

@@ -27,7 +27,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(Mesh* m);
-	void SetMesh(std::vector<float3>& vert, std::vector<unsigned int>& ind, std::vector<float2>& texCoord, std::vector<float3> norm, std::string& path);
+
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 

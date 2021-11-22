@@ -18,9 +18,9 @@ public:
 	static void ReleaseInstance();
 	~ResourceManager();
 
-	std::shared_ptr<Resource> CreateResource(ResourceType type, uint uid);
+	std::shared_ptr<Resource> CreateResource(ResourceType type, uint uid, std::string& assets, std::string& library);
 
-	void LoadResource();
+	std::shared_ptr<Resource> LoadResource(uint uid);
 
 	void AddTexture(Texture* tex);
 	Texture* IsTextureLoaded(std::string path);

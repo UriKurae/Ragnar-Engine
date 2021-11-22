@@ -15,9 +15,11 @@ enum class ResourceType
 class Resource
 {
 public:
-	Resource(uint id, ResourceType t) : uid(id), type(t){}
+	Resource(uint id, ResourceType t, std::string& assets, std::string& library) : uid(id), type(t), assetsPath(assets), libraryPath(library){}
 
 	~Resource() {}
+
+	virtual void Load() {}
 
 	inline const ResourceType& GetType() const { return type; }
 	inline const uint& GetUID() const { return uid; }

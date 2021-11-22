@@ -164,7 +164,7 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 	if (!vertices.empty())
 	{
 		MeshComponent* mesh = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);;
-		mesh->SetMesh(vertices, indices, texCoords, normals, path);
+		//mesh->SetMesh(vertices, indices, texCoords, normals, path);
 	}
 
 	return object;

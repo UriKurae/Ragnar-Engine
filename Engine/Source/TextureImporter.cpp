@@ -9,6 +9,7 @@
 
 #include "IL/il.h"
 #include "ResourceManager.h"
+#include "glew/include/GL/glew.h"
 #include "MathGeoLib/src/Algorithm/Random/LCG.h"
 
 #include "Profiling.h"
@@ -35,7 +36,7 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		app->fs->GetFilenameWithoutExtension(libraryPath);
 		libraryPath = TEXTURES_FOLDER + std::to_string(number) + ".dds";
 		
-		std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, number);
+		std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, number, path, libraryPath);
 		res->SetPaths(path, libraryPath);
 
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
@@ -80,18 +81,11 @@ void TextureImporter::SaveTexture(std::string& fileName)
 	}
 }
 
-Texture* TextureImporter::LoadTexture(const char* path)
+void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width, int& height, GLubyte* data)
 {
-	std::string pathName(path);
-	if (pathName.find(".dds") == std::string::npos)
-	{
-		pathName = TEXTURES_FOLDER + pathName + ".dds";
-	}
-
-	Texture* tex = nullptr;
 	char* buffer = nullptr;
 
-	unsigned int size = app->fs->Load(pathName.c_str(), &buffer);
+	unsigned int size = app->fs->Load(path, &buffer);
 
 	if (size > 0)
 	{
@@ -100,18 +94,24 @@ Texture* TextureImporter::LoadTexture(const char* path)
 		ilBindImage(image);
 		ilLoadL(IL_DDS, buffer, size);
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-		int w = ilGetInteger(IL_IMAGE_WIDTH);
-		int h = ilGetInteger(IL_IMAGE_HEIGHT);
+		width = ilGetInteger(IL_IMAGE_WIDTH);
+		height = ilGetInteger(IL_IMAGE_HEIGHT);
 
-		GLubyte* data = ilGetData();
+		data = ilGetData();
 
-		tex = new Texture(image, w, h, data, pathName);
-		ResourceManager::GetInstance()->AddTexture(tex);
+		glGenTextures(1, &id);
+		glBindTexture(GL_TEXTURE_2D, id);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		//glGenerateMipmap(GL_TEXTURE_2D);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		ilDeleteImages(1, &image);
 	}
 
 	RELEASE_ARRAY(buffer);
-
-	return tex;
 }

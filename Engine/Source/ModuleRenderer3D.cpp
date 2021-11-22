@@ -78,7 +78,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGuiIO& io = ImGui::GetIO(); 
+		io.IniFilename = "Settings/imgui.ini";
+		(void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 		//ImGui::StyleColorsDark();
@@ -275,7 +277,6 @@ bool ModuleRenderer3D::PostUpdate()
 
 	// Draw both buffers
 	app->editor->Draw(fbo, mainCameraFbo);
-
 
 	SDL_GL_SwapWindow(app->window->window);
 

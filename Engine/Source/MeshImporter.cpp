@@ -70,8 +70,8 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	meshName += "mesh" + std::to_string(uid);
 	meshName += ".rgmesh";
 
-	std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, uid);
-	res->SetPaths(path, meshName);
+	std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, uid, path, meshName);
+	/*res->SetPaths(path, meshName);*/
 	SaveMesh(meshName, vertices, indices, norms, texCoords);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
@@ -128,27 +128,12 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<float3>& vertices, st
 	RELEASE_ARRAY(buffer);
 }
 
-Mesh* MeshImporter::LoadMesh(const char* path)
+void MeshImporter::LoadMesh(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords, std::string& path)
 {
-	std::string meshPath(path);
-	if (meshPath.find(".rgmesh") == std::string::npos)
-	{
-		meshPath = MESHES_FOLDER;
-		meshPath += path;
-		meshPath += ".rgmesh";
-	}
-
 	char* buffer = nullptr;
 
-	Mesh* mesh = nullptr;
-
-	if (app->fs->Load(meshPath.c_str(), &buffer) > 0)
+	if (app->fs->Load(path.c_str(), &buffer) > 0)
 	{
-		std::vector<float3> vertices;
-		std::vector<unsigned int> indices;
-		std::vector<float3> normals;
-		std::vector<float2> texCoords;
-
 		char* cursor = buffer;
 		unsigned int* header = new unsigned int[4];
 
@@ -182,15 +167,10 @@ Mesh* MeshImporter::LoadMesh(const char* path)
 		bytes = sizeof(float2) * texCoords.size();
 		memcpy(texCoords.data(), cursor, bytes);
 
-		mesh = new Mesh(vertices, indices, normals, texCoords, meshPath);
-		ResourceManager::GetInstance()->AddMesh(mesh);
-
 		RELEASE_ARRAY(header);
 	}
 	else
 		DEBUG_LOG("Mesh file not found!");
 
 	RELEASE_ARRAY(buffer);
-
-	return mesh;
 }
