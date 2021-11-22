@@ -3,7 +3,7 @@
 #include "Module.h"
 #include "GameObject.h"
 #include "Quadtree.h"
-#include "EngineTimer.h"
+#include "GameTimer.h"
 #include <vector>
 
 enum class Object3D
@@ -56,6 +56,7 @@ public:
 	void RemoveFromQuadtree(GameObject* go);
 
 	Quadtree& GetQuadtree() { return qTree; }
+	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
 
 	CameraComponent* mainCamera;
 private:
@@ -63,5 +64,5 @@ private:
 	bool isPlaying;
 	Quadtree qTree;
 
-	EngineTimer time;
+	GameTimer gameTimer;
 };

@@ -187,11 +187,12 @@ bool MainMenuBar::Update(float dt)
 	ImGui::SameLine();
 	if (ImGui::ImageButton((ImTextureID)buttonStop->GetId(), { 27,18 }))
 	{
-		if (app->scene->GetGameState()) app->scene->Stop();
+		if (app->scene->GetGameState()) app->scene->SetGameDeltaTime(0.0f);
 	}
 	ImGui::SameLine();
 	if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 }))
 	{
+
 	}
 	ImGui::PopStyleColor(3);
 	ImGui::End();

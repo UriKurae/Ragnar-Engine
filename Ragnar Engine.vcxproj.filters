@@ -249,6 +249,9 @@
     <ClInclude Include="Engine\Source\Resource.h">
       <Filter>Sources\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\GameTimer.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Quadtree.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\GameTimer.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

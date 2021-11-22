@@ -35,6 +35,7 @@ public:
 
 	void SetFPSLimit(const int fps);
 	inline int GetFPSLimit() const { return engineTimer.GetFps(); }
+	inline float GetEngineDeltaTime() const { return engineTimer.GetDeltaTime(); }
 
 	inline void SaveConfigRequest() { saveRequested = true; }
 	inline void LoadConfigRequest() { loadRequested = true; }

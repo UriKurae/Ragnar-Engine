@@ -41,6 +41,7 @@ bool ModuleScene::PreUpdate(float dt)
 {
 	// TODO: When cleared the idea of the delays, uncomment or delete this.
 	//time.Start();
+	gameTimer.Start();
 
 	return true;
 }
@@ -49,10 +50,12 @@ bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
-	mainCamera->Update(dt);
+	mainCamera->Update(gameTimer.GetDeltaTime());
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
-		root->GetChilds()[i]->Update(dt);
+		root->GetChilds()[i]->Update(gameTimer.GetDeltaTime());
+	
+	DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
 
 	return true;
 }
@@ -61,6 +64,7 @@ bool ModuleScene::PostUpdate()
 {
 	// TODO: When cleared the idea of the delays, uncomment or delete this.
 	//time.FinishUpdate();
+	gameTimer.FinishUpdate();
 	return true;
 }
 
