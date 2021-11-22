@@ -11,7 +11,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : mainCamera(nullptr), isPlaying(false)
+ModuleScene::ModuleScene() : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0)
 {
 	root = new GameObject();
 	root->SetName("Scene");
@@ -39,8 +39,6 @@ bool ModuleScene::Start()
 
 bool ModuleScene::PreUpdate(float dt)
 {
-	// TODO: When cleared the idea of the delays, uncomment or delete this.
-	//time.Start();
 	gameTimer.Start();
 
 	return true;
@@ -55,15 +53,17 @@ bool ModuleScene::Update(float dt)
 	for (int i = 0; i < root->GetChilds().size(); ++i)
 		root->GetChilds()[i]->Update(gameTimer.GetDeltaTime());
 	
-	DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
+	if (frameSkip || gameState == GameState::PLAYING)
+	{
+		DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
+		frameSkip = false;
+	}
 
 	return true;
 }
 
 bool ModuleScene::PostUpdate()
 {
-	// TODO: When cleared the idea of the delays, uncomment or delete this.
-	//time.FinishUpdate();
 	gameTimer.FinishUpdate();
 	return true;
 }
@@ -336,7 +336,7 @@ void ModuleScene::Play()
 
 	RELEASE_ARRAY(buf);
 	
-	isPlaying = true;
+	gameState = GameState::PLAYING;
 }
 
 void ModuleScene::Stop()
@@ -345,5 +345,17 @@ void ModuleScene::Stop()
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.json");
 	qTree.Clear();
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
-	isPlaying = false;
+	gameState = GameState::NOT_PLAYING;
+}
+
+void ModuleScene::Pause()
+{
+	gameTimer.SetDesiredDeltaTime(0.0f);
+	gameState = GameState::PAUSE;
+}
+
+void ModuleScene::Resume()
+{
+	gameTimer.SetDesiredDeltaTime(0.016f);
+	gameState = GameState::PLAYING;
 }
