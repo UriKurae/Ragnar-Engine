@@ -35,7 +35,7 @@ void ModelImporter::ImportModel(std::string& path)
 	std::string root = "Childs" + p;
 	JSON_Array* array = child.SetNewJsonArray(child.GetRootValue(), root.c_str());
 
-	ProcessNode(scene->mRootNode, scene, child, array);
+	ProcessNode(scene->mRootNode, scene, child, array, path);
 
 	SaveModel(p, json);
 }
@@ -76,7 +76,7 @@ void ModelImporter::LoadModel(std::string& path)
 	}
 }
 
-void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json)
+void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path)
 {
 	if (node == scene->mRootNode || node->mNumMeshes > 0)
 	{
@@ -98,7 +98,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			MeshImporter::ImportMesh(mesh, scene, jsonValue);
+			MeshImporter::ImportMesh(mesh, scene, jsonValue, path);
 		}
 
 		std::string name = "Childs" + std::string(node->mName.C_Str());
@@ -106,7 +106,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		// Repeat the process until there's no more children
 		for (unsigned int i = 0; i < node->mNumChildren; ++i)
 		{
-			ProcessNode(node->mChildren[i], scene, jsonValue, array);
+			ProcessNode(node->mChildren[i], scene, jsonValue, array, path);
 		}
 		nodeJ.SetValueToArray(json, jsonValue.GetRootValue());
 	}
@@ -114,7 +114,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 	{
 		for (unsigned int i = 0; i < node->mNumChildren; ++i)
 		{
-			ProcessNode(node->mChildren[i], scene, nodeJ, json);
+			ProcessNode(node->mChildren[i], scene, nodeJ, json, path);
 		}
 	}
 }

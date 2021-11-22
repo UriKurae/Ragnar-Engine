@@ -8,10 +8,12 @@
 #include "Texture.h"
 
 #include "IL/il.h"
+#include "ResourceManager.h"
+#include "MathGeoLib/src/Algorithm/Random/LCG.h"
 
 #include "Profiling.h"
 
-void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json)
+void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json, std::string& path)
 {
 	for (unsigned int i = 0; i < material->GetTextureCount(type); ++i)
 	{
@@ -19,22 +21,27 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		material->GetTexture(type, i, &str);
 		std::string aux = str.C_Str();
 		app->fs->GetFilenameWithExtension(aux);
-		std::string path = RESOURCES_FOLDER;
-		path += aux;
+		std::string libraryPath = RESOURCES_FOLDER;
+		libraryPath += aux;
 
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage(path.c_str());
+		ilLoadImage(libraryPath.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
-		app->fs->GetFilenameWithoutExtension(path);
-		path = TEXTURES_FOLDER + path + ".dds";
+		LCG random;
+		uint number = random.IntFast();
+		app->fs->GetFilenameWithoutExtension(libraryPath);
+		libraryPath = TEXTURES_FOLDER + std::to_string(number) + ".dds";
+		
+		std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, number);
+		res->SetPaths(path, libraryPath);
 
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
-		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", path.c_str());
+		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", libraryPath.c_str());
 
-		SaveTexture(path);
+		SaveTexture(libraryPath);
 		ilDeleteImages(1, &image);
 	}
 }

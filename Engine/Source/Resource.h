@@ -24,6 +24,12 @@ public:
 	inline const std::string& GetAssetsPath() const { return assetsPath; }
 	inline const std::string& GetLibraryPath() const { return libraryPath; }
 
+	inline void SetPaths(std::string& assets, std::string& library)
+	{
+		assetsPath = assets;
+		libraryPath = library;
+	}
+
 protected:
 	uint uid;
 	ResourceType type;

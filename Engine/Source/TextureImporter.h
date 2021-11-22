@@ -8,7 +8,7 @@ class Texture;
 
 namespace TextureImporter
 {
-	void ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json);
+	void ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json, std::string& path);
 	void ImportTexture(std::string& fileName);
 	void SaveTexture(std::string& fileName);
 	Texture* LoadTexture(const char* path);

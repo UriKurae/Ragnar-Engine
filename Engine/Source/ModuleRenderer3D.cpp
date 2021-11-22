@@ -257,12 +257,12 @@ bool ModuleRenderer3D::PostUpdate()
 
 	grid->Draw();
 	//app->scene->Draw();
-	std::vector<GameObject*> objects;
+	std::set<GameObject*> objects;
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 
-	for (int i = 0; i < objects.size(); ++i)
+	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		objects[i]->Draw();
+		(*it)->Draw();
 	}
 
 	glMatrixMode(GL_PROJECTION);

@@ -3,6 +3,8 @@
 #include "MathGeoLib/src/Geometry/AABB.h"
 #include "MathGeoLib/src/Geometry/Frustum.h"
 
+#include <set>
+
 class GameObject;
 class CameraComponent;
 class VertexBuffer;
@@ -49,7 +51,7 @@ public:
 	
 	void Intersect(std::vector<GameObject*>& gos, Ray primitive);
 	
-	void Intersect(std::vector<GameObject*>& gos, CameraComponent* frustum);
+	void Intersect(std::set<GameObject*>& gos, CameraComponent* frustum);
 	void CollectGo(std::vector<GameObject*>& gos);
 	void DebugDraw();
 

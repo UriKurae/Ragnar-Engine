@@ -6,12 +6,13 @@
 #include "Component.h"
 #include "TextureImporter.h"
 #include "Mesh.h"
+#include "MathGeoLib/src/Algorithm/Random/LCG.h"
 
 #include "Globals.h"
 
 #include "Profiling.h"
 
-void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json)
+void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& path)
 {
 	RG_PROFILING_FUNCTION("Importing mesh");
 
@@ -63,10 +64,14 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 	}
 
+	LCG random;
+	uint uid = random.IntFast();
 	std::string meshName = MESHES_FOLDER;
-	meshName += mesh->mName.C_Str();
+	meshName += "mesh" + std::to_string(uid);
 	meshName += ".rgmesh";
 
+	std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, uid);
+	res->SetPaths(path, meshName);
 	SaveMesh(meshName, vertices, indices, norms, texCoords);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
@@ -82,7 +87,7 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 
 		JsonParsing mat = JsonParsing();
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		TextureImporter::ImportTexture(material, aiTextureType_DIFFUSE, "texture_diffuse", mat);
+		TextureImporter::ImportTexture(material, aiTextureType_DIFFUSE, "texture_diffuse", mat, path);
 		DEBUG_LOG("Material loading completed!");
 		json.SetValueToArray(array, mat.GetRootValue());
 	}

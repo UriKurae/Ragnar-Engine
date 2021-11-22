@@ -44,29 +44,28 @@ ResourceManager::~ResourceManager()
 	meshes.clear();
 }
 
-Resource* ResourceManager::CreateResource(ResourceType type)
+std::shared_ptr<Resource> ResourceManager::CreateResource(ResourceType type, uint uid)
 {
 	std::shared_ptr<Resource> resource = nullptr;
-	uint id = 0;
 
 	switch (type)
 	{
 	case ResourceType::NONE:
 		break;
 	case ResourceType::TEXTURE:
-		resource = std::make_shared<Texture>(id);
+		resource = std::make_shared<Texture>(uid);
 		break;
 	case ResourceType::MESH:
-		resource = std::make_shared<Mesh>(id);
+		resource = std::make_shared<Mesh>(uid);
 		break;
 	case ResourceType::MODEL:
 		//resource = std::make_shared<>();
 		break;
 	}
 
-	//if (resource != nullptr) map[0] = resource;
+	if (resource != nullptr) map[uid] = resource;
 
-	return resource.get();
+	return resource;
 }
 
 void ResourceManager::AddTexture(Texture* tex)

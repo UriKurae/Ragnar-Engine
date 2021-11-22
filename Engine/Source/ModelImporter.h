@@ -17,6 +17,6 @@ namespace ModelImporter
 	void SaveModel(std::string& path, JsonParsing& json);
 	void LoadModel(std::string& path);
 
-	void ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json);
+	void ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path);
 	void CreatingModel(JsonParsing& json, JSON_Array* array, GameObject* go);
 }
