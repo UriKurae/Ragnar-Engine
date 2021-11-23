@@ -200,8 +200,6 @@ void TransformComponent::UpdateTransform(GameObject* go)
 
 	if (transform)
 	{
-		transform->localMatrix = float4x4::FromTRS(position, rotation, scale);
-		
 		if (go->GetParent() && go->GetParent() != app->scene->GetRoot())
 		{
 			TransformComponent* parentTr = go->GetParent()->GetComponent<TransformComponent>();
@@ -315,7 +313,7 @@ void TransformComponent::ShowTransformationInfo()
 		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotationEditor.y));
 		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor.z));
 
-		Quat finalQuaternion = quaternionX * quaternionY * quaternionZ;
+		Quat finalQuaternion = quaternionZ * quaternionY * quaternionX;
 		rotation = finalQuaternion;
 		/*if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
 		{
@@ -340,4 +338,6 @@ void TransformComponent::ShowTransformationInfo()
 		//RecursiveTransform(owner);
 		changeTransform = true;
 	}
+	TransformComponent* transform = owner->GetComponent<TransformComponent>();
+	if (transform) transform->localMatrix = float4x4::FromTRS(position, rotation, scale);
 }
