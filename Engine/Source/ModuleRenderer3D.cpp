@@ -237,7 +237,20 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
-	app->scene->Draw();
+	app->scene->Draw();	
+
+	math::Line line = app->camera->rayCast.ToLine();
+
+	glBegin(GL_LINES);
+	glLineWidth(7.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(line.pos.x, line.pos.y, line.pos.z);
+	glVertex3f(line.dir.x * 50.0f, line.dir.y * 50.0f, line.dir.z * 50.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
+
+
+	glEnd();
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -256,6 +269,23 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+
+	////////
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	glBegin(GL_LINES);
+
+	glLineWidth(7.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(line.pos.x, line.pos.y, line.pos.z);
+	glVertex3f(line.dir.x * 50.0f, line.dir.y * 50.0f, line.dir.z * 50.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
+
+	glEnd();
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	///////
 
 	grid->Draw();
 	//app->scene->Draw();

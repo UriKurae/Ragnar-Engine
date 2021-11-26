@@ -4,6 +4,9 @@
 
 #include "MathGeoLib/src/Geometry/Frustum.h"
 
+class VertexBuffer;
+class IndexBuffer;
+
 class ModuleCamera3D : public Module
 {
 public:
@@ -36,5 +39,8 @@ public:
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
+
+	math::Ray rayCast;
+
 
 };

@@ -6,12 +6,16 @@
 #include "ModuleEditor.h"
 #include "GameObject.h"
 #include "ModuleScene.h"
+#include "Mesh.h"
+
+#include <map>
 
 #include "SDL.h"
 #include "Profiling.h"
+#include "GL/glew.h"
 
 
-ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(0.1f), farPlane(100.0f), Module(startEnabled)
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(50.0f), Module(startEnabled)
 {
 	name = "Camera3D";
 
@@ -228,7 +232,8 @@ bool ModuleCamera3D::Update(float dt)
 			mousePos.x = -1.0f + 2.0f * mousePos.x / size.z;
 			mousePos.y = 1.0f - 2.0f * mousePos.y / size.w;
 			LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
-			Ray rayCast = picking.ToRay();
+			rayCast = picking.ToRay();
+			
 			DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
 			bool hit = false;
 
@@ -236,31 +241,57 @@ bool ModuleCamera3D::Update(float dt)
 			app->scene->GetQuadtree().CollectGo(gameObjects);
 
 			std::vector<GameObject*>::iterator it = gameObjects.begin();
+			std::map<float, GameObject*> triangleMap;
 			for (; it < gameObjects.end(); ++it)
 			{
 				TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 				if ((*it)->GetAABB().IsFinite() && transform)
 				{
 
-					rayCast.Transform(transform->GetGlobalTransform().Transposed());
-					//OBB asObb = (*it)->GetAABB().Transform((*it)->GetComponent<TransformComponent>()->GetTransform());
+					rayCast.Transform(transform->GetGlobalTransform());
 					hit = rayCast.Intersects((*it)->GetAABB());
-					
+
 					if (hit)
 					{
-						app->editor->SetSelected((*it));
-						DEBUG_LOG("HITTED IS %s", (*it)->GetName());
+						MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
+						if (meshComponent)
+						{
+							const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
+
+							
+							float distance = 0.0f;
+							float closestDistance = 50000.0f;
+							math::vec hitPoint = { 0.0f, 0.0f, 0.0f };
+							int size = meshVertices.size();
+							while (size % 3 != 0)
+							{
+								size--;
+							}
+							int hits = 0;
+							for (int i = 0; i < size; i+=3)
+							{
+								const math::Triangle tri(meshVertices[i], meshVertices[i+1], meshVertices[i+2]);
+								if (rayCast.Intersects(tri, &distance, &hitPoint))
+								{
+									if (distance <= closestDistance) closestDistance = distance;
+									hits++;
+								}
+							}
+							DEBUG_LOG("Intersected with %s", (*it)->GetName());
+							DEBUG_LOG("%d times", hits);
+							triangleMap[distance] = (*it);
+						}
 					}
 				}
 			}
+			if (!triangleMap.empty()) app->editor->SetSelected((*triangleMap.begin()).second);
 		}
 	}
 	cameraFrustum.SetFrame(newPos, newFront, newUp);
 	
-	//matrixViewFrustum = cameraFrustum.ViewMatrix();
 	matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
 	matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
-
+	
 	return true;
 }
 
