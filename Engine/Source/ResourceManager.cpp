@@ -10,6 +10,7 @@
 
 #include "Texture.h"
 #include "Mesh.h"
+#include "Model.h"
 
 ResourceManager* ResourceManager::instance = nullptr;
 
@@ -46,19 +47,14 @@ ResourceManager::~ResourceManager()
 	meshes.clear();
 }
 
+void ResourceManager::CheckForNewResources()
+{
+
+}
+
 uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std::string& library)
 {
 	std::shared_ptr<Resource> resource = nullptr;
-
-	//for (std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
-	//{
-	//	std::shared_ptr<Resource> res = (*it).second;
-	//	if (res->GetAssetsPath() == assets)
-	//	{
-	//		library = res->GetLibraryPath();
-	//		return (*it).first;
-	//	}
-	//}
 
 	LCG random;
 	uint uid = random.IntFast();
@@ -76,7 +72,8 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 		resource = std::make_shared<Mesh>(uid, assets, library);
 		break;
 	case ResourceType::MODEL:
-		//resource = std::make_shared<>();
+		library = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".rgmodel";
+		resource = std::make_shared<Model>(uid, assets, library);
 		break;
 	}
 
@@ -92,6 +89,28 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
 	if (res != nullptr) res->Load();
 
 	return res;
+}
+
+void ResourceManager::LoadResource(std::string& path)
+{
+	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	for (it = map.begin(); it != map.end(); ++it)
+	{
+		std::shared_ptr<Resource> res = (*it).second;
+		if (res->GetAssetsPath() == path)
+			res->Load();
+	}
+}
+
+bool ResourceManager::CheckResource(std::string& path)
+{
+	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	for (it = map.begin(); it != map.end(); ++it)
+	{
+		if ((*it).second->GetAssetsPath() == path)
+			return true;
+	}
+	return false;
 }
 
 void ResourceManager::AddTexture(Texture* tex)

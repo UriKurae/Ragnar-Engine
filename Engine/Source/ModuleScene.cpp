@@ -6,6 +6,7 @@
 #include "Primitives.h"
 #include "ModelImporter.h"
 #include "FileSystem.h"
+#include "ResourceManager.h"
 
 #include <stack>
 
@@ -32,7 +33,9 @@ bool ModuleScene::Start()
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	
 	ModelImporter::ImportModel(std::string("Assets/Resources/BakerHouse.fbx"));
-	ModelImporter::LoadModel(std::string("Assets/Resources/BakerHouse.fbx"));
+	ModelImporter::ImportModel(std::string("Assets/Resources/BakerHouse.fbx"));
+	//ModelImporter::LoadModel(std::string("Assets/Resources/BakerHouse.fbx"));
+	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/BakerHouse.fbx"));
 
 	return true;
 }

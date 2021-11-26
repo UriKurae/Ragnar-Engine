@@ -18,9 +18,14 @@ public:
 	static void ReleaseInstance();
 	~ResourceManager();
 
+	void CheckForNewResources();
+
 	uint CreateResource(ResourceType type, std::string& assets, std::string& library);
 
 	std::shared_ptr<Resource> LoadResource(uint uid);
+	void LoadResource(std::string& path);
+
+	bool CheckResource(std::string& path);
 
 	void AddTexture(Texture* tex);
 	Texture* IsTextureLoaded(std::string path);

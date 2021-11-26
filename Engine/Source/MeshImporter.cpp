@@ -65,8 +65,11 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 
 	std::string meshName;
+	std::string assetsPath(path);
 
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, path, meshName);
+	assetsPath.insert(assetsPath.find_last_of("."), mesh->mName.C_Str());
+
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, assetsPath, meshName);
 	SaveMesh(meshName, vertices, indices, norms, texCoords);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");

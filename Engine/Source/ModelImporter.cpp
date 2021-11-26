@@ -7,7 +7,9 @@
 #include "Globals.h"
 #include "MeshImporter.h"
 #include "TextureImporter.h"
+
 #include "ResourceManager.h"
+#include "Resource.h"
 
 #include <stack>
 
@@ -17,27 +19,37 @@ void ModelImporter::ImportModel(std::string& path)
 {
 	RG_PROFILING_FUNCTION("Importing Model");
 
-	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcessPreset_TargetRealtime_MaxQuality);
+	std::string p = path;
 
-	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	if (ResourceManager::GetInstance()->CheckResource(path))
 	{
-		DEBUG_LOG("ERROR ASSIMP %s", import.GetErrorString());
 		return;
 	}
+	else
+	{
+		Assimp::Importer import;
+		const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcessPreset_TargetRealtime_MaxQuality);
 
-	std::string p = path;
-	app->fs->GetFilenameWithoutExtension(p);
+		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+		{
+			DEBUG_LOG("ERROR ASSIMP %s", import.GetErrorString());
+			return;
+		}
 
-	JsonParsing json = JsonParsing();
-	JsonParsing child = json.SetChild(json.GetRootValue(), "Model");
-	child.SetNewJsonString(child.ValueToObject(child.GetRootValue()), "Name", p.c_str());
-	std::string root = "Childs" + p;
-	JSON_Array* array = child.SetNewJsonArray(child.GetRootValue(), root.c_str());
+		app->fs->GetFilenameWithoutExtension(p);
 
-	ProcessNode(scene->mRootNode, scene, child, array, path);
+		JsonParsing json = JsonParsing();
+		JsonParsing child = json.SetChild(json.GetRootValue(), "Model");
+		child.SetNewJsonString(child.ValueToObject(child.GetRootValue()), "Name", p.c_str());
+		std::string root = "Childs" + p;
+		JSON_Array* array = child.SetNewJsonArray(child.GetRootValue(), root.c_str());
 
-	SaveModel(p, json);
+		ResourceManager::GetInstance()->CreateResource(ResourceType::MODEL, path, p);
+
+		ProcessNode(scene->mRootNode, scene, child, array, path);
+
+		SaveModel(p, json);
+	}
 }
 
 void ModelImporter::SaveModel(std::string& path, JsonParsing& json)
@@ -45,9 +57,7 @@ void ModelImporter::SaveModel(std::string& path, JsonParsing& json)
 	char* buffer = nullptr;
 	size_t size = json.Save(&buffer);
 
-	std::string fileName = MODELS_FOLDER + path + ".rgmodel";
-
-	app->fs->Save(fileName.c_str(), buffer, size);
+	app->fs->Save(path.c_str(), buffer, size);
 }
 
 void ModelImporter::LoadModel(std::string& path)
@@ -55,11 +65,7 @@ void ModelImporter::LoadModel(std::string& path)
 	RG_PROFILING_FUNCTION("Loading Model");
 	char* buffer = nullptr;
 
-	std::string p = path;
-	app->fs->GetFilenameWithoutExtension(p);
-	p = MODELS_FOLDER + p + ".rgmodel";
-
-	app->fs->Load(p.c_str(), &buffer);
+	app->fs->Load(path.c_str(), &buffer);
 
 	if (buffer != nullptr)
 	{
