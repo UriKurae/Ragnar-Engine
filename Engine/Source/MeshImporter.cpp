@@ -64,14 +64,9 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 	}
 
-	LCG random;
-	uint uid = random.IntFast();
-	std::string meshName = MESHES_FOLDER;
-	meshName += "mesh" + std::to_string(uid);
-	meshName += ".rgmesh";
+	std::string meshName;
 
-	std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, uid, path, meshName);
-	/*res->SetPaths(path, meshName);*/
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, path, meshName);
 	SaveMesh(meshName, vertices, indices, norms, texCoords);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");

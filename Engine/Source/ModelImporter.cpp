@@ -152,7 +152,7 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 				//LoadMesh(component.GetJsonString("Mesh Path"), mesh);
 				std::string path = component.GetJsonString("Mesh Path");
 				app->fs->GetFilenameWithoutExtension(path);
-				path = path.substr(path.find_last_of("h") + 1, path.length());
+				path = path.substr(path.find_last_of("_") + 1, path.length());
 				mesh->SetMesh((Mesh*)ResourceManager::GetInstance()->LoadResource(std::stoll(path)).get());
 				break;
 			}
@@ -161,6 +161,7 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 				MaterialComponent* material = (MaterialComponent*)newGo->CreateComponent(ComponentType::MATERIAL);
 				std::string path = component.GetJsonString("Texture Path");
 				app->fs->GetFilenameWithoutExtension(path);
+				path = path.substr(path.find_last_of("_") + 1, path.length());
 				material->SetTexture((Texture*)ResourceManager::GetInstance()->LoadResource(std::stoll(path)).get());
 				break;
 			}

@@ -48,7 +48,8 @@ public:
 	void SetParentTransform(TransformComponent* component);
 	void RecursiveTransform(GameObject* parent);
 
-	void UpdateTransform(GameObject* go);
+	void UpdateTransform();
+	void UpdateChildTransform(GameObject* go);
 	void SetAABB();
 
 	inline float4x4 GetLocalTransform() const { return localMatrix; }

@@ -6,6 +6,8 @@
 #include "TextureImporter.h"
 #include "MeshImporter.h"
 
+#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+
 #include "Texture.h"
 #include "Mesh.h"
 
@@ -44,18 +46,33 @@ ResourceManager::~ResourceManager()
 	meshes.clear();
 }
 
-std::shared_ptr<Resource> ResourceManager::CreateResource(ResourceType type, uint uid, std::string& assets, std::string& library)
+uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std::string& library)
 {
 	std::shared_ptr<Resource> resource = nullptr;
+
+	//for (std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
+	//{
+	//	std::shared_ptr<Resource> res = (*it).second;
+	//	if (res->GetAssetsPath() == assets)
+	//	{
+	//		library = res->GetLibraryPath();
+	//		return (*it).first;
+	//	}
+	//}
+
+	LCG random;
+	uint uid = random.IntFast();
 
 	switch (type)
 	{
 	case ResourceType::NONE:
 		break;
 	case ResourceType::TEXTURE:
+		library = TEXTURES_FOLDER + std::string("texture_") + std::to_string(uid) + ".dds";
 		resource = std::make_shared<Texture>(uid, assets, library);
 		break;
 	case ResourceType::MESH:
+		library = MESHES_FOLDER + std::string("mesh_") + std::to_string(uid) + ".rgmesh";
 		resource = std::make_shared<Mesh>(uid, assets, library);
 		break;
 	case ResourceType::MODEL:
@@ -65,7 +82,7 @@ std::shared_ptr<Resource> ResourceManager::CreateResource(ResourceType type, uin
 
 	if (resource != nullptr) map[uid] = resource;
 
-	return resource;
+	return uid;
 }
 
 std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)

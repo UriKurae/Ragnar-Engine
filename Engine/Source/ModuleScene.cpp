@@ -254,6 +254,9 @@ bool ModuleScene::LoadScene(const char* name)
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
 
+	// TODO: Check this because it can be much cleaner
+	qTree.Clear();
+	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	app->editor->SetSelected(nullptr);
 
 	RELEASE_ARRAY(buffer);

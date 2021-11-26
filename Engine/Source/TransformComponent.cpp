@@ -49,13 +49,17 @@ bool TransformComponent::Update(float dt)
 	if (changeTransform)
 	{
 		std::stack<GameObject*> stack;
-		stack.push(owner);
+
+		UpdateTransform();
+
+		for (int i = 0; i < owner->GetChilds().size(); ++i)
+			stack.push(owner->GetChilds()[i]);
 
 		while (!stack.empty())
 		{
 			GameObject* go = stack.top();
 
-			UpdateTransform(go);
+			UpdateChildTransform(go);
 
 			stack.pop();
 
@@ -194,21 +198,28 @@ void TransformComponent::RecursiveTransform(GameObject* parent)
 	}
 }
 
-void TransformComponent::UpdateTransform(GameObject* go)
+void TransformComponent::UpdateTransform()
+{
+	localMatrix = float4x4::FromTRS(position, rotation, scale);
+
+	if (owner->GetParent() && owner->GetParent() != app->scene->GetRoot())
+	{
+		TransformComponent* parentTr = owner->GetParent()->GetComponent<TransformComponent>();
+		if (parentTr) globalMatrix = parentTr->globalMatrix * localMatrix;
+	}
+	else
+	{
+		globalMatrix = localMatrix;
+	}
+}
+
+void TransformComponent::UpdateChildTransform(GameObject* go)
 {
 	TransformComponent* transform = go->GetComponent<TransformComponent>();
 
 	if (transform)
 	{
-		if (go->GetParent() && go->GetParent() != app->scene->GetRoot())
-		{
-			TransformComponent* parentTr = go->GetParent()->GetComponent<TransformComponent>();
-			if (parentTr) transform->globalMatrix = parentTr->globalMatrix * transform->localMatrix;
-		}
-		else
-		{
-			transform->globalMatrix = transform->localMatrix;
-		}
+		transform->globalMatrix = globalMatrix * transform->localMatrix;
 	}
 }
 
@@ -288,10 +299,6 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 void TransformComponent::ShowTransformationInfo()
 {
-	float3 pos = position;
-	float3 rot;
-	float3 sca;
-		
 	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
 
 	if (DrawVec3(std::string("Rotation: "), rotationEditor))
@@ -321,7 +328,4 @@ void TransformComponent::ShowTransformationInfo()
 	}
 
 	if (DrawVec3(std::string("Scale: "), scale)) changeTransform = true;
-
-	TransformComponent* transform = owner->GetComponent<TransformComponent>();
-	if (transform) transform->localMatrix = float4x4::FromTRS(position, rotation, scale);
 }

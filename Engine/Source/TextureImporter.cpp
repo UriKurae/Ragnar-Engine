@@ -30,14 +30,8 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		ilBindImage(image);
 		ilLoadImage(libraryPath.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-
-		LCG random;
-		uint number = random.IntFast();
-		app->fs->GetFilenameWithoutExtension(libraryPath);
-		libraryPath = TEXTURES_FOLDER + std::to_string(number) + ".dds";
 		
-		std::shared_ptr<Resource> res = ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, number, path, libraryPath);
-		res->SetPaths(path, libraryPath);
+		ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, path, libraryPath);
 
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
 		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", libraryPath.c_str());
