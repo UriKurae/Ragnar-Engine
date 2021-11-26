@@ -292,52 +292,36 @@ void TransformComponent::ShowTransformationInfo()
 	float3 rot;
 	float3 sca;
 		
-	if (DrawVec3(std::string("Position: "), position))
-	{
-		//if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-		//{
-		//	SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-		//}
-		//else
-		//	SetTranslation(position);
-
-		//RG_PROFILING_FUNCTION("Recursive");
-		//RecursiveTransform(owner);
-
-		changeTransform = true;
-	}
+	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
 
 	if (DrawVec3(std::string("Rotation: "), rotationEditor))
-	{	
+	{
+		if (rotationEditor.y == 0 && rotationEditor.z == 0) rotationOrder = RotationOrder::XYZ;
+		else if (rotationEditor.x == 0 && rotationEditor.y == 0) rotationOrder = RotationOrder::ZYX;
+		else if (rotationEditor.x == 0 && rotationEditor.z == 0) rotationOrder = RotationOrder::YXZ;
+
 		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotationEditor.x));
 		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotationEditor.y));
 		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor.z));
 
-		Quat finalQuaternion = quaternionZ * quaternionY * quaternionX;
-		rotation = finalQuaternion;
-		/*if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
+		switch (rotationOrder)
 		{
-			SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
+		case RotationOrder::XYZ:
+			rotation = quaternionX * quaternionY * quaternionZ;
+			break;
+		case RotationOrder::ZYX:
+			rotation = quaternionZ * quaternionY * quaternionX;
+			break;
+		case RotationOrder::YXZ:
+			rotation = quaternionY * quaternionX * quaternionZ;
+			break;
 		}
-		else
-			SetRotation(finalQuaternion);
 
-		RecursiveTransform(owner);*/
 		changeTransform = true;
 	}
 
-	if (DrawVec3(std::string("Scale: "), scale))
-	{
-		//if (owner->GetParent() != nullptr && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-		//{
-		//	SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-		//}
-		//else
-		//	SetScale(scale);
+	if (DrawVec3(std::string("Scale: "), scale)) changeTransform = true;
 
-		//RecursiveTransform(owner);
-		changeTransform = true;
-	}
 	TransformComponent* transform = owner->GetComponent<TransformComponent>();
 	if (transform) transform->localMatrix = float4x4::FromTRS(position, rotation, scale);
 }
