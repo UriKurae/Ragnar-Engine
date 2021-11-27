@@ -21,11 +21,15 @@ public:
 	void CheckForNewResources();
 
 	uint CreateResource(ResourceType type, std::string& assets, std::string& library);
+	void CreateResourceCreated(ResourceType type, std::string& assets, std::string& library);
 
 	std::shared_ptr<Resource> LoadResource(uint uid);
-	void LoadResource(std::string& path);
+
+	std::shared_ptr<Resource> LoadResource(std::string& path);
 
 	bool CheckResource(std::string& path);
+	void ImportResourcesFromLibrary();
+	void ImportAllResources();
 
 	void AddTexture(Texture* tex);
 	Texture* IsTextureLoaded(std::string path);

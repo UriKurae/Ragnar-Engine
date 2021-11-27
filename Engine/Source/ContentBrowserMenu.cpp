@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 
 #include "Texture.h"
+#include "TextureImporter.h"
 
 #include "Imgui/imgui.h"
 
@@ -23,7 +24,9 @@ ContentBrowserMenu::~ContentBrowserMenu()
 
 bool ContentBrowserMenu::Start()
 {
-	dirIcon = ResourceManager::GetInstance()->IsTextureLoaded(std::string("Library/Textures/folder.dds"));
+	//TextureImporter::ImportTexture(std::string("Assets/Resources/folder.png"));
+	/*std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(std::string("Settings/EngineResources/folder.rgtexture"));
+	dirIcon = std::static_pointer_cast<std::shared_ptr<Texture>>(res);*/
 	
 	return true;
 }

@@ -82,6 +82,13 @@ void ModelImporter::LoadModel(std::string& path)
 	}
 }
 
+void ModelImporter::CreateImportSettings()
+{
+	JsonParsing importSettings = JsonParsing();
+
+	importSettings.SetNewJsonBool(importSettings.ValueToObject(importSettings.GetRootValue()), "", true);
+}
+
 void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path)
 {
 	if (node == scene->mRootNode || node->mNumMeshes > 0)

@@ -51,7 +51,7 @@ void TextureImporter::ImportTexture(std::string& fileName)
 	ilLoadImage(fileName.c_str());
 	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 	app->fs->GetFilenameWithoutExtension(fileName);
-	fileName = TEXTURES_FOLDER + fileName + ".dds";
+	fileName = "Settings/EngineResources/" + fileName + ".rgtexture";
 
 	SaveTexture(fileName);
 	ilDeleteImages(1, &image);
