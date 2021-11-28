@@ -27,6 +27,7 @@ public:
 	inline const float3* GetVerticesData() const { return vertices.data(); }
 	inline const std::vector<float3>& GetVerticesVector() const { return vertices; }
 	inline const int& GetIndicesSize() const { return indices.size(); }
+	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
 
 
 private:

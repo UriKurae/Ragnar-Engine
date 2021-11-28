@@ -41,6 +41,4 @@ public:
 	float4x4 matrixProjectionFrustum;
 
 	math::Ray rayCast;
-
-
 };

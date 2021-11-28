@@ -231,6 +231,7 @@ bool ModuleCamera3D::Update(float dt)
 			mousePos.y -= size.y;
 			mousePos.x = -1.0f + 2.0f * mousePos.x / size.z;
 			mousePos.y = 1.0f - 2.0f * mousePos.y / size.w;
+
 			LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
 			rayCast = picking.ToRay();
 			
@@ -248,7 +249,7 @@ bool ModuleCamera3D::Update(float dt)
 				if ((*it)->GetAABB().IsFinite() && transform)
 				{
 
-					rayCast.Transform(transform->GetGlobalTransform());
+					//rayCast.Transform(transform->GetGlobalTransform());
 					hit = rayCast.Intersects((*it)->GetAABB());
 
 					if (hit)
@@ -257,29 +258,27 @@ bool ModuleCamera3D::Update(float dt)
 						if (meshComponent)
 						{
 							const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
-
+							const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
 							
 							float distance = 0.0f;
-							float closestDistance = 50000.0f;
+							float closestDistance = 0.0f;
 							math::vec hitPoint = { 0.0f, 0.0f, 0.0f };
-							int size = meshVertices.size();
-							while (size % 3 != 0)
-							{
-								size--;
-							}
+							int size = meshComponent->GetMesh()->GetIndicesSize();
+
 							int hits = 0;
 							for (int i = 0; i < size; i+=3)
 							{
-								const math::Triangle tri(meshVertices[i], meshVertices[i+1], meshVertices[i+2]);
+								const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i+1]], meshVertices[meshIndices[i+2]]);
 								if (rayCast.Intersects(tri, &distance, &hitPoint))
 								{
-									if (distance <= closestDistance) closestDistance = distance;
+									closestDistance = distance;
+									triangleMap[distance] = (*it);
 									hits++;
+									DEBUG_LOG("Intersected with %s", (*it)->GetName());
+									break;
 								}
-							}
-							DEBUG_LOG("Intersected with %s", (*it)->GetName());
+							}		
 							DEBUG_LOG("%d times", hits);
-							triangleMap[distance] = (*it);
 						}
 					}
 				}
