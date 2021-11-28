@@ -23,7 +23,6 @@ void GameView::Draw(Framebuffer* framebuffer)
 {
 
 	ImGui::Begin("Game", &active);
-	if (ImGui::IsItemActive()) app->renderer3D->currentView = CurrentView::GAME;
 
 	ImVec2 size = ImGui::GetContentRegionAvail();
 

@@ -41,6 +41,7 @@ bool ModuleScene::Start()
 
 bool ModuleScene::PreUpdate(float dt)
 {
+	if (gameState == GameState::PLAYING)
 	gameTimer.Start();
 
 	return true;
@@ -58,6 +59,7 @@ bool ModuleScene::Update(float dt)
 	if (frameSkip || gameState == GameState::PLAYING)
 	{
 		DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
+		DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
 		frameSkip = false;
 	}
 
@@ -66,7 +68,9 @@ bool ModuleScene::Update(float dt)
 
 bool ModuleScene::PostUpdate()
 {
-	gameTimer.FinishUpdate();
+	if (gameState == GameState::PLAYING)
+		gameTimer.FinishUpdate();
+
 	return true;
 }
 
@@ -342,6 +346,7 @@ void ModuleScene::Play()
 	RELEASE_ARRAY(buf);
 	
 	gameState = GameState::PLAYING;
+	gameTimer.ResetTimer();
 }
 
 void ModuleScene::Stop()

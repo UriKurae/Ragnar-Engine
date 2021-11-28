@@ -20,6 +20,8 @@ public:
 	inline float GetDeltaTime() const { return deltaTime; }
 	inline int GetFps() const { return (1.0f / ((float)cappedMs) * 1000.0f); }
 
+	void ResetTimer();
+
 	void ReadConfig(JsonParsing& node);
 	void SaveConfig(JsonParsing& node);
 private:
@@ -32,7 +34,7 @@ private:
 
 	// Engine timings
 	int gameTimer;
-	bool engineStarted;
+	bool gameStarted;
 
 	// Json Parsing for loading and saving things
 	JsonParsing jsonFile;

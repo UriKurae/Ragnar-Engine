@@ -15,7 +15,7 @@
 #include "GL/glew.h"
 
 
-ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(50.0f), Module(startEnabled)
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(200.0f), Module(startEnabled), canBeUpdated(true)
 {
 	name = "Camera3D";
 
@@ -113,183 +113,186 @@ bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Update(float dt)
 {
-	float3 newPos = cameraFrustum.Pos();
-	float3 newFront = cameraFrustum.Front();
-	float3 newUp = cameraFrustum.Up();
-	float speed = 9.0f * dt;
-
-	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
-		speed *= 2;
-
-	float dX = -app->input->GetMouseXMotion();
-	float dY = -app->input->GetMouseYMotion();
-
-	// Inputs for the camera
-	if (app->input->GetKey(SDL_SCANCODE_T) == KeyState::KEY_UP)
+	if (canBeUpdated)
 	{
-		newUp = float3::unitY;
-		newFront = -float3::unitZ;
-	}
-	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Front() * speed;
-		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Front() * speed;
+		float3 newPos = cameraFrustum.Pos();
+		float3 newFront = cameraFrustum.Front();
+		float3 newUp = cameraFrustum.Up();
+		float speed = 9.0f * dt;
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.WorldRight() * speed;
-		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos += cameraFrustum.WorldRight() * speed;
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+			speed *= 2;
 
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Up() * speed;
-		if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Up() * speed;
+		float dX = -app->input->GetMouseXMotion();
+		float dY = -app->input->GetMouseYMotion();
 
-		GameObject* target = app->editor->GetSelected();
-
-		if (dY != 0)
+		// Inputs for the camera
+		if (app->input->GetKey(SDL_SCANCODE_T) == KeyState::KEY_UP)
 		{
-			Quat rotateVertical;
-			rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
-			newFront = rotateVertical * newFront;
-			newUp = rotateVertical * newUp;
-			newFront.Normalize();
-			newUp.Normalize();
-			float3::Orthonormalize(newFront, newUp);
+			newUp = float3::unitY;
+			newFront = -float3::unitZ;
 		}
-		if (dX != 0)
+		if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
 		{
-			Quat rotateHorizontal;
-			rotateHorizontal = rotateHorizontal.RotateY(dX * dt);
-			newFront = rotateHorizontal * newFront;
-			newUp = rotateHorizontal * newUp;
-			newFront.Normalize();
-			newUp.Normalize();
-			float3::Orthonormalize(newFront, newUp);
-		}
-	}
+			if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Front() * speed;
+			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Front() * speed;
 
-	if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
-	{
-		GameObject* target = app->editor->GetSelected();
-		if (target != nullptr)
-		{
-			float3 targetPos = {};
-			Quat targetRot = {};
-			float3 targetSize = {};
-			target->GetComponent<TransformComponent>()->GetGlobalTransform().Decompose(targetPos, targetRot, targetSize);
-			float3 distanceTarget = cameraFrustum.Pos() - targetPos;
+			if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.WorldRight() * speed;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos += cameraFrustum.WorldRight() * speed;
 
-			Quat rotateOrbitY;
-			rotateOrbitY = rotateOrbitY.RotateY(-dX * dt);
-			rotateOrbitY.Normalize();
-			//distanceTarget = rotateOrbitY * distanceTarget;
+			if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Up() * speed;
+			if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Up() * speed;
 
-			Quat rotateOrbitX;
-			rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
-			rotateOrbitX.Normalize();
-			newUp =  rotateOrbitX * newUp;
-			newUp.Normalize();
-			newUp = rotateOrbitY * newUp;
-			newUp.Normalize();
-			distanceTarget = rotateOrbitX * rotateOrbitY * distanceTarget;
-			newFront = distanceTarget.Normalized().Neg();
-			newPos = distanceTarget + targetPos;
-			float3::Orthonormalize(newFront, newUp);
-		}
-	}
+			GameObject* target = app->editor->GetSelected();
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
-	{
-		GameObject* target = app->editor->GetSelected();
-		if (target != nullptr)
-		{
-			float3 maxPoint = target->GetAABB().maxPoint;
-			float3 minPoint = target->GetAABB().minPoint;
-
-			float3 h = (maxPoint - minPoint) / 2.0f;
-
-			float angle = DegToRad(cameraFrustum.VerticalFov()) / 2;
-
-			float3 distance = h / Tan(angle);
-
-			distance.x = (distance.x + 2.5f) * cameraFrustum.Front().x;
-			distance.y = distance.y * cameraFrustum.Front().y;
-			distance.z = (distance.z + 2.5f) * cameraFrustum.Front().z;
-			newPos = target->GetAABB().CenterPoint() - distance;
-		}
-	}
-	float4 size = app->editor->GetViewport()->GetBounds();
-	float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
-	if (pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
-	{
-		if (app->input->GetMouseZ() == 1) newPos += newFront * speed;
-		if (app->input->GetMouseZ() == -1) newPos -= newFront * speed;
-
-		if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
-		{
-			float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
-			
-			mousePos.x -= size.x;
-			mousePos.y -= size.y;
-			mousePos.x = -1.0f + 2.0f * mousePos.x / size.z;
-			mousePos.y = 1.0f - 2.0f * mousePos.y / size.w;
-
-			LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
-			rayCast = picking.ToRay();
-			
-			DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
-			bool hit = false;
-
-			std::vector<GameObject*> gameObjects;
-			app->scene->GetQuadtree().CollectGo(gameObjects);
-
-			std::vector<GameObject*>::iterator it = gameObjects.begin();
-			std::map<float, GameObject*> triangleMap;
-			for (; it < gameObjects.end(); ++it)
+			if (dY != 0)
 			{
-				TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
-				if ((*it)->GetAABB().IsFinite() && transform)
+				Quat rotateVertical;
+				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+				newFront = rotateVertical * newFront;
+				newUp = rotateVertical * newUp;
+				newFront.Normalize();
+				newUp.Normalize();
+				float3::Orthonormalize(newFront, newUp);
+			}
+			if (dX != 0)
+			{
+				Quat rotateHorizontal;
+				rotateHorizontal = rotateHorizontal.RotateY(dX * dt);
+				newFront = rotateHorizontal * newFront;
+				newUp = rotateHorizontal * newUp;
+				newFront.Normalize();
+				newUp.Normalize();
+				float3::Orthonormalize(newFront, newUp);
+			}
+		}
+
+		if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT &&
+			app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
+		{
+			GameObject* target = app->editor->GetSelected();
+			if (target != nullptr)
+			{
+				float3 targetPos = {};
+				Quat targetRot = {};
+				float3 targetSize = {};
+				target->GetComponent<TransformComponent>()->GetGlobalTransform().Decompose(targetPos, targetRot, targetSize);
+				float3 distanceTarget = cameraFrustum.Pos() - targetPos;
+
+				Quat rotateOrbitY;
+				rotateOrbitY = rotateOrbitY.RotateY(-dX * dt);
+				rotateOrbitY.Normalize();
+				//distanceTarget = rotateOrbitY * distanceTarget;
+
+				Quat rotateOrbitX;
+				rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+				rotateOrbitX.Normalize();
+				newUp = rotateOrbitX * newUp;
+				newUp.Normalize();
+				newUp = rotateOrbitY * newUp;
+				newUp.Normalize();
+				distanceTarget = rotateOrbitX * rotateOrbitY * distanceTarget;
+				newFront = distanceTarget.Normalized().Neg();
+				newPos = distanceTarget + targetPos;
+				float3::Orthonormalize(newFront, newUp);
+			}
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
+		{
+			GameObject* target = app->editor->GetSelected();
+			if (target != nullptr)
+			{
+				float3 maxPoint = target->GetAABB().maxPoint;
+				float3 minPoint = target->GetAABB().minPoint;
+
+				float3 h = (maxPoint - minPoint) / 2.0f;
+
+				float angle = DegToRad(cameraFrustum.VerticalFov()) / 2;
+
+				float3 distance = h / Tan(angle);
+
+				distance.x = (distance.x + 2.5f) * cameraFrustum.Front().x;
+				distance.y = distance.y * cameraFrustum.Front().y;
+				distance.z = (distance.z + 2.5f) * cameraFrustum.Front().z;
+				newPos = target->GetAABB().CenterPoint() - distance;
+			}
+		}
+		float4 size = app->editor->GetViewport()->GetBounds();
+		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
+		if (pos.x > size.x&& pos.x < size.x + size.z && pos.y > size.y&& pos.y < size.y + size.w)
+		{
+			if (app->input->GetMouseZ() == 1) newPos += newFront * speed;
+			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed;
+
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			{
+				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
+
+				mousePos.x -= size.x;
+				mousePos.y -= size.y;
+				mousePos.x = -1.0f + 2.0f * mousePos.x / size.z;
+				mousePos.y = 1.0f - 2.0f * mousePos.y / size.w;
+
+				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
+				rayCast = picking.ToRay();
+
+				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
+				bool hit = false;
+
+				std::vector<GameObject*> gameObjects;
+				app->scene->GetQuadtree().CollectGo(gameObjects);
+
+				std::vector<GameObject*>::iterator it = gameObjects.begin();
+				std::map<float, GameObject*> triangleMap;
+				for (; it < gameObjects.end(); ++it)
 				{
-
-					//rayCast.Transform(transform->GetGlobalTransform());
-					hit = rayCast.Intersects((*it)->GetAABB());
-
-					if (hit)
+					TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
+					if ((*it)->GetAABB().IsFinite() && transform)
 					{
-						MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
-						if (meshComponent)
-						{
-							const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
-							const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
-							
-							float distance = 0.0f;
-							float closestDistance = 0.0f;
-							math::vec hitPoint = { 0.0f, 0.0f, 0.0f };
-							int size = meshComponent->GetMesh()->GetIndicesSize();
 
-							int hits = 0;
-							for (int i = 0; i < size; i+=3)
+						//rayCast.Transform(transform->GetGlobalTransform());
+						hit = rayCast.Intersects((*it)->GetAABB());
+
+						if (hit)
+						{
+							MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
+							if (meshComponent)
 							{
-								const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i+1]], meshVertices[meshIndices[i+2]]);
-								if (rayCast.Intersects(tri, &distance, &hitPoint))
+								const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
+								const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
+
+								float distance = 0.0f;
+								float closestDistance = 0.0f;
+								math::vec hitPoint = { 0.0f, 0.0f, 0.0f };
+								int size = meshComponent->GetMesh()->GetIndicesSize();
+
+								int hits = 0;
+								for (int i = 0; i < size; i += 3)
 								{
-									closestDistance = distance;
-									triangleMap[distance] = (*it);
-									hits++;
-									DEBUG_LOG("Intersected with %s", (*it)->GetName());
-									break;
+									const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i + 1]], meshVertices[meshIndices[i + 2]]);
+									if (rayCast.Intersects(tri, &distance, &hitPoint))
+									{
+										closestDistance = distance;
+										triangleMap[distance] = (*it);
+										hits++;
+										DEBUG_LOG("Intersected with %s", (*it)->GetName());
+										break;
+									}
 								}
-							}		
-							DEBUG_LOG("%d times", hits);
+								DEBUG_LOG("%d times", hits);
+							}
 						}
 					}
 				}
+				if (!triangleMap.empty()) app->editor->SetSelected((*triangleMap.begin()).second);
 			}
-			if (!triangleMap.empty()) app->editor->SetSelected((*triangleMap.begin()).second);
 		}
+		cameraFrustum.SetFrame(newPos, newFront, newUp);
+
+		matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
+		matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
 	}
-	cameraFrustum.SetFrame(newPos, newFront, newUp);
-	
-	matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
-	matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
 	
 	return true;
 }

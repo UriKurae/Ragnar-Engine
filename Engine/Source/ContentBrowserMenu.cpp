@@ -54,8 +54,9 @@ bool ContentBrowserMenu::Update(float dt)
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
-	if (resource.joinable()) resource.join();
-	resource = std::thread(UpdatingResources);
+	/*if (resource.joinable()) resource.join();
+	resource = std::thread(UpdatingResources);*/
+	ResourceManager::GetInstance()->ImportAllResources();
 
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
