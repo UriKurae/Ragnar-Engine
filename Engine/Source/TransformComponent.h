@@ -16,13 +16,6 @@ enum class Mode
 	WORLD
 };
 
-enum class RotationOrder
-{
-	XYZ = 0,
-	ZYX,
-	YXZ
-};
-
 typedef float GLfloat;
 
 class TransformComponent : public Component
@@ -64,12 +57,10 @@ public:
 private:
 	float3 position;
 	Quat rotation;
+	float3 rotationEditor;
 	float3 scale;
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
-
-	float3 rotationEditor;
-	RotationOrder rotationOrder;
 
 
 	bool changeTransform;

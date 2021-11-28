@@ -301,29 +301,20 @@ void TransformComponent::ShowTransformationInfo()
 {
 	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
 
-	if (DrawVec3(std::string("Rotation: "), rotationEditor))
+	float3 rotationInEuler;
+	rotationInEuler.x = RADTODEG * rotationEditor.x;
+	rotationInEuler.y = RADTODEG * rotationEditor.y;
+	rotationInEuler.z = RADTODEG * rotationEditor.z;
+	if (DrawVec3(std::string("Rotation: "), rotationInEuler))
 	{
-		if (rotationEditor.y == 0 && rotationEditor.z == 0) rotationOrder = RotationOrder::XYZ;
-		else if (rotationEditor.x == 0 && rotationEditor.y == 0) rotationOrder = RotationOrder::ZYX;
-		else if (rotationEditor.x == 0 && rotationEditor.z == 0) rotationOrder = RotationOrder::YXZ;
+		rotationInEuler.x = DEGTORAD * rotationInEuler.x;
+		rotationInEuler.y = DEGTORAD * rotationInEuler.y;
+		rotationInEuler.z = DEGTORAD * rotationInEuler.z;
 
-		Quat quaternionX = quaternionX.RotateX(math::DegToRad(rotationEditor.x));
-		Quat quaternionY = quaternionY.RotateY(math::DegToRad(rotationEditor.y));
-		Quat quaternionZ = quaternionZ.RotateZ(math::DegToRad(rotationEditor.z));
-
-		switch (rotationOrder)
-		{
-		case RotationOrder::XYZ:
-			rotation = quaternionX * quaternionY * quaternionZ;
-			break;
-		case RotationOrder::ZYX:
-			rotation = quaternionZ * quaternionY * quaternionX;
-			break;
-		case RotationOrder::YXZ:
-			rotation = quaternionY * quaternionX * quaternionZ;
-			break;
-		}
-
+		Quat rotationDelta = Quat::FromEulerXYZ(rotationInEuler.x - rotationEditor.x, rotationInEuler.y - rotationEditor.y, rotationInEuler.z - rotationEditor.z);
+		rotation = rotation * rotationDelta;
+		rotationEditor = rotationInEuler;
+		
 		changeTransform = true;
 	}
 
