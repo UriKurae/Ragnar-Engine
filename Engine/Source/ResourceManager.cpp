@@ -69,7 +69,7 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 	case ResourceType::NONE:
 		break;
 	case ResourceType::TEXTURE:
-		library = TEXTURES_FOLDER + std::string("texture_") + std::to_string(uid) + ".dds";
+		library = TEXTURES_FOLDER + std::string("texture_") + std::to_string(uid) + ".rgtexture";
 		resource = std::make_shared<Texture>(uid, assets, library);
 		break;
 	case ResourceType::MESH:
@@ -113,8 +113,6 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 			return res;
 		}
 	}
-
-
 }
 
 bool ResourceManager::CheckResource(std::string& path)
@@ -187,7 +185,7 @@ void ResourceManager::ImportAllResources()
 				ModelImporter::ImportModel(*it);
 				break;
 			case ResourceType::TEXTURE:
-				ModelImporter::ImportModel(*it);
+				TextureImporter::ImportTexture(*it);
 				break;
 			}
 		}

@@ -45,16 +45,24 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 
 void TextureImporter::ImportTexture(std::string& fileName)
 {
-	ILuint image;
-	ilGenImages(1, &image);
-	ilBindImage(image);
-	ilLoadImage(fileName.c_str());
-	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-	app->fs->GetFilenameWithoutExtension(fileName);
-	fileName = "Settings/EngineResources/" + fileName + ".rgtexture";
+	if (ResourceManager::GetInstance()->CheckResource(fileName))
+	{
+		return;
+	}
+	else
+	{
+		ILuint image;
+		ilGenImages(1, &image);
+		ilBindImage(image);
+		ilLoadImage(fileName.c_str());
+		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+		std::string libraryPath;
 
-	SaveTexture(fileName);
-	ilDeleteImages(1, &image);
+		ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, fileName, libraryPath);
+
+		SaveTexture(libraryPath);
+		ilDeleteImages(1, &image);
+	}
 }
 
 void TextureImporter::SaveTexture(std::string& fileName)
