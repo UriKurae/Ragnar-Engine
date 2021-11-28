@@ -81,6 +81,7 @@ bool ModuleEditor::CleanUp()
 	mainMenuBar.CleanUp();
 
 	RELEASE(viewport);
+	RELEASE(gameView);
 
 	return true;
 }

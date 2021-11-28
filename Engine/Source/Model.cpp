@@ -2,6 +2,8 @@
 
 #include "ModelImporter.h"
 
+#include "Profiling.h"
+
 Model::Model(uint uid, std::string& assets, std::string& library) : Resource(uid, ResourceType::MODEL, assets, library)
 {
 }

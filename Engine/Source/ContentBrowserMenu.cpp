@@ -9,6 +9,10 @@
 #include "TextureImporter.h"
 
 #include "Imgui/imgui.h"
+#include <iostream>
+#include <thread>
+
+#include "Profiling.h"
 
 ContentBrowserMenu::ContentBrowserMenu() : Menu(true)
 {
@@ -20,21 +24,38 @@ ContentBrowserMenu::ContentBrowserMenu() : Menu(true)
 
 ContentBrowserMenu::~ContentBrowserMenu()
 {
+	RELEASE(dirIcon);
+	RELEASE(picIcon);
+	RELEASE(modelIcon);
 }
 
 bool ContentBrowserMenu::Start()
 {
-	//TextureImporter::ImportTexture(std::string("Assets/Resources/folder.png"));
-	/*std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(std::string("Settings/EngineResources/folder.rgtexture"));
-	dirIcon = std::static_pointer_cast<std::shared_ptr<Texture>>(res);*/
-	
+	//TextureImporter::ImportTexture(std::string("Assets/Resources/model.png"));
+	dirIcon = new Texture(-1, std::string(""), std::string("Settings/EngineResources/folder.rgtexture"));
+	dirIcon->Load();
+
+	picIcon = new Texture(-2, std::string(""), std::string("Settings/EngineResources/pic.rgtexture"));
+	picIcon->Load();
+
+	modelIcon = new Texture(-3, std::string(""), std::string("Settings/EngineResources/model.rgtexture"));
+	modelIcon->Load();
+
 	return true;
+}
+
+static void UpdatingResources()
+{
+	ResourceManager::GetInstance()->ImportAllResources();
 }
 
 bool ContentBrowserMenu::Update(float dt)
 {
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
+
+	if (resource.joinable()) resource.join();
+	resource = std::thread(UpdatingResources);
 
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
@@ -113,8 +134,9 @@ bool ContentBrowserMenu::Update(float dt)
 		
 		app->fs->GetFilenameWithExtension(item);
 		
-		Texture* texture = ResourceManager::GetInstance()->IsTextureLoaded(item);
-		ImGui::ImageButton(texture ? (ImTextureID)texture->GetId() : "", {cell, cell});
+		if (item.find(".png") != std::string::npos) ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", {cell, cell});
+		else if (item.find(".fbx") != std::string::npos) ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, cell });
+		else ImGui::ImageButton("", { cell, cell });
 		if (ImGui::IsItemClicked())
 		{
 			currentFile = (*it);

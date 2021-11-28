@@ -6,6 +6,8 @@
 
 #include "glew/include/GL/glew.h"
 
+#include "Profiling.h"
+
 CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(1.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
 {
 	type = ComponentType::CAMERA;
@@ -21,7 +23,8 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 
 CameraComponent::~CameraComponent()
 {
-
+	RELEASE(vbo);
+	RELEASE(ebo);
 }
 
 void CameraComponent::OnEditor()

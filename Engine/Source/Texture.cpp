@@ -6,6 +6,8 @@
 #include "glew/include/GL/glew.h"
 #include "Globals.h"
 
+#include "Profiling.h"
+
 Texture::Texture(uint uid, std::string& assets, std::string& library) 
 	: data(nullptr), width(0), height(0), id(0), Resource(uid, ResourceType::TEXTURE, assets, library)
 {

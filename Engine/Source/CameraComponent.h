@@ -47,5 +47,4 @@ private:
 
 	IndexBuffer* ebo;
 	VertexBuffer* vbo;
-
 };

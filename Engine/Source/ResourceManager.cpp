@@ -15,6 +15,8 @@
 
 #include <stack>
 
+#include "Profiling.h"
+
 ResourceManager* ResourceManager::instance = nullptr;
 
 ResourceManager* ResourceManager::GetInstance()
@@ -111,6 +113,8 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 			return res;
 		}
 	}
+
+
 }
 
 bool ResourceManager::CheckResource(std::string& path)

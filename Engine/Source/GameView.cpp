@@ -7,6 +7,8 @@
 
 #include "Imgui/imgui.h"
 
+#include "Profiling.h"
+
 GameView::GameView()
 {
 	sizeViewport = float2(0, 0);

@@ -58,6 +58,8 @@ void ModelImporter::SaveModel(std::string& path, JsonParsing& json)
 	size_t size = json.Save(&buffer);
 
 	app->fs->Save(path.c_str(), buffer, size);
+
+	RELEASE_ARRAY(buffer);
 }
 
 void ModelImporter::LoadModel(std::string& path)
@@ -73,13 +75,15 @@ void ModelImporter::LoadModel(std::string& path)
 
 		json = json.GetChild(json.GetRootValue(), "Model");
 
-		GameObject* go = new GameObject();
+		//GameObject* go = new GameObject();
 		std::string name = json.GetJsonString("Name");
-		go->SetName(name.c_str());
+		//go->SetName(name.c_str());
 
 		name = "Childs" + name;
 		CreatingModel(json, json.GetJsonArray(json.ValueToObject(json.GetRootValue()), name.c_str()), app->scene->GetRoot());
 	}
+
+	RELEASE_ARRAY(buffer);
 }
 
 void ModelImporter::CreateImportSettings()

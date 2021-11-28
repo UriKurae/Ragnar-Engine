@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include <thread>
 #include <memory>
 
 class Texture;
@@ -28,5 +29,9 @@ private:
 
 	std::string currentFile;
 
-	std::shared_ptr<Texture> dirIcon;
+	Texture* dirIcon;
+	Texture* picIcon;
+	Texture* modelIcon;
+
+	std::thread resource;
 };
