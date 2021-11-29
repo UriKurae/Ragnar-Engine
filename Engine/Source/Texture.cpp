@@ -6,11 +6,15 @@
 #include "glew/include/GL/glew.h"
 #include "Globals.h"
 
+#include "Imgui/imgui.h"
+
 #include "Profiling.h"
 
 Texture::Texture(uint uid, std::string& assets, std::string& library) 
-	: data(nullptr), width(0), height(0), id(0), Resource(uid, ResourceType::TEXTURE, assets, library)
+	: data(nullptr), width(0), height(0), id(0), Resource(uid, ResourceType::TEXTURE, assets, library), parameters({})
 {
+	std::string metaConfig = TEXTURES_FOLDER + std::string("texture_") + std::to_string(uid) + ".meta";
+	TextureImporter::CreateMetaTexture(metaConfig, parameters);
 }
 
 Texture::~Texture()
@@ -21,8 +25,33 @@ void Texture::Load()
 {
 	if (id == 0)
 	{
-		TextureImporter::LoadTexture(libraryPath.c_str(), id,  width, height, data);
+		TextureImporter::LoadTexture(libraryPath.c_str(), id,  width, height, data, parameters);
 	}
+}
+
+void Texture::DrawOnEditor()
+{
+	ImGui::PushID(this);
+
+	if (ImGui::CollapsingHeader("Texture Import Settings"))
+	{
+		if (ImGui::CollapsingHeader("Filters"))
+		{
+			ImGui::Checkbox("Alienify", &parameters.alienify);
+			ImGui::DragFloat("Blur Avg", &parameters.blurAvg);
+			ImGui::DragFloat("Blur Gaussian", &parameters.blurGaussian);
+			ImGui::Checkbox("Edge Detect P", &parameters.edgeDetectP);
+			ImGui::Checkbox("Edge Detect S", &parameters.edgeDetectS);
+			ImGui::Checkbox("Emboss", &parameters.emboss);
+			ImGui::DragFloat("Gamma Correct Curve", &parameters.gammaCorrectCurve);
+			ImGui::Checkbox("Negative", &parameters.negative);
+			ImGui::DragFloat("Noise", &parameters.noise);
+			ImGui::Button("Apply changes");
+			//ImGui::DragInt("Pixelization", &parameters.pixelization);
+		}
+	}
+	ImGui::PopID();
+
 }
 
 void Texture::Bind()

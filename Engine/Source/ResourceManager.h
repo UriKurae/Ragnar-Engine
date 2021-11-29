@@ -30,6 +30,7 @@ public:
 	bool CheckResource(std::string& path);
 	void ImportResourcesFromLibrary();
 	void ImportAllResources();
+	Resource* GetResource(std::string path);
 
 	void AddTexture(Texture* tex);
 	Texture* IsTextureLoaded(std::string path);

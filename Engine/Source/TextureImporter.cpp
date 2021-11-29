@@ -8,6 +8,7 @@
 #include "Texture.h"
 
 #include "IL/il.h"
+#include "IL/ilu.h"
 #include "ResourceManager.h"
 #include "glew/include/GL/glew.h"
 #include "MathGeoLib/src/Algorithm/Random/LCG.h"
@@ -85,8 +86,29 @@ void TextureImporter::SaveTexture(std::string& fileName)
 	}
 }
 
-void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width, int& height, GLubyte* data)
+void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width, int& height, GLubyte* data, TextureParameters& parameterData)
 {
+	std::string aux = path;
+	aux = aux.substr(0, aux.find_last_of(".")) + ".meta";
+	char* bufferMeta = nullptr;
+	uint sizeMeta = app->fs->Load(aux.c_str(), &bufferMeta);
+	JsonParsing metaFile(bufferMeta);
+	
+	// Ilu parameters for the texture
+	parameterData.alienify = metaFile.GetJsonBool("Alienify");
+	parameterData.blurAvg = (uint)metaFile.GetJsonNumber("BlurAvg");
+	parameterData.blurGaussian = (uint)metaFile.GetJsonNumber("BlurGaussian");
+	parameterData.edgeDetectP = metaFile.GetJsonBool("EdgeDetectP");
+	parameterData.edgeDetectS = metaFile.GetJsonBool("EdgeDetectS");
+	parameterData.emboss = metaFile.GetJsonBool("Emboss");
+	parameterData.gammaCorrectCurve = metaFile.GetJsonNumber("GammaCorrectCurve");
+	parameterData.negative = metaFile.GetJsonBool("Negative");
+	parameterData.noise = metaFile.GetJsonNumber("Noise");
+	parameterData.pixelization = (uint)metaFile.GetJsonNumber("Pixelization");
+
+	bool mipMap = metaFile.GetJsonBool("MipMap");
+	uint uuid = metaFile.GetJsonNumber("Uuid");
+
 	char* buffer = nullptr;
 
 	unsigned int size = app->fs->Load(path, &buffer);
@@ -98,6 +120,9 @@ void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width
 		ilBindImage(image);
 		ilLoadL(IL_DDS, buffer, size);
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+		if (sizeMeta > 0) SetIluParameters(parameterData);
+
 		width = ilGetInteger(IL_IMAGE_WIDTH);
 		height = ilGetInteger(IL_IMAGE_HEIGHT);
 
@@ -118,4 +143,47 @@ void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width
 	}
 
 	RELEASE_ARRAY(buffer);
+}
+
+void TextureImporter::CreateMetaTexture(std::string& path, TextureParameters& data)
+{
+	JsonParsing metaTexture;
+
+	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Alienify", data.alienify);
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "BlurAvg", data.blurAvg);
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "BlurGaussian", data.blurGaussian);
+	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "EdgeDetectP", data.edgeDetectP);
+	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "EdgeDetectS", data.edgeDetectS);
+	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Emboss", data.emboss);
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "GammaCorrectCurve", data.gammaCorrectCurve);
+	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Negative", data.negative);
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Noise", data.noise);
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Pixelization", data.pixelization);
+
+
+	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "MipMap", false);
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Uuid", 1);
+
+
+	char* buffer = nullptr;
+	size_t size = metaTexture.Save(&buffer);
+
+	app->fs->Save(path.c_str(), buffer, size);
+}
+
+void TextureImporter::SetIluParameters(TextureParameters& data)
+{
+
+	// Activate parameters 
+
+	if (data.alienify) iluAlienify();
+	if (data.blurAvg != 0) iluBlurAvg(data.blurAvg);
+	if (data.blurGaussian != 0) iluBlurAvg(data.blurGaussian);
+	if (data.edgeDetectP != 0) iluEdgeDetectP();
+	if (data.edgeDetectS != 0) iluEdgeDetectS();
+	if (data.emboss) iluEmboss();
+	if (data.gammaCorrectCurve != 0.0f) iluGammaCorrect(data.gammaCorrectCurve);
+	if (data.negative) iluNegative();
+	if (data.noise != 0.0f) iluNoisify(data.noise);
+	if (data.pixelization != 0) iluPixelize(data.pixelization);
 }

@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "FileSystem.h"
 #include "ResourceManager.h"
+#include "ModuleEditor.h"
 
 #include "Texture.h"
 #include "TextureImporter.h"
@@ -140,6 +141,7 @@ bool ContentBrowserMenu::Update(float dt)
 		else ImGui::ImageButton("", { cell, cell });
 		if (ImGui::IsItemClicked())
 		{
+			app->editor->SetResource(ResourceManager::GetInstance()->GetResource((*it)));
 			currentFile = (*it);
 		}
 		if (ImGui::BeginDragDropSource())

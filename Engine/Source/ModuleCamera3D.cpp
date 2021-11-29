@@ -143,7 +143,7 @@ bool ModuleCamera3D::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Up() * speed;
 			if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Up() * speed;
 
-			GameObject* target = app->editor->GetSelected();
+			GameObject* target = app->editor->GetGO();
 
 			if (dY != 0)
 			{
@@ -170,7 +170,7 @@ bool ModuleCamera3D::Update(float dt)
 		if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT &&
 			app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
 		{
-			GameObject* target = app->editor->GetSelected();
+			GameObject* target = app->editor->GetGO();
 			if (target != nullptr)
 			{
 				float3 targetPos = {};
@@ -200,7 +200,7 @@ bool ModuleCamera3D::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
 		{
-			GameObject* target = app->editor->GetSelected();
+			GameObject* target = app->editor->GetGO();
 			if (target != nullptr)
 			{
 				float3 maxPoint = target->GetAABB().maxPoint;
@@ -285,7 +285,7 @@ bool ModuleCamera3D::Update(float dt)
 						}
 					}
 				}
-				if (!triangleMap.empty()) app->editor->SetSelected((*triangleMap.begin()).second);
+				if (!triangleMap.empty()) app->editor->SetGO((*triangleMap.begin()).second);
 			}
 		}
 		cameraFrustum.SetFrame(newPos, newFront, newUp);

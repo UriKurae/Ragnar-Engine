@@ -2,6 +2,14 @@
 
 #include "Resource.h"
 
+struct ModelParameters
+{
+	bool flippedUvs = false;
+	bool optimizedMesh = false;
+	bool hasNormals = false;
+	bool triangulated = false;
+};
+
 class Model : public Resource
 {
 public:

@@ -21,6 +21,8 @@ GameView::~GameView()
 
 void GameView::Draw(Framebuffer* framebuffer)
 {
+	ImGuiStyle& style = ImGui::GetStyle();
+	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
 	ImGui::Begin("Game", &active);
 
@@ -40,4 +42,5 @@ void GameView::Draw(Framebuffer* framebuffer)
 	ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 	ImGui::End();
+	style.WindowPadding = ImVec2(8.0f, 8.0f);
 }

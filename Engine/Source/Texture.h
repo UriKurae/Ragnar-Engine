@@ -5,6 +5,20 @@
 
 typedef unsigned char GLubyte;
 
+struct TextureParameters
+{
+	bool alienify = false;
+	float blurAvg = 0.0f;
+	float blurGaussian = 0.0f;
+	bool edgeDetectP = false;
+	bool edgeDetectS = false;
+	bool emboss = false;
+	float gammaCorrectCurve = 0.0f;
+	bool negative = false;
+	float noise = 0.0f;
+	uint pixelization = 0;
+};
+
 class Texture : public Resource
 {
 public:
@@ -13,6 +27,8 @@ public:
 	~Texture();
 
 	void Load() override;
+
+	void DrawOnEditor() override;
 
 	void Bind();
 	void Unbind();
@@ -29,4 +45,6 @@ private:
 
 	std::string path;
 	GLubyte* data;
+
+	TextureParameters parameters;
 };

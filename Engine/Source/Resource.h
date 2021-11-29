@@ -21,6 +21,8 @@ public:
 
 	virtual void Load() {}
 
+	virtual void DrawOnEditor() {}
+
 	inline const ResourceType& GetType() const { return type; }
 	inline const uint& GetUID() const { return uid; }
 	inline const std::string& GetAssetsPath() const { return assetsPath; }

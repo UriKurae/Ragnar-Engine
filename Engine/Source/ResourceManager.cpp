@@ -201,6 +201,18 @@ void ResourceManager::ImportAllResources()
 	}
 }
 
+Resource* ResourceManager::GetResource(std::string path)
+{
+	std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin();
+
+	for (; it != map.end(); ++it)
+	{
+		if ((*it).second->GetAssetsPath() == path) return (*it).second.get();
+	}
+
+	return nullptr;
+}
+
 void ResourceManager::AddTexture(Texture* tex)
 {
 	textures.emplace_back(tex);

@@ -8,6 +8,7 @@
 #include "MeshImporter.h"
 #include "TextureImporter.h"
 
+#include "Model.h"
 #include "ResourceManager.h"
 #include "Resource.h"
 
@@ -188,4 +189,22 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 		name = "Childs" + name;
 		CreatingModel(parsing, parsing.GetJsonArray(parsing.ValueToObject(parsing.GetRootValue()), name.c_str()), newGo);
 	}
+}
+
+void ModelImporter::CreateMetaModel(std::string& path, ModelParameters& data)
+{
+	JsonParsing metaModel;
+
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "FlippedUvs", data.flippedUvs);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "optimizedMesh", data.optimizedMesh);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "hasNormals", data.hasNormals);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "Triangulate", data.triangulated);
+
+	metaModel.SetNewJsonNumber(metaModel.ValueToObject(metaModel.GetRootValue()), "Uuid", 1);
+
+
+	char* buffer = nullptr;
+	size_t size = metaModel.Save(&buffer);
+
+	app->fs->Save(path.c_str(), buffer, size);
 }

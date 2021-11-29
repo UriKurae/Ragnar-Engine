@@ -202,7 +202,7 @@ void FileSystem::LoadFile(std::string& path)
 		{
 			RG_PROFILING_FUNCTION("Loading Texture");
 			// When mouse picking fixed, this will work correctly
-			app->editor->GetSelected()->GetComponent<MaterialComponent>()->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(path));
+			app->editor->GetGO()->GetComponent<MaterialComponent>()->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(path));
 			return;
 		}
 	}

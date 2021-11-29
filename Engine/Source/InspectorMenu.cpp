@@ -4,6 +4,7 @@
 #include "ModuleScene.h"
 
 #include "GameObject.h"
+#include "Resource.h"
 
 #include "Profiling.h"
 
@@ -25,15 +26,19 @@ bool InspectorMenu::Update(float dt)
 		// TODO: Uncomment if you want
 		/*if (ImGui::BeginMenu(object.GetName()))
 		{*/
-		if (app->editor->GetSelected())
+		if (app->editor->GetGO())
 		{
 			//ImGui::SetNextTreeNodeOpen(true);
 			// This line below draws in the inspector only the selected object, Unity style
-			app->editor->GetSelected()->DrawEditor();
+			app->editor->GetGO()->DrawEditor();
 
 
 			// TODO: The line below is not necessary anymore, it's "HardCoded", does not function like unity's inspector
 			//object.DrawEditor();
+		}
+		else if (app->editor->GetResource())
+		{
+			app->editor->GetResource()->DrawOnEditor();
 		}
 
 		//	ImGui::EndMenu();

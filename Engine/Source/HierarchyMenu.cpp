@@ -27,7 +27,7 @@ bool HierarchyMenu::Update(float dt)
 	}
 	int size = app->scene->GetGameObjectsList().size();
 	GameObject* root = app->scene->GetRoot();
-	GameObject* selected = app->editor->GetSelected();
+	GameObject* selected = app->editor->GetGO();
 	GameObject* selectedParent = app->editor->GetSelectedParent();
 	ImGuiTreeNodeFlags flags = ((selected == root) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
 	if (ImGui::TreeNodeEx(root, flags, root->GetName()))
@@ -48,7 +48,7 @@ bool HierarchyMenu::Update(float dt)
 
 	if (!gameObjectOptions && ImGui::IsWindowHovered() && ImGui::IsWindowFocused() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
 	{
-		app->editor->SetSelected(nullptr);
+		app->editor->SetGO(nullptr);
 		app->editor->SetSelectedParent(nullptr);
 	}
 
@@ -102,7 +102,7 @@ bool HierarchyMenu::Update(float dt)
 						break;
 					}
 				}
-				app->editor->SetSelected(nullptr);
+				app->editor->SetGO(nullptr);
 				gameObjectOptions = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -165,7 +165,7 @@ bool HierarchyMenu::Update(float dt)
 void HierarchyMenu::ShowChildren(GameObject* parent)
 {
 	
-	GameObject* selected = app->editor->GetSelected();
+	GameObject* selected = app->editor->GetGO();
 	for (int i = 0; i < parent->GetChilds().size(); ++i)
 	{
 		GameObject* obj = parent->GetChilds()[i];
@@ -194,12 +194,12 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 			}
 			if (ImGui::IsItemClicked())
 			{
-				app->editor->SetSelected(obj);
+				app->editor->SetGO(obj);
 				app->editor->SetSelectedParent(parent);
 			}
 			else if (ImGui::IsItemClicked(1))
 			{
-				app->editor->SetSelected(obj);
+				app->editor->SetGO(obj);
 				app->editor->SetSelectedParent(parent);
 				gameObjectOptions = true;
 			}

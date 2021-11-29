@@ -14,7 +14,7 @@
 
 #include "Profiling.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), currentOperation(ImGuizmo::OPERATION::TRANSLATE), Module()
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), currentOperation(ImGuizmo::OPERATION::TRANSLATE), Module(), resource(nullptr)
 {
 	name = "Editor";
 
@@ -84,6 +84,18 @@ bool ModuleEditor::CleanUp()
 	RELEASE(gameView);
 
 	return true;
+}
+
+void ModuleEditor::SetResource(Resource* res)
+{
+	selected = nullptr;
+	resource = res;
+}
+
+void ModuleEditor::SetGO(GameObject* obj)
+{
+	resource = nullptr;
+	selected = obj;
 }
 
 bool ModuleEditor::LoadConfig(JsonParsing& node)

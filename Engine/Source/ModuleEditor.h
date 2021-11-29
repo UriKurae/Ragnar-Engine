@@ -10,6 +10,7 @@
 #include "Imgui/ImGuizmo.h"
 
 class GameObject;
+class Resource;
 
 class ModuleEditor : public Module
 {
@@ -23,10 +24,12 @@ public:
 	bool Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer);
 	bool CleanUp() override;
 
-	inline GameObject* GetSelected() { return selected; }
+	inline GameObject* GetGO() { return selected; }
+	inline Resource* GetResource() { return resource; }
 	inline GameObject* GetSelectedParent() { return selectedParent; }
 	
-	inline void SetSelected(GameObject* obj) { selected = obj; }
+	void SetResource(Resource* res);
+	void SetGO(GameObject* obj);
 	inline void SetSelectedParent(GameObject* obj) { selectedParent = obj; }
 
 	bool LoadConfig(JsonParsing& node) override;
@@ -42,6 +45,8 @@ private:
 
 	GameObject* selected;
 	GameObject* selectedParent;
+
+	Resource* resource;
 
 	Viewport* viewport;
 	GameView* gameView;
