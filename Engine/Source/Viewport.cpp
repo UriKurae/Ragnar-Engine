@@ -37,7 +37,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		app->camera->canBeUpdated = false;
 	}
 
-	ImVec2 size = ImGui::GetContentRegionAvail();
+	ImVec2 size = ImGui::GetWindowContentRegionMax();
 
 	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
 	{

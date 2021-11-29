@@ -219,6 +219,7 @@ bool ModuleCamera3D::Update(float dt)
 			}
 		}
 		float4 size = app->editor->GetViewport()->GetBounds();
+	//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
 		if (pos.x > size.x&& pos.x < size.x + size.z && pos.y > size.y&& pos.y < size.y + size.w)
 		{
@@ -229,15 +230,14 @@ bool ModuleCamera3D::Update(float dt)
 			{
 				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
 
-				mousePos.x -= size.x;
-				mousePos.y -= size.y;
-				mousePos.x = -1.0f + 2.0f * mousePos.x / size.z;
-				mousePos.y = 1.0f - 2.0f * mousePos.y / size.w;
+				mousePos.x = 2 * ((mousePos.x - size.x) / (size.z)) - 1.0f;
+				mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
 
 				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
 				rayCast = picking.ToRay();
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
+				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
 				bool hit = false;
 
 				std::vector<GameObject*> gameObjects;
