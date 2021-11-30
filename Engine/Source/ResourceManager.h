@@ -21,7 +21,7 @@ public:
 	void CheckForNewResources();
 
 	uint CreateResource(ResourceType type, std::string& assets, std::string& library);
-	void CreateResourceCreated(ResourceType type, std::string& assets, std::string& library);
+	void CreateResourceCreated(ResourceType type, uint uid, std::string& assets, std::string& library);
 
 	std::shared_ptr<Resource> LoadResource(uint uid);
 

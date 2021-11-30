@@ -5,6 +5,7 @@
 #include "JsonParsing.h"
 
 typedef unsigned char GLubyte;
+typedef unsigned int uint;
 
 struct TextureParameters;
 
@@ -14,6 +15,6 @@ namespace TextureImporter
 	void ImportTexture(std::string& fileName);
 	void SaveTexture(std::string& fileName);
 	void LoadTexture(const char* path, unsigned int& id, int& width, int& height, GLubyte* data, TextureParameters& parameterData);
-	void CreateMetaTexture(std::string& path, TextureParameters& data);
+	void CreateMetaTexture(std::string& path, TextureParameters& data, std::string& assets, uint uid);
 	void SetIluParameters(TextureParameters& data);
 }

@@ -24,7 +24,7 @@ void GameView::Draw(Framebuffer* framebuffer)
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
-	ImGui::Begin("Game", &active);
+	ImGui::Begin("Game", &active, ImGuiWindowFlags_NoScrollbar);
 
 	ImVec2 size = ImGui::GetContentRegionAvail();
 

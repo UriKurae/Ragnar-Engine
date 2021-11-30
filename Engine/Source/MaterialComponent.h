@@ -26,7 +26,7 @@ public:
 	void UnbindTexture();
 
 	void SetTexture(Texture* tex) { diffuse = tex; }
-	//void SetTexture(std::shared_ptr<Resource> tex) { diff = std::dynamic_pointer_cast<Texture>(tex); }
+	void SetTexture(std::shared_ptr<Resource> tex);
 
 	// TODO: Check because fucking no one use this shit
 	//inline Texture* GetTexture() const { return diffuse; }

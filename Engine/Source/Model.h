@@ -19,6 +19,12 @@ public:
 
 	void Load() override;
 
-private:
+	void DrawOnEditor() override;
 
+private:
+	void Reimport();
+
+	ModelParameters parameters;
+
+	//std::vector<uint> meshes;
 };

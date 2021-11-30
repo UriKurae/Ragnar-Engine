@@ -34,8 +34,8 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 
 		std::string libraryPath;
 		
-		ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, assetsPath, libraryPath);
-
+		uint id = ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, assetsPath, libraryPath);
+		
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
 		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", libraryPath.c_str());
 
@@ -95,16 +95,19 @@ void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width
 	JsonParsing metaFile(bufferMeta);
 	
 	// Ilu parameters for the texture
-	parameterData.alienify = metaFile.GetJsonBool("Alienify");
-	parameterData.blurAvg = (uint)metaFile.GetJsonNumber("BlurAvg");
-	parameterData.blurGaussian = (uint)metaFile.GetJsonNumber("BlurGaussian");
-	parameterData.edgeDetectP = metaFile.GetJsonBool("EdgeDetectP");
-	parameterData.edgeDetectS = metaFile.GetJsonBool("EdgeDetectS");
-	parameterData.emboss = metaFile.GetJsonBool("Emboss");
-	parameterData.gammaCorrectCurve = metaFile.GetJsonNumber("GammaCorrectCurve");
-	parameterData.negative = metaFile.GetJsonBool("Negative");
-	parameterData.noise = metaFile.GetJsonNumber("Noise");
-	parameterData.pixelization = (uint)metaFile.GetJsonNumber("Pixelization");
+	if (sizeMeta > 0)
+	{
+		parameterData.alienify = metaFile.GetJsonBool("Alienify");
+		parameterData.blurAvg = (uint)metaFile.GetJsonNumber("BlurAvg");
+		parameterData.blurGaussian = (uint)metaFile.GetJsonNumber("BlurGaussian");
+		parameterData.edgeDetectP = metaFile.GetJsonBool("EdgeDetectP");
+		parameterData.edgeDetectS = metaFile.GetJsonBool("EdgeDetectS");
+		parameterData.emboss = metaFile.GetJsonBool("Emboss");
+		parameterData.gammaCorrectCurve = metaFile.GetJsonNumber("GammaCorrectCurve");
+		parameterData.negative = metaFile.GetJsonBool("Negative");
+		parameterData.noise = metaFile.GetJsonNumber("Noise");
+		parameterData.pixelization = (uint)metaFile.GetJsonNumber("Pixelization");
+	}
 
 	bool mipMap = metaFile.GetJsonBool("MipMap");
 	uint uuid = metaFile.GetJsonNumber("Uuid");
@@ -145,7 +148,7 @@ void TextureImporter::LoadTexture(const char* path, unsigned int& id, int& width
 	RELEASE_ARRAY(buffer);
 }
 
-void TextureImporter::CreateMetaTexture(std::string& path, TextureParameters& data)
+void TextureImporter::CreateMetaTexture(std::string& path, TextureParameters& data, std::string& assets, uint uid)
 {
 	JsonParsing metaTexture;
 
@@ -160,10 +163,9 @@ void TextureImporter::CreateMetaTexture(std::string& path, TextureParameters& da
 	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Noise", data.noise);
 	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Pixelization", data.pixelization);
 
-
 	metaTexture.SetNewJsonBool(metaTexture.ValueToObject(metaTexture.GetRootValue()), "MipMap", false);
-	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Uuid", 1);
-
+	metaTexture.SetNewJsonNumber(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Uuid", uid);
+	metaTexture.SetNewJsonString(metaTexture.ValueToObject(metaTexture.GetRootValue()), "Assets Path", assets.c_str());
 
 	char* buffer = nullptr;
 	size_t size = metaTexture.Save(&buffer);

@@ -61,6 +61,17 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 {
 	std::shared_ptr<Resource> resource = nullptr;
 
+	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+
+	for (it = map.begin(); it != map.end(); ++it)
+	{
+		if ((*it).second->GetAssetsPath() == assets)
+		{
+			library = (*it).second->GetLibraryPath();
+			return (*it).first;
+		}
+	}
+
 	LCG random;
 	uint uid = random.IntFast();
 
@@ -87,9 +98,23 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 	return uid;
 }
 
-void ResourceManager::CreateResourceCreated(ResourceType type, std::string& assets, std::string& library)
+void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::string& assets, std::string& library)
 {
-	
+	std::shared_ptr<Resource> resource;
+	switch (type)
+	{
+	case ResourceType::TEXTURE:
+		resource = std::make_shared<Texture>(uid, assets, library);
+		break;
+	case ResourceType::MESH:
+		break;
+	case ResourceType::MODEL:
+		break;
+	default:
+		break;
+	}
+
+	if (resource != nullptr) map[uid] = resource;
 }
 
 std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
@@ -129,11 +154,10 @@ bool ResourceManager::CheckResource(std::string& path)
 void ResourceManager::ImportResourcesFromLibrary()
 {
 	std::vector<std::string> dirs;
-	std::vector<std::string> files;
 
 	std::stack<std::string> directories;
 
-	app->fs->DiscoverFilesAndDirs("Library/", files, dirs);
+	app->fs->DiscoverDirs("Library/", dirs);
 
 	for (int i = 0; i < dirs.size(); ++i)
 	{
@@ -146,15 +170,35 @@ void ResourceManager::ImportResourcesFromLibrary()
 	{
 		std::string dir = directories.top();
 
+		std::vector<std::string> files;
+		app->fs->DiscoverFiles(dir.c_str(), files);
+
 		for (int i = 0; i < files.size(); ++i)
 		{
-			std::string extension = files[i].substr(files[i].find_last_of("."), files[i].length());
+			if (files[i].find(".rg") != std::string::npos)
+			{
+				std::string extension = files[i].substr(files[i].find_last_of("."), files[i].length());
+				std::string metaFile = dir + files[i].substr(0, files[i].find_last_of(".")) + ".meta";
 
-			// TODO: Find a solution to get the assets path
-			if (extension.data() == ".rgmodel") CreateResourceCreated(ResourceType::MODEL, std::string(""), files[i]);
-			else if (extension.data() == ".rgtexture") CreateResourceCreated(ResourceType::TEXTURE, std::string(""), files[i]);
-			else if (extension.data() == ".rgmesh") CreateResourceCreated(ResourceType::MESH, std::string(""), files[i]);
+				char* buffer = nullptr;
+				if (app->fs->Load(metaFile.c_str(), &buffer) > 0)
+				{
+					JsonParsing metaInfo(buffer);
+
+					std::string assets(metaInfo.GetJsonString("Assets Path"));
+					uint uid = metaInfo.GetJsonNumber("Uuid");
+
+					// TODO: Find a solution to get the assets path
+					if (files[i].find(".rgmodel") != std::string::npos) CreateResourceCreated(ResourceType::MODEL, uid, assets, dir + files[i]);
+					else if (files[i].find(".rgtexture") != std::string::npos) CreateResourceCreated(ResourceType::TEXTURE, uid, assets, dir + files[i]);
+					else if (files[i].find(".rgmesh") != std::string::npos) CreateResourceCreated(ResourceType::MESH, uid, assets, dir + files[i]);
+
+					RELEASE_ARRAY(buffer);
+				}
+			}
 		}
+
+		directories.pop();
 	}
 }
 

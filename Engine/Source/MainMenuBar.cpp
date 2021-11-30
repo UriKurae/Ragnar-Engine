@@ -39,13 +39,13 @@ bool MainMenuBar::Start()
 	//TextureImporter::ImportTexture(std::string("Assets/Resources/PauseButton.png"));
 	//TextureImporter::ImportTexture(std::string("Assets/Resources/NextFrame.png"));
 
-	buttonPlay = new Texture(-4, std::string(""), std::string("Settings/EngineResources/PlayButton.rgtexture"));
+	buttonPlay = new Texture(-4, std::string("Settings/EngineResources/PlayButton.rgtexture"));
 	buttonPlay->Load();
 
-	buttonStop = new Texture(-5, std::string(""), std::string("Settings/EngineResources/PauseButton.rgtexture"));
+	buttonStop = new Texture(-5, std::string("Settings/EngineResources/PauseButton.rgtexture"));
 	buttonStop->Load();
 
-	buttonNextFrame = new Texture(-6, std::string(""), std::string("Settings/EngineResources/NextFrame.rgtexture"));
+	buttonNextFrame = new Texture(-6, std::string("Settings/EngineResources/NextFrame.rgtexture"));
 	buttonNextFrame->Load();
 
 	for (int i = 0; i < menus.size(); ++i)
