@@ -27,6 +27,7 @@ public:
 	inline const uint& GetUID() const { return uid; }
 	inline const std::string& GetAssetsPath() const { return assetsPath; }
 	inline const std::string& GetLibraryPath() const { return libraryPath; }
+	inline const std::string& GetName() const { return name; }
 
 protected:
 	uint uid;
@@ -34,4 +35,5 @@ protected:
 
 	std::string assetsPath;
 	std::string libraryPath;
+	std::string name;
 };

@@ -45,9 +45,11 @@ void ModelImporter::ImportModel(std::string& path)
 		std::string root = "Childs" + p;
 		JSON_Array* array = child.SetNewJsonArray(child.GetRootValue(), root.c_str());
 
-		ResourceManager::GetInstance()->CreateResource(ResourceType::MODEL, path, p);
+		uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::MODEL, path, p);
 
-		ProcessNode(scene->mRootNode, scene, child, array, path);
+		std::shared_ptr<Model> model = std::static_pointer_cast<Model>(ResourceManager::GetInstance()->GetResource(uid));
+		std::vector<uint> uids;
+		ProcessNode(scene->mRootNode, scene, child, array, path, uids);
 
 		SaveModel(p, json);
 	}
@@ -87,7 +89,7 @@ void ModelImporter::LoadModel(std::string& path)
 	RELEASE_ARRAY(buffer);
 }
 
-void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path)
+void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path, std::vector<uint>& uids)
 {
 	if (node == scene->mRootNode || node->mNumMeshes > 0)
 	{
@@ -109,7 +111,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			MeshImporter::ImportMesh(mesh, scene, jsonValue, path);
+			MeshImporter::ImportMesh(mesh, scene, jsonValue, path, uids);
 		}
 
 		std::string name = "Childs" + std::string(node->mName.C_Str());
@@ -117,7 +119,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		// Repeat the process until there's no more children
 		for (unsigned int i = 0; i < node->mNumChildren; ++i)
 		{
-			ProcessNode(node->mChildren[i], scene, jsonValue, array, path);
+			ProcessNode(node->mChildren[i], scene, jsonValue, array, path, uids);
 		}
 		nodeJ.SetValueToArray(json, jsonValue.GetRootValue());
 	}
@@ -125,7 +127,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 	{
 		for (unsigned int i = 0; i < node->mNumChildren; ++i)
 		{
-			ProcessNode(node->mChildren[i], scene, nodeJ, json, path);
+			ProcessNode(node->mChildren[i], scene, nodeJ, json, path, uids);
 		}
 	}
 }
@@ -164,7 +166,7 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 				std::string path = component.GetJsonString("Mesh Path");
 				app->fs->GetFilenameWithoutExtension(path);
 				path = path.substr(path.find_last_of("_") + 1, path.length());
-				mesh->SetMesh((Mesh*)ResourceManager::GetInstance()->LoadResource(std::stoll(path)).get());
+				mesh->SetMesh(ResourceManager::GetInstance()->LoadResource(std::stoll(path)));
 				break;
 			}
 			case ComponentType::MATERIAL:
@@ -184,19 +186,22 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 	}
 }
 
-void ModelImporter::CreateMetaModel(std::string& path, ModelParameters& data)
+void ModelImporter::CreateMetaModel(std::string& path, ModelParameters& data, std::string& assets, uint uid)
 {
 	JsonParsing metaModel;
 
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "FlippedUvs", data.flippedUvs);
-	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "optimizedMesh", data.optimizedMesh);
-	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "hasNormals", data.hasNormals);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "OptimizedMesh", data.optimizedMesh);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "HasNormals", data.hasNormals);
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "Triangulate", data.triangulated);
 
-	metaModel.SetNewJsonNumber(metaModel.ValueToObject(metaModel.GetRootValue()), "Uuid", 1);
+	metaModel.SetNewJsonNumber(metaModel.ValueToObject(metaModel.GetRootValue()), "Uuid", uid);
+	metaModel.SetNewJsonString(metaModel.ValueToObject(metaModel.GetRootValue()), "Assets Path", assets.c_str());
 
 	char* buffer = nullptr;
 	size_t size = metaModel.Save(&buffer);
 
 	app->fs->Save(path.c_str(), buffer, size);
+
+	RELEASE_ARRAY(buffer);
 }

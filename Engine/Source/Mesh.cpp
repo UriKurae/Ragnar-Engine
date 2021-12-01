@@ -107,3 +107,15 @@ void Mesh::ShowFaceNormals(float3& colorNormal, float& normalLength)
 	glColor3f(1, 1, 1);
 	glEnd();
 }
+
+void Mesh::Reimport(ModelParameters& data)
+{
+	if (vertices.empty())
+	{
+		vertices.clear();
+		indices.clear();
+		texCoords.clear();
+		normals.clear();
+	}
+	MeshImporter::LoadMesh(vertices, indices, normals, texCoords, libraryPath);
+}

@@ -12,13 +12,15 @@
 class GameObject;
 class ModelParameters;
 
+typedef unsigned int uint;
+
 namespace ModelImporter
 {
 	void ImportModel(std::string& path);
 	void SaveModel(std::string& path, JsonParsing& json);
 	void LoadModel(std::string& path);
 
-	void ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path);
+	void ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path, std::vector<uint>& uids);
 	void CreatingModel(JsonParsing& json, JSON_Array* array, GameObject* go);
-	void CreateMetaModel(std::string& path, ModelParameters& data);
+	void CreateMetaModel(std::string& path, ModelParameters& data, std::string& assets, uint uid);
 }

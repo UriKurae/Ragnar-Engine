@@ -6,6 +6,7 @@
 #include "GameObject.h"
 
 #include "FileSystem.h"
+#include "ResourceManager.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/ImGuizmo.h"
@@ -74,12 +75,12 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	{
 		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content Browser"))
 		{
+			// TODO: Check this for dropping resources to the scene
 			const char* path = (const char*)payload->Data;
-			app->fs->LoadFile(std::string(path));
+			ResourceManager::GetInstance()->LoadResource(std::string(path));
 		}
 		ImGui::EndDragDropTarget();
 	}
-	
 
 	GameObject* camera = app->editor->GetGO();
 	if (camera && camera->GetComponent<CameraComponent>())

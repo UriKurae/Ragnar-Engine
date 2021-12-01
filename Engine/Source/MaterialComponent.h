@@ -25,7 +25,6 @@ public:
 	void BindTexture();
 	void UnbindTexture();
 
-	void SetTexture(Texture* tex) { diffuse = tex; }
 	void SetTexture(std::shared_ptr<Resource> tex);
 
 	// TODO: Check because fucking no one use this shit
@@ -33,9 +32,9 @@ public:
 
 private:
 	bool checker;
+	bool showTexMenu;
 
 	Texture* checkerImage;
 
-	Texture* diffuse;
 	std::shared_ptr<Texture> diff;
 };

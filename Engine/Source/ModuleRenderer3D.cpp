@@ -276,6 +276,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
+		// TODO: Possible crash with the quadtree when you delete a game object
 		(*it)->Draw();
 	}
 

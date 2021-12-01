@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Resource.h"
+#include <vector>
+
+typedef unsigned int uint;
 
 struct ModelParameters
 {
@@ -21,10 +24,12 @@ public:
 
 	void DrawOnEditor() override;
 
+	inline void SetMeshes(std::vector<uint>& meshesUids) { meshes = meshesUids; }
+
 private:
 	void Reimport();
 
 	ModelParameters parameters;
 
-	//std::vector<uint> meshes;
+	std::vector<uint> meshes;
 };

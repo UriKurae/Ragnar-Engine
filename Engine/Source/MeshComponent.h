@@ -13,6 +13,7 @@ typedef unsigned char GLubyte;
 class TransformComponent;
 class MaterialComponent;
 class Mesh;
+class Resource;
 
 class MeshComponent : public Component
 {
@@ -26,13 +27,13 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void SetMesh(Mesh* m);
+	void SetMesh(std::shared_ptr<Resource> m);
 
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
-	const Mesh* GetMesh() const { return mesh; }
+	const Mesh* GetMesh() const { return mesh.get(); }
 private:
 	TransformComponent* transform;
 	MaterialComponent* material;
@@ -43,7 +44,7 @@ private:
 	bool faceNormals;
 	bool verticesNormals;
 
-	Mesh* mesh;
+	std::shared_ptr<Mesh> mesh;
 
 	AABB localBoundingBox;
 

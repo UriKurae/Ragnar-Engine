@@ -245,16 +245,41 @@ void ResourceManager::ImportAllResources()
 	}
 }
 
-Resource* ResourceManager::GetResource(std::string path)
+std::shared_ptr<Resource> ResourceManager::GetResource(uint uid)
+{
+	return map[uid];
+}
+
+std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 {
 	std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin();
 
 	for (; it != map.end(); ++it)
 	{
-		if ((*it).second->GetAssetsPath() == path) return (*it).second.get();
+		if ((*it).second->GetAssetsPath() == path) return (*it).second;
 	}
 
 	return nullptr;
+}
+
+void ResourceManager::DeleteResource(std::string& path)
+{
+	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+
+	for (it = map.begin(); it != map.end(); ++it)
+	{
+		std::shared_ptr<Resource> resource = (*it).second;
+		if (resource->GetAssetsPath() == path)
+		{
+			app->fs->RemoveFile(path.c_str());
+			app->fs->RemoveFile(resource->GetLibraryPath().c_str());
+			std::string meta = resource->GetLibraryPath();
+			meta = meta.substr(0, meta.find_last_of(".")) + ".meta";
+			app->fs->RemoveFile(meta.c_str());
+			map.erase(it);
+			return;
+		}
+	}
 }
 
 void ResourceManager::AddTexture(Texture* tex)

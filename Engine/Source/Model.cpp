@@ -1,6 +1,10 @@
 #include "Model.h"
 
+#include "Globals.h"
 #include "ModelImporter.h"
+
+#include "ResourceManager.h"
+#include "Mesh.h"
 
 #include "Imgui/imgui.h"
 
@@ -8,6 +12,8 @@
 
 Model::Model(uint uid, std::string& assets, std::string& library) : parameters({}), Resource(uid, ResourceType::MODEL, assets, library)
 {
+	std::string metaPath = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".meta";
+	ModelImporter::CreateMetaModel(metaPath, parameters, assets, uid);
 }
 
 Model::~Model()
@@ -34,5 +40,12 @@ void Model::DrawOnEditor()
 
 void Model::Reimport()
 {
+	std::string metaPath = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".meta";
+	ModelImporter::CreateMetaModel(metaPath, parameters, assetsPath, uid);
 
+	for (uint i = 0; i < meshes.size(); ++i)
+	{
+		std::shared_ptr<Mesh> mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->GetResource(i));
+		mesh->Reimport(parameters);
+	}
 }

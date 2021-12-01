@@ -9,6 +9,8 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
+struct ModelParameters;
+
 class Mesh : public Resource
 {
 public:
@@ -29,7 +31,7 @@ public:
 	inline const int& GetIndicesSize() const { return indices.size(); }
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
 
-
+	void Reimport(ModelParameters& data);
 private:
 	std::vector<float3> vertices;
 	std::vector<unsigned int> indices;

@@ -69,6 +69,9 @@ void MeshComponent::OnEditor()
 		ImGui::Checkbox("Face normals", &faceNormals);
 		ImGui::DragFloat("Normal Length", &normalLength, 0.200f);
 		ImGui::DragFloat3("Normal Color", colorNormal.ptr(), 1.0f, 0.0f, 255.0f);
+		ImGui::Text("Reference Count: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mesh ? mesh.use_count() : 0);
 		ImGui::Separator();
 	}
 
@@ -86,7 +89,7 @@ void MeshComponent::OnEditor()
 		{
 			if (ImGui::Button((*it).c_str(), {ImGui::GetWindowWidth() - 30, 20}))
 			{
-				SetMesh(ResourceManager::GetInstance()->IsMeshLoaded(MESHES_FOLDER + (*it)));
+				//SetMesh(ResourceManager::GetInstance()->IsMeshLoaded(MESHES_FOLDER + (*it)));
 			}
 		}
 
@@ -98,7 +101,7 @@ void MeshComponent::OnEditor()
 
 bool MeshComponent::OnLoad(JsonParsing& node)
 {
-	mesh = ResourceManager::GetInstance()->IsMeshLoaded(std::string(node.GetJsonString("Path")));
+	mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->GetResource(std::string(node.GetJsonString("Path"))));
 
 	active = node.GetJsonBool("Active");
 
@@ -110,7 +113,7 @@ bool MeshComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", mesh->GetPath());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", mesh->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	node.SetValueToArray(array, file.GetRootValue());
@@ -118,9 +121,9 @@ bool MeshComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void MeshComponent::SetMesh(Mesh* m)
+void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 {
-	mesh = m;
+	mesh = std::static_pointer_cast<Mesh>(m);
 
 	if (mesh)
 	{

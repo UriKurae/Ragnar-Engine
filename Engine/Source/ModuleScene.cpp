@@ -42,8 +42,7 @@ bool ModuleScene::Start()
 
 bool ModuleScene::PreUpdate(float dt)
 {
-	if (gameState == GameState::PLAYING)
-	gameTimer.Start();
+	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
 }
@@ -69,8 +68,7 @@ bool ModuleScene::Update(float dt)
 
 bool ModuleScene::PostUpdate()
 {
-	if (gameState == GameState::PLAYING)
-		gameTimer.FinishUpdate();
+	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
 	return true;
 }
@@ -170,7 +168,7 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 
 	if (!vertices.empty())
 	{
-		MeshComponent* mesh = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);;
+		MeshComponent* mesh = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);
 		//mesh->SetMesh(vertices, indices, texCoords, normals, path);
 	}
 
@@ -306,7 +304,7 @@ bool ModuleScene::SaveScene()
 	char* buf;
 	uint size = sceneFile.Save(&buf);
 	
-	if (app->fs->Save(SCENES_FOLDER "scene.json", buf, size) > 0)
+	if (app->fs->Save(SCENES_FOLDER "scene.ragnar", buf, size) > 0)
 		DEBUG_LOG("Scene saved succesfully");
 	else
 		DEBUG_LOG("Scene couldn't be saved");
@@ -339,7 +337,7 @@ void ModuleScene::Play()
 	char* buf;
 	uint size = sceneFile.Save(&buf);
 
-	if (app->fs->Save(SCENES_FOLDER "scenePlay.json", buf, size) > 0)
+	if (app->fs->Save(SCENES_FOLDER "scenePlay.ragnar", buf, size) > 0)
 		DEBUG_LOG("Scene saved succesfully");
 	else
 		DEBUG_LOG("Scene couldn't be saved");
@@ -352,8 +350,8 @@ void ModuleScene::Play()
 
 void ModuleScene::Stop()
 {
-	LoadScene("Assets/Scenes/scenePlay.json");
-	app->fs->RemoveFile("Assets/Scenes/scenePlay.json");
+	LoadScene("Assets/Scenes/scenePlay.ragnar");
+	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 	qTree.Clear();
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	gameState = GameState::NOT_PLAYING;

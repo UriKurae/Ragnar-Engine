@@ -202,7 +202,7 @@ void FileSystem::LoadFile(std::string& path)
 		{
 			RG_PROFILING_FUNCTION("Loading Texture");
 			// When mouse picking fixed, this will work correctly
-			app->editor->GetGO()->GetComponent<MaterialComponent>()->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(path));
+			//app->editor->GetGO()->GetComponent<MaterialComponent>()->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(path));
 			return;
 		}
 	}
@@ -414,8 +414,8 @@ void FileSystem::GetFilenameWithoutExtension(std::string& path)
 	if (path.find("/") != std::string::npos)
 	{
 		path = path.substr(path.find_last_of("/") + 1, path.length());
-		path = path.substr(0, path.find_last_of("."));
 	}
+	path = path.substr(0, path.find_last_of("."));
 }
 
 bool FileSystem::RemoveFile(const char* file)
