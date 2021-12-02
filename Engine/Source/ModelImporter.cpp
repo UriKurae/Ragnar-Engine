@@ -146,9 +146,11 @@ void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObje
 		std::string name = parsing.GetJsonString("Name");
 		
 		float4 quat = parsing.GetJson4Number(parsing, "Rotation");
-		transform->SetTranslation(parsing.GetJson3Number(parsing, "Position"));
-		transform->SetRotation(Quat(quat.x, quat.y, quat.z, quat.w));
-		transform->SetScale(parsing.GetJson3Number(parsing, "Scale"));
+		Quat rot(quat.x, quat.y, quat.z, quat.w);
+		float3 pos = parsing.GetJson3Number(parsing, "Position");
+		float3 scale = parsing.GetJson3Number(parsing, "Scale");
+		
+		transform->SetTransform(pos, rot, scale);
 
 		newGo->SetName(name.c_str());
 		JSON_Array* arr = parsing.GetJsonArray(parsing.ValueToObject(parsing.GetRootValue()), "Components");

@@ -241,25 +241,6 @@ void GameObject::RemoveChild(GameObject* object)
 	}
 }
 
-char* GameObject::GetNameBuffer()
-{	
-	return &name[0];
-}
-
-void GameObject::SetAABB(std::vector<float3>& vertices)
-{
-	globalAabb.Enclose(vertices.data(), vertices.size());
-}
-
-void GameObject::SetTotalAABB()
-{
-	for (int i = 0; i < children.size(); ++i)
-	{
-		children[i]->SetTotalAABB();
-		globalAabb.Enclose(children[i]->GetAABB());
-	}
-}
-
 void GameObject::SetAABB(AABB newAABB, bool needToClean)
 {
 	globalObb = newAABB;

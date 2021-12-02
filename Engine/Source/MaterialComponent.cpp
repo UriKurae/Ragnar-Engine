@@ -123,19 +123,9 @@ void MaterialComponent::OnEditor()
 	ImGui::PopID();
 }
 
-void MaterialComponent::SetNewMaterial(int i, int w, int h, std::string& p)
-{
-	/*RELEASE(texBuffer);
-
-	texBuffer = new TextureBuffer(i, w, h);
-	path = p;
-
-	texBuffer->Unbind();*/
-}
-
 bool MaterialComponent::OnLoad(JsonParsing& node)
 {
-	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->GetResource(std::string(node.GetJsonString("Path"))));
+	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
 
 	return true;

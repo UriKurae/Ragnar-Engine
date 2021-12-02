@@ -14,6 +14,8 @@
 #include "TextureImporter.h"
 #include "ResourceManager.h"
 
+#include "Dialogs.h"
+
 #include "Profiling.h"
 
 MainMenuBar::MainMenuBar() : Menu(true), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
@@ -41,7 +43,6 @@ bool MainMenuBar::Start()
 	//TextureImporter::ImportTexture2(std::string("Assets/Resources/PauseButtonActive.png"));
 	//TextureImporter::ImportTexture2(std::string("Assets/Resources/StopButton.png"));
 	
-
 	buttonPlay = new Texture(-4, std::string("Settings/EngineResources/PlayButton.rgtexture"));
 	buttonPlay->Load();
 
@@ -51,7 +52,7 @@ bool MainMenuBar::Start()
 	buttonPause = new Texture(-6, std::string("Settings/EngineResources/PauseButton.rgtexture"));
 	buttonPause->Load();
 
-	buttonPauseBlue = new Texture(-6, std::string("Settings/EngineResources/PauseButtonActive.rgtexture"));
+	buttonPauseBlue = new Texture(-7, std::string("Settings/EngineResources/PauseButtonActive.rgtexture"));
 	buttonPauseBlue->Load();
 
 	buttonNextFrame = new Texture(-8, std::string("Settings/EngineResources/NextFrame.rgtexture"));
@@ -83,11 +84,13 @@ bool MainMenuBar::Update(float dt)
 
 			if (ImGui::MenuItem("Load", "Ctrl + L", &ret))
 			{
-				app->scene->LoadScene("Assets/Scenes/scene.ragnar");
+				std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) app->scene->LoadScene(filePath.c_str());
 			}
 			if (ImGui::MenuItem("Save", "Ctrl + S", &ret))
 			{
-				app->scene->SaveScene();
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
 			}
 			if (ImGui::MenuItem("Exit", "ESC", &ret))
 			{

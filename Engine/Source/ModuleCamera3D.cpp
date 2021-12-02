@@ -15,7 +15,7 @@
 #include "GL/glew.h"
 
 
-ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(200.0f), Module(startEnabled), canBeUpdated(true)
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
 {
 	name = "Camera3D";
 
@@ -286,6 +286,7 @@ bool ModuleCamera3D::Update(float dt)
 					}
 				}
 				if (!triangleMap.empty()) app->editor->SetGO((*triangleMap.begin()).second);
+				//else app->editor->SetGO(nullptr);
 			}
 		}
 		cameraFrustum.SetFrame(newPos, newFront, newUp);

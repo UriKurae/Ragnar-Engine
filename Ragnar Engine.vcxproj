@@ -117,6 +117,7 @@
     <ClInclude Include="Engine\Source\ConfigurationMenu.h" />
     <ClInclude Include="Engine\Source\ConsoleMenu.h" />
     <ClInclude Include="Engine\Source\ContentBrowserMenu.h" />
+    <ClInclude Include="Engine\Source\Dialogs.h" />
     <ClInclude Include="Engine\Source\FileSystem.h" />
     <ClInclude Include="Engine\Source\Framebuffer.h" />
     <ClInclude Include="Engine\Source\GameObject.h" />

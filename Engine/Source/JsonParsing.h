@@ -14,6 +14,7 @@ public:
 	~JsonParsing();
 
 	size_t Save(char** buf);
+	size_t SaveFile(const char* name);
 
 	JSON_Object* SetNewJsonNode(JSON_Object* parent, const char* nodeName) const;
 	JSON_Status SetNewJsonString(JSON_Object* node, const char* name, const char* string) const;
@@ -39,7 +40,7 @@ public:
 	float4 GetJson4Number(JsonParsing& node, const char* name);
 	//GetValor("Width")
 
-	JSON_Value* ParseFile(const char* fileName);
+	size_t ParseFile(const char* fileName);
 	JSON_Object* ValueToObject(JSON_Value* value) const;
 	JSON_Status SerializeFile(JSON_Value* value, const char* fileName) const;
 

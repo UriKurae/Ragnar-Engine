@@ -257,7 +257,6 @@ bool ModuleRenderer3D::PostUpdate()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
-
 	grid->Draw();
 	//app->scene->Draw();
 	std::set<GameObject*> objects;

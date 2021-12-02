@@ -109,21 +109,6 @@ void TransformComponent::SetTransform(float4x4 trMatrix)
 	changeTransform = true;
 }
 
-void TransformComponent::SetTranslation(float3 pos)
-{
-	SetTransform(pos, rotation, scale);
-}
-
-void TransformComponent::SetRotation(Quat rot)
-{
-	SetTransform(position, rot, scale);
-}
-
-void TransformComponent::SetScale(float3 sca)
-{
-	SetTransform(position, rotation, sca);
-}
-
 bool TransformComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
@@ -133,16 +118,7 @@ bool TransformComponent::OnLoad(JsonParsing& node)
 	scale = node.GetJson3Number(node, "Scale");
 	rotationEditor = node.GetJson3Number(node, "RotationEditor");
 
-	if (owner->GetParent() && owner->GetParent()->GetComponent<TransformComponent>() != nullptr)
-	{
-		SetParentTransform(owner->GetParent()->GetComponent<TransformComponent>());
-	}
-	else
-	{
-		SetTransform(position, rotation, scale);
-	}
-
-	RecursiveTransform(owner);
+	changeTransform = true;
 
 	return true;
 }
@@ -161,41 +137,6 @@ bool TransformComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
-}
-
-void TransformComponent::SetChildTransform(float3 pos, Quat rot, float3 sca)
-{
-	float3 scaleParent(scale.x * sca.x, scale.y * sca.y, scale.z * sca.z);
-	globalMatrix = float4x4::FromTRS(position + pos, rotation * rot, scaleParent);
-}
-
-void TransformComponent::SetParentTransform(TransformComponent* component)
-{
-	float3 pos = position + component->GetPosition();
-	float3 scaleParent;
-	scaleParent.x = scale.x * component->GetScale().x;
-	scaleParent.y = scale.y * component->GetScale().y;
-	scaleParent.z = scale.z * component->GetScale().z;
-	Quat rot = rotation * component->GetRotation();
-	globalMatrix = float4x4::FromTRS(pos, rot, scaleParent);
-}
-
-void TransformComponent::RecursiveTransform(GameObject* parent)
-{
-	std::vector<GameObject*> children = parent->GetChilds();
-	for (int i = 0; i < children.size(); ++i)
-	{
-		children[i]->GetComponent<TransformComponent>()->SetChildTransform(position, rotation, scale);
-		RecursiveTransform(children[i]);
-	}
-
-	if (owner->GetComponent<MeshComponent>())
-	{
-		//OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB();
-		//newObb.Transform(globalMatrix);
-		//owner->SetAABB(newObb);
-		owner->SetAABB(owner->GetComponent<MeshComponent>()->GetLocalAABB());
-	}
 }
 
 void TransformComponent::UpdateTransform()
@@ -238,8 +179,9 @@ void TransformComponent::SetAABB()
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 	}
-	app->scene->RemoveFromQuadtree(owner);
-	app->scene->AddToQuadtree(owner);
+	//app->scene->RemoveFromQuadtree(owner);
+	//app->scene->AddToQuadtree(owner);
+	app->scene->ResetQuadtree();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)

@@ -126,9 +126,17 @@ void MeshComponent::OnEditor()
 
 bool MeshComponent::OnLoad(JsonParsing& node)
 {
-	mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->GetResource(std::string(node.GetJsonString("Path"))));
+	mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 
 	active = node.GetJsonBool("Active");
+
+	if (mesh)
+	{
+		localBoundingBox.SetNegativeInfinity();
+		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
+
+		owner->SetAABB(localBoundingBox);
+	}
 
 	return true;
 }

@@ -34,6 +34,13 @@ size_t JsonParsing::Save(char** buf)
 	return written;
 }
 
+size_t JsonParsing::SaveFile(const char* name)
+{
+	size_t written = json_serialization_size(rootObject);
+	json_serialize_to_file(rootObject, name);
+	return written;
+}
+
 JSON_Value* JsonParsing::InitObject()
 {
 	JSON_Value* object = json_value_init_object();
@@ -105,12 +112,12 @@ JsonParsing JsonParsing::SetChild(JSON_Value* parent, const char* name)
 	return GetChild(parent, name);
 }
 
-JSON_Value* JsonParsing::ParseFile(const char* fileName)
+size_t JsonParsing::ParseFile(const char* fileName)
 {
 	JSON_Value* config = json_parse_file(fileName);
 	rootObject = config;
-
-	return config;
+	
+	return json_serialization_size(rootObject);
 }
 
 JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const

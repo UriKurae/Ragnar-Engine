@@ -12,7 +12,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0)
+ModuleScene::ModuleScene() : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true)
 {
 	root = new GameObject();
 	root->SetName("Scene");
@@ -61,6 +61,29 @@ bool ModuleScene::Update(float dt)
 		DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
 		DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
 		frameSkip = false;
+	}
+
+	if (resetQuadtree)
+	{
+		qTree.Clear();
+		qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+		std::stack<GameObject*> objects;
+
+		for (int i = 0; i < root->GetChilds().size(); ++i)
+			objects.push(root->GetChilds()[i]);
+
+		while (!objects.empty())
+		{
+			GameObject* go = objects.top();
+			objects.pop();
+
+			qTree.Insert(go);
+
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+				objects.push(go->GetChilds()[i]);
+		}
+
+		resetQuadtree = false;
 	}
 
 	return true;
@@ -223,18 +246,20 @@ void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
 
 bool ModuleScene::LoadScene(const char* name)
 {
+	RG_PROFILING_FUNCTION("Loading Scene");
+
 	DEBUG_LOG("Loading Scene");
 
 	RELEASE(root);
 
-	char* buffer = nullptr;
+	//char* buffer = nullptr;
 
-	app->fs->Load(name, &buffer);
+	//app->fs->Load(name, &buffer);
 
-	if (buffer != nullptr)
+	JsonParsing sceneFile = JsonParsing();
+
+	if (sceneFile.ParseFile(name) > 0)
 	{
-		JsonParsing sceneFile = JsonParsing(buffer);
-
 		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Game Objects");
 		
 		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
@@ -264,8 +289,6 @@ bool ModuleScene::LoadScene(const char* name)
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	app->editor->SetGO(nullptr);
 
-	RELEASE_ARRAY(buffer);
-
 	return true;
 }
 
@@ -291,7 +314,7 @@ GameObject* ModuleScene::GetGoByUuid(double uuid) const
 	return nullptr;
 }
 
-bool ModuleScene::SaveScene()
+bool ModuleScene::SaveScene(const char* name)
 {
 	DEBUG_LOG("Saving Scene");
 
@@ -301,28 +324,25 @@ bool ModuleScene::SaveScene()
 	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Game Objects");
 	root->OnSave(sceneFile, array);
 
-	char* buf;
-	uint size = sceneFile.Save(&buf);
+	uint size = sceneFile.SaveFile(name);
 	
-	if (app->fs->Save(SCENES_FOLDER "scene.ragnar", buf, size) > 0)
+	if (size > 0)
 		DEBUG_LOG("Scene saved succesfully");
 	else
 		DEBUG_LOG("Scene couldn't be saved");
 
-	RELEASE_ARRAY(buf);
-
 	return true;
 }
 
-void ModuleScene::AddToQuadtree(GameObject* go)
-{
-	qTree.Insert(go);
-}
-
-void ModuleScene::RemoveFromQuadtree(GameObject* go)
-{
-	qTree.Remove(go);
-}
+//void ModuleScene::AddToQuadtree(GameObject* go)
+//{
+//	qTree.Insert(go);
+//}
+//
+//void ModuleScene::RemoveFromQuadtree(GameObject* go)
+//{
+//	qTree.Remove(go);
+//}
 
 void ModuleScene::Play()
 {

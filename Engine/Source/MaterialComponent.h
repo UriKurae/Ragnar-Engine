@@ -17,7 +17,6 @@ public:
 	~MaterialComponent();
 
 	void OnEditor() override;
-	void SetNewMaterial(int i, int w, int h, std::string& p);
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;

@@ -30,16 +30,9 @@ public:
 
 	void SetTransform(float3 pos, Quat rot, float3 sca);
 	void SetTransform(float4x4 trMatrix);
-	void SetTranslation(float3 pos);
-	void SetRotation(Quat rot);
-	void SetScale(float3 sca);
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
-
-	void SetChildTransform(float3 pos, Quat rot, float3 sca);
-	void SetParentTransform(TransformComponent* component);
-	void RecursiveTransform(GameObject* parent);
 
 	void UpdateTransform();
 	void UpdateChildTransform(GameObject* go);
