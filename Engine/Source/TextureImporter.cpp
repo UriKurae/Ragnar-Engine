@@ -66,6 +66,20 @@ void TextureImporter::ImportTexture(std::string& fileName)
 	}
 }
 
+void TextureImporter::ImportTexture2(std::string& fileName)
+{
+	ILuint image;
+	ilGenImages(1, &image);
+	ilBindImage(image);
+	ilLoadImage(fileName.c_str());
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	app->fs->GetFilenameWithoutExtension(fileName);
+	std::string libraryPath = SETTINGS_FOLDER + std::string("EngineResources/") + fileName + ".rgtexture";
+
+	SaveTexture(libraryPath);
+	ilDeleteImages(1, &image);
+}
+
 void TextureImporter::SaveTexture(std::string& fileName)
 {
 	ILuint size;

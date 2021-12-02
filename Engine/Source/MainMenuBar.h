@@ -34,6 +34,9 @@ private:
 	Texture* buttonPlay;
 	Texture* buttonStop;
 	Texture* buttonNextFrame;
+	Texture* buttonPause;
+	Texture* buttonPauseBlue;
+
 
 	std::vector<Menu*> menus;
 };

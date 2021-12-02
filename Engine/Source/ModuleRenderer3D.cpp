@@ -32,7 +32,7 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	colorMaterial = true;
 	lighting = true;
 	texture2D = true;
-	stencil = false;
+	stencil = true;
 	blending = false;
 	wireMode = false;
 	vsync = false;
@@ -164,40 +164,12 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (stencil) SetStencil();
 		if (blending) SetBlending();
 		if (wireMode) SetWireMode();
+
+		// set stencil
+		/*glEnable(GL_DEPTH_TEST);
+		glEnable(GL_STENCIL_TEST);*/
+		
 	}
-
-	// Uncomment for using framebuffer
-	//glGenFramebuffers(1, &framebuffer);
-	//glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
-	//glGenTextures(1, &textureColorbuffer);
-	//glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 1165, 641, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//// attach it to currently bound framebuffer object
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
-
-	//glBindTexture(GL_TEXTURE_2D, 0);
-
-	//
-	//glGenTextures(1, &rboDepthStencil);
-	//glBindTexture(GL_TEXTURE_2D, rboDepthStencil);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 1165, 641, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, rboDepthStencil, 0);
-
-	//glBindTexture(GL_TEXTURE_2D, 0);
-
-
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	//GLenum err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	//if (err != GL_FRAMEBUFFER_COMPLETE)
-	//{
-	//	DEBUG_LOG("Framebuffer is Incomplete. Error %s", glGetString(err));
-	//}
-	//else DEBUG_LOG("Framebuffer is Complete");
 
 	//// Projection matrix for
 	int w = *app->window->GetWindowWidth();
@@ -229,7 +201,7 @@ bool ModuleRenderer3D::PostUpdate()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
 	fbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
@@ -237,7 +209,24 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
+
+	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	glStencilMask(0xFF);
 	app->scene->Draw();	
+
+	if (stencil)
+	{
+		glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		if (app->editor->GetGO()) app->editor->GetGO()->DrawOutline();
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		glColor3f(1.0f, 1.0f, 1.0f);
+	}
 
 	math::Line line = app->camera->rayCast.ToLine();
 	glLineWidth(2.5f);
@@ -261,7 +250,7 @@ bool ModuleRenderer3D::PostUpdate()
 	// Camera Component FBO
 
 	mainCameraFbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
@@ -399,7 +388,11 @@ void ModuleRenderer3D::SetTexture2D()
 
 void ModuleRenderer3D::SetStencil()
 {
-	if (stencil) glEnable(GL_STENCIL_TEST);
+	if (stencil)
+	{
+		glEnable(GL_STENCIL_TEST);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	}
 	else glDisable(GL_STENCIL_TEST);
 }
 

@@ -24,6 +24,7 @@ public:
 	virtual bool Update(float dt) { return true; }
 	virtual void Disable() {}
 	virtual void Draw() {}
+	virtual void DrawOutline() {}
 
 	virtual void OnEditor() {}
 

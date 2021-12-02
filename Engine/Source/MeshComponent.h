@@ -22,6 +22,7 @@ public:
 	~MeshComponent();
 
 	void Draw() override;
+	void DrawOutline() override;
 	void OnEditor() override;
 
 	bool OnLoad(JsonParsing& node) override;

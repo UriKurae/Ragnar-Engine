@@ -26,6 +26,7 @@ public:
 
 	bool Update(float dt);
 	void Draw();
+	void DrawOutline();
 	void DrawEditor();
 
 	void DebugColliders();
