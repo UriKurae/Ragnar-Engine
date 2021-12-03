@@ -7,10 +7,10 @@ typedef unsigned int uint;
 
 struct ModelParameters
 {
-	bool flippedUvs = false;
-	bool optimizedMesh = false;
-	bool hasNormals = false;
-	bool triangulated = false;
+	bool flippedUvs = true;
+	bool optimizedMesh = true;
+	bool normals = true;
+	bool triangulated = true;
 };
 
 class Model : public Resource

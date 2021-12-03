@@ -40,6 +40,18 @@ TransformComponent::TransformComponent(GameObject* own)
 	active = true;
 }
 
+TransformComponent::TransformComponent(TransformComponent* trans)
+{
+	type = ComponentType::TRANSFORM;
+
+	position = trans->GetPosition();
+	rotation = trans->GetRotation();
+	scale = trans->GetScale();
+	globalMatrix = trans->GetGlobalTransform();
+	localMatrix = trans->GetLocalTransform();
+	rotationEditor = trans->GetRotEditor();
+}
+
 TransformComponent::~TransformComponent()
 {
 }

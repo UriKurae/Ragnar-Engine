@@ -6,11 +6,85 @@
 #include "Component.h"
 #include "TextureImporter.h"
 #include "Mesh.h"
+#include "Model.h"
 #include "MathGeoLib/src/Algorithm/Random/LCG.h"
 
 #include "Globals.h"
 
 #include "Profiling.h"
+
+void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& library, std::string& path, ModelParameters& data)
+{
+	RG_PROFILING_FUNCTION("Importing mesh");
+
+	std::vector<float3> vertices;
+	std::vector<float3> norms;
+	std::vector<unsigned int> indices;
+	std::vector<float2> texCoords;
+
+	int numVertices = mesh->mNumVertices;
+	int numFaces = mesh->mNumFaces;
+
+	vertices.reserve(numVertices);
+	indices.reserve(numFaces * 3);
+	texCoords.reserve(numVertices);
+
+	for (unsigned int i = 0; i < numVertices; ++i)
+	{
+		float3 vertex;
+		vertex.x = mesh->mVertices[i].x;
+		vertex.y = mesh->mVertices[i].y;
+		vertex.z = mesh->mVertices[i].z;
+
+		float3 normals;
+		if (data.normals && mesh->HasNormals())
+		{
+			normals.x = mesh->mNormals[i].x;
+			normals.y = mesh->mNormals[i].y;
+			normals.z = mesh->mNormals[i].z;
+			norms.push_back(normals);
+		}
+
+		float2 coords;
+		if (mesh->mTextureCoords[0])
+		{
+			coords.x = mesh->mTextureCoords[0][i].x;
+			coords.y = mesh->mTextureCoords[0][i].y;
+		}
+
+		vertices.push_back(vertex);
+		texCoords.push_back(coords);
+	}
+
+	for (unsigned int i = 0; i < numFaces; ++i)
+	{
+		aiFace face = mesh->mFaces[i];
+		for (unsigned int j = 0; j < face.mNumIndices; ++j)
+		{
+			indices.push_back(face.mIndices[j]);
+		}
+	}
+
+	SaveMesh(library, vertices, indices, norms, texCoords);
+
+	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
+	JsonParsing parse = JsonParsing();
+	parse.SetNewJsonNumber(parse.ValueToObject(parse.GetRootValue()), "Type", (int)ComponentType::MESH_RENDERER);
+	parse.SetNewJsonString(parse.ValueToObject(parse.GetRootValue()), "Mesh Path", library.c_str());
+
+	json.SetValueToArray(array, parse.GetRootValue());
+
+	if (mesh->mMaterialIndex >= 0)
+	{
+		DEBUG_LOG("Processing material...");
+
+		JsonParsing mat = JsonParsing();
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		TextureImporter::ImportTexture(material, aiTextureType_DIFFUSE, "texture_diffuse", mat, path);
+		DEBUG_LOG("Material loading completed!");
+		json.SetValueToArray(array, mat.GetRootValue());
+	}
+}
 
 void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& path, std::vector<uint>& uids)
 {

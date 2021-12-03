@@ -16,6 +16,42 @@
 
 #include "Profiling.h"
 
+void ModelImporter::ReImport(std::string& assetsPath, std::string& library, ModelParameters& parameters)
+{
+	RG_PROFILING_FUNCTION("Reimporting Model");
+
+	std::string p = assetsPath;
+
+	Assimp::Importer import;
+	unsigned int flags = aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances | aiProcess_ValidateDataStructure;
+	if (parameters.flippedUvs) flags |= aiProcess_FlipUVs;
+	if (parameters.optimizedMesh) flags |= aiProcess_OptimizeMeshes;
+	const aiScene* scene = import.ReadFile(assetsPath, flags);
+
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	{
+		DEBUG_LOG("ERROR ASSIMP %s", import.GetErrorString());
+		return;
+	}
+
+	app->fs->GetFilenameWithoutExtension(p);
+
+	JsonParsing json = JsonParsing();
+	JsonParsing child = json.SetChild(json.GetRootValue(), "Model");
+	child.SetNewJsonString(child.ValueToObject(child.GetRootValue()), "Name", p.c_str());
+	std::string root = "Childs" + p;
+	JSON_Array* array = child.SetNewJsonArray(child.GetRootValue(), root.c_str());
+
+	ReProcessNode(scene->mRootNode, scene, child, array, assetsPath, parameters);
+
+	char* buffer = nullptr;
+	size_t size = json.Save(&buffer);
+
+	app->fs->Save(library.c_str(), buffer, size);
+
+	RELEASE_ARRAY(buffer);
+}
+
 void ModelImporter::ImportModel(std::string& path)
 {
 	RG_PROFILING_FUNCTION("Importing Model");
@@ -51,6 +87,7 @@ void ModelImporter::ImportModel(std::string& path)
 		std::vector<uint> uids;
 		ProcessNode(scene->mRootNode, scene, child, array, path, uids);
 
+		model->SetMeshes(uids);
 		SaveModel(p, json);
 	}
 }
@@ -132,6 +169,52 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 	}
 }
 
+void ModelImporter::ReProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path, ModelParameters& data)
+{
+	if (node == scene->mRootNode || node->mNumMeshes > 0)
+	{
+		JsonParsing jsonValue = JsonParsing();
+		jsonValue.SetNewJsonString(jsonValue.ValueToObject(jsonValue.GetRootValue()), "Name", node->mName.C_Str());
+
+		aiVector3D pos;
+		aiQuaternion quat;
+		aiVector3D sca;
+		node->mTransformation.Decompose(sca, quat, pos);
+		float3 position(pos.x, pos.y, pos.z);
+		Quat quaternion(quat.x, quat.y, quat.z, quat.w);
+		float3 scale(sca.x, sca.y, sca.z);
+
+		jsonValue.SetNewJson3Number(jsonValue, "Position", position);
+		jsonValue.SetNewJson4Number(jsonValue, "Rotation", quaternion);
+		jsonValue.SetNewJson3Number(jsonValue, "Scale", scale);
+
+		for (unsigned int i = 0; i < node->mNumMeshes; ++i)
+		{
+			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+			std::string assetsMesh = path;
+			assetsMesh.insert(assetsMesh.find_last_of("."), mesh->mName.C_Str());
+			std::string library = ResourceManager::GetInstance()->GetResource(assetsMesh)->GetLibraryPath();
+			MeshImporter::ReImportMesh(mesh, scene, jsonValue, library, path, data);
+		}
+
+		std::string name = "Childs" + std::string(node->mName.C_Str());
+		JSON_Array* array = jsonValue.SetNewJsonArray(jsonValue.GetRootValue(), name.c_str());
+		// Repeat the process until there's no more children
+		for (unsigned int i = 0; i < node->mNumChildren; ++i)
+		{
+			ReProcessNode(node->mChildren[i], scene, jsonValue, array, path, data);
+		}
+		nodeJ.SetValueToArray(json, jsonValue.GetRootValue());
+	}
+	else
+	{
+		for (unsigned int i = 0; i < node->mNumChildren; ++i)
+		{
+			ReProcessNode(node->mChildren[i], scene, nodeJ, json, path, data);
+		}
+	}
+}
+
 void ModelImporter::CreatingModel(JsonParsing& json, JSON_Array* array, GameObject* go)
 {
 	size_t size = json.GetJsonArrayCount(array);
@@ -194,7 +277,7 @@ void ModelImporter::CreateMetaModel(std::string& path, ModelParameters& data, st
 
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "FlippedUvs", data.flippedUvs);
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "OptimizedMesh", data.optimizedMesh);
-	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "HasNormals", data.hasNormals);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "HasNormals", data.normals);
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "Triangulate", data.triangulated);
 
 	metaModel.SetNewJsonNumber(metaModel.ValueToObject(metaModel.GetRootValue()), "Uuid", uid);

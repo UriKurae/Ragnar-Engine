@@ -318,6 +318,10 @@ bool ModuleScene::SaveScene(const char* name)
 {
 	DEBUG_LOG("Saving Scene");
 
+	std::string rootName = name;
+	app->fs->GetFilenameWithoutExtension(rootName);
+	root->SetName(rootName.c_str());
+
 	JsonParsing sceneFile;
 
 	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Scene");
@@ -332,6 +336,26 @@ bool ModuleScene::SaveScene(const char* name)
 		DEBUG_LOG("Scene couldn't be saved");
 
 	return true;
+}
+
+void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
+{
+	GameObject* gameObject = new GameObject();
+	gameObject->SetName(go->GetName());
+
+	gameObject->SetParent(parent);
+	parent->AddChild(gameObject);
+
+	for (int i = 0; i < go->GetComponents().size(); ++i)
+	{
+		gameObject->CopyComponent(go->GetComponents()[i]);
+	}
+
+	for (int i = 0; i < go->GetChilds().size(); ++i)
+	{
+		DuplicateGO(go->GetChilds()[i], gameObject);
+	}
+	//gameObject->SetAABB(go->GetAABB());
 }
 
 //void ModuleScene::AddToQuadtree(GameObject* go)

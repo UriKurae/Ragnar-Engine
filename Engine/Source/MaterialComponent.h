@@ -14,6 +14,7 @@ class MaterialComponent : public Component
 {
 public:
 	MaterialComponent(GameObject* own);
+	MaterialComponent(MaterialComponent* mat);
 	~MaterialComponent();
 
 	void OnEditor() override;

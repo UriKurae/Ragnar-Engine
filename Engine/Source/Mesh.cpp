@@ -110,7 +110,7 @@ void Mesh::ShowFaceNormals(float3& colorNormal, float& normalLength)
 
 void Mesh::Reimport(ModelParameters& data)
 {
-	if (vertices.empty())
+	if (!vertices.empty())
 	{
 		vertices.clear();
 		indices.clear();

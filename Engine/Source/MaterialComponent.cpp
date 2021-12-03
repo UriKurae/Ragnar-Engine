@@ -24,6 +24,12 @@ MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMe
 	active = true;
 }
 
+MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), checkerImage(nullptr)
+{
+	checker = mat->checker;
+	diff = mat->diff;
+}
+
 MaterialComponent::~MaterialComponent()
 {
 }

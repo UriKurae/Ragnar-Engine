@@ -19,6 +19,7 @@ class MeshComponent : public Component
 {
 public:
 	MeshComponent(GameObject* own, TransformComponent* trans);
+	MeshComponent(MeshComponent* meshComponent, TransformComponent* trans);
 	~MeshComponent();
 
 	void Draw() override;
@@ -34,7 +35,7 @@ public:
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
-	const Mesh* GetMesh() const { return mesh.get(); }
+	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
 private:
 	TransformComponent* transform;
 	MaterialComponent* material;
@@ -48,9 +49,6 @@ private:
 	std::shared_ptr<Mesh> mesh;
 
 	AABB localBoundingBox;
-
-	VertexBuffer* vboAabb;
-	IndexBuffer* eboAabb;
 
 	bool showMeshMenu;
 };

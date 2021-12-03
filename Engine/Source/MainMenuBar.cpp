@@ -255,7 +255,9 @@ bool MainMenuBar::CleanUp()
 	}
 
 	RELEASE(buttonPlay);
+	RELEASE(buttonStop);
 	RELEASE(buttonPause);
+	RELEASE(buttonPauseBlue);
 	RELEASE(buttonNextFrame);
 
 	menus.clear();

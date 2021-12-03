@@ -33,6 +33,9 @@ public:
 
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
+
+	void CopyComponent(Component* component);
+	
 	void AddChild(GameObject* object);
 	void RemoveChild(GameObject* object);
 
@@ -56,6 +59,8 @@ public:
 
 	void OnLoad(JsonParsing& node);
 	void OnSave(JsonParsing& node, JSON_Array* array);
+
+	inline const std::vector<Component*> GetComponents() const { return components; }
 
 	template<typename T>
 	T* GetComponent();

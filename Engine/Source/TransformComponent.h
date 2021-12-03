@@ -22,6 +22,7 @@ class TransformComponent : public Component
 {
 public:
 	TransformComponent(GameObject* owner);
+	TransformComponent(TransformComponent* trans);
 	~TransformComponent();
 
 	bool Update(float dt) override;
@@ -43,6 +44,7 @@ public:
 	inline float3 GetPosition() const { return position; }
 	inline Quat GetRotation() const { return rotation; }
 	inline float3 GetScale() const { return scale; }
+	inline float3 GetRotEditor() const { return rotationEditor; }
 
 	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();

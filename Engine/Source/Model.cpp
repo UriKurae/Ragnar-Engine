@@ -14,6 +14,7 @@ Model::Model(uint uid, std::string& assets, std::string& library) : parameters({
 {
 	std::string metaPath = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".meta";
 	ModelImporter::CreateMetaModel(metaPath, parameters, assets, uid);
+	//ModelImporter::ImportModel(assets, parameters);
 }
 
 Model::~Model()
@@ -30,7 +31,7 @@ void Model::DrawOnEditor()
 	if (ImGui::CollapsingHeader("Model Import Settings"))
 	{
 		ImGui::Checkbox("Optimize Mesh", &parameters.optimizedMesh);
-		ImGui::Checkbox("Has Normals", &parameters.hasNormals);
+		ImGui::Checkbox("Has Normals", &parameters.normals);
 		ImGui::Checkbox("Flipped UVs", &parameters.flippedUvs);
 		ImGui::Checkbox("Triangulate", &parameters.triangulated);
 		
@@ -42,10 +43,11 @@ void Model::Reimport()
 {
 	std::string metaPath = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".meta";
 	ModelImporter::CreateMetaModel(metaPath, parameters, assetsPath, uid);
+	ModelImporter::ReImport(assetsPath, libraryPath, parameters);
 
-	for (uint i = 0; i < meshes.size(); ++i)
+	for (int i = 0; i < meshes.size(); ++i)
 	{
-		std::shared_ptr<Mesh> mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->GetResource(i));
+		std::shared_ptr<Mesh> mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->GetResource(meshes[i]));
 		mesh->Reimport(parameters);
 	}
 }

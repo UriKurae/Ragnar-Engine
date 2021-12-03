@@ -15,13 +15,26 @@
 
 #include "Profiling.h"
 
-MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f), vboAabb(nullptr), eboAabb(nullptr)
+MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
 {
 	type = ComponentType::MESH_RENDERER;
 	owner = own;
 	mesh = nullptr;
 
 	showMeshMenu = false;
+}
+
+MeshComponent::MeshComponent(MeshComponent* meshComponent, TransformComponent* trans) : material(nullptr), showMeshMenu(false)
+{
+	transform = trans;
+	mesh = meshComponent->GetMesh();
+
+	faceNormals = meshComponent->faceNormals;
+	verticesNormals = meshComponent->verticesNormals;
+	normalLength = meshComponent->normalLength;
+	colorNormal = meshComponent->colorNormal;
+
+	localBoundingBox = meshComponent->localBoundingBox;
 }
 
 MeshComponent::~MeshComponent()
@@ -112,9 +125,13 @@ void MeshComponent::OnEditor()
 		app->fs->DiscoverFiles("Library/Meshes/", files);
 		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 		{
+			app->fs->GetFilenameWithoutExtension(*it);
+			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+			uint uid = std::stoll(*it);
+			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
 			if (ImGui::Button((*it).c_str(), {ImGui::GetWindowWidth() - 30, 20}))
 			{
-				//SetMesh(ResourceManager::GetInstance()->IsMeshLoaded(MESHES_FOLDER + (*it)));
+				SetMesh(res);
 			}
 		}
 
