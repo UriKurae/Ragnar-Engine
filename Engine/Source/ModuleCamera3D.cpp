@@ -287,7 +287,11 @@ bool ModuleCamera3D::Update(float dt)
 					}
 				}
 				if (!triangleMap.empty()) app->editor->SetGO((*triangleMap.begin()).second);
-				//else app->editor->SetGO(nullptr);
+				else if (triangleMap.empty() && !ImGuizmo::IsUsing())
+				{
+					app->editor->SetGO(nullptr);
+					app->editor->SetSelectedParent(nullptr);
+				}
 			}
 		}
 		cameraFrustum.SetFrame(newPos, newFront, newUp);
