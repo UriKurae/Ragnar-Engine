@@ -107,9 +107,10 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 		resource = std::make_shared<Texture>(uid, assets, library);
 		break;
 	case ResourceType::MESH:
+		resource = std::make_shared<Mesh>(uid, assets, library);
 		break;
 	case ResourceType::MODEL:
-		//resource = std::make_shared<Model>(uid, assets, library);
+		resource = std::make_shared<Model>(uid, assets, library);
 		break;
 	default:
 		break;
