@@ -234,7 +234,8 @@ bool ModuleCamera3D::Update(float dt)
 				mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
 
 				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
-				rayCast = picking.ToRay();
+				LineSegment prevLine = picking;
+				rayCastToDraw = picking.ToLine();
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
 				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
@@ -249,11 +250,10 @@ bool ModuleCamera3D::Update(float dt)
 				{
 					TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 					if ((*it)->GetAABB().IsFinite() && transform)
-					{
-
-						//rayCast.Transform(transform->GetGlobalTransform());
-						hit = rayCast.Intersects((*it)->GetAABB());
-
+					{		
+						picking = prevLine;
+						hit = picking.Intersects((*it)->GetAABB());
+						
 						if (hit)
 						{
 							MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
@@ -268,10 +268,11 @@ bool ModuleCamera3D::Update(float dt)
 								int size = meshComponent->GetMesh()->GetIndicesSize();
 
 								int hits = 0;
+								picking.Transform(transform->GetGlobalTransform().Inverted());
 								for (int i = 0; i < size; i += 3)
 								{
 									const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i + 1]], meshVertices[meshIndices[i + 2]]);
-									if (rayCast.Intersects(tri, &distance, &hitPoint))
+									if (picking.Intersects(tri, &distance, &hitPoint))
 									{
 										closestDistance = distance;
 										triangleMap[distance] = (*it);
