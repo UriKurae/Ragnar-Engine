@@ -89,7 +89,6 @@ bool TransformComponent::Update(float dt)
 
 void TransformComponent::OnEditor()
 {
-	ImGui::SetNextTreeNodeOpen(true);
 	if (ImGui::CollapsingHeader("Transform"))
 	{
 		ImGui::PushItemWidth(90);

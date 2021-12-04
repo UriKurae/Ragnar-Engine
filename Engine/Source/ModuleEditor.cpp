@@ -61,6 +61,23 @@ bool ModuleEditor::Update(float dt)
 		app->window->SetFullscreen();
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_DELETE) == KeyState::KEY_DOWN)
+	{
+		if (selected)
+		{
+			for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
+			{
+				if (selected == (*i))
+				{
+					selectedParent->GetChilds().erase(i);
+					RELEASE(selected);
+					app->scene->ResetQuadtree();
+					break;
+				}
+			}
+		}
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
 	{

@@ -29,6 +29,8 @@ public:
 	ConsoleMenu* GetConsole();
 	std::string& GetCurrentDir();
 
+	void StyleTheme();
+
 private:
 	bool showMenu;
 	Texture* buttonPlay;

@@ -65,6 +65,7 @@ public:
 
 	//void AddToQuadtree(GameObject* go);
 	//void RemoveFromQuadtree(GameObject* go);
+	void ImportPrimitives();
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
 

@@ -2,6 +2,8 @@
 #include "Globals.h"
 
 #include "MeshImporter.h"
+#include "Application.h"
+#include "FileSystem.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -11,6 +13,8 @@ Mesh::Mesh(uint uid, std::string& assets, std::string& library) : vbo(nullptr), 
 {
 	std::string metaPath = MESHES_FOLDER + std::string("mesh_") + std::to_string(uid) + ".meta";
 	MeshImporter::CreateMetaMesh(metaPath, assets, uid);
+	name = assets;
+	app->fs->GetFilenameWithoutExtension(name);
 }
 
 Mesh::~Mesh()

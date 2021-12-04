@@ -96,7 +96,7 @@ void Quadtree::Intersect(std::vector<GameObject*>& gos, Ray ray)
 
 void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 {
-	if (root != nullptr)
+	if (root != nullptr && frustum != nullptr)
 	{
 		std::stack<QuadtreeNode*> nodes;
 		nodes.push(root);

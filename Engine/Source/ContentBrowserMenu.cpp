@@ -106,6 +106,12 @@ bool ContentBrowserMenu::Update(float dt)
 		std::string item = (*it);
 		app->fs->GetRelativeDirectory(item);
 		
+		bool selected = false;
+		if (currentFile == *it)
+		{
+			ImGui::PushStyleColor(ImGuiCol_Button, ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.29f, 0.66f, 1.0f)));
+			selected = true;
+		}
 		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, cell });
 		if (ImGui::IsItemClicked())
 		{
@@ -125,6 +131,8 @@ bool ContentBrowserMenu::Update(float dt)
 		
 		ImGui::Text(item.c_str());
 
+		if (selected) ImGui::PopStyleColor();
+
 		ImGui::NextColumn();
 	}
 
@@ -134,11 +142,25 @@ bool ContentBrowserMenu::Update(float dt)
 		ImGui::PushID(i++);
 		std::string item = (*it);
 		
+		ResourceType type = app->fs->CheckExtension(item);
 		app->fs->GetFilenameWithExtension(item);
 		
-		if (item.find(".png") != std::string::npos) ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", {cell, cell});
-		else if (item.find(".fbx") != std::string::npos) ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, cell });
-		else ImGui::ImageButton("", { cell, cell });
+		bool selected = false;
+		if (currentFile == *it)
+		{
+			ImGui::PushStyleColor(ImGuiCol_Button, ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.29f, 0.66f, 1.0f)));
+			selected = true;
+		}
+
+		switch (type)
+		{
+		case ResourceType::TEXTURE:
+			ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", { cell, cell });
+			break;
+		case ResourceType::MODEL:
+			ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, cell });
+			break;
+		}
 		if (ImGui::IsItemClicked())
 		{
 			app->editor->SetResource(ResourceManager::GetInstance()->GetResource((*it)).get());
@@ -151,6 +173,7 @@ bool ContentBrowserMenu::Update(float dt)
 			ImGui::EndDragDropSource();
 		}
 		ImGui::Text(item.c_str());
+		if (selected) ImGui::PopStyleColor();
 
 		ImGui::NextColumn();
 
