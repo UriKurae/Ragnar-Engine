@@ -47,6 +47,7 @@ public:
 	inline bool* GetBlending() { return &blending; }
 	inline bool* GetWireMode() { return &wireMode; }
 	inline bool* GetVsync() { return &vsync; }
+	inline bool* GetRayCast() { return &rayCast; }
 
 	void DrawCubeDirectMode();
 
@@ -69,4 +70,5 @@ public:
 	bool blending;
 	bool wireMode;
 	bool vsync;
+	bool rayCast;
 };

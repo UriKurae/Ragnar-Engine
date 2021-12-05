@@ -168,6 +168,10 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->renderer3D->SetWireMode();
 			}
+			if (ImGui::MenuItem("Show Raycast", NULL, app->renderer3D->GetRayCast()))
+			{
+				app->renderer3D->SetWireMode();
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())

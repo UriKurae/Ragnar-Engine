@@ -20,7 +20,7 @@
 
 #include "Profiling.h"
 
-ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), mainCameraFbo(nullptr)
+ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), mainCameraFbo(nullptr), rayCast(true)
 {
 	name = "Renderer";
 	context = NULL;
@@ -228,16 +228,19 @@ bool ModuleRenderer3D::PostUpdate()
 		glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
-	math::LineSegment line = app->camera->rayCastToDraw.ToLineSegment(50.0f);
-	glLineWidth(2.5f);
-	glBegin(GL_LINES);
-	glColor3f(1.0f, 0.64f, 0.0f);
-	glVertex3f(line.a.x, line.a.y, line.a.z);
-	glVertex3f(line.b.x, line.b.y, line.b.z);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	
-	glEnd();
-	glLineWidth(1.0f);
+	if (rayCast)
+	{
+		math::LineSegment line = app->camera->rayCastToDraw.ToLineSegment(50.0f);
+		glLineWidth(2.5f);
+		glBegin(GL_LINES);
+		glColor3f(1.0f, 0.64f, 0.0f);
+		glVertex3f(line.a.x, line.a.y, line.a.z);
+		glVertex3f(line.b.x, line.b.y, line.b.z);
+		glColor3f(1.0f, 1.0f, 1.0f);
+
+		glEnd();
+		glLineWidth(1.0f);
+	}
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
