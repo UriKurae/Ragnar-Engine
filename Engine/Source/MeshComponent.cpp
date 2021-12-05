@@ -39,6 +39,7 @@ MeshComponent::MeshComponent(MeshComponent* meshComponent, TransformComponent* t
 
 MeshComponent::~MeshComponent()
 {
+	if (mesh.use_count() - 1 == 1) mesh->UnLoad();
 }
 
 void MeshComponent::Draw()
@@ -49,11 +50,11 @@ void MeshComponent::Draw()
 	glPushMatrix();
 	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	
-	if (material != nullptr) material->BindTexture();
+	if (material != nullptr && material->GetActive()) material->BindTexture();
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
-	if (material != nullptr) material->UnbindTexture();
+	if (material != nullptr && material->GetActive()) material->UnbindTexture();
 	
 	glPopMatrix();
 
@@ -74,11 +75,7 @@ void MeshComponent::DrawOutline()
 	testGlobal.scaleZ += 0.05f;
 	glMultMatrixf(testGlobal.Transposed().ptr());
 
-	//if (material != nullptr) material->BindTexture();
-
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
-
-	//if (material != nullptr) material->UnbindTexture();
 
 	glPopMatrix();
 
@@ -115,23 +112,31 @@ void MeshComponent::OnEditor()
 
 	if (showMeshMenu)
 	{
-		ImGui::Begin("Meshes", &showMeshMenu);
+		ImGui::Begin("Meshes", &showMeshMenu, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoCollapse);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 size = ImGui::GetWindowSize();
+		ImVec2 mouse = ImGui::GetIO().MousePos;
+		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x && 
+			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+		{
+			if (ImGui::GetIO().MouseClicked[0]) showMeshMenu = false;
+		}
 
-		//if (!ImGui::IsItemHovered() && ImGui::GetIO().MouseClicked[0])
-		//{
-		//	showMeshMenu = false;
-		//}
 		std::vector<std::string> files;
 		app->fs->DiscoverFiles("Library/Meshes/", files);
 		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 		{
-			app->fs->GetFilenameWithoutExtension(*it);
-			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-			uint uid = std::stoll(*it);
-			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
-			if (ImGui::Selectable("", res->GetName().c_str(), ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups))
+			if ((*it).find(".rgmesh") != std::string::npos)
 			{
-				SetMesh(res);
+				app->fs->GetFilenameWithoutExtension(*it);
+				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+				uint uid = std::stoll(*it);
+				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
+				if (ImGui::Selectable(res->GetName().c_str()))
+				{
+					if (mesh.use_count() - 1 == 1) mesh->UnLoad();
+					SetMesh(res);
+				}
 			}
 		}
 

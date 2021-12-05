@@ -13,7 +13,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true)
+ModuleScene::ModuleScene() : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), goToRecalculate(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Scene");
@@ -64,6 +64,24 @@ bool ModuleScene::Update(float dt)
 		frameSkip = false;
 	}
 
+	if (goToRecalculate && goToRecalculate->GetParent() != root)
+	{
+		std::stack<GameObject*> objects;
+		objects.push(goToRecalculate->GetParent());
+		while (!objects.empty())
+		{
+			GameObject* parent = objects.top();
+			objects.pop();
+
+			parent->ClearAABB();
+			parent->SetNewAABB();
+
+			if (parent->GetParent() != root) objects.push(parent->GetParent());
+		}
+
+		goToRecalculate = nullptr;
+	}
+
 	if (resetQuadtree)
 	{
 		qTree.Clear();
@@ -111,13 +129,15 @@ bool ModuleScene::Draw()
 	while (!stack.empty())
 	{
 		GameObject* go = stack.top();
-
-		go->Draw();
-
 		stack.pop();
 
-		for (int i = 0; i < go->GetChilds().size(); ++i)
-			stack.push(go->GetChilds()[i]);
+		if (go->GetActive())
+		{
+			go->Draw();
+
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+				stack.push(go->GetChilds()[i]);
+		}
 	}
 	//for (int i = 0; i < root->GetChilds().size(); ++i)
 	//{
@@ -134,6 +154,20 @@ bool ModuleScene::CleanUp()
 	RELEASE(root);
 
 	return true;
+}
+
+void ModuleScene::NewScene()
+{
+	RELEASE(root);
+
+	root = new GameObject();
+	root->SetName("Scene");
+
+	GameObject* camera = CreateGameObject(nullptr);
+	camera->CreateComponent(ComponentType::CAMERA);
+	camera->SetName("Camera");
+
+	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 }
 
 GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransform)

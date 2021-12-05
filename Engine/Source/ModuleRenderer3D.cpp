@@ -214,13 +214,13 @@ bool ModuleRenderer3D::PostUpdate()
 	glStencilMask(0xFF);
 	app->scene->Draw();	
 
-	if (stencil)
+	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
 	{
 		glColor3f(0.25f, 0.87f, 0.81f);
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
-		if (app->editor->GetGO()) app->editor->GetGO()->DrawOutline();
+		app->editor->GetGO()->DrawOutline();
 
 		glStencilMask(0xFF);
 		glStencilFunc(GL_ALWAYS, 0, 0xFF);

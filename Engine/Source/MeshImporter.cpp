@@ -140,8 +140,10 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 
 	std::string meshName;
 	std::string assetsPath(path);
+	std::string name("__");
+	name += mesh->mName.C_Str();
 
-	assetsPath.insert(assetsPath.find_last_of("."), mesh->mName.C_Str());
+	assetsPath.insert(assetsPath.find_last_of("."), name.c_str());
 
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, assetsPath, meshName);
 	uids.push_back(uid);

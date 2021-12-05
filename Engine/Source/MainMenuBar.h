@@ -39,6 +39,6 @@ private:
 	Texture* buttonPause;
 	Texture* buttonPauseBlue;
 
-
+	bool saveWindow;
 	std::vector<Menu*> menus;
 };

@@ -338,11 +338,27 @@ void GameObject::SetAABB(OBB newOBB)
 {
 	globalAabb.Enclose(newOBB);
 
-	if (parent != nullptr && parent != app->scene->GetRoot())
+	//if (parent != nullptr && parent != app->scene->GetRoot())
+	//{
+	//	OBB newObb = globalAabb.ToOBB();
+	//	//newObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
+	//	parent->SetAABB(newObb);
+	//}
+}
+
+void GameObject::SetNewAABB()
+{
+	for (int i = 0; i < children.size(); ++i)
 	{
-		OBB newObb = globalAabb.ToOBB();
-		//newObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
-		parent->SetAABB(newObb);
+		children[i]->SetNewAABB();
+		OBB newObb = children[i]->GetAABB().ToOBB();
+		globalAabb.Enclose(newObb);
+	}
+	if (GetComponent<MeshComponent>() && GetComponent<MeshComponent>()->GetMesh())
+	{
+		OBB newObb = GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
+		newObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
+		globalAabb.Enclose(newObb);
 	}
 }
 

@@ -15,6 +15,7 @@ Mesh::Mesh(uint uid, std::string& assets, std::string& library) : vbo(nullptr), 
 	MeshImporter::CreateMetaMesh(metaPath, assets, uid);
 	name = assets;
 	app->fs->GetFilenameWithoutExtension(name);
+	name = name.substr(name.find_first_of("__") + 2, name.length());
 }
 
 Mesh::~Mesh()
@@ -45,6 +46,21 @@ void Mesh::Load()
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		vbo->Unbind();
 		ebo->Unbind();
+	}
+}
+
+void Mesh::UnLoad()
+{
+	if (!vertices.empty())
+	{
+		vertices.clear();
+		indices.clear();
+		normals.clear();
+		texCoords.clear();
+
+		glDeleteBuffers(1, &tbo);
+		RELEASE(vbo);
+		RELEASE(ebo);
 	}
 }
 

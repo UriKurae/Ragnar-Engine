@@ -35,6 +35,8 @@ public:
 	bool Draw();
 	bool CleanUp() override;
 
+	void NewScene();
+
 	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true);
 	inline std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
@@ -61,6 +63,8 @@ public:
 	bool LoadScene(const char* name);
 	bool SaveScene(const char* name);
 
+	inline void RecalculateAABB(GameObject* go) { goToRecalculate = go; }
+
 	void DuplicateGO(GameObject* go, GameObject* parent);
 
 	//void AddToQuadtree(GameObject* go);
@@ -82,4 +86,5 @@ private:
 	bool resetQuadtree;
 
 	GameTimer gameTimer;
+	GameObject* goToRecalculate;
 };

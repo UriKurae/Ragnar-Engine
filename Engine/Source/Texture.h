@@ -28,6 +28,7 @@ public:
 	~Texture();
 
 	void Load() override;
+	void UnLoad() override;
 
 	void DrawOnEditor() override;
 

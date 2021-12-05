@@ -9,7 +9,8 @@ enum class ResourceType
 	NONE = 0,
 	TEXTURE,
 	MESH,
-	MODEL
+	MODEL,
+	SCENE
 };
 
 class Resource
@@ -20,6 +21,7 @@ public:
 	~Resource() {}
 
 	virtual void Load() {}
+	virtual void UnLoad() {}
 
 	virtual void DrawOnEditor() {}
 

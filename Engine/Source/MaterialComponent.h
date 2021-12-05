@@ -27,14 +27,9 @@ public:
 
 	void SetTexture(std::shared_ptr<Resource> tex);
 
-	// TODO: Check because fucking no one use this shit
-	//inline Texture* GetTexture() const { return diffuse; }
-
 private:
 	bool checker;
 	bool showTexMenu;
-
-	Texture* checkerImage;
 
 	std::shared_ptr<Texture> diff;
 };

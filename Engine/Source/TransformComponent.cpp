@@ -179,10 +179,13 @@ void TransformComponent::SetAABB()
 {
 	std::vector<GameObject*> goList = owner->GetChilds();
 	owner->ClearAABB();
+	OBB childOBB;
 	for (int i = 0; i < goList.size(); ++i)
 	{
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
+		childOBB = tr->owner->GetAABB();
+		owner->SetAABB(childOBB);
 	}
 	if (owner->GetComponent<MeshComponent>())
 	{
@@ -190,8 +193,7 @@ void TransformComponent::SetAABB()
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 	}
-	//app->scene->RemoveFromQuadtree(owner);
-	//app->scene->AddToQuadtree(owner);
+	app->scene->RecalculateAABB(owner);
 	app->scene->ResetQuadtree();
 }
 

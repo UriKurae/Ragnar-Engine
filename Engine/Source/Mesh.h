@@ -18,6 +18,7 @@ public:
 	~Mesh();
 
 	void Load() override;
+	void UnLoad() override;
 
 	void Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, float &colorLength);
 

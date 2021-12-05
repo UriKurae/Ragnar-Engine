@@ -15,12 +15,10 @@
 
 #include "Profiling.h"
 
-ContentBrowserMenu::ContentBrowserMenu() : Menu(true)
+ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), Menu(true)
 {
 	mainDirectory = "Assets/";
 	currentDirectory = mainDirectory;
-	
-	dirIcon = nullptr;
 }
 
 ContentBrowserMenu::~ContentBrowserMenu()
@@ -28,6 +26,7 @@ ContentBrowserMenu::~ContentBrowserMenu()
 	RELEASE(dirIcon);
 	RELEASE(picIcon);
 	RELEASE(modelIcon);
+	RELEASE(sceneIcon);
 }
 
 bool ContentBrowserMenu::Start()
@@ -41,6 +40,9 @@ bool ContentBrowserMenu::Start()
 
 	modelIcon = new Texture(-3, std::string("Settings/EngineResources/model.rgtexture"));
 	modelIcon->Load();
+
+	//sceneIcon = new Texture(-3, std::string("Settings/EngineResources/model.rgtexture"));
+	//sceneIcon->Load();
 
 	return true;
 }
@@ -159,6 +161,9 @@ bool ContentBrowserMenu::Update(float dt)
 			break;
 		case ResourceType::MODEL:
 			ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, cell });
+			break;
+		case ResourceType::SCENE:
+			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, cell });
 			break;
 		}
 		if (ImGui::IsItemClicked())

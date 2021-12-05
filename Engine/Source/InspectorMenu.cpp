@@ -30,8 +30,11 @@ bool InspectorMenu::Update(float dt)
 		{
 			//ImGui::SetNextTreeNodeOpen(true);
 			// This line below draws in the inspector only the selected object, Unity style
-			app->editor->GetGO()->DrawEditor();
-
+			if (ImGui::BeginChild("Selected GO"))
+			{
+				app->editor->GetGO()->DrawEditor();
+				ImGui::EndChild();
+			}
 
 			// TODO: The line below is not necessary anymore, it's "HardCoded", does not function like unity's inspector
 			//object.DrawEditor();

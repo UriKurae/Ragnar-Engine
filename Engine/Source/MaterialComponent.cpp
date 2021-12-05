@@ -14,17 +14,13 @@
 MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMenu(false)
 {
 	type = ComponentType::MATERIAL;
-	checkerImage = nullptr;
 	owner = own;
 	checker = false;
-
-	// TODO: Rewrite the function on the texture importer to support textures from inside the engine.
-	//checkerImage = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Checker.png")));
 	
 	active = true;
 }
 
-MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), checkerImage(nullptr)
+MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false)
 {
 	checker = mat->checker;
 	diff = mat->diff;
@@ -32,6 +28,7 @@ MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false
 
 MaterialComponent::~MaterialComponent()
 {
+	if (diff.use_count() - 1 == 1) diff->UnLoad();
 }
 
 void MaterialComponent::OnEditor()
@@ -41,25 +38,7 @@ void MaterialComponent::OnEditor()
 	if (ImGui::CollapsingHeader("Material"))
 	{
 		Checkbox(this, "Active", active);
-		if (checker)
-		{
-			if (ImGui::Button(checker ? "Checker" : ""))
-			{
-				showTexMenu = true;
-			}
-			ImGui::Text("Path: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", checkerImage->GetAssetsPath().c_str());
-			ImGui::Text("Width: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", checkerImage->GetWidth());
-			ImGui::Text("Height: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", checkerImage->GetHeight());
-			ImGui::Checkbox("Checker Image", &checker);
-			ImGui::Image((ImTextureID)checkerImage->GetId(), ImVec2(128, 128));
-		}
-		else if (diff != nullptr)
+		if (diff != nullptr)
 		{
 			if (ImGui::Button(diff ? "Diffuse" : ""))
 			{
@@ -77,7 +56,6 @@ void MaterialComponent::OnEditor()
 			ImGui::Text("Reference Count: ");
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff.use_count());
-			ImGui::Checkbox("Checker Image", &checker);
 			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
 		}
 		else
@@ -101,11 +79,15 @@ void MaterialComponent::OnEditor()
 	if (showTexMenu)
 	{
 		ImGui::Begin("Textures", &showTexMenu);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 size = ImGui::GetWindowSize();
+		ImVec2 mouse = ImGui::GetIO().MousePos;
+		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+		{
+			if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
+		}
 
-		//if (!ImGui::IsItemHovered() && ImGui::GetIO().MouseClicked[0])
-		//{
-		//	showMeshMenu = false;
-		//}
 		std::vector<std::string> files;
 		app->fs->DiscoverFiles("Library/Textures/", files);
 		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -118,6 +100,7 @@ void MaterialComponent::OnEditor()
 				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
 				if (ImGui::Button(res->GetName().c_str(), { ImGui::GetWindowWidth() - 30, 20 }))
 				{
+					if (diff.use_count() - 1 == 1) diff->UnLoad();
 					SetTexture(res);
 				}
 			}
@@ -152,26 +135,12 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 void MaterialComponent::BindTexture()
 {
-	if (checker)
-	{
-		if (checkerImage) checkerImage->Bind();
-	}
-	else
-	{
-		if (diff) diff->Bind();
-	}
+	if (diff) diff->Bind();
 }
 
 void MaterialComponent::UnbindTexture()
 {
-	if (checker)
-	{
-		if (checkerImage) checkerImage->Unbind();
-	}
-	else
-	{
-		if (diff) diff->Unbind();
-	}
+	if (diff) diff->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)

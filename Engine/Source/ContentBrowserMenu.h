@@ -32,6 +32,7 @@ private:
 	Texture* dirIcon;
 	Texture* picIcon;
 	Texture* modelIcon;
+	Texture* sceneIcon;
 
 	std::thread resource;
 };

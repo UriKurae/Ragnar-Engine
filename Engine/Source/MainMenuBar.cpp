@@ -18,7 +18,7 @@
 
 #include "Profiling.h"
 
-MainMenuBar::MainMenuBar() : Menu(true), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
+MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {
 	showMenu = false;
 
@@ -68,8 +68,6 @@ bool MainMenuBar::Start()
 
 bool MainMenuBar::Update(float dt)
 {
-//	ImGui::DockSpaceOverViewport();
-
 	if (ImGui::BeginMainMenuBar())
 	{
 		bool ret = false;
@@ -77,17 +75,25 @@ bool MainMenuBar::Update(float dt)
 		if (ImGui::BeginMenu("File"))
 		{
 			// Project options (Create, open...)
-			ImGui::MenuItem("New Project", NULL, &ret);
-			ImGui::MenuItem("Open Project", NULL, &ret);
-
-			ImGui::Separator();
-
-			if (ImGui::MenuItem("Load", "Ctrl + L", &ret))
+			if (ImGui::MenuItem("New Project", "Ctrl + N", &ret))
+			{
+				saveWindow = true;
+				//app->scene->NewScene();
+			}
+			if (ImGui::MenuItem("Open Project", "Ctrl + O", &ret))
 			{
 				std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->scene->LoadScene(filePath.c_str());
 			}
+
+			ImGui::Separator();
+
 			if (ImGui::MenuItem("Save", "Ctrl + S", &ret))
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+			}
+			if (ImGui::MenuItem("Save As", "Ctrl + Shift + S", &ret))
 			{
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
@@ -192,6 +198,21 @@ bool MainMenuBar::Update(float dt)
 			ImGui::SetTooltip("Opens the help menu");
 		}
 		ImGui::EndMainMenuBar();
+	}
+
+	if (saveWindow)
+	{
+		bool saved = true;
+		ImVec2 position = { (float)app->window->width / 2, (float)app->window->height / 2 };
+		//ImVec2 size = 
+		ImGui::SetNextWindowPos(position);
+		ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+		ImGui::Button("Save");
+		ImGui::SameLine();
+		ImGui::Button("Don't Save");
+		ImGui::SameLine();
+		ImGui::Button("Cancel");
+		ImGui::End();
 	}
 
 	bool ret = true;

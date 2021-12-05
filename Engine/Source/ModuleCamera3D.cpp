@@ -221,7 +221,7 @@ bool ModuleCamera3D::Update(float dt)
 		float4 size = app->editor->GetViewport()->GetBounds();
 	//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
-		if (pos.x > size.x&& pos.x < size.x + size.z && pos.y > size.y&& pos.y < size.y + size.w)
+		if (app->editor->GetViewport()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y&& pos.y < size.y + size.w)
 		{
 			if (app->input->GetMouseZ() == 1) newPos += newFront * speed;
 			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed;
@@ -265,7 +265,11 @@ bool ModuleCamera3D::Update(float dt)
 								float distance = 0.0f;
 								float closestDistance = 0.0f;
 								math::vec hitPoint = { 0.0f, 0.0f, 0.0f };
-								int size = meshComponent->GetMesh()->GetIndicesSize();
+								int size = 0;
+								if (meshComponent->GetMesh())
+								{
+									size = meshComponent->GetMesh()->GetIndicesSize();
+								}
 
 								int hits = 0;
 								picking.Transform(transform->GetGlobalTransform().Inverted());

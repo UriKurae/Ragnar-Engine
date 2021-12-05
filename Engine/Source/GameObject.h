@@ -50,6 +50,7 @@ public:
 
 	void SetAABB(AABB newAABB, bool needToClean = false);
 	void SetAABB(OBB newOBB);
+	void SetNewAABB();
 	inline AABB GetAABB() { return globalAabb; }
 	
 	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }
