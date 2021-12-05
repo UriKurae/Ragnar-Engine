@@ -68,6 +68,11 @@ void ModuleCamera3D::UpdateFov()
 	cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (currentScreenWidth / currentScreenHeight));
 }
 
+void ModuleCamera3D::SetPlanes()
+{
+	cameraFrustum.SetViewPlaneDistances(nearPlane, farPlane);
+}
+
 bool ModuleCamera3D::LoadConfig(JsonParsing& node)
 {
 	//float3 pos;
@@ -148,7 +153,7 @@ bool ModuleCamera3D::Update(float dt)
 			if (dY != 0)
 			{
 				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt);
 				newFront = rotateVertical * newFront;
 				newUp = rotateVertical * newUp;
 				newFront.Normalize();

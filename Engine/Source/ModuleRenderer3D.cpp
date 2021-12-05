@@ -234,7 +234,6 @@ bool ModuleRenderer3D::PostUpdate()
 	glColor3f(1.0f, 0.64f, 0.0f);
 	glVertex3f(line.a.x, line.a.y, line.a.z);
 	glVertex3f(line.b.x, line.b.y, line.b.z);
-	//glVertex3f(line * 50.0f, line.dir.y * 50.0f, line.dir.z * 50.0f);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	
 	glEnd();
@@ -259,7 +258,6 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
-	//app->scene->Draw();
 	std::set<GameObject*> objects;
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 

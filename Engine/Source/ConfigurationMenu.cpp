@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
 #include "ModuleInput.h"
 #include "ConfigurationMenu.h"
 
@@ -145,6 +146,34 @@ bool ConfigurationMenu::Update(float dt)
 			app->window->SetFullscreenDesktop();
 		}
 	}
+	ImGui::PushID(this);
+	if (ImGui::CollapsingHeader("Camera"))
+	{
+		ImGui::Text("Field of view");
+		ImGui::SameLine();
+		static float horizontalFovEditorCamera = RadToDeg(app->camera->horizontalFov);
+		if (ImGui::DragFloat("", &horizontalFovEditorCamera, 1.0f, 1.0f, 179.0f))
+		{
+			app->camera->horizontalFov = DegToRad(horizontalFovEditorCamera);
+			app->camera->UpdateFov();
+		}
+
+		ImGui::Text("Clipping planes");
+
+		ImGui::Text("Near");
+		ImGui::SameLine();
+		ImGui::PushID("NearPlane");
+		if (ImGui::DragFloat("", &app->camera->nearPlane, 0.5f, 0.1f)) app->camera->SetPlanes();
+		ImGui::PopID();
+
+		ImGui::PushID("farPlane");
+		ImGui::Text("Far");
+		ImGui::SameLine();
+		if (ImGui::DragFloat("", &app->camera->farPlane, 0.5f, 0.1f)) app->camera->SetPlanes();
+		ImGui::PopID();
+
+	}
+	ImGui::PopID();
 	if (ImGui::CollapsingHeader("Renderer"))
 	{
 		if (ImGui::Checkbox("VSync", app->renderer3D->GetVsync()))
