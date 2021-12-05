@@ -73,6 +73,8 @@ public:
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
 
+	inline const std::string& SceneDirectory() const { return sceneDir; }
+
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
 
@@ -87,4 +89,6 @@ private:
 
 	GameTimer gameTimer;
 	GameObject* goToRecalculate;
+
+	std::string sceneDir;
 };

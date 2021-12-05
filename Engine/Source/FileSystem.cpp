@@ -309,7 +309,7 @@ ResourceType FileSystem::CheckExtension(std::string& path)
 	std::list<std::string>::iterator s;
 	std::list<std::string>::iterator end = modelExtension.end();
 
-	if (extension.data() == ".scene") return ResourceType::SCENE;
+	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
 
 	for (s = modelExtension.begin(); s != end; ++s)
 	{

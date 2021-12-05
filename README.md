@@ -77,6 +77,7 @@ v0.5
 - Ctrl + O: Opens the explorer window to search for a file and open it.
 - Ctrl + S: Saves the current Scene.
 - Ctrl + Shift + S: Opens the explorer window to save the scene in a desired location.
+- Ctrl + D: Duplicates the selected game object.
 
 - Play/Stop/Pause and Advance frame: To start a game preview, hit the play button, when you hit the play button, the preview will start, and the play button will be swapped by
 the stop button. Hitting the stop button will stop the game preview.

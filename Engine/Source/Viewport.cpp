@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "ModuleScene.h"
 #include "Viewport.h"
 #include "ModuleRenderer3D.h"
 #include "GameObject.h"
@@ -77,7 +78,15 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		{
 			// TODO: Check this for dropping resources to the scene
 			const char* path = (const char*)payload->Data;
-			ResourceManager::GetInstance()->LoadResource(std::string(path));
+			std::string scene = path;
+			if (scene.find(".ragnar") != std::string::npos)
+			{
+				app->scene->LoadScene(scene.c_str());
+			}
+			else
+			{
+				ResourceManager::GetInstance()->LoadResource(std::string(path));
+			}
 		}
 		ImGui::EndDragDropTarget();
 	}

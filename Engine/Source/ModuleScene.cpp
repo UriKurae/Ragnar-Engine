@@ -13,7 +13,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), goToRecalculate(nullptr)
+ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), goToRecalculate(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Scene");
@@ -36,7 +36,7 @@ bool ModuleScene::Start()
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
 	ResourceManager::GetInstance()->ImportAllResources();
 	ImportPrimitives();
-	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/BakerHouse.fbx"));
+	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
 	return true;
 }
@@ -281,6 +281,7 @@ bool ModuleScene::LoadScene(const char* name)
 	//char* buffer = nullptr;
 
 	//app->fs->Load(name, &buffer);
+	sceneDir = name;
 
 	JsonParsing sceneFile = JsonParsing();
 
@@ -343,6 +344,8 @@ GameObject* ModuleScene::GetGoByUuid(double uuid) const
 bool ModuleScene::SaveScene(const char* name)
 {
 	DEBUG_LOG("Saving Scene");
+
+	sceneDir = name;
 
 	std::string rootName = name;
 	app->fs->GetFilenameWithoutExtension(rootName);

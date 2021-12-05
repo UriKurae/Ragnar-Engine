@@ -131,6 +131,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 	if (node == scene->mRootNode || node->mNumMeshes > 0)
 	{
 		JsonParsing jsonValue = JsonParsing();
+		
 		jsonValue.SetNewJsonString(jsonValue.ValueToObject(jsonValue.GetRootValue()), "Name", node->mName.C_Str());
 
 		aiVector3D pos;

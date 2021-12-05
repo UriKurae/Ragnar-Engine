@@ -31,25 +31,19 @@ ContentBrowserMenu::~ContentBrowserMenu()
 
 bool ContentBrowserMenu::Start()
 {
-	//TextureImporter::ImportTexture(std::string("Assets/Resources/model.png"));
 	dirIcon = new Texture(-1, std::string("Settings/EngineResources/folder.rgtexture"));
 	dirIcon->Load();
 
-	picIcon = new Texture(-2, std::string("Settings/EngineResources/pic.rgtexture"));
+	picIcon = new Texture(-2, std::string("Settings/EngineResources/picture.rgtexture"));
 	picIcon->Load();
 
 	modelIcon = new Texture(-3, std::string("Settings/EngineResources/model.rgtexture"));
 	modelIcon->Load();
 
-	//sceneIcon = new Texture(-3, std::string("Settings/EngineResources/model.rgtexture"));
-	//sceneIcon->Load();
+	sceneIcon = new Texture(-4, std::string("Settings/EngineResources/logo.rgtexture"));
+	sceneIcon->Load();
 
 	return true;
-}
-
-static void UpdatingResources()
-{
-	ResourceManager::GetInstance()->ImportAllResources();
 }
 
 bool ContentBrowserMenu::Update(float dt)
@@ -90,7 +84,7 @@ bool ContentBrowserMenu::Update(float dt)
 	ImGui::BeginChild("Assets");
 
 	float padding = 10.0f;
-	float cell = 64 + padding;
+	float cell = 64;
 
 	float width = ImGui::GetContentRegionAvail().x;
 	int columns = (int)(width / cell);
@@ -137,6 +131,8 @@ bool ContentBrowserMenu::Update(float dt)
 
 		ImGui::NextColumn();
 	}
+
+	if (!ImGui::IsWindowFocused()) currentFile = "";
 
 	int i = 0;
 	for (std::vector<std::string>::const_iterator it = files2.begin(); it != files2.end(); ++it)

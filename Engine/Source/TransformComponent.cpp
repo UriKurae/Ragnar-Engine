@@ -168,10 +168,11 @@ void TransformComponent::UpdateTransform()
 void TransformComponent::UpdateChildTransform(GameObject* go)
 {
 	TransformComponent* transform = go->GetComponent<TransformComponent>();
-
+	GameObject* parent = go->GetParent();
+	TransformComponent* parentTrans = parent->GetComponent<TransformComponent>();
 	if (transform)
 	{
-		transform->globalMatrix = globalMatrix * transform->localMatrix;
+		transform->globalMatrix = parentTrans->GetGlobalTransform() * transform->localMatrix;
 	}
 }
 

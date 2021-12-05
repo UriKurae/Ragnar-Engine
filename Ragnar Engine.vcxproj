@@ -159,6 +159,7 @@
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
@@ -216,6 +217,12 @@
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\Viewport.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ragnar Engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Output\Settings\EngineResources\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

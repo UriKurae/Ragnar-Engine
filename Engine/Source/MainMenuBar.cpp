@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleInput.h"
 #include "ModuleScene.h"
 
 #include "ConsoleMenu.h"
@@ -43,19 +44,19 @@ bool MainMenuBar::Start()
 	//TextureImporter::ImportTexture2(std::string("Assets/Resources/PauseButtonActive.png"));
 	//TextureImporter::ImportTexture2(std::string("Assets/Resources/StopButton.png"));
 	
-	buttonPlay = new Texture(-4, std::string("Settings/EngineResources/PlayButton.rgtexture"));
+	buttonPlay = new Texture(-5, std::string("Settings/EngineResources/PlayButton.rgtexture"));
 	buttonPlay->Load();
 
-	buttonStop = new Texture(-5, std::string("Settings/EngineResources/StopButton.rgtexture"));
+	buttonStop = new Texture(-6, std::string("Settings/EngineResources/StopButton.rgtexture"));
 	buttonStop->Load();
 
-	buttonPause = new Texture(-6, std::string("Settings/EngineResources/PauseButton.rgtexture"));
+	buttonPause = new Texture(-7, std::string("Settings/EngineResources/PauseButton.rgtexture"));
 	buttonPause->Load();
 
-	buttonPauseBlue = new Texture(-7, std::string("Settings/EngineResources/PauseButtonActive.rgtexture"));
+	buttonPauseBlue = new Texture(-8, std::string("Settings/EngineResources/PauseButtonActive.rgtexture"));
 	buttonPauseBlue->Load();
 
-	buttonNextFrame = new Texture(-8, std::string("Settings/EngineResources/NextFrame.rgtexture"));
+	buttonNextFrame = new Texture(-9, std::string("Settings/EngineResources/NextFrame.rgtexture"));
 	buttonNextFrame->Load();
 
 	for (int i = 0; i < menus.size(); ++i)
@@ -78,7 +79,6 @@ bool MainMenuBar::Update(float dt)
 			if (ImGui::MenuItem("New Project", "Ctrl + N", &ret))
 			{
 				saveWindow = true;
-				//app->scene->NewScene();
 			}
 			if (ImGui::MenuItem("Open Project", "Ctrl + O", &ret))
 			{
@@ -90,8 +90,12 @@ bool MainMenuBar::Update(float dt)
 
 			if (ImGui::MenuItem("Save", "Ctrl + S", &ret))
 			{
-				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+				if (app->scene->SceneDirectory().empty())
+				{
+					std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+					if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+				}
+				else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
 			}
 			if (ImGui::MenuItem("Save As", "Ctrl + Shift + S", &ret))
 			{
@@ -207,15 +211,41 @@ bool MainMenuBar::Update(float dt)
 	if (saveWindow)
 	{
 		bool saved = true;
-		ImVec2 position = { (float)app->window->width / 2, (float)app->window->height / 2 };
-		//ImVec2 size = 
+		ImVec2 size = { 200, 100 };
+		ImVec2 position = { (float)(app->window->width / 2) - 100, (float)(app->window->height / 2) - 50 };
 		ImGui::SetNextWindowPos(position);
 		ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-		ImGui::Button("Save");
+		ImGui::TextWrapped("Do you want to save the changes you made in: ");
+
+		std::string dir = app->scene->SceneDirectory();
+		if (!dir.empty())
+		{
+			dir = dir.substr(dir.find("Output\\") + 7, dir.length());
+		}
+		ImGui::TextWrapped("%s", dir.empty() ? "Untitled" : dir.c_str());
+		ImGui::NewLine();
+		if (ImGui::Button("Save"))
+		{
+			if (app->scene->SceneDirectory().empty())
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+			}
+			else
+			{
+				app->scene->SaveScene(app->scene->SceneDirectory().c_str());
+			}
+			app->scene->NewScene();
+			saveWindow = false;
+		}
 		ImGui::SameLine();
-		ImGui::Button("Don't Save");
+		if (ImGui::Button("Don't Save"))
+		{
+			app->scene->NewScene();
+			saveWindow = false;
+		}
 		ImGui::SameLine();
-		ImGui::Button("Cancel");
+		if (ImGui::Button("Cancel")) saveWindow = false;
 		ImGui::End();
 	}
 
@@ -261,6 +291,40 @@ bool MainMenuBar::Update(float dt)
 		ImGui::SameLine();
 		if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 })) if (app->scene->GetGameState() == GameState::PAUSE) app->scene->NextFrame();
 
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+	{
+		saveWindow = true;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_O) == KeyState::KEY_DOWN)
+	{
+		std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+		if (!filePath.empty())
+		{
+			app->scene->LoadScene(filePath.c_str());
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+	{
+		std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+		if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+	{
+		if (app->scene->SceneDirectory().empty())
+		{
+			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+			if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+		}
+		else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
 	}
 
 	ImGui::PopStyleColor(3);

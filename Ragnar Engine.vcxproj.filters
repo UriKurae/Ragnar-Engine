@@ -258,6 +258,7 @@
     <ClInclude Include="Engine\Source\Dialogs.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -425,5 +426,11 @@
     <ClCompile Include="Engine\Source\Model.cpp">
       <Filter>Sources\Resources</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ragnar Engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Output\Settings\EngineResources\logo.ico" />
   </ItemGroup>
 </Project>

@@ -40,7 +40,7 @@ void MaterialComponent::OnEditor()
 		Checkbox(this, "Active", active);
 		if (diff != nullptr)
 		{
-			if (ImGui::Button(diff ? "Diffuse" : ""))
+			if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
 			{
 				showTexMenu = true;
 			}
