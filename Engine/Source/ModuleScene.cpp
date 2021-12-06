@@ -52,7 +52,7 @@ bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
-	mainCamera->Update(gameTimer.GetDeltaTime());
+	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
 		root->GetChilds()[i]->Update(gameTimer.GetDeltaTime());
@@ -400,7 +400,7 @@ void ModuleScene::ImportPrimitives()
 
 	RCube::CreateCube(vertices, indices, texCoords);
 	std::string library;
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/Cube.mesh"), library);
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
 	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
 
 	vertices.clear();
@@ -410,7 +410,7 @@ void ModuleScene::ImportPrimitives()
 	library.clear();
 
 	RPyramide::CreatePyramide(vertices, indices, texCoords);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/Pyramide.mesh"), library);
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
 	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
 
 	vertices.clear();
@@ -420,7 +420,7 @@ void ModuleScene::ImportPrimitives()
 	library.clear();
 
 	RSphere::CreateSphere(vertices, normals, indices, texCoords);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/Sphere.mesh"), library);
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
 	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
 
 	vertices.clear();
@@ -430,7 +430,7 @@ void ModuleScene::ImportPrimitives()
 	library.clear();
 
 	RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/Cylinder.mesh"), library);
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
 	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
 
 	vertices.clear();

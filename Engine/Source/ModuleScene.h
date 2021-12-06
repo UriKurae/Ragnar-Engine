@@ -75,6 +75,8 @@ public:
 
 	inline const std::string& SceneDirectory() const { return sceneDir; }
 
+	inline const GameObject* GetRecalculateGO() const { return goToRecalculate; }
+
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
 

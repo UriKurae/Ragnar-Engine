@@ -32,7 +32,7 @@ Texture::~Texture()
 
 void Texture::Load()
 {
-	if (!glIsTexture(id))
+	if (id == 0)
 	{
 		TextureImporter::LoadTexture(libraryPath.c_str(), id,  width, height, data, parameters);
 	}
@@ -40,9 +40,10 @@ void Texture::Load()
 
 void Texture::UnLoad()
 {
-	if (glIsTexture(id))
+	if (id != 0)
 	{
 		glDeleteTextures(1, &id);
+		id = 0;
 		width = 0;
 		height = 0;
 		RELEASE_ARRAY(data);

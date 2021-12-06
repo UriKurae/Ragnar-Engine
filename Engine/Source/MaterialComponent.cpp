@@ -57,7 +57,7 @@ void MaterialComponent::OnEditor()
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
 			ImGui::Text("Reference Count: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff.use_count());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
 			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
 		}
 		else
@@ -101,9 +101,10 @@ void MaterialComponent::OnEditor()
 				app->fs->GetFilenameWithoutExtension(*it);
 				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 				uint uid = std::stoll(*it);
-				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
+				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
 				if (ImGui::Selectable(res->GetName().c_str()))
 				{
+					res->Load();
 					if (diff.use_count() - 1 == 1) diff->UnLoad();
 					SetTexture(res);
 				}

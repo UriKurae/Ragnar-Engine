@@ -61,15 +61,16 @@ bool ModuleEditor::Update(float dt)
 		app->window->SetFullscreen();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_DELETE) == KeyState::KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_DELETE) == KeyState::KEY_UP)
 	{
-		if (selected)
+		if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 		{
 			for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
 			{
 				if (selected == (*i))
 				{
 					selectedParent->GetChilds().erase(i);
+					if (selected == app->scene->GetRecalculateGO()) app->scene->RecalculateAABB(nullptr);
 					RELEASE(selected);
 					app->scene->ResetQuadtree();
 					break;

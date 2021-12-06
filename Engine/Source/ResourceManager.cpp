@@ -121,9 +121,14 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 
 std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
 {
-	std::shared_ptr<Resource> res = map[uid];
-	
-	if (res != nullptr) res->Load();
+	std::shared_ptr<Resource> res = nullptr;
+	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	it = map.find(uid);
+	if (it != map.end())
+	{
+		res = map[uid];
+		if (res != nullptr) res->Load();
+	}
 
 	return res;
 }
