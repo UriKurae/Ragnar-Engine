@@ -111,7 +111,10 @@ void Mesh::ShowFaceNormals(float3& colorNormal, float& normalLength)
 {
 	glBegin(GL_LINES);
 	glColor3f(colorNormal.x / 255, colorNormal.y / 255, colorNormal.z / 255);
-	for (int i = 0; i < vertices.size(); i += 3)
+	int result = vertices.size() % 3;
+	int size = vertices.size();
+	if (result != 0) size -= result;
+	for (int i = 0; i < size; i += 3)
 	{
 		float3 line1 = -(vertices[i] - vertices[i + 1]);
 		float3 line2 = (vertices[i + 1] - vertices[i + 2]);

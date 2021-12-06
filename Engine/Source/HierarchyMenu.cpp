@@ -25,6 +25,7 @@ bool HierarchyMenu::Update(float dt)
 	{
 		createGameObject = true;
 	}
+
 	int size = app->scene->GetGameObjectsList().size();
 	GameObject* root = app->scene->GetRoot();
 	GameObject* selected = app->editor->GetGO();
@@ -120,31 +121,31 @@ bool HierarchyMenu::Update(float dt)
 		ImGui::OpenPopup("Create GameObject");
 		if (ImGui::BeginPopup("Create GameObject"))
 		{
-			if (ImGui::Button("Create Empty Object"))
+			if (ImGui::Selectable("Create Empty Object"))
 			{
 				if (selected != nullptr) app->scene->CreateGameObject(selected);
 				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Button("Create Cube"))
+			else if (ImGui::Selectable("Create Cube"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
 				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Button("Create Pyramide"))
+			else if (ImGui::Selectable("Create Pyramide"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
 				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Button("Create Sphere"))
+			else if (ImGui::Selectable("Create Sphere"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
 				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Button("Create Cylinder"))
+			else if (ImGui::Selectable("Create Cylinder"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
 				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);

@@ -16,7 +16,7 @@
 ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), goToRecalculate(nullptr)
 {
 	root = new GameObject();
-	root->SetName("Scene");
+	root->SetName("Untitled");
 }
 
 ModuleScene::~ModuleScene()
@@ -160,14 +160,18 @@ void ModuleScene::NewScene()
 {
 	RELEASE(root);
 
+	sceneDir.clear();
+
 	root = new GameObject();
-	root->SetName("Scene");
+	root->SetName("Untitled");
 
 	GameObject* camera = CreateGameObject(nullptr);
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
 
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+
+	app->editor->SetGO(nullptr);
 }
 
 GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransform)

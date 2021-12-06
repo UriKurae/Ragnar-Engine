@@ -55,20 +55,17 @@ void Texture::DrawOnEditor()
 
 	if (ImGui::CollapsingHeader("Texture Import Settings"))
 	{
-		if (ImGui::CollapsingHeader("Filters"))
-		{
-			ImGui::Checkbox("Alienify", &parameters.alienify);
-			ImGui::DragFloat("Blur Avg", &parameters.blurAvg);
-			ImGui::DragFloat("Blur Gaussian", &parameters.blurGaussian);
-			ImGui::Checkbox("Edge Detect P", &parameters.edgeDetectP);
-			ImGui::Checkbox("Edge Detect S", &parameters.edgeDetectS);
-			ImGui::Checkbox("Emboss", &parameters.emboss);
-			ImGui::DragFloat("Gamma Correct Curve", &parameters.gammaCorrectCurve);
-			ImGui::Checkbox("Negative", &parameters.negative);
-			ImGui::DragFloat("Noise", &parameters.noise);
-			if (ImGui::Button("Apply changes")) Reimport();
-			//ImGui::DragInt("Pixelization", &parameters.pixelization);
-		}
+		ImGui::Checkbox("Alienify", &parameters.alienify);
+		ImGui::DragFloat("Blur Avg", &parameters.blurAvg);
+		ImGui::DragFloat("Blur Gaussian", &parameters.blurGaussian);
+		ImGui::Checkbox("Edge Detect P", &parameters.edgeDetectP);
+		ImGui::Checkbox("Edge Detect S", &parameters.edgeDetectS);
+		ImGui::Checkbox("Emboss", &parameters.emboss);
+		ImGui::DragFloat("Gamma Correct Curve", &parameters.gammaCorrectCurve);
+		ImGui::Checkbox("Negative", &parameters.negative);
+		ImGui::DragFloat("Noise", &parameters.noise);
+		if (ImGui::Button("Apply changes")) Reimport();
+		ImGui::DragInt("Pixelization", &parameters.pixelization);
 	}
 	ImGui::PopID();
 

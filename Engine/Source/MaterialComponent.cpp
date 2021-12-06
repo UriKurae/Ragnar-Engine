@@ -40,6 +40,8 @@ void MaterialComponent::OnEditor()
 		Checkbox(this, "Active", active);
 		if (diff != nullptr)
 		{
+			ImGui::Text("Select texture: ");
+			ImGui::SameLine();
 			if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
 			{
 				showTexMenu = true;
@@ -60,6 +62,8 @@ void MaterialComponent::OnEditor()
 		}
 		else
 		{
+			ImGui::Text("Select texture: ");
+			ImGui::SameLine();
 			if (ImGui::Button(""))
 			{
 				showTexMenu = true;
@@ -98,7 +102,7 @@ void MaterialComponent::OnEditor()
 				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 				uint uid = std::stoll(*it);
 				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
-				if (ImGui::Button(res->GetName().c_str(), { ImGui::GetWindowWidth() - 30, 20 }))
+				if (ImGui::Selectable(res->GetName().c_str()))
 				{
 					if (diff.use_count() - 1 == 1) diff->UnLoad();
 					SetTexture(res);

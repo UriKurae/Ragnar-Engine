@@ -16,7 +16,7 @@ struct TextureParameters
 	float gammaCorrectCurve = 0.0f;
 	bool negative = false;
 	float noise = 0.0f;
-	uint pixelization = 0;
+	int pixelization = 0;
 };
 
 class Texture : public Resource

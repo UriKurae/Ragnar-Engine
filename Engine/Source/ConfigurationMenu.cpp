@@ -172,6 +172,7 @@ bool ConfigurationMenu::Update(float dt)
 		if (ImGui::DragFloat("", &app->camera->farPlane, 0.5f, 0.1f)) app->camera->SetPlanes();
 		ImGui::PopID();
 
+		ImGui::Checkbox("Visualize frustum culling on editor", &app->camera->visualizeFrustum);
 	}
 	ImGui::PopID();
 	if (ImGui::CollapsingHeader("Renderer"))

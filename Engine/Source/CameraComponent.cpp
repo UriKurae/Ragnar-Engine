@@ -55,9 +55,7 @@ void CameraComponent::OnEditor()
 		ImGui::Text("Far");
 		ImGui::SameLine();
 		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
-		ImGui::PopItemWidth();
 		ImGui::PopID();
-
 	}
 	ImGui::PopID();
 }

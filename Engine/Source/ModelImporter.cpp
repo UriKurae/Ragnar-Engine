@@ -23,9 +23,16 @@ void ModelImporter::ReImport(std::string& assetsPath, std::string& library, Mode
 	std::string p = assetsPath;
 
 	Assimp::Importer import;
-	unsigned int flags = aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances | aiProcess_ValidateDataStructure;
+	unsigned int flags = aiProcess_CalcTangentSpace | aiProcess_FindInstances | aiProcess_ValidateDataStructure | aiProcess_SortByPType | aiProcess_ImproveCacheLocality | aiProcess_JoinIdenticalVertices | aiProcess_LimitBoneWeights | aiProcess_FindInvalidData | aiProcess_FindDegenerates;
 	if (parameters.flippedUvs) flags |= aiProcess_FlipUVs;
 	if (parameters.optimizedMesh) flags |= aiProcess_OptimizeMeshes;
+	if (parameters.debone) flags |= aiProcess_Debone;
+	if (parameters.genSmoothNormals) flags |= aiProcess_GenSmoothNormals;
+	if (parameters.genUVCoords) flags |= aiProcess_GenUVCoords;
+	if (parameters.optimizeGraph) flags |= aiProcess_OptimizeGraph;
+	if (parameters.removeRedundantMaterials) flags |= aiProcess_RemoveRedundantMaterials;
+	if (parameters.splitLargeMeshes) flags |= aiProcess_SplitLargeMeshes;
+
 	const aiScene* scene = import.ReadFile(assetsPath, flags);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -193,7 +200,9 @@ void ModelImporter::ReProcessNode(aiNode* node, const aiScene* scene, JsonParsin
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 			std::string assetsMesh = path;
-			assetsMesh.insert(assetsMesh.find_last_of("."), mesh->mName.C_Str());
+			std::string meshName = "__";
+			meshName += +mesh->mName.C_Str();
+			assetsMesh.insert(assetsMesh.find_last_of("."), meshName);
 			std::string library = ResourceManager::GetInstance()->GetResource(assetsMesh)->GetLibraryPath();
 			MeshImporter::ReImportMesh(mesh, scene, jsonValue, library, path, data);
 		}
@@ -276,10 +285,15 @@ void ModelImporter::CreateMetaModel(std::string& path, ModelParameters& data, st
 {
 	JsonParsing metaModel;
 
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "Debone", data.debone);
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "FlippedUvs", data.flippedUvs);
-	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "OptimizedMesh", data.optimizedMesh);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "GenSmoothNormals", data.genSmoothNormals);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "GenUVCoords", data.genUVCoords);
 	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "HasNormals", data.normals);
-	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "Triangulate", data.triangulated);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "OptimizedMesh", data.optimizedMesh);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "OptimizeGraph", data.optimizeGraph);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "RemoveRedundantMaterials", data.removeRedundantMaterials);
+	metaModel.SetNewJsonBool(metaModel.ValueToObject(metaModel.GetRootValue()), "SplitLargeMeshes", data.splitLargeMeshes);
 
 	metaModel.SetNewJsonNumber(metaModel.ValueToObject(metaModel.GetRootValue()), "Uuid", uid);
 	metaModel.SetNewJsonString(metaModel.ValueToObject(metaModel.GetRootValue()), "Assets Path", assets.c_str());

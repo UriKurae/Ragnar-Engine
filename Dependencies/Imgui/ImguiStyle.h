@@ -8,6 +8,7 @@
 
 namespace ImGui
 {
+	// Background window color: 20, 23, 27
 	// Rich Black: 7, 7, 10
 	// Raisin Black: 36, 39, 43
 	// Charcoal: 74, 82, 90
@@ -16,14 +17,10 @@ namespace ImGui
 
 	void DarkTheme()
 	{
-		// Color azul claro: 0.0f, 1.0f, 0.96f
-		// Color azul claro: 0.0f, 0.67f, 0.70f, 0.30f
-		// Color azul oscuro: 0.13f, 0.15f, 0.19f, 0.30f
-		// Color azul oscuro 2: 57, 62, 70, 0.30f
 		ImVec4* colors = ImGui::GetStyle().Colors;
 		colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 		colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-		colors[ImGuiCol_WindowBg] = ImColor(7, 7, 10);
+		colors[ImGuiCol_WindowBg] = ImColor(20, 23, 27);
 		colors[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 		colors[ImGuiCol_PopupBg] = ImVec4(0.19f, 0.19f, 0.19f, 0.92f);
 		colors[ImGuiCol_Border] = ImVec4(0.19f, 0.19f, 0.19f, 0.29f);
@@ -36,9 +33,9 @@ namespace ImGui
 		colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
 		colors[ImGuiCol_MenuBarBg] = ImColor(7, 7, 10);
 		colors[ImGuiCol_ScrollbarBg] = ImVec4(0.05f, 0.05f, 0.05f, 0.54f);
-		colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.34f, 0.34f, 0.34f, 0.54f);
-		colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.40f, 0.40f, 0.40f, 0.54f);
-		colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.56f, 0.56f, 0.56f, 0.54f);
+		colors[ImGuiCol_ScrollbarGrab] = ImColor(62, 120, 178);
+		colors[ImGuiCol_ScrollbarGrabHovered] = ImColor(0, 75, 168);
+		colors[ImGuiCol_ScrollbarGrabActive] = ImColor(0, 75, 168);
 		colors[ImGuiCol_CheckMark] = ImVec4(0.33f, 0.67f, 0.86f, 1.00f);
 		colors[ImGuiCol_SliderGrab] = ImVec4(0.34f, 0.34f, 0.34f, 0.54f);
 		colors[ImGuiCol_SliderGrabActive] = ImVec4(0.56f, 0.56f, 0.56f, 0.54f);
@@ -71,7 +68,7 @@ namespace ImGui
 		colors[ImGuiCol_TableRowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 		colors[ImGuiCol_TableRowBgAlt] = ImVec4(1.00f, 1.00f, 1.00f, 0.06f);
 		colors[ImGuiCol_TextSelectedBg] = ImVec4(0.20f, 0.22f, 0.23f, 1.00f);
-		colors[ImGuiCol_DragDropTarget] = ImColor(255, 0, 0);
+		colors[ImGuiCol_DragDropTarget] = ImColor(0, 75, 168);
 		colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
 		colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 0.00f, 0.00f, 0.70f);
 		colors[ImGuiCol_NavWindowingDimBg] = ImVec4(1.00f, 0.00f, 0.00f, 0.20f);

@@ -209,10 +209,23 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
+	std::set<GameObject*> objects;
+	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);
-	app->scene->Draw();	
+	
+	if (app->camera->visualizeFrustum)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			(*it)->Draw();
+		}
+	}
+	else
+	{
+		app->scene->Draw();
+	}
 
 	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
 	{
@@ -261,12 +274,9 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
-	std::set<GameObject*> objects;
-	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		// TODO: Possible crash with the quadtree when you delete a game object
 		(*it)->Draw();
 	}
 

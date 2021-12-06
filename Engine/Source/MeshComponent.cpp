@@ -90,6 +90,8 @@ void MeshComponent::OnEditor()
 	if (ImGui::CollapsingHeader("Mesh Renderer"))
 	{
 		Checkbox(this, "Active", active);
+		ImGui::Text("Select mesh");
+		ImGui::SameLine();
 		if (ImGui::Button(mesh ? mesh->GetName().c_str() : " "))
 		{
 			showMeshMenu = true;

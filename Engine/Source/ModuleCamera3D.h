@@ -45,4 +45,5 @@ public:
 	math::Line rayCastToDraw;
 	
 	bool canBeUpdated;
+	bool visualizeFrustum;
 };
