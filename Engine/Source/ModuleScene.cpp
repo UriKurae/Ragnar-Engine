@@ -203,19 +203,19 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 	{
 	case Object3D::CUBE:
 		object->SetName("Cube");
-		path = "Settings/EngineResources/Cube.mesh";
+		path = "Settings/EngineResources/__Cube.mesh";
 		break;
 	case Object3D::PYRAMIDE:
 		object->SetName("Pyramide");
-		path = "Settings/EngineResources/Pyramide.mesh";
+		path = "Settings/EngineResources/__Pyramide.mesh";
 		break;
 	case Object3D::SPHERE:
 		object->SetName("Sphere");
-		path = "Settings/EngineResources/Sphere.mesh";
+		path = "Settings/EngineResources/__Sphere.mesh";
 		break;
 	case Object3D::CYLINDER:
 		object->SetName("Cylinder");
-		path = "Settings/EngineResources/Cylinder.mesh";
+		path = "Settings/EngineResources/__Cylinder.mesh";
 		break;
 	}
 

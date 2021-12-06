@@ -85,23 +85,19 @@ bool HierarchyMenu::Update(float dt)
 			}
 			else if (ImGui::Button("Delete", ImVec2(100.0f, 30.0f)))
 			{
-				/*for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
+				
+				if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 				{
-					if (selected == (*i))
+					for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
 					{
-						selectedParent->GetChilds().erase(i);
-						RELEASE(selected);
-						break;
-					}
-				}*/
-				for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
-				{
-					if (selected == (*i))
-					{
-						selectedParent->GetChilds().erase(i);
-						RELEASE(selected);
-						app->scene->ResetQuadtree();
-						break;
+						if (selected == (*i))
+						{
+							selectedParent->GetChilds().erase(i);
+							if (selected == app->scene->GetRecalculateGO()) app->scene->RecalculateAABB(nullptr);
+							RELEASE(selected);
+							app->scene->ResetQuadtree();
+							break;
+						}
 					}
 				}
 				app->editor->SetGO(nullptr);

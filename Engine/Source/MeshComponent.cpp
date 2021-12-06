@@ -93,7 +93,7 @@ void MeshComponent::OnEditor()
 		Checkbox(this, "Active", active);
 		ImGui::Text("Select mesh");
 		ImGui::SameLine();
-		if (ImGui::Button(mesh ? mesh->GetName().c_str() : " "))
+		if (ImGui::Button(mesh ? mesh->GetName().c_str() : "No Mesh"))
 		{
 			showMeshMenu = true;
 		}

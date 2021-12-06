@@ -64,7 +64,7 @@ void MaterialComponent::OnEditor()
 		{
 			ImGui::Text("Select texture: ");
 			ImGui::SameLine();
-			if (ImGui::Button(""))
+			if (ImGui::Button("No Texture"))
 			{
 				showTexMenu = true;
 			}
@@ -75,7 +75,6 @@ void MaterialComponent::OnEditor()
 			ImGui::Text("Height: ");
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-			ImGui::Checkbox("Checker Image", &checker);
 		}
 		ImGui::Separator();
 	}
