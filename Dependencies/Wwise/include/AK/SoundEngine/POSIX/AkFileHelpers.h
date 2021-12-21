@@ -29,8 +29,8 @@ written agreement between you and Audiokinetic Inc.
 
 #if defined(AK_EMSCRIPTEN) || defined(AK_QNX)
 	#include <errno.h>
-#else
-	#include <sys/errno.h>
+#else	
+	#include <errno.h>
 #endif
 
 #include "../Common/AkFileHelpersBase.h"
