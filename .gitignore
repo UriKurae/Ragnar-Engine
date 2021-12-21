@@ -36,6 +36,14 @@
 !Dependencies/DevIL/lib/DevIL.lib
 !Dependencies/DevIL/lib/ILU.lib
 !Dependencies/DevIL/lib/ILUT.lib
+!Dependencies/Wwise/lib/Deb/AkSoundEngine.lib
+!Dependencies/Wwise/lib/Deb/AkMusicEngine.lib
+!Dependencies/Wwise/lib/Deb/AkMemoryMgr.lib
+!Dependencies/Wwise/lib/Deb/AkStreamMgr.lib
+!Dependencies/Wwise/lib/Release/AkSoundEngine.lib
+!Dependencies/Wwise/lib/Release/AkMusicEngine.lib
+!Dependencies/Wwise/lib/Release/AkMemoryMgr.lib
+!Dependencies/Wwise/lib/Release/AkStreamMgr.lib
 
 # Executables
 *.exe

@@ -11,10 +11,10 @@ namespace Dialogs
 {
 	static std::string OpenFile(const char* path)
 	{
-		OPENFILENAME openFile;
+		OPENFILENAMEA openFile;
 		char sizeFile[260] = {};
-		ZeroMemory(&openFile, sizeof(OPENFILENAME));
-		openFile.lStructSize = sizeof(OPENFILENAME);
+		ZeroMemory(&openFile, sizeof(OPENFILENAMEA));
+		openFile.lStructSize = sizeof(OPENFILENAMEA);
 
 		openFile.hwndOwner = GetActiveWindow();
 		openFile.lpstrFile = sizeFile;
@@ -23,7 +23,7 @@ namespace Dialogs
 		openFile.lpstrDefExt = "ragnar";
 		openFile.nFilterIndex = 1;
 		openFile.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
-		if (GetOpenFileName(&openFile) == TRUE)
+		if (GetOpenFileNameA(&openFile) == TRUE)
 		{
 			return openFile.lpstrFile;
 		}
@@ -32,10 +32,10 @@ namespace Dialogs
 
 	static std::string SaveFile(const char* path)
 	{
-		OPENFILENAME openFile;
+		OPENFILENAMEA openFile;
 		char sizeFile[260] = {};
-		ZeroMemory(&openFile, sizeof(OPENFILENAME));
-		openFile.lStructSize = sizeof(OPENFILENAME);
+		ZeroMemory(&openFile, sizeof(OPENFILENAMEA));
+		openFile.lStructSize = sizeof(OPENFILENAMEA);
 
 		//SDL_SysWMinfo win;
 		//SDL_VERSION(&win.version);
@@ -47,7 +47,7 @@ namespace Dialogs
 		openFile.lpstrDefExt = "ragnar";
 		openFile.nFilterIndex = 1;
 		openFile.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
-		if (GetSaveFileName(&openFile) == TRUE)
+		if (GetSaveFileNameA(&openFile) == TRUE)
 		{
 			return openFile.lpstrFile;
 		}
