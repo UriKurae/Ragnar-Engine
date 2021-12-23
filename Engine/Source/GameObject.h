@@ -8,6 +8,8 @@
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
 #include "CameraComponent.h"
+#include "AudioSourceComponent.h"
+#include "ListenerComponent.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 

@@ -33,11 +33,11 @@ bool ModuleScene::Start()
 	GameObject* camera = CreateGameObject(nullptr);
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
+	camera->CreateComponent(ComponentType::AUDIO_LISTENER);
+	//camera->CreateComponent(ComponentType::AUDIO_SOURCE);
 
-	// TODO: Needs to be moved to the component Audio Listener
+	// Register this camera as the default listener.
 	AkGameObjectID cameraID = camera->GetUUID();
-	AudioManager::Get()->RegisterGameObject(cameraID);
-
 	AudioManager::Get()->SetDefaultListener(&cameraID);
 	
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
@@ -46,9 +46,6 @@ bool ModuleScene::Start()
 	ResourceManager::GetInstance()->ImportAllResources();
 	ImportPrimitives();
 	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
-
-	// TODO: Needs to be moved to the component Audio Source
-	AudioManager::Get()->RegisterGameObject(root->GetChilds()[1]->GetUUID());
 
 	return true;
 }
@@ -63,17 +60,6 @@ bool ModuleScene::PreUpdate(float dt)
 bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
-
-	// TODO: Needs to be moved to the component Audio Source
-	AkSoundPosition position;
-	AkVector vector;
-	float3 pos = root->GetChilds()[0]->GetComponent<TransformComponent>()->GetPosition();
-	vector.X = pos.x;
-	vector.Y = pos.y;
-	vector.Z = pos.z;
-	position.SetPosition(vector);
-	position.SetOrientation({ 0,0,1 }, {0,1,0});
-	AudioManager::Get()->SetPosition(root->GetChilds()[0]->GetUUID(), position);
 
 	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
 
@@ -90,16 +76,7 @@ bool ModuleScene::Update(float dt)
 	// TODO: Needs to be moved to the component Audio Source
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_UP)
 	{
-		AkSoundPosition positionEmitter;
-		AkVector vectorEmitter;
-		float3 posEmitter = root->GetChilds()[1]->GetComponent<TransformComponent>()->GetPosition();
-		vectorEmitter.X = posEmitter.x;
-		vectorEmitter.Y = posEmitter.y;
-		vectorEmitter.Z = posEmitter.z;
-		positionEmitter.SetPosition(vectorEmitter);
-		positionEmitter.SetOrientation({ 0,0,1 }, { 0,1,0 });
-		AudioManager::Get()->SetPosition(root->GetChilds()[1]->GetUUID(), positionEmitter);
-		AudioManager::Get()->PostEvent("checkpoint", root->GetChilds()[1]->GetUUID());
+		app->editor->GetGO()->GetComponent<AudioSourceComponent>()->PlayClip();
 	}
 
 	if (goToRecalculate && goToRecalculate->GetParent() != root)
@@ -191,7 +168,6 @@ bool ModuleScene::Draw()
 
 bool ModuleScene::CleanUp()
 {
-	AudioManager::Get()->UnregisterGameObject(root->GetChilds()[1]->GetUUID());
 	RELEASE(root);
 
 	return true;

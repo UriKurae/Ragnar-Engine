@@ -124,6 +124,16 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Audio Source Component"))
+		{
+			CreateComponent(ComponentType::AUDIO_SOURCE);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Audio Listener Component"))
+		{
+			CreateComponent(ComponentType::AUDIO_LISTENER);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -225,6 +235,12 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
 		app->scene->SetMainCamera((CameraComponent*)component);
+		break;
+	case ComponentType::AUDIO_SOURCE:
+		component = new AudioSourceComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::AUDIO_LISTENER:
+		component = new ListenerComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);

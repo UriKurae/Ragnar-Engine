@@ -210,7 +210,8 @@ bool ModuleRenderer3D::PostUpdate()
 
 	grid->Draw();
 	std::set<GameObject*> objects;
-	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
+	// TODO: wtf quadtree man.
+	//app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);
