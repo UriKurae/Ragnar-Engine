@@ -40,10 +40,13 @@
 !Dependencies/Wwise/lib/Deb/AkMusicEngine.lib
 !Dependencies/Wwise/lib/Deb/AkMemoryMgr.lib
 !Dependencies/Wwise/lib/Deb/AkStreamMgr.lib
+!Dependencies/Wwise/lib/Deb/AkSpatialAudio.lib
+!Dependencies/Wwise/lib/Deb/CommunicationCentral.lib
 !Dependencies/Wwise/lib/Release/AkSoundEngine.lib
 !Dependencies/Wwise/lib/Release/AkMusicEngine.lib
 !Dependencies/Wwise/lib/Release/AkMemoryMgr.lib
 !Dependencies/Wwise/lib/Release/AkStreamMgr.lib
+!Dependencies/Wwise/lib/Release/AkSpatialAudio.lib
 
 # Executables
 *.exe
