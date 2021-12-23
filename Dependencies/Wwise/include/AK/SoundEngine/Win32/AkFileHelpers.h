@@ -223,9 +223,7 @@ public:
 			fileAttributes = fileInfo.dwFileAttributes;
 		}
 #else
-		char* string;
-		AKPLATFORM::AkWideCharToChar(in_pszBasePath, sizeof(in_pszBasePath), string);
-		fileAttributes = GetFileAttributes(string);
+		fileAttributes = GetFileAttributes(in_pszBasePath);
 #endif
 		if (fileAttributes == INVALID_FILE_ATTRIBUTES)
 			return AK_Fail;  //something is wrong with your path!
@@ -268,10 +266,7 @@ public:
 
 	static AKRESULT CreateEmptyDirectory(const AkOSChar* in_pszDirectoryPath)
 	{
-		char* string;
-		AKPLATFORM::AkWideCharToChar(in_pszDirectoryPath, sizeof(in_pszDirectoryPath), string);
-
-		bool bSuccess = ::CreateDirectory(string, NULL) == TRUE;
+		bool bSuccess = ::CreateDirectory(in_pszDirectoryPath, NULL) == TRUE;
 		if (!bSuccess && ::GetLastError() != ERROR_ALREADY_EXISTS)
 			return AK_Fail;
 
@@ -280,10 +275,7 @@ public:
 
 	static AKRESULT RemoveEmptyDirectory(const AkOSChar* in_pszDirectoryPath)
 	{
-		char* string;
-		AKPLATFORM::AkWideCharToChar(in_pszDirectoryPath, sizeof(in_pszDirectoryPath), string);
-
-		bool bSuccess = ::RemoveDirectory(string) == TRUE;
+		bool bSuccess = ::RemoveDirectory(in_pszDirectoryPath) == TRUE;
 		if (!bSuccess)
 			return AK_Fail;
 

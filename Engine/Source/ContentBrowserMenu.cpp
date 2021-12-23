@@ -161,6 +161,9 @@ bool ContentBrowserMenu::Update(float dt)
 		case ResourceType::SCENE:
 			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, cell });
 			break;
+		default:
+			ImGui::Button(item.c_str());
+			break;
 		}
 		if (ImGui::IsItemClicked())
 		{

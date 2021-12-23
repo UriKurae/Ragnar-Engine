@@ -6,8 +6,10 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
+#include "AudioManager.h"
 
 #include "Profiling.h"
 
@@ -22,6 +24,7 @@ Application::Application()
 
 	fs = new FileSystem(RESOURCES_FOLDER);
 
+	AudioManager::Create();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -52,6 +55,7 @@ Application::~Application()
 
 	RELEASE(fs);
 	ResourceManager::ReleaseInstance();
+	AudioManager::Release();
 
 	listModules.clear();
 }
@@ -79,7 +83,9 @@ bool Application::Init()
 		RELEASE_ARRAY(buffer);
 	}
 
-	//// Call Init() in all modules
+	AudioManager::Get()->Init();
+	
+	// Call Init() in all modules
 	std::list<Module*>::iterator item;
 
 	// After all Init calls we call Start() in all modules
