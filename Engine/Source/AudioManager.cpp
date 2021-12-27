@@ -13,6 +13,9 @@
 #include <AK/MusicEngine/Common/AkMusicEngine.h>
 #include <AK/SpatialAudio/Common/AkSpatialAudio.h>
 
+#include <AK/SoundEngine/Common/IAkPlugin.h>
+#include <AK/Plugin/AkRoomVerbFXFactory.h>
+
 #ifndef AK_OPTIMIZED
 #include <AK/Comm/AkCommunication.h>
 #endif
@@ -139,9 +142,9 @@ bool AudioManager::Init()
 		DEBUG_LOG("Couldn't find the bank: Init.bnk");
 		return false;
 	}
-	if (AK::SoundEngine::LoadBank(L"MusicBlendSB.bnk", bankID) != AK_Success)
+	if (AK::SoundEngine::LoadBank(L"ragnarEngine.bnk", bankID) != AK_Success)
 	{
-		DEBUG_LOG("Couldn't find the bank: Main.bnk");
+		DEBUG_LOG("Couldn't find the bank: ragnarEngine.bnk");
 		return false;
 	}
 

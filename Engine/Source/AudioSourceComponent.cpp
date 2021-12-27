@@ -6,7 +6,7 @@
 
 #include "Imgui/imgui.h"
 
-AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("MusicBlend"), volume(1.0f), mute(false), transform(trans)
+AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("ActivateBgMusic"), volume(50.0f), mute(false), transform(trans), pitch(0.0f)
 {
 	owner = own;
 	type = ComponentType::AUDIO_SOURCE;
@@ -50,6 +50,13 @@ void AudioSourceComponent::OnEditor()
 		{
 			AK::SoundEngine::SetRTPCValue("Volume", volume, owner->GetUUID());
 			mute = false;
+		}
+
+		ImGui::Text("Pitch");
+		ImGui::SameLine();
+		if (ImGui::SliderFloat("Pitch", &pitch, -2400.0f, 2400.0f))
+		{
+			AK::SoundEngine::SetRTPCValue("Pitch", pitch, owner->GetUUID());
 		}
 	}
 	ImGui::PopID();

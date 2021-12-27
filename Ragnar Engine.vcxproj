@@ -65,7 +65,7 @@
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -88,7 +88,7 @@
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AkRoomVerbFX.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

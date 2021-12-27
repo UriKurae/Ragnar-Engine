@@ -27,4 +27,5 @@ private:
 	std::string audioClip;
 	bool mute;
 	float volume;
+	float pitch;
 };
