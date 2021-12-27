@@ -42,11 +42,14 @@
 !Dependencies/Wwise/lib/Deb/AkStreamMgr.lib
 !Dependencies/Wwise/lib/Deb/AkSpatialAudio.lib
 !Dependencies/Wwise/lib/Deb/CommunicationCentral.lib
+!Dependencies/Wwise/lib/Deb/AkRoomVerbFX.lib
 !Dependencies/Wwise/lib/Release/AkSoundEngine.lib
 !Dependencies/Wwise/lib/Release/AkMusicEngine.lib
 !Dependencies/Wwise/lib/Release/AkMemoryMgr.lib
 !Dependencies/Wwise/lib/Release/AkStreamMgr.lib
 !Dependencies/Wwise/lib/Release/AkSpatialAudio.lib
+!Dependencies/Wwise/lib/Release/AkRoomVerbFX.lib
+
 
 # Executables
 *.exe
