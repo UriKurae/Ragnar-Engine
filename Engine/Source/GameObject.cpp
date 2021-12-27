@@ -15,11 +15,11 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true)
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false)
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
-	uuid = lcg.IntFast();
+	uuid = lcg.Int();
 }
 
 GameObject::~GameObject()

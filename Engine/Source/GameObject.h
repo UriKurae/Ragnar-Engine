@@ -43,12 +43,14 @@ public:
 
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }
+	inline void SetAudioRegister(bool check) { audioRegistered = check; }
 
 	inline uint const GetUUID() const { return uuid; }
 	inline const char* GetName() const { return name.c_str(); }
 	inline GameObject* GetParent() const { return parent; }
 	inline const bool& GetActive() const { return active; }
 	inline std::vector<GameObject*>& GetChilds() { return children; }
+	inline bool CheckAudioRegister() { return audioRegistered; }
 
 	void SetAABB(AABB newAABB, bool needToClean = false);
 	void SetAABB(OBB newOBB);
@@ -87,6 +89,9 @@ private:
 	IndexBuffer* index;
 
 	uint uuid;
+
+	// Boolean to check if any component from audio (AudioSource, listener) has already been registered. 
+	bool audioRegistered;
 };
 
 template<typename T>

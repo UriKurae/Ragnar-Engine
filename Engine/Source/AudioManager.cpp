@@ -139,7 +139,7 @@ bool AudioManager::Init()
 		DEBUG_LOG("Couldn't find the bank: Init.bnk");
 		return false;
 	}
-	if (AK::SoundEngine::LoadBank(L"testing.bnk", bankID) != AK_Success)
+	if (AK::SoundEngine::LoadBank(L"MusicBlendSB.bnk", bankID) != AK_Success)
 	{
 		DEBUG_LOG("Couldn't find the bank: Main.bnk");
 		return false;

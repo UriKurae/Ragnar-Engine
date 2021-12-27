@@ -6,14 +6,18 @@
 
 #include "Imgui/imgui.h"
 
-AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("Sonido"), volume(1.0f), mute(false), transform(trans)
+AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("MusicBlend"), volume(1.0f), mute(false), transform(trans)
 {
 	owner = own;
 	type = ComponentType::AUDIO_SOURCE;
-
+	
 	// Register this audio source
-	AkGameObjectID cameraID = owner->GetUUID();
-	AudioManager::Get()->RegisterGameObject(cameraID);
+	if (!owner->CheckAudioRegister())
+	{
+		AkGameObjectID cameraID = owner->GetUUID();
+		AudioManager::Get()->RegisterGameObject(cameraID);
+		owner->SetAudioRegister(true);
+	}
 }
 
 AudioSourceComponent::~AudioSourceComponent()
@@ -28,15 +32,25 @@ void AudioSourceComponent::OnEditor()
 	{
 		ImGui::Text("AudioClip");
 		ImGui::SameLine();
-		ImGui::InputText("Audio", &audioClip[0], audioClip.size());
+		ImGui::InputText("##Audio", &audioClip[0], audioClip.size());
 
 		ImGui::Text("Mute");
 		ImGui::SameLine();
-		ImGui::Checkbox("Mute", &mute);
+		if (ImGui::Checkbox("Mute", &mute))
+		{
+			if (mute) AK::SoundEngine::SetRTPCValue("Volume", 0, owner->GetUUID());
+			else AK::SoundEngine::SetRTPCValue("Volume", volume, owner->GetUUID());
+			DEBUG_LOG("THE ID IS %d", owner->GetUUID());
+			
+		}
 
 		ImGui::Text("Volume");
 		ImGui::SameLine();
-		ImGui::SliderFloat("Volume", &volume, 0.0f, 1.0f);
+		if (ImGui::SliderFloat("Volume", &volume, 0.0f, 100.0f))
+		{
+			AK::SoundEngine::SetRTPCValue("Volume", volume, owner->GetUUID());
+			mute = false;
+		}
 	}
 	ImGui::PopID();
 }
