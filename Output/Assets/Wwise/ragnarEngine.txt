@@ -1,0 +1,11 @@
+Event	ID	Name			Wwise Object Path	Notes
+	799949012	ActivateBgMusic			\Default Work Unit\ActivateBgMusic	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1908158473	Pitch			\Default Work Unit\Pitch	
+	2415836739	Volume			\Default Work Unit\Volume	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	192247659	oriol	C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\.cache\Windows\SFX\oriol_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ReverbAudioMixer\MusicSequence\oriol		5308480
+	919001556	lucas	C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\.cache\Windows\SFX\lucas_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ReverbAudioMixer\MusicSequence\lucas		5308480
+

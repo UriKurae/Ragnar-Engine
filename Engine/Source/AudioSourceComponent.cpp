@@ -9,7 +9,7 @@
 
 #include "Imgui/imgui.h"
 
-AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("ActivateBgMusic"), volume(50.0f), mute(false), transform(trans), pitch(0.0f)
+AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("ActivateBgMusic"), volume(50.0f), mute(false), transform(trans), pitch(0.0f), reverb(0.0f)
 {
 	owner = own;
 	type = ComponentType::AUDIO_SOURCE;
