@@ -14,6 +14,7 @@ enum class ComponentType
 	CAMERA,
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
+	AUDIO_REVERB_ZONE
 };
 
 class Component

@@ -48,6 +48,7 @@ bool ModuleScene::Start()
 	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
 	AkAuxSendValue aEnvs[1];
+	root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
 	//root->GetChilds()[1]->GetChilds()[1]->GetUUID();
 	/*aEnvs[0].listenerID = camera->GetUUID();
@@ -58,10 +59,10 @@ bool ModuleScene::Start()
 	AK::SoundEngine::SetGameObjectOutputBusVolume(root->GetChilds()[1]->GetChilds()[1]->GetUUID(), camera->GetUUID(), 5.0f);
 	AK::SoundEngine::SetGameObjectAuxSendValues(root->GetChilds()[1]->GetChilds()[1]->GetUUID(), aEnvs, 1);*/
 
-	AkReal32 fObstruction = 0.05f;
+/*	AkReal32 fObstruction = 0.05f;
 	AkReal32 fOcclusion = 0.0f;
 
-	AK::SoundEngine::SetObjectObstructionAndOcclusion(camera->GetUUID(), camera->GetUUID(), fObstruction, fOcclusion);
+	AK::SoundEngine::SetObjectObstructionAndOcclusion(camera->GetUUID(), camera->GetUUID(), fObstruction, fOcclusion)*/;
 
 	return true;
 }
