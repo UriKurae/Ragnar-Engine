@@ -1,4 +1,6 @@
 #include "AudioManager.h"
+#include "TransformComponent.h"
+#include "ListenerComponent.h"
 
 #include "Globals.h"
 
@@ -171,9 +173,59 @@ void AudioManager::UnregisterGameObject(int uuid)
 	AK::SoundEngine::UnregisterGameObj(uuid);
 }
 
-void AudioManager::SetDefaultListener(AkGameObjectID* uuid)
+void AudioManager::AddReverbZone(AudioReverbZoneComponent* reverbZone)
+{
+	reverbZones.push_back(reverbZone);
+}
+
+void AudioManager::DeleteReverbZone(AudioReverbZoneComponent* reverbZone)
+{
+	std::vector<AudioReverbZoneComponent*>::iterator iterator = reverbZones.begin();
+
+	for (; iterator != reverbZones.end(); ++iterator)
+	{
+		if (*iterator == reverbZone)
+		{
+			reverbZones.erase(iterator);
+			break;
+		}
+	}
+}
+
+void AudioManager::CheckReverbGameObject(unsigned int UUID)
+{
+	AkAuxSendValue aEnvs;
+	for (int i = 0; i < reverbZones.size(); ++i)
+	{
+		if (reverbZones[i]->GetReverbZoneAABB().Contains(currentListenerPosition->GetPosition()))
+		{
+			aEnvs.listenerID = AK_INVALID_GAME_OBJECT;
+			aEnvs.auxBusID = AK::SoundEngine::GetIDFromString(reverbZones[i]->GetReverbBusName().c_str());
+			aEnvs.fControlValue = 1.5f;
+
+			if (AK::SoundEngine::SetGameObjectAuxSendValues(UUID, &aEnvs, 1) != AK_Success)
+			{
+				DEBUG_LOG("Couldnt set aux send values");
+			}
+		}
+		else
+		{
+			aEnvs.listenerID = AK_INVALID_GAME_OBJECT;
+			aEnvs.auxBusID = AK::SoundEngine::GetIDFromString(L"Master Audio Bus");
+			aEnvs.fControlValue = 1.0f;
+
+			if (AK::SoundEngine::SetGameObjectAuxSendValues(UUID, &aEnvs, 1) != AK_Success)
+			{
+				DEBUG_LOG("Couldnt set aux send values");
+			}
+		}
+	}
+}
+
+void AudioManager::SetDefaultListener(AkGameObjectID* uuid, TransformComponent* listenerPosition)
 {
 	AK::SoundEngine::SetDefaultListeners(uuid, 1);
+	currentListenerPosition = listenerPosition;
 }
 
 void AudioManager::SetPosition(int uuid, AkSoundPosition position)

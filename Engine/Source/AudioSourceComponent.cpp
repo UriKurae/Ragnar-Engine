@@ -74,21 +74,10 @@ bool AudioSourceComponent::Update(float dt)
 	//audioSourcePos.SetOrientation({orientation.x, orientation.y, orientation.z}, { orientation.x, orientation.y, orientation.z });
 	audioSourcePos.SetOrientation({0, 0, -1}, { 0,1,0 });
 	AudioManager::Get()->SetPosition(owner->GetUUID(), audioSourcePos);
-
-
-	// TODO: Aux Send Value
-	//AkAuxSendValue aux;
-	//aux.listenerID = AK_INVALID_GAME_OBJECT;
-	//aux.auxBusID = AK::SoundEngine::GetIDFromString(L"ReverbZone");
-	//aux.fControlValue = 1.0f;
-
-	//AK::SoundEngine::SetGameObjectOutputBusVolume(owner->GetUUID(), AK_INVALID_GAME_OBJECT, 1.0f);
-	//if (AK::SoundEngine::SetGameObjectAuxSendValues(owner->GetUUID(), &aux, 1) != AK_Success)
-	//{
-	//	DEBUG_LOG("Me cago en la puta, joder que asco el puto reverb zone");
-	//}
 	
 	//DEBUG_LOG("Source: x %f, y %f, z %f", position.x, position.y, position.z);
+	AudioManager::Get()->CheckReverbGameObject(owner->GetUUID());
+
 	return true;
 }
 

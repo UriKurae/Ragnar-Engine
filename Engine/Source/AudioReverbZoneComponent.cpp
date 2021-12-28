@@ -1,9 +1,11 @@
+#include "Globals.h"
 #include "AudioReverbZoneComponent.h"
 
 #include "GameObject.h"
 #include "AudioManager.h"
+#include <GL\glew.h>
 
-AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component()
+AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component(), busReverb("Reverb"), vbo(nullptr), ebo(nullptr)
 {
 	owner = own;
 	type = ComponentType::AUDIO_REVERB_ZONE;
@@ -15,10 +17,79 @@ AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformCom
 		AudioManager::Get()->RegisterGameObject(cameraID);
 		owner->SetAudioRegister(true);
 	}
+	ResizeReverbZone();
+	CompileBuffers();
+	AudioManager::Get()->AddReverbZone(this);
 }
 
 AudioReverbZoneComponent::~AudioReverbZoneComponent()
 {
+	AudioManager::Get()->DeleteReverbZone(this);
+	RELEASE(vbo);
+	RELEASE(ebo);
+}
+
+void AudioReverbZoneComponent::ResizeReverbZone()
+{
+	reverbBoxZone.SetNegativeInfinity();	
+	reverbBoxZone.SetFromCenterAndSize(transform->GetPosition(), float3(5.0f, 5.0f, 5.0f));
+
+}
+
+void AudioReverbZoneComponent::CompileBuffers()
+{
+	// Configure buffers
+	float3 corners[8];
+	reverbBoxZone.GetCornerPoints(corners);
+	unsigned int indices[24] =
+	{
+		0,1,
+		1,3,
+		3,2,
+		2,0,
+
+		1,5,
+		4,6,
+		7,3,
+
+		6,7,
+		6,2,
+
+		7,5,
+		4,5,
+
+		4,0
+	};
+
+	if (vbo)
+	{
+		vbo->Unbind();
+		RELEASE(vbo);
+	}
+	ebo = new IndexBuffer(indices, 24);
+	vbo = new VertexBuffer(corners, sizeof(float3) * 8);
+	ebo->Unbind();
+	vbo->Unbind();
+}
+
+void AudioReverbZoneComponent::Draw()
+{
+	glPushMatrix();
+
+	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
+	glEnableClientState(GL_VERTEX_ARRAY);
+	vbo->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	ebo->Bind();
+	glLineWidth(2.0f);
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
+	vbo->Unbind();
+	ebo->Unbind();
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glPopMatrix();
 }
 
 bool AudioReverbZoneComponent::Update(float dt)
