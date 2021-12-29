@@ -236,12 +236,16 @@ void AudioManager::SetPosition(int uuid, AkSoundPosition position)
 	AK::SoundEngine::SetPosition(uuid, position);
 }
 
-void AudioManager::PostEvent(const char* name, int uuid)
+AkPlayingID AudioManager::PostEvent(const char* name, int uuid)
 {
-	if (AK::SoundEngine::PostEvent(name, uuid) == AK_INVALID_PLAYING_ID)
+	AkPlayingID playingID = AK::SoundEngine::PostEvent(name, uuid);
+	if (playingID == AK_INVALID_PLAYING_ID)
 	{
 		DEBUG_LOG("Post event %s failed", name);
+		return -1;
 	}
+
+	return playingID;
 }
 
 AudioManager::AudioManager() : currentListenerPosition(nullptr)

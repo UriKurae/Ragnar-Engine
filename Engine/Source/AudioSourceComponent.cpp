@@ -9,7 +9,7 @@
 
 #include "Imgui/imgui.h"
 
-AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("None"), volume(50.0f), mute(false), transform(trans), pitch(0.0f)
+AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("None"), volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1)
 {
 	owner = own;
 	type = ComponentType::AUDIO_SOURCE;
@@ -77,6 +77,16 @@ void AudioSourceComponent::OnEditor()
 		{
 			AK::SoundEngine::SetRTPCValue("Pitch", pitch, owner->GetUUID());
 		}
+
+		if (ImGui::Button("Play"))
+		{
+			PlayClip();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Stop"))
+		{
+			AK::SoundEngine::StopPlayingID(playingID);
+		}
 	}
 	ImGui::PopID();
 }
@@ -124,5 +134,5 @@ bool AudioSourceComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 void AudioSourceComponent::PlayClip()
 {
- 	AudioManager::Get()->PostEvent(audioClip.c_str(), owner->GetUUID());
+ 	playingID = AudioManager::Get()->PostEvent(audioClip.c_str(), owner->GetUUID());
 }

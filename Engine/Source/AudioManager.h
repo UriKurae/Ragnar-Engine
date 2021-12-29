@@ -40,7 +40,7 @@ public:
 	void SetDefaultListener(AkGameObjectID* uuid, TransformComponent* listenerPosition);
 	void SetPosition(int uuid, AkSoundPosition position);
 
-	void PostEvent(const char* name, int uuid);
+	AkPlayingID PostEvent(const char* name, int uuid);
 
 	inline std::vector<std::string> GetEventsList() const { return wwiseInfo.events; }
 	inline std::vector<std::string> GetBussesList() const { return wwiseInfo.busses; }
