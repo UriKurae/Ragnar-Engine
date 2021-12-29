@@ -1,6 +1,6 @@
 # Ragnar Engine
 
-Ragnar Engine is a Video Game Engine created by [Lucas Pérez](https://github.com/LucasPG14). and [Oriol Bernal](https://github.com/UriKurae)., two students from the university Universitat Politècnica de Catalunya (CITM). 
+Ragnar Engine is a Video Game Engine created by [Lucas Pérez](https://github.com/LucasPG14). and [Oriol Bernal](https://github.com/UriKurae). Two students from the university Universitat Politècnica de Catalunya (CITM). 
 
 ## Planning
 
