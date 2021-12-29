@@ -7,11 +7,17 @@ For the long term, we would love to create a game with this Video Game Engine
 
 ## Team Members
 
-* Lucas Pérez (Github page): Lucas mainly focused in the Resource Manager part of the engine, creating all the needed functionalities aswell as a good layout for better user experience. He also spent a lot of time making sure that the game engine 
+* Lucas Pérez: Lucas mainly focused in the Resource Manager part of the engine, creating all the needed functionalities aswell as a good layout for better user experience. He also spent a lot of time making sure that the game engine 
 was well optimized. 
 
-* Oriol Bernal (Github page): Oriol mainly focused on the camera part of the engine, creating the frustum camera. He also did the time management so the game engine could have a timer for the game and the engine itself.
+   * [Github page](https://github.com/LucasPG14)
+   * [LinkedIn](https://www.linkedin.com/in/lucas-p%C3%A9rez-garc%C3%ADa-4473631b9/)
+
+* Oriol Bernal: Oriol mainly focused on the camera part of the engine, creating the frustum camera. He also did the time management so the game engine could have a timer for the game and the engine itself.
 Finally, Oriol did the mousepicking so the gameobjects could be selected.
+
+   * [Github page](https://github.com/UriKurae)
+   * [LinkedIn](https://www.linkedin.com/in/oriol-bernal-martinez-54b093176/)
 
 * Overall: The game engine was done by both programmers day-by-day working together in Discord, so everything worked correctly.
 
