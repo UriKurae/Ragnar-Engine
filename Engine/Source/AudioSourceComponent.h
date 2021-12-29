@@ -28,5 +28,4 @@ private:
 	bool mute;
 	float volume;
 	float pitch;
-	float reverb;
 };

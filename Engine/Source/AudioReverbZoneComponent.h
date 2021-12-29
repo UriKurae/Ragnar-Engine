@@ -28,6 +28,9 @@ public:
 
 	void OnEditor() override;
 
+	bool OnLoad(JsonParsing& node) override;
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
+
 private:
 	TransformComponent* transform;
 
@@ -37,4 +40,6 @@ private:
 	// Show reverb zone for debug purposes
 	IndexBuffer* ebo;
 	VertexBuffer* vbo;
+
+	float3 dimensions;
 };

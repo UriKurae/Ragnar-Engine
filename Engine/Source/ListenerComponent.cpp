@@ -30,9 +30,9 @@ void ListenerComponent::OnEditor()
 	ImGui::PushID(this);
 	if (ImGui::CollapsingHeader("Listener"))
 	{
-		ImGui::Text("##AudioClip");
+		ImGui::Text("AudioClip");
 		ImGui::SameLine(ImGui::GetWindowWidth() * 0.65f);
-		ImGui::Checkbox(" ", &activeListener);
+		ImGui::Checkbox("##AudioClip", &activeListener);
 		ImGui::SameLine();
 		ImGui::Text("Listen");
 	}

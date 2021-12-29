@@ -4,6 +4,14 @@
 #include "AudioReverbZoneComponent.h"
 #include <vector>
 
+struct WwiseData
+{
+	std::vector<std::string> events;
+	std::vector<std::string> busses;
+	std::vector<std::string> auxBusses;
+	std::vector<std::string> banks;
+};
+
 class TransformComponent;
 
 class AudioManager
@@ -34,8 +42,13 @@ public:
 
 	void PostEvent(const char* name, int uuid);
 
+	inline std::vector<std::string> GetEventsList() const { return wwiseInfo.events; }
+	inline std::vector<std::string> GetBussesList() const { return wwiseInfo.busses; }
+
 private:
 	AudioManager();
+
+	void ReadIDs();
 
 	// List to have all reverb zones in this singleton
 	std::vector<AudioReverbZoneComponent*> reverbZones;
@@ -44,4 +57,6 @@ private:
 
 	static AudioManager* instance;
 	CAkFilePackageLowLevelIOBlocking lowLevelIO;
+
+	WwiseData wwiseInfo;
 };

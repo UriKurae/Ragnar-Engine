@@ -5,7 +5,7 @@
 #include "AudioManager.h"
 #include <GL\glew.h>
 
-AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component(), busReverb("Reverb"), vbo(nullptr), ebo(nullptr)
+AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
 {
 	owner = own;
 	type = ComponentType::AUDIO_REVERB_ZONE;
@@ -32,8 +32,7 @@ AudioReverbZoneComponent::~AudioReverbZoneComponent()
 void AudioReverbZoneComponent::ResizeReverbZone()
 {
 	reverbBoxZone.SetNegativeInfinity();	
-	reverbBoxZone.SetFromCenterAndSize(transform->GetPosition(), float3(5.0f, 5.0f, 5.0f));
-
+	reverbBoxZone.SetFromCenterAndSize(transform->GetPosition(), dimensions);
 }
 
 void AudioReverbZoneComponent::CompileBuffers()
@@ -110,6 +109,53 @@ void AudioReverbZoneComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Audio Reverb Zone"))
 	{
+		ImGui::Text("Reverb effect");
+		ImGui::SameLine();
+		if (ImGui::BeginCombo("##Audio Reverb Zone", busReverb.c_str()))
+		{
+			if (ImGui::Selectable("None"))
+			{
+				busReverb = "None";
+			}
+			std::vector<std::string> busses = AudioManager::Get()->GetBussesList();
+			for (int i = 0; i < busses.size(); ++i)
+			{
+				if (ImGui::Selectable(busses[i].c_str()))
+				{
+					busReverb = busses[i];
+				}
+			}
+			ImGui::EndCombo();
+		}
 
+		if (ImGui::SliderFloat3("##Dimensions", &dimensions[0], 0, 20))
+		{
+			ResizeReverbZone();
+			CompileBuffers();
+		}
 	}
+}
+
+bool AudioReverbZoneComponent::OnLoad(JsonParsing& node)
+{
+	busReverb = node.GetJsonString("Reverb Zone");
+	dimensions = node.GetJson3Number(node, "Dimensions");
+
+	ResizeReverbZone();
+	CompileBuffers();
+
+	return false;
+}
+
+bool AudioReverbZoneComponent::OnSave(JsonParsing& node, JSON_Array* array)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Reverb Zone", busReverb.c_str());
+	file.SetNewJson3Number(file, "Dimensions", dimensions);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	return false;
 }

@@ -22,6 +22,8 @@
 #include <AK/Comm/AkCommunication.h>
 #endif
 
+#include <fstream>
+
 #include "Profiling.h"
 
 AudioManager* AudioManager::instance = nullptr;
@@ -138,16 +140,17 @@ bool AudioManager::Init()
 
 	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
 
+	ReadIDs();
+
 	AkBankID bankID = 0;
-	if (AK::SoundEngine::LoadBank(L"Init.bnk", bankID) != AK_Success)
+	for (int i = 0; i < wwiseInfo.banks.size(); ++i)
 	{
-		DEBUG_LOG("Couldn't find the bank: Init.bnk");
-		return false;
-	}
-	if (AK::SoundEngine::LoadBank(L"ragnarEngine.bnk", bankID) != AK_Success)
-	{
-		DEBUG_LOG("Couldn't find the bank: ragnarEngine.bnk");
-		return false;
+		std::string name = wwiseInfo.banks[i] + ".bnk";
+		if (AK::SoundEngine::LoadBank(name.c_str(), bankID) != AK_Success)
+		{
+			DEBUG_LOG("Couldn't find the bank: %s", name.c_str());
+			return false;
+		}
 	}
 
 	return true;
@@ -241,6 +244,85 @@ void AudioManager::PostEvent(const char* name, int uuid)
 	}
 }
 
-AudioManager::AudioManager()
+AudioManager::AudioManager() : currentListenerPosition(nullptr)
 {
+}
+
+void AudioManager::ReadIDs()
+{
+	std::ifstream file("Assets/Wwise/Wwise_IDs.h");
+	
+	std::string line;
+
+	while (std::getline(file, line))
+	{
+		if (line.find("EVENTS") != std::string::npos)
+		{
+			while (std::getline(file, line))
+			{
+				if (line.find("}") != std::string::npos)
+				{
+					break;
+				}
+				else if(line.find("AkUniqueID") != std::string::npos)
+				{
+					line = line.substr(0, line.find("=") - 1);
+					line = line.substr(line.find_last_of(" ") + 1, line.length());
+
+					wwiseInfo.events.push_back(line);
+				}
+			}
+		}
+		else if (line.find("BANKS") != std::string::npos)
+		{
+			while (std::getline(file, line))
+			{
+				if (line.find("}") != std::string::npos)
+				{
+					break;
+				}
+				else if (line.find("AkUniqueID") != std::string::npos)
+				{
+					line = line.substr(0, line.find("=") - 1);
+					line = line.substr(line.find_last_of(" ") + 1, line.length());
+
+					wwiseInfo.banks.push_back(line);
+				}
+			}
+		}
+		else if (line.find(" BUSSES") != std::string::npos)
+		{
+			while (std::getline(file, line))
+			{
+				if (line.find("}") != std::string::npos)
+				{
+					break;
+				}
+				else if (line.find("AkUniqueID") != std::string::npos)
+				{
+					line = line.substr(0, line.find("=") - 1);
+					line = line.substr(line.find_last_of(" ") + 1, line.length());
+
+					wwiseInfo.busses.push_back(line);
+				}
+			}
+		}
+		else if (line.find("AUX_BUSSES") != std::string::npos)
+		{
+			while (std::getline(file, line))
+			{
+				if (line.find("}") != std::string::npos)
+				{
+					break;
+				}
+				else if (line.find("AkUniqueID") != std::string::npos)
+				{
+					line = line.substr(0, line.find("=") - 1);
+					line = line.substr(line.find_last_of(" ") + 1, line.length());
+
+					wwiseInfo.auxBusses.push_back(line);
+				}
+			}
+		}
+	}
 }

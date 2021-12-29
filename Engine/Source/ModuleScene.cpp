@@ -47,18 +47,18 @@ bool ModuleScene::Start()
 	ImportPrimitives();
 	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
-	AkAuxSendValue aEnvs[1];
-	root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
+	//AkAuxSendValue aEnvs[1];
+	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
-	
-	aEnvs[0].listenerID = camera->GetUUID();
-	aEnvs[0].auxBusID = AK::SoundEngine::GetIDFromString(L"ReverbZone");
-	aEnvs[0].fControlValue = 0.0f;
-	
-	if (AK::SoundEngine::SetGameObjectAuxSendValues(camera->GetUUID(), aEnvs, 1) != AK_Success)
-	{
-		DEBUG_LOG("Couldnt set aux send values");
-	}
+	//
+	//aEnvs[0].listenerID = camera->GetUUID();
+	//aEnvs[0].auxBusID = AK::SoundEngine::GetIDFromString(L"ReverbZone");
+	//aEnvs[0].fControlValue = 0.0f;
+	//
+	//if (AK::SoundEngine::SetGameObjectAuxSendValues(camera->GetUUID(), aEnvs, 1) != AK_Success)
+	//{
+	//	DEBUG_LOG("Couldnt set aux send values");
+	//}
 
 	return true;
 }
