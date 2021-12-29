@@ -28,18 +28,25 @@ The audio subsystem had three main goals:
 We did this by basically controlling both the music options in WWise. WWise has many functionalities, including one that lets you create playlist for your sounds, so it's as easy as creating a sequence and telling Wwise how to play them and in which order.
 When you do this, as soon as you play the music in the engine, the functions from Wwise have the information on how to play them and in which order.
 
+![](Images/Playlist1.png)
+![](Images/Playlist2.png)
+
 #### - Spatial audio:
 The main goal of this objective was to be able to listen the sound effects/music depending on the listener´s position. This is also done easily by the WWise API, but you have to do some code aswell.
 In the WWise API you have to go to the "Positioning" tab and check the 3D Spatialization aswell as the Attenuation. With this options, WWise knows how to play the music depending on the listener´s position.
 But this is not it, you have to go to the source code and implement a position and orientation for the listener, so WWise knows how to calculate the distance. We did this with a simple function that asks for 2 parameters: the UUID from the gameobject and it´s position.
 Once you call the function correctly, WWise will register the gameobject's position and will know how to treat it.
 
+![](Images/Positioning1.png)
+![](Images/Positioning2.png)
+
 #### - Special effect (Reverb):
 The assignment asked for a tunnel effect in some area of the game. This was very difficult because there's not a lot of information on the subject. To create this effect, we had to go to the WWise API and create two different
 busses, one for the normal audio, and another audio bus that contains an effect called "WiseRoomReverb" which simulates a tunnel sound with echo. The trick is that you need to swap the bus via code depending on the listener's current position. 
 For this, we created a class called AudioReverbZone which creates an AABB simulating a collider zone, when the listener enters this zone, we call our audio singleton to use a function which is called
 CheckReverbGameObject(). This function loops between all reverb zones to check if the listener is inside any of the colliders from the reverb zones. If the listener is inside, we swap the busses from the audio to the one with the reverb effect.
--- Foto reverb1
+
+![](Images/ReverbZone1.png)
 
 #### - Extra Functionalities:
 
@@ -49,7 +56,31 @@ We added some extra functionalities so it's not a pain to use the audio, this fu
 benefit from this functionalities, you only need to do 1 extra step in the WWise API, that is to check the "Generate header files", this, when generating the sound banks, will generate a header file that we use to 
 read all the information, so this needs to be imported to the engine assets folder. This way, also, when you want to put an audio source or a special effect into the reverb zone, the engine will show you a dropdown menu
 with all the sounds or effects available.
--- Poner fotos de import1, import2, header1
 
+![](Images/Import1.png)
+![](Images/Import2.png)
+![](Images/HeaderFile1.png)
 
+## License
 
+MIT License
+
+Copyright (c) 2021 Oriol Bernal Martinez & Lucas Perez Garcia
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
