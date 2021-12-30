@@ -58,6 +58,8 @@ CheckReverbGameObject(). This function loops between all reverb zones to check i
 
 We added some extra functionalities so it's not a pain to use the audio, this functionalities include:
 * Sound options: Volume, mute and pitch. This options control the audio so you don't have to do it via code, volume ranges from 0 to 100. Pitch ranges from -2400 to 2400 and mute just mutes the volume (Mute option does not pause the music!).
+* Play On Awake functionality: Similar to Unity, if you check this box, it will play as soon as you start your game. It is also affected by the pause and stop from the game timer.
+* Debug options (Play, Pause, Resume, Stop): You can check the audio by playing it, pausing, resuming or stoping it. The buttons are easily located in the audio source component.
 * Auto-Load: To avoid having to code each time you import something into the audio, we created some functionalities to read files, this adds an extra step in the Wwise API but saves a lot of time and possible grammar mistakes. To
 benefit from this functionalities, you only need to do 1 extra step in the WWise API, that is to check the "Generate header files", this, when generating the sound banks, will generate a header file that we use to 
 read all the information, so this needs to be imported to the engine assets folder. This way, also, when you want to put an audio source or a special effect into the reverb zone, the engine will show you a dropdown menu
@@ -65,6 +67,7 @@ with all the sounds or effects available.
 
 ![](Images/Import1.png)
 ![](Images/Import2.png)
+![](Images/PlayOnAwake.png)
 ![](Images/HeaderFile1.png)
 
 ## License
