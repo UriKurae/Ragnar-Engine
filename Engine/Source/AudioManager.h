@@ -3,6 +3,7 @@
 #include <AK/SoundEngine/Win32/AkFilePackageLowLevelIOBlocking.h>
 #include "AudioReverbZoneComponent.h"
 #include <vector>
+#include "AudioSourceComponent.h"
 
 struct WwiseData
 {
@@ -37,6 +38,13 @@ public:
 	void DeleteReverbZone(AudioReverbZoneComponent* reverbZone);
 	void CheckReverbGameObject(unsigned int UUID);
 
+	void AddAudioSource(AudioSourceComponent* audioSource);
+	void DeleteAudioSource(AudioSourceComponent* audioSource);
+	void StopAllAudioSources();
+	void PlayAllAudioSources();
+	void ResumeAllAudioSources();
+	void PauseAllAudioSources();
+
 	void SetDefaultListener(AkGameObjectID* uuid, TransformComponent* listenerPosition);
 	void SetPosition(int uuid, AkSoundPosition position);
 
@@ -52,6 +60,9 @@ private:
 
 	// List to have all reverb zones in this singleton
 	std::vector<AudioReverbZoneComponent*> reverbZones;
+
+	// List to have all AudioSources in this singleton
+	std::vector<AudioSourceComponent*> audioSources;
 
 	TransformComponent* currentListenerPosition;
 

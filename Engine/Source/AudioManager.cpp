@@ -195,6 +195,35 @@ void AudioManager::DeleteReverbZone(AudioReverbZoneComponent* reverbZone)
 	}
 }
 
+void AudioManager::StopAllAudioSources()
+{
+	AK::SoundEngine::StopAll();
+}
+
+void AudioManager::PlayAllAudioSources()
+{
+	for (int i = 0; i < audioSources.size(); ++i)
+	{
+		audioSources[i]->PlayClipOnAwake();
+	}
+}
+
+void AudioManager::ResumeAllAudioSources()
+{
+	for (int i = 0; i < audioSources.size(); ++i)
+	{
+		audioSources[i]->ResumeClip();
+	}
+}
+
+void AudioManager::PauseAllAudioSources()
+{
+	for (int i = 0; i < audioSources.size(); ++i)
+	{
+		audioSources[i]->PauseClip();
+	}
+}
+
 void AudioManager::CheckReverbGameObject(unsigned int UUID)
 {
 	AkAuxSendValue aEnvs;
@@ -221,6 +250,25 @@ void AudioManager::CheckReverbGameObject(unsigned int UUID)
 			{
 				DEBUG_LOG("Couldnt set aux send values");
 			}
+		}
+	}
+}
+
+void AudioManager::AddAudioSource(AudioSourceComponent* audioSource)
+{
+	audioSources.push_back(audioSource);
+}
+
+void AudioManager::DeleteAudioSource(AudioSourceComponent* audioSource)
+{
+	std::vector<AudioSourceComponent*>::iterator iterator = audioSources.begin();
+
+	for (; iterator != audioSources.end(); ++iterator)
+	{
+		if (*iterator == audioSource)
+		{
+			audioSources.erase(iterator);
+			break;
 		}
 	}
 }

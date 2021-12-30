@@ -19,6 +19,10 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void PlayClip();
+	void PlayClipOnAwake();
+	void StopClip();
+	void PauseClip();
+	void ResumeClip();
 private:
 
 	TransformComponent* transform;
@@ -29,4 +33,5 @@ private:
 	bool mute;
 	float volume;
 	float pitch;
+	bool playOnAwake;
 };

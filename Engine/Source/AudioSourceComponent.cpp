@@ -9,11 +9,12 @@
 
 #include "Imgui/imgui.h"
 
-AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("None"), volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1)
+AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("None"), volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1), playOnAwake(false)
 {
 	owner = own;
 	type = ComponentType::AUDIO_SOURCE;
 	
+	AudioManager::Get()->AddAudioSource(this);
 	// Register this audio source
 	if (!owner->CheckAudioRegister())
 	{
@@ -25,6 +26,7 @@ AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* 
 
 AudioSourceComponent::~AudioSourceComponent()
 {
+	AudioManager::Get()->DeleteAudioSource(this);
 	AudioManager::Get()->UnregisterGameObject(owner->GetUUID());
 }
 
@@ -78,15 +80,30 @@ void AudioSourceComponent::OnEditor()
 			AK::SoundEngine::SetRTPCValue("Pitch", pitch, owner->GetUUID());
 		}
 
+		ImGui::Text("Play On Awake");
+		ImGui::SameLine();
+		ImGui::Checkbox("##Play On Awake", &playOnAwake);
+
 		if (ImGui::Button("Play"))
 		{
 			PlayClip();
 		}
 		ImGui::SameLine();
+		if (ImGui::Button("Pause"))
+		{
+			PauseClip();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Resume"))
+		{
+			ResumeClip();
+		}
+		ImGui::SameLine();
 		if (ImGui::Button("Stop"))
 		{
-			AK::SoundEngine::StopPlayingID(playingID);
+			StopClip();
 		}
+		
 	}
 	ImGui::PopID();
 }
@@ -135,4 +152,24 @@ bool AudioSourceComponent::OnSave(JsonParsing& node, JSON_Array* array)
 void AudioSourceComponent::PlayClip()
 {
  	playingID = AudioManager::Get()->PostEvent(audioClip.c_str(), owner->GetUUID());
+}
+
+void AudioSourceComponent::PlayClipOnAwake()
+{
+	if (playOnAwake) playingID = AudioManager::Get()->PostEvent(audioClip.c_str(), owner->GetUUID());
+}
+
+void AudioSourceComponent::StopClip()
+{
+	AK::SoundEngine::StopPlayingID(playingID);
+}
+
+void AudioSourceComponent::PauseClip()
+{
+	AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Pause, playingID);
+}
+
+void AudioSourceComponent::ResumeClip()
+{
+	AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Resume, playingID);
 }
