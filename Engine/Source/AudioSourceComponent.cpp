@@ -58,7 +58,7 @@ void AudioSourceComponent::OnEditor()
 
 		ImGui::Text("Mute");
 		ImGui::SameLine();
-		if (ImGui::Checkbox("Mute", &mute))
+		if (ImGui::Checkbox("##Mute", &mute))
 		{
 			if (mute) AK::SoundEngine::SetRTPCValue("Volume", 0, owner->GetUUID());
 			else AK::SoundEngine::SetRTPCValue("Volume", volume, owner->GetUUID());
@@ -67,7 +67,7 @@ void AudioSourceComponent::OnEditor()
 
 		ImGui::Text("Volume");
 		ImGui::SameLine();
-		if (ImGui::SliderFloat("Volume", &volume, 0.0f, 100.0f))
+		if (ImGui::SliderFloat("##Volume", &volume, 0.0f, 100.0f))
 		{
 			AK::SoundEngine::SetRTPCValue("Volume", volume, owner->GetUUID());
 			mute = false;
@@ -75,7 +75,7 @@ void AudioSourceComponent::OnEditor()
 
 		ImGui::Text("Pitch");
 		ImGui::SameLine();
-		if (ImGui::SliderFloat("Pitch", &pitch, -2400.0f, 2400.0f))
+		if (ImGui::SliderFloat("##Pitch", &pitch, -2400.0f, 2400.0f))
 		{
 			AK::SoundEngine::SetRTPCValue("Pitch", pitch, owner->GetUUID());
 		}

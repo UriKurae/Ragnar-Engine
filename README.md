@@ -17,6 +17,20 @@ The download files include an exe and you just have to execute it to test our en
 
 ## Features
 
+v1.0
+
+- Wwise implementation for the audio system.
+- Audio Source Component to play an audio clip at the position of the game object.
+  - Different options to modify the volume, pitch, mute, etc...
+- Audio Listener Component attached to the main camera.
+- Audio Reverb Zone Component to distort the audio clip if it's inside the zone.
+- You can create this new components the same way as the other ones, by selecting it at the new component button.
+- The audio is affected by the play, stop and pause buttons.
+  - The audio will play as soon as you hit the play button.
+  - The pause button will pause the music, not stop it.
+- If you check "Generate Header File" on the Wwise settings and you put this file inside the Wwise folder, the engine will automatically load all the clips.
+- Some little changes on the style of the engine UI.
+
 v0.8
 
 - Stencil border for the selected GameObject.

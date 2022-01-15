@@ -92,10 +92,12 @@ void GameObject::DrawOutline()
 void GameObject::DrawEditor()
 {
 	ImGui::PushMultiItemsWidths(3, ImGui::GetWindowWidth());
-	ImGui::Checkbox("Active", &active);
+	ImGui::Checkbox("##Active", &active);
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
-	ImGui::InputText("Name", &name[0], 20);
+	ImGui::Text("Name");
+	ImGui::SameLine();
+	ImGui::InputText("##Name", &name[0], 30);
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 	ImGui::Checkbox("Static", &staticObj);

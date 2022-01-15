@@ -109,7 +109,7 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86 /ignore:4221</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /Y "$(SolutionDir)\Build\$(ProjectName)\$(Configuration)\$(Platform)\MathGeoLib.lib" "$(SolutionDir)Dependencies\MathGeoLib\lib\Debug\"</Command>
+      <Command>copy /Y "$(SolutionDir)\Build\$(ProjectName)\$(Configuration)\$(Platform)\MathGeoLib.lib" "$(SolutionDir)Dependencies\MathGeoLib\lib\Deb\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
