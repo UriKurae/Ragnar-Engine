@@ -7,6 +7,8 @@ For the long term, we would love to create a game with this Video Game Engine
 
 ## Team Members
 
+![](Images/TeamMembers.png)
+
 * Lucas Pérez: Lucas mainly focused in the Resource Manager part of the engine, creating all the needed functionalities aswell as a good layout for better user experience. He also spent a lot of time making sure that the game engine 
 was well optimized. 
 
