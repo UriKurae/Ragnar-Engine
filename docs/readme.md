@@ -72,7 +72,11 @@ with all the sounds or effects available.
 ![](Images/PlayOnAwake.png)
 ![](Images/HeaderFile1.png)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qJ91oxEbzHY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+## Video demonstration
+
+This video demonstrates how the Audio System works, and it's utilities.
+
+<iframe width="1024" height="720" src="https://www.youtube.com/embed/qJ91oxEbzHY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## License
 
