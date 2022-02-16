@@ -11,13 +11,12 @@ enum class CommandType
 
 class Command
 {
-	//friend class CommandDispatcher;
-
 public:
-	//Command(CommandType t) : type(t) {}
 	virtual ~Command() {};
 	virtual void Execute() {};
 	virtual void Undo() {};
+	virtual void Redo() {};
+	virtual void GenerateRedo() {};
 
 	virtual CommandType GetType() const { return type; }
 

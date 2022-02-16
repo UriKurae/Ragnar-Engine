@@ -89,6 +89,13 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			CommandDispatcher dispatcher;
 			dispatcher.Undo();
 		}
+		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_Y) == KeyState::KEY_UP)
+		{
+			CommandDispatcher dispatcher;
+			dispatcher.Redo();
+		}
+
+
 
 		if (ImGui::BeginDragDropTarget())
 		{

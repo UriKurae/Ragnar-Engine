@@ -28,3 +28,20 @@ void MoveGameObjectCommand::Undo()
 	tr->SetScale(initialScale);
 	tr->ForceUpdateTransform();
 }
+
+void MoveGameObjectCommand::Redo()
+{
+	TransformComponent* tr = actor->GetComponent<TransformComponent>();
+	tr->SetPosition(lastPosition);
+	tr->SetRotation(lastRotation);
+	tr->SetScale(lastScale);
+	tr->ForceUpdateTransform();
+}
+
+void MoveGameObjectCommand::GenerateRedo()
+{
+	TransformComponent* tr = actor->GetComponent<TransformComponent>();
+	lastPosition = tr->GetPosition();
+	lastRotation = tr->GetRotation();
+	lastScale = tr->GetScale();
+}
