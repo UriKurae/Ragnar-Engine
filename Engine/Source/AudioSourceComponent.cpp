@@ -7,6 +7,8 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
+#include "IconsFontAwesome5.h"
+
 #include "Imgui/imgui.h"
 
 AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : audioClip("None"), volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1), playOnAwake(false)
@@ -33,7 +35,7 @@ AudioSourceComponent::~AudioSourceComponent()
 void AudioSourceComponent::OnEditor()
 {
 	ImGui::PushID(this);
-	if (ImGui::CollapsingHeader("AudioSource"))
+	if (ImGui::CollapsingHeader(ICON_FA_VOLUME_UP" AudioSource"))
 	{
 		ImGui::Text("AudioClip");
 		ImGui::SameLine();

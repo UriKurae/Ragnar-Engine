@@ -13,6 +13,8 @@
 
 #include "glew/include/GL/glew.h"
 
+#include "IconsFontAwesome5.h"
+
 #include "Profiling.h"
 
 MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
@@ -88,7 +90,7 @@ void MeshComponent::OnEditor()
 {
 	ImGui::PushID(this);
 
-	if (ImGui::CollapsingHeader("Mesh Renderer"))
+	if (ImGui::CollapsingHeader(ICON_FA_CUBES" Mesh Renderer"))
 	{
 		Checkbox(this, "Active", active);
 		ImGui::Text("Select mesh");

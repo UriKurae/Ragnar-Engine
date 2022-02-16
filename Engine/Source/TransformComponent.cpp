@@ -10,6 +10,8 @@
 
 #include <stack>
 
+#include "IconsFontAwesome5.h"
+
 #include "Profiling.h"
 
 TransformComponent::TransformComponent(GameObject* own)
@@ -89,7 +91,7 @@ bool TransformComponent::Update(float dt)
 
 void TransformComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("Transform"))
+	if (ImGui::CollapsingHeader(ICON_FA_ARROWS_ALT" Transform"))
 	{
 		ImGui::PushItemWidth(90);
 		//std::string test = std::to_string(position.x);

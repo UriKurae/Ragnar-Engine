@@ -13,6 +13,8 @@
 #include "Imgui/ImGuizmo.h"
 #include "Globals.h"
 
+#include "IconsFontAwesome5.h"
+
 #include "Profiling.h"
 
 Viewport::Viewport()
@@ -30,7 +32,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
-	if (ImGui::Begin("Scene", &active, ImGuiWindowFlags_NoScrollbar))
+	if (ImGui::Begin(ICON_FA_EYE" Scene", &active, ImGuiWindowFlags_NoScrollbar))
 	{
 		app->camera->canBeUpdated = true;	
 

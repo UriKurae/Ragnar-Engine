@@ -12,6 +12,7 @@
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/imgui_impl_sdl.h"
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -30,6 +31,15 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Start()
 {
 	mainMenuBar.Start();
+
+	ImGuiIO& io = ImGui::GetIO();
+	io.Fonts->AddFontDefault();
+
+	// merge in icons from Font Awesome
+	static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
+	ImFontConfig icons_config; icons_config.MergeMode = true; icons_config.PixelSnapH = true;
+	io.Fonts->AddFontFromFileTTF(FONT_ICON_FILE_NAME_FAS, 12.0f, &icons_config, icons_ranges);
+	// use FONT_ICON_FILE_NAME_FAR if you want regular instead of solid
 
 	return true;
 }

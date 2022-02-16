@@ -313,6 +313,9 @@
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Extras\IconsFontAwesome5.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

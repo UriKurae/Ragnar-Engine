@@ -4,6 +4,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleInput.h"
 #include "ConfigurationMenu.h"
+#include "IconsFontAwesome5.h"
 
 #include <GL\glew.h>
 
@@ -62,13 +63,13 @@ bool ConfigurationMenu::Update(float dt)
 
 	ImGui::Begin("Configuration", &active);
 
-	if (ImGui::BeginMenu("Options"))
+	if (ImGui::BeginMenu(ICON_FA_WRENCH" Options"))
 	{
-		if (ImGui::MenuItem("Load"))
+		if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Load"))
 		{
 			app->LoadConfigRequest();
 		}
-		if (ImGui::MenuItem("Save"))
+		if (ImGui::MenuItem(ICON_FA_SAVE" Save"))
 		{
 			app->SaveConfigRequest();
 		}

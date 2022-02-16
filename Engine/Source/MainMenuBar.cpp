@@ -17,6 +17,7 @@
 #include "ResourceManager.h"
 
 #include "Dialogs.h"
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -74,14 +75,14 @@ bool MainMenuBar::Update(float dt)
 	{
 		bool ret = false;
 
-		if (ImGui::BeginMenu("File"))
+		if (ImGui::BeginMenu(ICON_FA_FILE" File"))
 		{
 			// Project options (Create, open...)
-			if (ImGui::MenuItem("New Project", "Ctrl + N", &ret))
+			if (ImGui::MenuItem(ICON_FA_FILE_UPLOAD" New Project", "Ctrl + N", &ret))
 			{
 				saveWindow = true;
 			}
-			if (ImGui::MenuItem("Open Project", "Ctrl + O", &ret))
+			if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Open Project", "Ctrl + O", &ret))
 			{
 				std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->scene->LoadScene(filePath.c_str());
@@ -89,7 +90,7 @@ bool MainMenuBar::Update(float dt)
 
 			ImGui::Separator();
 
-			if (ImGui::MenuItem("Save", "Ctrl + S", &ret))
+			if (ImGui::MenuItem(ICON_FA_SAVE" Save", "Ctrl + S", &ret))
 			{
 				if (app->scene->SceneDirectory().empty())
 				{
@@ -98,12 +99,12 @@ bool MainMenuBar::Update(float dt)
 				}
 				else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
 			}
-			if (ImGui::MenuItem("Save As", "Ctrl + Shift + S", &ret))
+			if (ImGui::MenuItem(ICON_FA_SAVE" Save As", "Ctrl + Shift + S", &ret))
 			{
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
 			}
-			if (ImGui::MenuItem("Exit", "ESC", &ret))
+			if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC", &ret))
 			{
 				return false;
 			}
@@ -114,10 +115,10 @@ bool MainMenuBar::Update(float dt)
 			ImGui::SetTooltip("Opens the file menu");
 		}
 
-		if (ImGui::BeginMenu("Edit"))
+		if (ImGui::BeginMenu(ICON_FA_EDIT" Edit"))
 		{
-			ImGui::MenuItem("Undo", "Ctrl + Z", &ret);
-			ImGui::MenuItem("Redo", "Ctrl + Y", &ret);
+			ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z", &ret);
+			ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y", &ret);
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())
@@ -125,12 +126,12 @@ bool MainMenuBar::Update(float dt)
 			ImGui::SetTooltip("Opens the edit menu");
 		}
 
-		if (ImGui::BeginMenu("Window"))
+		if (ImGui::BeginMenu(ICON_FA_WINDOW_RESTORE" Window"))
 		{
-			ImGui::MenuItem("Console", NULL, &GetConsole()->active);
-			ImGui::MenuItem("Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
-			ImGui::MenuItem("Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
-			ImGui::MenuItem("Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
+			ImGui::MenuItem(ICON_FA_WINDOW_MAXIMIZE" Console", NULL, &GetConsole()->active);
+			ImGui::MenuItem(ICON_FA_WRENCH" Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
+			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
+			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 
 			ImGui::EndMenu();
 		}
@@ -139,7 +140,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::SetTooltip("Opens the window menu");
 		}
 
-		if (ImGui::BeginMenu("View"))
+		if (ImGui::BeginMenu(ICON_FA_EYE" View"))
 		{
 			if (ImGui::MenuItem("Depth Test", NULL, app->renderer3D->GetDepthTest()))
 			{
@@ -184,19 +185,19 @@ bool MainMenuBar::Update(float dt)
 			ImGui::SetTooltip("Opens the view menu");
 		}
 
-		if (ImGui::BeginMenu("Help"))
+		if (ImGui::BeginMenu(ICON_FA_INFO_CIRCLE" Help"))
 		{
 			ImGui::MenuItem("Demo Menu", NULL, &showMenu);
-			ImGui::MenuItem("About Ragnar Engine", "", &menus[(int)Menus::ABOUT]->active);
-			if (ImGui::MenuItem("Documentation", "F1", &ret))
+			ImGui::MenuItem(ICON_FA_USER" About Ragnar Engine", "", &menus[(int)Menus::ABOUT]->active);
+			if (ImGui::MenuItem(ICON_FA_ADDRESS_BOOK" Documentation", "F1", &ret))
 			{
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine");
 			}
-			if (ImGui::MenuItem("Report a Bug", "", &ret))
+			if (ImGui::MenuItem(ICON_FA_BUG" Report a Bug", "", &ret))
 			{
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/issues");
 			}
-			if (ImGui::MenuItem("Download latest", "", &ret))
+			if (ImGui::MenuItem(ICON_FA_DOWNLOAD" Download latest", "", &ret))
 			{
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/releases");
 			}

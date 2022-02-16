@@ -6,6 +6,7 @@
 #include "ModuleScene.h"
 
 #include "Imgui/imgui.h"
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -24,7 +25,7 @@ void GameView::Draw(Framebuffer* framebuffer)
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
-	ImGui::Begin("Game", &active, ImGuiWindowFlags_NoScrollbar);
+	ImGui::Begin(ICON_FA_GAMEPAD" Game", &active, ImGuiWindowFlags_NoScrollbar);
 
 	ImVec2 size = ImGui::GetContentRegionAvail();
 

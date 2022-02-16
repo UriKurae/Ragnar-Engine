@@ -3,6 +3,9 @@
 
 #include "GameObject.h"
 #include "AudioManager.h"
+
+#include "IconsFontAwesome5.h"
+
 #include <GL\glew.h>
 
 AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
@@ -107,7 +110,7 @@ bool AudioReverbZoneComponent::Update(float dt)
 
 void AudioReverbZoneComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("Audio Reverb Zone"))
+	if (ImGui::CollapsingHeader(ICON_FA_WAVE_SQUARE" Audio Reverb Zone"))
 	{
 		ImGui::Text("Reverb effect");
 		ImGui::SameLine();
