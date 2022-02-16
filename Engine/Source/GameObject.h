@@ -71,11 +71,14 @@ public:
 	template<typename T>
 	T* GetComponent();
 
-private:
 	std::string name;
 	bool active;
 	bool staticObj;
 	bool colliders;
+	std::string tag;
+	std::string layer;
+
+private:
 	std::vector<Component*> components;
 
 	GameObject* parent;

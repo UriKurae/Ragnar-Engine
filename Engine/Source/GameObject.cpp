@@ -15,7 +15,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false)
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -90,27 +90,7 @@ void GameObject::DrawOutline()
 }
 
 void GameObject::DrawEditor()
-{
-	ImGui::PushMultiItemsWidths(3, ImGui::GetWindowWidth());
-	ImGui::Checkbox("##Active", &active);
-	ImGui::PopItemWidth();
-	ImGui::SameLine();
-	ImGui::Text("Name");
-	ImGui::SameLine();
-	ImGui::InputText("##Name", &name[0], 30);
-	ImGui::PopItemWidth();
-	ImGui::SameLine();
-	ImGui::Checkbox("Static", &staticObj);
-	ImGui::PopItemWidth();
-
-	ImGui::Checkbox("Colliders", &colliders);
-	ImGui::Separator();
-	for (int i = 0; i < components.size(); ++i)
-	{
-		components[i]->OnEditor();
-	}
-
-	ImGui::NewLine();
+{	
 	float x = ImGui::GetWindowSize().x;
 	ImGui::SameLine((x / 2) - 50);
 	ImGui::SetNextItemWidth(120);

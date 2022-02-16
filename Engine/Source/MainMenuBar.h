@@ -28,6 +28,7 @@ public:
 
 	ConsoleMenu* GetConsole();
 	std::string& GetCurrentDir();
+	std::vector<Menu*> GetMenus() { return menus; };
 
 	void StyleTheme();
 

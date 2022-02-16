@@ -147,8 +147,8 @@ bool ModuleCamera3D::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.WorldRight() * speed;
 			if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) newPos += cameraFrustum.WorldRight() * speed;
 
-			if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Up() * speed;
-			if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Up() * speed;
+			if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT) newPos -= cameraFrustum.Up() * speed;
+			if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT) newPos += cameraFrustum.Up() * speed;
 
 			GameObject* target = app->editor->GetGO();
 
