@@ -100,7 +100,7 @@ bool ModuleCamera3D::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
+bool ModuleCamera3D::SaveConfig(JsonParsing& node)
 {
 	//node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "PosX", cameraFrustum.Pos().x);
 	//node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "PosY", cameraFrustum.Pos().y);

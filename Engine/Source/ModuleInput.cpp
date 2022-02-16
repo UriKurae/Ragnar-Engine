@@ -192,7 +192,7 @@ bool ModuleInput::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleInput::SaveConfig(JsonParsing& node) const
+bool ModuleInput::SaveConfig(JsonParsing& node)
 {
 	return true;
 }

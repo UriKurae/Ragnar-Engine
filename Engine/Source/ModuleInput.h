@@ -27,7 +27,7 @@ public:
 	bool CleanUp();
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	inline KeyState GetKey(int id) const
 	{

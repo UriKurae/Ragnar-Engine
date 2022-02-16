@@ -118,7 +118,7 @@ bool ModuleWindow::CleanUp()
 	return true;
 }
 
-bool ModuleWindow::SaveConfig(JsonParsing& node) const
+bool ModuleWindow::SaveConfig(JsonParsing& node)
 {
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "width", width);
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "height", height);
