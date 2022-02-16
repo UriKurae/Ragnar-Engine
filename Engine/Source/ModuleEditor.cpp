@@ -8,6 +8,7 @@
 #include "GameObject.h"
 
 #include "ConsoleMenu.h"
+#include "InspectorMenu.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_opengl3.h"
@@ -128,12 +129,42 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleEditor::SaveConfig(JsonParsing& node) const
+bool ModuleEditor::SaveConfig(JsonParsing& node)
 {
+	JsonParsing fileTag = node.SetChild(node.GetRootValue(), "Tags");
+	std::string label = "tag 0";
+	std::vector<std::string> tags = GetTags();
+	for (int i = 0; i < tags.size(); i++)
+	{
+		fileTag.SetNewJsonString(fileTag.ValueToObject(fileTag.GetRootValue()), label.c_str(), tags.at(i).c_str());
+		label = "tag ";
+		label.append(std::to_string(i + 1));
+	}
+	
+	JsonParsing fileLay = node.SetChild(node.GetRootValue(), "Layers");
+	label = "Layer 0";
+	std::vector<std::string> layers = GetTags();
+	for (int i = 0; i < layers.size(); i++)
+	{
+		fileLay.SetNewJsonString(fileLay.ValueToObject(fileLay.GetRootValue()), label.c_str(), layers.at(i).c_str());
+		label = "Layer ";
+		label.append(std::to_string(i + 1));
+	}
+
 	return true;
 }
 
 void ModuleEditor::LogConsole(const char* string)
 {
 	if (mainMenuBar.GetConsole()) mainMenuBar.GetConsole()->AddLog(string);
+}
+
+std::vector<std::string> ModuleEditor::GetTags()
+{
+	return dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->GetTags();
+}
+
+std::vector<std::string> ModuleEditor::GetLayers()
+{
+	return dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->GetLayers();
 }

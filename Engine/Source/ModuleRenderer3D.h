@@ -24,7 +24,7 @@ public:
 	bool CleanUp();
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	void OnResize(int width, int height);
 

@@ -47,7 +47,7 @@ public:
 		return true;
 	}
 
-	virtual bool SaveConfig(JsonParsing& node) const
+	virtual bool SaveConfig(JsonParsing& node)
 	{
 		return true;
 	}

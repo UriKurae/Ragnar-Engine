@@ -340,7 +340,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
+bool ModuleRenderer3D::SaveConfig(JsonParsing& node)
 {
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "vsync", vsync);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "depth test", depthTest);

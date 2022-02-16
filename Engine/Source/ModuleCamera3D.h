@@ -24,7 +24,7 @@ public:
 	void SetPlanes();
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	void LookAt(float3& target);
 	int ContainsAaBox(const AABB& boundingBox);

@@ -16,10 +16,12 @@ class InspectorMenu : public Menu
 {
 public:
 	InspectorMenu();
-
 	~InspectorMenu();
 
 	bool Update(float dt);
+
+	std::vector<std::string> GetTags() { return tags; };
+	std::vector<std::string> GetLayers() { return layers; };
 
 private:
 	void DrawDefaultInspector(GameObject* obj);
