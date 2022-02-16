@@ -23,6 +23,9 @@ public:
 	std::vector<std::string> GetTags() { return tags; };
 	std::vector<std::string> GetLayers() { return layers; };
 
+	void SetTags(std::vector<std::string> tag) { tags = tag; };
+	void SetLayers(std::vector<std::string> lay) { layers = lay; };
+
 private:
 	void DrawDefaultInspector(GameObject* obj);
 	void DrawEditLists();
@@ -31,7 +34,7 @@ private:
 	std::string DrawList(const char* label, std::vector<std::string>* list, std::string& item);
 	void AddItem(const char* label);
 
-	void DrawListTagLayer(const char* label, std::vector<std::string> list);
+	void DrawListTagLayer(const char* label, std::vector<std::string>& list);
 	void AddTag(std::string newTag);
 	void AddLayer(std::string newLayer);
 

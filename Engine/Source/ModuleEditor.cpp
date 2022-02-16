@@ -136,29 +136,59 @@ void ModuleEditor::SetGO(GameObject* obj)
 
 bool ModuleEditor::LoadConfig(JsonParsing& node)
 {
+	std::vector<std::string> tags;
+	std::vector<std::string> layers;
+
+	// Save Tags
+	JSON_Array *jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "tags");
+	size_t size = node.GetJsonArrayCount(jsonArray);
+
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing tag = node.GetJsonArrayValue(jsonArray, i);
+		tags.push_back(tag.GetJsonString(std::to_string(i).c_str()));
+	}
+	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetTags(tags);
+	
+	// Save Layers
+	jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "layers");
+	size = node.GetJsonArrayCount(jsonArray);
+
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing lay = node.GetJsonArrayValue(jsonArray, i);
+		layers.push_back(lay.GetJsonString(std::to_string(i).c_str()));
+	}
+	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetLayers(layers);
+
 	return true;
 }
 
 bool ModuleEditor::SaveConfig(JsonParsing& node)
 {
-	JsonParsing fileTag = node.SetChild(node.GetRootValue(), "Tags");
-	std::string label = "tag 0";
+	JsonParsing fileTag = JsonParsing();
+
+	JSON_Array* jsonArray = node.SetNewJsonArray(node.GetRootValue(), "tags");
+	std::string label = "0";
 	std::vector<std::string> tags = GetTags();
 	for (int i = 0; i < tags.size(); i++)
 	{
+		fileTag = JsonParsing();
 		fileTag.SetNewJsonString(fileTag.ValueToObject(fileTag.GetRootValue()), label.c_str(), tags.at(i).c_str());
-		label = "tag ";
-		label.append(std::to_string(i + 1));
+		label = std::to_string(i + 1);
+		node.SetValueToArray(jsonArray, fileTag.GetRootValue());
 	}
-	
-	JsonParsing fileLay = node.SetChild(node.GetRootValue(), "Layers");
-	label = "Layer 0";
-	std::vector<std::string> layers = GetTags();
+
+	JsonParsing fileLay = JsonParsing();
+	jsonArray = node.SetNewJsonArray(node.GetRootValue(), "layers");
+	label = "0";
+	std::vector<std::string> layers = GetLayers();
 	for (int i = 0; i < layers.size(); i++)
 	{
+		fileLay = JsonParsing();
 		fileLay.SetNewJsonString(fileLay.ValueToObject(fileLay.GetRootValue()), label.c_str(), layers.at(i).c_str());
-		label = "Layer ";
-		label.append(std::to_string(i + 1));
+		label = std::to_string(i + 1);
+		node.SetValueToArray(jsonArray, fileLay.GetRootValue());
 	}
 
 	return true;

@@ -36,7 +36,8 @@ bool InspectorMenu::Update(float dt)
 				DrawDefaultInspector(obj);
 				obj->DrawEditor();
 			}
-			else {
+			else 
+			{
 				DrawEditLists();
 			}
 
@@ -161,12 +162,28 @@ void InspectorMenu::AddItem(const char* label)
 	}
 }
 
-void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string> list)
+void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string>& list)
 {
-	for (int i = 0; i < list.size(); i++)
+	for (int i = 0; i < list.size(); ++i)
 	{
-		ImGui::Text("%s %d: ", label, i);	ImGui::SameLine();
+		ImGui::Text("%s %d: ", label, i);	
+		ImGui::SameLine();
 		ImGui::Text(list.at(i).c_str());
+		ImGui::SameLine();
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - 15.0f);
+		ImGui::PushID(i);
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			for (std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it)
+			{
+				if ((*it) == list.at(i))
+				{
+					list.erase(it);
+					break;
+				}
+			}
+		}
+		ImGui::PopID();
 	}
 	ImGui::Separator();
 	ImGui::Text("New %s: ", label);	ImGui::SameLine();

@@ -31,6 +31,7 @@ public:
 	void SetResource(Resource* res);
 	void SetGO(GameObject* obj);
 	inline void SetSelectedParent(GameObject* obj) { selectedParent = obj; }
+	
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) override;
@@ -41,6 +42,7 @@ public:
 	inline Viewport* GetViewport() { return viewport; }
 	std::vector<std::string> GetTags();
 	std::vector<std::string> GetLayers();
+
 
 private:
 	MainMenuBar mainMenuBar;
