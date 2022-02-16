@@ -23,6 +23,14 @@ TransformComponent::TransformComponent(GameObject* own)
 	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
+
+	//// UNDO
+	//owner->entityPosition = position;
+	//owner->entityRotation= rotation;
+	//owner->entityScale = scale;
+
+	//owner->SetMouseMoveCommand(MouseMoveCommand(owner, float3::zero));
+	// UNDO
 	
 	if (owner->GetParent() != nullptr)
 	{
@@ -155,7 +163,7 @@ bool TransformComponent::OnSave(JsonParsing& node, JSON_Array* array)
 void TransformComponent::UpdateTransform()
 {
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
-
+	
 	if (owner->GetParent() && owner->GetParent() != app->scene->GetRoot())
 	{
 		TransformComponent* parentTr = owner->GetParent()->GetComponent<TransformComponent>();
@@ -165,6 +173,10 @@ void TransformComponent::UpdateTransform()
 	{
 		globalMatrix = localMatrix;
 	}
+
+	//owner->entityPosition = position;
+	//owner->entityRotation = rotation;
+	//owner->entityScale = scale;
 }
 
 void TransformComponent::UpdateChildTransform(GameObject* go)

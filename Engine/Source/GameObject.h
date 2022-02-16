@@ -70,7 +70,8 @@ public:
 
 	template<typename T>
 	T* GetComponent();
-
+	
+public:
 	std::string name;
 	bool active;
 	bool staticObj;
@@ -93,6 +94,8 @@ private:
 	IndexBuffer* index;
 
 	uint uuid;
+
+	//MouseMoveCommand mouseMoveCommand;
 
 	// Boolean to check if any component from audio (AudioSource, listener) has already been registered. 
 	bool audioRegistered;

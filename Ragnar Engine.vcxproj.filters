@@ -52,6 +52,9 @@
     <Filter Include="Sources\Libraries\WWise">
       <UniqueIdentifier>{bd1af3b5-ca65-4c5d-adab-cf27c3be5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Commands">
+      <UniqueIdentifier>{6c54a952-fc50-4805-b3b5-7fb3fd1c7100}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -316,6 +319,15 @@
     <ClInclude Include="Dependencies\Extras\IconsFontAwesome5.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Command.h">
+      <Filter>Sources\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\MouseCommands.h">
+      <Filter>Sources\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CommandsDispatcher.h">
+      <Filter>Sources\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -518,6 +530,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MouseCommands.cpp">
+      <Filter>Sources\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
