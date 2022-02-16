@@ -46,8 +46,16 @@ public:
 	inline float3 GetScale() const { return scale; }
 	inline float3 GetRotEditor() const { return rotationEditor; }
 
+	inline void SetPosition(const float3& newPosition) { position = newPosition; }
+	inline void SetRotation(const Quat& newRotation) { rotation = newRotation; }
+	inline void SetScale(const float3& newScale) { scale = newScale; }
+
 	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();
+
+	// UNDO
+	inline void ForceUpdateTransform() { changeTransform = true; }
+	// UNDO
 
 private:
 	float3 position;

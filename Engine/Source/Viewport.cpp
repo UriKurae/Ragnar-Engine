@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "ModuleInput.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
@@ -6,12 +7,17 @@
 #include "ModuleRenderer3D.h"
 #include "GameObject.h"
 
+#include "CommandsDispatcher.h"
+#include "MouseCommands.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/ImGuizmo.h"
 #include "Globals.h"
+
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -30,7 +36,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
-	if (ImGui::Begin("Scene", &active, ImGuiWindowFlags_NoScrollbar))
+	if (ImGui::Begin(ICON_FA_EYE" Scene", &active, ImGuiWindowFlags_NoScrollbar))
 	{
 		app->camera->canBeUpdated = true;	
 
@@ -61,10 +67,27 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 
 			math::float4x4 tr = app->editor->GetGO()->GetComponent<TransformComponent>()->GetLocalTransform().Transposed();
 			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+			static bool firstMove = false;
 			if (ImGuizmo::IsUsing())
 			{
-				app->editor->GetGO()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				GameObject* go = app->editor->GetGO();
+				if (!firstMove)
+				{
+					firstMove = true;
+
+					CommandDispatcher dispatcher;
+					dispatcher.Execute<MoveGameObjectCommand>(new MoveGameObjectCommand(go));
+				}
+				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 			}
+			else firstMove = false;
+		}
+
+		// TODO: Not the best place to call this
+		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
+		{
+			CommandDispatcher dispatcher;
+			dispatcher.Undo();
 		}
 
 		if (ImGui::BeginDragDropTarget())

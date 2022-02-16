@@ -5,6 +5,7 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "GameObject.h"
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -20,7 +21,7 @@ HierarchyMenu::~HierarchyMenu()
 
 bool HierarchyMenu::Update(float dt)
 {
-	ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
+	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
 	if (ImGui::Button("+"))
 	{
 		createGameObject = true;
@@ -55,11 +56,11 @@ bool HierarchyMenu::Update(float dt)
 
 	if (gameObjectOptions)
 	{
-		ImGui::OpenPopup("GameObject");
+		ImGui::OpenPopup(ICON_FA_CUBE" GameObject");
 
-		if (ImGui::BeginPopup("GameObject"))
+		if (ImGui::BeginPopup(ICON_FA_CUBE" GameObject"))
 		{
-			if (ImGui::Button("Move Up", ImVec2(100.0f, 30.0f)))
+			if (ImGui::Button(ICON_FA_ARROW_UP" Move Up", ImVec2(100.0f, 30.0f)))
 			{
 				if (selectedParent != nullptr)
 				{
@@ -71,7 +72,7 @@ bool HierarchyMenu::Update(float dt)
 				}
 				gameObjectOptions = false;
 			}
-			else if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button(ICON_FA_ARROW_DOWN" Move Down", ImVec2(100.0f, 30.0f)))
 			{
 				if (selectedParent != nullptr)
 				{
@@ -83,7 +84,7 @@ bool HierarchyMenu::Update(float dt)
 				}
 				gameObjectOptions = false;
 			}
-			else if (ImGui::Button("Delete", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button(ICON_FA_MINUS" Delete", ImVec2(100.0f, 30.0f)))
 			{
 				
 				if (selected && selected->GetComponent<CameraComponent>() == nullptr)
@@ -114,34 +115,34 @@ bool HierarchyMenu::Update(float dt)
 	}
 	else if (createGameObject)
 	{
-		ImGui::OpenPopup("Create GameObject");
-		if (ImGui::BeginPopup("Create GameObject"))
+		ImGui::OpenPopup(ICON_FA_PLUS" Create GameObject");
+		if (ImGui::BeginPopup(ICON_FA_PLUS" Create GameObject"))
 		{
-			if (ImGui::Selectable("Create Empty Object"))
+			if (ImGui::Selectable(ICON_FA_LAYER_GROUP" Create Empty Object"))
 			{
 				if (selected != nullptr) app->scene->CreateGameObject(selected);
 				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Cube"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cube"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
 				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Pyramide"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Pyramide"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
 				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Sphere"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Sphere"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
 				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Cylinder"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cylinder"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
 				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);

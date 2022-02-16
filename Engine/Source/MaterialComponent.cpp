@@ -9,6 +9,8 @@
 
 #include "Imgui/imgui.h"
 
+#include "IconsFontAwesome5.h"
+
 #include "Profiling.h"
 
 MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMenu(false)
@@ -35,7 +37,7 @@ void MaterialComponent::OnEditor()
 {
 	ImGui::PushID(this);
 
-	if (ImGui::CollapsingHeader("Material"))
+	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
 	{
 		Checkbox(this, "Active", active);
 		if (diff != nullptr)

@@ -8,6 +8,7 @@
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -23,7 +24,7 @@ InspectorMenu::~InspectorMenu()
 
 bool InspectorMenu::Update(float dt)
 {
-	ImGui::Begin("Inspector", &active);
+	ImGui::Begin(ICON_FA_INFO_CIRCLE" Inspector", &active);
 	if (!app->scene->GetRoot()->GetChilds().empty())
 	{
 		// The inspector is empty if no object is selected
@@ -88,7 +89,7 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 
 void InspectorMenu::DrawEditLists()
 {
-	if (ImGui::Button("Back"))
+	if (ImGui::Button(ICON_FA_BACKWARD" Back"))
 		item = ItemType::NONE;
 
 	// System to determine which node starts open 
@@ -179,7 +180,7 @@ void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string>
 
 	ImGui::SameLine();
 	ImGui::PushID(label);
-	if (ImGui::Button("Add ICON_FA_PLUS"))
+	if (ImGui::Button(ICON_FA_PLUS" Add"))
 	{
 		if (label == "Tag")
 		{

@@ -4,6 +4,8 @@
 #include "AudioManager.h"
 #include "TransformComponent.h"
 
+#include "IconsFontAwesome5.h"
+
 #include "Imgui/imgui_internal.h"
 
 ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans) : activeListener(true), transform(trans)
@@ -28,7 +30,7 @@ ListenerComponent::~ListenerComponent()
 void ListenerComponent::OnEditor()
 {
 	ImGui::PushID(this);
-	if (ImGui::CollapsingHeader("Listener"))
+	if (ImGui::CollapsingHeader(ICON_FA_HEADPHONES" Listener"))
 	{
 		ImGui::Text("AudioClip");
 		ImGui::SameLine(ImGui::GetWindowWidth() * 0.65f);
