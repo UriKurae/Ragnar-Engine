@@ -83,9 +83,6 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 		obj->GetComponents()[i]->OnEditor();
 	}
 	ImGui::NewLine();
-
-	// Draw Add Component button
-	//DrawAddComponent();
 }
 
 void InspectorMenu::DrawEditLists()

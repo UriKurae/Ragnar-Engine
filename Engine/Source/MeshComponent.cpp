@@ -113,10 +113,10 @@ void MeshComponent::OnEditor()
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mesh ? mesh.use_count() : 0);
 
-		if (ImGui::Button(ICON_FA_TRASH))
-		{
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+		if (ImGui::Button(ICON_FA_TRASH" Delete"))
 			owner->RemoveComponent(this);
-		}
+
 		ImGui::Separator();
 	}
 
