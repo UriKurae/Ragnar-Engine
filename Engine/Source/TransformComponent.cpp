@@ -208,6 +208,7 @@ void TransformComponent::SetAABB()
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 	}
+
 	app->scene->RecalculateAABB(owner);
 	app->scene->ResetQuadtree();
 }
