@@ -7,7 +7,10 @@
 #include "TextureImporter.h"
 #include "Mesh.h"
 #include "Model.h"
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+
+#include "Vertex.h"
+
+#include "Algorithm/Random/LCG.h"
 
 #include "Globals.h"
 
@@ -90,43 +93,47 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 {
 	RG_PROFILING_FUNCTION("Importing mesh");
 
-	std::vector<float3> vertices;
-	std::vector<float3> norms;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float2> texCoords;
+
+	//std::vector<float3> vertices;
+	//std::vector<float3> norms;
+	//std::vector<float2> texCoords;
 
 	int numVertices = mesh->mNumVertices;
 	int numFaces = mesh->mNumFaces;
 
-	vertices.reserve(numVertices);
+	//vertices.reserve(numVertices * 2);
 	indices.reserve(numFaces * 3);
-	texCoords.reserve(numVertices);
+	
+	//vertices.reserve(numVertices);
+	//texCoords.reserve(numVertices);
 
 	for (unsigned int i = 0; i < numVertices; ++i)
 	{
-		float3 vertex;
-		vertex.x = mesh->mVertices[i].x;
-		vertex.y = mesh->mVertices[i].y;
-		vertex.z = mesh->mVertices[i].z;
+		Vertex vertex;
+		vertex.position.x = mesh->mVertices[i].x;
+		vertex.position.y = mesh->mVertices[i].y;
+		vertex.position.z = mesh->mVertices[i].z;
 
-		float3 normals;
+		//float3 normals;
 		if (mesh->HasNormals())
 		{
-			normals.x = mesh->mNormals[i].x;
-			normals.y = mesh->mNormals[i].y;
-			normals.z = mesh->mNormals[i].z;
+			vertex.normal.x = mesh->mNormals[i].x;
+			vertex.normal.y = mesh->mNormals[i].y;
+			vertex.normal.z = mesh->mNormals[i].z;
 		}
 
-		float2 coords;
+		//float2 coords;
 		if (mesh->mTextureCoords[0])
 		{
-			coords.x = mesh->mTextureCoords[0][i].x;
-			coords.y = mesh->mTextureCoords[0][i].y;
+			vertex.texCoords.x = mesh->mTextureCoords[0][i].x;
+			vertex.texCoords.y = mesh->mTextureCoords[0][i].y;
 		}
 
-		norms.push_back(normals);
 		vertices.push_back(vertex);
-		texCoords.push_back(coords);
+		//norms.push_back(normals);
+		//texCoords.push_back(coords);
 	}
 
 	for (unsigned int i = 0; i < numFaces; ++i)

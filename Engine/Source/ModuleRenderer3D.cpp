@@ -8,6 +8,9 @@
 #include "ModuleScene.h"
 #include "Framebuffer.h"
 
+#include "Material.h"
+#include "Shader.h"
+
 #include "glew/include/GL/glew.h"
 
 #include "Imgui/imgui.h"
@@ -184,6 +187,14 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	
 
 	grid = new PGrid(200, 200);
+
+	defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
+	shaders.push_back(defaultShader);
+
+	// TODO: To be handled with the resource manager
+	//defaultMaterial = new Material();
+	//defaultMaterial->SetShader(defaultShader);
+
 
 	return ret;
 }
@@ -493,4 +504,32 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
+}
+
+Material* ModuleRenderer3D::GetDefaultMaterial()
+{
+	return defaultMaterial;
+}
+
+Shader* ModuleRenderer3D::GetDefaultShader()
+{
+	return defaultShader;
+}
+
+Shader* ModuleRenderer3D::AddShader(const std::string& path)
+{
+	Shader* shader = new Shader(path);
+	shaders.push_back(shader);
+
+	if (path.find("default"))
+	{
+		defaultShader = shader;
+	}
+
+	return shader;
+}
+
+void ModuleRenderer3D::AddMaterial(Material* material)
+{
+	materials.emplace_back(material);
 }

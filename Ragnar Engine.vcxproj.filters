@@ -55,6 +55,9 @@
     <Filter Include="Sources\Commands">
       <UniqueIdentifier>{6c54a952-fc50-4805-b3b5-7fb3fd1c7100}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Materials">
+      <UniqueIdentifier>{52cdcc85-30bb-48e1-a81a-2133027b065d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -328,6 +331,21 @@
     <ClInclude Include="Engine\Source\CommandsDispatcher.h">
       <Filter>Sources\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\VertexArray.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\BufferLayout.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ShaderHelpers.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Shader.h">
+      <Filter>Sources\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Material.h">
+      <Filter>Sources\Materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -533,6 +551,15 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\MouseCommands.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\VertexArray.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Shader.cpp">
+      <Filter>Sources\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Material.cpp">
+      <Filter>Sources\Materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

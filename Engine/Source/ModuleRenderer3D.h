@@ -12,6 +12,9 @@
 typedef unsigned int GLuint;
 
 class Framebuffer;
+class Material;
+class Shader;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -51,6 +54,14 @@ public:
 
 	void DrawCubeDirectMode();
 
+
+	Material* GetDefaultMaterial();
+	Shader* GetDefaultShader();
+
+	Shader* AddShader(const std::string& path);
+	void AddMaterial(Material* material);
+	inline const std::vector<Shader*>& GetShaders() { return shaders; }
+
 public:
 	PGrid* grid;
 
@@ -71,4 +82,11 @@ public:
 	bool wireMode;
 	bool vsync;
 	bool rayCast;
+
+private:
+	Material* defaultMaterial;
+	Shader* defaultShader;
+
+	std::vector<Shader*> shaders;
+	std::vector<Material*> materials;
 };

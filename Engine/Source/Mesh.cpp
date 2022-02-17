@@ -36,16 +36,25 @@ void Mesh::Load()
 	{
 		MeshImporter::LoadMesh(vertices, indices, normals, texCoords, libraryPath);
 
+		vertexArray = new VertexArray();
 		vbo = new VertexBuffer(vertices.data(), vertices.size() * sizeof(float3));
+		vbo->SetLayout({
+			{ShaderDataType::VEC3F, "position"},
+			{ShaderDataType::VEC3F, "normal"},
+			{ShaderDataType::VEC2F, "texCoords"}
+		});
+		vertexArray->AddVertexBuffer(*vbo);
+
 		ebo = new IndexBuffer(indices.data(), indices.size());
+		vertexArray->SetIndexBuffer(*ebo);
 
 		glGenBuffers(1, &tbo);
 		glBindBuffer(GL_ARRAY_BUFFER, tbo);
 		glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(float2), texCoords.data(), GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		vbo->Unbind();
-		ebo->Unbind();
+		//vbo->Unbind();
+		//ebo->Unbind();
 	}
 }
 
@@ -66,13 +75,15 @@ void Mesh::UnLoad()
 
 void Mesh::Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, float& colorLength)
 {
-	vbo->Bind();
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	//vbo->Bind();
+	//glVertexPointer(3, GL_FLOAT, 0, NULL);
+	//
+	//glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	//glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	//
+	//if (ebo != nullptr) ebo->Bind();
 
-	glBindBuffer(GL_ARRAY_BUFFER, tbo);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
-	if (ebo != nullptr) ebo->Bind();
+	vertexArray->Bind();
 
 	// Debug normals
 	if (verticesNormals)
@@ -80,11 +91,13 @@ void Mesh::Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, f
 	else if (faceNormals)
 		ShowFaceNormals(colorNormal, colorLength);
 
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, 0);
 
-	if (ebo != nullptr) ebo->Unbind();
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	if (vbo != nullptr) vbo->Unbind();
+	vertexArray->Unbind();
+
+	//if (ebo != nullptr) ebo->Unbind();
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//if (vbo != nullptr) vbo->Unbind();
 }
 
 void Mesh::ShowVertexNormals(float3& colorNormal, float &normalLength)

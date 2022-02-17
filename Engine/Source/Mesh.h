@@ -6,8 +6,10 @@
 #include "MathGeoLib/src/Math/float3.h"
 #include "MathGeoLib/src/Math/float2.h"
 
+#include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+
 
 struct ModelParameters;
 
@@ -39,6 +41,7 @@ private:
 	std::vector<float3> normals;
 	std::vector<float2> texCoords;
 
+	VertexArray* vertexArray;
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
 	unsigned int tbo;
