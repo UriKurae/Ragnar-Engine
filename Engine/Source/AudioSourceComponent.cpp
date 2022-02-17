@@ -106,6 +106,12 @@ void AudioSourceComponent::OnEditor()
 			StopClip();
 		}
 		
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			owner->RemoveComponent(this);
+		}
+
+		ImGui::Separator();
 	}
 	ImGui::PopID();
 }

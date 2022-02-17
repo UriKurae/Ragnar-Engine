@@ -31,6 +31,8 @@ public:
 
 	void SetMesh(std::shared_ptr<Resource> m);
 
+	bool HasMaterial();
+
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
 	inline void SetMaterial(MaterialComponent* mat) { material = mat; }
 

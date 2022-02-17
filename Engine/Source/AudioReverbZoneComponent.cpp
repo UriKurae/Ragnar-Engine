@@ -136,6 +136,11 @@ void AudioReverbZoneComponent::OnEditor()
 			ResizeReverbZone();
 			CompileBuffers();
 		}
+
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			owner->RemoveComponent(this);
+		}
 	}
 }
 

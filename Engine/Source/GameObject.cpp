@@ -233,9 +233,12 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
-		component = new MaterialComponent(this);
 		MeshComponent* m = GetComponent<MeshComponent>();
-		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
+		if (m != nullptr && !m->HasMaterial())
+		{
+			component = new MaterialComponent(this);
+			m->SetMaterial((MaterialComponent*)component);
+		}
 		break;
 	}
 
@@ -252,6 +255,19 @@ void GameObject::AddComponent(Component* component)
 {
 	component->SetOwner(this);
 	components.emplace_back(component);
+}
+
+void GameObject::RemoveComponent(Component* component)
+{
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if (*it == component)
+		{
+			components.erase(it);
+			RELEASE(component);
+			break;
+		}
+	}
 }
 
 void GameObject::CopyComponent(Component* component)

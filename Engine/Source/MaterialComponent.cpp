@@ -31,6 +31,12 @@ MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false
 MaterialComponent::~MaterialComponent()
 {
 	if (diff.use_count() - 1 == 1) diff->UnLoad();
+
+	MeshComponent* mesh = owner->GetComponent<MeshComponent>();
+	if (mesh)
+	{
+		mesh->SetMaterial(nullptr);
+	}
 }
 
 void MaterialComponent::OnEditor()
@@ -78,6 +84,12 @@ void MaterialComponent::OnEditor()
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 		}
+
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			owner->RemoveComponent(this);
+		}
+
 		ImGui::Separator();
 	}
 

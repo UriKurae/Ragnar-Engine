@@ -37,6 +37,13 @@ void ListenerComponent::OnEditor()
 		ImGui::Checkbox("##AudioClip", &activeListener);
 		ImGui::SameLine();
 		ImGui::Text("Listen");
+
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			owner->RemoveComponent(this);
+		}
+
+		ImGui::Separator();
 	}
 	ImGui::PopID();
 }

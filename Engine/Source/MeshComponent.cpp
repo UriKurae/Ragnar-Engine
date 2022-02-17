@@ -112,6 +112,11 @@ void MeshComponent::OnEditor()
 		ImGui::Text("Reference Count: ");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mesh ? mesh.use_count() : 0);
+
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			owner->RemoveComponent(this);
+		}
 		ImGui::Separator();
 	}
 
@@ -192,4 +197,11 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 
 		owner->SetAABB(localBoundingBox);
 	}
+}
+
+bool MeshComponent::HasMaterial()
+{
+	if (material) return true;
+	
+	return false;
 }
