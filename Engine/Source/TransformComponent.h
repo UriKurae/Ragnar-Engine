@@ -37,6 +37,7 @@ public:
 
 	void UpdateTransform();
 	void UpdateChildTransform(GameObject* go);
+	void NewAttachment();
 	void SetAABB();
 
 	inline float4x4 GetLocalTransform() const { return localMatrix; }

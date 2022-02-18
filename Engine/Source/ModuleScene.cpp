@@ -306,6 +306,8 @@ void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
 	parentObj->RemoveChild(gameObj);
 	gameObj->SetParent(go);
 	go->AddChild(gameObj);
+
+	gameObj->GetComponent<TransformComponent>()->NewAttachment();
 }
 
 bool ModuleScene::LoadScene(const char* name)

@@ -106,12 +106,12 @@ void MeshComponent::DrawOutline()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glPushMatrix();
-	float4x4 testGlobal = transform->GetGlobalTransform();
+	float4x4 testLocal = transform->GetLocalTransform();
 
-	testGlobal.scaleX += 0.05f;
-	testGlobal.scaleY += 0.05f;
-	testGlobal.scaleZ += 0.05f;
-	glMultMatrixf(testGlobal.Transposed().ptr());
+	testLocal.scaleX += 0.05f;
+	testLocal.scaleY += 0.05f;
+	testLocal.scaleZ += 0.05f;
+	glMultMatrixf(testLocal.Transposed().ptr());
 
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 

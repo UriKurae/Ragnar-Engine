@@ -102,9 +102,6 @@ void TransformComponent::OnEditor()
 	if (ImGui::CollapsingHeader(ICON_FA_ARROWS_ALT" Transform"))
 	{
 		ImGui::PushItemWidth(90);
-		//std::string test = std::to_string(position.x);
-		//char* pos = new char[test.length()];
-		//strcpy(pos, test.c_str());
 		
 		ShowTransformationInfo();
 
@@ -127,6 +124,13 @@ void TransformComponent::SetTransform(float4x4 trMatrix)
 	globalMatrix = trMatrix;
 	globalMatrix.Decompose(position, rotation, scale);
 	
+	TransformComponent* trans = owner->GetParent()->GetComponent<TransformComponent>();
+	if (trans)
+	{
+		localMatrix = trans->globalMatrix.Inverted() * globalMatrix;
+		localMatrix.Decompose(position, rotation, scale);
+	}
+
 	changeTransform = true;
 }
 
@@ -188,6 +192,16 @@ void TransformComponent::UpdateChildTransform(GameObject* go)
 	{
 		transform->globalMatrix = parentTrans->GetGlobalTransform() * transform->localMatrix;
 	}
+}
+
+void TransformComponent::NewAttachment()
+{
+	if (owner->GetParent() != app->scene->GetRoot())
+		localMatrix = owner->GetParent()->GetComponent<TransformComponent>()->GetGlobalTransform().Inverted().Mul(globalMatrix);
+	
+	localMatrix.Decompose(position, rotation, scale);
+	changeTransform = true;
+	//eulerRotation = rotation.ToEulerXYZ();
 }
 
 void TransformComponent::SetAABB()
