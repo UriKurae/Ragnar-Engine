@@ -29,7 +29,7 @@ void main()
 	//vNormal = normalMatrix * normal;
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
-	vTextureAlpha = textureAlpha;
+	vTextureAlpha = 1.0f;
 
 	vCamPos = camPos;
 }
@@ -48,7 +48,9 @@ in float vTextureAlpha;
 
 out vec4 fragColor;
 
-uniform sampler2D tex;
+//uniform sampler2D tex;
+layout(location = 0) uniform sampler2D tex;
+
 
 struct Material {
 	vec3 ambient;
@@ -156,19 +158,20 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 void main()
 {
-	vec3 norm = normalize(vNormal);
-	vec3 viewDir = normalize(camPos - vPosition);
+	//vec3 norm = normalize(vNormal);
+	//vec3 viewDir = normalize(camPos - vPosition);
+	//
+	//vec3 result = CalcDirLight(dirLight, norm, viewDir);
+	//
+	//for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
+	//	result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);
+	//
+	//vec3 finalColor = result;
+	//if (material.gammaCorrection)
+	//{
+	//	finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
+	//}
 
-	vec3 result = CalcDirLight(dirLight, norm, viewDir);
-
-	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
-		result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);
-
-	vec3 finalColor = result;
-	if (material.gammaCorrection)
-	{
-		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
-	}
-
-	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
+	//fragColor = texture(tex , vTexCoords) /** vTextureAlpha*/ * vec4(finalColor, 1);
+	fragColor = texture(tex, vTexCoords);
 }

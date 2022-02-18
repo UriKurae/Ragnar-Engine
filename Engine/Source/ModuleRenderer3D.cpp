@@ -213,7 +213,7 @@ bool ModuleRenderer3D::PostUpdate()
 	fbo->Bind();
 	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
 	
@@ -274,7 +274,7 @@ bool ModuleRenderer3D::PostUpdate()
 	
 	// Camera Component FBO
 	mainCameraFbo->Bind();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
@@ -307,6 +307,7 @@ bool ModuleRenderer3D::CleanUp()
 	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
+	RELEASE(defaultShader);
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();

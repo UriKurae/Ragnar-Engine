@@ -72,8 +72,9 @@ void Texture::DrawOnEditor()
 
 }
 
-void Texture::Bind()
+void Texture::Bind(unsigned int index)
 {
+	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, id);
 }
 

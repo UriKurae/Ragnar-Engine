@@ -74,16 +74,6 @@ bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
-	// UNDO ============================================================
-	// TODO: Get the current Game Object, detect Input and Undo
-	/*if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
-			app->editor->GetGO()->OnEndedAction();
-	}*/
-	// ================================================================
-
-
 	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)

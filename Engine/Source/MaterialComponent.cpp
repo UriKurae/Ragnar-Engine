@@ -42,6 +42,8 @@ MaterialComponent::~MaterialComponent()
 	{
 		mesh->SetMaterial(nullptr);
 	}
+
+	RELEASE(shader);
 }
 
 void MaterialComponent::OnEditor()
@@ -167,7 +169,8 @@ void MaterialComponent::Bind()
 
 	shader->Bind();
 
-	float4x4& model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
+	// Could not do view and proj each frame.
+	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	shader->SetUniformMatrix4f("model", model.Transposed());
 	float4x4 view = app->camera->matrixViewFrustum;
 	shader->SetUniformMatrix4f("view", view.Transposed());

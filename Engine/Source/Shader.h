@@ -32,6 +32,8 @@ public:
 
 	bool Refresh();
 
+	inline unsigned int GetId() { return rendererID; }
+
 	inline const std::string& GetName() { return name; }
 	inline void SetName(const std::string n) { name = n; }
 	char* GetLastModifiedDate();

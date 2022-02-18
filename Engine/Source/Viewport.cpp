@@ -29,6 +29,7 @@ Viewport::Viewport()
 
 Viewport::~Viewport()
 {
+	CommandDispatcher::Shutdown();
 }
 
 void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int currentOperation)
@@ -75,8 +76,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 				{
 					firstMove = true;
 
-					CommandDispatcher dispatcher;
-					dispatcher.Execute<MoveGameObjectCommand>(new MoveGameObjectCommand(go));
+					CommandDispatcher::Execute(new MoveGameObjectCommand(go));
 				}
 				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 			}
@@ -86,15 +86,12 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 		// TODO: Not the best place to call this
 		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
 		{
-			CommandDispatcher dispatcher;
-			dispatcher.Undo();
+			CommandDispatcher::Undo();
 		}
 		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_Y) == KeyState::KEY_UP)
 		{
-			CommandDispatcher dispatcher;
-			dispatcher.Redo();
+			CommandDispatcher::Redo();
 		}
-
 
 
 		if (ImGui::BeginDragDropTarget())

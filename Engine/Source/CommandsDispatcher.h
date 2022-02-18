@@ -9,14 +9,13 @@ class CommandDispatcher
 public:
 	CommandDispatcher() {}
 
-	template <typename T>
-	void Execute(Command* c)
+	static void Execute(Command* c)
 	{
 		c->Execute();
 		commands.push(c);
 	}
 
-	void Undo()
+	static void Undo()
 	{
 		if (!commands.empty())
 		{
@@ -27,7 +26,7 @@ public:
 		}
 	}
 
-	void Redo()
+	static void Redo()
 	{
 		if (!undoneCommands.empty())
 		{
@@ -37,13 +36,32 @@ public:
 		}
 	}
 
+	static void Shutdown()
+	{
+		while(!commands.empty())
+		{
+			Command* c = commands.top();
+			commands.pop();
+			delete c;
+			c = nullptr;
+		}
+
+		while (!undoneCommands.empty())
+		{
+			if (Command* c = undoneCommands.top())
+			{
+				undoneCommands.pop();
+				delete c;
+				c = nullptr;
+			}
+		}
+	}
+
 private:
 
 	static std::stack<Command*> commands;
 	static std::stack<Command*> undoneCommands;
-	static std::stack<Command> redoneCommands;
 };
 
 std::stack<Command*> CommandDispatcher::commands = {};
 std::stack<Command*> CommandDispatcher::undoneCommands = {};
-std::stack<Command> CommandDispatcher::redoneCommands = {};
