@@ -237,7 +237,9 @@ void GameObject::CopyComponent(Component* component)
 
 void GameObject::AddChild(GameObject* object)
 {
+	object->parent = this;
 	children.emplace_back(object);
+	if(object->parent != nullptr) object->GetComponent<TransformComponent>()->NewAttachment();
 }
 
 void GameObject::RemoveChild(GameObject* object)

@@ -195,6 +195,14 @@ bool MainMenuBar::Update(float dt)
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
 				else app->scene->CreateGameObject(nullptr);
 			}
+			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child"))
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
+			}
+			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent"))
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+			}
 			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
 			{
 				if (ImGui::MenuItem("Cube"))
