@@ -233,7 +233,7 @@ bool ModuleCamera3D::Update(float dt)
 			if (app->input->GetMouseZ() == 1) newPos += newFront * speed * 10;
 			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed * 10;
 
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP && !ImGuizmo::IsUsing())
 			{
 				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
 
