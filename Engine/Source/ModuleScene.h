@@ -63,8 +63,6 @@ public:
 	bool LoadScene(const char* name);
 	bool SaveScene(const char* name);
 
-	inline void RecalculateAABB(GameObject* go) { goToRecalculate = go; }
-
 	void DuplicateGO(GameObject* go, GameObject* parent);
 
 	//void AddToQuadtree(GameObject* go);
@@ -74,8 +72,6 @@ public:
 	inline void ResetQuadtree() { resetQuadtree = true; }
 
 	inline const std::string& SceneDirectory() const { return sceneDir; }
-
-	inline const GameObject* GetRecalculateGO() const { return goToRecalculate; }
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
@@ -91,7 +87,6 @@ private:
 	bool resetQuadtree;
 
 	GameTimer gameTimer;
-	GameObject* goToRecalculate;
 
 	std::string sceneDir;
 };

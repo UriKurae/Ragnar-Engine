@@ -15,7 +15,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -35,9 +35,6 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
-
-	RELEASE(vertex);
-	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -69,11 +66,6 @@ void GameObject::Draw()
 		{
 			component->Draw();
 		}
-	}
-
-	if (index && vertex && colliders)
-	{
-		DebugColliders();
 	}
 }
 
@@ -320,47 +312,13 @@ void GameObject::SetAABB(AABB newAABB, bool needToClean)
 	globalObb = newAABB;
 	globalObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
 
+	globalAabb.SetNegativeInfinity();
 	globalAabb.Enclose(globalObb);
-
-	if (parent != nullptr && parent != app->scene->GetRoot())
-	{
-		parent->SetAABB(globalAabb);
-	}
-
-	// Configure buffers
-	float3 corners[8];
-	globalAabb.GetCornerPoints(corners);
-	
-	unsigned int indices[24] = 
-	{
-		0,1,
-		1,3,
-		3,2,
-		2,0,
-
-		1,5,
-		4,6,
-		7,3,
-
-		6,7,
-		6,2,
-
-		7,5,
-		4,5,
-
-		4,0
-	};
-
-	if (index) RELEASE(index);
-	if (vertex) RELEASE(vertex);
-	index = new IndexBuffer(indices, 24);
-	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
-	index->Unbind();
-	vertex->Unbind();
 }
 
 void GameObject::SetAABB(OBB newOBB)
 {
+	globalObb = newOBB;
 	globalAabb.Enclose(newOBB);
 
 	//if (parent != nullptr && parent != app->scene->GetRoot())

@@ -74,7 +74,6 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	DrawList("Tag", &tags, obj->tag);
 	ImGui::SameLine();
 	DrawList("Layer", &layers, obj->layer);
-	ImGui::Checkbox("Colliders", &obj->colliders);
 	// Destroy object selected, pendingToDelete = true
 
 	ImGui::Separator();
@@ -83,9 +82,6 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 		obj->GetComponents()[i]->OnEditor();
 	}
 	ImGui::NewLine();
-
-	// Draw Add Component button
-	//DrawAddComponent();
 }
 
 void InspectorMenu::DrawEditLists()

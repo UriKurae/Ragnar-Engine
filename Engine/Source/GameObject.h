@@ -33,8 +33,6 @@ public:
 	void DrawOutline();
 	void DrawEditor();
 
-	void DebugColliders();
-
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
@@ -59,6 +57,7 @@ public:
 	void SetAABB(OBB newOBB);
 	void SetNewAABB();
 	inline AABB GetAABB() { return globalAabb; }
+	inline OBB GetOOB() { return globalObb; }
 	
 	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }
 
@@ -77,7 +76,6 @@ public:
 	std::string name;
 	bool active;
 	bool staticObj;
-	bool colliders;
 	std::string tag;
 	std::string layer;
 
@@ -91,9 +89,6 @@ private:
 
 	AABB globalAabb;
 	OBB globalObb;
-
-	VertexBuffer* vertex;
-	IndexBuffer* index;
 
 	uint uuid;
 

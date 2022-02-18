@@ -30,6 +30,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(std::shared_ptr<Resource> m);
+	void DebugColliders(float3* points, float3 color = float3::one);
 
 	bool HasMaterial();
 
@@ -53,4 +54,6 @@ private:
 	AABB localBoundingBox;
 
 	bool showMeshMenu;
+	bool showAABB = false;
+	bool showOBB = false;
 };

@@ -136,6 +136,7 @@
     <ClInclude Include="Engine\Source\LightComponent.h" />
     <ClInclude Include="Engine\Source\Lights.h" />
     <ClInclude Include="Engine\Source\Material.h" />
+    <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\MouseCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
     <ClInclude Include="Engine\Source\Command.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp" />
+    <ClCompile Include="Engine\Source\FogWarMenu.cpp" />
     <ClCompile Include="Engine\Source\Framebuffer.cpp" />
     <ClCompile Include="Engine\Source\GameObject.cpp" />
     <ClCompile Include="Engine\Source\GameTimer.cpp" />

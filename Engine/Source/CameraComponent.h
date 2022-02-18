@@ -28,6 +28,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	int CameraComponent::ContainsAaBox(const AABB& boundingBox);
+	Frustum* GetFrustum() { return &camera; };
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;

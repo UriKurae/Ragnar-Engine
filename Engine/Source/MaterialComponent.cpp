@@ -101,10 +101,9 @@ void MaterialComponent::OnEditor()
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 		}
 
-		if (ImGui::Button(ICON_FA_TRASH))
-		{
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+		if (ImGui::Button(ICON_FA_TRASH" Delete"))
 			owner->RemoveComponent(this);
-		}
 
 		ImGui::Separator();
 	}

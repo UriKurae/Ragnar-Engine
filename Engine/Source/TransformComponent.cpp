@@ -102,11 +102,11 @@ void TransformComponent::OnEditor()
 	if (ImGui::CollapsingHeader(ICON_FA_ARROWS_ALT" Transform"))
 	{
 		ImGui::PushItemWidth(90);
-		//std::string test = std::to_string(position.x);
-		//char* pos = new char[test.length()];
-		//strcpy(pos, test.c_str());
 		
 		ShowTransformationInfo();
+
+		if (ImGui::Button(ICON_FA_UNDO" Reset Transform"))
+			ResetTransform();
 
 		ImGui::Separator();
 	}
@@ -127,6 +127,13 @@ void TransformComponent::SetTransform(float4x4 trMatrix)
 	globalMatrix = trMatrix;
 	globalMatrix.Decompose(position, rotation, scale);
 	
+	TransformComponent* trans = owner->GetParent()->GetComponent<TransformComponent>();
+	if (trans)
+	{
+		localMatrix = trans->globalMatrix.Inverted() * globalMatrix;
+		localMatrix.Decompose(position, rotation, scale);
+	}
+
 	changeTransform = true;
 }
 
@@ -190,6 +197,16 @@ void TransformComponent::UpdateChildTransform(GameObject* go)
 	}
 }
 
+void TransformComponent::NewAttachment()
+{
+	if (owner->GetParent() != app->scene->GetRoot())
+		localMatrix = owner->GetParent()->GetComponent<TransformComponent>()->GetGlobalTransform().Inverted().Mul(globalMatrix);
+	
+	localMatrix.Decompose(position, rotation, scale);
+	changeTransform = true;
+	//eulerRotation = rotation.ToEulerXYZ();
+}
+
 void TransformComponent::SetAABB()
 {
 	std::vector<GameObject*> goList = owner->GetChilds();
@@ -199,8 +216,6 @@ void TransformComponent::SetAABB()
 	{
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
-		childOBB = tr->owner->GetAABB();
-		owner->SetAABB(childOBB);
 	}
 	if (owner->GetComponent<MeshComponent>())
 	{
@@ -208,7 +223,7 @@ void TransformComponent::SetAABB()
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 	}
-	app->scene->RecalculateAABB(owner);
+
 	app->scene->ResetQuadtree();
 }
 
@@ -271,7 +286,7 @@ void TransformComponent::ShowTransformationInfo()
 {
 	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
 
-	float3 rotationInEuler;
+
 	rotationInEuler.x = RADTODEG * rotationEditor.x;
 	rotationInEuler.y = RADTODEG * rotationEditor.y;
 	rotationInEuler.z = RADTODEG * rotationEditor.z;
@@ -289,4 +304,11 @@ void TransformComponent::ShowTransformationInfo()
 	}
 
 	if (DrawVec3(std::string("Scale: "), scale)) changeTransform = true;
+}
+
+void TransformComponent::ResetTransform() 
+{
+	SetTransform(math::float3::zero, math::Quat::identity, math::float3::one);
+	rotationEditor = rotationInEuler = math::float3::zero;
+	UpdateTransform();
 }

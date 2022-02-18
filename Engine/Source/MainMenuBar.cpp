@@ -12,9 +12,11 @@
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "FogWarMenu.h"
 #include "Texture.h"
 #include "TextureImporter.h"
 #include "ResourceManager.h"
+#include "ModuleEditor.h"
 
 #include "Dialogs.h"
 #include "IconsFontAwesome5.h"
@@ -25,13 +27,14 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 {
 	showMenu = false;
 
-	menus.reserve(6);
+	menus.reserve(7);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
 	menus.emplace_back(new InspectorMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new FogWarMenu());
 }
 
 MainMenuBar::~MainMenuBar()
@@ -183,6 +186,40 @@ bool MainMenuBar::Update(float dt)
 		if (ImGui::IsItemHovered())
 		{
 			ImGui::SetTooltip("Opens the view menu");
+		}
+
+		if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
+		{
+			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object"))
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
+				else app->scene->CreateGameObject(nullptr);
+			}
+			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
+			{
+				if (ImGui::MenuItem("Cube"))
+				{
+					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::CUBE, app->editor->GetGO());
+					else app->scene->Create3DObject(Object3D::CUBE, nullptr);
+				}
+				else if (ImGui::MenuItem("Pyramide"))
+				{
+					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, app->editor->GetGO());
+					else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
+				}
+				else if (ImGui::MenuItem("Sphere"))
+				{
+					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::SPHERE, app->editor->GetGO());
+					else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
+				}
+				else if (ImGui::MenuItem("Cylinder"))
+				{
+					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, app->editor->GetGO());
+					else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenu();
 		}
 
 		if (ImGui::BeginMenu(ICON_FA_INFO_CIRCLE" Help"))
