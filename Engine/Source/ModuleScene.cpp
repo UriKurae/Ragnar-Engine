@@ -16,7 +16,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), goToRecalculate(nullptr), camera(nullptr)
+ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -94,24 +94,6 @@ bool ModuleScene::Update(float dt)
 		DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
 		DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
 		frameSkip = false;
-	}
-
-	if (goToRecalculate && goToRecalculate->GetParent() != root)
-	{
-		std::stack<GameObject*> objects;
-		objects.push(goToRecalculate->GetParent());
-		while (!objects.empty())
-		{
-			GameObject* parent = objects.top();
-			objects.pop();
-
-			parent->ClearAABB();
-			parent->SetNewAABB();
-
-			if (parent->GetParent() != root) objects.push(parent->GetParent());
-		}
-
-		goToRecalculate = nullptr;
 	}
 
 	if (resetQuadtree)
@@ -306,6 +288,7 @@ void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
 	parentObj->RemoveChild(gameObj);
 	gameObj->SetParent(go);
 	go->AddChild(gameObj);
+	gameObj->GetComponent<TransformComponent>()->SetAABB();
 }
 
 bool ModuleScene::LoadScene(const char* name)

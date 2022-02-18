@@ -102,9 +102,6 @@ void TransformComponent::OnEditor()
 	if (ImGui::CollapsingHeader(ICON_FA_ARROWS_ALT" Transform"))
 	{
 		ImGui::PushItemWidth(90);
-		//std::string test = std::to_string(position.x);
-		//char* pos = new char[test.length()];
-		//strcpy(pos, test.c_str());
 		
 		ShowTransformationInfo();
 
@@ -199,8 +196,6 @@ void TransformComponent::SetAABB()
 	{
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
-		childOBB = tr->owner->GetAABB();
-		owner->SetAABB(childOBB);
 	}
 	if (owner->GetComponent<MeshComponent>())
 	{
@@ -209,7 +204,6 @@ void TransformComponent::SetAABB()
 		owner->SetAABB(newObb);
 	}
 
-	app->scene->RecalculateAABB(owner);
 	app->scene->ResetQuadtree();
 }
 

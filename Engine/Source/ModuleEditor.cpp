@@ -81,7 +81,6 @@ bool ModuleEditor::Update(float dt)
 				if (selected == (*i))
 				{
 					selectedParent->GetChilds().erase(i);
-					if (selected == app->scene->GetRecalculateGO()) app->scene->RecalculateAABB(nullptr);
 					RELEASE(selected);
 					app->scene->ResetQuadtree();
 					break;
