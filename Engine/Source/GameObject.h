@@ -11,6 +11,7 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "BillboardParticleComponent.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 
@@ -70,6 +71,7 @@ public:
 
 	template<typename T>
 	T* GetComponent();
+	Component* GetComponent(ComponentType type);
 
 	std::string name;
 	bool active;

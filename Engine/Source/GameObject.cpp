@@ -210,6 +210,7 @@ void GameObject::DebugColliders()
 Component* GameObject::CreateComponent(ComponentType type)
 {
 	Component* component = nullptr;
+	TransformComponent* transform = nullptr;
 
 	switch (type)
 	{
@@ -232,10 +233,19 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
-	case ComponentType::MATERIAL:
+	case ComponentType::MATERIAL: {
 		component = new MaterialComponent(this);
 		MeshComponent* m = GetComponent<MeshComponent>();
 		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
+		break;
+	}
+	/*case ComponentType::PARTICLE_SYSTEM:
+		transform = (TransformComponent*)GetComponent(ComponentType::TRANSFORM);
+		component = new ParticleSystem(this, transform);
+		break;*/
+	case ComponentType::BILLBOARD:
+		transform = (TransformComponent*)GetComponent(ComponentType::TRANSFORM);
+		component = new BillboardParticleComponent(this, transform);
 		break;
 	}
 
@@ -443,4 +453,18 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	{
 		children[i]->OnSave(node, array);
 	}
+}
+
+Component* GameObject::GetComponent(ComponentType type)
+{
+	for (int i = 0; i < components.size(); i++)
+	{
+		if (components[i] != nullptr)
+		{
+			if (components[i]->GetType() == type)
+				return components[i];
+		}
+	}
+
+	return nullptr;
 }

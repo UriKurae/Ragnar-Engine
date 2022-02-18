@@ -14,7 +14,9 @@ enum class ComponentType
 	CAMERA,
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
-	AUDIO_REVERB_ZONE
+	AUDIO_REVERB_ZONE,
+	PARTICLE_SYSTEM,
+	BILLBOARD,
 };
 
 class Component
@@ -49,6 +51,7 @@ public:
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) { return true; }
 
 public:
+
 	ComponentType type;
 	bool active;
 	GameObject* owner;

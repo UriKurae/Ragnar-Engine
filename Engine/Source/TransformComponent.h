@@ -49,11 +49,15 @@ public:
 	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();
 
-private:
+public:
+
 	float3 position;
 	Quat rotation;
 	float3 rotationEditor;
 	float3 scale;
+
+private:
+	
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
 

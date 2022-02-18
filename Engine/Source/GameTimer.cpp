@@ -1,5 +1,4 @@
 #include "GameTimer.h"
-
 #include "SDL\include\SDL.h"
 
 
@@ -14,9 +13,16 @@ GameTimer::~GameTimer()
 
 void GameTimer::Start()
 {
+	isRunning = true;
 	frameCounter++;
 	/*deltaTime = (float)GetTime() / 1000.0f;*/
 	timer = SDL_GetTicks();
+}
+
+void GameTimer::Stop()
+{
+	isRunning = false;
+	stopped_at = SDL_GetTicks();
 }
 
 void GameTimer::FinishUpdate()
@@ -32,6 +38,19 @@ int GameTimer::GetEngineTimeStartup() const
 int GameTimer::GetTime() const
 {
 	return (SDL_GetTicks() - timer);
+}
+
+
+Uint32 GameTimer::ReadTime()
+{
+	if (isRunning == true)
+	{
+		return SDL_GetTicks() - timer;
+	}
+	else
+	{
+		return stopped_at - timer;
+	}
 }
 
 void GameTimer::ResetTimer()
