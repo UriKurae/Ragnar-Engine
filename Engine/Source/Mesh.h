@@ -33,6 +33,12 @@ public:
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
 
 	void Reimport(ModelParameters& data);
+
+	float3 GetCenterMesh() { return centerPoint; };
+	void SetCenterMesh(float3 center) { centerPoint = center; };
+	float GetRadius() { return radius; };
+	void SetRadius(float rad) { radius = rad; };
+
 private:
 	std::vector<float3> vertices;
 	std::vector<unsigned int> indices;
@@ -44,4 +50,6 @@ private:
 	unsigned int tbo;
 
 	std::string path;
+	float3 centerPoint = float3::zero;
+	float radius;
 };

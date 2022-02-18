@@ -239,7 +239,8 @@ void GameObject::AddChild(GameObject* object)
 {
 	object->parent = this;
 	children.emplace_back(object);
-	if(object->parent != nullptr) object->GetComponent<TransformComponent>()->NewAttachment();
+	TransformComponent* trans = object->GetComponent<TransformComponent>();
+	if(object->parent != nullptr && trans) trans->NewAttachment();
 }
 
 void GameObject::RemoveChild(GameObject* object)

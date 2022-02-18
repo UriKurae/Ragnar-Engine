@@ -92,7 +92,7 @@ bool ModuleEditor::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
 	{
-		if (selected) app->scene->DuplicateGO(selected, selectedParent);
+		if (selected) app->scene->DuplicateGO(selected, selected->GetParent());
 	}
 
 	return ret;
