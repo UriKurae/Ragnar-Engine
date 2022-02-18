@@ -328,6 +328,9 @@
     <ClInclude Include="Engine\Source\CommandsDispatcher.h">
       <Filter>Sources\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\FogWarMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -533,6 +536,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\MouseCommands.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\FogWarMenu.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

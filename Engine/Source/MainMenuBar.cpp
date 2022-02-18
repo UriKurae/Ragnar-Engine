@@ -12,6 +12,7 @@
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "FogWarMenu.h"
 #include "Texture.h"
 #include "TextureImporter.h"
 #include "ResourceManager.h"
@@ -26,13 +27,14 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 {
 	showMenu = false;
 
-	menus.reserve(6);
+	menus.reserve(7);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
 	menus.emplace_back(new InspectorMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new FogWarMenu());
 }
 
 MainMenuBar::~MainMenuBar()
