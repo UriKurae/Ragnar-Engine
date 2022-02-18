@@ -133,6 +133,8 @@
     <ClInclude Include="Engine\Source\BufferLayout.h" />
     <ClInclude Include="Engine\Source\CameraComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
+    <ClInclude Include="Engine\Source\LightComponent.h" />
+    <ClInclude Include="Engine\Source\Lights.h" />
     <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\MouseCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
@@ -153,7 +155,6 @@
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
     <ClInclude Include="Engine\Source\InspectorMenu.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
-    <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\ListenerComponent.h" />
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
     <ClInclude Include="Engine\Source\MaterialComponent.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
+    <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp" />
@@ -230,7 +232,6 @@
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Source\InspectorMenu.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
-    <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\ListenerComponent.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />

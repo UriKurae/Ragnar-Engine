@@ -1,5 +1,5 @@
 #include "Globals.h"
-#include "Light.h"
+#include "OldLight.h"
 #include <gl/GL.h>
 
 #include "Profiling.h"

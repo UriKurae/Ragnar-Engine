@@ -158,20 +158,19 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 void main()
 {
-	//vec3 norm = normalize(vNormal);
-	//vec3 viewDir = normalize(camPos - vPosition);
-	//
-	//vec3 result = CalcDirLight(dirLight, norm, viewDir);
-	//
-	//for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
-	//	result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);
-	//
-	//vec3 finalColor = result;
-	//if (material.gammaCorrection)
-	//{
-	//	finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
-	//}
+	vec3 norm = normalize(vNormal);
+	vec3 viewDir = normalize(camPos - vPosition);
+	
+	vec3 result = CalcDirLight(dirLight, norm, viewDir);
+	
+	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
+		result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);
+	
+	vec3 finalColor = result;
+	if (material.gammaCorrection)
+	{
+		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
+	}
 
-	//fragColor = texture(tex , vTexCoords) /** vTextureAlpha*/ * vec4(finalColor, 1);
-	fragColor = texture(tex, vTexCoords);
+	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 }

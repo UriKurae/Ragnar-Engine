@@ -84,9 +84,6 @@
     <ClInclude Include="Engine\Source\Color.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Light.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\glmath.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
@@ -349,6 +346,12 @@
     <ClInclude Include="Engine\Source\Vertex.h">
       <Filter>Sources\Buffers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Lights.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\LightComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -377,9 +380,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Color.cpp">
       <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Light.cpp">
-      <Filter>Sources\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\glmath.cpp">
       <Filter>Sources\Containers</Filter>
@@ -563,6 +563,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Material.cpp">
       <Filter>Sources\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\LightComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

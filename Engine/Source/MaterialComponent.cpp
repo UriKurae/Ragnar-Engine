@@ -1,6 +1,7 @@
 #include "MaterialComponent.h"
 
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
@@ -23,6 +24,10 @@ MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMe
 	active = true;
 
 	shader = new Shader("Assets/Resources/Shaders/default.shader");
+	ambientColor = { 0.4,0.4,0.4 };
+	diffuseColor = ambientColor;
+	specularColor = { 0.5,0.5,0.5 };
+	shininess = 5.0f;
 }
 
 MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false)
@@ -31,6 +36,10 @@ MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false
 	diff = mat->diff;
 
 	shader = new Shader("Assets/Resources/Shaders/default.shader");
+	ambientColor = { 0.4,0.4,0.4 };
+	diffuseColor = ambientColor;
+	specularColor = { 0.5,0.5,0.5 };
+	shininess = 5.0f;
 }
 
 MaterialComponent::~MaterialComponent()
@@ -178,6 +187,27 @@ void MaterialComponent::Bind()
 	float4x4 normalMat = view;
 	normalMat.Inverse();
 	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
+
+
+	shader->SetUniformVec3f("material.ambient", ambientColor);
+	shader->SetUniformVec3f("material.diffuse", diffuseColor);
+	shader->SetUniformVec3f("material.specular", specularColor);
+	shader->SetUniform1f("material.shininess", shininess);
+	shader->SetUniform1f("material.gammaCorrection", 0);
+
+	if (app->renderer3D->goDirLight)
+	{
+		shader->SetUniformVec3f("dirLight.direction", app->renderer3D->dirLight->dir);
+		shader->SetUniformVec3f("dirLight.ambient", app->renderer3D->dirLight->ambient);
+		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
+		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
+	}
+	else
+	{
+		shader->SetUniformVec3f("dirLight.ambient", float3::zero);
+		shader->SetUniformVec3f("dirLight.diffuse", float3::zero);
+		shader->SetUniformVec3f("dirLight.specular", float3::zero);
+	}
 
 }
 

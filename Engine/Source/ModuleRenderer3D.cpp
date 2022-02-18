@@ -8,6 +8,9 @@
 #include "ModuleScene.h"
 #include "Framebuffer.h"
 
+#include "GameObject.h"
+#include "LightComponent.h"
+
 #include "Material.h"
 #include "Shader.h"
 
@@ -133,20 +136,20 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 			ret = false;
 		}
 		
-		GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
-		
-		lights[0].ref = GL_LIGHT0;
-		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-		lights[0].SetPos(0.0f, 0.0f, 2.5f);
-		lights[0].Init();
-		
-		GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
-
-		GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
+		//GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
+		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
+		//
+		//lights[0].ref = GL_LIGHT0;
+		//lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		//lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		//lights[0].SetPos(0.0f, 0.0f, 2.5f);
+		//lights[0].Init();
+		//
+		//GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
+		//
+		//GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
 		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
@@ -157,7 +160,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		blending = node.GetJsonBool("blending");
 		wireMode = node.GetJsonBool("wire mode");
 
-		lights[0].Active(true);
+		//lights[0].Active(true);
 		
 		if (depthTest) SetDepthTest();
 		if (cullFace) SetCullFace();
@@ -195,6 +198,13 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//defaultMaterial = new Material();
 	//defaultMaterial->SetShader(defaultShader);
 
+	dirLight = new DirectionalLight();
+	goDirLight = app->scene->CreateGameObject(0);
+	goDirLight->SetName("Directional Light");
+	ComponentLight* lightComp = new ComponentLight();
+	lightComp->SetLight(dirLight);
+	goDirLight->AddComponent(lightComp);
+	lightComp->SetOwner(goDirLight);
 
 	return ret;
 }

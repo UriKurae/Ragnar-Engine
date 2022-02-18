@@ -1,10 +1,11 @@
 #pragma once
 #include "Module.h"
 
-#include "Light.h"
+#include "Lights.h"
 
 #include <vector>
 #include "Primitive.h"
+#include "glmath.h"
 #include "SDL.h"
 
 #define MAX_LIGHTS 8
@@ -14,6 +15,7 @@ typedef unsigned int GLuint;
 class Framebuffer;
 class Material;
 class Shader;
+class GameObject;
 
 class ModuleRenderer3D : public Module
 {
@@ -68,7 +70,7 @@ private:
 public:
 	PGrid* grid;
 
-	Light lights[MAX_LIGHTS];
+	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	Mat4x4 projectionMatrix;
 
@@ -85,6 +87,9 @@ public:
 	bool wireMode;
 	bool vsync;
 	bool rayCast;
+
+	GameObject* goDirLight;
+	DirectionalLight* dirLight;
 
 private:
 	Material* defaultMaterial;
