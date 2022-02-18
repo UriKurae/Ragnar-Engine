@@ -125,7 +125,7 @@ bool ModuleCamera3D::Update(float dt)
 		float3 newPos = cameraFrustum.Pos();
 		float3 newFront = cameraFrustum.Front();
 		float3 newUp = cameraFrustum.Up();
-		float speed = 9.0f * dt;
+		float speed = 15.0f * dt;
 
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
 			speed *= 2;
@@ -155,7 +155,7 @@ bool ModuleCamera3D::Update(float dt)
 			if (dY != 0)
 			{
 				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt);
+				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt * 2);
 				newFront = rotateVertical * newFront;
 				newUp = rotateVertical * newUp;
 				newFront.Normalize();
@@ -230,8 +230,8 @@ bool ModuleCamera3D::Update(float dt)
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
 		if (app->editor->GetViewport()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y&& pos.y < size.y + size.w)
 		{
-			if (app->input->GetMouseZ() == 1) newPos += newFront * speed;
-			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed;
+			if (app->input->GetMouseZ() == 1) newPos += newFront * speed * 10;
+			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed * 10;
 
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
