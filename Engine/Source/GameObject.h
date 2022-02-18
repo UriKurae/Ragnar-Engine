@@ -43,9 +43,6 @@ public:
 	
 	void AddChild(GameObject* object);
 	void RemoveChild(GameObject* object);
-	void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
-
-	std::vector<GameObject*>::const_iterator FindChildren(GameObject* child) { return std::find(children.begin(), children.end(), child); };
 
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }

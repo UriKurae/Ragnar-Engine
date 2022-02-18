@@ -204,28 +204,25 @@ bool ModuleCamera3D::Update(float dt)
 				float3::Orthonormalize(newFront, newUp);
 			}
 		}
-		// Focus
+
 		if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
 		{
-			GameObject* objSelected = app->editor->GetGO();
-
-			if (objSelected != nullptr)
+			GameObject* target = app->editor->GetGO();
+			if (target != nullptr)
 			{
-				if (MeshComponent* mesh = objSelected->GetComponent<MeshComponent>())
-				{
-					float3 meshCenter = mesh->GetCenterPointInWorldCoords();
-					newFront = (meshCenter - cameraFrustum.Pos()).Normalized();
-					newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
-					const float meshRadius = mesh->GetSphereRadius();
-					const float currentDistance = meshCenter.Distance(cameraFrustum.Pos());
-					newPos = meshCenter + ((cameraFrustum.Pos() - meshCenter).Normalized() * meshRadius * 2);
-				}
-				else
-				{
-					float3 pivot = objSelected->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3);
-					newFront = (pivot - cameraFrustum.Pos()).Normalized();
-					newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
-				}
+				float3 maxPoint = target->GetAABB().maxPoint;
+				float3 minPoint = target->GetAABB().minPoint;
+
+				float3 h = (maxPoint - minPoint) / 2.0f;
+
+				float angle = DegToRad(cameraFrustum.VerticalFov()) / 2;
+
+				float3 distance = h / Tan(angle);
+
+				distance.x = (distance.x + 2.5f) * cameraFrustum.Front().x;
+				distance.y = distance.y * cameraFrustum.Front().y;
+				distance.z = (distance.z + 2.5f) * cameraFrustum.Front().z;
+				newPos = target->GetAABB().CenterPoint() - distance;
 			}
 		}
 		float4 size = app->editor->GetViewport()->GetBounds();

@@ -35,7 +35,7 @@ bool HierarchyMenu::Update(float dt)
 	GameObject* selected = app->editor->GetGO();
 	GameObject* selectedParent = app->editor->GetSelectedParent();
 	ImGuiTreeNodeFlags flags = ((selected == root) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
-	if (ImGui::TreeNodeEx(root, flags | ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnDoubleClick, root->GetName()))
+	if (ImGui::TreeNodeEx(root, flags, root->GetName()))
 	{
 		if (ImGui::BeginDragDropTarget())
 		{
@@ -190,7 +190,7 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 		if (obj != nullptr)
 		{
 			uint uuid = obj->GetUUID();
-			opened = ImGui::TreeNodeEx((void*)obj, flags | ImGuiTreeNodeFlags_OpenOnDoubleClick, obj->GetName());
+			opened = ImGui::TreeNodeEx((void*)obj, flags, obj->GetName());
 			if (ImGui::BeginDragDropSource())
 			{
 				ImGui::SetDragDropPayload("HierarchyItem", &uuid, sizeof(uint));

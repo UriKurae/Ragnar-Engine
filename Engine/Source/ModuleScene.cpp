@@ -189,34 +189,15 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 	if (createTransform) object->CreateComponent(ComponentType::TRANSFORM);
 	if (parent != nullptr)
 	{
-		object->SetParent(parent);
 		parent->AddChild(object);
+		object->SetParent(parent);
 	}
 	else
 	{
-		object->SetParent(root);
 		root->AddChild(object);
+		object->SetParent(root);
 	}
 	
-	return object;
-}
-
-GameObject* ModuleScene::CreateGameObjectChild(const char* name, GameObject* parent)
-{
-	GameObject* object = CreateGameObject(parent);
-	object->SetName(name);
-
-	return object;
-}
-
-GameObject* ModuleScene::CreateGameObjectParent(const char* name, GameObject* child)
-{
-	GameObject* object = CreateGameObject(child->GetParent());
-	object->SetName(name);
-
-	child->GetParent()->RemoveChildren(child->GetParent()->FindChildren(child));
-	object->AddChild(child);
-
 	return object;
 }
 

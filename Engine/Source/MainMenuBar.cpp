@@ -135,7 +135,6 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_WRENCH" Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
 			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
-			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
 
 			ImGui::EndMenu();
 		}
@@ -195,14 +194,6 @@ bool MainMenuBar::Update(float dt)
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
 				else app->scene->CreateGameObject(nullptr);
-			}
-			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child"))
-			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
-			}
-			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent"))
-			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
 			}
 			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
 			{
