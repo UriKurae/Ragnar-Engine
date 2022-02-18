@@ -1,10 +1,13 @@
 #include "HierarchyMenu.h"
 
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "Globals.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "GameObject.h"
+#include "LightComponent.h"
+
 #include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
@@ -22,6 +25,10 @@ HierarchyMenu::~HierarchyMenu()
 bool HierarchyMenu::Update(float dt)
 {
 	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
+	if (ImGui::Button("+"))
+	{
+		createGameObject = true;
+	}
 
 	int size = app->scene->GetGameObjectsList().size();
 	GameObject* root = app->scene->GetRoot();
@@ -104,6 +111,62 @@ bool HierarchyMenu::Update(float dt)
 				/*app->editor->SetSelected(nullptr);
 				app->editor->SetSelectedParent(nullptr);*/
 				gameObjectOptions = false;
+			}
+			ImGui::EndPopup();
+		}
+	}
+	else if (createGameObject)
+	{
+		ImGui::OpenPopup(ICON_FA_PLUS" Create GameObject");
+		if (ImGui::BeginPopup(ICON_FA_PLUS" Create GameObject"))
+		{
+			if (ImGui::Selectable(ICON_FA_LAYER_GROUP" Create Empty Object"))
+			{
+				if (selected != nullptr) app->scene->CreateGameObject(selected);
+				else app->scene->CreateGameObject(nullptr);
+				createGameObject = false;
+			}
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cube"))
+			{
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
+				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
+				createGameObject = false;
+			}
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Pyramide"))
+			{
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
+				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
+				createGameObject = false;
+			}
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Sphere"))
+			{
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
+				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
+				createGameObject = false;
+			}
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cylinder"))
+			{
+				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
+				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
+				createGameObject = false;
+			}
+			else if (ImGui::Selectable(ICON_FA_LIGHTBULB" Create Point Light"))
+			{
+				GameObject* go = 0;
+				if (selected != nullptr) go = app->scene->CreateGameObject(selected);
+				else go = app->scene->CreateGameObject(nullptr);
+
+				go->SetName("Point Light");
+				ComponentLight* lightComp = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+				PointLight* pl = new PointLight();
+				lightComp->SetLight(pl);
+				
+				app->renderer3D->AddPointLight(pl);
+				createGameObject = false;
+			}
+			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
+			{
+				createGameObject = false;
 			}
 			ImGui::EndPopup();
 		}

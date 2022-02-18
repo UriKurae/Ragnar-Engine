@@ -23,6 +23,6 @@ public:
 
 
 private:
-	Light* light;
+	Light* light = nullptr;
 
 };

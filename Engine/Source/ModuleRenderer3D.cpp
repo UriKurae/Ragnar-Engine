@@ -318,6 +318,14 @@ bool ModuleRenderer3D::CleanUp()
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
 	RELEASE(defaultShader);
+	RELEASE(dirLight);
+
+	for(auto& pl : pointLights)
+	{
+		delete pl;
+		pl = nullptr;
+	}
+	pointLights.clear();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -534,6 +542,11 @@ Shader* ModuleRenderer3D::AddShader(const std::string& path)
 void ModuleRenderer3D::AddMaterial(Material* material)
 {
 	materials.emplace_back(material);
+}
+
+void ModuleRenderer3D::AddPointLight(PointLight* pl)
+{
+	pointLights.push_back(pl);
 }
 
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)

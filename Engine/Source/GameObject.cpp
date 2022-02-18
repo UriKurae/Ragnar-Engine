@@ -4,6 +4,8 @@
 #include "ModuleScene.h"
 #include "Globals.h"
 
+#include "LightComponent.h"
+
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -236,12 +238,17 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
+	{
 		MeshComponent* m = GetComponent<MeshComponent>();
 		if (m != nullptr && !m->HasMaterial())
 		{
 			component = new MaterialComponent(this);
 			m->SetMaterial((MaterialComponent*)component);
 		}
+		break;
+	}
+	case ComponentType::LIGHT:
+		component = new ComponentLight();
 		break;
 	}
 

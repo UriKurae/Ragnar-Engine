@@ -6,6 +6,7 @@
 #include "LightComponent.h"
 
 #include "imgui/imgui.h"
+#include "IconsFontAwesome5.h"
 
 ComponentLight::ComponentLight()
 {
@@ -79,7 +80,7 @@ void ComponentLight::OnEditor()
 	{
 		case LightType::DIRECTIONAL:
 		{
-			if (ImGui::CollapsingHeader("Light", ImGuiTreeNodeFlags_DefaultOpen))
+			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light", ImGuiTreeNodeFlags_DefaultOpen))
 			{
 				ImGui::Separator();
 				ImGui::Dummy({ 10,10 });

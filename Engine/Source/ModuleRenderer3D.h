@@ -64,6 +64,9 @@ public:
 	void AddMaterial(Material* material);
 	inline const std::vector<Shader*>& GetShaders() { return shaders; }
 
+	void AddPointLight(PointLight* pl);
+	inline const std::vector<PointLight*>& GetPointLights() { return pointLights; }
+
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 
@@ -90,6 +93,8 @@ public:
 
 	GameObject* goDirLight;
 	DirectionalLight* dirLight;
+
+	std::vector<PointLight*> pointLights;
 
 private:
 	Material* defaultMaterial;
