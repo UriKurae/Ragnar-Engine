@@ -32,6 +32,7 @@ public:
 private:
 	bool checker;
 	bool showTexMenu;
+	bool showShaderMenu;
 
 	std::shared_ptr<Texture> diff = nullptr;
 	Shader* shader;

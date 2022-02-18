@@ -15,7 +15,7 @@
 
 #include "Profiling.h"
 
-MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMenu(false)
+MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMenu(false), showShaderMenu(false)
 {
 	type = ComponentType::MATERIAL;
 	owner = own;
@@ -30,7 +30,7 @@ MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMe
 	shininess = 5.0f;
 }
 
-MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false)
+MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), showShaderMenu(false)
 {
 	checker = mat->checker;
 	diff = mat->diff;
@@ -106,6 +106,15 @@ void MaterialComponent::OnEditor()
 			owner->RemoveComponent(this);
 
 		ImGui::Separator();
+
+		ImGui::Text("Select shader: ");
+		ImGui::SameLine();
+		if (ImGui::Button(shader->GetName().c_str()))
+		{
+			showShaderMenu = true;
+		}
+
+		ImGui::Separator();
 	}
 
 	if (showTexMenu)
@@ -135,6 +144,35 @@ void MaterialComponent::OnEditor()
 					res->Load();
 					if (diff.use_count() - 1 == 1) diff->UnLoad();
 					SetTexture(res);
+				}
+			}
+		}
+
+		ImGui::End();
+	}
+
+	if (showShaderMenu)
+	{
+		ImGui::Begin("Shaders", &showShaderMenu);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 size = ImGui::GetWindowSize();
+		ImVec2 mouse = ImGui::GetIO().MousePos;
+		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+		{
+			if (ImGui::GetIO().MouseClicked[0]) showShaderMenu = false;
+		}
+
+		std::vector<std::string> files;
+		app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
+		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+		{
+			if ((*it).find(".shader") != std::string::npos)
+			{
+				if (ImGui::Selectable((*it).c_str()))
+				{
+					RELEASE(shader);
+					shader = new Shader("Assets/Resources/Shaders/" + *it);
 				}
 			}
 		}
