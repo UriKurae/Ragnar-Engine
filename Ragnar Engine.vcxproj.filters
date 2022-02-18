@@ -331,6 +331,9 @@
     <ClInclude Include="Engine\Source\FogWarMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Style.h">
+      <Filter>Sources\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

@@ -31,7 +31,10 @@ public:
 	std::string& GetCurrentDir();
 	std::vector<Menu*> GetMenus() { return menus; };
 
-	void StyleTheme();
+	int GetStyle() { return style; };
+	void SetStyle(int _style);
+
+	//void StyleTheme();
 	void AlignWithView();
 	void AlignViewWithSelected();
 
@@ -45,4 +48,7 @@ private:
 
 	bool saveWindow;
 	std::vector<Menu*> menus;
+	std::vector<std::string> stylesList;
+	int style = 5;
+	float alphaStyle = 0.1f;
 };
