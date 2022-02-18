@@ -17,6 +17,7 @@
 #include "TextureImporter.h"
 #include "ResourceManager.h"
 #include "ModuleEditor.h"
+#include "ModuleCamera3D.h"
 
 #include "Dialogs.h"
 #include "IconsFontAwesome5.h"
@@ -228,6 +229,25 @@ bool MainMenuBar::Update(float dt)
 				}
 				ImGui::EndMenu();
 			}
+			ImGui::Separator();
+			if (app->editor->GetGO() == nullptr)
+			{
+				ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(128, 128, 128, 255));
+				ImGui::PushStyleColor(ImGuiCol_HeaderHovered, IM_COL32(128, 128, 128, 100));
+			}
+			if (ImGui::MenuItem("Align with view", "Ctrl+Shift+F"))
+			{
+				if (app->editor->GetGO()) AlignWithView();
+			}
+			if (ImGui::MenuItem("Align view to selected", "Alt+Shift+F"))
+			{
+				if (app->editor->GetGO()) AlignViewWithSelected();
+			}
+			if (app->editor->GetGO() == nullptr)
+			{
+				ImGui::PopStyleColor();
+				ImGui::PopStyleColor();
+			}
 			ImGui::EndMenu();
 		}
 
@@ -365,13 +385,29 @@ bool MainMenuBar::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
 	{
-		std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-		if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			{
+				AlignWithView();
+			}
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			{
+				AlignViewWithSelected();
+			}
+		}
 	}
+	
 	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
 	{
@@ -519,4 +555,31 @@ void MainMenuBar::StyleTheme()
 	style.GrabRounding = 3;
 	style.LogSliderDeadzone = 4;
 	style.TabRounding = 4;
+}
+// Object align with camera
+void MainMenuBar::AlignWithView()
+{
+	GameObject* temp = app->editor->GetGO();
+	if (temp != nullptr)
+	{
+		TransformComponent* transform = temp->GetComponent<TransformComponent>();
+		float4x4 matrix = transform->GetGlobalTransform();
+		Frustum frus = app->camera->cameraFrustum;
+		matrix.SetTranslatePart(frus.Pos());
+		float3x3 rot{ frus.WorldRight(), frus.Up(), frus.Front() };
+		matrix.SetRotatePart(rot.ToQuat());
+		transform->SetTransform(matrix);
+	}
+}
+// Camera align with object
+void MainMenuBar::AlignViewWithSelected()
+{
+	GameObject* temp = app->editor->GetGO();
+	if (temp != nullptr)
+	{
+		TransformComponent* transform = temp->GetComponent<TransformComponent>();
+		float4x4 matrix = transform->GetGlobalTransform();
+		float3x3 rot = matrix.RotatePart();
+		app->camera->cameraFrustum.SetFrame(transform->GetGlobalTransform().Col3(3), rot.Col3(2), rot.Col3(1));
+	}
 }

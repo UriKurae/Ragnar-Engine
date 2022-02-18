@@ -16,6 +16,7 @@ public:
 
 	bool Start();
 	bool Update(float dt) override;
+	void Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos);
 	bool CleanUp();
 
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);

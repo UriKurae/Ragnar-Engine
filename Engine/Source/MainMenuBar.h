@@ -32,6 +32,8 @@ public:
 	std::vector<Menu*> GetMenus() { return menus; };
 
 	void StyleTheme();
+	void AlignWithView();
+	void AlignViewWithSelected();
 
 private:
 	bool showMenu;
