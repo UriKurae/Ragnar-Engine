@@ -15,7 +15,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -35,6 +35,9 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
+
+	RELEASE(vertex);
+	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -66,6 +69,11 @@ void GameObject::Draw()
 		{
 			component->Draw();
 		}
+	}
+
+	if (index && vertex && colliders)
+	{
+		DebugColliders();
 	}
 }
 
