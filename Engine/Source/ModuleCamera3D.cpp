@@ -266,7 +266,7 @@ bool ModuleCamera3D::Update(float dt)
 							MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
 							if (meshComponent)
 							{
-								const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
+								const std::vector<Vertex>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
 								const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
 
 								float distance = 0.0f;
@@ -282,7 +282,8 @@ bool ModuleCamera3D::Update(float dt)
 								picking.Transform(transform->GetGlobalTransform().Inverted());
 								for (int i = 0; i < size; i += 3)
 								{
-									const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i + 1]], meshVertices[meshIndices[i + 2]]);
+									// TODO: Is this ok?
+									const math::Triangle tri(meshVertices[meshIndices[i]].position, meshVertices[meshIndices[i + 1]].position, meshVertices[meshIndices[i + 2]].position);
 									if (picking.Intersects(tri, &distance, &hitPoint))
 									{
 										closestDistance = distance;

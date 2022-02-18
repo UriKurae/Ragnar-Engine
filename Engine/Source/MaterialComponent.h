@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Component.h"
+#include "Shader.h"
+
 #include <string>
 #include <memory>
 
@@ -22,8 +24,8 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void BindTexture();
-	void UnbindTexture();
+	void Bind();
+	void Unbind();
 
 	void SetTexture(std::shared_ptr<Resource> tex);
 
@@ -31,5 +33,6 @@ private:
 	bool checker;
 	bool showTexMenu;
 
-	std::shared_ptr<Texture> diff;
+	std::shared_ptr<Texture> diff = nullptr;
+	Shader* shader;
 };

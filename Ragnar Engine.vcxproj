@@ -184,6 +184,7 @@
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
+    <ClInclude Include="Engine\Source\Vertex.h" />
     <ClInclude Include="Engine\Source\VertexArray.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />

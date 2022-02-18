@@ -153,6 +153,7 @@ bool ModuleScene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
+
 	qTree.DebugDraw();
 
 	std::stack<GameObject*> stack;
@@ -427,50 +428,50 @@ void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
 
 void ModuleScene::ImportPrimitives()
 {
-	std::vector<float3> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float3> normals;
-	std::vector<float2> texCoords;
+	//std::vector<float3> normals;
+	//std::vector<float2> texCoords;
 
-	RCube::CreateCube(vertices, indices, texCoords);
+	RCube::CreateCube(vertices, indices);
 	std::string library;
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RPyramide::CreatePyramide(vertices, indices, texCoords);
+	RPyramide::CreatePyramide(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RSphere::CreateSphere(vertices, normals, indices, texCoords);
+	RSphere::CreateSphere(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
+	RCylinder::CreateCylinder(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 }
 
 void ModuleScene::Play()

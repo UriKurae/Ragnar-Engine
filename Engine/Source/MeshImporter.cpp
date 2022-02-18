@@ -20,43 +20,43 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 {
 	RG_PROFILING_FUNCTION("Importing mesh");
 
-	std::vector<float3> vertices;
-	std::vector<float3> norms;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float2> texCoords;
+	//std::vector<float3> norms;
+	//std::vector<float2> texCoords;
 
 	int numVertices = mesh->mNumVertices;
 	int numFaces = mesh->mNumFaces;
 
-	vertices.reserve(numVertices);
+	//vertices.reserve(numVertices);
 	indices.reserve(numFaces * 3);
-	texCoords.reserve(numVertices);
+	//texCoords.reserve(numVertices);
 
 	for (unsigned int i = 0; i < numVertices; ++i)
 	{
-		float3 vertex;
-		vertex.x = mesh->mVertices[i].x;
-		vertex.y = mesh->mVertices[i].y;
-		vertex.z = mesh->mVertices[i].z;
+		Vertex vertex;
+		vertex.position.x = mesh->mVertices[i].x;
+		vertex.position.y = mesh->mVertices[i].y;
+		vertex.position.z = mesh->mVertices[i].z;
 
-		float3 normals;
+		//float3 normals;
 		if (data.normals && mesh->HasNormals())
 		{
-			normals.x = mesh->mNormals[i].x;
-			normals.y = mesh->mNormals[i].y;
-			normals.z = mesh->mNormals[i].z;
-			norms.push_back(normals);
+			vertex.normal.x = mesh->mNormals[i].x;
+			vertex.normal.y = mesh->mNormals[i].y;
+			vertex.normal.z = mesh->mNormals[i].z;
+			//norms.push_back(normals);
 		}
 
-		float2 coords;
+		//float2 coords;
 		if (mesh->mTextureCoords[0])
 		{
-			coords.x = mesh->mTextureCoords[0][i].x;
-			coords.y = mesh->mTextureCoords[0][i].y;
+			vertex.texCoords.x = mesh->mTextureCoords[0][i].x;
+			vertex.texCoords.y = mesh->mTextureCoords[0][i].y;
 		}
 
 		vertices.push_back(vertex);
-		texCoords.push_back(coords);
+		//texCoords.push_back(coords);
 	}
 
 	for (unsigned int i = 0; i < numFaces; ++i)
@@ -68,7 +68,7 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 		}
 	}
 
-	SaveMesh(library, vertices, indices, norms, texCoords);
+	SaveMesh(library, vertices, indices/*, norms, texCoords*/);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -104,7 +104,7 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	int numFaces = mesh->mNumFaces;
 
 	//vertices.reserve(numVertices * 2);
-	indices.reserve(numFaces * 3);
+	//indices.reserve(numFaces * 3);
 	
 	//vertices.reserve(numVertices);
 	//texCoords.reserve(numVertices);
@@ -155,7 +155,7 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, assetsPath, meshName);
 	uids.push_back(uid);
 	
-	SaveMesh(meshName, vertices, indices, norms, texCoords);
+	SaveMesh(meshName, vertices, indices/*, norms, texCoords*/);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -176,20 +176,21 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 }
 
-void MeshImporter::SaveMesh(std::string& name, std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords)
+void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
 {
-	unsigned int header[4] = { vertices.size(), indices.size(), normals.size(), texCoords.size() };
+	unsigned int ranges[2] = { vertices.size(), indices.size() };
 
-	uint size = sizeof(header) + sizeof(float3) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(float3) * normals.size() + sizeof(float2) * texCoords.size();
+	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size();
 
-	char* buffer = new char[size];
-	char* cursor = buffer;
+	char* fileBuffer = new char[size];
+	char* cursor = fileBuffer;
 
-	uint bytes = sizeof(header);
-	memcpy(cursor, header, bytes);
+	unsigned int bytes = sizeof(ranges);
+	memcpy(cursor, ranges, bytes);
 	cursor += bytes;
 
-	bytes = sizeof(float3) * vertices.size();
+
+	bytes = sizeof(Vertex) * vertices.size();
 	memcpy(cursor, vertices.data(), bytes);
 	cursor += bytes;
 
@@ -197,60 +198,74 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<float3>& vertices, st
 	memcpy(cursor, indices.data(), bytes);
 	cursor += bytes;
 
-	bytes = sizeof(float3) * normals.size();
-	memcpy(cursor, normals.data(), bytes);
-	cursor += bytes;
-
-	bytes = sizeof(float2) * texCoords.size();
-	memcpy(cursor, texCoords.data(), bytes);
-	cursor += bytes;
-
-	if (app->fs->Save(name.c_str(), buffer, size) > 0)
+	if (app->fs->Save(name.c_str(), fileBuffer, size) > 0)
 		DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
 
-	RELEASE_ARRAY(buffer);
+	delete[] fileBuffer;
+
+
+	//unsigned int header[2] = { vertices.size(), indices.size() };
+
+	//uint size = sizeof(header) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size();
+
+	//char* buffer = new char[size];
+	//char* cursor = buffer;
+
+	//uint bytes = sizeof(header);
+	//memcpy(cursor, header, bytes);
+	//cursor += bytes;
+
+	//bytes = sizeof(Vertex) * vertices.size();
+	//memcpy(cursor, vertices.data(), bytes);
+	//cursor += bytes;
+
+	//bytes = sizeof(unsigned int) * indices.size();
+	//memcpy(cursor, indices.data(), bytes);
+	//cursor += bytes;
+
+	////bytes = sizeof(float3) * normals.size();
+	////memcpy(cursor, normals.data(), bytes);
+	////cursor += bytes;
+	////
+	////bytes = sizeof(float2) * texCoords.size();
+	////memcpy(cursor, texCoords.data(), bytes);
+	////cursor += bytes;
+
+	//if (app->fs->Save(name.c_str(), buffer, size) > 0)
+	//	DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
+
+	//RELEASE_ARRAY(buffer);
 }
 
-void MeshImporter::LoadMesh(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords, std::string& path)
+void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::string& path)
 {
 	char* buffer = nullptr;
 
 	if (app->fs->Load(path.c_str(), &buffer) > 0)
 	{
+		//char* buffer = nullptr;
+
 		char* cursor = buffer;
-		unsigned int* header = new unsigned int[4];
+		unsigned int ranges[2];
 
-		// Loading header information
-		uint bytes = sizeof(header) * sizeof(unsigned int);
-		memcpy(header, buffer, bytes);
+		unsigned int bytes = sizeof(ranges);
+		memcpy(ranges, cursor, bytes);
 		cursor += bytes;
 
-		// Setting information
-		vertices.resize(header[0]);
-		indices.resize(header[1]);
-		normals.resize(header[2]);
-		texCoords.resize(header[3]);
+		vertices.resize(ranges[0]);
+		indices.resize(ranges[1]);
 
-		// Loading vertices
-		bytes = sizeof(float3) * vertices.size();
-		memcpy(&vertices[0], cursor, bytes);
+		// Load vertices
+		bytes = sizeof(Vertex) * vertices.size();
+		memcpy(vertices.data(), cursor, bytes);
 		cursor += bytes;
 
-		// Loading indices
+		// Load indices
 		bytes = sizeof(unsigned int) * indices.size();
 		memcpy(indices.data(), cursor, bytes);
 		cursor += bytes;
 
-		// Loading normals
-		bytes = sizeof(float3) * normals.size();
-		memcpy(normals.data(), cursor, bytes);
-		cursor += bytes;
-
-		// Loading texture coordinates
-		bytes = sizeof(float2) * texCoords.size();
-		memcpy(texCoords.data(), cursor, bytes);
-
-		RELEASE_ARRAY(header);
+		RELEASE_ARRAY(buffer);
 	}
 	else
 		DEBUG_LOG("Mesh file not found!");

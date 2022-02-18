@@ -209,16 +209,14 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
 	fbo->Bind();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-
+	
 	grid->Draw();
 	std::set<GameObject*> objects;
 	// TODO: wtf quadtree man.
@@ -226,19 +224,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);
-	
-	if (app->camera->visualizeFrustum)
-	{
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			(*it)->Draw();
-		}
-	}
-	else
-	{
-		app->scene->Draw();
-	}
-
+		
 	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
 	{
 		glColor3f(0.25f, 0.87f, 0.81f);
@@ -267,36 +253,41 @@ bool ModuleRenderer3D::PostUpdate()
 		glLineWidth(1.0f);
 	}
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
+	//glPopMatrix();
+	//glPopMatrix();
+
+	
+	if (app->camera->visualizeFrustum)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			(*it)->Draw();
+		}
+	}
+	else
+	{
+		app->scene->Draw();
+	}
 
 	fbo->Unbind();
 
+	
 	// Camera Component FBO
-
 	mainCameraFbo->Bind();
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
 	grid->Draw();
+
+	//glPopMatrix();
+	//glPopMatrix();
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw();
 	}
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
 
 	mainCameraFbo->Unbind();
 
@@ -532,4 +523,15 @@ Shader* ModuleRenderer3D::AddShader(const std::string& path)
 void ModuleRenderer3D::AddMaterial(Material* material)
 {
 	materials.emplace_back(material);
+}
+
+void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
+{
+	//glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(proj.Transposed().ptr());
+
+	//glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(view.Transposed().ptr());
 }

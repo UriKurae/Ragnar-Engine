@@ -1,6 +1,7 @@
 #include "MaterialComponent.h"
 
 #include "Application.h"
+#include "ModuleCamera3D.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Texture.h"
@@ -20,12 +21,16 @@ MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMe
 	checker = false;
 	
 	active = true;
+
+	shader = new Shader("Assets/Resources/Shaders/default.shader");
 }
 
 MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false)
 {
 	checker = mat->checker;
 	diff = mat->diff;
+
+	shader = new Shader("Assets/Resources/Shaders/default.shader");
 }
 
 MaterialComponent::~MaterialComponent()
@@ -151,14 +156,34 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void MaterialComponent::BindTexture()
+void MaterialComponent::Bind()
 {
-	if (diff) diff->Bind();
+	// Crash when creating a primitive
+	if (!this)
+		return;
+
+	if (diff)
+		diff->Bind();
+
+	shader->Bind();
+
+	float4x4& model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
+	shader->SetUniformMatrix4f("model", model.Transposed());
+	float4x4 view = app->camera->matrixViewFrustum;
+	shader->SetUniformMatrix4f("view", view.Transposed());
+	shader->SetUniformMatrix4f("projection", app->camera->matrixProjectionFrustum.Transposed());
+	float4x4 normalMat = view;
+	normalMat.Inverse();
+	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
+
 }
 
-void MaterialComponent::UnbindTexture()
+void MaterialComponent::Unbind()
 {
+	// Crash when creating a primitive
+	if (!this) return;
 	if (diff) diff->Unbind();
+	shader->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)

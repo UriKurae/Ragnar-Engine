@@ -62,6 +62,9 @@ public:
 	void AddMaterial(Material* material);
 	inline const std::vector<Shader*>& GetShaders() { return shaders; }
 
+private:
+	void PushCamera(const float4x4& proj, const float4x4& view);
+
 public:
 	PGrid* grid;
 

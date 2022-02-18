@@ -346,6 +346,9 @@
     <ClInclude Include="Engine\Source\Material.h">
       <Filter>Sources\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Vertex.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

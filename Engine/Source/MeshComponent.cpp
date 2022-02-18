@@ -47,43 +47,44 @@ MeshComponent::~MeshComponent()
 
 void MeshComponent::Draw()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
+	//glPushMatrix();
+	//glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	
-	if (material != nullptr && material->GetActive()) material->BindTexture();
+	
+	if (material != nullptr && material->GetActive()) material->Bind();
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
-
-	if (material != nullptr && material->GetActive()) material->UnbindTexture();
 	
-	glPopMatrix();
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (material != nullptr && material->GetActive()) material->Unbind();
+	
+	//glPopMatrix();
+	//
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void MeshComponent::DrawOutline()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	float4x4 testGlobal = transform->GetGlobalTransform();
+	//glPushMatrix();
+	//float4x4 testGlobal = transform->GetGlobalTransform();
 
-	testGlobal.scaleX += 0.05f;
-	testGlobal.scaleY += 0.05f;
-	testGlobal.scaleZ += 0.05f;
-	glMultMatrixf(testGlobal.Transposed().ptr());
+	//testGlobal.scaleX += 0.05f;
+	//testGlobal.scaleY += 0.05f;
+	//testGlobal.scaleZ += 0.05f;
+	//glMultMatrixf(testGlobal.Transposed().ptr());
 
-	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+	//if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
-	glPopMatrix();
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glPopMatrix();
+	//
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void MeshComponent::OnEditor()
@@ -165,7 +166,7 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
+		localBoundingBox.Enclose(&mesh->GetVerticesData()->position, mesh->GetVerticesSize());
 
 		owner->SetAABB(localBoundingBox);
 	}
@@ -193,7 +194,7 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
+		localBoundingBox.Enclose(&mesh->GetVerticesData()->position, mesh->GetVerticesSize());
 
 		owner->SetAABB(localBoundingBox);
 	}

@@ -61,11 +61,14 @@ void GameObject::Draw()
 	//		GetAllComponent<MeshComponent>()[i]->Draw();
 	//	}
 	//}
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		Component* component = components[i];
 		if (component->GetActive())
+		{
 			component->Draw();
+		}
 	}
 
 	if (index && vertex && colliders)
@@ -165,7 +168,7 @@ void GameObject::DebugColliders()
 	index->Bind();
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 1.0f, 0.0f);
-	glDrawElements(GL_LINES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, index->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	vertex->Unbind();

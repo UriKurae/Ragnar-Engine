@@ -286,7 +286,7 @@ void QuadtreeNode::DebugDraw()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	ebo->Bind();
 
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 
 	vbo->Unbind();
 	ebo->Unbind();

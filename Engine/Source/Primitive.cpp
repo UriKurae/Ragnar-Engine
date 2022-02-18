@@ -658,7 +658,7 @@ void PGrid::Draw()
 	glEnableClientState(GL_VERTEX_ARRAY);
 	vertex->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	glDrawArrays(GL_LINES, 0, vertex->GetSize());
+	glDrawArrays(GL_LINES, 0, vertex->GetCount());
 
 	DrawAxis();
 
