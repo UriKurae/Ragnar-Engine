@@ -108,6 +108,9 @@ void TransformComponent::OnEditor()
 		
 		ShowTransformationInfo();
 
+		if (ImGui::Button(ICON_FA_UNDO" Reset Transform"))
+			ResetTransform();
+
 		ImGui::Separator();
 	}
 }
@@ -272,7 +275,7 @@ void TransformComponent::ShowTransformationInfo()
 {
 	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
 
-	float3 rotationInEuler;
+
 	rotationInEuler.x = RADTODEG * rotationEditor.x;
 	rotationInEuler.y = RADTODEG * rotationEditor.y;
 	rotationInEuler.z = RADTODEG * rotationEditor.z;
@@ -290,4 +293,11 @@ void TransformComponent::ShowTransformationInfo()
 	}
 
 	if (DrawVec3(std::string("Scale: "), scale)) changeTransform = true;
+}
+
+void TransformComponent::ResetTransform() 
+{
+	SetTransform(math::float3::zero, math::Quat::identity, math::float3::one);
+	rotationEditor = rotationInEuler = math::float3::zero;
+	UpdateTransform();
 }

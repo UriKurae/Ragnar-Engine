@@ -52,6 +52,7 @@ public:
 
 	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();
+	void ResetTransform();
 
 	// UNDO
 	inline void ForceUpdateTransform() { changeTransform = true; }
@@ -64,6 +65,8 @@ private:
 	float3 scale;
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
+
+	float3 rotationInEuler;
 
 
 	bool changeTransform;
