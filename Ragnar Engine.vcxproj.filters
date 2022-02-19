@@ -55,6 +55,9 @@
     <Filter Include="Particles">
       <UniqueIdentifier>{95424e2e-e040-492b-8903-1d24fb42ec54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles\Effects">
+      <UniqueIdentifier>{744104ab-de48-4d81-a240-c4777741af2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -328,6 +331,15 @@
     <ClInclude Include="Engine\Source\ParticleSystemComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Velocity.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Acceleration.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -539,6 +551,15 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ParticleSystemComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Velocity.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Acceleration.cpp">
+      <Filter>Particles\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

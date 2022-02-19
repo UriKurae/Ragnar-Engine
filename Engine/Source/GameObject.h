@@ -1,9 +1,6 @@
 #pragma once
 
-#include <string>
-#include <vector>
 #include "Component.h"
-
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
@@ -11,9 +8,12 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
+//#include "ParticleSystemComponent.h"
 #include "BillboardParticleComponent.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
+#include <string>
+#include <vector>
 
 typedef unsigned int uint;
 

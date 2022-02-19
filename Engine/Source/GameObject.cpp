@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleScene.h"
 #include "Globals.h"
+#include "ParticleSystemComponent.h"
 
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
@@ -119,6 +120,11 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Audio Reverb Zone Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Particle System Component"))
+		{
+			CreateComponent(ComponentType::PARTICLE_SYSTEM);
 			newComponent = false;
 		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -239,10 +245,10 @@ Component* GameObject::CreateComponent(ComponentType type)
 		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
 		break;
 	}
-	/*case ComponentType::PARTICLE_SYSTEM:
+	case ComponentType::PARTICLE_SYSTEM:
 		transform = (TransformComponent*)GetComponent(ComponentType::TRANSFORM);
-		component = new ParticleSystem(this, transform);
-		break;*/
+		component = new ParticleSystemComponent(this, transform);
+		break;
 	case ComponentType::BILLBOARD:
 		transform = (TransformComponent*)GetComponent(ComponentType::TRANSFORM);
 		component = new BillboardParticleComponent(this, transform);
