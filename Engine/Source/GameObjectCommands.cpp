@@ -1,4 +1,4 @@
-#include "MouseCommands.h"
+#include "GameObjectCommands.h"
 
 #include "GameObject.h"
 
@@ -25,6 +25,7 @@ void MoveGameObjectCommand::Undo()
 	TransformComponent* tr = actor->GetComponent<TransformComponent>();
 	tr->SetPosition(initialPosition);
 	tr->SetRotation(initialRotation);
+	tr->UpdateEditorRotation();
 	tr->SetScale(initialScale);
 	tr->ForceUpdateTransform();
 }

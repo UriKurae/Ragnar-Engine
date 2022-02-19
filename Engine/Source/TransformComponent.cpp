@@ -1,8 +1,13 @@
 #include "Application.h"
+#include "ModuleInput.h"
+
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "ModuleScene.h"
 #include "Globals.h"
+
+#include "CommandsDispatcher.h"
+#include "GameObjectCommands.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
@@ -24,14 +29,6 @@ TransformComponent::TransformComponent(GameObject* own)
 	scale = { 1.0f, 1.0f, 1.0f };
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
 
-	//// UNDO
-	//owner->entityPosition = position;
-	//owner->entityRotation= rotation;
-	//owner->entityScale = scale;
-
-	//owner->SetMouseMoveCommand(MouseMoveCommand(owner, float3::zero));
-	// UNDO
-	
 	if (owner->GetParent() != nullptr)
 	{
 		TransformComponent* tr = owner->GetParent()->GetComponent<TransformComponent>();
@@ -170,7 +167,7 @@ bool TransformComponent::OnSave(JsonParsing& node, JSON_Array* array)
 void TransformComponent::UpdateTransform()
 {
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
-	
+
 	if (owner->GetParent() && owner->GetParent() != app->scene->GetRoot())
 	{
 		TransformComponent* parentTr = owner->GetParent()->GetComponent<TransformComponent>();
@@ -180,10 +177,6 @@ void TransformComponent::UpdateTransform()
 	{
 		globalMatrix = localMatrix;
 	}
-
-	//owner->entityPosition = position;
-	//owner->entityRotation = rotation;
-	//owner->entityScale = scale;
 }
 
 void TransformComponent::UpdateChildTransform(GameObject* go)
@@ -248,6 +241,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::SameLine();
 	ImGui::DragFloat("##X", &vec.x, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::IsItemActivated())
+		CommandDispatcher::Execute(new MoveGameObjectCommand(owner));
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 
@@ -259,6 +254,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::SameLine();
 	ImGui::DragFloat("##Y", &vec.y, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::IsItemActivated())
+		CommandDispatcher::Execute(new MoveGameObjectCommand(owner));
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 
@@ -270,6 +267,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::SameLine();
 	ImGui::DragFloat("##Z", &vec.z, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::IsItemActivated())
+		CommandDispatcher::Execute(new MoveGameObjectCommand(owner));
 	ImGui::PopItemWidth();
 
 	ImGui::PopStyleVar();
@@ -285,7 +284,6 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 void TransformComponent::ShowTransformationInfo()
 {
 	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
-
 
 	rotationInEuler.x = RADTODEG * rotationEditor.x;
 	rotationInEuler.y = RADTODEG * rotationEditor.y;
@@ -311,4 +309,9 @@ void TransformComponent::ResetTransform()
 	SetTransform(math::float3::zero, math::Quat::identity, math::float3::one);
 	rotationEditor = rotationInEuler = math::float3::zero;
 	UpdateTransform();
+}
+
+void TransformComponent::UpdateEditorRotation()
+{
+	rotationEditor = rotation.ToEulerXYZ();
 }
