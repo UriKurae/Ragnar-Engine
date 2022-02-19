@@ -52,6 +52,9 @@
     <Filter Include="Sources\Libraries\WWise">
       <UniqueIdentifier>{bd1af3b5-ca65-4c5d-adab-cf27c3be5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\PugiXML">
+      <UniqueIdentifier>{e2e9269a-6c3b-4f29-b464-363e28b54c9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -313,6 +316,18 @@
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\MonoManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\PugiXML\pugiconfig.hpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\PugiXML\pugixml.hpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptBindings.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -515,6 +530,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MonoManager.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\PugiXML\pugixml.cpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

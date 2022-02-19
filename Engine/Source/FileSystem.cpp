@@ -39,7 +39,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SCRIPTS_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -388,6 +388,12 @@ void FileSystem::NormalizePath(std::string& path)
 {
 	for (int i = 0; i < path.length(); ++i)
 		if (path[i] == '\\') path[i] = '/';
+}
+
+void FileSystem::UnNormalizePath(std::string& path)
+{
+	for (int i = 0; i < path.length(); ++i)
+		if (path[i] == '/') path[i] = '\\';
 }
 
 void FileSystem::GetRelativeDirectory(std::string& path)

@@ -29,7 +29,7 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage((const wchar_t*)assetsPath.c_str());
+		ilLoadImage(assetsPath.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
 		std::string libraryPath;
@@ -55,7 +55,7 @@ void TextureImporter::ImportTexture(std::string& fileName)
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage((const wchar_t*)fileName.c_str());
+		ilLoadImage(fileName.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		std::string libraryPath;
 
@@ -71,7 +71,7 @@ void TextureImporter::ImportTexture2(std::string& fileName)
 	ILuint image;
 	ilGenImages(1, &image);
 	ilBindImage(image);
-	ilLoadImage((const wchar_t*)fileName.c_str());
+	ilLoadImage(fileName.c_str());
 	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 	app->fs->GetFilenameWithoutExtension(fileName);
 	std::string libraryPath = SETTINGS_FOLDER + std::string("EngineResources/") + fileName + ".rgtexture";

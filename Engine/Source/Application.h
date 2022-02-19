@@ -15,6 +15,7 @@ class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
 class FileSystem;
+class MonoManager;
 
 #define CONFIG_FILENAME	"config.json"
 #define APPLICATION_NAME "Ragnar Engine"
@@ -61,6 +62,7 @@ public:
 	ModuleEditor* editor;
 	ModuleScene* scene;
 	FileSystem* fs;
+	MonoManager* moduleMono;
 
 	JsonParsing jsonFile;
 
