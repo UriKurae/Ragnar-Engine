@@ -11,10 +11,12 @@
 
 #define MAX_KEYS 300
 
-ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
+ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled), pad(nullptr), joy(nullptr)
 {
 	name = "Input";
+
 	keyboard = new KeyState[MAX_KEYS];
+
 	memset(keyboard, (int)KeyState::KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
 	repeated = false;
 }
@@ -31,7 +33,7 @@ bool ModuleInput::Init(JsonParsing& node)
 	DEBUG_LOG("Init SDL input event system");
 
 	bool ret = true;
-	SDL_Init(0);
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
 
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
@@ -133,6 +135,17 @@ bool ModuleInput::PreUpdate(float dt)
 
 	mouseXMotion = mouseYMotion = 0;
 
+	//Update gamepad controller
+	ControllerUpdate();
+
+	if (IsJoystickAvailable(0))
+	{
+		if (app->input->GetButton(0, Button::DPAD_Left))
+		{
+			DEBUG_LOG("DPAD_Left pressed");
+		}
+	}
+
 	bool quit = false;
 	SDL_Event e;
 
@@ -161,6 +174,14 @@ bool ModuleInput::PreUpdate(float dt)
 			}	
 			break;
 
+			case SDL_CONTROLLERDEVICEADDED:
+				AddController(e.cdevice.which);
+				break;
+
+			case SDL_CONTROLLERDEVICEREMOVED:
+				RemoveController(e.jdevice.which);
+				break;
+
 			case SDL_QUIT:
 			quit = true;
 			break;
@@ -183,8 +204,42 @@ bool ModuleInput::PreUpdate(float dt)
 bool ModuleInput::CleanUp()
 {
 	DEBUG_LOG("Quitting SDL input event subsystem");
+	if (pad != NULL)
+	{
+		SDL_GameControllerClose(pad);
+		pad = nullptr;
+	}
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+bool ModuleInput::IsJoystickAvailable(int joystickId)
+{
+	return pad ? true : false;
+}
+
+bool ModuleInput::ControllerUpdate()
+{
+	bool ret = true;
+
+	if (pad)
+	{
+		lastButtons = buttons;
+		lastAxis = axes;
+
+		for (unsigned int i = 0; i < static_cast<int>(Button::Count); i++)
+		{
+			buttons[i] = SDL_GameControllerGetButton(pad, static_cast<SDL_GameControllerButton>(i));
+		}
+		
+		for (unsigned int i = 0; i < static_cast<int>(Axis::Count); i++)
+		{
+			// SDL ranges axes from -32768 to 32767
+			axes[i] = Clamp(SDL_GameControllerGetAxis(pad, static_cast<SDL_GameControllerAxis>(i)) / 32767.f, -1.f, 1.f);
+		}
+	}
+
+	return ret;
 }
 
 bool ModuleInput::LoadConfig(JsonParsing& node)
@@ -195,4 +250,76 @@ bool ModuleInput::LoadConfig(JsonParsing& node)
 bool ModuleInput::SaveConfig(JsonParsing& node)
 {
 	return true;
+}
+
+void ModuleInput::AddController(int id)
+{
+	if (SDL_IsGameController(id))
+	{
+		pad = SDL_GameControllerOpen(id);
+
+		if (pad)
+		{
+			DEBUG_LOG("Game controller device with index %d added.", id);
+			joy = SDL_GameControllerGetJoystick(pad);
+			joyID = SDL_JoystickInstanceID(joy);
+
+			std::fill(buttons.begin(), buttons.end(), false);
+			std::fill(lastButtons.begin(), lastButtons.end(), false);
+			std::fill(axes.begin(), axes.end(), 0.f);
+			std::fill(lastAxis.begin(), lastAxis.end(), 0.f);
+		}
+		else
+		{
+			DEBUG_LOG("Error opening game controller with Device Index %d", id);
+		}
+	}
+}
+
+void ModuleInput::RemoveController(int id)
+{
+	DEBUG_LOG("Game controller device with index %d removed.", id);
+	SDL_GameControllerClose(SDL_GameControllerFromInstanceID(id));
+	pad = nullptr;
+}
+
+bool ModuleInput::GetButton(int joystickId, Button button)
+{
+	if (SDL_GameControllerFromInstanceID(joystickId))
+	{
+		return buttons[static_cast<int>(button)];
+	}
+	DEBUG_LOG("Joystick with id %d is not available!", joystickId);
+	return false;
+}
+
+bool ModuleInput::GetButtonDown(int joystickId, Button button)
+{
+	if (SDL_GameControllerFromInstanceID(joystickId))
+	{
+		return buttons[static_cast<int>(button)] && !lastButtons[static_cast<int>(button)];
+	}
+	DEBUG_LOG("Joystick with id %d is not available!", joystickId);
+	return false;
+}
+
+bool ModuleInput::GetButtonUp(int joystickId, Button button)
+{
+	if (SDL_GameControllerFromInstanceID(joystickId))
+	{
+		return !buttons[static_cast<int>(button)] && lastButtons[static_cast<int>(button)];
+	}
+	DEBUG_LOG("Joystick with id %d is not available!", joystickId);
+	return false;
+}
+
+bool ModuleInput::GetAxis(int joystickId, Axis axis)
+{
+	if (SDL_GameControllerFromInstanceID(joystickId))
+	{
+		float val = axes[static_cast<int>(axis)];
+		return abs(val) > deadzone ? val : 0.0f;
+	}
+	DEBUG_LOG("Joystick with id %d is not available!", joystickId);
+	return 0.0f;
 }
