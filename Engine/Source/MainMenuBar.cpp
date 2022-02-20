@@ -197,16 +197,16 @@ bool MainMenuBar::Update(float dt)
 
 		if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
 		{
-			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object"))
+			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object", "Ctrl+Shift+N"))
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
 				else app->scene->CreateGameObject(nullptr);
 			}
-			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child"))
+			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child", "Alt+Shift+N"))
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
 			}
-			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent"))
+			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent", "Ctrl+Shift+G"))
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
 			}
@@ -401,6 +401,7 @@ bool MainMenuBar::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_LSHIFT) != KeyState::KEY_REPEAT && 
 		app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
 	{
 		saveWindow = true;
@@ -425,9 +426,18 @@ bool MainMenuBar::Update(float dt)
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
 			}
-			else if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 			{
 				AlignWithView();
+			}
+			if (app->input->GetKey(SDL_SCANCODE_G) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+			}
+			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
+				else app->scene->CreateGameObject(nullptr);
 			}
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
@@ -435,6 +445,10 @@ bool MainMenuBar::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 			{
 				AlignViewWithSelected();
+			}
+			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
 			}
 		}
 	}
@@ -448,6 +462,12 @@ bool MainMenuBar::Update(float dt)
 			if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
 		}
 		else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
+	}
+
+	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+	{
+		
 	}
 
 	ImGui::PopStyleColor(3);
