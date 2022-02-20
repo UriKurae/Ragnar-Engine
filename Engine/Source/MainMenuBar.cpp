@@ -25,6 +25,8 @@
 
 #include "Profiling.h"
 
+#include "Math/float3x3.h"
+
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {
 	showMenu = false;

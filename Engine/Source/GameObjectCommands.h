@@ -2,8 +2,8 @@
 
 #include "Command.h"
 
-#include "MathGeoLib/src/Math/float3.h"
-#include "MathGeoLib/src/Math/Quat.h"
+#include "MathGeoLib/include/Math/float3.h"
+#include "MathGeoLib/include/Math/Quat.h"
 
 class GameObject;
 

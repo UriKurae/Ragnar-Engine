@@ -11,6 +11,7 @@
 #include "glew/include/GL/glew.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
+#include "Algorithm/Random/LCG.h"
 
 #include "Profiling.h"
 

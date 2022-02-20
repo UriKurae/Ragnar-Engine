@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MathGeoLib/src/Geometry/AABB.h"
-#include "MathGeoLib/src/Geometry/Frustum.h"
+#include "MathGeoLib/include/Geometry/AABB.h"
+#include "MathGeoLib/include/Geometry/Frustum.h"
 
 #include <set>
 

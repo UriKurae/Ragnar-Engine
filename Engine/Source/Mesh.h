@@ -3,8 +3,8 @@
 #include "Resource.h"
 
 #include <vector>
-#include "MathGeoLib/src/Math/float3.h"
-#include "MathGeoLib/src/Math/float2.h"
+#include "MathGeoLib/include/Math/float3.h"
+#include "MathGeoLib/include/Math/float2.h"
 
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"

@@ -5,7 +5,7 @@
 #include "CameraComponent.h"
 
 #include "Glew/include/GL/glew.h"
-#include "MathGeoLib/src/Geometry/Frustum.h"
+#include "MathGeoLib/include/Geometry/Frustum.h"
 
 FogWarMenu::FogWarMenu() : Menu(true)
 {

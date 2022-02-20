@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-#include "MathGeoLib/src/Math/float3.h"
+#include "MathGeoLib/include/Math/float3.h"
 
 MoveGameObjectCommand::MoveGameObjectCommand(GameObject* go) : actor(go)
 {

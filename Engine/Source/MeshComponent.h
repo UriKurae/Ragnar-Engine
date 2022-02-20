@@ -3,8 +3,8 @@
 #include "Component.h"
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
-#include "MathGeoLib/src/MathGeoLib.h"
 
+#include "Geometry/AABB.h"
 #include <vector>
 
 typedef unsigned int GLuint;

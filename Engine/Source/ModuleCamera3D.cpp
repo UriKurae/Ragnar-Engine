@@ -14,6 +14,9 @@
 #include "Profiling.h"
 #include "GL/glew.h"
 
+#include "Math/float3x3.h"
+#include "Geometry/LineSegment.h"
+#include "Geometry/Triangle.h"
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
 {

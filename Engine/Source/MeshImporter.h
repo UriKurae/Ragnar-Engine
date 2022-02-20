@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "MathGeoLib/src/Math/float2.h"
-#include "MathGeoLib/src/Math/float3.h"
+#include "MathGeoLib/include/Math/float2.h"
+#include "MathGeoLib/include/Math/float3.h"
 
 #include "assimp/mesh.h"
 #include "assimp/scene.h"

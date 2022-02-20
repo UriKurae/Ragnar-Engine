@@ -17,6 +17,7 @@
 #include "Imgui/ImguiStyle.h"
 
 #include "IL/ilut.h"
+#include "Geometry/LineSegment.h"
 
 #include "Profiling.h"
 

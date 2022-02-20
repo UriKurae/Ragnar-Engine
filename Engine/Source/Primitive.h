@@ -1,8 +1,8 @@
 #pragma once
 
-#include "MathGeoLib/src/MathGeoLib.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "Math/float3.h"
 
 typedef unsigned int GLuint;
 typedef unsigned short GLushort;

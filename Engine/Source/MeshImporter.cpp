@@ -7,7 +7,7 @@
 #include "TextureImporter.h"
 #include "Mesh.h"
 #include "Model.h"
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+#include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 #include "Globals.h"
 
