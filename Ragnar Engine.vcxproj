@@ -56,7 +56,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -76,9 +76,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\Bullet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;AK_OPTIMIZED;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;AK_OPTIMIZED;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
@@ -208,6 +208,7 @@
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
     <ClInclude Include="Engine\Source\CameraComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
+    <ClInclude Include="Engine\Source\C_RigidBody.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\GameObjectCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
@@ -245,12 +246,14 @@
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\Physics3D.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Profiling.h" />
     <ClInclude Include="Engine\Source\Quadtree.h" />
     <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
+    <ClInclude Include="Engine\Source\Shapes.h" />
     <ClInclude Include="Engine\Source\Style.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
@@ -335,6 +338,7 @@
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp" />
+    <ClCompile Include="Engine\Source\C_RigidBody.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp" />
     <ClCompile Include="Engine\Source\FogWarMenu.cpp" />
     <ClCompile Include="Engine\Source\Framebuffer.cpp" />
@@ -364,9 +368,11 @@
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
+    <ClCompile Include="Engine\Source\Physics3D.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />
+    <ClCompile Include="Engine\Source\Shapes.cpp" />
     <ClCompile Include="Engine\Source\Texture.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />

@@ -58,6 +58,9 @@
     <Filter Include="Sources\Libraries\MathGeoLib">
       <UniqueIdentifier>{07ff1a3b-03c9-447f-942c-540f0dc0c782}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysicsEngine">
+      <UniqueIdentifier>{caaeba32-e8fd-448a-a552-88a21bcf8e7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -565,6 +568,15 @@
     <ClInclude Include="Dependencies\MathGeoLib\include\MathGeoLibFwd.h">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\C_RigidBody.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Physics3D.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Shapes.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -902,6 +914,15 @@
     </ClCompile>
     <ClCompile Include="Dependencies\MathGeoLib\include\Time\Clock.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\C_RigidBody.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Physics3D.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Shapes.cpp">
+      <Filter>PhysicsEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -440,6 +440,7 @@ public:
 	/// @return Max(x, y, z).
 	/** @see MaxElementIndex(). */
 	float MaxElement() const;
+	float MaxElementXZ() const;
 	/// Returns the index that has the smallest value in this vector.
 	/** @see MaxElement(). */
 	int MaxElementIndex() const;

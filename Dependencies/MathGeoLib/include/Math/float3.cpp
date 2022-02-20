@@ -354,6 +354,11 @@ float float3::MaxElement() const
 	return MATH_NS::Max(MATH_NS::Max(x, y), z);
 }
 
+float float3::MaxElementXZ() const
+{
+	return MATH_NS::Max(x,z);
+}
+
 int float3::MaxElementIndex() const
 {
 	if (x >= y && x >= z)
