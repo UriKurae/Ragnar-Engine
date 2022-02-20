@@ -67,6 +67,10 @@ public:
 	void AddPointLight(PointLight* pl);
 	inline const std::vector<PointLight*>& GetPointLights() { return pointLights; }
 
+	void AddSpotLight(SpotLight* sl);
+	inline const std::vector<SpotLight*>& GetSpotLights() { return spotLights; }
+
+
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 
@@ -95,6 +99,7 @@ public:
 	DirectionalLight* dirLight;
 
 	std::vector<PointLight*> pointLights;
+	std::vector<SpotLight*> spotLights;
 
 private:
 	Material* defaultMaterial;

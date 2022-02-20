@@ -37,11 +37,10 @@ ComponentLight::~ComponentLight()
 bool ComponentLight::Update(float dt)
 {
 	if (light->type == LightType::DIRECTIONAL)
-	{
-		DirectionalLight* l = (DirectionalLight*)light;
-				
+	{			
 		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
 		{
+			DirectionalLight* l = (DirectionalLight*)light;
 			l->dir = tr->GetRotation().CastToFloat4().Float3Part();
 			l->dir.Normalize();
 		}
@@ -68,6 +67,18 @@ bool ComponentLight::Update(float dt)
 				l->position = tr->GetPosition();
 				light = l;
 			}
+			
+			float3 dir = tr->GetRotation().CastToFloat4().Float3Part();
+			if (dir.x == 0 && dir.y == 0 && dir.z == 0)
+			{
+				l->direction = { 0,-1,0 };
+			}
+			else
+			{
+				l->direction = tr->GetRotation().CastToFloat4().Float3Part();
+				l->direction.Normalize();
+			}
+			
 		}
 	}
 
@@ -120,15 +131,18 @@ void ComponentLight::OnEditor()
 
 		case LightType::SPOT:
 		{
-			SpotLight* l = (SpotLight*)light;
+			if (ImGui::CollapsingHeader("Light", ImGuiTreeNodeFlags_DefaultOpen))
+			{
+				SpotLight* l = (SpotLight*)light;
 
-			ImGui::ColorEdit3("Ambient Color", l->ambient.ptr());
-			ImGui::ColorEdit3("Diffuse Color", l->diffuse.ptr());
-			ImGui::ColorEdit3("Specular Color", l->specular.ptr());
+				ImGui::ColorEdit3("Ambient Color", l->ambient.ptr());
+				ImGui::ColorEdit3("Diffuse Color", l->diffuse.ptr());
+				ImGui::ColorEdit3("Specular Color", l->specular.ptr());
 
-			ImGui::DragFloat("Intensity", &l->intensity, 0.1f);
-			ImGui::DragFloat("CutOff", &l->cutOff, 0.1f);
-			ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.1f);
+				ImGui::DragFloat("Intensity", &l->intensity, 0.01f);
+				ImGui::DragFloat("CutOff", &l->cutOff, 0.001f, 1.0f,0.0f);
+				ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.001f, 1.0f, 0.0f);
+			}
 		}
 	}
 }

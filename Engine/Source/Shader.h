@@ -56,6 +56,7 @@ public:
 	void SetUniformMatrix4f(const std::string& name, const float4x4& mat);
 
 	inline const std::string& GetPath() { return path; }
+	inline const std::string& GetSource() { return source; }
 
 	std::list<UniformData> GetUniforms();
 	void UpdateSourceCode(const std::string& newSource);

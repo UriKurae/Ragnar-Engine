@@ -18,8 +18,12 @@
 #include "ResourceManager.h"
 #include "ModuleEditor.h"
 
+#include "LightComponent.h"
+
 #include "Dialogs.h"
 #include "IconsFontAwesome5.h"
+
+#include <fstream>
 
 #include "Profiling.h"
 
@@ -218,10 +222,47 @@ bool MainMenuBar::Update(float dt)
 					else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
 				}
 				ImGui::EndMenu();
+
 			}
+			if (ImGui::BeginMenu(ICON_FA_LIGHTBULB " Lights"))
+			{
+				if (ImGui::MenuItem("Point Light"))
+				{
+					GameObject* go = app->scene->CreateGameObject(nullptr);
+					go->SetName("Point Light");
+					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+					PointLight* pl = new PointLight();
+					l->SetLight(pl);
+					app->renderer3D->AddPointLight(pl);
+
+				}
+				else if (ImGui::MenuItem("Spot Light"))
+				{
+					GameObject* go = app->scene->CreateGameObject(nullptr);
+					go->SetName("Spot Light");
+					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+					SpotLight* sl = new SpotLight();
+					l->SetLight(sl);
+					app->renderer3D->AddSpotLight(sl);
+
+				}
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::MenuItem("Shader"))
+			{
+				std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+
+				// TODO: Find a way to do this without ofstream
+				std::ofstream file;
+				file.open(path);
+				file << app->renderer3D->GetDefaultShader()->GetSource();
+				file.close();
+			}
+
 			ImGui::EndMenu();
 		}
-
+		
 		if (ImGui::BeginMenu(ICON_FA_INFO_CIRCLE" Help"))
 		{
 			ImGui::MenuItem("Demo Menu", NULL, &showMenu);
