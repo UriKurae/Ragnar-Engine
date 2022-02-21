@@ -49,6 +49,11 @@
 !Dependencies/Wwise/lib/Release/AkStreamMgr.lib
 !Dependencies/Wwise/lib/Release/AkSpatialAudio.lib
 !Dependencies/Wwise/lib/Release/AkRoomVerbFX.lib
+!Dependencies/mono/libx86/libmono-static-boehm.lib
+!Dependencies/mono/libx86/libmono-static-sgen.lib
+!Dependencies/mono/libx86/mono-2.0-boehm.lib
+!Dependencies/mono/libx86/mono-2.0-sgen.lib
+!Dependencies/mono/libx86/MonoPosixHelperm.lib
 
 
 # Executables
