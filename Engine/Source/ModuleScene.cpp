@@ -9,8 +9,9 @@
 #include "FileSystem.h"
 #include "Resource.h"
 #include "ResourceManager.h"
-
+#include "MonoManager.h"
 #include "AudioManager.h"
+#include "ScriptComponent.h"
 
 #include <stack>
 
@@ -333,11 +334,32 @@ bool ModuleScene::LoadScene(const char* name)
 				child->OnLoad(go);
 			}
 		}
+		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
+		{
+			// Get the range of the current key
+			auto range = referenceMap.equal_range(i->first);
+
+			// Now render out that whole range
+			for (auto d = range.first; d != range.second; ++d)
+			{
+				d->second->fiValue.goValue = GetGoByUuid(d->first);
+
+				if (d->second->fiValue.goValue)
+				{
+					if (std::find(d->second->fiValue.goValue->csReferences.begin(), d->second->fiValue.goValue->csReferences.end(), d->second) == d->second->fiValue.goValue->csReferences.end())
+						d->second->fiValue.goValue->csReferences.push_back(d->second);
+
+					d->second->parentSC->SetField(d->second->field, d->second->fiValue.goValue);
+				}
+			}
+		}
 	}
 	else
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
+
+	referenceMap.clear();
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();

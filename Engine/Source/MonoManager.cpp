@@ -36,9 +36,9 @@ bool MonoManager::Init(JsonParsing& node)
 	LOG(LogType::L_NORMAL, "Setting up the camera");
 	bool ret = true;
 
-#ifndef STANDALONE
+//#ifndef STANDALONE
 	CMDCompileCS();
-#endif // !STANDALONE
+//#endif // !STANDALONE
 
 	mono_set_dirs("mono-runtime/lib", "mono-runtime/etc");
 	mono_config_parse(NULL);

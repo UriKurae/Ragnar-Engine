@@ -7,10 +7,12 @@
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
+#include "ScriptComponent.h"
 #include "CameraComponent.h"
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "MonoManager.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 
@@ -78,11 +80,14 @@ public:
 	std::string tag;
 	std::string layer;
 
+	std::vector<SerializedField*> csReferences;
 private:
 	std::vector<Component*> components;
 
 	GameObject* parent;
 	std::vector<GameObject*> children;
+
+	
 
 	bool newComponent;
 

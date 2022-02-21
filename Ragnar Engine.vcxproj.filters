@@ -328,6 +328,9 @@
     <ClInclude Include="Engine\Source\ScriptBindings.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -536,6 +539,9 @@
     </ClCompile>
     <ClCompile Include="Dependencies\PugiXML\pugixml.cpp">
       <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ScriptComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

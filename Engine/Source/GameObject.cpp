@@ -106,6 +106,12 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
+
+		if (ImGui::Selectable("Script Component"))
+		{
+			CreateComponent(ComponentType::SCRIPT);
+			newComponent = false;
+		}
 		if (ImGui::Selectable("Audio Source Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_SOURCE);
@@ -142,6 +148,11 @@ void GameObject::DrawEditor()
 			if (ImGui::Button("Material Component"))
 			{
 				CreateComponent(ComponentType::MATERIAL);
+				newComponent = false;
+			}
+			if (ImGui::Button("Script Component"))
+			{
+				CreateComponent(ComponentType::SCRIPT);
 				newComponent = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -218,6 +229,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::SCRIPT:
+		component = new ScriptComponent(this, "Script");
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
