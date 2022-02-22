@@ -14,9 +14,22 @@ enum class ComponentType
 	CAMERA,
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
-	AUDIO_REVERB_ZONE
+	AUDIO_REVERB_ZONE,
+	UI_BUTTON,
+	UI_IMAGE,
+	UI_CHECKBOX,
+	UI_SLIDER,
+	UI_INPUTBOX,
+	UI_CANVAS
 };
-
+enum class State
+{
+	DISABLED,
+	NORMAL,
+	FOCUSED,
+	PRESSED,
+	SELECTED
+};
 class Component
 {
 public:
@@ -52,6 +65,6 @@ public:
 	ComponentType type;
 	bool active;
 	GameObject* owner;
-
+	
 	bool collapsed;
 };

@@ -232,11 +232,16 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::UI_BUTTON:
+
+		component = new ButtonComponent(1, "hdh");
+		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);
 		MeshComponent* m = GetComponent<MeshComponent>();
 		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
 		break;
+	
 	}
 
 	if (component != nullptr)

@@ -241,6 +241,10 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 		object->SetName("Cylinder");
 		path = "Settings/EngineResources/__Cylinder.mesh";
 		break;
+	case Object3D::PLANE:
+		object->SetName("Plane");
+		path = "Settings/EngineResources/__Plane.mesh";
+		break;
 	}
 
 	if (!path.empty())
@@ -455,6 +459,15 @@ void ModuleScene::ImportPrimitives()
 
 	RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
+	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+
+	vertices.clear();
+	indices.clear();
+	normals.clear();
+	texCoords.clear();
+
+	RPlane::CreatePlane(vertices, indices, texCoords);
+	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Plane.mesh"), library);
 	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
 
 	vertices.clear();

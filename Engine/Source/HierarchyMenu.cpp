@@ -1,11 +1,11 @@
 #include "HierarchyMenu.h"
-
+#include"ModuleUI.h"
 #include "Application.h"
 #include "Globals.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "GameObject.h"
-
+#include"ButtonComponent.h"
 #include "Profiling.h"
 
 HierarchyMenu::HierarchyMenu() : Menu(true)
@@ -146,6 +146,19 @@ bool HierarchyMenu::Update(float dt)
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
 				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
 				createGameObject = false;
+			}
+			else if (ImGui::Selectable("Create UI Button"))
+			{
+				/*if (selected != nullptr) app->scene->Create3DObject(Object3D::PLANE, selected);
+				else*/ 
+				GameObject* object = app->scene->Create3DObject(Object3D::PLANE, nullptr);
+				ButtonComponent* button= (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
+				button->gen = object;
+				MaterialComponent* material=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+				TransformComponent* transform= (TransformComponent*)object->CreateComponent(ComponentType::TRANSFORM);
+				createGameObject = false;
+				app->userInterface->UIGameObjects.push_back(object);
+
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{

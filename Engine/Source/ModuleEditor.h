@@ -39,7 +39,7 @@ public:
 	inline std::string& GetCurrentDir() { return mainMenuBar.GetCurrentDir(); }
 
 	inline Viewport* GetViewport() { return viewport; }
-
+	Viewport* viewport;
 private:
 	MainMenuBar mainMenuBar;
 
@@ -48,7 +48,7 @@ private:
 
 	Resource* resource;
 
-	Viewport* viewport;
+	
 	GameView* gameView;
 	ImGuizmo::OPERATION currentOperation;
 };

@@ -52,6 +52,9 @@
     <Filter Include="Sources\Libraries\WWise">
       <UniqueIdentifier>{bd1af3b5-ca65-4c5d-adab-cf27c3be5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\GameObject\Components\UI">
+      <UniqueIdentifier>{e82b9667-2e1a-4eca-adc3-1d0dc952de51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -313,6 +316,30 @@
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleUI.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ButtonComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CanvasComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CheckBoxComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ImageComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\InputBoxComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\SliderComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Text.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -515,6 +542,27 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleUI.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ButtonComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\CanvasComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\CheckBoxComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ImageComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\InputBoxComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\SliderComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

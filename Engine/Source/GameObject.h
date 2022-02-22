@@ -11,7 +11,7 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
-
+#include "ButtonComponent.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
 typedef unsigned int uint;

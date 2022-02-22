@@ -58,7 +58,41 @@ namespace RCube
 		};
 	}
 }
+namespace RPlane
+{
+	void CreatePlane(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	{
+		vertices =
+		{
+			{ -0.5,-0.5,0 },
+			{ 0.5,-0.5,0 },
+			{ -0.5,0.5,0 },
+			{ 0.5,0.5,0 },
 
+			{0.5f, -0.5f, -0.5f},
+			{0.5f, 0.5f, -0.5f},
+			{-0.5f, -0.5f, -0.5f},
+			{-0.5f, 0.5f, -0.5f},
+		};
+
+		indices =
+		{
+			0,1,2,
+			2,1,3
+		};
+
+		texCoords =
+		{
+			{0.0f, 1.0f},
+			{1.0f, 1.0f},
+			{0.0f, 0.0f},
+			{0.0f, 1.0f},
+
+			{1.0f, 0.0f},
+			
+		};
+	}
+}
 namespace RPyramide
 {
 	void CreatePyramide(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)

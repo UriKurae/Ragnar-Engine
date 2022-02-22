@@ -31,9 +31,12 @@ public:
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
+	Frustum camera;
+	float currentScreenWidth;
+	float currentScreenHeight;
 private:
 
-	Frustum camera;
+	
 	TransformComponent* transform;
 	Quat currentRotation;
 	float3 currentPos;
@@ -42,8 +45,7 @@ private:
 	float farPlane;
 	float verticalFov;
 	float horizontalFov;
-	float currentScreenWidth;
-	float currentScreenHeight;
+	
 
 	IndexBuffer* ebo;
 	VertexBuffer* vbo;

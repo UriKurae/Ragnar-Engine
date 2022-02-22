@@ -53,17 +53,7 @@ private:
 	unsigned int tbo;
 };
 
-class PPlane : public Primitive
-{
-public:
-	PPlane(float3 t, float3 r, float3 s);
 
-	~PPlane();
-
-	void Draw() override;
-
-private:
-};
 
 class PCylinder : public Primitive
 {
@@ -111,6 +101,23 @@ public:
 	PSphere(float radius, unsigned int rings, unsigned int sectors);
 
 	~PSphere();
+
+	void Draw() override;
+
+private:
+	std::vector<GLushort> indices;
+	std::vector<GLfloat> vertices;
+	std::vector<GLfloat> normals;
+	std::vector<GLfloat> texCoords;
+
+};
+
+class PPlane : public Primitive
+{
+public:
+	PPlane(float with,float heigth );
+
+	~PPlane();
 
 	void Draw() override;
 
