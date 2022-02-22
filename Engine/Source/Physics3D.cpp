@@ -106,7 +106,7 @@ bool Physics3D::CleanUp()
 	return true;
 }
 
-btRigidBody* Physics3D::CollisionShape(const PCube& cube, C_RigidBody* component)
+btRigidBody* Physics3D::CollisionShape(const PCube& cube, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
 	btTransform startTransform;
@@ -114,7 +114,7 @@ btRigidBody* Physics3D::CollisionShape(const PCube& cube, C_RigidBody* component
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::CollisionShape(const PSphere& sphere, C_RigidBody* component)
+btRigidBody* Physics3D::CollisionShape(const PSphere& sphere, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btSphereShape(sphere.radius);
 	btTransform startTransform;
@@ -122,7 +122,7 @@ btRigidBody* Physics3D::CollisionShape(const PSphere& sphere, C_RigidBody* compo
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::CollisionShape(const PCapsule& capsule, C_RigidBody* component)
+btRigidBody* Physics3D::CollisionShape(const PCapsule& capsule, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btCapsuleShape(capsule.radius, capsule.height);
 	btTransform startTransform;
@@ -130,7 +130,7 @@ btRigidBody* Physics3D::CollisionShape(const PCapsule& capsule, C_RigidBody* com
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::CollisionShape(const PCylinder& cylinder, C_RigidBody* component)
+btRigidBody* Physics3D::CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btCylinderShape(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
 	btTransform startTransform;
@@ -138,7 +138,7 @@ btRigidBody* Physics3D::CollisionShape(const PCylinder& cylinder, C_RigidBody* c
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::CollisionShape(const PPyramid& cone, C_RigidBody* component)
+btRigidBody* Physics3D::CollisionShape(const PPyramid& cone, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btConeShape(cone.radius, cone.height);
 	btTransform startTransform;
@@ -146,7 +146,7 @@ btRigidBody* Physics3D::CollisionShape(const PPyramid& cone, C_RigidBody* compon
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::CollisionShape(const PPlane& plane, C_RigidBody* component)
+btRigidBody* Physics3D::CollisionShape(const PPlane& plane, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btStaticPlaneShape(btVector3(plane.normal.x, plane.normal.y, plane.normal.z), plane.constant);
 	btTransform startTransform;
@@ -154,7 +154,7 @@ btRigidBody* Physics3D::CollisionShape(const PPlane& plane, C_RigidBody* compone
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTransform, C_RigidBody* component)
+btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTransform, RigidBodyComponent* component)
 {
 	float mass = (component->useGravity && !component->isKinematic) ? component->GetMass() : 0.0f;
 
@@ -182,14 +182,14 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 	return body;
 }
 
-void Physics3D::DeleteBody(C_RigidBody* body, std::string name)
+void Physics3D::DeleteBody(RigidBodyComponent* body, std::string name)
 {
 	if (body != nullptr)
 	{
 		world->removeRigidBody(body->GetBody());
 		if (body->constraintBodies.empty() == false)
 		{
-			std::vector<C_RigidBody*>::const_iterator k;
+			std::vector<RigidBodyComponent*>::const_iterator k;
 			bool clean = false;
 			int size = body->GetBody()->getNumConstraintRefs();
 			for (size_t i = 0; i < size; i++)
@@ -217,7 +217,7 @@ void Physics3D::DeleteBody(C_RigidBody* body, std::string name)
 				}
 			}
 		}
-		for (std::vector<C_RigidBody*>::iterator i = bodies.begin(); i != bodies.end(); ++i)
+		for (std::vector<RigidBodyComponent*>::iterator i = bodies.begin(); i != bodies.end(); ++i)
 		{
 			if (*i._Ptr == body)
 			{

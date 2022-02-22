@@ -19,7 +19,7 @@ class btDefaultMotionState;
 class btTypedConstraint;
 
 class btRigidBody;
-class C_RigidBody;
+class RigidBodyComponent;
 
 class Physics3D : public Module
 {
@@ -33,22 +33,22 @@ public:
 	bool PostUpdate() override;
 	bool CleanUp() override;
 
-	btRigidBody* CollisionShape(const PCube& cube, C_RigidBody* component);
-	btRigidBody* CollisionShape(const PSphere& sphere, C_RigidBody* component);
-	btRigidBody* CollisionShape(const PCapsule& capsule, C_RigidBody* component);
-	btRigidBody* CollisionShape(const PCylinder& cylinder, C_RigidBody* component);
-	btRigidBody* CollisionShape(const PPyramid& cone, C_RigidBody* component);
-	btRigidBody* CollisionShape(const PPlane& plane, C_RigidBody* component);
+	btRigidBody* CollisionShape(const PCube& cube, RigidBodyComponent* component);
+	btRigidBody* CollisionShape(const PSphere& sphere, RigidBodyComponent* component);
+	btRigidBody* CollisionShape(const PCapsule& capsule, RigidBodyComponent* component);
+	btRigidBody* CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component);
+	btRigidBody* CollisionShape(const PPyramid& cone, RigidBodyComponent* component);
+	btRigidBody* CollisionShape(const PPlane& plane, RigidBodyComponent* component);
 
-	btRigidBody* AddBody(btCollisionShape* colShape, btTransform startTransform, C_RigidBody* component);
-	void DeleteBody(C_RigidBody* body, std::string name);
+	btRigidBody* AddBody(btCollisionShape* colShape, btTransform startTransform, RigidBodyComponent* component);
+	void DeleteBody(RigidBodyComponent* body, std::string name);
 	void DesactivateCollision(btRigidBody* body);
 	void ActivateCollision(btRigidBody* body);
 
 	void AddConstraintP2P(btRigidBody& bodyA, btRigidBody& bodyB, const float3& anchorA, const float3& anchorB);
 	void AddConstraintHinge(btRigidBody& bodyA, btRigidBody& bodyB, const float3& anchorA, const float3& anchorB, const float3& axisS, const float3& axisB, bool disable_collision = false);
 
-	std::vector<C_RigidBody*> GetBodies() { return bodies; };
+	std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
 	std::vector<std::string> GetBodiesNames() { return bodiesNames; };
 
 	void SleepAllBodies();
@@ -63,7 +63,7 @@ private:
 
 	DebugDrawer* debugDraw = nullptr;
 
-	std::vector<C_RigidBody*> bodies;
+	std::vector<RigidBodyComponent*> bodies;
 	std::vector<std::string> bodiesNames;
 
 	bool debug = true;

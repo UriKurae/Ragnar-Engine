@@ -16,11 +16,11 @@ enum class CollisionType
 	STATIC_PLANE = 5,
 };
 
-class C_RigidBody : public Component
+class RigidBodyComponent : public Component
 {
 public:
-	C_RigidBody(GameObject* obj, CollisionType type = CollisionType::BOX, float mass = 1.0f,  bool isKinematic = false);
-	virtual ~C_RigidBody();
+	RigidBodyComponent(GameObject* obj, CollisionType type = CollisionType::BOX, float mass = 1.0f,  bool isKinematic = false);
+	virtual ~RigidBodyComponent();
 
 	void SetBoundingBox();
 	bool Update(float dt) override;
@@ -29,7 +29,7 @@ public:
 
 	void Combos();
 
-	void AddConstraintP2P(C_RigidBody* const& val);
+	void AddConstraintP2P(RigidBodyComponent* const& val);
 
 	void SetCollisionType(CollisionType type);
 	void ResetLocalValues();
@@ -47,7 +47,7 @@ public:
 
 	bool useGravity = true;
 	bool isKinematic = false;
-	std::vector<C_RigidBody*> constraintBodies;
+	std::vector<RigidBodyComponent*> constraintBodies;
 	std::vector<int> bodiesUIDs;
 
 private:

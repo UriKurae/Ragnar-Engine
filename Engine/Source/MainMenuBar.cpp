@@ -18,6 +18,7 @@
 #include "ResourceManager.h"
 #include "ModuleEditor.h"
 #include "ModuleCamera3D.h"
+#include "Physics3D.h"
 
 #include "Dialogs.h"
 #include "IconsFontAwesome5.h"
@@ -364,6 +365,7 @@ bool MainMenuBar::Update(float dt)
 			app->scene->Play();
 			AudioManager::Get()->PlayAllAudioSources();
 			ImGui::StyleColorsClassic();
+			app->physics->ActiveAllBodies();
 		}
 
 		ImGui::SameLine();
@@ -380,6 +382,7 @@ bool MainMenuBar::Update(float dt)
 			AudioManager::Get()->StopAllAudioSources();
 			app->scene->Stop();
 			//StyleTheme();
+			app->physics->SleepAllBodies();
 		}
 		ImGui::SameLine();
 
@@ -389,12 +392,14 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->scene->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
+				app->physics->ActiveAllBodies();
 			}
 		}
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
 			app->scene->Pause();
+			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();

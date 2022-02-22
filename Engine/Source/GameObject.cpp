@@ -13,6 +13,8 @@
 #include "Imgui/imgui_internal.h"
 #include "Algorithm/Random/LCG.h"
 
+#include "C_RigidBody.h"
+
 #include "Profiling.h"
 
 
@@ -114,6 +116,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Rigid Body"))
+		{
+			CreateComponent(ComponentType::RIGID_BODY);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -172,6 +179,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::RIGID_BODY:
+		component = new RigidBodyComponent(this);
 		break;
 	case ComponentType::MATERIAL:
 		MeshComponent* m = GetComponent<MeshComponent>();

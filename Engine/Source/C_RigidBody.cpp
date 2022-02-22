@@ -13,7 +13,7 @@
 
 #include "ModuleScene.h"
 
-C_RigidBody::C_RigidBody(GameObject* obj, CollisionType type, float mass, bool isKinematic) : Component(), collisionType(type), mass(mass), isKinematic(isKinematic)
+RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, float mass, bool isKinematic) : Component(), collisionType(type), mass(mass), isKinematic(isKinematic)
 {
 	owner = obj;
 	SetCollisionType(type);
@@ -27,7 +27,7 @@ C_RigidBody::C_RigidBody(GameObject* obj, CollisionType type, float mass, bool i
 	}	
 }
 
-C_RigidBody::~C_RigidBody()
+RigidBodyComponent::~RigidBodyComponent()
 {
 	if (body != nullptr)
 	{
@@ -37,7 +37,7 @@ C_RigidBody::~C_RigidBody()
 	}	
 }
 
-void C_RigidBody::SetBoundingBox()
+void RigidBodyComponent::SetBoundingBox()
 {
 	float3 pos, radius, size;
 
@@ -94,7 +94,7 @@ void C_RigidBody::SetBoundingBox()
 	}
 }
 
-bool C_RigidBody::Update(float dt)
+bool RigidBodyComponent::Update(float dt)
 {
 	if (app->scene->GetGameState() == GameState::PLAYING)
 	{
@@ -109,7 +109,7 @@ bool C_RigidBody::Update(float dt)
 	return true;
 }
 
-void C_RigidBody::UpdateCollision()
+void RigidBodyComponent::UpdateCollision()
 {
 	if (app->scene->GetGameState() != GameState::PLAYING)
 	{
@@ -124,7 +124,7 @@ void C_RigidBody::UpdateCollision()
 	}
 }
 
-void C_RigidBody::OnEditor()
+void RigidBodyComponent::OnEditor()
 {
 	// Important condition: body != nullptr 
 	// Because OnStop the body don't exist but OnPlay can modify her parameters
@@ -198,7 +198,7 @@ void C_RigidBody::OnEditor()
 	}
 }
 
-void C_RigidBody::Combos()
+void RigidBodyComponent::Combos()
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 	ImVec4 colors = style.Colors[ImGuiCol_Border];
@@ -276,7 +276,7 @@ void C_RigidBody::Combos()
 	ImGui::PopStyleColor();
 }
 
-void C_RigidBody::AddConstraintP2P(C_RigidBody* const& val)
+void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 {	
 	btVector3 center;
 	float r1, r2;
@@ -285,7 +285,7 @@ void C_RigidBody::AddConstraintP2P(C_RigidBody* const& val)
 	app->physics->AddConstraintP2P(*body, *val->GetBody(), float3(r1, r1, r1), float3(r2, r2, r2));
 }
 
-void C_RigidBody::SetCollisionType(CollisionType type)
+void RigidBodyComponent::SetCollisionType(CollisionType type)
 {
 	collisionType = type;
 	SetBoundingBox();
@@ -293,7 +293,7 @@ void C_RigidBody::SetCollisionType(CollisionType type)
 	ResetLocalValues();
 }
 
-void C_RigidBody::ResetLocalValues()
+void RigidBodyComponent::ResetLocalValues()
 {
 	LOG(LogType::L_NORMAL, "%f, %f, %f",box.size[0], box.size[1], box.size[2]);
 	box.size = { 1,1,1 };
@@ -305,7 +305,7 @@ void C_RigidBody::ResetLocalValues()
 	cone.height = 2;
 }
 
-void C_RigidBody::EditCollisionMesh()
+void RigidBodyComponent::EditCollisionMesh()
 {
 	switch (collisionType)
 	{
@@ -378,7 +378,7 @@ void C_RigidBody::EditCollisionMesh()
 	}
 }
 
-float4x4 C_RigidBody::btScalarTofloat4x4(btScalar* transform)
+float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 {
 	float4x4 newTransform;
 	int k = 0;
@@ -394,7 +394,7 @@ float4x4 C_RigidBody::btScalarTofloat4x4(btScalar* transform)
 	return newTransform;
 }
 
-void C_RigidBody::CreateBody()
+void RigidBodyComponent::CreateBody()
 {
 	if (body != nullptr)
 		app->physics->DeleteBody(this, owner->name);
@@ -433,7 +433,7 @@ void C_RigidBody::CreateBody()
 	}
 }
 
-void C_RigidBody::SetMass(float mass)
+void RigidBodyComponent::SetMass(float mass)
 {
 	btVector3 localInertia(0, 0, 0);
 	if (mass != 0.f)
@@ -442,7 +442,7 @@ void C_RigidBody::SetMass(float mass)
 	this->mass = mass;
 }
 
-void C_RigidBody::SetAsStatic()
+void RigidBodyComponent::SetAsStatic()
 {
 	useGravity = false;
 	isKinematic = false;
