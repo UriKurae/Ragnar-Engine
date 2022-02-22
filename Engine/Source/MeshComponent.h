@@ -22,7 +22,7 @@ public:
 	MeshComponent(MeshComponent* meshComponent, TransformComponent* trans);
 	~MeshComponent();
 
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 	void DrawOutline() override;
 	void OnEditor() override;
 

@@ -39,7 +39,12 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 
 	if (ImGui::Begin(ICON_FA_EYE" Scene", &active, ImGuiWindowFlags_NoScrollbar))
 	{
-		app->camera->canBeUpdated = true;	
+		if (ImGui::IsItemActivated() || ImGui::IsItemActive())
+			isFocused = true;
+		else if (ImGui::IsItemDeactivated()|| !ImGui::IsItemActive())
+			isFocused = false;
+
+		app->camera->canBeUpdated = true;
 
 		ImVec2 size = ImGui::GetContentRegionAvail();
 

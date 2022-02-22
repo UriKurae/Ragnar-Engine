@@ -1,11 +1,16 @@
 #include "MaterialComponent.h"
 
 #include "Application.h"
+#include "ModuleEditor.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleScene.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "Viewport.h"
+
+#include "CameraComponent.h"
 
 #include "FileSystem.h"
 
@@ -227,7 +232,7 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void MaterialComponent::Bind()
+void MaterialComponent::Bind(CameraComponent* gameCam)
 {
 	// Crash when creating a primitive
 	if (!this)
@@ -241,9 +246,21 @@ void MaterialComponent::Bind()
 	// Could not do view and proj each frame.
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	shader->SetUniformMatrix4f("model", model.Transposed());
-	float4x4 view = app->camera->matrixViewFrustum;
+
+	float4x4 view = float4x4::identity;
+	float4x4 proj = float4x4::identity;
+	if (gameCam)
+	{
+		view = gameCam->matrixViewFrustum;
+		proj = gameCam->matrixProjectionFrustum;
+	}
+	else
+	{
+		view = app->camera->matrixViewFrustum;
+		proj = app->camera->matrixProjectionFrustum;
+	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
-	shader->SetUniformMatrix4f("projection", app->camera->matrixProjectionFrustum.Transposed());
+	shader->SetUniformMatrix4f("projection", proj.Transposed());
 	float4x4 normalMat = view;
 	normalMat.Inverse();
 	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());

@@ -11,6 +11,7 @@ typedef unsigned char GLubyte;
 
 class Texture;
 class Resource;
+class CameraComponent;
 
 class MaterialComponent : public Component
 {
@@ -26,7 +27,7 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void Bind();
+	void Bind(CameraComponent* gameCam);
 	void Unbind();
 
 	void SetTexture(std::shared_ptr<Resource> tex);

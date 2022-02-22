@@ -74,7 +74,7 @@ void AudioReverbZoneComponent::CompileBuffers()
 	vbo->Unbind();
 }
 
-void AudioReverbZoneComponent::Draw()
+void AudioReverbZoneComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
 

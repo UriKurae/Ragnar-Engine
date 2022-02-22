@@ -65,6 +65,14 @@ bool ModuleScene::Start()
 
 bool ModuleScene::PreUpdate(float dt)
 {
+	static bool refresh = true;
+
+	if (refresh)
+	{
+		resetQuadtree = true;
+		refresh = false;
+	}
+
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
@@ -140,7 +148,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw();
+			go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);

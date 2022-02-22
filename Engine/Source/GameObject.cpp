@@ -53,7 +53,7 @@ bool GameObject::Update(float dt)
 	return true;
 }
 
-void GameObject::Draw()
+void GameObject::Draw(CameraComponent* gameCam)
 {
 	// TODO: Check this in the future
 	//if (!GetAllComponent<MeshComponent>().empty())
@@ -69,7 +69,7 @@ void GameObject::Draw()
 		Component* component = components[i];
 		if (component->GetActive())
 		{
-			component->Draw();
+			component->Draw(gameCam);
 		}
 	}
 

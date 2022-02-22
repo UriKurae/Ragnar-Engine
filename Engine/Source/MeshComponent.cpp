@@ -45,7 +45,7 @@ MeshComponent::~MeshComponent()
 	if (mesh.use_count() - 1 == 1) mesh->UnLoad();
 }
 
-void MeshComponent::Draw()
+void MeshComponent::Draw(CameraComponent* gameCam)
 {
 	//glEnableClientState(GL_VERTEX_ARRAY);
 	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -54,7 +54,7 @@ void MeshComponent::Draw()
 	//glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	
 	
-	if (material != nullptr && material->GetActive()) material->Bind();
+	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	

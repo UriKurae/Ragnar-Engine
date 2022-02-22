@@ -93,7 +93,7 @@ bool CameraComponent::Update(float dt)
 	return true;
 }
 
-void CameraComponent::Draw()
+void CameraComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
 

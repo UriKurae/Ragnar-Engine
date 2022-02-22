@@ -265,13 +265,13 @@ bool ModuleRenderer3D::PostUpdate()
 
 	//glPopMatrix();
 	//glPopMatrix();
-
+	//PushCamera(float4x4::identity, float4x4::identity);
 	
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			(*it)->Draw();
+			(*it)->Draw(nullptr);
 		}
 	}
 	else
@@ -293,10 +293,11 @@ bool ModuleRenderer3D::PostUpdate()
 
 	//glPopMatrix();
 	//glPopMatrix();
+	PushCamera(float4x4::identity, float4x4::identity);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw();
+		(*it)->Draw(app->scene->mainCamera);
 	}
 
 	mainCameraFbo->Unbind();

@@ -29,7 +29,7 @@ public:
 	~GameObject();
 
 	bool Update(float dt);
-	void Draw();
+	void Draw(CameraComponent* gameCam);
 	void DrawOutline();
 	void DrawEditor();
 
