@@ -7,6 +7,8 @@
 #include <sstream>
 #include <iostream>
 #include<vector>
+
+
 struct IVec2 {
     IVec2() = default;
     IVec2(int x, int y) : x(x), y(y) {}

@@ -15,11 +15,11 @@
 //	SliderComponent(int id, std::string text);
 //	virtual ~SliderComponent();
 //
-//	void Update() override;
+//	bool Update(float dt) override;
 //	void Draw() override;
-//	void OnEditor(int i) override;
+//	void OnEditor() override;
 //	float2 GetParentPosition();
-//
+//	GameObject* gen;
 //	float value;
 //	float minValue;
 //	float maxValue;
@@ -28,16 +28,16 @@
 //	float barProgres;
 //public:
 //	State state;
-//	Color disabledColor = White;
-//	Color pressedColor = Red;
-//	Color focusedColor = Blue;
-//	Color normalColor = Green;
-//	Color selectedColor = Black;
+//	Color disabledColor = white;
+//	Color pressedColor = red;
+//	Color focusedColor = blue;
+//	Color normalColor = green;
+//	Color selectedColor = black;
 //
 //	bool drawRect;
 //
 //	Text sliderText;
-//	Color textColor = White;
+//	Color textColor = white;
 //	char text[64] = "Camera FOV";
 //	float fontScale = 0.5;
 //};

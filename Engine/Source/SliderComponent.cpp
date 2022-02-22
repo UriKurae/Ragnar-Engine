@@ -26,7 +26,7 @@
 //	
 //}
 //
-//void SliderComponent::Update()
+//bool SliderComponent::Update()
 //{
 //	sliderText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 //
@@ -121,17 +121,17 @@
 //			glBindBuffer(GL_ARRAY_BUFFER, 0);
 //		}
 //	}
-//
+//	return true;
 //
 //}
 //
 //void SliderComponent::Draw()
 //{
-//	MyPlane* planeToDraw = nullptr;
+//	/*MyPlane* planeToDraw = nullptr;
 //	int auxId = owner->id;
 //
 //	for (int i = 0; i < app->editor->planes.size(); i++)
-//		if (App->editor->planes[i]->id == auxId) planeToDraw = App->editor->planes[i];
+//		if (App->editor->planes[i]->id == auxId) planeToDraw = App->editor->planes[i];*/
 //
 //	glAlphaFunc(GL_GREATER, 0.5);
 //	glEnable(GL_ALPHA_TEST);
@@ -157,13 +157,13 @@
 //		break;
 //	}
 //
-//	planeToDraw->DrawPlane2D();
+//	//planeToDraw->DrawPlane2D();
 //
 //	glDisable(GL_ALPHA_TEST);
 //	glColor3f(255, 255, 255);
 //}
 //
-//void SliderComponent::OnEditor(int i)
+//void SliderComponent::OnEditor()
 //{
 //	// Colors
 //	static bool normalEditable = false;
@@ -172,73 +172,81 @@
 //	static bool disabledEditable = false;
 //	static bool selectedEditable = false;
 //	static bool textColorEditable = false;
-//
-//	ImGui::Checkbox("Interactable", &active);
-//
-//	ImGui::Text("Normal Color"); ImGui::SameLine();
-//	if (ImGui::ColorButton("Normal Color", ImVec4(normalColor.r, normalColor.g, normalColor.b, normalColor.a)))
-//		normalEditable = !normalEditable;
-//
-//	ImGui::Text("Pressed Color"); ImGui::SameLine();
-//	if (ImGui::ColorButton("Pressed Color", ImVec4(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a)))
-//		pressedEditable = !pressedEditable;
-//
-//	ImGui::Text("Focused Color"); ImGui::SameLine();
-//	if (ImGui::ColorButton("Focused Color", ImVec4(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a)))
-//		focusedEditable = !focusedEditable;
-//
-//	ImGui::Text("Disabled Color"); ImGui::SameLine();
-//	if (ImGui::ColorButton("Disabled Color", ImVec4(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a)))
-//		disabledEditable = !disabledEditable;
-//
-//	ImGui::Text("Selected Color"); ImGui::SameLine();
-//	if (ImGui::ColorButton("Selected Color", ImVec4(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a)))
-//		selectedEditable = !selectedEditable;
-//
-//	ImGui::Separator();
-//
-//	ImGui::Text("Text Color"); ImGui::SameLine();
-//	if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
-//		textColorEditable = !textColorEditable;
-//
-//	sliderText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
-//
-//	if (normalEditable)
+//	ImGui::PushID(this);
+//	if (ImGui::CollapsingHeader("Button"))
 //	{
-//		ImGui::ColorPicker3("Normal Color", &normalColor);
-//	}
-//	if (pressedEditable)
-//	{
-//		ImGui::ColorPicker3("Pressed Color", &pressedColor);
-//	}
-//	if (focusedEditable)
-//	{
-//		ImGui::ColorPicker3("Focused Color", &focusedColor);
-//	}
-//	if (disabledEditable)
-//	{
-//		ImGui::ColorPicker3("Disabled Color", &disabledColor);
-//	}
-//	if (selectedEditable)
-//	{
-//		ImGui::ColorPicker3("Selected Color", &selectedColor);
-//	}
-//	if (textColorEditable)
-//	{
-//		ImGui::ColorPicker3("Text Color", &textColor);
-//	}
+//		ImGui::Checkbox("Interactable", &active);
 //
-//	ImGui::InputFloat("Min Value", &minValue);
-//	ImGui::InputFloat("Max Value", &maxValue);
-//	ImGui::SliderFloat("Value", &value, minValue, maxValue);
+//		ImGui::Text("Normal Color"); ImGui::SameLine();
+//		if (ImGui::ColorButton("Normal Color", ImVec4(normalColor.r, normalColor.g, normalColor.b, normalColor.a)))
+//			normalEditable = !normalEditable;
 //
-//	ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
-//	ImGui::DragFloat("Font Size", &sliderText.Scale, 0.1, 0, 10);
-//	sliderText.setOnlyText(text);
+//		ImGui::Text("Pressed Color"); ImGui::SameLine();
+//		if (ImGui::ColorButton("Pressed Color", ImVec4(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a)))
+//			pressedEditable = !pressedEditable;
+//
+//		ImGui::Text("Focused Color"); ImGui::SameLine();
+//		if (ImGui::ColorButton("Focused Color", ImVec4(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a)))
+//			focusedEditable = !focusedEditable;
+//
+//		ImGui::Text("Disabled Color"); ImGui::SameLine();
+//		if (ImGui::ColorButton("Disabled Color", ImVec4(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a)))
+//			disabledEditable = !disabledEditable;
+//
+//		ImGui::Text("Selected Color"); ImGui::SameLine();
+//		if (ImGui::ColorButton("Selected Color", ImVec4(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a)))
+//			selectedEditable = !selectedEditable;
+//
+//		ImGui::Separator();
+//
+//		ImGui::Text("Text Color"); ImGui::SameLine();
+//		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
+//			textColorEditable = !textColorEditable;
+//
+//		sliderText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+//
+//		if (normalEditable)
+//		{
+//			ImGui::ColorPicker3("Normal Color", &normalColor);
+//		}
+//		if (pressedEditable)
+//		{
+//			ImGui::ColorPicker3("Pressed Color", &pressedColor);
+//		}
+//		if (focusedEditable)
+//		{
+//			ImGui::ColorPicker3("Focused Color", &focusedColor);
+//		}
+//		if (disabledEditable)
+//		{
+//			ImGui::ColorPicker3("Disabled Color", &disabledColor);
+//		}
+//		if (selectedEditable)
+//		{
+//			ImGui::ColorPicker3("Selected Color", &selectedColor);
+//		}
+//		if (textColorEditable)
+//		{
+//			ImGui::ColorPicker3("Text Color", &textColor);
+//		}
+//
+//		ImGui::InputFloat("Min Value", &minValue);
+//		ImGui::InputFloat("Max Value", &maxValue);
+//		ImGui::SliderFloat("Value", &value, minValue, maxValue);
+//
+//		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
+//		ImGui::DragFloat("Font Size", &sliderText.Scale, 0.1, 0, 10);
+//		sliderText.setOnlyText(text);
+//
+//	}
+//	
 //}
 //
 //float2 SliderComponent::GetParentPosition()
 //{
-//	ComponentTransform2D* transform = owner->getTransform2D();
-//	return { transform->position.x - (strlen(text) * 12 * sliderText.Scale), transform->position.y - 5 };
+//	TransformComponent* transform2D = gen->GetComponent<TransformComponent>();
+//	float3 position = transform2D->GetPosition();
+//	return { position.x - (strlen(text) * 12 * sliderText.Scale), position.y - 5 };
+//
+//	
 //}

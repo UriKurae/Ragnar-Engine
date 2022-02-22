@@ -155,7 +155,7 @@ bool HierarchyMenu::Update(float dt)
 				ButtonComponent* button= (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
 				button->gen = object;
 				MaterialComponent* material=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-				TransformComponent* transform= (TransformComponent*)object->CreateComponent(ComponentType::TRANSFORM);
+				
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 

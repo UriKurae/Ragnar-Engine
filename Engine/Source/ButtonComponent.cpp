@@ -7,12 +7,14 @@
 #include"TransformComponent.h"
 #include"MathGeoLib/src/MathGeoLib.h"
 #include"glew/include/GL/glew.h"
-ButtonComponent::ButtonComponent(int id, std::string _text)
+ButtonComponent::ButtonComponent(GameObject* own)
 {
+	owner = own;
+	active = true;
 	//name = "Button Component";
 	type = ComponentType::UI_BUTTON;
 	state = State::NORMAL;
-	buttonText.setText(_text, 5, 5, 0.5, { 255,255,255 });
+	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
 }
 
 ButtonComponent::~ButtonComponent()
@@ -70,11 +72,7 @@ bool ButtonComponent::Update(float dt)
 
 void ButtonComponent::Draw()
 {
-	/*MyPlane* planeToDraw = nullptr;
-	int auxId = owner->id;
-
-	for (int i = 0; i < app->editor->planes.size(); i++)
-		if (app->editor->planes[i]->id == auxId) { planeToDraw = app->editor->planes[i]; }*/
+	
 	
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
@@ -108,7 +106,6 @@ void ButtonComponent::Draw()
 
 void ButtonComponent::OnEditor()
 {
-	// General variables
 	static float multiplier = 1;
 	static float fadeDuration = 0.1f;
 
@@ -119,68 +116,77 @@ void ButtonComponent::OnEditor()
 	static bool disabledEditable = false;
 	static bool selectedEditable = false;
 	static bool textColorEditable = false;
-
-	ImGui::Checkbox("Interactable", &active);
-
-	ImGui::Text("Normal Color"); ImGui::SameLine(); 
-	if (ImGui::ColorButton("Normal Color", ImVec4(normalColor.r, normalColor.g, normalColor.b, normalColor.a)))
-		normalEditable = !normalEditable;
-
-	ImGui::Text("Pressed Color"); ImGui::SameLine();
-	if (ImGui::ColorButton("Pressed Color", ImVec4(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a)))
-		pressedEditable = !pressedEditable;
-
-	ImGui::Text("Focused Color"); ImGui::SameLine();
-	if (ImGui::ColorButton("Focused Color", ImVec4(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a)))
-		focusedEditable = !focusedEditable;
-
-	ImGui::Text("Disabled Color"); ImGui::SameLine();
-	if (ImGui::ColorButton("Disabled Color", ImVec4(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a)))
-		disabledEditable = !disabledEditable;
-
-	ImGui::Text("Selected Color"); ImGui::SameLine();
-	if (ImGui::ColorButton("Selected Color", ImVec4(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a)))
-		selectedEditable = !selectedEditable;
-
-	ImGui::Separator();
-
-	ImGui::Text("Text Color"); ImGui::SameLine();
-	if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
-		textColorEditable = !textColorEditable;
-
-	buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
-
-	if (normalEditable)
+	ImGui::PushID(this);
+	if (ImGui::CollapsingHeader("Button"))
 	{
-		ImGui::ColorPicker3("Normal Color", &normalColor);
+		Checkbox(this, "Active", active);
+
+		ImGui::Checkbox("Interactable", &active);
+
+		ImGui::Text("Normal Color"); ImGui::SameLine();
+		if (ImGui::ColorButton("Normal Color", ImVec4(normalColor.r, normalColor.g, normalColor.b, normalColor.a)))
+			normalEditable = !normalEditable;
+
+		ImGui::Text("Pressed Color"); ImGui::SameLine();
+		if (ImGui::ColorButton("Pressed Color", ImVec4(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a)))
+			pressedEditable = !pressedEditable;
+
+		ImGui::Text("Focused Color"); ImGui::SameLine();
+		if (ImGui::ColorButton("Focused Color", ImVec4(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a)))
+			focusedEditable = !focusedEditable;
+
+		ImGui::Text("Disabled Color"); ImGui::SameLine();
+		if (ImGui::ColorButton("Disabled Color", ImVec4(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a)))
+			disabledEditable = !disabledEditable;
+
+		ImGui::Text("Selected Color"); ImGui::SameLine();
+		if (ImGui::ColorButton("Selected Color", ImVec4(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a)))
+			selectedEditable = !selectedEditable;
+
+		ImGui::Separator();
+
+		ImGui::Text("Text Color"); ImGui::SameLine();
+		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
+			textColorEditable = !textColorEditable;
+
+		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+
+		if (normalEditable)
+		{
+			ImGui::ColorPicker3("Normal Color", &normalColor);
+		}
+		if (pressedEditable)
+		{
+			ImGui::ColorPicker3("Pressed Color", &pressedColor);
+		}
+		if (focusedEditable)
+		{
+			ImGui::ColorPicker3("Focused Color", &focusedColor);
+		}
+		if (disabledEditable)
+		{
+			ImGui::ColorPicker3("Disabled Color", &disabledColor);
+		}
+		if (selectedEditable)
+		{
+			ImGui::ColorPicker3("Selected Color", &selectedColor);
+		}
+		if (textColorEditable)
+		{
+			ImGui::ColorPicker3("Text Color", &textColor);
+		}
+
+		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
+		ImGui::InputFloat("Fade Duration", &fadeDuration);
+
+		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
+		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
+		buttonText.setOnlyText(text);
 	}
-	if (pressedEditable)
-	{
-		ImGui::ColorPicker3("Pressed Color", &pressedColor);
-	}
-	if (focusedEditable)
-	{
-		ImGui::ColorPicker3("Focused Color", &focusedColor);
-	}
-	if (disabledEditable)
-	{
-		ImGui::ColorPicker3("Disabled Color", &disabledColor);
-	}
-	if (selectedEditable)
-	{
-		ImGui::ColorPicker3("Selected Color", &selectedColor);
-	}
-	if (textColorEditable)
-	{
-		ImGui::ColorPicker3("Text Color", &textColor);
-	}
+	// General variables
 	
-	ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
-	ImGui::InputFloat("Fade Duration", &fadeDuration);
 
-	ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
-	ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
-	buttonText.setOnlyText(text);
+	
 }
 
 
@@ -192,57 +198,4 @@ float2 ButtonComponent::GetParentPosition()
 	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
 
-//void ButtonComponent::FadeUI()
-//{
-//	static int iters = 0;
-//	float yMult = 5;
-//	float zMult = 1;
-//	float maxIters = 400;
-//	for (int i = 0; i < app->userInterface->UIGameObjects.size(); i++)
-//	{
-//		GameObject* go = app->userInterface->UIGameObjects[i];
-//
-//		TransformComponent* transform2D = app->userInterface->UIGameObjects[i]->GetComponent<TransformComponent>();
-//		float3 position = transform2D->GetPosition();
-//
-//		ImageComponent* image = nullptr;
-//		image = go->GetComponent<ImageComponent>();
-//
-//		
-//		
-//		if (app->maxMs == 1000 / 60)
-//		{
-//			yMult = 20;
-//			zMult = 4;
-//			maxIters = 100;
-//		}
-//		else
-//		{
-//			yMult = 5;
-//			zMult = 1;
-//			maxIters = 400;
-//		}
-//		if (image == nullptr)
-//		{
-//			position.y -= yMult;
-//			position.z += zMult;
-//		}
-//		if (image != nullptr)
-//		{
-//			position.y -= yMult;
-//			position.z += zMult;
-//		}
-//		/*if (image != nullptr && go->components[comp]->UIid != 10)
-//		{
-//			position.y -= yMult;
-//			position.z += zMult;
-//		}*/
-//	}
-//	iters++;
-//
-//	if (iters > maxIters)
-//	{
-//		fadeUI = false;
-//		iters = 0;
-//	}
-//}
+

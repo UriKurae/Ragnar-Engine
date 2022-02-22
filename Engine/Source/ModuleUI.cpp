@@ -590,49 +590,26 @@ bool ModuleUI::PostUpdate()
 	}
 	else
 	{
-		/*for (int i = 0; i < UIGameObjects.size(); i++)
+		for (int i = 0; i < UIGameObjects.size(); i++)
 		{
 			GameObject* go = UIGameObjects[i];
+			ButtonComponent* aux = nullptr;
 
-			int button = go->SearchComponent(go, ComponentType::UI_BUTTON);
-			int checkbox = go->SearchComponent(go, ComponentType::UI_CHECKBOX);
-			int image = go->SearchComponent(go, ComponentType::UI_IMAGE);
-			int inputbox = go->SearchComponent(go, ComponentType::UI_INPUTBOX);
-			int slider = go->SearchComponent(go, ComponentType::UI_SLIDER);
-			int canvas = go->SearchComponent(go, ComponentType::UI_CANVAS);
-			if (button != -1)
+			aux = go->GetComponent<ButtonComponent>();
+			/*aux1 = go->GetComponent<CanvasComponent>();
+			aux2 = go->GetComponent<CheckboxComponent>();
+			aux3 = go->GetComponent<ImageComponent>();
+			aux4 = go->GetComponent<InputBoxComponent>();
+			aux5 = go->GetComponent<SliderComponent>();*/
+
+			if (aux != nullptr)
 			{
-				go->components[button]->Draw();
-				ButtonComponent* auxiliar = go->GetButtonComponent(go);
-				RenderText(auxiliar->buttonText.textt, auxiliar->buttonText.X, auxiliar->buttonText.Y, auxiliar->buttonText.Scale, auxiliar->buttonText.Color);
+				aux->Draw();
+				RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+
+				aux = nullptr;
 			}
-			if (checkbox != -1)
-			{
-				go->components[checkbox]->Draw();
-				CheckboxComponent* auxiliar = go->GetCheckboxComponent(go);
-				RenderText(auxiliar->checkboxText.textt, auxiliar->checkboxText.X, auxiliar->checkboxText.Y, auxiliar->checkboxText.Scale, auxiliar->checkboxText.Color);
-			}
-			if (image != -1)
-			{
-				go->components[image]->Draw();
-			}
-			if (inputbox != -1)
-			{
-				go->components[inputbox]->Draw();
-				InputBoxComponent* auxiliar = go->GetInputboxComponent(go);
-				RenderText(auxiliar->aux.textt, auxiliar->aux.X, auxiliar->aux.Y, auxiliar->aux.Scale, auxiliar->aux.Color);
-			}
-			if (slider != -1)
-			{
-				go->components[slider]->Draw();
-				SliderComponent* auxiliar = go->GetSliderComponent(go);
-				RenderText(auxiliar->sliderText.textt, auxiliar->sliderText.X, auxiliar->sliderText.Y, auxiliar->sliderText.Scale, auxiliar->sliderText.Color);
-			}
-			if (canvas != -1)
-			{
-				go->components[canvas]->Draw();
-			}
-		}*/
+		}
 	}
 	
 	glEnable(GL_DEPTH_TEST);

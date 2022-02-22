@@ -11,7 +11,7 @@ class ButtonComponent : public Component
 {
 public:
 
-	ButtonComponent(int id, std::string text);
+	ButtonComponent(GameObject* own);
 	~ButtonComponent();
 
 	bool Update(float dt) override;
@@ -20,7 +20,6 @@ public:
 
 
 	float2 GetParentPosition();
-	void FadeUI();
 
 public:
 	float buttonWidth;

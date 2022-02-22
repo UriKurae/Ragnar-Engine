@@ -234,7 +234,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::UI_BUTTON:
 
-		component = new ButtonComponent(1, "hdh");
+		component = new ButtonComponent(this);
 		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);
