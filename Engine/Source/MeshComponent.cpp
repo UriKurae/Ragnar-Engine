@@ -103,23 +103,23 @@ void MeshComponent::DebugColliders(float3* points, float3 color)
 
 void MeshComponent::DrawOutline()
 {
-	//glEnableClientState(GL_VERTEX_ARRAY);
-	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	//glPushMatrix();
-	//float4x4 testGlobal = transform->GetGlobalTransform();
+	glPushMatrix();
+	float4x4 testGlobal = transform->GetGlobalTransform();
 
-	//testGlobal.scaleX += 0.05f;
-	//testGlobal.scaleY += 0.05f;
-	//testGlobal.scaleZ += 0.05f;
-	//glMultMatrixf(testGlobal.Transposed().ptr());
+	testGlobal.scaleX += 0.05f;
+	testGlobal.scaleY += 0.05f;
+	testGlobal.scaleZ += 0.05f;
+	glMultMatrixf(testGlobal.Transposed().ptr());
 
-	//if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
-	//glPopMatrix();
-	//
-	//glDisableClientState(GL_VERTEX_ARRAY);
-	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glPopMatrix();
+	
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void MeshComponent::OnEditor()
