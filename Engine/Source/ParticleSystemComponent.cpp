@@ -49,7 +49,7 @@ void ParticleSystemComponent::OnEditor()
         ImGui::Checkbox("Looping", &looping);
         ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
 
-        if (ImGui::Button("Save template"))
+/*        if (ImGui::Button("Save template"))
         {
             if (app->scene->SceneDirectory().empty())
             {
@@ -57,7 +57,7 @@ void ParticleSystemComponent::OnEditor()
                 if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
             }
             else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
-        }
+        }*/
 
         ImGui::Spacing();
         std::string guiName = "";
@@ -73,8 +73,7 @@ void ParticleSystemComponent::OnEditor()
         }
 
         if (ImGui::Button("Create Emitter")) {
-            ParticleEmitter* emitter = new ParticleEmitter(owner);
-            emitters.push_back(emitter);
+            emitters.push_back(new ParticleEmitter(owner));
         }
 
         ImGui::Separator();

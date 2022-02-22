@@ -6,6 +6,8 @@ class Particle {
 
 public:
 
+	Particle() {}
+
 	// This constructor is made to create the particle reference only
 	Particle(GameObject* parent) {
 		lifeTime = 1.5f;
