@@ -15,6 +15,8 @@
 
 #include "Profiling.h"
 
+#define MAX_TIME_TO_REFRESH_SHADER 10
+
 MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMenu(false), showShaderMenu(false)
 {
 	type = ComponentType::MATERIAL;
@@ -28,6 +30,8 @@ MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMe
 	diffuseColor = ambientColor;
 	specularColor = { 0.5,0.5,0.5 };
 	shininess = 5.0f;
+
+	refreshShaderTimer = 0.0f;
 }
 
 MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), showShaderMenu(false)
@@ -101,11 +105,9 @@ void MaterialComponent::OnEditor()
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 		}
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
+		
 
-		ImGui::Separator();
+		//ImGui::Separator();
 
 		ImGui::Text("Select shader: ");
 		ImGui::SameLine();
@@ -113,6 +115,8 @@ void MaterialComponent::OnEditor()
 		{
 			showShaderMenu = true;
 		}
+
+		ImGui::BulletText("Last time modified: %s", shader->GetLastModifiedDate());
 
 		ImGui::Separator();
 	}
@@ -148,6 +152,10 @@ void MaterialComponent::OnEditor()
 			}
 		}
 
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+		if (ImGui::Button(ICON_FA_TRASH" Delete"))
+			owner->RemoveComponent(this);
+
 		ImGui::End();
 	}
 
@@ -180,7 +188,22 @@ void MaterialComponent::OnEditor()
 		ImGui::End();
 	}
 
+
 	ImGui::PopID();
+}
+
+bool MaterialComponent::Update(float dt)
+{
+	if (refreshShaderTimer <= MAX_TIME_TO_REFRESH_SHADER)
+	{
+		refreshShaderTimer += dt;
+	}
+	else
+	{
+		refreshShaderTimer = 0.0f;
+		shader->Refresh();
+	}
+	return true;
 }
 
 bool MaterialComponent::OnLoad(JsonParsing& node)

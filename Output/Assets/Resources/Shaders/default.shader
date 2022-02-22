@@ -193,7 +193,7 @@ void main()
 	vec3 norm = normalize(vNormal);
 	vec3 viewDir = normalize(camPos - vPosition);
 	
-	vec3 result = vec3(0);//CalcDirLight(dirLight, norm, viewDir);
+	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	
 	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
 		result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);

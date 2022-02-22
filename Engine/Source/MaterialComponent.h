@@ -21,6 +21,8 @@ public:
 
 	void OnEditor() override;
 
+	bool Update(float dt) override;
+
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
@@ -42,5 +44,7 @@ private:
 	float3 diffuseColor;
 	float3 specularColor;
 	float shininess;
+
+	float refreshShaderTimer;
 
 };
