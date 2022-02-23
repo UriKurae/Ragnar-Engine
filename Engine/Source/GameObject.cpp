@@ -223,6 +223,21 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
+		{
+		MeshComponent* meshComp = (MeshComponent*)component;
+		
+			if (meshComp)
+			{
+				MaterialComponent* matComp = new MaterialComponent(this);
+				meshComp->SetMaterial((MaterialComponent*)matComp);
+				
+				if (matComp)
+				{
+					matComp->SetOwner(this);
+					components.push_back(matComp);
+				}
+			}
+		}
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
@@ -240,7 +255,26 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::MATERIAL:
 	{
 		MeshComponent* m = GetComponent<MeshComponent>();
-		if (m != nullptr && !m->HasMaterial())
+		MaterialComponent* matComp = GetComponent<MaterialComponent>();
+		if (m != nullptr && matComp)
+		{
+			if (matComp->IsDefaultMat())
+			{
+				std::vector<Component*>::iterator it = components.begin();
+				for (; it != components.end(); ++it)
+				{
+					if (*(it) == matComp)
+					{
+						components.erase(it);
+						RELEASE(matComp);
+						break;
+					}
+				}
+				component = new MaterialComponent(this, false);
+				m->SetMaterial((MaterialComponent*)component);
+			}
+		}
+		else
 		{
 			component = new MaterialComponent(this);
 			m->SetMaterial((MaterialComponent*)component);

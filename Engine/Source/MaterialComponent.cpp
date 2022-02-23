@@ -22,7 +22,7 @@
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 
-MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMenu(false), showShaderMenu(false)
+MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nullptr), showTexMenu(false), defaultMat(defaultMat)
 {
 	type = ComponentType::MATERIAL;
 	owner = own;
@@ -39,7 +39,7 @@ MaterialComponent::MaterialComponent(GameObject* own) : diff(nullptr), showTexMe
 	refreshShaderTimer = 0.0f;
 }
 
-MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), showShaderMenu(false)
+MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), defaultMat(false)
 {
 	checker = mat->checker;
 	diff = mat->diff;

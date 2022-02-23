@@ -11,7 +11,7 @@
 #include <fstream>
 #include <sys/types.h>
 #include <sys/stat.h>
-
+#include <time.h>
 
 
 GLenum GetShaderTypeFromString(const std::string& type)

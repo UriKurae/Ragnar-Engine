@@ -16,7 +16,7 @@ class CameraComponent;
 class MaterialComponent : public Component
 {
 public:
-	MaterialComponent(GameObject* own);
+	MaterialComponent(GameObject* own, bool defaultMat = true);
 	MaterialComponent(MaterialComponent* mat);
 	~MaterialComponent();
 
@@ -29,6 +29,7 @@ public:
 
 	void Bind(CameraComponent* gameCam);
 	void Unbind();
+	bool IsDefaultMat() const { return defaultMat; }
 
 	void SetTexture(std::shared_ptr<Resource> tex);
 
@@ -47,5 +48,7 @@ private:
 	float shininess;
 
 	float refreshShaderTimer;
+
+	bool defaultMat;
 
 };
