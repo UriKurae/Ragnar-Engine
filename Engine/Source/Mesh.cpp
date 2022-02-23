@@ -152,7 +152,7 @@ void Mesh::ShowFaceNormals(float3& colorNormal, float& normalLength)
 const std::vector<float3> Mesh::GetPositions()
 {
 	std::vector<float3> positions = {};
-	//positions.resize(vertices.size());
+	positions.reserve(vertices.size());
 
 	for (int i = 0; i < vertices.size(); ++i)
 		positions.emplace_back(vertices[i].position);
