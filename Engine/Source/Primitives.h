@@ -139,7 +139,7 @@ namespace RPyramide
 		vertices.emplace_back(vertex);
 
 		// 4
-		vertex.position = { 0.0f, -0.5f, 0.0f };
+		vertex.position = { 0.0f, 0.5f, 0.0f };
 		vertex.texCoords = { 0.5f,1.0 };
 		vertex.normal = { vertex.position };
 		vertices.emplace_back(vertex);
@@ -177,7 +177,7 @@ namespace RSphere
 
 		for (int i = 0; i <= 20; ++i)
 		{
-			stackAngle = M_PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
+			stackAngle = M_PI / 2 - i * stackStep;    // starting from pi/2 to -pi/2
 			xy = 1.0f * cosf(stackAngle);             // r * cos(u)
 			z = 1.0f * sinf(stackAngle);              // r * sin(u)
 

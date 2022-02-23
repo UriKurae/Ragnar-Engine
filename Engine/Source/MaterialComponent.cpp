@@ -22,7 +22,7 @@
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 
-MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nullptr), showTexMenu(false), defaultMat(defaultMat)
+MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nullptr), showTexMenu(false), showShaderMenu(false), defaultMat(defaultMat)
 {
 	type = ComponentType::MATERIAL;
 	owner = own;
@@ -31,6 +31,9 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 	active = true;
 
 	shader = new Shader("Assets/Resources/Shaders/default.shader");
+
+	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
+
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
 	specularColor = { 0.5,0.5,0.5 };
@@ -39,7 +42,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 	refreshShaderTimer = 0.0f;
 }
 
-MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), defaultMat(false)
+MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), showShaderMenu(false), defaultMat(false)
 {
 	checker = mat->checker;
 	diff = mat->diff;
