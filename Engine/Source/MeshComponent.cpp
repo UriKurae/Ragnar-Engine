@@ -205,7 +205,14 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(&mesh->GetVerticesData()->position, mesh->GetVerticesSize());
+
+		std::vector<float3> positions = {};
+		positions.resize(mesh->GetVerticesSize());
+
+		for (int i = 0; i < mesh->GetVerticesSize(); ++i)
+			positions[i] = mesh->GetVerticesData()->position;
+
+		localBoundingBox.Enclose(positions.data(), positions.size());
 
 		owner->SetAABB(localBoundingBox);
 	}
@@ -233,7 +240,14 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(&mesh->GetVerticesData()->position, mesh->GetVerticesSize());
+
+		std::vector<float3> positions = {};
+		positions.resize(mesh->GetVerticesSize());
+
+		for (int i = 0; i < mesh->GetVerticesSize(); ++i)
+			positions[i] = mesh->GetVerticesData()->position;
+
+		localBoundingBox.Enclose(positions.data(), positions.size());
 
 		owner->SetAABB(localBoundingBox);
 	}
