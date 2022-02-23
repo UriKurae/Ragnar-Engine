@@ -149,6 +149,17 @@ void Mesh::ShowFaceNormals(float3& colorNormal, float& normalLength)
 	glEnd();
 }
 
+const std::vector<float3> Mesh::GetPositions()
+{
+	std::vector<float3> positions = {};
+	//positions.resize(vertices.size());
+
+	for (int i = 0; i < vertices.size(); ++i)
+		positions.emplace_back(vertices[i].position);
+
+	return positions;
+}
+
 void Mesh::Reimport(ModelParameters& data)
 {
 	if (!vertices.empty())

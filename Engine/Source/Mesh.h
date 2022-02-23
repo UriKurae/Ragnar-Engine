@@ -32,6 +32,7 @@ public:
 	inline const char* GetPath() const { return path.c_str(); }
 	inline const int& GetVerticesSize() const { return vertices.size(); }
 	inline const Vertex* GetVerticesData() const { return vertices.data(); }
+	const std::vector<float3> GetPositions();
 	inline const std::vector<Vertex>& GetVerticesVector() const { return vertices; }
 	inline const int& GetIndicesSize() const { return indices.size(); }
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
