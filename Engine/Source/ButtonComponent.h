@@ -3,10 +3,10 @@
 #include "Component.h"
 #include "Color.h"
 #include "Text.h"
-
+#include "ModuleUI.h"
 class SDL_Rect;
 class SDL_Texture;
-
+class MyPlane;
 class ButtonComponent : public Component
 {
 public:
@@ -34,7 +34,7 @@ public:
 	Color focusedColor = blue;
 	Color normalColor = green;
 	Color selectedColor = black;
-
+	MyPlane* planeToDraw;
 	Color textColor = white;
 	char text[64] = "Button";
 	float fontScale = 1;

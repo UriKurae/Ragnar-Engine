@@ -200,6 +200,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
+
 	fbo->Bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	

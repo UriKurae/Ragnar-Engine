@@ -58,12 +58,18 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
-
-			math::float4x4 tr = app->editor->GetGO()->GetComponent<TransformComponent>()->GetLocalTransform().Transposed();
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
-			if (ImGuizmo::IsUsing())
+			
+			
+				
+			TransformComponent* tranform= app->editor->GetGO()->GetComponent<TransformComponent>();
+			if (tranform != nullptr) 
 			{
-				app->editor->GetGO()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				math::float4x4 tr=tranform->GetLocalTransform().Transposed();
+				ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+				if (ImGuizmo::IsUsing())
+				{
+					app->editor->GetGO()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				}	
 			}
 		}
 

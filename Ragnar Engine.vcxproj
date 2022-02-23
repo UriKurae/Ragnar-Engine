@@ -183,6 +183,7 @@
     <ClInclude Include="Engine\Source\TextureImporter.h" />
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
+    <ClInclude Include="Engine\Source\Transform2DComponent.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />
     <ClCompile Include="Engine\Source\EngineTimer.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
+    <ClCompile Include="Engine\Source\Transform2DComponent.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\Viewport.cpp" />

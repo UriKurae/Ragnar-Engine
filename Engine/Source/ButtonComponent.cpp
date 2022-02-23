@@ -15,6 +15,8 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	type = ComponentType::UI_BUTTON;
 	state = State::NORMAL;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
+
+
 }
 
 ButtonComponent::~ButtonComponent()
@@ -98,7 +100,7 @@ void ButtonComponent::Draw()
 		break;
 	}
 
-	/*planeToDraw->DrawPlane2D();*/
+	planeToDraw->DrawPlane2D();
 	
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
@@ -193,8 +195,8 @@ void ButtonComponent::OnEditor()
 
 float2 ButtonComponent::GetParentPosition()
 {
-	TransformComponent* transform2D =gen->GetComponent<TransformComponent>();
-	float3 position = transform2D->GetPosition();
+	ComponentTransform2D* transform2D =gen->GetComponent<ComponentTransform2D>();
+	float3 position = transform2D->position;
 	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
 

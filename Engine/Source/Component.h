@@ -20,7 +20,8 @@ enum class ComponentType
 	UI_CHECKBOX,
 	UI_SLIDER,
 	UI_INPUTBOX,
-	UI_CANVAS
+	UI_CANVAS,
+	TRANFORM2D
 };
 enum class State
 {

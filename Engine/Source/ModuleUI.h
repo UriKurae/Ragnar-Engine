@@ -7,8 +7,34 @@
 #include <sstream>
 #include <iostream>
 #include<vector>
+#include "GL/glew.h"
+#include"ModuleUI.h"
+#include"Transform2DComponent.h"
+class MyPlane
+{
+public:
+	MyPlane(float3 pos, float3 sca);
+    ~MyPlane();
+    void DrawPlane();
+    void DrawPlane2D();
+	std::vector<float3> getVertex() {
+	}
 
-
+public:
+    GLuint imageID;
+	float3 position;
+	float3 scale;
+	AABB aabb;
+	unsigned int VBO;
+	unsigned int EBO;
+	unsigned int TBO;
+	GLuint aTextureId;
+public:
+    std::vector<GLushort> indices;
+    std::vector<GLfloat> normals;
+    std::vector<GLfloat> texCoords;
+    std::vector<float3> vertices;
+};
 struct IVec2 {
     IVec2() = default;
     IVec2(int x, int y) : x(x), y(y) {}

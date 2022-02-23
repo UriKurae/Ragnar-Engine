@@ -151,14 +151,16 @@ bool HierarchyMenu::Update(float dt)
 			{
 				/*if (selected != nullptr) app->scene->Create3DObject(Object3D::PLANE, selected);
 				else*/ 
-				GameObject* object = app->scene->Create3DObject(Object3D::PLANE, nullptr);
+				
+				GameObject* object = app->scene->CreateGameObject(nullptr,false);
+				(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 				ButtonComponent* button= (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
 				button->gen = object;
 				MaterialComponent* material=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 				
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
-
+				button->planeToDraw = new MyPlane(float3{0,0,0}, float3{ 1,1,1 });
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{

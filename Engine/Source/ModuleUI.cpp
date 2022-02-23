@@ -25,7 +25,106 @@
 
 #include "MathGeoLib/src/Geometry/Frustum.h"
 #include FT_FREETYPE_H 
+MyPlane::MyPlane(float3 pos, float3 sca) {
+	position = pos;
+	scale = sca;
 
+	//type = PrimitivesTypes::PRIMITIVE_MYPLANE3D;
+
+	/*vertices.push_back({ (1 + pos.x) * sca.x ,pos.y,(1 + pos.z) * sca.z });
+	vertices.push_back({ (1 + pos.x) * sca.x ,pos.y, (pos.z - 1) * sca.z });
+	vertices.push_back({ (pos.x - 1) * sca.x ,pos.y,(pos.z - 1) * sca.z });
+	vertices.push_back({ (pos.x - 1) * sca.x ,pos.y,(1 + pos.z) * sca.z });*/
+	vertices.push_back({ -0.5,-0.5,0 });
+	vertices.push_back({ 0.5,-0.5,0 });
+	vertices.push_back({ -0.5,0.5,0 });
+	vertices.push_back({ 0.5,0.5,0 });
+
+	indices.push_back(2);
+	indices.push_back(1);
+	indices.push_back(0);
+	indices.push_back(3);
+	indices.push_back(1);
+	indices.push_back(2);
+
+	texCoords.push_back(0);
+	texCoords.push_back(1);
+	texCoords.push_back(1);
+	texCoords.push_back(1);
+	texCoords.push_back(0);
+	texCoords.push_back(0);
+	texCoords.push_back(1);
+	texCoords.push_back(0);
+
+	/*App->scene->gameObjects[App->scene->gameObjects.size() - 1]->rot.w = 0;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->rot.x = 0;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->rot.y = 0;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->rot.z = 0;
+
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->sca.x = sca.x;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->sca.y = sca.y;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->sca.z = sca.z;
+
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->trans.x = pos.x;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->trans.y = pos.y;
+	App->scene->gameObjects[App->scene->gameObjects.size() - 1]->trans.z = pos.z;*/
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float) * 3, vertices.data(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &TBO);
+	glBindBuffer(GL_ARRAY_BUFFER, TBO);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STATIC_DRAW);
+
+	aabb.SetNegativeInfinity();
+	aabb.Enclose((float3*)vertices.data(), (size_t)vertices.size());
+}
+
+void MyPlane::DrawPlane2D() {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	//Enable states
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	// TODO: 2D en lugar de 3D para UI
+
+
+	//Buffers
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Vertex
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_ARRAY_BUFFER, TBO); // TexCoords
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
+	glBindTexture(GL_TEXTURE_2D, aTextureId); // Textures and Indices
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+	ComponentTransform2D* auxTrans = app->userInterface->UIGameObjects[app->userInterface->UIGameObjects.size() - 1]->GetComponent<ComponentTransform2D>();
+	glPushMatrix();
+	float4x4 aux = float4x4::FromTRS(float3(auxTrans->position.x, auxTrans->position.y, auxTrans->position.z), auxTrans->rotationQuat, float3(auxTrans->scale.x, auxTrans->scale.y, 1));
+	glMultMatrixf(aux.Transposed().ptr());
+
+	//Draw
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0);
+
+	glPopMatrix();
+
+	//UnBind Buffers
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_TEXTURE_COORD_ARRAY, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	//Disable states
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+}
 Shader::Shader()
 {
 	// 1. retrieve the vertex/fragment source code from filePath
@@ -265,27 +364,32 @@ bool ModuleUI::PreUpdate(float dt)
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-		float4 viewport = app->editor->viewport->bounds;
+		
+		float4 viewport = app->editor->gameView->bounds;
 		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-
-		if (mousePos.x > viewport.x && mousePos.x < viewport.x + viewport.z && mousePos.y > viewport.y && mousePos.y < viewport.y + camera->currentScreenHeight)
+		/*DEBUG_LOG("%f",viewport.x);
+		DEBUG_LOG("%f", viewport.y);
+		DEBUG_LOG("%f", viewport.w);
+		DEBUG_LOG("%f", viewport.z);*/
+		
+		if (mousePos.x > viewport.x && mousePos.x < viewport.x + viewport.z && mousePos.y > viewport.y && mousePos.y < viewport.y + viewport.w)
 		{
 			for (int i = 0; i < UIGameObjects.size(); i++)
 			{
 				GameObject* go = UIGameObjects[i];
-				TransformComponent* transform2D = go->GetComponent<TransformComponent>();
+				ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
 
-				float3 position = transform2D->GetPosition();
+				float3 position = transform2D->position;
 				ButtonComponent*button=(ButtonComponent*)go->GetComponent<ButtonComponent>();
-				float posXMin = ((camera->currentScreenWidth / 2) + (position.x)) - (button->buttonWidth / 2);
-				float posXMax = ((camera->currentScreenWidth / 2) + (position.x)) + (button->buttonWidth / 2);
+				float posXMin = ((viewport.z / 2) + (position.x)) - (button->buttonWidth / 2);
+				float posXMax = ((viewport.z / 2) + (position.x)) + (button->buttonWidth / 2);
 
-				float posYMin = ((camera->currentScreenHeight / 2) + (-position.y)) - (button->buttonHeight / 2);
-				float posYMax = ((camera->currentScreenHeight / 2) + (-position.y)) + (button->buttonHeight / 2);
+				float posYMin = ((viewport.w / 2) + (-position.y)) - (button->buttonHeight / 2);
+				float posYMax = ((viewport.w / 2) + (-position.y)) + (button->buttonHeight / 2);
 
 				ImageComponent* image = nullptr;
 				image = go->GetComponent<ImageComponent>();
-				if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax) && image!=nullptr)
+				if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
 				{
 					hitObjs.push_back(go);
 				}
@@ -298,9 +402,9 @@ bool ModuleUI::PreUpdate(float dt)
 				int nearObj = 0;
 				for (int i = 0; i < hitObjs.size(); ++i)
 				{
-					TransformComponent* transform2D = hitObjs[i]->GetComponent<TransformComponent>();
+					ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
 
-					float3 position = transform2D->GetPosition();
+					float3 position = transform2D->position;
 					distance.push_back(position.z);
 					if (distance[i] < nearestDistance)
 					{
@@ -469,14 +573,21 @@ bool ModuleUI::PostUpdate()
 	glDisable(GL_DEPTH_TEST);
 
 	glPushMatrix();
+	
 	CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
 	//App->viewportBuffer->Bind(App->camera->GameCam);
+	
 	app->renderer3D->mainCameraFbo->Bind();
 	Frustum frustum;
+	
+	//frustum.pos = camera->camera.pos;
+	//frustum.front = camera->camera.front; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	//frustum.up = camera->camera.up; //COGED EL UP DE LA CAMARA DE JUEGO
 	frustum.pos = float3::zero;
 	frustum.front = float3::unitZ; //COGED EL FRONT DE LA CAMARA DE JUEGO
-	frustum.up = float3::unitY; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.up = float3::unitY;
 	frustum.type = OrthographicFrustum;
+	
 	frustum.orthographicHeight = camera->currentScreenHeight; //PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.orthographicWidth = camera->currentScreenWidth; //PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.nearPlaneDistance = 0.1;

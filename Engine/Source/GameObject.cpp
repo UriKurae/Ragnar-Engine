@@ -236,6 +236,10 @@ Component* GameObject::CreateComponent(ComponentType type)
 
 		component = new ButtonComponent(this);
 		break;
+	case ComponentType::TRANFORM2D:
+		
+		component = new ComponentTransform2D(float3{0,0,0}, float3{300,100,1}, float3{0,0,0}, this);
+		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);
 		MeshComponent* m = GetComponent<MeshComponent>();

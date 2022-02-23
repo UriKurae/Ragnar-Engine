@@ -220,7 +220,10 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 
 GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 {
-	GameObject* object = CreateGameObject(parent);
+	bool makeTransform = true;
+	if (type == Object3D::PLANE) makeTransform = false;
+	
+	GameObject* object = CreateGameObject(parent, makeTransform);
 	std::string path;
 
 	switch (type)
@@ -244,10 +247,11 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 	case Object3D::PLANE:
 		object->SetName("Plane");
 		path = "Settings/EngineResources/__Plane.mesh";
+
 		break;
 	}
 
-	if (!path.empty())
+	if (!path.empty()&& makeTransform == true)
 	{
 		MeshComponent* mesh = (MeshComponent*)object->CreateComponent(ComponentType::MESH_RENDERER);
 		mesh->SetMesh(ResourceManager::GetInstance()->LoadResource(path));

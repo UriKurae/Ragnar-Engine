@@ -340,6 +340,9 @@
     <ClInclude Include="Engine\Source\Text.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Transform2DComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -563,6 +566,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\SliderComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Transform2DComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
