@@ -14,6 +14,7 @@
 #include "Model.h"
 
 #include <stack>
+#include <fstream>
 
 #include "Profiling.h"
 
@@ -90,6 +91,15 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 	case ResourceType::MODEL:
 		library = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".rgmodel";
 		resource = std::make_shared<Model>(uid, assets, library);
+		break;
+	case ResourceType::SHADER:
+		library = SHADERS_FOLDER + std::string("shader_") + std::to_string(uid) + ".shader";
+		resource = std::make_shared<Shader>(uid, assets, library);
+		
+		std::ifstream src(assets, std::ios::binary);
+		std::ofstream dest(library, std::ios::binary);
+		dest << src.rdbuf();
+
 		break;
 	}
 

@@ -39,7 +39,7 @@ private:
 	bool showShaderMenu;
 
 	std::shared_ptr<Texture> diff = nullptr;
-	Shader* shader;
+	std::shared_ptr<Shader> shader;
 
 	// TODO: Temporary, should go in Material.h
 	float3 ambientColor;

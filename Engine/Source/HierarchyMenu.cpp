@@ -25,10 +25,6 @@ HierarchyMenu::~HierarchyMenu()
 bool HierarchyMenu::Update(float dt)
 {
 	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
-	if (ImGui::Button("+"))
-	{
-		createGameObject = true;
-	}
 
 	int size = app->scene->GetGameObjectsList().size();
 	GameObject* root = app->scene->GetRoot();

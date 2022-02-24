@@ -26,29 +26,39 @@ GLenum GetShaderTypeFromString(const std::string& type)
 
 
 
-Shader::Shader(const std::string& path) : path(path), rendererID(0)
+Shader::Shader(uint uid, std::string& assets, std::string& library) : Resource(uid, ResourceType::MESH, assets, library), rendererID(0)
 {
-	int s = path.find_last_of("/");
-	int e = path.find_last_of(".");
-	name = path.substr(s + 1, e - s - 1);
+	int s = assetsPath.find_last_of("/");
+	int e = assetsPath.find_last_of(".");
+	name = assetsPath.substr(s + 1, e - s - 1);
 
 	struct _stat nowStat;
-	if (_stat(path.c_str(), &nowStat) == 0)
+	if (_stat(assetsPath.c_str(), &nowStat) == 0)
 	{
 		lastStat = nowStat;
 	}
 
+	//Load();
+}
+
+Shader::~Shader()
+{
+	glDeleteProgram(rendererID);
+}
+
+void Shader::Load()
+{
 	source = ReadFile();
 
 	auto shaderSources = SplitShaders(source);
-	
+
 	//CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 	CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 
 	created = true;
 }
 
-Shader::~Shader()
+void Shader::UnLoad()
 {
 	glDeleteProgram(rendererID);
 }
@@ -77,7 +87,7 @@ void Shader::ReCompile(bool reReadSource)
 bool Shader::Refresh()
 {
 	struct _stat nowStat;
-	if (_stat(path.c_str(), &nowStat) == 0)
+	if (_stat(assetsPath.c_str(), &nowStat) == 0)
 	{
 		if (lastStat.st_mtime != nowStat.st_mtime)
 		{
@@ -104,25 +114,29 @@ char* Shader::GetLastModifiedDate()
 void Shader::SetUniformBool(const std::string& name, bool b)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniform1f(location, b);
+	if (location != -1)
+		glUniform1f(location, b);
 }
 
 void Shader::SetUniform1i(const std::string& name, int i)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniform1i(location, i);
+	if(location != -1)
+		glUniform1i(location, i);
 }
 
 void Shader::SetUniform1f(const std::string& name, float f)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniform1f(location, f);
+	if (location != -1)
+		glUniform1f(location, f);
 }
 
 void Shader::SetUnifromVec2f(const std::string& name, float v0, float v1)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniform2f(location, v0, v1);
+	if (location != -1)
+		glUniform2f(location, v0, v1);
 }
 
 void Shader::SetUnifromVec2f(const std::string& name, float2 v)
@@ -133,7 +147,8 @@ void Shader::SetUnifromVec2f(const std::string& name, float2 v)
 void Shader::SetUniformVec3f(const std::string& name, float v0, float v1, float v2)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniform3f(location, v0, v1, v2);
+	if (location != -1)
+		glUniform3f(location, v0, v1, v2);
 }
 
 void Shader::SetUniformVec3f(const std::string& name, float3 v)
@@ -144,7 +159,8 @@ void Shader::SetUniformVec3f(const std::string& name, float3 v)
 void Shader::SetUniformVec4f(const std::string& name, float v0, float v1, float v2, float v3)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniform4f(location, v0, v1, v2, v3);
+	if (location != -1)
+		glUniform4f(location, v0, v1, v2, v3);
 }
 
 void Shader::SetUniformVec4f(const std::string& name, float4 v)
@@ -155,13 +171,15 @@ void Shader::SetUniformVec4f(const std::string& name, float4 v)
 void Shader::SetUniformMatrix3f(const std::string& name, const float3x3& mat)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniformMatrix3fv(location, 1, GL_FALSE, mat.ptr());
+	if (location != -1)
+		glUniformMatrix3fv(location, 1, GL_FALSE, mat.ptr());
 }
 
 void Shader::SetUniformMatrix4f(const std::string& name, const float4x4& mat)
 {
 	GLint location = glGetUniformLocation(rendererID, name.c_str());
-	glUniformMatrix4fv(location, 1, GL_FALSE, mat.ptr());
+	if (location != -1)
+		glUniformMatrix4fv(location, 1, GL_FALSE, mat.ptr());
 }
 
 std::list<UniformData> Shader::GetUniforms()
@@ -291,7 +309,7 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 std::string Shader::ReadFile()
 {
 	std::string ret;
-	std::ifstream in(path, std::ios::in, std::ios::binary);
+	std::ifstream in(assetsPath, std::ios::in, std::ios::binary);
 
 	if (in)
 	{

@@ -30,7 +30,8 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 	
 	active = true;
 
-	shader = new Shader("Assets/Resources/Shaders/default.shader");
+	//shader = new Shader("Assets/Resources/Shaders/default.shader");
+	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
 
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
@@ -47,7 +48,9 @@ MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false
 	checker = mat->checker;
 	diff = mat->diff;
 
-	shader = new Shader("Assets/Resources/Shaders/default.shader");
+	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
+	//shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->GetResource("Assets/Resources/Shaders/default.shader"));
+
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
 	specularColor = { 0.5,0.5,0.5 };
@@ -64,7 +67,7 @@ MaterialComponent::~MaterialComponent()
 		mesh->SetMaterial(nullptr);
 	}
 
-	RELEASE(shader);
+	//RELEASE(shader);
 }
 
 void MaterialComponent::OnEditor()
@@ -123,6 +126,10 @@ void MaterialComponent::OnEditor()
 		{
 			showShaderMenu = true;
 		}
+
+		ImGui::Text("Reference Count: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", shader.use_count());
 
 		ImGui::BulletText("Last time modified: %s", shader->GetLastModifiedDate());
 
@@ -187,8 +194,8 @@ void MaterialComponent::OnEditor()
 			{
 				if (ImGui::Selectable((*it).c_str()))
 				{
-					RELEASE(shader);
-					shader = new Shader("Assets/Resources/Shaders/" + *it);
+					//RELEASE(shader);
+					//shader = new Shader("Assets/Resources/Shaders/" + *it);
 				}
 			}
 		}

@@ -8,11 +8,14 @@
 #include "ModuleScene.h"
 #include "Framebuffer.h"
 
+#include "ResourceManager.h"
+
 #include "GameObject.h"
 #include "LightComponent.h"
 
 #include "Material.h"
 #include "Shader.h"
+#include "Resource.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -191,8 +194,10 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 	grid = new PGrid(200, 200);
 
-	defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
-	shaders.push_back(defaultShader);
+	//defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
+	//shaders.push_back(defaultShader);
+
+	ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
 
 	// TODO: To be handled with the resource manager
 	//defaultMaterial = new Material();
@@ -316,7 +321,7 @@ bool ModuleRenderer3D::CleanUp()
 	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
-	RELEASE(defaultShader);
+	//RELEASE(defaultShader);
 	RELEASE(dirLight);
 
 	for(auto& pl : pointLights)
@@ -527,15 +532,18 @@ Shader* ModuleRenderer3D::GetDefaultShader()
 
 Shader* ModuleRenderer3D::AddShader(const std::string& path)
 {
-	Shader* shader = new Shader(path);
-	shaders.push_back(shader);
+	//Shader* shader = new Shader(path);
+	std::string p = path;
+	ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
+	//shaders.push_back(shader);
 
-	if (path.find("default"))
-	{
-		defaultShader = shader;
-	}
-
-	return shader;
+	//if (path.find("default"))
+	//{
+	//	defaultShader = shader;
+	//}
+	//
+	//return shader;
+	return 0;
 }
 
 void ModuleRenderer3D::AddMaterial(Material* material)

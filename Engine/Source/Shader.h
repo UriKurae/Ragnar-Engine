@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Resource.h"
+
 #include "Math/float4x4.h"
 #include "Math/float3x3.h"
 #include "Math/float2.h"
@@ -21,11 +23,14 @@ struct UniformData
 	std::string name;
 };
 
-class Shader
+class Shader : public Resource
 {
 public:
-	Shader(const std::string& path);
+	Shader(uint uid, std::string& assets, std::string& library);
 	virtual ~Shader();
+
+	void Load() override;
+	void UnLoad() override;
 
 	void Bind();
 	void Unbind();
@@ -55,7 +60,7 @@ public:
 	void SetUniformMatrix3f(const std::string& name, const float3x3& mat);
 	void SetUniformMatrix4f(const std::string& name, const float4x4& mat);
 
-	inline const std::string& GetPath() { return path; }
+	//inline const std::string& GetPath() { return path; }
 	inline const std::string& GetSource() { return source; }
 
 	std::list<UniformData> GetUniforms();
@@ -72,7 +77,7 @@ private:
 	std::string name;
 	unsigned int rendererID;
 	std::string source;
-	std::string path;
+	//std::string path;
 
 	bool created;
 
