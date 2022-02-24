@@ -277,7 +277,8 @@ Component* GameObject::CreateComponent(ComponentType type)
 		else
 		{
 			component = new MaterialComponent(this);
-			m->SetMaterial((MaterialComponent*)component);
+			if(m != nullptr)
+				m->SetMaterial((MaterialComponent*)component);
 		}
 		break;
 	}

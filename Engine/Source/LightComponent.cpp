@@ -91,7 +91,7 @@ void ComponentLight::OnEditor()
 	{
 		case LightType::DIRECTIONAL:
 		{
-			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light", ImGuiTreeNodeFlags_DefaultOpen))
+			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
 			{
 				ImGui::Separator();
 				ImGui::Dummy({ 10,10 });
@@ -110,7 +110,7 @@ void ComponentLight::OnEditor()
 		
 		case LightType::POINT:
 		{
-			if (ImGui::CollapsingHeader("Light", ImGuiTreeNodeFlags_DefaultOpen))
+			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB "Light"))
 			{
 				PointLight* l = (PointLight*)light;
 
@@ -131,7 +131,7 @@ void ComponentLight::OnEditor()
 
 		case LightType::SPOT:
 		{
-			if (ImGui::CollapsingHeader("Light", ImGuiTreeNodeFlags_DefaultOpen))
+			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB "Light"))
 			{
 				SpotLight* l = (SpotLight*)light;
 
@@ -158,157 +158,115 @@ void ComponentLight::SetLight(Light* light)
 
 bool ComponentLight::OnLoad(JsonParsing& node)
 {
+	active = node.GetJsonBool("Active");
+
+	int lightType = node.GetJsonNumber("Light Type");
+
+	switch ((LightType)lightType)
+	{
+		case LightType::DIRECTIONAL:
+		{
+			DirectionalLight* l = new DirectionalLight();
+
+			l->dir = node.GetJson3Number(node, "Direction");
+			l->ambient = node.GetJson3Number(node, "Ambient");
+			l->diffuse = node.GetJson3Number(node, "Diffuse");
+			l->specular = node.GetJson3Number(node, "Specular");
+
+			light = l;
+			app->renderer3D->dirLight = l;
+
+			break;
+		}
+
+		case LightType::POINT:
+		{
+			PointLight* l = new PointLight();
+
+			l->position = node.GetJson3Number(node, "Position");
+			l->ambient = node.GetJson3Number(node, "Ambient");
+			l->diffuse = node.GetJson3Number(node, "Diffuse");
+			l->specular = node.GetJson3Number(node, "Specular");
+			l->constant = node.GetJsonNumber("Constant");
+			l->lin = node.GetJsonNumber("Linear");
+			l->quadratic = node.GetJsonNumber("Quadratic");
+
+			light = l;
+
+			break;
+		}
+
+		case LightType::SPOT:
+		{
+			SpotLight* l = new SpotLight();
+
+			l->position = node.GetJson3Number(node, "Position");
+			l->direction = node.GetJson3Number(node, "Direction");
+			l->ambient = node.GetJson3Number(node, "Ambient");
+			l->diffuse = node.GetJson3Number(node, "Diffuse");
+			l->specular = node.GetJson3Number(node, "Specular");
+			l->cutOff = node.GetJsonNumber("CutOff");
+			l->outerCutOff = node.GetJsonNumber("Outer CutOff");
+
+			break;
+		}
+	}
+
 	return true;
 }
 
 bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 {
+	JsonParsing file = JsonParsing();
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Light Type", (int)light->type);
+
+	switch (light->type)
+	{
+		case LightType::DIRECTIONAL:
+		{
+			DirectionalLight* l = (DirectionalLight*)light;
+
+			file.SetNewJson3Number(file, "Direction", l->dir);
+			file.SetNewJson3Number(file, "Ambient", l->ambient);
+			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
+			file.SetNewJson3Number(file, "Specular", l->specular);
+
+			break;
+		}
+		case LightType::POINT:
+		{
+			PointLight* l = (PointLight*)light;
+			file.SetNewJson3Number(file, "Position", l->position);
+			file.SetNewJson3Number(file, "Ambient", l->ambient);
+			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
+			file.SetNewJson3Number(file, "Specular", l->specular);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Constant", l->constant);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Linear", l->lin);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Quadratic", l->quadratic);
+
+			break;
+		}
+
+		case LightType::SPOT:
+		{
+			SpotLight* l = (SpotLight*)light;
+
+			file.SetNewJson3Number(file, "Position", l->position);
+			file.SetNewJson3Number(file, "Direction", l->direction);
+			file.SetNewJson3Number(file, "Ambient", l->ambient);
+			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
+			file.SetNewJson3Number(file, "Specular", l->specular);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "CutOff", l->cutOff);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Outer CutOff", l->outerCutOff);
+
+			break;
+		}
+
+	}
+
+	node.SetValueToArray(array, file.GetRootValue());
+	
 	return true;
 }
-
-//JSON_Value* ComponentLight::Save()
-//{
-//	JSON_Value* value = json_value_init_object();
-//	JSON_Object* obj = json_value_get_object(value);
-//
-//	json_object_set_number(obj, "Type", 5);
-//	
-//	if(light->type == LightType::DIRECTIONAL)
-//		json_object_set_string(obj, "lightType", "directional");
-//	else if (light->type == LightType::POINT)
-//		json_object_set_string(obj, "lightType", "point");
-//
-//	switch (light->type)
-//	{
-//		case LightType::DIRECTIONAL:
-//		{
-//			DirectionalLight* l = (DirectionalLight*)light;
-//			
-//			json_object_dotset_number(obj, "dir.x", l->dir.x);
-//			json_object_dotset_number(obj, "dir.y", l->dir.y);
-//			json_object_dotset_number(obj, "dir.z", l->dir.z);
-//
-//			json_object_dotset_number(obj, "ambient.x", l->ambient.x);
-//			json_object_dotset_number(obj, "ambient.y", l->ambient.y);
-//			json_object_dotset_number(obj, "ambient.z", l->ambient.z);
-//			
-//			json_object_dotset_number(obj, "diffuse.x", l->diffuse.x);
-//			json_object_dotset_number(obj, "diffuse.y", l->diffuse.y);
-//			json_object_dotset_number(obj, "diffuse.z", l->diffuse.z);
-//
-//			json_object_dotset_number(obj, "specular.x", l->specular.x);
-//			json_object_dotset_number(obj, "specular.y", l->specular.y);
-//			json_object_dotset_number(obj, "specular.z", l->specular.z);
-//
-//			break;
-//		}
-//		case LightType::POINT:
-//		{
-//			PointLight* l = (PointLight*)light;
-//
-//			json_object_dotset_number(obj, "pos.x", l->position.x);
-//			json_object_dotset_number(obj, "pos.y", l->position.y);
-//			json_object_dotset_number(obj, "pos.z", l->position.z);
-//
-//			json_object_dotset_number(obj, "ambient.x", l->ambient.x);
-//			json_object_dotset_number(obj, "ambient.y", l->ambient.y);
-//			json_object_dotset_number(obj, "ambient.z", l->ambient.z);
-//
-//			json_object_dotset_number(obj, "diffuse.x", l->diffuse.x);
-//			json_object_dotset_number(obj, "diffuse.y", l->diffuse.y);
-//			json_object_dotset_number(obj, "diffuse.z", l->diffuse.z);
-//
-//			json_object_dotset_number(obj, "specular.x", l->specular.x);
-//			json_object_dotset_number(obj, "specular.y", l->specular.y);
-//			json_object_dotset_number(obj, "specular.z", l->specular.z);
-//
-//			json_object_set_number(obj, "constant", l->constant);
-//			json_object_set_number(obj, "linear", l->lin);
-//			json_object_set_number(obj, "quadratic", l->quadratic);
-//
-//
-//			break;
-//		}
-//	}
-//
-//	return value;
-//}
-//
-//void ComponentLight::Load(JSON_Object* obj, GameObject* parent)
-//{
-//	//light = new Light();
-//
-//	LightType type;
-//
-//	std::string lightType = json_object_get_string(obj, "lightType");
-//	if (lightType == "directional")
-//	{
-//		type = LightType::DIRECTIONAL;
-//		//light = app->renderer3D->dirLight;
-//	}
-//	else if (lightType == "point")
-//		type = LightType::POINT;
-//
-//
-//	switch (type)
-//	{
-//		case LightType::DIRECTIONAL:
-//		{
-//			float3 dir;
-//			dir.x = json_object_dotget_number(obj, "dir.x");
-//			dir.y = json_object_dotget_number(obj, "dir.y");
-//			dir.z = json_object_dotget_number(obj, "dir.z");
-//			
-//			//app->renderer3D->dirLight->dir = dir;
-//			//light = app->renderer3D->dirLight;
-//
-//			//l->ambient.x = json_object_dotget_number(obj, "ambient.x");
-//			//l->ambient.y = json_object_dotget_number(obj, "ambient.y");
-//			//l->ambient.z = json_object_dotget_number(obj, "ambient.z");
-//			//
-//			//l->diffuse.x = json_object_dotget_number(obj, "diffuse.x");
-//			//l->diffuse.y = json_object_dotget_number(obj, "diffuse.y");
-//			//l->diffuse.z = json_object_dotget_number(obj, "diffuse.z");
-//			//
-//			//l->specular.x = json_object_dotget_number(obj, "specular.x");
-//			//l->specular.y = json_object_dotget_number(obj, "specular.y");
-//			//l->specular.z = json_object_dotget_number(obj, "specular.z");
-//
-//			//app->renderer3D->goDirLight = new GameObject("Directional Light");
-//			
-//
-//			break;
-//		}
-//		case LightType::POINT:
-//		{
-//			PointLight* l = new PointLight();
-//
-//			TransformComponent* tr = owner->GetComponent<TransformComponent>();
-//			l->position = tr->GetPosition();
-//
-//			l->ambient.x = json_object_dotget_number(obj, "ambient.x");
-//			l->ambient.y = json_object_dotget_number(obj, "ambient.y");
-//			l->ambient.z = json_object_dotget_number(obj, "ambient.z");
-//
-//			l->diffuse.x = json_object_dotget_number(obj, "diffuse.x");
-//			l->diffuse.y = json_object_dotget_number(obj, "diffuse.y");
-//			l->diffuse.z = json_object_dotget_number(obj, "diffuse.z");
-//
-//			l->specular.x = json_object_dotget_number(obj, "specular.x");
-//			l->specular.y = json_object_dotget_number(obj, "specular.y");
-//			l->specular.z = json_object_dotget_number(obj, "specular.z");
-//
-//			l->constant = json_object_get_number(obj, "constant");
-//			l->lin = json_object_get_number(obj, "linear");
-//			l->quadratic = json_object_get_number(obj, "quadratic");
-//
-//
-//			//app->renderer3D->AddPointLight(l);
-//			light = l;
-//
-//			bool a;
-//			a = true;
-//			break;
-//		}
-//	}
-//}

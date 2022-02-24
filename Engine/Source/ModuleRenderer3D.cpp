@@ -201,10 +201,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	dirLight = new DirectionalLight();
 	goDirLight = app->scene->CreateGameObject(0);
 	goDirLight->SetName("Directional Light");
-	ComponentLight* lightComp = new ComponentLight();
+	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
 	lightComp->SetLight(dirLight);
-	goDirLight->AddComponent(lightComp);
-	lightComp->SetOwner(goDirLight);
 
 	return ret;
 }

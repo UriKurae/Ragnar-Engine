@@ -34,6 +34,9 @@ public:
 	void StyleTheme();
 
 private:
+	std::string GetNotLightSensibleShaderSource();
+
+private:
 	bool showMenu;
 	Texture* buttonPlay;
 	Texture* buttonStop;

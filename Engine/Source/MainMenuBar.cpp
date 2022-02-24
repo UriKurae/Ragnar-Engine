@@ -249,15 +249,30 @@ bool MainMenuBar::Update(float dt)
 				ImGui::EndMenu();
 			}
 
-			if (ImGui::MenuItem("Shader"))
+			if (ImGui::BeginMenu(ICON_FA_CIRCLE " Shader"))
 			{
-				std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+				if (ImGui::MenuItem("Light-sensible"))
+				{
+					std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
 
-				// TODO: Find a way to do this without ofstream
-				std::ofstream file;
-				file.open(path);
-				file << app->renderer3D->GetDefaultShader()->GetSource();
-				file.close();
+					// TODO: Find a way to do this without ofstream
+					std::ofstream file;
+					file.open(path);
+					file << app->renderer3D->GetDefaultShader()->GetSource();
+					file.close();
+				}
+				else if (ImGui::MenuItem("Not light-sensible"))
+				{
+					std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+
+					// TODO: Find a way to do this without ofstream
+					std::ofstream file;
+					file.open(path);
+					file << GetNotLightSensibleShaderSource();
+					file.close();
+				}
+
+				ImGui::EndMenu();
 			}
 
 			ImGui::EndMenu();
@@ -551,4 +566,47 @@ void MainMenuBar::StyleTheme()
 	style.GrabRounding = 3;
 	style.LogSliderDeadzone = 4;
 	style.TabRounding = 4;
+}
+
+std::string MainMenuBar::GetNotLightSensibleShaderSource()
+{
+	return  "#type vertex\n"
+		"#version 430\n\n"
+
+		"layout(location = 0) in vec3 position;\n"
+		"layout(location = 1) in vec3 normal;\n"
+		"layout(location = 2) in vec2 texCoords;\n\n"
+
+		"uniform mat4 model;\n"
+		"uniform mat4 view;\n"
+		"uniform mat4 projection;\n"
+		"uniform mat3 normalMatrix;\n\n"
+
+		"out vec3 vPosition;\n"
+		"out vec4 vNormal;\n"
+		"out vec2 vTexCoords;\n\n"
+
+		"void main()\n"
+		"{\n\t"
+			"gl_Position = projection * view * model * vec4(position, 1);\n\n\t"
+
+			"vTexCoords = texCoords;\n\t"
+			"vPosition = vec3(model * vec4(position, 1));\n\t"
+			"vNormal = normalMatrix * normal;\n\t"
+			"vNormal = normalize((model * vec4(normal, 0.0)).xyz);\n"
+		"}\n\n\n"
+
+
+		"#type fragment\n\n"
+
+		"in vec3 vPosition;\n"
+		"in vec3 vNormal;\n"
+		"in vec2 vTexCoords;\n\n"
+
+		"out vec4 fragColor;\n\n"
+
+		"void main()\n"
+		"{\n\t"
+			"fragColor = vec4(1.0f);\n"
+		"}\n";
 }
