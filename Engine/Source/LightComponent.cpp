@@ -15,23 +15,6 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
-	switch (light->type)
-	{
-		case LightType::DIRECTIONAL:
-		{
-			//delete app->renderer3D->dirLight;
-			//app->renderer3D->dirLight = 0;
-
-			break;
-		}
-
-		case LightType::POINT:
-		{
-			//app->renderer3D->DeletePointLight((PointLight*)light);
-	
-			break;
-		}
-	}
 }
 
 bool ComponentLight::Update(float dt)
@@ -110,7 +93,7 @@ void ComponentLight::OnEditor()
 		
 		case LightType::POINT:
 		{
-			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB "Light"))
+			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
 			{
 				PointLight* l = (PointLight*)light;
 
@@ -131,7 +114,7 @@ void ComponentLight::OnEditor()
 
 		case LightType::SPOT:
 		{
-			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB "Light"))
+			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
 			{
 				SpotLight* l = (SpotLight*)light;
 
@@ -192,6 +175,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->quadratic = node.GetJsonNumber("Quadratic");
 
 			light = l;
+			app->renderer3D->AddPointLight(l);
 
 			break;
 		}
@@ -207,6 +191,9 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->specular = node.GetJson3Number(node, "Specular");
 			l->cutOff = node.GetJsonNumber("CutOff");
 			l->outerCutOff = node.GetJsonNumber("Outer CutOff");
+
+			light = l;
+			app->renderer3D->AddSpotLight(l);
 
 			break;
 		}

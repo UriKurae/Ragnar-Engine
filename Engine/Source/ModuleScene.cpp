@@ -1,6 +1,7 @@
 #include "ModuleScene.h"
 
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "Globals.h"
 #include "ModuleEditor.h"
@@ -476,13 +477,16 @@ void ModuleScene::Play()
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-	
+
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 }
 
 void ModuleScene::Stop()
 {
+	app->renderer3D->ClearPointLights();
+	app->renderer3D->ClearSpotLights();
+
 	LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 	qTree.Clear();

@@ -553,6 +553,16 @@ void ModuleRenderer3D::AddSpotLight(SpotLight* sl)
 	spotLights.push_back(sl);
 }
 
+void ModuleRenderer3D::ClearPointLights()
+{
+	pointLights.clear();
+}
+
+void ModuleRenderer3D::ClearSpotLights()
+{
+	spotLights.clear();
+}
+
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 {
 	//glPushMatrix();

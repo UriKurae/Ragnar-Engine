@@ -70,6 +70,8 @@ public:
 	void AddSpotLight(SpotLight* sl);
 	inline const std::vector<SpotLight*>& GetSpotLights() { return spotLights; }
 
+	void ClearPointLights();
+	void ClearSpotLights();
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
