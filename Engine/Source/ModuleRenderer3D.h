@@ -4,7 +4,7 @@
 #include "Light.h"
 
 #include <vector>
-#include "Primitive.h"
+#include "Shapes.h"
 #include "SDL.h"
 
 #define MAX_LIGHTS 8
@@ -52,7 +52,7 @@ public:
 	void DrawCubeDirectMode();
 
 public:
-	PGrid* grid;
+	PPlane grid;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

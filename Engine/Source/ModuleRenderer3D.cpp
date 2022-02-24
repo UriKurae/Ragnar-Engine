@@ -26,7 +26,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	name = "Renderer";
 	context = NULL;
 	fbo = nullptr;
-	grid = nullptr;
 
 	depthTest = true;
 	cullFace = true;
@@ -184,13 +183,24 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo->Unbind();
 	
 
-	grid = new PGrid(200, 200);
+	grid.SetPos(0, 0, 0);
+	grid.constant = 0;
+	grid.axis = true;
 
 	return ret;
 }
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Editor Camera FBO
+	fbo->Bind();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -199,17 +209,7 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// Editor Camera FBO
-	fbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-
-	grid->Draw();
+	grid.Render();
 	std::set<GameObject*> objects;
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
@@ -275,7 +275,7 @@ bool ModuleRenderer3D::PostUpdate()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
-	grid->Draw();
+	grid.Render();
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
@@ -303,7 +303,6 @@ bool ModuleRenderer3D::CleanUp()
 {
 	DEBUG_LOG("Destroying 3D Renderer");
 
-	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
 
