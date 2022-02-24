@@ -364,7 +364,7 @@ bool MainMenuBar::Update(float dt)
 		{
 			app->scene->Play();
 			AudioManager::Get()->PlayAllAudioSources();
-			ImGui::StyleColorsClassic();
+			//ImGui::StyleColorsClassic();
 			app->physics->ActiveAllBodies();
 		}
 

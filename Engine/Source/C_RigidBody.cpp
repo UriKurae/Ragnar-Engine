@@ -7,6 +7,7 @@
 #include "MeshComponent.h"
 
 #include "ImGui/imgui.h"
+#include "ImGui/imgui_stdlib.h"
 #include "IconsFontAwesome5.h"
 #include "Bullet/include/btBulletDynamicsCommon.h"
 #include "Math/float3x3.h"
@@ -247,13 +248,12 @@ void RigidBodyComponent::Combos()
 		ImGui::PopItemWidth();
 
 		ImGui::Text("List of constraint P2P:");
-		if (constraintBodies.size() == 0) ImGui::TextColored(ImVec4(1.00f, 1.00f, 1.00f, 0.50f),"-List is empty");
-		char* name = "";
+		if (constraintBodies.size() == 0) ImGui::TextColored(ImVec4(1.00f, 1.00f, 1.00f, 0.50f), "-List is empty");
 		for (int i = 0; i < constraintBodies.size(); i++)
 		{
-			//Subtitute of imgui_stdlib function. Copy the information of the given string to a char*.
-			strncpy(name, constraintBodies.at(i)->owner->name.c_str(), sizeof(char*) * 1024);
-			ImGui::InputText("##Name", name, ImGuiInputTextFlags_::ImGuiInputTextFlags_ReadOnly);
+			ImGui::PushID(i);
+			ImGui::InputText("##Name", &constraintBodies.at(i)->owner->name, ImGuiInputTextFlags_::ImGuiInputTextFlags_ReadOnly);
+			ImGui::PopID();
 		}
 
 		ImGui::PopStyleColor();
@@ -355,19 +355,19 @@ void RigidBodyComponent::EditCollisionMesh()
 		switch (body->getCollisionShape()->getShapeType())
 		{
 		case BOX_SHAPE_PROXYTYPE:
-			static_cast<btBoxShape*>(body->getCollisionShape())->setLocalScaling(box.size);
+			body->getCollisionShape()->setLocalScaling(box.size);
 			break;
 		case SPHERE_SHAPE_PROXYTYPE:
 			static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
 			break;
 		case CAPSULE_SHAPE_PROXYTYPE:
-			static_cast<btCapsuleShape*>(body->getCollisionShape())->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, 0.0f));
+			body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, 0.0f));
 			break;
 		case CYLINDER_SHAPE_PROXYTYPE:
-			static_cast<btCylinderShape*>(body->getCollisionShape())->setLocalScaling(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
+			body->getCollisionShape()->setLocalScaling(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
 			break;
 		case CONE_SHAPE_PROXYTYPE:
-			static_cast<btConeShape*>(body->getCollisionShape())->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
+			body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
 			break;
 		case STATIC_PLANE_PROXYTYPE:
 			CreateBody();
@@ -494,11 +494,19 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	mass = node.GetJsonNumber("Mass");
 	friction = node.GetJsonNumber("Friction");
 	restitution = node.GetJsonNumber("Restitution");
-	offset = node.GetJson3Number(node, "Offset");
 
 	//Constrains
 	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
 	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+	if (int size = node.GetJsonNumber("SizeConstraint") > 0)
+	{
+		JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "ConstraintBodies");
+
+		for (int i = 0; i < size; i++)
+		{
+			bodiesUIDs.push_back(json_array_get_number(array, i));
+		}
+	}
 
 	//Damping
 	linearDamping = node.GetJsonNumber("LinearDamping");
@@ -514,7 +522,7 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 
 	//Collision dimensions
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Collision Type", (int)collisionType);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "CollisionType", (int)collisionType);
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -552,11 +560,18 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Mass", mass);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Friction", friction);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Restitution", restitution);
-	file.SetNewJson3Number(file, "Offset", offset);
 
 	//Constrains
 	file.SetNewJson3Number(file, "MovementConstraint", movementConstraint);
 	file.SetNewJson3Number(file, "RotationConstraint", rotationConstraint);
+	if (int size = constraintBodies.size() > 0)
+	{
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "SizeConstraint", size);
+
+		JSON_Array* arrayConstrains = file.SetNewJsonArray(file.GetRootValue(), "ConstraintBodies");
+		for (int i = 0; i < size; i++)
+			json_array_append_number(arrayConstrains, constraintBodies.at(i)->owner->GetUUID());
+	}
 
 	//Damping
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "LinearDamping", linearDamping);

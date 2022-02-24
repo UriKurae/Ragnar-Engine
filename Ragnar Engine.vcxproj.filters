@@ -577,6 +577,9 @@
     <ClInclude Include="Engine\Source\Shapes.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -923,6 +926,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Shapes.cpp">
       <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_stdlib.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

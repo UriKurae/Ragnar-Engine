@@ -33,6 +33,8 @@ public:
 	bool PostUpdate() override;
 	bool CleanUp() override;
 
+	bool LoadConstraints();
+
 	btRigidBody* CollisionShape(const PCube& cube, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PSphere& sphere, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PCapsule& capsule, RigidBodyComponent* component);

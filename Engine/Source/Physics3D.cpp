@@ -106,6 +106,29 @@ bool Physics3D::CleanUp()
 	return true;
 }
 
+bool Physics3D::LoadConstraints()
+{
+	for (int i = 0; i < GetBodies().size(); i++)
+	{
+		for (int j = 0; j < GetBodies().at(i)->bodiesUIDs.size(); j++)
+		{
+			for (int k = 0; k < GetBodies().size(); k++)
+			{
+				int UID1 = GetBodies().at(k)->owner->GetUUID();
+				int UID2 = GetBodies().at(i)->bodiesUIDs.at(j);
+				if (UID1 == UID2)
+				{
+					GetBodies().at(i)->constraintBodies.push_back(GetBodies().at(k));
+					GetBodies().at(i)->AddConstraintP2P(GetBodies().at(k));
+					break;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
 btRigidBody* Physics3D::CollisionShape(const PCube& cube, RigidBodyComponent* component)
 {
 	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
