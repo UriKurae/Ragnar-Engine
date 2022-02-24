@@ -17,6 +17,7 @@
 #include "TextureImporter.h"
 #include "ResourceManager.h"
 #include "ModuleEditor.h"
+#include "FileSystem.h"
 
 #include "LightComponent.h"
 
@@ -254,22 +255,33 @@ bool MainMenuBar::Update(float dt)
 				if (ImGui::MenuItem("Light-sensible"))
 				{
 					std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+					int start = path.find("Assets");
+					std::string p = path.substr(start);
+					app->fs->NormalizePath(p);
 
-					// TODO: Find a way to do this without ofstream
+
+					std::shared_ptr<Shader> newShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->GetResource(app->renderer3D->GetDefaultShader()));
+
 					std::ofstream file;
 					file.open(path);
-					file << app->renderer3D->GetDefaultShader()->GetSource();
+					file << newShader->GetSource();
 					file.close();
+
+					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
 				}
 				else if (ImGui::MenuItem("Not light-sensible"))
 				{
 					std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
 
-					// TODO: Find a way to do this without ofstream
 					std::ofstream file;
 					file.open(path);
 					file << GetNotLightSensibleShaderSource();
 					file.close();
+
+					int start = path.find("Assets");
+					std::string p = path.substr(start);
+					app->fs->NormalizePath(p);
+					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
 				}
 
 				ImGui::EndMenu();

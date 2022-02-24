@@ -58,7 +58,7 @@ public:
 
 
 	Material* GetDefaultMaterial();
-	Shader* GetDefaultShader();
+	unsigned int GetDefaultShader();
 
 	Shader* AddShader(const std::string& path);
 	void AddMaterial(Material* material);
@@ -105,7 +105,7 @@ public:
 
 private:
 	Material* defaultMaterial;
-	Shader* defaultShader;
+	unsigned int defaultShader;
 
 	std::vector<Shader*> shaders;
 	std::vector<Material*> materials;

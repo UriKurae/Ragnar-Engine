@@ -149,6 +149,7 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		std::shared_ptr<Resource> res = (*it).second;
+		std::string p = res->GetAssetsPath();
 		if (res->GetAssetsPath() == path)
 		{
 			res->Load();
@@ -273,7 +274,8 @@ std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 
 	for (; it != map.end(); ++it)
 	{
-		if ((*it).second->GetAssetsPath() == path) return (*it).second;
+		if ((*it).second->GetAssetsPath() == path)
+			return (*it).second;
 	}
 
 	return nullptr;

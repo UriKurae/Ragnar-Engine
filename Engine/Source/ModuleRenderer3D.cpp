@@ -197,7 +197,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	//defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
 	//shaders.push_back(defaultShader);
 
-	ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
+	defaultShader = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
 
 	// TODO: To be handled with the resource manager
 	//defaultMaterial = new Material();
@@ -525,7 +525,7 @@ Material* ModuleRenderer3D::GetDefaultMaterial()
 	return defaultMaterial;
 }
 
-Shader* ModuleRenderer3D::GetDefaultShader()
+uint ModuleRenderer3D::GetDefaultShader()
 {
 	return defaultShader;
 }

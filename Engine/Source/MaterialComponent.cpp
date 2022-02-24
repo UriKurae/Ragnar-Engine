@@ -194,8 +194,8 @@ void MaterialComponent::OnEditor()
 			{
 				if (ImGui::Selectable((*it).c_str()))
 				{
-					//RELEASE(shader);
-					//shader = new Shader("Assets/Resources/Shaders/" + *it);
+					uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/" + *it), std::string());
+					shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(uid));
 				}
 			}
 		}
