@@ -16,6 +16,7 @@
 RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, float mass, bool isKinematic) : Component(), collisionType(type), mass(mass), isKinematic(isKinematic)
 {
 	owner = obj;
+	this->type = ComponentType::RIGID_BODY;
 	SetCollisionType(type);
 	// Calculate offset CM
 	if (owner->GetComponent<MeshComponent>())

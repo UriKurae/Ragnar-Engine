@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "C_RigidBody.h"
 #include "ModuleScene.h"
 #include "Globals.h"
 
@@ -68,8 +69,10 @@ bool TransformComponent::Update(float dt)
 	if (changeTransform)
 	{
 		std::stack<GameObject*> stack;
-
+		RigidBodyComponent* body = owner->GetComponent<RigidBodyComponent>();
 		UpdateTransform();
+		if (body != nullptr)
+			owner->GetComponent<RigidBodyComponent>()->UpdateCollision();
 
 		for (int i = 0; i < owner->GetChilds().size(); ++i)
 			stack.push(owner->GetChilds()[i]);
@@ -79,6 +82,9 @@ bool TransformComponent::Update(float dt)
 			GameObject* go = stack.top();
 
 			UpdateChildTransform(go);
+			body = go->GetComponent<RigidBodyComponent>();
+			if (body != nullptr)
+				body->UpdateCollision();
 
 			stack.pop();
 
