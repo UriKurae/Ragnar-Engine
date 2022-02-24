@@ -45,6 +45,9 @@ public:
 
 	void SetAsStatic();
 
+	bool OnLoad(JsonParsing& node) override;
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
+
 	bool useGravity = true;
 	bool isKinematic = false;
 	std::vector<RigidBodyComponent*> constraintBodies;

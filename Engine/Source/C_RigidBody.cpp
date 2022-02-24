@@ -449,3 +449,122 @@ void RigidBodyComponent::SetAsStatic()
 	mass = 0.0f;
 	SetCollisionType(collisionType);
 }
+
+bool RigidBodyComponent::OnLoad(JsonParsing& node)
+{
+	active = node.GetJsonBool("Active");
+
+	//Collision dimensions
+	collisionType = (CollisionType)(int)node.GetJsonNumber("Collision Type");
+	switch (collisionType)
+	{
+	case CollisionType::BOX:
+		box.size = node.GetJson3Number(node, "Size");
+		break;
+	case CollisionType::SPHERE:
+		sphere.radius = node.GetJsonNumber("Radius");
+		sphere.sectors = node.GetJsonNumber("Sectors");
+		sphere.stacks = node.GetJsonNumber("Stacks");
+		break;
+	case CollisionType::CAPSULE:
+		capsule.radius = node.GetJsonNumber("Radius");
+		capsule.height = node.GetJsonNumber("Height");
+		break;
+	case CollisionType::CYLINDER:
+		cylinder.radius = node.GetJsonNumber("Radius");
+		cylinder.height = node.GetJsonNumber("Height");
+		cylinder.sectorCount = node.GetJsonNumber("Sectors");
+		break;
+	case CollisionType::CONE:
+		cone.radius = node.GetJsonNumber("Radius");
+		cone.height = node.GetJsonNumber("Height");
+		break;
+	case CollisionType::STATIC_PLANE:
+		plane.normal = node.GetJson3Number(node, "Normal");
+		plane.constant = node.GetJsonNumber("Constant");
+		break;
+	default:
+		break;
+	}
+
+	//Collision physics
+	useGravity = node.GetJsonBool("Gravity");
+	isKinematic = node.GetJsonBool("Kinematic");
+	mass = node.GetJsonNumber("Mass");
+	friction = node.GetJsonNumber("Friction");
+	restitution = node.GetJsonNumber("Restitution");
+	offset = node.GetJson3Number(node, "Offset");
+
+	//Constrains
+	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
+	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+
+	//Damping
+	linearDamping = node.GetJsonNumber("LinearDamping");
+	angularDamping = node.GetJsonNumber("AngularDamping");
+
+	return true;
+}
+
+bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+
+	//Collision dimensions
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Collision Type", (int)collisionType);
+	switch (collisionType)
+	{
+	case CollisionType::BOX:
+		file.SetNewJson3Number(file, "Size", box.size);
+		break;
+	case CollisionType::SPHERE:
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", sphere.radius);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Sectors", sphere.sectors);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Stacks", sphere.stacks);
+		break;
+	case CollisionType::CAPSULE:
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", capsule.radius);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", capsule.height);
+		break;
+	case CollisionType::CYLINDER:
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", cylinder.radius);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", cylinder.height);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Sectors", cylinder.sectorCount);
+		break;
+	case CollisionType::CONE:
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", cone.radius);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", cone.height);
+		break;
+	case CollisionType::STATIC_PLANE:
+		file.SetNewJson3Number(file, "Normal", plane.normal);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Constant", plane.constant);
+		break;
+	default:
+		break;
+	}
+
+	//Collision physics
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Gravity", useGravity);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Kinematic", isKinematic);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Mass", mass);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Friction", friction);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Restitution", restitution);
+	file.SetNewJson3Number(file, "Offset", offset);
+
+	//Constrains
+	file.SetNewJson3Number(file, "MovementConstraint", movementConstraint);
+	file.SetNewJson3Number(file, "RotationConstraint", rotationConstraint);
+
+	//Damping
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "LinearDamping", linearDamping);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AngularDamping", angularDamping);
+
+
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	return true;
+}
