@@ -27,7 +27,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 	type = ComponentType::MATERIAL;
 	owner = own;
 	checker = false;
-	
+	showShaderEditor = false;
 	active = true;
 
 	//shader = new Shader("Assets/Resources/Shaders/default.shader");
@@ -133,7 +133,42 @@ void MaterialComponent::OnEditor()
 
 		ImGui::BulletText("Last time modified: %s", shader->GetLastModifiedDate());
 
+		if (ImGui::Button("Edit Shader", { 100,25 }))	EditorShader();
+
 		ImGui::Separator();
+	}
+
+	if (showShaderEditor)
+	{
+		ImGui::Begin("Shader Editor", &showShaderEditor, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+		//Update
+		auto cpos = editor.GetCursorPosition();
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::Button("Save"))
+			{
+				std::string shader = editor.GetText();
+
+				app->fs->RemoveFile(fileToEdit.c_str());
+				app->fs->Save(fileToEdit.c_str(), shader.c_str(), editor.GetText().size());
+
+				//glDetachShader(shadertoRecompily->GetId(), meshCom->shadertoRecompily->parameters.vertexID);
+				//glDetachShader(shadertoRecompily->GetId(), meshCom->shadertoRecompily->parameters.fragmentID);
+				//glDeleteProgram(shadertoRecompily->GetId());
+
+				//meshCom->LoadShader(meshCom->fileToEdit.c_str());
+				//meshCom->GetShader()->parameters.uniforms = ShaderImporter::GetShaderUniforms(meshCom->GetShader()->parameters.shaderID);
+			}
+			ImGui::EndMenuBar();
+		}
+
+		ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, editor.GetTotalLines(),
+			editor.IsOverwrite() ? "Ovr" : "Ins",
+			editor.CanUndo() ? "*" : " ",
+			editor.GetLanguageDefinition().mName.c_str(), fileToEdit.c_str());
+
+		editor.Render("TextEditor");
+		ImGui::End();
 	}
 
 	if (showTexMenu)
@@ -346,4 +381,23 @@ void MaterialComponent::Unbind()
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)
 {
 	diff = std::static_pointer_cast<Texture>(tex);
+}
+
+void MaterialComponent::EditorShader()
+{
+	TextEditor::LanguageDefinition lang = TextEditor::LanguageDefinition::GLSL();
+
+	fileToEdit = shader->GetAssetsPath();
+	editor.SetShowWhitespaces(false);
+
+	/*std::ifstream text(fileToEdit.c_str());
+	if (text.good())
+	{
+		std::string str((std::istreambuf_iterator<char>(text)), std::istreambuf_iterator<char>());
+		editor.SetText(str);
+	}*/
+
+	showShaderEditor = true;
+
+	shadertoRecompily = shader;
 }

@@ -2,9 +2,12 @@
 
 #include "Component.h"
 #include "Shader.h"
+#include "TextEditor.h"
 
 #include <string>
 #include <memory>
+
+
 
 typedef unsigned int GLuint;
 typedef unsigned char GLubyte;
@@ -32,11 +35,18 @@ public:
 	bool IsDefaultMat() const { return defaultMat; }
 
 	void SetTexture(std::shared_ptr<Resource> tex);
+	void EditorShader();
 
 private:
 	bool checker;
 	bool showTexMenu;
+	bool showShaderEditor;
 	bool showShaderMenu;
+
+	TextEditor editor;
+	std::string fileToEdit;
+
+	std::shared_ptr<Shader> shadertoRecompily;
 
 	std::shared_ptr<Texture> diff = nullptr;
 	std::shared_ptr<Shader> shader;
