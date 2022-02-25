@@ -847,16 +847,19 @@ void MainMenuBar::ShowCreateLigthSensibleShaderWindow()
 
 	if (ImGui::Button("Create", { 50,25 }))
 	{
-		std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
 
-		std::ofstream file;
-		file.open(path);
-		file << GetLightSensibleShaderSource();
-		file.close();
+			std::ofstream file;
+			file.open(path);
+			file << GetLightSensibleShaderSource();
+			file.close();
 
-		ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
-		showCreateLightSensibleShaderWindow = false;
-		name.clear();
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+			showCreateLightSensibleShaderWindow = false;
+			name.clear();
+		}
 	}
 	
 	ImGui::End();
@@ -878,17 +881,20 @@ void MainMenuBar::ShowCreateNotLigthSensibleShaderWindow()
 
 	if (ImGui::Button("Create", { 50,25 }))
 	{
-		std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
 
-		std::ofstream file;
-		file.open(path);
-		file << GetNotLightSensibleShaderSource();
-		file.close();
+			std::ofstream file;
+			file.open(path);
+			file << GetNotLightSensibleShaderSource();
+			file.close();
 
-		ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
 
-		showCreateNotLightSensibleShaderWindow = false;
-		name.clear();
+			showCreateNotLightSensibleShaderWindow = false;
+			name.clear();
+		}
 
 	}
 

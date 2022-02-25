@@ -65,13 +65,16 @@ public:
 	inline const std::vector<Shader*>& GetShaders() { return shaders; }
 
 	void AddPointLight(PointLight* pl);
-	inline const std::vector<PointLight*>& GetPointLights() { return pointLights; }
+	inline std::vector<PointLight*>& GetPointLights() { return pointLights; }
 
 	void AddSpotLight(SpotLight* sl);
 	inline const std::vector<SpotLight*>& GetSpotLights() { return spotLights; }
 
 	void ClearPointLights();
 	void ClearSpotLights();
+
+	void RemovePointLight(PointLight* light);
+
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);

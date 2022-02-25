@@ -206,6 +206,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	dirLight = new DirectionalLight();
 	goDirLight = app->scene->CreateGameObject(0);
 	goDirLight->SetName("Directional Light");
+
+	TransformComponent* tr = goDirLight->GetComponent<TransformComponent>();
+	tr->SetPosition({ 50,50,50 });
 	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
 	lightComp->SetLight(dirLight);
 
@@ -296,7 +299,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	//glPopMatrix();
 	//glPopMatrix();
-	PushCamera(float4x4::identity, float4x4::identity);
+	//PushCamera(float4x4::identity, float4x4::identity);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
@@ -569,6 +572,37 @@ void ModuleRenderer3D::ClearPointLights()
 void ModuleRenderer3D::ClearSpotLights()
 {
 	spotLights.clear();
+}
+
+void ModuleRenderer3D::RemovePointLight(PointLight* light)
+{
+	std::vector<PointLight*>::iterator it = pointLights.begin();
+
+	for (; it != pointLights.end(); ++it)
+	{
+		if ((*it) == light)
+		{
+			delete light;
+			light = 0;
+			*it = 0;
+			pointLights.erase(it);
+			break;
+		}
+	}
+
+	//for (auto& pl : pointLights)
+	//{
+	//	if (pl == light)
+	//	{
+	//		delete pl;
+	//		pl = 0;
+	//		//*it = 0;
+	//		pointLights.erase(it);
+
+	//		break;
+	//	}
+	//	++it;
+	//}
 }
 
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)

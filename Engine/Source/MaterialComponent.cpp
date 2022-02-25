@@ -429,7 +429,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		shader->SetUniformVec3f("dirLight.specular", float3::zero);
 	}
 
-	std::vector<PointLight*> pls = app->renderer3D->GetPointLights();
+	std::vector<PointLight*>& pls = app->renderer3D->GetPointLights();
 	for (int i = 0; i < pls.size(); ++i)
 	{
 		std::string name = "pointLights[" + std::to_string(i) + "]";
@@ -446,7 +446,6 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		shader->SetUniformVec3f(name + ".ambient", pls[i]->ambient);
 		shader->SetUniformVec3f(name + ".diffuse", pls[i]->diffuse);
 		shader->SetUniformVec3f(name + ".specular", pls[i]->specular);
-
 	}
 
 	std::vector<SpotLight*> sls = app->renderer3D->GetSpotLights();

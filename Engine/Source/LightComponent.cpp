@@ -15,12 +15,15 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
-	/*switch (light->type)
+	switch (light->type)
 	{
 		case LightType::POINT:
 		{
+			app->renderer3D->RemovePointLight((PointLight*)light);
+			//delete (light);
+			//light = nullptr;
 		}
-	}*/
+	}
 }
 
 bool ComponentLight::Update(float dt)
