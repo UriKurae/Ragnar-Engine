@@ -466,7 +466,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	active = node.GetJsonBool("Active");
 
 	//Collision dimensions
-	collisionType = (CollisionType)(int)node.GetJsonNumber("Collision Type");
+	collisionType = (CollisionType)(int)node.GetJsonNumber("CollisionType");
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -497,6 +497,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	default:
 		break;
 	}
+	if(collisionType != CollisionType::BOX) SetCollisionType(collisionType);
 	UpdateCollisionMesh();
 
 	//Collision physics

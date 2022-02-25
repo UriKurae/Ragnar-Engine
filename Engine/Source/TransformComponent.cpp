@@ -149,6 +149,7 @@ bool TransformComponent::OnLoad(JsonParsing& node)
 	scale = node.GetJson3Number(node, "Scale");
 	rotationEditor = node.GetJson3Number(node, "RotationEditor");
 
+	UpdateTransform();
 	changeTransform = true;
 
 	return true;
