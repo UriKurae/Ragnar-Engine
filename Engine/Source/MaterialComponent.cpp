@@ -9,6 +9,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Viewport.h"
+#include <fstream>
 
 #include "CameraComponent.h"
 
@@ -19,6 +20,7 @@
 #include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
+
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 
@@ -32,8 +34,10 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 
 	//shader = new Shader("Assets/Resources/Shaders/default.shader");
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
+	shader->SetUniforms(GetShaderUniforms());
 
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
+
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -136,6 +140,10 @@ void MaterialComponent::OnEditor()
 		if (ImGui::Button("Edit Shader", { 100,25 }))	EditorShader();
 
 		ImGui::Separator();
+
+		ShowUniforms();
+
+		ImGui::Separator();
 	}
 
 	if (showShaderEditor)
@@ -147,17 +155,13 @@ void MaterialComponent::OnEditor()
 		{
 			if (ImGui::Button("Save"))
 			{
-				std::string shader = editor.GetText();
+				std::string s = editor.GetText();
 
 				app->fs->RemoveFile(fileToEdit.c_str());
-				app->fs->Save(fileToEdit.c_str(), shader.c_str(), editor.GetText().size());
+				app->fs->Save(fileToEdit.c_str(), s.c_str(), editor.GetText().size());
 
-				//glDetachShader(shadertoRecompily->GetId(), meshCom->shadertoRecompily->parameters.vertexID);
-				//glDetachShader(shadertoRecompily->GetId(), meshCom->shadertoRecompily->parameters.fragmentID);
-				//glDeleteProgram(shadertoRecompily->GetId());
+				shader->Refresh();
 
-				//meshCom->LoadShader(meshCom->fileToEdit.c_str());
-				//meshCom->GetShader()->parameters.uniforms = ShaderImporter::GetShaderUniforms(meshCom->GetShader()->parameters.shaderID);
 			}
 			ImGui::EndMenuBar();
 		}
@@ -231,6 +235,7 @@ void MaterialComponent::OnEditor()
 				{
 					uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/" + *it), std::string());
 					shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(uid));
+					shader->SetUniforms(GetShaderUniforms());
 				}
 			}
 		}
@@ -240,6 +245,100 @@ void MaterialComponent::OnEditor()
 
 
 	ImGui::PopID();
+}
+
+std::vector<Uniform> MaterialComponent::GetShaderUniforms()
+{
+	GLint activeUniforms;
+
+	glGetProgramiv(shader->GetId(), GL_ACTIVE_UNIFORMS, &activeUniforms);
+
+	std::vector<Uniform> uniforms;
+
+	for (uint i = 0; i < activeUniforms; i++)
+	{
+		Uniform uniform;
+		GLint length;
+		GLint size;
+		GLchar name[32];
+		glGetActiveUniform(shader->GetId(), i, sizeof(name), &length, &size, &uniform.GLtype, name);
+		uniform.name = name;
+		if (uniform.name != "inColor" && uniform.name != "time" && uniform.name != "modelMatrix" && uniform.name != "viewMatrix" && uniform.name != "projectionMatrix")
+		{
+			uint uinformLoc = glGetUniformLocation(shader->GetId(), uniform.name.c_str());
+
+			switch (uniform.GLtype)
+			{
+			case GL_INT:
+				uniform.uniformType = UniformType::INT;
+				glGetUniformiv(shader->GetId(), uinformLoc, &uniform.integer);
+				break;
+			case GL_FLOAT:
+				uniform.uniformType = UniformType::FLOAT;
+				glGetUniformfv(shader->GetId(), uinformLoc, &uniform.floatNumber);
+				break;
+			case GL_BOOL:
+				uniform.uniformType = UniformType::BOOL;
+				break;
+			case GL_INT_VEC2:
+				uniform.uniformType = UniformType::INT_VEC2;
+				glGetUniformiv(shader->GetId(), uinformLoc, (GLint*)&uniform.vec2);
+				break;
+			case GL_INT_VEC3:
+				uniform.uniformType = UniformType::INT_VEC3;
+				glGetUniformiv(shader->GetId(), uinformLoc, (GLint*)&uniform.vec3);
+				break;
+			case GL_INT_VEC4:
+				uniform.uniformType = UniformType::INT_VEC4;
+				glGetUniformiv(shader->GetId(), uinformLoc, (GLint*)&uniform.vec4);
+				break;
+			case GL_FLOAT_VEC2:
+				uniform.uniformType = UniformType::FLOAT_VEC2;
+				glGetUniformfv(shader->GetId(), uinformLoc, (GLfloat*)&uniform.vec2);
+				break;
+			case GL_FLOAT_VEC3:
+				uniform.uniformType = UniformType::FLOAT_VEC3;
+				glGetUniformfv(shader->GetId(), uinformLoc, (GLfloat*)&uniform.vec3);
+				break;
+			case GL_FLOAT_VEC4:
+				uniform.uniformType = UniformType::FLOAT_VEC4;
+				glGetUniformfv(shader->GetId(), uinformLoc, (GLfloat*)&uniform.vec4);
+				break;
+			case GL_FLOAT_MAT4:
+				uniform.uniformType = UniformType::MATRIX4;
+				glGetnUniformfv(shader->GetId(), uinformLoc, sizeof(uniform.matrix4), &uniform.matrix4.v[0][0]);
+				break;
+
+			default: uniform.uniformType = UniformType::NONE; break;
+
+			}
+
+			if (uniform.uniformType != UniformType::NONE) uniforms.push_back(uniform);
+
+		}
+	}
+	return uniforms;
+}
+
+void MaterialComponent::ShowUniforms()
+{
+	for (uint i = 0; i < shader->GetUniforms().size(); i++)
+	{
+		switch (shader->GetUniforms()[i].uniformType)
+		{
+		case  UniformType::INT:	ImGui::DragInt(shader->GetUniforms()[i].name.c_str(), &(int)shader->GetUniforms()[i].integer, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::FLOAT: ImGui::DragFloat(shader->GetUniforms()[i].name.c_str(), &(float)shader->GetUniforms()[i].floatNumber, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::INT_VEC2: ImGui::DragInt2(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec2, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::INT_VEC3: ImGui::DragInt3(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec3, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::INT_VEC4: ImGui::DragInt4(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec4, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::FLOAT_VEC2: ImGui::DragFloat2(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec2, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::FLOAT_VEC3: ImGui::DragFloat3(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec3, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case  UniformType::FLOAT_VEC4: ImGui::DragFloat4(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec4, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		case UniformType::MATRIX4: ImGui::DragFloat4(shader->GetUniforms()[i].name.c_str(), shader->GetUniforms()[i].matrix4.ToEulerXYZ().ptr(), 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
+		}
+	
+	}
+
 }
 
 bool MaterialComponent::Update(float dt)
@@ -390,12 +489,12 @@ void MaterialComponent::EditorShader()
 	fileToEdit = shader->GetAssetsPath();
 	editor.SetShowWhitespaces(false);
 
-	/*std::ifstream text(fileToEdit.c_str());
+	std::ifstream text(fileToEdit.c_str());
 	if (text.good())
 	{
 		std::string str((std::istreambuf_iterator<char>(text)), std::istreambuf_iterator<char>());
 		editor.SetText(str);
-	}*/
+	}
 
 	showShaderEditor = true;
 

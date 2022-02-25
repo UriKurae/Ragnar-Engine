@@ -209,3 +209,5 @@ void main()
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 }
+
+

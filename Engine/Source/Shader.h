@@ -5,9 +5,42 @@
 #include "Math/float4x4.h"
 #include "Math/float3x3.h"
 #include "Math/float2.h"
+#include "glew/include/GL/glew.h"
 
 #include <unordered_map>
 #include <string>
+
+
+
+enum class UniformType
+{
+	INT,
+	FLOAT,
+	BOOL,
+	INT_VEC2,
+	INT_VEC3,
+	INT_VEC4,
+	FLOAT_VEC2,
+	FLOAT_VEC3,
+	FLOAT_VEC4,
+	MATRIX4,
+	NONE
+};
+struct Uniform
+{
+	UniformType uniformType = UniformType::NONE;
+	std::string name;
+	GLenum GLtype;
+
+	bool boolean;
+	GLint integer;
+	GLfloat floatNumber;
+	float2 vec2;
+	float3 vec3;
+	float4 vec4;
+	float4x4 matrix4 = float4x4::zero;
+
+};
 
 enum class ShaderType
 {
@@ -40,6 +73,8 @@ public:
 	inline unsigned int GetId() { return rendererID; }
 
 	inline const std::string& GetName() { return name; }
+	inline const std::vector<Uniform>& GetUniforms() { return uniforms; }
+	void SetUniforms(const std::vector<Uniform>& u) { uniforms = u; }
 	inline void SetName(const std::string n) { name = n; }
 	char* GetLastModifiedDate();
 
@@ -60,10 +95,10 @@ public:
 	void SetUniformMatrix3f(const std::string& name, const float3x3& mat);
 	void SetUniformMatrix4f(const std::string& name, const float4x4& mat);
 
+
 	//inline const std::string& GetPath() { return path; }
 	inline const std::string& GetSource() { return source; }
 
-	std::list<UniformData> GetUniforms();
 	void UpdateSourceCode(const std::string& newSource);
 
 private:
@@ -78,6 +113,7 @@ private:
 	unsigned int rendererID;
 	std::string source;
 	//std::string path;
+	std::vector<Uniform> uniforms;
 
 	bool created;
 

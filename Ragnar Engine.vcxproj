@@ -57,7 +57,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\MathGeoLib\src;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>

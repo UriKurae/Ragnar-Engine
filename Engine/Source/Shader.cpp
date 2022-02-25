@@ -182,56 +182,7 @@ void Shader::SetUniformMatrix4f(const std::string& name, const float4x4& mat)
 		glUniformMatrix4fv(location, 1, GL_FALSE, mat.ptr());
 }
 
-std::list<UniformData> Shader::GetUniforms()
-{
-	//std::unordered_map<std::string, float> ret;
-	std::list<UniformData> ret;
 
-	GLint numActiveAttribs = 0;
-	GLint numActiveUniforms = 0;
-	glGetProgramInterfaceiv(rendererID, GL_PROGRAM_INPUT, GL_ACTIVE_RESOURCES, &numActiveAttribs);
-	glGetProgramInterfaceiv(rendererID, GL_UNIFORM, GL_ACTIVE_RESOURCES, &numActiveUniforms);
-
-	std::vector<GLchar> nameData(256);
-	std::vector<GLenum> properties;
-	properties.push_back(GL_NAME_LENGTH);
-	properties.push_back(GL_TYPE);
-	properties.push_back(GL_ARRAY_SIZE);
-	properties.push_back(GL_ARRAY_STRIDE);
-	properties.push_back(GL_OFFSET);
-
-	std::vector<GLint> values(properties.size());
-
-	UniformData retData;
-	for (int attrib = 0; attrib < numActiveUniforms; ++attrib)
-	{
-		glGetProgramResourceiv(rendererID, GL_UNIFORM, attrib, properties.size(),
-			&properties[0], values.size(), NULL, &values[0]);
-
-		//if (values[1] != GL_FLOAT) // If it is not a float, we continue iterating
-		//	continue;
-
-		/*if (values[0] == -1)
-			continue;*/
-		if (values[1] != GL_FLOAT)
-		{
-			continue;
-		}
-
-		nameData.resize(values[0]); // The length of the name.
-		glGetProgramResourceName(rendererID, GL_UNIFORM, attrib, nameData.size(), NULL, &nameData[0]);
-		
-		std::string name((char*)&nameData[0], nameData.size() - 1);
-
-		retData.name = name;
-		retData.type = properties[1];
-		retData.data = values[0];
-		ret.push_back(retData);
-		//ret[attrib] = values[attrib];
-	}
-
-	return ret;
-}
 
 void Shader::UpdateSourceCode(const std::string& newSource)
 {

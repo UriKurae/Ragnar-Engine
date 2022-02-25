@@ -25,6 +25,10 @@ public:
 
 	void OnEditor() override;
 
+	std::vector<Uniform> GetShaderUniforms();
+
+	void ShowUniforms();
+
 	bool Update(float dt) override;
 
 	bool OnLoad(JsonParsing& node) override;
