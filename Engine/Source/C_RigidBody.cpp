@@ -352,31 +352,36 @@ void RigidBodyComponent::EditCollisionMesh()
 
 	if (editMesh)
 	{
-		switch (body->getCollisionShape()->getShapeType())
-		{
-		case BOX_SHAPE_PROXYTYPE:
-			body->getCollisionShape()->setLocalScaling(box.size);
-			break;
-		case SPHERE_SHAPE_PROXYTYPE:
-			static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
-			break;
-		case CAPSULE_SHAPE_PROXYTYPE:
-			body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, 0.0f));
-			break;
-		case CYLINDER_SHAPE_PROXYTYPE:
-			body->getCollisionShape()->setLocalScaling(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
-			break;
-		case CONE_SHAPE_PROXYTYPE:
-			body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
-			break;
-		case STATIC_PLANE_PROXYTYPE:
-			CreateBody();
-			break;
-		default:
-			break;
-		}
-		editMesh = false;
+		UpdateCollisionMesh();
 	}
+}
+
+void RigidBodyComponent::UpdateCollisionMesh()
+{
+	switch (body->getCollisionShape()->getShapeType())
+	{
+	case BOX_SHAPE_PROXYTYPE:
+		body->getCollisionShape()->setLocalScaling(box.size);
+		break;
+	case SPHERE_SHAPE_PROXYTYPE:
+		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
+		break;
+	case CAPSULE_SHAPE_PROXYTYPE:
+		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, 0.0f));
+		break;
+	case CYLINDER_SHAPE_PROXYTYPE:
+		body->getCollisionShape()->setLocalScaling(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
+		break;
+	case CONE_SHAPE_PROXYTYPE:
+		body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
+		break;
+	case STATIC_PLANE_PROXYTYPE:
+		CreateBody();
+		break;
+	default:
+		break;
+	}
+	editMesh = false;
 }
 
 float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
@@ -424,6 +429,11 @@ void RigidBodyComponent::CreateBody()
 		break;
 	}
 
+	SetPhysicsProperties();
+}
+
+void RigidBodyComponent::SetPhysicsProperties()
+{
 	if (body != nullptr)
 	{
 		body->setFriction(friction);
@@ -487,6 +497,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	default:
 		break;
 	}
+	UpdateCollisionMesh();
 
 	//Collision physics
 	useGravity = node.GetJsonBool("Gravity");
@@ -495,9 +506,14 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	friction = node.GetJsonNumber("Friction");
 	restitution = node.GetJsonNumber("Restitution");
 
+	//Damping
+	linearDamping = node.GetJsonNumber("LinearDamping");
+	angularDamping = node.GetJsonNumber("AngularDamping");
+
 	//Constrains
 	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
 	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+
 	if (int size = node.GetJsonNumber("SizeConstraint") > 0)
 	{
 		JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "ConstraintBodies");
@@ -507,10 +523,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-
-	//Damping
-	linearDamping = node.GetJsonNumber("LinearDamping");
-	angularDamping = node.GetJsonNumber("AngularDamping");
+	SetPhysicsProperties();
 
 	return true;
 }

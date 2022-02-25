@@ -35,9 +35,12 @@ public:
 	void ResetLocalValues();
 	void EditCollisionMesh();
 
+	void UpdateCollisionMesh();
+
 	float4x4 btScalarTofloat4x4(btScalar* transform);
 
 	void CreateBody();
+	void SetPhysicsProperties();
 	float GetMass() { return mass; };
 	void SetMass(float mass);
 	btRigidBody* GetBody() { return body; };
