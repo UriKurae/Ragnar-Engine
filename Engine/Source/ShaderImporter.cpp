@@ -11,36 +11,11 @@
 
 uint ShaderImporter::SaveShader(std::string& assets, std::string& source)
 {
-	std::fstream assetsFile;
-	std::fstream libraryFile;
-	std::string s = "";
-
-	assetsFile.open(assets);
-	if (source == "")
-	{
-		char ch;
-		while (1)
-		{
-			assetsFile >> ch;
-			s += ch;
-			if (assetsFile.eof())
-				break;
-		}
-	}
-	//assetsFile >> source;
-	assetsFile.close();
-
-
-	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, assets, std::string());
+	std::string lib;
+	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, assets, lib);
 	std::shared_ptr<Shader> sh = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->GetResource(uid));
 
-	//source == "" ? sh->UpdateSourceCode(s) : sh->UpdateSourceCode(source);
-	//sh->UpdateSourceCode()
-	
-	libraryFile.open(sh->GetLibraryPath());
-	libraryFile << source;
-	libraryFile.close();
+	CopyFileA(assets.c_str(), lib.c_str(), false);
 
 	return uid;
 }
-
