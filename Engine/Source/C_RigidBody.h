@@ -20,10 +20,12 @@ class RigidBodyComponent : public Component
 {
 public:
 	RigidBodyComponent(GameObject* obj, CollisionType type = CollisionType::BOX, float mass = 1.0f,  bool isKinematic = false);
+	void IgnoreCollision();
 	virtual ~RigidBodyComponent();
 
 	void SetBoundingBox();
 	bool Update(float dt) override;
+	bool UpdateGameObject(float dt);
 	void UpdateCollision();
 	void OnEditor() override;
 
@@ -82,4 +84,5 @@ private:
 	PPlane plane;
 
 	bool editMesh = false;
+	bool mainBody = false;
 };

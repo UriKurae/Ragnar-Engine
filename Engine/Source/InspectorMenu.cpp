@@ -79,7 +79,9 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	ImGui::Separator();
 	for (int i = 0; i < obj->GetComponents().size(); ++i)
 	{
+		ImGui::PushID(i);
 		obj->GetComponents()[i]->OnEditor();
+		ImGui::PopID();
 	}
 	ImGui::NewLine();
 }

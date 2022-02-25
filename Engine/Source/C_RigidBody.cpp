@@ -39,6 +39,22 @@ RigidBodyComponent::~RigidBodyComponent()
 	}	
 }
 
+void RigidBodyComponent::IgnoreCollision()
+{
+	RigidBodyComponent* comp = nullptr;
+	for (int i = 0; i < owner->GetComponents().size(); i++)
+	{
+		if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY &&
+			owner->GetComponents().at(i) != this)
+		{
+			comp = static_cast<RigidBodyComponent*>(owner->GetComponents().at(i));
+
+			body->setIgnoreCollisionCheck(comp->body, true);
+			comp->body->setIgnoreCollisionCheck(body, true);
+		}
+	}
+}
+
 void RigidBodyComponent::SetBoundingBox()
 {
 	float3 pos, radius, size;
@@ -139,13 +155,13 @@ void RigidBodyComponent::OnEditor()
 		}
 		ImGui::SameLine();
 		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane" };
-		
+
 		ImGui::PushItemWidth(85);
 		int currentCollision = (int)collisionType;
 		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 6))
 		{
 			collisionType = (CollisionType)currentCollision;
-			SetCollisionType(collisionType);		
+			SetCollisionType(collisionType);
 		}
 		ImGui::PopItemWidth();
 
@@ -156,7 +172,7 @@ void RigidBodyComponent::OnEditor()
 		ImGui::PushItemWidth(winSize.x);
 		if (ImGui::DragFloat("##Mass", &mass, 0.1f, 0.0f, INFINITE))
 		{
-			if(body->isStaticObject() && mass != 0.0f)
+			if (body->isStaticObject() && mass != 0.0f)
 				CreateBody();
 			if (mass != 0.f)
 			{
@@ -179,7 +195,7 @@ void RigidBodyComponent::OnEditor()
 			body->setRestitution(restitution);
 		ImGui::PopItemWidth();
 
-		if(ImGui::Checkbox("Use Gravity", &useGravity))
+		if (ImGui::Checkbox("Use Gravity", &useGravity))
 		{
 			if (!useGravity && !isKinematic)
 				SetAsStatic();
@@ -190,13 +206,13 @@ void RigidBodyComponent::OnEditor()
 			if (isKinematic)
 			{
 				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-				if(app->scene->GetGameState() == GameState::PLAYING)
+				if (app->scene->GetGameState() == GameState::PLAYING)
 					body->setActivationState(DISABLE_DEACTIVATION);
 			}
 			else CreateBody();
 		}
 
-		Combos();		
+		Combos();
 	}
 }
 
@@ -233,7 +249,7 @@ void RigidBodyComponent::Combos()
 		{
 			for (int i = 0; i < app->physics->GetBodiesNames().size(); i++)
 			{
-				if (body != app->physics->GetBodies().at(i)->body)
+				if (owner->GetName() != app->physics->GetBodiesNames().at(i))
 				{
 					if (ImGui::Selectable(app->physics->GetBodiesNames().at(i).c_str()))
 					{
@@ -292,6 +308,8 @@ void RigidBodyComponent::SetCollisionType(CollisionType type)
 	SetBoundingBox();
 	CreateBody();
 	ResetLocalValues();
+
+	IgnoreCollision();
 }
 
 void RigidBodyComponent::ResetLocalValues()
@@ -524,6 +542,14 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		{
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
+	}
+	if (!useGravity && !isKinematic)
+		SetAsStatic();
+	else if (isKinematic)
+	{
+		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		if (app->scene->GetGameState() == GameState::PLAYING)
+			body->setActivationState(DISABLE_DEACTIVATION);
 	}
 	SetPhysicsProperties();
 
