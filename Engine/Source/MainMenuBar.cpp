@@ -151,6 +151,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_WRENCH" Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
 			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
+			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
 
 			ImGui::EndMenu();
 		}
@@ -964,15 +965,4 @@ void MainMenuBar::ShowCreateNotLigthSensibleShaderWindow()
 		transform->SetTransform(matrix);
 	}
 }
-// Camera align with object
-void MainMenuBar::AlignViewWithSelected()
-{
-	GameObject* temp = app->editor->GetGO();
-	if (temp != nullptr)
-	{
-		TransformComponent* transform = temp->GetComponent<TransformComponent>();
-		float4x4 matrix = transform->GetGlobalTransform();
-		float3x3 rot = matrix.RotatePart();
-		app->camera->cameraFrustum.SetFrame(transform->GetGlobalTransform().Col3(3), rot.Col3(2), rot.Col3(1));
-	}
-}
+

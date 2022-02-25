@@ -207,6 +207,13 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 		localBoundingBox.SetNegativeInfinity();
 		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
+
+		Sphere sphere;
+		sphere.r = 0.f;
+		sphere.pos = localBoundingBox.CenterPoint();
+		sphere.Enclose(localBoundingBox);
+		mesh.get()->SetRadius(sphere.r);
+		mesh.get()->SetCenterMesh(sphere.pos);
 	}
 
 	return true;
@@ -234,6 +241,13 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 		localBoundingBox.SetNegativeInfinity();
 		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
+
+		Sphere sphere;
+		sphere.r = 0.f;
+		sphere.pos = localBoundingBox.CenterPoint();
+		sphere.Enclose(localBoundingBox);
+		mesh.get()->SetRadius(sphere.r);
+		mesh.get()->SetCenterMesh(sphere.pos);
 	}
 }
 
@@ -242,4 +256,13 @@ bool MeshComponent::HasMaterial()
 	if (material) return true;
 	
 	return false;
+}
+
+float3 MeshComponent::GetCenterPointInWorldCoords()
+{
+	return owner->GetComponent<TransformComponent>()->GetGlobalTransform().TransformPos(mesh->GetCenterMesh());
+}
+float MeshComponent::GetSphereRadius()
+{
+	return mesh->GetRadius();
 }

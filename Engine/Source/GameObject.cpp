@@ -342,7 +342,10 @@ void GameObject::CopyComponent(Component* component)
 
 void GameObject::AddChild(GameObject* object)
 {
+	object->parent = this;
 	children.emplace_back(object);
+	TransformComponent* trans = object->GetComponent<TransformComponent>();
+	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
 
 void GameObject::RemoveChild(GameObject* object)

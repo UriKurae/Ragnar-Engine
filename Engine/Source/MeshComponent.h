@@ -39,6 +39,10 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
+
+	float3 GetCenterPointInWorldCoords();
+	float GetSphereRadius();
+
 private:
 	TransformComponent* transform;
 	MaterialComponent* material;

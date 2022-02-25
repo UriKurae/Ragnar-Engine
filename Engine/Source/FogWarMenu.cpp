@@ -92,8 +92,8 @@ bool FogWarMenu::Update(float dt)
 			else if (ImGui::SliderFloat("Density", &fogDensity, 0.0f, 1.0f));
 			glFogf(GL_FOG_DENSITY, fogDensity);
 		}
-		frustum = nullptr;
 	}
+
 	ImGui::End();
 	return true;
 }
