@@ -361,6 +361,9 @@
     <ClInclude Include="Engine\Source\ShaderImporter.h">
       <Filter>Sources\Resources\Importers</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -584,6 +587,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ShaderImporter.cpp">
       <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_stdlib.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

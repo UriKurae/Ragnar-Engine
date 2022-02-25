@@ -37,6 +37,9 @@ private:
 	std::string GetNotLightSensibleShaderSource();
 	std::string GetLightSensibleShaderSource();
 
+	void ShowCreateLigthSensibleShaderWindow();
+	void ShowCreateNotLigthSensibleShaderWindow();
+
 private:
 	bool showMenu;
 	Texture* buttonPlay;
@@ -47,4 +50,9 @@ private:
 
 	bool saveWindow;
 	std::vector<Menu*> menus;
+
+	bool showCreateLightSensibleShaderWindow = false;
+	bool showCreateNotLightSensibleShaderWindow = false;
+
+	//std::string name;
 };

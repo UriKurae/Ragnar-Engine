@@ -24,6 +24,8 @@
 #include "Dialogs.h"
 #include "IconsFontAwesome5.h"
 
+#include "imgui/imgui_stdlib.h"
+
 #include <fstream>
 
 #include "Profiling.h"
@@ -255,37 +257,11 @@ bool MainMenuBar::Update(float dt)
 				static int count = 0;
 				if (ImGui::MenuItem("Light-sensible"))
 				{
-					//std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
-					//int start = path.find("Assets");
-					//std::string p = path.substr(start);
-					//app->fs->NormalizePath(p);
-
-					std::string path = "Assets/Resources/Shaders/new shader" + std::to_string(count) + ".shader";
-					count++;
-
-					std::ofstream file;
-					file.open(path);
-					file << GetLightSensibleShaderSource();
-					file.close();
-
-					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+					showCreateLightSensibleShaderWindow = true;
 				}
 				else if (ImGui::MenuItem("Not light-sensible"))
-				{
-					//std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
-
-					std::string path = "Assets/Resources/Shaders/new shader" + std::to_string(count) + ".shader";
-					count++;
-
-					std::ofstream file;
-					file.open(path);
-					file << GetNotLightSensibleShaderSource();
-					file.close();
-
-					/*int start = path.find("Assets");
-					std::string p = path.substr(start);
-					app->fs->NormalizePath(p);*/
-					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+				{					
+					showCreateNotLightSensibleShaderWindow = true;
 				}
 
 				ImGui::EndMenu();
@@ -454,6 +430,17 @@ bool MainMenuBar::Update(float dt)
 		ImGui::ShowDemoWindow(&showMenu);
 		ImGui::ShowMetricsWindow(&showMenu);
 	}
+
+
+	if (showCreateLightSensibleShaderWindow)
+	{
+		ShowCreateLigthSensibleShaderWindow();
+	}
+	else if (showCreateNotLightSensibleShaderWindow)
+	{
+		ShowCreateNotLigthSensibleShaderWindow();
+	}
+
 
 	for (unsigned int i = 0; i < menus.size(); ++i)
 	{
@@ -842,4 +829,68 @@ void main()
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 })";
 
+}
+
+void MainMenuBar::ShowCreateLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateLightSensibleShaderWindow);
+
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+		std::ofstream file;
+		file.open(path);
+		file << GetLightSensibleShaderSource();
+		file.close();
+
+		ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+		showCreateLightSensibleShaderWindow = false;
+		name.clear();
+	}
+	
+	ImGui::End();
+}
+
+void MainMenuBar::ShowCreateNotLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateNotLightSensibleShaderWindow);
+
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+		std::ofstream file;
+		file.open(path);
+		file << GetNotLightSensibleShaderSource();
+		file.close();
+
+		ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+
+		showCreateNotLightSensibleShaderWindow = false;
+		name.clear();
+
+	}
+
+	ImGui::End();
 }
