@@ -35,6 +35,7 @@ public:
 
 private:
 	std::string GetNotLightSensibleShaderSource();
+	std::string GetLightSensibleShaderSource();
 
 private:
 	bool showMenu;

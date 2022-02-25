@@ -32,11 +32,15 @@ Shader::Shader(uint uid, std::string& assets, std::string& library) : Resource(u
 	int e = assetsPath.find_last_of(".");
 	name = assetsPath.substr(s + 1, e - s - 1);
 
+	source = "";
+
 	struct _stat nowStat;
 	if (_stat(assetsPath.c_str(), &nowStat) == 0)
 	{
 		lastStat = nowStat;
 	}
+
+	CreateMetaShader();
 
 	//Load();
 }
@@ -48,14 +52,17 @@ Shader::~Shader()
 
 void Shader::Load()
 {
-	source = ReadFile();
+	if (source == "")
+	{
+		source = ReadFile();
 
-	auto shaderSources = SplitShaders(source);
+		auto shaderSources = SplitShaders(source);
 
-	//CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
-	CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
+		//CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
+		CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 
-	created = true;
+		created = true;
+	}
 }
 
 void Shader::UnLoad()
@@ -82,6 +89,22 @@ void Shader::ReCompile(bool reReadSource)
 
 	//CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 	CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
+}
+
+void Shader::CreateMetaShader()
+{
+	JsonParsing metaFile;
+
+	metaFile.SetNewJsonString(metaFile.ValueToObject(metaFile.GetRootValue()), "Assets Path", assetsPath.c_str());
+	metaFile.SetNewJsonNumber(metaFile.ValueToObject(metaFile.GetRootValue()), "Uuid", uid);
+
+	char* buffer = nullptr;
+	size_t size = metaFile.Save(&buffer);
+
+	std::string metaPath = SHADERS_FOLDER + std::string("shader_") + std::to_string(uid) + ".meta";
+	app->fs->Save(metaPath.c_str(), buffer, size);
+
+	RELEASE_ARRAY(buffer);
 }
 
 bool Shader::Refresh()

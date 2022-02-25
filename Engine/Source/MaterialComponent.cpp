@@ -32,7 +32,6 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 	showShaderEditor = false;
 	active = true;
 
-	//shader = new Shader("Assets/Resources/Shaders/default.shader");
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
 	shader->SetUniforms(GetShaderUniforms());
 

@@ -108,6 +108,8 @@ private:
 
 	void ReCompile(bool reReadSource = true);
 
+	void CreateMetaShader();
+
 private:
 	std::string name;
 	unsigned int rendererID;

@@ -15,6 +15,12 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
+	/*switch (light->type)
+	{
+		case LightType::POINT:
+		{
+		}
+	}*/
 }
 
 bool ComponentLight::Update(float dt)
@@ -86,6 +92,12 @@ void ComponentLight::OnEditor()
 				ImGui::ColorEdit3("Specular Color", l->specular.ptr());
 
 				ImGui::Text("%f %f %f", l->dir.x, l->dir.y, l->dir.z);
+
+				ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+				if (ImGui::Button(ICON_FA_TRASH" Delete"))
+					owner->RemoveComponent(this);
+
+				ImGui::Separator();
 			}
 
 			break;
@@ -107,6 +119,11 @@ void ComponentLight::OnEditor()
 				ImGui::DragFloat("Linear", &l->lin, 0.001f);
 				ImGui::DragFloat("Quadratic", &l->quadratic, 0.001f, 0.0f, 1.0f);
 
+				ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+				if (ImGui::Button(ICON_FA_TRASH" Delete"))
+					owner->RemoveComponent(this);
+				
+				ImGui::Separator();
 			}
 
 			break;
@@ -125,13 +142,16 @@ void ComponentLight::OnEditor()
 				ImGui::DragFloat("Intensity", &l->intensity, 0.01f);
 				ImGui::DragFloat("CutOff", &l->cutOff, 0.001f, 1.0f,0.0f);
 				ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.001f, 1.0f, 0.0f);
+
+				ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+				if (ImGui::Button(ICON_FA_TRASH" Delete"))
+					owner->RemoveComponent(this);
+
+				ImGui::Separator();
 			}
 		}
 	}
 
-	ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-	if (ImGui::Button(ICON_FA_TRASH" Delete"))
-		owner->RemoveComponent(this);
 }
 
 void ComponentLight::SetLight(Light* light)

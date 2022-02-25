@@ -310,6 +310,7 @@ ResourceType FileSystem::CheckExtension(std::string& path)
 	std::list<std::string>::iterator end = modelExtension.end();
 
 	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
+	if (extension.data() == std::string(".shader")) return ResourceType::SHADER;
 
 	for (s = modelExtension.begin(); s != end; ++s)
 	{
