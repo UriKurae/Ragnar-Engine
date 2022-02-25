@@ -1,6 +1,7 @@
 #include "ModuleScene.h"
 
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "Globals.h"
 #include "ModuleEditor.h"
@@ -69,6 +70,14 @@ bool ModuleScene::Start()
 
 bool ModuleScene::PreUpdate(float dt)
 {
+	static bool refresh = true;
+
+	if (refresh)
+	{
+		resetQuadtree = true;
+		refresh = false;
+	}
+
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
@@ -77,16 +86,6 @@ bool ModuleScene::PreUpdate(float dt)
 bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
-
-	// UNDO ============================================================
-	// TODO: Get the current Game Object, detect Input and Undo
-	/*if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
-			app->editor->GetGO()->OnEndedAction();
-	}*/
-	// ================================================================
-
 
 	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
 
@@ -157,6 +156,7 @@ bool ModuleScene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
+
 	qTree.DebugDraw();
 
 	std::stack<GameObject*> stack;
@@ -171,7 +171,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw();
+			go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -220,34 +220,15 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 	if (createTransform) object->CreateComponent(ComponentType::TRANSFORM);
 	if (parent != nullptr)
 	{
-		object->SetParent(parent);
 		parent->AddChild(object);
+		object->SetParent(parent);
 	}
 	else
 	{
-		object->SetParent(root);
 		root->AddChild(object);
+		object->SetParent(root);
 	}
 	
-	return object;
-}
-
-GameObject* ModuleScene::CreateGameObjectChild(const char* name, GameObject* parent)
-{
-	GameObject* object = CreateGameObject(parent);
-	object->SetName(name);
-
-	return object;
-}
-
-GameObject* ModuleScene::CreateGameObjectParent(const char* name, GameObject* child)
-{
-	GameObject* object = CreateGameObject(child->GetParent());
-	object->SetName(name);
-
-	child->GetParent()->RemoveChildren(child->GetParent()->FindChildren(child));
-	object->AddChild(child);
-
 	return object;
 }
 
@@ -457,50 +438,50 @@ void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
 
 void ModuleScene::ImportPrimitives()
 {
-	std::vector<float3> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float3> normals;
-	std::vector<float2> texCoords;
+	//std::vector<float3> normals;
+	//std::vector<float2> texCoords;
 
-	RCube::CreateCube(vertices, indices, texCoords);
+	RCube::CreateCube(vertices, indices);
 	std::string library;
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RPyramide::CreatePyramide(vertices, indices, texCoords);
+	RPyramide::CreatePyramide(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RSphere::CreateSphere(vertices, normals, indices, texCoords);
+	RSphere::CreateSphere(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
+	RCylinder::CreateCylinder(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 }
 
 void ModuleScene::Play()
@@ -522,13 +503,16 @@ void ModuleScene::Play()
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-	
+
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 }
 
 void ModuleScene::Stop()
 {
+	app->renderer3D->ClearPointLights();
+	app->renderer3D->ClearSpotLights();
+
 	LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 	qTree.Clear();

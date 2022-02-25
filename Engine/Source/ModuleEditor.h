@@ -43,7 +43,8 @@ public:
 	std::vector<std::string> GetTags();
 	std::vector<std::string> GetLayers();
 
-
+	inline const Viewport* GetViewport() const { return viewport; }
+	//Viewport* GetViewport() { return viewport; }
 private:
 	MainMenuBar mainMenuBar;
 

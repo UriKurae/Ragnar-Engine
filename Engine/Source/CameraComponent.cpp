@@ -93,7 +93,7 @@ bool CameraComponent::Update(float dt)
 	return true;
 }
 
-void CameraComponent::Draw()
+void CameraComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
 
@@ -104,7 +104,7 @@ void CameraComponent::Draw()
 	ebo->Bind();
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 0.0f, 1.0f);
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	vbo->Unbind();

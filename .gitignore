@@ -84,6 +84,7 @@ Thumbs.db
 *.tlog
 .vs
 
+[Ll]ibrary/
 [Bb]uild
 [Bb]in
 [Dd]ebug/

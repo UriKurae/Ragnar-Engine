@@ -1,10 +1,11 @@
 #pragma once
 #include "Module.h"
 
-#include "Light.h"
+#include "Lights.h"
 
 #include <vector>
 #include "Primitive.h"
+#include "glmath.h"
 #include "SDL.h"
 
 #define MAX_LIGHTS 8
@@ -12,6 +13,10 @@
 typedef unsigned int GLuint;
 
 class Framebuffer;
+class Material;
+class Shader;
+class GameObject;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -51,10 +56,33 @@ public:
 
 	void DrawCubeDirectMode();
 
+
+	Material* GetDefaultMaterial();
+	unsigned int GetDefaultShader();
+
+	Shader* AddShader(const std::string& path);
+	void AddMaterial(Material* material);
+	inline const std::vector<Shader*>& GetShaders() { return shaders; }
+
+	void AddPointLight(PointLight* pl);
+	inline std::vector<PointLight*>& GetPointLights() { return pointLights; }
+
+	void AddSpotLight(SpotLight* sl);
+	inline const std::vector<SpotLight*>& GetSpotLights() { return spotLights; }
+
+	void ClearPointLights();
+	void ClearSpotLights();
+
+	void RemovePointLight(PointLight* light);
+
+
+private:
+	void PushCamera(const float4x4& proj, const float4x4& view);
+
 public:
 	PGrid* grid;
 
-	Light lights[MAX_LIGHTS];
+	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	Mat4x4 projectionMatrix;
 
@@ -71,4 +99,17 @@ public:
 	bool wireMode;
 	bool vsync;
 	bool rayCast;
+
+	GameObject* goDirLight;
+	DirectionalLight* dirLight;
+
+	std::vector<PointLight*> pointLights;
+	std::vector<SpotLight*> spotLights;
+
+private:
+	Material* defaultMaterial;
+	unsigned int defaultShader;
+
+	std::vector<Shader*> shaders;
+	std::vector<Material*> materials;
 };

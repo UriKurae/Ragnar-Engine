@@ -55,6 +55,9 @@
     <Filter Include="Sources\Commands">
       <UniqueIdentifier>{6c54a952-fc50-4805-b3b5-7fb3fd1c7100}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Materials">
+      <UniqueIdentifier>{52cdcc85-30bb-48e1-a81a-2133027b065d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -80,9 +83,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\Color.h">
       <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Light.h">
-      <Filter>Sources\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\glmath.h">
       <Filter>Sources\Containers</Filter>
@@ -328,8 +328,41 @@
     <ClInclude Include="Engine\Source\CommandsDispatcher.h">
       <Filter>Sources\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\VertexArray.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\BufferLayout.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ShaderHelpers.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Shader.h">
+      <Filter>Sources\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Material.h">
+      <Filter>Sources\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Vertex.h">
+      <Filter>Sources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Lights.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\LightComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Source\FogWarMenu.h">
       <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditor.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ShaderImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
+      <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Style.h">
       <Filter>Sources\Containers</Filter>
@@ -362,9 +395,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Color.cpp">
       <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Light.cpp">
-      <Filter>Sources\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\glmath.cpp">
       <Filter>Sources\Containers</Filter>
@@ -540,8 +570,29 @@
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp">
       <Filter>Sources\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\VertexArray.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Shader.cpp">
+      <Filter>Sources\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Material.cpp">
+      <Filter>Sources\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\LightComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Source\FogWarMenu.cpp">
       <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditor.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ShaderImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\imgui_stdlib.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>

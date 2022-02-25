@@ -101,16 +101,16 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 		std::stack<QuadtreeNode*> nodes;
 
 		for (int i = 0; i < 4; ++i)
-		{
-			if (root->GetChild(i) != nullptr) nodes.push(root->GetChild(i));
-		}
+			nodes.push(root->GetChild(i));
 
 		while (!nodes.empty())
 		{
 			QuadtreeNode* node = nodes.top();
 			nodes.pop();
 
-			int intersect = frustum->ContainsAaBox(node->GetBox());
+			int intersect = 0;
+			if (node)
+				intersect = frustum->ContainsAaBox(node->GetBox());
 			if (intersect == 1 || intersect == 2)
 			{
 				for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
@@ -286,7 +286,7 @@ void QuadtreeNode::DebugDraw()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	ebo->Bind();
 
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 
 	vbo->Unbind();
 	ebo->Unbind();
