@@ -63,10 +63,19 @@ bool ListenerComponent::Update(float dt)
 
 bool ListenerComponent::OnLoad(JsonParsing& node)
 {
+	activeListener = node.GetJsonBool("Active");
+
 	return true;
 }
 
 bool ListenerComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", activeListener);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
 	return true;
 }
