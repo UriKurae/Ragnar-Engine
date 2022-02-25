@@ -252,33 +252,40 @@ bool MainMenuBar::Update(float dt)
 
 			if (ImGui::BeginMenu(ICON_FA_CIRCLE " Shader"))
 			{
+				static int count = 0;
 				if (ImGui::MenuItem("Light-sensible"))
 				{
-					std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
-					int start = path.find("Assets");
-					std::string p = path.substr(start);
-					app->fs->NormalizePath(p);
+					//std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+					//int start = path.find("Assets");
+					//std::string p = path.substr(start);
+					//app->fs->NormalizePath(p);
+
+					std::string path = "Assets/Resources/Shaders/new shader" + std::to_string(count) + ".shader";
+					count++;
 
 					std::ofstream file;
 					file.open(path);
 					file << GetLightSensibleShaderSource();
 					file.close();
 
-					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
+					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
 				}
 				else if (ImGui::MenuItem("Not light-sensible"))
 				{
-					std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+					//std::string path = Dialogs::SaveFile("Shader (*.shader)\0*.shader\0");
+
+					std::string path = "Assets/Resources/Shaders/new shader" + std::to_string(count) + ".shader";
+					count++;
 
 					std::ofstream file;
 					file.open(path);
 					file << GetNotLightSensibleShaderSource();
 					file.close();
 
-					int start = path.find("Assets");
+					/*int start = path.find("Assets");
 					std::string p = path.substr(start);
-					app->fs->NormalizePath(p);
-					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
+					app->fs->NormalizePath(p);*/
+					ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
 				}
 
 				ImGui::EndMenu();
