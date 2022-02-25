@@ -204,7 +204,7 @@ void AudioManager::PlayAllAudioSources()
 {
 	for (int i = 0; i < audioSources.size(); ++i)
 	{
-		//audioSources[i]->PlayClipOnAwake();
+		audioSources[i]->PlayClipsOnAwake();
 	}
 }
 

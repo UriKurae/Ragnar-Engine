@@ -11,7 +11,7 @@
 
 #include "Imgui/imgui.h"
 
-AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1), playOnAwake(false)
+AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1)
 {
 	owner = own;
 	type = ComponentType::AUDIO_SOURCE;
@@ -25,7 +25,7 @@ AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* 
 		owner->SetAudioRegister(true);
 	}
 
-	audioClip.push_back("None");
+	audioClip.push_back({ "None", false});
 }
 
 AudioSourceComponent::~AudioSourceComponent()
@@ -43,30 +43,31 @@ void AudioSourceComponent::OnEditor()
 		{
 			for (int i = 0; i < audioClip.size(); ++i)
 			{
-				ImGui::PushID((void*)audioClip[i].c_str());
-				if (ImGui::BeginCombo("##AudioClip", audioClip[i].c_str()))
+				ImGui::PushID((void*)audioClip[i].clipName.c_str());
+				if (ImGui::BeginCombo("##AudioClip", audioClip[i].clipName.c_str()))
 				{
 					if (ImGui::Selectable("None"))
 					{
-						audioClip[i] = "None";
+						audioClip[i].clipName = "None";
 					}
 					std::vector<std::string> events = AudioManager::Get()->GetEventsList();
 					for (int j = 0; j < events.size(); j++)
 					{
 						if (ImGui::Selectable(events[j].c_str()))
 						{
-							audioClip[i] = events[j];
+							audioClip[i].clipName = events[j];
 						}
 					}
 					ImGui::EndCombo();
 				}
+				ImGui::SameLine();
+				ImGui::Checkbox("On Awake", &audioClip[i].playOnAwake);
 				ImGui::PopID();
 			}
 
-			ImGui::SameLine();
 			if (ImGui::Button(ICON_FA_PLUS))
 			{
-				audioClip.push_back("None");
+				audioClip.push_back({"None" , false});
 			}
 			ImGui::SameLine();
 			if (ImGui::Button(ICON_FA_MINUS))
@@ -101,13 +102,9 @@ void AudioSourceComponent::OnEditor()
 			AK::SoundEngine::SetRTPCValue("Pitch", pitch, owner->GetUUID());
 		}
 
-		ImGui::Text("Play On Awake");
-		ImGui::SameLine();
-		ImGui::Checkbox("##Play On Awake", &playOnAwake);
-
 		if (ImGui::Button("Play"))
 		{
-			PlayClip(audioClip[0].c_str());
+			PlayClip(audioClip[0].clipName.c_str());
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Pause"))
@@ -168,7 +165,7 @@ bool AudioSourceComponent::OnLoad(JsonParsing& node)
 		for (int i = 0; i < size; ++i)
 		{
 			JsonParsing clip = node.GetJsonArrayValue(clips, i);
-			audioClip.push_back(clip.GetJsonString(std::to_string(i).c_str()));
+			audioClip.push_back({ clip.GetJsonString(std::to_string(i).c_str()), false });
 		}
 	}
 	volume = node.GetJsonNumber("Volume");
@@ -194,7 +191,7 @@ bool AudioSourceComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	for (int i = 0; i < audioClip.size(); ++i)
 	{
 		clips = JsonParsing();
-		clips.SetNewJsonString(clips.ValueToObject(clips.GetRootValue()), label.c_str(), audioClip.at(i).c_str());
+		clips.SetNewJsonString(clips.ValueToObject(clips.GetRootValue()), label.c_str(), audioClip.at(i).clipName.c_str());
 		label = std::to_string(i + 1);
 		file.SetValueToArray(newArray, clips.GetRootValue());
 	}
@@ -214,9 +211,13 @@ void AudioSourceComponent::PlayClip(const char* clipName)
  	playingID = AudioManager::Get()->PostEvent(clipName, owner->GetUUID());
 }
 
-void AudioSourceComponent::PlayClipOnAwake(const char* clipName)
+void AudioSourceComponent::PlayClipsOnAwake()
 {
-	if (playOnAwake) playingID = AudioManager::Get()->PostEvent(clipName, owner->GetUUID());
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		if (audioClip[0].playOnAwake) playingID = AudioManager::Get()->PostEvent(audioClip[i].clipName.c_str(), owner->GetUUID());
+	}
+	
 }
 
 void AudioSourceComponent::StopClip()
