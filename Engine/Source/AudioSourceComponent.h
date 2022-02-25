@@ -6,6 +6,7 @@
 class TransformComponent;
 class IndexBuffer;
 class VertexBuffer;
+
 class AudioSourceComponent : public Component
 {
 public:
@@ -18,8 +19,10 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void PlayClip();
-	void PlayClipOnAwake();
+	void SwapAudioClip(const char* clipName);
+
+	void PlayClip(const char* clipMap);
+	void PlayClipOnAwake(const char* clipMap);
 	void StopClip();
 	void PauseClip();
 	void ResumeClip();
@@ -28,7 +31,7 @@ private:
 	TransformComponent* transform;
 
 	// Audio settings
-	std::string audioClip;
+	std::vector<std::string> audioClip;
 	unsigned int playingID;
 	bool mute;
 	float volume;

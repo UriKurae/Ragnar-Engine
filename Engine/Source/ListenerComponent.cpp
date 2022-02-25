@@ -63,6 +63,13 @@ bool ListenerComponent::Update(float dt)
 
 bool ListenerComponent::OnLoad(JsonParsing& node)
 {
+	// Register this audio source
+	if (!owner->CheckAudioRegister())
+	{
+		AkGameObjectID cameraID = owner->GetUUID();
+		AudioManager::Get()->RegisterGameObject(cameraID);
+		owner->SetAudioRegister(true);
+	}
 	activeListener = node.GetJsonBool("Active");
 
 	return true;

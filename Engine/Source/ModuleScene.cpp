@@ -16,7 +16,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr)
+ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -47,6 +47,10 @@ bool ModuleScene::Start()
 	ImportPrimitives();
 	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
+	player = CreateGameObject(nullptr);
+	player->CreateComponent(ComponentType::AUDIO_SOURCE);
+	player->SetName("Player");
+	
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
@@ -119,6 +123,24 @@ bool ModuleScene::Update(float dt)
 		resetQuadtree = false;
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+	{
+		player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+	{
+		player->GetComponent<AudioSourceComponent>()->StopClip();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+	{
+		player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+	{
+		player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+	}
+
 	AudioManager::Get()->Render();
 
 	return true;
@@ -345,6 +367,10 @@ bool ModuleScene::LoadScene(const char* name)
 				GameObject* parent = GetGoByUuid(go.GetJsonNumber("Parent UUID"));
 				GameObject* child = CreateGameObject(parent, false);
 				child->OnLoad(go);
+				if (child->GetName() == std::string("Player"))
+				{
+					player = child;
+				}
 			}
 		}
 	}

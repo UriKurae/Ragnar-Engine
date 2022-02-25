@@ -86,6 +86,8 @@ private:
 	GameState gameState;
 	bool frameSkip;
 
+	GameObject* player;
+
 	bool resetQuadtree;
 
 	GameTimer gameTimer;
