@@ -515,7 +515,8 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
 	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
 
-	if (int size = node.GetJsonNumber("SizeConstraint") > 0)
+	uint size = node.GetJsonNumber("SizeConstraint");
+	if (size > 0)
 	{
 		JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "ConstraintBodies");
 
@@ -578,12 +579,12 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	//Constrains
 	file.SetNewJson3Number(file, "MovementConstraint", movementConstraint);
 	file.SetNewJson3Number(file, "RotationConstraint", rotationConstraint);
-	if (int size = constraintBodies.size() > 0)
-	{
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "SizeConstraint", size);
 
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "SizeConstraint", constraintBodies.size());
+	if (constraintBodies.size() > 0)
+	{
 		JSON_Array* arrayConstrains = file.SetNewJsonArray(file.GetRootValue(), "ConstraintBodies");
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < constraintBodies.size(); i++)
 			json_array_append_number(arrayConstrains, constraintBodies.at(i)->owner->GetUUID());
 	}
 
