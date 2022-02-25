@@ -70,6 +70,7 @@ bool TransformComponent::Update(float dt)
 	{
 		std::stack<GameObject*> stack;
 		UpdateTransform();
+		//Get each RigidBodies of the GameObject to update their position
 		for (int i = 0; i < owner->GetComponents().size(); i++)
 			if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
 				static_cast<RigidBodyComponent*>(owner->GetComponents().at(i))->UpdateCollision();
@@ -83,6 +84,7 @@ bool TransformComponent::Update(float dt)
 
 			UpdateChildTransform(go);
 			
+			//Get each RigidBodies of the GameObject childs to update their position
 			for (int i = 0; i < go->GetComponents().size(); i++)
 				if (go->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
 					static_cast<RigidBodyComponent*>(go->GetComponents().at(i))->UpdateCollision();

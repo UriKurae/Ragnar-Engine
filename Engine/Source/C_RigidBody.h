@@ -25,7 +25,6 @@ public:
 
 	void SetBoundingBox();
 	bool Update(float dt) override;
-	bool UpdateGameObject(float dt);
 	void UpdateCollision();
 	void OnEditor() override;
 

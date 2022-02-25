@@ -34,11 +34,11 @@ RigidBodyComponent::~RigidBodyComponent()
 	if (body != nullptr)
 	{
 		app->physics->DeleteBody(this, owner->name);
-
 		constraintBodies.clear();
 	}	
 }
 
+//Function to make colliders of the same GameObject ignore one another
 void RigidBodyComponent::IgnoreCollision()
 {
 	RigidBodyComponent* comp = nullptr;
@@ -55,6 +55,7 @@ void RigidBodyComponent::IgnoreCollision()
 	}
 }
 
+//Function that calculates the size of the mesh and creates a collision of the same dimensions
 void RigidBodyComponent::SetBoundingBox()
 {
 	float3 pos, radius, size;
@@ -112,6 +113,7 @@ void RigidBodyComponent::SetBoundingBox()
 	}
 }
 
+//When the engine state is "playing" the GameObject follows the RigidBody
 bool RigidBodyComponent::Update(float dt)
 {
 	if (app->scene->GetGameState() == GameState::PLAYING)
@@ -127,6 +129,7 @@ bool RigidBodyComponent::Update(float dt)
 	return true;
 }
 
+//Function to update the position of the collider in the center of the GameObject
 void RigidBodyComponent::UpdateCollision()
 {
 	if (app->scene->GetGameState() != GameState::PLAYING)
@@ -142,6 +145,7 @@ void RigidBodyComponent::UpdateCollision()
 	}
 }
 
+//Function ImGui to draw/edit parameters
 void RigidBodyComponent::OnEditor()
 {
 	// Important condition: body != nullptr 
@@ -216,6 +220,7 @@ void RigidBodyComponent::OnEditor()
 	}
 }
 
+//pt.2
 void RigidBodyComponent::Combos()
 {
 	ImGuiStyle& style = ImGui::GetStyle();
@@ -324,6 +329,7 @@ void RigidBodyComponent::ResetLocalValues()
 	cone.height = 2;
 }
 
+//Function ImGui to draw/edit parameters of the shape
 void RigidBodyComponent::EditCollisionMesh()
 {
 	switch (collisionType)
@@ -374,6 +380,7 @@ void RigidBodyComponent::EditCollisionMesh()
 	}
 }
 
+//Function to update dimensions of the RigidBody when parameters have been changed
 void RigidBodyComponent::UpdateCollisionMesh()
 {
 	switch (body->getCollisionShape()->getShapeType())
@@ -551,6 +558,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		if (app->scene->GetGameState() == GameState::PLAYING)
 			body->setActivationState(DISABLE_DEACTIVATION);
 	}
+	SetMass(mass);
 	SetPhysicsProperties();
 
 	return true;

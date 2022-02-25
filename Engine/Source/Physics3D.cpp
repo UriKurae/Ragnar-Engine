@@ -303,7 +303,10 @@ void Physics3D::ActiveAllBodies()
 			bodies.at(i)->GetBody()->setActivationState(ACTIVE_TAG);
 	}
 }
+
 // =============================================
+
+//This functions are used directly by Bullet. Do not touch!
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
 	line.origin.Set(from.getX(), from.getY(), from.getZ());
