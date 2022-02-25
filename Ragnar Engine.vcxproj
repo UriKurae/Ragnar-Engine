@@ -138,7 +138,7 @@
     <ClInclude Include="Engine\Source\Lights.h" />
     <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
-    <ClInclude Include="Engine\Source\MouseCommands.h" />
+    <ClInclude Include="Engine\Source\GameObjectCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
     <ClInclude Include="Engine\Source\Command.h" />
     <ClInclude Include="Engine\Source\Component.h" />
@@ -183,6 +183,7 @@
     <ClInclude Include="Engine\Source\ShaderHelpers.h" />
     <ClInclude Include="Engine\Source\ShaderImporter.h" />
     <ClInclude Include="Engine\Source\TextEditor.h" />
+    <ClInclude Include="Engine\Source\Style.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureImporter.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\LightComponent.cpp" />
+    <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp" />
@@ -255,7 +257,7 @@
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
-    <ClCompile Include="Engine\Source\MouseCommands.cpp" />
+    <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />

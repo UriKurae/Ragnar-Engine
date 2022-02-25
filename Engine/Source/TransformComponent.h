@@ -57,6 +57,7 @@ public:
 
 	// UNDO
 	inline void ForceUpdateTransform() { changeTransform = true; }
+	void UpdateEditorRotation();
 	// UNDO
 
 private:
@@ -68,7 +69,6 @@ private:
 	float4x4 localMatrix;
 
 	float3 rotationInEuler;
-
 
 	bool changeTransform;
 };

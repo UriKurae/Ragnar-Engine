@@ -187,12 +187,12 @@ bool ModuleCamera3D::Update(float dt)
 				float3 distanceTarget = cameraFrustum.Pos() - targetPos;
 
 				Quat rotateOrbitY;
-				rotateOrbitY = rotateOrbitY.RotateY(-dX * dt);
+				rotateOrbitY = rotateOrbitY.RotateY(dX * dt);
 				rotateOrbitY.Normalize();
 				//distanceTarget = rotateOrbitY * distanceTarget;
 
 				Quat rotateOrbitX;
-				rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+				rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt);
 				rotateOrbitX.Normalize();
 				newUp = rotateOrbitX * newUp;
 				newUp.Normalize();
@@ -205,26 +205,8 @@ bool ModuleCamera3D::Update(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
-		{
-			GameObject* target = app->editor->GetGO();
-			if (target != nullptr)
-			{
-				float3 maxPoint = target->GetAABB().maxPoint;
-				float3 minPoint = target->GetAABB().minPoint;
+		Focus(newFront, newUp, newPos);
 
-				float3 h = (maxPoint - minPoint) / 2.0f;
-
-				float angle = DegToRad(cameraFrustum.VerticalFov()) / 2;
-
-				float3 distance = h / Tan(angle);
-
-				distance.x = (distance.x + 2.5f) * cameraFrustum.Front().x;
-				distance.y = distance.y * cameraFrustum.Front().y;
-				distance.z = (distance.z + 2.5f) * cameraFrustum.Front().z;
-				newPos = target->GetAABB().CenterPoint() - distance;
-			}
-		}
 		float4 size = app->editor->GetViewport()->GetBounds();
 	//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
@@ -313,6 +295,34 @@ bool ModuleCamera3D::Update(float dt)
 	}
 	
 	return true;
+}
+
+void ModuleCamera3D::Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos)
+{
+	// Focus
+	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
+	{
+		GameObject* objSelected = app->editor->GetGO();
+
+		if (objSelected != nullptr)
+		{
+			if (MeshComponent* mesh = objSelected->GetComponent<MeshComponent>())
+			{
+				float3 meshCenter = mesh->GetCenterPointInWorldCoords();
+				newFront = (meshCenter - cameraFrustum.Pos()).Normalized();
+				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
+				const float meshRadius = mesh->GetSphereRadius();
+				const float currentDistance = meshCenter.Distance(cameraFrustum.Pos());
+				newPos = meshCenter + ((cameraFrustum.Pos() - meshCenter).Normalized() * meshRadius * 2);
+			}
+			else
+			{
+				float3 pivot = objSelected->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3);
+				newFront = (pivot - cameraFrustum.Pos()).Normalized();
+				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
+			}
+		}
+	}
 }
 
 void ModuleCamera3D::LookAt(float3& target)

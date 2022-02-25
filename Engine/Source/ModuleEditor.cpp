@@ -138,7 +138,7 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 	std::vector<std::string> tags;
 	std::vector<std::string> layers;
 
-	// Save Tags
+	// Load Tags
 	JSON_Array *jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "tags");
 	size_t size = node.GetJsonArrayCount(jsonArray);
 
@@ -149,7 +149,7 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 	}
 	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetTags(tags);
 	
-	// Save Layers
+	// Load Layers
 	jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "layers");
 	size = node.GetJsonArrayCount(jsonArray);
 
@@ -160,6 +160,9 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 	}
 	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetLayers(layers);
 
+	// Load style
+	mainMenuBar.SetStyle((int)node.GetJsonNumber("style"));
+
 	return true;
 }
 
@@ -167,6 +170,7 @@ bool ModuleEditor::SaveConfig(JsonParsing& node)
 {
 	JsonParsing fileTag = JsonParsing();
 
+	// Save Tags
 	JSON_Array* jsonArray = node.SetNewJsonArray(node.GetRootValue(), "tags");
 	std::string label = "0";
 	std::vector<std::string> tags = GetTags();
@@ -178,6 +182,7 @@ bool ModuleEditor::SaveConfig(JsonParsing& node)
 		node.SetValueToArray(jsonArray, fileTag.GetRootValue());
 	}
 
+	// Save layers
 	JsonParsing fileLay = JsonParsing();
 	jsonArray = node.SetNewJsonArray(node.GetRootValue(), "layers");
 	label = "0";
@@ -189,6 +194,8 @@ bool ModuleEditor::SaveConfig(JsonParsing& node)
 		label = std::to_string(i + 1);
 		node.SetValueToArray(jsonArray, fileLay.GetRootValue());
 	}
+	// Save Style
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "style", mainMenuBar.GetStyle());
 
 	return true;
 }

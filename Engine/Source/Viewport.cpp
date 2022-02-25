@@ -8,7 +8,7 @@
 #include "GameObject.h"
 
 #include "CommandsDispatcher.h"
-#include "MouseCommands.h"
+#include "GameObjectCommands.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
