@@ -276,11 +276,20 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
-
+	ButtonComponent* aux = nullptr;
+	
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw();
+		
 	}
+	
+	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++) 
+	{
+		app->userInterface->UIGameObjects[a]->Draw();
+	}
+	
+	
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
