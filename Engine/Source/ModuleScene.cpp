@@ -122,22 +122,25 @@ bool ModuleScene::Update(float dt)
 		resetQuadtree = false;
 	}
 	
-	if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+	if (gameState == GameState::PLAYING)
 	{
-		player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
-	{
-		player->GetComponent<AudioSourceComponent>()->StopClip();
-	}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+		{
+			player->GetComponent<AudioSourceComponent>()->StopClip();
+		}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-	{
-		player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
-	{
-		player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		}
 	}
 
 	AudioManager::Get()->Render();
@@ -155,7 +158,6 @@ bool ModuleScene::PostUpdate()
 bool ModuleScene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
-
 
 	qTree.DebugDraw();
 

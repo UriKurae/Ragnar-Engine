@@ -432,7 +432,7 @@ bool MainMenuBar::Update(float dt)
 		{
 			AudioManager::Get()->StopAllAudioSources();
 			app->scene->Stop();
-			//StyleTheme();
+			SetStyle(6);
 		}
 		ImGui::SameLine();
 
@@ -965,4 +965,3 @@ void MainMenuBar::ShowCreateNotLigthSensibleShaderWindow()
 		transform->SetTransform(matrix);
 	}
 }
-
