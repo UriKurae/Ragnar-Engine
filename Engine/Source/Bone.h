@@ -3,7 +3,14 @@
 #include "Resource.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
-struct Weight {
+struct BoneInfo
+{
+	int id;
+	float4x4 offset;
+};
+
+struct Weight 
+{
 public:
 	Weight(unsigned int v, float w) : vertexId(v), weight(w) {}
 
@@ -11,7 +18,7 @@ public:
 	float weight;
 };
 
-class Bone :public Resource
+class Bone : public Resource
 {
 public:
 	Bone(uint uid, std::string& assets, std::string& library);

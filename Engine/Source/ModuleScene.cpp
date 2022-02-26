@@ -460,7 +460,7 @@ void ModuleScene::ImportPrimitives()
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<unsigned int> bonesUid;
+	std::map<std::string, BoneInfo> bonesUid;
 	//std::vector<float3> normals;
 	//std::vector<float2> texCoords;
 

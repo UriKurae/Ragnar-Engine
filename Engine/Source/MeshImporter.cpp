@@ -77,7 +77,8 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 		AnimationImporter::ReImportBones(path, mesh->mBones[i], json, library, bonesUid);
 	}
 
-	SaveMesh(library, vertices, indices/*, norms, texCoords*/, bonesUid);
+	// TODO: Check the re-import when animation is completed
+	//SaveMesh(library, vertices, indices/*, norms, texCoords*/, bonesUid);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -127,6 +128,12 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		vertex.position.y = mesh->mVertices[i].y;
 		vertex.position.z = mesh->mVertices[i].z;
 
+		for (int i = 0; i < 4; ++i)
+		{
+			vertex.boneIDs[i] = -1;
+			vertex.weights[i] = 0.0f;
+		}
+
 		//float3 normals;
 		if (mesh->HasNormals())
 		{
@@ -156,10 +163,13 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 	}
 
-	for (unsigned int i = 0; i < numBones; i++)
-	{
-		AnimationImporter::ImportBones(path, mesh->mBones[i], json, uids, bonesUid);
-	}
+	std::map<std::string, BoneInfo> bones;
+	ExtractBonesAndWeights(vertices, mesh, scene, bones);
+
+	//for (unsigned int i = 0; i < numBones; i++)
+	//{
+	//	AnimationImporter::ImportBones(path, mesh->mBones[i], json, uids, bonesUid);
+	//}
 
 	std::string meshName;
 	std::string assetsPath(path);
@@ -171,7 +181,7 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, assetsPath, meshName);
 	uids.push_back(uid);
 	
-	SaveMesh(meshName, vertices, indices/*, norms, texCoords*/, bonesUid);
+	SaveMesh(meshName, vertices, indices/*, norms, texCoords*/, bones);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -192,11 +202,11 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 }
 
-void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::vector<unsigned int>& bonesUid)
+void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::map<std::string, BoneInfo>& bones)
 {
-	unsigned int ranges[3] = { vertices.size(), indices.size() , bonesUid.size() };
+	unsigned int ranges[3] = { vertices.size(), indices.size(), bones.size() };
 
-	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(unsigned int) * bonesUid.size();
+	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(std::map<std::string, BoneInfo>) * bones.size();
 
 	char* fileBuffer = new char[size];
 	char* cursor = fileBuffer;
@@ -214,13 +224,32 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	memcpy(cursor, indices.data(), bytes);
 	cursor += bytes;
 
-	bytes = sizeof(unsigned int) * bonesUid.size();
-	memcpy(cursor, bonesUid.data(), bytes);
+	for (std::map<std::string, BoneInfo>::iterator it = bones.begin(); it != bones.end(); ++it)
+	{
+		std::string name = (*it).first;
+		BoneInfo info = (*it).second;
+
+		bytes = sizeof(unsigned int);
+		unsigned int size = name.size();
+		memcpy(cursor, &size, bytes);
+		cursor += bytes;
+
+		// WARNING: If you uncomment this, it crashes
+		//bytes = name.length() + 1;
+		//memcpy(cursor, name.data(), bytes);
+		//cursor += bytes;
+
+		//bytes = sizeof(BoneInfo);
+		//memcpy(cursor, &info, bytes);
+		//cursor += bytes;
+	}
+	//bytes = sizeof(std::map<std::string, BoneInfo>) * bones.size();
+	//memcpy(cursor, &bones, bytes);
 
 	if (app->fs->Save(name.c_str(), fileBuffer, size) > 0)
 		DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
 
-	delete[] fileBuffer;
+	//RELEASE_ARRAY(fileBuffer);
 
 
 	//unsigned int header[2] = { vertices.size(), indices.size() };
@@ -256,7 +285,7 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	//RELEASE_ARRAY(buffer);
 }
 
-void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::vector<unsigned int>& bonesUid, std::string& path)
+void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::map<std::string, BoneInfo>& bones, std::string& path)
 {
 	char* buffer = nullptr;
 
@@ -273,7 +302,6 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 
 		vertices.resize(ranges[0]);
 		indices.resize(ranges[1]);
-		bonesUid.resize(ranges[2]);
 
 		// Load vertices
 		bytes = sizeof(Vertex) * vertices.size();
@@ -285,9 +313,31 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 		memcpy(indices.data(), cursor, bytes);
 		cursor += bytes;
 
-		// Load bones
-		bytes = sizeof(unsigned int) * bonesUid.size();
-		memcpy(bonesUid.data(), cursor, bytes);
+		//// Load bones
+		//bytes = sizeof(std::map<std::string, BoneInfo>) * ranges[2];
+		//memcpy(&bones, cursor, bytes);
+
+		for (int i = 0; i < ranges[2]; ++i)
+		{
+			unsigned int stringSize;
+			std::string name;
+			BoneInfo info;
+			
+			bytes = sizeof(unsigned int);
+			memcpy(&stringSize, cursor, bytes);
+			cursor += bytes;
+
+			// WARNING: If you uncomment this, it crashes
+			//bytes = sizeof(std::string) * stringSize;
+			//memcpy(name.data(), cursor, bytes);
+			//cursor += bytes;
+
+			//bytes = sizeof(BoneInfo);
+			//memcpy(&info, cursor, bytes);
+			//cursor += bytes;
+
+			//bones[name] = info;
+		}
 
 		RELEASE_ARRAY(buffer);
 	}
@@ -310,4 +360,66 @@ void MeshImporter::CreateMetaMesh(std::string& library, std::string& assets, uin
 	app->fs->Save(library.c_str(), buffer, size);
 
 	RELEASE_ARRAY(buffer);
+}
+
+void MeshImporter::ExtractBonesAndWeights(std::vector<Vertex>& vertices, const aiMesh* mesh, const aiScene* scene, std::map<std::string, BoneInfo>& bones)
+{
+	int numBones = 0;
+	for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+	{
+		int boneID = -1;
+		std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
+
+		if (bones.find(boneName) == bones.end())
+		{
+			BoneInfo newBoneInfo;
+			newBoneInfo.id = numBones;
+			newBoneInfo.offset = FromAssimpMatrixToMathGeoLib(mesh->mBones[boneIndex]->mOffsetMatrix);
+			bones[boneName] = newBoneInfo;
+			boneID = numBones;
+			numBones++;
+		}
+		else
+		{
+			boneID = bones[boneName].id;
+		}
+
+		aiVertexWeight* weights = mesh->mBones[boneIndex]->mWeights;
+		int numWeights = mesh->mBones[boneIndex]->mNumWeights;
+
+		for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+		{
+			int vertexId = weights[weightIndex].mVertexId;
+			float weight = weights[weightIndex].mWeight;
+			SetBoneData(vertices[vertexId], boneID, weight);
+		}
+	}
+}
+
+float4x4 MeshImporter::FromAssimpMatrixToMathGeoLib(aiMatrix4x4& matrix)
+{
+	float4x4 mathMatrix;
+	aiQuaternion quat;
+	aiVector3D pos;
+	aiVector3D sca;
+	matrix.Decompose(sca, quat, pos);
+	
+	float3 position = { pos.x, pos.y, pos.z };
+	float3 scale = { sca.x, sca.y, sca.z };
+	Quat quaternion = { quat.x, quat.y, quat.z, quat.w };
+
+	return mathMatrix.FromTRS(position, quaternion, scale);
+}
+
+void MeshImporter::SetBoneData(Vertex& vertex, int boneID, float weight)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		if (vertex.boneIDs[i] < 0)
+		{
+			vertex.weights[i] = weight;
+			vertex.boneIDs[i] = boneID;
+			break;
+		}
+	}
 }

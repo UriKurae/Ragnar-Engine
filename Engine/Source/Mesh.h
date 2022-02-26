@@ -3,8 +3,11 @@
 #include "Resource.h"
 
 #include <vector>
+#include <map>
 #include "MathGeoLib/src/Math/float3.h"
 #include "MathGeoLib/src/Math/float2.h"
+
+#include "Bone.h"
 
 #include "VertexArray.h"
 #include "VertexBuffer.h"
@@ -59,7 +62,10 @@ private:
 	Shader* shader;
 
 	// Bones
+	std::map<std::string, BoneInfo> bones;
 	unsigned int numBones;
+
+
 	std::vector<unsigned int> bonesUid;
 
 	std::string path;
