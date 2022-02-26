@@ -12,7 +12,9 @@ enum class ResourceType
 	MODEL,
 	SCENE,
 	MATERIAL,
-	SHADER
+	SHADER,
+	ANIMATION,
+	BONE
 };
 
 class Resource

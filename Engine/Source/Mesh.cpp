@@ -32,7 +32,9 @@ void Mesh::Load()
 {
 	if (vertices.empty())
 	{
-		MeshImporter::LoadMesh(vertices, indices, libraryPath);
+		MeshImporter::LoadMesh(vertices, indices, bonesUid, libraryPath);
+
+		numBones = bonesUid.size();
 
 		vertexArray = new VertexArray();
 
@@ -169,5 +171,5 @@ void Mesh::Reimport(ModelParameters& data)
 		//texCoords.clear();
 		//normals.clear();
 	}
-	MeshImporter::LoadMesh(vertices, indices, libraryPath);
+	MeshImporter::LoadMesh(vertices, indices, bonesUid, libraryPath);
 }

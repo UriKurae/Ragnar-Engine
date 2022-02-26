@@ -249,6 +249,23 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 		mesh.get()->SetRadius(sphere.r);
 		mesh.get()->SetCenterMesh(sphere.pos);
 	}
+
+	int numBones = mesh->GetBonesCount();
+
+	if (numBones > 0)
+	{
+		for (int i = 0; i < mesh->GetBonesUidList().size(); i++)
+		{
+			GameObject* bone = app->scene->CreateGameObject(owner);
+			bone->CreateComponent(ComponentType::BONE);
+
+			std::shared_ptr<Resource> rBone = ResourceManager::GetInstance()->GetResource(mesh->GetBonesUidList().at(i));
+			rBone->Load();
+			bone->GetComponent<BoneComponent>()->SetBone(rBone);
+			bone->SetName(rBone->GetName().c_str());
+			boneList.push_back(bone);
+		}
+	}
 }
 
 bool MeshComponent::HasMaterial()

@@ -54,6 +54,7 @@ private:
 	bool verticesNormals;
 
 	std::shared_ptr<Mesh> mesh;
+	std::vector<GameObject*> boneList;
 
 	AABB localBoundingBox;
 

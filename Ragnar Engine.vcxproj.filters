@@ -367,6 +367,21 @@
     <ClInclude Include="Engine\Source\Style.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\AnimationComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\BoneComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AnimationImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Animation.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Bone.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -596,6 +611,21 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\AnimationComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\BoneComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\AnimationImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Animation.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Bone.cpp">
+      <Filter>Sources\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

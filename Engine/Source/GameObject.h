@@ -12,6 +12,8 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "AnimationComponent.h"
+#include "BoneComponent.h"
 
 #include "MathGeoLib/src/MathGeoLib.h"
 

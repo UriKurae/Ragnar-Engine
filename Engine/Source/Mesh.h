@@ -36,6 +36,8 @@ public:
 	inline const std::vector<Vertex>& GetVerticesVector() const { return vertices; }
 	inline const int& GetIndicesSize() const { return indices.size(); }
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
+	inline const int& GetBonesCount() const { return numBones; }
+	inline const std::vector<unsigned int>& GetBonesUidList() { return bonesUid; }
 
 	void Reimport(ModelParameters& data);
 
@@ -55,6 +57,10 @@ private:
 	IndexBuffer* ebo;
 	unsigned int tbo;
 	Shader* shader;
+
+	// Bones
+	unsigned int numBones;
+	std::vector<unsigned int> bonesUid;
 
 	std::string path;
 	float3 centerPoint = float3::zero;

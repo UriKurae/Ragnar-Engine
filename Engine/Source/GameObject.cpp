@@ -126,6 +126,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Animation Component"))
+		{
+			CreateComponent(ComponentType::ANIMATION);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -252,6 +257,12 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::ANIMATION:
+		component = new AnimationComponent(this);
+		break;
+	case ComponentType::BONE:
+		component = new BoneComponent(this);
+		break;
 	case ComponentType::MATERIAL:
 	{
 		MeshComponent* m = GetComponent<MeshComponent>();
@@ -325,6 +336,12 @@ void GameObject::CopyComponent(Component* component)
 		break;
 	case ComponentType::MESH_RENDERER:
 		c = new MeshComponent(dynamic_cast<MeshComponent*>(component), GetComponent<TransformComponent>());
+		break;
+	case ComponentType::ANIMATION:
+		c = new AnimationComponent(dynamic_cast<AnimationComponent*>(component));
+		break;
+	case ComponentType::BONE:
+		c = new BoneComponent(dynamic_cast<BoneComponent*>(component));
 		break;
 	case ComponentType::MATERIAL:
 		c = new MaterialComponent(dynamic_cast<MaterialComponent*>(component));

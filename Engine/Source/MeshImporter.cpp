@@ -7,6 +7,7 @@
 #include "TextureImporter.h"
 #include "Mesh.h"
 #include "Model.h"
+#include "AnimationImporter.h"
 
 #include "Vertex.h"
 
@@ -24,6 +25,9 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 	std::vector<unsigned int> indices;
 	//std::vector<float3> norms;
 	//std::vector<float2> texCoords;
+
+	unsigned int numBones = mesh->mNumBones;
+	std::vector<unsigned int> bonesUid;
 
 	int numVertices = mesh->mNumVertices;
 	int numFaces = mesh->mNumFaces;
@@ -68,7 +72,12 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 		}
 	}
 
-	SaveMesh(library, vertices, indices/*, norms, texCoords*/);
+	for (unsigned int i = 0; i < numBones; i++)
+	{
+		AnimationImporter::ReImportBones(path, mesh->mBones[i], json, library, bonesUid);
+	}
+
+	SaveMesh(library, vertices, indices/*, norms, texCoords*/, bonesUid);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -95,6 +104,8 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
+	unsigned int numBones = mesh->mNumBones;
+	std::vector<unsigned int> bonesUid;
 
 	//std::vector<float3> vertices;
 	//std::vector<float3> norms;
@@ -145,6 +156,11 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 	}
 
+	for (unsigned int i = 0; i < numBones; i++)
+	{
+		AnimationImporter::ImportBones(path, mesh->mBones[i], json, uids, bonesUid);
+	}
+
 	std::string meshName;
 	std::string assetsPath(path);
 	std::string name("__");
@@ -155,7 +171,7 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, assetsPath, meshName);
 	uids.push_back(uid);
 	
-	SaveMesh(meshName, vertices, indices/*, norms, texCoords*/);
+	SaveMesh(meshName, vertices, indices/*, norms, texCoords*/, bonesUid);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -176,11 +192,11 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 }
 
-void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
+void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::vector<unsigned int>& bonesUid)
 {
-	unsigned int ranges[2] = { vertices.size(), indices.size() };
+	unsigned int ranges[3] = { vertices.size(), indices.size() , bonesUid.size() };
 
-	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size();
+	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(unsigned int) * bonesUid.size();
 
 	char* fileBuffer = new char[size];
 	char* cursor = fileBuffer;
@@ -197,6 +213,9 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	bytes = sizeof(unsigned int) * indices.size();
 	memcpy(cursor, indices.data(), bytes);
 	cursor += bytes;
+
+	bytes = sizeof(unsigned int) * bonesUid.size();
+	memcpy(cursor, bonesUid.data(), bytes);
 
 	if (app->fs->Save(name.c_str(), fileBuffer, size) > 0)
 		DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
@@ -237,7 +256,7 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	//RELEASE_ARRAY(buffer);
 }
 
-void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::string& path)
+void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::vector<unsigned int>& bonesUid, std::string& path)
 {
 	char* buffer = nullptr;
 
@@ -246,7 +265,7 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 		//char* buffer = nullptr;
 
 		char* cursor = buffer;
-		unsigned int ranges[2];
+		unsigned int ranges[3];
 
 		unsigned int bytes = sizeof(ranges);
 		memcpy(ranges, cursor, bytes);
@@ -254,6 +273,7 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 
 		vertices.resize(ranges[0]);
 		indices.resize(ranges[1]);
+		bonesUid.resize(ranges[2]);
 
 		// Load vertices
 		bytes = sizeof(Vertex) * vertices.size();
@@ -264,6 +284,10 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 		bytes = sizeof(unsigned int) * indices.size();
 		memcpy(indices.data(), cursor, bytes);
 		cursor += bytes;
+
+		// Load bones
+		bytes = sizeof(unsigned int) * bonesUid.size();
+		memcpy(bonesUid.data(), cursor, bytes);
 
 		RELEASE_ARRAY(buffer);
 	}

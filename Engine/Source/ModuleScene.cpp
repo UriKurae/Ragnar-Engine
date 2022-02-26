@@ -460,13 +460,14 @@ void ModuleScene::ImportPrimitives()
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
+	std::vector<unsigned int> bonesUid;
 	//std::vector<float3> normals;
 	//std::vector<float2> texCoords;
 
 	RCube::CreateCube(vertices, indices);
 	std::string library;
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
@@ -476,7 +477,7 @@ void ModuleScene::ImportPrimitives()
 
 	RPyramide::CreatePyramide(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
@@ -486,7 +487,7 @@ void ModuleScene::ImportPrimitives()
 
 	RSphere::CreateSphere(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
@@ -496,7 +497,7 @@ void ModuleScene::ImportPrimitives()
 
 	RCylinder::CreateCylinder(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
