@@ -20,7 +20,9 @@ Bone::Bone(uint uid, std::string& assets, std::string& library) : Resource(uid, 
 
 Bone::~Bone()
 {
-	
+	RELEASE_ARRAY(position);
+	RELEASE_ARRAY(rotation);
+	RELEASE_ARRAY(scale);
 }
 
 void Bone::Load()
@@ -69,4 +71,6 @@ void Bone::Load()
 
 		weights.emplace_back(Weight(v, w));
 	}
+
+	RELEASE_ARRAY(buffer);
 }

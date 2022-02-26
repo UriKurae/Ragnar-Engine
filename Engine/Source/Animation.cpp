@@ -27,7 +27,7 @@ void Animation::Load()
 {
 	if (id == 0)
 	{
-		AnimationImporter::LoadAnimation(libraryPath.c_str(), ticks, ticksPerSecond, numBones, boneTranformations);
+		AnimationImporter::LoadAnimation(libraryPath.c_str(), ticks, ticksPerSecond, numBones, &boneTranformations);
 	}
 }
 

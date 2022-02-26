@@ -16,7 +16,7 @@ namespace AnimationImporter
 	void ImportAnimation(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids);
 	void CreateMetaAnimation(std::string& library, std::string& assets, uint uid);
 	void SaveAnimation(std::string& name, float ticks, float ticksPerSecond, int numBones, BoneTransform* boneTransformations);
-	void LoadAnimation(const char* path, float& ticks, float& ticksPerSecond, int& numBones, BoneTransform* boneTransformations);
+	void LoadAnimation(const char* path, float& ticks, float& ticksPerSecond, int& numBones, BoneTransform** boneTransformations);
 
 	// Bones 
 	void ReImportBones(std::string& path, aiBone* bone, JsonParsing& json, std::string& library, std::vector<unsigned int>& bonesUid);
