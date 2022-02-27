@@ -6,6 +6,7 @@
 #include <vector>
 #include <thread>
 #include <memory>
+#include <functional>
 
 class Texture;
 
@@ -20,6 +21,8 @@ public:
 	bool Update(float dt) override;
 
 	void DrawRecursive(std::vector<std::string>& dirs);
+
+	void DrawCreationPopup(const char* popName, const char* dotExtension, std::function<void(const char*)> f);
 
 	inline std::string& GetCurrentDir() { return currentDirectory; }
 

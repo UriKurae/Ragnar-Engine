@@ -317,13 +317,13 @@ SerializedField::SerializedField(MonoClassField* _field, MonoObject* _object, Sc
 
 void MonoManager::CreateAssetsScript(const char* localPath)
 {
-	std::string unnormalizedPath("Assets/");
+	std::string unnormalizedPath("Assets/Scripts/");
 	unnormalizedPath += localPath;
 	app->fs->UnNormalizePath(unnormalizedPath);
 
 	std::ofstream outfile(unnormalizedPath.c_str());
 
-	std::string className("Assets/");
+	std::string className("Assets/Scripts/");
 	className += localPath;
 	className = className.substr(className.find_last_of("/") + 1);
 	className = className.substr(0, className.find_last_of("."));
