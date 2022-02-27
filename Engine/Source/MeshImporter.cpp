@@ -215,7 +215,6 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	memcpy(cursor, ranges, bytes);
 	cursor += bytes;
 
-
 	bytes = sizeof(Vertex) * vertices.size();
 	memcpy(cursor, vertices.data(), bytes);
 	cursor += bytes;
@@ -234,12 +233,21 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 		memcpy(cursor, &size, bytes);
 		cursor += bytes;
 
-		// WARNING: If you uncomment this, it crashes
-		//bytes = name.length() + 1;
-		//memcpy(cursor, name.data(), bytes);
-		//cursor += bytes;
+		const char* str = name.c_str();
+		bytes = strlen(str);
+		memcpy(cursor, &str[0], bytes);
+		cursor += bytes;
 
-		//bytes = sizeof(BoneInfo);
+		// WARNING: If you uncomment this, it crashes
+		//char* buf = nullptr;
+		//buf = new char[sizeof(info)];
+		//SerializeBoneData(info, &buf);
+
+		//bytes = sizeof(info);
+		//memcpy(cursor, &buf, bytes);
+		//cursor += bytes;
+		
+		//bytes = sizeof(info);
 		//memcpy(cursor, &info, bytes);
 		//cursor += bytes;
 	}
@@ -291,8 +299,6 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 
 	if (app->fs->Load(path.c_str(), &buffer) > 0)
 	{
-		//char* buffer = nullptr;
-
 		char* cursor = buffer;
 		unsigned int ranges[3];
 
@@ -313,10 +319,7 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 		memcpy(indices.data(), cursor, bytes);
 		cursor += bytes;
 
-		//// Load bones
-		//bytes = sizeof(std::map<std::string, BoneInfo>) * ranges[2];
-		//memcpy(&bones, cursor, bytes);
-
+		// Load bones
 		for (int i = 0; i < ranges[2]; ++i)
 		{
 			unsigned int stringSize;
@@ -328,9 +331,10 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 			cursor += bytes;
 
 			// WARNING: If you uncomment this, it crashes
-			//bytes = sizeof(std::string) * stringSize;
-			//memcpy(name.data(), cursor, bytes);
-			//cursor += bytes;
+			bytes = stringSize;
+			name.resize(stringSize);
+			memcpy(name.data(), cursor, bytes);
+			cursor += bytes;
 
 			//bytes = sizeof(BoneInfo);
 			//memcpy(&info, cursor, bytes);
@@ -421,5 +425,22 @@ void MeshImporter::SetBoneData(Vertex& vertex, int boneID, float weight)
 			vertex.boneIDs[i] = boneID;
 			break;
 		}
+	}
+}
+
+void MeshImporter::SerializeBoneData(BoneInfo& info, char** buffer)
+{
+	char* cursor = *buffer;
+
+	unsigned int bytes = sizeof(info.id);
+	memcpy(cursor, &info.id, bytes);
+	cursor += bytes;
+
+	for (int i = 0; i < 16; ++i)
+	{
+		float* ptr = info.offset.ptr();
+		bytes = sizeof(&ptr);
+		memcpy(cursor, &ptr, bytes);
+		cursor += bytes;
 	}
 }
