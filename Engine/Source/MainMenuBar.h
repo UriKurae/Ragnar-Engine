@@ -5,6 +5,7 @@
 #include <string>
 
 class ConsoleMenu;
+class TextEditorMenu;
 class Texture;
 enum class Menus
 {
@@ -14,6 +15,7 @@ enum class Menus
 	INSPECTOR = 3,
 	HIERARCHY = 4,
 	CONTENT_BROWSER = 5,
+	TEXT_EDITOR = 6,
 };
 
 class MainMenuBar : public Menu

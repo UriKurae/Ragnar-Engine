@@ -175,6 +175,8 @@
     <ClInclude Include="Engine\Source\ResourceManager.h" />
     <ClInclude Include="Engine\Source\ScriptBindings.h" />
     <ClInclude Include="Engine\Source\ScriptComponent.h" />
+    <ClInclude Include="Engine\Source\TextEditor.h" />
+    <ClInclude Include="Engine\Source\TextEditorMenu.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureImporter.h" />
@@ -248,6 +250,8 @@
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />
     <ClCompile Include="Engine\Source\ScriptComponent.cpp" />
+    <ClCompile Include="Engine\Source\TextEditor.cpp" />
+    <ClCompile Include="Engine\Source\TextEditorMenu.cpp" />
     <ClCompile Include="Engine\Source\Texture.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />

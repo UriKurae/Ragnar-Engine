@@ -247,3 +247,16 @@ void Application::LoadConfig()
 
 	loadRequested = false;
 }
+
+bool Application::StringCmp(const char* str1, const char* str2)
+{
+	size_t size = strlen(str1);
+	if (size != strlen(str2))
+		return false;
+
+	for (uint i = 0; i < size; ++i) {
+		if (std::tolower(str1[i]) != std::tolower(str2[i]))
+			return false;
+	}
+	return true;
+}

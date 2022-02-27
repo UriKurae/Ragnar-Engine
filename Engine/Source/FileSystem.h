@@ -46,11 +46,15 @@ public:
 	inline const bool IsDirectory(const char* file) const { return PHYSFS_isDirectory(file) != 0; }
 	inline const bool Exists(const char* file) const { return PHYSFS_exists(file) != 0; }
 
+	void SplitFilePath(const char* fullPath, std::string* path, std::string* file = nullptr, std::string* extension = nullptr);
+
 	void NormalizePath(std::string& path);
 	void UnNormalizePath(std::string& path);
 	void GetRelativeDirectory(std::string& path);
 	void GetFilenameWithExtension(std::string& path);
 	void GetFilenameWithoutExtension(std::string& path);
+
+	std::string GetBaseFileNameWithExtension(const char* file_name);
 
 	bool RemoveFile(const char* file);
 	

@@ -388,6 +388,41 @@ void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& d
 	PHYSFS_freeList(rc);
 }
 
+void FileSystem::SplitFilePath(const char* full_path, std::string* path, std::string* file, std::string* extension)
+{
+	if (full_path != nullptr)
+	{
+		std::string full(full_path);
+		NormalizePath(full);
+		size_t pos_separator = full.find_last_of("\\/");
+		size_t pos_dot = full.find_last_of(".");
+
+		if (path != nullptr)
+		{
+			if (pos_separator < full.length())
+				*path = full.substr(0, pos_separator + 1);
+			else
+				path->clear();
+		}
+
+		if (file != nullptr)
+		{
+			if (pos_separator < full.length())
+				*file = full.substr(pos_separator + 1);
+			else
+				*file = full;
+		}
+
+		if (extension != nullptr)
+		{
+			if (pos_dot < full.length())
+				*extension = full.substr(pos_dot + 1);
+			else
+				extension->clear();
+		}
+	}
+}
+
 void FileSystem::NormalizePath(std::string& path)
 {
 	for (int i = 0; i < path.length(); ++i)
@@ -428,6 +463,24 @@ void FileSystem::GetFilenameWithoutExtension(std::string& path)
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 	}
 	path = path.substr(0, path.find_last_of("."));
+}
+
+std::string FileSystem::GetBaseFileNameWithExtension(const char* file_name)
+{
+	std::string name;
+	std::string hole_name(file_name);
+
+	std::string::const_reverse_iterator item = hole_name.crbegin();
+	for (; item != hole_name.crend(); ++item)
+	{
+		if (*item == '/') {
+			break;
+		}
+		else {
+			name = *item + name;
+		}
+	}
+	return name;
 }
 
 bool FileSystem::RemoveFile(const char* file)

@@ -331,6 +331,12 @@
     <ClInclude Include="Engine\Source\ScriptComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditor.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -542,6 +548,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ScriptComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditor.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

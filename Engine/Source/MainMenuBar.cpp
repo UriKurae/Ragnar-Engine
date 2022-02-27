@@ -12,6 +12,7 @@
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "TextEditorMenu.h"
 #include "Texture.h"
 #include "TextureImporter.h"
 #include "ResourceManager.h"
@@ -31,6 +32,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new InspectorMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new TextEditorMenu());
 }
 
 MainMenuBar::~MainMenuBar()
@@ -131,6 +133,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem("Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
 			ImGui::MenuItem("Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem("Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
+			ImGui::MenuItem("Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
 
 			ImGui::EndMenu();
 		}

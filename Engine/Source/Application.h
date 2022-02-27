@@ -31,6 +31,8 @@ public:
 	bool Update();
 	bool CleanUp();
 
+	bool StringCmp(const char* str1, const char* str2);
+
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
 
