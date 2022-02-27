@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
@@ -29,7 +30,7 @@ public:
 	~GameObject();
 
 	bool Update(float dt);
-	void Draw();
+	void Draw(CameraComponent* gameCam);
 	void DrawOutline();
 	void DrawEditor();
 
@@ -37,11 +38,15 @@ public:
 
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
+	void RemoveComponent(Component* component);
 
 	void CopyComponent(Component* component);
 	
 	void AddChild(GameObject* object);
 	void RemoveChild(GameObject* object);
+	inline void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
+
+	std::vector<GameObject*>::const_iterator FindChildren(GameObject* child) { return std::find(children.begin(), children.end(), child); };
 
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }
@@ -58,6 +63,7 @@ public:
 	void SetAABB(OBB newOBB);
 	void SetNewAABB();
 	inline AABB GetAABB() { return globalAabb; }
+	inline OBB GetOOB() { return globalObb; }
 	
 	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }
 
@@ -71,8 +77,11 @@ public:
 
 	template<typename T>
 	T* GetComponent();
-	Component* GetComponent(ComponentType type);
 
+	//Component* GetComponent(ComponentType type);
+
+	
+public:
 	std::string name;
 	bool active;
 	bool staticObj;
@@ -95,6 +104,8 @@ private:
 	IndexBuffer* index;
 
 	uint uuid;
+
+	//MouseMoveCommand mouseMoveCommand;
 
 	// Boolean to check if any component from audio (AudioSource, listener) has already been registered. 
 	bool audioRegistered;

@@ -14,7 +14,7 @@ public:
 
 	void OnEditor() override;
 	bool Update(float dt) override;
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 
 	void SetPlanes();
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
@@ -28,6 +28,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	int CameraComponent::ContainsAaBox(const AABB& boundingBox);
+	Frustum* GetFrustum() { return &camera; };
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;

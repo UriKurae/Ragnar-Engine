@@ -14,6 +14,7 @@ enum class Menus
 	INSPECTOR = 3,
 	HIERARCHY = 4,
 	CONTENT_BROWSER = 5,
+	FOGWAR = 6,
 };
 
 class MainMenuBar : public Menu
@@ -30,7 +31,19 @@ public:
 	std::string& GetCurrentDir();
 	std::vector<Menu*> GetMenus() { return menus; };
 
-	void StyleTheme();
+	int GetStyle() { return style; };
+	void SetStyle(int _style);
+
+	//void StyleTheme();
+	void AlignWithView();
+	void AlignViewWithSelected();
+
+private:
+	std::string GetNotLightSensibleShaderSource();
+	std::string GetLightSensibleShaderSource();
+
+	void ShowCreateLigthSensibleShaderWindow();
+	void ShowCreateNotLigthSensibleShaderWindow();
 
 private:
 	bool showMenu;
@@ -42,4 +55,12 @@ private:
 
 	bool saveWindow;
 	std::vector<Menu*> menus;
+
+
+	bool showCreateLightSensibleShaderWindow = false;
+	bool showCreateNotLightSensibleShaderWindow = false;
+
+	std::vector<std::string> stylesList;
+	int style = 5;
+	float alphaStyle = 0.1f;
 };

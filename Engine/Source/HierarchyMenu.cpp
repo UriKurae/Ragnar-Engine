@@ -1,10 +1,14 @@
 #include "HierarchyMenu.h"
 
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "Globals.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "GameObject.h"
+#include "LightComponent.h"
+
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -20,11 +24,7 @@ HierarchyMenu::~HierarchyMenu()
 
 bool HierarchyMenu::Update(float dt)
 {
-	ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
-	if (ImGui::Button("+"))
-	{
-		createGameObject = true;
-	}
+	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
 
 	int size = app->scene->GetGameObjectsList().size();
 	GameObject* root = app->scene->GetRoot();
@@ -55,11 +55,11 @@ bool HierarchyMenu::Update(float dt)
 
 	if (gameObjectOptions)
 	{
-		ImGui::OpenPopup("GameObject");
+		ImGui::OpenPopup(ICON_FA_CUBE" GameObject");
 
-		if (ImGui::BeginPopup("GameObject"))
+		if (ImGui::BeginPopup(ICON_FA_CUBE" GameObject"))
 		{
-			if (ImGui::Button("Move Up", ImVec2(100.0f, 30.0f)))
+			if (ImGui::Button(ICON_FA_ARROW_UP" Move Up", ImVec2(100.0f, 30.0f)))
 			{
 				if (selectedParent != nullptr)
 				{
@@ -71,7 +71,7 @@ bool HierarchyMenu::Update(float dt)
 				}
 				gameObjectOptions = false;
 			}
-			else if (ImGui::Button("Move Down", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button(ICON_FA_ARROW_DOWN" Move Down", ImVec2(100.0f, 30.0f)))
 			{
 				if (selectedParent != nullptr)
 				{
@@ -83,7 +83,7 @@ bool HierarchyMenu::Update(float dt)
 				}
 				gameObjectOptions = false;
 			}
-			else if (ImGui::Button("Delete", ImVec2(100.0f, 30.0f)))
+			else if (ImGui::Button(ICON_FA_MINUS" Delete", ImVec2(100.0f, 30.0f)))
 			{
 				
 				if (selected && selected->GetComponent<CameraComponent>() == nullptr)
@@ -93,7 +93,6 @@ bool HierarchyMenu::Update(float dt)
 						if (selected == (*i))
 						{
 							selectedParent->GetChilds().erase(i);
-							if (selected == app->scene->GetRecalculateGO()) app->scene->RecalculateAABB(nullptr);
 							RELEASE(selected);
 							app->scene->ResetQuadtree();
 							break;
@@ -114,37 +113,51 @@ bool HierarchyMenu::Update(float dt)
 	}
 	else if (createGameObject)
 	{
-		ImGui::OpenPopup("Create GameObject");
-		if (ImGui::BeginPopup("Create GameObject"))
+		ImGui::OpenPopup(ICON_FA_PLUS" Create GameObject");
+		if (ImGui::BeginPopup(ICON_FA_PLUS" Create GameObject"))
 		{
-			if (ImGui::Selectable("Create Empty Object"))
+			if (ImGui::Selectable(ICON_FA_LAYER_GROUP" Create Empty Object"))
 			{
 				if (selected != nullptr) app->scene->CreateGameObject(selected);
 				else app->scene->CreateGameObject(nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Cube"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cube"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
 				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Pyramide"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Pyramide"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
 				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Sphere"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Sphere"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
 				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
 				createGameObject = false;
 			}
-			else if (ImGui::Selectable("Create Cylinder"))
+			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cylinder"))
 			{
 				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
 				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
+				createGameObject = false;
+			}
+			else if (ImGui::Selectable(ICON_FA_LIGHTBULB" Create Point Light"))
+			{
+				GameObject* go = 0;
+				if (selected != nullptr) go = app->scene->CreateGameObject(selected);
+				else go = app->scene->CreateGameObject(nullptr);
+
+				go->SetName("Point Light");
+				ComponentLight* lightComp = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+				PointLight* pl = new PointLight();
+				lightComp->SetLight(pl);
+				
+				app->renderer3D->AddPointLight(pl);
 				createGameObject = false;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))

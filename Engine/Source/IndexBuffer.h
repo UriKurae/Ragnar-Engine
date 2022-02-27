@@ -1,21 +1,23 @@
 #pragma once
 
+//#include <stdint.h>
+
 class IndexBuffer
 {
 public:
-	IndexBuffer() : buffer(0), size(0) {}
-	IndexBuffer(const unsigned int* data, unsigned int s);
-	IndexBuffer(const unsigned short* data, unsigned int s);
+	IndexBuffer();
+	IndexBuffer(const unsigned int* indices, unsigned int count);
+	virtual ~IndexBuffer();
 
-	~IndexBuffer();
-
+	void SetData(const unsigned int* indices, unsigned int count);
 	void Bind() const;
-
 	void Unbind() const;
 
-	inline unsigned int GetSize() const { return size; }
+	inline const unsigned int& GetCount() const { return count; }
+	inline const unsigned int& GetID() const { return ibo; }
+
 
 private:
-	unsigned int buffer;
-	unsigned int size;
+	unsigned int ibo;
+	unsigned int count;
 };

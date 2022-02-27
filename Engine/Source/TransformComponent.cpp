@@ -1,14 +1,21 @@
 #include "Application.h"
+#include "ModuleInput.h"
+
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "ModuleScene.h"
 #include "Globals.h"
+
+#include "CommandsDispatcher.h"
+#include "GameObjectCommands.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
 #include "Imgui/ImGuizmo.h"
 
 #include <stack>
+
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -21,7 +28,7 @@ TransformComponent::TransformComponent(GameObject* own)
 	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	scale = { 1.0f, 1.0f, 1.0f };
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
-	
+
 	if (owner->GetParent() != nullptr)
 	{
 		TransformComponent* tr = owner->GetParent()->GetComponent<TransformComponent>();
@@ -89,14 +96,14 @@ bool TransformComponent::Update(float dt)
 
 void TransformComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("Transform"))
+	if (ImGui::CollapsingHeader(ICON_FA_ARROWS_ALT" Transform"))
 	{
 		ImGui::PushItemWidth(90);
-		//std::string test = std::to_string(position.x);
-		//char* pos = new char[test.length()];
-		//strcpy(pos, test.c_str());
 		
 		ShowTransformationInfo();
+
+		if (ImGui::Button(ICON_FA_UNDO" Reset Transform"))
+			ResetTransform();
 
 		ImGui::Separator();
 	}
@@ -117,6 +124,13 @@ void TransformComponent::SetTransform(float4x4 trMatrix)
 	globalMatrix = trMatrix;
 	globalMatrix.Decompose(position, rotation, scale);
 	
+	TransformComponent* trans = owner->GetParent()->GetComponent<TransformComponent>();
+	if (trans)
+	{
+		localMatrix = trans->globalMatrix.Inverted() * globalMatrix;
+		localMatrix.Decompose(position, rotation, scale);
+	}
+
 	changeTransform = true;
 }
 
@@ -176,6 +190,16 @@ void TransformComponent::UpdateChildTransform(GameObject* go)
 	}
 }
 
+void TransformComponent::NewAttachment()
+{
+	if (owner->GetParent() != app->scene->GetRoot())
+		localMatrix = owner->GetParent()->GetComponent<TransformComponent>()->GetGlobalTransform().Inverted().Mul(globalMatrix);
+	
+	localMatrix.Decompose(position, rotation, scale);
+	changeTransform = true;
+	//eulerRotation = rotation.ToEulerXYZ();
+}
+
 void TransformComponent::SetAABB()
 {
 	std::vector<GameObject*> goList = owner->GetChilds();
@@ -185,8 +209,6 @@ void TransformComponent::SetAABB()
 	{
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
-		childOBB = tr->owner->GetAABB();
-		owner->SetAABB(childOBB);
 	}
 	if (owner->GetComponent<MeshComponent>())
 	{
@@ -194,7 +216,7 @@ void TransformComponent::SetAABB()
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 	}
-	app->scene->RecalculateAABB(owner);
+
 	app->scene->ResetQuadtree();
 }
 
@@ -219,6 +241,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::SameLine();
 	ImGui::DragFloat("##X", &vec.x, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::IsItemActivated())
+		CommandDispatcher::Execute(new MoveGameObjectCommand(owner));
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 
@@ -230,6 +254,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::SameLine();
 	ImGui::DragFloat("##Y", &vec.y, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::IsItemActivated())
+		CommandDispatcher::Execute(new MoveGameObjectCommand(owner));
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 
@@ -241,6 +267,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::SameLine();
 	ImGui::DragFloat("##Z", &vec.z, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::IsItemActivated())
+		CommandDispatcher::Execute(new MoveGameObjectCommand(owner));
 	ImGui::PopItemWidth();
 
 	ImGui::PopStyleVar();
@@ -257,7 +285,6 @@ void TransformComponent::ShowTransformationInfo()
 {
 	if (DrawVec3(std::string("Position: "), position)) changeTransform = true;
 
-	float3 rotationInEuler;
 	rotationInEuler.x = RADTODEG * rotationEditor.x;
 	rotationInEuler.y = RADTODEG * rotationEditor.y;
 	rotationInEuler.z = RADTODEG * rotationEditor.z;
@@ -275,4 +302,16 @@ void TransformComponent::ShowTransformationInfo()
 	}
 
 	if (DrawVec3(std::string("Scale: "), scale)) changeTransform = true;
+}
+
+void TransformComponent::ResetTransform() 
+{
+	SetTransform(math::float3::zero, math::Quat::identity, math::float3::one);
+	rotationEditor = rotationInEuler = math::float3::zero;
+	UpdateTransform();
+}
+
+void TransformComponent::UpdateEditorRotation()
+{
+	rotationEditor = rotation.ToEulerXYZ();
 }

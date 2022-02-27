@@ -13,6 +13,8 @@
 #include <iostream>
 #include <thread>
 
+#include "IconsFontAwesome5.h"
+
 #include "Profiling.h"
 
 ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), Menu(true)
@@ -57,7 +59,7 @@ bool ContentBrowserMenu::Update(float dt)
 
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
-	ImGui::Begin("Content Browser", &active);
+	ImGui::Begin(ICON_FA_FOLDER" Content Browser", &active);
 	ImGui::Columns(2);
 	ImGui::SetColumnWidth(0, 150);
 

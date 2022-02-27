@@ -8,6 +8,7 @@
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
+#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -23,7 +24,7 @@ InspectorMenu::~InspectorMenu()
 
 bool InspectorMenu::Update(float dt)
 {
-	ImGui::Begin("Inspector", &active);
+	ImGui::Begin(ICON_FA_INFO_CIRCLE" Inspector", &active);
 	if (!app->scene->GetRoot()->GetChilds().empty())
 	{
 		// The inspector is empty if no object is selected
@@ -35,7 +36,8 @@ bool InspectorMenu::Update(float dt)
 				DrawDefaultInspector(obj);
 				obj->DrawEditor();
 			}
-			else {
+			else 
+			{
 				DrawEditLists();
 			}
 
@@ -72,7 +74,6 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	DrawList("Tag", &tags, obj->tag);
 	ImGui::SameLine();
 	DrawList("Layer", &layers, obj->layer);
-	ImGui::Checkbox("Colliders", &obj->colliders);
 	// Destroy object selected, pendingToDelete = true
 
 	ImGui::Separator();
@@ -81,14 +82,11 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 		obj->GetComponents()[i]->OnEditor();
 	}
 	ImGui::NewLine();
-
-	// Draw Add Component button
-	//DrawAddComponent();
 }
 
 void InspectorMenu::DrawEditLists()
 {
-	if (ImGui::Button("Back"))
+	if (ImGui::Button(ICON_FA_BACKWARD" Back"))
 		item = ItemType::NONE;
 
 	// System to determine which node starts open 
@@ -160,12 +158,28 @@ void InspectorMenu::AddItem(const char* label)
 	}
 }
 
-void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string> list)
+void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string>& list)
 {
-	for (int i = 0; i < list.size(); i++)
+	for (int i = 0; i < list.size(); ++i)
 	{
-		ImGui::Text("%s %d: ", label, i);	ImGui::SameLine();
+		ImGui::Text("%s %d: ", label, i);	
+		ImGui::SameLine();
 		ImGui::Text(list.at(i).c_str());
+		ImGui::SameLine();
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - 15.0f);
+		ImGui::PushID(i);
+		if (ImGui::Button(ICON_FA_TRASH))
+		{
+			for (std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it)
+			{
+				if ((*it) == list.at(i))
+				{
+					list.erase(it);
+					break;
+				}
+			}
+		}
+		ImGui::PopID();
 	}
 	ImGui::Separator();
 	ImGui::Text("New %s: ", label);	ImGui::SameLine();
@@ -179,7 +193,7 @@ void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string>
 
 	ImGui::SameLine();
 	ImGui::PushID(label);
-	if (ImGui::Button("Add ICON_FA_PLUS"))
+	if (ImGui::Button(ICON_FA_PLUS" Add"))
 	{
 		if (label == "Tag")
 		{

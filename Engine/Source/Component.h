@@ -4,6 +4,7 @@
 #include "JsonParsing.h"
 
 class GameObject;
+class CameraComponent;
 
 enum class ComponentType
 {
@@ -17,6 +18,8 @@ enum class ComponentType
 	AUDIO_REVERB_ZONE,
 	PARTICLE_SYSTEM,
 	BILLBOARD,
+	LIGHT
+
 };
 
 class Component
@@ -28,7 +31,7 @@ public:
 	virtual void Enable() {}
 	virtual bool Update(float dt) { return true; }
 	virtual void Disable() {}
-	virtual void Draw() {}
+	virtual void Draw(CameraComponent* gameCam = nullptr) {}
 	virtual void DrawOutline() {}
 
 	virtual void OnEditor() {}

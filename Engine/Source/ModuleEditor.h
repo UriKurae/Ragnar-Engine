@@ -31,15 +31,20 @@ public:
 	void SetResource(Resource* res);
 	void SetGO(GameObject* obj);
 	inline void SetSelectedParent(GameObject* obj) { selectedParent = obj; }
+	
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	void LogConsole(const char* string);
 	inline std::string& GetCurrentDir() { return mainMenuBar.GetCurrentDir(); }
 
 	inline Viewport* GetViewport() { return viewport; }
+	std::vector<std::string> GetTags();
+	std::vector<std::string> GetLayers();
 
+	inline const Viewport* GetViewport() const { return viewport; }
+	//Viewport* GetViewport() { return viewport; }
 private:
 	MainMenuBar mainMenuBar;
 

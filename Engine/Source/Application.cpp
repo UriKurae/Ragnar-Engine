@@ -40,7 +40,7 @@ Application::Application()
 
 	AddModule(renderer3D);
 
-	loadRequested = false;
+	loadRequested = true;
 	saveRequested = false;
 }
 

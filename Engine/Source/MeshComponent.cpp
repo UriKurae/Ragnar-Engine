@@ -13,6 +13,8 @@
 
 #include "glew/include/GL/glew.h"
 
+#include "IconsFontAwesome5.h"
+
 #include "Profiling.h"
 
 MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : material(nullptr), transform(trans), faceNormals(false), verticesNormals(false), normalLength(1.0f), colorNormal(150.0f, 0.0f, 255.0f)
@@ -43,24 +45,60 @@ MeshComponent::~MeshComponent()
 	if (mesh.use_count() - 1 == 1) mesh->UnLoad();
 }
 
-void MeshComponent::Draw()
+void MeshComponent::Draw(CameraComponent* gameCam)
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
+	//glPushMatrix();
+	//glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	
-	if (material != nullptr && material->GetActive()) material->BindTexture();
+	
+	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
-
-	if (material != nullptr && material->GetActive()) material->UnbindTexture();
 	
-	glPopMatrix();
+	if (material != nullptr && material->GetActive()) material->Unbind();
+	
+	//glPopMatrix();
+	//
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	// If showAABB are enable draw the his bounding boxes
+	if (showAABB == true) {
+		float3 points[8];
+		owner->GetAABB().GetCornerPoints(points);
+		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
+	}
+	// If showOBB are enable draw the his bounding boxes
+	if (showOBB == true) {
+		float3 points[8];
+		owner->GetOOB().GetCornerPoints(points);
+		DebugColliders(points);
+	}
+}
+
+void MeshComponent::DebugColliders(float3* points, float3 color)
+{
+	unsigned int index[24] =
+	{ 0, 2, 2, 6, 6, 4, 4, 0,
+	  0, 1, 1, 3, 3, 2, 4, 5,
+	  6, 7, 5, 7, 3, 7, 1, 5
+	};
+
+	glColor3fv(&color.x);
+	glLineWidth(2.f);
+	glBegin(GL_LINES);
+
+	for (int i = 0; i < 24; i++)
+	{
+		glVertex3fv(&points[index[i]].x);
+	}
+
+	glEnd();
+	glLineWidth(1.f);
+	glColor3f(1.f, 1.f, 1.f);
 }
 
 void MeshComponent::DrawOutline()
@@ -79,7 +117,7 @@ void MeshComponent::DrawOutline()
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
 	glPopMatrix();
-
+	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
@@ -88,7 +126,7 @@ void MeshComponent::OnEditor()
 {
 	ImGui::PushID(this);
 
-	if (ImGui::CollapsingHeader("Mesh Renderer"))
+	if (ImGui::CollapsingHeader(ICON_FA_CUBES" Mesh Renderer"))
 	{
 		Checkbox(this, "Active", active);
 		ImGui::Text("Select mesh");
@@ -110,6 +148,15 @@ void MeshComponent::OnEditor()
 		ImGui::Text("Reference Count: ");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mesh ? mesh.use_count() : 0);
+
+		ImGui::Checkbox("Show AABB     ", &showAABB);		
+		ImGui::SameLine();		
+		ImGui::Checkbox("Show OBB", &showOBB);
+
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+		if (ImGui::Button(ICON_FA_TRASH" Delete"))
+			owner->RemoveComponent(this);
+
 		ImGui::Separator();
 	}
 
@@ -158,9 +205,15 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
-
+		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
+
+		Sphere sphere;
+		sphere.r = 0.f;
+		sphere.pos = localBoundingBox.CenterPoint();
+		sphere.Enclose(localBoundingBox);
+		mesh.get()->SetRadius(sphere.r);
+		mesh.get()->SetCenterMesh(sphere.pos);
 	}
 
 	return true;
@@ -186,8 +239,30 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
-
+		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
+
+		Sphere sphere;
+		sphere.r = 0.f;
+		sphere.pos = localBoundingBox.CenterPoint();
+		sphere.Enclose(localBoundingBox);
+		mesh.get()->SetRadius(sphere.r);
+		mesh.get()->SetCenterMesh(sphere.pos);
 	}
+}
+
+bool MeshComponent::HasMaterial()
+{
+	if (material) return true;
+	
+	return false;
+}
+
+float3 MeshComponent::GetCenterPointInWorldCoords()
+{
+	return owner->GetComponent<TransformComponent>()->GetGlobalTransform().TransformPos(mesh->GetCenterMesh());
+}
+float MeshComponent::GetSphereRadius()
+{
+	return mesh->GetRadius();
 }

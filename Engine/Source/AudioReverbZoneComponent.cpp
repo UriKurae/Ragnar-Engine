@@ -3,6 +3,9 @@
 
 #include "GameObject.h"
 #include "AudioManager.h"
+
+#include "IconsFontAwesome5.h"
+
 #include <GL\glew.h>
 
 AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
@@ -71,7 +74,7 @@ void AudioReverbZoneComponent::CompileBuffers()
 	vbo->Unbind();
 }
 
-void AudioReverbZoneComponent::Draw()
+void AudioReverbZoneComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
 
@@ -82,7 +85,7 @@ void AudioReverbZoneComponent::Draw()
 	ebo->Bind();
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 0.0f, 1.0f);
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	vbo->Unbind();
@@ -107,7 +110,7 @@ bool AudioReverbZoneComponent::Update(float dt)
 
 void AudioReverbZoneComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("Audio Reverb Zone"))
+	if (ImGui::CollapsingHeader(ICON_FA_WAVE_SQUARE" Audio Reverb Zone"))
 	{
 		ImGui::Text("Reverb effect");
 		ImGui::SameLine();
@@ -133,6 +136,12 @@ void AudioReverbZoneComponent::OnEditor()
 			ResizeReverbZone();
 			CompileBuffers();
 		}
+
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
+		if (ImGui::Button(ICON_FA_TRASH" Delete"))
+			owner->RemoveComponent(this);
+
+		ImGui::Separator();
 	}
 }
 

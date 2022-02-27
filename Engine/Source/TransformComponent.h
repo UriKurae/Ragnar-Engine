@@ -37,6 +37,7 @@ public:
 
 	void UpdateTransform();
 	void UpdateChildTransform(GameObject* go);
+	void NewAttachment();
 	void SetAABB();
 
 	inline float4x4 GetLocalTransform() const { return localMatrix; }
@@ -46,8 +47,18 @@ public:
 	inline float3 GetScale() const { return scale; }
 	inline float3 GetRotEditor() const { return rotationEditor; }
 
+	inline void SetPosition(const float3& newPosition) { position = newPosition; }
+	inline void SetRotation(const Quat& newRotation) { rotation = newRotation; }
+	inline void SetScale(const float3& newScale) { scale = newScale; }
+
 	bool DrawVec3(std::string& name, float3& vec);
 	void ShowTransformationInfo();
+	void ResetTransform();
+
+	// UNDO
+	inline void ForceUpdateTransform() { changeTransform = true; }
+	void UpdateEditorRotation();
+	// UNDO
 
 public:
 
@@ -61,6 +72,7 @@ private:
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
 
+	float3 rotationInEuler;
 
 	bool changeTransform;
 };

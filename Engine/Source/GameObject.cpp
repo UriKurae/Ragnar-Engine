@@ -5,6 +5,8 @@
 #include "Globals.h"
 #include "ParticleSystemComponent.h"
 
+#include "LightComponent.h"
+
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -52,7 +54,7 @@ bool GameObject::Update(float dt)
 	return true;
 }
 
-void GameObject::Draw()
+void GameObject::Draw(CameraComponent* gameCam)
 {
 	// TODO: Check this in the future
 	//if (!GetAllComponent<MeshComponent>().empty())
@@ -62,11 +64,14 @@ void GameObject::Draw()
 	//		GetAllComponent<MeshComponent>()[i]->Draw();
 	//	}
 	//}
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		Component* component = components[i];
 		if (component->GetActive())
-			component->Draw();
+		{
+			component->Draw(gameCam);
+		}
 	}
 
 	if (index && vertex && colliders)
@@ -171,7 +176,7 @@ void GameObject::DebugColliders()
 	index->Bind();
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 1.0f, 0.0f);
-	glDrawElements(GL_LINES, index->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, index->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	vertex->Unbind();
@@ -225,6 +230,21 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
+		{
+		MeshComponent* meshComp = (MeshComponent*)component;
+		
+			if (meshComp)
+			{
+				MaterialComponent* matComp = new MaterialComponent(this);
+				meshComp->SetMaterial((MaterialComponent*)matComp);
+				
+				if (matComp)
+				{
+					matComp->SetOwner(this);
+					components.push_back(matComp);
+				}
+			}
+		}
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
@@ -239,10 +259,39 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
-	case ComponentType::MATERIAL: {
-		component = new MaterialComponent(this);
+	case ComponentType::MATERIAL:
+	{
+
 		MeshComponent* m = GetComponent<MeshComponent>();
-		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
+		MaterialComponent* matComp = GetComponent<MaterialComponent>();
+		if (m != nullptr && matComp)
+		{
+			if (matComp->IsDefaultMat())
+			{
+				std::vector<Component*>::iterator it = components.begin();
+				for (; it != components.end(); ++it)
+				{
+					if (*(it) == matComp)
+					{
+						components.erase(it);
+						RELEASE(matComp);
+						break;
+					}
+				}
+				component = new MaterialComponent(this, false);
+				m->SetMaterial((MaterialComponent*)component);
+			}
+		}
+		else
+		{
+			component = new MaterialComponent(this);
+			if(m != nullptr)
+				m->SetMaterial((MaterialComponent*)component);
+		}
+		break;
+	}
+	case ComponentType::LIGHT:
+		component = new ComponentLight();
 		break;
 	}
 	case ComponentType::PARTICLE_SYSTEM:
@@ -268,6 +317,19 @@ void GameObject::AddComponent(Component* component)
 {
 	component->SetOwner(this);
 	components.emplace_back(component);
+}
+
+void GameObject::RemoveComponent(Component* component)
+{
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if (*it == component)
+		{
+			components.erase(it);
+			RELEASE(component);
+			break;
+		}
+	}
 }
 
 void GameObject::CopyComponent(Component* component)
@@ -297,7 +359,10 @@ void GameObject::CopyComponent(Component* component)
 
 void GameObject::AddChild(GameObject* object)
 {
+	object->parent = this;
 	children.emplace_back(object);
+	TransformComponent* trans = object->GetComponent<TransformComponent>();
+	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
 
 void GameObject::RemoveChild(GameObject* object)
@@ -317,47 +382,13 @@ void GameObject::SetAABB(AABB newAABB, bool needToClean)
 	globalObb = newAABB;
 	globalObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
 
+	globalAabb.SetNegativeInfinity();
 	globalAabb.Enclose(globalObb);
-
-	if (parent != nullptr && parent != app->scene->GetRoot())
-	{
-		parent->SetAABB(globalAabb);
-	}
-
-	// Configure buffers
-	float3 corners[8];
-	globalAabb.GetCornerPoints(corners);
-	
-	unsigned int indices[24] = 
-	{
-		0,1,
-		1,3,
-		3,2,
-		2,0,
-
-		1,5,
-		4,6,
-		7,3,
-
-		6,7,
-		6,2,
-
-		7,5,
-		4,5,
-
-		4,0
-	};
-
-	if (index) RELEASE(index);
-	if (vertex) RELEASE(vertex);
-	index = new IndexBuffer(indices, 24);
-	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
-	index->Unbind();
-	vertex->Unbind();
 }
 
 void GameObject::SetAABB(OBB newOBB)
 {
+	globalObb = newOBB;
 	globalAabb.Enclose(newOBB);
 
 	//if (parent != nullptr && parent != app->scene->GetRoot())
@@ -460,17 +491,20 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 		children[i]->OnSave(node, array);
 	}
 }
+// <<<<<<< HEAD
 
-Component* GameObject::GetComponent(ComponentType type)
-{
-	for (int i = 0; i < components.size(); i++)
-	{
-		if (components[i] != nullptr)
-		{
-			if (components[i]->GetType() == type)
-				return components[i];
-		}
-	}
+// Component* GameObject::GetComponent(ComponentType type)
+// {
+// 	for (int i = 0; i < components.size(); i++)
+// 	{
+// 		if (components[i] != nullptr)
+// 		{
+// 			if (components[i]->GetType() == type)
+// 				return components[i];
+// 		}
+// 	}
 
-	return nullptr;
-}
+// 	return nullptr;
+// }
+// =======
+// >>>>>>> develop
