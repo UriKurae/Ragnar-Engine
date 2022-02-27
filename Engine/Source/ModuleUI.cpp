@@ -93,6 +93,11 @@ void MyPlane::DrawPlane2D() {
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	// TODO: 2D en lugar de 3D para UI
+	ComponentTransform2D* d=own->GetComponent<ComponentTransform2D>();
+
+	glPushMatrix();
+	
+	glMultMatrixf(d->matrix);
 
 
 	//Buffers
@@ -113,7 +118,7 @@ void MyPlane::DrawPlane2D() {
 	//Draw
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0);
 
-	glPopMatrix();
+	
 
 	//UnBind Buffers
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -124,6 +129,8 @@ void MyPlane::DrawPlane2D() {
 	//Disable states
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glPopMatrix();
 }
 Shader::Shader()
 {

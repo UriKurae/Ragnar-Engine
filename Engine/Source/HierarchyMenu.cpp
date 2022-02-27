@@ -162,6 +162,7 @@ bool HierarchyMenu::Update(float dt)
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->planeToDraw = new MyPlane(float3{0,0,0}, float3{ 1,1,1 });
+				button->planeToDraw->own = object;
 			}
 			else if (ImGui::Selectable("Create UI Slider"))
 			{

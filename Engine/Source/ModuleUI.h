@@ -29,6 +29,7 @@ public:
 	unsigned int EBO;
 	unsigned int TBO;
 	GLuint aTextureId;
+    GameObject* own;
 public:
     std::vector<GLushort> indices;
     std::vector<GLfloat> normals;
@@ -90,6 +91,7 @@ public:
 	std::vector<GameObject*> hitObjs;
 	GameObject* focusedGameObject;
     std::string textExample = "Default";
+    
     float3 color = { 255,255,255 };
     float scale = 1;
     std::vector<GameObject*> UIGameObjects;
