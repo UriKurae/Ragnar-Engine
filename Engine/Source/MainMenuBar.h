@@ -15,6 +15,7 @@ enum class Menus
 	HIERARCHY = 4,
 	CONTENT_BROWSER = 5,
 	FOGWAR = 6,
+	INPUT_ACTION = 7,
 };
 
 class MainMenuBar : public Menu

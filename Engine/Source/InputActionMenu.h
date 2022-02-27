@@ -2,7 +2,7 @@
 
 #include "Menu.h"
 
-class InputActionMenu : Menu
+class InputActionMenu : public Menu
 {
 public:
 	InputActionMenu(); 
