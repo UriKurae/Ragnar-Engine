@@ -93,6 +93,7 @@ bool FogWarMenu::Update(float dt)
 			glFogf(GL_FOG_DENSITY, fogDensity);
 		}
 	}
+
 	ImGui::End();
 	return true;
 }

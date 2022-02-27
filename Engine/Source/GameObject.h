@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "Geometry/OBB.h"
 
+
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "MaterialComponent.h"
@@ -27,9 +28,11 @@ public:
 	~GameObject();
 
 	bool Update(float dt);
-	void Draw();
+	void Draw(CameraComponent* gameCam);
 	void DrawOutline();
 	void DrawEditor();
+
+	void DebugColliders();
 
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
@@ -40,7 +43,7 @@ public:
 	
 	void AddChild(GameObject* object);
 	void RemoveChild(GameObject* object);
-	void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
+	inline void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
 
 	std::vector<GameObject*>::const_iterator FindChildren(GameObject* child) { return std::find(children.begin(), children.end(), child); };
 
@@ -78,6 +81,7 @@ public:
 	std::string name;
 	bool active;
 	bool staticObj;
+	bool colliders;
 	std::string tag;
 	std::string layer;
 
@@ -91,6 +95,9 @@ private:
 
 	AABB globalAabb;
 	OBB globalObb;
+
+	VertexBuffer* vertex;
+	IndexBuffer* index;
 
 	uint uuid;
 

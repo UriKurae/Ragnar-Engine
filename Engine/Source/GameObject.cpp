@@ -4,6 +4,8 @@
 #include "ModuleScene.h"
 #include "Globals.h"
 
+#include "LightComponent.h"
+
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -18,7 +20,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -38,6 +40,9 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
+
+	RELEASE(vertex);
+	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -51,7 +56,7 @@ bool GameObject::Update(float dt)
 	return true;
 }
 
-void GameObject::Draw()
+void GameObject::Draw(CameraComponent* gameCam)
 {
 	// TODO: Check this in the future
 	//if (!GetAllComponent<MeshComponent>().empty())
@@ -61,11 +66,19 @@ void GameObject::Draw()
 	//		GetAllComponent<MeshComponent>()[i]->Draw();
 	//	}
 	//}
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		Component* component = components[i];
 		if (component->GetActive())
-			component->Draw();
+		{
+			component->Draw(gameCam);
+		}
+	}
+
+	if (index && vertex && colliders)
+	{
+		DebugColliders();
 	}
 }
 
@@ -153,7 +166,59 @@ void GameObject::DrawEditor()
 	}
 }
 
+void GameObject::DebugColliders()
+{
+	//glPushMatrix();
+	//
+	//glMultMatrixf(GetComponent<TransformComponent>()->GetTransform().Transposed().ptr());
 
+	glEnableClientState(GL_VERTEX_ARRAY);
+	vertex->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	index->Bind();
+	glLineWidth(2.0f);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glDrawElements(GL_LINES, index->GetCount(), GL_UNSIGNED_INT, NULL);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
+	vertex->Unbind();
+	index->Unbind();
+	glDisableClientState(GL_VERTEX_ARRAY);
+	/*glPopMatrix();*/
+
+	// TODO delete this when done
+
+	// Configure buffers
+	float3 corners[8];
+	globalAabb.GetCornerPoints(corners);
+
+	unsigned int indices[24] =
+	{
+		0,1,
+		1,3,
+		3,2,
+		2,0,
+
+		1,5,
+		4,6,
+		7,3,
+
+		6,7,
+		6,2,
+
+		7,5,
+		4,5,
+
+		4,0
+	};
+
+	if (index) RELEASE(index);
+	if (vertex) RELEASE(vertex);
+	index = new IndexBuffer(indices, 24);
+	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
+	index->Unbind();
+	vertex->Unbind();
+}
 
 Component* GameObject::CreateComponent(ComponentType type)
 {
@@ -166,6 +231,21 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
+		{
+		MeshComponent* meshComp = (MeshComponent*)component;
+		
+			if (meshComp)
+			{
+				MaterialComponent* matComp = new MaterialComponent(this);
+				meshComp->SetMaterial((MaterialComponent*)matComp);
+				
+				if (matComp)
+				{
+					matComp->SetOwner(this);
+					components.push_back(matComp);
+				}
+			}
+		}
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
@@ -184,12 +264,37 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component = new RigidBodyComponent(this);
 		break;
 	case ComponentType::MATERIAL:
+	{
 		MeshComponent* m = GetComponent<MeshComponent>();
-		if (m != nullptr && !m->HasMaterial())
+		MaterialComponent* matComp = GetComponent<MaterialComponent>();
+		if (m != nullptr && matComp)
+		{
+			if (matComp->IsDefaultMat())
+			{
+				std::vector<Component*>::iterator it = components.begin();
+				for (; it != components.end(); ++it)
+				{
+					if (*(it) == matComp)
+					{
+						components.erase(it);
+						RELEASE(matComp);
+						break;
+					}
+				}
+				component = new MaterialComponent(this, false);
+				m->SetMaterial((MaterialComponent*)component);
+			}
+		}
+		else
 		{
 			component = new MaterialComponent(this);
-			m->SetMaterial((MaterialComponent*)component);
+			if(m != nullptr)
+				m->SetMaterial((MaterialComponent*)component);
 		}
+		break;
+	}
+	case ComponentType::LIGHT:
+		component = new ComponentLight();
 		break;
 	}
 
@@ -265,7 +370,7 @@ void GameObject::AddChild(GameObject* object)
 	object->parent = this;
 	children.emplace_back(object);
 	TransformComponent* trans = object->GetComponent<TransformComponent>();
-	if(object->parent != nullptr && trans) trans->NewAttachment();
+	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
 
 void GameObject::RemoveChild(GameObject* object)

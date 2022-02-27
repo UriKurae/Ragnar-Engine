@@ -22,7 +22,7 @@ public:
 	inline std::string GetReverbBusName() const { return busReverb; }
 
 	void CompileBuffers();
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 
 	bool Update(float dt) override;
 

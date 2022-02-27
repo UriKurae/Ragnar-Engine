@@ -39,6 +39,13 @@ public:
 	void AlignViewWithSelected();
 
 private:
+	std::string GetNotLightSensibleShaderSource();
+	std::string GetLightSensibleShaderSource();
+
+	void ShowCreateLigthSensibleShaderWindow();
+	void ShowCreateNotLigthSensibleShaderWindow();
+
+private:
 	bool showMenu;
 	Texture* buttonPlay;
 	Texture* buttonStop;
@@ -48,6 +55,11 @@ private:
 
 	bool saveWindow;
 	std::vector<Menu*> menus;
+
+
+	bool showCreateLightSensibleShaderWindow = false;
+	bool showCreateNotLightSensibleShaderWindow = false;
+
 	std::vector<std::string> stylesList;
 	int style = 5;
 	float alphaStyle = 0.1f;

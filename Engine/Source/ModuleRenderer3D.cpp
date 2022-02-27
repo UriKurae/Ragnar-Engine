@@ -8,6 +8,15 @@
 #include "ModuleScene.h"
 #include "Framebuffer.h"
 
+#include "ResourceManager.h"
+
+#include "GameObject.h"
+#include "LightComponent.h"
+
+#include "Material.h"
+#include "Shader.h"
+#include "Resource.h"
+
 #include "glew/include/GL/glew.h"
 
 #include "Imgui/imgui.h"
@@ -130,20 +139,20 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 			ret = false;
 		}
 		
-		GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
-		
-		lights[0].ref = GL_LIGHT0;
-		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-		lights[0].SetPos(0.0f, 0.0f, 2.5f);
-		lights[0].Init();
-		
-		GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
-
-		GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
+		//GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
+		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
+		//
+		//lights[0].ref = GL_LIGHT0;
+		//lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		//lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+		//lights[0].SetPos(0.0f, 0.0f, 2.5f);
+		//lights[0].Init();
+		//
+		//GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
+		//
+		//GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
 		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
@@ -154,7 +163,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		blending = node.GetJsonBool("blending");
 		wireMode = node.GetJsonBool("wire mode");
 
-		lights[0].Active(true);
+		//lights[0].Active(true);
 		
 		if (depthTest) SetDepthTest();
 		if (cullFace) SetCullFace();
@@ -187,6 +196,24 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	grid.constant = 0;
 	grid.axis = true;
 
+	//defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
+	//shaders.push_back(defaultShader);
+
+	//defaultShader = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
+
+	// TODO: To be handled with the resource manager
+	//defaultMaterial = new Material();
+	//defaultMaterial->SetShader(defaultShader);
+
+	dirLight = new DirectionalLight();
+	goDirLight = app->scene->CreateGameObject(0);
+	goDirLight->SetName("Directional Light");
+
+	TransformComponent* tr = goDirLight->GetComponent<TransformComponent>();
+	tr->SetPosition({ 50,50,50 });
+	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
+	lightComp->SetLight(dirLight);
+
 	return ret;
 }
 
@@ -195,6 +222,9 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
 	fbo->Bind();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -216,19 +246,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);
-	
-	if (app->camera->visualizeFrustum)
-	{
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			(*it)->Draw();
-		}
-	}
-	else
-	{
-		app->scene->Draw();
-	}
-
+		
 	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
 	{
 		glColor3f(0.25f, 0.87f, 0.81f);
@@ -257,36 +275,42 @@ bool ModuleRenderer3D::PostUpdate()
 		glLineWidth(1.0f);
 	}
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
+	//glPopMatrix();
+	//glPopMatrix();
+	//PushCamera(float4x4::identity, float4x4::identity);
+	
+	if (app->camera->visualizeFrustum)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			(*it)->Draw(nullptr);
+		}
+	}
+	else
+	{
+		app->scene->Draw();
+	}
 
 	fbo->Unbind();
 
+	
 	// Camera Component FBO
-
 	mainCameraFbo->Bind();
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
 	grid.Render();
 
+	//glPopMatrix();
+	//glPopMatrix();
+	//PushCamera(float4x4::identity, float4x4::identity);
+
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw();
+		(*it)->Draw(app->scene->mainCamera);
 	}
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
 
 	mainCameraFbo->Unbind();
 
@@ -305,6 +329,15 @@ bool ModuleRenderer3D::CleanUp()
 
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
+	//RELEASE(defaultShader);
+	RELEASE(dirLight);
+
+	for(auto& pl : pointLights)
+	{
+		delete pl;
+		pl = nullptr;
+	}
+	pointLights.clear();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -493,4 +526,97 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
+}
+
+Material* ModuleRenderer3D::GetDefaultMaterial()
+{
+	return defaultMaterial;
+}
+
+uint ModuleRenderer3D::GetDefaultShader()
+{
+	return defaultShader;
+}
+
+Shader* ModuleRenderer3D::AddShader(const std::string& path)
+{
+	//Shader* shader = new Shader(path);
+	std::string p = path;
+	ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
+	//shaders.push_back(shader);
+
+	//if (path.find("default"))
+	//{
+	//	defaultShader = shader;
+	//}
+	//
+	//return shader;
+	return 0;
+}
+
+void ModuleRenderer3D::AddMaterial(Material* material)
+{
+	materials.emplace_back(material);
+}
+
+void ModuleRenderer3D::AddPointLight(PointLight* pl)
+{
+	pointLights.push_back(pl);
+}
+
+void ModuleRenderer3D::AddSpotLight(SpotLight* sl)
+{
+	spotLights.push_back(sl);
+}
+
+void ModuleRenderer3D::ClearPointLights()
+{
+	pointLights.clear();
+}
+
+void ModuleRenderer3D::ClearSpotLights()
+{
+	spotLights.clear();
+}
+
+void ModuleRenderer3D::RemovePointLight(PointLight* light)
+{
+	std::vector<PointLight*>::iterator it = pointLights.begin();
+
+	for (; it != pointLights.end(); ++it)
+	{
+		if ((*it) == light)
+		{
+			delete light;
+			light = 0;
+			*it = 0;
+			pointLights.erase(it);
+			break;
+		}
+	}
+
+	//for (auto& pl : pointLights)
+	//{
+	//	if (pl == light)
+	//	{
+	//		delete pl;
+	//		pl = 0;
+	//		//*it = 0;
+	//		pointLights.erase(it);
+
+	//		break;
+	//	}
+	//	++it;
+	//}
+}
+
+void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
+{
+	//glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(proj.Transposed().ptr());
+
+	//glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(view.Transposed().ptr());
 }

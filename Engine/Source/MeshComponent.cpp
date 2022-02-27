@@ -46,24 +46,25 @@ MeshComponent::~MeshComponent()
 	if (mesh.use_count() - 1 == 1) mesh->UnLoad();
 }
 
-void MeshComponent::Draw()
+void MeshComponent::Draw(CameraComponent* gameCam)
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
+	//glPushMatrix();
+	//glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	
-	if (material != nullptr && material->GetActive()) material->BindTexture();
+	
+	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
-
-	if (material != nullptr && material->GetActive()) material->UnbindTexture();
 	
-	glPopMatrix();
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (material != nullptr && material->GetActive()) material->Unbind();
+	
+	//glPopMatrix();
+	//
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	// If showAABB are enable draw the his bounding boxes
 	if (showAABB == true) {
@@ -107,17 +108,17 @@ void MeshComponent::DrawOutline()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glPushMatrix();
-	float4x4 testLocal = transform->GetLocalTransform();
+	float4x4 testGlobal = transform->GetGlobalTransform();
 
-	testLocal.scaleX += 0.05f;
-	testLocal.scaleY += 0.05f;
-	testLocal.scaleZ += 0.05f;
-	glMultMatrixf(testLocal.Transposed().ptr());
+	testGlobal.scaleX += 0.05f;
+	testGlobal.scaleY += 0.05f;
+	testGlobal.scaleZ += 0.05f;
+	glMultMatrixf(testGlobal.Transposed().ptr());
 
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
 	glPopMatrix();
-
+	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
@@ -205,9 +206,9 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
-
+		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
+
 		Sphere sphere;
 		sphere.r = 0.f;
 		sphere.pos = localBoundingBox.CenterPoint();
@@ -239,9 +240,9 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
-
+		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
+
 		Sphere sphere;
 		sphere.r = 0.f;
 		sphere.pos = localBoundingBox.CenterPoint();
@@ -264,5 +265,5 @@ float3 MeshComponent::GetCenterPointInWorldCoords()
 }
 float MeshComponent::GetSphereRadius()
 {
-	return mesh.get()->GetRadius();
+	return mesh->GetRadius();
 }

@@ -182,7 +182,7 @@ bool ModuleEditor::SaveConfig(JsonParsing& node)
 		node.SetValueToArray(jsonArray, fileTag.GetRootValue());
 	}
 
-	// Save Tags
+	// Save layers
 	JsonParsing fileLay = JsonParsing();
 	jsonArray = node.SetNewJsonArray(node.GetRootValue(), "layers");
 	label = "0";

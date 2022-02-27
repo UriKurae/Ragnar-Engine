@@ -8,7 +8,7 @@ class CommandDispatcher
 {
 public:
 	CommandDispatcher() {}
-
+  
 	static void Execute(Command* c);
 	static void Undo();
 	static void Redo();
@@ -19,3 +19,4 @@ private:
 	static std::stack<Command*> commands;
 	static std::stack<Command*> undoneCommands;
 };
+

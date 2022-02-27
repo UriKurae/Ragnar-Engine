@@ -1,6 +1,7 @@
 #include "ModuleScene.h"
 
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "Globals.h"
 #include "ModuleEditor.h"
@@ -17,7 +18,7 @@
 
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr)
+ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -48,6 +49,10 @@ bool ModuleScene::Start()
 	ImportPrimitives();
 	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
+	player = CreateGameObject(nullptr);
+	player->CreateComponent(ComponentType::AUDIO_SOURCE);
+	player->SetName("Player");
+	
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
@@ -66,6 +71,14 @@ bool ModuleScene::Start()
 
 bool ModuleScene::PreUpdate(float dt)
 {
+	static bool refresh = true;
+
+	if (refresh)
+	{
+		resetQuadtree = true;
+		refresh = false;
+	}
+
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
@@ -74,16 +87,6 @@ bool ModuleScene::PreUpdate(float dt)
 bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
-
-	// UNDO ============================================================
-	// TODO: Get the current Game Object, detect Input and Undo
-	/*if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
-			app->editor->GetGO()->OnEndedAction();
-	}*/
-	// ================================================================
-
 
 	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
 
@@ -120,6 +123,27 @@ bool ModuleScene::Update(float dt)
 		resetQuadtree = false;
 	}
 	
+	if (gameState == GameState::PLAYING)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+		{
+			player->GetComponent<AudioSourceComponent>()->StopClip();
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		}
+	}
+
 	AudioManager::Get()->Render();
 
 	return true;
@@ -150,7 +174,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw();
+			go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -201,6 +225,7 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 	{
 		object->SetParent(parent);
 		parent->AddChild(object);
+
 	}
 	else
 	{
@@ -346,6 +371,10 @@ bool ModuleScene::LoadScene(const char* name)
 				GameObject* parent = GetGoByUuid(go.GetJsonNumber("Parent UUID"));
 				GameObject* child = CreateGameObject(parent, false);
 				child->OnLoad(go);
+				if (child->GetName() == std::string("Player"))
+				{
+					player = child;
+				}
 			}
 		}
 
@@ -434,50 +463,50 @@ void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
 
 void ModuleScene::ImportPrimitives()
 {
-	std::vector<float3> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float3> normals;
-	std::vector<float2> texCoords;
+	//std::vector<float3> normals;
+	//std::vector<float2> texCoords;
 
-	RCube::CreateCube(vertices, indices, texCoords);
+	RCube::CreateCube(vertices, indices);
 	std::string library;
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RPyramide::CreatePyramide(vertices, indices, texCoords);
+	RPyramide::CreatePyramide(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RSphere::CreateSphere(vertices, normals, indices, texCoords);
+	RSphere::CreateSphere(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
+	RCylinder::CreateCylinder(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 }
 
 void ModuleScene::Play()
@@ -499,13 +528,16 @@ void ModuleScene::Play()
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-	
+
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 }
 
 void ModuleScene::Stop()
 {
+	app->renderer3D->ClearPointLights();
+	app->renderer3D->ClearSpotLights();
+
 	LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 	qTree.Clear();

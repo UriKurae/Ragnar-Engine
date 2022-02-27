@@ -207,9 +207,13 @@
     <ClInclude Include="Engine\Source\AudioManager.h" />
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
+    <ClInclude Include="Engine\Source\BufferLayout.h" />
     <ClInclude Include="Engine\Source\CameraComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
     <ClInclude Include="Engine\Source\C_RigidBody.h" />
+    <ClInclude Include="Engine\Source\LightComponent.h" />
+    <ClInclude Include="Engine\Source\Lights.h" />
+    <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\GameObjectCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
@@ -230,7 +234,6 @@
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
     <ClInclude Include="Engine\Source\InspectorMenu.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
-    <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\ListenerComponent.h" />
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
     <ClInclude Include="Engine\Source\MaterialComponent.h" />
@@ -255,6 +258,10 @@
     <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
     <ClInclude Include="Engine\Source\Shapes.h" />
+    <ClInclude Include="Engine\Source\Shader.h" />
+    <ClInclude Include="Engine\Source\ShaderHelpers.h" />
+    <ClInclude Include="Engine\Source\ShaderImporter.h" />
+    <ClInclude Include="Engine\Source\TextEditor.h" />
     <ClInclude Include="Engine\Source\Style.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
@@ -262,6 +269,8 @@
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
+    <ClInclude Include="Engine\Source\Vertex.h" />
+    <ClInclude Include="Engine\Source\VertexArray.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />
     <ClInclude Include="resource.h" />
@@ -336,6 +345,7 @@
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
+    <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
@@ -352,11 +362,11 @@
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Source\InspectorMenu.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
-    <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\ListenerComponent.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
+    <ClCompile Include="Engine\Source\Material.cpp" />
     <ClCompile Include="Engine\Source\MaterialComponent.cpp" />
     <ClCompile Include="Engine\Source\Mesh.cpp" />
     <ClCompile Include="Engine\Source\MeshComponent.cpp" />
@@ -375,12 +385,16 @@
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />
     <ClCompile Include="Engine\Source\Shapes.cpp" />
+    <ClCompile Include="Engine\Source\Shader.cpp" />
+    <ClCompile Include="Engine\Source\ShaderImporter.cpp" />
+    <ClCompile Include="Engine\Source\TextEditor.cpp" />
     <ClCompile Include="Engine\Source\Texture.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />
     <ClCompile Include="Engine\Source\EngineTimer.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
+    <ClCompile Include="Engine\Source\VertexArray.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\Viewport.cpp" />
   </ItemGroup>

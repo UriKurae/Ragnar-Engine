@@ -22,7 +22,7 @@ public:
 	MeshComponent(MeshComponent* meshComponent, TransformComponent* trans);
 	~MeshComponent();
 
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 	void DrawOutline() override;
 	void OnEditor() override;
 
@@ -39,10 +39,9 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
-	
+
 	float3 GetCenterPointInWorldCoords();
 	float GetSphereRadius();
-
 
 private:
 	TransformComponent* transform;
