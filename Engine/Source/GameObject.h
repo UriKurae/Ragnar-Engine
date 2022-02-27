@@ -36,7 +36,7 @@ public:
 
 	void DebugColliders();
 
-	Component* CreateComponent(ComponentType type);
+	Component* CreateComponent(ComponentType type, const char* params = nullptr);
 	void AddComponent(Component* component);
 
 	void CopyComponent(Component* component);

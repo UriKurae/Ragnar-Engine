@@ -106,12 +106,20 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
-
+		/*for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		{
+			if (ImGui::Selectable(mono_class_get_name(app->moduleMono->userScripts[i])))
+			{
+				const char* name = mono_class_get_name(app->moduleMono->userScripts[i]);
+				CreateComponent(ComponentType::SCRIPT);
+			}
+		}*/
 		if (ImGui::Selectable("Script Component"))
 		{
-			CreateComponent(ComponentType::SCRIPT);
+			CreateComponent(ComponentType::SCRIPT, "Script");
 			newComponent = false;
 		}
+	
 		if (ImGui::Selectable("Audio Source Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_SOURCE);
@@ -218,7 +226,7 @@ void GameObject::DebugColliders()
 	vertex->Unbind();
 }
 
-Component* GameObject::CreateComponent(ComponentType type)
+Component* GameObject::CreateComponent(ComponentType type, const char* name)
 {
 	Component* component = nullptr;
 
@@ -231,7 +239,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::SCRIPT:
-		component = new ScriptComponent(this, "Script");
+		component = new ScriptComponent(this, name);
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());

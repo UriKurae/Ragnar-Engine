@@ -90,6 +90,12 @@ void MonoManager::ReCompileCS()
 	mono_domain_unload(domain);
 	mono_thread_cleanup();
 
+	while (mono_domain_is_unloading(domain) == true)
+	{
+
+	}
+
+	CMDCompileCS();
 	InitMono();
 
 	app->scene->LoadScene("Assets/Scenes/scenePlay.ragnar");
