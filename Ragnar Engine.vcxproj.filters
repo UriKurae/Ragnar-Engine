@@ -58,6 +58,21 @@
     <Filter Include="Sources\Materials">
       <UniqueIdentifier>{52cdcc85-30bb-48e1-a81a-2133027b065d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour">
+      <UniqueIdentifier>{dd53d544-f65e-4bcb-9838-ab1d53621efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\Detour">
+      <UniqueIdentifier>{48273050-b7bb-4b4a-928d-72f01a1db164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
+      <UniqueIdentifier>{6bc0fc28-8529-4aa8-95c0-7a5c5c32467d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DetourTileCache">
+      <UniqueIdentifier>{47af1f52-65b0-44df-a93f-44584932090d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\Recast">
+      <UniqueIdentifier>{95376722-a7da-49b0-835d-0678dbc33107}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -367,6 +382,60 @@
     <ClInclude Include="Engine\Source\Style.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourAlloc.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourAssert.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourCommon.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourMath.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMesh.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMeshBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMeshQuery.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNode.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourStatus.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\DebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\DetourDebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\RecastDebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\RecastDump.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\Include\DetourTileCache.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\Include\DetourTileCacheBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Include\Recast.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAlloc.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAssert.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -596,6 +665,72 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourAlloc.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourCommon.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMesh.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMeshBuilder.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMeshQuery.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNode.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\DebugDraw.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\DetourDebugDraw.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\RecastDebugDraw.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\RecastDump.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourTileCache\Source\DetourTileCache.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourTileCache\Source\DetourTileCacheBuilder.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\Recast.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastAlloc.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastArea.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastContour.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastFilter.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastLayers.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastMesh.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastMeshDetail.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastRasterization.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastRegion.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

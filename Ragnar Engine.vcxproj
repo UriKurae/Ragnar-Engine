@@ -55,7 +55,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\MathGeoLib\src;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\MathGeoLib\src;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\RecastDetour\DebugUtils\Include;$(SolutionDir)Dependencies\RecastDetour\Detour\Include;$(SolutionDir)Dependencies\RecastDetour\DetourTileCache\Include;$(SolutionDir)Dependencies\RecastDetour\Recast\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -112,6 +112,24 @@
     <ClInclude Include="Dependencies\json\parson.h" />
     <ClInclude Include="Dependencies\mmgr\mmgr.h" />
     <ClInclude Include="Dependencies\mmgr\nommgr.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\DebugDraw.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\DetourDebugDraw.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\RecastDebugDraw.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\RecastDump.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\Include\DetourTileCache.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\Include\DetourTileCacheBuilder.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourAlloc.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourAssert.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourCommon.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourMath.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMesh.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMeshBuilder.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMeshQuery.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNode.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourStatus.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Include\Recast.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAlloc.h" />
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAssert.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileHelpersBase.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.h" />
@@ -208,6 +226,28 @@
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\json\parson.c" />
     <ClCompile Include="Dependencies\mmgr\mmgr.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\DebugDraw.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\DetourDebugDraw.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\RecastDebugDraw.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\RecastDump.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DetourTileCache\Source\DetourTileCache.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DetourTileCache\Source\DetourTileCacheBuilder.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourAlloc.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourCommon.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMesh.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMeshBuilder.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMeshQuery.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNode.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\Recast.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastAlloc.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastArea.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastContour.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastFilter.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastLayers.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastMesh.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastMeshDetail.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastRasterization.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastRegion.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp" />
