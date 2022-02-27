@@ -34,6 +34,7 @@ public:
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
+	void MoveComponent(Component* component, int position);
 
 	void CopyComponent(Component* component);
 	

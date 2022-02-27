@@ -221,8 +221,22 @@ void GameObject::RemoveComponent(Component* component)
 	}
 }
 
+void GameObject::MoveComponent(Component* component, int position)
+{
+	//TODO: Add to each component the reorganitation structure where the delete button is
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if (*it == component && (it - position) > components.begin() && (it - position) < components.end())
+		{
+			std::swap(*it, *(it - position));
+			break;
+		}
+	}
+}
+
 void GameObject::CopyComponent(Component* component)
 {
+	//TODO: Copy every single type of Components
 	Component* c = nullptr;
 	switch (component->type)
 	{

@@ -4,7 +4,6 @@
 
 class GameObject;
 class btRigidBody;
-struct PhysVehicle3D;
 
 enum class CollisionType
 {
