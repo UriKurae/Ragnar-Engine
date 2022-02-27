@@ -6,6 +6,7 @@
 #include "ModuleScene.h"
 #include "GameObject.h"
 #include"ButtonComponent.h"
+#include"CheckBoxComponent.h"
 #include "Profiling.h"
 
 HierarchyMenu::HierarchyMenu() : Menu(true)
@@ -161,6 +162,36 @@ bool HierarchyMenu::Update(float dt)
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->planeToDraw = new MyPlane(float3{0,0,0}, float3{ 1,1,1 });
+			}
+			else if (ImGui::Selectable("Create UI Slider"))
+			{
+				/*if (selected != nullptr) app->scene->Create3DObject(Object3D::PLANE, selected);
+				else*/
+
+				GameObject* object = app->scene->CreateGameObject(nullptr, false);
+				(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+				SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
+				button->gen = object;
+				MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
+				createGameObject = false;
+				app->userInterface->UIGameObjects.push_back(object);
+				button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+			}
+			else if (ImGui::Selectable("Create UI Check Box"))
+			{
+				/*if (selected != nullptr) app->scene->Create3DObject(Object3D::PLANE, selected);
+				else*/
+
+				GameObject* object = app->scene->CreateGameObject(nullptr, false);
+				(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+				CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
+				button->gen = object;
+				MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
+				createGameObject = false;
+				app->userInterface->UIGameObjects.push_back(object);
+				button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{

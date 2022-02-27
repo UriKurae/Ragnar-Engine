@@ -12,6 +12,8 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 #include "ButtonComponent.h"
+#include"SliderComponent.h"
+#include"CheckBoxComponent.h"
 #include "Transform2DComponent.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 

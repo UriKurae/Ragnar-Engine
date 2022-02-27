@@ -299,6 +299,7 @@ bool ModuleUI::Start()
 void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
 {
 	// activate corresponding render state	
+	
 	shader->Use();
 	Frustum frustum;
 	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
@@ -306,12 +307,25 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	frustum.pos = camera->camera.pos;
 	frustum.front = camera->camera.front; //COGED EL FRONT DE LA CAMARA DE JUEGO
 	frustum.up = camera->camera.up; //COGED EL UP DE LA CAMARA DE JUEGO
-	frustum.type = OrthographicFrustum;
+	frustum.type = FrustumType::OrthographicFrustum;
+	
 	frustum.orthographicHeight = camera->currentScreenHeight;//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.orthographicWidth = camera->currentScreenWidth;//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.nearPlaneDistance = 0.1;
 	frustum.farPlaneDistance = 1000000.f;
+	
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+	//frustum.SetViewPlaneDistances(0.1, 1000000.f);
 
+	/*float verticalFov = 2 * Atan((Tan(DegToRad(90.0f) / 2)) * (camera->currentScreenHeight / camera->currentScreenWidth));
+	frustum.SetVerticalFovAndAspectRatio(verticalFov, (camera->currentScreenWidth / camera->currentScreenHeight));*/
+
+	/*frustum.SetOrthographic(camera->currentScreenWidth, camera->currentScreenHeight);
+	frustum.SetPerspective(DegToRad(90.0f), 0.0f);
+	frustum.SetFrame(camera->camera.pos, camera->camera.front, camera->camera.up);*/
+
+	/*math::float4x4 h = frustum.ComputeProjectionMatrix();
+	math::float4x4 v = frustum.ComputeViewMatrix();*/
 
 	auto p = frustum.ProjectionMatrix();
 	glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);

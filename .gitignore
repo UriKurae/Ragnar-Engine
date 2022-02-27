@@ -49,7 +49,7 @@
 !Dependencies/Wwise/lib/Release/AkStreamMgr.lib
 !Dependencies/Wwise/lib/Release/AkSpatialAudio.lib
 !Dependencies/Wwise/lib/Release/AkRoomVerbFX.lib
-
+!Dependencies/freetype-2.10.0/lib/freetype.lib
 
 # Executables
 *.exe
