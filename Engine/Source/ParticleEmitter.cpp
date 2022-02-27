@@ -57,7 +57,7 @@ void ParticleEmitter::Emit(float dt)
 			// When the particle is allocated in memory, but it's not being used at the moment
 			// Reuse an exisiting particle to make the smaller complexity, which results in more optimized code 
 
-			TransformComponent* transform = (TransformComponent*)own->GetComponent(ComponentType::TRANSFORM);
+			TransformComponent* transform = (TransformComponent*)own->GetComponent<TransformComponent>();
 			if (transform != nullptr)
 			{
 				if (particlesBuff[i].isActive == false)

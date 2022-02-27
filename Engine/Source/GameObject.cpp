@@ -231,13 +231,13 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
 		{
-		MeshComponent* meshComp = (MeshComponent*)component;
-		
+			MeshComponent* meshComp = (MeshComponent*)component;
+
 			if (meshComp)
 			{
 				MaterialComponent* matComp = new MaterialComponent(this);
 				meshComp->SetMaterial((MaterialComponent*)matComp);
-				
+
 				if (matComp)
 				{
 					matComp->SetOwner(this);
@@ -285,7 +285,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		else
 		{
 			component = new MaterialComponent(this);
-			if(m != nullptr)
+			if (m != nullptr)
 				m->SetMaterial((MaterialComponent*)component);
 		}
 		break;
@@ -293,16 +293,17 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::LIGHT:
 		component = new ComponentLight();
 		break;
-	}
+	
 	case ComponentType::PARTICLE_SYSTEM:
-		transform = (TransformComponent*)GetComponent(ComponentType::TRANSFORM);
+		transform = (TransformComponent*)GetComponent<TransformComponent>();
 		component = new ParticleSystemComponent(this, transform);
 		break;
 	case ComponentType::BILLBOARD:
-		transform = (TransformComponent*)GetComponent(ComponentType::TRANSFORM);
+		transform = (TransformComponent*)GetComponent<TransformComponent>();
 		component = new BillboardParticleComponent(this, transform);
 		break;
 	}
+	
 
 	if (component != nullptr)
 	{
