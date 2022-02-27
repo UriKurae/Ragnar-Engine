@@ -30,5 +30,5 @@ public:
 
 	float4x4 globalOffset = float4x4::identity;
 
-	std::shared_ptr<Bone> bone;
+	std::shared_ptr<Bone2> bone;
 };

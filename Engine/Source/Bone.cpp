@@ -9,7 +9,7 @@
 
 #include "Profiling.h"
 
-Bone::Bone(uint uid, std::string& assets, std::string& library) : Resource(uid, ResourceType::BONE, assets, library)
+Bone2::Bone2(uint uid, std::string& assets, std::string& library) : Resource(uid, ResourceType::BONE, assets, library)
 {
 	std::string metaPath = BONES_FOLDER + std::string("bone_") + std::to_string(uid) + ".meta";
 	AnimationImporter::CreateMetaBones(metaPath, assetsPath, uid);
@@ -18,14 +18,14 @@ Bone::Bone(uint uid, std::string& assets, std::string& library) : Resource(uid, 
 	name = name.substr(name.find_first_of("__") + 2, name.length());
 }
 
-Bone::~Bone()
+Bone2::~Bone2()
 {
 	RELEASE_ARRAY(position);
 	RELEASE_ARRAY(rotation);
 	RELEASE_ARRAY(scale);
 }
 
-void Bone::Load()
+void Bone2::Load()
 {
 	//Get the buffer
 	char* buffer = nullptr;
@@ -73,4 +73,13 @@ void Bone::Load()
 	}
 
 	RELEASE_ARRAY(buffer);
+}
+
+Bone::Bone(std::vector<KeyPosition> bonePositions, std::vector<KeyRotation> boneRotations, std::vector<KeyScale> boneScales, int boneId, std::string boneName)
+{
+	positions = bonePositions;
+	rotations = boneRotations;
+	scales = boneScales;
+	id = boneId;
+	name = boneName;
 }

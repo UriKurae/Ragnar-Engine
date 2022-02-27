@@ -19,7 +19,7 @@
 
 ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), Menu(true)
 {
-	mainDirectory = "Assets/";
+	mainDirectory = "Assets/Resources/";
 	currentDirectory = mainDirectory;
 }
 

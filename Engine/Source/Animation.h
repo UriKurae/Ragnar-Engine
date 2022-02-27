@@ -3,6 +3,8 @@
 #include "Resource.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
+class Bone;
+
 struct BoneTransform
 {
 	~BoneTransform();
@@ -60,6 +62,8 @@ public:
 	float ticksPerSecond = 0.0f;
 
 	int numBones = 0;
+
+	std::vector<Bone*> bones;
 
 	BoneTransform* boneTranformations = nullptr;
 };

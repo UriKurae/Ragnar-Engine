@@ -100,7 +100,7 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 		break;
 	case ResourceType::BONE:
 		library = BONES_FOLDER + std::string("bone_") + std::to_string(uid) + ".rgbone";
-		resource = std::make_shared<Bone>(uid, assets, library);
+		resource = std::make_shared<Bone2>(uid, assets, library);
 		break;
 	case ResourceType::SHADER:
 		library = SHADERS_FOLDER + std::string("shader_") + std::to_string(uid) + ".shader";
@@ -136,7 +136,7 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 		resource = std::make_shared<Animation>(uid, assets, library);
 		break;
 	case ResourceType::BONE:
-		resource = std::make_shared<Bone>(uid, assets, library);
+		resource = std::make_shared<Bone2>(uid, assets, library);
 		break;
 	case ResourceType::SHADER:
 		resource = std::make_shared<Shader>(uid, assets, library);

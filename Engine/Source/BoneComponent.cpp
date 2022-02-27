@@ -63,7 +63,7 @@ void BoneComponent::OnEditor()
 
 bool BoneComponent::OnLoad(JsonParsing& node)
 {
-	bone = std::static_pointer_cast<Bone>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
+	bone = std::static_pointer_cast<Bone2>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
 	return true;
 }
@@ -83,7 +83,7 @@ bool BoneComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 void BoneComponent::SetBone(std::shared_ptr<Resource> b)
 {
-	bone = std::static_pointer_cast<Bone>(b);
+	bone = std::static_pointer_cast<Bone2>(b);
 
 	float3 pos = float3(bone->position[0], bone->position[1], bone->position[2]);
 	Quat rot = Quat(bone->rotation[0], bone->rotation[1], bone->rotation[2], bone->rotation[3]);

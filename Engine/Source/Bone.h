@@ -9,6 +9,46 @@ struct BoneInfo
 	float4x4 offset;
 };
 
+struct KeyPosition
+{
+	float3 position;
+	float timeStamp;
+};
+
+struct KeyRotation
+{
+	Quat orientation;
+	float timeStamp;
+};
+
+struct KeyScale
+{
+	float3 scale;
+	float timeStamp;
+};
+
+class Bone
+{
+public:
+	Bone(){}
+	Bone(std::vector<KeyPosition> bonePositions, std::vector<KeyRotation> boneRotations, std::vector<KeyScale> boneScales, int boneId, std::string boneName);
+
+private:
+	std::vector<KeyPosition> positions;
+	std::vector<KeyRotation> rotations;
+	std::vector<KeyScale> scales;
+	int numPositions;
+	int numRotations;
+	int numScalings;
+
+	math::float4x4 localTransform;
+	std::string name;
+	int id;
+};
+
+
+
+
 struct Weight 
 {
 public:
@@ -18,11 +58,11 @@ public:
 	float weight;
 };
 
-class Bone : public Resource
+class Bone2 : public Resource
 {
 public:
-	Bone(uint uid, std::string& assets, std::string& library);
-	~Bone();
+	Bone2(uint uid, std::string& assets, std::string& library);
+	~Bone2();
 
 	void Load() override;
 	//void UnLoad() override;

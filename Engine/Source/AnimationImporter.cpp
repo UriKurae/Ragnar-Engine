@@ -10,6 +10,149 @@
 
 #include "Profiling.h"
 
+void AnimationImporter::ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids)
+{
+	for (unsigned int i = 0; i < scene->mNumAnimations; i++)
+	{
+		ImportAnimation2(path, scene->mAnimations[i], json, uids);
+	}
+}
+
+void AnimationImporter::ImportAnimation2(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids)
+{
+	int duration = animation->mDuration;
+	int ticksPerSecond = animation->mTicksPerSecond;
+	std::vector<BoneData> bones;
+
+	for (int i = 0; i < animation->mNumChannels; ++i)
+	{
+		BoneData bone;
+		bone.name = animation->mName.C_Str();
+
+		// Save Key positions
+		int boneKeys = animation->mChannels[i]->mNumPositionKeys;
+		for (int j = 0; j < boneKeys; ++j)
+		{
+			KeyPosition pos;
+			pos.position.x = animation->mChannels[i]->mPositionKeys[j].mValue.x;
+			pos.position.y = animation->mChannels[i]->mPositionKeys[j].mValue.y;
+			pos.position.z = animation->mChannels[i]->mPositionKeys[j].mValue.z;
+			pos.timeStamp = animation->mChannels[i]->mPositionKeys[j].mTime;
+			bone.positions.push_back(pos);
+		}
+
+		// Save Key scales
+		boneKeys = animation->mChannels[i]->mNumScalingKeys;
+		for (int j = 0; j < boneKeys; ++j)
+		{
+			KeyScale scale;
+			scale.scale.x = animation->mChannels[i]->mScalingKeys[j].mValue.x;
+			scale.scale.y = animation->mChannels[i]->mScalingKeys[j].mValue.y;
+			scale.scale.z = animation->mChannels[i]->mScalingKeys[j].mValue.z;
+			scale.timeStamp = animation->mChannels[i]->mScalingKeys[j].mTime;
+			bone.scales.push_back(scale);
+		}
+
+		// Save Key Rotations
+		boneKeys = animation->mChannels[i]->mNumRotationKeys;
+		for (int j = 0; j < boneKeys; ++j)
+		{
+			KeyRotation rotations;
+			rotations.orientation.x = animation->mChannels[i]->mRotationKeys[j].mValue.x;
+			rotations.orientation.y = animation->mChannels[i]->mRotationKeys[j].mValue.y;
+			rotations.orientation.z = animation->mChannels[i]->mRotationKeys[j].mValue.z;
+			rotations.orientation.w = animation->mChannels[i]->mRotationKeys[j].mValue.w;
+			rotations.timeStamp = animation->mChannels[i]->mRotationKeys[j].mTime;
+			bone.rotations.push_back(rotations);
+		}
+
+		bones.push_back(bone);
+	}
+
+	std::string animName;
+	std::string assetsPath(path);
+	std::string name("__");
+	name += animation->mName.C_Str();
+
+	assetsPath.insert(assetsPath.find_last_of("."), name.c_str());
+
+	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::ANIMATION, assetsPath, animName);
+
+	uids.push_back(uid);
+
+	SaveAnimation2(animName, duration, ticksPerSecond, bones);
+
+	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
+	JsonParsing parse = JsonParsing();
+	parse.SetNewJsonNumber(parse.ValueToObject(parse.GetRootValue()), "Type", (int)ComponentType::ANIMATION);
+	parse.SetNewJsonString(parse.ValueToObject(parse.GetRootValue()), "Animation Path", animName.c_str());
+
+	json.SetValueToArray(array, parse.GetRootValue());
+
+}
+
+void AnimationImporter::SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData)
+{
+	unsigned int header[3] = { duration, ticksPerSecond, boneData.size()};
+	uint size = sizeof(header) + sizeof(BoneData) * boneData.size();
+
+	char* buffer = new char[size];
+	char* cursor = buffer;
+
+	unsigned int bytes = sizeof(header);
+
+	// Save header
+	memcpy(cursor, header, bytes);
+	cursor += bytes;
+
+	// Save BoneData vector
+	bytes = sizeof(BoneData) * boneData.size();
+	memcpy(cursor, boneData.data(), bytes);
+	cursor += bytes;
+
+	
+	if (app->fs->Save(name.c_str(), buffer, size) > 0)
+		DEBUG_LOG("Animation %s saved succesfully", name.c_str());
+
+	RELEASE_ARRAY(buffer);
+
+}
+
+void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector)
+{
+	// WARNING: Uncommenting this causes to crash
+	/*char* buffer = nullptr;
+	app->fs->Load(path, &buffer);
+	char* cursor = buffer;
+
+	uint ranges[3];
+	uint bytes = sizeof(ranges);
+	memcpy(ranges, cursor, bytes);
+	cursor += bytes;
+
+	ticks = ranges[0];
+	ticksPerSecond = ranges[1];
+	boneVector.resize(ranges[2]);
+
+	std::vector<BoneData> boneData;
+	if (boneVector.size() > 0)
+	{
+		boneData.resize(ranges[2]);
+
+		bytes = sizeof(BoneData) * boneData.size();
+		memcpy(boneData.data(), cursor, bytes);
+		cursor += bytes;
+
+		for (int i = 0; i < boneData.size(); ++i)
+		{
+			Bone *bone = new Bone(boneData[i].positions, boneData[i].rotations, boneData[i].scales, boneData[i].id, boneData[i].name);
+			boneVector[i] = bone;
+		}
+	}*/
+
+	/*RELEASE_ARRAY(buffer);*/
+}
+
 void AnimationImporter::ImportAnimations(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids)
 {
 	for (unsigned int i = 0; i < scene->mNumAnimations; i++)

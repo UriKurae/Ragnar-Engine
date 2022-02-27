@@ -10,8 +10,23 @@
 
 class JsonParsing;
 
+struct BoneData {
+	std::vector<KeyPosition> positions;
+	std::vector<KeyScale> scales;
+	std::vector<KeyRotation> rotations;
+
+	std::string name;
+	int id;
+};
+
 namespace AnimationImporter
 {
+	void ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids);
+	void ImportAnimation2(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids);
+	void SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData);
+	void LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*> &boneVector);
+
+
 	void ImportAnimations(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids);
 	void ImportAnimation(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids);
 	void CreateMetaAnimation(std::string& library, std::string& assets, uint uid);
@@ -24,3 +39,5 @@ namespace AnimationImporter
 	void CreateMetaBones(std::string& library, std::string& assets, uint uid);
 	void SaveBone(std::string& name, unsigned int numWeights, float* pos, float* rot, float* scale, std::vector<Weight>& weights);
 }
+
+

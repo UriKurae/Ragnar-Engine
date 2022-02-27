@@ -4,6 +4,7 @@
 #include "AnimationImporter.h"
 #include "Application.h"
 #include "FileSystem.h"
+#include "Bone.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -27,7 +28,7 @@ void Animation::Load()
 {
 	if (id == 0)
 	{
-		AnimationImporter::LoadAnimation(libraryPath.c_str(), ticks, ticksPerSecond, numBones, &boneTranformations);
+		AnimationImporter::LoadAnimation2(libraryPath.c_str(), ticks, ticksPerSecond, bones);
 	}
 }
 

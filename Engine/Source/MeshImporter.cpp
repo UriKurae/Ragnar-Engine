@@ -206,9 +206,7 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 {
 	unsigned int ranges[3] = { vertices.size(), indices.size(), bones.size() };
 
-	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(std::map<std::string, BoneInfo>) * bones.size();
-
-	char* fileBuffer = new char[size];
+	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(unsigned int) * bones.size() + sizeof(std::string) * bones.size() + sizeof(float3) * 2 * bones.size() + sizeof(Quat) * bones.size();	char* fileBuffer = new char[size];
 	char* cursor = fileBuffer;
 
 	unsigned int bytes = sizeof(ranges);
@@ -239,9 +237,7 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 		cursor += bytes;
 
 		// WARNING: If you uncomment this, it crashes
-		//char* buf = nullptr;
-		//buf = new char[sizeof(info)];
-		//SerializeBoneData(info, &buf);
+		SerializeBoneData(info, &cursor);
 
 		//bytes = sizeof(info);
 		//memcpy(cursor, &buf, bytes);
@@ -336,13 +332,30 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 			memcpy(name.data(), cursor, bytes);
 			cursor += bytes;
 
-			//bytes = sizeof(BoneInfo);
-			//memcpy(&info, cursor, bytes);
-			//cursor += bytes;
+			bytes = sizeof(int);
+			memcpy(&info.id, cursor, bytes);
+			cursor += bytes;
 
-			//bones[name] = info;
+			float3 position;
+			Quat rotation;
+			float3 scale;
+
+			bytes = sizeof(float3);
+			memcpy(&position, cursor, bytes);
+			cursor += bytes;
+
+			bytes = sizeof(Quat);
+			memcpy(&rotation, cursor, bytes);
+			cursor += bytes;
+
+			bytes = sizeof(float3);
+			memcpy(&scale, cursor, bytes);
+			cursor += bytes;
+
+			info.offset = info.offset.FromTRS(position, rotation, scale);
+
+			bones[name] = info;
 		}
-
 		RELEASE_ARRAY(buffer);
 	}
 	else
@@ -430,17 +443,24 @@ void MeshImporter::SetBoneData(Vertex& vertex, int boneID, float weight)
 
 void MeshImporter::SerializeBoneData(BoneInfo& info, char** buffer)
 {
-	char* cursor = *buffer;
-
 	unsigned int bytes = sizeof(info.id);
-	memcpy(cursor, &info.id, bytes);
-	cursor += bytes;
+	memcpy(*buffer, &info.id, bytes);
+	*buffer += bytes;
 
-	for (int i = 0; i < 16; ++i)
-	{
-		float* ptr = info.offset.ptr();
-		bytes = sizeof(&ptr);
-		memcpy(cursor, &ptr, bytes);
-		cursor += bytes;
-	}
+	float3 position;
+	Quat rotation;
+	float3 scale;
+	info.offset.Decompose(position, rotation, scale);
+
+	bytes = sizeof(float3);
+	memcpy(*buffer, &position, bytes);
+	*buffer += bytes;
+
+	bytes = sizeof(Quat);
+	memcpy(*buffer, &rotation, bytes);
+	*buffer += bytes;
+
+	bytes = sizeof(float3);
+	memcpy(*buffer, &scale, bytes);
+	*buffer += bytes;
 }
