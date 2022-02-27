@@ -13,6 +13,9 @@
 #include "glew/include/GL/glew.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
+#include "Algorithm/Random/LCG.h"
+
+#include "C_RigidBody.h"
 
 #include "Profiling.h"
 
@@ -124,6 +127,11 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Audio Reverb Zone Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Rigid Body"))
+		{
+			CreateComponent(ComponentType::RIGID_BODY);
 			newComponent = false;
 		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -252,6 +260,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::RIGID_BODY:
+		component = new RigidBodyComponent(this);
+		break;
 	case ComponentType::MATERIAL:
 	{
 		MeshComponent* m = GetComponent<MeshComponent>();
@@ -315,8 +326,22 @@ void GameObject::RemoveComponent(Component* component)
 	}
 }
 
+void GameObject::MoveComponent(Component* component, int position)
+{
+	//TODO: Add to each component the reorganitation structure where the delete button is
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if (*it == component && (it - position) > components.begin() && (it - position) < components.end())
+		{
+			std::swap(*it, *(it - position));
+			break;
+		}
+	}
+}
+
 void GameObject::CopyComponent(Component* component)
 {
+	//TODO: Copy every single type of Components
 	Component* c = nullptr;
 	switch (component->type)
 	{

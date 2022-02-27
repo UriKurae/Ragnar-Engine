@@ -26,6 +26,7 @@
 #include "Imgui/ImguiStyle.h"
 
 #include "IL/ilut.h"
+#include "Geometry/LineSegment.h"
 
 #include "Profiling.h"
 
@@ -34,7 +35,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	name = "Renderer";
 	context = NULL;
 	fbo = nullptr;
-	grid = nullptr;
 
 	depthTest = true;
 	cullFace = true;
@@ -192,7 +192,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo->Unbind();
 	
 
-	grid = new PGrid(200, 200);
+	grid.SetPos(0, 0, 0);
+	grid.constant = 0;
+	grid.axis = true;
 
 	//defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
 	//shaders.push_back(defaultShader);
@@ -217,6 +219,18 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Editor Camera FBO
+	fbo->Bind();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -225,15 +239,7 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	// Editor Camera FBO
-	fbo->Bind();
-	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
-
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
-	
-	grid->Draw();
+	grid.Render();
 	std::set<GameObject*> objects;
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
@@ -295,7 +301,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
-	grid->Draw();
+	grid.Render();
 
 	//glPopMatrix();
 	//glPopMatrix();
@@ -321,7 +327,6 @@ bool ModuleRenderer3D::CleanUp()
 {
 	DEBUG_LOG("Destroying 3D Renderer");
 
-	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
 	//RELEASE(defaultShader);

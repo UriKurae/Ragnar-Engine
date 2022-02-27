@@ -4,8 +4,9 @@
 #include "Lights.h"
 
 #include <vector>
-#include "Primitive.h"
+#include "Shapes.h"
 #include "glmath.h"
+
 #include "SDL.h"
 
 #define MAX_LIGHTS 8
@@ -80,7 +81,7 @@ private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 
 public:
-	PGrid* grid;
+	PPlane grid;
 
 	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

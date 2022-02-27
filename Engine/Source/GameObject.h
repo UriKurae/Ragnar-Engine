@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Component.h"
+#include "Geometry/OBB.h"
 
 
 #include "TransformComponent.h"
@@ -12,8 +13,6 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
-
-#include "MathGeoLib/src/MathGeoLib.h"
 
 typedef unsigned int uint;
 
@@ -38,6 +37,7 @@ public:
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
+	void MoveComponent(Component* component, int position);
 
 	void CopyComponent(Component* component);
 	

@@ -8,7 +8,7 @@
 #include "ModelImporter.h"
 #include "ShaderImporter.h"
 
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+#include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 #include "Texture.h"
 #include "Mesh.h"

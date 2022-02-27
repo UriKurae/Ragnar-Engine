@@ -49,6 +49,12 @@
 !Dependencies/Wwise/lib/Release/AkStreamMgr.lib
 !Dependencies/Wwise/lib/Release/AkSpatialAudio.lib
 !Dependencies/Wwise/lib/Release/AkRoomVerbFX.lib
+!Dependencies/Bullet/libx86/BulletCollision.lib
+!Dependencies/Bullet/libx86/BulletCollision_debug.lib
+!Dependencies/Bullet/libx86/BulletDynamics.lib
+!Dependencies/Bullet/libx86/BulletDynamics_debug.lib
+!Dependencies/Bullet/libx86/LinearMath.lib
+!Dependencies/Bullet/libx86/LinearMath_debug.lib
 
 
 # Executables

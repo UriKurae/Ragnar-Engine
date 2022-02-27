@@ -10,6 +10,7 @@
 #include "FileSystem.h"
 #include "Resource.h"
 #include "ResourceManager.h"
+#include "Physics3D.h"
 
 #include "AudioManager.h"
 
@@ -376,6 +377,8 @@ bool ModuleScene::LoadScene(const char* name)
 				}
 			}
 		}
+
+		app->physics->LoadConstraints();
 	}
 	else
 	{

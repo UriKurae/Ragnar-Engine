@@ -23,6 +23,7 @@
 #include "LightComponent.h"
 
 #include "ModuleCamera3D.h"
+#include "Physics3D.h"
 
 
 #include "Dialogs.h"
@@ -34,6 +35,8 @@
 #include <fstream>
 
 #include "Profiling.h"
+
+#include "Math/float3x3.h"
 
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {
@@ -416,7 +419,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			app->scene->Play();
 			AudioManager::Get()->PlayAllAudioSources();
-			ImGui::StyleColorsClassic();
+			//ImGui::StyleColorsClassic();
+			app->physics->ActiveAllBodies();
 		}
 
 		ImGui::SameLine();
@@ -432,7 +436,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			AudioManager::Get()->StopAllAudioSources();
 			app->scene->Stop();
-			SetStyle(6);
+			app->physics->SleepAllBodies();
+			//SetStyle(6);
 		}
 		ImGui::SameLine();
 
@@ -442,12 +447,14 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->scene->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
+				app->physics->ActiveAllBodies();
 			}
 		}
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
 			app->scene->Pause();
+			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();

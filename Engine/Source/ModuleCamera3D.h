@@ -2,8 +2,8 @@
 
 #include "Module.h"
 
-#include "MathGeoLib/src/Geometry/Frustum.h"
-#include "MathGeoLib/src/Geometry/Line.h"
+#include "MathGeoLib/include/Geometry/Frustum.h"
+#include "MathGeoLib/include/Geometry/Line.h"
 
 class VertexBuffer;
 class IndexBuffer;

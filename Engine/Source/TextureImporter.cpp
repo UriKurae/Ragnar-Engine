@@ -11,7 +11,7 @@
 #include "IL/ilu.h"
 #include "ResourceManager.h"
 #include "glew/include/GL/glew.h"
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+#include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 #include "Profiling.h"
 

@@ -14,6 +14,7 @@
 #include "glew/include/GL/glew.h"
 
 #include "IconsFontAwesome5.h"
+#include "Geometry/Sphere.h"
 
 #include "Profiling.h"
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "MathGeoLib/src/MathGeoLib.h"
+#include "Math/float4x4.h"
 
 enum class Operation
 {

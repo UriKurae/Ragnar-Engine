@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Framebuffer.h"
-#include "MathGeoLib/src/Math/float2.h"
-#include "MathGeoLib/src/Math/float4.h"
+#include "MathGeoLib/include/Math/float2.h"
+#include "MathGeoLib/include/Math/float4.h"
 
 
 class Viewport

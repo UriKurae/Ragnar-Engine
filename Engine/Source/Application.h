@@ -15,6 +15,7 @@ class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
 class FileSystem;
+class Physics3D;
 
 #define CONFIG_FILENAME	"config.json"
 #define APPLICATION_NAME "Ragnar Engine"
@@ -55,6 +56,7 @@ private:
 
 public:
 	ModuleWindow* window;
+	Physics3D* physics;
 	ModuleInput* input;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
