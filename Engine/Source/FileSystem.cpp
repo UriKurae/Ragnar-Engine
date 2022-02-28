@@ -303,7 +303,7 @@ void FileSystem::ImportFromOutside(std::string& source, std::string& destination
 	}
 }
 
-ResourceType FileSystem::CheckExtension(std::string& path)
+ResourceType FileSystem::CheckExtension(const std::string& path)
 {
 	std::string extension = path.substr(path.find_last_of(".", path.length()));
 	std::list<std::string>::iterator s;

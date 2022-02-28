@@ -175,13 +175,10 @@ bool ContentBrowserMenu::Update(float dt)
 			currentFile = (*it);
 			if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_::ImGuiMouseButton_Left))
 			{
-				for (std::vector<std::string>::iterator ite = files2.begin(); ite != files2.end(); ++ite)
+				ResourceType type = app->fs->CheckExtension(*it);
+				if (type == ResourceType::SCRIPT)
 				{
-					ResourceType type = app->fs->CheckExtension(*ite);
-					if (type == ResourceType::SCRIPT)
-					{
-						ShellExecute(0, 0, "Assembly-CSharp.sln", 0, 0, SW_SHOW);
-					}
+					ShellExecute(0, 0, "Assembly-CSharp.sln", 0, 0, SW_SHOW);
 				}
 			}
 		}

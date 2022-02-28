@@ -38,7 +38,7 @@ public:
 	void ImportFiles(std::string& path);
 	void LoadFiles();
 	void ImportFromOutside(std::string& source, std::string& destination);
-	ResourceType CheckExtension(std::string& path);
+	ResourceType CheckExtension(const std::string& path);
 
 	void DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
 	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList);
