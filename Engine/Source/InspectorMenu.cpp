@@ -224,8 +224,8 @@ void InspectorMenu::DrawListTagLayer(const char* label, std::vector<std::string>
 		ImGui::SameLine();
 		ImGui::Text(list.at(i).c_str());
 		ImGui::SameLine();
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - 15.0f);
-		ImGui::PushID(i);
+		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - 15.0f);		
+		(strcmp(label, "Layer") == 0)? ImGui::PushID(i) : ImGui::PushID(i+30); // 30 must be more than tagList.size
 		if (ImGui::Button(ICON_FA_TRASH))
 		{
 			for (std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it)
