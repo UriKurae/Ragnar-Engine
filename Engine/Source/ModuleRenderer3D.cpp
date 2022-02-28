@@ -244,23 +244,6 @@ bool ModuleRenderer3D::PostUpdate()
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilMask(0xFF);
-		
-	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
-	{
-		glColor3f(0.25f, 0.87f, 0.81f);
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilMask(0x00);
-		glDisable(GL_DEPTH_TEST);
-		app->editor->GetGO()->DrawOutline();
-
-		glStencilMask(0xFF);
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		if (depthTest) glEnable(GL_DEPTH_TEST);
-		glColor3f(1.0f, 1.0f, 1.0f);
-	}
-
 	if (rayCast)
 	{
 		math::LineSegment line = app->camera->rayCastToDraw.ToLineSegment(50.0f);
@@ -278,17 +261,36 @@ bool ModuleRenderer3D::PostUpdate()
 	//glPopMatrix();
 	//glPopMatrix();
 	//PushCamera(float4x4::identity, float4x4::identity);
-	
+	GameObject* objSelected = app->editor->GetGO();
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			(*it)->Draw(nullptr);
+			if ((*it) != objSelected)(*it)->Draw(nullptr);
 		}
+		//if (objSelected) objSelected->Draw(nullptr);
 	}
 	else
 	{
 		app->scene->Draw();
+	}
+
+	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	glStencilMask(0xFF);
+
+	if (stencil && objSelected && objSelected->GetActive())
+	{
+		glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		objSelected->DrawOutline();
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		objSelected->Draw(nullptr);
 	}
 
 	fbo->Unbind();

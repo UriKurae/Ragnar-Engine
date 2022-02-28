@@ -86,8 +86,6 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	}
 	ImGui::NewLine();
 
-
-
 	/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 	//OPTIONAL TODO: Drag'n'Drop for component reorganitation. Code example below.
