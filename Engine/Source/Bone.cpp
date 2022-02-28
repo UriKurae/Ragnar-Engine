@@ -74,12 +74,3 @@ void Bone2::Load()
 
 	RELEASE_ARRAY(buffer);
 }
-
-Bone::Bone(std::vector<KeyPosition> bonePositions, std::vector<KeyRotation> boneRotations, std::vector<KeyScale> boneScales, int boneId, std::string boneName)
-{
-	positions = bonePositions;
-	rotations = boneRotations;
-	scales = boneScales;
-	id = boneId;
-	name = boneName;
-}

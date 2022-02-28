@@ -10,15 +10,6 @@
 
 class JsonParsing;
 
-struct BoneData {
-	std::vector<KeyPosition> positions;
-	std::vector<KeyScale> scales;
-	std::vector<KeyRotation> rotations;
-
-	std::string name;
-	int id;
-};
-
 namespace AnimationImporter
 {
 	void ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids);

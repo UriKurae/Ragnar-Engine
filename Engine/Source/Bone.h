@@ -27,23 +27,30 @@ struct KeyScale
 	float timeStamp;
 };
 
+struct BoneData 
+{
+	std::vector<KeyPosition> positions;
+	std::vector<KeyScale> scales;
+	std::vector<KeyRotation> rotations;
+
+	std::string name;
+	int id;
+};
+
 class Bone
 {
 public:
 	Bone(){}
-	Bone(std::vector<KeyPosition> bonePositions, std::vector<KeyRotation> boneRotations, std::vector<KeyScale> boneScales, int boneId, std::string boneName);
 
+	BoneData& GetData() { return data; }
 private:
-	std::vector<KeyPosition> positions;
-	std::vector<KeyRotation> rotations;
-	std::vector<KeyScale> scales;
+	BoneData data;
+
 	int numPositions;
 	int numRotations;
 	int numScalings;
 
 	math::float4x4 localTransform;
-	std::string name;
-	int id;
 };
 
 

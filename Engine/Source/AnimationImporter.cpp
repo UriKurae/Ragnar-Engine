@@ -121,7 +121,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector)
 {
 	// WARNING: Uncommenting this causes to crash
-	/*char* buffer = nullptr;
+	char* buffer = nullptr;
 	app->fs->Load(path, &buffer);
 	char* cursor = buffer;
 
@@ -134,23 +134,21 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	ticksPerSecond = ranges[1];
 	boneVector.resize(ranges[2]);
 
-	std::vector<BoneData> boneData;
 	if (boneVector.size() > 0)
 	{
-		boneData.resize(ranges[2]);
-
-		bytes = sizeof(BoneData) * boneData.size();
-		memcpy(boneData.data(), cursor, bytes);
-		cursor += bytes;
-
-		for (int i = 0; i < boneData.size(); ++i)
+		for (int i = 0; i < ranges[2]; ++i)
 		{
-			Bone *bone = new Bone(boneData[i].positions, boneData[i].rotations, boneData[i].scales, boneData[i].id, boneData[i].name);
+			Bone *bone = new Bone();
+
+			bytes = sizeof(BoneData);
+			memcpy(&bone->GetData(), cursor, bytes);
+			cursor += bytes;
+
 			boneVector[i] = bone;
 		}
-	}*/
+	}
 
-	/*RELEASE_ARRAY(buffer);*/
+	RELEASE_ARRAY(buffer);
 }
 
 void AnimationImporter::ImportAnimations(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids)
