@@ -36,9 +36,9 @@ Application::Application()
 	AddModule(input);
 	
 	// Scenes
+	AddModule(userInterface);
 	AddModule(scene);
 	AddModule(editor);
-	AddModule(userInterface);
 	AddModule(renderer3D);
 
 	loadRequested = false;

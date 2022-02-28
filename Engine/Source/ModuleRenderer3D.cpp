@@ -190,12 +190,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
-	return true;
-}
-
-// PostUpdate present buffer to screen
-bool ModuleRenderer3D::PostUpdate()
-{
 	RG_PROFILING_FUNCTION("Rendering");
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -203,12 +197,19 @@ bool ModuleRenderer3D::PostUpdate()
 
 	fbo->Bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 
+	return true;
+}
+
+// PostUpdate present buffer to screen
+bool ModuleRenderer3D::PostUpdate()
+{
+	
 	grid->Draw();
 	std::set<GameObject*> objects;
 	// TODO: wtf quadtree man.

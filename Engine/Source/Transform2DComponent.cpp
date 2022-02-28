@@ -27,6 +27,7 @@ ComponentTransform2D::ComponentTransform2D(GameObject* theObject, float3 pos, fl
 	transMatrix = aux.FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
+	matrix= transMatrix.ptr();
 	own = Own;
 	
 

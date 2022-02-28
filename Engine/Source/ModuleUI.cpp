@@ -118,7 +118,7 @@ void MyPlane::DrawPlane2D() {
 	//Draw
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0);
 
-	
+	glPopMatrix();
 
 	//UnBind Buffers
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -130,7 +130,7 @@ void MyPlane::DrawPlane2D() {
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPopMatrix();
+	
 }
 Shader::Shader()
 {
@@ -585,53 +585,36 @@ bool ModuleUI::Update(float dt)
 
 bool ModuleUI::PostUpdate()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_DEPTH_TEST);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glDisable(GL_DEPTH_TEST);
 
-	glPushMatrix();
-	
-	CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
-	//App->viewportBuffer->Bind(App->camera->GameCam);
-	
-	app->renderer3D->mainCameraFbo->Bind();
-	Frustum frustum;
-	
-	//frustum.pos = camera->camera.pos;
-	//frustum.front = camera->camera.front; //COGED EL FRONT DE LA CAMARA DE JUEGO
-	//frustum.up = camera->camera.up; //COGED EL UP DE LA CAMARA DE JUEGO
-	
-	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-	frustum.SetViewPlaneDistances(0.1, 1000.f);
-	
-
-	float verticalFov = 2 * Atan((Tan(DegToRad(90.0f) / 2)) * (camera->currentScreenHeight / camera->currentScreenWidth));
-	frustum.SetVerticalFovAndAspectRatio(verticalFov, (camera->currentScreenWidth / camera->currentScreenHeight));
-
-	frustum.SetOrthographic(camera->currentScreenWidth, camera->currentScreenHeight);
-	//frustum.SetPerspective(DegToRad(90.0f), 0.0f);
-	frustum.SetFrame(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
-
-	/////////////////////////////////////////////////////
-
+	//glPushMatrix();
+	//
+	//CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+	////App->viewportBuffer->Bind(App->camera->GameCam);
+	//
+	//app->renderer3D->mainCameraFbo->Bind();
+	//Frustum frustum;
+	//
+	////frustum.pos = camera->camera.pos;
+	////frustum.front = camera->camera.front; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	////frustum.up = camera->camera.up; //COGED EL UP DE LA CAMARA DE JUEGO
+	//
 	//frustum.pos = float3::zero;
 	//frustum.front = float3::unitZ; //COGED EL FRONT DE LA CAMARA DE JUEGO
-	//frustum.up = float3::unitY;
-	frustum.type = OrthographicFrustum;
-	//
+	//frustum.up = float3::unitY; //COGED EL UP DE LA CAMARA DE JUEGO
+	//frustum.type = OrthographicFrustum;
 	//frustum.orthographicHeight = camera->currentScreenHeight; //PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	//frustum.orthographicWidth = camera->currentScreenWidth; //PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	//frustum.nearPlaneDistance = 0.1;
 	//frustum.farPlaneDistance = 1000.f;
-
-	math::float4x4 h=frustum.ComputeProjectionMatrix();
-	math::float4x4 v=frustum.ComputeViewMatrix();
-	
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(h.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(v.Transposed().ptr());
+	//
+	//
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+	//glMatrixMode(GL_MODELVIEW);
+	//
 	//glLoadIdentity();
 
 	
@@ -760,11 +743,39 @@ bool ModuleUI::PostUpdate()
 		}
 	}
 	
-	glEnable(GL_DEPTH_TEST);
-	glPopMatrix();
-	app->renderer3D->mainCameraFbo->Unbind();
+	/*glEnable(GL_DEPTH_TEST);
+	glPopMatrix();*/
+	//app->renderer3D->mainCameraFbo->Unbind();
 	
 	//App->viewportBuffer->UnBind();
+	// 
+	// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+
+
+	//for (int i = 0; i < UIGameObjects.size(); i++)
+	//{
+	//		GameObject* go = UIGameObjects[i];
+	//		ButtonComponent* aux = nullptr;
+
+	//		aux = go->GetComponent<ButtonComponent>();
+	//		/*aux1 = go->GetComponent<CanvasComponent>();
+	//		aux2 = go->GetComponent<CheckboxComponent>();
+	//		aux3 = go->GetComponent<ImageComponent>();
+	//		aux4 = go->GetComponent<InputBoxComponent>();
+	//		aux5 = go->GetComponent<SliderComponent>();*/
+
+	//		if (aux != nullptr)
+	//		{
+	//			aux->Draw();
+	//			RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+
+	//			aux = nullptr;
+	//		}
+	//}
+
+	
 
 	return true;
 }
