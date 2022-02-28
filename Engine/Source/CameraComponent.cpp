@@ -69,8 +69,6 @@ void CameraComponent::OnEditor()
 
 		ImGui::Text("- - - - - - - - -");
 
-		ImGui::PushID("camMovement");//xd¿
-
 		if (ImGui::Checkbox("freeMovement", &freeMovement)) {}
 
 		if (ImGui::Checkbox("followTarget", &followTarget)) {}
@@ -86,7 +84,7 @@ void CameraComponent::OnEditor()
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
 
-		ImGui::PopID();
+
 	}
 	ImGui::PopID();
 }
