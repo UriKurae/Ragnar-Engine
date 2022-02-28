@@ -72,7 +72,16 @@ void CameraComponent::OnEditor()
 		if (ImGui::Checkbox("freeMovement", &freeMovement)) {}
 
 		if (ImGui::Checkbox("followTarget", &followTarget)) {}
-		//ImGui::SameLine(); select game object
+		ImGui::SameLine();
+		ImGui::Button(target != nullptr ? target->name.c_str() : "none");
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItemGameObject"))
+			{
+				target = (GameObject*)(go->Data);
+			}
+			ImGui::EndDragDropTarget();
+		}
 
 		if (ImGui::Checkbox("multifocusOnClick", &multifocusOnClick)) {}
 		//ImGui::SameLine(); select game object
@@ -84,7 +93,7 @@ void CameraComponent::OnEditor()
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
 
-
+		
 	}
 	ImGui::PopID();
 }
