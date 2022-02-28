@@ -20,6 +20,8 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	camera.SetPerspective(horizontalFov, verticalFov);
 	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 
+
+
 	CompileBuffers();
 }
 
@@ -59,6 +61,32 @@ void CameraComponent::OnEditor()
 		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
 		ImGui::PopID();
 
+		ImGui::PushID("farPlane");
+		ImGui::Text("Far");
+		ImGui::SameLine();
+		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
+		ImGui::PopID();
+
+		ImGui::Text("- - - - - - - - -");
+
+		ImGui::PushID("camMovement");//xd¿
+
+		if (ImGui::Checkbox("freeMovement", &freeMovement)) {}
+
+		if (ImGui::Checkbox("followTarget", &followTarget)) {}
+		//ImGui::SameLine(); select game object
+
+		if (ImGui::Checkbox("multifocusOnClick", &multifocusOnClick)) {}
+		//ImGui::SameLine(); select game object
+
+		ImGui::Text("s_lerp");
+		//ImGui::SameLine(); select mode none/lerp/slerp
+
+		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.5f, 0.0f/*, 90.0f*/)) {}
+
+		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
+
+		ImGui::PopID();
 	}
 	ImGui::PopID();
 }

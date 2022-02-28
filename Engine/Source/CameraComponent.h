@@ -48,4 +48,24 @@ private:
 
 	IndexBuffer* ebo;
 	VertexBuffer* vbo;
+
+	//----------------------------------------------
+	bool freeMovement = false;
+	bool followTarget = false;
+	GameObject*/*transform*/ target = nullptr;
+	int s_lerp = 0;
+	float verticalAngle = 0;
+	bool rotateAround = false;
+	bool multifocusOnClick = false;
+	GameObject*/*transform*/secondTarget = nullptr;
+public:
+	void shake(float strength, float duration);
+	void setTransition(std::vector<float> durations, std::vector<float3> positions);
+private:
+	float shakeStrength = 0;
+	float shakeDuration = 0;
+	std::vector<float> transitionDurations;
+	std::vector<float3> transitionPositions;
+	//----------------------------------------------
+
 };
