@@ -142,6 +142,7 @@ void MaterialComponent::OnEditor()
 
 		ShowUniforms();
 
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 
@@ -204,10 +205,6 @@ void MaterialComponent::OnEditor()
 				}
 			}
 		}
-
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
 
 		ImGui::End();
 	}

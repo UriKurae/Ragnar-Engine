@@ -154,10 +154,7 @@ void MeshComponent::OnEditor()
 		ImGui::SameLine();		
 		ImGui::Checkbox("Show OBB", &showOBB);
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 
@@ -190,6 +187,8 @@ void MeshComponent::OnEditor()
 				}
 			}
 		}
+		ComponentOptions(this);
+		ImGui::Separator();
 
 		ImGui::End();
 	}

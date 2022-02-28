@@ -345,6 +345,7 @@
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
+    <ClCompile Include="Engine\Source\Component.cpp" />
     <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />

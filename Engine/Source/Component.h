@@ -2,6 +2,7 @@
 
 #include "Imgui/imgui.h"
 #include "JsonParsing.h"
+#include "IconsFontAwesome5.h"
 
 class GameObject;
 class CameraComponent;
@@ -44,6 +45,9 @@ public:
 
 		ImGui::PopID();
 	}
+
+	void ComponentOptions(Component* component);
+	
 
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }
