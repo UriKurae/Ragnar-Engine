@@ -99,7 +99,7 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 	}
 }
 
-void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& path, std::vector<uint>& uids)
+void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& path, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones)
 {
 	RG_PROFILING_FUNCTION("Importing mesh");
 
@@ -163,7 +163,6 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 	}
 
-	std::map<std::string, BoneInfo> bones;
 	ExtractBonesAndWeights(vertices, mesh, scene, bones);
 
 	//for (unsigned int i = 0; i < numBones; i++)

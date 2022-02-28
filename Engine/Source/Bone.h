@@ -42,7 +42,21 @@ class Bone
 public:
 	Bone(){}
 
+	void Update(float animationTime);
+
 	BoneData& GetData() { return data; }
+
+private:
+	float4x4 InterpolatePosition(float animationTime);
+	float4x4 InterpolateRotation(float animationTime);
+	float4x4 InterpolateScaling(float animationTime);
+
+	int GetPositionIndex(float animationTime);
+	int GetRotationIndex(float animationTime);
+	int GetScalingIndex(float animationTime);
+
+	float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime);
+
 private:
 	BoneData data;
 

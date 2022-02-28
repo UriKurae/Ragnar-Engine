@@ -10,24 +10,37 @@
 
 #include "Profiling.h"
 
-void AnimationImporter::ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids)
+void AnimationImporter::ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones)
 {
 	for (unsigned int i = 0; i < scene->mNumAnimations; i++)
 	{
-		ImportAnimation2(path, scene->mAnimations[i], json, uids);
+		ImportAnimation2(path, scene->mAnimations[i], json, uids, bones);
 	}
 }
 
-void AnimationImporter::ImportAnimation2(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids)
+void AnimationImporter::ImportAnimation2(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bonesID)
 {
 	int duration = animation->mDuration;
 	int ticksPerSecond = animation->mTicksPerSecond;
 	std::vector<BoneData> bones;
 
+	int boneCount = 0;
 	for (int i = 0; i < animation->mNumChannels; ++i)
 	{
 		BoneData bone;
-		bone.name = animation->mName.C_Str();
+
+		std::string boneName = animation->mChannels[i]->mNodeName.data;
+		bone.name = boneName;
+
+		if (bonesID.find(boneName) == bonesID.end())
+		{
+			bone.id = boneCount;
+			boneCount++;
+		}
+		else
+		{
+			bone.id = bonesID[boneName].id;
+		}
 
 		// Save Key positions
 		int boneKeys = animation->mChannels[i]->mNumPositionKeys;

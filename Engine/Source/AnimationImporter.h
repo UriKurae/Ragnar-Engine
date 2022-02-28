@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 
 #include "assimp/anim.h"
 #include "assimp/mesh.h"
@@ -12,8 +13,8 @@ class JsonParsing;
 
 namespace AnimationImporter
 {
-	void ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids);
-	void ImportAnimation2(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids);
+	void ImportAnimations2(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones);
+	void ImportAnimation2(std::string& path, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones);
 	void SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData);
 	void LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*> &boneVector);
 

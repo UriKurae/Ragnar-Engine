@@ -74,3 +74,78 @@ void Bone2::Load()
 
 	RELEASE_ARRAY(buffer);
 }
+
+void Bone::Update(float animationTime)
+{
+	float4x4 translation = InterpolatePosition(animationTime);
+	float4x4 rotation = InterpolateRotation(animationTime);
+	float4x4 scale = InterpolateScaling(animationTime);
+	localTransform = translation * rotation * scale;
+}
+
+float4x4 Bone::InterpolatePosition(float animationTime)
+{
+	if (data.positions.size() == 1)
+		return float4x4::Translate(data.positions[0].position);
+
+	int p0Index = GetPositionIndex(animationTime);
+	int p1Index = p0Index + 1;
+	float scaleFactor = GetScaleFactor(data.positions[p0Index].timeStamp,
+		data.positions[p1Index].timeStamp, animationTime);
+	float3 finalPosition = /*glm::mix(data.positions[p0Index].position,
+		data.positions[p1Index].position, scaleFactor);*/{ 0, 0, 0 };
+	
+	return float4x4::Translate(finalPosition);
+}
+
+float4x4 Bone::InterpolateRotation(float animationTime)
+{
+	return float4x4();
+}
+
+float4x4 Bone::InterpolateScaling(float animationTime)
+{
+	return float4x4();
+}
+
+int Bone::GetPositionIndex(float animationTime)
+{
+	for (int index = 0; index < data.positions.size(); ++index)
+	{
+		if (animationTime < data.positions[index + 1].timeStamp)
+			return index;
+	}
+
+	return 0;
+}
+
+int Bone::GetRotationIndex(float animationTime)
+{
+	for (int index = 0; index < data.rotations.size(); ++index)
+	{
+		if (animationTime < data.rotations[index + 1].timeStamp)
+			return index;
+	}
+
+	return 0;
+}
+
+int Bone::GetScalingIndex(float animationTime)
+{
+	for (int index = 0; index < data.scales.size(); ++index)
+	{
+		if (animationTime < data.scales[index + 1].timeStamp)
+			return index;
+	}
+
+	return 0;
+}
+
+float Bone::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
+{
+	float scaleFactor = 0.0f;
+	float midWayLength = animationTime - lastTimeStamp;
+	float framesDiff = nextTimeStamp - lastTimeStamp;
+	scaleFactor = midWayLength / framesDiff;
+	return scaleFactor;
+}

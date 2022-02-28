@@ -93,8 +93,9 @@ void ModelImporter::ImportModel(std::string& path)
 
 		std::shared_ptr<Model> model = std::static_pointer_cast<Model>(ResourceManager::GetInstance()->GetResource(uid));
 		std::vector<uint> uids;
-		ProcessNode(scene->mRootNode, scene, child, array, path, uids);
-		if (scene->HasAnimations())	AnimationImporter::ImportAnimations2(path, scene, json, uids);
+		std::map<std::string, BoneInfo> bones;
+		ProcessNode(scene->mRootNode, scene, child, array, path, uids, bones);
+		if (scene->HasAnimations())	AnimationImporter::ImportAnimations2(path, scene, json, uids, bones);
 
 		model->SetMeshes(uids);
 		SaveModel(p, json);
@@ -135,7 +136,7 @@ void ModelImporter::LoadModel(std::string& path)
 	RELEASE_ARRAY(buffer);
 }
 
-void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path, std::vector<uint>& uids)
+void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing& nodeJ, JSON_Array* json, std::string& path, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones)
 {
 	if (node == scene->mRootNode || node->mNumMeshes > 0)
 	{
@@ -158,7 +159,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		for (unsigned int i = 0; i < node->mNumMeshes; ++i)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			MeshImporter::ImportMesh(mesh, scene, jsonValue, path, uids);
+			MeshImporter::ImportMesh(mesh, scene, jsonValue, path, uids, bones);
 		}
 
 		std::string name = "Childs" + std::string(node->mName.C_Str());
@@ -166,7 +167,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 		// Repeat the process until there's no more children
 		for (unsigned int i = 0; i < node->mNumChildren; ++i)
 		{
-			ProcessNode(node->mChildren[i], scene, jsonValue, array, path, uids);
+			ProcessNode(node->mChildren[i], scene, jsonValue, array, path, uids, bones);
 		}
 		nodeJ.SetValueToArray(json, jsonValue.GetRootValue());
 	}
@@ -174,7 +175,7 @@ void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, JsonParsing&
 	{
 		for (unsigned int i = 0; i < node->mNumChildren; ++i)
 		{
-			ProcessNode(node->mChildren[i], scene, nodeJ, json, path, uids);
+			ProcessNode(node->mChildren[i], scene, nodeJ, json, path, uids, bones);
 		}
 	}
 }
