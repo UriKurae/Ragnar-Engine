@@ -77,75 +77,6 @@ void MaterialComponent::OnEditor()
 {
 	ImGui::PushID(this);
 
-	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
-	{
-		Checkbox(this, "Active", active);
-		if (diff != nullptr)
-		{
-			ImGui::Text("Select texture: ");
-			ImGui::SameLine();
-			if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
-			{
-				showTexMenu = true;
-			}
-			ImGui::Text("Path: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diff->GetAssetsPath().c_str());
-			ImGui::Text("Width: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetWidth());
-			ImGui::Text("Height: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
-			ImGui::Text("Reference Count: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
-			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
-		}
-		else
-		{
-			ImGui::Text("Select texture: ");
-			ImGui::SameLine();
-			if (ImGui::Button("No Texture"))
-			{
-				showTexMenu = true;
-			}
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
-			ImGui::Text("Width: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-			ImGui::Text("Height: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-		}
-
-		
-
-		//ImGui::Separator();
-
-		ImGui::Text("Select shader: ");
-		ImGui::SameLine();
-		if (ImGui::Button(shader->GetName().c_str()))
-		{
-			showShaderMenu = true;
-		}
-
-		ImGui::Text("Reference Count: ");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", shader.use_count());
-
-		ImGui::BulletText("Last time modified: %s", shader->GetLastModifiedDate());
-
-		if (ImGui::Button("Edit Shader", { 100,25 }))	EditorShader();
-
-		ImGui::Separator();
-
-		ShowUniforms();
-
-		ComponentOptions(this);
-		ImGui::Separator();
-	}
-
 	if (showShaderEditor)
 	{
 		ImGui::Begin("Shader Editor", &showShaderEditor, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
@@ -239,7 +170,75 @@ void MaterialComponent::OnEditor()
 		ImGui::End();
 	}
 
+	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
+	{
+		Checkbox(this, "Active", active);
+		if (diff != nullptr)
+		{
+			ImGui::Text("Select texture: ");
+			ImGui::SameLine();
+			if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
+			{
+				showTexMenu = true;
+			}
+			ImGui::Text("Path: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diff->GetAssetsPath().c_str());
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetWidth());
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
+			ImGui::Text("Reference Count: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
+			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
+		}
+		else
+		{
+			ImGui::Text("Select texture: ");
+			ImGui::SameLine();
+			if (ImGui::Button("No Texture"))
+			{
+				showTexMenu = true;
+			}
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+		}
 
+		
+
+		//ImGui::Separator();
+
+		ImGui::Text("Select shader: ");
+		ImGui::SameLine();
+		if (ImGui::Button(shader->GetName().c_str()))
+		{
+			showShaderMenu = true;
+		}
+
+		ImGui::Text("Reference Count: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", shader.use_count());
+
+		ImGui::BulletText("Last time modified: %s", shader->GetLastModifiedDate());
+
+		if (ImGui::Button("Edit Shader", { 100,25 }))	EditorShader();
+
+		ImGui::Separator();
+
+		ShowUniforms();
+
+		ComponentOptions(this);
+		ImGui::Separator();
+	}
+	
 	ImGui::PopID();
 }
 
