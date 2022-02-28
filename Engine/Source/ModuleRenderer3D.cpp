@@ -1,4 +1,4 @@
-#include "Application.h"
+﻿#include "Application.h"
 #include "Globals.h"
 #include "ModuleRenderer3D.h"
 
@@ -269,6 +269,28 @@ bool ModuleRenderer3D::PostUpdate()
 	// Camera Component FBO
 
 	mainCameraFbo->Bind();
+
+
+
+
+	CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+	Frustum frustum;
+	frustum.pos = float3::zero;
+	frustum.front = float3::unitZ; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	frustum.up = float3::unitY; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.type = OrthographicFrustum;
+	frustum.orthographicHeight = camera->currentScreenHeight; //PONER EL TAMA�O DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicWidth = camera->currentScreenWidth; //PONER EL TAMA�O DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.nearPlaneDistance = 0.1;
+	frustum.farPlaneDistance = 1000.f;
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+	
+	
+
+
+
+
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -277,18 +299,15 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
 	grid->Draw();
-	ButtonComponent* aux = nullptr;
+	
 	
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw();
 		
 	}
+
 	
-	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++) 
-	{
-		app->userInterface->UIGameObjects[a]->Draw();
-	}
 	
 	
 
@@ -298,8 +317,41 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadIdentity();
 	glPopMatrix();
 
-	mainCameraFbo->Unbind();
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+	ButtonComponent* aux = nullptr;
+	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
+	{
+		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
+		app->userInterface->UIGameObjects[a]->Draw();
+
+		app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+		
+	}
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glPopMatrix();
+	
+	mainCameraFbo->Unbind();
+	
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+	//glMatrixMode(GL_MODELVIEW);
+
+	//// UI RENDER
+	//
+
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	//glPopMatrix();
+	
 	// Draw both buffers
 	app->editor->Draw(fbo, mainCameraFbo);
 

@@ -80,10 +80,10 @@ public:
 	bool colliders;
 	std::string tag;
 	std::string layer;
-
+	bool isUI;
 private:
 	std::vector<Component*> components;
-
+	
 	GameObject* parent;
 	std::vector<GameObject*> children;
 

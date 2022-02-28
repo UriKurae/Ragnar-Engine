@@ -8,7 +8,7 @@
 #include"ButtonComponent.h"
 #include"CheckBoxComponent.h"
 #include "Profiling.h"
-
+#include"ResourceManager.h"
 HierarchyMenu::HierarchyMenu() : Menu(true)
 {
 	gameObjectOptions = false;
@@ -158,11 +158,17 @@ bool HierarchyMenu::Update(float dt)
 				ButtonComponent* button= (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
 				button->gen = object;
 				MaterialComponent* material=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-				
+
+
+
+				//std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource();
+
+
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->planeToDraw = new MyPlane(float3{0,0,0}, float3{ 1,1,1 });
 				button->planeToDraw->own = object;
+				object->isUI = true;
 			}
 			else if (ImGui::Selectable("Create UI Slider"))
 			{
@@ -178,6 +184,7 @@ bool HierarchyMenu::Update(float dt)
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+				object->isUI = true;
 			}
 			else if (ImGui::Selectable("Create UI Check Box"))
 			{
@@ -189,10 +196,11 @@ bool HierarchyMenu::Update(float dt)
 				CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
 				button->gen = object;
 				MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-
+				
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+				object->isUI = true;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{

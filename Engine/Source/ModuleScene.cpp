@@ -155,7 +155,7 @@ bool ModuleScene::Draw()
 		GameObject* go = stack.top();
 		stack.pop();
 
-		if (go->GetActive())
+		if (go->GetActive()&& !go->isUI)
 		{
 			go->Draw();
 

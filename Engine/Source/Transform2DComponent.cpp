@@ -27,7 +27,7 @@ ComponentTransform2D::ComponentTransform2D(GameObject* theObject, float3 pos, fl
 	transMatrix = aux.FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	matrix= transMatrix.ptr();
+	//matrix= transMatrix.ptr();
 	own = Own;
 	
 
@@ -46,8 +46,8 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	rotationEuler = rot;
 	generalScale = 1.0f;
 
-	buttonWidth = scale.x;
-	buttonHeight = scale.y;
+	buttonWidth = sca.x;
+	buttonHeight = sca.y;
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
 
@@ -55,7 +55,7 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	transMatrix = aux.FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	matrix = transMatrix.ptr();
+	//matrix = transMatrix.ptr();
 	
 	//name = "Transform2D Component";
 
@@ -101,7 +101,7 @@ void ComponentTransform2D::Update(bool releaseMouse)
 	transMatrix = aux.FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	matrix = transMatrix.ptr();
+	//matrix = transMatrix.ptr();
 
 	
 

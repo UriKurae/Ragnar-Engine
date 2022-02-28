@@ -95,9 +95,9 @@ void MyPlane::DrawPlane2D() {
 	// TODO: 2D en lugar de 3D para UI
 	ComponentTransform2D* d=own->GetComponent<ComponentTransform2D>();
 
-	glPushMatrix();
+	/*glPushMatrix();
 	
-	glMultMatrixf(d->matrix);
+	glMultMatrixf(d->matrix);*/
 
 
 	//Buffers
@@ -469,21 +469,21 @@ bool ModuleUI::Update(float dt)
 		}
 	}
 	ButtonComponent* aux = nullptr;
-	/*CanvasComponent* aux1 = nullptr;
+	//CanvasComponent* aux1 = nullptr;
 	CheckboxComponent* aux2 = nullptr;
 	ImageComponent* aux3= nullptr;
-	InputBoxComponent* aux4 = nullptr;
-	SliderComponent*aux5= nullptr;*/
+	//InputBoxComponent* aux4 = nullptr;
+	SliderComponent*aux5= nullptr;
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
 		
 		aux = go->GetComponent<ButtonComponent>();
-		/*aux1 = go->GetComponent<CanvasComponent>();
+		//aux1 = go->GetComponent<CanvasComponent>();
 		aux2 = go->GetComponent<CheckboxComponent>();
 		aux3 = go->GetComponent<ImageComponent>();
-		aux4 = go->GetComponent<InputBoxComponent>();
-		aux5 = go->GetComponent<SliderComponent>();*/
+		//aux4 = go->GetComponent<InputBoxComponent>();
+		aux5 = go->GetComponent<SliderComponent>();
 		if (aux != nullptr) 
 		{
 			textExample = aux->text;
@@ -499,7 +499,7 @@ bool ModuleUI::Update(float dt)
 			color.y = aux1->color.g;
 			color.z = aux1->color.b;
 			aux1 = nullptr;
-		}
+		}*/
 		else if (aux2 != nullptr)
 		{
 			textExample = aux2->text;
@@ -516,14 +516,14 @@ bool ModuleUI::Update(float dt)
 			color.z = aux3->color.b;
 			aux3 = nullptr;
 		}
-		else if (aux4 != nullptr)
+		/*else if (aux4 != nullptr)
 		{
 			textExample = aux4->text;
 			color.x = aux4->textColor.r;
 			color.y = aux4->textColor.g;
 			color.z = aux4->textColor.b;
 			aux4 = nullptr;
-		}
+		}*/
 		else if (aux5 != nullptr)
 		{
 			textExample = aux5->text;
@@ -531,50 +531,8 @@ bool ModuleUI::Update(float dt)
 			color.y = aux5->textColor.g;
 			color.z = aux5->textColor.b;
 			aux5 = nullptr;
-		}*/
-		/*if (button != -1)
-		{
-			go->components[button]->Update();
-			ButtonComponent* auxiliar = go->GetButtonComponent(go);
-			textExample = auxiliar->text;
-			color.x = auxiliar->textColor.r;
-			color.y = auxiliar->textColor.g;
-			color.z = auxiliar->textColor.b;
 		}
-		if (checkbox != -1)
-		{
-			go->components[checkbox]->Update();
-			CheckboxComponent* auxiliar = go->GetCheckboxComponent(go);
-			textExample = auxiliar->text;
-			color.x = auxiliar->textColor.r;
-			color.y = auxiliar->textColor.g;
-			color.z = auxiliar->textColor.b;
-		}
-		if (image != -1)
-			go->components[image]->Update();
-		if (inputbox != -1)
-		{
-			go->components[inputbox]->Update();
-			InputBoxComponent* auxiliar = go->GetInputboxComponent(go);
-			textExample = auxiliar->text;
-			color.x = auxiliar->textColor.r;
-			color.y = auxiliar->textColor.g;
-			color.z = auxiliar->textColor.b;
-		}
-
-		if (slider != -1)
-		{
-			go->components[slider]->Update();
-			SliderComponent* auxiliar = go->GetSliderComponent(go);
-			textExample = auxiliar->text;
-			color.x = auxiliar->textColor.r;
-			color.y = auxiliar->textColor.g;
-			color.z = auxiliar->textColor.b;
-		}
-		if (canvas != -1)
-		{
-			go->components[canvas]->Update();
-		}*/
+		
 	}
 	
 		
@@ -583,202 +541,6 @@ bool ModuleUI::Update(float dt)
 	return true;
 }
 
-bool ModuleUI::PostUpdate()
-{
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glDisable(GL_DEPTH_TEST);
-
-	//glPushMatrix();
-	//
-	//CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
-	////App->viewportBuffer->Bind(App->camera->GameCam);
-	//
-	//app->renderer3D->mainCameraFbo->Bind();
-	//Frustum frustum;
-	//
-	////frustum.pos = camera->camera.pos;
-	////frustum.front = camera->camera.front; //COGED EL FRONT DE LA CAMARA DE JUEGO
-	////frustum.up = camera->camera.up; //COGED EL UP DE LA CAMARA DE JUEGO
-	//
-	//frustum.pos = float3::zero;
-	//frustum.front = float3::unitZ; //COGED EL FRONT DE LA CAMARA DE JUEGO
-	//frustum.up = float3::unitY; //COGED EL UP DE LA CAMARA DE JUEGO
-	//frustum.type = OrthographicFrustum;
-	//frustum.orthographicHeight = camera->currentScreenHeight; //PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
-	//frustum.orthographicWidth = camera->currentScreenWidth; //PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
-	//frustum.nearPlaneDistance = 0.1;
-	//frustum.farPlaneDistance = 1000.f;
-	//
-	//
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
-	//glMatrixMode(GL_MODELVIEW);
-	//
-	//glLoadIdentity();
-
-	
-	std::vector<GameObject*> orderedGameObjects;
-	std::vector<uint> orderedIndices;
-
-	for (int i = 0; i < UIGameObjects.size(); i++)
-	{
-		orderedIndices.push_back(i);
-	}
-
-	if (UIGameObjects.size() > 1)
-	{
-		for (int i = 0; i < (UIGameObjects.size() - 1); i++)
-		{
-			for (int j = 0; j < (UIGameObjects.size() - i - 1); j++)
-			{
-				GameObject* go = UIGameObjects[i];
-				TransformComponent* transform2D = go->GetComponent<TransformComponent>();
-
-				float3 position = transform2D->GetPosition();
-
-				GameObject* go1 = UIGameObjects[i+1];
-				TransformComponent* transform2D1 = go1->GetComponent<TransformComponent>();
-
-				float3 position1 = transform2D1->GetPosition();
-				if (position.z <= position1.z)
-				{
-					uint temp = j;
-					orderedIndices[j] = orderedIndices[j + 1];
-					orderedIndices[j + 1] = temp;
-				}
-			}
-		}
-
-		for (int i = 0; i < orderedIndices.size(); i++)
-		{
-			orderedGameObjects.push_back(UIGameObjects[orderedIndices[i]]);
-		}
-		ButtonComponent* aux = nullptr;
-		/*CanvasComponent* aux1 = nullptr;
-		CheckboxComponent* aux2 = nullptr;
-		ImageComponent* aux3 = nullptr;
-		InputBoxComponent* aux4 = nullptr;
-		SliderComponent* aux5 = nullptr;*/
-		for (int i = 0; i < orderedGameObjects.size(); i++)
-		{
-			GameObject* go = orderedGameObjects[i];
-
-			aux = go->GetComponent<ButtonComponent>();
-			/*aux1 = go->GetComponent<CanvasComponent>();
-			aux2 = go->GetComponent<CheckboxComponent>();
-			aux3 = go->GetComponent<ImageComponent>();
-			aux4 = go->GetComponent<InputBoxComponent>();
-			aux5 = go->GetComponent<SliderComponent>();*/
-
-			if (aux != nullptr)
-			{
-				aux->Draw();
-				RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
-				
-				aux = nullptr;
-			}
-			//else if (aux1 != nullptr)
-			//{
-			//	/*aux1->Draw();
-			//	RenderText(aux1->checkboxText.textt, aux1->checkboxText.X, auxiliar->checkboxText.Y, auxiliar->checkboxText.Scale, auxiliar->checkboxText.Color);
-			//	textExample = aux1->text;
-			//	color.x = aux1->color.r;
-			//	color.y = aux1->color.g;
-			//	color.z = aux1->color.b;*/
-			//	aux1 = nullptr;
-			//}
-			//else if (aux2 != nullptr)
-			//{
-			//	aux2->Draw();
-			//	RenderText(aux2->checkboxText.textt, aux2->checkboxText.X, aux2->checkboxText.Y, aux2->checkboxText.Scale, aux2->checkboxText.Color);
-			//	
-			//	aux2 = nullptr;
-			//}
-			//else if (aux3 != nullptr)
-			//{
-			//	aux3->Draw();
-			//	aux3 = nullptr;
-			//}
-			//else if (aux4 != nullptr)
-			//{
-			//	
-			//	aux4->Draw();
-			//	RenderText(aux4->aux.textt, aux4->aux.X, aux4->aux.Y, aux4->aux.Scale, aux4->aux.Color);
-			//	aux4 = nullptr;
-			//}
-			//else if (aux5 != nullptr)
-			//{
-			//	aux5->Draw();
-			//	aux5 = nullptr;
-			//}
-			
-			
-		}
-
-		orderedGameObjects.clear();
-		orderedIndices.clear();
-	}
-	else
-	{
-		for (int i = 0; i < UIGameObjects.size(); i++)
-		{
-			GameObject* go = UIGameObjects[i];
-			ButtonComponent* aux = nullptr;
-
-			aux = go->GetComponent<ButtonComponent>();
-			/*aux1 = go->GetComponent<CanvasComponent>();
-			aux2 = go->GetComponent<CheckboxComponent>();
-			aux3 = go->GetComponent<ImageComponent>();
-			aux4 = go->GetComponent<InputBoxComponent>();
-			aux5 = go->GetComponent<SliderComponent>();*/
-
-			if (aux != nullptr)
-			{
-				aux->Draw();
-				RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
-
-				aux = nullptr;
-			}
-		}
-	}
-	
-	/*glEnable(GL_DEPTH_TEST);
-	glPopMatrix();*/
-	//app->renderer3D->mainCameraFbo->Unbind();
-	
-	//App->viewportBuffer->UnBind();
-	// 
-	// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-
-
-	//for (int i = 0; i < UIGameObjects.size(); i++)
-	//{
-	//		GameObject* go = UIGameObjects[i];
-	//		ButtonComponent* aux = nullptr;
-
-	//		aux = go->GetComponent<ButtonComponent>();
-	//		/*aux1 = go->GetComponent<CanvasComponent>();
-	//		aux2 = go->GetComponent<CheckboxComponent>();
-	//		aux3 = go->GetComponent<ImageComponent>();
-	//		aux4 = go->GetComponent<InputBoxComponent>();
-	//		aux5 = go->GetComponent<SliderComponent>();*/
-
-	//		if (aux != nullptr)
-	//		{
-	//			aux->Draw();
-	//			RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
-
-	//			aux = nullptr;
-	//		}
-	//}
-
-	
-
-	return true;
-}
 
 bool ModuleUI::CleanUp()
 {

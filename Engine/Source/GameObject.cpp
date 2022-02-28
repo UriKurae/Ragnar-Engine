@@ -19,6 +19,7 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
+	isUI = false;
 	uuid = lcg.Int();
 }
 
@@ -246,7 +247,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::TRANFORM2D:
 		
-		component = new ComponentTransform2D(float3{0,0,0}, float3{300,100,1}, float3{0,0,0}, this);
+		component = new ComponentTransform2D(float3{0,0,501}, float3{300,100,1}, float3{0,0,0}, this);
 		break;
 	case ComponentType::MATERIAL:
 		component = new MaterialComponent(this);

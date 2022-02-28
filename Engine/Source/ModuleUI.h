@@ -77,7 +77,6 @@ public:
 	bool Start()override;
     bool PreUpdate(float dt)override;
     bool Update(float dt)override;
-    bool PostUpdate()override;
 
 	bool CleanUp();
 	void RenderText(std::string text, float x, float y, float scale, float3 color);
