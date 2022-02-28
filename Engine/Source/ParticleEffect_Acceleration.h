@@ -1,5 +1,6 @@
 #pragma once
 #include "ParticleEffect.h"
+#include "JsonParsing.h"
 
 class ParticleEffect_Acceleration : ParticleEffect
 {

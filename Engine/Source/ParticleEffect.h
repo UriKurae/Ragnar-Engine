@@ -1,5 +1,6 @@
 #pragma once
 #include "Particle.h"
+#include "JsonParsing.h"
 
 enum class ParticleEffectType : int
 {

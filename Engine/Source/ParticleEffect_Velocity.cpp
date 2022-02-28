@@ -1,5 +1,7 @@
 #include "ParticleEffect_Velocity.h"
 
+#include "imgui/imgui.h"
+
 ParticleEffect_Velocity::ParticleEffect_Velocity() : ParticleEffect(ParticleEffectType::VELOCITY_OVER_LIFETIME)
 {
 	type = ParticleEffectType::VELOCITY_OVER_LIFETIME;

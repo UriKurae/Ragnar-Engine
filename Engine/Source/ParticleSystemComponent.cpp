@@ -4,7 +4,17 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
 {
 	type = ComponentType::PARTICLE_SYSTEM;
 	transform = trans;
-	isActive = true;
+	active = true; // Component is active
+    isActive = false; // Simulation is active
+
+
+	particleProps.colorBegin = { 1,0,0,1};
+	particleProps.colorEnd = { 0,1,0,1 };
+	particleProps.sizeBegin = 0.5f, particleProps.sizeVariation = 0.3f, particleProps.sizeEnd = 0.0f;
+	particleProps.lifeTime = 1.0f;
+	particleProps.velocity = { 0.0f, 5.0f, 0.0f };
+	particleProps.acceleration = { 0.0f, 5.0f, 0.0f };
+	particleProps.position = { 0.0f, 0.0f, 0.0f };
 }
 
 ParticleSystemComponent::~ParticleSystemComponent()
@@ -20,27 +30,42 @@ bool ParticleSystemComponent::Update(float dt)
 {
 	if (isActive && (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true))
 	{
-		for (int i = 0; i < emitters.size(); i++) {
+		for (int i = 0; i < emitters.size(); i++)
+        {
+            emitters[i]->Emit(dt, particleProps);
 			emitters[i]->Update(dt);
+            //emitters[i]->Render(nullptr);
+            
 		}
 	}
 
 	return true;
 }
 
+void ParticleSystemComponent::Draw(CameraComponent* gameCam)
+{
+	if (isActive)
+		for (auto& e : emitters)
+			e->Render(gameCam);
+}
+
 void ParticleSystemComponent::OnEditor()
 {
     if (ImGui::CollapsingHeader("Particle System"))
     {
+        if (ImGui::Checkbox("Active", &active));
+
         ImGui::PushItemWidth(90);
 
         std::string playButtonName = isActive ? "Pause" : "Play";
         if (ImGui::Button(playButtonName.c_str()))
         {
-            if (isActive)
-                Stop();
-            else
-                Play();
+            isActive = !isActive;
+
+			//if (isActive)
+			//    Stop();
+			//else
+			//    Play();
         }
 
         ImGui::SameLine();

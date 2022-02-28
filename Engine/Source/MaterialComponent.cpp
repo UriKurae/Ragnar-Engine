@@ -464,7 +464,6 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		shader->SetUniformVec3f(name + ".specular", sls[i]->specular);
 	}
 
-
 }
 
 void MaterialComponent::Unbind()

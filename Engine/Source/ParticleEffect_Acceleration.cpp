@@ -1,5 +1,7 @@
 #include "ParticleEffect_Acceleration.h"
 
+#include "imgui/imgui.h"
+
 ParticleEffect_Acceleration::ParticleEffect_Acceleration() : ParticleEffect(ParticleEffectType::ACCELERATION_OVER_LIFETIME)
 {
 	type = ParticleEffectType::ACCELERATION_OVER_LIFETIME;
@@ -13,11 +15,13 @@ ParticleEffect_Acceleration::~ParticleEffect_Acceleration()
 
 void ParticleEffect_Acceleration::Update(Particle& particle, float dt)
 {
-	particle.acceleration = acceleration;
-	if (hasGravity)
-	{
-		particle.acceleration.y += gravity;
-	}
+	//particle.acceleration = acceleration;
+	//if (hasGravity)
+	//{
+	//	particle.acceleration.y += gravity;
+	//}
+
+
 	//	//Add acceleration to velocity
 	//	particle.velocity.x += particle.acceleration[0] * dt;
 	//	particle.velocity.y += particle.acceleration[1] * dt;

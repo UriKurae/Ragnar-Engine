@@ -5,7 +5,14 @@
 #include "ParticleEffect_Velocity.h"
 #include "ParticleEffect_Acceleration.h"
 
+#include "Particle.h"
+
 #define INSTANCE_DATA_LENGHT 20
+
+class Shader;
+class VertexArray;
+class VertexBuffer;
+class IndexBuffer;
 
 class ParticleEmitter {
 
@@ -14,8 +21,8 @@ public:
 	ParticleEmitter(GameObject* owner);
 	~ParticleEmitter();
 
-	virtual void Emit(float dt);
-	void Render();
+	virtual void Emit(float dt, const ParticleProps& props);
+	void Render(CameraComponent* gameCam);
 	virtual void UpdateParticle(float dt);
 	virtual void Update(float dt);
 
@@ -41,8 +48,8 @@ public:
 	bool isActive, toDelete;
 
 	std::vector<ParticleEffect*> effects;
-	std::vector<Particle> particlesBuff;
-	Particle* particleReference;
+	//std::vector<Particle> particlesBuff;
+	//Particle* particleReference;
 	GameObject* own;
 
 	float minLifeTime;
@@ -53,14 +60,23 @@ public:
 
 private:
 
+	std::vector<Particle> particlePool;
+	unsigned int poolIndex;
+
+	std::shared_ptr<Shader> shader;
+
 	std::string emitterName;
 	char charsOfName[50];
 	bool showTexMenu;
 	LCG random;
 
-	unsigned int VAO;
-	unsigned int instanceVBO;
-	unsigned int vertexVBO;
+	//unsigned int VAO;
+	//unsigned int instanceVBO;
+	//unsigned int vertexVBO;
+
+	VertexArray* vertexArray;
+	VertexBuffer* vertexBuffer;
+	IndexBuffer* indexBuffer;
 };
 
 const float particleVertices[] = {

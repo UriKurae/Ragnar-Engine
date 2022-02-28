@@ -5,6 +5,8 @@
 #include "GameTimer.h"
 #include "Dialogs.h"
 
+#include "Particle.h"
+
 class ParticleSystemComponent : public Component {
 
 public:
@@ -14,6 +16,8 @@ public:
 
 	void SetEmitter(ParticleEmitter* emitter);
 	bool Update(float dt) override;
+	void Draw(CameraComponent* gameCam) override;
+
 	void OnEditor() override;
 
 	void Play();
@@ -28,6 +32,7 @@ public:
 	float maxDuration = 0.0f;
 
 protected:
+	ParticleProps particleProps;
 
 	std::vector<ParticleEmitter*> emitters;
 	bool isActive;

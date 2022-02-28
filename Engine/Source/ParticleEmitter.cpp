@@ -1,7 +1,20 @@
+#include "Application.h"
+#include "ModuleCamera3D.h"
+
 #include "ParticleEmitter.h"
+
+#include "ResourceManager.h"
+#include "CameraComponent.h"
+
+#include "VertexArray.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+
+#include "Math/MathFunc.h"
+
 #include <GL/glew.h>
 
-ParticleEmitter::ParticleEmitter(GameObject* owner):
+ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particlesPerSecond(50),
 	maxParticles(200),
 	minLifeTime(0.7f),
@@ -9,90 +22,188 @@ ParticleEmitter::ParticleEmitter(GameObject* owner):
 	isActive(true),
 	showTexMenu(false),
 	emitterName(""),
-	own(owner),
-	VAO(0u),
-	instanceVBO(0u),
-	vertexVBO(0u)
+	own(owner)
+	//VAO(0u),
+	//instanceVBO(0u),
+	//vertexVBO(0u)
 {
-	particlesBuff.resize(0);
+	poolIndex = maxParticles - 1;
+	particlePool.resize(maxParticles);
 
-	particleReference = new Particle(own);
+	//particleReference = new Particle(own);
 	effects.resize(5);
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
 
-	/*glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &vertexVBO);
-	glGenBuffers(1, &instanceVBO);
+	TransformComponent* tr = owner->GetComponent<TransformComponent>();
+	float3 pos = tr->GetPosition();
 
-	glBindVertexArray(VAO);
+	/*float v[] = {
+		pos.x - 0.5f, pos.y - 0.5f, pos.z + 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		pos.x + 0.5f, pos.y - 0.5f, pos.z + 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		pos.x + 0.5f, pos.y + 0.5f, pos.z + 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		pos.x - 0.5f, pos.y + 0.5f, pos.z + 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
+	};*/
 
-	glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(particleVertices), particleVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-	glVertexAttribDivisor(0, 0);
+	std::vector<Vertex> vertices;
+	Vertex vertex;
 
-	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * maxParticles * INSTANCE_DATA_LENGHT, NULL, GL_STREAM_DRAW);
+	vertex.position = { pos.x - 0.5f, pos.y - 0.5f, pos.z + 0.0f };
+	vertex.normal = float3::zero;
+	vertex.texCoords = float2::zero;
+	vertices.push_back(vertex);
 
-	AddInstancedAttribute(VAO, instanceVBO, 1, 4, INSTANCE_DATA_LENGHT, 0);
-	AddInstancedAttribute(VAO, instanceVBO, 2, 4, INSTANCE_DATA_LENGHT, 4);
-	AddInstancedAttribute(VAO, instanceVBO, 3, 4, INSTANCE_DATA_LENGHT, 8);
-	AddInstancedAttribute(VAO, instanceVBO, 4, 4, INSTANCE_DATA_LENGHT, 12);
-	AddInstancedAttribute(VAO, instanceVBO, 5, 4, INSTANCE_DATA_LENGHT, 16);*/
+	vertex.position = { pos.x + 0.5f, pos.y - 0.5f, pos.z + 0.0f };
+	vertex.normal = float3::zero;
+	vertex.texCoords = float2::zero;
+	vertices.push_back(vertex);
+
+	vertex.position = { pos.x + 0.5f, pos.y + 0.5f, pos.z + 0.0f };
+	vertex.normal = float3::zero;
+	vertex.texCoords = float2::zero;
+	vertices.push_back(vertex);
+
+	vertex.position = { pos.x - 0.5f, pos.y + 0.5f, pos.z + 0.0f };
+	vertex.normal = float3::zero;
+	vertex.texCoords = float2::zero;
+	vertices.push_back(vertex);
+
+
+	vertexArray = new VertexArray();
+	
+	vertexBuffer = new VertexBuffer();
+	vertexBuffer->SetData(vertices);
+	vertexBuffer->SetLayout({
+		{ShaderDataType::VEC3F, "position"},
+		{ShaderDataType::VEC3F, "normal"},
+		{ShaderDataType::VEC2F, "texCoords"}
+	});
+	vertexArray->AddVertexBuffer(*vertexBuffer);
+	//vertexBuffer->Unbind();
+
+	unsigned int indices[] = { 0, 1, 2, 2, 3, 0 };
+
+	indexBuffer = new IndexBuffer(indices, 6);
+	vertexArray->SetIndexBuffer(*indexBuffer);
+	//indexBuffer->Unbind();
+
+	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/particlesBehaviour.shader")));
 }
 
 ParticleEmitter::~ParticleEmitter()
 {
+	RELEASE(vertexArray);
+	RELEASE(vertexBuffer);
+	RELEASE(indexBuffer);
 }
 
-void ParticleEmitter::Emit(float dt)
+void ParticleEmitter::Emit(float dt, const ParticleProps& props)
 {
-	currTimer -= dt;
-	if (currTimer <= 0.0f) {
+	Particle& particle = particlePool[poolIndex];
+	particle.active = true;
 
-		for (int i = 0; i < particlesBuff.size(); i++) {
-			// When the particle is allocated in memory, but it's not being used at the moment
-			// Reuse an exisiting particle to make the smaller complexity, which results in more optimized code 
+	particle.position = props.position;
+	particle.rotation = random.Float() * 2 * pi;
 
-			TransformComponent* transform = (TransformComponent*)own->GetComponent<TransformComponent>();
-			if (transform != nullptr)
-			{
-				if (particlesBuff[i].isActive == false)
-				{
-					particlesBuff[i].isActive = true;
-					particlesBuff[i].position = transform->position;
-					particlesBuff[i].rotation = particleReference->rotation;
-					particlesBuff[i].size = particleReference->size;
-					particlesBuff[i].color = particleReference->color;
-					particlesBuff[i].lifeTime = particleReference->lifeTime;
+	particle.velocity = props.velocity;
+	particle.velocity.x += props.acceleration.x * (random.Float() - 0.5f);
+	particle.velocity.y += props.acceleration.y * (random.Float() - 0.5f);
 
-					for (int j = 0; j < effects.size(); j++)
-					{
-						if (effects[j] != nullptr)
-						{
-							effects[j]->Init(particlesBuff[i]);
-						}
-					}
-					return;
-				}
-			}
-		}
+	particle.colorBegin = props.colorBegin;
+	particle.colorEnd = props.colorEnd;
 
-		if (particlesBuff.size() < maxParticles) {
-			// Create new particle
-			Particle* particle = new Particle(particleReference, own);
-			particlesBuff.push_back(*particle);
-		}
-		currTimer = timer;
+	particle.lifeTime = props.lifeTime;
+	particle.lifeRemaining = props.lifeTime;
+	particle.sizeBegin = props.sizeBegin + props.sizeVariation * (random.Float() - 0.5f);
+	particle.sizeEnd = props.sizeEnd;
+
+	poolIndex = --poolIndex % particlePool.size();
+
+	//currTimer -= dt;
+	//if (currTimer <= 0.0f) {
+	//
+	//	for (int i = 0; i < particlesBuff.size(); i++) {
+	//		// When the particle is allocated in memory, but it's not being used at the moment
+	//		// Reuse an exisiting particle to make the smaller complexity, which results in more optimized code 
+	//
+	//		TransformComponent* transform = (TransformComponent*)own->GetComponent<TransformComponent>();
+	//		if (transform != nullptr)
+	//		{
+	//			if (particlesBuff[i].isActive == false)
+	//			{
+	//				particlesBuff[i].isActive = true;
+	//				particlesBuff[i].position = transform->position;
+	//				particlesBuff[i].rotation = particleReference->rotation;
+	//				particlesBuff[i].size = particleReference->size;
+	//				particlesBuff[i].color = particleReference->color;
+	//				particlesBuff[i].lifeTime = particleReference->lifeTime;
+	//
+	//				for (int j = 0; j < effects.size(); j++)
+	//				{
+	//					if (effects[j] != nullptr)
+	//					{
+	//						effects[j]->Init(particlesBuff[i]);
+	//					}
+	//				}
+	//				return;
+	//			}
+	//		}
+	//	}
+	//
+	//	if (particlesBuff.size() < maxParticles) {
+	//		// Create new particle
+	//		Particle* particle = new Particle(particleReference, own);
+	//		particlesBuff.push_back(*particle);
+	//	}
+	//	currTimer = timer;
+	//}
+}
+
+void ParticleEmitter::Render(CameraComponent* gameCam)
+{
+	float4x4 view = float4x4::identity;
+	float4x4 proj = float4x4::identity;
+	if (gameCam)
+	{
+		view = gameCam->matrixViewFrustum;
+		proj = gameCam->matrixProjectionFrustum;
 	}
-}
+	else
+	{
+		view = app->camera->matrixViewFrustum;
+		proj = app->camera->matrixProjectionFrustum;
+	}
 
-void ParticleEmitter::Render()
-{
+	shader->Bind();
+	shader->SetUniformMatrix4f("view", view.Transposed());
+	shader->SetUniformMatrix4f("projection", proj.Transposed());
 
+	int i = 0;
+	for (auto& particle : particlePool)
+	{
+		i++;
+		if (!particle.active)
+			continue;
+
+		float life = particle.lifeRemaining / particle.lifeTime;
+		float4 color = float4::Lerp(particle.colorEnd, particle.colorBegin, life);
+		float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
+		
+		Quat q = Quat({ 0,0,1 }, particle.rotation);
+		float4x4 tr = float4x4::FromTRS({ particle.position.x, particle.position.y, 0.0f }, q, { size, size, 1.0f });
+		
+		shader->SetUniformMatrix4f("model", tr.Transposed());
+		shader->SetUniformVec4f("color", color);
+		vertexArray->Bind();
+		vertexBuffer->Bind();
+		indexBuffer->Bind();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		shader->Unbind();
+		vertexArray->Unbind();
+		vertexBuffer->Unbind();
+		indexBuffer->Unbind();
+	}
 }
 
 void ParticleEmitter::UpdateParticle(float dt)
@@ -101,6 +212,21 @@ void ParticleEmitter::UpdateParticle(float dt)
 
 void ParticleEmitter::Update(float dt)
 {
+	for (auto& particle : particlePool)
+	{
+		if (!particle.active)
+			continue;
+
+		if (particle.lifeRemaining <= 0.0f)
+		{
+			particle.active = false;
+			continue;
+		}
+
+		particle.lifeRemaining -= dt;
+		particle.position += particle.velocity * dt;
+		//particle.rotation += 0.001 * dt;
+	}
 }
 
 void ParticleEmitter::OnEditor(int emitterIndex)
@@ -117,7 +243,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		if (ImGui::Button(guiName.c_str()))
 		{
 			toDelete = true;
-			
 		}
 
 		ImGui::Spacing();
@@ -131,7 +256,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		guiName = "Particle max lifetime" + suffixLabel;
 		ImGui::DragFloat(guiName.c_str(), &maxLifeTime, 0.1f, 0.0f, 10.0f);
 
-		particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
+		//particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
 
 		guiName = "Particles per Second" + suffixLabel;
 		if (ImGui::DragFloat(guiName.c_str(), &particlesPerSecond))
@@ -140,45 +265,45 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		guiName = "Max Particles" + suffixLabel;
 		if (ImGui::DragInt(guiName.c_str(), &maxParticles)) {}
 
-		float size[2] = { particleReference->size.x, particleReference->size.y };
+		//float size[2] = { particleReference->size.x, particleReference->size.y };
 
 		guiName = "Size" + suffixLabel;
-		if (ImGui::DragFloat2(guiName.c_str(), size))
-		{
-			particleReference->size.x = size[0];
-			particleReference->size.y = size[1];
-		}
+		//if (ImGui::DragFloat2(guiName.c_str(), size))
+		//{
+		//	particleReference->size.x = size[0];
+		//	particleReference->size.y = size[1];
+		//}
 
-		float color[4] = { particleReference->color.r, particleReference->color.g, particleReference->color.b, particleReference->color.a };
+		//float color[4] = { particleReference->color.r, particleReference->color.g, particleReference->color.b, particleReference->color.a };
 
 		guiName = "Color (RGBA)" + suffixLabel;
-		if (ImGui::ColorPicker3(guiName.c_str(), color))
-		{
-			particleReference->color.r = color[0];
-			particleReference->color.g = color[1];
-			particleReference->color.b = color[2];
-			particleReference->color.a = color[3];
-		}
+		//if (ImGui::ColorPicker3(guiName.c_str(), color))
+		//{
+		//	particleReference->color.r = color[0];
+		//	particleReference->color.g = color[1];
+		//	particleReference->color.b = color[2];
+		//	particleReference->color.a = color[3];
+		//}
 
 		ImGui::Indent();
 
 		ImGui::Text("Texture");
 
-		if (particleReference->tex != nullptr)
-		{
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.2f, 0.2f, 1.0f));
-				ImGui::Text("Click on the image to erase it");
-				ImGui::PopStyleColor();
-				ImGui::EndTooltip();
-			}
-		}
-		else
-		{
-			ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
-		}
+		//if (particleReference->tex != nullptr)
+		//{
+		//	if (ImGui::IsItemHovered())
+		//	{
+		//		ImGui::BeginTooltip();
+		//		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.2f, 0.2f, 1.0f));
+		//		ImGui::Text("Click on the image to erase it");
+		//		ImGui::PopStyleColor();
+		//		ImGui::EndTooltip();
+		//	}
+		//}
+		//else
+		//{
+		//	ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
+		//}
 
 		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::ACCELERATION_OVER_LIFETIME; i++)
 		{

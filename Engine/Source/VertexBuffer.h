@@ -6,12 +6,14 @@
 class VertexBuffer
 {
 public:
-	VertexBuffer() : buffer(0), count(0) {}
+	VertexBuffer();
 	VertexBuffer(const void* data, unsigned int c);
 	VertexBuffer(const std::vector<Vertex>& vertices);
-	void SetData(const std::vector<Vertex>&);
-
 	~VertexBuffer();
+
+	void SetData(const std::vector<Vertex>&);
+	void SetData(float* vertices);
+
 
 	void Bind() const;
 	void Unbind() const;
