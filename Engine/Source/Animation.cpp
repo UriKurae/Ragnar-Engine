@@ -43,6 +43,17 @@ void Animation::UnLoad()
 	}
 }
 
+Bone* Animation::FindBone(const std::string& name)
+{
+	auto boneIter = std::find_if(bones.begin(), bones.end(), [&](Bone* bone)
+	{
+		return bone->GetName() == name;
+	});
+
+	if (boneIter == bones.end()) return nullptr;
+	else return (*boneIter);
+}
+
 BoneTransform::~BoneTransform()
 {
 	RELEASE_ARRAY(posKeysValues);

@@ -92,20 +92,42 @@ float4x4 Bone::InterpolatePosition(float animationTime)
 	int p1Index = p0Index + 1;
 	float scaleFactor = GetScaleFactor(data.positions[p0Index].timeStamp,
 		data.positions[p1Index].timeStamp, animationTime);
-	float3 finalPosition = /*glm::mix(data.positions[p0Index].position,
-		data.positions[p1Index].position, scaleFactor);*/{ 0, 0, 0 };
+	
+	float3 finalPosition = math::Lerp(data.positions[p0Index].position, data.positions[p1Index].position, scaleFactor);
 	
 	return float4x4::Translate(finalPosition);
 }
 
 float4x4 Bone::InterpolateRotation(float animationTime)
 {
-	return float4x4();
+	if (data.rotations.size() == 1)
+	{
+		Quat rotation = data.rotations[0].orientation.Normalized();
+		return float4x4(rotation);
+	}
+
+	int p0Index = GetRotationIndex(animationTime);
+	int p1Index = p0Index + 1;
+	float scaleFactor = GetScaleFactor(data.rotations[p0Index].timeStamp, data.rotations[p1Index].timeStamp, animationTime);
+	
+	Quat finalRotation = Slerp(data.rotations[p0Index].orientation, data.rotations[p1Index].orientation, scaleFactor);
+	finalRotation = finalRotation.Normalized();
+
+	return float4x4(finalRotation);
 }
 
 float4x4 Bone::InterpolateScaling(float animationTime)
 {
-	return float4x4();
+	if (data.scales.size() == 1)
+		return float4x4::Scale(data.scales[0].scale);
+
+	int p0Index = GetScalingIndex(animationTime);
+	int p1Index = p0Index + 1;
+	float scaleFactor = GetScaleFactor(data.scales[p0Index].timeStamp,
+		data.scales[p1Index].timeStamp, animationTime);
+	float3 finalScale = math::Lerp(data.scales[p0Index].scale, data.scales[p1Index].scale, scaleFactor);
+	
+	return float4x4::Scale(finalScale);
 }
 
 int Bone::GetPositionIndex(float animationTime)

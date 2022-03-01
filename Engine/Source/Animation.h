@@ -40,6 +40,13 @@ struct BoneTransform
 	double* rotKeysTimes = nullptr;
 };
 
+struct HierarchyData
+{
+	float4x4 transform;
+	char name[20];
+	int childrenCount;
+	std::vector<HierarchyData> children;
+};
 
 class Animation : public Resource
 {
@@ -49,6 +56,8 @@ public:
 	
 	void Load() override;
 	void UnLoad() override;
+
+	Bone* FindBone(const std::string& name);
 
 	inline const float& GetTicks() const { return ticks; }
 	inline const float& GetTicksPerSecond() const { return ticksPerSecond; }

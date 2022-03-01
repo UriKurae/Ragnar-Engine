@@ -46,6 +46,8 @@ public:
 
 	BoneData& GetData() { return data; }
 
+	inline const std::string& GetName() const { return data.name; }
+
 private:
 	float4x4 InterpolatePosition(float animationTime);
 	float4x4 InterpolateRotation(float animationTime);
