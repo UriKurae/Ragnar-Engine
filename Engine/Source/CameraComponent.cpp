@@ -94,7 +94,7 @@ void CameraComponent::OnEditor()
 		ImGui::Text("s_lerp");
 		//ImGui::SameLine(); select mode none/lerp/slerp
 
-		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.5f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
 
@@ -127,17 +127,26 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
+	float3 newPos;
+	Quat newRot;
 	if (followTarget && target)
 	{
-		transform->SetPosition(target->GetComponent<TransformComponent>()->GetPosition() + float3(0, 20, 20));
-		transform->SetRotation(Quat(float3(1, 0, 0), verticalAngle));
-		transform->SetRotation(Quat(float3(0, 1, 0), horizontalAngle));
+		newPos += target->GetComponent<TransformComponent>()->GetPosition();
+		newRot = Quat(float3(1, 0, 0), verticalAngle);
+		newPos.z += 20;
+		newPos.y += 20;
+
+		if (rotateAround)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle += dt * 0.5;
+			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle -= dt * 0.5;
+
+			newPos.z += sin(horizontalAngle) * 10;
+			newPos.x += cos(horizontalAngle) * 10;
+		}
 	}
-	if (rotateAround)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle += dt * 0.1;
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle -= dt * 0.1;
-	}
+	transform->SetPosition(newPos);
+	transform->SetRotation(newRot);
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
