@@ -108,13 +108,9 @@ void MeshComponent::DrawOutline()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glPushMatrix();
-	float4x4 testGlobal = transform->GetGlobalTransform();
-	float3 size = transform->GetScale();
-	testGlobal.SetTranslatePart(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f);
+	float4x4 testGlobal;
+	testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
 
-	testGlobal.scaleX += size.x * 0.05f;
-	testGlobal.scaleY += size.y * 0.05f;
-	testGlobal.scaleZ += size.z * 0.05f;
 	glMultMatrixf(testGlobal.Transposed().ptr());
 
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
@@ -257,4 +253,5 @@ void MeshComponent::CalculateCM()
 	float3 posObj = transform->GetGlobalTransform().Col3(3);
 	owner->SetOffsetCM(posBody - posObj);
 	owner->SetOffsetCM(quatRotate(transform->GetRotation().Inverted(), owner->GetOffsetCM()));
+	owner->SetOffsetCM(quatRotate(transform->GetRotation(), owner->GetOffsetCM()));
 }

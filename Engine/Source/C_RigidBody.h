@@ -63,7 +63,6 @@ private:
 	float mass = 1.0f;
 	float friction = 1.0f;
 	float restitution = 0.2f;
-	float3 offset = { 0,0,0 };
 
 	// Block the movement and rotation
 	float3 movementConstraint = float3::one;

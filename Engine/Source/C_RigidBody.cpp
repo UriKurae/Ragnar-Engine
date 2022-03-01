@@ -18,9 +18,6 @@ RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, floa
 	owner = obj;
 	this->type = ComponentType::RIGID_BODY;
 	SetCollisionType(type);
-
-	// Calculate offset CM
-	offset = owner->GetOffsetCM();
 }
 
 RigidBodyComponent::~RigidBodyComponent()
@@ -114,8 +111,7 @@ bool RigidBodyComponent::Update(float dt)
 	{
 		if (body->getActivationState() == 1 || body->getActivationState() == 3)
 		{
-			float3 f = quatRotate(body->getOrientation(), offset);
-			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - f, body->getWorldTransform().getRotation(), owner->GetComponent<TransformComponent>()->GetScale());
+			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), owner->GetComponent<TransformComponent>()->GetScale());
 			owner->GetComponent<TransformComponent>()->SetTransform(CM2);
 		}
 	}
@@ -130,10 +126,9 @@ void RigidBodyComponent::UpdateCollision()
 	{
 		OBB obb = owner->GetOOB();
 
-		float3 f = quatRotate(owner->GetComponent<TransformComponent>()->GetRotation(), offset);
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
-		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + f);
+		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
 		
 		body->setWorldTransform(t);
 	}
