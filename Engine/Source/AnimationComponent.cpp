@@ -4,16 +4,22 @@
 #include "ResourceManager.h"
 #include "Animation.h"
 #include "GameObject.h"
+#include "IconsFontAwesome5.h"
 
 AnimationComponent::AnimationComponent(GameObject* own) : anim(nullptr), showAnimMenu(false)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
 
-	attackBlendTime = 0.1f;
-	walkBlendTime = 0.1f;
+	currentTime = 0.0f;
 
-	smoothT = true;
+	finalBoneMatrices.reserve(100);
+
+	for (int i = 0; i < 100; i++)
+	{
+		finalBoneMatrices.push_back(float4x4::identity);
+	}
+
 	active = true;
 }
 
@@ -30,7 +36,7 @@ AnimationComponent::~AnimationComponent()
 void AnimationComponent::OnEditor()
 {
 	ImGui::PushID(this);
-	if (ImGui::CollapsingHeader("Animation Component"))
+	if (ImGui::CollapsingHeader(ICON_FA_PEOPLE_ARROWS" Animation Component"))
 	{
 		Checkbox(this, "Active", active);
 		if (anim != nullptr)
@@ -56,32 +62,13 @@ void AnimationComponent::OnEditor()
 			ImGui::Text("Bones Attached: ");
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", anim->numBones);
-			if(ImGui::Checkbox("Draw Bones", &debugDraw))
+			/*if(ImGui::Checkbox("Draw Bones", &debugDraw))
 			{
 				for (int i = 0; i < owner->GetChilds().size(); i++)
 				{
 					owner->GetChilds().at(i)->GetComponent<BoneComponent>()->SetDebugDraw();
 				}
-			}
-			
-			if (ImGui::CollapsingHeader("Pressing 1, blend animation1"))
-			{
-				ImGui::Text("Select animation 1: ");
-				ImGui::SameLine();
-				if (ImGui::Button(anim1 ? anim1->GetName().c_str() : "No Animation"))
-				{
-					showAnimMenu = true;
-				}
-			}
-			if (ImGui::CollapsingHeader("Pressing 2, blend animation2"))
-			{
-				ImGui::Text("Select animation 2: ");
-				ImGui::SameLine();
-				if (ImGui::Button(anim2 ? anim2->GetName().c_str() : "No Animation"))
-				{
-					showAnimMenu = true;
-				}
-			}		
+			}*/
 		}
 		else
 		{
@@ -93,44 +80,55 @@ void AnimationComponent::OnEditor()
 			}
 		}
 		ImGui::Separator();
-
 	}
 
 	if (showAnimMenu)
 	{
 		ImGui::Begin("Animations", &showAnimMenu);
-		ImVec2 winPos = ImGui::GetWindowPos();
-		ImVec2 size = ImGui::GetWindowSize();
-		ImVec2 mouse = ImGui::GetIO().MousePos;
-		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
-			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-		{
-			if (ImGui::GetIO().MouseClicked[0]) showAnimMenu = false;
-		}
-
-		std::vector<std::string> files;
-		app->fs->DiscoverFiles("Library/Animations", files);
-		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-		{
-			if ((*it).find(".rganim") != std::string::npos)
-			{
-				app->fs->GetFilenameWithoutExtension(*it);
-				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-				uint uid = std::stoll(*it);
-				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
-				if (ImGui::Selectable(res->GetName().c_str()))
-				{
-					res->Load();
-					if (anim.use_count() - 1 == 1) anim->UnLoad();
-					SetAnimation(res);
-				}
-			}
-		}
-
+		GetAnimations();
 		ImGui::End();
 	}
 	ImGui::PopID();
 }
+
+bool AnimationComponent::Update(float dt)
+{
+	deltaTime = dt;
+	if (anim)
+	{
+		currentTime += anim->GetTicksPerSecond() * dt;
+		currentTime = fmod(currentTime, anim->GetDuration());
+		CalculateBoneTransform(/*anim->GetRootNode(),*/ float4x4::identity);
+	}
+}
+
+void AnimationComponent::CalculateBoneTransform(/*const AssimpNodeData* node,*/ float4x4 parentTransform)
+{
+	//std::string nodeName = node->name;
+	//float4x4 nodeTransform = node->transformation;
+
+	//Bone* bone = anim->FindBone(nodeName);
+
+	//if (bone)
+	//{
+	//	bone->Update(currentTime);
+	//	nodeTransform = bone->GetLocalTransform();
+	//}
+
+	//float4x4 globalTransformation = parentTransform * nodeTransform;
+
+	//auto boneInfoMap = anim->GetBoneIDMap();
+	//if (boneInfoMap.find(nodeName) != boneInfoMap.end())
+	//{
+	//	int index = boneInfoMap[nodeName].id;
+	//	float4x4 offset = boneInfoMap[nodeName].offset;
+	//	finalBoneMatrices[index] = globalTransformation * offset;
+	//}
+
+	//for (int i = 0; i < node->childrenCount; i++)
+	//	CalculateBoneTransform(&node->children[i], globalTransformation);
+}
+
 
 bool AnimationComponent::OnLoad(JsonParsing& node)
 {
@@ -157,4 +155,33 @@ void AnimationComponent::SetAnimation(std::shared_ptr<Resource> a)
 	anim = std::static_pointer_cast<Animation>(a);
 }
 
+void AnimationComponent::GetAnimations()
+{
+	ImVec2 winPos = ImGui::GetWindowPos();
+	ImVec2 size = ImGui::GetWindowSize();
+	ImVec2 mouse = ImGui::GetIO().MousePos;
+	if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+		mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+	{
+		if (ImGui::GetIO().MouseClicked[0]) showAnimMenu = false;
+	}
 
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Library/Animations", files);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		if ((*it).find(".rganim") != std::string::npos)
+		{
+			app->fs->GetFilenameWithoutExtension(*it);
+			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+			uint uid = std::stoll(*it);
+			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
+			if (ImGui::Selectable(res->GetName().c_str()))
+			{
+				res->Load();
+				if (anim.use_count() - 1 == 1) anim->UnLoad();
+				SetAnimation(res);
+			}
+		}
+	}
+}
