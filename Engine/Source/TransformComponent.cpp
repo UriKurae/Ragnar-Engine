@@ -70,6 +70,7 @@ bool TransformComponent::Update(float dt)
 	{
 		std::stack<GameObject*> stack;
 		UpdateTransform();
+
 		//Get each RigidBodies of the GameObject to update their position
 		for (int i = 0; i < owner->GetComponents().size(); i++)
 			if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
@@ -225,6 +226,7 @@ void TransformComponent::SetAABB()
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
+		owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
 
 	app->scene->ResetQuadtree();

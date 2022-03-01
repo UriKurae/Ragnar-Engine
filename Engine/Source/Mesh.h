@@ -39,11 +39,6 @@ public:
 
 	void Reimport(ModelParameters& data);
 
-	float3 GetCenterMesh() { return centerPoint; };
-	inline void SetCenterMesh(float3 center) { centerPoint = center; };
-	float GetRadius() { return radius; };
-	inline void SetRadius(float rad) { radius = rad; };
-
 private:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -57,6 +52,4 @@ private:
 	Shader* shader;
 
 	std::string path;
-	float3 centerPoint = float3::zero;
-	float radius;
 };

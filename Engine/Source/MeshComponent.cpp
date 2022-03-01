@@ -109,10 +109,12 @@ void MeshComponent::DrawOutline()
 
 	glPushMatrix();
 	float4x4 testGlobal = transform->GetGlobalTransform();
+	float3 size = transform->GetScale();
+	testGlobal.SetTranslatePart(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f);
 
-	testGlobal.scaleX += 0.05f;
-	testGlobal.scaleY += 0.05f;
-	testGlobal.scaleZ += 0.05f;
+	testGlobal.scaleX += size.x * 0.05f;
+	testGlobal.scaleY += size.y * 0.05f;
+	testGlobal.scaleZ += size.z * 0.05f;
 	glMultMatrixf(testGlobal.Transposed().ptr());
 
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
@@ -208,12 +210,7 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
 
-		Sphere sphere;
-		sphere.r = 0.f;
-		sphere.pos = localBoundingBox.CenterPoint();
-		sphere.Enclose(localBoundingBox);
-		mesh.get()->SetRadius(sphere.r);
-		mesh.get()->SetCenterMesh(sphere.pos);
+		CalculateCM();
 	}
 
 	return true;
@@ -242,12 +239,7 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
 
-		Sphere sphere;
-		sphere.r = 0.f;
-		sphere.pos = localBoundingBox.CenterPoint();
-		sphere.Enclose(localBoundingBox);
-		mesh.get()->SetRadius(sphere.r);
-		mesh.get()->SetCenterMesh(sphere.pos);
+		CalculateCM();
 	}
 }
 
@@ -258,11 +250,11 @@ bool MeshComponent::HasMaterial()
 	return false;
 }
 
-float3 MeshComponent::GetCenterPointInWorldCoords()
+void MeshComponent::CalculateCM()
 {
-	return owner->GetComponent<TransformComponent>()->GetGlobalTransform().TransformPos(mesh->GetCenterMesh());
-}
-float MeshComponent::GetSphereRadius()
-{
-	return mesh->GetRadius();
+	// Calcule CM offset
+	float3 posBody = owner->GetOOB().CenterPoint();
+	float3 posObj = transform->GetGlobalTransform().Col3(3);
+	owner->SetOffsetCM(posBody - posObj);
+	owner->SetOffsetCM(quatRotate(transform->GetRotation().Inverted(), owner->GetOffsetCM()));
 }

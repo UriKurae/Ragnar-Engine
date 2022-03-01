@@ -74,6 +74,9 @@ public:
 
 	inline const std::vector<Component*> GetComponents() const { return components; }
 
+	inline float3 GetOffsetCM() { return offsetCM; };
+	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
+
 	template<typename T>
 	T* GetComponent();
 	
@@ -100,6 +103,7 @@ private:
 	IndexBuffer* index;
 
 	uint uuid;
+	float3 offsetCM = float3::zero;
 
 	//MouseMoveCommand mouseMoveCommand;
 

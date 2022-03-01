@@ -311,10 +311,10 @@ void ModuleCamera3D::Focus(math::float3& newFront, math::float3& newUp, math::fl
 		{
 			if (MeshComponent* mesh = objSelected->GetComponent<MeshComponent>())
 			{
-				float3 meshCenter = mesh->GetCenterPointInWorldCoords();
+				float3 meshCenter = objSelected->GetOffsetCM();
 				newFront = (meshCenter - cameraFrustum.Pos()).Normalized();
 				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
-				const float meshRadius = mesh->GetSphereRadius();
+				const float meshRadius = mesh->GetLocalAABB().HalfDiagonal().Length();
 				const float currentDistance = meshCenter.Distance(cameraFrustum.Pos());
 				newPos = meshCenter + ((cameraFrustum.Pos() - meshCenter).Normalized() * meshRadius * 2);
 			}

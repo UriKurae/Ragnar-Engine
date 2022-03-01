@@ -18,14 +18,9 @@ RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, floa
 	owner = obj;
 	this->type = ComponentType::RIGID_BODY;
 	SetCollisionType(type);
+
 	// Calculate offset CM
-	if (owner->GetComponent<MeshComponent>())
-	{
-		float3 posBody = body->getCenterOfMassPosition();
-		float3 posObj = owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3);
-		offset = posBody - posObj;
-		offset = quatRotate(body->getOrientation().inverse(), offset);
-	}	
+	offset = owner->GetOffsetCM();
 }
 
 RigidBodyComponent::~RigidBodyComponent()

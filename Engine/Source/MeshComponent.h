@@ -27,6 +27,7 @@ public:
 	void OnEditor() override;
 
 	bool OnLoad(JsonParsing& node) override;
+	void CalculateCM();
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(std::shared_ptr<Resource> m);
@@ -39,9 +40,6 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
-
-	float3 GetCenterPointInWorldCoords();
-	float GetSphereRadius();
 
 private:
 	TransformComponent* transform;
