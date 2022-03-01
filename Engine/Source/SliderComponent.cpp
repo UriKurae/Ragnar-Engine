@@ -158,7 +158,7 @@ void SliderComponent::Draw()
 		break;
 	}
 
-	//planeToDraw->DrawPlane2D();
+	thePlane->DrawPlane2D();
 
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);

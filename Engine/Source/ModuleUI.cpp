@@ -93,7 +93,7 @@ void MyPlane::DrawPlane2D() {
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	// TODO: 2D en lugar de 3D para UI
-	ComponentTransform2D* d=own->GetComponent<ComponentTransform2D>();
+	//ComponentTransform2D* d=own->GetComponent<ComponentTransform2D>();
 
 	/*glPushMatrix();
 	
@@ -110,7 +110,7 @@ void MyPlane::DrawPlane2D() {
 	glBindTexture(GL_TEXTURE_2D, aTextureId); // Textures and Indices
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-	ComponentTransform2D* auxTrans = app->userInterface->UIGameObjects[app->userInterface->UIGameObjects.size() - 1]->GetComponent<ComponentTransform2D>();
+	ComponentTransform2D* auxTrans = own->GetComponent<ComponentTransform2D>();
 	glPushMatrix();
 	float4x4 aux = float4x4::FromTRS(float3(auxTrans->position.x, auxTrans->position.y, auxTrans->position.z), auxTrans->rotationQuat, float3(auxTrans->scale.x, auxTrans->scale.y, 1));
 	glMultMatrixf(aux.Transposed().ptr());
@@ -118,7 +118,7 @@ void MyPlane::DrawPlane2D() {
 	//Draw
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0);
 
-	glPopMatrix();
+	//glPopMatrix();
 
 	//UnBind Buffers
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

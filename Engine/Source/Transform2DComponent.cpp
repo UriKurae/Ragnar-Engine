@@ -62,29 +62,7 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	//CreateAABB(ComponentType::PLANE, App->scene->gameObjects[App->scene->gameObjects.size() - 1], true);
 }
 
-//ComponentType ComponentTransform2D::getComponentType()
-//{
-//	/*for (int b = 0; b < App->scene->gameObjects[App->scene->gameObjects.size() - 1]->components.size(); b++)
-//	{
-//		if (App->scene->gameObjects[App->scene->gameObjects.size() - 1]->components[b]->type == ComponentType::UI_BUTTON)
-//		{
-//			return ComponentType::UI_BUTTON;
-//		}
-//		else if (App->scene->gameObjects[App->scene->gameObjects.size() - 1]->components[b]->type == ComponentType::UI_CHECKBOX)
-//		{
-//			return ComponentType::UI_CHECKBOX;
-//		}
-//		else if (App->scene->gameObjects[App->scene->gameObjects.size() - 1]->components[b]->type == ComponentType::UI_INPUTBOX)
-//		{
-//			return ComponentType::UI_INPUTBOX;
-//		}
-//		else if (App->scene->gameObjects[App->scene->gameObjects.size() - 1]->components[b]->type == ComponentType::UI_SLIDER)
-//		{
-//			return ComponentType::UI_SLIDER;
-//		}
-//		
-//	}*/
-//}
+
 ComponentTransform2D::~ComponentTransform2D()
 {
 }

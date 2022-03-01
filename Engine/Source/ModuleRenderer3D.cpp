@@ -317,25 +317,75 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadIdentity();
 	glPopMatrix();
 
+	// DRAW UI
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+	
 	ButtonComponent* aux = nullptr;
+	//CanvasComponent* aux1 = nullptr;
+	CheckboxComponent* aux2 = nullptr;
+	//ImageComponent* aux3 = nullptr;
+	//InputBoxComponent* aux4 = nullptr;
+	SliderComponent* aux5 = nullptr;
 	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
 	{
-		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
-		app->userInterface->UIGameObjects[a]->Draw();
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
 
-		app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+
+		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
+		//aux1 = go->GetComponent<CanvasComponent>();
+		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
+		//aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
+		//aux4 = go->GetComponent<InputBoxComponent>();
+		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
+
+
 		
+		if (aux != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw();
+			app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+			aux = nullptr;
+		}
+		/*else if (aux1 != nullptr)
+		{
+			textExample = aux1->text;
+			color.x = aux1->color.r;
+			color.y = aux1->color.g;
+			color.z = aux1->color.b;
+			aux1 = nullptr;
+		}*/
+		else if (aux2 != nullptr)
+		{
+			aux2 = nullptr;
+		}
+		/*else if (aux3 != nullptr)
+		{
+			
+		}*/
+		/*else if (aux4 != nullptr)
+		{
+			textExample = aux4->text;
+			color.x = aux4->textColor.r;
+			color.y = aux4->textColor.g;
+			color.z = aux4->textColor.b;
+			aux4 = nullptr;
+		}*/
+		else if (aux5 != nullptr)
+		{
+			
+		}
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glPopMatrix();
+		
+
 	}
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
+	
 	
 	mainCameraFbo->Unbind();
 	

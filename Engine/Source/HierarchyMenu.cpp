@@ -184,6 +184,7 @@ bool HierarchyMenu::Update(float dt)
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+				button->thePlane->own = object;
 				object->isUI = true;
 			}
 			else if (ImGui::Selectable("Create UI Check Box"))
@@ -200,6 +201,7 @@ bool HierarchyMenu::Update(float dt)
 				createGameObject = false;
 				app->userInterface->UIGameObjects.push_back(object);
 				button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+				button->planeToDraw->own = object;
 				object->isUI = true;
 			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
