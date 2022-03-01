@@ -109,9 +109,15 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 
 void AnimationImporter::SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData, HierarchyData& hierData)
 {
-	unsigned int header[3] = { duration, ticksPerSecond, boneData.size()};
+	std::string jsonName = name;
 
-	uint size = sizeof(header) + sizeof(BoneData) * boneData.size() + sizeof(name.size());
+	int index = jsonName.find(".");
+	jsonName = jsonName.substr(0, index);
+	jsonName += ".json";
+
+	unsigned int header[4] = { duration, ticksPerSecond, boneData.size(), jsonName.size()};
+
+	uint size = sizeof(header) + sizeof(BoneData) * boneData.size() + jsonName.size();
 
 	char* buffer = new char[size];
 	char* cursor = buffer;
@@ -127,14 +133,9 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 	memcpy(cursor, boneData.data(), bytes);
 	cursor += bytes;
 
-	std::string jsonName = name;
-
-	int index = jsonName.find(".");
-	jsonName = jsonName.substr(0, index);
-	jsonName += ".json";
-	
-	bytes = sizeof(jsonName.size());
-	memcpy(cursor, jsonName.data(), bytes);
+	const char* str = jsonName.c_str();
+	bytes = strlen(str);
+	memcpy(cursor, &str[0], bytes);
 	cursor += bytes;
 
 	JsonParsing json = JsonParsing();
@@ -157,7 +158,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	app->fs->Load(path, &buffer);
 	char* cursor = buffer;
 
-	uint ranges[3];
+	uint ranges[4];
 	uint bytes = sizeof(ranges);
 	memcpy(ranges, cursor, bytes);
 	cursor += bytes;
@@ -180,11 +181,19 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 		}
 	}
 
-	std::vector<HierarchyData> data;
-	data.resize(1);
-	bytes = sizeof(HierarchyData) * data.size();
-	memcpy(data.data(), cursor, bytes);
+	int stringSize = ranges[3];
+	
+	std::string aux;
+	aux.resize(stringSize);
+	bytes = stringSize;
+	memcpy(aux.data(), cursor, bytes);
 	cursor += bytes;
+
+	JsonParsing file = JsonParsing();
+	file.ParseFile(aux.c_str());
+
+	LoadHierarchyData(hierData, file);
+
 
 	RELEASE_ARRAY(buffer);
 }
@@ -204,7 +213,6 @@ void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node)
 
 	data.transform = float4x4::FromTRS(pos, rot, sca);
 	data.childrenCount = node->mNumChildren;
-
 	for (int i = 0; i < data.childrenCount; ++i)
 	{
 		HierarchyData childData;
@@ -228,9 +236,9 @@ void AnimationImporter::SaveHierarchyData(HierarchyData& data, JsonParsing& node
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "ChildrenCount", data.childrenCount);
 
 	JSON_Array* array = node.SetNewJsonArray(node.GetRootValue(), "Children");
-	JsonParsing childrenJson = JsonParsing();
 	for (int i = 0; i < data.childrenCount; ++i)
 	{
+		JsonParsing childrenJson = JsonParsing();
 		SaveHierarchyData(data.children[i], childrenJson);
 		node.SetValueToArray(array, childrenJson.GetRootValue());
 	}
@@ -238,7 +246,22 @@ void AnimationImporter::SaveHierarchyData(HierarchyData& data, JsonParsing& node
 
 void AnimationImporter::LoadHierarchyData(HierarchyData& data, JsonParsing& node)
 {
-	// AQUI ES DONDE TIENES QUE HACER EL LOAD ORIOL
+	float3 position = node.GetJson3Number(node, "Position");
+	math::float4 auxRotation = node.GetJson4Number(node, "Rotation");
+	Quat rotation = { auxRotation.x, auxRotation.y, auxRotation.z, auxRotation.w };
+	float3 scale = node.GetJson3Number(node, "Scale");
+
+	data.transform = math::float4x4::FromTRS(position, rotation, scale);
+	data.name = node.GetJsonString("Name");
+	data.childrenCount = node.GetJsonNumber("ChildrenCount");
+	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Children");
+
+	data.children.resize(data.childrenCount);
+	for (int i = 0; i < data.childrenCount; ++i)
+	{
+		JsonParsing children = node.GetJsonArrayValue(array, i);
+		LoadHierarchyData(data.children[i], children);
+	}
 }
 
 void AnimationImporter::ImportAnimations(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids)
