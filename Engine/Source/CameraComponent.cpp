@@ -5,6 +5,7 @@
 #include "GameObject.h"
 
 #include "ModuleScene.h"
+#include "ModuleInput.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -76,7 +77,6 @@ void CameraComponent::OnEditor()
 		if (ImGui::Checkbox("followTarget", &followTarget)) {}
 		ImGui::SameLine();
 		ImGui::Button(target != nullptr ? target->GetName() : "none");
-		ImGui::Selectable(target != nullptr ? target->GetName() : "none");
 		if (ImGui::BeginDragDropTarget())
 		{
 			const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItemGameObject");
@@ -127,17 +127,17 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
-	TransformComponent targetTransform;
-	targetTransform.SetPosition(float3(0, 0, 0));
-
-	float3 newPos = targetTransform.GetPosition();
-	newPos.x += 0;
-	newPos.y += 20;
-	newPos.z += 0;
-	transform->SetPosition(newPos);
-
-	Quat newRot(float3(1, 0, 0), 0.79);
-	transform->SetRotation(newRot);
+	if (followTarget && target)
+	{
+		transform->SetPosition(target->GetComponent<TransformComponent>()->GetPosition() + float3(0, 20, 20));
+		transform->SetRotation(Quat(float3(1, 0, 0), verticalAngle));
+		transform->SetRotation(Quat(float3(0, 1, 0), horizontalAngle));
+	}
+	if (rotateAround)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle += dt * 0.1;
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle -= dt * 0.1;
+	}
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();

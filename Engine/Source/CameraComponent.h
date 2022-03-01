@@ -55,8 +55,9 @@ private:
 	bool followTarget = false;
 	GameObject*/*transform*/ target = nullptr;
 	int s_lerp = 0;
-	float verticalAngle = 0;
+	float verticalAngle = 0.79;
 	bool rotateAround = false;
+	float horizontalAngle = 0;
 	bool multifocusOnClick = false;
 	GameObject*/*transform*/secondTarget = nullptr;
 public:
