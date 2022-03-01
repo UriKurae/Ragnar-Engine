@@ -7,14 +7,6 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
 	active = true; // Component is active
     isActive = false; // Simulation is active
 
-
-	particleProps.colorBegin = { 1,0,0,1};
-	particleProps.colorEnd = { 0,1,0,1 };
-	particleProps.sizeBegin = 0.5f, particleProps.sizeVariation = 0.3f, particleProps.sizeEnd = 0.0f;
-	particleProps.lifeTime = 1.0f;
-	particleProps.velocity = { 0.0f, 5.0f, 0.0f };
-	particleProps.acceleration = { 0.0f, 5.0f, 0.0f };
-	particleProps.position = { 0.0f, 0.0f, 0.0f };
 }
 
 ParticleSystemComponent::~ParticleSystemComponent()
@@ -32,7 +24,7 @@ bool ParticleSystemComponent::Update(float dt)
 	{
 		for (int i = 0; i < emitters.size(); i++)
         {
-            emitters[i]->Emit(dt, particleProps);
+            emitters[i]->Emit(dt);
 			emitters[i]->Update(dt);            
 		}
 	}

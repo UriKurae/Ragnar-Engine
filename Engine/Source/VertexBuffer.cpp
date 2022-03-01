@@ -49,7 +49,7 @@ void VertexBuffer::SetData(unsigned int size)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexBuffer::SetData(Vertex* vertices, uint32_t size)
+void VertexBuffer::SetData(void* vertices, uint32_t size)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 	//glBufferData(GL_ARRAY_BUFFER, 0, size, vertices);

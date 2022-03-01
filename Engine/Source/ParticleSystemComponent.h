@@ -32,7 +32,6 @@ public:
 	float maxDuration = 0.0f;
 
 protected:
-	ParticleProps particleProps;
 
 	std::vector<ParticleEmitter*> emitters;
 	bool isActive;

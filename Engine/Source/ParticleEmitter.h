@@ -14,6 +14,13 @@ class VertexArray;
 class VertexBuffer;
 class IndexBuffer;
 
+struct ParticleVertex
+{
+	float3 position;
+	float2 texCoords;
+	float4 color;
+};
+
 class ParticleEmitter {
 
 public:
@@ -21,7 +28,7 @@ public:
 	ParticleEmitter(GameObject* owner);
 	~ParticleEmitter();
 
-	virtual void Emit(float dt, const ParticleProps& props);
+	virtual void Emit(float dt);
 	void Render(CameraComponent* gameCam);
 	virtual void UpdateParticle(float dt);
 	virtual void Update(float dt);
@@ -42,7 +49,9 @@ protected:
 
 	void StartBatch();
 	void NextBatch();
-	void DrawParticle(const float3& pos, float rotation, const float3& size);
+	void DrawParticle(const float3& pos, float rotation, const float3& size, const float4& color);
+
+	void SetUpBuffers();
 public:
 
 	int maxParticles;
@@ -75,11 +84,12 @@ private:
 		std::shared_ptr<Shader> shader;
 
 		unsigned int indexCount = 0;
-		Vertex* vertexBufferBase = nullptr;
-		Vertex* vertexBufferPtr = nullptr;
+		ParticleVertex* vertexBufferBase = nullptr;
+		ParticleVertex* vertexBufferPtr = nullptr;
 		
 		float4 vertexPositions[4];
 
+		unsigned int drawCalls;
 	};
 	EmitterData data;
 
@@ -91,6 +101,8 @@ private:
 	char charsOfName[50];
 	bool showTexMenu;
 	LCG random;
+
+	ParticleProps particleProps;
 
 	//unsigned int VAO;
 	//unsigned int instanceVBO;
