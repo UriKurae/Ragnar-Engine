@@ -21,6 +21,7 @@ typedef float GLfloat;
 class TransformComponent : public Component
 {
 public:
+	TransformComponent() {}
 	TransformComponent(GameObject* owner);
 	TransformComponent(TransformComponent* trans);
 	~TransformComponent();

@@ -124,6 +124,18 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
+	TransformComponent targetTransform;
+	targetTransform.SetPosition(float3(0, 0, 0));
+
+	float3 newPos = targetTransform.GetPosition();
+	newPos.x += 0;
+	newPos.y += 20;
+	newPos.z += 0;
+	transform->SetPosition(newPos);
+
+	Quat newRot(float3(1, 0, 0), 0.79);
+	transform->SetRotation(newRot);
+
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
 
