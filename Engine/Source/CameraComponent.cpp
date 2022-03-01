@@ -73,10 +73,12 @@ void CameraComponent::OnEditor()
 
 		if (ImGui::Checkbox("followTarget", &followTarget)) {}
 		ImGui::SameLine();
-		ImGui::Button(target != nullptr ? target->name.c_str() : "none");
+		ImGui::Button(target != nullptr ? target->GetName() : "none");
+		ImGui::Selectable(target != nullptr ? target->GetName() : "none");
 		if (ImGui::BeginDragDropTarget())
 		{
-			if (const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItemGameObject"))
+			const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItemGameObject");
+			if (go)
 			{
 				target = (GameObject*)(go->Data);
 			}
