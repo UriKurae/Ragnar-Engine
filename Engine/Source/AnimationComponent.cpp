@@ -100,6 +100,8 @@ bool AnimationComponent::Update(float dt)
 		currentTime = fmod(currentTime, anim->GetDuration());
 		CalculateBoneTransform(/*anim->GetRootNode(),*/ float4x4::identity);
 	}
+
+	return true;
 }
 
 void AnimationComponent::CalculateBoneTransform(/*const AssimpNodeData* node,*/ float4x4 parentTransform)

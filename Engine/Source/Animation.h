@@ -43,7 +43,7 @@ struct BoneTransform
 struct HierarchyData
 {
 	float4x4 transform;
-	char name[20];
+	std::string name;
 	int childrenCount;
 	std::vector<HierarchyData> children;
 };
@@ -64,7 +64,6 @@ public:
 	inline const float& GetDuration() const { return ticks / ticksPerSecond; }
 
 public:
-
 	unsigned int id = 0;
 
 	float ticks = 0.0f;
@@ -73,6 +72,7 @@ public:
 	int numBones = 0;
 
 	std::vector<Bone*> bones;
+	HierarchyData hierarchy;
 
 	BoneTransform* boneTranformations = nullptr;
 };

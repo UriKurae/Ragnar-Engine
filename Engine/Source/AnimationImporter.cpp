@@ -110,11 +110,8 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 void AnimationImporter::SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData, HierarchyData& hierData)
 {
 	unsigned int header[3] = { duration, ticksPerSecond, boneData.size()};
-	int dataBytes = sizeof(hierData);
-	uint size = sizeof(header) + sizeof(BoneData) * boneData.size() + dataBytes;
 
-	//std::vector<HierarchyData> vectorHier;
-	//vectorHier.push_back(hierData);
+	uint size = sizeof(header) + sizeof(BoneData) * boneData.size() + sizeof(name.size());
 
 	char* buffer = new char[size];
 	char* cursor = buffer;
@@ -130,7 +127,21 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 	memcpy(cursor, boneData.data(), bytes);
 	cursor += bytes;
 
-	SaveHierarchyData(hierData, &cursor);
+	std::string jsonName = name;
+
+	int index = jsonName.find(".");
+	jsonName = jsonName.substr(0, index);
+	jsonName += ".json";
+	
+	bytes = sizeof(jsonName.size());
+	memcpy(cursor, jsonName.data(), bytes);
+	cursor += bytes;
+
+	JsonParsing json = JsonParsing();
+
+	SaveHierarchyData(hierData, json);
+
+	int jsonSize = json.SaveFile(jsonName.c_str());
 	
 	if (app->fs->Save(name.c_str(), buffer, size) > 0)
 		DEBUG_LOG("Animation %s saved succesfully", name.c_str());
@@ -139,7 +150,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 
 }
 
-void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector)
+void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector, HierarchyData hierData)
 {
 	// WARNING: Uncommenting this causes to crash
 	char* buffer = nullptr;
@@ -169,12 +180,18 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 		}
 	}
 
+	std::vector<HierarchyData> data;
+	data.resize(1);
+	bytes = sizeof(HierarchyData) * data.size();
+	memcpy(data.data(), cursor, bytes);
+	cursor += bytes;
+
 	RELEASE_ARRAY(buffer);
 }
 
 void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node)
 {
-	memcpy(data.name, node->mName.C_Str(), 20);
+	data.name = node->mName.C_Str();
 
 	aiVector3D position;
 	aiQuaternion rotation;
@@ -196,49 +213,32 @@ void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node)
 	}
 }
 
-void AnimationImporter::SaveHierarchyData(HierarchyData& data, char** buffer)
+void AnimationImporter::SaveHierarchyData(HierarchyData& data, JsonParsing& node)
 {
 	float3 position;
 	Quat rotation;
 	float3 scale;
 	data.transform.Decompose(position, rotation, scale);
 
-	unsigned int bytes = sizeof(float3);
-	memcpy(*buffer, &position, bytes);
-	*buffer += bytes;
+	node.SetNewJson3Number(node, "Position", position);
+	node.SetNewJson4Number(node, "Rotation", rotation);
+	node.SetNewJson3Number(node, "Scale", scale);
 
-	bytes = sizeof(Quat);
-	memcpy(*buffer, &rotation, bytes);
-	*buffer += bytes;
+	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Name", data.name.c_str());
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "ChildrenCount", data.childrenCount);
 
-	bytes = sizeof(float3);
-	memcpy(*buffer, &scale, bytes);
-	*buffer += bytes;
+	JSON_Array* array = node.SetNewJsonArray(node.GetRootValue(), "Children");
+	JsonParsing childrenJson = JsonParsing();
+	for (int i = 0; i < data.childrenCount; ++i)
+	{
+		SaveHierarchyData(data.children[i], childrenJson);
+		node.SetValueToArray(array, childrenJson.GetRootValue());
+	}
+}
 
-
-	// WARNING: If you uncomment this, it crash
-	//bytes = sizeof(unsigned int);
-	//unsigned int size = strlen(data.name);
-	//memcpy(*buffer, &size, bytes);
-	//*buffer += bytes;
-
-	//const char* str = data.name;
-	//bytes = strlen(str);
-	//memcpy(*buffer, &str[0], bytes);
-	//*buffer += bytes;
-
-
-	//bytes = sizeof(std::string);
-	//memcpy(*buffer, &data.name, bytes);
-	//*buffer += bytes;
-
-	bytes = sizeof(int);
-	memcpy(*buffer, &data.childrenCount, bytes);
-	*buffer += bytes;
-
-	bytes = sizeof(HierarchyData) * data.children.size();
-	memcpy(*buffer, &data.children, bytes);
-	*buffer += bytes;
+void AnimationImporter::LoadHierarchyData(HierarchyData& data, JsonParsing& node)
+{
+	// AQUI ES DONDE TIENES QUE HACER EL LOAD ORIOL
 }
 
 void AnimationImporter::ImportAnimations(std::string& path, const aiScene* scene, JsonParsing& json, std::vector<uint>& uids)
