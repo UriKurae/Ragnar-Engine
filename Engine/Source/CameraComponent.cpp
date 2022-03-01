@@ -4,6 +4,8 @@
 #include "CameraComponent.h"
 #include "GameObject.h"
 
+#include "ModuleScene.h"
+
 #include "glew/include/GL/glew.h"
 
 #include "IconsFontAwesome5.h"
@@ -80,7 +82,8 @@ void CameraComponent::OnEditor()
 			const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItemGameObject");
 			if (go)
 			{
-				target = (GameObject*)(go->Data);
+				uint uuid = *(const uint*)(go->Data);
+				target = app->scene->GetGoByUuid(uuid);
 			}
 			ImGui::EndDragDropTarget();
 		}

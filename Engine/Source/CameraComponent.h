@@ -6,6 +6,7 @@
 class TransformComponent;
 class IndexBuffer;
 class VertexBuffer;
+
 class CameraComponent : public Component
 {
 public:
