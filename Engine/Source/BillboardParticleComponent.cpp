@@ -99,13 +99,16 @@ Quat BillboardParticleComponent::GetAlignment()
 Quat BillboardParticleComponent::CameraAlign()
 {
 	// TODO: particles always face camera
+	return Quat::identity;
 }
 
 Quat BillboardParticleComponent::WorldAlign()
 {
 	// TODO: particles always face camera, but they can be softly rotated
+	return Quat::identity;
 }
 
 Quat BillboardParticleComponent::AxisAlign()
 {
+	return Quat::identity;
 }

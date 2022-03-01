@@ -41,6 +41,22 @@ void VertexBuffer::SetData(float* vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void VertexBuffer::SetData(unsigned int size)
+{
+	//glCreateBuffers(1, &buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void VertexBuffer::SetData(Vertex* vertices, uint32_t size)
+{
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	//glBufferData(GL_ARRAY_BUFFER, 0, size, vertices);
+	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 VertexBuffer::~VertexBuffer()
 {
 	if (buffer != 0) glDeleteBuffers(1, &buffer);

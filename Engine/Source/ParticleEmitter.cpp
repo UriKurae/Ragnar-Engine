@@ -70,32 +70,58 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	vertices.push_back(vertex);
 
 
-	vertexArray = new VertexArray();
+	data.maxQuads = maxParticles;
+	data.maxVertices = data.maxQuads * 4;
+	data.maxIndices = data.maxQuads * 6;
+
+	data.vertexArray = new VertexArray();
 	
-	vertexBuffer = new VertexBuffer();
-	vertexBuffer->SetData(vertices);
-	vertexBuffer->SetLayout({
+	data.vertexBuffer = new VertexBuffer();
+	data.vertexBuffer->SetData(data.maxVertices);
+	data.vertexBuffer->SetLayout({
 		{ShaderDataType::VEC3F, "position"},
 		{ShaderDataType::VEC3F, "normal"},
 		{ShaderDataType::VEC2F, "texCoords"}
 	});
-	vertexArray->AddVertexBuffer(*vertexBuffer);
+	data.vertexArray->AddVertexBuffer(*data.vertexBuffer);
 	//vertexBuffer->Unbind();
 
-	unsigned int indices[] = { 0, 1, 2, 2, 3, 0 };
+	data.vertexBufferBase = new Vertex[data.maxVertices];
 
-	indexBuffer = new IndexBuffer(indices, 6);
-	vertexArray->SetIndexBuffer(*indexBuffer);
+	unsigned int* indices = new unsigned int[data.maxIndices];
+	
+	int offset = 0;
+	for (int i = 0; i < data.maxIndices; i += 6)
+	{
+		indices[i + 0] = offset + 0;
+		indices[i + 1] = offset + 1;
+		indices[i + 2] = offset + 2;
+
+		indices[i + 3] = offset + 2;
+		indices[i + 4] = offset + 3;
+		indices[i + 5] = offset + 0;
+
+		offset += 4;
+	}
+
+	data.indexBuffer = new IndexBuffer(indices, data.maxIndices);
+	data.vertexArray->SetIndexBuffer(*data.indexBuffer);
 	//indexBuffer->Unbind();
 
-	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/particlesBehaviour.shader")));
+	data.shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/particlesBehaviour.shader")));
+
+	data.vertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+	data.vertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
+	data.vertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
+	data.vertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+
 }
 
 ParticleEmitter::~ParticleEmitter()
 {
-	RELEASE(vertexArray);
-	RELEASE(vertexBuffer);
-	RELEASE(indexBuffer);
+	RELEASE(data.vertexArray);
+	RELEASE(data.vertexBuffer);
+	RELEASE(data.indexBuffer);
 }
 
 void ParticleEmitter::Emit(float dt, const ParticleProps& props)
@@ -160,8 +186,37 @@ void ParticleEmitter::Emit(float dt, const ParticleProps& props)
 	//}
 }
 
+void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const float3& size)
+{
+	if (data.indexCount >= data.maxIndices)
+		NextBatch();
+
+	Quat q;
+	q.SetFromAxisAngle({ 0,0,1 }, rotation);
+	float4x4 transform = float4x4::FromTRS(pos, q, size);
+
+	const int quadVertexCount = 4;
+	for (int i = 0; i < quadVertexCount; i++)
+	{
+		float4 p = transform * data.vertexPositions[i];
+		data.vertexBufferPtr->position = p.Float3Part();
+		data.vertexBufferPtr->normal = float3::zero;
+		data.vertexBufferPtr->texCoords = float2::zero;
+		//data.vertexBufferPtr->Color = color;
+		//data.vertexBufferPtr->TexCoord = textureCoords[i];
+		//data.vertexBufferPtr->TexIndex = textureIndex;
+		//data.vertexBufferPtr->TilingFactor = tilingFactor;
+		//data.vertexBufferPtr->EntityID = entityID;
+		data.vertexBufferPtr++;
+	}
+
+	data.indexCount += 6;
+}
+
 void ParticleEmitter::Render(CameraComponent* gameCam)
 {
+	StartBatch();
+
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
 	if (gameCam)
@@ -175,35 +230,54 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 		proj = app->camera->matrixProjectionFrustum;
 	}
 
-	shader->Bind();
-	shader->SetUniformMatrix4f("view", view.Transposed());
-	shader->SetUniformMatrix4f("projection", proj.Transposed());
-
+	
 	int i = 0;
-	for (auto& particle : particlePool)
+	for (; i < particlePool.size(); ++i)
+	//for (auto& particle : particlePool)
 	{
-		i++;
+		Particle& particle = particlePool[i];
+
 		if (!particle.active)
 			continue;
 
 		float life = particle.lifeRemaining / particle.lifeTime;
-		float4 color = float4::Lerp(particle.colorEnd, particle.colorBegin, life);
+		//float4 color = float4::Lerp(particle.colorEnd, particle.colorBegin, life);
 		float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
 		
-		Quat q = Quat({ 0,0,1 }, particle.rotation);
-		float4x4 tr = float4x4::FromTRS({ particle.position.x, particle.position.y, 0.0f }, q, { size, size, 1.0f });
+		//Quat q = Quat({ 0,0,1 }, particle.rotation);
+		//float4x4 tr = float4x4::FromTRS({ particle.position.x, particle.position.y, 0.0f }, q, { size, size, 1.0f });
 		
-		shader->SetUniformMatrix4f("model", tr.Transposed());
-		shader->SetUniformVec4f("color", color);
-		vertexArray->Bind();
-		vertexBuffer->Bind();
-		indexBuffer->Bind();
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		shader->Unbind();
-		vertexArray->Unbind();
-		vertexBuffer->Unbind();
-		indexBuffer->Unbind();
+		DrawParticle(particle.position, particle.rotation, { size,size,0.0f });
+
+		//data.shader->SetUniformMatrix4f("model", tr.Transposed());
+		//data.shader->SetUniformVec4f("color", color);
+		//data.vertexArray->Bind();
+		//data.vertexBuffer->Bind();
+		//data.indexBuffer->Bind();
+		//glDrawElements(GL_TRIANGLES, data.indexCount, GL_UNSIGNED_INT, 0);
+		//data.shader->Unbind();
+		//data.vertexArray->Unbind();
+		//data.vertexBuffer->Unbind();
+		//data.indexBuffer->Unbind();
 	}
+
+	uint32_t dataSize = (uint32_t)((uint8_t*)data.vertexBufferPtr - (uint8_t*)data.vertexBufferBase);
+	data.vertexBuffer->SetData(data.vertexBufferBase, dataSize);
+
+	data.vertexArray->Bind();
+
+	data.shader->Bind();
+	data.shader->SetUniformMatrix4f("view", view.Transposed());
+	data.shader->SetUniformMatrix4f("projection", proj.Transposed());
+	
+	data.vertexBuffer->Bind();
+	data.indexBuffer->Bind();
+	glDrawElements(GL_TRIANGLES, data.indexCount, GL_UNSIGNED_INT, 0);
+	data.indexBuffer->Unbind();
+	data.vertexBuffer->Unbind();
+	data.shader->Unbind();
+	data.vertexArray->Unbind();
+
 }
 
 void ParticleEmitter::UpdateParticle(float dt)
@@ -212,8 +286,11 @@ void ParticleEmitter::UpdateParticle(float dt)
 
 void ParticleEmitter::Update(float dt)
 {
-	for (auto& particle : particlePool)
+	for (int i = 0; i < particlePool.size(); ++i)
+	//for (auto& particle : particlePool)
 	{
+		Particle& particle = particlePool[i];
+
 		if (!particle.active)
 			continue;
 
@@ -225,7 +302,10 @@ void ParticleEmitter::Update(float dt)
 
 		particle.lifeRemaining -= dt;
 		particle.position += particle.velocity * dt;
-		//particle.rotation += 0.001 * dt;
+		particle.rotation += 0.001 * dt;
+
+		int a = 0;
+		a += 2;
 	}
 }
 
@@ -484,4 +564,16 @@ void ParticleEmitter::AddInstancedAttribute(unsigned int vao, unsigned int vbo, 
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+void ParticleEmitter::StartBatch()
+{
+	data.indexCount = 0;
+	data.vertexBufferPtr = data.vertexBufferBase;
+}
+
+void ParticleEmitter::NextBatch()
+{
+	Render(0);
+	StartBatch();
 }

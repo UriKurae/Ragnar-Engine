@@ -33,9 +33,7 @@ bool ParticleSystemComponent::Update(float dt)
 		for (int i = 0; i < emitters.size(); i++)
         {
             emitters[i]->Emit(dt, particleProps);
-			emitters[i]->Update(dt);
-            //emitters[i]->Render(nullptr);
-            
+			emitters[i]->Update(dt);            
 		}
 	}
 

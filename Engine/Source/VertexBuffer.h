@@ -13,6 +13,8 @@ public:
 
 	void SetData(const std::vector<Vertex>&);
 	void SetData(float* vertices);
+	void SetData(unsigned int size);
+	void SetData(Vertex* vertices, uint32_t size);
 
 
 	void Bind() const;

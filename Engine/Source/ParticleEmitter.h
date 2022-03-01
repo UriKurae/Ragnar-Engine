@@ -38,9 +38,11 @@ public:
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array);
 
 protected:
-
 	void AddInstancedAttribute(unsigned int vao, unsigned int vbo, int attributeIndex, int dataSize, int instancedDataLength, int offset);
 
+	void StartBatch();
+	void NextBatch();
+	void DrawParticle(const float3& pos, float rotation, const float3& size);
 public:
 
 	int maxParticles;
@@ -60,10 +62,30 @@ public:
 
 private:
 
+	struct EmitterData
+	{
+		unsigned int maxQuads;
+		unsigned int maxVertices;
+		unsigned int maxIndices;
+
+		VertexArray* vertexArray;
+		VertexBuffer* vertexBuffer;
+		IndexBuffer* indexBuffer;
+
+		std::shared_ptr<Shader> shader;
+
+		unsigned int indexCount = 0;
+		Vertex* vertexBufferBase = nullptr;
+		Vertex* vertexBufferPtr = nullptr;
+		
+		float4 vertexPositions[4];
+
+	};
+	EmitterData data;
+
 	std::vector<Particle> particlePool;
 	unsigned int poolIndex;
 
-	std::shared_ptr<Shader> shader;
 
 	std::string emitterName;
 	char charsOfName[50];
@@ -74,9 +96,7 @@ private:
 	//unsigned int instanceVBO;
 	//unsigned int vertexVBO;
 
-	VertexArray* vertexArray;
-	VertexBuffer* vertexBuffer;
-	IndexBuffer* indexBuffer;
+	
 };
 
 const float particleVertices[] = {
