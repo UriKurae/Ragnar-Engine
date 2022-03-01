@@ -62,7 +62,8 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 
 		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
-		if (app->editor->GetGO())
+		GameObject* goSel = app->editor->GetGO();
+		if (goSel)
 		{
 			ImGuizmo::Enable(true);
 			ImGuizmo::SetGizmoSizeClipSpace(0.3f);
@@ -70,20 +71,27 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
+			math::float4x4 posGuizmo = app->editor->GetGO()->GetComponent<TransformComponent>()->GetGlobalTransform();
+			posGuizmo.SetCol3(3, posGuizmo.Col3(3) + goSel->GetOffsetCM());
+			posGuizmo.Transpose();
 
-			math::float4x4 tr = app->editor->GetGO()->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::WORLD, posGuizmo.ptr());
 			static bool firstMove = false;
 			if (ImGuizmo::IsUsing())
 			{
-				GameObject* go = app->editor->GetGO();
+				GameObject* go = goSel;
 				if (!firstMove)
 				{
 					firstMove = true;
 
 					CommandDispatcher::Execute(new MoveGameObjectCommand(go));
 				}
-				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				math::float4x4 tr = posGuizmo.Transposed();
+				tr.SetCol3(3, tr.Col3(3) - goSel->GetOffsetCM());
+				/*float angle = go->GetComponent<TransformComponent>()->GetRotation().AngleBetween(tr.RotatePart().ToQuat());
+				Quat quat = math::Quat::RotateAxisAngle(tr.Col3(3) - goSel->GetOffsetCM(), angle);
+				tr.SetRotatePart(quat);*/
+				go->GetComponent<TransformComponent>()->SetTransform(tr);
 			}
 			else firstMove = false;
 		}
@@ -118,8 +126,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGui::EndDragDropTarget();
 		}
 
-		GameObject* camera = app->editor->GetGO();
-		if (camera && camera->GetComponent<CameraComponent>())
+		if (goSel && goSel->GetComponent<CameraComponent>())
 		{
 			ImGui::SetNextWindowSize(ImVec2(210, 150));
 			ImGui::SetNextWindowPos(ImVec2((bounds.x + bounds.z) - 225, (bounds.y + bounds.w) - 150));
