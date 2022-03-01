@@ -52,7 +52,6 @@ bool ModuleInput::PreUpdate(float dt)
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
 		std::string string;

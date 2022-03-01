@@ -77,6 +77,7 @@ public:
 	inline int GetMouseZ() const { return mouseZ; }
 	inline int GetMouseXMotion() const { return mouseXMotion; }
 	inline int GetMouseYMotion() const { return mouseYMotion; }
+
 	bool GetButton(int joystickId, Button button);
 	bool GetButtonDown(int joystickId, Button button);
 	bool GetButtonUp(int joystickId, Button button);
