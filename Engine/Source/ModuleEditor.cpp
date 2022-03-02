@@ -71,16 +71,16 @@ bool ModuleEditor::Update(float dt)
 	{
 		app->window->SetFullscreen();
 	}
-
+	
 	if (app->input->GetKey(SDL_SCANCODE_DELETE) == KeyState::KEY_UP)
 	{
 		if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 		{
-			for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
+			for (std::vector<GameObject*>::iterator i = selected->GetParent()->GetChilds().begin(); i != selected->GetParent()->GetChilds().end(); ++i)
 			{
 				if (selected == (*i))
 				{
-					selectedParent->GetChilds().erase(i);
+					selected->GetParent()->GetChilds().erase(i);
 					RELEASE(selected);
 					app->scene->ResetQuadtree();
 					break;
@@ -102,8 +102,8 @@ bool ModuleEditor::Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer)
 {
 	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
-	viewport->Draw(editorBuffer, gameBuffer, currentOperation);
 	gameView->Draw(gameBuffer);
+	viewport->Draw(editorBuffer, gameBuffer, currentOperation);
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -147,7 +147,7 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 		JsonParsing tag = node.GetJsonArrayValue(jsonArray, i);
 		tags.push_back(tag.GetJsonString(std::to_string(i).c_str()));
 	}
-	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetTags(tags);
+	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(mainMenuBar.GetMenus().size()-1))->SetTags(tags);
 	
 	// Load Layers
 	jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "layers");
@@ -158,7 +158,7 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 		JsonParsing lay = node.GetJsonArrayValue(jsonArray, i);
 		layers.push_back(lay.GetJsonString(std::to_string(i).c_str()));
 	}
-	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetLayers(layers);
+	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(mainMenuBar.GetMenus().size() - 1))->SetLayers(layers);
 
 	// Load style
 	mainMenuBar.SetStyle((int)node.GetJsonNumber("style"));

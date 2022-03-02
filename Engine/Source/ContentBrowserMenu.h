@@ -21,6 +21,8 @@ public:
 
 	void DrawRecursive(std::vector<std::string>& dirs);
 
+	ImGuiTreeNodeFlags SetFlags(std::vector<std::string> node);
+
 	inline std::string& GetCurrentDir() { return currentDirectory; }
 
 private:

@@ -32,8 +32,6 @@ public:
 	void DrawOutline();
 	void DrawEditor();
 
-	void DebugColliders();
-
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
@@ -84,7 +82,6 @@ public:
 	std::string name;
 	bool active;
 	bool staticObj;
-	bool colliders;
 	std::string tag;
 	std::string layer;
 
@@ -98,9 +95,6 @@ private:
 
 	AABB globalAabb;
 	OBB globalObb;
-
-	VertexBuffer* vertex;
-	IndexBuffer* index;
 
 	uint uuid;
 	float3 offsetCM = float3::zero;

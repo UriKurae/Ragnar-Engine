@@ -15,8 +15,8 @@ public:
 
 	void ShowChildren(GameObject* parent);
 
+	ImGuiTreeNodeFlags SetFlags(GameObject* node);
+
 private:
 	bool gameObjectOptions;
-
-	bool createGameObject;
 };

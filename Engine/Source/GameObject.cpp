@@ -20,7 +20,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -40,9 +40,6 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
-
-	RELEASE(vertex);
-	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -74,11 +71,6 @@ void GameObject::Draw(CameraComponent* gameCam)
 		{
 			component->Draw(gameCam);
 		}
-	}
-
-	if (index && vertex && colliders)
-	{
-		DebugColliders();
 	}
 }
 
@@ -164,60 +156,6 @@ void GameObject::DrawEditor()
 			ImGui::EndPopup();
 		}
 	}
-}
-
-void GameObject::DebugColliders()
-{
-	//glPushMatrix();
-	//
-	//glMultMatrixf(GetComponent<TransformComponent>()->GetTransform().Transposed().ptr());
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	vertex->Bind();
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	index->Bind();
-	glLineWidth(2.0f);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glDrawElements(GL_LINES, index->GetCount(), GL_UNSIGNED_INT, NULL);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glLineWidth(1.0f);
-	vertex->Unbind();
-	index->Unbind();
-	glDisableClientState(GL_VERTEX_ARRAY);
-	/*glPopMatrix();*/
-
-	// TODO delete this when done
-
-	// Configure buffers
-	float3 corners[8];
-	globalAabb.GetCornerPoints(corners);
-
-	unsigned int indices[24] =
-	{
-		0,1,
-		1,3,
-		3,2,
-		2,0,
-
-		1,5,
-		4,6,
-		7,3,
-
-		6,7,
-		6,2,
-
-		7,5,
-		4,5,
-
-		4,0
-	};
-
-	if (index) RELEASE(index);
-	if (vertex) RELEASE(vertex);
-	index = new IndexBuffer(indices, 24);
-	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
-	index->Unbind();
-	vertex->Unbind();
 }
 
 Component* GameObject::CreateComponent(ComponentType type)
