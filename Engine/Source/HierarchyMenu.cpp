@@ -131,7 +131,7 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 			if (ImGui::BeginDragDropSource())
 			{
 				ImGui::SetDragDropPayload("HierarchyItem", &uuid, sizeof(uint));
-				ImGui::SetDragDropPayload("HierarchyItemGameObject", &uuid, sizeof(uint));
+				//ImGui::SetDragDropPayload("HierarchyItemGameObject", &uuid, sizeof(uint));
 
 				ImGui::EndDragDropSource();
 			}

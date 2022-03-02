@@ -39,6 +39,7 @@ private:
 	TransformComponent* transform;
 	Quat currentRotation;
 	float3 currentPos;
+	float3 originalPos;
 
 	float nearPlane;
 	float farPlane;
@@ -61,13 +62,16 @@ private:
 	bool multifocusOnClick = false;
 	GameObject*/*transform*/secondTarget = nullptr;
 public:
-	void shake(float strength, float duration);
+	//void Shake(float strength, float duration);
+	void Shake(float dt);
 	void setTransition(std::vector<float> durations, std::vector<float3> positions);
 private:
 	float shakeStrength = 0;
 	float shakeDuration = 0;
 	std::vector<float> transitionDurations;
 	std::vector<float3> transitionPositions;
+	bool shake = false;
+	float elapsedTime = 0.0f;
 	//----------------------------------------------
-
+public:
 };

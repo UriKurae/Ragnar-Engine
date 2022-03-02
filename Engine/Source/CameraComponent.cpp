@@ -13,6 +13,8 @@
 
 #include "Profiling.h"
 
+#include <stdlib.h>
+
 CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(1.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
 {
 	type = ComponentType::CAMERA;
@@ -23,7 +25,7 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	camera.SetPerspective(horizontalFov, verticalFov);
 	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 
-
+	srand(time(NULL));
 
 	CompileBuffers();
 }
@@ -79,7 +81,7 @@ void CameraComponent::OnEditor()
 		ImGui::Button(target != nullptr ? target->GetName() : "none");
 		if (ImGui::BeginDragDropTarget())
 		{
-			const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItemGameObject");
+			const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItem");
 			if (go)
 			{
 				uint uuid = *(const uint*)(go->Data);
@@ -98,15 +100,48 @@ void CameraComponent::OnEditor()
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
 
-		
+
+		ImGui::Text("- - - - - - - - - TESTING");
+
+		if (ImGui::DragFloat("shakeStrength", &shakeStrength, 0.1f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("shakeDuration", &shakeDuration, 0.1f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::Button("Shake")) {
+			shake = true; 
+			originalPos = transform->GetPosition();
+		}
 	}
 	ImGui::PopID();
+}
+
+void CameraComponent::Shake(float dt)
+{
+	if (elapsedTime < shakeDuration)
+	{
+		float x = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
+		float y = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
+		float3 lastPos = transform->GetPosition();
+		lastPos.x += x;
+		lastPos.y += y;
+		camera.SetPos(lastPos);
+		elapsedTime += dt;
+	}
+	else
+	{
+		shake = false;
+		elapsedTime = 0.0f;
+		camera.SetPos(originalPos);
+	}
 }
 
 bool CameraComponent::Update(float dt)
 {
 	
 	camera.SetPos(transform->GetPosition());
+
+	if (shake)
+	{
+		Shake(dt);
+	}
 	
 	if (!CompareRotations(currentRotation, transform->GetRotation()))
 	{
@@ -145,8 +180,8 @@ bool CameraComponent::Update(float dt)
 			newPos.x += cos(horizontalAngle) * 10;
 		}
 	}
-	transform->SetPosition(newPos);
-	transform->SetRotation(newRot);
+	//transform->SetPosition(newPos);
+	//transform->SetRotation(newRot);
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
