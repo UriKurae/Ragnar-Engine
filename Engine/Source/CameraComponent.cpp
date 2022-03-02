@@ -66,13 +66,7 @@ void CameraComponent::OnEditor()
 		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
 		ImGui::PopID();
 
-		ImGui::PushID("farPlane");
-		ImGui::Text("Far");
-		ImGui::SameLine();
-		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
-		ImGui::PopID();
-
-		ImGui::Text("- - - - - - - - -");
+		ImGui::Text("- - - - MOVEMENT - - - -");
 
 		if (ImGui::Checkbox("freeMovement", &freeMovement)) {}
 
@@ -102,11 +96,22 @@ void CameraComponent::OnEditor()
 		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.01f, 0.0f/*, 90.0f*/)) {}
 
 
-		ImGui::Text("- - - - - - - - -");
+		ImGui::Text("- - - - SHAKE - - - -");
 
 		if (ImGui::DragFloat("shakeStrength", &shakeStrength, 0.1f, 0.0f/*, 90.0f*/)) {}
 		if (ImGui::DragFloat("shakeDuration", &shakeDuration, 0.1f, 0.0f/*, 90.0f*/)) {}
-		if (ImGui::Checkbox("smoothShake", &smoothShake)) {}
+
+		if (ImGui::Button("<")) if (smooth > 0) smooth--;
+		ImGui::SameLine();
+		ImGui::Button("Smoothness Type");
+		ImGui::SameLine();
+		if (ImGui::Button(">")) if (smooth < 3) smooth++;
+
+		if (smooth == 0) ImGui::Text("Smoothnes:: none");
+		if (smooth == 1) ImGui::Text("Smoothnes:: in-out");
+		if (smooth == 2) ImGui::Text("Smoothnes:: in");
+		if (smooth == 3) ImGui::Text("Smoothnes:: out");
+		//if (ImGui::Checkbox("smoothShake", &smoothShake)) {}
 		if (ImGui::Button("Shake")) {
 			RequestShake(shakeStrength, shakeDuration);
 		}
@@ -147,12 +152,10 @@ bool CameraComponent::Update(float dt)
 	{
 		float3 targetPos = target->GetComponent<TransformComponent>()->GetPosition();
 		float3 newPos = targetPos;
-		float offsetZ = 20.0f;
-		float offsetX = 20.0f;
 		newPos.z += 20;
 		newPos.y += 20;
 
-		// This is from LookAt function from ModuleCamera.h
+		// This is from LookAt function at ModuleCamera.h
 		float3 directionFrustum = targetPos - camera.Pos();
 		directionFrustum.Normalize();
 
@@ -175,8 +178,9 @@ bool CameraComponent::Update(float dt)
 			newPos.x += TestPosX - newPos.x;
 		}
 
-		transform->SetPosition(newPos);
 		transform->SetRotation(lookAt.ToQuat());
+		transform->SetPosition(newPos);
+
 	}
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
@@ -303,7 +307,6 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-
 int CameraComponent::ContainsAaBox(const AABB& boundingBox)
 {
 	if (boundingBox.IsFinite())
@@ -325,7 +328,7 @@ void CameraComponent::RequestShake(float strength, float duration)
 {
 	shakeStrength = strength;
 	shakeDuration = duration;
-	if (smoothShake) currentStrength = 0;
+	if (smooth != 0) currentStrength = 0;
 	else currentStrength = strength;
 	shake = true;
 	originalPos = transform->GetPosition();
@@ -334,9 +337,9 @@ void CameraComponent::RequestShake(float strength, float duration)
 void CameraComponent::Shake(float dt)
 {
 	// Exponential
-	if (smoothShake)
+	if (smooth != 0)
 	{
-		if (elapsedTime < shakeDuration / 2)
+		if ((elapsedTime < shakeDuration / 2 && smooth == 1) || (smooth == 2 && elapsedTime < shakeDuration))
 		{
 			if (currentStrength < shakeStrength)
 			{
@@ -344,7 +347,7 @@ void CameraComponent::Shake(float dt)
 			}
 			else currentStrength = shakeStrength;
 		}
-		else if (currentStrength > 0 && elapsedTime < shakeDuration)
+		else if ((currentStrength > 0 && elapsedTime < shakeDuration && smooth == 1) || (elapsedTime < shakeDuration && smooth == 3))
 		{
 			currentStrength = shakeStrength * (shakeDuration - elapsedTime) * (shakeDuration - elapsedTime);
 		}

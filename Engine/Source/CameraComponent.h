@@ -39,6 +39,7 @@ private:
 	TransformComponent* transform;
 	Quat currentRotation;
 	float3 currentPos;
+	//float3 lastPos = float3(0, 0, 0);
 	float3 originalPos;
 
 	float nearPlane;
@@ -72,9 +73,10 @@ private:
 	float shakeStrength = 0.6f;
 	float shakeDuration = 1.0f;
 	bool shake = false;
-	bool smoothShake = true;
-	std::vector<float> transitionDurations;
-	std::vector<float3> transitionPositions;
+	//bool smoothShake = true;
+	int smooth = 0;
 	float elapsedTime = 0.0f;
 	float currentStrength = 0.0f;
+	std::vector<float> transitionDurations;
+	std::vector<float3> transitionPositions;
 };
