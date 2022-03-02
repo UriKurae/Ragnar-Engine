@@ -24,7 +24,6 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
-	isUI = false;
 	uuid = lcg.Int();
 }
 
@@ -263,18 +262,6 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
-      break;
-	case ComponentType::UI_BUTTON:
-		component = new ButtonComponent(this);
-		break;
-	case ComponentType::UI_SLIDER:
-		component = new SliderComponent(this);
-		break;
-	case ComponentType::UI_CHECKBOX:
-		component = new CheckboxComponent(this);
-		break;
-	case ComponentType::TRANFORM2D:
-		component = new ComponentTransform2D(float3{0,0,501}, float3{300,100,1}, float3{0,0,0}, this);
 		break;
 	case ComponentType::MATERIAL:
 	{
@@ -309,7 +296,6 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::LIGHT:
 		component = new ComponentLight();
 		break;
-	
 	}
 
 	if (component != nullptr)

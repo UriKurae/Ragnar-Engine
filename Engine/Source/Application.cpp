@@ -7,7 +7,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "Physics3D.h"
-#include "ModuleUI.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "AudioManager.h"
@@ -20,7 +20,6 @@ Application::Application()
 	input = new ModuleInput();
 	physics = new Physics3D();
 	scene = new ModuleScene();
-	userInterface = new ModuleUI();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	editor = new ModuleEditor();
@@ -39,9 +38,9 @@ Application::Application()
 	AddModule(input);
 	
 	// Scenes
-	AddModule(userInterface);
 	AddModule(scene);
 	AddModule(editor);
+
 	AddModule(renderer3D);
 
 	loadRequested = true;

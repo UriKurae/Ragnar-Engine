@@ -75,7 +75,7 @@ MaterialComponent::~MaterialComponent()
 
 void MaterialComponent::OnEditor()
 {
-	
+	ImGui::PushID(this);
 
 	if (showShaderEditor)
 	{

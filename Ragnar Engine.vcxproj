@@ -55,7 +55,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\freetype-2.10.0\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -64,8 +64,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;$(SolutionDir)Dependencies\freetype-2.10.0\lib;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;freetype.lib;BulletCollision_debug.lib;BulletDynamics_debug.lib;LinearMath_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;BulletCollision_debug.lib;BulletDynamics_debug.lib;LinearMath_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,7 +77,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\freetype-2.10.0\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\Bullet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\Bullet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;AK_OPTIMIZED;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -87,8 +87,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;$(SolutionDir)Dependencies\freetype-2.10.0\lib;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;freetype.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies);AkRoomVerbFX.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies);AkRoomVerbFX.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -216,9 +216,6 @@
     <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\GameObjectCommands.h" />
-    <ClInclude Include="Engine\Source\ButtonComponent.h" />
-    <ClInclude Include="Engine\Source\CanvasComponent.h" />
-    <ClInclude Include="Engine\Source\CheckBoxComponent.h" />
     <ClInclude Include="Engine\Source\Color.h" />
     <ClInclude Include="Engine\Source\Command.h" />
     <ClInclude Include="Engine\Source\Component.h" />
@@ -234,9 +231,7 @@
     <ClInclude Include="Engine\Source\glmath.h" />
     <ClInclude Include="Engine\Source\Globals.h" />
     <ClInclude Include="Engine\Source\HierarchyMenu.h" />
-    <ClInclude Include="Engine\Source\ImageComponent.h" />
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
-    <ClInclude Include="Engine\Source\InputBoxComponent.h" />
     <ClInclude Include="Engine\Source\InspectorMenu.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
     <ClInclude Include="Engine\Source\ListenerComponent.h" />
@@ -254,7 +249,6 @@
     <ClInclude Include="Engine\Source\ModuleInput.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
-    <ClInclude Include="Engine\Source\ModuleUI.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\Physics3D.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
@@ -269,14 +263,11 @@
     <ClInclude Include="Engine\Source\ShaderImporter.h" />
     <ClInclude Include="Engine\Source\TextEditor.h" />
     <ClInclude Include="Engine\Source\Style.h" />
-    <ClInclude Include="Engine\Source\SliderComponent.h" />
-    <ClInclude Include="Engine\Source\Text.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureImporter.h" />
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
-    <ClInclude Include="Engine\Source\Transform2DComponent.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\Vertex.h" />
     <ClInclude Include="Engine\Source\VertexArray.h" />
@@ -352,10 +343,7 @@
     <ClCompile Include="Engine\Source\AudioManager.cpp" />
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp" />
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
-    <ClCompile Include="Engine\Source\ButtonComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
-    <ClCompile Include="Engine\Source\CanvasComponent.cpp" />
-    <ClCompile Include="Engine\Source\CheckBoxComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\Component.cpp" />
     <ClCompile Include="Engine\Source\LightComponent.cpp" />
@@ -372,9 +360,7 @@
     <ClCompile Include="Engine\Source\GameView.cpp" />
     <ClCompile Include="Engine\Source\glmath.cpp" />
     <ClCompile Include="Engine\Source\HierarchyMenu.cpp" />
-    <ClCompile Include="Engine\Source\ImageComponent.cpp" />
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
-    <ClCompile Include="Engine\Source\InputBoxComponent.cpp" />
     <ClCompile Include="Engine\Source\InspectorMenu.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
     <ClCompile Include="Engine\Source\ListenerComponent.cpp" />
@@ -393,7 +379,6 @@
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
-    <ClCompile Include="Engine\Source\ModuleUI.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
     <ClCompile Include="Engine\Source\Physics3D.cpp" />
@@ -404,13 +389,11 @@
     <ClCompile Include="Engine\Source\Shader.cpp" />
     <ClCompile Include="Engine\Source\ShaderImporter.cpp" />
     <ClCompile Include="Engine\Source\TextEditor.cpp" />
-    <ClCompile Include="Engine\Source\SliderComponent.cpp" />
     <ClCompile Include="Engine\Source\Texture.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />
     <ClCompile Include="Engine\Source\EngineTimer.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
-    <ClCompile Include="Engine\Source\Transform2DComponent.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
     <ClCompile Include="Engine\Source\VertexArray.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
