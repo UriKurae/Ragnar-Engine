@@ -9,8 +9,9 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "Imgui/imgui_internal.h"
 
-InputActionMenu::InputActionMenu() : Menu(true)
+InputActionMenu::InputActionMenu() : Menu(false)
 {
+	actionMaps.push_back(new ActionMaps());
 }
 
 InputActionMenu::~InputActionMenu()
@@ -92,10 +93,10 @@ bool InputActionMenu::SaveInputActionFile(const char* path)
 	JsonParsing file;
 
 	file = file.SetChild(file.GetRootValue(), "Input Action");
-	JSON_Array* array = file.SetNewJsonArray(file.GetRootValue(), "");
+	JSON_Array* array = file.SetNewJsonArray(file.GetRootValue(), "Action Maps");
 	for (int i = 0; i < actionMaps.size(); i++)
 	{
-		actionMaps[i].OnSave(file, array);
+		actionMaps[i]->OnSave(file, array);
 	}
 
 	uint size = file.SaveFile(path);
@@ -110,11 +111,33 @@ bool InputActionMenu::SaveInputActionFile(const char* path)
 
 bool InputActionMenu::LoadInputActionFile(const char* path)
 {
+	actionMaps.clear();
+
+	JsonParsing sceneFile = JsonParsing();
+
+	if (sceneFile.ParseFile(path) > 0)
+	{
+		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Action Maps");
+
+		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
+		for (int i = 0; i < size; ++i)
+		{
+			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
+			ActionMaps* aM = new ActionMaps();
+			aM->OnLoad(go);
+			actionMaps.push_back(aM);
+		}
+	}
+	else
+	{
+		DEBUG_LOG("Input Asset couldn't be loaded");
+	}
 	return false;
 }
 
 Actions::Actions()
 {
+	name = "Move";
 }
 
 Actions::~Actions()
@@ -128,8 +151,15 @@ void Actions::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 }
 
+void Actions::OnLoad(JsonParsing& node)
+{
+	name = node.GetJsonString("Name");
+}
+
 ActionMaps::ActionMaps()
 {
+	name = "Player";
+	actions.push_back(new Actions());
 }
 
 ActionMaps::~ActionMaps()
@@ -141,8 +171,26 @@ void ActionMaps::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Actions");
 	for (int i = 0; i < actions.size(); i++)
 	{
-		actions[i].OnSave(node, array);
+		actions[i]->OnSave(node, newArray);
+	}
+}
+
+void ActionMaps::OnLoad(JsonParsing& node)
+{
+	name = node.GetJsonString("Name");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Actions");
+
+	size_t size = node.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		Actions* a = new Actions();
+		a->OnLoad(c);
+		actions.push_back(a);
 	}
 }

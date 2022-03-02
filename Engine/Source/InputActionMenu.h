@@ -12,6 +12,7 @@ public:
 	~Actions();
 
 	void OnSave(JsonParsing& node, JSON_Array* array);
+	void OnLoad(JsonParsing& node);
 
 private:
 	std::string name;
@@ -25,10 +26,11 @@ public:
 	~ActionMaps();
 
 	void OnSave(JsonParsing& node, JSON_Array* array);
+	void OnLoad(JsonParsing& node);
 
 private:
 	std::string name;
-	std::vector<Actions> actions;
+	std::vector<Actions*> actions;
 };
 
 class InputActionMenu : public Menu
@@ -46,6 +48,6 @@ public:
 
 private:
 
-	std::vector<ActionMaps> actionMaps;
+	std::vector<ActionMaps*> actionMaps;
 
 };
