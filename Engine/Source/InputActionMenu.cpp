@@ -12,6 +12,7 @@
 InputActionMenu::InputActionMenu() : Menu(false)
 {
 	actionMaps.push_back(new ActionMaps());
+	currentMap = nullptr;
 }
 
 InputActionMenu::~InputActionMenu()
@@ -43,9 +44,16 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-
+		
 	}
 	ImGui::Separator();
+	for (size_t i = 0; i < actionMaps.size(); i++)
+	{
+		if (ImGui::Selectable(actionMaps[i]->GetName().c_str()))
+		{
+			currentMap = actionMaps[i];
+		}
+	}
 	ImGui::EndChild();
 
 	ImGui::NextColumn();
@@ -63,6 +71,16 @@ bool InputActionMenu::Update(float dt)
 
 	}
 	ImGui::Separator();
+	if (currentMap != nullptr)
+	{
+		for (size_t i = 0; i < currentMap->GetActions().size(); i++)
+		{
+			if (ImGui::Selectable(currentMap->GetActions()[i]->GetName().c_str()))
+			{
+
+			}
+		}
+	}
 	ImGui::EndChild();
 
 	ImGui::NextColumn();
@@ -149,6 +167,8 @@ void Actions::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+
+	node.SetValueToArray(array, file.GetRootValue());
 }
 
 void Actions::OnLoad(JsonParsing& node)
@@ -175,8 +195,9 @@ void ActionMaps::OnSave(JsonParsing& node, JSON_Array* array)
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Actions");
 	for (int i = 0; i < actions.size(); i++)
 	{
-		actions[i]->OnSave(node, newArray);
+		actions[i]->OnSave(file, newArray);
 	}
+	node.SetValueToArray(array, file.GetRootValue());
 }
 
 void ActionMaps::OnLoad(JsonParsing& node)

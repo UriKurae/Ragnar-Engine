@@ -14,6 +14,8 @@ public:
 	void OnSave(JsonParsing& node, JSON_Array* array);
 	void OnLoad(JsonParsing& node);
 
+	inline std::string GetName() { return name; }
+
 private:
 	std::string name;
 	//std::vector<Bindings> bindings;
@@ -28,6 +30,9 @@ public:
 	void OnSave(JsonParsing& node, JSON_Array* array);
 	void OnLoad(JsonParsing& node);
 
+	inline std::string GetName() { return name; }
+	inline std::vector<Actions*> GetActions() { return actions; }
+	
 private:
 	std::string name;
 	std::vector<Actions*> actions;
@@ -49,5 +54,5 @@ public:
 private:
 
 	std::vector<ActionMaps*> actionMaps;
-
+	ActionMaps* currentMap;
 };

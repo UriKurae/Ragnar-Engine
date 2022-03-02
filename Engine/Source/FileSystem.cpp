@@ -311,7 +311,7 @@ ResourceType FileSystem::CheckExtension(std::string& path)
 
 	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
 
-	if (extension.data() == std::string(".inputactions")) return ResourceType::INPUT_ACTION;
+	if (extension.data() == std::string(".inputaction")) return ResourceType::INPUT_ACTION;
 
 	for (s = modelExtension.begin(); s != end; ++s)
 	{
