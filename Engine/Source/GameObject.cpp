@@ -126,6 +126,16 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Detour"))
+		{
+			CreateComponent(ComponentType::DETOUR);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Recast"))
+		{
+			CreateComponent(ComponentType::RECAST);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -251,6 +261,12 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::DETOUR:
+		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::RECAST:
+		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
 	{

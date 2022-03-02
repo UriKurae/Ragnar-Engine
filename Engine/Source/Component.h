@@ -16,7 +16,9 @@ enum class ComponentType
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
-	LIGHT
+	LIGHT,
+	DETOUR,
+	RECAST
 };
 
 class Component

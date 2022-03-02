@@ -191,6 +191,7 @@
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\NavigatorMenu.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Profiling.h" />
@@ -298,6 +299,7 @@
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
+    <ClCompile Include="Engine\Source\NavigatorMenu.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />

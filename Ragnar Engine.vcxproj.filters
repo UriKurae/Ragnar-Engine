@@ -436,6 +436,9 @@
     <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAssert.h">
       <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\NavigatorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -731,6 +734,9 @@
     </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastRegion.cpp">
       <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\NavigatorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

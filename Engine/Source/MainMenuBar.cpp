@@ -17,6 +17,7 @@
 #include "TextureImporter.h"
 #include "ResourceManager.h"
 #include "ModuleEditor.h"
+#include "NavigatorMenu.h"
 
 #include "FileSystem.h"
 
@@ -39,7 +40,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 {
 	showMenu = false;
 
-	menus.reserve(7);
+	menus.reserve(8);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
@@ -47,6 +48,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
 	menus.emplace_back(new FogWarMenu());
+	menus.emplace_back(new NavigatorMenu());
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
 }
@@ -152,6 +154,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
+			ImGui::MenuItem(ICON_FA_WALKING" Navigator", NULL, &menus[(int)Menus::NAVIGATOR]->active);
 
 			ImGui::EndMenu();
 		}
