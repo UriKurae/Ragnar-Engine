@@ -299,10 +299,10 @@ std::vector<Uniform> MaterialComponent::GetShaderUniforms()
 				uniform.uniformType = UniformType::FLOAT_VEC4;
 				glGetUniformfv(shader->GetId(), uinformLoc, (GLfloat*)&uniform.vec4);
 				break;
-			case GL_FLOAT_MAT4:
+			/*case GL_FLOAT_MAT4:
 				uniform.uniformType = UniformType::MATRIX4;
 				glGetnUniformfv(shader->GetId(), uinformLoc, sizeof(uniform.matrix4), &uniform.matrix4.v[0][0]);
-				break;
+				break;*/
 
 			default: uniform.uniformType = UniformType::NONE; break;
 
