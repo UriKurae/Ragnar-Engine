@@ -11,30 +11,30 @@ struct BoneInfo
 
 struct KeyPosition
 {
-	float3 position;
-	float timeStamp;
+	float3 position = {0.0f, 0.0f, 0.0f};
+	float timeStamp = 0.0f;
 };
 
 struct KeyRotation
 {
-	Quat orientation;
-	float timeStamp;
+	Quat orientation = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float timeStamp = 0.0f;
 };
 
 struct KeyScale
 {
-	float3 scale;
-	float timeStamp;
+	float3 scale = { 1.0f, 1.0f, 1.0f };
+	float timeStamp = 0.0f;
 };
 
 struct BoneData 
 {
-	std::vector<KeyPosition> positions;
-	std::vector<KeyScale> scales;
-	std::vector<KeyRotation> rotations;
+	std::vector<KeyPosition> positions = {};
+	std::vector<KeyScale> scales = {};
+	std::vector<KeyRotation> rotations = {};
 
-	std::string name;
-	int id;
+	std::string name = "";
+	int id = 0;
 };
 
 class Bone
@@ -48,6 +48,8 @@ public:
 
 	inline const std::string& GetName() const { return data.name; }
 
+	inline math::float4x4 GetTransform() { return localTransform; }
+
 private:
 	float4x4 InterpolatePosition(float animationTime);
 	float4x4 InterpolateRotation(float animationTime);
@@ -60,7 +62,7 @@ private:
 	float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime);
 
 private:
-	BoneData data;
+	BoneData data = {};
 
 	int numPositions;
 	int numRotations;

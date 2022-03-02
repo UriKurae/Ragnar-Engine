@@ -62,6 +62,7 @@ public:
 	inline const float& GetTicks() const { return ticks; }
 	inline const float& GetTicksPerSecond() const { return ticksPerSecond; }
 	inline const float& GetDuration() const { return ticks / ticksPerSecond; }
+	inline HierarchyData& GetHierarchyData() { return hierarchy; }
 
 public:
 	unsigned int id = 0;

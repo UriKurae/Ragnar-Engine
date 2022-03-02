@@ -3,9 +3,12 @@
 #include "Component.h"
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
+#include "Bone.h"
 #include "MathGeoLib/src/MathGeoLib.h"
 
 #include <vector>
+#include <map>
+#include <string>
 
 typedef unsigned int GLuint;
 typedef unsigned char GLubyte;
@@ -39,6 +42,7 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
+	const std::map<std::string, BoneInfo> GetBoneMap();
 
 	float3 GetCenterPointInWorldCoords();
 	float GetSphereRadius();

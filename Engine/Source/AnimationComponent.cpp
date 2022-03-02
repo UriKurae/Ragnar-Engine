@@ -98,37 +98,37 @@ bool AnimationComponent::Update(float dt)
 	{
 		currentTime += anim->GetTicksPerSecond() * dt;
 		currentTime = fmod(currentTime, anim->GetDuration());
-		CalculateBoneTransform(/*anim->GetRootNode(),*/ float4x4::identity);
+		CalculateBoneTransform(anim->GetHierarchyData(), float4x4::identity);
 	}
 
 	return true;
 }
 
-void AnimationComponent::CalculateBoneTransform(/*const AssimpNodeData* node,*/ float4x4 parentTransform)
+void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform)
 {
-	//std::string nodeName = node->name;
-	//float4x4 nodeTransform = node->transformation;
+	std::string nodeName = data.name;
+	float4x4 nodeTransform = data.transform;
 
-	//Bone* bone = anim->FindBone(nodeName);
+	Bone* bone = anim->FindBone(nodeName);
 
-	//if (bone)
-	//{
-	//	bone->Update(currentTime);
-	//	nodeTransform = bone->GetLocalTransform();
-	//}
+	if (bone)
+	{
+		bone->Update(currentTime);
+		nodeTransform = bone->GetTransform();
+	}
 
-	//float4x4 globalTransformation = parentTransform * nodeTransform;
+	float4x4 globalTransformation = parentTransform * nodeTransform;
 
-	//auto boneInfoMap = anim->GetBoneIDMap();
-	//if (boneInfoMap.find(nodeName) != boneInfoMap.end())
-	//{
-	//	int index = boneInfoMap[nodeName].id;
-	//	float4x4 offset = boneInfoMap[nodeName].offset;
-	//	finalBoneMatrices[index] = globalTransformation * offset;
-	//}
+	auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
+	if (boneInfoMap.find(nodeName) != boneInfoMap.end())
+	{
+		int index = boneInfoMap[nodeName].id;
+		float4x4 offset = boneInfoMap[nodeName].offset;
+		finalBoneMatrices[index] = globalTransformation * offset;
+	}
 
-	//for (int i = 0; i < node->childrenCount; i++)
-	//	CalculateBoneTransform(&node->children[i], globalTransformation);
+	for (int i = 0; i < data.childrenCount; i++)
+		CalculateBoneTransform(data.children[i], globalTransformation);
 }
 
 

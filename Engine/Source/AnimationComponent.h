@@ -17,7 +17,7 @@ public:
 
 	bool Update(float dt) override;
 
-	void CalculateBoneTransform(/*const AssimpNodeData* node,*/ float4x4 parentTransform);
+	void CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform);
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;

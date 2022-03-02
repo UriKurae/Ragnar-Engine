@@ -134,8 +134,11 @@ int Bone::GetPositionIndex(float animationTime)
 {
 	for (int index = 0; index < data.positions.size(); ++index)
 	{
-		if (animationTime < data.positions[index + 1].timeStamp)
-			return index;
+		if (index + 1 < data.positions.size())
+		{
+			if (animationTime < data.positions[index + 1].timeStamp)
+				return index;
+		}
 	}
 
 	return 0;
@@ -145,8 +148,11 @@ int Bone::GetRotationIndex(float animationTime)
 {
 	for (int index = 0; index < data.rotations.size(); ++index)
 	{
-		if (animationTime < data.rotations[index + 1].timeStamp)
-			return index;
+		if (index + 1 < data.rotations.size())
+		{
+			if (animationTime < data.rotations[index + 1].timeStamp)
+				return index;
+		}
 	}
 
 	return 0;
@@ -156,8 +162,11 @@ int Bone::GetScalingIndex(float animationTime)
 {
 	for (int index = 0; index < data.scales.size(); ++index)
 	{
-		if (animationTime < data.scales[index + 1].timeStamp)
-			return index;
+		if (index + 1 < data.scales.size())
+		{
+			if (animationTime < data.scales[index + 1].timeStamp)
+				return index;
+		}
 	}
 
 	return 0;
@@ -165,6 +174,7 @@ int Bone::GetScalingIndex(float animationTime)
 
 float Bone::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
 {
+	// WARNING: This here sometimes is a division by 0, so it causes inf (NaN)
 	float scaleFactor = 0.0f;
 	float midWayLength = animationTime - lastTimeStamp;
 	float framesDiff = nextTimeStamp - lastTimeStamp;

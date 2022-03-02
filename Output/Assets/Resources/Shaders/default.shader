@@ -5,9 +5,9 @@ layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texCoords;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform float textureAlpha;
 uniform vec3 ambientColor;
@@ -41,7 +41,7 @@ void main()
 in vec3 vPosition;
 in vec3 vNormal;
 in vec2 vTexCoords;
-in vec3 camPos;
+in vec3 vCamPos;
 
 in vec3 vAmbientColor;
 in float vTextureAlpha;
@@ -191,7 +191,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 void main()
 {
 	vec3 norm = normalize(vNormal);
-	vec3 viewDir = normalize(camPos - vPosition);
+	vec3 viewDir = normalize(vCamPos - vPosition);
 	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	

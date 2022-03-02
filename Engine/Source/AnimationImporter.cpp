@@ -151,7 +151,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 
 }
 
-void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector, HierarchyData hierData)
+void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector, HierarchyData& hierData)
 {
 	// WARNING: Uncommenting this causes to crash
 	char* buffer = nullptr;

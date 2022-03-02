@@ -39,9 +39,7 @@ public:
 	inline const std::vector<Vertex>& GetVerticesVector() const { return vertices; }
 	inline const int& GetIndicesSize() const { return indices.size(); }
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
-	inline const int& GetBonesCount() const { return numBones; }
-	inline const std::vector<unsigned int>& GetBonesUidList() { return bonesUid; }
-
+	inline const std::map<std::string, BoneInfo>& GetBoneMap() { return bones; }
 	void Reimport(ModelParameters& data);
 
 	float3 GetCenterMesh() { return centerPoint; };
