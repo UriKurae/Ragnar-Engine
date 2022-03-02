@@ -18,7 +18,22 @@ enum class ComponentType
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
 	RIGID_BODY,
-	LIGHT
+	LIGHT,
+	UI_BUTTON,
+	UI_IMAGE,
+	UI_CHECKBOX,
+	UI_SLIDER,
+	UI_INPUTBOX,
+	UI_CANVAS,
+	TRANFORM2D
+};
+enum class State
+{
+	DISABLED,
+	NORMAL,
+	FOCUSED,
+	PRESSED,
+	SELECTED
 };
 
 class Component
@@ -59,6 +74,6 @@ public:
 	ComponentType type;
 	bool active;
 	GameObject* owner;
-
+	
 	bool collapsed;
 };

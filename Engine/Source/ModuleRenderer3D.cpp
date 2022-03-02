@@ -1,4 +1,4 @@
-#include "Application.h"
+﻿#include "Application.h"
 #include "Globals.h"
 #include "ModuleRenderer3D.h"
 
@@ -219,8 +219,12 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
+//A lo mejor se tiene que poner en el post update
+	RG_PROFILING_FUNCTION("Rendering");
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
+
 	fbo->Bind();
 	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 
@@ -237,9 +241,8 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	RG_PROFILING_FUNCTION("Rendering");
-
 	grid.Render();
+
 	std::set<GameObject*> objects;
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
@@ -299,23 +302,123 @@ bool ModuleRenderer3D::PostUpdate()
 	// Camera Component FBO
 	mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+	CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+	Frustum frustum;
+	frustum.pos = float3::zero;
+	frustum.front = float3::unitZ; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	frustum.up = float3::unitY; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.type = OrthographicFrustum;
+	frustum.orthographicHeight = camera->currentScreenHeight; //PONER EL TAMA�O DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicWidth = camera->currentScreenWidth; //PONER EL TAMA�O DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.nearPlaneDistance = 0.1;
+	frustum.farPlaneDistance = 1000.f;
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
 	grid.Render();
 
-	//glPopMatrix();
-	//glPopMatrix();
-	//PushCamera(float4x4::identity, float4x4::identity);
-
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->scene->mainCamera);
 	}
+	
+  PushCamera(float4x4::identity, float4x4::identity);
+  
+/*
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glPopMatrix();
+*/
+	// DRAW UI
 
+	
+	ButtonComponent* aux = nullptr;
+	//CanvasComponent* aux1 = nullptr;
+	CheckboxComponent* aux2 = nullptr;
+	//ImageComponent* aux3 = nullptr;
+	//InputBoxComponent* aux4 = nullptr;
+	SliderComponent* aux5 = nullptr;
+	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
+	{
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
+
+		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
+		//aux1 = go->GetComponent<CanvasComponent>();
+		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
+		//aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
+		//aux4 = go->GetComponent<InputBoxComponent>();
+		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
+
+
+		
+		if (aux != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw();
+			app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+			aux = nullptr;
+		}
+		/*else if (aux1 != nullptr)
+		{
+			textExample = aux1->text;
+			color.x = aux1->color.r;
+			color.y = aux1->color.g;
+			color.z = aux1->color.b;
+			aux1 = nullptr;
+		}*/
+		else if (aux2 != nullptr)
+		{
+			aux2 = nullptr;
+		}
+		/*else if (aux3 != nullptr)
+		{
+			
+		}*/
+		/*else if (aux4 != nullptr)
+		{
+			textExample = aux4->text;
+			color.x = aux4->textColor.r;
+			color.y = aux4->textColor.g;
+			color.z = aux4->textColor.b;
+			aux4 = nullptr;
+		}*/
+		else if (aux5 != nullptr)
+		{
+			
+		}
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glPopMatrix();
+		
+
+	}
+	
+	
 	mainCameraFbo->Unbind();
+	
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+	//glMatrixMode(GL_MODELVIEW);
 
+	//// UI RENDER
+	//
+
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	//glPopMatrix();
+	
 	// Draw both buffers
 	app->editor->Draw(fbo, mainCameraFbo);
 
