@@ -162,14 +162,18 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
-	float3 newPos;
-	Quat newRot;
 	if (followTarget && target)
 	{
-		newPos += target->GetComponent<TransformComponent>()->GetPosition();
-		newRot = Quat(float3(1, 0, 0), verticalAngle);
+		float3 targetPos = target->GetComponent<TransformComponent>()->GetPosition();
+		float3 newPos = targetPos;
 		newPos.z += 20;
 		newPos.y += 20;
+
+		Quat newRot = transform->GetRotation().LookAt(
+			transform->GetRotation() * float3::unitY,
+			targetPos,
+			transform->GetRotation() * float3::unitZ,
+			float3::unitZ);
 
 		if (rotateAround)
 		{
@@ -179,9 +183,15 @@ bool CameraComponent::Update(float dt)
 			newPos.z += sin(horizontalAngle) * 10;
 			newPos.x += cos(horizontalAngle) * 10;
 		}
+
+		transform->SetPosition(newPos);
+		transform->SetRotation(newRot);
 	}
+<<<<<<< Updated upstream
 	//transform->SetPosition(newPos);
 	//transform->SetRotation(newRot);
+=======
+>>>>>>> Stashed changes
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
