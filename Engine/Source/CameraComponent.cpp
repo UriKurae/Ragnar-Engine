@@ -99,38 +99,18 @@ void CameraComponent::OnEditor()
 		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
+		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.01f, 0.0f/*, 90.0f*/)) {}
 
 
-		ImGui::Text("- - - - - - - - - TESTING");
+		ImGui::Text("- - - - - - - - -");
 
 		if (ImGui::DragFloat("shakeStrength", &shakeStrength, 0.1f, 0.0f/*, 90.0f*/)) {}
 		if (ImGui::DragFloat("shakeDuration", &shakeDuration, 0.1f, 0.0f/*, 90.0f*/)) {}
 		if (ImGui::Button("Shake")) {
-			shake = true; 
-			originalPos = transform->GetPosition();
+			RequestShake(shakeStrength, shakeDuration);
 		}
 	}
 	ImGui::PopID();
-}
-
-void CameraComponent::Shake(float dt)
-{
-	if (elapsedTime < shakeDuration)
-	{
-		float x = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
-		float y = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
-		float3 lastPos = transform->GetPosition();
-		lastPos.x += x;
-		lastPos.y += y;
-		camera.SetPos(lastPos);
-		elapsedTime += dt;
-	}
-	else
-	{
-		shake = false;
-		elapsedTime = 0.0f;
-		camera.SetPos(originalPos);
-	}
 }
 
 bool CameraComponent::Update(float dt)
@@ -166,32 +146,37 @@ bool CameraComponent::Update(float dt)
 	{
 		float3 targetPos = target->GetComponent<TransformComponent>()->GetPosition();
 		float3 newPos = targetPos;
+		float offsetZ = 20.0f;
+		float offsetX = 20.0f;
 		newPos.z += 20;
 		newPos.y += 20;
 
-		Quat newRot = transform->GetRotation().LookAt(
-			transform->GetRotation() * float3::unitY,
-			targetPos,
-			transform->GetRotation() * float3::unitZ,
-			float3::unitZ);
+		// This is from LookAt function from ModuleCamera.h
+		float3 directionFrustum = targetPos - camera.Pos();
+		directionFrustum.Normalize();
+
+		float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
+		camera.SetFront(lookAt.MulDir(camera.Front()).Normalized());
+		camera.SetUp(lookAt.MulDir(camera.Up()).Normalized());
 
 		if (rotateAround)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle += dt * 0.5;
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle -= dt * 0.5;
+			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle -= rotationSpeed;
+			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle += rotationSpeed;
 
-			newPos.z += sin(horizontalAngle) * 10;
-			newPos.x += cos(horizontalAngle) * 10;
+			// Calculate rotation position
+			float cosinus = cos(horizontalAngle);
+			float sinus = sin(horizontalAngle);
+			float TestPosZ = newPos.z * cosinus - newPos.x * sinus;
+			float TestPosX = newPos.x * cosinus + newPos.z * sinus;
+			// Add offset with angle 0
+			newPos.z += TestPosZ - newPos.z;
+			newPos.x += TestPosX - newPos.x;
 		}
 
 		transform->SetPosition(newPos);
-		transform->SetRotation(newRot);
+		transform->SetRotation(lookAt.ToQuat());
 	}
-<<<<<<< Updated upstream
-	//transform->SetPosition(newPos);
-	//transform->SetRotation(newRot);
-=======
->>>>>>> Stashed changes
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
@@ -333,4 +318,32 @@ int CameraComponent::ContainsAaBox(const AABB& boundingBox)
 		return 0;
 	}
 	return -1;
+}
+
+void CameraComponent::RequestShake(float strength, float duration)
+{
+	shakeStrength = strength;
+	shakeDuration = duration;
+	shake = true;
+	originalPos = transform->GetPosition();
+}
+
+void CameraComponent::Shake(float dt)
+{
+	if (elapsedTime < shakeDuration)
+	{
+		float x = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
+		float y = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
+		float3 lastPos = transform->GetPosition();
+		lastPos.x += x;
+		lastPos.y += y;
+		camera.SetPos(lastPos);
+		elapsedTime += dt;
+	}
+	else
+	{
+		shake = false;
+		elapsedTime = 0.0f;
+		camera.SetPos(originalPos);
+	}
 }

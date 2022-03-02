@@ -58,14 +58,16 @@ private:
 	int s_lerp = 0;
 	float verticalAngle = 0.79;
 	bool rotateAround = false;
+	float rotationSpeed = 0.05f;
 	float horizontalAngle = 0;
 	bool multifocusOnClick = false;
 	GameObject*/*transform*/secondTarget = nullptr;
 public:
-	//void Shake(float strength, float duration);
-	void Shake(float dt);
+	void RequestShake(float strength, float duration);
 	void setTransition(std::vector<float> durations, std::vector<float3> positions);
 private:
+	void Shake(float dt);
+
 	float shakeStrength = 0;
 	float shakeDuration = 0;
 	std::vector<float> transitionDurations;
