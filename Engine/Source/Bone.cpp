@@ -75,6 +75,10 @@ void Bone2::Load()
 	RELEASE_ARRAY(buffer);
 }
 
+Bone::Bone(BoneData boneData) : data(boneData)
+{
+}
+
 void Bone::Update(float animationTime)
 {
 	float4x4 translation = InterpolatePosition(animationTime);
@@ -179,5 +183,7 @@ float Bone::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float anima
 	float midWayLength = animationTime - lastTimeStamp;
 	float framesDiff = nextTimeStamp - lastTimeStamp;
 	scaleFactor = midWayLength / framesDiff;
+	if (scaleFactor < 0) return 0.0f;
+
 	return scaleFactor;
 }

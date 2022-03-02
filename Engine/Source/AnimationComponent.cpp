@@ -97,7 +97,7 @@ bool AnimationComponent::Update(float dt)
 	if (anim)
 	{
 		currentTime += anim->GetTicksPerSecond() * dt;
-		currentTime = fmod(currentTime, anim->GetDuration());
+		currentTime = fmod(currentTime, anim->GetTicks());
 		CalculateBoneTransform(anim->GetHierarchyData(), float4x4::identity);
 	}
 

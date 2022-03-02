@@ -5,9 +5,9 @@ layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texCoords;
 
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 projectionMatrix;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 uniform mat3 normalMatrix;
 uniform float textureAlpha;
 uniform vec3 ambientColor;
@@ -26,7 +26,7 @@ void main()
 
 	vTexCoords = texCoords;
 	vPosition = vec3(model * vec4(position, 1));
-	//vNormal = normalMatrix * normal;
+	//vNormal = normal * normal;
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
 	vTextureAlpha = 1.0f;

@@ -109,6 +109,9 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 
 void AnimationImporter::SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData, HierarchyData& hierData)
 {
+	// Json file to Save
+	JsonParsing json = JsonParsing();
+
 	std::string jsonName = name;
 
 	int index = jsonName.find(".");
@@ -128,19 +131,75 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 	memcpy(cursor, header, bytes);
 	cursor += bytes;
 
+	// First Save bonedata into a Json array
+	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Bones");
+	JsonParsing bone = JsonParsing();
+	for (int i = 0; i < boneData.size(); ++i)
+	{
+		// Id and Name values
+		std::string itemName = "Id" + std::to_string(i);
+		bone.SetNewJsonNumber(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), boneData[i].id);
+		itemName = "Name" + std::to_string(i);
+		bone.SetNewJsonString(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), boneData[i].name.c_str());
+
+		// Prepare array for positions
+		itemName = "Positions" + std::to_string(i);
+		JSON_Array* positionsArray = bone.SetNewJsonArray(bone.GetRootValue(), itemName.c_str());
+		int size = boneData[i].positions.size();
+		for (int j = 0; j < size; ++j)
+		{
+			// Save all positions
+			json_array_append_number(positionsArray, boneData[i].positions[j].position.x);
+			json_array_append_number(positionsArray, boneData[i].positions[j].position.y);
+			json_array_append_number(positionsArray, boneData[i].positions[j].position.z);
+			json_array_append_number(positionsArray, boneData[i].positions[j].timeStamp);
+		}
+
+		// Prepare array for scales
+		itemName = "Scales" + std::to_string(i);
+		JSON_Array* scalesArray = bone.SetNewJsonArray(bone.GetRootValue(), itemName.c_str());
+		size = boneData[i].scales.size();
+		for (int j = 0; j < size; ++j)
+		{
+			// Save all Scales
+			json_array_append_number(scalesArray, boneData[i].scales[j].scale.x);
+			json_array_append_number(scalesArray, boneData[i].scales[j].scale.y);
+			json_array_append_number(scalesArray, boneData[i].scales[j].scale.z);
+			json_array_append_number(scalesArray, boneData[i].scales[j].timeStamp);
+		}
+
+		// Prepare array for rotations
+		itemName = "Rotations" + std::to_string(i);
+		JSON_Array* rotationsArray = bone.SetNewJsonArray(bone.GetRootValue(), itemName.c_str());
+		size = boneData[i].rotations.size();
+		for (int j = 0; j < size; ++j)
+		{
+			// Save all rotations
+			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.x);
+			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.y);
+			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.z);
+			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.w);
+			json_array_append_number(rotationsArray, boneData[i].rotations[j].timeStamp);
+		}
+	}
+	// Append everything to the first json array
+	json.SetValueToArray(array, bone.GetRootValue());
+
+	// Old saving method for bone data using memcpy
 	// Save BoneData vector
-	bytes = sizeof(BoneData) * boneData.size();
-	memcpy(cursor, boneData.data(), bytes);
-	cursor += bytes;
+	//bytes = sizeof(BoneData) * boneData.size();
+	//memcpy(cursor, boneData.data(), bytes);
+	//cursor += bytes;
 
 	const char* str = jsonName.c_str();
 	bytes = strlen(str);
 	memcpy(cursor, &str[0], bytes);
 	cursor += bytes;
 
-	JsonParsing json = JsonParsing();
+	JsonParsing hierJson = JsonParsing();
+	SaveHierarchyData(hierData, hierJson);
 
-	SaveHierarchyData(hierData, json);
+	json.SetValueToArray(array, hierJson.GetRootValue());
 
 	int jsonSize = json.SaveFile(jsonName.c_str());
 	
@@ -165,24 +224,9 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 
 	ticks = ranges[0];
 	ticksPerSecond = ranges[1];
-	boneVector.resize(ranges[2]);
-
-	if (boneVector.size() > 0)
-	{
-		for (int i = 0; i < ranges[2]; ++i)
-		{
-			Bone *bone = new Bone();
-
-			bytes = sizeof(BoneData);
-			memcpy(&bone->GetData(), cursor, bytes);
-			cursor += bytes;
-
-			boneVector[i] = bone;
-		}
-	}
 
 	int stringSize = ranges[3];
-	
+
 	std::string aux;
 	aux.resize(stringSize);
 	bytes = stringSize;
@@ -192,8 +236,78 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	JsonParsing file = JsonParsing();
 	file.ParseFile(aux.c_str());
 
-	LoadHierarchyData(hierData, file);
+	if (ranges[2] > 0)
+	{
 
+		Bone* bone = new Bone();
+
+		// Old load method with memcpy for bones
+		/*bytes = sizeof(BoneData);
+		memcpy(&bone->GetData(), cursor, bytes);
+		cursor += bytes;*/
+
+		// Load bones
+		JSON_Array* jsonArray = file.GetJsonArray(file.ValueToObject(file.GetRootValue()), "Bones");
+		
+		JsonParsing jsonBone = file.GetJsonArrayValue(jsonArray, 0);
+		std::string aux;
+		for (int i = 0; i < ranges[2]; ++i)
+		{
+			BoneData boneData;
+			aux = "Id" + std::to_string(i);
+			boneData.id = jsonBone.GetJsonNumber(aux.c_str());
+			aux = "Name" + std::to_string(i);
+			boneData.name = jsonBone.GetJsonString(aux.c_str());
+
+			aux = "Positions" + std::to_string(i);
+			JSON_Array* positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
+			size_t size = file.GetJsonArrayCount(positionsArray);
+			for (int j = 0; j < size; j += 4)
+			{
+				KeyPosition pos;
+				pos.position.x = json_array_get_number(positionsArray, j);
+				pos.position.y = json_array_get_number(positionsArray, j + 1);
+				pos.position.z = json_array_get_number(positionsArray, j + 2);
+				pos.timeStamp = json_array_get_number(positionsArray, j + 3);
+
+				boneData.positions.push_back(pos);
+			}
+
+			aux = "Rotations" + std::to_string(i);
+			positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
+			size = file.GetJsonArrayCount(positionsArray);
+			for (int j = 0; j < size; j += 5)
+			{
+				KeyRotation rot;
+				rot.orientation.x = json_array_get_number(positionsArray, j);
+				rot.orientation.y = json_array_get_number(positionsArray, j + 1);
+				rot.orientation.z = json_array_get_number(positionsArray, j + 2);
+				rot.orientation.w = json_array_get_number(positionsArray, j + 3);
+				rot.timeStamp = json_array_get_number(positionsArray, j + 4);
+
+				boneData.rotations.push_back(rot);
+			}
+
+			aux = "Scales" + std::to_string(i);
+			positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
+			size = file.GetJsonArrayCount(positionsArray);
+			for (int j = 0; j < size; j += 4)
+			{
+				KeyScale sca;
+				sca.scale.x = json_array_get_number(positionsArray, j);
+				sca.scale.y = json_array_get_number(positionsArray, j + 1);
+				sca.scale.z = json_array_get_number(positionsArray, j + 2);
+				sca.timeStamp = json_array_get_number(positionsArray, j + 3);
+
+				boneData.scales.push_back(sca);
+			}
+
+			Bone* bone = new Bone(boneData);
+			boneVector.push_back(bone);
+		}
+		jsonBone = file.GetJsonArrayValue(jsonArray, 1);
+		LoadHierarchyData(hierData, jsonBone);
+	}
 
 	RELEASE_ARRAY(buffer);
 }

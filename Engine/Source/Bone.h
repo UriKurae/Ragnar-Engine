@@ -41,6 +41,7 @@ class Bone
 {
 public:
 	Bone(){}
+	Bone(BoneData boneData);
 
 	void Update(float animationTime);
 
@@ -62,11 +63,7 @@ private:
 	float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime);
 
 private:
-	BoneData data = {};
-
-	int numPositions;
-	int numRotations;
-	int numScalings;
+	BoneData data;
 
 	math::float4x4 localTransform;
 };
