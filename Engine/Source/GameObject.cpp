@@ -111,7 +111,7 @@ void GameObject::DrawEditor()
 			if (ImGui::Selectable(mono_class_get_name(app->moduleMono->userScripts[i])))
 			{
 				const char* name = mono_class_get_name(app->moduleMono->userScripts[i]);
-				CreateComponent(ComponentType::SCRIPT);
+				CreateComponent(ComponentType::SCRIPT, name);
 				newComponent = false;
 			}
 		}
