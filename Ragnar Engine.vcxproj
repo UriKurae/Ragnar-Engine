@@ -112,6 +112,7 @@
     <ClInclude Include="Dependencies\json\parson.h" />
     <ClInclude Include="Dependencies\mmgr\mmgr.h" />
     <ClInclude Include="Dependencies\mmgr\nommgr.h" />
+    <ClInclude Include="Dependencies\RecastDetour\ChunkyTriMesh.h" />
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\DebugDraw.h" />
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\DetourDebugDraw.h" />
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\Include\RecastDebugDraw.h" />
@@ -127,6 +128,8 @@
     <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNavMeshQuery.h" />
     <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourNode.h" />
     <ClInclude Include="Dependencies\RecastDetour\Detour\Include\DetourStatus.h" />
+    <ClInclude Include="Dependencies\RecastDetour\InputGeom.h" />
+    <ClInclude Include="Dependencies\RecastDetour\NavMeshBuilder.h" />
     <ClInclude Include="Dependencies\RecastDetour\Recast\Include\Recast.h" />
     <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAlloc.h" />
     <ClInclude Include="Dependencies\RecastDetour\Recast\Include\RecastAssert.h" />
@@ -227,6 +230,7 @@
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\json\parson.c" />
     <ClCompile Include="Dependencies\mmgr\mmgr.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\ChunkyTriMesh.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\DebugDraw.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\DetourDebugDraw.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\Source\RecastDebugDraw.cpp" />
@@ -239,6 +243,8 @@
     <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMeshBuilder.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNavMeshQuery.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Detour\Source\DetourNode.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\InputGeom.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\NavMeshBuilder.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Recast\Source\Recast.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastAlloc.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Recast\Source\RecastArea.cpp" />
