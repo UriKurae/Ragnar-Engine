@@ -45,6 +45,9 @@ public:
 
 	inline const Viewport* GetViewport() const { return viewport; }
 	//Viewport* GetViewport() { return viewport; }
+
+	Viewport* viewport;
+	GameView* gameView;
 private:
 	MainMenuBar mainMenuBar;
 
@@ -52,8 +55,6 @@ private:
 	GameObject* selectedParent;
 
 	Resource* resource;
-
-	Viewport* viewport;
-	GameView* gameView;
+	
 	ImGuizmo::OPERATION currentOperation;
 };

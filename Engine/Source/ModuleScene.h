@@ -11,7 +11,8 @@ enum class Object3D
 	CUBE = 0,
 	PYRAMIDE,
 	SPHERE,
-	CYLINDER
+	CYLINDER,
+	PLANE
 };
 
 enum class GameState

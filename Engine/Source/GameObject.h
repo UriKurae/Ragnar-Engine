@@ -14,6 +14,12 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 
+#include "ButtonComponent.h"
+#include"SliderComponent.h"
+#include"CheckBoxComponent.h"
+#include "Transform2DComponent.h"
+#include "MathGeoLib/src/MathGeoLib.h"
+
 typedef unsigned int uint;
 
 typedef json_array_t JSON_Array;
@@ -87,10 +93,10 @@ public:
 	bool colliders;
 	std::string tag;
 	std::string layer;
-
+	bool isUI;
 private:
 	std::vector<Component*> components;
-
+	
 	GameObject* parent;
 	std::vector<GameObject*> children;
 
