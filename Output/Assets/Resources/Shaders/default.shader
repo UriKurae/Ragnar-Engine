@@ -41,7 +41,7 @@ void main()
 in vec3 vPosition;
 in vec3 vNormal;
 in vec2 vTexCoords;
-in vec3 camPos;
+in vec3 vCamPos;
 
 in vec3 vAmbientColor;
 in float vTextureAlpha;
@@ -191,7 +191,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 void main()
 {
 	vec3 norm = normalize(vNormal);
-	vec3 viewDir = normalize(camPos - vPosition);
+	vec3 viewDir = normalize(vCamPos - vPosition);
 	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	
