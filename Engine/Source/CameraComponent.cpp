@@ -106,6 +106,7 @@ void CameraComponent::OnEditor()
 
 		if (ImGui::DragFloat("shakeStrength", &shakeStrength, 0.1f, 0.0f/*, 90.0f*/)) {}
 		if (ImGui::DragFloat("shakeDuration", &shakeDuration, 0.1f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::Checkbox("smoothShake", &smoothShake)) {}
 		if (ImGui::Button("Shake")) {
 			RequestShake(shakeStrength, shakeDuration);
 		}
@@ -324,16 +325,36 @@ void CameraComponent::RequestShake(float strength, float duration)
 {
 	shakeStrength = strength;
 	shakeDuration = duration;
+	if (smoothShake) currentStrength = 0;
+	else currentStrength = strength;
 	shake = true;
 	originalPos = transform->GetPosition();
 }
 
 void CameraComponent::Shake(float dt)
 {
+	// Exponential
+	if (smoothShake)
+	{
+		if (elapsedTime < shakeDuration / 2)
+		{
+			if (currentStrength < shakeStrength)
+			{
+				currentStrength = shakeStrength * elapsedTime * elapsedTime;
+			}
+			else currentStrength = shakeStrength;
+		}
+		else if (currentStrength > 0 && elapsedTime < shakeDuration)
+		{
+			currentStrength = shakeStrength * (shakeDuration - elapsedTime) * (shakeDuration - elapsedTime);
+		}
+		else currentStrength = 0;
+	}
+
 	if (elapsedTime < shakeDuration)
 	{
-		float x = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
-		float y = -shakeStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (shakeStrength - -shakeStrength)));
+		float x = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
+		float y = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
 		float3 lastPos = transform->GetPosition();
 		lastPos.x += x;
 		lastPos.y += y;

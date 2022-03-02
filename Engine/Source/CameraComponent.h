@@ -62,18 +62,19 @@ private:
 	float horizontalAngle = 0;
 	bool multifocusOnClick = false;
 	GameObject*/*transform*/secondTarget = nullptr;
+
 public:
 	void RequestShake(float strength, float duration);
 	void setTransition(std::vector<float> durations, std::vector<float3> positions);
 private:
 	void Shake(float dt);
 
-	float shakeStrength = 0;
-	float shakeDuration = 0;
+	float shakeStrength = 0.6f;
+	float shakeDuration = 1.0f;
+	bool shake = false;
+	bool smoothShake = true;
 	std::vector<float> transitionDurations;
 	std::vector<float3> transitionPositions;
-	bool shake = false;
 	float elapsedTime = 0.0f;
-	//----------------------------------------------
-public:
+	float currentStrength = 0.0f;
 };
