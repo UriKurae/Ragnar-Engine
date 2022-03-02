@@ -185,8 +185,6 @@ void MeshComponent::OnEditor()
 				}
 			}
 		}
-		ComponentOptions(this);
-		ImGui::Separator();
 
 		ImGui::End();
 	}

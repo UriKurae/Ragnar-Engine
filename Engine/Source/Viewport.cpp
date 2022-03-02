@@ -12,6 +12,8 @@
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
+#include "MeshComponent.h"
+#include "Mesh.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/ImGuizmo.h"
@@ -71,11 +73,9 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
-			math::float4x4 posGuizmo = app->editor->GetGO()->GetComponent<TransformComponent>()->GetGlobalTransform();
-			posGuizmo.SetCol3(3, posGuizmo.Col3(3) + goSel->GetOffsetCM());
-			posGuizmo.Transpose();
+			math::float4x4 tr = goSel->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
 
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::WORLD, posGuizmo.ptr());
+			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
 			static bool firstMove = false;
 			if (ImGuizmo::IsUsing())
 			{
@@ -86,12 +86,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 
 					CommandDispatcher::Execute(new MoveGameObjectCommand(go));
 				}
-				math::float4x4 tr = posGuizmo.Transposed();
-				tr.SetCol3(3, tr.Col3(3) - goSel->GetOffsetCM());
-				/*float angle = go->GetComponent<TransformComponent>()->GetRotation().AngleBetween(tr.RotatePart().ToQuat());
-				Quat quat = math::Quat::RotateAxisAngle(tr.Col3(3) - goSel->GetOffsetCM(), angle);
-				tr.SetRotatePart(quat);*/
-				go->GetComponent<TransformComponent>()->SetTransform(tr);
+				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 			}
 			else firstMove = false;
 		}
