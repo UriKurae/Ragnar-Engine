@@ -7,7 +7,6 @@
 
 #include <vector>
 #include <string>
-#include "Imgui/ImGuizmo.h"
 
 class GameObject;
 class Resource;
@@ -43,8 +42,6 @@ public:
 	std::vector<std::string> GetTags();
 	std::vector<std::string> GetLayers();
 
-	inline const Viewport* GetViewport() const { return viewport; }
-	//Viewport* GetViewport() { return viewport; }
 private:
 	MainMenuBar mainMenuBar;
 
@@ -55,5 +52,4 @@ private:
 
 	Viewport* viewport;
 	GameView* gameView;
-	ImGuizmo::OPERATION currentOperation;
 };

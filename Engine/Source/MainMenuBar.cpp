@@ -141,6 +141,9 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z", &ret);
 			ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y", &ret);
+
+			ImGui::Separator();
+			app->editor->GetViewport()->SnapOptions();
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())

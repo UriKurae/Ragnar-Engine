@@ -17,7 +17,7 @@
 
 #include "Profiling.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), currentOperation(ImGuizmo::OPERATION::TRANSLATE), Module(), resource(nullptr)
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), Module(), resource(nullptr)
 {
 	name = "Editor";
 
@@ -57,9 +57,9 @@ bool ModuleEditor::Update(float dt)
 	
 	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_IDLE && selected)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::TRANSLATE;
-		else if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::ROTATE;
-		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::SCALE;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP) viewport->SetSnap(ImGuizmo::OPERATION::TRANSLATE);
+		else if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP) viewport->SetSnap(ImGuizmo::OPERATION::ROTATE);
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_UP) viewport->SetSnap(ImGuizmo::OPERATION::SCALE);
 	}
 
 
@@ -103,7 +103,7 @@ bool ModuleEditor::Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer)
 	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
 	gameView->Draw(gameBuffer);
-	viewport->Draw(editorBuffer, gameBuffer, currentOperation);
+	viewport->Draw(editorBuffer, gameBuffer);
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

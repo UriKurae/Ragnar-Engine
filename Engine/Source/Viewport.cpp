@@ -34,7 +34,7 @@ Viewport::~Viewport()
 	CommandDispatcher::Shutdown();
 }
 
-void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int currentOperation)
+void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
@@ -75,7 +75,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
 			math::float4x4 tr = goSel->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
 
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr(), 0, (float*)snap);
 			static bool firstMove = false;
 			if (ImGuizmo::IsUsing())
 			{
@@ -142,3 +142,44 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	ImGui::End();
 	style.WindowPadding = ImVec2(8.0f, 8.0f);
 }
+
+void Viewport::SetSnap(ImGuizmo::OPERATION operation)
+{
+	bool desactiveSnap = false;
+	switch (operation)
+	{
+	case ImGuizmo::OPERATION::TRANSLATE:
+		currentOperation = ImGuizmo::OPERATION::TRANSLATE;
+		if(translateSnap) snap[0] = snap[1] = snap[2] = allTsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	case ImGuizmo::OPERATION::ROTATE:
+		currentOperation = ImGuizmo::OPERATION::ROTATE;
+		if (rotateSnap) snap[0] = snap[1] = snap[2] = allRsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	case ImGuizmo::OPERATION::SCALE:
+		currentOperation = ImGuizmo::OPERATION::SCALE;
+		if (scaleSnap) snap[0] = snap[1] = snap[2] = allSsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	default:
+		break;
+	}
+}
+
+void Viewport::SnapOptions()
+{
+	ImGui::Checkbox("Snap Translate", &translateSnap);
+	ImGui::SliderFloat("##Translate", &allTsnap, 0.0f, 10.0f, "%.2f");
+
+	ImGui::Checkbox("Snap Rotation", &rotateSnap);
+	ImGui::SliderInt("##Rotation", &allRsnap, 0.0f, 90.0f);
+
+	ImGui::Checkbox("Snap Scale", &scaleSnap);
+	ImGui::SliderFloat("##Scale", &allSsnap, 0.0f, 5.0f, "%.2f");
+
+	SetSnap(currentOperation);
+}
+
+
