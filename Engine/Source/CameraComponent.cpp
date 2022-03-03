@@ -93,7 +93,7 @@ void CameraComponent::OnEditor()
 		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
-		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.01f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
 		if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
 
 
@@ -155,10 +155,10 @@ bool CameraComponent::Update(float dt)
 		float3 newPos = targetPos;
 		//newPos.z += 20;
 		// offset
-		newPos.y += radius;
-		newPos.z += radius * cos(horizontalAngle);
-		newPos.x += radius * sin(horizontalAngle);
-
+		newPos.x += radius * sin(DEGTORAD * verticalAngle) * cos(DEGTORAD * horizontalAngle);
+		newPos.z += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
+		newPos.y += radius * cos(DEGTORAD * verticalAngle);
+		
 		// This is from LookAt function at ModuleCamera.h
 		float3 directionFrustum = targetPos - camera.Pos();
 		directionFrustum.Normalize();
@@ -171,15 +171,17 @@ bool CameraComponent::Update(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle -= rotationSpeed;
 			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle += rotationSpeed;
+			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT && verticalAngle > -179.9f)
+			{
+				verticalAngle -= rotationSpeed;
+				if (verticalAngle < -179.9f) verticalAngle = -179.9f;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT && verticalAngle < 0.1f)
+			{
+				verticalAngle += rotationSpeed;
 
-			// Calculate rotation position
-			float cosinus = cos(horizontalAngle);
-			float sinus = sin(horizontalAngle);
-			float TestPosZ = newPos.z * cosinus - newPos.x * sinus;
-			float TestPosX = newPos.x * cosinus + newPos.z * sinus;
-			// Add offset with angle 0
-			//newPos.z += TestPosZ - newPos.z;
-			//newPos.x += TestPosX - newPos.x;
+				if (verticalAngle > 0.1f) verticalAngle = 0.1f;
+			}
 		}
 
 		transform->SetRotation(lookAt.ToQuat());
