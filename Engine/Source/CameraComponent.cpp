@@ -94,6 +94,7 @@ void CameraComponent::OnEditor()
 
 		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
 		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.01f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
 
 
 		ImGui::Text("- - - - SHAKE - - - -");
@@ -152,8 +153,11 @@ bool CameraComponent::Update(float dt)
 	{
 		float3 targetPos = target->GetComponent<TransformComponent>()->GetPosition();
 		float3 newPos = targetPos;
-		newPos.z += 20;
-		newPos.y += 20;
+		//newPos.z += 20;
+		// offset
+		newPos.y += radius;
+		newPos.z += radius * cos(horizontalAngle);
+		newPos.x += radius * sin(horizontalAngle);
 
 		// This is from LookAt function at ModuleCamera.h
 		float3 directionFrustum = targetPos - camera.Pos();
@@ -174,8 +178,8 @@ bool CameraComponent::Update(float dt)
 			float TestPosZ = newPos.z * cosinus - newPos.x * sinus;
 			float TestPosX = newPos.x * cosinus + newPos.z * sinus;
 			// Add offset with angle 0
-			newPos.z += TestPosZ - newPos.z;
-			newPos.x += TestPosX - newPos.x;
+			//newPos.z += TestPosZ - newPos.z;
+			//newPos.x += TestPosX - newPos.x;
 		}
 
 		transform->SetRotation(lookAt.ToQuat());

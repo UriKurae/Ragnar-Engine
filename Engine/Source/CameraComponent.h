@@ -60,6 +60,7 @@ private:
 	float verticalAngle = 0.79;
 	bool rotateAround = false;
 	float rotationSpeed = 0.05f;
+	float radius = 20.0f;
 	float horizontalAngle = 0;
 	bool multifocusOnClick = false;
 	GameObject*/*transform*/secondTarget = nullptr;
