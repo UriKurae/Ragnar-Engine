@@ -1,14 +1,6 @@
 #pragma once
-
 #include "Component.h"
-#include "IndexBuffer.h"
-#include "VertexBuffer.h"
-
 #include "Geometry/AABB.h"
-#include <vector>
-
-typedef unsigned int GLuint;
-typedef unsigned char GLubyte;
 
 class TransformComponent;
 class MaterialComponent;

@@ -27,7 +27,7 @@
 #include "../MathGeoLibFwd.h"
 
 #ifdef MATH_BULLET_INTEROP
-#include "../../../Bullet/include/LinearMath/btQuaternion.h"
+#include "LinearMath/btQuaternion.h"
 #endif
 
 MATH_BEGIN_NAMESPACE

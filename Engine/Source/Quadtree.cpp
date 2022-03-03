@@ -6,7 +6,6 @@
 #include "IndexBuffer.h"
 
 #include "glew/include/GL/glew.h"
-#include "CameraComponent.h"
 
 #include <stack>
 

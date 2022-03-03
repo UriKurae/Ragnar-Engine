@@ -1,15 +1,17 @@
+#include "ModuleCamera3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleCamera3D.h"
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "GameObject.h"
 #include "ModuleScene.h"
+
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 #include "Mesh.h"
 
 #include <map>
-
 #include "SDL.h"
 #include "Profiling.h"
 #include "GL/glew.h"

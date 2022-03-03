@@ -1,18 +1,9 @@
-#include "Application.h"
-#include "FileSystem.h"
-
 #include "Shader.h"
-
+#include "Application.h"
 #include "Globals.h"
 
-#include "GL/glew.h"
-
-#include <assert.h>
+#include "FileSystem.h"
 #include <fstream>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <time.h>
-
 
 GLenum GetShaderTypeFromString(const std::string& type)
 {

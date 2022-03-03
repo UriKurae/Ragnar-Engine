@@ -1,12 +1,11 @@
+#include "LightComponent.h"
 #include "Application.h"
+
 #include "ModuleRenderer3D.h"
 
 #include "GameObject.h"
-
-#include "LightComponent.h"
-
-#include "imgui/imgui.h"
-#include "IconsFontAwesome5.h"
+#include "TransformComponent.h"
+#include "Lights.h"
 
 ComponentLight::ComponentLight()
 {

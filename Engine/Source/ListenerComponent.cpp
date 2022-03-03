@@ -1,12 +1,8 @@
-#include "Globals.h"
 #include "ListenerComponent.h"
-#include "GameObject.h"
 #include "AudioManager.h"
+
+#include "GameObject.h"
 #include "TransformComponent.h"
-
-#include "IconsFontAwesome5.h"
-
-#include "Imgui/imgui_internal.h"
 
 ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans) : activeListener(true), transform(trans)
 {

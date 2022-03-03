@@ -1,15 +1,9 @@
-#include "Globals.h"
-
-#include "Application.h"
-#include "ModuleScene.h"
 #include "AudioSourceComponent.h"
+#include "Globals.h"
 #include "AudioManager.h"
-#include "TransformComponent.h"
+
 #include "GameObject.h"
-
-#include "IconsFontAwesome5.h"
-
-#include "Imgui/imgui.h"
+#include "TransformComponent.h"
 
 AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1)
 {

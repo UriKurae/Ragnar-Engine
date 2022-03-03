@@ -1,11 +1,7 @@
 #pragma once
-
 #include "Component.h"
 
-
 class TransformComponent;
-class IndexBuffer;
-class VertexBuffer;
 
 struct AudioClip
 {

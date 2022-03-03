@@ -1,11 +1,12 @@
 #include "Physics3D.h"
-#include "Globals.h"
 #include "Application.h"
-
-#include "C_RigidBody.h"
-#include "Bullet/include/btBulletDynamicsCommon.h"
+#include "Globals.h"
 
 #include "ModuleScene.h"
+#include "C_RigidBody.h"
+
+#include "btBulletDynamicsCommon.h"
+
 
 Physics3D::Physics3D(bool start_enabled) : Module(start_enabled)
 {

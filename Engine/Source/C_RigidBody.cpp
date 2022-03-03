@@ -3,15 +3,14 @@
 #include "Globals.h"
 
 #include "Physics3D.h"
+#include "ModuleScene.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 
-#include "ImGui/imgui.h"
 #include "ImGui/imgui_stdlib.h"
-#include "Bullet/include/btBulletDynamicsCommon.h"
+#include "btBulletDynamicsCommon.h"
 #include "Math/float3x3.h"
 
-#include "ModuleScene.h"
 
 RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, float mass, bool isKinematic) : Component(), collisionType(type), mass(mass), isKinematic(isKinematic)
 {

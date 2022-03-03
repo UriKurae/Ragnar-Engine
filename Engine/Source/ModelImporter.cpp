@@ -1,10 +1,15 @@
 #include "ModelImporter.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "ModuleScene.h"
 #include "FileSystem.h"
+
 #include "GameObject.h"
-#include "Globals.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "MaterialComponent.h"
+
 #include "MeshImporter.h"
 #include "TextureImporter.h"
 

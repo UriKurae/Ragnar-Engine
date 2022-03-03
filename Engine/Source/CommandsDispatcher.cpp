@@ -1,4 +1,5 @@
 #include "CommandsDispatcher.h"
+#include "Command.h"
 
 std::stack<Command*> CommandDispatcher::commands = {};
 std::stack<Command*> CommandDispatcher::undoneCommands = {};

@@ -1,7 +1,8 @@
 #include "Primitive.h"
-
-#include "glew/include/GL/glew.h"
 #include "Globals.h"
+
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 #include "Profiling.h"
 

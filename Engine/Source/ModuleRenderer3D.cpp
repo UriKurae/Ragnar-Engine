@@ -1,30 +1,27 @@
+#include "ModuleRenderer3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleRenderer3D.h"
 
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
-#include "Framebuffer.h"
 
+#include "Framebuffer.h"
 #include "ResourceManager.h"
 
 #include "GameObject.h"
 #include "LightComponent.h"
+#include "TransformComponent.h"
 
-#include "Material.h"
 #include "Shader.h"
 #include "Resource.h"
 
 #include "glew/include/GL/glew.h"
-
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
-
 #include "Imgui/ImguiStyle.h"
-
 #include "IL/ilut.h"
 #include "Geometry/LineSegment.h"
 

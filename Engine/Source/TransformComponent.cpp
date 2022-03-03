@@ -1,23 +1,16 @@
-#include "Application.h"
-#include "ModuleInput.h"
-
-#include "GameObject.h"
 #include "TransformComponent.h"
-#include "C_RigidBody.h"
-#include "ModuleScene.h"
+#include "Application.h"
 #include "Globals.h"
+
+#include "ModuleScene.h"
+
+#include "C_RigidBody.h"
+#include "MeshComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
-#include "Imgui/ImGuizmo.h"
-
-#include <stack>
-
-#include "IconsFontAwesome5.h"
-
 #include "Profiling.h"
 
 TransformComponent::TransformComponent(GameObject* own)

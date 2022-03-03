@@ -1,18 +1,10 @@
 #pragma once
-
 #include <string>
 #include <vector>
-#include "Component.h"
+
 #include "Geometry/OBB.h"
-
-
-#include "TransformComponent.h"
-#include "MeshComponent.h"
-#include "MaterialComponent.h"
+#include "Geometry/AABB.h"
 #include "CameraComponent.h"
-#include "AudioSourceComponent.h"
-#include "ListenerComponent.h"
-#include "AudioReverbZoneComponent.h"
 
 typedef unsigned int uint;
 
@@ -20,6 +12,7 @@ typedef json_array_t JSON_Array;
 class JsonParsing;
 class VertexBuffer;
 class IndexBuffer;
+class Component;
 
 class GameObject
 {

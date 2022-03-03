@@ -1,13 +1,12 @@
+#include "CameraComponent.h"
 #include "Application.h"
 #include "Globals.h"
 
-#include "CameraComponent.h"
-#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
-#include "glew/include/GL/glew.h"
-
-#include "IconsFontAwesome5.h"
-
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
 #include "Profiling.h"
 
 CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(1.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)

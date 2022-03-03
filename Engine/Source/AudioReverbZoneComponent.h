@@ -1,7 +1,6 @@
 #pragma once
-
 #include "Component.h"
-#include "MathGeoLib/include/Geometry/AABB.h"
+#include "Geometry/AABB.h"
 #include <string>
 
 class GameObject;

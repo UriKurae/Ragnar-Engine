@@ -1,7 +1,6 @@
+#include "GameView.h"
 #include "Application.h"
 
-#include "CameraComponent.h"
-#include "GameView.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleScene.h"
 

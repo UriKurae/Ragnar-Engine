@@ -1,8 +1,7 @@
 #pragma once
-
 #include "Component.h"
 
-#include "Lights.h"
+class Light;
 
 class ComponentLight : public Component
 {
@@ -21,8 +20,6 @@ public:
 	virtual bool OnLoad(JsonParsing& node) override;
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-
 private:
 	Light* light = nullptr;
-
 };

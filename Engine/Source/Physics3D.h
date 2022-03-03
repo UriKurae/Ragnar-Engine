@@ -1,8 +1,8 @@
 #pragma once
 #include "Module.h"
+
 #include "Shapes.h"
-#include <list>
-#include "Bullet/include/LinearMath/btIDebugDraw.h"
+#include "LinearMath/btIDebugDraw.h"
 
 #define GRAVITY btVector3(0.0f, -10.0f, 0.0f)
 

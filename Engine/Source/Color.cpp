@@ -1,5 +1,4 @@
 #include "Color.h"
-
 #include "Profiling.h"
 
 Color red = Color(1.0f, 0.0f, 0.0f);

@@ -1,16 +1,9 @@
 #pragma once
-
 #include "Component.h"
 #include "Shader.h"
 #include "TextEditor.h"
 
 #include <string>
-#include <memory>
-
-
-
-typedef unsigned int GLuint;
-typedef unsigned char GLubyte;
 
 class Texture;
 class Resource;

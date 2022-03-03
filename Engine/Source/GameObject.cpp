@@ -1,24 +1,25 @@
 #include "GameObject.h"
-
 #include "Application.h"
-#include "ModuleScene.h"
 #include "Globals.h"
 
-#include "LightComponent.h"
+#include "ModuleScene.h"
 
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "glew/include/GL/glew.h"
-#include "Imgui/imgui.h"
-#include "Imgui/imgui_internal.h"
-#include "Algorithm/Random/LCG.h"
-
+#include "Component.h"
 #include "C_RigidBody.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "MaterialComponent.h"
+#include "LightComponent.h"
+#include "AudioSourceComponent.h"
+#include "ListenerComponent.h"
+#include "AudioReverbZoneComponent.h"
 
+#include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
-
 
 GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {

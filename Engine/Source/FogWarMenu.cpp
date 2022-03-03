@@ -1,11 +1,10 @@
-#include "Application.h"
 #include "FogWarMenu.h"
+#include "Application.h"
+
 #include "ModuleScene.h"
 
-#include "CameraComponent.h"
-
-#include "Glew/include/GL/glew.h"
-#include "MathGeoLib/include/Geometry/Frustum.h"
+#include "GL/glew.h"
+#include "Geometry/Frustum.h"
 
 FogWarMenu::FogWarMenu() : Menu(true)
 {

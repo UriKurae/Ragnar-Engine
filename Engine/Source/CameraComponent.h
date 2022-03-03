@@ -1,11 +1,11 @@
 #pragma once
-
 #include "Component.h"
-#include "MathGeoLib/include/Geometry/Frustum.h"
+#include "Geometry/Frustum.h"
 
 class TransformComponent;
 class IndexBuffer;
 class VertexBuffer;
+
 class CameraComponent : public Component
 {
 public:

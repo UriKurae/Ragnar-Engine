@@ -17,6 +17,7 @@
 #include "TextureImporter.h"
 #include "ResourceManager.h"
 #include "ModuleEditor.h"
+#include "TransformComponent.h"
 
 #include "FileSystem.h"
 

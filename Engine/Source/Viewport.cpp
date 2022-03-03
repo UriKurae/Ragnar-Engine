@@ -6,14 +6,13 @@
 #include "Viewport.h"
 #include "ModuleRenderer3D.h"
 #include "GameObject.h"
+#include "TransformComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/ImGuizmo.h"

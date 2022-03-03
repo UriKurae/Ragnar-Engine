@@ -1,26 +1,19 @@
 #include "MaterialComponent.h"
-
 #include "Application.h"
-#include "ModuleEditor.h"
+
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModuleScene.h"
-#include "GameObject.h"
-#include "ResourceManager.h"
-#include "Texture.h"
-#include "Viewport.h"
-#include <fstream>
 
-#include "CameraComponent.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
 #include "FileSystem.h"
-
-#include "Imgui/imgui.h"
-
-#include "IconsFontAwesome5.h"
+#include "ResourceManager.h"
+#include "Texture.h"
+#include <fstream>
 
 #include "Profiling.h"
-
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 

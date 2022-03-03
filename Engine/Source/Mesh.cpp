@@ -5,7 +5,7 @@
 #include "Application.h"
 #include "FileSystem.h"
 
-#include "glew/include/GL/glew.h"
+#include "GL/glew.h"
 
 #include "Profiling.h"
 

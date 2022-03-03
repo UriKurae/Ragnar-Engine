@@ -1,9 +1,8 @@
 #pragma once
+
 #include "glmath.h"
 #include "Color.h"
-#include <vector>
 #include "Math/float4x4.h"
-#include "glmath.h"
 
 enum ShapesTypes
 {

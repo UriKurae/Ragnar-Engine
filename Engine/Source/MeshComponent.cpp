@@ -1,20 +1,15 @@
+#include "MeshComponent.h"
 #include "Application.h"
 #include "Globals.h"
-#include "MeshComponent.h"
 
 #include "ModuleScene.h"
-#include "CameraComponent.h"
+
+#include "TransformComponent.h"
+#include "MaterialComponent.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
-
 #include "Mesh.h"
-
-#include "Imgui/imgui.h"
-
-#include "glew/include/GL/glew.h"
-
-#include "IconsFontAwesome5.h"
-#include "Geometry/Sphere.h"
 
 #include "Profiling.h"
 

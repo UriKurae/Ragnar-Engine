@@ -1,21 +1,24 @@
 #include "ModuleScene.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
-#include "Globals.h"
 #include "ModuleEditor.h"
+#include "Physics3D.h"
+
 #include "Primitives.h"
 #include "MeshImporter.h"
 #include "FileSystem.h"
+
 #include "Resource.h"
 #include "ResourceManager.h"
-#include "Physics3D.h"
-
 #include "AudioManager.h"
 
-#include <stack>
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
+#include <stack>
 #include "Profiling.h"
 
 ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
