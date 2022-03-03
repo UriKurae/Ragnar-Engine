@@ -12,6 +12,8 @@
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
+#include "MeshComponent.h"
+#include "Mesh.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/ImGuizmo.h"
@@ -62,7 +64,8 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 
 		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
-		if (app->editor->GetGO())
+		GameObject* goSel = app->editor->GetGO();
+		if (goSel)
 		{
 			ImGuizmo::Enable(true);
 			ImGuizmo::SetGizmoSizeClipSpace(0.3f);
@@ -70,13 +73,13 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
+			math::float4x4 tr = goSel->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
 
-			math::float4x4 tr = app->editor->GetGO()->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
 			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
 			static bool firstMove = false;
 			if (ImGuizmo::IsUsing())
 			{
-				GameObject* go = app->editor->GetGO();
+				GameObject* go = goSel;
 				if (!firstMove)
 				{
 					firstMove = true;
@@ -118,8 +121,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGui::EndDragDropTarget();
 		}
 
-		GameObject* camera = app->editor->GetGO();
-		if (camera && camera->GetComponent<CameraComponent>())
+		if (goSel && goSel->GetComponent<CameraComponent>())
 		{
 			ImGui::SetNextWindowSize(ImVec2(210, 150));
 			ImGui::SetNextWindowPos(ImVec2((bounds.x + bounds.z) - 225, (bounds.y + bounds.w) - 150));

@@ -14,6 +14,9 @@
 #include "Profiling.h"
 #include "GL/glew.h"
 
+#include "Math/float3x3.h"
+#include "Geometry/LineSegment.h"
+#include "Geometry/Triangle.h"
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
 {
@@ -308,10 +311,10 @@ void ModuleCamera3D::Focus(math::float3& newFront, math::float3& newUp, math::fl
 		{
 			if (MeshComponent* mesh = objSelected->GetComponent<MeshComponent>())
 			{
-				float3 meshCenter = mesh->GetCenterPointInWorldCoords();
+				float3 meshCenter = objSelected->GetOffsetCM();
 				newFront = (meshCenter - cameraFrustum.Pos()).Normalized();
 				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
-				const float meshRadius = mesh->GetSphereRadius();
+				const float meshRadius = mesh->GetLocalAABB().HalfDiagonal().Length();
 				const float currentDistance = meshCenter.Distance(cameraFrustum.Pos());
 				newPos = meshCenter + ((cameraFrustum.Pos() - meshCenter).Normalized() * meshRadius * 2);
 			}

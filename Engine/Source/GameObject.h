@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Component.h"
+#include "Geometry/OBB.h"
 
 
 #include "TransformComponent.h"
@@ -12,8 +13,6 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
-
-#include "MathGeoLib/src/MathGeoLib.h"
 
 typedef unsigned int uint;
 
@@ -33,11 +32,10 @@ public:
 	void DrawOutline();
 	void DrawEditor();
 
-	void DebugColliders();
-
 	Component* CreateComponent(ComponentType type);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
+	void MoveComponent(Component* component, int position);
 
 	void CopyComponent(Component* component);
 	
@@ -74,6 +72,9 @@ public:
 
 	inline const std::vector<Component*> GetComponents() const { return components; }
 
+	inline float3 GetOffsetCM() { return offsetCM; };
+	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
+
 	template<typename T>
 	T* GetComponent();
 	
@@ -81,7 +82,6 @@ public:
 	std::string name;
 	bool active;
 	bool staticObj;
-	bool colliders;
 	std::string tag;
 	std::string layer;
 
@@ -96,10 +96,8 @@ private:
 	AABB globalAabb;
 	OBB globalObb;
 
-	VertexBuffer* vertex;
-	IndexBuffer* index;
-
 	uint uuid;
+	float3 offsetCM = float3::zero;
 
 	//MouseMoveCommand mouseMoveCommand;
 

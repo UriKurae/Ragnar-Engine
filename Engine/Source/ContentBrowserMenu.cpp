@@ -63,7 +63,7 @@ bool ContentBrowserMenu::Update(float dt)
 	ImGui::Columns(2);
 	ImGui::SetColumnWidth(0, 150);
 
-	ImGuiTreeNodeFlags flags = (currentDirectory == mainDirectory ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags flags = (currentDirectory == mainDirectory ? ImGuiTreeNodeFlags_Selected : 0) | SetFlags(dirs);
 	bool opened = ImGui::TreeNodeEx("Assets", flags);
 	if (ImGui::IsItemClicked())
 	{
@@ -86,7 +86,8 @@ bool ContentBrowserMenu::Update(float dt)
 	ImGui::BeginChild("Assets");
 
 	float padding = 10.0f;
-	float cell = 64;
+	float cell = 100;
+	float height = 64;
 
 	float width = ImGui::GetContentRegionAvail().x;
 	int columns = (int)(width / cell);
@@ -110,7 +111,7 @@ bool ContentBrowserMenu::Update(float dt)
 			ImGui::PushStyleColor(ImGuiCol_Button, ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.29f, 0.66f, 1.0f)));
 			selected = true;
 		}
-		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, cell });
+		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, height });
 		if (ImGui::IsItemClicked())
 		{
 			currentFile = (*it);
@@ -155,13 +156,13 @@ bool ContentBrowserMenu::Update(float dt)
 		switch (type)
 		{
 		case ResourceType::TEXTURE:
-			ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", { cell, cell });
+			ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", { cell, height });
 			break;
 		case ResourceType::MODEL:
-			ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, cell });
+			ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, height });
 			break;
 		case ResourceType::SCENE:
-			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, cell });
+			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, height });
 			break;
 		default:
 			ImGui::Button(item.c_str());
@@ -215,7 +216,7 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 		std::string name = (*it);
 		app->fs->GetRelativeDirectory(name);
 
-		ImGuiTreeNodeFlags flags = (currentDirectory == (*it) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+		ImGuiTreeNodeFlags flags = (currentDirectory == (*it) ? ImGuiTreeNodeFlags_Selected : 0) | SetFlags(dirs);
 		
 		bool opened = ImGui::TreeNodeEx(name.c_str(), flags);
 		if (ImGui::IsItemClicked())
@@ -233,4 +234,16 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 			ImGui::TreePop();
 		}
 	}
+}
+
+ImGuiTreeNodeFlags ContentBrowserMenu::SetFlags(std::vector<std::string> node)
+{
+	// This flags allow to open the tree if you click on arrow or doubleClick on object, by default the tree is open  
+	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+
+	// If GameObject doesn't childrens = no collapsing and no arrow
+	//if (node.size() == 0)
+	//	flags |= ImGuiTreeNodeFlags_Leaf;
+
+	return flags;
 }

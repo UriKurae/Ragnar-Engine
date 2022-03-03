@@ -13,11 +13,14 @@
 #include "glew/include/GL/glew.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
+#include "Algorithm/Random/LCG.h"
+
+#include "C_RigidBody.h"
 
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -37,9 +40,6 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
-
-	RELEASE(vertex);
-	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -71,11 +71,6 @@ void GameObject::Draw(CameraComponent* gameCam)
 		{
 			component->Draw(gameCam);
 		}
-	}
-
-	if (index && vertex && colliders)
-	{
-		DebugColliders();
 	}
 }
 
@@ -126,6 +121,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Rigid Body"))
+		{
+			CreateComponent(ComponentType::RIGID_BODY);
+      newComponent = false;
+		}
 		if (ImGui::Selectable("Detour"))
 		{
 			CreateComponent(ComponentType::DETOUR);
@@ -168,60 +168,6 @@ void GameObject::DrawEditor()
 	}
 }
 
-void GameObject::DebugColliders()
-{
-	//glPushMatrix();
-	//
-	//glMultMatrixf(GetComponent<TransformComponent>()->GetTransform().Transposed().ptr());
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	vertex->Bind();
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	index->Bind();
-	glLineWidth(2.0f);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glDrawElements(GL_LINES, index->GetCount(), GL_UNSIGNED_INT, NULL);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glLineWidth(1.0f);
-	vertex->Unbind();
-	index->Unbind();
-	glDisableClientState(GL_VERTEX_ARRAY);
-	/*glPopMatrix();*/
-
-	// TODO delete this when done
-
-	// Configure buffers
-	float3 corners[8];
-	globalAabb.GetCornerPoints(corners);
-
-	unsigned int indices[24] =
-	{
-		0,1,
-		1,3,
-		3,2,
-		2,0,
-
-		1,5,
-		4,6,
-		7,3,
-
-		6,7,
-		6,2,
-
-		7,5,
-		4,5,
-
-		4,0
-	};
-
-	if (index) RELEASE(index);
-	if (vertex) RELEASE(vertex);
-	index = new IndexBuffer(indices, 24);
-	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
-	index->Unbind();
-	vertex->Unbind();
-}
-
 Component* GameObject::CreateComponent(ComponentType type)
 {
 	Component* component = nullptr;
@@ -262,6 +208,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::RIGID_BODY:
+		component = new RigidBodyComponent(this);
+    break;
 	case ComponentType::DETOUR:
 		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
@@ -331,8 +280,22 @@ void GameObject::RemoveComponent(Component* component)
 	}
 }
 
+void GameObject::MoveComponent(Component* component, int position)
+{
+	//TODO: Add to each component the reorganitation structure where the delete button is
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if (*it == component && (it - position) > components.begin() && (it - position) < components.end())
+		{
+			std::swap(*it, *(it - position));
+			break;
+		}
+	}
+}
+
 void GameObject::CopyComponent(Component* component)
 {
+	//TODO: Copy every single type of Components
 	Component* c = nullptr;
 	switch (component->type)
 	{

@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "C_RigidBody.h"
 #include "ModuleScene.h"
 #include "Globals.h"
 
@@ -68,8 +69,12 @@ bool TransformComponent::Update(float dt)
 	if (changeTransform)
 	{
 		std::stack<GameObject*> stack;
-
 		UpdateTransform();
+
+		//Get each RigidBodies of the GameObject to update their position
+		for (int i = 0; i < owner->GetComponents().size(); i++)
+			if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
+				static_cast<RigidBodyComponent*>(owner->GetComponents().at(i))->UpdateCollision();
 
 		for (int i = 0; i < owner->GetChilds().size(); ++i)
 			stack.push(owner->GetChilds()[i]);
@@ -79,6 +84,11 @@ bool TransformComponent::Update(float dt)
 			GameObject* go = stack.top();
 
 			UpdateChildTransform(go);
+			
+			//Get each RigidBodies of the GameObject childs to update their position
+			for (int i = 0; i < go->GetComponents().size(); i++)
+				if (go->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
+					static_cast<RigidBodyComponent*>(go->GetComponents().at(i))->UpdateCollision();
 
 			stack.pop();
 
@@ -143,6 +153,7 @@ bool TransformComponent::OnLoad(JsonParsing& node)
 	scale = node.GetJson3Number(node, "Scale");
 	rotationEditor = node.GetJson3Number(node, "RotationEditor");
 
+	UpdateTransform();
 	changeTransform = true;
 
 	return true;
@@ -215,6 +226,7 @@ void TransformComponent::SetAABB()
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
+		owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
 
 	app->scene->ResetQuadtree();

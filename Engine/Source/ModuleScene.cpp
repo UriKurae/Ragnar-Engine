@@ -10,6 +10,7 @@
 #include "FileSystem.h"
 #include "Resource.h"
 #include "ResourceManager.h"
+#include "Physics3D.h"
 
 #include "AudioManager.h"
 
@@ -173,7 +174,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw(nullptr);
+			if (go != app->editor->GetGO()) go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -376,6 +377,8 @@ bool ModuleScene::LoadScene(const char* name)
 				}
 			}
 		}
+
+		app->physics->LoadConstraints();
 	}
 	else
 	{

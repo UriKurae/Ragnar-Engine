@@ -38,10 +38,7 @@ void ListenerComponent::OnEditor()
 		ImGui::SameLine();
 		ImGui::Text("Listen");
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 	ImGui::PopID();

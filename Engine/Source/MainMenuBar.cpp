@@ -24,6 +24,7 @@
 #include "LightComponent.h"
 
 #include "ModuleCamera3D.h"
+#include "Physics3D.h"
 
 
 #include "Dialogs.h"
@@ -36,6 +37,8 @@
 
 #include "Profiling.h"
 
+#include "Math/float3x3.h"
+
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {
 	showMenu = false;
@@ -44,11 +47,11 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
-	menus.emplace_back(new InspectorMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
 	menus.emplace_back(new FogWarMenu());
-	menus.emplace_back(new NavigatorMenu());
+  menus.emplace_back(new NavigatorMenu());
+	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
 }
@@ -419,7 +422,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			app->scene->Play();
 			AudioManager::Get()->PlayAllAudioSources();
-			ImGui::StyleColorsClassic();
+			//ImGui::StyleColorsClassic();
+			app->physics->ActiveAllBodies();
 		}
 
 		ImGui::SameLine();
@@ -435,7 +439,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			AudioManager::Get()->StopAllAudioSources();
 			app->scene->Stop();
-			SetStyle(6);
+			app->physics->SleepAllBodies();
+			//SetStyle(6);
 		}
 		ImGui::SameLine();
 
@@ -445,12 +450,14 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->scene->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
+				app->physics->ActiveAllBodies();
 			}
 		}
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
 			app->scene->Pause();
+			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();

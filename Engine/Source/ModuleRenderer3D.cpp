@@ -26,6 +26,7 @@
 #include "Imgui/ImguiStyle.h"
 
 #include "IL/ilut.h"
+#include "Geometry/LineSegment.h"
 
 #include "Profiling.h"
 
@@ -34,7 +35,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	name = "Renderer";
 	context = NULL;
 	fbo = nullptr;
-	grid = nullptr;
 
 	depthTest = true;
 	cullFace = true;
@@ -192,7 +192,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo->Unbind();
 	
 
-	grid = new PGrid(200, 200);
+	grid.SetPos(0, 0, 0);
+	grid.constant = 0;
+	grid.axis = true;
 
 	//defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
 	//shaders.push_back(defaultShader);
@@ -217,6 +219,18 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Editor Camera FBO
+	fbo->Bind();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -225,35 +239,10 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	// Editor Camera FBO
-	fbo->Bind();
-	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
-
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
-	
-	grid->Draw();
+	grid.Render();
 	std::set<GameObject*> objects;
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
-
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilMask(0xFF);
-		
-	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
-	{
-		glColor3f(0.25f, 0.87f, 0.81f);
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilMask(0x00);
-		glDisable(GL_DEPTH_TEST);
-		app->editor->GetGO()->DrawOutline();
-
-		glStencilMask(0xFF);
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		if (depthTest) glEnable(GL_DEPTH_TEST);
-		glColor3f(1.0f, 1.0f, 1.0f);
-	}
 
 	if (rayCast)
 	{
@@ -272,17 +261,36 @@ bool ModuleRenderer3D::PostUpdate()
 	//glPopMatrix();
 	//glPopMatrix();
 	//PushCamera(float4x4::identity, float4x4::identity);
-	
+	GameObject* objSelected = app->editor->GetGO();
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			(*it)->Draw(nullptr);
+			if ((*it) != objSelected)(*it)->Draw(nullptr);
 		}
+		//if (objSelected) objSelected->Draw(nullptr);
 	}
 	else
 	{
 		app->scene->Draw();
+	}
+
+	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	glStencilMask(0xFF);
+
+	if (stencil && objSelected && objSelected->GetActive())
+	{
+		glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		objSelected->DrawOutline();
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		objSelected->Draw(nullptr);
 	}
 
 	fbo->Unbind();
@@ -295,7 +303,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
-	grid->Draw();
+	grid.Render();
 
 	//glPopMatrix();
 	//glPopMatrix();
@@ -321,7 +329,6 @@ bool ModuleRenderer3D::CleanUp()
 {
 	DEBUG_LOG("Destroying 3D Renderer");
 
-	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
 	//RELEASE(defaultShader);

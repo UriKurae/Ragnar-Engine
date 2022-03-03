@@ -15,7 +15,6 @@
 HierarchyMenu::HierarchyMenu() : Menu(true)
 {
 	gameObjectOptions = false;
-	createGameObject = false;
 }
 
 HierarchyMenu::~HierarchyMenu()
@@ -30,7 +29,7 @@ bool HierarchyMenu::Update(float dt)
 	GameObject* root = app->scene->GetRoot();
 	GameObject* selected = app->editor->GetGO();
 	GameObject* selectedParent = app->editor->GetSelectedParent();
-	ImGuiTreeNodeFlags flags = ((selected == root) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags flags = SetFlags(root) | ImGuiTreeNodeFlags_DefaultOpen;
 	if (ImGui::TreeNodeEx(root, flags, root->GetName()))
 	{
 		if (ImGui::BeginDragDropTarget())
@@ -111,62 +110,6 @@ bool HierarchyMenu::Update(float dt)
 			ImGui::EndPopup();
 		}
 	}
-	else if (createGameObject)
-	{
-		ImGui::OpenPopup(ICON_FA_PLUS" Create GameObject");
-		if (ImGui::BeginPopup(ICON_FA_PLUS" Create GameObject"))
-		{
-			if (ImGui::Selectable(ICON_FA_LAYER_GROUP" Create Empty Object"))
-			{
-				if (selected != nullptr) app->scene->CreateGameObject(selected);
-				else app->scene->CreateGameObject(nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cube"))
-			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::CUBE, selected);
-				else app->scene->Create3DObject(Object3D::CUBE, nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable(ICON_FA_CUBES" Create Pyramide"))
-			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, selected);
-				else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable(ICON_FA_CUBES" Create Sphere"))
-			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::SPHERE, selected);
-				else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable(ICON_FA_CUBES" Create Cylinder"))
-			{
-				if (selected != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, selected);
-				else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
-				createGameObject = false;
-			}
-			else if (ImGui::Selectable(ICON_FA_LIGHTBULB" Create Point Light"))
-			{
-				GameObject* go = 0;
-				if (selected != nullptr) go = app->scene->CreateGameObject(selected);
-				else go = app->scene->CreateGameObject(nullptr);
-
-				go->SetName("Point Light");
-				ComponentLight* lightComp = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
-				PointLight* pl = new PointLight();
-				lightComp->SetLight(pl);
-				
-				app->renderer3D->AddPointLight(pl);
-				createGameObject = false;
-			}
-			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
-			{
-				createGameObject = false;
-			}
-			ImGui::EndPopup();
-		}
-	}
 
 	ImGui::End();
 
@@ -175,13 +118,12 @@ bool HierarchyMenu::Update(float dt)
 
 void HierarchyMenu::ShowChildren(GameObject* parent)
 {
-	
 	GameObject* selected = app->editor->GetGO();
 	for (int i = 0; i < parent->GetChilds().size(); ++i)
 	{
 		GameObject* obj = parent->GetChilds()[i];
 		ImGui::PushID(obj->GetName());
-		ImGuiTreeNodeFlags flags = ((selected == obj) ? ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnArrow;
+		ImGuiTreeNodeFlags flags = SetFlags(obj);
 		bool opened = false;
 		if (obj != nullptr)
 		{
@@ -229,4 +171,19 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 		}
 		ImGui::PopID();
 	}
+}
+ImGuiTreeNodeFlags HierarchyMenu::SetFlags(GameObject* node)
+{
+	// This flags allow to open the tree if you click on arrow or doubleClick on object, by default the tree is open  
+	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+
+	// If GameObject doesn't childrens = no collapsing and no arrow
+	if (node->GetChilds().size() == 0)
+		flags |= ImGuiTreeNodeFlags_Leaf;
+
+	// If GameObject is selected = activeModeSelected
+	if (node == app->editor->GetGO())
+		flags |= ImGuiTreeNodeFlags_Selected;
+
+	return flags;
 }

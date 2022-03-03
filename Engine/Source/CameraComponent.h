@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "MathGeoLib/src/Geometry/Frustum.h"
+#include "MathGeoLib/include/Geometry/Frustum.h"
 
 class TransformComponent;
 class IndexBuffer;

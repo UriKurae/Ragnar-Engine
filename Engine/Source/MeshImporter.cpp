@@ -9,7 +9,6 @@
 #include "Model.h"
 
 #include "Vertex.h"
-
 #include "Algorithm/Random/LCG.h"
 
 #include "Globals.h"
