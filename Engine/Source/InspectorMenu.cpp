@@ -76,6 +76,12 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	DrawList("Layer", &layers, obj->layer);
 	// Destroy object selected, pendingToDelete = true
 
+	if (obj->GetPrefabID() != 0)
+	{
+		ImGui::Text("Prefab ID: %d", obj->GetPrefabID());
+		ImGui::Text("Prefab Path: %s", obj->prefabPath.c_str());
+	}
+
 	int comp_origin = -1, comp_destination = -1;
 	ImGui::Separator();
 	for (int i = 0; i < obj->GetComponents().size(); ++i)

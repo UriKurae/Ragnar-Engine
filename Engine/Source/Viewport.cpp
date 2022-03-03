@@ -12,8 +12,7 @@
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
+#include "PrefabManager.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/ImGuizmo.h"
@@ -112,6 +111,10 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 				if (scene.find(".ragnar") != std::string::npos)
 				{
 					app->scene->LoadScene(scene.c_str());
+				}
+				else if (scene.find(".rgprefab") != std::string::npos)
+				{
+					PrefabManager::GetInstance()->LoadPrefab(scene.c_str());
 				}
 				else
 				{

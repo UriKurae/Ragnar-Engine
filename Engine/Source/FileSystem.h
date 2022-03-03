@@ -24,6 +24,7 @@ public:
 	bool CleanUp();
 
 	bool AddPath(const char* path);
+	bool Exists(const char* file) const;
 
 	uint Load(const char* file, char** buffer);
 	uint Save(const char* file, const void* buffer, unsigned int size, bool append = false);

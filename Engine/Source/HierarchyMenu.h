@@ -19,4 +19,5 @@ public:
 
 private:
 	bool gameObjectOptions;
+	bool confirmPanel;
 };

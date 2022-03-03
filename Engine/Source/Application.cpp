@@ -11,6 +11,7 @@
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "AudioManager.h"
+#include "PrefabManager.h"
 
 #include "Profiling.h"
 
@@ -59,6 +60,7 @@ Application::~Application()
 	RELEASE(fs);
 	ResourceManager::ReleaseInstance();
 	AudioManager::Release();
+	PrefabManager::ReleaseInstance();
 
 	listModules.clear();
 }

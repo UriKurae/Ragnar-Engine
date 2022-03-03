@@ -373,6 +373,9 @@
     <ClInclude Include="Engine\Source\Style.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\PrefabManager.h">
+      <Filter>Sources\GameObject</Filter>
+    </ClInclude>
     <ClInclude Include="Dependencies\MathGeoLib\include\Algorithm\GJK.h">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClInclude>
@@ -842,6 +845,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\PrefabManager.cpp">
+      <Filter>Sources\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\MathGeoLib\include\Algorithm\GJK.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
