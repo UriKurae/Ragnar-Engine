@@ -176,11 +176,11 @@ bool CameraComponent::Update(float dt)
 				verticalAngle -= rotationSpeed;
 				if (verticalAngle < -179.9f) verticalAngle = -179.9f;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT && verticalAngle < 0.1f)
+			if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT && verticalAngle < -0.1f)
 			{
 				verticalAngle += rotationSpeed;
 
-				if (verticalAngle > 0.1f) verticalAngle = 0.1f;
+				if (verticalAngle > -0.1f) verticalAngle = -0.1f;
 			}
 		}
 
