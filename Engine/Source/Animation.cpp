@@ -45,13 +45,16 @@ void Animation::UnLoad()
 
 Bone* Animation::FindBone(const std::string& name)
 {
-	auto boneIter = std::find_if(bones.begin(), bones.end(), [&](Bone* bone)
+	auto boneIter = std::find_if(bones.begin(), bones.end(), [&](const Bone& bone)
 	{
-		return bone->GetName() == name;
+		if (bone.GetName() == name)
+		{
+			return &bone;
+		}
 	});
 
 	if (boneIter == bones.end()) return nullptr;
-	else return (*boneIter);
+	else return &(*boneIter);
 }
 
 BoneTransform::~BoneTransform()

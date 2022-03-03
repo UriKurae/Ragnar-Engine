@@ -72,7 +72,7 @@ public:
 
 	int numBones = 0;
 
-	std::vector<Bone*> bones;
+	std::vector<Bone> bones;
 	HierarchyData hierarchy;
 
 	BoneTransform* boneTranformations = nullptr;

@@ -61,7 +61,7 @@ void AnimationComponent::OnEditor()
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f s", anim->GetDuration());
 			ImGui::Text("Bones Attached: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", anim->numBones);
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", anim->bones.size());
 			/*if(ImGui::Checkbox("Draw Bones", &debugDraw))
 			{
 				for (int i = 0; i < owner->GetChilds().size(); i++)

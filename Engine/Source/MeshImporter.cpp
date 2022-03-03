@@ -203,9 +203,15 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 
 void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::map<std::string, BoneInfo>& bones)
 {
-	unsigned int ranges[3] = { vertices.size(), indices.size(), bones.size() };
+	std::string json = name;
 
-	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(unsigned int) * bones.size() + sizeof(std::string) * bones.size() + sizeof(float3) * 2 * bones.size() + sizeof(Quat) * bones.size();	char* fileBuffer = new char[size];
+	json = json.substr(0, json.find_last_of('.'));
+	json += ".json";
+
+	unsigned int ranges[4] = { vertices.size(), indices.size(), bones.size(), json.size() };
+
+	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + json.size();
+	char* fileBuffer = new char[size];
 	char* cursor = fileBuffer;
 
 	unsigned int bytes = sizeof(ranges);
@@ -220,39 +226,49 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	memcpy(cursor, indices.data(), bytes);
 	cursor += bytes;
 
-	for (std::map<std::string, BoneInfo>::iterator it = bones.begin(); it != bones.end(); ++it)
+	bytes = json.size();
+	memcpy(cursor, json.data(), bytes);
+	cursor += bytes;
+
+	if (ranges[2] > 0)
 	{
-		std::string name = (*it).first;
-		BoneInfo info = (*it).second;
+		JsonParsing file = JsonParsing();
 
-		bytes = sizeof(unsigned int);
-		unsigned int size = name.size();
-		memcpy(cursor, &size, bytes);
-		cursor += bytes;
+		int i = 0;
+		for (std::map<std::string, BoneInfo>::iterator it = bones.begin(); it != bones.end(); ++i, ++it)
+		{
+			std::string name = (*it).first;
+			BoneInfo info = (*it).second;
 
-		const char* str = name.c_str();
-		bytes = strlen(str);
-		memcpy(cursor, &str[0], bytes);
-		cursor += bytes;
+			std::string index = std::to_string(i);
+			std::string aux;
+			aux = "Name" + index;
+			file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), aux.c_str(), name.c_str());
 
-		// WARNING: If you uncomment this, it crashes
-		SerializeBoneData(info, &cursor);
+			aux = "Id" + index;
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), aux.c_str(), info.id);
 
-		//bytes = sizeof(info);
-		//memcpy(cursor, &buf, bytes);
-		//cursor += bytes;
-		
-		//bytes = sizeof(info);
-		//memcpy(cursor, &info, bytes);
-		//cursor += bytes;
+			float3 position;
+			Quat rotation;
+			float3 scale;
+			info.offset.Decompose(position, rotation, scale);
+
+			aux = "Position" + index;
+			file.SetNewJson3Number(file, aux.c_str(), position);
+
+			aux = "Rotation" + index;
+			file.SetNewJson4Number(file, aux.c_str(), rotation);
+
+			aux = "Scale" + index;
+			file.SetNewJson3Number(file, aux.c_str(), scale);
+		}
+		file.SaveFile(json.c_str());
 	}
-	//bytes = sizeof(std::map<std::string, BoneInfo>) * bones.size();
-	//memcpy(cursor, &bones, bytes);
 
 	if (app->fs->Save(name.c_str(), fileBuffer, size) > 0)
 		DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
 
-	//RELEASE_ARRAY(fileBuffer);
+	RELEASE_ARRAY(fileBuffer);
 
 
 	//unsigned int header[2] = { vertices.size(), indices.size() };
@@ -285,7 +301,7 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 	//if (app->fs->Save(name.c_str(), buffer, size) > 0)
 	//	DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
 
-	//RELEASE_ARRAY(buffer);
+	// RELEASE_ARRAY(buffer);
 }
 
 void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::map<std::string, BoneInfo>& bones, std::string& path)
@@ -295,7 +311,7 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 	if (app->fs->Load(path.c_str(), &buffer) > 0)
 	{
 		char* cursor = buffer;
-		unsigned int ranges[3];
+		unsigned int ranges[4];
 
 		unsigned int bytes = sizeof(ranges);
 		memcpy(ranges, cursor, bytes);
@@ -314,6 +330,15 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 		memcpy(indices.data(), cursor, bytes);
 		cursor += bytes;
 
+		std::string jsonFile;
+		jsonFile.resize(ranges[3]);
+		bytes = ranges[3];
+		memcpy(jsonFile.data(), cursor, bytes);
+		cursor += bytes;
+
+		JsonParsing file = JsonParsing();
+		file.ParseFile(jsonFile.c_str());
+		
 		// Load bones
 		for (int i = 0; i < ranges[2]; ++i)
 		{
@@ -321,41 +346,28 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 			std::string name;
 			BoneInfo info;
 			
-			bytes = sizeof(unsigned int);
-			memcpy(&stringSize, cursor, bytes);
-			cursor += bytes;
+			std::string index = std::to_string(i);
+			std::string aux = "Name" + index;
+			name = file.GetJsonString(aux.c_str());
 
-			// WARNING: If you uncomment this, it crashes
-			bytes = stringSize;
-			name.resize(stringSize);
-			memcpy(name.data(), cursor, bytes);
-			cursor += bytes;
+			aux = "Id" + index;
+			info.id = file.GetJsonNumber(aux.c_str());
 
-			bytes = sizeof(int);
-			memcpy(&info.id, cursor, bytes);
-			cursor += bytes;
+			aux = "Position" + index;
+			float3 position = file.GetJson3Number(file, aux.c_str());		
 
-			float3 position;
-			Quat rotation;
-			float3 scale;
+			aux = "Rotation" + index;
+			float4 rotation = file.GetJson4Number(file, aux.c_str());
 
-			bytes = sizeof(float3);
-			memcpy(&position, cursor, bytes);
-			cursor += bytes;
+			aux = "Scale" + index;
+			float3 scale = file.GetJson3Number(file, aux.c_str());
 
-			bytes = sizeof(Quat);
-			memcpy(&rotation, cursor, bytes);
-			cursor += bytes;
+			Quat quat = { rotation.x, rotation.y, rotation.z, rotation.w };
 
-			bytes = sizeof(float3);
-			memcpy(&scale, cursor, bytes);
-			cursor += bytes;
-
-			info.offset = info.offset.FromTRS(position, rotation, scale);
+			info.offset = info.offset.FromTRS(position, quat, scale);
 
 			bones[name] = info;
 		}
-		RELEASE_ARRAY(buffer);
 	}
 	else
 		DEBUG_LOG("Mesh file not found!");
@@ -440,9 +452,9 @@ void MeshImporter::SetBoneData(Vertex& vertex, int boneID, float weight)
 	}
 }
 
-void MeshImporter::SerializeBoneData(BoneInfo& info, char** buffer)
+void MeshImporter::SerializeBoneData(BoneInfo& info, JsonParsing& file)
 {
-	unsigned int bytes = sizeof(info.id);
+	/*unsigned int bytes = sizeof(info.id);
 	memcpy(*buffer, &info.id, bytes);
 	*buffer += bytes;
 
@@ -461,5 +473,5 @@ void MeshImporter::SerializeBoneData(BoneInfo& info, char** buffer)
 
 	bytes = sizeof(float3);
 	memcpy(*buffer, &scale, bytes);
-	*buffer += bytes;
+	*buffer += bytes;*/
 }

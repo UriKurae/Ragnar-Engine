@@ -210,7 +210,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 
 }
 
-void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone*>& boneVector, HierarchyData& hierData)
+void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone>& boneVector, HierarchyData& hierData)
 {
 	// WARNING: Uncommenting this causes to crash
 	char* buffer = nullptr;
@@ -238,9 +238,6 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 
 	if (ranges[2] > 0)
 	{
-
-		Bone* bone = new Bone();
-
 		// Old load method with memcpy for bones
 		/*bytes = sizeof(BoneData);
 		memcpy(&bone->GetData(), cursor, bytes);
@@ -302,7 +299,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 				boneData.scales.push_back(sca);
 			}
 
-			Bone* bone = new Bone(boneData);
+			Bone bone(boneData);
 			boneVector.push_back(bone);
 		}
 		jsonBone = file.GetJsonArrayValue(jsonArray, 1);
