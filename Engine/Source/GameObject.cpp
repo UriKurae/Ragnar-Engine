@@ -124,16 +124,6 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Rigid Body"))
 		{
 			CreateComponent(ComponentType::RIGID_BODY);
-      newComponent = false;
-		}
-		if (ImGui::Selectable("Detour"))
-		{
-			CreateComponent(ComponentType::DETOUR);
-			newComponent = false;
-		}
-		if (ImGui::Selectable("Recast"))
-		{
-			CreateComponent(ComponentType::RECAST);
 			newComponent = false;
 		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -210,12 +200,6 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
-    break;
-	case ComponentType::DETOUR:
-		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
-		break;
-	case ComponentType::RECAST:
-		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
 	{

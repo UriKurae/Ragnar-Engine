@@ -18,9 +18,7 @@ enum class ComponentType
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
 	RIGID_BODY,
-	LIGHT,
-	DETOUR,
-	RECAST,
+	LIGHT
 };
 
 class Component
