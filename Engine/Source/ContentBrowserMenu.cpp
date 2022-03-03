@@ -29,6 +29,7 @@ ContentBrowserMenu::~ContentBrowserMenu()
 	RELEASE(picIcon);
 	RELEASE(modelIcon);
 	RELEASE(sceneIcon);
+	RELEASE(prefabIcon);
 }
 
 bool ContentBrowserMenu::Start()
@@ -44,6 +45,9 @@ bool ContentBrowserMenu::Start()
 
 	sceneIcon = new Texture(-4, std::string("Settings/EngineResources/logo.rgtexture"));
 	sceneIcon->Load();
+
+	prefabIcon = new Texture(-5, std::string("Settings/EngineResources/prefab.rgtexture"));
+	prefabIcon->Load();
 
 	return true;
 }
@@ -165,7 +169,14 @@ bool ContentBrowserMenu::Update(float dt)
 			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, height });
 			break;
 		default:
-			ImGui::Button(item.c_str());
+			if ((*it).find(".rgprefab") != std::string::npos)
+			{
+				ImGui::ImageButton(prefabIcon ? (ImTextureID)prefabIcon->GetId() : "", { cell, cell });
+			}
+			else
+			{
+				ImGui::Button(item.c_str());
+			}
 			break;
 		}
 		if (ImGui::IsItemClicked())

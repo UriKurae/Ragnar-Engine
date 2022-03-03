@@ -348,6 +348,7 @@ bool MaterialComponent::OnLoad(JsonParsing& node)
 {
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
+	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 
 	return true;
 }
@@ -359,6 +360,7 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", diff->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	
 	node.SetValueToArray(array, file.GetRootValue());
 

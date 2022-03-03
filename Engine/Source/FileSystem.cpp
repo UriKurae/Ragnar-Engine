@@ -39,7 +39,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -97,6 +97,12 @@ bool FileSystem::AddPath(const char* path)
 		ret = true;
 
 	return ret;
+}
+
+// Check if a file exists
+bool FileSystem::Exists(const char* file) const
+{
+	return PHYSFS_exists(file) != 0;
 }
 
 uint FileSystem::Load(const char* file, char** buffer)

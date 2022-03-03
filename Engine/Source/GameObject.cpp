@@ -21,7 +21,7 @@
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default"), prefabPath("None"), prefabID(0)
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -170,19 +170,19 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
-		{
-		MeshComponent* meshComp = (MeshComponent*)component;
 		
-			if (meshComp)
+		{
+			MeshComponent* meshComp = (MeshComponent*)component;
+
+			MaterialComponent* matComp = GetComponent<MaterialComponent>();
+			if (matComp != nullptr)
 			{
-				MaterialComponent* matComp = new MaterialComponent(this);
-				meshComp->SetMaterial((MaterialComponent*)matComp);
-				
-				if (matComp)
-				{
-					matComp->SetOwner(this);
-					components.push_back(matComp);
-				}
+				meshComp->SetMaterial(matComp);
+			}
+			else
+			{
+				matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
+				meshComp->SetMaterial(matComp);
 			}
 		}
 		break;
@@ -204,30 +204,12 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::MATERIAL:
 	{
-		MeshComponent* m = GetComponent<MeshComponent>();
-		MaterialComponent* matComp = GetComponent<MaterialComponent>();
-		if (m != nullptr && matComp)
+		component = new MaterialComponent(this, false);
+
 		{
-			if (matComp->IsDefaultMat())
-			{
-				std::vector<Component*>::iterator it = components.begin();
-				for (; it != components.end(); ++it)
-				{
-					if (*(it) == matComp)
-					{
-						components.erase(it);
-						RELEASE(matComp);
-						break;
-					}
-				}
-				component = new MaterialComponent(this, false);
-				m->SetMaterial((MaterialComponent*)component);
-			}
-		}
-		else
-		{
-			component = new MaterialComponent(this);
-			if(m != nullptr)
+			MeshComponent* m = GetComponent<MeshComponent>();
+
+			if (m != nullptr)
 				m->SetMaterial((MaterialComponent*)component);
 		}
 		break;
@@ -256,7 +238,7 @@ void GameObject::RemoveComponent(Component* component)
 {
 	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
 	{
-		if (*it == component)
+		if ((*it) == component)
 		{
 			components.erase(it);
 			RELEASE(component);
@@ -403,6 +385,8 @@ void GameObject::OnLoad(JsonParsing& node)
 	uuid = node.GetJsonNumber("UUID");
 	name = node.GetJsonString("Name");
 	active = node.GetJsonBool("Active");
+	prefabID = node.GetJsonNumber("PrefabID");
+	prefabPath = node.GetJsonString("Prefab Path");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
 
@@ -423,6 +407,8 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
 
@@ -436,5 +422,177 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	for (int i = 0; i < children.size(); ++i)
 	{
 		children[i]->OnSave(node, array);
+	}
+}
+
+void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "UUID", uuid);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
+
+	if (option == 1 || option == 3)
+	{
+		LCG lcg;
+		prefabID = lcg.Int();
+	}
+	if (option == 2 && prefabID == 0)
+	{
+		LCG lcg;
+		prefabID = lcg.Int();
+	}
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
+
+	for (int i = 0; i < components.size(); ++i)
+	{
+		components[i]->OnSave(file, newArray);
+	}
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	for (int i = 0; i < children.size(); ++i)
+	{
+		children[i]->OnSavePrefab(node, array, option);
+	}
+}
+
+void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
+{
+	active = node.GetJsonBool("Active");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
+
+	size_t size = node.GetJsonArrayCount(jsonArray);
+
+	std::vector<ComponentType> listComp;
+
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		ComponentType comp = (ComponentType)(int)c.GetJsonNumber("Type");
+
+		listComp.push_back(comp);
+
+		switch (comp)
+		{
+		case ComponentType::TRANSFORM:
+			if (!isParent)
+			{
+				if (GetComponent<TransformComponent>() == nullptr)
+					CreateComponent(ComponentType::TRANSFORM);
+
+				GetComponent<TransformComponent>()->OnLoad(c);
+			}
+			break;
+		case ComponentType::MESH_RENDERER:
+			if (GetComponent<MeshComponent>() == nullptr)
+				CreateComponent(ComponentType::MESH_RENDERER);
+
+			GetComponent<MeshComponent>()->OnLoad(c);
+			break;
+		case ComponentType::CAMERA:
+			if (GetComponent<CameraComponent>() == nullptr)
+				CreateComponent(ComponentType::CAMERA);
+
+			GetComponent<CameraComponent>()->OnLoad(c);
+			break;
+		case ComponentType::AUDIO_SOURCE:
+			if (GetComponent<AudioSourceComponent>() == nullptr)
+				CreateComponent(ComponentType::AUDIO_SOURCE);
+
+			GetComponent<AudioSourceComponent>()->OnLoad(c);
+			break;
+		case ComponentType::AUDIO_LISTENER:
+			if (GetComponent<ListenerComponent>() == nullptr)
+				CreateComponent(ComponentType::AUDIO_LISTENER);
+
+			GetComponent<ListenerComponent>()->OnLoad(c);
+			break;
+		case ComponentType::AUDIO_REVERB_ZONE:
+			if (GetComponent<AudioReverbZoneComponent>() == nullptr)
+				CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
+
+			GetComponent<AudioReverbZoneComponent>()->OnLoad(c);
+			break;
+		case ComponentType::MATERIAL:
+			if (GetComponent<MaterialComponent>() == nullptr)
+				CreateComponent(ComponentType::MATERIAL);
+
+			GetComponent<MaterialComponent>()->OnLoad(c);
+			break;
+		case ComponentType::LIGHT:
+			if (GetComponent<ComponentLight>() == nullptr)
+				CreateComponent(ComponentType::LIGHT);
+
+			GetComponent<ComponentLight>()->OnLoad(c);
+			break;
+		case ComponentType::RIGID_BODY:
+			if (GetComponent<RigidBodyComponent>() == nullptr)
+				CreateComponent(ComponentType::RIGID_BODY);
+
+			GetComponent<RigidBodyComponent>()->OnLoad(c);
+			break;
+		}
+	}
+
+	std::vector<ComponentType> compToDelete;
+
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		bool exist = false;
+		for (std::vector<ComponentType>::iterator it2 = listComp.begin(); it2 != listComp.end(); ++it2)
+		{
+			if ((*it)->type == (*it2))
+			{
+				exist = true;
+				break;
+			}
+		}
+
+		if (!exist)
+		{
+			compToDelete.push_back((*it)->type);
+		}
+	}
+
+	for (std::vector<ComponentType>::iterator it = compToDelete.begin(); it != compToDelete.end(); ++it)
+	{
+		switch ((*it))
+		{
+		case ComponentType::TRANSFORM:
+			RemoveComponent(GetComponent<TransformComponent>());
+			break;
+		case ComponentType::MESH_RENDERER:
+			RemoveComponent(GetComponent<MeshComponent>());
+			break;
+		case ComponentType::CAMERA:
+			RemoveComponent(GetComponent<CameraComponent>());
+			break;
+		case ComponentType::AUDIO_SOURCE:
+			RemoveComponent(GetComponent<AudioSourceComponent>());
+			break;
+		case ComponentType::AUDIO_LISTENER:
+			RemoveComponent(GetComponent<ListenerComponent>());
+			break;
+		case ComponentType::AUDIO_REVERB_ZONE:
+			RemoveComponent(GetComponent<AudioReverbZoneComponent>());
+			break;
+		case ComponentType::MATERIAL:
+			RemoveComponent(GetComponent<MaterialComponent>());
+			break;
+		case ComponentType::LIGHT:
+			RemoveComponent(GetComponent<ComponentLight>());
+			break;
+		case ComponentType::RIGID_BODY:
+			RemoveComponent(GetComponent<RigidBodyComponent>());
+			break;
+		}
 	}
 }
