@@ -18,8 +18,8 @@
 
 #define _USE_MATH_DEFINES
 #include <string.h>
-#include "DebugDraw.h"
-#include "DetourMath.h"
+#include "DebugUtils/DebugDraw.h"
+#include "Detour/DetourMath.h"
 
 
 duDebugDraw::~duDebugDraw()

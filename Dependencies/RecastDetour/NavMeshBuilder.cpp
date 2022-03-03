@@ -1,14 +1,13 @@
 #include "../Globals.h"
 #include "NavMeshBuilder.h"
 #include "../MO_Pathfinding.h"
-#include "RecastNavigation/InputGeom.h"
-#include "RecastNavigation/Detour/DetourNavMesh.h"
-#include "RecastNavigation/Detour/DetourNavMeshQuery.h"
-#include "RecastNavigation/Detour/DetourNavMeshBuilder.h"
-#include "RecastNavigation/DebugUtils/SampleInterfaces.h"
+#include "InputGeom.h"
+#include "Detour/DetourNavMesh.h"
+#include "Detour/DetourNavMeshQuery.h"
+#include "Detour/DetourNavMeshBuilder.h"
 
-#include "RecastNavigation/DebugUtils/DetourDebugDraw.h"
-#include "RecastNavigation/DebugUtils/RecastDebugDraw.h"
+#include "DebugUtils/DetourDebugDraw.h"
+#include "DebugUtils/RecastDebugDraw.h"
 
 #include "ImGui/imgui.h"
 

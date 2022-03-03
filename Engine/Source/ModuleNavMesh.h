@@ -1,8 +1,8 @@
 #pragma once
 #include "Module.h"
-#include "RecastDetour/Recast/Recast.h"
-#include "RecastDetour/Detour/DetourNavMesh.h"
-#include "RecastDetour/Detour/DetourNavMeshQuery.h"
+//#include "RecastDetour/Recast/Recast.h"
+//#include "RecastDetour/Detour/DetourNavMesh.h"
+//#include "RecastDetour/Detour/DetourNavMeshQuery.h"
 
 #include "MathGeoLib.h"
 #include <string>

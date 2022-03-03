@@ -18,9 +18,9 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "DebugDraw.h"
-#include "RecastDebugDraw.h"
-#include "Recast.h"
+#include "DebugUtils/DebugDraw.h"
+#include "DebugUtils/RecastDebugDraw.h"
+#include "Recast/Recast.h"
 
 void duDebugDrawTriMesh(duDebugDraw* dd, const float* verts, int /*nverts*/,
 						const int* tris, const float* normals, int ntris,

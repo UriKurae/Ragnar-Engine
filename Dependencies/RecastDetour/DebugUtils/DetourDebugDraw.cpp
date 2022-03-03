@@ -16,11 +16,11 @@
 // 3. This notice may not be removed or altered from any source distribution.
 //
 
-#include "DebugDraw.h"
-#include "DetourDebugDraw.h"
-#include "DetourNavMesh.h"
-#include "DetourCommon.h"
-#include "DetourNode.h"
+#include "DebugUtils/DebugDraw.h"
+#include "DebugUtils/DetourDebugDraw.h"
+#include "Detour/DetourNavMesh.h"
+#include "Detour/DetourCommon.h"
+#include "Detour/DetourNode.h"
 
 
 static float distancePtLine2d(const float* pt, const float* p, const float* q)

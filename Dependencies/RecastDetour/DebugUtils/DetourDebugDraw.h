@@ -19,10 +19,10 @@
 #ifndef DETOURDEBUGDRAW_H
 #define DETOURDEBUGDRAW_H
 
-#include "DetourNavMesh.h"
-#include "DetourNavMeshQuery.h"
+#include "Detour/DetourNavMesh.h"
+#include "Detour/DetourNavMeshQuery.h"
 //#include "DetourTileCacheBuilder.h"
-#include "DetourTileCacheBuilder.h"
+#include "DetourTileCache/DetourTileCacheBuilder.h"
 enum DrawNavMeshFlags
 {
 	DU_DRAWNAVMESH_OFFMESHCONS = 0x01,

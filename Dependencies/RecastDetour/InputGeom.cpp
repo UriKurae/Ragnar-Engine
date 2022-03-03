@@ -22,18 +22,18 @@
 #include <ctype.h>
 #include <string.h>
 #include <algorithm>
-#include "RecastNavigation/Recast/Recast.h"
+#include "Recast/Recast.h"
 #include "InputGeom.h"
 #include "ChunkyTriMesh.h"
-#include "RecastNavigation/DebugUtils/DebugDraw.h"
-#include "RecastNavigation/DebugUtils/RecastDebugDraw.h"
-#include "RecastNavigation/Detour/DetourNavMesh.h"
+#include "DebugUtils/DebugDraw.h"
+#include "DebugUtils/RecastDebugDraw.h"
+#include "Detour/DetourNavMesh.h"
+#include "Math/float4x4.h"
+
 #include "../RE_Mesh.h"
 #include "../Globals.h"
-#include "../MO_ResourceManager.h"
-#include "MathGeoLib/include/Math/float4x4.h"
-
-#include "../MO_Renderer3D.h"
+#include "../ModuleResourceManager.h"
+#include "../ModuleRenderer3D.h"
 
 #include "mmgr/mmgr.h"
 
