@@ -448,6 +448,9 @@
     <ClInclude Include="Dependencies\RecastDetour\NavMeshBuilder.h">
       <Filter>Sources\Libraries\RecastDetour</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleNavMesh.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -755,6 +758,9 @@
     </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\NavMeshBuilder.cpp">
       <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleNavMesh.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
