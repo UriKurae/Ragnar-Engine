@@ -4,7 +4,7 @@
 
 #include <string>
 #include <vector>
-
+#include <functional>
 
 class Texture;
 
@@ -20,6 +20,8 @@ public:
 
 	void DrawRecursive(std::vector<std::string>& dirs);
 
+
+	void DrawCreationPopup(const char* popName, const char* dotExtension, std::function<void(const char*)> f);
 	ImGuiTreeNodeFlags SetFlags(std::vector<std::string> node);
 
 	inline std::string& GetCurrentDir() { return currentDirectory; }

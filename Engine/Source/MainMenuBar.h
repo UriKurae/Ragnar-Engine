@@ -4,6 +4,7 @@
 #include <string>
 
 class ConsoleMenu;
+class TextEditorMenu;
 class Texture;
 
 enum class Menus
@@ -14,7 +15,8 @@ enum class Menus
 	INSPECTOR = 3,
 	HIERARCHY = 4,
 	CONTENT_BROWSER = 5,
-	FOGWAR = 6,
+	TEXT_EDITOR = 6,
+	FOGWAR = 7,
 };
 
 class MainMenuBar : public Menu

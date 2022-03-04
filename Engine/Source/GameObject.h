@@ -8,6 +8,8 @@
 
 typedef unsigned int uint;
 
+struct SerializedField;
+
 typedef json_array_t JSON_Array;
 class JsonParsing;
 class VertexBuffer;
@@ -25,7 +27,7 @@ public:
 	void DrawOutline();
 	void DrawEditor();
 
-	Component* CreateComponent(ComponentType type);
+	Component* CreateComponent(ComponentType type, const char* name = nullptr);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
 	void MoveComponent(Component* component, int position);
@@ -85,6 +87,7 @@ public:
 	std::string layer;
 	std::string prefabPath;
 
+	std::vector<SerializedField*> csReferences;
 private:
 	std::vector<Component*> components;
 

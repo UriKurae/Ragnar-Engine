@@ -9,7 +9,7 @@
 
 #define MAX_MOUSE_BUTTONS 5
 
-enum class KeyState
+enum KeyState
 {
 	KEY_IDLE = 0,
 	KEY_DOWN,

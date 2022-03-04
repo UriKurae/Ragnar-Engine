@@ -52,6 +52,9 @@
     <Filter Include="Sources\Libraries\WWise">
       <UniqueIdentifier>{bd1af3b5-ca65-4c5d-adab-cf27c3be5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\PugiXML">
+      <UniqueIdentifier>{e2e9269a-6c3b-4f29-b464-363e28b54c9a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Commands">
       <UniqueIdentifier>{6c54a952-fc50-4805-b3b5-7fb3fd1c7100}</UniqueIdentifier>
     </Filter>
@@ -322,6 +325,27 @@
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\MonoManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\PugiXML\pugiconfig.hpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\PugiXML\pugixml.hpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptBindings.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditor.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
     <ClInclude Include="Dependencies\Extras\IconsFontAwesome5.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
@@ -360,9 +384,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\FogWarMenu.h">
       <Filter>Sources\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\TextEditor.h">
-      <Filter>Sources\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\ShaderImporter.h">
       <Filter>Sources\Resources\Importers</Filter>
@@ -816,6 +837,21 @@
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\MonoManager.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\PugiXML\pugixml.cpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ScriptComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditor.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp">
       <Filter>Sources\Commands</Filter>
     </ClCompile>
@@ -833,9 +869,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\FogWarMenu.cpp">
       <Filter>Sources\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\TextEditor.cpp">
-      <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\ShaderImporter.cpp">
       <Filter>Sources\Resources\Importers</Filter>

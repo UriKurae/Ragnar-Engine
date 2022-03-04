@@ -5,6 +5,9 @@
 #include "GameTimer.h"
 
 #include <vector>
+#include <map>
+
+struct SerializedField;
 
 enum class Object3D
 {
@@ -80,6 +83,8 @@ public:
 
 	CameraComponent* mainCamera;
 	GameObject* camera;
+
+	std::multimap<uint, SerializedField*> referenceMap;
 private:
 	GameObject* root;
 	Quadtree qTree;

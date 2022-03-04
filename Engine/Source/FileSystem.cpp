@@ -36,7 +36,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -316,13 +316,14 @@ void FileSystem::ImportFromOutside(std::string& source, std::string& destination
 	}
 }
 
-ResourceType FileSystem::CheckExtension(std::string& path)
+ResourceType FileSystem::CheckExtension(const std::string& path)
 {
 	std::string extension = path.substr(path.find_last_of(".", path.length()));
 	std::list<std::string>::iterator s;
 	std::list<std::string>::iterator end = modelExtension.end();
 
 	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
+	if (extension.data() == std::string(".cs")) return ResourceType::SCRIPT;
 	if (extension.data() == std::string(".shader")) return ResourceType::SHADER;
 
 	for (s = modelExtension.begin(); s != end; ++s)
@@ -398,6 +399,42 @@ void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& d
 	PHYSFS_freeList(rc);
 }
 
+
+void FileSystem::SplitFilePath(const char* full_path, std::string* path, std::string* file, std::string* extension)
+{
+	if (full_path != nullptr)
+	{
+		std::string full(full_path);
+		NormalizePath(full);
+		size_t pos_separator = full.find_last_of("\\/");
+		size_t pos_dot = full.find_last_of(".");
+
+		if (path != nullptr)
+		{
+			if (pos_separator < full.length())
+				*path = full.substr(0, pos_separator + 1);
+			else
+				path->clear();
+		}
+
+		if (file != nullptr)
+		{
+			if (pos_separator < full.length())
+				*file = full.substr(pos_separator + 1);
+			else
+				*file = full;
+		}
+
+		if (extension != nullptr)
+		{
+			if (pos_dot < full.length())
+				*extension = full.substr(pos_dot + 1);
+			else
+				extension->clear();
+		}
+	}
+}
+
 const bool FileSystem::IsDirectory(const char* file) const
 {
 	return PHYSFS_isDirectory(file) != 0;
@@ -407,6 +444,12 @@ void FileSystem::NormalizePath(std::string& path)
 {
 	for (int i = 0; i < path.length(); ++i)
 		if (path[i] == '\\') path[i] = '/';
+}
+
+void FileSystem::UnNormalizePath(std::string& path)
+{
+	for (int i = 0; i < path.length(); ++i)
+		if (path[i] == '/') path[i] = '\\';
 }
 
 void FileSystem::GetRelativeDirectory(std::string& path)
@@ -437,6 +480,24 @@ void FileSystem::GetFilenameWithoutExtension(std::string& path)
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 	}
 	path = path.substr(0, path.find_last_of("."));
+}
+
+std::string FileSystem::GetBaseFileNameWithExtension(const char* file_name)
+{
+	std::string name;
+	std::string hole_name(file_name);
+
+	std::string::const_reverse_iterator item = hole_name.crbegin();
+	for (; item != hole_name.crend(); ++item)
+	{
+		if (*item == '/') {
+			break;
+		}
+		else {
+			name = *item + name;
+		}
+	}
+	return name;
 }
 
 bool FileSystem::RemoveFile(const char* file)

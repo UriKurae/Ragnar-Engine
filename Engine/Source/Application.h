@@ -11,6 +11,7 @@ class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
 class FileSystem;
+class MonoManager;
 class Physics3D;
 
 #define CONFIG_FILENAME	"config.json"
@@ -26,6 +27,8 @@ public:
 	bool Init();
 	bool Update();
 	bool CleanUp();
+
+	bool StringCmp(const char* str1, const char* str2);
 
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
@@ -59,6 +62,7 @@ public:
 	ModuleEditor* editor = nullptr;
 	ModuleScene* scene = nullptr;
 	FileSystem* fs = nullptr;
+	MonoManager* moduleMono = nullptr;
 
 	JsonParsing jsonFile;
 

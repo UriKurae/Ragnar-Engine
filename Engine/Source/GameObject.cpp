@@ -4,6 +4,7 @@
 
 #include "ModuleScene.h"
 
+#include "MonoManager.h"
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -17,6 +18,7 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "ScriptComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
@@ -107,6 +109,21 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
+		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		{
+			if (ImGui::Selectable(mono_class_get_name(app->moduleMono->userScripts[i])))
+			{
+				const char* name = mono_class_get_name(app->moduleMono->userScripts[i]);
+				CreateComponent(ComponentType::SCRIPT, name);
+				newComponent = false;
+			}
+		}
+		/*if (ImGui::Selectable("Script Component"))
+		{
+			CreateComponent(ComponentType::SCRIPT, "Script");
+			newComponent = false;
+		}*/
+	
 		if (ImGui::Selectable("Audio Source Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_SOURCE);
@@ -150,6 +167,11 @@ void GameObject::DrawEditor()
 				CreateComponent(ComponentType::MATERIAL);
 				newComponent = false;
 			}
+			if (ImGui::Button("Script Component"))
+			{
+				CreateComponent(ComponentType::SCRIPT);
+				newComponent = false;
+			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
 				newComponent = false;
@@ -159,7 +181,8 @@ void GameObject::DrawEditor()
 	}
 }
 
-Component* GameObject::CreateComponent(ComponentType type)
+
+Component* GameObject::CreateComponent(ComponentType type, const char* name)
 {
 	Component* component = nullptr;
 
@@ -185,6 +208,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 				meshComp->SetMaterial(matComp);
 			}
 		}
+		break;
+	case ComponentType::SCRIPT:
+		component = new ScriptComponent(this, name);
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());

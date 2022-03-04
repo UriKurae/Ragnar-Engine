@@ -16,6 +16,7 @@
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "TextEditorMenu.h"
 #include "FogWarMenu.h"
 
 #include "TransformComponent.h"
@@ -46,6 +47,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new AboutMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
@@ -156,6 +158,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
+			ImGui::MenuItem(ICON_FA_CODE" Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
 
 			ImGui::EndMenu();
 		}

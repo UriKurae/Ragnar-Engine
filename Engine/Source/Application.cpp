@@ -8,6 +8,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "MonoManager.h"
 #include "Physics3D.h"
 
 #include "FileSystem.h"
@@ -25,6 +26,7 @@ Application::Application()
 	scene = new ModuleScene();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
+	moduleMono = new MonoManager(this);
 	editor = new ModuleEditor();
 
 	fs = new FileSystem(RESOURCES_FOLDER);
@@ -39,6 +41,7 @@ Application::Application()
 	AddModule(physics);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(moduleMono);
 	
 	// Scenes
 	AddModule(scene);
@@ -250,4 +253,17 @@ void Application::LoadConfig()
 	}
 
 	loadRequested = false;
+}
+
+bool Application::StringCmp(const char* str1, const char* str2)
+{
+	size_t size = strlen(str1);
+	if (size != strlen(str2))
+		return false;
+
+	for (uint i = 0; i < size; ++i) {
+		if (std::tolower(str1[i]) != std::tolower(str2[i]))
+			return false;
+	}
+	return true;
 }
