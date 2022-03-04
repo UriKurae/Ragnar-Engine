@@ -2,9 +2,7 @@
 #include "Application.h"
 
 #include "ModuleScene.h"
-
 #include "GL/glew.h"
-#include "Geometry/Frustum.h"
 
 FogWarMenu::FogWarMenu() : Menu(true)
 {

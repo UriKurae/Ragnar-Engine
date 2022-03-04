@@ -1,9 +1,9 @@
 #pragma once
-
-#include "Framebuffer.h"
-#include "MathGeoLib/include/Math/float2.h"
-#include "MathGeoLib/include/Math/float4.h"
+#include "Math/float2.h"
+#include "Math/float4.h"
 #include "Imgui/ImGuizmo.h"
+
+class Framebuffer;
 
 class Viewport
 {

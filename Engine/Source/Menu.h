@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Imgui/imgui.h"
+#include "IconsFontAwesome5.h"
 
 class Menu
 {

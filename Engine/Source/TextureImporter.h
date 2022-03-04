@@ -1,11 +1,10 @@
 #pragma once
-
-#include <string>
-#include <assimp/material.h>
 #include "JsonParsing.h"
 
 typedef unsigned char GLubyte;
 typedef unsigned int uint;
+class aiMaterial;
+enum aiTextureType;
 
 struct TextureParameters;
 

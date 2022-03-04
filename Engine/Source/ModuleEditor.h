@@ -1,15 +1,15 @@
 #pragma once
-
 #include "Module.h"
 #include "MainMenuBar.h"
-#include "Viewport.h"
-#include "GameView.h"
 
 #include <vector>
 #include <string>
 
 class GameObject;
 class Resource;
+class Viewport;
+class GameView;
+class Framebuffer;
 
 class ModuleEditor : public Module
 {

@@ -6,8 +6,6 @@
 
 #include "ModuleScene.h"
 
-#include "GameObject.h"
-
 #include <queue>
 
 PrefabManager* PrefabManager::instance = nullptr;

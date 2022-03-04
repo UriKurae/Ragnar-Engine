@@ -1,17 +1,11 @@
 #include "HierarchyMenu.h"
-
 #include "Application.h"
-#include "ModuleRenderer3D.h"
 #include "Globals.h"
+
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
-#include "GameObject.h"
-#include "LightComponent.h"
-
-#include "IconsFontAwesome5.h"
 #include "FileSystem.h"
 
-#include "ModuleInput.h"
 #include "PrefabManager.h"
 
 #include "Profiling.h"

@@ -4,9 +4,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleScene.h"
 
-#include "Imgui/imgui.h"
-#include "IconsFontAwesome5.h"
-
+#include "Framebuffer.h"
 #include "Profiling.h"
 
 GameView::GameView()

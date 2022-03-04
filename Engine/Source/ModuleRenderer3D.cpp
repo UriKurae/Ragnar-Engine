@@ -7,18 +7,14 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 
-#include "Framebuffer.h"
-#include "ResourceManager.h"
-
-#include "GameObject.h"
 #include "LightComponent.h"
 #include "TransformComponent.h"
 
+#include "ResourceManager.h"
 #include "Shader.h"
-#include "Resource.h"
+#include "Lights.h"
+#include "Framebuffer.h"
 
-#include "glew/include/GL/glew.h"
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/ImguiStyle.h"

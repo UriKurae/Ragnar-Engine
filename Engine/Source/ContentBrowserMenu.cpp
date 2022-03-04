@@ -1,19 +1,13 @@
 #include "ContentBrowserMenu.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "ModuleInput.h"
-#include "FileSystem.h"
-#include "ResourceManager.h"
 #include "ModuleEditor.h"
 
+#include "FileSystem.h"
+#include "ResourceManager.h"
 #include "Texture.h"
-#include "TextureImporter.h"
-
-#include "Imgui/imgui.h"
-#include <iostream>
-#include <thread>
-
-#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 

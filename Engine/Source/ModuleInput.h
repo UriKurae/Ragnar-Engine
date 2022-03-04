@@ -1,6 +1,8 @@
 #pragma once
 #include "Module.h"
-#include "SDL.h"
+
+#include "SDL_scancode.h"
+#include "SDL_mouse.h"
 
 #include <vector>
 #include <string>

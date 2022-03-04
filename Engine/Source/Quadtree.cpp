@@ -1,14 +1,11 @@
 #include "Quadtree.h"
-
 #include "Globals.h"
+
 #include "GameObject.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "glew/include/GL/glew.h"
-
 #include <stack>
-
 #include "Profiling.h"
 
 Quadtree::Quadtree() : root(nullptr)

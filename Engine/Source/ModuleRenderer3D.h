@@ -1,22 +1,20 @@
 #pragma once
 #include "Module.h"
 
-#include "Lights.h"
-
-#include <vector>
 #include "Shapes.h"
-#include "glmath.h"
-
-#include "SDL.h"
+#include "SDL_video.h"
+#include <vector>
 
 #define MAX_LIGHTS 8
-
-typedef unsigned int GLuint;
 
 class Framebuffer;
 class Material;
 class Shader;
 class GameObject;
+
+class PointLight;
+class SpotLight;
+class DirectionalLight;
 
 class ModuleRenderer3D : public Module
 {

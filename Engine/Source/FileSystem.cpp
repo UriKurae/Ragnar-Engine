@@ -1,20 +1,17 @@
 #include "FileSystem.h"
 #include "Application.h"
 #include "Globals.h"
+
 #include "ModelImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
-#include "GameObject.h"
+#include "Resource.h"
 
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
 #include "IL/il.h"
-#include "Resource.h"
+#include "PhysFS/include/physfs.h"
+#include "SDL_filesystem.h"
 
-#include <vector>
 #include <stack>
-
-#include "SDL/include/SDL_filesystem.h"
 #include "Profiling.h"
 
 FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
@@ -166,6 +163,16 @@ uint FileSystem::Save(const char* file, const void* buffer, unsigned int size, b
 		DEBUG_LOG("File System error while opening file %s: %s", file, PHYSFS_getLastError());
 
 	return ret;
+}
+
+const char* FileSystem::GetBasePath() const
+{
+	return PHYSFS_getBaseDir();
+}
+
+const char* FileSystem::GetWritePath() const
+{
+	return PHYSFS_getWriteDir();
 }
 
 const char* FileSystem::GetReadPaths() const
@@ -389,6 +396,11 @@ void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& d
 	}
 
 	PHYSFS_freeList(rc);
+}
+
+const bool FileSystem::IsDirectory(const char* file) const
+{
+	return PHYSFS_isDirectory(file) != 0;
 }
 
 void FileSystem::NormalizePath(std::string& path)

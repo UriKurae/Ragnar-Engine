@@ -1,15 +1,10 @@
 #pragma once
-
 #include "JsonParsing.h"
-
-#include "PhysFS/include/physfs.h"
-#include "assimp/cfileio.h"
-
 #include <list>
-#include <string>
 
 typedef unsigned int uint;
 enum class ResourceType;
+struct aiFileIO;
 
 class FileSystem
 {
@@ -31,8 +26,8 @@ public:
 
 	inline aiFileIO* GetAssimpIO() const { return assimpIO; }
 
-	inline const char* GetBasePath() const { return PHYSFS_getBaseDir(); }
-	inline const char* GetWritePath() const { return PHYSFS_getWriteDir(); }
+	const char* GetBasePath() const;
+	const char* GetWritePath() const;
 	const char* GetReadPaths() const;
 
 	void LoadFile(std::string& path);
@@ -44,7 +39,7 @@ public:
 	void DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
 	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList);
 	void DiscoverDirs(const char* directory, std::vector<std::string>& dirList);
-	inline const bool IsDirectory(const char* file) const { return PHYSFS_isDirectory(file) != 0; }
+	const bool IsDirectory(const char* file) const;
 
 	void NormalizePath(std::string& path);
 	void GetRelativeDirectory(std::string& path);

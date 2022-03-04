@@ -1,26 +1,20 @@
+#include "ModuleEditor.h" // For some reason the ModuleEditor must be upon of the Viewport.h 
+#include "Viewport.h"
 #include "Application.h"
+
 #include "ModuleInput.h"
 #include "ModuleCamera3D.h"
-#include "ModuleEditor.h"
 #include "ModuleScene.h"
-#include "Viewport.h"
 #include "ModuleRenderer3D.h"
-#include "GameObject.h"
-#include "TransformComponent.h"
 
+#include "TransformComponent.h"
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
-#include "FileSystem.h"
 #include "ResourceManager.h"
 #include "PrefabManager.h"
 
-#include "Imgui/imgui.h"
-#include "Imgui/ImGuizmo.h"
-#include "Globals.h"
-
-#include "IconsFontAwesome5.h"
-
+#include "Framebuffer.h"
 #include "Profiling.h"
 
 Viewport::Viewport()

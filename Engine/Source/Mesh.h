@@ -1,18 +1,13 @@
 #pragma once
-
 #include "Resource.h"
 
 #include <vector>
-#include "Math/float3.h"
-#include "Math/float2.h"
-
-#include "VertexArray.h"
 #include "Shader.h"
-
 #include "Vertex.h"
 
 class IndexBuffer;
 class VertexBuffer;
+class VertexArray;
 
 struct ModelParameters;
 

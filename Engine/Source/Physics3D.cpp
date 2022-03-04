@@ -7,7 +7,6 @@
 
 #include "btBulletDynamicsCommon.h"
 
-
 Physics3D::Physics3D(bool start_enabled) : Module(start_enabled)
 {
 	// Collision configuration contains default setup for memory, collision setup. Advanced

@@ -11,8 +11,9 @@
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "Texture.h"
-#include <fstream>
+#include "Lights.h"
 
+#include <fstream>
 #include "Profiling.h"
 
 #define MAX_TIME_TO_REFRESH_SHADER 10

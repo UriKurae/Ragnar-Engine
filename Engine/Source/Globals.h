@@ -1,6 +1,5 @@
 #pragma once
 #include <windows.h>
-#include <stdio.h>
 
 #define DEBUG_LOG(format, ...) Log(__FILE__, __LINE__, format, __VA_ARGS__)
 

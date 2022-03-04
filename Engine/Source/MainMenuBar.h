@@ -1,11 +1,11 @@
 #pragma once
-
 #include "Menu.h"
 #include <vector>
 #include <string>
 
 class ConsoleMenu;
 class Texture;
+
 enum class Menus
 {
 	CONSOLE = 0,

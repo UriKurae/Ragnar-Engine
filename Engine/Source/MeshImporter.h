@@ -1,15 +1,8 @@
 #pragma once
-
-#include <string>
-
-#include "MathGeoLib/include/Math/float2.h"
-#include "MathGeoLib/include/Math/float3.h"
-
-#include "assimp/mesh.h"
+#include <vector>
 #include "assimp/scene.h"
 
 class JsonParsing;
-class Mesh;
 struct Vertex;
 struct ModelParameters;
 

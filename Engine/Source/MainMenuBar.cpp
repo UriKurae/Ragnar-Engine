@@ -1,43 +1,40 @@
+#include "MainMenuBar.h"
 #include "Application.h"
 #include "Globals.h"
-#include "AudioManager.h"
+
 #include "ModuleRenderer3D.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
+#include "ModuleEditor.h"
+#include "ModuleCamera3D.h"
+#include "Physics3D.h"
 
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
-#include "MainMenuBar.h"
 #include "AboutMenu.h"
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
 #include "FogWarMenu.h"
-#include "Texture.h"
-#include "TextureImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
+
 #include "TransformComponent.h"
-
-#include "FileSystem.h"
-
 #include "LightComponent.h"
 
-#include "ModuleCamera3D.h"
-#include "Physics3D.h"
+#include "ResourceManager.h"
+#include "AudioManager.h"
 
-
+#include "Lights.h"
+#include "Texture.h"
 #include "Dialogs.h"
-#include "IconsFontAwesome5.h"
+#include "Viewport.h"
 #include "Style.h"
 
+#include "Math/float3x3.h"
 #include "imgui/imgui_stdlib.h"
 
 #include <fstream>
-
 #include "Profiling.h"
-
-#include "Math/float3x3.h"
 
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {

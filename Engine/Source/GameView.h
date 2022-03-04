@@ -1,8 +1,8 @@
 #pragma once
+#include "Math/float2.h"
+#include "Math/float4.h"
 
-#include "Framebuffer.h"
-#include "MathGeoLib/include/Math/float2.h"
-#include "MathGeoLib/include/Math/float4.h"
+class Framebuffer;
 
 class GameView
 {

@@ -1,18 +1,17 @@
 #include "TextureImporter.h"
-
 #include "Application.h"
-#include "FileSystem.h"
 #include "Globals.h"
-#include "ResourceManager.h"
+
+#include "FileSystem.h"
 #include "Component.h"
 #include "Texture.h"
 
-#include "IL/il.h"
 #include "IL/ilu.h"
 #include "ResourceManager.h"
-#include "glew/include/GL/glew.h"
-#include "MathGeoLib/include/Algorithm/Random/LCG.h"
+#include "GL/glew.h"
 
+#include <assimp/material.h>
+#include <string>
 #include "Profiling.h"
 
 void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json, std::string& path)

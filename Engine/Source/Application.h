@@ -1,13 +1,9 @@
 #pragma once
-
 #include "EngineTimer.h"
-#include "Module.h"
-
 #include <list>
-#include <string>
-
 #include "JsonParsing.h"
 
+class Module;
 class ModuleWindow;
 class ModuleInput;
 class ModuleScene;
@@ -55,14 +51,14 @@ private:
 	void LoadConfig();
 
 public:
-	ModuleWindow* window;
-	Physics3D* physics;
-	ModuleInput* input;
-	ModuleRenderer3D* renderer3D;
-	ModuleCamera3D* camera;
-	ModuleEditor* editor;
-	ModuleScene* scene;
-	FileSystem* fs;
+	ModuleWindow* window = nullptr;
+	Physics3D* physics = nullptr;
+	ModuleInput* input = nullptr;
+	ModuleRenderer3D* renderer3D = nullptr;
+	ModuleCamera3D* camera = nullptr;
+	ModuleEditor* editor = nullptr;
+	ModuleScene* scene = nullptr;
+	FileSystem* fs = nullptr;
 
 	JsonParsing jsonFile;
 

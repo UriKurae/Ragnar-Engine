@@ -1,15 +1,12 @@
 #include "InspectorMenu.h"
 #include "Application.h"
+
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 
-#include "GameObject.h"
 #include "Resource.h"
 
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
-#include "IconsFontAwesome5.h"
-
 #include "Profiling.h"
 
 InspectorMenu::InspectorMenu() : Menu(true)

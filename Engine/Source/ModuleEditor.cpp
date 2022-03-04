@@ -1,19 +1,19 @@
 ﻿#include "ModuleEditor.h"
-
 #include "Application.h"
 #include "Globals.h"
+
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
-#include "GameObject.h"
 
 #include "ConsoleMenu.h"
 #include "InspectorMenu.h"
 
-#include "Imgui/imgui.h"
+#include "Viewport.h"
+#include "GameView.h"
+
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/imgui_impl_sdl.h"
-#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
