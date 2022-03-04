@@ -28,6 +28,7 @@ void Animation::Load()
 {
 	if (id == 0)
 	{
+		bones.clear();
 		AnimationImporter::LoadAnimation2(libraryPath.c_str(), ticks, ticksPerSecond, bones, hierarchy);
 	}
 }
