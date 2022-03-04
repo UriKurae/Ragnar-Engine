@@ -4,6 +4,8 @@
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texCoords;
+layout(location = 3) in vec4 boneIds;
+layout(location = 4) in vec4 weights;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -19,6 +21,7 @@ out vec2 vTexCoords;
 out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
+out vec4 vb;
 
 void main()
 {
@@ -32,6 +35,7 @@ void main()
 	vTextureAlpha = 1.0f;
 
 	vCamPos = camPos;
+	vb = boneIds;
 }
 
 

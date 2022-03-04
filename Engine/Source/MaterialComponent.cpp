@@ -384,6 +384,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (diff)
 		diff->Bind();
 
+
 	shader->Bind();
 
 	// Could not do view and proj each frame.
@@ -414,7 +415,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	{
 		auto transforms = anim->GetFinalBoneMatrices();
 		for (int i = 0; i < transforms.size(); ++i)
-			shader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+			shader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
 	}
 
 	shader->SetUniformVec3f("material.ambient", ambientColor);
