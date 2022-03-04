@@ -109,20 +109,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
-		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		if (ImGui::Selectable("Script Component"))
 		{
-			if (ImGui::Selectable(mono_class_get_name(app->moduleMono->userScripts[i])))
-			{
-				const char* name = mono_class_get_name(app->moduleMono->userScripts[i]);
-				CreateComponent(ComponentType::SCRIPT, name);
-				newComponent = false;
-			}
-		}
-		/*if (ImGui::Selectable("Script Component"))
-		{
-			CreateComponent(ComponentType::SCRIPT, "Script");
+			CreateComponent(ComponentType::SCRIPT);
 			newComponent = false;
-		}*/
+		}
 	
 		if (ImGui::Selectable("Audio Source Component"))
 		{

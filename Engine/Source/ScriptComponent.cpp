@@ -12,9 +12,12 @@ ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
 {
 	type = ComponentType::SCRIPT;
 	owner = own;
-	name = scriptName;
 
-	LoadScriptData(scriptName);
+	if (scriptName != nullptr && scriptName != "")
+	{
+		name = scriptName;
+		LoadScriptData(scriptName);
+	}
 }
 
 ScriptComponent::~ScriptComponent()
@@ -67,25 +70,44 @@ bool ScriptComponent::Update(float dt)
 //#ifndef STANDALONE
 void ScriptComponent::OnEditor()
 {
-	//if (Component::OnEditor() == true)
-	//{
-		//ImGui::Separator();
 	ImGui::PushID(this);
 	if (ImGui::CollapsingHeader(ICON_FA_CODE" Script"))
 	{
-		for (int i = 0; i < fields.size(); i++)
+		if(name == "") SelectScript();
+		else
 		{
-			DropField(fields[i], "_GAMEOBJECT");
+			for (int i = 0; i < fields.size(); i++)
+			{
+				DropField(fields[i], "_GAMEOBJECT");
+			}
+			ImGui::Separator();
+			for (int i = 0; i < methods.size(); i++)
+			{
+				ImGui::Text(methods[i].c_str());
+			}
 		}
-		ImGui::Separator();
-		for (int i = 0; i < methods.size(); i++)
-		{
-			ImGui::Text(methods[i].c_str());
-		}
+		
 		ImGui::Separator();
 	}
 	ImGui::PopID();
-	//}
+}
+
+void ScriptComponent::SelectScript()
+{
+	if (ImGui::BeginCombo("Select Script", "New Script"))
+	{
+		const char* scriptName;
+		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		{
+			scriptName = mono_class_get_name(app->moduleMono->userScripts[i]);
+			if (ImGui::Selectable(scriptName))
+			{
+				name = scriptName;
+				LoadScriptData(scriptName);
+			}
+		}
+		ImGui::EndCombo();
+	}
 }
 
 void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)

@@ -29,6 +29,7 @@ public:
 private:
 //#ifndef STANDALONE
 	void OnEditor() override;
+	void SelectScript();
 	void DisplayField(SerializedField& field, const char* dropType);
 //#endif // !STANDALONE
 
@@ -38,7 +39,7 @@ public:
 
 	MonoMethod* updateMethod;
 	uint32_t noGCobject;
-	std::string name;
+	std::string name = "";
 
 	static ScriptComponent* runningScript;
 };
