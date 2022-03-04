@@ -37,4 +37,5 @@ private:
 	Texture* modelIcon;
 	Texture* sceneIcon;
 	Texture* prefabIcon;
+	Texture* scriptIcon;
 };

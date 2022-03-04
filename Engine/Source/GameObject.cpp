@@ -420,7 +420,7 @@ void GameObject::OnLoad(JsonParsing& node)
 	for (int i = 0; i < size; ++i)
 	{
 		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
-		Component* component = CreateComponent((ComponentType)(int)c.GetJsonNumber("Type"));
+		Component* component = CreateComponent((ComponentType)(int)c.GetJsonNumber("Type"), c.GetJsonString("ScriptName"));
 		component->OnLoad(c);
 	}
 }
@@ -565,6 +565,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<RigidBodyComponent>()->OnLoad(c);
 			break;
+		case ComponentType::SCRIPT:
+			if (GetComponent<ScriptComponent>() == nullptr)
+				CreateComponent(ComponentType::SCRIPT, c.GetJsonString("ScriptName"));
+
+			GetComponent<ScriptComponent>()->OnLoad(c);
+			break;
 		}
 	}
 
@@ -618,6 +624,9 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::RIGID_BODY:
 			RemoveComponent(GetComponent<RigidBodyComponent>());
+			break;
+		case ComponentType::SCRIPT:
+			RemoveComponent(GetComponent<ScriptComponent>());
 			break;
 		}
 	}

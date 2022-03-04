@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "TextureImporter.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "MonoManager.h"
@@ -25,6 +26,7 @@ ContentBrowserMenu::~ContentBrowserMenu()
 	RELEASE(modelIcon);
 	RELEASE(sceneIcon);
 	RELEASE(prefabIcon);
+	RELEASE(scriptIcon);
 }
 
 bool ContentBrowserMenu::Start()
@@ -43,6 +45,9 @@ bool ContentBrowserMenu::Start()
 
 	prefabIcon = new Texture(-5, std::string("Settings/EngineResources/prefab.rgtexture"));
 	prefabIcon->Load();
+
+	scriptIcon = new Texture(-6, std::string("Settings/EngineResources/script.rgtexture"));
+	scriptIcon->Load();
 
 	return true;
 }
@@ -163,6 +168,9 @@ bool ContentBrowserMenu::Update(float dt)
 			break;
 		case ResourceType::SCENE:
 			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, height });
+			break;
+		case ResourceType::SCRIPT:
+			ImGui::ImageButton(scriptIcon ? (ImTextureID)scriptIcon->GetId() : "", { cell, height });
 			break;
 		default:
 			if ((*it).find(".rgprefab") != std::string::npos)
