@@ -43,7 +43,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
 {
-	RELEASE(mainCameraFbo);
 }
 
 // Called before render is available
@@ -172,18 +171,15 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		glEnable(GL_STENCIL_TEST);*/
 		
 	}
-
 	//// Projection matrix for
 	int w = *app->window->GetWindowWidth();
 	int h = *app->window->GetWindowHeight();
 	OnResize(w, h);
-
 	
 	fbo = new Framebuffer(w, h, 1);
 	fbo->Unbind();
 	mainCameraFbo = new Framebuffer(w, h, 0);
-	mainCameraFbo->Unbind();
-	
+	mainCameraFbo->Unbind();	
 
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
@@ -333,6 +329,13 @@ bool ModuleRenderer3D::CleanUp()
 		pl = nullptr;
 	}
 	pointLights.clear();
+
+	for (auto& pl : spotLights)
+	{
+		delete pl;
+		pl = nullptr;
+	}
+	spotLights.clear();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
