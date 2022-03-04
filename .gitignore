@@ -54,6 +54,12 @@
 !Dependencies/mono/libx86/mono-2.0-boehm.lib
 !Dependencies/mono/libx86/mono-2.0-sgen.lib
 !Dependencies/mono/libx86/MonoPosixHelperm.lib
+!Dependencies/Bullet/libx86/BulletCollision.lib
+!Dependencies/Bullet/libx86/BulletCollision_debug.lib
+!Dependencies/Bullet/libx86/BulletDynamics.lib
+!Dependencies/Bullet/libx86/BulletDynamics_debug.lib
+!Dependencies/Bullet/libx86/LinearMath.lib
+!Dependencies/Bullet/libx86/LinearMath_debug.lib
 
 
 # Executables
@@ -89,6 +95,7 @@ Thumbs.db
 *.tlog
 .vs
 
+[Ll]ibrary/
 [Bb]uild
 [Bb]in
 [Dd]ebug/

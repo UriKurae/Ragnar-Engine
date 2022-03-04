@@ -1,6 +1,8 @@
 #pragma once
 #include "Module.h"
-#include "SDL.h"
+
+#include "SDL_scancode.h"
+#include "SDL_mouse.h"
 
 #include <vector>
 #include <string>
@@ -27,7 +29,7 @@ public:
 	bool CleanUp();
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	inline KeyState GetKey(int id) const
 	{

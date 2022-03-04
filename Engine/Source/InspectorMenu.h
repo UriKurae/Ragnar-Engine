@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Menu.h"
 #include <string>
 #include <vector>
@@ -16,10 +15,15 @@ class InspectorMenu : public Menu
 {
 public:
 	InspectorMenu();
-
 	~InspectorMenu();
 
 	bool Update(float dt);
+
+	std::vector<std::string> GetTags() { return tags; };
+	std::vector<std::string> GetLayers() { return layers; };
+
+	void SetTags(std::vector<std::string> tag) { tags = tag; };
+	void SetLayers(std::vector<std::string> lay) { layers = lay; };
 
 private:
 	void DrawDefaultInspector(GameObject* obj);
@@ -29,7 +33,7 @@ private:
 	std::string DrawList(const char* label, std::vector<std::string>* list, std::string& item);
 	void AddItem(const char* label);
 
-	void DrawListTagLayer(const char* label, std::vector<std::string> list);
+	void DrawListTagLayer(const char* label, std::vector<std::string>& list);
 	void AddTag(std::string newTag);
 	void AddLayer(std::string newLayer);
 

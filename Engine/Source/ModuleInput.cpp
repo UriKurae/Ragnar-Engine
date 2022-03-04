@@ -1,11 +1,12 @@
+#include "ModuleInput.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleInput.h"
+
 #include "FileSystem.h"
 #include "ModuleEditor.h"
 
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
+#include "SDL.h"
 
 #include "Profiling.h"
 
@@ -192,7 +193,7 @@ bool ModuleInput::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleInput::SaveConfig(JsonParsing& node) const
+bool ModuleInput::SaveConfig(JsonParsing& node)
 {
 	return true;
 }

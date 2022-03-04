@@ -1,12 +1,7 @@
 #pragma once
-
 #include "Module.h"
-
-#include "MathGeoLib/src/Geometry/Frustum.h"
-#include "MathGeoLib/src/Geometry/Line.h"
-
-class VertexBuffer;
-class IndexBuffer;
+#include "Geometry/Frustum.h"
+#include "Geometry/Line.h"
 
 class ModuleCamera3D : public Module
 {
@@ -16,6 +11,7 @@ public:
 
 	bool Start();
 	bool Update(float dt) override;
+	void Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos);
 	bool CleanUp();
 
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
@@ -24,7 +20,7 @@ public:
 	void SetPlanes();
 
 	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
+	bool SaveConfig(JsonParsing& node) override;
 
 	void LookAt(float3& target);
 	int ContainsAaBox(const AABB& boundingBox);

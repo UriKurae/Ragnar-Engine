@@ -1,15 +1,11 @@
 #include "Quadtree.h"
-
 #include "Globals.h"
+
 #include "GameObject.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "glew/include/GL/glew.h"
-#include "CameraComponent.h"
-
 #include <stack>
-
 #include "Profiling.h"
 
 Quadtree::Quadtree() : root(nullptr)
@@ -110,7 +106,9 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 			QuadtreeNode* node = nodes.top();
 			nodes.pop();
 
-			int intersect = frustum->ContainsAaBox(node->GetBox());
+			int intersect = 0;
+			if (node)
+				intersect = frustum->ContainsAaBox(node->GetBox());
 			if (intersect == 1 || intersect == 2)
 			{
 				for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
@@ -286,7 +284,7 @@ void QuadtreeNode::DebugDraw()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	ebo->Bind();
 
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 
 	vbo->Unbind();
 	ebo->Unbind();

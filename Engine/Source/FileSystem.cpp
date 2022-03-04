@@ -1,20 +1,17 @@
 #include "FileSystem.h"
 #include "Application.h"
 #include "Globals.h"
+
 #include "ModelImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
-#include "GameObject.h"
+#include "Resource.h"
 
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
 #include "IL/il.h"
-#include "Resource.h"
+#include "PhysFS/include/physfs.h"
+#include "SDL_filesystem.h"
 
-#include <vector>
 #include <stack>
-
-#include "SDL/include/SDL_filesystem.h"
 #include "Profiling.h"
 
 FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
@@ -39,7 +36,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SCRIPTS_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -97,6 +94,12 @@ bool FileSystem::AddPath(const char* path)
 		ret = true;
 
 	return ret;
+}
+
+// Check if a file exists
+bool FileSystem::Exists(const char* file) const
+{
+	return PHYSFS_exists(file) != 0;
 }
 
 uint FileSystem::Load(const char* file, char** buffer)
@@ -160,6 +163,16 @@ uint FileSystem::Save(const char* file, const void* buffer, unsigned int size, b
 		DEBUG_LOG("File System error while opening file %s: %s", file, PHYSFS_getLastError());
 
 	return ret;
+}
+
+const char* FileSystem::GetBasePath() const
+{
+	return PHYSFS_getBaseDir();
+}
+
+const char* FileSystem::GetWritePath() const
+{
+	return PHYSFS_getWriteDir();
 }
 
 const char* FileSystem::GetReadPaths() const
@@ -310,10 +323,8 @@ ResourceType FileSystem::CheckExtension(const std::string& path)
 	std::list<std::string>::iterator end = modelExtension.end();
 
 	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
-	
 	if (extension.data() == std::string(".cs")) return ResourceType::SCRIPT;
-
-
+	if (extension.data() == std::string(".shader")) return ResourceType::SHADER;
 
 	for (s = modelExtension.begin(); s != end; ++s)
 	{
@@ -388,6 +399,7 @@ void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& d
 	PHYSFS_freeList(rc);
 }
 
+
 void FileSystem::SplitFilePath(const char* full_path, std::string* path, std::string* file, std::string* extension)
 {
 	if (full_path != nullptr)
@@ -421,6 +433,11 @@ void FileSystem::SplitFilePath(const char* full_path, std::string* path, std::st
 				extension->clear();
 		}
 	}
+}
+
+const bool FileSystem::IsDirectory(const char* file) const
+{
+	return PHYSFS_isDirectory(file) != 0;
 }
 
 void FileSystem::NormalizePath(std::string& path)

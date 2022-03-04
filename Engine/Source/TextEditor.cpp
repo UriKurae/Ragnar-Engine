@@ -1,13 +1,9 @@
-#include <algorithm>
 #include <chrono>
-#include <string>
-#include <regex>
-#include <cmath>
+#include <unordered_map>
 
 #include "TextEditor.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "Imgui/imgui.h" // for imGui::GetCurrentWindow()
 
 // TODO
 // - multiline comments vs single-line: latter is blocking start of a ML

@@ -1,13 +1,9 @@
 #pragma once
-
 #include "EngineTimer.h"
-#include "Module.h"
-
 #include <list>
-#include <string>
-
 #include "JsonParsing.h"
 
+class Module;
 class ModuleWindow;
 class ModuleInput;
 class ModuleScene;
@@ -16,6 +12,7 @@ class ModuleCamera3D;
 class ModuleEditor;
 class FileSystem;
 class MonoManager;
+class Physics3D;
 
 #define CONFIG_FILENAME	"config.json"
 #define APPLICATION_NAME "Ragnar Engine"
@@ -57,14 +54,15 @@ private:
 	void LoadConfig();
 
 public:
-	ModuleWindow* window;
-	ModuleInput* input;
-	ModuleRenderer3D* renderer3D;
-	ModuleCamera3D* camera;
-	ModuleEditor* editor;
-	ModuleScene* scene;
-	FileSystem* fs;
-	MonoManager* moduleMono;
+	ModuleWindow* window = nullptr;
+	Physics3D* physics = nullptr;
+	ModuleInput* input = nullptr;
+	ModuleRenderer3D* renderer3D = nullptr;
+	ModuleCamera3D* camera = nullptr;
+	ModuleEditor* editor = nullptr;
+	ModuleScene* scene = nullptr;
+	FileSystem* fs = nullptr;
+	MonoManager* moduleMono = nullptr;
 
 	JsonParsing jsonFile;
 

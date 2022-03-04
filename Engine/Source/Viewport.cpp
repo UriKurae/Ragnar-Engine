@@ -1,18 +1,20 @@
-#include "Application.h"
-#include "ModuleCamera3D.h"
-#include "ModuleEditor.h"
-#include "ModuleScene.h"
+#include "ModuleEditor.h" // For some reason the ModuleEditor must be upon of the Viewport.h 
 #include "Viewport.h"
+#include "Application.h"
+
+#include "ModuleInput.h"
+#include "ModuleCamera3D.h"
+#include "ModuleScene.h"
 #include "ModuleRenderer3D.h"
-#include "GameObject.h"
 
-#include "FileSystem.h"
+#include "TransformComponent.h"
+#include "CommandsDispatcher.h"
+#include "GameObjectCommands.h"
+
 #include "ResourceManager.h"
+#include "PrefabManager.h"
 
-#include "Imgui/imgui.h"
-#include "Imgui/ImGuizmo.h"
-#include "Globals.h"
-
+#include "Framebuffer.h"
 #include "Profiling.h"
 
 Viewport::Viewport()
@@ -23,16 +25,22 @@ Viewport::Viewport()
 
 Viewport::~Viewport()
 {
+	CommandDispatcher::Shutdown();
 }
 
-void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int currentOperation)
+void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
-	if (ImGui::Begin("Scene", &active, ImGuiWindowFlags_NoScrollbar))
+	if (ImGui::Begin(ICON_FA_EYE" Scene", &active, ImGuiWindowFlags_NoScrollbar))
 	{
-		app->camera->canBeUpdated = true;	
+		if (ImGui::IsItemActivated() || ImGui::IsItemActive())
+			isFocused = true;
+		else if (ImGui::IsItemDeactivated()|| !ImGui::IsItemActive())
+			isFocused = false;
+
+		app->camera->canBeUpdated = true;
 
 		ImVec2 size = ImGui::GetContentRegionAvail();
 
@@ -50,7 +58,8 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 
 		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
-		if (app->editor->GetGO())
+		GameObject* goSel = app->editor->GetGO();
+		if (goSel)
 		{
 			ImGuizmo::Enable(true);
 			ImGuizmo::SetGizmoSizeClipSpace(0.3f);
@@ -58,14 +67,34 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
+			math::float4x4 tr = goSel->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
 
-			math::float4x4 tr = app->editor->GetGO()->GetComponent<TransformComponent>()->GetLocalTransform().Transposed();
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
+			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr(), 0, (float*)snap);
+			static bool firstMove = false;
 			if (ImGuizmo::IsUsing())
 			{
-				app->editor->GetGO()->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				GameObject* go = goSel;
+				if (!firstMove)
+				{
+					firstMove = true;
+
+					CommandDispatcher::Execute(new MoveGameObjectCommand(go));
+				}
+				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 			}
+			else firstMove = false;
 		}
+
+		// TODO: Not the best place to call this
+		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
+		{
+			CommandDispatcher::Undo();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_Y) == KeyState::KEY_UP)
+		{
+			CommandDispatcher::Redo();
+		}
+
 
 		if (ImGui::BeginDragDropTarget())
 		{
@@ -78,6 +107,10 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 				{
 					app->scene->LoadScene(scene.c_str());
 				}
+				else if (scene.find(".rgprefab") != std::string::npos)
+				{
+					PrefabManager::GetInstance()->LoadPrefab(scene.c_str());
+				}
 				else
 				{
 					ResourceManager::GetInstance()->LoadResource(std::string(path));
@@ -86,8 +119,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGui::EndDragDropTarget();
 		}
 
-		GameObject* camera = app->editor->GetGO();
-		if (camera && camera->GetComponent<CameraComponent>())
+		if (goSel && goSel->GetComponent<CameraComponent>())
 		{
 			ImGui::SetNextWindowSize(ImVec2(210, 150));
 			ImGui::SetNextWindowPos(ImVec2((bounds.x + bounds.z) - 225, (bounds.y + bounds.w) - 150));
@@ -108,3 +140,44 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	ImGui::End();
 	style.WindowPadding = ImVec2(8.0f, 8.0f);
 }
+
+void Viewport::SetSnap(ImGuizmo::OPERATION operation)
+{
+	bool desactiveSnap = false;
+	switch (operation)
+	{
+	case ImGuizmo::OPERATION::TRANSLATE:
+		currentOperation = ImGuizmo::OPERATION::TRANSLATE;
+		if(translateSnap) snap[0] = snap[1] = snap[2] = allTsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	case ImGuizmo::OPERATION::ROTATE:
+		currentOperation = ImGuizmo::OPERATION::ROTATE;
+		if (rotateSnap) snap[0] = snap[1] = snap[2] = allRsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	case ImGuizmo::OPERATION::SCALE:
+		currentOperation = ImGuizmo::OPERATION::SCALE;
+		if (scaleSnap) snap[0] = snap[1] = snap[2] = allSsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	default:
+		break;
+	}
+}
+
+void Viewport::SnapOptions()
+{
+	ImGui::Checkbox("Snap Translate", &translateSnap);
+	ImGui::SliderFloat("##Translate", &allTsnap, 0.0f, 10.0f, "%.2f");
+
+	ImGui::Checkbox("Snap Rotation", &rotateSnap);
+	ImGui::SliderInt("##Rotation", &allRsnap, 0.0f, 90.0f);
+
+	ImGui::Checkbox("Snap Scale", &scaleSnap);
+	ImGui::SliderFloat("##Scale", &allSsnap, 0.0f, 5.0f, "%.2f");
+
+	SetSnap(currentOperation);
+}
+
+

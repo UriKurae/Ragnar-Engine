@@ -16,8 +16,8 @@ bool ConsoleMenu::Update(float dt)
 {
 	bool ret = false;
 
-	ImGui::Begin("Console", &active);
-	if (ImGui::Button("Clear console"))
+	ImGui::Begin(ICON_FA_WINDOW_MAXIMIZE" Console", &active);
+	if (ImGui::Button(ICON_FA_POO" Clear console"))
 	{
 		ClearConsole();
 	}

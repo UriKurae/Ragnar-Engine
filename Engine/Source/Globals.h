@@ -1,6 +1,5 @@
 #pragma once
 #include <windows.h>
-#include <stdio.h>
 
 #define DEBUG_LOG(format, ...) Log(__FILE__, __LINE__, format, __VA_ARGS__)
 
@@ -32,8 +31,10 @@ void Log(const char file[], int line, const char* format, ...);
 #define TEXTURES_FOLDER "Library/Textures/"
 #define MATERIALS_FOLDER "Library/Materials/"
 #define SCRIPTS_FOLDER "Library/ScriptsAssembly/"
-#define SCENES_FOLDER "Assets/Scenes/"
 #define SCRIPTS_ASSETS_FOLDER "Assets/Scripts/"
+#define SHADERS_FOLDER "Library/Shaders/"
+#define SCENES_FOLDER "Assets/Scenes/"
+#define PREFABS_FOLDER "Assets/Prefabs/"
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\

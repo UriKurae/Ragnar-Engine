@@ -1,10 +1,13 @@
+#include "ConfigurationMenu.h"
 #include "Application.h"
+
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleInput.h"
-#include "ConfigurationMenu.h"
 
+#include "SDL_cpuinfo.h"
+#include "SDL_version.h"
 #include <GL\glew.h>
 
 #include "Profiling.h"
@@ -62,13 +65,13 @@ bool ConfigurationMenu::Update(float dt)
 
 	ImGui::Begin("Configuration", &active);
 
-	if (ImGui::BeginMenu("Options"))
+	if (ImGui::BeginMenu(ICON_FA_WRENCH" Options"))
 	{
-		if (ImGui::MenuItem("Load"))
+		if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Load"))
 		{
 			app->LoadConfigRequest();
 		}
-		if (ImGui::MenuItem("Save"))
+		if (ImGui::MenuItem(ICON_FA_SAVE" Save"))
 		{
 			app->SaveConfigRequest();
 		}

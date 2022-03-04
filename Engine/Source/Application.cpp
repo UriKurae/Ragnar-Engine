@@ -1,5 +1,7 @@
 #include "Application.h"
 #include "Globals.h"
+#include "Module.h"
+
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
@@ -7,10 +9,12 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "MonoManager.h"
+#include "Physics3D.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "AudioManager.h"
+#include "PrefabManager.h"
 
 #include "Profiling.h"
 
@@ -18,6 +22,7 @@ Application::Application()
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
+	physics = new Physics3D();
 	scene = new ModuleScene();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
@@ -33,6 +38,7 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
+	AddModule(physics);
 	AddModule(camera);
 	AddModule(input);
 	AddModule(moduleMono);
@@ -43,7 +49,7 @@ Application::Application()
 
 	AddModule(renderer3D);
 
-	loadRequested = false;
+	loadRequested = true;
 	saveRequested = false;
 }
 
@@ -59,6 +65,7 @@ Application::~Application()
 	RELEASE(fs);
 	ResourceManager::ReleaseInstance();
 	AudioManager::Release();
+	PrefabManager::ReleaseInstance();
 
 	listModules.clear();
 }

@@ -1,9 +1,8 @@
 #pragma once
-
 #include "json/parson.h"
-#include "MathGeoLib/src/Math/float3.h"
-#include "MathGeoLib/src/Math/float4.h"
-#include "MathGeoLib/src/Math/Quat.h"
+#include "Math/float3.h"
+#include "Math/float4.h"
+#include "Math/Quat.h"
 
 class JsonParsing
 {

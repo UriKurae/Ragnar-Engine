@@ -1,11 +1,12 @@
+#include "CameraComponent.h"
 #include "Application.h"
 #include "Globals.h"
 
-#include "CameraComponent.h"
-#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
-#include "glew/include/GL/glew.h"
-
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
 #include "Profiling.h"
 
 CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(1.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
@@ -31,7 +32,7 @@ void CameraComponent::OnEditor()
 {
 	ImGui::PushID(this);
 
-	if (ImGui::CollapsingHeader("Camera"))
+	if (ImGui::CollapsingHeader(ICON_FA_CAMERA" Camera"))
 	{
 		ImGui::Text("Field of view");
 		ImGui::SameLine();
@@ -56,6 +57,9 @@ void CameraComponent::OnEditor()
 		ImGui::SameLine();
 		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
 		ImGui::PopID();
+
+		ComponentOptions(this);
+		ImGui::Separator();
 	}
 	ImGui::PopID();
 }
@@ -90,7 +94,7 @@ bool CameraComponent::Update(float dt)
 	return true;
 }
 
-void CameraComponent::Draw()
+void CameraComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
 
@@ -101,7 +105,7 @@ void CameraComponent::Draw()
 	ebo->Bind();
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 0.0f, 1.0f);
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	vbo->Unbind();

@@ -1,19 +1,22 @@
+#include "ModuleCamera3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleCamera3D.h"
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "GameObject.h"
 #include "ModuleScene.h"
+
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 #include "Mesh.h"
 
 #include <map>
-
+#include "Viewport.h"
+#include "Geometry/LineSegment.h"
+#include "Geometry/Triangle.h"
 #include "SDL.h"
-#include "Profiling.h"
-#include "GL/glew.h"
 
+#include "Profiling.h"
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
 {
@@ -100,7 +103,7 @@ bool ModuleCamera3D::LoadConfig(JsonParsing& node)
 	return true;
 }
 
-bool ModuleCamera3D::SaveConfig(JsonParsing& node) const
+bool ModuleCamera3D::SaveConfig(JsonParsing& node)
 {
 	//node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "PosX", cameraFrustum.Pos().x);
 	//node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "PosY", cameraFrustum.Pos().y);
@@ -125,7 +128,7 @@ bool ModuleCamera3D::Update(float dt)
 		float3 newPos = cameraFrustum.Pos();
 		float3 newFront = cameraFrustum.Front();
 		float3 newUp = cameraFrustum.Up();
-		float speed = 9.0f * dt;
+		float speed = 15.0f * dt;
 
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
 			speed *= 2;
@@ -155,7 +158,7 @@ bool ModuleCamera3D::Update(float dt)
 			if (dY != 0)
 			{
 				Quat rotateVertical;
-				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt);
+				rotateVertical = rotateVertical.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt * 2);
 				newFront = rotateVertical * newFront;
 				newUp = rotateVertical * newUp;
 				newFront.Normalize();
@@ -187,12 +190,12 @@ bool ModuleCamera3D::Update(float dt)
 				float3 distanceTarget = cameraFrustum.Pos() - targetPos;
 
 				Quat rotateOrbitY;
-				rotateOrbitY = rotateOrbitY.RotateY(-dX * dt);
+				rotateOrbitY = rotateOrbitY.RotateY(dX * dt);
 				rotateOrbitY.Normalize();
 				//distanceTarget = rotateOrbitY * distanceTarget;
 
 				Quat rotateOrbitX;
-				rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), -dY * dt);
+				rotateOrbitX = rotateOrbitX.RotateAxisAngle(cameraFrustum.WorldRight().Normalized(), dY * dt);
 				rotateOrbitX.Normalize();
 				newUp = rotateOrbitX * newUp;
 				newUp.Normalize();
@@ -205,35 +208,17 @@ bool ModuleCamera3D::Update(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
-		{
-			GameObject* target = app->editor->GetGO();
-			if (target != nullptr)
-			{
-				float3 maxPoint = target->GetAABB().maxPoint;
-				float3 minPoint = target->GetAABB().minPoint;
+		Focus(newFront, newUp, newPos);
 
-				float3 h = (maxPoint - minPoint) / 2.0f;
-
-				float angle = DegToRad(cameraFrustum.VerticalFov()) / 2;
-
-				float3 distance = h / Tan(angle);
-
-				distance.x = (distance.x + 2.5f) * cameraFrustum.Front().x;
-				distance.y = distance.y * cameraFrustum.Front().y;
-				distance.z = (distance.z + 2.5f) * cameraFrustum.Front().z;
-				newPos = target->GetAABB().CenterPoint() - distance;
-			}
-		}
 		float4 size = app->editor->GetViewport()->GetBounds();
 	//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
 		if (app->editor->GetViewport()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y&& pos.y < size.y + size.w)
 		{
-			if (app->input->GetMouseZ() == 1) newPos += newFront * speed;
-			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed;
+			if (app->input->GetMouseZ() == 1) newPos += newFront * speed * 10;
+			if (app->input->GetMouseZ() == -1) newPos -= newFront * speed * 10;
 
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP && !ImGuizmo::IsUsing())
 			{
 				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
 
@@ -266,7 +251,7 @@ bool ModuleCamera3D::Update(float dt)
 							MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
 							if (meshComponent)
 							{
-								const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
+								const std::vector<Vertex>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
 								const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
 
 								float distance = 0.0f;
@@ -282,7 +267,8 @@ bool ModuleCamera3D::Update(float dt)
 								picking.Transform(transform->GetGlobalTransform().Inverted());
 								for (int i = 0; i < size; i += 3)
 								{
-									const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i + 1]], meshVertices[meshIndices[i + 2]]);
+									// TODO: Is this ok?
+									const math::Triangle tri(meshVertices[meshIndices[i]].position, meshVertices[meshIndices[i + 1]].position, meshVertices[meshIndices[i + 2]].position);
 									if (picking.Intersects(tri, &distance, &hitPoint))
 									{
 										closestDistance = distance;
@@ -312,6 +298,34 @@ bool ModuleCamera3D::Update(float dt)
 	}
 	
 	return true;
+}
+
+void ModuleCamera3D::Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos)
+{
+	// Focus
+	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
+	{
+		GameObject* objSelected = app->editor->GetGO();
+
+		if (objSelected != nullptr)
+		{
+			if (MeshComponent* mesh = objSelected->GetComponent<MeshComponent>())
+			{
+				float3 meshCenter = objSelected->GetOffsetCM();
+				newFront = (meshCenter - cameraFrustum.Pos()).Normalized();
+				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
+				const float meshRadius = mesh->GetLocalAABB().HalfDiagonal().Length();
+				const float currentDistance = meshCenter.Distance(cameraFrustum.Pos());
+				newPos = meshCenter + ((cameraFrustum.Pos() - meshCenter).Normalized() * meshRadius * 2);
+			}
+			else
+			{
+				float3 pivot = objSelected->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3);
+				newFront = (pivot - cameraFrustum.Pos()).Normalized();
+				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
+			}
+		}
+	}
 }
 
 void ModuleCamera3D::LookAt(float3& target)

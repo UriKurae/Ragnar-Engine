@@ -1,9 +1,9 @@
 #pragma once
-
 #include "Module.h"
 #include "GameObject.h"
 #include "Quadtree.h"
 #include "GameTimer.h"
+
 #include <vector>
 #include <map>
 
@@ -41,6 +41,8 @@ public:
 	void NewScene();
 
 	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true);
+	GameObject* CreateGameObjectChild(const char* name, GameObject* parent);
+	GameObject* CreateGameObjectParent(const char* name, GameObject* child);
 	inline std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
 		return root->GetChilds(); 
@@ -66,8 +68,6 @@ public:
 	bool LoadScene(const char* name);
 	bool SaveScene(const char* name);
 
-	inline void RecalculateAABB(GameObject* go) { goToRecalculate = go; }
-
 	void DuplicateGO(GameObject* go, GameObject* parent);
 
 	//void AddToQuadtree(GameObject* go);
@@ -77,8 +77,6 @@ public:
 	inline void ResetQuadtree() { resetQuadtree = true; }
 
 	inline const std::string& SceneDirectory() const { return sceneDir; }
-
-	inline const GameObject* GetRecalculateGO() const { return goToRecalculate; }
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
@@ -93,10 +91,11 @@ private:
 	GameState gameState;
 	bool frameSkip;
 
+	GameObject* player;
+
 	bool resetQuadtree;
 
 	GameTimer gameTimer;
-	GameObject* goToRecalculate;
 
 	std::string sceneDir;
 };

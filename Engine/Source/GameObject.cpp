@@ -1,21 +1,27 @@
 #include "GameObject.h"
-
 #include "Application.h"
-#include "ModuleScene.h"
 #include "Globals.h"
+
+#include "ModuleScene.h"
 
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "glew/include/GL/glew.h"
-#include "Imgui/imgui.h"
-#include "Imgui/imgui_internal.h"
+#include "Component.h"
+#include "C_RigidBody.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "MaterialComponent.h"
+#include "LightComponent.h"
+#include "AudioSourceComponent.h"
+#include "ListenerComponent.h"
+#include "AudioReverbZoneComponent.h"
 
+#include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 
-
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), index(nullptr), vertex(nullptr), colliders(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default"), prefabPath("None"), prefabID(0)
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
@@ -35,9 +41,6 @@ GameObject::~GameObject()
 		RELEASE(children[i]);
 	}
 	children.clear();
-
-	RELEASE(vertex);
-	RELEASE(index);
 }
 
 bool GameObject::Update(float dt)
@@ -51,7 +54,7 @@ bool GameObject::Update(float dt)
 	return true;
 }
 
-void GameObject::Draw()
+void GameObject::Draw(CameraComponent* gameCam)
 {
 	// TODO: Check this in the future
 	//if (!GetAllComponent<MeshComponent>().empty())
@@ -61,16 +64,14 @@ void GameObject::Draw()
 	//		GetAllComponent<MeshComponent>()[i]->Draw();
 	//	}
 	//}
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		Component* component = components[i];
 		if (component->GetActive())
-			component->Draw();
-	}
-
-	if (index && vertex && colliders)
-	{
-		DebugColliders();
+		{
+			component->Draw(gameCam);
+		}
 	}
 }
 
@@ -136,6 +137,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Rigid Body"))
+		{
+			CreateComponent(ComponentType::RIGID_BODY);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -173,59 +179,6 @@ void GameObject::DrawEditor()
 	}
 }
 
-void GameObject::DebugColliders()
-{
-	//glPushMatrix();
-	//
-	//glMultMatrixf(GetComponent<TransformComponent>()->GetTransform().Transposed().ptr());
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	vertex->Bind();
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	index->Bind();
-	glLineWidth(2.0f);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glDrawElements(GL_LINES, index->GetSize(), GL_UNSIGNED_INT, NULL);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glLineWidth(1.0f);
-	vertex->Unbind();
-	index->Unbind();
-	glDisableClientState(GL_VERTEX_ARRAY);
-	/*glPopMatrix();*/
-
-	// TODO delete this when done
-
-	// Configure buffers
-	float3 corners[8];
-	globalAabb.GetCornerPoints(corners);
-
-	unsigned int indices[24] =
-	{
-		0,1,
-		1,3,
-		3,2,
-		2,0,
-
-		1,5,
-		4,6,
-		7,3,
-
-		6,7,
-		6,2,
-
-		7,5,
-		4,5,
-
-		4,0
-	};
-
-	if (index) RELEASE(index);
-	if (vertex) RELEASE(vertex);
-	index = new IndexBuffer(indices, 24);
-	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
-	index->Unbind();
-	vertex->Unbind();
-}
 
 Component* GameObject::CreateComponent(ComponentType type, const char* name)
 {
@@ -238,6 +191,21 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::MESH_RENDERER:
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
+		
+		{
+			MeshComponent* meshComp = (MeshComponent*)component;
+
+			MaterialComponent* matComp = GetComponent<MaterialComponent>();
+			if (matComp != nullptr)
+			{
+				meshComp->SetMaterial(matComp);
+			}
+			else
+			{
+				matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
+				meshComp->SetMaterial(matComp);
+			}
+		}
 		break;
 	case ComponentType::SCRIPT:
 		component = new ScriptComponent(this, name);
@@ -255,10 +223,23 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::RIGID_BODY:
+		component = new RigidBodyComponent(this);
+		break;
 	case ComponentType::MATERIAL:
-		component = new MaterialComponent(this);
-		MeshComponent* m = GetComponent<MeshComponent>();
-		if (m != nullptr) m->SetMaterial((MaterialComponent*)component);
+	{
+		component = new MaterialComponent(this, false);
+
+		{
+			MeshComponent* m = GetComponent<MeshComponent>();
+
+			if (m != nullptr)
+				m->SetMaterial((MaterialComponent*)component);
+		}
+		break;
+	}
+	case ComponentType::LIGHT:
+		component = new ComponentLight();
 		break;
 	}
 
@@ -277,8 +258,35 @@ void GameObject::AddComponent(Component* component)
 	components.emplace_back(component);
 }
 
+void GameObject::RemoveComponent(Component* component)
+{
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if ((*it) == component)
+		{
+			components.erase(it);
+			RELEASE(component);
+			break;
+		}
+	}
+}
+
+void GameObject::MoveComponent(Component* component, int position)
+{
+	//TODO: Add to each component the reorganitation structure where the delete button is
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		if (*it == component && (it - position) > components.begin() && (it - position) < components.end())
+		{
+			std::swap(*it, *(it - position));
+			break;
+		}
+	}
+}
+
 void GameObject::CopyComponent(Component* component)
 {
+	//TODO: Copy every single type of Components
 	Component* c = nullptr;
 	switch (component->type)
 	{
@@ -304,7 +312,10 @@ void GameObject::CopyComponent(Component* component)
 
 void GameObject::AddChild(GameObject* object)
 {
+	object->parent = this;
 	children.emplace_back(object);
+	TransformComponent* trans = object->GetComponent<TransformComponent>();
+	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
 
 void GameObject::RemoveChild(GameObject* object)
@@ -324,47 +335,13 @@ void GameObject::SetAABB(AABB newAABB, bool needToClean)
 	globalObb = newAABB;
 	globalObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
 
+	globalAabb.SetNegativeInfinity();
 	globalAabb.Enclose(globalObb);
-
-	if (parent != nullptr && parent != app->scene->GetRoot())
-	{
-		parent->SetAABB(globalAabb);
-	}
-
-	// Configure buffers
-	float3 corners[8];
-	globalAabb.GetCornerPoints(corners);
-	
-	unsigned int indices[24] = 
-	{
-		0,1,
-		1,3,
-		3,2,
-		2,0,
-
-		1,5,
-		4,6,
-		7,3,
-
-		6,7,
-		6,2,
-
-		7,5,
-		4,5,
-
-		4,0
-	};
-
-	if (index) RELEASE(index);
-	if (vertex) RELEASE(vertex);
-	index = new IndexBuffer(indices, 24);
-	vertex = new VertexBuffer(corners, sizeof(float3) * 8);
-	index->Unbind();
-	vertex->Unbind();
 }
 
 void GameObject::SetAABB(OBB newOBB)
 {
+	globalObb = newOBB;
 	globalAabb.Enclose(newOBB);
 
 	//if (parent != nullptr && parent != app->scene->GetRoot())
@@ -432,6 +409,8 @@ void GameObject::OnLoad(JsonParsing& node)
 	uuid = node.GetJsonNumber("UUID");
 	name = node.GetJsonString("Name");
 	active = node.GetJsonBool("Active");
+	prefabID = node.GetJsonNumber("PrefabID");
+	prefabPath = node.GetJsonString("Prefab Path");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
 
@@ -452,6 +431,8 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
 
@@ -465,5 +446,177 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	for (int i = 0; i < children.size(); ++i)
 	{
 		children[i]->OnSave(node, array);
+	}
+}
+
+void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "UUID", uuid);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
+
+	if (option == 1 || option == 3)
+	{
+		LCG lcg;
+		prefabID = lcg.Int();
+	}
+	if (option == 2 && prefabID == 0)
+	{
+		LCG lcg;
+		prefabID = lcg.Int();
+	}
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
+
+	for (int i = 0; i < components.size(); ++i)
+	{
+		components[i]->OnSave(file, newArray);
+	}
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	for (int i = 0; i < children.size(); ++i)
+	{
+		children[i]->OnSavePrefab(node, array, option);
+	}
+}
+
+void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
+{
+	active = node.GetJsonBool("Active");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
+
+	size_t size = node.GetJsonArrayCount(jsonArray);
+
+	std::vector<ComponentType> listComp;
+
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		ComponentType comp = (ComponentType)(int)c.GetJsonNumber("Type");
+
+		listComp.push_back(comp);
+
+		switch (comp)
+		{
+		case ComponentType::TRANSFORM:
+			if (!isParent)
+			{
+				if (GetComponent<TransformComponent>() == nullptr)
+					CreateComponent(ComponentType::TRANSFORM);
+
+				GetComponent<TransformComponent>()->OnLoad(c);
+			}
+			break;
+		case ComponentType::MESH_RENDERER:
+			if (GetComponent<MeshComponent>() == nullptr)
+				CreateComponent(ComponentType::MESH_RENDERER);
+
+			GetComponent<MeshComponent>()->OnLoad(c);
+			break;
+		case ComponentType::CAMERA:
+			if (GetComponent<CameraComponent>() == nullptr)
+				CreateComponent(ComponentType::CAMERA);
+
+			GetComponent<CameraComponent>()->OnLoad(c);
+			break;
+		case ComponentType::AUDIO_SOURCE:
+			if (GetComponent<AudioSourceComponent>() == nullptr)
+				CreateComponent(ComponentType::AUDIO_SOURCE);
+
+			GetComponent<AudioSourceComponent>()->OnLoad(c);
+			break;
+		case ComponentType::AUDIO_LISTENER:
+			if (GetComponent<ListenerComponent>() == nullptr)
+				CreateComponent(ComponentType::AUDIO_LISTENER);
+
+			GetComponent<ListenerComponent>()->OnLoad(c);
+			break;
+		case ComponentType::AUDIO_REVERB_ZONE:
+			if (GetComponent<AudioReverbZoneComponent>() == nullptr)
+				CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
+
+			GetComponent<AudioReverbZoneComponent>()->OnLoad(c);
+			break;
+		case ComponentType::MATERIAL:
+			if (GetComponent<MaterialComponent>() == nullptr)
+				CreateComponent(ComponentType::MATERIAL);
+
+			GetComponent<MaterialComponent>()->OnLoad(c);
+			break;
+		case ComponentType::LIGHT:
+			if (GetComponent<ComponentLight>() == nullptr)
+				CreateComponent(ComponentType::LIGHT);
+
+			GetComponent<ComponentLight>()->OnLoad(c);
+			break;
+		case ComponentType::RIGID_BODY:
+			if (GetComponent<RigidBodyComponent>() == nullptr)
+				CreateComponent(ComponentType::RIGID_BODY);
+
+			GetComponent<RigidBodyComponent>()->OnLoad(c);
+			break;
+		}
+	}
+
+	std::vector<ComponentType> compToDelete;
+
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); ++it)
+	{
+		bool exist = false;
+		for (std::vector<ComponentType>::iterator it2 = listComp.begin(); it2 != listComp.end(); ++it2)
+		{
+			if ((*it)->type == (*it2))
+			{
+				exist = true;
+				break;
+			}
+		}
+
+		if (!exist)
+		{
+			compToDelete.push_back((*it)->type);
+		}
+	}
+
+	for (std::vector<ComponentType>::iterator it = compToDelete.begin(); it != compToDelete.end(); ++it)
+	{
+		switch ((*it))
+		{
+		case ComponentType::TRANSFORM:
+			RemoveComponent(GetComponent<TransformComponent>());
+			break;
+		case ComponentType::MESH_RENDERER:
+			RemoveComponent(GetComponent<MeshComponent>());
+			break;
+		case ComponentType::CAMERA:
+			RemoveComponent(GetComponent<CameraComponent>());
+			break;
+		case ComponentType::AUDIO_SOURCE:
+			RemoveComponent(GetComponent<AudioSourceComponent>());
+			break;
+		case ComponentType::AUDIO_LISTENER:
+			RemoveComponent(GetComponent<ListenerComponent>());
+			break;
+		case ComponentType::AUDIO_REVERB_ZONE:
+			RemoveComponent(GetComponent<AudioReverbZoneComponent>());
+			break;
+		case ComponentType::MATERIAL:
+			RemoveComponent(GetComponent<MaterialComponent>());
+			break;
+		case ComponentType::LIGHT:
+			RemoveComponent(GetComponent<ComponentLight>());
+			break;
+		case ComponentType::RIGID_BODY:
+			RemoveComponent(GetComponent<RigidBodyComponent>());
+			break;
+		}
 	}
 }
