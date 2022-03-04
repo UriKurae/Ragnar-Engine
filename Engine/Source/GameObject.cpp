@@ -15,6 +15,8 @@
 #include "Imgui/imgui_internal.h"
 #include "Algorithm/Random/LCG.h"
 
+#include "NavAgentComponent.h"
+
 #include "C_RigidBody.h"
 
 #include "Profiling.h"
@@ -215,7 +217,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::RECAST:
-		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		component = new NavAgentComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
 	{
