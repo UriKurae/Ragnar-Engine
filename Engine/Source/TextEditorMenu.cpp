@@ -36,7 +36,7 @@ bool TextEditorMenu::Start()
 
 bool TextEditorMenu::Update(float dt)
 {
-	ImGui::Begin("Text Editor", &active, ImGuiWindowFlags_MenuBar);
+	ImGui::Begin(ICON_FA_CODE" Text Editor", &active, ImGuiWindowFlags_MenuBar);
 
 	auto pos = textEditor.GetCursorPosition();
 

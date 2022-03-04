@@ -3,7 +3,7 @@
 #include "Module.h"
 
 #include <mono/utils/mono-publib.h>
-#include "MathGeoLib/src/Math/float3.h"
+#include "Math/float3.h"
 
 #include<mono/metadata/object-forward.h>
 #include <mono/metadata/blob.h>

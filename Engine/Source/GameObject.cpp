@@ -4,6 +4,7 @@
 
 #include "ModuleScene.h"
 
+#include "MonoManager.h"
 #include "JsonParsing.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -17,6 +18,7 @@
 #include "AudioSourceComponent.h"
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "ScriptComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"

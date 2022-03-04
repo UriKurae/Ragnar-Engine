@@ -2,14 +2,13 @@
 #include <string>
 #include <vector>
 
-
-#include "MonoManager.h"
-
 #include "Geometry/OBB.h"
 #include "Geometry/AABB.h"
 #include "CameraComponent.h"
 
 typedef unsigned int uint;
+
+struct SerializedField;
 
 typedef json_array_t JSON_Array;
 class JsonParsing;

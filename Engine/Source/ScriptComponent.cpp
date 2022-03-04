@@ -78,7 +78,7 @@ void ScriptComponent::OnEditor()
 	//{
 		//ImGui::Separator();
 	ImGui::PushID(this);
-	if (ImGui::CollapsingHeader("Script"))
+	if (ImGui::CollapsingHeader(ICON_FA_CODE" Script"))
 	{
 		for (int i = 0; i < fields.size(); i++)
 		{

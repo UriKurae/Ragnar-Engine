@@ -13,7 +13,7 @@ FogWarMenu::~FogWarMenu()
 
 bool FogWarMenu::Update(float dt)
 {
-	if (ImGui::Begin("Fog War", &active))
+	if (ImGui::Begin(ICON_FA_CLOUD" Fog War", &active))
 	{
 		Frustum* frustum = app->scene->mainCamera->GetFrustum();
 		if (ImGui::Checkbox("Active", &fog))
