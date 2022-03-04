@@ -3,40 +3,40 @@
 
 #include "GameObject.h"
 
-#include "DetourComponent.h"
+#include "NavAgentComponent.h"
 
 #include "imgui/imgui.h"
 #include "IconsFontAwesome5.h"
 
-DetourComponent::DetourComponent()
+NavAgentComponent::NavAgentComponent()
 {
 	this->type = ComponentType::DETOUR;
 }
 
-DetourComponent::~DetourComponent()
+NavAgentComponent::~NavAgentComponent()
 {
 
 }
 
-bool DetourComponent::Update(float dt)
+bool NavAgentComponent::Update(float dt)
 {
 
 	return true;
 }
 
-void DetourComponent::OnEditor()
+void NavAgentComponent::OnEditor()
 {
 
 }
 
-bool DetourComponent::OnLoad(JsonParsing& node)
+bool NavAgentComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
 
 	return true;
 }
 
-bool DetourComponent::OnSave(JsonParsing& node, JSON_Array* array)
+bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);

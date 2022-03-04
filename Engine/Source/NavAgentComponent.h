@@ -3,11 +3,11 @@
 #include "Component.h"
 
 
-class DetourComponent : public Component
+class NavAgentComponent : public Component
 {
 public:
-	DetourComponent();
-	virtual ~DetourComponent();
+	NavAgentComponent();
+	virtual ~NavAgentComponent();
 
 	bool Update(float dt) override;
 

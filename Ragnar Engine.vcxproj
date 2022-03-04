@@ -55,7 +55,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\RecastDetour;$(SolutionDir)Engine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -193,6 +193,7 @@
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\DetourDebugDraw.h" />
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\RecastDebugDraw.h" />
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\RecastDump.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.h" />
     <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourCrowd.h" />
     <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourLocalBoundary.h" />
     <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourObstacleAvoidance.h" />
@@ -278,6 +279,7 @@
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\NavAgentComponent.h" />
     <ClInclude Include="Engine\Source\Physics3D.h" />
     <ClInclude Include="Engine\Source\NavigatorMenu.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
@@ -363,6 +365,7 @@
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\DetourDebugDraw.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\RecastDebugDraw.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\RecastDump.cpp" />
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourCrowd.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourLocalBoundary.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourObstacleAvoidance.cpp" />
@@ -442,6 +445,7 @@
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
+    <ClCompile Include="Engine\Source\NavAgentComponent.cpp" />
     <ClCompile Include="Engine\Source\Physics3D.cpp" />
     <ClCompile Include="Engine\Source\NavigatorMenu.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />

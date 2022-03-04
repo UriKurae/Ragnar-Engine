@@ -171,3 +171,16 @@ void Mesh::Reimport(ModelParameters& data)
 	}
 	MeshImporter::LoadMesh(vertices, indices, libraryPath);
 }
+
+void Mesh::SetVariables(float* position, int total, uint* ind, int indtotal)
+{
+	for (int i = 0; i < total; i++)
+	{
+		vertices[i].position.x = position[i * 3];
+		vertices[i].position.y = position[i * 3 + 1];
+		vertices[i].position.z = position[i * 3 + 2];
+	}
+
+	for (int i = 0; i < indtotal; i++)
+		indices[i] = ind[i];
+}

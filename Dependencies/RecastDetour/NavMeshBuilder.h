@@ -1,10 +1,10 @@
 #pragma once
 
-#include "RecastNavigation/Recast/Recast.h"
-#include "RecastNavigation/Detour/DetourNavMesh.h"
-#include "RecastNavigation/Detour/DetourNavMeshQuery.h"
-#include "RecastNavigation/InputGeom.h"
-#include "../MO_Pathfinding.h"
+#include "Recast/Recast.h"
+#include "Detour/DetourNavMesh.h"
+#include "Detour/DetourNavMeshQuery.h"
+#include "InputGeom.h"
+#include "ModuleNavMesh.h"
 
 enum class Walkability
 {

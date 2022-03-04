@@ -30,10 +30,10 @@
 #include "Detour/DetourNavMesh.h"
 #include "Math/float4x4.h"
 
-#include "../RE_Mesh.h"
-#include "../Globals.h"
-#include "../ModuleResourceManager.h"
-#include "../ModuleRenderer3D.h"
+#include "Mesh.h"
+#include "Globals.h"
+#include "ResourceManager.h"
+#include "ModuleRenderer3D.h"
 
 #include "mmgr/mmgr.h"
 
@@ -129,8 +129,7 @@ InputGeom::~InputGeom()
 
 	if (m_mesh != nullptr)
 	{
-		delete[] m_mesh->vertices;
-		delete[] m_mesh->indices;
+		m_mesh->UnLoad();
 
 		delete m_mesh;
 		m_mesh = nullptr;
@@ -138,7 +137,7 @@ InputGeom::~InputGeom()
 }
 
 
-bool InputGeom::loadMesh(ResourceMesh* mesh)
+bool InputGeom::loadMesh(Mesh* mesh)
 {
 	if (m_mesh)
 	{
@@ -150,12 +149,18 @@ bool InputGeom::loadMesh(ResourceMesh* mesh)
 	m_offMeshConCount = 0;
 	m_volumeCount = 0;
 
-	float* vertices = new float[mesh->vertices_count * 3];
-	mesh->GetVertices(vertices);
+	float* vertices = new float[mesh->GetVerticesSize() * 3];
+	const std::vector<Vertex>& meshVertices = mesh->GetVerticesVector();
+	for (int i = 0; i < mesh->GetVerticesSize(); i++)
+	{
+		vertices[i * 3]		= meshVertices[i].position.x;
+		vertices[i * 3 + 1] = meshVertices[i].position.y;
+		vertices[i * 3 + 2] = meshVertices[i].position.z;
+	}
 
 	m_mesh = mesh;
 
-	rcCalcBounds(vertices, m_mesh->vertices_count, m_meshBMin, m_meshBMax);
+	rcCalcBounds(vertices, mesh->GetVerticesSize(), m_meshBMin, m_meshBMax);
 
 	m_chunkyMesh = new rcChunkyTriMesh();
 	if (!m_chunkyMesh)
@@ -164,7 +169,7 @@ bool InputGeom::loadMesh(ResourceMesh* mesh)
 		return false;
 	}
 
-	if (!rcCreateChunkyTriMesh(vertices, (int*)m_mesh->indices, m_mesh->indices_count / 3, 256, m_chunkyMesh))
+	if (!rcCreateChunkyTriMesh(vertices, (int*)&mesh->GetIndicesVector()[0], m_mesh->GetIndicesSize() / 3, 256, m_chunkyMesh))
 	{
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Failed to build chunky mesh.");
 		RELEASE_ARRAY(vertices);
@@ -175,7 +180,7 @@ bool InputGeom::loadMesh(ResourceMesh* mesh)
 	return true;
 }
 
-bool InputGeom::AddMesh(ResourceMesh* mesh, float4x4 new_mesh_transform)
+bool InputGeom::AddMesh(Mesh* mesh, float4x4 new_mesh_transform)
 {
 	if (m_chunkyMesh)
 	{
@@ -185,12 +190,18 @@ bool InputGeom::AddMesh(ResourceMesh* mesh, float4x4 new_mesh_transform)
 	++m_offMeshConCount;
 	++m_volumeCount;
 
-	if (m_mesh == nullptr)
-		m_mesh = new ResourceMesh(EngineExternal->GetRandomInt());
-
 	MergeToMesh(mesh, new_mesh_transform);
 
-	rcCalcBounds(m_mesh->vertices, m_mesh->vertices_count, m_meshBMin, m_meshBMax);
+	float* vertices = new float[m_mesh->GetVerticesSize() * 3];
+	const std::vector<Vertex>& meshVertices = mesh->GetVerticesVector();
+	for (int i = 0; i < m_mesh->GetVerticesSize(); i++)
+	{
+		vertices[i * 3] = meshVertices[i].position.x;
+		vertices[i * 3 + 1] = meshVertices[i].position.y;
+		vertices[i * 3 + 2] = meshVertices[i].position.z;
+	}
+
+	rcCalcBounds(vertices, m_mesh->GetVerticesSize(), m_meshBMin, m_meshBMax);
 
 	m_chunkyMesh = new rcChunkyTriMesh();
 	if (!m_chunkyMesh)
@@ -198,7 +209,7 @@ bool InputGeom::AddMesh(ResourceMesh* mesh, float4x4 new_mesh_transform)
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Out of memory 'm_chunkyMesh'.");
 		return false;
 	}
-	if (!rcCreateChunkyTriMesh(m_mesh->vertices, (int*)m_mesh->indices, m_mesh->indices_count / 3, 256, m_chunkyMesh))
+	if (!rcCreateChunkyTriMesh(vertices, (int*)&mesh->GetIndicesVector()[0], m_mesh->GetIndicesSize() / 3, 256, m_chunkyMesh))
 	{
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Failed to build chunky mesh.");
 		//RELEASE_ARRAY(vertices);
@@ -208,31 +219,38 @@ bool InputGeom::AddMesh(ResourceMesh* mesh, float4x4 new_mesh_transform)
 	return true;
 }
 
-void InputGeom::SetMesh(ResourceMesh* newMesh)
+void InputGeom::SetMesh(Mesh* newMesh)
 {
 	m_mesh = newMesh;
 }
 
-void InputGeom::MergeToMesh(ResourceMesh* new_mesh, float4x4 new_mesh_transform)
+void InputGeom::MergeToMesh(Mesh* new_mesh, float4x4 new_mesh_transform)
 {
 	// Vertex Merging =====================================================================
-	int total_vertices = m_mesh->vertices_count + new_mesh->vertices_count;
+	int total_vertices = m_mesh->GetVerticesSize() + new_mesh->GetVerticesSize();
 	float* merged_vertices = new float[total_vertices * 3];
 
-	int indices_offset = m_mesh->vertices_count;
+	int indices_offset = m_mesh->GetVerticesSize();
 
-	for (size_t i = 0; i < m_mesh->vertices_count; i++)
+	const std::vector<Vertex>& meshVertices = m_mesh->GetVerticesVector();
+	for (int i = 0; i < m_mesh->GetVerticesSize(); i++)
 	{
-		merged_vertices[i * 3]	   = m_mesh->vertices[i * 3];
-		merged_vertices[i * 3 + 1] = m_mesh->vertices[i * 3 + 1];
-		merged_vertices[i * 3 + 2] = m_mesh->vertices[i * 3 + 2];
+		merged_vertices[i * 3]	   = meshVertices[i].position.x;
+		merged_vertices[i * 3 + 1] = meshVertices[i].position.y;
+		merged_vertices[i * 3 + 2] = meshVertices[i].position.z;
 	}
 
-	float* new_mesh_vertices = new float[new_mesh->vertices_count * 3];
-	new_mesh->GetVertices(new_mesh_vertices);
+	float* new_mesh_vertices = new float[new_mesh->GetVerticesSize() * 3];
+	const std::vector<Vertex>& new_meshVertices = m_mesh->GetVerticesVector();
+	for (int i = 0; i < new_mesh->GetVerticesSize(); i++)
+	{
+		new_mesh_vertices[i * 3] = new_meshVertices[i].position.x;
+		new_mesh_vertices[i * 3 + 1] = new_meshVertices[i].position.y;
+		new_mesh_vertices[i * 3 + 2] = new_meshVertices[i].position.z;
+	}
 
-	int index = m_mesh->vertices_count;
-	for (size_t i = 0; i < new_mesh->vertices_count; i++)
+	int index = m_mesh->GetVerticesSize();
+	for (size_t i = 0; i < new_mesh->GetVerticesSize(); i++)
 	{
 		float3 vertex = { new_mesh_vertices[i * 3],	new_mesh_vertices[i * 3 + 1], new_mesh_vertices[i * 3 + 2] };
 
@@ -244,33 +262,35 @@ void InputGeom::MergeToMesh(ResourceMesh* new_mesh, float4x4 new_mesh_transform)
 		index++;
 	}
 
-	RELEASE_ARRAY(new_mesh_vertices);
-	RELEASE_ARRAY(m_mesh->vertices);
-
-	m_mesh->vertices = merged_vertices;
-	m_mesh->vertices_count = total_vertices;
+	//std::vector<Vertex>& a_mesh = m_mesh->GetVerticesVector();
+	//for (int i = 0; i < new_mesh->GetVerticesSize(); i++)
+	//{
+	//	a_mesh[i].position.x = merged_vertices[i * 3];
+	//	a_mesh[i].position.y = merged_vertices[i * 3];
+	//	a_mesh[i].position.z = merged_vertices[i * 3];
+	//}
 
 	//Indices Merging =====================================================================
 
-	int total_indices = m_mesh->indices_count + new_mesh->indices_count;
+	int total_indices = m_mesh->GetIndicesSize() + new_mesh->GetIndicesSize();
 	uint* merged_indices = new uint[total_indices];
 
 	index = 0;
-	for (size_t i = 0; i < m_mesh->indices_count; i++)
+	for (size_t i = 0; i < m_mesh->GetIndicesSize(); i++)
 	{
-		merged_indices[i] = m_mesh->indices[i];
+		merged_indices[i] = m_mesh->GetIndicesVector()[i];
 		index++;
 	}
 
-	for (size_t i = 0; i < new_mesh->indices_count; i++)
+	for (size_t i = 0; i < new_mesh->GetIndicesSize(); i++)
 	{
-		merged_indices[index + i] = new_mesh->indices[i] + indices_offset;
+		merged_indices[index + i] = new_mesh->GetIndicesVector()[i] + indices_offset;
 	}
 
-	RELEASE_ARRAY(m_mesh->indices);
+	RELEASE_ARRAY(new_mesh_vertices);
+	m_mesh->UnLoad();
 
-	m_mesh->indices = merged_indices;
-	m_mesh->indices_count = total_indices;
+	m_mesh->SetVariables(merged_vertices, total_vertices, merged_indices, total_indices);
 }
 
 #ifndef STANDALONE
@@ -278,13 +298,14 @@ void InputGeom::DrawMesh()
 {
 	if (m_mesh != nullptr)
 	{
-		for (size_t i = 0; i < m_mesh->vertices_count / 3; i+= 3)
+		const std::vector<Vertex>& meshVertices = m_mesh->GetVerticesVector();
+		for (size_t i = 0; i < m_mesh->GetVerticesSize(); i+= 3)
 		{
-			float3 a = float3(m_mesh->vertices[i * 3], m_mesh->vertices[i * 3 + 1], m_mesh->vertices[i * 3 + 2]);
-			float3 b = float3(m_mesh->vertices[(i + 1) * 3], m_mesh->vertices[(i + 1) * 3 + 1], m_mesh->vertices[(i + 1) * 3 + 2]);
-			float3 c = float3(m_mesh->vertices[(i + 2) * 3], m_mesh->vertices[(i + 2) * 3 + 1], m_mesh->vertices[(i + 2) * 3 + 2]);
+			float3 a = meshVertices[i].position;
+			float3 b = meshVertices[i + 1].position;
+			float3 c = meshVertices[i + 2].position;
 
-			EngineExternal->moduleRenderer3D->AddDebugTriangles(a, b ,c, float3(0.1, 0.75, 0.5));
+			//EngineExternal->moduleRenderer3D->AddDebugTriangles(a, b ,c, float3(0.1, 0.75, 0.5));
 		}
 	}
 }
@@ -351,7 +372,14 @@ bool InputGeom::raycastMesh(float* src, float* dst, float& tmin)
 	
 	tmin = 1.0f;
 	bool hit = false;
-	float* verts = m_mesh->vertices;
+	float* verts = new float[m_mesh->GetVerticesSize() * 3];
+	const std::vector<Vertex>& meshVertices = m_mesh->GetVerticesVector();
+	for (int i = 0; i < m_mesh->GetVerticesSize(); i++)
+	{
+		verts[i * 3] = meshVertices[i].position.x;
+		verts[i * 3 + 1] = meshVertices[i].position.y;
+		verts[i * 3 + 2] = meshVertices[i].position.z;
+	}
 	
 	for (int i = 0; i < ncid; ++i)
 	{

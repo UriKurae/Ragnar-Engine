@@ -38,6 +38,7 @@ public:
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
 
 	void Reimport(ModelParameters& data);
+	void SetVariables(float* position, int total, uint* ind, int indtotal);
 
 private:
 	std::vector<Vertex> vertices;

@@ -718,6 +718,12 @@
     <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourProximityGrid.h">
       <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\NavAgentComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1187,6 +1193,12 @@
     </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourProximityGrid.cpp">
       <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

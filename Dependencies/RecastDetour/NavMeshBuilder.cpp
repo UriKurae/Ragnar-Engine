@@ -1,20 +1,21 @@
-#include "../Globals.h"
 #include "NavMeshBuilder.h"
-#include "../MO_Pathfinding.h"
 #include "InputGeom.h"
 #include "Detour/DetourNavMesh.h"
 #include "Detour/DetourNavMeshQuery.h"
 #include "Detour/DetourNavMeshBuilder.h"
+#include "DebugUtils/SampleInterfaces.h"
 
 #include "DebugUtils/DetourDebugDraw.h"
 #include "DebugUtils/RecastDebugDraw.h"
 
 #include "ImGui/imgui.h"
 
-#include "../Application.h"
-#include "../MO_Renderer3D.h"
+#include "Application.h"
+#include "ModuleRenderer3D.h"
+#include "Globals.h"
+#include "ModuleNavMesh.h"
 
-#include "../RE_Mesh.h"
+#include "Mesh.h"
 #include "mmgr/mmgr.h"
 
 
@@ -196,9 +197,17 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 
 	CleanUp();
 
-	const float* verts = m_geom->getMesh()->vertices;
-	const int nverts = m_geom->getMesh()->vertices_count;
-	const int ntris = m_geom->getMesh()->indices_count / 3;
+	float* verts = new float[m_geom->getMesh()->GetVerticesSize() * 3];
+	const std::vector<Vertex>& meshVertices = m_geom->getMesh()->GetVerticesVector();
+	for (int i = 0; i < m_geom->getMesh()->GetVerticesSize(); i++)
+	{
+		verts[i * 3] = meshVertices[i].position.x;
+		verts[i * 3 + 1] = meshVertices[i].position.y;
+		verts[i * 3 + 2] = meshVertices[i].position.z;
+	}
+
+	const int nverts = m_geom->getMesh()->GetVerticesSize();
+	const int ntris = m_geom->getMesh()->GetIndicesSize() / 3;
 	const rcChunkyTriMesh* chunkyMesh = m_geom->getChunkyMesh();
 
 	// Init build configuration from GUI
@@ -629,23 +638,23 @@ void NavMeshBuilder::DebugDraw()
 
 void NavMeshBuilder::DrawBoundaries(float minx, float miny, float minz, float maxx, float maxy, float maxz)
 {
-	//Top
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(minx, miny, minz), float3(maxx, miny, minz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(maxx, miny, minz), float3(maxx, miny, maxz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(maxx, miny, maxz), float3(minx, miny, maxz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(minx, miny, maxz), float3(minx, miny, minz), float3(1.0f, 1.0f, 1.0f));
-
-	//Bottom	
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(minx, maxy, minz), float3(maxx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(maxx, maxy, minz), float3(maxx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(maxx, maxy, maxz), float3(minx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(minx, maxy, maxz), float3(minx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
-
-	//Sides		
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(minx, miny, minz), float3(minx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(maxx, miny, minz), float3(maxx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(maxx, miny, maxz), float3(maxx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
-	EngineExternal->moduleRenderer3D->AddDebugLines(float3(minx, miny, maxz), float3(minx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
+	////Top
+	//app->renderer3D->AddDebugLines(float3(minx, miny, minz), float3(maxx, miny, minz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(maxx, miny, minz), float3(maxx, miny, maxz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(maxx, miny, maxz), float3(minx, miny, maxz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(minx, miny, maxz), float3(minx, miny, minz), float3(1.0f, 1.0f, 1.0f));
+	
+	////Bottom	
+	//app->renderer3D->AddDebugLines(float3(minx, maxy, minz), float3(maxx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(maxx, maxy, minz), float3(maxx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(maxx, maxy, maxz), float3(minx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(minx, maxy, maxz), float3(minx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
+	
+	////Sides		
+	//app->renderer3D->AddDebugLines(float3(minx, miny, minz), float3(minx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(maxx, miny, minz), float3(maxx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(maxx, miny, maxz), float3(maxx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
+	//app->renderer3D->AddDebugLines(float3(minx, miny, maxz), float3(minx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
 }
 
 
@@ -662,8 +671,8 @@ void NavMeshBuilder::OnEditor()
 		}
 
 		//ImGui::SameLine();
-		ImGui::Text("Verts: %d", m_geom->getMesh()->vertices_count);
-		ImGui::Text("Indices: %d", m_geom->getMesh()->indices_count);
+		ImGui::Text("Verts: %d", m_geom->getMesh()->GetVerticesSize());
+		ImGui::Text("Indices: %d", m_geom->getMesh()->GetIndicesSize());
 
 		ImGui::Spacing();
 		ImGui::Separator();
