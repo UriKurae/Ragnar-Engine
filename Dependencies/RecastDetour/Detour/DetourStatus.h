@@ -61,4 +61,9 @@ inline bool dtStatusDetail(dtStatus status, unsigned int detail)
 	return (status & detail) != 0;
 }
 
+// Returns true if result is partial
+inline bool dtStatusPartial(dtStatus status)
+{
+	return (status & DT_PARTIAL_RESULT) != 0;
+}
 #endif // DETOURSTATUS_H

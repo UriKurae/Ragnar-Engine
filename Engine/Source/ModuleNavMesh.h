@@ -76,66 +76,48 @@ struct Pathfinder
 	float m_polyPickExt[3];
 };
 
+class ModuleNavMesh : public Module {
+public:
+	ModuleNavMesh(Application* app, bool start_enabled = true);
+	~ModuleNavMesh();
 
-//class ModuleNavMesh : public Module
-//{
-//public:
-//	
-//	ModuleNavMesh(bool startEnabled = true);
-//	~ModuleNavMesh();
-//
-//	bool Init(JsonParsing& node) override;
-//	bool PreUpdate(float dt) override;
-//	bool CleanUp();
-//
-//	bool LoadConfig(JsonParsing& node) override;
-//	bool SaveConfig(JsonParsing& node) override;
-//};
+	bool Start() override;
+	bool Update(float dt) override;
 
-//class M_Pathfinding : public Module {
-//public:
-//	M_Pathfinding(Application* app, bool start_enabled = true);
-//	~M_Pathfinding();
-//
-//	bool Start() override;
-//	bool Update(float dt) override;
-//
-//	int Save(const char* scene_path);
-//	void Load(int navMeshResourceUID);
-//
-//#ifndef STANDALONE
-//	void DebugDraw();
-//	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
-//	void CreateWalkabilityTestPoint();
-//#endif // !STANDALONE
-//
-//	void ClearNavMeshes();
-//	bool IsWalkable(float x, float z, float3& hitPoint);
-//
-//	bool CleanUp() override;
-//
-//	void BakeNavMesh();
-//	void AddGameObjectToNavMesh(GameObject* objectToAdd);
-//	NavMeshBuilder* GetNavMeshBuilder();
-//	float3 FindRandomPointAround(float3 centerPoint, float radius);
-//	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
-//
-//private:
-//
-//public:
-//	std::vector<NavAgent> agents;
-//	NavAgent bakedNav;
-//	Pathfinder pathfinder;
-//	bool debugDraw;
-//
-//private:
-//	NavMeshBuilder* navMeshBuilder;
-//	InputGeom* geometry;
-//
-//	GameObject* walkabilityPoint;
-//
-//	//Random Point Finding
-//	bool randomPointSet;
-//	float3 randomPoint;
-//	float randomRadius;
-//};
+	bool LoadConfig(JsonParsing& node) override;
+	bool SaveConfig(JsonParsing& node) override;
+
+	void DebugDraw();
+	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
+	void CreateWalkabilityTestPoint();
+
+	void ClearNavMeshes();
+	bool IsWalkable(float x, float z, float3& hitPoint);
+
+	bool CleanUp() override;
+
+	void BakeNavMesh();
+	void AddGameObjectToNavMesh(GameObject* objectToAdd);
+	NavMeshBuilder* GetNavMeshBuilder();
+	float3 FindRandomPointAround(float3 centerPoint, float radius);
+	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
+
+private:
+
+public:
+	std::vector<NavAgent> agents;
+	NavAgent bakedNav;
+	Pathfinder pathfinder;
+	bool debugDraw;
+
+private:
+	NavMeshBuilder* navMeshBuilder;
+	InputGeom* geometry;
+
+	GameObject* walkabilityPoint;
+
+	//Random Point Finding
+	bool randomPointSet;
+	float3 randomPoint;
+	float randomRadius;
+};

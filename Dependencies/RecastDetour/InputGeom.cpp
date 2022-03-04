@@ -180,7 +180,7 @@ bool InputGeom::loadMesh(Mesh* mesh)
 	return true;
 }
 
-bool InputGeom::AddMesh(Mesh* mesh, float4x4 new_mesh_transform)
+bool InputGeom::AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform)
 {
 	if (m_chunkyMesh)
 	{
@@ -224,7 +224,7 @@ void InputGeom::SetMesh(Mesh* newMesh)
 	m_mesh = newMesh;
 }
 
-void InputGeom::MergeToMesh(Mesh* new_mesh, float4x4 new_mesh_transform)
+void InputGeom::MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_transform)
 {
 	// Vertex Merging =====================================================================
 	int total_vertices = m_mesh->GetVerticesSize() + new_mesh->GetVerticesSize();

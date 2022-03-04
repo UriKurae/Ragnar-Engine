@@ -110,8 +110,8 @@ public:
 
 	void SetMesh(Mesh* newMesh);
 	bool loadMesh(Mesh* mesh);
-	bool AddMesh(Mesh* mesh, float4x4 new_mesh_transform);
-	void MergeToMesh(Mesh* new_mesh, float4x4 new_mesh_transform);
+	bool AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform);
+	void MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_transform);
 
 #ifndef STANDALONE
 	void DrawMesh();
