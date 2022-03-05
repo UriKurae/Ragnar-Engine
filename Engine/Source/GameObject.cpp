@@ -195,8 +195,11 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 			}
 			else
 			{
-				matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
+				matComp = new MaterialComponent(this, true);
 				meshComp->SetMaterial(matComp);
+				matComp->SetOwner(this);
+				components.push_back(matComp);
+				//matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
 			}
 		}
 		break;
@@ -221,14 +224,33 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::MATERIAL:
 	{
-		component = new MaterialComponent(this, false);
-
 		{
-			MeshComponent* m = GetComponent<MeshComponent>();
+			MaterialComponent* matComp = GetComponent<MaterialComponent>();
+			if (matComp != nullptr && matComp->IsDefaultMat())
+			{
+				std::vector<Component*>::iterator it = components.begin();
+				for (; it != components.end(); ++it)
+				{
+					if (*(it) == matComp)
+					{
+						components.erase(it);
+						RELEASE(matComp);
+						break;
+					}
+				}
 
+				component = new MaterialComponent(this, false);
+			}
+			else
+			{
+				component = new MaterialComponent(this, false);
+			}
+
+			MeshComponent* m = GetComponent<MeshComponent>();
 			if (m != nullptr)
 				m->SetMaterial((MaterialComponent*)component);
 		}
+
 		break;
 	}
 	case ComponentType::LIGHT:
