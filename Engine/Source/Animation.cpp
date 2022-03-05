@@ -46,13 +46,22 @@ void Animation::UnLoad()
 
 Bone* Animation::FindBone(const std::string& name)
 {
-	auto boneIter = std::find_if(bones.begin(), bones.end(), [&](const Bone& bone)
+	std::vector<Bone>::iterator boneIter = bones.end();
+	for (std::vector<Bone>::iterator it = bones.begin(); it != bones.end(); ++it)
 	{
-		if (bone.GetName() == name)
+		if ((*it).GetName() == name)
 		{
-			return &bone;
+			boneIter = it;
+			break;
 		}
-	});
+	}
+	//auto boneIter = std::find_if(bones.begin(), bones.end(), [&](const Bone& bone)
+	//{
+	//	if (bone.GetName() == name)
+	//	{
+	//		return &bone;
+	//	}
+	//});
 
 	if (boneIter == bones.end()) return nullptr;
 	else return &(*boneIter);

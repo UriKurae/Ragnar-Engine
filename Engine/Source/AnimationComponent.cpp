@@ -6,7 +6,7 @@
 #include "GameObject.h"
 #include "IconsFontAwesome5.h"
 
-AnimationComponent::AnimationComponent(GameObject* own) : anim(nullptr), showAnimMenu(false)
+AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
@@ -25,12 +25,19 @@ AnimationComponent::AnimationComponent(GameObject* own) : anim(nullptr), showAni
 
 AnimationComponent::AnimationComponent(AnimationComponent* animation) : showAnimMenu(false)
 {
-	anim = animation->anim;
+	currAnim = animation->currAnim;
 }
 
 AnimationComponent::~AnimationComponent()
 {
-	if (anim.use_count() - 1 == 1) anim->UnLoad();
+	for (int i = 0; i < animations.size(); ++i)
+	{
+		std::shared_ptr<Animation> anim = animations[i].anim;
+		if (anim.use_count() - 1 == 1)
+		{
+			anim->UnLoad();
+		}
+	}
 }
 
 void AnimationComponent::OnEditor()
@@ -38,67 +45,137 @@ void AnimationComponent::OnEditor()
 	ImGui::PushID(this);
 	if (ImGui::CollapsingHeader(ICON_FA_PEOPLE_ARROWS" Animation Component"))
 	{
-		Checkbox(this, "Active", active);
-		if (anim != nullptr)
+		//Checkbox(this, "Active", active);
+		//if (currAnim != nullptr)
+		//{
+		//	ImGui::Text("Select animation: ");
+		//	ImGui::SameLine();
+			//if (ImGui::Button(currAnim ? currAnim->GetName().c_str() : ""))
+			//{
+			//	showAnimMenu = true;
+			//}
+
+		if (ImGui::TreeNodeEx("Animations"))
 		{
-			ImGui::Text("Select animation: ");
-			ImGui::SameLine();
-			if (ImGui::Button(anim ? anim->GetName().c_str() : ""))
+			for (int i = 0; i < animations.size(); ++i)
 			{
-				showAnimMenu = true;
+				AnimState* currState = &animations[i];
+				ImGui::PushID((void*)currState->state.c_str());
+				ImGui::InputText("##State", &currState->state[0], 30);
+				ImGui::SameLine();
+				if (ImGui::BeginCombo("##Animations", currState->anim ? currState->anim->GetName().c_str() : "None"))
+				{
+					if (ImGui::Selectable("None"))
+					{
+						currState->state = "None";
+						currState->anim = nullptr;
+						currState->loop = false;
+					}
+
+					std::vector<std::string> files;
+					app->fs->DiscoverFiles("Library/Animations", files);
+					for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+					{
+						if ((*it).find(".rganim") != std::string::npos)
+						{
+							app->fs->GetFilenameWithoutExtension(*it);
+							*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+							uint uid = std::stoll(*it);
+							std::shared_ptr<Animation> res = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid));
+							if (ImGui::Selectable(res->GetName().c_str()))
+							{
+								res->Load();
+								currState->anim = res;
+								if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
+								currAnim = currState;
+							}
+						}
+					}
+
+					ImGui::EndCombo();
+				}
+
+				ImGui::Checkbox("##Loop", &currState->loop);
+				ImGui::PopID();
 			}
+
+			if (ImGui::Button(ICON_FA_PLUS))
+			{
+				animations.push_back({ "None", nullptr, false });
+			}
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_FA_MINUS))
+			{
+				animations.erase(animations.end() - 1);
+			}
+
+			ImGui::TreePop();
+		}
+
+		if (currAnim && currAnim->anim)
+		{
 			ImGui::Text("Path: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", anim->GetAssetsPath().c_str());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", currAnim->anim->GetAssetsPath().c_str());
 			ImGui::Text("Ticks: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", anim->GetTicks());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", currAnim->anim->GetTicks());
 			ImGui::Text("Ticks Per Second: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", anim->GetTicksPerSecond());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", currAnim->anim->GetTicksPerSecond());
 			ImGui::Text("Duration: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f s", anim->GetDuration());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f s", currAnim->anim->GetDuration());
 			ImGui::Text("Bones Attached: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", anim->bones.size());
-			/*if(ImGui::Checkbox("Draw Bones", &debugDraw))
-			{
-				for (int i = 0; i < owner->GetChilds().size(); i++)
-				{
-					owner->GetChilds().at(i)->GetComponent<BoneComponent>()->SetDebugDraw();
-				}
-			}*/
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", currAnim->anim->bones.size());
 		}
 		else
 		{
-			ImGui::Text("Select animation: ");
-			ImGui::SameLine();
-			if (ImGui::Button("No Animation"))
-			{
-				showAnimMenu = true;
-			}
+			ImGui::Text("There's is no current animation");
 		}
-		ImGui::Separator();
+		/*if(ImGui::Checkbox("Draw Bones", &debugDraw))
+		{
+			for (int i = 0; i < owner->GetChilds().size(); i++)
+			{
+				owner->GetChilds().at(i)->GetComponent<BoneComponent>()->SetDebugDraw();
+			}
+		}*/
+		//}
+		//else
+		//{
+		//	ImGui::Text("Select animation: ");
+		//	ImGui::SameLine();
+		//	if (ImGui::Button("No Animation"))
+		//	{
+		//		showAnimMenu = true;
+		//	}
+		//}
+		//ImGui::Separator();
 	}
 
-	if (showAnimMenu)
-	{
-		ImGui::Begin("Animations", &showAnimMenu);
-		GetAnimations();
-		ImGui::End();
-	}
+	//if (showAnimMenu)
+	//{
+	//	ImGui::Begin("Animations", &showAnimMenu);
+	//	GetAnimations();
+	//	ImGui::End();
+	//}
 	ImGui::PopID();
 }
 
 bool AnimationComponent::Update(float dt)
 {
 	deltaTime = dt;
-	if (anim)
+	if (currAnim && playing)
 	{
-		currentTime += anim->GetTicksPerSecond() * dt;
-		currentTime = fmod(currentTime, anim->GetTicks());
-		CalculateBoneTransform(anim->GetHierarchyData(), float4x4::identity);
+		if (currentTime > currAnim->anim->GetTicks())
+		{
+			if (currAnim->loop) currentTime = 0.0f;
+			else playing = false;
+		}
+		currentTime += currAnim->anim->GetTicksPerSecond() * dt;
+		currentTime = fmod(currentTime, currAnim->anim->GetTicks());
+		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
 	}
 
 	return true;
@@ -109,7 +186,7 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 	std::string nodeName = data.name;
 	float4x4 nodeTransform = data.transform;
 
-	Bone* bone = anim->FindBone(nodeName);
+	Bone* bone = currAnim->anim->FindBone(nodeName);
 
 	if (bone)
 	{
@@ -134,7 +211,7 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 
 bool AnimationComponent::OnLoad(JsonParsing& node)
 {
-	anim = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
+	//currAnim = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
 	return true;
 }
@@ -144,7 +221,7 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", anim->GetAssetsPath().c_str());
+	//file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", currAnim->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	node.SetValueToArray(array, file.GetRootValue());
@@ -154,7 +231,20 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 void AnimationComponent::SetAnimation(std::shared_ptr<Resource> a)
 {
-	anim = std::static_pointer_cast<Animation>(a);
+	//currAnim = std::static_pointer_cast<Animation>(a);
+}
+
+void AnimationComponent::Play(std::string state)
+{
+	for (int i = 0; i < animations.size(); ++i)
+	{
+		if (animations[i].state == state)
+		{
+			currAnim = &animations[i];
+			playing = true;
+			break;
+		}
+	}
 }
 
 void AnimationComponent::GetAnimations()
@@ -181,7 +271,7 @@ void AnimationComponent::GetAnimations()
 			if (ImGui::Selectable(res->GetName().c_str()))
 			{
 				res->Load();
-				if (anim.use_count() - 1 == 1) anim->UnLoad();
+				//if (currAnim.use_count() - 1 == 1) currAnim->UnLoad();
 				SetAnimation(res);
 			}
 		}

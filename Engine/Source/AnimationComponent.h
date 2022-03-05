@@ -6,6 +6,13 @@
 #include <map>
 #include <memory>
 
+struct AnimState
+{
+	std::string state;
+	std::shared_ptr<Animation> anim;
+	bool loop;
+};
+
 class AnimationComponent : public Component
 {
 public: 
@@ -23,6 +30,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetAnimation(std::shared_ptr<Resource> a);
+	void Play(std::string state);
 	
 	void GetAnimations();
 
@@ -33,11 +41,13 @@ public:
 
 public:
 	bool showAnimMenu = false;
+	bool playing;
 
 	float currentTime;
 	float deltaTime;
 
 	std::vector<float4x4> finalBoneMatrices;
 
-	std::shared_ptr<Animation> anim;
+	AnimState* currAnim;
+	std::vector<AnimState> animations;
 };

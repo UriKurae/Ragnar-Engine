@@ -140,6 +140,21 @@ bool ModuleScene::Update(float dt)
 		player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	{
+		GameObject* anim = *(root->GetChilds().end() - 1);
+		anim = *(anim->GetChilds().end() - 1);
+
+		anim->GetComponent<AnimationComponent>()->Play("Capoeira");
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	{
+		GameObject* anim = *(root->GetChilds().end() - 1);
+		anim = *(anim->GetChilds().end() - 1);
+
+		anim->GetComponent<AnimationComponent>()->Play("Idle");
+	}
+
 	AudioManager::Get()->Render();
 
 	return true;
