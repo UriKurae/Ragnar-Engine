@@ -6,6 +6,8 @@
 #include "GameObject.h"
 #include "IconsFontAwesome5.h"
 
+#include "Imgui/imgui_stdlib.h"
+
 AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false)
 {
 	type = ComponentType::ANIMATION;
@@ -61,7 +63,8 @@ void AnimationComponent::OnEditor()
 			{
 				AnimState* currState = &animations[i];
 				ImGui::PushID((void*)currState->state.c_str());
-				ImGui::InputText("##State", &currState->state[0], 30);
+				ImGui::InputText("##State", &currState->state, 64);
+				unsigned int test = currState->state.size();
 				ImGui::SameLine();
 				if (ImGui::BeginCombo("##Animations", currState->anim ? currState->anim->GetName().c_str() : "None"))
 				{

@@ -15,6 +15,10 @@ uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
 
+const int MAX_BONES = 100;
+const int MAX_BONE_INFLUENCE = 4;
+uniform mat4 finalBonesMatrices[MAX_BONES];
+
 out vec3 vPosition;
 out vec3 vAmbientColor;
 out vec2 vTexCoords;
@@ -25,7 +29,27 @@ out vec4 vb;
 
 void main()
 {
-	gl_Position = projection * view * model * vec4(position, 1);
+	vec4 totalPosition = vec4(0.0f);
+    for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
+    {
+        int currentBoneId = int(boneIds[i]);
+
+        if (currentBoneId == -1)
+            continue;
+        if (currentBoneId >= MAX_BONES)
+        {
+            totalPosition = vec4(position, 1.0f);
+            break;
+        }
+        vec4 localPosition = finalBonesMatrices[currentBoneId] * vec4(position, 1.0f);
+        totalPosition += localPosition * weights[i];
+        vec3 localNormal = mat3(finalBonesMatrices[currentBoneId]) * normal;
+    }
+
+    if (totalPosition == vec4(0.0f))
+        totalPosition = vec4(position, 1.0f);
+
+    gl_Position = projection * view * model * totalPosition;
 
 	vTexCoords = texCoords;
 	vPosition = vec3(model * vec4(position, 1));
