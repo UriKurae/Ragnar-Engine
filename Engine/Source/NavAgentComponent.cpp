@@ -80,6 +80,9 @@ void NavAgentComponent::OnEditor()
 bool NavAgentComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
+	properties.speed = node.GetJsonNumber("Speed");
+	properties.angularSpeed = node.GetJsonNumber("Angular Speed");
+	properties.stoppingDistance = node.GetJsonNumber("Stopping Distance");
 
 	return true;
 }
@@ -89,6 +92,10 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Speed", (float)properties.speed);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Angular Speed", (float)properties.angularSpeed);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Stopping Distance", (float)properties.stoppingDistance);
 
 	node.SetValueToArray(array, file.GetRootValue());
 	
