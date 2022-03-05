@@ -44,6 +44,7 @@ public:
 	bool playing;
 
 	float currentTime;
+	float loopTime;
 	float deltaTime;
 
 	std::vector<float4x4> finalBoneMatrices;

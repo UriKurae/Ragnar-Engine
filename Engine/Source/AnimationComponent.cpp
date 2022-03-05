@@ -8,7 +8,7 @@
 
 #include "Imgui/imgui_stdlib.h"
 
-AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false)
+AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
@@ -171,11 +171,20 @@ bool AnimationComponent::Update(float dt)
 	deltaTime = dt;
 	if (currAnim && playing)
 	{
-		if (currentTime > currAnim->anim->GetTicks())
+		// Loop time keeps track of the miliseconds that passed since the start of the animation
+		// GetDuration gets the duration of the animation in miliseconds
+		if (loopTime > currAnim->anim->GetDuration())
 		{
-			if (currAnim->loop) currentTime = 0.0f;
-			else playing = false;
+			// When it reaches the desired duration, we reset everything
+			if (currAnim->loop) loopTime = 0.0f;
+			else
+			{
+				loopTime = 0.0f;
+				playing = false;
+			}
 		}
+		// Loop time increases by our delta time
+		loopTime += dt;
 		currentTime += currAnim->anim->GetTicksPerSecond() * dt;
 		currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
