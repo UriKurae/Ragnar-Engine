@@ -45,6 +45,8 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	blending = false;
 	wireMode = false;
 	vsync = false;
+	rayCast = false;
+	navMesh = false;
 }
 
 // Destructor

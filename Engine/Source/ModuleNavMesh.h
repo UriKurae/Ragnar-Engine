@@ -78,7 +78,7 @@ struct Pathfinder
 
 class ModuleNavMesh : public Module {
 public:
-	ModuleNavMesh(Application* app, bool start_enabled = true);
+	ModuleNavMesh(bool start_enabled = true);
 	~ModuleNavMesh();
 
 	bool Start() override;

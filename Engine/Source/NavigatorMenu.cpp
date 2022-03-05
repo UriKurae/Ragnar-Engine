@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "NavigatorMenu.h"
 #include "ModuleScene.h"
+#include "ModuleNavMesh.h"
 
 #include "IconsFontAwesome5.h"
 
@@ -19,7 +20,7 @@ bool NavigatorMenu::Update(float dt)
 	ImGui::Begin(ICON_FA_WALKING" Navigator", &active);
 	if (ImGui::Button("Bake"))
 	{
-
+		app->navMesh->BakeNavMesh();
 	}
 
 	ImGui::Text("Agent Properties");

@@ -74,11 +74,17 @@ struct BuildSettings
 	float tileSize;
 };
 
+struct SimpleMesh
+{
+	std::vector<float3> vertices;
+	std::vector<unsigned int> indices;
+};
+
 class InputGeom
 {
 private:
 	rcChunkyTriMesh* m_chunkyMesh;
-	Mesh* m_mesh;
+	SimpleMesh* m_mesh;
 	BuildSettings m_buildSettings;
 	bool m_hasBuildSettings;
 	
@@ -108,18 +114,16 @@ public:
 	InputGeom();
 	~InputGeom();
 
-	void SetMesh(Mesh* newMesh);
+	void SetMesh();
 	bool loadMesh(Mesh* mesh);
 	bool AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform);
 	void MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_transform);
 
-#ifndef STANDALONE
 	void DrawMesh();
-#endif // !STANDALONE
 
 
 	/// Method to return static mesh data.
-	Mesh* getMesh() const { return m_mesh; }
+	SimpleMesh* getMesh() const { return m_mesh; }
 	const float* getMeshBoundsMin() const { return m_meshBMin; }
 	const float* getMeshBoundsMax() const { return m_meshBMax; }
 	const float* getNavMeshBoundsMin() const { return m_hasBuildSettings ? m_buildSettings.navMeshBMin : m_meshBMin; }

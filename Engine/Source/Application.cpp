@@ -7,6 +7,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "Physics3D.h"
+#include "ModuleNavMesh.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
@@ -23,6 +24,7 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	editor = new ModuleEditor();
+	navMesh = new ModuleNavMesh();
 
 	fs = new FileSystem(RESOURCES_FOLDER);
 
@@ -36,6 +38,7 @@ Application::Application()
 	AddModule(physics);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(navMesh);
 	
 	// Scenes
 	AddModule(scene);

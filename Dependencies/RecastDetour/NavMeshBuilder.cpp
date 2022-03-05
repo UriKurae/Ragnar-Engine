@@ -197,17 +197,17 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 
 	CleanUp();
 
-	float* verts = new float[m_geom->getMesh()->GetVerticesSize() * 3];
-	const std::vector<Vertex>& meshVertices = m_geom->getMesh()->GetVerticesVector();
-	for (int i = 0; i < m_geom->getMesh()->GetVerticesSize(); i++)
+	float* verts = new float[m_geom->getMesh()->vertices.size() * 3];
+	const std::vector<float3>& meshVertices = m_geom->getMesh()->vertices;
+	for (int i = 0; i < m_geom->getMesh()->vertices.size(); i++)
 	{
-		verts[i * 3] = meshVertices[i].position.x;
-		verts[i * 3 + 1] = meshVertices[i].position.y;
-		verts[i * 3 + 2] = meshVertices[i].position.z;
+		verts[i * 3] = meshVertices[i].x;
+		verts[i * 3 + 1] = meshVertices[i].y;
+		verts[i * 3 + 2] = meshVertices[i].z;
 	}
 
-	const int nverts = m_geom->getMesh()->GetVerticesSize();
-	const int ntris = m_geom->getMesh()->GetIndicesSize() / 3;
+	const int nverts = m_geom->getMesh()->vertices.size();
+	const int ntris = m_geom->getMesh()->indices.size() / 3;
 	const rcChunkyTriMesh* chunkyMesh = m_geom->getChunkyMesh();
 
 	// Init build configuration from GUI
@@ -318,6 +318,7 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 	}
 
 
+	delete verts;
 	delete[] m_triareas;
 	m_triareas = 0;
 
@@ -616,8 +617,6 @@ void NavMeshBuilder::HandleSettings()
 	}
 }
 
-
-#ifndef STANDALONE
 void NavMeshBuilder::DebugDraw()
 {
 	if (m_geom != nullptr)
@@ -643,13 +642,13 @@ void NavMeshBuilder::DrawBoundaries(float minx, float miny, float minz, float ma
 	//app->renderer3D->AddDebugLines(float3(maxx, miny, minz), float3(maxx, miny, maxz), float3(1.0f, 1.0f, 1.0f));
 	//app->renderer3D->AddDebugLines(float3(maxx, miny, maxz), float3(minx, miny, maxz), float3(1.0f, 1.0f, 1.0f));
 	//app->renderer3D->AddDebugLines(float3(minx, miny, maxz), float3(minx, miny, minz), float3(1.0f, 1.0f, 1.0f));
-	
+	//
 	////Bottom	
 	//app->renderer3D->AddDebugLines(float3(minx, maxy, minz), float3(maxx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
 	//app->renderer3D->AddDebugLines(float3(maxx, maxy, minz), float3(maxx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
 	//app->renderer3D->AddDebugLines(float3(maxx, maxy, maxz), float3(minx, maxy, maxz), float3(1.0f, 1.0f, 1.0f));
 	//app->renderer3D->AddDebugLines(float3(minx, maxy, maxz), float3(minx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
-	
+	//
 	////Sides		
 	//app->renderer3D->AddDebugLines(float3(minx, miny, minz), float3(minx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
 	//app->renderer3D->AddDebugLines(float3(maxx, miny, minz), float3(maxx, maxy, minz), float3(1.0f, 1.0f, 1.0f));
@@ -671,8 +670,8 @@ void NavMeshBuilder::OnEditor()
 		}
 
 		//ImGui::SameLine();
-		ImGui::Text("Verts: %d", m_geom->getMesh()->GetVerticesSize());
-		ImGui::Text("Indices: %d", m_geom->getMesh()->GetIndicesSize());
+		ImGui::Text("Verts: %d", m_geom->getMesh()->vertices.size());
+		ImGui::Text("Indices: %d", m_geom->getMesh()->indices.size());
 
 		ImGui::Spacing();
 		ImGui::Separator();
@@ -696,7 +695,6 @@ void NavMeshBuilder::OnEditor()
 		//ImGui::Text(": %i", m_cellSize);
 	}
 }
-#endif // !STANDALONE
 
 dtNavMesh* NavMeshBuilder::GetNavMesh() { return m_navMesh; }
 

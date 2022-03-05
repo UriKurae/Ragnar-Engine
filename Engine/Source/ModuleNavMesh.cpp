@@ -30,13 +30,13 @@
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 
-ModuleNavMesh::ModuleNavMesh(Application* app, bool start_enabled) : Module(start_enabled),
+ModuleNavMesh::ModuleNavMesh(bool start_enabled) : Module(start_enabled),
 geometry(nullptr), navMeshBuilder(nullptr), walkabilityPoint(nullptr), debugDraw(false),
 randomPointSet(false), randomRadius(0.0f)
 {
 	name = "NavMesh";
 	geometry = new InputGeom();
-	geometry->SetMesh(nullptr);
+	geometry->SetMesh();
 	agents.push_back(NavAgent());
 
 	randomPoint = float3::inf;
@@ -102,6 +102,8 @@ bool ModuleNavMesh::Update(float dt)
 			randomPoint = FindRandomPointAround(pathfinder.startPosition, 5.0f);
 		}
 	}
+
+	if (app->renderer3D->navMesh) app->navMesh->navMeshBuilder->DebugDraw();
 
 	return true;
 }
@@ -236,9 +238,7 @@ void ModuleNavMesh::ClearNavMeshes()
 	CleanUp();
 
 	geometry = new InputGeom();
-	geometry->SetMesh(nullptr);
-
-	pathfinder;
+	geometry->SetMesh();
 }
 
 bool ModuleNavMesh::IsWalkable(float x, float z, float3& hitPoint)
@@ -285,6 +285,11 @@ void ModuleNavMesh::BakeNavMesh()
 		if (gameObjects[i]->staticObj)
 		{
 			AddGameObjectToNavMesh(gameObjects[i]);
+		}
+
+		for (size_t j = 0; j < gameObjects[i]->GetChilds().size(); j++)
+		{
+			gameObjects.push_back(gameObjects[i]->GetChilds()[j]);
 		}
 	}
 

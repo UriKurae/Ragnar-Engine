@@ -16,6 +16,7 @@ class ModuleCamera3D;
 class ModuleEditor;
 class FileSystem;
 class Physics3D;
+class ModuleNavMesh;
 
 #define CONFIG_FILENAME	"config.json"
 #define APPLICATION_NAME "Ragnar Engine"
@@ -62,6 +63,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
 	ModuleScene* scene;
+	ModuleNavMesh* navMesh;
 	FileSystem* fs;
 
 	JsonParsing jsonFile;

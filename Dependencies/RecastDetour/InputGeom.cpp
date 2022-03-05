@@ -29,7 +29,9 @@
 #include "DebugUtils/RecastDebugDraw.h"
 #include "Detour/DetourNavMesh.h"
 #include "Math/float4x4.h"
+#include "ModuleRenderer3D.h"
 
+#include "Application.h"
 #include "Mesh.h"
 #include "Globals.h"
 #include "ResourceManager.h"
@@ -112,7 +114,7 @@ static char* parseRow(char* buf, char* bufEnd, char* row, int len)
 
 InputGeom::InputGeom() :
 	m_chunkyMesh(nullptr),
-	m_mesh(nullptr),
+	m_mesh(),
 	m_hasBuildSettings(false),
 	m_offMeshConCount(0),
 	m_volumeCount(0)
@@ -129,7 +131,8 @@ InputGeom::~InputGeom()
 
 	if (m_mesh != nullptr)
 	{
-		m_mesh->UnLoad();
+		m_mesh->vertices.clear();
+		m_mesh->indices.clear();
 
 		delete m_mesh;
 		m_mesh = nullptr;
@@ -156,9 +159,9 @@ bool InputGeom::loadMesh(Mesh* mesh)
 		vertices[i * 3]		= meshVertices[i].position.x;
 		vertices[i * 3 + 1] = meshVertices[i].position.y;
 		vertices[i * 3 + 2] = meshVertices[i].position.z;
-	}
 
-	m_mesh = mesh;
+		m_mesh->vertices[i] = mesh->GetVerticesVector()[i].position;
+	}
 
 	rcCalcBounds(vertices, mesh->GetVerticesSize(), m_meshBMin, m_meshBMax);
 
@@ -169,7 +172,7 @@ bool InputGeom::loadMesh(Mesh* mesh)
 		return false;
 	}
 
-	if (!rcCreateChunkyTriMesh(vertices, (int*)&mesh->GetIndicesVector()[0], m_mesh->GetIndicesSize() / 3, 256, m_chunkyMesh))
+	if (!rcCreateChunkyTriMesh(vertices, (int*)&mesh->GetIndicesVector()[0], m_mesh->indices.size() / 3, 256, m_chunkyMesh))
 	{
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Failed to build chunky mesh.");
 		RELEASE_ARRAY(vertices);
@@ -192,16 +195,16 @@ bool InputGeom::AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform)
 
 	MergeToMesh(mesh, new_mesh_transform);
 
-	float* vertices = new float[m_mesh->GetVerticesSize() * 3];
-	const std::vector<Vertex>& meshVertices = mesh->GetVerticesVector();
-	for (int i = 0; i < m_mesh->GetVerticesSize(); i++)
+	float* vertices = new float[m_mesh->vertices.size() * 3];
+	const std::vector<float3>& meshVertices = m_mesh->vertices;
+	for (int i = 0; i < m_mesh->vertices.size(); i++)
 	{
-		vertices[i * 3] = meshVertices[i].position.x;
-		vertices[i * 3 + 1] = meshVertices[i].position.y;
-		vertices[i * 3 + 2] = meshVertices[i].position.z;
+		vertices[i * 3] = meshVertices[i].x;
+		vertices[i * 3 + 1] = meshVertices[i].y;
+		vertices[i * 3 + 2] = meshVertices[i].z;
 	}
 
-	rcCalcBounds(vertices, m_mesh->GetVerticesSize(), m_meshBMin, m_meshBMax);
+	rcCalcBounds(vertices, m_mesh->vertices.size(), m_meshBMin, m_meshBMax);
 
 	m_chunkyMesh = new rcChunkyTriMesh();
 	if (!m_chunkyMesh)
@@ -209,107 +212,77 @@ bool InputGeom::AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform)
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Out of memory 'm_chunkyMesh'.");
 		return false;
 	}
-	if (!rcCreateChunkyTriMesh(vertices, (int*)&mesh->GetIndicesVector()[0], m_mesh->GetIndicesSize() / 3, 256, m_chunkyMesh))
+	if (!rcCreateChunkyTriMesh(vertices, (int*)&m_mesh->indices[0], m_mesh->indices.size() / 3, 256, m_chunkyMesh))
 	{
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Failed to build chunky mesh.");
 		//RELEASE_ARRAY(vertices);
 		return false;
 	}
 
+	delete vertices;
+
 	return true;
 }
 
-void InputGeom::SetMesh(Mesh* newMesh)
+void InputGeom::SetMesh()
 {
-	m_mesh = newMesh;
+	m_mesh = new SimpleMesh();
 }
 
 void InputGeom::MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_transform)
 {
 	// Vertex Merging =====================================================================
-	int total_vertices = m_mesh->GetVerticesSize() + new_mesh->GetVerticesSize();
-	float* merged_vertices = new float[total_vertices * 3];
+	int total_vertices = m_mesh->vertices.size() + new_mesh->GetVerticesSize();
+	std::vector<float3> merged_vertices;
 
-	int indices_offset = m_mesh->GetVerticesSize();
+	int indices_offset = m_mesh->vertices.size();
 
-	const std::vector<Vertex>& meshVertices = m_mesh->GetVerticesVector();
-	for (int i = 0; i < m_mesh->GetVerticesSize(); i++)
-	{
-		merged_vertices[i * 3]	   = meshVertices[i].position.x;
-		merged_vertices[i * 3 + 1] = meshVertices[i].position.y;
-		merged_vertices[i * 3 + 2] = meshVertices[i].position.z;
-	}
+	merged_vertices = m_mesh->vertices;
 
-	float* new_mesh_vertices = new float[new_mesh->GetVerticesSize() * 3];
-	const std::vector<Vertex>& new_meshVertices = m_mesh->GetVerticesVector();
+	std::vector<float3> new_mesh_vertices;
 	for (int i = 0; i < new_mesh->GetVerticesSize(); i++)
-	{
-		new_mesh_vertices[i * 3] = new_meshVertices[i].position.x;
-		new_mesh_vertices[i * 3 + 1] = new_meshVertices[i].position.y;
-		new_mesh_vertices[i * 3 + 2] = new_meshVertices[i].position.z;
-	}
+		new_mesh_vertices.push_back(new_mesh->GetVerticesVector()[i].position);
 
-	int index = m_mesh->GetVerticesSize();
 	for (size_t i = 0; i < new_mesh->GetVerticesSize(); i++)
 	{
-		float3 vertex = { new_mesh_vertices[i * 3],	new_mesh_vertices[i * 3 + 1], new_mesh_vertices[i * 3 + 2] };
-
-		vertex = new_mesh_transform.MulPos(vertex);
-
-		merged_vertices[index * 3]     =  vertex.x;
-		merged_vertices[index * 3 + 1] =  vertex.y;
-		merged_vertices[index * 3 + 2] =  vertex.z;
-		index++;
+		float3 vertex = new_mesh_transform.MulPos(new_mesh_vertices[i]);
+		merged_vertices.push_back(vertex);
 	}
 
-	//std::vector<Vertex>& a_mesh = m_mesh->GetVerticesVector();
-	//for (int i = 0; i < new_mesh->GetVerticesSize(); i++)
-	//{
-	//	a_mesh[i].position.x = merged_vertices[i * 3];
-	//	a_mesh[i].position.y = merged_vertices[i * 3];
-	//	a_mesh[i].position.z = merged_vertices[i * 3];
-	//}
+	new_mesh_vertices.clear();
+	m_mesh->vertices.clear();
+
+	m_mesh->vertices = merged_vertices;
 
 	//Indices Merging =====================================================================
 
-	int total_indices = m_mesh->GetIndicesSize() + new_mesh->GetIndicesSize();
-	uint* merged_indices = new uint[total_indices];
+	int total_indices = m_mesh->indices.size() + new_mesh->GetIndicesSize();
+	std::vector<unsigned int> merged_indices;
 
-	index = 0;
-	for (size_t i = 0; i < m_mesh->GetIndicesSize(); i++)
-	{
-		merged_indices[i] = m_mesh->GetIndicesVector()[i];
-		index++;
-	}
+	merged_indices = m_mesh->indices;
 
 	for (size_t i = 0; i < new_mesh->GetIndicesSize(); i++)
-	{
-		merged_indices[index + i] = new_mesh->GetIndicesVector()[i] + indices_offset;
-	}
+		merged_indices.push_back(new_mesh->GetIndicesVector()[i] + indices_offset);
 
-	RELEASE_ARRAY(new_mesh_vertices);
-	m_mesh->UnLoad();
+	m_mesh->indices.clear();
 
-	m_mesh->SetVariables(merged_vertices, total_vertices, merged_indices, total_indices);
+	m_mesh->indices = merged_indices;
 }
 
-#ifndef STANDALONE
 void InputGeom::DrawMesh()
 {
 	if (m_mesh != nullptr)
 	{
-		const std::vector<Vertex>& meshVertices = m_mesh->GetVerticesVector();
-		for (size_t i = 0; i < m_mesh->GetVerticesSize(); i+= 3)
+		for (size_t i = 0; i < m_mesh->vertices.size() / 3; i += 3)
 		{
-			float3 a = meshVertices[i].position;
-			float3 b = meshVertices[i + 1].position;
-			float3 c = meshVertices[i + 2].position;
+			float3 a = float3(m_mesh->vertices[i]);
+			float3 b = float3(m_mesh->vertices[i + 1]);
+			float3 c = float3(m_mesh->vertices[i + 2]);
 
-			//EngineExternal->moduleRenderer3D->AddDebugTriangles(a, b ,c, float3(0.1, 0.75, 0.5));
+			//app->renderer3D->AddDebugTriangles(a, b, c, float3(0.1, 0.75, 0.5));
 		}
 	}
 }
-#endif
 
 static bool isectSegAABB(const float* sp, const float* sq,
 						 const float* amin, const float* amax,
@@ -372,13 +345,13 @@ bool InputGeom::raycastMesh(float* src, float* dst, float& tmin)
 	
 	tmin = 1.0f;
 	bool hit = false;
-	float* verts = new float[m_mesh->GetVerticesSize() * 3];
-	const std::vector<Vertex>& meshVertices = m_mesh->GetVerticesVector();
-	for (int i = 0; i < m_mesh->GetVerticesSize(); i++)
+	float* verts = new float[m_mesh->vertices.size() * 3];
+	const std::vector<float3>& meshVertices = m_mesh->vertices;
+	for (int i = 0; i < m_mesh->vertices.size(); i++)
 	{
-		verts[i * 3] = meshVertices[i].position.x;
-		verts[i * 3 + 1] = meshVertices[i].position.y;
-		verts[i * 3 + 2] = meshVertices[i].position.z;
+		verts[i * 3] = meshVertices[i].x;
+		verts[i * 3 + 1] = meshVertices[i].y;
+		verts[i * 3 + 2] = meshVertices[i].z;
 	}
 	
 	for (int i = 0; i < ncid; ++i)
