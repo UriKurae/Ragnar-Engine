@@ -7,6 +7,8 @@
 
 #include "Particle.h"
 
+#include <array>
+
 #define INSTANCE_DATA_LENGHT 20
 
 class Shader;
@@ -46,6 +48,7 @@ public:
 
 protected:
 	void AddInstancedAttribute(unsigned int vao, unsigned int vbo, int attributeIndex, int dataSize, int instancedDataLength, int offset);
+	void ShowTextureMenu();
 
 	void StartBatch();
 	void NextBatch();
@@ -76,10 +79,13 @@ private:
 		unsigned int maxQuads;
 		unsigned int maxVertices;
 		unsigned int maxIndices;
+		//unsigned int maxTextureSlots = 32;
 
 		VertexArray* vertexArray;
 		VertexBuffer* vertexBuffer;
 		IndexBuffer* indexBuffer;
+		//std::array<std::shared_ptr<Texture>, 32> texture; // 32 == textureSlots
+		//unsigned int textureSlotIndex = 1;
 
 		std::shared_ptr<Shader> shader;
 
@@ -103,12 +109,11 @@ private:
 	LCG random;
 
 	ParticleProps particleProps;
-
+	std::shared_ptr<Texture> texture;
 	//unsigned int VAO;
 	//unsigned int instanceVBO;
 	//unsigned int vertexVBO;
 
-	
 };
 
 const float particleVertices[] = {

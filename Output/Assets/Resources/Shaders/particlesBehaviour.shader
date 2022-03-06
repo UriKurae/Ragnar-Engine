@@ -9,12 +9,14 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+out vec2 vTexCoords;
 out vec4 vColor;
 
 void main()
 {
-	gl_Position = projection * view * vec4(position, 1.0f);
+	gl_Position = projection * view * model * vec4(position, 1.0f);
 	vColor = color;
+	vTexCoords = texCoords;
 }
 
 #type fragment
@@ -22,10 +24,12 @@ void main()
 
 layout(location = 0) out vec4 fragColor;
 
+uniform sampler2D tex;
+
+in vec2 vTexCoords;
 in vec4 vColor;
 
 void main()
 {
-	fragColor = vColor;
-	//fragColor = vec4(1, 0, 0, 1);
+	fragColor = texture(tex, vTexCoords) * vColor;
 }

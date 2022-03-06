@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "FileSystem.h"
 
 #include "ParticleEmitter.h"
 
@@ -46,6 +47,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particleProps.acceleration = { 0.0f, 5.0f, 0.0f };
 	particleProps.position = { 0.0f, 0.0f, 0.0f };
 
+
 	data.vertexArray = nullptr;
 	data.vertexBuffer = nullptr;
 	data.indexBuffer = nullptr;
@@ -58,7 +60,11 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	data.vertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
 	data.vertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 
+	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
+
 	data.drawCalls = 0;
+
+	showTexMenu = false;
 }
 
 ParticleEmitter::~ParticleEmitter()
@@ -70,25 +76,31 @@ ParticleEmitter::~ParticleEmitter()
 
 void ParticleEmitter::Emit(float dt)
 {
-	Particle& particle = particlePool[poolIndex];
-	particle.active = true;
+	currTimer -= dt;
+	if (currTimer <= 0.0f)
+	{
+		Particle& particle = particlePool[poolIndex];
+		particle.active = true;
 
-	particle.position = particleProps.position;
-	particle.rotation = random.Float() * 2 * pi;
+		particle.position = particleProps.position;
+		particle.rotation = particleProps.deltaRotation + random.Float() * 2 * pi;
 
-	particle.velocity = particleProps.velocity;
-	particle.velocity.x += particleProps.acceleration.x * (random.Float() - 0.5f);
-	particle.velocity.y += particleProps.acceleration.y * (random.Float() - 0.5f);
+		particle.velocity = particleProps.velocity;
+		particle.velocity.x += particleProps.acceleration.x * (random.Float() - 0.5f);
+		particle.velocity.y += particleProps.acceleration.y * (random.Float() - 0.5f);
 
-	particle.colorBegin = particleProps.colorBegin;
-	particle.colorEnd = particleProps.colorEnd;
+		particle.colorBegin = particleProps.colorBegin;
+		particle.colorEnd = particleProps.colorEnd;
 
-	particle.lifeTime = particleProps.lifeTime;
-	particle.lifeRemaining = particleProps.lifeTime;
-	particle.sizeBegin = particleProps.sizeBegin + particleProps.sizeVariation * (random.Float() - 0.5f);
-	particle.sizeEnd = particleProps.sizeEnd;
+		particle.lifeTime = particleProps.lifeTime;
+		particle.lifeRemaining = particleProps.lifeTime;
+		particle.sizeBegin = particleProps.sizeBegin + particleProps.sizeVariation * (random.Float() - 0.5f);
+		particle.sizeEnd = particleProps.sizeEnd;
 
-	poolIndex = --poolIndex % particlePool.size();
+		poolIndex = --poolIndex % particlePool.size();
+
+		currTimer = timer;
+	}
 
 	//currTimer -= dt;
 	//if (currTimer <= 0.0f) {
@@ -135,6 +147,8 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	if (data.indexCount >= data.maxIndices)
 		NextBatch();
 
+	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+
 	Quat q;
 	q.SetFromAxisAngle({ 0,0,1 }, rotation);
 	float4x4 transform = float4x4::FromTRS(pos, q, size);
@@ -144,9 +158,8 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	{
 		float4 p = transform * data.vertexPositions[i];
 		data.vertexBufferPtr->position = p.Float3Part();
+		data.vertexBufferPtr->texCoords = texCoords[i];
 		data.vertexBufferPtr->color = color;
-		// TODO: Tex coords
-		data.vertexBufferPtr->texCoords = float2::zero;
 
 		data.vertexBufferPtr++;
 	}
@@ -245,17 +258,23 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 
 		data.vertexArray->Bind();
 
+		texture->Bind();
 		data.shader->Bind();
 		data.shader->SetUniformMatrix4f("view", view.Transposed());
 		data.shader->SetUniformMatrix4f("projection", proj.Transposed());
+		TransformComponent* tr = own->GetComponent<TransformComponent>();
+		data.shader->SetUniformMatrix4f("model", tr->GetGlobalTransform().Transposed());
+
+		//for (int i = 0; i < data.textureSlots; ++i)
+		//	data.textureSlots[i]->;
 
 		data.vertexBuffer->Bind();
 		data.indexBuffer->Bind();
 		glDrawElements(GL_TRIANGLES, data.indexCount, GL_UNSIGNED_INT, 0);
 		data.indexBuffer->Unbind();
-		data.vertexBuffer->Unbind();
 		data.shader->Unbind();
 		data.vertexArray->Unbind();
+		texture->Unbind();
 
 		data.drawCalls++;
 	}
@@ -283,10 +302,7 @@ void ParticleEmitter::Update(float dt)
 
 		particle.lifeRemaining -= dt;
 		particle.position += particle.velocity * dt;
-		particle.rotation += 0.001 * dt;
-
-		int a = 0;
-		a += 2;
+		particle.rotation += particleProps.deltaRotation * dt;
 	}
 }
 
@@ -319,11 +335,8 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::Separator();
 		ImGui::Indent();
 
-		guiName = "Particle min lifetime" + suffixLabel;
-		ImGui::DragFloat(guiName.c_str(), &minLifeTime, 0.1f, 0.0f, 10.0f);
-
-		guiName = "Particle max lifetime" + suffixLabel;
-		ImGui::DragFloat(guiName.c_str(), &maxLifeTime, 0.1f, 0.0f, 10.0f);
+		//guiName = "Particle max lifetime" + suffixLabel;
+		//ImGui::DragFloat(guiName.c_str(), &maxLifeTime, 0.1f, 0.0f, 10.0f);
 
 		//particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
 
@@ -340,28 +353,28 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//float size[2] = { particleReference->size.x, particleReference->size.y };
 
 		//guiName = "Size" + suffixLabel;
-		if (ImGui::DragFloat("Beginning Size", &particleProps.sizeBegin, 0.001f, 0.0f))
-			//{
-			//	particleReference->size.x = size[0];
-			//	particleReference->size.y = size[1];
-			//}
 
-		//float color[4] = { particleReference->color.r, particleReference->color.g, particleReference->color.b, particleReference->color.a };
+		guiName = "Particle lifetime" + suffixLabel;
+		ImGui::DragFloat(guiName.c_str(), &particleProps.lifeTime, 0.01f, 0.0f, 10.0f);
 
+		ImGui::DragFloat("Beginning Size", &particleProps.sizeBegin, 0.001f, 0.0f);
+
+		ImGui::DragFloat("Rotation Amount", &particleProps.deltaRotation, 0.01f);
+	
 		guiName = "Color (RGBA)" + suffixLabel;
 		ImGui::ColorEdit4("Beginning Color", particleProps.colorBegin.ptr());
-		//if (ImGui::ColorPicker3(guiName.c_str(), color))
-		//{
-		//	particleReference->color.r = color[0];
-		//	particleReference->color.g = color[1];
-		//	particleReference->color.b = color[2];
-		//	particleReference->color.a = color[3];
-		//}
+
 		ImGui::ColorEdit4("Ending Color", particleProps.colorEnd.ptr());
 
 		ImGui::Indent();
 
 		ImGui::Text("Texture");
+		if (ImGui::ImageButton((void*)texture->GetId(), { 150,150 }))
+			showTexMenu = true;
+
+
+		if (showTexMenu)
+			ShowTextureMenu();
 
 		//if (particleReference->tex != nullptr)
 		//{
@@ -558,6 +571,41 @@ void ParticleEmitter::AddInstancedAttribute(unsigned int vao, unsigned int vbo, 
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+void ParticleEmitter::ShowTextureMenu()
+{
+	ImGui::Begin("Change Texture", &showTexMenu);
+
+	ImVec2 winPos = ImGui::GetWindowPos();
+	ImVec2 size = ImGui::GetWindowSize();
+	ImVec2 mouse = ImGui::GetIO().MousePos;
+	if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+		mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+	{
+		if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
+	}
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Library/Textures/", files);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		if ((*it).find(".rgtexture") != std::string::npos)
+		{
+			app->fs->GetFilenameWithoutExtension(*it);
+			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+			uint uid = std::stoll(*it);
+			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
+			if (ImGui::Selectable(res->GetName().c_str()))
+			{
+				res->Load();
+				if (texture.use_count() - 1 == 1) texture->UnLoad();
+				texture = std::static_pointer_cast<Texture>(res);
+			}
+		}
+	}
+
+	ImGui::End();
 }
 
 void ParticleEmitter::StartBatch()
