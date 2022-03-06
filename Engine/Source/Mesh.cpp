@@ -31,7 +31,9 @@ void Mesh::Load()
 {
 	if (vertices.empty())
 	{
-		MeshImporter::LoadMesh(vertices, indices, libraryPath);
+		MeshImporter::LoadMesh(vertices, indices, bones, libraryPath);
+
+		numBones = bones.size();
 
 		vertexArray = new VertexArray();
 
@@ -39,7 +41,9 @@ void Mesh::Load()
 		vbo->SetLayout({
 			{ShaderDataType::VEC3F, "position"},
 			{ShaderDataType::VEC3F, "normal"},
-			{ShaderDataType::VEC2F, "texCoords"}
+			{ShaderDataType::VEC2F, "texCoords"},
+			{ShaderDataType::VEC4I, "boneIds"},
+			{ShaderDataType::VEC4F, "weights"}
 		});
 		vertexArray->AddVertexBuffer(*vbo);
 
@@ -165,8 +169,9 @@ void Mesh::Reimport(ModelParameters& data)
 	{
 		vertices.clear();
 		indices.clear();
+		bones.clear();
 		//texCoords.clear();
 		//normals.clear();
 	}
-	MeshImporter::LoadMesh(vertices, indices, libraryPath);
+	MeshImporter::LoadMesh(vertices, indices, bones, libraryPath);
 }

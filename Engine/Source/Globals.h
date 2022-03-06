@@ -33,6 +33,8 @@ void Log(const char file[], int line, const char* format, ...);
 #define SCRIPTS_FOLDER "Library/ScriptsAssembly/"
 #define SCRIPTS_ASSETS_FOLDER "Assets/Scripts/"
 #define SHADERS_FOLDER "Library/Shaders/"
+#define ANIMATIONS_FOLDER "Library/Animations/"
+#define BONES_FOLDER "Library/Bones/"
 #define SCENES_FOLDER "Assets/Scenes/"
 #define PREFABS_FOLDER "Assets/Prefabs/"
 

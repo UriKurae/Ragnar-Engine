@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans) : activeListener(true), transform(trans)
+ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans) : changePosition(true), activeListener(true), transform(trans)
 {
 	owner = own;
 	type = ComponentType::AUDIO_LISTENER;
@@ -42,14 +42,17 @@ void ListenerComponent::OnEditor()
 
 bool ListenerComponent::Update(float dt)
 {
-	float3 position = transform->GetPosition();
-	AkSoundPosition audioSourcePos;
-	float3 orientation = transform->GetRotation().ToEulerXYZ().Normalized();
-	//audioSourcePos.SetOrientation({ orientation.x, orientation.y, orientation.z }, { orientation.x, orientation.y, orientation.z });
-	audioSourcePos.SetOrientation({ 0,0,-1 }, {0,1,0 });
-	audioSourcePos.SetPosition(position.x, position.y, position.z);
-	AudioManager::Get()->SetPosition(owner->GetUUID(), audioSourcePos);
-	//DEBUG_LOG("Source: x %f, y %f, z %f", position.x, position.y, position.z);
+	if (changePosition)
+	{
+		float3 position = transform->GetPosition();
+		AkSoundPosition audioSourcePos;
+		float3 orientation = transform->GetRotation().ToEulerXYZ().Normalized();
+		audioSourcePos.SetOrientation({ 0,0,-1 }, { 0,1,0 });
+		audioSourcePos.SetPosition(position.x, position.y, position.z);
+		AudioManager::Get()->SetPosition(owner->GetUUID(), audioSourcePos);
+
+		changePosition = false;
+	}
 
 	return true;
 }

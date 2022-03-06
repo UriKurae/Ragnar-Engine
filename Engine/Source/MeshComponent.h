@@ -1,6 +1,9 @@
 #pragma once
+#include <map>
+
 #include "Component.h"
 #include "Geometry/AABB.h"
+#include "Bone.h"
 
 class TransformComponent;
 class MaterialComponent;
@@ -32,6 +35,7 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
+	const std::map<std::string, BoneInfo> GetBoneMap();
 
 private:
 	TransformComponent* transform;
@@ -44,6 +48,7 @@ private:
 	bool verticesNormals;
 
 	std::shared_ptr<Mesh> mesh;
+	std::vector<GameObject*> boneList;
 
 	AABB localBoundingBox;
 

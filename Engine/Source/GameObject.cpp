@@ -19,6 +19,7 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
+#include "AnimationComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
@@ -130,6 +131,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Animation Component"))
+		{
+			CreateComponent(ComponentType::ANIMATION);
+			newComponent = false;
+		}
 		if (ImGui::Selectable("Rigid Body"))
 		{
 			CreateComponent(ComponentType::RIGID_BODY);
@@ -218,6 +224,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::ANIMATION:
+		component = new AnimationComponent(this);
 		break;
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
@@ -310,6 +319,9 @@ void GameObject::CopyComponent(Component* component)
 		break;
 	case ComponentType::MESH_RENDERER:
 		c = new MeshComponent(dynamic_cast<MeshComponent*>(component), GetComponent<TransformComponent>());
+		break;
+	case ComponentType::ANIMATION:
+		c = new AnimationComponent(dynamic_cast<AnimationComponent*>(component));
 		break;
 	case ComponentType::MATERIAL:
 		c = new MaterialComponent(dynamic_cast<MaterialComponent*>(component));
