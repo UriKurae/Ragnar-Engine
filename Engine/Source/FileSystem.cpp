@@ -1,20 +1,17 @@
 #include "FileSystem.h"
 #include "Application.h"
 #include "Globals.h"
+
 #include "ModelImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
-#include "GameObject.h"
+#include "Resource.h"
 
 #include "assimp/cimport.h"
 #include "AssimpDefs.h"
 #include "IL/il.h"
-#include "Resource.h"
+#include "PhysFS/include/physfs.h"
+#include "SDL_filesystem.h"
 
-#include <vector>
 #include <stack>
-
-#include "SDL/include/SDL_filesystem.h"
 #include "Profiling.h"
 
 FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
@@ -39,7 +36,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -97,6 +94,12 @@ bool FileSystem::AddPath(const char* path)
 		ret = true;
 
 	return ret;
+}
+
+// Check if a file exists
+bool FileSystem::Exists(const char* file) const
+{
+	return PHYSFS_exists(file) != 0;
 }
 
 uint FileSystem::Load(const char* file, char** buffer)
@@ -160,6 +163,16 @@ uint FileSystem::Save(const char* file, const void* buffer, unsigned int size, b
 		DEBUG_LOG("File System error while opening file %s: %s", file, PHYSFS_getLastError());
 
 	return ret;
+}
+
+const char* FileSystem::GetBasePath() const
+{
+	return PHYSFS_getBaseDir();
+}
+
+const char* FileSystem::GetWritePath() const
+{
+	return PHYSFS_getWriteDir();
 }
 
 const char* FileSystem::GetReadPaths() const
@@ -303,13 +316,14 @@ void FileSystem::ImportFromOutside(std::string& source, std::string& destination
 	}
 }
 
-ResourceType FileSystem::CheckExtension(std::string& path)
+ResourceType FileSystem::CheckExtension(const std::string& path)
 {
 	std::string extension = path.substr(path.find_last_of(".", path.length()));
 	std::list<std::string>::iterator s;
 	std::list<std::string>::iterator end = modelExtension.end();
 
 	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
+	if (extension.data() == std::string(".cs")) return ResourceType::SCRIPT;
 	if (extension.data() == std::string(".shader")) return ResourceType::SHADER;
 
 
@@ -386,10 +400,57 @@ void FileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& d
 	PHYSFS_freeList(rc);
 }
 
+
+void FileSystem::SplitFilePath(const char* full_path, std::string* path, std::string* file, std::string* extension)
+{
+	if (full_path != nullptr)
+	{
+		std::string full(full_path);
+		NormalizePath(full);
+		size_t pos_separator = full.find_last_of("\\/");
+		size_t pos_dot = full.find_last_of(".");
+
+		if (path != nullptr)
+		{
+			if (pos_separator < full.length())
+				*path = full.substr(0, pos_separator + 1);
+			else
+				path->clear();
+		}
+
+		if (file != nullptr)
+		{
+			if (pos_separator < full.length())
+				*file = full.substr(pos_separator + 1);
+			else
+				*file = full;
+		}
+
+		if (extension != nullptr)
+		{
+			if (pos_dot < full.length())
+				*extension = full.substr(pos_dot + 1);
+			else
+				extension->clear();
+		}
+	}
+}
+
+const bool FileSystem::IsDirectory(const char* file) const
+{
+	return PHYSFS_isDirectory(file) != 0;
+}
+
 void FileSystem::NormalizePath(std::string& path)
 {
 	for (int i = 0; i < path.length(); ++i)
 		if (path[i] == '\\') path[i] = '/';
+}
+
+void FileSystem::UnNormalizePath(std::string& path)
+{
+	for (int i = 0; i < path.length(); ++i)
+		if (path[i] == '/') path[i] = '\\';
 }
 
 void FileSystem::GetRelativeDirectory(std::string& path)
@@ -420,6 +481,24 @@ void FileSystem::GetFilenameWithoutExtension(std::string& path)
 		path = path.substr(path.find_last_of("/") + 1, path.length());
 	}
 	path = path.substr(0, path.find_last_of("."));
+}
+
+std::string FileSystem::GetBaseFileNameWithExtension(const char* file_name)
+{
+	std::string name;
+	std::string hole_name(file_name);
+
+	std::string::const_reverse_iterator item = hole_name.crbegin();
+	for (; item != hole_name.crend(); ++item)
+	{
+		if (*item == '/') {
+			break;
+		}
+		else {
+			name = *item + name;
+		}
+	}
+	return name;
 }
 
 bool FileSystem::RemoveFile(const char* file)

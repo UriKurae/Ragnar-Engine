@@ -1,12 +1,8 @@
-#include "Globals.h"
 #include "ListenerComponent.h"
-#include "GameObject.h"
 #include "AudioManager.h"
+
+#include "GameObject.h"
 #include "TransformComponent.h"
-
-#include "IconsFontAwesome5.h"
-
-#include "Imgui/imgui_internal.h"
 
 ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans) : changePosition(true), activeListener(true), transform(trans)
 {
@@ -38,10 +34,7 @@ void ListenerComponent::OnEditor()
 		ImGui::SameLine();
 		ImGui::Text("Listen");
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 	ImGui::PopID();

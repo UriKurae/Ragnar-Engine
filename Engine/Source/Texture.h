@@ -1,7 +1,5 @@
 #pragma once
-
 #include "Resource.h"
-#include <string>
 
 typedef unsigned char GLubyte;
 

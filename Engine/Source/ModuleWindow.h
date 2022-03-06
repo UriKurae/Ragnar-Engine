@@ -1,10 +1,8 @@
-#ifndef __ModuleWindow_H__
-#define __ModuleWindow_H__
-
+#pragma once
 #include "Module.h"
-#include "SDL/include/SDL.h"
 
-class Application;
+typedef struct SDL_Window;
+typedef struct SDL_Surface;
 
 class ModuleWindow : public Module
 {
@@ -57,5 +55,3 @@ public:
 
 	float brightness;
 };
-
-#endif // __ModuleWindow_H__

@@ -1,26 +1,20 @@
 #include "MaterialComponent.h"
-
 #include "Application.h"
-#include "ModuleEditor.h"
+
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModuleScene.h"
-#include "GameObject.h"
-#include "ResourceManager.h"
-#include "Texture.h"
-#include "Viewport.h"
-#include <fstream>
 
-#include "CameraComponent.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
 #include "FileSystem.h"
+#include "ResourceManager.h"
+#include "Texture.h"
+#include "Lights.h"
 
-#include "Imgui/imgui.h"
-
-#include "IconsFontAwesome5.h"
-
+#include <fstream>
 #include "Profiling.h"
-
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 
@@ -76,6 +70,99 @@ MaterialComponent::~MaterialComponent()
 void MaterialComponent::OnEditor()
 {
 	ImGui::PushID(this);
+
+	if (showShaderEditor)
+	{
+		ImGui::Begin("Shader Editor", &showShaderEditor, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+		//Update
+		auto cpos = editor.GetCursorPosition();
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::Button("Save"))
+			{
+				std::string s = editor.GetText();
+
+				app->fs->RemoveFile(fileToEdit.c_str());
+				app->fs->Save(fileToEdit.c_str(), s.c_str(), editor.GetText().size());
+
+				shader->Refresh();
+
+			}
+			ImGui::EndMenuBar();
+		}
+
+		ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, editor.GetTotalLines(),
+			editor.IsOverwrite() ? "Ovr" : "Ins",
+			editor.CanUndo() ? "*" : " ",
+			editor.GetLanguageDefinition().mName.c_str(), fileToEdit.c_str());
+
+		editor.Render("TextEditor");
+		ImGui::End();
+	}
+
+	if (showTexMenu)
+	{
+		ImGui::Begin("Textures", &showTexMenu);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 size = ImGui::GetWindowSize();
+		ImVec2 mouse = ImGui::GetIO().MousePos;
+		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+		{
+			if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
+		}
+
+		std::vector<std::string> files;
+		app->fs->DiscoverFiles("Library/Textures/", files);
+		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+		{
+			if ((*it).find(".rgtexture") != std::string::npos)
+			{
+				app->fs->GetFilenameWithoutExtension(*it);
+				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+				uint uid = std::stoll(*it);
+				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
+				if (ImGui::Selectable(res->GetName().c_str()))
+				{
+					res->Load();
+					if (diff.use_count() - 1 == 1) diff->UnLoad();
+					SetTexture(res);
+				}
+			}
+		}
+
+		ImGui::End();
+	}
+
+	if (showShaderMenu)
+	{
+		ImGui::Begin("Shaders", &showShaderMenu);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 size = ImGui::GetWindowSize();
+		ImVec2 mouse = ImGui::GetIO().MousePos;
+		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+		{
+			if (ImGui::GetIO().MouseClicked[0]) showShaderMenu = false;
+		}
+
+		std::vector<std::string> files;
+		app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
+		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+		{
+			if ((*it).find(".shader") != std::string::npos)
+			{
+				if (ImGui::Selectable((*it).c_str()))
+				{
+					uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/" + *it), std::string());
+					shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(uid));
+					shader->SetUniforms(GetShaderUniforms());
+				}
+			}
+		}
+
+		ImGui::End();
+	}
 
 	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
 	{
@@ -142,107 +229,10 @@ void MaterialComponent::OnEditor()
 
 		ShowUniforms();
 
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
-
-	if (showShaderEditor)
-	{
-		ImGui::Begin("Shader Editor", &showShaderEditor, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
-		//Update
-		auto cpos = editor.GetCursorPosition();
-		if (ImGui::BeginMenuBar())
-		{
-			if (ImGui::Button("Save"))
-			{
-				std::string s = editor.GetText();
-
-				app->fs->RemoveFile(fileToEdit.c_str());
-				app->fs->Save(fileToEdit.c_str(), s.c_str(), editor.GetText().size());
-
-				shader->Refresh();
-
-			}
-			ImGui::EndMenuBar();
-		}
-
-		ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, editor.GetTotalLines(),
-			editor.IsOverwrite() ? "Ovr" : "Ins",
-			editor.CanUndo() ? "*" : " ",
-			editor.GetLanguageDefinition().mName.c_str(), fileToEdit.c_str());
-
-		editor.Render("TextEditor");
-		ImGui::End();
-	}
-
-	if (showTexMenu)
-	{
-		ImGui::Begin("Textures", &showTexMenu);
-		ImVec2 winPos = ImGui::GetWindowPos();
-		ImVec2 size = ImGui::GetWindowSize();
-		ImVec2 mouse = ImGui::GetIO().MousePos;
-		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
-			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-		{
-			if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
-		}
-
-		std::vector<std::string> files;
-		app->fs->DiscoverFiles("Library/Textures/", files);
-		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-		{
-			if ((*it).find(".rgtexture") != std::string::npos)
-			{
-				app->fs->GetFilenameWithoutExtension(*it);
-				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-				uint uid = std::stoll(*it);
-				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
-				if (ImGui::Selectable(res->GetName().c_str()))
-				{
-					res->Load();
-					if (diff.use_count() - 1 == 1) diff->UnLoad();
-					SetTexture(res);
-				}
-			}
-		}
-
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
-		ImGui::End();
-	}
-
-	if (showShaderMenu)
-	{
-		ImGui::Begin("Shaders", &showShaderMenu);
-		ImVec2 winPos = ImGui::GetWindowPos();
-		ImVec2 size = ImGui::GetWindowSize();
-		ImVec2 mouse = ImGui::GetIO().MousePos;
-		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
-			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-		{
-			if (ImGui::GetIO().MouseClicked[0]) showShaderMenu = false;
-		}
-
-		std::vector<std::string> files;
-		app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
-		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-		{
-			if ((*it).find(".shader") != std::string::npos)
-			{
-				if (ImGui::Selectable((*it).c_str()))
-				{
-					uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/" + *it), std::string());
-					shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(uid));
-					shader->SetUniforms(GetShaderUniforms());
-				}
-			}
-		}
-
-		ImGui::End();
-	}
-
-
+	
 	ImGui::PopID();
 }
 
@@ -303,10 +293,11 @@ std::vector<Uniform> MaterialComponent::GetShaderUniforms()
 				uniform.uniformType = UniformType::FLOAT_VEC4;
 				glGetUniformfv(shader->GetId(), uinformLoc, (GLfloat*)&uniform.vec4);
 				break;
-			case GL_FLOAT_MAT4:
-				uniform.uniformType = UniformType::MATRIX4;
-				glGetnUniformfv(shader->GetId(), uinformLoc, sizeof(uniform.matrix4), &uniform.matrix4.v[0][0]);
-				break;
+
+			//case GL_FLOAT_MAT4:
+			//	uniform.uniformType = UniformType::MATRIX4;
+			//	glGetnUniformfv(shader->GetId(), uinformLoc, sizeof(uniform.matrix4), &uniform.matrix4.v[0][0]);
+			//	break;
 
 			default: uniform.uniformType = UniformType::NONE; break;
 
@@ -358,6 +349,7 @@ bool MaterialComponent::OnLoad(JsonParsing& node)
 {
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
+	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 
 	return true;
 }
@@ -369,6 +361,7 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", diff->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	
 	node.SetValueToArray(array, file.GetRootValue());
 

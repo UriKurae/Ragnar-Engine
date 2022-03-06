@@ -1,18 +1,14 @@
 #pragma once
-
-#include <string>
 #include <map>
+#include <vector>
 
-#include "assimp/cimport.h"
-#include "assimp/Importer.hpp"
-#include "assimp/scene.h"
-#include "assimp/postProcess.h"
 #include "Bone.h"
-
 #include "JsonParsing.h"
 
 class GameObject;
 class ModelParameters;
+class aiScene;
+class aiNode;
 
 typedef unsigned int uint;
 

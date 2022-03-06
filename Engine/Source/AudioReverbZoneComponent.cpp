@@ -1,12 +1,13 @@
-#include "Globals.h"
 #include "AudioReverbZoneComponent.h"
-
-#include "GameObject.h"
+#include "Globals.h"
 #include "AudioManager.h"
 
-#include "IconsFontAwesome5.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
-#include <GL\glew.h>
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
 
 AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : changePosition(true), transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
 {
@@ -140,10 +141,7 @@ void AudioReverbZoneComponent::OnEditor()
 			CompileBuffers();
 		}
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 }

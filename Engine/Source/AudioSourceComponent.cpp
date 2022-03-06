@@ -1,15 +1,9 @@
-#include "Globals.h"
-
-#include "Application.h"
-#include "ModuleScene.h"
 #include "AudioSourceComponent.h"
+#include "Globals.h"
 #include "AudioManager.h"
-#include "TransformComponent.h"
+
 #include "GameObject.h"
-
-#include "IconsFontAwesome5.h"
-
-#include "Imgui/imgui.h"
+#include "TransformComponent.h"
 
 AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : changePosition(true), volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1)
 {
@@ -122,10 +116,7 @@ void AudioSourceComponent::OnEditor()
 			StopClip();
 		}
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 	ImGui::PopID();

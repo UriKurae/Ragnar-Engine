@@ -1,16 +1,12 @@
 #pragma once
-
 #include <string>
 #include <map>
-
-#include "MathGeoLib/src/Math/float2.h"
-#include "MathGeoLib/src/Math/float3.h"
+#include <vector>
 
 #include "assimp/mesh.h"
 #include "assimp/scene.h"
 
 class JsonParsing;
-class Mesh;
 struct Vertex;
 struct ModelParameters;
 struct BoneInfo;

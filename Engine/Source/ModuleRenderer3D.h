@@ -1,21 +1,20 @@
 #pragma once
 #include "Module.h"
 
-#include "Lights.h"
-
+#include "Shapes.h"
+#include "SDL_video.h"
 #include <vector>
-#include "Primitive.h"
-#include "glmath.h"
-#include "SDL.h"
 
 #define MAX_LIGHTS 8
-
-typedef unsigned int GLuint;
 
 class Framebuffer;
 class Material;
 class Shader;
 class GameObject;
+
+class PointLight;
+class SpotLight;
+class DirectionalLight;
 
 class ModuleRenderer3D : public Module
 {
@@ -80,7 +79,7 @@ private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 
 public:
-	PGrid* grid;
+	PPlane grid;
 
 	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

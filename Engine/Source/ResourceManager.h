@@ -1,6 +1,4 @@
 #pragma once
-
-#include "Globals.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -10,6 +8,7 @@ class Texture;
 class Mesh;
 class Resource;
 enum class ResourceType;
+typedef unsigned int uint;
 
 class ResourceManager
 {

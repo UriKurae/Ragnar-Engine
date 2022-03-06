@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 
 typedef unsigned int uint;
@@ -11,6 +10,7 @@ enum class ResourceType
 	MESH,
 	MODEL,
 	SCENE,
+	SCRIPT,
 	MATERIAL,
 	SHADER,
 	ANIMATION,

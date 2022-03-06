@@ -1,9 +1,8 @@
 #include "ShaderImporter.h"
+#include "Globals.h"
 
 #include "ResourceManager.h"
 #include "Resource.h"
-
-#include "Globals.h"
 
 uint ShaderImporter::SaveShader(std::string& assets, std::string& source)
 {

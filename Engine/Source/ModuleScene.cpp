@@ -1,20 +1,27 @@
 #include "ModuleScene.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
-#include "Globals.h"
 #include "ModuleEditor.h"
+#include "Physics3D.h"
+
 #include "Primitives.h"
 #include "MeshImporter.h"
 #include "FileSystem.h"
+
 #include "Resource.h"
 #include "ResourceManager.h"
-
+#include "MonoManager.h"
 #include "AudioManager.h"
 
-#include <stack>
+#include "ScriptComponent.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "AudioSourceComponent.h"
 
+#include <stack>
 #include "Profiling.h"
 
 ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
@@ -122,22 +129,25 @@ bool ModuleScene::Update(float dt)
 		resetQuadtree = false;
 	}
 	
-	if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+	if (gameState == GameState::PLAYING)
 	{
-		player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
-	{
-		player->GetComponent<AudioSourceComponent>()->StopClip();
-	}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+		{
+			player->GetComponent<AudioSourceComponent>()->StopClip();
+		}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-	{
-		player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
-	{
-		player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
@@ -171,7 +181,6 @@ bool ModuleScene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
-
 	qTree.DebugDraw();
 
 	std::stack<GameObject*> stack;
@@ -186,7 +195,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw(nullptr);
+			if (go != app->editor->GetGO()) go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -389,11 +398,33 @@ bool ModuleScene::LoadScene(const char* name)
 				}
 			}
 		}
+		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
+		{
+			// Get the range of the current key
+			auto range = referenceMap.equal_range(i->first);
+
+			// Now render out that whole range
+			for (auto d = range.first; d != range.second; ++d)
+			{
+				d->second->fiValue.goValue = GetGoByUuid(d->first);
+
+				if (d->second->fiValue.goValue)
+				{
+					if (std::find(d->second->fiValue.goValue->csReferences.begin(), d->second->fiValue.goValue->csReferences.end(), d->second) == d->second->fiValue.goValue->csReferences.end())
+						d->second->fiValue.goValue->csReferences.push_back(d->second);
+
+					d->second->parentSC->SetField(d->second->field, d->second->fiValue.goValue);
+				}
+			}
+		}
+		app->physics->LoadConstraints();
 	}
 	else
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
+
+	referenceMap.clear();
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();

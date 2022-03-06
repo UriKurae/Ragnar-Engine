@@ -1,5 +1,4 @@
 #pragma once
-
 #include "ShaderHelpers.h"
 
 #include <vector>

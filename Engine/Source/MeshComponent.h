@@ -1,17 +1,11 @@
 #pragma once
-
-#include "Component.h"
-#include "IndexBuffer.h"
-#include "VertexBuffer.h"
-#include "Bone.h"
-#include "MathGeoLib/src/MathGeoLib.h"
-
-#include <vector>
 #include <map>
+#include <vector>
 #include <string>
 
-typedef unsigned int GLuint;
-typedef unsigned char GLubyte;
+#include "Component.h"
+#include "Geometry/AABB.h"
+#include "Bone.h"
 
 class TransformComponent;
 class MaterialComponent;
@@ -30,6 +24,7 @@ public:
 	void OnEditor() override;
 
 	bool OnLoad(JsonParsing& node) override;
+	void CalculateCM();
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(std::shared_ptr<Resource> m);
@@ -43,9 +38,6 @@ public:
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
 	const std::map<std::string, BoneInfo> GetBoneMap();
-
-	float3 GetCenterPointInWorldCoords();
-	float GetSphereRadius();
 
 private:
 	TransformComponent* transform;

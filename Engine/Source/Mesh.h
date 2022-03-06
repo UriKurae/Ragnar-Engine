@@ -1,20 +1,16 @@
 #pragma once
-
 #include "Resource.h"
 
 #include <vector>
 #include <map>
-#include "MathGeoLib/src/Math/float3.h"
-#include "MathGeoLib/src/Math/float2.h"
 
 #include "Bone.h"
-
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
 #include "Shader.h"
-
 #include "Vertex.h"
+
+class IndexBuffer;
+class VertexBuffer;
+class VertexArray;
 
 struct ModelParameters;
 
@@ -42,16 +38,9 @@ public:
 	inline const std::map<std::string, BoneInfo>& GetBoneMap() { return bones; }
 	void Reimport(ModelParameters& data);
 
-	float3 GetCenterMesh() { return centerPoint; };
-	inline void SetCenterMesh(float3 center) { centerPoint = center; };
-	float GetRadius() { return radius; };
-	inline void SetRadius(float rad) { radius = rad; };
-
 private:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	//std::vector<float3> normals;
-	//std::vector<float2> texCoords;
 
 	VertexArray* vertexArray;
 	VertexBuffer* vbo;
@@ -67,6 +56,4 @@ private:
 	std::vector<unsigned int> bonesUid;
 
 	std::string path;
-	float3 centerPoint = float3::zero;
-	float radius;
 };

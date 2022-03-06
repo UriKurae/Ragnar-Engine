@@ -1,9 +1,4 @@
 #pragma once
-
-#include <vector>
-#include "MathGeoLib/src/MathGeoLib.h"
-#include "glmath.h"
-
 #include "Vertex.h"
 
 typedef unsigned char GLubyte;
