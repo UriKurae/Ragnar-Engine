@@ -22,6 +22,8 @@ AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), d
 		finalBoneMatrices.push_back(float4x4::identity);
 	}
 
+	animations.push_back({ "None", nullptr, false });
+
 	active = true;
 }
 
@@ -47,73 +49,68 @@ void AnimationComponent::OnEditor()
 	ImGui::PushID(this);
 	if (ImGui::CollapsingHeader(ICON_FA_PEOPLE_ARROWS" Animation Component"))
 	{
-		//Checkbox(this, "Active", active);
-		//if (currAnim != nullptr)
-		//{
-		//	ImGui::Text("Select animation: ");
-		//	ImGui::SameLine();
-			//if (ImGui::Button(currAnim ? currAnim->GetName().c_str() : ""))
-			//{
-			//	showAnimMenu = true;
-			//}
-
-		if (ImGui::TreeNodeEx("Animations"))
+		for (int i = 0; i < animations.size(); ++i)
 		{
-			for (int i = 0; i < animations.size(); ++i)
+			AnimState* currState = &animations[i];
+			ImGui::PushID((void*)currState->state.c_str());
+
+			int width = ImGui::GetWindowContentRegionMax().x;
+			ImGui::PushItemWidth(width / 3);
+			ImGui::InputText("##State", &currState->state, 64);
+			ImGui::PopItemWidth();
+
+			unsigned int test = currState->state.size();
+			ImGui::SameLine();
+
+			ImGui::PushItemWidth(2 * width / 3 - 15.0f);
+			if (ImGui::BeginCombo("##Animations", currState->anim ? currState->anim->GetName().c_str() : "None"))
 			{
-				AnimState* currState = &animations[i];
-				ImGui::PushID((void*)currState->state.c_str());
-				ImGui::InputText("##State", &currState->state, 64);
-				unsigned int test = currState->state.size();
-				ImGui::SameLine();
-				if (ImGui::BeginCombo("##Animations", currState->anim ? currState->anim->GetName().c_str() : "None"))
+				if (ImGui::Selectable("None"))
 				{
-					if (ImGui::Selectable("None"))
-					{
-						currState->state = "None";
-						currState->anim = nullptr;
-						currState->loop = false;
-					}
-
-					std::vector<std::string> files;
-					app->fs->DiscoverFiles("Library/Animations", files);
-					for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-					{
-						if ((*it).find(".rganim") != std::string::npos)
-						{
-							app->fs->GetFilenameWithoutExtension(*it);
-							*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-							uint uid = std::stoll(*it);
-							std::shared_ptr<Animation> res = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid));
-							if (ImGui::Selectable(res->GetName().c_str()))
-							{
-								res->Load();
-								currState->anim = res;
-								if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
-								currAnim = currState;
-							}
-						}
-					}
-
-					ImGui::EndCombo();
+					currState->state = "None";
+					currState->anim = nullptr;
+					currState->loop = false;
 				}
 
-				ImGui::Checkbox("##Loop", &currState->loop);
-				ImGui::PopID();
-			}
+				std::vector<std::string> files;
+				app->fs->DiscoverFiles("Library/Animations", files);
+				for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+				{
+					if ((*it).find(".rganim") != std::string::npos)
+					{
+						app->fs->GetFilenameWithoutExtension(*it);
+						*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+						uint uid = std::stoll(*it);
+						std::shared_ptr<Animation> res = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid));
+						if (ImGui::Selectable(res->GetName().c_str()))
+						{
+							res->Load();
+							currState->anim = res;
+							if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
+							currAnim = currState;
+						}
+					}
+				}
 
-			if (ImGui::Button(ICON_FA_PLUS))
-			{
-				animations.push_back({ "None", nullptr, false });
+				ImGui::EndCombo();
 			}
-			ImGui::SameLine();
-			if (ImGui::Button(ICON_FA_MINUS))
-			{
-				animations.erase(animations.end() - 1);
-			}
+			ImGui::PopItemWidth();
 
-			ImGui::TreePop();
+			ImGui::Checkbox("Loop", &currState->loop);
+			ImGui::PopID();
 		}
+
+		if (ImGui::Button(ICON_FA_PLUS))
+		{
+			animations.push_back({ "None", nullptr, false });
+		}
+		ImGui::SameLine();
+		if (ImGui::Button(ICON_FA_MINUS))
+		{
+			animations.erase(animations.end() - 1);
+		}
+
+		ImGui::Separator();
 
 		if (currAnim && currAnim->anim)
 		{
@@ -137,33 +134,10 @@ void AnimationComponent::OnEditor()
 		{
 			ImGui::Text("There's is no current animation");
 		}
-		/*if(ImGui::Checkbox("Draw Bones", &debugDraw))
-		{
-			for (int i = 0; i < owner->GetChilds().size(); i++)
-			{
-				owner->GetChilds().at(i)->GetComponent<BoneComponent>()->SetDebugDraw();
-			}
-		}*/
-		//}
-		//else
-		//{
-		//	ImGui::Text("Select animation: ");
-		//	ImGui::SameLine();
-		//	if (ImGui::Button("No Animation"))
-		//	{
-		//		showAnimMenu = true;
-		//	}
-		//}
-		//ImGui::Separator();
 	}
-
-	//if (showAnimMenu)
-	//{
-	//	ImGui::Begin("Animations", &showAnimMenu);
-	//	GetAnimations();
-	//	ImGui::End();
-	//}
 	ImGui::PopID();
+
+	ImGui::Separator();
 }
 
 bool AnimationComponent::Update(float dt)
