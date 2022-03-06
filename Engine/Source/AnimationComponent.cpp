@@ -215,8 +215,35 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 
 bool AnimationComponent::OnLoad(JsonParsing& node)
 {
-	//currAnim = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Animations");
+
+	animations.clear();
+
+	std::string currAnimState = node.GetJsonString("Current Anim");
+	size_t size = node.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		AnimState anim;
+
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		anim.state = c.GetJsonString("State");
+		anim.loop = c.GetJsonBool("Loop");
+		anim.anim = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->LoadResource(std::string(c.GetJsonString("Path Anim Assets"))));
+
+		animations.push_back(anim);
+	}
+
+	for (std::vector<AnimState>::iterator it = animations.begin(); it != animations.end(); ++it)
+	{
+		if (currAnimState == (*it).state)
+		{
+			currAnim = &(*it);
+			break;
+		}
+	}
+
 	return true;
 }
 
@@ -225,8 +252,21 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	//file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", currAnim->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Current Anim", currAnim->state.c_str());
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Animations");
+	for (std::vector<AnimState>::iterator it = animations.begin(); it != animations.end(); ++it)
+	{
+		JsonParsing animF = JsonParsing();
+
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "State", (*it).state.c_str());
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets", (*it).anim.get()->GetAssetsPath().c_str());
+		animF.SetNewJsonBool(animF.ValueToObject(animF.GetRootValue()), "Loop", (*it).loop);
+		
+		file.SetValueToArray(newArray, animF.GetRootValue());
+	}
 
 	node.SetValueToArray(array, file.GetRootValue());
 

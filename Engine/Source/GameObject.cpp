@@ -596,6 +596,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<ScriptComponent>()->OnLoad(c);
 			break;
+		case ComponentType::ANIMATION:
+			if (GetComponent<AnimationComponent>() == nullptr)
+				CreateComponent(ComponentType::ANIMATION);
+
+			GetComponent<AnimationComponent>()->OnLoad(c);
+			break;
 		}
 	}
 
@@ -652,6 +658,9 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::SCRIPT:
 			RemoveComponent(GetComponent<ScriptComponent>());
+			break;
+		case ComponentType::ANIMATION:
+			RemoveComponent(GetComponent<AnimationComponent>());
 			break;
 		}
 	}
