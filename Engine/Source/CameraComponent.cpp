@@ -25,6 +25,12 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	camera.SetPerspective(horizontalFov, verticalFov);
 	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 
+	defTarget = new GameObject();
+	defTarget->SetName("cameraController");
+	TransformComponent* comp = new TransformComponent(defTarget);
+	defTarget->AddComponent(comp);
+	this->owner->AddChild(defTarget);
+
 	srand(time(NULL));
 
 	CompileBuffers();
@@ -80,7 +86,7 @@ void CameraComponent::OnEditor()
 			{
 				freeMovement = true;
 				followTarget = false;
-				transform->SetRotation(Quat::identity);
+				//transform->SetRotation(Quat::identity);
 			}
 		}
 
@@ -88,13 +94,8 @@ void CameraComponent::OnEditor()
 		{
 			ImGui::Text("Movement: free");
 			ImGui::DragFloat("movementSpeed", &movementSpeed, 0.001f, 0.0f/*, 90.0f*/);
-
-			if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
-
-			if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
-			if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
-			if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
 		}
+
 		else if (followTarget)
 		{
 			ImGui::Text("Movement: target-locked");
@@ -118,13 +119,13 @@ void CameraComponent::OnEditor()
 
 			ImGui::Text("s_lerp");
 			//ImGui::SameLine(); select mode none/lerp/slerp
-
-			if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
-
-			if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
-			if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
-			if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
 		}
+
+		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::Checkbox("lockVerticalAngle", &lockVerticalAngle)) {}
+
+		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
 
 		ImGui::Text("- - - - SHAKE - - - -");
 
@@ -151,7 +152,7 @@ void CameraComponent::OnEditor()
 
 bool CameraComponent::Update(float dt)
 {
-	camera.SetOrthographic(100.0f, 100.0f);
+	camera.SetOrthographic(75.0f, 75.0f);
 
 	camera.SetPos(transform->GetPosition());
 
@@ -179,51 +180,66 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
-	if (followTarget && target)
+	// -------------MOVEMENT---------------
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle -= rotationSpeed;
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle += rotationSpeed;
+	if (!lockVerticalAngle)
 	{
-		float3 targetPos = target->GetComponent<TransformComponent>()->GetPosition();
-		float3 newPos = targetPos;
-
-		// offset
-		newPos.z += radius * sin(DEGTORAD * verticalAngle) * cos(DEGTORAD * horizontalAngle);
-		newPos.x += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
-		newPos.y += radius * cos(DEGTORAD * verticalAngle);
-		
-		// This is from LookAt function at ModuleCamera.h
-		float3 directionFrustum = targetPos - camera.Pos();
-		directionFrustum.Normalize();
-
-		float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
-		camera.SetFront(lookAt.MulDir(camera.Front()).Normalized());
-		camera.SetUp(lookAt.MulDir(camera.Up()).Normalized());
-
-		if (rotateAround)
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT && verticalAngle > -179.9f)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) horizontalAngle -= rotationSpeed;
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle += rotationSpeed;
-			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT && verticalAngle > -179.9f)
-			{
-				verticalAngle -= rotationSpeed;
-				if (verticalAngle < -179.9f) verticalAngle = -179.9f;
-			}
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT && verticalAngle < -0.1f)
-			{
-				verticalAngle += rotationSpeed;
-
-				if (verticalAngle > -0.1f) verticalAngle = -0.1f;
-			}
+			verticalAngle -= rotationSpeed;
+			if (verticalAngle < -179.9f) verticalAngle = -179.9f;
 		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT && verticalAngle < -0.1f)
+		{
+			verticalAngle += rotationSpeed;
 
-		float3 pos = target->GetComponent<TransformComponent>()->GetPosition();
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x + movementSpeed * sin(DEGTORAD * (horizontalAngle + 90)), 0, pos.z + movementSpeed * cos(DEGTORAD * (horizontalAngle + 90))));
-		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x - movementSpeed * sin(DEGTORAD * (horizontalAngle + 90)), 0, pos.z - movementSpeed * cos(DEGTORAD * (horizontalAngle + 90))));
-		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x - movementSpeed * sin(DEGTORAD * horizontalAngle), 0, pos.z - movementSpeed * cos(DEGTORAD * horizontalAngle)));
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x + movementSpeed * sin(DEGTORAD * horizontalAngle), 0, pos.z + movementSpeed * cos(DEGTORAD * horizontalAngle)));
-
-		transform->SetRotation(lookAt.ToQuat());
-		transform->SetPosition(newPos);
-
+			if (verticalAngle > -0.1f) verticalAngle = -0.1f;
+		}
 	}
+
+	if (freeMovement)
+	{
+		float3 pos = defTarget->GetComponent<TransformComponent>()->GetPosition();
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT)
+		{
+			pos.x += movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
+			pos.z += movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) {
+			pos.x -= movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
+			pos.z -= movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) {
+			pos.x -= movementSpeed * sin(DEGTORAD * horizontalAngle);
+			pos.z -= movementSpeed * cos(DEGTORAD * horizontalAngle);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) {
+			pos.x += movementSpeed * sin(DEGTORAD * horizontalAngle);
+			pos.z += movementSpeed * cos(DEGTORAD * horizontalAngle);
+		}
+		defTarget->GetComponent<TransformComponent>()->SetPosition(float3(pos.x, 0, pos.z));
+	}
+
+	float3 targetPos = float3(0, 0, 0);
+	if(freeMovement) targetPos = defTarget->GetComponent<TransformComponent>()->GetPosition();
+	else if(target) targetPos = target->GetComponent<TransformComponent>()->GetPosition();
+	float3 newPos = targetPos;
+
+	// offset
+	newPos.z += radius * sin(DEGTORAD * verticalAngle) * cos(DEGTORAD * horizontalAngle);
+	newPos.x += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
+	newPos.y += radius * cos(DEGTORAD * verticalAngle);
+
+	float3 directionFrustum = targetPos - camera.Pos();
+	directionFrustum.Normalize();
+
+	float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
+	camera.SetFront(lookAt.MulDir(camera.Front()).Normalized());
+	camera.SetUp(lookAt.MulDir(camera.Up()).Normalized());
+
+	transform->SetRotation(lookAt.ToQuat());
+	transform->SetPosition(newPos);
 
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
@@ -400,9 +416,11 @@ void CameraComponent::Shake(float dt)
 	{
 		float x = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
 		float y = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
+		float z = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
 		float3 lastPos = transform->GetPosition();
 		lastPos.x += x;
 		lastPos.y += y;
+		lastPos.z += z;
 		camera.SetPos(lastPos);
 		elapsedTime += dt;
 	}

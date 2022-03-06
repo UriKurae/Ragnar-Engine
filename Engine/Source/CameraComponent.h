@@ -54,13 +54,14 @@ private:
 
 	//----------------------------------------------
 	bool freeMovement = true;
-	float movementSpeed = 1.0f;
+	GameObject*/*transform*/ defTarget = nullptr; // FreeMovement Target
+	float movementSpeed = 0.5f;
 	bool followTarget = false;
 	GameObject*/*transform*/ target = nullptr;
 	int s_lerp = 0;
 	float verticalAngle = -40.0f;
-	bool rotateAround = false;
-	float rotationSpeed = 0.1f;
+	bool lockVerticalAngle = false;
+	float rotationSpeed = 0.5f;
 	float radius = 20.0f;
 	float horizontalAngle = 0;
 	bool multifocusOnClick = false;
