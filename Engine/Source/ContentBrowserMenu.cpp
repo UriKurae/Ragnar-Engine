@@ -17,7 +17,7 @@
 
 #include "Profiling.h"
 
-ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), Menu(true)
+ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), refreshTime(0.0f), Menu(true)
 {
 	mainDirectory = "Assets/Resources/";
 	currentDirectory = mainDirectory;
@@ -50,13 +50,18 @@ bool ContentBrowserMenu::Start()
 
 bool ContentBrowserMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Content Browser Update");
+
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
-	/*if (resource.joinable()) resource.join();
-	resource = std::thread(UpdatingResources);*/
-	ResourceManager::GetInstance()->ImportAllResources();
-
+	refreshTime += dt;
+	if (refreshTime >= 5.0f)
+	{
+		ResourceManager::GetInstance()->ImportAllResources();
+		refreshTime = 0.0f;
+	}
+	
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
 	ImGui::Begin(ICON_FA_FOLDER" Content Browser", &active);

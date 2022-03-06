@@ -8,7 +8,7 @@
 
 #include <GL\glew.h>
 
-AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
+AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : changePosition(true), transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
 {
 	owner = own;
 	type = ComponentType::AUDIO_REVERB_ZONE;
@@ -96,14 +96,17 @@ void AudioReverbZoneComponent::Draw(CameraComponent* gameCam)
 
 bool AudioReverbZoneComponent::Update(float dt)
 {
-	float3 position = transform->GetPosition();
-	AkSoundPosition audioSourcePos;
-	audioSourcePos.SetPosition(position.x, position.y, position.z);
-	float3 orientation = transform->GetRotation().ToEulerXYZ().Normalized();
-	//audioSourcePos.SetOrientation({orientation.x, orientation.y, orientation.z}, { orientation.x, orientation.y, orientation.z });
-	audioSourcePos.SetOrientation({ 0, 0, -1 }, { 0,1,0 });
-	AudioManager::Get()->SetPosition(owner->GetUUID(), audioSourcePos);
-	//DEBUG_LOG("Source: x %f, y %f, z %f", position.x, position.y, position.z);
+	if (changePosition)
+	{
+		float3 position = transform->GetPosition();
+		AkSoundPosition audioSourcePos;
+		audioSourcePos.SetPosition(position.x, position.y, position.z);
+		float3 orientation = transform->GetRotation().ToEulerXYZ().Normalized();
+		audioSourcePos.SetOrientation({ 0, 0, -1 }, { 0,1,0 });
+		AudioManager::Get()->SetPosition(owner->GetUUID(), audioSourcePos);
+		
+		changePosition = false;
+	}
 
 	return true;
 }

@@ -88,6 +88,18 @@ bool TransformComponent::Update(float dt)
 
 		SetAABB();
 
+		ListenerComponent* listener = owner->GetComponent<ListenerComponent>();
+		if (listener != nullptr)
+			listener->ChangePosition();
+
+		AudioSourceComponent* audioSource = owner->GetComponent<AudioSourceComponent>();
+		if (audioSource != nullptr)
+			audioSource->ChangePosition();
+
+		AudioReverbZoneComponent* reverb = owner->GetComponent<AudioReverbZoneComponent>();
+		if (reverb != nullptr)
+			reverb->ChangePosition();
+
 		changeTransform = false;
 	}
 
