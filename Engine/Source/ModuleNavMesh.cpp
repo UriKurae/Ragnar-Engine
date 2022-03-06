@@ -277,26 +277,19 @@ void ModuleNavMesh::BakeNavMesh()
 {
 	ClearNavMeshes();
 
-	std::vector<GameObject*> gameObjects;
-	gameObjects = app->scene->GetGameObjectsList();
-
-	for (size_t i = 0; i < gameObjects.size(); i++)
+	for (size_t i = 0; i < app->scene->GetStaticGO().size(); i++)
 	{
-		if (gameObjects[i]->staticObj)
-		{
-			AddGameObjectToNavMesh(gameObjects[i]);
-		}
-
-		gameObjects.reserve(gameObjects[i]->GetChilds().size());
-		for (size_t j = 0; j < gameObjects[i]->GetChilds().size(); j++)
-		{
-			gameObjects.push_back(gameObjects[i]->GetChilds()[j]);
-		}
+		AddGameObjectToNavMesh(app->scene->GetStaticGO()[i]);
 	}
 
-	pathfinder.Init(navMeshBuilder);
+	if (navMeshBuilder == nullptr)
+		navMeshBuilder = new NavMeshBuilder();
 
-	gameObjects.clear();
+	navMeshBuilder->HandleMeshChanged(geometry, bakedNav);
+	navMeshBuilder->HandleSettings();
+	navMeshBuilder->HandleBuild();
+
+	pathfinder.Init(navMeshBuilder);
 }
 
 void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)
@@ -314,13 +307,6 @@ void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)
 	float4x4 globalTransform = objectToAdd->GetComponent<TransformComponent>()->GetGlobalTransform();
 
 	geometry->AddMesh(mesh, globalTransform);
-
-	if (navMeshBuilder == nullptr)
-		navMeshBuilder = new NavMeshBuilder();
-
-	navMeshBuilder->HandleMeshChanged(geometry, bakedNav);
-	navMeshBuilder->HandleSettings();
-	navMeshBuilder->HandleBuild();
 
 	//pathfinder.Init(navMeshBuilder);
 }

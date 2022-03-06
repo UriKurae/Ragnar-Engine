@@ -164,6 +164,7 @@ void InspectorMenu::DrawEditLists()
 void InspectorMenu::RecursiveSetStaticObjects(GameObject* obj, bool ret)
 {
 	obj->staticObj = ret;
+	app->scene->AddStaticGO(obj);
 	for (int i = 0; i < obj->GetChilds().size(); i++)
 	{
 		RecursiveSetStaticObjects(obj->GetChilds()[i], ret);

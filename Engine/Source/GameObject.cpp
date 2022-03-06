@@ -22,7 +22,7 @@
 #include "Profiling.h"
 
 
-GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(true), audioRegistered(false), tag("Untagged"), layer("Default")
+GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), newComponent(false), staticObj(false), audioRegistered(false), tag("Untagged"), layer("Default")
 {
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
