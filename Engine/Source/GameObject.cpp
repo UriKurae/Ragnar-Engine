@@ -21,6 +21,7 @@
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
 #include "AnimationComponent.h"
+#include "BillboardParticleComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"

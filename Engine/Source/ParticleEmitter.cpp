@@ -6,10 +6,14 @@
 
 #include "ResourceManager.h"
 #include "CameraComponent.h"
+#include "TransformComponent.h"
 
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "Shader.h"
+
+#include "Globals.h"
 
 #include "Math/MathFunc.h"
 
@@ -43,7 +47,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particleProps.colorEnd = { 0,1,0,1 };
 	particleProps.sizeBegin = 0.5f, particleProps.sizeVariation = 0.3f, particleProps.sizeEnd = 0.0f;
 	particleProps.lifeTime = 1.0f;
-	particleProps.velocity = { 0.0f, 5.0f, 0.0f };
+	particleProps.velocity = { 0.0f, 2.0f, 0.0f };
 	particleProps.acceleration = { 0.0f, 5.0f, 0.0f };
 	particleProps.position = { 0.0f, 0.0f, 0.0f };
 
@@ -86,8 +90,8 @@ void ParticleEmitter::Emit(float dt)
 		particle.rotation = particleProps.deltaRotation + random.Float() * 2 * pi;
 
 		particle.velocity = particleProps.velocity;
-		particle.velocity.x += particleProps.acceleration.x * (random.Float() - 0.5f);
-		particle.velocity.y += particleProps.acceleration.y * (random.Float() - 0.5f);
+		particle.velocity.x += particleProps.acceleration.x * (random.Float() - 0.5f) * 2;
+		particle.velocity.y += particleProps.acceleration.y * (random.Float() - 0.5f) * 2;
 
 		particle.colorBegin = particleProps.colorBegin;
 		particle.colorEnd = particleProps.colorEnd;
