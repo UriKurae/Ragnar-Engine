@@ -98,6 +98,11 @@ void AnimationComponent::OnEditor()
 			ImGui::PopItemWidth();
 
 			ImGui::Checkbox("Loop", &currState->loop);
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_FA_INFO) && currAnim && currAnim->anim)
+			{
+				currAnim = currState;
+			}
 			ImGui::PopID();
 		}
 
