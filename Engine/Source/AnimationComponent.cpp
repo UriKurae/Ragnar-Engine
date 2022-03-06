@@ -99,7 +99,7 @@ void AnimationComponent::OnEditor()
 
 			ImGui::Checkbox("Loop", &currState->loop);
 			ImGui::SameLine();
-			if (ImGui::Button(ICON_FA_INFO) && currAnim && currAnim->anim)
+			if (ImGui::Button(ICON_FA_INFO) && currAnim)
 			{
 				currAnim = currState;
 			}
