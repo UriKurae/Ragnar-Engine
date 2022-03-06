@@ -1,7 +1,5 @@
 #include "VertexBuffer.h"
-
-#include "glew/include/GL/glew.h"
-
+#include "GL/glew.h"
 #include "Profiling.h"
 
 VertexBuffer::VertexBuffer() : count(0)

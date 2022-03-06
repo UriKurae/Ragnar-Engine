@@ -1,5 +1,4 @@
 #pragma once
-
 #include "JsonParsing.h"
 #include <SDL/include/SDL_timer.h>
 

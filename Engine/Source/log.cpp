@@ -1,7 +1,7 @@
 #pragma once
-#include "Globals.h"
 #include "Application.h"
 
+#include <windows.h>
 #include "Profiling.h"
 
 void Log(const char file[], int line, const char* format, ...)

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Math/float3.h"
 
 enum class LightType

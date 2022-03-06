@@ -1,8 +1,5 @@
 #pragma once
-
 #include "assimp/cfileio.h"
-#include "PhysFS/include/physfs.h"
-#include "Globals.h"
 
 size_t AssimpWrite(aiFile* file, const char* data, size_t size, size_t chunks);
 

@@ -1,9 +1,11 @@
 #pragma once
-
 #include <AK/SoundEngine/Win32/AkFilePackageLowLevelIOBlocking.h>
-#include "AudioReverbZoneComponent.h"
+
 #include <vector>
-#include "AudioSourceComponent.h"
+#include <string>
+
+class AudioReverbZoneComponent;
+class AudioSourceComponent;
 
 struct WwiseData
 {

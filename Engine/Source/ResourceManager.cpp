@@ -1,14 +1,12 @@
 #include "ResourceManager.h"
-
 #include "Application.h"
-#include "FileSystem.h"
 #include "Globals.h"
+
+#include "FileSystem.h"
 #include "TextureImporter.h"
-#include "MeshImporter.h"
 #include "ModelImporter.h"
 #include "ShaderImporter.h"
-
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+#include "AnimationImporter.h"
 
 #include "Texture.h"
 #include "Mesh.h"
@@ -16,6 +14,7 @@
 
 #include <stack>
 #include <fstream>
+#include "Algorithm/Random/LCG.h"
 
 #include "Profiling.h"
 
@@ -93,6 +92,14 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 		library = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".rgmodel";
 		resource = std::make_shared<Model>(uid, assets, library);
 		break;
+	case ResourceType::ANIMATION:
+		library = ANIMATIONS_FOLDER + std::string("anim_") + std::to_string(uid) + ".rganim";
+		resource = std::make_shared<Animation>(uid, assets, library);
+		break;
+	case ResourceType::BONE:
+		library = BONES_FOLDER + std::string("bone_") + std::to_string(uid) + ".rgbone";
+		resource = std::make_shared<Bone2>(uid, assets, library);
+		break;
 	case ResourceType::SHADER:
 		library = SHADERS_FOLDER + std::string("shader_") + std::to_string(uid) + ".shader";
 		resource = std::make_shared<Shader>(uid, assets, library);
@@ -122,6 +129,12 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 		break;
 	case ResourceType::MODEL:
 		resource = std::make_shared<Model>(uid, assets, library);
+		break;
+	case ResourceType::ANIMATION:
+		resource = std::make_shared<Animation>(uid, assets, library);
+		break;
+	case ResourceType::BONE:
+		resource = std::make_shared<Bone2>(uid, assets, library);
 		break;
 	case ResourceType::SHADER:
 		resource = std::make_shared<Shader>(uid, assets, library);
@@ -214,6 +227,8 @@ void ResourceManager::ImportResourcesFromLibrary()
 					if (files[i].find(".rgmodel") != std::string::npos) CreateResourceCreated(ResourceType::MODEL, uid, assets, dir + files[i]);
 					else if (files[i].find(".rgtexture") != std::string::npos) CreateResourceCreated(ResourceType::TEXTURE, uid, assets, dir + files[i]);
 					else if (files[i].find(".rgmesh") != std::string::npos) CreateResourceCreated(ResourceType::MESH, uid, assets, dir + files[i]);
+					else if (files[i].find(".rganim") != std::string::npos) CreateResourceCreated(ResourceType::ANIMATION, uid, assets, dir + files[i]);
+					else if (files[i].find(".rgbone") != std::string::npos) CreateResourceCreated(ResourceType::BONE, uid, assets, dir + files[i]);
 					else if (files[i].find(".shader") != std::string::npos) CreateResourceCreated(ResourceType::SHADER, uid, assets, dir + files[i]);
 
 					RELEASE_ARRAY(buffer);

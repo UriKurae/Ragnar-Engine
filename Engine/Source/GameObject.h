@@ -1,27 +1,36 @@
 #pragma once
 
-#include "Component.h"
-
-#include "TransformComponent.h"
-#include "MeshComponent.h"
-#include "MaterialComponent.h"
-#include "CameraComponent.h"
-#include "AudioSourceComponent.h"
-#include "ListenerComponent.h"
-#include "AudioReverbZoneComponent.h"
-//#include "ParticleSystemComponent.h"
-#include "BillboardParticleComponent.h"
-
-#include "MathGeoLib/src/MathGeoLib.h"
+//#include "Component.h"
+//
+//#include "TransformComponent.h"
+//#include "MeshComponent.h"
+//#include "MaterialComponent.h"
+//#include "CameraComponent.h"
+//#include "AudioSourceComponent.h"
+//#include "ListenerComponent.h"
+//#include "AudioReverbZoneComponent.h"
+////#include "ParticleSystemComponent.h"
+//#include "BillboardParticleComponent.h"
+//
+//#include "MathGeoLib/src/MathGeoLib.h"
+//#include <string>
+//#include <vector>
 #include <string>
 #include <vector>
 
+#include "Geometry/OBB.h"
+#include "Geometry/AABB.h"
+#include "CameraComponent.h"
+
 typedef unsigned int uint;
+
+struct SerializedField;
 
 typedef json_array_t JSON_Array;
 class JsonParsing;
 class VertexBuffer;
 class IndexBuffer;
+class Component;
 
 class GameObject
 {
@@ -34,11 +43,10 @@ public:
 	void DrawOutline();
 	void DrawEditor();
 
-	void DebugColliders();
-
-	Component* CreateComponent(ComponentType type);
+	Component* CreateComponent(ComponentType type, const char* name = nullptr);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
+	void MoveComponent(Component* component, int position);
 
 	void CopyComponent(Component* component);
 	
@@ -51,8 +59,11 @@ public:
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }
 	inline void SetAudioRegister(bool check) { audioRegistered = check; }
+	inline void UnPrefab() { prefabID = 0; }
+	inline void SetPrefabID(uint id) { prefabID = id; }
 
 	inline uint const GetUUID() const { return uuid; }
+	inline uint const GetPrefabID() const { return prefabID; }
 	inline const char* GetName() const { return name.c_str(); }
 	inline GameObject* GetParent() const { return parent; }
 	inline const bool& GetActive() const { return active; }
@@ -73,7 +84,13 @@ public:
 	void OnLoad(JsonParsing& node);
 	void OnSave(JsonParsing& node, JSON_Array* array);
 
+	void OnSavePrefab(JsonParsing& node, JSON_Array* array, int option);
+	void UpdateFromPrefab(JsonParsing& node, bool isParent);
+
 	inline const std::vector<Component*> GetComponents() const { return components; }
+
+	inline float3 GetOffsetCM() { return offsetCM; };
+	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
 
 	template<typename T>
 	T* GetComponent();
@@ -85,10 +102,11 @@ public:
 	std::string name;
 	bool active;
 	bool staticObj;
-	bool colliders;
 	std::string tag;
 	std::string layer;
+	std::string prefabPath;
 
+	std::vector<SerializedField*> csReferences;
 private:
 	std::vector<Component*> components;
 
@@ -100,10 +118,9 @@ private:
 	AABB globalAabb;
 	OBB globalObb;
 
-	VertexBuffer* vertex;
-	IndexBuffer* index;
-
 	uint uuid;
+	uint prefabID;
+	float3 offsetCM = float3::zero;
 
 	//MouseMoveCommand mouseMoveCommand;
 

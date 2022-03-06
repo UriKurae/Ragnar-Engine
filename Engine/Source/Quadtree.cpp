@@ -1,15 +1,11 @@
 #include "Quadtree.h"
-
 #include "Globals.h"
+
 #include "GameObject.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "glew/include/GL/glew.h"
-#include "CameraComponent.h"
-
 #include <stack>
-
 #include "Profiling.h"
 
 Quadtree::Quadtree() : root(nullptr)
@@ -101,7 +97,9 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 		std::stack<QuadtreeNode*> nodes;
 
 		for (int i = 0; i < 4; ++i)
-			nodes.push(root->GetChild(i));
+		{
+			if (root->GetChild(i) != nullptr) nodes.push(root->GetChild(i));
+		}
 
 		while (!nodes.empty())
 		{

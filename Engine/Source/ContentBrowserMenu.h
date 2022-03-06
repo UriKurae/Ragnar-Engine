@@ -4,8 +4,7 @@
 
 #include <string>
 #include <vector>
-#include <thread>
-#include <memory>
+#include <functional>
 
 class Texture;
 
@@ -21,9 +20,15 @@ public:
 
 	void DrawRecursive(std::vector<std::string>& dirs);
 
+
+	void DrawCreationPopup(const char* popName, const char* dotExtension, std::function<void(const char*)> f);
+	ImGuiTreeNodeFlags SetFlags(std::vector<std::string> node);
+
 	inline std::string& GetCurrentDir() { return currentDirectory; }
 
 private:
+	float refreshTime;
+
 	std::string currentDirectory;
 	std::string mainDirectory;
 
@@ -33,4 +38,6 @@ private:
 	Texture* picIcon;
 	Texture* modelIcon;
 	Texture* sceneIcon;
+	Texture* prefabIcon;
+	Texture* scriptIcon;
 };

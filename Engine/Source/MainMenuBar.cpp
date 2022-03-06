@@ -1,38 +1,40 @@
+#include "MainMenuBar.h"
 #include "Application.h"
 #include "Globals.h"
-#include "AudioManager.h"
+
 #include "ModuleRenderer3D.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
+#include "ModuleEditor.h"
+#include "ModuleCamera3D.h"
+#include "Physics3D.h"
 
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
-#include "MainMenuBar.h"
 #include "AboutMenu.h"
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "TextEditorMenu.h"
 #include "FogWarMenu.h"
-#include "Texture.h"
-#include "TextureImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
 
-#include "FileSystem.h"
-
+#include "TransformComponent.h"
 #include "LightComponent.h"
 
-#include "ModuleCamera3D.h"
+#include "ResourceManager.h"
+#include "AudioManager.h"
 
-
+#include "Lights.h"
+#include "Texture.h"
 #include "Dialogs.h"
-#include "IconsFontAwesome5.h"
+#include "Viewport.h"
 #include "Style.h"
 
+#include "Math/float3x3.h"
 #include "imgui/imgui_stdlib.h"
 
 #include <fstream>
-
 #include "Profiling.h"
 
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
@@ -43,10 +45,11 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
-	menus.emplace_back(new InspectorMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
+	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
 }
@@ -138,6 +141,9 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z", &ret);
 			ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y", &ret);
+
+			ImGui::Separator();
+			app->editor->GetViewport()->SnapOptions();
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())
@@ -152,6 +158,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
+			ImGui::MenuItem(ICON_FA_CODE" Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
 
 			ImGui::EndMenu();
 		}
@@ -416,7 +423,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			app->scene->Play();
 			AudioManager::Get()->PlayAllAudioSources();
-			ImGui::StyleColorsClassic();
+			//ImGui::StyleColorsClassic();
+			app->physics->ActiveAllBodies();
 		}
 
 		ImGui::SameLine();
@@ -432,7 +440,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			AudioManager::Get()->StopAllAudioSources();
 			app->scene->Stop();
-			SetStyle(6);
+			app->physics->SleepAllBodies();
+			//SetStyle(6);
 		}
 		ImGui::SameLine();
 
@@ -442,12 +451,14 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->scene->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
+				app->physics->ActiveAllBodies();
 			}
 		}
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
 			app->scene->Pause();
+			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();

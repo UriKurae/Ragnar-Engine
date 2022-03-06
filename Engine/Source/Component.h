@@ -2,6 +2,7 @@
 
 #include "Imgui/imgui.h"
 #include "JsonParsing.h"
+#include "IconsFontAwesome5.h"
 
 class GameObject;
 class CameraComponent;
@@ -13,13 +14,16 @@ enum class ComponentType
 	MESH_RENDERER,
 	MATERIAL,
 	CAMERA,
+	SCRIPT,
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
 	PARTICLE_SYSTEM,
 	BILLBOARD,
-	LIGHT
-
+	LIGHT,
+	ANIMATION,
+	BONE,
+	RIGID_BODY,
 };
 
 class Component
@@ -46,6 +50,9 @@ public:
 
 		ImGui::PopID();
 	}
+
+	void ComponentOptions(Component* component);
+	
 
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }

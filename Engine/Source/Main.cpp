@@ -2,8 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "SDL/include/SDL.h"
-
+#include "SDL_main.h"
 #include "Profiling.h"
 
 enum class MainState

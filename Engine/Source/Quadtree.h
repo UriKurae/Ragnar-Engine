@@ -1,8 +1,5 @@
 #pragma once
-
-#include "MathGeoLib/src/Geometry/AABB.h"
-#include "MathGeoLib/src/Geometry/Frustum.h"
-
+#include "Geometry/AABB.h"
 #include <set>
 
 class GameObject;

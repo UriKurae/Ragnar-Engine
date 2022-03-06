@@ -1,7 +1,6 @@
 #pragma once
-
 #include "Component.h"
-#include "MathGeoLib/src/Geometry/AABB.h"
+#include "Geometry/AABB.h"
 #include <string>
 
 class GameObject;
@@ -31,7 +30,10 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
+	inline void ChangePosition() { changePosition = true; }
+
 private:
+	bool changePosition;
 	TransformComponent* transform;
 
 	AABB reverbBoxZone;

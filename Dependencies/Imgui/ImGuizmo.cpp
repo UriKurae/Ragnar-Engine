@@ -1256,6 +1256,11 @@ namespace ImGuizmo
       }
    }
 
+   float GetmRotationAngle()
+   {
+       return gContext.mRotationAngle;
+   }
+
    static void DrawHatchedAxis(const vec_t& axis)
    {
       for (int j = 1; j < 10; j++)

@@ -1,20 +1,28 @@
 #include "ModuleScene.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
-#include "Globals.h"
 #include "ModuleEditor.h"
+#include "Physics3D.h"
+
 #include "Primitives.h"
 #include "MeshImporter.h"
 #include "FileSystem.h"
+
 #include "Resource.h"
 #include "ResourceManager.h"
-
+#include "MonoManager.h"
 #include "AudioManager.h"
 
-#include <stack>
+#include "ScriptComponent.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "AudioSourceComponent.h"
+#include "AnimationComponent.h"
 
+#include <stack>
 #include "Profiling.h"
 
 ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
@@ -143,6 +151,21 @@ bool ModuleScene::Update(float dt)
 		}
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	{
+		GameObject* anim = *(root->GetChilds().end() - 1);
+		anim = *(anim->GetChilds().end() - 1);
+
+		anim->GetComponent<AnimationComponent>()->Play("Capoeira");
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	{
+		GameObject* anim = *(root->GetChilds().end() - 1);
+		anim = *(anim->GetChilds().end() - 1);
+
+		anim->GetComponent<AnimationComponent>()->Play("Idle");
+	}
+
 	AudioManager::Get()->Render();
 
 	return true;
@@ -173,7 +196,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw(nullptr);
+			if (go != app->editor->GetGO()) go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -376,11 +399,33 @@ bool ModuleScene::LoadScene(const char* name)
 				}
 			}
 		}
+		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
+		{
+			// Get the range of the current key
+			auto range = referenceMap.equal_range(i->first);
+
+			// Now render out that whole range
+			for (auto d = range.first; d != range.second; ++d)
+			{
+				d->second->fiValue.goValue = GetGoByUuid(d->first);
+
+				if (d->second->fiValue.goValue)
+				{
+					if (std::find(d->second->fiValue.goValue->csReferences.begin(), d->second->fiValue.goValue->csReferences.end(), d->second) == d->second->fiValue.goValue->csReferences.end())
+						d->second->fiValue.goValue->csReferences.push_back(d->second);
+
+					d->second->parentSC->SetField(d->second->field, d->second->fiValue.goValue);
+				}
+			}
+		}
+		app->physics->LoadConstraints();
 	}
 	else
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
+
+	referenceMap.clear();
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
@@ -462,13 +507,14 @@ void ModuleScene::ImportPrimitives()
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
+	std::map<std::string, BoneInfo> bonesUid;
 	//std::vector<float3> normals;
 	//std::vector<float2> texCoords;
 
 	RCube::CreateCube(vertices, indices);
 	std::string library;
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
@@ -478,7 +524,7 @@ void ModuleScene::ImportPrimitives()
 
 	RPyramide::CreatePyramide(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
@@ -488,7 +534,7 @@ void ModuleScene::ImportPrimitives()
 
 	RSphere::CreateSphere(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
@@ -498,7 +544,7 @@ void ModuleScene::ImportPrimitives()
 
 	RCylinder::CreateCylinder(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();

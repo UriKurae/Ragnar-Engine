@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ragnar Engine", "Ragnar Engine.vcxproj", "{04FA9777-0911-49B2-9F45-5FA5C639F2AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathGeoLib", "Dependencies\MathGeoLib\MathGeoLib.vcxproj", "{DCFA8650-2D3F-331C-8C03-577981EF1623}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -23,14 +21,6 @@ Global
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.Release|Win32.Build.0 = Release|Win32
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
 		{04FA9777-0911-49B2-9F45-5FA5C639F2AB}.RelWithDebInfo|Win32.Build.0 = Release|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.Debug|Win32.Build.0 = Debug|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.MinSizeRel|Win32.ActiveCfg = MinSizeRel|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.MinSizeRel|Win32.Build.0 = MinSizeRel|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.Release|Win32.ActiveCfg = Release|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.Release|Win32.Build.0 = Release|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|Win32
-		{DCFA8650-2D3F-331C-8C03-577981EF1623}.RelWithDebInfo|Win32.Build.0 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

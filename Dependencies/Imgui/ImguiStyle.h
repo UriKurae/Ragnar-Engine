@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "MathGeoLib/src/Math/float3.h"
+#include "MathGeoLib/include/Math/float3.h"
 
 #include "imgui.h"
 #include "Imgui/imgui_internal.h"
