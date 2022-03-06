@@ -87,9 +87,9 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) override;
 
-	void DebugDraw();
+	//void DebugDraw();
 	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
-	void CreateWalkabilityTestPoint();
+	//void CreateWalkabilityTestPoint();
 
 	void ClearNavMeshes();
 	bool IsWalkable(float x, float z, float3& hitPoint);
@@ -98,7 +98,7 @@ public:
 
 	void BakeNavMesh();
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
-	NavMeshBuilder* GetNavMeshBuilder();
+	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
 	float3 FindRandomPointAround(float3 centerPoint, float radius);
 	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
 

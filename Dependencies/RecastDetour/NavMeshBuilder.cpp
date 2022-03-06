@@ -695,8 +695,6 @@ void NavMeshBuilder::OnEditor()
 	}
 }
 
-dtNavMesh* NavMeshBuilder::GetNavMesh() { return m_navMesh; }
-
 void NavMeshBuilder::SetNavMesh(dtNavMesh* newNavMesh)
 {
 	if (m_navMesh != nullptr)

@@ -30,7 +30,8 @@ public:
 	void DrawBoundaries(float minx, float miny, float minz, float maxx, float maxy, float maxz);
 	void OnEditor();
 
-	dtNavMesh* GetNavMesh();
+	inline dtNavMesh* GetNavMesh() { return m_navMesh; };
+	inline InputGeom* GetGeom() { return m_geom; };
 	void SetNavMesh(dtNavMesh* newNavMesh);
 
 	dtNavMeshQuery* GetNavMeshQuery();

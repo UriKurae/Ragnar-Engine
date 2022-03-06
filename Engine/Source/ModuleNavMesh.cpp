@@ -103,8 +103,6 @@ bool ModuleNavMesh::Update(float dt)
 		}
 	}
 
-	if (app->renderer3D->navMesh) app->navMesh->navMeshBuilder->DebugDraw();
-
 	return true;
 }
 
@@ -307,11 +305,6 @@ void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)
 	geometry->AddMesh(mesh, globalTransform);
 
 	//pathfinder.Init(navMeshBuilder);
-}
-
-NavMeshBuilder* ModuleNavMesh::GetNavMeshBuilder()
-{
-	return navMeshBuilder;
 }
 
 static float frand()

@@ -7,6 +7,8 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "Framebuffer.h"
+#include "ModuleNavMesh.h"
+#include "NavMeshBuilder.h"
 
 #include "ResourceManager.h"
 
@@ -276,6 +278,9 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		app->scene->Draw();
 	}
+
+	if(navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+		app->navMesh->GetNavMeshBuilder()->DebugDraw();
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);

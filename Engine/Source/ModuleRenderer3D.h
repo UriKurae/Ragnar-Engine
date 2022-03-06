@@ -42,6 +42,7 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
+	//TODO: Save/Load NavMesh
 	void SetNavMeshView();
 	void SetVsync();
 
