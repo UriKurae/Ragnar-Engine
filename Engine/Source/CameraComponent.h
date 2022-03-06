@@ -53,7 +53,8 @@ private:
 	VertexBuffer* vbo;
 
 	//----------------------------------------------
-	bool freeMovement = false;
+	bool freeMovement = true;
+	float movementSpeed = 1.0f;
 	bool followTarget = false;
 	GameObject*/*transform*/ target = nullptr;
 	int s_lerp = 0;

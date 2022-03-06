@@ -68,34 +68,63 @@ void CameraComponent::OnEditor()
 
 		ImGui::Text("- - - - MOVEMENT - - - -");
 
-		if (ImGui::Checkbox("freeMovement", &freeMovement)) {}
-
-		if (ImGui::Checkbox("followTarget", &followTarget)) {}
-		ImGui::SameLine();
-		ImGui::Button(target != nullptr ? target->GetName() : "none");
-		if (ImGui::BeginDragDropTarget())
+		if (ImGui::Button("Switch camera movement"))
 		{
-			const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItem");
-			if (go)
+			if (freeMovement)
 			{
-				uint uuid = *(const uint*)(go->Data);
-				target = app->scene->GetGoByUuid(uuid);
+				freeMovement = false;
+				followTarget = true;
 			}
-			ImGui::EndDragDropTarget();
+
+			else
+			{
+				freeMovement = true;
+				followTarget = false;
+				transform->SetRotation(Quat::identity);
+			}
 		}
 
-		if (ImGui::Checkbox("multifocusOnClick", &multifocusOnClick)) {}
-		//ImGui::SameLine(); select game object
+		if (freeMovement)
+		{
+			ImGui::Text("Movement: free");
+			ImGui::DragFloat("movementSpeed", &movementSpeed, 0.001f, 0.0f/*, 90.0f*/);
 
-		ImGui::Text("s_lerp");
-		//ImGui::SameLine(); select mode none/lerp/slerp
+			if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
 
-		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
+			if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
+			if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
+			if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
+		}
+		else if (followTarget)
+		{
+			ImGui::Text("Movement: target-locked");
 
-		if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
-		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
-		if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
 
+			ImGui::Text("Target:");
+			ImGui::SameLine();
+			ImGui::Button(target != nullptr ? target->GetName() : "none");
+			if (ImGui::BeginDragDropTarget())
+			{
+				const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItem");
+				if (go)
+				{
+					uint uuid = *(const uint*)(go->Data);
+					target = app->scene->GetGoByUuid(uuid);
+				}
+				ImGui::EndDragDropTarget();
+			}
+			if (ImGui::Checkbox("multifocusOnClick", &multifocusOnClick)) {}
+			//ImGui::SameLine(); select game object
+
+			ImGui::Text("s_lerp");
+			//ImGui::SameLine(); select mode none/lerp/slerp
+
+			if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
+
+			if (ImGui::Checkbox("rotateAround", &rotateAround)) {}
+			if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
+			if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
+		}
 
 		ImGui::Text("- - - - SHAKE - - - -");
 
@@ -122,7 +151,8 @@ void CameraComponent::OnEditor()
 
 bool CameraComponent::Update(float dt)
 {
-	
+	camera.SetOrthographic(100.0f, 100.0f);
+
 	camera.SetPos(transform->GetPosition());
 
 	if (shake)
@@ -153,10 +183,10 @@ bool CameraComponent::Update(float dt)
 	{
 		float3 targetPos = target->GetComponent<TransformComponent>()->GetPosition();
 		float3 newPos = targetPos;
-		//newPos.z += 20;
+
 		// offset
-		newPos.x += radius * sin(DEGTORAD * verticalAngle) * cos(DEGTORAD * horizontalAngle);
-		newPos.z += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
+		newPos.z += radius * sin(DEGTORAD * verticalAngle) * cos(DEGTORAD * horizontalAngle);
+		newPos.x += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
 		newPos.y += radius * cos(DEGTORAD * verticalAngle);
 		
 		// This is from LookAt function at ModuleCamera.h
@@ -183,6 +213,12 @@ bool CameraComponent::Update(float dt)
 				if (verticalAngle > -0.1f) verticalAngle = -0.1f;
 			}
 		}
+
+		float3 pos = target->GetComponent<TransformComponent>()->GetPosition();
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x + movementSpeed * sin(DEGTORAD * (horizontalAngle + 90)), 0, pos.z + movementSpeed * cos(DEGTORAD * (horizontalAngle + 90))));
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x - movementSpeed * sin(DEGTORAD * (horizontalAngle + 90)), 0, pos.z - movementSpeed * cos(DEGTORAD * (horizontalAngle + 90))));
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x - movementSpeed * sin(DEGTORAD * horizontalAngle), 0, pos.z - movementSpeed * cos(DEGTORAD * horizontalAngle)));
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) target->GetComponent<TransformComponent>()->SetPosition(float3(pos.x + movementSpeed * sin(DEGTORAD * horizontalAngle), 0, pos.z + movementSpeed * cos(DEGTORAD * horizontalAngle)));
 
 		transform->SetRotation(lookAt.ToQuat());
 		transform->SetPosition(newPos);
