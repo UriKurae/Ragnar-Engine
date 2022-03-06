@@ -277,10 +277,8 @@ void ModuleNavMesh::BakeNavMesh()
 {
 	ClearNavMeshes();
 
-	for (size_t i = 0; i < app->scene->GetStaticGO().size(); i++)
-	{
-		AddGameObjectToNavMesh(app->scene->GetStaticGO()[i]);
-	}
+	for (auto& go:app->scene->GetStaticGO())
+		AddGameObjectToNavMesh(go);
 
 	if (navMeshBuilder == nullptr)
 		navMeshBuilder = new NavMeshBuilder();
