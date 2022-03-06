@@ -4,6 +4,7 @@
 
 #include "FileSystem.h"
 #include <fstream>
+#include <time.h>
 
 GLenum GetShaderTypeFromString(const std::string& type)
 {

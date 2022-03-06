@@ -108,7 +108,19 @@ void AnimationComponent::OnEditor()
 
 		if (ImGui::Button(ICON_FA_PLUS))
 		{
-			animations.push_back({ "None", nullptr, false });
+			if (currAnim != nullptr)
+			{
+				std::string aux = currAnim->state;
+				animations.push_back({ "None", nullptr, false });
+				for (int i = 0; i < animations.size(); ++i)
+				{
+					if (animations[i].state == aux) currAnim = &animations[i];
+				}
+			}
+			else
+			{
+				animations.push_back({ "None", nullptr, false });
+			}
 		}
 		ImGui::SameLine();
 		if (ImGui::Button(ICON_FA_MINUS))
