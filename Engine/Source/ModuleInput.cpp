@@ -137,14 +137,6 @@ bool ModuleInput::PreUpdate(float dt)
 	//Update gamepad controller
 	ControllerUpdate();
 
-	if (IsJoystickAvailable(0))
-	{
-		if (app->input->GetButton(0, Button::DPAD_Left))
-		{
-			DEBUG_LOG("DPAD_Left pressed");
-		}
-	}
-
 	bool quit = false;
 	SDL_Event e;
 

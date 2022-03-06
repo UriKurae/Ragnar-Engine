@@ -18,7 +18,7 @@ public:
 
 private:
 	std::string name;
-	//std::vector<Bindings> bindings;
+	std::vector<int> bindings;
 };
 
 class ActionMaps
@@ -31,8 +31,8 @@ public:
 	void OnLoad(JsonParsing& node);
 
 	inline std::string GetName() { return name; }
-	inline std::vector<Actions*> GetActions() { return actions; }
-	
+	inline std::vector<Actions*>* GetActions() { return &actions; }
+
 private:
 	std::string name;
 	std::vector<Actions*> actions;
@@ -54,5 +54,6 @@ public:
 private:
 
 	std::vector<ActionMaps*> actionMaps;
-	ActionMaps* currentMap;
+	int currentMap;
+	int currentAction;
 };

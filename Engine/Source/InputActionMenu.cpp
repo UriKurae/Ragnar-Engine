@@ -12,7 +12,8 @@
 InputActionMenu::InputActionMenu() : Menu(false)
 {
 	actionMaps.push_back(new ActionMaps());
-	currentMap = nullptr;
+	currentMap = NULL;
+	currentAction = NULL;
 }
 
 InputActionMenu::~InputActionMenu()
@@ -44,14 +45,18 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-		
+		actionMaps.push_back(new ActionMaps());
 	}
 	ImGui::Separator();
 	for (size_t i = 0; i < actionMaps.size(); i++)
 	{
-		if (ImGui::Selectable(actionMaps[i]->GetName().c_str()))
+		if (ImGui::TreeNodeEx(actionMaps[i]->GetName().c_str(), (actionMaps[currentMap] == actionMaps[i] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf))
 		{
-			currentMap = actionMaps[i];
+			if (ImGui::IsItemClicked())
+			{
+				currentMap = i;
+			}
+			ImGui::TreePop();
 		}
 	}
 	ImGui::EndChild();
@@ -68,17 +73,18 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-
+		actionMaps[currentMap]->GetActions()->push_back(new Actions());
 	}
 	ImGui::Separator();
-	if (currentMap != nullptr)
+	for (size_t i = 0; i < actionMaps[currentMap]->GetActions()->size(); i++)
 	{
-		for (size_t i = 0; i < currentMap->GetActions().size(); i++)
+		if (ImGui::TreeNodeEx(actionMaps[currentMap]->GetActions()->at(i)->GetName().c_str(), (actionMaps[currentMap]->GetActions()->at(currentAction) == actionMaps[currentMap]->GetActions()->at(i) ? ImGuiTreeNodeFlags_Selected : 0)))
 		{
-			if (ImGui::Selectable(currentMap->GetActions()[i]->GetName().c_str()))
+			if (ImGui::IsItemClicked())
 			{
-
+				currentAction = i;
 			}
+			ImGui::TreePop();
 		}
 	}
 	ImGui::EndChild();
