@@ -213,7 +213,6 @@
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
     <ClInclude Include="Engine\Source\Bone.h" />
-    <ClInclude Include="Engine\Source\BoneComponent.h" />
     <ClInclude Include="Engine\Source\BufferLayout.h" />
     <ClInclude Include="Engine\Source\CameraComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
@@ -360,7 +359,6 @@
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp" />
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
     <ClCompile Include="Engine\Source\Bone.cpp" />
-    <ClCompile Include="Engine\Source\BoneComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\Component.cpp" />

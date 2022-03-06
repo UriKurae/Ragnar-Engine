@@ -6,12 +6,13 @@
 #include "ResourceManager.h"
 #include "TextureImporter.h"
 #include "AnimationImporter.h"
+
 #include "Component.h"
+
 #include "Mesh.h"
 #include "Model.h"
 #include "Vertex.h"
 
-#include <string>
 #include "Profiling.h"
 
 void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& library, std::string& path, ModelParameters& data)
@@ -330,7 +331,7 @@ void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned 
 		std::string jsonFile;
 		jsonFile.resize(ranges[3]);
 		bytes = ranges[3];
-		memcpy(jsonFile.data(), cursor, bytes);
+		memcpy(&jsonFile[0], cursor, bytes);
 		cursor += bytes;
 
 		JsonParsing file = JsonParsing();

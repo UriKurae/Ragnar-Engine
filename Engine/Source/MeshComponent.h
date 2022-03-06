@@ -1,7 +1,5 @@
 #pragma once
 #include <map>
-#include <vector>
-#include <string>
 
 #include "Component.h"
 #include "Geometry/AABB.h"

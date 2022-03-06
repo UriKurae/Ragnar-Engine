@@ -397,9 +397,6 @@
     <ClInclude Include="Engine\Source\AnimationComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\BoneComponent.h">
-      <Filter>Sources\GameObject\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\AnimationImporter.h">
       <Filter>Sources\Resources\Importers</Filter>
     </ClInclude>
@@ -895,9 +892,6 @@
       <Filter>Sources\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\AnimationComponent.cpp">
-      <Filter>Sources\GameObject\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\BoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\AnimationImporter.cpp">

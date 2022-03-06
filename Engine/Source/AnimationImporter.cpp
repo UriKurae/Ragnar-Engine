@@ -230,7 +230,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	std::string aux;
 	aux.resize(stringSize);
 	bytes = stringSize;
-	memcpy(aux.data(), cursor, bytes);
+	memcpy(&aux[0], cursor, bytes);
 	cursor += bytes;
 
 	JsonParsing file = JsonParsing();

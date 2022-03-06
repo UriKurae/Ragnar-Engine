@@ -1,7 +1,7 @@
 #pragma once
-
 #include "Resource.h"
-#include "MathGeoLib/src/MathGeoLib.h"
+#include "Math/float4x4.h"
+#include "Math/Quat.h"
 
 struct BoneInfo
 {

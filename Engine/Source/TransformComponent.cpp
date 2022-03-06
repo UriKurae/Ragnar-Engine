@@ -6,6 +6,9 @@
 
 #include "C_RigidBody.h"
 #include "MeshComponent.h"
+#include "ListenerComponent.h"
+#include "AudioSourceComponent.h"
+#include "AudioReverbZoneComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"

@@ -1,10 +1,11 @@
 #include "AnimationComponent.h"
 #include "Application.h"
+
+#include "GameObject.h"
+#include "MeshComponent.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
-#include "Animation.h"
-#include "GameObject.h"
-#include "IconsFontAwesome5.h"
 
 #include "Imgui/imgui_stdlib.h"
 

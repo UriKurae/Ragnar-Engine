@@ -1,15 +1,15 @@
 #pragma once
-#include <string>
 #include <map>
-#include <vector>
 
-#include "assimp/mesh.h"
 #include "assimp/scene.h"
+#include "assimp/matrix4x4.h"
+#include "Math/float4x4.h"
 
 class JsonParsing;
 struct Vertex;
 struct ModelParameters;
 struct BoneInfo;
+
 
 typedef unsigned int uint;
 

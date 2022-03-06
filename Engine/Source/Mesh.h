@@ -1,8 +1,8 @@
 #pragma once
 #include "Resource.h"
 
-#include <vector>
 #include <map>
+#include <vector>
 
 #include "Bone.h"
 #include "Shader.h"

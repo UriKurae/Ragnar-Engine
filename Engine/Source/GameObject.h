@@ -5,8 +5,7 @@
 #include "Geometry/OBB.h"
 #include "Geometry/AABB.h"
 #include "CameraComponent.h"
-#include "AnimationComponent.h"
-#include "BoneComponent.h"
+
 typedef unsigned int uint;
 
 struct SerializedField;

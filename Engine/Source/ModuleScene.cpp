@@ -20,6 +20,7 @@
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "AudioSourceComponent.h"
+#include "AnimationComponent.h"
 
 #include <stack>
 #include "Profiling.h"

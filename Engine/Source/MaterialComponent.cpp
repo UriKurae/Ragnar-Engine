@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
+#include "AnimationComponent.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"

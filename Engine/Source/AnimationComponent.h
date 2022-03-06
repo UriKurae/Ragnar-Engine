@@ -1,10 +1,10 @@
 #pragma once
-
 #include "Component.h"
-#include "Globals.h"
 #include "Animation.h"
+
 #include <map>
 #include <memory>
+
 
 struct AnimState
 {

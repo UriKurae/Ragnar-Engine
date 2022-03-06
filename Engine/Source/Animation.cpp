@@ -1,12 +1,11 @@
 #include "Animation.h"
+#include "Application.h"
 #include "Globals.h"
 
-#include "AnimationImporter.h"
-#include "Application.h"
 #include "FileSystem.h"
-#include "Bone.h"
 
-#include "glew/include/GL/glew.h"
+#include "AnimationImporter.h"
+#include "Bone.h"
 
 #include "Profiling.h"
 
