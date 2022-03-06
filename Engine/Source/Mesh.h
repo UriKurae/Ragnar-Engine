@@ -3,15 +3,13 @@
 #include "Resource.h"
 
 #include <vector>
-#include "MathGeoLib/include/Math/float3.h"
-#include "MathGeoLib/include/Math/float2.h"
+#include "Math/float3.h"
+#include "Math/float2.h"
 
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
-
-#include "Vertex.h"
 
 struct ModelParameters;
 

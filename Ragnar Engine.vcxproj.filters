@@ -367,9 +367,6 @@
     <ClInclude Include="Engine\Source\Material.h">
       <Filter>Sources\Materials</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Vertex.h">
-      <Filter>Sources\Buffers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Lights.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>

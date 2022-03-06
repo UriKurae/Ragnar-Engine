@@ -79,8 +79,7 @@ NavMeshBuilder::~NavMeshBuilder()
 
 void NavMeshBuilder::CleanUp()
 {
-	delete[] m_triareas;
-	m_triareas = nullptr;
+	RELEASE_ARRAY(m_triareas);
 	rcFreeHeightField(m_solid);
 	m_solid = nullptr;
 	rcFreeCompactHeightfield(m_chf);
@@ -197,15 +196,17 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 
 	CleanUp();
 
-	float* verts = new float[m_geom->getMesh()->vertices.size() * 3];
-	const std::vector<float3>& meshVertices = m_geom->getMesh()->vertices;
+	std::vector<float> vertices;
+	vertices.reserve(m_geom->getMesh()->vertices.size());
+	const std::vector<float3>& verticesMesh = m_geom->getMesh()->vertices;
 	for (int i = 0; i < m_geom->getMesh()->vertices.size(); i++)
 	{
-		verts[i * 3] = meshVertices[i].x;
-		verts[i * 3 + 1] = meshVertices[i].y;
-		verts[i * 3 + 2] = meshVertices[i].z;
+		vertices.push_back(verticesMesh[i].x);
+		vertices.push_back(verticesMesh[i].y);
+		vertices.push_back(verticesMesh[i].z);
 	}
 
+	const float* verts = (float*)&vertices[0];
 	const int nverts = m_geom->getMesh()->vertices.size();
 	const int ntris = m_geom->getMesh()->indices.size() / 3;
 	const rcChunkyTriMesh* chunkyMesh = m_geom->getChunkyMesh();
@@ -317,10 +318,8 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 			return 0;
 	}
 
-
-	delete verts;
-	delete[] m_triareas;
-	m_triareas = 0;
+	vertices.clear();
+	RELEASE_ARRAY(m_triareas);
 
 
 	// Once all geometry is rasterized, we do initial pass of filtering to

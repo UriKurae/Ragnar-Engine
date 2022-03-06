@@ -193,6 +193,9 @@ bool InputGeom::AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform)
 	++m_offMeshConCount;
 	++m_volumeCount;
 
+	if (m_mesh == nullptr)
+		m_mesh = new SimpleMesh();
+
 	MergeToMesh(mesh, new_mesh_transform);
 
 	float* vertices = new float[m_mesh->vertices.size() * 3];
@@ -219,7 +222,7 @@ bool InputGeom::AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform)
 		return false;
 	}
 
-	delete vertices;
+	RELEASE_ARRAY(vertices);
 
 	return true;
 }

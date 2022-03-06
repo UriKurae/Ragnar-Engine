@@ -8,7 +8,6 @@
 #include "Mesh.h"
 #include "Model.h"
 
-#include "Vertex.h"
 #include "Algorithm/Random/LCG.h"
 
 #include "Globals.h"
@@ -201,6 +200,7 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, st
 		DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
 
 	delete[] fileBuffer;
+	fileBuffer = nullptr;
 
 
 	//unsigned int header[2] = { vertices.size(), indices.size() };

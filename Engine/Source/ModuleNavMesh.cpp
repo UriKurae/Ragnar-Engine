@@ -287,6 +287,7 @@ void ModuleNavMesh::BakeNavMesh()
 			AddGameObjectToNavMesh(gameObjects[i]);
 		}
 
+		gameObjects.reserve(gameObjects[i]->GetChilds().size());
 		for (size_t j = 0; j < gameObjects[i]->GetChilds().size(); j++)
 		{
 			gameObjects.push_back(gameObjects[i]->GetChilds()[j]);
@@ -294,6 +295,8 @@ void ModuleNavMesh::BakeNavMesh()
 	}
 
 	pathfinder.Init(navMeshBuilder);
+
+	gameObjects.clear();
 }
 
 void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)

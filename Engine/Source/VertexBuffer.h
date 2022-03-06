@@ -1,7 +1,15 @@
 #pragma once
 
 #include "BufferLayout.h"
-#include "Vertex.h"
+#include "Math/float3.h"
+#include "Math/float2.h"
+
+struct Vertex
+{
+	float3 position;
+	float3 normal;
+	float2 texCoords;
+};
 
 class VertexBuffer
 {
