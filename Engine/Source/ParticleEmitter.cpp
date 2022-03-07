@@ -268,8 +268,8 @@ void ParticleEmitter::Update(float dt)
 
 		particle.lifeRemaining -= dt;
 		particle.position += particle.velocity * dt;
-		particle.velocity += particleProps.acceleration * dt;
-		particle.rotation += particleProps.deltaRotation * dt;
+		particle.velocity += particleReference.acceleration * dt;
+		particle.rotation += particleReference.deltaRotation * dt;
 	}
 }
 
@@ -324,10 +324,10 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		guiName = "Particle lifetime" + suffixLabel;
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
 
-		ImGui::DragFloat3("Velocity", particleProps.velocity.ptr(), 0.01f);
-		ImGui::DragFloat3("Acceleration", particleProps.acceleration.ptr(), 0.01f);
+		ImGui::DragFloat3("Velocity", particleReference.velocity.ptr(), 0.01f);
+		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
 
-		ImGui::DragFloat("Beginning Size", &particleProps.sizeBegin, 0.001f, 0.0f);
+		ImGui::DragFloat("Beginning Size", &particleReference.sizeBegin, 0.001f, 0.0f);
 
 		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
 	
@@ -500,16 +500,16 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	timer = node.GetJsonNumber("Emitter: Timer");
 	currTimer = node.GetJsonNumber("Emitter: Current Timer");
 
-	particleProps.position = node.GetJson3Number(node, "Particle Props Position");
-	particleProps.velocity = node.GetJson3Number(node, "Particle Props Velocity");
-	particleProps.acceleration = node.GetJson3Number(node, "Particle Props Acceleration");
-	particleProps.colorBegin = node.GetJson4Number(node, "Particle Props Color Begin");
-	particleProps.colorEnd = node.GetJson4Number(node, "Particle Props Color End");
-	particleProps.sizeBegin = node.GetJsonNumber ("Particle Props Size Begin");
-	particleProps.sizeEnd = node.GetJsonNumber ("Particle Props Size End");
-	particleProps.sizeVariation = node.GetJsonNumber ("Particle Props Size Variation");
-	particleProps.lifeTime = node.GetJsonNumber ("Particle Props Lifetime");
-	particleProps.deltaRotation = node.GetJsonNumber ("Particle Props Rotation Amount");
+	particleReference.position = node.GetJson3Number(node, "Particle Props Position");
+	particleReference.velocity = node.GetJson3Number(node, "Particle Props Velocity");
+	particleReference.acceleration = node.GetJson3Number(node, "Particle Props Acceleration");
+	particleReference.colorBegin = node.GetJson4Number(node, "Particle Props Color Begin");
+	particleReference.colorEnd = node.GetJson4Number(node, "Particle Props Color End");
+	particleReference.sizeBegin = node.GetJsonNumber ("Particle Props Size Begin");
+	particleReference.sizeEnd = node.GetJsonNumber ("Particle Props Size End");
+	particleReference.sizeVariation = node.GetJsonNumber ("Particle Props Size Variation");
+	particleReference.lifeTime = node.GetJsonNumber ("Particle Props Lifetime");
+	particleReference.deltaRotation = node.GetJsonNumber ("Particle Props Rotation Amount");
 
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Texture Assets Path"))));
 	
@@ -538,16 +538,16 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Timer", timer);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Current Timer", currTimer);
 
-	file.SetNewJson3Number(file, "Particle Props Position", particleProps.position);
-	file.SetNewJson3Number(file, "Particle Props Velocity", particleProps.velocity);
-	file.SetNewJson3Number(file, "Particle Props Acceleration", particleProps.acceleration);
-	file.SetNewJson4Number(file, "Particle Props Color Begin", particleProps.colorBegin);
-	file.SetNewJson4Number(file, "Particle Props Color End", particleProps.colorEnd);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Begin", particleProps.sizeBegin);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size End", particleProps.sizeEnd);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Variation", particleProps.sizeVariation);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Lifetime", particleProps.lifeTime);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Rotation Amount", particleProps.deltaRotation);
+	file.SetNewJson3Number(file, "Particle Props Position", particleReference.position);
+	file.SetNewJson3Number(file, "Particle Props Velocity", particleReference.velocity);
+	file.SetNewJson3Number(file, "Particle Props Acceleration", particleReference.acceleration);
+	//file.SetNewJson4Number(file, "Particle Props Color Begin", particleReference.colorBegin);
+	//file.SetNewJson4Number(file, "Particle Props Color End", particleReference.colorEnd);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Begin", particleReference.sizeBegin);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size End", particleReference.sizeEnd);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Variation", particleReference.sizeVariation);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Lifetime", particleReference.lifeTime);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Rotation Amount", particleReference.deltaRotation);
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Texture Assets Path", texture->GetAssetsPath().c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", data.shader->GetAssetsPath().c_str());
