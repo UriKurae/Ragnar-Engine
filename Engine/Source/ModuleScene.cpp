@@ -141,7 +141,7 @@ bool ModuleScene::Update(float dt)
 
 	///////////////////////
 	// Scripting
-	Scripting();
+	Scripting(dt);
 	
 
 	AudioManager::Get()->Render();
@@ -580,7 +580,7 @@ void ModuleScene::Resume()
 
 /////////////////////////
 
-void ModuleScene::Scripting()
+void ModuleScene::Scripting(float dt)
 {
 	if (gameState == GameState::PLAYING)
 	{
@@ -614,6 +614,8 @@ void ModuleScene::Scripting()
 			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
 
 		//ACTIONS
+		RigidBodyComponent* playerRB = player->GetComponent<RigidBodyComponent>();
+		float playerForce = 100.0f;
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			float force = 10.0f;
@@ -625,13 +627,25 @@ void ModuleScene::Scripting()
 			RigidBodyComponent* rigidBody;
 			s->CreateComponent(ComponentType::RIGID_BODY);
 			rigidBody = s->GetComponent<RigidBodyComponent>();
-			rigidBody->GetBody()->setIgnoreCollisionCheck(player->GetComponent<RigidBodyComponent>()->GetBody(), true); // Rigid Body of Player
+			rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB->GetBody(), true); // Rigid Body of Player
 			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-
+			playerRB->GetBody()->applyCentralImpulse(float3(-1, 0, 0) * playerForce * dt);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(1, 0, 0) * playerForce * dt);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, 1) * playerForce * dt);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, -1) * playerForce * dt);
 		}
 	}
 }
