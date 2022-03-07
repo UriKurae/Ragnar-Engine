@@ -22,6 +22,10 @@
 #include "AudioSourceComponent.h"
 #include "AnimationComponent.h"
 
+//Scripting
+#include "C_RigidBody.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
+
 #include <stack>
 #include "Profiling.h"
 
@@ -59,6 +63,7 @@ bool ModuleScene::Start()
 	player = CreateGameObject(nullptr);
 	player->CreateComponent(ComponentType::AUDIO_SOURCE);
 	player->SetName("Player");
+	player->tag = "Player";
 	
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
@@ -72,6 +77,8 @@ bool ModuleScene::Start()
 	//{
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
+
+	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
 }
@@ -595,49 +602,32 @@ void ModuleScene::Scripting()
 		}
 
 		// ANIMATIONS
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN ||
-			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN ||
-			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || 
-			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT ||
+			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT ||
+			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT ||
+			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
 		{
-			GameObject* anim = *(root->GetChilds().end() - 1);
-			anim = *(anim->GetChilds().end() - 1);
-
-			anim->GetComponent<AnimationComponent>()->Play("Capoeira"); //Walk
+			player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
 		}
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-		{
-			GameObject* anim = *(root->GetChilds().end() - 1);
-			anim = *(anim->GetChilds().end() - 1);
-
-			anim->GetComponent<AnimationComponent>()->Play("Capoeira"); //Shoot
-		}
+		else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
 		else
-		{
-			GameObject* anim = *(root->GetChilds().end() - 1);
-			anim = *(anim->GetChilds().end() - 1);
-
-			anim->GetComponent<AnimationComponent>()->Play("Idle");
-		}
+			player->GetComponent<AnimationComponent>()->Play("Idle"); // Idle
 
 		//ACTIONS
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			PCube spherePrim = PCube(1,1,1);
-			/*spherePrim.SetPos(app->camera->GetPosition().x, app->camera->GetPosition().y, app->camera->GetPosition().z);
-			spherePrim.InnerMesh();
-			spherePrim.mesh->LoadToMemory();
-			spherePrim.mesh->GenerateBounds();*/
-
-			float force = 30.0f;
+			float force = 10.0f;
 			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
-			s->GetComponent<TransformComponent>()->SetPosition({ 0, 5, 0 });
+			s->GetComponent<TransformComponent>()->SetPosition(player->GetComponent<TransformComponent>()->GetPosition());
 			s->GetComponent<TransformComponent>()->UpdateTransform();
+			s->GetComponent<TransformComponent>()->ForceUpdateTransform();
+
 			RigidBodyComponent* rigidBody;
-			/*rigidBody = dynamic_cast<RigidBodyComponent*>(s->CreateComponent(ComponentType::RIGID_BODY));
-			rigidBody->SetCollisionType(CollisionType::SPHERE);
-			rigidBody->GetBody()->setIgnoreCollisionCheck(app->camera->rigidBody->GetBody(), true);
-			rigidBody->GetBody()->applyCentralImpulse(app->camera->GetFront().Normalized() * force);*/
+			s->CreateComponent(ComponentType::RIGID_BODY);
+			rigidBody = s->GetComponent<RigidBodyComponent>();
+			rigidBody->GetBody()->setIgnoreCollisionCheck(player->GetComponent<RigidBodyComponent>()->GetBody(), true); // Rigid Body of Player
+			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
 		}
 	}
 }
