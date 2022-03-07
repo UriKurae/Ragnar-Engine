@@ -105,7 +105,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.2162314653396606,
+                    "Vertical Fov": 1.0774549245834351,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         0,
@@ -167,12 +167,12 @@
                 {
                     "Type": 9,
                     "Active": true,
-                    "Current Anim": "Shoot",
+                    "Current Anim": "Idle",
                     "Animations": [
                         {
                             "State": "Walk",
                             "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
-                            "Loop": true
+                            "Loop": false
                         },
                         {
                             "State": "Idle",

@@ -79,6 +79,7 @@ bool ModuleScene::Start()
 	//}
 
 	LoadScene("Assets/Scenes/build.ragnar");
+	player->GetComponent<AnimationComponent>()->Play("Idle");
 
 	return true;
 }
@@ -611,8 +612,6 @@ void ModuleScene::Scripting()
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
 			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
-		else
-			player->GetComponent<AnimationComponent>()->Play("Idle"); // Idle
 
 		//ACTIONS
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -628,6 +627,11 @@ void ModuleScene::Scripting()
 			rigidBody = s->GetComponent<RigidBodyComponent>();
 			rigidBody->GetBody()->setIgnoreCollisionCheck(player->GetComponent<RigidBodyComponent>()->GetBody(), true); // Rigid Body of Player
 			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+
 		}
 	}
 }

@@ -169,14 +169,25 @@ bool AnimationComponent::Update(float dt)
 		// GetDuration gets the duration of the animation in miliseconds
 		if (loopTime > currAnim->anim->GetDuration())
 		{
+			currAnim->hasFinished = true;
 			// When it reaches the desired duration, we reset everything
-			if (currAnim->loop) loopTime = 0.0f;
+			if (currAnim->loop && animQueue.empty()) loopTime = 0.0f;
 			else
 			{
 				loopTime = 0.0f;
 				playing = false;
+				if(animQueue.empty())
+				{
+					Play("Idle");
+				}
+				else
+				{
+					currAnim = animQueue.front();
+					animQueue.pop();
+				}
 			}
 		}
+
 		// Loop time increases by our delta time
 		loopTime += dt;
 		currentTime += currAnim->anim->GetTicksPerSecond() * dt;
@@ -286,11 +297,17 @@ void AnimationComponent::Play(std::string state)
 	{
 		if (animations[i].state == state)
 		{
-			currAnim = &animations[i];
-			playing = true;
+			if (animQueue.empty())
+			{
+				currAnim = &animations[i];
+				playing = true;
+			}
+			else
+				animQueue.push(currAnim);
 			break;
 		}
 	}
+
 }
 
 void AnimationComponent::GetAnimations()

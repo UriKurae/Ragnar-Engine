@@ -86,6 +86,7 @@ public:
 	GameObject* camera;
 
 	std::multimap<uint, SerializedField*> referenceMap;
+
 private:
 	GameObject* root;
 	Quadtree qTree;
