@@ -26,11 +26,19 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	camera.SetPerspective(horizontalFov, verticalFov);
 	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 
+	/*owner->GetParent()->RemoveChild(owner);
+
 	defTarget = new GameObject();
 	defTarget->SetName("cameraController");
+
+	defTarget->SetParent(app->scene->GetRoot());
+	app->scene->GetRoot()->AddChild(defTarget);
+
 	TransformComponent* comp = new TransformComponent(defTarget);
 	defTarget->AddComponent(comp);
-	this->owner->AddChild(defTarget);
+
+	owner->SetParent(defTarget);
+	defTarget->AddChild(owner);*/
 
 	srand(time(NULL));
 
@@ -158,6 +166,13 @@ void CameraComponent::OnEditor()
 
 bool CameraComponent::Update(float dt)
 {
+	// This is bad!
+	if (targetUID != 0)
+	{
+		target = app->scene->GetGoByUuid(targetUID);
+		targetUID = 0;
+	}
+
 	camera.SetOrthographic(zoom, zoom);
 	zoom = Clamp(zoom - app->input->GetMouseZ(), zoomMin, zoomMax);
 
@@ -376,6 +391,31 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	horizontalFov = node.GetJsonNumber("Horizontal Fov");
 	camera.SetPos(node.GetJson3Number(node, "Camera Pos"));
 
+	// MOVEMENT
+	zoom = node.GetJsonNumber("Zoom");
+	freeMovement = node.GetJsonBool("Free Movement");
+	if (!freeMovement) followTarget = true;
+	defTarget = owner->GetParent();
+	//defTarget->GetComponent<TransformComponent>()->SetPosition(node.GetJson3Number(node, "Default Target Pos"));
+	movementSpeed = node.GetJsonNumber("Movement Speed");
+	targetUID = node.GetJsonNumber("Target Pos");
+	// ANGLES
+	verticalAngle = node.GetJsonNumber("Vertical Angle");
+	lockVerticalAngle = node.GetJsonBool("Lock Vertical Angle");
+	rotationSpeed = node.GetJsonNumber("Rotation Speed");
+	radius = node.GetJsonNumber("Radius");
+	horizontalAngle = node.GetJsonNumber("Horizontal Angle");
+	// CONTROLS
+	rightClickRot = node.GetJsonBool("Right Click Rotation");
+	if (!rightClickRot) midClickMov = false;
+	arrowRot = node.GetJsonBool("Arrow Rotation");
+	WASDMov = node.GetJsonBool("WASD Movement");
+	borderMov = node.GetJsonBool("Border Movement");
+	// SHAKE
+	shakeStrength = node.GetJsonNumber("Shake Strength");
+	shakeDuration = node.GetJsonNumber("Shake Duration");
+	smooth = node.GetJsonNumber("Shake Smooth");
+
 	return true;
 }
 
@@ -389,6 +429,27 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Horizontal Fov", horizontalFov);
 	file.SetNewJson3Number(file, "Camera Pos", camera.Pos());
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	// MOVEMENT
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom", zoom);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Free Movement", freeMovement);
+	file.SetNewJson3Number(file, "Default Target Pos", defTarget->GetComponent<TransformComponent>()->GetPosition());
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Movement Speed", movementSpeed);
+	if(target) file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Target Pos", target->GetUUID());
+	// ANGLES
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Vertical Angle", verticalAngle);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Lock Vertical Angle", lockVerticalAngle);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Rotation Speed", rotationSpeed);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", radius);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Horizontal Angle", horizontalAngle);
+	// CONTROLS
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Right Click Rotation", rightClickRot);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Arrow Rotation", arrowRot);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "WASD Movement", WASDMov);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Border Movement", borderMov);
+	// SHAKE
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Strength", shakeStrength);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Duration", shakeDuration);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Smooth", smooth);
 
 	node.SetValueToArray(array, file.GetRootValue());
 

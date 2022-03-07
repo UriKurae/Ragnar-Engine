@@ -38,7 +38,6 @@ private:
 	Frustum camera;
 	TransformComponent* transform;
 	Quat currentRotation;
-	float3 currentPos;
 	//float3 lastPos = float3(0, 0, 0);
 	float3 originalPos;
 
@@ -64,7 +63,6 @@ private:
 	float movementSpeed = 0.5f;
 	bool followTarget = false;
 	GameObject* target = nullptr;
-	int s_lerp = 0;
 	float verticalAngle = -40.0f;
 	bool lockVerticalAngle = false;
 	float rotationSpeed = 0.5f;
@@ -77,6 +75,8 @@ private:
 	bool midClickMov = true;
 	bool WASDMov = false;
 	bool borderMov = false;
+
+	int targetUID = 0;
 
 public:
 	void RequestShake(float strength, float duration);

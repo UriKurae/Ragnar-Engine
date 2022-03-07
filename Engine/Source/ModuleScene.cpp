@@ -59,6 +59,7 @@ bool ModuleScene::Start()
 	//{
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
+	LoadScene("Assets/Scenes/scene2.ragnar");
 
 	return true;
 }
