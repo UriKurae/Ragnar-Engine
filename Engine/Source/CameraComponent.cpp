@@ -205,27 +205,30 @@ bool CameraComponent::Update(float dt)
 		int horizontalDrag = app->input->GetMouseXMotion();
 		int verticalDrag = app->input->GetMouseYMotion();
 		int dragThreshold = 1;
+		int wx, wy;
+		SDL_GetWindowPosition(app->window->window, &wx, &wy);
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT
 			|| (mouseDragMid && horizontalDrag < -dragThreshold)
-			|| app->input->GetMouseX() < 1) {
+			|| app->input->GetMouseX() < wx) {
 			pos.x += movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z += movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT
 			|| (mouseDragMid && horizontalDrag > dragThreshold)
-			|| app->input->GetMouseX() > *app->window->GetWindowWidth() - 2) {
+			|| app->input->GetMouseX() > *app->window->GetWindowWidth() + wx) {
 			pos.x -= movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z -= movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT
 			|| (mouseDragMid && verticalDrag > dragThreshold)
-			|| app->input->GetMouseY() > *app->window->GetWindowHeight() - 2) {
+			|| app->input->GetMouseY() > *app->window->GetWindowHeight() + wy) {
 			pos.x -= movementSpeed * sin(DEGTORAD * horizontalAngle);
 			pos.z -= movementSpeed * cos(DEGTORAD * horizontalAngle);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT
 			|| (mouseDragMid && verticalDrag < -dragThreshold)
-			|| app->input->GetMouseY() < 1) {
+			|| app->input->GetMouseY() < wy) {
 			pos.x += movementSpeed * sin(DEGTORAD * horizontalAngle);
 			pos.z += movementSpeed * cos(DEGTORAD * horizontalAngle);
 		}
