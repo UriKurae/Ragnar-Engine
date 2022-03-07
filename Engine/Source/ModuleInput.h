@@ -7,6 +7,7 @@
 #include <string>
 
 #define MAX_MOUSE_BUTTONS 5
+#define MAX_KEYS 300
 
 enum class KeyState
 {
@@ -71,7 +72,6 @@ public:
 	void RemoveController(int id);
 
 	void FillScancodeNameList();
-	inline std::vector<std::string> GetScancodeNameList() { return keyNameList; }
 
 	inline KeyState GetKey(int id) const { return keyboard[id]; }
 	inline KeyState GetMouseButton(int id) const { return mouseButtons[id]; }
@@ -87,6 +87,8 @@ public:
 	bool GetAxis(int joystickId, Axis axis);
 
 	inline std::vector<std::string> GetInputList() const { return strings; }
+
+	const char* keyNameList[MAX_KEYS];
 
 private:
 	KeyState* keyboard;
@@ -108,7 +110,6 @@ private:
 	float deadzone;
 
 	std::vector<std::string> strings;
-	std::vector<std::string> keyNameList;
 
 	bool repeated = true;
 };

@@ -53,12 +53,16 @@ bool InputActionMenu::Update(float dt)
 	ImGui::Separator();
 	for (size_t i = 0; i < actionMaps.size(); i++)
 	{
-		if (ImGui::TreeNodeEx(actionMaps[i]->GetName().c_str(), (actionMaps[currentMap] == actionMaps[i] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf))
+		bool open = ImGui::TreeNodeEx(actionMaps[i]->GetName().c_str(),
+			(actionMaps[currentMap] == actionMaps[i] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
+
+		if (ImGui::IsItemClicked())
 		{
-			if (ImGui::IsItemClicked())
-			{
-				currentMap = i;
-			}
+			currentMap = i;
+		}
+
+		if (open)
+		{
 			ImGui::TreePop();
 		}
 	}
@@ -81,14 +85,32 @@ bool InputActionMenu::Update(float dt)
 	ImGui::Separator();
 	for (size_t i = 0; i < actionMaps[currentMap]->GetActions()->size(); i++)
 	{
-		if (ImGui::TreeNodeEx(actionMaps[currentMap]->GetActions()->at(i)->GetName().c_str(), (actionMaps[currentMap]->GetActions()->at(currentAction) == actionMaps[currentMap]->GetActions()->at(i) ? ImGuiTreeNodeFlags_Selected : 0)))
+		ImGui::PushID(i);
+		bool open = ImGui::TreeNodeEx(actionMaps[currentMap]->GetActions()->at(i)->GetName().c_str(),
+			ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen | (actionMaps[currentMap]->GetActions()->at(currentAction) == actionMaps[currentMap]->GetActions()->at(i) ? ImGuiTreeNodeFlags_Selected : 0));
+		
+		if (ImGui::IsItemClicked())
 		{
-			if (ImGui::IsItemClicked())
+			currentAction = i;
+		}
+
+		if (open)
+		{
+			for (size_t j = 0; j < actionMaps[currentMap]->GetActions()->at(i)->GetBindings().size(); j++)
 			{
-				currentAction = i;
+				ImGui::TreeNodeEx(SDL_GetScancodeName((SDL_Scancode)actionMaps[currentMap]->GetActions()->at(i)->GetBindings()[j]),
+					(actionMaps[currentMap]->GetActions()->at(i)->GetBindings()[currentBinding] == actionMaps[currentMap]->GetActions()->at(i)->GetBindings()[j] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
+				
+				if (ImGui::IsItemClicked())
+				{
+					currentBinding = j;
+				}
+				ImGui::TreePop();
 			}
 			ImGui::TreePop();
 		}
+
+		ImGui::PopID();
 	}
 	ImGui::EndChild();
 
@@ -102,20 +124,24 @@ bool InputActionMenu::Update(float dt)
 	//ImGui::SameLine();
 	//ImGui::InputText("##Name", &current, 30);
 	ImGui::Separator();
-	//static const char* current_item = NULL;
-
-	//if (ImGui::BeginCombo("##combo", current_item)) // The second parameter is the label previewed before opening the combo.
-	//{
-	//	for (int n = 0; n < IM_ARRAYSIZE(app->input->GetScancodeNameList()); n++)
-	//	{
-	//		bool is_selected = (current_item == items[n]); // You can store your selection however you want, outside or inside your objects
-	//		if (ImGui::Selectable(items[n], is_selected)
-	//			current_item = items[n];
-	//			if (is_selected)
-	//				ImGui::SetItemDefaultFocus();   // You may set the initial focus when opening the combo (scrolling + for keyboard navigation support)
-	//	}
-	//	ImGui::EndCombo();
-	//}
+	if (ImGui::BeginCombo("##combo", currentBindingItem))
+	{
+		for (int n = 0; n < IM_ARRAYSIZE(app->input->keyNameList); n++)
+		{
+			if ((app->input->keyNameList[n] != NULL) && (app->input->keyNameList[n][0] != '\0'))
+			{
+				bool is_selected = (currentBindingItem == app->input->keyNameList[n]);
+				if (ImGui::Selectable(app->input->keyNameList[n], is_selected))
+				{
+					currentBindingItem = app->input->keyNameList[n];
+					//actionMaps[currentMap]->GetActions()->at(currentAction)->AddBinding(n);
+				}
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+		}
+		ImGui::EndCombo();
+	}
 	ImGui::EndChild();
 
 	ImGui::End();

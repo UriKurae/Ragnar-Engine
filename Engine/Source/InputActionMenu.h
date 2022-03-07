@@ -15,6 +15,8 @@ public:
 	void OnLoad(JsonParsing& node);
 
 	inline std::string GetName() { return name; }
+	inline void AddBinding(int bind) { bindings.push_back(bind); }
+	inline std::vector<int> GetBindings() { return bindings; }
 
 private:
 	std::string name;
@@ -54,6 +56,9 @@ public:
 private:
 
 	std::vector<ActionMaps*> actionMaps;
+
 	int currentMap;
 	int currentAction;
+	int currentBinding;
+	const char* currentBindingItem = NULL;
 };

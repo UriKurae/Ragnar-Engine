@@ -9,8 +9,6 @@
 
 #include "Profiling.h"
 
-#define MAX_KEYS 300
-
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled), pad(nullptr), joy(nullptr)
 {
 	name = "Input";
@@ -280,7 +278,7 @@ void ModuleInput::FillScancodeNameList()
 {
 	for (size_t i = 0; i < MAX_KEYS; i++)
 	{
-		keyNameList.push_back(SDL_GetScancodeName((SDL_Scancode)i));
+		keyNameList[i] = SDL_GetScancodeName((SDL_Scancode)i);
 	}
 }
 
