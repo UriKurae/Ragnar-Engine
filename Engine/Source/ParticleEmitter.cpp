@@ -47,8 +47,8 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particleProps.colorEnd = { 0,1,0,1 };
 	particleProps.sizeBegin = 0.5f, particleProps.sizeVariation = 0.3f, particleProps.sizeEnd = 0.0f;
 	particleProps.lifeTime = 1.0f;
-	particleProps.velocity = { 0.0f, 2.0f, 0.0f };
-	particleProps.acceleration = { 0.0f, 5.0f, 0.0f };
+	particleProps.velocity = { 0.0f, 2.0f, -3.0f };
+	particleProps.acceleration = { 2.0f, 2.0f, 0.0f };
 	particleProps.position = { 0.0f, 0.0f, 0.0f };
 
 
@@ -251,7 +251,7 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 
 			float life = particle.lifeRemaining / particle.lifeTime;
 			float4 color = float4::Lerp(particle.colorEnd, particle.colorBegin, life);
-			//color.w *= life;
+			color.w *= life;
 			float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
 
 			DrawParticle(particle.position, particle.rotation, { size,size,0.0f }, color);
@@ -306,6 +306,7 @@ void ParticleEmitter::Update(float dt)
 
 		particle.lifeRemaining -= dt;
 		particle.position += particle.velocity * dt;
+		particle.velocity += particleProps.acceleration * dt;
 		particle.rotation += particleProps.deltaRotation * dt;
 	}
 }
@@ -360,6 +361,9 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 
 		guiName = "Particle lifetime" + suffixLabel;
 		ImGui::DragFloat(guiName.c_str(), &particleProps.lifeTime, 0.01f, 0.0f, 10.0f);
+
+		ImGui::DragFloat3("Velocity", particleProps.velocity.ptr(), 0.01f);
+		ImGui::DragFloat3("Acceleration", particleProps.acceleration.ptr(), 0.01f);
 
 		ImGui::DragFloat("Beginning Size", &particleProps.sizeBegin, 0.001f, 0.0f);
 
@@ -529,13 +533,32 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	particlesPerSecond = node.GetJsonNumber("Emitter: Particles Per Second");
 	isActive = node.GetJsonBool("Emitter: Is Active");
 	toDelete = node.GetJsonBool("Emitter: To Delete");
-	minLifeTime = node.GetJsonNumber("Emitter: Min Life Time");
-	maxLifeTime = node.GetJsonNumber("Emitter: Max Life Time");
+	//minLifeTime = node.GetJsonNumber("Emitter: Min Life Time");
+	//maxLifeTime = node.GetJsonNumber("Emitter: Max Life Time");
 	timer = node.GetJsonNumber("Emitter: Timer");
 	currTimer = node.GetJsonNumber("Emitter: Current Timer");
 
-	for (int i = 0; i < effects.size(); i++)
+	particleProps.position = node.GetJson3Number(node, "Particle Props Position");
+	particleProps.velocity = node.GetJson3Number(node, "Particle Props Velocity");
+	particleProps.acceleration = node.GetJson3Number(node, "Particle Props Acceleration");
+	particleProps.colorBegin = node.GetJson4Number(node, "Particle Props Color Begin");
+	particleProps.colorEnd = node.GetJson4Number(node, "Particle Props Color End");
+	particleProps.sizeBegin = node.GetJsonNumber ("Particle Props Size Begin");
+	particleProps.sizeEnd = node.GetJsonNumber ("Particle Props Size End");
+	particleProps.sizeVariation = node.GetJsonNumber ("Particle Props Size Variation");
+	particleProps.lifeTime = node.GetJsonNumber ("Particle Props Lifetime");
+	particleProps.deltaRotation = node.GetJsonNumber ("Particle Props Rotation Amount");
+
+	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Texture Assets Path"))));
+	
+	JSON_Array* effectsArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Effects");
+	int effectsCount = node.GetJsonArrayCount(effectsArray);
+
+	for (int i = 0; i < effectsCount; ++i)
+	{
+		// TODO: Switch checking the type of the effect and creating it, afterwards push it to the vector
 		effects[i]->OnLoad(node);
+	}
 
 	return true;
 }
@@ -548,18 +571,35 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Particles Per Second", particlesPerSecond);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Emitter: Is Active", isActive);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Emitter: To Delete", toDelete);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Min Life Time", minLifeTime);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Max Life Time", maxLifeTime);
+	//file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Min Life Time", minLifeTime);
+	//file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Max Life Time", maxLifeTime);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Timer", timer);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Current Timer", currTimer);
-	node.SetValueToArray(array, file.GetRootValue());
 
+	file.SetNewJson3Number(file, "Particle Props Position", particleProps.position);
+	file.SetNewJson3Number(file, "Particle Props Velocity", particleProps.velocity);
+	file.SetNewJson3Number(file, "Particle Props Acceleration", particleProps.acceleration);
+	file.SetNewJson4Number(file, "Particle Props Color Begin", particleProps.colorBegin);
+	file.SetNewJson4Number(file, "Particle Props Color End", particleProps.colorEnd);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Begin", particleProps.sizeBegin);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size End", particleProps.sizeEnd);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Variation", particleProps.sizeVariation);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Lifetime", particleProps.lifeTime);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Rotation Amount", particleProps.deltaRotation);
+
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Texture Assets Path", texture->GetAssetsPath().c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", data.shader->GetAssetsPath().c_str());
+
+
+	JSON_Array* effectsArray = file.SetNewJsonArray(file.GetRootValue(), "Effects");
 
 	for (int i = 0; i < effects.size(); i++)
 	{
 		if (effects[i] != nullptr)
-			effects[i]->OnSave(node, array);
+			effects[i]->OnSave(file, effectsArray);
 	}
+
+	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
 }
