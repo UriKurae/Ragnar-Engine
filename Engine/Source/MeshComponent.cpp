@@ -230,6 +230,8 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 
 		CalculateCM();
 	}
+
+
 }
 
 bool MeshComponent::HasMaterial()
@@ -237,6 +239,10 @@ bool MeshComponent::HasMaterial()
 	if (material) return true;
 	
 	return false;
+}
+const std::map<std::string, BoneInfo> MeshComponent::GetBoneMap()
+{
+	return mesh->GetBoneMap();
 }
 
 void MeshComponent::CalculateCM()

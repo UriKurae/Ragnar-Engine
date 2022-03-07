@@ -18,8 +18,10 @@ enum class ComponentType
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
+	LIGHT,
+	ANIMATION,
+	BONE,
 	RIGID_BODY,
-	LIGHT
 };
 
 class Component

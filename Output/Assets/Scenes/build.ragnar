@@ -1,0 +1,302 @@
+{
+    "Game Objects": [
+        {
+            "UUID": 417171234,
+            "Parent UUID": 0,
+            "Name": "build",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": []
+        },
+        {
+            "UUID": 1340834673,
+            "Parent UUID": 417171234,
+            "Name": "Directional Light",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        50,
+                        50,
+                        50
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 8,
+                    "Active": true,
+                    "Light Type": 1,
+                    "Direction": [
+                        1,
+                        0,
+                        0
+                    ],
+                    "Ambient": [
+                        0.25,
+                        0.25,
+                        0.25
+                    ],
+                    "Diffuse": [
+                        0.75,
+                        0.75,
+                        0.75
+                    ],
+                    "Specular": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 417171234,
+            "Name": "Camera",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 1.0774549245834351,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Type": 3
+                },
+                {
+                    "Type": 6,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2021177439,
+            "Parent UUID": 417171234,
+            "Name": "Player",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.5,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/AnimatedDummy__BlueGuy.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "Idle",
+                    "Animations": [
+                        {
+                            "State": "Walk",
+                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/AnimatedDummy__Take 001.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Shoot",
+                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Loop": false
+                        }
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "None"
+                        }
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 2,
+                    "Radius": 0.30000001192092896,
+                    "Height": 1.6000000238418579,
+                    "Gravity": false,
+                    "Kinematic": true,
+                    "Mass": 60,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1388560002,
+            "Parent UUID": 417171234,
+            "Name": "Cube",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        -1,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        20,
+                        1,
+                        20
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        }
+    ]
+}

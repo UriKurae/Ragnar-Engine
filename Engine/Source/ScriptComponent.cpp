@@ -1,15 +1,7 @@
 #include "ScriptComponent.h"
-#include "ImGui/imgui.h"
 
-#include "ModuleEditor.h"
 #include "ModuleScene.h"
 
-#include "GameObject.h"
-#include "Application.h"
-//#include "DETime.h"
-#include "TransformComponent.h"
-
-#include"JsonParsing.h"
 #include <mono/metadata/class.h>
 #include <mono/metadata/object.h>
 #include <mono/metadata/object-forward.h>
@@ -21,7 +13,11 @@ ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
 	type = ComponentType::SCRIPT;
 	owner = own;
 
-	LoadScriptData(scriptName);
+	if (scriptName != nullptr && scriptName != "")
+	{
+		name = scriptName;
+		LoadScriptData(scriptName);
+	}
 }
 
 ScriptComponent::~ScriptComponent()
@@ -74,25 +70,44 @@ bool ScriptComponent::Update(float dt)
 //#ifndef STANDALONE
 void ScriptComponent::OnEditor()
 {
-	//if (Component::OnEditor() == true)
-	//{
-		//ImGui::Separator();
 	ImGui::PushID(this);
 	if (ImGui::CollapsingHeader(ICON_FA_CODE" Script"))
 	{
-		for (int i = 0; i < fields.size(); i++)
+		if(name == "") SelectScript();
+		else
 		{
-			DropField(fields[i], "_GAMEOBJECT");
+			for (int i = 0; i < fields.size(); i++)
+			{
+				DropField(fields[i], "_GAMEOBJECT");
+			}
+			ImGui::Separator();
+			for (int i = 0; i < methods.size(); i++)
+			{
+				ImGui::Text(methods[i].c_str());
+			}
 		}
-		ImGui::Separator();
-		for (int i = 0; i < methods.size(); i++)
-		{
-			ImGui::Text(methods[i].c_str());
-		}
+		
 		ImGui::Separator();
 	}
 	ImGui::PopID();
-	//}
+}
+
+void ScriptComponent::SelectScript()
+{
+	if (ImGui::BeginCombo("Select Script", "New Script"))
+	{
+		const char* scriptName;
+		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		{
+			scriptName = mono_class_get_name(app->moduleMono->userScripts[i]);
+			if (ImGui::Selectable(scriptName))
+			{
+				name = scriptName;
+				LoadScriptData(scriptName);
+			}
+		}
+		ImGui::EndCombo();
+	}
 }
 
 void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
@@ -319,12 +334,13 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 }
 
 
-bool ScriptComponent::OnSave(JSON_Object* nObj)
+bool ScriptComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	//Component::OnLoad(nObj);
 
 	JsonParsing file = JsonParsing();
-	//file.SetNewJsonNumber(nObj, "ScriptName", name.c_str());
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "ScriptName", name.c_str());
 
 	for (int i = 0; i < fields.size(); i++)
 	{
@@ -332,33 +348,35 @@ bool ScriptComponent::OnSave(JSON_Object* nObj)
 		{
 		case MonoTypeEnum::MONO_TYPE_BOOLEAN:
 			mono_field_get_value(mono_gchandle_get_target(noGCobject), fields[i].field, &fields[i].fiValue.bValue);
-			file.SetNewJsonBool(nObj, mono_field_get_name(fields[i].field), fields[i].fiValue.bValue);
+			file.SetNewJsonBool(node.ValueToObject(file.GetRootValue()), mono_field_get_name(fields[i].field), fields[i].fiValue.bValue);
 			break;
 
 		case MonoTypeEnum::MONO_TYPE_I4:
 			mono_field_get_value(mono_gchandle_get_target(noGCobject), fields[i].field, &fields[i].fiValue.iValue);
-			file.SetNewJsonNumber(nObj, mono_field_get_name(fields[i].field), fields[i].fiValue.iValue);
+			file.SetNewJsonNumber(node.ValueToObject(file.GetRootValue()), mono_field_get_name(fields[i].field), fields[i].fiValue.iValue);
 			break;
 
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 			if (fields[i].fiValue.goValue != nullptr)
-				file.SetNewJsonNumber(nObj, mono_field_get_name(fields[i].field), fields[i].fiValue.goValue->GetUUID());
+				file.SetNewJsonNumber(node.ValueToObject(file.GetRootValue()), mono_field_get_name(fields[i].field), fields[i].fiValue.goValue->GetUUID());
 			break;
 
 		case MonoTypeEnum::MONO_TYPE_R4:
 			mono_field_get_value(mono_gchandle_get_target(noGCobject), fields[i].field, &fields[i].fiValue.fValue);
-			file.SetNewJsonNumber(nObj, mono_field_get_name(fields[i].field), fields[i].fiValue.fValue);
+			file.SetNewJsonNumber(node.ValueToObject(file.GetRootValue()), mono_field_get_name(fields[i].field), fields[i].fiValue.fValue);
 			break;
 
 		case MonoTypeEnum::MONO_TYPE_STRING:
-			file.SetNewJsonString(nObj, mono_field_get_name(fields[i].field), fields[i].fiValue.strValue);
+			file.SetNewJsonString(node.ValueToObject(file.GetRootValue()), mono_field_get_name(fields[i].field), fields[i].fiValue.strValue);
 			break;
 
 		default:
-			file.SetNewJsonNumber(nObj, mono_field_get_name(fields[i].field), fields[i].fiValue.iValue);
+			file.SetNewJsonNumber(node.ValueToObject(file.GetRootValue()), mono_field_get_name(fields[i].field), fields[i].fiValue.iValue);
 			break;
 		}
 	}
+	node.SetValueToArray(array, file.GetRootValue());
+
 	return true;
 }
 

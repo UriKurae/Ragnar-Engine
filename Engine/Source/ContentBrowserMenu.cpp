@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "TextureImporter.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "MonoManager.h"
@@ -12,9 +13,9 @@
 
 #include "Profiling.h"
 
-ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), Menu(true)
+ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), refreshTime(0.0f), Menu(true)
 {
-	mainDirectory = "Assets/";
+	mainDirectory = "Assets/Resources/";
 	currentDirectory = mainDirectory;
 }
 
@@ -25,6 +26,7 @@ ContentBrowserMenu::~ContentBrowserMenu()
 	RELEASE(modelIcon);
 	RELEASE(sceneIcon);
 	RELEASE(prefabIcon);
+	RELEASE(scriptIcon);
 }
 
 bool ContentBrowserMenu::Start()
@@ -44,18 +46,26 @@ bool ContentBrowserMenu::Start()
 	prefabIcon = new Texture(-5, std::string("Settings/EngineResources/prefab.rgtexture"));
 	prefabIcon->Load();
 
+	scriptIcon = new Texture(-6, std::string("Settings/EngineResources/script.rgtexture"));
+	scriptIcon->Load();
+
 	return true;
 }
 
 bool ContentBrowserMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Content Browser Update");
+
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
-	/*if (resource.joinable()) resource.join();
-	resource = std::thread(UpdatingResources);*/
-	ResourceManager::GetInstance()->ImportAllResources();
-
+	refreshTime += dt;
+	if (refreshTime >= 5.0f)
+	{
+		ResourceManager::GetInstance()->ImportAllResources();
+		refreshTime = 0.0f;
+	}
+	
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
 	ImGui::Begin(ICON_FA_FOLDER" Content Browser", &active);
@@ -163,6 +173,9 @@ bool ContentBrowserMenu::Update(float dt)
 			break;
 		case ResourceType::SCENE:
 			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, height });
+			break;
+		case ResourceType::SCRIPT:
+			ImGui::ImageButton(scriptIcon ? (ImTextureID)scriptIcon->GetId() : "", { cell, height });
 			break;
 		default:
 			if ((*it).find(".rgprefab") != std::string::npos)

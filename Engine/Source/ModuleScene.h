@@ -34,6 +34,7 @@ public:
 	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool Update(float dt) override;
+	void Scripting(float dt);
 	bool PostUpdate() override;
 	bool Draw();
 	bool CleanUp() override;
@@ -85,6 +86,7 @@ public:
 	GameObject* camera;
 
 	std::multimap<uint, SerializedField*> referenceMap;
+
 private:
 	GameObject* root;
 	Quadtree qTree;

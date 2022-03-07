@@ -12,7 +12,9 @@ enum class ResourceType
 	SCENE,
 	SCRIPT,
 	MATERIAL,
-	SHADER
+	SHADER,
+	ANIMATION,
+	BONE
 };
 
 class Resource

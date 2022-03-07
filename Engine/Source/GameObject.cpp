@@ -19,6 +19,7 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
+#include "AnimationComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
@@ -109,20 +110,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
-		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		if (ImGui::Selectable("Script Component"))
 		{
-			if (ImGui::Selectable(mono_class_get_name(app->moduleMono->userScripts[i])))
-			{
-				const char* name = mono_class_get_name(app->moduleMono->userScripts[i]);
-				CreateComponent(ComponentType::SCRIPT, name);
-				newComponent = false;
-			}
-		}
-		/*if (ImGui::Selectable("Script Component"))
-		{
-			CreateComponent(ComponentType::SCRIPT, "Script");
+			CreateComponent(ComponentType::SCRIPT);
 			newComponent = false;
-		}*/
+		}
 	
 		if (ImGui::Selectable("Audio Source Component"))
 		{
@@ -137,6 +129,11 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Audio Reverb Zone Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Animation Component"))
+		{
+			CreateComponent(ComponentType::ANIMATION);
 			newComponent = false;
 		}
 		if (ImGui::Selectable("Rigid Body"))
@@ -204,8 +201,11 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 			}
 			else
 			{
-				matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
+				matComp = new MaterialComponent(this, true);
 				meshComp->SetMaterial(matComp);
+				matComp->SetOwner(this);
+				components.push_back(matComp);
+				//matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
 			}
 		}
 		break;
@@ -225,19 +225,41 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::ANIMATION:
+		component = new AnimationComponent(this);
+		break;
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
 		break;
 	case ComponentType::MATERIAL:
 	{
-		component = new MaterialComponent(this, false);
-
 		{
-			MeshComponent* m = GetComponent<MeshComponent>();
+			MaterialComponent* matComp = GetComponent<MaterialComponent>();
+			if (matComp != nullptr && matComp->IsDefaultMat())
+			{
+				std::vector<Component*>::iterator it = components.begin();
+				for (; it != components.end(); ++it)
+				{
+					if (*(it) == matComp)
+					{
+						components.erase(it);
+						RELEASE(matComp);
+						break;
+					}
+				}
 
+				component = new MaterialComponent(this, false);
+			}
+			else
+			{
+				component = new MaterialComponent(this, false);
+			}
+
+			MeshComponent* m = GetComponent<MeshComponent>();
 			if (m != nullptr)
 				m->SetMaterial((MaterialComponent*)component);
 		}
+
 		break;
 	}
 	case ComponentType::LIGHT:
@@ -297,6 +319,9 @@ void GameObject::CopyComponent(Component* component)
 		break;
 	case ComponentType::MESH_RENDERER:
 		c = new MeshComponent(dynamic_cast<MeshComponent*>(component), GetComponent<TransformComponent>());
+		break;
+	case ComponentType::ANIMATION:
+		c = new AnimationComponent(dynamic_cast<AnimationComponent*>(component));
 		break;
 	case ComponentType::MATERIAL:
 		c = new MaterialComponent(dynamic_cast<MaterialComponent*>(component));
@@ -420,7 +445,7 @@ void GameObject::OnLoad(JsonParsing& node)
 	for (int i = 0; i < size; ++i)
 	{
 		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
-		Component* component = CreateComponent((ComponentType)(int)c.GetJsonNumber("Type"));
+		Component* component = CreateComponent((ComponentType)(int)c.GetJsonNumber("Type"), c.GetJsonString("ScriptName"));
 		component->OnLoad(c);
 	}
 }
@@ -565,6 +590,18 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<RigidBodyComponent>()->OnLoad(c);
 			break;
+		case ComponentType::SCRIPT:
+			if (GetComponent<ScriptComponent>() == nullptr)
+				CreateComponent(ComponentType::SCRIPT, c.GetJsonString("ScriptName"));
+
+			GetComponent<ScriptComponent>()->OnLoad(c);
+			break;
+		case ComponentType::ANIMATION:
+			if (GetComponent<AnimationComponent>() == nullptr)
+				CreateComponent(ComponentType::ANIMATION);
+
+			GetComponent<AnimationComponent>()->OnLoad(c);
+			break;
 		}
 	}
 
@@ -618,6 +655,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::RIGID_BODY:
 			RemoveComponent(GetComponent<RigidBodyComponent>());
+			break;
+		case ComponentType::SCRIPT:
+			RemoveComponent(GetComponent<ScriptComponent>());
+			break;
+		case ComponentType::ANIMATION:
+			RemoveComponent(GetComponent<AnimationComponent>());
 			break;
 		}
 	}

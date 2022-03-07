@@ -170,6 +170,8 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->specular = node.GetJson3Number(node, "Specular");
 
 			light = l;
+
+			delete app->renderer3D->dirLight;
 			app->renderer3D->dirLight = l;
 
 			break;

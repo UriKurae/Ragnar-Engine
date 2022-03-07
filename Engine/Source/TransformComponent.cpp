@@ -6,6 +6,9 @@
 
 #include "C_RigidBody.h"
 #include "MeshComponent.h"
+#include "ListenerComponent.h"
+#include "AudioSourceComponent.h"
+#include "AudioReverbZoneComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
@@ -90,6 +93,18 @@ bool TransformComponent::Update(float dt)
 		}
 
 		SetAABB();
+
+		ListenerComponent* listener = owner->GetComponent<ListenerComponent>();
+		if (listener != nullptr)
+			listener->ChangePosition();
+
+		AudioSourceComponent* audioSource = owner->GetComponent<AudioSourceComponent>();
+		if (audioSource != nullptr)
+			audioSource->ChangePosition();
+
+		AudioReverbZoneComponent* reverb = owner->GetComponent<AudioReverbZoneComponent>();
+		if (reverb != nullptr)
+			reverb->ChangePosition();
 
 		changeTransform = false;
 	}

@@ -27,6 +27,8 @@ public:
 	inline std::string& GetCurrentDir() { return currentDirectory; }
 
 private:
+	float refreshTime;
+
 	std::string currentDirectory;
 	std::string mainDirectory;
 
@@ -37,4 +39,5 @@ private:
 	Texture* modelIcon;
 	Texture* sceneIcon;
 	Texture* prefabIcon;
+	Texture* scriptIcon;
 };

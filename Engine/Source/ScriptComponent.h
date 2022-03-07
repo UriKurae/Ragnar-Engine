@@ -19,7 +19,7 @@ public:
 	bool Update(float dt) override;
 
 	bool OnLoad(JsonParsing& nObj) override;
-	bool OnSave(JSON_Object* nObj);
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetField(MonoClassField* field, GameObject* value);
 	void DropField(SerializedField& fieldName, const char* dropType);
@@ -29,6 +29,7 @@ public:
 private:
 //#ifndef STANDALONE
 	void OnEditor() override;
+	void SelectScript();
 	void DisplayField(SerializedField& field, const char* dropType);
 //#endif // !STANDALONE
 
@@ -38,6 +39,7 @@ public:
 
 	MonoMethod* updateMethod;
 	uint32_t noGCobject;
+	std::string name = "";
 
 	static ScriptComponent* runningScript;
 };
