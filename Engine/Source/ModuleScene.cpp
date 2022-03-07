@@ -615,7 +615,7 @@ void ModuleScene::Scripting(float dt)
 
 		//ACTIONS
 		RigidBodyComponent* playerRB = player->GetComponent<RigidBodyComponent>();
-		float playerForce = 100.0f;
+		float playerForce = 1000.0f;
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			float force = 10.0f;
