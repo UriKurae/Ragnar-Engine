@@ -151,14 +151,14 @@ bool ModuleScene::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN && app->scene->GetGameState() == GameState::PLAYING)
 	{
 		GameObject* anim = *(root->GetChilds().end() - 1);
 		anim = *(anim->GetChilds().end() - 1);
 
 		anim->GetComponent<AnimationComponent>()->Play("Capoeira");
 	}
-	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN && app->scene->GetGameState() == GameState::PLAYING)
 	{
 		GameObject* anim = *(root->GetChilds().end() - 1);
 		anim = *(anim->GetChilds().end() - 1);

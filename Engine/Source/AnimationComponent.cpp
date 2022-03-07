@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "MeshComponent.h"
 
+#include "ModuleScene.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
 
@@ -161,7 +163,7 @@ void AnimationComponent::OnEditor()
 bool AnimationComponent::Update(float dt)
 {
 	deltaTime = dt;
-	if (currAnim && playing)
+	if (currAnim && playing && app->scene->GetGameState() == GameState::PLAYING)
 	{
 		// Loop time keeps track of the miliseconds that passed since the start of the animation
 		// GetDuration gets the duration of the animation in miliseconds
