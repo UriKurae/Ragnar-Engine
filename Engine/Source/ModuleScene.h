@@ -34,6 +34,7 @@ public:
 	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool Update(float dt) override;
+	void Scripting();
 	bool PostUpdate() override;
 	bool Draw();
 	bool CleanUp() override;

@@ -129,42 +129,12 @@ bool ModuleScene::Update(float dt)
 
 		resetQuadtree = false;
 	}
+
+
+	///////////////////////
+	// Scripting
+	Scripting();
 	
-	if (gameState == GameState::PLAYING)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
-		{
-			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
-		{
-			player->GetComponent<AudioSourceComponent>()->StopClip();
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-		{
-			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
-		{
-			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
-		}
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN && app->scene->GetGameState() == GameState::PLAYING)
-	{
-		GameObject* anim = *(root->GetChilds().end() - 1);
-		anim = *(anim->GetChilds().end() - 1);
-
-		anim->GetComponent<AnimationComponent>()->Play("Capoeira");
-	}
-	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN && app->scene->GetGameState() == GameState::PLAYING)
-	{
-		GameObject* anim = *(root->GetChilds().end() - 1);
-		anim = *(anim->GetChilds().end() - 1);
-
-		anim->GetComponent<AnimationComponent>()->Play("Idle");
-	}
 
 	AudioManager::Get()->Render();
 
@@ -598,4 +568,76 @@ void ModuleScene::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
+}
+
+/////////////////////////
+
+void ModuleScene::Scripting()
+{
+	if (gameState == GameState::PLAYING)
+	{
+		// AUDIO
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+		{
+			player->GetComponent<AudioSourceComponent>()->StopClip();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		}
+
+		// ANIMATIONS
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN ||
+			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN ||
+			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || 
+			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			GameObject* anim = *(root->GetChilds().end() - 1);
+			anim = *(anim->GetChilds().end() - 1);
+
+			anim->GetComponent<AnimationComponent>()->Play("Capoeira"); //Walk
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			GameObject* anim = *(root->GetChilds().end() - 1);
+			anim = *(anim->GetChilds().end() - 1);
+
+			anim->GetComponent<AnimationComponent>()->Play("Capoeira"); //Shoot
+		}
+		else
+		{
+			GameObject* anim = *(root->GetChilds().end() - 1);
+			anim = *(anim->GetChilds().end() - 1);
+
+			anim->GetComponent<AnimationComponent>()->Play("Idle");
+		}
+
+		//ACTIONS
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			PCube spherePrim = PCube(1,1,1);
+			/*spherePrim.SetPos(app->camera->GetPosition().x, app->camera->GetPosition().y, app->camera->GetPosition().z);
+			spherePrim.InnerMesh();
+			spherePrim.mesh->LoadToMemory();
+			spherePrim.mesh->GenerateBounds();*/
+
+			float force = 30.0f;
+			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
+			s->GetComponent<TransformComponent>()->SetPosition({ 0, 5, 0 });
+			s->GetComponent<TransformComponent>()->UpdateTransform();
+			RigidBodyComponent* rigidBody;
+			/*rigidBody = dynamic_cast<RigidBodyComponent*>(s->CreateComponent(ComponentType::RIGID_BODY));
+			rigidBody->SetCollisionType(CollisionType::SPHERE);
+			rigidBody->GetBody()->setIgnoreCollisionCheck(app->camera->rigidBody->GetBody(), true);
+			rigidBody->GetBody()->applyCentralImpulse(app->camera->GetFront().Normalized() * force);*/
+		}
+	}
 }
