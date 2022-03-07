@@ -6,6 +6,7 @@
 
 #include "ModuleScene.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -204,19 +205,27 @@ bool CameraComponent::Update(float dt)
 		int horizontalDrag = app->input->GetMouseXMotion();
 		int verticalDrag = app->input->GetMouseYMotion();
 		int dragThreshold = 1;
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT || (mouseDragMid && horizontalDrag < -dragThreshold)) {
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT
+			|| (mouseDragMid && horizontalDrag < -dragThreshold)
+			|| app->input->GetMouseX() < 1) {
 			pos.x += movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z += movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
 		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT || (mouseDragMid && horizontalDrag > dragThreshold)) {
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT
+			|| (mouseDragMid && horizontalDrag > dragThreshold)
+			|| app->input->GetMouseX() > *app->window->GetWindowWidth() - 2) {
 			pos.x -= movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z -= movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT || (mouseDragMid && verticalDrag > dragThreshold)) {
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT
+			|| (mouseDragMid && verticalDrag > dragThreshold)
+			|| app->input->GetMouseY() > *app->window->GetWindowHeight() - 2) {
 			pos.x -= movementSpeed * sin(DEGTORAD * horizontalAngle);
 			pos.z -= movementSpeed * cos(DEGTORAD * horizontalAngle);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT || (mouseDragMid && verticalDrag < -dragThreshold)) {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT
+			|| (mouseDragMid && verticalDrag < -dragThreshold)
+			|| app->input->GetMouseY() < 1) {
 			pos.x += movementSpeed * sin(DEGTORAD * horizontalAngle);
 			pos.z += movementSpeed * cos(DEGTORAD * horizontalAngle);
 		}
@@ -233,7 +242,7 @@ bool CameraComponent::Update(float dt)
 	newPos.x += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
 	newPos.y += radius * cos(DEGTORAD * verticalAngle);
 
-	float3 directionFrustum = targetPos - camera.Pos();
+	float3 directionFrustum = targetPos - newPos;
 	directionFrustum.Normalize();
 
 	float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
@@ -272,7 +281,7 @@ void CameraComponent::Draw()
 void CameraComponent::SetPlanes()
 {
 	camera.SetViewPlaneDistances(nearPlane, farPlane);
-	CompileBuffers();
+	//CompileBuffers();
 }
 
 void CameraComponent::CalculateVerticalFov(float horizontalFovRadians, float width, float height)
