@@ -21,14 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -54,9 +54,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\mono;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Engine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -64,8 +64,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;$(SolutionDir)Dependencies\mono\libx86;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;mono-2.0-boehm.lib;mono-2.0-sgen.lib;BulletCollision_debug.lib;BulletDynamics_debug.lib;LinearMath_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,9 +76,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>AK_OPTIMIZED;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\mono;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\Bullet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;AK_OPTIMIZED;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
@@ -87,8 +87,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AkRoomVerbFX.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;$(SolutionDir)Dependencies\mono\libx86;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies);AkRoomVerbFX.lib;mono-2.0-boehm.lib;mono-2.0-sgen.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -97,6 +97,7 @@
     <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
+    <ClInclude Include="Dependencies\Imgui\bezier.hpp" />
     <ClInclude Include="Dependencies\Imgui\imconfig.h" />
     <ClInclude Include="Dependencies\Imgui\imgui.h" />
     <ClInclude Include="Dependencies\Imgui\ImguiStyle.h" />
@@ -105,12 +106,91 @@
     <ClInclude Include="Dependencies\Imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_impl_sdl.h" />
     <ClInclude Include="Dependencies\Imgui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_textedit.h" />
     <ClInclude Include="Dependencies\Imgui\imstb_truetype.h" />
     <ClInclude Include="Dependencies\json\parson.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Algorithm\GJK.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Algorithm\GJK2D.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Algorithm\Random\LCG.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Algorithm\SAT.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\emscripten\library_system.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\AABB.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\AABB2D.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Capsule.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Circle.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Circle2D.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Frustum.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\GeometryAll.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\GeomType.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\HitInfo.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\KDTree.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Line.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\LineSegment.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\LineSegment2D.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\OBB.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\OBB2D.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\PBVolume.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Plane.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Polygon.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Polygon2DRef.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Polyhedron.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\QuadTree.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Ray.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Sphere.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Triangle.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\Triangle2D.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\MathBuildConfig.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\MathGeoLib.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\MathGeoLibFwd.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\assume.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\BitFuncs.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\BitOps.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Callstack.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\FixedPoint.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float2.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float3.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float3x3.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float3x4.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4d.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4x4.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4x4_neon.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4x4_sse.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4_neon.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\float4_sse.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\FloatCmp.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\grisu3.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\InclWindows.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Interpolate.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MathAll.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MathConstants.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MathFunc.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MathLog.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MathNamespace.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MathTypes.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MatrixProxy.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MiniFloat.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\MultiLineMacro.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\myassert.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Polynomial.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Quat.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\quat_simd.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Rect.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Reinterpret.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\simd.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\SSEMath.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\sse_mathfun.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\Swap.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\TransformOps.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Math\vec2d.h" />
+    <ClInclude Include="Dependencies\MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="Dependencies\mmgr\mmgr.h" />
     <ClInclude Include="Dependencies\mmgr\nommgr.h" />
+    <ClInclude Include="Dependencies\PugiXML\pugiconfig.hpp" />
+    <ClInclude Include="Dependencies\PugiXML\pugixml.hpp" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileHelpersBase.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.h" />
@@ -125,13 +205,22 @@
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIODeferred.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\stdafx.h" />
     <ClInclude Include="Engine\Source\AboutMenu.h" />
+    <ClInclude Include="Engine\Source\Animation.h" />
+    <ClInclude Include="Engine\Source\AnimationComponent.h" />
+    <ClInclude Include="Engine\Source\AnimationImporter.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\AssimpDefs.h" />
     <ClInclude Include="Engine\Source\AudioManager.h" />
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
+    <ClInclude Include="Engine\Source\Bone.h" />
+    <ClInclude Include="Engine\Source\BufferLayout.h" />
     <ClInclude Include="Engine\Source\CameraComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
+    <ClInclude Include="Engine\Source\C_RigidBody.h" />
+    <ClInclude Include="Engine\Source\LightComponent.h" />
+    <ClInclude Include="Engine\Source\Lights.h" />
+    <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\GameObjectCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
@@ -152,7 +241,6 @@
     <ClInclude Include="Engine\Source\IndexBuffer.h" />
     <ClInclude Include="Engine\Source\InspectorMenu.h" />
     <ClInclude Include="Engine\Source\JsonParsing.h" />
-    <ClInclude Include="Engine\Source\Light.h" />
     <ClInclude Include="Engine\Source\ListenerComponent.h" />
     <ClInclude Include="Engine\Source\MainMenuBar.h" />
     <ClInclude Include="Engine\Source\MaterialComponent.h" />
@@ -169,34 +257,92 @@
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\MonoManager.h" />
+    <ClInclude Include="Engine\Source\PrefabManager.h" />
+    <ClInclude Include="Engine\Source\Physics3D.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Profiling.h" />
     <ClInclude Include="Engine\Source\Quadtree.h" />
     <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
+    <ClInclude Include="Engine\Source\ScriptBindings.h" />
+    <ClInclude Include="Engine\Source\ScriptComponent.h" />
+    <ClInclude Include="Engine\Source\Shapes.h" />
+    <ClInclude Include="Engine\Source\Shader.h" />
+    <ClInclude Include="Engine\Source\ShaderHelpers.h" />
+    <ClInclude Include="Engine\Source\ShaderImporter.h" />
     <ClInclude Include="Engine\Source\Style.h" />
+    <ClInclude Include="Engine\Source\TextEditor.h" />
+    <ClInclude Include="Engine\Source\TextEditorMenu.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureImporter.h" />
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
+    <ClInclude Include="Engine\Source\Vertex.h" />
+    <ClInclude Include="Engine\Source\VertexArray.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\Imgui\bezier.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
     <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_draw.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="Dependencies\Imgui\imgui_stdlib.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\json\parson.c" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Algorithm\GJK.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Algorithm\GJK2D.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Algorithm\Random\LCG.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Algorithm\SAT.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\AABB.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Capsule.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Circle.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Circle2D.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Frustum.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Line.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\LineSegment.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\LineSegment2D.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\OBB.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\PBVolume.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Plane.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Polygon.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Polyhedron.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Ray.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Sphere.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Triangle.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\Triangle2D.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\BitOps.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\Callstack.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float2.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float3.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float3x3.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float3x4.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float4.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float4d.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\float4x4.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\grisu3.c" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\grisu3_cpp.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\MathFunc.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\MathLog.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\MathOps.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\MiniFloat.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\Polynomial.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\Quat.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\SSEMath.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Math\TransformOps.cpp" />
+    <ClCompile Include="Dependencies\MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Dependencies\mmgr\mmgr.cpp" />
+    <ClCompile Include="Dependencies\PugiXML\pugixml.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp" />
@@ -206,17 +352,24 @@
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp" />
     <ClCompile Include="Engine\Source\AboutMenu.cpp" />
+    <ClCompile Include="Engine\Source\Animation.cpp" />
+    <ClCompile Include="Engine\Source\AnimationComponent.cpp" />
+    <ClCompile Include="Engine\Source\AnimationImporter.cpp" />
     <ClCompile Include="Engine\Source\Application.cpp" />
     <ClCompile Include="Engine\Source\AssimpDefs.cpp" />
     <ClCompile Include="Engine\Source\AudioManager.cpp" />
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp" />
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
+    <ClCompile Include="Engine\Source\Bone.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
+    <ClCompile Include="Engine\Source\Component.cpp" />
+    <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
     <ClCompile Include="Engine\Source\ConsoleMenu.cpp" />
     <ClCompile Include="Engine\Source\ContentBrowserMenu.cpp" />
+    <ClCompile Include="Engine\Source\C_RigidBody.cpp" />
     <ClCompile Include="Engine\Source\FileSystem.cpp" />
     <ClCompile Include="Engine\Source\FogWarMenu.cpp" />
     <ClCompile Include="Engine\Source\Framebuffer.cpp" />
@@ -228,11 +381,11 @@
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Source\InspectorMenu.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
-    <ClCompile Include="Engine\Source\Light.cpp" />
     <ClCompile Include="Engine\Source\ListenerComponent.cpp" />
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
+    <ClCompile Include="Engine\Source\Material.cpp" />
     <ClCompile Include="Engine\Source\MaterialComponent.cpp" />
     <ClCompile Include="Engine\Source\Mesh.cpp" />
     <ClCompile Include="Engine\Source\MeshComponent.cpp" />
@@ -245,16 +398,26 @@
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
+    <ClCompile Include="Engine\Source\MonoManager.cpp" />
+    <ClCompile Include="Engine\Source\ScriptComponent.cpp" />
+    <ClCompile Include="Engine\Source\TextEditorMenu.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
+    <ClCompile Include="Engine\Source\PrefabManager.cpp" />
+    <ClCompile Include="Engine\Source\Physics3D.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />
+    <ClCompile Include="Engine\Source\Shapes.cpp" />
+    <ClCompile Include="Engine\Source\Shader.cpp" />
+    <ClCompile Include="Engine\Source\ShaderImporter.cpp" />
+    <ClCompile Include="Engine\Source\TextEditor.cpp" />
     <ClCompile Include="Engine\Source\Texture.cpp" />
     <ClCompile Include="Engine\Source\TextureBuffer.cpp" />
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />
     <ClCompile Include="Engine\Source\EngineTimer.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
+    <ClCompile Include="Engine\Source\VertexArray.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\Viewport.cpp" />
   </ItemGroup>
@@ -265,6 +428,13 @@
     <Image Include="Output\Settings\EngineResources\logo.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dependencies\MathGeoLib\include\Geometry\KDTree.inl" />
+    <None Include="Dependencies\MathGeoLib\include\Geometry\QuadTree.inl" />
+    <None Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
+    <None Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_CPP.inl" />
+    <None Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
+    <None Include="Dependencies\MathGeoLib\include\Math\float2.inl" />
+    <None Include="Dependencies\MathGeoLib\include\Math\Matrix.inl" />
     <None Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFilePackageLowLevelIO.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

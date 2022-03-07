@@ -1,12 +1,7 @@
 #pragma once
-
 #include "Module.h"
-
-#include "MathGeoLib/src/Geometry/Frustum.h"
-#include "MathGeoLib/src/Geometry/Line.h"
-
-class VertexBuffer;
-class IndexBuffer;
+#include "Geometry/Frustum.h"
+#include "Geometry/Line.h"
 
 class ModuleCamera3D : public Module
 {

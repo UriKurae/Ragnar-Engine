@@ -1,14 +1,9 @@
 #pragma once
+#include <map>
 
 #include "Component.h"
-#include "IndexBuffer.h"
-#include "VertexBuffer.h"
-#include "MathGeoLib/src/MathGeoLib.h"
-
-#include <vector>
-
-typedef unsigned int GLuint;
-typedef unsigned char GLubyte;
+#include "Geometry/AABB.h"
+#include "Bone.h"
 
 class TransformComponent;
 class MaterialComponent;
@@ -22,11 +17,12 @@ public:
 	MeshComponent(MeshComponent* meshComponent, TransformComponent* trans);
 	~MeshComponent();
 
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 	void DrawOutline() override;
 	void OnEditor() override;
 
 	bool OnLoad(JsonParsing& node) override;
+	void CalculateCM();
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(std::shared_ptr<Resource> m);
@@ -39,10 +35,7 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
-	
-	float3 GetCenterPointInWorldCoords();
-	float GetSphereRadius();
-
+	const std::map<std::string, BoneInfo> GetBoneMap();
 
 private:
 	TransformComponent* transform;
@@ -55,6 +48,7 @@ private:
 	bool verticesNormals;
 
 	std::shared_ptr<Mesh> mesh;
+	std::vector<GameObject*> boneList;
 
 	AABB localBoundingBox;
 

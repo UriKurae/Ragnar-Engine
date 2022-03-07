@@ -1,19 +1,15 @@
+#include "MeshComponent.h"
 #include "Application.h"
 #include "Globals.h"
-#include "MeshComponent.h"
 
 #include "ModuleScene.h"
-#include "CameraComponent.h"
+
+#include "TransformComponent.h"
+#include "MaterialComponent.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
-
 #include "Mesh.h"
-
-#include "Imgui/imgui.h"
-
-#include "glew/include/GL/glew.h"
-
-#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
@@ -45,24 +41,25 @@ MeshComponent::~MeshComponent()
 	if (mesh.use_count() - 1 == 1) mesh->UnLoad();
 }
 
-void MeshComponent::Draw()
+void MeshComponent::Draw(CameraComponent* gameCam)
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
+	//glPushMatrix();
+	//glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	
-	if (material != nullptr && material->GetActive()) material->BindTexture();
+	
+	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
-
-	if (material != nullptr && material->GetActive()) material->UnbindTexture();
 	
-	glPopMatrix();
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (material != nullptr && material->GetActive()) material->Unbind();
+	
+	//glPopMatrix();
+	//
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	// If showAABB are enable draw the his bounding boxes
 	if (showAABB == true) {
@@ -106,17 +103,15 @@ void MeshComponent::DrawOutline()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glPushMatrix();
-	float4x4 testLocal = transform->GetLocalTransform();
+	float4x4 testGlobal;
+	testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
 
-	testLocal.scaleX += 0.05f;
-	testLocal.scaleY += 0.05f;
-	testLocal.scaleZ += 0.05f;
-	glMultMatrixf(testLocal.Transposed().ptr());
+	glMultMatrixf(testGlobal.Transposed().ptr());
 
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
 	glPopMatrix();
-
+	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
@@ -152,10 +147,7 @@ void MeshComponent::OnEditor()
 		ImGui::SameLine();		
 		ImGui::Checkbox("Show OBB", &showOBB);
 
-		ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Delete").x - 25);
-		if (ImGui::Button(ICON_FA_TRASH" Delete"))
-			owner->RemoveComponent(this);
-
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 
@@ -204,15 +196,10 @@ bool MeshComponent::OnLoad(JsonParsing& node)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
-
+		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
-		Sphere sphere;
-		sphere.r = 0.f;
-		sphere.pos = localBoundingBox.CenterPoint();
-		sphere.Enclose(localBoundingBox);
-		mesh.get()->SetRadius(sphere.r);
-		mesh.get()->SetCenterMesh(sphere.pos);
+
+		CalculateCM();
 	}
 
 	return true;
@@ -238,16 +225,13 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 	if (mesh)
 	{
 		localBoundingBox.SetNegativeInfinity();
-		localBoundingBox.Enclose(mesh->GetVerticesData(), mesh->GetVerticesSize());
-
+		localBoundingBox.Enclose(mesh->GetPositions().data(), mesh->GetPositions().size());
 		owner->SetAABB(localBoundingBox);
-		Sphere sphere;
-		sphere.r = 0.f;
-		sphere.pos = localBoundingBox.CenterPoint();
-		sphere.Enclose(localBoundingBox);
-		mesh.get()->SetRadius(sphere.r);
-		mesh.get()->SetCenterMesh(sphere.pos);
+
+		CalculateCM();
 	}
+
+
 }
 
 bool MeshComponent::HasMaterial()
@@ -256,12 +240,17 @@ bool MeshComponent::HasMaterial()
 	
 	return false;
 }
-
-float3 MeshComponent::GetCenterPointInWorldCoords()
+const std::map<std::string, BoneInfo> MeshComponent::GetBoneMap()
 {
-	return owner->GetComponent<TransformComponent>()->GetGlobalTransform().TransformPos(mesh->GetCenterMesh());
+	return mesh->GetBoneMap();
 }
-float MeshComponent::GetSphereRadius()
+
+void MeshComponent::CalculateCM()
 {
-	return mesh.get()->GetRadius();
+	// Calcule CM offset
+	float3 posBody = owner->GetOOB().CenterPoint();
+	float3 posObj = transform->GetGlobalTransform().Col3(3);
+	owner->SetOffsetCM(posBody - posObj);
+	owner->SetOffsetCM(quatRotate(transform->GetRotation().Inverted(), owner->GetOffsetCM()));
+	owner->SetOffsetCM(quatRotate(transform->GetRotation(), owner->GetOffsetCM()));
 }

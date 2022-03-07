@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="87917746" Language="SFX" Hash="1385756100">
+		<SoundBank Id="87917746" Language="SFX" Hash="52207161">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine</ObjectPath>
 			<ShortName>ragnarEngine</ShortName>
 			<Path>ragnarEngine.bnk</Path>
@@ -25,6 +25,30 @@
 						<File Id="919001556" Language="SFX">
 							<ShortName>lucas.wav</ShortName>
 							<Path>SFX\lucas_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2385628198" Name="footSteps" ObjectPath="\Events\Default Work Unit\footSteps">
+					<IncludedMemoryFiles>
+						<File Id="1011617347" Language="SFX">
+							<ShortName>footsteps.wav</ShortName>
+							<Path>SFX\footsteps_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="456382354" Name="Reload" ObjectPath="\Events\Default Work Unit\Reload">
+					<IncludedMemoryFiles>
+						<File Id="756390645" Language="SFX">
+							<ShortName>reload.wav</ShortName>
+							<Path>SFX\reload_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="251412229" Name="Shot" ObjectPath="\Events\Default Work Unit\Shot">
+					<IncludedMemoryFiles>
+						<File Id="113564842" Language="SFX">
+							<ShortName>shot.wav</ShortName>
+							<Path>SFX\shot_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

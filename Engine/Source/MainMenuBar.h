@@ -1,11 +1,12 @@
 #pragma once
-
 #include "Menu.h"
 #include <vector>
 #include <string>
 
 class ConsoleMenu;
+class TextEditorMenu;
 class Texture;
+
 enum class Menus
 {
 	CONSOLE = 0,
@@ -14,7 +15,8 @@ enum class Menus
 	INSPECTOR = 3,
 	HIERARCHY = 4,
 	CONTENT_BROWSER = 5,
-	FOGWAR = 6,
+	TEXT_EDITOR = 6,
+	FOGWAR = 7,
 };
 
 class MainMenuBar : public Menu
@@ -39,6 +41,13 @@ public:
 	void AlignViewWithSelected();
 
 private:
+	std::string GetNotLightSensibleShaderSource();
+	std::string GetLightSensibleShaderSource();
+
+	void ShowCreateLigthSensibleShaderWindow();
+	void ShowCreateNotLigthSensibleShaderWindow();
+
+private:
 	bool showMenu;
 	Texture* buttonPlay;
 	Texture* buttonStop;
@@ -48,6 +57,11 @@ private:
 
 	bool saveWindow;
 	std::vector<Menu*> menus;
+
+
+	bool showCreateLightSensibleShaderWindow = false;
+	bool showCreateNotLightSensibleShaderWindow = false;
+
 	std::vector<std::string> stylesList;
 	int style = 5;
 	float alphaStyle = 0.1f;

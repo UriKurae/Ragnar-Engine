@@ -1,11 +1,13 @@
+#include "ConfigurationMenu.h"
 #include "Application.h"
+
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleInput.h"
-#include "ConfigurationMenu.h"
-#include "IconsFontAwesome5.h"
 
+#include "SDL_cpuinfo.h"
+#include "SDL_version.h"
 #include <GL\glew.h>
 
 #include "Profiling.h"

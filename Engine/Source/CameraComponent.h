@@ -1,7 +1,6 @@
 #pragma once
-
 #include "Component.h"
-#include "MathGeoLib/src/Geometry/Frustum.h"
+#include "Geometry/Frustum.h"
 
 class TransformComponent;
 class IndexBuffer;
@@ -15,7 +14,7 @@ public:
 
 	void OnEditor() override;
 	bool Update(float dt) override;
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 
 	void SetPlanes();
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);

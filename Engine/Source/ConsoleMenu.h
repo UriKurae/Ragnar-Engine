@@ -1,8 +1,5 @@
 #pragma once
-
 #include "Menu.h"
-
-#include "Imgui/imgui.h"
 
 class ConsoleMenu : public Menu
 {
@@ -21,6 +18,5 @@ public:
 
 private:
 	ImGuiTextBuffer buf;
-
 	ImVec2 size;
 };

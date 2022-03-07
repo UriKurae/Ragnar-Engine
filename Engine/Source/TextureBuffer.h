@@ -1,6 +1,5 @@
 #pragma once
 
-class MaterialComponent;
 typedef unsigned int GLuint;
 typedef unsigned char GLubyte;
 

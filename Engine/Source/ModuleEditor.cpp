@@ -1,23 +1,23 @@
 ﻿#include "ModuleEditor.h"
-
 #include "Application.h"
 #include "Globals.h"
+
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
-#include "GameObject.h"
 
 #include "ConsoleMenu.h"
 #include "InspectorMenu.h"
 
-#include "Imgui/imgui.h"
+#include "Viewport.h"
+#include "GameView.h"
+
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/imgui_impl_sdl.h"
-#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
-ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), currentOperation(ImGuizmo::OPERATION::TRANSLATE), Module(), resource(nullptr)
+ModuleEditor::ModuleEditor() : selected(nullptr), selectedParent(nullptr), Module(), resource(nullptr)
 {
 	name = "Editor";
 
@@ -57,9 +57,9 @@ bool ModuleEditor::Update(float dt)
 	
 	if (app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_IDLE && selected)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::TRANSLATE;
-		else if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::ROTATE;
-		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_UP) currentOperation = ImGuizmo::OPERATION::SCALE;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP) viewport->SetSnap(ImGuizmo::OPERATION::TRANSLATE);
+		else if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP) viewport->SetSnap(ImGuizmo::OPERATION::ROTATE);
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_UP) viewport->SetSnap(ImGuizmo::OPERATION::SCALE);
 	}
 
 
@@ -71,16 +71,16 @@ bool ModuleEditor::Update(float dt)
 	{
 		app->window->SetFullscreen();
 	}
-
+	
 	if (app->input->GetKey(SDL_SCANCODE_DELETE) == KeyState::KEY_UP)
 	{
 		if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 		{
-			for (std::vector<GameObject*>::iterator i = selectedParent->GetChilds().begin(); i != selectedParent->GetChilds().end(); ++i)
+			for (std::vector<GameObject*>::iterator i = selected->GetParent()->GetChilds().begin(); i != selected->GetParent()->GetChilds().end(); ++i)
 			{
 				if (selected == (*i))
 				{
-					selectedParent->GetChilds().erase(i);
+					selected->GetParent()->GetChilds().erase(i);
 					RELEASE(selected);
 					app->scene->ResetQuadtree();
 					break;
@@ -102,8 +102,8 @@ bool ModuleEditor::Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer)
 {
 	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
-	viewport->Draw(editorBuffer, gameBuffer, currentOperation);
 	gameView->Draw(gameBuffer);
+	viewport->Draw(editorBuffer, gameBuffer);
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -147,7 +147,7 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 		JsonParsing tag = node.GetJsonArrayValue(jsonArray, i);
 		tags.push_back(tag.GetJsonString(std::to_string(i).c_str()));
 	}
-	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetTags(tags);
+	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(mainMenuBar.GetMenus().size()-1))->SetTags(tags);
 	
 	// Load Layers
 	jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "layers");
@@ -158,7 +158,7 @@ bool ModuleEditor::LoadConfig(JsonParsing& node)
 		JsonParsing lay = node.GetJsonArrayValue(jsonArray, i);
 		layers.push_back(lay.GetJsonString(std::to_string(i).c_str()));
 	}
-	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->SetLayers(layers);
+	dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(mainMenuBar.GetMenus().size() - 1))->SetLayers(layers);
 
 	// Load style
 	mainMenuBar.SetStyle((int)node.GetJsonNumber("style"));
@@ -182,7 +182,7 @@ bool ModuleEditor::SaveConfig(JsonParsing& node)
 		node.SetValueToArray(jsonArray, fileTag.GetRootValue());
 	}
 
-	// Save Tags
+	// Save layers
 	JsonParsing fileLay = JsonParsing();
 	jsonArray = node.SetNewJsonArray(node.GetRootValue(), "layers");
 	label = "0";

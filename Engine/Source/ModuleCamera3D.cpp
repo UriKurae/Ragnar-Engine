@@ -1,19 +1,22 @@
+#include "ModuleCamera3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleCamera3D.h"
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "GameObject.h"
 #include "ModuleScene.h"
+
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 #include "Mesh.h"
 
 #include <map>
-
+#include "Viewport.h"
+#include "Geometry/LineSegment.h"
+#include "Geometry/Triangle.h"
 #include "SDL.h"
-#include "Profiling.h"
-#include "GL/glew.h"
 
+#include "Profiling.h"
 
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
 {
@@ -248,7 +251,7 @@ bool ModuleCamera3D::Update(float dt)
 							MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
 							if (meshComponent)
 							{
-								const std::vector<float3>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
+								const std::vector<Vertex>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
 								const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
 
 								float distance = 0.0f;
@@ -264,7 +267,8 @@ bool ModuleCamera3D::Update(float dt)
 								picking.Transform(transform->GetGlobalTransform().Inverted());
 								for (int i = 0; i < size; i += 3)
 								{
-									const math::Triangle tri(meshVertices[meshIndices[i]], meshVertices[meshIndices[i + 1]], meshVertices[meshIndices[i + 2]]);
+									// TODO: Is this ok?
+									const math::Triangle tri(meshVertices[meshIndices[i]].position, meshVertices[meshIndices[i + 1]].position, meshVertices[meshIndices[i + 2]].position);
 									if (picking.Intersects(tri, &distance, &hitPoint))
 									{
 										closestDistance = distance;
@@ -307,10 +311,10 @@ void ModuleCamera3D::Focus(math::float3& newFront, math::float3& newUp, math::fl
 		{
 			if (MeshComponent* mesh = objSelected->GetComponent<MeshComponent>())
 			{
-				float3 meshCenter = mesh->GetCenterPointInWorldCoords();
+				float3 meshCenter = objSelected->GetOffsetCM();
 				newFront = (meshCenter - cameraFrustum.Pos()).Normalized();
 				newUp = newFront.Cross(float3(0.0f, 1.0f, 0.0f).Cross(newFront).Normalized());
-				const float meshRadius = mesh->GetSphereRadius();
+				const float meshRadius = mesh->GetLocalAABB().HalfDiagonal().Length();
 				const float currentDistance = meshCenter.Distance(cameraFrustum.Pos());
 				newPos = meshCenter + ((cameraFrustum.Pos() - meshCenter).Normalized() * meshRadius * 2);
 			}

@@ -1,10 +1,13 @@
 #pragma once
-
 #include "Module.h"
 #include "GameObject.h"
 #include "Quadtree.h"
 #include "GameTimer.h"
+
 #include <vector>
+#include <map>
+
+struct SerializedField;
 
 enum class Object3D
 {
@@ -31,6 +34,7 @@ public:
 	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool Update(float dt) override;
+	void Scripting(float dt);
 	bool PostUpdate() override;
 	bool Draw();
 	bool CleanUp() override;
@@ -80,11 +84,16 @@ public:
 
 	CameraComponent* mainCamera;
 	GameObject* camera;
+
+	std::multimap<uint, SerializedField*> referenceMap;
+
 private:
 	GameObject* root;
 	Quadtree qTree;
 	GameState gameState;
 	bool frameSkip;
+
+	GameObject* player;
 
 	bool resetQuadtree;
 

@@ -1,22 +1,35 @@
 #include "ModuleScene.h"
-
 #include "Application.h"
-#include "ModuleInput.h"
 #include "Globals.h"
+
+#include "ModuleRenderer3D.h"
+#include "ModuleInput.h"
 #include "ModuleEditor.h"
+#include "Physics3D.h"
+
 #include "Primitives.h"
 #include "MeshImporter.h"
 #include "FileSystem.h"
+
 #include "Resource.h"
 #include "ResourceManager.h"
-
+#include "MonoManager.h"
 #include "AudioManager.h"
 
-#include <stack>
+#include "ScriptComponent.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "AudioSourceComponent.h"
+#include "AnimationComponent.h"
 
+//Scripting
+#include "C_RigidBody.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
+
+#include <stack>
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr)
+ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -47,6 +60,11 @@ bool ModuleScene::Start()
 	ImportPrimitives();
 	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
+	player = CreateGameObject(nullptr);
+	player->CreateComponent(ComponentType::AUDIO_SOURCE);
+	player->SetName("Player");
+	player->tag = "Player";
+	
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
@@ -61,11 +79,22 @@ bool ModuleScene::Start()
 	//}
 	LoadScene("Assets/Scenes/scene2.ragnar");
 
+	LoadScene("Assets/Scenes/build.ragnar");
+	player->GetComponent<AnimationComponent>()->Play("Idle");
+
 	return true;
 }
 
 bool ModuleScene::PreUpdate(float dt)
 {
+	static bool refresh = true;
+
+	if (refresh)
+	{
+		resetQuadtree = true;
+		refresh = false;
+	}
+
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
@@ -74,16 +103,6 @@ bool ModuleScene::PreUpdate(float dt)
 bool ModuleScene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
-
-	// UNDO ============================================================
-	// TODO: Get the current Game Object, detect Input and Undo
-	/*if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_UP)
-			app->editor->GetGO()->OnEndedAction();
-	}*/
-	// ================================================================
-
 
 	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
 
@@ -119,7 +138,13 @@ bool ModuleScene::Update(float dt)
 
 		resetQuadtree = false;
 	}
+
+
+	///////////////////////
+	// Scripting
+	Scripting(dt);
 	
+
 	AudioManager::Get()->Render();
 
 	return true;
@@ -150,7 +175,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			go->Draw();
+			if (go != app->editor->GetGO()) go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -201,6 +226,7 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 	{
 		object->SetParent(parent);
 		parent->AddChild(object);
+
 	}
 	else
 	{
@@ -346,13 +372,39 @@ bool ModuleScene::LoadScene(const char* name)
 				GameObject* parent = GetGoByUuid(go.GetJsonNumber("Parent UUID"));
 				GameObject* child = CreateGameObject(parent, false);
 				child->OnLoad(go);
+				if (child->GetName() == std::string("Player"))
+				{
+					player = child;
+				}
 			}
 		}
+		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
+		{
+			// Get the range of the current key
+			auto range = referenceMap.equal_range(i->first);
+
+			// Now render out that whole range
+			for (auto d = range.first; d != range.second; ++d)
+			{
+				d->second->fiValue.goValue = GetGoByUuid(d->first);
+
+				if (d->second->fiValue.goValue)
+				{
+					if (std::find(d->second->fiValue.goValue->csReferences.begin(), d->second->fiValue.goValue->csReferences.end(), d->second) == d->second->fiValue.goValue->csReferences.end())
+						d->second->fiValue.goValue->csReferences.push_back(d->second);
+
+					d->second->parentSC->SetField(d->second->field, d->second->fiValue.goValue);
+				}
+			}
+		}
+		app->physics->LoadConstraints();
 	}
 	else
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
+
+	referenceMap.clear();
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
@@ -432,50 +484,51 @@ void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
 
 void ModuleScene::ImportPrimitives()
 {
-	std::vector<float3> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float3> normals;
-	std::vector<float2> texCoords;
+	std::map<std::string, BoneInfo> bonesUid;
+	//std::vector<float3> normals;
+	//std::vector<float2> texCoords;
 
-	RCube::CreateCube(vertices, indices, texCoords);
+	RCube::CreateCube(vertices, indices);
 	std::string library;
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RPyramide::CreatePyramide(vertices, indices, texCoords);
+	RPyramide::CreatePyramide(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RSphere::CreateSphere(vertices, normals, indices, texCoords);
+	RSphere::CreateSphere(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 	library.clear();
 
-	RCylinder::CreateCylinder(vertices, normals, indices, texCoords);
+	RCylinder::CreateCylinder(vertices, indices);
 	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, normals, texCoords);
+	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
 
 	vertices.clear();
 	indices.clear();
-	normals.clear();
-	texCoords.clear();
+	//normals.clear();
+	//texCoords.clear();
 }
 
 void ModuleScene::Play()
@@ -497,13 +550,16 @@ void ModuleScene::Play()
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-	
+
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 }
 
 void ModuleScene::Stop()
 {
+	app->renderer3D->ClearPointLights();
+	app->renderer3D->ClearSpotLights();
+
 	LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 	qTree.Clear();
@@ -521,4 +577,76 @@ void ModuleScene::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
+}
+
+/////////////////////////
+
+void ModuleScene::Scripting(float dt)
+{
+	if (gameState == GameState::PLAYING)
+	{
+		// AUDIO
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+		{
+			player->GetComponent<AudioSourceComponent>()->StopClip();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		}
+
+		// ANIMATIONS
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT ||
+			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT ||
+			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT ||
+			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
+		{
+			player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
+
+		//ACTIONS
+		RigidBodyComponent* playerRB = player->GetComponent<RigidBodyComponent>();
+		float playerForce = 100.0f;
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			float force = 10.0f;
+			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
+			s->GetComponent<TransformComponent>()->SetPosition(player->GetComponent<TransformComponent>()->GetPosition());
+			s->GetComponent<TransformComponent>()->UpdateTransform();
+			s->GetComponent<TransformComponent>()->ForceUpdateTransform();
+
+			RigidBodyComponent* rigidBody;
+			s->CreateComponent(ComponentType::RIGID_BODY);
+			rigidBody = s->GetComponent<RigidBodyComponent>();
+			rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB->GetBody(), true); // Rigid Body of Player
+			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(-1, 0, 0) * playerForce * dt);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(1, 0, 0) * playerForce * dt);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, 1) * playerForce * dt);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, -1) * playerForce * dt);
+		}
+	}
 }

@@ -1,15 +1,17 @@
 #include "MeshImporter.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
-#include "Component.h"
 #include "TextureImporter.h"
+#include "AnimationImporter.h"
+
+#include "Component.h"
+
 #include "Mesh.h"
 #include "Model.h"
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
-
-#include "Globals.h"
+#include "Vertex.h"
 
 #include "Profiling.h"
 
@@ -17,43 +19,46 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 {
 	RG_PROFILING_FUNCTION("Importing mesh");
 
-	std::vector<float3> vertices;
-	std::vector<float3> norms;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float2> texCoords;
+	//std::vector<float3> norms;
+	//std::vector<float2> texCoords;
+
+	unsigned int numBones = mesh->mNumBones;
+	std::vector<unsigned int> bonesUid;
 
 	int numVertices = mesh->mNumVertices;
 	int numFaces = mesh->mNumFaces;
 
-	vertices.reserve(numVertices);
+	//vertices.reserve(numVertices);
 	indices.reserve(numFaces * 3);
-	texCoords.reserve(numVertices);
+	//texCoords.reserve(numVertices);
 
 	for (unsigned int i = 0; i < numVertices; ++i)
 	{
-		float3 vertex;
-		vertex.x = mesh->mVertices[i].x;
-		vertex.y = mesh->mVertices[i].y;
-		vertex.z = mesh->mVertices[i].z;
+		Vertex vertex;
+		vertex.position.x = mesh->mVertices[i].x;
+		vertex.position.y = mesh->mVertices[i].y;
+		vertex.position.z = mesh->mVertices[i].z;
 
-		float3 normals;
+		//float3 normals;
 		if (data.normals && mesh->HasNormals())
 		{
-			normals.x = mesh->mNormals[i].x;
-			normals.y = mesh->mNormals[i].y;
-			normals.z = mesh->mNormals[i].z;
-			norms.push_back(normals);
+			vertex.normal.x = mesh->mNormals[i].x;
+			vertex.normal.y = mesh->mNormals[i].y;
+			vertex.normal.z = mesh->mNormals[i].z;
+			//norms.push_back(normals);
 		}
 
-		float2 coords;
+		//float2 coords;
 		if (mesh->mTextureCoords[0])
 		{
-			coords.x = mesh->mTextureCoords[0][i].x;
-			coords.y = mesh->mTextureCoords[0][i].y;
+			vertex.texCoords.x = mesh->mTextureCoords[0][i].x;
+			vertex.texCoords.y = mesh->mTextureCoords[0][i].y;
 		}
 
 		vertices.push_back(vertex);
-		texCoords.push_back(coords);
+		//texCoords.push_back(coords);
 	}
 
 	for (unsigned int i = 0; i < numFaces; ++i)
@@ -65,7 +70,13 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 		}
 	}
 
-	SaveMesh(library, vertices, indices, norms, texCoords);
+	for (unsigned int i = 0; i < numBones; i++)
+	{
+		AnimationImporter::ReImportBones(path, mesh->mBones[i], json, library, bonesUid);
+	}
+
+	// TODO: Check the re-import when animation is completed
+	//SaveMesh(library, vertices, indices/*, norms, texCoords*/, bonesUid);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -86,47 +97,59 @@ void MeshImporter::ReImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPa
 	}
 }
 
-void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& path, std::vector<uint>& uids)
+void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonParsing& json, std::string& path, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones)
 {
 	RG_PROFILING_FUNCTION("Importing mesh");
 
-	std::vector<float3> vertices;
-	std::vector<float3> norms;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<float2> texCoords;
+	unsigned int numBones = mesh->mNumBones;
+	std::vector<unsigned int> bonesUid;
+
+	//std::vector<float3> vertices;
+	//std::vector<float3> norms;
+	//std::vector<float2> texCoords;
 
 	int numVertices = mesh->mNumVertices;
 	int numFaces = mesh->mNumFaces;
 
-	vertices.reserve(numVertices);
-	indices.reserve(numFaces * 3);
-	texCoords.reserve(numVertices);
+	//vertices.reserve(numVertices * 2);
+	//indices.reserve(numFaces * 3);
+	
+	//vertices.reserve(numVertices);
+	//texCoords.reserve(numVertices);
 
 	for (unsigned int i = 0; i < numVertices; ++i)
 	{
-		float3 vertex;
-		vertex.x = mesh->mVertices[i].x;
-		vertex.y = mesh->mVertices[i].y;
-		vertex.z = mesh->mVertices[i].z;
+		Vertex vertex;
+		vertex.position.x = mesh->mVertices[i].x;
+		vertex.position.y = mesh->mVertices[i].y;
+		vertex.position.z = mesh->mVertices[i].z;
 
-		float3 normals;
+		for (int i = 0; i < 4; ++i)
+		{
+			vertex.boneIDs[i] = -1;
+			vertex.weights[i] = 0.0f;
+		}
+
+		//float3 normals;
 		if (mesh->HasNormals())
 		{
-			normals.x = mesh->mNormals[i].x;
-			normals.y = mesh->mNormals[i].y;
-			normals.z = mesh->mNormals[i].z;
+			vertex.normal.x = mesh->mNormals[i].x;
+			vertex.normal.y = mesh->mNormals[i].y;
+			vertex.normal.z = mesh->mNormals[i].z;
 		}
 
-		float2 coords;
+		//float2 coords;
 		if (mesh->mTextureCoords[0])
 		{
-			coords.x = mesh->mTextureCoords[0][i].x;
-			coords.y = mesh->mTextureCoords[0][i].y;
+			vertex.texCoords.x = mesh->mTextureCoords[0][i].x;
+			vertex.texCoords.y = mesh->mTextureCoords[0][i].y;
 		}
 
-		norms.push_back(normals);
 		vertices.push_back(vertex);
-		texCoords.push_back(coords);
+		//norms.push_back(normals);
+		//texCoords.push_back(coords);
 	}
 
 	for (unsigned int i = 0; i < numFaces; ++i)
@@ -138,6 +161,13 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 		}
 	}
 
+	ExtractBonesAndWeights(vertices, mesh, scene, bones);
+
+	//for (unsigned int i = 0; i < numBones; i++)
+	//{
+	//	AnimationImporter::ImportBones(path, mesh->mBones[i], json, uids, bonesUid);
+	//}
+
 	std::string meshName;
 	std::string assetsPath(path);
 	std::string name("__");
@@ -148,7 +178,7 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, assetsPath, meshName);
 	uids.push_back(uid);
 	
-	SaveMesh(meshName, vertices, indices, norms, texCoords);
+	SaveMesh(meshName, vertices, indices/*, norms, texCoords*/, bones);
 
 	JSON_Array* array = json.SetNewJsonArray(json.GetRootValue(), "Components");
 	JsonParsing parse = JsonParsing();
@@ -169,20 +199,24 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 }
 
-void MeshImporter::SaveMesh(std::string& name, std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords)
+void MeshImporter::SaveMesh(std::string& name, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::map<std::string, BoneInfo>& bones)
 {
-	unsigned int header[4] = { vertices.size(), indices.size(), normals.size(), texCoords.size() };
+	std::string json = name;
 
-	uint size = sizeof(header) + sizeof(float3) * vertices.size() + sizeof(unsigned int) * indices.size() + sizeof(float3) * normals.size() + sizeof(float2) * texCoords.size();
+	json = json.substr(0, json.find_last_of('.'));
+	json += ".json";
 
-	char* buffer = new char[size];
-	char* cursor = buffer;
+	unsigned int ranges[4] = { vertices.size(), indices.size(), bones.size(), json.size() };
 
-	uint bytes = sizeof(header);
-	memcpy(cursor, header, bytes);
+	uint size = sizeof(ranges) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size() + json.size();
+	char* fileBuffer = new char[size];
+	char* cursor = fileBuffer;
+
+	unsigned int bytes = sizeof(ranges);
+	memcpy(cursor, ranges, bytes);
 	cursor += bytes;
 
-	bytes = sizeof(float3) * vertices.size();
+	bytes = sizeof(Vertex) * vertices.size();
 	memcpy(cursor, vertices.data(), bytes);
 	cursor += bytes;
 
@@ -190,60 +224,148 @@ void MeshImporter::SaveMesh(std::string& name, std::vector<float3>& vertices, st
 	memcpy(cursor, indices.data(), bytes);
 	cursor += bytes;
 
-	bytes = sizeof(float3) * normals.size();
-	memcpy(cursor, normals.data(), bytes);
+	bytes = json.size();
+	memcpy(cursor, json.data(), bytes);
 	cursor += bytes;
 
-	bytes = sizeof(float2) * texCoords.size();
-	memcpy(cursor, texCoords.data(), bytes);
-	cursor += bytes;
+	if (ranges[2] > 0)
+	{
+		JsonParsing file = JsonParsing();
 
-	if (app->fs->Save(name.c_str(), buffer, size) > 0)
+		int i = 0;
+		for (std::map<std::string, BoneInfo>::iterator it = bones.begin(); it != bones.end(); ++i, ++it)
+		{
+			std::string name = (*it).first;
+			BoneInfo info = (*it).second;
+
+			std::string index = std::to_string(i);
+			std::string aux;
+			aux = "Name" + index;
+			file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), aux.c_str(), name.c_str());
+
+			aux = "Id" + index;
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), aux.c_str(), info.id);
+
+			float3 position;
+			Quat rotation;
+			float3 scale;
+			info.offset.Decompose(position, rotation, scale);
+
+			aux = "Position" + index;
+			file.SetNewJson3Number(file, aux.c_str(), position);
+
+			aux = "Rotation" + index;
+			file.SetNewJson4Number(file, aux.c_str(), rotation);
+
+			aux = "Scale" + index;
+			file.SetNewJson3Number(file, aux.c_str(), scale);
+		}
+		file.SaveFile(json.c_str());
+	}
+
+	if (app->fs->Save(name.c_str(), fileBuffer, size) > 0)
 		DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
 
-	RELEASE_ARRAY(buffer);
+	RELEASE_ARRAY(fileBuffer);
+
+
+	//unsigned int header[2] = { vertices.size(), indices.size() };
+
+	//uint size = sizeof(header) + sizeof(Vertex) * vertices.size() + sizeof(unsigned int) * indices.size();
+
+	//char* buffer = new char[size];
+	//char* cursor = buffer;
+
+	//uint bytes = sizeof(header);
+	//memcpy(cursor, header, bytes);
+	//cursor += bytes;
+
+	//bytes = sizeof(Vertex) * vertices.size();
+	//memcpy(cursor, vertices.data(), bytes);
+	//cursor += bytes;
+
+	//bytes = sizeof(unsigned int) * indices.size();
+	//memcpy(cursor, indices.data(), bytes);
+	//cursor += bytes;
+
+	////bytes = sizeof(float3) * normals.size();
+	////memcpy(cursor, normals.data(), bytes);
+	////cursor += bytes;
+	////
+	////bytes = sizeof(float2) * texCoords.size();
+	////memcpy(cursor, texCoords.data(), bytes);
+	////cursor += bytes;
+
+	//if (app->fs->Save(name.c_str(), buffer, size) > 0)
+	//	DEBUG_LOG("Mesh %s saved succesfully", name.c_str());
+
+	// RELEASE_ARRAY(buffer);
 }
 
-void MeshImporter::LoadMesh(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float3>& normals, std::vector<float2>& texCoords, std::string& path)
+void MeshImporter::LoadMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::map<std::string, BoneInfo>& bones, std::string& path)
 {
 	char* buffer = nullptr;
 
 	if (app->fs->Load(path.c_str(), &buffer) > 0)
 	{
 		char* cursor = buffer;
-		unsigned int* header = new unsigned int[4];
+		unsigned int ranges[4];
 
-		// Loading header information
-		uint bytes = sizeof(header) * sizeof(unsigned int);
-		memcpy(header, buffer, bytes);
+		unsigned int bytes = sizeof(ranges);
+		memcpy(ranges, cursor, bytes);
 		cursor += bytes;
 
-		// Setting information
-		vertices.resize(header[0]);
-		indices.resize(header[1]);
-		normals.resize(header[2]);
-		texCoords.resize(header[3]);
+		vertices.resize(ranges[0]);
+		indices.resize(ranges[1]);
 
-		// Loading vertices
-		bytes = sizeof(float3) * vertices.size();
-		memcpy(&vertices[0], cursor, bytes);
+		// Load vertices
+		bytes = sizeof(Vertex) * vertices.size();
+		memcpy(vertices.data(), cursor, bytes);
 		cursor += bytes;
 
-		// Loading indices
+		// Load indices
 		bytes = sizeof(unsigned int) * indices.size();
 		memcpy(indices.data(), cursor, bytes);
 		cursor += bytes;
 
-		// Loading normals
-		bytes = sizeof(float3) * normals.size();
-		memcpy(normals.data(), cursor, bytes);
+		std::string jsonFile;
+		jsonFile.resize(ranges[3]);
+		bytes = ranges[3];
+		memcpy(&jsonFile[0], cursor, bytes);
 		cursor += bytes;
 
-		// Loading texture coordinates
-		bytes = sizeof(float2) * texCoords.size();
-		memcpy(texCoords.data(), cursor, bytes);
+		JsonParsing file = JsonParsing();
+		file.ParseFile(jsonFile.c_str());
+		
+		// Load bones
+		for (int i = 0; i < ranges[2]; ++i)
+		{
+			unsigned int stringSize;
+			std::string name;
+			BoneInfo info;
+			
+			std::string index = std::to_string(i);
+			std::string aux = "Name" + index;
+			name = file.GetJsonString(aux.c_str());
 
-		RELEASE_ARRAY(header);
+			aux = "Id" + index;
+			info.id = file.GetJsonNumber(aux.c_str());
+
+			aux = "Position" + index;
+			float3 position = file.GetJson3Number(file, aux.c_str());		
+
+			aux = "Rotation" + index;
+			float4 rotation = file.GetJson4Number(file, aux.c_str());
+
+			aux = "Scale" + index;
+			float3 scale = file.GetJson3Number(file, aux.c_str());
+
+			Quat quat = { rotation.x, rotation.y, rotation.z, rotation.w };
+
+			info.offset = info.offset.FromTRS(position, quat, scale);
+
+			bones[name] = info;
+		}
 	}
 	else
 		DEBUG_LOG("Mesh file not found!");
@@ -264,4 +386,90 @@ void MeshImporter::CreateMetaMesh(std::string& library, std::string& assets, uin
 	app->fs->Save(library.c_str(), buffer, size);
 
 	RELEASE_ARRAY(buffer);
+}
+
+void MeshImporter::ExtractBonesAndWeights(std::vector<Vertex>& vertices, const aiMesh* mesh, const aiScene* scene, std::map<std::string, BoneInfo>& bones)
+{
+	int numBones = 0;
+	for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+	{
+		int boneID = -1;
+		std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
+
+		if (bones.find(boneName) == bones.end())
+		{
+			BoneInfo newBoneInfo;
+			newBoneInfo.id = numBones;
+			newBoneInfo.offset = FromAssimpMatrixToMathGeoLib(mesh->mBones[boneIndex]->mOffsetMatrix);
+			bones[boneName] = newBoneInfo;
+			boneID = numBones;
+			numBones++;
+		}
+		else
+		{
+			boneID = bones[boneName].id;
+		}
+
+		aiVertexWeight* weights = mesh->mBones[boneIndex]->mWeights;
+		int numWeights = mesh->mBones[boneIndex]->mNumWeights;
+
+		for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+		{
+			int vertexId = weights[weightIndex].mVertexId;
+			float weight = weights[weightIndex].mWeight;
+			SetBoneData(vertices[vertexId], boneID, weight);
+		}
+	}
+}
+
+float4x4 MeshImporter::FromAssimpMatrixToMathGeoLib(aiMatrix4x4& matrix)
+{
+	float4x4 mathMatrix;
+	aiQuaternion quat;
+	aiVector3D pos;
+	aiVector3D sca;
+	matrix.Decompose(sca, quat, pos);
+	
+	float3 position = { pos.x, pos.y, pos.z };
+	float3 scale = { sca.x, sca.y, sca.z };
+	Quat quaternion = { quat.x, quat.y, quat.z, quat.w };
+
+	return mathMatrix.FromTRS(position, quaternion, scale);
+}
+
+void MeshImporter::SetBoneData(Vertex& vertex, int boneID, float weight)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		if (vertex.boneIDs[i] < 0)
+		{
+			vertex.weights[i] = weight;
+			vertex.boneIDs[i] = boneID;
+			break;
+		}
+	}
+}
+
+void MeshImporter::SerializeBoneData(BoneInfo& info, JsonParsing& file)
+{
+	/*unsigned int bytes = sizeof(info.id);
+	memcpy(*buffer, &info.id, bytes);
+	*buffer += bytes;
+
+	float3 position;
+	Quat rotation;
+	float3 scale;
+	info.offset.Decompose(position, rotation, scale);
+
+	bytes = sizeof(float3);
+	memcpy(*buffer, &position, bytes);
+	*buffer += bytes;
+
+	bytes = sizeof(Quat);
+	memcpy(*buffer, &rotation, bytes);
+	*buffer += bytes;
+
+	bytes = sizeof(float3);
+	memcpy(*buffer, &scale, bytes);
+	*buffer += bytes;*/
 }

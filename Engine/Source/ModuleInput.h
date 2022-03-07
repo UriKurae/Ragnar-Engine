@@ -1,13 +1,15 @@
 #pragma once
 #include "Module.h"
-#include "SDL.h"
+
+#include "SDL_scancode.h"
+#include "SDL_mouse.h"
 
 #include <vector>
 #include <string>
 
 #define MAX_MOUSE_BUTTONS 5
 
-enum class KeyState
+enum KeyState
 {
 	KEY_IDLE = 0,
 	KEY_DOWN,

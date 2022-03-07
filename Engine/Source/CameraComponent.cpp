@@ -1,17 +1,16 @@
+#include "CameraComponent.h"
 #include "Application.h"
 #include "Globals.h"
-
-#include "CameraComponent.h"
-#include "GameObject.h"
 
 #include "ModuleScene.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 
-#include "glew/include/GL/glew.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
 
-#include "IconsFontAwesome5.h"
-
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
 #include "Profiling.h"
 
 #include <stdlib.h>
@@ -160,6 +159,8 @@ void CameraComponent::OnEditor()
 		if (ImGui::Button("Shake")) {
 			RequestShake(shakeStrength, shakeDuration);
 		}
+		ComponentOptions(this);
+		ImGui::Separator();
 	}
 	ImGui::PopID();
 }
@@ -292,7 +293,7 @@ bool CameraComponent::Update(float dt)
 	return true;
 }
 
-void CameraComponent::Draw()
+void CameraComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
 
@@ -303,7 +304,7 @@ void CameraComponent::Draw()
 	ebo->Bind();
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 0.0f, 1.0f);
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	vbo->Unbind();

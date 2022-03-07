@@ -1,11 +1,14 @@
 #pragma once
-
 #include "Component.h"
 
-
 class TransformComponent;
-class IndexBuffer;
-class VertexBuffer;
+
+struct AudioClip
+{
+	std::string clipName;
+	bool playOnAwake;
+};
+
 class AudioSourceComponent : public Component
 {
 public:
@@ -18,20 +21,24 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void PlayClip();
-	void PlayClipOnAwake();
+	void SwapAudioClip(const char* clipName);
+
+	void PlayClip(const char* clipMap);
+	void PlayClipsOnAwake();
 	void StopClip();
 	void PauseClip();
 	void ResumeClip();
+
+	inline void ChangePosition() { changePosition = true; }
 private:
+	bool changePosition;
 
 	TransformComponent* transform;
 
 	// Audio settings
-	std::string audioClip;
+	std::vector<AudioClip> audioClip;
 	unsigned int playingID;
 	bool mute;
 	float volume;
 	float pitch;
-	bool playOnAwake;
 };
