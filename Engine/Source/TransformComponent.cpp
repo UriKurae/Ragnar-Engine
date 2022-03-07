@@ -196,6 +196,7 @@ void TransformComponent::UpdateTransform()
 	{
 		globalMatrix = localMatrix;
 	}
+	UpdateBoundingBox();
 }
 
 void TransformComponent::UpdateChildTransform(GameObject* go)
@@ -229,6 +230,14 @@ void TransformComponent::SetAABB()
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
 	}
+
+	UpdateBoundingBox();
+
+	app->scene->ResetQuadtree();
+}
+
+void TransformComponent::UpdateBoundingBox()
+{
 	if (owner->GetComponent<MeshComponent>())
 	{
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
@@ -236,8 +245,6 @@ void TransformComponent::SetAABB()
 		owner->SetAABB(newObb);
 		owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
-
-	app->scene->ResetQuadtree();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)

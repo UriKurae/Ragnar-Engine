@@ -622,7 +622,6 @@ void ModuleScene::Scripting(float dt)
 			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
 			s->GetComponent<TransformComponent>()->SetPosition(player->GetComponent<TransformComponent>()->GetPosition());
 			s->GetComponent<TransformComponent>()->UpdateTransform();
-			s->GetComponent<TransformComponent>()->ForceUpdateTransform();
 
 			RigidBodyComponent* rigidBody;
 			s->CreateComponent(ComponentType::RIGID_BODY);
@@ -633,19 +632,19 @@ void ModuleScene::Scripting(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			playerRB->GetBody()->applyCentralImpulse(float3(-1, 0, 0) * playerForce * dt);
+			playerRB->GetBody()->applyCentralForce(float3(-1, 0, 0) * playerForce);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			playerRB->GetBody()->applyCentralImpulse(float3(1, 0, 0) * playerForce * dt);
+			playerRB->GetBody()->applyCentralForce(float3(1, 0, 0) * playerForce);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, 1) * playerForce * dt);
+			playerRB->GetBody()->applyCentralForce(float3(0, 0, 1) * playerForce);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, -1) * playerForce * dt);
+			playerRB->GetBody()->applyCentralForce(float3(0, 0, -1) * playerForce);
 		}
 	}
 }

@@ -82,6 +82,8 @@ public:
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
 
+	inline GameObject* GetPlayer() { return player; };
+
 	CameraComponent* mainCamera;
 	GameObject* camera;
 

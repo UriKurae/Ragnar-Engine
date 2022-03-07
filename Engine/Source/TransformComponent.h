@@ -40,6 +40,8 @@ public:
 	void NewAttachment();
 	void SetAABB();
 
+	void UpdateBoundingBox();
+
 	inline float4x4 GetLocalTransform() const { return localMatrix; }
 	inline float4x4 GetGlobalTransform() const { return globalMatrix; }
 	inline float3 GetPosition() const { return position; }
