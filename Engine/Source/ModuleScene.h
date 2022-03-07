@@ -78,14 +78,9 @@ public:
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
 
-	inline void AddStaticGO(GameObject* gameobject) { staticGO.push_back(gameobject); };
-	inline void RemoveStaticGO(GameObject* gameobject) { staticGO.remove(gameobject); };
-	inline std::list<GameObject*> GetStaticGO() { return staticGO; };
-
 	CameraComponent* mainCamera;
 	GameObject* camera;
 private:
-	std::list<GameObject*> staticGO;
 	GameObject* root;
 	Quadtree qTree;
 	GameState gameState;

@@ -145,9 +145,12 @@ bool InputGeom::loadMesh(Mesh* mesh)
 	if (m_mesh)
 	{
 		delete m_chunkyMesh;
-		m_chunkyMesh = 0;
+		m_chunkyMesh = nullptr;
+
+		m_mesh->vertices.clear();
+		m_mesh->indices.clear();
 		delete m_mesh;
-		m_mesh = 0;
+		m_mesh = nullptr;
 	}
 	m_offMeshConCount = 0;
 	m_volumeCount = 0;

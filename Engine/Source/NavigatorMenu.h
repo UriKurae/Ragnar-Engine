@@ -1,6 +1,5 @@
 #pragma once
 #include "Menu.h"
-#include "ModuleNavMesh.h"
 
 struct BuildSettings;
 
@@ -10,7 +9,9 @@ public:
     NavigatorMenu();
     ~NavigatorMenu();
 
+    bool Start();
     bool Update(float dt) override;
+
 private:
-    BuildSettings settings;
+    BuildSettings* buildSettings;
 };

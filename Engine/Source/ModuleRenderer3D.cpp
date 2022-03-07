@@ -368,6 +368,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	stencil = node.GetJsonBool("stencil");
 	blending = node.GetJsonBool("blending");
 	wireMode = node.GetJsonBool("wire mode");
+	navMesh = node.GetJsonBool("navmesh");
 
 	SetVsync();
 	SetDepthTest();
@@ -393,6 +394,7 @@ bool ModuleRenderer3D::SaveConfig(JsonParsing& node)
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "stencil", stencil);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "blending", blending);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wire mode", wireMode);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "navmesh", navMesh);
 
 	return true;
 }

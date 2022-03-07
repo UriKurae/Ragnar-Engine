@@ -22,24 +22,19 @@ public:
 	bool HandleBuild();
 	bool BuildAllTiles();
 	unsigned char* BuildTile(const int tx, const int ty, const float* bmin, const float* bmax, int& dataSize);
-	void ResetCommonSettings();
 	void HandleMeshChanged(InputGeom* geom, BuildSettings settings);
 	void HandleSettings();
 
 	void DebugDraw();
 	void DrawBoundaries(float minx, float miny, float minz, float maxx, float maxy, float maxz);
-	void OnEditor();
 
 	inline dtNavMesh* GetNavMesh() { return m_navMesh; };
-	const inline InputGeom* GetGeom() const { return m_geom; };
+	inline dtNavMeshQuery* GetNavMeshQuery() { return m_navQuery; };
+	inline const InputGeom* GetGeom() const { return m_geom; };
+	inline const rcPolyMesh* GetPolyMesh() const { return m_pmesh; };
+	inline const int GetMaxTyles() const { return m_maxTiles; };
+	inline const int GetMaxPolyTile() const { return m_maxPolysPerTile; };
 	void SetNavMesh(dtNavMesh* newNavMesh);
-
-	dtNavMeshQuery* GetNavMeshQuery();
-
-	void CollectSettings(BuildSettings& settings);
-	void SetSettings(BuildSettings& settings);
-
-	void SetGeometry(InputGeom* geom);
 
 private:
 	class InputGeom* m_geom;
@@ -59,26 +54,11 @@ private:
 	rcPolyMesh* m_pmesh;
 	rcConfig m_cfg;
 	rcPolyMeshDetail* m_dmesh;
-
-	float m_cellSize			 = 0.0f;
-	float m_cellHeight			 = 0.0f;
-	float m_agentHeight			 = 0.0f;
-	float m_agentRadius			 = 0.0f;
-	float m_agentMaxClimb		 = 0.0f;
-	float m_agentMaxSlope		 = 0.0f;
-	float m_regionMinSize		 = 0.0f;
-	float m_regionMergeSize      = 0.0f;
-	float m_edgeMaxLen		     = 0.0f;
-	float m_edgeMaxError		 = 0.0f;
-	float m_vertsPerPoly		 = 0.0f;
-	float m_detailSampleDist	 = 0.0f;
-	float m_detailSampleMaxError = 0.0f;
-	int m_partitionType			 = 0.0f;
+	BuildSettings buildSettings;
 
 	//Tile Settings
 	int   m_maxTiles;
 	int   m_maxPolysPerTile;
-	float m_tileSize;
 
 	unsigned int m_tileCol;
 	float m_lastBuiltTileBmin[3];

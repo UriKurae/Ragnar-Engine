@@ -84,7 +84,7 @@ public:
 
 
 	/// Method to return static mesh data.
-	SimpleMesh* getMesh() const { return m_mesh; }
+	const SimpleMesh* getMesh() const { return m_mesh; }
 	const float* getMeshBoundsMin() const { return m_meshBMin; }
 	const float* getMeshBoundsMax() const { return m_meshBMax; }
 	rcChunkyTriMesh* getChunkyMesh() const { return m_chunkyMesh; }

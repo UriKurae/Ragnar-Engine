@@ -54,9 +54,6 @@ struct BuildSettings
 	float detailSampleMaxError;
 	// Partition type, see SamplePartitionType
 	int partitionType;
-	// Bounds of the area to mesh
-	float navMeshBMin[3];
-	float navMeshBMax[3];
 	// Size of the tiles in voxels
 	float tileSize;
 };
@@ -134,13 +131,14 @@ public:
 
 	bool CleanUp() override;
 
-	void BakeNavMesh(BuildSettings settings);
+	void BakeNavMesh();
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
 	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
+	const inline InputGeom* GetInputGeom() const { return geometry; };
 	float3 FindRandomPointAround(float3 centerPoint, float radius);
 	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
 
-	const BuildSettings GetBuildSettings() const { return buildSettings; }
+	BuildSettings GetBuildSettings() { return buildSettings; }
 
 public:
 	std::vector<NavAgent> agents;

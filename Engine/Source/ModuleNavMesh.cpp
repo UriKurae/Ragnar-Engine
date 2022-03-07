@@ -100,12 +100,51 @@ bool ModuleNavMesh::Update(float dt)
 
 bool ModuleNavMesh::LoadConfig(JsonParsing& node)
 {
+	JSON_Array* arraySettings = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "NavMeshSettings");
+	if (arraySettings != nullptr)
+	{
+		buildSettings.cellSize				= node.GetJsonArrayValue(arraySettings, 0).GetJsonNumber("cellSize");
+		buildSettings.cellHeight			= node.GetJsonArrayValue(arraySettings, 1).GetJsonNumber("cellHeight");
+		buildSettings.agentHeight			= node.GetJsonArrayValue(arraySettings, 2).GetJsonNumber("agentHeight");
+		buildSettings.agentRadius			= node.GetJsonArrayValue(arraySettings, 3).GetJsonNumber("agentRadius");
+		buildSettings.agentMaxClimb			= node.GetJsonArrayValue(arraySettings, 4).GetJsonNumber("agentMaxClimb");
+		buildSettings.agentMaxSlope			= node.GetJsonArrayValue(arraySettings, 5).GetJsonNumber("agentMaxSlope");
+		buildSettings.regionMinSize			= node.GetJsonArrayValue(arraySettings, 6).GetJsonNumber("regionMinSize");
+		buildSettings.regionMergeSize		= node.GetJsonArrayValue(arraySettings, 7).GetJsonNumber("regionMergeSize");
+		buildSettings.edgeMaxLen			= node.GetJsonArrayValue(arraySettings, 8).GetJsonNumber("edgeMaxLen");
+		buildSettings.edgeMaxError			= node.GetJsonArrayValue(arraySettings, 9).GetJsonNumber("edgeMaxError");
+		buildSettings.vertsPerPoly			= node.GetJsonArrayValue(arraySettings, 10).GetJsonNumber("vertsPerPoly");
+		buildSettings.detailSampleDist		= node.GetJsonArrayValue(arraySettings, 11).GetJsonNumber("detailSampleDist");
+		buildSettings.detailSampleMaxError	= node.GetJsonArrayValue(arraySettings, 12).GetJsonNumber("detailSampleMaxError");
+		buildSettings.partitionType			= node.GetJsonArrayValue(arraySettings, 13).GetJsonNumber("partitionType");
+		buildSettings.tileSize				= node.GetJsonArrayValue(arraySettings, 14).GetJsonNumber("tileSize");
+	}
+
+	BakeNavMesh();
 
 	return true;
 }
 
 bool ModuleNavMesh::SaveConfig(JsonParsing& node)
 {
+	JsonParsing file = JsonParsing();
+	JSON_Array* arraySettings = file.SetNewJsonArray(file.GetRootValue(), "NavMeshSettings");
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellSize", buildSettings.cellSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellHeight", buildSettings.cellHeight);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentHeight", buildSettings.agentHeight);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentRadius", buildSettings.agentRadius);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxClimb", buildSettings.agentMaxClimb);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxSlope", buildSettings.agentMaxSlope);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMinSize", buildSettings.regionMinSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMergeSize", buildSettings.regionMergeSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxLen", buildSettings.edgeMaxLen);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxError", buildSettings.edgeMaxError);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "vertsPerPoly", buildSettings.vertsPerPoly);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleDist", buildSettings.detailSampleDist);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleMaxError", buildSettings.detailSampleMaxError);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "partitionType", buildSettings.partitionType);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "tileSize", buildSettings.tileSize);
+	node.SetValueToArray(arraySettings, file.GetRootValue());
 
 	return true;
 }
@@ -166,8 +205,7 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 
 	if (geometry->getChunkyMesh() == nullptr && navMeshBuilder->GetNavMesh() == nullptr)
 	{
-		//return;
-		BakeNavMesh(buildSettings);
+		BakeNavMesh();
 		LOG(LogType::L_WARNING, "No chunky mesh set, one has been baked to avoid crashes");
 	}
 
@@ -263,27 +301,42 @@ bool ModuleNavMesh::CleanUp()
 	return true;
 }
 
-void ModuleNavMesh::BakeNavMesh(BuildSettings settings)
+void ModuleNavMesh::BakeNavMesh()
 {
-	if (app->scene->GetStaticGO().size() > 0)
+	ClearNavMeshes();
+
+	std::vector<GameObject*> gameObjects;
+	gameObjects = app->scene->GetGameObjectsList();
+
+	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
-		ClearNavMeshes();
+		if (gameObjects[i]->staticObj)
+		{
+			AddGameObjectToNavMesh(gameObjects[i]);
+		}
 
-		for (auto& go : app->scene->GetStaticGO())
-			AddGameObjectToNavMesh(go);
+		for (size_t j = 0; j < gameObjects[i]->GetChilds().size(); j++)
+		{
+			gameObjects.push_back(gameObjects[i]->GetChilds()[j]);
+		}
+	}
 
+	//Optimize
+	if (geometry->getMesh()->vertices.size() > 0 && geometry->getMesh()->indices.size() > 0)
+	{
 		geometry->SetChunkyMesh();
 
 		if (navMeshBuilder == nullptr)
 			navMeshBuilder = new NavMeshBuilder();
 
-		buildSettings = settings;
-		navMeshBuilder->HandleMeshChanged(geometry, settings);
+		navMeshBuilder->HandleMeshChanged(geometry, buildSettings);
 		navMeshBuilder->HandleSettings();
 		navMeshBuilder->HandleBuild();
 
 		pathfinder.Init(navMeshBuilder);
 	}
+
+	gameObjects.clear();
 }
 
 void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)
