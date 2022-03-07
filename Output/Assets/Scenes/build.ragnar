@@ -70,9 +70,9 @@
             ]
         },
         {
-            "UUID": 360238450,
+            "UUID": 2128337088,
             "Parent UUID": 417171234,
-            "Name": "Camera",
+            "Name": "cameraController",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -81,9 +81,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
+                        -0.6122596263885498,
                         0,
-                        0,
-                        0
+                        -0.90129142999649048
                     ],
                     "Quaternion": [
                         0,
@@ -101,18 +101,74 @@
                         1,
                         1
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
                 {
-                    "Near Plane": 1,
-                    "Far Plane": 100,
-                    "Vertical Fov": 1.0774549245834351,
-                    "Horizontal Fov": 1.5707963705062866,
-                    "Camera Pos": [
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        11.394997596740723,
+                        11.183857917785645,
+                        10.533176422119141
+                    ],
+                    "Quaternion": [
+                        -0.5590241551399231,
+                        0.68719130754470825,
+                        -0.0037344666197896004,
+                        0.46394634246826172
+                    ],
+                    "RotationEditor": [
                         0,
                         0,
                         0
                     ],
-                    "Type": 3
+                    "Scale": [
+                        1.4142135381698608,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 1.3977527618408203,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        11.394997596740723,
+                        11.183857917785645,
+                        10.533176422119141
+                    ],
+                    "Type": 3,
+                    "Zoom": 14,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -0.6122596263885498,
+                        0,
+                        -0.90129142999649048
+                    ],
+                    "Movement Speed": 0.5,
+                    "Target Pos": 2021177439,
+                    "Vertical Angle": -56,
+                    "Lock Vertical Angle": false,
+                    "Rotation Speed": 0.5,
+                    "Radius": 20,
+                    "Horizontal Angle": 226.39971923828125,
+                    "Right Click Rotation": true,
+                    "Arrow Rotation": false,
+                    "WASD Movement": false,
+                    "Border Movement": false,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0
                 },
                 {
                     "Type": 6,
@@ -133,7 +189,7 @@
                     "Active": true,
                     "Position": [
                         0,
-                        0.5,
+                        0.45086690783500671,
                         0
                     ],
                     "Quaternion": [
@@ -237,7 +293,7 @@
                     "Active": true,
                     "Position": [
                         0,
-                        -1,
+                        -0.16094398498535156,
                         0
                     ],
                     "Quaternion": [
@@ -247,9 +303,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         20,
