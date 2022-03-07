@@ -1,22 +1,16 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 #include "FileSystem.h"
-
 #include "ParticleEmitter.h"
-
 #include "ResourceManager.h"
 #include "CameraComponent.h"
 #include "TransformComponent.h"
-
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
-
 #include "Globals.h"
-
 #include "Math/MathFunc.h"
-
 #include "imgui/imgui.h"
 
 #include <GL/glew.h>
@@ -30,9 +24,6 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	showTexMenu(false),
 	emitterName(""),
 	own(owner)
-	//VAO(0u),
-	//instanceVBO(0u),
-	//vertexVBO(0u)
 {
 	poolIndex = maxParticles - 1;
 	particlePool.resize(maxParticles);
@@ -43,14 +34,13 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
 
-	particleProps.colorBegin = { 1,0,0,1 };
-	particleProps.colorEnd = { 0,1,0,1 };
-	particleProps.sizeBegin = 0.5f, particleProps.sizeVariation = 0.3f, particleProps.sizeEnd = 0.0f;
-	particleProps.lifeTime = 1.0f;
-	particleProps.velocity = { 0.0f, 2.0f, 0.0f };
-	particleProps.acceleration = { 0.0f, 5.0f, 0.0f };
-	particleProps.position = { 0.0f, 0.0f, 0.0f };
-
+	particleReference.colorBegin = { 1,0,0,1 };
+	particleReference.colorEnd = { 0,1,0,1 };
+	particleReference.sizeBegin = 0.5f, particleReference.sizeVariation = 0.3f, particleReference.sizeEnd = 0.0f;
+	particleReference.lifeTime = 1.0f;
+	particleReference.velocity = { 0.0f, 2.0f, 0.0f };
+	particleReference.acceleration = { 0.0f, 5.0f, 0.0f };
+	particleReference.position = { 0.0f, 0.0f, 0.0f };
 
 	data.vertexArray = nullptr;
 	data.vertexBuffer = nullptr;
@@ -86,64 +76,36 @@ void ParticleEmitter::Emit(float dt)
 		Particle& particle = particlePool[poolIndex];
 		particle.active = true;
 
-		particle.position = particleProps.position;
-		particle.rotation = particleProps.deltaRotation + random.Float() * 2 * pi;
+		particle.position = particleReference.position;
+		particle.rotation = particleReference.deltaRotation + random.Float() * 2 * pi;
 
-		particle.velocity = particleProps.velocity;
-		particle.velocity.x += particleProps.acceleration.x * (random.Float() - 0.5f) * 2;
-		particle.velocity.y += particleProps.acceleration.y * (random.Float() - 0.5f) * 2;
+		particle.velocity = particleReference.velocity;
+		particle.velocity.x += particleReference.acceleration.x * (random.Float() - 0.5f) * 2;
+		particle.velocity.y += particleReference.acceleration.y * (random.Float() - 0.5f) * 2;
 
-		particle.colorBegin = particleProps.colorBegin;
-		particle.colorEnd = particleProps.colorEnd;
+		particle.colorBegin = particleReference.colorBegin;
+		particle.colorEnd = particleReference.colorEnd;
 
-		particle.lifeTime = particleProps.lifeTime;
-		particle.lifeRemaining = particleProps.lifeTime;
-		particle.sizeBegin = particleProps.sizeBegin + particleProps.sizeVariation * (random.Float() - 0.5f);
-		particle.sizeEnd = particleProps.sizeEnd;
+		particle.lifeTime = particleReference.lifeTime;
+		particle.lifeRemaining = particleReference.lifeTime;
+		particle.sizeBegin = particleReference.sizeBegin + particleReference.sizeVariation * (random.Float() - 0.5f);
+		particle.sizeEnd = particleReference.sizeEnd;
 
 		poolIndex = --poolIndex % particlePool.size();
 
 		currTimer = timer;
+		
+		for (int i = 0; i < particlePool.size(); i++)
+		{
+			for (int j = 0; j < effects.size(); j++)
+			{
+				if (effects[j] != nullptr)
+				{
+					effects[j]->Init(particlePool[i]);
+				}
+			}
+		}
 	}
-
-	//currTimer -= dt;
-	//if (currTimer <= 0.0f) {
-	//
-	//	for (int i = 0; i < particlesBuff.size(); i++) {
-	//		// When the particle is allocated in memory, but it's not being used at the moment
-	//		// Reuse an exisiting particle to make the smaller complexity, which results in more optimized code 
-	//
-	//		TransformComponent* transform = (TransformComponent*)own->GetComponent<TransformComponent>();
-	//		if (transform != nullptr)
-	//		{
-	//			if (particlesBuff[i].isActive == false)
-	//			{
-	//				particlesBuff[i].isActive = true;
-	//				particlesBuff[i].position = transform->position;
-	//				particlesBuff[i].rotation = particleReference->rotation;
-	//				particlesBuff[i].size = particleReference->size;
-	//				particlesBuff[i].color = particleReference->color;
-	//				particlesBuff[i].lifeTime = particleReference->lifeTime;
-	//
-	//				for (int j = 0; j < effects.size(); j++)
-	//				{
-	//					if (effects[j] != nullptr)
-	//					{
-	//						effects[j]->Init(particlesBuff[i]);
-	//					}
-	//				}
-	//				return;
-	//			}
-	//		}
-	//	}
-	//
-	//	if (particlesBuff.size() < maxParticles) {
-	//		// Create new particle
-	//		Particle* particle = new Particle(particleReference, own);
-	//		particlesBuff.push_back(*particle);
-	//	}
-	//	currTimer = timer;
-	//}
 }
 
 void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const float3& size, const float4& color)
@@ -306,7 +268,7 @@ void ParticleEmitter::Update(float dt)
 
 		particle.lifeRemaining -= dt;
 		particle.position += particle.velocity * dt;
-		particle.rotation += particleProps.deltaRotation * dt;
+		particle.rotation += particleReference.deltaRotation * dt;
 	}
 }
 
@@ -359,16 +321,16 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//guiName = "Size" + suffixLabel;
 
 		guiName = "Particle lifetime" + suffixLabel;
-		ImGui::DragFloat(guiName.c_str(), &particleProps.lifeTime, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
 
-		ImGui::DragFloat("Beginning Size", &particleProps.sizeBegin, 0.001f, 0.0f);
+		ImGui::DragFloat("Beginning Size", &particleReference.sizeBegin, 0.001f, 0.0f);
 
-		ImGui::DragFloat("Rotation Amount", &particleProps.deltaRotation, 0.01f);
+		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
 	
 		guiName = "Color (RGBA)" + suffixLabel;
-		ImGui::ColorEdit4("Beginning Color", particleProps.colorBegin.ptr());
+		ImGui::ColorEdit4("Beginning Color", particleReference.colorBegin.ptr());
 
-		ImGui::ColorEdit4("Ending Color", particleProps.colorEnd.ptr());
+		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());
 
 		ImGui::Indent();
 

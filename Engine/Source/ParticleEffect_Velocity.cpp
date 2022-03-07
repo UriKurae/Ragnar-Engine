@@ -28,8 +28,8 @@ void ParticleEffect_Velocity::Update(Particle& particle, float dt)
 
 void ParticleEffect_Velocity::OnEditor(int emitterIndex)
 {
-	float minVel = -1.0f;
-	float maxVel = 1.0f;
+	float minVel = -5.0f;
+	float maxVel = 5.0f;
 
 	float minV[3] = { minVelocity.x, minVelocity.y, minVelocity.z };
 	float maxV[3] = { maxVelocity.x, maxVelocity.y, maxVelocity.z };

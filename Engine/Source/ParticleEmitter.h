@@ -4,7 +4,6 @@
 #include "ParticleEffect.h"
 #include "ParticleEffect_Velocity.h"
 #include "ParticleEffect_Acceleration.h"
-
 #include "Particle.h"
 
 #include <array>
@@ -108,11 +107,8 @@ private:
 	bool showTexMenu;
 	LCG random;
 
-	ParticleProps particleProps;
+	ParticleReference particleReference;
 	std::shared_ptr<Texture> texture;
-	//unsigned int VAO;
-	//unsigned int instanceVBO;
-	//unsigned int vertexVBO;
 
 };
 
