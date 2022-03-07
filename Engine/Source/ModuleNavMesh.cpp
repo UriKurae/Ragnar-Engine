@@ -265,22 +265,25 @@ bool ModuleNavMesh::CleanUp()
 
 void ModuleNavMesh::BakeNavMesh(BuildSettings settings)
 {
-	ClearNavMeshes();
+	if (app->scene->GetStaticGO().size() > 0)
+	{
+		ClearNavMeshes();
 
-	for (auto& go:app->scene->GetStaticGO())
-		AddGameObjectToNavMesh(go);
+		for (auto& go : app->scene->GetStaticGO())
+			AddGameObjectToNavMesh(go);
 
-	geometry->SetChunkyMesh();
+		geometry->SetChunkyMesh();
 
-	if (navMeshBuilder == nullptr)
-		navMeshBuilder = new NavMeshBuilder();
+		if (navMeshBuilder == nullptr)
+			navMeshBuilder = new NavMeshBuilder();
 
-	buildSettings = settings;
-	navMeshBuilder->HandleMeshChanged(geometry, settings);
-	navMeshBuilder->HandleSettings();
-	navMeshBuilder->HandleBuild();
+		buildSettings = settings;
+		navMeshBuilder->HandleMeshChanged(geometry, settings);
+		navMeshBuilder->HandleSettings();
+		navMeshBuilder->HandleBuild();
 
-	pathfinder.Init(navMeshBuilder);
+		pathfinder.Init(navMeshBuilder);
+	}
 }
 
 void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)
