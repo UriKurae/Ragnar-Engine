@@ -97,6 +97,7 @@
     <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
+    <ClInclude Include="Dependencies\Imgui\bezier.hpp" />
     <ClInclude Include="Dependencies\Imgui\imconfig.h" />
     <ClInclude Include="Dependencies\Imgui\imgui.h" />
     <ClInclude Include="Dependencies\Imgui\ImguiStyle.h" />
@@ -287,6 +288,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\Imgui\bezier.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
     <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />

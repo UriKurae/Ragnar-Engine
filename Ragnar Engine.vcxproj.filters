@@ -649,6 +649,9 @@
     <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\bezier.hpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1046,6 +1049,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Component.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\bezier.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
