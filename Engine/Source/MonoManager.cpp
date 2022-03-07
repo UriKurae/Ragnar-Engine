@@ -49,6 +49,20 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Input::GetMouseX", MouseX);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
 
+	mono_add_internal_call("RagnarEngine.Transform::GetLocalPosition", GetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::GetGlobalPosition", GetGlobalPosition);
+	mono_add_internal_call("RagnarEngine.Transform::GetLocalRotation", GetRotation);
+	mono_add_internal_call("RagnarEngine.Transform::GetGlobalRotation", GetGlobalRotation);
+	mono_add_internal_call("RagnarEngine.Transform::GetScale", GetScale);
+	mono_add_internal_call("RagnarEngine.Transform::GetUp", GetUp);
+	mono_add_internal_call("RagnarEngine.Transform::GetRight", GetRight);
+	mono_add_internal_call("RagnarEngine.Transform::GetForward", GetForward);
+	
+	mono_add_internal_call("RagnarEngine.Transform::SetPosition", SetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::SetRotation", SetRotation);
+	mono_add_internal_call("RagnarEngine.Transform::SetScale", SetScale);
+
+
 	InitMono();
 
 	return ret;

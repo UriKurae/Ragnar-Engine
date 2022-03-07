@@ -76,6 +76,10 @@ void ScriptComponent::OnEditor()
 		if(name == "") SelectScript();
 		else
 		{
+			ImGui::Text("Name: ");
+			ImGui::SameLine();
+			ImGui::TextColored({ 1,1,0,1 }, (name + ".cs").c_str());
+			
 			for (int i = 0; i < fields.size(); i++)
 			{
 				DropField(fields[i], "_GAMEOBJECT");

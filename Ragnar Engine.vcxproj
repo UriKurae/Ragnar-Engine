@@ -280,6 +280,7 @@
     <ClInclude Include="Engine\Source\TextureImporter.h" />
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
+    <ClInclude Include="Engine\Source\TransformBindings.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\Vertex.h" />
     <ClInclude Include="Engine\Source\VertexArray.h" />

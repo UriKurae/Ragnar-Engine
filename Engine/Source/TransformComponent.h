@@ -54,6 +54,10 @@ public:
 	void ShowTransformationInfo();
 	void ResetTransform();
 
+	float3 GetForward();
+	float3 GetRight();
+	float3 GetUp();
+
 	// UNDO
 	inline void ForceUpdateTransform() { changeTransform = true; }
 	void UpdateEditorRotation();

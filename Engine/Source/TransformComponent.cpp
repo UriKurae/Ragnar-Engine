@@ -13,6 +13,8 @@
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
+#include "Math/float3x3.h"
+
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
 
@@ -329,6 +331,21 @@ void TransformComponent::ResetTransform()
 	SetTransform(math::float3::zero, math::Quat::identity, math::float3::one);
 	rotationEditor = rotationInEuler = math::float3::zero;
 	UpdateTransform();
+}
+
+float3 TransformComponent::GetForward()
+{
+	return globalMatrix.RotatePart().Col(2).Normalized();
+}
+
+float3 TransformComponent::GetRight()
+{
+	return globalMatrix.RotatePart().Col(0).Normalized();
+}
+
+float3 TransformComponent::GetUp()
+{
+	return globalMatrix.RotatePart().Col(1).Normalized();
 }
 
 void TransformComponent::UpdateEditorRotation()
