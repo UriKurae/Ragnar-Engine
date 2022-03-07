@@ -70,6 +70,13 @@ private:
 	float rotationSpeed = 0.5f;
 	float radius = 20.0f;
 	float horizontalAngle = 0;
+	
+	// Controls
+	bool rightClickRot = true; // Right click rotation and midle click movement go together
+	bool arrowRot = false;
+	bool midClickMov = true;
+	bool WASDMov = false;
+	bool borderMov = false;
 
 public:
 	void RequestShake(float strength, float duration);
