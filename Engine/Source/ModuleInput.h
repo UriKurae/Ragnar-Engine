@@ -70,6 +70,9 @@ public:
 	void AddController(int id);
 	void RemoveController(int id);
 
+	void FillScancodeNameList();
+	inline std::vector<std::string> GetScancodeNameList() { return keyNameList; }
+
 	inline KeyState GetKey(int id) const { return keyboard[id]; }
 	inline KeyState GetMouseButton(int id) const { return mouseButtons[id]; }
 	inline int GetMouseX() const { return mouseX; }
@@ -105,6 +108,7 @@ private:
 	float deadzone;
 
 	std::vector<std::string> strings;
+	std::vector<std::string> keyNameList;
 
 	bool repeated = true;
 };

@@ -43,6 +43,8 @@ bool ModuleInput::Init(JsonParsing& node)
 
 	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 
+	FillScancodeNameList();
+
 	return ret;
 }
 
@@ -272,6 +274,14 @@ void ModuleInput::RemoveController(int id)
 	DEBUG_LOG("Game controller device with index %d removed.", id);
 	SDL_GameControllerClose(SDL_GameControllerFromInstanceID(id));
 	pad = nullptr;
+}
+
+void ModuleInput::FillScancodeNameList()
+{
+	for (size_t i = 0; i < MAX_KEYS; i++)
+	{
+		keyNameList.push_back(SDL_GetScancodeName((SDL_Scancode)i));
+	}
 }
 
 bool ModuleInput::GetButton(int joystickId, Button button)

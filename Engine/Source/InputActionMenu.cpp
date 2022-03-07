@@ -1,10 +1,13 @@
 
 #include "Application.h"
+#include "ModuleInput.h"
 #include "FileSystem.h"
 #include "InputActionMenu.h"
 #include "IconsFontAwesome5.h"
 #include "Globals.h"
 #include <string>
+
+#include "SDL.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "Imgui/imgui_internal.h"
@@ -90,10 +93,29 @@ bool InputActionMenu::Update(float dt)
 	ImGui::EndChild();
 
 	ImGui::NextColumn();
+
 	ImGui::BeginChild("Properties");
 	ImGui::Separator();
 	ImGui::Text("Properties");
 	ImGui::Separator();
+	ImGui::Text("Name");
+	//ImGui::SameLine();
+	//ImGui::InputText("##Name", &current, 30);
+	ImGui::Separator();
+	//static const char* current_item = NULL;
+
+	//if (ImGui::BeginCombo("##combo", current_item)) // The second parameter is the label previewed before opening the combo.
+	//{
+	//	for (int n = 0; n < IM_ARRAYSIZE(app->input->GetScancodeNameList()); n++)
+	//	{
+	//		bool is_selected = (current_item == items[n]); // You can store your selection however you want, outside or inside your objects
+	//		if (ImGui::Selectable(items[n], is_selected)
+	//			current_item = items[n];
+	//			if (is_selected)
+	//				ImGui::SetItemDefaultFocus();   // You may set the initial focus when opening the combo (scrolling + for keyboard navigation support)
+	//	}
+	//	ImGui::EndCombo();
+	//}
 	ImGui::EndChild();
 
 	ImGui::End();
@@ -208,6 +230,7 @@ void ActionMaps::OnSave(JsonParsing& node, JSON_Array* array)
 
 void ActionMaps::OnLoad(JsonParsing& node)
 {
+	actions.clear();
 	name = node.GetJsonString("Name");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Actions");
