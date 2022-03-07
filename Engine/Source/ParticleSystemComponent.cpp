@@ -6,7 +6,6 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
 	transform = trans;
 	active = true; // Component is active
     isActive = false; // Simulation is active
-
 }
 
 ParticleSystemComponent::~ParticleSystemComponent()
@@ -105,10 +104,35 @@ void ParticleSystemComponent::Stop()
 
 bool ParticleSystemComponent::OnLoad(JsonParsing& node)
 {
-	return false;
+    JSON_Array* emittersArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Emitters");
+    int emittersCount = node.GetJsonArrayCount(emittersArray);
+
+    for (int i = 0; i < emittersCount; ++i)
+    {
+        JsonParsing file = node.GetJsonArrayValue(emittersArray, i);
+        ParticleEmitter* emitter = new ParticleEmitter(owner);
+        emitter->OnLoad(file);
+        emitters.push_back(emitter);
+    }
+
+    //for (auto& emitter : emitters)
+    //    emitter->OnLoad(node);
+	return true;
 }
 
 bool ParticleSystemComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
-	return false;
+    JsonParsing file = JsonParsing();
+
+    file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+    file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+
+    JSON_Array* emittersArray = file.SetNewJsonArray(file.GetRootValue(), "Emitters");
+
+    for (auto& emitter : emitters)
+        emitter->OnSave(node, emittersArray);
+
+    node.SetValueToArray(array, file.GetRootValue());
+
+	return true;
 }
