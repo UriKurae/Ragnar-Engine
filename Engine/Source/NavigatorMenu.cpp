@@ -1,7 +1,5 @@
 #include "Application.h"
 #include "NavigatorMenu.h"
-#include "ModuleScene.h"
-#include "ModuleNavMesh.h"
 
 #include "IconsFontAwesome5.h"
 
@@ -35,8 +33,7 @@ bool NavigatorMenu::Update(float dt)
     ImGui::Begin(ICON_FA_WALKING" Navigator", &active);
     if (ImGui::Button("Bake"))
     {
-        //app->navMesh->SetGeometry(settings);
-        app->navMesh->BakeNavMesh();
+        app->navMesh->BakeNavMesh(settings);
     }
     ImGui::Spacing();
     ImGui::Spacing();
@@ -44,10 +41,10 @@ bool NavigatorMenu::Update(float dt)
     ImGui::Text("Agent Properties");
     ImGui::Separator();
     ImGui::Spacing();
-    ImGui::DragFloat("Agent radius", &settings.agentRadius, 0.900f);
-    ImGui::DragFloat("Agent height", &settings.agentHeight, 2.0f);
-    ImGui::DragFloat("Agent max climb", &settings.agentMaxClimb, 2.0f);
-    ImGui::DragFloat("Agent max slope", &settings.agentMaxSlope, 2.0f);
+    ImGui::DragFloat("Agent radius", &settings.agentRadius, 0.1f);
+    ImGui::DragFloat("Agent height", &settings.agentHeight, 0.1f);
+    ImGui::DragFloat("Agent max climb", &settings.agentMaxClimb, 0.1f);
+    ImGui::DragFloat("Agent max slope", &settings.agentMaxSlope, 0.1f);
     ImGui::Spacing();
     ImGui::Spacing();
     ImGui::Spacing();
@@ -55,15 +52,15 @@ bool NavigatorMenu::Update(float dt)
     ImGui::Text("NavMesh Properties");
     ImGui::Separator();
     ImGui::Spacing();
-    ImGui::DragFloat("Cell size", &settings.cellSize, 2.0f);
-    ImGui::DragFloat("Cell hight", &settings.cellHeight, 2.0f);
-    ImGui::DragFloat("Region minimum size", &settings.regionMinSize, 2.0f);
-    ImGui::DragFloat("Region merge size", &settings.regionMergeSize, 2.0f);
-    ImGui::DragFloat("Edge max lenght", &settings.edgeMaxLen, 2.0f);
-    ImGui::DragFloat("Edge max error", &settings.edgeMaxError, 2.0f);
-    ImGui::DragFloat("Detail sample distance", &settings.detailSampleDist, 2.0f);
-    ImGui::DragFloat("Detail sample max error", &settings.detailSampleMaxError, 2.0f);
-    ImGui::DragFloat("Tile Size", &settings.tileSize, 0.0f);
+    ImGui::DragFloat("Cell size", &settings.cellSize, 0.1f);
+    ImGui::DragFloat("Cell hight", &settings.cellHeight, 0.1f);
+    ImGui::DragFloat("Region minimum size", &settings.regionMinSize, 0.1f);
+    ImGui::DragFloat("Region merge size", &settings.regionMergeSize, 0.1f);
+    ImGui::DragFloat("Edge max lenght", &settings.edgeMaxLen, 0.1f);
+    ImGui::DragFloat("Edge max error", &settings.edgeMaxError, 0.1f);
+    ImGui::DragFloat("Detail sample distance", &settings.detailSampleDist, 0.1f);
+    ImGui::DragFloat("Detail sample max error", &settings.detailSampleMaxError, 0.1f);
+    ImGui::DragFloat("Tile Size", &settings.tileSize, 0.1f);
 
     ImGui::End();
     return true;

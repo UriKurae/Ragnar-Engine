@@ -183,20 +183,13 @@ bool InputGeom::loadMesh(Mesh* mesh)
 	return true;
 }
 
-bool InputGeom::AddMesh(std::shared_ptr<Mesh> mesh, float4x4 new_mesh_transform)
+bool InputGeom::SetChunkyMesh()
 {
 	if (m_chunkyMesh)
 	{
 		delete m_chunkyMesh;
 		m_chunkyMesh = nullptr;
 	}
-	++m_offMeshConCount;
-	++m_volumeCount;
-
-	if (m_mesh == nullptr)
-		m_mesh = new SimpleMesh();
-
-	MergeToMesh(mesh, new_mesh_transform);
 
 	float* vertices = new float[m_mesh->vertices.size() * 3];
 	const std::vector<float3>& meshVertices = m_mesh->vertices;
@@ -234,6 +227,11 @@ void InputGeom::SetMesh()
 
 void InputGeom::MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_transform)
 {
+	if (m_mesh == nullptr)
+		m_mesh = new SimpleMesh();
+	++m_offMeshConCount;
+	++m_volumeCount;
+
 	// Vertex Merging =====================================================================
 	int total_vertices = m_mesh->vertices.size() + new_mesh->GetVerticesSize();
 	std::vector<float3> merged_vertices;
@@ -243,6 +241,8 @@ void InputGeom::MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_tr
 	merged_vertices = m_mesh->vertices;
 
 	std::vector<float3> new_mesh_vertices;
+	new_mesh_vertices.reserve(new_mesh->GetVerticesSize());
+
 	for (int i = 0; i < new_mesh->GetVerticesSize(); i++)
 		new_mesh_vertices.push_back(new_mesh->GetVerticesVector()[i].position);
 

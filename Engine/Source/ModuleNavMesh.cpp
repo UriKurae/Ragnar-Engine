@@ -2,8 +2,6 @@
 #include "Globals.h"
 
 #include "ModuleNavMesh.h"
-#include "ModuleCamera3D.h"
-#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
 
@@ -13,18 +11,12 @@
 #include "GameObject.h"
 
 #include "NavMeshBuilder.h"
-//#include "IM_NavMeshImporter.h"
-#include "ResourceManager.h"
-#include "FileSystem.h"
-
 #include "DebugUtils/DetourDebugDraw.h"
 #include "InputGeom.h"
 #include "Detour/DetourNavMesh.h"
 #include "Detour/DetourNavMeshQuery.h"
 #include "Detour/DetourNavMeshBuilder.h"
 #include "Detour/DetourCommon.h"
-#include "NavigatorMenu.h"
-#include "mmgr/mmgr.h"
 #include "DebugUtils/SampleInterfaces.h"
 
 #include "Imgui/imgui.h"
@@ -175,7 +167,7 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 	if (geometry->getChunkyMesh() == nullptr && navMeshBuilder->GetNavMesh() == nullptr)
 	{
 		//return;
-		BakeNavMesh();
+		BakeNavMesh(buildSettings);
 		LOG(LogType::L_WARNING, "No chunky mesh set, one has been baked to avoid crashes");
 	}
 
@@ -271,17 +263,20 @@ bool ModuleNavMesh::CleanUp()
 	return true;
 }
 
-void ModuleNavMesh::BakeNavMesh()
+void ModuleNavMesh::BakeNavMesh(BuildSettings settings)
 {
 	ClearNavMeshes();
 
 	for (auto& go:app->scene->GetStaticGO())
 		AddGameObjectToNavMesh(go);
 
+	geometry->SetChunkyMesh();
+
 	if (navMeshBuilder == nullptr)
 		navMeshBuilder = new NavMeshBuilder();
 
-	navMeshBuilder->HandleMeshChanged(geometry, bakedNav);
+	buildSettings = settings;
+	navMeshBuilder->HandleMeshChanged(geometry, settings);
 	navMeshBuilder->HandleSettings();
 	navMeshBuilder->HandleBuild();
 
@@ -302,9 +297,7 @@ void ModuleNavMesh::AddGameObjectToNavMesh(GameObject* objectToAdd)
 
 	float4x4 globalTransform = objectToAdd->GetComponent<TransformComponent>()->GetGlobalTransform();
 
-	geometry->AddMesh(mesh, globalTransform);
-
-	//pathfinder.Init(navMeshBuilder);
+	geometry->MergeToMesh(mesh, globalTransform);
 }
 
 static float frand()

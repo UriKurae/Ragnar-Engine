@@ -1,6 +1,8 @@
 #pragma once
 #include "Menu.h"
-#include "InputGeom.h"
+#include "ModuleNavMesh.h"
+
+struct BuildSettings;
 
 class NavigatorMenu : public Menu
 {

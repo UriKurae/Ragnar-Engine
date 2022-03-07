@@ -110,7 +110,7 @@ bool NavMeshBuilder::HandleBuild()
 	}
 
 	dtNavMeshParams params;
-	rcVcopy(params.orig, m_geom->getNavMeshBoundsMin());
+	rcVcopy(params.orig, m_geom->getMeshBoundsMin());
 	params.tileWidth = m_tileSize * m_cellSize;
 	params.tileHeight = m_tileSize * m_cellSize;
 	params.maxTiles = m_maxTiles;
@@ -143,8 +143,8 @@ bool NavMeshBuilder::BuildAllTiles()
 	if (!m_geom) return false;
 	if (!m_navMesh) return false;
 
-	const float* bmin = m_geom->getNavMeshBoundsMin();
-	const float* bmax = m_geom->getNavMeshBoundsMax();
+	const float* bmin = m_geom->getMeshBoundsMin();
+	const float* bmax = m_geom->getMeshBoundsMax();
 	int gw = 0, gh = 0;
 	rcCalcGridSize(bmin, bmax, m_cellSize, &gw, &gh);
 	const int ts = (int)m_tileSize;
@@ -546,35 +546,31 @@ void NavMeshBuilder::ResetCommonSettings()
 	m_detailSampleMaxError = 1.0f;
 }
 
-void NavMeshBuilder::HandleMeshChanged(InputGeom* geom, NavAgent agent)
+void NavMeshBuilder::HandleMeshChanged(InputGeom* geom, BuildSettings settings)
 {
 	//Normal sample settings 
 	m_geom = geom;
 
-	const BuildSettings* buildSettings = geom->getBuildSettings();
-	if (buildSettings)
-	{
-		//Agent
-		m_agentHeight = agent.height;
-		m_agentRadius = agent.radius;
-		m_agentMaxClimb = agent.stopHeight;
-		m_agentMaxSlope = agent.maxSlope;
+	//Agent
+	m_agentHeight = settings.agentHeight;
+	m_agentRadius = settings.agentRadius;
+	m_agentMaxClimb = settings.agentMaxClimb;
+	m_agentMaxSlope = settings.agentMaxSlope;
 
-		//Nav Mesh
-		m_cellSize = buildSettings->cellSize;
-		m_cellHeight = buildSettings->cellHeight;
-		m_regionMinSize = buildSettings->regionMinSize;
-		m_regionMergeSize = buildSettings->regionMergeSize;
-		m_edgeMaxLen = buildSettings->edgeMaxLen;
-		m_edgeMaxError = buildSettings->edgeMaxError;
-		m_vertsPerPoly = buildSettings->vertsPerPoly;
-		m_detailSampleDist = buildSettings->detailSampleDist;
-		m_detailSampleMaxError = buildSettings->detailSampleMaxError;
-		m_partitionType = buildSettings->partitionType;
-	}
+	//Nav Mesh
+	m_cellSize = settings.cellSize;
+	m_cellHeight = settings.cellHeight;
+	m_regionMinSize = settings.regionMinSize;
+	m_regionMergeSize = settings.regionMergeSize;
+	m_edgeMaxLen = settings.edgeMaxLen;
+	m_edgeMaxError = settings.edgeMaxError;
+	m_vertsPerPoly = settings.vertsPerPoly;
+	m_detailSampleDist = settings.detailSampleDist;
+	m_detailSampleMaxError = settings.detailSampleMaxError;
+	m_partitionType = settings.partitionType;
 
-	if (buildSettings && buildSettings->tileSize > 0)
-		m_tileSize = buildSettings->tileSize;
+	if (settings.tileSize > 0)
+		m_tileSize = settings.tileSize;
 
 	CleanUp();
 
@@ -588,8 +584,8 @@ void NavMeshBuilder::HandleSettings()
 	{
 		char text[64];
 		int gw = 0, gh = 0;
-		const float* bmin = m_geom->getNavMeshBoundsMin();
-		const float* bmax = m_geom->getNavMeshBoundsMax();
+		const float* bmin = m_geom->getMeshBoundsMin();
+		const float* bmax = m_geom->getMeshBoundsMax();
 		rcCalcGridSize(bmin, bmax, m_cellSize, &gw, &gh);
 		const int ts = (int)m_tileSize;
 		const int tw = (gw + ts - 1) / ts;
@@ -620,8 +616,8 @@ void NavMeshBuilder::DebugDraw()
 {
 	if (m_geom != nullptr)
 	{
-		const float* bmin = m_geom->getNavMeshBoundsMin();
-		const float* bmax = m_geom->getNavMeshBoundsMax();
+		const float* bmin = m_geom->getMeshBoundsMin();
+		const float* bmax = m_geom->getMeshBoundsMax();
 		DrawBoundaries(bmin[0], bmin[1], bmin[2], bmax[0], bmax[1], bmax[2]);
 	}
 

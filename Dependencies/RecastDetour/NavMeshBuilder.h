@@ -23,7 +23,7 @@ public:
 	bool BuildAllTiles();
 	unsigned char* BuildTile(const int tx, const int ty, const float* bmin, const float* bmax, int& dataSize);
 	void ResetCommonSettings();
-	void HandleMeshChanged(InputGeom* geom, NavAgent agent);
+	void HandleMeshChanged(InputGeom* geom, BuildSettings settings);
 	void HandleSettings();
 
 	void DebugDraw();
@@ -31,7 +31,7 @@ public:
 	void OnEditor();
 
 	inline dtNavMesh* GetNavMesh() { return m_navMesh; };
-	inline InputGeom* GetGeom() { return m_geom; };
+	const inline InputGeom* GetGeom() const { return m_geom; };
 	void SetNavMesh(dtNavMesh* newNavMesh);
 
 	dtNavMeshQuery* GetNavMeshQuery();
@@ -86,7 +86,4 @@ private:
 	float m_tileBuildTime;
 	float m_tileMemUsage;
 	int m_tileTriCount;
-
-public:
-	BuildSettings buildSettings;
 };

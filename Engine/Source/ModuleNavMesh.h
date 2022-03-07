@@ -23,6 +23,44 @@ struct NavAgent
 	int maxSlope = 0;
 };
 
+struct BuildSettings
+{
+	// Cell size in world units
+	float cellSize;
+	// Cell height in world units
+	float cellHeight;
+	// Agent height in world units
+	float agentHeight;
+	// Agent radius in world units
+	float agentRadius;
+	// Agent max climb in world units
+	float agentMaxClimb;
+	// Agent max slope in degrees
+	float agentMaxSlope;
+	// Region minimum size in voxels.
+	// regionMinSize = sqrt(regionMinArea)
+	float regionMinSize;
+	// Region merge size in voxels.
+	// regionMergeSize = sqrt(regionMergeArea)
+	float regionMergeSize;
+	// Edge max length in world units
+	float edgeMaxLen;
+	// Edge max error in voxels
+	float edgeMaxError;
+	float vertsPerPoly;
+	// Detail sample distance in voxels
+	float detailSampleDist;
+	// Detail sample max error in voxel heights.
+	float detailSampleMaxError;
+	// Partition type, see SamplePartitionType
+	int partitionType;
+	// Bounds of the area to mesh
+	float navMeshBMin[3];
+	float navMeshBMax[3];
+	// Size of the tiles in voxels
+	float tileSize;
+};
+
 enum class PathType
 {
 	SMOOTH,
@@ -96,13 +134,13 @@ public:
 
 	bool CleanUp() override;
 
-	void BakeNavMesh();
+	void BakeNavMesh(BuildSettings settings);
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
 	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
 	float3 FindRandomPointAround(float3 centerPoint, float radius);
 	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
 
-private:
+	const BuildSettings GetBuildSettings() const { return buildSettings; }
 
 public:
 	std::vector<NavAgent> agents;
@@ -113,6 +151,7 @@ public:
 private:
 	NavMeshBuilder* navMeshBuilder;
 	InputGeom* geometry;
+	BuildSettings buildSettings;
 
 	GameObject* walkabilityPoint;
 
