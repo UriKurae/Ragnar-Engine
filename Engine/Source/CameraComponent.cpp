@@ -93,7 +93,7 @@ void CameraComponent::OnEditor()
 		if (freeMovement)
 		{
 			ImGui::Text("Movement: free");
-			ImGui::DragFloat("movementSpeed", &movementSpeed, 0.001f, 0.0f/*, 90.0f*/);
+			ImGui::DragFloat("movementSpeed", &movementSpeed, 0.001f, 0.0f);
 		}
 
 		else if (followTarget)
@@ -114,23 +114,18 @@ void CameraComponent::OnEditor()
 				}
 				ImGui::EndDragDropTarget();
 			}
-			if (ImGui::Checkbox("multifocusOnClick", &multifocusOnClick)) {}
-			//ImGui::SameLine(); select game object
-
-			ImGui::Text("s_lerp");
-			//ImGui::SameLine(); select mode none/lerp/slerp
 		}
 
-		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f)) {}
 		if (ImGui::Checkbox("lockVerticalAngle", &lockVerticalAngle)) {}
 
-		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f/*, 90.0f*/)) {}
-		if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f)) {}
+		if (ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f)) {}
 
 		ImGui::Text("- - - - SHAKE - - - -");
 
-		if (ImGui::DragFloat("shakeStrength", &shakeStrength, 0.1f, 0.0f/*, 90.0f*/)) {}
-		if (ImGui::DragFloat("shakeDuration", &shakeDuration, 0.1f, 0.0f/*, 90.0f*/)) {}
+		if (ImGui::DragFloat("shakeStrength", &shakeStrength, 0.1f, 0.0f)) {}
+		if (ImGui::DragFloat("shakeDuration", &shakeDuration, 0.1f, 0.0f)) {}
 
 		if (ImGui::Button("<")) if (smooth > 0) smooth--;
 		ImGui::SameLine();
@@ -152,9 +147,21 @@ void CameraComponent::OnEditor()
 
 bool CameraComponent::Update(float dt)
 {
-	camera.SetOrthographic(75.0f, 75.0f);
+	camera.SetOrthographic(zoom, zoom);
+	zoom = Clamp(zoom - app->input->GetMouseZ(), zoomMin, zoomMax);
 
 	camera.SetPos(transform->GetPosition());
+
+	if (target && app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+	{
+		fixingToTarget ^= true;
+	}
+	if (target&&fixingToTarget)
+	{
+		float3 pos_ = target->GetComponent<TransformComponent>()->GetPosition() - camera.Pos();
+		camera.Translate(pos_ * dt);
+		if (pos_.IsZero(0.001)) fixingToTarget = false;
+	}
 
 	if (shake)
 	{
@@ -185,36 +192,31 @@ bool CameraComponent::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) horizontalAngle += rotationSpeed;
 	if (!lockVerticalAngle)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT && verticalAngle > -179.9f)
-		{
-			verticalAngle -= rotationSpeed;
-			if (verticalAngle < -179.9f) verticalAngle = -179.9f;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT && verticalAngle < -0.1f)
-		{
-			verticalAngle += rotationSpeed;
-
-			if (verticalAngle > -0.1f) verticalAngle = -0.1f;
-		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT) verticalAngle -= rotationSpeed;
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_REPEAT) verticalAngle += rotationSpeed;
+		verticalAngle = Clamp(verticalAngle, -179.9f, -0.1f);
 	}
 
 	if (freeMovement)
 	{
 		float3 pos = defTarget->GetComponent<TransformComponent>()->GetPosition();
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT)
-		{
+		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
+		int horizontalDrag = app->input->GetMouseXMotion();
+		int verticalDrag = app->input->GetMouseYMotion();
+		int dragThreshold = 1;
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT || (mouseDragMid && horizontalDrag < -dragThreshold)) {
 			pos.x += movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z += movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
 		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT) {
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT || (mouseDragMid && horizontalDrag > dragThreshold)) {
 			pos.x -= movementSpeed * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z -= movementSpeed * cos(DEGTORAD * (horizontalAngle + 90));
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT) {
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT || (mouseDragMid && verticalDrag > dragThreshold)) {
 			pos.x -= movementSpeed * sin(DEGTORAD * horizontalAngle);
 			pos.z -= movementSpeed * cos(DEGTORAD * horizontalAngle);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT) {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT || (mouseDragMid && verticalDrag < -dragThreshold)) {
 			pos.x += movementSpeed * sin(DEGTORAD * horizontalAngle);
 			pos.z += movementSpeed * cos(DEGTORAD * horizontalAngle);
 		}

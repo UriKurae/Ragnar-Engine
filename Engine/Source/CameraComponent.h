@@ -53,23 +53,26 @@ private:
 	VertexBuffer* vbo;
 
 	//----------------------------------------------
+	const float zoomMin = 10;
+	const float zoomMax = 100;
+	float zoom = zoomMax;
+
+	bool fixingToTarget = false;
+
 	bool freeMovement = true;
-	GameObject*/*transform*/ defTarget = nullptr; // FreeMovement Target
+	GameObject* defTarget = nullptr; // FreeMovement Target
 	float movementSpeed = 0.5f;
 	bool followTarget = false;
-	GameObject*/*transform*/ target = nullptr;
+	GameObject* target = nullptr;
 	int s_lerp = 0;
 	float verticalAngle = -40.0f;
 	bool lockVerticalAngle = false;
 	float rotationSpeed = 0.5f;
 	float radius = 20.0f;
 	float horizontalAngle = 0;
-	bool multifocusOnClick = false;
-	GameObject*/*transform*/secondTarget = nullptr;
 
 public:
 	void RequestShake(float strength, float duration);
-	void setTransition(std::vector<float> durations, std::vector<float3> positions);
 private:
 	void Shake(float dt);
 
@@ -80,6 +83,4 @@ private:
 	int smooth = 0;
 	float elapsedTime = 0.0f;
 	float currentStrength = 0.0f;
-	std::vector<float> transitionDurations;
-	std::vector<float3> transitionPositions;
 };
