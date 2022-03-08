@@ -37,7 +37,8 @@ private:
 	Frustum camera;
 	TransformComponent* transform;
 	Quat currentRotation;
-	float3 currentPos;
+	//float3 lastPos = float3(0, 0, 0);
+	float3 originalPos;
 
 	float nearPlane;
 	float farPlane;
@@ -48,4 +49,44 @@ private:
 
 	IndexBuffer* ebo;
 	VertexBuffer* vbo;
+
+	//----------------------------------------------
+	const float zoomMin = 10;
+	const float zoomMax = 100;
+	float zoom = zoomMax;
+
+	bool fixingToTarget = false;
+
+	bool freeMovement = true;
+	GameObject* defTarget = nullptr; // FreeMovement Target
+	float movementSpeed = 0.5f;
+	bool followTarget = false;
+	GameObject* target = nullptr;
+	float verticalAngle = -40.0f;
+	bool lockVerticalAngle = false;
+	float rotationSpeed = 0.5f;
+	float radius = 20.0f;
+	float horizontalAngle = 0;
+	
+	// Controls
+	bool rightClickRot = true; // Right click rotation and midle click movement go together
+	bool arrowRot = false;
+	bool midClickMov = true;
+	bool WASDMov = false;
+	bool borderMov = false;
+
+	int targetUID = 0;
+
+public:
+	void RequestShake(float strength, float duration);
+private:
+	void Shake(float dt);
+
+	float shakeStrength = 0.6f;
+	float shakeDuration = 1.0f;
+	bool shake = false;
+	//bool smoothShake = true;
+	int smooth = 0;
+	float elapsedTime = 0.0f;
+	float currentStrength = 0.0f;
 };

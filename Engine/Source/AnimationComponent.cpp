@@ -156,8 +156,6 @@ void AnimationComponent::OnEditor()
 		}
 	}
 	ImGui::PopID();
-
-	ImGui::Separator();
 }
 
 bool AnimationComponent::Update(float dt)

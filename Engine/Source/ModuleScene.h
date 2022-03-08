@@ -8,6 +8,7 @@
 #include <map>
 
 struct SerializedField;
+class btRigidBody; // Scripting
 
 enum class Object3D
 {
@@ -34,7 +35,6 @@ public:
 	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool Update(float dt) override;
-	void Scripting(float dt);
 	bool PostUpdate() override;
 	bool Draw();
 	bool CleanUp() override;
@@ -81,6 +81,11 @@ public:
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
+	inline GameObject* GetPlayer() { return player; };
+
+	// Scripting
+	void Scripting(float dt);
+	void SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel);
 
 	CameraComponent* mainCamera;
 	GameObject* camera;
@@ -94,6 +99,7 @@ private:
 	bool frameSkip;
 
 	GameObject* player;
+	
 
 	bool resetQuadtree;
 
