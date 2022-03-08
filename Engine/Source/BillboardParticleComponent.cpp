@@ -6,12 +6,13 @@
 #include <gl/GLU.h>
 #include "Math/float3x3.h"
 
-BillboardParticleComponent::BillboardParticleComponent(GameObject* own, TransformComponent* trans)
+BillboardParticleComponent::BillboardParticleComponent(GameObject* own, TransformComponent* trans) :
+	particleAlignment(Particle_Alignment::CAMERA_ALIGNED),
+	isHorizontalAligned(true)
 {
 	type = ComponentType::BILLBOARD;
 	owner = own;
 	transform = trans;
-	particleAlignment = Particle_Alignment::CAMERA_ALIGNED;
 }
 
 BillboardParticleComponent::~BillboardParticleComponent()
@@ -56,6 +57,20 @@ void BillboardParticleComponent::OnEditor()
 				SetAlignment(Particle_Alignment::AXIS_ALIGNED);
 
 			ImGui::EndMenu();
+		}
+
+		if (particleAlignment == Particle_Alignment::AXIS_ALIGNED) {
+			std::string tempName = (isHorizontalAligned ? "Horizontal" : "Vertical");
+			ImGui::Text("Current Aligned Axis: %s", tempName.c_str());
+
+			if (ImGui::BeginMenu("Change aligned axis")) {
+				if (ImGui::MenuItem("Horizontal")) 
+					isHorizontalAligned = true;
+				if (ImGui::MenuItem("Vertical")) 
+					isHorizontalAligned = false;
+
+				ImGui::EndMenu();
+			}
 		}
 	}
 }
@@ -105,28 +120,18 @@ Quat BillboardParticleComponent::GetAlignment()
 
 Quat BillboardParticleComponent::CameraAlign()
 {
-	// TODO: particles always face camera
-	
-	float3 normal = (app->scene->mainCamera->currentPos - this->transform->GetPosition()).Normalized();
-	float3 up = app->scene->mainCamera->camera.Up();
-	float3 right = normal.Cross(up);
+	Frustum camFrustum = app->scene->mainCamera->camera;
+	float3 billboardForward = (camFrustum.Pos() - transform->GetGlobalTransform().TranslatePart()).Normalized();
+
+	float3 up = camFrustum.Up();
+	float3 right = up.Cross(billboardForward);
+	up = billboardForward.Cross(right);
 
 	float3x3 mat = float3x3::identity;
-	mat.Set(-right.x, -right.y, -right.z, up.x, up.y, up.z, normal.x, normal.y, normal.z);
+	mat.Set(right.x, right.y, right.z, up.x, up.y, up.z, billboardForward.x, billboardForward.y, billboardForward.z);
 
-	transform->rotation = mat.Inverted().ToQuat();
-	return mat.Inverted().ToQuat();
-
-	/*float3 normal = (App->camera->Position - this->transform->position).Normalized();
-	float3 up = App->camera->camera->frustum.up;
-	float3 right = normal.Cross(up);
-
-	float3x3 mat = float3x3::identity;
-	mat.Set(-right.x, -right.y, -right.z, up.x, up.y, up.z, normal.x, normal.y, normal.z);
-
-	transform->rotation = mat.Inverted().ToQuat();*/
-
-	return Quat::identity;
+	Quat ret = mat.Inverted().ToQuat();
+	return ret;
 }
 
 Quat BillboardParticleComponent::WorldAlign()

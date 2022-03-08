@@ -138,6 +138,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::PARTICLE_SYSTEM);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Billboard Component"))
+		{
+			CreateComponent(ComponentType::BILLBOARD);
+			newComponent = false;
+		}
 		if (ImGui::Selectable("Animation Component"))
 		{
 			CreateComponent(ComponentType::ANIMATION);
@@ -298,7 +303,6 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		component = new BillboardParticleComponent(this, transform);
 		break;
 	}
-	
 
 	if (component != nullptr)
 	{

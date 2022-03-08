@@ -110,15 +110,18 @@ void ParticleEmitter::Emit(float dt)
 	}
 }
 
-void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const float3& size, const float4& color)
+void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const float3& size, const float4& color, Quat newRotation)
 {
 	if (data.indexCount >= data.maxIndices)
 		NextBatch();
 
 	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
-	Quat q;
+	/*Quat q;
 	q.SetFromAxisAngle({ 0,1,0 }, rotation);
+	float4x4 transform = float4x4::FromTRS(pos, q, size);*/
+
+	Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
 	float4x4 transform = float4x4::FromTRS(pos, q, size);
 
 	const int quadVertexCount = 4;
@@ -202,7 +205,8 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 		proj = app->camera->matrixProjectionFrustum;
 	}
 
-	
+	BillboardParticleComponent* billboard = static_cast<BillboardParticleComponent*>(own->GetComponent<BillboardParticleComponent>());
+
 	if (data.maxQuads > 0)
 	{
 		int i = 0;
@@ -218,7 +222,10 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 			color.w *= life;
 			float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
 
-			DrawParticle(particle.position, particle.rotation, { size,size,0.0f }, color);
+			if (billboard != nullptr)
+			{
+				DrawParticle(particle.position, particle.rotation, { size,size,0.0f }, color, billboard->GetAlignment());
+			}
 		}
 
 		uint32_t dataSize = (uint32_t)((uint8_t*)data.vertexBufferPtr - (uint8_t*)data.vertexBufferBase);

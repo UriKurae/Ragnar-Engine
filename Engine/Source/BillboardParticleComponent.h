@@ -37,4 +37,5 @@ public:
 private:
 
 	Particle_Alignment particleAlignment;
+	bool isHorizontalAligned;
 };

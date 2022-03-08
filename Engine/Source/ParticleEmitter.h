@@ -4,7 +4,7 @@
 #include "ParticleEffect.h"
 #include "ParticleEffect_Velocity.h"
 #include "ParticleEffect_Acceleration.h"
-#include "Particle.h"
+#include "BillboardParticleComponent.h"
 
 #include <array>
 
@@ -51,7 +51,7 @@ protected:
 
 	void StartBatch();
 	void NextBatch();
-	void DrawParticle(const float3& pos, float rotation, const float3& size, const float4& color);
+	void DrawParticle(const float3& pos, float rotation, const float3& size, const float4& color, Quat newRotation);
 
 	void SetUpBuffers();
 public:
