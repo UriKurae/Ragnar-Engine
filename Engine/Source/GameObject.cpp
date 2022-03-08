@@ -187,7 +187,7 @@ void GameObject::DrawEditor()
 Component* GameObject::CreateComponent(ComponentType type, const char* name)
 {
 	Component* component = nullptr;
-
+	
 	switch (type)
 	{
 	case ComponentType::TRANSFORM:
@@ -211,6 +211,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 				matComp->SetOwner(this);
 				components.push_back(matComp);
 				//matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
+				
 			}
 		}
 		break;
@@ -229,9 +230,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::UI_IMAGE:
 		component = new ImageComponent(this);
 		break;
-	case ComponentType::TRANFORM2D:
-		component = new ComponentTransform2D(float3{ 0,0,0 }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
-		break;
+	
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
 		app->scene->SetMainCamera((CameraComponent*)component);
@@ -251,6 +250,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
 		break;
+	
 	case ComponentType::MATERIAL:
 	{
 		{
@@ -284,6 +284,10 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	}
 	case ComponentType::LIGHT:
 		component = new ComponentLight();
+		break;
+	case ComponentType::TRANFORM2D:
+		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+		component = new ComponentTransform2D(float3{ camera->GetFrustum()->pos.x,camera->GetFrustum()->pos.y,camera->GetFrustum()->pos.z }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
 		break;
 	}
 

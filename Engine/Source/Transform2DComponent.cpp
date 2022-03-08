@@ -12,9 +12,10 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	//UID = GenerateUID();
 	//type = ComponentType::TRANSFORM2D;
 	own = Own;
-	internalPosition = position = pos;
-	scale.x = 1.30;
-	scale.y = 0.5;
+	internalPosition = { 0,0,0 };
+		position = { 0,0,0 };
+	scale.x = 25;
+	scale.y = 15;
 	scale.z = 1;
 	rotationEuler = rot;
 	generalScale = 1.0f;
@@ -47,22 +48,21 @@ void ComponentTransform2D::Enable()
 bool ComponentTransform2D::Update(float dt)
 {
 	float4 viewport = app->editor->GetGameView()->GetBounds();
-	float temporalW = (viewport.z * 300) / 847;
-	float temporalH = (viewport.w * 100) / 649;
-	scale.x = (buttonWidth * 1.30) / temporalW;
-	scale.y = (buttonHeight * 0.5) / temporalH;
+	float temporalW = (viewport.z * 25) / 847;
+	float temporalH = (viewport.w * 15) / 649;
+	scale.x = (buttonWidth / 0.6) / temporalW;
+	scale.y = (buttonHeight / 0.75) / temporalH;
 
 
 
-	internalPosition.x = (position.x * 2.0f) / (viewport.z / 2);
+	internalPosition.x = (position.x *30.0f) / (viewport.z / 2);
 
-	float res = (viewport.w * 1.5) / 649;
-	res = 1.5 - (res - 1.5)+0.05;
-	internalPosition.y = (position.y * res) / (viewport.w / 2);
+	/*float res = (viewport.w * 1.5) / 649;
+	res = 1.5 - (res - 1.5)+0.05;*/
+	internalPosition.y = (position.y * 30) / (viewport.w / 2);
 
-
-
-
+	/*internalPosition.x = position.x/1;
+	internalPosition.y = position.y/8;*/
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
 

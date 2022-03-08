@@ -307,7 +307,7 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		(*it)->Draw(app->scene->mainCamera);
 	}
-	PushCamera(float4x4::identity, float4x4::identity);
+	//PushCamera(float4x4::identity, float4x4::identity);
 
 
 	glMatrixMode(GL_PROJECTION);
