@@ -116,15 +116,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.39390754699707031,
+                        14.51568603515625,
                         11.183857917785645,
-                        11.142666816711426
+                        -0.87579107284545898
                     ],
                     "Quaternion": [
-                        0.15827116370201111,
-                        -0.58409619331359863,
-                        0.40780901908874512,
-                        0.68372046947479248
+                        0.023795556277036667,
+                        -0.52334421873092651,
+                        -0.095651589334011078,
+                        0.84640145301818848
                     ],
                     "RotationEditor": [
                         0,
@@ -140,12 +140,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0528367757797241,
+                    "Vertical Fov": 1.2162314653396606,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        0.39390754699707031,
+                        14.51568603515625,
                         11.183857917785645,
-                        11.142666816711426
+                        -0.87579107284545898
                     ],
                     "Type": 3,
                     "Zoom": 60,
@@ -161,7 +161,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 546.39971923828125,
+                    "Horizontal Angle": 614.39971923828125,
                     "Right Click Rotation": true,
                     "Arrow Rotation": false,
                     "WASD Movement": false,
@@ -283,7 +283,7 @@
         {
             "UUID": 1388560002,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Ground",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -358,7 +358,7 @@
         {
             "UUID": 1649238540,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Wall 1",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -432,7 +432,7 @@
         {
             "UUID": 784770431,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Wall 2",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -506,7 +506,7 @@
         {
             "UUID": 251971884,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Wall 3",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -580,7 +580,7 @@
         {
             "UUID": 1205700819,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Wall 4",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -654,7 +654,7 @@
         {
             "UUID": 265814943,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Trash 1",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -728,7 +728,7 @@
         {
             "UUID": 185076044,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Trash 2",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -802,7 +802,7 @@
         {
             "UUID": 1163337140,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Trash 3",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -876,7 +876,7 @@
         {
             "UUID": 1214010153,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Trash 4",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -950,7 +950,7 @@
         {
             "UUID": 813752052,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Wall center",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -1024,7 +1024,7 @@
         {
             "UUID": 361365125,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Wall left",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -1098,7 +1098,7 @@
         {
             "UUID": 2079792075,
             "Parent UUID": 417171234,
-            "Name": "Cylinder",
+            "Name": "Cylinder 1",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -1141,12 +1141,10 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Sectors": 24,
                     "Gravity": true,
                     "Kinematic": false,
                     "Mass": 1,
@@ -1172,7 +1170,7 @@
         {
             "UUID": 1231973631,
             "Parent UUID": 417171234,
-            "Name": "Cylinder",
+            "Name": "Cylinder 2",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -1215,12 +1213,10 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Sectors": 24,
                     "Gravity": true,
                     "Kinematic": false,
                     "Mass": 1,
@@ -1246,7 +1242,7 @@
         {
             "UUID": 322783125,
             "Parent UUID": 417171234,
-            "Name": "Cylinder",
+            "Name": "Cylinder 3",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -1289,12 +1285,10 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Sectors": 24,
                     "Gravity": true,
                     "Kinematic": false,
                     "Mass": 1,
@@ -1320,7 +1314,7 @@
         {
             "UUID": 268799058,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Obstacle",
             "Active": true,
             "PrefabID": false,
             "Prefab Path": "None",
