@@ -79,7 +79,6 @@ bool ModuleScene::Start()
 	//}
 
 	LoadScene("Assets/Scenes/build.ragnar");
-	player->GetComponent<AnimationComponent>()->Play("Idle");
 
 	return true;
 }
@@ -551,6 +550,7 @@ void ModuleScene::Play()
 	RELEASE_ARRAY(buf);
 
 	gameState = GameState::PLAYING;
+	player->GetComponent<AnimationComponent>()->Play("Idle");
 	gameTimer.ResetTimer();
 }
 
@@ -609,6 +609,7 @@ void ModuleScene::Scripting(float dt)
 			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
 		{
 			player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
+			player->GetComponent<AnimationComponent>()->currAnim->loop = true;
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
 			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
@@ -660,6 +661,11 @@ void ModuleScene::Scripting(float dt)
 			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_IDLE &&
 			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE)
 		{
+			if (player->GetComponent<AnimationComponent>()->currAnim->state == "Walk")
+			{
+				player->GetComponent<AnimationComponent>()->currAnim->loop = false;
+				player->GetComponent<AnimationComponent>()->loopTime = 100.0f;
+			}
 			playerRB->clearForces();
 			playerRB->setLinearVelocity({0,0,0});
 		}
