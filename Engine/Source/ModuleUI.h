@@ -12,6 +12,7 @@
 #include"Transform2DComponent.h"
 #include"MathGeoLib/include/Geometry/LineSegment.h"
 class Texture;
+class GameObject;
 
 class Shadert
 {

@@ -7,7 +7,7 @@ class MyPlane;
 class SDL_Rect;
 class SDL_Color;
 class SDL_Texture;
-
+class GameObject;
 class SliderComponent : public Component
 {
 public:

@@ -20,6 +20,11 @@
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
 #include "AnimationComponent.h"
+#include "ButtonComponent.h"
+#include "SliderComponent.h"
+#include "ImageComponent.h"
+#include "CheckBoxComponent.h"
+#include "Transform2DComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
@@ -211,6 +216,21 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::SCRIPT:
 		component = new ScriptComponent(this, name);
+		break;
+	case ComponentType::UI_BUTTON:
+		component = new ButtonComponent(this);
+		break;
+	case ComponentType::UI_SLIDER:
+		component = new SliderComponent(this);
+		break;
+	case ComponentType::UI_CHECKBOX:
+		component = new CheckboxComponent(this);
+		break;
+	case ComponentType::UI_IMAGE:
+		component = new ImageComponent(this);
+		break;
+	case ComponentType::TRANFORM2D:
+		component = new ComponentTransform2D(float3{ 0,0,0 }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());

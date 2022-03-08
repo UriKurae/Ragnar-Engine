@@ -11,7 +11,7 @@
 #include "assimp/postProcess.h"
 #include "GameObject.h"
 class Component;
-
+class GameObject;
 class ComponentTransform2D : public Component
 {
 public:

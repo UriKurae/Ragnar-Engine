@@ -6,6 +6,7 @@
 #include"MaterialComponent.h"
 #include"Material.h"
 class MyPlane;
+class GameObject;
 class CheckboxComponent : public Component
 {
 public:

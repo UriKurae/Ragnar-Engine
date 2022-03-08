@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include"MathGeoLib/include/MathGeoLib.h"
+#include "Math/float2.h"
 
 class Text {
 public:

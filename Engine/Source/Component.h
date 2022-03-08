@@ -6,6 +6,11 @@
 
 class GameObject;
 class CameraComponent;
+class ButtonComponent;
+class ComponentTransform2D;
+class SliderComponent;
+class ImageComponent;
+class CheckboxComponent;
 
 enum class ComponentType
 {

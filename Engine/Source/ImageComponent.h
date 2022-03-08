@@ -6,6 +6,7 @@
 class SDL_Rect;
 class SDL_Texture;
 class MyPlane;
+class GameObject;
 class ImageComponent : public Component
 {
 public:

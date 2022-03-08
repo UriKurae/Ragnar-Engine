@@ -3,11 +3,10 @@
 #include "ButtonComponent.h"
 #include"GameObject.h"
 #include "ModuleInput.h"
-#include"ModuleUI.h"
-#include"TransformComponent.h"
+#include "ModuleUI.h"
+#include "TransformComponent.h"
 #include "MaterialComponent.h"
-#include"MathGeoLib/include/MathGeoLib.h"
-#include"glew/include/GL/glew.h"
+
 ButtonComponent::ButtonComponent(GameObject* own)
 {
 	owner = own;

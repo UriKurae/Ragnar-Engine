@@ -90,8 +90,10 @@ public:
 	bool isUI = false;
 
 	std::vector<SerializedField*> csReferences;
-private:
+
 	std::vector<Component*> components;
+private:
+
 
 	GameObject* parent;
 	std::vector<GameObject*> children;
@@ -115,7 +117,7 @@ template<typename T>
 inline T* GameObject::GetComponent()
 {
 	T* component = nullptr;
-	
+
 	for (std::vector<Component*>::iterator i = components.begin(); i < components.end(); ++i)
 	{
 		component = dynamic_cast<T*>(*i);

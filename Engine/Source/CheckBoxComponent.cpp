@@ -1,7 +1,6 @@
 #include "Application.h"
 #include "SDL.h"
 #include "CheckboxComponent.h"
-#include"glew/include/GL/glew.h"
 #include"ModuleUI.h"
 #include"ModuleInput.h"
 CheckboxComponent::CheckboxComponent(GameObject* ow)

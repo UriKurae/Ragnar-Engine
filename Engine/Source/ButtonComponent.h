@@ -3,10 +3,11 @@
 #include "Component.h"
 #include "Color.h"
 #include "Text.h"
-#include "ModuleUI.h"
+
 class SDL_Rect;
 class SDL_Texture;
 class MyPlane;
+class GameObject;
 class ButtonComponent : public Component
 {
 public:

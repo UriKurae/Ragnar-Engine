@@ -1,13 +1,12 @@
 ﻿#include "ModuleUI.h"
 
-#include"glew/include/GL/glew.h"
 #include "Globals.h"
 #include "Application.h"
 
 #include "CameraComponent.h"
 #include "ModuleCamera3D.h"
 #include "ButtonComponent.h"
-#include"ModuleScene.h"
+#include "ModuleScene.h"
 #include "ImageComponent.h"
 #include "MaterialComponent.h"
 #include "SliderComponent.h"
@@ -21,7 +20,7 @@
 #include "ModuleRenderer3D.h"
 #include "Texture.h"
 #include "GameView.h"
-#include "MathGeoLib/include/Geometry/Frustum.h"
+//#include "Geometry/Frustum.h"
 
 #include FT_FREETYPE_H 
 
