@@ -118,7 +118,7 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
 	Quat q;
-	q.SetFromAxisAngle({ 0,0,1 }, rotation);
+	q.SetFromAxisAngle({ 0,1,0 }, rotation);
 	float4x4 transform = float4x4::FromTRS(pos, q, size);
 
 	const int quadVertexCount = 4;

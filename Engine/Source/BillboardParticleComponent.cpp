@@ -1,10 +1,17 @@
 #include "BillboardParticleComponent.h"
+#include "ModuleScene.h"
+#include "glew/include/GL/glew.h"
+#include "SDL/include/SDL_opengl.h"
+#include <gl/GL.h>
+#include <gl/GLU.h>
+#include "Math/float3x3.h"
 
 BillboardParticleComponent::BillboardParticleComponent(GameObject* own, TransformComponent* trans)
 {
 	type = ComponentType::BILLBOARD;
 	owner = own;
 	transform = trans;
+	particleAlignment = Particle_Alignment::CAMERA_ALIGNED;
 }
 
 BillboardParticleComponent::~BillboardParticleComponent()
@@ -99,6 +106,26 @@ Quat BillboardParticleComponent::GetAlignment()
 Quat BillboardParticleComponent::CameraAlign()
 {
 	// TODO: particles always face camera
+	
+	float3 normal = (app->scene->mainCamera->currentPos - this->transform->GetPosition()).Normalized();
+	float3 up = app->scene->mainCamera->camera.Up();
+	float3 right = normal.Cross(up);
+
+	float3x3 mat = float3x3::identity;
+	mat.Set(-right.x, -right.y, -right.z, up.x, up.y, up.z, normal.x, normal.y, normal.z);
+
+	transform->rotation = mat.Inverted().ToQuat();
+	return mat.Inverted().ToQuat();
+
+	/*float3 normal = (App->camera->Position - this->transform->position).Normalized();
+	float3 up = App->camera->camera->frustum.up;
+	float3 right = normal.Cross(up);
+
+	float3x3 mat = float3x3::identity;
+	mat.Set(-right.x, -right.y, -right.z, up.x, up.y, up.z, normal.x, normal.y, normal.z);
+
+	transform->rotation = mat.Inverted().ToQuat();*/
+
 	return Quat::identity;
 }
 
