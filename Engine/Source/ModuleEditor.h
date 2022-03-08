@@ -42,6 +42,8 @@ public:
 	std::vector<std::string> GetTags();
 	std::vector<std::string> GetLayers();
 
+	GameView* gameView;
+
 private:
 	MainMenuBar mainMenuBar;
 
@@ -51,5 +53,4 @@ private:
 	Resource* resource;
 
 	Viewport* viewport;
-	GameView* gameView;
 };

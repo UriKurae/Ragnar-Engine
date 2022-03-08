@@ -87,6 +87,8 @@ public:
 	std::string layer;
 	std::string prefabPath;
 
+	bool isUI = false;
+
 	std::vector<SerializedField*> csReferences;
 private:
 	std::vector<Component*> components;
