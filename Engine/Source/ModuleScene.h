@@ -96,6 +96,7 @@ private:
 	bool frameSkip;
 
 	GameObject* player;
+	
 
 	bool resetQuadtree;
 

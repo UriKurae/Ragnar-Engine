@@ -20,6 +20,7 @@ class btTypedConstraint;
 
 class btRigidBody;
 class RigidBodyComponent;
+class GameObject;
 
 class Physics3D : public Module
 {
@@ -52,6 +53,8 @@ public:
 
 	std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
 	std::vector<std::string> GetBodiesNames() { return bodiesNames; };
+
+	std::vector<GameObject*> bullets;
 
 	void SleepAllBodies();
 	void ActiveAllBodies();

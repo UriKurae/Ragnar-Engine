@@ -618,16 +618,19 @@ void ModuleScene::Scripting(float dt)
 		float playerForce = 1000.0f;
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			float force = 10.0f;
+			float force = 20.0f;
 			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
-			s->GetComponent<TransformComponent>()->SetPosition(player->GetComponent<TransformComponent>()->GetPosition());
+			s->GetComponent<TransformComponent>()->SetPosition(player->GetOOB().CenterPoint());
+			s->GetComponent<TransformComponent>()->SetScale(float3(0.2f, 0.2f, 0.3f));
 			s->GetComponent<TransformComponent>()->UpdateTransform();
 
 			RigidBodyComponent* rigidBody;
 			s->CreateComponent(ComponentType::RIGID_BODY);
 			rigidBody = s->GetComponent<RigidBodyComponent>();
 			rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB, true); // Rigid Body of Player
-			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
+			rigidBody->GetBody()->applyCentralImpulse(player->GetComponent<TransformComponent>()->GetForward() *force); // Player front normalized
+		
+			app->physics->bullets.push_back(s);
 		}
 
 		float3 front(0, 0, 1);
