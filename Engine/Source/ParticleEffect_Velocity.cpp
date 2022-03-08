@@ -6,7 +6,7 @@ ParticleEffect_Velocity::ParticleEffect_Velocity() : ParticleEffect(ParticleEffe
 {
 	type = ParticleEffectType::VELOCITY_OVER_LIFETIME;
 	minVelocity = { 0.0f,0.0f,0.0f };
-	maxVelocity = { 1.0f, 1.0f, 1.0f };
+	maxVelocity = { 0.3f, 0.3f, 0.3f };
 }
 
 ParticleEffect_Velocity::~ParticleEffect_Velocity()

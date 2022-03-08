@@ -7,7 +7,7 @@
 struct Particle
 {
 	float3 position;
-	float3 velocity;
+	float3 velocity, acceleration;
 	float4 colorBegin, colorEnd;
 	float sizeBegin, sizeEnd;
 	float rotation = 0.0f;

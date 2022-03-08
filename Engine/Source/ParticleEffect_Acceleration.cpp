@@ -15,22 +15,21 @@ ParticleEffect_Acceleration::~ParticleEffect_Acceleration()
 
 void ParticleEffect_Acceleration::Update(Particle& particle, float dt)
 {
-	//particle.acceleration = acceleration;
-	//if (hasGravity)
-	//{
-	//	particle.acceleration.y += gravity;
-	//}
+	particle.acceleration = acceleration;
+	if (hasGravity)
+	{
+		particle.acceleration.y += gravity;
+	}
 
-
-	//	//Add acceleration to velocity
-	//	particle.velocity.x += particle.acceleration[0] * dt;
-	//	particle.velocity.y += particle.acceleration[1] * dt;
-	//	particle.velocity.z += particle.acceleration[2] * dt;
-	//
-	//	//Update position based on particle's velocity
-	//	particle.position.x += particle.velocity[0] * dt;
-	//	particle.position.y += particle.velocity[1] * dt;
-	//	particle.position.z += particle.velocity[2] * dt;
+		//Add acceleration to velocity
+		particle.velocity.x += particle.acceleration[0] * dt;
+		particle.velocity.y += particle.acceleration[1] * dt;
+		particle.velocity.z += particle.acceleration[2] * dt;
+	
+		//Update position based on particle's velocity
+		particle.position.x += particle.velocity[0] * dt;
+		particle.position.y += particle.velocity[1] * dt;
+		particle.position.z += particle.velocity[2] * dt;
 }
 
 void ParticleEffect_Acceleration::OnEditor(int emitterIndex)

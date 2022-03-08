@@ -38,8 +38,8 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particleReference.colorEnd = { 0,1,0,1 };
 	particleReference.sizeBegin = 0.5f, particleReference.sizeVariation = 0.3f, particleReference.sizeEnd = 0.0f;
 	particleReference.lifeTime = 1.0f;
-	particleReference.velocity = { 0.0f, 2.0f, 0.0f };
-	particleReference.acceleration = { 0.0f, 5.0f, 0.0f };
+	particleReference.velocity = { 0.0f, 0.1f, 0.0f };
+	particleReference.acceleration = { 0.0f, 0.0f, 0.0f };
 	particleReference.position = { 0.0f, 0.0f, 0.0f };
 
 	data.vertexArray = nullptr;
@@ -78,6 +78,8 @@ void ParticleEmitter::Emit(float dt)
 
 		particle.position = particleReference.position;
 		particle.rotation = particleReference.deltaRotation + random.Float() * 2 * pi;
+
+		particle.acceleration = particleReference.acceleration;
 
 		particle.velocity = particleReference.velocity;
 		particle.velocity.x += particleReference.acceleration.x * (random.Float() - 0.5f) * 2;
@@ -248,10 +250,26 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 
 void ParticleEmitter::UpdateParticle(float dt)
 {
+	for (int i = 0; i < particlePool.size(); ++i) 
+	{
+		if (particlePool[i].active)
+		{
+			for (int j = 0; j < effects.size(); j++)
+			{
+				if (effects[j] != nullptr && isEffectActive(effects[j]->type))
+				{
+					effects[j]->Update(particlePool[i], dt);
+				}
+			}
+			particlePool[i].velocity += particlePool[i].acceleration * dt;
+			particlePool[i].position += particlePool[i].velocity;
+		}
+	}
 }
 
 void ParticleEmitter::Update(float dt)
 {
+	UpdateParticle(dt);
 	for (int i = 0; i < particlePool.size(); ++i)
 	//for (auto& particle : particlePool)
 	{
@@ -267,8 +285,8 @@ void ParticleEmitter::Update(float dt)
 		}
 
 		particle.lifeRemaining -= dt;
-		particle.position += particle.velocity * dt;
-		particle.velocity += particleReference.acceleration * dt;
+		//particle.position += particle.velocity * dt;
+		//particle.velocity += particleReference.acceleration * dt;
 		particle.rotation += particleReference.deltaRotation * dt;
 	}
 }
@@ -324,7 +342,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		guiName = "Particle lifetime" + suffixLabel;
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
 
-		ImGui::DragFloat3("Velocity", particleReference.velocity.ptr(), 0.01f);
+		ImGui::DragFloat3("Velocity", particleReference.velocity.ptr(), 0.01f, -1.0f, 1.0f);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
 
 		ImGui::DragFloat("Beginning Size", &particleReference.sizeBegin, 0.001f, 0.0f);
@@ -341,7 +359,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::Text("Texture");
 		if (ImGui::ImageButton((void*)texture->GetId(), { 150,150 }))
 			showTexMenu = true;
-
 
 		if (showTexMenu)
 			ShowTextureMenu();
