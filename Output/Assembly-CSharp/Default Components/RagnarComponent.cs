@@ -52,5 +52,8 @@ namespace RagnarEngine
         {
             return type;
         }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void Instantiate(string name, Vector3 position, Quaternion rotation);
     }
 }

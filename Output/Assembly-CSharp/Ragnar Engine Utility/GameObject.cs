@@ -44,10 +44,5 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void AddComponent(int componentType);
-
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void Instantiate(string name, Vector3 position, Quaternion rotation);
-
     }
 }

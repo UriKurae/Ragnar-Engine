@@ -15,7 +15,7 @@ public class test : RagnarComponent
 
 
 		if (Input.GetKey(REKeyCode.P) == KeyState.KEY_DOWN)
-			gameObject.Instantiate("New Instance", new Vector3(-5, 0, 0), Quaternion.identity);
+			InternalCalls.CreateGameObject("New Instance", new Vector3(-5, 0, 0), Quaternion.identity);
 
 
 

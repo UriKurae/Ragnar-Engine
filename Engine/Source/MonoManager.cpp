@@ -63,7 +63,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform::set_scale", SetScale);
 
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
-	mono_add_internal_call("RagnarEngine.RagnarComponent::Instantiate", InstantiateGameObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);

@@ -7,7 +7,7 @@ namespace RagnarEngine
     class InternalCalls
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void CreateGameObject(object name, object position);
+        public static extern void CreateGameObject(object name, object position, object rotation);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
