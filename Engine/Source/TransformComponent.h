@@ -66,11 +66,11 @@ public:
 	void UpdateEditorRotation();
 	// UNDO
 
-	// Get Axis
-	float3 GetForward();
-	float3 GetUp();
-	float3 GetRight();
-	float3 GetNormalizeAxis(int i);
+	//// Get Axis
+	//float3 GetForward();
+	//float3 GetUp();
+	//float3 GetRight();
+	//float3 GetNormalizeAxis(int i);
 
 private:
 	float3 position;
