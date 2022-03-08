@@ -116,15 +116,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        14.51568603515625,
+                        14.591072082519531,
                         11.183857917785645,
-                        -0.87579107284545898
+                        -1.1551828384399414
                     ],
                     "Quaternion": [
-                        0.35083505511283875,
-                        -0.38946297764778137,
-                        0.094021111726760864,
-                        0.84640026092529297
+                        0.30162891745567322,
+                        -0.43406477570533752,
+                        -0.03290117159485817,
+                        0.84824836254119873
                     ],
                     "RotationEditor": [
                         0,
@@ -143,9 +143,9 @@
                     "Vertical Fov": 1.2162314653396606,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        14.51568603515625,
+                        14.591072082519531,
                         11.183857917785645,
-                        -0.87579107284545898
+                        -1.1551828384399414
                     ],
                     "Type": 3,
                     "Zoom": 60,
@@ -161,7 +161,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 614.39971923828125,
+                    "Horizontal Angle": 615.39971923828125,
                     "Right Click Rotation": true,
                     "Arrow Rotation": false,
                     "WASD Movement": false,
@@ -386,80 +386,6 @@
                         4.0999999046325684,
                         0.10000007599592209,
                         20
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Settings\/EngineResources\/__Cube.mesh",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 784770431,
-            "Parent UUID": 417171234,
-            "Name": "Wall 2",
-            "Active": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        2.0035200119018555,
-                        -9.9992952346801758
-                    ],
-                    "Quaternion": [
-                        0.70723122358322144,
-                        0,
-                        0,
-                        0.7069823145866394
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        20,
-                        0.10000006109476089,
-                        4.1000003814697266
                     ]
                 },
                 {
