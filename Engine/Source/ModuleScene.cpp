@@ -616,7 +616,6 @@ void ModuleScene::Scripting(float dt)
 
 		//ACTIONS
 		btRigidBody* playerRB = player->GetComponent<RigidBodyComponent>()->GetBody();
-		float playerForce = 1000.0f;
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			float force = 20.0f;
@@ -634,28 +633,19 @@ void ModuleScene::Scripting(float dt)
 			app->physics->bullets.push_back(s);
 		}
 
+		float force = 1000.0f;
 		float3 front(0, 0, 1);
 		float3 right(1, 0, 0);
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			playerRB->activate(true);
-			playerRB->applyCentralForce(right * playerForce);
-		}
+			SetVelocityPlayer(playerRB, right * force);
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			playerRB->activate(true);
-			playerRB->applyCentralForce(-right * playerForce);
-		}
+			SetVelocityPlayer(playerRB, -right * force);
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		{
-			playerRB->activate(true);
-			playerRB->applyCentralForce(front * playerForce);
-		}
+			SetVelocityPlayer(playerRB, front * force);
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		{
-			playerRB->activate(true);
-			playerRB->applyCentralForce(-front * playerForce);
-		}
+			SetVelocityPlayer(playerRB, -front * force);
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE &&
 			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_IDLE &&
 			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_IDLE &&
@@ -670,4 +660,14 @@ void ModuleScene::Scripting(float dt)
 			playerRB->setLinearVelocity({0,0,0});
 		}
 	}
+}
+
+void ModuleScene::SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel)
+{
+	int velMax = 5;
+	playerRB->activate(true);
+	playerRB->applyCentralForce(vel);
+
+	if(playerRB->getLinearVelocity().norm() > velMax)
+		playerRB->setLinearVelocity(playerRB->getLinearVelocity().normalized() * velMax);
 }
