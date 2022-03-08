@@ -121,10 +121,10 @@
                         4.9325852394104004
                     ],
                     "Quaternion": [
-                        0.10158593207597733,
-                        0.89332163333892822,
-                        0.19096270203590393,
-                        0.39394161105155945
+                        0.23471002280712128,
+                        0.6929125189781189,
+                        -0.55644303560256958,
+                        0.3938966691493988
                     ],
                     "RotationEditor": [
                         0,
@@ -223,21 +223,21 @@
                 {
                     "Type": 9,
                     "Active": true,
-                    "Current Anim": "Idle",
+                    "Current Anim": "Shoot",
                     "Animations": [
                         {
                             "State": "Walk",
-                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
                             "Loop": false
                         },
                         {
                             "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/AnimatedDummy__Take 001.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Rifle_Idle__Idle.fbx",
                             "Loop": true
                         },
                         {
                             "State": "Shoot",
-                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
                             "Loop": false
                         }
                     ]
