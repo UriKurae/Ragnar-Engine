@@ -169,7 +169,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			if (go != app->editor->GetGO()) go->Draw(nullptr);
+			if (go != app->editor->GetGO()&& !go->isUI) go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -372,6 +372,10 @@ bool ModuleScene::LoadScene(const char* name)
 					// Register this camera as the default listener.
 					AkGameObjectID playerID = player->GetUUID();
 					AudioManager::Get()->SetDefaultListener(&playerID, player->GetComponent<TransformComponent>());
+				}
+				if (child->GetName() == std::string("Camera"))
+				{
+					camera = child;
 				}
 				if (child->GetName() == std::string("Camera"))
 				{

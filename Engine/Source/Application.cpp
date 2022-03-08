@@ -10,6 +10,7 @@
 #include "ModuleEditor.h"
 #include "MonoManager.h"
 #include "Physics3D.h"
+#include "ModuleUI.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
@@ -28,6 +29,7 @@ Application::Application()
 	camera = new ModuleCamera3D();
 	moduleMono = new MonoManager(this);
 	editor = new ModuleEditor();
+	userInterface = new ModuleUI();
 
 	fs = new FileSystem(RESOURCES_FOLDER);
 
@@ -46,6 +48,7 @@ Application::Application()
 	// Scenes
 	AddModule(scene);
 	AddModule(editor);
+	AddModule(userInterface);
 
 	AddModule(renderer3D);
 

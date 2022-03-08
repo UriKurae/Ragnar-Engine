@@ -30,11 +30,16 @@ public:
 	int CameraComponent::ContainsAaBox(const AABB& boundingBox);
 	Frustum* GetFrustum() { return &camera; };
 
+	inline float GetCurrentScreenWidth() { return currentScreenWidth; }
+	inline float GetCurrentScreenHeight() { return currentScreenHeight; }
+
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
+
 private:
 
 	Frustum camera;
+
 	TransformComponent* transform;
 	Quat currentRotation;
 	//float3 lastPos = float3(0, 0, 0);
@@ -44,6 +49,7 @@ private:
 	float farPlane;
 	float verticalFov;
 	float horizontalFov;
+
 	float currentScreenWidth;
 	float currentScreenHeight;
 
