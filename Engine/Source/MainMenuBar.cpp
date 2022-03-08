@@ -265,6 +265,7 @@ bool MainMenuBar::Update(float dt)
 				if (ImGui::MenuItem("UI Button"))
 				{
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("Button");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 
 					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
@@ -276,8 +277,9 @@ bool MainMenuBar::Update(float dt)
 					object->isUI = true;
 				}
 				else if (ImGui::MenuItem("UI Slider"))
-				{
+				{				
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("Slider");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
 					button->gen = object;
@@ -290,6 +292,7 @@ bool MainMenuBar::Update(float dt)
 				else if (ImGui::MenuItem("UI Check Box"))
 				{
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("CheckBox");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
 					button->gen = object;
@@ -305,6 +308,7 @@ bool MainMenuBar::Update(float dt)
 				else if (ImGui::MenuItem("UI Image"))
 				{
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("Image");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
 					button->gen = object;
