@@ -72,6 +72,8 @@ public:
 	MonoObject* Float3ToCS(float3& inVec) const;
 	MonoObject* GoToCSGO(GameObject* inGo) const;
 
+	void UpdateListScripts();
+
 	void ReCompileCS();
 
 public:

@@ -91,6 +91,7 @@ void ScriptComponent::OnEditor()
 			}
 		}
 		
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 	ImGui::PopID();
