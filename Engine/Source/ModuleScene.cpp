@@ -374,6 +374,10 @@ bool ModuleScene::LoadScene(const char* name)
 				{
 					player = child;
 				}
+				if (child->GetName() == std::string("Camera"))
+				{
+					camera = child;
+				}
 			}
 		}
 		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
