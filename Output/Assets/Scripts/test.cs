@@ -9,10 +9,12 @@ public class test : RagnarComponent
 	public void Update()
 	{
 		Transform tr = gameObject.GetComponent<Transform>();
-
+		Rigidbody rb = gameObject.GetComponent<Rigidbody>();
 		if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
         {
-			tr.localPosition = new Vector3(tr.localPosition.x - 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
+			//tr.localPosition = new Vector3(tr.localPosition.x - 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
+			Vector3 f = new Vector3(10000 * Time.deltaTime, 0, 0);
+			rb.ApplyCentralForce(f);
 			gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
 		}
 
@@ -37,8 +39,7 @@ public class test : RagnarComponent
 		if (Input.GetKey(REKeyCode.D) == KeyState.KEY_UP || Input.GetKey(REKeyCode.A) == KeyState.KEY_UP
 			|| Input.GetKey(REKeyCode.W) == KeyState.KEY_UP || Input.GetKey(REKeyCode.S) == KeyState.KEY_UP)
         {
-			AudioSource audio = gameObject.GetComponent<AudioSource>();
-			audio.StopCurrentClip();
+			gameObject.GetComponent<AudioSource>().StopCurrentClip();
 		}
 
 			if (Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)

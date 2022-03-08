@@ -267,6 +267,7 @@
     <ClInclude Include="Engine\Source\Quadtree.h" />
     <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
+    <ClInclude Include="Engine\Source\RigidbodyBindings.h" />
     <ClInclude Include="Engine\Source\ScriptBindings.h" />
     <ClInclude Include="Engine\Source\ScriptComponent.h" />
     <ClInclude Include="Engine\Source\Shapes.h" />

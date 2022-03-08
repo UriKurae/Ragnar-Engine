@@ -658,6 +658,9 @@
     <ClInclude Include="Engine\Source\AudioBindings.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\RigidbodyBindings.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
