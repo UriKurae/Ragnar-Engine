@@ -210,6 +210,7 @@
     <ClInclude Include="Engine\Source\AnimationImporter.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\AssimpDefs.h" />
+    <ClInclude Include="Engine\Source\AudioBindings.h" />
     <ClInclude Include="Engine\Source\AudioManager.h" />
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />

@@ -24,8 +24,12 @@ public class test : RagnarComponent
 
 
 		if(Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
-        {
 			InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, Vector3.zero, Quaternion.identity);
+
+		if(Input.GetKey(REKeyCode.X) == KeyState.KEY_DOWN)
+        {
+			AudioSource audio = gameObject.GetComponent<AudioSource>();
+			audio.PlayClip("footSteps");
         }
 
 	}

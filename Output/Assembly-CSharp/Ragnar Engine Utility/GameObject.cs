@@ -10,20 +10,24 @@ namespace RagnarEngine
         public string name;
         public UIntPtr pointer;
         public Transform transform;
-
+        public AudioSource audioSource;
+        
         public GameObject()
         {
             name = "Empty";
             pointer = UIntPtr.Zero;
             //InternalCalls.CreateGameObject(name, Vector3.zero);
         }
-        public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR)
+        public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR, UIntPtr audioPTR)
         {
             name = _name;
             pointer = ptr;
 
             transform = new Transform();
             transform.pointer = transPTR;
+
+            audioSource = new AudioSource();
+            audioSource.pointer = audioPTR;
         }
 
 

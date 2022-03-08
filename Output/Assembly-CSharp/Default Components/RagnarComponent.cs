@@ -33,8 +33,11 @@ namespace RagnarEngine
     {
         public UIntPtr pointer;
         public ComponentType type;
-        public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType> {
+
+        public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType>
+        {
             { typeof(Transform), ComponentType.TRANSFORM },
+            { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
         };
 
         public RagnarComponent()
