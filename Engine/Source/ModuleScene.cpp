@@ -46,12 +46,8 @@ bool ModuleScene::Start()
 	camera = CreateGameObject(nullptr);
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
-	camera->CreateComponent(ComponentType::AUDIO_LISTENER);
+	//camera->CreateComponent(ComponentType::AUDIO_LISTENER);
 	//camera->CreateComponent(ComponentType::AUDIO_SOURCE);
-
-	// Register this camera as the default listener.
-	AkGameObjectID cameraID = camera->GetUUID();
-	AudioManager::Get()->SetDefaultListener(&cameraID, camera->GetComponent<TransformComponent>());
 	
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	
@@ -373,6 +369,13 @@ bool ModuleScene::LoadScene(const char* name)
 				if (child->GetName() == std::string("Player"))
 				{
 					player = child;
+					// Register this camera as the default listener.
+					AkGameObjectID playerID = player->GetUUID();
+					AudioManager::Get()->SetDefaultListener(&playerID, player->GetComponent<TransformComponent>());
+				}
+				if (child->GetName() == std::string("Camera"))
+				{
+					camera = child;
 				}
 			}
 		}
