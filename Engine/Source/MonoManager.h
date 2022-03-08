@@ -17,7 +17,7 @@ class GameObject;
 class ScriptComponent;
 
 #define USER_SCRIPTS_NAMESPACE ""
-#define DE_SCRIPTS_NAMESPACE "RagnarEngine"
+#define SCRIPTS_NAMESPACE "RagnarEngine"
 
 union FieldValue
 {

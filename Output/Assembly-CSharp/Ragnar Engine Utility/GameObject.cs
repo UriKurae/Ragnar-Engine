@@ -8,14 +8,13 @@ namespace RagnarEngine
     public sealed class GameObject
     {
         public string name;
-        public UIntPtr pointer; //Searching all the GO's with UID's? Nah boy we cast stuff here
+        public UIntPtr pointer;
         public Transform transform;
 
         public GameObject()
         {
             name = "Empty";
             pointer = UIntPtr.Zero;
-            //transform = new Transform(); //ERROR TODO: If we request something out of a gameobject created like this, we are fucked
             //InternalCalls.CreateGameObject(name, Vector3.zero);
         }
         public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR)
@@ -31,12 +30,12 @@ namespace RagnarEngine
         public T GetComponent<T>() where T : RagnarComponent
         {
             //ComponentType type = T.get;
-            ComponentType retValue = ComponentType.Script;
+            ComponentType retValue = ComponentType.SCRIPT;
             if (RagnarComponent.componentTable.ContainsKey(typeof(T)))
             {
                 retValue = RagnarComponent.componentTable[typeof(T)];
             }
-            return TryGetComponent<T>(typeof(T).ToString(), (int)retValue);
+            return TryGetComponent<T>(typeof(T).ToString(), (int)retValue - 1); // TODO: Very temporary. FIND A BETTER WAY TO DO THIS
         }
 
 
@@ -45,6 +44,10 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void AddComponent(int componentType);
+
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void Instantiate(string name, Vector3 position, Quaternion rotation);
 
     }
 }

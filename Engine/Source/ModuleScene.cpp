@@ -110,8 +110,8 @@ bool ModuleScene::Update(float dt)
 	
 	if (frameSkip || gameState == GameState::PLAYING)
 	{
-		DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
-		DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
+		//DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
+		//DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
 		frameSkip = false;
 	}
 

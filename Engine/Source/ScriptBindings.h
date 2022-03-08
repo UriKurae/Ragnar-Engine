@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleScene.h"
 #include "TransformBindings.h"
 
 #include <metadata\object-forward.h>
@@ -133,3 +134,24 @@ void SetScale(MonoObject* go, MonoObject* scale)
 }
 
 // Transform ========
+
+
+
+
+// GameObject =======================
+void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
+{
+	GameObject* go = app->scene->CreateGameObject(nullptr);
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+	go->SetName(goName);
+	mono_free(goName);
+
+	float3 p = app->moduleMono->UnboxVector(position);
+	TransformComponent* tr = go->GetComponent<TransformComponent>();
+	tr->SetPosition(p);
+
+	Quat r = app->moduleMono->UnboxQuat(rotation);
+	tr->SetRotation(r);
+}
+
+// GameObject =======================

@@ -408,9 +408,10 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	MonoClass* goClass = mono_object_get_class(mono_gchandle_get_target(noGCobject));
 	uintptr_t ptr = reinterpret_cast<uintptr_t>(this);
 	mono_field_set_value(mono_gchandle_get_target(noGCobject), mono_class_get_field_from_name(goClass, "pointer"), &ptr);
-
+	//std::string methodName = scriptName + std::string(":Update");
 	MonoMethodDesc* mdesc = mono_method_desc_new(":Update", false);
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
+	//updateMethod = mono_method_desc_search_in_image(mdesc, app->moduleMono->image);
 	mono_method_desc_free(mdesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);

@@ -49,18 +49,24 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Input::GetMouseX", MouseX);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
 
-	mono_add_internal_call("RagnarEngine.Transform::GetLocalPosition", GetPosition);
-	mono_add_internal_call("RagnarEngine.Transform::GetGlobalPosition", GetGlobalPosition);
-	mono_add_internal_call("RagnarEngine.Transform::GetLocalRotation", GetRotation);
-	mono_add_internal_call("RagnarEngine.Transform::GetGlobalRotation", GetGlobalRotation);
-	mono_add_internal_call("RagnarEngine.Transform::GetScale", GetScale);
+	mono_add_internal_call("RagnarEngine.Transform::get_localPosition", GetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::get_globalPosition", GetGlobalPosition);
+	mono_add_internal_call("RagnarEngine.Transform::get_localRotation", GetRotation);
+	mono_add_internal_call("RagnarEngine.Transform::get_globalRotation", GetGlobalRotation);
+	mono_add_internal_call("RagnarEngine.Transform::get_scale", GetScale);
 	mono_add_internal_call("RagnarEngine.Transform::GetUp", GetUp);
 	mono_add_internal_call("RagnarEngine.Transform::GetRight", GetRight);
 	mono_add_internal_call("RagnarEngine.Transform::GetForward", GetForward);
 	
-	mono_add_internal_call("RagnarEngine.Transform::SetPosition", SetPosition);
-	mono_add_internal_call("RagnarEngine.Transform::SetRotation", SetRotation);
-	mono_add_internal_call("RagnarEngine.Transform::SetScale", SetScale);
+	mono_add_internal_call("RagnarEngine.Transform::set_localPosition", SetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::set_localRotation", SetRotation);
+	mono_add_internal_call("RagnarEngine.Transform::set_scale", SetScale);
+
+	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
+	mono_add_internal_call("RagnarEngine.RagnarComponent::Instantiate", InstantiateGameObject);
+	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
+
+	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
 
 
 	InitMono();
@@ -173,7 +179,7 @@ void MonoManager::DebugAllMethods(const char* nsName, const char* className, std
 
 MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 {
-	MonoClass* goClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "GameObject");
+	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 	uintptr_t goPtr = reinterpret_cast<uintptr_t>(inGo);
 
 	void* args[3];
@@ -197,7 +203,7 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 MonoObject* MonoManager::Float3ToCS(float3& inVec) const
 {
 
-	MonoClass* vecClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "Vector3");
+	MonoClass* vecClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "Vector3");
 
 	MonoObject* vecObject = mono_object_new(domain, vecClass);
 	const char* name = mono_class_get_name(mono_object_get_class(vecObject));
@@ -280,7 +286,7 @@ void MonoManager::LoadFieldData(SerializedField& _field, MonoObject* _object)
 MonoObject* MonoManager::QuatToCS(Quat& inVec) const
 {
 
-	MonoClass* quadClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "Quaternion");
+	MonoClass* quadClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "Quaternion");
 	MonoObject* quatObject = mono_object_new(domain, quadClass);
 
 	void* args[4];
@@ -301,7 +307,7 @@ MonoObject* MonoManager::QuatToCS(Quat& inVec) const
 GameObject* MonoManager::GameObject_From_CSGO(MonoObject* goObj)
 {
 	uintptr_t ptr = 0;
-	MonoClass* goClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "GameObject");
+	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 
 	mono_field_get_value(goObj, mono_class_get_field_from_name(goClass, "pointer"), &ptr);
 
@@ -311,7 +317,7 @@ GameObject* MonoManager::GameObject_From_CSGO(MonoObject* goObj)
 GameObject* MonoManager::GameObject_From_CSCOMP(MonoObject* goComponent)
 {
 	uintptr_t ptr = 0;
-	MonoClass* goClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "RagnarComponent");
+	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "RagnarComponent");
 
 	mono_field_get_value(goComponent, mono_class_get_field_from_name(goClass, "pointer"), &ptr);
 
@@ -453,7 +459,7 @@ void MonoManager::InitMono()
 			const char* name_space = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAMESPACE]);
 			_class = mono_class_from_name(image, name_space, name);
 
-			if (_class != nullptr && strcmp(mono_class_get_namespace(_class), DE_SCRIPTS_NAMESPACE) != 0 && !mono_class_is_enum(_class))
+			if (_class != nullptr && strcmp(mono_class_get_namespace(_class), SCRIPTS_NAMESPACE) != 0 && !mono_class_is_enum(_class))
 			{
 				userScripts.push_back(_class);
 				LOG(LogType::L_WARNING, "%s", mono_class_get_name(_class));

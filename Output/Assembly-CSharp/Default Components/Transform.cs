@@ -9,7 +9,7 @@ namespace RagnarEngine
         //Change type depending of class
         public Transform()
         {
-            type = ComponentType.Transform;
+            type = ComponentType.TRANSFORM;
         }
 
         public extern Vector3 localPosition
