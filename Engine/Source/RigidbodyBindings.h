@@ -27,5 +27,9 @@ void ApplyCentralForce(MonoObject* go, MonoObject* force)
 	int velMax = 5;
 	if (body->getLinearVelocity().norm() > velMax)
 		body->setLinearVelocity(body->getLinearVelocity().normalized() * velMax);
+
+	TransformComponent* tr = rb->owner->GetComponent<TransformComponent>();
+	tr->ForceUpdateTransform();
+
 }
 
