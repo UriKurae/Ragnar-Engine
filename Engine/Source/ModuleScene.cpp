@@ -5,6 +5,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
+#include "ModuleUI.h"
 #include "Physics3D.h"
 
 #include "Primitives.h"
@@ -340,7 +341,7 @@ bool ModuleScene::LoadScene(const char* name)
 	DEBUG_LOG("Loading Scene");
 
 	RELEASE(root);
-
+	app->userInterface->UIGameObjects.clear();
 	//char* buffer = nullptr;
 
 	//app->fs->Load(name, &buffer);
@@ -410,12 +411,13 @@ bool ModuleScene::LoadScene(const char* name)
 	}
 
 	referenceMap.clear();
+	
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	app->editor->SetGO(nullptr);
-
+	
 	return true;
 }
 
