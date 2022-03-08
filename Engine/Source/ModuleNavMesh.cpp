@@ -30,12 +30,16 @@ randomPointSet(false), randomRadius(0.0f)
 	geometry = new InputGeom();
 	geometry->SetMesh();
 	agents.push_back(NavAgent());
+	buildSettings = new BuildSettings;
 
 	randomPoint = float3::inf;
 }
 
 ModuleNavMesh::~ModuleNavMesh()
 {
+	delete buildSettings;
+	buildSettings = nullptr;
+
 	agents.clear();
 }
 
@@ -103,21 +107,39 @@ bool ModuleNavMesh::LoadConfig(JsonParsing& node)
 	JSON_Array* arraySettings = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "NavMeshSettings");
 	if (arraySettings != nullptr)
 	{
-		buildSettings.cellSize				= node.GetJsonArrayValue(arraySettings, 0).GetJsonNumber("cellSize");
-		buildSettings.cellHeight			= node.GetJsonArrayValue(arraySettings, 1).GetJsonNumber("cellHeight");
-		buildSettings.agentHeight			= node.GetJsonArrayValue(arraySettings, 2).GetJsonNumber("agentHeight");
-		buildSettings.agentRadius			= node.GetJsonArrayValue(arraySettings, 3).GetJsonNumber("agentRadius");
-		buildSettings.agentMaxClimb			= node.GetJsonArrayValue(arraySettings, 4).GetJsonNumber("agentMaxClimb");
-		buildSettings.agentMaxSlope			= node.GetJsonArrayValue(arraySettings, 5).GetJsonNumber("agentMaxSlope");
-		buildSettings.regionMinSize			= node.GetJsonArrayValue(arraySettings, 6).GetJsonNumber("regionMinSize");
-		buildSettings.regionMergeSize		= node.GetJsonArrayValue(arraySettings, 7).GetJsonNumber("regionMergeSize");
-		buildSettings.edgeMaxLen			= node.GetJsonArrayValue(arraySettings, 8).GetJsonNumber("edgeMaxLen");
-		buildSettings.edgeMaxError			= node.GetJsonArrayValue(arraySettings, 9).GetJsonNumber("edgeMaxError");
-		buildSettings.vertsPerPoly			= node.GetJsonArrayValue(arraySettings, 10).GetJsonNumber("vertsPerPoly");
-		buildSettings.detailSampleDist		= node.GetJsonArrayValue(arraySettings, 11).GetJsonNumber("detailSampleDist");
-		buildSettings.detailSampleMaxError	= node.GetJsonArrayValue(arraySettings, 12).GetJsonNumber("detailSampleMaxError");
-		buildSettings.partitionType			= node.GetJsonArrayValue(arraySettings, 13).GetJsonNumber("partitionType");
-		buildSettings.tileSize				= node.GetJsonArrayValue(arraySettings, 14).GetJsonNumber("tileSize");
+		buildSettings->cellSize				= node.GetJsonArrayValue(arraySettings, 0).GetJsonNumber("cellSize");
+		buildSettings->cellHeight			= node.GetJsonArrayValue(arraySettings, 1).GetJsonNumber("cellHeight");
+		buildSettings->agentHeight			= node.GetJsonArrayValue(arraySettings, 2).GetJsonNumber("agentHeight");
+		buildSettings->agentRadius			= node.GetJsonArrayValue(arraySettings, 3).GetJsonNumber("agentRadius");
+		buildSettings->agentMaxClimb		= node.GetJsonArrayValue(arraySettings, 4).GetJsonNumber("agentMaxClimb");
+		buildSettings->agentMaxSlope		= node.GetJsonArrayValue(arraySettings, 5).GetJsonNumber("agentMaxSlope");
+		buildSettings->regionMinSize		= node.GetJsonArrayValue(arraySettings, 6).GetJsonNumber("regionMinSize");
+		buildSettings->regionMergeSize		= node.GetJsonArrayValue(arraySettings, 7).GetJsonNumber("regionMergeSize");
+		buildSettings->edgeMaxLen			= node.GetJsonArrayValue(arraySettings, 8).GetJsonNumber("edgeMaxLen");
+		buildSettings->edgeMaxError			= node.GetJsonArrayValue(arraySettings, 9).GetJsonNumber("edgeMaxError");
+		buildSettings->vertsPerPoly			= node.GetJsonArrayValue(arraySettings, 10).GetJsonNumber("vertsPerPoly");
+		buildSettings->detailSampleDist		= node.GetJsonArrayValue(arraySettings, 11).GetJsonNumber("detailSampleDist");
+		buildSettings->detailSampleMaxError	= node.GetJsonArrayValue(arraySettings, 12).GetJsonNumber("detailSampleMaxError");
+		buildSettings->partitionType		= node.GetJsonArrayValue(arraySettings, 13).GetJsonNumber("partitionType");
+		buildSettings->tileSize				= node.GetJsonArrayValue(arraySettings, 14).GetJsonNumber("tileSize");
+	}
+	else
+	{
+		buildSettings->cellSize				= 0.3f;
+		buildSettings->cellHeight			= 0.2f;
+		buildSettings->agentHeight			= 2.0f;
+		buildSettings->agentRadius			= 0.6f;
+		buildSettings->agentMaxClimb		= 0.9f;
+		buildSettings->agentMaxSlope		= 45.0f;
+		buildSettings->regionMinSize		= 8;
+		buildSettings->regionMergeSize		= 20;
+		buildSettings->edgeMaxLen			= 12.0f;
+		buildSettings->edgeMaxError			= 1.3f;
+		buildSettings->vertsPerPoly			= 6.0f;
+		buildSettings->detailSampleDist		= 6.0f;
+		buildSettings->detailSampleMaxError = 1.0f;
+		buildSettings->partitionType		= 0.0f;
+		buildSettings->tileSize				= 32.0f;
 	}
 
 	BakeNavMesh();
@@ -129,21 +151,21 @@ bool ModuleNavMesh::SaveConfig(JsonParsing& node)
 {
 	JsonParsing file = JsonParsing();
 	JSON_Array* arraySettings = file.SetNewJsonArray(file.GetRootValue(), "NavMeshSettings");
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellSize", buildSettings.cellSize);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellHeight", buildSettings.cellHeight);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentHeight", buildSettings.agentHeight);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentRadius", buildSettings.agentRadius);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxClimb", buildSettings.agentMaxClimb);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxSlope", buildSettings.agentMaxSlope);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMinSize", buildSettings.regionMinSize);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMergeSize", buildSettings.regionMergeSize);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxLen", buildSettings.edgeMaxLen);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxError", buildSettings.edgeMaxError);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "vertsPerPoly", buildSettings.vertsPerPoly);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleDist", buildSettings.detailSampleDist);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleMaxError", buildSettings.detailSampleMaxError);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "partitionType", buildSettings.partitionType);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "tileSize", buildSettings.tileSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellSize", buildSettings->cellSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellHeight", buildSettings->cellHeight);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentHeight", buildSettings->agentHeight);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentRadius", buildSettings->agentRadius);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxClimb", buildSettings->agentMaxClimb);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxSlope", buildSettings->agentMaxSlope);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMinSize", buildSettings->regionMinSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMergeSize", buildSettings->regionMergeSize);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxLen", buildSettings->edgeMaxLen);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxError", buildSettings->edgeMaxError);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "vertsPerPoly", buildSettings->vertsPerPoly);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleDist", buildSettings->detailSampleDist);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleMaxError", buildSettings->detailSampleMaxError);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "partitionType", buildSettings->partitionType);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "tileSize", buildSettings->tileSize);
 	node.SetValueToArray(arraySettings, file.GetRootValue());
 
 	return true;
@@ -390,6 +412,7 @@ bool ModuleNavMesh::FindPath(float3 origin, float3 destination, std::vector<floa
 {
 	return pathfinder.CalculatePath(origin, destination, path);
 }
+
 
 Pathfinder::Pathfinder() : m_navQuery(nullptr),
 m_navMesh(nullptr), m_navMeshBuilder(nullptr), endPosSet(false), startPosSet(false),

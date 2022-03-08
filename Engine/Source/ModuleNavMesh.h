@@ -138,7 +138,7 @@ public:
 	float3 FindRandomPointAround(float3 centerPoint, float radius);
 	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
 
-	BuildSettings GetBuildSettings() { return buildSettings; }
+	BuildSettings* GetBuildSettings() { return buildSettings; };
 
 public:
 	std::vector<NavAgent> agents;
@@ -149,7 +149,7 @@ public:
 private:
 	NavMeshBuilder* navMeshBuilder;
 	InputGeom* geometry;
-	BuildSettings buildSettings;
+	BuildSettings* buildSettings;
 
 	GameObject* walkabilityPoint;
 

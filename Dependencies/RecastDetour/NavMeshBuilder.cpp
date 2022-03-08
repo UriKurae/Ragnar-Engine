@@ -109,8 +109,8 @@ bool NavMeshBuilder::HandleBuild()
 
 	dtNavMeshParams params;
 	rcVcopy(params.orig, m_geom->getMeshBoundsMin());
-	params.tileWidth = buildSettings.tileSize * buildSettings.cellSize;
-	params.tileHeight = buildSettings.tileSize * buildSettings.cellSize;
+	params.tileWidth = buildSettings->tileSize * buildSettings->cellSize;
+	params.tileHeight = buildSettings->tileSize * buildSettings->cellSize;
 	params.maxTiles = m_maxTiles;
 	params.maxPolys = m_maxPolysPerTile;
 
@@ -144,11 +144,11 @@ bool NavMeshBuilder::BuildAllTiles()
 	const float* bmin = m_geom->getMeshBoundsMin();
 	const float* bmax = m_geom->getMeshBoundsMax();
 	int gw = 0, gh = 0;
-	rcCalcGridSize(bmin, bmax, buildSettings.cellSize, &gw, &gh);
-	const int ts = (int)buildSettings.tileSize;
+	rcCalcGridSize(bmin, bmax, buildSettings->cellSize, &gw, &gh);
+	const int ts = (int)buildSettings->tileSize;
 	const int tw = (gw + ts - 1) / ts;
 	const int th = (gh + ts - 1) / ts;
-	const float tcs = buildSettings.tileSize * buildSettings.cellSize;
+	const float tcs = buildSettings->tileSize * buildSettings->cellSize;
 
 	for (int y = 0; y < th; ++y)
 	{
@@ -211,23 +211,23 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 
 	// Init build configuration from GUI
 	memset(&m_cfg, 0, sizeof(m_cfg));
-	m_cfg.cs = buildSettings.cellSize;
-	m_cfg.ch = buildSettings.cellHeight;
-	m_cfg.walkableSlopeAngle = buildSettings.agentMaxSlope;
-	m_cfg.walkableHeight = (int)ceilf(buildSettings.agentHeight / m_cfg.ch);
-	m_cfg.walkableClimb = (int)floorf(buildSettings.agentMaxClimb / m_cfg.ch);
-	m_cfg.walkableRadius = (int)ceilf(buildSettings.agentRadius / m_cfg.cs);
-	m_cfg.maxEdgeLen = (int)(buildSettings.edgeMaxLen / buildSettings.cellSize);
-	m_cfg.maxSimplificationError = buildSettings.edgeMaxError;
-	m_cfg.minRegionArea = (int)rcSqr(buildSettings.regionMinSize);		// Note: area = size*size
-	m_cfg.mergeRegionArea = (int)rcSqr(buildSettings.regionMergeSize);	// Note: area = size*size
-	m_cfg.maxVertsPerPoly = (int)buildSettings.vertsPerPoly;
-	m_cfg.tileSize = (int)buildSettings.tileSize;
+	m_cfg.cs = buildSettings->cellSize;
+	m_cfg.ch = buildSettings->cellHeight;
+	m_cfg.walkableSlopeAngle = buildSettings->agentMaxSlope;
+	m_cfg.walkableHeight = (int)ceilf(buildSettings->agentHeight / m_cfg.ch);
+	m_cfg.walkableClimb = (int)floorf(buildSettings->agentMaxClimb / m_cfg.ch);
+	m_cfg.walkableRadius = (int)ceilf(buildSettings->agentRadius / m_cfg.cs);
+	m_cfg.maxEdgeLen = (int)(buildSettings->edgeMaxLen / buildSettings->cellSize);
+	m_cfg.maxSimplificationError = buildSettings->edgeMaxError;
+	m_cfg.minRegionArea = (int)rcSqr(buildSettings->regionMinSize);		// Note: area = size*size
+	m_cfg.mergeRegionArea = (int)rcSqr(buildSettings->regionMergeSize);	// Note: area = size*size
+	m_cfg.maxVertsPerPoly = (int)buildSettings->vertsPerPoly;
+	m_cfg.tileSize = (int)buildSettings->tileSize;
 	m_cfg.borderSize = m_cfg.walkableRadius + 3; // Reserve enough padding.
 	m_cfg.width = m_cfg.tileSize + m_cfg.borderSize * 2;
 	m_cfg.height = m_cfg.tileSize + m_cfg.borderSize * 2;
-	m_cfg.detailSampleDist = buildSettings.detailSampleDist < 0.9f ? 0 : buildSettings.cellSize * buildSettings.detailSampleDist;
-	m_cfg.detailSampleMaxError = buildSettings.cellHeight * buildSettings.detailSampleMaxError;
+	m_cfg.detailSampleDist = buildSettings->detailSampleDist < 0.9f ? 0 : buildSettings->cellSize * buildSettings->detailSampleDist;
+	m_cfg.detailSampleMaxError = buildSettings->cellHeight * buildSettings->detailSampleMaxError;
 
 	// Expand the heighfield bounding box by border size to find the extents of geometry we need to build this tile.
 	//
@@ -500,9 +500,9 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 		params.offMeshConFlags = m_geom->getOffMeshConnectionFlags();
 		params.offMeshConUserID = m_geom->getOffMeshConnectionId();
 		params.offMeshConCount = m_geom->getOffMeshConnectionCount();
-		params.walkableHeight = buildSettings.agentHeight;
-		params.walkableRadius = buildSettings.agentRadius;
-		params.walkableClimb = buildSettings.agentMaxClimb;
+		params.walkableHeight = buildSettings->agentHeight;
+		params.walkableRadius = buildSettings->agentRadius;
+		params.walkableClimb = buildSettings->agentMaxClimb;
 		params.tileX = tx;
 		params.tileY = ty;
 		params.tileLayer = 0;
@@ -527,7 +527,7 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 	return navData;
 }
 
-void NavMeshBuilder::HandleMeshChanged(InputGeom* geom, BuildSettings settings)
+void NavMeshBuilder::HandleMeshChanged(InputGeom* geom, BuildSettings* settings)
 {
 	//Normal sample settings 
 	m_geom = geom;
@@ -549,8 +549,8 @@ void NavMeshBuilder::HandleSettings()
 		int gw = 0, gh = 0;
 		const float* bmin = m_geom->getMeshBoundsMin();
 		const float* bmax = m_geom->getMeshBoundsMax();
-		rcCalcGridSize(bmin, bmax, buildSettings.cellSize, &gw, &gh);
-		const int ts = (int)buildSettings.tileSize;
+		rcCalcGridSize(bmin, bmax, buildSettings->cellSize, &gw, &gh);
+		const int ts = (int)buildSettings->tileSize;
 		const int tw = (gw + ts - 1) / ts;
 		const int th = (gh + ts - 1) / ts;
 		snprintf(text, 64, "Tiles  %d x %d", tw, th);

@@ -22,7 +22,7 @@ public:
 	bool HandleBuild();
 	bool BuildAllTiles();
 	unsigned char* BuildTile(const int tx, const int ty, const float* bmin, const float* bmax, int& dataSize);
-	void HandleMeshChanged(InputGeom* geom, BuildSettings settings);
+	void HandleMeshChanged(InputGeom* geom, BuildSettings* settings);
 	void HandleSettings();
 
 	void DebugDraw();
@@ -54,7 +54,7 @@ private:
 	rcPolyMesh* m_pmesh;
 	rcConfig m_cfg;
 	rcPolyMeshDetail* m_dmesh;
-	BuildSettings buildSettings;
+	BuildSettings* buildSettings;
 
 	//Tile Settings
 	int   m_maxTiles;
