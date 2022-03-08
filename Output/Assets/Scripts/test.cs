@@ -23,6 +23,10 @@ public class test : RagnarComponent
 			tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - 5 * Time.deltaTime);
 
 
+		if(Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
+        {
+			InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, Vector3.zero, Quaternion.identity);
+        }
 
 	}
 

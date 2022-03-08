@@ -4,10 +4,26 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
+    public enum PrimitiveType
+    {
+        CUBE = 0,
+        PYRAMIDE,
+        SPHERE,
+        CYLINDER,
+    }
+
     class InternalCalls
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void CreateGameObject(object name, object position, object rotation);
+
+        //public void CreateObject(string name, PrimitiveType primitiveType, Vector3 position, Quaternion rotation)
+        //{
+        //    Create3DObject(name, (int)primitiveType, position, rotation);
+        //}
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void Create3DObject(object name, int primitiveType, object position, object rotation);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);

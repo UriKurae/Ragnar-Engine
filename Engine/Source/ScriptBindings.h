@@ -152,6 +152,22 @@ void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* r
 	tr->SetRotation(r);
 }
 
+void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* position, MonoObject* rotation)
+{
+	Object3D t = static_cast<Object3D>(primitiveType);
+	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+	go->SetName(goName);
+	mono_free(goName);
+
+	float3 p = app->moduleMono->UnboxVector(position);
+	TransformComponent* tr = go->GetComponent<TransformComponent>();
+	tr->SetPosition(p);
+
+	Quat r = app->moduleMono->UnboxQuat(rotation);
+	tr->SetRotation(r);
+}
+
 // GameObject =======================
 
 

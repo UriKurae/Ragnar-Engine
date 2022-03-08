@@ -616,20 +616,20 @@ void ModuleScene::Scripting(float dt)
 		//ACTIONS
 		RigidBodyComponent* playerRB = player->GetComponent<RigidBodyComponent>();
 		float playerForce = 100.0f;
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		{
-			float force = 10.0f;
-			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
-			s->GetComponent<TransformComponent>()->SetPosition(player->GetComponent<TransformComponent>()->GetPosition());
-			s->GetComponent<TransformComponent>()->UpdateTransform();
-			s->GetComponent<TransformComponent>()->ForceUpdateTransform();
-
-			RigidBodyComponent* rigidBody;
-			s->CreateComponent(ComponentType::RIGID_BODY);
-			rigidBody = s->GetComponent<RigidBodyComponent>();
-			rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB->GetBody(), true); // Rigid Body of Player
-			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
-		}
+		//if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		//{
+		//	float force = 10.0f;
+		//	GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
+		//	s->GetComponent<TransformComponent>()->SetPosition(player->GetComponent<TransformComponent>()->GetPosition());
+		//	s->GetComponent<TransformComponent>()->UpdateTransform();
+		//	s->GetComponent<TransformComponent>()->ForceUpdateTransform();
+		//
+		//	RigidBodyComponent* rigidBody;
+		//	s->CreateComponent(ComponentType::RIGID_BODY);
+		//	rigidBody = s->GetComponent<RigidBodyComponent>();
+		//	rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB->GetBody(), true); // Rigid Body of Player
+		//	rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
+		//}
 
 		//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		//{
