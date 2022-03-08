@@ -15,5 +15,8 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void PlayClip(string clipName);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void StopCurrentClip();
+
     }
 }

@@ -72,6 +72,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
 
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
+	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClipClip", StopCurrentClip);
 
 	InitMono();
 
