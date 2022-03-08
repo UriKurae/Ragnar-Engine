@@ -358,13 +358,13 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	Frustum frustum;
 	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
 	
-	frustum.pos = camera->camera.pos;
-	frustum.front = camera->camera.front; //COGED EL FRONT DE LA CAMARA DE JUEGO
-	frustum.up = camera->camera.up; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.pos = camera->GetFrustum()->pos;
+	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
 	frustum.type = FrustumType::OrthographicFrustum;
 	
-	frustum.orthographicHeight = camera->currentScreenHeight;//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
-	frustum.orthographicWidth = camera->currentScreenWidth;//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.nearPlaneDistance = 0.1;
 	frustum.farPlaneDistance = 1000000.f;
 	
@@ -434,7 +434,7 @@ bool ModuleUI::PreUpdate(float dt)
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
 		
-		float4 viewport = app->editor->gameView->bounds;
+		float4 viewport = app->editor->GetGameView()->GetBounds();
 		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
 		/*DEBUG_LOG("%f",viewport.x);
 		DEBUG_LOG("%f", viewport.y);

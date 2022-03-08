@@ -46,7 +46,7 @@ void ComponentTransform2D::Enable()
 
 bool ComponentTransform2D::Update(float dt)
 {
-	float4 viewport = app->editor->gameView->bounds;
+	float4 viewport = app->editor->GetGameView()->GetBounds();
 	float temporalW = (viewport.z * 300) / 847;
 	float temporalH = (viewport.w * 100) / 649;
 	scale.x = (buttonWidth * 1.30) / temporalW;

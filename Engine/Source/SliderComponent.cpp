@@ -81,7 +81,7 @@ bool SliderComponent::Update(float dt)
 	if (state == State::PRESSED) {
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-		float4 viewport = app->editor->gameView->bounds;
+		float4 viewport = app->editor->GetGameView()->GetBounds();
 		float2 fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
 
 

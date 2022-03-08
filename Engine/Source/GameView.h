@@ -14,12 +14,12 @@ public:
 	void Draw(Framebuffer* framebuffer);
 
 	inline float4 GetBounds() { return bounds; }
-	inline const bool GetState() const { return selected; }
-
-	float4 bounds;
+	inline const bool GetState() const { return selected; }	
 
 private:
 	float2 sizeViewport;
+
+	float4 bounds;
 
 	bool active;
 
