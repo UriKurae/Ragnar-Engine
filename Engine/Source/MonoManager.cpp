@@ -66,6 +66,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 
+	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
 
 

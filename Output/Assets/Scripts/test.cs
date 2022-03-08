@@ -9,17 +9,21 @@ public class test : RagnarComponent
 	public void Update()
 	{
 		Transform tr = gameObject.GetComponent<Transform>();
+
+		if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
+			tr.localPosition = new Vector3(tr.localPosition.x - 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
+
+		else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
+			tr.localPosition = new Vector3(tr.localPosition.x + 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
 		
-		if(Input.GetKey(REKeyCode.B) == KeyState.KEY_DOWN)
-			tr.localPosition = new Vector3(tr.localPosition.x + 1, 10, 10);
+		else if (Input.GetKey(REKeyCode.W) == KeyState.KEY_REPEAT)
+			tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z + 5 * Time.deltaTime);
+		
+		else if (Input.GetKey(REKeyCode.S) == KeyState.KEY_REPEAT)
+			tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - 5 * Time.deltaTime);
 
 
-		if (Input.GetKey(REKeyCode.P) == KeyState.KEY_DOWN)
-			InternalCalls.CreateGameObject("New Instance", new Vector3(-5, 0, 0), Quaternion.identity);
 
-
-
-		Debug.Log("Script Update Methoddd"); // This Works
 	}
 
 }

@@ -631,21 +631,21 @@ void ModuleScene::Scripting(float dt)
 			rigidBody->GetBody()->applyCentralImpulse(float3(0,2,0) *force); // Player front normalized
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			playerRB->GetBody()->applyCentralImpulse(float3(-1, 0, 0) * playerForce * dt);
-		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			playerRB->GetBody()->applyCentralImpulse(float3(1, 0, 0) * playerForce * dt);
-		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		{
-			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, 1) * playerForce * dt);
-		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		{
-			playerRB->GetBody()->applyCentralImpulse(float3(0, 0, -1) * playerForce * dt);
-		}
+		//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		//{
+		//	playerRB->GetBody()->applyCentralImpulse(float3(-1, 0, 0) * playerForce * dt);
+		//}
+		//if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		//{
+		//	playerRB->GetBody()->applyCentralImpulse(float3(1, 0, 0) * playerForce * dt);
+		//}
+		//if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		//{
+		//	playerRB->GetBody()->applyCentralImpulse(float3(0, 0, 1) * playerForce * dt);
+		//}
+		//if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		//{
+		//	playerRB->GetBody()->applyCentralImpulse(float3(0, 0, -1) * playerForce * dt);
+		//}
 	}
 }

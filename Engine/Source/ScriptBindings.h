@@ -136,8 +136,6 @@ void SetScale(MonoObject* go, MonoObject* scale)
 // Transform ========
 
 
-
-
 // GameObject =======================
 void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
@@ -155,3 +153,9 @@ void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* r
 }
 
 // GameObject =======================
+
+
+float GetGameTimeStep()
+{
+	return app->GetEngineDeltaTime();
+}
