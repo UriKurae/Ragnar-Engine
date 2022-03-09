@@ -335,6 +335,8 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 		}
 	}
 
+	LoadScriptData(name.c_str());
+
 	return true;
 }
 
