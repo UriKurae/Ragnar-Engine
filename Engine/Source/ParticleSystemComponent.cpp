@@ -10,6 +10,11 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
 
 ParticleSystemComponent::~ParticleSystemComponent()
 {
+	for (int i = 0; i < emitters.size(); i++)
+	{
+		delete emitters[i];
+	}
+	emitters.clear();
 }
 
 void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
