@@ -33,7 +33,13 @@ bool InputActionMenu::Start()
 bool InputActionMenu::Update(float dt)
 {
 	bool ret = true;
+	
 	ImGui::Begin(ICON_FA_KEYBOARD" Input Actions", &active);
+
+	if (ImGui::BeginMenu("Button"))
+	{
+		ImGui::EndMenu();
+	}
 
 	ImGui::Columns(3, nullptr);
 
@@ -124,6 +130,8 @@ bool InputActionMenu::Update(float dt)
 	//ImGui::SameLine();
 	//ImGui::InputText("##Name", &current, 30);
 	ImGui::Separator();
+	ImGui::Text("Path: ");
+	ImGui::SameLine();
 	if (ImGui::BeginCombo("##combo", currentBindingItem))
 	{
 		for (int n = 0; n < IM_ARRAYSIZE(app->input->keyNameList); n++)
