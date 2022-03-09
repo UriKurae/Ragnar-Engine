@@ -606,16 +606,16 @@ void ModuleScene::Scripting(float dt)
 		//}
 
 		// ANIMATIONS
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT ||
-			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT ||
-			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT ||
-			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
-		{
-			player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
-			player->GetComponent<AnimationComponent>()->currAnim->loop = true;
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
+		//if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT ||
+		//	app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT ||
+		//	app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT ||
+		//	app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
+		//{
+		//	player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
+		//	player->GetComponent<AnimationComponent>()->currAnim->loop = true;
+		//}
+		//else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		//	player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
 
 		//ACTIONS
 		btRigidBody* playerRB = player->GetComponent<RigidBodyComponent>()->GetBody();

@@ -206,6 +206,7 @@
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\stdafx.h" />
     <ClInclude Include="Engine\Source\AboutMenu.h" />
     <ClInclude Include="Engine\Source\Animation.h" />
+    <ClInclude Include="Engine\Source\AnimationBindings.h" />
     <ClInclude Include="Engine\Source\AnimationComponent.h" />
     <ClInclude Include="Engine\Source\AnimationImporter.h" />
     <ClInclude Include="Engine\Source\Application.h" />

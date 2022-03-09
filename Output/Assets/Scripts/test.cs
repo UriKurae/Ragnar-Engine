@@ -12,6 +12,7 @@ public class test : RagnarComponent
 			|| Input.GetKey(REKeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.D) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+			gameObject.GetComponent<Animation>().PlayAnimation("Walk");
 		}
 
 		if (Input.GetKey(REKeyCode.R) == KeyState.KEY_DOWN)

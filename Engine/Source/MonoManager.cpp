@@ -16,6 +16,7 @@
 #include "ScriptBindings.h"
 #include "AudioBindings.h"
 #include "RigidbodyBindings.h"
+#include "AnimationBindings.h"
 
 #include <iostream>
 #include <fstream>
@@ -77,6 +78,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
 
+	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
 
 	InitMono();
 
@@ -191,7 +193,7 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 	uintptr_t goPtr = reinterpret_cast<uintptr_t>(inGo);
 
-	void* args[5];
+	void* args[6];
 	args[0] = &inGo->name;
 	args[1] = &goPtr;
 
@@ -204,7 +206,10 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	uintptr_t rbPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<RigidBodyComponent>());
 	args[4] = &rbPTR;
 
-	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr,uintptr,uintptr)", true);
+	uintptr_t animPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AnimationComponent>());
+	args[5] = &animPTR;
+
+	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr,uintptr,uintptr,uintptr)", true);
 	MonoMethod* method = mono_method_desc_search_in_class(constructorDesc, goClass);
 	MonoObject* goObj = mono_object_new(domain, goClass);
 	mono_runtime_invoke(method, goObj, args, NULL);

@@ -12,6 +12,7 @@ namespace RagnarEngine
         public Transform transform;
         public AudioSource audioSource;
         public Rigidbody rigidBody;
+        public Animation animation;
         
         public GameObject()
         {
@@ -19,7 +20,7 @@ namespace RagnarEngine
             pointer = UIntPtr.Zero;
             //InternalCalls.CreateGameObject(name, Vector3.zero);
         }
-        public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR, UIntPtr audioPTR, UIntPtr rbPTR)
+        public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR, UIntPtr audioPTR, UIntPtr rbPTR, UIntPtr animPTR)
         {
             name = _name;
             pointer = ptr;
@@ -32,6 +33,9 @@ namespace RagnarEngine
 
             rigidBody = new Rigidbody();
             rigidBody.pointer = rbPTR;
+            
+            animation = new Animation();
+            animation.pointer = animPTR;
         }
 
 
