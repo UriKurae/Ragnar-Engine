@@ -33,7 +33,6 @@ public:
 	Color normalColor = white;
 	Color selectedColor = white;//black
 	MyPlane* planeToDraw;
-	GameObject* gen;
 	bool checked;
 	State state;
 	Text checkboxText;

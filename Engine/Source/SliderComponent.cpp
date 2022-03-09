@@ -107,20 +107,20 @@ bool SliderComponent::Update(float dt)
 			{
 				/*thePlane->texCoords[0] = 1;
 				thePlane->texCoords[6] = 1;*/
-				thePlane->texCoords[0] = (0.5 - barProgres);
-				thePlane->texCoords[4] = (0.5 - barProgres);
+				planeToDraw->texCoords[0] = (0.5 - barProgres);
+				planeToDraw->texCoords[4] = (0.5 - barProgres);
 			}
 			else if (barProgres >= 0.5f) {
 
 				float aux = barProgres - 0.5;
-				thePlane->texCoords[2] = (1 - aux);
-				thePlane->texCoords[5] = (1 - aux);
+				planeToDraw->texCoords[2] = (1 - aux);
+				planeToDraw->texCoords[5] = (1 - aux);
 			}
-			glDeleteBuffers(thePlane->texCoords.size() * sizeof(GLfloat), &thePlane->TBO);
+			glDeleteBuffers(planeToDraw->texCoords.size() * sizeof(GLfloat), &planeToDraw->TBO);
 
-			glGenBuffers(1, &thePlane->TBO);
-			glBindBuffer(GL_ARRAY_BUFFER, thePlane->TBO);
-			glBufferData(GL_ARRAY_BUFFER, thePlane->texCoords.size() * sizeof(GLfloat), thePlane->texCoords.data(), GL_STATIC_DRAW);
+			glGenBuffers(1, &planeToDraw->TBO);
+			glBindBuffer(GL_ARRAY_BUFFER, planeToDraw->TBO);
+			glBufferData(GL_ARRAY_BUFFER, planeToDraw->texCoords.size() * sizeof(GLfloat), planeToDraw->texCoords.data(), GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
@@ -167,7 +167,7 @@ void SliderComponent::Draw(CameraComponent* gameCam)
 	}
 
 	MaterialComponent* mat = owner->GetComponent<MaterialComponent>();
-	thePlane->DrawPlane2D(mat->GetTexture().get());
+	planeToDraw->DrawPlane2D(mat->GetTexture().get());
 
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
@@ -254,9 +254,27 @@ void SliderComponent::OnEditor()
 
 float2 SliderComponent::GetParentPosition()
 {
-	ComponentTransform2D* transform2D = gen->GetComponent<ComponentTransform2D>();
+	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->position;
-	return { position.x - (strlen(text) * 12 * sliderText.Scale), position.y - 5 };
+	return { position.x - (strlen(text) * 12 * sliderText.Scale), position.y - 5 };	
+}
+bool SliderComponent::OnLoad(JsonParsing& node)
+{
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = owner;
+	owner->isUI = true;
 
-	
+	app->userInterface->UIGameObjects.push_back(owner);
+	return true;
+}
+
+bool SliderComponent::OnSave(JsonParsing& node, JSON_Array* array)
+{
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+
+	node.SetValueToArray(array, file.GetRootValue());
+
+	return true;
 }

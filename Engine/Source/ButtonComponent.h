@@ -26,7 +26,6 @@ public:
 public:
 	float buttonWidth;
 	float buttonHeight;
-	GameObject* gen;
 	Text buttonText;
 	bool fadeUI = false;
 	State state;

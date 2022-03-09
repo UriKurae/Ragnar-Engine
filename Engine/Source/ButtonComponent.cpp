@@ -205,7 +205,7 @@ void ButtonComponent::OnEditor()
 
 float2 ButtonComponent::GetParentPosition()
 {
-	ComponentTransform2D* transform2D =gen->GetComponent<ComponentTransform2D>();
+	ComponentTransform2D* transform2D =owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->position;
 	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
@@ -213,6 +213,10 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 {
 	std::string text;
 
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = owner;
+	owner->isUI = true;
+	app->userInterface->UIGameObjects.push_back(owner);
 	text = node.GetJsonNumber("buttonText");
 	buttonText.textt = text;
 	fontScale = node.GetJsonNumber("fontScale");

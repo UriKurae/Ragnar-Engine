@@ -12,7 +12,6 @@ CheckboxComponent::CheckboxComponent(GameObject* ow)
 	checkboxText.setText("check", 5, 5, 0.5, { 255,255,255 });
 	//UIid = id;
 	actualColor = normalColor;
-	gen= ow;
 	firstTime = true;
 
 }
@@ -191,17 +190,47 @@ void CheckboxComponent::OnEditor()
 
 float2 CheckboxComponent::GetParentPosition()
 {
-	ComponentTransform2D* transform = gen->GetComponent<ComponentTransform2D>();
+	ComponentTransform2D* transform = owner->GetComponent<ComponentTransform2D>();
 	return { transform->position.x - (strlen(text) * 12 * checkboxText.Scale) - (transform->scale.x / 4), transform->position.y - 5 };
 }
 bool CheckboxComponent::OnLoad(JsonParsing& node)
 {
+	std::string selected;
+	selected = node.GetJsonString("selected");
+	noSelectedMaterial = nullptr;
+	selectedMaterial= nullptr;
+	for (int a = 0; a < owner->components.size(); a++) {
+		if (owner->components[a]->type == ComponentType::MATERIAL) 
+		{
+			if (selectedMaterial == nullptr) {
+				selectedMaterial = (MaterialComponent*)owner->components[a];
+			}
+			else 
+			{
+				noSelectedMaterial = (MaterialComponent*)owner->components[a];
+				break;
+			}
+		}
+	}
+	
+	const char* sel=new char[selected.size()];
+	sel = selected.c_str();
+	if (sel[0] == 'n')
+	{
+		actual = noSelectedMaterial;			
+	}
+	else 
+	{
+		actual = selectedMaterial;	
+	}
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = owner;
+	owner->isUI = true;
+	app->userInterface->UIGameObjects.push_back(owner);
 
+	/*delete[] sel;*/
+	
 
-
-
-
-	checked = node.GetJsonBool("checked");
 	return true;
 }
 
@@ -211,8 +240,14 @@ bool CheckboxComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	if (actual == noSelectedMaterial) {
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "noSelected");
+	}
+	else {
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "Selected");
+	}
 
-	/*file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "checked", checked);*/
+
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;

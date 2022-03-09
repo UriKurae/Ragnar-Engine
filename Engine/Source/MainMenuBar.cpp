@@ -269,7 +269,6 @@ bool MainMenuBar::Update(float dt)
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 
 					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
-					button->gen = object;
 					object->CreateComponent(ComponentType::MATERIAL);
 					app->userInterface->UIGameObjects.push_back(object);
 					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
@@ -282,11 +281,10 @@ bool MainMenuBar::Update(float dt)
 					object->SetName("Slider");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
-					button->gen = object;
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					app->userInterface->UIGameObjects.push_back(object);
-					button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->thePlane->own = object;
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
 					object->isUI = true;
 				}
 				else if (ImGui::MenuItem("UI Check Box"))
@@ -294,10 +292,12 @@ bool MainMenuBar::Update(float dt)
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
 					object->SetName("CheckBox");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					MaterialComponent* selected = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					MaterialComponent* noselected = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
-					button->gen = object;
-					button->selectedMaterial = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-					button->noSelectedMaterial = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					button->selectedMaterial = selected;
+					button->noSelectedMaterial = noselected;
+					
 					//material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					button->actual = button->noSelectedMaterial;
 					app->userInterface->UIGameObjects.push_back(object);

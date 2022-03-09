@@ -65,14 +65,11 @@ void ImageComponent::OnEditor()
 }
 bool ImageComponent::OnLoad(JsonParsing& node)
 {
-	std::string text;
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = owner;
+	owner->isUI = true;
 
-	/*text = node.GetJsonNumber("buttonText");
-	buttonText.textt = text;
-	fontScale = node.GetJsonNumber("fontScale");
-	textColor.r = node.GetJsonNumber("textColor.r");
-	textColor.g = node.GetJsonNumber("textColor.g");
-	textColor.b = node.GetJsonNumber("textColor.b");*/
+	app->userInterface->UIGameObjects.push_back(owner);
 	return true;
 }
 
@@ -81,12 +78,8 @@ bool ImageComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	/*file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text.c_str());
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "fontScale", fontScale);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.b", textColor.b);
-	node.SetValueToArray(array, file.GetRootValue());*/
+
+	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
 }

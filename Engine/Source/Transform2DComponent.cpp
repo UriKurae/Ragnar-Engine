@@ -29,6 +29,7 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	transMatrix = aux.FromTRS(internalPosition, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
+	type = ComponentType::TRANFORM2D;
 	//matrix = transMatrix.ptr();
 	
 	//name = "Transform2D Component";
@@ -162,7 +163,7 @@ bool ComponentTransform2D::OnSave(JsonParsing& node, JSON_Array* array)
 
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)18);
 	file.SetNewJson3Number(file, "Position", position);
 	file.SetNewJson3Number(file, "Scale", scale);
 	file.SetNewJson3Number(file, "rotationEuler", rotationEuler);

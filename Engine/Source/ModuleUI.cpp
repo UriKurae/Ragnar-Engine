@@ -52,7 +52,8 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	texCoords.push_back(1);
 	texCoords.push_back(0);
 
-
+	texCoords.push_back(0);
+	texCoords.push_back(1);
 
 	
 

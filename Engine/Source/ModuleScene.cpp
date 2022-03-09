@@ -21,7 +21,7 @@
 #include "MeshComponent.h"
 #include "AudioSourceComponent.h"
 #include "AnimationComponent.h"
-
+#include "ModuleUI.h"
 //Scripting
 #include "C_RigidBody.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
@@ -344,7 +344,7 @@ bool ModuleScene::LoadScene(const char* name)
 	DEBUG_LOG("Loading Scene");
 
 	RELEASE(root);
-
+	app->userInterface->UIGameObjects.clear();
 	//char* buffer = nullptr;
 
 	//app->fs->Load(name, &buffer);

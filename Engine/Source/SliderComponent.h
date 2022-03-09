@@ -18,8 +18,9 @@ public:
 	bool Update(float dt) override;
 	void Draw(CameraComponent* gameCam = nullptr) override;
 	void OnEditor() override;
+	bool OnLoad(JsonParsing& node) override;
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 	float2 GetParentPosition();
-	GameObject* gen;
 	float value;
 	float minValue;
 	float maxValue;
@@ -27,7 +28,7 @@ public:
 	bool completed;
 	float barProgres;
 public:
-	MyPlane* thePlane;
+	MyPlane* planeToDraw;
 	State state;
 	Color actualColor;
 	Color disabledColor = white;
