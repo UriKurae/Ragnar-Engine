@@ -2,7 +2,7 @@
 #include "ParticleEffect.h"
 #include "Algorithm/Random/LCG.h"
 
-class ParticleEffect_Velocity : ParticleEffect
+class ParticleEffect_Velocity : public ParticleEffect
 {
 public:
 	ParticleEffect_Velocity();

@@ -12,8 +12,7 @@
 #include "Globals.h"
 #include "Math/MathFunc.h"
 #include "imgui/imgui.h"
-
-#include <GL/glew.h>
+#include "Profiling.h"
 
 ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particlesPerSecond(50),
@@ -66,6 +65,8 @@ ParticleEmitter::~ParticleEmitter()
 	RELEASE(data.vertexArray);
 	RELEASE(data.vertexBuffer);
 	RELEASE(data.indexBuffer);
+	RELEASE_ARRAY(data.vertexBufferBase);
+	data.vertexBufferPtr = nullptr;
 }
 
 void ParticleEmitter::Emit(float dt)
@@ -142,9 +143,12 @@ void ParticleEmitter::SetUpBuffers()
 {
 	if (data.vertexArray)
 	{
-		delete data.vertexArray;
-		delete data.vertexBuffer;
-		delete data.indexBuffer;
+		RELEASE( data.vertexArray);
+		RELEASE( data.vertexBuffer);
+		RELEASE( data.indexBuffer);
+		RELEASE_ARRAY( data.vertexBufferBase);
+		data.vertexBufferPtr = nullptr;
+		
 	}
 
 	particlePool.resize(maxParticles);
@@ -186,6 +190,8 @@ void ParticleEmitter::SetUpBuffers()
 
 	data.indexBuffer = new IndexBuffer(indices, data.maxIndices);
 	data.vertexArray->SetIndexBuffer(*data.indexBuffer);
+
+	delete[]indices;
 }
 
 void ParticleEmitter::Render(CameraComponent* gameCam)
@@ -456,11 +462,11 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effects[(int)ParticleEffectType::SIZE_OVER_LIFETIME] = effect;
 		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
-		effect = (ParticleEffect*)new ParticleEffect_Velocity();
+		effect = new ParticleEffect_Velocity();
 		effects[(int)ParticleEffectType::VELOCITY_OVER_LIFETIME] = effect;
 		break;
 	case ParticleEffectType::ACCELERATION_OVER_LIFETIME:
-		effect = (ParticleEffect*)new ParticleEffect_Acceleration();
+		effect = new ParticleEffect_Acceleration();
 		effects[(int)ParticleEffectType::ACCELERATION_OVER_LIFETIME] = effect;
 		break;
 	default:
