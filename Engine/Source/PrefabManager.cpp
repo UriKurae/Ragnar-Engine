@@ -118,6 +118,8 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 				DEBUG_LOG("Prefab couldn't be saved");
 
 			RELEASE_ARRAY(buf);
+
+			option = 1;
 		}
 		else
 		{
