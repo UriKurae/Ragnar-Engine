@@ -17,6 +17,7 @@ InputActionMenu::InputActionMenu() : Menu(false)
 	actionMaps.push_back(new ActionMaps());
 	currentMap = NULL;
 	currentAction = NULL;
+	currentBinding = NULL;
 }
 
 InputActionMenu::~InputActionMenu()
@@ -34,17 +35,25 @@ bool InputActionMenu::Update(float dt)
 {
 	bool ret = true;
 	
-	ImGui::Begin(ICON_FA_KEYBOARD" Input Actions", &active);
+	ImGui::Begin(ICON_FA_KEYBOARD" Input Actions", &active, ImGuiWindowFlags_MenuBar);
 
-	if (ImGui::BeginMenu("Button"))
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(15.0f, 0.0f));
+	if (ImGui::BeginMenuBar())
 	{
-		ImGui::EndMenu();
+		ImGui::Text("Asset name: %s", currentInputAssetName.c_str());
+
+		if (ImGui::Button("Save Asset"))
+		{
+			SaveInputActionFile(currentInputAssetPath.c_str());
+		}
+
+		ImGui::EndMenuBar();
 	}
+	ImGui::PopStyleVar();
 
 	ImGui::Columns(3, nullptr);
 
 	ImGui::BeginChild("Action Maps");
-	ImGui::Separator();
 	ImGui::Text("Action Maps");
 	ImGui::SameLine();
 	std::string text = ICON_FA_PLUS;
@@ -77,7 +86,6 @@ bool InputActionMenu::Update(float dt)
 	ImGui::NextColumn();
 
 	ImGui::BeginChild("Actions");
-	ImGui::Separator();
 	ImGui::Text("Actions");
 	ImGui::SameLine();
 	posX = (ImGui::GetCursorPosX() + ImGui::GetColumnWidth() - ImGui::CalcTextSize(text.c_str()).x
@@ -123,13 +131,11 @@ bool InputActionMenu::Update(float dt)
 	ImGui::NextColumn();
 
 	ImGui::BeginChild("Properties");
-	ImGui::Separator();
 	ImGui::Text("Properties");
 	ImGui::Separator();
 	ImGui::Text("Name");
 	//ImGui::SameLine();
 	//ImGui::InputText("##Name", &current, 30);
-	ImGui::Separator();
 	ImGui::Text("Path: ");
 	ImGui::SameLine();
 	if (ImGui::BeginCombo("##combo", currentBindingItem))
@@ -207,6 +213,9 @@ bool InputActionMenu::LoadInputActionFile(const char* path)
 			aM->OnLoad(go);
 			actionMaps.push_back(aM);
 		}
+		currentInputAssetName = path;
+		app->fs->GetFilenameWithoutExtension(currentInputAssetName);
+		currentInputAssetPath = path;
 	}
 	else
 	{
@@ -229,6 +238,12 @@ void Actions::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Bindings");
+	for (int i = 0; i < bindings.size(); i++)
+	{
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Path", bindings[i]);
+	}
 
 	node.SetValueToArray(array, file.GetRootValue());
 }

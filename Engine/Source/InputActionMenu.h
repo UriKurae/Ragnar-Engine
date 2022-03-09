@@ -61,4 +61,7 @@ private:
 	int currentAction;
 	int currentBinding;
 	const char* currentBindingItem = NULL;
+
+	std::string currentInputAssetName;
+	std::string currentInputAssetPath;
 };
