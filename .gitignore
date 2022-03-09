@@ -65,6 +65,12 @@
 # Executables
 *.exe
 !Dependencies/Optick/Optick.exe
+!Output/mono-runtime/MSBuild/MSBuild.exe
+!Output/mono-runtime/MSBuild/MSBuildTaskHost.exe
+!Output/mono-runtime/MSBuild/Roslyn/csc.exe
+!Output/mono-runtime/MSBuild/Roslyn/csi.exe
+!Output/mono-runtime/MSBuild/Roslyn/vbc.exe
+!Output/mono-runtime/MSBuild/Roslyn/VBCSCompiler.exe
 *.out
 *.app
 
