@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Assembly-CSharp\Default Components\Animation.cs" />
     <Compile Include="Assembly-CSharp\Default Components\AudioSource.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
     <Compile Include="Assembly-CSharp\Default Components\RagnarComponent.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Rigidbody.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform.cs" />

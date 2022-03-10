@@ -17,6 +17,7 @@
 #include "AudioBindings.h"
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
+#include "CameraBindings.h"
 
 #include <iostream>
 #include <fstream>
@@ -79,6 +80,9 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
 
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
+
+	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
+	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
 
 	InitMono();
 
@@ -193,7 +197,7 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 	uintptr_t goPtr = reinterpret_cast<uintptr_t>(inGo);
 
-	void* args[6];
+	void* args[7];
 	args[0] = &inGo->name;
 	args[1] = &goPtr;
 
@@ -209,7 +213,10 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	uintptr_t animPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AnimationComponent>());
 	args[5] = &animPTR;
 
-	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr,uintptr,uintptr,uintptr)", true);
+	uintptr_t camPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<CameraComponent>());
+	args[6] = &camPTR;
+
+	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr,uintptr,uintptr,uintptr,uintptr)", true);
 	MonoMethod* method = mono_method_desc_search_in_class(constructorDesc, goClass);
 	MonoObject* goObj = mono_object_new(domain, goClass);
 	mono_runtime_invoke(method, goObj, args, NULL);

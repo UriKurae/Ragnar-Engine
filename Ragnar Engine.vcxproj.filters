@@ -667,6 +667,9 @@
     <ClInclude Include="Engine\Source\TransformBindings.h">
       <Filter>Sources\Tools\Bindings</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\CameraBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">

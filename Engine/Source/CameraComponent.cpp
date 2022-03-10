@@ -344,6 +344,11 @@ void CameraComponent::UpdateFov()
 	camera.SetVerticalFovAndAspectRatio(verticalFov, (currentScreenWidth / currentScreenHeight));
 }
 
+void CameraComponent::SetNewFov(float horizontalFovRadians)
+{
+	horizontalFov = horizontalFovRadians;
+}
+
 void CameraComponent::CompileBuffers()
 {
 	// Configure buffers

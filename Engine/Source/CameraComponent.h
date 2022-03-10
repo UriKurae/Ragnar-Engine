@@ -20,6 +20,8 @@ public:
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
 	void UpdateFovAndScreen(float width, float height);
 	void UpdateFov();
+
+	void SetNewFov(float horizontalFovRadians);
 	
 	void CompileBuffers();
 	bool CompareRotations(Quat& quat1, Quat& quat2);

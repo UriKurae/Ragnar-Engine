@@ -33,6 +33,7 @@ namespace RagnarEngine
             { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
             { typeof(Rigidbody), ComponentType.RIGID_BODY},
             { typeof(Animation), ComponentType.ANIMATION},
+            { typeof(Camera), ComponentType.CAMERA},
         };
 
         public RagnarComponent()
