@@ -76,6 +76,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
 	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClip", StopCurrentClip);
+	mono_add_internal_call("RagnarEngine.AudioListener::TestListener", TestListener);
 
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
 
@@ -197,24 +198,27 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 	uintptr_t goPtr = reinterpret_cast<uintptr_t>(inGo);
 
-	void* args[7];
+	void* args[8];
 	args[0] = &inGo->name;
 	args[1] = &goPtr;
 
 	uintptr_t transPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<TransformComponent>());
 	args[2] = &transPTR;
 
-	uintptr_t audioPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AudioSourceComponent>());
-	args[3] = &audioPTR;
+	uintptr_t audioSourcePTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AudioSourceComponent>());
+	args[3] = &audioSourcePTR;
+
+	uintptr_t audioListenerPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<ListenerComponent>());
+	args[4] = &audioListenerPTR;
 
 	uintptr_t rbPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<RigidBodyComponent>());
-	args[4] = &rbPTR;
+	args[5] = &rbPTR;
 
 	uintptr_t animPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AnimationComponent>());
-	args[5] = &animPTR;
+	args[6] = &animPTR;
 
 	uintptr_t camPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<CameraComponent>());
-	args[6] = &camPTR;
+	args[7] = &camPTR;
 
 	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr,uintptr,uintptr,uintptr,uintptr)", true);
 	MonoMethod* method = mono_method_desc_search_in_class(constructorDesc, goClass);

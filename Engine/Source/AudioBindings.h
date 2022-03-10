@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "AudioSourceComponent.h"
+#include "ListenerComponent.h"
 
 #include "ScriptBindings.h"
 
@@ -9,7 +10,7 @@
 #include <metadata\object.h>
 #include <metadata/class.h>
 
-
+// AUDIO SOURCE ================================================
 void PlayClip(MonoObject* clipName, MonoObject* owner)
 {
 	// IMPORTANT! Names are flipped but it works, if i try to flip them it won't work
@@ -20,4 +21,10 @@ void PlayClip(MonoObject* clipName, MonoObject* owner)
 void StopCurrentClip(MonoObject* go)
 {
 	GetComponentMono<AudioSourceComponent*>(go)->StopClip();
+}
+
+// AUDIO LISTENER ============================================
+void TestListener(MonoObject* go)
+{
+	GetComponentMono<ListenerComponent*>(go);
 }
