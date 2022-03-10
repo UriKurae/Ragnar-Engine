@@ -13,6 +13,7 @@
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
+#include "Math/float3x3.h"
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
 
@@ -196,6 +197,7 @@ void TransformComponent::UpdateTransform()
 	{
 		globalMatrix = localMatrix;
 	}
+	UpdateBoundingBox();
 }
 
 void TransformComponent::UpdateChildTransform(GameObject* go)
@@ -229,6 +231,14 @@ void TransformComponent::SetAABB()
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
 	}
+
+	UpdateBoundingBox();
+
+	app->scene->ResetQuadtree();
+}
+
+void TransformComponent::UpdateBoundingBox()
+{
 	if (owner->GetComponent<MeshComponent>())
 	{
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
@@ -236,8 +246,6 @@ void TransformComponent::SetAABB()
 		owner->SetAABB(newObb);
 		owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
-
-	app->scene->ResetQuadtree();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
@@ -334,4 +342,21 @@ void TransformComponent::ResetTransform()
 void TransformComponent::UpdateEditorRotation()
 {
 	rotationEditor = rotation.ToEulerXYZ();
+}
+float3 TransformComponent::GetRight()
+{
+	return GetNormalizeAxis(0);
+}
+float3 TransformComponent::GetUp()
+{
+	return GetNormalizeAxis(1);
+}
+float3 TransformComponent::GetForward()
+{
+	return GetNormalizeAxis(2);
+}
+
+float3 TransformComponent::GetNormalizeAxis(int i)
+{
+	return globalMatrix.RotatePart().Col(i).Normalized();
 }
