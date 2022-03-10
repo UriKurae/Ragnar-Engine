@@ -4,6 +4,7 @@
 #include "ParticleEffect.h"
 #include "ParticleEffect_Velocity.h"
 #include "ParticleEffect_Acceleration.h"
+#include "ParticleEffect_Size.h"
 #include "BillboardParticleComponent.h"
 
 #include <array>
@@ -112,13 +113,4 @@ private:
 
 	ParticleEffect* effect;
 
-};
-
-const float particleVertices[] = {
--1, -1,
-1, -1,
--1, 1,
-1, -1,
-1, 1,
--1, 1,
 };
