@@ -32,9 +32,9 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
-
-	particleReference.colorBegin = { 1,0,0,1 };
-	particleReference.colorEnd = { 0,1,0,1 };
+	particleReference.color = { 1,0,0,1 };
+	//particleReference.colorBegin = { 1,0,0,1 };
+	//particleReference.colorEnd = { 0,1,0,1 };
 	//particleReference.sizeBegin = 0.5f, particleReference.sizeVariation = 0.3f, particleReference.sizeEnd = 0.0f;
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
@@ -97,8 +97,9 @@ void ParticleEmitter::Emit(float dt)
 		particle.velocity.x += particleReference.acceleration.x * (random.Float() - 0.5f) * 2;
 		particle.velocity.y += particleReference.acceleration.y * (random.Float() - 0.5f) * 2;
 
-		particle.colorBegin = particleReference.colorBegin;
-		particle.colorEnd = particleReference.colorEnd;
+		particle.color = particleReference.color;
+		//particle.colorBegin = particleReference.colorBegin;
+		//particle.colorEnd = particleReference.colorEnd;
 
 		particle.lifeTime = particleReference.lifeTime;
 		particle.lifeRemaining = particleReference.lifeTime;
@@ -235,13 +236,13 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 				continue;
 
 			float life = particle.lifeRemaining / particle.lifeTime;
-			float4 color = float4::Lerp(particle.colorEnd, particle.colorBegin, life);
-			color.w *= life;
+			//float4 color = float4::Lerp(particle.color, particle.color, life);
+			//color.w *= life;
 			//float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
 
 			if (billboard != nullptr)
 			{
-				DrawParticle(particle.position, particle.rotation, { particle.size,particle.size,0.0f }, color, billboard->GetAlignment());
+				DrawParticle(particle.position, particle.rotation, { particle.size,particle.size,0.0f }, particle.color, billboard->GetAlignment());
 			}
 		}
 
@@ -371,10 +372,10 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 
 		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
 	
-		guiName = "Color (RGBA)" + suffixLabel;
+		/*guiName = "Color (RGBA)" + suffixLabel;
 		ImGui::ColorEdit4("Beginning Color", particleReference.colorBegin.ptr());
 
-		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());
+		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());*/
 
 		ImGui::Indent();
 
@@ -401,7 +402,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//	ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
 		//}
 
-		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::SIZE_OVER_LIFETIME; i++)
+		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; i++)
 		{
 			if (isEffectActive((ParticleEffectType)i))
 			{
@@ -427,7 +428,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		textNameDisplay += emitterIndex;
 		if (ImGui::BeginCombo(guiName.c_str(), textNameDisplay.c_str()))
 		{
-			for (int j = (int)ParticleEffectType::NO_TYPE + 1; j <= (int)ParticleEffectType::SIZE_OVER_LIFETIME; j++)
+			for (int j = (int)ParticleEffectType::NO_TYPE + 1; j <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; j++)
 			{
 				guiName = (GetNameFromEffect((ParticleEffectType)j)) + suffixLabel;
 
@@ -467,6 +468,10 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effect = new ParticleEffect_Acceleration();
 		effects[(int)ParticleEffectType::ACCELERATION_OVER_LIFETIME] = effect;
 		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		effect = new ParticleEffect_Color();
+		effects[(int)ParticleEffectType::COLOR_OVER_LIFETIME] = effect;
+		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		effect = new ParticleEffect_Size();
 		effects[(int)ParticleEffectType::SIZE_OVER_LIFETIME] = effect;
@@ -501,6 +506,9 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 	case ParticleEffectType::ACCELERATION_OVER_LIFETIME:
 		return "Acceleration Effect";
 		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		return "Color Effect";
+		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		return "Size Effect";
 		break;
@@ -529,16 +537,13 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	timer = node.GetJsonNumber("Emitter: Timer");
 	currTimer = node.GetJsonNumber("Emitter: Current Timer");
 
-	particleReference.position = node.GetJson3Number(node, "Particle Props Position");
-	particleReference.velocity = node.GetJson3Number(node, "Particle Props Velocity");
-	particleReference.acceleration = node.GetJson3Number(node, "Particle Props Acceleration");
-	particleReference.colorBegin = node.GetJson4Number(node, "Particle Props Color Begin");
-	particleReference.colorEnd = node.GetJson4Number(node, "Particle Props Color End");
-	//particleReference.sizeBegin = node.GetJsonNumber ("Particle Props Size Begin");
-	//particleReference.sizeEnd = node.GetJsonNumber ("Particle Props Size End");
-	//particleReference.sizeVariation = node.GetJsonNumber ("Particle Props Size Variation");
-	particleReference.lifeTime = node.GetJsonNumber ("Particle Props Lifetime");
-	particleReference.deltaRotation = node.GetJsonNumber ("Particle Props Rotation Amount");
+	particleReference.position = node.GetJson3Number(node, "Particle Reference Position");
+	particleReference.velocity = node.GetJson3Number(node, "Particle Reference Velocity");
+	particleReference.acceleration = node.GetJson3Number(node, "Particle Reference Acceleration");
+	particleReference.color = node.GetJson4Number(node, "Particle Reference Color");
+	particleReference.size = node.GetJsonNumber("Particle Reference Size");
+	particleReference.lifeTime = node.GetJsonNumber ("Particle Reference Lifetime");
+	particleReference.deltaRotation = node.GetJsonNumber ("Particle Reference Rotation Amount");
 
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Texture Assets Path"))));
 	
@@ -567,17 +572,13 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Timer", timer);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Current Timer", currTimer);
 
-	file.SetNewJson3Number(file, "Particle Props Position", particleReference.position);
-	file.SetNewJson3Number(file, "Particle Props Velocity", particleReference.velocity);
-	file.SetNewJson3Number(file, "Particle Props Acceleration", particleReference.acceleration);
-	//file.SetNewJson4Number(file, "Particle Props Color Begin", particleReference.colorBegin);
-	//file.SetNewJson4Number(file, "Particle Props Color End", particleReference.colorEnd);
-	/*file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Begin", particleReference.sizeBegin);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size End", particleReference.sizeEnd);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Variation", particleReference.sizeVariation);*/
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Size Begin", particleReference.size);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Lifetime", particleReference.lifeTime);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Props Rotation Amount", particleReference.deltaRotation);
+	file.SetNewJson3Number(file, "Particle Reference Position", particleReference.position);
+	file.SetNewJson3Number(file, "Particle Reference Velocity", particleReference.velocity);
+	file.SetNewJson3Number(file, "Particle Reference Acceleration", particleReference.acceleration);
+	file.SetNewJson4Number(file, "Particle Reference Color Begin", particleReference.color);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Size Begin", particleReference.size);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Lifetime", particleReference.lifeTime);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Rotation Amount", particleReference.deltaRotation);
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Texture Assets Path", texture->GetAssetsPath().c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", data.shader->GetAssetsPath().c_str());

@@ -48,10 +48,16 @@ void ParticleEffect_Size::OnEditor(int emitterIndex)
 
 bool ParticleEffect_Size::OnLoad(JsonParsing& node)
 {
-	return false;
+	startSize = node.GetJsonNumber("PES: Start size");
+	endSize = node.GetJsonNumber ("PES: End size");
+	return true;
 }
 
 bool ParticleEffect_Size::OnSave(JsonParsing& node, JSON_Array* array)
 {
-	return false;
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PES: Start size", startSize);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PES: End size", endSize);
+	return true;
 }
