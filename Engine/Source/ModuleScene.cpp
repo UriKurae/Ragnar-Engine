@@ -5,7 +5,6 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "ModuleUI.h"
 #include "Physics3D.h"
 
 #include "Primitives.h"
@@ -22,10 +21,6 @@
 #include "MeshComponent.h"
 #include "AudioSourceComponent.h"
 #include "AnimationComponent.h"
-
-//Scripting
-#include "C_RigidBody.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include <stack>
 #include "Profiling.h"
@@ -47,8 +42,12 @@ bool ModuleScene::Start()
 	camera = CreateGameObject(nullptr);
 	camera->CreateComponent(ComponentType::CAMERA);
 	camera->SetName("Camera");
-	//camera->CreateComponent(ComponentType::AUDIO_LISTENER);
+	camera->CreateComponent(ComponentType::AUDIO_LISTENER);
 	//camera->CreateComponent(ComponentType::AUDIO_SOURCE);
+
+	// Register this camera as the default listener.
+	AkGameObjectID cameraID = camera->GetUUID();
+	AudioManager::Get()->SetDefaultListener(&cameraID, camera->GetComponent<TransformComponent>());
 	
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	
@@ -60,7 +59,6 @@ bool ModuleScene::Start()
 	player = CreateGameObject(nullptr);
 	player->CreateComponent(ComponentType::AUDIO_SOURCE);
 	player->SetName("Player");
-	player->tag = "Player";
 	
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
@@ -74,8 +72,6 @@ bool ModuleScene::Start()
 	//{
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
-
-	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
 }
@@ -133,12 +129,42 @@ bool ModuleScene::Update(float dt)
 
 		resetQuadtree = false;
 	}
-
-
-	///////////////////////
-	// Scripting
-	Scripting(dt);
 	
+	if (gameState == GameState::PLAYING)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
+		{
+			player->GetComponent<AudioSourceComponent>()->StopClip();
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
+		{
+			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	{
+		GameObject* anim = *(root->GetChilds().end() - 1);
+		anim = *(anim->GetChilds().end() - 1);
+
+		anim->GetComponent<AnimationComponent>()->Play("Capoeira");
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	{
+		GameObject* anim = *(root->GetChilds().end() - 1);
+		anim = *(anim->GetChilds().end() - 1);
+
+		anim->GetComponent<AnimationComponent>()->Play("Idle");
+	}
 
 	AudioManager::Get()->Render();
 
@@ -170,7 +196,7 @@ bool ModuleScene::Draw()
 
 		if (go->GetActive())
 		{
-			if (go != app->editor->GetGO()&& !go->isUI) go->Draw(nullptr);
+			if (go != app->editor->GetGO()) go->Draw(nullptr);
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
@@ -341,7 +367,7 @@ bool ModuleScene::LoadScene(const char* name)
 	DEBUG_LOG("Loading Scene");
 
 	RELEASE(root);
-	app->userInterface->UIGameObjects.clear();
+
 	//char* buffer = nullptr;
 
 	//app->fs->Load(name, &buffer);
@@ -370,17 +396,6 @@ bool ModuleScene::LoadScene(const char* name)
 				if (child->GetName() == std::string("Player"))
 				{
 					player = child;
-					// Register this camera as the default listener.
-					AkGameObjectID playerID = player->GetUUID();
-					AudioManager::Get()->SetDefaultListener(&playerID, player->GetComponent<TransformComponent>());
-				}
-				if (child->GetName() == std::string("Camera"))
-				{
-					camera = child;
-				}
-				if (child->GetName() == std::string("Camera"))
-				{
-					camera = child;
 				}
 			}
 		}
@@ -411,13 +426,12 @@ bool ModuleScene::LoadScene(const char* name)
 	}
 
 	referenceMap.clear();
-	
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	app->editor->SetGO(nullptr);
-	
+
 	return true;
 }
 
@@ -559,7 +573,6 @@ void ModuleScene::Play()
 	RELEASE_ARRAY(buf);
 
 	gameState = GameState::PLAYING;
-	player->GetComponent<AnimationComponent>()->Play("Idle");
 	gameTimer.ResetTimer();
 }
 
@@ -585,98 +598,4 @@ void ModuleScene::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
-}
-
-/////////////////////////
-
-void ModuleScene::Scripting(float dt)
-{
-	if (gameState == GameState::PLAYING)
-	{
-		// AUDIO
-		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
-		{
-			player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
-		{
-			player->GetComponent<AudioSourceComponent>()->StopClip();
-		}
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-		{
-			player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
-		{
-			player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
-		}
-
-		// ANIMATIONS
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT ||
-			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT ||
-			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT ||
-			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
-		{
-			player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
-			player->GetComponent<AnimationComponent>()->currAnim->loop = true;
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-			player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
-
-		//ACTIONS
-		btRigidBody* playerRB = player->GetComponent<RigidBodyComponent>()->GetBody();
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		{
-			float force = 20.0f;
-			GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
-			s->GetComponent<TransformComponent>()->SetPosition(player->GetOOB().CenterPoint());
-			s->GetComponent<TransformComponent>()->SetScale(float3(0.2f, 0.2f, 0.3f));
-			s->GetComponent<TransformComponent>()->UpdateTransform();
-
-			RigidBodyComponent* rigidBody;
-			s->CreateComponent(ComponentType::RIGID_BODY);
-			rigidBody = s->GetComponent<RigidBodyComponent>();
-			rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB, true); // Rigid Body of Player
-			rigidBody->GetBody()->applyCentralImpulse(player->GetComponent<TransformComponent>()->GetForward() *force); // Player front normalized
-		
-			app->physics->bullets.push_back(s);
-		}
-
-		float force = 1000.0f;
-		float3 front(0, 0, 1);
-		float3 right(1, 0, 0);
-
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-			SetVelocityPlayer(playerRB, right * force);
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-			SetVelocityPlayer(playerRB, -right * force);
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			SetVelocityPlayer(playerRB, front * force);
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			SetVelocityPlayer(playerRB, -front * force);
-
-		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE &&
-			app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_IDLE &&
-			app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_IDLE &&
-			app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE)
-		{
-			if (player->GetComponent<AnimationComponent>()->currAnim->state == "Walk")
-			{
-				player->GetComponent<AnimationComponent>()->currAnim->loop = false;
-				player->GetComponent<AnimationComponent>()->loopTime = 100.0f;
-			}
-			playerRB->clearForces();
-			playerRB->setLinearVelocity({0,0,0});
-		}
-	}
-}
-
-void ModuleScene::SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel)
-{
-	int velMax = 5;
-	playerRB->activate(true);
-	playerRB->applyCentralForce(vel);
-
-	if(playerRB->getLinearVelocity().norm() > velMax)
-		playerRB->setLinearVelocity(playerRB->getLinearVelocity().normalized() * velMax);
 }

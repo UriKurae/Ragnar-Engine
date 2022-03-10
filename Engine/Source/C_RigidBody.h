@@ -4,7 +4,6 @@
 
 class GameObject;
 class btRigidBody;
-enum class Axis;
 
 enum class CollisionType
 {
@@ -80,8 +79,6 @@ private:
 	PCylinder cylinder;
 	PPyramid cone;
 	PPlane plane;
-
-	int cylinderAxis = 3;
 
 	bool editMesh = false;
 	bool mainBody = false;

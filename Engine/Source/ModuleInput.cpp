@@ -88,8 +88,7 @@ bool ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	//Uint32 buttons = SDL_GetMouseState(&mouseX, &mouseY);
-	Uint32 buttons = SDL_GetGlobalMouseState(&mouseX, &mouseY);
+	Uint32 buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
 	mouseX /= SCREEN_SIZE;
 	mouseY /= SCREEN_SIZE;

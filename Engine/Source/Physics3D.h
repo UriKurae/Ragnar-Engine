@@ -20,13 +20,6 @@ class btTypedConstraint;
 
 class btRigidBody;
 class RigidBodyComponent;
-class GameObject;
-
-enum class Axis {
-	Y = 1,
-	X = 2,
-	Z = 3
-};
 
 class Physics3D : public Module
 {
@@ -45,7 +38,7 @@ public:
 	btRigidBody* CollisionShape(const PCube& cube, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PSphere& sphere, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PCapsule& capsule, RigidBodyComponent* component);
-	btRigidBody* CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component, Axis axis = Axis::Y);
+	btRigidBody* CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PPyramid& cone, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PPlane& plane, RigidBodyComponent* component);
 
@@ -59,8 +52,6 @@ public:
 
 	std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
 	std::vector<std::string> GetBodiesNames() { return bodiesNames; };
-
-	std::vector<GameObject*> bullets;
 
 	void SleepAllBodies();
 	void ActiveAllBodies();

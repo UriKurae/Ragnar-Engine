@@ -107,13 +107,9 @@ public:
 	std::string layer;
 	std::string prefabPath;
 
-	bool isUI = false;
-
 	std::vector<SerializedField*> csReferences;
-
-	std::vector<Component*> components;
 private:
-
+	std::vector<Component*> components;
 
 	GameObject* parent;
 	std::vector<GameObject*> children;
@@ -137,7 +133,7 @@ template<typename T>
 inline T* GameObject::GetComponent()
 {
 	T* component = nullptr;
-
+	
 	for (std::vector<Component*>::iterator i = components.begin(); i < components.end(); ++i)
 	{
 		component = dynamic_cast<T*>(*i);

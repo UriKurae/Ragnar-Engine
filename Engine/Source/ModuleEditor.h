@@ -26,7 +26,6 @@ public:
 	inline GameObject* GetGO() { return selected; }
 	inline Resource* GetResource() { return resource; }
 	inline GameObject* GetSelectedParent() { return selectedParent; }
-	inline GameView* GetGameView() { return gameView; }
 	
 	void SetResource(Resource* res);
 	void SetGO(GameObject* obj);
@@ -43,8 +42,6 @@ public:
 	std::vector<std::string> GetTags();
 	std::vector<std::string> GetLayers();
 
-
-
 private:
 	MainMenuBar mainMenuBar;
 
@@ -53,7 +50,6 @@ private:
 
 	Resource* resource;
 
-	GameView* gameView;
-
 	Viewport* viewport;
+	GameView* gameView;
 };
