@@ -34,6 +34,8 @@ public:
 	void SetTexture(std::shared_ptr<Resource> tex);
 	void EditorShader();
 
+	std::shared_ptr<Texture> GetTexture() { return diff; }
+
 private:
 	bool checker;
 	bool showTexMenu;

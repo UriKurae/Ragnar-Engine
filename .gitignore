@@ -60,7 +60,7 @@
 !Dependencies/Bullet/libx86/BulletDynamics_debug.lib
 !Dependencies/Bullet/libx86/LinearMath.lib
 !Dependencies/Bullet/libx86/LinearMath_debug.lib
-
+!Dependencies/freetype-2.10.0/freetype.lib
 
 # Executables
 *.exe

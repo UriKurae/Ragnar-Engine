@@ -6,6 +6,11 @@
 
 class GameObject;
 class CameraComponent;
+class ButtonComponent;
+class ComponentTransform2D;
+class SliderComponent;
+class ImageComponent;
+class CheckboxComponent;
 
 enum class ComponentType
 {
@@ -22,6 +27,22 @@ enum class ComponentType
 	ANIMATION,
 	BONE,
 	RIGID_BODY,
+	UI_BUTTON,
+	UI_IMAGE,
+	UI_CHECKBOX,
+	UI_SLIDER,
+	UI_INPUTBOX,
+	UI_CANVAS,
+	TRANFORM2D,
+};
+
+enum class State
+{
+	DISABLED,
+	NORMAL,
+	FOCUSED,
+	PRESSED,
+	SELECTED
 };
 
 class Component
