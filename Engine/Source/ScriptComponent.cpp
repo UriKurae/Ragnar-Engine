@@ -82,7 +82,7 @@ void ScriptComponent::OnEditor()
 			
 			for (int i = 0; i < fields.size(); i++)
 			{
-				DropField(fields[i], "_GAMEOBJECT");
+				DropField(fields[i], "HierarchyItem");
 			}
 			ImGui::Separator();
 			for (int i = 0; i < methods.size(); i++)
@@ -133,18 +133,23 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 
 	case MonoTypeEnum::MONO_TYPE_CLASS:
 
-		if (strcmp(mono_type_get_name(mono_field_get_type(field.field)), "DiamondEngine.GameObject") != 0)
+		if (strcmp(mono_type_get_name(mono_field_get_type(field.field)), "RagnarEngine.GameObject") != 0)
 		{
 			ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "The class %s can't be serialized yet", mono_type_get_name(mono_field_get_type(field.field)));
 			break;
 		}
 
-		ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), (field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
+		
+		ImGui::Button((field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
 		if (ImGui::BeginDragDropTarget())
 		{
-			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(dropType))
+			if (const ImGuiPayload* go = ImGui::AcceptDragDropPayload(dropType))
 			{
-				//field.fiValue.goValue = app->editor->GetDraggingGO();
+				if (go)
+				{
+					uint uuid = *(const uint*)(go->Data);
+					field.fiValue.goValue = app->scene->GetGoByUuid(uuid);
+				}
 				SetField(field.field, field.fiValue.goValue);
 			}
 			ImGui::EndDragDropTarget();
@@ -203,9 +208,13 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), (cpp_obj == nullptr) ? "None" : cpp_obj->name.c_str());
 				if (ImGui::BeginDragDropTarget())
 				{
-					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(dropType))
+					if (const ImGuiPayload* go = ImGui::AcceptDragDropPayload(dropType))
 					{
-						//cpp_obj = app->editor->GetDraggingGO();
+						if (go)
+						{
+							uint uuid = *(const uint*)(go->Data);
+							cpp_obj = app->scene->GetGoByUuid(uuid);
+						}
 						arrayElementGO = app->moduleMono->GoToCSGO(cpp_obj);
 						mono_array_set(field.fiValue.arrValue, MonoObject*, i, arrayElementGO);
 					}
@@ -300,7 +309,7 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 		{
-			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "DiamondEngine.GameObject") == 0)
+			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "RagnarEngine.GameObject") == 0)
 				app->scene->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
 
 			break;
