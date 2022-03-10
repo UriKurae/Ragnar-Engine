@@ -67,22 +67,25 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
-			math::float4x4 tr = goSel->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
+			TransformComponent* h = goSel->GetComponent<TransformComponent>();
+			if (h) {
+				math::float4x4 tr = h->GetGlobalTransform().Transposed();
 
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr(), 0, (float*)snap);
-			static bool firstMove = false;
-			if (ImGuizmo::IsUsing())
-			{
-				GameObject* go = goSel;
-				if (!firstMove)
+				ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr(), 0, (float*)snap);
+				static bool firstMove = false;
+				if (ImGuizmo::IsUsing())
 				{
-					firstMove = true;
+					GameObject* go = goSel;
+					if (!firstMove)
+					{
+						firstMove = true;
 
-					CommandDispatcher::Execute(new MoveGameObjectCommand(go));
+						CommandDispatcher::Execute(new MoveGameObjectCommand(go));
+					}
+					go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 				}
-				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				else firstMove = false;
 			}
-			else firstMove = false;
 		}
 
 		// TODO: Not the best place to call this

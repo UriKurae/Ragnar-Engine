@@ -413,10 +413,10 @@ void MonoManager::InitMono()
 
 	MonoImageOpenStatus sts;
 
-	if (app->fs->Exists("Library/ScriptsAssembly/Assembly-CSharp.dll") == false)
+	if (app->fs->Exists("Assembly-CSharp.dll") == false)
 		assert(false && "You need to install the 'Visual Studio .NET desktop development pack' to run the engine");
 
-	assembly = mono_assembly_open("Library/ScriptsAssembly/Assembly-CSharp.dll", &sts);
+	assembly = mono_assembly_open("Assembly-CSharp.dll", &sts);
 	if (!assembly)
 		LOG(LogType::L_ERROR, "ERROR");
 
