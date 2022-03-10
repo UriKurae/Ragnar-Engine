@@ -57,11 +57,22 @@ namespace RagnarEngine
             get;
         }
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 GetForward();
+        public extern Vector3 forward
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 GetRight();
+        public extern Vector3 right
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
+        public extern Vector3 up
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
 
     }
 }

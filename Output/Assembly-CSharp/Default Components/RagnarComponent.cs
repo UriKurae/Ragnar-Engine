@@ -7,13 +7,6 @@ namespace RagnarEngine
 {
     public enum ComponentType
     {
-        //None,
-        //Transform,
-        //MeshRenderer,
-        //Material,
-        //Camera,
-        //Script,
-        //Count,
         NONE = 0,
         TRANSFORM,
         MESH_RENDERER,
@@ -57,8 +50,5 @@ namespace RagnarEngine
         {
             return type;
         }
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void Instantiate(string name, Vector3 position, Quaternion rotation);
     }
 }

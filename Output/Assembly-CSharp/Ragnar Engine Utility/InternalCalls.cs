@@ -22,6 +22,10 @@ namespace RagnarEngine
         //    Create3DObject(name, (int)primitiveType, position, rotation);
         //}
 
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void Instantiate(string name, Vector3 position, Quaternion rotation);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Create3DObject(object name, int primitiveType, object position, object rotation);
 
