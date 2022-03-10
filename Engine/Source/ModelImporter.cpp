@@ -18,7 +18,6 @@
 
 #include "assimp/Importer.hpp"
 #include "assimp/postProcess.h"
-#include "assimp/scene.h"
 
 #include <string>
 #include "Profiling.h"

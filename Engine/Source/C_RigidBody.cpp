@@ -86,8 +86,8 @@ void RigidBodyComponent::SetBoundingBox()
 	case CollisionType::CYLINDER:
 		cylinder.FromRS(owner->GetComponent<TransformComponent>()->GetRotation(), { 1,1,1 });
 		cylinder.SetPos(pos);
-		cylinder.radius = radius.MinElement();
-		cylinder.height = size.z;
+		cylinder.radius = radius.MaxElementXZ();
+		cylinder.height = size.y;
 		break;
 	case CollisionType::CONE:
 		cone.FromRS(owner->GetComponent<TransformComponent>()->GetRotation(), { 1,1,1 });
@@ -345,22 +345,6 @@ void RigidBodyComponent::EditCollisionMesh()
 		if (ImGui::DragFloat("##Radius", &cylinder.radius, 0.1f, 0.1f, INFINITE)) editMesh = true;
 		ImGui::Text("Height: "); ImGui::SameLine();
 		if (ImGui::DragFloat("##Height", &cylinder.height, 0.1f, 0.1f, INFINITE)) editMesh = true;
-
-		if (ImGui::RadioButton("X", (Axis)cylinderAxis == Axis::X)) {
-			cylinderAxis = (int)Axis::X;
-			CreateBody();
-		}
-		ImGui::SameLine();
-		if (ImGui::RadioButton("Y", (Axis)cylinderAxis == Axis::Y)) {
-			cylinderAxis = (int)Axis::Y;
-			CreateBody();
-		}
-		ImGui::SameLine();
-		if (ImGui::RadioButton("Z", (Axis)cylinderAxis == Axis::Z)) {
-			cylinderAxis = (int)Axis::Z;
-			CreateBody();		
-		}
-
 		break;
 	case CollisionType::CONE:
 		ImGui::Text("Radius: "); ImGui::SameLine();
@@ -400,15 +384,10 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
-		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
+		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, 0.0f));
 		break;
 	case CYLINDER_SHAPE_PROXYTYPE:
-		if ((Axis)cylinderAxis == Axis::X)
-			body->getCollisionShape()->setLocalScaling(btVector3(cylinder.height * 0.5f, cylinder.radius, 0.0f));
-		if ((Axis)cylinderAxis == Axis::Y)
-			body->getCollisionShape()->setLocalScaling(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
-		if ((Axis)cylinderAxis == Axis::Z)
-			body->getCollisionShape()->setLocalScaling(btVector3(cylinder.radius, 0.0f, cylinder.height * 0.5f));
+		body->getCollisionShape()->setLocalScaling(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
 		break;
 	case CONE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
@@ -455,7 +434,7 @@ void RigidBodyComponent::CreateBody()
 		body = app->physics->CollisionShape(capsule, this);
 		break;
 	case CollisionType::CYLINDER:
-		body = app->physics->CollisionShape(cylinder, this, (Axis)cylinderAxis);
+		body = app->physics->CollisionShape(cylinder, this);
 		break;
 	case CollisionType::CONE:
 		body = app->physics->CollisionShape(cone, this);
@@ -505,7 +484,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 
 	//Collision dimensions
 	collisionType = (CollisionType)(int)node.GetJsonNumber("CollisionType");
-	if(collisionType != CollisionType::BOX) SetCollisionType(collisionType);
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -536,6 +514,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	default:
 		break;
 	}
+	if(collisionType != CollisionType::BOX) SetCollisionType(collisionType);
 	UpdateCollisionMesh();
 
 	//Collision physics

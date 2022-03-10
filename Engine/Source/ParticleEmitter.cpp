@@ -58,6 +58,8 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	data.drawCalls = 0;
 
 	showTexMenu = false;
+
+	effect = nullptr;
 }
 
 ParticleEmitter::~ParticleEmitter()
@@ -67,6 +69,14 @@ ParticleEmitter::~ParticleEmitter()
 	RELEASE(data.indexBuffer);
 	RELEASE_ARRAY(data.vertexBufferBase);
 	data.vertexBufferPtr = nullptr;
+
+	RELEASE(effect);
+	///delete effect;
+
+	for (int i = 0; i < effects.size(); i++)
+	{
+		delete effects[i];
+	}
 }
 
 void ParticleEmitter::Emit(float dt)
@@ -445,21 +455,11 @@ void ParticleEmitter::SetParticlesPerSecond(float particlesPerSec)
 
 void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 {
-	ParticleEffect* effect = nullptr;
 
 	switch (type)
 	{
 	case ParticleEffectType::NO_TYPE:
 		effects[(int)ParticleEffectType::NO_TYPE] = effect;
-		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		//TODO
-		effects[(int)ParticleEffectType::COLOR_OVER_LIFETIME] = effect;
-		break;
-	case ParticleEffectType::SIZE_OVER_LIFETIME:
-		//TODO
-		//effect = (ParticleEffect*)new ParticleEffect_Size();
-		effects[(int)ParticleEffectType::SIZE_OVER_LIFETIME] = effect;
 		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		effect = new ParticleEffect_Velocity();
@@ -492,12 +492,6 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 	{
 	case ParticleEffectType::NO_TYPE:
 		return "No Type";
-		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		return "Color Effect";
-		break;
-	case ParticleEffectType::SIZE_OVER_LIFETIME:
-		return "Size Effect";
 		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		return "Velocity Effect";

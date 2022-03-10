@@ -199,8 +199,6 @@ namespace RSphere
 				s = (float)j / 20;
 				t = (float)i / 20;
 				vertex.texCoords = { s, t };
-
-				vertices.push_back(vertex);
 			}
 		}
 
