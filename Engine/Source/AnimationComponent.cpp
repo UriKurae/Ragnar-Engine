@@ -13,7 +13,7 @@
 
 #include "Imgui/imgui_stdlib.h"
 
-AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f)
+AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(0.0f)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
@@ -132,6 +132,8 @@ void AnimationComponent::OnEditor()
 			animations.erase(animations.end() - 1);
 		}
 
+		ImGui::DragFloat("Interp. Velocity", &interpolatingVel, 0.5f, 1.0f);
+
 		ImGui::Separator();
 
 		if (currAnim && currAnim->anim)
@@ -227,8 +229,12 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 		}
 		else if (lastBone && lastAnim != currAnim)
 		{
-			bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating);
-			if (!interpolating) currentTime = 0.0f;
+			bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
+			if (!interpolating)
+			{
+				loopTime = 0.0f;
+				currentTime = 0.0f;
+			}
 		}
 		nodeTransform = bone->GetTransform();
 	}
@@ -408,10 +414,17 @@ void AnimationComponent::Play(std::string state)
 		{
 			if (animQueue.empty())
 			{
-				lastAnim = currAnim;
+				if (!interpolating) lastAnim = currAnim;
+
 				currAnim = &animations[i];
 				lastCurrentTime = currentTime;
-				if (lastAnim != currAnim) interpolating = true;
+	
+				if (lastAnim != currAnim)
+				{
+					currentTime = 0.0f;
+					loopTime = 0.0f;
+					interpolating = true;
+				}
 				playing = true;
 			}
 			else

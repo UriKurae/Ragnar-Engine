@@ -44,7 +44,7 @@ public:
 	Bone(BoneData boneData);
 
 	void Update(float animationTime);
-	void UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating);
+	void UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
 
 	BoneData& GetData() { return data; }
 
@@ -62,9 +62,9 @@ private:
 	float4x4 InterpolateScaling(float animationTime);
 
 	// Interpolations for between animations
-	float4x4 InterpolatePosition(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating);
-	float4x4 InterpolateRotation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating);
-	float4x4 InterpolateScaling(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating);
+	float4x4 InterpolatePosition(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
+	float4x4 InterpolateRotation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
+	float4x4 InterpolateScaling(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
 
 
 	float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime);

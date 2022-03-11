@@ -50,6 +50,7 @@ public:
 	bool playing;
 
 	bool interpolating;
+	float interpolatingVel;
 
 	float lastCurrentTime;
 	float currentTime;
