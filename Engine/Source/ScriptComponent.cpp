@@ -48,9 +48,16 @@ bool ScriptComponent::Update(float dt)
 	if (app->scene->GetGameState() == GameState::NOT_PLAYING || app->scene->GetGameState() == GameState::PAUSE || updateMethod == nullptr)
 		return false;
 
-	ScriptComponent::runningScript = this; // I really think this is the peak of stupid code, but hey, it works, slow as hell but works.
-
 	MonoObject* exec = nullptr;
+	static bool firstUpdate = true;
+	if (firstUpdate)
+	{
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
+		firstUpdate = false;
+	}
+
+	ScriptComponent::runningScript = this;
+
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
 
 	if (exec != nullptr)
@@ -420,10 +427,13 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	MonoClass* goClass = mono_object_get_class(mono_gchandle_get_target(noGCobject));
 	uintptr_t ptr = reinterpret_cast<uintptr_t>(this);
 	mono_field_set_value(mono_gchandle_get_target(noGCobject), mono_class_get_field_from_name(goClass, "pointer"), &ptr);
-	//std::string methodName = scriptName + std::string(":Update");
-	MonoMethodDesc* mdesc = mono_method_desc_new(":Update", false);
+
+	MonoMethodDesc* mdesc = mono_method_desc_new(":Start", false);
+	startMethod = mono_method_desc_search_in_class(mdesc, klass);
+	mono_method_desc_free(mdesc);
+
+	mdesc = mono_method_desc_new(":Update", false);
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
-	//updateMethod = mono_method_desc_search_in_image(mdesc, app->moduleMono->image);
 	mono_method_desc_free(mdesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);

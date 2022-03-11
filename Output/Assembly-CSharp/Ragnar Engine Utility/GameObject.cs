@@ -13,12 +13,12 @@ namespace RagnarEngine
 
         List<RagnarComponent> components;
 
-        public Transform transform;
-        public AudioSource audioSource;
-        public Rigidbody rigidBody;
-        public Animation animation;
-        public Camera camera;
-        
+        private Transform trans;
+        //public AudioSource audioSource;
+        //public Rigidbody rigidBody;
+        //public Animation animation;
+        //public Camera camera;
+
         public GameObject()
         {
             name = "Empty";
@@ -30,11 +30,11 @@ namespace RagnarEngine
             name = _name;
             pointer = ptr;
 
-            transform = new Transform();
-            transform.pointer = transPTR;
+            trans = new Transform();
+            trans.pointer = transPTR;
 
             components = new List<RagnarComponent>();
-            components.Add(transform);
+            components.Add(trans);
 
             //audioSource = new AudioSource();
             //audioSource.pointer = audioPTR;
@@ -71,20 +71,21 @@ namespace RagnarEngine
                 type = (int)RagnarComponent.componentTable[typeof(T)];
 
             T comp = AddComponent<T>(type);
-            if(components.Contains(comp) == false)
+            if (components.Contains(comp) == false)
                 components.Add(comp);
-            
+
             return comp;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern internal T AddComponent<T>(int componentType);
 
-        //public void CreateComponent(ComponentType type)
-        //{
-        //    AddComponent((int)type - 1); // TODO: Very temporary. FIND A BETTER WAY TO DO THIS
-        //}
-        //[MethodImplAttribute(MethodImplOptions.InternalCall)]
-        //public extern void AddComponent(int componentType);
+        public Transform transform
+        {
+            get
+            {
+                return trans;
+            }
+        }
     }
 }

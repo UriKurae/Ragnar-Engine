@@ -7,11 +7,15 @@ public class Player : RagnarComponent
 	public int velocity = 5;
 	public GameObject target = null;
 
+    Rigidbody rb;
+
+    public void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
+
     public void Update()
 	{
-        Transform tr = gameObject.GetComponent<Transform>();
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-
         if (Input.GetKey(REKeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.A) == KeyState.KEY_DOWN
 			|| Input.GetKey(REKeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.D) == KeyState.KEY_DOWN)
 		{
