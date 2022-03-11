@@ -44,13 +44,13 @@ public class Player : RagnarComponent
         
         if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(1000, 0, 0);
+            Vector3 f = new Vector3(-1000, 0, 0);
             rb.ApplyCentralForce(f);
         }
 
         else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(-1000, 0, 0);
+            Vector3 f = new Vector3(1000, 0, 0);
             rb.ApplyCentralForce(f);
         }
 
@@ -71,7 +71,8 @@ public class Player : RagnarComponent
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 1;
             GameObject bullet = InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, pos);
-            
+            bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
+
             Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
             bulletRb.IgnoreCollision(gameObject, true);
             bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);

@@ -23,11 +23,11 @@ namespace RagnarEngine
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
             if (rb != null)
-                SetIgnoreCollision(other, value);
+                SetIgnoreCollision(rb, value);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private void SetIgnoreCollision(GameObject go, bool value);
+        extern private void SetIgnoreCollision(Rigidbody other, bool value);
 
         public extern Vector3 linearVelocity
         {

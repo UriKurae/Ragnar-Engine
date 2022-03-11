@@ -39,14 +39,17 @@ void SetLinearVelocity(MonoObject* go, MonoObject* velocity)
 	rb->GetBody()->setLinearVelocity({ vel.x, vel.y, vel.z });
 }
 
-void SetIgnoreCollision(MonoObject* go, bool value)
+void SetIgnoreCollision(MonoObject* go, MonoObject* other, bool value)
 {
 	char* nameGo = mono_string_to_utf8(mono_object_to_string(go, 0));
+	char* nameGo2 = mono_string_to_utf8(mono_object_to_string(other, 0));
 
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	RigidBodyComponent* otherRb = GetComponentMono<RigidBodyComponent*>(other);
+
 	btRigidBody* body = rb->GetBody();
 	body->activate(true);
-	body->setIgnoreCollisionCheck(body, value);
+	body->setIgnoreCollisionCheck(otherRb->GetBody(), value);
 }
 
 MonoObject* GetLinearVelocity(MonoObject* go)

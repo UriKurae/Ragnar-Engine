@@ -41,20 +41,13 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
-
-        public extern Vector3 localScale
+        
+        public extern Vector3 scale
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
-
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
-        }
-
-        public extern Vector3 globalScale
-        {
-            [MethodImplAttribute(MethodImplOptions.InternalCall)]
-            get;
         }
 
         public extern Vector3 forward

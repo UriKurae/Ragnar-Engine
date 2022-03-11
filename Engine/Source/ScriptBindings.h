@@ -110,7 +110,7 @@ void SetPosition(MonoObject* go, MonoObject* position)
 	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
 	{
 		tr->SetPosition(app->moduleMono->UnboxVector(position));
-		tr->ForceUpdateTransform();
+		tr->UpdateTransform();
 	}
 }
 
@@ -120,7 +120,7 @@ void SetRotation(MonoObject* go, MonoObject* rotation)
 	{
 		// Should update inspector rotation too?
 		tr->SetRotation(app->moduleMono->UnboxQuat(rotation));
-		tr->ForceUpdateTransform();
+		tr->UpdateTransform();
 	}
 }
 
@@ -129,10 +129,9 @@ void SetScale(MonoObject* go, MonoObject* scale)
 	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
 	{
 		tr->SetScale(app->moduleMono->UnboxVector(scale));
-		tr->ForceUpdateTransform();
+		tr->UpdateTransform();
 	}
 }
-
 // Transform ========
 
 
