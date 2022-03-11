@@ -26,7 +26,7 @@ public:
 
 	bool Update(float dt) override;
 
-	void CalculateBoneTransform(HierarchyData& data, HierarchyData& lastData, float4x4 parentTransform);
+	void CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform);
 
 	float4x4 InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform);
 	float4x4 InterpolateWithOneBone(float4x4& transform, Bone& bone);

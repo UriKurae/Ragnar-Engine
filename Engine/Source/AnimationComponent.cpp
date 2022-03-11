@@ -202,19 +202,16 @@ bool AnimationComponent::Update(float dt)
 		{
 			loopTime += dt;
 			// 60 is the frames per second that we want
-			currentTime += 60.0f * dt;
+			currentTime += 24.0f * dt;
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
-		HierarchyData lastData;
-		if (lastAnim->anim) lastData = lastAnim->anim->GetHierarchyData();
-		else lastData.name = "None";
-		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), lastData, float4x4::identity);
+		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
 	}
 
 	return true;
 }
 
-void AnimationComponent::CalculateBoneTransform(HierarchyData& data, HierarchyData& lastData, float4x4 parentTransform)
+void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform)
 {
 	std::string nodeName = data.name;
 	float4x4 nodeTransform = data.transform;
@@ -227,28 +224,13 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, HierarchyDa
 		if (!interpolating)
 		{
 			bone->Update(currentTime);
-			nodeTransform = bone->GetTransform();
 		}
-		else if (lastAnim && currAnim != lastAnim)
+		else if (lastBone && lastAnim != currAnim)
 		{
-			if (lastBone)
-			{
-				bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime);
-				nodeTransform = bone->GetTransform();
-			}
-			else
-			{
-				nodeTransform = InterpolateWithOneBone(lastData.transform, *bone);
-			}
+			bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating);
+			if (!interpolating) currentTime = 0.0f;
 		}
-	}
-	else if (lastBone && interpolating && currAnim != lastAnim)
-	{
-		nodeTransform = InterpolateWithOneBone(*lastBone, data.transform);
-	}
-	else if (interpolating && currAnim != lastAnim && lastData.name != "None")
-	{
-		nodeTransform = InterpolateWithoutBones(data.transform, lastData.transform);
+		nodeTransform = bone->GetTransform();
 	}
 
 	float4x4 globalTransformation = parentTransform * nodeTransform;
@@ -262,7 +244,7 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, HierarchyDa
 	}
 
 	for (int i = 0; i < data.childrenCount; ++i)
-		CalculateBoneTransform(data.children[i], lastData.children[i], globalTransformation);
+		CalculateBoneTransform(data.children[i], globalTransformation);
 }
 
 float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform)
