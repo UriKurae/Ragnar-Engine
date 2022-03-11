@@ -1,10 +1,9 @@
 using System;
 using RagnarEngine;
 
-public class test : RagnarComponent
+public class Player : RagnarComponent
 {
-	public int prueba = 1;
-	public int prueba2 = 5;
+	public int velocity = 5;
 	public GameObject target = null;
 	
 	public void Update()
@@ -37,26 +36,26 @@ public class test : RagnarComponent
         //Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x - 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
+            tr.localPosition = new Vector3(tr.localPosition.x - velocity * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
             //Vector3 f = new Vector3(10000 * Time.deltaTime, 0, 0);
             //rb.ApplyCentralForce(f);
         }
 
         else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x + 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
+            tr.localPosition = new Vector3(tr.localPosition.x + velocity * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
             //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
         }
 
         else if (Input.GetKey(REKeyCode.W) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z + 5 * Time.deltaTime);
+            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z + velocity * Time.deltaTime);
             //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
         }
 
         else if (Input.GetKey(REKeyCode.S) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - 5 * Time.deltaTime);
+            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - velocity * Time.deltaTime);
             //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
         }
 
@@ -72,11 +71,3 @@ public class test : RagnarComponent
     }
 
 }
-
-
-
-
-
-
-
-
