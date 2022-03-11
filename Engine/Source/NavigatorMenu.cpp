@@ -30,20 +30,26 @@ bool NavigatorMenu::Start()
 bool NavigatorMenu::Update(float dt)
 {
     ImGui::Begin(ICON_FA_WALKING" Navigator", &active);
-    if (ImGui::Button("Bake"))
+    ImGui::Spacing();
+    ImGui::Spacing();
+    ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x - 180) / 2);
+    if (ImGui::Button("Bake NavMesh", ImVec2(180.0f, 20.0f)))
     {
         app->navMesh->BakeNavMesh();
     }
+    ImGui::Spacing();
     ImGui::Spacing();
     ImGui::Spacing();
 
     ImGui::Text("Agent Properties");
     ImGui::Separator();
     ImGui::Spacing();
+    ImGui::PushItemWidth(180);
     ImGui::DragFloat("Agent radius", &buildSettings->agentRadius, 0.1f);
     ImGui::DragFloat("Agent height", &buildSettings->agentHeight, 0.1f);
     ImGui::DragFloat("Agent max climb", &buildSettings->agentMaxClimb, 0.1f);
     ImGui::DragFloat("Agent max slope", &buildSettings->agentMaxSlope, 0.1f);
+    ImGui::PopItemWidth();
     ImGui::Spacing();
     ImGui::Spacing();
     ImGui::Spacing();
@@ -51,6 +57,7 @@ bool NavigatorMenu::Update(float dt)
     ImGui::Text("NavMesh Properties");
     ImGui::Separator();
     ImGui::Spacing();
+    ImGui::PushItemWidth(180);
     ImGui::DragFloat("Cell size", &buildSettings->cellSize, 0.1f);
     ImGui::DragFloat("Cell hight", &buildSettings->cellHeight, 0.1f);
     ImGui::DragFloat("Region minimum size", &buildSettings->regionMinSize, 0.1f);
@@ -60,6 +67,7 @@ bool NavigatorMenu::Update(float dt)
     ImGui::DragFloat("Detail sample distance", &buildSettings->detailSampleDist, 0.1f);
     ImGui::DragFloat("Detail sample max error", &buildSettings->detailSampleMaxError, 0.1f);
     ImGui::DragFloat("Tile Size", &buildSettings->tileSize, 0.1f);
+    ImGui::PopItemWidth();
     ImGui::Spacing();
     ImGui::Spacing();
     ImGui::Spacing();

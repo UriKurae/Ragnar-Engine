@@ -19,8 +19,7 @@ enum class ComponentType
 	AUDIO_REVERB_ZONE,
 	RIGID_BODY,
 	LIGHT,
-	DETOUR,
-	RECAST,
+	NAVAGENT,
 };
 
 class Component

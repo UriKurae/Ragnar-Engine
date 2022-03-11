@@ -10,7 +10,7 @@
 
 NavAgentComponent::NavAgentComponent(GameObject* own, TransformComponent* trans)
 {
-	this->type = ComponentType::DETOUR;
+	this->type = ComponentType::NAVAGENT;
 }
 
 NavAgentComponent::~NavAgentComponent()
@@ -28,51 +28,18 @@ void NavAgentComponent::OnEditor()
 {
 	ImGui::PushID(this);
 
-	if (ImGui::CollapsingHeader(ICON_FA_CUBES" Recast"))
+	if (ImGui::CollapsingHeader(ICON_FA_RUNNING" NavAgent"))
 	{
-		ImGui::Separator();
-		ImGui::Columns(2, NULL, false);
-		ImGui::Spacing();
 		ImGui::Text("Steering");
+		ImGui::Separator();
 		ImGui::Spacing();
-		ImGui::Spacing();
-		ImGui::Text("Speed");
-		ImGui::Spacing();
-		ImGui::Text("Angular Speed");
-		ImGui::Spacing();
-		ImGui::Text("Stopping Distance");
-		ImGui::Spacing();
-		ImGui::NextColumn();
+		ImGui::PushItemWidth(180);
+		ImGui::DragFloat("Speed", &properties.speed, 0.1f);
+		ImGui::DragFloat("Angular", &properties.angularSpeed, 0.1f);
+		ImGui::DragFloat("Stopping Distance", &properties.stoppingDistance, 0.1f);
+		ImGui::PopItemWidth();
 
-		char buffer[50];
-
-		ImGui::Dummy({ 0,17 });
-		sprintf_s(buffer, 50, "%.2f", properties.speed);
-		if (ImGui::InputText("##speed", &buffer[0], sizeof(buffer)))
-		{
-			if (buffer[0] != '\0') {
-				properties.speed = strtod(buffer, NULL);
-			}
-		}
-
-		sprintf_s(buffer, 50, "%.2f", properties.angularSpeed);
-		if (ImGui::InputText("##angularSpeed", &buffer[0], sizeof(buffer)))
-		{
-			if (buffer[0] != '\0') {
-				properties.angularSpeed = strtod(buffer, NULL);
-			}
-		}
-
-		sprintf_s(buffer, 50, "%.2f", properties.stoppingDistance);
-		if (ImGui::InputText("##stoppingDistance", &buffer[0], sizeof(buffer)))
-		{
-			if (buffer[0] != '\0') {
-				properties.stoppingDistance = strtod(buffer, NULL);
-			}
-		}
-
-
-		ImGui::NextColumn();
+		ComponentOptions(this);
 	}
 	ImGui::PopID();
 }

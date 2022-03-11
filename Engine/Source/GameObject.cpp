@@ -128,14 +128,9 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::RIGID_BODY);
       newComponent = false;
 		}
-		if (ImGui::Selectable("Detour"))
+		if (ImGui::Selectable("NavAgent"))
 		{
-			CreateComponent(ComponentType::DETOUR);
-			newComponent = false;
-		}
-		if (ImGui::Selectable("Recast"))
-		{
-			CreateComponent(ComponentType::RECAST);
+			CreateComponent(ComponentType::NAVAGENT);
 			newComponent = false;
 		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -213,10 +208,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
     break;
-	case ComponentType::DETOUR:
-		//component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
-		break;
-	case ComponentType::RECAST:
+	case ComponentType::NAVAGENT:
 		component = new NavAgentComponent(this, GetComponent<TransformComponent>());
 		break;
 	case ComponentType::MATERIAL:
