@@ -86,6 +86,8 @@ bool MonoManager::Init(JsonParsing& node)
 
 	// Rigidbody =================
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
+	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralImpulse", ApplyCentralImpulse);
+	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyTorque", ApplyTorque);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetIgnoreCollision", SetIgnoreCollision);
 	mono_add_internal_call("RagnarEngine.Rigidbody::set_linearVelocity", SetLinearVelocity);
 	mono_add_internal_call("RagnarEngine.Rigidbody::get_linearVelocity", GetLinearVelocity);

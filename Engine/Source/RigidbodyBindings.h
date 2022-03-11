@@ -29,6 +29,24 @@ void ApplyCentralForce(MonoObject* go, MonoObject* force)
 	body->applyCentralForce(f);
 }
 
+void ApplyCentralImpulse(MonoObject* go, MonoObject* impulse)
+{
+	float3 f = app->moduleMono->UnboxVector(impulse);
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	btRigidBody* body = rb->GetBody();
+	body->activate(true);
+	body->applyCentralImpulse(f);
+}
+
+void ApplyTorque(MonoObject* go, MonoObject* torque)
+{
+	float3 f = app->moduleMono->UnboxVector(torque);
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	btRigidBody* body = rb->GetBody();
+	body->activate(true);
+	body->applyTorque(f);
+}
+
 void SetLinearVelocity(MonoObject* go, MonoObject* velocity)
 {
 	char* nameGo = mono_string_to_utf8(mono_object_to_string(go, 0));

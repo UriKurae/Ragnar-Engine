@@ -17,6 +17,12 @@ namespace RagnarEngine
         public extern void ApplyCentralForce(Vector3 force);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void ApplyCentralImpulse(Vector3 impulse);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void ApplyTorque(Vector3 torque);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void ClearForces();
 
         public void IgnoreCollision(GameObject other, bool value)

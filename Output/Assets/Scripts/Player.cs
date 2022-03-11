@@ -76,9 +76,10 @@ public class Player : RagnarComponent
             Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
             bulletRb.IgnoreCollision(gameObject, true);
             bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);
-            
+
             AudioSource audio = gameObject.GetComponent<AudioSource>();
             audio.PlayClip("Shot");
         }
     }
 }
+
