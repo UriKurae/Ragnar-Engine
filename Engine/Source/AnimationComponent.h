@@ -26,7 +26,11 @@ public:
 
 	bool Update(float dt) override;
 
-	void CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform);
+	void CalculateBoneTransform(HierarchyData& data, HierarchyData& lastData, float4x4 parentTransform);
+
+	float4x4 InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform);
+	float4x4 InterpolateWithOneBone(float4x4& transform, Bone& bone);
+	float4x4 InterpolateWithOneBone(Bone& bone, float4x4& transform);
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
@@ -45,12 +49,16 @@ public:
 	bool showAnimMenu = false;
 	bool playing;
 
+	bool interpolating;
+
+	float lastCurrentTime;
 	float currentTime;
 	float loopTime;
 	float deltaTime;
 
 	std::vector<float4x4> finalBoneMatrices;
 
+	AnimState* lastAnim;
 	AnimState* currAnim;
 	std::vector<AnimState> animations;
 
