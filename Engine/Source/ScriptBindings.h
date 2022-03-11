@@ -168,6 +168,31 @@ void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* positi
 	tr->SetRotation(r);
 }
 
+MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObject* position)
+{
+	Object3D t = static_cast<Object3D>(primitiveType);
+	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+	go->SetName(goName);
+	mono_free(goName);
+
+	float3 p = app->moduleMono->UnboxVector(position);
+	TransformComponent* tr = go->GetComponent<TransformComponent>();
+	tr->SetPosition(p);
+
+	return app->moduleMono->GoToCSGO(go);
+}
+
+MonoObject* AddComponentMono(MonoObject* go, int componentType)
+{
+	char* goName = mono_string_to_utf8(mono_object_to_string(go, 0));
+
+	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
+	Component* comp = owner->CreateComponent(static_cast<ComponentType>(componentType));
+
+	return app->moduleMono->ComponentToCS(comp);
+}
+
 // GameObject =======================
 
 

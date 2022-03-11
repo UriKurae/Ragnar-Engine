@@ -1,4 +1,5 @@
 using System;
+
 using RagnarEngine;
 
 public class test : RagnarComponent
@@ -6,8 +7,8 @@ public class test : RagnarComponent
 	public int prueba = 1;
 	public int prueba2 = 5;
 	public GameObject target = null;
-	
-	public void Update()
+
+    public void Update()
 	{
 		if (Input.GetKey(REKeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.A) == KeyState.KEY_DOWN
 			|| Input.GetKey(REKeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.D) == KeyState.KEY_DOWN)
@@ -34,35 +35,44 @@ public class test : RagnarComponent
 
 
         Transform tr = gameObject.GetComponent<Transform>();
-        //Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x - 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
             //Vector3 f = new Vector3(10000 * Time.deltaTime, 0, 0);
             //rb.ApplyCentralForce(f);
+            rb.linearVelocity += new Vector3(-50 * Time.deltaTime, 0, 0);
+
         }
 
         else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x + 5 * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
-            //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            //Vector3 f = new Vector3(-10000 * Time.deltaTime, 0, 0);
+            //rb.ApplyCentralForce(f);
+            rb.linearVelocity += new Vector3(50 * Time.deltaTime, 0, 0);
         }
 
         else if (Input.GetKey(REKeyCode.W) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z + 5 * Time.deltaTime);
-            //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            //Vector3 f = new Vector3(0, 0, 10000 * Time.deltaTime);
+            //rb.ApplyCentralForce(f);
+            rb.linearVelocity += new Vector3(0, 0, 50 * Time.deltaTime);
+
         }
 
         else if (Input.GetKey(REKeyCode.S) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - 5 * Time.deltaTime);
-            //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            //tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - 5 * Time.deltaTime);
+            //Vector3 f = new Vector3(0, 0, -10000 * Time.deltaTime);
+            //rb.ApplyCentralForce(f);
+            rb.linearVelocity += new Vector3(0, 0, -50 * Time.deltaTime);
         }
 
         if (Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
         {
-            InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, Vector3.zero, Quaternion.identity);
+            GameObject bullet = InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, gameObject.transform.globalPosition);
+            Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
+            bulletRb.IgnoreCollision(gameObject, true);
+            bulletRb.linearVelocity += new Vector3(0, 1000 * Time.deltaTime, 0);
             AudioSource audio = gameObject.GetComponent<AudioSource>();
             audio.PlayClip("Shot");
         }

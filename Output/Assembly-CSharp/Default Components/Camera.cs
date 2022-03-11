@@ -6,8 +6,9 @@ namespace RagnarEngine
 {
     public class Camera : RagnarComponent
     {
-        public Camera()
+        public Camera(UIntPtr ptr) : base(ptr)
         {
+            pointer = ptr;
             type = ComponentType.CAMERA;
         }
 

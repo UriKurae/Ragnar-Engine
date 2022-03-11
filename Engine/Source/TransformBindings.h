@@ -35,7 +35,7 @@ MonoObject* GetGameObjectMonoObject(MonoObject* comp)
 
 MonoObject* TryGetComponentMono(MonoObject* go, MonoString* type, int inputType)
 {
-	GameObject* gameObject = app->moduleMono->GameObject_From_CSGO(go);
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 
 	ComponentType t = static_cast<ComponentType>(inputType);
 	Component* comp = gameObject->GetComponent(t);

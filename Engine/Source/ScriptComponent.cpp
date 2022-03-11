@@ -204,7 +204,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				//	break;
 				//}
 				//MonoClass* cls = mono_object(arrayElementGO);
-				GameObject* cpp_obj = app->moduleMono->GameObject_From_CSGO(arrayElementGO);
+				GameObject* cpp_obj = app->moduleMono->GameObjectFromCSGO(arrayElementGO);
 				ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), (cpp_obj == nullptr) ? "None" : cpp_obj->name.c_str());
 				if (ImGui::BeginDragDropTarget())
 				{
