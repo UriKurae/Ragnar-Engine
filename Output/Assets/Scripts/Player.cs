@@ -2,10 +2,9 @@ using System;
 
 using RagnarEngine;
 
-public class test : RagnarComponent
+public class Player : RagnarComponent
 {
-	public int prueba = 1;
-	public int prueba2 = 5;
+	public int velocity = 5;
 	public GameObject target = null;
 
     public void Update()
@@ -38,10 +37,7 @@ public class test : RagnarComponent
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
         {
-            //Vector3 f = new Vector3(10000 * Time.deltaTime, 0, 0);
-            //rb.ApplyCentralForce(f);
             rb.linearVelocity += new Vector3(-50 * Time.deltaTime, 0, 0);
-
         }
 
         else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
@@ -61,7 +57,6 @@ public class test : RagnarComponent
 
         else if (Input.GetKey(REKeyCode.S) == KeyState.KEY_REPEAT)
         {
-            //tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - 5 * Time.deltaTime);
             //Vector3 f = new Vector3(0, 0, -10000 * Time.deltaTime);
             //rb.ApplyCentralForce(f);
             rb.linearVelocity += new Vector3(0, 0, -50 * Time.deltaTime);
@@ -76,17 +71,6 @@ public class test : RagnarComponent
             AudioSource audio = gameObject.GetComponent<AudioSource>();
             audio.PlayClip("Shot");
         }
-
-
-
     }
 
 }
-
-
-
-
-
-
-
-
