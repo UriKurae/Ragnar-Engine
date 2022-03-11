@@ -689,3 +689,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 		}
 	}
 }
+
+Component* GameObject::GetComponent(ComponentType type)
+{
+	for (auto& comp : components)
+	{
+		if (comp->type == type)
+			return comp;
+	}
+}

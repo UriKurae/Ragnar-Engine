@@ -17,7 +17,7 @@ class GameObject;
 class ScriptComponent;
 
 #define USER_SCRIPTS_NAMESPACE ""
-#define DE_SCRIPTS_NAMESPACE "RagnarEngine"
+#define SCRIPTS_NAMESPACE "RagnarEngine"
 
 union FieldValue
 {
@@ -71,6 +71,8 @@ public:
 	MonoObject* QuatToCS(Quat& inVec) const;
 	MonoObject* Float3ToCS(float3& inVec) const;
 	MonoObject* GoToCSGO(GameObject* inGo) const;
+
+	void UpdateListScripts();
 
 	void ReCompileCS();
 

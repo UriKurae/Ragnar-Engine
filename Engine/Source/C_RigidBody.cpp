@@ -139,7 +139,7 @@ void RigidBodyComponent::OnEditor()
 {
 	// Important condition: body != nullptr 
 	// Because OnStop the body don't exist but OnPlay can modify her parameters
-	if (ImGui::CollapsingHeader(ICON_FA_ATOM" Rigid Body", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader(ICON_FA_ATOM" Rigid Body"))
 	{
 		if (ImGui::Checkbox("Active    ", &active))
 		{

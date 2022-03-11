@@ -67,6 +67,9 @@
     <Filter Include="PhysicsEngine">
       <UniqueIdentifier>{caaeba32-e8fd-448a-a552-88a21bcf8e7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\Bindings">
+      <UniqueIdentifier>{5c47b0eb-4345-495a-98f2-1a9e26e42dba}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\GameObject\Components\UI">
       <UniqueIdentifier>{e7c2aa50-fdb9-4519-ac74-100049977be3}</UniqueIdentifier>
     </Filter>
@@ -336,9 +339,6 @@
     </ClInclude>
     <ClInclude Include="Dependencies\PugiXML\pugixml.hpp">
       <Filter>Sources\Libraries\PugiXML</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\ScriptBindings.h">
-      <Filter>Sources\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\ScriptComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
@@ -654,6 +654,24 @@
     </ClInclude>
     <ClInclude Include="Dependencies\Imgui\bezier.hpp">
       <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AnimationBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AudioBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\RigidbodyBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TransformBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CameraBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\ModuleUI.h">
       <Filter>Sources\Modules</Filter>

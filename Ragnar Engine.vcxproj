@@ -206,16 +206,19 @@
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\stdafx.h" />
     <ClInclude Include="Engine\Source\AboutMenu.h" />
     <ClInclude Include="Engine\Source\Animation.h" />
+    <ClInclude Include="Engine\Source\AnimationBindings.h" />
     <ClInclude Include="Engine\Source\AnimationComponent.h" />
     <ClInclude Include="Engine\Source\AnimationImporter.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\AssimpDefs.h" />
+    <ClInclude Include="Engine\Source\AudioBindings.h" />
     <ClInclude Include="Engine\Source\AudioManager.h" />
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
     <ClInclude Include="Engine\Source\Bone.h" />
     <ClInclude Include="Engine\Source\BufferLayout.h" />
     <ClInclude Include="Engine\Source\ButtonComponent.h" />
+    <ClInclude Include="Engine\Source\CameraBindings.h" />	
     <ClInclude Include="Engine\Source\CameraComponent.h" />
     <ClInclude Include="Engine\Source\CheckBoxComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
@@ -270,6 +273,7 @@
     <ClInclude Include="Engine\Source\Quadtree.h" />
     <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
+    <ClInclude Include="Engine\Source\RigidbodyBindings.h" />
     <ClInclude Include="Engine\Source\ScriptBindings.h" />
     <ClInclude Include="Engine\Source\ScriptComponent.h" />
     <ClInclude Include="Engine\Source\Shapes.h" />
@@ -287,6 +291,7 @@
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
     <ClInclude Include="Engine\Source\Transform2DComponent.h" />
+    <ClInclude Include="Engine\Source\TransformBindings.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\Vertex.h" />
     <ClInclude Include="Engine\Source\VertexArray.h" />

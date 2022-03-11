@@ -7,26 +7,39 @@ namespace RagnarEngine
 {
     public enum ComponentType
     {
-        None,
-		Transform,
-		MeshRenderer,
-		Material,
-		Camera,
-		Script,
-		Count,
+        NONE = 0,
+        TRANSFORM,
+        MESH_RENDERER,
+        MATERIAL,
+        CAMERA,
+        SCRIPT,
+        AUDIO_SOURCE,
+        AUDIO_LISTENER,
+        AUDIO_REVERB_ZONE,
+        LIGHT,
+        ANIMATION,
+        BONE,
+        RIGID_BODY,
     }
 
     public class RagnarComponent
     {
         public UIntPtr pointer;
         public ComponentType type;
-        public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType> {
-            { typeof(Transform), ComponentType.Transform },
+
+        public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType>
+        {
+            { typeof(Transform), ComponentType.TRANSFORM },
+            { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
+            { typeof(Rigidbody), ComponentType.RIGID_BODY},
+            { typeof(Animation), ComponentType.ANIMATION},
+            { typeof(Camera), ComponentType.CAMERA},
+            { typeof(AudioListener), ComponentType.AUDIO_LISTENER},
         };
 
         public RagnarComponent()
         {
-            this.type = ComponentType.Script;
+            this.type = ComponentType.SCRIPT;
         }
 
         public extern GameObject gameObject
