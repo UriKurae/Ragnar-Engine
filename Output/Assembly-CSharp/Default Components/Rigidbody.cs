@@ -16,6 +16,9 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void ApplyCentralForce(Vector3 force);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void ClearForces();
+
         public void IgnoreCollision(GameObject other, bool value)
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
@@ -33,6 +36,10 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
-
+        public extern Vector3 totalForce
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
     }
 }

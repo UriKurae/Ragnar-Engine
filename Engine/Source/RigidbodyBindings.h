@@ -21,20 +21,12 @@ void ApplyCentralForce(MonoObject* go, MonoObject* force)
 	char* nameGo = mono_string_to_utf8(mono_object_to_string(go, 0));
 	char* nameForce = mono_string_to_utf8(mono_object_to_string(force, 0));
 
-
 	float3 f = app->moduleMono->UnboxVector(force);
 	
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
 	btRigidBody* body = rb->GetBody();
+	body->activate(true);
 	body->applyCentralForce(f);
-
-	int velMax = 5;
-	if (body->getLinearVelocity().norm() > velMax)
-		body->setLinearVelocity(body->getLinearVelocity().normalized() * velMax);
-
-	//TransformComponent* tr = rb->owner->GetComponent<TransformComponent>();
-	//tr->ForceUpdateTransform();
-
 }
 
 void SetLinearVelocity(MonoObject* go, MonoObject* velocity)
@@ -50,19 +42,11 @@ void SetLinearVelocity(MonoObject* go, MonoObject* velocity)
 void SetIgnoreCollision(MonoObject* go, bool value)
 {
 	char* nameGo = mono_string_to_utf8(mono_object_to_string(go, 0));
-	//std::string name = nameGo;
-	//GameObject* gameObject = 0;
-	//if (name.find("Component") != -1)
-	//{
-	//	gameObject = GetGameObjectMono(go);
-	//	RigidBodyComponent* rb = gameObject->GetComponent<RigidBodyComponent>();
-	//	rb->GetBody()->setIgnoreCollisionCheck(rb->GetBody(), value);
-	//}
-	//else
-	//{
-		RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
-		rb->GetBody()->setIgnoreCollisionCheck(rb->GetBody(), value);
-	//}
+
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	btRigidBody* body = rb->GetBody();
+	body->activate(true);
+	body->setIgnoreCollisionCheck(body, value);
 }
 
 MonoObject* GetLinearVelocity(MonoObject* go)
@@ -71,4 +55,19 @@ MonoObject* GetLinearVelocity(MonoObject* go)
 
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
 	return app->moduleMono->Float3ToCS((float3)rb->GetBody()->getLinearVelocity());
+}
+
+void ClearForces(MonoObject* go)
+{
+	char* nameGo = mono_string_to_utf8(mono_object_to_string(go, 0));
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->GetBody()->clearForces();
+}
+
+MonoObject* GetTotalForce(MonoObject* go)
+{
+	char* nameGo = mono_string_to_utf8(mono_object_to_string(go, 0));
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	float3 f = rb->GetBody()->getTotalForce();
+	return app->moduleMono->Float3ToCS(f);
 }

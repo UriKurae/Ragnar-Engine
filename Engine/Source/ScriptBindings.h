@@ -179,6 +179,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	float3 p = app->moduleMono->UnboxVector(position);
 	TransformComponent* tr = go->GetComponent<TransformComponent>();
 	tr->SetPosition(p);
+	tr->UpdateTransform();
 
 	return app->moduleMono->GoToCSGO(go);
 }
@@ -198,5 +199,5 @@ MonoObject* AddComponentMono(MonoObject* go, int componentType)
 
 float GetGameTimeStep()
 {
-	return app->GetEngineDeltaTime();
+	return app->scene->GetGameDeltaTime();
 }
