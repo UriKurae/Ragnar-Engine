@@ -7,7 +7,6 @@ struct NavAgentProperties {
 	float speed = 0.0f;
 	float angularSpeed = 0.0f;
 	float stoppingDistance = 0.0f;
-
 };
 
 class NavAgentComponent : public Component

@@ -30,16 +30,13 @@ bool NavigatorMenu::Start()
 bool NavigatorMenu::Update(float dt)
 {
     ImGui::Begin(ICON_FA_WALKING" Navigator", &active);
-    ImGui::Spacing();
-    ImGui::Spacing();
+    ImGui::Dummy({ 0,10 });
     ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x - 180) / 2);
     if (ImGui::Button("Bake NavMesh", ImVec2(180.0f, 20.0f)))
     {
         app->navMesh->BakeNavMesh();
     }
-    ImGui::Spacing();
-    ImGui::Spacing();
-    ImGui::Spacing();
+    ImGui::Dummy({ 0,10 });
 
     ImGui::Text("Agent Properties");
     ImGui::Separator();
@@ -50,9 +47,7 @@ bool NavigatorMenu::Update(float dt)
     ImGui::DragFloat("Agent max climb", &buildSettings->agentMaxClimb, 0.1f);
     ImGui::DragFloat("Agent max slope", &buildSettings->agentMaxSlope, 0.1f);
     ImGui::PopItemWidth();
-    ImGui::Spacing();
-    ImGui::Spacing();
-    ImGui::Spacing();
+    ImGui::Dummy({ 0,10 });
 
     ImGui::Text("NavMesh Properties");
     ImGui::Separator();
@@ -68,9 +63,7 @@ bool NavigatorMenu::Update(float dt)
     ImGui::DragFloat("Detail sample max error", &buildSettings->detailSampleMaxError, 0.1f);
     ImGui::DragFloat("Tile Size", &buildSettings->tileSize, 0.1f);
     ImGui::PopItemWidth();
-    ImGui::Spacing();
-    ImGui::Spacing();
-    ImGui::Spacing();
+    ImGui::Dummy({ 0,10 });
 
     if (ImGui::CollapsingHeader("NavMeshBuilder"))
     {

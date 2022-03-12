@@ -66,7 +66,6 @@ enum class PathType
 
 struct Pathfinder
 {
-
 	Pathfinder();
 	~Pathfinder();
 	void Init(NavMeshBuilder* builder);

@@ -30,6 +30,7 @@ void NavAgentComponent::OnEditor()
 
 	if (ImGui::CollapsingHeader(ICON_FA_RUNNING" NavAgent"))
 	{
+		ImGui::Spacing();
 		ImGui::Text("Steering");
 		ImGui::Separator();
 		ImGui::Spacing();
@@ -38,7 +39,18 @@ void NavAgentComponent::OnEditor()
 		ImGui::DragFloat("Angular", &properties.angularSpeed, 0.1f);
 		ImGui::DragFloat("Stopping Distance", &properties.stoppingDistance, 0.1f);
 		ImGui::PopItemWidth();
+		ImGui::Dummy({ 0,10 });
 
+		ImGui::Text("Path Type");
+		ImGui::Separator();
+		ImGui::Spacing();
+		if (ImGui::RadioButton("Smooth Path", app->navMesh->pathfinder.pathType == PathType::SMOOTH))
+			app->navMesh->pathfinder.pathType = PathType::SMOOTH;
+		ImGui::SameLine();
+		if (ImGui::RadioButton("Straight Path", app->navMesh->pathfinder.pathType == PathType::STRAIGHT))
+			app->navMesh->pathfinder.pathType = PathType::STRAIGHT;
+
+		ImGui::Spacing();
 		ComponentOptions(this);
 	}
 	ImGui::PopID();
