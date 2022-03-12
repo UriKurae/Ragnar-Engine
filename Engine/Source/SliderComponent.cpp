@@ -287,6 +287,42 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 {
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = owner;
+
+	frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	frontPlaneToDraw->own = owner;
+	int contt = 0;
+	int contm = 0;
+	for (int a = 0; a < owner->components.size(); a++) {
+
+		if (owner->components[a]->type == ComponentType::TRANFORM2D)
+		{
+			contt++;
+			if (contt==1) {
+				//selectedMaterial = (MaterialComponent*)owner->components[a];
+			}
+			else
+			{
+				ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
+				r->buttonHeight = 100;
+				r->buttonWidth = 30;
+				r->position.z = 0.5f;
+			}
+				
+		}
+		else if (owner->components[a]->type == ComponentType::MATERIAL) 
+		{
+			contm++;
+			if (contm == 1) {
+				//selectedMaterial = (MaterialComponent*)owner->components[a];
+			}
+			else
+			{
+				secondMaterial = (MaterialComponent*)owner->components[a];
+				
+				
+			}
+		}
+	}
 	owner->isUI = true;
 
 	app->userInterface->UIGameObjects.push_back(owner);
@@ -298,7 +334,7 @@ bool SliderComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "barProgres", barProgres);
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;

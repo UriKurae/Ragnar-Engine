@@ -281,18 +281,24 @@ bool MainMenuBar::Update(float dt)
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
 					object->SetName("Slider");
 					object->CreateComponent(ComponentType::TRANFORM2D);
-					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
+					
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					app->userInterface->UIGameObjects.push_back(object);
-					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->planeToDraw->own = object;
+					
 					ComponentTransform2D* i=(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					i->buttonHeight = 100;
 					i->buttonWidth = 30;
 					i->position.z = 0.5f;
-					button->secondMaterial=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					
+					MaterialComponent* second=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					
+
+					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 					button->frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 					button->frontPlaneToDraw->own = object;
+					button->planeToDraw->own = object;
+					button->secondMaterial = second;
 					object->isUI = true;
 				}
 				else if (ImGui::MenuItem("UI Check Box"))
