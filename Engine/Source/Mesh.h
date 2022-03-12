@@ -2,9 +2,6 @@
 #include "Resource.h"
 
 #include <map>
-#include <vector>
-#include "Math/float3.h"
-#include "Math/float2.h"
 
 #include "Bone.h"
 #include "Shader.h"
@@ -39,7 +36,6 @@ public:
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
 	inline const std::map<std::string, BoneInfo>& GetBoneMap() { return bones; }
 	void Reimport(ModelParameters& data);
-	void SetVariables(float* position, int total, uint* ind, int indtotal);
 
 private:
 	std::vector<Vertex> vertices;

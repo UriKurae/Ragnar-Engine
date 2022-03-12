@@ -39,7 +39,7 @@ void NavAgentComponent::OnEditor()
 		ImGui::PushItemWidth(180);
 		ImGui::DragFloat("Agent Radius", &agentProperties->radius, 0.1f);
 		ImGui::DragFloat("Agent Height", &agentProperties->height, 0.1f);
-		ImGui::DragFloat("Stop Height", &agentProperties->stopHeight, 0.1f);
+		ImGui::DragFloat("Stop Height", &agentProperties->maxClimb, 0.1f);
 		ImGui::DragInt("Max Slope", &agentProperties->maxSlope, 1);
 		ImGui::PopItemWidth();
 		ImGui::Dummy({ 0,10 });
@@ -76,7 +76,7 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
 	agentProperties->height = node.GetJsonNumber("Height");
-	agentProperties->stopHeight = node.GetJsonNumber("StopHeight");
+	agentProperties->maxClimb = node.GetJsonNumber("StopHeight");
 	agentProperties->maxSlope = node.GetJsonNumber("MaxSlope");
 
 	agentProperties->speed = node.GetJsonNumber("Speed");
@@ -94,7 +94,7 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", (float)agentProperties->radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", (float)agentProperties->height);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "StopHeight", (float)agentProperties->stopHeight);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "StopHeight", (float)agentProperties->maxClimb);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "MaxSlope", (int)agentProperties->maxSlope);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Speed", (float)agentProperties->speed);

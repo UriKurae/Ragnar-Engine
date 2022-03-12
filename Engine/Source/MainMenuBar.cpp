@@ -18,6 +18,7 @@
 #include "ContentBrowserMenu.h"
 #include "TextEditorMenu.h"
 #include "FogWarMenu.h"
+#include "NavigatorMenu.h"
 
 #include "TransformComponent.h"
 #include "LightComponent.h"

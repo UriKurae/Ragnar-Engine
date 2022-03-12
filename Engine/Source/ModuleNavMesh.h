@@ -1,62 +1,14 @@
 #pragma once
 #include "Module.h"
-#include "Application.h"
 #include "Recast/Recast.h"
 #include "Detour/DetourNavMesh.h"
 #include "Detour/DetourNavMeshQuery.h"
 
 #include "MathGeoLib.h"
 
-class dtNavMesh;
-class dtNavMeshQuery;
-class dtQueryFilter;
 class GameObject;
 class InputGeom;
 class NavMeshBuilder;
-
-struct NavAgent
-{
-	NavAgent();
-	float radius = 0.0f;
-	float height = 0.0f;
-	float stopHeight = 0.0f;
-	int maxSlope = 0;
-};
-
-struct BuildSettings
-{
-	// Cell size in world units
-	float cellSize;
-	// Cell height in world units
-	float cellHeight;
-	// Agent height in world units
-	float agentHeight;
-	// Agent radius in world units
-	float agentRadius;
-	// Agent max climb in world units
-	float agentMaxClimb;
-	// Agent max slope in degrees
-	float agentMaxSlope;
-	// Region minimum size in voxels.
-	// regionMinSize = sqrt(regionMinArea)
-	float regionMinSize;
-	// Region merge size in voxels.
-	// regionMergeSize = sqrt(regionMergeArea)
-	float regionMergeSize;
-	// Edge max length in world units
-	float edgeMaxLen;
-	// Edge max error in voxels
-	float edgeMaxError;
-	float vertsPerPoly;
-	// Detail sample distance in voxels
-	float detailSampleDist;
-	// Detail sample max error in voxel heights.
-	float detailSampleMaxError;
-	// Partition type, see SamplePartitionType
-	int partitionType;
-	// Size of the tiles in voxels
-	float tileSize;
-};
 
 enum class PathType
 {
@@ -64,12 +16,28 @@ enum class PathType
 	STRAIGHT
 };
 
+struct NavAgent
+{
+	NavAgent();
+
+	float radius = 0.0f;
+	float height = 0.0f;
+	float maxClimb = 0.0f;
+	int maxSlope = 0;
+
+	float speed = 0.0f;
+	float angularSpeed = 0.0f;
+	float acceleration = 0.0f;
+	float stoppingDistance = 0;
+
+	PathType pathType = PathType::STRAIGHT;
+};
+
 struct Pathfinder
 {
 	Pathfinder();
 	~Pathfinder();
 	void Init(NavMeshBuilder* builder);
-	void CleanUp();
 
 	bool CalculatePath();
 	bool CalculatePath(float3 origin, float3 destination, std::vector<float3>& path);
@@ -110,6 +78,41 @@ struct Pathfinder
 	float m_polyPickExt[3];
 };
 
+struct BuildSettings
+{
+	// Cell size in world units
+	float cellSize;
+	// Cell height in world units
+	float cellHeight;
+	// Agent height in world units
+	float agentHeight;
+	// Agent radius in world units
+	float agentRadius;
+	// Agent max climb in world units
+	float agentMaxClimb;
+	// Agent max slope in degrees
+	float agentMaxSlope;
+	// Region minimum size in voxels.
+	// regionMinSize = sqrt(regionMinArea)
+	float regionMinSize;
+	// Region merge size in voxels.
+	// regionMergeSize = sqrt(regionMergeArea)
+	float regionMergeSize;
+	// Edge max length in world units
+	float edgeMaxLen;
+	// Edge max error in voxels
+	float edgeMaxError;
+	float vertsPerPoly;
+	// Detail sample distance in voxels
+	float detailSampleDist;
+	// Detail sample max error in voxel heights.
+	float detailSampleMaxError;
+	// Partition type, see SamplePartitionType
+	int partitionType;
+	// Size of the tiles in voxels
+	float tileSize;
+};
+
 class ModuleNavMesh : public Module {
 public:
 	ModuleNavMesh(bool start_enabled = true);
@@ -121,10 +124,6 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) override;
 
-	//void DebugDraw();
-	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
-	//void CreateWalkabilityTestPoint();
-
 	void ClearNavMeshes();
 	bool IsWalkable(float x, float z, float3& hitPoint);
 
@@ -134,26 +133,13 @@ public:
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
 	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
 	const inline InputGeom* GetInputGeom() const { return geometry; };
-	float3 FindRandomPointAround(float3 centerPoint, float radius);
-	bool FindPath(float3 origin, float3 destination, std::vector<float3>& path);
-
 	BuildSettings* GetBuildSettings() { return buildSettings; };
 
 public:
-	std::vector<NavAgent> agents;
-	NavAgent bakedNav;
 	Pathfinder pathfinder;
-	bool debugDraw;
 
 private:
 	NavMeshBuilder* navMeshBuilder;
 	InputGeom* geometry;
 	BuildSettings* buildSettings;
-
-	GameObject* walkabilityPoint;
-
-	//Random Point Finding
-	bool randomPointSet;
-	float3 randomPoint;
-	float randomRadius;
 };

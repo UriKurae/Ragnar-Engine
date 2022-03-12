@@ -1,20 +1,14 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleNavMesh.h"
-#include "ModuleInput.h"
-#include "ModuleScene.h"
-
 #include "Mesh.h"
 #include "TransformComponent.h"
-#include "MeshComponent.h"
-#include "GameObject.h"
+#include "ModuleNavMesh.h"
+#include "ModuleScene.h"
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
 #include "InputGeom.h"
-#include "Detour/DetourNavMesh.h"
-#include "Detour/DetourNavMeshQuery.h"
 #include "Detour/DetourNavMeshBuilder.h"
 #include "Detour/DetourCommon.h"
 #include "DebugUtils/SampleInterfaces.h"
@@ -23,24 +17,20 @@
 #include "Imgui/imgui_impl_sdl.h"
 
 ModuleNavMesh::ModuleNavMesh(bool start_enabled) : Module(start_enabled),
-geometry(nullptr), navMeshBuilder(nullptr), walkabilityPoint(nullptr), debugDraw(false),
-randomPointSet(false), randomRadius(0.0f)
+geometry(nullptr), navMeshBuilder(nullptr)
 {
 	name = "NavMesh";
 	geometry = new InputGeom();
 	geometry->SetMesh();
-	agents.push_back(NavAgent());
 	buildSettings = new BuildSettings;
-
-	randomPoint = float3::inf;
 }
 
 ModuleNavMesh::~ModuleNavMesh()
 {
+	CleanUp();
+
 	delete buildSettings;
 	buildSettings = nullptr;
-
-	agents.clear();
 }
 
 bool ModuleNavMesh::Start()
@@ -50,54 +40,6 @@ bool ModuleNavMesh::Start()
 
 bool ModuleNavMesh::Update(float dt)
 {
-	if (debugDraw)
-	{
-		if (navMeshBuilder != nullptr && app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
-		{
-			float hitTime;
-			float rayStart[3];
-			float rayEnd[3];
-			bool hit = geometry->raycastMesh(rayStart, rayEnd, hitTime);
-			if (hit)
-			{
-				pathfinder.startPosition = float3(rayEnd[0], rayEnd[1], rayEnd[2]);
-				pathfinder.startPosSet = true;
-
-				if (pathfinder.endPosSet)
-				{
-					pathfinder.CalculatePath();
-					std::vector<float3> path;
-					FindPath(pathfinder.startPosition, pathfinder.endPosition, path);
-				}
-			}
-		}
-
-		if (navMeshBuilder != nullptr && app->input->GetMouseButton(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN)
-		{
-			float hitTime;
-			float rayStart[3];
-			float rayEnd[3];
-			bool hit = geometry->raycastMesh(rayStart, rayEnd, hitTime);
-
-			if (hit)
-			{
-				pathfinder.endPosition = float3(rayEnd[0], rayEnd[1], rayEnd[2]);
-				pathfinder.endPosSet = true;
-
-				if (pathfinder.startPosSet)
-				{
-					pathfinder.CalculatePath();
-					std::vector<float3> path;
-					FindPath(pathfinder.startPosition, pathfinder.endPosition, path);
-				}
-			}
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_F1) == KeyState::KEY_DOWN)
-		{
-			randomPoint = FindRandomPointAround(pathfinder.startPosition, 5.0f);
-		}
-	}
 
 	return true;
 }
@@ -171,118 +113,6 @@ bool ModuleNavMesh::SaveConfig(JsonParsing& node)
 	return true;
 }
 
-//void ModuleNavMesh::DebugDraw()
-//{
-//	if (!debugDraw)
-//		return;
-//	
-//	if (navMeshBuilder == nullptr)
-//		return;
-//
-//	navMeshBuilder->DebugDraw();
-//
-//	float3 debugStartPoint = pathfinder.startPosition;
-//	debugStartPoint.y += 0.2f;
-//	float3 debugEndPoint = pathfinder.endPosition;
-//	debugEndPoint.y += 0.2f;
-//
-//	if (pathfinder.startPosSet)
-//		app->renderer3D->AddDebugPoints(debugStartPoint, float3(0.0f, 255.0f, 0.0f));
-//
-//	if (pathfinder.endPosSet)
-//		app->renderer3D->AddDebugPoints(debugEndPoint, float3(255.0f, 0.0f, 0.0f));
-//
-//	if (pathfinder.m_npolys > 0 && pathfinder.m_navMesh != nullptr)
-//		pathfinder.RenderPath();
-//
-//	if (walkabilityPoint != nullptr)
-//	{
-//		float3 position = walkabilityPoint->GetComponent<TransformComponent>()->GetPosition();
-//		float3 hitPoint;
-//
-//		if (IsWalkable(position.x, position.z, hitPoint))
-//		{
-//			app->renderer3D->AddDebugLines(float3(position.x, 20, position.z), float3(position.x, -20, position.z), float3(0.0f, 255.0f, 0.0f));
-//			app->renderer3D->AddDebugPoints(hitPoint, float3(255.0f, 255.0f, 255.0f));
-//		}
-//		else
-//		{
-//			app->renderer3D->AddDebugLines(float3(position.x, 20, position.z), float3(position.x, -20, position.z), float3(255.0f, 0.0f, 0.0f));
-//		}
-//	}
-//
-//	if (randomPointSet)
-//	{
-//		DebugDrawGL dd;
-//		app->renderer3D->AddDebugPoints(randomPoint, float3(255.0f, 255.0f, 255.0f));
-//		duDebugDrawCircle(&dd, pathfinder.startPosition.x, pathfinder.startPosition.y + 0.2f, pathfinder.startPosition.z, randomRadius, duRGBA(64, 16, 0, 220), 2.0f);
-//	}
-//
-//}
-
-void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton)
-{
-	if (navMeshBuilder == nullptr)
-		return;
-
-	if (geometry->getChunkyMesh() == nullptr && navMeshBuilder->GetNavMesh() == nullptr)
-	{
-		BakeNavMesh();
-		LOG(LogType::L_WARNING, "No chunky mesh set, one has been baked to avoid crashes");
-	}
-
-	float hitTime;
-	bool hit = geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime);
-
-	float3 hitPoint;
-	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-
-	if (clickedMouseButton == SDL_BUTTON_LEFT)
-	{
-		if (hit)
-		{
-			pathfinder.startPosition = hitPoint;
-			pathfinder.startPosSet = true;
-
-			if (pathfinder.endPosSet)
-			{
-				pathfinder.CalculatePath();
-				std::vector<float3> path;
-				FindPath(pathfinder.startPosition, pathfinder.endPosition, path);
-			}
-
-			randomPointSet = false;
-		}
-	}
-	else if (clickedMouseButton == SDL_BUTTON_RIGHT)
-	{
-		if (hit)
-		{
-			pathfinder.endPosition = hitPoint;
-			pathfinder.endPosSet = true;
-
-			if (pathfinder.startPosSet)
-			{
-				pathfinder.CalculatePath();
-				std::vector<float3> path;
-				FindPath(pathfinder.startPosition, pathfinder.endPosition, path);
-			}
-		}
-	}
-	else
-	{
-		LOG(LogType::L_ERROR, "How did you even get here?");
-	}
-}
-
-//void ModuleNavMesh::CreateWalkabilityTestPoint()
-//{
-//	if (walkabilityPoint != nullptr)
-//		walkabilityPoint->Destroy();
-//
-//	walkabilityPoint = app->scene->CreateGameObject("Walkability Test", EngineExternal->moduleScene->root);
-//}
-
 void ModuleNavMesh::ClearNavMeshes()
 {
 	CleanUp();
@@ -317,8 +147,6 @@ bool ModuleNavMesh::CleanUp()
 		delete navMeshBuilder;
 		navMeshBuilder = nullptr;
 	}
-
-	pathfinder.CleanUp();
 
 	return true;
 }
@@ -383,36 +211,7 @@ static float frand()
 	return (float)rand() / (float)RAND_MAX;
 }
 
-float3 ModuleNavMesh::FindRandomPointAround(float3 centerPoint, float radius)
-{
-	if (navMeshBuilder == nullptr)
-		return centerPoint;
-
-	dtPolyRef polyRef;
-	navMeshBuilder->GetNavMeshQuery()->findNearestPoly(centerPoint.ptr(), pathfinder.m_polyPickExt, &pathfinder.m_filter, &polyRef, 0);
-
-	float3 randomPoint;
-
-	dtPolyRef ref;
-	dtStatus status = navMeshBuilder->GetNavMeshQuery()->findRandomPointAroundCircle(polyRef, centerPoint.ptr(), radius, &pathfinder.m_filter, frand, &ref, randomPoint.ptr());
-
-	if (dtStatusSucceed(status))
-	{
-		randomPointSet = true;
-		randomRadius = radius;
-	}
-
-	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK))
-		return centerPoint;
-
-	return randomPoint;
-}
-
-bool ModuleNavMesh::FindPath(float3 origin, float3 destination, std::vector<float3>& path)
-{
-	return pathfinder.CalculatePath(origin, destination, path);
-}
-
+/*----------------------------------------------------------------------------------------------------------------------*/
 
 Pathfinder::Pathfinder() : m_navQuery(nullptr),
 m_navMesh(nullptr), m_navMeshBuilder(nullptr), endPosSet(false), startPosSet(false),
@@ -430,7 +229,14 @@ m_nstraightPath(0), m_pathIterNum(0)
 
 Pathfinder::~Pathfinder()
 {
-	CleanUp();
+	if (m_navQuery != nullptr)
+		m_navQuery = nullptr;
+
+	m_navMesh = nullptr;
+	m_navQuery = nullptr;
+	m_navMeshBuilder = nullptr;
+	startPosSet = false;
+	endPosSet = false;
 }
 
 void Pathfinder::Init(NavMeshBuilder* builder)
@@ -442,18 +248,6 @@ void Pathfinder::Init(NavMeshBuilder* builder)
 
 	m_navMesh = builder->GetNavMesh();
 	m_navQuery = builder->GetNavMeshQuery();
-}
-
-void Pathfinder::CleanUp()
-{
-	if (m_navQuery != nullptr)
-		m_navQuery = nullptr;
-
-	m_navMesh = nullptr;
-	m_navQuery = nullptr;
-	m_navMeshBuilder = nullptr;
-	startPosSet = false;
-	endPosSet = false;
 }
 
 inline bool InRange(const float* v1, const float* v2, const float r, const float h)
@@ -943,6 +737,19 @@ void Pathfinder::RenderPath()
 	}
 }
 
-NavAgent::NavAgent() :radius(2.0f), height(5.0f), stopHeight(0.2f), maxSlope(45.0f)
-{}
+
+
+NavAgent::NavAgent()
+{
+	const BuildSettings* settings = app->navMesh->GetBuildSettings();
+	radius = settings->agentRadius;
+	height = settings->agentHeight;
+	maxClimb = settings->agentMaxClimb;
+	maxSlope = settings->agentMaxSlope;
+
+	speed = 1.0f;
+	angularSpeed = 1.0f;
+	acceleration = 1.0f;
+	stoppingDistance = 0;
+}
 

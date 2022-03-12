@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "TextureImporter.h"
 #include "AnimationImporter.h"
+#include "VertexBuffer.h"
 
 #include "Component.h"
 

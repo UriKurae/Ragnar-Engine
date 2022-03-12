@@ -22,10 +22,9 @@
 #include <string>
 
 #include "ChunkyTriMesh.h"
-//#include "MeshLoaderObj.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
 class Mesh;
-#include "MathGeoLib/include/MathGeoLib.h"
 
 static const int MAX_CONVEXVOL_PTS = 12;
 struct ConvexVolume
