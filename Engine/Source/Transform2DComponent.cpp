@@ -61,7 +61,7 @@ bool ComponentTransform2D::Update(float dt)
 	/*float res = (viewport.w * 1.5) / 649;
 	res = 1.5 - (res - 1.5)+0.05;*/
 	internalPosition.y = (position.y * 30) / (viewport.w / 2);
-
+	internalPosition.z = position.z;
 	/*internalPosition.x = position.x/1;
 	internalPosition.y = position.y/8;*/
 

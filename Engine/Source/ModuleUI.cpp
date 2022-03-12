@@ -131,19 +131,16 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	
 
 	float4x4 transform = float4x4::FromTRS(float3(auxTrans->internalPosition.x, auxTrans->internalPosition.y, auxTrans->internalPosition.z), auxTrans->rotationQuat, float3(auxTrans->scale.x, auxTrans->scale.y, 1));
-
-	texture->Bind();
-	shader->Use();
-	
 	theButton = own->GetComponent<ButtonComponent>();
 	theSlider=own->GetComponent<SliderComponent>();
 	theCheckbox = own->GetComponent<CheckboxComponent>();
 	theImage = own->GetComponent<ImageComponent>();
-
+	if(texture)
+		texture->Bind();
+	shader->Use();
 
 	CameraComponent* cam = app->scene->camera->GetComponent<CameraComponent>();
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
+	
 
 	if (theButton)
 	{
@@ -151,6 +148,25 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theSlider) 
 	{
+		if (theSlider->firstDraw) {
+			int cont = 0;
+			for (int a = 0; a < own->components.size(); a++) {
+				if (own->components[a]->type == ComponentType::TRANFORM2D)
+				{
+					cont++;
+					if (cont == 1) {
+
+					}
+					else
+					{
+						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
+						transform = float4x4::FromTRS(float3(r->internalPosition.x, r->internalPosition.y, r->internalPosition.z), r->rotationQuat, float3(r->scale.x, r->scale.y, 1));
+						break;
+					}
+				}
+			}
+		}
+		
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->actualColor.r, theSlider->actualColor.g, theSlider->actualColor.b, 1);
 	}
 	else if (theCheckbox)
@@ -161,6 +177,9 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	{
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->actualColor.r, theImage->actualColor.g, theImage->actualColor.b, 1);
 	}
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
+
 	glBindVertexArray(VAO);
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);

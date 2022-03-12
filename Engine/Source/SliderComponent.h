@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "Color.h"
 #include "Text.h"
+#include"MaterialComponent.h"
 class MyPlane;
 class SDL_Rect;
 class SDL_Color;
@@ -29,6 +30,7 @@ public:
 	float barProgres;
 public:
 	MyPlane* planeToDraw;
+	MyPlane* frontPlaneToDraw;
 	State state;
 	Color actualColor;
 	Color disabledColor = white;
@@ -36,9 +38,9 @@ public:
 	Color focusedColor = blue;
 	Color normalColor = green;
 	Color selectedColor = black;
-
+	bool firstDraw = false;
 	bool drawRect;
-
+	MaterialComponent* secondMaterial;
 	Text sliderText;
 	Color textColor = white;
 	char text[64] = "Camera FOV";

@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "SDL.h"
 #include "ModuleInput.h"
+#include"Globals.h"
 #include "SliderComponent.h"
 #include "ModuleCamera3D.h"
 #include "CameraComponent.h"
@@ -96,34 +97,55 @@ bool SliderComponent::Update(float dt)
 
 
 			barProgres = thePos / total;
-
-			if (state == State::PRESSED)
-			{
-				
+			DEBUG_LOG("Bar: %f", barProgres);
+			int cont = 0;
+			ComponentTransform2D* q;
+			for (int a = 0; a < owner->components.size(); a++) {
+				if (owner->components[a]->type == ComponentType::TRANFORM2D)
+				{
+					
+					cont++;
+					if (cont == 1) {
+						q = (ComponentTransform2D*)owner->components[a];
+					}
+					else
+					{
+						ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
+						r->position.x=fMousePos.x - q->buttonWidth-70;
+						r->position.y = q->position.y;
+						r->Update(0);
+						break;
+					}
+				}
 			}
 
+			
+			
+			//if (barProgres < 0.5f)
+			//{
+			//	
+			//	/*planeToDraw->texCoords[0] = (0.5 - barProgres);
+			//	planeToDraw->texCoords[1] = (0.5 - barProgres);*/
+			//}
+			//else if (barProgres >= 0.5f) {
 
-			if (barProgres < 0.5f)
-			{
-				/*thePlane->texCoords[0] = 1;
-				thePlane->texCoords[6] = 1;*/
-				planeToDraw->texCoords[0] = (0.5 - barProgres);
-				planeToDraw->texCoords[1] = (0.5 - barProgres);
-			}
-			else if (barProgres >= 0.5f) {
+			//	float aux = barProgres - 0.5;
+			//	/*planeToDraw->texCoords[2] = (1 - aux);
+			//	planeToDraw->texCoords[3] = (1 - aux);*/
 
-				float aux = barProgres - 0.5;
-				planeToDraw->texCoords[2] = (1 - aux);
-				planeToDraw->texCoords[3] = (1 - aux);
+			//}
 
-			}
-			glDeleteBuffers(planeToDraw->texCoords.size() * sizeof(GLfloat), &planeToDraw->TBO);
+
+
+
+			/*glDeleteBuffers(planeToDraw->texCoords.size() * sizeof(GLfloat), &planeToDraw->TBO);
 
 			glGenBuffers(1, &planeToDraw->TBO);
 			glBindBuffer(GL_ARRAY_BUFFER, planeToDraw->TBO);
 			glBufferData(GL_ARRAY_BUFFER, planeToDraw->texCoords.size() * sizeof(GLfloat), planeToDraw->texCoords.data(), GL_STATIC_DRAW);
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat), 0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 		}
 	}
 	return true;
@@ -166,10 +188,12 @@ void SliderComponent::Draw(CameraComponent* gameCam)
 	default:
 		break;
 	}
-
+	firstDraw = false;
 	MaterialComponent* mat = owner->GetComponent<MaterialComponent>();
 	planeToDraw->DrawPlane2D(mat->GetTexture().get());
+	firstDraw = true;
 
+	frontPlaneToDraw->DrawPlane2D(secondMaterial->GetTexture().get());
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
