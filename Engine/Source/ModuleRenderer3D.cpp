@@ -6,6 +6,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
+#include "ModuleNavMesh.h"
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
@@ -19,6 +20,7 @@
 #include "Shader.h"
 #include "Lights.h"
 #include "Framebuffer.h"
+#include "NavMeshBuilder.h"
 
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
@@ -43,6 +45,8 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	blending = false;
 	wireMode = false;
 	vsync = false;
+	rayCast = false;
+	navMesh = false;
 }
 
 // Destructor
@@ -269,6 +273,9 @@ bool ModuleRenderer3D::PostUpdate()
 		app->scene->Draw();
 	}
 
+	if(navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);
 
@@ -440,6 +447,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	stencil = node.GetJsonBool("stencil");
 	blending = node.GetJsonBool("blending");
 	wireMode = node.GetJsonBool("wire mode");
+	navMesh = node.GetJsonBool("navmesh");
 
 	SetVsync();
 	SetDepthTest();
@@ -465,6 +473,7 @@ bool ModuleRenderer3D::SaveConfig(JsonParsing& node)
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "stencil", stencil);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "blending", blending);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wire mode", wireMode);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "navmesh", navMesh);
 
 	return true;
 }

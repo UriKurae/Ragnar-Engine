@@ -9,7 +9,11 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "Component.h"
+#include "glew/include/GL/glew.h"
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_internal.h"
+#include "Algorithm/Random/LCG.h"
+
 #include "C_RigidBody.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -25,6 +29,7 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "Transform2DComponent.h"
+#include "NavAgentComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
@@ -146,6 +151,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::RIGID_BODY);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("NavAgent"))
+		{
+			CreateComponent(ComponentType::NAVAGENT);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -249,6 +259,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
+    	break;
+	case ComponentType::NAVAGENT:
+		component = new NavAgentComponent(this);
 		break;
 	
 	case ComponentType::MATERIAL:
@@ -460,6 +473,7 @@ void GameObject::OnLoad(JsonParsing& node)
 	uuid = node.GetJsonNumber("UUID");
 	name = node.GetJsonString("Name");
 	active = node.GetJsonBool("Active");
+	staticObj = node.GetJsonBool("Static");
 	prefabID = node.GetJsonNumber("PrefabID");
 	prefabPath = node.GetJsonString("Prefab Path");
 
@@ -482,6 +496,7 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 
