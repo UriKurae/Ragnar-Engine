@@ -43,4 +43,5 @@ public:
 	float3 scale;
 	float generalScale;
 	GameObject* own;
+	bool showEdit = true;
 };

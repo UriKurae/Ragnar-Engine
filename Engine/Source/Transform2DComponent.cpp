@@ -81,35 +81,37 @@ void ComponentTransform2D::Disable()
 
 void ComponentTransform2D::OnEditor()
 {
-	if (ImGui::CollapsingHeader("2D Transform"))
-	{
-		ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
-
-		if (ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000))
+	if (showEdit) {
+		if (ImGui::CollapsingHeader("2D Transform"))
 		{
-					
-		}
-		if (ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000))
-		{
-			
-		}
+			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
+
+			if (ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000))
+			{
+
+			}
+			if (ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000))
+			{
+
+			}
 
 
-		ImGui::TextColored(ImVec4(0, 0, 255, 255), "Position");
-		static bool wasNull = true;
+			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Position");
+			static bool wasNull = true;
 
 
-		if (ImGui::DragFloat("Position X", &position.x, 0.5f))
-		{
-				
-		}
-		if (ImGui::DragFloat("Position Y", &position.y, 0.5f))
-		{
-				
-		}
-		if (ImGui::DragFloat("Position Z", &position.z, 0.5f))
-		{
+			if (ImGui::DragFloat("Position X", &position.x, 0.5f))
+			{
 
+			}
+			if (ImGui::DragFloat("Position Y", &position.y, 0.5f))
+			{
+
+			}
+			if (ImGui::DragFloat("Position Z", &position.z, 0.5f))
+			{
+
+			}
 		}
 	}
 }

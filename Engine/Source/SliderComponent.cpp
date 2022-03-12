@@ -111,8 +111,11 @@ bool SliderComponent::Update(float dt)
 					else
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
-						r->position.x=fMousePos.x - q->buttonWidth-70;
+						float res = (viewport.z * 70) / 747;
+
+						r->position.x= thePos- (r->buttonWidth*5);
 						r->position.y = q->position.y;
+						r->buttonHeight = q->buttonHeight;
 						r->Update(0);
 						break;
 					}
@@ -306,6 +309,7 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 				r->buttonHeight = 100;
 				r->buttonWidth = 30;
 				r->position.z = 0.5f;
+				r->showEdit = false;
 			}
 				
 		}

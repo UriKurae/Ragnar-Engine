@@ -289,7 +289,7 @@ bool MainMenuBar::Update(float dt)
 					i->buttonHeight = 100;
 					i->buttonWidth = 30;
 					i->position.z = 0.5f;
-					
+					i->showEdit = false;
 					MaterialComponent* second=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					
 
