@@ -179,7 +179,7 @@ Shadert::Shadert(const std::string& vertexSource, const std::string& fragmentSou
 	std::string vertexCode = vertexSource;
 	std::string fragmentCode = fragmentSource;
 	if(vertexSource.empty())
-		vertexCode = "#version 330 core\n  in vec4 vertex;\n out vec2 TexCoords;\n  uniform mat4 projection;\n  void main() {\n  gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);\n  TexCoords = vertex.zw; };";
+		vertexCode = "#version 330 core\n  in vec4 vertex;\n out vec2 TexCoords;\n uniform mat4 model;\n  uniform mat4 projection;\n  void main() {\n  gl_Position = projection * model *vec4(vertex.xy, 0.0, 1.0);\n  TexCoords = vertex.zw; };";
 	if(fragmentSource.empty())
 		fragmentCode = "#version 330 core\n  in vec2 TexCoords;\n  out vec4 color;\n  uniform sampler2D text;\n  uniform vec3 textColor;\n  void main() {\n  vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);\n  color = vec4(textColor, 1.0) * sampled;};"; //color = vec4(textColor, 1.0) * sampled;};";
 
@@ -360,14 +360,15 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
 	
 	frustum.pos = camera->GetFrustum()->pos;
+	/*frustum.pos = { 0,0,0 };*/
 	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
 	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
 	frustum.type = FrustumType::OrthographicFrustum;
 	
 	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
-	frustum.nearPlaneDistance = 0.1;
-	frustum.farPlaneDistance = 1000000.f;
+	frustum.nearPlaneDistance = -1.0f;
+	frustum.farPlaneDistance = 1.0f;
 	
 	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	//frustum.SetViewPlaneDistances(0.1, 1000000.f);
@@ -381,10 +382,16 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 
 	/*math::float4x4 h = frustum.ComputeProjectionMatrix();
 	math::float4x4 v = frustum.ComputeViewMatrix();*/
+	math::float4x4 model = math::float4x4::identity;
+	math::float3 scl = math::float3(1, 1, 1.0f);
+	math::float3 center = math::float3(x, y, 1.0f);
+	model = model.Scale(scl, center);
+	model.SetTranslatePart(center);
 
 	auto p = frustum.ProjectionMatrix();
 	glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_TRUE, (const float*)&model);
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 

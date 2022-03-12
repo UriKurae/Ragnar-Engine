@@ -11,6 +11,7 @@ class ComponentTransform2D;
 class SliderComponent;
 class ImageComponent;
 class CheckboxComponent;
+class TextComponent;
 
 enum class ComponentType
 {
@@ -34,6 +35,7 @@ enum class ComponentType
 	UI_INPUTBOX,
 	UI_CANVAS,
 	TRANFORM2D,
+	UI_TEXT,
 };
 
 enum class State

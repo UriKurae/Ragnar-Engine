@@ -25,7 +25,7 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "Transform2DComponent.h"
-
+#include"TextComponent.h"
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 
@@ -230,7 +230,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::UI_IMAGE:
 		component = new ImageComponent(this);
 		break;
-	
+	case ComponentType::UI_TEXT:
+		component = new TextComponent(this);
+		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
 		app->scene->SetMainCamera((CameraComponent*)component);

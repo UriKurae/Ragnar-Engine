@@ -107,6 +107,10 @@ void ComponentTransform2D::OnEditor()
 		{
 				
 		}
+		if (ImGui::DragFloat("Position Z", &position.z, 0.5f))
+		{
+
+		}
 	}
 }
 

@@ -14,6 +14,7 @@
 #include "CheckBoxComponent.h"
 #include "ImageComponent.h"
 #include "SliderComponent.h"
+#include"TextComponent.h"
 
 #include "ResourceManager.h"
 #include "Shader.h"
@@ -320,9 +321,10 @@ bool ModuleRenderer3D::PostUpdate()
 
 
 	ButtonComponent* aux = nullptr;
-	//CanvasComponent* aux1 = nullptr;
+	TextComponent* aux1 = nullptr;
 	CheckboxComponent* aux2 = nullptr;
 	ImageComponent* aux3 = nullptr;
+	
 	//InputBoxComponent* aux4 = nullptr;
 	SliderComponent* aux5 = nullptr;
 	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
@@ -333,7 +335,7 @@ bool ModuleRenderer3D::PostUpdate()
 		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
 
 			aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
-		//aux1 = go->GetComponent<CanvasComponent>();
+		aux1 = app->userInterface->UIGameObjects[a]->GetComponent<TextComponent>();
 		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
 		aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
 		//aux4 = go->GetComponent<InputBoxComponent>();
@@ -348,14 +350,11 @@ bool ModuleRenderer3D::PostUpdate()
 			app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
 			aux = nullptr;
 		}
-		/* else if (aux1 != nullptr)
+		 else if (aux1 != nullptr)
 		{
-			textExample = aux1->text;
-			color.x = aux1->color.r;
-			color.y = aux1->color.g;
-			color.z = aux1->color.b;
+			app->userInterface->RenderText(aux1->buttonText.textt, aux1->buttonText.X, aux1->buttonText.Y, aux1->buttonText.Scale, aux1->buttonText.Color);
 			aux1 = nullptr;
-		} */
+		} 
 		else if (aux2 != nullptr)
 		{
 			app->userInterface->UIGameObjects[a]->Draw(nullptr);

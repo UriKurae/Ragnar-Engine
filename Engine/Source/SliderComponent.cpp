@@ -108,13 +108,14 @@ bool SliderComponent::Update(float dt)
 				/*thePlane->texCoords[0] = 1;
 				thePlane->texCoords[6] = 1;*/
 				planeToDraw->texCoords[0] = (0.5 - barProgres);
-				planeToDraw->texCoords[4] = (0.5 - barProgres);
+				planeToDraw->texCoords[1] = (0.5 - barProgres);
 			}
 			else if (barProgres >= 0.5f) {
 
 				float aux = barProgres - 0.5;
 				planeToDraw->texCoords[2] = (1 - aux);
-				planeToDraw->texCoords[5] = (1 - aux);
+				planeToDraw->texCoords[3] = (1 - aux);
+
 			}
 			glDeleteBuffers(planeToDraw->texCoords.size() * sizeof(GLfloat), &planeToDraw->TBO);
 

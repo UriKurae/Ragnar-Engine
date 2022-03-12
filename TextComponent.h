@@ -8,12 +8,12 @@ class SDL_Rect;
 class SDL_Texture;
 class MyPlane;
 class GameObject;
-class ButtonComponent : public Component
+class TextComponent : public Component
 {
 public:
 
-	ButtonComponent(GameObject* own);
-	~ButtonComponent();
+	TextComponent(GameObject* own);
+	~TextComponent();
 
 	bool Update(float dt) override;
 	void Draw(CameraComponent* gameCam = nullptr) override;
@@ -24,6 +24,7 @@ public:
 	float2 GetParentPosition();
 
 public:
+
 	Text buttonText;
 	bool fadeUI = false;
 	State state;

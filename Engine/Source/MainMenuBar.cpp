@@ -26,6 +26,7 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "SliderComponent.h"
+#include"TextComponent.h"
 #include "Transform2DComponent.h"
 
 #include "ResourceManager.h"
@@ -312,6 +313,21 @@ bool MainMenuBar::Update(float dt)
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
 					button->gen = object;
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
+
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Text"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("text");
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					TextComponent* button = (TextComponent*)object->CreateComponent(ComponentType::UI_TEXT);
+					
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 
 

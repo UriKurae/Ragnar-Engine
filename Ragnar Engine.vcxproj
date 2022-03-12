@@ -279,6 +279,7 @@
     <ClInclude Include="Engine\Source\SliderComponent.h" />
     <ClInclude Include="Engine\Source\Style.h" />
     <ClInclude Include="Engine\Source\Text.h" />
+    <ClInclude Include="Engine\Source\TextComponent.h" />
     <ClInclude Include="Engine\Source\TextEditor.h" />
     <ClInclude Include="Engine\Source\TextEditorMenu.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
@@ -412,6 +413,7 @@
     <ClCompile Include="Engine\Source\MonoManager.cpp" />
     <ClCompile Include="Engine\Source\ScriptComponent.cpp" />
     <ClCompile Include="Engine\Source\SliderComponent.cpp" />
+    <ClCompile Include="Engine\Source\TextComponent.cpp" />
     <ClCompile Include="Engine\Source\TextEditorMenu.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
     <ClCompile Include="Engine\Source\PrefabManager.cpp" />
