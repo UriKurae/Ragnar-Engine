@@ -34,7 +34,6 @@
 #include "Globals.h"
 #include "ResourceManager.h"
 #include "ModuleRenderer3D.h"
-#include "VertexBuffer.h"
 
 #include "mmgr/mmgr.h"
 

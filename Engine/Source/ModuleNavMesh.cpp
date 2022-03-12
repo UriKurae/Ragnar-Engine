@@ -5,6 +5,7 @@
 #include "TransformComponent.h"
 #include "ModuleNavMesh.h"
 #include "ModuleScene.h"
+#include "MeshComponent.h"
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"

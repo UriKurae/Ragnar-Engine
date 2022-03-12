@@ -25,6 +25,7 @@
 #include "MathGeoLib/include/MathGeoLib.h"
 
 class Mesh;
+struct Vertex;
 
 static const int MAX_CONVEXVOL_PTS = 12;
 struct ConvexVolume

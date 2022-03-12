@@ -667,9 +667,6 @@
     <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\NavigatorMenu.h">
-      <Filter>Sources\Menus</Filter>
-    </ClInclude>
     <ClInclude Include="Dependencies\RecastDetour\ChunkyTriMesh.h">
       <Filter>Sources\Libraries\RecastDetour</Filter>
     </ClInclude>
@@ -678,9 +675,6 @@
     </ClInclude>
     <ClInclude Include="Dependencies\RecastDetour\NavMeshBuilder.h">
       <Filter>Sources\Libraries\RecastDetour</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\ModuleNavMesh.h">
-      <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\DebugDraw.h">
       <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
@@ -801,6 +795,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\ImageComponent.h">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\NavigatorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleNavMesh.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1200,9 +1200,6 @@
     <ClCompile Include="Engine\Source\Component.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\NavigatorMenu.cpp">
-      <Filter>Sources\Menus</Filter>
-    </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\ChunkyTriMesh.cpp">
       <Filter>Sources\Libraries\RecastDetour</Filter>
     </ClCompile>
@@ -1211,9 +1208,6 @@
     </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\NavMeshBuilder.cpp">
       <Filter>Sources\Libraries\RecastDetour</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\ModuleNavMesh.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\DebugDraw.cpp">
       <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
@@ -1325,6 +1319,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ImageComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\NavigatorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleNavMesh.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

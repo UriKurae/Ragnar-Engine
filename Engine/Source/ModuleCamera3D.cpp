@@ -9,7 +9,6 @@
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-#include "VertexBuffer.h"
 
 #include <map>
 #include "Viewport.h"

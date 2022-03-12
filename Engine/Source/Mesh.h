@@ -1,5 +1,6 @@
 #pragma once
 #include "Resource.h"
+#include "VertexBuffer.h"
 
 #include <map>
 
@@ -7,11 +8,8 @@
 #include "Shader.h"
 
 class IndexBuffer;
-class VertexBuffer;
 class VertexArray;
-
 struct ModelParameters;
-struct Vertex;
 
 class Mesh : public Resource
 {

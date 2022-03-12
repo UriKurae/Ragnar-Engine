@@ -11,7 +11,6 @@
 
 #include "Mesh.h"
 #include "Model.h"
-#include "VertexBuffer.h"
 
 #include "Profiling.h"
 
