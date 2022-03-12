@@ -209,7 +209,7 @@ Component* GameObject::CreateComponent(ComponentType type)
 		component = new RigidBodyComponent(this);
     break;
 	case ComponentType::NAVAGENT:
-		component = new NavAgentComponent(this, GetComponent<TransformComponent>());
+		component = new NavAgentComponent(this);
 		break;
 	case ComponentType::MATERIAL:
 	{
