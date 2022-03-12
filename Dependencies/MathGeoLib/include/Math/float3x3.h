@@ -28,7 +28,7 @@
 #include "../Math/float2.h"
 
 #ifdef MATH_BULLET_INTEROP
-#include "../../../Bullet/include/LinearMath/btMatrix3x3.h"
+#include "LinearMath/btMatrix3x3.h"
 #endif
 
 MATH_BEGIN_NAMESPACE

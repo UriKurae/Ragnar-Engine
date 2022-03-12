@@ -52,6 +52,9 @@
     <Filter Include="Sources\Libraries\WWise">
       <UniqueIdentifier>{bd1af3b5-ca65-4c5d-adab-cf27c3be5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\PugiXML">
+      <UniqueIdentifier>{e2e9269a-6c3b-4f29-b464-363e28b54c9a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Commands">
       <UniqueIdentifier>{6c54a952-fc50-4805-b3b5-7fb3fd1c7100}</UniqueIdentifier>
     </Filter>
@@ -64,20 +67,11 @@
     <Filter Include="PhysicsEngine">
       <UniqueIdentifier>{caaeba32-e8fd-448a-a552-88a21bcf8e7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Libraries\RecastDetour">
-      <UniqueIdentifier>{dd53d544-f65e-4bcb-9838-ab1d53621efd}</UniqueIdentifier>
+    <Filter Include="Sources\Tools\Bindings">
+      <UniqueIdentifier>{5c47b0eb-4345-495a-98f2-1a9e26e42dba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Libraries\RecastDetour\Detour">
-      <UniqueIdentifier>{48273050-b7bb-4b4a-928d-72f01a1db164}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
-      <UniqueIdentifier>{6bc0fc28-8529-4aa8-95c0-7a5c5c32467d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Libraries\RecastDetour\DetourTileCache">
-      <UniqueIdentifier>{47af1f52-65b0-44df-a93f-44584932090d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Libraries\RecastDetour\Recast">
-      <UniqueIdentifier>{95376722-a7da-49b0-835d-0678dbc33107}</UniqueIdentifier>
+    <Filter Include="Sources\GameObject\Components\UI">
+      <UniqueIdentifier>{e7c2aa50-fdb9-4519-ac74-100049977be3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Libraries\RecastDetour\DetourCrowd">
       <UniqueIdentifier>{960acad9-cc85-4df1-801f-8536d1570b0b}</UniqueIdentifier>
@@ -340,6 +334,24 @@
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\MonoManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\PugiXML\pugiconfig.hpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\PugiXML\pugixml.hpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditor.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextEditorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
     <ClInclude Include="Dependencies\Extras\IconsFontAwesome5.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
@@ -376,9 +388,6 @@
     <ClInclude Include="Engine\Source\FogWarMenu.h">
       <Filter>Sources\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\TextEditor.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\ShaderImporter.h">
       <Filter>Sources\Resources\Importers</Filter>
     </ClInclude>
@@ -387,6 +396,21 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\Style.h">
       <Filter>Sources\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AnimationComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AnimationImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Animation.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Bone.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\PrefabManager.h">
+      <Filter>Sources\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\MathGeoLib\include\Algorithm\GJK.h">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
@@ -721,6 +745,48 @@
     <ClInclude Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.h">
       <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\bezier.hpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AnimationBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\AudioBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\RigidbodyBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ScriptBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TransformBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CameraBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleUI.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ButtonComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CheckBoxComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\SliderComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Transform2DComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Text.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ImageComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -921,6 +987,21 @@
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\MonoManager.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\PugiXML\pugixml.cpp">
+      <Filter>Sources\Libraries\PugiXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ScriptComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditor.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextEditorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp">
       <Filter>Sources\Commands</Filter>
     </ClCompile>
@@ -939,9 +1020,6 @@
     <ClCompile Include="Engine\Source\FogWarMenu.cpp">
       <Filter>Sources\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\TextEditor.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\ShaderImporter.cpp">
       <Filter>Sources\Resources\Importers</Filter>
     </ClCompile>
@@ -950,6 +1028,21 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\AnimationComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\AnimationImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Animation.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Bone.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\PrefabManager.cpp">
+      <Filter>Sources\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\MathGeoLib\include\Algorithm\GJK.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
@@ -1196,6 +1289,27 @@
     </ClCompile>
     <ClCompile Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.cpp">
       <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\bezier.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleUI.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ButtonComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\CheckBoxComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\SliderComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Transform2DComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ImageComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,7 @@
 #pragma once
-
-#include "Command.h"
-
 #include <stack>
+
+class Command;
 
 class CommandDispatcher
 {

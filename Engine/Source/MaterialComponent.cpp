@@ -1,26 +1,21 @@
 #include "MaterialComponent.h"
-
 #include "Application.h"
-#include "ModuleEditor.h"
+
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModuleScene.h"
-#include "GameObject.h"
-#include "ResourceManager.h"
-#include "Texture.h"
-#include "Viewport.h"
-#include <fstream>
 
-#include "CameraComponent.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "AnimationComponent.h"
 
 #include "FileSystem.h"
+#include "ResourceManager.h"
+#include "Texture.h"
+#include "Lights.h"
 
-#include "Imgui/imgui.h"
-
-#include "IconsFontAwesome5.h"
-
+#include <fstream>
 #include "Profiling.h"
-
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 
@@ -258,7 +253,7 @@ std::vector<Uniform> MaterialComponent::GetShaderUniforms()
 		GLchar name[32];
 		glGetActiveUniform(shader->GetId(), i, sizeof(name), &length, &size, &uniform.GLtype, name);
 		uniform.name = name;
-		if (uniform.name != "inColor" && uniform.name != "time" && uniform.name != "modelMatrix" && uniform.name != "viewMatrix" && uniform.name != "projectionMatrix")
+		if (uniform.name != "inColor" && uniform.name != "time" && uniform.name != "modelMatrix" && uniform.name != "viewMatrix" && uniform.name != "projectionMatrix" && uniform.name != "finalBonesMatrices[0]")
 		{
 			uint uinformLoc = glGetUniformLocation(shader->GetId(), uniform.name.c_str());
 
@@ -355,6 +350,7 @@ bool MaterialComponent::OnLoad(JsonParsing& node)
 {
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
+	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 
 	return true;
 }
@@ -366,6 +362,7 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", diff->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	
 	node.SetValueToArray(array, file.GetRootValue());
 
@@ -380,6 +377,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	if (diff)
 		diff->Bind();
+
 
 	shader->Bind();
 
@@ -405,6 +403,14 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	normalMat.Inverse();
 	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
+	// Get matrices to animate the model
+	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
+	if (anim)
+	{
+		auto transforms = anim->GetFinalBoneMatrices();
+		for (int i = 0; i < transforms.size(); ++i)
+			shader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
+	}
 
 	shader->SetUniformVec3f("material.ambient", ambientColor);
 	shader->SetUniformVec3f("material.diffuse", diffuseColor);

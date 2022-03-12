@@ -1,6 +1,5 @@
 #pragma once
 #include "imgui/imgui.h"
-#include <stdint.h>
 
 namespace Style
 {

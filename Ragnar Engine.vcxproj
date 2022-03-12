@@ -21,14 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -55,7 +55,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\RecastDetour;$(SolutionDir)Engine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype-2.10.0\include;$(SolutionDir)Dependencies\mono;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\RecastDetour;$(SolutionDir)Engine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;RG_PROFILING;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -64,8 +64,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;BulletCollision_debug.lib;BulletDynamics_debug.lib;LinearMath_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freetype-2.10.0\lib;$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Deb;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Deb;$(SolutionDir)Dependencies\mono\libx86;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;CommunicationCentral.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;AkRoomVerbFX.lib;mono-2.0-boehm.lib;mono-2.0-sgen.lib;BulletCollision_debug.lib;BulletDynamics_debug.lib;LinearMath_debug.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,7 +77,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\RecastDetour;$(SolutionDir)Engine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype-2.10.0\include;$(SolutionDir)Dependencies\mono;$(SolutionDir)Dependencies\Extras;$(SolutionDir)Dependencies\glew\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies/SDL/include;$(SolutionDir)Dependencies\Assimp\include;$(SolutionDir)Dependencies\DevIL\include;$(SolutionDir)Dependencies\Wwise\include;$(SolutionDir)Dependencies\MathGeoLib\include;$(SolutionDir)Dependencies\Bullet\include;$(SolutionDir)Dependencies\RecastDetour;$(SolutionDir)Engine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;MATH_BULLET_INTEROP;AK_OPTIMIZED;GLEW_STATIC;LOGGING_SUPPORT_DISABLED;WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions);USE_IMGUI_API</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -87,8 +87,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies);AkRoomVerbFX.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freetype-2.10.0\lib;$(SolutionDir)Dependencies\glew\lib;$(SolutionDir)Dependencies\SDL\libx86;$(SolutionDir)Dependencies\MathGeoLib\lib\Release;$(SolutionDir)Dependencies\Assimp\lib;$(SolutionDir)Dependencies\PhysFS\lib;$(SolutionDir)Dependencies\Optick\lib;$(SolutionDir)Dependencies\DevIL\lib;$(SolutionDir)Dependencies\Wwise\lib\Release;$(SolutionDir)Dependencies\mono\libx86;$(SolutionDir)Dependencies\Bullet\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;ILU.lib;ILUT.lib;DevIL.lib;OptickCore.lib;physfs.lib;assimp-vc142-mt.lib;glew32s.lib;MathGeoLib.lib;opengl32.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies);AkRoomVerbFX.lib;mono-2.0-boehm.lib;mono-2.0-sgen.lib;freetype.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -97,6 +97,7 @@
     <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
+    <ClInclude Include="Dependencies\Imgui\bezier.hpp" />
     <ClInclude Include="Dependencies\Imgui\imconfig.h" />
     <ClInclude Include="Dependencies\Imgui\imgui.h" />
     <ClInclude Include="Dependencies\Imgui\ImguiStyle.h" />
@@ -216,6 +217,8 @@
     <ClInclude Include="Dependencies\RecastDetour\Recast\Recast.h" />
     <ClInclude Include="Dependencies\RecastDetour\Recast\RecastAlloc.h" />
     <ClInclude Include="Dependencies\RecastDetour\Recast\RecastAssert.h" />
+    <ClInclude Include="Dependencies\PugiXML\pugiconfig.hpp" />
+    <ClInclude Include="Dependencies\PugiXML\pugixml.hpp" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileHelpersBase.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.h" />
@@ -230,15 +233,25 @@
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIODeferred.h" />
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\stdafx.h" />
     <ClInclude Include="Engine\Source\AboutMenu.h" />
+    <ClInclude Include="Engine\Source\Animation.h" />
+    <ClInclude Include="Engine\Source\AnimationBindings.h" />
+    <ClInclude Include="Engine\Source\AnimationComponent.h" />
+    <ClInclude Include="Engine\Source\AnimationImporter.h" />
     <ClInclude Include="Engine\Source\Application.h" />
     <ClInclude Include="Engine\Source\AssimpDefs.h" />
+    <ClInclude Include="Engine\Source\AudioBindings.h" />
     <ClInclude Include="Engine\Source\AudioManager.h" />
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
+    <ClInclude Include="Engine\Source\Bone.h" />
     <ClInclude Include="Engine\Source\BufferLayout.h" />
+    <ClInclude Include="Engine\Source\ButtonComponent.h" />
+    <ClInclude Include="Engine\Source\CameraBindings.h" />	
     <ClInclude Include="Engine\Source\CameraComponent.h" />
+    <ClInclude Include="Engine\Source\CheckBoxComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
     <ClInclude Include="Engine\Source\C_RigidBody.h" />
+    <ClInclude Include="Engine\Source\ImageComponent.h" />
     <ClInclude Include="Engine\Source\LightComponent.h" />
     <ClInclude Include="Engine\Source\Lights.h" />
     <ClInclude Include="Engine\Source\Material.h" />
@@ -275,30 +288,39 @@
     <ClInclude Include="Engine\Source\ModuleCamera3D.h" />
     <ClInclude Include="Engine\Source\ModuleEditor.h" />
     <ClInclude Include="Engine\Source\ModuleInput.h" />
-    <ClInclude Include="Engine\Source\ModuleNavMesh.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
     <ClInclude Include="Engine\Source\ModuleScene.h" />
+    <ClInclude Include="Engine\Source\ModuleUI.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\NavAgentComponent.h" />
+    <ClInclude Include="Engine\Source\MonoManager.h" />
+    <ClInclude Include="Engine\Source\PrefabManager.h" />
     <ClInclude Include="Engine\Source\Physics3D.h" />
-    <ClInclude Include="Engine\Source\NavigatorMenu.h" />
     <ClInclude Include="Engine\Source\Primitive.h" />
     <ClInclude Include="Engine\Source\Primitives.h" />
     <ClInclude Include="Engine\Source\Profiling.h" />
     <ClInclude Include="Engine\Source\Quadtree.h" />
     <ClInclude Include="Engine\Source\Resource.h" />
     <ClInclude Include="Engine\Source\ResourceManager.h" />
+    <ClInclude Include="Engine\Source\RigidbodyBindings.h" />
+    <ClInclude Include="Engine\Source\ScriptBindings.h" />
+    <ClInclude Include="Engine\Source\ScriptComponent.h" />
     <ClInclude Include="Engine\Source\Shapes.h" />
     <ClInclude Include="Engine\Source\Shader.h" />
     <ClInclude Include="Engine\Source\ShaderHelpers.h" />
     <ClInclude Include="Engine\Source\ShaderImporter.h" />
-    <ClInclude Include="Engine\Source\TextEditor.h" />
+    <ClInclude Include="Engine\Source\SliderComponent.h" />
     <ClInclude Include="Engine\Source\Style.h" />
+    <ClInclude Include="Engine\Source\Text.h" />
+    <ClInclude Include="Engine\Source\TextEditor.h" />
+    <ClInclude Include="Engine\Source\TextEditorMenu.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
     <ClInclude Include="Engine\Source\TextureBuffer.h" />
     <ClInclude Include="Engine\Source\TextureImporter.h" />
     <ClInclude Include="Engine\Source\EngineTimer.h" />
     <ClInclude Include="Engine\Source\Timer.h" />
+    <ClInclude Include="Engine\Source\Transform2DComponent.h" />
+    <ClInclude Include="Engine\Source\TransformBindings.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
     <ClInclude Include="Engine\Source\VertexArray.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
@@ -306,6 +328,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\Imgui\bezier.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui.cpp" />
     <ClCompile Include="Dependencies\Imgui\ImGuizmo.cpp" />
     <ClCompile Include="Dependencies\Imgui\imgui_demo.cpp" />
@@ -391,6 +414,7 @@
     <ClCompile Include="Dependencies\RecastDetour\Recast\RecastMeshDetail.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Recast\RecastRasterization.cpp" />
     <ClCompile Include="Dependencies\RecastDetour\Recast\RecastRegion.cpp" />
+    <ClCompile Include="Dependencies\PugiXML\pugixml.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp" />
@@ -400,14 +424,21 @@
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp" />
     <ClCompile Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp" />
     <ClCompile Include="Engine\Source\AboutMenu.cpp" />
+    <ClCompile Include="Engine\Source\Animation.cpp" />
+    <ClCompile Include="Engine\Source\AnimationComponent.cpp" />
+    <ClCompile Include="Engine\Source\AnimationImporter.cpp" />
     <ClCompile Include="Engine\Source\Application.cpp" />
     <ClCompile Include="Engine\Source\AssimpDefs.cpp" />
     <ClCompile Include="Engine\Source\AudioManager.cpp" />
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp" />
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
+    <ClCompile Include="Engine\Source\Bone.cpp" />
+    <ClCompile Include="Engine\Source\ButtonComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
+    <ClCompile Include="Engine\Source\CheckBoxComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\Component.cpp" />
+    <ClCompile Include="Engine\Source\ImageComponent.cpp" />
     <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />
     <ClCompile Include="Engine\Source\ConfigurationMenu.cpp" />
@@ -439,14 +470,18 @@
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleEditor.cpp" />
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
-    <ClCompile Include="Engine\Source\ModuleNavMesh.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
+    <ClCompile Include="Engine\Source\ModuleUI.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
+    <ClCompile Include="Engine\Source\MonoManager.cpp" />
+    <ClCompile Include="Engine\Source\ScriptComponent.cpp" />
+    <ClCompile Include="Engine\Source\SliderComponent.cpp" />
+    <ClCompile Include="Engine\Source\TextEditorMenu.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
     <ClCompile Include="Engine\Source\NavAgentComponent.cpp" />
+    <ClCompile Include="Engine\Source\PrefabManager.cpp" />
     <ClCompile Include="Engine\Source\Physics3D.cpp" />
-    <ClCompile Include="Engine\Source\NavigatorMenu.cpp" />
     <ClCompile Include="Engine\Source\Primitive.cpp" />
     <ClCompile Include="Engine\Source\Quadtree.cpp" />
     <ClCompile Include="Engine\Source\ResourceManager.cpp" />
@@ -459,6 +494,7 @@
     <ClCompile Include="Engine\Source\TextureImporter.cpp" />
     <ClCompile Include="Engine\Source\EngineTimer.cpp" />
     <ClCompile Include="Engine\Source\Timer.cpp" />
+    <ClCompile Include="Engine\Source\Transform2DComponent.cpp" />
     <ClCompile Include="Engine\Source\TransformComponent.cpp" />
     <ClCompile Include="Engine\Source\VertexArray.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />

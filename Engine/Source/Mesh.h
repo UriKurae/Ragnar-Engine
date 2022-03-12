@@ -1,17 +1,20 @@
 #pragma once
-
 #include "Resource.h"
 
+#include <map>
 #include <vector>
 #include "Math/float3.h"
 #include "Math/float2.h"
 
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
+#include "Bone.h"
 #include "Shader.h"
 
+class IndexBuffer;
+class VertexBuffer;
+class VertexArray;
+
 struct ModelParameters;
+struct Vertex;
 
 class Mesh : public Resource
 {
@@ -34,21 +37,26 @@ public:
 	inline const std::vector<Vertex>& GetVerticesVector() const { return vertices; }
 	inline const int& GetIndicesSize() const { return indices.size(); }
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
-
+	inline const std::map<std::string, BoneInfo>& GetBoneMap() { return bones; }
 	void Reimport(ModelParameters& data);
 	void SetVariables(float* position, int total, uint* ind, int indtotal);
 
 private:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	//std::vector<float3> normals;
-	//std::vector<float2> texCoords;
 
 	VertexArray* vertexArray;
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
 	unsigned int tbo;
 	Shader* shader;
+
+	// Bones
+	std::map<std::string, BoneInfo> bones;
+	unsigned int numBones;
+
+
+	std::vector<unsigned int> bonesUid;
 
 	std::string path;
 };

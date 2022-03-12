@@ -1,7 +1,6 @@
-#include "Application.h"
-#include "GL/glew.h"
 #include "Shapes.h"
-#include <cmath>
+
+#include "GL/glew.h"
 #include "Math/float3x3.h"
 #include "Math/TransformOps.h"
 

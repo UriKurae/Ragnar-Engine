@@ -1,11 +1,12 @@
 #pragma once
-
 #include "Menu.h"
 #include <vector>
 #include <string>
 
 class ConsoleMenu;
+class TextEditorMenu;
 class Texture;
+
 enum class Menus
 {
 	CONSOLE = 0,
@@ -14,8 +15,8 @@ enum class Menus
 	INSPECTOR = 3,
 	HIERARCHY = 4,
 	CONTENT_BROWSER = 5,
-	FOGWAR = 6,
-	NAVIGATOR = 7,
+	TEXT_EDITOR = 6,
+	FOGWAR = 7,
 };
 
 class MainMenuBar : public Menu

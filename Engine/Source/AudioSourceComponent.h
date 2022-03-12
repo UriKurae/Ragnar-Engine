@@ -1,11 +1,7 @@
 #pragma once
-
 #include "Component.h"
 
-
 class TransformComponent;
-class IndexBuffer;
-class VertexBuffer;
 
 struct AudioClip
 {
@@ -32,7 +28,10 @@ public:
 	void StopClip();
 	void PauseClip();
 	void ResumeClip();
+
+	inline void ChangePosition() { changePosition = true; }
 private:
+	bool changePosition;
 
 	TransformComponent* transform;
 

@@ -3,8 +3,12 @@
 #include "GameObject.h"
 #include "Quadtree.h"
 #include "GameTimer.h"
+
 #include <vector>
-#include <list>
+#include <map>
+
+struct SerializedField;
+class btRigidBody; // Scripting
 
 enum class Object3D
 {
@@ -77,9 +81,17 @@ public:
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
+	inline GameObject* GetPlayer() { return player; };
+
+	// Scripting
+	void Scripting(float dt);
+	void SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel);
 
 	CameraComponent* mainCamera;
 	GameObject* camera;
+
+	std::multimap<uint, SerializedField*> referenceMap;
+
 private:
 	GameObject* root;
 	Quadtree qTree;
@@ -87,6 +99,7 @@ private:
 	bool frameSkip;
 
 	GameObject* player;
+	
 
 	bool resetQuadtree;
 

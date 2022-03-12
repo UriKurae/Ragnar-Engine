@@ -1,13 +1,8 @@
 #pragma once
-
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
 #include "Math/float3.h"
 
-typedef unsigned int GLuint;
-typedef unsigned short GLushort;
-typedef float GLfloat;
-typedef unsigned char GLubyte;
+class IndexBuffer;
+class VertexBuffer;
 
 class Primitive
 {

@@ -1,20 +1,15 @@
+#include "MeshComponent.h"
 #include "Application.h"
 #include "Globals.h"
-#include "MeshComponent.h"
 
 #include "ModuleScene.h"
-#include "CameraComponent.h"
+
+#include "TransformComponent.h"
+#include "MaterialComponent.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
-
 #include "Mesh.h"
-
-#include "Imgui/imgui.h"
-
-#include "glew/include/GL/glew.h"
-
-#include "IconsFontAwesome5.h"
-#include "Geometry/Sphere.h"
 
 #include "Profiling.h"
 
@@ -235,6 +230,8 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 
 		CalculateCM();
 	}
+
+
 }
 
 bool MeshComponent::HasMaterial()
@@ -242,6 +239,10 @@ bool MeshComponent::HasMaterial()
 	if (material) return true;
 	
 	return false;
+}
+const std::map<std::string, BoneInfo> MeshComponent::GetBoneMap()
+{
+	return mesh->GetBoneMap();
 }
 
 void MeshComponent::CalculateCM()

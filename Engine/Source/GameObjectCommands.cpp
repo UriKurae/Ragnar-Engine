@@ -1,8 +1,6 @@
 #include "GameObjectCommands.h"
-
 #include "GameObject.h"
-
-#include "MathGeoLib/include/Math/float3.h"
+#include "TransformComponent.h"
 
 MoveGameObjectCommand::MoveGameObjectCommand(GameObject* go) : actor(go)
 {

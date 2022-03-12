@@ -1,6 +1,5 @@
 #include "ConsoleMenu.h"
 #include "Application.h"
-#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 

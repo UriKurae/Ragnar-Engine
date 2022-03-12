@@ -1,32 +1,30 @@
+#include "ModuleRenderer3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleRenderer3D.h"
 
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
-#include "Framebuffer.h"
 #include "ModuleNavMesh.h"
-#include "NavMeshBuilder.h"
+
+#include "LightComponent.h"
+#include "TransformComponent.h"
+
+#include "ButtonComponent.h"
+#include "CheckBoxComponent.h"
+#include "ImageComponent.h"
+#include "SliderComponent.h"
 
 #include "ResourceManager.h"
-
-#include "GameObject.h"
-#include "LightComponent.h"
-
-#include "Material.h"
 #include "Shader.h"
-#include "Resource.h"
+#include "Lights.h"
+#include "Framebuffer.h"
+#include "NavMeshBuilder.h"
 
-#include "glew/include/GL/glew.h"
-
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
-
 #include "Imgui/ImguiStyle.h"
-
 #include "IL/ilut.h"
 #include "Geometry/LineSegment.h"
 
@@ -54,7 +52,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
 {
-	RELEASE(mainCameraFbo);
 }
 
 // Called before render is available
@@ -183,18 +180,15 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		glEnable(GL_STENCIL_TEST);*/
 		
 	}
-
 	//// Projection matrix for
 	int w = *app->window->GetWindowWidth();
 	int h = *app->window->GetWindowHeight();
 	OnResize(w, h);
-
 	
 	fbo = new Framebuffer(w, h, 1);
 	fbo->Unbind();
 	mainCameraFbo = new Framebuffer(w, h, 0);
-	mainCameraFbo->Unbind();
-	
+	mainCameraFbo->Unbind();	
 
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
@@ -320,6 +314,84 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		(*it)->Draw(app->scene->mainCamera);
 	}
+	//PushCamera(float4x4::identity, float4x4::identity);
+
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glPopMatrix();
+
+	// DRAW UI
+
+
+	ButtonComponent* aux = nullptr;
+	//CanvasComponent* aux1 = nullptr;
+	CheckboxComponent* aux2 = nullptr;
+	ImageComponent* aux3 = nullptr;
+	//InputBoxComponent* aux4 = nullptr;
+	SliderComponent* aux5 = nullptr;
+	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
+	{
+		/* glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
+
+			aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
+		//aux1 = go->GetComponent<CanvasComponent>();
+		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
+		aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
+		//aux4 = go->GetComponent<InputBoxComponent>();
+		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
+
+
+
+		if (aux != nullptr)
+		{
+
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+			aux = nullptr;
+		}
+		/* else if (aux1 != nullptr)
+		{
+			textExample = aux1->text;
+			color.x = aux1->color.r;
+			color.y = aux1->color.g;
+			color.z = aux1->color.b;
+			aux1 = nullptr;
+		} */
+		else if (aux2 != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			aux2 = nullptr;
+		}
+		else if (aux3 != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			aux3 = nullptr;
+		}
+		/* else if (aux4 != nullptr)
+		{
+			textExample = aux4->text;
+			color.x = aux4->textColor.r;
+			color.y = aux4->textColor.g;
+			color.z = aux4->textColor.b;
+			aux4 = nullptr;
+		} */
+		else if (aux5 != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			aux5 = nullptr;
+		}
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+	}
 
 	mainCameraFbo->Unbind();
 
@@ -347,6 +419,13 @@ bool ModuleRenderer3D::CleanUp()
 		pl = nullptr;
 	}
 	pointLights.clear();
+
+	for (auto& pl : spotLights)
+	{
+		delete pl;
+		pl = nullptr;
+	}
+	spotLights.clear();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();

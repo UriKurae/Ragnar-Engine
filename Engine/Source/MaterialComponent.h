@@ -1,16 +1,9 @@
 #pragma once
-
 #include "Component.h"
 #include "Shader.h"
 #include "TextEditor.h"
 
 #include <string>
-#include <memory>
-
-
-
-typedef unsigned int GLuint;
-typedef unsigned char GLubyte;
 
 class Texture;
 class Resource;
@@ -40,6 +33,8 @@ public:
 
 	void SetTexture(std::shared_ptr<Resource> tex);
 	void EditorShader();
+
+	std::shared_ptr<Texture> GetTexture() { return diff; }
 
 private:
 	bool checker;

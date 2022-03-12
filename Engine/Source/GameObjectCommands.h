@@ -1,9 +1,8 @@
 #pragma once
-
 #include "Command.h"
 
-#include "MathGeoLib/include/Math/float3.h"
-#include "MathGeoLib/include/Math/Quat.h"
+#include "Math/float3.h"
+#include "Math/Quat.h"
 
 class GameObject;
 

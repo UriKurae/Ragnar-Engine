@@ -1,54 +1,59 @@
+#include "MainMenuBar.h"
 #include "Application.h"
 #include "Globals.h"
-#include "AudioManager.h"
+
 #include "ModuleRenderer3D.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
+#include "ModuleEditor.h"
+#include "ModuleCamera3D.h"
+#include "Physics3D.h"
 
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
-#include "MainMenuBar.h"
 #include "AboutMenu.h"
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "TextEditorMenu.h"
 #include "FogWarMenu.h"
-#include "Texture.h"
-#include "TextureImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
-#include "NavigatorMenu.h"
 
-#include "FileSystem.h"
-
+#include "TransformComponent.h"
 #include "LightComponent.h"
 
-#include "ModuleCamera3D.h"
-#include "Physics3D.h"
+#include "ButtonComponent.h"
+#include "ImageComponent.h"
+#include "CheckBoxComponent.h"
+#include "SliderComponent.h"
+#include "Transform2DComponent.h"
 
+#include "ResourceManager.h"
+#include "AudioManager.h"
 
+#include "Lights.h"
+#include "Texture.h"
 #include "Dialogs.h"
-#include "IconsFontAwesome5.h"
+#include "Viewport.h"
 #include "Style.h"
 
+#include "Math/float3x3.h"
 #include "imgui/imgui_stdlib.h"
 
 #include <fstream>
-
 #include "Profiling.h"
-
-#include "Math/float3x3.h"
 
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {
 	showMenu = false;
 
-	menus.reserve(8);
+	menus.reserve(7);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
 	menus.emplace_back(new NavigatorMenu());
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
@@ -143,6 +148,9 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z", &ret);
 			ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y", &ret);
+
+			ImGui::Separator();
+			app->editor->GetViewport()->SnapOptions();
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())
@@ -157,7 +165,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
-			ImGui::MenuItem(ICON_FA_WALKING" Navigator", NULL, &menus[(int)Menus::NAVIGATOR]->active);
+			ImGui::MenuItem(ICON_FA_CODE" Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
 
 			ImGui::EndMenu();
 		}
@@ -254,6 +262,70 @@ bool MainMenuBar::Update(float dt)
 					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, app->editor->GetGO());
 					else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
 				}
+				ImGui::EndMenu();
+
+			}
+			if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
+			{
+				if (ImGui::MenuItem("UI Button"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("Button");
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+
+					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
+					button->gen = object;
+					object->CreateComponent(ComponentType::MATERIAL);
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Slider"))
+				{				
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("Slider");
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
+					button->gen = object;
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					app->userInterface->UIGameObjects.push_back(object);
+					button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->thePlane->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Check Box"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("CheckBox");
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
+					button->gen = object;
+					button->selectedMaterial = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					button->noSelectedMaterial = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					//material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					button->actual = button->noSelectedMaterial;
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Image"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("Image");
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
+					button->gen = object;
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
+
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+
 				ImGui::EndMenu();
 
 			}

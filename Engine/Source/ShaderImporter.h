@@ -1,9 +1,5 @@
 #pragma once
-
 #include "JsonParsing.h"
-#include "ShaderHelpers.h"
-
-#include <string>
 
 namespace ShaderImporter
 {

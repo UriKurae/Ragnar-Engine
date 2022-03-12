@@ -1,15 +1,12 @@
 #include "InspectorMenu.h"
 #include "Application.h"
+
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 
-#include "GameObject.h"
 #include "Resource.h"
 
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_internal.h"
-#include "IconsFontAwesome5.h"
-
 #include "Profiling.h"
 
 InspectorMenu::InspectorMenu() : Menu(true)
@@ -75,6 +72,12 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	ImGui::SameLine();
 	DrawList("Layer", &layers, obj->layer);
 	// Destroy object selected, pendingToDelete = true
+
+	if (obj->GetPrefabID() != 0)
+	{
+		ImGui::Text("Prefab ID: %d", obj->GetPrefabID());
+		ImGui::Text("Prefab Path: %s", obj->prefabPath.c_str());
+	}
 
 	int comp_origin = -1, comp_destination = -1;
 	ImGui::Separator();

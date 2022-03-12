@@ -1,16 +1,12 @@
 #pragma once
-
 #include "Resource.h"
 
 #include "Math/float4x4.h"
 #include "Math/float3x3.h"
 #include "Math/float2.h"
-#include "glew/include/GL/glew.h"
+#include "GL/glew.h"
 
 #include <unordered_map>
-#include <string>
-
-
 
 enum class UniformType
 {

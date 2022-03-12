@@ -1,15 +1,12 @@
 #include "Texture.h"
-#include "DevIL/include/IL/il.h"
-
 #include "Application.h"
+#include "Globals.h"
+
 #include "FileSystem.h"
 #include "TextureImporter.h"
 
-#include "glew/include/GL/glew.h"
-#include "Globals.h"
-
+#include "GL/glew.h"
 #include "Imgui/imgui.h"
-
 #include "Profiling.h"
 
 Texture::Texture(uint uid, std::string& assets, std::string& library) 

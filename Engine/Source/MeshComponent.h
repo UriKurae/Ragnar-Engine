@@ -1,14 +1,9 @@
 #pragma once
+#include <map>
 
 #include "Component.h"
-#include "IndexBuffer.h"
-#include "VertexBuffer.h"
-
 #include "Geometry/AABB.h"
-#include <vector>
-
-typedef unsigned int GLuint;
-typedef unsigned char GLubyte;
+#include "Bone.h"
 
 class TransformComponent;
 class MaterialComponent;
@@ -40,6 +35,7 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
+	const std::map<std::string, BoneInfo> GetBoneMap();
 
 private:
 	TransformComponent* transform;
@@ -52,6 +48,7 @@ private:
 	bool verticesNormals;
 
 	std::shared_ptr<Mesh> mesh;
+	std::vector<GameObject*> boneList;
 
 	AABB localBoundingBox;
 

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Component.h"
 #include "Math/float4x4.h"
 
@@ -21,6 +20,7 @@ typedef float GLfloat;
 class TransformComponent : public Component
 {
 public:
+	TransformComponent() {}
 	TransformComponent(GameObject* owner);
 	TransformComponent(TransformComponent* trans);
 	~TransformComponent();
@@ -40,6 +40,8 @@ public:
 	void NewAttachment();
 	void SetAABB();
 
+	void UpdateBoundingBox();
+
 	inline float4x4 GetLocalTransform() const { return localMatrix; }
 	inline float4x4 GetGlobalTransform() const { return globalMatrix; }
 	inline float3 GetPosition() const { return position; }
@@ -55,10 +57,20 @@ public:
 	void ShowTransformationInfo();
 	void ResetTransform();
 
+	float3 GetForward();
+	float3 GetRight();
+	float3 GetUp();
+
 	// UNDO
 	inline void ForceUpdateTransform() { changeTransform = true; }
 	void UpdateEditorRotation();
 	// UNDO
+
+	//// Get Axis
+	//float3 GetForward();
+	//float3 GetUp();
+	//float3 GetRight();
+	//float3 GetNormalizeAxis(int i);
 
 private:
 	float3 position;

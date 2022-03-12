@@ -1,12 +1,5 @@
 #pragma once
 
-#include <string>
-#include <windows.h>
-#include <commdlg.h>
-#include "Application.h"
-#include "ModuleWindow.h"
-#include <SDL/include/SDL_syswm.h>
-
 namespace Dialogs
 {
 	static std::string OpenFile(const char* path)
@@ -17,7 +10,7 @@ namespace Dialogs
 		openFile.lStructSize = sizeof(OPENFILENAMEA);
 
 		openFile.hwndOwner = GetActiveWindow();
-		openFile.lpstrFile = sizeFile;
+		openFile.lpstrFile = sizeFile; typedef unsigned int uint;
 		openFile.nMaxFile = sizeof(openFile);
 		openFile.lpstrFilter = path;
 		openFile.lpstrDefExt = "ragnar";

@@ -1,18 +1,17 @@
 #include "TextureImporter.h"
-
 #include "Application.h"
-#include "FileSystem.h"
 #include "Globals.h"
-#include "ResourceManager.h"
+
+#include "FileSystem.h"
 #include "Component.h"
 #include "Texture.h"
 
-#include "IL/il.h"
 #include "IL/ilu.h"
 #include "ResourceManager.h"
-#include "glew/include/GL/glew.h"
-#include "MathGeoLib/include/Algorithm/Random/LCG.h"
+#include "GL/glew.h"
 
+#include <assimp/material.h>
+#include <string>
 #include "Profiling.h"
 
 void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, const char* typeName, JsonParsing& json, std::string& path)
@@ -29,7 +28,7 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage((const wchar_t*)assetsPath.c_str());
+		ilLoadImage(assetsPath.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
 		std::string libraryPath;
@@ -55,7 +54,7 @@ void TextureImporter::ImportTexture(std::string& fileName)
 		ILuint image;
 		ilGenImages(1, &image);
 		ilBindImage(image);
-		ilLoadImage((const wchar_t*)fileName.c_str());
+		ilLoadImage(fileName.c_str());
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		std::string libraryPath;
 
@@ -71,7 +70,7 @@ void TextureImporter::ImportTexture2(std::string& fileName)
 	ILuint image;
 	ilGenImages(1, &image);
 	ilBindImage(image);
-	ilLoadImage((const wchar_t*)fileName.c_str());
+	ilLoadImage(fileName.c_str());
 	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 	app->fs->GetFilenameWithoutExtension(fileName);
 	std::string libraryPath = SETTINGS_FOLDER + std::string("EngineResources/") + fileName + ".rgtexture";

@@ -1,7 +1,5 @@
 #include "IndexBuffer.h"
-
 #include "glew/include/GL/glew.h"
-
 #include "Profiling.h"
 
 IndexBuffer::IndexBuffer() : count(0)

@@ -1,20 +1,19 @@
 #include "HierarchyMenu.h"
-
 #include "Application.h"
-#include "ModuleRenderer3D.h"
 #include "Globals.h"
+
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
-#include "GameObject.h"
-#include "LightComponent.h"
+#include "FileSystem.h"
 
-#include "IconsFontAwesome5.h"
+#include "PrefabManager.h"
 
 #include "Profiling.h"
 
 HierarchyMenu::HierarchyMenu() : Menu(true)
 {
 	gameObjectOptions = false;
+	confirmPanel = false;
 }
 
 HierarchyMenu::~HierarchyMenu()
@@ -101,11 +100,70 @@ bool HierarchyMenu::Update(float dt)
 				app->editor->SetGO(nullptr);
 				gameObjectOptions = false;
 			}
+			else if (ImGui::Button(ICON_FA_BOX_OPEN" Prefab", ImVec2(100.0f, 30.0f)))
+			{
+				if (app->fs->Exists(selected->prefabPath.c_str()) != 0)
+				{
+					confirmPanel = true;
+					gameObjectOptions = false;
+				}
+				else
+				{
+					PrefabManager::GetInstance()->SavePrefab(selected, 1);
+					gameObjectOptions = false;
+				}
+			}
 			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 			{
-				/*app->editor->SetSelected(nullptr);
-				app->editor->SetSelectedParent(nullptr);*/
 				gameObjectOptions = false;
+			}
+
+			if (selected != nullptr && selected->prefabPath != "None")
+			{
+				if (ImGui::Button(ICON_FA_BOX_OPEN" UnPrefab", ImVec2(100.0f, 30.0f)))
+				{
+					selected->prefabPath = "None";
+					selected->UnPrefab();
+
+					for (std::vector<GameObject*>::iterator it = selected->GetChilds().begin(); it != selected->GetChilds().end(); ++it)
+					{
+						(*it)->prefabPath = "None";
+					}
+
+					gameObjectOptions = false;
+				}
+			}
+
+			ImGui::EndPopup();
+		}
+	}
+
+	if (confirmPanel)
+	{
+		ImGui::OpenPopup("Confirm");
+
+		if (ImGui::BeginPopup("Confirm"))
+		{
+			ImGui::Text("There's an existing prefab");
+			ImGui::Text("with the same name: ");
+
+			if (ImGui::Button("Overwrite", ImVec2(150.0f, 30.0f)))
+			{
+				PrefabManager::GetInstance()->SavePrefab(selected, 2);
+				confirmPanel = false;
+			}
+			else if (ImGui::Button("Create new prefab", ImVec2(150.0f, 30.0f)))
+			{
+				PrefabManager::GetInstance()->SavePrefab(selected, 3);
+				confirmPanel = false;
+			}
+			else if (ImGui::Button("Cancel", ImVec2(150.0f, 30.0f)))
+			{
+				confirmPanel = false;
+			}
+			else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
+			{
+				confirmPanel = false;
 			}
 			ImGui::EndPopup();
 		}
@@ -132,9 +190,11 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 			if (ImGui::BeginDragDropSource())
 			{
 				ImGui::SetDragDropPayload("HierarchyItem", &uuid, sizeof(uint));
+				//ImGui::SetDragDropPayload("HierarchyItemGameObject", &uuid, sizeof(uint));
 
 				ImGui::EndDragDropSource();
 			}
+
 			if (ImGui::BeginDragDropTarget())
 			{
 				const ImGuiPayload* go = ImGui::AcceptDragDropPayload("HierarchyItem");
@@ -145,7 +205,7 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 				}
 				ImGui::EndDragDropTarget();
 			}
-			if (ImGui::IsItemClicked())
+			if (ImGui::IsMouseReleased(0) && ImGui::IsItemHovered())
 			{
 				app->editor->SetGO(obj);
 				app->editor->SetSelectedParent(parent);

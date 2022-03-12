@@ -1,6 +1,6 @@
 #include "TextureBuffer.h"
 
-#include "glew/include/GL/glew.h"
+#include "GL/glew.h"
 #include "IL/il.h"
 
 #include "Profiling.h"

@@ -1,16 +1,15 @@
 #pragma once
-
 #include "Module.h"
 #include "MainMenuBar.h"
-#include "Viewport.h"
-#include "GameView.h"
 
 #include <vector>
 #include <string>
-#include "Imgui/ImGuizmo.h"
 
 class GameObject;
 class Resource;
+class Viewport;
+class GameView;
+class Framebuffer;
 
 class ModuleEditor : public Module
 {
@@ -27,6 +26,7 @@ public:
 	inline GameObject* GetGO() { return selected; }
 	inline Resource* GetResource() { return resource; }
 	inline GameObject* GetSelectedParent() { return selectedParent; }
+	inline GameView* GetGameView() { return gameView; }
 	
 	void SetResource(Resource* res);
 	void SetGO(GameObject* obj);
@@ -43,8 +43,8 @@ public:
 	std::vector<std::string> GetTags();
 	std::vector<std::string> GetLayers();
 
-	inline const Viewport* GetViewport() const { return viewport; }
-	//Viewport* GetViewport() { return viewport; }
+
+
 private:
 	MainMenuBar mainMenuBar;
 
@@ -53,7 +53,7 @@ private:
 
 	Resource* resource;
 
-	Viewport* viewport;
 	GameView* gameView;
-	ImGuizmo::OPERATION currentOperation;
+
+	Viewport* viewport;
 };

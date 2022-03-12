@@ -1,5 +1,5 @@
-#include "Globals.h"
 #include "JsonParsing.h"
+#include "Globals.h"
 
 #include "Profiling.h"
 
@@ -37,7 +37,7 @@ size_t JsonParsing::Save(char** buf)
 size_t JsonParsing::SaveFile(const char* name)
 {
 	size_t written = json_serialization_size(rootObject);
-	json_serialize_to_file(rootObject, name);
+	json_serialize_to_file_pretty(rootObject, name);
 	return written;
 }
 

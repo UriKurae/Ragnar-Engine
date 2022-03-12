@@ -1,11 +1,8 @@
-#include "Application.h"
 #include "FogWarMenu.h"
+#include "Application.h"
+
 #include "ModuleScene.h"
-
-#include "CameraComponent.h"
-
-#include "Glew/include/GL/glew.h"
-#include "MathGeoLib/include/Geometry/Frustum.h"
+#include "GL/glew.h"
 
 FogWarMenu::FogWarMenu() : Menu(true)
 {
@@ -16,7 +13,7 @@ FogWarMenu::~FogWarMenu()
 
 bool FogWarMenu::Update(float dt)
 {
-	if (ImGui::Begin("Fog War", &active))
+	if (ImGui::Begin(ICON_FA_CLOUD" Fog War", &active))
 	{
 		Frustum* frustum = app->scene->mainCamera->GetFrustum();
 		if (ImGui::Checkbox("Active", &fog))

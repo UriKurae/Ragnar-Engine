@@ -14,5 +14,4 @@ void Component::ComponentOptions(Component* component)
 	ImGui::SameLine();
 	if (ImGui::Button(ICON_FA_TRASH" Delete"))
 		owner->RemoveComponent(component);
-
 }

@@ -1,17 +1,22 @@
 #include "Application.h"
 #include "Globals.h"
+#include "Module.h"
+
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "MonoManager.h"
 #include "Physics3D.h"
 #include "ModuleNavMesh.h"
+#include "ModuleUI.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "AudioManager.h"
+#include "PrefabManager.h"
 
 #include "Profiling.h"
 
@@ -23,8 +28,10 @@ Application::Application()
 	scene = new ModuleScene();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
+	moduleMono = new MonoManager(this);
 	editor = new ModuleEditor();
 	navMesh = new ModuleNavMesh();
+	userInterface = new ModuleUI();
 
 	fs = new FileSystem(RESOURCES_FOLDER);
 
@@ -39,10 +46,12 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(navMesh);
+	AddModule(moduleMono);
 	
 	// Scenes
 	AddModule(scene);
 	AddModule(editor);
+	AddModule(userInterface);
 
 	AddModule(renderer3D);
 
@@ -62,6 +71,7 @@ Application::~Application()
 	RELEASE(fs);
 	ResourceManager::ReleaseInstance();
 	AudioManager::Release();
+	PrefabManager::ReleaseInstance();
 
 	listModules.clear();
 }
@@ -249,4 +259,17 @@ void Application::LoadConfig()
 	}
 
 	loadRequested = false;
+}
+
+bool Application::StringCmp(const char* str1, const char* str2)
+{
+	size_t size = strlen(str1);
+	if (size != strlen(str2))
+		return false;
+
+	for (uint i = 0; i < size; ++i) {
+		if (std::tolower(str1[i]) != std::tolower(str2[i]))
+			return false;
+	}
+	return true;
 }

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Menu.h"
 
 class GameObject;
@@ -19,4 +18,5 @@ public:
 
 private:
 	bool gameObjectOptions;
+	bool confirmPanel;
 };

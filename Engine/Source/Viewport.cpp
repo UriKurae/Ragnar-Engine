@@ -1,26 +1,20 @@
+#include "ModuleEditor.h" // For some reason the ModuleEditor must be upon of the Viewport.h 
+#include "Viewport.h"
 #include "Application.h"
+
 #include "ModuleInput.h"
 #include "ModuleCamera3D.h"
-#include "ModuleEditor.h"
 #include "ModuleScene.h"
-#include "Viewport.h"
 #include "ModuleRenderer3D.h"
-#include "GameObject.h"
 
+#include "TransformComponent.h"
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
-#include "FileSystem.h"
 #include "ResourceManager.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
+#include "PrefabManager.h"
 
-#include "Imgui/imgui.h"
-#include "Imgui/ImGuizmo.h"
-#include "Globals.h"
-
-#include "IconsFontAwesome5.h"
-
+#include "Framebuffer.h"
 #include "Profiling.h"
 
 Viewport::Viewport()
@@ -34,7 +28,7 @@ Viewport::~Viewport()
 	CommandDispatcher::Shutdown();
 }
 
-void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int currentOperation)
+void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
@@ -73,22 +67,25 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 			ImGuizmo::SetDrawlist();
 
 			math::float4x4 view = app->camera->cameraFrustum.ViewMatrix();
-			math::float4x4 tr = goSel->GetComponent<TransformComponent>()->GetGlobalTransform().Transposed();
+			TransformComponent* h = goSel->GetComponent<TransformComponent>();
+			if (h) {
+				math::float4x4 tr = h->GetGlobalTransform().Transposed();
 
-			ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), (ImGuizmo::OPERATION)currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr());
-			static bool firstMove = false;
-			if (ImGuizmo::IsUsing())
-			{
-				GameObject* go = goSel;
-				if (!firstMove)
+				ImGuizmo::Manipulate(view.Transposed().ptr(), app->camera->cameraFrustum.ProjectionMatrix().Transposed().ptr(), currentOperation, ImGuizmo::MODE::LOCAL, tr.ptr(), 0, (float*)snap);
+				static bool firstMove = false;
+				if (ImGuizmo::IsUsing())
 				{
-					firstMove = true;
+					GameObject* go = goSel;
+					if (!firstMove)
+					{
+						firstMove = true;
 
-					CommandDispatcher::Execute(new MoveGameObjectCommand(go));
+						CommandDispatcher::Execute(new MoveGameObjectCommand(go));
+					}
+					go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
 				}
-				go->GetComponent<TransformComponent>()->SetTransform(tr.Transposed());
+				else firstMove = false;
 			}
-			else firstMove = false;
 		}
 
 		// TODO: Not the best place to call this
@@ -112,6 +109,10 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 				if (scene.find(".ragnar") != std::string::npos)
 				{
 					app->scene->LoadScene(scene.c_str());
+				}
+				else if (scene.find(".rgprefab") != std::string::npos)
+				{
+					PrefabManager::GetInstance()->LoadPrefab(scene.c_str());
 				}
 				else
 				{
@@ -142,3 +143,44 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer, int curre
 	ImGui::End();
 	style.WindowPadding = ImVec2(8.0f, 8.0f);
 }
+
+void Viewport::SetSnap(ImGuizmo::OPERATION operation)
+{
+	bool desactiveSnap = false;
+	switch (operation)
+	{
+	case ImGuizmo::OPERATION::TRANSLATE:
+		currentOperation = ImGuizmo::OPERATION::TRANSLATE;
+		if(translateSnap) snap[0] = snap[1] = snap[2] = allTsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	case ImGuizmo::OPERATION::ROTATE:
+		currentOperation = ImGuizmo::OPERATION::ROTATE;
+		if (rotateSnap) snap[0] = snap[1] = snap[2] = allRsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	case ImGuizmo::OPERATION::SCALE:
+		currentOperation = ImGuizmo::OPERATION::SCALE;
+		if (scaleSnap) snap[0] = snap[1] = snap[2] = allSsnap;
+		else snap[0] = snap[1] = snap[2] = 0;
+		break;
+	default:
+		break;
+	}
+}
+
+void Viewport::SnapOptions()
+{
+	ImGui::Checkbox("Snap Translate", &translateSnap);
+	ImGui::SliderFloat("##Translate", &allTsnap, 0.0f, 10.0f, "%.2f");
+
+	ImGui::Checkbox("Snap Rotation", &rotateSnap);
+	ImGui::SliderInt("##Rotation", &allRsnap, 0.0f, 90.0f);
+
+	ImGui::Checkbox("Snap Scale", &scaleSnap);
+	ImGui::SliderFloat("##Scale", &allSsnap, 0.0f, 5.0f, "%.2f");
+
+	SetSnap(currentOperation);
+}
+
+

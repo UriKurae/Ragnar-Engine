@@ -1,8 +1,8 @@
+#include "ModuleWindow.h"
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleWindow.h"
-
+#include "SDL.h"
 #include "Profiling.h"
 
 ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)

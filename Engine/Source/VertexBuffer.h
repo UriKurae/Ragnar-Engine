@@ -1,5 +1,4 @@
 #pragma once
-
 #include "BufferLayout.h"
 #include "Math/float3.h"
 #include "Math/float2.h"

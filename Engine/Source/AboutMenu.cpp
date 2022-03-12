@@ -1,11 +1,9 @@
 #include "AboutMenu.h"
 
+#include "assimp/version.h"
+#include "PhysFS/include/physfs.h"
 #include <SDL_syswm.h>
 #include <GL\glew.h>
-
-#include "assimp/version.h"
-#include "DevIL/include/IL/il.h"
-#include "PhysFS/include/physfs.h"
 
 #include "Profiling.h"
 
