@@ -73,8 +73,23 @@
     <Filter Include="Sources\GameObject\Components\UI">
       <UniqueIdentifier>{e7c2aa50-fdb9-4519-ac74-100049977be3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour">
+      <UniqueIdentifier>{58372d26-6a47-44e6-9840-a670bd587a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
+      <UniqueIdentifier>{f4ea8377-05e1-4c9f-bec2-0007fcd46baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\Detour">
+      <UniqueIdentifier>{092b5690-982b-4223-8de3-c05ac588f021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DetourTileCache">
+      <UniqueIdentifier>{226045b1-1767-44e0-8a09-2340fb6efcfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\Recast">
+      <UniqueIdentifier>{3519ba21-f7d3-4aa1-8b2f-986de673a97a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Libraries\RecastDetour\DetourCrowd">
-      <UniqueIdentifier>{960acad9-cc85-4df1-801f-8536d1570b0b}</UniqueIdentifier>
+      <UniqueIdentifier>{c359254e-8161-490d-b0d5-cd504e6de230}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
