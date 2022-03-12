@@ -22,7 +22,6 @@ NavAgentComponent::~NavAgentComponent()
 
 bool NavAgentComponent::Update(float dt)
 {
-	agentProperties->pathfinder.CalculatePath();
 
 	return true;
 }
