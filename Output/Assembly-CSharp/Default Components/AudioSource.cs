@@ -7,8 +7,9 @@ namespace RagnarEngine
     public class AudioSource : RagnarComponent
     {
         //Change type depending of class
-        public AudioSource()
+        public AudioSource(UIntPtr ptr)
         {
+            pointer = ptr;
             type = ComponentType.AUDIO_SOURCE;
         }
         

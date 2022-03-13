@@ -7,7 +7,7 @@ namespace RagnarEngine
 {
     public enum ComponentType
     {
-        NONE = 0,
+        NONE = -1,
         TRANSFORM,
         MESH_RENDERER,
         MATERIAL,
@@ -40,6 +40,12 @@ namespace RagnarEngine
         public RagnarComponent()
         {
             this.type = ComponentType.SCRIPT;
+        }
+
+        public RagnarComponent(UIntPtr ptr)
+        {
+            pointer = ptr;
+            //this.type = ComponentType.SCRIPT;
         }
 
         public extern GameObject gameObject

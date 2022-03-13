@@ -80,6 +80,8 @@ public:
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
+	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
+
 	inline GameObject* GetPlayer() { return player; };
 
 	// Scripting

@@ -286,8 +286,8 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 234581128,
-                    "type": 5,
+                    "pointer": 118926336,
+                    "type": 4,
                     "componentTable": 0,
                     "velocity": 5
                 }
@@ -1497,6 +1497,132 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 268799058,
+            "Parent UUID": 417171234,
+            "Name": "Obstacle",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -6.2942304611206055,
+                        1,
+                        7.0980758666992188
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.50000005960464478,
+                        0,
+                        0.86602538824081421
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        3.0000007152557373,
+                        1.3999999761581421,
+                        1.5000003576278687
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 892713844,
+            "Parent UUID": 417171234,
+            "Name": "Image",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        7,
+                        -99.5,
+                        0
+                    ],
+                    "Scale": [
+                        10.911433219909668,
+                        5.5470085144042969,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 200,
+                    "buttonHeight": 50
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI_skill.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1853976858,
+            "Parent UUID": 417171234,
+            "Name": "Image",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -170,
+                        -99.5,
+                        0
+                    ],
+                    "Scale": [
+                        8.4836397171020508,
+                        5.5470085144042969,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 155.5,
+                    "buttonHeight": 50
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI_chra.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
             ]
         }
