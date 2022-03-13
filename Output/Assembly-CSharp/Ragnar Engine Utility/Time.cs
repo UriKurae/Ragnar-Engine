@@ -7,18 +7,10 @@ namespace RagnarEngine
 {
     public class Time
     {
-
         public static extern float deltaTime
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
-
-
-
-
-
-
-
     }
 }

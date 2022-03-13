@@ -10,6 +10,7 @@
 #include "ModuleEditor.h"
 #include "MonoManager.h"
 #include "Physics3D.h"
+#include "ModuleNavMesh.h"
 #include "ModuleUI.h"
 
 #include "FileSystem.h"
@@ -29,6 +30,7 @@ Application::Application()
 	camera = new ModuleCamera3D();
 	moduleMono = new MonoManager(this);
 	editor = new ModuleEditor();
+	navMesh = new ModuleNavMesh();
 	userInterface = new ModuleUI();
 
 	fs = new FileSystem(RESOURCES_FOLDER);
@@ -43,6 +45,7 @@ Application::Application()
 	AddModule(physics);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(navMesh);
 	AddModule(moduleMono);
 	
 	// Scenes

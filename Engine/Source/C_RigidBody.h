@@ -4,6 +4,7 @@
 
 class GameObject;
 class btRigidBody;
+enum class Axis;
 
 enum class CollisionType
 {
@@ -41,16 +42,17 @@ public:
 
 	void CreateBody();
 	void SetPhysicsProperties();
-	float GetMass() { return mass; };
+	inline float GetMass() { return mass; };
 	void SetMass(float mass);
-	btRigidBody* GetBody() { return body; };
-	CollisionType GetCollisionType() { return collisionType; };
+	inline btRigidBody* GetBody() { return body; };
+	inline CollisionType GetCollisionType() { return collisionType; };
 
 	void SetAsStatic();
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
+public:
 	bool useGravity = true;
 	bool isKinematic = false;
 	std::vector<RigidBodyComponent*> constraintBodies;
@@ -79,6 +81,8 @@ private:
 	PCylinder cylinder;
 	PPyramid cone;
 	PPlane plane;
+
+	int cylinderAxis = 3;
 
 	bool editMesh = false;
 	bool mainBody = false;
