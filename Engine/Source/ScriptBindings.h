@@ -159,7 +159,7 @@ MonoObject* GetTexturePath(MonoObject* go)
 	//
 	//mono_method_desc_free(constDesc);
 
-	return p.c_str();
+	return (MonoObject*)p.c_str();
 }
 
 void SetTexturePath(MonoObject* go, MonoObject* texturePath)

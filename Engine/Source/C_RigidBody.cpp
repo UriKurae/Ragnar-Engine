@@ -204,6 +204,12 @@ void RigidBodyComponent::OnEditor()
 			}
 			else CreateBody();
 		}
+		if (ImGui::Checkbox("Is Trigger", &trigger))
+		{
+			if (trigger)
+				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			else CreateBody();
+		}
 
 		Combos();
 
@@ -541,6 +547,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	//Collision physics
 	useGravity = node.GetJsonBool("Gravity");
 	isKinematic = node.GetJsonBool("Kinematic");
+	trigger = node.GetJsonBool("Trigger");
 	mass = node.GetJsonNumber("Mass");
 	friction = node.GetJsonNumber("Friction");
 	restitution = node.GetJsonNumber("Restitution");
@@ -571,6 +578,9 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		if (app->scene->GetGameState() == GameState::PLAYING)
 			body->setActivationState(DISABLE_DEACTIVATION);
 	}
+	if(trigger) 
+		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+
 	SetMass(mass);
 	SetPhysicsProperties();
 
@@ -619,6 +629,7 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	//Collision physics
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Gravity", useGravity);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Kinematic", isKinematic);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Trigger", trigger);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Mass", mass);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Friction", friction);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Restitution", restitution);

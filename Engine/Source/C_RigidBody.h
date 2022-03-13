@@ -55,6 +55,7 @@ public:
 public:
 	bool useGravity = true;
 	bool isKinematic = false;
+	bool trigger = false;
 	std::vector<RigidBodyComponent*> constraintBodies;
 	std::vector<int> bodiesUIDs;
 

@@ -218,6 +218,7 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 	}		
 	if (app->scene->GetGameState() != GameState::PLAYING)
 		body->setActivationState(ISLAND_SLEEPING);
+	if(component->trigger) body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
 	world->addRigidBody(body);
 	bodies.push_back(component);

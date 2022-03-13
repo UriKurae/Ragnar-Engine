@@ -43,28 +43,26 @@ bool ModuleScene::Start()
 {
 	RG_PROFILING_FUNCTION("Starting Scene");
 
-	camera = CreateGameObject(nullptr);
-	camera->CreateComponent(ComponentType::CAMERA);
-	camera->SetName("Camera");
+	//camera = CreateGameObject(nullptr);
+	//camera->CreateComponent(ComponentType::CAMERA);
+	//camera->SetName("Camera");
 	//camera->CreateComponent(ComponentType::AUDIO_LISTENER);
 	//camera->CreateComponent(ComponentType::AUDIO_SOURCE);
 	
-	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+	//player = CreateGameObject(nullptr);
+	//player->CreateComponent(ComponentType::AUDIO_SOURCE);
+	//player->SetName("Player");
+	//player->tag = "Player";
 	
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
 	ResourceManager::GetInstance()->ImportAllResources();
-	ImportPrimitives();
-	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
-
-	player = CreateGameObject(nullptr);
-	player->CreateComponent(ComponentType::AUDIO_SOURCE);
-	player->SetName("Player");
-	player->tag = "Player";
+	//ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 	
+	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
-	//
 	//aEnvs[0].listenerID = camera->GetUUID();
 	//aEnvs[0].auxBusID = AK::SoundEngine::GetIDFromString(L"ReverbZone");
 	//aEnvs[0].fControlValue = 0.0f;
@@ -74,6 +72,7 @@ bool ModuleScene::Start()
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
 
+	ImportPrimitives();
 	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
@@ -371,10 +370,6 @@ bool ModuleScene::LoadScene(const char* name)
 					// Register this camera as the default listener.
 					AkGameObjectID playerID = player->GetUUID();
 					AudioManager::Get()->SetDefaultListener(&playerID, player->GetComponent<TransformComponent>());
-				}
-				if (child->GetName() == std::string("Camera"))
-				{
-					camera = child;
 				}
 				if (child->GetName() == std::string("Camera"))
 				{
