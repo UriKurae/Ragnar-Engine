@@ -35,7 +35,12 @@ bool InputActionMenu::Update(float dt)
 {
 	bool ret = true;
 	
-	ImGui::Begin(ICON_FA_KEYBOARD" Input Actions", &active, ImGuiWindowFlags_MenuBar);
+	ImGui::Begin(ICON_FA_KEYBOARD" Input Actions", &active, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+
+	if (!ImGui::IsWindowHovered() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
+	{
+		ImGui::Text("XD");
+	}
 
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(15.0f, 0.0f));
 	if (ImGui::BeginMenuBar())

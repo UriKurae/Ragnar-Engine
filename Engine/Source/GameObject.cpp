@@ -113,6 +113,11 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Plyer Input Component"))
+		{
+			CreateComponent(ComponentType::INPUT_ACTION);
+			newComponent = false;
+		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -171,6 +176,9 @@ Component* GameObject::CreateComponent(ComponentType type)
 		break;
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		break;
+	case ComponentType::INPUT_ACTION:
+		component = new InputActionComponent(this);
 		break;
 	case ComponentType::MATERIAL:
 		MeshComponent* m = GetComponent<MeshComponent>();
