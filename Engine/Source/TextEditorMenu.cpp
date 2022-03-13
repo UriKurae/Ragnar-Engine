@@ -2,7 +2,6 @@
 
 #include "Application.h"
 #include "ModuleEditor.h"
-#include "MonoManager.h"
 #include "FileSystem.h"
 #include "Globals.h"
 
@@ -68,7 +67,6 @@ bool TextEditorMenu::Update(float dt)
 			{
 				std::string toSave = textEditor.GetText();
 				app->fs->Save(fileToEdit.data(), toSave.data(), toSave.size());
-				app->moduleMono->ReCompileCS();
 			}
 			ImGui::EndMenu();
 		}

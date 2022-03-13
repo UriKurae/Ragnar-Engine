@@ -1,7 +1,7 @@
 using System;
 using RagnarEngine;
 
-public class test2 : RagnarComponent
+public class prueba : RagnarComponent
 {
 	public void Update()
 	{

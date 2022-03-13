@@ -189,7 +189,6 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 			opened = ImGui::TreeNodeEx((void*)obj, flags, obj->GetName());
 			if (ImGui::BeginDragDropSource())
 			{
-				ImGui::Text("Moving \"%s\"", obj->name.c_str());
 				ImGui::SetDragDropPayload("HierarchyItem", &uuid, sizeof(uint));
 				//ImGui::SetDragDropPayload("HierarchyItemGameObject", &uuid, sizeof(uint));
 

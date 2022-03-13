@@ -8,6 +8,7 @@
 #include <map>
 
 struct SerializedField;
+class btRigidBody; // Scripting
 
 enum class Object3D
 {
@@ -75,17 +76,16 @@ public:
 	void ImportPrimitives();
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
-	inline bool* GetDrawQuad() { return &drawQuad; }
+
+	inline const std::string& SceneDirectory() const { return sceneDir; }
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
-	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
-
 	inline GameObject* GetPlayer() { return player; };
-	inline const std::string& SceneDirectory() const { return sceneDir; }
 
 	// Scripting
 	void Scripting(float dt);
+	void SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel);
 
 	CameraComponent* mainCamera;
 	GameObject* camera;
@@ -94,15 +94,16 @@ public:
 
 private:
 	GameObject* root;
-	GameObject* player;
-
 	Quadtree qTree;
 	GameState gameState;
-	GameTimer gameTimer;
-
 	bool frameSkip;
+
+	GameObject* player;
+	
+
 	bool resetQuadtree;
-	bool drawQuad = false;
+
+	GameTimer gameTimer;
 
 	std::string sceneDir;
 };

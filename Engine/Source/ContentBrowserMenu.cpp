@@ -230,7 +230,6 @@ bool ContentBrowserMenu::Update(float dt)
 		if (ImGui::BeginMenu("Create C# Script"))
 		{
 			DrawCreationPopup("Script name: ", ".cs", std::bind(&MonoManager::CreateAssetsScript, app->moduleMono, std::placeholders::_1));
-			std::bind(&MonoManager::UpdateListScripts, app->moduleMono, std::placeholders::_1);
 			ImGui::EndMenu();
 		}
 		ImGui::EndPopup();

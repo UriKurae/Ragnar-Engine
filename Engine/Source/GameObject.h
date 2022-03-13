@@ -76,8 +76,6 @@ public:
 	inline float3 GetOffsetCM() { return offsetCM; };
 	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
 
-	Component* GetComponent(ComponentType type);
-
 	template<typename T>
 	T* GetComponent();
 	

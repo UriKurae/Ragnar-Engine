@@ -167,16 +167,9 @@ btRigidBody* Physics3D::CollisionShape(const PCapsule& capsule, RigidBodyCompone
 	return AddBody(colShape, startTransform, component);
 }
 
-btRigidBody* Physics3D::CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component, Axis axis)
+btRigidBody* Physics3D::CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component)
 {
-	btCollisionShape* colShape;
-	if (axis == Axis::X)
-		colShape = new btCylinderShapeX(btVector3(cylinder.height * 0.5f, cylinder.radius, 0.0f));
-	if(axis == Axis::Y)
-		colShape = new btCylinderShape(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
-	if (axis == Axis::Z)
-		colShape = new btCylinderShapeZ(btVector3(cylinder.radius, 0.0f, cylinder.height * 0.5f));
-
+	btCollisionShape* colShape = new btCylinderShape(btVector3(cylinder.radius, cylinder.height * 0.5f, 0.0f));
 	btTransform startTransform;
 	startTransform.setFromOpenGLMatrix(&cylinder.transform);
 	return AddBody(colShape, startTransform, component);

@@ -4,40 +4,24 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
-    public enum PrimitiveType
-    {
-        CUBE = 0,
-        PYRAMIDE,
-        SPHERE,
-        CYLINDER,
-    }
-
     class InternalCalls
     {
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void CreateGameObject(object name, object position, object rotation);
-
-        //public void CreateObject(string name, PrimitiveType primitiveType, Vector3 position, Quaternion rotation)
-        //{
-        //    Create3DObject(name, (int)primitiveType, position, rotation);
-        //}
-
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void Instantiate(string name, Vector3 position, Quaternion rotation);
+        public static extern void CreateGameObject(object name, object position);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void Create3DObject(object name, int primitiveType, object position, object rotation);
+        public static extern void CreateBullet(object position, object rotation, object scale);
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern GameObject Create3DObject(object name, int primitiveType, object position);
+        //[MethodImplAttribute(MethodImplOptions.InternalCall)]
+        //public static extern void UpdateCppGO(int UID, Vector3 position, Quaternion quat, Vector3 scale);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
     }
-
     public class Input
     {
+        //Keyboard and mouse
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern KeyState GetKey(object keyPressed);
 
@@ -49,16 +33,41 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetMouseY();
+
+        //Gamepad
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern KeyState GetGamepadButton(object keyPressed);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetLeftAxisX();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetLeftAxisY();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetRightAxisX();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetRightAxisY();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetLeftTrigger();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetRightTrigger();
     }
 
     public partial class Debug
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Log(object logText);
+
+        //[DllImport("__Internal", EntryPoint = "CSLog")]
+        //public static extern void Log(string logText);
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public partial struct mat4x4
+    public partial struct mat4x4 /*: IEquatable<Vector3>*/
     {
         //    |  0   1   2   3
         // ---+----------------
@@ -159,6 +168,16 @@ namespace RagnarEngine
 
         public void SetFromTRS(Vector3 pos, Quaternion r, Vector3 s)
         {
+            //mat4x4 posMat = SetTranslatePart(pos);
+            //mat4x4 rotMat = SetRotatePart(rot);
+            //mat4x4 scaleMat = SetScalePart(size);
+
+            //InternalCalls.CSLog(posMat.ToString());
+            //InternalCalls.CSLog(rotMat.ToString());
+            //InternalCalls.CSLog(scaleMat.ToString());
+
+            //mat4x4 posRotMat = posMat * rotMat;
+
             this[0] = (1.0f - 2.0f * (r.y * r.y + r.z * r.z)) * s.x;
             this[1] = (r.x * r.y + r.z * r.w) * s.x * 2.0f;
             this[2] = (r.x * r.z - r.y * r.w) * s.x * 2.0f;
@@ -175,6 +194,8 @@ namespace RagnarEngine
             this[13] = pos.y;
             this[14] = pos.z;
             this[15] = 1.0f;
+
+            //InternalCalls.CSLog("Pos * Rot * scale: " + this.GetForward().ToString());
         }
 
         public static mat4x4 SetTranslatePart(Vector3 pos)
@@ -190,7 +211,6 @@ namespace RagnarEngine
 
             return mat;
         }
-
         public static mat4x4 SetRotatePart(Quaternion rot)
         {
             mat4x4 mat = identity;
@@ -209,7 +229,6 @@ namespace RagnarEngine
 
             return mat;
         }
-
         public static mat4x4 SetScalePart(Vector3 scale)
         {
             mat4x4 mat = identity;
@@ -221,9 +240,9 @@ namespace RagnarEngine
 
             Debug.Log("Scale: " + mat.ToString());
 
+
             return mat;
         }
-
         void SetIdentity()
         {
             this.m00 = 1; this.m01 = 0; this.m02 = 0; this.m03 = 0;
@@ -238,7 +257,6 @@ namespace RagnarEngine
             ret.Set(this[0], this[1], this[2]);
             return ret.normalized;
         }
-
         public Vector3 GetForward()
         {
             Vector3 ret = Vector3.zero;
@@ -348,7 +366,6 @@ namespace RagnarEngine
         {
             return this[(y * 4) + x];
         }
-
         public void Set(int x, int y, float value)
         {
             this[(y * 4) + x] = value;
@@ -356,9 +373,9 @@ namespace RagnarEngine
     }
 }
 
-public enum KeyCode
+public enum DEKeyCode //This is a mirror from the SDL scancode enum to allow C# to C++ compatibility
 {
-    SCANCODE_UNKNOWN = 0,
+    SDL_SCANCODE_UNKNOWN = 0,
     A = 4,
     B = 5,
     C = 6,
@@ -385,16 +402,16 @@ public enum KeyCode
     X = 27,
     Y = 28,
     Z = 29,
-    ALPHA1 = 30,
-    ALPHA2 = 31,
-    ALPHA3 = 32,
-    ALPHA4 = 33,
-    ALPHA5 = 34,
-    ALPHA6 = 35,
-    ALPHA7 = 36,
-    ALPHA8 = 37,
-    ALPHA9 = 38,
-    ALPHA0 = 39,
+    Alpha1 = 30,
+    Alpha2 = 31,
+    Alpha3 = 32,
+    Alpha4 = 33,
+    Alpha5 = 34,
+    Alpha6 = 35,
+    Alpha7 = 36,
+    Alpha8 = 37,
+    Alpha9 = 38,
+    Alpha0 = 39,
     RETURN = 40,
     ESCAPE = 41,
     BACKSPACE = 42,

@@ -38,7 +38,6 @@ public:
 	std::vector<SerializedField> fields;
 
 	MonoMethod* updateMethod;
-	MonoMethod* startMethod;
 	uint32_t noGCobject;
 	std::string name = "";
 

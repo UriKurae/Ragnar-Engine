@@ -36,7 +36,6 @@ enum class ComponentType
 	UI_CANVAS,
 	TRANFORM2D,
 	UI_TEXT,
-	NAVAGENT,
 };
 
 enum class State

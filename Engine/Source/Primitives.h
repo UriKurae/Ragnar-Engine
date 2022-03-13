@@ -1,6 +1,5 @@
 #pragma once
-
-#include "VertexBuffer.h"
+#include "Vertex.h"
 
 typedef unsigned char GLubyte;
 

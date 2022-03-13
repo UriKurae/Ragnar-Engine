@@ -38,6 +38,8 @@ class MyPlane
 {
 public:
 	MyPlane(float3 pos, float3 sca);
+    ~MyPlane();
+    void DrawPlane();
     void DrawPlane2D(Texture* texture);
 	std::vector<float3> getVertex() {
 	}

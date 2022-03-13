@@ -60,17 +60,11 @@
 !Dependencies/Bullet/libx86/BulletDynamics_debug.lib
 !Dependencies/Bullet/libx86/LinearMath.lib
 !Dependencies/Bullet/libx86/LinearMath_debug.lib
-!Dependencies/freetype-2.10.0/lib/freetype.lib
+!Dependencies/freetype-2.10.0/freetype.lib
 
 # Executables
 *.exe
 !Dependencies/Optick/Optick.exe
-!Output/mono-runtime/MSBuild/MSBuild.exe
-!Output/mono-runtime/MSBuild/MSBuildTaskHost.exe
-!Output/mono-runtime/MSBuild/Roslyn/csc.exe
-!Output/mono-runtime/MSBuild/Roslyn/csi.exe
-!Output/mono-runtime/MSBuild/Roslyn/vbc.exe
-!Output/mono-runtime/MSBuild/Roslyn/VBCSCompiler.exe
 *.out
 *.app
 

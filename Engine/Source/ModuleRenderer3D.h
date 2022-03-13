@@ -40,8 +40,6 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
-	//TODO: Save/Load NavMesh
-	void SetNavMeshView();
 	void SetVsync();
 
 	inline bool* GetDepthTest() { return &depthTest; }
@@ -54,8 +52,6 @@ public:
 	inline bool* GetWireMode() { return &wireMode; }
 	inline bool* GetVsync() { return &vsync; }
 	inline bool* GetRayCast() { return &rayCast; }
-	inline bool* GetNavMesh() { return &navMesh; }
-	inline bool* GetDrawGrid() { return &drawGrid; }
 
 	void DrawCubeDirectMode();
 
@@ -102,8 +98,6 @@ public:
 	bool wireMode;
 	bool vsync;
 	bool rayCast;
-	bool navMesh;
-	bool drawGrid;
 
 	GameObject* goDirLight;
 	DirectionalLight* dirLight;

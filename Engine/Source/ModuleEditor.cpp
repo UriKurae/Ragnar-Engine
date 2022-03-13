@@ -207,10 +207,10 @@ void ModuleEditor::LogConsole(const char* string)
 
 std::vector<std::string> ModuleEditor::GetTags()
 {
-	return dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(mainMenuBar.GetMenus().size() - 1))->GetTags();
+	return dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->GetTags();
 }
 
 std::vector<std::string> ModuleEditor::GetLayers()
 {
-	return dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(mainMenuBar.GetMenus().size() - 1))->GetLayers();
+	return dynamic_cast<InspectorMenu*>(mainMenuBar.GetMenus().at(3))->GetLayers();
 }
