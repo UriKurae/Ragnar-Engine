@@ -9,6 +9,7 @@
 
 ButtonComponent::ButtonComponent(GameObject* own)
 {
+
 	owner = own;
 	active = true;
 	//name = "Button Component";
