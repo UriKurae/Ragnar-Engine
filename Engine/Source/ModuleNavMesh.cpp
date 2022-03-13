@@ -47,43 +47,21 @@ bool ModuleNavMesh::Update(float dt)
 
 bool ModuleNavMesh::LoadConfig(JsonParsing& node)
 {
-	JSON_Array* arraySettings = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "NavMeshSettings");
-	if (arraySettings != nullptr)
-	{
-		buildSettings->cellSize				= node.GetJsonArrayValue(arraySettings, 0).GetJsonNumber("cellSize");
-		buildSettings->cellHeight			= node.GetJsonArrayValue(arraySettings, 1).GetJsonNumber("cellHeight");
-		buildSettings->agentHeight			= node.GetJsonArrayValue(arraySettings, 2).GetJsonNumber("agentHeight");
-		buildSettings->agentRadius			= node.GetJsonArrayValue(arraySettings, 3).GetJsonNumber("agentRadius");
-		buildSettings->agentMaxClimb		= node.GetJsonArrayValue(arraySettings, 4).GetJsonNumber("agentMaxClimb");
-		buildSettings->agentMaxSlope		= node.GetJsonArrayValue(arraySettings, 5).GetJsonNumber("agentMaxSlope");
-		buildSettings->regionMinSize		= node.GetJsonArrayValue(arraySettings, 6).GetJsonNumber("regionMinSize");
-		buildSettings->regionMergeSize		= node.GetJsonArrayValue(arraySettings, 7).GetJsonNumber("regionMergeSize");
-		buildSettings->edgeMaxLen			= node.GetJsonArrayValue(arraySettings, 8).GetJsonNumber("edgeMaxLen");
-		buildSettings->edgeMaxError			= node.GetJsonArrayValue(arraySettings, 9).GetJsonNumber("edgeMaxError");
-		buildSettings->vertsPerPoly			= node.GetJsonArrayValue(arraySettings, 10).GetJsonNumber("vertsPerPoly");
-		buildSettings->detailSampleDist		= node.GetJsonArrayValue(arraySettings, 11).GetJsonNumber("detailSampleDist");
-		buildSettings->detailSampleMaxError	= node.GetJsonArrayValue(arraySettings, 12).GetJsonNumber("detailSampleMaxError");
-		buildSettings->partitionType		= node.GetJsonArrayValue(arraySettings, 13).GetJsonNumber("partitionType");
-		buildSettings->tileSize				= node.GetJsonArrayValue(arraySettings, 14).GetJsonNumber("tileSize");
-	}
-	else
-	{
-		buildSettings->cellSize				= 0.3f;
-		buildSettings->cellHeight			= 0.2f;
-		buildSettings->agentHeight			= 2.0f;
-		buildSettings->agentRadius			= 0.6f;
-		buildSettings->agentMaxClimb		= 0.9f;
-		buildSettings->agentMaxSlope		= 45.0f;
-		buildSettings->regionMinSize		= 8;
-		buildSettings->regionMergeSize		= 20;
-		buildSettings->edgeMaxLen			= 12.0f;
-		buildSettings->edgeMaxError			= 1.3f;
-		buildSettings->vertsPerPoly			= 6.0f;
-		buildSettings->detailSampleDist		= 6.0f;
-		buildSettings->detailSampleMaxError = 1.0f;
-		buildSettings->partitionType		= 0.0f;
-		buildSettings->tileSize				= 32.0f;
-	}
+	buildSettings->cellSize = node.GetJsonNumber("cellSize");
+	buildSettings->cellHeight = node.GetJsonNumber("cellHeight");
+	buildSettings->agentHeight = node.GetJsonNumber("agentHeight");
+	buildSettings->agentRadius = node.GetJsonNumber("agentRadius");
+	buildSettings->agentMaxClimb = node.GetJsonNumber("agentMaxClimb");
+	buildSettings->agentMaxSlope = node.GetJsonNumber("agentMaxSlope");
+	buildSettings->regionMinSize = node.GetJsonNumber("regionMinSize");
+	buildSettings->regionMergeSize = node.GetJsonNumber("regionMergeSize");
+	buildSettings->edgeMaxLen = node.GetJsonNumber("edgeMaxLen");
+	buildSettings->edgeMaxError = node.GetJsonNumber("edgeMaxError");
+	buildSettings->vertsPerPoly = node.GetJsonNumber("vertsPerPoly");
+	buildSettings->detailSampleDist = node.GetJsonNumber("detailSampleDist");
+	buildSettings->detailSampleMaxError = node.GetJsonNumber("detailSampleMaxError");
+	buildSettings->partitionType = node.GetJsonNumber("partitionType");
+	buildSettings->tileSize = node.GetJsonNumber("tileSize");
 
 	BakeNavMesh();
 
@@ -92,24 +70,21 @@ bool ModuleNavMesh::LoadConfig(JsonParsing& node)
 
 bool ModuleNavMesh::SaveConfig(JsonParsing& node)
 {
-	JsonParsing file = JsonParsing();
-	JSON_Array* arraySettings = file.SetNewJsonArray(file.GetRootValue(), "NavMeshSettings");
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellSize", buildSettings->cellSize);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "cellHeight", buildSettings->cellHeight);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentHeight", buildSettings->agentHeight);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentRadius", buildSettings->agentRadius);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxClimb", buildSettings->agentMaxClimb);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "agentMaxSlope", buildSettings->agentMaxSlope);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMinSize", buildSettings->regionMinSize);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "regionMergeSize", buildSettings->regionMergeSize);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxLen", buildSettings->edgeMaxLen);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "edgeMaxError", buildSettings->edgeMaxError);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "vertsPerPoly", buildSettings->vertsPerPoly);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleDist", buildSettings->detailSampleDist);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "detailSampleMaxError", buildSettings->detailSampleMaxError);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "partitionType", buildSettings->partitionType);
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "tileSize", buildSettings->tileSize);
-	node.SetValueToArray(arraySettings, file.GetRootValue());
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "cellSize", buildSettings->cellSize);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "cellHeight", buildSettings->cellHeight);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "agentHeight", buildSettings->agentHeight);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "agentRadius", buildSettings->agentRadius);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "agentMaxClimb", buildSettings->agentMaxClimb);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "agentMaxSlope", buildSettings->agentMaxSlope);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "regionMinSize", buildSettings->regionMinSize);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "regionMergeSize", buildSettings->regionMergeSize);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "edgeMaxLen", buildSettings->edgeMaxLen);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "edgeMaxError", buildSettings->edgeMaxError);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "vertsPerPoly", buildSettings->vertsPerPoly);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "detailSampleDist", buildSettings->detailSampleDist);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "detailSampleMaxError", buildSettings->detailSampleMaxError);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "partitionType", buildSettings->partitionType);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "tileSize", buildSettings->tileSize);
 
 	return true;
 }

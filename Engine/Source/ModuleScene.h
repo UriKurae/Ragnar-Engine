@@ -75,14 +75,14 @@ public:
 	void ImportPrimitives();
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
-
-	inline const std::string& SceneDirectory() const { return sceneDir; }
+	inline bool* GetDrawQuad() { return &drawQuad; }
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 
 	inline GameObject* GetPlayer() { return player; };
+	inline const std::string& SceneDirectory() const { return sceneDir; }
 
 	// Scripting
 	void Scripting(float dt);
@@ -94,16 +94,15 @@ public:
 
 private:
 	GameObject* root;
+	GameObject* player;
+
 	Quadtree qTree;
 	GameState gameState;
-	bool frameSkip;
-
-	GameObject* player;
-	
-
-	bool resetQuadtree;
-
 	GameTimer gameTimer;
+
+	bool frameSkip;
+	bool resetQuadtree;
+	bool drawQuad = false;
 
 	std::string sceneDir;
 };

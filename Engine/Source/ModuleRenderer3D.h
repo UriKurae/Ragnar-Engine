@@ -55,6 +55,7 @@ public:
 	inline bool* GetVsync() { return &vsync; }
 	inline bool* GetRayCast() { return &rayCast; }
 	inline bool* GetNavMesh() { return &navMesh; }
+	inline bool* GetDrawGrid() { return &drawGrid; }
 
 	void DrawCubeDirectMode();
 
@@ -102,6 +103,7 @@ public:
 	bool vsync;
 	bool rayCast;
 	bool navMesh;
+	bool drawGrid;
 
 	GameObject* goDirLight;
 	DirectionalLight* dirLight;

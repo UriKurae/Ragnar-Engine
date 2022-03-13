@@ -213,10 +213,9 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->renderer3D->SetWireMode();
 			}
-			if (ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh()))
-			{
-
-			}
+			if (ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh())) {}
+			if (ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid())) {}
+			if (ImGui::MenuItem("Show Quad Tree", NULL, app->scene->GetDrawQuad())) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())

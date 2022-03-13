@@ -154,7 +154,7 @@ bool ModuleScene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
-	qTree.DebugDraw();
+	if (drawQuad) qTree.DebugDraw();
 
 	std::stack<GameObject*> stack;
 
