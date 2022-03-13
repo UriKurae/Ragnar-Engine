@@ -30,6 +30,7 @@ namespace RagnarEngine
         public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType>
         {
             { typeof(Transform), ComponentType.TRANSFORM },
+            { typeof(MaterialComponent), ComponentType.MATERIAL},
             { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
             { typeof(Rigidbody), ComponentType.RIGID_BODY},
             { typeof(Animation), ComponentType.ANIMATION},

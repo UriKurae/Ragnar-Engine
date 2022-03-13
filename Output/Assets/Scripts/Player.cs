@@ -8,33 +8,35 @@ public class Player : RagnarComponent
 	public GameObject target = null;
 
     Rigidbody rb;
+    MaterialComponent materialComponent;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        materialComponent = gameObject.GetComponent<MaterialComponent>();
     }
 
     public void Update()
 	{
-        if (Input.GetKey(REKeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.A) == KeyState.KEY_DOWN
-			|| Input.GetKey(REKeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.D) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
+			|| Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
 			gameObject.GetComponent<Animation>().PlayAnimation("Walk");
 		}
 
-		if (Input.GetKey(REKeyCode.R) == KeyState.KEY_DOWN)
+		if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("Reload");
 		}
 
-		if (Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
+		if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("Shot");
 		}
 
-		if (Input.GetKey(REKeyCode.D) == KeyState.KEY_UP || Input.GetKey(REKeyCode.A) == KeyState.KEY_UP
-			|| Input.GetKey(REKeyCode.W) == KeyState.KEY_UP || Input.GetKey(REKeyCode.S) == KeyState.KEY_UP)
+		if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
+			|| Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
 		{
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
 			gameObject.GetComponent<AudioSource>().StopCurrentClip();
@@ -47,31 +49,31 @@ public class Player : RagnarComponent
         }
 
         
-        if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
+        if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(-1000, 0, 0);
             rb.ApplyCentralForce(f);
         }
 
-        else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
+        else if (Input.GetKey(KeyCode.A) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(1000, 0, 0);
             rb.ApplyCentralForce(f);
         }
 
-        else if (Input.GetKey(REKeyCode.W) == KeyState.KEY_REPEAT)
+        else if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(0, 0, 1000);
             rb.ApplyCentralForce(f);
         }
 
-        else if (Input.GetKey(REKeyCode.S) == KeyState.KEY_REPEAT)
+        else if (Input.GetKey(KeyCode.S) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(0, 0, -1000);
             rb.ApplyCentralForce(f);
         }
 
-        if (Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
         {
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 1;
