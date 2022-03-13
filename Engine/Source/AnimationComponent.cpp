@@ -9,9 +9,11 @@
 #include "FileSystem.h"
 #include "ResourceManager.h"
 
+#include "MathGeoLib/include/MathGeoLib.h"
+
 #include "Imgui/imgui_stdlib.h"
 
-AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f)
+AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(0.0f)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
@@ -130,6 +132,8 @@ void AnimationComponent::OnEditor()
 			animations.erase(animations.end() - 1);
 		}
 
+		ImGui::DragFloat("Interp. Velocity", &interpolatingVel, 0.5f, 1.0f);
+
 		ImGui::Separator();
 
 		if (currAnim && currAnim->anim)
@@ -169,27 +173,40 @@ bool AnimationComponent::Update(float dt)
 		{
 			currAnim->hasFinished = true;
 			// When it reaches the desired duration, we reset everything
-			if (currAnim->loop && animQueue.empty()) loopTime = 0.0f;
+			if (currAnim->loop && animQueue.empty())
+			{
+				loopTime = 0.0f;
+			}
 			else
 			{
 				loopTime = 0.0f;
 				playing = false;
-				if(animQueue.empty())
-				{
-					Play("Idle");
-				}
-				else
+				lastAnim = currAnim;
+
+				if (!animQueue.empty())
 				{
 					currAnim = animQueue.front();
 					animQueue.pop();
 				}
+
+				if (lastAnim != currAnim) interpolating = true;
 			}
 		}
 
-		// Loop time increases by our delta time
-		loopTime += dt;
-		currentTime += currAnim->anim->GetTicksPerSecond() * dt;
-		currentTime = fmod(currentTime, currAnim->anim->GetTicks());
+		if (!interpolating)
+		{
+			// Loop time increases by our delta time
+			loopTime += dt;
+			currentTime += currAnim->anim->GetTicksPerSecond() * dt;
+			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
+		}
+		else
+		{
+			loopTime += dt;
+			// 60 is the frames per second that we want
+			currentTime += 24.0f * dt;
+			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
+		}
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
 	}
 
@@ -202,10 +219,23 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 	float4x4 nodeTransform = data.transform;
 
 	Bone* bone = currAnim->anim->FindBone(nodeName);
+	Bone* lastBone = lastAnim->anim->FindBone(nodeName);
 
 	if (bone)
 	{
-		bone->Update(currentTime);
+		if (!interpolating)
+		{
+			bone->Update(currentTime);
+		}
+		else if (lastBone && lastAnim != currAnim)
+		{
+			bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
+			if (!interpolating)
+			{
+				loopTime = 0.0f;
+				currentTime = 0.0f;
+			}
+		}
 		nodeTransform = bone->GetTransform();
 	}
 
@@ -219,10 +249,97 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 		finalBoneMatrices[index] = globalTransformation * offset;
 	}
 
-	for (int i = 0; i < data.childrenCount; i++)
+	for (int i = 0; i < data.childrenCount; ++i)
 		CalculateBoneTransform(data.children[i], globalTransformation);
 }
 
+float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform)
+{
+	float3 lastPosition;
+	Quat lastRotation;
+	float3 lastScale;
+
+	lastTransform.Decompose(lastPosition, lastRotation, lastScale);
+
+	float3 position;
+	Quat rotation;
+	float3 scale;
+
+	transform.Decompose(position, rotation, scale);
+
+	float scaleFactor = 0.0f;
+	float midWayLength = currentTime - 0; 
+	float framesDiff = 60 - 0;
+	scaleFactor = midWayLength / framesDiff;
+	if (scaleFactor < 0) scaleFactor = 0.0f;
+
+	float3 finalPos = Lerp(lastPosition, position, scaleFactor);
+
+	float4x4 pos = float4x4::Translate(finalPos);
+	float4x4 rot = float4x4(Slerp(lastRotation, rotation, scaleFactor));
+	float4x4 sca = float4x4::Scale(Lerp(lastScale, scale, scaleFactor));
+
+	if (scaleFactor >= 1.0f) 
+		interpolating = false;
+
+	return pos * rot * sca;
+}
+
+float4x4 AnimationComponent::InterpolateWithOneBone(float4x4& transform, Bone& bone)
+{
+	float3 position;
+	Quat rotation;
+	float3 scale;
+
+	transform.Decompose(position, rotation, scale);
+
+	float scaleFactor = 0.0f;
+	float midWayLength = currentTime - 0;
+	float framesDiff = 60 - 0;
+	scaleFactor = midWayLength / framesDiff;
+	if (scaleFactor < 0) scaleFactor = 0.0f;
+
+	float3 finalPos = Lerp(position, bone.GetData().positions[0].position, scaleFactor);
+
+	float4x4 pos = float4x4::Translate(finalPos);
+	float4x4 rot = float4x4(Slerp(rotation, bone.GetData().rotations[0].orientation, scaleFactor));
+	float4x4 sca = float4x4::Scale(Lerp(scale, bone.GetData().scales[0].scale, scaleFactor));
+
+	if (scaleFactor >= 1.0f) 
+		interpolating = false;
+
+	return pos * rot * sca;
+}
+
+float4x4 AnimationComponent::InterpolateWithOneBone(Bone& bone, float4x4& transform)
+{
+	float3 position;
+	Quat rotation;
+	float3 scale;
+
+	transform.Decompose(position, rotation, scale);
+
+	int posIndex = bone.GetPositionIndex(lastCurrentTime);
+	int rotIndex = bone.GetRotationIndex(lastCurrentTime);
+	int scaIndex = bone.GetScalingIndex(lastCurrentTime);
+
+	float scaleFactor = 0.0f;
+	float midWayLength = currentTime - 0;
+	float framesDiff = 60 - 0;
+	scaleFactor = midWayLength / framesDiff;
+	if (scaleFactor < 0) scaleFactor = 0.0f;
+
+	float3 finalPos = Lerp(bone.GetData().positions[posIndex].position, position, scaleFactor);
+
+	float4x4 pos = float4x4::Translate(finalPos);
+	float4x4 rot = float4x4(Slerp(bone.GetData().rotations[rotIndex].orientation, rotation, scaleFactor));
+	float4x4 sca = float4x4::Scale(Lerp(bone.GetData().scales[scaIndex].scale, scale, scaleFactor));
+
+	if (scaleFactor >= 1.0f) 
+		interpolating = false;
+
+	return pos * rot * sca;
+}
 
 bool AnimationComponent::OnLoad(JsonParsing& node)
 {
@@ -297,7 +414,17 @@ void AnimationComponent::Play(std::string state)
 		{
 			if (animQueue.empty())
 			{
+				if (!interpolating) lastAnim = currAnim;
+
 				currAnim = &animations[i];
+				lastCurrentTime = currentTime;
+	
+				if (lastAnim != currAnim)
+				{
+					currentTime = 0.0f;
+					loopTime = 0.0f;
+					interpolating = true;
+				}
 				playing = true;
 			}
 			else

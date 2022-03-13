@@ -13,7 +13,13 @@
 #include <mono/metadata/threads.h>
 
 #include "GameObject.h"
+#include "Component.h"
+
 #include "ScriptBindings.h"
+#include "AudioBindings.h"
+#include "RigidbodyBindings.h"
+#include "AnimationBindings.h"
+#include "CameraBindings.h"
 
 #include <iostream>
 #include <fstream>
@@ -48,6 +54,57 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Input::GetMouseClick", GetMouseClick);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseX", MouseX);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
+
+	// Transform =================
+	mono_add_internal_call("RagnarEngine.Transform::get_localPosition", GetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::get_globalPosition", GetGlobalPosition);
+	mono_add_internal_call("RagnarEngine.Transform::get_localRotation", GetRotation);
+	mono_add_internal_call("RagnarEngine.Transform::get_globalRotation", GetGlobalRotation);
+	mono_add_internal_call("RagnarEngine.Transform::get_scale", GetScale);
+	mono_add_internal_call("RagnarEngine.Transform::get_up", GetUp);
+	mono_add_internal_call("RagnarEngine.Transform::get_right", GetRight);
+	mono_add_internal_call("RagnarEngine.Transform::get_forward", GetForward);
+	
+	mono_add_internal_call("RagnarEngine.Transform::set_localPosition", SetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::set_localRotation", SetRotation);
+	mono_add_internal_call("RagnarEngine.Transform::set_scale", SetScale);
+	// Transform =================
+
+	// Material Comp =============
+
+	mono_add_internal_call("RagnarEngine.MaterialComponent::get_texture", GetTexturePath);
+	mono_add_internal_call("RagnarEngine.MaterialComponent::set_texture", SetTexturePath);
+	// Material Comp =============
+
+	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     // This does not return a GameObject
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject); // This does
+	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
+	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+
+	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
+	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
+
+	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
+	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClip", StopCurrentClip);
+	mono_add_internal_call("RagnarEngine.AudioListener::TestListener", TestListener);
+
+	// Rigidbody =================
+	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
+	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralImpulse", ApplyCentralImpulse);
+	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyTorque", ApplyTorque);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetIgnoreCollision", SetIgnoreCollision);
+	mono_add_internal_call("RagnarEngine.Rigidbody::set_linearVelocity", SetLinearVelocity);
+	mono_add_internal_call("RagnarEngine.Rigidbody::get_linearVelocity", GetLinearVelocity);
+	mono_add_internal_call("RagnarEngine.Rigidbody::get_totalForce", GetTotalForce);
+	mono_add_internal_call("RagnarEngine.Rigidbody::ClearForces", ClearForces);
+	// Rigidbody =================
+
+	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
+
+	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
+	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
 
 	InitMono();
 
@@ -159,7 +216,7 @@ void MonoManager::DebugAllMethods(const char* nsName, const char* className, std
 
 MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 {
-	MonoClass* goClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "GameObject");
+	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 	uintptr_t goPtr = reinterpret_cast<uintptr_t>(inGo);
 
 	void* args[3];
@@ -169,7 +226,22 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	uintptr_t transPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<TransformComponent>());
 	args[2] = &transPTR;
 
+	//uintptr_t audioSourcePTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AudioSourceComponent>());
+	//args[3] = &audioSourcePTR;
+	//
+	//uintptr_t audioListenerPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<ListenerComponent>());
+	//args[4] = &audioListenerPTR;
+	//
+	//uintptr_t rbPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<RigidBodyComponent>());
+	//args[5] = &rbPTR;
+	//
+	//uintptr_t animPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<AnimationComponent>());
+	//args[6] = &animPTR;
+	//
+	//uintptr_t camPTR = reinterpret_cast<uintptr_t>(inGo->GetComponent<CameraComponent>());
+	//args[7] = &camPTR;
 
+	//MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr,uintptr,uintptr,uintptr,uintptr)", true);
 	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.GameObject:.ctor(string,uintptr,uintptr)", true);
 	MonoMethod* method = mono_method_desc_search_in_class(constructorDesc, goClass);
 	MonoObject* goObj = mono_object_new(domain, goClass);
@@ -180,10 +252,38 @@ MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 	return goObj;
 }
 
+MonoObject* MonoManager::ComponentToCS(Component* comp) const
+{
+	std::string compName = std::string();
+
+	MonoClass* compClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "RagnarComponent");
+
+	MonoMethodDesc* constructorDesc = mono_method_desc_new("RagnarEngine.RagnarComponent:.ctor(uintptr)", true);
+	
+	MonoMethod* contstructorMethod = mono_method_desc_search_in_class(constructorDesc, compClass);
+	MonoObject* compObj = mono_object_new(domain, compClass);
+	//uint32_t fieldToken = mono_gchandle_new(goObj, false);
+
+	//MonoClass* monoClass = mono_object_get_class(goObj);
+	//MonoClassField* field = mono_class_get_field(monoClass, fieldToken);
+
+	//uintptr_t compPTR = reinterpret_cast<uintptr_t>(comp);
+	//mono_field_set_value(goObj, field, comp);
+	
+	void* args[1];
+	uintptr_t compPTR = reinterpret_cast<uintptr_t>(comp);
+	args[0] = &compPTR;
+	mono_runtime_invoke(contstructorMethod, compObj, args, NULL);
+	
+	mono_method_desc_free(constructorDesc);
+
+	return compObj;
+}
+
+
 MonoObject* MonoManager::Float3ToCS(float3& inVec) const
 {
-
-	MonoClass* vecClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "Vector3");
+	MonoClass* vecClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "Vector3");
 
 	MonoObject* vecObject = mono_object_new(domain, vecClass);
 	const char* name = mono_class_get_name(mono_object_get_class(vecObject));
@@ -220,23 +320,6 @@ void MonoManager::LoadFieldData(SerializedField& _field, MonoObject* _object)
 
 	case MonoTypeEnum::MONO_TYPE_GENERICINST:
 	{
-		/*const char* className = mono_type_get_name(mono_field_get_type(_field.field));
-
-		int* data = nullptr;
-		mono_field_get_value(_object, _field.field, &data);
-
-		std::vector<int> test;
-		while (data != nullptr)
-		{
-			test.push_back(*data);
-			data++;
-		}
-
-
-		if (strcmp(className, "GameObject") == 0)
-			_field.fiValue.goValue = nullptr;
-		else if (strcmp(className, "GameObject") == 0)
-			LOG(LogType::L_WARNING, "%s", className);*/
 		break;
 	}
 
@@ -265,8 +348,7 @@ void MonoManager::LoadFieldData(SerializedField& _field, MonoObject* _object)
 
 MonoObject* MonoManager::QuatToCS(Quat& inVec) const
 {
-
-	MonoClass* quadClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "Quaternion");
+	MonoClass* quadClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "Quaternion");
 	MonoObject* quatObject = mono_object_new(domain, quadClass);
 
 	void* args[4];
@@ -284,25 +366,31 @@ MonoObject* MonoManager::QuatToCS(Quat& inVec) const
 	return quatObject;
 }
 
-GameObject* MonoManager::GameObject_From_CSGO(MonoObject* goObj)
+GameObject* MonoManager::GameObjectFromCSGO(MonoObject* goObj)
 {
 	uintptr_t ptr = 0;
-	MonoClass* goClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "GameObject");
+	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");
 
 	mono_field_get_value(goObj, mono_class_get_field_from_name(goClass, "pointer"), &ptr);
 
 	return reinterpret_cast<GameObject*>(ptr);
 }
 
-GameObject* MonoManager::GameObject_From_CSCOMP(MonoObject* goComponent)
+GameObject* MonoManager::GameObjectFromCSComponent(MonoObject* goComponent)
 {
 	uintptr_t ptr = 0;
-	MonoClass* goClass = mono_class_from_name(image, DE_SCRIPTS_NAMESPACE, "RagnarComponent");
+	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "RagnarComponent");
 
 	mono_field_get_value(goComponent, mono_class_get_field_from_name(goClass, "pointer"), &ptr);
 
 	return reinterpret_cast<Component*>(ptr)->owner;
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
 
 SerializedField::SerializedField() : field(nullptr), parentSC(nullptr)
 {
@@ -413,10 +501,10 @@ void MonoManager::InitMono()
 
 	MonoImageOpenStatus sts;
 
-	if (app->fs->Exists("Assembly-CSharp.dll") == false)
+	if (app->fs->Exists("Library/ScriptsAssembly/Assembly-CSharp.dll") == false)
 		assert(false && "You need to install the 'Visual Studio .NET desktop development pack' to run the engine");
 
-	assembly = mono_assembly_open("Assembly-CSharp.dll", &sts);
+	assembly = mono_assembly_open("Library/ScriptsAssembly/Assembly-CSharp.dll", &sts);
 	if (!assembly)
 		LOG(LogType::L_ERROR, "ERROR");
 
@@ -439,7 +527,35 @@ void MonoManager::InitMono()
 			const char* name_space = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAMESPACE]);
 			_class = mono_class_from_name(image, name_space, name);
 
-			if (_class != nullptr && strcmp(mono_class_get_namespace(_class), DE_SCRIPTS_NAMESPACE) != 0 && !mono_class_is_enum(_class))
+			if (_class != nullptr && strcmp(mono_class_get_namespace(_class), SCRIPTS_NAMESPACE) != 0 && !mono_class_is_enum(_class))
+			{
+				userScripts.push_back(_class);
+				LOG(LogType::L_WARNING, "%s", mono_class_get_name(_class));
+			}
+		}
+	}
+}
+
+void MonoManager::UpdateListScripts()
+{
+	const MonoTableInfo* table_info = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
+	int rows = mono_table_info_get_rows(table_info);
+
+	MonoClass* _class = nullptr;
+
+	userScripts.clear();
+	for (int i = 0; i < rows; i++)
+	{
+		uint32_t cols[MONO_TYPEDEF_SIZE];
+		mono_metadata_decode_row(table_info, i, cols, MONO_TYPEDEF_SIZE);
+		const char* name = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAME]);
+
+		if (name[0] != '<')
+		{
+			const char* name_space = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAMESPACE]);
+			_class = mono_class_from_name(image, name_space, name);
+
+			if (_class != nullptr && strcmp(mono_class_get_namespace(_class), SCRIPTS_NAMESPACE) != 0 && !mono_class_is_enum(_class))
 			{
 				userScripts.push_back(_class);
 				LOG(LogType::L_WARNING, "%s", mono_class_get_name(_class));

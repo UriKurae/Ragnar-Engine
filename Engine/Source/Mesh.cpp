@@ -173,5 +173,6 @@ void Mesh::Reimport(ModelParameters& data)
 		//texCoords.clear();
 		//normals.clear();
 	}
+
 	MeshImporter::LoadMesh(vertices, indices, bones, libraryPath);
 }

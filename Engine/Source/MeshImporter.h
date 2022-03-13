@@ -6,10 +6,11 @@
 #include "Math/float4x4.h"
 
 class JsonParsing;
+
 struct Vertex;
 struct ModelParameters;
 struct BoneInfo;
-
+struct Vertex;
 
 typedef unsigned int uint;
 

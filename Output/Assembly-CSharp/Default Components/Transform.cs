@@ -6,10 +6,9 @@ namespace RagnarEngine
 {
     public class Transform : RagnarComponent
     {
-        //Change type depending of class
         public Transform()
         {
-            type = ComponentType.Transform;
+            type = ComponentType.TRANSFORM;
         }
 
         public extern Vector3 localPosition
@@ -41,27 +40,31 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
-
-        public extern Vector3 localScale
+        
+        public extern Vector3 scale
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
-
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
 
-        public extern Vector3 globalScale
+        public extern Vector3 forward
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 GetForward();
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 GetRight();
+        public extern Vector3 right
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
+        public extern Vector3 up
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
 
     }
 }
