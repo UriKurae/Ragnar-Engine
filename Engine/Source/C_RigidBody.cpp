@@ -3,7 +3,8 @@
 #include "Globals.h"
 
 #include "Physics3D.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -107,7 +108,7 @@ void RigidBodyComponent::SetBoundingBox()
 //When the engine state is "playing" the GameObject follows the RigidBody
 bool RigidBodyComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 	{
 		if (body->getActivationState() == 1 || body->getActivationState() == 3)
 		{
@@ -122,7 +123,7 @@ bool RigidBodyComponent::Update(float dt)
 //Function to update the position of the collider in the center of the GameObject
 void RigidBodyComponent::UpdateCollision()
 {
-	if (app->scene->GetGameState() != GameState::PLAYING)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() != GameState::PLAYING)
 	{
 		OBB obb = owner->GetOOB();
 
@@ -199,7 +200,7 @@ void RigidBodyComponent::OnEditor()
 			if (isKinematic)
 			{
 				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-				if (app->scene->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 					body->setActivationState(DISABLE_DEACTIVATION);
 			}
 			else CreateBody();
@@ -568,7 +569,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	else if (isKinematic)
 	{
 		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		if (app->scene->GetGameState() == GameState::PLAYING)
+		if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 			body->setActivationState(DISABLE_DEACTIVATION);
 	}
 	SetMass(mass);

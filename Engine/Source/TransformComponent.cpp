@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "C_RigidBody.h"
 #include "MeshComponent.h"
@@ -189,7 +190,7 @@ void TransformComponent::UpdateTransform()
 {
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
 
-	if (owner->GetParent() && owner->GetParent() != app->scene->GetRoot())
+	if (owner->GetParent() && owner->GetParent() != app->sceneManager->GetCurrentScene()->GetRoot())
 	{
 		TransformComponent* parentTr = owner->GetParent()->GetComponent<TransformComponent>();
 		if (parentTr) globalMatrix = parentTr->globalMatrix * localMatrix;
@@ -214,7 +215,7 @@ void TransformComponent::UpdateChildTransform(GameObject* go)
 
 void TransformComponent::NewAttachment()
 {
-	if (owner->GetParent() != app->scene->GetRoot())
+	if (owner->GetParent() != app->sceneManager->GetCurrentScene()->GetRoot())
 		localMatrix = owner->GetParent()->GetComponent<TransformComponent>()->GetGlobalTransform().Inverted().Mul(globalMatrix);
 	
 	localMatrix.Decompose(position, rotation, scale);
@@ -235,7 +236,7 @@ void TransformComponent::SetAABB()
 
 	UpdateBoundingBox();
 
-	app->scene->ResetQuadtree();
+	app->sceneManager->GetCurrentScene()->ResetQuadtree();
 }
 
 void TransformComponent::UpdateBoundingBox()

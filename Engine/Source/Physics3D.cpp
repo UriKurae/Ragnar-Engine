@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "C_RigidBody.h"
 
 #include "btBulletDynamicsCommon.h"
@@ -49,7 +50,7 @@ bool Physics3D::Start()
 bool Physics3D::PreUpdate(float dt)
 {
 	world->stepSimulation(dt, 15);
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 	{
 		int numManifolds = world->getDispatcher()->getNumManifolds();
 		for (int i = 0; i < numManifolds; i++)
@@ -216,7 +217,7 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		body->setActivationState(DISABLE_DEACTIVATION);
 	}		
-	if (app->scene->GetGameState() != GameState::PLAYING)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() != GameState::PLAYING)
 		body->setActivationState(ISLAND_SLEEPING);
 
 	world->addRigidBody(body);

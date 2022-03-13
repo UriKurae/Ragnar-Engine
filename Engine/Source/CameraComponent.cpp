@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 
@@ -131,7 +132,7 @@ void CameraComponent::OnEditor()
 				if (go)
 				{
 					uint uuid = *(const uint*)(go->Data);
-					target = app->scene->GetGoByUuid(uuid);
+					target = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 				}
 				ImGui::EndDragDropTarget();
 			}
@@ -173,7 +174,7 @@ bool CameraComponent::Update(float dt)
 	// This is bad!
 	if (targetUID != 0)
 	{
-		target = app->scene->GetGoByUuid(targetUID);
+		target = app->sceneManager->GetCurrentScene()->GetGoByUuid(targetUID);
 		targetUID = 0;
 	}
 

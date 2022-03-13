@@ -4,7 +4,8 @@
 #include "FileSystem.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include <queue>
 
@@ -196,15 +197,15 @@ void PrefabManager::LoadPrefab(const char* path)
 			if (i == 0)
 			{
 				JsonParsing go = prefabFile.GetJsonArrayValue(jsonArray, i);
-				GameObject* parent = app->scene->GetGoByUuid(0);
-				GameObject* child = app->scene->CreateGameObject(parent, false);
+				GameObject* parent = app->sceneManager->GetCurrentScene()->GetGoByUuid(0);
+				GameObject* child = app->sceneManager->GetCurrentScene()->CreateGameObject(parent, false);
 				child->OnLoad(go);
 			}
 			else
 			{
 				JsonParsing go = prefabFile.GetJsonArrayValue(jsonArray, i);
-				GameObject* parent = app->scene->GetGoByUuid(go.GetJsonNumber("Parent UUID"));
-				GameObject* child = app->scene->CreateGameObject(parent, false);
+				GameObject* parent = app->sceneManager->GetCurrentScene()->GetGoByUuid(go.GetJsonNumber("Parent UUID"));
+				GameObject* child = app->sceneManager->GetCurrentScene()->CreateGameObject(parent, false);
 				child->OnLoad(go);
 			}
 		}
@@ -218,7 +219,7 @@ void PrefabManager::LoadPrefab(const char* path)
 void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 {
 	std::queue<GameObject*> que;
-	que.push(app->scene->GetRoot());
+	que.push(app->sceneManager->GetCurrentScene()->GetRoot());
 
 	std::vector<GameObject*> listGo;
 	std::vector<GameObject*> listParents;
@@ -312,7 +313,7 @@ void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 
 				if (!exist)
 				{
-					GameObject* newGO = app->scene->CreateGameObject((*it), false);
+					GameObject* newGO = app->sceneManager->GetCurrentScene()->CreateGameObject((*it), false);
 					newGO->OnLoad(go);
 				}
 			}
@@ -357,7 +358,7 @@ void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 						{
 							selectedParent->GetChilds().erase(i);
 							RELEASE((*it2));
-							app->scene->ResetQuadtree();
+							app->sceneManager->GetCurrentScene()->ResetQuadtree();
 							break;
 						}
 					}

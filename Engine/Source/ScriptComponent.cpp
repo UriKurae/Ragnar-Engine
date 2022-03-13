@@ -1,6 +1,7 @@
 #include "ScriptComponent.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include <mono/metadata/class.h>
 #include <mono/metadata/object.h>
@@ -45,7 +46,7 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::NOT_PLAYING || app->scene->GetGameState() == GameState::PAUSE || updateMethod == nullptr)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::NOT_PLAYING || app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE || updateMethod == nullptr)
 		return false;
 
 	ScriptComponent::runningScript = this; // I really think this is the peak of stupid code, but hey, it works, slow as hell but works.
@@ -148,7 +149,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				if (go)
 				{
 					uint uuid = *(const uint*)(go->Data);
-					field.fiValue.goValue = app->scene->GetGoByUuid(uuid);
+					field.fiValue.goValue = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 				}
 				SetField(field.field, field.fiValue.goValue);
 			}
@@ -213,7 +214,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 						if (go)
 						{
 							uint uuid = *(const uint*)(go->Data);
-							cpp_obj = app->scene->GetGoByUuid(uuid);
+							cpp_obj = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 						}
 						arrayElementGO = app->moduleMono->GoToCSGO(cpp_obj);
 						mono_array_set(field.fiValue.arrValue, MonoObject*, i, arrayElementGO);
@@ -310,7 +311,7 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 		{
 			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "RagnarEngine.GameObject") == 0)
-				app->scene->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
+				app->sceneManager->GetCurrentScene()->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
 
 			break;
 		}

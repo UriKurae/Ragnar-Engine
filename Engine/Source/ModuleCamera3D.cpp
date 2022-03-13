@@ -4,7 +4,8 @@
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -234,7 +235,7 @@ bool ModuleCamera3D::Update(float dt)
 				bool hit = false;
 
 				std::vector<GameObject*> gameObjects;
-				app->scene->GetQuadtree().CollectGo(gameObjects);
+				app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects);
 
 				std::vector<GameObject*>::iterator it = gameObjects.begin();
 				std::map<float, GameObject*> triangleMap;

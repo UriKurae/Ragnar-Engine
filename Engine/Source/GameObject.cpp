@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "MonoManager.h"
 #include "JsonParsing.h"
@@ -233,7 +234,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
-		app->scene->SetMainCamera((CameraComponent*)component);
+		app->sceneManager->GetCurrentScene()->SetMainCamera((CameraComponent*)component);
 		break;
 	case ComponentType::AUDIO_SOURCE:
 		component = new AudioSourceComponent(this, GetComponent<TransformComponent>());
@@ -286,7 +287,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		component = new ComponentLight();
 		break;
 	case ComponentType::TRANFORM2D:
-		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		component = new ComponentTransform2D(float3{ camera->GetFrustum()->pos.x,camera->GetFrustum()->pos.y,camera->GetFrustum()->pos.z }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
 		break;
 	}

@@ -1,4 +1,4 @@
-#include "ModuleScene.h"
+#include "Scene.h"
 #include "Application.h"
 #include "Globals.h"
 
@@ -30,17 +30,17 @@
 #include <stack>
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
+Scene::Scene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
 }
 
-ModuleScene::~ModuleScene()
+Scene::~Scene()
 {
 }
 
-bool ModuleScene::Start()
+bool Scene::Start()
 {
 	RG_PROFILING_FUNCTION("Starting Scene");
 
@@ -80,7 +80,7 @@ bool ModuleScene::Start()
 	return true;
 }
 
-bool ModuleScene::PreUpdate(float dt)
+bool Scene::PreUpdate(float dt)
 {
 	static bool refresh = true;
 
@@ -95,7 +95,7 @@ bool ModuleScene::PreUpdate(float dt)
 	return true;
 }
 
-bool ModuleScene::Update(float dt)
+bool Scene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
@@ -145,14 +145,14 @@ bool ModuleScene::Update(float dt)
 	return true;
 }
 
-bool ModuleScene::PostUpdate()
+bool Scene::PostUpdate()
 {
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
 	return true;
 }
 
-bool ModuleScene::Draw()
+bool Scene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
@@ -186,14 +186,14 @@ bool ModuleScene::Draw()
 	return true;
 }
 
-bool ModuleScene::CleanUp()
+bool Scene::CleanUp()
 {
 	RELEASE(root);
 
 	return true;
 }
 
-void ModuleScene::NewScene()
+void Scene::NewScene()
 {
 	RELEASE(root);
 
@@ -211,7 +211,7 @@ void ModuleScene::NewScene()
 	app->editor->SetGO(nullptr);
 }
 
-GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransform)
+GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
 {
 	RG_PROFILING_FUNCTION("Creating Game Object");
 
@@ -232,7 +232,7 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 	return object;
 }
 
-GameObject* ModuleScene::CreateGameObjectChild(const char* name, GameObject* parent)
+GameObject* Scene::CreateGameObjectChild(const char* name, GameObject* parent)
 {
 	GameObject* object = CreateGameObject(parent);
 	object->SetName(name);
@@ -240,7 +240,7 @@ GameObject* ModuleScene::CreateGameObjectChild(const char* name, GameObject* par
 	return object;
 }
 
-GameObject* ModuleScene::CreateGameObjectParent(const char* name, GameObject* child)
+GameObject* Scene::CreateGameObjectParent(const char* name, GameObject* child)
 {
 	GameObject* object = CreateGameObject(child->GetParent());
 	object->SetName(name);
@@ -251,7 +251,7 @@ GameObject* ModuleScene::CreateGameObjectParent(const char* name, GameObject* ch
 	return object;
 }
 
-GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
+GameObject* Scene::Create3DObject(Object3D type, GameObject* parent)
 {
 	GameObject* object = CreateGameObject(parent);
 	std::string path;
@@ -285,7 +285,7 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 	return object;
 }
 
-void ModuleScene::MoveGameObjectUp(GameObject* object)
+void Scene::MoveGameObjectUp(GameObject* object)
 {
 	if (object == root->GetChilds()[0]) return;
 
@@ -303,7 +303,7 @@ void ModuleScene::MoveGameObjectUp(GameObject* object)
 	}
 }
 
-void ModuleScene::MoveGameObjectDown(GameObject* object)
+void Scene::MoveGameObjectDown(GameObject* object)
 {
 	int size = root->GetChilds().size() - 1;
 	if (object == root->GetChilds()[size]) return;
@@ -321,7 +321,7 @@ void ModuleScene::MoveGameObjectDown(GameObject* object)
 	}
 }
 
-void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
+void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 {
 	GameObject* gameObj = GetGoByUuid(uuid);
 	GameObject* parentObj = gameObj->GetParent();
@@ -334,7 +334,7 @@ void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
 	gameObj->GetComponent<TransformComponent>()->SetAABB();
 }
 
-bool ModuleScene::LoadScene(const char* name)
+bool Scene::LoadScene(const char* name)
 {
 	RG_PROFILING_FUNCTION("Loading Scene");
 
@@ -421,7 +421,7 @@ bool ModuleScene::LoadScene(const char* name)
 	return true;
 }
 
-GameObject* ModuleScene::GetGoByUuid(double uuid) const
+GameObject* Scene::GetGoByUuid(double uuid) const
 {
 	std::stack<GameObject*> goStack;
 	goStack.push(root);
@@ -443,7 +443,7 @@ GameObject* ModuleScene::GetGoByUuid(double uuid) const
 	return nullptr;
 }
 
-bool ModuleScene::SaveScene(const char* name)
+bool Scene::SaveScene(const char* name)
 {
 	DEBUG_LOG("Saving Scene");
 
@@ -469,7 +469,7 @@ bool ModuleScene::SaveScene(const char* name)
 	return true;
 }
 
-void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
+void Scene::DuplicateGO(GameObject* go, GameObject* parent)
 {
 	GameObject* gameObject = new GameObject();
 	gameObject->SetName(go->GetName());
@@ -489,7 +489,7 @@ void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
 	//gameObject->SetAABB(go->GetAABB());
 }
 
-void ModuleScene::ImportPrimitives()
+void Scene::ImportPrimitives()
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -538,7 +538,7 @@ void ModuleScene::ImportPrimitives()
 	//texCoords.clear();
 }
 
-void ModuleScene::Play()
+void Scene::Play()
 {
 	DEBUG_LOG("Saving Scene");
 
@@ -563,7 +563,7 @@ void ModuleScene::Play()
 	gameTimer.ResetTimer();
 }
 
-void ModuleScene::Stop()
+void Scene::Stop()
 {
 	app->renderer3D->ClearPointLights();
 	app->renderer3D->ClearSpotLights();
@@ -575,13 +575,13 @@ void ModuleScene::Stop()
 	gameState = GameState::NOT_PLAYING;
 }
 
-void ModuleScene::Pause()
+void Scene::Pause()
 {
 	gameTimer.SetDesiredDeltaTime(0.0f);
 	gameState = GameState::PAUSE;
 }
 
-void ModuleScene::Resume()
+void Scene::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
@@ -589,8 +589,9 @@ void ModuleScene::Resume()
 
 /////////////////////////
 
-void ModuleScene::Scripting(float dt)
+void Scene::Scripting(float dt)
 {
+	// TODO: Must delete this maybe
 	if (gameState == GameState::PLAYING)
 	{
 		// AUDIO
@@ -671,7 +672,7 @@ void ModuleScene::Scripting(float dt)
 	}
 }
 
-void ModuleScene::SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel)
+void Scene::SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel)
 {
 	int velMax = 5;
 	playerRB->activate(true);

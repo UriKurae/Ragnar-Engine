@@ -2,7 +2,8 @@
 
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "TransformBindings.h"
 
 #include <metadata\object-forward.h>
@@ -139,7 +140,7 @@ void SetScale(MonoObject* go, MonoObject* scale)
 // GameObject =======================
 void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
-	GameObject* go = app->scene->CreateGameObject(nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -155,7 +156,7 @@ void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* r
 void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* position, MonoObject* rotation)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);

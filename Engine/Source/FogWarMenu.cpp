@@ -1,7 +1,8 @@
 #include "FogWarMenu.h"
 #include "Application.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "GL/glew.h"
 
 FogWarMenu::FogWarMenu() : Menu(true)
@@ -15,7 +16,7 @@ bool FogWarMenu::Update(float dt)
 {
 	if (ImGui::Begin(ICON_FA_CLOUD" Fog War", &active))
 	{
-		Frustum* frustum = app->scene->mainCamera->GetFrustum();
+		Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
 		if (ImGui::Checkbox("Active", &fog))
 		{
 			if (fog)

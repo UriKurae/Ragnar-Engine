@@ -180,9 +180,6 @@
     <ClInclude Include="Engine\Source\AssimpDefs.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ModuleScene.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\GameObject.h">
       <Filter>Sources\GameObject</Filter>
     </ClInclude>
@@ -694,6 +691,12 @@
     <ClInclude Include="Engine\Source\ImageComponent.h">
       <Filter>Sources\GameObject\Components\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleSceneManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Scene.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -776,9 +779,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AssimpDefs.cpp">
       <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\ModuleScene.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\GameObject.cpp">
       <Filter>Sources\GameObject</Filter>
@@ -1112,6 +1112,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ImageComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleSceneManager.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Scene.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

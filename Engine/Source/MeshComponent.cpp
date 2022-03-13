@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "Scene.h"
 
 #include "TransformComponent.h"
 #include "MaterialComponent.h"

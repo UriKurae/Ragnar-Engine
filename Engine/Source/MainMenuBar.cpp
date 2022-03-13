@@ -5,7 +5,8 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleEditor.h"
 #include "ModuleCamera3D.h"
 #include "Physics3D.h"
@@ -113,24 +114,24 @@ bool MainMenuBar::Update(float dt)
 			if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Open Project", "Ctrl + O", &ret))
 			{
 				std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->scene->LoadScene(filePath.c_str());
+				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->LoadScene(filePath.c_str());
 			}
 
 			ImGui::Separator();
 
 			if (ImGui::MenuItem(ICON_FA_SAVE" Save", "Ctrl + S", &ret))
 			{
-				if (app->scene->SceneDirectory().empty())
+				if (app->sceneManager->GetCurrentScene()->SceneDirectory().empty())
 				{
 					std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-					if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+					if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 				}
-				else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
+				else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->SceneDirectory().c_str());
 			}
 			if (ImGui::MenuItem(ICON_FA_SAVE" Save As", "Ctrl + Shift + S", &ret))
 			{
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 			}
 			if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC", &ret))
 			{
@@ -222,40 +223,40 @@ bool MainMenuBar::Update(float dt)
 		{
 			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object", "Ctrl+Shift+N"))
 			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
-				else app->scene->CreateGameObject(nullptr);
+				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObject(app->editor->GetGO());
+				else app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 			}
       
 			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child", "Alt+Shift+N"))
 			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
+				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
 			}
 			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent", "Ctrl+Shift+G"))
 			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
 			}
       
 			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
 			{
 				if (ImGui::MenuItem("Cube"))
 				{
-					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::CUBE, app->editor->GetGO());
-					else app->scene->Create3DObject(Object3D::CUBE, nullptr);
+					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CUBE, app->editor->GetGO());
+					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CUBE, nullptr);
 				}
 				else if (ImGui::MenuItem("Pyramide"))
 				{
-					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::PYRAMIDE, app->editor->GetGO());
-					else app->scene->Create3DObject(Object3D::PYRAMIDE, nullptr);
+					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::PYRAMIDE, app->editor->GetGO());
+					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::PYRAMIDE, nullptr);
 				}
 				else if (ImGui::MenuItem("Sphere"))
 				{
-					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::SPHERE, app->editor->GetGO());
-					else app->scene->Create3DObject(Object3D::SPHERE, nullptr);
+					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::SPHERE, app->editor->GetGO());
+					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::SPHERE, nullptr);
 				}
 				else if (ImGui::MenuItem("Cylinder"))
 				{
-					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, app->editor->GetGO());
-					else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
+					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CYLINDER, app->editor->GetGO());
+					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CYLINDER, nullptr);
 				}
 				ImGui::EndMenu();
 
@@ -264,7 +265,7 @@ bool MainMenuBar::Update(float dt)
 			{
 				if (ImGui::MenuItem("UI Button"))
 				{
-					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
 					object->SetName("Button");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 
@@ -278,7 +279,7 @@ bool MainMenuBar::Update(float dt)
 				}
 				else if (ImGui::MenuItem("UI Slider"))
 				{				
-					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
 					object->SetName("Slider");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
@@ -291,7 +292,7 @@ bool MainMenuBar::Update(float dt)
 				}
 				else if (ImGui::MenuItem("UI Check Box"))
 				{
-					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
 					object->SetName("CheckBox");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
@@ -307,7 +308,7 @@ bool MainMenuBar::Update(float dt)
 				}
 				else if (ImGui::MenuItem("UI Image"))
 				{
-					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
 					object->SetName("Image");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
@@ -328,7 +329,7 @@ bool MainMenuBar::Update(float dt)
 			{
 				if (ImGui::MenuItem("Point Light"))
 				{
-					GameObject* go = app->scene->CreateGameObject(nullptr);
+					GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 					go->SetName("Point Light");
 					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
 					PointLight* pl = new PointLight();
@@ -338,7 +339,7 @@ bool MainMenuBar::Update(float dt)
 				}
 				else if (ImGui::MenuItem("Spot Light"))
 				{
-					GameObject* go = app->scene->CreateGameObject(nullptr);
+					GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 					go->SetName("Spot Light");
 					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
 					SpotLight* sl = new SpotLight();
@@ -448,7 +449,7 @@ bool MainMenuBar::Update(float dt)
 		ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 		ImGui::TextWrapped("Do you want to save the changes you made in: ");
 
-		std::string dir = app->scene->SceneDirectory();
+		std::string dir = app->sceneManager->GetCurrentScene()->SceneDirectory();
 		if (!dir.empty())
 		{
 			dir = dir.substr(dir.find("Output\\") + 7, dir.length());
@@ -457,22 +458,22 @@ bool MainMenuBar::Update(float dt)
 		ImGui::NewLine();
 		if (ImGui::Button("Save"))
 		{
-			if (app->scene->SceneDirectory().empty())
+			if (app->sceneManager->GetCurrentScene()->SceneDirectory().empty())
 			{
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 			}
 			else
 			{
-				app->scene->SaveScene(app->scene->SceneDirectory().c_str());
+				app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->SceneDirectory().c_str());
 			}
-			app->scene->NewScene();
+			app->sceneManager->GetCurrentScene()->NewScene();
 			saveWindow = false;
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Don't Save"))
 		{
-			app->scene->NewScene();
+			app->sceneManager->GetCurrentScene()->NewScene();
 			saveWindow = false;
 		}
 		ImGui::SameLine();
@@ -487,11 +488,11 @@ bool MainMenuBar::Update(float dt)
 	ImGui::PushStyleColor(ImGuiCol_BorderShadow, { 0, 0, 0, 0 });
 	ImGui::SameLine(ImGui::GetWindowSize().x * 0.5f - 81);
 	
-	if (app->scene->GetGameState() == GameState::NOT_PLAYING)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::NOT_PLAYING)
 	{
 		if (ImGui::ImageButton((ImTextureID)buttonPlay->GetId(), { 27,18 }))
 		{
-			app->scene->Play();
+			app->sceneManager->GetCurrentScene()->Play();
 			AudioManager::Get()->PlayAllAudioSources();
 			//ImGui::StyleColorsClassic();
 			app->physics->ActiveAllBodies();
@@ -504,22 +505,22 @@ bool MainMenuBar::Update(float dt)
 		ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 });
 
 	}
-	else if (app->scene->GetGameState() == GameState::PLAYING || app->scene->GetGameState() == GameState::PAUSE)
+	else if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING || app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE)
 	{
 		if (ImGui::ImageButton((ImTextureID)buttonStop->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->StopAllAudioSources();
-			app->scene->Stop();
+			app->sceneManager->GetCurrentScene()->Stop();
 			app->physics->SleepAllBodies();
 			//SetStyle(6);
 		}
 		ImGui::SameLine();
 
-		if (app->scene->GetGameState() == GameState::PAUSE)
+		if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE)
 		{
 			if (ImGui::ImageButton((ImTextureID)buttonPauseBlue->GetId(), { 27,18 }))
 			{
-				app->scene->Resume();
+				app->sceneManager->GetCurrentScene()->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
 				app->physics->ActiveAllBodies();
 			}
@@ -527,12 +528,12 @@ bool MainMenuBar::Update(float dt)
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
-			app->scene->Pause();
+			app->sceneManager->GetCurrentScene()->Pause();
 			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();
-		if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 })) if (app->scene->GetGameState() == GameState::PAUSE) app->scene->NextFrame();
+		if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 })) if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE) app->sceneManager->GetCurrentScene()->NextFrame();
 
 	}
 
@@ -549,7 +550,7 @@ bool MainMenuBar::Update(float dt)
 		std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 		if (!filePath.empty())
 		{
-			app->scene->LoadScene(filePath.c_str());
+			app->sceneManager->GetCurrentScene()->LoadScene(filePath.c_str());
 		}
 	}
 
@@ -560,7 +561,7 @@ bool MainMenuBar::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
 			{
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 			}
 			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 			{
@@ -568,12 +569,12 @@ bool MainMenuBar::Update(float dt)
 			}
 			if (app->input->GetKey(SDL_SCANCODE_G) == KeyState::KEY_DOWN)
 			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
 			}
 			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
 			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
-				else app->scene->CreateGameObject(nullptr);
+				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObject(app->editor->GetGO());
+				else app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 			}
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
@@ -584,7 +585,7 @@ bool MainMenuBar::Update(float dt)
 			}
 			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
 			{
-				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
+				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
 			}
 		}
 	}
@@ -592,12 +593,12 @@ bool MainMenuBar::Update(float dt)
 	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
 	{
-		if (app->scene->SceneDirectory().empty())
+		if (app->sceneManager->GetCurrentScene()->SceneDirectory().empty())
 		{
 			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-			if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
+			if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 		}
-		else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
+		else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->SceneDirectory().c_str());
 	}
 
 	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&

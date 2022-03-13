@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "MonoManager.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "TransformComponent.h"
 
 #include <mono/jit/jit.h>
@@ -114,10 +115,10 @@ bool MonoManager::CleanUp()
 
 void MonoManager::ReCompileCS()
 {
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 		return;
 
-	app->scene->SaveScene("Assets/Scenes/scenePlay.ragnar");
+	app->sceneManager->GetCurrentScene()->SaveScene("Assets/Scenes/scenePlay.ragnar");
 
 	//TODO: Clean scene and all render data
 	//app->scene->CleanScene();
@@ -134,7 +135,7 @@ void MonoManager::ReCompileCS()
 	CMDCompileCS();
 	InitMono();
 
-	app->scene->LoadScene("Assets/Scenes/scenePlay.ragnar");
+	app->sceneManager->GetCurrentScene()->LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 
 }

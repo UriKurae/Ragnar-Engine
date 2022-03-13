@@ -1,5 +1,5 @@
 #pragma once
-#include "Module.h"
+
 #include "GameObject.h"
 #include "Quadtree.h"
 #include "GameTimer.h"
@@ -26,18 +26,18 @@ enum class GameState
 };
 class CameraComponent;
 
-class ModuleScene : public Module
+class Scene
 {
 public:
-	ModuleScene();
-	~ModuleScene();
+	Scene();
+	~Scene();
 
-	bool Start() override;
-	bool PreUpdate(float dt) override;
-	bool Update(float dt) override;
-	bool PostUpdate() override;
+	bool Start();
+	bool PreUpdate(float dt);
+	bool Update(float dt);
+	bool PostUpdate();
 	bool Draw();
-	bool CleanUp() override;
+	bool CleanUp();
 
 	void NewScene();
 

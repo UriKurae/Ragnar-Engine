@@ -2,7 +2,8 @@
 #include "Application.h"
 
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "Resource.h"
 
@@ -22,7 +23,7 @@ InspectorMenu::~InspectorMenu()
 bool InspectorMenu::Update(float dt)
 {
 	ImGui::Begin(ICON_FA_INFO_CIRCLE" Inspector", &active);
-	if (!app->scene->GetRoot()->GetChilds().empty())
+	if (!app->sceneManager->GetCurrentScene()->GetRoot()->GetChilds().empty())
 	{
 		// The inspector is empty if no object is selected
 		GameObject* obj = app->editor->GetGO();

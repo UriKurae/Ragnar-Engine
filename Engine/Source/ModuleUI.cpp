@@ -6,7 +6,8 @@
 #include "CameraComponent.h"
 #include "ModuleCamera3D.h"
 #include "ButtonComponent.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ImageComponent.h"
 #include "MaterialComponent.h"
 #include "SliderComponent.h"
@@ -140,7 +141,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	theImage = own->GetComponent<ImageComponent>();
 
 
-	CameraComponent* cam = app->scene->camera->GetComponent<CameraComponent>();
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
 
@@ -356,7 +357,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	
 	shader->Use();
 	Frustum frustum;
-	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
+	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 	
 	frustum.pos = camera->GetFrustum()->pos;
 	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
@@ -429,7 +430,7 @@ bool ModuleUI::PreUpdate(float dt)
 {
 	/*if (app->gameMode)
 	{*/
-		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };

@@ -4,7 +4,7 @@
 
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
@@ -24,7 +24,7 @@ Application::Application()
 	window = new ModuleWindow();
 	input = new ModuleInput();
 	physics = new Physics3D();
-	scene = new ModuleScene();
+	sceneManager = new ModuleSceneManager();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	moduleMono = new MonoManager(this);
@@ -46,7 +46,7 @@ Application::Application()
 	AddModule(moduleMono);
 	
 	// Scenes
-	AddModule(scene);
+	AddModule(sceneManager);
 	AddModule(editor);
 	AddModule(userInterface);
 
