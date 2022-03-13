@@ -45,22 +45,26 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::NOT_PLAYING || app->scene->GetGameState() == GameState::PAUSE || updateMethod == nullptr)
+	if (app->scene->GetGameState() == GameState::NOT_PLAYING || app->scene->GetGameState() == GameState::PAUSE
+		|| updateMethod == nullptr || startMethod == nullptr)
+	{
 		return false;
+	}
 
-	MonoObject* exec = nullptr;
+	MonoObject* startExec = nullptr;
 	static bool firstUpdate = true;
 	if (firstUpdate)
 	{
-		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
 		firstUpdate = false;
 	}
 
 	ScriptComponent::runningScript = this;
 
+	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
 
-	if (exec != nullptr)
+	if (exec != nullptr || startExec != nullptr)
 	{
 		if (strcmp(mono_class_get_name(mono_object_get_class(exec)), "NullReferenceException") == 0)
 		{
@@ -295,8 +299,6 @@ void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 
 bool ScriptComponent::OnLoad(JsonParsing& nObj)
 {
-	Component::OnLoad(nObj);
-
 	SerializedField* _field = nullptr;
 	for (int i = 0; i < fields.size(); i++) //TODO IMPORTANT ASK: There must be a better way to do this... too much use of switches with this stuff, look at MONOMANAGER
 	{

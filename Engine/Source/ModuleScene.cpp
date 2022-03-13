@@ -137,13 +137,6 @@ bool ModuleScene::Update(float dt)
 	///////////////////////
 	// Scripting
 	Scripting(dt);
-	
-
-
-	///////////////////////
-	// Scripting
-	Scripting(dt);
-
 
 	AudioManager::Get()->Render();
 
