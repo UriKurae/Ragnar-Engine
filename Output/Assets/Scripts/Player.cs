@@ -36,6 +36,7 @@ public class Player : RagnarComponent
 		if (Input.GetKey(REKeyCode.D) == KeyState.KEY_UP || Input.GetKey(REKeyCode.A) == KeyState.KEY_UP
 			|| Input.GetKey(REKeyCode.W) == KeyState.KEY_UP || Input.GetKey(REKeyCode.S) == KeyState.KEY_UP)
 		{
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
 			gameObject.GetComponent<AudioSource>().StopCurrentClip();
 
             if (rb.linearVelocity != Vector3.zero)

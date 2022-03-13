@@ -8,7 +8,6 @@
 #include <map>
 
 struct SerializedField;
-class btRigidBody; // Scripting
 
 enum class Object3D
 {
@@ -87,7 +86,6 @@ public:
 
 	// Scripting
 	void Scripting(float dt);
-	void SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel);
 
 	CameraComponent* mainCamera;
 	GameObject* camera;

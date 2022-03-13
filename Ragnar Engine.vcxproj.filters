@@ -73,6 +73,24 @@
     <Filter Include="Sources\GameObject\Components\UI">
       <UniqueIdentifier>{e7c2aa50-fdb9-4519-ac74-100049977be3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour">
+      <UniqueIdentifier>{58372d26-6a47-44e6-9840-a670bd587a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
+      <UniqueIdentifier>{f4ea8377-05e1-4c9f-bec2-0007fcd46baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\Detour">
+      <UniqueIdentifier>{092b5690-982b-4223-8de3-c05ac588f021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DetourTileCache">
+      <UniqueIdentifier>{226045b1-1767-44e0-8a09-2340fb6efcfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\Recast">
+      <UniqueIdentifier>{3519ba21-f7d3-4aa1-8b2f-986de673a97a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DetourCrowd">
+      <UniqueIdentifier>{c359254e-8161-490d-b0d5-cd504e6de230}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -376,9 +394,6 @@
     <ClInclude Include="Engine\Source\Material.h">
       <Filter>Sources\Materials</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\Vertex.h">
-      <Filter>Sources\Buffers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\Lights.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
@@ -652,6 +667,93 @@
     <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\ChunkyTriMesh.h">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\InputGeom.h">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\NavMeshBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\DebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\DetourDebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\RecastDebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\RecastDump.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourAlloc.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourAssert.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourCommon.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourMath.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNavMesh.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNavMeshBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNavMeshQuery.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNode.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourStatus.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\DetourTileCache.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\DetourTileCacheBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Recast.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\RecastAlloc.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\RecastAssert.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourCrowd.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourLocalBoundary.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourObstacleAvoidance.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourPathCorridor.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourPathQueue.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourProximityGrid.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\NavAgentComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
     <ClInclude Include="Dependencies\Imgui\bezier.hpp">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
@@ -693,6 +795,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\ImageComponent.h">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\NavigatorMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleNavMesh.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1092,6 +1200,105 @@
     <ClCompile Include="Engine\Source\Component.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\ChunkyTriMesh.cpp">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\InputGeom.cpp">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\NavMeshBuilder.cpp">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\DebugDraw.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\DetourDebugDraw.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\RecastDebugDraw.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\RecastDump.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\DetourAlloc.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\DetourCommon.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\DetourNavMesh.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\DetourNavMeshBuilder.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\DetourNavMeshQuery.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Detour\DetourNode.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourTileCache\DetourTileCache.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourTileCache\DetourTileCacheBuilder.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\Recast.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastAlloc.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastArea.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastContour.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastFilter.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastLayers.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastMesh.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastMeshDetail.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastRasterization.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\Recast\RecastRegion.cpp">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourCrowd.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourLocalBoundary.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourObstacleAvoidance.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourPathCorridor.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourPathQueue.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DetourCrowd\DetourProximityGrid.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.cpp">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClCompile>
     <ClCompile Include="Dependencies\Imgui\bezier.cpp">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClCompile>
@@ -1112,6 +1319,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ImageComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\NavigatorMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleNavMesh.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

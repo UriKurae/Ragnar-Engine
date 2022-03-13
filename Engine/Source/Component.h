@@ -34,6 +34,7 @@ enum class ComponentType
 	UI_INPUTBOX,
 	UI_CANVAS,
 	TRANFORM2D,
+	NAVAGENT,
 };
 
 enum class State

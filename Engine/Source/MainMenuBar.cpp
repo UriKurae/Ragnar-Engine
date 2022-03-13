@@ -18,6 +18,7 @@
 #include "ContentBrowserMenu.h"
 #include "TextEditorMenu.h"
 #include "FogWarMenu.h"
+#include "NavigatorMenu.h"
 
 #include "TransformComponent.h"
 #include "LightComponent.h"
@@ -55,6 +56,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new ContentBrowserMenu());
 	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
+	menus.emplace_back(new NavigatorMenu());
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
@@ -210,6 +212,10 @@ bool MainMenuBar::Update(float dt)
 			if (ImGui::MenuItem("Show Raycast", NULL, app->renderer3D->GetRayCast()))
 			{
 				app->renderer3D->SetWireMode();
+			}
+			if (ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh()))
+			{
+
 			}
 			ImGui::EndMenu();
 		}
