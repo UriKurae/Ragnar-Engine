@@ -6,7 +6,6 @@ namespace RagnarEngine
 {
     public class Transform : RagnarComponent
     {
-        //Change type depending of class
         public Transform()
         {
             type = ComponentType.TRANSFORM;

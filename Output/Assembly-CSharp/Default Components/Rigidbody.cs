@@ -6,10 +6,8 @@ namespace RagnarEngine
 {
     public class Rigidbody : RagnarComponent
     {
-        //Change type depending of class
         public Rigidbody(UIntPtr ptr) : base(ptr)
         {
-            //pointer = ptr;
             type = ComponentType.RIGID_BODY;
         }
 

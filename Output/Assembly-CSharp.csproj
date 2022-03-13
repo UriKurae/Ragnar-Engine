@@ -50,6 +50,7 @@
     <Compile Include="Assembly-CSharp\Default Components\AudioListener.cs" />
     <Compile Include="Assembly-CSharp\Default Components\AudioSource.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\MaterialComponent.cs" />
     <Compile Include="Assembly-CSharp\Default Components\RagnarComponent.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Rigidbody.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform.cs" />
