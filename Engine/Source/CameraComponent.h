@@ -37,6 +37,7 @@ public:
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
+	float zoom = zoomMax;
 
 private:
 
@@ -61,7 +62,7 @@ private:
 	//----------------------------------------------
 	const float zoomMin = 10;
 	const float zoomMax = 100;
-	float zoom = zoomMax;
+	
 
 	bool fixingToTarget = false;
 

@@ -13,5 +13,14 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void UIFunctionTransform2D();
+
+        public extern Vector3 position2D
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
     }
 }

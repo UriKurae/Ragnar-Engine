@@ -112,6 +112,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
 	mono_add_internal_call("RagnarEngine.UISlider::UIFunctionSlider", UIFunctionSlider);
 	mono_add_internal_call("RagnarEngine.Transform2D::UIFunctionTransform2D", UIFunctionTransform2D);
+	mono_add_internal_call("RagnarEngine.Transform2D::get_position2D", Get2DPosition);
+	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
 
 	InitMono();
 

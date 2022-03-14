@@ -51,16 +51,17 @@ bool ComponentTransform2D::Update(float dt)
 	float4 viewport = app->editor->GetGameView()->GetBounds();
 	float temporalW = (viewport.z * 25) / 847;
 	float temporalH = (viewport.w * 15) / 649;
-	scale.x = (buttonWidth / 0.6) / temporalW;
-	scale.y = (buttonHeight / 0.75) / temporalH;
+	scale.x = (buttonWidth / 1.2) / temporalW;
+	scale.y = (buttonHeight / 1.4) / temporalH;
 
 
 
 	internalPosition.x = (position.x *30.0f) / (viewport.z / 2);
 
-	/*float res = (viewport.w * 1.5) / 649;
-	res = 1.5 - (res - 1.5)+0.05;*/
+
 	internalPosition.y = (position.y * 30) / (viewport.w / 2);
+
+
 	internalPosition.z = position.z;
 	/*internalPosition.x = position.x/1;
 	internalPosition.y = position.y/8;*/
