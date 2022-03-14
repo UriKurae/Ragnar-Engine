@@ -33,12 +33,13 @@ RigidBodyComponent::~RigidBodyComponent()
 void RigidBodyComponent::IgnoreCollision()
 {
 	RigidBodyComponent* comp = nullptr;
+	Component* component = nullptr;
 	for (int i = 0; i < owner->GetComponents().size(); i++)
 	{
-		if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY &&
-			owner->GetComponents().at(i) != this)
+		component = owner->GetComponents().at(i);
+		if (component->type == ComponentType::RIGID_BODY &&	component != this)
 		{
-			comp = static_cast<RigidBodyComponent*>(owner->GetComponents().at(i));
+			comp = static_cast<RigidBodyComponent*>(component);
 
 			body->setIgnoreCollisionCheck(comp->body, true);
 			comp->body->setIgnoreCollisionCheck(body, true);
@@ -109,16 +110,17 @@ bool RigidBodyComponent::Update(float dt)
 {
 	if (app->scene->GetGameState() == GameState::PLAYING)
 	{
+		TransformComponent* trans = owner->GetComponent<TransformComponent>();
 		if (body->getActivationState() == 1 || body->getActivationState() == 3)
 		{
-				float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), owner->GetComponent<TransformComponent>()->GetScale());
-				owner->GetComponent<TransformComponent>()->SetTransform(CM2);
+				float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
+				trans->SetTransform(CM2);
 		}
 		if (trigger)
 		{
 			btTransform t;
-			t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
-			t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
+			t.setBasis(float3x3::FromQuat(trans->GetRotation()));
+			t.setOrigin(trans->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
 
 			body->setWorldTransform(t);
 		}

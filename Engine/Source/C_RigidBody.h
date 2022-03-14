@@ -56,6 +56,7 @@ public:
 	bool useGravity = true;
 	bool isKinematic = false;
 	bool trigger = false;
+
 	std::vector<RigidBodyComponent*> constraintBodies;
 	std::vector<int> bodiesUIDs;
 
@@ -86,5 +87,4 @@ private:
 	int cylinderAxis = 3;
 
 	bool editMesh = false;
-	bool mainBody = false;
 };
