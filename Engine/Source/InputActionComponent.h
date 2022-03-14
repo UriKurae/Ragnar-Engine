@@ -19,6 +19,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	bool LoadInputAsset(const char* path);
+	void LoadAllInputAssets(const char* folder);
 
 private:
 
@@ -26,5 +27,5 @@ private:
 	std::string currentAssetName;
 
 	bool assetWindowActive;
-
+	std::vector<std::string> inputAssetsList;
 };

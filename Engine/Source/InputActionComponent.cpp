@@ -1,4 +1,6 @@
 
+#include "Application.h"
+#include "FileSystem.h"
 #include "InputActionComponent.h"
 #include "InputActionMenu.h"
 #include "Globals.h"
@@ -33,7 +35,8 @@ void InputActionComponent::OnEditor()
 		if (ImGui::Button(ICON_FA_EDIT))
 		{
 			assetWindowActive = true;
-			LoadInputAsset("Assets/InputAction.inputaction");
+			LoadAllInputAssets("Assets");
+			//LoadInputAsset("Assets/InputAction.inputaction");
 		}
 
 		if (currentActionMaps.size() > 0)
@@ -57,8 +60,15 @@ void InputActionComponent::OnEditor()
 
 	if (assetWindowActive)
 	{
-		ImGui::Begin("Input Action Assets", &assetWindowActive);
-		
+		ImGui::Begin("Input Action Assets", &assetWindowActive, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoCollapse);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 size = ImGui::GetWindowSize();
+		ImVec2 mouse = ImGui::GetIO().MousePos;
+		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+		{
+			if (ImGui::GetIO().MouseClicked[0]) assetWindowActive = false;
+		}
 
 
 		ImGui::End();
@@ -105,4 +115,23 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 		DEBUG_LOG("Input Asset couldn't be loaded");
 	}
 	return false;
+}
+
+void InputActionComponent::LoadAllInputAssets(const char* folder)
+{
+	std::vector<std::string> files;
+	std::vector<std::string> dirs;
+	std::string path = folder + std::string("/");
+	app->fs->DiscoverFilesAndDirs(path.c_str(), files, dirs);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		if ((*it).find(".inputaction") != std::string::npos)
+		{
+			inputAssetsList.push_back(*it);
+		}
+	}
+	for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
+	{
+		LoadInputAsset((*it).c_str());
+	}
 }
