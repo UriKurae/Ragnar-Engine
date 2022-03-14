@@ -8,7 +8,6 @@
 #include "ModuleUI.h"
 #include "Physics3D.h"
 
-#include "Primitives.h"
 #include "MeshImporter.h"
 #include "FileSystem.h"
 
@@ -46,34 +45,16 @@ bool Scene::Start()
 
 	camera = CreateGameObject(nullptr);
 	camera->CreateComponent(ComponentType::CAMERA);
+	camera->CreateComponent(ComponentType::AUDIO_LISTENER);
 	camera->SetName("Camera");
-	//camera->CreateComponent(ComponentType::AUDIO_LISTENER);
-	//camera->CreateComponent(ComponentType::AUDIO_SOURCE);
-	
-	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
-	
-	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
-	ResourceManager::GetInstance()->ImportAllResources();
-	ImportPrimitives();
-	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 
+	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+
+	// TODO: The player lines should leave as soon as we have scripting going.
 	player = CreateGameObject(nullptr);
 	player->CreateComponent(ComponentType::AUDIO_SOURCE);
 	player->SetName("Player");
 	player->tag = "Player";
-	
-	//AkAuxSendValue aEnvs[1];
-	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
-
-	//
-	//aEnvs[0].listenerID = camera->GetUUID();
-	//aEnvs[0].auxBusID = AK::SoundEngine::GetIDFromString(L"ReverbZone");
-	//aEnvs[0].fControlValue = 0.0f;
-	//
-	//if (AK::SoundEngine::SetGameObjectAuxSendValues(camera->GetUUID(), aEnvs, 1) != AK_Success)
-	//{
-	//	DEBUG_LOG("Couldnt set aux send values");
-	//}
 
 	LoadScene("Assets/Scenes/build.ragnar");
 
@@ -487,55 +468,6 @@ void Scene::DuplicateGO(GameObject* go, GameObject* parent)
 		DuplicateGO(go->GetChilds()[i], gameObject);
 	}
 	//gameObject->SetAABB(go->GetAABB());
-}
-
-void Scene::ImportPrimitives()
-{
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
-	std::map<std::string, BoneInfo> bonesUid;
-	//std::vector<float3> normals;
-	//std::vector<float2> texCoords;
-
-	RCube::CreateCube(vertices, indices);
-	std::string library;
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-	library.clear();
-
-	RPyramide::CreatePyramide(vertices, indices);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-	library.clear();
-
-	RSphere::CreateSphere(vertices, indices);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-	library.clear();
-
-	RCylinder::CreateCylinder(vertices, indices);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
 }
 
 void Scene::Play()

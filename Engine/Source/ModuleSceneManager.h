@@ -41,10 +41,14 @@ public:
 	bool Draw();
 	bool CleanUp() override;
 
+	void ImportPrimitives();
+
 	Scene* GetCurrentScene() const { return currentScene; }
 
 	void NewScene();
 	void AddScene(Scene* newScene);
+
+	void ChangeScene(const char* sceneName);
 
 private:
 

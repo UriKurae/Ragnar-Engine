@@ -24,6 +24,7 @@ enum class GameState
 	PLAYING,
 	PAUSE
 };
+
 class CameraComponent;
 
 class Scene
@@ -70,10 +71,6 @@ public:
 	bool SaveScene(const char* name);
 
 	void DuplicateGO(GameObject* go, GameObject* parent);
-
-	//void AddToQuadtree(GameObject* go);
-	//void RemoveFromQuadtree(GameObject* go);
-	void ImportPrimitives();
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
 

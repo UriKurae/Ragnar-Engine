@@ -1,4 +1,5 @@
 #pragma once
+#include "Globals.h"
 #include "Vertex.h"
 
 typedef unsigned char GLubyte;
