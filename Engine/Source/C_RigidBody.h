@@ -52,6 +52,9 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
+	inline void SetOnCollision(bool ret) { onCollision = ret; };
+	inline bool GetOnCollision() { return onCollision; };
+
 public:
 	bool useGravity = true;
 	bool isKinematic = false;
@@ -87,4 +90,5 @@ private:
 	int cylinderAxis = 3;
 
 	bool editMesh = false;
+	bool onCollision = false;
 };

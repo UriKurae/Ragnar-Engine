@@ -59,20 +59,19 @@ bool Physics3D::PreUpdate(float dt)
 			btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
 			int numContacts = contactManifold->getNumContacts();
-			std::vector<GameObject*>::iterator it = bullets.begin();
-
-			for (int i = 0; i < bullets.size(); i++)
+			
+			for (int i = 0; i < bodies.size(); i++)
 			{
-				if (numContacts > 0 && (obA == bullets.at(i)->GetComponent<RigidBodyComponent>()->GetBody() ||
-					obB == bullets.at(i)->GetComponent<RigidBodyComponent>()->GetBody()))
+				if (numContacts > 0 && obA == bodies.at(i)->GetBody())
 				{
-					bullets.at(i)->GetParent()->RemoveChild(bullets.at(i));
-					RELEASE(bullets.at(i));
-					bullets.erase(it);
-					break;
+					bodies.at(i)->SetOnCollision(true);
 				}
-				it++;
+				if (numContacts > 0 && obB == bodies.at(i)->GetBody())
+				{
+					bodies.at(i)->SetOnCollision(true);
+				}
 			}
+			
 		}
 	}
 	
