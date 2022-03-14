@@ -54,3 +54,54 @@ void Set2DPosition(MonoObject* go, MonoObject* position)
 		tr->UpdateTransform();*/
 	}
 }
+
+int GetButtonState(MonoObject* go)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	//float3 position = ;
+	
+
+	return (int)tr->state;
+}
+void SetText(MonoObject* go, const char* text)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	//float3 position = ;
+	tr->buttonText.textt.clear();
+	tr->buttonText.textt = text;
+
+	
+}
+const char* GetText(MonoObject* go)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	//float3 position = ;
+	
+
+	return tr->buttonText.textt.c_str();
+}
+
+const bool GetIsChecked(MonoObject* go)
+{
+	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
+	//float3 position = ;
+
+
+	return tr->checked;
+}
+int GetCheckboxState(MonoObject* go)
+{
+	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
+	//float3 position = ;
+
+
+	return (int)tr->state;
+}
+float GetSliderActualValue(MonoObject* go)
+{
+	SliderComponent* tr = GetComponentMono<SliderComponent*>(go);
+	//float3 position = ;
+
+
+	return tr->barProgres;
+}

@@ -51,9 +51,11 @@ bool CheckboxComponent::Update(float dt)
 			{
 				if (actual == noSelectedMaterial) {
 					actual = selectedMaterial;
+					checked = true;
 				}
 				else 
 				{
+					checked = false;
 					actual = noSelectedMaterial;
 				}
 			}

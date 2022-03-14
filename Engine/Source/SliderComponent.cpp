@@ -97,7 +97,6 @@ bool SliderComponent::Update(float dt)
 
 
 			barProgres = thePos / total;
-			DEBUG_LOG("Bar: %f", barProgres);
 			int cont = 0;
 			ComponentTransform2D* q;
 			for (int a = 0; a < owner->components.size(); a++) {

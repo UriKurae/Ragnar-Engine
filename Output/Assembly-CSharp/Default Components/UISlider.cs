@@ -13,5 +13,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void UIFunctionSlider();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern float GetSliderActualValue();
     }
 }

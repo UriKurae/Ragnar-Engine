@@ -13,5 +13,11 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void UIFunctionCheckbox();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern bool GetIsChecked();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern int GetCheckboxState();
     }
 }

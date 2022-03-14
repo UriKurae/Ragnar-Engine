@@ -78,7 +78,7 @@ bool ModuleScene::Start()
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
 
-	LoadScene("Assets/Scenes/uiTest.ragnar");
+	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
 }
