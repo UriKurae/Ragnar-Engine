@@ -111,8 +111,16 @@ bool RigidBodyComponent::Update(float dt)
 	{
 		if (body->getActivationState() == 1 || body->getActivationState() == 3)
 		{
-			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), owner->GetComponent<TransformComponent>()->GetScale());
-			owner->GetComponent<TransformComponent>()->SetTransform(CM2);
+				float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), owner->GetComponent<TransformComponent>()->GetScale());
+				owner->GetComponent<TransformComponent>()->SetTransform(CM2);
+		}
+		if (trigger)
+		{
+			btTransform t;
+			t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
+			t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
+
+			body->setWorldTransform(t);
 		}
 	}
 
@@ -124,8 +132,6 @@ void RigidBodyComponent::UpdateCollision()
 {
 	if (app->scene->GetGameState() != GameState::PLAYING)
 	{
-		OBB obb = owner->GetOOB();
-
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
 		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
