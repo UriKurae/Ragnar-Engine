@@ -17,6 +17,6 @@ public:
 	virtual bool OnLoad(JsonParsing& node) override;
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-private:
+public:
 	NavAgent* agentProperties = nullptr;
 };

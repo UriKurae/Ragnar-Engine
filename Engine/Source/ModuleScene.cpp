@@ -6,6 +6,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
+#include "ModuleNavMesh.h"
 #include "Physics3D.h"
 
 #include "Primitives.h"
@@ -598,6 +599,26 @@ void ModuleScene::Scripting(float dt)
 {
 	if (gameState == GameState::PLAYING)
 	{
-		player->GetComponent<NavAgentComponent>();
+		if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
+		{
+			float hitTime;
+			float rayStart[3];
+			float rayEnd[3];
+			bool hit = app->navMesh->GetInputGeom()->raycastMesh(rayStart, rayEnd, hitTime);
+			if (hit)
+			{
+				app->navMesh->pathfinder->startPosition = float3(rayEnd[0], rayEnd[1], rayEnd[2]);
+				app->navMesh->pathfinder->startPosSet = true;
+
+				if (app->navMesh->pathfinder->endPosSet)
+				{
+					app->navMesh->pathfinder->CalculatePath();
+					std::vector<float3> path;
+					app->navMesh->pathfinder->CalculatePath(app->navMesh->pathfinder->startPosition, app->navMesh->pathfinder->endPosition, path);
+				}
+			}
+		}
+		app->navMesh->pathfinder->CalculatePath();
+		//player->GetComponent<NavAgentComponent>();
 	}
 }

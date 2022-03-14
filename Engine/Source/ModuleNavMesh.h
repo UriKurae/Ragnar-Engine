@@ -3,6 +3,7 @@
 #include "Recast/Recast.h"
 #include "Detour/DetourNavMesh.h"
 #include "Detour/DetourNavMeshQuery.h"
+#include "InputGeom.h"
 
 #include "MathGeoLib.h"
 
@@ -31,24 +32,29 @@ struct NavAgent
 	float stoppingDistance = 0;
 
 	PathType pathType = PathType::STRAIGHT;
+
+	//Pathfinder* pathfinder;
 };
 
-struct Pathfinder
+class Pathfinder
 {
+public:
 	Pathfinder();
 	~Pathfinder();
-	void Init(NavMeshBuilder* builder);
 
+	void Init(NavMeshBuilder* builder);
 	bool CalculatePath();
 	bool CalculatePath(float3 origin, float3 destination, std::vector<float3>& path);
 	void RenderPath();
 
-	PathType pathType;
-
+public:
 	dtNavMesh* m_navMesh;
 	dtNavMeshQuery* m_navQuery;
 	dtQueryFilter m_filter;
 	NavMeshBuilder* m_navMeshBuilder;
+
+	//CHECK
+	PathType pathType;
 
 	int m_straightPathOptions;
 
@@ -132,11 +138,11 @@ public:
 	void BakeNavMesh();
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
 	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
-	const inline InputGeom* GetInputGeom() const { return geometry; };
+	inline InputGeom* GetInputGeom() { return geometry; };
 	BuildSettings* GetBuildSettings() { return buildSettings; };
 
 public:
-	Pathfinder pathfinder;
+	Pathfinder* pathfinder;
 
 private:
 	NavMeshBuilder* navMeshBuilder;

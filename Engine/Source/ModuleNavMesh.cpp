@@ -9,7 +9,6 @@
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
-#include "InputGeom.h"
 #include "Detour/DetourNavMeshBuilder.h"
 #include "Detour/DetourCommon.h"
 #include "DebugUtils/SampleInterfaces.h"
@@ -24,6 +23,7 @@ geometry(nullptr), navMeshBuilder(nullptr)
 	geometry = new InputGeom();
 	geometry->SetMesh();
 	buildSettings = new BuildSettings;
+	pathfinder = new Pathfinder;
 }
 
 ModuleNavMesh::~ModuleNavMesh()
@@ -32,6 +32,8 @@ ModuleNavMesh::~ModuleNavMesh()
 
 	delete buildSettings;
 	buildSettings = nullptr;
+	delete pathfinder;
+	pathfinder = nullptr;
 }
 
 bool ModuleNavMesh::Start()
@@ -184,7 +186,7 @@ void ModuleNavMesh::BakeNavMesh()
 		navMeshBuilder->HandleSettings();
 		navMeshBuilder->HandleBuild();
 
-		pathfinder.Init(navMeshBuilder);
+		pathfinder->Init(navMeshBuilder);
 	}
 
 	gameObjects.clear();
@@ -752,5 +754,7 @@ NavAgent::NavAgent()
 	angularSpeed = 1.0f;
 	acceleration = 1.0f;
 	stoppingDistance = 0;
+
+	//pathfinder = app->navMesh->pathfinder;
 }
 
