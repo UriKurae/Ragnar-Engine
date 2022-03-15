@@ -102,5 +102,10 @@ public class Player : RagnarComponent
             bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);
         }
     }
+
+    public void OnTriggerEnter(Rigidbody other)
+    {
+        other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
+    }
 }
 

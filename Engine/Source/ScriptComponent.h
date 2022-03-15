@@ -7,6 +7,8 @@
 #include <mono/metadata/object-forward.h>
 
 class GameObject;
+class RigidBodyComponent;
+
 typedef struct _MonoClassField MonoClassField;
 
 class ScriptComponent : public Component
@@ -26,6 +28,8 @@ public:
 
 	void LoadScriptData(const char*);
 
+	void CallOnTriggerEnter(RigidBodyComponent* other);
+
 private:
 //#ifndef STANDALONE
 	void OnEditor() override;
@@ -39,6 +43,8 @@ public:
 
 	MonoMethod* updateMethod;
 	MonoMethod* startMethod;
+	MonoMethod* onTriggerEnterMethod;
+
 	uint32_t noGCobject;
 	std::string name = "";
 

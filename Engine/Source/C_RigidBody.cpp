@@ -598,8 +598,11 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		if (app->scene->GetGameState() == GameState::PLAYING)
 			body->setActivationState(DISABLE_DEACTIVATION);
 	}
-	if(trigger) 
+	if (trigger)
+	{
 		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+		app->physics->triggers.push_back(this);
+	}
 
 	SetMass(mass);
 	SetPhysicsProperties();

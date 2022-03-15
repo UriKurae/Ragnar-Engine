@@ -23,7 +23,6 @@ namespace RagnarEngine
         {
             name = "Empty";
             pointer = UIntPtr.Zero;
-            //InternalCalls.CreateGameObject(name, Vector3.zero);
         }
         public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR/*, UIntPtr audioPTR, UIntPtr rbPTR, UIntPtr animPTR, UIntPtr camPTR*/)
         {
@@ -58,7 +57,7 @@ namespace RagnarEngine
             {
                 retValue = RagnarComponent.componentTable[typeof(T)];
             }
-            return TryGetComponent<T>(typeof(T).ToString(), (int)retValue); // TODO: Very temporary. FIND A BETTER WAY TO DO THIS
+            return TryGetComponent<T>(typeof(T).ToString(), (int)retValue);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -82,10 +81,7 @@ namespace RagnarEngine
 
         public Transform transform
         {
-            get
-            {
-                return trans;
-            }
+            get { return trans; }
         }
     }
 }

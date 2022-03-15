@@ -423,6 +423,7 @@ void MonoManager::CreateAssetsScript(const char* localPath)
 	className = className.substr(0, className.find_last_of("."));
 
 	outfile << "using System;" << std::endl << "using RagnarEngine;" << std::endl << std::endl << "public class " << className.c_str() << " : RagnarComponent" << std::endl << "{" << std::endl <<
+		"	public void Start()" << std::endl << "	{" << std::endl << std::endl << "	}" << std::endl << 
 		"	public void Update()" << std::endl << "	{" << std::endl << std::endl << "	}" << std::endl << std::endl << "}";
 
 	outfile.close();

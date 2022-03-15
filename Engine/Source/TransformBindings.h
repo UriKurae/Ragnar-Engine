@@ -21,7 +21,7 @@ GameObject* GetGameObjectMono(MonoObject* component)
 {
 	uintptr_t ptr = 0;
 	MonoClass* goClass = mono_object_get_class(component);
-
+	const char* name = mono_class_get_name(goClass);
 	mono_field_get_value(component, mono_class_get_field_from_name(goClass, "pointer"), &ptr);
 
 	return reinterpret_cast<Component*>(ptr)->owner;
