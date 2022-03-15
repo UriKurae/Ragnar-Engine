@@ -65,15 +65,14 @@ bool Physics3D::PreUpdate(float dt)
 				btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
 				//int numContacts = contactManifold->getNumContacts();
-				for (int i = 0; i < triggers.size(); i++)
+				for (int j = 0; j < triggers.size(); j++)
 				{
-					if (obA == triggers.at(i)->GetBody() || obB == triggers.at(i)->GetBody())
+					if (obA == triggers.at(j)->GetBody() || obB == triggers.at(j)->GetBody())
 					{
-						for (int j = 0; j < bodies.size(); j++)
+						for (int k = 0; k < bodies.size(); k++)
 						{
-							if (obA == bodies.at(j)->GetBody() || obB == bodies.at(j)->GetBody())
-								bodies.at(j)->SetOnCollision(true);
-							//else bodies.at(j)->SetOnCollision(false); //Check, not work
+							if (obA == bodies.at(k)->GetBody() || obB == bodies.at(k)->GetBody())
+								bodies.at(k)->SetOnCollision(true);
 						}
 					}					
 				}
