@@ -56,12 +56,12 @@ public:
 		return mouseZ;
 	}
 
-	inline int GetMouseXMotion() const
+	inline float GetMouseXMotion() const
 	{
 		return mouseXMotion;
 	}
 
-	inline int GetMouseYMotion() const
+	inline float GetMouseYMotion() const
 	{
 		return mouseYMotion;
 	}
@@ -77,8 +77,8 @@ private:
 	int mouseX;
 	int mouseY;
 	int mouseZ;
-	int mouseXMotion;
-	int mouseYMotion;
+	float mouseXMotion;
+	float mouseYMotion;
 	int mouseZMotion;
 
 	std::vector<std::string> strings;
