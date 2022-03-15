@@ -51,36 +51,32 @@ bool Physics3D::PreUpdate(float dt)
 	world->stepSimulation(dt, 15);
 	if (app->scene->GetGameState() == GameState::PLAYING)
 	{
+		for (size_t i = 0; i < bodies.size(); i++)
+		{
+			bodies.at(i)->SetOnCollision(false);
+		}
 		int numManifolds = world->getDispatcher()->getNumManifolds();
 		if (numManifolds > 0)
 		{
-			checkColision = true;
 			for (int i = 0; i < numManifolds; i++)
 			{
 				btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
 				btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
 				btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
-				int numContacts = contactManifold->getNumContacts();
-				if (numContacts > 0 && (obA->CF_NO_CONTACT_RESPONSE || obB->CF_NO_CONTACT_RESPONSE)) // CF_NO_CONTACT_RESPONSE = Trigger
+				//int numContacts = contactManifold->getNumContacts();
+				for (int i = 0; i < triggers.size(); i++)
 				{
-					for (int j = 0; j < bodies.size(); j++)
+					if (obA == triggers.at(i)->GetBody() || obB == triggers.at(i)->GetBody())
 					{
-						if (obA == bodies.at(j)->GetBody() || obB == bodies.at(j)->GetBody())
+						for (int j = 0; j < bodies.size(); j++)
 						{
-							bodies.at(j)->SetOnCollision(true);
+							if (obA == bodies.at(j)->GetBody() || obB == bodies.at(j)->GetBody())
+								bodies.at(j)->SetOnCollision(true);
+							//else bodies.at(j)->SetOnCollision(false); //Check, not work
 						}
-						else bodies.at(j)->SetOnCollision(false);
-					}
-				}				
-			}
-		}
-		else if(checkColision)
-		{
-			checkColision = false;
-			for (int i = 0; i < bodies.size(); i++)
-			{
-				bodies.at(i)->SetOnCollision(false);
+					}					
+				}
 			}
 		}
 	}

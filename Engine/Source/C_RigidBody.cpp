@@ -220,8 +220,15 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::Checkbox("Is Trigger", &trigger))
 		{
 			if (trigger)
+			{
 				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-			else CreateBody();
+				app->physics->triggers.push_back(this);
+			}
+			else
+			{
+				//app->physics->triggers.remove(this);
+				CreateBody();
+			}
 		}
 		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();

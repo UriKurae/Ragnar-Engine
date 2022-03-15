@@ -60,7 +60,7 @@ public:
 	std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
 	std::vector<std::string> GetBodiesNames() { return bodiesNames; };
 
-	std::vector<GameObject*> bullets;
+	std::vector<RigidBodyComponent*> triggers;
 
 	void SleepAllBodies();
 	void ActiveAllBodies();
