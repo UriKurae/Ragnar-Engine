@@ -8,8 +8,8 @@ namespace RagnarEngine
 
     public sealed class GameObject
     {
-        public string name;
-        public UIntPtr pointer;
+        private string goName;
+        private UIntPtr pointer;
 
         List<RagnarComponent> components;
 
@@ -21,12 +21,12 @@ namespace RagnarEngine
 
         public GameObject()
         {
-            name = "Empty";
+            goName = "Empty";
             pointer = UIntPtr.Zero;
         }
-        public GameObject(string _name, UIntPtr ptr, UIntPtr transPTR/*, UIntPtr audioPTR, UIntPtr rbPTR, UIntPtr animPTR, UIntPtr camPTR*/)
+        public GameObject(string name, UIntPtr ptr, UIntPtr transPTR/*, UIntPtr audioPTR, UIntPtr rbPTR, UIntPtr animPTR, UIntPtr camPTR*/)
         {
-            name = _name;
+            goName = name;
             pointer = ptr;
 
             trans = new Transform();
@@ -79,9 +79,40 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern internal T AddComponent<T>(int componentType);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern public GameObject FindGameObjectWithName(string name);
+
+        //[MethodImplAttribute(MethodImplOptions.InternalCall)]
+        //static extern public GameObject FindGameObjectWithTag(string tag);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern public GameObject[] FindGameObjectsWithTag(string tag);
+
+        public extern GameObject[] childs
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
+
         public Transform transform
         {
             get { return trans; }
+        }
+
+        public extern string tag
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
+
+        public extern string name
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
         }
     }
 }

@@ -19,6 +19,17 @@ public class Player : RagnarComponent
 
     public void Update()
 	{
+        if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
+        {
+            //GameObject[] gos = GameObject.FindGameObjectsWithTag("Untagged");
+            GameObject[] gos = gameObject.childs;
+
+            foreach (GameObject go in gos)
+            {
+                Debug.Log(go.name);
+            }
+        }
+
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
 			|| Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
 		{

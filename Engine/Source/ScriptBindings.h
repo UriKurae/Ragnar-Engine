@@ -231,6 +231,83 @@ MonoObject* AddComponentMono(MonoObject* go, int componentType)
 	return app->moduleMono->ComponentToCS(comp);
 }
 
+MonoObject* FindGameObjectWithName(MonoObject* name)
+{
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+
+	for (auto& go : app->scene->GetGameObjectsList())
+	{
+		if (go->GetName() == goName)
+		{
+			return app->moduleMono->GoToCSGO(go);
+		}
+	}
+
+	mono_free(goName);
+}
+
+MonoArray* FindGameObjectsWithTag(MonoObject* tag)
+{
+	char* tagName = mono_string_to_utf8(mono_object_to_string(tag, 0));
+	
+	std::vector<MonoObject*> objects;
+	for (auto& go : app->scene->GetGameObjectsList())
+	{
+		if (go->tag == tagName)
+			objects.push_back(app->moduleMono->GoToCSGO(go));
+	}
+	
+	MonoClass* goClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "GameObject");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, goClass, objects.size());
+	
+	for (int i = 0; i < objects.size(); ++i)
+		mono_array_set(ret, MonoObject*, i, objects[i]);
+
+	return ret;
+}
+
+MonoArray* GetGameObjectChilds(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+
+	std::vector<MonoObject*> objects;
+	for (auto& child : gameObject->GetChilds())
+		objects.push_back(app->moduleMono->GoToCSGO(child));
+
+	MonoClass* goClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "GameObject");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, goClass, objects.size());
+
+	for (int i = 0; i < objects.size(); ++i)
+		mono_array_set(ret, MonoObject*, i, objects[i]);
+
+	return ret;
+}
+
+MonoString* GetGameObjectTagMono(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return mono_string_new(app->moduleMono->domain, gameObject->tag.c_str());
+}
+
+void SetGameObjectTagMono(MonoObject* go, MonoString* newTag)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	char* tagName = mono_string_to_utf8(newTag);
+	gameObject->tag = tagName;
+}
+
+MonoString* GetGameObjectName(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return mono_string_new(app->moduleMono->domain, gameObject->name.c_str());
+}
+
+void SetGameObjectName(MonoObject* go, MonoString* newName)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	char* name = mono_string_to_utf8(newName);
+	gameObject->name = name;
+}
 // GameObject =======================
 
 

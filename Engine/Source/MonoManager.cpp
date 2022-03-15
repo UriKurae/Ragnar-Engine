@@ -50,10 +50,12 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_config_parse(NULL);
 	jitDomain = mono_jit_init("myapp");
 
+	// Input =====================
 	mono_add_internal_call("RagnarEngine.Input::GetKey", GetKey);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseClick", GetMouseClick);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseX", MouseX);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
+	// Input =====================
 
 	// Transform =================
 	mono_add_internal_call("RagnarEngine.Transform::get_localPosition", GetPosition);
@@ -71,7 +73,6 @@ bool MonoManager::Init(JsonParsing& node)
 	// Transform =================
 
 	// Material Comp =============
-
 	mono_add_internal_call("RagnarEngine.MaterialComponent::get_texture", GetTexturePath);
 	mono_add_internal_call("RagnarEngine.MaterialComponent::set_texture", SetTexturePath);
 	// Material Comp =============
@@ -83,12 +84,24 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
 
+	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
+	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectWithName", FindGameObjectWithName);
+	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectsWithTag", FindGameObjectsWithTag);
+	mono_add_internal_call("RagnarEngine.GameObject::get_tag", GetGameObjectTagMono);
+	mono_add_internal_call("RagnarEngine.GameObject::set_tag", SetGameObjectTagMono);
+	mono_add_internal_call("RagnarEngine.GameObject::get_name", GetGameObjectName);
+	mono_add_internal_call("RagnarEngine.GameObject::set_name", SetGameObjectName);
+	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 
+	// Utility ===================
+
+	// Audio Source ==============
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
 	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClip", StopCurrentClip);
 	mono_add_internal_call("RagnarEngine.AudioListener::TestListener", TestListener);
+	// Audio Source ==============
 
 	// Rigidbody =================
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
@@ -101,10 +114,14 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::ClearForces", ClearForces);
 	// Rigidbody =================
 
+	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
+	// Animation =================
 
+	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
+	// Camera ====================
 
 	InitMono();
 
