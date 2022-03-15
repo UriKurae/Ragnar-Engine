@@ -113,6 +113,7 @@ bool RigidBodyComponent::Update(float dt)
 		TransformComponent* trans = owner->GetComponent<TransformComponent>();
 		if (trigger)
 		{
+			body->activate(true);
 			btTransform t;
 			t.setBasis(float3x3::FromQuat(trans->GetRotation()));
 			t.setOrigin(trans->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());

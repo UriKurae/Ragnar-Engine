@@ -62,7 +62,7 @@ bool Physics3D::PreUpdate(float dt)
 				btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
 				int numContacts = contactManifold->getNumContacts();
-				if (numContacts > 1)
+				if (numContacts > 0 && ((!obA->isStaticOrKinematicObject() && !obB->isStaticOrKinematicObject()) || obA->getCollisionFlags() == 4 || obB->getCollisionFlags() == 4))
 				{
 					for (int j = 0; j < bodies.size(); j++)
 					{
