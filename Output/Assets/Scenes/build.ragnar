@@ -125,10 +125,10 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        0.15684884786605835,
-                        -0.55527609586715698,
-                        0.39447560906410217,
-                        0.71516156196594238
+                        -0.14068865776062012,
+                        -0.57568717002868652,
+                        0.37059000134468079,
+                        0.71516019105911255
                     ],
                     "RotationEditor": [
                         0,
@@ -144,7 +144,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.93115627765655518,
+                    "Vertical Fov": 0.92976027727127075,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -0.26639080047607422,
@@ -229,7 +229,7 @@
                         {
                             "State": "Walk",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
-                            "Loop": false
+                            "Loop": true
                         },
                         {
                             "State": "Idle",
@@ -287,11 +287,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 123678240,
+                    "pointer": 81921376,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 5,
-                    "force": 100
+                    "force": 100,
+                    "rockSoundRadius": 4,
+                    "canThrowKnife": true
                 }
             ]
         },
@@ -1498,8 +1500,8 @@
                         0
                     ],
                     "Scale": [
-                        10.911433219909668,
-                        5.5470085144042969,
+                        11.606715202331543,
+                        5.9107465744018555,
                         1
                     ],
                     "rotationEuler": [
@@ -1539,8 +1541,8 @@
                         0
                     ],
                     "Scale": [
-                        8.4836397171020508,
-                        5.5470085144042969,
+                        9.0242204666137695,
+                        5.9107465744018555,
                         1
                     ],
                     "rotationEuler": [

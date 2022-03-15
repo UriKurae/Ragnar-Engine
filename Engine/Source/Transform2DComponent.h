@@ -13,8 +13,8 @@ public:
 	~ComponentTransform2D();
 	
 	bool Update(float dt)override;
-	void OnEditor() override
-		;
+	void OnEditor() override;
+
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 	
