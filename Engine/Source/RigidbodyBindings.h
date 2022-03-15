@@ -92,3 +92,27 @@ MonoObject* GetTotalForce(MonoObject* go)
 	float3 f = rb->GetBody()->getTotalForce();
 	return app->moduleMono->Float3ToCS(f);
 }
+
+void SetAsStatic(MonoObject* go)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->SetAsStatic();
+}
+
+void SetAsTrigger(MonoObject* go)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->SetAsTrigger();
+}
+
+void SetCollisionType(MonoObject* go, CollisionType type)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->SetCollisionType(type);
+}
+
+void SetSphereRadius(MonoObject* go, float radius)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->SetSphereRadius(radius);
+}
