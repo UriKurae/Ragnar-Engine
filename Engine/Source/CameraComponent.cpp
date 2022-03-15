@@ -6,6 +6,9 @@
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 
+#include "ModuleEditor.h"
+#include "GameView.h"
+
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 
@@ -177,8 +180,9 @@ bool CameraComponent::Update(float dt)
 		targetUID = 0;
 	}
 
-	camera.SetOrthographic(zoom, zoom);
-	zoom = Clamp(zoom - app->input->GetMouseZ(), zoomMin, zoomMax);
+	float4 viewport = app->editor->GetGameView()->GetBounds();
+	camera.SetOrthographic(viewport.z / zoom, viewport.w / zoom);
+	zoom = Clamp(zoom + app->input->GetMouseZ(), zoomMin, zoomMax);
 
 	camera.SetPos(transform->GetPosition());
 
