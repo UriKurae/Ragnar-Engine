@@ -36,12 +36,15 @@ public:
 	void EditCollisionMesh();
 	void UpdateCollisionMesh();
 
+	void SetSphereRadius(float sphereRadius);
+
 	void CreateBody();
 	void SetPhysicsProperties();
 	inline float GetMass() { return mass; };
 	void SetMass(float mass);
 
 	void SetAsStatic();
+	void SetAsTrigger();
 	float4x4 btScalarTofloat4x4(btScalar* transform);
 
 	bool OnLoad(JsonParsing& node) override;

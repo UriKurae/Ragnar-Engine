@@ -7,6 +7,8 @@ public class Player : RagnarComponent
 	public int velocity = 5;
 	public GameObject target = null;
     public float force = 100;
+    public float rockSoundRadius = 4f;
+    public bool canThrowKnife = true;
 
     Rigidbody rb;
     MaterialComponent materialComponent;
@@ -19,6 +21,8 @@ public class Player : RagnarComponent
 
     public void Update()
 	{
+        ///////// SOUNDS /////////
+        // Movement Sound
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
 			|| Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
 		{
@@ -26,17 +30,22 @@ public class Player : RagnarComponent
 			gameObject.GetComponent<Animation>().PlayAnimation("Walk");
 		}
 
+        // Reload Sound
 		if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("Reload");
 		}
 
+        // Shoot sound
 		if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("Shot");
 		}
+        //////////////////////////
 
-		if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
+        ///////// MOVEMENT /////////
+        // Idle
+        if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
 			|| Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
 		{
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
@@ -48,32 +57,31 @@ public class Player : RagnarComponent
             if (rb.totalForce != Vector3.zero)
                 rb.ClearForces();
         }
-
-        
-        if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
+        // WASD Movement
+        if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(-1000, 0, 0);
+            Vector3 f = new Vector3(0, 0, 1000);
             rb.ApplyCentralForce(f);
         }
-
         else if (Input.GetKey(KeyCode.A) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(1000, 0, 0);
             rb.ApplyCentralForce(f);
         }
-
-        else if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
-        {
-            Vector3 f = new Vector3(0, 0, 1000);
-            rb.ApplyCentralForce(f);
-        }
-
         else if (Input.GetKey(KeyCode.S) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(0, 0, -1000);
             rb.ApplyCentralForce(f);
         }
+        else if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
+        {
+            Vector3 f = new Vector3(-1000, 0, 0);
+            rb.ApplyCentralForce(f);
+        }
+        ////////////////////////////
 
+        ///////// ABILITIES /////////
+        // Rock Throw
         if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
         {
             Vector3 pos = gameObject.transform.globalPosition;
@@ -86,12 +94,17 @@ public class Player : RagnarComponent
             Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
             bulletRb.ApplyCentralForce(vectorDir.normalized * force);
 
-            //AudioSource audio = gameObject.GetComponent<AudioSource>();
-            //audio.PlayClip("Shot");
+            // Falta if(OnCollision(bullet, floor))
+            GameObject soundArea = InternalCalls.CreateGameObject("SoundArea", bullet.transform.globalPosition, bullet.transform.globalRotation);
+            Rigidbody soundRb = soundArea.CreateComponent<Rigidbody>();
+            soundRb.IgnoreCollision(gameObject, true);
+            CreateSphereTrigger(soundRb, rockSoundRadius);
         }
 
-        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
+        // Knife Throw
+        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN && canThrowKnife)
         {
+            canThrowKnife = false;
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 1;
             GameObject bullet = InternalCalls.Create3DObject("Knife", (int)PrimitiveType.CUBE, pos);
@@ -101,6 +114,16 @@ public class Player : RagnarComponent
             bulletRb.IgnoreCollision(gameObject, true);
             bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);
         }
+        /////////////////////////////
+    }
+
+    // With this method we create an spherical Trigger.
+    private static void CreateSphereTrigger(Rigidbody rb, float radius)
+    {
+        rb.SetCollisionType(CollisionType.SPHERE);
+        rb.SetAsStatic();
+        rb.SetAsTrigger();
+        rb.SetSphereRadius(radius);
     }
 }
 
