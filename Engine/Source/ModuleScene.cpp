@@ -596,5 +596,6 @@ void ModuleScene::Scripting(float dt)
 	{
 		std::vector<float3> path;
 		pathfinding->CalculatePath(this, agentProperties->targetPos, path);
+		agentProperties->targetPosSet = false;
 	}*/
 }

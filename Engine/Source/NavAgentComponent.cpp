@@ -12,7 +12,9 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 	owner = obj;
 	this->type = ComponentType::NAVAGENT;
 	agentProperties = new NavAgent;
+
 	pathfinding = app->navMesh->GetPathfinding();
+	pathfinding->agents.push_back(this);
 }
 
 NavAgentComponent::~NavAgentComponent()
@@ -23,7 +25,13 @@ NavAgentComponent::~NavAgentComponent()
 
 bool NavAgentComponent::Update(float dt)
 {
-
+	//Scripting
+	if (agentProperties->targetPosSet)
+	{
+		std::vector<float3> path;
+		pathfinding->CalculatePath(this, agentProperties->targetPos, path);
+		agentProperties->targetPosSet = false;
+	}
 	return true;
 }
 

@@ -273,8 +273,14 @@ bool ModuleRenderer3D::PostUpdate()
 		app->scene->Draw();
 	}
 
-	if(navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
+		Pathfinder* pathfinding = app->navMesh->GetPathfinding();
+		for (int i = 0; i < pathfinding->agents.size(); i++)
+			pathfinding->RenderPath(app->navMesh->GetPathfinding()->agents[i]);
+	}
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);

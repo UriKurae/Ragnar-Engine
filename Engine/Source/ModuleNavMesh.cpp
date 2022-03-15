@@ -19,7 +19,7 @@
 #include "Imgui/imgui_impl_sdl.h"
 
 ModuleNavMesh::ModuleNavMesh(bool start_enabled) : Module(start_enabled),
-geometry(nullptr), navMeshBuilder(nullptr)
+geometry(nullptr), navMeshBuilder(nullptr), buildSettings(nullptr), pathfinder(nullptr)
 {
 	name = "NavMesh";
 	geometry = new InputGeom();
@@ -34,6 +34,7 @@ ModuleNavMesh::~ModuleNavMesh()
 
 	delete buildSettings;
 	buildSettings = nullptr;
+
 	delete pathfinder;
 	pathfinder = nullptr;
 }
@@ -135,13 +136,13 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 
 	float3 hitPoint;
 	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-	if (hit)
+	if (hit && pathfinder->agents.size() > 0)
 	{
 		if (clickedMouseButton == SDL_BUTTON_LEFT)
 		{
 			//Just set the Player Target!!!
-			//pathfinder->agents[0]->agentProperties->targetPos = hitPoint;
-			//pathfinder->agents[0]->agentProperties->targetPosSet = true;
+			pathfinder->agents[0]->agentProperties->targetPos = hitPoint;
+			pathfinder->agents[0]->agentProperties->targetPosSet = true;
 		}
 		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
 		{
