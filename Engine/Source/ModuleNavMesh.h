@@ -130,6 +130,8 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) override;
 
+	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
+
 	void ClearNavMeshes();
 	bool IsWalkable(float x, float z, float3& hitPoint);
 
@@ -139,13 +141,12 @@ public:
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
 	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
 	inline InputGeom* GetInputGeom() { return geometry; };
-	BuildSettings* GetBuildSettings() { return buildSettings; };
-
-public:
-	Pathfinder* pathfinder;
+	inline BuildSettings* GetBuildSettings() { return buildSettings; };
+	inline Pathfinder* GetPathfinding() { return pathfinder; };
 
 private:
 	NavMeshBuilder* navMeshBuilder;
+	Pathfinder* pathfinder;
 	InputGeom* geometry;
 	BuildSettings* buildSettings;
 };

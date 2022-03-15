@@ -138,13 +138,6 @@ bool ModuleScene::Update(float dt)
 	///////////////////////
 	// Scripting
 	Scripting(dt);
-	
-
-
-	///////////////////////
-	// Scripting
-	Scripting(dt);
-
 
 	AudioManager::Get()->Render();
 
@@ -597,28 +590,10 @@ void ModuleScene::Resume()
 
 void ModuleScene::Scripting(float dt)
 {
-	if (gameState == GameState::PLAYING)
+	if (app->navMesh->GetPathfinding()->endPosSet)
 	{
-		if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
-		{
-			float hitTime;
-			float rayStart[3];
-			float rayEnd[3];
-			bool hit = app->navMesh->GetInputGeom()->raycastMesh(rayStart, rayEnd, hitTime);
-			if (hit)
-			{
-				app->navMesh->pathfinder->startPosition = float3(rayEnd[0], rayEnd[1], rayEnd[2]);
-				app->navMesh->pathfinder->startPosSet = true;
-
-				if (app->navMesh->pathfinder->endPosSet)
-				{
-					app->navMesh->pathfinder->CalculatePath();
-					std::vector<float3> path;
-					app->navMesh->pathfinder->CalculatePath(app->navMesh->pathfinder->startPosition, app->navMesh->pathfinder->endPosition, path);
-				}
-			}
-		}
-		app->navMesh->pathfinder->CalculatePath();
-		//player->GetComponent<NavAgentComponent>();
+		app->navMesh->GetPathfinding()->CalculatePath();
+		std::vector<float3> path;
+		app->navMesh->GetPathfinding()->CalculatePath(app->navMesh->GetPathfinding()->startPosition, app->navMesh->GetPathfinding()->endPosition, path);
 	}
 }

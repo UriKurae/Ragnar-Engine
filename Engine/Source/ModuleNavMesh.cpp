@@ -6,6 +6,7 @@
 #include "ModuleNavMesh.h"
 #include "ModuleScene.h"
 #include "MeshComponent.h"
+#include "ModuleInput.h"
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
@@ -114,6 +115,45 @@ bool ModuleNavMesh::SaveConfig(JsonParsing& node)
 	node.SetValueToArray(arraySettings, file.GetRootValue());
 
 	return true;
+}
+
+void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton)
+{
+	if (navMeshBuilder == nullptr)
+		return;
+
+	if (geometry->getChunkyMesh() == nullptr && navMeshBuilder->GetNavMesh() == nullptr)
+	{
+		//return;
+		BakeNavMesh();
+		LOG(LogType::L_WARNING, "No chunky mesh set, one has been baked to avoid crashes");
+	}
+
+	float hitTime;
+	bool hit = geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime);
+
+	float3 hitPoint;
+	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
+	if (hit)
+	{
+		if (clickedMouseButton == SDL_BUTTON_LEFT)
+		{
+			pathfinder->endPosition = hitPoint;
+			pathfinder->endPosSet = true;
+		}
+		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
+		{
+			pathfinder->startPosition = hitPoint;
+			pathfinder->startPosSet = true;
+
+			if (pathfinder->endPosSet)
+			{
+				pathfinder->CalculatePath();
+				std::vector<float3> path;
+				pathfinder->CalculatePath(pathfinder->startPosition, pathfinder->endPosition, path);
+			}
+		}
+	}
 }
 
 void ModuleNavMesh::ClearNavMeshes()
@@ -755,6 +795,6 @@ NavAgent::NavAgent()
 	acceleration = 1.0f;
 	stoppingDistance = 0;
 
-	//pathfinder = app->navMesh->pathfinder;
+	//pathfinder = app->navMesh->GetPathfinding();
 }
 
