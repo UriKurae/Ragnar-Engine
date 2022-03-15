@@ -18,7 +18,7 @@ public:
 	virtual void Redo() {};
 	virtual void GenerateRedo() {};
 
-	virtual CommandType GetType() const { return type; }
+	inline virtual CommandType GetType() const { return type; }
 
 protected:
 	CommandType type;
