@@ -72,6 +72,11 @@ void BillboardParticleComponent::OnEditor()
 				ImGui::EndMenu();
 			}
 		}
+
+		ImGui::Spacing();
+		ImGui::Spacing();
+		ComponentOptions(this);
+		ImGui::Separator();
 	}
 }
 

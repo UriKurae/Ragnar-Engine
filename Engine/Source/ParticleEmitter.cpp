@@ -22,7 +22,8 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	isActive(true),
 	showTexMenu(false),
 	emitterName(""),
-	own(owner)
+	own(owner),
+	toDelete(false)
 {
 	poolIndex = maxParticles - 1;
 	particlePool.resize(maxParticles);
@@ -65,19 +66,21 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 
 ParticleEmitter::~ParticleEmitter()
 {
+	for (int i = 0; i < effects.size(); i++)
+	{
+		if (effects[i] != nullptr)
+			RELEASE(effects[i]);
+	}
+
 	RELEASE(data.vertexArray);
 	RELEASE(data.vertexBuffer);
 	RELEASE(data.indexBuffer);
 	RELEASE_ARRAY(data.vertexBufferBase);
 	data.vertexBufferPtr = nullptr;
 
-	RELEASE(effect);
-	///delete effect;
+	effect = nullptr;
 
-	for (int i = 0; i < effects.size(); i++)
-	{
-		delete effects[i];
-	}
+	effects.clear();
 }
 
 void ParticleEmitter::Emit(float dt)
@@ -322,6 +325,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 	suffixLabel += emitterIndex;
 	std::string guiName = "Emitter " + suffixLabel;
 
+	ImGui::Indent();
 	if (ImGui::CollapsingHeader(guiName.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		ImGui::Indent();
@@ -335,7 +339,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		strcpy(charsOfName, guiName.c_str());
 		guiName = suffixLabel + "Name";
 		guiName = "Delete Emitter" + suffixLabel;
-		if (ImGui::Button(guiName.c_str()))
+		if (ImGui::Button(ICON_FA_TRASH" Delete Emitter"))
 		{
 			toDelete = true;
 		}
@@ -343,7 +347,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::Spacing();
 		ImGui::Spacing();
 		ImGui::Separator();
-		ImGui::Indent();
+		/*ImGui::Indent();*/
 
 		//guiName = "Particle max lifetime" + suffixLabel;
 		//ImGui::DragFloat(guiName.c_str(), &maxLifeTime, 0.1f, 0.0f, 10.0f);
@@ -377,7 +381,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 
 		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());*/
 
-		ImGui::Indent();
+		//ImGui::Indent();
 
 		ImGui::Text("Texture");
 		if (ImGui::ImageButton((void*)texture->GetId(), { 150,150 }))
@@ -412,11 +416,15 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 				ImGui::Spacing();
 
 				effects[(int)(ParticleEffectType)i]->OnEditor(emitterIndex);
+
+				if (effects[(int)(ParticleEffectType)i]->toDelete)
+				{
+					delete effects[(int)(ParticleEffectType)i];
+					effects[(int)(ParticleEffectType)i] = nullptr;
+				}
 			}
 		}
 
-		ImGui::Spacing();
-		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::Spacing();
 
@@ -445,6 +453,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 			ImGui::EndCombo();
 		}
 	}
+	ImGui::Unindent();
 }
 
 void ParticleEmitter::SetParticlesPerSecond(float particlesPerSec)
