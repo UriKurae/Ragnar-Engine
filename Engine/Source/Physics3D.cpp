@@ -51,27 +51,31 @@ bool Physics3D::PreUpdate(float dt)
 	world->stepSimulation(dt, 15);
 	if (app->scene->GetGameState() == GameState::PLAYING)
 	{
-		int numManifolds = world->getDispatcher()->getNumManifolds();
-		for (int i = 0; i < numManifolds; i++)
+		for (size_t i = 0; i < bodies.size(); i++)
 		{
-			btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
-			btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
-			btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
-
-			int numContacts = contactManifold->getNumContacts();
-			std::vector<GameObject*>::iterator it = bullets.begin();
-
-			for (int i = 0; i < bullets.size(); i++)
+			bodies.at(i)->SetOnCollision(false);
+		}
+		int numManifolds = world->getDispatcher()->getNumManifolds();
+		if (numManifolds > 0)
+		{
+			for (int i = 0; i < numManifolds; i++)
 			{
-				if (numContacts > 0 && (obA == bullets.at(i)->GetComponent<RigidBodyComponent>()->GetBody() ||
-					obB == bullets.at(i)->GetComponent<RigidBodyComponent>()->GetBody()))
+				btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
+				btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
+				btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
+
+				//int numContacts = contactManifold->getNumContacts();
+				for (int j = 0; j < triggers.size(); j++)
 				{
-					bullets.at(i)->GetParent()->RemoveChild(bullets.at(i));
-					RELEASE(bullets.at(i));
-					bullets.erase(it);
-					break;
+					if (obA == triggers.at(j)->GetBody() || obB == triggers.at(j)->GetBody())
+					{
+						for (int k = 0; k < bodies.size(); k++)
+						{
+							if (obA == bodies.at(k)->GetBody() || obB == bodies.at(k)->GetBody())
+								bodies.at(k)->SetOnCollision(true);
+						}
+					}					
 				}
-				it++;
 			}
 		}
 	}

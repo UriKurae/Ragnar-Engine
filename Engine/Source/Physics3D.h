@@ -60,7 +60,7 @@ public:
 	std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
 	std::vector<std::string> GetBodiesNames() { return bodiesNames; };
 
-	std::vector<GameObject*> bullets;
+	std::vector<RigidBodyComponent*> triggers;
 
 	void SleepAllBodies();
 	void ActiveAllBodies();
@@ -78,6 +78,7 @@ private:
 	std::vector<std::string> bodiesNames;
 
 	bool debug = true;
+	bool checkColision = false;
 };
 
 class DebugDrawer : public btIDebugDraw

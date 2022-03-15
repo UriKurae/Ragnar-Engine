@@ -111,18 +111,19 @@ bool RigidBodyComponent::Update(float dt)
 	if (app->scene->GetGameState() == GameState::PLAYING)
 	{
 		TransformComponent* trans = owner->GetComponent<TransformComponent>();
-		if (body->getActivationState() == 1 || body->getActivationState() == 3)
-		{
-				float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
-				trans->SetTransform(CM2);
-		}
 		if (trigger)
 		{
+			body->activate(true);
 			btTransform t;
 			t.setBasis(float3x3::FromQuat(trans->GetRotation()));
 			t.setOrigin(trans->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
 
 			body->setWorldTransform(t);
+		}
+		else if (body->getActivationState() == 1 || body->getActivationState() == 3)
+		{
+			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
+			trans->SetTransform(CM2);
 		}
 	}
 
@@ -200,7 +201,11 @@ void RigidBodyComponent::OnEditor()
 		{
 			if (!useGravity && !isKinematic)
 				SetAsStatic();
-			else CreateBody();
+			else 
+			{
+				if (mass == 0) mass = 1.0f;
+				CreateBody();
+			}
 		}
 		if (ImGui::Checkbox("Is Kinematic", &isKinematic))
 		{
@@ -215,10 +220,17 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::Checkbox("Is Trigger", &trigger))
 		{
 			if (trigger)
+			{
 				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-			else CreateBody();
+				app->physics->triggers.push_back(this);
+			}
+			else
+			{
+				//app->physics->triggers.remove(this);
+				CreateBody();
+			}
 		}
-
+		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();
 
 		ComponentOptions(this);
