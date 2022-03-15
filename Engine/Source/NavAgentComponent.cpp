@@ -93,6 +93,27 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 	agentProperties->acceleration = node.GetJsonNumber("Acceleration");
 	agentProperties->stoppingDistance = node.GetJsonNumber("StoppingDistance");
 
+	//Complete
+	agentProperties->targetPos = node.GetJsonNumber("TargetPos");
+	agentProperties->targetPosSet = node.GetJsonNumber("TargetPosSet");
+
+	agentProperties->pathType = node.GetJsonNumber("TargetPos");
+
+	agentProperties->m_startRef = node.GetJsonNumber("TargetPos");
+	agentProperties->m_endRef = node.GetJsonNumber("TargetPos");
+
+	agentProperties->m_npolys = node.GetJsonNumber("TargetPos");
+	agentProperties->m_polys = node.GetJsonNumber("TargetPos");
+	agentProperties->m_parent = node.GetJsonNumber("TargetPos");
+
+	agentProperties->m_nsmoothPath = node.GetJsonNumber("TargetPos");
+	agentProperties->m_smoothPath = node.GetJsonNumber("TargetPos");
+
+	agentProperties->m_nstraightPath = node.GetJsonNumber("TargetPos");
+	agentProperties->m_straightPath = node.GetJsonNumber("TargetPos");
+	agentProperties->m_straightPathFlags = node.GetJsonNumber("TargetPos");
+	agentProperties->m_straightPathPolys = node.GetJsonNumber("TargetPos");
+
 	return true;
 }
 
