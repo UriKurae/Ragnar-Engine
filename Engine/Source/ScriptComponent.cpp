@@ -45,14 +45,15 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::NOT_PLAYING || app->scene->GetGameState() == GameState::PAUSE
+	static bool firstUpdate = true;
+	if (app->scene->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
+		firstUpdate = true;
 		return false;
 	}
 
 	MonoObject* startExec = nullptr;
-	static bool firstUpdate = true;
 	if (firstUpdate)
 	{
 		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
