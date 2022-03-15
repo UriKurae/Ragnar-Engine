@@ -78,6 +78,7 @@ private:
 	std::vector<std::string> bodiesNames;
 
 	bool debug = true;
+	bool checkColision = false;
 };
 
 class DebugDrawer : public btIDebugDraw
