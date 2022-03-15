@@ -72,9 +72,12 @@ bool Physics3D::PreUpdate(float dt)
 						for (int k = 0; k < bodies.size(); k++)
 						{
 							if (obA == bodies.at(k)->GetBody() || obB == bodies.at(k)->GetBody())
+							{
 								bodies.at(k)->SetOnCollision(true);
+								bodies.at(k)->SetCollisionTarget(triggers.at(j));
+							}
 						}
-					}					
+					}		
 				}
 			}
 		}

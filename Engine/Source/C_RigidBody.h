@@ -55,6 +55,9 @@ public:
 	inline void SetOnCollision(bool ret) { onCollision = ret; };
 	inline bool GetOnCollision() { return onCollision; };
 
+	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
+	inline bool GetCollisionTarget() { return collisionTarget; };
+
 public:
 	bool useGravity = true;
 	bool isKinematic = false;
@@ -91,4 +94,6 @@ private:
 
 	bool editMesh = false;
 	bool onCollision = false;
+
+	RigidBodyComponent* collisionTarget = nullptr;
 };
