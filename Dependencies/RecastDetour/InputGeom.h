@@ -76,7 +76,6 @@ public:
 	~InputGeom();
 
 	void SetMesh();
-	bool loadMesh(Mesh* mesh);
 	bool SetChunkyMesh();
 	void MergeToMesh(std::shared_ptr<Mesh> new_mesh, float4x4 new_mesh_transform);
 
