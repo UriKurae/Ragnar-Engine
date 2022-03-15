@@ -7,6 +7,7 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "ModuleNavMesh.h"
+#include "ModuleUI.h"
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
@@ -307,7 +308,7 @@ bool ModuleRenderer3D::PostUpdate()
 		{
 
 			app->userInterface->UIGameObjects[a]->Draw(nullptr);
-			app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+			app->userInterface->RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
 			aux = nullptr;
 		}
 		/* else if (aux1 != nullptr)

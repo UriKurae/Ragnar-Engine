@@ -45,10 +45,10 @@ struct Pathfinder
 
 	PathType pathType;
 
-	dtNavMesh* m_navMesh;
-	dtNavMeshQuery* m_navQuery;
+	dtNavMesh* m_navMesh = nullptr;
+	dtNavMeshQuery* m_navQuery = nullptr;
 	dtQueryFilter m_filter;
-	NavMeshBuilder* m_navMeshBuilder;
+	NavMeshBuilder* m_navMeshBuilder = nullptr;
 
 	int m_straightPathOptions;
 
@@ -139,7 +139,7 @@ public:
 	Pathfinder pathfinder;
 
 private:
-	NavMeshBuilder* navMeshBuilder;
-	InputGeom* geometry;
-	BuildSettings* buildSettings;
+	NavMeshBuilder* navMeshBuilder = nullptr;
+	InputGeom* geometry = nullptr;
+	BuildSettings* buildSettings = nullptr;
 };
