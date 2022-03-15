@@ -3,6 +3,7 @@
 #include "Component.h"
 
 struct NavAgent;
+class Pathfinder;
 
 class NavAgentComponent : public Component
 {
@@ -19,4 +20,5 @@ public:
 
 public:
 	NavAgent* agentProperties = nullptr;
+	Pathfinder* pathfinding = nullptr;
 };

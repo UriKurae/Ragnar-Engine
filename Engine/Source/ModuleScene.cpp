@@ -590,10 +590,11 @@ void ModuleScene::Resume()
 
 void ModuleScene::Scripting(float dt)
 {
-	if (app->navMesh->GetPathfinding()->endPosSet)
+	//Scripting. Estructura de C# en caso de que funcionase como el Update del NavAgentComponent
+
+	/*if (agentProperties->targetPosSet)
 	{
-		app->navMesh->GetPathfinding()->CalculatePath();
 		std::vector<float3> path;
-		app->navMesh->GetPathfinding()->CalculatePath(app->navMesh->GetPathfinding()->startPosition, app->navMesh->GetPathfinding()->endPosition, path);
-	}
+		pathfinding->CalculatePath(this, agentProperties->targetPos, path);
+	}*/
 }

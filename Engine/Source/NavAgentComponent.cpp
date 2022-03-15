@@ -12,6 +12,7 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 	owner = obj;
 	this->type = ComponentType::NAVAGENT;
 	agentProperties = new NavAgent;
+	pathfinding = app->navMesh->GetPathfinding();
 }
 
 NavAgentComponent::~NavAgentComponent()

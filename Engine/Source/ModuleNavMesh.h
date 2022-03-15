@@ -7,9 +7,13 @@
 
 #include "MathGeoLib.h"
 
+#define MAX_POLYS 256
+#define MAX_SMOOTH 2048
+
 class GameObject;
 class InputGeom;
 class NavMeshBuilder;
+class NavAgentComponent;
 
 enum class PathType
 {
@@ -31,21 +35,39 @@ struct NavAgent
 	float acceleration = 0.0f;
 	float stoppingDistance = 0;
 
+	float3 targetPos = float3::zero;
+	bool targetPosSet = false;
+
 	PathType pathType = PathType::STRAIGHT;
 
-	//Pathfinder* pathfinder;
+	int m_straightPathOptions = 0;
+
+	//Path Calculations Variables
+	dtPolyRef m_startRef = 0;
+	dtPolyRef m_endRef = 0;
+
+	int m_npolys = 0;
+	dtPolyRef m_polys[MAX_POLYS];
+	dtPolyRef m_parent[MAX_POLYS];
+
+	int m_nsmoothPath = 0;
+	float m_smoothPath[MAX_SMOOTH * 3];
+
+	int m_nstraightPath = 0;
+	float m_straightPath[MAX_POLYS * 3];
+	unsigned char m_straightPathFlags[MAX_POLYS];
+	dtPolyRef m_straightPathPolys[MAX_POLYS];
 };
 
-class Pathfinder
+class Pathfinder : public Module
 {
 public:
 	Pathfinder();
 	~Pathfinder();
 
 	void Init(NavMeshBuilder* builder);
-	bool CalculatePath();
-	bool CalculatePath(float3 origin, float3 destination, std::vector<float3>& path);
-	void RenderPath();
+	bool CalculatePath(NavAgentComponent* agent, float3 destination, std::vector<float3>& path);
+	void RenderPath(NavAgentComponent* agent);
 
 public:
 	dtNavMesh* m_navMesh;
@@ -53,35 +75,7 @@ public:
 	dtQueryFilter m_filter;
 	NavMeshBuilder* m_navMeshBuilder;
 
-	//CHECK
-	PathType pathType;
-
-	int m_straightPathOptions;
-
-	static const int MAX_POLYS = 256;
-	static const int MAX_SMOOTH = 2048;
-
-	dtPolyRef m_startRef;
-	dtPolyRef m_endRef;
-	dtPolyRef m_polys[MAX_POLYS];
-	dtPolyRef m_parent[MAX_POLYS];
-	int m_npolys;
-
-	int m_nstraightPath;
-	float m_straightPath[MAX_POLYS * 3];
-	unsigned char m_straightPathFlags[MAX_POLYS];
-	dtPolyRef m_straightPathPolys[MAX_POLYS];
-
-	int m_nsmoothPath;
-	float m_smoothPath[MAX_SMOOTH * 3];
-
-	float3 startPosition;
-	bool startPosSet;
-	float3 endPosition;
-	bool endPosSet;
-
-	int m_pathIterNum;
-	float m_polyPickExt[3];
+	std::vector<NavAgentComponent*> agents;
 };
 
 struct BuildSettings
@@ -119,7 +113,8 @@ struct BuildSettings
 	float tileSize;
 };
 
-class ModuleNavMesh : public Module {
+class ModuleNavMesh : public Module 
+{
 public:
 	ModuleNavMesh(bool start_enabled = true);
 	~ModuleNavMesh();

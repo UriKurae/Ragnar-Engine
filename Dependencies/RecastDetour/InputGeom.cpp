@@ -364,7 +364,7 @@ bool InputGeom::raycastMesh(float* src, float* dst, float& tmin)
 		const int* tris = &m_chunkyMesh->tris[node.i*3];
 		const int ntris = node.n;
 
-		for (int j = 0; j < ntris*3; j += 3)
+		for (int j = 0; j < ntris * 3; j += 3)
 		{
 			float t = 1;
 			if (intersectSegmentTriangle(src, dst,
@@ -378,8 +378,8 @@ bool InputGeom::raycastMesh(float* src, float* dst, float& tmin)
 			}
 		}
 	}
-	
-	verts = nullptr;
+
+	RELEASE_ARRAY(verts);
 
 	return hit;
 }
