@@ -1,11 +1,8 @@
+#include "NavAgentComponent.h"
 #include "Application.h"
 #include "Globals.h"
-#include "NavAgentComponent.h"
 
 #include "ModuleNavMesh.h"
-
-#include "imgui/imgui.h"
-#include "IconsFontAwesome5.h"
 
 NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 {
@@ -137,6 +134,7 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", (float)agentProperties->radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", (float)agentProperties->height);

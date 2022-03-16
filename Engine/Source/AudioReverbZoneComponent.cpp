@@ -4,7 +4,6 @@
 
 #include "GameObject.h"
 #include "TransformComponent.h"
-#include "MeshComponent.h"
 
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
@@ -44,7 +43,7 @@ void AudioReverbZoneComponent::CompileBuffers()
 	// Configure buffers
 	float3 corners[8];
 	reverbBoxZone.GetCornerPoints(corners);
-	unsigned int indices[24] =
+	static unsigned int indices[24] =
 	{
 		0,1,
 		1,3,
@@ -78,19 +77,22 @@ void AudioReverbZoneComponent::CompileBuffers()
 void AudioReverbZoneComponent::Draw(CameraComponent* gameCam)
 {
 	glPushMatrix();
-
 	glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
 	glEnableClientState(GL_VERTEX_ARRAY);
+
 	vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	ebo->Bind();
+
 	glLineWidth(2.0f);
 	glColor3f(0.0f, 0.0f, 1.0f);
 	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
+
 	vbo->Unbind();
 	ebo->Unbind();
+
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glPopMatrix();
 }

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Component.h"
 
 struct NavAgent;
@@ -12,7 +11,6 @@ public:
 	virtual ~NavAgentComponent();
 
 	bool Update(float dt) override;
-
 	void OnEditor() override;
 
 	virtual bool OnLoad(JsonParsing& node) override;
