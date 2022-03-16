@@ -22,7 +22,7 @@ enum KeyState
 };
 
 //Adapted from SDL_GameControllerAxis
-enum class Axis
+enum class JAxis
 {
 	LeftStickHorizontal,
 	LeftStickVertical,
@@ -88,7 +88,7 @@ public:
 	bool GetButton(int joystickId, Button button);
 	bool GetButtonDown(int joystickId, Button button);
 	bool GetButtonUp(int joystickId, Button button);
-	bool GetAxis(int joystickId, Axis axis);
+	bool GetAxis(int joystickId, JAxis axis);
 
 	inline std::vector<std::string> GetInputList() const { return strings; }
 
@@ -109,8 +109,8 @@ private:
 	int joyID;
 	std::array<bool, (int)Button::Count> buttons;
 	std::array<bool, (int)Button::Count> lastButtons;
-	std::array<float, (int)Axis::Count> axes;
-	std::array<float, (int)Axis::Count> lastAxis;
+	std::array<float, (int)JAxis::Count> axes;
+	std::array<float, (int)JAxis::Count> lastAxis;
 	float deadzone;
 
 	std::vector<std::string> strings;

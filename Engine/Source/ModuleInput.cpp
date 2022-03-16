@@ -225,7 +225,7 @@ bool ModuleInput::ControllerUpdate()
 			buttons[i] = SDL_GameControllerGetButton(pad, static_cast<SDL_GameControllerButton>(i));
 		}
 		
-		for (unsigned int i = 0; i < static_cast<int>(Axis::Count); i++)
+		for (unsigned int i = 0; i < static_cast<int>(JAxis::Count); i++)
 		{
 			// SDL ranges axes from -32768 to 32767
 			axes[i] = Clamp(SDL_GameControllerGetAxis(pad, static_cast<SDL_GameControllerAxis>(i)) / 32767.f, -1.f, 1.f);
@@ -314,7 +314,7 @@ bool ModuleInput::GetButtonUp(int joystickId, Button button)
 	return false;
 }
 
-bool ModuleInput::GetAxis(int joystickId, Axis axis)
+bool ModuleInput::GetAxis(int joystickId, JAxis axis)
 {
 	if (SDL_GameControllerFromInstanceID(joystickId))
 	{
