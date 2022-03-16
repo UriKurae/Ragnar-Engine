@@ -23,7 +23,6 @@ enum class ComponentType
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
-	INPUT_ACTION,
 	LIGHT,
 	ANIMATION,
 	BONE,
@@ -36,6 +35,7 @@ enum class ComponentType
 	UI_CANVAS,
 	TRANFORM2D,
 	NAVAGENT,
+	INPUT_ACTION
 };
 
 enum class State
