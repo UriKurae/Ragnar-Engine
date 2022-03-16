@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 
 typedef unsigned int uint;
@@ -12,6 +11,11 @@ enum class ResourceType
 	MODEL,
 	SCENE,
 	INPUT_ACTION,
+	SCRIPT,
+	MATERIAL,
+	SHADER,
+	ANIMATION,
+	BONE
 };
 
 class Resource

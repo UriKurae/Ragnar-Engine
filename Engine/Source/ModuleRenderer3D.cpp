@@ -1,22 +1,33 @@
+#include "ModuleRenderer3D.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleRenderer3D.h"
 
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
+#include "ModuleNavMesh.h"
+#include "ModuleUI.h"
+
+#include "LightComponent.h"
+#include "TransformComponent.h"
+
+#include "ButtonComponent.h"
+#include "CheckBoxComponent.h"
+#include "ImageComponent.h"
+#include "SliderComponent.h"
+
+#include "ResourceManager.h"
+#include "Shader.h"
+#include "Lights.h"
 #include "Framebuffer.h"
+#include "NavMeshBuilder.h"
 
-#include "glew/include/GL/glew.h"
-
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
-
 #include "Imgui/ImguiStyle.h"
-
 #include "IL/ilut.h"
+#include "Geometry/LineSegment.h"
 
 #include "Profiling.h"
 
@@ -25,7 +36,6 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	name = "Renderer";
 	context = NULL;
 	fbo = nullptr;
-	grid = nullptr;
 
 	depthTest = true;
 	cullFace = true;
@@ -36,12 +46,14 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	blending = false;
 	wireMode = false;
 	vsync = false;
+	rayCast = false;
+	navMesh = false;
+	drawGrid = false;
 }
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
 {
-	RELEASE(mainCameraFbo);
 }
 
 // Called before render is available
@@ -130,21 +142,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 			ret = false;
 		}
 		
-		GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
-		
-		lights[0].ref = GL_LIGHT0;
-		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-		lights[0].SetPos(0.0f, 0.0f, 2.5f);
-		lights[0].Init();
-		
-		GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
-
-		GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
-		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
 		lighting = node.GetJsonBool("lighting");
@@ -153,8 +150,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		stencil = node.GetJsonBool("stencil");
 		blending = node.GetJsonBool("blending");
 		wireMode = node.GetJsonBool("wire mode");
-
-		lights[0].Active(true);
+		drawGrid = node.GetJsonBool("draw grid");
 		
 		if (depthTest) SetDepthTest();
 		if (cullFace) SetCullFace();
@@ -163,33 +159,48 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (texture2D) SetTexture2D();
 		if (stencil) SetStencil();
 		if (blending) SetBlending();
-		if (wireMode) SetWireMode();
-
-		// set stencil
-		/*glEnable(GL_DEPTH_TEST);
-		glEnable(GL_STENCIL_TEST);*/
-		
+		if (wireMode) SetWireMode();		
 	}
-
 	//// Projection matrix for
 	int w = *app->window->GetWindowWidth();
 	int h = *app->window->GetWindowHeight();
 	OnResize(w, h);
-
 	
 	fbo = new Framebuffer(w, h, 1);
 	fbo->Unbind();
 	mainCameraFbo = new Framebuffer(w, h, 0);
-	mainCameraFbo->Unbind();
-	
+	mainCameraFbo->Unbind();	
 
-	grid = new PGrid(200, 200);
+	grid.SetPos(0, 0, 0);
+	grid.constant = 0;
+	grid.axis = true;
+
+	dirLight = new DirectionalLight();
+	goDirLight = app->scene->CreateGameObject(0);
+	goDirLight->SetName("Directional Light");
+
+	TransformComponent* tr = goDirLight->GetComponent<TransformComponent>();
+	tr->SetPosition({ 50,50,50 });
+	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
+	lightComp->SetLight(dirLight);
 
 	return ret;
 }
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Editor Camera FBO
+	fbo->Bind();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -198,49 +209,11 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// Editor Camera FBO
-	fbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
-
-	grid->Draw();
 	std::set<GameObject*> objects;
+	if(drawGrid) grid.Render();
+
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
-
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilMask(0xFF);
-	
-	if (app->camera->visualizeFrustum)
-	{
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			(*it)->Draw();
-		}
-	}
-	else
-	{
-		app->scene->Draw();
-	}
-
-	if (stencil && app->editor->GetGO() && app->editor->GetGO()->GetActive())
-	{
-		glColor3f(0.25f, 0.87f, 0.81f);
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilMask(0x00);
-		glDisable(GL_DEPTH_TEST);
-		app->editor->GetGO()->DrawOutline();
-
-		glStencilMask(0xFF);
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		if (depthTest) glEnable(GL_DEPTH_TEST);
-		glColor3f(1.0f, 1.0f, 1.0f);
-	}
 
 	if (rayCast)
 	{
@@ -256,29 +229,52 @@ bool ModuleRenderer3D::PostUpdate()
 		glLineWidth(1.0f);
 	}
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
+	GameObject* objSelected = app->editor->GetGO();
+	if (app->camera->visualizeFrustum)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			if ((*it) != objSelected)(*it)->Draw(nullptr);
+		}
+	}
+	else
+	{
+		app->scene->Draw();
+	}
+
+	if(navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
+	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	glStencilMask(0xFF);
+
+	if (stencil && objSelected && objSelected->GetActive())
+	{
+		glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		objSelected->DrawOutline();
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		objSelected->Draw(nullptr);
+	}
 
 	fbo->Unbind();
-
+		
 	// Camera Component FBO
-
 	mainCameraFbo->Bind();
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->scene->mainCamera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr());
-
-	grid->Draw();
+	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw();
+		(*it)->Draw(app->scene->mainCamera);
 	}
 
 	glMatrixMode(GL_PROJECTION);
@@ -286,6 +282,71 @@ bool ModuleRenderer3D::PostUpdate()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glPopMatrix();
+
+	// DRAW UI
+	ButtonComponent* aux = nullptr;
+	//CanvasComponent* aux1 = nullptr;
+	CheckboxComponent* aux2 = nullptr;
+	ImageComponent* aux3 = nullptr;
+	//InputBoxComponent* aux4 = nullptr;
+	SliderComponent* aux5 = nullptr;
+	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
+	{
+		/* glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
+
+		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
+		//aux1 = go->GetComponent<CanvasComponent>();
+		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
+		aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
+		//aux4 = go->GetComponent<InputBoxComponent>();
+		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
+
+		if (aux != nullptr)
+		{
+
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			app->userInterface->RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
+			aux = nullptr;
+		}
+		/* else if (aux1 != nullptr)
+		{
+			textExample = aux1->text;
+			color.x = aux1->color.r;
+			color.y = aux1->color.g;
+			color.z = aux1->color.b;
+			aux1 = nullptr;
+		} */
+		else if (aux2 != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			aux2 = nullptr;
+		}
+		else if (aux3 != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			aux3 = nullptr;
+		}
+		/* else if (aux4 != nullptr)
+		{
+			textExample = aux4->text;
+			color.x = aux4->textColor.r;
+			color.y = aux4->textColor.g;
+			color.z = aux4->textColor.b;
+			aux4 = nullptr;
+		} */
+		else if (aux5 != nullptr)
+		{
+			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			aux5 = nullptr;
+		}
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+	}
 
 	mainCameraFbo->Unbind();
 
@@ -302,9 +363,24 @@ bool ModuleRenderer3D::CleanUp()
 {
 	DEBUG_LOG("Destroying 3D Renderer");
 
-	RELEASE(grid);
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
+	//RELEASE(defaultShader);
+	RELEASE(dirLight);
+
+	for(auto& pl : pointLights)
+	{
+		delete pl;
+		pl = nullptr;
+	}
+	pointLights.clear();
+
+	for (auto& pl : spotLights)
+	{
+		delete pl;
+		pl = nullptr;
+	}
+	spotLights.clear();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -326,6 +402,8 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	stencil = node.GetJsonBool("stencil");
 	blending = node.GetJsonBool("blending");
 	wireMode = node.GetJsonBool("wire mode");
+	navMesh = node.GetJsonBool("navmesh");
+	drawGrid = node.GetJsonBool("draw grid");
 
 	SetVsync();
 	SetDepthTest();
@@ -351,6 +429,8 @@ bool ModuleRenderer3D::SaveConfig(JsonParsing& node)
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "stencil", stencil);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "blending", blending);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wire mode", wireMode);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "navmesh", navMesh);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "draw grid", drawGrid);
 
 	return true;
 }
@@ -493,4 +573,97 @@ void ModuleRenderer3D::DrawCubeDirectMode()
 	glVertex3fv(v7);
 
 	glEnd();
+}
+
+Material* ModuleRenderer3D::GetDefaultMaterial()
+{
+	return defaultMaterial;
+}
+
+uint ModuleRenderer3D::GetDefaultShader()
+{
+	return defaultShader;
+}
+
+Shader* ModuleRenderer3D::AddShader(const std::string& path)
+{
+	//Shader* shader = new Shader(path);
+	std::string p = path;
+	ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
+	//shaders.push_back(shader);
+
+	//if (path.find("default"))
+	//{
+	//	defaultShader = shader;
+	//}
+	//
+	//return shader;
+	return 0;
+}
+
+void ModuleRenderer3D::AddMaterial(Material* material)
+{
+	materials.emplace_back(material);
+}
+
+void ModuleRenderer3D::AddPointLight(PointLight* pl)
+{
+	pointLights.push_back(pl);
+}
+
+void ModuleRenderer3D::AddSpotLight(SpotLight* sl)
+{
+	spotLights.push_back(sl);
+}
+
+void ModuleRenderer3D::ClearPointLights()
+{
+	pointLights.clear();
+}
+
+void ModuleRenderer3D::ClearSpotLights()
+{
+	spotLights.clear();
+}
+
+void ModuleRenderer3D::RemovePointLight(PointLight* light)
+{
+	std::vector<PointLight*>::iterator it = pointLights.begin();
+
+	for (; it != pointLights.end(); ++it)
+	{
+		if ((*it) == light)
+		{
+			delete light;
+			light = 0;
+			*it = 0;
+			pointLights.erase(it);
+			break;
+		}
+	}
+
+	//for (auto& pl : pointLights)
+	//{
+	//	if (pl == light)
+	//	{
+	//		delete pl;
+	//		pl = 0;
+	//		//*it = 0;
+	//		pointLights.erase(it);
+
+	//		break;
+	//	}
+	//	++it;
+	//}
+}
+
+void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
+{
+	//glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(proj.Transposed().ptr());
+
+	//glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(view.Transposed().ptr());
 }

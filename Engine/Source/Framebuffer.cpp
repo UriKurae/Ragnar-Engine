@@ -1,7 +1,7 @@
 #include "Framebuffer.h"
-#include "glew/include/GL/glew.h"
-
 #include "Globals.h"
+
+#include "glew/include/GL/glew.h"
 
 Framebuffer::Framebuffer(int w, int h, int channel) : width(w), height(h), channelId(channel)
 {
@@ -30,8 +30,7 @@ void Framebuffer::Unbind()
 }
 
 void Framebuffer::SetFramebuffer()
-{
-	
+{	
 	if (framebuffer > 0)
 	{
 		glDeleteFramebuffers(1, &framebuffer);

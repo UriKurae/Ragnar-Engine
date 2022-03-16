@@ -2,8 +2,15 @@
 
 #include "Imgui/imgui.h"
 #include "JsonParsing.h"
+#include "IconsFontAwesome5.h"
 
 class GameObject;
+class CameraComponent;
+class ButtonComponent;
+class ComponentTransform2D;
+class SliderComponent;
+class ImageComponent;
+class CheckboxComponent;
 
 enum class ComponentType
 {
@@ -12,10 +19,32 @@ enum class ComponentType
 	MESH_RENDERER,
 	MATERIAL,
 	CAMERA,
+	SCRIPT,
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
 	INPUT_ACTION,
+	LIGHT,
+	ANIMATION,
+	BONE,
+	RIGID_BODY,
+	UI_BUTTON,
+	UI_IMAGE,
+	UI_CHECKBOX,
+	UI_SLIDER,
+	UI_INPUTBOX,
+	UI_CANVAS,
+	TRANFORM2D,
+	NAVAGENT,
+};
+
+enum class State
+{
+	DISABLED,
+	NORMAL,
+	FOCUSED,
+	PRESSED,
+	SELECTED
 };
 
 class Component
@@ -27,7 +56,7 @@ public:
 	virtual void Enable() {}
 	virtual bool Update(float dt) { return true; }
 	virtual void Disable() {}
-	virtual void Draw() {}
+	virtual void Draw(CameraComponent* gameCam = nullptr) {}
 	virtual void DrawOutline() {}
 
 	virtual void OnEditor() {}
@@ -42,6 +71,9 @@ public:
 
 		ImGui::PopID();
 	}
+
+	void ComponentOptions(Component* component);
+	
 
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }

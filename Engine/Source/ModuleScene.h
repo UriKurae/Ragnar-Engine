@@ -1,10 +1,13 @@
 #pragma once
-
 #include "Module.h"
 #include "GameObject.h"
 #include "Quadtree.h"
 #include "GameTimer.h"
+
 #include <vector>
+#include <map>
+
+struct SerializedField;
 
 enum class Object3D
 {
@@ -72,23 +75,34 @@ public:
 	void ImportPrimitives();
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
-
-	inline const std::string& SceneDirectory() const { return sceneDir; }
+	inline bool* GetDrawQuad() { return &drawQuad; }
 
 	Quadtree& GetQuadtree() { return qTree; }
 	void SetGameDeltaTime(float deltaTime) { gameTimer.SetDesiredDeltaTime(deltaTime); }
+	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
+
+	inline GameObject* GetPlayer() { return player; };
+	inline const std::string& SceneDirectory() const { return sceneDir; }
+
+	// Scripting
+	void Scripting(float dt);
 
 	CameraComponent* mainCamera;
 	GameObject* camera;
+
+	std::multimap<uint, SerializedField*> referenceMap;
+
 private:
 	GameObject* root;
+	GameObject* player;
+
 	Quadtree qTree;
 	GameState gameState;
-	bool frameSkip;
-
-	bool resetQuadtree;
-
 	GameTimer gameTimer;
+
+	bool frameSkip;
+	bool resetQuadtree;
+	bool drawQuad = false;
 
 	std::string sceneDir;
 };

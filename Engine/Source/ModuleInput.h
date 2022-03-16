@@ -1,6 +1,10 @@
 #pragma once
 #include "Module.h"
-#include "SDL.h"
+
+#include "SDL_gamecontroller.h"
+#include "SDL_joystick.h"
+#include "SDL_scancode.h"
+#include "SDL_mouse.h"
 
 #include <vector>
 #include <array>
@@ -9,7 +13,7 @@
 #define MAX_MOUSE_BUTTONS 5
 #define MAX_KEYS 300
 
-enum class KeyState
+enum KeyState
 {
 	KEY_IDLE = 0,
 	KEY_DOWN,
@@ -96,8 +100,8 @@ private:
 	int mouseX;
 	int mouseY;
 	int mouseZ;
-	int mouseXMotion;
-	int mouseYMotion;
+	float mouseXMotion;
+	float mouseYMotion;
 	int mouseZMotion;
 	
 	SDL_GameController* pad;

@@ -1,26 +1,17 @@
 #pragma once
-
 #include <string>
 #include <vector>
-#include "Component.h"
 
-#include "TransformComponent.h"
-#include "MeshComponent.h"
-#include "MaterialComponent.h"
+#include "Geometry/OBB.h"
+#include "Geometry/AABB.h"
 #include "CameraComponent.h"
-#include "AudioSourceComponent.h"
-#include "ListenerComponent.h"
-#include "AudioReverbZoneComponent.h"
-#include "InputActionComponent.h"
-
-#include "MathGeoLib/src/MathGeoLib.h"
 
 typedef unsigned int uint;
+typedef JSON_Array;
 
-typedef json_array_t JSON_Array;
+struct SerializedField;
 class JsonParsing;
-class VertexBuffer;
-class IndexBuffer;
+class Component;
 
 class GameObject
 {
@@ -29,27 +20,32 @@ public:
 	~GameObject();
 
 	bool Update(float dt);
-	void Draw();
+	void Draw(CameraComponent* gameCam);
 	void DrawOutline();
 	void DrawEditor();
 
-	Component* CreateComponent(ComponentType type);
+	Component* CreateComponent(ComponentType type, const char* name = nullptr);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
-
+	void MoveComponent(Component* component, int position);
 	void CopyComponent(Component* component);
+	inline const std::vector<Component*> GetComponents() const { return components; }
+	Component* GetComponent(ComponentType type);
 	
 	void AddChild(GameObject* object);
 	void RemoveChild(GameObject* object);
-	void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
+	inline void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
 
-	std::vector<GameObject*>::const_iterator FindChildren(GameObject* child) { return std::find(children.begin(), children.end(), child); };
+	inline std::vector<GameObject*>::const_iterator FindChildren(GameObject* child) { return std::find(children.begin(), children.end(), child); };
 
 	inline void SetParent(GameObject* object) { parent = object; }
 	inline void SetName(const char* n) { name = n; }
 	inline void SetAudioRegister(bool check) { audioRegistered = check; }
+	inline void UnPrefab() { prefabID = 0; }
+	inline void SetPrefabID(uint id) { prefabID = id; }
 
 	inline uint const GetUUID() const { return uuid; }
+	inline uint const GetPrefabID() const { return prefabID; }
 	inline const char* GetName() const { return name.c_str(); }
 	inline GameObject* GetParent() const { return parent; }
 	inline const bool& GetActive() const { return active; }
@@ -61,8 +57,7 @@ public:
 	void SetNewAABB();
 	inline AABB GetAABB() { return globalAabb; }
 	inline OBB GetOOB() { return globalObb; }
-	
-	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }
+	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }	
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
@@ -70,7 +65,11 @@ public:
 	void OnLoad(JsonParsing& node);
 	void OnSave(JsonParsing& node, JSON_Array* array);
 
-	inline const std::vector<Component*> GetComponents() const { return components; }
+	void OnSavePrefab(JsonParsing& node, JSON_Array* array, int option);
+	void UpdateFromPrefab(JsonParsing& node, bool isParent);
+
+	inline float3 GetOffsetCM() { return offsetCM; };
+	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
 
 	template<typename T>
 	T* GetComponent();
@@ -81,9 +80,13 @@ public:
 	bool staticObj;
 	std::string tag;
 	std::string layer;
+	std::string prefabPath;
 
-private:
+	bool isUI = false;
+
+	std::vector<SerializedField*> csReferences;
 	std::vector<Component*> components;
+private:
 
 	GameObject* parent;
 	std::vector<GameObject*> children;
@@ -94,6 +97,8 @@ private:
 	OBB globalObb;
 
 	uint uuid;
+	uint prefabID;
+	float3 offsetCM = float3::zero;
 
 	//MouseMoveCommand mouseMoveCommand;
 
@@ -105,7 +110,7 @@ template<typename T>
 inline T* GameObject::GetComponent()
 {
 	T* component = nullptr;
-	
+
 	for (std::vector<Component*>::iterator i = components.begin(); i < components.end(); ++i)
 	{
 		component = dynamic_cast<T*>(*i);

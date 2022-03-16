@@ -1,7 +1,5 @@
 #pragma once
-
 #include "Resource.h"
-#include <string>
 
 typedef unsigned char GLubyte;
 
@@ -32,7 +30,7 @@ public:
 
 	void DrawOnEditor() override;
 
-	void Bind();
+	void Bind(unsigned int index = 0);
 	void Unbind();
 
 	inline const std::string& GetPath() const { return path; }

@@ -1,7 +1,6 @@
 #pragma once
-
 #include "Component.h"
-#include "MathGeoLib/src/Geometry/AABB.h"
+#include "Geometry/AABB.h"
 #include <string>
 
 class GameObject;
@@ -22,7 +21,7 @@ public:
 	inline std::string GetReverbBusName() const { return busReverb; }
 
 	void CompileBuffers();
-	void Draw() override;
+	void Draw(CameraComponent* gameCam = nullptr) override;
 
 	bool Update(float dt) override;
 
@@ -31,7 +30,10 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
+	inline void ChangePosition() { changePosition = true; }
+
 private:
+	bool changePosition;
 	TransformComponent* transform;
 
 	AABB reverbBoxZone;

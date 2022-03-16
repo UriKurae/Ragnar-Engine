@@ -1,11 +1,12 @@
+#include "ModuleInput.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleInput.h"
+
 #include "FileSystem.h"
 #include "ModuleEditor.h"
 
-#include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
+#include "SDL.h"
 
 #include "Profiling.h"
 
@@ -88,7 +89,8 @@ bool ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	Uint32 buttons = SDL_GetMouseState(&mouseX, &mouseY);
+	//Uint32 buttons = SDL_GetMouseState(&mouseX, &mouseY);
+	Uint32 buttons = SDL_GetGlobalMouseState(&mouseX, &mouseY);
 
 	mouseX /= SCREEN_SIZE;
 	mouseY /= SCREEN_SIZE;

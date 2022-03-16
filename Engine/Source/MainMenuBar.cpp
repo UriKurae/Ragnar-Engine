@@ -1,44 +1,65 @@
+#include "MainMenuBar.h"
 #include "Application.h"
 #include "Globals.h"
-#include "AudioManager.h"
+
 #include "ModuleRenderer3D.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
+#include "ModuleEditor.h"
+#include "ModuleCamera3D.h"
+#include "Physics3D.h"
+#include "ModuleUI.h"
 
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
-#include "MainMenuBar.h"
 #include "AboutMenu.h"
 #include "InspectorMenu.h"
 #include "HierarchyMenu.h"
 #include "ContentBrowserMenu.h"
+#include "TextEditorMenu.h"
 #include "FogWarMenu.h"
 #include "InputActionMenu.h"
-#include "Texture.h"
-#include "TextureImporter.h"
-#include "ResourceManager.h"
-#include "ModuleEditor.h"
-#include "ModuleCamera3D.h"
+#include "NavigatorMenu.h"
 
+#include "TransformComponent.h"
+#include "LightComponent.h"
+#include "ButtonComponent.h"
+#include "ImageComponent.h"
+#include "CheckBoxComponent.h"
+#include "SliderComponent.h"
+#include "Transform2DComponent.h"
+
+#include "ResourceManager.h"
+#include "AudioManager.h"
+
+#include "Lights.h"
+#include "Texture.h"
 #include "Dialogs.h"
-#include "IconsFontAwesome5.h"
+#include "Viewport.h"
 #include "Style.h"
 
+#include "Math/float3x3.h"
+#include "imgui/imgui_stdlib.h"
+
+#include <fstream>
 #include "Profiling.h"
 
 MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
 {
 	showMenu = false;
 
-	menus.reserve(8);
+	menus.reserve(10);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
-	menus.emplace_back(new InspectorMenu());
 	menus.emplace_back(new HierarchyMenu());
 	menus.emplace_back(new ContentBrowserMenu());
+	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
 	menus.emplace_back(new InputActionMenu());
+	menus.emplace_back(new NavigatorMenu());
+	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
 }
@@ -130,6 +151,9 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z", &ret);
 			ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y", &ret);
+
+			ImGui::Separator();
+			app->editor->GetViewport()->SnapOptions();
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())
@@ -145,6 +169,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
 			ImGui::MenuItem(ICON_FA_GAMEPAD" Input Actions", NULL, &menus[(int)Menus::INPUT_ACTION]->active);
+			ImGui::MenuItem(ICON_FA_CODE" Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
 
 			ImGui::EndMenu();
 		}
@@ -191,6 +216,9 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->renderer3D->SetWireMode();
 			}
+			if (ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh())) {}
+			if (ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid())) {}
+			if (ImGui::MenuItem("Show Quad Tree", NULL, app->scene->GetDrawQuad())) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())
@@ -200,19 +228,21 @@ bool MainMenuBar::Update(float dt)
 
 		if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
 		{
-			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object"))
+			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object", "Ctrl+Shift+N"))
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
 				else app->scene->CreateGameObject(nullptr);
 			}
-			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child"))
+      
+			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child", "Alt+Shift+N"))
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
 			}
-			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent"))
+			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent", "Ctrl+Shift+G"))
 			{
 				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
 			}
+      
 			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
 			{
 				if (ImGui::MenuItem("Cube"))
@@ -235,6 +265,102 @@ bool MainMenuBar::Update(float dt)
 					if (app->editor->GetGO() != nullptr) app->scene->Create3DObject(Object3D::CYLINDER, app->editor->GetGO());
 					else app->scene->Create3DObject(Object3D::CYLINDER, nullptr);
 				}
+				ImGui::EndMenu();
+
+			}
+			if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
+			{
+				if (ImGui::MenuItem("UI Button"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+
+					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
+					object->CreateComponent(ComponentType::MATERIAL);
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Slider"))
+				{				
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					app->userInterface->UIGameObjects.push_back(object);
+					button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->thePlane->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Check Box"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
+					button->SetSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
+					button->SetNoSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
+					//material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					button->SetActual(button->GetNoSelectedMaterial());
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Image"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
+
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+
+				ImGui::EndMenu();
+
+			}
+			if (ImGui::BeginMenu(ICON_FA_LIGHTBULB " Lights"))
+			{
+				if (ImGui::MenuItem("Point Light"))
+				{
+					GameObject* go = app->scene->CreateGameObject(nullptr);
+					go->SetName("Point Light");
+					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+					PointLight* pl = new PointLight();
+					l->SetLight(pl);
+					app->renderer3D->AddPointLight(pl);
+
+				}
+				else if (ImGui::MenuItem("Spot Light"))
+				{
+					GameObject* go = app->scene->CreateGameObject(nullptr);
+					go->SetName("Spot Light");
+					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+					SpotLight* sl = new SpotLight();
+					l->SetLight(sl);
+					app->renderer3D->AddSpotLight(sl);
+
+				}
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu(ICON_FA_CIRCLE " Shader"))
+			{
+				static int count = 0;
+				if (ImGui::MenuItem("Light-sensible"))
+				{
+					showCreateLightSensibleShaderWindow = true;
+				}
+				else if (ImGui::MenuItem("Not light-sensible"))
+				{					
+					showCreateNotLightSensibleShaderWindow = true;
+				}
+
 				ImGui::EndMenu();
 			}
 			if (ImGui::MenuItem(ICON_FA_KEYBOARD" Create Input Action"))
@@ -261,9 +387,10 @@ bool MainMenuBar::Update(float dt)
 				ImGui::PopStyleColor();
 				ImGui::PopStyleColor();
 			}
+
 			ImGui::EndMenu();
 		}
-
+		
 		if (ImGui::BeginMenu(ICON_FA_INFO_CIRCLE" Help"))
 		{
 			ImGui::MenuItem("Demo Menu", NULL, &showMenu);
@@ -369,7 +496,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			app->scene->Play();
 			AudioManager::Get()->PlayAllAudioSources();
-			ImGui::StyleColorsClassic();
+			//ImGui::StyleColorsClassic();
+			app->physics->ActiveAllBodies();
 		}
 
 		ImGui::SameLine();
@@ -385,7 +513,8 @@ bool MainMenuBar::Update(float dt)
 		{
 			AudioManager::Get()->StopAllAudioSources();
 			app->scene->Stop();
-			//StyleTheme();
+			app->physics->SleepAllBodies();
+			//SetStyle(6);
 		}
 		ImGui::SameLine();
 
@@ -395,12 +524,14 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->scene->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
+				app->physics->ActiveAllBodies();
 			}
 		}
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
 			app->scene->Pause();
+			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();
@@ -409,6 +540,7 @@ bool MainMenuBar::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_LSHIFT) != KeyState::KEY_REPEAT && 
 		app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
 	{
 		saveWindow = true;
@@ -433,9 +565,18 @@ bool MainMenuBar::Update(float dt)
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
 			}
-			else if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 			{
 				AlignWithView();
+			}
+			if (app->input->GetKey(SDL_SCANCODE_G) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+			}
+			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObject(app->editor->GetGO());
+				else app->scene->CreateGameObject(nullptr);
 			}
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
@@ -443,6 +584,10 @@ bool MainMenuBar::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 			{
 				AlignViewWithSelected();
+			}
+			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO() != nullptr) app->scene->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
 			}
 		}
 	}
@@ -458,6 +603,12 @@ bool MainMenuBar::Update(float dt)
 		else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
 	}
 
+	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+	{
+		
+	}
+
 	ImGui::PopStyleColor(3);
 	ImGui::End();
 
@@ -466,6 +617,17 @@ bool MainMenuBar::Update(float dt)
 		ImGui::ShowDemoWindow(&showMenu);
 		ImGui::ShowMetricsWindow(&showMenu);
 	}
+
+
+	if (showCreateLightSensibleShaderWindow)
+	{
+		ShowCreateLigthSensibleShaderWindow();
+	}
+	else if (showCreateNotLightSensibleShaderWindow)
+	{
+		ShowCreateNotLigthSensibleShaderWindow();
+	}
+
 
 	for (unsigned int i = 0; i < menus.size(); ++i)
 	{
@@ -521,7 +683,7 @@ void MainMenuBar::SetStyle(int _style)
 // Object align with camera
 void MainMenuBar::AlignWithView()
 {
-	GameObject* temp = app->editor->GetGO();
+  GameObject* temp = app->editor->GetGO();
 	if (temp != nullptr)
 	{
 		TransformComponent* transform = temp->GetComponent<TransformComponent>();
@@ -533,6 +695,7 @@ void MainMenuBar::AlignWithView()
 		transform->SetTransform(matrix);
 	}
 }
+
 // Camera align with object
 void MainMenuBar::AlignViewWithSelected()
 {
@@ -543,5 +706,346 @@ void MainMenuBar::AlignViewWithSelected()
 		float4x4 matrix = transform->GetGlobalTransform();
 		float3x3 rot = matrix.RotatePart();
 		app->camera->cameraFrustum.SetFrame(transform->GetGlobalTransform().Col3(3), rot.Col3(2), rot.Col3(1));
+	}
+}
+
+std::string MainMenuBar::GetNotLightSensibleShaderSource()
+{
+	return "#type vertex\n"
+		"#version 430 core\n\n"
+
+		"layout(location = 0) in vec3 position;\n"
+		"layout(location = 1) in vec3 normal;\n"
+		"layout(location = 2) in vec2 texCoords;\n\n"
+
+		"uniform mat4 model;\n"
+		"uniform mat4 view;\n"
+		"uniform mat4 projection;\n"
+		"uniform mat3 normalMatrix;\n\n"
+
+		"out vec3 vPosition;\n"
+		"out vec3 vNormal;\n"
+		"out vec2 vTexCoords;\n\n"
+
+		"void main()\n"
+		"{\n\t"
+			"gl_Position = projection * view * model * vec4(position, 1);\n\n\t"
+
+			"vTexCoords = texCoords;\n\t"
+			"vPosition = vec3(model * vec4(position, 1));\n\t"
+			"vNormal = normalMatrix * normal;\n\t"
+			"vNormal = normalize((model * vec4(normal, 0.0)).xyz);\n"
+		"}\n\n\n"
+
+
+		"#type fragment\n\n"
+		"#version 430 core\n\n"
+
+		"in vec3 vPosition;\n"
+		"in vec3 vNormal;\n"
+		"in vec2 vTexCoords;\n\n"
+
+		"out vec4 fragColor;\n\n"
+
+		"void main()\n"
+		"{\n\t"
+			"fragColor = vec4(1.0f);\n"
+		"}\n";
+}
+
+std::string MainMenuBar::GetLightSensibleShaderSource()
+{
+	return R"(#type vertex
+#version 430 core
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 texCoords;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+uniform mat3 normalMatrix;
+uniform float textureAlpha;
+uniform vec3 ambientColor;
+uniform vec3 camPos;
+
+out vec3 vPosition;
+out vec3 vAmbientColor;
+out vec2 vTexCoords;
+out vec3 vCamPos;
+out vec3 vNormal;
+out float vTextureAlpha;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(position, 1);
+
+	vTexCoords = texCoords;
+	vPosition = vec3(model * vec4(position, 1));
+	//vNormal = normalMatrix * normal;
+	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
+	vAmbientColor = ambientColor;
+	vTextureAlpha = 1.0f;
+
+	vCamPos = camPos;
+}
+
+
+#type fragment
+#version 430 core
+
+in vec3 vPosition;
+in vec3 vNormal;
+in vec2 vTexCoords;
+in vec3 camPos;
+
+in vec3 vAmbientColor;
+in float vTextureAlpha;
+
+out vec4 fragColor;
+
+//uniform sampler2D tex;
+layout(location = 0) uniform sampler2D tex;
+
+
+struct Material {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	float shininess;
+	bool gammaCorrection;
+	float gammaCorrectionAmount;
+};
+
+uniform Material material;
+
+struct DirLight
+{
+	vec3 direction;
+
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+};
+uniform DirLight dirLight;
+
+struct PointLight {
+	vec3 position;
+
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+
+	// 0 -> constant, 1 -> linear (lin), 2 -> quadratic
+	vec3 properties;
+
+	float intensity;
+	float constant;
+	float lin;
+	float quadratic;
+};
+#define MAX_POINT_LIGHTS 4
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
+
+struct SpotLight
+{
+	vec3 position;
+	vec3 direction;
+	float cutOff;
+	float outerCutOff;
+	float intensity;
+
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+
+};
+#define MAX_SPOT_LIGHTS 4
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
+
+
+vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
+{
+	vec3 lightDir = normalize(-light.direction);
+	
+	// Diffuse shading
+	float diff = max(dot(normal, lightDir), 0.0);
+	
+	// Specular shading
+	vec3 reflectDir = reflect(-lightDir, normal);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	
+	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
+	vec3 diffuse = light.diffuse * diff * material.diffuse;
+	vec3 specular = light.specular * spec * material.specular;
+
+	return (ambient + diffuse + specular);
+}
+
+vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
+{
+	vec3 lightDir = normalize(light.position - fragPos);
+
+	// Diffuse shading
+	float diff = max(dot(normal, lightDir), 0.0);
+
+	// Specular shading
+	vec3 reflectDir = reflect(-lightDir, normal);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+
+	// Attenuation
+	float distance = length(fragPos - light.position);
+	float attenuation = 1.0 / (1 + light.constant + light.lin * distance + light.quadratic * (distance * distance));
+	//float attenuation = 1.0 / (light.constant + light.lin * distance + light.quadratic * (distance * distance));
+	//float attenuation = 1.0 / (light.properties[0] + light.properties[1] * distance + light.properties[2] * (distance * distance));
+	
+	attenuation *= light.intensity;
+
+	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
+	vec3 diffuse = light.diffuse * diff * material.diffuse;
+	vec3 specular = light.specular * spec * material.specular;
+
+	ambient *= attenuation;
+	diffuse *= attenuation;
+	specular *= attenuation;
+
+	return (ambient + diffuse + specular);
+}
+
+vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
+{
+	vec3 lightDir = normalize(light.position - fragPos);
+	// diffuse shading
+	float diff = max(dot(normal, lightDir), 0.0);
+	// specular shading
+	vec3 reflectDir = reflect(-lightDir, normal);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	// attenuation
+	float distance = length(light.position - fragPos);
+	//float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+	// spotlight intensity
+	float theta = dot(lightDir, normalize(-light.direction));
+	float epsilon = light.cutOff - light.outerCutOff;
+	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
+	// combine results
+	//vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
+	//vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
+	//vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
+
+	vec3 ambient = light.ambient * material.diffuse * material.diffuse;
+	vec3 diffuse = light.diffuse * diff * material.diffuse;
+	vec3 specular = light.specular * spec * material.specular;
+
+
+	ambient *=  /*attenuation **/ intensity * light.intensity;
+	diffuse  *= /*attenuation **/ intensity * light.intensity;
+	specular *= /*attenuation **/ intensity * light.intensity;
+	
+	return (ambient + diffuse + specular);
+}
+
+void main()
+{
+	vec3 norm = normalize(vNormal);
+	vec3 viewDir = normalize(camPos - vPosition);
+	
+	vec3 result = CalcDirLight(dirLight, norm, viewDir);
+	
+	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
+		result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);
+	
+	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
+		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
+
+	vec3 finalColor = result;
+	if (material.gammaCorrection)
+	{
+		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
+	}
+
+	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
+})";
+
+}
+
+void MainMenuBar::ShowCreateLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateLightSensibleShaderWindow);
+
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+			std::ofstream file;
+			file.open(path);
+			file << GetLightSensibleShaderSource();
+			file.close();
+
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+			showCreateLightSensibleShaderWindow = false;
+			name.clear();
+		}
+	}
+	
+	ImGui::End();
+}
+
+void MainMenuBar::ShowCreateNotLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateNotLightSensibleShaderWindow);
+
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+			std::ofstream file;
+			file.open(path);
+			file << GetNotLightSensibleShaderSource();
+			file.close();
+
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+
+			showCreateNotLightSensibleShaderWindow = false;
+			name.clear();
+		}
+
+	}
+
+	ImGui::End();
+	GameObject* temp = app->editor->GetGO();
+	if (temp != nullptr)
+	{
+		TransformComponent* transform = temp->GetComponent<TransformComponent>();
+		float4x4 matrix = transform->GetGlobalTransform();
+		Frustum frus = app->camera->cameraFrustum;
+		matrix.SetTranslatePart(frus.Pos());
+		float3x3 rot{ frus.WorldRight(), frus.Up(), frus.Front() };
+		matrix.SetRotatePart(rot.ToQuat());
+		transform->SetTransform(matrix);
 	}
 }

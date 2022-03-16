@@ -1,19 +1,20 @@
 #include "ResourceManager.h"
-
 #include "Application.h"
-#include "FileSystem.h"
 #include "Globals.h"
-#include "TextureImporter.h"
-#include "MeshImporter.h"
-#include "ModelImporter.h"
 
-#include "MathGeoLib/src/Algorithm/Random/LCG.h"
+#include "FileSystem.h"
+#include "TextureImporter.h"
+#include "ModelImporter.h"
+#include "ShaderImporter.h"
+#include "AnimationImporter.h"
 
 #include "Texture.h"
 #include "Mesh.h"
 #include "Model.h"
 
 #include <stack>
+#include <fstream>
+#include "Algorithm/Random/LCG.h"
 
 #include "Profiling.h"
 
@@ -91,6 +92,23 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 		library = MODELS_FOLDER + std::string("model_") + std::to_string(uid) + ".rgmodel";
 		resource = std::make_shared<Model>(uid, assets, library);
 		break;
+	case ResourceType::ANIMATION:
+		library = ANIMATIONS_FOLDER + std::string("anim_") + std::to_string(uid) + ".rganim";
+		resource = std::make_shared<Animation>(uid, assets, library);
+		break;
+	case ResourceType::BONE:
+		library = BONES_FOLDER + std::string("bone_") + std::to_string(uid) + ".rgbone";
+		resource = std::make_shared<Bone2>(uid, assets, library);
+		break;
+	case ResourceType::SHADER:
+		library = SHADERS_FOLDER + std::string("shader_") + std::to_string(uid) + ".shader";
+		resource = std::make_shared<Shader>(uid, assets, library);
+		
+		std::ifstream src(assets, std::ios::binary);
+		std::ofstream dest(library, std::ios::binary);
+		dest << src.rdbuf();
+
+		break;
 	}
 
 	if (resource != nullptr) map[uid] = resource;
@@ -111,6 +129,15 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 		break;
 	case ResourceType::MODEL:
 		resource = std::make_shared<Model>(uid, assets, library);
+		break;
+	case ResourceType::ANIMATION:
+		resource = std::make_shared<Animation>(uid, assets, library);
+		break;
+	case ResourceType::BONE:
+		resource = std::make_shared<Bone2>(uid, assets, library);
+		break;
+	case ResourceType::SHADER:
+		resource = std::make_shared<Shader>(uid, assets, library);
 		break;
 	default:
 		break;
@@ -139,6 +166,7 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		std::shared_ptr<Resource> res = (*it).second;
+		std::string p = res->GetAssetsPath();
 		if (res->GetAssetsPath() == path)
 		{
 			res->Load();
@@ -182,7 +210,7 @@ void ResourceManager::ImportResourcesFromLibrary()
 
 		for (int i = 0; i < files.size(); ++i)
 		{
-			if (files[i].find(".rg") != std::string::npos)
+			if (files[i].find(".rg") != std::string::npos || files[i].find(".shader") != std::string::npos)
 			{
 				std::string extension = files[i].substr(files[i].find_last_of("."), files[i].length());
 				std::string metaFile = dir + files[i].substr(0, files[i].find_last_of(".")) + ".meta";
@@ -199,6 +227,9 @@ void ResourceManager::ImportResourcesFromLibrary()
 					if (files[i].find(".rgmodel") != std::string::npos) CreateResourceCreated(ResourceType::MODEL, uid, assets, dir + files[i]);
 					else if (files[i].find(".rgtexture") != std::string::npos) CreateResourceCreated(ResourceType::TEXTURE, uid, assets, dir + files[i]);
 					else if (files[i].find(".rgmesh") != std::string::npos) CreateResourceCreated(ResourceType::MESH, uid, assets, dir + files[i]);
+					else if (files[i].find(".rganim") != std::string::npos) CreateResourceCreated(ResourceType::ANIMATION, uid, assets, dir + files[i]);
+					else if (files[i].find(".rgbone") != std::string::npos) CreateResourceCreated(ResourceType::BONE, uid, assets, dir + files[i]);
+					else if (files[i].find(".shader") != std::string::npos) CreateResourceCreated(ResourceType::SHADER, uid, assets, dir + files[i]);
 
 					RELEASE_ARRAY(buffer);
 				}
@@ -238,6 +269,11 @@ void ResourceManager::ImportAllResources()
 			case ResourceType::TEXTURE:
 				TextureImporter::ImportTexture(*it);
 				break;
+			case ResourceType::SHADER:
+				ShaderImporter::SaveShader(*it);
+				//ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
+				break;
+
 			}
 		}
 
@@ -263,7 +299,8 @@ std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 
 	for (; it != map.end(); ++it)
 	{
-		if ((*it).second->GetAssetsPath() == path) return (*it).second;
+		if ((*it).second->GetAssetsPath() == path)
+			return (*it).second;
 	}
 
 	return nullptr;

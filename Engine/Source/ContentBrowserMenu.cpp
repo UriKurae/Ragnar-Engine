@@ -1,26 +1,22 @@
 #include "ContentBrowserMenu.h"
-
 #include "Application.h"
+#include "Globals.h"
+
+#include "TextureImporter.h"
 #include "ModuleInput.h"
-#include "FileSystem.h"
-#include "ResourceManager.h"
 #include "ModuleEditor.h"
 #include "InputActionMenu.h"
+#include "MonoManager.h"
 
+#include "FileSystem.h"
+#include "ResourceManager.h"
 #include "Texture.h"
-#include "TextureImporter.h"
-
-#include "Imgui/imgui.h"
-#include <iostream>
-#include <thread>
-
-#include "IconsFontAwesome5.h"
 
 #include "Profiling.h"
 
-ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), Menu(true)
+ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), refreshTime(0.0f), Menu(true)
 {
-	mainDirectory = "Assets/";
+	mainDirectory = "Assets/Resources/";
 	currentDirectory = mainDirectory;
 }
 
@@ -30,6 +26,8 @@ ContentBrowserMenu::~ContentBrowserMenu()
 	RELEASE(picIcon);
 	RELEASE(modelIcon);
 	RELEASE(sceneIcon);
+	RELEASE(prefabIcon);
+	RELEASE(scriptIcon);
 }
 
 bool ContentBrowserMenu::Start()
@@ -46,31 +44,43 @@ bool ContentBrowserMenu::Start()
 	sceneIcon = new Texture(-4, std::string("Settings/EngineResources/logo.rgtexture"));
 	sceneIcon->Load();
 
+	prefabIcon = new Texture(-5, std::string("Settings/EngineResources/prefab.rgtexture"));
+	prefabIcon->Load();
+
+	scriptIcon = new Texture(-6, std::string("Settings/EngineResources/script.rgtexture"));
+	scriptIcon->Load();
+
 	return true;
 }
 
 bool ContentBrowserMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Content Browser Update");
+
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
-	/*if (resource.joinable()) resource.join();
-	resource = std::thread(UpdatingResources);*/
-	ResourceManager::GetInstance()->ImportAllResources();
-
+	refreshTime += dt;
+	if (refreshTime >= 5.0f)
+	{
+		ResourceManager::GetInstance()->ImportAllResources();
+		refreshTime = 0.0f;
+	}
+	
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
 	
 	ImGui::Begin(ICON_FA_FOLDER" Content Browser", &active);
 	ImGui::Columns(2);
 	ImGui::SetColumnWidth(0, 150);
 
-	ImGuiTreeNodeFlags flags = (currentDirectory == mainDirectory ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags flags = (currentDirectory == mainDirectory ? ImGuiTreeNodeFlags_Selected : 0) | SetFlags(dirs);
 	bool opened = ImGui::TreeNodeEx("Assets", flags);
 	if (ImGui::IsItemClicked())
 	{
 		currentDirectory = mainDirectory;
 	}
-
+	
+	
 	if (opened)
 	{
 		DrawRecursive(dirs);
@@ -87,7 +97,8 @@ bool ContentBrowserMenu::Update(float dt)
 	ImGui::BeginChild("Assets");
 
 	float padding = 10.0f;
-	float cell = 64;
+	float cell = 100;
+	float height = 64;
 
 	float width = ImGui::GetContentRegionAvail().x;
 	int columns = (int)(width / cell);
@@ -111,10 +122,10 @@ bool ContentBrowserMenu::Update(float dt)
 			ImGui::PushStyleColor(ImGuiCol_Button, ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.29f, 0.66f, 1.0f)));
 			selected = true;
 		}
-		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, cell });
+		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, height });
 		if (ImGui::IsItemClicked())
 		{
-			currentFile = (*it);
+			currentFile = (*it);			
 		}
 		if (ImGui::BeginDragDropSource())
 		{
@@ -156,16 +167,26 @@ bool ContentBrowserMenu::Update(float dt)
 		switch (type)
 		{
 		case ResourceType::TEXTURE:
-			ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", { cell, cell });
+			ImGui::ImageButton(picIcon ? (ImTextureID)picIcon->GetId() : "", { cell, height });
 			break;
 		case ResourceType::MODEL:
-			ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, cell });
+			ImGui::ImageButton(modelIcon ? (ImTextureID)modelIcon->GetId() : "", { cell, height });
 			break;
 		case ResourceType::SCENE:
-			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, cell });
+			ImGui::ImageButton(sceneIcon ? (ImTextureID)sceneIcon->GetId() : "", { cell, height });
+			break;
+		case ResourceType::SCRIPT:
+			ImGui::ImageButton(scriptIcon ? (ImTextureID)scriptIcon->GetId() : "", { cell, height });
 			break;
 		default:
-			ImGui::Button(item.c_str());
+			if ((*it).find(".rgprefab") != std::string::npos)
+			{
+				ImGui::ImageButton(prefabIcon ? (ImTextureID)prefabIcon->GetId() : "", { cell, cell });
+			}
+			else
+			{
+				ImGui::Button(item.c_str());
+			}
 			break;
 		}
 		if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0) && type == ResourceType::INPUT_ACTION)
@@ -178,6 +199,14 @@ bool ContentBrowserMenu::Update(float dt)
 		{
 			app->editor->SetResource(ResourceManager::GetInstance()->GetResource((*it)).get());
 			currentFile = (*it);
+			if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_::ImGuiMouseButton_Left))
+			{
+				ResourceType type = app->fs->CheckExtension(*it);
+				if (type == ResourceType::SCRIPT)
+				{
+					ShellExecute(0, 0, "Assembly-CSharp.sln", 0, 0, SW_SHOW);
+				}
+			}
 		}
 		if (ImGui::BeginDragDropSource())
 		{
@@ -203,6 +232,17 @@ bool ContentBrowserMenu::Update(float dt)
 		}
 	}
 
+	if (ImGui::BeginPopupContextWindow())
+	{
+		if (ImGui::BeginMenu("Create C# Script"))
+		{
+			DrawCreationPopup("Script name: ", ".cs", std::bind(&MonoManager::CreateAssetsScript, app->moduleMono, std::placeholders::_1));
+			std::bind(&MonoManager::UpdateListScripts, app->moduleMono, std::placeholders::_1);
+			ImGui::EndMenu();
+		}
+		ImGui::EndPopup();
+	}
+
 	ImGui::Columns(1);
 
 	ImGui::PopStyleColor();
@@ -222,7 +262,7 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 		std::string name = (*it);
 		app->fs->GetRelativeDirectory(name);
 
-		ImGuiTreeNodeFlags flags = (currentDirectory == (*it) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+		ImGuiTreeNodeFlags flags = (currentDirectory == (*it) ? ImGuiTreeNodeFlags_Selected : 0) | SetFlags(dirs);
 		
 		bool opened = ImGui::TreeNodeEx(name.c_str(), flags);
 		if (ImGui::IsItemClicked())
@@ -240,4 +280,43 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 			ImGui::TreePop();
 		}
 	}
+}
+
+void ContentBrowserMenu::DrawCreationPopup(const char* popDisplay, const char* dotExtension, std::function<void(const char*)> f)
+{
+	static char name[50] = "\0";
+
+	ImGui::Text(popDisplay); ImGui::SameLine();
+
+	std::string id("##");
+	id += dotExtension;
+
+	ImGui::InputText(id.c_str(), name, sizeof(char) * 50);
+	if (ImGui::Button("Create"))
+	{
+		std::string path = name;
+		if (path.find('.') == path.npos)
+			path += dotExtension;
+
+		//TODO: Check if the extension is correct, to avoid a .cs.glsl file
+		if (path.find(dotExtension) != path.npos)
+		{
+			f(path.c_str());
+			name[0] = '\0';
+		}
+
+		ImGui::CloseCurrentPopup();
+	}
+}
+
+ImGuiTreeNodeFlags ContentBrowserMenu::SetFlags(std::vector<std::string> node)
+{
+	// This flags allow to open the tree if you click on arrow or doubleClick on object, by default the tree is open  
+	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+
+	// If GameObject doesn't childrens = no collapsing and no arrow
+	//if (node.size() == 0)
+	//	flags |= ImGuiTreeNodeFlags_Leaf;
+
+	return flags;
 }

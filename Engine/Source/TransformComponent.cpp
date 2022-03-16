@@ -1,22 +1,21 @@
-#include "Application.h"
-#include "ModuleInput.h"
-
-#include "GameObject.h"
 #include "TransformComponent.h"
-#include "ModuleScene.h"
+#include "Application.h"
 #include "Globals.h"
+
+#include "ModuleScene.h"
+
+#include "C_RigidBody.h"
+#include "MeshComponent.h"
+#include "ListenerComponent.h"
+#include "AudioSourceComponent.h"
+#include "AudioReverbZoneComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
 
-#include "Imgui/imgui.h"
+#include "Math/float3x3.h"
+
 #include "Imgui/imgui_internal.h"
-#include "Imgui/ImGuizmo.h"
-
-#include <stack>
-
-#include "IconsFontAwesome5.h"
-
 #include "Profiling.h"
 
 TransformComponent::TransformComponent(GameObject* own)
@@ -68,8 +67,12 @@ bool TransformComponent::Update(float dt)
 	if (changeTransform)
 	{
 		std::stack<GameObject*> stack;
-
 		UpdateTransform();
+
+		//Get each RigidBodies of the GameObject to update their position
+		for (int i = 0; i < owner->GetComponents().size(); i++)
+			if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
+				static_cast<RigidBodyComponent*>(owner->GetComponents().at(i))->UpdateCollision();
 
 		for (int i = 0; i < owner->GetChilds().size(); ++i)
 			stack.push(owner->GetChilds()[i]);
@@ -79,6 +82,11 @@ bool TransformComponent::Update(float dt)
 			GameObject* go = stack.top();
 
 			UpdateChildTransform(go);
+			
+			//Get each RigidBodies of the GameObject childs to update their position
+			for (int i = 0; i < go->GetComponents().size(); i++)
+				if (go->GetComponents().at(i)->type == ComponentType::RIGID_BODY)
+					static_cast<RigidBodyComponent*>(go->GetComponents().at(i))->UpdateCollision();
 
 			stack.pop();
 
@@ -87,6 +95,18 @@ bool TransformComponent::Update(float dt)
 		}
 
 		SetAABB();
+
+		ListenerComponent* listener = owner->GetComponent<ListenerComponent>();
+		if (listener != nullptr)
+			listener->ChangePosition();
+
+		AudioSourceComponent* audioSource = owner->GetComponent<AudioSourceComponent>();
+		if (audioSource != nullptr)
+			audioSource->ChangePosition();
+
+		AudioReverbZoneComponent* reverb = owner->GetComponent<AudioReverbZoneComponent>();
+		if (reverb != nullptr)
+			reverb->ChangePosition();
 
 		changeTransform = false;
 	}
@@ -143,6 +163,7 @@ bool TransformComponent::OnLoad(JsonParsing& node)
 	scale = node.GetJson3Number(node, "Scale");
 	rotationEditor = node.GetJson3Number(node, "RotationEditor");
 
+	UpdateTransform();
 	changeTransform = true;
 
 	return true;
@@ -177,6 +198,7 @@ void TransformComponent::UpdateTransform()
 	{
 		globalMatrix = localMatrix;
 	}
+	UpdateBoundingBox();
 }
 
 void TransformComponent::UpdateChildTransform(GameObject* go)
@@ -210,14 +232,21 @@ void TransformComponent::SetAABB()
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
 		tr->SetAABB();
 	}
+
+	UpdateBoundingBox();
+
+	app->scene->ResetQuadtree();
+}
+
+void TransformComponent::UpdateBoundingBox()
+{
 	if (owner->GetComponent<MeshComponent>())
 	{
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
+		owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
-
-	app->scene->ResetQuadtree();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
@@ -311,7 +340,40 @@ void TransformComponent::ResetTransform()
 	UpdateTransform();
 }
 
+float3 TransformComponent::GetForward()
+{
+	return globalMatrix.RotatePart().Col(2).Normalized();
+}
+
+float3 TransformComponent::GetRight()
+{
+	return globalMatrix.RotatePart().Col(0).Normalized();
+}
+
+float3 TransformComponent::GetUp()
+{
+	return globalMatrix.RotatePart().Col(1).Normalized();
+}
+
 void TransformComponent::UpdateEditorRotation()
 {
 	rotationEditor = rotation.ToEulerXYZ();
 }
+
+//float3 TransformComponent::GetRight()
+//{
+//	return GetNormalizeAxis(0);
+//}
+//float3 TransformComponent::GetUp()
+//{
+//	return GetNormalizeAxis(1);
+//}
+//float3 TransformComponent::GetForward()
+//{
+//	return GetNormalizeAxis(2);
+//}
+//
+//float3 TransformComponent::GetNormalizeAxis(int i)
+//{
+//	return globalMatrix.RotatePart().Col(i).Normalized();
+//}

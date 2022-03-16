@@ -1,16 +1,14 @@
 #pragma once
 
-#include <vector>
-#include "MathGeoLib/src/MathGeoLib.h"
-#include "glmath.h"
+#include "VertexBuffer.h"
 
 typedef unsigned char GLubyte;
 
 namespace RCube
 {
-	void CreateCube(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	void CreateCube(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
 	{
-		vertices =
+		/*vertices =
 		{
 			{-0.5f, 0.5f, 0.5f},
 			{-0.5f, -0.5f, 0.5f},
@@ -21,9 +19,57 @@ namespace RCube
 			{0.5f, 0.5f, -0.5f},
 			{-0.5f, -0.5f, -0.5f},
 			{-0.5f, 0.5f, -0.5f},
-		};
+		};*/
 
-		indices =
+		Vertex vertex;
+
+		// 0
+		vertex.position = { -0.5f,  0.5f,  0.5f };
+		vertex.texCoords = { 0,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 1
+		vertex.position = { -0.5f, -0.5f,  0.5f };
+		vertex.texCoords = { 0,1 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+		// 2
+		vertex.position = { 0.5f, -0.5f,  0.5f };
+		vertex.texCoords = { 1,1 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+		// 3
+		vertex.position = { 0.5f,  0.5f,  0.5f };
+		vertex.texCoords = { 1,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 4
+		vertex.position = { 0.5f, -0.5f, -0.5f };
+		vertex.texCoords = { 0,1 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 5
+		vertex.position = { 0.5f,  0.5f, -0.5f };
+		vertex.texCoords = { 0,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 6
+		vertex.position = { -0.5f, -0.5f, -0.5f };
+		vertex.texCoords = { 1,1 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 7
+		vertex.position = { -0.5f,  0.5f, -0.5f };
+		vertex.texCoords = { 1,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		unsigned int in[] =
 		{
 			0,1,2,
 			2,3,0,
@@ -43,36 +89,58 @@ namespace RCube
 			1,6,4,
 			4,2,1
 		};
+		indices.insert(indices.begin(), in, in + 12 * 3);
 
-		texCoords =
-		{
-			{0.0f, 1.0f},
-			{0.0f, 0.0f},
-			{1.0f, 0.0f},
-			{1.0f, 1.0f},
-
-			{1.0f, 1.0f},
-			{1.0f, 0.0f},
-			{0.0f, 1.0f},
-			{0.0f, 0.0f},
-		};
+		//texCoords =
+		//{
+		//	{0.0f, 1.0f},
+		//	{0.0f, 0.0f},
+		//	{1.0f, 0.0f},
+		//	{1.0f, 1.0f},
+		//
+		//	{1.0f, 1.0f},
+		//	{1.0f, 0.0f},
+		//	{0.0f, 1.0f},
+		//	{0.0f, 0.0f},
+		//};
 	}
 }
 
 namespace RPyramide
 {
-	void CreatePyramide(std::vector<float3>& vertices, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	void CreatePyramide(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
 	{
-		vertices =
-		{
-			{-0.5f, -0.5f, 0.5f},
-			{0.5f, -0.5f, 0.5f},
-			{-0.5f, -0.5f, -0.5f},
-			{0.5f, -0.5f, -0.5f},
-			{0.0f, 0.5f, 0.0f},
-		};
+		Vertex vertex;
 
-		indices =
+		// 0
+		vertex.position = { -0.5f,  -0.5f,  0.5f };
+		vertex.texCoords = { 1,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 1
+		vertex.position = { 0.5f, -0.5f,  0.5f };
+		vertex.texCoords = { 0,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+		// 2
+		vertex.position = { -0.5f, -0.5f, -0.5f };
+		vertex.texCoords = { 0,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+		// 3
+		vertex.position = { 0.5f,  -0.5f, -0.5f };
+		vertex.texCoords = { 1,0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		// 4
+		vertex.position = { 0.0f, 0.5f, 0.0f };
+		vertex.texCoords = { 0.5f,1.0 };
+		vertex.normal = { vertex.position };
+		vertices.emplace_back(vertex);
+
+		unsigned int in[] =
 		{
 			1,0,2,
 
@@ -85,22 +153,15 @@ namespace RPyramide
 			3,2,4,
 
 			2,0,4
-		};
 
-		texCoords =
-		{
-			{1.0f, 0.0f},
-			{0.0f, 0.0f},
-			{0.0f, 0.0f},
-			{1.0f, 0.0f},
-			{0.5f, 1.0f},
 		};
+		indices.insert(indices.begin(), in, in + 6 * 3);
 	}
 }
 
 namespace RSphere
 {
-	void CreateSphere(std::vector<float3>& vertices, std::vector<float3>& normals, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	void CreateSphere(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
 	{
 		float x, y, z, xy;                              // vertex position
 		float nx, ny, nz, lengthInv = 1.0f / 1.0f;    // vertex normal
@@ -112,7 +173,7 @@ namespace RSphere
 
 		for (int i = 0; i <= 20; ++i)
 		{
-			stackAngle = M_PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
+			stackAngle = M_PI / 2 - i * stackStep;    // starting from pi/2 to -pi/2
 			xy = 1.0f * cosf(stackAngle);             // r * cos(u)
 			z = 1.0f * sinf(stackAngle);              // r * sin(u)
 
@@ -120,23 +181,27 @@ namespace RSphere
 			// the first and last vertices have same position and normal, but different tex coords
 			for (int j = 0; j <= 20; ++j)
 			{
+				Vertex vertex;
+
 				sectorAngle = j * sectorStep;           // starting from 0 to 2pi
 
 				// vertex position (x, y, z)
 				x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
 				y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
-				vertices.emplace_back(x, y, z);
+				vertex.position = { x, y, z };
 
 				// normalized vertex normal (nx, ny, nz)
 				nx = x * lengthInv;
 				ny = y * lengthInv;
 				nz = z * lengthInv;
-				normals.emplace_back(nx, ny, nz);
+				vertex.normal = { nx, ny, nz };
 
 				// vertex tex coord (s, t) range between [0, 1]
 				s = (float)j / 20;
 				t = (float)i / 20;
-				texCoords.emplace_back(s, t);
+				vertex.texCoords = { s, t };
+
+				vertices.push_back(vertex);
 			}
 		}
 
@@ -181,7 +246,7 @@ namespace RSphere
 
 namespace RCylinder
 {
-	void CreateCylinder(std::vector<float3>& vertices, std::vector<float3>& normals, std::vector<unsigned int>& indices, std::vector<float2>& texCoords)
+	void CreateCylinder(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
 	{
 		const float PI = 3.1415926f;
 		float sectorStep = 2 * PI / 50;
@@ -194,29 +259,32 @@ namespace RCylinder
 			unitVertices.emplace_back(cos(sectorAngle), sin(sectorAngle), 0); // x
 		}
 
-		vertices.reserve(204);
-		texCoords.reserve(204);
-		normals.reserve(204);
-		indices.reserve(600);
+		//vertices.reserve(204);
+		//indices.reserve(600);
+		//texCoords.reserve(204);
+		//normals.reserve(204);
 
 		for (int i = 0; i < 2; ++i)
 		{
 			float h = -2.0f / 2.0f + i * 2.0f;           // z value; -h/2 to h/2
-			float t = 1.0f - i;                              // vertical tex coord; 1 to 0
+			float t = 1.0f - i;                          // vertical tex coord; 1 to 0
 
 			for (int j = 0, k = 0; j <= 50; ++j, ++k)
 			{
+				Vertex vertex;
 				float ux = unitVertices[k].x;
 				float uy = unitVertices[k].y;
 				float uz = unitVertices[k].z;
 				// position vector
-				vertices.emplace_back(ux * 1.0f, uy * 1.0f, h);
+				vertex.position = { ux * 1.0f, uy * 1.0f, h };
 
 				// normal vector
-				normals.emplace_back(ux, uy, uz);
+				vertex.normal = { ux, uy, uz };
 
 				// texture coordinate
-				texCoords.emplace_back((float)j / 50, t);
+				vertex.texCoords = { (float)j / 50, t };
+
+				vertices.emplace_back(vertex);
 			}
 		}
 
@@ -230,26 +298,34 @@ namespace RCylinder
 			float nz = -1 + i * 2;                           // z value of normal; -1 to 1
 
 			// center point
-			vertices.emplace_back(0, 0, h);
-			normals.emplace_back(0, 0, nz);
-			texCoords.emplace_back(0.5f, 0.5f);
+			Vertex v;
+			v.position = { 0,0,h };
+			v.normal = { 0,0,nz };
+			v.texCoords = { 0.5f,0.5f };
+			vertices.emplace_back(v);
+			//vertices.emplace_back(0, 0, h);
+			//normals.emplace_back(0, 0, nz);
+			//texCoords.emplace_back(0.5f, 0.5f);
 
 			for (int j = 0, k = 0; j < 50; ++j, ++k)
 			{
+				Vertex vertex;
 				float ux = unitVertices[k].x;
 				float uy = unitVertices[k].y;
 				// position vector
-				vertices.emplace_back(ux * 1.0f, uy * 1.0f, h);
-
+				vertex.position = { ux * 1.0f, uy * 1.0f, h };
+				
 				// normal vector
-				normals.emplace_back(0, 0, nz);
+				vertex.normal = { 0, 0, nz };
 
 				// texture coordinate
-				texCoords.emplace_back(-ux * 0.5f + 0.5f, -uy * 0.5f + 0.5f);
+				vertex.texCoords = { -ux * 0.5f + 0.5f, -uy * 0.5f + 0.5f };
+
+				vertices.emplace_back(vertex);
 			}
 		}
 
-		int k1 = 0;                 // 1st vertex index at base
+		int k1 = 0;                // 1st vertex index at base
 		int k2 = 50 + 1;           // 1st vertex index at top
 
 		// indices for the side surface
