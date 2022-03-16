@@ -16,15 +16,14 @@
 #include "MonoManager.h"
 #include "AudioManager.h"
 
+//Scripting
+#include "NavAgentComponent.h"
+
 #include "ScriptComponent.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "AudioSourceComponent.h"
 #include "AnimationComponent.h"
-
-//Scripting
-#include "C_RigidBody.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include <stack>
 #include "Profiling.h"
@@ -43,19 +42,36 @@ bool Scene::Start()
 {
 	RG_PROFILING_FUNCTION("Starting Scene");
 
-	camera = CreateGameObject(nullptr);
-	camera->CreateComponent(ComponentType::CAMERA);
-	camera->CreateComponent(ComponentType::AUDIO_LISTENER);
-	camera->SetName("Camera");
-
+	//camera = CreateGameObject(nullptr);
+	//camera->CreateComponent(ComponentType::CAMERA);
+	//camera->SetName("Camera");
+	//camera->CreateComponent(ComponentType::AUDIO_LISTENER);
+	//camera->CreateComponent(ComponentType::AUDIO_SOURCE);
+	
+	//player = CreateGameObject(nullptr);
+	//player->CreateComponent(ComponentType::AUDIO_SOURCE);
+	//player->SetName("Player");
+	//player->tag = "Player";
+	
+	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
+	ResourceManager::GetInstance()->ImportAllResources();
+	//ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
+	
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 
-	// TODO: The player lines should leave as soon as we have scripting going.
-	player = CreateGameObject(nullptr);
-	player->CreateComponent(ComponentType::AUDIO_SOURCE);
-	player->SetName("Player");
-	player->tag = "Player";
+	//AkAuxSendValue aEnvs[1];
+	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 
+	//aEnvs[0].listenerID = camera->GetUUID();
+	//aEnvs[0].auxBusID = AK::SoundEngine::GetIDFromString(L"ReverbZone");
+	//aEnvs[0].fControlValue = 0.0f;
+	//
+	//if (AK::SoundEngine::SetGameObjectAuxSendValues(camera->GetUUID(), aEnvs, 1) != AK_Success)
+	//{
+	//	DEBUG_LOG("Couldnt set aux send values");
+	//}
+
+	ImportPrimitives();
 	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
@@ -119,7 +135,6 @@ bool Scene::Update(float dt)
 	///////////////////////
 	// Scripting
 	Scripting(dt);
-	
 
 	AudioManager::Get()->Render();
 
@@ -137,7 +152,7 @@ bool Scene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
-	qTree.DebugDraw();
+	if (drawQuad) qTree.DebugDraw();
 
 	std::stack<GameObject*> stack;
 
@@ -359,10 +374,6 @@ bool Scene::LoadScene(const char* name)
 				{
 					camera = child;
 				}
-				if (child->GetName() == std::string("Camera"))
-				{
-					camera = child;
-				}
 			}
 		}
 		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
@@ -526,90 +537,6 @@ void Scene::Scripting(float dt)
 	// TODO: Must delete this maybe
 	if (gameState == GameState::PLAYING)
 	{
-		// AUDIO
-		//if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
-		//{
-		//	player->GetComponent<AudioSourceComponent>()->PlayClip("footSteps");
-		//}
-		//else if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_UP || app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_UP)
-		//{
-		//	player->GetComponent<AudioSourceComponent>()->StopClip();
-		//}
-		//if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-		//{
-		//	player->GetComponent<AudioSourceComponent>()->PlayClip("Shot");
-		//}
-		//else if (app->input->GetKey(SDL_SCANCODE_R) == KeyState::KEY_DOWN)
-		//{
-		//	player->GetComponent<AudioSourceComponent>()->PlayClip("Reload");
-		//}
-
-		// ANIMATIONS
-		//if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT ||
-		//	app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT ||
-		//	app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT ||
-		//	app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
-		//{
-		//	player->GetComponent<AnimationComponent>()->Play("Walk"); //Walk
-		//	player->GetComponent<AnimationComponent>()->currAnim->loop = true;
-		//}
-		//else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-		//	player->GetComponent<AnimationComponent>()->Play("Shoot"); //Shoot
-
-		//ACTIONS
-		//btRigidBody* playerRB = player->GetComponent<RigidBodyComponent>()->GetBody();
-		//if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		//{
-		//	float force = 20.0f;
-		//	GameObject* s = Create3DObject(Object3D::CUBE, nullptr);
-		//	s->GetComponent<TransformComponent>()->SetPosition(player->GetOOB().CenterPoint());
-		//	s->GetComponent<TransformComponent>()->SetScale(float3(0.2f, 0.2f, 0.3f));
-		//	s->GetComponent<TransformComponent>()->UpdateTransform();
-		//
-		//	RigidBodyComponent* rigidBody;
-		//	s->CreateComponent(ComponentType::RIGID_BODY);
-		//	rigidBody = s->GetComponent<RigidBodyComponent>();
-		//	rigidBody->GetBody()->setIgnoreCollisionCheck(playerRB, true); // Rigid Body of Player
-		//	rigidBody->GetBody()->applyCentralImpulse(player->GetComponent<TransformComponent>()->GetForward() *force); // Player front normalized
-		//
-		//	app->physics->bullets.push_back(s);
-		//}
-		//
-		//float force = 1000.0f;
-		//float3 front(0, 0, 1);
-		//float3 right(1, 0, 0);
-		//
-		//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		//	SetVelocityPlayer(playerRB, right * force);
-		//if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		//	SetVelocityPlayer(playerRB, -right * force);
-		//if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		//	SetVelocityPlayer(playerRB, front * force);
-		//if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		//	SetVelocityPlayer(playerRB, -front * force);
-		//
-		//if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE &&
-		//	app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_IDLE &&
-		//	app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_IDLE &&
-		//	app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE)
-		//{
-		//	if (player->GetComponent<AnimationComponent>()->currAnim->state == "Walk")
-		//	{
-		//		player->GetComponent<AnimationComponent>()->currAnim->loop = false;
-		//		player->GetComponent<AnimationComponent>()->loopTime = 100.0f;
-		//	}
-		//	playerRB->clearForces();
-		//	playerRB->setLinearVelocity({0,0,0});
-		//}
+		player->GetComponent<NavAgentComponent>();
 	}
-}
-
-void Scene::SetVelocityPlayer(btRigidBody* playerRB, math::float3& vel)
-{
-	int velMax = 5;
-	playerRB->activate(true);
-	playerRB->applyCentralForce(vel);
-
-	if(playerRB->getLinearVelocity().norm() > velMax)
-		playerRB->setLinearVelocity(playerRB->getLinearVelocity().normalized() * velMax);
 }

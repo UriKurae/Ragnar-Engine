@@ -6,10 +6,6 @@ MoveGameObjectCommand::MoveGameObjectCommand(GameObject* go) : actor(go)
 {
 }
 
-MoveGameObjectCommand::MoveGameObjectCommand()
-{
-}
-
 void MoveGameObjectCommand::Execute()
 {
 	TransformComponent* tr = actor->GetComponent<TransformComponent>();

@@ -94,7 +94,7 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 
 	//OPTIONAL TODO: Drag'n'Drop for component reorganitation. Code example below.
 
-	/* {
+	/*{
 		ImGui::BulletText("Drag and drop to re-order");
 		static const char* names[6] = { "1. Adbul", "2. Alfonso", "3. Aline", "4. Amelie", "5. Anna", "6. Arthur" };
 		int move_from = -1, move_to = -1;
@@ -168,6 +168,7 @@ void InspectorMenu::DrawEditLists()
 void InspectorMenu::RecursiveSetStaticObjects(GameObject* obj, bool ret)
 {
 	obj->staticObj = ret;
+
 	for (int i = 0; i < obj->GetChilds().size(); i++)
 	{
 		RecursiveSetStaticObjects(obj->GetChilds()[i], ret);

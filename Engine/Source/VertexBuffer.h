@@ -1,6 +1,17 @@
 #pragma once
 #include "BufferLayout.h"
-#include "Vertex.h"
+#include "Math/float3.h"
+#include "Math/float2.h"
+
+struct Vertex
+{
+	float3 position;
+	float3 normal;
+	float2 texCoords;
+
+	int boneIDs[4] = { -1, -1, -1, -1 };
+	float weights[4];
+};
 
 class VertexBuffer
 {
@@ -16,7 +27,6 @@ public:
 	void Unbind() const;
 
 	inline unsigned int GetCount() const { return count; }
-
 	inline const BufferLayout& GetLayout() const { return layout; }
 
 	// Make sure to do this BEFORE adding the VertexBuffer into the VertexArray.

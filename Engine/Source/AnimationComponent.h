@@ -1,11 +1,13 @@
 #pragma once
 #include "Component.h"
-#include "Animation.h"
 
 #include <map>
-#include <memory>
+
 #include <queue>
 
+class Bone;
+class Animation;
+struct HierarchyData;
 
 struct AnimState
 {
@@ -23,7 +25,7 @@ public:
 	~AnimationComponent();
 
 	void OnEditor() override;
-
+	void AnimationInfo();
 	bool Update(float dt) override;
 
 	void CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform);
@@ -40,10 +42,7 @@ public:
 	
 	void GetAnimations();
 
-	std::vector<float4x4> GetFinalBoneMatrices()
-	{
-		return finalBoneMatrices;
-	}
+	inline std::vector<float4x4> GetFinalBoneMatrices() { return finalBoneMatrices; };
 
 public:
 	bool showAnimMenu = false;
@@ -57,11 +56,10 @@ public:
 	float loopTime;
 	float deltaTime;
 
-	std::vector<float4x4> finalBoneMatrices;
-
 	AnimState* lastAnim;
 	AnimState* currAnim;
-	std::vector<AnimState> animations;
 
+	std::vector<float4x4> finalBoneMatrices;
+	std::vector<AnimState> animations;
 	std::queue<AnimState*> animQueue;
 };

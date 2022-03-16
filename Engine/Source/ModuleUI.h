@@ -38,6 +38,7 @@ class MyPlane
 {
 public:
 	MyPlane(float3 pos, float3 sca);
+	~MyPlane();
     void DrawPlane2D(Texture* texture);
 	std::vector<float3> getVertex() {
 	}
@@ -91,7 +92,7 @@ public:
     void DeleteUIGameObjects();
 public:
     std::map<char, Character> characters;
-    Shadert* shader{ nullptr }; //TODO:Clean
+    Shadert* shader = nullptr; //TODO:Clean
     uint VAO = 0, VBO = 0;
 	LineSegment myRay;
 	float3 corners[8];

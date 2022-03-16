@@ -2,11 +2,10 @@
 
 #include "ModuleSceneManager.h"
 #include "Scene.h"
+#include "MonoManager.h"
 
-#include <mono/metadata/class.h>
-#include <mono/metadata/object.h>
-#include <mono/metadata/object-forward.h>
 #include <mono/metadata/debug-helpers.h>
+#include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
 ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
@@ -43,18 +42,29 @@ ScriptComponent::~ScriptComponent()
 	fields.clear();
 }
 
-
 bool ScriptComponent::Update(float dt)
 {
-	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::NOT_PLAYING || app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE || updateMethod == nullptr)
+	static bool firstUpdate = true;
+	if (app->sceneManager->GetCurrentScene()->GetGameState() != GameState::PLAYING 
+		|| updateMethod == nullptr || startMethod == nullptr)
+	{
+		firstUpdate = true;
 		return false;
+	}
 
-	ScriptComponent::runningScript = this; // I really think this is the peak of stupid code, but hey, it works, slow as hell but works.
+	MonoObject* startExec = nullptr;
+	if (firstUpdate)
+	{
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
+		firstUpdate = false;
+	}
+
+	ScriptComponent::runningScript = this;
 
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
 
-	if (exec != nullptr)
+	if (exec != nullptr || startExec != nullptr)
 	{
 		if (strcmp(mono_class_get_name(mono_object_get_class(exec)), "NullReferenceException") == 0)
 		{
@@ -139,7 +149,6 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 			ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "The class %s can't be serialized yet", mono_type_get_name(mono_field_get_type(field.field)));
 			break;
 		}
-
 		
 		ImGui::Button((field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
 		if (ImGui::BeginDragDropTarget())
@@ -205,7 +214,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				//	break;
 				//}
 				//MonoClass* cls = mono_object(arrayElementGO);
-				GameObject* cpp_obj = app->moduleMono->GameObject_From_CSGO(arrayElementGO);
+				GameObject* cpp_obj = app->moduleMono->GameObjectFromCSGO(arrayElementGO);
 				ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), (cpp_obj == nullptr) ? "None" : cpp_obj->name.c_str());
 				if (ImGui::BeginDragDropTarget())
 				{
@@ -273,7 +282,6 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 
 void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 {
-
 	const char* fieldName = mono_field_get_name(field.field);
 	ImGui::PushID(fieldName);
 
@@ -286,11 +294,8 @@ void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 }
 //#endif
 
-
 bool ScriptComponent::OnLoad(JsonParsing& nObj)
 {
-	Component::OnLoad(nObj);
-
 	SerializedField* _field = nullptr;
 	for (int i = 0; i < fields.size(); i++) //TODO IMPORTANT ASK: There must be a better way to do this... too much use of switches with this stuff, look at MONOMANAGER
 	{
@@ -402,7 +407,6 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	methods.clear();
 	fields.clear();
 
-
 	MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, scriptName);
 
 	if (klass == nullptr)
@@ -421,10 +425,13 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	MonoClass* goClass = mono_object_get_class(mono_gchandle_get_target(noGCobject));
 	uintptr_t ptr = reinterpret_cast<uintptr_t>(this);
 	mono_field_set_value(mono_gchandle_get_target(noGCobject), mono_class_get_field_from_name(goClass, "pointer"), &ptr);
-	//std::string methodName = scriptName + std::string(":Update");
-	MonoMethodDesc* mdesc = mono_method_desc_new(":Update", false);
+
+	MonoMethodDesc* mdesc = mono_method_desc_new(":Start", false);
+	startMethod = mono_method_desc_search_in_class(mdesc, klass);
+	mono_method_desc_free(mdesc);
+
+	mdesc = mono_method_desc_new(":Update", false);
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
-	//updateMethod = mono_method_desc_search_in_image(mdesc, app->moduleMono->image);
 	mono_method_desc_free(mdesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);

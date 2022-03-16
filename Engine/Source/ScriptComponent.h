@@ -1,18 +1,16 @@
 #pragma once
 #include "Component.h"
-#include<vector>
-#include<string>
-
-#include "MonoManager.h"
-#include <mono/metadata/object-forward.h>
+#include <vector>
+#include <string>
 
 class GameObject;
 typedef struct _MonoClassField MonoClassField;
+typedef struct _MonoMethod MonoMethod;
+struct SerializedField;
 
 class ScriptComponent : public Component
 {
 public:
-
 	ScriptComponent(GameObject* owner, const char* scriptName);
 	virtual ~ScriptComponent();
 
@@ -38,6 +36,7 @@ public:
 	std::vector<SerializedField> fields;
 
 	MonoMethod* updateMethod;
+	MonoMethod* startMethod;
 	uint32_t noGCobject;
 	std::string name = "";
 

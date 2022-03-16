@@ -34,12 +34,13 @@ RigidBodyComponent::~RigidBodyComponent()
 void RigidBodyComponent::IgnoreCollision()
 {
 	RigidBodyComponent* comp = nullptr;
+	Component* component = nullptr;
 	for (int i = 0; i < owner->GetComponents().size(); i++)
 	{
-		if (owner->GetComponents().at(i)->type == ComponentType::RIGID_BODY &&
-			owner->GetComponents().at(i) != this)
+		component = owner->GetComponents().at(i);
+		if (component->type == ComponentType::RIGID_BODY &&	component != this)
 		{
-			comp = static_cast<RigidBodyComponent*>(owner->GetComponents().at(i));
+			comp = static_cast<RigidBodyComponent*>(component);
 
 			body->setIgnoreCollisionCheck(comp->body, true);
 			comp->body->setIgnoreCollisionCheck(body, true);
@@ -110,10 +111,20 @@ bool RigidBodyComponent::Update(float dt)
 {
 	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 	{
-		if (body->getActivationState() == 1 || body->getActivationState() == 3)
+		TransformComponent* trans = owner->GetComponent<TransformComponent>();
+		if (trigger)
 		{
-			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), owner->GetComponent<TransformComponent>()->GetScale());
-			owner->GetComponent<TransformComponent>()->SetTransform(CM2);
+			body->activate(true);
+			btTransform t;
+			t.setBasis(float3x3::FromQuat(trans->GetRotation()));
+			t.setOrigin(trans->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
+
+			body->setWorldTransform(t);
+		}
+		else if (body->getActivationState() == 1 || body->getActivationState() == 3)
+		{
+			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
+			trans->SetTransform(CM2);
 		}
 	}
 
@@ -125,8 +136,6 @@ void RigidBodyComponent::UpdateCollision()
 {
 	if (app->sceneManager->GetCurrentScene()->GetGameState() != GameState::PLAYING)
 	{
-		OBB obb = owner->GetOOB();
-
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
 		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
@@ -193,7 +202,11 @@ void RigidBodyComponent::OnEditor()
 		{
 			if (!useGravity && !isKinematic)
 				SetAsStatic();
-			else CreateBody();
+			else 
+			{
+				if (mass == 0) mass = 1.0f;
+				CreateBody();
+			}
 		}
 		if (ImGui::Checkbox("Is Kinematic", &isKinematic))
 		{
@@ -205,7 +218,19 @@ void RigidBodyComponent::OnEditor()
 			}
 			else CreateBody();
 		}
-
+		if (ImGui::Checkbox("Is Trigger", &trigger))
+		{
+			if (trigger)
+			{
+				SetAsTrigger();
+			}
+			else
+			{
+				//app->physics->triggers.remove(this);
+				CreateBody();
+			}
+		}
+		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();
 
 		ComponentOptions(this);
@@ -398,7 +423,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(box.size);
 		break;
 	case SPHERE_SHAPE_PROXYTYPE:
-		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
+		SetSphereRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
@@ -421,6 +446,12 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		break;
 	}
 	editMesh = false;
+}
+
+void RigidBodyComponent::SetSphereRadius(float sphereRadius)
+{
+	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
+	sphere.radius = sphereRadius;
 }
 
 float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
@@ -500,6 +531,12 @@ void RigidBodyComponent::SetAsStatic()
 	SetCollisionType(collisionType);
 }
 
+void RigidBodyComponent::SetAsTrigger()
+{
+	body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	app->physics->triggers.push_back(this);
+}
+
 bool RigidBodyComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
@@ -542,6 +579,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	//Collision physics
 	useGravity = node.GetJsonBool("Gravity");
 	isKinematic = node.GetJsonBool("Kinematic");
+	trigger = node.GetJsonBool("Trigger");
 	mass = node.GetJsonNumber("Mass");
 	friction = node.GetJsonNumber("Friction");
 	restitution = node.GetJsonNumber("Restitution");
@@ -572,6 +610,9 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
 			body->setActivationState(DISABLE_DEACTIVATION);
 	}
+	if(trigger) 
+		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+
 	SetMass(mass);
 	SetPhysicsProperties();
 
@@ -620,6 +661,7 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	//Collision physics
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Gravity", useGravity);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Kinematic", isKinematic);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Trigger", trigger);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Mass", mass);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Friction", friction);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Restitution", restitution);

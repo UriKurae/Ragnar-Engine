@@ -1,11 +1,11 @@
 #include "PrefabManager.h"
-
 #include "Application.h"
-#include "FileSystem.h"
 #include "Globals.h"
 
 #include "ModuleSceneManager.h"
+
 #include "Scene.h"
+#include "FileSystem.h"
 
 #include <queue>
 
@@ -225,7 +225,19 @@ void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 	std::vector<GameObject*> listParents;
 	std::vector<uint> idToDeleteScene;
 	std::vector<uint> idToDeletePrefab;
+	JsonParsing prefabFile = JsonParsing();
 
+	FillListGoParents(que, listGo, idToDeleteScene, listParents);
+	AddObjectsFromPrefabs(prefabFile, gameObject, idToDeletePrefab, listGo, listParents);
+	RemoveObjectFromPrefabs(idToDeletePrefab, idToDeleteScene, listGo);
+
+	idToDeleteScene.clear();
+	idToDeletePrefab.clear();
+	listGo.clear();
+}
+
+void PrefabManager::FillListGoParents(std::queue<GameObject*>& que, std::vector<GameObject*>& listGo, std::vector<uint>& idToDeleteScene, std::vector<GameObject*>& listParents)
+{
 	while (!que.empty())
 	{
 		GameObject* itGo = que.front();
@@ -262,9 +274,10 @@ void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 			}
 		}
 	}
-
-	JsonParsing prefabFile = JsonParsing();
-
+}
+// Add objects to prefabs if in the reference have been added 
+void PrefabManager::AddObjectsFromPrefabs(JsonParsing& prefabFile, GameObject* gameObject, std::vector<uint>& idToDeletePrefab, std::vector<GameObject*>& listGo, std::vector<GameObject*>& listParents)
+{
 	if (prefabFile.ParseFile(gameObject->prefabPath.c_str()) > 0)
 	{
 		JSON_Array* jsonArray = prefabFile.GetJsonArray(prefabFile.ValueToObject(prefabFile.GetRootValue()), "Game Objects");
@@ -323,7 +336,10 @@ void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 	{
 		DEBUG_LOG("Prefab couldn't be updated");
 	}
-
+}
+// Remove objects to prefabs if in the reference have been removed 
+void PrefabManager::RemoveObjectFromPrefabs(std::vector<uint>& idToDeletePrefab, std::vector<uint>& idToDeleteScene, std::vector<GameObject*>& listGo)
+{
 	if (idToDeletePrefab.size() != idToDeleteScene.size())
 	{
 		std::vector<uint> toDelete;
@@ -368,8 +384,4 @@ void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 
 		toDelete.clear();
 	}
-
-	idToDeleteScene.clear();
-	idToDeletePrefab.clear();
-	listGo.clear();
 }

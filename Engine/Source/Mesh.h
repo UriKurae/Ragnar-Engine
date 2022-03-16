@@ -1,17 +1,14 @@
 #pragma once
 #include "Resource.h"
+#include "VertexBuffer.h"
 
 #include <map>
-#include <vector>
 
 #include "Bone.h"
 #include "Shader.h"
-#include "Vertex.h"
 
 class IndexBuffer;
-class VertexBuffer;
 class VertexArray;
-
 struct ModelParameters;
 
 class Mesh : public Resource

@@ -7,7 +7,7 @@ namespace RagnarEngine
 {
     public enum ComponentType
     {
-        NONE = 0,
+        NONE = -1,
         TRANSFORM,
         MESH_RENDERER,
         MATERIAL,
@@ -30,6 +30,7 @@ namespace RagnarEngine
         public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType>
         {
             { typeof(Transform), ComponentType.TRANSFORM },
+            { typeof(MaterialComponent), ComponentType.MATERIAL},
             { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
             { typeof(Rigidbody), ComponentType.RIGID_BODY},
             { typeof(Animation), ComponentType.ANIMATION},
@@ -40,6 +41,12 @@ namespace RagnarEngine
         public RagnarComponent()
         {
             this.type = ComponentType.SCRIPT;
+        }
+
+        public RagnarComponent(UIntPtr ptr)
+        {
+            pointer = ptr;
+            //this.type = ComponentType.SCRIPT;
         }
 
         public extern GameObject gameObject

@@ -1,25 +1,27 @@
+#include "ImageComponent.h"
 #include "Application.h"
-#include"GameObject.h"
+#include "Globals.h"
+
 #include "ModuleInput.h"
 #include"ModuleUI.h"
-#include "ImageComponent.h"
+
+#include"GameObject.h"
 #include "MaterialComponent.h"
 
 ImageComponent::ImageComponent(GameObject* own)
 {
-	//name = "Image Component";
 	type = ComponentType::UI_IMAGE;
 	this->text = "Image Component";
-	owner = own;
-	state = State::NORMAL;
-	actualColor = color;
-	/*color = White;
-	UIid = id;*/
+	own->name = "Image";
+
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = owner;
 }
 
 ImageComponent::~ImageComponent()
 {
 	text.clear();
+	RELEASE(planeToDraw);
 }
 
 bool ImageComponent::Update(float dt)
@@ -29,12 +31,6 @@ bool ImageComponent::Update(float dt)
 
 void ImageComponent::Draw(CameraComponent* gameCam)
 {
-	/*MyPlane* planeToDraw = nullptr;
-	int auxId = owner->id;
-
-	for (int i = 0; i < App->editor->planes.size(); i++)
-		if (App->editor->planes[i]->id == auxId) planeToDraw = App->editor->planes[i];*/
-
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
@@ -49,24 +45,12 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 
 void ImageComponent::OnEditor()
 {
-	// Manage if colors are being edited or not
-	/*static bool normalEditable = false;
-
-	ImGui::Checkbox("Active", &active);
-
-	ImGui::Text("Image Color"); ImGui::SameLine();
-	if (ImGui::ColorButton("Image Color", ImVec4(color.r, color.g, color.b, color.a)))
-		normalEditable = !normalEditable;
-
-	if (normalEditable)
-	{
-		ImGui::ColorPicker3("Image Color", &color);
-	}*/
 }
 bool ImageComponent::OnLoad(JsonParsing& node)
 {
 	/*if(planeToDraw!=nullptr)
 		delete planeToDraw;*/
+	RELEASE(planeToDraw);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = owner;
 	owner->isUI = true;

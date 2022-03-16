@@ -10,7 +10,7 @@ namespace Style
 
 	void SetStyle(int numStyle)
 	{
-		if (numStyle == 0)
+		if (numStyle == 0) // Deep Dark
 		{
 			ImVec4* colors = ImGui::GetStyle().Colors;
 			colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
@@ -93,7 +93,7 @@ namespace Style
 			style.LogSliderDeadzone = 4;
 			style.TabRounding = 4;
 		}
-		else if (numStyle == 1)
+		else if (numStyle == 1) // Red & Dark
 		{
 			ImVec4* colors = ImGui::GetStyle().Colors;
 			colors[ImGuiCol_Text] = ImVec4(0.75f, 0.75f, 0.75f, 1.00f);
@@ -152,7 +152,7 @@ namespace Style
 			colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 			colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
 		}
-		else if (numStyle == 2)
+		else if (numStyle == 2) // Green & Blue
 		{
 			ImVec4* colors = ImGui::GetStyle().Colors;
 			colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
@@ -211,7 +211,7 @@ namespace Style
 			colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 			colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
 		}
-		else if (numStyle == 3)
+		else if (numStyle == 3) // Classic Dark
 		{
 			ImGuiStyle& style = ImGui::GetStyle();
 			style.Colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
@@ -266,7 +266,7 @@ namespace Style
 			style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
 			style.GrabRounding = style.FrameRounding = 2.3f;
 		}
-		else if (numStyle == 4)
+		else if (numStyle == 4) // Visual Studio
 		{
 			auto& style = ImGui::GetStyle();
 			ImVec4* colors = style.Colors;
@@ -339,7 +339,7 @@ namespace Style
 			style.ScrollbarRounding = 0.0f;
 			style.TabRounding = 0.0f;
 		}
-		else if (numStyle == 5)
+		else if (numStyle == 5) // Dark Visual
 		{
 			ImVec4* colors = ImGui::GetStyle().Colors;
 			colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
@@ -423,7 +423,7 @@ namespace Style
 			style.TabRounding = 4;
 
 		}
-		else if (numStyle == 6)
+		else if (numStyle == 6) // Gold & Black
 		{
 			ImGuiStyle& style = ImGui::GetStyle();
 			ImVec4* colors = style.Colors;
@@ -501,7 +501,7 @@ namespace Style
 			style.TabRounding = 4;
 
 		}
-		else if (numStyle == 7)
+		else if (numStyle == 7) // Smooth Dark
 		{ 
 			//imGuiIO.Fonts->AddFontFromFileTTF("../data/Fonts/Ruda-Bold.ttf", 15.0f, &config);
 			ImGui::GetStyle().FrameRounding = 4.0f;

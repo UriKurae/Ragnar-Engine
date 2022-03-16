@@ -14,6 +14,7 @@ typedef struct _MonoAssembly MonoAssembly;
 typedef struct _MonoClassField MonoClassField;
 
 class GameObject;
+class Component;
 class ScriptComponent;
 
 #define USER_SCRIPTS_NAMESPACE ""
@@ -48,10 +49,6 @@ public:
 
 	bool Init(JsonParsing& node) override;
 
-//#ifndef STANDALONE
-//	void OnGUI() override;
-//#endif // !STANDALONE
-
 	bool CleanUp() override;
 
 	static Quat UnboxQuat(MonoObject* _obj);
@@ -65,12 +62,12 @@ public:
 	void AddScriptToSLN(const char* scriptLocalPath);
 	void RemoveScriptFromSLN(const char* scriptLocalPath);
 
-	GameObject* GameObject_From_CSGO(MonoObject* goObj);
-	GameObject* GameObject_From_CSCOMP(MonoObject* goComponent);
-
+	GameObject* GameObjectFromCSGO(MonoObject* goObj);
+	GameObject* GameObjectFromCSComponent(MonoObject* goComponent);
 	MonoObject* QuatToCS(Quat& inVec) const;
 	MonoObject* Float3ToCS(float3& inVec) const;
 	MonoObject* GoToCSGO(GameObject* inGo) const;
+	MonoObject* ComponentToCS(Component* comp) const;
 
 	void UpdateListScripts();
 

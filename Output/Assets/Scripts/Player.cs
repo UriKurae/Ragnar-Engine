@@ -1,74 +1,129 @@
 using System;
+
 using RagnarEngine;
 
 public class Player : RagnarComponent
 {
 	public int velocity = 5;
 	public GameObject target = null;
-	
-	public void Update()
+    public float force = 100;
+    public float rockSoundRadius = 4f;
+    public bool canThrowKnife = true;
+
+    Rigidbody rb;
+    MaterialComponent materialComponent;
+
+    public void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        materialComponent = gameObject.GetComponent<MaterialComponent>();
+    }
+
+    public void Update()
 	{
-		if (Input.GetKey(REKeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.A) == KeyState.KEY_DOWN
-			|| Input.GetKey(REKeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(REKeyCode.D) == KeyState.KEY_DOWN)
+        ///////// SOUNDS /////////
+        // Movement Sound
+        if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
+			|| Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
 			gameObject.GetComponent<Animation>().PlayAnimation("Walk");
 		}
 
-		if (Input.GetKey(REKeyCode.R) == KeyState.KEY_DOWN)
+        // Reload Sound
+		if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("Reload");
 		}
 
-		if (Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
+        // Shoot sound
+		if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
 		{
 			gameObject.GetComponent<AudioSource>().PlayClip("Shot");
 		}
+        //////////////////////////
 
-		if (Input.GetKey(REKeyCode.D) == KeyState.KEY_UP || Input.GetKey(REKeyCode.A) == KeyState.KEY_UP
-			|| Input.GetKey(REKeyCode.W) == KeyState.KEY_UP || Input.GetKey(REKeyCode.S) == KeyState.KEY_UP)
+        ///////// MOVEMENT /////////
+        // Idle
+        if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
+			|| Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
 		{
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
 			gameObject.GetComponent<AudioSource>().StopCurrentClip();
-		}
 
+            if (rb.linearVelocity != Vector3.zero)
+                rb.linearVelocity = new Vector3(0, 0, 0);
 
-        Transform tr = gameObject.GetComponent<Transform>();
-        //Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        if (Input.GetKey(REKeyCode.D) == KeyState.KEY_REPEAT)
+            if (rb.totalForce != Vector3.zero)
+                rb.ClearForces();
+        }
+        // WASD Movement
+        if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x - velocity * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
-            //Vector3 f = new Vector3(10000 * Time.deltaTime, 0, 0);
-            //rb.ApplyCentralForce(f);
+            Vector3 f = new Vector3(0, 0, 1000);
+            rb.ApplyCentralForce(f);
+        }
+        else if (Input.GetKey(KeyCode.A) == KeyState.KEY_REPEAT)
+        {
+            Vector3 f = new Vector3(1000, 0, 0);
+            rb.ApplyCentralForce(f);
+        }
+        else if (Input.GetKey(KeyCode.S) == KeyState.KEY_REPEAT)
+        {
+            Vector3 f = new Vector3(0, 0, -1000);
+            rb.ApplyCentralForce(f);
+        }
+        else if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
+        {
+            Vector3 f = new Vector3(-1000, 0, 0);
+            rb.ApplyCentralForce(f);
+        }
+        ////////////////////////////
+
+        ///////// ABILITIES /////////
+        // Rock Throw
+        if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
+        {
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 1;
+            GameObject bullet = InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, pos);
+            bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
+
+            Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
+            bulletRb.IgnoreCollision(gameObject, true);
+            Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
+            bulletRb.ApplyCentralForce(vectorDir.normalized * force);
+
+            // Falta if(OnCollision(bullet, floor))
+            GameObject soundArea = InternalCalls.CreateGameObject("SoundArea", bullet.transform.globalPosition, bullet.transform.globalRotation);
+            Rigidbody soundRb = soundArea.CreateComponent<Rigidbody>();
+            soundRb.IgnoreCollision(gameObject, true);
+            CreateSphereTrigger(soundRb, rockSoundRadius);
         }
 
-        else if (Input.GetKey(REKeyCode.A) == KeyState.KEY_REPEAT)
+        // Knife Throw
+        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN && canThrowKnife)
         {
-            tr.localPosition = new Vector3(tr.localPosition.x + velocity * Time.deltaTime, tr.localPosition.y, tr.localPosition.z);
-            //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            canThrowKnife = false;
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 1;
+            GameObject bullet = InternalCalls.Create3DObject("Knife", (int)PrimitiveType.CUBE, pos);
+            bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
+
+            Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
+            bulletRb.IgnoreCollision(gameObject, true);
+            bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);
         }
-
-        else if (Input.GetKey(REKeyCode.W) == KeyState.KEY_REPEAT)
-        {
-            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z + velocity * Time.deltaTime);
-            //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
-        }
-
-        else if (Input.GetKey(REKeyCode.S) == KeyState.KEY_REPEAT)
-        {
-            tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, tr.localPosition.z - velocity * Time.deltaTime);
-            //gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
-        }
-
-        if (Input.GetKey(REKeyCode.SPACE) == KeyState.KEY_DOWN)
-        {
-            InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, Vector3.zero, Quaternion.identity);
-            AudioSource audio = gameObject.GetComponent<AudioSource>();
-            audio.PlayClip("Shot");
-        }
-
-
-
+        /////////////////////////////
     }
 
+    // With this method we create an spherical Trigger.
+    private static void CreateSphereTrigger(Rigidbody rb, float radius)
+    {
+        rb.SetCollisionType(CollisionType.SPHERE);
+        rb.SetAsStatic();
+        rb.SetAsTrigger();
+        rb.SetSphereRadius(radius);
+    }
 }
+

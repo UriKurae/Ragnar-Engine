@@ -13,6 +13,7 @@ class ModuleEditor;
 class FileSystem;
 class MonoManager;
 class Physics3D;
+class ModuleNavMesh;
 class ModuleUI;
 
 #define CONFIG_FILENAME	"config.json"
@@ -65,6 +66,7 @@ public:
 	FileSystem* fs = nullptr;
 	MonoManager* moduleMono = nullptr;
 	ModuleUI* userInterface = nullptr;
+	ModuleNavMesh* navMesh = nullptr;
 
 	JsonParsing jsonFile;
 

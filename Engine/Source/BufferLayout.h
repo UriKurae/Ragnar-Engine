@@ -12,7 +12,6 @@ struct BufferElement
 	uint32_t offset;
 	bool normalized;
 
-	BufferElement() {}
 	BufferElement(ShaderDataType type, const std::string& name, bool normalized = false) : name(name), type(type), size(GetShaderDataTypeSize(type)), offset(0), normalized(normalized) {}
 
 	uint32_t GetComponentCount() const
@@ -58,6 +57,5 @@ public:
 
 private:
 	std::vector<BufferElement> bufferElements;
-
 	uint32_t stride = 0; // Distance to the next vertex
 };

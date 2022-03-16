@@ -1,14 +1,16 @@
-#include "Application.h"
-#include "SDL.h"
-#include "ModuleInput.h"
 #include "SliderComponent.h"
-#include "ModuleCamera3D.h"
-#include "CameraComponent.h"
-#include "MaterialComponent.h"
-#include "glew/include/GL/glew.h"
+#include "Application.h"
+#include "Globals.h"
+
+#include "ModuleInput.h"
 #include "ModuleUI.h"
 #include "ModuleEditor.h"
+#include "ModuleCamera3D.h"
+
+#include "CameraComponent.h"
+#include "MaterialComponent.h"
 #include "GameView.h"
+
 SliderComponent::SliderComponent(GameObject* own)
 {
 	//name = "Slider Component";
@@ -20,7 +22,7 @@ SliderComponent::SliderComponent(GameObject* own)
 	state = State::NORMAL;
 	barProgres = 0.0f;
 	completed = false;
-	owner = own;
+	own->name = "Slider";
 	actualColor = normalColor;
 	//thePlane = App->editor->planes[App->editor->planes.size() - 1];
 	sliderText.setText("Slider", 5, 5, 0.5, { 255,255,255 });
@@ -28,7 +30,7 @@ SliderComponent::SliderComponent(GameObject* own)
 
 SliderComponent::~SliderComponent()
 {
-	
+	RELEASE(thePlane);
 }
 
 bool SliderComponent::Update(float dt)
@@ -86,8 +88,8 @@ bool SliderComponent::Update(float dt)
 
 
 		ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
-		float posXMin = ((viewport.z / 2) + (transform2D->position.x)) - (transform2D->buttonWidth / 2);
-		float posXMax = ((viewport.z / 2) + (transform2D->position.x)) + (transform2D->buttonWidth / 2);
+		float posXMin = ((viewport.z / 2) + (transform2D->GetPosition().x)) - (transform2D->GetButtonWidth() / 2);
+		float posXMax = ((viewport.z / 2) + (transform2D->GetPosition().x)) + (transform2D->GetButtonWidth() / 2);
 
 		if (fMousePos.x > posXMin && fMousePos.x < posXMax)
 		{
@@ -248,15 +250,14 @@ void SliderComponent::OnEditor()
 		ImGui::DragFloat("Font Size", &sliderText.Scale, 0.1, 0, 10);
 		sliderText.setOnlyText(text);
 
-	}
-	
+		ComponentOptions(this);
+		ImGui::Separator();
+	}	
 }
 
 float2 SliderComponent::GetParentPosition()
 {
-	ComponentTransform2D* transform2D = gen->GetComponent<ComponentTransform2D>();
-	float3 position = transform2D->position;
+	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
+	float3 position = transform2D->GetPosition();
 	return { position.x - (strlen(text) * 12 * sliderText.Scale), position.y - 5 };
-
-	
 }

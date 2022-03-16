@@ -22,15 +22,13 @@
 #include <ctype.h>
 #include <string.h>
 #include <algorithm>
+
 #include "Recast/Recast.h"
-#include "InputGeom.h"
-#include "ChunkyTriMesh.h"
 #include "DebugUtils/DebugDraw.h"
 #include "DebugUtils/RecastDebugDraw.h"
 #include "Detour/DetourNavMesh.h"
-#include "Math/float4x4.h"
-#include "ModuleRenderer3D.h"
 
+#include "InputGeom.h"
 #include "Application.h"
 #include "Mesh.h"
 #include "Globals.h"

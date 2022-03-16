@@ -1,17 +1,17 @@
+#include "Animation.h"
 #include "AnimationComponent.h"
 #include "Application.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 
-#include "GameObject.h"
-#include "MeshComponent.h"
+#include "ModuleScene.h"
 
+#include "MeshComponent.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
 
-#include "MathGeoLib/include/MathGeoLib.h"
-
+#include "Math/TransformOps.h"
 #include "Imgui/imgui_stdlib.h"
 
 AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(0.0f)
@@ -134,33 +134,37 @@ void AnimationComponent::OnEditor()
 		}
 
 		ImGui::DragFloat("Interp. Velocity", &interpolatingVel, 0.5f, 1.0f);
-
 		ImGui::Separator();
 
-		if (currAnim && currAnim->anim)
-		{
-			ImGui::Text("Path: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", currAnim->anim->GetAssetsPath().c_str());
-			ImGui::Text("Ticks: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", currAnim->anim->GetTicks());
-			ImGui::Text("Ticks Per Second: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", currAnim->anim->GetTicksPerSecond());
-			ImGui::Text("Duration: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f s", currAnim->anim->GetDuration());
-			ImGui::Text("Bones Attached: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", currAnim->anim->bones.size());
-		}
-		else
-		{
-			ImGui::Text("There's is no current animation");
-		}
+		AnimationInfo();
 	}
 	ImGui::PopID();
+}
+
+void AnimationComponent::AnimationInfo()
+{
+	if (currAnim && currAnim->anim)
+	{
+		ImGui::Text("Path: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", currAnim->anim->GetAssetsPath().c_str());
+		ImGui::Text("Ticks: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", currAnim->anim->GetTicks());
+		ImGui::Text("Ticks Per Second: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f", currAnim->anim->GetTicksPerSecond());
+		ImGui::Text("Duration: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%.0f s", currAnim->anim->GetDuration());
+		ImGui::Text("Bones Attached: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d bones", currAnim->anim->bones.size());
+	}
+	else
+	{
+		ImGui::Text("There's is no current animation");
+	}
 }
 
 bool AnimationComponent::Update(float dt)

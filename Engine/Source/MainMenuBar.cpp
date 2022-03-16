@@ -10,6 +10,7 @@
 #include "ModuleEditor.h"
 #include "ModuleCamera3D.h"
 #include "Physics3D.h"
+#include "ModuleUI.h"
 
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
@@ -19,6 +20,7 @@
 #include "ContentBrowserMenu.h"
 #include "TextEditorMenu.h"
 #include "FogWarMenu.h"
+#include "NavigatorMenu.h"
 
 #include "TransformComponent.h"
 #include "LightComponent.h"
@@ -27,7 +29,6 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "SliderComponent.h"
-#include "Transform2DComponent.h"
 
 #include "ResourceManager.h"
 #include "AudioManager.h"
@@ -56,6 +57,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new ContentBrowserMenu());
 	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
+	menus.emplace_back(new NavigatorMenu());
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
@@ -212,6 +214,9 @@ bool MainMenuBar::Update(float dt)
 			{
 				app->renderer3D->SetWireMode();
 			}
+			if (ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh())) {}
+			if (ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid())) {}
+			if (ImGui::MenuItem("Show Quad Tree", NULL, app->scene->GetDrawQuad())) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::IsItemHovered())
@@ -266,11 +271,9 @@ bool MainMenuBar::Update(float dt)
 				if (ImGui::MenuItem("UI Button"))
 				{
 					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					object->SetName("Button");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 
 					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
-					button->gen = object;
 					object->CreateComponent(ComponentType::MATERIAL);
 					app->userInterface->UIGameObjects.push_back(object);
 					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
@@ -280,10 +283,9 @@ bool MainMenuBar::Update(float dt)
 				else if (ImGui::MenuItem("UI Slider"))
 				{				
 					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					object->SetName("Slider");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+
 					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
-					button->gen = object;
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					app->userInterface->UIGameObjects.push_back(object);
 					button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
@@ -293,14 +295,13 @@ bool MainMenuBar::Update(float dt)
 				else if (ImGui::MenuItem("UI Check Box"))
 				{
 					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					object->SetName("CheckBox");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+
 					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
-					button->gen = object;
-					button->selectedMaterial = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-					button->noSelectedMaterial = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					button->SetSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
+					button->SetNoSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
 					//material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-					button->actual = button->noSelectedMaterial;
+					button->SetActual(button->GetNoSelectedMaterial());
 					app->userInterface->UIGameObjects.push_back(object);
 					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 					button->planeToDraw->own = object;
@@ -309,10 +310,9 @@ bool MainMenuBar::Update(float dt)
 				else if (ImGui::MenuItem("UI Image"))
 				{
 					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					object->SetName("Image");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+
 					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
-					button->gen = object;
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 
 
