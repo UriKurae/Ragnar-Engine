@@ -23,6 +23,9 @@ public:
 	void Play();
 	void Stop();
 
+	void SaveConfiguration();
+	void LoadConfiguration();
+
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
@@ -37,5 +40,10 @@ protected:
 	bool isActive;
 	GameTimer timer;
 	TransformComponent* transform;
+
+private:
+
+	bool saveConfig;
+	bool loadConfig;
 };
 
