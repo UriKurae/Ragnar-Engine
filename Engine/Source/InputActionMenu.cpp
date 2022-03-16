@@ -15,7 +15,7 @@
 
 InputActionMenu::InputActionMenu() : Menu(false)
 {
-	actionMaps.push_back(std::shared_ptr<ActionMaps>());
+	actionMaps.push_back(std::shared_ptr<ActionMaps>(new ActionMaps()));
 	currentMap = NULL;
 	currentAction = NULL;
 	currentBinding = NULL;
@@ -41,7 +41,7 @@ bool InputActionMenu::Update(float dt)
 
 	if (!ImGui::IsWindowHovered() && (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]))
 	{
-		ImGui::Text("XD");
+		//ImGui::Text("XD");
 	}
 
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(15.0f, 0.0f));
@@ -70,7 +70,7 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-		actionMaps.push_back(std::shared_ptr<ActionMaps>());
+		actionMaps.push_back(std::shared_ptr<ActionMaps>(new ActionMaps()));
 	}
 	ImGui::Separator();
 	for (size_t i = 0; i < actionMaps.size(); i++)
@@ -81,6 +81,7 @@ bool InputActionMenu::Update(float dt)
 		if (ImGui::IsItemClicked())
 		{
 			currentMap = i;
+			currentAction = 0;
 		}
 
 		if (open)
@@ -101,14 +102,14 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-		actionMaps[currentMap].get()->GetActions().push_back(std::shared_ptr<Actions>());
+		actionMaps[currentMap].get()->GetActions()->push_back(std::shared_ptr<Actions>(new Actions()));
 	}
 	ImGui::Separator();
-	for (size_t i = 0; i < actionMaps[currentMap].get()->GetActions().size(); i++)
+	for (size_t i = 0; i < actionMaps[currentMap].get()->GetActions()->size(); i++)
 	{
 		ImGui::PushID(i);
-		bool open = ImGui::TreeNodeEx(actionMaps[currentMap].get()->GetActions().at(i)->GetName().c_str(),
-			ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen | (actionMaps[currentMap].get()->GetActions().at(currentAction) == actionMaps[currentMap].get()->GetActions().at(i) ? ImGuiTreeNodeFlags_Selected : 0));
+		bool open = ImGui::TreeNodeEx(actionMaps[currentMap].get()->GetActions()->at(i)->GetName().c_str(),
+			ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen | (actionMaps[currentMap].get()->GetActions()->at(currentAction) == actionMaps[currentMap].get()->GetActions()->at(i) ? ImGuiTreeNodeFlags_Selected : 0));
 		
 		if (ImGui::IsItemClicked())
 		{
@@ -117,10 +118,10 @@ bool InputActionMenu::Update(float dt)
 
 		if (open)
 		{
-			for (size_t j = 0; j < actionMaps[currentMap].get()->GetActions().at(i)->GetBindings().size(); j++)
+			for (size_t j = 0; j < actionMaps[currentMap].get()->GetActions()->at(i)->GetBindings().size(); j++)
 			{
-				ImGui::TreeNodeEx(SDL_GetScancodeName((SDL_Scancode)actionMaps[currentMap].get()->GetActions().at(i)->GetBindings()[j]),
-					(actionMaps[currentMap].get()->GetActions().at(i)->GetBindings()[currentBinding] == actionMaps[currentMap].get()->GetActions().at(i)->GetBindings()[j] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
+				ImGui::TreeNodeEx(SDL_GetScancodeName((SDL_Scancode)actionMaps[currentMap].get()->GetActions()->at(i)->GetBindings()[j]),
+					(actionMaps[currentMap].get()->GetActions()->at(i)->GetBindings()[currentBinding] == actionMaps[currentMap].get()->GetActions()->at(i)->GetBindings()[j] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
 				
 				if (ImGui::IsItemClicked())
 				{
@@ -264,7 +265,7 @@ void Actions::OnLoad(JsonParsing& node)
 ActionMaps::ActionMaps()
 {
 	name = "Player";
-	actions.push_back(std::shared_ptr<Actions>());
+	actions.push_back(std::shared_ptr<Actions>(new Actions()));
 }
 
 ActionMaps::~ActionMaps()

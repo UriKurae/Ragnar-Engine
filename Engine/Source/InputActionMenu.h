@@ -33,7 +33,7 @@ public:
 	void OnLoad(JsonParsing& node);
 
 	inline std::string GetName() { return name; }
-	inline std::vector<std::shared_ptr<Actions>> GetActions() { return actions; }
+	inline std::vector<std::shared_ptr<Actions>>* GetActions() { return &actions; }
 
 private:
 	std::string name;

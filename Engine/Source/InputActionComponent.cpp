@@ -36,7 +36,7 @@ void InputActionComponent::OnEditor()
 		if (ImGui::Button(ICON_FA_EDIT))
 		{
 			assetWindowActive = true;
-			//inputAssetsList.clear();
+			inputAssetsList.clear();
 			LoadAllInputAssets("Assets");
 		}
 
@@ -148,6 +148,6 @@ void InputActionComponent::LoadAllInputAssets(const char* folder)
 	}
 	for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
 	{
-		LoadInputAsset((*it).c_str());
+		LoadAllInputAssets((*it).c_str());
 	}
 }
