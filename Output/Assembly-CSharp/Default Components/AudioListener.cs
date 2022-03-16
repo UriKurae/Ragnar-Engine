@@ -6,7 +6,7 @@ namespace RagnarEngine
 {
     public class AudioListener : RagnarComponent
     {
-        public AudioListener()
+        public AudioListener(UIntPtr ptr) : base(ptr)
         {
             type = ComponentType.AUDIO_LISTENER;
         }

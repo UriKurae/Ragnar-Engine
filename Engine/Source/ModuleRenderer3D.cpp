@@ -7,6 +7,7 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "ModuleNavMesh.h"
+#include "ModuleUI.h"
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
@@ -47,6 +48,7 @@ ModuleRenderer3D::ModuleRenderer3D(bool startEnabled) : Module(startEnabled), ma
 	vsync = false;
 	rayCast = false;
 	navMesh = false;
+	drawGrid = false;
 }
 
 // Destructor
@@ -140,21 +142,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 			ret = false;
 		}
 		
-		//GLfloat lightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
-		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
-		//
-		//lights[0].ref = GL_LIGHT0;
-		//lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-		//lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-		//lights[0].SetPos(0.0f, 0.0f, 2.5f);
-		//lights[0].Init();
-		//
-		//GLfloat materialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialAmbient);
-		//
-		//GLfloat materialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-		//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialDiffuse);
-		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
 		lighting = node.GetJsonBool("lighting");
@@ -163,8 +150,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		stencil = node.GetJsonBool("stencil");
 		blending = node.GetJsonBool("blending");
 		wireMode = node.GetJsonBool("wire mode");
-
-		//lights[0].Active(true);
+		drawGrid = node.GetJsonBool("draw grid");
 		
 		if (depthTest) SetDepthTest();
 		if (cullFace) SetCullFace();
@@ -173,12 +159,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (texture2D) SetTexture2D();
 		if (stencil) SetStencil();
 		if (blending) SetBlending();
-		if (wireMode) SetWireMode();
-
-		// set stencil
-		/*glEnable(GL_DEPTH_TEST);
-		glEnable(GL_STENCIL_TEST);*/
-		
+		if (wireMode) SetWireMode();		
 	}
 	//// Projection matrix for
 	int w = *app->window->GetWindowWidth();
@@ -193,15 +174,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
 	grid.axis = true;
-
-	//defaultShader = new Shader("Assets/Resources/Shaders/default.shader");
-	//shaders.push_back(defaultShader);
-
-	//defaultShader = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
-
-	// TODO: To be handled with the resource manager
-	//defaultMaterial = new Material();
-	//defaultMaterial->SetShader(defaultShader);
 
 	dirLight = new DirectionalLight();
 	goDirLight = app->scene->CreateGameObject(0);
@@ -237,8 +209,9 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	grid.Render();
 	std::set<GameObject*> objects;
+	if(drawGrid) grid.Render();
+
 	// TODO: wtf quadtree man.
 	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
 
@@ -256,9 +229,6 @@ bool ModuleRenderer3D::PostUpdate()
 		glLineWidth(1.0f);
 	}
 
-	//glPopMatrix();
-	//glPopMatrix();
-	//PushCamera(float4x4::identity, float4x4::identity);
 	GameObject* objSelected = app->editor->GetGO();
 	if (app->camera->visualizeFrustum)
 	{
@@ -266,7 +236,6 @@ bool ModuleRenderer3D::PostUpdate()
 		{
 			if ((*it) != objSelected)(*it)->Draw(nullptr);
 		}
-		//if (objSelected) objSelected->Draw(nullptr);
 	}
 	else
 	{
@@ -301,8 +270,7 @@ bool ModuleRenderer3D::PostUpdate()
 	}
 
 	fbo->Unbind();
-
-	
+		
 	// Camera Component FBO
 	mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -310,18 +278,10 @@ bool ModuleRenderer3D::PostUpdate()
 
 	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
 
-	grid.Render();
-
-	//glPopMatrix();
-	//glPopMatrix();
-	//PushCamera(float4x4::identity, float4x4::identity);
-
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->scene->mainCamera);
 	}
-	//PushCamera(float4x4::identity, float4x4::identity);
-
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -330,8 +290,6 @@ bool ModuleRenderer3D::PostUpdate()
 	glPopMatrix();
 
 	// DRAW UI
-
-
 	ButtonComponent* aux = nullptr;
 	//CanvasComponent* aux1 = nullptr;
 	CheckboxComponent* aux2 = nullptr;
@@ -345,20 +303,18 @@ bool ModuleRenderer3D::PostUpdate()
 		glMatrixMode(GL_MODELVIEW);
 		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
 
-			aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
+		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
 		//aux1 = go->GetComponent<CanvasComponent>();
 		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
 		aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
 		//aux4 = go->GetComponent<InputBoxComponent>();
 		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
 
-
-
 		if (aux != nullptr)
 		{
 
 			app->userInterface->UIGameObjects[a]->Draw(nullptr);
-			app->userInterface->RenderText(aux->buttonText.textt, aux->buttonText.X, aux->buttonText.Y, aux->buttonText.Scale, aux->buttonText.Color);
+			app->userInterface->RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
 			aux = nullptr;
 		}
 		/* else if (aux1 != nullptr)
@@ -396,7 +352,6 @@ bool ModuleRenderer3D::PostUpdate()
 		glLoadIdentity();
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-
 	}
 
 	mainCameraFbo->Unbind();
@@ -454,6 +409,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	blending = node.GetJsonBool("blending");
 	wireMode = node.GetJsonBool("wire mode");
 	navMesh = node.GetJsonBool("navmesh");
+	drawGrid = node.GetJsonBool("draw grid");
 
 	SetVsync();
 	SetDepthTest();
@@ -480,6 +436,7 @@ bool ModuleRenderer3D::SaveConfig(JsonParsing& node)
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "blending", blending);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wire mode", wireMode);
 	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "navmesh", navMesh);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "draw grid", drawGrid);
 
 	return true;
 }

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "glmath.h"
 #include "Color.h"
 #include "Math/float4x4.h"

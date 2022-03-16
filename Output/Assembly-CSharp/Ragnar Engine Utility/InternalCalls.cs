@@ -15,7 +15,7 @@ namespace RagnarEngine
     class InternalCalls
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void CreateGameObject(object name, object position, object rotation);
+        public static extern GameObject CreateGameObject(object name, object position, object rotation);
 
         //public void CreateObject(string name, PrimitiveType primitiveType, Vector3 position, Quaternion rotation)
         //{
@@ -28,6 +28,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Create3DObject(object name, int primitiveType, object position, object rotation);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern GameObject Create3DObject(object name, int primitiveType, object position);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
@@ -353,9 +356,9 @@ namespace RagnarEngine
     }
 }
 
-public enum REKeyCode //This is a mirror from the SDL scancode enum to allow C# to C++ compatibility
+public enum KeyCode
 {
-    SDL_SCANCODE_UNKNOWN = 0,
+    SCANCODE_UNKNOWN = 0,
     A = 4,
     B = 5,
     C = 6,
@@ -382,16 +385,16 @@ public enum REKeyCode //This is a mirror from the SDL scancode enum to allow C# 
     X = 27,
     Y = 28,
     Z = 29,
-    Alpha1 = 30,
-    Alpha2 = 31,
-    Alpha3 = 32,
-    Alpha4 = 33,
-    Alpha5 = 34,
-    Alpha6 = 35,
-    Alpha7 = 36,
-    Alpha8 = 37,
-    Alpha9 = 38,
-    Alpha0 = 39,
+    ALPHA1 = 30,
+    ALPHA2 = 31,
+    ALPHA3 = 32,
+    ALPHA4 = 33,
+    ALPHA5 = 34,
+    ALPHA6 = 35,
+    ALPHA7 = 36,
+    ALPHA8 = 37,
+    ALPHA9 = 38,
+    ALPHA0 = 39,
     RETURN = 40,
     ESCAPE = 41,
     BACKSPACE = 42,

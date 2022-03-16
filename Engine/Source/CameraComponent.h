@@ -67,7 +67,7 @@ private:
 
 	bool freeMovement = true;
 	GameObject* defTarget = nullptr; // FreeMovement Target
-	float movementSpeed = 0.5f;
+	float movementSpeed = 0.05f;
 	bool followTarget = false;
 	GameObject* target = nullptr;
 	float verticalAngle = -40.0f;

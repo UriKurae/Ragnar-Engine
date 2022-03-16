@@ -30,8 +30,7 @@ void Framebuffer::Unbind()
 }
 
 void Framebuffer::SetFramebuffer()
-{
-	
+{	
 	if (framebuffer > 0)
 	{
 		glDeleteFramebuffers(1, &framebuffer);

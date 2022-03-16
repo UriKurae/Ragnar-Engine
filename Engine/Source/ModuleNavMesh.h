@@ -140,8 +140,8 @@ public:
 	inline Pathfinder* GetPathfinding() { return pathfinder; };
 
 private:
-	NavMeshBuilder* navMeshBuilder;
-	Pathfinder* pathfinder;
-	InputGeom* geometry;
-	BuildSettings* buildSettings;
+	NavMeshBuilder* navMeshBuilder = nullptr;
+	Pathfinder* pathfinder = nullptr;
+	InputGeom* geometry = nullptr;
+	BuildSettings* buildSettings = nullptr;
 };

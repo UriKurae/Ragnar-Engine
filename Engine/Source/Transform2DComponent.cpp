@@ -1,24 +1,25 @@
-#include "Application.h"
 #include "Transform2DComponent.h"
-#include <math.h>
-#include"CameraComponent.h"
+#include "Application.h"
+#include "Globals.h"
+
 #include "ModuleEditor.h"
-#include "ModuleInput.h"
+
+#include "GameObject.h"
 #include "GameView.h"
 
+#include <math.h>
 
-ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, GameObject* Own)
+
+ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, GameObject* own)
 {
 	//UID = GenerateUID();
 	//type = ComponentType::TRANSFORM2D;
-	own = Own;
 	internalPosition = { 0,0,0 };
-		position = { 0,0,0 };
+	position = { 0,0,0 };
 	scale.x = 25;
 	scale.y = 15;
 	scale.z = 1;
 	rotationEuler = rot;
-	generalScale = 1.0f;
 
 	buttonWidth = 300;
 	buttonHeight = 100;
@@ -38,10 +39,6 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 
 
 ComponentTransform2D::~ComponentTransform2D()
-{
-}
-
-void ComponentTransform2D::Enable()
 {
 }
 
@@ -74,9 +71,6 @@ bool ComponentTransform2D::Update(float dt)
 	
 	return true;
 }
-void ComponentTransform2D::Disable()
-{
-}
 
 void ComponentTransform2D::OnEditor()
 {
@@ -108,12 +102,6 @@ void ComponentTransform2D::OnEditor()
 		}
 	}
 }
-
-void ComponentTransform2D::setOwner() 
-{
-	matrix = transMatrix.ptr();
-}
-
 
 
 Quat ComponentTransform2D::FromEulerToQuat(float3 eulerAngles)

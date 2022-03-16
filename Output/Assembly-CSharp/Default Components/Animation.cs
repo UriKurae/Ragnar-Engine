@@ -6,7 +6,7 @@ namespace RagnarEngine
 { 
     public class Animation : RagnarComponent
     {
-        public Animation()
+        public Animation(UIntPtr ptr) : base(ptr)
         {
             type = ComponentType.ANIMATION;
         }
