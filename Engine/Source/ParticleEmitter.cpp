@@ -76,7 +76,7 @@ ParticleEmitter::~ParticleEmitter()
 	RELEASE_ARRAY(data.vertexBufferBase);
 	data.vertexBufferPtr = nullptr;
 
-	RELEASE(effect);
+	effect = nullptr;
 	effects.clear();
 }
 
