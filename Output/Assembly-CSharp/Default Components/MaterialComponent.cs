@@ -13,8 +13,8 @@ namespace RagnarEngine
 
         public extern string texture
         {
-            //[MethodImplAttribute(MethodImplOptions.InternalCall)]
-            //get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }

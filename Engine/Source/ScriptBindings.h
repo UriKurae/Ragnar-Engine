@@ -141,25 +141,11 @@ void SetScale(MonoObject* go, MonoObject* scale)
 // Transform ========
 
 
-MonoObject* GetTexturePath(MonoObject* go)
+MonoString* GetTexturePath(MonoObject* go)
 {
 	MaterialComponent* matComp = GetComponentMono<MaterialComponent*>(go);
 	std::string p = matComp->GetTexture()->GetAssetsPath();
-	
-	//MonoClass* strignClass = mono_class_from_name(app->moduleMono->image, "System", "string");
-	//MonoObject* stringObj = mono_object_new(app->moduleMono->domain, strignClass);
-	//
-	//MonoMethodDesc* constDesc = mono_method_desc_new("System.string(char[])", true);
-	//MonoMethod* method = mono_method_desc_search_in_class(constDesc, strignClass);
-	//
-	//void* args[1];
-	//args[0] = (void*)p.c_str();
-	//
-	//mono_runtime_invoke(method, stringObj, args, NULL);
-	//
-	//mono_method_desc_free(constDesc);
-
-	return (MonoObject*)p.c_str();
+	return mono_string_new(app->moduleMono->domain, p.c_str());
 }
 
 void SetTexturePath(MonoObject* go, MonoObject* texturePath)

@@ -22,12 +22,15 @@ public class Player : RagnarComponent
         if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             //GameObject[] gos = GameObject.FindGameObjectsWithTag("Untagged");
-            GameObject[] gos = gameObject.childs;
+            //GameObject[] gos = gameObject.childs;
 
-            foreach (GameObject go in gos)
-            {
-                Debug.Log(go.name);
-            }
+            //foreach (GameObject go in gos)
+            //{
+            //    Debug.Log(go.name);
+            //}
+
+            Debug.Log(materialComponent.texture);
+
         }
 
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
