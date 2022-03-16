@@ -33,11 +33,11 @@ public:
 	void OnLoad(JsonParsing& node);
 
 	inline std::string GetName() { return name; }
-	inline std::vector<Actions*>* GetActions() { return &actions; }
+	inline std::vector<std::shared_ptr<Actions>> GetActions() { return actions; }
 
 private:
 	std::string name;
-	std::vector<Actions*> actions;
+	std::vector<std::shared_ptr<Actions>> actions;
 };
 
 class InputActionMenu : public Menu
@@ -55,7 +55,7 @@ public:
 
 private:
 
-	std::vector<ActionMaps*> actionMaps;
+	std::vector<std::shared_ptr<ActionMaps>> actionMaps;
 
 	int currentMap;
 	int currentAction;

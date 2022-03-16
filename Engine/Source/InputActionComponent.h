@@ -23,7 +23,7 @@ public:
 
 private:
 
-	std::vector<ActionMaps*> currentActionMaps;
+	std::vector<std::shared_ptr<ActionMaps>> currentActionMaps;
 	std::string currentAssetName;
 
 	bool assetWindowActive;

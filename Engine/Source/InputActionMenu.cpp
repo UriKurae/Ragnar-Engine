@@ -11,10 +11,11 @@
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "Imgui/imgui_internal.h"
+#include "Profiling.h"
 
 InputActionMenu::InputActionMenu() : Menu(false)
 {
-	actionMaps.push_back(new ActionMaps());
+	actionMaps.push_back(std::shared_ptr<ActionMaps>());
 	currentMap = NULL;
 	currentAction = NULL;
 	currentBinding = NULL;
@@ -22,6 +23,7 @@ InputActionMenu::InputActionMenu() : Menu(false)
 
 InputActionMenu::~InputActionMenu()
 {
+	actionMaps.clear();
 }
 
 bool InputActionMenu::Start()
@@ -68,7 +70,7 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-		actionMaps.push_back(new ActionMaps());
+		actionMaps.push_back(std::shared_ptr<ActionMaps>());
 	}
 	ImGui::Separator();
 	for (size_t i = 0; i < actionMaps.size(); i++)
@@ -99,14 +101,14 @@ bool InputActionMenu::Update(float dt)
 		ImGui::SetCursorPosX(posX);
 	if (ImGui::Button(text.c_str()))
 	{
-		actionMaps[currentMap]->GetActions()->push_back(new Actions());
+		actionMaps[currentMap].get()->GetActions().push_back(std::shared_ptr<Actions>());
 	}
 	ImGui::Separator();
-	for (size_t i = 0; i < actionMaps[currentMap]->GetActions()->size(); i++)
+	for (size_t i = 0; i < actionMaps[currentMap].get()->GetActions().size(); i++)
 	{
 		ImGui::PushID(i);
-		bool open = ImGui::TreeNodeEx(actionMaps[currentMap]->GetActions()->at(i)->GetName().c_str(),
-			ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen | (actionMaps[currentMap]->GetActions()->at(currentAction) == actionMaps[currentMap]->GetActions()->at(i) ? ImGuiTreeNodeFlags_Selected : 0));
+		bool open = ImGui::TreeNodeEx(actionMaps[currentMap].get()->GetActions().at(i)->GetName().c_str(),
+			ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen | (actionMaps[currentMap].get()->GetActions().at(currentAction) == actionMaps[currentMap].get()->GetActions().at(i) ? ImGuiTreeNodeFlags_Selected : 0));
 		
 		if (ImGui::IsItemClicked())
 		{
@@ -115,10 +117,10 @@ bool InputActionMenu::Update(float dt)
 
 		if (open)
 		{
-			for (size_t j = 0; j < actionMaps[currentMap]->GetActions()->at(i)->GetBindings().size(); j++)
+			for (size_t j = 0; j < actionMaps[currentMap].get()->GetActions().at(i)->GetBindings().size(); j++)
 			{
-				ImGui::TreeNodeEx(SDL_GetScancodeName((SDL_Scancode)actionMaps[currentMap]->GetActions()->at(i)->GetBindings()[j]),
-					(actionMaps[currentMap]->GetActions()->at(i)->GetBindings()[currentBinding] == actionMaps[currentMap]->GetActions()->at(i)->GetBindings()[j] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
+				ImGui::TreeNodeEx(SDL_GetScancodeName((SDL_Scancode)actionMaps[currentMap].get()->GetActions().at(i)->GetBindings()[j]),
+					(actionMaps[currentMap].get()->GetActions().at(i)->GetBindings()[currentBinding] == actionMaps[currentMap].get()->GetActions().at(i)->GetBindings()[j] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
 				
 				if (ImGui::IsItemClicked())
 				{
@@ -214,7 +216,7 @@ bool InputActionMenu::LoadInputActionFile(const char* path)
 		for (int i = 0; i < size; ++i)
 		{
 			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
-			ActionMaps* aM = new ActionMaps();
+			std::shared_ptr<ActionMaps> aM(new ActionMaps());
 			aM->OnLoad(go);
 			actionMaps.push_back(aM);
 		}
@@ -236,6 +238,7 @@ Actions::Actions()
 
 Actions::~Actions()
 {
+
 }
 
 void Actions::OnSave(JsonParsing& node, JSON_Array* array)
@@ -261,11 +264,12 @@ void Actions::OnLoad(JsonParsing& node)
 ActionMaps::ActionMaps()
 {
 	name = "Player";
-	actions.push_back(new Actions());
+	actions.push_back(std::shared_ptr<Actions>());
 }
 
 ActionMaps::~ActionMaps()
 {
+	actions.clear();
 }
 
 void ActionMaps::OnSave(JsonParsing& node, JSON_Array* array)
@@ -293,7 +297,7 @@ void ActionMaps::OnLoad(JsonParsing& node)
 	for (int i = 0; i < size; ++i)
 	{
 		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
-		Actions* a = new Actions();
+		std::shared_ptr<Actions> a(new Actions());
 		a->OnLoad(c);
 		actions.push_back(a);
 	}

@@ -6,6 +6,7 @@
 #include "Globals.h"
 
 #include "IconsFontAwesome5.h"
+#include "Profiling.h"
 
 InputActionComponent::InputActionComponent(GameObject* own)
 {
@@ -35,8 +36,8 @@ void InputActionComponent::OnEditor()
 		if (ImGui::Button(ICON_FA_EDIT))
 		{
 			assetWindowActive = true;
+			//inputAssetsList.clear();
 			LoadAllInputAssets("Assets");
-			//LoadInputAsset("Assets/InputAction.inputaction");
 		}
 
 		if (currentActionMaps.size() > 0)
@@ -70,6 +71,21 @@ void InputActionComponent::OnEditor()
 			if (ImGui::GetIO().MouseClicked[0]) assetWindowActive = false;
 		}
 
+		if (ImGui::BeginTable("table3", 3))
+		{
+			for (int item = 0; item < inputAssetsList.size(); item++)
+			{
+				ImGui::TableNextColumn();
+				std::string assetName = inputAssetsList[item];
+				app->fs->GetFilenameWithoutExtension(assetName);
+				if (ImGui::Selectable(assetName.c_str()))
+				{
+					assetWindowActive = false;
+					LoadInputAsset(inputAssetsList[item].c_str());
+				}
+			}
+			ImGui::EndTable();
+		}
 
 		ImGui::End();
 	}
@@ -104,7 +120,7 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 		for (int i = 0; i < size; ++i)
 		{
 			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
-			ActionMaps* aM = new ActionMaps();
+			std::shared_ptr<ActionMaps> aM(new ActionMaps());
 			aM->OnLoad(go);
 			currentActionMaps.push_back(aM);
 		}
