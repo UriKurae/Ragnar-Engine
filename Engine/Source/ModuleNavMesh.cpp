@@ -4,8 +4,10 @@
 #include "Mesh.h"
 #include "TransformComponent.h"
 #include "ModuleNavMesh.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "MeshComponent.h"
+
+#include "Scene.h"
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
@@ -123,7 +125,7 @@ void ModuleNavMesh::BakeNavMesh()
 	ClearNavMeshes();
 
 	std::vector<GameObject*> gameObjects;
-	gameObjects = app->scene->GetGameObjectsList();
+	gameObjects = app->sceneManager->GetCurrentScene()->GetGameObjectsList();
 
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{

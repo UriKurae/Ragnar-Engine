@@ -1,5 +1,4 @@
 #pragma once
-#include "Vertex.h"
 #include "VertexBuffer.h"
 
 #define M_PI 3.1416

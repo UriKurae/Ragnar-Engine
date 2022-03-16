@@ -7,6 +7,7 @@
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
 #include "Physics3D.h"
+#include "ModuleSceneManager.h"
 
 #include "MeshImporter.h"
 #include "FileSystem.h"
@@ -53,10 +54,6 @@ bool Scene::Start()
 	//player->SetName("Player");
 	//player->tag = "Player";
 	
-	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
-	ResourceManager::GetInstance()->ImportAllResources();
-	//ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
-	
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 
 	//AkAuxSendValue aEnvs[1];
@@ -71,7 +68,6 @@ bool Scene::Start()
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
 
-	ImportPrimitives();
 	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;

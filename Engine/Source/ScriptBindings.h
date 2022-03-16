@@ -208,7 +208,7 @@ void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* positi
 MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObject* position)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -236,5 +236,5 @@ MonoObject* AddComponentMono(MonoObject* go, int componentType)
 
 float GetGameTimeStep()
 {
-	return app->scene->GetGameDeltaTime();
+	return app->sceneManager->GetCurrentScene()->GetGameDeltaTime();
 }

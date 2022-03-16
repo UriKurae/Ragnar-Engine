@@ -125,7 +125,7 @@ void CameraComponent::OnEditorMovement()
 			if (go)
 			{
 				uint uuid = *(const uint*)(go->Data);
-				target = app->scene->GetGoByUuid(uuid);
+				target = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 			}
 			ImGui::EndDragDropTarget();
 		}

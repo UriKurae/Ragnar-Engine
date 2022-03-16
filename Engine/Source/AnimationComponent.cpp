@@ -4,8 +4,6 @@
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 
-#include "ModuleScene.h"
-
 #include "MeshComponent.h"
 
 #include "FileSystem.h"
