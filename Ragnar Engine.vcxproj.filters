@@ -676,9 +676,6 @@
     <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ParticleEffect_Size.h">
-      <Filter>Particles\Effects</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1094,9 +1091,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Component.cpp">
       <Filter>Sources\GameObject\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\ParticleEffect_Size.cpp">
-      <Filter>Particles\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ struct Particle
 	float3 position;
 	float3 velocity, acceleration;
 	float4 colorBegin, colorEnd;
-	float size;
+	float sizeBegin, sizeEnd;
 	float rotation = 0.0f;
 	float deltaRotation = rotation;
 
@@ -24,7 +24,7 @@ struct ParticleReference
 	float3 position;
 	float3 velocity, acceleration;
 	float4 colorBegin, colorEnd;
-	float size;
+	float sizeBegin, sizeEnd, sizeVariation;
 	float lifeTime = 1.0f;
 	float deltaRotation = 0.0f;
 };

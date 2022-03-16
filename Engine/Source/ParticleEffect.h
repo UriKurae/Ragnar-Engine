@@ -6,8 +6,7 @@ enum class ParticleEffectType : int
 {
 	NO_TYPE = -1,
 	VELOCITY_OVER_LIFETIME,
-	ACCELERATION_OVER_LIFETIME,
-	SIZE_OVER_LIFETIME
+	ACCELERATION_OVER_LIFETIME
 };
 
 class ParticleEffect
