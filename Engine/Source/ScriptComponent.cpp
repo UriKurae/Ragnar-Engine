@@ -45,15 +45,27 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::NOT_PLAYING || app->scene->GetGameState() == GameState::PAUSE || updateMethod == nullptr)
+	static bool firstUpdate = true;
+	if (app->scene->GetGameState() != GameState::PLAYING 
+		|| updateMethod == nullptr || startMethod == nullptr)
+	{
+		firstUpdate = true;
 		return false;
+	}
 
-	ScriptComponent::runningScript = this; // I really think this is the peak of stupid code, but hey, it works, slow as hell but works.
+	MonoObject* startExec = nullptr;
+	if (firstUpdate)
+	{
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
+		firstUpdate = false;
+	}
+
+	ScriptComponent::runningScript = this;
 
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
 
-	if (exec != nullptr)
+	if (exec != nullptr || startExec != nullptr)
 	{
 		if (strcmp(mono_class_get_name(mono_object_get_class(exec)), "NullReferenceException") == 0)
 		{
@@ -76,9 +88,13 @@ void ScriptComponent::OnEditor()
 		if(name == "") SelectScript();
 		else
 		{
+			ImGui::Text("Name: ");
+			ImGui::SameLine();
+			ImGui::TextColored({ 1,1,0,1 }, (name + ".cs").c_str());
+			
 			for (int i = 0; i < fields.size(); i++)
 			{
-				DropField(fields[i], "_GAMEOBJECT");
+				DropField(fields[i], "HierarchyItem");
 			}
 			ImGui::Separator();
 			for (int i = 0; i < methods.size(); i++)
@@ -87,6 +103,7 @@ void ScriptComponent::OnEditor()
 			}
 		}
 		
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 	ImGui::PopID();
@@ -128,18 +145,23 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 
 	case MonoTypeEnum::MONO_TYPE_CLASS:
 
-		if (strcmp(mono_type_get_name(mono_field_get_type(field.field)), "DiamondEngine.GameObject") != 0)
+		if (strcmp(mono_type_get_name(mono_field_get_type(field.field)), "RagnarEngine.GameObject") != 0)
 		{
 			ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "The class %s can't be serialized yet", mono_type_get_name(mono_field_get_type(field.field)));
 			break;
 		}
 
-		ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), (field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
+		
+		ImGui::Button((field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
 		if (ImGui::BeginDragDropTarget())
 		{
-			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(dropType))
+			if (const ImGuiPayload* go = ImGui::AcceptDragDropPayload(dropType))
 			{
-				//field.fiValue.goValue = app->editor->GetDraggingGO();
+				if (go)
+				{
+					uint uuid = *(const uint*)(go->Data);
+					field.fiValue.goValue = app->scene->GetGoByUuid(uuid);
+				}
 				SetField(field.field, field.fiValue.goValue);
 			}
 			ImGui::EndDragDropTarget();
@@ -194,13 +216,17 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				//	break;
 				//}
 				//MonoClass* cls = mono_object(arrayElementGO);
-				GameObject* cpp_obj = app->moduleMono->GameObject_From_CSGO(arrayElementGO);
+				GameObject* cpp_obj = app->moduleMono->GameObjectFromCSGO(arrayElementGO);
 				ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), (cpp_obj == nullptr) ? "None" : cpp_obj->name.c_str());
 				if (ImGui::BeginDragDropTarget())
 				{
-					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(dropType))
+					if (const ImGuiPayload* go = ImGui::AcceptDragDropPayload(dropType))
 					{
-						//cpp_obj = app->editor->GetDraggingGO();
+						if (go)
+						{
+							uint uuid = *(const uint*)(go->Data);
+							cpp_obj = app->scene->GetGoByUuid(uuid);
+						}
 						arrayElementGO = app->moduleMono->GoToCSGO(cpp_obj);
 						mono_array_set(field.fiValue.arrValue, MonoObject*, i, arrayElementGO);
 					}
@@ -274,8 +300,6 @@ void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 
 bool ScriptComponent::OnLoad(JsonParsing& nObj)
 {
-	Component::OnLoad(nObj);
-
 	SerializedField* _field = nullptr;
 	for (int i = 0; i < fields.size(); i++) //TODO IMPORTANT ASK: There must be a better way to do this... too much use of switches with this stuff, look at MONOMANAGER
 	{
@@ -295,7 +319,7 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 		{
-			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "DiamondEngine.GameObject") == 0)
+			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "RagnarEngine.GameObject") == 0)
 				app->scene->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
 
 			break;
@@ -329,6 +353,8 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 			break;
 		}
 	}
+
+	LoadScriptData(name.c_str());
 
 	return true;
 }
@@ -405,7 +431,11 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	uintptr_t ptr = reinterpret_cast<uintptr_t>(this);
 	mono_field_set_value(mono_gchandle_get_target(noGCobject), mono_class_get_field_from_name(goClass, "pointer"), &ptr);
 
-	MonoMethodDesc* mdesc = mono_method_desc_new(":Update", false);
+	MonoMethodDesc* mdesc = mono_method_desc_new(":Start", false);
+	startMethod = mono_method_desc_search_in_class(mdesc, klass);
+	mono_method_desc_free(mdesc);
+
+	mdesc = mono_method_desc_new(":Update", false);
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
 	mono_method_desc_free(mdesc);
 

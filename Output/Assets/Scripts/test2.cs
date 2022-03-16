@@ -3,9 +3,13 @@ using RagnarEngine;
 
 public class test2 : RagnarComponent
 {
-	public void Update()
+	public void Start()
 	{
 
 	}
 
+	public void Update()
+	{
+
+	}
 }

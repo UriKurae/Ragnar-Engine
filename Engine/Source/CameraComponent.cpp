@@ -6,6 +6,9 @@
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 
+#include "ModuleEditor.h"
+#include "GameView.h"
+
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 
@@ -114,7 +117,7 @@ void CameraComponent::OnEditor()
 		if (freeMovement)
 		{
 			ImGui::Text("Movement: free");
-			ImGui::DragFloat("movementSpeed", &movementSpeed, 0.001f, 0.0f);
+			ImGui::DragFloat("movementSpeed", &movementSpeed, 0.001f, 0.01f, 0.1f);
 		}
 
 		else if (followTarget)
@@ -177,8 +180,9 @@ bool CameraComponent::Update(float dt)
 		targetUID = 0;
 	}
 
-	camera.SetOrthographic(zoom, zoom);
-	zoom = Clamp(zoom - app->input->GetMouseZ(), zoomMin, zoomMax);
+	float4 viewport = app->editor->GetGameView()->GetBounds();
+	camera.SetOrthographic(viewport.z / zoom, viewport.w / zoom);
+	zoom = Clamp(zoom + app->input->GetMouseZ(), zoomMin, zoomMax);
 
 	camera.SetPos(transform->GetPosition());
 
@@ -220,7 +224,7 @@ bool CameraComponent::Update(float dt)
 
 	bool mouseDragRight;
 	if(rightClickRot) mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
-	int horizontalDrag;
+	float horizontalDrag = 0;
 	if(arrowRot || rightClickRot) horizontalDrag = app->input->GetMouseXMotion();
 
 	// -------------MOVEMENT---------------
@@ -238,34 +242,34 @@ bool CameraComponent::Update(float dt)
 		float3 pos = defTarget->GetComponent<TransformComponent>()->GetPosition();
 		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
 		//int horizontalDrag = app->input->GetMouseXMotion();
-		int verticalDrag = app->input->GetMouseYMotion();
-		int dragThreshold = 1;
+		float verticalDrag = app->input->GetMouseYMotion();
+		int dragThreshold = 0;
 		int wx, wy;
 		SDL_GetWindowPosition(app->window->window, &wx, &wy);
 
 		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT)
 			|| (rightClickRot && mouseDragMid && horizontalDrag > dragThreshold)
 			|| (borderMov && app->input->GetMouseX() < wx+2)) {
-			pos.x += movementSpeed / 2 * sin(DEGTORAD * (horizontalAngle + 90));
-			pos.z += movementSpeed / 2 * cos(DEGTORAD * (horizontalAngle + 90));
+			pos.x += movementSpeed * horizontalDrag / 2 * sin(DEGTORAD * (horizontalAngle + 90));
+			pos.z += movementSpeed * horizontalDrag / 2 * cos(DEGTORAD * (horizontalAngle + 90));
 		}
 		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
 			|| (rightClickRot && mouseDragMid && horizontalDrag < -dragThreshold)
 			|| (borderMov && app->input->GetMouseX() > *app->window->GetWindowWidth() + wx-2)) {
-			pos.x -= movementSpeed / 2 * sin(DEGTORAD * (horizontalAngle + 90));
-			pos.z -= movementSpeed / 2 * cos(DEGTORAD * (horizontalAngle + 90));
+			pos.x -= movementSpeed * -horizontalDrag  / 2 * sin(DEGTORAD * (horizontalAngle + 90));
+			pos.z -= movementSpeed * -horizontalDrag  / 2 * cos(DEGTORAD * (horizontalAngle + 90));
 		}
 		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT)
 			|| (rightClickRot && mouseDragMid && verticalDrag < -dragThreshold)
 			|| (borderMov && app->input->GetMouseY() > *app->window->GetWindowHeight() + wy-2)) {
-			pos.x -= movementSpeed * sin(DEGTORAD * horizontalAngle);
-			pos.z -= movementSpeed * cos(DEGTORAD * horizontalAngle);
+			pos.x -= movementSpeed * -verticalDrag * sin(DEGTORAD * horizontalAngle);
+			pos.z -= movementSpeed * -verticalDrag * cos(DEGTORAD * horizontalAngle);
 		}
 		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT)
 			|| (rightClickRot && mouseDragMid && verticalDrag > dragThreshold)
 			|| (borderMov && app->input->GetMouseY() < wy+2)) {
-			pos.x += movementSpeed * sin(DEGTORAD * horizontalAngle);
-			pos.z += movementSpeed * cos(DEGTORAD * horizontalAngle);
+			pos.x += movementSpeed * verticalDrag * sin(DEGTORAD * horizontalAngle);
+			pos.z += movementSpeed * verticalDrag * cos(DEGTORAD * horizontalAngle);
 		}
 		defTarget->GetComponent<TransformComponent>()->SetPosition(float3(pos.x, 0, pos.z));
 	}
@@ -342,6 +346,11 @@ void CameraComponent::UpdateFov()
 {
 	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (currentScreenHeight / currentScreenWidth));
 	camera.SetVerticalFovAndAspectRatio(verticalFov, (currentScreenWidth / currentScreenHeight));
+}
+
+void CameraComponent::SetNewFov(float horizontalFovRadians)
+{
+	horizontalFov = horizontalFovRadians;
 }
 
 void CameraComponent::CompileBuffers()

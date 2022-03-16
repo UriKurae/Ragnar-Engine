@@ -46,16 +46,22 @@
 		<Reference Include="System.Xml" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Include="Assembly-CSharp\Default Components\Animation.cs" />
+		<Compile Include="Assembly-CSharp\Default Components\AudioListener.cs" />
+		<Compile Include="Assembly-CSharp\Default Components\AudioSource.cs" />
+		<Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
+		<Compile Include="Assembly-CSharp\Default Components\MaterialComponent.cs" />
 		<Compile Include="Assembly-CSharp\Default Components\RagnarComponent.cs" />
+		<Compile Include="Assembly-CSharp\Default Components\Rigidbody.cs" />
 		<Compile Include="Assembly-CSharp\Default Components\Transform.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\GameObject.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\InternalCalls.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\Quaternion.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\Time.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
-		<Compile Include="Assets\Scripts\test.cs" />
+		<Compile Include="Assets\Scripts\Player.cs" />
 		<Compile Include="Assets\Scripts\test2.cs" />
-		<Compile Include="Assets\Scripts\prueba.cs" />
+		<Compile Include="Assets\Scripts\Abilities.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Assembly-CSharp\App.config" />

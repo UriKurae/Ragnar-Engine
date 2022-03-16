@@ -5,12 +5,6 @@
 
 #include "ModuleScene.h"
 
-#include "MonoManager.h"
-#include "JsonParsing.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-
-#include "Component.h"
 #include "C_RigidBody.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -27,6 +21,7 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "Transform2DComponent.h"
+#include "NavAgentComponent.h"
 
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
@@ -66,15 +61,6 @@ bool GameObject::Update(float dt)
 
 void GameObject::Draw(CameraComponent* gameCam)
 {
-	// TODO: Check this in the future
-	//if (!GetAllComponent<MeshComponent>().empty())
-	//{
-	//	for (int i = 0; i < GetAllComponent<MeshComponent>().size(); ++i)
-	//	{
-	//		GetAllComponent<MeshComponent>()[i]->Draw();
-	//	}
-	//}
-
 	for (int i = 0; i < components.size(); ++i)
 	{
 		Component* component = components[i];
@@ -121,8 +107,7 @@ void GameObject::DrawEditor()
 		{
 			CreateComponent(ComponentType::SCRIPT);
 			newComponent = false;
-		}
-	
+		}	
 		if (ImGui::Selectable("Audio Source Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_SOURCE);
@@ -156,6 +141,11 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Rigid Body"))
 		{
 			CreateComponent(ComponentType::RIGID_BODY);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("NavAgent"))
+		{
+			CreateComponent(ComponentType::NAVAGENT);
 			newComponent = false;
 		}
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
@@ -207,41 +197,22 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		component = new TransformComponent(this);
 		break;
 	case ComponentType::MESH_RENDERER:
+	{ // {} are necessary if you want declare variables into the case
 		component = new MeshComponent(this, GetComponent<TransformComponent>());
-// <<<<<<< HEAD
-// 		{
-// 			MeshComponent* meshComp = (MeshComponent*)component;
 
-// 			if (meshComp)
-// 			{
-// 				MaterialComponent* matComp = new MaterialComponent(this);
-// 				meshComp->SetMaterial((MaterialComponent*)matComp);
+		MeshComponent* meshComp = (MeshComponent*)component;
+		MaterialComponent* matComp = GetComponent<MaterialComponent>();
 
-// 				if (matComp)
-// 				{
-// 					matComp->SetOwner(this);
-// 					components.push_back(matComp);
-// 				}
-// =======
-		
+		if (matComp != nullptr)
+			meshComp->SetMaterial(matComp);
+		else
 		{
-			MeshComponent* meshComp = (MeshComponent*)component;
-
-			MaterialComponent* matComp = GetComponent<MaterialComponent>();
-			if (matComp != nullptr)
-			{
-				meshComp->SetMaterial(matComp);
-			}
-			else
-			{
-				matComp = new MaterialComponent(this, true);
-				meshComp->SetMaterial(matComp);
-				matComp->SetOwner(this);
-				components.push_back(matComp);
-				//matComp = (MaterialComponent*)CreateComponent(ComponentType::MATERIAL);
-				
-			}
+			matComp = new MaterialComponent(this, true);
+			meshComp->SetMaterial(matComp);
+			matComp->SetOwner(this);
+			components.push_back(matComp);
 		}
+	}		
 		break;
 	case ComponentType::SCRIPT:
 		component = new ScriptComponent(this, name);
@@ -257,8 +228,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::UI_IMAGE:
 		component = new ImageComponent(this);
-		break;
-	
+		break;	
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
 		app->scene->SetMainCamera((CameraComponent*)component);
@@ -277,39 +247,38 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::RIGID_BODY:
 		component = new RigidBodyComponent(this);
-		break;
-	
+    	break;
+	case ComponentType::NAVAGENT:
+		component = new NavAgentComponent(this);
+		break;	
 	case ComponentType::MATERIAL:
 	{
+		MaterialComponent* matComp = GetComponent<MaterialComponent>();
+		if (matComp != nullptr && matComp->IsDefaultMat())
 		{
-			MaterialComponent* matComp = GetComponent<MaterialComponent>();
-			if (matComp != nullptr && matComp->IsDefaultMat())
+			std::vector<Component*>::iterator it = components.begin();
+			for (; it != components.end(); ++it)
 			{
-				std::vector<Component*>::iterator it = components.begin();
-				for (; it != components.end(); ++it)
+				if (*(it) == matComp)
 				{
-					if (*(it) == matComp)
-					{
-						components.erase(it);
-						RELEASE(matComp);
-						break;
-					}
+					components.erase(it);
+					RELEASE(matComp);
+					break;
 				}
-
-				component = new MaterialComponent(this, false);
-			}
-			else
-			{
-				component = new MaterialComponent(this, false);
 			}
 
-			MeshComponent* m = GetComponent<MeshComponent>();
-			if (m != nullptr)
-				m->SetMaterial((MaterialComponent*)component);
+			component = new MaterialComponent(this, false);
+		}
+		else
+		{
+			component = new MaterialComponent(this, false);
 		}
 
+		MeshComponent* m = GetComponent<MeshComponent>();
+		if (m != nullptr)
+			m->SetMaterial((MaterialComponent*)component);
+	}		
 		break;
-	}
 	case ComponentType::LIGHT:
 		component = new ComponentLight();
 		break;
@@ -430,13 +399,6 @@ void GameObject::SetAABB(OBB newOBB)
 {
 	globalObb = newOBB;
 	globalAabb.Enclose(newOBB);
-
-	//if (parent != nullptr && parent != app->scene->GetRoot())
-	//{
-	//	OBB newObb = globalAabb.ToOBB();
-	//	//newObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
-	//	parent->SetAABB(newObb);
-	//}
 }
 
 void GameObject::SetNewAABB()
@@ -496,6 +458,7 @@ void GameObject::OnLoad(JsonParsing& node)
 	uuid = node.GetJsonNumber("UUID");
 	name = node.GetJsonString("Name");
 	active = node.GetJsonBool("Active");
+	staticObj = node.GetJsonBool("Static");
 	prefabID = node.GetJsonNumber("PrefabID");
 	prefabPath = node.GetJsonString("Prefab Path");
 
@@ -518,6 +481,7 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 
@@ -579,9 +543,7 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 	active = node.GetJsonBool("Active");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
-
 	size_t size = node.GetJsonArrayCount(jsonArray);
-
 	std::vector<ComponentType> listComp;
 
 	for (int i = 0; i < size; ++i)
@@ -723,5 +685,14 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			RemoveComponent(GetComponent<AnimationComponent>());
 			break;
 		}
+	}
+}
+
+Component* GameObject::GetComponent(ComponentType type)
+{
+	for (auto& comp : components)
+	{
+		if (comp->type == type)
+			return comp;
 	}
 }

@@ -24,9 +24,6 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 	int ticksPerSecond = animation->mTicksPerSecond;
 	std::vector<BoneData> bones;
 
-	HierarchyData data;
-	ReadHierarchyData(data, scene->mRootNode);
-
 	int boneCount = 0;
 	for (int i = 0; i < animation->mNumChannels; ++i)
 	{
@@ -84,6 +81,9 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 
 		bones.push_back(bone);
 	}
+
+	HierarchyData data;
+	ReadHierarchyData(data, scene->mRootNode, bones, boneCount);
 
 	std::string animName;
 	std::string assetsPath(path);
@@ -309,7 +309,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	RELEASE_ARRAY(buffer);
 }
 
-void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node)
+void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bones, int count)
 {
 	data.name = node->mName.C_Str();
 
@@ -324,10 +324,48 @@ void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node)
 
 	data.transform = float4x4::FromTRS(pos, rot, sca);
 	data.childrenCount = node->mNumChildren;
+
+	bool find = false;
+	for (int i = 0; i < bones.size(); ++i)
+	{
+		if (bones[i].name == data.name)
+		{
+			find = true;
+			break;
+		}
+	}
+
+	if (!find)
+	{
+		BoneData boneData;
+		boneData.id = count;
+		boneData.name = data.name;
+
+		KeyPosition position;
+		position.position = pos;
+		position.timeStamp = 0.0f;
+
+		boneData.positions.push_back(position);
+
+		KeyRotation rotation;
+		rotation.orientation = rot;
+		rotation.timeStamp = 0.0f;
+
+		boneData.rotations.push_back(rotation);
+
+		KeyScale scale;
+		scale.scale = sca;
+		scale.timeStamp = 0.0f;
+
+		boneData.scales.push_back(scale);
+
+		bones.push_back(boneData);
+	}
+
 	for (int i = 0; i < data.childrenCount; ++i)
 	{
 		HierarchyData childData;
-		ReadHierarchyData(childData, node->mChildren[i]);
+		ReadHierarchyData(childData, node->mChildren[i], bones, count);
 		data.children.push_back(childData);
 	}
 }

@@ -20,6 +20,8 @@ public:
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
 	void UpdateFovAndScreen(float width, float height);
 	void UpdateFov();
+
+	void SetNewFov(float horizontalFovRadians);
 	
 	void CompileBuffers();
 	bool CompareRotations(Quat& quat1, Quat& quat2);
@@ -67,7 +69,7 @@ private:
 
 	bool freeMovement = true;
 	GameObject* defTarget = nullptr; // FreeMovement Target
-	float movementSpeed = 0.5f;
+	float movementSpeed = 0.05f;
 	bool followTarget = false;
 	GameObject* target = nullptr;
 	float verticalAngle = -40.0f;

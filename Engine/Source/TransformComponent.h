@@ -57,18 +57,20 @@ public:
 	void ShowTransformationInfo();
 	void ResetTransform();
 
+	float3 GetForward();
+	float3 GetRight();
+	float3 GetUp();
+
 	// UNDO
 	inline void ForceUpdateTransform() { changeTransform = true; }
 	void UpdateEditorRotation();
 	// UNDO
 
-public:
-
-	// Get Axis
-	float3 GetForward();
-	float3 GetUp();
-	float3 GetRight();
-	float3 GetNormalizeAxis(int i);
+	//// Get Axis
+	//float3 GetForward();
+	//float3 GetUp();
+	//float3 GetRight();
+	//float3 GetNormalizeAxis(int i);
 
 private:
 	float3 position;

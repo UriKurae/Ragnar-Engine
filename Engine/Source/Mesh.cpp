@@ -5,6 +5,7 @@
 #include "MeshImporter.h"
 #include "FileSystem.h"
 #include "VertexArray.h"
+#include "IndexBuffer.h"
 
 #include "Profiling.h"
 
@@ -173,5 +174,6 @@ void Mesh::Reimport(ModelParameters& data)
 		//texCoords.clear();
 		//normals.clear();
 	}
+
 	MeshImporter::LoadMesh(vertices, indices, bones, libraryPath);
 }
