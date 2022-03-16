@@ -221,8 +221,7 @@ void RigidBodyComponent::OnEditor()
 		{
 			if (trigger)
 			{
-				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-				app->physics->triggers.push_back(this);
+				SetAsTrigger();
 			}
 			else
 			{
@@ -423,7 +422,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(box.size);
 		break;
 	case SPHERE_SHAPE_PROXYTYPE:
-		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
+		SetSphereRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
@@ -446,6 +445,12 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		break;
 	}
 	editMesh = false;
+}
+
+void RigidBodyComponent::SetSphereRadius(float sphereRadius)
+{
+	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
+	sphere.radius = sphereRadius;
 }
 
 float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
@@ -523,6 +528,12 @@ void RigidBodyComponent::SetAsStatic()
 	isKinematic = false;
 	mass = 0.0f;
 	SetCollisionType(collisionType);
+}
+
+void RigidBodyComponent::SetAsTrigger()
+{
+	body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	app->physics->triggers.push_back(this);
 }
 
 bool RigidBodyComponent::OnLoad(JsonParsing& node)

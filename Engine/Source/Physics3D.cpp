@@ -65,24 +65,23 @@ bool Physics3D::PreUpdate(float dt)
 				btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
 				btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
-				//int numContacts = contactManifold->getNumContacts();
-				for (int j = 0; j < triggers.size(); j++)
+				// numContacts is important because otherwise we can get false collisions  
+				int numContacts = contactManifold->getNumContacts();
+				if (numContacts > 0) 
 				{
-					if (obA == triggers.at(j)->GetBody() || obB == triggers.at(j)->GetBody())
+					// Check all collision with triggers
+					for (int j = 0; j < triggers.size(); j++)
 					{
-						for (int k = 0; k < bodies.size(); k++)
+						if (obA == triggers.at(j)->GetBody() || obB == triggers.at(j)->GetBody())
 						{
-							if (obA == bodies.at(k)->GetBody() || obB == bodies.at(k)->GetBody())
+							for (int k = 0; k < bodies.size(); k++)
 							{
 								if(ScriptComponent* script = bodies[k]->owner->GetComponent<ScriptComponent>())
 									script->CallOnTriggerEnter(triggers[j]);
-
-								//bodies.at(k)->SetOnCollision(true);
-								//bodies.at(k)->SetCollisionTarget(triggers.at(j));
 							}
 						}
-					}		
-				}
+					}
+				}				
 			}
 		}
 	}
@@ -121,8 +120,6 @@ bool Physics3D::CleanUp()
 		RELEASE(obj);
 	}
 
-	/*for (std::vector<C_RigidBody*>::iterator it = bodies.begin(); it != bodies.end(); ++it)
-		RELEASE(*it);*/
 	bodies.clear();
 	bodiesNames.clear();
 
@@ -222,6 +219,7 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 
 	btRigidBody* body = new btRigidBody(rbInfo);
 
+	// Set Flags
 	if (component->isKinematic)
 	{
 		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
@@ -231,6 +229,7 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 		body->setActivationState(ISLAND_SLEEPING);
 	if(component->trigger) body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
+	// Add body to world
 	world->addRigidBody(body);
 	bodies.push_back(component);
 	bodiesNames.push_back(component->owner->name);
@@ -310,7 +309,6 @@ void Physics3D::AddConstraintP2P(btRigidBody& bodyA, btRigidBody& bodyB, const f
 	bodyB.addConstraintRef(p2p);
 	p2p->setDbgDrawSize(2.0f);
 }
-
 void Physics3D::AddConstraintHinge(btRigidBody& bodyA, btRigidBody& bodyB, const float3& anchorA, const float3& anchorB, const float3& axisA, const float3& axisB, bool disable_collision)
 {
 	btHingeConstraint* hinge = new btHingeConstraint(bodyA, bodyB, anchorA, anchorB, axisA, axisB);
@@ -319,6 +317,7 @@ void Physics3D::AddConstraintHinge(btRigidBody& bodyA, btRigidBody& bodyB, const
 	bodyB.addConstraintRef(hinge);
 	hinge->setDbgDrawSize(2.0f);
 }
+
 void Physics3D::SleepAllBodies()
 {
 	for (int i = 0; i < bodies.size(); i++)

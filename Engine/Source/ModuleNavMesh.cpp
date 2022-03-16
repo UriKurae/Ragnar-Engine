@@ -30,8 +30,7 @@ ModuleNavMesh::~ModuleNavMesh()
 {
 	CleanUp();
 
-	delete buildSettings;
-	buildSettings = nullptr;
+	RELEASE(buildSettings);
 }
 
 bool ModuleNavMesh::Start()
@@ -93,6 +92,7 @@ void ModuleNavMesh::ClearNavMeshes()
 {
 	CleanUp();
 
+	RELEASE(geometry);
 	geometry = new InputGeom();
 	geometry->SetMesh();
 }
@@ -112,17 +112,8 @@ bool ModuleNavMesh::IsWalkable(float x, float z, float3& hitPoint)
 
 bool ModuleNavMesh::CleanUp()
 {
-	if (geometry != nullptr)
-	{
-		delete geometry;
-		geometry = nullptr;
-	}
-
-	if (navMeshBuilder != nullptr)
-	{
-		delete navMeshBuilder;
-		navMeshBuilder = nullptr;
-	}
+	RELEASE(geometry);
+	RELEASE(navMeshBuilder);
 
 	return true;
 }

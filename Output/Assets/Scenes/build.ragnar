@@ -120,15 +120,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -5.641993522644043,
+                        -0.26639080047607422,
                         11.183857917785645,
-                        -18.824314117431641
+                        13.648064613342285
                     ],
                     "Quaternion": [
-                        0.10118459165096283,
-                        0.10326525568962097,
-                        -0.23148880898952484,
-                        0.96203476190567017
+                        -0.14068865776062012,
+                        -0.57568717002868652,
+                        0.37059000134468079,
+                        0.71516019105911255
                     ],
                     "RotationEditor": [
                         0,
@@ -147,9 +147,9 @@
                     "Vertical Fov": 0.92976027727127075,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -5.641993522644043,
+                        -0.26639080047607422,
                         11.183857917785645,
-                        -18.824314117431641
+                        13.648064613342285
                     ],
                     "Type": 3,
                     "Zoom": 24,
@@ -165,7 +165,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 722.39971923828125,
+                    "Horizontal Angle": 556.39971923828125,
                     "Right Click Rotation": true,
                     "Arrow Rotation": false,
                     "WASD Movement": false,
@@ -191,7 +191,7 @@
                     "Position": [
                         0,
                         0.45086690783500671,
-                        -0.4539036750793457
+                        0
                     ],
                     "Quaternion": [
                         0,
@@ -200,9 +200,9 @@
                         1
                     ],
                     "RotationEditor": [
-                        -0,
                         0,
-                        -0
+                        0,
+                        0
                     ],
                     "Scale": [
                         1,
@@ -229,7 +229,7 @@
                         {
                             "State": "Walk",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
-                            "Loop": false
+                            "Loop": true
                         },
                         {
                             "State": "Idle",
@@ -287,93 +287,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 155635184,
+                    "pointer": 81921376,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 5,
-                    "force": 100
-                }
-            ]
-        },
-        {
-            "UUID": 892713844,
-            "Parent UUID": 417171234,
-            "Name": "Image",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        7,
-                        -99.5,
-                        0
-                    ],
-                    "Scale": [
-                        11.606715202331543,
-                        5.9107465744018555,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 200,
-                    "buttonHeight": 50
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI_skill.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 1853976858,
-            "Parent UUID": 417171234,
-            "Name": "Image",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -170,
-                        -99.5,
-                        0
-                    ],
-                    "Scale": [
-                        9.0242204666137695,
-                        5.9107465744018555,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 155.5,
-                    "buttonHeight": 50
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI_chra.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "force": 100,
+                    "rockSoundRadius": 4,
+                    "canThrowKnife": true
                 }
             ]
         },
@@ -666,9 +586,9 @@
                         0.70710688829421997
                     ],
                     "RotationEditor": [
-                        1.570796012878418,
                         0,
-                        -0
+                        0,
+                        0
                     ],
                     "Scale": [
                         20,
@@ -691,9 +611,9 @@
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
-                        19.899999618530273,
-                        0.80000001192092896,
-                        4.0999999046325684
+                        1,
+                        1,
+                        1
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -761,35 +681,6 @@
                 {
                     "Type": 1,
                     "Path": "Settings\/EngineResources\/__Cube.mesh",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": true,
-                    "Mass": 1,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
                     "Active": true
                 }
             ]

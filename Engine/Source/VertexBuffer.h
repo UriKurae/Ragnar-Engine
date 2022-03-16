@@ -27,7 +27,6 @@ public:
 	void Unbind() const;
 
 	inline unsigned int GetCount() const { return count; }
-
 	inline const BufferLayout& GetLayout() const { return layout; }
 
 	// Make sure to do this BEFORE adding the VertexBuffer into the VertexArray.

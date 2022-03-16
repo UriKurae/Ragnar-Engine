@@ -64,7 +64,6 @@ public:
 
 	GameObject* GameObjectFromCSGO(MonoObject* goObj);
 	GameObject* GameObjectFromCSComponent(MonoObject* goComponent);
-
 	MonoObject* QuatToCS(Quat& inVec) const;
 	MonoObject* Float3ToCS(float3& inVec) const;
 	MonoObject* GoToCSGO(GameObject* inGo) const;
