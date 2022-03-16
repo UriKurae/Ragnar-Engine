@@ -64,12 +64,6 @@ bool TextEditorMenu::Update(float dt)
 			else if (!allScriptsFiles.empty())
 				allScriptsFiles.clear();
 
-			/*if (ImGui::MenuItem("Save"))
-			{
-				std::string toSave = textEditor.GetText();
-				app->fs->Save(fileToEdit.data(), toSave.data(), toSave.size());
-				app->moduleMono->ReCompileCS();
-			}*/
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Edit"))
