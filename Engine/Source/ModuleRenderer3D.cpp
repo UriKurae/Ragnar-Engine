@@ -284,6 +284,8 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadIdentity();
 	glPopMatrix();
 
+	glEnable(GL_BLEND);
+
 	// DRAW UI
 	ButtonComponent* aux = nullptr;
 	TextComponent* aux1 = nullptr;
@@ -354,6 +356,8 @@ bool ModuleRenderer3D::PostUpdate()
 
 	SDL_GL_SwapWindow(app->window->window);
 
+	glDisable(GL_BLEND);
+	
 	return true;
 }
 
