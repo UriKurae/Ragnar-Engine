@@ -4,7 +4,7 @@ using RagnarEngine;
 
 public class Player : RagnarComponent
 {
-	public int velocity = 5;
+	public int velocity = 1000;
 	public GameObject target = null;
     public float force = 100;
     public float rockSoundRadius = 4f;
@@ -74,22 +74,22 @@ public class Player : RagnarComponent
         // WASD Movement
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(0, 0, 1000);
+            Vector3 f = new Vector3(0, 0, velocity);
             rb.ApplyCentralForce(f);
         }
         else if (Input.GetKey(KeyCode.A) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(1000, 0, 0);
+            Vector3 f = new Vector3(velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
         else if (Input.GetKey(KeyCode.S) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(0, 0, -1000);
+            Vector3 f = new Vector3(0, 0, -velocity);
             rb.ApplyCentralForce(f);
         }
         else if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(-1000, 0, 0);
+            Vector3 f = new Vector3(-velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
         ////////////////////////////
@@ -145,4 +145,5 @@ public class Player : RagnarComponent
         other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
     }
 }
+
 
