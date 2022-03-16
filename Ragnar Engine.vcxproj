@@ -297,6 +297,7 @@
     <ClInclude Include="Engine\Source\Particle.h" />
     <ClInclude Include="Engine\Source\ParticleEffect.h" />
     <ClInclude Include="Engine\Source\ParticleEffect_Acceleration.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect_Color.h" />
     <ClInclude Include="Engine\Source\ParticleEffect_Size.h" />
     <ClInclude Include="Engine\Source\ParticleEffect_Velocity.h" />
     <ClInclude Include="Engine\Source\ParticleEmitter.h" />
@@ -488,6 +489,7 @@
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect_Acceleration.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect_Color.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect_Size.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect_Velocity.cpp" />
     <ClCompile Include="Engine\Source\ParticleEmitter.cpp" />

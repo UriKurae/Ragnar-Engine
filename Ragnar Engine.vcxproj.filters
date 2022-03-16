@@ -832,6 +832,9 @@
     <ClInclude Include="Engine\Source\ParticleEffect_Size.h">
       <Filter>Particles\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Color.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1375,6 +1378,9 @@
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\ParticleEffect_Size.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Color.cpp">
       <Filter>Particles\Effects</Filter>
     </ClCompile>
   </ItemGroup>
