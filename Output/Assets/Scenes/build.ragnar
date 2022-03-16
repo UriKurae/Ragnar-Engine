@@ -120,15 +120,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        8.2242946624755859,
+                        10.152107238769531,
                         11.183857917785645,
-                        -12.328786849975586
+                        -9.1076087951660156
                     ],
                     "Quaternion": [
-                        -0.63975530862808228,
-                        0.72107625007629395,
-                        -0.1017555296421051,
-                        0.24578046798706055
+                        -0.43246972560882568,
+                        0.8525383472442627,
+                        -0.040350023657083511,
+                        0.29072368144989014
                     ],
                     "RotationEditor": [
                         0,
@@ -147,12 +147,12 @@
                     "Vertical Fov": 0.92976027727127075,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        8.2242946624755859,
+                        10.152107238769531,
                         11.183857917785645,
-                        -12.328786849975586
+                        -9.1076087951660156
                     ],
                     "Type": 3,
-                    "Zoom": 24,
+                    "Zoom": 10,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -165,7 +165,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 307.39971923828125,
+                    "Horizontal Angle": 294.39971923828125,
                     "Right Click Rotation": true,
                     "Arrow Rotation": false,
                     "WASD Movement": false,
@@ -287,7 +287,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 66705856,
+                    "pointer": 66478704,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 5,
@@ -380,7 +380,7 @@
             ]
         },
         {
-            "UUID": 1107009206,
+            "UUID": 1225016965,
             "Parent UUID": 417171234,
             "Name": "RootNode",
             "Active": true,
@@ -416,8 +416,8 @@
             ]
         },
         {
-            "UUID": 1481152460,
-            "Parent UUID": 1107009206,
+            "UUID": 1593451297,
+            "Parent UUID": 1225016965,
             "Name": "Cube.001",
             "Active": true,
             "Static": true,
@@ -457,14 +457,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.010.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.010.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 262086665,
-            "Parent UUID": 1107009206,
+            "UUID": 120268852,
+            "Parent UUID": 1225016965,
             "Name": "Cube.002",
             "Active": true,
             "Static": true,
@@ -504,14 +504,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.011.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.011.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 652891155,
-            "Parent UUID": 1107009206,
+            "UUID": 1898365290,
+            "Parent UUID": 1225016965,
             "Name": "Cube.003",
             "Active": true,
             "Static": true,
@@ -551,14 +551,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.012.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.012.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 367954219,
-            "Parent UUID": 1107009206,
+            "UUID": 18039237,
+            "Parent UUID": 1225016965,
             "Name": "Cube.004",
             "Active": true,
             "Static": true,
@@ -598,14 +598,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.013.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.013.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 888671495,
-            "Parent UUID": 1107009206,
+            "UUID": 509724556,
+            "Parent UUID": 1225016965,
             "Name": "Cube.005",
             "Active": true,
             "Static": true,
@@ -645,14 +645,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.014.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.014.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 1829899611,
-            "Parent UUID": 1107009206,
+            "UUID": 1902608001,
+            "Parent UUID": 1225016965,
             "Name": "Cube.006",
             "Active": true,
             "Static": true,
@@ -664,7 +664,7 @@
                     "Active": true,
                     "Position": [
                         -7.1163177490234375,
-                        -0.20033326745033264,
+                        0.80921024084091187,
                         54.287708282470703
                     ],
                     "Quaternion": [
@@ -692,14 +692,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.015.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.015.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 869754315,
-            "Parent UUID": 1107009206,
+            "UUID": 818606946,
+            "Parent UUID": 1225016965,
             "Name": "Cube",
             "Active": true,
             "Static": true,
@@ -739,14 +739,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.018.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.018.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 1743171577,
-            "Parent UUID": 1107009206,
+            "UUID": 1147239883,
+            "Parent UUID": 1225016965,
             "Name": "Cube.010",
             "Active": true,
             "Static": true,
@@ -786,14 +786,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.021.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.021.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 326939110,
-            "Parent UUID": 1107009206,
+            "UUID": 1535259533,
+            "Parent UUID": 1225016965,
             "Name": "Cube.012",
             "Active": true,
             "Static": true,
@@ -833,14 +833,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.023.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.023.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 338354869,
-            "Parent UUID": 1107009206,
+            "UUID": 1546490331,
+            "Parent UUID": 1225016965,
             "Name": "Cube.013",
             "Active": true,
             "Static": true,
@@ -880,14 +880,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.024.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.024.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 2021673224,
-            "Parent UUID": 1107009206,
+            "UUID": 1283553631,
+            "Parent UUID": 1225016965,
             "Name": "Cube.007",
             "Active": true,
             "Static": true,
@@ -927,14 +927,14 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.fbx",
                     "Active": true
                 }
             ]
         },
         {
-            "UUID": 1956112059,
-            "Parent UUID": 1107009206,
+            "UUID": 1699769786,
+            "Parent UUID": 1225016965,
             "Name": "Cube.008",
             "Active": true,
             "Static": true,
@@ -974,7 +974,36 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockoutlvl_1Final__Cube.001.fbx",
+                    "Path": "Assets\/Resources\/blockoutlvl_1__Cube.001.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
                     "Active": true
                 }
             ]
