@@ -93,47 +93,34 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 	agentProperties->acceleration = node.GetJsonNumber("Acceleration");
 	agentProperties->stoppingDistance = node.GetJsonNumber("StoppingDistance");
 
-	//Complete
-	agentProperties->targetPos = node.GetJson3Number(node,"TargetPos");
-	
-	//agentProperties->targetPos = node.GetJsonNumber("TargetPos");
-	agentProperties->targetPosSet = node.GetJsonNumber("TargetPosSet");
+	agentProperties->targetPos = node.GetJson3Number(node,"Target");
+	agentProperties->targetPosSet = node.GetJsonBool("TargetSet");
 
-	agentProperties->pathType = (PathType)(int)node.GetJsonNumber("TargetPos");
+	agentProperties->pathType = (PathType)(int)node.GetJsonNumber("PathType");
 
 	agentProperties->m_startRef = node.GetJsonNumber("TargetPos");
 	agentProperties->m_endRef = node.GetJsonNumber("TargetPos");
 
-	agentProperties->m_npolys = node.GetJsonNumber("TargetPos");
-	//LoadArray(agentProperties->m_npolys,node, &(float)agentProperties->m_polys, "TargetPos");
+	agentProperties->m_npolys = node.GetJsonNumber("NumPolys");
+	agentProperties->m_nstraightPath = node.GetJsonNumber("NumStraight");
+	agentProperties->m_nsmoothPath = node.GetJsonNumber("NumSmooth");
+
 	if (agentProperties->m_npolys > 0)
 	{
-		JSON_Array* array1 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()),"TargetPos");
-		JSON_Array* array2 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()),"TargetPos");
-		JSON_Array* array3 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()),"TargetPos");
-		JSON_Array* array4 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()),"TargetPos");
+		JSON_Array* array1 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Polys");
+		JSON_Array* array2 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "StraightPath");
+		JSON_Array* array3 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "StraightPathFlags");
+		JSON_Array* array4 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "StraightPathPolys");
+		JSON_Array* array5 = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "SmoothPath");
 		for (int i = 0; i < agentProperties->m_npolys; i++)
 		{
 			agentProperties->m_polys[i] = json_array_get_number(array1,i);
 			agentProperties->m_straightPath[i] = json_array_get_number(array2, i);
 			agentProperties->m_straightPathFlags[i] = json_array_get_number(array3, i);
 			agentProperties->m_straightPathPolys[i] = json_array_get_number(array4, i);
-		}
-
-	}
-
-	agentProperties->m_nsmoothPath = node.GetJsonNumber("TargetPos");
-	if (agentProperties->m_nsmoothPath > 0)
-	{
-		JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "TargetPos");
-		for (int i = 0; i < agentProperties->m_nsmoothPath; i++)
-		{
-			agentProperties->m_smoothPath[i] = json_array_get_number(array, i);
+			agentProperties->m_smoothPath[i] = json_array_get_number(array5, i);
 		}
 	}
-
-	agentProperties->m_nstraightPath = node.GetJsonNumber("TargetPos");
-
 
 	return true;
 }
@@ -152,6 +139,32 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AngularSpeed", (float)agentProperties->angularSpeed);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Acceleration", (float)agentProperties->acceleration);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "StoppingDistance", (float)agentProperties->stoppingDistance);
+
+	file.SetNewJson3Number(file, "Target", agentProperties->targetPos);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "TargetSet", agentProperties->targetPosSet);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PathType", (int)agentProperties->pathType);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "NumPolys", agentProperties->m_npolys);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "NumStraight", agentProperties->m_nstraightPath);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "NumSmooth", agentProperties->m_nstraightPath);
+
+	if (agentProperties->m_npolys > 0)
+	{
+		JSON_Array* array1 = file.SetNewJsonArray(file.GetRootValue(), "Polys");
+		JSON_Array* array2 = file.SetNewJsonArray(file.GetRootValue(), "StraightPath");
+		JSON_Array* array3 = file.SetNewJsonArray(file.GetRootValue(), "StraightPathFlags");
+		JSON_Array* array4 = file.SetNewJsonArray(file.GetRootValue(), "StraightPathPolys");
+		JSON_Array* array5 = file.SetNewJsonArray(file.GetRootValue(), "SmoothPath");
+		for (int i = 0; i < agentProperties->m_npolys; i++)
+		{
+			json_array_append_number(array1, agentProperties->m_polys[i]);
+			json_array_append_number(array2, agentProperties->m_straightPath[i]);
+			json_array_append_number(array3, agentProperties->m_straightPathFlags[i]);
+			json_array_append_number(array4, agentProperties->m_straightPathPolys[i]);
+			json_array_append_number(array5, agentProperties->m_smoothPath[i]);
+		}
+	}
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
