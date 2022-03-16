@@ -1,7 +1,4 @@
 #include "ParticleSystemComponent.h"
-#include "BillboardParticleComponent.h"
-#include "GameObject.h"
-#include "Globals.h"
 
 ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformComponent* trans, uint numParticles)
 {
@@ -9,9 +6,6 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
 	transform = trans;
 	active = true; // Component is active
     isActive = false; // Simulation is active
-
-    if (own->GetComponent<BillboardParticleComponent>() == nullptr)
-        own->CreateComponent(ComponentType::BILLBOARD);
 }
 
 ParticleSystemComponent::~ParticleSystemComponent()
@@ -30,26 +24,16 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 
 bool ParticleSystemComponent::Update(float dt)
 {
-    if (isActive && (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true))
-    {
-        for (int i = 0; i < emitters.size(); i++)
+	if (isActive && (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true))
+	{
+		for (int i = 0; i < emitters.size(); i++)
         {
             emitters[i]->Emit(dt);
-            emitters[i]->Update(dt);
-        }
-    }
+			emitters[i]->Update(dt);            
+		}
+	}
 
-    for (std::vector<ParticleEmitter*>::iterator it = emitters.begin(); it != emitters.end(); ++it)
-    {
-        if ((*it)->toDelete)
-        {
-            RELEASE((*it));
-            emitters.erase(it);
-            break;
-        }
-    }
-
-    return true;
+	return true;
 }
 
 void ParticleSystemComponent::Draw(CameraComponent* gameCam)
@@ -84,10 +68,6 @@ void ParticleSystemComponent::OnEditor()
         ImGui::Checkbox("Looping", &looping);
         ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
 
-        if (ImGui::Button(ICON_FA_PLUS" Create Emitter")) {
-            emitters.push_back(new ParticleEmitter(owner));
-        }
-
 /*        if (ImGui::Button("Save template"))
         {
             if (app->scene->SceneDirectory().empty())
@@ -98,7 +78,7 @@ void ParticleSystemComponent::OnEditor()
             else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
         }*/
 
-        //ImGui::Spacing();
+        ImGui::Spacing();
         std::string guiName = "";
         std::string suffixLabel = "";
         for (int i = 0; i < emitters.size(); ++i)
@@ -106,16 +86,15 @@ void ParticleSystemComponent::OnEditor()
             suffixLabel = "##";
             suffixLabel += i;
             ImGui::Separator();
-            //ImGui::Spacing();
+            ImGui::Spacing();
 
             emitters[i]->OnEditor(i);
         }
 
-        ImGui::Spacing();
-        ImGui::Spacing();
-        ImGui::Unindent();
-        ImGui::Separator();
-        ComponentOptions(this);
+        if (ImGui::Button("Create Emitter")) {
+            emitters.push_back(new ParticleEmitter(owner));
+        }
+
         ImGui::Separator();
     }
 }

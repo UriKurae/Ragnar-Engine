@@ -1,7 +1,6 @@
 #pragma once
 #include "Particle.h"
 #include "JsonParsing.h"
-#include "IconsFontAwesome5.h"
 
 enum class ParticleEffectType : int
 {
@@ -16,7 +15,7 @@ class ParticleEffect
 {
 public:
 	ParticleEffect(ParticleEffectType type);
-	virtual ~ParticleEffect();
+	~ParticleEffect();
 
 	virtual void Init(Particle& particle) {}
 	virtual void Update(Particle& particle, float dt) {}
