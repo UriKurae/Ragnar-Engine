@@ -28,8 +28,7 @@ NavAgentComponent::~NavAgentComponent()
 		}
 	}
 
-	delete agentProperties;
-	agentProperties = nullptr;
+	RELEASE(agentProperties);
 }
 
 bool NavAgentComponent::Update(float dt)
