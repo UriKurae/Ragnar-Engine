@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Math/float4x4.h"
+#include "glmath.h"
 
 enum class Operation
 {
@@ -71,6 +72,7 @@ public:
 	//float3 GetUp();
 	//float3 GetRight();
 	//float3 GetNormalizeAxis(int i);
+	Mat4x4 float4x4ToMat4x4();
 
 private:
 	float3 position;

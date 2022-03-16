@@ -4,6 +4,8 @@
 
 #include "ModuleScene.h"
 #include "C_RigidBody.h"
+#include "TransformComponent.h"
+#include "Mesh.h"
 
 #include "btBulletDynamicsCommon.h"
 
@@ -205,6 +207,25 @@ btRigidBody* Physics3D::CollisionShape(const PPlane& plane, RigidBodyComponent* 
 	btCollisionShape* colShape = new btStaticPlaneShape(btVector3(plane.normal.x, plane.normal.y, plane.normal.z), plane.constant);
 	btTransform startTransform;
 	startTransform.setFromOpenGLMatrix(&plane.transform);
+	return AddBody(colShape, startTransform, component);
+}
+
+btRigidBody* Physics3D::CollisionShape(const std::shared_ptr<Mesh> mesh, RigidBodyComponent* component)
+{
+	btIndexedMesh indexedMesh;
+	indexedMesh.m_numTriangles = mesh->GetIndicesSize() / 3;
+	indexedMesh.m_triangleIndexBase = (unsigned char*)&mesh->GetIndicesVector()[0];
+	indexedMesh.m_triangleIndexStride = 3 * sizeof(unsigned int);
+	indexedMesh.m_numVertices = mesh->GetVerticesSize();
+	indexedMesh.m_vertexBase = (unsigned char*)&mesh->GetVerticesVector()[0];
+	indexedMesh.m_vertexStride = sizeof(Vertex);
+
+	btTriangleIndexVertexArray* mTriangleIndexVertexArray = new btTriangleIndexVertexArray();
+	mTriangleIndexVertexArray->addIndexedMesh(indexedMesh, PHY_SHORT);
+
+	btCollisionShape* colShape = new btBvhTriangleMeshShape(mTriangleIndexVertexArray, true, true);
+	btTransform startTransform;
+	startTransform.setFromOpenGLMatrix(&component->owner->GetComponent<TransformComponent>()->float4x4ToMat4x4());
 	return AddBody(colShape, startTransform, component);
 }
 

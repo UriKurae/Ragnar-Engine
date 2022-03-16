@@ -14,6 +14,7 @@ enum class CollisionType
 	CYLINDER = 3,
 	CONE = 4,
 	STATIC_PLANE = 5,
+	MESH = 6
 };
 
 class RigidBodyComponent : public Component

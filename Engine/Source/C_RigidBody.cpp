@@ -156,11 +156,11 @@ void RigidBodyComponent::OnEditor()
 			else app->physics->DesactivateCollision(body);
 		}
 		ImGui::SameLine();
-		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane" };
+		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane", "Mesh"};
 
 		ImGui::PushItemWidth(85);
 		int currentCollision = (int)collisionType;
-		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 6))
+		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 7))
 		{
 			collisionType = (CollisionType)currentCollision;
 			SetCollisionType(collisionType);
@@ -403,6 +403,9 @@ void RigidBodyComponent::EditCollisionMesh()
 		ImGui::Text("Constant: "); ImGui::SameLine();
 		if (ImGui::DragFloat("##Constant", &plane.constant, 0.1f)) editMesh = true;
 		break;
+	case CollisionType::MESH:
+		ImGui::Text("Don't can modified collision mesh");
+		break;
 	default:
 		break;
 	}
@@ -493,6 +496,9 @@ void RigidBodyComponent::CreateBody()
 		break;
 	case CollisionType::STATIC_PLANE:
 		body = app->physics->CollisionShape(plane, this);
+		break;
+	case CollisionType::MESH:
+		body = app->physics->CollisionShape(owner->GetComponent<MeshComponent>()->GetMesh(), this);
 		break;
 	default:
 		break;
