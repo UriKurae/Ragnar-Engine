@@ -1,0 +1,1367 @@
+{
+    "Game Objects": [
+        {
+            "UUID": 417171234,
+            "Parent UUID": 0,
+            "Name": "build",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": []
+        },
+        {
+            "UUID": 1340834673,
+            "Parent UUID": 417171234,
+            "Name": "Directional Light",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        50,
+                        50,
+                        50
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 8,
+                    "Active": true,
+                    "Light Type": 1,
+                    "Direction": [
+                        1,
+                        0,
+                        0
+                    ],
+                    "Ambient": [
+                        0.25,
+                        0.25,
+                        0.25
+                    ],
+                    "Diffuse": [
+                        0.75,
+                        0.75,
+                        0.75
+                    ],
+                    "Specular": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 2128337088,
+            "Parent UUID": 417171234,
+            "Name": "cameraController",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        8.7004261016845703,
+                        11.183857917785645,
+                        7.1572380065917969
+                    ],
+                    "Quaternion": [
+                        0.30410283803939819,
+                        -0.50604653358459473,
+                        0.0083964532241225243,
+                        0.80707365274429321
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.4142135381698608,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 0.95770376920700073,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        8.7004261016845703,
+                        11.183857917785645,
+                        7.1572380065917969
+                    ],
+                    "Type": 3,
+                    "Zoom": 24,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Movement Speed": 0.5,
+                    "Target Pos": 2021177439,
+                    "Vertical Angle": -56,
+                    "Lock Vertical Angle": false,
+                    "Rotation Speed": 0.5,
+                    "Radius": 20,
+                    "Horizontal Angle": 595.39971923828125,
+                    "Right Click Rotation": true,
+                    "Arrow Rotation": false,
+                    "WASD Movement": false,
+                    "Border Movement": false,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0
+                }
+            ]
+        },
+        {
+            "UUID": 2021177439,
+            "Parent UUID": 417171234,
+            "Name": "Player",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0.45086690783500671,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/AnimatedDummy__BlueGuy.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "Idle",
+                    "Animations": [
+                        {
+                            "State": "Walk",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Rifle_Idle__Idle.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Shoot",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
+                            "Loop": false
+                        }
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "None"
+                        }
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 2,
+                    "Radius": 0.30000001192092896,
+                    "Height": 1.6000000238418579,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 60,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1388560002,
+            "Parent UUID": 417171234,
+            "Name": "Ground",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        -0.16094398498535156,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        20,
+                        1,
+                        20
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 5,
+                    "Normal": [
+                        0,
+                        1,
+                        0
+                    ],
+                    "Constant": 0.5,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1649238540,
+            "Parent UUID": 417171234,
+            "Name": "Wall 1",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -9.9990205764770508,
+                        2.0048873424530029,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        -0.70727956295013428,
+                        0.70693397521972656
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        4.0999999046325684,
+                        0.10000007599592209,
+                        20
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 251971884,
+            "Parent UUID": 417171234,
+            "Name": "Wall 3",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        10.000000953674316,
+                        1.9999963045120239,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0.70710664987564087,
+                        0.70710694789886475
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        4.0998835563659668,
+                        0.099997498095035553,
+                        20
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1205700819,
+            "Parent UUID": 417171234,
+            "Name": "Wall 4",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        2.0000035762786865,
+                        9.9999990463256836
+                    ],
+                    "Quaternion": [
+                        0.70710664987564087,
+                        0,
+                        0,
+                        0.70710688829421997
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        20,
+                        0.09999798983335495,
+                        4.0999078750610352
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 265814943,
+            "Parent UUID": 417171234,
+            "Name": "Trash 1",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        6,
+                        1,
+                        -5
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.25881907343864441,
+                        0,
+                        0.96592581272125244
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1,
+                        1.3955485820770264,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 185076044,
+            "Parent UUID": 417171234,
+            "Name": "Trash 2",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        5,
+                        1,
+                        -6
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1.3999999761581421,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1163337140,
+            "Parent UUID": 417171234,
+            "Name": "Trash 3",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        7,
+                        1,
+                        -6
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1.3999999761581421,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1214010153,
+            "Parent UUID": 417171234,
+            "Name": "Trash 4",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        5.9999995231628418,
+                        2.2448813915252686,
+                        -6
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        -0.70710664987564087,
+                        0.70710688829421997
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99995207786560059,
+                        1.39990234375,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 813752052,
+            "Parent UUID": 417171234,
+            "Name": "Wall center",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -2,
+                        1,
+                        -5
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.5,
+                        1.3999999761581421,
+                        10
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 361365125,
+            "Parent UUID": 417171234,
+            "Name": "Wall left",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8,
+                        1,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        4,
+                        1.3999999761581421,
+                        0.5
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2079792075,
+            "Parent UUID": 417171234,
+            "Name": "Cylinder 1",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8,
+                        1.0000008344650269,
+                        -7
+                    ],
+                    "Quaternion": [
+                        0.70710712671279907,
+                        0,
+                        0,
+                        0.70710694789886475
+                    ],
+                    "RotationEditor": [
+                        1.5707963705062866,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        0.5,
+                        0.49998858571052551,
+                        0.69998615980148315
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cylinder.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Sectors": 24,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1231973631,
+            "Parent UUID": 417171234,
+            "Name": "Cylinder 2",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7,
+                        1.0000028610229492,
+                        -7.9999995231628418
+                    ],
+                    "Quaternion": [
+                        0.70710688829421997,
+                        0,
+                        0,
+                        0.70710664987564087
+                    ],
+                    "RotationEditor": [
+                        1.5707963705062866,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.5,
+                        0.49999073147773743,
+                        0.69998151063919067
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cylinder.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Sectors": 24,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 322783125,
+            "Parent UUID": 417171234,
+            "Name": "Cylinder 3",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7.6006631851196289,
+                        2.3814036846160889,
+                        -7.3794169425964355
+                    ],
+                    "Quaternion": [
+                        0.70710688829421997,
+                        0,
+                        0,
+                        0.70710664987564087
+                    ],
+                    "RotationEditor": [
+                        1.5707963705062866,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.5,
+                        0.49996128678321838,
+                        0.69992262125015259
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cylinder.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Sectors": 24,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 268799058,
+            "Parent UUID": 417171234,
+            "Name": "Obstacle",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -6.2942304611206055,
+                        1,
+                        7.0980758666992188
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.50000005960464478,
+                        0,
+                        0.86602538824081421
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        3.0000007152557373,
+                        1.3999999761581421,
+                        1.5000003576278687
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 892713844,
+            "Parent UUID": 417171234,
+            "Name": "Image",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        7,
+                        -99.5,
+                        0
+                    ],
+                    "Scale": [
+                        9.2040205001831055,
+                        4.528170108795166,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 200,
+                    "buttonHeight": 50
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI_skill.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1853976858,
+            "Parent UUID": 417171234,
+            "Name": "Image",
+            "Active": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -170,
+                        -99.5,
+                        0
+                    ],
+                    "Scale": [
+                        7.1561260223388672,
+                        4.528170108795166,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 155.5,
+                    "buttonHeight": 50
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI_chra.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        }
+    ]
+}

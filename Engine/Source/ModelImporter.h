@@ -7,7 +7,7 @@
 
 class GameObject;
 class ModelParameters;
-class aiScene;
+struct aiScene;
 class aiNode;
 
 typedef unsigned int uint;

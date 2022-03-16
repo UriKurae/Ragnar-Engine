@@ -4,6 +4,7 @@
 
 #include <map>
 #include <memory>
+#include <queue>
 
 
 struct AnimState
@@ -11,6 +12,7 @@ struct AnimState
 	std::string state;
 	std::shared_ptr<Animation> anim;
 	bool loop;
+	bool hasFinished;
 };
 
 class AnimationComponent : public Component
@@ -51,4 +53,6 @@ public:
 
 	AnimState* currAnim;
 	std::vector<AnimState> animations;
+
+	std::queue<AnimState*> animQueue;
 };

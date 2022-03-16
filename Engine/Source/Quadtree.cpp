@@ -96,10 +96,7 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 	{
 		std::stack<QuadtreeNode*> nodes;
 
-		for (int i = 0; i < 4; ++i)
-		{
-			if (root->GetChild(i) != nullptr) nodes.push(root->GetChild(i));
-		}
+		nodes.push(root);
 
 		while (!nodes.empty())
 		{

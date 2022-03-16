@@ -73,6 +73,9 @@
     <Filter Include="PhysicsEngine">
       <UniqueIdentifier>{caaeba32-e8fd-448a-a552-88a21bcf8e7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\GameObject\Components\UI">
+      <UniqueIdentifier>{e7c2aa50-fdb9-4519-ac74-100049977be3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -676,6 +679,30 @@
     <ClInclude Include="Dependencies\Imgui\imgui_stdlib.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\Imgui\bezier.hpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleUI.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ButtonComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CheckBoxComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\SliderComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Transform2DComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Text.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ImageComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1091,6 +1118,27 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Component.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\Imgui\bezier.cpp">
+      <Filter>Sources\Libraries\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleUI.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ButtonComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\CheckBoxComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\SliderComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Transform2DComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ImageComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

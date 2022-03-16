@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "MeshComponent.h"
 
+#include "ModuleScene.h"
+
 #include "FileSystem.h"
 #include "ResourceManager.h"
 
@@ -98,12 +100,29 @@ void AnimationComponent::OnEditor()
 			ImGui::PopItemWidth();
 
 			ImGui::Checkbox("Loop", &currState->loop);
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_FA_INFO) && currAnim)
+			{
+				currAnim = currState;
+			}
 			ImGui::PopID();
 		}
 
 		if (ImGui::Button(ICON_FA_PLUS))
 		{
-			animations.push_back({ "None", nullptr, false });
+			if (currAnim != nullptr)
+			{
+				std::string aux = currAnim->state;
+				animations.push_back({ "None", nullptr, false });
+				for (int i = 0; i < animations.size(); ++i)
+				{
+					if (animations[i].state == aux) currAnim = &animations[i];
+				}
+			}
+			else
+			{
+				animations.push_back({ "None", nullptr, false });
+			}
 		}
 		ImGui::SameLine();
 		if (ImGui::Button(ICON_FA_MINUS))
@@ -137,27 +156,36 @@ void AnimationComponent::OnEditor()
 		}
 	}
 	ImGui::PopID();
-
-	ImGui::Separator();
 }
 
 bool AnimationComponent::Update(float dt)
 {
 	deltaTime = dt;
-	if (currAnim && playing)
+	if (currAnim && playing && app->scene->GetGameState() == GameState::PLAYING)
 	{
 		// Loop time keeps track of the miliseconds that passed since the start of the animation
 		// GetDuration gets the duration of the animation in miliseconds
 		if (loopTime > currAnim->anim->GetDuration())
 		{
+			currAnim->hasFinished = true;
 			// When it reaches the desired duration, we reset everything
-			if (currAnim->loop) loopTime = 0.0f;
+			if (currAnim->loop && animQueue.empty()) loopTime = 0.0f;
 			else
 			{
 				loopTime = 0.0f;
 				playing = false;
+				if(animQueue.empty())
+				{
+					Play("Idle");
+				}
+				else
+				{
+					currAnim = animQueue.front();
+					animQueue.pop();
+				}
 			}
 		}
+
 		// Loop time increases by our delta time
 		loopTime += dt;
 		currentTime += currAnim->anim->GetTicksPerSecond() * dt;
@@ -198,8 +226,35 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 
 bool AnimationComponent::OnLoad(JsonParsing& node)
 {
-	//currAnim = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
 	active = node.GetJsonBool("Active");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Animations");
+
+	animations.clear();
+
+	std::string currAnimState = node.GetJsonString("Current Anim");
+	size_t size = node.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		AnimState anim;
+
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		anim.state = c.GetJsonString("State");
+		anim.loop = c.GetJsonBool("Loop");
+		anim.anim = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->LoadResource(std::string(c.GetJsonString("Path Anim Assets"))));
+
+		animations.push_back(anim);
+	}
+
+	for (std::vector<AnimState>::iterator it = animations.begin(); it != animations.end(); ++it)
+	{
+		if (currAnimState == (*it).state)
+		{
+			currAnim = &(*it);
+			break;
+		}
+	}
+
 	return true;
 }
 
@@ -208,8 +263,21 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	//file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", currAnim->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Current Anim", currAnim->state.c_str());
+
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Animations");
+	for (std::vector<AnimState>::iterator it = animations.begin(); it != animations.end(); ++it)
+	{
+		JsonParsing animF = JsonParsing();
+
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "State", (*it).state.c_str());
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets", (*it).anim.get()->GetAssetsPath().c_str());
+		animF.SetNewJsonBool(animF.ValueToObject(animF.GetRootValue()), "Loop", (*it).loop);
+		
+		file.SetValueToArray(newArray, animF.GetRootValue());
+	}
 
 	node.SetValueToArray(array, file.GetRootValue());
 
@@ -227,11 +295,17 @@ void AnimationComponent::Play(std::string state)
 	{
 		if (animations[i].state == state)
 		{
-			currAnim = &animations[i];
-			playing = true;
+			if (animQueue.empty())
+			{
+				currAnim = &animations[i];
+				playing = true;
+			}
+			else
+				animQueue.push(currAnim);
 			break;
 		}
 	}
+
 }
 
 void AnimationComponent::GetAnimations()

@@ -21,13 +21,13 @@
 ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
 {
 	name = "Camera3D";
-
 	cameraFrustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 	cameraFrustum.SetViewPlaneDistances(nearPlane, farPlane);
 	CalculateVerticalFov(horizontalFov, SCREEN_WIDTH, SCREEN_HEIGHT);
 	cameraFrustum.SetPerspective(horizontalFov, verticalFov);
+	//cameraFrustum.SetOrthographic(SCREEN_WIDTH, SCREEN_HEIGHT);
 	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
-
+	
 	visualizeFrustum = false;
 }
 
