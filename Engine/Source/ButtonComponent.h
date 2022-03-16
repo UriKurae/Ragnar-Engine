@@ -20,6 +20,7 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	float2 GetParentPosition();
+	State GetState() { return state; };
 	inline Text GetButtonText() { return buttonText; };
 	inline char* GetText() { return text; };
 

@@ -104,7 +104,7 @@ void TextComponent::OnEditor()
 float2 TextComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
-	float3 position = transform2D->position;
+	float3 position = transform2D->GetPosition();
 	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
 bool TextComponent::OnLoad(JsonParsing& node)

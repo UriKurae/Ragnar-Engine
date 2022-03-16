@@ -35,6 +35,9 @@ public:
 	inline void SetSelectedMaterial(MaterialComponent* mat) { selectedMaterial = mat; };
 	inline void SetActual(MaterialComponent* mat) { actual = mat; };
 
+	inline bool GetChecked() { return checked; };
+	inline State GetState() { return state; };
+
 	MyPlane* planeToDraw;
 private:
 	MaterialComponent* noSelectedMaterial;

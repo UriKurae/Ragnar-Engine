@@ -287,10 +287,6 @@ bool MainMenuBar::Update(float dt)
 					app->userInterface->UIGameObjects.push_back(object);
 					
 					ComponentTransform2D* i=(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-					i->buttonHeight = 100;
-					i->buttonWidth = 30;
-					i->position.z = 0.5f;
-					i->showEdit = false;
 
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);					
 					MaterialComponent* second=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);					
@@ -301,7 +297,7 @@ bool MainMenuBar::Update(float dt)
 					button->frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 					button->frontPlaneToDraw->own = object;
 					button->planeToDraw->own = object;
-					button->secondMaterial = second;
+					button->SetSecondMaterial(second);
 					object->isUI = true;
 				}
 				else if (ImGui::MenuItem("UI Check Box"))

@@ -18,7 +18,7 @@ public class test2 : RagnarComponent
 			//gameObject.GetComponent<UICheckbox>().GetIsChecked();
 			//gameObject.GetComponent<UIButton>().text="ffff";
 			//gameObject.GetComponent<UICheckbox>().GetCheckboxState();
-			gameObject.GetComponent<UISlider>().GetSliderActualValue();
+			//gameObject.GetComponent<UISlider>().GetSliderActualValue();
 		}
 	}
 

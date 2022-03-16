@@ -30,15 +30,12 @@ SliderComponent::SliderComponent(GameObject* own)
 
 SliderComponent::~SliderComponent()
 {
-	RELEASE(thePlane);
+	RELEASE(planeToDraw);
+	RELEASE(frontPlaneToDraw);
 }
 
 bool SliderComponent::Update(float dt)
 {
-	/*sliderText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));*/
-
-	
-
 	if (!active)
 		state = State::DISABLED;
 	else
@@ -113,42 +110,13 @@ bool SliderComponent::Update(float dt)
 						ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
 						float res = (viewport.z * 70) / 747;
 
-						r->position.x= thePos- (r->buttonWidth*5);
-						r->position.y = q->position.y;
-						r->buttonHeight = q->buttonHeight;
+						r->SetPosition(float3(thePos - (r->GetButtonWidth() * 5), q->GetPosition().y,r->GetPosition().z));
+						r->SetButtonHeight(q->GetButtonHeight());
 						r->Update(0);
 						break;
 					}
 				}
 			}
-
-			
-			
-			//if (barProgres < 0.5f)
-			//{
-			//	
-			//	/*planeToDraw->texCoords[0] = (0.5 - barProgres);
-			//	planeToDraw->texCoords[1] = (0.5 - barProgres);*/
-			//}
-			//else if (barProgres >= 0.5f) {
-
-			//	float aux = barProgres - 0.5;
-			//	/*planeToDraw->texCoords[2] = (1 - aux);
-			//	planeToDraw->texCoords[3] = (1 - aux);*/
-
-			//}
-
-
-
-
-			/*glDeleteBuffers(planeToDraw->texCoords.size() * sizeof(GLfloat), &planeToDraw->TBO);
-
-			glGenBuffers(1, &planeToDraw->TBO);
-			glBindBuffer(GL_ARRAY_BUFFER, planeToDraw->TBO);
-			glBufferData(GL_ARRAY_BUFFER, planeToDraw->texCoords.size() * sizeof(GLfloat), planeToDraw->texCoords.data(), GL_STATIC_DRAW);
-			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat), 0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 		}
 	}
 	return true;
@@ -306,10 +274,6 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 			else
 			{
 				ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
-				r->buttonHeight = 100;
-				r->buttonWidth = 30;
-				r->position.z = 0.5f;
-				r->showEdit = false;
 			}
 				
 		}

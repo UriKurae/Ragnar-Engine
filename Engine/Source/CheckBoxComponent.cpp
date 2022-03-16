@@ -44,17 +44,17 @@ bool CheckboxComponent::Update(float dt)
 			{
 				if (actual == noSelectedMaterial)
 					actual = selectedMaterial;
-					checked = true;
-				}
-				else 
-				{
-					checked = false;
-					actual = noSelectedMaterial;
-				}
+				checked = true;
+			}
+			else
+			{
+				checked = false;
+				actual = noSelectedMaterial;
 			}
 		}
-		else state = State::NORMAL;
 	}
+	else state = State::NORMAL;
+	
 	return true;
 }
 

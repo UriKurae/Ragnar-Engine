@@ -5,6 +5,7 @@
 
 class MyPlane;
 class GameObject;
+class MaterialComponent;
 
 class SliderComponent : public Component
 {
@@ -23,6 +24,11 @@ public:
 	inline Color GetActualColor() { return actualColor; };
 	inline Color GetTextColor() { return textColor; };
 	inline Text GetText() { return sliderText; };
+
+	inline float GetBarProgress() { return barProgres; };
+	inline bool GetFirstDraw() { return firstDraw; };
+
+	inline void SetSecondMaterial(MaterialComponent* mat) { secondMaterial = mat; };
 
 	MyPlane* planeToDraw;
 	MyPlane* frontPlaneToDraw;

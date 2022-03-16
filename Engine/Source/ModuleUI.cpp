@@ -151,7 +151,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theSlider) 
 	{
-		if (theSlider->firstDraw) {
+		if (theSlider->GetFirstDraw()) {
 			int cont = 0;
 			for (int a = 0; a < own->components.size(); a++) {
 				if (own->components[a]->type == ComponentType::TRANFORM2D)
