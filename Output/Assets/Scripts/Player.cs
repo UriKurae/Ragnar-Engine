@@ -31,8 +31,12 @@ public class Player : RagnarComponent
             //    Debug.Log(go.name);
             //}
 
-            Debug.Log(materialComponent.texture);
-
+            //Debug.Log(materialComponent.texture);
+            GameObject go = GameObject.Find("Wall 4");
+            if(go != null)
+            {
+                Debug.Log(go.name);
+            }
         }
 
         ///////// SOUNDS /////////

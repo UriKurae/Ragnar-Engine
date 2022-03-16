@@ -11,6 +11,8 @@
 
 #include "TransformBindings.h"
 
+#include <queue>
+
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
 
@@ -222,15 +224,27 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 {
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
+	std::queue<GameObject*> q;
 	for (auto& go : app->scene->GetGameObjectsList())
+		q.push(go);
+
+	while (!q.empty())
 	{
-		if (go->GetName() == goName)
+		GameObject* curr = q.front();
+		q.pop();
+
+		if (curr->GetName() == std::string(goName))
 		{
-			return app->moduleMono->GoToCSGO(go);
+			mono_free(goName);
+			return app->moduleMono->GoToCSGO(curr);
 		}
+
+		for (auto& child : curr->GetChilds())
+			q.push(child);
 	}
 
 	mono_free(goName);
+	return nullptr;
 }
 
 MonoArray* FindGameObjectsWithTag(MonoObject* tag)
@@ -294,6 +308,18 @@ void SetGameObjectName(MonoObject* go, MonoString* newName)
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 	char* name = mono_string_to_utf8(newName);
 	gameObject->name = name;
+}
+
+MonoBoolean GetGameObjectIsActive(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->active;
+}
+
+void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->active = value;
 }
 // GameObject =======================
 

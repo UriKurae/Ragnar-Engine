@@ -87,13 +87,15 @@ bool MonoManager::Init(JsonParsing& node)
 	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
-	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectWithName", FindGameObjectWithName);
+	mono_add_internal_call("RagnarEngine.GameObject::Find", FindGameObjectWithName);
 	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectsWithTag", FindGameObjectsWithTag);
 	mono_add_internal_call("RagnarEngine.GameObject::get_tag", GetGameObjectTagMono);
 	mono_add_internal_call("RagnarEngine.GameObject::set_tag", SetGameObjectTagMono);
 	mono_add_internal_call("RagnarEngine.GameObject::get_name", GetGameObjectName);
 	mono_add_internal_call("RagnarEngine.GameObject::set_name", SetGameObjectName);
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
+	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
 
 	// Utility ===================
 
