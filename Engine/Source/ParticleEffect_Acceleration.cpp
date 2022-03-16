@@ -1,4 +1,5 @@
 #include "ParticleEffect_Acceleration.h"
+#include "Globals.h"
 
 #include "imgui/imgui.h"
 
@@ -45,7 +46,7 @@ void ParticleEffect_Acceleration::OnEditor(int emitterIndex)
 		suffixLabel = "Delete Effect##";
 		suffixLabel += emitterIndex;
 
-		if (ImGui::Button(suffixLabel.c_str()))
+		if (ImGui::Button(ICON_FA_TRASH" Delete Effect"))
 			this->toDelete = true;
 
 		ImGui::Spacing();

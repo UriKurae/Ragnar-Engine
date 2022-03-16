@@ -1,4 +1,6 @@
 #include "ParticleEffect_Color.h"
+#include "Globals.h"
+
 #include <Imgui/imgui.h>
 
 ParticleEffect_Color::ParticleEffect_Color() : ParticleEffect(ParticleEffectType::COLOR_OVER_LIFETIME),
@@ -27,7 +29,7 @@ void ParticleEffect_Color::OnEditor(int emitterIndex)
 	{
 		suffixLabel = "Delete Color Over Lifetime Effect##";
 		suffixLabel += emitterIndex;
-		if (ImGui::Button(suffixLabel.c_str()))
+		if (ImGui::Button(ICON_FA_TRASH" Delete Effect##"))
 			this->toDelete = true;
 
 		ImGui::Spacing();

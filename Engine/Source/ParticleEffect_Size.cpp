@@ -1,4 +1,6 @@
 #include "ParticleEffect_Size.h"
+#include "Globals.h"
+
 #include <Imgui/imgui.h>
 
 ParticleEffect_Size::ParticleEffect_Size() : ParticleEffect(ParticleEffectType::SIZE_OVER_LIFETIME),
@@ -28,7 +30,7 @@ void ParticleEffect_Size::OnEditor(int emitterIndex)
 	{
 		suffixLabel = "Delete Size Over Lifetime Effect##";
 		suffixLabel += emitterIndex;
-		if (ImGui::Button(suffixLabel.c_str()))
+		if (ImGui::Button(ICON_FA_TRASH" Delete Effect##"))
 			this->toDelete = true;
 
 		ImGui::Spacing();
