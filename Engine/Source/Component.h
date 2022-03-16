@@ -23,8 +23,6 @@ enum class ComponentType
 	AUDIO_SOURCE,
 	AUDIO_LISTENER,
 	AUDIO_REVERB_ZONE,
-	PARTICLE_SYSTEM,
-	BILLBOARD,
 	LIGHT,
 	ANIMATION,
 	BONE,
@@ -37,6 +35,8 @@ enum class ComponentType
 	UI_CANVAS,
 	TRANFORM2D,
 	NAVAGENT,
+	PARTICLE_SYSTEM,
+	BILLBOARD,
 };
 
 enum class State

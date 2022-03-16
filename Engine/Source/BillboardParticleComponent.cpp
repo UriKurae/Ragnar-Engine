@@ -120,10 +120,10 @@ Quat BillboardParticleComponent::GetAlignment()
 
 Quat BillboardParticleComponent::CameraAlign()
 {
-	Frustum camFrustum = app->scene->mainCamera->camera;
-	float3 billboardForward = (camFrustum.Pos() - transform->GetGlobalTransform().TranslatePart()).Normalized();
+	Frustum* camFrustum = app->scene->mainCamera->GetFrustum();
+	float3 billboardForward = (camFrustum->Pos() - transform->GetGlobalTransform().TranslatePart()).Normalized();
 
-	float3 up = camFrustum.Up();
+	float3 up = camFrustum->Up();
 	float3 right = up.Cross(billboardForward);
 	up = billboardForward.Cross(right);
 
