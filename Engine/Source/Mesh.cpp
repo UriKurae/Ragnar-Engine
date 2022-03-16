@@ -5,6 +5,7 @@
 #include "MeshImporter.h"
 #include "FileSystem.h"
 #include "VertexArray.h"
+#include "IndexBuffer.h"
 
 #include "Profiling.h"
 

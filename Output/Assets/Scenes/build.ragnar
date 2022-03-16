@@ -125,10 +125,10 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        0.094169549643993378,
-                        -0.69133859872817993,
-                        -0.041533477604389191,
-                        0.71516293287277222
+                        -0.14068865776062012,
+                        -0.57568717002868652,
+                        0.37059000134468079,
+                        0.71516019105911255
                     ],
                     "RotationEditor": [
                         0,
@@ -144,7 +144,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.93115627765655518,
+                    "Vertical Fov": 0.92976027727127075,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -0.26639080047607422,
@@ -229,7 +229,7 @@
                         {
                             "State": "Walk",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
-                            "Loop": false
+                            "Loop": true
                         },
                         {
                             "State": "Idle",
@@ -261,6 +261,7 @@
                     "Height": 1.6000000238418579,
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 60,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -286,92 +287,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 175992120,
+                    "pointer": 81921376,
                     "type": 4,
                     "componentTable": 0,
-                    "velocity": 5
-                }
-            ]
-        },
-        {
-            "UUID": 892713844,
-            "Parent UUID": 417171234,
-            "Name": "Image",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        7,
-                        -99.5,
-                        0
-                    ],
-                    "Scale": [
-                        10.911433219909668,
-                        5.5470085144042969,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 200,
-                    "buttonHeight": 50
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI_skill.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 1853976858,
-            "Parent UUID": 417171234,
-            "Name": "Image",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -170,
-                        -99.5,
-                        0
-                    ],
-                    "Scale": [
-                        8.4836397171020508,
-                        5.5470085144042969,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 155.5,
-                    "buttonHeight": 50
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI_chra.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "velocity": 5,
+                    "force": 100,
+                    "rockSoundRadius": 4,
+                    "canThrowKnife": true
                 }
             ]
         },
@@ -467,6 +389,7 @@
                     "Constant": 0.5,
                     "Gravity": false,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -542,6 +465,7 @@
                     ],
                     "Gravity": false,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -617,6 +541,7 @@
                     ],
                     "Gravity": false,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -692,6 +617,7 @@
                     ],
                     "Gravity": false,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -814,6 +740,7 @@
                     ],
                     "Gravity": false,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -889,6 +816,7 @@
                     ],
                     "Gravity": false,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1000,6 +928,7 @@
                     ],
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1075,6 +1004,7 @@
                     ],
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1150,6 +1080,7 @@
                     ],
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1225,6 +1156,7 @@
                     ],
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1334,6 +1266,7 @@
                     "Sectors": 24,
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1407,6 +1340,7 @@
                     "Sectors": 24,
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1480,6 +1414,7 @@
                     "Sectors": 24,
                     "Gravity": true,
                     "Kinematic": false,
+                    "Trigger": false,
                     "Mass": 1,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -1565,8 +1500,8 @@
                         0
                     ],
                     "Scale": [
-                        10.911433219909668,
-                        5.5470085144042969,
+                        11.606715202331543,
+                        5.9107465744018555,
                         1
                     ],
                     "rotationEuler": [
@@ -1606,8 +1541,8 @@
                         0
                     ],
                     "Scale": [
-                        8.4836397171020508,
-                        5.5470085144042969,
+                        9.0242204666137695,
+                        5.9107465744018555,
                         1
                     ],
                     "rotationEuler": [

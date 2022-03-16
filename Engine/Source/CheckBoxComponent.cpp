@@ -1,24 +1,22 @@
-#include "Application.h"
-#include "SDL.h"
 #include "CheckboxComponent.h"
+#include "Application.h"
+#include "Globals.h"
+
 #include"ModuleUI.h"
 #include"ModuleInput.h"
-CheckboxComponent::CheckboxComponent(GameObject* ow)
-{
-	//name = "CheckBox Component";
-	type = ComponentType::UI_CHECKBOX;
-	state = State::NORMAL;
-	checked = false;
-	checkboxText.setText("check", 5, 5, 0.5, { 255,255,255 });
-	//UIid = id;
-	actualColor = normalColor;
-	firstTime = true;
 
+#include"MaterialComponent.h"
+
+CheckboxComponent::CheckboxComponent(GameObject* own)
+{
+	type = ComponentType::UI_CHECKBOX;
+	checkboxText.setText("check", 5, 5, 0.5, { 255,255,255 });	
+	own->name = "CheckBox";
 }
 
 CheckboxComponent::~CheckboxComponent()
 {
-
+	RELEASE(planeToDraw);
 }
 
 bool CheckboxComponent::Update(float dt)
@@ -36,11 +34,6 @@ bool CheckboxComponent::Update(float dt)
 		{
 			state = State::FOCUSED;
 
-			if (state != State::FOCUSED && state != State::PRESSED)
-			{
-				/*app->audio->PlayFx(focusedFX);*/
-			}
-
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = State::PRESSED;
@@ -49,7 +42,7 @@ bool CheckboxComponent::Update(float dt)
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
-				if (actual == noSelectedMaterial) {
+				if (actual == noSelectedMaterial)
 					actual = selectedMaterial;
 					checked = true;
 				}
@@ -61,17 +54,12 @@ bool CheckboxComponent::Update(float dt)
 			}
 		}
 		else state = State::NORMAL;
-
 	}
 	return true;
 }
 
 void CheckboxComponent::Draw(CameraComponent* gameCam)
 {
-	
-
-	
-
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
@@ -101,9 +89,6 @@ void CheckboxComponent::Draw(CameraComponent* gameCam)
 	default:
 		break;
 	}
-
-	//MaterialComponent* mat = owner->GetComponent<MaterialComponent>();
-
 
 	planeToDraw->DrawPlane2D(actual->GetTexture().get());
 
@@ -150,51 +135,36 @@ void CheckboxComponent::OnEditor()
 
 		ImGui::Separator();
 
-		/*ImGui::Text("Text Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
-			textColorEditable = !textColorEditable;
-
-		checkboxText.setOnlyColor({ textColor.r, textColor.g, textColor.b });*/
-
 		if (normalEditable)
-		{
 			ImGui::ColorPicker3("Normal Color", &normalColor);
-		}
 		if (pressedEditable)
-		{
 			ImGui::ColorPicker3("Pressed Color", &pressedColor);
-		}
 		if (focusedEditable)
-		{
 			ImGui::ColorPicker3("Focused Color", &focusedColor);
-		}
 		if (disabledEditable)
-		{
 			ImGui::ColorPicker3("Disabled Color", &disabledColor);
-		}
 		if (selectedEditable)
-		{
 			ImGui::ColorPicker3("Selected Color", &selectedColor);
-		}
 		if (textColorEditable)
-		{
 			ImGui::ColorPicker3("Text Color", &textColor);
-		}
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 		ImGui::DragFloat("Font Size", &checkboxText.Scale, 0.1, 0, 10);
 		checkboxText.setOnlyText(text);
+
+		ComponentOptions(this);
+		ImGui::Separator();
 	}
 }
-
 
 float2 CheckboxComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform = owner->GetComponent<ComponentTransform2D>();
-	return { transform->position.x - (strlen(text) * 12 * checkboxText.Scale) - (transform->scale.x / 4), transform->position.y - 5 };
+	return { transform->GetPosition().x - (strlen(text) * 12 * checkboxText.Scale) - (transform->GetScale().x / 4), transform->GetPosition().y - 5 };
 }
+
 bool CheckboxComponent::OnLoad(JsonParsing& node)
 {
 	std::string selected;
@@ -229,26 +199,21 @@ bool CheckboxComponent::OnLoad(JsonParsing& node)
 	planeToDraw->own = owner;
 	owner->isUI = true;
 	app->userInterface->UIGameObjects.push_back(owner);
-
-	/*delete[] sel;*/
 	
-
 	return true;
 }
+
 
 bool CheckboxComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 
-
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	if (actual == noSelectedMaterial) {
+	if (actual == noSelectedMaterial) 
 		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "noSelected");
-	}
-	else {
+	
+	else 
 		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "Selected");
-	}
-
 
 	node.SetValueToArray(array, file.GetRootValue());
 

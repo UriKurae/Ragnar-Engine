@@ -57,13 +57,13 @@ public:
 	void AddConstraintP2P(btRigidBody& bodyA, btRigidBody& bodyB, const float3& anchorA, const float3& anchorB);
 	void AddConstraintHinge(btRigidBody& bodyA, btRigidBody& bodyB, const float3& anchorA, const float3& anchorB, const float3& axisS, const float3& axisB, bool disable_collision = false);
 
-	std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
-	std::vector<std::string> GetBodiesNames() { return bodiesNames; };
-
-	std::vector<GameObject*> bullets;
+	inline std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
+	inline std::vector<std::string> GetBodiesNames() { return bodiesNames; };
 
 	void SleepAllBodies();
 	void ActiveAllBodies();
+
+	std::vector<RigidBodyComponent*> triggers;
 
 private:
 	btDefaultCollisionConfiguration* collisionConfig = nullptr;

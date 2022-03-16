@@ -20,7 +20,8 @@
 #include "ModuleRenderer3D.h"
 #include "Texture.h"
 #include "GameView.h"
-//#include "Geometry/Frustum.h"
+
+#include "Profiling.h"
 
 #include FT_FREETYPE_H 
 
@@ -54,8 +55,6 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 
 	texCoords.push_back(0);
 	texCoords.push_back(1);
-
-	
 
 	glGenVertexArrays(1, &VAO);
 
@@ -116,6 +115,11 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	shader = new Shadert(vertexSource, fragSource);
 }
 
+MyPlane::~MyPlane()
+{
+	RELEASE(shader);
+}
+
 void MyPlane::DrawPlane2D(Texture* texture)
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -128,9 +132,8 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	CheckboxComponent* theCheckbox = nullptr;
 	ImageComponent* theImage = nullptr;
 
+	float4x4 transform = float4x4::FromTRS(auxTrans->GetInternalPosition(), auxTrans->GetRotationQuat(), float3(auxTrans->GetScale().x, auxTrans->GetScale().y, 1));
 	
-
-	float4x4 transform = float4x4::FromTRS(float3(auxTrans->internalPosition.x, auxTrans->internalPosition.y, auxTrans->internalPosition.z), auxTrans->rotationQuat, float3(auxTrans->scale.x, auxTrans->scale.y, 1));
 	theButton = own->GetComponent<ButtonComponent>();
 	theSlider=own->GetComponent<SliderComponent>();
 	theCheckbox = own->GetComponent<CheckboxComponent>();
@@ -144,7 +147,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	if (theButton)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->actualColor.r, theButton->actualColor.g, theButton->actualColor.b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, 1);
 	}
 	else if (theSlider) 
 	{
@@ -160,22 +163,22 @@ void MyPlane::DrawPlane2D(Texture* texture)
 					else
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
-						transform = float4x4::FromTRS(float3(r->internalPosition.x, r->internalPosition.y, r->internalPosition.z), r->rotationQuat, float3(r->scale.x, r->scale.y, 1));
+						transform = float4x4::FromTRS(r->GetInternalPosition(), r->GetRotationQuat(), float3(r->GetScale().x, r->GetScale().y, 1));
 						break;
 					}
 				}
 			}
 		}
 		
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->actualColor.r, theSlider->actualColor.g, theSlider->actualColor.b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, 1);
 	}
 	else if (theCheckbox)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->actualColor.r, theCheckbox->actualColor.g, theCheckbox->actualColor.b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, 1);
 	}
 	else if (theImage)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->actualColor.r, theImage->actualColor.g, theImage->actualColor.b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, 1);
 	}
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
@@ -475,13 +478,13 @@ bool ModuleUI::PreUpdate(float dt)
 				GameObject* go = UIGameObjects[i];
 				ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
 
-				float3 position = transform2D->position;
+				float3 position = transform2D->GetPosition();
 				ComponentTransform2D*button=(ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
-				float posXMin = ((viewport.z / 2) + (position.x)) - (button->buttonWidth / 2);
-				float posXMax = ((viewport.z / 2) + (position.x)) + (button->buttonWidth / 2);
+				float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
+				float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
-				float posYMin = ((viewport.w / 2) + (-position.y)) - (button->buttonHeight / 2);
-				float posYMax = ((viewport.w / 2) + (-position.y)) + (button->buttonHeight / 2);
+				float posYMin = ((viewport.w / 2) + (-position.y)) - (button->GetButtonHeight() / 2);
+				float posYMax = ((viewport.w / 2) + (-position.y)) + (button->GetButtonHeight() / 2);
 
 				ImageComponent* image = nullptr;
 				image = go->GetComponent<ImageComponent>();
@@ -500,7 +503,7 @@ bool ModuleUI::PreUpdate(float dt)
 				{
 					ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
 
-					float3 position = transform2D->position;
+					float3 position = transform2D->GetPosition();
 					distance.push_back(position.z);
 					if (distance[i] < nearestDistance)
 					{
@@ -560,10 +563,10 @@ bool ModuleUI::Update(float dt)
 		aux5 = go->GetComponent<SliderComponent>();
 		if (aux != nullptr) 
 		{
-			textExample = aux->text;
-			color.x = aux->textColor.r;
-			color.y = aux->textColor.g;
-			color.z = aux->textColor.b;
+			textExample = aux->GetText();
+			color.x = aux->GetTextColor().r;
+			color.y = aux->GetTextColor().g;
+			color.z = aux->GetTextColor().b;
 			aux = nullptr;
 		}
 		/*else if (aux1 != nullptr) 
@@ -576,18 +579,18 @@ bool ModuleUI::Update(float dt)
 		}*/
 		else if (aux2 != nullptr)
 		{
-			textExample = aux2->text;
-			color.x = aux2->textColor.r;
-			color.y = aux2->textColor.g;
-			color.z = aux2->textColor.b;
+			textExample = aux2->GetText();
+			color.x = aux2->GetTextColor().r;
+			color.y = aux2->GetTextColor().g;
+			color.z = aux2->GetTextColor().b;
 			aux2 = nullptr;
 		}
 		else if (aux3 != nullptr)
 		{
-			textExample = aux3->text;
-			color.x = aux3->color.r;
-			color.y = aux3->color.g;
-			color.z = aux3->color.b;
+			textExample = aux3->GetText();
+			color.x = aux3->GetColor().r;
+			color.y = aux3->GetColor().g;
+			color.z = aux3->GetColor().b;
 			aux3 = nullptr;
 		}
 		/*else if (aux4 != nullptr)
@@ -600,10 +603,10 @@ bool ModuleUI::Update(float dt)
 		}*/
 		else if (aux5 != nullptr)
 		{
-			textExample = aux5->text;
-			color.x = aux5->textColor.r;
-			color.y = aux5->textColor.g;
-			color.z = aux5->textColor.b;
+			textExample = aux5->GetText().textt;
+			color.x = aux5->GetTextColor().r;
+			color.y = aux5->GetTextColor().g;
+			color.z = aux5->GetTextColor().b;
 			aux5 = nullptr;
 		}
 		
@@ -618,6 +621,7 @@ bool ModuleUI::Update(float dt)
 
 bool ModuleUI::CleanUp()
 {
+	RELEASE(shader);
 	return true;
 }
 

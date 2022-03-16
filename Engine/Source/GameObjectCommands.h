@@ -9,7 +9,6 @@ class GameObject;
 class MoveGameObjectCommand : public Command
 {
 public:
-	MoveGameObjectCommand();
 	MoveGameObjectCommand(GameObject* entity);
 
 	virtual void Execute() override;
@@ -28,7 +27,6 @@ private:
 	float3 lastPosition = float3::zero;
 	Quat   lastRotation = Quat::identity;
 	float3 lastScale = float3::zero;
-
 
 	GameObject* actor;
 };

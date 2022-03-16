@@ -26,35 +26,45 @@ public:
 	void SetBoundingBox();
 	bool Update(float dt) override;
 	void UpdateCollision();
-	void OnEditor() override;
 
+	void OnEditor() override;
 	void Combos();
 
 	void AddConstraintP2P(RigidBodyComponent* const& val);
 
-	void SetCollisionType(CollisionType type);
 	void ResetLocalValues();
 	void EditCollisionMesh();
-
 	void UpdateCollisionMesh();
 
-	float4x4 btScalarTofloat4x4(btScalar* transform);
+	void SetSphereRadius(float sphereRadius);
 
 	void CreateBody();
 	void SetPhysicsProperties();
 	inline float GetMass() { return mass; };
 	void SetMass(float mass);
-	inline btRigidBody* GetBody() { return body; };
-	inline CollisionType GetCollisionType() { return collisionType; };
 
 	void SetAsStatic();
+	void SetAsTrigger();
+	float4x4 btScalarTofloat4x4(btScalar* transform);
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
+	
+	inline btRigidBody* GetBody() { return body; };
+	inline CollisionType GetCollisionType() { return collisionType; };
+	void SetCollisionType(CollisionType type);
+
+	inline void SetOnCollision(bool ret) { onCollision = ret; };
+	inline bool GetOnCollision() { return onCollision; };
+
+	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
+	inline bool GetCollisionTarget() { return collisionTarget; };
 
 public:
 	bool useGravity = true;
 	bool isKinematic = false;
+	bool trigger = false;
+
 	std::vector<RigidBodyComponent*> constraintBodies;
 	std::vector<int> bodiesUIDs;
 
@@ -85,5 +95,7 @@ private:
 	int cylinderAxis = 3;
 
 	bool editMesh = false;
-	bool mainBody = false;
+	bool onCollision = false;
+
+	RigidBodyComponent* collisionTarget = nullptr;
 };

@@ -1,4 +1,6 @@
 #include "VertexArray.h"
+#include "IndexBuffer.h"
+
 #include "GL/glew.h"
 #include "mmgr/mmgr.h"
 

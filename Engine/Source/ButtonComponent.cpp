@@ -1,27 +1,24 @@
-#include "Application.h"
-#include "SDL.h"
 #include "ButtonComponent.h"
-#include"GameObject.h"
+#include "Application.h"
+#include "Globals.h"
+
 #include "ModuleInput.h"
 #include "ModuleUI.h"
-#include "TransformComponent.h"
+
+#include"GameObject.h"
 #include "MaterialComponent.h"
 
 ButtonComponent::ButtonComponent(GameObject* own)
 {
-
-	owner = own;
 	active = true;
-	//name = "Button Component";
+	own->name = "Button";
 	type = ComponentType::UI_BUTTON;
-	state = State::NORMAL;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
-	actualColor = normalColor;
-
 }
 
 ButtonComponent::~ButtonComponent()
 {
+	RELEASE(planeToDraw);
 }
 
 bool ButtonComponent::Update(float dt)
@@ -33,24 +30,14 @@ bool ButtonComponent::Update(float dt)
 	else
 		state = State::NORMAL;
 
-
-
-
 	if (state != State::DISABLED)
-	{
-		
+	{		
 		if (app->userInterface->focusedGameObject == owner)
 		{
 			state = State::FOCUSED;
 
-			if (state != State::FOCUSED && state != State::PRESSED)
-			{
-			}
-
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
-			{
 				state = State::PRESSED;
-			}
 
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
@@ -66,13 +53,10 @@ bool ButtonComponent::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN) 
 			{
 
-			}
-				
+			}				
 		}
 	}
 
-	/*if (fadeUI) 
-		FadeUI();*/
 	return true;
 }
 
@@ -115,8 +99,7 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 }
 
 void ButtonComponent::OnEditor()
-{
-	
+{	
 	if (ImGui::CollapsingHeader("Button"))
 	{
 		static float multiplier = 1;
@@ -130,9 +113,7 @@ void ButtonComponent::OnEditor()
 		static bool selectedEditable = false;
 		static bool textColorEditable = false;
 
-
 		Checkbox(this, "Active", active);
-
 		ImGui::Checkbox("Interactable", &active);
 
 		ImGui::Text("Normal Color"); ImGui::SameLine();
@@ -164,29 +145,17 @@ void ButtonComponent::OnEditor()
 		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
 		if (normalEditable)
-		{
 			ImGui::ColorPicker3("Normal Color", &normalColor);
-		}
 		if (pressedEditable)
-		{
 			ImGui::ColorPicker3("Pressed Color", &pressedColor);
-		}
 		if (focusedEditable)
-		{
 			ImGui::ColorPicker3("Focused Color", &focusedColor);
-		}
 		if (disabledEditable)
-		{
 			ImGui::ColorPicker3("Disabled Color", &disabledColor);
-		}
 		if (selectedEditable)
-		{
 			ImGui::ColorPicker3("Selected Color", &selectedColor);
-		}
 		if (textColorEditable)
-		{
 			ImGui::ColorPicker3("Text Color", &textColor);
-		}
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
@@ -194,20 +163,16 @@ void ButtonComponent::OnEditor()
 		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
 		buttonText.setOnlyText(text);
+		
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
-	// General variables
-	
-
-	
 }
-
-
 
 float2 ButtonComponent::GetParentPosition()
 {
-	ComponentTransform2D* transform2D =owner->GetComponent<ComponentTransform2D>();
-	float3 position = transform2D->position;
+	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
+	float3 position = transform2D->GetPosition();
 	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
 bool ButtonComponent::OnLoad(JsonParsing& node)
@@ -242,4 +207,3 @@ bool ButtonComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	return true;
 }
-

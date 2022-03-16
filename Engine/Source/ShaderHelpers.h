@@ -97,8 +97,4 @@ namespace ShaderSources
 		"{\n\t"
 		"fragColor = vec4(1.0f);\n"
 		"}\n";
-
-
-	//static std::string lightSensibleShaderSource = 
-
 }

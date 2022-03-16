@@ -100,6 +100,10 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::get_linearVelocity", GetLinearVelocity);
 	mono_add_internal_call("RagnarEngine.Rigidbody::get_totalForce", GetTotalForce);
 	mono_add_internal_call("RagnarEngine.Rigidbody::ClearForces", ClearForces);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsStatic", SetAsStatic);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsTrigger", SetAsTrigger);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionType", SetCollisionType);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetSphereRadius", SetSphereRadius);
 	// Rigidbody =================
 
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);

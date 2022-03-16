@@ -174,7 +174,7 @@ void SetTexturePath(MonoObject* go, MonoObject* texturePath)
 
 
 // GameObject =======================
-void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
+MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
 	GameObject* go = app->scene->CreateGameObject(nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
@@ -187,6 +187,7 @@ void InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* r
 
 	Quat r = app->moduleMono->UnboxQuat(rotation);
 	tr->SetRotation(r);
+	return app->moduleMono->GoToCSGO(go);
 }
 
 void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* position, MonoObject* rotation)
