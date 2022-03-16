@@ -1,13 +1,14 @@
 #include "ScriptComponent.h"
 
 #include "ModuleScene.h"
+#include "MonoManager.h"
 
 #include "C_RigidBody.h"
 
 #include <mono/metadata/class.h>
 #include <mono/metadata/object.h>
-#include <mono/metadata/object-forward.h>
 #include <mono/metadata/debug-helpers.h>
+#include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
 ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
@@ -43,7 +44,6 @@ ScriptComponent::~ScriptComponent()
 	methods.clear();
 	fields.clear();
 }
-
 
 bool ScriptComponent::Update(float dt)
 {
@@ -162,7 +162,6 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 			ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "The class %s can't be serialized yet", mono_type_get_name(mono_field_get_type(field.field)));
 			break;
 		}
-
 		
 		ImGui::Button((field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
 		if (ImGui::BeginDragDropTarget())
@@ -296,7 +295,6 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 
 void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 {
-
 	const char* fieldName = mono_field_get_name(field.field);
 	ImGui::PushID(fieldName);
 
@@ -308,7 +306,6 @@ void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 	ImGui::PopID();
 }
 //#endif
-
 
 bool ScriptComponent::OnLoad(JsonParsing& nObj)
 {

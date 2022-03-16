@@ -19,8 +19,6 @@ ComponentLight::~ComponentLight()
 		case LightType::POINT:
 		{
 			app->renderer3D->RemovePointLight((PointLight*)light);
-			//delete (light);
-			//light = nullptr;
 		}
 	}
 }
@@ -98,10 +96,8 @@ void ComponentLight::OnEditor()
 				ComponentOptions(this);
 				ImGui::Separator();
 			}
-
 			break;
-		}
-		
+		}		
 		case LightType::POINT:
 		{
 			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
@@ -121,10 +117,8 @@ void ComponentLight::OnEditor()
 				ComponentOptions(this);
 				ImGui::Separator();
 			}
-
 			break;
 		}
-
 		case LightType::SPOT:
 		{
 			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
@@ -176,7 +170,6 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 
 			break;
 		}
-
 		case LightType::POINT:
 		{
 			PointLight* l = new PointLight();
@@ -194,7 +187,6 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 
 			break;
 		}
-
 		case LightType::SPOT:
 		{
 			SpotLight* l = new SpotLight();
@@ -250,7 +242,6 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 
 			break;
 		}
-
 		case LightType::SPOT:
 		{
 			SpotLight* l = (SpotLight*)light;
@@ -265,7 +256,6 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 
 			break;
 		}
-
 	}
 
 	node.SetValueToArray(array, file.GetRootValue());

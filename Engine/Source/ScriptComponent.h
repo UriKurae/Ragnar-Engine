@@ -1,20 +1,18 @@
 #pragma once
 #include "Component.h"
-#include<vector>
-#include<string>
-
-#include "MonoManager.h"
-#include <mono/metadata/object-forward.h>
+#include <vector>
+#include <string>
 
 class GameObject;
 class RigidBodyComponent;
 
 typedef struct _MonoClassField MonoClassField;
+typedef struct _MonoMethod MonoMethod;
+struct SerializedField;
 
 class ScriptComponent : public Component
 {
 public:
-
 	ScriptComponent(GameObject* owner, const char* scriptName);
 	virtual ~ScriptComponent();
 
