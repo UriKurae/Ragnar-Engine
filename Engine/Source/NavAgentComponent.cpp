@@ -1,11 +1,8 @@
+#include "NavAgentComponent.h"
 #include "Application.h"
 #include "Globals.h"
-#include "NavAgentComponent.h"
 
 #include "ModuleNavMesh.h"
-
-#include "imgui/imgui.h"
-#include "IconsFontAwesome5.h"
 
 NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 {
@@ -16,13 +13,11 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 
 NavAgentComponent::~NavAgentComponent()
 {
-	delete agentProperties;
-	agentProperties = nullptr;
+	RELEASE(agentProperties);
 }
 
 bool NavAgentComponent::Update(float dt)
 {
-
 	return true;
 }
 
@@ -91,6 +86,7 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", (float)agentProperties->radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", (float)agentProperties->height);
@@ -101,8 +97,6 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AngularSpeed", (float)agentProperties->angularSpeed);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Acceleration", (float)agentProperties->acceleration);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "StoppingDistance", (float)agentProperties->stoppingDistance);
-
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	node.SetValueToArray(array, file.GetRootValue());
 	
