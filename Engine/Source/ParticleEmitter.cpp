@@ -60,6 +60,8 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	data.drawCalls = 0;
 
 	showTexMenu = false;
+
+	effect = nullptr;
 }
 
 ParticleEmitter::~ParticleEmitter()
@@ -506,17 +508,17 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 	case ParticleEffectType::NO_TYPE:
 		return "No Type";
 		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		return "Color Effect";
-		break;
-	case ParticleEffectType::SIZE_OVER_LIFETIME:
-		return "Size Effect";
-		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		return "Velocity Effect";
 		break;
 	case ParticleEffectType::ACCELERATION_OVER_LIFETIME:
 		return "Acceleration Effect";
+		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		return "Color Effect";
+		break;
+	case ParticleEffectType::SIZE_OVER_LIFETIME:
+		return "Size Effect";
 		break;
 	default:
 		break;
