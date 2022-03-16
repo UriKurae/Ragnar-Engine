@@ -28,7 +28,6 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "SliderComponent.h"
-#include "Transform2DComponent.h"
 
 #include "ResourceManager.h"
 #include "AudioManager.h"

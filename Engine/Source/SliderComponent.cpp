@@ -250,6 +250,8 @@ void SliderComponent::OnEditor()
 		ImGui::DragFloat("Font Size", &sliderText.Scale, 0.1, 0, 10);
 		sliderText.setOnlyText(text);
 
+		ComponentOptions(this);
+		ImGui::Separator();
 	}	
 }
 
