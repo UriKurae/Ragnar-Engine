@@ -19,6 +19,15 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 
 NavAgentComponent::~NavAgentComponent()
 {
+	for (std::vector<NavAgentComponent*>::iterator it = pathfinding->agents.begin(); it != pathfinding->agents.end(); ++it)
+	{
+		if (*it == this)
+		{
+			pathfinding->agents.erase(it);
+			break;
+		}
+	}
+
 	delete agentProperties;
 	agentProperties = nullptr;
 }
