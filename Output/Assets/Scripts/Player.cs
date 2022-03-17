@@ -11,32 +11,20 @@ public class Player : RagnarComponent
     public bool canThrowKnife = true;
 
     Rigidbody rb;
-    MaterialComponent materialComponent;
+    Material materialComponent;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        materialComponent = gameObject.GetComponent<MaterialComponent>();
+        materialComponent = gameObject.GetComponent<Material>();
     }
 
     public void Update()
 	{
         if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
-            //GameObject[] gos = GameObject.FindGameObjectsWithTag("Untagged");
-            //GameObject[] gos = gameObject.childs;
-
-            //foreach (GameObject go in gos)
-            //{
-            //    Debug.Log(go.name);
-            //}
-
-            //Debug.Log(materialComponent.texture);
-            GameObject go = GameObject.Find("Wall 4");
-            if(go != null)
-            {
-                Debug.Log(go.name);
-            }
+            //GameObject but = GameObject.Find("Button");
+            //but.GetComponent<Button>().text = "Testint Text";
         }
 
         ///////// SOUNDS /////////
@@ -146,6 +134,7 @@ public class Player : RagnarComponent
 
     public void OnTriggerEnter(Rigidbody other)
     {
+        // Only for testing purposes
         other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
     }
 }

@@ -6,6 +6,7 @@
 
 #include "ResourceManager.h"
 
+#include "ButtonComponent.h"
 #include "MaterialComponent.h"
 #include "Texture.h"
 
@@ -264,6 +265,7 @@ MonoArray* FindGameObjectsWithTag(MonoObject* tag)
 	for (int i = 0; i < objects.size(); ++i)
 		mono_array_set(ret, MonoObject*, i, objects[i]);
 
+	mono_free(tagName);
 	return ret;
 }
 
@@ -322,6 +324,20 @@ void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 	gameObject->active = value;
 }
 // GameObject =======================
+
+// UI ===============================
+MonoString* GetButtonText(MonoObject* go)
+{
+	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
+	return mono_string_new(app->moduleMono->domain, button->GetText());
+}
+
+void SetButtonText(MonoObject* go, MonoString* text)
+{
+	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
+	//button->SetText(mono_string_to_utf8(text));
+}
+// UI ===============================
 
 
 float GetGameTimeStep()

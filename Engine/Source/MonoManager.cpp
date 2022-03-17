@@ -73,8 +73,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Transform =================
 
 	// Material Comp =============
-	mono_add_internal_call("RagnarEngine.MaterialComponent::get_texture", GetTexturePath);
-	mono_add_internal_call("RagnarEngine.MaterialComponent::set_texture", SetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
 
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
@@ -82,6 +82,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     // This does not return a GameObject
 	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject); // This does
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
+	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
 
 	// Utility ===================
@@ -96,8 +97,13 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
-
 	// Utility ===================
+
+	// UI ========================
+	// TODO: Create C# class when the merge to develop is done
+	//mono_add_internal_call("RagnarEngine.Button::get_text", GetButtonText);
+	//mono_add_internal_call("RagnarEngine.Button::set_text", SetButtonText);
+	// UI ========================
 
 	// Audio Source ==============
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);

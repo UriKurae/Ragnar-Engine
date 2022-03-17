@@ -37,7 +37,7 @@ MonoObject* TryGetComponentMono(MonoObject* go, MonoString* type, int inputType)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 
-	ComponentType t = static_cast<ComponentType>(inputType);
+	ComponentType t = ComponentType(inputType);
 	Component* comp = gameObject->GetComponent(t);
 
 	if(t == ComponentType::SCRIPT)
@@ -52,7 +52,26 @@ MonoObject* TryGetComponentMono(MonoObject* go, MonoString* type, int inputType)
 	mono_field_set_value(ret, field, &data);
 
 	return ret;
+}
 
+MonoArray* TryGetComponentsMono(MonoObject* go, MonoString* type, int inputType)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+
+	std::vector<MonoObject*> objs;
+	for (auto& comp : gameObject->components)
+	{
+		if (comp->type == ComponentType(inputType))
+			objs.emplace_back(TryGetComponentMono(go, type, inputType));
+	}
+
+	MonoClass* goClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "GameObject");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, goClass, objs.size());
+	
+	for (int i = 0; i < objs.size(); ++i)
+		mono_array_set(ret, MonoObject*, i, objs[i]);
+
+	return ret;
 }
 
 void LogMono(MonoString* x)

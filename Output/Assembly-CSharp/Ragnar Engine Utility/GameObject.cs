@@ -48,20 +48,31 @@ namespace RagnarEngine
             //camera.pointer = camPTR;
         }
 
+        public T[] GetComponents<T>() where T : RagnarComponent
+        {
+            ComponentType type = ComponentType.SCRIPT;
+            if (RagnarComponent.componentTable.ContainsKey(typeof(T)))
+            {
+                type = RagnarComponent.componentTable[typeof(T)];
+            }
+            return TryGetComponents<T>(typeof(T).ToString(), (int)type);
+        }
 
         public T GetComponent<T>() where T : RagnarComponent
         {
-            //ComponentType type = T.get;
-            ComponentType retValue = ComponentType.SCRIPT;
+            ComponentType type = ComponentType.SCRIPT;
             if (RagnarComponent.componentTable.ContainsKey(typeof(T)))
             {
-                retValue = RagnarComponent.componentTable[typeof(T)];
+                type = RagnarComponent.componentTable[typeof(T)];
             }
-            return TryGetComponent<T>(typeof(T).ToString(), (int)retValue);
+            return TryGetComponent<T>(typeof(T).ToString(), (int)type);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern internal T TryGetComponent<T>(string type, int inputType = 0);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern internal T[] TryGetComponents<T>(string type, int inputType = 0);
 
         public T CreateComponent<T>() where T : RagnarComponent
         {
