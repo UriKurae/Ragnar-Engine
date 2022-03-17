@@ -227,7 +227,7 @@ void RigidBodyComponent::OnEditor()
 			}
 			else
 			{
-				//app->physics->triggers.remove(this);
+				app->physics->triggers.erase(FindTrigger(this));
 				CreateBody();
 			}
 		}
@@ -324,6 +324,11 @@ void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 	body->getCollisionShape()->getBoundingSphere(center, r1);
 	val->GetBody()->getCollisionShape()->getBoundingSphere(center, r2);
 	app->physics->AddConstraintP2P(*body, *val->GetBody(), float3(r1, r1, r1), float3(r2, r2, r2));
+}
+
+std::vector<RigidBodyComponent*>::const_iterator RigidBodyComponent::FindTrigger(RigidBodyComponent* node)
+{
+	return std::find(app->physics->triggers.begin(), app->physics->triggers.end(), node);
 }
 
 void RigidBodyComponent::SetCollisionType(CollisionType type)
@@ -616,6 +621,8 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
+	if (trigger)
+		app->physics->triggers.push_back(this);
 
 	SetPhysicsProperties();
 

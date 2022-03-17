@@ -32,6 +32,7 @@ public:
 	void Combos();
 
 	void AddConstraintP2P(RigidBodyComponent* const& val);
+	std::vector<RigidBodyComponent*>::const_iterator FindTrigger(RigidBodyComponent* node);
 
 	void ResetLocalValues();
 	void EditCollisionMesh();
