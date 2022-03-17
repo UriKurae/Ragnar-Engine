@@ -120,7 +120,7 @@ bool RigidBodyComponent::Update(float dt)
 
 			body->setWorldTransform(t);
 		}
-		else if (body->getActivationState() == 1 || body->getActivationState() == 3)
+		else if (useGravity != false && (body->getActivationState() == 1 || body->getActivationState() == 3))
 		{
 			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
 			trans->SetTransform(CM2);
@@ -326,6 +326,13 @@ void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 
 void RigidBodyComponent::SetCollisionType(CollisionType type)
 {
+	if (type == CollisionType::MESH)
+	{
+		useGravity = false;
+		isKinematic = false;
+		mass = 0.0f;
+	}
+		
 	collisionType = type;
 	SetBoundingBox();
 	CreateBody();

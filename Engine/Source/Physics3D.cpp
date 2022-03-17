@@ -221,7 +221,7 @@ btRigidBody* Physics3D::CollisionShape(const std::shared_ptr<Mesh> mesh, RigidBo
 	indexedMesh.m_vertexStride = sizeof(Vertex);
 
 	btTriangleIndexVertexArray* mTriangleIndexVertexArray = new btTriangleIndexVertexArray();
-	mTriangleIndexVertexArray->addIndexedMesh(indexedMesh, PHY_SHORT);
+	mTriangleIndexVertexArray->addIndexedMesh(indexedMesh, PHY_INTEGER);
 
 	btCollisionShape* colShape = new btBvhTriangleMeshShape(mTriangleIndexVertexArray, true, true);
 	btTransform startTransform;
