@@ -2,6 +2,7 @@
 #include "Module.h"
 
 #include <vector>
+#include <memory>
 #include <map>
 
 class Scene;
@@ -43,22 +44,24 @@ public:
 
 	void ImportPrimitives();
 
-	Scene* GetCurrentScene() const { return currentScene; }
+	Scene* GetCurrentScene() const { return currentScene.get(); }
 
 	void NewScene();
-	void AddScene(Scene* newScene);
+	void AddScene(std::shared_ptr<Scene> newScene);
 
 	void ChangeScene(const char* sceneName);
 
-private:
+	void NextScene();
+	void NextScene(const char* name);
 
+private:
+	int index;
 	/*GameState gameState;
 	bool frameSkip;*/
 
 	//GameTimer gameTimer;
 
-	Scene* currentScene;
+	std::shared_ptr<Scene> currentScene;
 
-	std::vector<Scene*> scenes;
-
+	std::vector<std::shared_ptr<Scene>> scenes;
 };

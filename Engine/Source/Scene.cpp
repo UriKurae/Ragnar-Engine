@@ -29,7 +29,7 @@
 #include <stack>
 #include "Profiling.h"
 
-Scene::Scene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
+Scene::Scene(uint uid, std::string& assets, std::string& library) : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr), Resource(uid, ResourceType::SCENE, assets, library)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -189,8 +189,6 @@ void Scene::NewScene()
 {
 	RELEASE(root);
 
-	sceneDir.clear();
-
 	root = new GameObject();
 	root->SetName("Untitled");
 
@@ -326,6 +324,45 @@ void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 	gameObj->GetComponent<TransformComponent>()->SetAABB();
 }
 
+void Scene::Load()
+{
+	if (root == nullptr)
+	{
+		LoadScene(assetsPath.c_str());
+	}
+}
+
+void Scene::UnLoad()
+{
+	RELEASE(root);
+	RELEASE(mainCamera);
+	RELEASE(camera);
+	RELEASE(player);
+	qTree.Clear();
+}
+
+GameObject* Scene::GetGoByUuid(double uuid) const
+{
+	std::stack<GameObject*> goStack;
+	goStack.push(root);
+
+	while (!goStack.empty())
+	{
+		GameObject* go = goStack.top();
+		goStack.pop();
+		if (go->GetUUID() == uuid)	return go;
+		else
+		{
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+			{
+				goStack.push(go->GetChilds()[i]);
+			}
+		}
+	}
+
+	return nullptr;
+}
+
 bool Scene::LoadScene(const char* name)
 {
 	RG_PROFILING_FUNCTION("Loading Scene");
@@ -334,17 +371,15 @@ bool Scene::LoadScene(const char* name)
 
 	RELEASE(root);
 	app->userInterface->UIGameObjects.clear();
-	//char* buffer = nullptr;
 
-	//app->fs->Load(name, &buffer);
-	sceneDir = name;
+	assetsPath = name;
 
 	JsonParsing sceneFile = JsonParsing();
 
-	if (sceneFile.ParseFile(name) > 0)
+	if (sceneFile.ParseFile(assetsPath.c_str()) > 0)
 	{
 		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Game Objects");
-		
+
 		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
 		for (int i = 0; i < size; ++i)
 		{
@@ -399,43 +434,21 @@ bool Scene::LoadScene(const char* name)
 	}
 
 	referenceMap.clear();
-	
+
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	app->editor->SetGO(nullptr);
-	
+
 	return true;
-}
-
-GameObject* Scene::GetGoByUuid(double uuid) const
-{
-	std::stack<GameObject*> goStack;
-	goStack.push(root);
-
-	while (!goStack.empty())
-	{
-		GameObject* go = goStack.top();
-		goStack.pop();
-		if (go->GetUUID() == uuid)	return go;
-		else
-		{
-			for (int i = 0; i < go->GetChilds().size(); ++i)
-			{
-				goStack.push(go->GetChilds()[i]);
-			}
-		}
-	}
-
-	return nullptr;
 }
 
 bool Scene::SaveScene(const char* name)
 {
 	DEBUG_LOG("Saving Scene");
 
-	sceneDir = name;
+	assetsPath = name;
 
 	std::string rootName = name;
 	app->fs->GetFilenameWithoutExtension(rootName);

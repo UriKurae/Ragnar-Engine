@@ -109,7 +109,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 				std::string scene = path;
 				if (scene.find(".ragnar") != std::string::npos)
 				{
-					app->sceneManager->GetCurrentScene()->LoadScene(scene.c_str());
+					app->sceneManager->ChangeScene(scene.c_str());
 				}
 				else if (scene.find(".rgprefab") != std::string::npos)
 				{

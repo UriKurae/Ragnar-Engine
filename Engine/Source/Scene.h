@@ -4,6 +4,8 @@
 #include "Quadtree.h"
 #include "GameTimer.h"
 
+#include "Resource.h"
+
 #include <vector>
 #include <map>
 
@@ -26,10 +28,10 @@ enum class GameState
 
 class CameraComponent;
 
-class Scene
+class Scene : public Resource
 {
 public:
-	Scene();
+	Scene(uint uid, std::string& assets, std::string& library);
 	~Scene();
 
 	bool Start();
@@ -66,6 +68,9 @@ public:
 	void MoveGameObjectDown(GameObject* object);
 	void ReparentGameObjects(uint uuid, GameObject* go);
 
+	void Load() override;
+	void UnLoad() override;
+	
 	bool LoadScene(const char* name);
 	bool SaveScene(const char* name);
 
@@ -79,7 +84,6 @@ public:
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 
 	inline GameObject* GetPlayer() { return player; };
-	inline const std::string& SceneDirectory() const { return sceneDir; }
 
 	// Scripting
 	void Scripting(float dt);
@@ -100,6 +104,4 @@ private:
 	bool frameSkip;
 	bool resetQuadtree;
 	bool drawQuad = false;
-
-	std::string sceneDir;
 };

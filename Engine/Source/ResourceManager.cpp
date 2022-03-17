@@ -11,6 +11,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Model.h"
+#include "Scene.h"
 
 #include <stack>
 #include <fstream>
@@ -58,7 +59,7 @@ void ResourceManager::CheckForNewResources()
 
 }
 
-uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std::string& library)
+uint ResourceManager::CreateResource(ResourceType type, std::string assets, std::string& library)
 {
 	std::shared_ptr<Resource> resource = nullptr;
 
@@ -79,6 +80,10 @@ uint ResourceManager::CreateResource(ResourceType type, std::string& assets, std
 	switch (type)
 	{
 	case ResourceType::NONE:
+		break;
+	case ResourceType::SCENE:
+		library = SCENES_FOLDER + std::string("scenes_") + std::to_string(uid) + ".ragnar";
+		resource = std::make_shared<Scene>(uid, assets, library);
 		break;
 	case ResourceType::TEXTURE:
 		library = TEXTURES_FOLDER + std::string("texture_") + std::to_string(uid) + ".rgtexture";
@@ -273,7 +278,9 @@ void ResourceManager::ImportAllResources()
 				ShaderImporter::SaveShader(*it);
 				//ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
 				break;
-
+			case ResourceType::SCENE:
+				CreateResource(ResourceType::SCENE, *it, *it);
+				break;
 			}
 		}
 
@@ -323,6 +330,14 @@ void ResourceManager::DeleteResource(std::string& path)
 			map.erase(it);
 			return;
 		}
+	}
+}
+
+void ResourceManager::DeleteResource(uint uid)
+{
+	if (map.find(uid) != map.end())
+	{
+		map.erase(uid);
 	}
 }
 

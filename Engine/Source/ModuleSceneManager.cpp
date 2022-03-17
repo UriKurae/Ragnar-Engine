@@ -14,17 +14,18 @@
 
 ModuleSceneManager::ModuleSceneManager(bool startEnabled) : Module(startEnabled)
 {
-	currentScene = new Scene();
+	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
+	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
 	AddScene(currentScene);
 }
 
 ModuleSceneManager::~ModuleSceneManager()
 {
 	currentScene = nullptr;
-	for (int i = 0; i < scenes.size(); ++i)
-	{
-		RELEASE(scenes[i]);
-	}
+	//for (int i = 0; i < scenes.size(); ++i)
+	//{
+	//	RELEASE(scenes[i]);
+	//}
 }
 
 bool ModuleSceneManager::Start()
@@ -40,37 +41,29 @@ bool ModuleSceneManager::Start()
 
 bool ModuleSceneManager::PreUpdate(float dt)
 {
-	for (int i = 0; i < scenes.size(); ++i)
-	{
-		scenes[i]->PreUpdate(dt);
-	}
+	currentScene->PreUpdate(dt);
+
 	return true;
 }
 
 bool ModuleSceneManager::Update(float dt)
 {
-	for (int i = 0; i < scenes.size(); ++i)
-	{
-		scenes[i]->Update(dt);
-	}
+	currentScene->Update(dt);
+	
 	return true;
 }
 
 bool ModuleSceneManager::PostUpdate()
 {
-	for (int i = 0; i < scenes.size(); ++i)
-	{
-		scenes[i]->PostUpdate();
-	}
+	currentScene->PostUpdate();
+
 	return true;
 }
 
 bool ModuleSceneManager::Draw()
 {
-	for (int i = 0; i < scenes.size(); ++i)
-	{
-		scenes[i]->Draw();
-	}
+	currentScene->Draw();
+
 	return true;
 }
 
@@ -80,6 +73,7 @@ bool ModuleSceneManager::CleanUp()
 	{
 		scenes[i]->CleanUp();
 	}
+
 	return true;
 }
 
@@ -135,12 +129,38 @@ void ModuleSceneManager::NewScene()
 	currentScene->NewScene();
 }
 
-void ModuleSceneManager::AddScene(Scene* newScene)
+void ModuleSceneManager::AddScene(std::shared_ptr<Scene> newScene)
 {
 	scenes.push_back(newScene);
 }
 
 void ModuleSceneManager::ChangeScene(const char* sceneName)
 {
-	currentScene->LoadScene(sceneName);
+	if (currentScene->GetAssetsPath() == "")
+	{
+		ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
+	}
+	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->LoadResource(std::string(sceneName)));
+}
+
+void ModuleSceneManager::NextScene()
+{
+	scenes[index]->UnLoad();
+	++index;
+	scenes[index]->Load();
+}
+
+void ModuleSceneManager::NextScene(const char* name)
+{
+	for (int i = 0; i < scenes.size(); ++i)
+	{
+		if (scenes[i]->GetName() == name)
+		{
+			currentScene->UnLoad();
+			index = i;
+			scenes[index]->Load();
+			currentScene = scenes[index];
+			break;
+		}
+	}
 }

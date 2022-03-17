@@ -123,12 +123,12 @@ bool MainMenuBar::Update(float dt)
 
 			if (ImGui::MenuItem(ICON_FA_SAVE" Save", "Ctrl + S", &ret))
 			{
-				if (app->sceneManager->GetCurrentScene()->SceneDirectory().empty())
+				if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
 				{
 					std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 					if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 				}
-				else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->SceneDirectory().c_str());
+				else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
 			}
 			if (ImGui::MenuItem(ICON_FA_SAVE" Save As", "Ctrl + Shift + S", &ret))
 			{
@@ -449,7 +449,7 @@ bool MainMenuBar::Update(float dt)
 		ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 		ImGui::TextWrapped("Do you want to save the changes you made in: ");
 
-		std::string dir = app->sceneManager->GetCurrentScene()->SceneDirectory();
+		std::string dir = app->sceneManager->GetCurrentScene()->GetAssetsPath();
 		if (!dir.empty())
 		{
 			dir = dir.substr(dir.find("Output\\") + 7, dir.length());
@@ -458,14 +458,14 @@ bool MainMenuBar::Update(float dt)
 		ImGui::NewLine();
 		if (ImGui::Button("Save"))
 		{
-			if (app->sceneManager->GetCurrentScene()->SceneDirectory().empty())
+			if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
 			{
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 			}
 			else
 			{
-				app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->SceneDirectory().c_str());
+				app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
 			}
 			app->sceneManager->GetCurrentScene()->NewScene();
 			saveWindow = false;
@@ -593,12 +593,12 @@ bool MainMenuBar::Update(float dt)
 	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
 	{
-		if (app->sceneManager->GetCurrentScene()->SceneDirectory().empty())
+		if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
 		{
 			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 			if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 		}
-		else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->SceneDirectory().c_str());
+		else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
 	}
 
 	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
