@@ -120,7 +120,7 @@ bool RigidBodyComponent::Update(float dt)
 
 			body->setWorldTransform(t);
 		}
-		else if (useGravity != false && (body->getActivationState() == 1 || body->getActivationState() == 3))
+		else if (collisionType != CollisionType::MESH && (body->getActivationState() == 1 || body->getActivationState() == 3))
 		{
 			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
 			trans->SetTransform(CM2);
@@ -137,7 +137,9 @@ void RigidBodyComponent::UpdateCollision()
 	{
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
-		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
+		if (collisionType == CollisionType::MESH)
+			t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3));
+		else t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
 		
 		body->setWorldTransform(t);
 	}
@@ -197,11 +199,11 @@ void RigidBodyComponent::OnEditor()
 			body->setRestitution(restitution);
 		ImGui::PopItemWidth();
 
-		if (ImGui::Checkbox("Use Gravity", &useGravity))
+		if (collisionType != CollisionType::MESH && ImGui::Checkbox("Use Gravity", &useGravity))
 		{
 			if (!useGravity && !isKinematic)
 				SetAsStatic();
-			else 
+			else
 			{
 				if (mass == 0) mass = 1.0f;
 				CreateBody();
@@ -553,9 +555,25 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
 
-	//Collision dimensions
+	//Collision Type
 	collisionType = (CollisionType)(int)node.GetJsonNumber("CollisionType");
-	if(collisionType != CollisionType::BOX) SetCollisionType(collisionType);
+	//Physic properties
+	useGravity = node.GetJsonBool("Gravity");
+	isKinematic = node.GetJsonBool("Kinematic");
+	trigger = node.GetJsonBool("Trigger");
+	mass = node.GetJsonNumber("Mass");
+	friction = node.GetJsonNumber("Friction");
+	restitution = node.GetJsonNumber("Restitution");
+
+	//Damping
+	linearDamping = node.GetJsonNumber("LinearDamping");
+	angularDamping = node.GetJsonNumber("AngularDamping");
+
+	//Constrains
+	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
+	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+
+	SetCollisionType(collisionType);
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -588,22 +606,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	}
 	UpdateCollisionMesh();
 
-	//Collision physics
-	useGravity = node.GetJsonBool("Gravity");
-	isKinematic = node.GetJsonBool("Kinematic");
-	trigger = node.GetJsonBool("Trigger");
-	mass = node.GetJsonNumber("Mass");
-	friction = node.GetJsonNumber("Friction");
-	restitution = node.GetJsonNumber("Restitution");
-
-	//Damping
-	linearDamping = node.GetJsonNumber("LinearDamping");
-	angularDamping = node.GetJsonNumber("AngularDamping");
-
-	//Constrains
-	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
-	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
-
 	uint size = node.GetJsonNumber("SizeConstraint");
 	if (size > 0)
 	{
@@ -614,18 +616,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-	if (!useGravity && !isKinematic)
-		SetAsStatic();
-	else if (isKinematic)
-	{
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		if (app->scene->GetGameState() == GameState::PLAYING)
-			body->setActivationState(DISABLE_DEACTIVATION);
-	}
-	if(trigger) 
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
-	SetMass(mass);
 	SetPhysicsProperties();
 
 	return true;
