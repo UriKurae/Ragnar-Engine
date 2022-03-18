@@ -57,12 +57,15 @@
     <Compile Include="Assembly-CSharp\Default Components\Transform2D.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIButton.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UICheckbox.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\UIImage.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UISlider.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\GameObject.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\InternalCalls.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Quaternion.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Time.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
+    <Compile Include="Assets\Scripts\pauseMenuButton.cs" />
+    <Compile Include="Assets\Scripts\pauseMenuImage.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\test2.cs" />
     <Compile Include="Assets\Scripts\Abilities.cs" />

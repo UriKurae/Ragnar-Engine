@@ -42,9 +42,10 @@ private:
 	float3 position = {1,1,0.5f};
 	float3 internalPosition;
 	float3 scale;
-
+	float4 lastViewportBounds;
 	Quat rotationQuat;
-	bool showEdit = false;
+	bool showEdit = true;
 	float buttonWidth = 30;
 	float buttonHeight = 100;
+	bool firstTime = true;
 };

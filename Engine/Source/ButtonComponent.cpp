@@ -23,7 +23,7 @@ ButtonComponent::~ButtonComponent()
 
 bool ButtonComponent::Update(float dt)
 {
-	buttonText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
+	buttonText.SetOnlyPosition(float2(GetParentPosition().x/2, GetParentPosition().y/2));
 
 	if (!active)
 		state = State::DISABLED;

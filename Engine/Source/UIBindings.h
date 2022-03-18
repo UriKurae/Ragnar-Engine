@@ -48,10 +48,8 @@ MonoObject* Get2DPosition(MonoObject* go)
 void Set2DPosition(MonoObject* go, MonoObject* position)
 {
 	if (ComponentTransform2D* tr = GetComponentMono<ComponentTransform2D*>(go))
-	{
-		int i = 0;
-		/*tr->SetPosition(app->moduleMono->UnboxVector(position));
-		tr->UpdateTransform();*/
+	{		
+		tr->SetPosition(app->moduleMono->UnboxVector(position));
 	}
 }
 

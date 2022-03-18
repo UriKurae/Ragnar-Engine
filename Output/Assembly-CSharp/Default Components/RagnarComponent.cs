@@ -46,6 +46,7 @@ namespace RagnarEngine
             { typeof(AudioListener), ComponentType.AUDIO_LISTENER},
             { typeof(Transform2D), ComponentType.TRANFORM2D},
             { typeof(UIButton), ComponentType.UI_BUTTON},
+            { typeof(UIImage), ComponentType.UI_IMAGE},
             { typeof(UICheckbox), ComponentType.UI_CHECKBOX},
             { typeof(UISlider), ComponentType.UI_SLIDER},
         };
