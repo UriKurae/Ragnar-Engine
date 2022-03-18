@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
+#include "ModuleNavMesh.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -228,6 +229,8 @@ bool ModuleCamera3D::Update(float dt)
 				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
 				LineSegment prevLine = picking;
 				rayCastToDraw = picking.ToLine();
+				if (app->scene->GetGameState() == GameState::PLAYING)
+					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
 				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
