@@ -72,111 +72,6 @@
             ]
         },
         {
-            "UUID": 2128337088,
-            "Parent UUID": 417171234,
-            "Name": "cameraController",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -4.9477472305297852,
-                        0,
-                        -2.2581052780151367
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 360238450,
-            "Parent UUID": 2128337088,
-            "Name": "Camera",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -0.26639080047607422,
-                        11.183857917785645,
-                        13.648064613342285
-                    ],
-                    "Quaternion": [
-                        -0.14068865776062012,
-                        -0.57568717002868652,
-                        0.37059000134468079,
-                        0.71516019105911255
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1.4142135381698608,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Near Plane": 1,
-                    "Far Plane": 100,
-                    "Vertical Fov": 0.92976027727127075,
-                    "Horizontal Fov": 1.5707963705062866,
-                    "Camera Pos": [
-                        -0.26639080047607422,
-                        11.183857917785645,
-                        13.648064613342285
-                    ],
-                    "Type": 3,
-                    "Zoom": 24,
-                    "Free Movement": true,
-                    "Default Target Pos": [
-                        -4.9477472305297852,
-                        0,
-                        -2.2581052780151367
-                    ],
-                    "Movement Speed": 0.5,
-                    "Target Pos": 2021177439,
-                    "Vertical Angle": -56,
-                    "Lock Vertical Angle": false,
-                    "Rotation Speed": 0.5,
-                    "Radius": 20,
-                    "Horizontal Angle": 556.39971923828125,
-                    "Right Click Rotation": true,
-                    "Arrow Rotation": false,
-                    "WASD Movement": false,
-                    "Border Movement": false,
-                    "Shake Strength": 0.60000002384185791,
-                    "Shake Duration": 1,
-                    "Shake Smooth": 0
-                }
-            ]
-        },
-        {
             "UUID": 2021177439,
             "Parent UUID": 417171234,
             "Name": "Player",
@@ -1561,6 +1456,111 @@
                     "Path": "Assets\/Resources\/UI_chra.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2128337088,
+            "Parent UUID": 417171234,
+            "Name": "cameraController",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.26639080047607422,
+                        11.183857917785645,
+                        13.648064613342285
+                    ],
+                    "Quaternion": [
+                        -0.14068865776062012,
+                        -0.57568717002868652,
+                        0.37059000134468079,
+                        0.71516019105911255
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.4142135381698608,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 0.92976027727127075,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        -0.26639080047607422,
+                        11.183857917785645,
+                        13.648064613342285
+                    ],
+                    "Type": 3,
+                    "Zoom": 24,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Movement Speed": 0.5,
+                    "Target Pos": 2021177439,
+                    "Vertical Angle": -56,
+                    "Lock Vertical Angle": false,
+                    "Rotation Speed": 0.5,
+                    "Radius": 20,
+                    "Horizontal Angle": 556.39971923828125,
+                    "Right Click Rotation": true,
+                    "Arrow Rotation": false,
+                    "WASD Movement": false,
+                    "Border Movement": false,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0
                 }
             ]
         }

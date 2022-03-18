@@ -88,15 +88,7 @@ void CameraComponent::OnEditor()
 
 		ImGui::Text("- - - - MOVEMENT - - - -");
 
-		if (ImGui::Checkbox("RightClickRotation", &rightClickRot)) {}
-		ImGui::SameLine();
-		if (ImGui::Checkbox("WheelClickMovement", &rightClickRot)) {}
-
 		if (ImGui::Checkbox("ArrowRotation", &arrowRot)) {}
-		ImGui::SameLine();
-		if (ImGui::Checkbox("WASD-Movement", &WASDMov)) {}
-
-		if (ImGui::Checkbox("BorderMovement", &borderMov)) {}
 
 		if (ImGui::Button("Switch camera movement"))
 		{
@@ -161,7 +153,6 @@ void CameraComponent::OnEditor()
 		if (smooth == 1) ImGui::Text("Smoothnes:: in-out");
 		if (smooth == 2) ImGui::Text("Smoothnes:: in");
 		if (smooth == 3) ImGui::Text("Smoothnes:: out");
-		//if (ImGui::Checkbox("smoothShake", &smoothShake)) {}
 		if (ImGui::Button("Shake")) {
 			RequestShake(shakeStrength, shakeDuration);
 		}
@@ -184,6 +175,12 @@ bool CameraComponent::Update(float dt)
 	camera.SetOrthographic(viewport.z / zoom, viewport.w / zoom);
 	zoom = Clamp(zoom + app->input->GetMouseZ(), zoomMin, zoomMax);
 
+	float z = app->input->GetMouseZ();
+	if ((z > 0 && z < 1) || (z<0 && z>-1))
+	{
+		DEBUG_LOG("Wheel: %.2f", app->input->GetMouseZ());
+	}
+
 	camera.SetPos(transform->GetPosition());
 
 	if (target && app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
@@ -201,7 +198,7 @@ bool CameraComponent::Update(float dt)
 	{
 		Shake(dt);
 	}
-	
+
 	if (!CompareRotations(currentRotation, transform->GetRotation()))
 	{
 		currentRotation = transform->GetRotation();
@@ -222,14 +219,12 @@ bool CameraComponent::Update(float dt)
 	}
 
 
-	bool mouseDragRight;
-	if(rightClickRot) mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
-	float horizontalDrag = 0;
-	if(arrowRot || rightClickRot) horizontalDrag = app->input->GetMouseXMotion();
+	bool mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
+	float horizontalDrag = app->input->GetMouseXMotion();
 
 	// -------------MOVEMENT---------------
-	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) || (rightClickRot && mouseDragRight && horizontalDrag > 1)) horizontalAngle -= rotationSpeed;
-	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) || (rightClickRot && mouseDragRight && horizontalDrag < -1)) horizontalAngle += rotationSpeed;
+	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) || (mouseDragRight && horizontalDrag > 1)) horizontalAngle -= rotationSpeed;
+	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) || (mouseDragRight && horizontalDrag < -1)) horizontalAngle += rotationSpeed;
 	if (!lockVerticalAngle)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT) verticalAngle -= rotationSpeed;
@@ -241,35 +236,18 @@ bool CameraComponent::Update(float dt)
 	{
 		float3 pos = defTarget->GetComponent<TransformComponent>()->GetPosition();
 		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
-		//int horizontalDrag = app->input->GetMouseXMotion();
 		float verticalDrag = app->input->GetMouseYMotion();
-		int dragThreshold = 0;
-		int wx, wy;
-		SDL_GetWindowPosition(app->window->window, &wx, &wy);
 
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && horizontalDrag > dragThreshold)
-			|| (borderMov && app->input->GetMouseX() < wx+2)) {
+		if (mouseDragMid && horizontalDrag)
+		{
 			pos.x += movementSpeed * horizontalDrag / zoom / 2 * sin(DEGTORAD * (horizontalAngle + 90));
 			pos.z += movementSpeed * horizontalDrag / zoom / 2 * cos(DEGTORAD * (horizontalAngle + 90));
 		}
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && horizontalDrag < -dragThreshold)
-			|| (borderMov && app->input->GetMouseX() > *app->window->GetWindowWidth() + wx-2)) {
-			pos.x -= movementSpeed * -horizontalDrag / zoom / 2 * sin(DEGTORAD * (horizontalAngle + 90));
-			pos.z -= movementSpeed * -horizontalDrag / zoom / 2 * cos(DEGTORAD * (horizontalAngle + 90));
-		}
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && verticalDrag < -dragThreshold)
-			|| (borderMov && app->input->GetMouseY() > *app->window->GetWindowHeight() + wy-2)) {
+
+		if (mouseDragMid && verticalDrag)
+		{
 			pos.x -= movementSpeed * -verticalDrag / zoom * sin(DEGTORAD * horizontalAngle);
 			pos.z -= movementSpeed * -verticalDrag / zoom * cos(DEGTORAD * horizontalAngle);
-		}
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && verticalDrag > dragThreshold)
-			|| (borderMov && app->input->GetMouseY() < wy+2)) {
-			pos.x += movementSpeed * verticalDrag / zoom * sin(DEGTORAD * horizontalAngle);
-			pos.z += movementSpeed * verticalDrag / zoom * cos(DEGTORAD * horizontalAngle);
 		}
 		defTarget->GetComponent<TransformComponent>()->SetPosition(float3(pos.x, 0, pos.z));
 	}
@@ -419,11 +397,7 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	radius = node.GetJsonNumber("Radius");
 	horizontalAngle = node.GetJsonNumber("Horizontal Angle");
 	// CONTROLS
-	rightClickRot = node.GetJsonBool("Right Click Rotation");
-	if (!rightClickRot) midClickMov = false;
 	arrowRot = node.GetJsonBool("Arrow Rotation");
-	WASDMov = node.GetJsonBool("WASD Movement");
-	borderMov = node.GetJsonBool("Border Movement");
 	// SHAKE
 	shakeStrength = node.GetJsonNumber("Shake Strength");
 	shakeDuration = node.GetJsonNumber("Shake Duration");
@@ -455,10 +429,7 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Horizontal Angle", horizontalAngle);
 	// CONTROLS
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Right Click Rotation", rightClickRot);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Arrow Rotation", arrowRot);
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "WASD Movement", WASDMov);
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Border Movement", borderMov);
 	// SHAKE
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Strength", shakeStrength);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Duration", shakeDuration);
