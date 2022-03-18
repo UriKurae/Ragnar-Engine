@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "FileSystem.h"
 #include "Globals.h"
+#include "Geometry/Sphere.h"
+#include "MeshComponent.h"
 
 ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformComponent* trans, uint numParticles)
 {
@@ -12,6 +14,12 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
     isActive = false; // Simulation is active
     saveConfig = false;
     loadConfig = false;
+
+    Sphere s(trans->GetPosition(), 5);
+    own->SetAABB(AABB(s));
+
+    if (own->GetComponent<MeshComponent>() == nullptr)
+        app->scene->GetQuadtree().Insert(own);
 
     if (own->GetComponent<BillboardParticleComponent>() == nullptr)
         own->CreateComponent(ComponentType::BILLBOARD);
@@ -132,7 +140,6 @@ void ParticleSystemComponent::OnEditor()
 
         ImGui::Spacing();
         ImGui::Spacing();
-        ImGui::Unindent();
         ImGui::Separator();
         ComponentOptions(this);
         ImGui::Separator();
