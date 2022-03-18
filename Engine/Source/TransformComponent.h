@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Math/float4x4.h"
 #include "Math/float3x3.h"
+#include "glmath.h"
 
 enum class Operation
 {
@@ -62,6 +63,7 @@ public:
 	inline void ForceUpdateTransform() { changeTransform = true; }
 	inline void UpdateEditorRotation() { rotationEditor = rotation.ToEulerXYZ(); };
 	// UNDO
+	Mat4x4 float4x4ToMat4x4();
 
 private:
 	float3 position = float3::zero;
