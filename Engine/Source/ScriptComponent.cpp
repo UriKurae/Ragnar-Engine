@@ -3,6 +3,10 @@
 #include "ModuleScene.h"
 #include "MonoManager.h"
 
+#include "C_RigidBody.h"
+
+#include <mono/metadata/class.h>
+#include <mono/metadata/object.h>
 #include <mono/metadata/debug-helpers.h>
 #include <mono/metadata/object-forward.h>
 
@@ -62,6 +66,16 @@ bool ScriptComponent::Update(float dt)
 
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
+
+	//if (RigidBodyComponent* rb = owner->GetComponent<RigidBodyComponent>())
+	//{
+	//	if (rb->GetOnCollision())
+	//	{
+	//		void* params[1];
+	//		params[0] = app->moduleMono->ComponentToCS(rb->GetCollisionTarget());
+	//		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	//	}
+	//}
 
 	if (exec != nullptr || startExec != nullptr)
 	{
@@ -401,6 +415,16 @@ bool ScriptComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
+void ScriptComponent::CallOnTriggerEnter(RigidBodyComponent* other)
+{
+	if (onTriggerEnterMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+
 void ScriptComponent::LoadScriptData(const char* scriptName)
 {
 	methods.clear();
@@ -432,6 +456,10 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	mdesc = mono_method_desc_new(":Update", false);
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
 	mono_method_desc_free(mdesc);
+
+	MonoMethodDesc* triggerDesc = mono_method_desc_new(":OnTriggerEnter", false);
+	onTriggerEnterMethod = mono_method_desc_search_in_class(triggerDesc, klass);
+	mono_method_desc_free(triggerDesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);
 	if (baseClass != nullptr)

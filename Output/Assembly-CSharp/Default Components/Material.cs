@@ -4,17 +4,17 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
-    public class MaterialComponent : RagnarComponent
+    public class Material : RagnarComponent
     {
-        public MaterialComponent(UIntPtr ptr) : base(ptr)
+        public Material(UIntPtr ptr) : base(ptr)
         {
             type = ComponentType.MATERIAL;
         }
 
         public extern string texture
         {
-            //[MethodImplAttribute(MethodImplOptions.InternalCall)]
-            //get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }

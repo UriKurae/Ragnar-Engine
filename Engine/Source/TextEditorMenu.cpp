@@ -64,12 +64,6 @@ bool TextEditorMenu::Update(float dt)
 			else if (!allScriptsFiles.empty())
 				allScriptsFiles.clear();
 
-			if (ImGui::MenuItem("Save"))
-			{
-				std::string toSave = textEditor.GetText();
-				app->fs->Save(fileToEdit.data(), toSave.data(), toSave.size());
-				app->moduleMono->ReCompileCS();
-			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Edit"))
@@ -116,6 +110,12 @@ bool TextEditorMenu::Update(float dt)
 		ImGui::EndMenuBar();
 	}
 
+	if(ImGui::Button("Save and Reload"))
+	{
+		std::string toSave = textEditor.GetText();
+		app->fs->Save(fileToEdit.data(), toSave.data(), toSave.size());
+		app->moduleMono->ReCompileCS();
+	}
 
 	ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", pos.mLine + 1, pos.mColumn + 1, textEditor.GetTotalLines(),
 		textEditor.IsOverwrite() ? "Ovr" : "Ins",
