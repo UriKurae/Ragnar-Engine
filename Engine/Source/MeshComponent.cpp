@@ -46,41 +46,6 @@ void MeshComponent::Draw(CameraComponent* gameCam)
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	
 	if (material != nullptr && material->GetActive()) material->Unbind();
-
-	// If showAABB are enable draw the his bounding boxes
-	if (showAABB == true) {
-		float3 points[8];
-		owner->GetAABB().GetCornerPoints(points);
-		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
-	}
-	// If showOBB are enable draw the his bounding boxes
-	if (showOBB == true) {
-		float3 points[8];
-		owner->GetOOB().GetCornerPoints(points);
-		DebugColliders(points);
-	}
-}
-
-void MeshComponent::DebugColliders(float3* points, float3 color)
-{
-	static unsigned int index[24] =
-	{ 0, 2, 2, 6, 6, 4, 4, 0,
-	  0, 1, 1, 3, 3, 2, 4, 5,
-	  6, 7, 5, 7, 3, 7, 1, 5
-	};
-
-	glColor3fv(&color.x);
-	glLineWidth(2.f);
-	glBegin(GL_LINES);
-
-	for (int i = 0; i < 24; i++)
-	{
-		glVertex3fv(&points[index[i]].x);
-	}
-
-	glEnd();
-	glLineWidth(1.f);
-	glColor3f(1.f, 1.f, 1.f);
 }
 
 void MeshComponent::DrawOutline()
@@ -129,9 +94,9 @@ void MeshComponent::OnEditor()
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mesh ? mesh.use_count() : 0);
 
-		ImGui::Checkbox("Show AABB     ", &showAABB);		
+		ImGui::Checkbox("Show AABB     ", &owner->showAABB);		
 		ImGui::SameLine();		
-		ImGui::Checkbox("Show OBB", &showOBB);
+		ImGui::Checkbox("Show OBB", &owner->showOBB);
 
 		ComponentOptions(this);
 		ImGui::Separator();

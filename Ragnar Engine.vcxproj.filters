@@ -52,6 +52,12 @@
     <Filter Include="Sources\Libraries\WWise">
       <UniqueIdentifier>{bd1af3b5-ca65-4c5d-adab-cf27c3be5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{95424e2e-e040-492b-8903-1d24fb42ec54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles\Effects">
+      <UniqueIdentifier>{744104ab-de48-4d81-a240-c4777741af2e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Libraries\PugiXML">
       <UniqueIdentifier>{e2e9269a-6c3b-4f29-b464-363e28b54c9a}</UniqueIdentifier>
     </Filter>
@@ -348,6 +354,27 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Particle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEmitter.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\BillboardParticleComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleSystemComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Velocity.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Acceleration.h">
+      <Filter>Particles\Effects</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\MonoManager.h">
       <Filter>Sources\Modules</Filter>
@@ -802,6 +829,12 @@
     <ClInclude Include="Engine\Source\ModuleNavMesh.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Size.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_Color.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1001,6 +1034,24 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEmitter.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\BillboardParticleComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleSystemComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Velocity.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Acceleration.cpp">
+      <Filter>Particles\Effects</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\MonoManager.cpp">
       <Filter>Sources\Modules</Filter>
@@ -1325,6 +1376,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ModuleNavMesh.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Size.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_Color.cpp">
+      <Filter>Particles\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
