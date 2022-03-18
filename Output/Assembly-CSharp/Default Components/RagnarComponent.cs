@@ -44,6 +44,7 @@ namespace RagnarEngine
             { typeof(Animation), ComponentType.ANIMATION },
             { typeof(Camera), ComponentType.CAMERA },
             { typeof(AudioListener), ComponentType.AUDIO_LISTENER },
+            { typeof(NavAgent), ComponentType.NAVAGENT },
             //{ typeof(Button), ComponentType.UI_BUTTON },
         };
 

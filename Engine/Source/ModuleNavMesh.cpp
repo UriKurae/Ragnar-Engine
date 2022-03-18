@@ -413,8 +413,10 @@ static int fixupShortcuts(dtPolyRef* path, int npath, dtNavMeshQuery* navQuery)
 	return npath;
 }
 
-bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std::vector<float3>& path)
+std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination)
 {
+	std::vector<float3> path;
+
 	NavAgent* agentProp = agent->agentProperties;
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 
@@ -422,21 +424,23 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	const float m_polyPickExt[3] = { 2,4,2 };
 
 	if (m_navQuery == nullptr)
-		return false;
+		return path;
 
 	status = m_navQuery->findNearestPoly(origin.ptr(), m_polyPickExt, &m_filter, &agentProp->m_startRef, nullptr);
 	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
 		LOG(LogType::L_ERROR, "Could not find a near poly to start path");
-		return false;}
+		return path;
+	}
 
 	status = m_navQuery->findNearestPoly(destination.ptr(), m_polyPickExt, &m_filter, &agentProp->m_endRef, nullptr);
 	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
 		LOG(LogType::L_ERROR, "Could not find a near poly to end path");
-		return false;}
+		return path;
+	}
 
 	if (agentProp->pathType == PathType::SMOOTH)
 	{
-		if (agentProp->targetPosSet && agentProp->m_startRef && agentProp->m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
 			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(), destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
 
@@ -569,7 +573,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
 				LOG(LogType::L_ERROR, "Could not create smooth path");
 				path.clear();
-				return false;
+				return path;
 			}
 		}
 		else
@@ -580,7 +584,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	}
 	else if (agentProp->pathType == PathType::STRAIGHT)
 	{
-		if (agentProp->targetPosSet && agentProp->m_startRef && agentProp->m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
 			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(),
 				destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
@@ -602,7 +606,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
 				LOG(LogType::L_ERROR, "Could not create straight path");
 				path.clear();
-				return false;
+				return path;
 			}
 		}
 		else
@@ -618,7 +622,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
 
-	return true;
+	return path;
 }
 
 void Pathfinder::RenderPath(NavAgentComponent* agent)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using RagnarEngine;
 
@@ -12,20 +13,25 @@ public class Player : RagnarComponent
 
     Rigidbody rb;
     Material materialComponent;
+    NavAgent agent;
+    List<Vector3> wp;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
+        agent = gameObject.GetComponent<NavAgent>();
+        wp = new List<Vector3> { new Vector3(-1, 0, 1), new Vector3(-4, 0, 2) };
     }
 
     public void Update()
 	{
-        if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
+        if (agent.targetSetted)
         {
-            //GameObject but = GameObject.Find("Button");
-            //but.GetComponent<Button>().text = "Testint Text";
+            agent.CalculatePath(agent.destination);
         }
+
+        agent.MoveTo(agent.destination);
 
         ///////// SOUNDS /////////
         // Movement Sound
@@ -92,5 +98,6 @@ public class Player : RagnarComponent
         other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
     }
 }
+
 
 

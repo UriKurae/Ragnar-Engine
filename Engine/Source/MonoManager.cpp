@@ -20,6 +20,7 @@
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
+#include "NavAgentBindings.h"
 
 #include <iostream>
 #include <fstream>
@@ -129,6 +130,16 @@ bool MonoManager::Init(JsonParsing& node)
 	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
 	// Animation =================
+
+
+	// NavAgent ==================
+	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_targetSetted", GetAgentTargetSetted);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_destination", GetAgentDestination);
+	mono_add_internal_call("RagnarEngine.NavAgent::SetPath", SetAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
+	// NavAgent ==================
+
 
 	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
