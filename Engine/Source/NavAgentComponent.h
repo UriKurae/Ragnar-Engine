@@ -2,6 +2,7 @@
 #include "Component.h"
 
 struct NavAgent;
+class Pathfinder;
 
 class NavAgentComponent : public Component
 {
@@ -15,6 +16,7 @@ public:
 	virtual bool OnLoad(JsonParsing& node) override;
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-private:
+public:
 	NavAgent* agentProperties = nullptr;
+	Pathfinder* pathfinding = nullptr;
 };

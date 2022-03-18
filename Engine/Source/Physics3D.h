@@ -21,6 +21,7 @@ class btTypedConstraint;
 class btRigidBody;
 class RigidBodyComponent;
 class GameObject;
+class Mesh;
 
 enum class Axis {
 	Y = 1,
@@ -48,6 +49,7 @@ public:
 	btRigidBody* CollisionShape(const PCylinder& cylinder, RigidBodyComponent* component, Axis axis = Axis::Y);
 	btRigidBody* CollisionShape(const PPyramid& cone, RigidBodyComponent* component);
 	btRigidBody* CollisionShape(const PPlane& plane, RigidBodyComponent* component);
+	btRigidBody* CollisionShape(const std::shared_ptr<Mesh> mesh, RigidBodyComponent* component);
 
 	btRigidBody* AddBody(btCollisionShape* colShape, btTransform startTransform, RigidBodyComponent* component);
 	void DeleteBody(RigidBodyComponent* body, std::string name);
