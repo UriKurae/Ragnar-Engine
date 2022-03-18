@@ -225,7 +225,7 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
 	std::queue<GameObject*> q;
-	for (auto& go : app->scene->GetGameObjectsList())
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
 		q.push(go);
 
 	while (!q.empty())
@@ -252,7 +252,7 @@ MonoArray* FindGameObjectsWithTag(MonoObject* tag)
 	char* tagName = mono_string_to_utf8(mono_object_to_string(tag, 0));
 	
 	std::vector<MonoObject*> objects;
-	for (auto& go : app->scene->GetGameObjectsList())
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
 	{
 		if (go->tag == tagName)
 			objects.push_back(app->moduleMono->GoToCSGO(go));
