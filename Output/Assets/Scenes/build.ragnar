@@ -125,10 +125,10 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        -0.14068865776062012,
-                        -0.57568717002868652,
-                        0.37059000134468079,
-                        0.71516019105911255
+                        0.081818118691444397,
+                        -0.54951578378677368,
+                        0.42412963509559631,
+                        0.71515893936157227
                     ],
                     "RotationEditor": [
                         0,
@@ -287,13 +287,22 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 81921376,
+                    "pointer": 121955384,
                     "type": 4,
                     "componentTable": 0,
-                    "velocity": 5,
+                    "velocity": 1000,
                     "force": 100,
                     "rockSoundRadius": 4,
                     "canThrowKnife": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Abilities",
+                    "pointer": 121957736,
+                    "type": 4,
+                    "componentTable": 0,
+                    "force": 100,
+                    "rockSoundRadius": 4
                 }
             ]
         },

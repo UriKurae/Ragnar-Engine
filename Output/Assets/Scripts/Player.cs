@@ -4,23 +4,29 @@ using RagnarEngine;
 
 public class Player : RagnarComponent
 {
-	public int velocity = 5;
+	public int velocity = 1000;
 	public GameObject target = null;
     public float force = 100;
     public float rockSoundRadius = 4f;
     public bool canThrowKnife = true;
 
     Rigidbody rb;
-    MaterialComponent materialComponent;
+    Material materialComponent;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        materialComponent = gameObject.GetComponent<MaterialComponent>();
+        materialComponent = gameObject.GetComponent<Material>();
     }
 
     public void Update()
 	{
+        if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
+        {
+            //GameObject but = GameObject.Find("Button");
+            //but.GetComponent<Button>().text = "Testint Text";
+        }
+
         ///////// SOUNDS /////////
         // Movement Sound
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
@@ -60,70 +66,31 @@ public class Player : RagnarComponent
         // WASD Movement
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(0, 0, 1000);
+            Vector3 f = new Vector3(0, 0, velocity);
             rb.ApplyCentralForce(f);
         }
         else if (Input.GetKey(KeyCode.A) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(1000, 0, 0);
+            Vector3 f = new Vector3(velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
         else if (Input.GetKey(KeyCode.S) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(0, 0, -1000);
+            Vector3 f = new Vector3(0, 0, -velocity);
             rb.ApplyCentralForce(f);
         }
         else if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
         {
-            Vector3 f = new Vector3(-1000, 0, 0);
+            Vector3 f = new Vector3(-velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
-        ////////////////////////////
-
-        ///////// ABILITIES /////////
-        // Rock Throw
-        if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
-        {
-            Vector3 pos = gameObject.transform.globalPosition;
-            pos.y += 1;
-            GameObject bullet = InternalCalls.Create3DObject("Bullet", (int)PrimitiveType.CUBE, pos);
-            bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
-
-            Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
-            bulletRb.IgnoreCollision(gameObject, true);
-            Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
-            bulletRb.ApplyCentralForce(vectorDir.normalized * force);
-
-            // Falta if(OnCollision(bullet, floor))
-            GameObject soundArea = InternalCalls.CreateGameObject("SoundArea", bullet.transform.globalPosition, bullet.transform.globalRotation);
-            Rigidbody soundRb = soundArea.CreateComponent<Rigidbody>();
-            soundRb.IgnoreCollision(gameObject, true);
-            CreateSphereTrigger(soundRb, rockSoundRadius);
-        }
-
-        // Knife Throw
-        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN && canThrowKnife)
-        {
-            canThrowKnife = false;
-            Vector3 pos = gameObject.transform.globalPosition;
-            pos.y += 1;
-            GameObject bullet = InternalCalls.Create3DObject("Knife", (int)PrimitiveType.CUBE, pos);
-            bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
-
-            Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
-            bulletRb.IgnoreCollision(gameObject, true);
-            bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);
-        }
-        /////////////////////////////
     }
 
-    // With this method we create an spherical Trigger.
-    private static void CreateSphereTrigger(Rigidbody rb, float radius)
+    public void OnTriggerEnter(Rigidbody other)
     {
-        rb.SetCollisionType(CollisionType.SPHERE);
-        rb.SetAsStatic();
-        rb.SetAsTrigger();
-        rb.SetSphereRadius(radius);
+        // Only for testing purposes
+        other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
     }
 }
+
 
