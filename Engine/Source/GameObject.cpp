@@ -71,6 +71,19 @@ void GameObject::Draw(CameraComponent* gameCam)
 			component->Draw(gameCam);
 		}
 	}
+
+	// If showAABB are enable draw the his bounding boxes
+	if (showAABB == true) {
+		float3 points[8];
+		globalAabb.GetCornerPoints(points);
+		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
+	}
+	// If showOBB are enable draw the his bounding boxes
+	if (showOBB == true) {
+		float3 points[8];
+		globalObb.GetCornerPoints(points);
+		DebugColliders(points);
+	}
 }
 
 void GameObject::DrawOutline()
@@ -421,6 +434,12 @@ void GameObject::SetNewAABB()
 	}
 }
 
+void GameObject::EditAABB(float3 offset, float3 size)
+{
+	globalAabb.SetFromCenterAndSize(GetComponent<TransformComponent>()->GetPosition() + offset, size);
+	globalObb.SetFrom(globalAabb);
+}
+
 void GameObject::MoveChildrenUp(GameObject* child)
 {
 	if (child == children[0]) return;
@@ -717,4 +736,26 @@ Component* GameObject::GetComponent(ComponentType type)
 		if (comp->type == type)
 			return comp;
 	}
+}
+
+void GameObject::DebugColliders(float3* points, float3 color)
+{
+	static unsigned int index[24] =
+	{ 0, 2, 2, 6, 6, 4, 4, 0,
+	  0, 1, 1, 3, 3, 2, 4, 5,
+	  6, 7, 5, 7, 3, 7, 1, 5
+	};
+
+	glColor3fv(&color.x);
+	glLineWidth(2.f);
+	glBegin(GL_LINES);
+
+	for (int i = 0; i < 24; i++)
+	{
+		glVertex3fv(&points[index[i]].x);
+	}
+
+	glEnd();
+	glLineWidth(1.f);
+	glColor3f(1.f, 1.f, 1.f);
 }

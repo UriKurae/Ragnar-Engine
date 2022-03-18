@@ -17,6 +17,8 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
 
     Sphere s(trans->GetPosition(), 5);
     own->SetAABB(AABB(s));
+    sizeAABB = { 10,10,10 };
+    offsetAABB = { 0,0,0 };
 
     if (own->GetComponent<MeshComponent>() == nullptr)
         app->scene->GetQuadtree().Insert(own);
@@ -111,6 +113,23 @@ void ParticleSystemComponent::OnEditor()
         //ImGui::Checkbox("Looping", &looping);
         ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
 
+        ImGui::Spacing();
+        ImGui::Spacing();
+
+        ImGui::Text("Box Position: ");
+        if (ImGui::DragFloat3("##Offset", &offsetAABB.x, 0.1f))
+            owner->EditAABB(offsetAABB, sizeAABB);
+        ImGui::Text("Box Size: ");
+        if (ImGui::DragFloat3("##Box", &sizeAABB.x, 0.1f, 0.1f, INFINITE))
+            owner->EditAABB(offsetAABB, sizeAABB);
+
+        ImGui::Checkbox("Show AABB     ", &owner->showAABB);
+        ImGui::SameLine();
+        ImGui::Checkbox("Show OBB", &owner->showOBB);
+
+        ImGui::Spacing();
+        ImGui::Spacing();
+
         if (ImGui::Button(ICON_FA_PLUS" Create Emitter")) {
             emitters.push_back(new ParticleEmitter(owner));
         }
@@ -144,6 +163,11 @@ void ParticleSystemComponent::OnEditor()
         ComponentOptions(this);
         ImGui::Separator();
     }
+}
+
+void ParticleSystemComponent::UpdateAABB()
+{
+    owner->EditAABB(offsetAABB, sizeAABB);
 }
 
 void ParticleSystemComponent::Play()
@@ -266,6 +290,9 @@ void ParticleSystemComponent::LoadConfiguration()
 
 bool ParticleSystemComponent::OnLoad(JsonParsing& node)
 {
+    sizeAABB = node.GetJson3Number(node, "Size");
+    offsetAABB = node.GetJson3Number(node, "Offset");
+    owner->EditAABB(offsetAABB, sizeAABB);
     JSON_Array* emittersArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Emitters");
     size_t size = node.GetJsonArrayCount(emittersArray);
 
@@ -288,6 +315,8 @@ bool ParticleSystemComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
     file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
     file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+    file.SetNewJson3Number(file, "Size", sizeAABB);
+    file.SetNewJson3Number(file, "Offset", offsetAABB);
 
     JSON_Array* emittersArray = file.SetNewJsonArray(file.GetRootValue(), "Emitters");
 
@@ -301,6 +330,8 @@ bool ParticleSystemComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 void ParticleSystemComponent::SaveConfig(JsonParsing& node)
 {
+    node.SetNewJson3Number(node, "Size", sizeAABB);
+    node.SetNewJson3Number(node, "Offset", offsetAABB);
     JSON_Array* emittersArray = node.SetNewJsonArray(node.GetRootValue(), "Emitters");
 
     for (auto& emitter : emitters)
@@ -309,6 +340,9 @@ void ParticleSystemComponent::SaveConfig(JsonParsing& node)
 
 void ParticleSystemComponent::LoadConfig(JsonParsing& node)
 {
+    sizeAABB = node.GetJson3Number(node, "Size");
+    offsetAABB = node.GetJson3Number(node, "Offset");
+    owner->EditAABB(offsetAABB, sizeAABB);
     JSON_Array* emittersArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Emitters");
     size_t size = node.GetJsonArrayCount(emittersArray);
 

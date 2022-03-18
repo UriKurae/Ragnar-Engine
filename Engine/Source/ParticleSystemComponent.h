@@ -31,6 +31,8 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
+	void UpdateAABB();
+
 public:
 
 	bool looping = false;
@@ -47,5 +49,8 @@ private:
 
 	bool saveConfig;
 	bool loadConfig;
+
+	float3 offsetAABB;
+	float3 sizeAABB;
 };
 
