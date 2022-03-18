@@ -33,8 +33,12 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 
 bool ParticleSystemComponent::Update(float dt)
 {
-    if (isActive && (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true))
+    if (isActive)
     {
+        //if ((((float)timer.GetTime()) / 1000.0f) < maxDuration)
+        //{
+        //    int i = 0;
+        //}//|| looping == true)
         for (int i = 0; i < emitters.size(); i++)
         {
             emitters[i]->Emit(dt);
@@ -96,7 +100,7 @@ void ParticleSystemComponent::OnEditor()
         ImGui::SameLine();
         ImGui::Text("Played for: %.2f", timer.ReadTime() * 0.001f);
 
-        ImGui::Checkbox("Looping", &looping);
+        //ImGui::Checkbox("Looping", &looping);
         ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
 
         if (ImGui::Button(ICON_FA_PLUS" Create Emitter")) {
@@ -168,11 +172,6 @@ void ParticleSystemComponent::SaveConfiguration()
         //TODO: Check if the extension is correct, to avoid a .cs.glsl file
         if (path.find(extension) != path.npos)
         {
-            JsonParsing particuleFile;
-
-            particuleFile = particuleFile.SetChild(particuleFile.GetRootValue(), "Particle");
-            JSON_Array* array = particuleFile.SetNewJsonArray(particuleFile.GetRootValue(), "Emitters");
-
             bool nameDone = false;
             int count = 0;
             while (!nameDone)
@@ -190,7 +189,10 @@ void ParticleSystemComponent::SaveConfiguration()
                 }
             }
 
-            OnSave(particuleFile, array);
+            JsonParsing particuleFile = JsonParsing();
+            particuleFile = particuleFile.SetChild(particuleFile.GetRootValue(), "Particule");
+
+            SaveConfig(particuleFile);
 
             char* buf;
             uint size = particuleFile.Save(&buf);
@@ -238,15 +240,12 @@ void ParticleSystemComponent::LoadConfiguration()
             if (ImGui::Selectable(guiName.c_str()))
             {
                 std::string path = PARTICLES_FOLDER + files[i];
+
                 JsonParsing particleFile = JsonParsing();
 
                 if (particleFile.ParseFile(path.c_str()) > 0)
                 {
-                    OnLoad(particleFile);
-                }
-                else
-                {
-                    DEBUG_LOG("Particle Configuration couldn't be loaded");
+                    LoadConfig(particleFile);
                 }
 
                 loadConfig = false;
@@ -291,4 +290,32 @@ bool ParticleSystemComponent::OnSave(JsonParsing& node, JSON_Array* array)
     node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
+}
+
+void ParticleSystemComponent::SaveConfig(JsonParsing& node)
+{
+    JSON_Array* emittersArray = node.SetNewJsonArray(node.GetRootValue(), "Emitters");
+
+    for (auto& emitter : emitters)
+        emitter->OnSave(node, emittersArray);
+}
+
+void ParticleSystemComponent::LoadConfig(JsonParsing& node)
+{
+    JSON_Array* emittersArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Emitters");
+    size_t size = node.GetJsonArrayCount(emittersArray);
+
+    for (int i = 0; i < emitters.size(); ++i)
+    {
+        RELEASE(emitters[i]);
+    }
+    emitters.clear();
+
+    for (int i = 0; i < size; ++i)
+    {
+        JsonParsing file = node.GetJsonArrayValue(emittersArray, i);
+        ParticleEmitter* emitter = new ParticleEmitter(owner);
+        emitter->OnLoad(file);
+        emitters.push_back(emitter);
+    }
 }

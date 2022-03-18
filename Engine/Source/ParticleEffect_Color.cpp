@@ -51,6 +51,7 @@ bool ParticleEffect_Color::OnLoad(JsonParsing& node)
 {
 	startColor = node.GetJson4Number(node, "PEC: start color");
 	endColor = node.GetJson4Number(node, "PEC: start color");
+	//toDelete = node.GetJsonBool("PEC: To Delete");
 	return true;
 }
 
@@ -60,5 +61,8 @@ bool ParticleEffect_Color::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJson4Number(file, "PEC: start color", startColor);
 	file.SetNewJson4Number(file, "PEC: start color", endColor);
+	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PEC: To Delete", toDelete);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
+	node.SetValueToArray(array, file.GetRootValue());
 	return true;
 }

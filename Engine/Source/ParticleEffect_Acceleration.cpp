@@ -69,7 +69,7 @@ void ParticleEffect_Acceleration::OnEditor(int emitterIndex)
 bool ParticleEffect_Acceleration::OnLoad(JsonParsing& node)
 {
 	hasGravity = node.GetJsonBool("PEA: Has Gravity");
-	toDelete = node.GetJsonBool("PEA: To Delete");
+	//toDelete = node.GetJsonBool("PEA: To Delete");
 	gravity = node.GetJsonNumber("PEA: Gravity");
 	acceleration = node.GetJson3Number(node, "PEA: Acceleration");
 	return true;
@@ -79,10 +79,10 @@ bool ParticleEffect_Acceleration::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PEA: Has Gravity", hasGravity);
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PEA: To Delete", toDelete);
+	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PEA: To Delete", toDelete);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEA: Gravity", gravity);
 	file.SetNewJson3Number(file, "PEA: Acceleration", acceleration);
-
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
 	node.SetValueToArray(array, file.GetRootValue());
 	return true;
 }

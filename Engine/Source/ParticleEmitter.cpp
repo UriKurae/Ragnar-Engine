@@ -29,7 +29,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particlePool.resize(maxParticles);
 
 	//particleReference = new Particle(own);
-	effects.resize(5);
+	effects.resize(4);
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
@@ -548,20 +548,30 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	particleReference.position = node.GetJson3Number(node, "Particle Reference Position");
 	particleReference.velocity = node.GetJson3Number(node, "Particle Reference Velocity");
 	particleReference.acceleration = node.GetJson3Number(node, "Particle Reference Acceleration");
-	particleReference.color = node.GetJson4Number(node, "Particle Reference Color");
-	particleReference.size = node.GetJsonNumber("Particle Reference Size");
+	particleReference.color = node.GetJson4Number(node, "Particle Reference Color Begin");
+	particleReference.size = node.GetJsonNumber("Particle Reference Size Begin");
 	particleReference.lifeTime = node.GetJsonNumber ("Particle Reference Lifetime");
 	particleReference.deltaRotation = node.GetJsonNumber ("Particle Reference Rotation Amount");
 
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Texture Assets Path"))));
+	data.shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 	
 	JSON_Array* effectsArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Effects");
 	int effectsCount = node.GetJsonArrayCount(effectsArray);
 
+	for (int i = 0; i < effects.size(); ++i)
+	{
+		RELEASE(effects[i]);
+		effects[i] = nullptr;
+	}
+
 	for (int i = 0; i < effectsCount; ++i)
 	{
 		// TODO: Switch checking the type of the effect and creating it, afterwards push it to the vector
-		effects[i]->OnLoad(node);
+		JsonParsing c = node.GetJsonArrayValue(effectsArray, i);
+		CreateParticleEffect((ParticleEffectType)(int)c.GetJsonNumber("Effect Type"));
+		effects[(int)c.GetJsonNumber("Effect Type")]->OnLoad(node);
+		//effects[i]->OnLoad(node);
 	}
 
 	return true;
@@ -594,7 +604,7 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 
 	JSON_Array* effectsArray = file.SetNewJsonArray(file.GetRootValue(), "Effects");
 
-	for (int i = 0; i < effects.size(); i++)
+	for (int i = 0; i < effects.size(); ++i)
 	{
 		if (effects[i] != nullptr)
 			effects[i]->OnSave(file, effectsArray);

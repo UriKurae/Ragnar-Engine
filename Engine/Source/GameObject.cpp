@@ -624,6 +624,18 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<AnimationComponent>()->OnLoad(c);
 			break;
+		case ComponentType::BILLBOARD:
+			if (GetComponent<BillboardParticleComponent>() == nullptr)
+				CreateComponent(ComponentType::BILLBOARD);
+
+			GetComponent<BillboardParticleComponent>()->OnLoad(c);
+			break;
+		case ComponentType::PARTICLE_SYSTEM:
+			if (GetComponent<ParticleSystemComponent>() == nullptr)
+				CreateComponent(ComponentType::ANIMATION);
+
+			GetComponent<ParticleSystemComponent>()->OnLoad(c);
+			break;
 		}
 	}
 
@@ -683,6 +695,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::ANIMATION:
 			RemoveComponent(GetComponent<AnimationComponent>());
+			break;
+		case ComponentType::BILLBOARD:
+			RemoveComponent(GetComponent<BillboardParticleComponent>());
+			break;
+		case ComponentType::PARTICLE_SYSTEM:
+			RemoveComponent(GetComponent<ParticleSystemComponent>());
 			break;
 		}
 	}

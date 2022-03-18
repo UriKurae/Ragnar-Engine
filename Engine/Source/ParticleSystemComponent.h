@@ -25,6 +25,8 @@ public:
 
 	void SaveConfiguration();
 	void LoadConfiguration();
+	void SaveConfig(JsonParsing& node);
+	void LoadConfig(JsonParsing& node);
 
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
