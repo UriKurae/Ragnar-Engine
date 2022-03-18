@@ -24,6 +24,7 @@ RigidBodyComponent::~RigidBodyComponent()
 {
 	if (body != nullptr)
 	{
+		if(trigger) app->physics->triggers.erase(FindTrigger(this));
 		app->physics->DeleteBody(this, owner->name);
 		constraintBodies.clear();
 	}	
@@ -177,7 +178,10 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::DragFloat("##Mass", &mass, 0.1f, 0.0f, INFINITE))
 		{
 			if (body->isStaticObject() && mass != 0.0f)
+			{
+				useGravity = true;
 				CreateBody();
+			}
 			if (mass != 0.f)
 			{
 				btVector3 inertia;
@@ -222,9 +226,7 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::Checkbox("Is Trigger", &trigger))
 		{
 			if (trigger)
-			{
 				SetAsTrigger();
-			}
 			else
 			{
 				app->physics->triggers.erase(FindTrigger(this));
@@ -341,11 +343,7 @@ void RigidBodyComponent::SetCollisionType(CollisionType type)
 	}
 		
 	collisionType = type;
-	SetBoundingBox();
-	CreateBody();
-	ResetLocalValues();
-
-	IgnoreCollision();
+	CreateBody();	
 }
 
 void RigidBodyComponent::ResetLocalValues()
@@ -488,6 +486,8 @@ float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 
 void RigidBodyComponent::CreateBody()
 {
+	SetBoundingBox();
+
 	if (body != nullptr)
 		app->physics->DeleteBody(this, owner->name);
 
@@ -519,6 +519,8 @@ void RigidBodyComponent::CreateBody()
 	}
 
 	SetPhysicsProperties();
+	ResetLocalValues();
+	IgnoreCollision();
 }
 
 void RigidBodyComponent::SetPhysicsProperties()
@@ -547,7 +549,7 @@ void RigidBodyComponent::SetAsStatic()
 	useGravity = false;
 	isKinematic = false;
 	mass = 0.0f;
-	SetCollisionType(collisionType);
+	CreateBody();
 }
 
 void RigidBodyComponent::SetAsTrigger()
@@ -578,7 +580,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
 	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
 
-	SetCollisionType(collisionType);
+	CreateBody();
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -610,6 +612,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		break;
 	}
 	UpdateCollisionMesh();
+	SetPhysicsProperties();
 
 	uint size = node.GetJsonNumber("SizeConstraint");
 	if (size > 0)
@@ -621,10 +624,9 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
+
 	if (trigger)
 		app->physics->triggers.push_back(this);
-
-	SetPhysicsProperties();
 
 	return true;
 }
