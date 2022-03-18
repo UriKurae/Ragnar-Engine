@@ -49,7 +49,6 @@ private:
 	std::map<std::string, BoneInfo> bones;
 	unsigned int numBones;
 
-
 	std::vector<unsigned int> bonesUid;
 
 	std::string path;

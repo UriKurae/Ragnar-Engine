@@ -326,6 +326,7 @@ void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 
 void Scene::Load()
 {
+	RELEASE(root);
 	if (root == nullptr)
 	{
 		LoadScene(assetsPath.c_str());
@@ -404,6 +405,7 @@ bool Scene::LoadScene(const char* name)
 				if (child->GetName() == std::string("Camera"))
 				{
 					camera = child;
+					mainCamera = child->GetComponent<CameraComponent>();
 				}
 			}
 		}

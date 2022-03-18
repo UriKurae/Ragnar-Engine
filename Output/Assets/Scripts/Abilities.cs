@@ -5,6 +5,12 @@ public class Abilities : RagnarComponent
 {
     public float force = 100;
     public float rockSoundRadius = 4f;
+
+    public void Start()
+    {
+
+    }
+
     public void Update()
 	{
         ///////// ABILITIES /////////

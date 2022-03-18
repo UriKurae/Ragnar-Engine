@@ -327,3 +327,19 @@ void TransformComponent::ResetTransform()
 	rotationEditor = rotationInEuler = math::float3::zero;
 	UpdateTransform();
 }
+
+Mat4x4 TransformComponent::float4x4ToMat4x4()
+{
+	Mat4x4 newTransform;
+	int k = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			newTransform[k] = globalMatrix[j][i];
+			k++;
+		}
+	}
+
+	return newTransform;
+}

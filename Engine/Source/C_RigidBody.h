@@ -14,6 +14,7 @@ enum class CollisionType
 	CYLINDER = 3,
 	CONE = 4,
 	STATIC_PLANE = 5,
+	MESH = 6
 };
 
 class RigidBodyComponent : public Component
@@ -31,6 +32,7 @@ public:
 	void Combos();
 
 	void AddConstraintP2P(RigidBodyComponent* const& val);
+	std::vector<RigidBodyComponent*>::const_iterator FindTrigger(RigidBodyComponent* node);
 
 	void ResetLocalValues();
 	void EditCollisionMesh();
@@ -58,7 +60,7 @@ public:
 	inline bool GetOnCollision() { return onCollision; };
 
 	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
-	inline bool GetCollisionTarget() { return collisionTarget; };
+	inline RigidBodyComponent* GetCollisionTarget() { return collisionTarget; };
 
 public:
 	bool useGravity = true;

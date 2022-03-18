@@ -25,6 +25,7 @@ RigidBodyComponent::~RigidBodyComponent()
 {
 	if (body != nullptr)
 	{
+		if(trigger) app->physics->triggers.erase(FindTrigger(this));
 		app->physics->DeleteBody(this, owner->name);
 		constraintBodies.clear();
 	}	
@@ -121,7 +122,7 @@ bool RigidBodyComponent::Update(float dt)
 
 			body->setWorldTransform(t);
 		}
-		else if (body->getActivationState() == 1 || body->getActivationState() == 3)
+		else if (collisionType != CollisionType::MESH && (body->getActivationState() == 1 || body->getActivationState() == 3))
 		{
 			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
 			trans->SetTransform(CM2);
@@ -138,7 +139,9 @@ void RigidBodyComponent::UpdateCollision()
 	{
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
-		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
+		if (collisionType == CollisionType::MESH)
+			t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3));
+		else t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
 		
 		body->setWorldTransform(t);
 	}
@@ -157,11 +160,11 @@ void RigidBodyComponent::OnEditor()
 			else app->physics->DesactivateCollision(body);
 		}
 		ImGui::SameLine();
-		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane" };
+		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane", "Mesh"};
 
 		ImGui::PushItemWidth(85);
 		int currentCollision = (int)collisionType;
-		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 6))
+		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 7))
 		{
 			collisionType = (CollisionType)currentCollision;
 			SetCollisionType(collisionType);
@@ -176,7 +179,10 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::DragFloat("##Mass", &mass, 0.1f, 0.0f, INFINITE))
 		{
 			if (body->isStaticObject() && mass != 0.0f)
+			{
+				useGravity = true;
 				CreateBody();
+			}
 			if (mass != 0.f)
 			{
 				btVector3 inertia;
@@ -198,11 +204,11 @@ void RigidBodyComponent::OnEditor()
 			body->setRestitution(restitution);
 		ImGui::PopItemWidth();
 
-		if (ImGui::Checkbox("Use Gravity", &useGravity))
+		if (collisionType != CollisionType::MESH && ImGui::Checkbox("Use Gravity", &useGravity))
 		{
 			if (!useGravity && !isKinematic)
 				SetAsStatic();
-			else 
+			else
 			{
 				if (mass == 0) mass = 1.0f;
 				CreateBody();
@@ -221,12 +227,10 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::Checkbox("Is Trigger", &trigger))
 		{
 			if (trigger)
-			{
 				SetAsTrigger();
-			}
 			else
 			{
-				//app->physics->triggers.remove(this);
+				app->physics->triggers.erase(FindTrigger(this));
 				CreateBody();
 			}
 		}
@@ -325,14 +329,22 @@ void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 	app->physics->AddConstraintP2P(*body, *val->GetBody(), float3(r1, r1, r1), float3(r2, r2, r2));
 }
 
+std::vector<RigidBodyComponent*>::const_iterator RigidBodyComponent::FindTrigger(RigidBodyComponent* node)
+{
+	return std::find(app->physics->triggers.begin(), app->physics->triggers.end(), node);
+}
+
 void RigidBodyComponent::SetCollisionType(CollisionType type)
 {
+	if (type == CollisionType::MESH)
+	{
+		useGravity = false;
+		isKinematic = false;
+		mass = 0.0f;
+	}
+		
 	collisionType = type;
-	SetBoundingBox();
-	CreateBody();
-	ResetLocalValues();
-
-	IgnoreCollision();
+	CreateBody();	
 }
 
 void RigidBodyComponent::ResetLocalValues()
@@ -404,6 +416,9 @@ void RigidBodyComponent::EditCollisionMesh()
 		ImGui::Text("Constant: "); ImGui::SameLine();
 		if (ImGui::DragFloat("##Constant", &plane.constant, 0.1f)) editMesh = true;
 		break;
+	case CollisionType::MESH:
+		ImGui::Text("Don't can modified collision mesh");
+		break;
 	default:
 		break;
 	}
@@ -472,6 +487,8 @@ float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 
 void RigidBodyComponent::CreateBody()
 {
+	SetBoundingBox();
+
 	if (body != nullptr)
 		app->physics->DeleteBody(this, owner->name);
 
@@ -495,11 +512,16 @@ void RigidBodyComponent::CreateBody()
 	case CollisionType::STATIC_PLANE:
 		body = app->physics->CollisionShape(plane, this);
 		break;
+	case CollisionType::MESH:
+		body = app->physics->CollisionShape(owner->GetComponent<MeshComponent>()->GetMesh(), this);
+		break;
 	default:
 		break;
 	}
 
 	SetPhysicsProperties();
+	ResetLocalValues();
+	IgnoreCollision();
 }
 
 void RigidBodyComponent::SetPhysicsProperties()
@@ -528,7 +550,7 @@ void RigidBodyComponent::SetAsStatic()
 	useGravity = false;
 	isKinematic = false;
 	mass = 0.0f;
-	SetCollisionType(collisionType);
+	CreateBody();
 }
 
 void RigidBodyComponent::SetAsTrigger()
@@ -541,9 +563,25 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
 
-	//Collision dimensions
+	//Collision Type
 	collisionType = (CollisionType)(int)node.GetJsonNumber("CollisionType");
-	if(collisionType != CollisionType::BOX) SetCollisionType(collisionType);
+	//Physic properties
+	useGravity = node.GetJsonBool("Gravity");
+	isKinematic = node.GetJsonBool("Kinematic");
+	trigger = node.GetJsonBool("Trigger");
+	mass = node.GetJsonNumber("Mass");
+	friction = node.GetJsonNumber("Friction");
+	restitution = node.GetJsonNumber("Restitution");
+
+	//Damping
+	linearDamping = node.GetJsonNumber("LinearDamping");
+	angularDamping = node.GetJsonNumber("AngularDamping");
+
+	//Constrains
+	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
+	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+
+	CreateBody();
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -575,22 +613,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		break;
 	}
 	UpdateCollisionMesh();
-
-	//Collision physics
-	useGravity = node.GetJsonBool("Gravity");
-	isKinematic = node.GetJsonBool("Kinematic");
-	trigger = node.GetJsonBool("Trigger");
-	mass = node.GetJsonNumber("Mass");
-	friction = node.GetJsonNumber("Friction");
-	restitution = node.GetJsonNumber("Restitution");
-
-	//Damping
-	linearDamping = node.GetJsonNumber("LinearDamping");
-	angularDamping = node.GetJsonNumber("AngularDamping");
-
-	//Constrains
-	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
-	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+	SetPhysicsProperties();
 
 	uint size = node.GetJsonNumber("SizeConstraint");
 	if (size > 0)
@@ -602,19 +625,9 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-	if (!useGravity && !isKinematic)
-		SetAsStatic();
-	else if (isKinematic)
-	{
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
-			body->setActivationState(DISABLE_DEACTIVATION);
-	}
-	if(trigger) 
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
-	SetMass(mass);
-	SetPhysicsProperties();
+	if (trigger)
+		app->physics->triggers.push_back(this);
 
 	return true;
 }
