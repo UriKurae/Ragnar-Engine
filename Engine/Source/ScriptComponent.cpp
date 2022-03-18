@@ -95,7 +95,8 @@ bool ScriptComponent::Update(float dt)
 void ScriptComponent::OnEditor()
 {
 	ImGui::PushID(this);
-	if (ImGui::CollapsingHeader(ICON_FA_CODE" Script"))
+	std::string n = ICON_FA_CODE" Script: " + name + ".cs";
+	if (ImGui::CollapsingHeader(n.c_str()))
 	{
 		if(name == "") SelectScript();
 		else
