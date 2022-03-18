@@ -125,10 +125,10 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        0.081818118691444397,
-                        -0.54951578378677368,
-                        0.42412963509559631,
-                        0.71515893936157227
+                        0.11625227332115173,
+                        -0.55113792419433594,
+                        0.41385984420776367,
+                        0.71515911817550659
                     ],
                     "RotationEditor": [
                         0,
@@ -152,7 +152,7 @@
                         13.648064613342285
                     ],
                     "Type": 3,
-                    "Zoom": 24,
+                    "Zoom": 18,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -287,7 +287,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 121955384,
+                    "pointer": 128496968,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -298,11 +298,33 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 121957736,
+                    "pointer": 128494280,
                     "type": 4,
                     "componentTable": 0,
                     "force": 100,
                     "rockSoundRadius": 4
+                },
+                {
+                    "Type": 19,
+                    "Active": true,
+                    "Radius": 0.30000001192092896,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 1,
+                    "AngularSpeed": 1,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "Target": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "TargetSet": false,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
                 }
             ]
         },

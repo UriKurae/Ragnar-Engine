@@ -293,6 +293,7 @@
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleUI.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\NavAgentBindings.h" />
     <ClInclude Include="Engine\Source\NavAgentComponent.h" />
     <ClInclude Include="Engine\Source\MonoManager.h" />
     <ClInclude Include="Engine\Source\NavigatorMenu.h" />

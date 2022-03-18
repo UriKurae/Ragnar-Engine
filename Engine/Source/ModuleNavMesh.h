@@ -67,7 +67,7 @@ public:
 	~Pathfinder();
 
 	void Init(NavMeshBuilder* builder);
-	bool CalculatePath(NavAgentComponent* agent, float3 destination, std::vector<float3>& path);
+	std::vector<float3> CalculatePath(NavAgentComponent* agent, float3 destination);
 	void RenderPath(NavAgentComponent* agent);
 	bool SetPath(NavAgentComponent* agent, std::vector<float3>& path);
 	bool MoveTo(NavAgentComponent* agent, float3 destination);
