@@ -16,7 +16,8 @@ public:
 
 	inline std::string GetName() { return name; }
 	inline void AddBinding(int bind) { bindings.push_back(bind); }
-	inline std::vector<int> GetBindings() { return bindings; }
+	inline void SetBinding(int vecPos, int bind) { bindings[vecPos] = bind; }
+	inline std::vector<int>* GetBindings() { return &bindings; }
 
 private:
 	std::string name;
@@ -48,6 +49,11 @@ public:
 
 	bool Start() override;
 	bool Update(float dt) override;
+
+	void ColumnProperties();
+	void ColumnActions();
+	void ColumnActionMaps();
+
 	bool CleanUp() override;
 
 	bool SaveInputActionFile(const char* path);

@@ -366,7 +366,7 @@ bool MainMenuBar::Update(float dt)
 			if (ImGui::MenuItem(ICON_FA_KEYBOARD" Create Input Action"))
 			{
 				InputActionMenu* iAMenu = static_cast<InputActionMenu*>(menus[(int)Menus::INPUT_ACTION]);
-				iAMenu->SaveInputActionFile("Assets/InputAction.inputaction");
+				iAMenu->SaveInputActionFile("Assets/Resources/InputAction.inputaction");
 			}
 			ImGui::Separator();
 			if (app->editor->GetGO() == nullptr)
