@@ -38,7 +38,7 @@ struct NavAgent
 
 	float3 targetPos = float3::zero;
 	bool targetPosSet = false;
-	std::vector<float3> path;
+
 	PathType pathType = PathType::STRAIGHT;
 
 	int m_straightPathOptions = 0;
