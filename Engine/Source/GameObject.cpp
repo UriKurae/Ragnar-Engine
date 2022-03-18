@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "Application.h"
 #include "Globals.h"
+#include "ParticleSystemComponent.h"
 
 #include "ModuleScene.h"
 
@@ -14,6 +15,7 @@
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
 #include "AnimationComponent.h"
+#include "BillboardParticleComponent.h"
 #include "ButtonComponent.h"
 #include "SliderComponent.h"
 #include "ImageComponent.h"
@@ -36,6 +38,8 @@ GameObject::~GameObject()
 	for (int i = 0; i < components.size(); ++i)
 	{
 		RELEASE(components[i]);
+		if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
+			app->scene->GetQuadtree().Remove(this);
 	}
 	components.clear();
 
@@ -66,6 +70,19 @@ void GameObject::Draw(CameraComponent* gameCam)
 		{
 			component->Draw(gameCam);
 		}
+	}
+
+	// If showAABB are enable draw the his bounding boxes
+	if (showAABB == true) {
+		float3 points[8];
+		globalAabb.GetCornerPoints(points);
+		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
+	}
+	// If showOBB are enable draw the his bounding boxes
+	if (showOBB == true) {
+		float3 points[8];
+		globalObb.GetCornerPoints(points);
+		DebugColliders(points);
 	}
 }
 
@@ -121,6 +138,16 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Particle System Component"))
+		{
+			CreateComponent(ComponentType::PARTICLE_SYSTEM);
+			newComponent = false;
+		}
+		/*if (ImGui::Selectable("Billboard Component"))
+		{
+			CreateComponent(ComponentType::BILLBOARD);
+			newComponent = false;
+		}*/
 		if (ImGui::Selectable("Animation Component"))
 		{
 			CreateComponent(ComponentType::ANIMATION);
@@ -177,6 +204,7 @@ void GameObject::DrawEditor()
 Component* GameObject::CreateComponent(ComponentType type, const char* name)
 {
 	Component* component = nullptr;
+	TransformComponent* transform = nullptr;
 	
 	switch (type)
 	{
@@ -269,6 +297,14 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::LIGHT:
 		component = new ComponentLight();
 		break;
+	case ComponentType::PARTICLE_SYSTEM:
+		transform = (TransformComponent*)GetComponent<TransformComponent>();
+		component = new ParticleSystemComponent(this, transform);
+		break;
+	case ComponentType::BILLBOARD:
+		transform = (TransformComponent*)GetComponent<TransformComponent>();
+		component = new BillboardParticleComponent(this, transform);
+		break;
 	case ComponentType::TRANFORM2D:
 		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
 		component = new ComponentTransform2D(float3{ camera->GetFrustum()->pos.x,camera->GetFrustum()->pos.y,camera->GetFrustum()->pos.z }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
@@ -298,6 +334,8 @@ void GameObject::RemoveComponent(Component* component)
 		{
 			components.erase(it);
 			RELEASE(component);
+			if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
+				app->scene->GetQuadtree().Remove(this);
 			break;
 		}
 	}
@@ -394,6 +432,12 @@ void GameObject::SetNewAABB()
 		newObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
 		globalAabb.Enclose(newObb);
 	}
+}
+
+void GameObject::EditAABB(float3 offset, float3 size)
+{
+	globalAabb.SetFromCenterAndSize(GetComponent<TransformComponent>()->GetPosition() + offset, size);
+	globalObb.SetFrom(globalAabb);
 }
 
 void GameObject::MoveChildrenUp(GameObject* child)
@@ -603,6 +647,18 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<AnimationComponent>()->OnLoad(c);
 			break;
+		case ComponentType::BILLBOARD:
+			if (GetComponent<BillboardParticleComponent>() == nullptr)
+				CreateComponent(ComponentType::BILLBOARD);
+
+			GetComponent<BillboardParticleComponent>()->OnLoad(c);
+			break;
+		case ComponentType::PARTICLE_SYSTEM:
+			if (GetComponent<ParticleSystemComponent>() == nullptr)
+				CreateComponent(ComponentType::ANIMATION);
+
+			GetComponent<ParticleSystemComponent>()->OnLoad(c);
+			break;
 		}
 	}
 
@@ -663,6 +719,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 		case ComponentType::ANIMATION:
 			RemoveComponent(GetComponent<AnimationComponent>());
 			break;
+		case ComponentType::BILLBOARD:
+			RemoveComponent(GetComponent<BillboardParticleComponent>());
+			break;
+		case ComponentType::PARTICLE_SYSTEM:
+			RemoveComponent(GetComponent<ParticleSystemComponent>());
+			break;
 		}
 	}
 }
@@ -674,4 +736,26 @@ Component* GameObject::GetComponent(ComponentType type)
 		if (comp->type == type)
 			return comp;
 	}
+}
+
+void GameObject::DebugColliders(float3* points, float3 color)
+{
+	static unsigned int index[24] =
+	{ 0, 2, 2, 6, 6, 4, 4, 0,
+	  0, 1, 1, 3, 3, 2, 4, 5,
+	  6, 7, 5, 7, 3, 7, 1, 5
+	};
+
+	glColor3fv(&color.x);
+	glLineWidth(2.f);
+	glBegin(GL_LINES);
+
+	for (int i = 0; i < 24; i++)
+	{
+		glVertex3fv(&points[index[i]].x);
+	}
+
+	glEnd();
+	glLineWidth(1.f);
+	glColor3f(1.f, 1.f, 1.f);
 }

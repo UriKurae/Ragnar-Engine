@@ -29,6 +29,8 @@ enum class ComponentType
 	UI_CANVAS,
 	TRANFORM2D,
 	NAVAGENT,
+	PARTICLE_SYSTEM,
+	BILLBOARD,
 };
 
 enum class State
@@ -72,6 +74,7 @@ public:
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) { return true; }
 
 public:
+
 	ComponentType type;
 	GameObject* owner;
 	bool active;

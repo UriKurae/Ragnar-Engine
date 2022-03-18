@@ -4,6 +4,7 @@
 
 #include "FileSystem.h"
 #include <fstream>
+#include <regex>
 #include <time.h>
 
 GLenum GetShaderTypeFromString(const std::string& type)
@@ -15,8 +16,6 @@ GLenum GetShaderTypeFromString(const std::string& type)
 	else
 		DEBUG_LOG("Invalid Shader Type %s", type);
 }
-
-
 
 Shader::Shader(uint uid, std::string& assets, std::string& library) : Resource(uid, ResourceType::MESH, assets, library), rendererID(0)
 {

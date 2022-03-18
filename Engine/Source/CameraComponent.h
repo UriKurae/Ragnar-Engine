@@ -53,6 +53,8 @@ private:
 	Quat currentRotation;
 	float3 originalPos;
 
+private:
+
 	float nearPlane;
 	float farPlane;
 	float verticalFov;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Windows.h>
+
 namespace Dialogs
 {
 	static std::string OpenFile(const char* path)
