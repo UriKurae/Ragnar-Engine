@@ -5,7 +5,7 @@
 
 class MyPlane;
 class GameObject;
-
+class MaterialComponent;
 class ButtonComponent : public Component
 {
 public:
@@ -27,20 +27,34 @@ public:
 	inline Color GetActualColor() { return actualColor; };
 	inline Color GetTextColor() { return textColor; };
 
+	inline void SetNormalMaterial(MaterialComponent* texture) {normalMaterial = texture;};
+	inline void SetFocusedMaterial(MaterialComponent* texture) { focusedMaterial = texture; };
+	inline void SetPressedMaterial(MaterialComponent* texture) { pressedMaterial = texture; };
+	inline void SetDisabledMaterial(MaterialComponent* texture) { disabledMaterial = texture; };
+	inline void SetActualMaterial(MaterialComponent* texture) { actual = texture; };
+
+
+	inline MaterialComponent* GetNormalMaterial() { return normalMaterial; };
+	inline MaterialComponent* GetFocusedMaterial() { return focusedMaterial; };
+	inline MaterialComponent* GetPressedMaterial() { return pressedMaterial; };
+	inline MaterialComponent* GetDisabledMaterial() { return disabledMaterial; };
+	inline MaterialComponent* GetActualMaterial() { return actual; };
+
 	MyPlane* planeToDraw;
 	
 private:
 	Text buttonText;
 	State state = State::NORMAL;
 	bool fadeUI = false;
+	
+	MaterialComponent* normalMaterial;
+	MaterialComponent* focusedMaterial;
+	MaterialComponent* pressedMaterial;
+	MaterialComponent* disabledMaterial;
+	MaterialComponent* actual;
 
-	Color disabledColor = white;
-	Color pressedColor = red;
-	Color focusedColor = blue;
-	Color normalColor = green;
-	Color selectedColor = black;
 	Color textColor = white;
-	Color actualColor = normalColor;
+	Color actualColor = white;
 
 	char text[64] = "Button";
 	float fontScale = 1;

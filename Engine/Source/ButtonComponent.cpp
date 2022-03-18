@@ -14,6 +14,7 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	own->name = "Button";
 	type = ComponentType::UI_BUTTON;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
+	
 }
 
 ButtonComponent::~ButtonComponent()
@@ -35,9 +36,13 @@ bool ButtonComponent::Update(float dt)
 		if (app->userInterface->focusedGameObject == owner)
 		{
 			state = State::FOCUSED;
-
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			actual = focusedMaterial;
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) 
+			{
 				state = State::PRESSED;
+				actual = pressedMaterial;
+			}
+				
 
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
@@ -45,16 +50,20 @@ bool ButtonComponent::Update(float dt)
 				
 			}
 		}
-		else state = State::NORMAL;
+		else 
+		{
+			state = State::NORMAL;
+			actual = normalMaterial;
+		}
 
-		if (app->userInterface->UIGameObjectSelected == owner)
+		/*if (app->userInterface->UIGameObjectSelected == owner)
 		{
 			state = State::SELECTED;
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN) 
 			{
 
 			}				
-		}
+		}*/
 	}
 
 	return true;
@@ -65,34 +74,7 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
-	switch (state)
-	{
-	case State::DISABLED:
-		glColor4f(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::NORMAL:
-		glColor4f(normalColor.r, normalColor.g, normalColor.b, normalColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::FOCUSED:
-		glColor4f(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a);
-		actualColor = normalColor;
-		break;
-	case State::PRESSED:
-		glColor4f(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a);
-		actualColor = pressedColor;
-		break;
-	case State::SELECTED:
-		glColor4f(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a);
-		actualColor = selectedColor;
-		break;
-	default:
-		break;
-	}
-
-	MaterialComponent* mat = owner->GetComponent<MaterialComponent>();
-	planeToDraw->DrawPlane2D(mat->GetTexture().get());
+	planeToDraw->DrawPlane2D(actual->GetTexture().get());
 	
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
@@ -116,25 +98,6 @@ void ButtonComponent::OnEditor()
 		Checkbox(this, "Active", active);
 		ImGui::Checkbox("Interactable", &active);
 
-		ImGui::Text("Normal Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Normal Color", ImVec4(normalColor.r, normalColor.g, normalColor.b, normalColor.a)))
-			normalEditable = !normalEditable;
-
-		ImGui::Text("Pressed Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Pressed Color", ImVec4(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a)))
-			pressedEditable = !pressedEditable;
-
-		ImGui::Text("Focused Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Focused Color", ImVec4(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a)))
-			focusedEditable = !focusedEditable;
-
-		ImGui::Text("Disabled Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Disabled Color", ImVec4(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a)))
-			disabledEditable = !disabledEditable;
-
-		ImGui::Text("Selected Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Selected Color", ImVec4(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a)))
-			selectedEditable = !selectedEditable;
 
 		ImGui::Separator();
 
@@ -142,20 +105,11 @@ void ButtonComponent::OnEditor()
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
 			textColorEditable = !textColorEditable;
 
-		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
-
-		if (normalEditable)
-			ImGui::ColorPicker3("Normal Color", &normalColor);
-		if (pressedEditable)
-			ImGui::ColorPicker3("Pressed Color", &pressedColor);
-		if (focusedEditable)
-			ImGui::ColorPicker3("Focused Color", &focusedColor);
-		if (disabledEditable)
-			ImGui::ColorPicker3("Disabled Color", &disabledColor);
-		if (selectedEditable)
-			ImGui::ColorPicker3("Selected Color", &selectedColor);
 		if (textColorEditable)
 			ImGui::ColorPicker3("Text Color", &textColor);
+
+		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
@@ -189,6 +143,33 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");
 	textColor.b = node.GetJsonNumber("textColor.b");
+
+	int cont = 0;
+
+	for (int a = 0; a < owner->components.size(); a++) {
+		if (owner->components[a]->type == ComponentType::MATERIAL)
+		{
+			switch (cont)
+			{
+			case 0:
+				normalMaterial=(MaterialComponent*)owner->components[a];
+				break;
+			case 1:
+				focusedMaterial = (MaterialComponent*)owner->components[a];
+				break;
+			case 2:
+				pressedMaterial = (MaterialComponent*)owner->components[a];
+				break;
+			case 3:
+				disabledMaterial = (MaterialComponent*)owner->components[a];
+				actual = normalMaterial;
+				break;
+			default:
+				break;
+			}
+			cont++;
+		}
+	}
 	return true;
 }
 
