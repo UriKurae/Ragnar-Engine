@@ -624,20 +624,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-	
-	if (!useGravity && !isKinematic)
-		SetAsStatic();
-	else if (isKinematic)
-	{
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		if (app->scene->GetGameState() == GameState::PLAYING)
-			body->setActivationState(DISABLE_DEACTIVATION);
-	}
-	if (trigger)
-	{
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-		app->physics->triggers.push_back(this);
-	}
 
 	if (trigger)
 		app->physics->triggers.push_back(this);
