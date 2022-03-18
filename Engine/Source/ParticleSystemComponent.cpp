@@ -43,12 +43,8 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 
 bool ParticleSystemComponent::Update(float dt)
 {
-    if (isActive)
+    if (isActive || app->scene->GetGameState() != GameState::NOT_PLAYING)
     {
-        //if ((((float)timer.GetTime()) / 1000.0f) < maxDuration)
-        //{
-        //    int i = 0;
-        //}//|| looping == true)
         for (int i = 0; i < emitters.size(); i++)
         {
             emitters[i]->Emit(dt);
@@ -71,7 +67,7 @@ bool ParticleSystemComponent::Update(float dt)
 
 void ParticleSystemComponent::Draw(CameraComponent* gameCam)
 {
-	if (isActive)
+	if (isActive || app->scene->GetGameState() != GameState::NOT_PLAYING)
 		for (auto& e : emitters)
 			e->Render(gameCam);
 }
@@ -100,28 +96,28 @@ void ParticleSystemComponent::OnEditor()
         if (ImGui::Button(playButtonName.c_str()))
         {
             isActive = !isActive;
-
-			//if (isActive)
-			//    Stop();
-			//else
-			//    Play();
         }
 
         ImGui::SameLine();
         ImGui::Text("Played for: %.2f", timer.ReadTime() * 0.001f);
 
         //ImGui::Checkbox("Looping", &looping);
-        ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
+        //ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
 
         ImGui::Spacing();
         ImGui::Spacing();
 
-        ImGui::Text("Box Position: ");
+        ImGui::Text("Box Offset: ");
+        ImGui::PushItemWidth(300);
         if (ImGui::DragFloat3("##Offset", &offsetAABB.x, 0.1f))
             owner->EditAABB(offsetAABB, sizeAABB);
+        ImGui::PopItemWidth();
+
         ImGui::Text("Box Size: ");
+        ImGui::PushItemWidth(300);
         if (ImGui::DragFloat3("##Box", &sizeAABB.x, 0.1f, 0.1f, INFINITE))
             owner->EditAABB(offsetAABB, sizeAABB);
+        ImGui::PopItemWidth();
 
         ImGui::Checkbox("Show AABB     ", &owner->showAABB);
         ImGui::SameLine();
@@ -133,16 +129,6 @@ void ParticleSystemComponent::OnEditor()
         if (ImGui::Button(ICON_FA_PLUS" Create Emitter")) {
             emitters.push_back(new ParticleEmitter(owner));
         }
-
-/*        if (ImGui::Button("Save template"))
-        {
-            if (app->scene->SceneDirectory().empty())
-            {
-                std::string filePath = Dialogs::SaveFile("Orange Juice Scene (*.orangeJuice)\0*.orangeJuice\0");
-                if (!filePath.empty()) app->scene->SaveScene(filePath.c_str());
-            }
-            else app->scene->SaveScene(app->scene->SceneDirectory().c_str());
-        }*/
 
         //ImGui::Spacing();
         std::string guiName = "";
