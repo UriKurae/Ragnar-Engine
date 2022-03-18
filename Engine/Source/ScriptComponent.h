@@ -4,6 +4,8 @@
 #include <string>
 
 class GameObject;
+class RigidBodyComponent;
+
 typedef struct _MonoClassField MonoClassField;
 typedef struct _MonoMethod MonoMethod;
 struct SerializedField;
@@ -24,6 +26,8 @@ public:
 
 	void LoadScriptData(const char*);
 
+	void CallOnTriggerEnter(RigidBodyComponent* other);
+
 private:
 //#ifndef STANDALONE
 	void OnEditor() override;
@@ -37,6 +41,8 @@ public:
 
 	MonoMethod* updateMethod;
 	MonoMethod* startMethod;
+	MonoMethod* onTriggerEnterMethod;
+
 	uint32_t noGCobject;
 	std::string name = "";
 

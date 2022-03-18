@@ -60,7 +60,7 @@ public:
 	inline bool GetOnCollision() { return onCollision; };
 
 	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
-	inline bool GetCollisionTarget() { return collisionTarget; };
+	inline RigidBodyComponent* GetCollisionTarget() { return collisionTarget; };
 
 public:
 	bool useGravity = true;
