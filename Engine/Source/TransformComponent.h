@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Math/float4x4.h"
+#include "Math/float3x3.h"
 #include "glmath.h"
 
 enum class Operation
@@ -16,18 +17,14 @@ enum class Mode
 	WORLD
 };
 
-typedef float GLfloat;
-
 class TransformComponent : public Component
 {
 public:
-	TransformComponent() {}
 	TransformComponent(GameObject* owner);
 	TransformComponent(TransformComponent* trans);
 	~TransformComponent();
 
 	bool Update(float dt) override;
-
 	void OnEditor() override;
 
 	void SetTransform(float3 pos, Quat rot, float3 sca);
@@ -58,31 +55,25 @@ public:
 	void ShowTransformationInfo();
 	void ResetTransform();
 
-	float3 GetForward();
-	float3 GetRight();
-	float3 GetUp();
+	inline float3 GetForward() { return globalMatrix.RotatePart().Col(2).Normalized(); };
+	inline float3 GetRight() { return globalMatrix.RotatePart().Col(0).Normalized(); };
+	inline float3 GetUp() { return globalMatrix.RotatePart().Col(1).Normalized(); };
 
 	// UNDO
 	inline void ForceUpdateTransform() { changeTransform = true; }
-	void UpdateEditorRotation();
+	inline void UpdateEditorRotation() { rotationEditor = rotation.ToEulerXYZ(); };
 	// UNDO
-
-	//// Get Axis
-	//float3 GetForward();
-	//float3 GetUp();
-	//float3 GetRight();
-	//float3 GetNormalizeAxis(int i);
 	Mat4x4 float4x4ToMat4x4();
 
 private:
-	float3 position;
-	Quat rotation;
-	float3 rotationEditor;
-	float3 scale;
+	float3 position = float3::zero;
+	Quat rotation = Quat::identity;
+	float3 rotationInEuler;
+	float3 rotationEditor = float3::zero;
+	float3 scale = float3::one;
+
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
-
-	float3 rotationInEuler;
 
 	bool changeTransform;
 };
