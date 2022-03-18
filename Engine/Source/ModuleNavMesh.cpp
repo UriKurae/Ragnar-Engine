@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "TransformComponent.h"
 #include "NavAgentComponent.h"
+#include "C_RigidBody.h"
 #include "ModuleNavMesh.h"
 #include "ModuleScene.h"
 #include "MeshComponent.h"
@@ -14,6 +15,7 @@
 #include "Detour/DetourNavMeshBuilder.h"
 #include "Detour/DetourCommon.h"
 #include "DebugUtils/SampleInterfaces.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
@@ -415,6 +417,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 {
 	NavAgent* agentProp = agent->agentProperties;
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
+
 	dtStatus status;
 	const float m_polyPickExt[3] = { 2,4,2 };
 
@@ -612,6 +615,9 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	path.resize(agentProp->m_nstraightPath);
 	memcpy(path.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
 
+	agentProp->targetPos = destination;
+	agentProp->targetPosSet = false;
+
 	return true;
 }
 
@@ -701,6 +707,33 @@ void Pathfinder::RenderPath(NavAgentComponent* agent)
 			dd.depthMask(true);
 		}
 	}
+}
+
+bool Pathfinder::SetPath(NavAgentComponent* agent, std::vector<float3>& path)
+{
+	if (!path.empty() && MoveTo(agent, path[0]))
+	{
+		path.erase(path.begin());
+		if (path.empty()) return true;
+	}
+
+	return false;
+}
+
+bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
+{
+	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
+	float3 direction = destination - origin;
+	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
+	direction = direction.Normalized() * agent->agentProperties->speed;
+	
+	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
+	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
+
+	if (destination.Distance(offSet) < MAX_ERROR)
+		return true;
+
+	return false;
 }
 
 

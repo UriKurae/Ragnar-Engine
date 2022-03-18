@@ -9,6 +9,7 @@
 
 #define MAX_POLYS 256
 #define MAX_SMOOTH 2048
+#define MAX_ERROR 0.01f
 
 class GameObject;
 class InputGeom;
@@ -37,7 +38,7 @@ struct NavAgent
 
 	float3 targetPos = float3::zero;
 	bool targetPosSet = false;
-
+	std::vector<float3> path;
 	PathType pathType = PathType::STRAIGHT;
 
 	int m_straightPathOptions = 0;
@@ -68,6 +69,8 @@ public:
 	void Init(NavMeshBuilder* builder);
 	bool CalculatePath(NavAgentComponent* agent, float3 destination, std::vector<float3>& path);
 	void RenderPath(NavAgentComponent* agent);
+	bool SetPath(NavAgentComponent* agent, std::vector<float3>& path);
+	bool MoveTo(NavAgentComponent* agent, float3 destination);
 
 public:
 	dtNavMesh* m_navMesh;

@@ -4,12 +4,6 @@
 
 #include "ModuleNavMesh.h"
 
-//Scripting
-#include "GameObject.h"
-#include "C_RigidBody.h"
-#include "Physics3D.h"
-#include "RigidbodyBindings.h"
-
 NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 {
 	owner = obj;
@@ -31,6 +25,7 @@ NavAgentComponent::~NavAgentComponent()
 		}
 	}
 
+	agentProperties->path.clear();
 	RELEASE(agentProperties);
 }
 
@@ -38,13 +33,9 @@ bool NavAgentComponent::Update(float dt)
 {
 	//Scripting
 	if (agentProperties->targetPosSet)
-	{
-		std::vector<float3> path;
-		pathfinding->CalculatePath(this, agentProperties->targetPos, path);
-		owner->GetComponent<RigidBodyComponent>()->GetBody()->applyCentralForce(path[0] * 1000);
+		pathfinding->CalculatePath(this, agentProperties->targetPos, agentProperties->path);
 
-		agentProperties->targetPosSet = false;
-	}
+	if (pathfinding->SetPath(this, agentProperties->path)) {/*Has finished its path*/ }
 	return true;
 }
 
