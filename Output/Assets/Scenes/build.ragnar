@@ -125,10 +125,10 @@
                         1.3589518070220947
                     ],
                     "Quaternion": [
-                        -0.448630690574646,
-                        0.77664083242416382,
-                        -0.15958476066589355,
-                        0.41242238879203796
+                        -0.33369326591491699,
+                        0.84744226932525635,
+                        -0.020057780668139458,
+                        0.41241741180419922
                     ],
                     "RotationEditor": [
                         0,
@@ -287,22 +287,22 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 157577752,
+                    "pointer": 123668216,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
                     "force": 100,
-                    "rockSoundRadius": 4,
-                    "canThrowKnife": true
+                    "rockSoundRadius": 4
                 },
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 157576744,
+                    "pointer": 123668720,
                     "type": 4,
                     "componentTable": 0,
                     "force": 100,
-                    "rockSoundRadius": 4
+                    "rockSoundRadius": 4,
+                    "canThrowKnife": true
                 },
                 {
                     "Type": 19,
@@ -1280,10 +1280,10 @@
                         1,
                         1
                     ],
-                    "Gravity": true,
+                    "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
-                    "Mass": 1,
+                    "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
                     "MovementConstraint": [

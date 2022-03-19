@@ -78,13 +78,16 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
 
+	// Internall Calls =============
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     // This does not return a GameObject
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject); // This does
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+	// Internal Calls =============
 
 	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);

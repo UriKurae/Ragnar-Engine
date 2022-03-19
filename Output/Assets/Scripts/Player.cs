@@ -9,7 +9,6 @@ public class Player : RagnarComponent
 	public GameObject target = null;
     public float force = 100;
     public float rockSoundRadius = 4f;
-    public bool canThrowKnife = true;
 
     Rigidbody rb;
     Material materialComponent;

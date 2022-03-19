@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
+#include "ModuleEditor.h"
 
 #include "ResourceManager.h"
 
@@ -209,6 +210,14 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	tr->UpdateTransform();
 
 	return app->moduleMono->GoToCSGO(go);
+}
+
+MonoObject* Destroy(MonoObject* go)
+{
+	GameObject* toDelete = app->moduleMono->GameObjectFromCSGO(go);
+	toDelete->GetParent()->GetChilds().erase(toDelete->GetParent()->FindChildren(toDelete));
+	RELEASE(toDelete);
+	return 0;
 }
 
 MonoObject* AddComponentMono(MonoObject* go, int componentType)
