@@ -728,13 +728,42 @@ bool Pathfinder::MovePath(NavAgentComponent* agent)
 
 bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 {
+	btRigidBody* rigidBody = agent->owner->GetComponent<RigidBodyComponent>()->GetBody();
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 	float3 direction = destination - origin;
 	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
-	direction = direction.Normalized() * agent->agentProperties->speed;
-	
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
+	direction.Normalize();
+
+	rigidBody->activate(true);
+	//rigidBody->setAngularVelocity();
+
+	//Angle
+
+	//Quat quat = (Quat)rigidBody->getWorldTransform().getRotation();
+	//float2 twoQuat = (float2)(quat.ToEulerXYZ().x, quat.ToEulerXYZ().z);
+	//float angle = twoQuat.AngleBetween((float2)(direction.x, direction.z));
+	//rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+	//float cross = direction.Length();
+	//float dot = direction.Dot({ 0,0,1 });
+	//double angle = atan2(cross, dot);
+	//rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+	//Quat quat = (Quat)rigidBody->getWorldTransform().getRotation();
+	//float2 twoQuat = (float2)(quat.ToEulerXYZ().x, quat.ToEulerXYZ().z);
+	//float2 twoDir = (float2)(direction.x, direction.z);
+	//float angle = acos(twoQuat.Dot(twoDir) / (twoQuat.Length() * twoDir.Length()));
+	//rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+	//Quat look = Quat::LookAt(agent->owner->GetComponent<TransformComponent>()->GetForward(),
+	//						 direction,
+	//						 agent->owner->GetComponent<TransformComponent>()->GetUp(),
+	//						 float3(0.0f, 1.0f, 0.0f));
+	//rigidBody->getWorldTransform().setRotation(Quat::FromEulerXYZ(look.ToEulerXYZ().x, 0, look.ToEulerXYZ().y));
+
+
+	//Movement
+	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
 
 	if (destination.Distance(offSet) < (MAX_ERROR * agent->agentProperties->speed))
 		return true;
