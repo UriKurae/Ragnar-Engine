@@ -4,7 +4,7 @@ using RagnarEngine;
 public class Abilities : RagnarComponent
 {
     public float force = 200;
-    public float rockSoundRadius = 4f;
+    public float rockSoundRadius = 6f;
     public bool canThrowKnife = true;
     private GameObject bullet;
     private GameObject soundArea;
@@ -35,10 +35,14 @@ public class Abilities : RagnarComponent
         if (bullet != null && bullet.transform.globalPosition.y <= 0.56f && createSoundArea)
         {
             createSoundArea = false;
-            soundArea = InternalCalls.CreateGameObject("SoundArea", bullet.transform.globalPosition, bullet.transform.globalRotation);
+            Vector3 pos = bullet.transform.globalPosition;
+            soundArea = InternalCalls.CreateGameObject("SoundArea", pos, bullet.transform.globalRotation);
             Rigidbody soundRb = soundArea.CreateComponent<Rigidbody>();
             soundRb.IgnoreCollision(gameObject, true);
-            CreateSphereTrigger(soundRb, rockSoundRadius);
+            Debug.Log(bullet.transform.globalPosition.x.ToString());
+            Debug.Log(bullet.transform.globalPosition.y.ToString());
+            Debug.Log(bullet.transform.globalPosition.z.ToString());
+            CreateSphereTrigger(soundRb, rockSoundRadius, bullet.transform.globalPosition);
         }
         if(bullet != null && !createSoundArea)
         {
@@ -81,20 +85,17 @@ public class Abilities : RagnarComponent
         Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
         bulletRb.ApplyCentralForce(vectorDir.normalized * force);
 
-        timer = 2f;
+        timer = 20f;
     }
 
     // With this method we create an spherical Trigger.
-    private static void CreateSphereTrigger(Rigidbody rb, float radius)
+    private static void CreateSphereTrigger(Rigidbody rb, float radius, Vector3 pos)
     {
-        rb.SetCollisionType(CollisionType.SPHERE);
-        rb.SetAsStatic();
+        Debug.Log(pos.x.ToString());
+        Debug.Log(pos.y.ToString());
+        Debug.Log(pos.z.ToString());
+        rb.SetCollisionSphere(radius, pos.x, pos.y, pos.z);
         rb.SetAsTrigger();
-        rb.SetSphereRadius(radius);
     }
 
-    private void ReloadKnife()
-    {
-        if (!canThrowKnife) canThrowKnife = true;
-    }
 }

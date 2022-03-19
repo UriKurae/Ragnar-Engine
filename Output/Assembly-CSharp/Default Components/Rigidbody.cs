@@ -41,7 +41,7 @@ namespace RagnarEngine
         public extern void SetAsStatic();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void SetSphereRadius(float radius);
+        public extern void SetCollisionSphere(float radius, float x, float y, float z);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetHeight(float height);

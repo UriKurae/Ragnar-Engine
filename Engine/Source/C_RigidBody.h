@@ -38,9 +38,6 @@ public:
 	void EditCollisionMesh();
 	void UpdateCollisionMesh();
 
-	void SetSphereRadius(float sphereRadius);
-	void SetHeight(float height);
-
 	void CreateBody(bool changeShape = true);
 	void SetPhysicsProperties();
 	inline float GetMass() { return mass; };
@@ -62,6 +59,10 @@ public:
 
 	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
 	inline RigidBodyComponent* GetCollisionTarget() { return collisionTarget; };
+	
+	// Used specifictly on scripting.
+	void SetCollisionSphere(float sphereRadius, float3 pos);
+	void SetHeight(float height);
 
 public:
 	bool useGravity = true;

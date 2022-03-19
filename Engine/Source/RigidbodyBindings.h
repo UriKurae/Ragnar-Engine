@@ -111,10 +111,11 @@ void SetCollisionType(MonoObject* go, CollisionType type)
 	rb->SetCollisionType(type);
 }
 
-void SetSphereRadius(MonoObject* go, float radius)
+void SetCollisionSphere(MonoObject* go, float radius, float x, float y, float z)
 {
+	float3 pos(x, y, z);
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
-	rb->SetSphereRadius(radius);
+	rb->SetCollisionSphere(radius, pos);
 }
 
 void SetHeight(MonoObject* go, float height)

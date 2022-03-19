@@ -437,7 +437,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(box.size);
 		break;
 	case SPHERE_SHAPE_PROXYTYPE:
-		SetSphereRadius(sphere.radius);
+		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
@@ -697,10 +697,18 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 }
 
 // Use specificly in Scripting
-void RigidBodyComponent::SetSphereRadius(float sphereRadius)
+void RigidBodyComponent::SetCollisionSphere(float sphereRadius, float3 pos)
 {
-	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
+	collisionType = CollisionType::SPHERE;
 	sphere.radius = sphereRadius;
+	sphere.SetPos(pos);
+	useGravity = false;
+	isKinematic = false;
+	trigger = true;
+	mass = 0.0f;
+	owner->GetComponent<TransformComponent>()->SetPosition(pos);
+	owner->GetComponent<TransformComponent>()->UpdateTransform();
+	CreateBody(false);
 }
 
 void RigidBodyComponent::SetHeight(float height)
