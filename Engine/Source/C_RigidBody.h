@@ -39,8 +39,9 @@ public:
 	void UpdateCollisionMesh();
 
 	void SetSphereRadius(float sphereRadius);
+	void SetHeight(float height);
 
-	void CreateBody();
+	void CreateBody(bool changeShape = true);
 	void SetPhysicsProperties();
 	inline float GetMass() { return mass; };
 	void SetMass(float mass);

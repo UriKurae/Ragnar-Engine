@@ -29,12 +29,10 @@ void PGrid::Draw()
 
 	vertex->Unbind();
 	glDisableClientState(GL_VERTEX_ARRAY);
-
 }
 
 void PGrid::CreateGrid()
-{
-	
+{	
 	for (int j = 0; j < width; ++j)
 	{
 		float3 line = {};
@@ -59,7 +57,6 @@ void PGrid::CreateGrid()
 void Primitive::DrawAxis()
 {
 	glLineWidth(3.0f);
-
 	glBegin(GL_LINES);
 
 	// X axis
@@ -79,8 +76,6 @@ void Primitive::DrawAxis()
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 
-
 	glEnd();
-
 	glLineWidth(1.0f);
 }

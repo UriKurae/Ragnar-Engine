@@ -128,6 +128,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsTrigger", SetAsTrigger);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionType", SetCollisionType);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetSphereRadius", SetSphereRadius);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetHeight", SetHeight);
 	// Rigidbody =================
 
 	// Animation =================
@@ -139,8 +140,9 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_targetSetted", GetAgentTargetSetted);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_destination", GetAgentDestination);
-	mono_add_internal_call("RagnarEngine.NavAgent::SetPath", SetAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
+	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
 	// NavAgent ==================
 
 

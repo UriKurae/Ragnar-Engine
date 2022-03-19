@@ -43,6 +43,9 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetSphereRadius(float radius);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetHeight(float height);
+
         public void IgnoreCollision(GameObject other, bool value)
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();

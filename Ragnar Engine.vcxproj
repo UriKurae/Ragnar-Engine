@@ -255,7 +255,6 @@
     <ClInclude Include="Engine\Source\ImageComponent.h" />
     <ClInclude Include="Engine\Source\LightComponent.h" />
     <ClInclude Include="Engine\Source\Lights.h" />
-    <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\GameObjectCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
@@ -473,7 +472,6 @@
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
-    <ClCompile Include="Engine\Source\Material.cpp" />
     <ClCompile Include="Engine\Source\MaterialComponent.cpp" />
     <ClCompile Include="Engine\Source\Mesh.cpp" />
     <ClCompile Include="Engine\Source\MeshComponent.cpp" />

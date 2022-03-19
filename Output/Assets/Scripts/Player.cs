@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 using RagnarEngine;
 
@@ -13,24 +12,20 @@ public class Player : RagnarComponent
     Rigidbody rb;
     Material materialComponent;
     NavAgent agent;
-    List<Vector3> wp;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
-        wp = new List<Vector3> { new Vector3(-1, 0, 1), new Vector3(-4, 0, 2) };
     }
 
     public void Update()
 	{
         if (agent.targetSetted)
-        {
             agent.CalculatePath(agent.destination);
-        }
 
-        agent.MoveTo(agent.destination);
+        if (agent.MovePath()) { Debug.Log("No es null"); }
 
         ///////// SOUNDS /////////
         // Movement Sound
@@ -89,6 +84,17 @@ public class Player : RagnarComponent
             Vector3 f = new Vector3(-velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
+
+        // Crouch
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+        {
+            rb.SetHeight(0.6f); // 0.6 = 60%
+        }
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
+        {
+            rb.SetHeight(1); // 1 = 100% = Reset
+        }
+
     }
 
     public void OnTriggerEnter(Rigidbody other)

@@ -462,12 +462,6 @@ void RigidBodyComponent::UpdateCollisionMesh()
 	editMesh = false;
 }
 
-void RigidBodyComponent::SetSphereRadius(float sphereRadius)
-{
-	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
-	sphere.radius = sphereRadius;
-}
-
 float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 {
 	float4x4 newTransform;
@@ -484,12 +478,12 @@ float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 	return newTransform;
 }
 
-void RigidBodyComponent::CreateBody()
+void RigidBodyComponent::CreateBody(bool changeShape)
 {
-	SetBoundingBox();
-
 	if (body != nullptr)
 		app->physics->DeleteBody(this, owner->name);
+
+	if (changeShape) SetBoundingBox();
 
 	switch (collisionType)
 	{
@@ -700,4 +694,42 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
+}
+
+// Use specificly in Scripting
+void RigidBodyComponent::SetSphereRadius(float sphereRadius)
+{
+	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
+	sphere.radius = sphereRadius;
+}
+
+void RigidBodyComponent::SetHeight(float height)
+{
+	if (height != 1) 
+	{
+		float3 offset(0, owner->GetAABB().HalfSize().y * (1-height), 0);
+		PCapsule capAux = capsule;
+		OBB obb = owner->GetOOB();
+		float3 pos = body->getCenterOfMassPosition();
+
+		capsule.SetPos(pos.x, pos.y - offset.y, pos.z);
+		capsule.radius *= obb.r.MaxElementXZ();
+		capsule.height *= obb.Size().y * 0.5 * height;
+
+		CreateBody(false);
+		owner->SetOffsetCM(owner->GetOffsetCM() - offset);
+		capsule = capAux;
+	}
+	else
+	{
+		float radius = capsule.radius;
+		float height = capsule.height;
+
+		CreateBody();
+		body->getCollisionShape()->setLocalScaling(btVector3(radius, height * 0.5f, radius));
+		capsule.radius = radius;
+		capsule.height = height;
+
+		owner->GetComponent<MeshComponent>()->CalculateCM();
+	}
 }

@@ -40,7 +40,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 		else if (ImGui::IsItemDeactivated()|| !ImGui::IsItemActive())
 			isFocused = false;
 
-		app->camera->canBeUpdated = true;
+		app->camera->updateViewPort = true;
 
 		ImVec2 size = ImGui::GetContentRegionAvail();
 
@@ -137,7 +137,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 	}
 	else
 	{
-		app->camera->canBeUpdated = false;
+		app->camera->updateViewPort = false;
 	}
 
 	ImGui::End();
