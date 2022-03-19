@@ -40,6 +40,7 @@ public:
 
 	math::Line rayCastToDraw;
 	
-	bool canBeUpdated;
+	bool updateViewPort;
+	bool updateGameView;
 	bool visualizeFrustum;
 };
