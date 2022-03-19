@@ -26,7 +26,7 @@ Mesh::~Mesh()
 
 	RELEASE(vbo);
 	RELEASE(ebo);
-	RELEASE(vao);
+	//RELEASE(vao);
 }
 
 void Mesh::Load()

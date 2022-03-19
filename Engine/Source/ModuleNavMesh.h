@@ -9,7 +9,7 @@
 
 #define MAX_POLYS 256
 #define MAX_SMOOTH 2048
-#define MAX_ERROR 0.01f
+#define MAX_ERROR 0.06f
 
 class GameObject;
 class InputGeom;
