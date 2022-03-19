@@ -2,10 +2,12 @@
 #include "Menu.h"
 #include <vector>
 #include <string>
+#include <memory>
 
 class ConsoleMenu;
 class TextEditorMenu;
 class Texture;
+class Scene;
 
 enum class Menus
 {
@@ -49,6 +51,10 @@ private:
 
 private:
 	bool showMenu;
+	bool showBuildMenu;
+
+	std::shared_ptr<Scene> sceneSelected;
+
 	Texture* buttonPlay;
 	Texture* buttonStop;
 	Texture* buttonNextFrame;

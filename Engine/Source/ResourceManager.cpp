@@ -413,3 +413,18 @@ void ResourceManager::RemoveMesh(Mesh* mesh)
 		}
 	}
 }
+
+std::vector<std::shared_ptr<Scene>> ResourceManager::GetScenes()
+{
+	std::vector<std::shared_ptr<Scene>> scenes;
+	
+	for (std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
+	{
+		if ((*it).second->GetType() == ResourceType::SCENE)
+		{
+			scenes.push_back(std::static_pointer_cast<Scene>((*it).second));
+		}
+	}
+
+	return scenes;
+}

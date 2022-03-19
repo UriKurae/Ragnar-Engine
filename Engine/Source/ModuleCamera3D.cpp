@@ -232,7 +232,7 @@ bool ModuleCamera3D::Update(float dt)
 				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
 				LineSegment prevLine = picking;
 				rayCastToDraw = picking.ToLine();
-				if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);

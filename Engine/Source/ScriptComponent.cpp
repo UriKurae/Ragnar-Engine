@@ -12,7 +12,7 @@
 #include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
-ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
+ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : firstUpdate(false)
 {
 	type = ComponentType::SCRIPT;
 	owner = own;
@@ -48,8 +48,7 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	static bool firstUpdate = true;
-	if (app->sceneManager->GetCurrentScene()->GetGameState() != GameState::PLAYING 
+	if (app->sceneManager->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
 		firstUpdate = true;
@@ -57,10 +56,11 @@ bool ScriptComponent::Update(float dt)
 	}
 
 	MonoObject* startExec = nullptr;
-	if (firstUpdate)
+	if (firstUpdate || app->sceneManager->newSceneLoaded)
 	{
 		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
 		firstUpdate = false;
+		app->sceneManager->newSceneLoaded = false;
 	}
 
 	ScriptComponent::runningScript = this;
@@ -331,7 +331,7 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 		{
 			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "RagnarEngine.GameObject") == 0)
-				app->sceneManager->GetCurrentScene()->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
+				app->sceneManager->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
 
 			break;
 		}

@@ -7,6 +7,7 @@
 class Texture;
 class Mesh;
 class Resource;
+class Scene;
 enum class ResourceType;
 typedef unsigned int uint;
 
@@ -42,6 +43,8 @@ public:
 	void AddMesh(Mesh* mesh);
 	Mesh* IsMeshLoaded(std::string path);
 	void RemoveMesh(Mesh* mesh);
+
+	std::vector<std::shared_ptr<Scene>> GetScenes();
 
 private:
 	ResourceManager();

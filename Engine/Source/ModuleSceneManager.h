@@ -1,32 +1,22 @@
 #pragma once
 #include "Module.h"
+#include "GameTimer.h"
 
 #include <vector>
 #include <memory>
 #include <map>
 
+enum class GameState
+{
+	NOT_PLAYING = 0,
+	PLAYING,
+	PAUSE
+};
+
+typedef unsigned int uint;
+
+struct SerializedField;
 class Scene;
-
-
-//struct SerializedField;
-//class btRigidBody; // Scripting
-
-
-// Already in Scene.h
-//enum class Object3D
-//{
-//	CUBE = 0,
-//	PYRAMIDE,
-//	SPHERE,
-//	CYLINDER
-//};
-
-//enum class GameState
-//{
-//	NOT_PLAYING = 0,
-//	PLAYING,
-//	PAUSE
-//};
 class CameraComponent;
 
 class ModuleSceneManager : public Module
@@ -48,18 +38,36 @@ public:
 
 	void NewScene();
 	void AddScene(std::shared_ptr<Scene> newScene);
+	void DeleteScene(std::shared_ptr<Scene> scene);
 
 	void ChangeScene(const char* sceneName);
 
 	void NextScene();
 	void NextScene(const char* name);
 
+	GameState GetGameState() { return gameState; }
+	GameTimer GetTimer() { return gameTimer; }
+
+	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
+
+	void Play();
+	void Stop();
+	void Pause();
+	void Resume();
+	inline void NextFrame() { frameSkip = true; }
+
+	std::vector<std::shared_ptr<Scene>>& GetScenes() { return scenes; }
+
+	std::multimap<uint, SerializedField*> referenceMap;
+	bool newSceneLoaded;
+
 private:
 	int index;
-	/*GameState gameState;
-	bool frameSkip;*/
+	bool changeScene;
 
-	//GameTimer gameTimer;
+	GameState gameState;
+	GameTimer gameTimer;
+	bool frameSkip;
 
 	std::shared_ptr<Scene> currentScene;
 

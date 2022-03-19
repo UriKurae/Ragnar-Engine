@@ -27,7 +27,6 @@ void Animation::Load()
 {
 	if (id == 0)
 	{
-		bones.clear();
 		AnimationImporter::LoadAnimation2(libraryPath.c_str(), ticks, ticksPerSecond, bones, hierarchy);
 	}
 }
@@ -40,6 +39,7 @@ void Animation::UnLoad()
 		ticks = 0;
 		ticksPerSecond = 0;
 		RELEASE_ARRAY(boneTranformations);
+		bones.clear();
 	}
 }
 

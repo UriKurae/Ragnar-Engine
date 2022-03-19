@@ -79,6 +79,15 @@ Bone::Bone(BoneData boneData) : data(boneData)
 {
 }
 
+Bone::~Bone()
+{
+	data.positions.clear();
+	data.rotations.clear();
+	data.scales.clear();
+
+	data.name.clear();
+}
+
 void Bone::Update(float animationTime)
 {
 	float4x4 translation = InterpolatePosition(animationTime);

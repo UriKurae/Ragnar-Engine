@@ -29,14 +29,24 @@
 #include <stack>
 #include "Profiling.h"
 
-Scene::Scene(uint uid, std::string& assets, std::string& library) : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr), Resource(uid, ResourceType::SCENE, assets, library)
+Scene::Scene(uint uid, std::string& assets, std::string& library) : mainCamera(nullptr), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr), Resource(uid, ResourceType::SCENE, assets, library)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
+	if (assets == "")
+	{
+		name = "";
+	}
+	else
+	{
+		name = assets;
+		app->fs->GetFilenameWithoutExtension(name);
+	}
 }
 
 Scene::~Scene()
 {
+	UnLoad();
 }
 
 bool Scene::Start()
@@ -83,7 +93,7 @@ bool Scene::PreUpdate(float dt)
 		refresh = false;
 	}
 
-	if (gameState == GameState::PLAYING) gameTimer.Start();
+	if (app->sceneManager->GetGameState() == GameState::PLAYING) app->sceneManager->GetTimer().Start();
 
 	return true;
 }
@@ -92,12 +102,12 @@ bool Scene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
-	if (mainCamera != nullptr) mainCamera->Update(gameTimer.GetDeltaTime());
+	if (mainCamera != nullptr) mainCamera->Update(app->sceneManager->GetTimer().GetDeltaTime());
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
-		root->GetChilds()[i]->Update(gameTimer.GetDeltaTime());
+		root->GetChilds()[i]->Update(app->sceneManager->GetTimer().GetDeltaTime());
 	
-	if (frameSkip || gameState == GameState::PLAYING)
+	if (frameSkip || app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		//DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
 		//DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
@@ -127,19 +137,15 @@ bool Scene::Update(float dt)
 		resetQuadtree = false;
 	}
 
-
-	///////////////////////
-	// Scripting
-	Scripting(dt);
-
-	AudioManager::Get()->Render();
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
+		AudioManager::Get()->Render();
 
 	return true;
 }
 
 bool Scene::PostUpdate()
 {
-	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
+	if (app->sceneManager->GetGameState() == GameState::PLAYING) app->sceneManager->GetTimer().FinishUpdate();
 
 	return true;
 }
@@ -336,9 +342,9 @@ void Scene::Load()
 void Scene::UnLoad()
 {
 	RELEASE(root);
-	RELEASE(mainCamera);
-	RELEASE(camera);
-	RELEASE(player);
+	mainCamera = nullptr;
+	camera = nullptr;
+	player = nullptr;
 	qTree.Clear();
 }
 
@@ -364,7 +370,7 @@ GameObject* Scene::GetGoByUuid(double uuid) const
 	return nullptr;
 }
 
-bool Scene::LoadScene(const char* name)
+bool Scene::LoadScene(const char* assetsName)
 {
 	RG_PROFILING_FUNCTION("Loading Scene");
 
@@ -373,7 +379,13 @@ bool Scene::LoadScene(const char* name)
 	RELEASE(root);
 	app->userInterface->UIGameObjects.clear();
 
-	assetsPath = name;
+	if (std::string(assetsName).find("scenePlay") == -1)
+	{
+		assetsPath = assetsName;
+		name = assetsPath;
+	}
+	
+	app->fs->GetFilenameWithoutExtension(name);
 
 	JsonParsing sceneFile = JsonParsing();
 
@@ -409,10 +421,10 @@ bool Scene::LoadScene(const char* name)
 				}
 			}
 		}
-		for (auto i = referenceMap.begin(); i != referenceMap.end(); ++i)
+		for (auto i = app->sceneManager->referenceMap.begin(); i != app->sceneManager->referenceMap.end(); ++i)
 		{
 			// Get the range of the current key
-			auto range = referenceMap.equal_range(i->first);
+			auto range = app->sceneManager->referenceMap.equal_range(i->first);
 
 			// Now render out that whole range
 			for (auto d = range.first; d != range.second; ++d)
@@ -434,9 +446,6 @@ bool Scene::LoadScene(const char* name)
 	{
 		DEBUG_LOG("Scene couldn't be loaded");
 	}
-
-	referenceMap.clear();
-
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
@@ -490,64 +499,4 @@ void Scene::DuplicateGO(GameObject* go, GameObject* parent)
 		DuplicateGO(go->GetChilds()[i], gameObject);
 	}
 	//gameObject->SetAABB(go->GetAABB());
-}
-
-void Scene::Play()
-{
-	DEBUG_LOG("Saving Scene");
-
-	JsonParsing sceneFile;
-
-	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Scene");
-	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Game Objects");
-	root->OnSave(sceneFile, array);
-
-	char* buf;
-	uint size = sceneFile.Save(&buf);
-
-	if (app->fs->Save(SCENES_FOLDER "scenePlay.ragnar", buf, size) > 0)
-		DEBUG_LOG("Scene saved succesfully");
-	else
-		DEBUG_LOG("Scene couldn't be saved");
-
-	RELEASE_ARRAY(buf);
-
-	gameState = GameState::PLAYING;
-	player->GetComponent<AnimationComponent>()->Play("Idle");
-	gameTimer.ResetTimer();
-}
-
-void Scene::Stop()
-{
-	app->renderer3D->ClearPointLights();
-	app->renderer3D->ClearSpotLights();
-
-	LoadScene("Assets/Scenes/scenePlay.ragnar");
-	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
-	qTree.Clear();
-	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
-	gameState = GameState::NOT_PLAYING;
-}
-
-void Scene::Pause()
-{
-	gameTimer.SetDesiredDeltaTime(0.0f);
-	gameState = GameState::PAUSE;
-}
-
-void Scene::Resume()
-{
-	gameTimer.SetDesiredDeltaTime(0.016f);
-	gameState = GameState::PLAYING;
-}
-
-/////////////////////////
-
-void Scene::Scripting(float dt)
-{
-	// TODO: Must delete this maybe
-	if (gameState == GameState::PLAYING)
-	{
-		player->GetComponent<NavAgentComponent>();
-	}
 }

@@ -3,7 +3,7 @@
         {
             "UUID": 417171234,
             "Parent UUID": 0,
-            "Name": "ScenePrueba",
+            "Name": "scenePrueba",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -125,9 +125,9 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        0.21982041001319885,
-                        -0.66260653734207153,
-                        0.034338295459747314,
+                        -0.12382756918668747,
+                        -0.57092005014419556,
+                        0.38375061750411987,
                         0.71515905857086182
                     ],
                     "RotationEditor": [
@@ -189,9 +189,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.655059814453125,
+                        0,
                         0.45086690783500671,
-                        0
+                        -4.7825136184692383
                     ],
                     "Quaternion": [
                         0,
@@ -287,13 +287,22 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 32201904,
+                    "pointer": 173335672,
                     "type": 4,
                     "componentTable": 0,
-                    "velocity": 5,
+                    "velocity": 1000,
                     "force": 100,
                     "rockSoundRadius": 4,
                     "canThrowKnife": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Abilities",
+                    "pointer": 173337608,
+                    "type": 4,
+                    "componentTable": 0,
+                    "force": 100,
+                    "rockSoundRadius": 4
                 }
             ]
         },
@@ -886,9 +895,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        6,
+                        3.7788910865783691,
                         1,
-                        -5
+                        -3.7176430225372314
                     ],
                     "Quaternion": [
                         0,
@@ -962,9 +971,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        5,
+                        1.5149838924407959,
                         1,
-                        -6
+                        -0.6898646354675293
                     ],
                     "Quaternion": [
                         0,

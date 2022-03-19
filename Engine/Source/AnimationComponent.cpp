@@ -168,7 +168,7 @@ void AnimationComponent::AnimationInfo()
 bool AnimationComponent::Update(float dt)
 {
 	deltaTime = dt;
-	if (currAnim && playing && app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
+	if (currAnim && playing && app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		// Loop time keeps track of the miliseconds that passed since the start of the animation
 		// GetDuration gets the duration of the animation in miliseconds

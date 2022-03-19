@@ -341,5 +341,17 @@ void SetButtonText(MonoObject* go, MonoString* text)
 
 float GetGameTimeStep()
 {
-	return app->sceneManager->GetCurrentScene()->GetGameDeltaTime();
+	return app->sceneManager->GetGameDeltaTime();
+}
+
+// Scene Manager
+void NextScene()
+{
+	app->sceneManager->NextScene();
+}
+
+void LoadScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->NextScene(name);
 }

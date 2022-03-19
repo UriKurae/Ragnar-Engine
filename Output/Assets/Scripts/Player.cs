@@ -24,7 +24,8 @@ public class Player : RagnarComponent
         if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             //GameObject but = GameObject.Find("Button");
-            //but.GetComponent<Button>().text = "Testint Text";
+            //but.GetComponent<Button>().text = "Testint Text
+            SceneManager.LoadScene("scenePrueba");
         }
 
         ///////// SOUNDS /////////

@@ -42,6 +42,7 @@ class Bone
 public:
 	Bone(){}
 	Bone(BoneData boneData);
+	~Bone();
 
 	void Update(float animationTime);
 	void UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);

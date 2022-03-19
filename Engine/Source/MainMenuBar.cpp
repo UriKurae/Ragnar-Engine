@@ -32,6 +32,7 @@
 
 #include "ResourceManager.h"
 #include "AudioManager.h"
+#include "FileSystem.h"
 
 #include "Lights.h"
 #include "Texture.h"
@@ -45,7 +46,7 @@
 #include <fstream>
 #include "Profiling.h"
 
-MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr)
+MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr), showBuildMenu(false), sceneSelected(nullptr)
 {
 	showMenu = false;
 
@@ -135,6 +136,14 @@ bool MainMenuBar::Update(float dt)
 				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
 			}
+
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Build", "", &ret))
+			{
+				showBuildMenu = true;
+			}
+
 			if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC", &ret))
 			{
 				return false;
@@ -488,11 +497,11 @@ bool MainMenuBar::Update(float dt)
 	ImGui::PushStyleColor(ImGuiCol_BorderShadow, { 0, 0, 0, 0 });
 	ImGui::SameLine(ImGui::GetWindowSize().x * 0.5f - 81);
 	
-	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::NOT_PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::NOT_PLAYING)
 	{
 		if (ImGui::ImageButton((ImTextureID)buttonPlay->GetId(), { 27,18 }))
 		{
-			app->sceneManager->GetCurrentScene()->Play();
+			app->sceneManager->Play();
 			AudioManager::Get()->PlayAllAudioSources();
 			//ImGui::StyleColorsClassic();
 			app->physics->ActiveAllBodies();
@@ -505,22 +514,22 @@ bool MainMenuBar::Update(float dt)
 		ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 });
 
 	}
-	else if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING || app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE)
+	else if (app->sceneManager->GetGameState() == GameState::PLAYING || app->sceneManager->GetGameState() == GameState::PAUSE)
 	{
 		if (ImGui::ImageButton((ImTextureID)buttonStop->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->StopAllAudioSources();
-			app->sceneManager->GetCurrentScene()->Stop();
+			app->sceneManager->Stop();
 			app->physics->SleepAllBodies();
 			//SetStyle(6);
 		}
 		ImGui::SameLine();
 
-		if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE)
+		if (app->sceneManager->GetGameState() == GameState::PAUSE)
 		{
 			if (ImGui::ImageButton((ImTextureID)buttonPauseBlue->GetId(), { 27,18 }))
 			{
-				app->sceneManager->GetCurrentScene()->Resume();
+				app->sceneManager->Resume();
 				AudioManager::Get()->ResumeAllAudioSources();
 				app->physics->ActiveAllBodies();
 			}
@@ -528,12 +537,12 @@ bool MainMenuBar::Update(float dt)
 		else if (ImGui::ImageButton((ImTextureID)buttonPause->GetId(), { 27,18 }))
 		{
 			AudioManager::Get()->PauseAllAudioSources();
-			app->sceneManager->GetCurrentScene()->Pause();
+			app->sceneManager->Pause();
 			app->physics->SleepAllBodies();
 		}
 
 		ImGui::SameLine();
-		if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 })) if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PAUSE) app->sceneManager->GetCurrentScene()->NextFrame();
+		if (ImGui::ImageButton((ImTextureID)buttonNextFrame->GetId(), { 27,18 })) if (app->sceneManager->GetGameState() == GameState::PAUSE) app->sceneManager->NextFrame();
 
 	}
 
@@ -550,7 +559,7 @@ bool MainMenuBar::Update(float dt)
 		std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
 		if (!filePath.empty())
 		{
-			app->sceneManager->GetCurrentScene()->LoadScene(filePath.c_str());
+			app->sceneManager->ChangeScene(filePath.c_str());
 		}
 	}
 
@@ -608,6 +617,69 @@ bool MainMenuBar::Update(float dt)
 	}
 
 	ImGui::PopStyleColor(3);
+
+	// Build menu
+	if (showBuildMenu)
+	{
+		static bool addScene = false;
+		ImGui::Begin("Build", &showBuildMenu);
+
+		ImGui::BeginChild("Scenes");
+		for (int i = 0; i < app->sceneManager->GetScenes().size(); ++i)
+		{
+			int flags = ImGuiTreeNodeFlags_Leaf;
+			flags |= sceneSelected == app->sceneManager->GetScenes()[i] ? ImGuiTreeNodeFlags_Selected : 0;
+			ImGui::TreeNodeEx(app->sceneManager->GetScenes()[i]->GetName().c_str(), flags);
+			if (ImGui::IsItemClicked())
+			{
+				sceneSelected = app->sceneManager->GetScenes()[i];
+			}
+			ImGui::TreePop();
+		}
+
+		if (ImGui::Button("+"))
+		{
+			addScene = true;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("-"))
+		{
+			app->sceneManager->DeleteScene(sceneSelected);
+		}
+
+		if (addScene)
+		{
+			ImGui::Begin("Add Scene");
+
+			std::vector<std::shared_ptr<Scene>> scenes = ResourceManager::GetInstance()->GetScenes();
+			static std::shared_ptr<Scene> scene = nullptr;
+			for (int i = 0; i < scenes.size(); ++i)
+			{
+				int flags = ImGuiTreeNodeFlags_Leaf;
+				flags |= sceneSelected == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
+				ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
+				if (ImGui::IsItemClicked())
+				{
+					scene = scenes[i];
+				}
+				ImGui::TreePop();
+			}
+
+			if (ImGui::Button("Add") && scene != nullptr)
+			{
+				app->sceneManager->AddScene(scene);
+				scene = nullptr;
+				addScene = false;
+			}
+
+			ImGui::End();
+		}
+
+		ImGui::EndChild();
+
+		ImGui::End();
+	}
+
 	ImGui::End();
 
 	if (showMenu)
@@ -625,7 +697,6 @@ bool MainMenuBar::Update(float dt)
 	{
 		ShowCreateNotLigthSensibleShaderWindow();
 	}
-
 
 	for (unsigned int i = 0; i < menus.size(); ++i)
 	{

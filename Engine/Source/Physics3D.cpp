@@ -53,7 +53,7 @@ bool Physics3D::Start()
 bool Physics3D::PreUpdate(float dt)
 {
 	world->stepSimulation(dt, 15);
-	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		for (size_t i = 0; i < bodies.size(); i++)
 		{
@@ -247,7 +247,7 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		body->setActivationState(DISABLE_DEACTIVATION);
 	}		
-	if (app->sceneManager->GetCurrentScene()->GetGameState() != GameState::PLAYING)
+	if (app->sceneManager->GetGameState() != GameState::PLAYING)
 		body->setActivationState(ISLAND_SLEEPING);
 	if(component->trigger) body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 

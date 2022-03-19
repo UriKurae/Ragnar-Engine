@@ -136,6 +136,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
 	// Camera ====================
 
+	// Scene Manager =============
+	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
+	// Scene Manager =============
+
 	InitMono();
 
 	return ret;
@@ -165,7 +170,7 @@ bool MonoManager::CleanUp()
 
 void MonoManager::ReCompileCS()
 {
-	if (app->sceneManager->GetCurrentScene()->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 		return;
 
 	app->sceneManager->GetCurrentScene()->SaveScene("Assets/Scenes/scenePlay.ragnar");
