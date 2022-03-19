@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 using RagnarEngine;
 
@@ -14,24 +13,20 @@ public class Player : RagnarComponent
     Rigidbody rb;
     Material materialComponent;
     NavAgent agent;
-    List<Vector3> wp;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
-        wp = new List<Vector3> { new Vector3(-1, 0, 1), new Vector3(-4, 0, 2) };
     }
 
     public void Update()
 	{
         if (agent.targetSetted)
-        {
             agent.CalculatePath(agent.destination);
-        }
 
-        agent.MoveTo(agent.destination);
+        if (agent.MovePath()) { Debug.Log("No es null"); }
 
         ///////// SOUNDS /////////
         // Movement Sound

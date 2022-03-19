@@ -28,19 +28,10 @@ MonoBoolean GetAgentTargetSetted(MonoObject* go)
 	return agent->agentProperties->targetPosSet;
 }
 
-bool SetAgentPath(MonoObject* go, MonoArray* path)
+bool MoveAgentPath(MonoObject* go)
 {
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
-
-	std::vector<float3> wayPoints;
-	int size = mono_array_length(path);
-	for (int i = 0; i < size; ++i)
-	{
-		float3 v = app->moduleMono->UnboxVector(mono_array_get(path, MonoObject*, i));
-		wayPoints.push_back(v);
-	}
-
-	return agent->pathfinding->SetPath(agent, wayPoints);
+	return agent->pathfinding->MovePath(agent);
 }
 
 MonoObject* GetAgentDestination(MonoObject* go)
@@ -54,4 +45,20 @@ bool MoveAgentTo(MonoObject* go, MonoObject* dest)
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
 	float3 destination = app->moduleMono->UnboxVector(dest);
 	return agent->pathfinding->MoveTo(agent, destination);
+}
+
+void SetAgentPath(MonoObject* go, MonoArray* path)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+
+	std::vector<float3> wayPoints;
+	int size = mono_array_length(path);
+	for (int i = 0; i < size; ++i)
+	{
+		float3 v = app->moduleMono->UnboxVector(mono_array_get(path, MonoObject*, i));
+		wayPoints.push_back(v);
+	}
+
+	agent->agentProperties->path.clear();
+	agent->agentProperties->path = wayPoints;
 }

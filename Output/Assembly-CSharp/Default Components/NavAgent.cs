@@ -13,10 +13,10 @@ namespace RagnarEngine
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void CalculatePath(Vector3 destination);
+        public extern Vector3[] CalculatePath(Vector3 destination);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern bool SetPath(Vector3[] wayPoints);
+        public extern bool MovePath();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern bool MoveTo(Vector3 destination);
@@ -32,6 +32,12 @@ namespace RagnarEngine
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
+        }
+
+        public extern Vector3 path
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
         }
     }
 }

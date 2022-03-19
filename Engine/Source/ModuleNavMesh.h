@@ -69,7 +69,7 @@ public:
 	void Init(NavMeshBuilder* builder);
 	std::vector<float3> CalculatePath(NavAgentComponent* agent, float3 destination);
 	void RenderPath(NavAgentComponent* agent);
-	bool SetPath(NavAgentComponent* agent, std::vector<float3>& path);
+	bool MovePath(NavAgentComponent* agent);
 	bool MoveTo(NavAgentComponent* agent, float3 destination);
 
 public:
