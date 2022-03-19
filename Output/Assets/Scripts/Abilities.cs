@@ -85,7 +85,7 @@ public class Abilities : RagnarComponent
         Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
         bulletRb.ApplyCentralForce(vectorDir.normalized * force);
 
-        timer = 20f;
+        timer = 2f;
     }
 
     // With this method we create an spherical Trigger.
