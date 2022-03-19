@@ -413,8 +413,10 @@ static int fixupShortcuts(dtPolyRef* path, int npath, dtNavMeshQuery* navQuery)
 	return npath;
 }
 
-bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std::vector<float3>& path)
+std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination)
 {
+	std::vector<float3> calculatedPath;
+
 	NavAgent* agentProp = agent->agentProperties;
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 
@@ -422,21 +424,23 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	const float m_polyPickExt[3] = { 2,4,2 };
 
 	if (m_navQuery == nullptr)
-		return false;
+		return calculatedPath;
 
 	status = m_navQuery->findNearestPoly(origin.ptr(), m_polyPickExt, &m_filter, &agentProp->m_startRef, nullptr);
 	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
 		LOG(LogType::L_ERROR, "Could not find a near poly to start path");
-		return false;}
+		return calculatedPath;
+	}
 
 	status = m_navQuery->findNearestPoly(destination.ptr(), m_polyPickExt, &m_filter, &agentProp->m_endRef, nullptr);
 	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
 		LOG(LogType::L_ERROR, "Could not find a near poly to end path");
-		return false;}
+		return calculatedPath;
+	}
 
 	if (agentProp->pathType == PathType::SMOOTH)
 	{
-		if (agentProp->targetPosSet && agentProp->m_startRef && agentProp->m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
 			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(), destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
 
@@ -568,8 +572,8 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 
 			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
 				LOG(LogType::L_ERROR, "Could not create smooth path");
-				path.clear();
-				return false;
+				calculatedPath.clear();
+				return calculatedPath;
 			}
 		}
 		else
@@ -580,7 +584,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	}
 	else if (agentProp->pathType == PathType::STRAIGHT)
 	{
-		if (agentProp->targetPosSet && agentProp->m_startRef && agentProp->m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
 			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(),
 				destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
@@ -601,8 +605,8 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 
 			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
 				LOG(LogType::L_ERROR, "Could not create straight path");
-				path.clear();
-				return false;
+				calculatedPath.clear();
+				return calculatedPath;
 			}
 		}
 		else
@@ -612,13 +616,14 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 		}
 	}
 
-	path.resize(agentProp->m_nstraightPath);
-	memcpy(path.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
+	calculatedPath.resize(agentProp->m_nstraightPath);
+	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
 
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
+	agentProp->path = calculatedPath;
 
-	return true;
+	return calculatedPath;
 }
 
 void Pathfinder::RenderPath(NavAgentComponent* agent)
@@ -709,12 +714,13 @@ void Pathfinder::RenderPath(NavAgentComponent* agent)
 	}
 }
 
-bool Pathfinder::SetPath(NavAgentComponent* agent, std::vector<float3>& path)
+bool Pathfinder::MovePath(NavAgentComponent* agent)
 {
-	if (!path.empty() && MoveTo(agent, path[0]))
+	if (!agent->agentProperties->path.empty() && 
+		MoveTo(agent, agent->agentProperties->path[0]))
 	{
-		path.erase(path.begin());
-		if (path.empty()) return true;
+		agent->agentProperties->path.erase(agent->agentProperties->path.begin());
+		if (agent->agentProperties->path.empty()) return true;
 	}
 
 	return false;
@@ -730,7 +736,7 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
 	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
 
-	if (destination.Distance(offSet) < MAX_ERROR)
+	if (destination.Distance(offSet) < (MAX_ERROR * agent->agentProperties->speed))
 		return true;
 
 	return false;

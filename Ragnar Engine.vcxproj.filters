@@ -829,6 +829,9 @@
     <ClInclude Include="Engine\Source\ModuleNavMesh.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\NavAgentBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Source\ParticleEffect_Size.h">
       <Filter>Particles\Effects</Filter>
     </ClInclude>

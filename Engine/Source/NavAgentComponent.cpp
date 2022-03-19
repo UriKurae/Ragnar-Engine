@@ -31,11 +31,7 @@ NavAgentComponent::~NavAgentComponent()
 
 bool NavAgentComponent::Update(float dt)
 {
-	//Scripting
-	if (agentProperties->targetPosSet)
-		pathfinding->CalculatePath(this, agentProperties->targetPos, agentProperties->path);
 
-	if (pathfinding->SetPath(this, agentProperties->path)) {/*Has finished its path*/ }
 	return true;
 }
 

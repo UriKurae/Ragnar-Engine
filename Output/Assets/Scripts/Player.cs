@@ -12,20 +12,21 @@ public class Player : RagnarComponent
 
     Rigidbody rb;
     Material materialComponent;
+    NavAgent agent;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
+        agent = gameObject.GetComponent<NavAgent>();
     }
 
     public void Update()
 	{
-        if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
-        {
-            //GameObject but = GameObject.Find("Button");
-            //but.GetComponent<Button>().text = "Testint Text";
-        }
+        if (agent.targetSetted)
+            agent.CalculatePath(agent.destination);
+
+        if (agent.MovePath()) { Debug.Log("No es null"); }
 
         ///////// SOUNDS /////////
         // Movement Sound
@@ -92,5 +93,6 @@ public class Player : RagnarComponent
         other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
     }
 }
+
 
 
