@@ -26,7 +26,6 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(std::shared_ptr<Resource> m);
-	void DebugColliders(float3* points, float3 color = float3::one);
 
 	void CalculateCM();
 	bool HasMaterial();
@@ -49,11 +48,8 @@ private:
 	bool verticesNormals;
 
 	std::shared_ptr<Mesh> mesh;
-	std::vector<GameObject*> boneList;
 
 	AABB localBoundingBox;
 
 	bool showMeshMenu = false;
-	bool showAABB = false;
-	bool showOBB = false;
 };

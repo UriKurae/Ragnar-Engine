@@ -82,7 +82,6 @@ bool ModuleEditor::Update(float dt)
 				{
 					selected->GetParent()->GetChilds().erase(i);
 					RELEASE(selected);
-					app->scene->ResetQuadtree();
 					break;
 				}
 			}

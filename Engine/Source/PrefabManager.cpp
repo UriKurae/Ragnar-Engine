@@ -370,7 +370,6 @@ void PrefabManager::RemoveObjectFromPrefabs(std::vector<uint>& idToDeletePrefab,
 						{
 							selectedParent->GetChilds().erase(i);
 							RELEASE((*it2));
-							app->scene->ResetQuadtree();
 							break;
 						}
 					}
