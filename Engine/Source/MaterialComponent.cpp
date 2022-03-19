@@ -14,6 +14,7 @@
 #include "Texture.h"
 #include "Lights.h"
 
+#include "GL/glew.h"
 #include <fstream>
 #include "Profiling.h"
 

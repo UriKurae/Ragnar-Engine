@@ -23,6 +23,7 @@
 #include "Transform2DComponent.h"
 #include "NavAgentComponent.h"
 
+#include "GL/glew.h"
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 

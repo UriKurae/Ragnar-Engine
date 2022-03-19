@@ -67,9 +67,6 @@
     <Filter Include="Sources\Libraries\MathGeoLib">
       <UniqueIdentifier>{07ff1a3b-03c9-447f-942c-540f0dc0c782}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Materials">
-      <UniqueIdentifier>{52cdcc85-30bb-48e1-a81a-2133027b065d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PhysicsEngine">
       <UniqueIdentifier>{caaeba32-e8fd-448a-a552-88a21bcf8e7b}</UniqueIdentifier>
     </Filter>
@@ -414,12 +411,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\ShaderHelpers.h">
       <Filter>Sources\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Shader.h">
-      <Filter>Sources\Materials</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Material.h">
-      <Filter>Sources\Materials</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Lights.h">
       <Filter>Sources\Helpers</Filter>
@@ -838,6 +829,9 @@
     <ClInclude Include="Engine\Source\ParticleEffect_Color.h">
       <Filter>Particles\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\Shader.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Source\ModuleCamera3D.cpp">
@@ -1076,12 +1070,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\VertexArray.cpp">
       <Filter>Sources\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Shader.cpp">
-      <Filter>Sources\Materials</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Material.cpp">
-      <Filter>Sources\Materials</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\LightComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
@@ -1385,6 +1373,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ParticleEffect_Color.cpp">
       <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Shader.cpp">
+      <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,8 +3,6 @@
 #include "Color.h"
 #include "Text.h"
 
-#include"Material.h"
-
 class MyPlane;
 class GameObject;
 class MaterialComponent;
