@@ -84,6 +84,17 @@ public class Player : RagnarComponent
             Vector3 f = new Vector3(-velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
+
+        // Crouch
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+        {
+            rb.SetHeight(0.6f); // 0.6 = 60%
+        }
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
+        {
+            rb.SetHeight(1); // 1 = 100% = Reset
+        }
+
     }
 
     public void OnTriggerEnter(Rigidbody other)

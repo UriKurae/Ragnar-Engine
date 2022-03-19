@@ -124,6 +124,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsTrigger", SetAsTrigger);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionType", SetCollisionType);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetSphereRadius", SetSphereRadius);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetHeight", SetHeight);
 	// Rigidbody =================
 
 	// Animation =================

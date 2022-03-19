@@ -231,7 +231,7 @@ void TransformComponent::UpdateBoundingBox()
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
-		owner->GetComponent<MeshComponent>()->CalculateCM();
+		//owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
 
 	ParticleSystemComponent* partComp = owner->GetComponent<ParticleSystemComponent>();
