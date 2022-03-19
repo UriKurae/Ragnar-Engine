@@ -9,7 +9,7 @@
 
 #include "Profiling.h"
 
-Mesh::Mesh(uint uid, std::string& assets, std::string& library) : vbo(nullptr), ebo(nullptr), tbo(0), Resource(uid, ResourceType::MESH, assets, library)
+Mesh::Mesh(uint uid, std::string& assets, std::string& library) : vbo(nullptr), ebo(nullptr), Resource(uid, ResourceType::MESH, assets, library)
 {
 	std::string metaPath = MESHES_FOLDER + std::string("mesh_") + std::to_string(uid) + ".meta";
 	MeshImporter::CreateMetaMesh(metaPath, assets, uid);
@@ -22,10 +22,11 @@ Mesh::~Mesh()
 {
 	vertices.clear();
 	indices.clear();
+	bones.clear();
 
-	//RELEASE(vertexArray);
 	RELEASE(vbo);
 	RELEASE(ebo);
+	RELEASE(vao);
 }
 
 void Mesh::Load()
@@ -36,7 +37,7 @@ void Mesh::Load()
 
 		numBones = bones.size();
 
-		vertexArray = new VertexArray();
+		vao = new VertexArray();
 
 		vbo = new VertexBuffer(vertices);
 		vbo->SetLayout({
@@ -46,10 +47,10 @@ void Mesh::Load()
 			{ShaderDataType::VEC4I, "boneIds"},
 			{ShaderDataType::VEC4F, "weights"}
 		});
-		vertexArray->AddVertexBuffer(*vbo);
+		vao->AddVertexBuffer(*vbo);
 
 		ebo = new IndexBuffer(indices.data(), indices.size());
-		vertexArray->SetIndexBuffer(*ebo);
+		vao->SetIndexBuffer(*ebo);
 	}
 }
 
@@ -59,52 +60,28 @@ void Mesh::UnLoad()
 	{
 		vertices.clear();
 		indices.clear();
+		bones.clear();
 
-		//glDeleteBuffers(1, &tbo);
 		RELEASE(vbo);
 		RELEASE(ebo);
-		RELEASE(vertexArray);
+		RELEASE(vao);
 	}
 }
 
 void Mesh::Draw(bool& verticesNormals, bool& faceNormals, float3& colorNormal, float& colorLength)
 {
-	//vbo->Bind();
-	//vertexArray->Bind();
-	//glVertexPointer(3, GL_FLOAT, sizeof(Vertex), NULL);
-	//
-	//glBindBuffer(GL_ARRAY_BUFFER, tbo);
-	//glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-	//
-	//if (ebo != nullptr) ebo->Bind();
-
-	//vbo->Bind();
-	//ebo->Bind();
-	//shader->Bind();
-	
-	vertexArray->Bind();
+	vao->Bind();
 	
 	if (verticesNormals)
 		ShowVertexNormals(colorNormal, colorLength);
 	else if (faceNormals)
 		ShowFaceNormals(colorNormal, colorLength);
 
-	
-	unsigned int s = vertexArray->GetIndexBuffer()->GetCount();
-	//vbo->Bind();
 	ebo->Bind();
-	glDrawElements(GL_TRIANGLES, s, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, vao->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
+	ebo->Unbind();
 
-	//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
-	vertexArray->Unbind();
-	
-	// Debug normals
-	
-	
-	//if (ebo != nullptr) ebo->Unbind();
-	////glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//if (vbo != nullptr) vbo->Unbind();
+	vao->Unbind();
 }
 
 void Mesh::ShowVertexNormals(float3& colorNormal, float &normalLength)
@@ -171,8 +148,6 @@ void Mesh::Reimport(ModelParameters& data)
 		vertices.clear();
 		indices.clear();
 		bones.clear();
-		//texCoords.clear();
-		//normals.clear();
 	}
 
 	MeshImporter::LoadMesh(vertices, indices, bones, libraryPath);
