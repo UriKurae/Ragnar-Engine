@@ -18,7 +18,7 @@ public class Rock : RagnarComponent
 		Rigidbody rockRb = gameObject.GetComponent<Rigidbody>();
 		rockRb.SetBodyPosition(pos);
 		rockRb.IgnoreCollision(player, true);
-		Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
+		Vector3 vectorDir = new Vector3(player.transform.forward.x, 1, player.transform.forward.z);
 		rockRb.ApplyCentralForce(vectorDir.normalized * force);
 	}
 
