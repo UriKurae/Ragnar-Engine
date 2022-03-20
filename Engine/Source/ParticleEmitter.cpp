@@ -5,6 +5,11 @@
 #include "ResourceManager.h"
 #include "CameraComponent.h"
 #include "TransformComponent.h"
+#include "ParticleEffect_Velocity.h"
+#include "ParticleEffect_Acceleration.h"
+#include "ParticleEffect_Size.h"
+#include "ParticleEffect_Color.h"
+#include "BillboardParticleComponent.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -346,9 +351,15 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 
 		if (isEmitterCubical)
 		{
+			ImGui::PushItemWidth(200);
 			ImGui::SliderFloat("Spread distance X", &spreadDistanceX, 0.0f, 10.0f, "%.2f");
+			ImGui::PopItemWidth();
+			ImGui::PushItemWidth(200);
 			ImGui::SliderFloat("Spread distance Y", &spreadDistanceY, 0.0f, 10.0f, "%.2f");
+			ImGui::PopItemWidth();
+			ImGui::PushItemWidth(200);
 			ImGui::SliderFloat("Spread distance Z", &spreadDistanceZ, 0.0f, 10.0f, "%.2f");
+			ImGui::PopItemWidth();
 		}
 
 		ImGui::Spacing();
@@ -362,23 +373,34 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
 
 		guiName = "Particles per Second" + suffixLabel;
+		ImGui::PushItemWidth(200);
 		if (ImGui::DragFloat(guiName.c_str(), &particlesPerSecond))
 			SetParticlesPerSecond(particlesPerSecond);
+		ImGui::PopItemWidth();
 
 		guiName = "Max Particles" + suffixLabel;
+		ImGui::PushItemWidth(200);
 		ImGui::DragInt(guiName.c_str(), &maxParticles, 1.0f, 0.0f);
 		if (ImGui::IsItemDeactivated())
 			if(maxParticles > 0)
 				SetUpBuffers();
+		ImGui::PopItemWidth();
 
 
 		guiName = "Particle lifetime" + suffixLabel;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
+		ImGui::PopItemWidth();
 
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Velocity", particleReference.velocity.ptr(), 0.01f, -1.0f, 1.0f);
+		ImGui::PopItemWidth();
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
-
+		ImGui::PopItemWidth();
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
+		ImGui::PopItemWidth();
 	
 		/*guiName = "Color (RGBA)" + suffixLabel;
 		ImGui::ColorEdit4("Beginning Color", particleReference.colorBegin.ptr());

@@ -37,11 +37,15 @@ void ParticleEffect_Color::OnEditor(int emitterIndex)
 
 		suffixLabel = "Start Color##ColorOverLife";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(150);
 		ImGui::ColorEdit4(suffixLabel.c_str(), startColor.ptr());
+		ImGui::PopItemWidth();
 
 		suffixLabel = "End Color##ColorOverLife";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(150);
 		ImGui::ColorEdit4(suffixLabel.c_str(), endColor.ptr());
+		ImGui::PopItemWidth();
 
 		ImGui::Unindent();
 	}

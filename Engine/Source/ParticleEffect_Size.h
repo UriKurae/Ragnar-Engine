@@ -1,5 +1,5 @@
 #pragma once
-#include "ParticleEffect.h"\
+#include "ParticleEffect.h"
 #include <Imgui/imgui.h>
 
 class ParticleEffect_Size : public ParticleEffect
