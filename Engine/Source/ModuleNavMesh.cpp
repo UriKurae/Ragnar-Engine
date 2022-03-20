@@ -622,6 +622,7 @@ std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 d
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
 	agentProp->path = calculatedPath;
+	agentProp->path.erase(agentProp->path.begin());
 
 	return calculatedPath;
 }
@@ -728,18 +729,37 @@ bool Pathfinder::MovePath(NavAgentComponent* agent)
 
 bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 {
+	btRigidBody* rigidBody = agent->owner->GetComponent<RigidBodyComponent>()->GetBody();
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 	float3 direction = destination - origin;
 	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
-	direction = direction.Normalized() * agent->agentProperties->speed;
-	
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
+	direction.Normalize();
+
+	rigidBody->activate(true);
+	//rigidBody->setAngularVelocity();
+
+	rigidBody->getWorldTransform().setRotation(Quat::RotateY(0));
+
+	//Angle
+	float2 forward = { 0, 1 };
+	float angle = forward.AngleBetween({ direction.x, direction.z });
+
+	if (direction.x < 0) angle = angle * (-1);
+	rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+	//Movement
+	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
 
 	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
 
 	return false;
+}
+
+bool Pathfinder::RotateTo(btRigidBody* rigidBody, float3 direction, float speed)
+{
+
+	return true;
 }
 
 
