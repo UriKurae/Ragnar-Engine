@@ -42,6 +42,7 @@ public:
 	Mesh* IsMeshLoaded(std::string path);
 	void RemoveMesh(Mesh* mesh);
 
+
 private:
 	ResourceManager();
 

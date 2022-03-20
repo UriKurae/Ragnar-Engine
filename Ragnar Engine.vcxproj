@@ -243,6 +243,7 @@
     <ClInclude Include="Engine\Source\AudioManager.h" />
     <ClInclude Include="Engine\Source\AudioReverbZoneComponent.h" />
     <ClInclude Include="Engine\Source\AudioSourceComponent.h" />
+    <ClInclude Include="Engine\Source\BillboardParticleComponent.h" />
     <ClInclude Include="Engine\Source\Bone.h" />
     <ClInclude Include="Engine\Source\BufferLayout.h" />
     <ClInclude Include="Engine\Source\ButtonComponent.h" />
@@ -254,7 +255,6 @@
     <ClInclude Include="Engine\Source\ImageComponent.h" />
     <ClInclude Include="Engine\Source\LightComponent.h" />
     <ClInclude Include="Engine\Source\Lights.h" />
-    <ClInclude Include="Engine\Source\Material.h" />
     <ClInclude Include="Engine\Source\FogWarMenu.h" />
     <ClInclude Include="Engine\Source\GameObjectCommands.h" />
     <ClInclude Include="Engine\Source\Color.h" />
@@ -293,6 +293,15 @@
     <ClInclude Include="Engine\Source\ModuleScene.h" />
     <ClInclude Include="Engine\Source\ModuleUI.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
+    <ClInclude Include="Engine\Source\NavAgentBindings.h" />
+    <ClInclude Include="Engine\Source\Particle.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect_Acceleration.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect_Color.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect_Size.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect_Velocity.h" />
+    <ClInclude Include="Engine\Source\ParticleEmitter.h" />
+    <ClInclude Include="Engine\Source\ParticleSystemComponent.h" />
     <ClInclude Include="Engine\Source\NavAgentComponent.h" />
     <ClInclude Include="Engine\Source\MonoManager.h" />
     <ClInclude Include="Engine\Source\NavigatorMenu.h" />
@@ -434,6 +443,7 @@
     <ClCompile Include="Engine\Source\AudioManager.cpp" />
     <ClCompile Include="Engine\Source\AudioReverbZoneComponent.cpp" />
     <ClCompile Include="Engine\Source\AudioSourceComponent.cpp" />
+    <ClCompile Include="Engine\Source\BillboardParticleComponent.cpp" />
     <ClCompile Include="Engine\Source\Bone.cpp" />
     <ClCompile Include="Engine\Source\ButtonComponent.cpp" />
     <ClCompile Include="Engine\Source\CameraComponent.cpp" />
@@ -462,7 +472,6 @@
     <ClCompile Include="Engine\Source\log.cpp" />
     <ClCompile Include="Engine\Source\Main.cpp" />
     <ClCompile Include="Engine\Source\MainMenuBar.cpp" />
-    <ClCompile Include="Engine\Source\Material.cpp" />
     <ClCompile Include="Engine\Source\MaterialComponent.cpp" />
     <ClCompile Include="Engine\Source\Mesh.cpp" />
     <ClCompile Include="Engine\Source\MeshComponent.cpp" />
@@ -477,6 +486,13 @@
     <ClCompile Include="Engine\Source\ModuleScene.cpp" />
     <ClCompile Include="Engine\Source\ModuleUI.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect_Acceleration.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect_Color.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect_Size.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect_Velocity.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEmitter.cpp" />
+    <ClCompile Include="Engine\Source\ParticleSystemComponent.cpp" />
     <ClCompile Include="Engine\Source\MonoManager.cpp" />
     <ClCompile Include="Engine\Source\NavigatorMenu.cpp" />
     <ClCompile Include="Engine\Source\ScriptComponent.cpp" />

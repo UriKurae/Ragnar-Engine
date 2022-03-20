@@ -39,16 +39,13 @@ private:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 
-	VertexArray* vertexArray;
+	VertexArray* vao;
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
-	unsigned int tbo;
-	Shader* shader;
 
 	// Bones
 	std::map<std::string, BoneInfo> bones;
 	unsigned int numBones;
-
 
 	std::vector<unsigned int> bonesUid;
 

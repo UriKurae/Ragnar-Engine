@@ -32,7 +32,6 @@ public:
 	inline void ChangePosition() { changePosition = true; }
 private:
 	bool changePosition;
-
 	TransformComponent* transform;
 
 	// Audio settings

@@ -8,6 +8,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": []
         },
         {
@@ -18,6 +20,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -72,6 +76,115 @@
             ]
         },
         {
+            "UUID": 2128337088,
+            "Parent UUID": 417171234,
+            "Name": "cameraController",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.26639080047607422,
+                        11.183857917785645,
+                        13.648064613342285
+                    ],
+                    "Quaternion": [
+                        0.25525948405265808,
+                        -0.58351808786392212,
+                        0.28791782259941101,
+                        0.71515911817550659
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.4142135381698608,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 0.9574846625328064,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        -0.26639080047607422,
+                        11.183857917785645,
+                        13.648064613342285
+                    ],
+                    "Type": 3,
+                    "Zoom": 18,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Movement Speed": 0.5,
+                    "Target Pos": 2021177439,
+                    "Vertical Angle": -56,
+                    "Lock Vertical Angle": false,
+                    "Rotation Speed": 0.5,
+                    "Radius": 20,
+                    "Horizontal Angle": 556.39971923828125,
+                    "Right Click Rotation": true,
+                    "Arrow Rotation": false,
+                    "WASD Movement": false,
+                    "Border Movement": false,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0
+                }
+            ]
+        },
+        {
             "UUID": 2021177439,
             "Parent UUID": 417171234,
             "Name": "Player",
@@ -79,6 +192,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Player",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -182,13 +297,44 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 81921376,
+                    "pointer": 168038016,
                     "type": 4,
                     "componentTable": 0,
-                    "velocity": 5,
+                    "velocity": 1000,
                     "force": 100,
                     "rockSoundRadius": 4,
                     "canThrowKnife": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Abilities",
+                    "pointer": 168037848,
+                    "type": 4,
+                    "componentTable": 0,
+                    "force": 100,
+                    "rockSoundRadius": 4
+                },
+                {
+                    "Type": 19,
+                    "Active": true,
+                    "Radius": 0.30000001192092896,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 2,
+                    "AngularSpeed": 1,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "Target": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "TargetSet": false,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
                 }
             ]
         },
@@ -200,6 +346,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -236,6 +384,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -313,6 +463,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -389,6 +541,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -465,6 +619,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -541,6 +697,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -588,6 +746,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -664,6 +824,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -740,6 +902,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -776,6 +940,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -852,6 +1018,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -928,6 +1096,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1004,6 +1174,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1080,6 +1252,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1116,6 +1290,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1190,6 +1366,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1264,6 +1442,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1338,6 +1518,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1385,6 +1567,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Active": true,
@@ -1396,7 +1580,7 @@
                     ],
                     "Scale": [
                         11.606715202331543,
-                        5.9107465744018555,
+                        5.7117714881896973,
                         1
                     ],
                     "rotationEuler": [
@@ -1426,6 +1610,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Active": true,
@@ -1437,7 +1623,7 @@
                     ],
                     "Scale": [
                         9.0242204666137695,
-                        5.9107465744018555,
+                        5.7117714881896973,
                         1
                     ],
                     "rotationEuler": [
@@ -1456,111 +1642,6 @@
                     "Path": "Assets\/Resources\/UI_chra.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 2128337088,
-            "Parent UUID": 417171234,
-            "Name": "cameraController",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -4.9477472305297852,
-                        0,
-                        -2.2581052780151367
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 360238450,
-            "Parent UUID": 2128337088,
-            "Name": "Camera",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -0.26639080047607422,
-                        11.183857917785645,
-                        13.648064613342285
-                    ],
-                    "Quaternion": [
-                        -0.14068865776062012,
-                        -0.57568717002868652,
-                        0.37059000134468079,
-                        0.71516019105911255
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1.4142135381698608,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Near Plane": 1,
-                    "Far Plane": 100,
-                    "Vertical Fov": 0.92976027727127075,
-                    "Horizontal Fov": 1.5707963705062866,
-                    "Camera Pos": [
-                        -0.26639080047607422,
-                        11.183857917785645,
-                        13.648064613342285
-                    ],
-                    "Type": 3,
-                    "Zoom": 24,
-                    "Free Movement": true,
-                    "Default Target Pos": [
-                        -4.9477472305297852,
-                        0,
-                        -2.2581052780151367
-                    ],
-                    "Movement Speed": 0.5,
-                    "Target Pos": 2021177439,
-                    "Vertical Angle": -56,
-                    "Lock Vertical Angle": false,
-                    "Rotation Speed": 0.5,
-                    "Radius": 20,
-                    "Horizontal Angle": 556.39971923828125,
-                    "Right Click Rotation": true,
-                    "Arrow Rotation": false,
-                    "WASD Movement": false,
-                    "Border Movement": false,
-                    "Shake Strength": 0.60000002384185791,
-                    "Shake Duration": 1,
-                    "Shake Smooth": 0
                 }
             ]
         }

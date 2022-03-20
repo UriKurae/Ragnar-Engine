@@ -14,6 +14,7 @@ enum class CollisionType
 	CYLINDER = 3,
 	CONE = 4,
 	STATIC_PLANE = 5,
+	MESH = 6
 };
 
 class RigidBodyComponent : public Component
@@ -37,8 +38,9 @@ public:
 	void UpdateCollisionMesh();
 
 	void SetSphereRadius(float sphereRadius);
+	void SetHeight(float height);
 
-	void CreateBody();
+	void CreateBody(bool changeShape = true);
 	void SetPhysicsProperties();
 	inline float GetMass() { return mass; };
 	void SetMass(float mass);
@@ -58,7 +60,7 @@ public:
 	inline bool GetOnCollision() { return onCollision; };
 
 	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
-	inline bool GetCollisionTarget() { return collisionTarget; };
+	inline RigidBodyComponent* GetCollisionTarget() { return collisionTarget; };
 
 public:
 	bool useGravity = true;

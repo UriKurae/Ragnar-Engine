@@ -3,27 +3,31 @@
 
 #include "Mesh.h"
 #include "TransformComponent.h"
+#include "NavAgentComponent.h"
+#include "C_RigidBody.h"
 #include "ModuleNavMesh.h"
 #include "ModuleScene.h"
 #include "MeshComponent.h"
+#include "ModuleInput.h"
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
-#include "InputGeom.h"
 #include "Detour/DetourNavMeshBuilder.h"
 #include "Detour/DetourCommon.h"
 #include "DebugUtils/SampleInterfaces.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_sdl.h"
 
 ModuleNavMesh::ModuleNavMesh(bool start_enabled) : Module(start_enabled),
-geometry(nullptr), navMeshBuilder(nullptr)
+geometry(nullptr), navMeshBuilder(nullptr), buildSettings(nullptr), pathfinder(nullptr)
 {
 	name = "NavMesh";
 	geometry = new InputGeom();
 	geometry->SetMesh();
 	buildSettings = new BuildSettings;
+	pathfinder = new Pathfinder;
 }
 
 ModuleNavMesh::~ModuleNavMesh()
@@ -31,6 +35,7 @@ ModuleNavMesh::~ModuleNavMesh()
 	CleanUp();
 
 	RELEASE(buildSettings);
+	RELEASE(pathfinder);
 }
 
 bool ModuleNavMesh::Start()
@@ -86,6 +91,46 @@ bool ModuleNavMesh::SaveConfig(JsonParsing& node)
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "tileSize", buildSettings->tileSize);
 
 	return true;
+}
+
+void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton)
+{
+	if (navMeshBuilder == nullptr)
+		return;
+
+	if (geometry->getChunkyMesh() == nullptr && navMeshBuilder->GetNavMesh() == nullptr)
+	{
+		//return;
+		BakeNavMesh();
+		LOG(LogType::L_WARNING, "No chunky mesh set, one has been baked to avoid crashes");
+	}
+
+	float hitTime;
+	bool hit = geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime);
+
+	float3 hitPoint;
+	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
+	if (hit && pathfinder->agents.size() > 0)
+	{
+		if (clickedMouseButton == SDL_BUTTON_LEFT)
+		{
+			//Just set the Player Target!!!
+			pathfinder->agents[0]->agentProperties->targetPos = hitPoint;
+			pathfinder->agents[0]->agentProperties->targetPosSet = true;
+		}
+		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
+		{
+			//pathfinder->startPosition = hitPoint;
+			//pathfinder->startPosSet = true;
+
+			//if (pathfinder->endPosSet)
+			//{
+			//	pathfinder->CalculatePath();
+			//	std::vector<float3> path;
+			//	pathfinder->CalculatePath(pathfinder->startPosition, pathfinder->endPosition, path);
+			//}
+		}
+	}
 }
 
 void ModuleNavMesh::ClearNavMeshes()
@@ -150,7 +195,7 @@ void ModuleNavMesh::BakeNavMesh()
 		navMeshBuilder->HandleSettings();
 		navMeshBuilder->HandleBuild();
 
-		pathfinder.Init(navMeshBuilder);
+		pathfinder->Init(navMeshBuilder);
 	}
 
 	gameObjects.clear();
@@ -181,17 +226,9 @@ static float frand()
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 Pathfinder::Pathfinder() : m_navQuery(nullptr),
-m_navMesh(nullptr), m_navMeshBuilder(nullptr), endPosSet(false), startPosSet(false),
-m_npolys(0), m_nsmoothPath(0), pathType(PathType::STRAIGHT),
-m_startRef(0), m_endRef(0), 
-m_nstraightPath(0), m_pathIterNum(0)
+m_navMesh(nullptr), m_navMeshBuilder(nullptr)
 {
-	m_polyPickExt[0] = 32.0f;
-	m_polyPickExt[1] = 32.0f;
-	m_polyPickExt[2] = 32.0f;
 
-	startPosition = float3::zero;
-	endPosition = float3::zero;
 }
 
 Pathfinder::~Pathfinder()
@@ -202,8 +239,8 @@ Pathfinder::~Pathfinder()
 	m_navMesh = nullptr;
 	m_navQuery = nullptr;
 	m_navMeshBuilder = nullptr;
-	startPosSet = false;
-	endPosSet = false;
+
+	agents.clear();
 }
 
 void Pathfinder::Init(NavMeshBuilder* builder)
@@ -376,47 +413,61 @@ static int fixupShortcuts(dtPolyRef* path, int npath, dtNavMeshQuery* navQuery)
 	return npath;
 }
 
-bool Pathfinder::CalculatePath()
+std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination)
 {
-	bool validPath = true;
+	std::vector<float3> calculatedPath;
 
-	if (m_navMesh == nullptr)
-		return false;
+	NavAgent* agentProp = agent->agentProperties;
+	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 
-	m_navQuery->findNearestPoly(startPosition.ptr(), m_polyPickExt, &m_filter, &m_startRef, nullptr);
-	m_navQuery->findNearestPoly(endPosition.ptr(), m_polyPickExt, &m_filter, &m_endRef, nullptr);
+	dtStatus status;
+	const float m_polyPickExt[3] = { 2,4,2 };
 
-	if (pathType == PathType::SMOOTH)
+	if (m_navQuery == nullptr)
+		return calculatedPath;
+
+	status = m_navQuery->findNearestPoly(origin.ptr(), m_polyPickExt, &m_filter, &agentProp->m_startRef, nullptr);
+	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
+		LOG(LogType::L_ERROR, "Could not find a near poly to start path");
+		return calculatedPath;
+	}
+
+	status = m_navQuery->findNearestPoly(destination.ptr(), m_polyPickExt, &m_filter, &agentProp->m_endRef, nullptr);
+	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
+		LOG(LogType::L_ERROR, "Could not find a near poly to end path");
+		return calculatedPath;
+	}
+
+	if (agentProp->pathType == PathType::SMOOTH)
 	{
-		m_pathIterNum = 0;
-		if (startPosSet && endPosSet && m_startRef && m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
-			m_navQuery->findPath(m_startRef, m_endRef, startPosition.ptr(), endPosition.ptr(), &m_filter, m_polys, &m_npolys, MAX_POLYS);
+			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(), destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
 
-			m_nsmoothPath = 0;
+			agentProp->m_nsmoothPath = 0;
 
-			if (m_npolys)
+			if (agentProp->m_npolys)
 			{
 				// Iterate over the path to find smooth path on the detail mesh surface.
 				dtPolyRef polys[MAX_POLYS];
-				memcpy(polys, m_polys, sizeof(dtPolyRef) * m_npolys);
-				int npolys = m_npolys;
+				memcpy(polys, agentProp->m_polys, sizeof(dtPolyRef) * agentProp->m_npolys);
+				int npolys = agentProp->m_npolys;
 
 				float iterPos[3], targetPos[3];
-				m_navQuery->closestPointOnPoly(m_startRef, startPosition.ptr(), iterPos, 0);
-				m_navQuery->closestPointOnPoly(polys[npolys - 1], endPosition.ptr(), targetPos, 0);
+				m_navQuery->closestPointOnPoly(agentProp->m_startRef, origin.ptr(), iterPos, 0);
+				m_navQuery->closestPointOnPoly(polys[npolys - 1], destination.ptr(), targetPos, 0);
 
 				static const float STEP_SIZE = 0.5f;
 				static const float SLOP = 0.01f;
 
-				m_nsmoothPath = 0;
+				agentProp->m_nsmoothPath = 0;
 
-				dtVcopy(&m_smoothPath[m_nsmoothPath * 3], iterPos);
-				m_nsmoothPath++;
+				dtVcopy(&agentProp->m_smoothPath[agentProp->m_nsmoothPath * 3], iterPos);
+				agentProp->m_nsmoothPath++;
 
 				// Move towards target a small advancement at a time until target reached or
 				// when ran out of memory to store the path.
-				while (npolys && m_nsmoothPath < MAX_SMOOTH)
+				while (npolys && agentProp->m_nsmoothPath < MAX_SMOOTH)
 				{
 					// Find location to steer towards.
 					float steerPos[3];
@@ -462,10 +513,10 @@ bool Pathfinder::CalculatePath()
 					{
 						// Reached end of path.
 						dtVcopy(iterPos, targetPos);
-						if (m_nsmoothPath < MAX_SMOOTH)
+						if (agentProp->m_nsmoothPath < MAX_SMOOTH)
 						{
-							dtVcopy(&m_smoothPath[m_nsmoothPath * 3], iterPos);
-							m_nsmoothPath++;
+							dtVcopy(&agentProp->m_smoothPath[agentProp->m_nsmoothPath * 3], iterPos);
+							agentProp->m_nsmoothPath++;
 						}
 						break;
 					}
@@ -491,15 +542,15 @@ bool Pathfinder::CalculatePath()
 						dtStatus status = m_navMesh->getOffMeshConnectionPolyEndPoints(prevRef, polyRef, startPos, endPos);
 						if (dtStatusSucceed(status))
 						{
-							if (m_nsmoothPath < MAX_SMOOTH)
+							if (agentProp->m_nsmoothPath < MAX_SMOOTH)
 							{
-								dtVcopy(&m_smoothPath[m_nsmoothPath * 3], startPos);
-								m_nsmoothPath++;
+								dtVcopy(&agentProp->m_smoothPath[agentProp->m_nsmoothPath * 3], startPos);
+								agentProp->m_nsmoothPath++;
 								// Hack to make the dotted path not visible during off-mesh connection.
-								if (m_nsmoothPath & 1)
+								if (agentProp->m_nsmoothPath & 1)
 								{
-									dtVcopy(&m_smoothPath[m_nsmoothPath * 3], startPos);
-									m_nsmoothPath++;
+									dtVcopy(&agentProp->m_smoothPath[agentProp->m_nsmoothPath * 3], startPos);
+									agentProp->m_nsmoothPath++;
 								}
 							}
 							// Move position at the other side of the off-mesh link.
@@ -511,197 +562,184 @@ bool Pathfinder::CalculatePath()
 					}
 
 					// Store results.
-					if (m_nsmoothPath < MAX_SMOOTH)
+					if (agentProp->m_nsmoothPath < MAX_SMOOTH)
 					{
-						dtVcopy(&m_smoothPath[m_nsmoothPath * 3], iterPos);
-						m_nsmoothPath++;
+						dtVcopy(&agentProp->m_smoothPath[agentProp->m_nsmoothPath * 3], iterPos);
+						agentProp->m_nsmoothPath++;
 					}
 				}
 			}
 
-		}
-		else
-		{
-			m_npolys = 0;
-			m_nsmoothPath = 0;
-		}
-	}
-	else if (pathType == PathType::STRAIGHT)
-	{
-		if (startPosSet && endPosSet && m_startRef && m_endRef)
-		{
-			dtStatus status = m_navQuery->findPath(m_startRef, m_endRef, startPosition.ptr(),
-				endPosition.ptr(), &m_filter, m_polys, &m_npolys, MAX_POLYS);
-
-			if (dtStatusPartial(status) || dtStatusFailed(status))
-				validPath = false;
-
-			m_nstraightPath = 0;
-			if (m_npolys)
-			{
-				// In case of partial path, make sure the end point is clamped to the last polygon.
-				float epos[3];
-				dtVcopy(epos, endPosition.ptr());
-				if (m_polys[m_npolys - 1] != m_endRef)
-					m_navQuery->closestPointOnPoly(m_polys[m_npolys - 1], endPosition.ptr(), epos, 0);
-
-				m_navQuery->findStraightPath(startPosition.ptr(), epos, m_polys, m_npolys,
-					m_straightPath, m_straightPathFlags,
-					m_straightPathPolys, &m_nstraightPath, MAX_POLYS, m_straightPathOptions);
+			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
+				LOG(LogType::L_ERROR, "Could not create smooth path");
+				calculatedPath.clear();
+				return calculatedPath;
 			}
 		}
 		else
 		{
-			m_npolys = 0;
-			m_nstraightPath = 0;
-			validPath = false;
+			agentProp->m_npolys = 0;
+			agentProp->m_nsmoothPath = 0;
+		}
+	}
+	else if (agentProp->pathType == PathType::STRAIGHT)
+	{
+		if (agentProp->m_startRef && agentProp->m_endRef)
+		{
+			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(),
+				destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
+
+			agentProp->m_nstraightPath = 0;
+			if (agentProp->m_npolys)
+			{
+				// In case of partial path, make sure the end point is clamped to the last polygon.
+				float epos[3];
+				dtVcopy(epos, destination.ptr());
+				if (agentProp->m_polys[agentProp->m_npolys - 1] != agentProp->m_endRef)
+					m_navQuery->closestPointOnPoly(agentProp->m_polys[agentProp->m_npolys - 1], destination.ptr(), epos, 0);
+
+				m_navQuery->findStraightPath(origin.ptr(), epos, agentProp->m_polys, agentProp->m_npolys,
+					agentProp->m_straightPath, agentProp->m_straightPathFlags,
+					agentProp->m_straightPathPolys, &agentProp->m_nstraightPath, MAX_POLYS);
+			}
+
+			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
+				LOG(LogType::L_ERROR, "Could not create straight path");
+				calculatedPath.clear();
+				return calculatedPath;
+			}
+		}
+		else
+		{
+			agentProp->m_npolys = 0;
+			agentProp->m_nstraightPath = 0;
 		}
 	}
 
-	if (validPath) {
-		LOG(LogType::L_NORMAL, "Valid Path");}
-	else {
-		LOG(LogType::L_ERROR, "Invalid Path");}
+	calculatedPath.resize(agentProp->m_nstraightPath);
+	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
 
-	return validPath;
+	agentProp->targetPos = destination;
+	agentProp->targetPosSet = false;
+	agentProp->path = calculatedPath;
+
+	return calculatedPath;
 }
 
-bool Pathfinder::CalculatePath(float3 origin, float3 destination, std::vector<float3>& path)
+void Pathfinder::RenderPath(NavAgentComponent* agent)
 {
-	dtStatus status;
-	float startNearest[3];
-	float endNearest[3];
-
-	if (m_navQuery == nullptr)
-		return false;
-
-	status = m_navQuery->findNearestPoly(origin.ptr(), m_polyPickExt, &m_filter, &m_startRef, startNearest);
-	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
-		LOG(LogType::L_ERROR, "Could not find a near poly to start path");
-		return false;}
-
-	status = m_navQuery->findNearestPoly(destination.ptr(), m_polyPickExt, &m_filter, &m_endRef, endNearest);
-	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
-		LOG(LogType::L_ERROR, "Could not find a near poly to end path");
-		return false;}
-
-	status = m_navQuery->findPath(m_startRef, m_endRef, origin.ptr(),
-		destination.ptr(), &m_filter, m_polys, &m_npolys, MAX_POLYS);
-
-	m_nstraightPath = 0;
-	if (m_npolys)
-	{
-		// In case of partial path, make sure the end point is clamped to the last polygon.
-		float epos[3];
-		dtVcopy(epos, destination.ptr());
-		if (m_polys[m_npolys - 1] != m_endRef)
-			m_navQuery->closestPointOnPoly(m_polys[m_npolys - 1], destination.ptr(), epos, 0);
-
-		m_navQuery->findStraightPath(origin.ptr(), epos, m_polys, m_npolys,
-			m_straightPath, m_straightPathFlags,
-			m_straightPathPolys, &m_nstraightPath, MAX_POLYS, m_straightPathOptions);
-	}
-
-	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || m_nstraightPath == 0) {
-		//LOG(LogType::L_ERROR, "Could not create straight path");
-		path.clear();
-		return false;
-	}
-
-	path.resize(m_nstraightPath);
-	memcpy(path.data(), m_straightPath, sizeof(float) * m_nstraightPath * 3);
-
-	startPosition = origin;
-	endPosition = destination;
-	startPosSet = true;
-	endPosSet = true;
-}
-
-void Pathfinder::RenderPath()
-{
+	NavAgent* agentProp = agent->agentProperties;
 	DebugDrawGL dd;
 
 	static const unsigned int startCol = duRGBA(128, 25, 0, 192);
 	static const unsigned int endCol = duRGBA(51, 102, 0, 129);
 	static const unsigned int pathCol = duRGBA(0, 0, 0, 64);
 
-	if (pathType == PathType::SMOOTH)
+	if (agentProp->pathType == PathType::SMOOTH)
 	{
-		duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_startRef, startCol);
-		duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_endRef, endCol);
+		duDebugDrawNavMeshPoly(&dd, *m_navMesh, agentProp->m_startRef, startCol);
+		duDebugDrawNavMeshPoly(&dd, *m_navMesh, agentProp->m_endRef, endCol);
 
-		if (m_npolys)
+		if (agentProp->m_npolys)
 		{
-			for (int i = 0; i < m_npolys; ++i)
+			for (int i = 0; i < agentProp->m_npolys; ++i)
 			{
-				if (m_polys[i] == m_startRef || m_polys[i] == m_endRef)
+				if (agentProp->m_polys[i] == agentProp->m_startRef || agentProp->m_polys[i] == agentProp->m_endRef)
 					continue;
-				duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_polys[i], pathCol);
+				duDebugDrawNavMeshPoly(&dd, *m_navMesh, agentProp->m_polys[i], pathCol);
 			}
 		}
 
-		if (m_nsmoothPath)
+		if (agentProp->m_nsmoothPath)
 		{
 			dd.depthMask(false);
 			const unsigned int spathCol = duRGBA(0, 0, 0, 220);
 			dd.begin(DU_DRAW_LINES, 3.0f);
-			for (int i = 0; i < m_nsmoothPath; ++i)
-				dd.vertex(m_smoothPath[i * 3], m_smoothPath[i * 3 + 1] + 0.1f, m_smoothPath[i * 3 + 2], spathCol);
+			for (int i = 0; i < agentProp->m_nsmoothPath; ++i)
+				dd.vertex(agentProp->m_smoothPath[i * 3], agentProp->m_smoothPath[i * 3 + 1] + 0.1f, agentProp->m_smoothPath[i * 3 + 2], spathCol);
 			dd.end();
 			dd.depthMask(true);
 		}
 	}
-	else if (pathType == PathType::STRAIGHT)
+	else if (agentProp->pathType == PathType::STRAIGHT)
 	{
-		duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_startRef, startCol);
-		duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_endRef, endCol);
+		duDebugDrawNavMeshPoly(&dd, *m_navMesh, agentProp->m_startRef, startCol);
+		duDebugDrawNavMeshPoly(&dd, *m_navMesh, agentProp->m_endRef, endCol);
 
-		if (m_npolys)
+		if (agentProp->m_npolys)
 		{
-			for (int i = 0; i < m_npolys; ++i)
+			for (int i = 0; i < agentProp->m_npolys; ++i)
 			{
-				if (m_polys[i] == m_startRef || m_polys[i] == m_endRef)
+				if (agentProp->m_polys[i] == agentProp->m_startRef || agentProp->m_polys[i] == agentProp->m_endRef)
 					continue;
-				duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_polys[i], pathCol);
+				duDebugDrawNavMeshPoly(&dd, *m_navMesh, agentProp->m_polys[i], pathCol);
 			}
 		}
 
-		if (m_nstraightPath)
+		if (agentProp->m_nstraightPath)
 		{
 			dd.depthMask(false);
 			const unsigned int spathCol = duRGBA(64, 16, 0, 220);
 			const unsigned int offMeshCol = duRGBA(128, 96, 0, 220);
 			dd.begin(DU_DRAW_LINES, 2.0f);
-			for (int i = 0; i < m_nstraightPath - 1; ++i)
+			for (int i = 0; i < agentProp->m_nstraightPath - 1; ++i)
 			{
 				unsigned int col;
-				if (m_straightPathFlags[i] & DT_STRAIGHTPATH_OFFMESH_CONNECTION)
+				if (agentProp->m_straightPathFlags[i] & DT_STRAIGHTPATH_OFFMESH_CONNECTION)
 					col = offMeshCol;
 				else
 					col = spathCol;
 
-				dd.vertex(m_straightPath[i * 3], m_straightPath[i * 3 + 1] + 0.4f, m_straightPath[i * 3 + 2], col);
-				dd.vertex(m_straightPath[(i + 1) * 3], m_straightPath[(i + 1) * 3 + 1] + 0.4f, m_straightPath[(i + 1) * 3 + 2], col);
+				dd.vertex(agentProp->m_straightPath[i * 3], agentProp->m_straightPath[i * 3 + 1] + 0.4f, agentProp->m_straightPath[i * 3 + 2], col);
+				dd.vertex(agentProp->m_straightPath[(i + 1) * 3], agentProp->m_straightPath[(i + 1) * 3 + 1] + 0.4f, agentProp->m_straightPath[(i + 1) * 3 + 2], col);
 			}
 			dd.end();
 			dd.begin(DU_DRAW_POINTS, 6.0f);
-			for (int i = 0; i < m_nstraightPath; ++i)
+			for (int i = 0; i < agentProp->m_nstraightPath; ++i)
 			{
 				unsigned int col;
-				if (m_straightPathFlags[i] & DT_STRAIGHTPATH_START)
+				if (agentProp->m_straightPathFlags[i] & DT_STRAIGHTPATH_START)
 					col = startCol;
-				else if (m_straightPathFlags[i] & DT_STRAIGHTPATH_END)
+				else if (agentProp->m_straightPathFlags[i] & DT_STRAIGHTPATH_END)
 					col = endCol;
-				else if (m_straightPathFlags[i] & DT_STRAIGHTPATH_OFFMESH_CONNECTION)
+				else if (agentProp->m_straightPathFlags[i] & DT_STRAIGHTPATH_OFFMESH_CONNECTION)
 					col = offMeshCol;
 				else
 					col = spathCol;
-				dd.vertex(m_straightPath[i * 3], m_straightPath[i * 3 + 1] + 0.4f, m_straightPath[i * 3 + 2], col);
+				dd.vertex(agentProp->m_straightPath[i * 3], agentProp->m_straightPath[i * 3 + 1] + 0.4f, agentProp->m_straightPath[i * 3 + 2], col);
 			}
 			dd.end();
 			dd.depthMask(true);
 		}
 	}
+}
+
+bool Pathfinder::MovePath(NavAgentComponent* agent)
+{
+	if (!agent->agentProperties->path.empty() && 
+		MoveTo(agent, agent->agentProperties->path[0]))
+	{
+		agent->agentProperties->path.erase(agent->agentProperties->path.begin());
+		if (agent->agentProperties->path.empty()) return true;
+	}
+
+	return false;
+}
+
+bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
+{
+	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
+	float3 direction = destination - origin;
+	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
+	direction = direction.Normalized() * agent->agentProperties->speed;
+	
+	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
+	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
+
+	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
+		return true;
+
+	return false;
 }
 
 
