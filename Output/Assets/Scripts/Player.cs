@@ -103,7 +103,7 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        Debug.Log("OnTrigger");
+        //Debug.Log("OnTrigger");
     }
     public void OnCollisionEnter(Rigidbody other)
     {
@@ -111,7 +111,7 @@ public class Player : RagnarComponent
     }
     public void OnCollision(Rigidbody other)
     {
-        Debug.Log("OnCollision");
+        //Debug.Log("OnCollision");
     }
 }
 

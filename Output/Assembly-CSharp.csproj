@@ -62,9 +62,9 @@
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
 		<Compile Include="Assets\Scripts\EnemyPatrol.cs" />
 		<Compile Include="Assets\Scripts\Player.cs" />
-		<Compile Include="Assets\Scripts\test2.cs" />
 		<Compile Include="Assets\Scripts\Abilities.cs" />
 		<Compile Include="Assets\Scripts\Knife.cs" />
+		<Compile Include="Assets\Scripts\Rock.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Assembly-CSharp\App.config" />

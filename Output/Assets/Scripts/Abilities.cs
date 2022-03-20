@@ -89,19 +89,21 @@ public class Abilities : RagnarComponent
 
     private void ThrowRock()
     {
-        createSoundArea = true;
+        InternalCalls.InstancePrefab("Assets/Prefabs/Rock.rgprefab");
 
-        Vector3 pos = gameObject.transform.globalPosition;
-        pos.y += 1;
-        rock = InternalCalls.Create3DObject("Rock", (int)PrimitiveType.CUBE, pos);
-        rock.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
+        //createSoundArea = true;
 
-        Rigidbody rockRb = rock.CreateComponent<Rigidbody>();
-        rockRb.IgnoreCollision(gameObject, true);
-        Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
-        rockRb.ApplyCentralForce(vectorDir.normalized * force);
+        //Vector3 pos = gameObject.transform.globalPosition;
+        //pos.y += 1;
+        //rock = InternalCalls.Create3DObject("Rock", (int)PrimitiveType.CUBE, pos);
+        //rock.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
 
-        rockCooldown = 2f;
+        //Rigidbody rockRb = rock.CreateComponent<Rigidbody>();
+        //rockRb.IgnoreCollision(gameObject, true);
+        //Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
+        //rockRb.ApplyCentralForce(vectorDir.normalized * force);
+
+        //rockCooldown = 2f;
     }
 
     // With this method we create an spherical Trigger.
