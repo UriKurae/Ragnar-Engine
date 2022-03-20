@@ -100,8 +100,11 @@ public class Player : RagnarComponent
 
     public void OnTriggerEnter(Rigidbody other)
     {
-        // Only for testing purposes
-        other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
+        Debug.Log("OnTriggerEnter");
+    }
+    public void OnCollisionEnter(Rigidbody other)
+    {
+        Debug.Log("OnCollisionEnter");
     }
 }
 

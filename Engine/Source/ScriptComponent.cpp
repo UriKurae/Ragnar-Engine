@@ -426,6 +426,16 @@ void ScriptComponent::CallOnTriggerEnter(RigidBodyComponent* other)
 	}
 }
 
+void ScriptComponent::CallOnCollisionEnter(RigidBodyComponent* other)
+{
+	if (onCollisionEnterMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onCollisionEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+
 void ScriptComponent::LoadScriptData(const char* scriptName)
 {
 	methods.clear();
@@ -461,6 +471,10 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	MonoMethodDesc* triggerDesc = mono_method_desc_new(":OnTriggerEnter", false);
 	onTriggerEnterMethod = mono_method_desc_search_in_class(triggerDesc, klass);
 	mono_method_desc_free(triggerDesc);
+
+	MonoMethodDesc* collisionDesc = mono_method_desc_new(":OnCollisionEnter", false);
+	onCollisionEnterMethod = mono_method_desc_search_in_class(collisionDesc, klass);
+	mono_method_desc_free(collisionDesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);
 	if (baseClass != nullptr)

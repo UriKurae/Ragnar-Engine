@@ -27,6 +27,7 @@ public:
 	void LoadScriptData(const char*);
 
 	void CallOnTriggerEnter(RigidBodyComponent* other);
+	void CallOnCollisionEnter(RigidBodyComponent* other);
 
 private:
 //#ifndef STANDALONE
@@ -39,9 +40,10 @@ public:
 	std::vector<std::string> methods;
 	std::vector<SerializedField> fields;
 
-	MonoMethod* updateMethod;
 	MonoMethod* startMethod;
+	MonoMethod* updateMethod;
 	MonoMethod* onTriggerEnterMethod;
+	MonoMethod* onCollisionEnterMethod;
 
 	uint32_t noGCobject;
 	std::string name = "";
