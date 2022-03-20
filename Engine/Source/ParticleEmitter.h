@@ -113,4 +113,10 @@ private:
 	std::shared_ptr<Texture> texture;
 
 	ParticleEffect* effect;
+
+	bool isEmitterCubical;
+	float spreadDistanceX;
+	float spreadDistanceY;
+	float spreadDistanceZ;
+
 };

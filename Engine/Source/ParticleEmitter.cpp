@@ -19,6 +19,10 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	maxParticles(200),
 	minLifeTime(0.7f),
 	maxLifeTime(1.7f),
+	spreadDistanceX(2.0f), 
+	spreadDistanceY(2.0f),
+	spreadDistanceZ(2.0f),
+	isEmitterCubical(false),
 	isActive(true),
 	showTexMenu(false),
 	emitterName(""),
@@ -34,9 +38,6 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
 	particleReference.color = { 1,0,0,1 };
-	//particleReference.colorBegin = { 1,0,0,1 };
-	//particleReference.colorEnd = { 0,1,0,1 };
-	//particleReference.sizeBegin = 0.5f, particleReference.sizeVariation = 0.3f, particleReference.sizeEnd = 0.0f;
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
 	particleReference.velocity = { 0.0f, 0.1f, 0.0f };
@@ -90,7 +91,17 @@ void ParticleEmitter::Emit(float dt)
 		Particle& particle = particlePool[poolIndex];
 		particle.active = true;
 
-		particle.position = particleReference.position;
+		if (!isEmitterCubical)
+		{
+			particle.position = particleReference.position;
+		}
+		else 
+		{
+			particle.position.x = particleReference.position.x + random.Float(-spreadDistanceX, spreadDistanceX);
+			particle.position.y = particleReference.position.y + random.Float(-spreadDistanceY, spreadDistanceY);
+			particle.position.z = particleReference.position.z + random.Float(-spreadDistanceZ, spreadDistanceZ);
+		}
+		
 		particle.rotation = particleReference.deltaRotation + random.Float() * 2 * pi;
 
 		particle.acceleration = particleReference.acceleration;
@@ -100,14 +111,10 @@ void ParticleEmitter::Emit(float dt)
 		particle.velocity.y += particleReference.acceleration.y * (random.Float() - 0.5f) * 2;
 
 		particle.color = particleReference.color;
-		//particle.colorBegin = particleReference.colorBegin;
-		//particle.colorEnd = particleReference.colorEnd;
 
 		particle.lifeTime = particleReference.lifeTime;
 		particle.lifeRemaining = particleReference.lifeTime;
-		//particle.sizeBegin = particleReference.sizeBegin + particleReference.sizeVariation * (random.Float() - 0.5f);
 		particle.size = particleReference.size;
-		//particle.sizeEnd = particleReference.sizeEnd;
 
 		poolIndex = --poolIndex % particlePool.size();
 
@@ -133,10 +140,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 
 	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
-	/*Quat q;
-	q.SetFromAxisAngle({ 0,1,0 }, rotation);
-	float4x4 transform = float4x4::FromTRS(pos, q, size);*/
-
 	Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
 	float4x4 transform = float4x4::FromTRS(pos, q, size);
 
@@ -150,7 +153,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 
 		data.vertexBufferPtr++;
 	}
-
 	data.indexCount += 6;
 }
 
@@ -238,9 +240,6 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 				continue;
 
 			float life = particle.lifeRemaining / particle.lifeTime;
-			//float4 color = float4::Lerp(particle.color, particle.color, life);
-			//color.w *= life;
-			//float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
 
 			if (billboard != nullptr)
 			{
@@ -343,6 +342,15 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 			toDelete = true;
 		}
 
+		(ImGui::Checkbox("Cubical emitter", &isEmitterCubical));
+
+		if (isEmitterCubical)
+		{
+			ImGui::SliderFloat("Spread distance X", &spreadDistanceX, 0.0f, 10.0f, "%.2f");
+			ImGui::SliderFloat("Spread distance Y", &spreadDistanceY, 0.0f, 10.0f, "%.2f");
+			ImGui::SliderFloat("Spread distance Z", &spreadDistanceZ, 0.0f, 10.0f, "%.2f");
+		}
+
 		ImGui::Spacing();
 		ImGui::Spacing();
 		ImGui::Separator();
@@ -363,9 +371,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 			if(maxParticles > 0)
 				SetUpBuffers();
 
-		//float size[2] = { particleReference->size.x, particleReference->size.y };
-
-		//guiName = "Size" + suffixLabel;
 
 		guiName = "Particle lifetime" + suffixLabel;
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
