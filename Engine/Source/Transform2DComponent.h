@@ -9,7 +9,7 @@ class GameObject;
 class ComponentTransform2D : public Component
 {
 public:
-	ComponentTransform2D(float3 pos, float3 sca, float3 rot, GameObject* Own);
+	ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* Own);
 	~ComponentTransform2D();
 	
 	bool Update(float dt)override;
