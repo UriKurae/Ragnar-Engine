@@ -445,7 +445,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
 		break;
 	case STATIC_PLANE_PROXYTYPE:
-		CreateBody();
+		CreateBody(false);
 		break;
 	default:
 		break;
