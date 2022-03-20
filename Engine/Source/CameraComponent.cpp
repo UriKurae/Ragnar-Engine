@@ -82,15 +82,9 @@ void CameraComponent::OnEditor()
 
 void CameraComponent::OnEditorMovement()
 {
-	ImGui::Checkbox("RightClickRotation", &rightClickRot);
-	ImGui::SameLine();
-	ImGui::Checkbox("WheelClickMovement", &rightClickRot);
 
 	ImGui::Checkbox("ArrowRotation", &arrowRot);
-	ImGui::SameLine();
-	ImGui::Checkbox("WASD-Movement", &WASDMov);
-
-	ImGui::Checkbox("BorderMovement", &borderMov);
+	
 	if (ImGui::Button("Switch camera movement"))
 	{
 		if (freeMovement)
@@ -170,10 +164,6 @@ bool CameraComponent::Update(float dt)
 	zoom = Clamp(zoom + app->input->GetMouseZ(), zoomMin, zoomMax);
 
 	float z = app->input->GetMouseZ();
-	if ((z > 0 && z < 1) || (z<0 && z>-1))
-	{
-		DEBUG_LOG("Wheel: %.2f", app->input->GetMouseZ());
-	}
 
 	camera.SetPos(transform->GetPosition());
 
@@ -210,10 +200,8 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
-	bool mouseDragRight;
-	if(rightClickRot) mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
-	float horizontalDrag = 0;
-	if(arrowRot || rightClickRot) horizontalDrag = app->input->GetMouseXMotion();
+	bool mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
+	float horizontalDrag = app->input->GetMouseXMotion();
 
 	// -------------MOVEMENT---------------
 	UpdateMovement(mouseDragRight, horizontalDrag);
@@ -227,8 +215,8 @@ bool CameraComponent::Update(float dt)
 
 void CameraComponent::UpdateMovement(bool mouseDragRight, float horizontalDrag)
 {
-	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) || (rightClickRot && mouseDragRight && horizontalDrag > 1)) horizontalAngle -= rotationSpeed;
-	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) || (rightClickRot && mouseDragRight && horizontalDrag < -1)) horizontalAngle += rotationSpeed;
+	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) || (mouseDragRight && horizontalDrag > 1)) horizontalAngle -= rotationSpeed;
+	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) || (mouseDragRight && horizontalDrag < -1)) horizontalAngle += rotationSpeed;
 	if (!lockVerticalAngle)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT) verticalAngle -= rotationSpeed;
@@ -241,33 +229,16 @@ void CameraComponent::UpdateMovement(bool mouseDragRight, float horizontalDrag)
 		float3 pos = defTarget->GetComponent<TransformComponent>()->GetPosition();
 		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
 		float verticalDrag = app->input->GetMouseYMotion();
-		int dragThreshold = 0;
-		int wx, wy;
-		SDL_GetWindowPosition(app->window->window, &wx, &wy);
 
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && horizontalDrag > dragThreshold)
-			|| (borderMov && app->input->GetMouseX() < wx + 2)) {
-			pos.x += movementSpeed * horizontalDrag / 2 * sin(DEGTORAD * (horizontalAngle + 90));
-			pos.z += movementSpeed * horizontalDrag / 2 * cos(DEGTORAD * (horizontalAngle + 90));
+		if (mouseDragMid && horizontalDrag)
+		{
+			pos.x += movementSpeed * horizontalDrag / zoom / 2 * sin(DEGTORAD * (horizontalAngle + 90));
+			pos.z += movementSpeed * horizontalDrag / zoom / 2 * cos(DEGTORAD * (horizontalAngle + 90));
 		}
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && horizontalDrag < -dragThreshold)
-			|| (borderMov && app->input->GetMouseX() > *app->window->GetWindowWidth() + wx - 2)) {
-			pos.x -= movementSpeed * -horizontalDrag / 2 * sin(DEGTORAD * (horizontalAngle + 90));
-			pos.z -= movementSpeed * -horizontalDrag / 2 * cos(DEGTORAD * (horizontalAngle + 90));
-		}
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && verticalDrag < -dragThreshold)
-			|| (borderMov && app->input->GetMouseY() > *app->window->GetWindowHeight() + wy - 2)) {
-			pos.x -= movementSpeed * -verticalDrag * sin(DEGTORAD * horizontalAngle);
-			pos.z -= movementSpeed * -verticalDrag * cos(DEGTORAD * horizontalAngle);
-		}
-		if ((WASDMov && app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT)
-			|| (rightClickRot && mouseDragMid && verticalDrag > dragThreshold)
-			|| (borderMov && app->input->GetMouseY() < wy + 2)) {
-			pos.x += movementSpeed * verticalDrag * sin(DEGTORAD * horizontalAngle);
-			pos.z += movementSpeed * verticalDrag * cos(DEGTORAD * horizontalAngle);
+		if (mouseDragMid && verticalDrag)
+		{
+			pos.x -= movementSpeed * -verticalDrag / zoom * sin(DEGTORAD * horizontalAngle);
+			pos.z -= movementSpeed * -verticalDrag / zoom * cos(DEGTORAD * horizontalAngle);
 		}
 		defTarget->GetComponent<TransformComponent>()->SetPosition(float3(pos.x, 0, pos.z));
 	}
