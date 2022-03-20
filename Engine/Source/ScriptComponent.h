@@ -55,4 +55,7 @@ public:
 	std::string name = "";
 
 	static ScriptComponent* runningScript;
+
+private:
+	bool callStart;
 };

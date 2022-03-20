@@ -8,7 +8,6 @@ public class Player : RagnarComponent
 	public GameObject target = null;
     public float force = 100;
     public float rockSoundRadius = 4f;
-    public bool canThrowKnife = true;
 
     Rigidbody rb;
     Material materialComponent;
@@ -26,7 +25,7 @@ public class Player : RagnarComponent
         if (agent.targetSetted)
             agent.CalculatePath(agent.destination);
 
-        if (agent.MovePath()) { Debug.Log("No es null"); }
+        if (agent.MovePath()) { Debug.Log("Not null"); }
 
         ///////// SOUNDS /////////
         // Movement Sound
@@ -104,7 +103,7 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        Debug.Log("OnTrigger");
+        //Debug.Log("OnTrigger");
     }
     public void OnCollisionEnter(Rigidbody other)
     {
@@ -112,7 +111,7 @@ public class Player : RagnarComponent
     }
     public void OnCollision(Rigidbody other)
     {
-        Debug.Log("OnCollision");
+        //Debug.Log("OnCollision");
     }
 }
 
