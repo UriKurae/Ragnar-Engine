@@ -8,6 +8,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": []
         },
         {
@@ -18,6 +20,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -79,6 +83,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -115,6 +121,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -125,9 +133,9 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        0.11625227332115173,
-                        -0.55113792419433594,
-                        0.41385984420776367,
+                        0.25525948405265808,
+                        -0.58351808786392212,
+                        0.28791782259941101,
                         0.71515911817550659
                     ],
                     "RotationEditor": [
@@ -144,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.92976027727127075,
+                    "Vertical Fov": 0.9574846625328064,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -0.26639080047607422,
@@ -184,6 +192,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Player",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -287,7 +297,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 128496968,
+                    "pointer": 168038016,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -298,7 +308,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 128494280,
+                    "pointer": 168037848,
                     "type": 4,
                     "componentTable": 0,
                     "force": 100,
@@ -311,7 +321,7 @@
                     "Height": 2,
                     "StopHeight": 0.89999997615814209,
                     "MaxSlope": 45,
-                    "Speed": 1,
+                    "Speed": 2,
                     "AngularSpeed": 1,
                     "Acceleration": 1,
                     "StoppingDistance": 0,
@@ -336,6 +346,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -372,6 +384,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -449,6 +463,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -525,6 +541,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -601,6 +619,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -677,6 +697,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -724,6 +746,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -800,6 +824,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -876,6 +902,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -912,6 +940,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -988,6 +1018,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1064,6 +1096,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1140,6 +1174,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1216,6 +1252,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1252,6 +1290,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1326,6 +1366,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1400,6 +1442,8 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1474,6 +1518,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Type": 0,
@@ -1521,6 +1567,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Active": true,
@@ -1532,7 +1580,7 @@
                     ],
                     "Scale": [
                         11.606715202331543,
-                        5.9107465744018555,
+                        5.7117714881896973,
                         1
                     ],
                     "rotationEuler": [
@@ -1562,6 +1610,8 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
             "Components": [
                 {
                     "Active": true,
@@ -1573,7 +1623,7 @@
                     ],
                     "Scale": [
                         9.0242204666137695,
-                        5.9107465744018555,
+                        5.7117714881896973,
                         1
                     ],
                     "rotationEuler": [
