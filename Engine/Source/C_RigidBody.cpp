@@ -24,7 +24,6 @@ RigidBodyComponent::~RigidBodyComponent()
 {
 	if (body != nullptr)
 	{
-		if(trigger) app->physics->triggers.erase(FindTrigger(this));
 		app->physics->DeleteBody(this, owner->name);
 		constraintBodies.clear();
 	}	
@@ -228,10 +227,7 @@ void RigidBodyComponent::OnEditor()
 			if (trigger)
 				SetAsTrigger();
 			else
-			{
-				app->physics->triggers.erase(FindTrigger(this));
 				CreateBody();
-			}
 		}
 		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();
@@ -326,11 +322,6 @@ void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 	body->getCollisionShape()->getBoundingSphere(center, r1);
 	val->GetBody()->getCollisionShape()->getBoundingSphere(center, r2);
 	app->physics->AddConstraintP2P(*body, *val->GetBody(), float3(r1, r1, r1), float3(r2, r2, r2));
-}
-
-std::vector<RigidBodyComponent*>::const_iterator RigidBodyComponent::FindTrigger(RigidBodyComponent* node)
-{
-	return std::find(app->physics->triggers.begin(), app->physics->triggers.end(), node);
 }
 
 void RigidBodyComponent::SetCollisionType(CollisionType type)
@@ -549,7 +540,7 @@ void RigidBodyComponent::SetAsStatic()
 void RigidBodyComponent::SetAsTrigger()
 {
 	body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-	app->physics->triggers.push_back(this);
+	trigger = true;
 }
 
 bool RigidBodyComponent::OnLoad(JsonParsing& node)
@@ -618,9 +609,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-
-	if (trigger)
-		app->physics->triggers.push_back(this);
 
 	return true;
 }
