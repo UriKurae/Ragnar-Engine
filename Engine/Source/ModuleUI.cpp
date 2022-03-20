@@ -1,26 +1,22 @@
 ﻿#include "ModuleUI.h"
-
-#include "Globals.h"
 #include "Application.h"
+#include "Globals.h"
 
-#include "CameraComponent.h"
-#include "ModuleCamera3D.h"
-#include "ButtonComponent.h"
 #include "ModuleScene.h"
-#include "ImageComponent.h"
-#include "MaterialComponent.h"
-#include "SliderComponent.h"
-#include "CheckBoxComponent.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "GameObject.h"
-#include "TransformComponent.h"
-#include <stack>
+
+#include "Transform2DComponent.h"
+#include "ButtonComponent.h"
+#include "ImageComponent.h"
+#include "SliderComponent.h"
+#include "CheckBoxComponent.h"
+
 #include "freetype-2.10.0/include/ft2build.h"
-#include "ModuleRenderer3D.h"
 #include "Texture.h"
 #include "GameView.h"
 
+#include "GL/glew.h"
 #include "Profiling.h"
 
 #include FT_FREETYPE_H 
@@ -259,7 +255,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 		{
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
 			
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			DEBUG_LOG("ERROR::SHADER_COMPILATION_ERROR of type: %s\n%s ", type, infoLog);
 		}
 	}
 	else
@@ -269,7 +265,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 		{
 			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
 
-			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			DEBUG_LOG("ERROR::PROGRAM_LINKING_ERROR of type: %s\n%s ", type, infoLog);
 		}
 	}
 }
@@ -319,7 +315,7 @@ bool ModuleUI::Start()
 			// Load character glyph 
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 			{
-				std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+				DEBUG_LOG("ERROR::FREETYTPE: Failed to load Glyph");
 				continue;
 			}
 			// generate texture
@@ -610,10 +606,7 @@ bool ModuleUI::Update(float dt)
 			aux5 = nullptr;
 		}
 		
-	}
-	
-		
-	
+	}	
 	
 	return true;
 }
@@ -625,45 +618,8 @@ bool ModuleUI::CleanUp()
 	return true;
 }
 
-void ModuleUI::DeleteUIGameObjects()
+void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 {
-	//int UIGameObjectsQuantity = UIGameObjects.size();
-
-	//for (int a = UIGameObjectsQuantity -1 ; a >= 0; a--)
-	//{
-	//	app->editor->objectSelected = UIGameObjects[a];
-	//	int i;
-	//	int id = App->editor->objectSelected->id;
-	//	for (i = 0; i < App->scene->gameObjects.size(); i++)
-	//	{
-	//		if (id == App->scene->gameObjects[i]->id)
-	//		{
-	//			App->editor->objectSelected = nullptr;
-
-
-	//			for (int i = 0; i < App->userInterface->UIGameObjects.size(); i++)
-	//			{
-	//				if (App->userInterface->UIGameObjects[i]->id == id)
-	//				{
-	//					GameObject* go = App->userInterface->UIGameObjects[i];
-	//					uint comp = go->SearchComponent(go, ComponentType::UI_IMAGE);
-	//					if (comp == -1 || (comp != -1 && go->components[comp]->UIid != 10))
-	//					{
-	//						ComponentTransform2D* component2d = App->userInterface->UIGameObjects[i]->getTransform2D();
-	//						component2d->position.x = 70000;
-	//						component2d->position.z = 70000;
-	//					}
-	//					//App->userInterface->UIGameObjects.erase(App->userInterface->UIGameObjects.begin() + i);
-	//					break;
-	//				}
-	//			}
-
-	//			//delete (*(App->scene->gameObjects.begin() + i));
-	//			//App->scene->gameObjects.erase(App->scene->gameObjects.begin() + i);
-	//			break;
-	//		}
-	//	}
-	//}
-
+	UIGameObjects.erase(FindUI(ui));
 	UIGameObjectSelected = nullptr;
 }

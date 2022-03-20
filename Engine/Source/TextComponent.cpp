@@ -1,12 +1,13 @@
+#include "TextComponent.h"
 #include "Application.h"
-#include "SDL.h"
-#include"TextComponent.h"
-#include"GameObject.h"
+
 #include "ModuleInput.h"
 #include "ModuleUI.h"
+
+#include "GameObject.h"
 #include "TransformComponent.h"
 #include "MaterialComponent.h"
-
+#include "Transform2DComponent.h"
 
 TextComponent::TextComponent(GameObject* own)
 {
@@ -98,8 +99,6 @@ void TextComponent::OnEditor()
 
 
 }
-
-
 
 float2 TextComponent::GetParentPosition()
 {

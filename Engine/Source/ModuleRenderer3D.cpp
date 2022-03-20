@@ -301,17 +301,18 @@ bool ModuleRenderer3D::PostUpdate()
 		glMatrixMode(GL_MODELVIEW);
 		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
 
-			aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
-		aux1 = app->userInterface->UIGameObjects[a]->GetComponent<TextComponent>();
-		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
-		aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
+		GameObject* UI = app->userInterface->UIGameObjects[a];
+		aux = UI->GetComponent<ButtonComponent>();
+		aux1 = UI->GetComponent<TextComponent>();
+		aux2 = UI->GetComponent<CheckboxComponent>();
+		aux3 = UI->GetComponent<ImageComponent>();
 		//aux4 = go->GetComponent<InputBoxComponent>();
-		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
+		aux5 = UI->GetComponent<SliderComponent>();
 
 		if (aux != nullptr)
 		{
 
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			UI->Draw(nullptr);
 			app->userInterface->RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
 			aux = nullptr;
 		}
@@ -322,12 +323,12 @@ bool ModuleRenderer3D::PostUpdate()
 		} 
 		else if (aux2 != nullptr)
 		{
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			UI->Draw(nullptr);
 			aux2 = nullptr;
 		}
 		else if (aux3 != nullptr)
 		{
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			UI->Draw(nullptr);
 			aux3 = nullptr;
 		}
 		/* else if (aux4 != nullptr)
@@ -340,7 +341,7 @@ bool ModuleRenderer3D::PostUpdate()
 		} */
 		else if (aux5 != nullptr)
 		{
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
+			UI->Draw(nullptr);
 			aux5 = nullptr;
 		}
 		glMatrixMode(GL_PROJECTION);

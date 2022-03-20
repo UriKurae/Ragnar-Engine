@@ -5,7 +5,9 @@
 #include"ModuleUI.h"
 #include"ModuleInput.h"
 
+#include "GameObject.h"
 #include"MaterialComponent.h"
+#include "Transform2DComponent.h"
 
 CheckboxComponent::CheckboxComponent(GameObject* own)
 {

@@ -7,8 +7,11 @@
 #include "ModuleEditor.h"
 #include "ModuleCamera3D.h"
 
+#include "GameObject.h"
 #include "CameraComponent.h"
 #include "MaterialComponent.h"
+#include "Transform2DComponent.h"
+
 #include "GameView.h"
 
 SliderComponent::SliderComponent(GameObject* own)

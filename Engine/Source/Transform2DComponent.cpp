@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include "ModuleEditor.h"
+#include "ModuleUI.h"
 
 #include "GameObject.h"
 #include "GameView.h"
@@ -34,9 +35,9 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	
 }
 
-
 ComponentTransform2D::~ComponentTransform2D()
 {
+	app->userInterface->DeleteUIGameObjects(owner);
 }
 
 bool ComponentTransform2D::Update(float dt)
