@@ -6,7 +6,6 @@ public class EnemyPatrol : RagnarComponent
 {
 	public int velocity = 1000;
 
-	Rigidbody rb;
 	public NavAgent agents;
     public GameObject[] waypoints;
     private int destPoint = 0;

@@ -3,7 +3,7 @@ using RagnarEngine;
 
 public class Abilities : RagnarComponent
 {
-    public float force = 200;
+    public float force = 400;
     public float rockSoundRadius = 6f;
     public bool canThrowKnife = true;
     private GameObject rock;
@@ -133,5 +133,21 @@ public class Abilities : RagnarComponent
                 canThrowKnife = true;
             }
         }
+    }
+    public void OnTriggerEnter(Rigidbody other)
+    {
+        Debug.Log("OnTriggerEnter");
+    }
+    public void OnTrigger(Rigidbody other)
+    {
+        Debug.Log("OnTrigger");
+    }
+    public void OnCollisionEnter(Rigidbody other)
+    {
+        Debug.Log("OnCollisionEnter");
+    }
+    public void OnCollision(Rigidbody other)
+    {
+        Debug.Log("OnCollision");
     }
 }
