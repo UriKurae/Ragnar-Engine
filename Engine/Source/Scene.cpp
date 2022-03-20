@@ -102,10 +102,10 @@ bool Scene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
-	if (mainCamera != nullptr) mainCamera->Update(app->sceneManager->GetTimer().GetDeltaTime());
+	if (mainCamera != nullptr) mainCamera->Update(dt);
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
-		root->GetChilds()[i]->Update(app->sceneManager->GetTimer().GetDeltaTime());
+		root->GetChilds()[i]->Update(dt);
 	
 	if (frameSkip || app->sceneManager->GetGameState() == GameState::PLAYING)
 	{

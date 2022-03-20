@@ -50,7 +50,9 @@ bool ModuleSceneManager::Start()
 
 bool ModuleSceneManager::PreUpdate(float dt)
 {
-	currentScene->PreUpdate(dt);
+	currentScene->PreUpdate(gameTimer.GetDeltaTime());
+
+	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
 }
@@ -66,13 +68,15 @@ bool ModuleSceneManager::Update(float dt)
 		changeScene = false;
 	}
 
-	currentScene->Update(dt);
+	currentScene->Update(gameTimer.GetDeltaTime());
 	
 	return true;
 }
 
 bool ModuleSceneManager::PostUpdate()
 {
+	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
+
 	currentScene->PostUpdate();
 
 	return true;

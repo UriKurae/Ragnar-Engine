@@ -52,9 +52,13 @@ bool Physics3D::Start()
 
 bool Physics3D::PreUpdate(float dt)
 {
-	world->stepSimulation(dt, 15);
-	if (app->sceneManager->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::NOT_PLAYING)
 	{
+		world->stepSimulation(dt, 15);
+	}
+	else if (app->sceneManager->GetGameState() == GameState::PLAYING)
+	{
+		world->stepSimulation(app->sceneManager->GetGameDeltaTime(), 15);
 		for (size_t i = 0; i < bodies.size(); i++)
 		{
 			bodies.at(i)->SetOnCollision(false);

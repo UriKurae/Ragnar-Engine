@@ -21,11 +21,17 @@ public class Player : RagnarComponent
 
     public void Update()
 	{
-        if(Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
         {
             //GameObject but = GameObject.Find("Button");
             //but.GetComponent<Button>().text = "Testint Text
-            SceneManager.LoadScene("scenePrueba");
+            //SceneManager.NextScene();
+            Time.timeScale = 1;
+        }
+
+        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
+        {
+            Time.timeScale = 0;
         }
 
         ///////// SOUNDS /////////

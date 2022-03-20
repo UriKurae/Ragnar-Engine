@@ -1,7 +1,7 @@
 #include "GameTimer.h"
 #include "SDL_timer.h"
 
-GameTimer::GameTimer() : gameTimer(0.0f), gameStarted(false), deltaTime(0.016f), frameCounter(0), timer(0.0f), lastFrameMs(0.0f), cappedMs(0.0f)
+GameTimer::GameTimer() : gameTimer(0.0f), gameStarted(false), deltaTime(0.016f), frameCounter(0), timer(0.0f), lastFrameMs(0.0f), cappedMs(0.0f), timeScale(1.0f)
 {
 	gameTimer = SDL_GetTicks();
 }

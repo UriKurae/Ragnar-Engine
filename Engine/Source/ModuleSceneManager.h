@@ -46,9 +46,10 @@ public:
 	void NextScene(const char* name);
 
 	GameState GetGameState() { return gameState; }
-	GameTimer GetTimer() { return gameTimer; }
+	GameTimer& GetTimer() { return gameTimer; }
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
+	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
 
 	void Play();
 	void Stop();

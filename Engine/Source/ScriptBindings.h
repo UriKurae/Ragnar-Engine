@@ -344,6 +344,11 @@ float GetGameTimeStep()
 	return app->sceneManager->GetGameDeltaTime();
 }
 
+void SetTimeScale(float scale)
+{
+	app->sceneManager->GetTimer().SetTimeScale(scale);
+}
+
 // Scene Manager
 void NextScene()
 {

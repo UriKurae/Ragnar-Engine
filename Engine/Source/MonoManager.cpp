@@ -88,6 +88,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
+	mono_add_internal_call("RagnarEngine.Time::set_timeScale", SetTimeScale);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
 	mono_add_internal_call("RagnarEngine.GameObject::Find", FindGameObjectWithName);
 	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectsWithTag", FindGameObjectsWithTag);

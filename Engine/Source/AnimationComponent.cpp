@@ -12,7 +12,7 @@
 #include "Math/TransformOps.h"
 #include "Imgui/imgui_stdlib.h"
 
-AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(0.0f)
+AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(1.0f)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
@@ -411,6 +411,10 @@ void AnimationComponent::SetAnimation(std::shared_ptr<Resource> a)
 
 void AnimationComponent::Play(std::string state)
 {
+	if (app->sceneManager->GetTimeScale() == 0.0f)
+	{
+		return;
+	}
 	for (int i = 0; i < animations.size(); ++i)
 	{
 		if (animations[i].state == state)
@@ -421,7 +425,7 @@ void AnimationComponent::Play(std::string state)
 
 				currAnim = &animations[i];
 				lastCurrentTime = currentTime;
-	
+
 				if (lastAnim != currAnim)
 				{
 					currentTime = 0.0f;
@@ -435,7 +439,6 @@ void AnimationComponent::Play(std::string state)
 			break;
 		}
 	}
-
 }
 
 void AnimationComponent::GetAnimations()
