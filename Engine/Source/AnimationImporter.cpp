@@ -81,45 +81,19 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 			rot.w = animation->mChannels[i]->mRotationKeys[l].mValue.w;
 
 			keyframes.matrix = keyframes.matrix.FromTRS(pos, rot, scales);
-			keyframes.timeStamp = animation->mChannels[i]->mPositionKeys[j].mTime;
+			keyframes.timeStamp = animation->mChannels[i]->mRotationKeys[l].mTime;
+		
+			if (size < keyScales)
+			{
+				keyframes.timeStamp = animation->mChannels[i]->mScalingKeys[k].mTime;
+			}
+			if (size < keyPositions)
+			{
+				keyframes.timeStamp = animation->mChannels[i]->mPositionKeys[j].mTime;
+			}
 
 			bone.keyFrames.push_back(keyframes);
 		}
-
-		/*for (int j = 0; j < boneKeys; ++j)
-		{
-			KeyPosition pos;
-			pos.position.x = animation->mChannels[i]->mPositionKeys[j].mValue.x;
-			pos.position.y = animation->mChannels[i]->mPositionKeys[j].mValue.y;
-			pos.position.z = animation->mChannels[i]->mPositionKeys[j].mValue.z;
-			pos.timeStamp = animation->mChannels[i]->mPositionKeys[j].mTime;
-			bone.positions.push_back(pos);
-		}*/
-
-		//// Save Key scales
-		//boneKeys = animation->mChannels[i]->mNumScalingKeys;
-		//for (int j = 0; j < boneKeys; ++j)
-		//{
-		//	KeyScale scale;
-		//	scale.scale.x = animation->mChannels[i]->mScalingKeys[j].mValue.x;
-		//	scale.scale.y = animation->mChannels[i]->mScalingKeys[j].mValue.y;
-		//	scale.scale.z = animation->mChannels[i]->mScalingKeys[j].mValue.z;
-		//	scale.timeStamp = animation->mChannels[i]->mScalingKeys[j].mTime;
-		//	bone.scales.push_back(scale);
-		//}
-
-		//// Save Key Rotations
-		//boneKeys = animation->mChannels[i]->mNumRotationKeys;
-		//for (int j = 0; j < boneKeys; ++j)
-		//{
-		//	KeyRotation rotations;
-		//	rotations.orientation.x = animation->mChannels[i]->mRotationKeys[j].mValue.x;
-		//	rotations.orientation.y = animation->mChannels[i]->mRotationKeys[j].mValue.y;
-		//	rotations.orientation.z = animation->mChannels[i]->mRotationKeys[j].mValue.z;
-		//	rotations.orientation.w = animation->mChannels[i]->mRotationKeys[j].mValue.w;
-		//	rotations.timeStamp = animation->mChannels[i]->mRotationKeys[j].mTime;
-		//	bone.rotations.push_back(rotations);
-		//}
 
 		bones.push_back(bone);
 	}
@@ -127,7 +101,16 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 	HierarchyData data;
 	ReadHierarchyData(data, scene->mRootNode, bones, boneCount);
 
+	FilterBones(bones);
 
+	for (int i = 0; i < bones.size(); i++)
+	{
+		if (bones[i].name.find("$") != std::string::npos)
+		{
+			bones.erase(bones.begin() + i);
+			i = 0;
+		}
+	}
 
 	for (int i = 0; i < bones.size(); ++i)
 	{
@@ -356,6 +339,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 				indexRot += 5;
 
 				keys.matrix = keys.matrix.FromTRS(positions, rot, scales);
+				keys.timeStamp = timeStamp;
 				boneData.keyFrames.push_back(keys);
 			}
 
@@ -369,7 +353,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	RELEASE_ARRAY(buffer);
 }
 
-void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bones, int count)
+void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bones, int count, int index)
 {
 	data.name = node->mName.C_Str();
 
@@ -406,13 +390,28 @@ void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std
 		keyframe.timeStamp = 0.0f;
 		boneData.keyFrames.push_back(keyframe);
 
-		bones.push_back(boneData);
+		bones.insert(bones.begin() + index, boneData);
 	}
+	else
+	{
+		for (int i = 0; i < bones.size(); ++i)
+		{
+			if (bones[i].name == data.name)
+			{
+				BoneData d = bones[i];
+				bones.erase(bones.begin() + i);
+				bones.insert(bones.begin() + index, d);
+				break;
+			}
+		}
+	}
+
+	index++;
 
 	for (int i = 0; i < data.childrenCount; ++i)
 	{
 		HierarchyData childData;
-		ReadHierarchyData(childData, node->mChildren[i], bones, count);
+		ReadHierarchyData(childData, node->mChildren[i], bones, count, index);
 		data.children.push_back(childData);
 	}
 }
@@ -899,28 +898,19 @@ void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
 		}
 		else
 		{
-			//for (int j = dollarsVisited.size()-1; 0 < j; --j)
-			//{
-
-			//	// Positions
-			//	for (int k = 0; k < dollarsVisited[j].positions.size(); k++)
-			//	{
-
-			//	}
-
-			//	// Scales
-			//	for (int k = 0; k < dollarsVisited[j].positions.size(); k++)
-			//	{
-
-			//	}
-
-			//	// Rotations
-			//	for (int k = 0; k < dollarsVisited[j].positions.size(); k++)
-			//	{
-
-			//	}
-
-			//}
+			// TODO: Uncommenting this causes crash
+			/*for (int j = dollarsVisited.size() - 1; 0 <= j; --j)
+			{
+				int size = dollarsVisited[j].keyFrames.size();
+				if (bones[i].keyFrames.size() < size) bones[i].keyFrames.resize(size);
+				
+				for (int k = 0; k < size; k++)
+				{
+					bones[i].keyFrames[k].matrix = dollarsVisited[j].keyFrames[k].matrix * bones[i].keyFrames[k].matrix;
+					bones[i].keyFrames[k].timeStamp = dollarsVisited[j].keyFrames[k].timeStamp;
+				}
+			}
+			dollarsVisited.clear();*/
 		}
 	}
 }
