@@ -32,6 +32,7 @@ namespace AnimationImporter
 	void ImportBones(std::string& path, aiBone* bone, JsonParsing& json, std::vector<uint>& uids, std::vector<unsigned int>& bonesUid);
 	void CreateMetaBones(std::string& library, std::string& assets, uint uid);
 	void SaveBone(std::string& name, unsigned int numWeights, float* pos, float* rot, float* scale, std::vector<Weight>& weights);
+	void FilterBones(std::vector<BoneData>& bones);
 }
 
 
