@@ -65,8 +65,6 @@ public:
 	void SleepAllBodies();
 	void ActiveAllBodies();
 
-	std::vector<RigidBodyComponent*> triggers;
-
 private:
 	btDefaultCollisionConfiguration* collisionConfig = nullptr;
 	btCollisionDispatcher* dispatcher = nullptr;
