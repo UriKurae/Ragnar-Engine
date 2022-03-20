@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include "ModuleEditor.h"
+#include "ModuleScene.h"
 
 #include "GameObject.h"
 #include "GameView.h"
@@ -10,7 +11,7 @@
 #include <math.h>
 
 
-ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, GameObject* own)
+ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	//UID = GenerateUID();
 	//type = ComponentType::TRANSFORM2D;
@@ -19,7 +20,8 @@ ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, G
 	scale.x = 25;
 	scale.y = 15;
 	scale.z = 1;
-	rotationEuler = rot;
+	//rotationEuler = rot;
+	rotationEuler = float3(0, 0, 0);
 
 	buttonWidth = 300;
 	buttonHeight = 100;
@@ -44,19 +46,19 @@ ComponentTransform2D::~ComponentTransform2D()
 
 bool ComponentTransform2D::Update(float dt)
 {
-	float4 viewport = app->editor->GetGameView()->GetBounds();
+	float4 viewport = app->editor->GetGameView()->GetBounds() * app->scene->mainCamera->GetZoomRatio();
 	float temporalW = (viewport.z * 25) / 847;
 	float temporalH = (viewport.w * 15) / 649;
-	scale.x = (buttonWidth / 0.6) / temporalW;
-	scale.y = (buttonHeight / 0.75) / temporalH;
+	scale.x = (buttonWidth / 0.6f) / temporalW;
+	scale.y = (buttonHeight / 0.75f) / temporalH;
 
 
 
-	internalPosition.x = (position.x *30.0f) / (viewport.z / 2);
+	internalPosition.x = (position.x * 30.0f) / (viewport.z / 2);
 
 	/*float res = (viewport.w * 1.5) / 649;
 	res = 1.5 - (res - 1.5)+0.05;*/
-	internalPosition.y = (position.y * 30) / (viewport.w / 2);
+	internalPosition.y = (position.y * 30.0f) / (viewport.w / 2);
 
 	/*internalPosition.x = position.x/1;
 	internalPosition.y = position.y/8;*/

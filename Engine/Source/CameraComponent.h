@@ -41,6 +41,7 @@ public:
 
 	inline float GetCurrentScreenWidth() { return currentScreenWidth; }
 	inline float GetCurrentScreenHeight() { return currentScreenHeight; }
+	inline float GetZoomRatio() { return zoom / ((zoomMax - zoomMin) / 2); };
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
@@ -86,11 +87,7 @@ private:
 	float horizontalAngle = 0;
 	
 	// Controls
-	bool rightClickRot = true; // Right click rotation and midle click movement go together
 	bool arrowRot = false;
-	bool midClickMov = true;
-	bool WASDMov = false;
-	bool borderMov = false;
 
 	int targetUID = 0;
 

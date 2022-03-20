@@ -307,8 +307,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		component = new BillboardParticleComponent(this, transform);
 		break;
 	case ComponentType::TRANFORM2D:
-		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
-		component = new ComponentTransform2D(float3{ camera->GetFrustum()->pos.x,camera->GetFrustum()->pos.y,camera->GetFrustum()->pos.z }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
+		//CameraComponent* camera = app->scene->mainCamera;
+		//component = new ComponentTransform2D(float3{ camera->GetFrustum()->pos.x,camera->GetFrustum()->pos.y,camera->GetFrustum()->pos.z }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
+		component = new ComponentTransform2D(this);
 		break;
 	}
 
