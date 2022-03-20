@@ -59,7 +59,7 @@ public:
 	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
 	inline RigidBodyComponent* GetCollisionTarget() { return collisionTarget; };
 	
-	// Used specifictly on scripting.
+	// Used specifictly on scripting. (Future deleting)
 	void SetCollisionSphere(float sphereRadius, float3 pos);
 	void SetHeight(float height);
 

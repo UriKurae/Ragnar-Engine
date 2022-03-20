@@ -123,3 +123,10 @@ void SetHeight(MonoObject* go, float height)
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
 	rb->SetHeight(height);
 }
+
+void SetBodyPosition(MonoObject* go, MonoObject* pos)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	float3 bPos = app->moduleMono->UnboxVector(pos);
+	rb->GetBody()->getWorldTransform().setOrigin(bPos);
+}

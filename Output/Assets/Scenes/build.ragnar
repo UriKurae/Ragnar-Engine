@@ -133,10 +133,10 @@
                         12.462577819824219
                     ],
                     "Quaternion": [
-                        -0.32551410794258118,
-                        0.69559216499328613,
-                        -0.27192935347557068,
-                        0.57986772060394287
+                        -0.13895966112613678,
+                        0.80216938257217407,
+                        0.031219342723488808,
+                        0.57986199855804443
                     ],
                     "RotationEditor": [
                         0,
@@ -192,7 +192,7 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Player",
             "layer": "Default",
             "Components": [
                 {
@@ -297,7 +297,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 118705912,
+                    "pointer": 89561208,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -307,10 +307,9 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 118706096,
+                    "pointer": 89562128,
                     "type": 4,
                     "componentTable": 0,
-                    "force": 200,
                     "rockSoundRadius": 6,
                     "canThrowKnife": true
                 },

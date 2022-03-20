@@ -692,10 +692,7 @@ void RigidBodyComponent::SetCollisionSphere(float sphereRadius, float3 pos)
 	sphere.SetPos(pos);
 	useGravity = false;
 	isKinematic = false;
-	trigger = true;
 	mass = 0.0f;
-	owner->GetComponent<TransformComponent>()->SetPosition(pos);
-	owner->GetComponent<TransformComponent>()->UpdateTransform();
 	CreateBody(false);
 }
 

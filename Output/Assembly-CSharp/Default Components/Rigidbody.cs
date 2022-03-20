@@ -45,6 +45,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetHeight(float height);
+        
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetBodyPosition(Vector3 position);
 
         public void IgnoreCollision(GameObject other, bool value)
         {
