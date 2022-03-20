@@ -125,10 +125,10 @@
                         1.3589518070220947
                     ],
                     "Quaternion": [
-                        -0.33369326591491699,
-                        0.84744226932525635,
-                        -0.020057780668139458,
-                        0.41241741180419922
+                        -0.4506915807723999,
+                        0.73388707637786865,
+                        -0.29707187414169312,
+                        0.41235324740409851
                     ],
                     "RotationEditor": [
                         0,
@@ -144,7 +144,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.95660227537155151,
+                    "Vertical Fov": 0.98000586032867432,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         11.233668327331543,
@@ -152,7 +152,7 @@
                         1.3589518070220947
                     ],
                     "Type": 3,
-                    "Zoom": 18,
+                    "Zoom": 16,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -287,7 +287,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 123668216,
+                    "pointer": 123774912,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -297,11 +297,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 123668720,
+                    "pointer": 123776088,
                     "type": 4,
                     "componentTable": 0,
-                    "force": 100,
-                    "rockSoundRadius": 4,
+                    "force": 200,
+                    "rockSoundRadius": 6,
                     "canThrowKnife": true
                 },
                 {
@@ -347,7 +347,7 @@
                     ],
                     "Scale": [
                         9.9238433837890625,
-                        4.8888888359069824,
+                        4.7519679069519043,
                         1
                     ],
                     "rotationEuler": [
@@ -388,7 +388,7 @@
                     ],
                     "Scale": [
                         7.7157878875732422,
-                        4.8888888359069824,
+                        4.7519679069519043,
                         1
                     ],
                     "rotationEuler": [

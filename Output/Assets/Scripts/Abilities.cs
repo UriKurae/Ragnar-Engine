@@ -6,10 +6,10 @@ public class Abilities : RagnarComponent
     public float force = 200;
     public float rockSoundRadius = 6f;
     public bool canThrowKnife = true;
-    private GameObject bullet;
+    private GameObject rock;
     private GameObject soundArea;
     private bool createSoundArea = true;
-    private float timer = 0f;
+    private float rockCooldown = 0f;
 
     public void Start()
     {
@@ -17,10 +17,10 @@ public class Abilities : RagnarComponent
     }
 
     public void Update()
-	{
+    {
         ///////// ABILITIES /////////
         // Rock Throw
-        if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN && timer == 0f)
+        if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN && rockCooldown == 0f)
         {
             ThrowRock();
         }
@@ -28,30 +28,44 @@ public class Abilities : RagnarComponent
         // Knife Throw
         if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN && canThrowKnife)
         {
+            Debug.Log("Entra en ThrowKnife");
             ThrowKnife();
         }
         /////////////////////////////
 
-        if (bullet != null && bullet.transform.globalPosition.y <= 0.56f && createSoundArea)
+        // Rock sound area creation if rock hits the ground
+        // When the rockCooldown goes off, the rock and the area dies and the player restores the ability to throw another rock (Cooldown).
+        // This shouldn't be here. The right way is to do this with a prefab instantiation.
+        SoundAreaCreationAndDestruction();
+
+        // This shouldn't be here. The right way is to do this with a prefab instantiation.
+        // This may cause lag if we repeat this process with every bullet or thing we create.
+        // Every reload or bullet/ammo restore should work by prefab scripting.
+        ReloadKnife();
+    }
+
+    private void SoundAreaCreationAndDestruction()
+    {
+        if (rock != null && rock.transform.globalPosition.y <= 0.56f && createSoundArea)
         {
             createSoundArea = false;
-            Vector3 pos = bullet.transform.globalPosition;
-            soundArea = InternalCalls.CreateGameObject("SoundArea", pos, bullet.transform.globalRotation);
+            Vector3 pos = rock.transform.globalPosition;
+            soundArea = InternalCalls.CreateGameObject("SoundArea", pos, rock.transform.globalRotation);
             Rigidbody soundRb = soundArea.CreateComponent<Rigidbody>();
             soundRb.IgnoreCollision(gameObject, true);
-            Debug.Log(bullet.transform.globalPosition.x.ToString());
-            Debug.Log(bullet.transform.globalPosition.y.ToString());
-            Debug.Log(bullet.transform.globalPosition.z.ToString());
-            CreateSphereTrigger(soundRb, rockSoundRadius, bullet.transform.globalPosition);
+            Debug.Log(rock.transform.globalPosition.x.ToString());
+            Debug.Log(rock.transform.globalPosition.y.ToString());
+            Debug.Log(rock.transform.globalPosition.z.ToString());
+            CreateSphereTrigger(soundRb, rockSoundRadius, rock.transform.globalPosition);
         }
-        if(bullet != null && !createSoundArea)
+        if (rock != null && !createSoundArea)
         {
-            timer -= Time.deltaTime;
-            if(timer < 0)
+            rockCooldown -= Time.deltaTime;
+            if (rockCooldown < 0)
             {
-                timer = 0f;
-                InternalCalls.Destroy(bullet);
-                bullet = null;
+                rockCooldown = 0f;
+                InternalCalls.Destroy(rock);
+                rock = null;
                 InternalCalls.Destroy(soundArea);
                 soundArea = null;
             }
@@ -63,12 +77,14 @@ public class Abilities : RagnarComponent
         canThrowKnife = false;
         Vector3 pos = gameObject.transform.globalPosition;
         pos.y += 1;
-        GameObject bullet = InternalCalls.Create3DObject("Knife", (int)PrimitiveType.CUBE, pos);
-        bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
+        pos.z += 1;
+        GameObject knife = InternalCalls.Create3DObject("Knife", (int)PrimitiveType.CUBE, pos);
+        knife.tag = "Knife";
+        knife.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
 
-        Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
-        bulletRb.IgnoreCollision(gameObject, true);
-        bulletRb.ApplyCentralForce(gameObject.transform.forward * 1000);
+        Rigidbody knifeRb = knife.CreateComponent<Rigidbody>();
+        knifeRb.IgnoreCollision(gameObject, true);
+        knifeRb.ApplyCentralForce(gameObject.transform.forward * 1000);
     }
 
     private void ThrowRock()
@@ -77,15 +93,15 @@ public class Abilities : RagnarComponent
 
         Vector3 pos = gameObject.transform.globalPosition;
         pos.y += 1;
-        bullet = InternalCalls.Create3DObject("Rock", (int)PrimitiveType.CUBE, pos);
-        bullet.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
+        rock = InternalCalls.Create3DObject("Rock", (int)PrimitiveType.CUBE, pos);
+        rock.transform.scale = new Vector3(0.2f, 0.2f, 0.2f);
 
-        Rigidbody bulletRb = bullet.CreateComponent<Rigidbody>();
-        bulletRb.IgnoreCollision(gameObject, true);
+        Rigidbody rockRb = rock.CreateComponent<Rigidbody>();
+        rockRb.IgnoreCollision(gameObject, true);
         Vector3 vectorDir = new Vector3(gameObject.transform.forward.x, 1, gameObject.transform.forward.z);
-        bulletRb.ApplyCentralForce(vectorDir.normalized * force);
+        rockRb.ApplyCentralForce(vectorDir.normalized * force);
 
-        timer = 2f;
+        rockCooldown = 2f;
     }
 
     // With this method we create an spherical Trigger.
@@ -98,4 +114,24 @@ public class Abilities : RagnarComponent
         rb.SetAsTrigger();
     }
 
+    // With this method we pick up the knife by being close to it
+    private void ReloadKnife()
+    {
+        GameObject knife = GameObject.Find("Knife");
+        if (knife != null)
+        {
+            // Calcula diferencia de posición (vectores) y haz magnitud entonces.
+            float xDiff = knife.transform.globalPosition.x - gameObject.transform.globalPosition.x;
+            float zDiff = knife.transform.globalPosition.z - gameObject.transform.globalPosition.z;
+            double distance = Math.Sqrt(zDiff * zDiff + xDiff * xDiff);
+
+            if (distance < 3) Debug.Log(distance.ToString());
+            if (distance < 0.6f)
+            {
+                InternalCalls.Destroy(knife);
+                knife = null;
+                canThrowKnife = true;
+            }
+        }
+    }
 }
