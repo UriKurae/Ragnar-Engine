@@ -9,7 +9,7 @@
 
 #define MAX_POLYS 256
 #define MAX_SMOOTH 2048
-#define MAX_ERROR 0.06f
+#define MAX_ERROR 0.05f
 
 class GameObject;
 class InputGeom;
@@ -72,7 +72,8 @@ public:
 	void RenderPath(NavAgentComponent* agent);
 	bool MovePath(NavAgentComponent* agent);
 	bool MoveTo(NavAgentComponent* agent, float3 destination);
-	bool RotateTo(btRigidBody* rigidBody, float3 direction, float speed);
+	bool LookAt(btRigidBody* rigidBody, float3 direction);
+	bool SmoothLookAt(btRigidBody* rigidBody, float3 direction, float speed);
 
 public:
 	dtNavMesh* m_navMesh;
