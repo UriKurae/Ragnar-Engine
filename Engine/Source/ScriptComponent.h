@@ -27,7 +27,11 @@ public:
 	void LoadScriptData(const char*);
 
 	void CallOnTriggerEnter(RigidBodyComponent* other);
+	void CallOnTrigger(RigidBodyComponent* other);
+
 	void CallOnCollisionEnter(RigidBodyComponent* other);
+	void CallOnCollision(RigidBodyComponent* other);
+
 
 private:
 //#ifndef STANDALONE
@@ -43,7 +47,9 @@ public:
 	MonoMethod* startMethod;
 	MonoMethod* updateMethod;
 	MonoMethod* onTriggerEnterMethod;
+	MonoMethod* onTriggerMethod;
 	MonoMethod* onCollisionEnterMethod;
+	MonoMethod* onCollisionMethod;
 
 	uint32_t noGCobject;
 	std::string name = "";
