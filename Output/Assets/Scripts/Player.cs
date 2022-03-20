@@ -25,7 +25,7 @@ public class Player : RagnarComponent
         if (agent.targetSetted)
             agent.CalculatePath(agent.destination);
 
-        if (agent.MovePath()) { Debug.Log("No es null"); }
+        if (agent.MovePath()) { Debug.Log("Not null"); }
 
         ///////// SOUNDS /////////
         // Movement Sound
