@@ -622,6 +622,7 @@ std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 d
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
 	agentProp->path = calculatedPath;
+	agentProp->path.erase(agentProp->path.begin());
 
 	return calculatedPath;
 }
@@ -737,30 +738,14 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	rigidBody->activate(true);
 	//rigidBody->setAngularVelocity();
 
+	rigidBody->getWorldTransform().setRotation(Quat::RotateY(0));
+
 	//Angle
+	float2 forward = { 0, 1 };
+	float angle = forward.AngleBetween({ direction.x, direction.z });
 
-	//Quat quat = (Quat)rigidBody->getWorldTransform().getRotation();
-	//float2 twoQuat = (float2)(quat.ToEulerXYZ().x, quat.ToEulerXYZ().z);
-	//float angle = twoQuat.AngleBetween((float2)(direction.x, direction.z));
-	//rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
-
-	//float cross = direction.Length();
-	//float dot = direction.Dot({ 0,0,1 });
-	//double angle = atan2(cross, dot);
-	//rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
-
-	//Quat quat = (Quat)rigidBody->getWorldTransform().getRotation();
-	//float2 twoQuat = (float2)(quat.ToEulerXYZ().x, quat.ToEulerXYZ().z);
-	//float2 twoDir = (float2)(direction.x, direction.z);
-	//float angle = acos(twoQuat.Dot(twoDir) / (twoQuat.Length() * twoDir.Length()));
-	//rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
-
-	//Quat look = Quat::LookAt(agent->owner->GetComponent<TransformComponent>()->GetForward(),
-	//						 direction,
-	//						 agent->owner->GetComponent<TransformComponent>()->GetUp(),
-	//						 float3(0.0f, 1.0f, 0.0f));
-	//rigidBody->getWorldTransform().setRotation(Quat::FromEulerXYZ(look.ToEulerXYZ().x, 0, look.ToEulerXYZ().y));
-
+	if (direction.x < 0) angle = angle * (-1);
+	rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
 
 	//Movement
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
@@ -769,6 +754,12 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 		return true;
 
 	return false;
+}
+
+bool Pathfinder::RotateTo(btRigidBody* rigidBody, float3 direction, float speed)
+{
+
+	return true;
 }
 
 

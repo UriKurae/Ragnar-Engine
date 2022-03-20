@@ -15,6 +15,7 @@ class GameObject;
 class InputGeom;
 class NavMeshBuilder;
 class NavAgentComponent;
+class btRigidBody;
 
 enum class PathType
 {
@@ -71,6 +72,7 @@ public:
 	void RenderPath(NavAgentComponent* agent);
 	bool MovePath(NavAgentComponent* agent);
 	bool MoveTo(NavAgentComponent* agent, float3 destination);
+	bool RotateTo(btRigidBody* rigidBody, float3 direction, float speed);
 
 public:
 	dtNavMesh* m_navMesh;
