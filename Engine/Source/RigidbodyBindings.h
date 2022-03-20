@@ -116,3 +116,9 @@ void SetSphereRadius(MonoObject* go, float radius)
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
 	rb->SetSphereRadius(radius);
 }
+
+void SetHeight(MonoObject* go, float height)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->SetHeight(height);
+}

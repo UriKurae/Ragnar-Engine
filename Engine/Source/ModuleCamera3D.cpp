@@ -13,13 +13,14 @@
 
 #include <map>
 #include "Viewport.h"
+#include "GameView.h"
 #include "Geometry/LineSegment.h"
 #include "Geometry/Triangle.h"
 #include "SDL.h"
 
 #include "Profiling.h"
 
-ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), canBeUpdated(true)
+ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f)), verticalFov(0.0f), nearPlane(0.5f), farPlane(777.0f), Module(startEnabled), updateViewPort(true)
 {
 	name = "Camera3D";
 	cameraFrustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
@@ -124,7 +125,7 @@ bool ModuleCamera3D::SaveConfig(JsonParsing& node)
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Update(float dt)
 {
-	if (canBeUpdated)
+	if (updateViewPort)
 	{
 		float3 newPos = cameraFrustum.Pos();
 		float3 newFront = cameraFrustum.Front();
@@ -299,13 +300,13 @@ bool ModuleCamera3D::Update(float dt)
 		matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
 		matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
 	}
-	else
+	else if(updateGameView)
 	{
 		//TODO: Make the click work properly
 		float4 size = app->editor->GetViewport()->GetBounds();
 		//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
-		if (pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
+		if (app->editor->GetGameView()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
 		{
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP && !ImGuizmo::IsUsing())
 			{

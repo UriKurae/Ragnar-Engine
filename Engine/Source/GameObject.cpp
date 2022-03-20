@@ -23,6 +23,7 @@
 #include "Transform2DComponent.h"
 #include "NavAgentComponent.h"
 
+#include "GL/glew.h"
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 
@@ -484,6 +485,8 @@ void GameObject::OnLoad(JsonParsing& node)
 	staticObj = node.GetJsonBool("Static");
 	prefabID = node.GetJsonNumber("PrefabID");
 	prefabPath = node.GetJsonString("Prefab Path");
+	tag = node.GetJsonString("tag");
+	layer = node.GetJsonString("layer");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
 
@@ -507,6 +510,8 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PrefabID", prefabID);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
 

@@ -750,7 +750,7 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	//Movement
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
 
-	if (destination.Distance(offSet) < (MAX_ERROR * agent->agentProperties->speed))
+	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
 
 	return false;
