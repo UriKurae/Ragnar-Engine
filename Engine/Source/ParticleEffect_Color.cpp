@@ -17,7 +17,7 @@ void ParticleEffect_Color::Update(Particle& particle, float dt)
 {
 	float porcentage = particle.lifeRemaining / particle.lifeTime;
 	float4 color = float4::Lerp(endColor, startColor, porcentage);
-	color.w *= porcentage;
+	//color.w *= porcentage;
 	particle.color = color;
 }
 

@@ -361,13 +361,16 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		if (isEmitterCubical)
 		{
 			ImGui::PushItemWidth(200);
-			ImGui::SliderFloat("Spread distance X", &spreadDistanceX, 0.0f, 10.0f, "%.2f");
+			ImGui::DragFloat("Spread distance X", &spreadDistanceX, 0.1f, 0.0f);
+			//ImGui::SliderFloat("Spread distance X", &spreadDistanceX, 0.0f, 10.0f, "%.2f");
 			ImGui::PopItemWidth();
 			ImGui::PushItemWidth(200);
-			ImGui::SliderFloat("Spread distance Y", &spreadDistanceY, 0.0f, 10.0f, "%.2f");
+			ImGui::DragFloat("Spread distance Y", &spreadDistanceY, 0.1f, 0.0f);
+			//ImGui::SliderFloat("Spread distance Y", &spreadDistanceY, 0.0f, 10.0f, "%.2f");
 			ImGui::PopItemWidth();
 			ImGui::PushItemWidth(200);
-			ImGui::SliderFloat("Spread distance Z", &spreadDistanceZ, 0.0f, 10.0f, "%.2f");
+			ImGui::DragFloat("Spread distance Z", &spreadDistanceZ, 0.1f, 0.0f);
+			//ImGui::SliderFloat("Spread distance Z", &spreadDistanceZ, 0.0f, 10.0f, "%.2f");
 			ImGui::PopItemWidth();
 		}
 
