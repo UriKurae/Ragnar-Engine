@@ -11,20 +11,10 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 	agentProperties = new NavAgent;
 
 	pathfinding = app->navMesh->GetPathfinding();
-	pathfinding->agents.push_back(this);
 }
 
 NavAgentComponent::~NavAgentComponent()
 {
-	for (std::vector<NavAgentComponent*>::iterator it = pathfinding->agents.begin(); it != pathfinding->agents.end(); ++it)
-	{
-		if (*it == this)
-		{
-			pathfinding->agents.erase(it);
-			break;
-		}
-	}
-
 	agentProperties->path.clear();
 	RELEASE(agentProperties);
 }
@@ -72,8 +62,38 @@ void NavAgentComponent::OnEditor()
 		ImGui::SameLine();
 		if (ImGui::RadioButton("Straight Path", agentProperties->pathType == PathType::STRAIGHT))
 			agentProperties->pathType = PathType::STRAIGHT;
+		ImGui::Dummy({ 0,10 });
 
-		ImGui::Spacing();
+		//TODO: Hacer ma bonico
+		std::string name;
+		switch (agentProperties->AgentType)
+		{
+			case AgentType::ENEMY:
+				name = "Enemy";
+				break;
+			case AgentType::CHARACTER_1:
+				name = "Character 1";
+				break;
+		}
+		ImGui::Text("Agent Type"); ImGui::SameLine;
+		if (ImGui::BeginCombo("##AgentType", name.c_str()))
+		{
+			if (ImGui::Selectable("Enemy"))
+			{
+				agentProperties->AgentType = AgentType::ENEMY;
+				if (pathfinding->player == this) pathfinding->player = nullptr;
+			}
+
+			if (pathfinding->player == nullptr && ImGui::Selectable("Character 1"))
+			{
+				agentProperties->AgentType = AgentType::CHARACTER_1;
+				pathfinding->player = this;
+			}
+
+			ImGui::EndCombo();
+		}
+		ImGui::Dummy({ 0,10 });
+
 		ComponentOptions(this);
 	}
 	ImGui::PopID();
@@ -82,6 +102,8 @@ void NavAgentComponent::OnEditor()
 bool NavAgentComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
+
+	if (node.GetJsonBool("TargetSet") == true) pathfinding->player = this;
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
 	agentProperties->height = node.GetJsonNumber("Height");
@@ -130,6 +152,8 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	if (pathfinding->player == this) file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", true);
+	else file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", false);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", (float)agentProperties->radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", (float)agentProperties->height);

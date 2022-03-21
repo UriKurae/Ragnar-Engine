@@ -110,13 +110,13 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 
 	float3 hitPoint;
 	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-	if (hit && pathfinder->agents.size() > 0)
+	if (hit)
 	{
 		if (clickedMouseButton == SDL_BUTTON_LEFT)
 		{
 			//Just set the Player Target!!!
-			pathfinder->agents[0]->agentProperties->targetPos = hitPoint;
-			pathfinder->agents[0]->agentProperties->targetPosSet = true;
+			pathfinder->player->agentProperties->targetPos = hitPoint;
+			pathfinder->player->agentProperties->targetPosSet = true;
 		}
 		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
 		{
@@ -239,8 +239,6 @@ Pathfinder::~Pathfinder()
 	m_navMesh = nullptr;
 	m_navQuery = nullptr;
 	m_navMeshBuilder = nullptr;
-
-	agents.clear();
 }
 
 void Pathfinder::Init(NavMeshBuilder* builder)

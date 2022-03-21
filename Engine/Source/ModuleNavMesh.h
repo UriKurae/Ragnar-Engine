@@ -23,9 +23,16 @@ enum class PathType
 	STRAIGHT
 };
 
+enum class AgentType
+{
+	ENEMY,
+	CHARACTER_1,
+};
+
 struct NavAgent
 {
 	NavAgent();
+	AgentType AgentType = AgentType::ENEMY;
 
 	float radius = 0.0f;
 	float height = 0.0f;
@@ -81,7 +88,7 @@ public:
 	dtQueryFilter m_filter;
 	NavMeshBuilder* m_navMeshBuilder;
 
-	std::vector<NavAgentComponent*> agents;
+	NavAgentComponent* player = nullptr;
 };
 
 struct BuildSettings

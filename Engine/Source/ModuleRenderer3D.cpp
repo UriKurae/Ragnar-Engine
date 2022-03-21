@@ -11,6 +11,7 @@
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
+#include "NavAgentComponent.h"
 
 #include "ResourceManager.h"
 #include "Shader.h"
@@ -242,9 +243,8 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
 
-		Pathfinder* pathfinding = app->navMesh->GetPathfinding();
-		for (int i = 0; i < pathfinding->agents.size(); i++)
-			pathfinding->RenderPath(app->navMesh->GetPathfinding()->agents[i]);
+		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
+			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
 	}
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
