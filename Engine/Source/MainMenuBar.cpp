@@ -354,7 +354,7 @@ bool MainMenuBar::Update(float dt)
 				}
 				else if (ImGui::MenuItem("UI Text"))
 				{
-					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
 					object->SetName("text");
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					TextComponent* button = (TextComponent*)object->CreateComponent(ComponentType::UI_TEXT);

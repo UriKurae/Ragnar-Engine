@@ -43,7 +43,7 @@ GameObject::~GameObject()
 	{
 		RELEASE(components[i]);
 		if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
-			app->scene->GetQuadtree().Remove(this);
+			app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
 	}
 	components.clear();
 
@@ -341,7 +341,7 @@ void GameObject::RemoveComponent(Component* component)
 			components.erase(it);
 			RELEASE(component);
 			if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
-				app->scene->GetQuadtree().Remove(this);
+				app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
 			break;
 		}
 	}

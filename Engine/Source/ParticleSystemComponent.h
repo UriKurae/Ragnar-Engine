@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "ModuleScene.h"
+
 #include "ParticleEmitter.h"
 #include "GameTimer.h"
 #include "Dialogs.h"
