@@ -571,6 +571,11 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	//maxLifeTime = node.GetJsonNumber("Emitter: Max Life Time");
 	timer = node.GetJsonNumber("Emitter: Timer");
 	currTimer = node.GetJsonNumber("Emitter: Current Timer");
+	isEmitterCubical = node.GetJsonBool("Emitter: Is Cubical");
+
+	spreadDistanceX = node.GetJsonNumber("Cubical: Spread on X");
+	spreadDistanceY = node.GetJsonNumber("Cubical: Spread on Y");
+	spreadDistanceZ = node.GetJsonNumber("Cubical: Spread on Z");
 
 	particleReference.position = node.GetJson3Number(node, "Particle Reference Position");
 	particleReference.velocity = node.GetJson3Number(node, "Particle Reference Velocity");
@@ -616,6 +621,12 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	//file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Max Life Time", maxLifeTime);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Timer", timer);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Current Timer", currTimer);
+
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Emitter: Is Cubical", isEmitterCubical);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Cubical: Spread on X", spreadDistanceX);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Cubical: Spread on Y", spreadDistanceY);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Cubical: Spread on Z", spreadDistanceZ);
 
 	file.SetNewJson3Number(file, "Particle Reference Position", particleReference.position);
 	file.SetNewJson3Number(file, "Particle Reference Velocity", particleReference.velocity);
