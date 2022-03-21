@@ -6,6 +6,8 @@
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 #include "ModuleEditor.h"
+#include "ModuleNavMesh.h"
+#include "ModuleCamera3D.h"
 
 #include "GameView.h"
 #include "TransformComponent.h"
@@ -13,6 +15,8 @@
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 #include "Math/float3x3.h"
+#include "Geometry/LineSegment.h"
+#include "Imgui/ImGuizmo.h"
 
 #include <time.h>
 #include "Profiling.h"
@@ -152,6 +156,32 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
+	if (app->camera->updateGameView)
+	{
+		//TODO: Make the click work properly
+		float4 size = app->editor->GetGameView()->GetBounds();
+		//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
+		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
+		if (app->editor->GetGameView()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
+		{
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP && !ImGuizmo::IsUsing())
+			{
+				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
+
+				mousePos.x = 2 * ((mousePos.x - size.x) / (size.z)) - 1.0f;
+				mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
+
+				LineSegment picking = camera.UnProjectLineSegment(mousePos.x, mousePos.y);
+				LineSegment prevLine = picking;
+				if (app->scene->GetGameState() == GameState::PLAYING)
+					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
+
+				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
+				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
+			}
+		}
+	}
+
 	// This is bad!
 	if (targetUID != 0)
 	{
