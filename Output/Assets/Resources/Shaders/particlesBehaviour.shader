@@ -31,5 +31,10 @@ in vec4 vColor;
 
 void main()
 {
-	fragColor = texture(tex, vTexCoords) * vColor;
+	//fragColor = texture(tex, vTexCoords) * vColor;
+
+	vec4 texColor = texture(tex, vTexCoords) * vColor;
+    if(texColor.a < 0.1)
+        discard;
+    fragColor = texColor;
 }
