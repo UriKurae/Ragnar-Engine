@@ -110,7 +110,7 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 
 	float3 hitPoint;
 	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-	if (hit)
+	if (hit && pathfinder->player != nullptr)
 	{
 		if (clickedMouseButton == SDL_BUTTON_LEFT)
 		{
