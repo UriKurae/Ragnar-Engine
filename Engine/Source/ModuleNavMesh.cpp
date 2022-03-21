@@ -738,15 +738,8 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	rigidBody->activate(true);
 	//rigidBody->setAngularVelocity();
 
-	rigidBody->getWorldTransform().setRotation(Quat::RotateY(0));
-
-	//Angles
-	float2 axis = { 0, 1 };
-	float speed = agent->agentProperties->speed * DEGTORAD;
-	float angle = axis.AngleBetween({ direction.x, direction.z });
-
-	if (origin.x < 0) speed *= -1;
-	if (angle != inf) rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed));
+	//Rotation
+	SmoothLookAt(rigidBody, direction, origin, agent->agentProperties->speed * DEGTORAD);
 
 	//Movement
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
@@ -770,17 +763,18 @@ bool Pathfinder::LookAt(btRigidBody* rigidBody, float3 direction)
 	return true;
 }
 
-bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float3 direction, float speed)
+bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float3 direction, float3 origin, float speed)
 {
-	//float2 axis = { 0, 1 };
-	//float speed = agent->agentProperties->speed * DEGTORAD;
-	//float angleDir = axis.AngleBetween({ direction.x, direction.z });
-	//if (angleDir >= MAX_ERROR * (speed * RADTODEG))
-	//{
-	//	float angle = axis.AngleBetween({ origin.x, origin.z });
-	//
-	//	if (angle != inf) rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle + speed));
-	//}
+	//if (direction.Normalized() > origin.Normalized())
+	{
+		Quat quat = rigidBody->getWorldTransform().getRotation();
+		float angle = quat.ToEulerXYZ().y;
+
+		if (direction.x < 0 && origin.x < direction.x) speed *= -1;
+		else if (origin.x > direction.x) speed *= -1;
+
+		rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed + quat.ToEulerXYZ().y));
+	}
 
 	return true;
 }
