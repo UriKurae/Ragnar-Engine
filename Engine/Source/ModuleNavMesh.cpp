@@ -618,11 +618,11 @@ std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 d
 
 	calculatedPath.resize(agentProp->m_nstraightPath);
 	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
+	calculatedPath.erase(calculatedPath.begin());
 
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
 	agentProp->path = calculatedPath;
-	agentProp->path.erase(agentProp->path.begin());
 
 	return calculatedPath;
 }
@@ -738,17 +738,12 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	rigidBody->activate(true);
 	//rigidBody->setAngularVelocity();
 
-	rigidBody->getWorldTransform().setRotation(Quat::RotateY(0));
-
-	//Angle
-	float2 forward = { 0, 1 };
-	float angle = forward.AngleBetween({ direction.x, direction.z });
-
-	if (direction.x < 0) angle = angle * (-1);
-	rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
-
 	//Movement
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
+
+	//Rotation
+	SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
+	//LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
 
 	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
@@ -756,10 +751,44 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	return false;
 }
 
-bool Pathfinder::RotateTo(btRigidBody* rigidBody, float3 direction, float speed)
+bool Pathfinder::LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D)
 {
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR)
+	{
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
 
-	return true;
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed)
+{
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR*speed)
+	{
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
+
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			btTransform quat = rigidBody->getWorldTransform();
+			quat.setRotation(Quat::RotateY(angle));
+
+			rigidBody->getWorldTransform().setRotation(math::Lerp(rigidBody->getWorldTransform().getRotation(), quat.getRotation(), speed*app->GetEngineDeltaTime()));
+
+			return true;
+		}
+	}
+	return false;
 }
 
 

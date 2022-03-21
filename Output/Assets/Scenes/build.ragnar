@@ -209,8 +209,8 @@
                     "Height": 2,
                     "StopHeight": 0.89999997615814209,
                     "MaxSlope": 45,
-                    "Speed": 1,
-                    "AngularSpeed": 1,
+                    "Speed": 2,
+                    "AngularSpeed": 180,
                     "Acceleration": 1,
                     "StoppingDistance": 0,
                     "Target": [
