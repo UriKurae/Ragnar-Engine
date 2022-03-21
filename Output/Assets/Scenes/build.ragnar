@@ -188,7 +188,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 168038016,
+                    "pointer": 12931656,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -199,7 +199,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 168037848,
+                    "pointer": 12932944,
                     "type": 4,
                     "componentTable": 0,
                     "force": 100,
@@ -213,7 +213,7 @@
                     "StopHeight": 0.89999997615814209,
                     "MaxSlope": 45,
                     "Speed": 2,
-                    "AngularSpeed": 1,
+                    "AngularSpeed": 180,
                     "Acceleration": 1,
                     "StoppingDistance": 0,
                     "Target": [
@@ -1470,8 +1470,8 @@
                         0
                     ],
                     "Scale": [
-                        11.606715202331543,
-                        5.7117714881896973,
+                        63.161819458007813,
+                        35.176151275634766,
                         1
                     ],
                     "rotationEuler": [
@@ -1513,8 +1513,8 @@
                         0
                     ],
                     "Scale": [
-                        9.0242204666137695,
-                        5.7117714881896973,
+                        49.108314514160156,
+                        35.176151275634766,
                         1
                     ],
                     "rotationEuler": [
@@ -1594,10 +1594,10 @@
                         13.648064613342285
                     ],
                     "Quaternion": [
-                        0.25525948405265808,
-                        -0.58351808786392212,
-                        0.28791782259941101,
-                        0.71515911817550659
+                        0.060316666960716248,
+                        -0.69471806287765503,
+                        -0.047709580510854721,
+                        0.71515905857086182
                     ],
                     "RotationEditor": [
                         0,
@@ -1613,7 +1613,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.9574846625328064,
+                    "Vertical Fov": 0.85998672246932983,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -0.26639080047607422,
@@ -1635,10 +1635,7 @@
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 556.39971923828125,
-                    "Right Click Rotation": true,
                     "Arrow Rotation": false,
-                    "WASD Movement": false,
-                    "Border Movement": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
