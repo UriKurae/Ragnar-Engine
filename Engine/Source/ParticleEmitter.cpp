@@ -27,6 +27,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	spreadDistanceX(2.0f), 
 	spreadDistanceY(2.0f),
 	spreadDistanceZ(2.0f),
+	followPlayer(true),
 	isEmitterCubical(false),
 	isActive(true),
 	showTexMenu(false),
@@ -96,11 +97,18 @@ void ParticleEmitter::Emit(float dt)
 		Particle& particle = particlePool[poolIndex];
 		particle.active = true;
 
-		if (!isEmitterCubical)
+		if (!isEmitterCubical  || !followPlayer)
 		{
 			particle.position = particleReference.position;
 		}
-		else 
+		if (followPlayer)
+		{
+			GameObject* player = new GameObject();
+			player = app->scene->GetPlayer();
+
+			particle.position = player->GetComponent<TransformComponent>()->GetPosition();
+		}
+		if (isEmitterCubical)
 		{
 			particle.position.x = particleReference.position.x + random.Float(-spreadDistanceX, spreadDistanceX);
 			particle.position.y = particleReference.position.y + random.Float(-spreadDistanceY, spreadDistanceY);
@@ -347,6 +355,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 			toDelete = true;
 		}
 
+		(ImGui::Checkbox("Follow the player's character", &followPlayer));
 		(ImGui::Checkbox("Cubical emitter", &isEmitterCubical));
 
 		if (isEmitterCubical)

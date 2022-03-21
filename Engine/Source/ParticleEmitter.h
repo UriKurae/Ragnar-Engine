@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Particle.h"
 #include "ParticleEffect.h"
+#include "ModuleScene.h"
 #include "Algorithm/Random/LCG.h"
 
 #include <array>
@@ -109,6 +110,8 @@ private:
 	std::shared_ptr<Texture> texture;
 
 	ParticleEffect* effect;
+
+	bool followPlayer;
 
 	bool isEmitterCubical;
 	float spreadDistanceX;
