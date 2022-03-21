@@ -9,6 +9,8 @@
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
 
+#include "GL/glew.h"
+
 TextComponent::TextComponent(GameObject* own)
 {
 	owner = own;
@@ -106,15 +108,13 @@ float2 TextComponent::GetParentPosition()
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
-	std::string text;
-
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = owner;
 	owner->isUI = true;
 	app->userInterface->UIGameObjects.push_back(owner);
-	text = node.GetJsonString("buttonText");
+	//text = node.GetJsonString("buttonText");
 
-	buttonText.textt = text;
+	//buttonText.textt = text;
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");

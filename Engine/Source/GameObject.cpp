@@ -4,6 +4,7 @@
 #include "ParticleSystemComponent.h"
 
 #include "ModuleScene.h"
+#include "GL/glew.h"
 
 #include "C_RigidBody.h"
 #include "TransformComponent.h"
@@ -24,7 +25,6 @@
 #include"TextComponent.h"
 #include "NavAgentComponent.h"
 
-#include "GL/glew.h"
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 

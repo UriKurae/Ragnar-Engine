@@ -18,6 +18,7 @@
 #include "Framebuffer.h"
 #include "NavMeshBuilder.h"
 
+#include "GL/glew.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/ImguiStyle.h"

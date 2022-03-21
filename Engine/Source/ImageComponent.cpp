@@ -8,6 +8,8 @@
 #include"GameObject.h"
 #include "MaterialComponent.h"
 
+#include "GL/glew.h"
+
 ImageComponent::ImageComponent(GameObject* own)
 {
 	type = ComponentType::UI_IMAGE;

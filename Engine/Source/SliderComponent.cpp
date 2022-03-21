@@ -12,6 +12,7 @@
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
 
+#include "GL/glew.h"
 #include "GameView.h"
 
 SliderComponent::SliderComponent(GameObject* own)

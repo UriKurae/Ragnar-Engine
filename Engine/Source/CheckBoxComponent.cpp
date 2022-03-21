@@ -9,6 +9,8 @@
 #include"MaterialComponent.h"
 #include "Transform2DComponent.h"
 
+#include "GL/glew.h"
+
 CheckboxComponent::CheckboxComponent(GameObject* own)
 {
 	type = ComponentType::UI_CHECKBOX;

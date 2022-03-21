@@ -8,6 +8,7 @@
 #include"GameObject.h"
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
+#include "GL/glew.h"
 
 ButtonComponent::ButtonComponent(GameObject* own)
 {
