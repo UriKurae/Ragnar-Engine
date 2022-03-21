@@ -103,6 +103,18 @@ bool InputActionComponent::OnLoad(JsonParsing& node)
 
 bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
+	JsonParsing file = JsonParsing();
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	JSON_Array* array = file.SetNewJsonArray(file.GetRootValue(), "Action Maps");
+	for (int i = 0; i < currentActionMaps.size(); i++)
+	{
+		currentActionMaps[i]->OnSave(file, array);
+	}
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Asset Path", currentAssetName.c_str());
+
+	node.SetValueToArray(array, file.GetRootValue());
+
 	return false;
 }
 
