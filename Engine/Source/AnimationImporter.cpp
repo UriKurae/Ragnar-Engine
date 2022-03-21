@@ -43,40 +43,56 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 		}
 
 		// Save Key positions
-		int boneKeys = animation->mChannels[i]->mNumPositionKeys;
-		for (int j = 0; j < boneKeys; ++j)
+		int keyPositions = animation->mChannels[i]->mNumPositionKeys;
+		int keyScales = animation->mChannels[i]->mNumScalingKeys;
+		int keyRotations = animation->mChannels[i]->mNumRotationKeys;
+		int size = keyRotations;
+		
+		if (size < keyScales)
 		{
-			KeyPosition pos;
-			pos.position.x = animation->mChannels[i]->mPositionKeys[j].mValue.x;
-			pos.position.y = animation->mChannels[i]->mPositionKeys[j].mValue.y;
-			pos.position.z = animation->mChannels[i]->mPositionKeys[j].mValue.z;
-			pos.timeStamp = animation->mChannels[i]->mPositionKeys[j].mTime;
-			bone.positions.push_back(pos);
+			size = keyScales;
+		}
+		if (size < keyPositions)
+		{
+			size = keyPositions;
 		}
 
-		// Save Key scales
-		boneKeys = animation->mChannels[i]->mNumScalingKeys;
-		for (int j = 0; j < boneKeys; ++j)
+		Keys keyframes;
+		for (int j = 0, k = 0, l = 0; j < size && k < size && l < size; ++j, ++k, ++l)
 		{
-			KeyScale scale;
-			scale.scale.x = animation->mChannels[i]->mScalingKeys[j].mValue.x;
-			scale.scale.y = animation->mChannels[i]->mScalingKeys[j].mValue.y;
-			scale.scale.z = animation->mChannels[i]->mScalingKeys[j].mValue.z;
-			scale.timeStamp = animation->mChannels[i]->mScalingKeys[j].mTime;
-			bone.scales.push_back(scale);
-		}
 
-		// Save Key Rotations
-		boneKeys = animation->mChannels[i]->mNumRotationKeys;
-		for (int j = 0; j < boneKeys; ++j)
-		{
-			KeyRotation rotations;
-			rotations.orientation.x = animation->mChannels[i]->mRotationKeys[j].mValue.x;
-			rotations.orientation.y = animation->mChannels[i]->mRotationKeys[j].mValue.y;
-			rotations.orientation.z = animation->mChannels[i]->mRotationKeys[j].mValue.z;
-			rotations.orientation.w = animation->mChannels[i]->mRotationKeys[j].mValue.w;
-			rotations.timeStamp = animation->mChannels[i]->mRotationKeys[j].mTime;
-			bone.rotations.push_back(rotations);
+			float3 pos;
+			if (j == keyPositions) j = keyPositions - 1;
+			pos.x = animation->mChannels[i]->mPositionKeys[j].mValue.x;
+			pos.y = animation->mChannels[i]->mPositionKeys[j].mValue.y;
+			pos.z = animation->mChannels[i]->mPositionKeys[j].mValue.z;
+
+			float3 scales;
+			if (k == keyScales) k = keyScales - 1;
+			scales.x = animation->mChannels[i]->mScalingKeys[k].mValue.x;
+			scales.y = animation->mChannels[i]->mScalingKeys[k].mValue.y;
+			scales.z = animation->mChannels[i]->mScalingKeys[k].mValue.z;
+
+			Quat rot;
+			if (l == keyRotations) l = keyRotations - 1;
+			rot.x = animation->mChannels[i]->mRotationKeys[l].mValue.x;
+			rot.y = animation->mChannels[i]->mRotationKeys[l].mValue.y;
+			rot.z = animation->mChannels[i]->mRotationKeys[l].mValue.z;
+			rot.w = animation->mChannels[i]->mRotationKeys[l].mValue.w;
+
+			keyframes.matrix = keyframes.matrix.FromTRS(pos, rot, scales);
+			keyframes.timeStamp = animation->mChannels[i]->mRotationKeys[l].mTime;
+		
+			if (size < keyScales)
+			{
+				keyframes.timeStamp = animation->mChannels[i]->mScalingKeys[k].mTime;
+			}
+			if (size < keyPositions)
+			{
+				keyframes.timeStamp = animation->mChannels[i]->mPositionKeys[j].mTime;
+			}
+
+			bone.keyFrames.push_back(keyframes);
 		}
 
 		bones.push_back(bone);
@@ -84,6 +100,44 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 
 	HierarchyData data;
 	ReadHierarchyData(data, scene->mRootNode, bones, boneCount);
+
+	FilterBones(bones);
+
+	for (int i = 0; i < bones.size(); i++)
+	{
+		if (bones[i].name.find("$") != std::string::npos)
+		{
+			bones.erase(bones.begin() + i);
+			i = 0;
+		}
+	}
+
+	std::vector<int> usedIds;
+	for (int i = 0; i < bones.size(); i++)
+	{
+		if (bonesID.find(bones[i].name) != bonesID.end())
+		{
+			bones[i].id = bonesID[bones[i].name].id;
+			usedIds.push_back(bones[i].id);
+		}
+		else
+		{
+			bones[i].id = -1;
+		}
+	}
+	int index = 0;
+	for (int i = 0; i < bones.size(); ++i)
+	{
+		if (bones[i].id == -1)
+		{
+			while (std::find(usedIds.begin(), usedIds.end(), index) != usedIds.end())
+			{
+				++index;
+			}
+			bones[i].id = index;
+			usedIds.push_back(index);
+		}
+	}
 
 	std::string animName;
 	std::string assetsPath(path);
@@ -141,45 +195,48 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 		bone.SetNewJsonNumber(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), boneData[i].id);
 		itemName = "Name" + std::to_string(i);
 		bone.SetNewJsonString(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), boneData[i].name.c_str());
+		
+		int sizeKeys = boneData[i].keyFrames.size();
+		itemName = "KeyFrameSize" + std::to_string(i);
+		bone.SetNewJsonNumber(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), sizeKeys);
 
 		// Prepare array for positions
 		itemName = "Positions" + std::to_string(i);
 		JSON_Array* positionsArray = bone.SetNewJsonArray(bone.GetRootValue(), itemName.c_str());
-		int size = boneData[i].positions.size();
-		for (int j = 0; j < size; ++j)
+
+		std::string scalesName = "Scales" + std::to_string(i);
+		JSON_Array* scalesArray = bone.SetNewJsonArray(bone.GetRootValue(), scalesName.c_str());
+
+		std::string rotationName = "Rotations" + std::to_string(i);
+		JSON_Array* rotationsArray = bone.SetNewJsonArray(bone.GetRootValue(), rotationName.c_str());
+
+		for (int j = 0; j < sizeKeys; ++j)
 		{
+			float3 pos;
+			float3 scales;
+			Quat rot;
+			boneData[i].keyFrames[j].matrix.Decompose(pos, rot, scales);
+
 			// Save all positions
-			json_array_append_number(positionsArray, boneData[i].positions[j].position.x);
-			json_array_append_number(positionsArray, boneData[i].positions[j].position.y);
-			json_array_append_number(positionsArray, boneData[i].positions[j].position.z);
-			json_array_append_number(positionsArray, boneData[i].positions[j].timeStamp);
-		}
+			json_array_append_number(positionsArray, pos.x);
+			json_array_append_number(positionsArray, pos.y);
+			json_array_append_number(positionsArray, pos.z);
+			json_array_append_number(positionsArray, boneData[i].keyFrames[j].timeStamp);
 
-		// Prepare array for scales
-		itemName = "Scales" + std::to_string(i);
-		JSON_Array* scalesArray = bone.SetNewJsonArray(bone.GetRootValue(), itemName.c_str());
-		size = boneData[i].scales.size();
-		for (int j = 0; j < size; ++j)
-		{
-			// Save all Scales
-			json_array_append_number(scalesArray, boneData[i].scales[j].scale.x);
-			json_array_append_number(scalesArray, boneData[i].scales[j].scale.y);
-			json_array_append_number(scalesArray, boneData[i].scales[j].scale.z);
-			json_array_append_number(scalesArray, boneData[i].scales[j].timeStamp);
-		}
+			// Save all scales
+			json_array_append_number(scalesArray, scales.x);
+			json_array_append_number(scalesArray, scales.y);
+			json_array_append_number(scalesArray, scales.z);
+			json_array_append_number(scalesArray, boneData[i].keyFrames[j].timeStamp);
 
-		// Prepare array for rotations
-		itemName = "Rotations" + std::to_string(i);
-		JSON_Array* rotationsArray = bone.SetNewJsonArray(bone.GetRootValue(), itemName.c_str());
-		size = boneData[i].rotations.size();
-		for (int j = 0; j < size; ++j)
-		{
 			// Save all rotations
-			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.x);
-			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.y);
-			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.z);
-			json_array_append_number(rotationsArray, boneData[i].rotations[j].orientation.w);
-			json_array_append_number(rotationsArray, boneData[i].rotations[j].timeStamp);
+			json_array_append_number(rotationsArray, rot.x);
+			json_array_append_number(rotationsArray, rot.y);
+			json_array_append_number(rotationsArray, rot.z);
+			json_array_append_number(rotationsArray, rot.w);
+			json_array_append_number(rotationsArray, boneData[i].keyFrames[j].timeStamp);
+
+
 		}
 	}
 	// Append everything to the first json array
@@ -258,45 +315,50 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 
 			aux = "Positions" + std::to_string(i);
 			JSON_Array* positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
-			size_t size = file.GetJsonArrayCount(positionsArray);
-			for (int j = 0; j < size; j += 4)
+			size_t positionsSize = file.GetJsonArrayCount(positionsArray);
+
+			std::string scales = "Scales" + std::to_string(i);
+			JSON_Array* scalesArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), scales.c_str());
+			size_t scalesSize = file.GetJsonArrayCount(scalesArray);
+
+			std::string rotations = "Rotations" + std::to_string(i);
+			JSON_Array* rotationsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), rotations.c_str());
+			size_t rotationsSize = file.GetJsonArrayCount(rotationsArray);
+
+			std::string sizeKeyFrames = "KeyFrameSize" + std::to_string(i);
+			int size = jsonBone.GetJsonNumber(sizeKeyFrames.c_str());
+
+			int indexPos = 0;
+			int indexScales = 0;
+			int indexRot = 0;
+			for (int j = 0; j < size; ++j)
 			{
-				KeyPosition pos;
-				pos.position.x = json_array_get_number(positionsArray, j);
-				pos.position.y = json_array_get_number(positionsArray, j + 1);
-				pos.position.z = json_array_get_number(positionsArray, j + 2);
-				pos.timeStamp = json_array_get_number(positionsArray, j + 3);
+				Keys keys;
+				float3 positions;
+				positions.x = json_array_get_number(positionsArray, indexPos);
+				positions.y = json_array_get_number(positionsArray, indexPos + 1);
+				positions.z = json_array_get_number(positionsArray, indexPos + 2);
+				float timeStamp = json_array_get_number(positionsArray, indexPos + 3);
+				indexPos += 4;
 
-				boneData.positions.push_back(pos);
-			}
+				float3 scales;
+				scales.x = json_array_get_number(scalesArray, indexScales);
+				scales.y = json_array_get_number(scalesArray, indexScales + 1);
+				scales.z = json_array_get_number(scalesArray, indexScales + 2);
+				timeStamp = json_array_get_number(scalesArray, indexScales + 3);
+				indexScales += 4;
 
-			aux = "Rotations" + std::to_string(i);
-			positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
-			size = file.GetJsonArrayCount(positionsArray);
-			for (int j = 0; j < size; j += 5)
-			{
-				KeyRotation rot;
-				rot.orientation.x = json_array_get_number(positionsArray, j);
-				rot.orientation.y = json_array_get_number(positionsArray, j + 1);
-				rot.orientation.z = json_array_get_number(positionsArray, j + 2);
-				rot.orientation.w = json_array_get_number(positionsArray, j + 3);
-				rot.timeStamp = json_array_get_number(positionsArray, j + 4);
+				Quat rot;
+				rot.x = json_array_get_number(rotationsArray, indexRot);
+				rot.y = json_array_get_number(rotationsArray, indexRot + 1);
+				rot.z = json_array_get_number(rotationsArray, indexRot + 2);
+				rot.w = json_array_get_number(rotationsArray, indexRot + 3);
+				timeStamp = json_array_get_number(rotationsArray, indexRot + 4);
+				indexRot += 5;
 
-				boneData.rotations.push_back(rot);
-			}
-
-			aux = "Scales" + std::to_string(i);
-			positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
-			size = file.GetJsonArrayCount(positionsArray);
-			for (int j = 0; j < size; j += 4)
-			{
-				KeyScale sca;
-				sca.scale.x = json_array_get_number(positionsArray, j);
-				sca.scale.y = json_array_get_number(positionsArray, j + 1);
-				sca.scale.z = json_array_get_number(positionsArray, j + 2);
-				sca.timeStamp = json_array_get_number(positionsArray, j + 3);
-
-				boneData.scales.push_back(sca);
+				keys.matrix = keys.matrix.FromTRS(positions, rot, scales);
+				keys.timeStamp = timeStamp;
+				boneData.keyFrames.push_back(keys);
 			}
 
 			Bone bone(boneData);
@@ -309,7 +371,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 	RELEASE_ARRAY(buffer);
 }
 
-void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bones, int count)
+void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bones, int count, int index)
 {
 	data.name = node->mName.C_Str();
 
@@ -340,32 +402,34 @@ void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std
 		BoneData boneData;
 		boneData.id = count;
 		boneData.name = data.name;
+		
+		Keys keyframe;
+		keyframe.matrix = data.transform;
+		keyframe.timeStamp = 0.0f;
+		boneData.keyFrames.push_back(keyframe);
 
-		KeyPosition position;
-		position.position = pos;
-		position.timeStamp = 0.0f;
-
-		boneData.positions.push_back(position);
-
-		KeyRotation rotation;
-		rotation.orientation = rot;
-		rotation.timeStamp = 0.0f;
-
-		boneData.rotations.push_back(rotation);
-
-		KeyScale scale;
-		scale.scale = sca;
-		scale.timeStamp = 0.0f;
-
-		boneData.scales.push_back(scale);
-
-		bones.push_back(boneData);
+		bones.insert(bones.begin() + index, boneData);
 	}
+	else
+	{
+		for (int i = 0; i < bones.size(); ++i)
+		{
+			if (bones[i].name == data.name)
+			{
+				BoneData d = bones[i];
+				bones.erase(bones.begin() + i);
+				bones.insert(bones.begin() + index, d);
+				break;
+			}
+		}
+	}
+
+	index++;
 
 	for (int i = 0; i < data.childrenCount; ++i)
 	{
 		HierarchyData childData;
-		ReadHierarchyData(childData, node->mChildren[i], bones, count);
+		ReadHierarchyData(childData, node->mChildren[i], bones, count, index);
 		data.children.push_back(childData);
 	}
 }
@@ -839,4 +903,52 @@ void AnimationImporter::SaveBone(std::string& name,unsigned int numWeights, floa
 		DEBUG_LOG("Bone %s saved succesfully", name.c_str());
 
 	RELEASE_ARRAY(buffer);
+}
+
+void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
+{
+	std::vector<BoneData> dollarsVisited;
+	for (int i = 0; i < bones.size(); ++i)
+	{
+		if (bones[i].name.find("$") != std::string::npos)
+		{
+			dollarsVisited.push_back(bones[i]);
+		}
+		else
+		{
+			if (!dollarsVisited.empty())
+			{
+				for (int j = dollarsVisited.size() - 1; 0 <= j; --j)
+				{
+					int size = dollarsVisited[j].keyFrames.size();
+					if (bones[i].keyFrames.size() < size)
+					{
+						for (int l = bones[i].keyFrames.size()-1; l < size-1; ++l)
+						{
+							bones[i].keyFrames.push_back(bones[i].keyFrames[l]);
+						}
+					}
+
+					int k = 0;
+					int index = 0;
+					for (k = 0; k < size; k++)
+					{
+						bones[i].keyFrames[k].matrix = bones[i].keyFrames[k].matrix * dollarsVisited[j].keyFrames[k].matrix ;
+						bones[i].keyFrames[k].timeStamp = dollarsVisited[j].keyFrames[k].timeStamp;
+			
+						index = k;
+					}
+					if (bones[i].keyFrames.size() > k)
+					{
+						float4x4 mat = bones[i].keyFrames[index].matrix;
+						for (; k < bones[i].keyFrames.size(); ++k)
+						{
+							bones[i].keyFrames[k].matrix = mat;
+						}
+					}
+				}
+				dollarsVisited.clear();
+			}
+		}
+	}
 }

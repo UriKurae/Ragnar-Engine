@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "C_RigidBody.h"
 #include "ScriptComponent.h"
 #include "TransformComponent.h"
@@ -51,9 +52,13 @@ bool Physics3D::Start()
 
 bool Physics3D::PreUpdate(float dt)
 {
-	world->stepSimulation(dt, 15);
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::NOT_PLAYING)
 	{
+		world->stepSimulation(dt, 15);
+	}
+	else if (app->sceneManager->GetGameState() == GameState::PLAYING)
+	{
+		world->stepSimulation(app->sceneManager->GetGameDeltaTime(), 15);
 		int numManifolds = world->getDispatcher()->getNumManifolds();
 		if (numManifolds > 0)
 		{
@@ -286,7 +291,7 @@ btRigidBody* Physics3D::AddBody(btCollisionShape* colShape, btTransform startTra
 		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		body->setActivationState(DISABLE_DEACTIVATION);
 	}		
-	if (app->scene->GetGameState() != GameState::PLAYING)
+	if (app->sceneManager->GetGameState() != GameState::PLAYING)
 		body->setActivationState(ISLAND_SLEEPING);
 	if(component->trigger) body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 

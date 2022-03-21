@@ -174,9 +174,6 @@
     <ClCompile Include="Engine\Source\ModuleUI.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\ModuleScene.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -882,9 +879,6 @@
     <ClInclude Include="Engine\Source\ModuleUI.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\ModuleScene.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -904,6 +898,12 @@
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\AudioManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ModuleSceneManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Scene.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\TransformComponent.h">
@@ -1615,6 +1615,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ImageComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ModuleSceneManager.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Scene.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\NavigatorMenu.cpp">
       <Filter>Sources\Menus</Filter>

@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "MonoManager.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "TransformComponent.h"
 
 #include <mono/jit/jit.h>
@@ -93,6 +94,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
+	mono_add_internal_call("RagnarEngine.Time::set_timeScale", SetTimeScale);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
 	mono_add_internal_call("RagnarEngine.GameObject::Find", FindGameObjectWithName);
 	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectsWithTag", FindGameObjectsWithTag);
@@ -154,6 +156,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
 	// Camera ====================
 
+	// Scene Manager =============
+	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
+	// Scene Manager =============
+
 	// UI
 	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
 	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
@@ -199,10 +206,10 @@ bool MonoManager::CleanUp()
 
 void MonoManager::ReCompileCS()
 {
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 		return;
 
-	app->scene->SaveScene("Assets/Scenes/scenePlay.ragnar");
+	app->sceneManager->GetCurrentScene()->SaveScene("Assets/Scenes/scenePlay.ragnar");
 
 	//TODO: Clean scene and all render data
 	//app->scene->CleanScene();
@@ -219,7 +226,7 @@ void MonoManager::ReCompileCS()
 	CMDCompileCS();
 	InitMono();
 
-	app->scene->LoadScene("Assets/Scenes/scenePlay.ragnar");
+	app->sceneManager->GetCurrentScene()->LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 
 }

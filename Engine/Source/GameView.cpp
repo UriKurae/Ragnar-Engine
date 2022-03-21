@@ -3,7 +3,9 @@
 
 #include "ModuleCamera3D.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleScene.h"
+
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "Framebuffer.h"
 #include "Profiling.h"
@@ -40,7 +42,7 @@ void GameView::Draw(Framebuffer* framebuffer)
 			sizeViewport.y = size.y;
 			framebuffer->ResizeFramebuffer(size.x, size.y);
 			app->renderer3D->OnResize(size.x, size.y);
-			app->scene->mainCamera->UpdateFovAndScreen(size.x, size.y);
+			app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
 		}
 
 		bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };

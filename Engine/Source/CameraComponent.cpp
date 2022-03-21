@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 #include "ModuleEditor.h"
@@ -122,7 +123,7 @@ void CameraComponent::OnEditorMovement()
 			if (go)
 			{
 				uint uuid = *(const uint*)(go->Data);
-				target = app->scene->GetGoByUuid(uuid);
+				target = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -173,7 +174,7 @@ bool CameraComponent::Update(float dt)
 
 				LineSegment picking = camera.UnProjectLineSegment(mousePos.x, mousePos.y);
 				LineSegment prevLine = picking;
-				if (app->scene->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
@@ -185,7 +186,7 @@ bool CameraComponent::Update(float dt)
 	// This is bad!
 	if (targetUID != 0)
 	{
-		target = app->scene->GetGoByUuid(targetUID);
+		target = app->sceneManager->GetCurrentScene()->GetGoByUuid(targetUID);
 		targetUID = 0;
 	}
 

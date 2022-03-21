@@ -9,29 +9,15 @@ struct BoneInfo
 	float4x4 offset;
 };
 
-struct KeyPosition
+struct Keys
 {
-	float3 position = {0.0f, 0.0f, 0.0f};
-	float timeStamp = 0.0f;
-};
-
-struct KeyRotation
-{
-	Quat orientation = { 0.0f, 0.0f, 0.0f, 1.0f };
-	float timeStamp = 0.0f;
-};
-
-struct KeyScale
-{
-	float3 scale = { 1.0f, 1.0f, 1.0f };
+	float4x4 matrix = {};
 	float timeStamp = 0.0f;
 };
 
 struct BoneData 
 {
-	std::vector<KeyPosition> positions = {};
-	std::vector<KeyScale> scales = {};
-	std::vector<KeyRotation> rotations = {};
+	std::vector<Keys> keyFrames = {};
 
 	std::string name = "";
 	int id = 0;
@@ -42,6 +28,7 @@ class Bone
 public:
 	Bone(){}
 	Bone(BoneData boneData);
+	~Bone();
 
 	void Update(float animationTime);
 	void UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);

@@ -1,7 +1,7 @@
 #pragma once
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
 
 #include "ResourceManager.h"
@@ -10,7 +10,7 @@
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
 #include "Texture.h"
-
+#include "Scene.h"
 #include "TransformBindings.h"
 
 #include <queue>
@@ -166,7 +166,7 @@ void SetTexturePath(MonoObject* go, MonoObject* texturePath)
 // GameObject =======================
 MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
-	GameObject* go = app->scene->CreateGameObject(nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -183,7 +183,7 @@ MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoOb
 void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* position, MonoObject* rotation)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -199,7 +199,7 @@ void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* positi
 MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObject* position)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -240,7 +240,7 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
 	std::queue<GameObject*> q;
-	for (auto& go : app->scene->GetGameObjectsList())
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
 		q.push(go);
 
 	while (!q.empty())
@@ -267,7 +267,7 @@ MonoArray* FindGameObjectsWithTag(MonoObject* tag)
 	char* tagName = mono_string_to_utf8(mono_object_to_string(tag, 0));
 	
 	std::vector<MonoObject*> objects;
-	for (auto& go : app->scene->GetGameObjectsList())
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
 	{
 		if (go->tag == tagName)
 			objects.push_back(app->moduleMono->GoToCSGO(go));
@@ -356,5 +356,22 @@ void SetButtonText(MonoObject* go, MonoString* text)
 
 float GetGameTimeStep()
 {
-	return app->scene->GetGameDeltaTime();
+	return app->sceneManager->GetGameDeltaTime();
+}
+
+void SetTimeScale(float scale)
+{
+	app->sceneManager->GetTimer().SetTimeScale(scale);
+}
+
+// Scene Manager
+void NextScene()
+{
+	app->sceneManager->NextScene();
+}
+
+void LoadScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->NextScene(name);
 }

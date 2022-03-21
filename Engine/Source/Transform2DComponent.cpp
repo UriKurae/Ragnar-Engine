@@ -2,9 +2,11 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
-#include "ModuleScene.h"
 
 #include "GameObject.h"
 #include "GameView.h"
@@ -43,7 +45,7 @@ ComponentTransform2D::~ComponentTransform2D()
 bool ComponentTransform2D::Update(float dt)
 {
 	
-	float4 viewport = app->editor->GetGameView()->GetBounds() * app->scene->mainCamera->GetZoomRatio();
+	float4 viewport = app->editor->GetGameView()->GetBounds() * app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float temporalW = (viewport.z * 25) / 847;
 	float temporalH = (viewport.w * 15) / 649;
 	scale.x = (buttonWidth / 0.6) / temporalW;

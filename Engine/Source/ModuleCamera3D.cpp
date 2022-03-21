@@ -4,7 +4,10 @@
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+
 #include "ModuleNavMesh.h"
 
 #include "TransformComponent.h"
@@ -230,7 +233,7 @@ bool ModuleCamera3D::Update(float dt)
 				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
 				LineSegment prevLine = picking;
 				rayCastToDraw = picking.ToLine();
-				if (app->scene->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
@@ -238,7 +241,7 @@ bool ModuleCamera3D::Update(float dt)
 				bool hit = false;
 
 				std::vector<GameObject*> gameObjects;
-				app->scene->GetQuadtree().CollectGo(gameObjects);
+				app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects);
 
 				std::vector<GameObject*>::iterator it = gameObjects.begin();
 				std::map<float, GameObject*> triangleMap;

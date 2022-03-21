@@ -1,6 +1,7 @@
 #include "ScriptComponent.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "MonoManager.h"
 
 #include "C_RigidBody.h"
@@ -47,7 +48,7 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() != GameState::PLAYING 
+	if (app->sceneManager->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
 		callStart = true;
@@ -57,10 +58,11 @@ bool ScriptComponent::Update(float dt)
 	ScriptComponent::runningScript = this;
 
 	MonoObject* startExec = nullptr;
-	if (callStart)
+	if (callStart || app->sceneManager->newSceneLoaded)
 	{
 		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
 		callStart = false;
+		app->sceneManager->newSceneLoaded = false;
 	}
 
 	MonoObject* exec = nullptr;
@@ -161,7 +163,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				if (go)
 				{
 					uint uuid = *(const uint*)(go->Data);
-					field.fiValue.goValue = app->scene->GetGoByUuid(uuid);
+					field.fiValue.goValue = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 				}
 				SetField(field.field, field.fiValue.goValue);
 			}
@@ -226,7 +228,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 						if (go)
 						{
 							uint uuid = *(const uint*)(go->Data);
-							cpp_obj = app->scene->GetGoByUuid(uuid);
+							cpp_obj = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 						}
 						arrayElementGO = app->moduleMono->GoToCSGO(cpp_obj);
 						mono_array_set(field.fiValue.arrValue, MonoObject*, i, arrayElementGO);
@@ -319,7 +321,7 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 		{
 			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "RagnarEngine.GameObject") == 0)
-				app->scene->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
+				app->sceneManager->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
 
 			break;
 		}

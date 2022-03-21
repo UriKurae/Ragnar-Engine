@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 
@@ -131,8 +132,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		texture->Bind();
 	shader->Use();
 
-	CameraComponent* cam = app->scene->camera->GetComponent<CameraComponent>();
-	
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 
 	if (theButton)
 	{
@@ -368,7 +368,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	
 	shader->Use();
 	Frustum frustum;
-	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
+	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 	
 	frustum.pos = camera->GetFrustum()->pos;
 	
@@ -441,8 +441,9 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	
-		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+	/*if (app->gameMode)
+	{*/
+		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
