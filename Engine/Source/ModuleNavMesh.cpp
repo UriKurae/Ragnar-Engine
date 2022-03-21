@@ -742,8 +742,8 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
 
 	//Rotation
-	//SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
-	LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
+	SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
+	//LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
 
 	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
@@ -781,26 +781,10 @@ bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2
 		{
 			if (origin2D.x < 0) angle *= -1;
 
-			if (direction2D.x < 0)
-			{
-				if (origin2D.x > direction2D.x) speed *= -1;
-				else if (origin2D.y < direction2D.y) speed *= -1;
-			}
-			else
-			{
-				if (origin2D.x > direction2D.x) speed *= -1;
-				else if (origin2D.y < direction2D.y) speed *= -1;
-			}
-			if (direction2D.y < 0)
-			{
-				if (origin2D.x > direction2D.x) speed *= -1;
-				else if (origin2D.y < direction2D.y) speed *= -1;
-			}
-			else
-			{
-				if (origin2D.x > direction2D.x) speed *= -1;
-				else if (origin2D.y < direction2D.y) speed *= -1;
-			}
+			if (direction2D.y > 0 && origin2D.x > direction2D.x) speed *= -1;
+			else if (direction2D.y < 0 && origin2D.x < direction2D.x) speed *= -1;
+			else if (direction2D.x > 0 && origin2D.y < direction2D.y) speed *= -1;
+			else if (direction2D.x < 0 && origin2D.y > direction2D.y) speed *= -1;
 
 			rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed + angle));
 
