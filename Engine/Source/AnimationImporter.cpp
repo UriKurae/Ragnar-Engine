@@ -921,14 +921,21 @@ void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
 				for (int j = dollarsVisited.size() - 1; 0 <= j; --j)
 				{
 					int size = dollarsVisited[j].keyFrames.size();
-					if (bones[i].keyFrames.size() < size) bones[i].keyFrames.resize(size);
+					if (bones[i].keyFrames.size() < size)
+					{
+						for (int l = bones[i].keyFrames.size()-1; l < size-1; ++l)
+						{
+							bones[i].keyFrames.push_back(bones[i].keyFrames[l]);
+						}
+					}
 
 					int k = 0;
 					int index = 0;
 					for (k = 0; k < size; k++)
 					{
-						bones[i].keyFrames[k].matrix = dollarsVisited[j].keyFrames[k].matrix * bones[i].keyFrames[k].matrix;
+						bones[i].keyFrames[k].matrix = bones[i].keyFrames[k].matrix * dollarsVisited[j].keyFrames[k].matrix ;
 						bones[i].keyFrames[k].timeStamp = dollarsVisited[j].keyFrames[k].timeStamp;
+			
 						index = k;
 					}
 					if (bones[i].keyFrames.size() > k)
