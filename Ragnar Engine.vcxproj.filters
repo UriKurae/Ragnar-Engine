@@ -79,9 +79,6 @@
     <Filter Include="Sources\Libraries\RecastDetour">
       <UniqueIdentifier>{58372d26-6a47-44e6-9840-a670bd587a4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
-      <UniqueIdentifier>{f4ea8377-05e1-4c9f-bec2-0007fcd46baf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Libraries\RecastDetour\Detour">
       <UniqueIdentifier>{092b5690-982b-4223-8de3-c05ac588f021}</UniqueIdentifier>
     </Filter>
@@ -93,6 +90,9 @@
     </Filter>
     <Filter Include="Sources\Libraries\RecastDetour\DetourCrowd">
       <UniqueIdentifier>{c359254e-8161-490d-b0d5-cd504e6de230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
+      <UniqueIdentifier>{f4ea8377-05e1-4c9f-bec2-0007fcd46baf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +125,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Primitive.cpp">
       <Filter>Sources\Materials\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\Material.cpp">
-      <Filter>Sources\Materials</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\Shader.cpp">
       <Filter>Sources\Materials</Filter>
@@ -669,9 +666,111 @@
     <ClCompile Include="Engine\Source\Quadtree.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClInclude Include="Dependencies\Imgui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\DebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\DetourDebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\RecastDebugDraw.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\RecastDump.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DebugUtils\SampleInterfaces.h">
+      <Filter>Sources\Libraries\RecastDetour\DebugUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourAlloc.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourAssert.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourCommon.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourMath.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNavMesh.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNavMeshBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNavMeshQuery.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourNode.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Detour\DetourStatus.h">
+      <Filter>Sources\Libraries\RecastDetour\Detour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourCrowd.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourLocalBoundary.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourObstacleAvoidance.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourPathCorridor.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourPathQueue.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourCrowd\DetourProximityGrid.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourCrowd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\DetourTileCacheBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\DetourTileCache\DetourTileCache.h">
+      <Filter>Sources\Libraries\RecastDetour\DetourTileCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\RecastAlloc.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\Recast.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\Recast\RecastAssert.h">
+      <Filter>Sources\Libraries\RecastDetour\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\ChunkyTriMesh.h">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\InputGeom.h">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\RecastDetour\NavMeshBuilder.h">
+      <Filter>Sources\Libraries\RecastDetour</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\UIBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextureImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.h">
+      <Filter>Sources\Libraries\WWise</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\Quadtree.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\FileSystem.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Engine\Source\C_RigidBody.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
@@ -731,9 +830,6 @@
     </ClInclude>
     <ClInclude Include="Dependencies\Extras\IconsFontAwesome5.h">
       <Filter>Sources\Materials\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\Material.h">
-      <Filter>Sources\Materials</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Shader.h">
       <Filter>Sources\Materials</Filter>
@@ -1537,6 +1633,27 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\Shader.cpp">
       <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\IndexBuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextureBuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\VertexBuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Framebuffer.cpp">
+      <Filter>Sources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MaterialComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\MeshComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
+      <Filter>Sources\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
