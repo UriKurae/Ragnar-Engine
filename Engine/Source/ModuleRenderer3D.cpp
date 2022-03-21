@@ -12,12 +12,6 @@
 #include "LightComponent.h"
 #include "TransformComponent.h"
 
-#include "ButtonComponent.h"
-#include "CheckBoxComponent.h"
-#include "ImageComponent.h"
-#include "SliderComponent.h"
-#include"TextComponent.h"
-
 #include "ResourceManager.h"
 #include "Shader.h"
 #include "Lights.h"
@@ -287,68 +281,7 @@ bool ModuleRenderer3D::PostUpdate()
 	glEnable(GL_BLEND);
 
 	// DRAW UI
-	ButtonComponent* aux = nullptr;
-	TextComponent* aux1 = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3 = nullptr;
-	
-	//InputBoxComponent* aux4 = nullptr;
-	SliderComponent* aux5 = nullptr;
-	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
-	{
-		/* glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
-
-		GameObject* UI = app->userInterface->UIGameObjects[a];
-		aux = UI->GetComponent<ButtonComponent>();
-		aux1 = UI->GetComponent<TextComponent>();
-		aux2 = UI->GetComponent<CheckboxComponent>();
-		aux3 = UI->GetComponent<ImageComponent>();
-		//aux4 = go->GetComponent<InputBoxComponent>();
-		aux5 = UI->GetComponent<SliderComponent>();
-
-		if (aux != nullptr)
-		{
-
-			UI->Draw(nullptr);
-			app->userInterface->RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
-			aux = nullptr;
-		}
-		 else if (aux1 != nullptr)
-		{
-			app->userInterface->RenderText(aux1->buttonText.textt, aux1->buttonText.X, aux1->buttonText.Y, aux1->buttonText.Scale, aux1->buttonText.Color);
-			aux1 = nullptr;
-		} 
-		else if (aux2 != nullptr)
-		{
-			UI->Draw(nullptr);
-			aux2 = nullptr;
-		}
-		else if (aux3 != nullptr)
-		{
-			UI->Draw(nullptr);
-			aux3 = nullptr;
-		}
-		/* else if (aux4 != nullptr)
-		{
-			textExample = aux4->text;
-			color.x = aux4->textColor.r;
-			color.y = aux4->textColor.g;
-			color.z = aux4->textColor.b;
-			aux4 = nullptr;
-		} */
-		else if (aux5 != nullptr)
-		{
-			UI->Draw(nullptr);
-			aux5 = nullptr;
-		}
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-	}
+	app->userInterface->Draw();
 
 	mainCameraFbo->Unbind();
 

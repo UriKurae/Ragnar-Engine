@@ -4,6 +4,7 @@
 #include "Geometry/LineSegment.h"
 #include "Geometry/AABB.h"
 #include "Math/float2.h"
+#include "Color.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -83,9 +84,14 @@ public:
 	bool Start()override;
     bool PreUpdate(float dt)override;
     bool Update(float dt)override;
-
+    void Draw();
 	bool CleanUp();
+
+	void SetFocusedObject();
+	void HitPosibleFocusedObjects(math::float4& viewport);
+
 	void RenderText(std::string text, float x, float y, float scale, float3 color);
+	void DrawCharacters(std::string& text, float& x, float scale, float y);
 
     void DeleteUIGameObjects(GameObject* ui);
 	inline std::vector<GameObject*>::const_iterator FindUI(GameObject* child) { return std::find(UIGameObjects.begin(), UIGameObjects.end(), child); };
@@ -100,7 +106,7 @@ public:
 	GameObject* focusedGameObject;
     std::string textExample = "Default";
 
-    float3 color = { 255,255,255 };
+    Color color = { 255,255,255 };
     float scale = 1;
     std::vector<GameObject*> UIGameObjects;
     GameObject* UIGameObjectSelected;

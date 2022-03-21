@@ -11,6 +11,7 @@
 #include "ImageComponent.h"
 #include "SliderComponent.h"
 #include "CheckBoxComponent.h"
+#include "TextComponent.h"
 
 #include "freetype-2.10.0/include/ft2build.h"
 #include "Texture.h"
@@ -414,6 +415,14 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	glBindVertexArray(VAO);
 
 	// iterate through all characters
+	DrawCharacters(text, x, scale, y);
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	shader->StopUse();
+}
+// Draw all text letters 
+void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
+{
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++)
 	{
@@ -446,9 +455,6 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 		// now advance cursors for next glyph (note that advance is number of 1/64 pixels)
 		x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 	}
-	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	shader->StopUse();
 }
 
 bool ModuleUI::PreUpdate(float dt)
@@ -467,56 +473,67 @@ bool ModuleUI::PreUpdate(float dt)
 		DEBUG_LOG("%f", viewport.w);
 		DEBUG_LOG("%f", viewport.z);*/
 		
-		if (mousePos.x > viewport.x && mousePos.x < viewport.x + viewport.z && mousePos.y > viewport.y && mousePos.y < viewport.y + viewport.w)
+		// Check if mouse is hovered on Game View
+		if (app->editor->GetGameView()->GetState())
 		{
-			for (int i = 0; i < UIGameObjects.size(); i++)
-			{
-				GameObject* go = UIGameObjects[i];
-				ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
-
-				float3 position = transform2D->GetPosition();
-				ComponentTransform2D*button=(ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
-				float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
-				float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
-
-				float posYMin = ((viewport.w / 2) + (-position.y)) - (button->GetButtonHeight() / 2);
-				float posYMax = ((viewport.w / 2) + (-position.y)) + (button->GetButtonHeight() / 2);
-
-				ImageComponent* image = nullptr;
-				image = go->GetComponent<ImageComponent>();
-				if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
-				{
-					hitObjs.push_back(go);
-				}
-			}
-
-			if (hitObjs.size() > 0)
-			{
-				std::vector<float> distance;
-				float nearestDistance = 100000.0f;
-				int nearObj = 0;
-				for (int i = 0; i < hitObjs.size(); ++i)
-				{
-					ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
-
-					float3 position = transform2D->GetPosition();
-					distance.push_back(position.z);
-					if (distance[i] < nearestDistance)
-					{
-						nearestDistance = distance[i];
-						nearObj = i;
-					}
-				}
-				focusedGameObject = hitObjs[nearObj];
-				UIGameObjectSelected = nullptr;
-				hitObjs.clear();
-			}
-			else
-				focusedGameObject = nullptr;
+			HitPosibleFocusedObjects(viewport);
+			SetFocusedObject();
 		}
 	/*}*/
 
 	return true;
+}
+
+// Check if mouse is hovered on some object UI
+void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
+{
+	for (int i = 0; i < UIGameObjects.size(); i++)
+	{
+		GameObject* go = UIGameObjects[i];
+		ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
+
+		float3 position = transform2D->GetPosition();
+		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
+		float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
+		float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
+
+		float posYMin = ((viewport.w / 2) + (-position.y)) - (button->GetButtonHeight() / 2);
+		float posYMax = ((viewport.w / 2) + (-position.y)) + (button->GetButtonHeight() / 2);
+
+		ImageComponent* image = nullptr;
+		image = go->GetComponent<ImageComponent>();
+		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+		{
+			hitObjs.push_back(go);
+		}
+	}
+}
+// Check depending on the distance of the object from the camera what object is focused 
+void ModuleUI::SetFocusedObject()
+{
+	if (hitObjs.size() > 0)
+	{
+		std::vector<float> distance;
+		float nearestDistance = 100000.0f;
+		int nearObj = 0;
+		for (int i = 0; i < hitObjs.size(); ++i)
+		{
+			ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
+
+			float3 position = transform2D->GetPosition();
+			distance.push_back(position.z);
+			if (distance[i] < nearestDistance)
+			{
+				nearestDistance = distance[i];
+				nearObj = i;
+			}
+		}
+		focusedGameObject = hitObjs[nearObj];
+		UIGameObjectSelected = nullptr;
+		hitObjs.clear();
+	}
+	else
+		focusedGameObject = nullptr;
 }
 
 bool ModuleUI::Update(float dt)
@@ -560,55 +577,92 @@ bool ModuleUI::Update(float dt)
 		if (aux != nullptr) 
 		{
 			textExample = aux->GetText();
-			color.x = aux->GetTextColor().r;
-			color.y = aux->GetTextColor().g;
-			color.z = aux->GetTextColor().b;
-			aux = nullptr;
+			color = aux->GetTextColor();
 		}
 		/*else if (aux1 != nullptr) 
 		{
 			textExample = aux1->text;
-			color.x = aux1->color.r;
-			color.y = aux1->color.g;
-			color.z = aux1->color.b;
-			aux1 = nullptr;
+			color = aux1->color();
 		}*/
 		else if (aux2 != nullptr)
 		{
 			textExample = aux2->GetText();
-			color.x = aux2->GetTextColor().r;
-			color.y = aux2->GetTextColor().g;
-			color.z = aux2->GetTextColor().b;
-			aux2 = nullptr;
+			color = aux2->GetTextColor();
 		}
 		else if (aux3 != nullptr)
 		{
 			textExample = aux3->GetText();
-			color.x = aux3->GetColor().r;
-			color.y = aux3->GetColor().g;
-			color.z = aux3->GetColor().b;
-			aux3 = nullptr;
+			color = aux3->GetColor();
 		}
 		/*else if (aux4 != nullptr)
+		{
+			textExample = aux4->text;
+			color = aux4->textColor();
+		}*/
+		else if (aux5 != nullptr)
+		{
+			textExample = aux5->GetText().textt;
+			color = aux5->GetTextColor();
+		}		
+	}	
+	
+	return true;
+}
+
+void ModuleUI::Draw()
+{
+	ButtonComponent* aux = nullptr;
+	TextComponent* aux1 = nullptr;
+	CheckboxComponent* aux2 = nullptr;
+	ImageComponent* aux3 = nullptr;
+	//InputBoxComponent* aux4 = nullptr;
+	SliderComponent* aux5 = nullptr;
+
+	for (int a = 0; a < UIGameObjects.size(); a++)
+	{
+		GameObject* UI = app->userInterface->UIGameObjects[a];
+		aux = UI->GetComponent<ButtonComponent>();
+		aux1 = UI->GetComponent<TextComponent>();
+		aux2 = UI->GetComponent<CheckboxComponent>();
+		aux3 = UI->GetComponent<ImageComponent>();
+		//aux4 = go->GetComponent<InputBoxComponent>();
+		aux5 = UI->GetComponent<SliderComponent>();
+
+		if (aux != nullptr)
+		{
+			UI->Draw(nullptr);
+			RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
+			aux = nullptr;
+		}
+		else if (aux1 != nullptr)
+		{
+			RenderText(aux1->buttonText.textt, aux1->buttonText.X, aux1->buttonText.Y, aux1->buttonText.Scale, aux1->buttonText.Color);
+			aux1 = nullptr;
+		}
+		else if (aux2 != nullptr)
+		{
+			UI->Draw(nullptr);
+			aux2 = nullptr;
+		}
+		else if (aux3 != nullptr)
+		{
+			UI->Draw(nullptr);
+			aux3 = nullptr;
+		}
+		/* else if (aux4 != nullptr)
 		{
 			textExample = aux4->text;
 			color.x = aux4->textColor.r;
 			color.y = aux4->textColor.g;
 			color.z = aux4->textColor.b;
 			aux4 = nullptr;
-		}*/
+		} */
 		else if (aux5 != nullptr)
 		{
-			textExample = aux5->GetText().textt;
-			color.x = aux5->GetTextColor().r;
-			color.y = aux5->GetTextColor().g;
-			color.z = aux5->GetTextColor().b;
+			UI->Draw(nullptr);
 			aux5 = nullptr;
 		}
-		
-	}	
-	
-	return true;
+	}
 }
 
 
