@@ -772,21 +772,18 @@ bool Pathfinder::LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origi
 
 bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed)
 {
-	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR * speed)
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR*speed)
 	{
 		float2 axis = { 0, 1 };
-		float angle = axis.AngleBetween(origin2D.Normalized());
+		float angle = axis.AngleBetween(direction2D);
 
 		if (angle != inf)
 		{
-			if (origin2D.x < 0) angle *= -1;
+			if (direction2D.x < 0) angle *= -1;
+			btTransform quat = rigidBody->getWorldTransform();
+			quat.setRotation(Quat::RotateY(angle));
 
-			if (direction2D.y > 0 && origin2D.x > direction2D.x) speed *= -1;
-			else if (direction2D.y < 0 && origin2D.x < direction2D.x) speed *= -1;
-			else if (direction2D.x > 0 && origin2D.y < direction2D.y) speed *= -1;
-			else if (direction2D.x < 0 && origin2D.y > direction2D.y) speed *= -1;
-
-			rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed + angle));
+			rigidBody->getWorldTransform().setRotation(math::Lerp(rigidBody->getWorldTransform().getRotation(), quat.getRotation(), speed));
 
 			return true;
 		}
