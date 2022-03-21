@@ -606,9 +606,6 @@
     <ClCompile Include="Dependencies\MathGeoLib\include\Math\MiniFloat.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
-      <Filter>Sources\Libraries\MathGeoLib</Filter>
-    </ClCompile>
     <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\OBB.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClCompile>
@@ -768,6 +765,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\FileSystem.h">
       <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\NavAgentComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1406,9 +1406,6 @@
     <ClInclude Include="Dependencies\MathGeoLib\include\Math\myassert.h">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\NavAgentComponent.h">
-      <Filter>Sources\Libraries\MathGeoLib</Filter>
-    </ClInclude>
     <ClInclude Include="Dependencies\MathGeoLib\include\Geometry\OBB.h">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClInclude>
@@ -1654,6 +1651,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
