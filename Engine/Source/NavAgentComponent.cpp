@@ -15,6 +15,8 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 
 NavAgentComponent::~NavAgentComponent()
 {
+	if (pathfinding->player == this) pathfinding->player = nullptr;
+
 	agentProperties->path.clear();
 	RELEASE(agentProperties);
 }
