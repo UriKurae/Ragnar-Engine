@@ -16,7 +16,6 @@
 
 SliderComponent::SliderComponent(GameObject* own)
 {
-	//name = "Slider Component";
 	type = ComponentType::UI_SLIDER;
 	value = 0;
 	minValue = 70;
@@ -27,7 +26,7 @@ SliderComponent::SliderComponent(GameObject* own)
 	completed = false;
 	own->name = "Slider";
 	actualColor = normalColor;
-	//thePlane = App->editor->planes[App->editor->planes.size() - 1];
+
 	sliderText.setText("Slider", 5, 5, 0.5, { 255,255,255 });
 }
 
@@ -79,7 +78,7 @@ bool SliderComponent::Update(float dt)
 		}
 	}
 
-	//barProgres += 0.001;
+	
 	if (state == State::PRESSED) {
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
@@ -128,11 +127,6 @@ bool SliderComponent::Update(float dt)
 
 void SliderComponent::Draw(CameraComponent* gameCam)
 {
-	/*MyPlane* planeToDraw = nullptr;
-	int auxId = owner->id;
-
-	for (int i = 0; i < app->editor->planes.size(); i++)
-		if (App->editor->planes[i]->id == auxId) planeToDraw = App->editor->planes[i];*/
 
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
@@ -272,7 +266,7 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 		{
 			contt++;
 			if (contt==1) {
-				//selectedMaterial = (MaterialComponent*)owner->components[a];
+			
 			}
 			else
 			{
@@ -284,7 +278,6 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 		{
 			contm++;
 			if (contm == 1) {
-				//selectedMaterial = (MaterialComponent*)owner->components[a];
 			}
 			else
 			{

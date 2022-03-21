@@ -56,15 +56,6 @@ bool ButtonComponent::Update(float dt)
 			state = State::NORMAL;
 			actual = normalMaterial;
 		}
-
-		/*if (app->userInterface->UIGameObjectSelected == owner)
-		{
-			state = State::SELECTED;
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN) 
-			{
-
-			}				
-		}*/
 	}
 
 	return true;

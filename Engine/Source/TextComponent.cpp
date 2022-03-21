@@ -13,7 +13,7 @@ TextComponent::TextComponent(GameObject* own)
 {
 	owner = own;
 	active = true;
-	//name = "Button Component";
+	
 	type = ComponentType::UI_TEXT;
 	state = State::NORMAL;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
@@ -34,10 +34,6 @@ bool TextComponent::Update(float dt)
 	else
 		state = State::NORMAL;
 
-
-
-
-	
 	return true;
 }
 
@@ -92,6 +88,8 @@ void TextComponent::OnEditor()
 		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
 		buttonText.setOnlyText(text);
+
+		ComponentOptions(this);
 		ImGui::Separator();
 	}
 	// General variables

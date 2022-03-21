@@ -26,13 +26,6 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	position = pos;
 	scale = sca;
 
-	//type = PrimitivesTypes::PRIMITIVE_MYPLANE3D;
-
-	/*vertices.push_back({ (1 + pos.x) * sca.x ,pos.y,(1 + pos.z) * sca.z });
-	vertices.push_back({ (1 + pos.x) * sca.x ,pos.y, (pos.z - 1) * sca.z });
-	vertices.push_back({ (pos.x - 1) * sca.x ,pos.y,(pos.z - 1) * sca.z });
-	vertices.push_back({ (pos.x - 1) * sca.x ,pos.y,(1 + pos.z) * sca.z });*/
-
 	vertices.push_back({ -0.5,0.5,-2});
 	vertices.push_back({ -0.5,-0.5,-2 });
 	vertices.push_back({ 0.5,-0.5,-2 });
@@ -59,7 +52,6 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float3), vertices.data(), GL_STATIC_DRAW);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float3), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -279,7 +271,7 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	focusedGameObject = nullptr;
 	UIGameObjectSelected = nullptr;
-	/*fff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Background2.png")));*/
+	
 }
 
 ModuleUI::~ModuleUI()
@@ -379,7 +371,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
 	
 	frustum.pos = camera->GetFrustum()->pos;
-	/*frustum.pos = { 0,0,0 };*/
+	
 	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
 	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
 	frustum.type = FrustumType::OrthographicFrustum;
@@ -390,17 +382,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	frustum.farPlaneDistance = 1.0f;
 	
 	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-	//frustum.SetViewPlaneDistances(0.1, 1000000.f);
-
-	/*float verticalFov = 2 * Atan((Tan(DegToRad(90.0f) / 2)) * (camera->currentScreenHeight / camera->currentScreenWidth));
-	frustum.SetVerticalFovAndAspectRatio(verticalFov, (camera->currentScreenWidth / camera->currentScreenHeight));*/
-
-	/*frustum.SetOrthographic(camera->currentScreenWidth, camera->currentScreenHeight);
-	frustum.SetPerspective(DegToRad(90.0f), 0.0f);
-	frustum.SetFrame(camera->camera.pos, camera->camera.front, camera->camera.up);*/
-
-	/*math::float4x4 h = frustum.ComputeProjectionMatrix();
-	math::float4x4 v = frustum.ComputeViewMatrix();*/
+	
 	math::float4x4 model = math::float4x4::identity;
 	math::float3 scl = math::float3(1, 1, 1.0f);
 	math::float3 center = math::float3(x, y, 1.0f);
@@ -459,8 +441,7 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	/*if (app->gameMode)
-	{*/
+	
 		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
@@ -468,10 +449,7 @@ bool ModuleUI::PreUpdate(float dt)
 		
 		float4 viewport = app->editor->GetGameView()->GetBounds();
 		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-		/*DEBUG_LOG("%f",viewport.x);
-		DEBUG_LOG("%f", viewport.y);
-		DEBUG_LOG("%f", viewport.w);
-		DEBUG_LOG("%f", viewport.z);*/
+		
 		
 		// Check if mouse is hovered on Game View
 		if (app->editor->GetGameView()->GetState())
@@ -479,7 +457,7 @@ bool ModuleUI::PreUpdate(float dt)
 			HitPosibleFocusedObjects(viewport);
 			SetFocusedObject();
 		}
-	/*}*/
+	
 
 	return true;
 }
@@ -559,31 +537,24 @@ bool ModuleUI::Update(float dt)
 		}
 	}
 	ButtonComponent* aux = nullptr;
-	//CanvasComponent* aux1 = nullptr;
 	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3= nullptr;
-	//InputBoxComponent* aux4 = nullptr;
+	ImageComponent* aux3= nullptr;	
 	SliderComponent*aux5= nullptr;
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
 		
 		aux = go->GetComponent<ButtonComponent>();
-		//aux1 = go->GetComponent<CanvasComponent>();
+		
 		aux2 = go->GetComponent<CheckboxComponent>();
 		aux3 = go->GetComponent<ImageComponent>();
-		//aux4 = go->GetComponent<InputBoxComponent>();
+	
 		aux5 = go->GetComponent<SliderComponent>();
 		if (aux != nullptr) 
 		{
 			textExample = aux->GetText();
 			color = aux->GetTextColor();
 		}
-		/*else if (aux1 != nullptr) 
-		{
-			textExample = aux1->text;
-			color = aux1->color();
-		}*/
 		else if (aux2 != nullptr)
 		{
 			textExample = aux2->GetText();
@@ -594,11 +565,6 @@ bool ModuleUI::Update(float dt)
 			textExample = aux3->GetText();
 			color = aux3->GetColor();
 		}
-		/*else if (aux4 != nullptr)
-		{
-			textExample = aux4->text;
-			color = aux4->textColor();
-		}*/
 		else if (aux5 != nullptr)
 		{
 			textExample = aux5->GetText().textt;
@@ -615,7 +581,6 @@ void ModuleUI::Draw()
 	TextComponent* aux1 = nullptr;
 	CheckboxComponent* aux2 = nullptr;
 	ImageComponent* aux3 = nullptr;
-	//InputBoxComponent* aux4 = nullptr;
 	SliderComponent* aux5 = nullptr;
 
 	for (int a = 0; a < UIGameObjects.size(); a++)
@@ -625,7 +590,6 @@ void ModuleUI::Draw()
 		aux1 = UI->GetComponent<TextComponent>();
 		aux2 = UI->GetComponent<CheckboxComponent>();
 		aux3 = UI->GetComponent<ImageComponent>();
-		//aux4 = go->GetComponent<InputBoxComponent>();
 		aux5 = UI->GetComponent<SliderComponent>();
 
 		if (aux != nullptr)
@@ -649,14 +613,6 @@ void ModuleUI::Draw()
 			UI->Draw(nullptr);
 			aux3 = nullptr;
 		}
-		/* else if (aux4 != nullptr)
-		{
-			textExample = aux4->text;
-			color.x = aux4->textColor.r;
-			color.y = aux4->textColor.g;
-			color.z = aux4->textColor.b;
-			aux4 = nullptr;
-		} */
 		else if (aux5 != nullptr)
 		{
 			UI->Draw(nullptr);

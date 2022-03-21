@@ -13,8 +13,6 @@
 
 ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, GameObject* own)
 {
-	//UID = GenerateUID();
-	//type = ComponentType::TRANSFORM2D;
 	internalPosition = { 0,0,0 };
 	position = { 0,0,0 };
 	scale.x = 30;
@@ -80,8 +78,7 @@ bool ComponentTransform2D::Update(float dt)
 
 
 	internalPosition.z = position.z;
-	/*internalPosition.x = position.x/1;
-	internalPosition.y = position.y/8;*/
+	
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
 
