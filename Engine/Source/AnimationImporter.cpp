@@ -112,12 +112,30 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 		}
 	}
 
+	std::vector<int> usedIds;
+	for (int i = 0; i < bones.size(); i++)
+	{
+		if (bonesID.find(bones[i].name) != bonesID.end())
+		{
+			bones[i].id = bonesID[bones[i].name].id;
+			usedIds.push_back(bones[i].id);
+		}
+		else
+		{
+			bones[i].id = -1;
+		}
+	}
+	int index = 0;
 	for (int i = 0; i < bones.size(); ++i)
 	{
-		if (bones[i].name.find("$") != std::string::npos)
+		if (bones[i].id == -1)
 		{
-			bones.erase(bones.begin() + i);
-			i = 0;
+			while (std::find(usedIds.begin(), usedIds.end(), index) != usedIds.end())
+			{
+				++index;
+			}
+			bones[i].id = index;
+			usedIds.push_back(index);
 		}
 	}
 
@@ -898,19 +916,32 @@ void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
 		}
 		else
 		{
-			// TODO: Uncommenting this causes crash
-			/*for (int j = dollarsVisited.size() - 1; 0 <= j; --j)
+			if (!dollarsVisited.empty())
 			{
-				int size = dollarsVisited[j].keyFrames.size();
-				if (bones[i].keyFrames.size() < size) bones[i].keyFrames.resize(size);
-				
-				for (int k = 0; k < size; k++)
+				for (int j = dollarsVisited.size() - 1; 0 <= j; --j)
 				{
-					bones[i].keyFrames[k].matrix = dollarsVisited[j].keyFrames[k].matrix * bones[i].keyFrames[k].matrix;
-					bones[i].keyFrames[k].timeStamp = dollarsVisited[j].keyFrames[k].timeStamp;
+					int size = dollarsVisited[j].keyFrames.size();
+					if (bones[i].keyFrames.size() < size) bones[i].keyFrames.resize(size);
+
+					int k = 0;
+					int index = 0;
+					for (k = 0; k < size; k++)
+					{
+						bones[i].keyFrames[k].matrix = dollarsVisited[j].keyFrames[k].matrix * bones[i].keyFrames[k].matrix;
+						bones[i].keyFrames[k].timeStamp = dollarsVisited[j].keyFrames[k].timeStamp;
+						index = k;
+					}
+					if (bones[i].keyFrames.size() > k)
+					{
+						float4x4 mat = bones[i].keyFrames[index].matrix;
+						for (; k < bones[i].keyFrames.size(); ++k)
+						{
+							bones[i].keyFrames[k].matrix = mat;
+						}
+					}
 				}
+				dollarsVisited.clear();
 			}
-			dollarsVisited.clear();*/
 		}
 	}
 }
