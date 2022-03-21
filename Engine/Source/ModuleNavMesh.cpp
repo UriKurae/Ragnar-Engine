@@ -616,13 +616,13 @@ std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 d
 		}
 	}
 
+	calculatedPath.erase(calculatedPath.begin());
 	calculatedPath.resize(agentProp->m_nstraightPath);
 	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
 
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
 	agentProp->path = calculatedPath;
-	agentProp->path.erase(agentProp->path.begin());
 
 	return calculatedPath;
 }
