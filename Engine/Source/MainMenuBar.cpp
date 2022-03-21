@@ -653,10 +653,11 @@ bool MainMenuBar::Update(float dt)
 
 			std::vector<std::shared_ptr<Scene>> scenes = ResourceManager::GetInstance()->GetScenes();
 			static std::shared_ptr<Scene> scene = nullptr;
+			
 			for (int i = 0; i < scenes.size(); ++i)
 			{
 				int flags = ImGuiTreeNodeFlags_Leaf;
-				flags |= sceneSelected == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
+				flags |= scene == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
 				ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
 				if (ImGui::IsItemClicked())
 				{
@@ -668,6 +669,7 @@ bool MainMenuBar::Update(float dt)
 			if (ImGui::Button("Add") && scene != nullptr)
 			{
 				app->sceneManager->AddScene(scene);
+				app->sceneManager->SaveBuild();
 				scene = nullptr;
 				addScene = false;
 			}

@@ -36,6 +36,9 @@ public:
 
 	Scene* GetCurrentScene() const { return currentScene.get(); }
 
+	void LoadBuild();
+	void SaveBuild();
+
 	void NewScene();
 	void AddScene(std::shared_ptr<Scene> newScene);
 	void DeleteScene(std::shared_ptr<Scene> scene);
@@ -64,6 +67,7 @@ public:
 
 private:
 	int index;
+	int lastIndex;
 	bool changeScene;
 
 	GameState gameState;

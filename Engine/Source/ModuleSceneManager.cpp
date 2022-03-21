@@ -19,7 +19,7 @@
 
 #include "Profiling.h"
 
-ModuleSceneManager::ModuleSceneManager(bool startEnabled) : changeScene(false), index(0), gameState(GameState::NOT_PLAYING), Module(startEnabled)
+ModuleSceneManager::ModuleSceneManager(bool startEnabled) : changeScene(false), index(0), lastIndex(0), gameState(GameState::NOT_PLAYING), Module(startEnabled)
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
@@ -42,6 +42,8 @@ bool ModuleSceneManager::Start()
 	ImportPrimitives();
 
 	currentScene->Start();
+
+	LoadBuild();
 
 	referenceMap.clear();
 
@@ -146,6 +148,55 @@ void ModuleSceneManager::ImportPrimitives()
 	indices.clear();
 }
 
+void ModuleSceneManager::LoadBuild()
+{
+	char* buffer;
+
+	if (app->fs->Load("Settings/EngineResources/build.json", &buffer) > 0)
+	{
+		scenes.clear();
+		JsonParsing json = JsonParsing(buffer);
+
+		int size = json.GetJsonNumber("ScenesSize");
+
+		for (int i = 0; i < size; ++i)
+		{
+			std::string name = "Scene" + std::to_string(i);
+			std::string sceneName = json.GetJsonString(name.c_str());
+
+			std::vector<std::shared_ptr<Scene>> scenesVec = ResourceManager::GetInstance()->GetScenes();
+
+			for (int j = 0; j < scenesVec.size(); ++j)
+			{
+				if (scenesVec[j]->GetName() == sceneName)
+				{
+					AddScene(scenesVec[j]);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void ModuleSceneManager::SaveBuild()
+{
+	JsonParsing json;
+
+	json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "ScenesSize", scenes.size());
+
+	for (int i = 0; i < scenes.size(); ++i)
+	{
+		std::string name = "Scene" + std::to_string(i);
+		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), name.c_str(), scenes[i]->GetName().c_str());
+	}
+
+	char* buffer = nullptr;
+
+	int size = json.Save(&buffer);
+
+	app->fs->Save("Settings/EngineResources/build.json", buffer, size);
+}
+
 void ModuleSceneManager::NewScene()
 {
 	currentScene->NewScene();
@@ -220,7 +271,14 @@ void ModuleSceneManager::Play()
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 
-	currentScene = scenes[index];
+	if (currentScene != scenes[index])
+	{
+		currentScene->UnLoad();
+		currentScene = scenes[index];
+		currentScene->Load();
+		lastIndex = index;
+		newSceneLoaded = true;
+	}
 }
 
 void ModuleSceneManager::Stop()
@@ -228,11 +286,16 @@ void ModuleSceneManager::Stop()
 	app->renderer3D->ClearPointLights();
 	app->renderer3D->ClearSpotLights();
 
+	currentScene->UnLoad();
+	currentScene = scenes[lastIndex];
 	currentScene->LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 	currentScene->GetQuadtree().Clear();
 	currentScene->GetQuadtree().Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	gameState = GameState::NOT_PLAYING;
+
+	gameTimer.SetTimeScale(1.0f);
+	index = 0;
 }
 
 void ModuleSceneManager::Pause()
