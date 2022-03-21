@@ -141,10 +141,12 @@ void ParticleSystemComponent::OnEditor()
         {
             suffixLabel = "##";
             suffixLabel += i;
+            ImGui::PushID(suffixLabel.c_str());
             ImGui::Separator();
             //ImGui::Spacing();
 
             emitters[i]->OnEditor(i);
+            ImGui::PopID();
         }
 
         ImGui::Spacing();

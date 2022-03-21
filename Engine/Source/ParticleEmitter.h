@@ -2,11 +2,7 @@
 #include "GameObject.h"
 #include "Particle.h"
 #include "ParticleEffect.h"
-#include "ParticleEffect_Velocity.h"
-#include "ParticleEffect_Acceleration.h"
-#include "ParticleEffect_Size.h"
-#include "ParticleEffect_Color.h"
-#include "BillboardParticleComponent.h"
+#include "Algorithm/Random/LCG.h"
 
 #include <array>
 
@@ -113,4 +109,10 @@ private:
 	std::shared_ptr<Texture> texture;
 
 	ParticleEffect* effect;
+
+	bool isEmitterCubical;
+	float spreadDistanceX;
+	float spreadDistanceY;
+	float spreadDistanceZ;
+
 };

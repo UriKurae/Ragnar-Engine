@@ -60,6 +60,7 @@
     <Compile Include="Assembly-CSharp\Default Components\UICheckbox.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIImage.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UISlider.cs" />
+    <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Emitter.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\SceneManager.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\GameObject.cs" />
 		<Compile Include="Assembly-CSharp\Ragnar Engine Utility\InternalCalls.cs" />

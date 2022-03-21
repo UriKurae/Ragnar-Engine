@@ -74,6 +74,39 @@ MonoArray* TryGetComponentsMono(MonoObject* go, MonoString* type, int inputType)
 	return ret;
 }
 
+MonoObject* ParticleEmitterToCS(ParticleEmitter* emitter)
+{
+	MonoClass* emitterClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "Emitter");
+
+	MonoObject* emitterObject = mono_object_new(app->moduleMono->domain, emitterClass);
+	const char* name = mono_class_get_name(mono_object_get_class(emitterObject));
+
+	uintptr_t ptr = reinterpret_cast<uintptr_t>(emitter);
+	uintptr_t ownerPtr = reinterpret_cast<uintptr_t>(emitter->own);
+	void* args[2];
+	args[0] = &ptr;
+	args[1] = &ownerPtr;
+
+	MonoMethodDesc* constDesc = mono_method_desc_new("RagnarEngine.Emitter:.ctor(uintptr,uintptr)", true);
+	MonoMethod* method = mono_method_desc_search_in_class(constDesc, emitterClass);
+
+	mono_runtime_invoke(method, emitterObject, args, NULL);
+
+	mono_method_desc_free(constDesc);
+	
+	return emitterObject;
+}
+
+ParticleEmitter* GetEmitterFromCS(MonoObject* obj)
+{
+	uintptr_t ptr = 0;
+	MonoClass* emitterClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "Emitter");
+
+	mono_field_get_value(obj, mono_class_get_field_from_name(emitterClass, "pointer"), &ptr);
+
+	return reinterpret_cast<ParticleEmitter*>(ptr);
+}
+
 void LogMono(MonoString* x)
 {
 	if (x == NULL)

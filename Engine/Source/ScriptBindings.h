@@ -10,6 +10,8 @@
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
 #include "Texture.h"
+#include "ParticleSystemComponent.h"
+
 #include "Scene.h"
 #include "TransformBindings.h"
 
@@ -353,6 +355,38 @@ void SetButtonText(MonoObject* go, MonoString* text)
 }
 // UI ===============================
 
+
+// Particle System ==================
+MonoArray* GetEmitters(MonoObject* go)
+{
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	if (!particleSystem)
+		return nullptr;
+
+	MonoClass* emitterClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "Emitter");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, emitterClass, particleSystem->GetEmitters().size());
+
+	for (int i = 0; i < particleSystem->GetEmitters().size(); ++i)
+	{
+		MonoObject* emitterObject = ParticleEmitterToCS(particleSystem->GetEmitters()[i]);
+		mono_array_set(ret, MonoObject*, i, emitterObject);
+	}
+
+	return ret;
+}
+
+void PlayEmitter(MonoObject* emitter)
+{
+	ParticleEmitter* e = GetEmitterFromCS(emitter);
+	e->isActive = true;
+}
+
+void PauseEmitter(MonoObject* emitter)
+{
+	ParticleEmitter* e = GetEmitterFromCS(emitter);
+	e->isActive = false;
+}
+// Particle System ==================
 
 float GetGameTimeStep()
 {

@@ -33,6 +33,8 @@ public:
 
 	void UpdateAABB();
 
+	inline const std::vector<ParticleEmitter*>& GetEmitters() { return emitters; }
+
 public:
 
 	bool looping = false;
