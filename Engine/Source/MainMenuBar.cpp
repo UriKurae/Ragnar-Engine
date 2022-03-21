@@ -50,7 +50,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 {
 	showMenu = false;
 
-	menus.reserve(7);
+	menus.reserve(9);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
@@ -169,6 +169,7 @@ bool MainMenuBar::Update(float dt)
 			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
 			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
 			ImGui::MenuItem(ICON_FA_CODE" Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
+			ImGui::MenuItem(ICON_FA_WALKING" Navigator Menu", NULL, &menus[(int)Menus::NAVIGATOR]->active);
 
 			ImGui::EndMenu();
 		}
