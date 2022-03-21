@@ -111,8 +111,6 @@ private:
 
 	ParticleEffect* effect;
 
-	bool followPlayer;
-
 	bool isEmitterCubical;
 	float spreadDistanceX;
 	float spreadDistanceY;
