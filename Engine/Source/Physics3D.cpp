@@ -60,6 +60,7 @@ bool Physics3D::PreUpdate(float dt)
 			// Save Reference
 			RigidBodyComponent* obAobject = nullptr;
 			RigidBodyComponent* obBobject = nullptr;
+			ScriptComponent* script = nullptr;
 			for (int i = 0; i < numManifolds; i++)
 			{
 				btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
@@ -79,8 +80,9 @@ bool Physics3D::PreUpdate(float dt)
 							obBobject = bodies.at(j);
 					}
 					// Call Methods for obA
-					if (ScriptComponent* script = obAobject->owner->GetComponent<ScriptComponent>())
+					if (!obAobject->trigger && obAobject->owner->GetComponent<ScriptComponent>())
 					{
+						script = obAobject->owner->GetComponent<ScriptComponent>();
 						// OnEnter
 						if (!obAobject->GetOnCollision())
 						{
@@ -100,8 +102,9 @@ bool Physics3D::PreUpdate(float dt)
 						}
 					}
 					// Call Methods for obB
-					if (ScriptComponent* script = obBobject->owner->GetComponent<ScriptComponent>())
+					if (!obBobject->trigger && obBobject->owner->GetComponent<ScriptComponent>())
 					{
+						script = obBobject->owner->GetComponent<ScriptComponent>();
 						// OnEnter
 						if (!obBobject->GetOnCollision())
 						{

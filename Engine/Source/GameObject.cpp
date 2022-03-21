@@ -4,6 +4,7 @@
 #include "ParticleSystemComponent.h"
 
 #include "ModuleScene.h"
+#include "GL/glew.h"
 
 #include "C_RigidBody.h"
 #include "TransformComponent.h"
@@ -21,9 +22,9 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "Transform2DComponent.h"
+#include"TextComponent.h"
 #include "NavAgentComponent.h"
 
-#include "GL/glew.h"
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 
@@ -244,7 +245,10 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::UI_IMAGE:
 		component = new ImageComponent(this);
-		break;	
+		break;
+	case ComponentType::UI_TEXT:
+		component = new TextComponent(this);
+		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
 		app->scene->SetMainCamera((CameraComponent*)component);
@@ -538,6 +542,8 @@ void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());
 
 	if (option == 1 || option == 3)
 	{

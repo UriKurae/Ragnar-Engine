@@ -33,6 +33,9 @@ namespace RagnarEngine
         public static extern GameObject Create3DObject(object name, int primitiveType, object position);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern GameObject InstancePrefab(object path);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
     }
 

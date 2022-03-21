@@ -11,7 +11,7 @@
 #include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
-ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
+ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : callStart(true)
 {
 	type = ComponentType::SCRIPT;
 	owner = own;
@@ -47,35 +47,24 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	static bool firstUpdate = true;
 	if (app->scene->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
-		firstUpdate = true;
+		callStart = true;
 		return false;
-	}
-
-	MonoObject* startExec = nullptr;
-	if (firstUpdate)
-	{
-		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
-		firstUpdate = false;
 	}
 
 	ScriptComponent::runningScript = this;
 
+	MonoObject* startExec = nullptr;
+	if (callStart)
+	{
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
+		callStart = false;
+	}
+
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
-
-	//if (RigidBodyComponent* rb = owner->GetComponent<RigidBodyComponent>())
-	//{
-	//	if (rb->GetOnCollision())
-	//	{
-	//		void* params[1];
-	//		params[0] = app->moduleMono->ComponentToCS(rb->GetCollisionTarget());
-	//		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
-	//	}
-	//}
 
 	if (exec != nullptr || startExec != nullptr)
 	{

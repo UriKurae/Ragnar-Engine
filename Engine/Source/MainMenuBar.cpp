@@ -28,6 +28,8 @@
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "SliderComponent.h"
+#include"TextComponent.h"
+#include "Transform2DComponent.h"
 
 #include "ResourceManager.h"
 #include "AudioManager.h"
@@ -272,8 +274,20 @@ bool MainMenuBar::Update(float dt)
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 
+
+					MaterialComponent* normal = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					MaterialComponent* focused = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					MaterialComponent* pressed = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+					MaterialComponent* disabled = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
 					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
-					object->CreateComponent(ComponentType::MATERIAL);
+
+					button->SetNormalMaterial(normal);
+					button->SetFocusedMaterial(focused);
+					button->SetPressedMaterial(pressed);
+					button->SetDisabledMaterial(disabled);
+
+					button->SetActualMaterial(normal);
 					app->userInterface->UIGameObjects.push_back(object);
 					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 					button->planeToDraw->own = object;
@@ -282,23 +296,32 @@ bool MainMenuBar::Update(float dt)
 				else if (ImGui::MenuItem("UI Slider"))
 				{				
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
-					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
-					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					app->userInterface->UIGameObjects.push_back(object);
-					button->thePlane = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->thePlane->own = object;
+					
+					ComponentTransform2D* i=(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);					
+					MaterialComponent* second=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);					
+
+					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
+					
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->frontPlaneToDraw->own = object;
+					button->planeToDraw->own = object;
+					button->SetSecondMaterial(second);
 					object->isUI = true;
 				}
 				else if (ImGui::MenuItem("UI Check Box"))
 				{
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
+					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);		
+
 					button->SetSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
 					button->SetNoSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
-					//material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 					button->SetActual(button->GetNoSelectedMaterial());
+
 					app->userInterface->UIGameObjects.push_back(object);
 					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 					button->planeToDraw->own = object;
@@ -309,6 +332,21 @@ bool MainMenuBar::Update(float dt)
 					GameObject* object = app->scene->CreateGameObject(nullptr, false);
 					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
 					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
+					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
+
+
+					app->userInterface->UIGameObjects.push_back(object);
+					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+					button->planeToDraw->own = object;
+					object->isUI = true;
+				}
+				else if (ImGui::MenuItem("UI Text"))
+				{
+					GameObject* object = app->scene->CreateGameObject(nullptr, false);
+					object->SetName("text");
+					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
+					TextComponent* button = (TextComponent*)object->CreateComponent(ComponentType::UI_TEXT);
+					
 					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
 
 
