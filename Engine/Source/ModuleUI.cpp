@@ -465,7 +465,7 @@ bool ModuleUI::PreUpdate(float dt)
 // Check if mouse is hovered on some object UI
 void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
 {
-	for (int i = 0; i < UIGameObjects.size(); i++)
+	for (int i = 0; i < 2; i++)
 	{
 		GameObject* go = UIGameObjects[i];
 		ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();

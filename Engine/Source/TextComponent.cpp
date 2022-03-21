@@ -112,9 +112,9 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	planeToDraw->own = owner;
 	owner->isUI = true;
 	app->userInterface->UIGameObjects.push_back(owner);
-	//text = node.GetJsonString("buttonText");
+	text = node.GetJsonString("buttonText");
 
-	//buttonText.textt = text;
+	buttonText.textt = text;
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");
