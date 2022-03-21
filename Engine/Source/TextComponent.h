@@ -37,6 +37,6 @@ public:
 	Color selectedColor = black;
 	MyPlane* planeToDraw;
 	Color textColor = white;
-	char text[64] = "Button";
+	std::string text;
 	float fontScale = 1;
 };

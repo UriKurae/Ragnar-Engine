@@ -18,7 +18,7 @@ TextComponent::TextComponent(GameObject* own)
 	state = State::NORMAL;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
 	actualColor = normalColor;
-
+	text = "Text";
 }
 
 TextComponent::~TextComponent()
@@ -28,7 +28,7 @@ TextComponent::~TextComponent()
 bool TextComponent::Update(float dt)
 {
 	buttonText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
-
+	buttonText.setOnlyText(text);
 	if (!active)
 		state = State::DISABLED;
 	else
@@ -85,7 +85,7 @@ void TextComponent::OnEditor()
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 
-		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
+		ImGui::InputText("Text", (char*)text.c_str(), IM_ARRAYSIZE(text.c_str()));
 		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
 		buttonText.setOnlyText(text);
 
@@ -102,7 +102,7 @@ float2 TextComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
+	return { position.x - (strlen(text.c_str()) * 12 * buttonText.Scale), position.y - 5 };
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
@@ -112,7 +112,8 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	planeToDraw->own = owner;
 	owner->isUI = true;
 	app->userInterface->UIGameObjects.push_back(owner);
-	text = node.GetJsonNumber("buttonText");
+	text = node.GetJsonString("buttonText");
+
 	buttonText.textt = text;
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
@@ -124,7 +125,6 @@ bool TextComponent::OnLoad(JsonParsing& node)
 bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
-	std::string text = buttonText.textt;
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text.c_str());
