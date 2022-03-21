@@ -119,7 +119,7 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\Color.h">
       <Filter>Sources\Containers</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClCompile Include="Engine\Source\glmath.cpp">
       <Filter>Sources\Containers</Filter>
     </ClCompile>
@@ -206,7 +206,7 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ScriptComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClInclude Include="Engine\Source\Particle.h">
       <Filter>Particles</Filter>
     </ClInclude>
@@ -272,7 +272,7 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\LightComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClCompile Include="Engine\Source\ListenerComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
@@ -925,7 +925,7 @@
     </ClCompile>
     <ClCompile Include="Dependencies\Imgui\imgui.cpp">
       <Filter>Sources\Libraries\Imgui</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClInclude Include="Dependencies\Imgui\imstb_textedit.h">
       <Filter>Sources\Libraries\Imgui</Filter>
     </ClInclude>
@@ -1012,7 +1012,7 @@
     </ClInclude>
     <ClInclude Include="Dependencies\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIODeferred.h">
       <Filter>Sources\Libraries\WWise</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClCompile Include="Engine\Source\AudioManager.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -1072,7 +1072,7 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ShaderImporter.cpp">
       <Filter>Sources\Resources\Importers</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClInclude Include="Engine\Source\ShaderImporter.h">
       <Filter>Sources\Resources\Importers</Filter>
     </ClInclude>
@@ -1387,7 +1387,7 @@
     </ClInclude>
     <ClInclude Include="Dependencies\MathGeoLib\include\Math\vec2d.h">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClCompile Include="Engine\Source\C_RigidBody.cpp">
       <Filter>PhysicsEngine</Filter>
     </ClCompile>
