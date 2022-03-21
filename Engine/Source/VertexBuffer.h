@@ -16,12 +16,16 @@ struct Vertex
 class VertexBuffer
 {
 public:
-	VertexBuffer() : buffer(0), count(0) {}
+	VertexBuffer();
 	VertexBuffer(const void* data, unsigned int c);
 	VertexBuffer(const std::vector<Vertex>& vertices);
-	void SetData(const std::vector<Vertex>&);
-
 	~VertexBuffer();
+
+	void SetData(const std::vector<Vertex>&);
+	void SetData(float* vertices);
+	void SetData(unsigned int size);
+	void SetData(void* vertices, uint32_t size);
+
 
 	void Bind() const;
 	void Unbind() const;

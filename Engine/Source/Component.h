@@ -1,17 +1,10 @@
 #pragma once
-
 #include "Imgui/imgui.h"
 #include "JsonParsing.h"
 #include "IconsFontAwesome5.h"
 
 class GameObject;
 class CameraComponent;
-class ButtonComponent;
-class ComponentTransform2D;
-class SliderComponent;
-class ImageComponent;
-class CheckboxComponent;
-class TextComponent;
 
 enum class ComponentType
 {
@@ -37,6 +30,8 @@ enum class ComponentType
 	TRANFORM2D,
 	UI_TEXT,
 	NAVAGENT,
+	PARTICLE_SYSTEM,
+	BILLBOARD,
 };
 
 enum class State
@@ -67,14 +62,11 @@ public:
 	void Checkbox(Component* component, const char* name, bool& act)
 	{
 		ImGui::PushID((void*)component);
-
 		ImGui::Checkbox(name, &act);
-
 		ImGui::PopID();
 	}
 
 	void ComponentOptions(Component* component);
-	
 
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }
@@ -83,9 +75,9 @@ public:
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) { return true; }
 
 public:
-	ComponentType type;
-	bool active;
-	GameObject* owner;
 
-	bool collapsed;
+	ComponentType type;
+	GameObject* owner;
+	bool active;
+	bool collapsed = false;
 };

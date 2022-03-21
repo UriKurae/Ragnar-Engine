@@ -4,6 +4,9 @@
 
 #include "ModuleScene.h"
 #include "C_RigidBody.h"
+#include "ScriptComponent.h"
+#include "TransformComponent.h"
+#include "Mesh.h"
 
 #include "btBulletDynamicsCommon.h"
 
@@ -51,13 +54,13 @@ bool Physics3D::PreUpdate(float dt)
 	world->stepSimulation(dt, 15);
 	if (app->scene->GetGameState() == GameState::PLAYING)
 	{
-		for (size_t i = 0; i < bodies.size(); i++)
-		{
-			bodies.at(i)->SetOnCollision(false);
-		}
 		int numManifolds = world->getDispatcher()->getNumManifolds();
 		if (numManifolds > 0)
 		{
+			// Save Reference
+			RigidBodyComponent* obAobject = nullptr;
+			RigidBodyComponent* obBobject = nullptr;
+			ScriptComponent* script = nullptr;
 			for (int i = 0; i < numManifolds; i++)
 			{
 				btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
@@ -68,19 +71,56 @@ bool Physics3D::PreUpdate(float dt)
 				int numContacts = contactManifold->getNumContacts();
 				if (numContacts > 0) 
 				{
-					// Check all collision with triggers
-					for (int j = 0; j < triggers.size(); j++)
+					// Find what objects have collided  
+					for (int j = 0; j < bodies.size(); j++)
 					{
-						if (obA == triggers.at(j)->GetBody() || obB == triggers.at(j)->GetBody())
+						if (obA == bodies.at(j)->GetBody())
+							obAobject = bodies.at(j);
+						if (obB == bodies.at(j)->GetBody())
+							obBobject = bodies.at(j);
+					}
+					// Call Methods for obA
+					if (!obAobject->trigger && obAobject->owner->GetComponent<ScriptComponent>())
+					{
+						script = obAobject->owner->GetComponent<ScriptComponent>();
+						// OnEnter
+						if (!obAobject->GetOnCollision())
 						{
-							for (int k = 0; k < bodies.size(); k++)
-							{
-								if (obA == bodies.at(k)->GetBody() || obB == bodies.at(k)->GetBody())
-								{
-									bodies.at(k)->SetOnCollision(true);
-									bodies.at(k)->SetCollisionTarget(triggers.at(j));
-								}
-							}
+							obAobject->SetOnCollision(true);
+							if (obBobject->trigger)
+								script->CallOnTriggerEnter(obBobject);
+							else
+								script->CallOnCollisionEnter(obBobject);
+						}	
+						// OnState
+						else
+						{
+							if (obBobject->trigger)
+								script->CallOnTrigger(obBobject);
+							else
+								script->CallOnCollision(obBobject);
+						}
+					}
+					// Call Methods for obB
+					if (!obBobject->trigger && obBobject->owner->GetComponent<ScriptComponent>())
+					{
+						script = obBobject->owner->GetComponent<ScriptComponent>();
+						// OnEnter
+						if (!obBobject->GetOnCollision())
+						{
+							obBobject->SetOnCollision(true);
+							if (obAobject->trigger)
+								script->CallOnTriggerEnter(obAobject);
+							else
+								script->CallOnCollisionEnter(obAobject);
+						}
+						// OnState
+						else
+						{
+							if (obAobject->trigger)
+								script->CallOnTrigger(obAobject);
+							else
+								script->CallOnCollision(obAobject);
 						}
 					}
 				}				
@@ -205,6 +245,25 @@ btRigidBody* Physics3D::CollisionShape(const PPlane& plane, RigidBodyComponent* 
 	btCollisionShape* colShape = new btStaticPlaneShape(btVector3(plane.normal.x, plane.normal.y, plane.normal.z), plane.constant);
 	btTransform startTransform;
 	startTransform.setFromOpenGLMatrix(&plane.transform);
+	return AddBody(colShape, startTransform, component);
+}
+
+btRigidBody* Physics3D::CollisionShape(const std::shared_ptr<Mesh> mesh, RigidBodyComponent* component)
+{
+	btIndexedMesh indexedMesh;
+	indexedMesh.m_numTriangles = mesh->GetIndicesSize() / 3;
+	indexedMesh.m_triangleIndexBase = (unsigned char*)&mesh->GetIndicesVector()[0];
+	indexedMesh.m_triangleIndexStride = 3 * sizeof(unsigned int);
+	indexedMesh.m_numVertices = mesh->GetVerticesSize();
+	indexedMesh.m_vertexBase = (unsigned char*)&mesh->GetVerticesVector()[0];
+	indexedMesh.m_vertexStride = sizeof(Vertex);
+
+	btTriangleIndexVertexArray* mTriangleIndexVertexArray = new btTriangleIndexVertexArray();
+	mTriangleIndexVertexArray->addIndexedMesh(indexedMesh, PHY_INTEGER);
+
+	btCollisionShape* colShape = new btBvhTriangleMeshShape(mTriangleIndexVertexArray, true, true);
+	btTransform startTransform;
+	startTransform.setFromOpenGLMatrix(&component->owner->GetComponent<TransformComponent>()->float4x4ToMat4x4());
 	return AddBody(colShape, startTransform, component);
 }
 

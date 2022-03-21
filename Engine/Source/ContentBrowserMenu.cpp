@@ -15,7 +15,7 @@
 
 ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), refreshTime(0.0f), Menu(true)
 {
-	mainDirectory = "Assets/Resources/";
+	mainDirectory = "Assets/";
 	currentDirectory = mainDirectory;
 }
 
@@ -67,6 +67,7 @@ bool ContentBrowserMenu::Update(float dt)
 	}
 	
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);
+	dirs.erase(std::find(dirs.begin(), dirs.end(), "Assets/ParticlesTemplates/"));
 	
 	ImGui::Begin(ICON_FA_FOLDER" Content Browser", &active);
 	ImGui::Columns(2);
@@ -112,37 +113,40 @@ bool ContentBrowserMenu::Update(float dt)
 
 	for (std::vector<std::string>::const_iterator it = dirs2.begin(); it != dirs2.end(); ++it)
 	{
-		std::string item = (*it);
-		app->fs->GetRelativeDirectory(item);
-		
-		bool selected = false;
-		if (currentFile == *it)
+		if ((*it).find("Assets/ParticlesTemplates/") == std::string::npos)
 		{
-			ImGui::PushStyleColor(ImGuiCol_Button, ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.29f, 0.66f, 1.0f)));
-			selected = true;
-		}
-		ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, height });
-		if (ImGui::IsItemClicked())
-		{
-			currentFile = (*it);			
-		}
-		if (ImGui::BeginDragDropSource())
-		{
-			const wchar_t* path = (const wchar_t*)(*it).c_str();
-			ImGui::SetDragDropPayload("Content Browser", path, (wcslen(path) + 1) * sizeof(wchar_t), ImGuiCond_Once);
-			ImGui::EndDragDropSource();
-		}
-		if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
-		{
-			if (app->fs->IsDirectory((*it).c_str()))
-				currentDirectory = (*it);
-		}
-		
-		ImGui::Text(item.c_str());
+			std::string item = (*it);
+			app->fs->GetRelativeDirectory(item);
 
-		if (selected) ImGui::PopStyleColor();
+			bool selected = false;
+			if (currentFile == *it)
+			{
+				ImGui::PushStyleColor(ImGuiCol_Button, ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.29f, 0.66f, 1.0f)));
+				selected = true;
+			}
+			ImGui::ImageButton(dirIcon ? (ImTextureID)dirIcon->GetId() : 0, { cell, height });
+			if (ImGui::IsItemClicked())
+			{
+				currentFile = (*it);
+			}
+			if (ImGui::BeginDragDropSource())
+			{
+				const wchar_t* path = (const wchar_t*)(*it).c_str();
+				ImGui::SetDragDropPayload("Content Browser", path, (wcslen(path) + 1) * sizeof(wchar_t), ImGuiCond_Once);
+				ImGui::EndDragDropSource();
+			}
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+			{
+				if (app->fs->IsDirectory((*it).c_str()))
+					currentDirectory = (*it);
+			}
 
-		ImGui::NextColumn();
+			ImGui::Text(item.c_str());
+
+			if (selected) ImGui::PopStyleColor();
+
+			ImGui::NextColumn();
+		}
 	}
 
 	if (!ImGui::IsWindowFocused()) currentFile = "";
@@ -256,7 +260,7 @@ void ContentBrowserMenu::DrawRecursive(std::vector<std::string>& dirs)
 		app->fs->GetRelativeDirectory(name);
 
 		ImGuiTreeNodeFlags flags = (currentDirectory == (*it) ? ImGuiTreeNodeFlags_Selected : 0) | SetFlags(dirs);
-		
+
 		bool opened = ImGui::TreeNodeEx(name.c_str(), flags);
 		if (ImGui::IsItemClicked())
 		{

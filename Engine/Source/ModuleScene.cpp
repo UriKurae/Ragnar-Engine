@@ -6,6 +6,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
+#include "ModuleNavMesh.h"
 #include "Physics3D.h"
 
 #include "Primitives.h"
@@ -588,8 +589,12 @@ void ModuleScene::Resume()
 
 void ModuleScene::Scripting(float dt)
 {
-	if (gameState == GameState::PLAYING)
+	//Scripting. Estructura de C# en caso de que funcionase como el Update del NavAgentComponent
+
+	/*if (agentProperties->targetPosSet)
 	{
-		player->GetComponent<NavAgentComponent>();
-	}
+		std::vector<float3> path;
+		pathfinding->CalculatePath(this, agentProperties->targetPos, path);
+		agentProperties->targetPosSet = false;
+	}*/
 }

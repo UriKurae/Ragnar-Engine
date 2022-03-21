@@ -237,8 +237,14 @@ bool ModuleRenderer3D::PostUpdate()
 		app->scene->Draw();
 	}
 
-	if(navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
+		Pathfinder* pathfinding = app->navMesh->GetPathfinding();
+		for (int i = 0; i < pathfinding->agents.size(); i++)
+			pathfinding->RenderPath(app->navMesh->GetPathfinding()->agents[i]);
+	}
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilMask(0xFF);
@@ -565,9 +571,7 @@ void ModuleRenderer3D::ClearSpotLights()
 
 void ModuleRenderer3D::RemovePointLight(PointLight* light)
 {
-	std::vector<PointLight*>::iterator it = pointLights.begin();
-
-	for (; it != pointLights.end(); ++it)
+	for (std::vector<PointLight*>::iterator it = pointLights.begin(); it != pointLights.end(); ++it)
 	{
 		if ((*it) == light)
 		{
@@ -578,20 +582,6 @@ void ModuleRenderer3D::RemovePointLight(PointLight* light)
 			break;
 		}
 	}
-
-	//for (auto& pl : pointLights)
-	//{
-	//	if (pl == light)
-	//	{
-	//		delete pl;
-	//		pl = 0;
-	//		//*it = 0;
-	//		pointLights.erase(it);
-
-	//		break;
-	//	}
-	//	++it;
-	//}
 }
 
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)

@@ -211,7 +211,6 @@ void AudioSourceComponent::PlayClipsOnAwake()
 	{
 		if (audioClip[0].playOnAwake) playingID = AudioManager::Get()->PostEvent(audioClip[i].clipName.c_str(), owner->GetUUID());
 	}
-	
 }
 
 void AudioSourceComponent::StopClip()

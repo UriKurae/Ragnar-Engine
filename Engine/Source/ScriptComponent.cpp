@@ -1,14 +1,17 @@
 #include "ScriptComponent.h"
 
 #include "ModuleScene.h"
+#include "MonoManager.h"
+
+#include "C_RigidBody.h"
 
 #include <mono/metadata/class.h>
 #include <mono/metadata/object.h>
-#include <mono/metadata/object-forward.h>
 #include <mono/metadata/debug-helpers.h>
+#include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
-ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
+ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : callStart(true)
 {
 	type = ComponentType::SCRIPT;
 	owner = own;
@@ -42,25 +45,23 @@ ScriptComponent::~ScriptComponent()
 	fields.clear();
 }
 
-
 bool ScriptComponent::Update(float dt)
 {
-	static bool firstUpdate = true;
 	if (app->scene->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
-		firstUpdate = true;
+		callStart = true;
 		return false;
 	}
 
+	ScriptComponent::runningScript = this;
+
 	MonoObject* startExec = nullptr;
-	if (firstUpdate)
+	if (callStart)
 	{
 		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
-		firstUpdate = false;
+		callStart = false;
 	}
-
-	ScriptComponent::runningScript = this;
 
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
@@ -83,7 +84,8 @@ bool ScriptComponent::Update(float dt)
 void ScriptComponent::OnEditor()
 {
 	ImGui::PushID(this);
-	if (ImGui::CollapsingHeader(ICON_FA_CODE" Script"))
+	std::string n = ICON_FA_CODE" Script: " + name + ".cs";
+	if (ImGui::CollapsingHeader(n.c_str()))
 	{
 		if(name == "") SelectScript();
 		else
@@ -150,7 +152,6 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 			ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "The class %s can't be serialized yet", mono_type_get_name(mono_field_get_type(field.field)));
 			break;
 		}
-
 		
 		ImGui::Button((field.fiValue.goValue != nullptr) ? field.fiValue.goValue->name.c_str() : "None");
 		if (ImGui::BeginDragDropTarget())
@@ -284,7 +285,6 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 
 void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 {
-
 	const char* fieldName = mono_field_get_name(field.field);
 	ImGui::PushID(fieldName);
 
@@ -296,7 +296,6 @@ void ScriptComponent::DropField(SerializedField& field, const char* dropType)
 	ImGui::PopID();
 }
 //#endif
-
 
 bool ScriptComponent::OnLoad(JsonParsing& nObj)
 {
@@ -406,11 +405,48 @@ bool ScriptComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
+void ScriptComponent::CallOnTriggerEnter(RigidBodyComponent* other)
+{
+	if (onTriggerEnterMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+void ScriptComponent::CallOnTrigger(RigidBodyComponent* other)
+{
+	if (onTriggerMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onTriggerMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+
+void ScriptComponent::CallOnCollisionEnter(RigidBodyComponent* other)
+{
+	if (onCollisionEnterMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onCollisionEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+void ScriptComponent::CallOnCollision(RigidBodyComponent* other)
+{
+	if (onCollisionMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onCollisionMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+
 void ScriptComponent::LoadScriptData(const char* scriptName)
 {
 	methods.clear();
 	fields.clear();
-
 
 	MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, scriptName);
 
@@ -438,6 +474,22 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	mdesc = mono_method_desc_new(":Update", false);
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
 	mono_method_desc_free(mdesc);
+
+	MonoMethodDesc* triggerEnterDesc = mono_method_desc_new(":OnTriggerEnter", false);
+	onTriggerEnterMethod = mono_method_desc_search_in_class(triggerEnterDesc, klass);
+	mono_method_desc_free(triggerEnterDesc);
+
+	MonoMethodDesc* triggerDesc = mono_method_desc_new(":OnTrigger", false);
+	onTriggerMethod = mono_method_desc_search_in_class(triggerDesc, klass);
+	mono_method_desc_free(triggerDesc);
+
+	MonoMethodDesc* collisionEnterDesc = mono_method_desc_new(":OnCollisionEnter", false);
+	onCollisionEnterMethod = mono_method_desc_search_in_class(collisionEnterDesc, klass);
+	mono_method_desc_free(collisionEnterDesc);
+
+	MonoMethodDesc* collisionDesc = mono_method_desc_new(":OnCollision", false);
+	onCollisionMethod = mono_method_desc_search_in_class(collisionDesc, klass);
+	mono_method_desc_free(collisionDesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);
 	if (baseClass != nullptr)

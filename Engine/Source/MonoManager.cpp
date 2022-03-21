@@ -21,6 +21,7 @@
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
 #include "UIBindings.h"
+#include "NavAgentBindings.h"
 
 #include <iostream>
 #include <fstream>
@@ -51,10 +52,12 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_config_parse(NULL);
 	jitDomain = mono_jit_init("myapp");
 
+	// Input =====================
 	mono_add_internal_call("RagnarEngine.Input::GetKey", GetKey);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseClick", GetMouseClick);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseX", MouseX);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
+	// Input =====================
 
 	// Transform =================
 	mono_add_internal_call("RagnarEngine.Transform::get_localPosition", GetPosition);
@@ -72,24 +75,47 @@ bool MonoManager::Init(JsonParsing& node)
 	// Transform =================
 
 	// Material Comp =============
-
-	mono_add_internal_call("RagnarEngine.MaterialComponent::get_texture", GetTexturePath);
-	mono_add_internal_call("RagnarEngine.MaterialComponent::set_texture", SetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
 
+	// Internall Calls =============
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     // This does not return a GameObject
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject); // This does
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::InstancePrefab", InstancePrefab);
+	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
+	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+	// Internal Calls =============
 
+	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
+	mono_add_internal_call("RagnarEngine.GameObject::Find", FindGameObjectWithName);
+	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectsWithTag", FindGameObjectsWithTag);
+	mono_add_internal_call("RagnarEngine.GameObject::get_tag", GetGameObjectTagMono);
+	mono_add_internal_call("RagnarEngine.GameObject::set_tag", SetGameObjectTagMono);
+	mono_add_internal_call("RagnarEngine.GameObject::get_name", GetGameObjectName);
+	mono_add_internal_call("RagnarEngine.GameObject::set_name", SetGameObjectName);
+	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
+	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	// Utility ===================
 
+	// UI ========================
+	// TODO: Create C# class when the merge to develop is done
+	//mono_add_internal_call("RagnarEngine.Button::get_text", GetButtonText);
+	//mono_add_internal_call("RagnarEngine.Button::set_text", SetButtonText);
+	// UI ========================
+
+	// Audio Source ==============
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
 	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClip", StopCurrentClip);
 	mono_add_internal_call("RagnarEngine.AudioListener::TestListener", TestListener);
+	// Audio Source ==============
 
 	// Rigidbody =================
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
@@ -103,13 +129,30 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsStatic", SetAsStatic);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsTrigger", SetAsTrigger);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionType", SetCollisionType);
-	mono_add_internal_call("RagnarEngine.Rigidbody::SetSphereRadius", SetSphereRadius);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionSphere", SetCollisionSphere);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetHeight", SetHeight);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetBodyPosition", SetBodyPosition);
 	// Rigidbody =================
 
+	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
+	// Animation =================
 
+
+	// NavAgent ==================
+	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_targetSetted", GetAgentTargetSetted);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_destination", GetAgentDestination);
+	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
+	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
+	// NavAgent ==================
+
+
+	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
+	// Camera ====================
 
 	// UI
 	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
@@ -444,6 +487,7 @@ void MonoManager::CreateAssetsScript(const char* localPath)
 	className = className.substr(0, className.find_last_of("."));
 
 	outfile << "using System;" << std::endl << "using RagnarEngine;" << std::endl << std::endl << "public class " << className.c_str() << " : RagnarComponent" << std::endl << "{" << std::endl <<
+		"	public void Start()" << std::endl << "	{" << std::endl << std::endl << "	}" << std::endl << 
 		"	public void Update()" << std::endl << "	{" << std::endl << std::endl << "	}" << std::endl << std::endl << "}";
 
 	outfile.close();

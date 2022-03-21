@@ -4,6 +4,7 @@
 
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
+#include "ModuleScene.h"
 
 #include "GameObject.h"
 #include "GameView.h"
@@ -11,15 +12,16 @@
 #include <math.h>
 
 
-ComponentTransform2D::ComponentTransform2D(float3 pos, float3 sca, float3 rot, GameObject* own)
+ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
 	position = { 0,0,0 };
 	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;
-	rotationEuler = rot;
-	
+
+	//rotationEuler = rot;
+	rotationEuler = float3(0, 0, 0);
 	buttonWidth = 300;
 	buttonHeight = 100;
 
@@ -41,7 +43,7 @@ ComponentTransform2D::~ComponentTransform2D()
 bool ComponentTransform2D::Update(float dt)
 {
 	
-	float4 viewport = app->editor->GetGameView()->GetBounds();
+	float4 viewport = app->editor->GetGameView()->GetBounds() * app->scene->mainCamera->GetZoomRatio();
 	
 	if (firstTime) 
 	{
