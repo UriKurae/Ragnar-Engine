@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include "ModuleEditor.h"
+#include "ModuleUI.h"
 #include "ModuleScene.h"
 
 #include "GameObject.h"
@@ -13,16 +14,14 @@
 
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
-	//UID = GenerateUID();
-	//type = ComponentType::TRANSFORM2D;
 	internalPosition = { 0,0,0 };
 	position = { 0,0,0 };
-	scale.x = 25;
+	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;
+
 	//rotationEuler = rot;
 	rotationEuler = float3(0, 0, 0);
-
 	buttonWidth = 300;
 	buttonHeight = 100;
 
@@ -32,36 +31,56 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 	transMatrix = aux.FromTRS(internalPosition, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	//matrix = transMatrix.ptr();
+	type = ComponentType::TRANFORM2D;
 	
-	//name = "Transform2D Component";
-
-	//CreateAABB(ComponentType::PLANE, App->scene->gameObjects[App->scene->gameObjects.size() - 1], true);
 }
-
 
 ComponentTransform2D::~ComponentTransform2D()
 {
+	app->userInterface->DeleteUIGameObjects(owner);
 }
 
 bool ComponentTransform2D::Update(float dt)
 {
+	
 	float4 viewport = app->editor->GetGameView()->GetBounds() * app->scene->mainCamera->GetZoomRatio();
-	float temporalW = (viewport.z * 25) / 847;
-	float temporalH = (viewport.w * 15) / 649;
-	scale.x = (buttonWidth / 0.6f) / temporalW;
-	scale.y = (buttonHeight / 0.75f) / temporalH;
+	
+	if (firstTime) 
+	{
+		lastViewportBounds.w = app->editor->GetGameView()->GetBounds().w;
+		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
+		firstTime = false;
+	}
+
+	
+	if (lastViewportBounds.w != viewport.w)
+	{
+		//position.y +=(viewport.w - lastViewportBounds.w)/100;
+		
+	}
+	else if (lastViewportBounds.z != viewport.z) 
+	{
+		if (position.x != 0.0f) 
+		{
+			position.x -=( viewport.z - lastViewportBounds.z)/2;
+		}
+		
+	}
+	
+	internalPosition.x = ((position.x)/24);
+	internalPosition.y = (((position.y)/24)+0.5);
+	
+	
+	lastViewportBounds = viewport;
 
 
 
-	internalPosition.x = (position.x * 30.0f) / (viewport.z / 2);
+	scale.x = (buttonWidth* (viewport.z/25)) / viewport.z;
+	scale.y = (buttonHeight * (viewport.w/23)) / viewport.w;
 
-	/*float res = (viewport.w * 1.5) / 649;
-	res = 1.5 - (res - 1.5)+0.05;*/
-	internalPosition.y = (position.y * 30.0f) / (viewport.w / 2);
 
-	/*internalPosition.x = position.x/1;
-	internalPosition.y = position.y/8;*/
+	internalPosition.z = position.z;
+	
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
 
@@ -76,31 +95,37 @@ bool ComponentTransform2D::Update(float dt)
 
 void ComponentTransform2D::OnEditor()
 {
-	if (ImGui::CollapsingHeader("2D Transform"))
-	{
-		ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
-
-		if (ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000))
+	if (showEdit) {
+		if (ImGui::CollapsingHeader("2D Transform"))
 		{
-					
-		}
-		if (ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000))
-		{
-			
-		}
+			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
+
+			if (ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000))
+			{
+
+			}
+			if (ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000))
+			{
+
+			}
 
 
-		ImGui::TextColored(ImVec4(0, 0, 255, 255), "Position");
-		static bool wasNull = true;
+			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Position");
+			static bool wasNull = true;
 
 
-		if (ImGui::DragFloat("Position X", &position.x, 0.5f))
-		{
-				
-		}
-		if (ImGui::DragFloat("Position Y", &position.y, 0.5f))
-		{
-				
+			if (ImGui::DragFloat("Position X", &position.x, 0.5f))
+			{
+
+			}
+			if (ImGui::DragFloat("Position Y", &position.y, 0.5f))
+			{
+
+			}
+			if (ImGui::DragFloat("Position Z", &position.z, 0.5f))
+			{
+
+			}
 		}
 	}
 }

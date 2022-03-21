@@ -1,83 +1,62 @@
-#include "ButtonComponent.h"
+#include "TextComponent.h"
 #include "Application.h"
-#include "Globals.h"
 
 #include "ModuleInput.h"
 #include "ModuleUI.h"
 
-#include"GameObject.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
+
 #include "GL/glew.h"
 
-ButtonComponent::ButtonComponent(GameObject* own)
+TextComponent::TextComponent(GameObject* own)
 {
+	owner = own;
 	active = true;
-	own->name = "Button";
-	type = ComponentType::UI_BUTTON;
-	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
 	
-	text = "Button";
+	type = ComponentType::UI_TEXT;
+	state = State::NORMAL;
+	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
+	actualColor = normalColor;
+	text = "Text";
 }
 
-ButtonComponent::~ButtonComponent()
+TextComponent::~TextComponent()
 {
-	text.clear();
-	RELEASE(planeToDraw);
 }
 
-bool ButtonComponent::Update(float dt)
+bool TextComponent::Update(float dt)
 {
-	buttonText.SetOnlyPosition(float2(GetParentPosition().x/2, GetParentPosition().y/2));
+	buttonText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 	buttonText.setOnlyText(text);
 	if (!active)
 		state = State::DISABLED;
 	else
 		state = State::NORMAL;
 
-	if (state != State::DISABLED)
-	{		
-		if (app->userInterface->focusedGameObject == owner)
-		{
-			state = State::FOCUSED;
-			actual = focusedMaterial;
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) 
-			{
-				state = State::PRESSED;
-				actual = pressedMaterial;
-			}
-				
-
-			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
-			{
-				
-			}
-		}
-		else 
-		{
-			state = State::NORMAL;
-			actual = normalMaterial;
-		}
-	}
-
 	return true;
 }
 
-void ButtonComponent::Draw(CameraComponent* gameCam)
+void TextComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
-	planeToDraw->DrawPlane2D(actual->GetTexture().get());
-	
+
+
+	MaterialComponent* mat = owner->GetComponent<MaterialComponent>();
+	planeToDraw->DrawPlane2D(mat->GetTexture().get());
+
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
 
-void ButtonComponent::OnEditor()
-{	
-	if (ImGui::CollapsingHeader("Button"))
+void TextComponent::OnEditor()
+{
+
+	if (ImGui::CollapsingHeader("Text"))
 	{
 		static float multiplier = 1;
 		static float fadeDuration = 0.1f;
@@ -90,87 +69,60 @@ void ButtonComponent::OnEditor()
 		static bool selectedEditable = false;
 		static bool textColorEditable = false;
 
+
 		Checkbox(this, "Active", active);
-		ImGui::Checkbox("Interactable", &active);
 
+		
 
-		ImGui::Separator();
+		
 
 		ImGui::Text("Text Color"); ImGui::SameLine();
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
 			textColorEditable = !textColorEditable;
 
-		if (textColorEditable)
-			ImGui::ColorPicker3("Text Color", &textColor);
-
 		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
+		
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
-		
-	
+
 		ImGui::InputText("Text", (char*)text.c_str(), IM_ARRAYSIZE(text.c_str()));
 		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
 		buttonText.setOnlyText(text);
-		
+
 		ComponentOptions(this);
 		ImGui::Separator();
 	}
+	// General variables
+
+
+
 }
 
-float2 ButtonComponent::GetParentPosition()
+float2 TextComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
 	return { position.x - (strlen(text.c_str()) * 12 * buttonText.Scale), position.y - 5 };
 }
-bool ButtonComponent::OnLoad(JsonParsing& node)
+bool TextComponent::OnLoad(JsonParsing& node)
 {
-	std::string textt;
-
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = owner;
 	owner->isUI = true;
 	app->userInterface->UIGameObjects.push_back(owner);
-
 	text = node.GetJsonString("buttonText");
-	buttonText.textt = textt;
+
+	buttonText.textt = text;
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");
 	textColor.b = node.GetJsonNumber("textColor.b");
-
-	int cont = 0;
-
-	for (int a = 0; a < owner->components.size(); a++) {
-		if (owner->components[a]->type == ComponentType::MATERIAL)
-		{
-			switch (cont)
-			{
-			case 0:
-				normalMaterial=(MaterialComponent*)owner->components[a];
-				break;
-			case 1:
-				focusedMaterial = (MaterialComponent*)owner->components[a];
-				break;
-			case 2:
-				pressedMaterial = (MaterialComponent*)owner->components[a];
-				break;
-			case 3:
-				disabledMaterial = (MaterialComponent*)owner->components[a];
-				actual = normalMaterial;
-				break;
-			default:
-				break;
-			}
-			cont++;
-		}
-	}
 	return true;
 }
 
-bool ButtonComponent::OnSave(JsonParsing& node, JSON_Array* array)
+bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 

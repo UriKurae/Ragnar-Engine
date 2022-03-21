@@ -20,6 +20,7 @@
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
+#include "UIBindings.h"
 #include "NavAgentBindings.h"
 
 #include <iostream>
@@ -153,6 +154,22 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
 	// Camera ====================
 
+	// UI
+	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
+	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
+	mono_add_internal_call("RagnarEngine.UISlider::UIFunctionSlider", UIFunctionSlider);
+	mono_add_internal_call("RagnarEngine.Transform2D::UIFunctionTransform2D", UIFunctionTransform2D);
+	mono_add_internal_call("RagnarEngine.Transform2D::get_position2D", Get2DPosition);
+	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
+
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
+	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetText);
+	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetText);
+
+	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
+	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
+
+	mono_add_internal_call("RagnarEngine.UISlider::GetSliderActualValue", GetSliderActualValue);
 	InitMono();
 
 	return ret;
