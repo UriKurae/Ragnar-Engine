@@ -617,7 +617,7 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 		// TODO: Switch checking the type of the effect and creating it, afterwards push it to the vector
 		JsonParsing c = node.GetJsonArrayValue(effectsArray, i);
 		CreateParticleEffect((ParticleEffectType)(int)c.GetJsonNumber("Effect Type"));
-		effects[(int)c.GetJsonNumber("Effect Type")]->OnLoad(node);
+		effects[(int)c.GetJsonNumber("Effect Type")]->OnLoad(c);
 		//effects[i]->OnLoad(node);
 	}
 
