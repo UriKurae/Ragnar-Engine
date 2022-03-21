@@ -1,18 +1,20 @@
 #pragma once
 #include "Module.h"
-#include <map>
-#include"GameObject.h"
+
+#include "Geometry/LineSegment.h"
+#include "Geometry/AABB.h"
+#include "Math/float2.h"
+#include "Color.h"
+#include <vector>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include<vector>
-#include "GL/glew.h"
-#include"ModuleUI.h"
-#include"Transform2DComponent.h"
-#include"MathGeoLib/include/Geometry/LineSegment.h"
+#include <map>
+
 class Texture;
 class GameObject;
+typedef unsigned short GLushort;
+typedef unsigned int GLuint;
+typedef float GLfloat;
+typedef unsigned int uint;
 
 class Shadert
 {
@@ -23,14 +25,12 @@ public:
 	// activate the shader
 	// ------------------------------------------------------------------------
 	void Use();
-
 	void StopUse();
 
 private:
 	// utility function for checking shader compilation/linking errors.
 	// ------------------------------------------------------------------------
 	void CheckCompileErrors(uint shader, std::string type);
-
 };
 
 
@@ -40,8 +40,6 @@ public:
 	MyPlane(float3 pos, float3 sca);
 	~MyPlane();
     void DrawPlane2D(Texture* texture);
-	std::vector<float3> getVertex() {
-	}
 
 public:
     GLuint imageID;
@@ -68,6 +66,7 @@ struct IVec2 {
 
     int x = 0, y = 0;
 };
+
 /// Holds all state information relevant to a character as loaded using FreeType
 struct Character {
     unsigned int TextureID; // ID handle of the glyph texture
@@ -75,7 +74,6 @@ struct Character {
     IVec2  Bearing;   // Offset from baseline to left/top of glyph
     unsigned int Advance;   // Horizontal offset to advance to next glyph
 };
-
 
 class ModuleUI : public Module
 {
@@ -86,13 +84,21 @@ public:
 	bool Start()override;
     bool PreUpdate(float dt)override;
     bool Update(float dt)override;
-
+    void Draw();
 	bool CleanUp();
+
+	void SetFocusedObject();
+	void HitPosibleFocusedObjects(math::float4& viewport);
+
 	void RenderText(std::string text, float x, float y, float scale, float3 color);
-    void DeleteUIGameObjects();
+	void DrawCharacters(std::string& text, float& x, float scale, float y);
+
+    void DeleteUIGameObjects(GameObject* ui);
+	inline std::vector<GameObject*>::const_iterator FindUI(GameObject* child) { return std::find(UIGameObjects.begin(), UIGameObjects.end(), child); };
+
 public:
     std::map<char, Character> characters;
-    Shadert* shader = nullptr; //TODO:Clean
+    Shadert* shader = nullptr;
     uint VAO = 0, VBO = 0;
 	LineSegment myRay;
 	float3 corners[8];
@@ -100,7 +106,7 @@ public:
 	GameObject* focusedGameObject;
     std::string textExample = "Default";
 
-    float3 color = { 255,255,255 };
+    Color color = { 255,255,255 };
     float scale = 1;
     std::vector<GameObject*> UIGameObjects;
     GameObject* UIGameObjectSelected;

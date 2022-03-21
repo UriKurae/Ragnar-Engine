@@ -9,12 +9,13 @@
 
 #define MAX_POLYS 256
 #define MAX_SMOOTH 2048
-#define MAX_ERROR 0.06f
+#define MAX_ERROR 0.05f
 
 class GameObject;
 class InputGeom;
 class NavMeshBuilder;
 class NavAgentComponent;
+class btRigidBody;
 
 enum class PathType
 {
@@ -22,9 +23,16 @@ enum class PathType
 	STRAIGHT
 };
 
+enum class AgentType
+{
+	ENEMY,
+	CHARACTER_1,
+};
+
 struct NavAgent
 {
 	NavAgent();
+	AgentType AgentType = AgentType::ENEMY;
 
 	float radius = 0.0f;
 	float height = 0.0f;
@@ -71,6 +79,8 @@ public:
 	void RenderPath(NavAgentComponent* agent);
 	bool MovePath(NavAgentComponent* agent);
 	bool MoveTo(NavAgentComponent* agent, float3 destination);
+	bool LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D);
+	bool SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed);
 
 public:
 	dtNavMesh* m_navMesh;
@@ -78,7 +88,7 @@ public:
 	dtQueryFilter m_filter;
 	NavMeshBuilder* m_navMeshBuilder;
 
-	std::vector<NavAgentComponent*> agents;
+	NavAgentComponent* player = nullptr;
 };
 
 struct BuildSettings

@@ -1,5 +1,9 @@
 #include "ParticleSystemComponent.h"
 #include "BillboardParticleComponent.h"
+
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+
 #include "GameObject.h"
 #include "FileSystem.h"
 #include "Globals.h"
@@ -21,7 +25,7 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
     offsetAABB = { 0,0,0 };
 
     if (own->GetComponent<MeshComponent>() == nullptr)
-        app->scene->GetQuadtree().Insert(own);
+        app->sceneManager->GetCurrentScene()->GetQuadtree().Insert(own);
 
     if (own->GetComponent<BillboardParticleComponent>() == nullptr)
         own->CreateComponent(ComponentType::BILLBOARD);
@@ -43,7 +47,7 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 
 bool ParticleSystemComponent::Update(float dt)
 {
-    if (isActive || app->scene->GetGameState() != GameState::NOT_PLAYING)
+    if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {
         for (int i = 0; i < emitters.size(); i++)
         {
@@ -67,7 +71,7 @@ bool ParticleSystemComponent::Update(float dt)
 
 void ParticleSystemComponent::Draw(CameraComponent* gameCam)
 {
-	if (isActive || app->scene->GetGameState() != GameState::NOT_PLAYING)
+	if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
 		for (auto& e : emitters)
 			e->Render(gameCam);
 }

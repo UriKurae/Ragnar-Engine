@@ -54,5 +54,10 @@ public:
 	uint32_t noGCobject;
 	std::string name = "";
 
+	bool firstUpdate;
+
 	static ScriptComponent* runningScript;
+
+private:
+	bool callStart;
 };

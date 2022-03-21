@@ -6,9 +6,11 @@
 #include "NavAgentComponent.h"
 #include "C_RigidBody.h"
 #include "ModuleNavMesh.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "MeshComponent.h"
 #include "ModuleInput.h"
+
+#include "Scene.h"
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
@@ -110,13 +112,13 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 
 	float3 hitPoint;
 	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-	if (hit && pathfinder->agents.size() > 0)
+	if (hit && pathfinder->player != nullptr)
 	{
 		if (clickedMouseButton == SDL_BUTTON_LEFT)
 		{
 			//Just set the Player Target!!!
-			pathfinder->agents[0]->agentProperties->targetPos = hitPoint;
-			pathfinder->agents[0]->agentProperties->targetPosSet = true;
+			pathfinder->player->agentProperties->targetPos = hitPoint;
+			pathfinder->player->agentProperties->targetPosSet = true;
 		}
 		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
 		{
@@ -168,7 +170,7 @@ void ModuleNavMesh::BakeNavMesh()
 	ClearNavMeshes();
 
 	std::vector<GameObject*> gameObjects;
-	gameObjects = app->scene->GetGameObjectsList();
+	gameObjects = app->sceneManager->GetCurrentScene()->GetGameObjectsList();
 
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
@@ -239,8 +241,6 @@ Pathfinder::~Pathfinder()
 	m_navMesh = nullptr;
 	m_navQuery = nullptr;
 	m_navMeshBuilder = nullptr;
-
-	agents.clear();
 }
 
 void Pathfinder::Init(NavMeshBuilder* builder)
@@ -618,6 +618,7 @@ std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 d
 
 	calculatedPath.resize(agentProp->m_nstraightPath);
 	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
+	calculatedPath.erase(calculatedPath.begin());
 
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
@@ -728,17 +729,65 @@ bool Pathfinder::MovePath(NavAgentComponent* agent)
 
 bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 {
+	btRigidBody* rigidBody = agent->owner->GetComponent<RigidBodyComponent>()->GetBody();
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 	float3 direction = destination - origin;
 	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
-	direction = direction.Normalized() * agent->agentProperties->speed;
-	
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
+	direction.Normalize();
+
+	rigidBody->activate(true);
+	//rigidBody->setAngularVelocity();
+
+	//Movement
+	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
+
+	//Rotation
+	SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
+	//LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
 
 	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
 
+	return false;
+}
+
+bool Pathfinder::LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D)
+{
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR)
+	{
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
+
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed)
+{
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR*speed)
+	{
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
+
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			btTransform quat = rigidBody->getWorldTransform();
+			quat.setRotation(Quat::RotateY(angle));
+
+			rigidBody->getWorldTransform().setRotation(math::Lerp(rigidBody->getWorldTransform().getRotation(), quat.getRotation(), speed*app->GetEngineDeltaTime()));
+
+			return true;
+		}
+	}
 	return false;
 }
 

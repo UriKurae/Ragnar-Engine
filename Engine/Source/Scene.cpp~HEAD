@@ -1,4 +1,4 @@
-#include "ModuleScene.h"
+#include "Scene.h"
 #include "Application.h"
 #include "Globals.h"
 
@@ -8,8 +8,8 @@
 #include "ModuleUI.h"
 #include "ModuleNavMesh.h"
 #include "Physics3D.h"
+#include "ModuleSceneManager.h"
 
-#include "Primitives.h"
 #include "MeshImporter.h"
 #include "FileSystem.h"
 
@@ -26,21 +26,25 @@
 #include "MeshComponent.h"
 #include "AudioSourceComponent.h"
 #include "AnimationComponent.h"
+#include "ModuleUI.h"
+//Scripting
+#include "C_RigidBody.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include <stack>
 #include "Profiling.h"
 
-ModuleScene::ModuleScene() : sceneDir(""), mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr)
+Scene::Scene(uint uid, std::string& assets, std::string& library) : mainCamera(nullptr), gameState(GameState::NOT_PLAYING), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr), Resource(uid, ResourceType::SCENE, assets, library)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
 }
 
-ModuleScene::~ModuleScene()
+Scene::~Scene()
 {
 }
 
-bool ModuleScene::Start()
+bool Scene::Start()
 {
 	RG_PROFILING_FUNCTION("Starting Scene");
 
@@ -54,10 +58,6 @@ bool ModuleScene::Start()
 	//player->CreateComponent(ComponentType::AUDIO_SOURCE);
 	//player->SetName("Player");
 	//player->tag = "Player";
-	
-	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
-	ResourceManager::GetInstance()->ImportAllResources();
-	//ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street.fbx"));
 	
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 
@@ -73,13 +73,12 @@ bool ModuleScene::Start()
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
 
-	ImportPrimitives();
 	LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
 }
 
-bool ModuleScene::PreUpdate(float dt)
+bool Scene::PreUpdate(float dt)
 {
 	static bool refresh = true;
 
@@ -94,7 +93,7 @@ bool ModuleScene::PreUpdate(float dt)
 	return true;
 }
 
-bool ModuleScene::Update(float dt)
+bool Scene::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Updating Scene");
 
@@ -143,14 +142,14 @@ bool ModuleScene::Update(float dt)
 	return true;
 }
 
-bool ModuleScene::PostUpdate()
+bool Scene::PostUpdate()
 {
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
 	return true;
 }
 
-bool ModuleScene::Draw()
+bool Scene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
@@ -184,18 +183,16 @@ bool ModuleScene::Draw()
 	return true;
 }
 
-bool ModuleScene::CleanUp()
+bool Scene::CleanUp()
 {
 	RELEASE(root);
 
 	return true;
 }
 
-void ModuleScene::NewScene()
+void Scene::NewScene()
 {
 	RELEASE(root);
-
-	sceneDir.clear();
 
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -209,7 +206,7 @@ void ModuleScene::NewScene()
 	app->editor->SetGO(nullptr);
 }
 
-GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransform)
+GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
 {
 	RG_PROFILING_FUNCTION("Creating Game Object");
 
@@ -230,7 +227,7 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent, bool createTransfo
 	return object;
 }
 
-GameObject* ModuleScene::CreateGameObjectChild(const char* name, GameObject* parent)
+GameObject* Scene::CreateGameObjectChild(const char* name, GameObject* parent)
 {
 	GameObject* object = CreateGameObject(parent);
 	object->SetName(name);
@@ -238,7 +235,7 @@ GameObject* ModuleScene::CreateGameObjectChild(const char* name, GameObject* par
 	return object;
 }
 
-GameObject* ModuleScene::CreateGameObjectParent(const char* name, GameObject* child)
+GameObject* Scene::CreateGameObjectParent(const char* name, GameObject* child)
 {
 	GameObject* object = CreateGameObject(child->GetParent());
 	object->SetName(name);
@@ -249,7 +246,7 @@ GameObject* ModuleScene::CreateGameObjectParent(const char* name, GameObject* ch
 	return object;
 }
 
-GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
+GameObject* Scene::Create3DObject(Object3D type, GameObject* parent)
 {
 	GameObject* object = CreateGameObject(parent);
 	std::string path;
@@ -283,7 +280,7 @@ GameObject* ModuleScene::Create3DObject(Object3D type, GameObject* parent)
 	return object;
 }
 
-void ModuleScene::MoveGameObjectUp(GameObject* object)
+void Scene::MoveGameObjectUp(GameObject* object)
 {
 	if (object == root->GetChilds()[0]) return;
 
@@ -301,7 +298,7 @@ void ModuleScene::MoveGameObjectUp(GameObject* object)
 	}
 }
 
-void ModuleScene::MoveGameObjectDown(GameObject* object)
+void Scene::MoveGameObjectDown(GameObject* object)
 {
 	int size = root->GetChilds().size() - 1;
 	if (object == root->GetChilds()[size]) return;
@@ -319,7 +316,7 @@ void ModuleScene::MoveGameObjectDown(GameObject* object)
 	}
 }
 
-void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
+void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 {
 	GameObject* gameObj = GetGoByUuid(uuid);
 	GameObject* parentObj = gameObj->GetParent();
@@ -332,7 +329,46 @@ void ModuleScene::ReparentGameObjects(uint uuid, GameObject* go)
 	gameObj->GetComponent<TransformComponent>()->SetAABB();
 }
 
-bool ModuleScene::LoadScene(const char* name)
+void Scene::Load()
+{
+	if (root == nullptr)
+	{
+		LoadScene(assetsPath.c_str());
+	}
+}
+
+void Scene::UnLoad()
+{
+	RELEASE(root);
+	RELEASE(mainCamera);
+	RELEASE(camera);
+	RELEASE(player);
+	qTree.Clear();
+}
+
+GameObject* Scene::GetGoByUuid(double uuid) const
+{
+	std::stack<GameObject*> goStack;
+	goStack.push(root);
+
+	while (!goStack.empty())
+	{
+		GameObject* go = goStack.top();
+		goStack.pop();
+		if (go->GetUUID() == uuid)	return go;
+		else
+		{
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+			{
+				goStack.push(go->GetChilds()[i]);
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+bool Scene::LoadScene(const char* name)
 {
 	RG_PROFILING_FUNCTION("Loading Scene");
 
@@ -340,17 +376,15 @@ bool ModuleScene::LoadScene(const char* name)
 
 	RELEASE(root);
 	app->userInterface->UIGameObjects.clear();
-	//char* buffer = nullptr;
 
-	//app->fs->Load(name, &buffer);
-	sceneDir = name;
+	assetsPath = name;
 
 	JsonParsing sceneFile = JsonParsing();
 
-	if (sceneFile.ParseFile(name) > 0)
+	if (sceneFile.ParseFile(assetsPath.c_str()) > 0)
 	{
 		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Game Objects");
-		
+
 		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
 		for (int i = 0; i < size; ++i)
 		{
@@ -405,43 +439,21 @@ bool ModuleScene::LoadScene(const char* name)
 	}
 
 	referenceMap.clear();
-	
+
 
 	// TODO: Check this because it can be much cleaner
 	qTree.Clear();
 	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	app->editor->SetGO(nullptr);
-	
+
 	return true;
 }
 
-GameObject* ModuleScene::GetGoByUuid(double uuid) const
-{
-	std::stack<GameObject*> goStack;
-	goStack.push(root);
-
-	while (!goStack.empty())
-	{
-		GameObject* go = goStack.top();
-		goStack.pop();
-		if (go->GetUUID() == uuid)	return go;
-		else
-		{
-			for (int i = 0; i < go->GetChilds().size(); ++i)
-			{
-				goStack.push(go->GetChilds()[i]);
-			}
-		}
-	}
-
-	return nullptr;
-}
-
-bool ModuleScene::SaveScene(const char* name)
+bool Scene::SaveScene(const char* name)
 {
 	DEBUG_LOG("Saving Scene");
 
-	sceneDir = name;
+	assetsPath = name;
 
 	std::string rootName = name;
 	app->fs->GetFilenameWithoutExtension(rootName);
@@ -463,7 +475,7 @@ bool ModuleScene::SaveScene(const char* name)
 	return true;
 }
 
-void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
+void Scene::DuplicateGO(GameObject* go, GameObject* parent)
 {
 	GameObject* gameObject = new GameObject();
 	gameObject->SetName(go->GetName());
@@ -483,56 +495,7 @@ void ModuleScene::DuplicateGO(GameObject* go, GameObject* parent)
 	//gameObject->SetAABB(go->GetAABB());
 }
 
-void ModuleScene::ImportPrimitives()
-{
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
-	std::map<std::string, BoneInfo> bonesUid;
-	//std::vector<float3> normals;
-	//std::vector<float2> texCoords;
-
-	RCube::CreateCube(vertices, indices);
-	std::string library;
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cube.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-	library.clear();
-
-	RPyramide::CreatePyramide(vertices, indices);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Pyramide.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-	library.clear();
-
-	RSphere::CreateSphere(vertices, indices);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Sphere.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-	library.clear();
-
-	RCylinder::CreateCylinder(vertices, indices);
-	ResourceManager::GetInstance()->CreateResource(ResourceType::MESH, std::string("Settings/EngineResources/__Cylinder.mesh"), library);
-	MeshImporter::SaveMesh(library, vertices, indices, bonesUid);
-
-	vertices.clear();
-	indices.clear();
-	//normals.clear();
-	//texCoords.clear();
-}
-
-void ModuleScene::Play()
+void Scene::Play()
 {
 	DEBUG_LOG("Saving Scene");
 
@@ -557,7 +520,7 @@ void ModuleScene::Play()
 	gameTimer.ResetTimer();
 }
 
-void ModuleScene::Stop()
+void Scene::Stop()
 {
 	app->renderer3D->ClearPointLights();
 	app->renderer3D->ClearSpotLights();
@@ -569,13 +532,13 @@ void ModuleScene::Stop()
 	gameState = GameState::NOT_PLAYING;
 }
 
-void ModuleScene::Pause()
+void Scene::Pause()
 {
 	gameTimer.SetDesiredDeltaTime(0.0f);
 	gameState = GameState::PAUSE;
 }
 
-void ModuleScene::Resume()
+void Scene::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
@@ -583,11 +546,16 @@ void ModuleScene::Resume()
 
 /////////////////////////
 
-void ModuleScene::Scripting(float dt)
+void Scene::Scripting(float dt)
 {
+<<<<<<< HEAD:Engine/Source/Scene.cpp
+	// TODO: Must delete this maybe
+	if (gameState == GameState::PLAYING)
+=======
 	//Scripting. Estructura de C# en caso de que funcionase como el Update del NavAgentComponent
 
 	/*if (agentProperties->targetPosSet)
+>>>>>>> develop:Engine/Source/ModuleScene.cpp
 	{
 		std::vector<float3> path;
 		pathfinding->CalculatePath(this, agentProperties->targetPos, path);

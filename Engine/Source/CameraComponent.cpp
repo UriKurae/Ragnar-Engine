@@ -2,10 +2,13 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 #include "ModuleEditor.h"
+#include "ModuleNavMesh.h"
+#include "ModuleCamera3D.h"
 
 #include "GameView.h"
 #include "TransformComponent.h"
@@ -13,12 +16,14 @@
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 #include "Math/float3x3.h"
+#include "Geometry/LineSegment.h"
+#include "Imgui/ImGuizmo.h"
 
 #include <time.h>
 #include "Profiling.h"
 
 
-CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(1.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
+CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(-90.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
 {
 	type = ComponentType::CAMERA;
 	owner = own;
@@ -118,7 +123,7 @@ void CameraComponent::OnEditorMovement()
 			if (go)
 			{
 				uint uuid = *(const uint*)(go->Data);
-				target = app->scene->GetGoByUuid(uuid);
+				target = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -152,10 +157,36 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
+	if (app->camera->updateGameView)
+	{
+		//TODO: Make the click work properly
+		float4 size = app->editor->GetGameView()->GetBounds();
+		//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
+		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
+		if (app->editor->GetGameView()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
+		{
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP && !ImGuizmo::IsUsing())
+			{
+				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
+
+				mousePos.x = 2 * ((mousePos.x - size.x) / (size.z)) - 1.0f;
+				mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
+
+				LineSegment picking = camera.UnProjectLineSegment(mousePos.x, mousePos.y);
+				LineSegment prevLine = picking;
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
+					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
+
+				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
+				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
+			}
+		}
+	}
+
 	// This is bad!
 	if (targetUID != 0)
 	{
-		target = app->scene->GetGoByUuid(targetUID);
+		target = app->sceneManager->GetCurrentScene()->GetGoByUuid(targetUID);
 		targetUID = 0;
 	}
 

@@ -75,5 +75,5 @@ private:
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
 
-	bool changeTransform;
+	bool changeTransform = false;
 };

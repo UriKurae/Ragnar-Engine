@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "FileSystem.h"
 
 #include "TransformComponent.h"
@@ -136,7 +137,7 @@ void ModelImporter::LoadModel(std::string& path)
 		//go->SetName(name.c_str());
 
 		name = "Childs" + name;
-		CreatingModel(json, json.GetJsonArray(json.ValueToObject(json.GetRootValue()), name.c_str()), app->scene->GetRoot());
+		CreatingModel(json, json.GetJsonArray(json.ValueToObject(json.GetRootValue()), name.c_str()), app->sceneManager->GetCurrentScene()->GetRoot());
 	}
 
 	RELEASE_ARRAY(buffer);

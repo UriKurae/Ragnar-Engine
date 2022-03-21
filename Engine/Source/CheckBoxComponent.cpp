@@ -5,7 +5,11 @@
 #include"ModuleUI.h"
 #include"ModuleInput.h"
 
+#include "GameObject.h"
 #include"MaterialComponent.h"
+#include "Transform2DComponent.h"
+
+#include "GL/glew.h"
 
 CheckboxComponent::CheckboxComponent(GameObject* own)
 {
@@ -44,12 +48,17 @@ bool CheckboxComponent::Update(float dt)
 			{
 				if (actual == noSelectedMaterial)
 					actual = selectedMaterial;
-				else 
-					actual = noSelectedMaterial;
+				checked = true;
+			}
+			else
+			{
+				checked = false;
+				actual = noSelectedMaterial;
 			}
 		}
-		else state = State::NORMAL;
 	}
+	else state = State::NORMAL;
+	
 	return true;
 }
 
@@ -159,19 +168,57 @@ float2 CheckboxComponent::GetParentPosition()
 	ComponentTransform2D* transform = owner->GetComponent<ComponentTransform2D>();
 	return { transform->GetPosition().x - (strlen(text) * 12 * checkboxText.Scale) - (transform->GetScale().x / 4), transform->GetPosition().y - 5 };
 }
+
 bool CheckboxComponent::OnLoad(JsonParsing& node)
 {
-	checked = node.GetJsonBool("checked");
+	std::string selected;
+	selected = node.GetJsonString("selected");
+	noSelectedMaterial = nullptr;
+	selectedMaterial= nullptr;
+	for (int a = 0; a < owner->components.size(); a++) {
+		if (owner->components[a]->type == ComponentType::MATERIAL) 
+		{
+			if (selectedMaterial == nullptr) {
+				selectedMaterial = (MaterialComponent*)owner->components[a];
+			}
+			else 
+			{
+				noSelectedMaterial = (MaterialComponent*)owner->components[a];
+				break;
+			}
+		}
+	}
+	
+	const char* sel=new char[selected.size()];
+	sel = selected.c_str();
+	if (sel[0] == 'n')
+	{
+		actual = noSelectedMaterial;			
+	}
+	else 
+	{
+		actual = selectedMaterial;	
+	}
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = owner;
+	owner->isUI = true;
+	app->userInterface->UIGameObjects.push_back(owner);
+	
 	return true;
 }
+
 
 bool CheckboxComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	if (actual == noSelectedMaterial) 
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "noSelected");
+	
+	else 
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "Selected");
 
-	/*file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "checked", checked);*/
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;

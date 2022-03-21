@@ -4,7 +4,10 @@
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+
 #include "ModuleNavMesh.h"
 
 #include "TransformComponent.h"
@@ -230,7 +233,7 @@ bool ModuleCamera3D::Update(float dt)
 				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
 				LineSegment prevLine = picking;
 				rayCastToDraw = picking.ToLine();
-				if (app->scene->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
 
 				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
@@ -238,7 +241,7 @@ bool ModuleCamera3D::Update(float dt)
 				bool hit = false;
 
 				std::vector<GameObject*> gameObjects;
-				app->scene->GetQuadtree().CollectGo(gameObjects);
+				app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects);
 
 				std::vector<GameObject*>::iterator it = gameObjects.begin();
 				std::map<float, GameObject*> triangleMap;
@@ -300,32 +303,7 @@ bool ModuleCamera3D::Update(float dt)
 		matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
 		matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
 	}
-	else if(updateGameView)
-	{
-		//TODO: Make the click work properly
-		float4 size = app->editor->GetViewport()->GetBounds();
-		//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
-		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
-		if (app->editor->GetGameView()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
-		{
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP && !ImGuizmo::IsUsing())
-			{
-				float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
 
-				mousePos.x = 2 * ((mousePos.x - size.x) / (size.z)) - 1.0f;
-				mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
-
-				LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
-				LineSegment prevLine = picking;
-				rayCastToDraw = picking.ToLine();
-				if (app->scene->GetGameState() == GameState::PLAYING)
-					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
-
-				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
-				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
-			}
-		}
-	}
 	return true;
 }
 

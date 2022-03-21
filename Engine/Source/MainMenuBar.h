@@ -2,21 +2,24 @@
 #include "Menu.h"
 #include <vector>
 #include <string>
+#include <memory>
 
 class ConsoleMenu;
 class TextEditorMenu;
 class Texture;
+class Scene;
 
 enum class Menus
 {
-	CONSOLE = 0,
-	CONFIGURATION = 1,
-	ABOUT = 2,
-	INSPECTOR = 3,
-	HIERARCHY = 4,
-	CONTENT_BROWSER = 5,
-	TEXT_EDITOR = 6,
-	FOGWAR = 7,
+	CONSOLE,
+	CONFIGURATION,
+	ABOUT,
+	HIERARCHY,
+	CONTENT_BROWSER,
+	TEXT_EDITOR,
+	FOGWAR,
+	NAVIGATOR,
+	INSPECTOR
 };
 
 class MainMenuBar : public Menu
@@ -49,6 +52,10 @@ private:
 
 private:
 	bool showMenu;
+	bool showBuildMenu;
+
+	std::shared_ptr<Scene> sceneSelected;
+
 	Texture* buttonPlay;
 	Texture* buttonStop;
 	Texture* buttonNextFrame;

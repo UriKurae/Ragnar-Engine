@@ -290,7 +290,8 @@
     <ClInclude Include="Engine\Source\ModuleInput.h" />
     <ClInclude Include="Engine\Source\ModuleNavMesh.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
-    <ClInclude Include="Engine\Source\ModuleScene.h" />
+    <ClInclude Include="Engine\Source\Scene.h" />
+    <ClInclude Include="Engine\Source\ModuleSceneManager.h" />
     <ClInclude Include="Engine\Source\ModuleUI.h" />
     <ClInclude Include="Engine\Source\ModuleWindow.h" />
     <ClInclude Include="Engine\Source\NavAgentBindings.h" />
@@ -323,6 +324,7 @@
     <ClInclude Include="Engine\Source\SliderComponent.h" />
     <ClInclude Include="Engine\Source\Style.h" />
     <ClInclude Include="Engine\Source\Text.h" />
+    <ClInclude Include="Engine\Source\TextComponent.h" />
     <ClInclude Include="Engine\Source\TextEditor.h" />
     <ClInclude Include="Engine\Source\TextEditorMenu.h" />
     <ClInclude Include="Engine\Source\Texture.h" />
@@ -333,6 +335,7 @@
     <ClInclude Include="Engine\Source\Transform2DComponent.h" />
     <ClInclude Include="Engine\Source\TransformBindings.h" />
     <ClInclude Include="Engine\Source\TransformComponent.h" />
+    <ClInclude Include="Engine\Source\UIBindings.h" />
     <ClInclude Include="Engine\Source\VertexArray.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />
@@ -483,7 +486,8 @@
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
     <ClCompile Include="Engine\Source\ModuleNavMesh.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
-    <ClCompile Include="Engine\Source\ModuleScene.cpp" />
+    <ClCompile Include="Engine\Source\Scene.cpp" />
+    <ClCompile Include="Engine\Source\ModuleSceneManager.cpp" />
     <ClCompile Include="Engine\Source\ModuleUI.cpp" />
     <ClCompile Include="Engine\Source\ModuleWindow.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect.cpp" />
@@ -497,6 +501,7 @@
     <ClCompile Include="Engine\Source\NavigatorMenu.cpp" />
     <ClCompile Include="Engine\Source\ScriptComponent.cpp" />
     <ClCompile Include="Engine\Source\SliderComponent.cpp" />
+    <ClCompile Include="Engine\Source\TextComponent.cpp" />
     <ClCompile Include="Engine\Source\TextEditorMenu.cpp" />
     <ClCompile Include="Engine\Source\GameObjectCommands.cpp" />
     <ClCompile Include="Engine\Source\NavAgentComponent.cpp" />

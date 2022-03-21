@@ -3,7 +3,8 @@
 #include "Globals.h"
 
 #include "Physics3D.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -108,7 +109,7 @@ void RigidBodyComponent::SetBoundingBox()
 //When the engine state is "playing" the GameObject follows the RigidBody
 bool RigidBodyComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		TransformComponent* trans = owner->GetComponent<TransformComponent>();
 		if (trigger)
@@ -133,7 +134,7 @@ bool RigidBodyComponent::Update(float dt)
 //Function to update the position of the collider in the center of the GameObject
 void RigidBodyComponent::UpdateCollision()
 {
-	if (app->scene->GetGameState() != GameState::PLAYING)
+	if (app->sceneManager->GetGameState() != GameState::PLAYING)
 	{
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
@@ -217,7 +218,7 @@ void RigidBodyComponent::OnEditor()
 			if (isKinematic)
 			{
 				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-				if (app->scene->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					body->setActivationState(DISABLE_DEACTIVATION);
 			}
 			else CreateBody();
@@ -428,7 +429,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(box.size);
 		break;
 	case SPHERE_SHAPE_PROXYTYPE:
-		SetSphereRadius(sphere.radius);
+		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
@@ -445,7 +446,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
 		break;
 	case STATIC_PLANE_PROXYTYPE:
-		CreateBody();
+		CreateBody(false);
 		break;
 	default:
 		break;
@@ -685,10 +686,15 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 }
 
 // Use specificly in Scripting
-void RigidBodyComponent::SetSphereRadius(float sphereRadius)
+void RigidBodyComponent::SetCollisionSphere(float sphereRadius, float3 pos)
 {
-	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
+	collisionType = CollisionType::SPHERE;
 	sphere.radius = sphereRadius;
+	sphere.SetPos(pos);
+	useGravity = false;
+	isKinematic = false;
+	mass = 0.0f;
+	CreateBody(false);
 }
 
 void RigidBodyComponent::SetHeight(float height)

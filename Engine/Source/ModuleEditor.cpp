@@ -4,7 +4,8 @@
 
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "ConsoleMenu.h"
 #include "InspectorMenu.h"
@@ -76,22 +77,15 @@ bool ModuleEditor::Update(float dt)
 	{
 		if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 		{
-			for (std::vector<GameObject*>::iterator i = selected->GetParent()->GetChilds().begin(); i != selected->GetParent()->GetChilds().end(); ++i)
-			{
-				if (selected == (*i))
-				{
-					selected->GetParent()->GetChilds().erase(i);
-					RELEASE(selected);
-					break;
-				}
-			}
+			selected->GetParent()->GetChilds().erase(selected->GetParent()->FindChildren(selected));
+			RELEASE(selected);
 		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
 	{
-		if (selected) app->scene->DuplicateGO(selected, selected->GetParent());
+		if (selected) app->sceneManager->GetCurrentScene()->DuplicateGO(selected, selected->GetParent());
 	}
 
 	return ret;

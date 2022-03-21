@@ -1,6 +1,7 @@
 #include "ScriptComponent.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "MonoManager.h"
 
 #include "C_RigidBody.h"
@@ -11,7 +12,7 @@
 #include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
-ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName)
+ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : callStart(true)
 {
 	type = ComponentType::SCRIPT;
 	owner = own;
@@ -47,35 +48,25 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
-	static bool firstUpdate = true;
-	if (app->scene->GetGameState() != GameState::PLAYING 
+	if (app->sceneManager->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
-		firstUpdate = true;
+		callStart = true;
 		return false;
-	}
-
-	MonoObject* startExec = nullptr;
-	if (firstUpdate)
-	{
-		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
-		firstUpdate = false;
 	}
 
 	ScriptComponent::runningScript = this;
 
+	MonoObject* startExec = nullptr;
+	if (callStart || app->sceneManager->newSceneLoaded)
+	{
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
+		callStart = false;
+		app->sceneManager->newSceneLoaded = false;
+	}
+
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
-
-	//if (RigidBodyComponent* rb = owner->GetComponent<RigidBodyComponent>())
-	//{
-	//	if (rb->GetOnCollision())
-	//	{
-	//		void* params[1];
-	//		params[0] = app->moduleMono->ComponentToCS(rb->GetCollisionTarget());
-	//		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
-	//	}
-	//}
 
 	if (exec != nullptr || startExec != nullptr)
 	{
@@ -172,7 +163,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 				if (go)
 				{
 					uint uuid = *(const uint*)(go->Data);
-					field.fiValue.goValue = app->scene->GetGoByUuid(uuid);
+					field.fiValue.goValue = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 				}
 				SetField(field.field, field.fiValue.goValue);
 			}
@@ -237,7 +228,7 @@ void ScriptComponent::DisplayField(SerializedField& field, const char* dropType)
 						if (go)
 						{
 							uint uuid = *(const uint*)(go->Data);
-							cpp_obj = app->scene->GetGoByUuid(uuid);
+							cpp_obj = app->sceneManager->GetCurrentScene()->GetGoByUuid(uuid);
 						}
 						arrayElementGO = app->moduleMono->GoToCSGO(cpp_obj);
 						mono_array_set(field.fiValue.arrValue, MonoObject*, i, arrayElementGO);
@@ -330,7 +321,7 @@ bool ScriptComponent::OnLoad(JsonParsing& nObj)
 		case MonoTypeEnum::MONO_TYPE_CLASS:
 		{
 			if (strcmp(mono_type_get_name(mono_field_get_type(_field->field)), "RagnarEngine.GameObject") == 0)
-				app->scene->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
+				app->sceneManager->referenceMap.emplace(nObj.GetJsonNumber(mono_field_get_name(_field->field)), _field);
 
 			break;
 		}
