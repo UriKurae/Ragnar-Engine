@@ -150,7 +150,7 @@ void ModuleSceneManager::ImportPrimitives()
 
 void ModuleSceneManager::LoadBuild()
 {
-	char* buffer;
+	char* buffer = nullptr;
 
 	if (app->fs->Load("Settings/EngineResources/build.json", &buffer) > 0)
 	{

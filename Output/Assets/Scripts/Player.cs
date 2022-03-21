@@ -26,7 +26,7 @@ public class Player : RagnarComponent
             //GameObject but = GameObject.Find("Button");
             //but.GetComponent<Button>().text = "Testint Text
             SceneManager.NextScene();
-            //Time.timeScale = 1;
+            Time.timeScale = 1;
         }
 
         if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
