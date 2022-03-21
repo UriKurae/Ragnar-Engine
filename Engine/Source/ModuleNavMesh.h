@@ -72,8 +72,8 @@ public:
 	void RenderPath(NavAgentComponent* agent);
 	bool MovePath(NavAgentComponent* agent);
 	bool MoveTo(NavAgentComponent* agent, float3 destination);
-	bool LookAt(btRigidBody* rigidBody, float3 direction);
-	bool SmoothLookAt(btRigidBody* rigidBody, float3 direction, float3 origin, float speed);
+	bool LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D);
+	bool SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed);
 
 public:
 	dtNavMesh* m_navMesh;

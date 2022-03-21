@@ -738,11 +738,12 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	rigidBody->activate(true);
 	//rigidBody->setAngularVelocity();
 
-	//Rotation
-	SmoothLookAt(rigidBody, direction, origin, agent->agentProperties->speed * DEGTORAD);
-
 	//Movement
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
+
+	//Rotation
+	//SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
+	LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
 
 	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
@@ -750,36 +751,64 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	return false;
 }
 
-bool Pathfinder::LookAt(btRigidBody* rigidBody, float3 direction)
+bool Pathfinder::LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D)
 {
-	float2 axis = { 0, 1 };
-	float angle = axis.AngleBetween({ direction.x, direction.z });
-	if (angle != inf)
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR)
 	{
-		if (direction.x < 0) angle *= -1;
-		rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
+
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+			return true;
+		}
 	}
 
-	return true;
+	return false;
 }
 
-bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float3 direction, float3 origin, float speed)
+bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed)
 {
-	//if (direction.Normalized() > origin.Normalized())
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR * speed)
 	{
-		Quat quat = rigidBody->getWorldTransform().getRotation();
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(origin2D.Normalized());
 
-		//if (direction.x < 0 && origin.x < direction.x) speed *= -1;
-		//else if (origin.x < direction.x) speed *= -1;
-		//else if (origin.z < direction.z) speed *= -1;
+		if (angle != inf)
+		{
+			if (origin2D.x < 0) angle *= -1;
 
-		if (origin.x < direction.x) speed *= -1;
-		else if (origin.z < direction.z) speed *= -1;
+			if (direction2D.x < 0)
+			{
+				if (origin2D.x > direction2D.x) speed *= -1;
+				else if (origin2D.y < direction2D.y) speed *= -1;
+			}
+			else
+			{
+				if (origin2D.x > direction2D.x) speed *= -1;
+				else if (origin2D.y < direction2D.y) speed *= -1;
+			}
+			if (direction2D.y < 0)
+			{
+				if (origin2D.x > direction2D.x) speed *= -1;
+				else if (origin2D.y < direction2D.y) speed *= -1;
+			}
+			else
+			{
+				if (origin2D.x > direction2D.x) speed *= -1;
+				else if (origin2D.y < direction2D.y) speed *= -1;
+			}
 
-		rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed + quat.ToEulerXYZ().y));
+			rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed + angle));
+
+			return true;
+		}
 	}
 
-	return true;
+	return false;
 }
 
 
