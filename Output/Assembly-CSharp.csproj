@@ -52,9 +52,11 @@
     <Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Material.cs" />
     <Compile Include="Assembly-CSharp\Default Components\NavAgent.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\ParticleSystem.cs" />
     <Compile Include="Assembly-CSharp\Default Components\RagnarComponent.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Rigidbody.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform.cs" />
+    <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Emitter.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\GameObject.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\InternalCalls.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Quaternion.cs" />

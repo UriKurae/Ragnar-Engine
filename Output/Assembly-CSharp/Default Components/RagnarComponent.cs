@@ -28,6 +28,8 @@ namespace RagnarEngine
         UI_CANVAS,
         TRANFORM2D,
         NAVAGENT,
+        PARTICLE_SYSTEM,
+        BILLBOARD,
     }
 
     public class RagnarComponent
@@ -45,6 +47,7 @@ namespace RagnarEngine
             { typeof(Camera), ComponentType.CAMERA },
             { typeof(AudioListener), ComponentType.AUDIO_LISTENER },
             { typeof(NavAgent), ComponentType.NAVAGENT },
+            { typeof(ParticleSystem), ComponentType.PARTICLE_SYSTEM },
             //{ typeof(Button), ComponentType.UI_BUTTON },
         };
 

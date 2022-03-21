@@ -225,6 +225,9 @@ void ParticleEmitter::SetUpBuffers()
 
 void ParticleEmitter::Render(CameraComponent* gameCam)
 {
+	if (!isActive)
+		return;
+
 	StartBatch();
 
 	float4x4 view = float4x4::identity;

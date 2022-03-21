@@ -142,6 +142,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
 	// NavAgent ==================
 
+	// Particle System ==========
+	mono_add_internal_call("RagnarEngine.ParticleSystem::get_emitters", GetEmitters);
+	mono_add_internal_call("RagnarEngine.Emitter::Play", PlayEmitter);
+	mono_add_internal_call("RagnarEngine.Emitter::Pause", PauseEmitter);
+	// Particle System ==========
 
 	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
