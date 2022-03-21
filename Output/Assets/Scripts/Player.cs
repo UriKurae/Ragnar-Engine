@@ -8,15 +8,16 @@ public class Player : RagnarComponent
 	public GameObject target = null;
     public float force = 100;
     public float rockSoundRadius = 4f;
-    public bool canThrowKnife = true;
 
     Rigidbody rb;
     Material materialComponent;
+    NavAgent agent;
 
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
+        agent = gameObject.GetComponent<NavAgent>();
     }
 
     public void Update()
@@ -33,6 +34,11 @@ public class Player : RagnarComponent
         {
             Time.timeScale = 0;
         }
+        
+        if (agent.targetSetted)
+            agent.CalculatePath(agent.destination);
+
+        if (agent.MovePath()) { Debug.Log("Not null"); }
 
         ///////// SOUNDS /////////
         // Movement Sound
@@ -91,13 +97,36 @@ public class Player : RagnarComponent
             Vector3 f = new Vector3(-velocity, 0, 0);
             rb.ApplyCentralForce(f);
         }
+
+        // Crouch
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+        {
+            rb.SetHeight(0.6f); // 0.6 = 60%
+        }
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
+        {
+            rb.SetHeight(1); // 1 = 100% = Reset
+        }
+
     }
 
     public void OnTriggerEnter(Rigidbody other)
     {
-        // Only for testing purposes
-        other.gameObject.transform.localPosition = new Vector3(0, 5, 0);
+        Debug.Log("OnTriggerEnter");
+    }
+    public void OnTrigger(Rigidbody other)
+    {
+        //Debug.Log("OnTrigger");
+    }
+    public void OnCollisionEnter(Rigidbody other)
+    {
+        Debug.Log("OnCollisionEnter");
+    }
+    public void OnCollision(Rigidbody other)
+    {
+        //Debug.Log("OnCollision");
     }
 }
+
 
 

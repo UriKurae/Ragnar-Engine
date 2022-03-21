@@ -27,6 +27,11 @@ public:
 	void LoadScriptData(const char*);
 
 	void CallOnTriggerEnter(RigidBodyComponent* other);
+	void CallOnTrigger(RigidBodyComponent* other);
+
+	void CallOnCollisionEnter(RigidBodyComponent* other);
+	void CallOnCollision(RigidBodyComponent* other);
+
 
 private:
 //#ifndef STANDALONE
@@ -39,9 +44,12 @@ public:
 	std::vector<std::string> methods;
 	std::vector<SerializedField> fields;
 
-	MonoMethod* updateMethod;
 	MonoMethod* startMethod;
+	MonoMethod* updateMethod;
 	MonoMethod* onTriggerEnterMethod;
+	MonoMethod* onTriggerMethod;
+	MonoMethod* onCollisionEnterMethod;
+	MonoMethod* onCollisionMethod;
 
 	uint32_t noGCobject;
 	std::string name = "";
@@ -49,4 +57,7 @@ public:
 	bool firstUpdate;
 
 	static ScriptComponent* runningScript;
+
+private:
+	bool callStart;
 };

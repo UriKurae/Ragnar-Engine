@@ -93,7 +93,7 @@ bool HierarchyMenu::Update(float dt)
 						{
 							selectedParent->GetChilds().erase(i);
 							RELEASE(selected);
-							app->sceneManager->GetCurrentScene()->ResetQuadtree();
+
 							break;
 						}
 					}

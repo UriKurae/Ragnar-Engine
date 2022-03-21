@@ -112,13 +112,13 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 
 	float3 hitPoint;
 	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-	if (hit && pathfinder->agents.size() > 0)
+	if (hit && pathfinder->player != nullptr)
 	{
 		if (clickedMouseButton == SDL_BUTTON_LEFT)
 		{
 			//Just set the Player Target!!!
-			pathfinder->agents[0]->agentProperties->targetPos = hitPoint;
-			pathfinder->agents[0]->agentProperties->targetPosSet = true;
+			pathfinder->player->agentProperties->targetPos = hitPoint;
+			pathfinder->player->agentProperties->targetPosSet = true;
 		}
 		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
 		{
@@ -241,8 +241,6 @@ Pathfinder::~Pathfinder()
 	m_navMesh = nullptr;
 	m_navQuery = nullptr;
 	m_navMeshBuilder = nullptr;
-
-	agents.clear();
 }
 
 void Pathfinder::Init(NavMeshBuilder* builder)
@@ -415,8 +413,10 @@ static int fixupShortcuts(dtPolyRef* path, int npath, dtNavMeshQuery* navQuery)
 	return npath;
 }
 
-bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std::vector<float3>& path)
+std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination)
 {
+	std::vector<float3> calculatedPath;
+
 	NavAgent* agentProp = agent->agentProperties;
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 
@@ -424,21 +424,23 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	const float m_polyPickExt[3] = { 2,4,2 };
 
 	if (m_navQuery == nullptr)
-		return false;
+		return calculatedPath;
 
 	status = m_navQuery->findNearestPoly(origin.ptr(), m_polyPickExt, &m_filter, &agentProp->m_startRef, nullptr);
 	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
 		LOG(LogType::L_ERROR, "Could not find a near poly to start path");
-		return false;}
+		return calculatedPath;
+	}
 
 	status = m_navQuery->findNearestPoly(destination.ptr(), m_polyPickExt, &m_filter, &agentProp->m_endRef, nullptr);
 	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK)) {
 		LOG(LogType::L_ERROR, "Could not find a near poly to end path");
-		return false;}
+		return calculatedPath;
+	}
 
 	if (agentProp->pathType == PathType::SMOOTH)
 	{
-		if (agentProp->targetPosSet && agentProp->m_startRef && agentProp->m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
 			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(), destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
 
@@ -570,8 +572,8 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 
 			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
 				LOG(LogType::L_ERROR, "Could not create smooth path");
-				path.clear();
-				return false;
+				calculatedPath.clear();
+				return calculatedPath;
 			}
 		}
 		else
@@ -582,7 +584,7 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 	}
 	else if (agentProp->pathType == PathType::STRAIGHT)
 	{
-		if (agentProp->targetPosSet && agentProp->m_startRef && agentProp->m_endRef)
+		if (agentProp->m_startRef && agentProp->m_endRef)
 		{
 			status = m_navQuery->findPath(agentProp->m_startRef, agentProp->m_endRef, origin.ptr(),
 				destination.ptr(), &m_filter, agentProp->m_polys, &agentProp->m_npolys, MAX_POLYS);
@@ -603,8 +605,8 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 
 			if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK) || agentProp->m_nstraightPath == 0) {
 				LOG(LogType::L_ERROR, "Could not create straight path");
-				path.clear();
-				return false;
+				calculatedPath.clear();
+				return calculatedPath;
 			}
 		}
 		else
@@ -614,13 +616,15 @@ bool Pathfinder::CalculatePath(NavAgentComponent* agent, float3 destination, std
 		}
 	}
 
-	path.resize(agentProp->m_nstraightPath);
-	memcpy(path.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
+	calculatedPath.resize(agentProp->m_nstraightPath);
+	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
+	calculatedPath.erase(calculatedPath.begin());
 
 	agentProp->targetPos = destination;
 	agentProp->targetPosSet = false;
+	agentProp->path = calculatedPath;
 
-	return true;
+	return calculatedPath;
 }
 
 void Pathfinder::RenderPath(NavAgentComponent* agent)
@@ -711,12 +715,13 @@ void Pathfinder::RenderPath(NavAgentComponent* agent)
 	}
 }
 
-bool Pathfinder::SetPath(NavAgentComponent* agent, std::vector<float3>& path)
+bool Pathfinder::MovePath(NavAgentComponent* agent)
 {
-	if (!path.empty() && MoveTo(agent, path[0]))
+	if (!agent->agentProperties->path.empty() && 
+		MoveTo(agent, agent->agentProperties->path[0]))
 	{
-		path.erase(path.begin());
-		if (path.empty()) return true;
+		agent->agentProperties->path.erase(agent->agentProperties->path.begin());
+		if (agent->agentProperties->path.empty()) return true;
 	}
 
 	return false;
@@ -724,17 +729,65 @@ bool Pathfinder::SetPath(NavAgentComponent* agent, std::vector<float3>& path)
 
 bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 {
+	btRigidBody* rigidBody = agent->owner->GetComponent<RigidBodyComponent>()->GetBody();
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 	float3 direction = destination - origin;
 	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
-	direction = direction.Normalized() * agent->agentProperties->speed;
-	
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->activate(true);
-	agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity((btVector3)direction);
+	direction.Normalize();
 
-	if (destination.Distance(offSet) < MAX_ERROR)
+	rigidBody->activate(true);
+	//rigidBody->setAngularVelocity();
+
+	//Movement
+	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
+
+	//Rotation
+	SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
+	//LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
+
+	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
 		return true;
 
+	return false;
+}
+
+bool Pathfinder::LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D)
+{
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR)
+	{
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
+
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			rigidBody->getWorldTransform().setRotation(Quat::RotateY(angle));
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed)
+{
+	if (origin2D.Normalized().AngleBetween(direction2D) >= MAX_ERROR*speed)
+	{
+		float2 axis = { 0, 1 };
+		float angle = axis.AngleBetween(direction2D);
+
+		if (angle != inf)
+		{
+			if (direction2D.x < 0) angle *= -1;
+			btTransform quat = rigidBody->getWorldTransform();
+			quat.setRotation(Quat::RotateY(angle));
+
+			rigidBody->getWorldTransform().setRotation(math::Lerp(rigidBody->getWorldTransform().getRotation(), quat.getRotation(), speed*app->GetEngineDeltaTime()));
+
+			return true;
+		}
+	}
 	return false;
 }
 

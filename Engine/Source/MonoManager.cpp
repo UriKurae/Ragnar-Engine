@@ -21,6 +21,8 @@
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
+#include "UIBindings.h"
+#include "NavAgentBindings.h"
 
 #include <iostream>
 #include <fstream>
@@ -78,13 +80,17 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
 
+	// Internall Calls =============
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     // This does not return a GameObject
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject); // This does
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::InstancePrefab", InstancePrefab);
+	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+	// Internal Calls =============
 
 	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
@@ -125,12 +131,25 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsStatic", SetAsStatic);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsTrigger", SetAsTrigger);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionType", SetCollisionType);
-	mono_add_internal_call("RagnarEngine.Rigidbody::SetSphereRadius", SetSphereRadius);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionSphere", SetCollisionSphere);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetHeight", SetHeight);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetBodyPosition", SetBodyPosition);
 	// Rigidbody =================
 
 	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
 	// Animation =================
+
+
+	// NavAgent ==================
+	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_targetSetted", GetAgentTargetSetted);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_destination", GetAgentDestination);
+	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
+	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
+	// NavAgent ==================
+
 
 	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
@@ -142,6 +161,22 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
 	// Scene Manager =============
 
+	// UI
+	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
+	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
+	mono_add_internal_call("RagnarEngine.UISlider::UIFunctionSlider", UIFunctionSlider);
+	mono_add_internal_call("RagnarEngine.Transform2D::UIFunctionTransform2D", UIFunctionTransform2D);
+	mono_add_internal_call("RagnarEngine.Transform2D::get_position2D", Get2DPosition);
+	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
+
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
+	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetText);
+	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetText);
+
+	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
+	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
+
+	mono_add_internal_call("RagnarEngine.UISlider::GetSliderActualValue", GetSliderActualValue);
 	InitMono();
 
 	return ret;

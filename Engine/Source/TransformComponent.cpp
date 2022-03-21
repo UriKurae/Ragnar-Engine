@@ -10,6 +10,7 @@
 #include "ListenerComponent.h"
 #include "AudioSourceComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "ParticleSystemComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
@@ -232,8 +233,12 @@ void TransformComponent::UpdateBoundingBox()
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
-		owner->GetComponent<MeshComponent>()->CalculateCM();
+		//owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
+
+	ParticleSystemComponent* partComp = owner->GetComponent<ParticleSystemComponent>();
+	if (partComp)
+		partComp->UpdateAABB();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)

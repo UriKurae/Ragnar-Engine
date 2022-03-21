@@ -32,15 +32,12 @@ public:
 	void Combos();
 
 	void AddConstraintP2P(RigidBodyComponent* const& val);
-	std::vector<RigidBodyComponent*>::const_iterator FindTrigger(RigidBodyComponent* node);
 
 	void ResetLocalValues();
 	void EditCollisionMesh();
 	void UpdateCollisionMesh();
 
-	void SetSphereRadius(float sphereRadius);
-
-	void CreateBody();
+	void CreateBody(bool changeShape = true);
 	void SetPhysicsProperties();
 	inline float GetMass() { return mass; };
 	void SetMass(float mass);
@@ -61,6 +58,10 @@ public:
 
 	inline void SetCollisionTarget(RigidBodyComponent* obj) { collisionTarget = obj; };
 	inline RigidBodyComponent* GetCollisionTarget() { return collisionTarget; };
+	
+	// Used specifictly on scripting. (Future deleting)
+	void SetCollisionSphere(float sphereRadius, float3 pos);
+	void SetHeight(float height);
 
 public:
 	bool useGravity = true;

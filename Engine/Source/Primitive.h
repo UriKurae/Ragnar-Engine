@@ -11,8 +11,6 @@ public:
 	virtual ~Primitive() {}
 
 	virtual void Draw() {}
-	//inline GLuint GetIndexBuffer() { return indexBuffer; }
-
 	void DrawAxis();
 
 protected:
@@ -24,7 +22,6 @@ protected:
 	IndexBuffer* index;
 
 	unsigned int vao;
-
 	bool showAxis;
 };
 

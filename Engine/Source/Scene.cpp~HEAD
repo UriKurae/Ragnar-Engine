@@ -26,6 +26,10 @@
 #include "MeshComponent.h"
 #include "AudioSourceComponent.h"
 #include "AnimationComponent.h"
+#include "ModuleUI.h"
+//Scripting
+#include "C_RigidBody.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include <stack>
 #include "Profiling.h"

@@ -2,8 +2,10 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleSceneManager.h"
+#include "ModuleEditor.h"
 
 #include "ResourceManager.h"
+#include "PrefabManager.h"
 
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
@@ -208,6 +210,19 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	tr->UpdateTransform();
 
 	return app->moduleMono->GoToCSGO(go);
+}
+void InstancePrefab(MonoObject* path)
+{
+	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
+	PrefabManager::GetInstance()->LoadPrefab(goPath);
+}
+
+MonoObject* Destroy(MonoObject* go)
+{
+	GameObject* toDelete = app->moduleMono->GameObjectFromCSGO(go);
+	toDelete->GetParent()->GetChilds().erase(toDelete->GetParent()->FindChildren(toDelete));
+	RELEASE(toDelete);
+	return 0;
 }
 
 MonoObject* AddComponentMono(MonoObject* go, int componentType)

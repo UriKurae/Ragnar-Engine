@@ -19,7 +19,7 @@ namespace RagnarEngine
         LIGHT,
         ANIMATION,
         BONE,
-        RIGID_BODY,
+        RIGID_BODY, 
         UI_BUTTON,
         UI_IMAGE,
         UI_CHECKBOX,
@@ -27,6 +27,7 @@ namespace RagnarEngine
         UI_INPUTBOX,
         UI_CANVAS,
         TRANFORM2D,
+        UI_TEXT,
         NAVAGENT,
     }
 
@@ -40,11 +41,16 @@ namespace RagnarEngine
             { typeof(Transform), ComponentType.TRANSFORM },
             { typeof(Material), ComponentType.MATERIAL },
             { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
-            { typeof(Rigidbody), ComponentType.RIGID_BODY },
-            { typeof(Animation), ComponentType.ANIMATION },
-            { typeof(Camera), ComponentType.CAMERA },
-            { typeof(AudioListener), ComponentType.AUDIO_LISTENER },
-            //{ typeof(Button), ComponentType.UI_BUTTON },
+            { typeof(Rigidbody), ComponentType.RIGID_BODY},
+            { typeof(Animation), ComponentType.ANIMATION},
+            { typeof(Camera), ComponentType.CAMERA},
+            { typeof(AudioListener), ComponentType.AUDIO_LISTENER},
+            { typeof(NavAgent), ComponentType.NAVAGENT },
+            { typeof(Transform2D), ComponentType.TRANFORM2D},
+            { typeof(UIButton), ComponentType.UI_BUTTON},
+            { typeof(UIImage), ComponentType.UI_IMAGE},
+            { typeof(UICheckbox), ComponentType.UI_CHECKBOX},
+            { typeof(UISlider), ComponentType.UI_SLIDER},
         };
 
         public RagnarComponent()

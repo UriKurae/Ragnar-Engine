@@ -4,9 +4,11 @@
 #include "Math/float4x4.h"
 #include "Math/float3x3.h"
 #include "Math/float2.h"
-#include "GL/glew.h"
-
 #include <unordered_map>
+
+typedef int GLint;
+typedef float GLfloat;
+typedef unsigned int GLenum;
 
 enum class UniformType
 {
@@ -35,7 +37,6 @@ struct Uniform
 	float3 vec3;
 	float4 vec4;
 	float4x4 matrix4 = float4x4::zero;
-
 };
 
 enum class ShaderType
@@ -91,8 +92,6 @@ public:
 	void SetUniformMatrix3f(const std::string& name, const float3x3& mat);
 	void SetUniformMatrix4f(const std::string& name, const float4x4& mat);
 
-
-	//inline const std::string& GetPath() { return path; }
 	inline const std::string& GetSource() { return source; }
 
 	void UpdateSourceCode(const std::string& newSource);
@@ -110,7 +109,6 @@ private:
 	std::string name;
 	unsigned int rendererID;
 	std::string source;
-	//std::string path;
 	std::vector<Uniform> uniforms;
 
 	bool created;

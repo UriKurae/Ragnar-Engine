@@ -77,16 +77,8 @@ bool ModuleEditor::Update(float dt)
 	{
 		if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 		{
-			for (std::vector<GameObject*>::iterator i = selected->GetParent()->GetChilds().begin(); i != selected->GetParent()->GetChilds().end(); ++i)
-			{
-				if (selected == (*i))
-				{
-					selected->GetParent()->GetChilds().erase(i);
-					RELEASE(selected);
-					app->sceneManager->GetCurrentScene()->ResetQuadtree();
-					break;
-				}
-			}
+			selected->GetParent()->GetChilds().erase(selected->GetParent()->FindChildren(selected));
+			RELEASE(selected);
 		}
 	}
 

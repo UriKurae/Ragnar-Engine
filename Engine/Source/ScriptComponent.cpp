@@ -12,7 +12,7 @@
 #include <mono/metadata/object-forward.h>
 
 ScriptComponent* ScriptComponent::runningScript = nullptr;
-ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : firstUpdate(false)
+ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : callStart(true)
 {
 	type = ComponentType::SCRIPT;
 	owner = own;
@@ -51,32 +51,22 @@ bool ScriptComponent::Update(float dt)
 	if (app->sceneManager->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{
-		firstUpdate = true;
+		callStart = true;
 		return false;
-	}
-
-	MonoObject* startExec = nullptr;
-	if (firstUpdate || app->sceneManager->newSceneLoaded)
-	{
-		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
-		firstUpdate = false;
-		app->sceneManager->newSceneLoaded = false;
 	}
 
 	ScriptComponent::runningScript = this;
 
+	MonoObject* startExec = nullptr;
+	if (callStart || app->sceneManager->newSceneLoaded)
+	{
+		mono_runtime_invoke(startMethod, mono_gchandle_get_target(noGCobject), NULL, &startExec);
+		callStart = false;
+		app->sceneManager->newSceneLoaded = false;
+	}
+
 	MonoObject* exec = nullptr;
 	mono_runtime_invoke(updateMethod, mono_gchandle_get_target(noGCobject), NULL, &exec);
-
-	//if (RigidBodyComponent* rb = owner->GetComponent<RigidBodyComponent>())
-	//{
-	//	if (rb->GetOnCollision())
-	//	{
-	//		void* params[1];
-	//		params[0] = app->moduleMono->ComponentToCS(rb->GetCollisionTarget());
-	//		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
-	//	}
-	//}
 
 	if (exec != nullptr || startExec != nullptr)
 	{
@@ -426,6 +416,34 @@ void ScriptComponent::CallOnTriggerEnter(RigidBodyComponent* other)
 		mono_runtime_invoke(onTriggerEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
 	}
 }
+void ScriptComponent::CallOnTrigger(RigidBodyComponent* other)
+{
+	if (onTriggerMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onTriggerMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+
+void ScriptComponent::CallOnCollisionEnter(RigidBodyComponent* other)
+{
+	if (onCollisionEnterMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onCollisionEnterMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
+void ScriptComponent::CallOnCollision(RigidBodyComponent* other)
+{
+	if (onCollisionMethod)
+	{
+		void* params[1];
+		params[0] = app->moduleMono->ComponentToCS(other);
+		mono_runtime_invoke(onCollisionMethod, mono_gchandle_get_target(noGCobject), params, nullptr);
+	}
+}
 
 void ScriptComponent::LoadScriptData(const char* scriptName)
 {
@@ -459,9 +477,21 @@ void ScriptComponent::LoadScriptData(const char* scriptName)
 	updateMethod = mono_method_desc_search_in_class(mdesc, klass);
 	mono_method_desc_free(mdesc);
 
-	MonoMethodDesc* triggerDesc = mono_method_desc_new(":OnTriggerEnter", false);
-	onTriggerEnterMethod = mono_method_desc_search_in_class(triggerDesc, klass);
+	MonoMethodDesc* triggerEnterDesc = mono_method_desc_new(":OnTriggerEnter", false);
+	onTriggerEnterMethod = mono_method_desc_search_in_class(triggerEnterDesc, klass);
+	mono_method_desc_free(triggerEnterDesc);
+
+	MonoMethodDesc* triggerDesc = mono_method_desc_new(":OnTrigger", false);
+	onTriggerMethod = mono_method_desc_search_in_class(triggerDesc, klass);
 	mono_method_desc_free(triggerDesc);
+
+	MonoMethodDesc* collisionEnterDesc = mono_method_desc_new(":OnCollisionEnter", false);
+	onCollisionEnterMethod = mono_method_desc_search_in_class(collisionEnterDesc, klass);
+	mono_method_desc_free(collisionEnterDesc);
+
+	MonoMethodDesc* collisionDesc = mono_method_desc_new(":OnCollision", false);
+	onCollisionMethod = mono_method_desc_search_in_class(collisionDesc, klass);
+	mono_method_desc_free(collisionDesc);
 
 	MonoClass* baseClass = mono_class_get_parent(klass);
 	if (baseClass != nullptr)

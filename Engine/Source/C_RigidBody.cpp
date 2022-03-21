@@ -25,7 +25,6 @@ RigidBodyComponent::~RigidBodyComponent()
 {
 	if (body != nullptr)
 	{
-		if(trigger) app->physics->triggers.erase(FindTrigger(this));
 		app->physics->DeleteBody(this, owner->name);
 		constraintBodies.clear();
 	}	
@@ -229,10 +228,7 @@ void RigidBodyComponent::OnEditor()
 			if (trigger)
 				SetAsTrigger();
 			else
-			{
-				app->physics->triggers.erase(FindTrigger(this));
 				CreateBody();
-			}
 		}
 		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();
@@ -327,11 +323,6 @@ void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 	body->getCollisionShape()->getBoundingSphere(center, r1);
 	val->GetBody()->getCollisionShape()->getBoundingSphere(center, r2);
 	app->physics->AddConstraintP2P(*body, *val->GetBody(), float3(r1, r1, r1), float3(r2, r2, r2));
-}
-
-std::vector<RigidBodyComponent*>::const_iterator RigidBodyComponent::FindTrigger(RigidBodyComponent* node)
-{
-	return std::find(app->physics->triggers.begin(), app->physics->triggers.end(), node);
 }
 
 void RigidBodyComponent::SetCollisionType(CollisionType type)
@@ -438,7 +429,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(box.size);
 		break;
 	case SPHERE_SHAPE_PROXYTYPE:
-		SetSphereRadius(sphere.radius);
+		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
@@ -455,18 +446,12 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
 		break;
 	case STATIC_PLANE_PROXYTYPE:
-		CreateBody();
+		CreateBody(false);
 		break;
 	default:
 		break;
 	}
 	editMesh = false;
-}
-
-void RigidBodyComponent::SetSphereRadius(float sphereRadius)
-{
-	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
-	sphere.radius = sphereRadius;
 }
 
 float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
@@ -485,12 +470,12 @@ float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 	return newTransform;
 }
 
-void RigidBodyComponent::CreateBody()
+void RigidBodyComponent::CreateBody(bool changeShape)
 {
-	SetBoundingBox();
-
 	if (body != nullptr)
 		app->physics->DeleteBody(this, owner->name);
+
+	if (changeShape) SetBoundingBox();
 
 	switch (collisionType)
 	{
@@ -556,7 +541,7 @@ void RigidBodyComponent::SetAsStatic()
 void RigidBodyComponent::SetAsTrigger()
 {
 	body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-	app->physics->triggers.push_back(this);
+	trigger = true;
 }
 
 bool RigidBodyComponent::OnLoad(JsonParsing& node)
@@ -625,9 +610,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-
-	if (trigger)
-		app->physics->triggers.push_back(this);
 
 	return true;
 }
@@ -701,4 +683,47 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
+}
+
+// Use specificly in Scripting
+void RigidBodyComponent::SetCollisionSphere(float sphereRadius, float3 pos)
+{
+	collisionType = CollisionType::SPHERE;
+	sphere.radius = sphereRadius;
+	sphere.SetPos(pos);
+	useGravity = false;
+	isKinematic = false;
+	mass = 0.0f;
+	CreateBody(false);
+}
+
+void RigidBodyComponent::SetHeight(float height)
+{
+	if (height != 1) 
+	{
+		float3 offset(0, owner->GetAABB().HalfSize().y * (1-height), 0);
+		PCapsule capAux = capsule;
+		OBB obb = owner->GetOOB();
+		float3 pos = body->getCenterOfMassPosition();
+
+		capsule.SetPos(pos.x, pos.y - offset.y, pos.z);
+		capsule.radius *= obb.r.MaxElementXZ();
+		capsule.height *= obb.Size().y * 0.5 * height;
+
+		CreateBody(false);
+		owner->SetOffsetCM(owner->GetOffsetCM() - offset);
+		capsule = capAux;
+	}
+	else
+	{
+		float radius = capsule.radius;
+		float height = capsule.height;
+
+		CreateBody();
+		body->getCollisionShape()->setLocalScaling(btVector3(radius, height * 0.5f, radius));
+		capsule.radius = radius;
+		capsule.height = height;
+
+		owner->GetComponent<MeshComponent>()->CalculateCM();
+	}
 }

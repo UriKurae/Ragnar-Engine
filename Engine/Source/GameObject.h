@@ -1,4 +1,21 @@
 #pragma once
+
+//#include "Component.h"
+//
+//#include "TransformComponent.h"
+//#include "MeshComponent.h"
+//#include "MaterialComponent.h"
+//#include "CameraComponent.h"
+//#include "AudioSourceComponent.h"
+//#include "ListenerComponent.h"
+//#include "AudioReverbZoneComponent.h"
+////#include "ParticleSystemComponent.h"
+//#include "BillboardParticleComponent.h"
+//
+//#include "MathGeoLib/src/MathGeoLib.h"
+//#include <string>
+//#include <vector>
+
 #include <string>
 #include <vector>
 
@@ -23,6 +40,7 @@ public:
 	void Draw(CameraComponent* gameCam);
 	void DrawOutline();
 	void DrawEditor();
+	void DebugColliders(float3* points, float3 color = float3::one);
 
 	Component* CreateComponent(ComponentType type, const char* name = nullptr);
 	void AddComponent(Component* component);
@@ -57,7 +75,8 @@ public:
 	void SetNewAABB();
 	inline AABB GetAABB() { return globalAabb; }
 	inline OBB GetOOB() { return globalObb; }
-	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }	
+	inline void ClearAABB() { globalAabb.SetNegativeInfinity(); }
+	void EditAABB(float3 offset, float3 size);
 
 	void MoveChildrenUp(GameObject *child);
 	void MoveChildrenDown(GameObject *child);
@@ -73,6 +92,9 @@ public:
 
 	template<typename T>
 	T* GetComponent();
+
+	//Component* GetComponent(ComponentType type);
+
 	
 public:
 	std::string name;
@@ -86,6 +108,9 @@ public:
 
 	std::vector<SerializedField*> csReferences;
 	std::vector<Component*> components;
+
+	bool showAABB = false;
+	bool showOBB = false;
 private:
 
 	GameObject* parent;

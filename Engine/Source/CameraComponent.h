@@ -41,9 +41,11 @@ public:
 
 	inline float GetCurrentScreenWidth() { return currentScreenWidth; }
 	inline float GetCurrentScreenHeight() { return currentScreenHeight; }
+	inline float GetZoomRatio() { return zoom / ((zoomMax - zoomMin) / 2); };
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
+	float zoom = zoomMax;
 
 private:
 	void Shake(float dt);
@@ -52,6 +54,8 @@ private:
 	TransformComponent* transform;
 	Quat currentRotation;
 	float3 originalPos;
+
+private:
 
 	float nearPlane;
 	float farPlane;
@@ -67,7 +71,7 @@ private:
 	//----------------------------------------------
 	const float zoomMin = 10;
 	const float zoomMax = 100;
-	float zoom = zoomMax;
+	
 
 	bool fixingToTarget = false;
 	bool freeMovement = true;
@@ -84,11 +88,7 @@ private:
 	float horizontalAngle = 0;
 	
 	// Controls
-	bool rightClickRot = true; // Right click rotation and midle click movement go together
 	bool arrowRot = false;
-	bool midClickMov = true;
-	bool WASDMov = false;
-	bool borderMov = false;
 
 	int targetUID = 0;
 

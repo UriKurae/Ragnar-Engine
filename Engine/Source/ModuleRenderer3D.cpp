@@ -11,10 +11,7 @@
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
-#include "ButtonComponent.h"
-#include "CheckBoxComponent.h"
-#include "ImageComponent.h"
-#include "SliderComponent.h"
+#include "NavAgentComponent.h"
 
 #include "ResourceManager.h"
 #include "Scene.h"
@@ -23,6 +20,7 @@
 #include "Framebuffer.h"
 #include "NavMeshBuilder.h"
 
+#include "GL/glew.h"
 #include "Imgui/imgui_impl_sdl.h"
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/ImguiStyle.h"
@@ -246,9 +244,8 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
 
-		Pathfinder* pathfinding = app->navMesh->GetPathfinding();
-		for (int i = 0; i < pathfinding->agents.size(); i++)
-			pathfinding->RenderPath(app->navMesh->GetPathfinding()->agents[i]);
+		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
+			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
 	}
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
@@ -289,70 +286,10 @@ bool ModuleRenderer3D::PostUpdate()
 	glLoadIdentity();
 	glPopMatrix();
 
+	glEnable(GL_BLEND);
+
 	// DRAW UI
-	ButtonComponent* aux = nullptr;
-	//CanvasComponent* aux1 = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3 = nullptr;
-	//InputBoxComponent* aux4 = nullptr;
-	SliderComponent* aux5 = nullptr;
-	for (int a = 0; a < app->userInterface->UIGameObjects.size(); a++)
-	{
-		/* glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf(frustum.ProjectionMatrix().Transposed().ptr());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(app->scene->mainCamera->matrixViewFrustum.Transposed().ptr()); */
-
-		aux = app->userInterface->UIGameObjects[a]->GetComponent<ButtonComponent>();
-		//aux1 = go->GetComponent<CanvasComponent>();
-		aux2 = app->userInterface->UIGameObjects[a]->GetComponent<CheckboxComponent>();
-		aux3 = app->userInterface->UIGameObjects[a]->GetComponent<ImageComponent>();
-		//aux4 = go->GetComponent<InputBoxComponent>();
-		aux5 = app->userInterface->UIGameObjects[a]->GetComponent<SliderComponent>();
-
-		if (aux != nullptr)
-		{
-
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
-			app->userInterface->RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
-			aux = nullptr;
-		}
-		/* else if (aux1 != nullptr)
-		{
-			textExample = aux1->text;
-			color.x = aux1->color.r;
-			color.y = aux1->color.g;
-			color.z = aux1->color.b;
-			aux1 = nullptr;
-		} */
-		else if (aux2 != nullptr)
-		{
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
-			aux2 = nullptr;
-		}
-		else if (aux3 != nullptr)
-		{
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
-			aux3 = nullptr;
-		}
-		/* else if (aux4 != nullptr)
-		{
-			textExample = aux4->text;
-			color.x = aux4->textColor.r;
-			color.y = aux4->textColor.g;
-			color.z = aux4->textColor.b;
-			aux4 = nullptr;
-		} */
-		else if (aux5 != nullptr)
-		{
-			app->userInterface->UIGameObjects[a]->Draw(nullptr);
-			aux5 = nullptr;
-		}
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-	}
+	app->userInterface->Draw();
 
 	mainCameraFbo->Unbind();
 
@@ -361,6 +298,8 @@ bool ModuleRenderer3D::PostUpdate()
 
 	SDL_GL_SwapWindow(app->window->window);
 
+	glDisable(GL_BLEND);
+	
 	return true;
 }
 
