@@ -768,10 +768,13 @@ bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float3 direction, float3 o
 	//if (direction.Normalized() > origin.Normalized())
 	{
 		Quat quat = rigidBody->getWorldTransform().getRotation();
-		float angle = quat.ToEulerXYZ().y;
 
-		if (direction.x < 0 && origin.x < direction.x) speed *= -1;
-		else if (origin.x > direction.x) speed *= -1;
+		//if (direction.x < 0 && origin.x < direction.x) speed *= -1;
+		//else if (origin.x < direction.x) speed *= -1;
+		//else if (origin.z < direction.z) speed *= -1;
+
+		if (origin.x < direction.x) speed *= -1;
+		else if (origin.z < direction.z) speed *= -1;
 
 		rigidBody->getWorldTransform().setRotation(Quat::RotateY(speed + quat.ToEulerXYZ().y));
 	}
