@@ -783,12 +783,11 @@ bool Pathfinder::SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2
 			btTransform quat = rigidBody->getWorldTransform();
 			quat.setRotation(Quat::RotateY(angle));
 
-			rigidBody->getWorldTransform().setRotation(math::Lerp(rigidBody->getWorldTransform().getRotation(), quat.getRotation(), speed));
+			rigidBody->getWorldTransform().setRotation(math::Lerp(rigidBody->getWorldTransform().getRotation(), quat.getRotation(), speed*app->GetEngineDeltaTime()));
 
 			return true;
 		}
 	}
-
 	return false;
 }
 

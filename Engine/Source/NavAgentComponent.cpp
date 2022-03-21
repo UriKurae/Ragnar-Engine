@@ -46,10 +46,10 @@ void NavAgentComponent::OnEditor()
 		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::PushItemWidth(180);
-		ImGui::DragFloat("Agent Radius", &agentProperties->radius, 0.1f);
-		ImGui::DragFloat("Agent Height", &agentProperties->height, 0.1f);
-		ImGui::DragFloat("Stop Height", &agentProperties->maxClimb, 0.1f);
-		ImGui::DragInt("Max Slope", &agentProperties->maxSlope, 1);
+		ImGui::DragFloat("Agent Radius", &agentProperties->radius, 0.1f, 0.f);
+		ImGui::DragFloat("Agent Height", &agentProperties->height, 0.1f, 0.f);
+		ImGui::DragFloat("Stop Height", &agentProperties->maxClimb, 0.1f, 0.f);
+		ImGui::DragInt("Max Slope", &agentProperties->maxSlope, 1, 0);
 		ImGui::PopItemWidth();
 		ImGui::Dummy({ 0,10 });
 
@@ -57,10 +57,10 @@ void NavAgentComponent::OnEditor()
 		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::PushItemWidth(180);
-		ImGui::DragFloat("Speed", &agentProperties->speed, 0.1f);
-		ImGui::DragFloat("Angular Speed", &agentProperties->angularSpeed, 0.1f);
-		ImGui::DragFloat("Acceleration", &agentProperties->acceleration, 0.1f);
-		ImGui::DragFloat("Stopping Distance", &agentProperties->stoppingDistance, 0.1f);
+		ImGui::DragFloat("Speed", &agentProperties->speed, 0.1f,0.f);
+		ImGui::DragFloat("Angular Speed", &agentProperties->angularSpeed, 1.f,0.f);
+		ImGui::DragFloat("Acceleration", &agentProperties->acceleration, 0.1f,0.f);
+		ImGui::DragFloat("Stopping Distance", &agentProperties->stoppingDistance, 0.1f,0.f);
 		ImGui::PopItemWidth();
 		ImGui::Dummy({ 0,10 });
 
