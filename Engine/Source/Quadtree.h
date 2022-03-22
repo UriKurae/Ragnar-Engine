@@ -52,6 +52,8 @@ public:
 	void CollectGo(std::vector<GameObject*>& gos);
 	void DebugDraw();
 
+	QuadtreeNode* getRoot() const { return root; }
+
 private:
 	QuadtreeNode* root;
 };
