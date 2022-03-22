@@ -198,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 143169024,
+                    "pointer": 283197112,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -208,7 +208,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 143168344,
+                    "pointer": 222405336,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -255,11 +255,11 @@
                     "Position": [
                         7,
                         -226,
-                        84.5
+                        83.5
                     ],
                     "Scale": [
-                        6.3115382194519043,
-                        1.329431414604187,
+                        6.3115386962890625,
+                        1.3294315338134766,
                         1
                     ],
                     "rotationEuler": [
@@ -298,11 +298,11 @@
                     "Position": [
                         -364.5,
                         -214,
-                        84.5
+                        83.5
                     ],
                     "Scale": [
                         4.8692302703857422,
-                        2.1697323322296143,
+                        2.1697325706481934,
                         1
                     ],
                     "rotationEuler": [
@@ -382,10 +382,10 @@
                         -2.9523561000823975
                     ],
                     "Quaternion": [
-                        -0.29092654585838318,
-                        0.87676310539245605,
-                        -0.15412478148937225,
-                        0.35056236386299133
+                        -0.32747209072113037,
+                        0.80676490068435669,
+                        -0.34496134519577026,
+                        0.35056260228157043
                     ],
                     "RotationEditor": [
                         0,
@@ -537,7 +537,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 141911536,
+                    "pointer": 222409416,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -549,7 +549,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 143167256,
+                    "pointer": 222406288,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -1140,7 +1140,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        92.525833129882813,
+                        92.525833129882812,
                         2.2737367544323206e-13,
                         -16.057146072387695
                     ],
@@ -1267,7 +1267,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        21.418655395507813,
+                        21.418655395507812,
                         9.3179587309921708e-13,
                         -51.225345611572266
                     ],
@@ -2048,7 +2048,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -63.902603149414063,
+                        -63.902603149414062,
                         -9.0949470177292824e-13,
                         45.437911987304688
                     ],
@@ -2327,7 +2327,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        49.983169555664063,
+                        49.983169555664062,
                         -1.1368683772161603e-13,
                         7.4482307434082031
                     ],
@@ -3030,7 +3030,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        28.489822387695313,
+                        28.489822387695312,
                         1.1368683772161603e-13,
                         -2.9738852977752686
                     ],
@@ -3230,7 +3230,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        71.183181762695313,
+                        71.183181762695312,
                         4.5474735088646412e-13,
                         -31.695037841796875
                     ],
@@ -3437,7 +3437,7 @@
                     "Position": [
                         -67.671066284179688,
                         -2.7284841053187847e-12,
-                        85.158279418945313
+                        85.158279418945312
                     ],
                     "Quaternion": [
                         0,
@@ -3969,7 +3969,7 @@
                     "Position": [
                         1.0848355293273926,
                         -4.5474735088646412e-13,
-                        31.037124633789063
+                        31.037124633789062
                     ],
                     "Quaternion": [
                         0,
@@ -4114,9 +4114,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        34.722244262695313,
+                        34.722244262695312,
                         9.1846300530329383e-13,
-                        -44.113845825195313
+                        -44.113845825195312
                     ],
                     "Quaternion": [
                         0,
@@ -4604,7 +4604,7 @@
                     "Position": [
                         35.914356231689453,
                         -2.2737367544323206e-13,
-                        8.8782119750976563
+                        8.8782119750976562
                     ],
                     "Quaternion": [
                         0,
@@ -4905,7 +4905,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        91.582473754882813,
+                        91.582473754882812,
                         4.5474735088646412e-13,
                         -29.861276626586914
                     ],
@@ -5745,7 +5745,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -35.553298950195313,
+                        -35.553298950195312,
                         -5.6843418860808015e-14,
                         2.5179390907287598
                     ],
@@ -5918,7 +5918,7 @@
                     "Position": [
                         -0.19964806735515594,
                         -9.0949470177292824e-13,
-                        48.219497680664063
+                        48.219497680664062
                     ],
                     "Quaternion": [
                         0,
@@ -5965,7 +5965,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        77.873733520507813,
+                        77.873733520507812,
                         9.0949470177292824e-13,
                         -45.601097106933594
                     ],
@@ -6293,6 +6293,429 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1022231576,
+            "Parent UUID": 417171234,
+            "Name": "BackgroundImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        84
+                    ],
+                    "Scale": [
+                        23.365385055541992,
+                        12.143418312072754,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 1142.5,
+                    "buttonHeight": 534.11761474609375
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/pauseMenuScreen.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "pauseMenuButton",
+                    "pointer": 222405608,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 801014828,
+            "Parent UUID": 417171234,
+            "Name": "UIRectangle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -326,
+                        7.5,
+                        88.199996948242188
+                    ],
+                    "Scale": [
+                        8.3423070907592773,
+                        2.947324275970459,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 491.5,
+                    "buttonHeight": 167.5
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/MainMenuBox.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 236607230,
+            "Parent UUID": 417171234,
+            "Name": "ButtonResume",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -363,
+                        30,
+                        90
+                    ],
+                    "Scale": [
+                        3.9230766296386719,
+                        0.33862873911857605,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Resume",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 58210541,
+            "Parent UUID": 417171234,
+            "Name": "ButtonMainMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -363,
+                        -28,
+                        90
+                    ],
+                    "Scale": [
+                        3.9230766296386719,
+                        0.33862873911857605,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Main Menu",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 794518623,
+            "Parent UUID": 417171234,
+            "Name": "ButtonOptions",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -356.5,
+                        0,
+                        90
+                    ],
+                    "Scale": [
+                        3.9230766296386719,
+                        0.33862873911857605,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Options",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 556679081,
+            "Parent UUID": 417171234,
+            "Name": "SkillKnife",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -64.5,
+                        -209,
+                        84
+                    ],
+                    "Scale": [
+                        0.46153846383094788,
+                        0.57692307233810425,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 73
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/CrysknifeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/CrysknifeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1090268186,
+            "Parent UUID": 417171234,
+            "Name": "SkillNade",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -28.5,
+                        -210,
+                        84
+                    ],
+                    "Scale": [
+                        0.49615380167961121,
+                        0.40133780241012573,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 151.5,
+                    "buttonHeight": 66
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SpiceNadeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SpiceNadeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
                 }
             ]
         }
