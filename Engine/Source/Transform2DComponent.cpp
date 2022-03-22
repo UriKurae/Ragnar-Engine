@@ -60,10 +60,7 @@ bool ComponentTransform2D::Update(float dt)
 	}
 	else if (lastViewportBounds.z != viewport.z) 
 	{
-		if (position.x != 0.0f) 
-		{
 			position.x -=( viewport.z - lastViewportBounds.z)/2;
-		}
 		
 	}
 	
