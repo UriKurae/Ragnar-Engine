@@ -39,7 +39,7 @@ private:
 	float4x4 transmat;
 
 	float3 rotationEuler;
-	float3 position = {1,1,55.5f};
+	float3 position = {1,1,100.0f};
 	float3 internalPosition;
 	float3 scale;
 	float4 lastViewportBounds;
