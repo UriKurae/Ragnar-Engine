@@ -14,8 +14,9 @@ ImageComponent::ImageComponent(GameObject* own)
 {
 	type = ComponentType::UI_IMAGE;
 	this->text = "Image Component";
-	own->name = "Image";
-
+	if (own->name == "Game Object") {
+		own->name = "Image";
+	}
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = owner;
 }

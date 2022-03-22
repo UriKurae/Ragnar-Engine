@@ -87,6 +87,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::InstancePrefab", InstancePrefab);
 	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
+	mono_add_internal_call("RagnarEngine.InternalCalls::GetRegionGame", GetRegionGame);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
