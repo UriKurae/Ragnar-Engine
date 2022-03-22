@@ -198,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 105589752,
+                    "pointer": 108842792,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -208,13 +208,14 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 105591224,
+                    "pointer": 108840952,
                     "type": 4,
                     "componentTable": 0
                 },
                 {
                     "Type": 20,
                     "Active": true,
+                    "AgentType": 1,
                     "Player": false,
                     "Radius": 0.30000001192092896,
                     "Height": 2,
@@ -233,8 +234,7 @@
                     "PathType": 1,
                     "NumPolys": 0,
                     "NumStraight": 0,
-                    "NumSmooth": 0,
-                    "AgentType": 1
+                    "NumSmooth": 0
                 }
             ]
         },
@@ -258,8 +258,8 @@
                         84.5
                     ],
                     "Scale": [
-                        48.600002288818359,
-                        12.32608699798584,
+                        49.230003356933594,
+                        10.369565010070801,
                         1
                     ],
                     "rotationEuler": [
@@ -267,8 +267,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 113
+                    "buttonWidth": 403.5,
+                    "buttonHeight": 103
                 },
                 {
                     "Type": 13
@@ -297,12 +297,12 @@
                     "Type": 18,
                     "Position": [
                         -364.5,
-                        -221.5,
+                        -214,
                         84.5
                     ],
                     "Scale": [
-                        34.55999755859375,
-                        15.456521987915039,
+                        37.980003356933594,
+                        16.923913955688477,
                         1
                     ],
                     "rotationEuler": [
@@ -310,8 +310,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 322,
-                    "buttonHeight": 129
+                    "buttonWidth": 341,
+                    "buttonHeight": 136.5
                 },
                 {
                     "Type": 13
@@ -377,15 +377,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -10.997602462768555,
+                        -14.31525707244873,
                         11.183857917785645,
-                        -17.69573974609375
+                        -15.939152717590332
                     ],
                     "Quaternion": [
-                        0.055610783398151398,
-                        0.25024005770683289,
-                        -0.23375752568244934,
-                        0.93789380788803101
+                        -0.017439672723412514,
+                        0.36172977089881897,
+                        0.0042738001793622971,
+                        0.93211007118225098
                     ],
                     "RotationEditor": [
                         0,
@@ -401,12 +401,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.96585309505462646,
+                    "Vertical Fov": 0.94449907541275024,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -10.997602462768555,
+                        -14.31525707244873,
                         11.183857917785645,
-                        -17.69573974609375
+                        -15.939152717590332
                     ],
                     "Type": 3,
                     "Zoom": 10,
@@ -421,7 +421,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 21.39971923828125,
+                    "Horizontal Angle": 34.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -4770,7 +4770,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 105593432,
+                    "pointer": 108841688,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -4782,7 +4782,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 105592328,
+                    "pointer": 108844080,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -4791,6 +4791,7 @@
                 {
                     "Type": 20,
                     "Active": true,
+                    "AgentType": 1,
                     "Player": false,
                     "Radius": 0.30000001192092896,
                     "Height": 2,
@@ -4809,8 +4810,7 @@
                     "PathType": 1,
                     "NumPolys": 0,
                     "NumStraight": 0,
-                    "NumSmooth": 0,
-                    "AgentType": 1
+                    "NumSmooth": 0
                 }
             ]
         },
