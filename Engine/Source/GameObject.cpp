@@ -41,7 +41,8 @@ GameObject::~GameObject()
 {
 	AABB aabb;
 	aabb.SetNegativeInfinity();
-	if (!globalAabb.Equals(aabb) && (GetComponent<MeshComponent>() || GetComponent<ScriptComponent>()))
+	if ((!globalAabb.Equals(aabb) && (GetComponent<MeshComponent>() || GetComponent<ScriptComponent>()))
+		&& app->sceneManager->GetCurrentScene()->GetQuadtree().getRoot() != nullptr)
 		app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
 
 	for (int i = 0; i < components.size(); ++i)

@@ -344,11 +344,11 @@ void Scene::Load()
 
 void Scene::UnLoad()
 {
+	qTree.Clear();
 	RELEASE(root);
 	mainCamera = nullptr;
 	camera = nullptr;
 	player = nullptr;
-	qTree.Clear();
 }
 
 GameObject* Scene::GetGoByUuid(double uuid) const

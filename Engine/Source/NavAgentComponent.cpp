@@ -105,6 +105,7 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
 
+	agentProperties->AgentType = (AgentType)(int)node.GetJsonNumber("AgentType");
 	if (node.GetJsonBool("TargetSet") == true) pathfinding->player = this;
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
@@ -146,8 +147,6 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 		}
 	}
 
-	agentProperties->AgentType = (AgentType)(int)node.GetJsonNumber("AgentType");
-
 	return true;
 }
 
@@ -156,6 +155,8 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AgentType", (int)agentProperties->AgentType);
 	if (pathfinding->player == this) file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", true);
 	else file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", false);
 
@@ -196,7 +197,6 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	}
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AgentType", (int)agentProperties->AgentType);
 
 	node.SetValueToArray(array, file.GetRootValue());
 	
