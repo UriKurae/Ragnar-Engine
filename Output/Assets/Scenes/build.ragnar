@@ -76,169 +76,6 @@
             ]
         },
         {
-            "UUID": 2021177439,
-            "Parent UUID": 417171234,
-            "Name": "Player",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Player",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0.45086690783500671,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/AnimatedDummy__BlueGuy.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "Crouch",
-                    "Animations": [
-                        {
-                            "State": "Walk",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Rifle_Idle__Idle.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Shoot",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Crouch",
-                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Death",
-                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
-                            "Loop": false
-                        }
-                    ]
-                },
-                {
-                    "Type": 5,
-                    "Volume": 50,
-                    "Pitch": 0,
-                    "Mute": false,
-                    "AudioClips": [
-                        {
-                            "0": "None"
-                        }
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 2,
-                    "Radius": 0.30000001192092896,
-                    "Height": 1.6000000238418579,
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 60,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                },
-                {
-                    "Type": 6,
-                    "Active": true
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Player",
-                    "pointer": 239266784,
-                    "type": 4,
-                    "componentTable": 0,
-                    "velocity": 1000,
-                    "force": 100,
-                    "rockSoundRadius": 4
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Abilities",
-                    "pointer": 239267736,
-                    "type": 4,
-                    "componentTable": 0
-                },
-                {
-                    "Type": 20,
-                    "Active": true,
-                    "AgentType": 1,
-                    "Player": true,
-                    "Radius": 0.30000001192092896,
-                    "Height": 2,
-                    "StopHeight": 0.89999997615814209,
-                    "MaxSlope": 45,
-                    "Speed": 6,
-                    "AngularSpeed": 180,
-                    "Acceleration": 1,
-                    "StoppingDistance": 0,
-                    "Target": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "TargetSet": false,
-                    "PathType": 1,
-                    "NumPolys": 0,
-                    "NumStraight": 0,
-                    "NumSmooth": 0
-                }
-            ]
-        },
-        {
             "UUID": 892713844,
             "Parent UUID": 417171234,
             "Name": "Image",
@@ -258,8 +95,8 @@
                         83.5
                     ],
                     "Scale": [
-                        6.3115386962890625,
-                        1.329431414604187,
+                        8.2049989700317383,
+                        1.7282607555389404,
                         1
                     ],
                     "rotationEuler": [
@@ -301,8 +138,8 @@
                         83.5
                     ],
                     "Scale": [
-                        4.8692302703857422,
-                        2.1697325706481934,
+                        6.3299994468688965,
+                        2.8206517696380615,
                         1
                     ],
                     "rotationEuler": [
@@ -382,8 +219,8 @@
                         84
                     ],
                     "Scale": [
-                        23.365385055541992,
-                        12.14341926574707,
+                        30.375,
+                        15.786443710327148,
                         1
                     ],
                     "rotationEuler": [
@@ -406,7 +243,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 239253592,
+                    "pointer": 278187136,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -432,8 +269,8 @@
                         88.199996948242188
                     ],
                     "Scale": [
-                        8.3423080444335938,
-                        2.947324275970459,
+                        10.845000267028809,
+                        3.8315215110778809,
                         1
                     ],
                     "rotationEuler": [
@@ -475,8 +312,8 @@
                         90
                     ],
                     "Scale": [
-                        3.9230771064758301,
-                        0.33862873911857605,
+                        5.0999999046325684,
+                        0.44021737575531006,
                         1
                     ],
                     "rotationEuler": [
@@ -541,8 +378,8 @@
                         90
                     ],
                     "Scale": [
-                        3.9230771064758301,
-                        0.33862873911857605,
+                        5.0999999046325684,
+                        0.44021737575531006,
                         1
                     ],
                     "rotationEuler": [
@@ -607,8 +444,8 @@
                         90
                     ],
                     "Scale": [
-                        3.9230771064758301,
-                        0.33862873911857605,
+                        5.0999999046325684,
+                        0.44021737575531006,
                         1
                     ],
                     "rotationEuler": [
@@ -673,8 +510,8 @@
                         84
                     ],
                     "Scale": [
-                        0.46153846383094788,
-                        0.57692307233810425,
+                        0.59999996423721313,
+                        0.75,
                         1
                     ],
                     "rotationEuler": [
@@ -739,8 +576,8 @@
                         84
                     ],
                     "Scale": [
-                        0.49615386128425598,
-                        0.40133780241012573,
+                        0.64499998092651367,
+                        0.52173906564712524,
                         1
                     ],
                     "rotationEuler": [
@@ -843,10 +680,10 @@
                         -2.9523561000823975
                     ],
                     "Quaternion": [
-                        -0.17318865656852722,
-                        0.89169603586196899,
-                        -0.22801961004734039,
-                        0.35055801272392273
+                        -0.21939389407634735,
+                        0.85922491550445557,
+                        -0.29567280411720276,
+                        0.35521325469017029
                     ],
                     "RotationEditor": [
                         0,
@@ -870,7 +707,7 @@
                         -2.9523561000823975
                     ],
                     "Type": 3,
-                    "Zoom": 78,
+                    "Zoom": 60,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -998,7 +835,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 239252232,
+                    "pointer": 278187504,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -1010,7 +847,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 239253320,
+                    "pointer": 278184744,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -2598,9 +2435,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -6754,6 +6591,493 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2021177439,
+            "Parent UUID": 417171234,
+            "Name": "Player",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Player.rgprefab",
+            "tag": "Player",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Paul_low_blinn1_BaseColor.1001.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Animations\/Dying__Malla.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "Death",
+                    "Animations": [
+                        {
+                            "State": "Walk",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walking__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Idle__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Shoot",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Gunplay__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Crouch",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/IdleCrouch__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Death",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Dying__Armature|Armature|mixamo.com|Layer0.fbx",
+                            "Loop": false
+                        }
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "None"
+                        }
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 2,
+                    "Radius": 0.30000001192092896,
+                    "Height": 1.6000000238418579,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 60,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Player",
+                    "pointer": 362000736,
+                    "type": 4,
+                    "componentTable": 0,
+                    "velocity": 1000,
+                    "force": 100,
+                    "rockSoundRadius": 4
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Abilities",
+                    "pointer": 362000920,
+                    "type": 4,
+                    "componentTable": 0
+                },
+                {
+                    "Type": 20,
+                    "Active": true,
+                    "AgentType": 1,
+                    "Player": true,
+                    "Radius": 0.30000001192092896,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 6,
+                    "AngularSpeed": 180,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "Target": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "TargetSet": false,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
+                }
+            ]
+        },
+        {
+            "UUID": 382565728,
+            "Parent UUID": 417171234,
+            "Name": "SandParicle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        15.653947830200195,
+                        0,
+                        -18.625564575195312
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        3.1699998378753662,
+                        3.1699998378753662,
+                        3.1699998378753662
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        10,
+                        10,
+                        10
+                    ],
+                    "Offset": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 10,
+                            "Cubical: Spread on Y": 0.86000001430511475,
+                            "Cubical: Spread on Z": 10,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.05000000074505806,
+                                0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0.0099999997764825821,
+                                0,
+                                0.0099999997764825821
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 3,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/white.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.070000000298023224,
+                                    "PES: End size": 0.070000000298023224,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: start color": [
+                                        0.80000001192092896,
+                                        0.59215688705444336,
+                                        0.23529411852359772,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 10,
+                            "Cubical: Spread on Y": 0.75,
+                            "Cubical: Spread on Z": 10,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.0099999997764825821,
+                                -0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 3,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/white.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 0.10000000149011612,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: start color": [
+                                        0.80000001192092896,
+                                        0.59215688705444336,
+                                        0.23529411852359772,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 382565728,
+            "Parent UUID": 417171234,
+            "Name": "SandParicle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -18.732231140136719,
+                        0,
+                        9.7206764221191406
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.32315078377723694,
+                        0,
+                        0.94634759426116943
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        3.1700024604797363,
+                        3.1700000762939453,
+                        3.1700024604797363
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        10,
+                        10,
+                        10
+                    ],
+                    "Offset": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 10,
+                            "Cubical: Spread on Y": 0.86000001430511475,
+                            "Cubical: Spread on Z": 10,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.05000000074505806,
+                                0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0.0099999997764825821,
+                                0,
+                                0.0099999997764825821
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 3,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/white.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.070000000298023224,
+                                    "PES: End size": 0.070000000298023224,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: start color": [
+                                        0.80000001192092896,
+                                        0.59215688705444336,
+                                        0.23529411852359772,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 10,
+                            "Cubical: Spread on Y": 0.75,
+                            "Cubical: Spread on Z": 10,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.0099999997764825821,
+                                -0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 3,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/white.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 0.10000000149011612,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: start color": [
+                                        0.80000001192092896,
+                                        0.59215688705444336,
+                                        0.23529411852359772,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

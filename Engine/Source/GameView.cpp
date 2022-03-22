@@ -25,7 +25,10 @@ void GameView::Draw(Framebuffer* framebuffer)
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
 
-	if (ImGui::Begin(ICON_FA_GAMEPAD" Game", &active, ImGuiWindowFlags_NoScrollbar))
+	int flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
+	flags |= ImGuiWindowFlags_NoScrollbar;
+
+	if (ImGui::Begin(ICON_FA_GAMEPAD" Game", &active, flags))
 	{
 		if (ImGui::IsItemActivated() || ImGui::IsItemActive())
 			isFocused = true;

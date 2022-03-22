@@ -6,7 +6,6 @@ public class winScren : RagnarComponent
 	bool firstTime = true;
 	GameObject Back;
 	GameObject Menu;
-	GameObject Retry;
 
 	public void Start()
     {

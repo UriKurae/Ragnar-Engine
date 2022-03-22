@@ -65,7 +65,7 @@ bool ModuleEditor::Update(float dt)
 
 
 	ImGui::DockSpaceOverViewport();
-	ret = mainMenuBar.Update(dt);
+	//ret = mainMenuBar.Update(dt);
 
 	if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN)
@@ -96,7 +96,7 @@ bool ModuleEditor::Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer)
 	RG_PROFILING_FUNCTION("Drawing Module Editor");
 	
 	gameView->Draw(gameBuffer);
-	viewport->Draw(editorBuffer, gameBuffer);
+	//viewport->Draw(editorBuffer, gameBuffer);
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

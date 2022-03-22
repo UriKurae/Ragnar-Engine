@@ -1,5 +1,6 @@
 #include <Globals.h>
 #include "Application.h"
+#include "ModuleNavMesh.h"
 
 #include "ModuleRenderer3D.h"
 #include "ModuleSceneManager.h"
@@ -48,6 +49,8 @@ bool ModuleSceneManager::Start()
 
 	referenceMap.clear();
 
+	Play();
+
 	return true;
 }
 
@@ -69,6 +72,7 @@ bool ModuleSceneManager::Update(float dt)
 		currentScene->Load();
 		newSceneLoaded = true;
 		changeScene = false;
+		app->navMesh->BakeNavMesh();
 	}
 
 	currentScene->Update(gameTimer.GetDeltaTime());

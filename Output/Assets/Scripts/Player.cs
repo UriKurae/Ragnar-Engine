@@ -25,18 +25,32 @@ public class Player : RagnarComponent
     public void Update()
     {
         if (agent.targetSetted)
+        {
             agent.CalculatePath(agent.destination);
+        }
 
-        if (agent.MovePath()) { Debug.Log("Not null"); }
+        if(agent.MovePath())
+        {
+            //gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        }
+        //else gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+
+        //if(agent.destination != gameObject.transform.globalPosition)
+        //    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+
+        if (rb.linearVelocity != new Vector3(0,0,0))
+            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        else
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
 
         ///////// SOUNDS /////////
         // Movement Sound
-       /* if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
-            || Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
-        {
-            gameObject.GetComponent<AudioSource>().PlayClip("FootSteps");
-            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-        }*/
+        /* if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
+             || Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
+         {
+             gameObject.GetComponent<AudioSource>().PlayClip("FootSteps");
+             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+         }*/
 
         // Reload Sound
         if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
@@ -129,6 +143,7 @@ public class Player : RagnarComponent
         }
     }
 }
+
 
 
 
