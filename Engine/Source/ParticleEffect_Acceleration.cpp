@@ -6,7 +6,7 @@
 ParticleEffect_Acceleration::ParticleEffect_Acceleration() : ParticleEffect(ParticleEffectType::ACCELERATION_OVER_LIFETIME)
 {
 	type = ParticleEffectType::ACCELERATION_OVER_LIFETIME;
-	gravity = -9.81f;
+	gravity = -5.0f;
 	acceleration = float3(0.0f, 0.0f, 0.0f);
 }
 
