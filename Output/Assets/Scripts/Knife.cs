@@ -5,6 +5,7 @@ public class Knife : RagnarComponent
 {
 	private float force = 1000;
 	private bool canReload = false;
+	private bool pendingToDelete = false;
 	public void Start()
 	{
 		Debug.Log("Start Knife");
@@ -22,26 +23,27 @@ public class Knife : RagnarComponent
 	public void Update()
 	{
 		if (canReload) ReloadKnife();
+		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 
 	}
 	private void ReloadKnife()
 	{
 		GameObject player = GameObject.Find("Player");
-		
+
 		float xDiff = player.transform.globalPosition.x - gameObject.transform.globalPosition.x;
 		float zDiff = player.transform.globalPosition.z - gameObject.transform.globalPosition.z;
 		double distance = Math.Sqrt(zDiff * zDiff + xDiff * xDiff);
 
 		if (distance < 1.0f)
 		{
-			InternalCalls.Destroy(gameObject);
+			pendingToDelete = true;
 			canReload = false;
 		}
 	}
 
 	public void OnCollisionEnter(Rigidbody other)
-    {
+	{
 		canReload = true;
-    }
+	}
 
 }

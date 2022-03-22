@@ -188,7 +188,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 26767080,
+                    "pointer": 275007168,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -198,19 +198,19 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 26768736,
+                    "pointer": 275002568,
                     "type": 4,
                     "componentTable": 0
                 },
                 {
                     "Type": 20,
                     "Active": true,
-                    "Player": false,
+                    "Player": true,
                     "Radius": 0.30000001192092896,
                     "Height": 2,
                     "StopHeight": 0.89999997615814209,
                     "MaxSlope": 45,
-                    "Speed": 2,
+                    "Speed": 6,
                     "AngularSpeed": 180,
                     "Acceleration": 1,
                     "StoppingDistance": 0,
@@ -247,8 +247,8 @@
                         84.5
                     ],
                     "Scale": [
-                        28.927593231201172,
-                        13.867521286010742,
+                        5.7272725105285645,
+                        0,
                         1
                     ],
                     "rotationEuler": [
@@ -290,8 +290,8 @@
                         84.5
                     ],
                     "Scale": [
-                        22.491203308105469,
-                        13.867521286010742,
+                        2.0863635540008545,
+                        0,
                         1
                     ],
                     "rotationEuler": [
@@ -366,15 +366,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -3.9644844532012939,
+                        -20.853916168212891,
                         11.183857917785645,
-                        14.293465614318848
+                        2.4232497215270996
                     ],
                     "Quaternion": [
-                        -0.2539161741733551,
-                        0.72389036417007446,
-                        -0.097250565886497498,
-                        0.63407552242279053
+                        -0.12394709885120392,
+                        0.44992077350616455,
+                        -0.29961872100830078,
+                        0.83212804794311523
                     ],
                     "RotationEditor": [
                         0,
@@ -393,12 +393,12 @@
                     "Vertical Fov": 0.97906363010406494,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -3.9644844532012939,
+                        -20.853916168212891,
                         11.183857917785645,
-                        14.293465614318848
+                        2.4232497215270996
                     ],
                     "Type": 3,
-                    "Zoom": 16,
+                    "Zoom": 22,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -411,7 +411,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 183.39971923828125,
+                    "Horizontal Angle": 106.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -498,12 +498,12 @@
                     "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low25.fbx",
                     "Active": true
                 },
-              {
-                "Type": 2,
-                "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
-                "Active": true,
-                "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-              }
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
             ]
         },
         {
@@ -548,10 +548,10 @@
                     "Active": true
                 },
                 {
-                  "Type": 2,
-                  "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
-                  "Active": true,
-                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
             ]
         },
@@ -1532,6 +1532,36 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/DesertSand\/MaterialSand_basecolor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 5,
+                    "Normal": [
+                        0,
+                        1,
+                        0
+                    ],
+                    "Constant": 1,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -4619,6 +4649,276 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2021177439,
+            "Parent UUID": 417171234,
+            "Name": "Enemy",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/Enemy.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.6251392364501953,
+                        0.45086687803268433,
+                        19.916378021240234
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/AnimatedDummy__BlueGuy.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 9,
+                    "Active": true,
+                    "Current Anim": "Idle",
+                    "Animations": [
+                        {
+                            "State": "Walk",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Idle",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Rifle_Idle__Idle.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Shoot",
+                            "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
+                            "Loop": false
+                        }
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "None"
+                        }
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 2,
+                    "Radius": 0.30000001192092896,
+                    "Height": 1.6000000238418579,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 60,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "EnemyPatrol",
+                    "pointer": 275002384,
+                    "type": 4,
+                    "componentTable": 0,
+                    "velocity": 1000,
+                    "waypoints": 0,
+                    "patrol": false,
+                    "stopState": false,
+                    "stoppedTime": 0
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "EnemyInteraction",
+                    "pointer": 275004040,
+                    "type": 4,
+                    "componentTable": 0,
+                    "canShoot": true,
+                    "shootCooldown": 0
+                },
+                {
+                    "Type": 20,
+                    "Active": true,
+                    "Player": false,
+                    "Radius": 0.30000001192092896,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 6,
+                    "AngularSpeed": 1,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "Target": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "TargetSet": false,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1245657567,
+            "Parent UUID": 417171234,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        4.4863696098327637,
+                        1,
+                        24.365568161010742
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1676813773,
+            "Parent UUID": 417171234,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        17.311189651489258,
+                        1,
+                        17.078973770141602
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 279655738,
+            "Parent UUID": 417171234,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        6.3106880187988281,
+                        1,
+                        10.506481170654297
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
                 }
             ]
         }

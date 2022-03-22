@@ -6,6 +6,7 @@ public class Rock : RagnarComponent
 	private float force = 400;
 	public float soundRadius = 6f;
 	private float cooldown = 0f;
+	private bool pendingToDelete = false;
 
 	public void Start()
 	{
@@ -30,9 +31,10 @@ public class Rock : RagnarComponent
 			if (cooldown < 0)
 			{
 				cooldown = 0f;
-				InternalCalls.Destroy(gameObject);
+				pendingToDelete = true;
 			}
 		}
+		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 	}
 
 	public void OnCollisionEnter(Rigidbody other)

@@ -1,13 +1,13 @@
 using System;
-
 using RagnarEngine;
 
 public class Player : RagnarComponent
 {
-	public int velocity = 1000;
-	public GameObject target = null;
+    public int velocity = 1000;
+    public GameObject target = null;
     public float force = 100;
     public float rockSoundRadius = 4f;
+    private bool pendingToDelete = false;
 
     Rigidbody rb;
     Material materialComponent;
@@ -21,7 +21,7 @@ public class Player : RagnarComponent
     }
 
     public void Update()
-	{
+    {
         if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
         {
             //GameObject but = GameObject.Find("Button");
@@ -34,7 +34,7 @@ public class Player : RagnarComponent
         {
             Time.timeScale = 0;
         }
-        
+
         if (agent.targetSetted)
             agent.CalculatePath(agent.destination);
 
@@ -43,32 +43,32 @@ public class Player : RagnarComponent
         ///////// SOUNDS /////////
         // Movement Sound
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
-			|| Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
-		{
-			gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
-			gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-		}
+            || Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
+        {
+            gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        }
 
         // Reload Sound
-		if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
-		{
-			gameObject.GetComponent<AudioSource>().PlayClip("Reload");
-		}
+        if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
+        {
+            gameObject.GetComponent<AudioSource>().PlayClip("Reload");
+        }
 
         // Shoot sound
-		if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
-		{
-			gameObject.GetComponent<AudioSource>().PlayClip("Shot");
-		}
+        if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
+        {
+            gameObject.GetComponent<AudioSource>().PlayClip("Shot");
+        }
         //////////////////////////
 
         ///////// MOVEMENT /////////
         // Idle
         if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
-			|| Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
-		{
+            || Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
+        {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-			gameObject.GetComponent<AudioSource>().StopCurrentClip();
+            gameObject.GetComponent<AudioSource>().StopCurrentClip();
 
             if (rb.linearVelocity != Vector3.zero)
                 rb.linearVelocity = new Vector3(0, 0, 0);
@@ -107,24 +107,16 @@ public class Player : RagnarComponent
         {
             rb.SetHeight(1); // 1 = 100% = Reset
         }
-
+        if (pendingToDelete) InternalCalls.Destroy(gameObject);
     }
 
-    public void OnTriggerEnter(Rigidbody other)
-    {
-        Debug.Log("OnTriggerEnter");
-    }
-    public void OnTrigger(Rigidbody other)
-    {
-        //Debug.Log("OnTrigger");
-    }
-    public void OnCollisionEnter(Rigidbody other)
-    {
-        Debug.Log("OnCollisionEnter");
-    }
     public void OnCollision(Rigidbody other)
     {
-        //Debug.Log("OnCollision");
+        if (other.gameObject.name == "EnemyBullet")
+        {
+            pendingToDelete = true;
+            // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER
+        }
     }
 }
 

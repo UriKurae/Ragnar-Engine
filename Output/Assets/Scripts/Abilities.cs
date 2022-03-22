@@ -15,7 +15,7 @@ public class Abilities : RagnarComponent
         // Rock Throw
         if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN && GameObject.Find("Rock") == null)
         {
-            
+
             InternalCalls.InstancePrefab("Assets/Prefabs/Rock.rgprefab");
         }
 
