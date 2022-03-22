@@ -198,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 67669368,
+                    "pointer": 159500216,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -208,7 +208,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 67668264,
+                    "pointer": 159498376,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -258,8 +258,8 @@
                         84.5
                     ],
                     "Scale": [
-                        4.922999382019043,
-                        1.0369564294815063,
+                        6.3115382194519043,
+                        1.329431414604187,
                         1
                     ],
                     "rotationEuler": [
@@ -301,8 +301,8 @@
                         84.5
                     ],
                     "Scale": [
-                        3.7979996204376221,
-                        1.6923911571502686,
+                        4.8692302703857422,
+                        2.1697323322296143,
                         1
                     ],
                     "rotationEuler": [
@@ -377,15 +377,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        9.6098318099975586,
+                        11.618462562561035,
                         11.183857917785645,
-                        5.6790366172790527
+                        -2.9523561000823975
                     ],
                     "Quaternion": [
-                        -0.1747487485408783,
-                        -0.49879524111747742,
-                        0.2872309684753418,
-                        0.79885202646255493
+                        -0.31804797053337097,
+                        0.86608242988586426,
+                        -0.16078603267669678,
+                        0.35056319832801819
                     ],
                     "RotationEditor": [
                         0,
@@ -404,12 +404,12 @@
                     "Vertical Fov": 0.97906363010406494,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        9.6098318099975586,
+                        11.618462562561035,
                         11.183857917785645,
-                        5.6790366172790527
+                        -2.9523561000823975
                     ],
                     "Type": 3,
-                    "Zoom": 100,
+                    "Zoom": 78,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -421,7 +421,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": -118.60028076171875,
+                    "Horizontal Angle": -447.60028076171875,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -537,7 +537,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 242616488,
+                    "pointer": 159496536,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -549,7 +549,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 242616856,
+                    "pointer": 159499664,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -860,7 +860,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        0.69999998807907104,
+                        1,
+                        0.80000001192092896
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -1008,35 +1013,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1086,35 +1062,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1164,35 +1111,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1242,35 +1160,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1367,9 +1256,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        19.718585968017578,
-                        9.0949470177292824e-13,
-                        -47.895248413085938
+                        21.418655395507812,
+                        9.3179587309921708e-13,
+                        -51.225345611572266
                     ],
                     "Quaternion": [
                         0,
@@ -1476,35 +1365,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1705,35 +1565,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.89999997615814209,
-                        1,
-                        0.69999998807907104
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1783,30 +1614,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -1903,25 +1710,25 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        4.2376899719238281,
-                        1.8189894035458565e-12,
-                        -48.424850463867188
+                        3.8494658470153809,
+                        1.8376268388908823e-12,
+                        -52.007843017578125
                     ],
                     "Quaternion": [
                         0,
                         -0.73615795373916626,
                         0,
-                        0.67680984735488892
+                        0.67680978775024414
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        3.1415927410125732,
+                        -1.4868419170379639,
+                        3.1415927410125732
                     ],
                     "Scale": [
-                        0.99999994039535522,
                         1,
-                        0.99999994039535522
+                        1,
+                        1
                     ]
                 },
                 {
@@ -1939,9 +1746,9 @@
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
-                        0.80000001192092896,
+                        0.69999998807907104,
                         1,
-                        0.80000001192092896
+                        0.69999998807907104
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -2085,30 +1892,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -2158,35 +1941,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -2349,7 +2103,7 @@
         {
             "UUID": 1546004666,
             "Parent UUID": 490799902,
-            "Name": "SmartCombine_10",
+            "Name": "Ground",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -2544,35 +2298,6 @@
                     "Path": "Assets\/Resources\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -2700,35 +2425,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -2856,7 +2552,7 @@
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
-                        1,
+                        1.8999999761581421,
                         1,
                         1
                     ],
@@ -3007,30 +2703,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -3129,35 +2801,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -3207,35 +2850,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -3436,30 +3050,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -3615,84 +3205,6 @@
             ]
         },
         {
-            "UUID": 65740460,
-            "Parent UUID": 490799902,
-            "Name": "RockMedium2_low1",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        57.899730682373047,
-                        4.5474735088646412e-13,
-                        -26.65269660949707
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.68299978971481323,
-                        0,
-                        0.73041856288909912
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/Scenary_1_B__Malla.038.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
             "UUID": 1013465146,
             "Parent UUID": 490799902,
             "Name": "RockMedium2_low2",
@@ -3738,35 +3250,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4128,35 +3611,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4284,30 +3738,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4430,30 +3860,6 @@
                     "Path": "Assets\/Resources\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4506,7 +3912,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        0.80000001192092896
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4576,30 +3987,6 @@
                     "Path": "Assets\/Resources\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4649,30 +4036,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4722,30 +4085,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -4764,25 +4103,25 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        34.358963012695312,
-                        9.0949470177292824e-13,
-                        -41.754592895507812
+                        34.722244262695312,
+                        9.1846300530329383e-13,
+                        -44.113845825195312
                     ],
                     "Quaternion": [
                         0,
-                        -0.081493377685546875,
+                        -0.081493593752384186,
                         0,
                         0.99667388200759888
                     ],
                     "RotationEditor": [
                         0,
-                        0,
+                        -0.16316770017147064,
                         0
                     ],
                     "Scale": [
-                        0.99999994039535522,
+                        0.99999922513961792,
                         1,
-                        0.99999994039535522
+                        0.99999922513961792
                     ]
                 },
                 {
@@ -4798,7 +4137,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4871,7 +4215,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        0.69999998807907104,
+                        1,
+                        0.89999997615814209
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4944,7 +4293,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        0.60000002384185791,
+                        1,
+                        1
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5014,35 +4368,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -5092,35 +4417,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -5173,7 +4469,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5370,30 +4671,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -5521,30 +4798,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -5828,35 +5081,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        0.80000001192092896
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -5906,35 +5130,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6221,7 +5416,12 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 6,
+                    "CollisionType": 0,
+                    "Size": [
+                        0.89999997615814209,
+                        1,
+                        1
+                    ],
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -6291,30 +5491,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6364,30 +5540,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6470,84 +5622,6 @@
             ]
         },
         {
-            "UUID": 1731678132,
-            "Parent UUID": 490799902,
-            "Name": "RockMedium1_low24",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -82.296920776367188,
-                        -9.0949470177292824e-13,
-                        36.028404235839844
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.40568795800209045,
-                        0,
-                        0.91401165723800659
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/Scenary_1_B__Malla.076.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/TX_RockMedium_BaseColor.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
             "UUID": 216744904,
             "Parent UUID": 490799902,
             "Name": "RockMedium2_low18",
@@ -6593,35 +5667,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6671,35 +5716,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6749,108 +5765,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 185800938,
-            "Parent UUID": 490799902,
-            "Name": "RockMedium1_low39",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -9.6887140274047852,
-                        -9.0949470177292824e-13,
-                        80.950172424316406
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.70807260274887085,
-                        0,
-                        0.70613968372344971
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        1,
-                        0.99999994039535522
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/Scenary_1_B__Malla.080.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6900,35 +5814,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -7051,35 +5936,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -7137,6 +5993,274 @@
                         1,
                         1,
                         1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 607658224,
+            "Parent UUID": 490799902,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        25.934730529785156,
+                        0,
+                        -5.4929323196411133
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.23085863888263702,
+                        0,
+                        0.97298729419708252
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999988079071045,
+                        1,
+                        0.99999988079071045
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 348225230,
+            "Parent UUID": 490799902,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -19.367259979248047,
+                        0,
+                        52.037998199462891
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.19572246074676514,
+                        0,
+                        0.98065930604934692
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        7.5,
+                        17,
+                        10.300000190734863
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1591929443,
+            "Parent UUID": 490799902,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7.5414552688598633,
+                        0.018218427896499634,
+                        55.95465087890625
+                    ],
+                    "Quaternion": [
+                        0.0066881375387310982,
+                        0.47487375140190125,
+                        -0.0044542481191456318,
+                        0.88001728057861328
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000001192092896,
+                        0.99999099969863892,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        21.399999618530273,
+                        5.8000001907348633,
+                        5.5
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1175507077,
+            "Parent UUID": 490799902,
+            "Name": "Game Object",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        50.808086395263672,
+                        -0.00067010149359703064,
+                        -35.078330993652344
+                    ],
+                    "Quaternion": [
+                        -0.0010730866342782974,
+                        0.12272819131612778,
+                        0.00025512147112749517,
+                        0.99243974685668945
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999988079071045,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        14.899999618530273,
+                        10.300000190734863,
+                        1.5
                     ],
                     "Gravity": false,
                     "Kinematic": false,
