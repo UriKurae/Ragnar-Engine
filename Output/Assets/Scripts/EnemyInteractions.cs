@@ -58,9 +58,7 @@ public class EnemyInteraction : RagnarComponent
     {
         if (other.gameObject.name == "Knife")
         {
-            pendingToDelete = true;
-            // AÑADIR AQUÍ EL CAMBIO DE ESCENA A VICTORY
-           
+            pendingToDelete = true;               
         }
     }
 

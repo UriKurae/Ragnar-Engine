@@ -198,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 69027072,
+                    "pointer": 105589752,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -208,7 +208,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 69026520,
+                    "pointer": 105591224,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -254,12 +254,12 @@
                     "Type": 18,
                     "Position": [
                         7,
-                        -99.5,
+                        -226,
                         84.5
                     ],
                     "Scale": [
-                        8.9999990463256836,
-                        0,
+                        48.600002288818359,
+                        12.32608699798584,
                         1
                     ],
                     "rotationEuler": [
@@ -267,8 +267,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 200,
-                    "buttonHeight": 50
+                    "buttonWidth": 400,
+                    "buttonHeight": 113
                 },
                 {
                     "Type": 13
@@ -296,13 +296,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -170,
-                        -99.5,
+                        -364.5,
+                        -221.5,
                         84.5
                     ],
                     "Scale": [
-                        3.2785713672637939,
-                        0,
+                        34.55999755859375,
+                        15.456521987915039,
                         1
                     ],
                     "rotationEuler": [
@@ -310,8 +310,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 155.5,
-                    "buttonHeight": 50
+                    "buttonWidth": 322,
+                    "buttonHeight": 129
                 },
                 {
                     "Type": 13
@@ -377,15 +377,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.9408102035522461,
+                        -10.997602462768555,
                         11.183857917785645,
-                        -18.566474914550781
+                        -17.69573974609375
                     ],
                     "Quaternion": [
-                        0.25794428586959839,
-                        -0.17316895723342896,
-                        -0.147515669465065,
-                        0.93899756669998169
+                        0.055610783398151398,
+                        0.25024005770683289,
+                        -0.23375752568244934,
+                        0.93789380788803101
                     ],
                     "RotationEditor": [
                         0,
@@ -401,15 +401,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.97906363010406494,
+                    "Vertical Fov": 0.96585309505462646,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -7.9408102035522461,
+                        -10.997602462768555,
                         11.183857917785645,
-                        -18.566474914550781
+                        -17.69573974609375
                     ],
                     "Type": 3,
-                    "Zoom": 14,
+                    "Zoom": 10,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -417,12 +417,11 @@
                         -2.2581052780151367
                     ],
                     "Movement Speed": 0.5,
-                    "Target Pos": 2021177439,
                     "Vertical Angle": -56,
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 10.39971923828125,
+                    "Horizontal Angle": 21.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -4678,9 +4677,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        9.6251392364501953,
-                        0.45086687803268433,
-                        19.916378021240234
+                        3.5858135223388672,
+                        0.45086678862571716,
+                        18.033758163452148
                     ],
                     "Quaternion": [
                         0,
@@ -4713,7 +4712,7 @@
                 {
                     "Type": 9,
                     "Active": true,
-                    "Current Anim": "Death",
+                    "Current Anim": "Crouch",
                     "Animations": [
                         {
                             "State": "Walk",
@@ -4729,6 +4728,11 @@
                             "State": "Shoot",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
                             "Loop": false
+                        },
+                        {
+                            "State": "Crouch",
+                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Loop": true
                         },
                         {
                             "State": "Death",
@@ -4766,7 +4770,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 69026704,
+                    "pointer": 105593432,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -4778,7 +4782,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 69026888,
+                    "pointer": 105592328,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -4793,7 +4797,7 @@
                     "StopHeight": 0.89999997615814209,
                     "MaxSlope": 45,
                     "Speed": 6,
-                    "AngularSpeed": 1,
+                    "AngularSpeed": 180,
                     "Acceleration": 1,
                     "StoppingDistance": 0,
                     "Target": [
@@ -4806,51 +4810,13 @@
                     "NumPolys": 0,
                     "NumStraight": 0,
                     "NumSmooth": 0,
-                    "AgentType": 0
-                }
-            ]
-        },
-        {
-            "UUID": 288238026,
-            "Parent UUID": 417171234,
-            "Name": "WayPoints",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
+                    "AgentType": 1
                 }
             ]
         },
         {
             "UUID": 279655738,
-            "Parent UUID": 288238026,
+            "Parent UUID": 417171234,
             "Name": "Game Object",
             "Active": true,
             "Static": true,
@@ -4888,7 +4854,7 @@
         },
         {
             "UUID": 1676813773,
-            "Parent UUID": 288238026,
+            "Parent UUID": 417171234,
             "Name": "Game Object",
             "Active": true,
             "Static": true,
@@ -4926,7 +4892,7 @@
         },
         {
             "UUID": 1245657567,
-            "Parent UUID": 288238026,
+            "Parent UUID": 417171234,
             "Name": "Game Object",
             "Active": true,
             "Static": true,

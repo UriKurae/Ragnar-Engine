@@ -24,6 +24,7 @@ ModuleSceneManager::ModuleSceneManager(bool startEnabled) : changeScene(false), 
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
 	AddScene(currentScene);
+	exit = false;
 }
 
 ModuleSceneManager::~ModuleSceneManager()
@@ -72,7 +73,7 @@ bool ModuleSceneManager::Update(float dt)
 
 	currentScene->Update(gameTimer.GetDeltaTime());
 	
-	return true;
+	return !exit;
 }
 
 bool ModuleSceneManager::PostUpdate()
