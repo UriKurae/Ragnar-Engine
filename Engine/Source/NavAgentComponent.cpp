@@ -66,7 +66,6 @@ void NavAgentComponent::OnEditor()
 			agentProperties->pathType = PathType::STRAIGHT;
 		ImGui::Dummy({ 0,10 });
 
-		//TODO: Hacer ma bonico
 		std::string name;
 		switch (agentProperties->AgentType)
 		{
@@ -106,6 +105,10 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 	active = node.GetJsonBool("Active");
 
 	agentProperties->AgentType = (AgentType)(int)node.GetJsonNumber("AgentType");
+	if (pathfinding->player == nullptr)
+	{
+		pathfinding->player = this;
+	}
 	if (node.GetJsonBool("TargetSet") == true) pathfinding->player = this;
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
