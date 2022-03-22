@@ -35,6 +35,8 @@ public class EnemyInteraction : RagnarComponent
 
         if (distance < 12.0f && canShoot)
         {
+            //TODO_AUDIO
+            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Shoot");
             canShoot = false;
             shootCooldown = 4f;
             InternalCalls.InstancePrefab("Assets/Prefabs/EnemyBullet.rgprefab");
