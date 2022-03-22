@@ -39,11 +39,15 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 
 GameObject::~GameObject()
 {
+	AABB aabb;
+	aabb.SetNegativeInfinity();
+	if (!globalAabb.Equals(aabb) && (GetComponent<MeshComponent>() || GetComponent<ScriptComponent>()))
+		app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		RELEASE(components[i]);
-		if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
-			app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
+		
 	}
 	components.clear();
 
