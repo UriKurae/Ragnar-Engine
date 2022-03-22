@@ -198,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 283197112,
+                    "pointer": 239266784,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -208,7 +208,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 222405336,
+                    "pointer": 239267736,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -259,7 +259,7 @@
                     ],
                     "Scale": [
                         6.3115386962890625,
-                        1.3294315338134766,
+                        1.329431414604187,
                         1
                     ],
                     "rotationEuler": [
@@ -325,6 +325,467 @@
             ]
         },
         {
+            "UUID": 1973886103,
+            "Parent UUID": 417171234,
+            "Name": "UI",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1022231576,
+            "Parent UUID": 1973886103,
+            "Name": "BackgroundImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        84
+                    ],
+                    "Scale": [
+                        23.365385055541992,
+                        12.14341926574707,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 1142.5,
+                    "buttonHeight": 534.11761474609375
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/pauseMenuScreen.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "pauseMenuButton",
+                    "pointer": 239253592,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 801014828,
+            "Parent UUID": 1973886103,
+            "Name": "UIRectangle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -326,
+                        7.5,
+                        88.199996948242188
+                    ],
+                    "Scale": [
+                        8.3423080444335938,
+                        2.947324275970459,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 491.5,
+                    "buttonHeight": 167.5
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/MainMenuBox.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 236607230,
+            "Parent UUID": 1973886103,
+            "Name": "ButtonResume",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -363,
+                        30,
+                        90
+                    ],
+                    "Scale": [
+                        3.9230771064758301,
+                        0.33862873911857605,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Resume",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 58210541,
+            "Parent UUID": 1973886103,
+            "Name": "ButtonMainMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -363,
+                        -28,
+                        90
+                    ],
+                    "Scale": [
+                        3.9230771064758301,
+                        0.33862873911857605,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Main Menu",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 794518623,
+            "Parent UUID": 1973886103,
+            "Name": "ButtonOptions",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -356.5,
+                        0,
+                        90
+                    ],
+                    "Scale": [
+                        3.9230771064758301,
+                        0.33862873911857605,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Options",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 556679081,
+            "Parent UUID": 1973886103,
+            "Name": "SkillKnife",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -64.5,
+                        -209,
+                        84
+                    ],
+                    "Scale": [
+                        0.46153846383094788,
+                        0.57692307233810425,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 73
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/CrysknifeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/CrysknifeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1090268186,
+            "Parent UUID": 1973886103,
+            "Name": "SkillNade",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -28.5,
+                        -210,
+                        84
+                    ],
+                    "Scale": [
+                        0.49615386128425598,
+                        0.40133780241012573,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 151.5,
+                    "buttonHeight": 66
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SpiceNadeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/SpiceNadeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                }
+            ]
+        },
+        {
             "UUID": 2128337088,
             "Parent UUID": 417171234,
             "Name": "cameraController",
@@ -382,10 +843,10 @@
                         -2.9523561000823975
                     ],
                     "Quaternion": [
-                        -0.32747209072113037,
-                        0.80676490068435669,
-                        -0.34496134519577026,
-                        0.35056260228157043
+                        -0.17318865656852722,
+                        0.89169603586196899,
+                        -0.22801961004734039,
+                        0.35055801272392273
                     ],
                     "RotationEditor": [
                         0,
@@ -419,7 +880,7 @@
                     "Movement Speed": 0.5,
                     "Vertical Angle": -56,
                     "Lock Vertical Angle": false,
-                    "Rotation Speed": 0.5,
+                    "Rotation Speed": 2,
                     "Radius": 20,
                     "Horizontal Angle": -447.60028076171875,
                     "Arrow Rotation": false,
@@ -537,7 +998,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 222409416,
+                    "pointer": 239252232,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -549,7 +1010,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 222406288,
+                    "pointer": 239253320,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -6293,429 +6754,6 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1022231576,
-            "Parent UUID": 417171234,
-            "Name": "BackgroundImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        84
-                    ],
-                    "Scale": [
-                        23.365385055541992,
-                        12.143418312072754,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 1142.5,
-                    "buttonHeight": 534.11761474609375
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/pauseMenuScreen.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "pauseMenuButton",
-                    "pointer": 222405608,
-                    "type": 4,
-                    "componentTable": 0
-                }
-            ]
-        },
-        {
-            "UUID": 801014828,
-            "Parent UUID": 417171234,
-            "Name": "UIRectangle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -326,
-                        7.5,
-                        88.199996948242188
-                    ],
-                    "Scale": [
-                        8.3423070907592773,
-                        2.947324275970459,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 491.5,
-                    "buttonHeight": 167.5
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/MainMenuBox.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 236607230,
-            "Parent UUID": 417171234,
-            "Name": "ButtonResume",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -363,
-                        30,
-                        90
-                    ],
-                    "Scale": [
-                        3.9230766296386719,
-                        0.33862873911857605,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 300,
-                    "buttonHeight": 63.5
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Resume",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1
-                }
-            ]
-        },
-        {
-            "UUID": 58210541,
-            "Parent UUID": 417171234,
-            "Name": "ButtonMainMenu",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -363,
-                        -28,
-                        90
-                    ],
-                    "Scale": [
-                        3.9230766296386719,
-                        0.33862873911857605,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 300,
-                    "buttonHeight": 63.5
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Main Menu",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1
-                }
-            ]
-        },
-        {
-            "UUID": 794518623,
-            "Parent UUID": 417171234,
-            "Name": "ButtonOptions",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -356.5,
-                        0,
-                        90
-                    ],
-                    "Scale": [
-                        3.9230766296386719,
-                        0.33862873911857605,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 300,
-                    "buttonHeight": 63.5
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Options",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1
-                }
-            ]
-        },
-        {
-            "UUID": 556679081,
-            "Parent UUID": 417171234,
-            "Name": "SkillKnife",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -64.5,
-                        -209,
-                        84
-                    ],
-                    "Scale": [
-                        0.46153846383094788,
-                        0.57692307233810425,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 150,
-                    "buttonHeight": 73
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/CrysknifeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/CrysknifeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1090268186,
-            "Parent UUID": 417171234,
-            "Name": "SkillNade",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -28.5,
-                        -210,
-                        84
-                    ],
-                    "Scale": [
-                        0.49615380167961121,
-                        0.40133780241012573,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 151.5,
-                    "buttonHeight": 66
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/SpiceNadeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/SpiceNadeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1
                 }
             ]
         }

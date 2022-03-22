@@ -16,7 +16,7 @@ public class Abilities : RagnarComponent
     {
         ///////// ABILITIES /////////
         // Rock Throw
-        if ((Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN || SkillNade.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Rock") == null)
+        if ((Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || SkillNade.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Rock") == null)
         {
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ThrowRock");
@@ -24,7 +24,7 @@ public class Abilities : RagnarComponent
         }
 
         // Knife Throw
-        if ((Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN || SkillKnife.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Knife") == null)
+        if ((Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || SkillKnife.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Knife") == null)
         {
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ThrowKnife");
