@@ -47,6 +47,8 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 
 void ImageComponent::OnEditor()
 {
+
+
 }
 bool ImageComponent::OnLoad(JsonParsing& node)
 {

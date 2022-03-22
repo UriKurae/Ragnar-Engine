@@ -12,7 +12,7 @@ namespace RagnarEngine
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void UIFunctionButton();
+        public extern Vector3 UIFunctionButton();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern int GetButtonState();

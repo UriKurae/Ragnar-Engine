@@ -10,7 +10,7 @@ namespace RagnarEngine
         {
             type = ComponentType.UI_IMAGE;
         }
-
         
+
     }
 }

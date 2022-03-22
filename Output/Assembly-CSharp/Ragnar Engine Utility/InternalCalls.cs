@@ -37,6 +37,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern Vector3 GetRegionGame();
     }
 
     public class Input

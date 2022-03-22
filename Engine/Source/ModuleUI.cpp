@@ -473,11 +473,12 @@ void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
 
 		float3 position = transform2D->GetPosition();
 		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
-		float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
-		float posYMin = ((viewport.w / 2) + (-position.y)) - (button->GetButtonHeight() / 2);
-		float posYMax = ((viewport.w / 2) + (-position.y)) + (button->GetButtonHeight() / 2);
+		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
+		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
+
+		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
+		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
 
 		ImageComponent* image = nullptr;
 		image = go->GetComponent<ImageComponent>();
@@ -493,7 +494,7 @@ void ModuleUI::SetFocusedObject()
 	if (hitObjs.size() > 0)
 	{
 		std::vector<float> distance;
-		float nearestDistance = 100000.0f;
+		float nearestDistance = -100000.0f;
 		int nearObj = 0;
 		for (int i = 0; i < hitObjs.size(); ++i)
 		{
@@ -501,7 +502,7 @@ void ModuleUI::SetFocusedObject()
 
 			float3 position = transform2D->GetPosition();
 			distance.push_back(position.z);
-			if (distance[i] < nearestDistance)
+			if (distance[i] > nearestDistance)
 			{
 				nearestDistance = distance[i];
 				nearObj = i;

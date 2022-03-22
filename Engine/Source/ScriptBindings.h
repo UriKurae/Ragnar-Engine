@@ -14,6 +14,7 @@
 
 #include "Scene.h"
 #include "TransformBindings.h"
+#include "GameView.h"
 
 #include <queue>
 
@@ -408,4 +409,11 @@ void LoadScene(MonoString* string)
 {
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
+}
+
+MonoObject* GetRegionGame()
+{
+	float4 vec4(app->editor->GetGameView()->GetBounds());
+	float3 vec3 = { vec4.z / 1.6f, vec4.w / 1.7f, 0 };
+	return app->moduleMono->Float3ToCS(vec3);
 }

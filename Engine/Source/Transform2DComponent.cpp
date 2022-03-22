@@ -48,16 +48,13 @@ bool ComponentTransform2D::Update(float dt)
 	float4 viewport = app->editor->GetGameView()->GetBounds() * app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float temporalW = (viewport.z * 25) / 847;
 	float temporalH = (viewport.w * 15) / 649;
-	scale.x = (buttonWidth / 0.6) / temporalW;
-	scale.y = (buttonHeight / 0.75) / temporalH;
+	scale.x = (((buttonWidth - 130) * (viewport.z / 25)) / viewport.z) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
+	scale.y = (((buttonHeight - 50) * (viewport.w / 23)) / viewport.w) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
 
+	
+	internalPosition.x = ((position.x) / 24) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
+	internalPosition.y = (((position.y) / 24) + 0.5) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
 
-
-	internalPosition.x = (position.x * 30.0f) / (viewport.z / 2);
-
-	/*float res = (viewport.w * 1.5) / 649;
-	res = 1.5 - (res - 1.5)+0.05;*/
-	internalPosition.y = (position.y * 30.0f) / (viewport.w / 2);
 	internalPosition.z = position.z;
 
 	/*internalPosition.x = position.x/1;

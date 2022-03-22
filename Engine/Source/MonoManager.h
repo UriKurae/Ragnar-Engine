@@ -53,6 +53,7 @@ public:
 
 	static Quat UnboxQuat(MonoObject* _obj);
 	static float3 UnboxVector(MonoObject* _obj);
+	static float2 UnboxVector2D(MonoObject* _obj);
 
 	static void LoadFieldData(SerializedField& _field, MonoObject* _object);
 	static void DebugAllMethods(const char* nsName, const char* className, std::vector<std::string>& _data);

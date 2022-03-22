@@ -22,7 +22,7 @@ public:
 	float2 GetParentPosition();
 	State GetState() { return state; };
 	inline Text GetButtonText() { return buttonText; };
-	inline char* GetText() { return (char*)text.c_str(); };
+	inline char* GetText() { return text; };
 
 	inline Color GetActualColor() { return actualColor; };
 	inline Color GetTextColor() { return textColor; };
@@ -56,6 +56,6 @@ private:
 	Color textColor = white;
 	Color actualColor = white;
 
-	std::string text;
+	char text[64] = "Button";
 	float fontScale = 1;
 };

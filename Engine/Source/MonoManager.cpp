@@ -166,7 +166,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
 	// Scene Manager =============
 
-	// UI
+	// UI =======================
 	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
 	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
 	mono_add_internal_call("RagnarEngine.UISlider::UIFunctionSlider", UIFunctionSlider);
@@ -182,6 +182,10 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
 
 	mono_add_internal_call("RagnarEngine.UISlider::GetSliderActualValue", GetSliderActualValue);
+
+	mono_add_internal_call("RagnarEngine.Transform2D::GetSize", GetSize);
+	mono_add_internal_call("RagnarEngine.Transform2D::SetSize", SetSize);
+	// UI =======================
 	InitMono();
 
 	return ret;
@@ -639,4 +643,14 @@ void MonoManager::UpdateListScripts()
 			}
 		}
 	}
+}
+
+float2 MonoManager::UnboxVector2D(MonoObject* _obj)
+{
+	float2 ret;
+
+	MonoClass* klass = mono_object_get_class(_obj);
+	mono_field_get_value(_obj, mono_class_get_field_from_name(klass, "x"), &ret.x);
+	mono_field_get_value(_obj, mono_class_get_field_from_name(klass, "y"), &ret.y);
+	return ret;
 }

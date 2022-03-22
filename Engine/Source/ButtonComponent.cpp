@@ -17,18 +17,18 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	type = ComponentType::UI_BUTTON;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
 	
-	text = "Button";
+	
 }
 
 ButtonComponent::~ButtonComponent()
 {
-	text.clear();
+	
 	RELEASE(planeToDraw);
 }
 
 bool ButtonComponent::Update(float dt)
 {
-	buttonText.SetOnlyPosition(float2(GetParentPosition().x/2, GetParentPosition().y/2));
+	buttonText.SetOnlyPosition(float2((GetParentPosition().x / 1.07) + 5, (GetParentPosition().y / 1.07) + 10));
 	buttonText.setOnlyText(text);
 	if (!active)
 		state = State::DISABLED;
@@ -109,8 +109,8 @@ void ButtonComponent::OnEditor()
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 		
-	
-		ImGui::InputText("Text", (char*)text.c_str(), IM_ARRAYSIZE(text.c_str()));
+		
+		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
 		buttonText.setOnlyText(text);
 		
@@ -123,7 +123,7 @@ float2 ButtonComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	return { position.x - (strlen(text.c_str()) * 12 * buttonText.Scale), position.y - 5 };
+	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
 bool ButtonComponent::OnLoad(JsonParsing& node)
 {
@@ -133,8 +133,8 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 	planeToDraw->own = owner;
 	owner->isUI = true;
 	app->userInterface->UIGameObjects.push_back(owner);
-
-	text = node.GetJsonString("buttonText");
+	std::string aux = node.GetJsonString("buttonText");
+	strcpy(text, aux.c_str());
 	buttonText.textt = textt;
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
@@ -175,7 +175,7 @@ bool ButtonComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "fontScale", fontScale);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);

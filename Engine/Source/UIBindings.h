@@ -102,3 +102,21 @@ float GetSliderActualValue(MonoObject* go)
 
 	return tr->GetBarProgress();
 }
+
+Vec3 GetSize(MonoObject* go)
+{
+	ComponentTransform2D* tr = GetComponentMono<ComponentTransform2D*>(go);	
+	Vec3 vec2(tr->GetButtonWidth(), tr->GetButtonHeight(),0);
+	return vec2;
+}
+
+void SetSize(MonoObject* go, MonoObject* size)
+{
+	if (ComponentTransform2D* tr = GetComponentMono<ComponentTransform2D*>(go))
+	{
+		tr->SetButtonWidth(app->moduleMono->UnboxVector2D(size).x);
+		tr->SetButtonHeight(app->moduleMono->UnboxVector2D(size).y);		
+	}
+}
+
+
