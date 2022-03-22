@@ -498,12 +498,12 @@
                     "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low25.fbx",
                     "Active": true
                 },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
+              {
+                "Type": 2,
+                "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                "Active": true,
+                "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+              }
             ]
         },
         {
@@ -548,10 +548,10 @@
                     "Active": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
             ]
         },
@@ -598,7 +598,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -647,7 +647,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -696,7 +696,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -745,7 +745,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -794,7 +794,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -843,7 +843,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -892,7 +892,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -941,7 +941,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -990,7 +990,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1039,7 +1039,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1088,7 +1088,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1137,7 +1137,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1186,7 +1186,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1235,7 +1235,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1284,7 +1284,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1333,7 +1333,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1382,7 +1382,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1431,7 +1431,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1480,7 +1480,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1578,7 +1578,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1676,7 +1676,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1725,7 +1725,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1774,7 +1774,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1823,7 +1823,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1872,7 +1872,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1921,7 +1921,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1970,7 +1970,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2019,7 +2019,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2068,7 +2068,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2117,7 +2117,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2166,7 +2166,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2215,7 +2215,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2264,7 +2264,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2313,7 +2313,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2362,7 +2362,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2411,7 +2411,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2460,7 +2460,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2558,7 +2558,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2607,7 +2607,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2656,7 +2656,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2705,7 +2705,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2754,7 +2754,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2803,7 +2803,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2901,7 +2901,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2950,7 +2950,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2999,7 +2999,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3048,7 +3048,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3097,7 +3097,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3146,7 +3146,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3195,7 +3195,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3244,7 +3244,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3293,7 +3293,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3342,7 +3342,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3391,7 +3391,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3440,7 +3440,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3489,7 +3489,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3538,7 +3538,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3587,7 +3587,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3636,7 +3636,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3685,7 +3685,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3734,7 +3734,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3783,7 +3783,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3832,7 +3832,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3881,7 +3881,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3930,7 +3930,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3979,7 +3979,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4028,7 +4028,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4077,7 +4077,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4126,7 +4126,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4175,7 +4175,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4224,7 +4224,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4273,7 +4273,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4322,7 +4322,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4371,7 +4371,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4420,7 +4420,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4469,7 +4469,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4518,7 +4518,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4567,7 +4567,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4616,7 +4616,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
