@@ -44,16 +44,38 @@ ComponentTransform2D::~ComponentTransform2D()
 
 bool ComponentTransform2D::Update(float dt)
 {
-	
-	float4 viewport = app->editor->GetGameView()->GetBounds() * app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
-	float temporalW = (viewport.z * 25) / 847;
-	float temporalH = (viewport.w * 15) / 649;
-	scale.x = (((buttonWidth - 130) * (viewport.z / 25)) / viewport.z) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
-	scale.y = (((buttonHeight - 50) * (viewport.w / 23)) / viewport.w) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
+	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
+	float4 viewport = app->editor->GetGameView()->GetBounds();
+
+	if (firstTime) 
+	{
+		lastViewportBounds.w = app->editor->GetGameView()->GetBounds().w;
+		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
+		firstTime = false;
+	}
 
 	
-	internalPosition.x = ((position.x) / 24) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
-	internalPosition.y = (((position.y) / 24) + 0.5) / (app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio());
+	if (lastViewportBounds.w != viewport.w)
+	{
+		//position.y +=(viewport.w - lastViewportBounds.w)/100;
+		
+	}
+	else if (lastViewportBounds.z != viewport.z) 
+	{
+			position.x -=( viewport.z - lastViewportBounds.z)/2;
+		
+	}
+	
+	internalPosition.x = ((position.x)/24) / zoomRatio;
+	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;
+	
+	
+	lastViewportBounds = viewport;
+
+
+	scale.x = (((buttonWidth - 130) * (viewport.z / 25)) / viewport.z) / zoomRatio;
+	scale.y = (((buttonHeight - 50) * (viewport.w / 23)) / viewport.w) / zoomRatio;
+
 
 	internalPosition.z = position.z;
 
