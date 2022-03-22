@@ -8,6 +8,7 @@ public class Player : RagnarComponent
     public float force = 100;
     public float rockSoundRadius = 4f;
     private bool pendingToDelete = false;
+    private bool paused = false;
 
     Rigidbody rb;
     Material materialComponent;
@@ -22,19 +23,6 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
-        {
-            //GameObject but = GameObject.Find("Button");
-            //but.GetComponent<Button>().text = "Testint Text
-            SceneManager.NextScene();
-            Time.timeScale = 1;
-        }
-
-        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
-        {
-            Time.timeScale = 0;
-        }
-
         if (agent.targetSetted)
             agent.CalculatePath(agent.destination);
 
@@ -101,19 +89,38 @@ public class Player : RagnarComponent
         // Crouch
         if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
         {
+            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
             rb.SetHeight(0.6f); // 0.6 = 60%
         }
         if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
         {
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
             rb.SetHeight(1); // 1 = 100% = Reset
         }
-        if (pendingToDelete) InternalCalls.Destroy(gameObject);
+        if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
+        {
+            InternalCalls.Destroy(gameObject);
+            SceneManager.LoadScene("LoseScene");
+        }
+
+        if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
+        {
+            paused = !paused;
+            
+            if (paused)
+                Time.timeScale = 1.0f;
+            else
+                Time.timeScale = 0.0f;
+
+            // Pause menu
+        }
     }
 
     public void OnCollision(Rigidbody other)
     {
         if (other.gameObject.name == "EnemyBullet")
         {
+            gameObject.GetComponent<Animation>().PlayAnimation("Death");
             pendingToDelete = true;
             // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER
         }

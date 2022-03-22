@@ -20,7 +20,11 @@ public class EnemyInteraction : RagnarComponent
     public void Update()
     {
         Shoot();
-        if (pendingToDelete) InternalCalls.Destroy(gameObject);
+        if (pendingToDelete)
+        {
+            InternalCalls.Destroy(gameObject);
+            SceneManager.LoadScene("WinScene");
+        }
     }
 
     private void Shoot()
@@ -56,6 +60,7 @@ public class EnemyInteraction : RagnarComponent
         {
             pendingToDelete = true;
             // AÑADIR AQUÍ EL CAMBIO DE ESCENA A VICTORY
+           
         }
     }
 

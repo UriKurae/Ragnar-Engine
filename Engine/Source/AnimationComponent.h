@@ -14,7 +14,7 @@ struct AnimState
 	std::string state;
 	std::shared_ptr<Animation> anim;
 	bool loop;
-	bool hasFinished;
+	bool hasFinished = false;
 };
 
 class AnimationComponent : public Component
@@ -41,6 +41,7 @@ public:
 	void Play(std::string state);
 	
 	void GetAnimations();
+	bool HasFinished() { return currAnim->hasFinished; }
 
 	inline std::vector<float4x4> GetFinalBoneMatrices() { return finalBoneMatrices; };
 

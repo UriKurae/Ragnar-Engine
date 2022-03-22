@@ -116,7 +116,7 @@ void AnimationComponent::OnEditor()
 			if (currAnim != nullptr)
 			{
 				std::string aux = currAnim->state;
-				animations.push_back({ "None", nullptr, false });
+				animations.push_back({ "None", nullptr, false, false });
 				for (int i = 0; i < animations.size(); ++i)
 				{
 					if (animations[i].state == aux) currAnim = &animations[i];
@@ -124,7 +124,7 @@ void AnimationComponent::OnEditor()
 			}
 			else
 			{
-				animations.push_back({ "None", nullptr, false });
+				animations.push_back({ "None", nullptr, false, false });
 			}
 		}
 		ImGui::SameLine();
@@ -407,7 +407,7 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 		JsonParsing animF = JsonParsing();
 
 		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "State", (*it).state.c_str());
-		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets", (*it).anim.get()->GetAssetsPath().c_str());
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets",(*it).anim != nullptr ? (*it).anim.get()->GetAssetsPath().c_str() : "");
 		animF.SetNewJsonBool(animF.ValueToObject(animF.GetRootValue()), "Loop", (*it).loop);
 		
 		file.SetValueToArray(newArray, animF.GetRootValue());

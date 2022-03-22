@@ -14,3 +14,8 @@ void PlayAnimation(MonoObject* go, MonoObject* animationName)
 	std::string nameState = animName;
 	GetComponentMono<AnimationComponent*>(go)->Play(nameState);
 }
+
+bool HasFinished(MonoObject* go)
+{
+	return GetComponentMono<AnimationComponent*>(go)->HasFinished();
+}

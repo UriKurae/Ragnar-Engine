@@ -125,7 +125,7 @@
                 {
                     "Type": 9,
                     "Active": true,
-                    "Current Anim": "Idle",
+                    "Current Anim": "Crouch",
                     "Animations": [
                         {
                             "State": "Walk",
@@ -140,6 +140,16 @@
                         {
                             "State": "Shoot",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
+                            "Loop": false
+                        },
+                        {
+                            "State": "Crouch",
+                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Loop": true
+                        },
+                        {
+                            "State": "Death",
+                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
                             "Loop": false
                         }
                     ]
@@ -188,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 275007168,
+                    "pointer": 69027072,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -198,14 +208,14 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 275002568,
+                    "pointer": 69026520,
                     "type": 4,
                     "componentTable": 0
                 },
                 {
                     "Type": 20,
                     "Active": true,
-                    "Player": true,
+                    "Player": false,
                     "Radius": 0.30000001192092896,
                     "Height": 2,
                     "StopHeight": 0.89999997615814209,
@@ -223,7 +233,8 @@
                     "PathType": 1,
                     "NumPolys": 0,
                     "NumStraight": 0,
-                    "NumSmooth": 0
+                    "NumSmooth": 0,
+                    "AgentType": 1
                 }
             ]
         },
@@ -247,7 +258,7 @@
                         84.5
                     ],
                     "Scale": [
-                        5.7272725105285645,
+                        8.9999990463256836,
                         0,
                         1
                     ],
@@ -290,7 +301,7 @@
                         84.5
                     ],
                     "Scale": [
-                        2.0863635540008545,
+                        3.2785713672637939,
                         0,
                         1
                     ],
@@ -366,15 +377,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -20.853916168212891,
+                        -7.9408102035522461,
                         11.183857917785645,
-                        2.4232497215270996
+                        -18.566474914550781
                     ],
                     "Quaternion": [
-                        -0.12394709885120392,
-                        0.44992077350616455,
-                        -0.29961872100830078,
-                        0.83212804794311523
+                        0.25794428586959839,
+                        -0.17316895723342896,
+                        -0.147515669465065,
+                        0.93899756669998169
                     ],
                     "RotationEditor": [
                         0,
@@ -393,12 +404,12 @@
                     "Vertical Fov": 0.97906363010406494,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -20.853916168212891,
+                        -7.9408102035522461,
                         11.183857917785645,
-                        2.4232497215270996
+                        -18.566474914550781
                     ],
                     "Type": 3,
-                    "Zoom": 22,
+                    "Zoom": 14,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -411,7 +422,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 106.39971923828125,
+                    "Horizontal Angle": 10.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -4702,7 +4713,7 @@
                 {
                     "Type": 9,
                     "Active": true,
-                    "Current Anim": "Idle",
+                    "Current Anim": "Death",
                     "Animations": [
                         {
                             "State": "Walk",
@@ -4718,17 +4729,11 @@
                             "State": "Shoot",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
                             "Loop": false
-                        }
-                    ]
-                },
-                {
-                    "Type": 5,
-                    "Volume": 50,
-                    "Pitch": 0,
-                    "Mute": false,
-                    "AudioClips": [
+                        },
                         {
-                            "0": "None"
+                            "State": "Death",
+                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
+                            "Loop": false
                         }
                     ]
                 },
@@ -4759,13 +4764,9 @@
                     "Active": true
                 },
                 {
-                    "Type": 6,
-                    "Active": true
-                },
-                {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 275002384,
+                    "pointer": 69026704,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -4777,7 +4778,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 275004040,
+                    "pointer": 69026888,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -4804,13 +4805,52 @@
                     "PathType": 1,
                     "NumPolys": 0,
                     "NumStraight": 0,
-                    "NumSmooth": 0
+                    "NumSmooth": 0,
+                    "AgentType": 0
                 }
             ]
         },
         {
-            "UUID": 1245657567,
+            "UUID": 288238026,
             "Parent UUID": 417171234,
+            "Name": "WayPoints",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 279655738,
+            "Parent UUID": 288238026,
             "Name": "Game Object",
             "Active": true,
             "Static": true,
@@ -4823,9 +4863,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        4.4863696098327637,
+                        6.3106880187988281,
                         1,
-                        24.365568161010742
+                        10.506481170654297
                     ],
                     "Quaternion": [
                         0,
@@ -4848,7 +4888,7 @@
         },
         {
             "UUID": 1676813773,
-            "Parent UUID": 417171234,
+            "Parent UUID": 288238026,
             "Name": "Game Object",
             "Active": true,
             "Static": true,
@@ -4885,8 +4925,8 @@
             ]
         },
         {
-            "UUID": 279655738,
-            "Parent UUID": 417171234,
+            "UUID": 1245657567,
+            "Parent UUID": 288238026,
             "Name": "Game Object",
             "Active": true,
             "Static": true,
@@ -4899,9 +4939,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        6.3106880187988281,
+                        4.4863696098327637,
                         1,
-                        10.506481170654297
+                        24.365568161010742
                     ],
                     "Quaternion": [
                         0,

@@ -4,6 +4,7 @@
 
 #include "FileSystem.h"
 #include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
 
 #include "Imgui/imgui_impl_sdl.h"
 #include "SDL.h"
@@ -175,7 +176,7 @@ bool ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KeyState::KEY_UP)
+	if(quit == true || (keyboard[SDL_SCANCODE_ESCAPE] == KeyState::KEY_UP && app->sceneManager->GetGameState() == GameState::NOT_PLAYING))
 		return false;
 
 	return true;
