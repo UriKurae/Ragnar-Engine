@@ -198,7 +198,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 34599768,
+                    "pointer": 67669368,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -208,7 +208,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 34600688,
+                    "pointer": 67668264,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -258,8 +258,8 @@
                         84.5
                     ],
                     "Scale": [
-                        7.9403219223022461,
-                        1.6725103855133057,
+                        4.922999382019043,
+                        1.0369564294815063,
                         1
                     ],
                     "rotationEuler": [
@@ -301,8 +301,8 @@
                         84.5
                     ],
                     "Scale": [
-                        6.1258058547973633,
-                        2.7296633720397949,
+                        3.7979996204376221,
+                        1.6923911571502686,
                         1
                     ],
                     "rotationEuler": [
@@ -377,15 +377,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        9.3534183502197266,
+                        9.6098318099975586,
                         11.183857917785645,
-                        -10.648455619812012
+                        5.6790366172790527
                     ],
                     "Quaternion": [
-                        -0.098014727234840393,
-                        -0.33308720588684082,
-                        0.26122379302978516,
-                        0.90067094564437866
+                        -0.1747487485408783,
+                        -0.49879524111747742,
+                        0.2872309684753418,
+                        0.79885202646255493
                     ],
                     "RotationEditor": [
                         0,
@@ -404,12 +404,12 @@
                     "Vertical Fov": 0.97906363010406494,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        9.3534183502197266,
+                        9.6098318099975586,
                         11.183857917785645,
-                        -10.648455619812012
+                        5.6790366172790527
                     ],
                     "Type": 3,
-                    "Zoom": 62,
+                    "Zoom": 100,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -421,7 +421,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": -59.60028076171875,
+                    "Horizontal Angle": -118.60028076171875,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -537,7 +537,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 34600136,
+                    "pointer": 242616488,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -549,7 +549,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 34599216,
+                    "pointer": 242616856,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -860,12 +860,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.80000001192092896,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -1791,12 +1786,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -2025,12 +2015,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.89999997615814209,
-                        1,
-                        0.80000001192092896
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -2103,12 +2088,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -2494,16 +2474,11 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.80000001192092896,
-                        1,
-                        0.89999997615814209
-                    ],
-                    "Gravity": true,
+                    "CollisionType": 6,
+                    "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
-                    "Mass": 1,
+                    "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
                     "MovementConstraint": [
@@ -2652,9 +2627,9 @@
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
+                        0.69999998807907104,
                         1,
-                        1,
-                        1
+                        0.89999997615814209
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -2772,9 +2747,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        47.395698547363281,
-                        2.2737367544323206e-13,
-                        -20.849809646606445
+                        51.801017761230469,
+                        3.476644997135736e-05,
+                        -19.224971771240234
                     ],
                     "Quaternion": [
                         0,
@@ -2806,12 +2781,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.89999997615814209,
-                        1,
-                        0.80000001192092896
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -3318,12 +3288,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.89999997615814209,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -3474,12 +3439,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -3552,12 +3512,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.80000001192092896,
-                        1,
-                        0.89999997615814209
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4405,12 +4360,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4483,12 +4433,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4561,12 +4506,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.80000001192092896,
-                        1,
-                        0.80000001192092896
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4858,12 +4798,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -4936,12 +4871,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.80000001192092896,
-                        1,
-                        0.89999997615814209
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5014,12 +4944,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5248,12 +5173,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5401,30 +5321,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -5477,12 +5373,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5633,12 +5524,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.80000001192092896,
-                        1,
-                        0.80000001192092896
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -5949,7 +5835,7 @@
                     "Size": [
                         1,
                         1,
-                        1
+                        0.80000001192092896
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -6335,12 +6221,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        0.89999997615814209,
-                        1,
-                        0.89999997615814209
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -6413,12 +6294,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
@@ -6491,12 +6367,7 @@
                 },
                 {
                     "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
+                    "CollisionType": 6,
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
