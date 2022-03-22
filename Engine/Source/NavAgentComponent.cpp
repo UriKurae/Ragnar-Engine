@@ -1,6 +1,7 @@
 #include "NavAgentComponent.h"
 #include "Application.h"
 #include "Globals.h"
+#include "GameObject.h"
 
 #include "ModuleNavMesh.h"
 
@@ -9,7 +10,6 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 	owner = obj;
 	this->type = ComponentType::NAVAGENT;
 	agentProperties = new NavAgent;
-
 	pathfinding = app->navMesh->GetPathfinding();
 }
 
@@ -80,16 +80,20 @@ void NavAgentComponent::OnEditor()
 		ImGui::Text("Agent Type"); ImGui::SameLine;
 		if (ImGui::BeginCombo("##AgentType", name.c_str()))
 		{
+			
+			if (owner->tag == std::string("Player"))
+			{
+				if (ImGui::Selectable("Character 1"))
+				{
+					agentProperties->AgentType = AgentType::CHARACTER_1;
+					pathfinding->player = this;
+				}
+			}
+
 			if (ImGui::Selectable("Enemy"))
 			{
 				agentProperties->AgentType = AgentType::ENEMY;
 				if (pathfinding->player == this) pathfinding->player = nullptr;
-			}
-
-			if (pathfinding->player == nullptr && ImGui::Selectable("Character 1"))
-			{
-				agentProperties->AgentType = AgentType::CHARACTER_1;
-				pathfinding->player = this;
 			}
 
 			ImGui::EndCombo();
@@ -106,6 +110,13 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 	active = node.GetJsonBool("Active");
 
 	agentProperties->AgentType = (AgentType)(int)node.GetJsonNumber("AgentType");
+	if (owner->tag == std::string("Player")) {
+		agentProperties->AgentType = AgentType::CHARACTER_1;
+		pathfinding->player = this;
+	}
+	else agentProperties->AgentType = AgentType::ENEMY;
+
+
 	if (node.GetJsonBool("TargetSet") == true) pathfinding->player = this;
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
@@ -157,6 +168,7 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AgentType", (int)agentProperties->AgentType);
+
 	if (pathfinding->player == this) file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", true);
 	else file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", false);
 
