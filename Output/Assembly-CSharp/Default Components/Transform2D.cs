@@ -22,5 +22,11 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 GetSize();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetSize(Vector3 bounds);
     }
 }

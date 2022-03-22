@@ -2,9 +2,11 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
-#include "ModuleScene.h"
 
 #include "GameObject.h"
 #include "GameView.h"
@@ -15,7 +17,7 @@
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
-	position = { 0,0,0 };
+	position = { 0,0,84.5f };
 	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;
@@ -77,7 +79,9 @@ bool ComponentTransform2D::Update(float dt)
 
 
 	internalPosition.z = position.z;
-	
+
+	/*internalPosition.x = position.x/1;
+	internalPosition.y = position.y/8;*/
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
 
@@ -86,7 +90,7 @@ bool ComponentTransform2D::Update(float dt)
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
 
-	
+
 	return true;
 }
 

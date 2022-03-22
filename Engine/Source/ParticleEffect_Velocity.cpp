@@ -49,14 +49,18 @@ void ParticleEffect_Velocity::OnEditor(int emitterIndex)
 
 		suffixLabel = "Minimum Velocity##max_vel";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3(suffixLabel.c_str(), minV, 0.01f, minVel, maxVel);
+		ImGui::PopItemWidth();
 		minVelocity.x = minV[0];
 		minVelocity.y = minV[1];
 		minVelocity.z = minV[2];
 
 		suffixLabel = "Maximum Velocity##max_vel";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3(suffixLabel.c_str(), maxV, 0.01f, minVel, maxVel);
+		ImGui::PopItemWidth();
 		maxVelocity.x = maxV[0];
 		maxVelocity.y = maxV[1];
 		maxVelocity.z = maxV[2];

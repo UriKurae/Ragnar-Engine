@@ -4,7 +4,8 @@
 
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "ConsoleMenu.h"
 #include "InspectorMenu.h"
@@ -84,7 +85,7 @@ bool ModuleEditor::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
 		app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_DOWN)
 	{
-		if (selected) app->scene->DuplicateGO(selected, selected->GetParent());
+		if (selected) app->sceneManager->GetCurrentScene()->DuplicateGO(selected, selected->GetParent());
 	}
 
 	return ret;

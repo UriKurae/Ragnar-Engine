@@ -5,6 +5,11 @@
 #include "ResourceManager.h"
 #include "CameraComponent.h"
 #include "TransformComponent.h"
+#include "ParticleEffect_Velocity.h"
+#include "ParticleEffect_Acceleration.h"
+#include "ParticleEffect_Size.h"
+#include "ParticleEffect_Color.h"
+#include "BillboardParticleComponent.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -19,6 +24,10 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	maxParticles(200),
 	minLifeTime(0.7f),
 	maxLifeTime(1.7f),
+	spreadDistanceX(2.0f), 
+	spreadDistanceY(2.0f),
+	spreadDistanceZ(2.0f),
+	isEmitterCubical(false),
 	isActive(true),
 	showTexMenu(false),
 	emitterName(""),
@@ -34,9 +43,6 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
 	particleReference.color = { 1,0,0,1 };
-	//particleReference.colorBegin = { 1,0,0,1 };
-	//particleReference.colorEnd = { 0,1,0,1 };
-	//particleReference.sizeBegin = 0.5f, particleReference.sizeVariation = 0.3f, particleReference.sizeEnd = 0.0f;
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
 	particleReference.velocity = { 0.0f, 0.1f, 0.0f };
@@ -90,7 +96,17 @@ void ParticleEmitter::Emit(float dt)
 		Particle& particle = particlePool[poolIndex];
 		particle.active = true;
 
-		particle.position = particleReference.position;
+		if (!isEmitterCubical )
+		{
+			particle.position = particleReference.position;
+		}
+		if (isEmitterCubical)
+		{
+			particle.position.x = particleReference.position.x + random.Float(-spreadDistanceX, spreadDistanceX);
+			particle.position.y = particleReference.position.y + random.Float(-spreadDistanceY, spreadDistanceY);
+			particle.position.z = particleReference.position.z + random.Float(-spreadDistanceZ, spreadDistanceZ);
+		}
+		
 		particle.rotation = particleReference.deltaRotation + random.Float() * 2 * pi;
 
 		particle.acceleration = particleReference.acceleration;
@@ -100,14 +116,10 @@ void ParticleEmitter::Emit(float dt)
 		particle.velocity.y += particleReference.acceleration.y * (random.Float() - 0.5f) * 2;
 
 		particle.color = particleReference.color;
-		//particle.colorBegin = particleReference.colorBegin;
-		//particle.colorEnd = particleReference.colorEnd;
 
 		particle.lifeTime = particleReference.lifeTime;
 		particle.lifeRemaining = particleReference.lifeTime;
-		//particle.sizeBegin = particleReference.sizeBegin + particleReference.sizeVariation * (random.Float() - 0.5f);
 		particle.size = particleReference.size;
-		//particle.sizeEnd = particleReference.sizeEnd;
 
 		poolIndex = --poolIndex % particlePool.size();
 
@@ -133,10 +145,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 
 	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
-	/*Quat q;
-	q.SetFromAxisAngle({ 0,1,0 }, rotation);
-	float4x4 transform = float4x4::FromTRS(pos, q, size);*/
-
 	Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
 	float4x4 transform = float4x4::FromTRS(pos, q, size);
 
@@ -150,7 +158,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 
 		data.vertexBufferPtr++;
 	}
-
 	data.indexCount += 6;
 }
 
@@ -210,6 +217,9 @@ void ParticleEmitter::SetUpBuffers()
 
 void ParticleEmitter::Render(CameraComponent* gameCam)
 {
+	if (!isActive)
+		return;
+
 	StartBatch();
 
 	float4x4 view = float4x4::identity;
@@ -238,9 +248,6 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 				continue;
 
 			float life = particle.lifeRemaining / particle.lifeTime;
-			//float4 color = float4::Lerp(particle.color, particle.color, life);
-			//color.w *= life;
-			//float size = Lerp(particle.sizeEnd, particle.sizeBegin, life);
 
 			if (billboard != nullptr)
 			{
@@ -343,6 +350,24 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 			toDelete = true;
 		}
 
+		(ImGui::Checkbox("Cubical emitter", &isEmitterCubical));
+
+		if (isEmitterCubical)
+		{
+			ImGui::PushItemWidth(200);
+			ImGui::DragFloat("Spread distance X", &spreadDistanceX, 0.1f, 0.0f);
+			//ImGui::SliderFloat("Spread distance X", &spreadDistanceX, 0.0f, 10.0f, "%.2f");
+			ImGui::PopItemWidth();
+			ImGui::PushItemWidth(200);
+			ImGui::DragFloat("Spread distance Y", &spreadDistanceY, 0.1f, 0.0f);
+			//ImGui::SliderFloat("Spread distance Y", &spreadDistanceY, 0.0f, 10.0f, "%.2f");
+			ImGui::PopItemWidth();
+			ImGui::PushItemWidth(200);
+			ImGui::DragFloat("Spread distance Z", &spreadDistanceZ, 0.1f, 0.0f);
+			//ImGui::SliderFloat("Spread distance Z", &spreadDistanceZ, 0.0f, 10.0f, "%.2f");
+			ImGui::PopItemWidth();
+		}
+
 		ImGui::Spacing();
 		ImGui::Spacing();
 		ImGui::Separator();
@@ -354,26 +379,34 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
 
 		guiName = "Particles per Second" + suffixLabel;
+		ImGui::PushItemWidth(200);
 		if (ImGui::DragFloat(guiName.c_str(), &particlesPerSecond))
 			SetParticlesPerSecond(particlesPerSecond);
+		ImGui::PopItemWidth();
 
 		guiName = "Max Particles" + suffixLabel;
+		ImGui::PushItemWidth(200);
 		ImGui::DragInt(guiName.c_str(), &maxParticles, 1.0f, 0.0f);
 		if (ImGui::IsItemDeactivated())
 			if(maxParticles > 0)
 				SetUpBuffers();
+		ImGui::PopItemWidth();
 
-		//float size[2] = { particleReference->size.x, particleReference->size.y };
-
-		//guiName = "Size" + suffixLabel;
 
 		guiName = "Particle lifetime" + suffixLabel;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
+		ImGui::PopItemWidth();
 
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Velocity", particleReference.velocity.ptr(), 0.01f, -1.0f, 1.0f);
+		ImGui::PopItemWidth();
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
-
+		ImGui::PopItemWidth();
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
+		ImGui::PopItemWidth();
 	
 		/*guiName = "Color (RGBA)" + suffixLabel;
 		ImGui::ColorEdit4("Beginning Color", particleReference.colorBegin.ptr());
@@ -544,6 +577,11 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	//maxLifeTime = node.GetJsonNumber("Emitter: Max Life Time");
 	timer = node.GetJsonNumber("Emitter: Timer");
 	currTimer = node.GetJsonNumber("Emitter: Current Timer");
+	isEmitterCubical = node.GetJsonBool("Emitter: Is Cubical");
+
+	spreadDistanceX = node.GetJsonNumber("Cubical: Spread on X");
+	spreadDistanceY = node.GetJsonNumber("Cubical: Spread on Y");
+	spreadDistanceZ = node.GetJsonNumber("Cubical: Spread on Z");
 
 	particleReference.position = node.GetJson3Number(node, "Particle Reference Position");
 	particleReference.velocity = node.GetJson3Number(node, "Particle Reference Velocity");
@@ -570,7 +608,7 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 		// TODO: Switch checking the type of the effect and creating it, afterwards push it to the vector
 		JsonParsing c = node.GetJsonArrayValue(effectsArray, i);
 		CreateParticleEffect((ParticleEffectType)(int)c.GetJsonNumber("Effect Type"));
-		effects[(int)c.GetJsonNumber("Effect Type")]->OnLoad(node);
+		effects[(int)c.GetJsonNumber("Effect Type")]->OnLoad(c);
 		//effects[i]->OnLoad(node);
 	}
 
@@ -589,6 +627,12 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	//file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Max Life Time", maxLifeTime);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Timer", timer);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Emitter: Current Timer", currTimer);
+
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Emitter: Is Cubical", isEmitterCubical);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Cubical: Spread on X", spreadDistanceX);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Cubical: Spread on Y", spreadDistanceY);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Cubical: Spread on Z", spreadDistanceZ);
 
 	file.SetNewJson3Number(file, "Particle Reference Position", particleReference.position);
 	file.SetNewJson3Number(file, "Particle Reference Velocity", particleReference.velocity);

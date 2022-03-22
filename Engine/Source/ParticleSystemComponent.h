@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "ModuleScene.h"
+
 #include "ParticleEmitter.h"
 #include "GameTimer.h"
 #include "Dialogs.h"
@@ -32,6 +32,8 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void UpdateAABB();
+
+	inline const std::vector<ParticleEmitter*>& GetEmitters() { return emitters; }
 
 public:
 

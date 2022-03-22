@@ -1,8 +1,8 @@
 #include "Animation.h"
 #include "AnimationComponent.h"
 #include "Application.h"
-
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "MeshComponent.h"
 
@@ -12,7 +12,7 @@
 #include "Math/TransformOps.h"
 #include "Imgui/imgui_stdlib.h"
 
-AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(0.0f)
+AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(1.0f)
 {
 	type = ComponentType::ANIMATION;
 	owner = own;
@@ -82,6 +82,7 @@ void AnimationComponent::OnEditor()
 				{
 					if ((*it).find(".rganim") != std::string::npos)
 					{
+						ImGui::PushID((*it).c_str());
 						app->fs->GetFilenameWithoutExtension(*it);
 						*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 						uint uid = std::stoll(*it);
@@ -93,6 +94,7 @@ void AnimationComponent::OnEditor()
 							if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
 							currAnim = currState;
 						}
+						ImGui::PopID();
 					}
 				}
 
@@ -168,7 +170,7 @@ void AnimationComponent::AnimationInfo()
 bool AnimationComponent::Update(float dt)
 {
 	deltaTime = dt;
-	if (currAnim && playing && app->scene->GetGameState() == GameState::PLAYING)
+	if (currAnim && playing && app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		// Loop time keeps track of the miliseconds that passed since the start of the animation
 		// GetDuration gets the duration of the animation in miliseconds
@@ -302,11 +304,17 @@ float4x4 AnimationComponent::InterpolateWithOneBone(float4x4& transform, Bone& b
 	scaleFactor = midWayLength / framesDiff;
 	if (scaleFactor < 0) scaleFactor = 0.0f;
 
-	float3 finalPos = Lerp(position, bone.GetData().positions[0].position, scaleFactor);
+	float3 p;
+	Quat r;
+	float3 s;
+
+	bone.GetData().keyFrames[0].matrix.Decompose(p, r, s);
+
+	float3 finalPos = Lerp(position, p, scaleFactor);
 
 	float4x4 pos = float4x4::Translate(finalPos);
-	float4x4 rot = float4x4(Slerp(rotation, bone.GetData().rotations[0].orientation, scaleFactor));
-	float4x4 sca = float4x4::Scale(Lerp(scale, bone.GetData().scales[0].scale, scaleFactor));
+	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
+	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
 
 	if (scaleFactor >= 1.0f) 
 		interpolating = false;
@@ -332,11 +340,17 @@ float4x4 AnimationComponent::InterpolateWithOneBone(Bone& bone, float4x4& transf
 	scaleFactor = midWayLength / framesDiff;
 	if (scaleFactor < 0) scaleFactor = 0.0f;
 
-	float3 finalPos = Lerp(bone.GetData().positions[posIndex].position, position, scaleFactor);
+	float3 p;
+	Quat r;
+	float3 s;
+
+	bone.GetData().keyFrames[0].matrix.Decompose(p, r, s);
+
+	float3 finalPos = Lerp(position, p, scaleFactor);
 
 	float4x4 pos = float4x4::Translate(finalPos);
-	float4x4 rot = float4x4(Slerp(bone.GetData().rotations[rotIndex].orientation, rotation, scaleFactor));
-	float4x4 sca = float4x4::Scale(Lerp(bone.GetData().scales[scaIndex].scale, scale, scaleFactor));
+	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
+	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
 
 	if (scaleFactor >= 1.0f) 
 		interpolating = false;
@@ -411,6 +425,10 @@ void AnimationComponent::SetAnimation(std::shared_ptr<Resource> a)
 
 void AnimationComponent::Play(std::string state)
 {
+	if (app->sceneManager->GetTimeScale() == 0.0f)
+	{
+		return;
+	}
 	for (int i = 0; i < animations.size(); ++i)
 	{
 		if (animations[i].state == state)
@@ -421,7 +439,7 @@ void AnimationComponent::Play(std::string state)
 
 				currAnim = &animations[i];
 				lastCurrentTime = currentTime;
-	
+
 				if (lastAnim != currAnim)
 				{
 					currentTime = 0.0f;
@@ -435,7 +453,6 @@ void AnimationComponent::Play(std::string state)
 			break;
 		}
 	}
-
 }
 
 void AnimationComponent::GetAnimations()

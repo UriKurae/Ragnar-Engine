@@ -1,7 +1,7 @@
 #pragma once
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
 
 #include "ResourceManager.h"
@@ -10,8 +10,11 @@
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
 #include "Texture.h"
+#include "ParticleSystemComponent.h"
 
+#include "Scene.h"
 #include "TransformBindings.h"
+#include "GameView.h"
 
 #include <queue>
 
@@ -166,7 +169,7 @@ void SetTexturePath(MonoObject* go, MonoObject* texturePath)
 // GameObject =======================
 MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
-	GameObject* go = app->scene->CreateGameObject(nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -183,7 +186,7 @@ MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoOb
 void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* position, MonoObject* rotation)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -199,7 +202,7 @@ void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* positi
 MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObject* position)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -240,7 +243,7 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
 	std::queue<GameObject*> q;
-	for (auto& go : app->scene->GetGameObjectsList())
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
 		q.push(go);
 
 	while (!q.empty())
@@ -267,7 +270,7 @@ MonoArray* FindGameObjectsWithTag(MonoObject* tag)
 	char* tagName = mono_string_to_utf8(mono_object_to_string(tag, 0));
 	
 	std::vector<MonoObject*> objects;
-	for (auto& go : app->scene->GetGameObjectsList())
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
 	{
 		if (go->tag == tagName)
 			objects.push_back(app->moduleMono->GoToCSGO(go));
@@ -354,7 +357,63 @@ void SetButtonText(MonoObject* go, MonoString* text)
 // UI ===============================
 
 
+// Particle System ==================
+MonoArray* GetEmitters(MonoObject* go)
+{
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	if (!particleSystem)
+		return nullptr;
+
+	MonoClass* emitterClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "Emitter");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, emitterClass, particleSystem->GetEmitters().size());
+
+	for (int i = 0; i < particleSystem->GetEmitters().size(); ++i)
+	{
+		MonoObject* emitterObject = ParticleEmitterToCS(particleSystem->GetEmitters()[i]);
+		mono_array_set(ret, MonoObject*, i, emitterObject);
+	}
+
+	return ret;
+}
+
+void PlayEmitter(MonoObject* emitter)
+{
+	ParticleEmitter* e = GetEmitterFromCS(emitter);
+	e->isActive = true;
+}
+
+void PauseEmitter(MonoObject* emitter)
+{
+	ParticleEmitter* e = GetEmitterFromCS(emitter);
+	e->isActive = false;
+}
+// Particle System ==================
+
 float GetGameTimeStep()
 {
-	return app->scene->GetGameDeltaTime();
+	return app->sceneManager->GetGameDeltaTime();
+}
+
+void SetTimeScale(float scale)
+{
+	app->sceneManager->GetTimer().SetTimeScale(scale);
+}
+
+// Scene Manager
+void NextScene()
+{
+	app->sceneManager->NextScene();
+}
+
+void LoadScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->NextScene(name);
+}
+
+MonoObject* GetRegionGame()
+{
+	float4 vec4(app->editor->GetGameView()->GetBounds());
+	float3 vec3 = { vec4.z / 1.6f, vec4.w / 1.7f, 0 };
+	return app->moduleMono->Float3ToCS(vec3);
 }

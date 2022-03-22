@@ -56,7 +56,9 @@ void ParticleEffect_Acceleration::OnEditor(int emitterIndex)
 
 		suffixLabel = "Acceleration";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3(suffixLabel.c_str(), acc, 0.01f, minAcc, maxAcc);
+		ImGui::PopItemWidth();
 
 		acceleration[0] = acc[0];
 		acceleration[1] = acc[1];

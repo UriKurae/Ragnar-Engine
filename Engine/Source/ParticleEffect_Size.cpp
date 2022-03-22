@@ -38,11 +38,15 @@ void ParticleEffect_Size::OnEditor(int emitterIndex)
 
 		suffixLabel = "Start Size##SizeOverLife";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat(suffixLabel.c_str(), &startSize, 0.1f, 0.0f, FLT_MAX);
+		ImGui::PopItemWidth();
 
 		suffixLabel = "End Size##SizeOverLife";
 		suffixLabel += emitterIndex;
+		ImGui::PushItemWidth(200);
 		ImGui::DragFloat(suffixLabel.c_str(), &endSize, 0.1f, 0.0f, FLT_MAX);
+		ImGui::PopItemWidth();
 
 		ImGui::Unindent();
 	}

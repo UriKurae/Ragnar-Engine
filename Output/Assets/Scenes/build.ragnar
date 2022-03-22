@@ -188,7 +188,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 63498904,
+                    "pointer": 26767080,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -198,19 +198,20 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 61873912,
+                    "pointer": 26768736,
                     "type": 4,
                     "componentTable": 0
                 },
                 {
                     "Type": 20,
                     "Active": true,
+                    "Player": false,
                     "Radius": 0.30000001192092896,
                     "Height": 2,
                     "StopHeight": 0.89999997615814209,
                     "MaxSlope": 45,
-                    "Speed": 1,
-                    "AngularSpeed": 1,
+                    "Speed": 2,
+                    "AngularSpeed": 180,
                     "Acceleration": 1,
                     "StoppingDistance": 0,
                     "Target": [
@@ -243,11 +244,11 @@
                     "Position": [
                         7,
                         -99.5,
-                        55.5
+                        84.5
                     ],
                     "Scale": [
-                        35.999996185302734,
-                        9.7826080322265625,
+                        28.927593231201172,
+                        13.867521286010742,
                         1
                     ],
                     "rotationEuler": [
@@ -286,11 +287,11 @@
                     "Position": [
                         -170,
                         -99.5,
-                        55.5
+                        84.5
                     ],
                     "Scale": [
-                        27.989995956420898,
-                        9.7826080322265625,
+                        22.491203308105469,
+                        13.867521286010742,
                         1
                     ],
                     "rotationEuler": [
@@ -365,15 +366,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.051603317260742,
+                        -3.9644844532012939,
                         11.183857917785645,
-                        13.158257484436035
+                        14.293465614318848
                     ],
                     "Quaternion": [
-                        0.26859459280967712,
-                        0.64110046625137329,
-                        -0.015950441360473633,
-                        0.71874392032623291
+                        -0.2539161741733551,
+                        0.72389036417007446,
+                        -0.097250565886497498,
+                        0.63407552242279053
                     ],
                     "RotationEditor": [
                         0,
@@ -387,17 +388,17 @@
                     ]
                 },
                 {
-                    "Near Plane": -55.5,
+                    "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0577222108840942,
+                    "Vertical Fov": 0.97906363010406494,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -11.051603317260742,
+                        -3.9644844532012939,
                         11.183857917785645,
-                        13.158257484436035
+                        14.293465614318848
                     ],
                     "Type": 3,
-                    "Zoom": 10,
+                    "Zoom": 16,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -410,7 +411,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 158.39971923828125,
+                    "Horizontal Angle": 183.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -419,7 +420,7 @@
             ]
         },
         {
-            "UUID": 887940709,
+            "UUID": 229908290,
             "Parent UUID": 417171234,
             "Name": "RootNode",
             "Active": true,
@@ -457,9 +458,9 @@
             ]
         },
         {
-            "UUID": 1014024340,
-            "Parent UUID": 887940709,
-            "Name": "Cube.001",
+            "UUID": 473024822,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low25",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -471,15 +472,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -35.887790679931641,
-                        0.3171423077583313,
-                        68.587371826171875
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -493,46 +494,71 @@
                     ]
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low25.fbx",
+                    "Active": true
+                },
+              {
+                "Type": 2,
+                "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                "Active": true,
+                "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+              }
+            ]
+        },
+        {
+            "UUID": 562716402,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low11",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.001.fbx",
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low11.fbx",
                     "Active": true
                 },
                 {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
+                  "Type": 2,
+                  "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
             ]
         },
         {
-            "UUID": 1701159708,
-            "Parent UUID": 887940709,
-            "Name": "Cube.002",
+            "UUID": 2109390551,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low28",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -544,15 +570,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -33.937026977539062,
-                        -0.22877958416938782,
-                        50.117961883544922
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -566,46 +592,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low28.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.002.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 49841026,
-            "Parent UUID": 887940709,
-            "Name": "Cube.003",
+            "UUID": 1498903734,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low26",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -617,15 +619,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -19.670696258544922,
-                        -0.22877958416938782,
-                        51.776824951171875
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -639,46 +641,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low26.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.003.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 578797482,
-            "Parent UUID": 887940709,
-            "Name": "Cube.004",
+            "UUID": 613274725,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low27",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -690,15 +668,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -12.371637344360352,
-                        -0.22877958416938782,
-                        62.526351928710938
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -712,46 +690,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low27.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.004.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 1109076737,
-            "Parent UUID": 887940709,
-            "Name": "Cube.005",
+            "UUID": 2097150732,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low28",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -763,15 +717,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -34.252872467041016,
-                        -0.22877958416938782,
-                        28.679960250854492
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -785,46 +739,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low28.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.005.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 1605798670,
-            "Parent UUID": 887940709,
-            "Name": "Cube.006",
+            "UUID": 943759357,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall1_low",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -836,15 +766,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.1163177490234375,
-                        0.80921024084091187,
-                        54.287708282470703
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -858,46 +788,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall1_low.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.006.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 2060956866,
-            "Parent UUID": 887940709,
-            "Name": "Cube",
+            "UUID": 727745126,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low25",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -909,15 +815,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -2.4808347225189209,
-                        1.8536815643310547,
-                        -25.181812286376953
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.62194883823394775,
-                        -0.33642226457595825,
-                        -0.3364223837852478,
-                        0.62194830179214478
+                        0,
+                        0,
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -931,46 +837,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low25.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 550411846,
-            "Parent UUID": 887940709,
-            "Name": "Cube.010",
+            "UUID": 153461229,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low15",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -982,20 +864,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        27.338373184204102,
-                        0.92448687553405762,
-                        -6.3595066070556641
+                        2.0143742561340332,
+                        0,
+                        -1.8965649604797363
                     ],
                     "Quaternion": [
-                        -0.64441263675689697,
-                        0.29108837246894836,
-                        0.29108840227127075,
-                        0.64441251754760742
+                        0,
+                        -0.017658282071352005,
+                        0,
+                        0.99984419345855713
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -1004,46 +886,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low15.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.010.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 1316149323,
-            "Parent UUID": 887940709,
-            "Name": "Cube.012",
+            "UUID": 1669293275,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low7",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1055,15 +913,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -40.700679779052734,
-                        -0.22877958416938782,
-                        94.614181518554688
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -1077,46 +935,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low7.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.012.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 2064829655,
-            "Parent UUID": 887940709,
-            "Name": "Cube.013",
+            "UUID": 1145484603,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low6",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1128,15 +962,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -70.95806884765625,
-                        4.6641359329223633,
-                        105.99839782714844
+                        0,
+                        0,
+                        0
                     ],
                     "Quaternion": [
-                        -0.7038227915763855,
-                        -0.06807253509759903,
-                        -0.068072564899921417,
-                        0.70382225513458252
+                        0,
+                        0,
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -1150,46 +984,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low6.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.013.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 550316238,
-            "Parent UUID": 887940709,
-            "Name": "Cube.007",
+            "UUID": 381970828,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall1_low4",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1202,14 +1012,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        4.9142489433288574,
+                        0,
                         0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
                         0,
@@ -1223,46 +1033,22 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall1_low4.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.007.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
         {
-            "UUID": 1071753626,
-            "Parent UUID": 887940709,
-            "Name": "Ground",
+            "UUID": 99886268,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low5",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1279,13 +1065,13 @@
                         0
                     ],
                     "Quaternion": [
-                        -0.7071068286895752,
                         0,
                         0,
-                        0.70710670948028564
+                        0,
+                        1
                     ],
                     "RotationEditor": [
-                        -1.5707964897155762,
+                        0,
                         0,
                         0
                     ],
@@ -1296,45 +1082,3543 @@
                     ]
                 },
                 {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low5.fbx",
+                    "Active": true
+                },
+                {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1565730436,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low12",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/blockout_lvl1__Cube.008.fbx",
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low12.fbx",
                     "Active": true
                 },
                 {
-                    "Type": 11,
-                    "CollisionType": 5,
-                    "Normal": [
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1079238620,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low22",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
                         0,
                         0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
                         1
                     ],
-                    "Constant": 1.2999999523162842,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
                         1,
                         1,
                         1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low22.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 453156699,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low20",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low20.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2100990161,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low16",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low16.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1690524477,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low6.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1312711042,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall3_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall3_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 975208166,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low20",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low20.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 388253247,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low24",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low24.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1871990012,
+            "Parent UUID": 229908290,
+            "Name": "SmartCombine_10",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__SmartCombine_10.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/DesertSand\/MaterialSand_basecolor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 373115333,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low12",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low12.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1882333384,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low29",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low29.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1116939842,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low30",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low30.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 659828088,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low29",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low29.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2088912368,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low31",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low31.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1238720448,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low32",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low32.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 224919178,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low33",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low33.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1519704549,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall1_low1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall1_low1.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 760576897,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low9",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low9.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 421542359,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low43",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low43.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1716188488,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low44",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low44.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 952744334,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low13",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low13.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 395447961,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low22",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low22.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1636137815,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low7",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low7.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 713191950,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low17",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low17.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 318669475,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low2.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1534574253,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low1.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 835947250,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low2.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1892768043,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low3.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 886416220,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low19",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low19.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1982155152,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low27",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low27.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1295363719,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low23",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low23.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 209504714,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall2_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall2_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1781451286,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low26",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low26.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1441093949,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall3_low1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall3_low1.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 878158275,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low8",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low8.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 133859896,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low16",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low16.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1535026155,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low18",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low18.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 703283800,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall4_low2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall4_low2.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 320179169,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall2_low1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall2_low1.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1650192766,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall4_low1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall4_low1.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1094010329,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low8",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low8.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 450453537,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low19",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low19.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2053659938,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low1.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1958647005,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low21",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low21.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1121404591,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall4_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall4_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 530063549,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low9",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low9.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1655182543,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low21",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.07801549881696701,
+                        0,
+                        0.99695217609405518
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low21.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1508301965,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall1_low2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall1_low2.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 660268296,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low17",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low17.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2068466276,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low3.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1018462086,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low4.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2088023522,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1259901459,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 438741496,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low37",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low37.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1838097609,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low38",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low38.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 812600011,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low30",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low30.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1982694171,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low36",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low36.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1188964882,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low35",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low35.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 477666857,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low34",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low34.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2138380204,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low13",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low13.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1157509667,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low15",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low15.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 170930208,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low14",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low14.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1377018425,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low23",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low23.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 382362930,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low24",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low24.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 63309619,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium2_low18",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium2_low18.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1395829572,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low41",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low41.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1139226298,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall1_low3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall1_low3.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 943123673,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low39",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low39.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 334516623,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low40",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low40.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1834266218,
+            "Parent UUID": 229908290,
+            "Name": "RockSmall3_low2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockSmall3_low2.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1324729851,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low42",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low42.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 713546824,
+            "Parent UUID": 229908290,
+            "Name": "RockMedium1_low45",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Level1_VS2__RockMedium1_low45.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockMedium_BaseColor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
             ]
         }

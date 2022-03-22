@@ -17,7 +17,7 @@ namespace AnimationImporter
 	void ImportAnimation2(std::string& path, const aiScene* scene, const aiAnimation* animation, JsonParsing& json, std::vector<uint>& uids, std::map<std::string, BoneInfo>& bones);
 	void SaveAnimation2(std::string& name, float duration, float ticksPerSecond, std::vector<BoneData>& boneData, HierarchyData& hierData);
 	void LoadAnimation2(const char* path, float& ticks, float& ticksPerSecond, std::vector<Bone> &boneVector, HierarchyData& hierData);
-	void ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bonesData, int count);
+	void ReadHierarchyData(HierarchyData& data, aiNode* node, std::vector<BoneData>& bonesData, int count, int index = 0);
 	void SaveHierarchyData(HierarchyData& data, JsonParsing& node);
 	void LoadHierarchyData(HierarchyData& data, JsonParsing& node);
 
@@ -32,6 +32,7 @@ namespace AnimationImporter
 	void ImportBones(std::string& path, aiBone* bone, JsonParsing& json, std::vector<uint>& uids, std::vector<unsigned int>& bonesUid);
 	void CreateMetaBones(std::string& library, std::string& assets, uint uid);
 	void SaveBone(std::string& name, unsigned int numWeights, float* pos, float* rot, float* scale, std::vector<Weight>& weights);
+	void FilterBones(std::vector<BoneData>& bones);
 }
 
 

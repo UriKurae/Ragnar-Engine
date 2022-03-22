@@ -5,14 +5,16 @@
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleNavMesh.h"
 #include "ModuleUI.h"
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
+#include "NavAgentComponent.h"
 
 #include "ResourceManager.h"
+#include "Scene.h"
 #include "Shader.h"
 #include "Lights.h"
 #include "Framebuffer.h"
@@ -172,7 +174,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	grid.axis = true;
 
 	dirLight = new DirectionalLight();
-	goDirLight = app->scene->CreateGameObject(0);
+	goDirLight = app->sceneManager->GetCurrentScene()->CreateGameObject(0);
 	goDirLight->SetName("Directional Light");
 
 	TransformComponent* tr = goDirLight->GetComponent<TransformComponent>();
@@ -209,7 +211,7 @@ bool ModuleRenderer3D::PostUpdate()
 	if(drawGrid) grid.Render();
 
 	// TODO: wtf quadtree man.
-	app->scene->GetQuadtree().Intersect(objects, app->scene->mainCamera);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
 
 	if (rayCast)
 	{
@@ -235,16 +237,15 @@ bool ModuleRenderer3D::PostUpdate()
 	}
 	else
 	{
-		app->scene->Draw();
+		app->sceneManager->GetCurrentScene()->Draw();
 	}
 
 	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
 	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
 
-		Pathfinder* pathfinding = app->navMesh->GetPathfinding();
-		for (int i = 0; i < pathfinding->agents.size(); i++)
-			pathfinding->RenderPath(app->navMesh->GetPathfinding()->agents[i]);
+		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
+			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
 	}
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
@@ -272,11 +273,11 @@ bool ModuleRenderer3D::PostUpdate()
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	PushCamera(app->scene->mainCamera->matrixProjectionFrustum, app->scene->mainCamera->matrixViewFrustum);
+	PushCamera(app->sceneManager->GetCurrentScene()->mainCamera->matrixProjectionFrustum, app->sceneManager->GetCurrentScene()->mainCamera->matrixViewFrustum);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw(app->scene->mainCamera);
+		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
 
 	glMatrixMode(GL_PROJECTION);

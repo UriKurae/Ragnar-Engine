@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 
@@ -131,8 +132,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		texture->Bind();
 	shader->Use();
 
-	CameraComponent* cam = app->scene->camera->GetComponent<CameraComponent>();
-	
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 
 	if (theButton)
 	{
@@ -368,7 +368,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	
 	shader->Use();
 	Frustum frustum;
-	CameraComponent* camera= app->scene->camera->GetComponent<CameraComponent>();
+	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 	
 	frustum.pos = camera->GetFrustum()->pos;
 	
@@ -441,8 +441,9 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	
-		CameraComponent* camera = app->scene->camera->GetComponent<CameraComponent>();
+	/*if (app->gameMode)
+	{*/
+		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
@@ -465,18 +466,19 @@ bool ModuleUI::PreUpdate(float dt)
 // Check if mouse is hovered on some object UI
 void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
 {
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
 		ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
 
 		float3 position = transform2D->GetPosition();
 		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
-		float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
-		float posYMin = ((viewport.w / 2) + (-position.y)) - (button->GetButtonHeight() / 2);
-		float posYMax = ((viewport.w / 2) + (-position.y)) + (button->GetButtonHeight() / 2);
+		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
+		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
+
+		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
+		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
 
 		ImageComponent* image = nullptr;
 		image = go->GetComponent<ImageComponent>();
@@ -492,7 +494,7 @@ void ModuleUI::SetFocusedObject()
 	if (hitObjs.size() > 0)
 	{
 		std::vector<float> distance;
-		float nearestDistance = 100000.0f;
+		float nearestDistance = -100000.0f;
 		int nearObj = 0;
 		for (int i = 0; i < hitObjs.size(); ++i)
 		{
@@ -500,7 +502,7 @@ void ModuleUI::SetFocusedObject()
 
 			float3 position = transform2D->GetPosition();
 			distance.push_back(position.z);
-			if (distance[i] < nearestDistance)
+			if (distance[i] > nearestDistance)
 			{
 				nearestDistance = distance[i];
 				nearObj = i;

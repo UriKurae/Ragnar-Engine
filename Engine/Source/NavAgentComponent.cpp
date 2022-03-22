@@ -11,19 +11,11 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 	agentProperties = new NavAgent;
 
 	pathfinding = app->navMesh->GetPathfinding();
-	pathfinding->agents.push_back(this);
 }
 
 NavAgentComponent::~NavAgentComponent()
 {
-	for (std::vector<NavAgentComponent*>::iterator it = pathfinding->agents.begin(); it != pathfinding->agents.end(); ++it)
-	{
-		if (*it == this)
-		{
-			pathfinding->agents.erase(it);
-			break;
-		}
-	}
+	if (pathfinding->player == this) pathfinding->player = nullptr;
 
 	agentProperties->path.clear();
 	RELEASE(agentProperties);
@@ -46,10 +38,10 @@ void NavAgentComponent::OnEditor()
 		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::PushItemWidth(180);
-		ImGui::DragFloat("Agent Radius", &agentProperties->radius, 0.1f);
-		ImGui::DragFloat("Agent Height", &agentProperties->height, 0.1f);
-		ImGui::DragFloat("Stop Height", &agentProperties->maxClimb, 0.1f);
-		ImGui::DragInt("Max Slope", &agentProperties->maxSlope, 1);
+		ImGui::DragFloat("Agent Radius", &agentProperties->radius, 0.1f, 0.f);
+		ImGui::DragFloat("Agent Height", &agentProperties->height, 0.1f, 0.f);
+		ImGui::DragFloat("Stop Height", &agentProperties->maxClimb, 0.1f, 0.f);
+		ImGui::DragInt("Max Slope", &agentProperties->maxSlope, 1, 0);
 		ImGui::PopItemWidth();
 		ImGui::Dummy({ 0,10 });
 
@@ -57,10 +49,10 @@ void NavAgentComponent::OnEditor()
 		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::PushItemWidth(180);
-		ImGui::DragFloat("Speed", &agentProperties->speed, 0.1f);
-		ImGui::DragFloat("Angular Speed", &agentProperties->angularSpeed, 0.1f);
-		ImGui::DragFloat("Acceleration", &agentProperties->acceleration, 0.1f);
-		ImGui::DragFloat("Stopping Distance", &agentProperties->stoppingDistance, 0.1f);
+		ImGui::DragFloat("Speed", &agentProperties->speed, 0.1f,0.f);
+		ImGui::DragFloat("Angular Speed", &agentProperties->angularSpeed, 1.f,0.f);
+		ImGui::DragFloat("Acceleration", &agentProperties->acceleration, 0.1f,0.f);
+		ImGui::DragFloat("Stopping Distance", &agentProperties->stoppingDistance, 0.1f,0.f);
 		ImGui::PopItemWidth();
 		ImGui::Dummy({ 0,10 });
 
@@ -72,8 +64,38 @@ void NavAgentComponent::OnEditor()
 		ImGui::SameLine();
 		if (ImGui::RadioButton("Straight Path", agentProperties->pathType == PathType::STRAIGHT))
 			agentProperties->pathType = PathType::STRAIGHT;
+		ImGui::Dummy({ 0,10 });
 
-		ImGui::Spacing();
+		//TODO: Hacer ma bonico
+		std::string name;
+		switch (agentProperties->AgentType)
+		{
+			case AgentType::ENEMY:
+				name = "Enemy";
+				break;
+			case AgentType::CHARACTER_1:
+				name = "Character 1";
+				break;
+		}
+		ImGui::Text("Agent Type"); ImGui::SameLine;
+		if (ImGui::BeginCombo("##AgentType", name.c_str()))
+		{
+			if (ImGui::Selectable("Enemy"))
+			{
+				agentProperties->AgentType = AgentType::ENEMY;
+				if (pathfinding->player == this) pathfinding->player = nullptr;
+			}
+
+			if (pathfinding->player == nullptr && ImGui::Selectable("Character 1"))
+			{
+				agentProperties->AgentType = AgentType::CHARACTER_1;
+				pathfinding->player = this;
+			}
+
+			ImGui::EndCombo();
+		}
+		ImGui::Dummy({ 0,10 });
+
 		ComponentOptions(this);
 	}
 	ImGui::PopID();
@@ -82,6 +104,8 @@ void NavAgentComponent::OnEditor()
 bool NavAgentComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
+
+	if (node.GetJsonBool("TargetSet") == true) pathfinding->player = this;
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
 	agentProperties->height = node.GetJsonNumber("Height");
@@ -130,6 +154,8 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	if (pathfinding->player == this) file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", true);
+	else file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", false);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", (float)agentProperties->radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", (float)agentProperties->height);

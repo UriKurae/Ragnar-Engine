@@ -3,7 +3,9 @@
 #include "Globals.h"
 #include "ParticleSystemComponent.h"
 
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+
 #include "GL/glew.h"
 
 #include "C_RigidBody.h"
@@ -37,11 +39,15 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 
 GameObject::~GameObject()
 {
+	AABB aabb;
+	aabb.SetNegativeInfinity();
+	if (!globalAabb.Equals(aabb) && (GetComponent<MeshComponent>() || GetComponent<ScriptComponent>()))
+		app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
+
 	for (int i = 0; i < components.size(); ++i)
 	{
 		RELEASE(components[i]);
-		if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
-			app->scene->GetQuadtree().Remove(this);
+		
 	}
 	components.clear();
 
@@ -251,7 +257,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::CAMERA:
 		component = new CameraComponent(this, GetComponent<TransformComponent>());
-		app->scene->SetMainCamera((CameraComponent*)component);
+		app->sceneManager->GetCurrentScene()->SetMainCamera((CameraComponent*)component);
 		break;
 	case ComponentType::AUDIO_SOURCE:
 		component = new AudioSourceComponent(this, GetComponent<TransformComponent>());
@@ -311,8 +317,6 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		component = new BillboardParticleComponent(this, transform);
 		break;
 	case ComponentType::TRANFORM2D:
-		//CameraComponent* camera = app->scene->mainCamera;
-		//component = new ComponentTransform2D(float3{ camera->GetFrustum()->pos.x,camera->GetFrustum()->pos.y,camera->GetFrustum()->pos.z }, float3{ 300,100,1 }, float3{ 0,0,0 }, this);
 		component = new ComponentTransform2D(this);
 		break;
 	}
@@ -341,7 +345,7 @@ void GameObject::RemoveComponent(Component* component)
 			components.erase(it);
 			RELEASE(component);
 			if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
-				app->scene->GetQuadtree().Remove(this);
+				app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
 			break;
 		}
 	}
