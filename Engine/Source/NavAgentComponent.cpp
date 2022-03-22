@@ -146,6 +146,8 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 		}
 	}
 
+	agentProperties->AgentType = (AgentType)(int)node.GetJsonNumber("AgentType");
+
 	return true;
 }
 
@@ -194,6 +196,7 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	}
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AgentType", (int)agentProperties->AgentType);
 
 	node.SetValueToArray(array, file.GetRootValue());
 	
