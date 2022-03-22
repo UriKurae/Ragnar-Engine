@@ -33,7 +33,7 @@ public class Player : RagnarComponent
         if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
             || Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            gameObject.GetComponent<AudioSource>().PlayClip("FootSteps");
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         }
 
@@ -46,7 +46,7 @@ public class Player : RagnarComponent
         // Shoot sound
         if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
         {
-            //gameObject.GetComponent<AudioSource>().PlayClip("Shot");
+            gameObject.GetComponent<AudioSource>().PlayClip("Shot");
             gameObject.GetComponent<Animation>().PlayAnimation("Shoot");
         }
         //////////////////////////
@@ -121,6 +121,8 @@ public class Player : RagnarComponent
     {
         if (other.gameObject.name == "EnemyBullet")
         {
+            //TODO_AUDIO
+            gameObject.GetComponent<AudioSource>().PlayClip("PlayerDeath");
             gameObject.GetComponent<Animation>().PlayAnimation("Death");
             pendingToDelete = true;
             // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER
