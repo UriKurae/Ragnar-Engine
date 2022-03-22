@@ -19,6 +19,7 @@ public class Player : RagnarComponent
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
+        gameObject.GetComponent<AudioSource>().PlayClip("Level1BgMusic");
     }
 
     public void Update()
@@ -46,7 +47,6 @@ public class Player : RagnarComponent
         // Shoot sound
         if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Shot");
             gameObject.GetComponent<Animation>().PlayAnimation("Shoot");
         }
         //////////////////////////

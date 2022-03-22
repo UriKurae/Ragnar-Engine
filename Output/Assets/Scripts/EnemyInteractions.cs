@@ -60,6 +60,7 @@ public class EnemyInteraction : RagnarComponent
     {
         if (other.gameObject.name == "Knife")
         {
+            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
             pendingToDelete = true;               
         }
     }
