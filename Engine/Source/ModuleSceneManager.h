@@ -53,6 +53,7 @@ public:
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
+	inline void Exit() { exit = true; }
 
 	void Play();
 	void Stop();
@@ -69,7 +70,7 @@ private:
 	int index;
 	int lastIndex;
 	bool changeScene;
-
+	bool exit;
 	GameState gameState;
 	GameTimer gameTimer;
 	bool frameSkip;

@@ -166,6 +166,7 @@ bool MonoManager::Init(JsonParsing& node)
 	// Scene Manager =============
 	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::Exit", Exit);
 	// Scene Manager =============
 
 	// UI =======================

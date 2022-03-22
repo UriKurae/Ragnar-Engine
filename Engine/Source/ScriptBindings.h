@@ -411,6 +411,11 @@ void LoadScene(MonoString* string)
 	app->sceneManager->NextScene(name);
 }
 
+void Exit()
+{
+	app->sceneManager->Exit();
+}
+
 MonoObject* GetRegionGame()
 {
 	float4 vec4(app->editor->GetGameView()->GetBounds());

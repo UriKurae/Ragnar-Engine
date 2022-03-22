@@ -39,7 +39,7 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 
 ComponentTransform2D::~ComponentTransform2D()
 {
-	app->userInterface->DeleteUIGameObjects(owner);
+	//app->userInterface->DeleteUIGameObjects(owner);
 }
 
 bool ComponentTransform2D::Update(float dt)

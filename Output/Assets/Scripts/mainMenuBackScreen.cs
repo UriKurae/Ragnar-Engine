@@ -13,7 +13,8 @@ public class mainMenuBackScreen : RagnarComponent
 	void PlayButtonAction()
 	{
 		GameObject start = GameObject.Find("ButtonStart");
-		switch (start.CreateComponent<UIButton>().GetButtonState())
+		int a = start.GetComponent<UIButton>().GetButtonState();
+		switch (a)
 		{
 			case 0:
 				// disabled Mode
@@ -34,9 +35,7 @@ public class mainMenuBackScreen : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				imagePos.Set(0.0f, -100.5f, 84.5f);
-				start.GetComponent<Transform2D>().position2D = imagePos;
-
+				SceneManager.NextScene();
 				//cambiar de escena
 				break;
 		}
@@ -44,7 +43,8 @@ public class mainMenuBackScreen : RagnarComponent
 	void ExitButtonAction()
 	{
 		GameObject exit = GameObject.Find("ButtonExit");
-		switch (exit.CreateComponent<UIButton>().GetButtonState())
+		int a = exit.GetComponent<UIButton>().GetButtonState();
+		switch (a)
 		{
 			case 0:
 				// disabled Mode
@@ -64,7 +64,8 @@ public class mainMenuBackScreen : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-
+				isFirstE = true;
+				SceneManager.Exit();
 				//salir del Juego
 				break;
 		}
@@ -85,9 +86,9 @@ public class mainMenuBackScreen : RagnarComponent
 	{
         //button start
 
-        //PlayButtonAction();
-        ////button exit
-        //ExitButtonAction();
+        PlayButtonAction();
+        //////button exit
+        ExitButtonAction();
         //image back
         BackgroundImageAction();
 
