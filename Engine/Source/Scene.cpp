@@ -326,8 +326,11 @@ void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 	gameObj->SetParent(go);
 	go->AddChild(gameObj);
 
-	gameObj->GetComponent<TransformComponent>()->NewAttachment();
-	gameObj->GetComponent<TransformComponent>()->SetAABB();
+	if (TransformComponent* trans = gameObj->GetComponent<TransformComponent>())
+	{
+		trans->NewAttachment();
+		trans->SetAABB();
+	}	
 }
 
 void Scene::Load()
