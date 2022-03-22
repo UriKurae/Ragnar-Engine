@@ -44,9 +44,10 @@ public class Player : RagnarComponent
         }
 
         // Shoot sound
-        if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Shot");
+            //gameObject.GetComponent<AudioSource>().PlayClip("Shot");
+            gameObject.GetComponent<Animation>().PlayAnimation("Shoot");
         }
         //////////////////////////
 
