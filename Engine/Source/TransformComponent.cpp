@@ -218,7 +218,7 @@ void TransformComponent::SetAABB()
 	for (int i = 0; i < goList.size(); ++i)
 	{
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
-		tr->SetAABB();
+		if(tr) tr->SetAABB();
 	}
 
 	UpdateBoundingBox();

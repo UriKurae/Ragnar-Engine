@@ -55,7 +55,7 @@ public class pauseMenuButton : RagnarComponent
 			}
 		}
 
-		if (Input.GetKey(KeyCode.P) == KeyState.KEY_DOWN)
+		if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
 		{
 			if (isSowing)
 			{

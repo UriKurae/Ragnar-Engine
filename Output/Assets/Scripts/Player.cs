@@ -31,12 +31,12 @@ public class Player : RagnarComponent
 
         ///////// SOUNDS /////////
         // Movement Sound
-        if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
+       /* if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
             || Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
         {
             gameObject.GetComponent<AudioSource>().PlayClip("FootSteps");
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-        }
+        }*/
 
         // Reload Sound
         if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
@@ -66,7 +66,7 @@ public class Player : RagnarComponent
                 rb.ClearForces();
         }
         // WASD Movement
-        if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
+        /*if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
         {
             Vector3 f = new Vector3(0, 0, velocity);
             rb.ApplyCentralForce(f);
@@ -85,7 +85,7 @@ public class Player : RagnarComponent
         {
             Vector3 f = new Vector3(-velocity, 0, 0);
             rb.ApplyCentralForce(f);
-        }
+        }*/
 
         // Crouch
         if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)

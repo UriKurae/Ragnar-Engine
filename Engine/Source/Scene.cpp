@@ -424,25 +424,26 @@ bool Scene::LoadScene(const char* assetsName)
 				}
 			}
 		}
-		for (auto i = app->sceneManager->referenceMap.begin(); i != app->sceneManager->referenceMap.end(); ++i)
-		{
-			// Get the range of the current key
-			auto range = app->sceneManager->referenceMap.equal_range(i->first);
+		// TODO: This has been comented to avoid potential crash on release. Will need to be used in the future, so dont delete.
+		//for (auto i = app->sceneManager->referenceMap.begin(); i != app->sceneManager->referenceMap.end(); ++i)
+		//{
+		//	// Get the range of the current key
+		//	auto range = app->sceneManager->referenceMap.equal_range(i->first);
 
-			// Now render out that whole range
-			for (auto d = range.first; d != range.second; ++d)
-			{
-				d->second->fiValue.goValue = GetGoByUuid(d->first);
+		//	// Now render out that whole range
+		//	for (auto d = range.first; d != range.second; ++d)
+		//	{
+		//		d->second->fiValue.goValue = GetGoByUuid(d->first);
 
-				if (d->second->fiValue.goValue)
-				{
-					if (std::find(d->second->fiValue.goValue->csReferences.begin(), d->second->fiValue.goValue->csReferences.end(), d->second) == d->second->fiValue.goValue->csReferences.end())
-						d->second->fiValue.goValue->csReferences.push_back(d->second);
+		//		if (d->second->fiValue.goValue)
+		//		{
+		//			if (std::find(d->second->fiValue.goValue->csReferences.begin(), d->second->fiValue.goValue->csReferences.end(), d->second) == d->second->fiValue.goValue->csReferences.end())
+		//				d->second->fiValue.goValue->csReferences.push_back(d->second);
 
-					d->second->parentSC->SetField(d->second->field, d->second->fiValue.goValue);
-				}
-			}
-		}
+		//			d->second->parentSC->SetField(d->second->field, d->second->fiValue.goValue);
+		//		}
+		//	}
+		//}
 		app->physics->LoadConstraints();
 	}
 	else
