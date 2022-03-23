@@ -5,7 +5,17 @@
             "Actions": [
                 {
                     "Name": "Move",
-                    "Bindings": []
+                    "Bindings": [
+                        {
+                            "Path": 5
+                        }
+                    ]
+                },
+                {
+                    "Name": "Move",
+                    "Bindings": [
+                        {}
+                    ]
                 }
             ]
         }

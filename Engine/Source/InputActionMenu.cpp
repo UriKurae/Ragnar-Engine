@@ -79,27 +79,31 @@ void InputActionMenu::ColumnProperties()
 	ImGui::BeginChild("Properties");
 	ImGui::Text("Properties");
 	ImGui::Separator();
-	ImGui::Text("Binding: %s", currentBindingItem);
-	ImGui::Text("Path: ");
-	ImGui::SameLine();
-	if (ImGui::BeginCombo("##combo", currentBindingItem))
+	if (actionMaps.at(currentMap).get()->GetActions()->at(currentAction).get()->GetBindings() != nullptr)
 	{
-		for (int n = 0; n < IM_ARRAYSIZE(app->input->keyNameList); n++)
+		ImGui::Text("Binding: %s", currentBindingItem);
+		ImGui::Text("Path: ");
+		ImGui::SameLine();
+		if (ImGui::BeginCombo("##combo", currentBindingItem))
 		{
-			if ((app->input->keyNameList[n] != NULL) && (app->input->keyNameList[n][0] != '\0'))
+			for (int n = 0; n < IM_ARRAYSIZE(app->input->keyNameList); n++)
 			{
-				bool is_selected = (currentBindingItem == app->input->keyNameList[n]);
-				if (ImGui::Selectable(app->input->keyNameList[n], is_selected))
+				if ((app->input->keyNameList[n] != NULL) && (app->input->keyNameList[n][0] != '\0'))
 				{
-					currentBindingItem = app->input->keyNameList[n];
-					actionMaps[currentMap].get()->GetActions()[currentAction].at(currentAction).get()->SetBinding(currentBinding, n);
+					bool is_selected = (currentBindingItem == app->input->keyNameList[n]);
+					if (ImGui::Selectable(app->input->keyNameList[n], is_selected))
+					{
+						currentBindingItem = app->input->keyNameList[n];
+						actionMaps.at(currentMap).get()->GetActions()->at(currentAction).get()->SetBinding(currentBinding, n);
+					}
+					if (is_selected)
+						ImGui::SetItemDefaultFocus();
 				}
-				if (is_selected)
-					ImGui::SetItemDefaultFocus();
 			}
+			ImGui::EndCombo();
 		}
-		ImGui::EndCombo();
 	}
+	
 	ImGui::EndChild();
 }
 
@@ -146,11 +150,21 @@ void InputActionMenu::ColumnActions()
 		{
 			for (size_t j = 0; j < actionMaps[currentMap].get()->GetActions()->at(i).get()->GetBindings()->size(); j++)
 			{
+				ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding;
+				if (actionMaps.at(currentMap).get()->GetActions()->at(currentAction) == actionMaps.at(currentMap).get()->GetActions()->at(i))
+				{
+					if (actionMaps.at(currentMap).get()->GetActions()->at(currentAction).get()->GetBindings()->at(currentBinding) == actionMaps.at(currentMap).get()->GetActions()->at(i).get()->GetBindings()->at(j))
+					{
+						flags |= ImGuiTreeNodeFlags_Selected;
+					}
+				}
+				
 				ImGui::TreeNodeEx(SDL_GetScancodeName((SDL_Scancode)actionMaps[currentMap].get()->GetActions()->at(i).get()->GetBindings()->at(j)),
-					(actionMaps[currentMap].get()->GetActions()->at(i).get()->GetBindings()[currentBinding] == actionMaps[currentMap].get()->GetActions()->at(i).get()->GetBindings()[j] ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_FramePadding);
+					flags);
 
 				if (ImGui::IsItemClicked())
 				{
+					currentAction = i;
 					currentBinding = j;
 				}
 				ImGui::TreePop();
@@ -276,10 +290,13 @@ void Actions::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Bindings");
+
+	JsonParsing newFile = JsonParsing();
 	for (int i = 0; i < bindings.size(); i++)
 	{
-		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Path", bindings[i]);
+		newFile.SetNewJsonNumber(newFile.ValueToObject(newFile.GetRootValue()), "Path", bindings[i]);
 	}
+	node.SetValueToArray(newArray, newFile.GetRootValue());
 
 	node.SetValueToArray(array, file.GetRootValue());
 }
@@ -287,6 +304,14 @@ void Actions::OnSave(JsonParsing& node, JSON_Array* array)
 void Actions::OnLoad(JsonParsing& node)
 {
 	name = node.GetJsonString("Name");
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Bindings");
+	size_t size = node.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing c = node.GetJsonArrayValue(jsonArray, i);
+		bindings.push_back(c.GetJsonNumber("Path"));
+	}
 }
 
 ActionMaps::ActionMaps()

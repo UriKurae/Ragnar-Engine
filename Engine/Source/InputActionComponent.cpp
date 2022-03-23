@@ -98,6 +98,20 @@ bool InputActionComponent::Update(float dt)
 
 bool InputActionComponent::OnLoad(JsonParsing& node)
 {
+	currentActionMaps.clear();
+
+	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Action Maps");
+
+	size_t size = node.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing go = node.GetJsonArrayValue(jsonArray, i);
+		std::shared_ptr<ActionMaps> aM(new ActionMaps());
+		aM->OnLoad(go);
+		currentActionMaps.push_back(aM);
+	}
+	currentAssetName = node.GetJsonString("Path");
+
 	return false;
 }
 
@@ -106,12 +120,12 @@ bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	JSON_Array* array = file.SetNewJsonArray(file.GetRootValue(), "Action Maps");
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Action Maps");
 	for (int i = 0; i < currentActionMaps.size(); i++)
 	{
-		currentActionMaps[i]->OnSave(file, array);
+		currentActionMaps[i]->OnSave(file, newArray);
 	}
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Asset Path", currentAssetName.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", currentAssetPath.c_str());
 
 	node.SetValueToArray(array, file.GetRootValue());
 
@@ -136,7 +150,9 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 			aM->OnLoad(go);
 			currentActionMaps.push_back(aM);
 		}
+		currentAssetPath = path;
 		currentAssetName = path;
+		app->fs->GetFilenameWithExtension(currentAssetName);
 	}
 	else
 	{
