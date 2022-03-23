@@ -50,21 +50,24 @@ void MeshComponent::Draw(CameraComponent* gameCam)
 
 void MeshComponent::DrawOutline()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (mesh)
+	{
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	float4x4 testGlobal;
-	testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
+		glPushMatrix();
+		float4x4 testGlobal;
+		testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
 
-	glMultMatrixf(testGlobal.Transposed().ptr());
+		glMultMatrixf(testGlobal.Transposed().ptr());
 
-	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+		mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
-	glPopMatrix();
-	
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glPopMatrix();
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
 }
 
 void MeshComponent::OnEditor()

@@ -2,7 +2,6 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "TextureImporter.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "MonoManager.h"

@@ -1,8 +1,8 @@
 #include "NavAgentComponent.h"
 #include "Application.h"
 #include "Globals.h"
-#include "GameObject.h"
 
+#include "GameObject.h"
 #include "ModuleNavMesh.h"
 
 NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()

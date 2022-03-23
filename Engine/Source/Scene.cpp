@@ -2,29 +2,20 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleRenderer3D.h"
-#include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleUI.h"
 #include "Physics3D.h"
 #include "ModuleSceneManager.h"
 
-#include "MeshImporter.h"
 #include "FileSystem.h"
 
-#include "Resource.h"
 #include "ResourceManager.h"
-#include "MonoManager.h"
 #include "AudioManager.h"
 
 //Scripting
-#include "NavAgentComponent.h"
 
-#include "ScriptComponent.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
-#include "AudioSourceComponent.h"
-#include "AnimationComponent.h"
 
 #include <stack>
 #include "Profiling.h"

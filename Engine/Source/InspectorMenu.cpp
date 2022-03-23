@@ -5,8 +5,6 @@
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 
-#include "Resource.h"
-
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
 

@@ -68,9 +68,6 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	aabb.SetNegativeInfinity();
-	aabb.Enclose((float3*)vertices.data(), (size_t)vertices.size());
-
 	std::string vertexSource = R"(
 		#version 430 core
 		layout(location = 0) in vec3 position;

@@ -3,9 +3,6 @@
 #include "Recast/Recast.h"
 #include "Detour/DetourNavMesh.h"
 #include "Detour/DetourNavMeshQuery.h"
-#include "InputGeom.h"
-
-#include "MathGeoLib.h"
 
 #define MAX_POLYS 256
 #define MAX_SMOOTH 2048

@@ -1,22 +1,16 @@
-#include <Globals.h>
-#include "Application.h"
-#include "ModuleNavMesh.h"
-
-#include "ModuleRenderer3D.h"
 #include "ModuleSceneManager.h"
-#include "Scene.h"
+#include "Application.h"
+#include "Globals.h"
 
+#include "ModuleNavMesh.h"
+#include "ModuleRenderer3D.h"
 #include "ResourceManager.h"
-#include "Resource.h"
 
 #include "FileSystem.h"
-
 #include "MeshImporter.h"
-#include "Bone.h"
 #include "Primitives.h"
-
-#include "MonoManager.h"
-#include "ScriptComponent.h"
+#include "Scene.h"
+#include "Bone.h"
 
 #include "Profiling.h"
 

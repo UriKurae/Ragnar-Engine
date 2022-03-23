@@ -1,13 +1,11 @@
 #include "GameObject.h"
 #include "Application.h"
 #include "Globals.h"
-#include "ParticleSystemComponent.h"
 
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 
-#include "GL/glew.h"
-
+#include "ParticleSystemComponent.h"
 #include "C_RigidBody.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -27,6 +25,7 @@
 #include"TextComponent.h"
 #include "NavAgentComponent.h"
 
+#include "GL/glew.h"
 #include "Algorithm/Random/LCG.h"
 #include "Profiling.h"
 
@@ -39,19 +38,21 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 
 GameObject::~GameObject()
 {
+	// Delete object from qTree list if this is in the list
 	AABB aabb;
 	aabb.SetNegativeInfinity();
 	if ((!globalAabb.Equals(aabb) && (GetComponent<MeshComponent>() || GetComponent<ScriptComponent>()))
 		&& app->sceneManager->GetCurrentScene()->GetQuadtree().getRoot() != nullptr)
 		app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
 
+	// Delete all components
 	for (int i = 0; i < components.size(); ++i)
 	{
-		RELEASE(components[i]);
-		
+		RELEASE(components[i]);		
 	}
 	components.clear();
 
+	// Recursive Release, delete all childrens
 	for (int i = 0; i < children.size(); ++i)
 	{
 		RELEASE(children[i]);
@@ -97,17 +98,8 @@ void GameObject::Draw(CameraComponent* gameCam)
 
 void GameObject::DrawOutline()
 {
-	for (int i = 0; i < components.size(); ++i)
-	{
-		Component* component = components[i];
-		if (component->GetActive())
-			component->DrawOutline();
-	}
-
-	for (int i = 0; i < children.size(); ++i)
-	{
-		children[i]->DrawOutline();
-	}
+	if(MeshComponent* border = GetComponent<MeshComponent>())
+		border->DrawOutline();
 }
 
 void GameObject::DrawEditor()

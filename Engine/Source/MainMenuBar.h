@@ -5,7 +5,6 @@
 #include <memory>
 
 class ConsoleMenu;
-class TextEditorMenu;
 class Texture;
 class Scene;
 

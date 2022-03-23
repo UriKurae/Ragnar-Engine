@@ -1,12 +1,10 @@
 #pragma once
-
 #include "GameObject.h"
 #include "Quadtree.h"
 
 #include "Resource.h"
 
 #include <vector>
-#include <map>
 
 struct SerializedField;
 
