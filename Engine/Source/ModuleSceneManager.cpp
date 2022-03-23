@@ -48,8 +48,11 @@ bool ModuleSceneManager::Start()
 	LoadBuild();
 
 	referenceMap.clear();
-
+	
+	// DELIVERY!!
+#if 0
 	Play();
+#endif
 
 	return true;
 }

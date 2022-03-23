@@ -24,9 +24,13 @@ void GameView::Draw(Framebuffer* framebuffer)
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.WindowPadding = ImVec2(0.0f, 0.0f);
+	int flags = ImGuiWindowFlags_NoScrollbar;
 
-	int flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
+	// DELIVERY !!
+#if 0
+	 = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
 	flags |= ImGuiWindowFlags_NoScrollbar;
+#endif
 
 	if (ImGui::Begin(ICON_FA_GAMEPAD" Game", &active, flags))
 	{
