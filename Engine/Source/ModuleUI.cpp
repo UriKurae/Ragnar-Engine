@@ -290,7 +290,7 @@ bool ModuleUI::Start()
 	}
 
 	FT_Face face;
-	if (FT_New_Face(ft, "Assets/Resources/Fonts/OpenSans-Bold.ttf", 0, &face))
+	if (FT_New_Face(ft, "Assets/Resources/Fonts/Montserrat-Bold.ttf", 0, &face))
 	{
 		//LOG("ERROR::FREETYPE: Failed to load font");
 		return false;

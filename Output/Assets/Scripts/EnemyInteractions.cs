@@ -20,7 +20,11 @@ public class EnemyInteraction : RagnarComponent
     public void Update()
     {
         Shoot();
-        if (pendingToDelete) InternalCalls.Destroy(gameObject);
+        if (pendingToDelete)
+        {
+            InternalCalls.Destroy(gameObject);
+            SceneManager.LoadScene("WinScene");
+        }
     }
 
     private void Shoot()
@@ -31,6 +35,8 @@ public class EnemyInteraction : RagnarComponent
 
         if (distance < 12.0f && canShoot)
         {
+            //TODO_AUDIO
+            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Shoot");
             canShoot = false;
             shootCooldown = 4f;
             InternalCalls.InstancePrefab("Assets/Prefabs/EnemyBullet.rgprefab");
@@ -54,8 +60,8 @@ public class EnemyInteraction : RagnarComponent
     {
         if (other.gameObject.name == "Knife")
         {
-            pendingToDelete = true;
-            // AÑADIR AQUÍ EL CAMBIO DE ESCENA A VICTORY
+            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
+            pendingToDelete = true;               
         }
     }
 

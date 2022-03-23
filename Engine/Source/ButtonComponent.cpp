@@ -13,7 +13,10 @@
 ButtonComponent::ButtonComponent(GameObject* own)
 {
 	active = true;
-	own->name = "Button";
+	
+	if (own->name == "Game Object") {
+		own->name = "Button";
+	}
 	type = ComponentType::UI_BUTTON;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
 	

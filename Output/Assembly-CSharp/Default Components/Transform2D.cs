@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
-    class Transform2D : RagnarComponent
+    public class Transform2D : RagnarComponent
     {
         public Transform2D(UIntPtr ptr) : base(ptr)
         {

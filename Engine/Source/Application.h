@@ -17,7 +17,7 @@ class ModuleNavMesh;
 class ModuleUI;
 
 #define CONFIG_FILENAME	"config.json"
-#define APPLICATION_NAME "Ragnar Engine"
+#define APPLICATION_NAME "Dune Commandos"
 #define ORGANIZATION_NAME "Yggdrasil Studios"
 
 class Application

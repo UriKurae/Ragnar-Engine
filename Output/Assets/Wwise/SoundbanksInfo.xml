@@ -1,38 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>D:\Descargas\RagnarEngineSound\RagnarEngineSound\</ProjectRoot>
+		<SourceFilesRoot>D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\Github\ProjectIII\Output\Assets\Wwise\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Uri\Documents\WwiseProjects\RagnarEngineSound\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>D:\Descargas\RagnarEngineSound\RagnarEngineSound\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="87917746" Language="SFX" Hash="52207161">
+		<SoundBank Id="87917746" Language="SFX" Hash="1868834749">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine</ObjectPath>
 			<ShortName>ragnarEngine</ShortName>
 			<Path>ragnarEngine.bnk</Path>
 			<IncludedEvents>
-				<Event Id="799949012" Name="ActivateBgMusic" ObjectPath="\Events\Default Work Unit\ActivateBgMusic">
+				<Event Id="2769082178" Name="Enemy1Death" ObjectPath="\Events\Default Work Unit\Enemy1Death">
 					<IncludedMemoryFiles>
-						<File Id="192247659" Language="SFX">
-							<ShortName>oriol.wav</ShortName>
-							<Path>SFX\oriol_10C4C929.wem</Path>
-						</File>
-						<File Id="919001556" Language="SFX">
-							<ShortName>lucas.wav</ShortName>
-							<Path>SFX\lucas_10C4C929.wem</Path>
+						<File Id="793852379" Language="SFX">
+							<ShortName>nme_enemy1_death_sand_sfx.wav</ShortName>
+							<Path>SFX\nme_enemy1_death_sand_sfx_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="2385628198" Name="footSteps" ObjectPath="\Events\Default Work Unit\footSteps">
+				<Event Id="1506077633" Name="Enemy1Shoot" ObjectPath="\Events\Default Work Unit\Enemy1Shoot">
+					<IncludedMemoryFiles>
+						<File Id="341785350" Language="SFX">
+							<ShortName>nme_enemy1_shoot_sfx.wav</ShortName>
+							<Path>SFX\nme_enemy1_shoot_sfx_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2385628198" Name="FootSteps" ObjectPath="\Events\Default Work Unit\FootSteps">
 					<IncludedMemoryFiles>
 						<File Id="1011617347" Language="SFX">
 							<ShortName>footsteps.wav</ShortName>
 							<Path>SFX\footsteps_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1286730336" Name="Level1BgCombatMusic" ObjectPath="\Events\Default Work Unit\Level1BgCombatMusic">
+					<IncludedMemoryFiles>
+						<File Id="988044120" Language="SFX">
+							<ShortName>level1_combat_music.wav</ShortName>
+							<Path>SFX\level1_combat_music_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1040789284" Name="Level1BgMusic" ObjectPath="\Events\Default Work Unit\Level1BgMusic">
+					<IncludedMemoryFiles>
+						<File Id="470470188" Language="SFX">
+							<ShortName>level1_music.wav</ShortName>
+							<Path>SFX\level1_music_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2739288618" Name="MenuBgMusic" ObjectPath="\Events\Default Work Unit\MenuBgMusic">
+					<IncludedMemoryFiles>
+						<File Id="689931038" Language="SFX">
+							<ShortName>mainmenu_music.wav</ShortName>
+							<Path>SFX\mainmenu_music_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1656947812" Name="PlayerDeath" ObjectPath="\Events\Default Work Unit\PlayerDeath">
+					<IncludedMemoryFiles>
+						<File Id="248508106" Language="SFX">
+							<ShortName>char_paulatreides_death_sand_sfx.wav</ShortName>
+							<Path>SFX\char_paulatreides_death_sand_sfx_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -52,11 +88,23 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="4234860738" Name="ThrowKnife" ObjectPath="\Events\Default Work Unit\ThrowKnife">
+					<IncludedMemoryFiles>
+						<File Id="493101304" Language="SFX">
+							<ShortName>char_paulatreides_throw_knife_sfx.wav</ShortName>
+							<Path>SFX\char_paulatreides_throw_knife_sfx_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2658549256" Name="ThrowRock" ObjectPath="\Events\Default Work Unit\ThrowRock">
+					<IncludedMemoryFiles>
+						<File Id="903503596" Language="SFX">
+							<ShortName>char_paulatreides_throw_rock_sfx.wav</ShortName>
+							<Path>SFX\char_paulatreides_throw_rock_sfx_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 			</IncludedEvents>
-			<GameParameters>
-				<GameParameter Id="1908158473" Name="Pitch" ObjectPath="\Game Parameters\Default Work Unit\Pitch"/>
-				<GameParameter Id="2415836739" Name="Volume" ObjectPath="\Game Parameters\Default Work Unit\Volume"/>
-			</GameParameters>
 		</SoundBank>
 		<SoundBank Id="1355168291" Language="SFX" Hash="3218428019">
 			<ObjectPath>Init</ObjectPath>

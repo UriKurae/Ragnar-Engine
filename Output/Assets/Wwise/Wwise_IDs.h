@@ -13,10 +13,17 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID ACTIVATEBGMUSIC = 799949012U;
+        static const AkUniqueID ENEMY1DEATH = 2769082178U;
+        static const AkUniqueID ENEMY1SHOOT = 1506077633U;
         static const AkUniqueID FOOTSTEPS = 2385628198U;
+        static const AkUniqueID LEVEL1BGCOMBATMUSIC = 1286730336U;
+        static const AkUniqueID LEVEL1BGMUSIC = 1040789284U;
+        static const AkUniqueID MENUBGMUSIC = 2739288618U;
+        static const AkUniqueID PLAYERDEATH = 1656947812U;
         static const AkUniqueID RELOAD = 456382354U;
         static const AkUniqueID SHOT = 251412229U;
+        static const AkUniqueID THROWKNIFE = 4234860738U;
+        static const AkUniqueID THROWROCK = 2658549256U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS

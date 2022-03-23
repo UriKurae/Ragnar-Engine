@@ -1,5 +1,6 @@
 #include <Globals.h>
 #include "Application.h"
+#include "ModuleNavMesh.h"
 
 #include "ModuleRenderer3D.h"
 #include "ModuleSceneManager.h"
@@ -24,6 +25,7 @@ ModuleSceneManager::ModuleSceneManager(bool startEnabled) : changeScene(false), 
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
 	AddScene(currentScene);
+	exit = false;
 }
 
 ModuleSceneManager::~ModuleSceneManager()
@@ -46,6 +48,11 @@ bool ModuleSceneManager::Start()
 	LoadBuild();
 
 	referenceMap.clear();
+	
+	// DELIVERY!!
+#if 0
+	Play();
+#endif
 
 	return true;
 }
@@ -68,11 +75,12 @@ bool ModuleSceneManager::Update(float dt)
 		currentScene->Load();
 		newSceneLoaded = true;
 		changeScene = false;
+		app->navMesh->BakeNavMesh();
 	}
 
 	currentScene->Update(gameTimer.GetDeltaTime());
 	
-	return true;
+	return !exit;
 }
 
 bool ModuleSceneManager::PostUpdate()

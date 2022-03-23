@@ -13,5 +13,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static public extern void LoadScene(string name);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static public extern void Exit();
     }
 }

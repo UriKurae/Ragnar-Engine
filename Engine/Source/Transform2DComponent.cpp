@@ -39,7 +39,7 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 
 ComponentTransform2D::~ComponentTransform2D()
 {
-	app->userInterface->DeleteUIGameObjects(owner);
+	//app->userInterface->DeleteUIGameObjects(owner);
 }
 
 bool ComponentTransform2D::Update(float dt)
@@ -55,16 +55,16 @@ bool ComponentTransform2D::Update(float dt)
 	}
 
 	
-	if (lastViewportBounds.w != viewport.w)
-	{
-		//position.y +=(viewport.w - lastViewportBounds.w)/100;
-		
-	}
-	else if (lastViewportBounds.z != viewport.z) 
-	{
-			position.x -=( viewport.z - lastViewportBounds.z)/2;
-		
-	}
+	//if (lastViewportBounds.w != viewport.w)
+	//{
+	//	//position.y +=(viewport.w - lastViewportBounds.w)/100;
+	//	
+	//}
+	//else if (lastViewportBounds.z != viewport.z) 
+	//{
+	//		position.x -=( viewport.z - lastViewportBounds.z)/2;
+	//	
+	//}
 	
 	internalPosition.x = ((position.x)/24) / zoomRatio;
 	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;
