@@ -6,7 +6,6 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
 #include "ModuleSceneManager.h"
-#include "ModuleNavMesh.h"
 #include "ModuleUI.h"
 
 #include "LightComponent.h"
@@ -15,7 +14,6 @@
 
 #include "ResourceManager.h"
 #include "Scene.h"
-#include "Shader.h"
 #include "Lights.h"
 #include "Framebuffer.h"
 #include "NavMeshBuilder.h"
@@ -25,7 +23,6 @@
 #include "Imgui/imgui_impl_opengl3.h"
 #include "Imgui/ImguiStyle.h"
 #include "IL/ilut.h"
-#include "Geometry/LineSegment.h"
 
 #include "Profiling.h"
 
@@ -247,9 +244,6 @@ bool ModuleRenderer3D::PostUpdate()
 		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
 			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
 	}
-
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilMask(0xFF);
 
 	if (stencil && objSelected && objSelected->GetActive())
 	{

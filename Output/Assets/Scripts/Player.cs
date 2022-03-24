@@ -27,20 +27,10 @@ public class Player : RagnarComponent
         if (agent.targetSetted)
         {
             agent.CalculatePath(agent.destination);
-        }
-
-        if(agent.MovePath())
-        {
-            //gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-        }
-        //else gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-
-        //if(agent.destination != gameObject.transform.globalPosition)
-        //    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-
-        if (rb.linearVelocity != new Vector3(0,0,0))
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-        else
+        }
+
+        if (agent.MovePath())
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
 
         ///////// SOUNDS /////////

@@ -2,7 +2,6 @@
 #include "Module.h"
 
 #include "Geometry/LineSegment.h"
-#include "Geometry/AABB.h"
 #include "Math/float2.h"
 #include "Color.h"
 #include <vector>
@@ -45,7 +44,6 @@ public:
     GLuint imageID;
 	float3 position;
 	float3 scale;
-	AABB aabb;
 	unsigned int VBO;
 	unsigned int VAO;
 	//unsigned int EBO;

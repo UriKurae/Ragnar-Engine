@@ -5,7 +5,6 @@
 #include "TransformComponent.h"
 #include "NavAgentComponent.h"
 #include "C_RigidBody.h"
-#include "ModuleNavMesh.h"
 #include "ModuleSceneManager.h"
 #include "MeshComponent.h"
 #include "ModuleInput.h"
@@ -14,13 +13,9 @@
 
 #include "NavMeshBuilder.h"
 #include "DebugUtils/DetourDebugDraw.h"
-#include "Detour/DetourNavMeshBuilder.h"
 #include "Detour/DetourCommon.h"
 #include "DebugUtils/SampleInterfaces.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
-
-#include "Imgui/imgui.h"
-#include "Imgui/imgui_impl_sdl.h"
 
 ModuleNavMesh::ModuleNavMesh(bool start_enabled) : Module(start_enabled),
 geometry(nullptr), navMeshBuilder(nullptr), buildSettings(nullptr), pathfinder(nullptr)

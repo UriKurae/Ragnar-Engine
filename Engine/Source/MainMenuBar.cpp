@@ -24,12 +24,11 @@
 
 #include "TransformComponent.h"
 #include "LightComponent.h"
-
 #include "ButtonComponent.h"
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
 #include "SliderComponent.h"
-#include"TextComponent.h"
+#include "TextComponent.h"
 #include "Transform2DComponent.h"
 
 #include "ResourceManager.h"

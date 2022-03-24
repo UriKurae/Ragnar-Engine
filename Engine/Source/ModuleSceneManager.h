@@ -17,7 +17,6 @@ typedef unsigned int uint;
 
 struct SerializedField;
 class Scene;
-class CameraComponent;
 
 class ModuleSceneManager : public Module
 {

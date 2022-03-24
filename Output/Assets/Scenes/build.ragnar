@@ -95,8 +95,8 @@
                         83.5
                     ],
                     "Scale": [
-                        8.2049989700317383,
-                        1.7282607555389404,
+                        8.4879312515258789,
+                        1.7878559827804565,
                         1
                     ],
                     "rotationEuler": [
@@ -138,8 +138,8 @@
                         83.5
                     ],
                     "Scale": [
-                        6.3299994468688965,
-                        2.8206517696380615,
+                        6.5482759475708008,
+                        2.9179158210754395,
                         1
                     ],
                     "rotationEuler": [
@@ -219,8 +219,8 @@
                         84
                     ],
                     "Scale": [
-                        30.375,
-                        15.786443710327148,
+                        31.422412872314453,
+                        16.330804824829102,
                         1
                     ],
                     "rotationEuler": [
@@ -243,7 +243,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 278187136,
+                    "pointer": 252293576,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -269,8 +269,8 @@
                         88.199996948242188
                     ],
                     "Scale": [
-                        10.845000267028809,
-                        3.8315215110778809,
+                        11.218965530395508,
+                        3.9636428356170654,
                         1
                     ],
                     "rotationEuler": [
@@ -312,8 +312,8 @@
                         90
                     ],
                     "Scale": [
-                        5.0999999046325684,
-                        0.44021737575531006,
+                        5.2758622169494629,
+                        0.45539730787277222,
                         1
                     ],
                     "rotationEuler": [
@@ -378,8 +378,8 @@
                         90
                     ],
                     "Scale": [
-                        5.0999999046325684,
-                        0.44021737575531006,
+                        5.2758622169494629,
+                        0.45539730787277222,
                         1
                     ],
                     "rotationEuler": [
@@ -444,8 +444,8 @@
                         90
                     ],
                     "Scale": [
-                        5.0999999046325684,
-                        0.44021737575531006,
+                        5.2758622169494629,
+                        0.45539730787277222,
                         1
                     ],
                     "rotationEuler": [
@@ -510,8 +510,8 @@
                         84
                     ],
                     "Scale": [
-                        0.59999996423721313,
-                        0.75,
+                        0.62068963050842285,
+                        0.77586203813552856,
                         1
                     ],
                     "rotationEuler": [
@@ -576,8 +576,8 @@
                         84
                     ],
                     "Scale": [
-                        0.64499998092651367,
-                        0.52173906564712524,
+                        0.66724139451980591,
+                        0.53973013162612915,
                         1
                     ],
                     "rotationEuler": [
@@ -675,15 +675,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        11.618462562561035,
+                        2.7341175079345703,
                         11.183857917785645,
-                        -2.9523561000823975
+                        -16.951992034912109
                     ],
                     "Quaternion": [
-                        -0.21939389407634735,
-                        0.85922491550445557,
-                        -0.29567280411720276,
-                        0.35521325469017029
+                        0.30083775520324707,
+                        -0.048138115555047989,
+                        0.38859280943870544,
+                        0.86958324909210205
                     ],
                     "RotationEditor": [
                         0,
@@ -699,15 +699,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.90442204475402832,
+                    "Vertical Fov": 0.94526910781860352,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        11.618462562561035,
+                        2.7341175079345703,
                         11.183857917785645,
-                        -2.9523561000823975
+                        -16.951992034912109
                     ],
                     "Type": 3,
-                    "Zoom": 60,
+                    "Zoom": 58,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -719,7 +719,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 2,
                     "Radius": 20,
-                    "Horizontal Angle": -447.60028076171875,
+                    "Horizontal Angle": -747.60028076171875,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -835,7 +835,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 278187504,
+                    "pointer": 252289360,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -847,7 +847,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 278184744,
+                    "pointer": 252290992,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -1438,7 +1438,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        92.525833129882812,
+                        92.525833129882813,
                         2.2737367544323206e-13,
                         -16.057146072387695
                     ],
@@ -1565,7 +1565,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        21.418655395507812,
+                        21.418655395507813,
                         9.3179587309921708e-13,
                         -51.225345611572266
                     ],
@@ -1801,30 +1801,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -2346,7 +2322,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -63.902603149414062,
+                        -63.902603149414063,
                         -9.0949470177292824e-13,
                         45.437911987304688
                     ],
@@ -2625,7 +2601,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        49.983169555664062,
+                        49.983169555664063,
                         -1.1368683772161603e-13,
                         7.4482307434082031
                     ],
@@ -3328,7 +3304,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        28.489822387695312,
+                        28.489822387695313,
                         1.1368683772161603e-13,
                         -2.9738852977752686
                     ],
@@ -3528,7 +3504,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        71.183181762695312,
+                        71.183181762695313,
                         4.5474735088646412e-13,
                         -31.695037841796875
                     ],
@@ -3735,7 +3711,7 @@
                     "Position": [
                         -67.671066284179688,
                         -2.7284841053187847e-12,
-                        85.158279418945312
+                        85.158279418945313
                     ],
                     "Quaternion": [
                         0,
@@ -4267,7 +4243,7 @@
                     "Position": [
                         1.0848355293273926,
                         -4.5474735088646412e-13,
-                        31.037124633789062
+                        31.037124633789063
                     ],
                     "Quaternion": [
                         0,
@@ -4412,9 +4388,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        34.722244262695312,
+                        34.722244262695313,
                         9.1846300530329383e-13,
-                        -44.113845825195312
+                        -44.113845825195313
                     ],
                     "Quaternion": [
                         0,
@@ -4902,7 +4878,7 @@
                     "Position": [
                         35.914356231689453,
                         -2.2737367544323206e-13,
-                        8.8782119750976562
+                        8.8782119750976563
                     ],
                     "Quaternion": [
                         0,
@@ -5203,7 +5179,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        91.582473754882812,
+                        91.582473754882813,
                         4.5474735088646412e-13,
                         -29.861276626586914
                     ],
@@ -6043,7 +6019,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -35.553298950195312,
+                        -35.553298950195313,
                         -5.6843418860808015e-14,
                         2.5179390907287598
                     ],
@@ -6172,30 +6148,6 @@
                     "Path": "Assets\/Resources\/BlockOut\/Assets&Textures_Vertical2\/Rocks\/TX_RockSmall_BaseColor.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6216,7 +6168,7 @@
                     "Position": [
                         -0.19964806735515594,
                         -9.0949470177292824e-13,
-                        48.219497680664062
+                        48.219497680664063
                     ],
                     "Quaternion": [
                         0,
@@ -6263,7 +6215,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        77.873733520507812,
+                        77.873733520507813,
                         9.0949470177292824e-13,
                         -45.601097106933594
                     ],
@@ -6600,7 +6552,7 @@
             "Name": "Player",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Player.rgprefab",
             "tag": "Player",
             "layer": "Default",
@@ -6717,7 +6669,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 362000736,
+                    "pointer": 252291264,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -6727,7 +6679,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 362000920,
+                    "pointer": 252287864,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -6763,7 +6715,7 @@
             "Name": "SandParicle",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -6774,7 +6726,7 @@
                     "Position": [
                         15.653947830200195,
                         0,
-                        -18.625564575195312
+                        -18.625564575195313
                     ],
                     "Quaternion": [
                         0,
@@ -6925,7 +6877,7 @@
             "Name": "SandParicle",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
             "tag": "Untagged",
             "layer": "Default",

@@ -1,20 +1,16 @@
+#include "MonoManager.h"
 #include "Globals.h"
 #include "Application.h"
-#include "MonoManager.h"
-#include "ModuleRenderer3D.h"
-#include "ModuleSceneManager.h"
-#include "Scene.h"
+
+#include "FileSystem.h"
+#include "GameObject.h"
+#include "Component.h"
 #include "TransformComponent.h"
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/debug-helpers.h>
-#include <mono/metadata/class.h>
-#include <mono/metadata/threads.h>
-
-#include "GameObject.h"
-#include "Component.h"
 
 #include "ScriptBindings.h"
 #include "AudioBindings.h"
@@ -24,12 +20,8 @@
 #include "UIBindings.h"
 #include "NavAgentBindings.h"
 
-#include <iostream>
 #include <fstream>
 #include <PugiXML/pugixml.hpp>
-#include "FileSystem.h"
-#include "ImGui/imgui.h"
-#include "ModuleEditor.h"
 
 MonoManager::MonoManager(bool start_enabled) : Module(start_enabled), domain(nullptr), domainThread(nullptr), assembly(nullptr), image(nullptr)
 , jitDomain(nullptr)

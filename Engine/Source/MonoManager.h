@@ -2,11 +2,7 @@
 #include "Application.h"
 #include "Module.h"
 
-#include <mono/utils/mono-publib.h>
 #include "Math/float3.h"
-
-#include<mono/metadata/object-forward.h>
-#include <mono/metadata/blob.h>
 #include<mono/metadata/threads.h>
 
 typedef struct _MonoDomain MonoDomain;
@@ -85,5 +81,4 @@ public:
 
 private:
 	void InitMono();
-
 };

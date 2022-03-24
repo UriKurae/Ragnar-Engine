@@ -6,6 +6,7 @@
 
 class AudioReverbZoneComponent;
 class AudioSourceComponent;
+class TransformComponent;
 
 struct WwiseData
 {
@@ -15,7 +16,6 @@ struct WwiseData
 	std::vector<std::string> banks;
 };
 
-class TransformComponent;
 
 class AudioManager
 {

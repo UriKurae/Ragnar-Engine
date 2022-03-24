@@ -4,22 +4,18 @@
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-
+#include "ModuleNavMesh.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
-
-#include "ModuleNavMesh.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 
-#include <map>
 #include "Viewport.h"
 #include "GameView.h"
 #include "Geometry/LineSegment.h"
 #include "Geometry/Triangle.h"
-#include "SDL.h"
 
 #include "Profiling.h"
 

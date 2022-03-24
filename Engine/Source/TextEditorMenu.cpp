@@ -1,19 +1,11 @@
 #include "TextEditorMenu.h"
-
 #include "Application.h"
-#include "ModuleEditor.h"
-#include "MonoManager.h"
-#include "FileSystem.h"
 #include "Globals.h"
 
+#include "MonoManager.h"
+#include "FileSystem.h"
 
-#include "Imgui/imgui.h"
-#include <iostream>
-#include <thread>
 #include <fstream>
-
-#include <GL\glew.h>
-
 #include "Profiling.h"
 
 TextEditorMenu::TextEditorMenu() : Menu(true)

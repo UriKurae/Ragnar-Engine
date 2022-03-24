@@ -1,13 +1,8 @@
+#include "NavigatorMenu.h"
 #include "Application.h"
 #include "Globals.h"
 
-#include "NavigatorMenu.h"
-#include "InputGeom.h"
 #include "NavMeshBuilder.h"
-
-#include "IconsFontAwesome5.h"
-
-#include "Glew/include/GL/glew.h"
 
 NavigatorMenu::NavigatorMenu() : Menu(true)
 {
