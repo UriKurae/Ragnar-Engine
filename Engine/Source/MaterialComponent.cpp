@@ -440,6 +440,7 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f("dirLight.ambient", app->renderer3D->dirLight->ambient);
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
+		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
 	}
 	else
 	{
@@ -451,6 +452,10 @@ void MaterialComponent::ShaderSetUniforms()
 	std::vector<PointLight*>& pls = app->renderer3D->GetPointLights();
 	for (int i = 0; i < pls.size(); ++i)
 	{
+		//float intensity = 0;
+		//if (pls[i])
+		//	intensity = pls[i]->intensity;
+
 		std::string name = "pointLights[" + std::to_string(i) + "]";
 		shader->SetUniformVec3f(name + ".position", pls[i]->position);
 
@@ -465,6 +470,13 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f(name + ".ambient", pls[i]->ambient);
 		shader->SetUniformVec3f(name + ".diffuse", pls[i]->diffuse);
 		shader->SetUniformVec3f(name + ".specular", pls[i]->specular);
+
+		if (pls[i]->toDelete)
+		{
+			delete pls[i];
+			pls[i] = nullptr;
+			pls.erase(pls.begin() + i);
+		}
 	}
 
 	std::vector<SpotLight*> sls = app->renderer3D->GetSpotLights();
