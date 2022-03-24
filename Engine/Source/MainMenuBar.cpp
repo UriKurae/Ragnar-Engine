@@ -140,26 +140,7 @@ bool MainMenuBar::Update(float dt)
 				if (ImGui::MenuItem("UI Button"))
 				{
 					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-
-
-					MaterialComponent* normal = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-					MaterialComponent* focused = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-					MaterialComponent* pressed = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-					MaterialComponent* disabled = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-
 					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
-
-					button->SetNormalMaterial(normal);
-					button->SetFocusedMaterial(focused);
-					button->SetPressedMaterial(pressed);
-					button->SetDisabledMaterial(disabled);
-
-					button->SetActualMaterial(normal);
-					app->userInterface->UIGameObjects.push_back(object);
-					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->planeToDraw->own = object;
-					object->isUI = true;
 				}
 				else if (ImGui::MenuItem("UI Slider"))
 				{				

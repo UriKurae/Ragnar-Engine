@@ -13,14 +13,24 @@
 ButtonComponent::ButtonComponent(GameObject* own)
 {
 	active = true;
+	own->isUI = true;
 	
-	if (own->name == "Game Object") {
+	if (own->name == "Game Object")
 		own->name = "Button";
-	}
+	
 	type = ComponentType::UI_BUTTON;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
-	
-	
+
+	own->CreateComponent(ComponentType::TRANFORM2D);
+	normalMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	focusedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	actual = normalMaterial;
+
+	app->userInterface->UIGameObjects.push_back(own);
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
 }
 
 ButtonComponent::~ButtonComponent()
