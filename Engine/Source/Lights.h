@@ -32,7 +32,7 @@ public:
         dir = { 1,0,0 };
         ambient = { 0.25f, 0.25f, 0.25f };
         diffuse = { 0.75f, 0.75f, 0.75f };
-        specular = { 1,1,1 };
+        specular = { 0.0f,0.0f,0.0f };
         
         intensity = 5.0f;
         
