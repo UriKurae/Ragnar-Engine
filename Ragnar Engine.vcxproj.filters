@@ -766,6 +766,15 @@
     <ClInclude Include="Engine\Source\NavAgentComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\SpawnShape.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_SphericalSpawn.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_SpawningShape.h">
+      <Filter>Particles\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\C_RigidBody.h">
@@ -1660,6 +1669,15 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\SpawnShape.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_SphericalSpawn.cpp">
+      <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_SpawningShape.cpp">
+      <Filter>Particles\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

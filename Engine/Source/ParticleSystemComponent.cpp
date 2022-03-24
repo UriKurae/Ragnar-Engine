@@ -49,10 +49,13 @@ bool ParticleSystemComponent::Update(float dt)
 {
     if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {
-        for (int i = 0; i < emitters.size(); i++)
+        if (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true)
         {
-            emitters[i]->Emit(dt);
-            emitters[i]->Update(dt);
+            for (int i = 0; i < emitters.size(); i++)
+            {
+                emitters[i]->Emit(dt);
+                emitters[i]->Update(dt);
+            }
         }
     }
 
@@ -63,6 +66,15 @@ bool ParticleSystemComponent::Update(float dt)
             RELEASE((*it));
             emitters.erase(it);
             break;
+        }
+    }
+
+    if (isActive)
+    {
+        if ((float)timer.GetTime() / 1000.0f >= maxDuration && looping != true)
+        {
+            isActive = false;
+            timer.Stop();
         }
     }
 
@@ -100,13 +112,18 @@ void ParticleSystemComponent::OnEditor()
         if (ImGui::Button(playButtonName.c_str()))
         {
             isActive = !isActive;
+
+            if (isActive)
+                timer.Start();
+            else if (!isActive)
+                timer.Stop();
         }
 
         ImGui::SameLine();
         ImGui::Text("Played for: %.2f", timer.ReadTime() * 0.001f);
 
-        //ImGui::Checkbox("Looping", &looping);
-        //ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
+        ImGui::Checkbox("Looping", &looping);
+        ImGui::SliderFloat("Duration", &maxDuration, 0.0f, 10.0f);
 
         ImGui::Spacing();
         ImGui::Spacing();
@@ -164,10 +181,18 @@ void ParticleSystemComponent::UpdateAABB()
 
 void ParticleSystemComponent::Play()
 {
+    timer.Start();
+    isActive = true;
+    for (int i = 0; i < emitters.size(); ++i)
+    {
+        // TODO: emitters[i]->RestartEmitter();
+    }
 }
 
 void ParticleSystemComponent::Stop()
 {
+    timer.Stop();
+    isActive = false;
 }
 
 void ParticleSystemComponent::SaveConfiguration()

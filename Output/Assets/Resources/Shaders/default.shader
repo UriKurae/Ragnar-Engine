@@ -98,6 +98,8 @@ struct DirLight
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+
+	float intensity;
 };
 uniform DirLight dirLight;
 
@@ -151,7 +153,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	return (ambient + diffuse + specular);
+	return (ambient + diffuse + specular) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)

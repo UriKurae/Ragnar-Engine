@@ -555,10 +555,15 @@ void ModuleRenderer3D::RemovePointLight(PointLight* light)
 	{
 		if ((*it) == light)
 		{
-			delete light;
-			light = 0;
-			*it = 0;
-			pointLights.erase(it);
+			light->intensity = 0;
+			(*it)->toDelete = false;
+			//delete (*it);
+			//*it = nullptr;
+			//delete* it;
+			//delete light;
+			//light = 0;
+			//*it = 0;
+			//pointLights.erase(it);
 			break;
 		}
 	}
