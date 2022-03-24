@@ -105,7 +105,7 @@ bool MainMenuBar::Update(float dt)
 		if (!FileMenu()) return false;		
 		EditMenu();
 		WindowMenu();
-		void ViewMenu();		
+		ViewMenu();		
 
 		if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
 		{
