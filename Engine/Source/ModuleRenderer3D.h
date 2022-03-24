@@ -63,7 +63,6 @@ public:
 	Material* GetDefaultMaterial();
 	unsigned int GetDefaultShader();
 
-	Shader* AddShader(const std::string& path);
 	void AddMaterial(Material* material);
 	inline const std::vector<Shader*>& GetShaders() { return shaders; }
 

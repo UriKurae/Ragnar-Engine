@@ -8,7 +8,7 @@
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
 
-InspectorMenu::InspectorMenu() : Menu(true)
+InspectorMenu::InspectorMenu() : Menu(true, "Inspector")
 {
 	tags = { "Untagged", "Respawn", "Finish", "EditorOnly", "MainCamara", "Player", "GameController" };
 	layers = { "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "Player" };

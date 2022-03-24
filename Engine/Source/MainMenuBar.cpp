@@ -31,6 +31,7 @@
 #include "TextComponent.h"
 #include "Transform2DComponent.h"
 
+#include "CommandsDispatcher.h"
 #include "ResourceManager.h"
 #include "AudioManager.h"
 #include "FileSystem.h"
@@ -47,7 +48,7 @@
 #include <fstream>
 #include "Profiling.h"
 
-MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr), showBuildMenu(false), sceneSelected(nullptr)
+MainMenuBar::MainMenuBar() : Menu(true, "MainMenu"), saveWindow(false), buttonPlay(nullptr), buttonPause(nullptr), buttonNextFrame(nullptr), buttonStop(nullptr), buttonPauseBlue(nullptr), showBuildMenu(false), sceneSelected(nullptr)
 {
 	showMenu = false;
 
@@ -63,6 +64,7 @@ MainMenuBar::MainMenuBar() : Menu(true), saveWindow(false), buttonPlay(nullptr),
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
+	iconList = { ICON_FA_WINDOW_MAXIMIZE, ICON_FA_WRENCH, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_CODE, ICON_FA_CLOUD, ICON_FA_WALKING, ICON_FA_INFO_CIRCLE };
 }
 
 MainMenuBar::~MainMenuBar()
@@ -71,12 +73,6 @@ MainMenuBar::~MainMenuBar()
 
 bool MainMenuBar::Start()
 {
-	//TextureImporter::ImportTexture(std::string("Assets/Resources/PlayButton.png"));
-	//TextureImporter::ImportTexture(std::string("Assets/Resources/PauseButton.png"));
-	//TextureImporter::ImportTexture(std::string("Assets/Resources/NextFrame.png"));
-	//TextureImporter::ImportTexture2(std::string("Assets/Resources/PauseButtonActive.png"));
-	//TextureImporter::ImportTexture2(std::string("Assets/Resources/StopButton.png"));
-	
 	buttonPlay = new Texture(-5, std::string("Settings/EngineResources/PlayButton.rgtexture"));
 	buttonPlay->Load();
 
@@ -106,134 +102,12 @@ bool MainMenuBar::Update(float dt)
 {
 	if (ImGui::BeginMainMenuBar())
 	{
-		bool ret = false;
+		if (!FileMenu()) return false;		
+		EditMenu();
+		WindowMenu();
+		
 
-		if (ImGui::BeginMenu(ICON_FA_FILE" File"))
-		{
-			// Project options (Create, open...)
-			if (ImGui::MenuItem(ICON_FA_FILE_UPLOAD" New Project", "Ctrl + N", &ret))
-			{
-				saveWindow = true;
-			}
-			if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Open Project", "Ctrl + O", &ret))
-			{
-				std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->LoadScene(filePath.c_str());
-			}
-
-			ImGui::Separator();
-
-			if (ImGui::MenuItem(ICON_FA_SAVE" Save", "Ctrl + S", &ret))
-			{
-				if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
-				{
-					std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-					if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
-				}
-				else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
-			}
-			if (ImGui::MenuItem(ICON_FA_SAVE" Save As", "Ctrl + Shift + S", &ret))
-			{
-				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
-			}
-
-			ImGui::Separator();
-
-			if (ImGui::MenuItem("Build", "", &ret))
-			{
-				showBuildMenu = true;
-			}
-
-			if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC", &ret))
-			{
-				return false;
-			}
-			ImGui::EndMenu();
-		}
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip("Opens the file menu");
-		}
-
-		if (ImGui::BeginMenu(ICON_FA_EDIT" Edit"))
-		{
-			ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z", &ret);
-			ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y", &ret);
-
-			ImGui::Separator();
-			app->editor->GetViewport()->SnapOptions();
-			ImGui::EndMenu();
-		}
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip("Opens the edit menu");
-		}
-
-		if (ImGui::BeginMenu(ICON_FA_WINDOW_RESTORE" Window"))
-		{
-			ImGui::MenuItem(ICON_FA_WINDOW_MAXIMIZE" Console", NULL, &GetConsole()->active);
-			ImGui::MenuItem(ICON_FA_WRENCH" Configuration", NULL, &menus[(int)Menus::CONFIGURATION]->active);
-			ImGui::MenuItem(ICON_FA_SITEMAP" Hierarchy", NULL, &menus[(int)Menus::HIERARCHY]->active);
-			ImGui::MenuItem(ICON_FA_INFO_CIRCLE" Inspector", NULL, &menus[(int)Menus::INSPECTOR]->active);
-			ImGui::MenuItem(ICON_FA_CLOUD" Fog War", NULL, &menus[(int)Menus::FOGWAR]->active);
-			ImGui::MenuItem(ICON_FA_CODE" Text Editor", NULL, &menus[(int)Menus::TEXT_EDITOR]->active);
-			ImGui::MenuItem(ICON_FA_WALKING" Navigator Menu", NULL, &menus[(int)Menus::NAVIGATOR]->active);
-
-			ImGui::EndMenu();
-		}
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip("Opens the window menu");
-		}
-
-		if (ImGui::BeginMenu(ICON_FA_EYE" View"))
-		{
-			if (ImGui::MenuItem("Depth Test", NULL, app->renderer3D->GetDepthTest()))
-			{
-				app->renderer3D->SetDepthTest();
-			}
-			if (ImGui::MenuItem("Cull Face", NULL, app->renderer3D->GetCullFace()))
-			{
-				app->renderer3D->SetCullFace();
-			}
-			if (ImGui::MenuItem("Lighting", NULL, app->renderer3D->GetLighting()))
-			{
-				app->renderer3D->SetLighting();
-			}
-			if (ImGui::MenuItem("Color Material", NULL, app->renderer3D->GetColorMaterial()))
-			{
-				app->renderer3D->SetColorMaterial();
-			}
-			if (ImGui::MenuItem("Texture 2D", NULL, app->renderer3D->GetTexture2D()))
-			{
-				app->renderer3D->SetTexture2D();
-			}
-			if (ImGui::MenuItem("Stencil", NULL, app->renderer3D->GetStencil()))
-			{
-				app->renderer3D->SetStencil();
-			}
-			if (ImGui::MenuItem("Blending", NULL, app->renderer3D->GetBlending()))
-			{
-				app->renderer3D->SetBlending();
-			}
-			if (ImGui::MenuItem("Wire", NULL, app->renderer3D->GetWireMode()))
-			{
-				app->renderer3D->SetWireMode();
-			}
-			if (ImGui::MenuItem("Show Raycast", NULL, app->renderer3D->GetRayCast()))
-			{
-				app->renderer3D->SetWireMode();
-			}
-			if (ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh())) {}
-			if (ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid())) {}
-			if (ImGui::MenuItem("Show Quad Tree", NULL, app->sceneManager->GetCurrentScene()->GetDrawQuad())) {}
-			ImGui::EndMenu();
-		}
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip("Opens the view menu");
-		}
+		
 
 		if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
 		{
@@ -244,38 +118,22 @@ bool MainMenuBar::Update(float dt)
 			}
       
 			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child", "Alt+Shift+N"))
-			{
 				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
-			}
+
 			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent", "Ctrl+Shift+G"))
-			{
 				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
-			}
-      
+
+			static std::vector<std::string> primitives = {"Cube", "Pyramide", "Sphere", "Cylinder"};
 			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
 			{
-				if (ImGui::MenuItem("Cube"))
+				GameObject* selected = app->editor->GetGO();
+				for (int i = 0; i < primitives.size(); i++)
 				{
-					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CUBE, app->editor->GetGO());
-					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CUBE, nullptr);
+					if (ImGui::MenuItem(primitives.at(i).c_str()))
+						app->sceneManager->GetCurrentScene()->Create3DObject((Object3D)i, selected);
 				}
-				else if (ImGui::MenuItem("Pyramide"))
-				{
-					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::PYRAMIDE, app->editor->GetGO());
-					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::PYRAMIDE, nullptr);
-				}
-				else if (ImGui::MenuItem("Sphere"))
-				{
-					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::SPHERE, app->editor->GetGO());
-					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::SPHERE, nullptr);
-				}
-				else if (ImGui::MenuItem("Cylinder"))
-				{
-					if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CYLINDER, app->editor->GetGO());
-					else app->sceneManager->GetCurrentScene()->Create3DObject(Object3D::CYLINDER, nullptr);
-				}
+				
 				ImGui::EndMenu();
-
 			}
 			if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
 			{
@@ -438,15 +296,15 @@ bool MainMenuBar::Update(float dt)
 		{
 			ImGui::MenuItem("Demo Menu", NULL, &showMenu);
 			ImGui::MenuItem(ICON_FA_USER" About Ragnar Engine", "", &menus[(int)Menus::ABOUT]->active);
-			if (ImGui::MenuItem(ICON_FA_ADDRESS_BOOK" Documentation", "F1", &ret))
+			if (ImGui::MenuItem(ICON_FA_ADDRESS_BOOK" Documentation", "F1"))
 			{
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine");
 			}
-			if (ImGui::MenuItem(ICON_FA_BUG" Report a Bug", "", &ret))
+			if (ImGui::MenuItem(ICON_FA_BUG" Report a Bug"))
 			{
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/issues");
 			}
-			if (ImGui::MenuItem(ICON_FA_DOWNLOAD" Download latest", "", &ret))
+			if (ImGui::MenuItem(ICON_FA_DOWNLOAD" Download latest"))
 			{
 				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/releases");
 			}
@@ -743,6 +601,135 @@ bool MainMenuBar::Update(float dt)
 
 	return true;
 }
+
+bool MainMenuBar::FileMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_FILE" File"))
+	{
+		// Project options (Create, open...)
+		if (ImGui::MenuItem(ICON_FA_FILE_UPLOAD" New Project", "Ctrl + N"))
+			saveWindow = true;
+
+		if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Open Project", "Ctrl + O"))
+		{
+			std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+			if (!filePath.empty()) app->sceneManager->GetCurrentScene()->LoadScene(filePath.c_str());
+		}
+
+		ImGui::Separator();
+
+		if (ImGui::MenuItem(ICON_FA_SAVE" Save", "Ctrl + S"))
+		{
+			if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
+			}
+			else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
+		}
+		if (ImGui::MenuItem(ICON_FA_SAVE" Save As", "Ctrl + Shift + S"))
+		{
+			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+			if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
+		}
+
+		ImGui::Separator();
+
+		if (ImGui::MenuItem("Build"))
+			showBuildMenu = true;
+
+		if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC"))
+			return false;
+
+		ImGui::EndMenu();
+	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Opens the file menu");
+	}
+
+	return true;
+}
+
+void MainMenuBar::EditMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_EDIT" Edit"))
+	{
+		if(ImGui::MenuItem(ICON_FA_UNDO" Undo", "Ctrl + Z"))
+			CommandDispatcher::Undo();
+		if(ImGui::MenuItem(ICON_FA_REDO" Redo", "Ctrl + Y"))
+			CommandDispatcher::Redo();
+
+		ImGui::Separator();
+		app->editor->GetViewport()->SnapOptions();
+		ImGui::EndMenu();
+	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Opens the edit menu");
+	}
+}
+void MainMenuBar::WindowMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_WINDOW_RESTORE" Window"))
+	{
+		std::string iconName;
+		for (size_t i = 0; i < menus.size(); i++)
+		{
+			iconName = iconList.at(i) + " " + menus.at(i)->name;
+			ImGui::MenuItem(iconName.c_str(), NULL, &menus[i]->active);
+		}
+
+		ImGui::EndMenu();
+	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Opens the window menu");
+	}
+}
+void MainMenuBar::ViewMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_EYE" View"))
+	{
+		if (ImGui::MenuItem("Depth Test", NULL, app->renderer3D->GetDepthTest()))
+			app->renderer3D->SetDepthTest();
+		if (ImGui::MenuItem("Cull Face", NULL, app->renderer3D->GetCullFace()))
+			app->renderer3D->SetCullFace();
+		if (ImGui::MenuItem("Lighting", NULL, app->renderer3D->GetLighting()))
+			app->renderer3D->SetLighting();
+		if (ImGui::MenuItem("Color Material", NULL, app->renderer3D->GetColorMaterial()))
+			app->renderer3D->SetColorMaterial();
+		if (ImGui::MenuItem("Texture 2D", NULL, app->renderer3D->GetTexture2D()))
+			app->renderer3D->SetTexture2D();
+		if (ImGui::MenuItem("Stencil", NULL, app->renderer3D->GetStencil()))
+			app->renderer3D->SetStencil();
+		if (ImGui::MenuItem("Blending", NULL, app->renderer3D->GetBlending()))
+			app->renderer3D->SetBlending();
+		if (ImGui::MenuItem("Wire", NULL, app->renderer3D->GetWireMode()))
+			app->renderer3D->SetWireMode();
+		if (ImGui::MenuItem("Show Raycast", NULL, app->renderer3D->GetRayCast()))
+			app->renderer3D->SetWireMode();
+
+		ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh());
+		ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid());
+		ImGui::MenuItem("Show Quad Tree", NULL, app->sceneManager->GetCurrentScene()->GetDrawQuad());
+		ImGui::EndMenu();
+	}
+
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Opens the view menu");
+	}
+}
+//void MainMenuBar::EditMenu()
+//{
+//}
+//void MainMenuBar::EditMenu()
+//{
+//}
+//void MainMenuBar::EditMenu()
+//{
+//}
 
 bool MainMenuBar::CleanUp()
 {

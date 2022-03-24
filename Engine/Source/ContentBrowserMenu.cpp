@@ -12,7 +12,7 @@
 
 #include "Profiling.h"
 
-ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), refreshTime(0.0f), Menu(true)
+ContentBrowserMenu::ContentBrowserMenu() : sceneIcon(nullptr), dirIcon(nullptr), modelIcon(nullptr), picIcon(nullptr), refreshTime(0.0f), Menu(true, "Content Browser")
 {
 	mainDirectory = "Assets/";
 	currentDirectory = mainDirectory;

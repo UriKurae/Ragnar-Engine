@@ -11,7 +11,7 @@
 
 #include "Profiling.h"
 
-HierarchyMenu::HierarchyMenu() : Menu(true)
+HierarchyMenu::HierarchyMenu() : Menu(true, "Hierarchy")
 {
 	gameObjectOptions = false;
 	confirmPanel = false;

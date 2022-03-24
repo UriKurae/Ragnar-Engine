@@ -8,7 +8,7 @@
 #include <fstream>
 #include "Profiling.h"
 
-TextEditorMenu::TextEditorMenu() : Menu(true)
+TextEditorMenu::TextEditorMenu() : Menu(true, "Text Editor")
 {
 }
 

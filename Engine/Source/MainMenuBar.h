@@ -1,7 +1,6 @@
 #pragma once
 #include "Menu.h"
 #include <vector>
-#include <string>
 #include <memory>
 
 class ConsoleMenu;
@@ -49,6 +48,13 @@ private:
 	void ShowCreateLigthSensibleShaderWindow();
 	void ShowCreateNotLigthSensibleShaderWindow();
 
+	//Menus
+	bool FileMenu();
+	void EditMenu();
+	void WindowMenu();
+	void ViewMenu();
+	//void GameObjectMenu();
+
 private:
 	bool showMenu;
 	bool showBuildMenu;
@@ -69,6 +75,7 @@ private:
 	bool showCreateNotLightSensibleShaderWindow = false;
 
 	std::vector<std::string> stylesList;
+	std::vector<std::string> iconList;
 	int style = 5;
 	float alphaStyle = 0.1f;
 };

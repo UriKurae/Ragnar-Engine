@@ -3,7 +3,7 @@
 
 #include "Profiling.h"
 
-ConsoleMenu::ConsoleMenu() : Menu(false)
+ConsoleMenu::ConsoleMenu() : Menu(false, "Console")
 {
 }
 

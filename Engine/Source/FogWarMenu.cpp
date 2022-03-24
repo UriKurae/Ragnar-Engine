@@ -5,7 +5,7 @@
 #include "Scene.h"
 #include "GL/glew.h"
 
-FogWarMenu::FogWarMenu() : Menu(true)
+FogWarMenu::FogWarMenu() : Menu(true, "Fog War")
 {
 }
 FogWarMenu::~FogWarMenu()

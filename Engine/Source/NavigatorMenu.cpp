@@ -4,7 +4,7 @@
 
 #include "NavMeshBuilder.h"
 
-NavigatorMenu::NavigatorMenu() : Menu(true)
+NavigatorMenu::NavigatorMenu() : Menu(true, "Navigator")
 {
 }
 

@@ -1,12 +1,12 @@
 #pragma once
-
 #include "Imgui/imgui.h"
 #include "IconsFontAwesome5.h"
+#include <string>
 
 class Menu
 {
 public:
-	Menu(bool act) : active(act) {}
+	Menu(bool act, std::string name) : active(act), name(name) {}
 	virtual ~Menu(){}
 
 	virtual bool Start() { return true; }
@@ -16,4 +16,5 @@ public:
 	bool* GetActive() { return &active; }
 public:
 	bool active;
+	std::string name;
 };

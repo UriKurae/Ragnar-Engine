@@ -524,22 +524,6 @@ uint ModuleRenderer3D::GetDefaultShader()
 	return defaultShader;
 }
 
-Shader* ModuleRenderer3D::AddShader(const std::string& path)
-{
-	//Shader* shader = new Shader(path);
-	std::string p = path;
-	ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, p, std::string());
-	//shaders.push_back(shader);
-
-	//if (path.find("default"))
-	//{
-	//	defaultShader = shader;
-	//}
-	//
-	//return shader;
-	return 0;
-}
-
 void ModuleRenderer3D::AddMaterial(Material* material)
 {
 	materials.emplace_back(material);
