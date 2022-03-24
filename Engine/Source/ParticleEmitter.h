@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Particle.h"
 #include "ParticleEffect.h"
+#include "TransformComponent.h"
 #include "Algorithm/Random/LCG.h"
 
 #include <array>
@@ -99,7 +100,6 @@ private:
 	std::vector<Particle> particlePool;
 	unsigned int poolIndex;
 
-
 	std::string emitterName;
 	char charsOfName[50];
 	bool showTexMenu;
@@ -115,4 +115,5 @@ private:
 	float spreadDistanceY;
 	float spreadDistanceZ;
 
+	TransformComponent* transform;
 };

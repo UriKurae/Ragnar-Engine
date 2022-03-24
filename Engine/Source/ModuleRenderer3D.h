@@ -59,7 +59,6 @@ public:
 
 	void DrawCubeDirectMode();
 
-
 	Material* GetDefaultMaterial();
 	unsigned int GetDefaultShader();
 
@@ -77,7 +76,6 @@ public:
 	void ClearSpotLights();
 
 	void RemovePointLight(PointLight* light);
-
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);

@@ -1,12 +1,14 @@
 #pragma once
-#include "ParticleEffect_SpawnShape.h"
+#include "SpawnShape.h"
 #include "Particle.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "Algorithm/Random/LCG.h"
 #include "Math/float4x4.h"
 
-class ParticleEffect_SphericalSpawn : public ParticleEffect_SpawnShape
+class ParticleEffect_SphericalSpawn : public SpawnShape
 {
 public:
 

@@ -43,6 +43,8 @@ public:
 	inline float GetCurrentScreenHeight() { return currentScreenHeight; }
 	inline float GetZoomRatio() { return zoom / ((zoomMax - zoomMin) / 2); };
 
+	float4x4 ViewMatrixOpenGL();
+
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
 	float zoom = zoomMax;
