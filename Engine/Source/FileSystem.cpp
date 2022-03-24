@@ -123,6 +123,9 @@ uint FileSystem::Load(const char* file, char** buffer)
 			}
 			else
 				ret = readed;
+
+			// TODO: Memory Leak here, but if you put line 122 here you will run into a crash
+			//if (*buffer) RELEASE_ARRAY(buffer);
 		}
 
 		if (PHYSFS_close(fsFile) == 0)

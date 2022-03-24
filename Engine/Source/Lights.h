@@ -17,7 +17,8 @@ public:
     //float3 ambient = { 1,0,0 };
     //float3 diffuse = { 1,1,1 };
     //float3 specular = { 0,0,1 };
-
+    
+    float intensity = 10.0f;
     float3 ambient = { 0.25f, 0.25f, 0.25f };
     float3 diffuse = { 0.75f, 0.75f, 0.75f };
     float3 specular = { 1,1,1 };
@@ -32,7 +33,9 @@ public:
         ambient = { 0.25f, 0.25f, 0.25f };
         diffuse = { 0.75f, 0.75f, 0.75f };
         specular = { 1,1,1 };
-
+        
+        intensity = 5.0f;
+        
         type = LightType::DIRECTIONAL;
 
         Light();
@@ -52,18 +55,18 @@ public:
     {
         position = { 0,0,0 };
         type = LightType::POINT;
-
+        intensity = 10.0f;
         Light();
     }
 
 public:
     float3 position = { 0,0,0 };
 
-    float intensity = 10.0f;
     float constant = 1.0f;
     // Linear
     float lin = 0.09f;
     float quadratic = 0.032f;
+    bool toDelete = false;
 };
 
 class SpotLight : public Light
@@ -89,4 +92,5 @@ public:
     float cutOff;
     float outerCutOff;
     float intensity;
+    bool toDelete = false;
 };

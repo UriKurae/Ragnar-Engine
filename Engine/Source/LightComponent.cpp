@@ -87,6 +87,7 @@ void ComponentLight::OnEditor()
 
 				DirectionalLight* l = (DirectionalLight*)light;
 
+				ImGui::DragFloat("Intensity", &l->intensity, 0.1f, 0.0f);
 				ImGui::ColorEdit3("Ambient Color", l->ambient.ptr());
 				ImGui::ColorEdit3("Diffuse Color", l->diffuse.ptr());
 				ImGui::ColorEdit3("Specular Color", l->specular.ptr());
@@ -131,7 +132,7 @@ void ComponentLight::OnEditor()
 
 				ImGui::DragFloat("Intensity", &l->intensity, 0.01f);
 				ImGui::DragFloat("CutOff", &l->cutOff, 0.001f, 1.0f,0.0f);
-				ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.001f, 1.0f, 0.0f);
+				ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.001f, l->cutOff, 0.0f);
 
 				ComponentOptions(this);
 				ImGui::Separator();
