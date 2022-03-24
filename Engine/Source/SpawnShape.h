@@ -8,16 +8,15 @@ enum class SPAWN_SHAPE_TYPE : int
 	SPHERE,
 	CONE,
 	CIRCUMFERENCE,
-	MAX
 };
 
 
-class ParticleEffect_SpawnShape
+class SpawnShape
 {
 public:
 
-	ParticleEffect_SpawnShape(SPAWN_SHAPE_TYPE type);
-	virtual ~ParticleEffect_SpawnShape(){}
+	SpawnShape(SPAWN_SHAPE_TYPE type);
+	virtual ~SpawnShape(){}
 
 	virtual void Spawn(Particle& particle, bool hasInitialSpeed, float speed, float4x4& gTrans, float* offset){}
 

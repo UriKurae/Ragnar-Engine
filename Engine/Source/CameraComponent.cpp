@@ -480,6 +480,18 @@ int CameraComponent::ContainsAaBox(const AABB& boundingBox)
 	return -1;
 }
 
+float4x4 CameraComponent::ViewMatrixOpenGL()
+{
+	float4x4 mat = camera.ViewMatrix();
+	return mat.Transposed();
+}
+
+//float4x4 CameraComponent::ViewMatrixOpenGL()
+//{
+//	math::float4x4 mat = camera.ViewMatrix();
+//	return mat.Transposed();
+//}
+
 void CameraComponent::RequestShake(float strength, float duration)
 {
 	shakeStrength = strength;

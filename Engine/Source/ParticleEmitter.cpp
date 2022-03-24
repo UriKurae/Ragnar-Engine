@@ -9,6 +9,7 @@
 #include "ParticleEffect_Acceleration.h"
 #include "ParticleEffect_Size.h"
 #include "ParticleEffect_Color.h"
+#include "ParticleEffect_SpawningShape.h"
 #include "BillboardParticleComponent.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
@@ -27,6 +28,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	spreadDistanceX(2.0f), 
 	spreadDistanceY(2.0f),
 	spreadDistanceZ(2.0f),
+	transform(nullptr),
 	isEmitterCubical(false),
 	isActive(true),
 	showTexMenu(false),
@@ -501,6 +503,10 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 	case ParticleEffectType::NO_TYPE:
 		effects[(int)ParticleEffectType::NO_TYPE] = effect;
 		break;
+	case ParticleEffectType::SPAWNING_SHAPE:
+		effect = new ParticleEffect_SpawningShape(transform);
+		effects[(int)ParticleEffectType::SPAWNING_SHAPE] = effect;
+		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		effect = new ParticleEffect_Velocity();
 		effects[(int)ParticleEffectType::VELOCITY_OVER_LIFETIME] = effect;
@@ -540,6 +546,9 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 	{
 	case ParticleEffectType::NO_TYPE:
 		return "No Type";
+		break;
+	case ParticleEffectType::SPAWNING_SHAPE:
+		return "Spawning shape";
 		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		return "Velocity Effect";
