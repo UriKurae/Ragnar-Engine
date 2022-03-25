@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
+#include "ModuleRenderer3D.h"
 
 #include "Transform2DComponent.h"
 #include "ButtonComponent.h"
@@ -358,11 +359,18 @@ bool ModuleUI::Start()
 	shader = new Shadert("", "");
 	return true;
 }
+void ModuleUI::updateText() 
+{
+	float4 size=app->editor->GetGameView()->GetBounds();
+	app->renderer3D->OnResize(size.z, size.w);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
+}
 void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
 {
 	// activate corresponding render state	
 	
 	shader->Use();
+	updateText();
 	Frustum frustum;
 	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 	
@@ -575,46 +583,46 @@ bool ModuleUI::Update(float dt)
 
 void ModuleUI::Draw()
 {
-	ButtonComponent* aux = nullptr;
-	TextComponent* aux1 = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3 = nullptr;
-	SliderComponent* aux5 = nullptr;
+	ButtonComponent* button = nullptr;
+	TextComponent* text = nullptr;
+	CheckboxComponent* check = nullptr;
+	ImageComponent* image = nullptr;
+	SliderComponent* slider = nullptr;
 
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
 		GameObject* UI = app->userInterface->UIGameObjects[a];
-		aux = UI->GetComponent<ButtonComponent>();
-		aux1 = UI->GetComponent<TextComponent>();
-		aux2 = UI->GetComponent<CheckboxComponent>();
-		aux3 = UI->GetComponent<ImageComponent>();
-		aux5 = UI->GetComponent<SliderComponent>();
+		button = UI->GetComponent<ButtonComponent>();
+		text = UI->GetComponent<TextComponent>();
+		check = UI->GetComponent<CheckboxComponent>();
+		image = UI->GetComponent<ImageComponent>();
+		slider = UI->GetComponent<SliderComponent>();
 
-		if (aux != nullptr)
+		if (button != nullptr)
 		{
 			UI->Draw(nullptr);
-			RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
-			aux = nullptr;
+			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color);
+			button = nullptr;
 		}
-		else if (aux1 != nullptr)
+		else if (text != nullptr)
 		{
-			RenderText(aux1->buttonText.textt, aux1->buttonText.X, aux1->buttonText.Y, aux1->buttonText.Scale, aux1->buttonText.Color);
-			aux1 = nullptr;
+			RenderText(text->buttonText.textt, text->buttonText.X, text->buttonText.Y, text->buttonText.Scale, text->buttonText.Color);
+			text = nullptr;
 		}
-		else if (aux2 != nullptr)
-		{
-			UI->Draw(nullptr);
-			aux2 = nullptr;
-		}
-		else if (aux3 != nullptr)
+		else if (check != nullptr)
 		{
 			UI->Draw(nullptr);
-			aux3 = nullptr;
+			check = nullptr;
 		}
-		else if (aux5 != nullptr)
+		else if (image != nullptr)
 		{
 			UI->Draw(nullptr);
-			aux5 = nullptr;
+			image = nullptr;
+		}
+		else if (slider != nullptr)
+		{
+			UI->Draw(nullptr);
+			slider = nullptr;
 		}
 	}
 }
