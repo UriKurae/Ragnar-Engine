@@ -12,14 +12,12 @@
 
 ButtonComponent::ButtonComponent(GameObject* own)
 {
-	active = true;
-	own->isUI = true;
-	
-	if (own->name == "Game Object")
-		own->name = "Button";
-	
 	type = ComponentType::UI_BUTTON;
+	own->name = "Button";
+	own->isUI = true;
+	active = true;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
+	
 
 	own->CreateComponent(ComponentType::TRANFORM2D);
 	normalMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);

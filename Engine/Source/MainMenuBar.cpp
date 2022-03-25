@@ -105,220 +105,11 @@ bool MainMenuBar::Update(float dt)
 		if (!FileMenu()) return false;		
 		EditMenu();
 		WindowMenu();
-		ViewMenu();		
-
-		if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
-		{
-			if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object", "Ctrl+Shift+N"))
-			{
-				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObject(app->editor->GetGO());
-				else app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
-			}
-      
-			if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child", "Alt+Shift+N"))
-				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
-
-			if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent", "Ctrl+Shift+G"))
-				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
-
-			static std::vector<std::string> primitives = {"Cube", "Pyramide", "Sphere", "Cylinder"};
-			if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
-			{
-				GameObject* selected = app->editor->GetGO();
-				for (int i = 0; i < primitives.size(); i++)
-				{
-					if (ImGui::MenuItem(primitives.at(i).c_str()))
-						app->sceneManager->GetCurrentScene()->Create3DObject((Object3D)i, selected);
-				}
-				
-				ImGui::EndMenu();
-			}
-			if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
-			{
-				if (ImGui::MenuItem("UI Button"))
-				{
-					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					ButtonComponent* button = (ButtonComponent*)object->CreateComponent(ComponentType::UI_BUTTON);
-				}
-				else if (ImGui::MenuItem("UI Slider"))
-				{				
-					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					app->userInterface->UIGameObjects.push_back(object);
-					
-					ComponentTransform2D* i=(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-
-					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);					
-					MaterialComponent* second=(MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);					
-
-					SliderComponent* button = (SliderComponent*)object->CreateComponent(ComponentType::UI_SLIDER);
-					
-					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->frontPlaneToDraw->own = object;
-					button->planeToDraw->own = object;
-					button->SetSecondMaterial(second);
-					object->isUI = true;
-				}
-				else if (ImGui::MenuItem("UI Check Box"))
-				{
-					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-
-					CheckboxComponent* button = (CheckboxComponent*)object->CreateComponent(ComponentType::UI_CHECKBOX);
-					button->SetSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
-					button->SetNoSelectedMaterial((MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL));
-					button->SetActual(button->GetNoSelectedMaterial());
-
-					app->userInterface->UIGameObjects.push_back(object);
-					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->planeToDraw->own = object;
-					object->isUI = true;
-				}
-				else if (ImGui::MenuItem("UI Image"))
-				{
-					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-
-					ImageComponent* button = (ImageComponent*)object->CreateComponent(ComponentType::UI_IMAGE);
-					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-
-
-					app->userInterface->UIGameObjects.push_back(object);
-					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->planeToDraw->own = object;
-					object->isUI = true;
-				}
-				else if (ImGui::MenuItem("UI Text"))
-				{
-					GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
-					object->SetName("text");
-					(ComponentTransform2D*)object->CreateComponent(ComponentType::TRANFORM2D);
-					TextComponent* button = (TextComponent*)object->CreateComponent(ComponentType::UI_TEXT);
-					
-					MaterialComponent* material = (MaterialComponent*)object->CreateComponent(ComponentType::MATERIAL);
-
-
-					app->userInterface->UIGameObjects.push_back(object);
-					button->planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-					button->planeToDraw->own = object;
-					object->isUI = true;
-				}
-
-				ImGui::EndMenu();
-
-			}
-			if (ImGui::BeginMenu(ICON_FA_LIGHTBULB " Lights"))
-			{
-				if (ImGui::MenuItem("Point Light"))
-				{
-					GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
-					go->SetName("Point Light");
-					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
-					PointLight* pl = new PointLight();
-					l->SetLight(pl);
-					app->renderer3D->AddPointLight(pl);
-
-				}
-				else if (ImGui::MenuItem("Spot Light"))
-				{
-					GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
-					go->SetName("Spot Light");
-					ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
-					SpotLight* sl = new SpotLight();
-					l->SetLight(sl);
-					app->renderer3D->AddSpotLight(sl);
-
-				}
-				ImGui::EndMenu();
-			}
-
-			if (ImGui::BeginMenu(ICON_FA_CIRCLE " Shader"))
-			{
-				static int count = 0;
-				if (ImGui::MenuItem("Light-sensible"))
-				{
-					showCreateLightSensibleShaderWindow = true;
-				}
-				else if (ImGui::MenuItem("Not light-sensible"))
-				{					
-					showCreateNotLightSensibleShaderWindow = true;
-				}
-
-				ImGui::EndMenu();
-			}
-
-
-			ImGui::Separator();
-			if (app->editor->GetGO() == nullptr)
-			{
-				ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(128, 128, 128, 255));
-				ImGui::PushStyleColor(ImGuiCol_HeaderHovered, IM_COL32(128, 128, 128, 100));
-			}
-			if (ImGui::MenuItem("Align with view", "Ctrl+Shift+F"))
-			{
-				if (app->editor->GetGO()) AlignWithView();
-			}
-			if (ImGui::MenuItem("Align view to selected", "Alt+Shift+F"))
-			{
-				if (app->editor->GetGO()) AlignViewWithSelected();
-			}
-			if (app->editor->GetGO() == nullptr)
-			{
-				ImGui::PopStyleColor();
-				ImGui::PopStyleColor();
-			}
-
-			ImGui::EndMenu();
-		}
+		ViewMenu();	
+		GameObjectMenu();
+		HelpMenu();
+		SetStyleMenu();		
 		
-		if (ImGui::BeginMenu(ICON_FA_INFO_CIRCLE" Help"))
-		{
-			ImGui::MenuItem("Demo Menu", NULL, &showMenu);
-			ImGui::MenuItem(ICON_FA_USER" About Ragnar Engine", "", &menus[(int)Menus::ABOUT]->active);
-			if (ImGui::MenuItem(ICON_FA_ADDRESS_BOOK" Documentation", "F1"))
-			{
-				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine");
-			}
-			if (ImGui::MenuItem(ICON_FA_BUG" Report a Bug"))
-			{
-				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/issues");
-			}
-			if (ImGui::MenuItem(ICON_FA_DOWNLOAD" Download latest"))
-			{
-				app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/releases");
-			}
-			ImGui::EndMenu();
-		}
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip("Opens the help menu");
-		}
-		if (ImGui::BeginMenu(ICON_FA_BORDER_STYLE" Set Style"))
-		{
-			for (int i = 0; i < stylesList.size(); i++)
-			{
-				if (ImGui::MenuItem(stylesList.at(i).c_str()))
-				{
-					Style::SetStyle(i);
-					style = i;
-				}
-			}
-			ImGui::Separator();
-
-			float auxAlpha = alphaStyle;
-			ImGui::Text(ICON_FA_SORT_ALPHA_DOWN_ALT" PopUp Alpha:");
-			ImGui::PushItemWidth(100);
-			if (ImGui::InputFloat("##Alpha", &alphaStyle, 0.1f))
-			{
-				if (alphaStyle < auxAlpha)
-					Style::SetAlpha(0.9);
-				else Style::SetAlpha(1.1);
-				alphaStyle = auxAlpha;
-			}
-			ImGui::PopItemWidth();
-
-			ImGui::EndMenu();
-		}
 		ImGui::EndMainMenuBar();
 	}
 
@@ -648,6 +439,7 @@ void MainMenuBar::EditMenu()
 		ImGui::SetTooltip("Opens the edit menu");
 	}
 }
+
 void MainMenuBar::WindowMenu()
 {
 	if (ImGui::BeginMenu(ICON_FA_WINDOW_RESTORE" Window"))
@@ -666,6 +458,7 @@ void MainMenuBar::WindowMenu()
 		ImGui::SetTooltip("Opens the window menu");
 	}
 }
+
 void MainMenuBar::ViewMenu()
 {
 	if (ImGui::BeginMenu(ICON_FA_EYE" View"))
@@ -700,15 +493,163 @@ void MainMenuBar::ViewMenu()
 		ImGui::SetTooltip("Opens the view menu");
 	}
 }
-//void MainMenuBar::EditMenu()
-//{
-//}
-//void MainMenuBar::EditMenu()
-//{
-//}
-//void MainMenuBar::EditMenu()
-//{
-//}
+
+void MainMenuBar::GameObjectMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_PLUS" GameObject"))
+	{
+		CreateGameObjectMenu();
+		ImGui::Separator();
+
+		// Align with options
+		if (app->editor->GetGO() == nullptr)
+		{
+			ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(128, 128, 128, 255));
+			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, IM_COL32(128, 128, 128, 100));
+		}
+		if (ImGui::MenuItem("Align with view", "Ctrl+Shift+F"))
+			if (app->editor->GetGO()) AlignWithView();
+
+		if (ImGui::MenuItem("Align view to selected", "Alt+Shift+F"))
+			if (app->editor->GetGO()) AlignViewWithSelected();
+
+		if (app->editor->GetGO() == nullptr)
+		{
+			ImGui::PopStyleColor();
+			ImGui::PopStyleColor();
+		}
+
+		ImGui::EndMenu();
+	}
+}
+
+void MainMenuBar::CreateGameObjectMenu()
+{
+	// Empty Objects
+	if (ImGui::MenuItem(ICON_FA_LAYER_GROUP" Create Empty Object", "Ctrl+Shift+N"))
+	{
+		if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObject(app->editor->GetGO());
+		else app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
+	}
+
+	if (ImGui::MenuItem(ICON_FA_OBJECT_UNGROUP" Create Child", "Alt+Shift+N"))
+		if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
+
+	if (ImGui::MenuItem(ICON_FA_OBJECT_GROUP" Create Parent", "Ctrl+Shift+G"))
+		if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+
+	// 3D Object
+	if (ImGui::BeginMenu(ICON_FA_CUBES" Create 3D Object"))
+	{
+		static std::vector<std::string> primitives = { "Cube", "Pyramide", "Sphere", "Cylinder" };
+		GameObject* selected = app->editor->GetGO();
+		for (int i = 0; i < primitives.size(); i++)
+		{
+			if (ImGui::MenuItem(primitives.at(i).c_str()))
+				app->sceneManager->GetCurrentScene()->Create3DObject((Object3D)i, selected);
+		}
+
+		ImGui::EndMenu();
+	}
+	// UI Object
+	if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
+	{
+		static std::vector<std::string> uiComponents = { "UI Button", "UI Image", "UI Check Box", "UI Slider", "UI Text" };
+		for (int i = 0; i < uiComponents.size(); i++)
+		{
+			if (ImGui::MenuItem(uiComponents.at(i).c_str()))
+			{
+				GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
+				object->CreateComponent((ComponentType)(i + (int)ComponentType::UI_BUTTON));
+			}
+		}
+
+		ImGui::EndMenu();
+
+	}
+	// Lights
+	if (ImGui::BeginMenu(ICON_FA_LIGHTBULB " Lights"))
+	{
+		if (ImGui::MenuItem("Point Light"))
+		{
+			GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
+			ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+			l->SetAsPointLight();
+		}
+		else if (ImGui::MenuItem("Spot Light"))
+		{
+			GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
+			ComponentLight* l = (ComponentLight*)go->CreateComponent(ComponentType::LIGHT);
+			l->SetAsSpotLight();
+		}
+		ImGui::EndMenu();
+	}
+	// Shader
+	if (ImGui::BeginMenu(ICON_FA_CIRCLE " Shader"))
+	{
+		static int count = 0;
+		if (ImGui::MenuItem("Light-sensible"))
+			showCreateLightSensibleShaderWindow = true;
+
+		else if (ImGui::MenuItem("Not light-sensible"))
+			showCreateNotLightSensibleShaderWindow = true;
+
+		ImGui::EndMenu();
+	}
+}
+
+void MainMenuBar::HelpMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_INFO_CIRCLE" Help"))
+	{
+		ImGui::MenuItem("Demo Menu", NULL, &showMenu);
+		ImGui::MenuItem(ICON_FA_USER" About Ragnar Engine", "", &menus[(int)Menus::ABOUT]->active);
+
+		if (ImGui::MenuItem(ICON_FA_ADDRESS_BOOK" Documentation", "F1"))
+			app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine");
+
+		if (ImGui::MenuItem(ICON_FA_BUG" Report a Bug"))
+			app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/issues");
+	
+		if (ImGui::MenuItem(ICON_FA_DOWNLOAD" Download latest"))
+			app->RequestBrowser("https://github.com/UriKurae/Ragnar-Engine/releases");
+		
+		ImGui::EndMenu();
+	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Opens the help menu");
+	}
+}
+
+void MainMenuBar::SetStyleMenu()
+{
+	if (ImGui::BeginMenu(ICON_FA_BORDER_STYLE" Set Style"))
+	{
+		for (int i = 0; i < stylesList.size(); i++)
+		{
+			if (ImGui::MenuItem(stylesList.at(i).c_str()))
+			{
+				Style::SetStyle(i);
+				style = i;
+			}
+		}
+		ImGui::Separator();
+
+		float auxAlpha = alphaStyle;
+		ImGui::Text(ICON_FA_SORT_ALPHA_DOWN_ALT" PopUp Alpha:");
+		ImGui::PushItemWidth(100);
+		if (ImGui::InputFloat("##Alpha", &alphaStyle, 0.1f))
+		{
+			if (alphaStyle < auxAlpha)
+				Style::SetAlpha(0.9);
+			else Style::SetAlpha(1.1);
+			alphaStyle = auxAlpha;
+		}
+		ImGui::PopItemWidth();
+		ImGui::EndMenu();
+	}
+}
 
 bool MainMenuBar::CleanUp()
 {

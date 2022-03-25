@@ -13,10 +13,14 @@
 ImageComponent::ImageComponent(GameObject* own)
 {
 	type = ComponentType::UI_IMAGE;
+	own->name = "Image";
+	own->isUI = true;
 	this->text = "Image Component";
-	if (own->name == "Game Object") {
-		own->name = "Image";
-	}
+
+	own->CreateComponent(ComponentType::TRANFORM2D);
+	own->CreateComponent(ComponentType::MATERIAL);
+	app->userInterface->UIGameObjects.push_back(own);
+	
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = owner;
 }

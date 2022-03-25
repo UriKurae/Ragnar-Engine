@@ -18,17 +18,29 @@
 SliderComponent::SliderComponent(GameObject* own)
 {
 	type = ComponentType::UI_SLIDER;
+	own->name = "Slider";
+	own->isUI = true;
+	sliderText.setText("Slider", 5, 5, 0.5, { 255,255,255 });
+
 	value = 0;
 	minValue = 70;
 	maxValue = 120;
-	drawRect = false;
+
 	state = State::NORMAL;
 	barProgres = 0.0f;
 	completed = false;
-	own->name = "Slider";
+	drawRect = false;
 	actualColor = normalColor;
 
-	sliderText.setText("Slider", 5, 5, 0.5, { 255,255,255 });
+	own->CreateComponent(ComponentType::TRANFORM2D);
+	own->CreateComponent(ComponentType::MATERIAL);
+	secondMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	app->userInterface->UIGameObjects.push_back(own);
+
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
+	frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	frontPlaneToDraw->own = own;
 }
 
 SliderComponent::~SliderComponent()

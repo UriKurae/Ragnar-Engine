@@ -53,7 +53,10 @@ private:
 	void EditMenu();
 	void WindowMenu();
 	void ViewMenu();
-	//void GameObjectMenu();
+	void GameObjectMenu();
+	void CreateGameObjectMenu();
+	void HelpMenu();
+	void SetStyleMenu();
 
 private:
 	bool showMenu;

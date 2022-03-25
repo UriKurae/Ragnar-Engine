@@ -13,14 +13,22 @@
 
 TextComponent::TextComponent(GameObject* own)
 {
-	owner = own;
-	active = true;
-	
 	type = ComponentType::UI_TEXT;
-	state = State::NORMAL;
+	own->name = "Text";
+	own->isUI = true;
+	active = true;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
+	
+	state = State::NORMAL;
 	actualColor = normalColor;
 	text = "Text";
+
+	own->CreateComponent(ComponentType::TRANFORM2D);
+	own->CreateComponent(ComponentType::MATERIAL);
+	app->userInterface->UIGameObjects.push_back(own);
+
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
 }
 
 TextComponent::~TextComponent()

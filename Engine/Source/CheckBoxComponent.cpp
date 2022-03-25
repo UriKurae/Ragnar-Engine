@@ -14,8 +14,18 @@
 CheckboxComponent::CheckboxComponent(GameObject* own)
 {
 	type = ComponentType::UI_CHECKBOX;
-	checkboxText.setText("check", 5, 5, 0.5, { 255,255,255 });	
 	own->name = "CheckBox";
+	own->isUI = true;
+	checkboxText.setText("check", 5, 5, 0.5, { 255,255,255 });	
+
+	own->CreateComponent(ComponentType::TRANFORM2D);
+	noSelectedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	selectedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	actual = noSelectedMaterial;
+
+	app->userInterface->UIGameObjects.push_back(own);
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
 }
 
 CheckboxComponent::~CheckboxComponent()

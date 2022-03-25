@@ -13,6 +13,8 @@ public:
 	void OnEditor() override;
 
 	void SetLight(Light* light);
+	void SetAsPointLight();
+	void SetAsSpotLight();
 
 	virtual bool OnLoad(JsonParsing& node) override;
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) override;

@@ -147,6 +147,20 @@ void ComponentLight::SetLight(Light* light)
 	this->light = light;
 }
 
+void ComponentLight::SetAsPointLight()
+{
+	owner->name = "Point Light";
+	light = new PointLight();
+	app->renderer3D->AddPointLight((PointLight*)light);
+}
+
+void ComponentLight::SetAsSpotLight()
+{
+	owner->name = "Spot Light";
+	light = new SpotLight();
+	app->renderer3D->AddSpotLight((SpotLight*)light);
+}
+
 bool ComponentLight::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
