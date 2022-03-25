@@ -49,6 +49,15 @@ void InputActionComponent::OnEditor()
 					ImGui::PushID(i);
 					if (ImGui::TreeNodeEx(currentActionMaps[i]->GetName().c_str(), ImGuiTreeNodeFlags_DefaultOpen))
 					{
+						for (size_t j = 0; j < currentActionMaps[i]->GetActions()->size(); j++)
+						{
+							ImGui::PushID(j);
+							if (ImGui::TreeNodeEx(currentActionMaps[i]->GetActions()->at(j)->GetName().c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+							{
+								ImGui::TreePop();
+							}
+							ImGui::PopID();
+						}
 						ImGui::TreePop();
 					}
 					ImGui::PopID();

@@ -201,6 +201,7 @@ void InputActionMenu::ColumnActionMaps()
 		{
 			currentMap = i;
 			currentAction = 0;
+			currentBinding = 0;
 		}
 
 		if (open)
@@ -291,12 +292,12 @@ void Actions::OnSave(JsonParsing& node, JSON_Array* array)
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Bindings");
 
-	JsonParsing newFile = JsonParsing();
 	for (int i = 0; i < bindings.size(); i++)
 	{
+		JsonParsing newFile = JsonParsing();
 		newFile.SetNewJsonNumber(newFile.ValueToObject(newFile.GetRootValue()), "Path", bindings[i]);
+		file.SetValueToArray(newArray, newFile.GetRootValue());
 	}
-	node.SetValueToArray(newArray, newFile.GetRootValue());
 
 	node.SetValueToArray(array, file.GetRootValue());
 }
