@@ -21,14 +21,7 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern bool MoveTo(Vector3 destination);
 
-        // Returns true if a target is setted
-        public extern bool targetSetted
-        {
-            [MethodImplAttribute(MethodImplOptions.InternalCall)]
-            get;
-        }
-
-        public extern Vector3 destination
+        public extern Vector3 hitPosition
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;

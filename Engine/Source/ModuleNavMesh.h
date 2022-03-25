@@ -29,7 +29,6 @@ enum class AgentType
 struct NavAgent
 {
 	NavAgent();
-	AgentType AgentType = AgentType::ENEMY;
 
 	float radius = 0.0f;
 	float height = 0.0f;
@@ -41,12 +40,8 @@ struct NavAgent
 	float acceleration = 0.0f;
 	float stoppingDistance = 0;
 
-	float3 targetPos = float3::zero;
-	bool targetPosSet = false;
 	std::vector<float3> path;
 	PathType pathType = PathType::STRAIGHT;
-
-	int m_straightPathOptions = 0;
 
 	//Path Calculations Variables
 	dtPolyRef m_startRef = 0;
@@ -85,7 +80,7 @@ public:
 	dtQueryFilter m_filter;
 	NavMeshBuilder* m_navMeshBuilder;
 
-	NavAgentComponent* player = nullptr;
+	float3 hitPosition = float3::zero;
 };
 
 struct BuildSettings

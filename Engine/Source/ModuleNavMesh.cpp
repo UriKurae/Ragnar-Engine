@@ -103,31 +103,8 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 	}
 
 	float hitTime;
-	bool hit = geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime);
-
-	float3 hitPoint;
-	hitPoint = raycast.a + (raycast.b - raycast.a) * hitTime;
-	if (hit && pathfinder->player != nullptr)
-	{
-		if (clickedMouseButton == SDL_BUTTON_LEFT)
-		{
-			//Just set the Player Target!!!
-			pathfinder->player->agentProperties->targetPos = hitPoint;
-			pathfinder->player->agentProperties->targetPosSet = true;
-		}
-		else if (clickedMouseButton == SDL_BUTTON_RIGHT)
-		{
-			//pathfinder->startPosition = hitPoint;
-			//pathfinder->startPosSet = true;
-
-			//if (pathfinder->endPosSet)
-			//{
-			//	pathfinder->CalculatePath();
-			//	std::vector<float3> path;
-			//	pathfinder->CalculatePath(pathfinder->startPosition, pathfinder->endPosition, path);
-			//}
-		}
-	}
+	if (geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime))
+		pathfinder->hitPosition = raycast.a + (raycast.b - raycast.a) * hitTime;
 }
 
 void ModuleNavMesh::ClearNavMeshes()
@@ -615,8 +592,6 @@ std::vector<float3> Pathfinder::CalculatePath(NavAgentComponent* agent, float3 d
 	memcpy(calculatedPath.data(), agentProp->m_straightPath, sizeof(float)* agentProp->m_nstraightPath * 3);
 	calculatedPath.erase(calculatedPath.begin());
 
-	agentProp->targetPos = destination;
-	agentProp->targetPosSet = false;
 	agentProp->path = calculatedPath;
 
 	return calculatedPath;
@@ -727,11 +702,11 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	btRigidBody* rigidBody = agent->owner->GetComponent<RigidBodyComponent>()->GetBody();
 	float3 origin = agent->owner->GetComponent<TransformComponent>()->GetPosition();
 	float3 direction = destination - origin;
-	float3 offSet(origin.x, origin.y - math::Abs(direction.y), origin.z);
+	float2 destination2D = { destination.x, destination.z };
+	float totalheight = math::Abs(direction.y);
 	direction.Normalize();
 
 	rigidBody->activate(true);
-	//rigidBody->setAngularVelocity();
 
 	//Movement
 	rigidBody->setLinearVelocity((btVector3)direction * agent->agentProperties->speed);
@@ -740,7 +715,8 @@ bool Pathfinder::MoveTo(NavAgentComponent* agent, float3 destination)
 	SmoothLookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z }, agent->agentProperties->angularSpeed * DEGTORAD);
 	//LookAt(rigidBody, { direction.x, direction.z }, { origin.x, origin.z });
 
-	if (destination.Distance(offSet) < MAX_ERROR * agent->agentProperties->speed)
+	if (destination2D.Distance({ origin.x, origin.z }) < MAX_ERROR * agent->agentProperties->speed &&
+		totalheight < MAX_ERROR + (agent->agentProperties->height / 2))
 		return true;
 
 	return false;

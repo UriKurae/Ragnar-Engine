@@ -15,8 +15,6 @@ NavAgentComponent::NavAgentComponent(GameObject* obj) : Component()
 
 NavAgentComponent::~NavAgentComponent()
 {
-	if (pathfinding->player == this) pathfinding->player = nullptr;
-
 	agentProperties->path.clear();
 	RELEASE(agentProperties);
 }
@@ -66,40 +64,6 @@ void NavAgentComponent::OnEditor()
 			agentProperties->pathType = PathType::STRAIGHT;
 		ImGui::Dummy({ 0,10 });
 
-		//TODO: Hacer ma bonico
-		std::string name;
-		switch (agentProperties->AgentType)
-		{
-			case AgentType::ENEMY:
-				name = "Enemy";
-				break;
-			case AgentType::CHARACTER_1:
-				name = "Character 1";
-				break;
-		}
-		ImGui::Text("Agent Type"); ImGui::SameLine;
-		if (ImGui::BeginCombo("##AgentType", name.c_str()))
-		{
-			
-			if (owner->tag == std::string("Player"))
-			{
-				if (ImGui::Selectable("Character 1"))
-				{
-					agentProperties->AgentType = AgentType::CHARACTER_1;
-					pathfinding->player = this;
-				}
-			}
-
-			if (ImGui::Selectable("Enemy"))
-			{
-				agentProperties->AgentType = AgentType::ENEMY;
-				if (pathfinding->player == this) pathfinding->player = nullptr;
-			}
-
-			ImGui::EndCombo();
-		}
-		ImGui::Dummy({ 0,10 });
-
 		ComponentOptions(this);
 	}
 	ImGui::PopID();
@@ -108,16 +72,6 @@ void NavAgentComponent::OnEditor()
 bool NavAgentComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
-
-	agentProperties->AgentType = (AgentType)(int)node.GetJsonNumber("AgentType");
-	if (owner->tag == std::string("Player")) {
-		agentProperties->AgentType = AgentType::CHARACTER_1;
-		pathfinding->player = this;
-	}
-	else agentProperties->AgentType = AgentType::ENEMY;
-
-
-	if (node.GetJsonBool("TargetSet") == true) pathfinding->player = this;
 
 	agentProperties->radius = node.GetJsonNumber("Radius");
 	agentProperties->height = node.GetJsonNumber("Height");
@@ -128,9 +82,6 @@ bool NavAgentComponent::OnLoad(JsonParsing& node)
 	agentProperties->angularSpeed = node.GetJsonNumber("AngularSpeed");
 	agentProperties->acceleration = node.GetJsonNumber("Acceleration");
 	agentProperties->stoppingDistance = node.GetJsonNumber("StoppingDistance");
-
-	agentProperties->targetPos = node.GetJson3Number(node,"Target");
-	agentProperties->targetPosSet = node.GetJsonBool("TargetSet");
 
 	agentProperties->pathType = (PathType)(int)node.GetJsonNumber("PathType");
 
@@ -167,11 +118,6 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "AgentType", (int)agentProperties->AgentType);
-
-	if (pathfinding->player == this) file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", true);
-	else file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Player", false);
-
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", (float)agentProperties->radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Height", (float)agentProperties->height);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "StopHeight", (float)agentProperties->maxClimb);
@@ -182,9 +128,7 @@ bool NavAgentComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Acceleration", (float)agentProperties->acceleration);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "StoppingDistance", (float)agentProperties->stoppingDistance);
 
-	file.SetNewJson3Number(file, "Target", agentProperties->targetPos);
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "TargetSet", agentProperties->targetPosSet);
-
+	//TODO: Maybe Store the path?
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PathType", (int)agentProperties->pathType);
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "NumPolys", agentProperties->m_npolys);

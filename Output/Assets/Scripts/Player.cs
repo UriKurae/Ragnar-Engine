@@ -24,9 +24,9 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-        if (agent.targetSetted)
+        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
-            agent.CalculatePath(agent.destination);
+            agent.CalculatePath(agent.hitPosition);
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         }
 

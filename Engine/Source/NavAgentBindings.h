@@ -22,22 +22,16 @@ MonoArray* CalculateAgentPath(MonoObject* go, MonoObject* dest)
 	return ret;
 }
 
-MonoBoolean GetAgentTargetSetted(MonoObject* go)
-{
-	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
-	return agent->agentProperties->targetPosSet;
-}
-
 bool MoveAgentPath(MonoObject* go)
 {
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
 	return agent->pathfinding->MovePath(agent);
 }
 
-MonoObject* GetAgentDestination(MonoObject* go)
+MonoObject* GetHitPosition(MonoObject* go)
 {
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
-	return app->moduleMono->Float3ToCS(agent->agentProperties->targetPos);
+	return app->moduleMono->Float3ToCS(agent->pathfinding->hitPosition);
 }
 
 bool MoveAgentTo(MonoObject* go, MonoObject* dest)
