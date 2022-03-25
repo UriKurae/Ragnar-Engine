@@ -3,6 +3,7 @@
 #include "FileSystem.h"
 #include "InputActionComponent.h"
 #include "InputActionMenu.h"
+#include "MonoManager.h"
 #include "Globals.h"
 
 #include "IconsFontAwesome5.h"
@@ -54,6 +55,20 @@ void InputActionComponent::OnEditor()
 							ImGui::PushID(j);
 							if (ImGui::TreeNodeEx(currentActionMaps[i]->GetActions()->at(j)->GetName().c_str(), ImGuiTreeNodeFlags_DefaultOpen))
 							{
+								if (ImGui::BeginCombo("Script", scriptsNameList[i][j].c_str()))
+								{
+									const char* scriptName;
+									for (int k = 0; k < app->moduleMono->userScripts.size(); k++)
+									{
+										scriptName = mono_class_get_name(app->moduleMono->userScripts[k]);
+										if (ImGui::Selectable(scriptName))
+										{
+											scriptsNameList[i][j] = scriptName;
+											//LoadScriptData(scriptName);
+										}
+									}
+									ImGui::EndCombo();
+								}
 								ImGui::TreePop();
 							}
 							ImGui::PopID();
@@ -144,6 +159,7 @@ bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
 bool InputActionComponent::LoadInputAsset(const char* path)
 {
 	currentActionMaps.clear();
+	scriptsNameList.clear();
 
 	JsonParsing sceneFile = JsonParsing();
 
@@ -152,12 +168,14 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Action Maps");
 
 		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
+		scriptsNameList.resize(size);
 		for (int i = 0; i < size; ++i)
 		{
 			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
 			std::shared_ptr<ActionMaps> aM(new ActionMaps());
 			aM->OnLoad(go);
 			currentActionMaps.push_back(aM);
+			scriptsNameList[i].resize(aM->GetActions()->size());
 		}
 		currentAssetPath = path;
 		currentAssetName = path;
