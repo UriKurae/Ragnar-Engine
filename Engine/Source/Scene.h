@@ -76,7 +76,7 @@ private:
 
 	Quadtree qTree;
 
-	bool frameSkip;
+	bool frameSkip = false;
 	bool resetQuadtree;
 	bool drawQuad = false;
 };

@@ -1105,7 +1105,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1183,7 +1183,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1261,7 +1261,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1339,7 +1339,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1388,7 +1388,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1437,7 +1437,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1486,7 +1486,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1535,7 +1535,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1613,7 +1613,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1691,7 +1691,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1740,7 +1740,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1818,7 +1818,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1867,7 +1867,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1916,7 +1916,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1965,7 +1965,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2043,7 +2043,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2121,7 +2121,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2194,7 +2194,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2243,7 +2243,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2292,7 +2292,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2370,7 +2370,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2448,7 +2448,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/DesertSand\/prop_plane_desert_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/DesertSand\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2527,7 +2527,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2600,7 +2600,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2649,7 +2649,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2727,7 +2727,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2776,7 +2776,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2849,7 +2849,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2927,7 +2927,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3005,7 +3005,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3054,7 +3054,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3103,7 +3103,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3152,7 +3152,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3201,7 +3201,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3274,7 +3274,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3352,7 +3352,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3401,7 +3401,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3474,7 +3474,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3552,7 +3552,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3601,7 +3601,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3679,7 +3679,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3757,7 +3757,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3835,7 +3835,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3913,7 +3913,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3962,7 +3962,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4040,7 +4040,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4089,7 +4089,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4162,7 +4162,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4211,7 +4211,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4289,7 +4289,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4338,7 +4338,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4387,7 +4387,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4436,7 +4436,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4514,7 +4514,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4592,7 +4592,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4670,7 +4670,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4719,7 +4719,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4768,7 +4768,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4846,7 +4846,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -4924,7 +4924,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4973,7 +4973,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5022,7 +5022,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5100,7 +5100,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5149,7 +5149,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5227,7 +5227,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5305,7 +5305,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5383,7 +5383,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5432,7 +5432,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5481,7 +5481,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5559,7 +5559,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5637,7 +5637,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5715,7 +5715,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5793,7 +5793,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5842,7 +5842,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5891,7 +5891,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -5969,7 +5969,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -6018,7 +6018,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -6067,7 +6067,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -6116,7 +6116,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -6165,7 +6165,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_small_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_small_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -6214,7 +6214,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -6263,7 +6263,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Textures\/Rocks\/prop_rock_medium_albedo.png",
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/prop_rock_medium_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

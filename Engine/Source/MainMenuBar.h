@@ -58,17 +58,13 @@ private:
 	void HelpMenu();
 	void SetStyleMenu();
 
+	void PlayBar();
+
 private:
 	bool showMenu;
 	bool showBuildMenu;
 
 	std::shared_ptr<Scene> sceneSelected;
-
-	Texture* buttonPlay;
-	Texture* buttonStop;
-	Texture* buttonNextFrame;
-	Texture* buttonPause;
-	Texture* buttonPauseBlue;
 
 	bool saveWindow;
 	std::vector<Menu*> menus;
