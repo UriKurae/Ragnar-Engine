@@ -561,6 +561,7 @@ void MainMenuBar::CreateGameObjectMenu()
 			{
 				GameObject* object = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr, false);
 				object->CreateComponent((ComponentType)(i + (int)ComponentType::UI_BUTTON));
+				object->SetName(uiComponents.at(i).c_str());
 			}
 		}
 

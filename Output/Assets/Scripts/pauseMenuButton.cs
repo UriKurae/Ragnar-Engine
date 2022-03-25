@@ -21,11 +21,11 @@ public class pauseMenuButton : RagnarComponent
 	{
 		if (firstTime)
 		{
-			Image = GameObject.Find("BackgroundImage");
-			Rect = GameObject.Find("UIRectangle");
-			Resume = GameObject.Find("ButtonResume");
-			MainM = GameObject.Find("ButtonMainMenu");
-			Opt = GameObject.Find("ButtonOptions");
+			Image = GameObject.Find("Background");
+			Rect = GameObject.Find("UI Rectangle");
+			Resume = GameObject.Find("Button Resume");
+			MainM = GameObject.Find("Button MainMenu");
+			Opt = GameObject.Find("Button Options");
 
 			pos = new Vector3(0.0f, 0.0f, 0.0f);
 

@@ -18,7 +18,6 @@
 SliderComponent::SliderComponent(GameObject* own)
 {
 	type = ComponentType::UI_SLIDER;
-	own->name = "Slider";
 	own->isUI = true;
 	sliderText.setText("Slider", 5, 5, 0.5, { 255,255,255 });
 
@@ -32,11 +31,14 @@ SliderComponent::SliderComponent(GameObject* own)
 	drawRect = false;
 	actualColor = normalColor;
 
-	own->CreateComponent(ComponentType::TRANFORM2D);
-	own->CreateComponent(ComponentType::MATERIAL);
-	secondMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
-	app->userInterface->UIGameObjects.push_back(own);
+	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
+	{
+		own->CreateComponent(ComponentType::TRANFORM2D);
+		own->CreateComponent(ComponentType::MATERIAL);
+		secondMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	}
 
+	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
 	frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
@@ -58,46 +60,26 @@ bool SliderComponent::Update(float dt)
 
 	if (state != State::DISABLED)
 	{
-
 		if (app->userInterface->focusedGameObject == owner)
 		{
 			state = State::FOCUSED;
 
-			if (state != State::FOCUSED && state != State::PRESSED)
-			{
-			}
-
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
-			{
 				state = State::PRESSED;
-			}
-
-			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
-			{
-
-			}
 		}
 		else state = State::NORMAL;
 
 		if (app->userInterface->UIGameObjectSelected == owner)
 		{
 			state = State::SELECTED;
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KeyState::KEY_DOWN)
-			{
-
-			}
-
 		}
 	}
-
 	
 	if (state == State::PRESSED) {
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
 		float4 viewport = app->editor->GetGameView()->GetBounds();
 		float2 fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-
 
 		ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 		float posXMin = ((viewport.z / 2) + (transform2D->GetPosition().x)) - (transform2D->GetButtonWidth() / 2);
@@ -114,8 +96,7 @@ bool SliderComponent::Update(float dt)
 			ComponentTransform2D* q;
 			for (int a = 0; a < owner->components.size(); a++) {
 				if (owner->components[a]->type == ComponentType::TRANFORM2D)
-				{
-					
+				{					
 					cont++;
 					if (cont == 1) {
 						q = (ComponentTransform2D*)owner->components[a];
@@ -140,7 +121,6 @@ bool SliderComponent::Update(float dt)
 
 void SliderComponent::Draw(CameraComponent* gameCam)
 {
-
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
@@ -169,9 +149,9 @@ void SliderComponent::Draw(CameraComponent* gameCam)
 	default:
 		break;
 	}
+
 	firstDraw = false;
-	MaterialComponent* mat = owner->GetComponent<MaterialComponent>();
-	planeToDraw->DrawPlane2D(mat->GetTexture().get());
+	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
 	firstDraw = true;
 
 	frontPlaneToDraw->DrawPlane2D(secondMaterial->GetTexture().get());
@@ -222,29 +202,17 @@ void SliderComponent::OnEditor()
 		sliderText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
 		if (normalEditable)
-		{
 			ImGui::ColorPicker3("Normal Color", &normalColor);
-		}
 		if (pressedEditable)
-		{
-			ImGui::ColorPicker3("Pressed Color", &pressedColor);
-		}
+			ImGui::ColorPicker3("Pressed Color", &pressedColor);		
 		if (focusedEditable)
-		{
-			ImGui::ColorPicker3("Focused Color", &focusedColor);
-		}
+			ImGui::ColorPicker3("Focused Color", &focusedColor);		
 		if (disabledEditable)
-		{
-			ImGui::ColorPicker3("Disabled Color", &disabledColor);
-		}
+			ImGui::ColorPicker3("Disabled Color", &disabledColor);		
 		if (selectedEditable)
-		{
-			ImGui::ColorPicker3("Selected Color", &selectedColor);
-		}
+			ImGui::ColorPicker3("Selected Color", &selectedColor);		
 		if (textColorEditable)
-		{
-			ImGui::ColorPicker3("Text Color", &textColor);
-		}
+			ImGui::ColorPicker3("Text Color", &textColor);		
 
 		ImGui::InputFloat("Min Value", &minValue);
 		ImGui::InputFloat("Max Value", &maxValue);
@@ -268,41 +236,20 @@ float2 SliderComponent::GetParentPosition()
 
 bool SliderComponent::OnLoad(JsonParsing& node)
 {
-	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-	planeToDraw->own = owner;
-
-	frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-	frontPlaneToDraw->own = owner;
-	int contt = 0;
 	int contm = 0;
-	for (int a = 0; a < owner->components.size(); a++) {
-
-		if (owner->components[a]->type == ComponentType::TRANFORM2D)
+	for (int a = 0; a < owner->components.size(); a++) 
+	{
+		if (owner->components[a]->type == ComponentType::MATERIAL) 
 		{
-			contt++;
-			if (contt==1) {
-			
-			}
-			else
+			if (contm != 0)
 			{
-				ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
+				secondMaterial = (MaterialComponent*)owner->components[a];
+				break;
 			}
-				
-		}
-		else if (owner->components[a]->type == ComponentType::MATERIAL) 
-		{
 			contm++;
-			if (contm == 1) {
-			}
-			else
-			{
-				secondMaterial = (MaterialComponent*)owner->components[a];			
-			}
 		}
 	}
-	owner->isUI = true;
 
-	app->userInterface->UIGameObjects.push_back(owner);
 	return true;
 }
 

@@ -33,13 +33,12 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 	transMatrix = aux.FromTRS(internalPosition, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	type = ComponentType::TRANFORM2D;
-	
+	type = ComponentType::TRANFORM2D;	
 }
 
 ComponentTransform2D::~ComponentTransform2D()
 {
-	//app->userInterface->DeleteUIGameObjects(owner);
+	app->userInterface->DeleteUIGameObjects(owner);
 }
 
 bool ComponentTransform2D::Update(float dt)
@@ -53,7 +52,6 @@ bool ComponentTransform2D::Update(float dt)
 		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
 		firstTime = false;
 	}
-
 	
 	//if (lastViewportBounds.w != viewport.w)
 	//{
@@ -67,17 +65,12 @@ bool ComponentTransform2D::Update(float dt)
 	//}
 	
 	internalPosition.x = ((position.x)/24) / zoomRatio;
-	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;
-	
-	
+	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;	
+	internalPosition.z = position.z;
+
 	lastViewportBounds = viewport;
-
-
 	scale.x = (((buttonWidth - 130) * (viewport.z / 25)) / viewport.z) / zoomRatio;
 	scale.y = (((buttonHeight - 50) * (viewport.w / 23)) / viewport.w) / zoomRatio;
-
-
-	internalPosition.z = position.z;
 
 	/*internalPosition.x = position.x/1;
 	internalPosition.y = position.y/8;*/
@@ -89,7 +82,6 @@ bool ComponentTransform2D::Update(float dt)
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
 
-
 	return true;
 }
 
@@ -99,33 +91,14 @@ void ComponentTransform2D::OnEditor()
 		if (ImGui::CollapsingHeader("2D Transform"))
 		{
 			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
-
-			if (ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000))
-			{
-
-			}
-			if (ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000))
-			{
-
-			}
-
+			ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000);
+			ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000);
 
 			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Position");
-			static bool wasNull = true;
 
-
-			if (ImGui::DragFloat("Position X", &position.x, 0.5f))
-			{
-
-			}
-			if (ImGui::DragFloat("Position Y", &position.y, 0.5f))
-			{
-
-			}
-			if (ImGui::DragFloat("Position Z", &position.z, 0.5f))
-			{
-
-			}
+			ImGui::DragFloat("Position X", &position.x, 0.5f);
+			ImGui::DragFloat("Position Y", &position.y, 0.5f);
+			ImGui::DragFloat("Position Z", &position.z, 0.5f);
 		}
 	}
 }
@@ -137,23 +110,17 @@ Quat ComponentTransform2D::FromEulerToQuat(float3 eulerAngles)
 	eulerAngles.y = math::DegToRad(eulerAngles.y);
 	eulerAngles.z = math::DegToRad(eulerAngles.z);
 
-	Quat q = q.FromEulerXYZ(eulerAngles.x, eulerAngles.y, eulerAngles.z);
-
-	return q;
+	return Quat::FromEulerXYZ(eulerAngles.x, eulerAngles.y, eulerAngles.z);
 }
 
 float3 ComponentTransform2D::FromQuatToEuler(Quat quatAngles)
 {
-	float3 angles;
-
-	angles = quatAngles.ToEulerXYZ();
-
+	float3 angles = quatAngles.ToEulerXYZ();
 	angles.x = math::RadToDeg(angles.x);
 	angles.y = math::RadToDeg(angles.y);
 	angles.z = math::RadToDeg(angles.z);
-	float3 toReturn(angles.x,angles.y,angles.z);
 
-	return toReturn;
+	return float3(angles.x, angles.y, angles.z);
 }
 bool ComponentTransform2D::OnLoad(JsonParsing& node)
 {
@@ -163,9 +130,8 @@ bool ComponentTransform2D::OnLoad(JsonParsing& node)
 	rotationEuler = node.GetJson3Number(node, "rotationEuler");
 	buttonWidth = node.GetJsonNumber("buttonWidth");
 	buttonHeight = node.GetJsonNumber("buttonHeight");
-	
-	float4x4 aux;
-	transMatrix = aux.FromTRS(position, rotationQuat, scale);
+
+	transMatrix = float4x4::FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
 	return true;
@@ -174,7 +140,6 @@ bool ComponentTransform2D::OnLoad(JsonParsing& node)
 bool ComponentTransform2D::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
-
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)18);

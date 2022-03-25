@@ -13,18 +13,19 @@
 ButtonComponent::ButtonComponent(GameObject* own)
 {
 	type = ComponentType::UI_BUTTON;
-	own->name = "Button";
 	own->isUI = true;
 	active = true;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
 	
-
-	own->CreateComponent(ComponentType::TRANFORM2D);
-	normalMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
-	focusedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
-	pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
-	disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
-	actual = normalMaterial;
+	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
+	{
+		own->CreateComponent(ComponentType::TRANFORM2D);
+		normalMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+		focusedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+		pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+		disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+		actual = normalMaterial;
+	}	
 
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
@@ -32,15 +33,14 @@ ButtonComponent::ButtonComponent(GameObject* own)
 }
 
 ButtonComponent::~ButtonComponent()
-{
-	
+{	
 	RELEASE(planeToDraw);
 }
 
 bool ButtonComponent::Update(float dt)
 {
 	buttonText.SetOnlyPosition(float2((GetParentPosition().x / 1.07) + 5, (GetParentPosition().y / 1.07) + 10));
-	buttonText.setOnlyText(text);
+
 	if (!active)
 		state = State::DISABLED;
 	else
@@ -56,13 +56,6 @@ bool ButtonComponent::Update(float dt)
 			{
 				state = State::PRESSED;
 				actual = pressedMaterial;
-			}
-				
-
-			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
-			{
-				
 			}
 		}
 		else 
@@ -94,16 +87,10 @@ void ButtonComponent::OnEditor()
 		static float fadeDuration = 0.1f;
 
 		// Manage if colors are being edited or not
-		static bool normalEditable = false;
-		static bool pressedEditable = false;
-		static bool focusedEditable = false;
-		static bool disabledEditable = false;
-		static bool selectedEditable = false;
 		static bool textColorEditable = false;
 
 		Checkbox(this, "Active", active);
 		ImGui::Checkbox("Interactable", &active);
-
 
 		ImGui::Separator();
 
@@ -116,14 +103,13 @@ void ButtonComponent::OnEditor()
 
 		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
-
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 		
 		
-		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
-		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
-		buttonText.setOnlyText(text);
+		if(ImGui::InputText("Text", text, IM_ARRAYSIZE(text)))
+			buttonText.setOnlyText(text);
+		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);		
 		
 		ComponentOptions(this);
 		ImGui::Separator();
@@ -138,15 +124,10 @@ float2 ButtonComponent::GetParentPosition()
 }
 bool ButtonComponent::OnLoad(JsonParsing& node)
 {
-	std::string textt;
-
-	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-	planeToDraw->own = owner;
-	owner->isUI = true;
-	app->userInterface->UIGameObjects.push_back(owner);
 	std::string aux = node.GetJsonString("buttonText");
 	strcpy(text, aux.c_str());
-	buttonText.textt = textt;
+	buttonText.textt = text;
+
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");

@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.95515614748001099,
+                    "Vertical Fov": 0.77191311120986938,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         11.233668327331543,
@@ -183,7 +183,7 @@
         {
             "UUID": 651135605,
             "Parent UUID": 417171234,
-            "Name": "BackgroundImage",
+            "Name": "Background",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -200,7 +200,7 @@
                         84.5
                     ],
                     "Scale": [
-                        145.79998779296875,
+                        145.80000305175781,
                         75.228256225585938,
                         1
                     ],
@@ -224,7 +224,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 66622064,
+                    "pointer": 30670232,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -233,7 +233,7 @@
         {
             "UUID": 1783704250,
             "Parent UUID": 417171234,
-            "Name": "Image",
+            "Name": "UI Rectangle",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -276,7 +276,7 @@
         {
             "UUID": 864873950,
             "Parent UUID": 417171234,
-            "Name": "ButtonStart",
+            "Name": "Button Start",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -293,7 +293,7 @@
                         88
                     ],
                     "Scale": [
-                        30.599998474121094,
+                        30.600000381469727,
                         2.6413044929504395,
                         1
                     ],
@@ -342,7 +342,7 @@
         {
             "UUID": 166393221,
             "Parent UUID": 417171234,
-            "Name": "ButtonExit",
+            "Name": "Button Exit",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -359,7 +359,7 @@
                         86
                     ],
                     "Scale": [
-                        30.599998474121094,
+                        30.600000381469727,
                         2.4456520080566406,
                         1
                     ],

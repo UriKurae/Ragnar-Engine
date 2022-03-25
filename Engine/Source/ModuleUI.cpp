@@ -267,8 +267,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	focusedGameObject = nullptr;
-	UIGameObjectSelected = nullptr;
-	
+	UIGameObjectSelected = nullptr;	
 }
 
 ModuleUI::~ModuleUI()
