@@ -274,12 +274,6 @@ bool MainMenuBar::Update(float dt)
 		else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
 	}
 
-	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
-	{
-		
-	}
-
 	ImGui::PopStyleColor(3);
 
 	// Build menu
@@ -698,7 +692,7 @@ void MainMenuBar::SetStyle(int _style)
 // Object align with camera
 void MainMenuBar::AlignWithView()
 {
-  GameObject* temp = app->editor->GetGO();
+	GameObject* temp = app->editor->GetGO();
 	if (temp != nullptr)
 	{
 		TransformComponent* transform = temp->GetComponent<TransformComponent>();

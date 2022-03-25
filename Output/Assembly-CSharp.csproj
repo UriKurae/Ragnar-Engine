@@ -68,9 +68,9 @@
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Quaternion.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Time.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
-    <Compile Include="Assets\Scripts\loseScreen.cs" />
-    <Compile Include="Assets\Scripts\mainMenuBackScreen.cs" />
-    <Compile Include="Assets\Scripts\pauseMenuButton.cs" />
+    <Compile Include="Assets\Scripts\LoseScreen.cs" />
+    <Compile Include="Assets\Scripts\MainMenuBackScreen.cs" />
+    <Compile Include="Assets\Scripts\PauseMenuButton.cs" />
     <Compile Include="Assets\Scripts\EnemyPatrol.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Abilities.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\EnemyInteractions.cs" />
-    <Compile Include="Assets\Scripts\winScreen.cs" />
+    <Compile Include="Assets\Scripts\WinScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />

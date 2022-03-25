@@ -217,7 +217,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/mainMenuScreen.png",
+                    "Path": "Assets\/Resources\/UI\/mainMenuScreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -267,7 +267,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/MainMenuBox.png",
+                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -307,13 +307,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -373,13 +373,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

@@ -133,8 +133,8 @@
                         84
                     ],
                     "Scale": [
-                        0.64285707473754883,
-                        0.80357140302658081,
+                        0.74999994039535522,
+                        0.93749994039535522,
                         1
                     ],
                     "rotationEuler": [
@@ -147,13 +147,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/CrysknifeV.png",
+                    "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/CrysknifeV.png",
+                    "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -199,8 +199,8 @@
                         84
                     ],
                     "Scale": [
-                        0.69107139110565186,
-                        0.5590062141418457,
+                        0.80624997615814209,
+                        0.65217387676239014,
                         1
                     ],
                     "rotationEuler": [
@@ -213,13 +213,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SpiceNadeV.png",
+                    "Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SpiceNadeV.png",
+                    "Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -265,8 +265,8 @@
                         83.5
                     ],
                     "Scale": [
-                        6.7821431159973145,
-                        3.0221273899078369,
+                        7.9124999046325684,
+                        3.5258152484893799,
                         1
                     ],
                     "rotationEuler": [
@@ -282,7 +282,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI_chra.png",
+                    "Path": "Assets\/Resources\/UI\/UI_chra.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -308,8 +308,8 @@
                         83.5
                     ],
                     "Scale": [
-                        8.791071891784668,
-                        1.8517081737518311,
+                        10.256250381469727,
+                        2.1603262424468994,
                         1
                     ],
                     "rotationEuler": [
@@ -325,7 +325,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI_skill.png",
+                    "Path": "Assets\/Resources\/UI\/UI_skill.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -389,8 +389,8 @@
                         84
                     ],
                     "Scale": [
-                        32.544643402099609,
-                        16.914047241210938,
+                        37.968746185302734,
+                        19.733055114746094,
                         1
                     ],
                     "rotationEuler": [
@@ -406,14 +406,14 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/pauseMenuScreen.png",
+                    "Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 361966048,
+                    "pointer": 34693696,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -439,8 +439,8 @@
                         88.199996948242188
                     ],
                     "Scale": [
-                        11.61964225769043,
-                        4.1052021980285645,
+                        13.556249618530273,
+                        4.7894020080566406,
                         1
                     ],
                     "rotationEuler": [
@@ -456,7 +456,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/MainMenuBox.png",
+                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -482,8 +482,8 @@
                         90
                     ],
                     "Scale": [
-                        5.4642858505249023,
-                        0.47166150808334351,
+                        6.375,
+                        0.55027174949645996,
                         1
                     ],
                     "rotationEuler": [
@@ -496,13 +496,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -548,8 +548,8 @@
                         90
                     ],
                     "Scale": [
-                        5.4642858505249023,
-                        0.47166150808334351,
+                        6.375,
+                        0.55027174949645996,
                         1
                     ],
                     "rotationEuler": [
@@ -562,13 +562,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -614,8 +614,8 @@
                         90
                     ],
                     "Scale": [
-                        5.4642858505249023,
-                        0.47166150808334351,
+                        6.375,
+                        0.55027174949645996,
                         1
                     ],
                     "rotationEuler": [
@@ -628,13 +628,13 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/SelectorFocused.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -718,10 +718,10 @@
                         -16.951992034912109
                     ],
                     "Quaternion": [
-                        0.030886312946677208,
-                        -0.49284610152244568,
-                        0.035356923937797546,
-                        0.86884903907775879
+                        0.4181348979473114,
+                        0.057465791702270508,
+                        0.25883430242538452,
+                        0.86883008480072021
                     ],
                     "RotationEditor": [
                         0,
@@ -745,7 +745,7 @@
                         -16.951992034912109
                     ],
                     "Type": 3,
-                    "Zoom": 56,
+                    "Zoom": 48,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -815,7 +815,7 @@
                 {
                     "Type": 9,
                     "Active": true,
-                    "Current Anim": "Crouch",
+                    "Current Anim": "Shoot",
                     "Animations": [
                         {
                             "State": "Walk",
@@ -830,16 +830,6 @@
                         {
                             "State": "Shoot",
                             "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Crouch",
-                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Death",
-                            "Path Anim Assets": "Assets\/Resources\/Capoeira__mixamo.com.fbx",
                             "Loop": false
                         }
                     ]
@@ -873,7 +863,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 32440768,
+                    "pointer": 34694064,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -885,7 +875,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 32442056,
+                    "pointer": 34694248,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -6614,7 +6604,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/Paul_low_blinn1_BaseColor.1001.png",
+                    "Path": "Assets\/Resources\/CharacterTex\/char_paul_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -6699,7 +6689,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 361962184,
+                    "pointer": 361175120,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -6709,7 +6699,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 361964944,
+                    "pointer": 361174936,
                     "type": 4,
                     "componentTable": 0
                 },
