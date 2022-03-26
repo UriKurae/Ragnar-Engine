@@ -3,13 +3,10 @@
 #include "Globals.h"
 
 #include "ModuleRenderer3D.h"
-#include "ModuleWindow.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 #include "ModuleEditor.h"
-#include "ModuleCamera3D.h"
 #include "Physics3D.h"
-#include "ModuleUI.h"
 
 #include "ConsoleMenu.h"
 #include "ConfigurationMenu.h"
@@ -42,9 +39,7 @@
 #include "Style.h"
 
 #include "Math/float3x3.h"
-#include "imgui/imgui_stdlib.h"
 
-#include <fstream>
 #include "Profiling.h"
 
 MainMenuBar::MainMenuBar() : Menu(true, "MainMenu")
@@ -102,15 +97,6 @@ bool MainMenuBar::Update(float dt)
 		ImGui::ShowMetricsWindow(&showMenu);
 	}
 
-	if (showCreateLightSensibleShaderWindow)
-	{
-		ShowCreateLigthSensibleShaderWindow();
-	}
-	else if (showCreateNotLightSensibleShaderWindow)
-	{
-		ShowCreateNotLigthSensibleShaderWindow();
-	}
-
 	for (unsigned int i = 0; i < menus.size(); ++i)
 	{
 		if (menus[i]->active) menus[i]->Update(dt);
@@ -125,7 +111,7 @@ bool MainMenuBar::FileMenu()
 	{
 		// Project options (Create, open...)
 		if (ImGui::MenuItem(ICON_FA_FILE_UPLOAD" New Project", "Ctrl + N"))
-			app->sceneManager->SetSaveScene(true);
+			app->sceneManager->saveScene = true;
 
 		if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Open Project", "Ctrl + O"))
 		{
@@ -153,7 +139,7 @@ bool MainMenuBar::FileMenu()
 		ImGui::Separator();
 
 		if (ImGui::MenuItem("Build"))
-			app->sceneManager->SetShowBuild(true);
+			app->sceneManager->showBuildMenu = true;
 
 		if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC"))
 			return false;
@@ -337,10 +323,10 @@ void MainMenuBar::CreateGameObjectMenu()
 	{
 		static int count = 0;
 		if (ImGui::MenuItem("Light-sensible"))
-			showCreateLightSensibleShaderWindow = true;
+			app->sceneManager->showCreateLightSensibleShaderWindow = true;
 
 		else if (ImGui::MenuItem("Not light-sensible"))
-			showCreateNotLightSensibleShaderWindow = true;
+			app->sceneManager->showCreateNotLightSensibleShaderWindow = true;
 
 		ImGui::EndMenu();
 	}
@@ -488,345 +474,4 @@ void MainMenuBar::SetStyle(int _style)
 {
 	style = _style; 
 	Style::SetStyle(style);
-}
-
-std::string MainMenuBar::GetNotLightSensibleShaderSource()
-{
-	return "#type vertex\n"
-		"#version 430 core\n\n"
-
-		"layout(location = 0) in vec3 position;\n"
-		"layout(location = 1) in vec3 normal;\n"
-		"layout(location = 2) in vec2 texCoords;\n\n"
-
-		"uniform mat4 model;\n"
-		"uniform mat4 view;\n"
-		"uniform mat4 projection;\n"
-		"uniform mat3 normalMatrix;\n\n"
-
-		"out vec3 vPosition;\n"
-		"out vec3 vNormal;\n"
-		"out vec2 vTexCoords;\n\n"
-
-		"void main()\n"
-		"{\n\t"
-			"gl_Position = projection * view * model * vec4(position, 1);\n\n\t"
-
-			"vTexCoords = texCoords;\n\t"
-			"vPosition = vec3(model * vec4(position, 1));\n\t"
-			"vNormal = normalMatrix * normal;\n\t"
-			"vNormal = normalize((model * vec4(normal, 0.0)).xyz);\n"
-		"}\n\n\n"
-
-
-		"#type fragment\n\n"
-		"#version 430 core\n\n"
-
-		"in vec3 vPosition;\n"
-		"in vec3 vNormal;\n"
-		"in vec2 vTexCoords;\n\n"
-
-		"out vec4 fragColor;\n\n"
-
-		"void main()\n"
-		"{\n\t"
-			"fragColor = vec4(1.0f);\n"
-		"}\n";
-}
-
-std::string MainMenuBar::GetLightSensibleShaderSource()
-{
-	return R"(#type vertex
-#version 430 core
-
-layout(location = 0) in vec3 position;
-layout(location = 1) in vec3 normal;
-layout(location = 2) in vec2 texCoords;
-
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-uniform mat3 normalMatrix;
-uniform float textureAlpha;
-uniform vec3 ambientColor;
-uniform vec3 camPos;
-
-out vec3 vPosition;
-out vec3 vAmbientColor;
-out vec2 vTexCoords;
-out vec3 vCamPos;
-out vec3 vNormal;
-out float vTextureAlpha;
-
-void main()
-{
-	gl_Position = projection * view * model * vec4(position, 1);
-
-	vTexCoords = texCoords;
-	vPosition = vec3(model * vec4(position, 1));
-	//vNormal = normalMatrix * normal;
-	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
-	vAmbientColor = ambientColor;
-	vTextureAlpha = 1.0f;
-
-	vCamPos = camPos;
-}
-
-
-#type fragment
-#version 430 core
-
-in vec3 vPosition;
-in vec3 vNormal;
-in vec2 vTexCoords;
-in vec3 camPos;
-
-in vec3 vAmbientColor;
-in float vTextureAlpha;
-
-out vec4 fragColor;
-
-//uniform sampler2D tex;
-layout(location = 0) uniform sampler2D tex;
-
-
-struct Material {
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
-	float shininess;
-	bool gammaCorrection;
-	float gammaCorrectionAmount;
-};
-
-uniform Material material;
-
-struct DirLight
-{
-	vec3 direction;
-
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
-};
-uniform DirLight dirLight;
-
-struct PointLight {
-	vec3 position;
-
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
-
-	// 0 -> constant, 1 -> linear (lin), 2 -> quadratic
-	vec3 properties;
-
-	float intensity;
-	float constant;
-	float lin;
-	float quadratic;
-};
-#define MAX_POINT_LIGHTS 4
-uniform PointLight pointLights[MAX_POINT_LIGHTS];
-
-struct SpotLight
-{
-	vec3 position;
-	vec3 direction;
-	float cutOff;
-	float outerCutOff;
-	float intensity;
-
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
-
-};
-#define MAX_SPOT_LIGHTS 4
-uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
-
-
-vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
-{
-	vec3 lightDir = normalize(-light.direction);
-	
-	// Diffuse shading
-	float diff = max(dot(normal, lightDir), 0.0);
-	
-	// Specular shading
-	vec3 reflectDir = reflect(-lightDir, normal);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-	
-	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
-	vec3 diffuse = light.diffuse * diff * material.diffuse;
-	vec3 specular = light.specular * spec * material.specular;
-
-	return (ambient + diffuse + specular);
-}
-
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
-{
-	vec3 lightDir = normalize(light.position - fragPos);
-
-	// Diffuse shading
-	float diff = max(dot(normal, lightDir), 0.0);
-
-	// Specular shading
-	vec3 reflectDir = reflect(-lightDir, normal);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-
-	// Attenuation
-	float distance = length(fragPos - light.position);
-	float attenuation = 1.0 / (1 + light.constant + light.lin * distance + light.quadratic * (distance * distance));
-	//float attenuation = 1.0 / (light.constant + light.lin * distance + light.quadratic * (distance * distance));
-	//float attenuation = 1.0 / (light.properties[0] + light.properties[1] * distance + light.properties[2] * (distance * distance));
-	
-	attenuation *= light.intensity;
-
-	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
-	vec3 diffuse = light.diffuse * diff * material.diffuse;
-	vec3 specular = light.specular * spec * material.specular;
-
-	ambient *= attenuation;
-	diffuse *= attenuation;
-	specular *= attenuation;
-
-	return (ambient + diffuse + specular);
-}
-
-vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
-{
-	vec3 lightDir = normalize(light.position - fragPos);
-	// diffuse shading
-	float diff = max(dot(normal, lightDir), 0.0);
-	// specular shading
-	vec3 reflectDir = reflect(-lightDir, normal);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-	// attenuation
-	float distance = length(light.position - fragPos);
-	//float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
-	// spotlight intensity
-	float theta = dot(lightDir, normalize(-light.direction));
-	float epsilon = light.cutOff - light.outerCutOff;
-	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
-	// combine results
-	//vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
-	//vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
-	//vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
-
-	vec3 ambient = light.ambient * material.diffuse * material.diffuse;
-	vec3 diffuse = light.diffuse * diff * material.diffuse;
-	vec3 specular = light.specular * spec * material.specular;
-
-
-	ambient *=  /*attenuation **/ intensity * light.intensity;
-	diffuse  *= /*attenuation **/ intensity * light.intensity;
-	specular *= /*attenuation **/ intensity * light.intensity;
-	
-	return (ambient + diffuse + specular);
-}
-
-void main()
-{
-	vec3 norm = normalize(vNormal);
-	vec3 viewDir = normalize(camPos - vPosition);
-	
-	vec3 result = CalcDirLight(dirLight, norm, viewDir);
-	
-	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
-		result += CalcPointLight(pointLights[i], norm, vPosition, viewDir);
-	
-	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
-		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
-
-	vec3 finalColor = result;
-	if (material.gammaCorrection)
-	{
-		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
-	}
-
-	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-})";
-
-}
-
-void MainMenuBar::ShowCreateLigthSensibleShaderWindow()
-{
-	ImGui::Begin("Create Shader", &showCreateLightSensibleShaderWindow);
-
-	ImGui::Dummy({ 10,2 });
-
-	ImGui::Text("Assets/Resources/Shaders/");
-	ImGui::SameLine();
-
-	static std::string name;
-	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
-	ImGui::InputText("Shader Name", &name);
-	ImGui::PopItemWidth();
-
-	if (ImGui::Button("Create", { 50,25 }))
-	{
-		if (!name.empty())
-		{
-			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
-
-			std::ofstream file;
-			file.open(path);
-			file << GetLightSensibleShaderSource();
-			file.close();
-
-			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
-			showCreateLightSensibleShaderWindow = false;
-			name.clear();
-		}
-	}
-	
-	ImGui::End();
-}
-
-void MainMenuBar::ShowCreateNotLigthSensibleShaderWindow()
-{
-	ImGui::Begin("Create Shader", &showCreateNotLightSensibleShaderWindow);
-
-	ImGui::Dummy({ 10,2 });
-
-	ImGui::Text("Assets/Resources/Shaders/");
-	ImGui::SameLine();
-
-	static std::string name;
-	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
-	ImGui::InputText("Shader Name", &name);
-	ImGui::PopItemWidth();
-
-	if (ImGui::Button("Create", { 50,25 }))
-	{
-		if (!name.empty())
-		{
-			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
-
-			std::ofstream file;
-			file.open(path);
-			file << GetNotLightSensibleShaderSource();
-			file.close();
-
-			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
-
-			showCreateNotLightSensibleShaderWindow = false;
-			name.clear();
-		}
-
-	}
-
-	ImGui::End();
-	GameObject* temp = app->editor->GetGO();
-	if (temp != nullptr)
-	{
-		TransformComponent* transform = temp->GetComponent<TransformComponent>();
-		float4x4 matrix = transform->GetGlobalTransform();
-		Frustum frus = app->camera->cameraFrustum;
-		matrix.SetTranslatePart(frus.Pos());
-		float3x3 rot{ frus.WorldRight(), frus.Up(), frus.Front() };
-		matrix.SetRotatePart(rot.ToQuat());
-		transform->SetTransform(matrix);
-	}
 }

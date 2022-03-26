@@ -4,6 +4,7 @@
 
 #include "ModuleNavMesh.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ResourceManager.h"
@@ -16,7 +17,10 @@
 #include "Scene.h"
 #include "Bone.h"
 #include "Dialogs.h"
+#include "ShaderHelpers.h"
 
+#include "imgui/imgui_stdlib.h"
+#include <fstream>
 #include "Profiling.h"
 
 ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled)
@@ -58,11 +62,9 @@ bool ModuleSceneManager::Start()
 bool ModuleSceneManager::PreUpdate(float dt)
 {
 	currentScene->PreUpdate(gameTimer.GetDeltaTime());
+	ShortCuts();
 
 	if (gameState == GameState::PLAYING) gameTimer.Start();
-	if (saveScene) WarningWindow();
-	if (showBuildMenu) BuildWindow();
-	ShortCuts();
 
 	return true;
 }
@@ -86,6 +88,13 @@ bool ModuleSceneManager::Update(float dt)
 
 bool ModuleSceneManager::PostUpdate()
 {
+	if (saveScene) WarningWindow();
+	if (showBuildMenu) BuildWindow();
+	if (showCreateLightSensibleShaderWindow)
+		ShowCreateLigthSensibleShaderWindow();
+	if (showCreateNotLightSensibleShaderWindow)
+		ShowCreateNotLigthSensibleShaderWindow();
+
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
 	currentScene->PostUpdate();
@@ -384,47 +393,52 @@ void ModuleSceneManager::ShortCuts()
 
 void ModuleSceneManager::WarningWindow()
 {
-	bool saved = true;
-	ImVec2 size = { 200, 100 };
-	
-	ImVec2 position = { ImGui::GetWindowWidth() / 2 - 100, ImGui::GetWindowHeight() / 2 - 50 };
-	ImGui::SetNextWindowPos(position);
-	ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-	ImGui::TextWrapped("Do you want to save the changes you made in: ");
-
-	std::string dir = currentScene.get()->GetAssetsPath();
-	if (!dir.empty())
+	ImGui::OpenPopup("Warning");
+	if (ImGui::BeginPopupModal("Warning"))
 	{
-		dir = dir.substr(dir.find("Output\\") + 7, dir.length());
-	}
-	ImGui::TextWrapped("%s", dir.empty() ? "Untitled" : dir.c_str());
-	ImGui::NewLine();
+		float offset = ImGui::GetWindowContentRegionMax().x / 2 - ImGui::CalcTextSize("New Scene").x / 2;
+		ImGui::SetCursorPosX(offset);
+		ImGui::Text(ICON_FA_EXCLAMATION_TRIANGLE); ImGui::SameLine();
+		ImGui::Text("New Scene");
 
-	if (ImGui::Button("Save"))
-	{
-		if (currentScene.get()->GetAssetsPath().empty())
+		ImGui::TextWrapped("Do you want to save the changes you made in: ");
+		std::string dir = currentScene.get()->GetAssetsPath();
+		if (!dir.empty())
 		{
-			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-			if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			dir = dir.substr(dir.find("Output\\") + 7, dir.length());
 		}
-		else
+		ImGui::TextWrapped("%s", dir.empty() ? "Untitled" : dir.c_str());
+		ImGui::NewLine();
+
+		offset = ImGui::GetWindowContentRegionMax().x * 0.5 - ImGui::CalcTextSize("SAVE Don't Save Cancel").x * 0.5;
+		ImGui::SetCursorPosX(offset);
+
+		if (ImGui::Button("Save"))
 		{
-			currentScene.get()->SaveScene(currentScene.get()->GetAssetsPath().c_str());
+			if (currentScene.get()->GetAssetsPath().empty())
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			}
+			else
+			{
+				currentScene.get()->SaveScene(currentScene.get()->GetAssetsPath().c_str());
+			}
+			currentScene.get()->NewScene();
+			saveScene = false;
 		}
-		currentScene.get()->NewScene();
-		saveScene = false;
-	}
-	ImGui::SameLine();
+		ImGui::SameLine();
 
-	if (ImGui::Button("Don't Save"))
-	{
-		currentScene.get()->NewScene();
-		saveScene = false;
-	}
-	ImGui::SameLine();
+		if (ImGui::Button("Don't Save"))
+		{
+			currentScene.get()->NewScene();
+			saveScene = false;
+		}
+		ImGui::SameLine();
 
-	if (ImGui::Button("Cancel")) saveScene = false;
-	ImGui::End();
+		if (ImGui::Button("Cancel")) saveScene = false;
+	}
+	ImGui::EndPopup();
 }
 
 void ModuleSceneManager::BuildWindow()
@@ -487,5 +501,70 @@ void ModuleSceneManager::BuildWindow()
 
 	ImGui::EndChild();
 
+	ImGui::End();
+}
+
+void ModuleSceneManager::ShowCreateLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateLightSensibleShaderWindow);
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+			std::ofstream file;
+			file.open(path);
+			file << ShaderSources::lightSensibleShaderSource;
+			file.close();
+
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+			showCreateLightSensibleShaderWindow = false;
+			name.clear();
+		}
+	}
+	ImGui::End();
+}
+
+void ModuleSceneManager::ShowCreateNotLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateNotLightSensibleShaderWindow);
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+			std::ofstream file;
+			file.open(path);
+			file << ShaderSources::notLightSensibleShaderSource;
+			file.close();
+
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+
+			showCreateNotLightSensibleShaderWindow = false;
+			name.clear();
+		}
+	}
 	ImGui::End();
 }

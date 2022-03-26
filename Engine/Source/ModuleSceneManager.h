@@ -50,14 +50,14 @@ public:
 	// Pop Up
 	void WarningWindow();
 	void BuildWindow();
+	void ShowCreateLigthSensibleShaderWindow();
+	void ShowCreateNotLigthSensibleShaderWindow();
 
 	GameState GetGameState() { return gameState; }
 	GameTimer& GetTimer() { return gameTimer; }
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
-	inline void SetSaveScene(bool ret) { saveScene = ret; }
-	inline void SetShowBuild(bool ret) { showBuildMenu = ret; }
 	inline void Exit() { exit = true; }
 
 	void Play();
@@ -72,12 +72,16 @@ public:
 	std::multimap<uint, SerializedField*> referenceMap;
 	bool newSceneLoaded;
 
+	// bool popUp's
+	bool saveScene = false;
+	bool showBuildMenu = false;
+	bool showCreateLightSensibleShaderWindow = false;
+	bool showCreateNotLightSensibleShaderWindow = false;
+
 private:
 	int index = 0;
 	int lastIndex = 0;
 	bool changeScene = false;
-	bool saveScene = false;
-	bool showBuildMenu = false;
 	bool exit = false;
 	GameState gameState;
 	GameTimer gameTimer;

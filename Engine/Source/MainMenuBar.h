@@ -38,11 +38,6 @@ public:
 	void SetStyle(int _style);
 
 private:
-	std::string GetNotLightSensibleShaderSource();
-	std::string GetLightSensibleShaderSource();
-
-	void ShowCreateLigthSensibleShaderWindow();
-	void ShowCreateNotLigthSensibleShaderWindow();
 
 	//Menus
 	bool FileMenu();
@@ -57,14 +52,11 @@ private:
 	void PlayBar();
 
 private:
-	bool showMenu = false;
-	bool showCreateLightSensibleShaderWindow = false;
-	bool showCreateNotLightSensibleShaderWindow = false;
-
 	std::vector<Menu*> menus;
 	std::vector<std::string> stylesList;
 	std::vector<std::string> iconList;
 
+	bool showMenu = false;
 	int style = 5;
 	float alphaStyle = 0.1f;
 };
