@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleCamera3D.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 
@@ -347,4 +348,22 @@ Mat4x4 TransformComponent::float4x4ToMat4x4()
 	}
 
 	return newTransform;
+}
+
+// Object align with camera
+void TransformComponent::AlignWithView()
+{
+	Frustum frus = app->camera->cameraFrustum;
+	globalMatrix.SetTranslatePart(frus.Pos());
+	float3x3 rot{ frus.WorldRight(), frus.Up(), frus.Front() };
+	globalMatrix.SetRotatePart(rot.ToQuat());
+	SetTransform(globalMatrix);
+}
+
+// Camera align with object
+void TransformComponent::AlignViewWithSelected()
+{
+	float3x3 rot = globalMatrix.RotatePart();
+	app->camera->cameraFrustum.SetFrame(position, rot.Col3(2), rot.Col3(1));
+	app->camera->CalculateViewMatrix();
 }

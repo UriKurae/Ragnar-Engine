@@ -15,6 +15,8 @@ public:
 	bool CleanUp();
 
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
+	void CalculateViewMatrix();
+	
 	void UpdateFovAndScreen(float width, float height);
 	void UpdateFov();
 	void SetPlanes();

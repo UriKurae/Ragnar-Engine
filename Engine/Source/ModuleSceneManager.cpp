@@ -4,22 +4,26 @@
 
 #include "ModuleNavMesh.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleInput.h"
+#include "ModuleEditor.h"
 #include "ResourceManager.h"
+
+#include "TransformComponent.h"
 
 #include "FileSystem.h"
 #include "MeshImporter.h"
 #include "Primitives.h"
 #include "Scene.h"
 #include "Bone.h"
+#include "Dialogs.h"
 
 #include "Profiling.h"
 
-ModuleSceneManager::ModuleSceneManager(bool startEnabled) : changeScene(false), index(0), lastIndex(0), gameState(GameState::NOT_PLAYING), Module(startEnabled)
+ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled)
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
 	AddScene(currentScene);
-	exit = false;
 }
 
 ModuleSceneManager::~ModuleSceneManager()
@@ -56,6 +60,9 @@ bool ModuleSceneManager::PreUpdate(float dt)
 	currentScene->PreUpdate(gameTimer.GetDeltaTime());
 
 	if (gameState == GameState::PLAYING) gameTimer.Start();
+	if (saveScene) WarningWindow();
+	if (showBuildMenu) BuildWindow();
+	ShortCuts();
 
 	return true;
 }
@@ -310,4 +317,175 @@ void ModuleSceneManager::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
+}
+
+void ModuleSceneManager::ShortCuts()
+{
+	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) app->editor->GetGO()->GetComponent<TransformComponent>()->AlignWithView();
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_G) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) currentScene.get()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) currentScene.get()->CreateGameObject(app->editor->GetGO());
+				else currentScene.get()->CreateGameObject(nullptr);
+			}
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+		{
+			saveScene = true;
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_O) == KeyState::KEY_DOWN)
+		{
+			std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+			if (!filePath.empty())
+			{
+				ChangeScene(filePath.c_str());
+			}
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+		{
+			if (currentScene.get()->GetAssetsPath().empty())
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			}
+			else currentScene.get()->SaveScene(currentScene.get()->GetAssetsPath().c_str());
+		}
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			{
+				if(app->editor->GetGO()) app->editor->GetGO()->GetComponent<TransformComponent>()->AlignViewWithSelected();
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) currentScene.get()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
+			}
+		}		
+	}
+}
+
+void ModuleSceneManager::WarningWindow()
+{
+	bool saved = true;
+	ImVec2 size = { 200, 100 };
+	
+	ImVec2 position = { ImGui::GetWindowWidth() / 2 - 100, ImGui::GetWindowHeight() / 2 - 50 };
+	ImGui::SetNextWindowPos(position);
+	ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+	ImGui::TextWrapped("Do you want to save the changes you made in: ");
+
+	std::string dir = currentScene.get()->GetAssetsPath();
+	if (!dir.empty())
+	{
+		dir = dir.substr(dir.find("Output\\") + 7, dir.length());
+	}
+	ImGui::TextWrapped("%s", dir.empty() ? "Untitled" : dir.c_str());
+	ImGui::NewLine();
+
+	if (ImGui::Button("Save"))
+	{
+		if (currentScene.get()->GetAssetsPath().empty())
+		{
+			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+			if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+		}
+		else
+		{
+			currentScene.get()->SaveScene(currentScene.get()->GetAssetsPath().c_str());
+		}
+		currentScene.get()->NewScene();
+		saveScene = false;
+	}
+	ImGui::SameLine();
+
+	if (ImGui::Button("Don't Save"))
+	{
+		currentScene.get()->NewScene();
+		saveScene = false;
+	}
+	ImGui::SameLine();
+
+	if (ImGui::Button("Cancel")) saveScene = false;
+	ImGui::End();
+}
+
+void ModuleSceneManager::BuildWindow()
+{
+	static bool addScene = false;
+	ImGui::Begin("Build", &showBuildMenu);
+	ImGui::BeginChild("Scenes");
+
+	for (int i = 0; i < scenes.size(); ++i)
+	{
+		int flags = ImGuiTreeNodeFlags_Leaf;
+		flags |= sceneSelected == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
+		ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
+		if (ImGui::IsItemClicked())
+		{
+			sceneSelected = scenes[i];
+		}
+		ImGui::TreePop();
+	}
+
+	if (ImGui::Button("+"))
+	{
+		addScene = true;
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("-"))
+	{
+		DeleteScene(sceneSelected);
+	}
+
+	if (addScene)
+	{
+		ImGui::Begin("Add Scene");
+
+		std::vector<std::shared_ptr<Scene>> scenes = ResourceManager::GetInstance()->GetScenes();
+		static std::shared_ptr<Scene> scene = nullptr;
+
+		for (int i = 0; i < scenes.size(); ++i)
+		{
+			int flags = ImGuiTreeNodeFlags_Leaf;
+			flags |= scene == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
+			ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
+			if (ImGui::IsItemClicked())
+			{
+				scene = scenes[i];
+			}
+			ImGui::TreePop();
+		}
+
+		if (ImGui::Button("Add") && scene != nullptr)
+		{
+			AddScene(scene);
+			SaveBuild();
+			scene = nullptr;
+			addScene = false;
+		}
+
+		ImGui::End();
+	}
+
+	ImGui::EndChild();
+
+	ImGui::End();
 }

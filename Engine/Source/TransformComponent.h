@@ -37,8 +37,10 @@ public:
 	void UpdateChildTransform(GameObject* go);
 	void NewAttachment();
 	void SetAABB();
-
 	void UpdateBoundingBox();
+
+	void AlignWithView();
+	void AlignViewWithSelected();
 
 	inline float4x4 GetLocalTransform() const { return localMatrix; }
 	inline float4x4 GetGlobalTransform() const { return globalMatrix; }

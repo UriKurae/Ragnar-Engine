@@ -37,10 +37,6 @@ public:
 	int GetStyle() { return style; };
 	void SetStyle(int _style);
 
-	//void StyleTheme();
-	void AlignWithView();
-	void AlignViewWithSelected();
-
 private:
 	std::string GetNotLightSensibleShaderSource();
 	std::string GetLightSensibleShaderSource();
@@ -61,20 +57,14 @@ private:
 	void PlayBar();
 
 private:
-	bool showMenu;
-	bool showBuildMenu;
-
-	std::shared_ptr<Scene> sceneSelected;
-
-	bool saveWindow;
-	std::vector<Menu*> menus;
-
-
+	bool showMenu = false;
 	bool showCreateLightSensibleShaderWindow = false;
 	bool showCreateNotLightSensibleShaderWindow = false;
 
+	std::vector<Menu*> menus;
 	std::vector<std::string> stylesList;
 	std::vector<std::string> iconList;
+
 	int style = 5;
 	float alphaStyle = 0.1f;
 };

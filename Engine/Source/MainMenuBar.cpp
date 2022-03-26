@@ -4,7 +4,6 @@
 
 #include "ModuleRenderer3D.h"
 #include "ModuleWindow.h"
-#include "ModuleInput.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 #include "ModuleEditor.h"
@@ -48,10 +47,8 @@
 #include <fstream>
 #include "Profiling.h"
 
-MainMenuBar::MainMenuBar() : Menu(true, "MainMenu"), saveWindow(false), showBuildMenu(false), sceneSelected(nullptr)
+MainMenuBar::MainMenuBar() : Menu(true, "MainMenu")
 {
-	showMenu = false;
-
 	menus.reserve(9);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
@@ -77,7 +74,6 @@ bool MainMenuBar::Start()
 	{
 		menus[i]->Start();
 	}
-
 	Style::SetStyle(style);
 
 	return true;
@@ -98,186 +94,13 @@ bool MainMenuBar::Update(float dt)
 		ImGui::EndMainMenuBar();
 	}
 
-	if (saveWindow)
-	{
-		bool saved = true;
-		ImVec2 size = { 200, 100 };
-		ImVec2 position = { (float)(app->window->width / 2) - 100, (float)(app->window->height / 2) - 50 };
-		ImGui::SetNextWindowPos(position);
-		ImGui::Begin("Ask for Save", &saved, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-		ImGui::TextWrapped("Do you want to save the changes you made in: ");
-
-		std::string dir = app->sceneManager->GetCurrentScene()->GetAssetsPath();
-		if (!dir.empty())
-		{
-			dir = dir.substr(dir.find("Output\\") + 7, dir.length());
-		}
-		ImGui::TextWrapped("%s", dir.empty() ? "Untitled" : dir.c_str());
-		ImGui::NewLine();
-		if (ImGui::Button("Save"))
-		{
-			if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
-			{
-				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
-			}
-			else
-			{
-				app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
-			}
-			app->sceneManager->GetCurrentScene()->NewScene();
-			saveWindow = false;
-		}
-		ImGui::SameLine();
-		if (ImGui::Button("Don't Save"))
-		{
-			app->sceneManager->GetCurrentScene()->NewScene();
-			saveWindow = false;
-		}
-		ImGui::SameLine();
-		if (ImGui::Button("Cancel")) saveWindow = false;
-		ImGui::End();
-	}
-
 	PlayBar();
-
-	// ShortCuts
-	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_LSHIFT) != KeyState::KEY_REPEAT && 
-		app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
-	{
-		saveWindow = true;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_O) == KeyState::KEY_DOWN)
-	{
-		std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-		if (!filePath.empty())
-		{
-			app->sceneManager->ChangeScene(filePath.c_str());
-		}
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
-		{
-			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
-			{
-				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-				if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
-			}
-			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
-			{
-				AlignWithView();
-			}
-			if (app->input->GetKey(SDL_SCANCODE_G) == KeyState::KEY_DOWN)
-			{
-				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
-			}
-			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
-			{
-				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObject(app->editor->GetGO());
-				else app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
-			}
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
-		{
-			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
-			{
-				AlignViewWithSelected();
-			}
-			if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
-			{
-				if (app->editor->GetGO() != nullptr) app->sceneManager->GetCurrentScene()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
-			}
-		}
-	}
-	
-	else if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
-	{
-		if (app->sceneManager->GetCurrentScene()->GetAssetsPath().empty())
-		{
-			std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
-			if (!filePath.empty()) app->sceneManager->GetCurrentScene()->SaveScene(filePath.c_str());
-		}
-		else app->sceneManager->GetCurrentScene()->SaveScene(app->sceneManager->GetCurrentScene()->GetAssetsPath().c_str());
-	}
-
-	// Build menu
-	if (showBuildMenu)
-	{
-		static bool addScene = false;
-		ImGui::Begin("Build", &showBuildMenu);
-
-		ImGui::BeginChild("Scenes");
-		for (int i = 0; i < app->sceneManager->GetScenes().size(); ++i)
-		{
-			int flags = ImGuiTreeNodeFlags_Leaf;
-			flags |= sceneSelected == app->sceneManager->GetScenes()[i] ? ImGuiTreeNodeFlags_Selected : 0;
-			ImGui::TreeNodeEx(app->sceneManager->GetScenes()[i]->GetName().c_str(), flags);
-			if (ImGui::IsItemClicked())
-			{
-				sceneSelected = app->sceneManager->GetScenes()[i];
-			}
-			ImGui::TreePop();
-		}
-
-		if (ImGui::Button("+"))
-		{
-			addScene = true;
-		}
-		ImGui::SameLine();
-		if (ImGui::Button("-"))
-		{
-			app->sceneManager->DeleteScene(sceneSelected);
-		}
-
-		if (addScene)
-		{
-			ImGui::Begin("Add Scene");
-
-			std::vector<std::shared_ptr<Scene>> scenes = ResourceManager::GetInstance()->GetScenes();
-			static std::shared_ptr<Scene> scene = nullptr;
-			
-			for (int i = 0; i < scenes.size(); ++i)
-			{
-				int flags = ImGuiTreeNodeFlags_Leaf;
-				flags |= scene == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
-				ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
-				if (ImGui::IsItemClicked())
-				{
-					scene = scenes[i];
-				}
-				ImGui::TreePop();
-			}
-
-			if (ImGui::Button("Add") && scene != nullptr)
-			{
-				app->sceneManager->AddScene(scene);
-				app->sceneManager->SaveBuild();
-				scene = nullptr;
-				addScene = false;
-			}
-
-			ImGui::End();
-		}
-
-		ImGui::EndChild();
-
-		ImGui::End();
-	}
-
-	ImGui::End();
 
 	if (showMenu)
 	{
 		ImGui::ShowDemoWindow(&showMenu);
 		ImGui::ShowMetricsWindow(&showMenu);
 	}
-
 
 	if (showCreateLightSensibleShaderWindow)
 	{
@@ -302,7 +125,7 @@ bool MainMenuBar::FileMenu()
 	{
 		// Project options (Create, open...)
 		if (ImGui::MenuItem(ICON_FA_FILE_UPLOAD" New Project", "Ctrl + N"))
-			saveWindow = true;
+			app->sceneManager->SetSaveScene(true);
 
 		if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN" Open Project", "Ctrl + O"))
 		{
@@ -330,7 +153,7 @@ bool MainMenuBar::FileMenu()
 		ImGui::Separator();
 
 		if (ImGui::MenuItem("Build"))
-			showBuildMenu = true;
+			app->sceneManager->SetShowBuild(true);
 
 		if (ImGui::MenuItem(ICON_FA_WINDOW_CLOSE" Exit", "ESC"))
 			return false;
@@ -426,23 +249,24 @@ void MainMenuBar::GameObjectMenu()
 		ImGui::Separator();
 
 		// Align with options
-		if (app->editor->GetGO() == nullptr)
+		GameObject* selected = app->editor->GetGO();
+		if (selected == nullptr)
 		{
 			ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(128, 128, 128, 255));
 			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, IM_COL32(128, 128, 128, 100));
 		}
+
 		if (ImGui::MenuItem("Align with view", "Ctrl+Shift+F"))
-			if (app->editor->GetGO()) AlignWithView();
+			if (selected) selected->GetComponent<TransformComponent>()->AlignWithView();
 
 		if (ImGui::MenuItem("Align view to selected", "Alt+Shift+F"))
-			if (app->editor->GetGO()) AlignViewWithSelected();
+			if (selected) selected->GetComponent<TransformComponent>()->AlignViewWithSelected();
 
-		if (app->editor->GetGO() == nullptr)
+		if (selected == nullptr)
 		{
 			ImGui::PopStyleColor();
 			ImGui::PopStyleColor();
 		}
-
 		ImGui::EndMenu();
 	}
 }
@@ -490,7 +314,6 @@ void MainMenuBar::CreateGameObjectMenu()
 		}
 
 		ImGui::EndMenu();
-
 	}
 	// Lights
 	if (ImGui::BeginMenu(ICON_FA_LIGHTBULB " Lights"))
@@ -630,6 +453,7 @@ void MainMenuBar::PlayBar()
 			app->sceneManager->NextFrame(); // Not implemented yet
 	}
 	ImGui::PopStyleColor(2);
+	ImGui::End();
 }
 
 bool MainMenuBar::CleanUp()
@@ -638,7 +462,6 @@ bool MainMenuBar::CleanUp()
 	{
 		RELEASE(menus[i]);
 	}
-
 	menus.clear();
 
 	return true;
@@ -658,7 +481,6 @@ ConsoleMenu* MainMenuBar::GetConsole()
 std::string& MainMenuBar::GetCurrentDir()
 {
 	ContentBrowserMenu* content = (ContentBrowserMenu*)menus[(int)Menus::CONTENT_BROWSER];
-
 	return content->GetCurrentDir();
 }
 
@@ -666,35 +488,6 @@ void MainMenuBar::SetStyle(int _style)
 {
 	style = _style; 
 	Style::SetStyle(style);
-}
-
-// Object align with camera
-void MainMenuBar::AlignWithView()
-{
-	GameObject* temp = app->editor->GetGO();
-	if (temp != nullptr)
-	{
-		TransformComponent* transform = temp->GetComponent<TransformComponent>();
-		float4x4 matrix = transform->GetGlobalTransform();
-		Frustum frus = app->camera->cameraFrustum;
-		matrix.SetTranslatePart(frus.Pos());
-		float3x3 rot{ frus.WorldRight(), frus.Up(), frus.Front() };
-		matrix.SetRotatePart(rot.ToQuat());
-		transform->SetTransform(matrix);
-	}
-}
-
-// Camera align with object
-void MainMenuBar::AlignViewWithSelected()
-{
-	GameObject* temp = app->editor->GetGO();
-	if (temp != nullptr)
-	{
-		TransformComponent* transform = temp->GetComponent<TransformComponent>();
-		float4x4 matrix = transform->GetGlobalTransform();
-		float3x3 rot = matrix.RotatePart();
-		app->camera->cameraFrustum.SetFrame(transform->GetGlobalTransform().Col3(3), rot.Col3(2), rot.Col3(1));
-	}
 }
 
 std::string MainMenuBar::GetNotLightSensibleShaderSource()

@@ -47,11 +47,17 @@ public:
 	void NextScene();
 	void NextScene(const char* name);
 
+	// Pop Up
+	void WarningWindow();
+	void BuildWindow();
+
 	GameState GetGameState() { return gameState; }
 	GameTimer& GetTimer() { return gameTimer; }
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
+	inline void SetSaveScene(bool ret) { saveScene = ret; }
+	inline void SetShowBuild(bool ret) { showBuildMenu = ret; }
 	inline void Exit() { exit = true; }
 
 	void Play();
@@ -61,20 +67,23 @@ public:
 	inline void NextFrame() { frameSkip = true; }
 
 	std::vector<std::shared_ptr<Scene>>& GetScenes() { return scenes; }
+	void ShortCuts();
 
 	std::multimap<uint, SerializedField*> referenceMap;
 	bool newSceneLoaded;
 
 private:
-	int index;
-	int lastIndex;
-	bool changeScene;
-	bool exit;
+	int index = 0;
+	int lastIndex = 0;
+	bool changeScene = false;
+	bool saveScene = false;
+	bool showBuildMenu = false;
+	bool exit = false;
 	GameState gameState;
 	GameTimer gameTimer;
 	bool frameSkip;
 
 	std::shared_ptr<Scene> currentScene;
-
+	std::shared_ptr<Scene> sceneSelected = nullptr;
 	std::vector<std::shared_ptr<Scene>> scenes;
 };
