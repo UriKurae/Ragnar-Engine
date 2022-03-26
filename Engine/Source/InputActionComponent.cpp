@@ -64,7 +64,20 @@ void InputActionComponent::OnEditor()
 										if (ImGui::Selectable(scriptName))
 										{
 											scriptsNameList[i][j] = scriptName;
-											//LoadScriptData(scriptName);
+											app->moduleMono->DebugAllMethods(USER_SCRIPTS_NAMESPACE, scriptName, scriptsMethodsList[i][j]);
+										}
+									}
+									ImGui::EndCombo();
+								}
+								if (ImGui::BeginCombo("Method", scriptsNameList[i][j].c_str()))
+								{
+									const char* scriptName;
+									for (int actualScript = 0; actualScript < scriptsMethodsList[i][j].size(); actualScript++)
+									{
+										scriptName = scriptsMethodsList[i][j][actualScript].c_str();
+										if (ImGui::Selectable(scriptName))
+										{
+											//scriptsNameList[i][j] = scriptName;
 										}
 									}
 									ImGui::EndCombo();
@@ -160,6 +173,7 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 {
 	currentActionMaps.clear();
 	scriptsNameList.clear();
+	scriptsMethodsList.clear();
 
 	JsonParsing sceneFile = JsonParsing();
 
@@ -169,6 +183,7 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 
 		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
 		scriptsNameList.resize(size);
+		scriptsMethodsList.resize(size);
 		for (int i = 0; i < size; ++i)
 		{
 			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
@@ -176,6 +191,7 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 			aM->OnLoad(go);
 			currentActionMaps.push_back(aM);
 			scriptsNameList[i].resize(aM->GetActions()->size());
+			scriptsMethodsList[i].resize(aM->GetActions()->size());
 		}
 		currentAssetPath = path;
 		currentAssetName = path;
