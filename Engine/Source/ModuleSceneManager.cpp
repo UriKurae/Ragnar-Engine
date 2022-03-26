@@ -4,22 +4,30 @@
 
 #include "ModuleNavMesh.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleEditor.h"
 #include "ResourceManager.h"
+
+#include "TransformComponent.h"
 
 #include "FileSystem.h"
 #include "MeshImporter.h"
 #include "Primitives.h"
 #include "Scene.h"
 #include "Bone.h"
+#include "Dialogs.h"
+#include "ShaderHelpers.h"
 
+#include "imgui/imgui_stdlib.h"
+#include <fstream>
 #include "Profiling.h"
 
-ModuleSceneManager::ModuleSceneManager(bool startEnabled) : changeScene(false), index(0), lastIndex(0), gameState(GameState::NOT_PLAYING), Module(startEnabled)
+ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled)
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
 	AddScene(currentScene);
-	exit = false;
 }
 
 ModuleSceneManager::~ModuleSceneManager()
@@ -54,6 +62,7 @@ bool ModuleSceneManager::Start()
 bool ModuleSceneManager::PreUpdate(float dt)
 {
 	currentScene->PreUpdate(gameTimer.GetDeltaTime());
+	ShortCuts();
 
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
@@ -79,6 +88,13 @@ bool ModuleSceneManager::Update(float dt)
 
 bool ModuleSceneManager::PostUpdate()
 {
+	if (saveScene) WarningWindow();
+	if (showBuildMenu) BuildWindow();
+	if (showCreateLightSensibleShaderWindow)
+		ShowCreateLigthSensibleShaderWindow();
+	if (showCreateNotLightSensibleShaderWindow)
+		ShowCreateNotLigthSensibleShaderWindow();
+
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
 	currentScene->PostUpdate();
@@ -310,4 +326,245 @@ void ModuleSceneManager::Resume()
 {
 	gameTimer.SetDesiredDeltaTime(0.016f);
 	gameState = GameState::PLAYING;
+}
+
+void ModuleSceneManager::ShortCuts()
+{
+	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) app->editor->GetGO()->GetComponent<TransformComponent>()->AlignWithView();
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_G) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) currentScene.get()->CreateGameObjectParent("GameObjectParent", app->editor->GetGO());
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) currentScene.get()->CreateGameObject(app->editor->GetGO());
+				else currentScene.get()->CreateGameObject(nullptr);
+			}
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+		{
+			saveScene = true;
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_O) == KeyState::KEY_DOWN)
+		{
+			std::string filePath = Dialogs::OpenFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+			if (!filePath.empty())
+			{
+				ChangeScene(filePath.c_str());
+			}
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_DOWN)
+		{
+			if (currentScene.get()->GetAssetsPath().empty())
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			}
+			else currentScene.get()->SaveScene(currentScene.get()->GetAssetsPath().c_str());
+		}
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_LALT) == KeyState::KEY_REPEAT)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
+			{
+				if(app->editor->GetGO()) app->editor->GetGO()->GetComponent<TransformComponent>()->AlignViewWithSelected();
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_N) == KeyState::KEY_DOWN)
+			{
+				if (app->editor->GetGO()) currentScene.get()->CreateGameObjectChild("GameObjectChild", app->editor->GetGO());
+			}
+		}		
+	}
+}
+
+void ModuleSceneManager::WarningWindow()
+{
+	ImGui::OpenPopup("Warning");
+	if (ImGui::BeginPopupModal("Warning"))
+	{
+		float offset = ImGui::GetWindowContentRegionMax().x / 2 - ImGui::CalcTextSize("New Scene").x / 2;
+		ImGui::SetCursorPosX(offset);
+		ImGui::Text(ICON_FA_EXCLAMATION_TRIANGLE); ImGui::SameLine();
+		ImGui::Text("New Scene");
+
+		ImGui::TextWrapped("Do you want to save the changes you made in: ");
+		std::string dir = currentScene.get()->GetAssetsPath();
+		if (!dir.empty())
+		{
+			dir = dir.substr(dir.find("Output\\") + 7, dir.length());
+		}
+		ImGui::TextWrapped("%s", dir.empty() ? "Untitled" : dir.c_str());
+		ImGui::NewLine();
+
+		offset = ImGui::GetWindowContentRegionMax().x * 0.5 - ImGui::CalcTextSize("SAVE Don't Save Cancel").x * 0.5;
+		ImGui::SetCursorPosX(offset);
+
+		if (ImGui::Button("Save"))
+		{
+			if (currentScene.get()->GetAssetsPath().empty())
+			{
+				std::string filePath = Dialogs::SaveFile("Ragnar Scene (*.ragnar)\0*.ragnar\0");
+				if (!filePath.empty()) currentScene.get()->SaveScene(filePath.c_str());
+			}
+			else
+			{
+				currentScene.get()->SaveScene(currentScene.get()->GetAssetsPath().c_str());
+			}
+			currentScene.get()->NewScene();
+			saveScene = false;
+		}
+		ImGui::SameLine();
+
+		if (ImGui::Button("Don't Save"))
+		{
+			currentScene.get()->NewScene();
+			saveScene = false;
+		}
+		ImGui::SameLine();
+
+		if (ImGui::Button("Cancel")) saveScene = false;
+	}
+	ImGui::EndPopup();
+}
+
+void ModuleSceneManager::BuildWindow()
+{
+	static bool addScene = false;
+	ImGui::Begin("Build", &showBuildMenu);
+	ImGui::BeginChild("Scenes");
+
+	for (int i = 0; i < scenes.size(); ++i)
+	{
+		int flags = ImGuiTreeNodeFlags_Leaf;
+		flags |= sceneSelected == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
+		ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
+		if (ImGui::IsItemClicked())
+		{
+			sceneSelected = scenes[i];
+		}
+		ImGui::TreePop();
+	}
+
+	if (ImGui::Button("+"))
+	{
+		addScene = true;
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("-"))
+	{
+		DeleteScene(sceneSelected);
+	}
+
+	if (addScene)
+	{
+		ImGui::Begin("Add Scene");
+
+		std::vector<std::shared_ptr<Scene>> scenes = ResourceManager::GetInstance()->GetScenes();
+		static std::shared_ptr<Scene> scene = nullptr;
+
+		for (int i = 0; i < scenes.size(); ++i)
+		{
+			int flags = ImGuiTreeNodeFlags_Leaf;
+			flags |= scene == scenes[i] ? ImGuiTreeNodeFlags_Selected : 0;
+			ImGui::TreeNodeEx(scenes[i]->GetName().c_str(), flags);
+			if (ImGui::IsItemClicked())
+			{
+				scene = scenes[i];
+			}
+			ImGui::TreePop();
+		}
+
+		if (ImGui::Button("Add") && scene != nullptr)
+		{
+			AddScene(scene);
+			SaveBuild();
+			scene = nullptr;
+			addScene = false;
+		}
+
+		ImGui::End();
+	}
+
+	ImGui::EndChild();
+
+	ImGui::End();
+}
+
+void ModuleSceneManager::ShowCreateLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateLightSensibleShaderWindow);
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+			std::ofstream file;
+			file.open(path);
+			file << ShaderSources::lightSensibleShaderSource;
+			file.close();
+
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+			showCreateLightSensibleShaderWindow = false;
+			name.clear();
+		}
+	}
+	ImGui::End();
+}
+
+void ModuleSceneManager::ShowCreateNotLigthSensibleShaderWindow()
+{
+	ImGui::Begin("Create Shader", &showCreateNotLightSensibleShaderWindow);
+	ImGui::Dummy({ 10,2 });
+
+	ImGui::Text("Assets/Resources/Shaders/");
+	ImGui::SameLine();
+
+	static std::string name;
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionMax().x - ImGui::CalcTextSize("Assets/Resources/Shaders/").x - 15);
+	ImGui::InputText("Shader Name", &name);
+	ImGui::PopItemWidth();
+
+	if (ImGui::Button("Create", { 50,25 }))
+	{
+		if (!name.empty())
+		{
+			std::string path = "Assets/Resources/Shaders/" + name + ".shader";
+
+			std::ofstream file;
+			file.open(path);
+			file << ShaderSources::notLightSensibleShaderSource;
+			file.close();
+
+			ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, path, std::string());
+
+			showCreateNotLightSensibleShaderWindow = false;
+			name.clear();
+		}
+	}
+	ImGui::End();
 }

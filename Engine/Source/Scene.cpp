@@ -20,7 +20,7 @@
 #include <stack>
 #include "Profiling.h"
 
-Scene::Scene(uint uid, std::string& assets, std::string& library) : mainCamera(nullptr), frameSkip(0), resetQuadtree(true), camera(nullptr), player(nullptr), Resource(uid, ResourceType::SCENE, assets, library)
+Scene::Scene(uint uid, std::string& assets, std::string& library) : mainCamera(nullptr), resetQuadtree(true), camera(nullptr), player(nullptr), Resource(uid, ResourceType::SCENE, assets, library)
 {
 	root = new GameObject();
 	root->SetName("Untitled");
@@ -97,13 +97,6 @@ bool Scene::Update(float dt)
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
 		root->GetChilds()[i]->Update(dt);
-	
-	if (frameSkip || app->sceneManager->GetGameState() == GameState::PLAYING)
-	{
-		//DEBUG_LOG("DELTA TIME GAME %f", gameTimer.GetDeltaTime());
-		//DEBUG_LOG("Seconds passed since game startup %d", gameTimer.GetEngineTimeStartup() / 1000);
-		frameSkip = false;
-	}
 
 	if (resetQuadtree)
 	{
@@ -208,7 +201,6 @@ GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
 	{
 		object->SetParent(parent);
 		parent->AddChild(object);
-
 	}
 	else
 	{

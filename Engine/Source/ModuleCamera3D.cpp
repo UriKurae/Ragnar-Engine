@@ -295,18 +295,22 @@ bool ModuleCamera3D::Update(float dt)
 			}
 		}
 		cameraFrustum.SetFrame(newPos, newFront, newUp);
-
-		matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
-		matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
+		CalculateViewMatrix();
 	}
 
 	return true;
 }
 
+void ModuleCamera3D::CalculateViewMatrix()
+{
+	matrixProjectionFrustum = cameraFrustum.ComputeProjectionMatrix();
+	matrixViewFrustum = cameraFrustum.ComputeViewMatrix();
+}
+
 void ModuleCamera3D::Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos)
 {
 	// Focus
-	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_UP && app->input->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_IDLE)
 	{
 		GameObject* objSelected = app->editor->GetGO();
 

@@ -23,18 +23,13 @@ Shader::Shader(uint uid, std::string& assets, std::string& library) : Resource(u
 	int s = assetsPath.find_last_of("/");
 	int e = assetsPath.find_last_of(".");
 	name = assetsPath.substr(s + 1, e - s - 1);
-
 	source = "";
 
 	struct _stat nowStat;
 	if (_stat(assetsPath.c_str(), &nowStat) == 0)
-	{
 		lastStat = nowStat;
-	}
 
 	CreateMetaShader();
-
-	//Load();
 }
 
 Shader::~Shader()
@@ -47,12 +42,8 @@ void Shader::Load()
 	if (source == "")
 	{
 		source = ReadFile();
-
 		auto shaderSources = SplitShaders(source);
-
-		//CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 		CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
-
 		created = true;
 	}
 }
@@ -78,8 +69,6 @@ void Shader::ReCompile(bool reReadSource)
 		source = ReadFile();
 
 	auto shaderSources = SplitShaders(source);
-
-	//CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 	CreateShader(shaderSources[GL_VERTEX_SHADER], shaderSources[GL_FRAGMENT_SHADER]);
 }
 
@@ -109,8 +98,7 @@ bool Shader::Refresh()
 			ctime_s(timeBuf, 26, &lastStat.st_mtime);
 			printf("Time modified : %s", timeBuf);
 			
-			ReCompile();
-			
+			ReCompile();			
 			lastStat = nowStat;
 			
 			return true;
@@ -197,8 +185,6 @@ void Shader::SetUniformMatrix4f(const std::string& name, const float4x4& mat)
 		glUniformMatrix4fv(location, 1, GL_FALSE, mat.ptr());
 }
 
-
-
 void Shader::UpdateSourceCode(const std::string& newSource)
 {
 	source = newSource;
@@ -220,7 +206,6 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 		glGetShaderInfoLog(vs, 512, NULL, infoLog);
 		DEBUG_LOG("Vertex shader compilation failed: %s", infoLog);
 	}
-
 
 	unsigned int fs = glCreateShader(GL_FRAGMENT_SHADER);
 	const char* fsource = fragmentSource.c_str();
@@ -260,7 +245,6 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 		{
 			DEBUG_LOG("Linked program %s successfully!", name.c_str());
 		}
-
 	}
 
 	//glDetachShader(rendererID, vs);

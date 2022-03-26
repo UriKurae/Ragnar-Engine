@@ -217,7 +217,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/win_lose_background.png",
+                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -267,7 +267,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/victory_logo.png",
+                    "Path": "Assets\/Resources\/UI\/victory_logo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -307,7 +307,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/transparent_tex.png",
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
