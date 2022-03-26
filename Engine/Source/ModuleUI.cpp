@@ -450,6 +450,8 @@ bool ModuleUI::PreUpdate(float dt)
 		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+
+		// TODO: Change this
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
 		
 		float4 viewport = app->editor->GetGameView()->GetBounds();
@@ -468,7 +470,7 @@ bool ModuleUI::PreUpdate(float dt)
 }
 
 // Check if mouse is hovered on some object UI
-void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
+void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 {
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
@@ -478,20 +480,21 @@ void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
 		float3 position = transform2D->GetPosition();
 		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
+		// Whats does this do?
 		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
 		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
 
 		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
 		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
 
-		ImageComponent* image = nullptr;
-		image = go->GetComponent<ImageComponent>();
+		//ImageComponent* image = go->GetComponent<ImageComponent>();
 		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
 		{
 			hitObjs.push_back(go);
 		}
 	}
 }
+
 // Check depending on the distance of the object from the camera what object is focused 
 void ModuleUI::SetFocusedObject()
 {
@@ -542,40 +545,31 @@ bool ModuleUI::Update(float dt)
 			}
 		}
 	}
-	ButtonComponent* aux = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3= nullptr;	
-	SliderComponent*aux5= nullptr;
+	
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
-		
-		aux = go->GetComponent<ButtonComponent>();
-		
-		aux2 = go->GetComponent<CheckboxComponent>();
-		aux3 = go->GetComponent<ImageComponent>();
-	
-		aux5 = go->GetComponent<SliderComponent>();
-		if (aux != nullptr) 
+
+		if (ButtonComponent* buttonComp = go->GetComponent<ButtonComponent>())
 		{
-			textExample = aux->GetText();
-			color = aux->GetTextColor();
+			textExample = buttonComp->GetText();
+			color = buttonComp->GetTextColor();
 		}
-		else if (aux2 != nullptr)
+		else if (CheckboxComponent* checkboxComp = go->GetComponent<CheckboxComponent>())
 		{
-			textExample = aux2->GetText();
-			color = aux2->GetTextColor();
+			textExample = checkboxComp->GetText();
+			color = checkboxComp->GetTextColor();
 		}
-		else if (aux3 != nullptr)
+		else if (ImageComponent* imageComp = go->GetComponent<ImageComponent>())
 		{
-			textExample = aux3->GetText();
-			color = aux3->GetColor();
+			textExample = imageComp->GetText();
+			color = imageComp->GetColor();
 		}
-		else if (aux5 != nullptr)
+		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
 		{
-			textExample = aux5->GetText().textt;
-			color = aux5->GetTextColor();
-		}		
+			textExample = sliderComp->GetText().textt;
+			color = sliderComp->GetTextColor();
+		}
 	}	
 	
 	return true;
@@ -583,45 +577,34 @@ bool ModuleUI::Update(float dt)
 
 void ModuleUI::Draw()
 {
-	ButtonComponent* button = nullptr;
-	TextComponent* text = nullptr;
-	CheckboxComponent* check = nullptr;
-	ImageComponent* image = nullptr;
-	SliderComponent* slider = nullptr;
-
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
-		GameObject* UI = app->userInterface->UIGameObjects[a];
-		button = UI->GetComponent<ButtonComponent>();
-		text = UI->GetComponent<TextComponent>();
-		check = UI->GetComponent<CheckboxComponent>();
-		image = UI->GetComponent<ImageComponent>();
-		slider = UI->GetComponent<SliderComponent>();
+		GameObject* go = app->userInterface->UIGameObjects[a];
 
-		if (button != nullptr)
+		if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 		{
-			UI->Draw(nullptr);
+			go->Draw(nullptr);
 			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color);
 			button = nullptr;
 		}
-		else if (text != nullptr)
+		else if (TextComponent* text = go->GetComponent<TextComponent>())
 		{
 			RenderText(text->buttonText.textt, text->buttonText.X, text->buttonText.Y, text->buttonText.Scale, text->buttonText.Color);
 			text = nullptr;
 		}
-		else if (check != nullptr)
+		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
 		{
-			UI->Draw(nullptr);
+			go->Draw(nullptr);
 			check = nullptr;
 		}
-		else if (image != nullptr)
+		else if (ImageComponent* image = go->GetComponent<ImageComponent>())
 		{
-			UI->Draw(nullptr);
+			go->Draw(nullptr);
 			image = nullptr;
 		}
-		else if (slider != nullptr)
+		else if (SliderComponent* slider = go->GetComponent<SliderComponent>())
 		{
-			UI->Draw(nullptr);
+			go->Draw(nullptr);
 			slider = nullptr;
 		}
 	}
