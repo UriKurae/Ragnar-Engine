@@ -47,13 +47,13 @@ void DialogueSystem::OnEditor()
 		countId++;
 	}
 
-	if (ImGui::Button(ICON_FA_AD "Add Line"))
+	if (ImGui::Button(ICON_FA_PLUS" Add Line"))
 	{
 		std::string aux = "";
 		dialogueLines.push_back(aux);
 	}
 
-	if (ImGui::Button("Create Dialogue Archive"))
+	if (ImGui::Button(ICON_FA_FILE" Create Dialogue Archive"))
 	{
 		Dialogue dia;
 		dia.dialogue = dialogueLines;
