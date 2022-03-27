@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
+#include "ModuleRenderer3D.h"
 
 #include "Transform2DComponent.h"
 #include "ButtonComponent.h"
@@ -358,11 +359,18 @@ bool ModuleUI::Start()
 	shader = new Shadert("", "");
 	return true;
 }
+void ModuleUI::updateText() 
+{
+	float4 size=app->editor->GetGameView()->GetBounds();
+	app->renderer3D->OnResize(size.z, size.w);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
+}
 void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
 {
 	// activate corresponding render state	
 	
 	shader->Use();
+	updateText();
 	Frustum frustum;
 	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 	
@@ -442,6 +450,8 @@ bool ModuleUI::PreUpdate(float dt)
 		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
 		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+
+		// TODO: Change this
 		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
 		
 		float4 viewport = app->editor->GetGameView()->GetBounds();
@@ -460,7 +470,7 @@ bool ModuleUI::PreUpdate(float dt)
 }
 
 // Check if mouse is hovered on some object UI
-void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
+void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 {
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
@@ -470,20 +480,21 @@ void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
 		float3 position = transform2D->GetPosition();
 		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
+		// Whats does this do?
 		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
 		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
 
 		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
 		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
 
-		ImageComponent* image = nullptr;
-		image = go->GetComponent<ImageComponent>();
+		//ImageComponent* image = go->GetComponent<ImageComponent>();
 		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
 		{
 			hitObjs.push_back(go);
 		}
 	}
 }
+
 // Check depending on the distance of the object from the camera what object is focused 
 void ModuleUI::SetFocusedObject()
 {
@@ -534,40 +545,31 @@ bool ModuleUI::Update(float dt)
 			}
 		}
 	}
-	ButtonComponent* aux = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3= nullptr;	
-	SliderComponent*aux5= nullptr;
+	
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
-		
-		aux = go->GetComponent<ButtonComponent>();
-		
-		aux2 = go->GetComponent<CheckboxComponent>();
-		aux3 = go->GetComponent<ImageComponent>();
-	
-		aux5 = go->GetComponent<SliderComponent>();
-		if (aux != nullptr) 
+
+		if (ButtonComponent* buttonComp = go->GetComponent<ButtonComponent>())
 		{
-			textExample = aux->GetText();
-			color = aux->GetTextColor();
+			textExample = buttonComp->GetText();
+			color = buttonComp->GetTextColor();
 		}
-		else if (aux2 != nullptr)
+		else if (CheckboxComponent* checkboxComp = go->GetComponent<CheckboxComponent>())
 		{
-			textExample = aux2->GetText();
-			color = aux2->GetTextColor();
+			textExample = checkboxComp->GetText();
+			color = checkboxComp->GetTextColor();
 		}
-		else if (aux3 != nullptr)
+		else if (ImageComponent* imageComp = go->GetComponent<ImageComponent>())
 		{
-			textExample = aux3->GetText();
-			color = aux3->GetColor();
+			textExample = imageComp->GetText();
+			color = imageComp->GetColor();
 		}
-		else if (aux5 != nullptr)
+		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
 		{
-			textExample = aux5->GetText().textt;
-			color = aux5->GetTextColor();
-		}		
+			textExample = sliderComp->GetText().textt;
+			color = sliderComp->GetTextColor();
+		}
 	}	
 	
 	return true;
@@ -575,46 +577,35 @@ bool ModuleUI::Update(float dt)
 
 void ModuleUI::Draw()
 {
-	ButtonComponent* aux = nullptr;
-	TextComponent* aux1 = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3 = nullptr;
-	SliderComponent* aux5 = nullptr;
-
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
-		GameObject* UI = app->userInterface->UIGameObjects[a];
-		aux = UI->GetComponent<ButtonComponent>();
-		aux1 = UI->GetComponent<TextComponent>();
-		aux2 = UI->GetComponent<CheckboxComponent>();
-		aux3 = UI->GetComponent<ImageComponent>();
-		aux5 = UI->GetComponent<SliderComponent>();
+		GameObject* go = app->userInterface->UIGameObjects[a];
 
-		if (aux != nullptr)
+		if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 		{
-			UI->Draw(nullptr);
-			RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
-			aux = nullptr;
+			go->Draw(nullptr);
+			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color);
+			button = nullptr;
 		}
-		else if (aux1 != nullptr)
+		else if (TextComponent* text = go->GetComponent<TextComponent>())
 		{
 			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color);
 			text = nullptr;
 		}
-		else if (aux2 != nullptr)
+		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
 		{
-			UI->Draw(nullptr);
-			aux2 = nullptr;
+			go->Draw(nullptr);
+			check = nullptr;
 		}
-		else if (aux3 != nullptr)
+		else if (ImageComponent* image = go->GetComponent<ImageComponent>())
 		{
-			UI->Draw(nullptr);
-			aux3 = nullptr;
+			go->Draw(nullptr);
+			image = nullptr;
 		}
-		else if (aux5 != nullptr)
+		else if (SliderComponent* slider = go->GetComponent<SliderComponent>())
 		{
-			UI->Draw(nullptr);
-			aux5 = nullptr;
+			go->Draw(nullptr);
+			slider = nullptr;
 		}
 	}
 }

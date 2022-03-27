@@ -20,7 +20,6 @@ TextComponent::TextComponent(GameObject* own)
 	
 	state = State::NORMAL;
 	actualColor = normalColor;
-	text = "Text";
 
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
@@ -29,8 +28,8 @@ TextComponent::TextComponent(GameObject* own)
 		app->userInterface->UIGameObjects.push_back(own);
 	}	
 
-	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-	planeToDraw->own = own;
+	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	//planeToDraw->own = own;
 }
 
 TextComponent::~TextComponent()
@@ -51,13 +50,6 @@ bool TextComponent::Update(float dt)
 
 void TextComponent::Draw(CameraComponent* gameCam)
 {
-	glAlphaFunc(GL_GREATER, 0.5);
-	glEnable(GL_ALPHA_TEST);
-
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
-
-	glDisable(GL_ALPHA_TEST);
-	glColor3f(255, 255, 255);
 }
 
 void TextComponent::OnEditor()
@@ -109,7 +101,7 @@ bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "fontScale", fontScale);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
