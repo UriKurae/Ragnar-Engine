@@ -252,6 +252,7 @@
     <ClInclude Include="Engine\Source\CheckBoxComponent.h" />
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
     <ClInclude Include="Engine\Source\C_RigidBody.h" />
+    <ClInclude Include="Engine\Source\DialogueSystem.h" />
     <ClInclude Include="Engine\Source\ImageComponent.h" />
     <ClInclude Include="Engine\Source\LightComponent.h" />
     <ClInclude Include="Engine\Source\Lights.h" />
@@ -456,6 +457,7 @@
     <ClCompile Include="Engine\Source\CheckBoxComponent.cpp" />
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\Component.cpp" />
+    <ClCompile Include="Engine\Source\DialogueSystem.cpp" />
     <ClCompile Include="Engine\Source\ImageComponent.cpp" />
     <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />

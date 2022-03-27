@@ -775,6 +775,12 @@
     <ClInclude Include="Engine\Source\ParticleEffect_SpawningShape.h">
       <Filter>Particles\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\TextComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\DialogueSystem.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\C_RigidBody.h">
@@ -1678,6 +1684,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ParticleEffect_SpawningShape.cpp">
       <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\DialogueSystem.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

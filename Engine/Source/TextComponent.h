@@ -26,7 +26,7 @@ public:
 public:
 	float buttonWidth;
 	float buttonHeight;
-	Text buttonText;
+	Text textToShow;
 	bool fadeUI = false;
 	State state;
 	Color disabledColor = white;

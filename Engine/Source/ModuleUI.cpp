@@ -598,8 +598,8 @@ void ModuleUI::Draw()
 		}
 		else if (aux1 != nullptr)
 		{
-			RenderText(aux1->buttonText.textt, aux1->buttonText.X, aux1->buttonText.Y, aux1->buttonText.Scale, aux1->buttonText.Color);
-			aux1 = nullptr;
+			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color);
+			text = nullptr;
 		}
 		else if (aux2 != nullptr)
 		{
