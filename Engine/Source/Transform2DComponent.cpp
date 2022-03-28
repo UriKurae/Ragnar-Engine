@@ -88,7 +88,7 @@ bool ComponentTransform2D::Update(float dt)
 void ComponentTransform2D::OnEditor()
 {
 	if (showEdit) {
-		if (ImGui::CollapsingHeader("2D Transform"))
+		if (ImGui::CollapsingHeader("2DTransformComponent"))
 		{
 			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
 			ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000);

@@ -81,7 +81,7 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 
 void ButtonComponent::OnEditor()
 {	
-	if (ImGui::CollapsingHeader("Button"))
+	if (ImGui::CollapsingHeader("ButtonComponent"))
 	{
 		static float multiplier = 1;
 		static float fadeDuration = 0.1f;

@@ -169,7 +169,7 @@ void SliderComponent::OnEditor()
 	static bool selectedEditable = false;
 	static bool textColorEditable = false;
 
-	if (ImGui::CollapsingHeader("Slider"))
+	if (ImGui::CollapsingHeader("SliderComponent"))
 	{
 		ImGui::Checkbox("Interactable", &active);
 
