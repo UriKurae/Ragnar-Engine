@@ -72,8 +72,7 @@ void ParticleEffect_Velocity::OnEditor(int emitterIndex)
 bool ParticleEffect_Velocity::OnLoad(JsonParsing& node)
 {
 	minVelocity = node.GetJson3Number(node, "PEV: Min Velocity");
-	minVelocity = node.GetJson3Number(node, "PEV: Max Velocity");
-	//toDelete = node.GetJsonBool("PEV: To Delete");
+	maxVelocity = node.GetJson3Number(node, "PEV: Max Velocity");
 	return true;
 }
 
@@ -82,7 +81,6 @@ bool ParticleEffect_Velocity::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 	file.SetNewJson3Number(file, "PEV: Min Velocity", minVelocity);
 	file.SetNewJson3Number(file, "PEV: Max Velocity", maxVelocity);
-	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PEV: To Delete", toDelete);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
 	node.SetValueToArray(array, file.GetRootValue());
 	return true;
