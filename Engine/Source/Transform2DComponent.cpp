@@ -53,16 +53,16 @@ bool ComponentTransform2D::Update(float dt)
 		firstTime = false;
 	}
 	
-	//if (lastViewportBounds.w != viewport.w)
-	//{
-	//	//position.y +=(viewport.w - lastViewportBounds.w)/100;
-	//	
-	//}
-	//else if (lastViewportBounds.z != viewport.z) 
-	//{
-	//		position.x -=( viewport.z - lastViewportBounds.z)/2;
-	//	
-	//}
+	if (lastViewportBounds.w != viewport.w)
+	{
+		//position.y +=(viewport.w - lastViewportBounds.w)/100;
+		
+	}
+	else if (lastViewportBounds.z != viewport.z) 
+	{
+			position.x -=( viewport.z - lastViewportBounds.z)/3.5;
+		
+	}
 	
 	internalPosition.x = ((position.x)/24) / zoomRatio;
 	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;	
