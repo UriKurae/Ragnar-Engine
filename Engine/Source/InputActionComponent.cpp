@@ -8,6 +8,7 @@
 
 #include "IconsFontAwesome5.h"
 #include "Profiling.h"
+#include <ScriptComponent.cpp>
 
 InputActionComponent::InputActionComponent(GameObject* own)
 {
@@ -64,12 +65,28 @@ void InputActionComponent::OnEditor()
 										if (ImGui::Selectable(scriptName))
 										{
 											scriptsNameList[i][j] = scriptName;
+											scriptsMethodsList[i][j].clear();
+
+											MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, scriptName);
+											MonoMethodDesc* mdesc = mono_method_desc_new(":Start", false);
+											monoMethodList[i][j] = mono_method_desc_search_in_class(mdesc, klass);
+											mono_method_desc_free(mdesc);
+
 											app->moduleMono->DebugAllMethods(USER_SCRIPTS_NAMESPACE, scriptName, scriptsMethodsList[i][j]);
 										}
 									}
 									ImGui::EndCombo();
 								}
-								if (ImGui::BeginCombo("Method", scriptsNameList[i][j].c_str()))
+								const char* methodName = nullptr;
+								if (scriptsMethodsList[i][j].size() > 0)
+								{
+									methodName = scriptsMethodsList[i][j][currentMethodList[i][j]].c_str();
+								}
+								else
+								{
+									methodName = "";
+								}
+								if (ImGui::BeginCombo("Method", methodName))
 								{
 									const char* scriptName;
 									for (int actualScript = 0; actualScript < scriptsMethodsList[i][j].size(); actualScript++)
@@ -77,6 +94,7 @@ void InputActionComponent::OnEditor()
 										scriptName = scriptsMethodsList[i][j][actualScript].c_str();
 										if (ImGui::Selectable(scriptName))
 										{
+											currentMethodList[i][j] = actualScript;
 											//scriptsNameList[i][j] = scriptName;
 										}
 									}
@@ -174,6 +192,8 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 	currentActionMaps.clear();
 	scriptsNameList.clear();
 	scriptsMethodsList.clear();
+	currentMethodList.clear();
+	monoMethodList.clear();
 
 	JsonParsing sceneFile = JsonParsing();
 
@@ -184,6 +204,8 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 		size_t size = sceneFile.GetJsonArrayCount(jsonArray);
 		scriptsNameList.resize(size);
 		scriptsMethodsList.resize(size);
+		currentMethodList.resize(size);
+		monoMethodList.resize(size);
 		for (int i = 0; i < size; ++i)
 		{
 			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
@@ -192,6 +214,8 @@ bool InputActionComponent::LoadInputAsset(const char* path)
 			currentActionMaps.push_back(aM);
 			scriptsNameList[i].resize(aM->GetActions()->size());
 			scriptsMethodsList[i].resize(aM->GetActions()->size());
+			currentMethodList[i].resize(aM->GetActions()->size());
+			monoMethodList[i].resize(aM->GetActions()->size());
 		}
 		currentAssetPath = path;
 		currentAssetName = path;
