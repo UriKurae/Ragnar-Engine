@@ -121,9 +121,6 @@ bool Scene::Update(float dt)
 		resetQuadtree = false;
 	}
 
-	if (app->sceneManager->GetGameState() == GameState::PLAYING)
-		AudioManager::Get()->Render();
-
 	return true;
 }
 

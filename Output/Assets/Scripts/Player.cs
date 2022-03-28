@@ -104,8 +104,8 @@ public class Player : RagnarComponent
         }
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
-            InternalCalls.Destroy(gameObject);
             SceneManager.LoadScene("LoseScene");
+            InternalCalls.Destroy(gameObject);
         }
 
         if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
