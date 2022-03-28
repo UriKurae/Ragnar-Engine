@@ -1,22 +1,14 @@
 #include "TextEditorMenu.h"
-
 #include "Application.h"
-#include "ModuleEditor.h"
-#include "MonoManager.h"
-#include "FileSystem.h"
 #include "Globals.h"
 
+#include "MonoManager.h"
+#include "FileSystem.h"
 
-#include "Imgui/imgui.h"
-#include <iostream>
-#include <thread>
 #include <fstream>
-
-#include <GL\glew.h>
-
 #include "Profiling.h"
 
-TextEditorMenu::TextEditorMenu() : Menu(true)
+TextEditorMenu::TextEditorMenu() : Menu(true, "Text Editor")
 {
 }
 
@@ -64,12 +56,6 @@ bool TextEditorMenu::Update(float dt)
 			else if (!allScriptsFiles.empty())
 				allScriptsFiles.clear();
 
-			if (ImGui::MenuItem("Save"))
-			{
-				std::string toSave = textEditor.GetText();
-				app->fs->Save(fileToEdit.data(), toSave.data(), toSave.size());
-				app->moduleMono->ReCompileCS();
-			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Edit"))
@@ -116,6 +102,12 @@ bool TextEditorMenu::Update(float dt)
 		ImGui::EndMenuBar();
 	}
 
+	if(ImGui::Button("Save and Reload"))
+	{
+		std::string toSave = textEditor.GetText();
+		app->fs->Save(fileToEdit.data(), toSave.data(), toSave.size());
+		app->moduleMono->ReCompileCS();
+	}
 
 	ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", pos.mLine + 1, pos.mColumn + 1, textEditor.GetTotalLines(),
 		textEditor.IsOverwrite() ? "Ovr" : "Ins",

@@ -19,8 +19,6 @@ ComponentLight::~ComponentLight()
 		case LightType::POINT:
 		{
 			app->renderer3D->RemovePointLight((PointLight*)light);
-			//delete (light);
-			//light = nullptr;
 		}
 	}
 }
@@ -89,6 +87,7 @@ void ComponentLight::OnEditor()
 
 				DirectionalLight* l = (DirectionalLight*)light;
 
+				ImGui::DragFloat("Intensity", &l->intensity, 0.1f, 0.0f);
 				ImGui::ColorEdit3("Ambient Color", l->ambient.ptr());
 				ImGui::ColorEdit3("Diffuse Color", l->diffuse.ptr());
 				ImGui::ColorEdit3("Specular Color", l->specular.ptr());
@@ -98,10 +97,8 @@ void ComponentLight::OnEditor()
 				ComponentOptions(this);
 				ImGui::Separator();
 			}
-
 			break;
-		}
-		
+		}		
 		case LightType::POINT:
 		{
 			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
@@ -121,10 +118,8 @@ void ComponentLight::OnEditor()
 				ComponentOptions(this);
 				ImGui::Separator();
 			}
-
 			break;
 		}
-
 		case LightType::SPOT:
 		{
 			if (ImGui::CollapsingHeader(ICON_FA_LIGHTBULB" Light"))
@@ -137,7 +132,7 @@ void ComponentLight::OnEditor()
 
 				ImGui::DragFloat("Intensity", &l->intensity, 0.01f);
 				ImGui::DragFloat("CutOff", &l->cutOff, 0.001f, 1.0f,0.0f);
-				ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.001f, 1.0f, 0.0f);
+				ImGui::DragFloat("Outer CutOff", &l->outerCutOff, 0.001f, l->cutOff, 0.0f);
 
 				ComponentOptions(this);
 				ImGui::Separator();
@@ -150,6 +145,20 @@ void ComponentLight::OnEditor()
 void ComponentLight::SetLight(Light* light)
 {
 	this->light = light;
+}
+
+void ComponentLight::SetAsPointLight()
+{
+	owner->name = "Point Light";
+	light = new PointLight();
+	app->renderer3D->AddPointLight((PointLight*)light);
+}
+
+void ComponentLight::SetAsSpotLight()
+{
+	owner->name = "Spot Light";
+	light = new SpotLight();
+	app->renderer3D->AddSpotLight((SpotLight*)light);
 }
 
 bool ComponentLight::OnLoad(JsonParsing& node)
@@ -176,7 +185,6 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 
 			break;
 		}
-
 		case LightType::POINT:
 		{
 			PointLight* l = new PointLight();
@@ -194,7 +202,6 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 
 			break;
 		}
-
 		case LightType::SPOT:
 		{
 			SpotLight* l = new SpotLight();
@@ -250,7 +257,6 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 
 			break;
 		}
-
 		case LightType::SPOT:
 		{
 			SpotLight* l = (SpotLight*)light;
@@ -265,7 +271,6 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 
 			break;
 		}
-
 	}
 
 	node.SetValueToArray(array, file.GetRootValue());

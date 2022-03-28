@@ -194,17 +194,7 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 
 	CleanUp();
 
-	std::vector<float> vertices;
-	vertices.reserve(m_geom->getMesh()->vertices.size());
-	const std::vector<float3>& verticesMesh = m_geom->getMesh()->vertices;
-	for (int i = 0; i < m_geom->getMesh()->vertices.size(); i++)
-	{
-		vertices.push_back(verticesMesh[i].x);
-		vertices.push_back(verticesMesh[i].y);
-		vertices.push_back(verticesMesh[i].z);
-	}
-
-	const float* verts = (float*)&vertices[0];
+	const float* verts = (float*)&m_geom->getMesh()->vertices[0];
 	const int nverts = m_geom->getMesh()->vertices.size();
 	const int ntris = m_geom->getMesh()->indices.size() / 3;
 	const rcChunkyTriMesh* chunkyMesh = m_geom->getChunkyMesh();
@@ -316,7 +306,6 @@ unsigned char* NavMeshBuilder::BuildTile(const int tx, const int ty, const float
 			return 0;
 	}
 
-	vertices.clear();
 	RELEASE_ARRAY(m_triareas);
 
 

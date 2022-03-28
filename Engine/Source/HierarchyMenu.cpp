@@ -3,14 +3,15 @@
 #include "Globals.h"
 
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "FileSystem.h"
 
 #include "PrefabManager.h"
 
 #include "Profiling.h"
 
-HierarchyMenu::HierarchyMenu() : Menu(true)
+HierarchyMenu::HierarchyMenu() : Menu(true, "Hierarchy")
 {
 	gameObjectOptions = false;
 	confirmPanel = false;
@@ -24,8 +25,8 @@ bool HierarchyMenu::Update(float dt)
 {
 	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
 
-	int size = app->scene->GetGameObjectsList().size();
-	GameObject* root = app->scene->GetRoot();
+	int size = app->sceneManager->GetCurrentScene()->GetGameObjectsList().size();
+	GameObject* root = app->sceneManager->GetCurrentScene()->GetRoot();
 	GameObject* selected = app->editor->GetGO();
 	GameObject* selectedParent = app->editor->GetSelectedParent();
 	ImGuiTreeNodeFlags flags = SetFlags(root) | ImGuiTreeNodeFlags_DefaultOpen;
@@ -37,7 +38,7 @@ bool HierarchyMenu::Update(float dt)
 			if (go)
 			{
 				uint goUuid = *(const uint*)(go->Data);
-				app->scene->ReparentGameObjects(goUuid, root);
+				app->sceneManager->GetCurrentScene()->ReparentGameObjects(goUuid, root);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -65,7 +66,7 @@ bool HierarchyMenu::Update(float dt)
 				}
 				else
 				{
-					app->scene->MoveGameObjectUp(selected);
+					app->sceneManager->GetCurrentScene()->MoveGameObjectUp(selected);
 				}
 				gameObjectOptions = false;
 			}
@@ -77,7 +78,7 @@ bool HierarchyMenu::Update(float dt)
 				}
 				else
 				{
-					app->scene->MoveGameObjectDown(selected);
+					app->sceneManager->GetCurrentScene()->MoveGameObjectDown(selected);
 				}
 				gameObjectOptions = false;
 			}
@@ -92,7 +93,7 @@ bool HierarchyMenu::Update(float dt)
 						{
 							selectedParent->GetChilds().erase(i);
 							RELEASE(selected);
-							app->scene->ResetQuadtree();
+
 							break;
 						}
 					}
@@ -202,7 +203,7 @@ void HierarchyMenu::ShowChildren(GameObject* parent)
 				if (go)
 				{
 					uint goUuid = *(const uint*)(go->Data);
-					app->scene->ReparentGameObjects(goUuid, obj);
+					app->sceneManager->GetCurrentScene()->ReparentGameObjects(goUuid, obj);
 				}
 				ImGui::EndDragDropTarget();
 			}

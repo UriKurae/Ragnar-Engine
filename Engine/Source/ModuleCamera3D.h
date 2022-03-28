@@ -2,6 +2,9 @@
 #include "Module.h"
 #include "Geometry/Frustum.h"
 #include "Geometry/Line.h"
+#include <map>
+
+class GameObject;
 
 class ModuleCamera3D : public Module
 {
@@ -11,10 +14,17 @@ public:
 
 	bool Start();
 	bool Update(float dt) override;
-	void Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos);
 	bool CleanUp();
+	
+	void MousePicking(math::float3& newPos, math::float3& newFront, float speed);
+	void ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, math::LineSegment& prevLine, bool& hit, std::map<float, GameObject*>& triangleMap);
+	void OrbitAround(float& dt, math::float3& newUp, math::float3& newFront, math::float3& newPos);
+	void RotateAround(float dt, math::float3& newFront, math::float3& newUp);
+	void Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos);
 
 	void CalculateVerticalFov(float horizontalFovRadians, float width, float height);
+	void CalculateViewMatrix();
+	
 	void UpdateFovAndScreen(float width, float height);
 	void UpdateFov();
 	void SetPlanes();
@@ -40,6 +50,7 @@ public:
 
 	math::Line rayCastToDraw;
 	
-	bool canBeUpdated;
+	bool updateViewPort;
+	bool updateGameView;
 	bool visualizeFrustum;
 };

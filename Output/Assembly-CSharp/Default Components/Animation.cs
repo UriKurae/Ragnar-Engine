@@ -14,5 +14,8 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void PlayAnimation(string v);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern bool HasFinished();
+
     }
 }

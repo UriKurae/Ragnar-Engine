@@ -1,32 +1,27 @@
+#include "MonoManager.h"
 #include "Globals.h"
 #include "Application.h"
-#include "MonoManager.h"
-#include "ModuleRenderer3D.h"
-#include "ModuleScene.h"
+
+#include "FileSystem.h"
+#include "GameObject.h"
+#include "Component.h"
 #include "TransformComponent.h"
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/debug-helpers.h>
-#include <mono/metadata/class.h>
-#include <mono/metadata/threads.h>
-
-#include "GameObject.h"
-#include "Component.h"
 
 #include "ScriptBindings.h"
 #include "AudioBindings.h"
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
+#include "UIBindings.h"
+#include "NavAgentBindings.h"
 
-#include <iostream>
 #include <fstream>
 #include <PugiXML/pugixml.hpp>
-#include "FileSystem.h"
-#include "ImGui/imgui.h"
-#include "ModuleEditor.h"
 
 MonoManager::MonoManager(bool start_enabled) : Module(start_enabled), domain(nullptr), domainThread(nullptr), assembly(nullptr), image(nullptr)
 , jitDomain(nullptr)
@@ -50,10 +45,12 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_config_parse(NULL);
 	jitDomain = mono_jit_init("myapp");
 
+	// Input =====================
 	mono_add_internal_call("RagnarEngine.Input::GetKey", GetKey);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseClick", GetMouseClick);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseX", MouseX);
 	mono_add_internal_call("RagnarEngine.Input::GetMouseY", MouseY);
+	// Input =====================
 
 	// Transform =================
 	mono_add_internal_call("RagnarEngine.Transform::get_localPosition", GetPosition);
@@ -71,24 +68,49 @@ bool MonoManager::Init(JsonParsing& node)
 	// Transform =================
 
 	// Material Comp =============
-
-	mono_add_internal_call("RagnarEngine.MaterialComponent::get_texture", GetTexturePath);
-	mono_add_internal_call("RagnarEngine.MaterialComponent::set_texture", SetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
 
+	// Internall Calls =============
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     // This does not return a GameObject
-	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject); // This does
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     
+	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject);
+	mono_add_internal_call("RagnarEngine.InternalCalls::InstancePrefab", InstancePrefab);
+	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
+	mono_add_internal_call("RagnarEngine.InternalCalls::GetRegionGame", GetRegionGame);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
+	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+	// Internal Calls =============
 
+	// Utility ===================
 	mono_add_internal_call("RagnarEngine.Time::get_deltaTime", GetGameTimeStep);
+	mono_add_internal_call("RagnarEngine.Time::set_timeScale", SetTimeScale);
 	mono_add_internal_call("RagnarEngine.Debug::Log", LogMono);
+	mono_add_internal_call("RagnarEngine.GameObject::Find", FindGameObjectWithName);
+	mono_add_internal_call("RagnarEngine.GameObject::FindGameObjectsWithTag", FindGameObjectsWithTag);
+	mono_add_internal_call("RagnarEngine.GameObject::get_tag", GetGameObjectTagMono);
+	mono_add_internal_call("RagnarEngine.GameObject::set_tag", SetGameObjectTagMono);
+	mono_add_internal_call("RagnarEngine.GameObject::get_name", GetGameObjectName);
+	mono_add_internal_call("RagnarEngine.GameObject::set_name", SetGameObjectName);
+	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
+	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	// Utility ===================
 
+	// UI ========================
+	// TODO: Create C# class when the merge to develop is done
+	//mono_add_internal_call("RagnarEngine.Button::get_text", GetButtonText);
+	//mono_add_internal_call("RagnarEngine.Button::set_text", SetButtonText);
+	// UI ========================
+
+	// Audio Source ==============
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
 	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClip", StopCurrentClip);
 	mono_add_internal_call("RagnarEngine.AudioListener::TestListener", TestListener);
+	// Audio Source ==============
 
 	// Rigidbody =================
 	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyCentralForce", ApplyCentralForce);
@@ -102,14 +124,62 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsStatic", SetAsStatic);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetAsTrigger", SetAsTrigger);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionType", SetCollisionType);
-	mono_add_internal_call("RagnarEngine.Rigidbody::SetSphereRadius", SetSphereRadius);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetCollisionSphere", SetCollisionSphere);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetHeight", SetHeight);
+	mono_add_internal_call("RagnarEngine.Rigidbody::SetBodyPosition", SetBodyPosition);
 	// Rigidbody =================
 
+	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
+	mono_add_internal_call("RagnarEngine.Animation::HasFinished", HasFinished);
+	// Animation =================
 
+
+	// NavAgent ==================
+	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_hitPosition", GetHitPosition);
+	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
+	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
+	// NavAgent ==================
+
+	// Particle System ==========
+	mono_add_internal_call("RagnarEngine.ParticleSystem::get_emitters", GetEmitters);
+	mono_add_internal_call("RagnarEngine.Emitter::Play", PlayEmitter);
+	mono_add_internal_call("RagnarEngine.Emitter::Pause", PauseEmitter);
+	// Particle System ==========
+
+	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
+	// Camera ====================
 
+	// Scene Manager =============
+	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::Exit", Exit);
+	// Scene Manager =============
+
+	// UI =======================
+	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
+	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
+	mono_add_internal_call("RagnarEngine.UISlider::UIFunctionSlider", UIFunctionSlider);
+	mono_add_internal_call("RagnarEngine.Transform2D::UIFunctionTransform2D", UIFunctionTransform2D);
+	mono_add_internal_call("RagnarEngine.Transform2D::get_position2D", Get2DPosition);
+	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
+
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
+	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetText);
+	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetText);
+
+	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
+	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
+
+	mono_add_internal_call("RagnarEngine.UISlider::GetSliderActualValue", GetSliderActualValue);
+
+	mono_add_internal_call("RagnarEngine.Transform2D::GetSize", GetSize);
+	mono_add_internal_call("RagnarEngine.Transform2D::SetSize", SetSize);
+	// UI =======================
 	InitMono();
 
 	return ret;
@@ -139,10 +209,10 @@ bool MonoManager::CleanUp()
 
 void MonoManager::ReCompileCS()
 {
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 		return;
 
-	app->scene->SaveScene("Assets/Scenes/scenePlay.ragnar");
+	app->sceneManager->GetCurrentScene()->SaveScene("Assets/Scenes/scenePlay.ragnar");
 
 	//TODO: Clean scene and all render data
 	//app->scene->CleanScene();
@@ -159,7 +229,7 @@ void MonoManager::ReCompileCS()
 	CMDCompileCS();
 	InitMono();
 
-	app->scene->LoadScene("Assets/Scenes/scenePlay.ragnar");
+	app->sceneManager->GetCurrentScene()->LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
 
 }
@@ -427,6 +497,7 @@ void MonoManager::CreateAssetsScript(const char* localPath)
 	className = className.substr(0, className.find_last_of("."));
 
 	outfile << "using System;" << std::endl << "using RagnarEngine;" << std::endl << std::endl << "public class " << className.c_str() << " : RagnarComponent" << std::endl << "{" << std::endl <<
+		"	public void Start()" << std::endl << "	{" << std::endl << std::endl << "	}" << std::endl << 
 		"	public void Update()" << std::endl << "	{" << std::endl << std::endl << "	}" << std::endl << std::endl << "}";
 
 	outfile.close();
@@ -566,4 +637,14 @@ void MonoManager::UpdateListScripts()
 			}
 		}
 	}
+}
+
+float2 MonoManager::UnboxVector2D(MonoObject* _obj)
+{
+	float2 ret;
+
+	MonoClass* klass = mono_object_get_class(_obj);
+	mono_field_get_value(_obj, mono_class_get_field_from_name(klass, "x"), &ret.x);
+	mono_field_get_value(_obj, mono_class_get_field_from_name(klass, "y"), &ret.y);
+	return ret;
 }

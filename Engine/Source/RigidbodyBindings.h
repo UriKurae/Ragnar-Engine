@@ -111,8 +111,22 @@ void SetCollisionType(MonoObject* go, CollisionType type)
 	rb->SetCollisionType(type);
 }
 
-void SetSphereRadius(MonoObject* go, float radius)
+void SetCollisionSphere(MonoObject* go, float radius, float x, float y, float z)
+{
+	float3 pos(x, y, z);
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	rb->SetCollisionSphere(radius, pos);
+}
+
+void SetHeight(MonoObject* go, float height)
 {
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
-	rb->SetSphereRadius(radius);
+	rb->SetHeight(height);
+}
+
+void SetBodyPosition(MonoObject* go, MonoObject* pos)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	float3 bPos = app->moduleMono->UnboxVector(pos);
+	rb->GetBody()->getWorldTransform().setOrigin(bPos);
 }

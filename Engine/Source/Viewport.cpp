@@ -4,7 +4,8 @@
 
 #include "ModuleInput.h"
 #include "ModuleCamera3D.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 #include "ModuleRenderer3D.h"
 
 #include "TransformComponent.h"
@@ -40,7 +41,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 		else if (ImGui::IsItemDeactivated()|| !ImGui::IsItemActive())
 			isFocused = false;
 
-		app->camera->canBeUpdated = true;
+		app->camera->updateViewPort = true;
 
 		ImVec2 size = ImGui::GetContentRegionAvail();
 
@@ -108,7 +109,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 				std::string scene = path;
 				if (scene.find(".ragnar") != std::string::npos)
 				{
-					app->scene->LoadScene(scene.c_str());
+					app->sceneManager->ChangeScene(scene.c_str());
 				}
 				else if (scene.find(".rgprefab") != std::string::npos)
 				{
@@ -137,7 +138,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 	}
 	else
 	{
-		app->camera->canBeUpdated = false;
+		app->camera->updateViewPort = false;
 	}
 
 	ImGui::End();

@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "Scene.h"
 
 #include "TransformComponent.h"
 #include "MaterialComponent.h"
@@ -19,8 +19,6 @@ MeshComponent::MeshComponent(GameObject* own, TransformComponent* trans) : mater
 	owner = own;
 	mesh = nullptr;
 	material = owner->GetComponent<MaterialComponent>();
-
-	showMeshMenu = false;
 }
 
 MeshComponent::MeshComponent(MeshComponent* meshComponent, TransformComponent* trans) : material(nullptr), showMeshMenu(false)
@@ -43,77 +41,33 @@ MeshComponent::~MeshComponent()
 
 void MeshComponent::Draw(CameraComponent* gameCam)
 {
-	//glEnableClientState(GL_VERTEX_ARRAY);
-	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	//glPushMatrix();
-	//glMultMatrixf(transform->GetGlobalTransform().Transposed().ptr());
-	
-	
 	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	
 	if (material != nullptr && material->GetActive()) material->Unbind();
-	
-	//glPopMatrix();
-	//
-	//glDisableClientState(GL_VERTEX_ARRAY);
-	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	// If showAABB are enable draw the his bounding boxes
-	if (showAABB == true) {
-		float3 points[8];
-		owner->GetAABB().GetCornerPoints(points);
-		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
-	}
-	// If showOBB are enable draw the his bounding boxes
-	if (showOBB == true) {
-		float3 points[8];
-		owner->GetOOB().GetCornerPoints(points);
-		DebugColliders(points);
-	}
-}
-
-void MeshComponent::DebugColliders(float3* points, float3 color)
-{
-	unsigned int index[24] =
-	{ 0, 2, 2, 6, 6, 4, 4, 0,
-	  0, 1, 1, 3, 3, 2, 4, 5,
-	  6, 7, 5, 7, 3, 7, 1, 5
-	};
-
-	glColor3fv(&color.x);
-	glLineWidth(2.f);
-	glBegin(GL_LINES);
-
-	for (int i = 0; i < 24; i++)
-	{
-		glVertex3fv(&points[index[i]].x);
-	}
-
-	glEnd();
-	glLineWidth(1.f);
-	glColor3f(1.f, 1.f, 1.f);
 }
 
 void MeshComponent::DrawOutline()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (mesh)
+	{
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glPushMatrix();
-	float4x4 testGlobal;
-	testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
+		glPushMatrix();
+		float4x4 testGlobal;
+		testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
 
-	glMultMatrixf(testGlobal.Transposed().ptr());
+		glMultMatrixf(testGlobal.Transposed().ptr());
 
-	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
+		mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
-	glPopMatrix();
-	
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glPopMatrix();
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
 }
 
 void MeshComponent::OnEditor()
@@ -143,54 +97,56 @@ void MeshComponent::OnEditor()
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mesh ? mesh.use_count() : 0);
 
-		ImGui::Checkbox("Show AABB     ", &showAABB);		
+		ImGui::Checkbox("Show AABB     ", &owner->showAABB);		
 		ImGui::SameLine();		
-		ImGui::Checkbox("Show OBB", &showOBB);
+		ImGui::Checkbox("Show OBB", &owner->showOBB);
 
 		ComponentOptions(this);
 		ImGui::Separator();
 	}
 
 	if (showMeshMenu)
-	{
-		ImGui::Begin("Meshes", &showMeshMenu, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoCollapse);
-		ImVec2 winPos = ImGui::GetWindowPos();
-		ImVec2 size = ImGui::GetWindowSize();
-		ImVec2 mouse = ImGui::GetIO().MousePos;
-		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x && 
-			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-		{
-			if (ImGui::GetIO().MouseClicked[0]) showMeshMenu = false;
-		}
-
-		std::vector<std::string> files;
-		app->fs->DiscoverFiles("Library/Meshes/", files);
-		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-		{
-			if ((*it).find(".rgmesh") != std::string::npos)
-			{
-				app->fs->GetFilenameWithoutExtension(*it);
-				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-				uint uid = std::stoll(*it);
-				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
-				if (ImGui::Selectable(res->GetName().c_str()))
-				{
-					if (mesh.use_count() - 1 == 1) mesh->UnLoad();
-					SetMesh(res);
-				}
-			}
-		}
-
-		ImGui::End();
-	}
+		MenuChangeMesh();
 
 	ImGui::PopID();
+}
+
+void MeshComponent::MenuChangeMesh()
+{
+	ImGui::Begin("Meshes", &showMeshMenu, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoCollapse);
+	ImVec2 winPos = ImGui::GetWindowPos();
+	ImVec2 size = ImGui::GetWindowSize();
+	ImVec2 mouse = ImGui::GetIO().MousePos;
+	if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+		mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+	{
+		if (ImGui::GetIO().MouseClicked[0]) showMeshMenu = false;
+	}
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Library/Meshes/", files);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		if ((*it).find(".rgmesh") != std::string::npos)
+		{
+			app->fs->GetFilenameWithoutExtension(*it);
+			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+			uint uid = std::stoll(*it);
+			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
+			if (ImGui::Selectable(res->GetName().c_str()))
+			{
+				if (mesh.use_count() - 1 == 1) mesh->UnLoad();
+				SetMesh(res);
+			}
+		}
+	}
+
+	ImGui::End();
 }
 
 bool MeshComponent::OnLoad(JsonParsing& node)
 {
 	mesh = std::static_pointer_cast<Mesh>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
-
 	active = node.GetJsonBool("Active");
 
 	if (mesh)
@@ -230,8 +186,6 @@ void MeshComponent::SetMesh(std::shared_ptr<Resource> m)
 
 		CalculateCM();
 	}
-
-
 }
 
 bool MeshComponent::HasMaterial()

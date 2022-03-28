@@ -36,7 +36,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER, PARTICLES_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
@@ -123,6 +123,9 @@ uint FileSystem::Load(const char* file, char** buffer)
 			}
 			else
 				ret = readed;
+
+			// TODO: Memory Leak here, but if you put line 122 here you will run into a crash
+			//if (*buffer) RELEASE_ARRAY(buffer);
 		}
 
 		if (PHYSFS_close(fsFile) == 0)

@@ -1,9 +1,7 @@
 #pragma once
-
 #include "Menu.h"
 #include "TextEditor.h"
 
-#include <string>
 #include <vector>
 
 class TextEditorMenu : public Menu

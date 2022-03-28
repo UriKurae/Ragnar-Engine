@@ -7,6 +7,7 @@
 class Texture;
 class Mesh;
 class Resource;
+class Scene;
 enum class ResourceType;
 typedef unsigned int uint;
 
@@ -19,7 +20,7 @@ public:
 
 	void CheckForNewResources();
 
-	uint CreateResource(ResourceType type, std::string& assets, std::string& library);
+	uint CreateResource(ResourceType type, std::string assets, std::string& library);
 	void CreateResourceCreated(ResourceType type, uint uid, std::string& assets, std::string& library);
 
 	std::shared_ptr<Resource> LoadResource(uint uid);
@@ -33,6 +34,7 @@ public:
 	std::shared_ptr<Resource> GetResource(std::string path);
 
 	void DeleteResource(std::string& path);
+	void DeleteResource(uint uid);
 
 	void AddTexture(Texture* tex);
 	Texture* IsTextureLoaded(std::string path);
@@ -41,6 +43,8 @@ public:
 	void AddMesh(Mesh* mesh);
 	Mesh* IsMeshLoaded(std::string path);
 	void RemoveMesh(Mesh* mesh);
+
+	std::vector<std::shared_ptr<Scene>> GetScenes();
 
 private:
 	ResourceManager();

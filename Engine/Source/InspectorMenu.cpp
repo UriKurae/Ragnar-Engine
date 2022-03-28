@@ -2,14 +2,13 @@
 #include "Application.h"
 
 #include "ModuleEditor.h"
-#include "ModuleScene.h"
-
-#include "Resource.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
 
-InspectorMenu::InspectorMenu() : Menu(true)
+InspectorMenu::InspectorMenu() : Menu(true, "Inspector")
 {
 	tags = { "Untagged", "Respawn", "Finish", "EditorOnly", "MainCamara", "Player", "GameController" };
 	layers = { "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "Player" };
@@ -22,7 +21,7 @@ InspectorMenu::~InspectorMenu()
 bool InspectorMenu::Update(float dt)
 {
 	ImGui::Begin(ICON_FA_INFO_CIRCLE" Inspector", &active);
-	if (!app->scene->GetRoot()->GetChilds().empty())
+	if (!app->sceneManager->GetCurrentScene()->GetRoot()->GetChilds().empty())
 	{
 		// The inspector is empty if no object is selected
 		GameObject* obj = app->editor->GetGO();

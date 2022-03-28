@@ -4,16 +4,26 @@
 #include "Detour/DetourNavMesh.h"
 #include "Detour/DetourNavMeshQuery.h"
 
-#include "MathGeoLib.h"
+#define MAX_POLYS 256
+#define MAX_SMOOTH 2048
+#define MAX_ERROR 0.05f
 
 class GameObject;
 class InputGeom;
 class NavMeshBuilder;
+class NavAgentComponent;
+class btRigidBody;
 
 enum class PathType
 {
 	SMOOTH,
 	STRAIGHT
+};
+
+enum class AgentType
+{
+	ENEMY,
+	CHARACTER_1,
 };
 
 struct NavAgent
@@ -30,52 +40,47 @@ struct NavAgent
 	float acceleration = 0.0f;
 	float stoppingDistance = 0;
 
+	std::vector<float3> path;
 	PathType pathType = PathType::STRAIGHT;
-};
 
-struct Pathfinder
-{
-	Pathfinder();
-	~Pathfinder();
-	void Init(NavMeshBuilder* builder);
+	//Path Calculations Variables
+	dtPolyRef m_startRef = 0;
+	dtPolyRef m_endRef = 0;
 
-	bool CalculatePath();
-	bool CalculatePath(float3 origin, float3 destination, std::vector<float3>& path);
-	void RenderPath();
-
-	PathType pathType;
-
-	dtNavMesh* m_navMesh = nullptr;
-	dtNavMeshQuery* m_navQuery = nullptr;
-	dtQueryFilter m_filter;
-	NavMeshBuilder* m_navMeshBuilder = nullptr;
-
-	int m_straightPathOptions;
-
-	static const int MAX_POLYS = 256;
-	static const int MAX_SMOOTH = 2048;
-
-	dtPolyRef m_startRef;
-	dtPolyRef m_endRef;
+	int m_npolys = 0;
 	dtPolyRef m_polys[MAX_POLYS];
 	dtPolyRef m_parent[MAX_POLYS];
-	int m_npolys;
 
-	int m_nstraightPath;
+	int m_nsmoothPath = 0;
+	float m_smoothPath[MAX_SMOOTH * 3];
+
+	int m_nstraightPath = 0;
 	float m_straightPath[MAX_POLYS * 3];
 	unsigned char m_straightPathFlags[MAX_POLYS];
 	dtPolyRef m_straightPathPolys[MAX_POLYS];
+};
 
-	int m_nsmoothPath;
-	float m_smoothPath[MAX_SMOOTH * 3];
+class Pathfinder : public Module
+{
+public:
+	Pathfinder();
+	~Pathfinder();
 
-	float3 startPosition;
-	bool startPosSet;
-	float3 endPosition;
-	bool endPosSet;
+	void Init(NavMeshBuilder* builder);
+	std::vector<float3> CalculatePath(NavAgentComponent* agent, float3 destination);
+	void RenderPath(NavAgentComponent* agent);
+	bool MovePath(NavAgentComponent* agent);
+	bool MoveTo(NavAgentComponent* agent, float3 destination);
+	bool LookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D);
+	bool SmoothLookAt(btRigidBody* rigidBody, float2 direction2D, float2 origin2D, float speed);
 
-	int m_pathIterNum;
-	float m_polyPickExt[3];
+public:
+	dtNavMesh* m_navMesh;
+	dtNavMeshQuery* m_navQuery;
+	dtQueryFilter m_filter;
+	NavMeshBuilder* m_navMeshBuilder;
+
+	float3 hitPosition = float3::zero;
 };
 
 struct BuildSettings
@@ -113,7 +118,8 @@ struct BuildSettings
 	float tileSize;
 };
 
-class ModuleNavMesh : public Module {
+class ModuleNavMesh : public Module 
+{
 public:
 	ModuleNavMesh(bool start_enabled = true);
 	~ModuleNavMesh();
@@ -124,6 +130,8 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) override;
 
+	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
+
 	void ClearNavMeshes();
 	bool IsWalkable(float x, float z, float3& hitPoint);
 
@@ -132,14 +140,13 @@ public:
 	void BakeNavMesh();
 	void AddGameObjectToNavMesh(GameObject* objectToAdd);
 	inline NavMeshBuilder* GetNavMeshBuilder() { return navMeshBuilder; };
-	const inline InputGeom* GetInputGeom() const { return geometry; };
-	BuildSettings* GetBuildSettings() { return buildSettings; };
-
-public:
-	Pathfinder pathfinder;
+	inline InputGeom* GetInputGeom() { return geometry; };
+	inline BuildSettings* GetBuildSettings() { return buildSettings; };
+	inline Pathfinder* GetPathfinding() { return pathfinder; };
 
 private:
 	NavMeshBuilder* navMeshBuilder = nullptr;
+	Pathfinder* pathfinder = nullptr;
 	InputGeom* geometry = nullptr;
 	BuildSettings* buildSettings = nullptr;
 };

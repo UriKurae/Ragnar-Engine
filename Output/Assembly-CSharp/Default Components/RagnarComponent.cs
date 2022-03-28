@@ -19,7 +19,18 @@ namespace RagnarEngine
         LIGHT,
         ANIMATION,
         BONE,
-        RIGID_BODY,
+        RIGID_BODY, 
+        UI_BUTTON,
+        UI_IMAGE,
+        UI_CHECKBOX,
+        UI_SLIDER,
+        UI_INPUTBOX,
+        UI_CANVAS,
+        TRANFORM2D,
+        UI_TEXT,
+        NAVAGENT,
+        PARTICLE_SYSTEM,
+        BILLBOARD,
     }
 
     public class RagnarComponent
@@ -30,23 +41,30 @@ namespace RagnarEngine
         public static Dictionary<System.Type, ComponentType> componentTable = new Dictionary<Type, ComponentType>
         {
             { typeof(Transform), ComponentType.TRANSFORM },
-            { typeof(MaterialComponent), ComponentType.MATERIAL},
+            { typeof(Material), ComponentType.MATERIAL },
             { typeof(AudioSource), ComponentType.AUDIO_SOURCE },
             { typeof(Rigidbody), ComponentType.RIGID_BODY},
             { typeof(Animation), ComponentType.ANIMATION},
             { typeof(Camera), ComponentType.CAMERA},
             { typeof(AudioListener), ComponentType.AUDIO_LISTENER},
+            { typeof(NavAgent), ComponentType.NAVAGENT },
+            { typeof(ParticleSystem), ComponentType.PARTICLE_SYSTEM },
+            { typeof(Transform2D), ComponentType.TRANFORM2D},
+            { typeof(UIButton), ComponentType.UI_BUTTON},
+            { typeof(UIImage), ComponentType.UI_IMAGE},
+            { typeof(UICheckbox), ComponentType.UI_CHECKBOX},
+            { typeof(UISlider), ComponentType.UI_SLIDER},
         };
 
         public RagnarComponent()
         {
-            this.type = ComponentType.SCRIPT;
+            type = ComponentType.SCRIPT;
         }
 
         public RagnarComponent(UIntPtr ptr)
         {
             pointer = ptr;
-            //this.type = ComponentType.SCRIPT;
+            type = ComponentType.SCRIPT;
         }
 
         public extern GameObject gameObject

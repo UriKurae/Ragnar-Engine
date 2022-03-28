@@ -6,7 +6,7 @@
 class Module;
 class ModuleWindow;
 class ModuleInput;
-class ModuleScene;
+class ModuleSceneManager;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
@@ -17,7 +17,7 @@ class ModuleNavMesh;
 class ModuleUI;
 
 #define CONFIG_FILENAME	"config.json"
-#define APPLICATION_NAME "Ragnar Engine"
+#define APPLICATION_NAME "Dune Commandos"
 #define ORGANIZATION_NAME "Yggdrasil Studios"
 
 class Application
@@ -62,7 +62,7 @@ public:
 	ModuleRenderer3D* renderer3D = nullptr;
 	ModuleCamera3D* camera = nullptr;
 	ModuleEditor* editor = nullptr;
-	ModuleScene* scene = nullptr;
+	ModuleSceneManager* sceneManager = nullptr;
 	FileSystem* fs = nullptr;
 	MonoManager* moduleMono = nullptr;
 	ModuleUI* userInterface = nullptr;

@@ -14,24 +14,21 @@
 #include "Texture.h"
 #include "Lights.h"
 
+#include "GL/glew.h"
 #include <fstream>
 #include "Profiling.h"
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
 
-MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nullptr), showTexMenu(false), showShaderMenu(false), defaultMat(defaultMat)
+MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : defaultMat(defaultMat)
 {
 	type = ComponentType::MATERIAL;
 	owner = own;
-	checker = false;
-	showShaderEditor = false;
 	active = true;
 
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
 	shader->SetUniforms(GetShaderUniforms());
-
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
-
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -41,7 +38,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : diff(nu
 	refreshShaderTimer = 0.0f;
 }
 
-MaterialComponent::MaterialComponent(MaterialComponent* mat) : showTexMenu(false), showShaderMenu(false), defaultMat(false)
+MaterialComponent::MaterialComponent(MaterialComponent* mat)
 {
 	checker = mat->checker;
 	diff = mat->diff;
@@ -71,99 +68,6 @@ MaterialComponent::~MaterialComponent()
 void MaterialComponent::OnEditor()
 {
 	ImGui::PushID(this);
-
-	if (showShaderEditor)
-	{
-		ImGui::Begin("Shader Editor", &showShaderEditor, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
-		//Update
-		auto cpos = editor.GetCursorPosition();
-		if (ImGui::BeginMenuBar())
-		{
-			if (ImGui::Button("Save"))
-			{
-				std::string s = editor.GetText();
-
-				app->fs->RemoveFile(fileToEdit.c_str());
-				app->fs->Save(fileToEdit.c_str(), s.c_str(), editor.GetText().size());
-
-				shader->Refresh();
-
-			}
-			ImGui::EndMenuBar();
-		}
-
-		ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, editor.GetTotalLines(),
-			editor.IsOverwrite() ? "Ovr" : "Ins",
-			editor.CanUndo() ? "*" : " ",
-			editor.GetLanguageDefinition().mName.c_str(), fileToEdit.c_str());
-
-		editor.Render("TextEditor");
-		ImGui::End();
-	}
-
-	if (showTexMenu)
-	{
-		ImGui::Begin("Textures", &showTexMenu);
-		ImVec2 winPos = ImGui::GetWindowPos();
-		ImVec2 size = ImGui::GetWindowSize();
-		ImVec2 mouse = ImGui::GetIO().MousePos;
-		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
-			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-		{
-			if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
-		}
-
-		std::vector<std::string> files;
-		app->fs->DiscoverFiles("Library/Textures/", files);
-		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-		{
-			if ((*it).find(".rgtexture") != std::string::npos)
-			{
-				app->fs->GetFilenameWithoutExtension(*it);
-				*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-				uint uid = std::stoll(*it);
-				std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
-				if (ImGui::Selectable(res->GetName().c_str()))
-				{
-					res->Load();
-					if (diff.use_count() - 1 == 1) diff->UnLoad();
-					SetTexture(res);
-				}
-			}
-		}
-
-		ImGui::End();
-	}
-
-	if (showShaderMenu)
-	{
-		ImGui::Begin("Shaders", &showShaderMenu);
-		ImVec2 winPos = ImGui::GetWindowPos();
-		ImVec2 size = ImGui::GetWindowSize();
-		ImVec2 mouse = ImGui::GetIO().MousePos;
-		if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
-			mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-		{
-			if (ImGui::GetIO().MouseClicked[0]) showShaderMenu = false;
-		}
-
-		std::vector<std::string> files;
-		app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
-		for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-		{
-			if ((*it).find(".shader") != std::string::npos)
-			{
-				if (ImGui::Selectable((*it).c_str()))
-				{
-					uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/" + *it), std::string());
-					shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(uid));
-					shader->SetUniforms(GetShaderUniforms());
-				}
-			}
-		}
-
-		ImGui::End();
-	}
 
 	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
 	{
@@ -207,10 +111,6 @@ void MaterialComponent::OnEditor()
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 		}
 
-		
-
-		//ImGui::Separator();
-
 		ImGui::Text("Select shader: ");
 		ImGui::SameLine();
 		if (ImGui::Button(shader->GetName().c_str()))
@@ -233,16 +133,114 @@ void MaterialComponent::OnEditor()
 		ComponentOptions(this);
 		ImGui::Separator();
 	}
+
+	if (showShaderEditor)
+		ShaderEditor();
+
+	if (showTexMenu)
+		MenuTextureList();
+
+	if (showShaderMenu)
+		MenuShaderList();
 	
 	ImGui::PopID();
+}
+
+void MaterialComponent::MenuTextureList()
+{
+	ImGui::Begin("Textures", &showTexMenu);
+	ImVec2 winPos = ImGui::GetWindowPos();
+	ImVec2 size = ImGui::GetWindowSize();
+	ImVec2 mouse = ImGui::GetIO().MousePos;
+	if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+		mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+	{
+		if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
+	}
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Library/Textures/", files);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		if ((*it).find(".rgtexture") != std::string::npos)
+		{
+			app->fs->GetFilenameWithoutExtension(*it);
+			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+			uint uid = std::stoll(*it);
+			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
+			if (ImGui::Selectable(res->GetName().c_str()))
+			{
+				res->Load();
+				if (diff.use_count() - 1 == 1) diff->UnLoad();
+				SetTexture(res);
+			}
+		}
+	}
+
+	ImGui::End();
+}
+void MaterialComponent::MenuShaderList()
+{
+	ImGui::Begin("Shaders", &showShaderMenu);
+	ImVec2 winPos = ImGui::GetWindowPos();
+	ImVec2 size = ImGui::GetWindowSize();
+	ImVec2 mouse = ImGui::GetIO().MousePos;
+	if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
+		mouse.y < winPos.y + size.y && mouse.y > winPos.y))
+	{
+		if (ImGui::GetIO().MouseClicked[0]) showShaderMenu = false;
+	}
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		if ((*it).find(".shader") != std::string::npos)
+		{
+			if (ImGui::Selectable((*it).c_str()))
+			{
+				uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/" + *it), std::string());
+				shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(uid));
+				shader->SetUniforms(GetShaderUniforms());
+			}
+		}
+	}
+
+	ImGui::End();
+}
+void MaterialComponent::ShaderEditor()
+{
+	ImGui::Begin("Shader Editor", &showShaderEditor, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+	//Update
+	auto cpos = editor.GetCursorPosition();
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::Button("Save"))
+		{
+			std::string s = editor.GetText();
+
+			app->fs->RemoveFile(fileToEdit.c_str());
+			app->fs->Save(fileToEdit.c_str(), s.c_str(), editor.GetText().size());
+
+			shader->Refresh();
+
+		}
+		ImGui::EndMenuBar();
+	}
+
+	ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, editor.GetTotalLines(),
+		editor.IsOverwrite() ? "Ovr" : "Ins",
+		editor.CanUndo() ? "*" : " ",
+		editor.GetLanguageDefinition().mName.c_str(), fileToEdit.c_str());
+
+	editor.Render("TextEditor");
+	ImGui::End();
 }
 
 std::vector<Uniform> MaterialComponent::GetShaderUniforms()
 {
 	GLint activeUniforms;
-
 	glGetProgramiv(shader->GetId(), GL_ACTIVE_UNIFORMS, &activeUniforms);
-
 	std::vector<Uniform> uniforms;
 
 	for (uint i = 0; i < activeUniforms; i++)
@@ -300,12 +298,12 @@ std::vector<Uniform> MaterialComponent::GetShaderUniforms()
 			//	glGetnUniformfv(shader->GetId(), uinformLoc, sizeof(uniform.matrix4), &uniform.matrix4.v[0][0]);
 			//	break;
 
-			default: uniform.uniformType = UniformType::NONE; break;
-
+			default: uniform.uniformType = UniformType::NONE; 
+				break;
 			}
 
-			if (uniform.uniformType != UniformType::NONE) uniforms.push_back(uniform);
-
+			if (uniform.uniformType != UniformType::NONE) 
+				uniforms.push_back(uniform);
 		}
 	}
 	return uniforms;
@@ -317,27 +315,41 @@ void MaterialComponent::ShowUniforms()
 	{
 		switch (shader->GetUniforms()[i].uniformType)
 		{
-		case  UniformType::INT:	ImGui::DragInt(shader->GetUniforms()[i].name.c_str(), &(int)shader->GetUniforms()[i].integer, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::FLOAT: ImGui::DragFloat(shader->GetUniforms()[i].name.c_str(), &(float)shader->GetUniforms()[i].floatNumber, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::INT_VEC2: ImGui::DragInt2(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec2, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::INT_VEC3: ImGui::DragInt3(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec3, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::INT_VEC4: ImGui::DragInt4(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec4, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::FLOAT_VEC2: ImGui::DragFloat2(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec2, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::FLOAT_VEC3: ImGui::DragFloat3(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec3, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case  UniformType::FLOAT_VEC4: ImGui::DragFloat4(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec4, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		case UniformType::MATRIX4: ImGui::DragFloat4(shader->GetUniforms()[i].name.c_str(), shader->GetUniforms()[i].matrix4.ToEulerXYZ().ptr(), 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); break;
-		}
-	
+		case  UniformType::INT:	
+			ImGui::DragInt(shader->GetUniforms()[i].name.c_str(), &(int)shader->GetUniforms()[i].integer, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::FLOAT: 
+			ImGui::DragFloat(shader->GetUniforms()[i].name.c_str(), &(float)shader->GetUniforms()[i].floatNumber, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::INT_VEC2: 
+			ImGui::DragInt2(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec2, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::INT_VEC3: 
+			ImGui::DragInt3(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec3, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::INT_VEC4: 
+			ImGui::DragInt4(shader->GetUniforms()[i].name.c_str(), (int*)&shader->GetUniforms()[i].vec4, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::FLOAT_VEC2: 
+			ImGui::DragFloat2(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec2, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::FLOAT_VEC3: 
+			ImGui::DragFloat3(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec3, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case  UniformType::FLOAT_VEC4: 
+			ImGui::DragFloat4(shader->GetUniforms()[i].name.c_str(), (float*)&shader->GetUniforms()[i].vec4, 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		case UniformType::MATRIX4: 
+			ImGui::DragFloat4(shader->GetUniforms()[i].name.c_str(), shader->GetUniforms()[i].matrix4.ToEulerXYZ().ptr(), 0.02f, 0.0f, 0.0f, "%.2f", ImGuiSliderFlags_None); 
+			break;
+		}	
 	}
-
 }
 
 bool MaterialComponent::Update(float dt)
 {
 	if (refreshShaderTimer <= MAX_TIME_TO_REFRESH_SHADER)
-	{
 		refreshShaderTimer += dt;
-	}
 	else
 	{
 		refreshShaderTimer = 0.0f;
@@ -378,7 +390,6 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (diff)
 		diff->Bind();
 
-
 	shader->Bind();
 
 	// Could not do view and proj each frame.
@@ -412,6 +423,11 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 			shader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
 	}
 
+	ShaderSetUniforms();
+}
+
+void MaterialComponent::ShaderSetUniforms()
+{
 	shader->SetUniformVec3f("material.ambient", ambientColor);
 	shader->SetUniformVec3f("material.diffuse", diffuseColor);
 	shader->SetUniformVec3f("material.specular", specularColor);
@@ -424,6 +440,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		shader->SetUniformVec3f("dirLight.ambient", app->renderer3D->dirLight->ambient);
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
+		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
 	}
 	else
 	{
@@ -435,6 +452,10 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	std::vector<PointLight*>& pls = app->renderer3D->GetPointLights();
 	for (int i = 0; i < pls.size(); ++i)
 	{
+		//float intensity = 0;
+		//if (pls[i])
+		//	intensity = pls[i]->intensity;
+
 		std::string name = "pointLights[" + std::to_string(i) + "]";
 		shader->SetUniformVec3f(name + ".position", pls[i]->position);
 
@@ -449,6 +470,13 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		shader->SetUniformVec3f(name + ".ambient", pls[i]->ambient);
 		shader->SetUniformVec3f(name + ".diffuse", pls[i]->diffuse);
 		shader->SetUniformVec3f(name + ".specular", pls[i]->specular);
+
+		if (pls[i]->toDelete)
+		{
+			delete pls[i];
+			pls[i] = nullptr;
+			pls.erase(pls.begin() + i);
+		}
 	}
 
 	std::vector<SpotLight*> sls = app->renderer3D->GetSpotLights();
@@ -466,8 +494,6 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		shader->SetUniformVec3f(name + ".diffuse", sls[i]->diffuse);
 		shader->SetUniformVec3f(name + ".specular", sls[i]->specular);
 	}
-
-
 }
 
 void MaterialComponent::Unbind()

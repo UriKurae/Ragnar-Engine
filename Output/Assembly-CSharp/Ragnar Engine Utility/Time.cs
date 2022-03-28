@@ -12,5 +12,11 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
+
+        public static extern float timeScale
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
     }
 }

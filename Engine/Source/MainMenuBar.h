@@ -1,23 +1,24 @@
 #pragma once
 #include "Menu.h"
 #include <vector>
-#include <string>
+#include <memory>
 
 class ConsoleMenu;
-class TextEditorMenu;
 class Texture;
+class Scene;
 
 enum class Menus
 {
-	CONSOLE = 0,
-	CONFIGURATION = 1,
-	ABOUT = 2,
-	INSPECTOR = 3,
-	HIERARCHY = 4,
-	CONTENT_BROWSER = 5,
-	FOGWAR = 6,
-	INPUT_ACTION = 7,
-	TEXT_EDITOR = 8,
+	CONSOLE,
+	CONFIGURATION,
+	ABOUT,
+	HIERARCHY,
+	CONTENT_BROWSER,
+	TEXT_EDITOR,
+	FOGWAR,
+	NAVIGATOR,
+	INSPECTOR,
+	INPUT_ACTION
 };
 
 class MainMenuBar : public Menu
@@ -37,33 +38,26 @@ public:
 	int GetStyle() { return style; };
 	void SetStyle(int _style);
 
-	//void StyleTheme();
-	void AlignWithView();
-	void AlignViewWithSelected();
+private:
+
+	//Menus
+	bool FileMenu();
+	void EditMenu();
+	void WindowMenu();
+	void ViewMenu();
+	void GameObjectMenu();
+	void CreateGameObjectMenu();
+	void HelpMenu();
+	void SetStyleMenu();
+
+	void PlayBar();
 
 private:
-	std::string GetNotLightSensibleShaderSource();
-	std::string GetLightSensibleShaderSource();
-
-	void ShowCreateLigthSensibleShaderWindow();
-	void ShowCreateNotLigthSensibleShaderWindow();
-
-private:
-	bool showMenu;
-	Texture* buttonPlay;
-	Texture* buttonStop;
-	Texture* buttonNextFrame;
-	Texture* buttonPause;
-	Texture* buttonPauseBlue;
-
-	bool saveWindow;
 	std::vector<Menu*> menus;
-
-
-	bool showCreateLightSensibleShaderWindow = false;
-	bool showCreateNotLightSensibleShaderWindow = false;
-
 	std::vector<std::string> stylesList;
+	std::vector<std::string> iconList;
+
+	bool showMenu = false;
 	int style = 5;
 	float alphaStyle = 0.1f;
 };

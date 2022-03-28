@@ -1,9 +1,8 @@
 #pragma once
-#include <map>
-
 #include "Component.h"
 #include "Geometry/AABB.h"
 #include "Bone.h"
+#include <map>
 
 class TransformComponent;
 class MaterialComponent;
@@ -21,13 +20,14 @@ public:
 	void DrawOutline() override;
 	void OnEditor() override;
 
+	void MenuChangeMesh();
+
 	bool OnLoad(JsonParsing& node) override;
-	void CalculateCM();
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 	void SetMesh(std::shared_ptr<Resource> m);
-	void DebugColliders(float3* points, float3 color = float3::one);
 
+	void CalculateCM();
 	bool HasMaterial();
 
 	inline void SetTransform(TransformComponent* trans) { transform = trans; }
@@ -48,11 +48,8 @@ private:
 	bool verticesNormals;
 
 	std::shared_ptr<Mesh> mesh;
-	std::vector<GameObject*> boneList;
 
 	AABB localBoundingBox;
 
-	bool showMeshMenu;
-	bool showAABB = false;
-	bool showOBB = false;
+	bool showMeshMenu = false;
 };

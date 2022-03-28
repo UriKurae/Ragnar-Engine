@@ -1,6 +1,7 @@
 #pragma once
-
 #include "VertexBuffer.h"
+
+#define M_PI 3.1416
 
 typedef unsigned char GLubyte;
 

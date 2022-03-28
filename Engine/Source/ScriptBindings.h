@@ -1,15 +1,22 @@
 #pragma once
-
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "ModuleEditor.h"
 
 #include "ResourceManager.h"
+#include "PrefabManager.h"
 
+#include "ButtonComponent.h"
 #include "MaterialComponent.h"
 #include "Texture.h"
+#include "ParticleSystemComponent.h"
 
+#include "Scene.h"
 #include "TransformBindings.h"
+#include "GameView.h"
+
+#include <queue>
 
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
@@ -141,25 +148,11 @@ void SetScale(MonoObject* go, MonoObject* scale)
 // Transform ========
 
 
-MonoObject* GetTexturePath(MonoObject* go)
+MonoString* GetTexturePath(MonoObject* go)
 {
 	MaterialComponent* matComp = GetComponentMono<MaterialComponent*>(go);
 	std::string p = matComp->GetTexture()->GetAssetsPath();
-	
-	//MonoClass* strignClass = mono_class_from_name(app->moduleMono->image, "System", "string");
-	//MonoObject* stringObj = mono_object_new(app->moduleMono->domain, strignClass);
-	//
-	//MonoMethodDesc* constDesc = mono_method_desc_new("System.string(char[])", true);
-	//MonoMethod* method = mono_method_desc_search_in_class(constDesc, strignClass);
-	//
-	//void* args[1];
-	//args[0] = (void*)p.c_str();
-	//
-	//mono_runtime_invoke(method, stringObj, args, NULL);
-	//
-	//mono_method_desc_free(constDesc);
-
-	return (MonoObject*)p.c_str();
+	return mono_string_new(app->moduleMono->domain, p.c_str());
 }
 
 void SetTexturePath(MonoObject* go, MonoObject* texturePath)
@@ -176,7 +169,7 @@ void SetTexturePath(MonoObject* go, MonoObject* texturePath)
 // GameObject =======================
 MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
-	GameObject* go = app->scene->CreateGameObject(nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -193,7 +186,7 @@ MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoOb
 void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* position, MonoObject* rotation)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -209,7 +202,7 @@ void Instantiate3DObject(MonoObject* name, int primitiveType, MonoObject* positi
 MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObject* position)
 {
 	Object3D t = static_cast<Object3D>(primitiveType);
-	GameObject* go = app->scene->Create3DObject(t, nullptr);
+	GameObject* go = app->sceneManager->GetCurrentScene()->Create3DObject(t, nullptr);
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 	go->SetName(goName);
 	mono_free(goName);
@@ -220,6 +213,19 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	tr->UpdateTransform();
 
 	return app->moduleMono->GoToCSGO(go);
+}
+void InstancePrefab(MonoObject* path)
+{
+	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
+	PrefabManager::GetInstance()->LoadPrefab(goPath);
+}
+
+MonoObject* Destroy(MonoObject* go)
+{
+	GameObject* toDelete = app->moduleMono->GameObjectFromCSGO(go);
+	toDelete->GetParent()->GetChilds().erase(toDelete->GetParent()->FindChildren(toDelete));
+	RELEASE(toDelete);
+	return 0;
 }
 
 MonoObject* AddComponentMono(MonoObject* go, int componentType)
@@ -232,10 +238,187 @@ MonoObject* AddComponentMono(MonoObject* go, int componentType)
 	return app->moduleMono->ComponentToCS(comp);
 }
 
+MonoObject* FindGameObjectWithName(MonoObject* name)
+{
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+
+	std::queue<GameObject*> q;
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
+		q.push(go);
+
+	while (!q.empty())
+	{
+		GameObject* curr = q.front();
+		q.pop();
+
+		if (curr->GetName() == std::string(goName))
+		{
+			mono_free(goName);
+			return app->moduleMono->GoToCSGO(curr);
+		}
+
+		for (auto& child : curr->GetChilds())
+			q.push(child);
+	}
+
+	mono_free(goName);
+	return nullptr;
+}
+
+MonoArray* FindGameObjectsWithTag(MonoObject* tag)
+{
+	char* tagName = mono_string_to_utf8(mono_object_to_string(tag, 0));
+	
+	std::vector<MonoObject*> objects;
+	for (auto& go : app->sceneManager->GetCurrentScene()->GetGameObjectsList())
+	{
+		if (go->tag == tagName)
+			objects.push_back(app->moduleMono->GoToCSGO(go));
+	}
+	
+	MonoClass* goClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "GameObject");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, goClass, objects.size());
+	
+	for (int i = 0; i < objects.size(); ++i)
+		mono_array_set(ret, MonoObject*, i, objects[i]);
+
+	mono_free(tagName);
+	return ret;
+}
+
+MonoArray* GetGameObjectChilds(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+
+	std::vector<MonoObject*> objects;
+	for (auto& child : gameObject->GetChilds())
+		objects.push_back(app->moduleMono->GoToCSGO(child));
+
+	MonoClass* goClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "GameObject");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, goClass, objects.size());
+
+	for (int i = 0; i < objects.size(); ++i)
+		mono_array_set(ret, MonoObject*, i, objects[i]);
+
+	return ret;
+}
+
+MonoString* GetGameObjectTagMono(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return mono_string_new(app->moduleMono->domain, gameObject->tag.c_str());
+}
+
+void SetGameObjectTagMono(MonoObject* go, MonoString* newTag)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	char* tagName = mono_string_to_utf8(newTag);
+	gameObject->tag = tagName;
+}
+
+MonoString* GetGameObjectName(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return mono_string_new(app->moduleMono->domain, gameObject->name.c_str());
+}
+
+void SetGameObjectName(MonoObject* go, MonoString* newName)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	char* name = mono_string_to_utf8(newName);
+	gameObject->name = name;
+}
+
+MonoBoolean GetGameObjectIsActive(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->active;
+}
+
+void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->active = value;
+}
 // GameObject =======================
 
+// UI ===============================
+MonoString* GetButtonText(MonoObject* go)
+{
+	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
+	return mono_string_new(app->moduleMono->domain, button->GetText());
+}
+
+void SetButtonText(MonoObject* go, MonoString* text)
+{
+	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
+	//button->SetText(mono_string_to_utf8(text));
+}
+// UI ===============================
+
+
+// Particle System ==================
+MonoArray* GetEmitters(MonoObject* go)
+{
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	if (!particleSystem)
+		return nullptr;
+
+	MonoClass* emitterClass = mono_class_from_name(app->moduleMono->image, SCRIPTS_NAMESPACE, "Emitter");
+	MonoArray* ret = mono_array_new(app->moduleMono->domain, emitterClass, particleSystem->GetEmitters().size());
+
+	for (int i = 0; i < particleSystem->GetEmitters().size(); ++i)
+	{
+		MonoObject* emitterObject = ParticleEmitterToCS(particleSystem->GetEmitters()[i]);
+		mono_array_set(ret, MonoObject*, i, emitterObject);
+	}
+
+	return ret;
+}
+
+void PlayEmitter(MonoObject* emitter)
+{
+	ParticleEmitter* e = GetEmitterFromCS(emitter);
+	e->isActive = true;
+}
+
+void PauseEmitter(MonoObject* emitter)
+{
+	ParticleEmitter* e = GetEmitterFromCS(emitter);
+	e->isActive = false;
+}
+// Particle System ==================
 
 float GetGameTimeStep()
 {
-	return app->scene->GetGameDeltaTime();
+	return app->sceneManager->GetGameDeltaTime();
+}
+
+void SetTimeScale(float scale)
+{
+	app->sceneManager->GetTimer().SetTimeScale(scale);
+}
+
+// Scene Manager
+void NextScene()
+{
+	app->sceneManager->NextScene();
+}
+
+void LoadScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->NextScene(name);
+}
+
+void Exit()
+{
+	app->sceneManager->Exit();
+}
+
+MonoObject* GetRegionGame()
+{
+	float4 vec4(app->editor->GetGameView()->GetBounds());
+	float3 vec3 = { vec4.z / 1.6f, vec4.w / 1.7f, 0 };
+	return app->moduleMono->Float3ToCS(vec3);
 }

@@ -1,18 +1,18 @@
 #pragma once
 #include "Component.h"
-#include<vector>
-#include<string>
-
-#include "MonoManager.h"
-#include <mono/metadata/object-forward.h>
+#include <vector>
+#include <string>
 
 class GameObject;
+class RigidBodyComponent;
+
 typedef struct _MonoClassField MonoClassField;
+typedef struct _MonoMethod MonoMethod;
+struct SerializedField;
 
 class ScriptComponent : public Component
 {
 public:
-
 	ScriptComponent(GameObject* owner, const char* scriptName);
 	virtual ~ScriptComponent();
 
@@ -26,6 +26,13 @@ public:
 
 	void LoadScriptData(const char*);
 
+	void CallOnTriggerEnter(RigidBodyComponent* other);
+	void CallOnTrigger(RigidBodyComponent* other);
+
+	void CallOnCollisionEnter(RigidBodyComponent* other);
+	void CallOnCollision(RigidBodyComponent* other);
+
+
 private:
 //#ifndef STANDALONE
 	void OnEditor() override;
@@ -37,10 +44,20 @@ public:
 	std::vector<std::string> methods;
 	std::vector<SerializedField> fields;
 
-	MonoMethod* updateMethod;
 	MonoMethod* startMethod;
+	MonoMethod* updateMethod;
+	MonoMethod* onTriggerEnterMethod;
+	MonoMethod* onTriggerMethod;
+	MonoMethod* onCollisionEnterMethod;
+	MonoMethod* onCollisionMethod;
+
 	uint32_t noGCobject;
 	std::string name = "";
 
+	bool firstUpdate;
+
 	static ScriptComponent* runningScript;
+
+private:
+	bool callStart;
 };

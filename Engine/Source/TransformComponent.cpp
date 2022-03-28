@@ -2,18 +2,19 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleScene.h"
+#include "ModuleCamera3D.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "C_RigidBody.h"
 #include "MeshComponent.h"
 #include "ListenerComponent.h"
 #include "AudioSourceComponent.h"
 #include "AudioReverbZoneComponent.h"
+#include "ParticleSystemComponent.h"
 
 #include "CommandsDispatcher.h"
 #include "GameObjectCommands.h"
-
-#include "Math/float3x3.h"
 
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
@@ -22,10 +23,6 @@ TransformComponent::TransformComponent(GameObject* own)
 {
 	type = ComponentType::TRANSFORM;
 	owner = own;
-
-	position = { 0.0f, 0.0f, 0.0f }; 
-	rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
-	scale = { 1.0f, 1.0f, 1.0f };
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
 
 	if (owner->GetParent() != nullptr)
@@ -35,14 +32,8 @@ TransformComponent::TransformComponent(GameObject* own)
 			globalMatrix = localMatrix * tr->GetGlobalTransform();
 	}
 	else
-	{
 		globalMatrix = localMatrix;
-	}
 
-	for (int i = 0; i < 3; ++i)
-		rotationEditor[i] = 0;
-
-	collapsed = false;
 	active = true;
 }
 
@@ -189,15 +180,14 @@ void TransformComponent::UpdateTransform()
 {
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
 
-	if (owner->GetParent() && owner->GetParent() != app->scene->GetRoot())
+	if (owner->GetParent() && owner->GetParent() != app->sceneManager->GetCurrentScene()->GetRoot())
 	{
 		TransformComponent* parentTr = owner->GetParent()->GetComponent<TransformComponent>();
 		if (parentTr) globalMatrix = parentTr->globalMatrix * localMatrix;
 	}
 	else
-	{
 		globalMatrix = localMatrix;
-	}
+
 	UpdateBoundingBox();
 }
 
@@ -206,15 +196,14 @@ void TransformComponent::UpdateChildTransform(GameObject* go)
 	TransformComponent* transform = go->GetComponent<TransformComponent>();
 	GameObject* parent = go->GetParent();
 	TransformComponent* parentTrans = parent->GetComponent<TransformComponent>();
+
 	if (transform)
-	{
 		transform->globalMatrix = parentTrans->GetGlobalTransform() * transform->localMatrix;
-	}
 }
 
 void TransformComponent::NewAttachment()
 {
-	if (owner->GetParent() != app->scene->GetRoot())
+	if (owner->GetParent() != app->sceneManager->GetCurrentScene()->GetRoot())
 		localMatrix = owner->GetParent()->GetComponent<TransformComponent>()->GetGlobalTransform().Inverted().Mul(globalMatrix);
 	
 	localMatrix.Decompose(position, rotation, scale);
@@ -230,12 +219,12 @@ void TransformComponent::SetAABB()
 	for (int i = 0; i < goList.size(); ++i)
 	{
 		TransformComponent* tr = goList[i]->GetComponent<TransformComponent>();
-		tr->SetAABB();
+		if(tr) tr->SetAABB();
 	}
 
 	UpdateBoundingBox();
 
-	app->scene->ResetQuadtree();
+	app->sceneManager->GetCurrentScene()->ResetQuadtree();
 }
 
 void TransformComponent::UpdateBoundingBox()
@@ -245,8 +234,12 @@ void TransformComponent::UpdateBoundingBox()
 		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
-		owner->GetComponent<MeshComponent>()->CalculateCM();
+		//owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
+
+	ParticleSystemComponent* partComp = owner->GetComponent<ParticleSystemComponent>();
+	if (partComp)
+		partComp->UpdateAABB();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)
@@ -306,7 +299,8 @@ bool TransformComponent::DrawVec3(std::string& name, float3& vec)
 
 	ImGui::PopID();
 
-	if (lastVec.x != vec.x || lastVec.y != vec.y || lastVec.z != vec.z) return true;
+	if (lastVec.x != vec.x || lastVec.y != vec.y || lastVec.z != vec.z) 
+		return true;
 	else return false;
 }
 
@@ -340,40 +334,36 @@ void TransformComponent::ResetTransform()
 	UpdateTransform();
 }
 
-float3 TransformComponent::GetForward()
+Mat4x4 TransformComponent::float4x4ToMat4x4()
 {
-	return globalMatrix.RotatePart().Col(2).Normalized();
+	Mat4x4 newTransform;
+	int k = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			newTransform[k] = globalMatrix[j][i];
+			k++;
+		}
+	}
+
+	return newTransform;
 }
 
-float3 TransformComponent::GetRight()
+// Object align with camera
+void TransformComponent::AlignWithView()
 {
-	return globalMatrix.RotatePart().Col(0).Normalized();
+	Frustum frus = app->camera->cameraFrustum;
+	globalMatrix.SetTranslatePart(frus.Pos());
+	float3x3 rot{ frus.WorldRight(), frus.Up(), frus.Front() };
+	globalMatrix.SetRotatePart(rot.ToQuat());
+	SetTransform(globalMatrix);
 }
 
-float3 TransformComponent::GetUp()
+// Camera align with object
+void TransformComponent::AlignViewWithSelected()
 {
-	return globalMatrix.RotatePart().Col(1).Normalized();
+	float3x3 rot = globalMatrix.RotatePart();
+	app->camera->cameraFrustum.SetFrame(position, rot.Col3(2), rot.Col3(1));
+	app->camera->CalculateViewMatrix();
 }
-
-void TransformComponent::UpdateEditorRotation()
-{
-	rotationEditor = rotation.ToEulerXYZ();
-}
-
-//float3 TransformComponent::GetRight()
-//{
-//	return GetNormalizeAxis(0);
-//}
-//float3 TransformComponent::GetUp()
-//{
-//	return GetNormalizeAxis(1);
-//}
-//float3 TransformComponent::GetForward()
-//{
-//	return GetNormalizeAxis(2);
-//}
-//
-//float3 TransformComponent::GetNormalizeAxis(int i)
-//{
-//	return globalMatrix.RotatePart().Col(i).Normalized();
-//}

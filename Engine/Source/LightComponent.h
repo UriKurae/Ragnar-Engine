@@ -10,13 +10,12 @@ public:
 	virtual ~ComponentLight();
 
 	bool Update(float dt) override;
-
 	void OnEditor() override;
 
 	void SetLight(Light* light);
+	void SetAsPointLight();
+	void SetAsSpotLight();
 
-	//JSON_Value* OnSave() override;
-	//void OnLoad(JSON_Object* obj, GameObject* parent = nullptr) override;
 	virtual bool OnLoad(JsonParsing& node) override;
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) override;
 

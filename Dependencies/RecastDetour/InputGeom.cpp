@@ -137,53 +137,6 @@ InputGeom::~InputGeom()
 	}
 }
 
-
-bool InputGeom::loadMesh(Mesh* mesh)
-{
-	if (m_mesh)
-	{
-		delete m_chunkyMesh;
-		m_chunkyMesh = nullptr;
-
-		m_mesh->vertices.clear();
-		m_mesh->indices.clear();
-		delete m_mesh;
-		m_mesh = nullptr;
-	}
-	m_offMeshConCount = 0;
-	m_volumeCount = 0;
-
-	float* vertices = new float[mesh->GetVerticesSize() * 3];
-	const std::vector<Vertex>& meshVertices = mesh->GetVerticesVector();
-	for (int i = 0; i < mesh->GetVerticesSize(); i++)
-	{
-		vertices[i * 3]		= meshVertices[i].position.x;
-		vertices[i * 3 + 1] = meshVertices[i].position.y;
-		vertices[i * 3 + 2] = meshVertices[i].position.z;
-
-		m_mesh->vertices[i] = mesh->GetVerticesVector()[i].position;
-	}
-
-	rcCalcBounds(vertices, mesh->GetVerticesSize(), m_meshBMin, m_meshBMax);
-
-	m_chunkyMesh = new rcChunkyTriMesh();
-	if (!m_chunkyMesh)
-	{
-		LOG(LogType::L_ERROR, "buildTiledNavigation: Out of memory 'm_chunkyMesh'.");
-		return false;
-	}
-
-	if (!rcCreateChunkyTriMesh(vertices, (int*)&mesh->GetIndicesVector()[0], m_mesh->indices.size() / 3, 256, m_chunkyMesh))
-	{
-		LOG(LogType::L_ERROR, "buildTiledNavigation: Failed to build chunky mesh.");
-		RELEASE_ARRAY(vertices);
-		return false;
-	}		
-	
-	RELEASE_ARRAY(vertices);
-	return true;
-}
-
 bool InputGeom::SetChunkyMesh()
 {
 	if (m_chunkyMesh)
@@ -192,16 +145,7 @@ bool InputGeom::SetChunkyMesh()
 		m_chunkyMesh = nullptr;
 	}
 
-	float* vertices = new float[m_mesh->vertices.size() * 3];
-	const std::vector<float3>& meshVertices = m_mesh->vertices;
-	for (int i = 0; i < m_mesh->vertices.size(); i++)
-	{
-		vertices[i * 3] = meshVertices[i].x;
-		vertices[i * 3 + 1] = meshVertices[i].y;
-		vertices[i * 3 + 2] = meshVertices[i].z;
-	}
-
-	rcCalcBounds(vertices, m_mesh->vertices.size(), m_meshBMin, m_meshBMax);
+	rcCalcBounds((float*)&m_mesh->vertices[0], m_mesh->vertices.size(), m_meshBMin, m_meshBMax);
 
 	m_chunkyMesh = new rcChunkyTriMesh();
 	if (!m_chunkyMesh)
@@ -209,14 +153,12 @@ bool InputGeom::SetChunkyMesh()
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Out of memory 'm_chunkyMesh'.");
 		return false;
 	}
-	if (!rcCreateChunkyTriMesh(vertices, (int*)&m_mesh->indices[0], m_mesh->indices.size() / 3, 256, m_chunkyMesh))
+	if (!rcCreateChunkyTriMesh((float*)&m_mesh->vertices[0], (int*)&m_mesh->indices[0], m_mesh->indices.size() / 3, 256, m_chunkyMesh))
 	{
 		LOG(LogType::L_ERROR, "buildTiledNavigation: Failed to build chunky mesh.");
 		//RELEASE_ARRAY(vertices);
 		return false;
 	}
-
-	RELEASE_ARRAY(vertices);
 
 	return true;
 }
@@ -364,7 +306,7 @@ bool InputGeom::raycastMesh(float* src, float* dst, float& tmin)
 		const int* tris = &m_chunkyMesh->tris[node.i*3];
 		const int ntris = node.n;
 
-		for (int j = 0; j < ntris*3; j += 3)
+		for (int j = 0; j < ntris * 3; j += 3)
 		{
 			float t = 1;
 			if (intersectSegmentTriangle(src, dst,
@@ -378,8 +320,8 @@ bool InputGeom::raycastMesh(float* src, float* dst, float& tmin)
 			}
 		}
 	}
-	
-	verts = nullptr;
+
+	RELEASE_ARRAY(verts);
 
 	return hit;
 }

@@ -5,13 +5,29 @@
 #include"ModuleUI.h"
 #include"ModuleInput.h"
 
+#include "GameObject.h"
 #include"MaterialComponent.h"
+#include "Transform2DComponent.h"
+
+#include "GL/glew.h"
 
 CheckboxComponent::CheckboxComponent(GameObject* own)
 {
 	type = ComponentType::UI_CHECKBOX;
+	own->isUI = true;
 	checkboxText.setText("check", 5, 5, 0.5, { 255,255,255 });	
-	own->name = "CheckBox";
+
+	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
+	{
+		own->CreateComponent(ComponentType::TRANFORM2D);
+		selectedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+		noSelectedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+		actual = noSelectedMaterial;
+	}
+
+	app->userInterface->UIGameObjects.push_back(own);
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
 }
 
 CheckboxComponent::~CheckboxComponent()
@@ -35,21 +51,24 @@ bool CheckboxComponent::Update(float dt)
 			state = State::FOCUSED;
 
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
-			{
 				state = State::PRESSED;
-			}
 
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
 				if (actual == noSelectedMaterial)
 					actual = selectedMaterial;
-				else 
-					actual = noSelectedMaterial;
+				checked = true;
+			}
+			else
+			{
+				checked = false;
+				actual = noSelectedMaterial;
 			}
 		}
-		else state = State::NORMAL;
 	}
+	else state = State::NORMAL;
+	
 	return true;
 }
 
@@ -71,7 +90,6 @@ void CheckboxComponent::Draw(CameraComponent* gameCam)
 	case State::FOCUSED:
 		glColor4f(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a);
 		actualColor = focusedColor;
-
 		break;
 	case State::PRESSED:
 		glColor4f(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a);
@@ -159,19 +177,48 @@ float2 CheckboxComponent::GetParentPosition()
 	ComponentTransform2D* transform = owner->GetComponent<ComponentTransform2D>();
 	return { transform->GetPosition().x - (strlen(text) * 12 * checkboxText.Scale) - (transform->GetScale().x / 4), transform->GetPosition().y - 5 };
 }
+
 bool CheckboxComponent::OnLoad(JsonParsing& node)
 {
-	checked = node.GetJsonBool("checked");
+	std::string selected;
+	selected = node.GetJsonString("selected");
+	noSelectedMaterial = nullptr;
+	selectedMaterial= nullptr;
+	for (int a = 0; a < owner->components.size(); a++) {
+		if (owner->components[a]->type == ComponentType::MATERIAL) 
+		{
+			if (selectedMaterial == nullptr) {
+				selectedMaterial = (MaterialComponent*)owner->components[a];
+			}
+			else 
+			{
+				noSelectedMaterial = (MaterialComponent*)owner->components[a];
+				break;
+			}
+		}
+	}
+	
+	const char* sel = new char[selected.size()];
+	sel = selected.c_str();
+	if (sel[0] == 'n')
+		actual = noSelectedMaterial;			
+	else 
+		actual = selectedMaterial;	
+	
 	return true;
 }
+
 
 bool CheckboxComponent::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	if (actual == noSelectedMaterial) 
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "noSelected");	
+	else 
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "Selected");
 
-	/*file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "checked", checked);*/
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;

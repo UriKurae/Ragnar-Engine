@@ -3,7 +3,8 @@
 #include "Globals.h"
 
 #include "Physics3D.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -108,7 +109,7 @@ void RigidBodyComponent::SetBoundingBox()
 //When the engine state is "playing" the GameObject follows the RigidBody
 bool RigidBodyComponent::Update(float dt)
 {
-	if (app->scene->GetGameState() == GameState::PLAYING)
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		TransformComponent* trans = owner->GetComponent<TransformComponent>();
 		if (trigger)
@@ -120,7 +121,7 @@ bool RigidBodyComponent::Update(float dt)
 
 			body->setWorldTransform(t);
 		}
-		else if (body->getActivationState() == 1 || body->getActivationState() == 3)
+		else if (collisionType != CollisionType::MESH && (body->getActivationState() == 1 || body->getActivationState() == 3))
 		{
 			float4x4 CM2 = float4x4::FromTRS(body->getCenterOfMassPosition() - owner->GetOffsetCM(), body->getWorldTransform().getRotation(), trans->GetScale());
 			trans->SetTransform(CM2);
@@ -133,11 +134,13 @@ bool RigidBodyComponent::Update(float dt)
 //Function to update the position of the collider in the center of the GameObject
 void RigidBodyComponent::UpdateCollision()
 {
-	if (app->scene->GetGameState() != GameState::PLAYING)
+	if (app->sceneManager->GetGameState() != GameState::PLAYING)
 	{
 		btTransform t;
 		t.setBasis(float3x3::FromQuat(owner->GetComponent<TransformComponent>()->GetRotation()));
-		t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
+		if (collisionType == CollisionType::MESH)
+			t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3));
+		else t.setOrigin(owner->GetComponent<TransformComponent>()->GetGlobalTransform().Col3(3) + owner->GetOffsetCM());
 		
 		body->setWorldTransform(t);
 	}
@@ -156,11 +159,11 @@ void RigidBodyComponent::OnEditor()
 			else app->physics->DesactivateCollision(body);
 		}
 		ImGui::SameLine();
-		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane" };
+		static const char* collisions[] = { "Box", "Sphere", "Capsule", "Cylinder", "Cone", "Plane", "Mesh"};
 
 		ImGui::PushItemWidth(85);
 		int currentCollision = (int)collisionType;
-		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 6))
+		if (ImGui::Combo("Collision Type", &currentCollision, collisions, 7))
 		{
 			collisionType = (CollisionType)currentCollision;
 			SetCollisionType(collisionType);
@@ -175,7 +178,10 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::DragFloat("##Mass", &mass, 0.1f, 0.0f, INFINITE))
 		{
 			if (body->isStaticObject() && mass != 0.0f)
+			{
+				useGravity = true;
 				CreateBody();
+			}
 			if (mass != 0.f)
 			{
 				btVector3 inertia;
@@ -197,11 +203,11 @@ void RigidBodyComponent::OnEditor()
 			body->setRestitution(restitution);
 		ImGui::PopItemWidth();
 
-		if (ImGui::Checkbox("Use Gravity", &useGravity))
+		if (collisionType != CollisionType::MESH && ImGui::Checkbox("Use Gravity", &useGravity))
 		{
 			if (!useGravity && !isKinematic)
 				SetAsStatic();
-			else 
+			else
 			{
 				if (mass == 0) mass = 1.0f;
 				CreateBody();
@@ -212,7 +218,7 @@ void RigidBodyComponent::OnEditor()
 			if (isKinematic)
 			{
 				body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-				if (app->scene->GetGameState() == GameState::PLAYING)
+				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					body->setActivationState(DISABLE_DEACTIVATION);
 			}
 			else CreateBody();
@@ -220,14 +226,9 @@ void RigidBodyComponent::OnEditor()
 		if (ImGui::Checkbox("Is Trigger", &trigger))
 		{
 			if (trigger)
-			{
 				SetAsTrigger();
-			}
 			else
-			{
-				//app->physics->triggers.remove(this);
 				CreateBody();
-			}
 		}
 		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();
@@ -326,12 +327,15 @@ void RigidBodyComponent::AddConstraintP2P(RigidBodyComponent* const& val)
 
 void RigidBodyComponent::SetCollisionType(CollisionType type)
 {
+	if (type == CollisionType::MESH)
+	{
+		useGravity = false;
+		isKinematic = false;
+		mass = 0.0f;
+	}
+		
 	collisionType = type;
-	SetBoundingBox();
-	CreateBody();
-	ResetLocalValues();
-
-	IgnoreCollision();
+	CreateBody();	
 }
 
 void RigidBodyComponent::ResetLocalValues()
@@ -403,6 +407,9 @@ void RigidBodyComponent::EditCollisionMesh()
 		ImGui::Text("Constant: "); ImGui::SameLine();
 		if (ImGui::DragFloat("##Constant", &plane.constant, 0.1f)) editMesh = true;
 		break;
+	case CollisionType::MESH:
+		ImGui::Text("Don't can modified collision mesh");
+		break;
 	default:
 		break;
 	}
@@ -422,7 +429,7 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(box.size);
 		break;
 	case SPHERE_SHAPE_PROXYTYPE:
-		SetSphereRadius(sphere.radius);
+		static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphere.radius);
 		break;
 	case CAPSULE_SHAPE_PROXYTYPE:
 		body->getCollisionShape()->setLocalScaling(btVector3(capsule.radius, capsule.height * 0.5f, capsule.radius));
@@ -439,18 +446,12 @@ void RigidBodyComponent::UpdateCollisionMesh()
 		body->getCollisionShape()->setLocalScaling(btVector3(cone.radius, cone.height * 0.5f, cone.radius));
 		break;
 	case STATIC_PLANE_PROXYTYPE:
-		CreateBody();
+		CreateBody(false);
 		break;
 	default:
 		break;
 	}
 	editMesh = false;
-}
-
-void RigidBodyComponent::SetSphereRadius(float sphereRadius)
-{
-	static_cast<btSphereShape*>(body->getCollisionShape())->setUnscaledRadius(sphereRadius);
-	sphere.radius = sphereRadius;
 }
 
 float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
@@ -469,10 +470,12 @@ float4x4 RigidBodyComponent::btScalarTofloat4x4(btScalar* transform)
 	return newTransform;
 }
 
-void RigidBodyComponent::CreateBody()
+void RigidBodyComponent::CreateBody(bool changeShape)
 {
 	if (body != nullptr)
 		app->physics->DeleteBody(this, owner->name);
+
+	if (changeShape) SetBoundingBox();
 
 	switch (collisionType)
 	{
@@ -494,11 +497,16 @@ void RigidBodyComponent::CreateBody()
 	case CollisionType::STATIC_PLANE:
 		body = app->physics->CollisionShape(plane, this);
 		break;
+	case CollisionType::MESH:
+		body = app->physics->CollisionShape(owner->GetComponent<MeshComponent>()->GetMesh(), this);
+		break;
 	default:
 		break;
 	}
 
 	SetPhysicsProperties();
+	ResetLocalValues();
+	IgnoreCollision();
 }
 
 void RigidBodyComponent::SetPhysicsProperties()
@@ -527,22 +535,38 @@ void RigidBodyComponent::SetAsStatic()
 	useGravity = false;
 	isKinematic = false;
 	mass = 0.0f;
-	SetCollisionType(collisionType);
+	CreateBody();
 }
 
 void RigidBodyComponent::SetAsTrigger()
 {
 	body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-	app->physics->triggers.push_back(this);
+	trigger = true;
 }
 
 bool RigidBodyComponent::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
 
-	//Collision dimensions
+	//Collision Type
 	collisionType = (CollisionType)(int)node.GetJsonNumber("CollisionType");
-	if(collisionType != CollisionType::BOX) SetCollisionType(collisionType);
+	//Physic properties
+	useGravity = node.GetJsonBool("Gravity");
+	isKinematic = node.GetJsonBool("Kinematic");
+	trigger = node.GetJsonBool("Trigger");
+	mass = node.GetJsonNumber("Mass");
+	friction = node.GetJsonNumber("Friction");
+	restitution = node.GetJsonNumber("Restitution");
+
+	//Damping
+	linearDamping = node.GetJsonNumber("LinearDamping");
+	angularDamping = node.GetJsonNumber("AngularDamping");
+
+	//Constrains
+	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
+	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+
+	CreateBody();
 	switch (collisionType)
 	{
 	case CollisionType::BOX:
@@ -574,22 +598,7 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 		break;
 	}
 	UpdateCollisionMesh();
-
-	//Collision physics
-	useGravity = node.GetJsonBool("Gravity");
-	isKinematic = node.GetJsonBool("Kinematic");
-	trigger = node.GetJsonBool("Trigger");
-	mass = node.GetJsonNumber("Mass");
-	friction = node.GetJsonNumber("Friction");
-	restitution = node.GetJsonNumber("Restitution");
-
-	//Damping
-	linearDamping = node.GetJsonNumber("LinearDamping");
-	angularDamping = node.GetJsonNumber("AngularDamping");
-
-	//Constrains
-	movementConstraint = node.GetJson3Number(node, "MovementConstraint");
-	rotationConstraint = node.GetJson3Number(node, "RotationConstraint");
+	SetPhysicsProperties();
 
 	uint size = node.GetJsonNumber("SizeConstraint");
 	if (size > 0)
@@ -601,19 +610,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 			bodiesUIDs.push_back(json_array_get_number(array, i));
 		}
 	}
-	if (!useGravity && !isKinematic)
-		SetAsStatic();
-	else if (isKinematic)
-	{
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-		if (app->scene->GetGameState() == GameState::PLAYING)
-			body->setActivationState(DISABLE_DEACTIVATION);
-	}
-	if(trigger) 
-		body->setCollisionFlags(body->getFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-
-	SetMass(mass);
-	SetPhysicsProperties();
 
 	return true;
 }
@@ -687,4 +683,47 @@ bool RigidBodyComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
+}
+
+// Use specificly in Scripting
+void RigidBodyComponent::SetCollisionSphere(float sphereRadius, float3 pos)
+{
+	collisionType = CollisionType::SPHERE;
+	sphere.radius = sphereRadius;
+	sphere.SetPos(pos);
+	useGravity = false;
+	isKinematic = false;
+	mass = 0.0f;
+	CreateBody(false);
+}
+
+void RigidBodyComponent::SetHeight(float height)
+{
+	if (height != 1) 
+	{
+		float3 offset(0, owner->GetAABB().HalfSize().y * (1-height), 0);
+		PCapsule capAux = capsule;
+		OBB obb = owner->GetOOB();
+		float3 pos = body->getCenterOfMassPosition();
+
+		capsule.SetPos(pos.x, pos.y - offset.y, pos.z);
+		capsule.radius *= obb.r.MaxElementXZ();
+		capsule.height *= obb.Size().y * 0.5 * height;
+
+		CreateBody(false);
+		owner->SetOffsetCM(owner->GetOffsetCM() - offset);
+		capsule = capAux;
+	}
+	else
+	{
+		float radius = capsule.radius;
+		float height = capsule.height;
+
+		CreateBody();
+		body->getCollisionShape()->setLocalScaling(btVector3(radius, height * 0.5f, radius));
+		capsule.radius = radius;
+		capsule.height = height;
+
+		owner->GetComponent<MeshComponent>()->CalculateCM();
+	}
 }

@@ -59,11 +59,9 @@ public:
 
 	void DrawCubeDirectMode();
 
-
 	Material* GetDefaultMaterial();
 	unsigned int GetDefaultShader();
 
-	Shader* AddShader(const std::string& path);
 	void AddMaterial(Material* material);
 	inline const std::vector<Shader*>& GetShaders() { return shaders; }
 
@@ -77,7 +75,6 @@ public:
 	void ClearSpotLights();
 
 	void RemovePointLight(PointLight* light);
-
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);

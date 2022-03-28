@@ -41,7 +41,7 @@ void Quadtree::Insert(GameObject* go)
 void Quadtree::Remove(GameObject* go)
 {
 	std::stack<QuadtreeNode*> nodes;
-	nodes.push(root);
+	if (root) nodes.push(root);
 
 	while (!nodes.empty())
 	{

@@ -1,0 +1,409 @@
+{
+    "Game Objects": [
+        {
+            "UUID": 417171234,
+            "Parent UUID": 0,
+            "Name": "LoseScene",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": []
+        },
+        {
+            "UUID": 1340834673,
+            "Parent UUID": 417171234,
+            "Name": "Directional Light",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        50,
+                        50,
+                        50
+                    ],
+                    "Quaternion": [
+                        0.67389911413192749,
+                        -0.59794372320175171,
+                        0.41976538300514221,
+                        -0.11009232699871063
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000151395797729,
+                        1.0000368356704712,
+                        1.0000402927398682
+                    ]
+                },
+                {
+                    "Type": 8,
+                    "Active": true,
+                    "Light Type": 1,
+                    "Direction": [
+                        0.67802053689956665,
+                        -0.60160064697265625,
+                        0.42233258485794067
+                    ],
+                    "Ambient": [
+                        0.25,
+                        0.25,
+                        0.25
+                    ],
+                    "Diffuse": [
+                        0.75,
+                        0.75,
+                        0.75
+                    ],
+                    "Specular": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 2128337088,
+            "Parent UUID": 417171234,
+            "Name": "cameraController",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -2.239762544631958,
+                        11.183857917785645,
+                        14.100016593933105
+                    ],
+                    "Quaternion": [
+                        -0.30002456903457642,
+                        0.65696793794631958,
+                        -0.28076925873756409,
+                        0.63209736347198486
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.4142135381698608,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 1.08711838722229,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        -2.239762544631958,
+                        11.183857917785645,
+                        14.100016593933105
+                    ],
+                    "Type": 3,
+                    "Zoom": 70,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -4.9477472305297852,
+                        0,
+                        -2.2581052780151367
+                    ],
+                    "Movement Speed": 0.5,
+                    "Vertical Angle": -56,
+                    "Lock Vertical Angle": false,
+                    "Rotation Speed": 0.5,
+                    "Radius": 20,
+                    "Horizontal Angle": 189.39971923828125,
+                    "Arrow Rotation": false,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0
+                }
+            ]
+        },
+        {
+            "UUID": 792537890,
+            "Parent UUID": 417171234,
+            "Name": "Background",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        84.5
+                    ],
+                    "Scale": [
+                        20.571428298950195,
+                        10.271738052368164,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 930,
+                    "buttonHeight": 417.5
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "loseScreen",
+                    "pointer": 274939128,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 407713614,
+            "Parent UUID": 417171234,
+            "Name": "ButtonMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        50,
+                        -103.5,
+                        87.5
+                    ],
+                    "Scale": [
+                        1.529999852180481,
+                        0.55900615453720093,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 189.5,
+                    "buttonHeight": 70
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Menu",
+                    "fontScale": 1,
+                    "textColor.r": 0.81746029853820801,
+                    "textColor.g": 0.81746029853820801,
+                    "textColor.b": 0.81746029853820801
+                }
+            ]
+        },
+        {
+            "UUID": 2128208653,
+            "Parent UUID": 417171234,
+            "Name": "Image",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        62.5,
+                        89.5
+                    ],
+                    "Scale": [
+                        10.50428581237793,
+                        1.8027949333190918,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 538.5,
+                    "buttonHeight": 114.5
+                },
+                {
+                    "Type": 13
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/defeat_logo.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 341861695,
+            "Parent UUID": 417171234,
+            "Name": "ButtonRetry",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -50,
+                        -103.5,
+                        85
+                    ],
+                    "Scale": [
+                        1.9799998998641968,
+                        0.55900615453720093,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 207,
+                    "buttonHeight": 70
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Retry",
+                    "fontScale": 1,
+                    "textColor.r": 0.81568628549575806,
+                    "textColor.g": 0.81568628549575806,
+                    "textColor.b": 0.81568628549575806
+                }
+            ]
+        }
+    ]
+}

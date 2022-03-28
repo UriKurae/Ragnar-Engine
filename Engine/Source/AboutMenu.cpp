@@ -7,7 +7,7 @@
 
 #include "Profiling.h"
 
-AboutMenu::AboutMenu() : Menu(false)
+AboutMenu::AboutMenu() : Menu(false, "About")
 {
 }
 

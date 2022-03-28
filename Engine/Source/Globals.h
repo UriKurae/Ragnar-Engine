@@ -10,6 +10,7 @@ void Log(const char file[], int line, const char* format, ...);
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
 #define HAVE_M_PI
+#define M_PI 3.1416
 
 // Deletes a buffer
 #define RELEASE( x )\
@@ -37,6 +38,7 @@ void Log(const char file[], int line, const char* format, ...);
 #define BONES_FOLDER "Library/Bones/"
 #define SCENES_FOLDER "Assets/Scenes/"
 #define PREFABS_FOLDER "Assets/Prefabs/"
+#define PARTICLES_FOLDER "Assets/ParticlesTemplates/"
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\
@@ -83,4 +85,4 @@ static void CMDCompileCS()
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "Ragnar Engine"
+#define TITLE "Dune Commandos"

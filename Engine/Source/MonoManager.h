@@ -2,11 +2,7 @@
 #include "Application.h"
 #include "Module.h"
 
-#include <mono/utils/mono-publib.h>
 #include "Math/float3.h"
-
-#include<mono/metadata/object-forward.h>
-#include <mono/metadata/blob.h>
 #include<mono/metadata/threads.h>
 
 typedef struct _MonoDomain MonoDomain;
@@ -53,6 +49,7 @@ public:
 
 	static Quat UnboxQuat(MonoObject* _obj);
 	static float3 UnboxVector(MonoObject* _obj);
+	static float2 UnboxVector2D(MonoObject* _obj);
 
 	static void LoadFieldData(SerializedField& _field, MonoObject* _object);
 	static void DebugAllMethods(const char* nsName, const char* className, std::vector<std::string>& _data);
@@ -84,5 +81,4 @@ public:
 
 private:
 	void InitMono();
-
 };

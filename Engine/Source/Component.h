@@ -1,41 +1,37 @@
 #pragma once
-
 #include "Imgui/imgui.h"
 #include "JsonParsing.h"
 #include "IconsFontAwesome5.h"
 
 class GameObject;
 class CameraComponent;
-class ButtonComponent;
-class ComponentTransform2D;
-class SliderComponent;
-class ImageComponent;
-class CheckboxComponent;
 
 enum class ComponentType
 {
-	NONE = -1,
-	TRANSFORM,
-	MESH_RENDERER,
-	MATERIAL,
-	CAMERA,
-	SCRIPT,
-	AUDIO_SOURCE,
-	AUDIO_LISTENER,
-	AUDIO_REVERB_ZONE,
-	LIGHT,
-	ANIMATION,
-	BONE,
-	RIGID_BODY,
-	UI_BUTTON,
-	UI_IMAGE,
-	UI_CHECKBOX,
-	UI_SLIDER,
-	UI_INPUTBOX,
-	UI_CANVAS,
-	TRANFORM2D,
-	NAVAGENT,
-	INPUT_ACTION
+	NONE =				-1,
+	TRANSFORM =			0,
+	MESH_RENDERER =		1,
+	MATERIAL =			2,
+	CAMERA =			3,
+	SCRIPT =			4,
+	AUDIO_SOURCE =		5,
+	AUDIO_LISTENER =	6,
+	AUDIO_REVERB_ZONE = 7,
+	LIGHT =				8,
+	ANIMATION =			9,
+	BONE =				10,
+	RIGID_BODY =		11,
+	UI_BUTTON =			12,
+	UI_IMAGE =			13,
+	UI_CHECKBOX =		14,
+	UI_SLIDER =			15,
+	UI_INPUTBOX =		16,
+	UI_TEXT =			17,
+	TRANFORM2D =		18,
+	INPUT_ACTION = 19,
+	NAVAGENT =			20,
+	PARTICLE_SYSTEM =	21,
+	BILLBOARD =			22,
 };
 
 enum class State
@@ -66,14 +62,11 @@ public:
 	void Checkbox(Component* component, const char* name, bool& act)
 	{
 		ImGui::PushID((void*)component);
-
 		ImGui::Checkbox(name, &act);
-
 		ImGui::PopID();
 	}
 
 	void ComponentOptions(Component* component);
-	
 
 	inline const ComponentType& GetType() const { return type; }
 	inline const bool& GetActive() const { return active; }
@@ -82,9 +75,9 @@ public:
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array) { return true; }
 
 public:
-	ComponentType type;
-	bool active;
-	GameObject* owner;
 
-	bool collapsed;
+	ComponentType type;
+	GameObject* owner;
+	bool active;
+	bool collapsed = false;
 };
