@@ -37,7 +37,8 @@ void Log(const char file[], int line, const char* format, ...);
 #define ANIMATIONS_FOLDER "Library/Animations/"
 #define BONES_FOLDER "Library/Bones/"
 #define SCENES_FOLDER "Assets/Scenes/"
-#define PREFABS_FOLDER "Assets/Prefabs/"
+#define PREFABS_ASSETS_FOLDER "Assets/Prefabs/"
+#define PREFABS_FOLDER "Library/Prefabs/"
 #define PARTICLES_FOLDER "Assets/ParticlesTemplates/"
 
 // Deletes an array of buffers

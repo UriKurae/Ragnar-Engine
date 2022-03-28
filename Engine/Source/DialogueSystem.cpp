@@ -32,7 +32,7 @@ void DialogueSystem::OnEditor()
 {
 	ImGui::Begin("Create Dialogue", &createDialogue);
 
-	char text[256];
+	/*char text[256];
 
 	int countId = 0;
 	for (std::vector<std::string>::iterator it = dialogueLines.begin(); it != dialogueLines.end(); ++it)
@@ -50,14 +50,13 @@ void DialogueSystem::OnEditor()
 	if (ImGui::Button(ICON_FA_PLUS" Add Line"))
 	{
 		std::string aux = "";
-		dialogueLines.push_back(aux);
+		dialogues.push_back(aux);
 	}
 
 	if (ImGui::Button(ICON_FA_FILE" Create Dialogue Archive"))
 	{
-		Dialogue dia;
-		dia.dialogue = dialogueLines;
-	}
+		
+	}*/
 
 	ImGui::End();
 }
@@ -72,4 +71,10 @@ void DialogueSystem::LoadDialogue(std::vector<std::string>& dialogs, std::string
 
 
 	}
+}
+
+void DialogueSystem::SaveDialogue(Dialogue& dialogue)
+{
+	JsonParsing dialogueFile;
+	JSON_Array* array = dialogueFile.SetNewJsonArray(dialogueFile.GetRootValue(), "Dialogue");
 }

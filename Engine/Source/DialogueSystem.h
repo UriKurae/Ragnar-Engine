@@ -3,11 +3,18 @@
 #include <vector>
 #include <string>
 
+class DialogueLine
+{
+public:
+	std::string author;
+	std::string line;
+};
+
 class Dialogue
 {
 public:
-
-	std::vector<std::string> dialogue;
+	int id;
+	std::vector<DialogueLine> dialogue;
 };
 
 class DialogueSystem
@@ -19,6 +26,7 @@ public:
 
 	void OnEditor();
 	void LoadDialogue(std::vector<std::string>& dialogs, std::string path);
+	void SaveDialogue(Dialogue& dialogue);
 
 	bool createDialogue;
 
@@ -26,7 +34,9 @@ private:
 	DialogueSystem();
 
 	int numOfLines;
-	std::vector<std::string> dialogueLines;
+	std::vector<Dialogue> dialogues;
+
+	Dialogue currDialogue;
 
 	static DialogueSystem* instance;
 };
