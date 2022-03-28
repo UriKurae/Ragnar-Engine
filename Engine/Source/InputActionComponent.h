@@ -4,6 +4,7 @@
 
 class TransformComponent;
 class ActionMaps;
+typedef struct _MonoMethod MonoMethod;
 
 class InputActionComponent : public Component
 {

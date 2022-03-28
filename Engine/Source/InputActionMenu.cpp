@@ -13,7 +13,7 @@
 #include "Imgui/imgui_internal.h"
 #include "Profiling.h"
 
-InputActionMenu::InputActionMenu() : Menu(false)
+InputActionMenu::InputActionMenu() : Menu(false, "Input Action")
 {
 	actionMaps.push_back(std::shared_ptr<ActionMaps>(new ActionMaps()));
 	currentMap = NULL;
