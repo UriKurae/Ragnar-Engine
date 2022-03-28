@@ -14,6 +14,8 @@ public class Player : RagnarComponent
     Material materialComponent;
     NavAgent agent;
 
+    bool controled = false;
+
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -24,10 +26,15 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+        if (controled)
         {
-            agent.CalculatePath(agent.hitPosition);
-            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                agent.CalculatePath(agent.hitPosition);
+                gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            }
+        }else{
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
         }
 
         if (agent.MovePath())
@@ -132,7 +139,13 @@ public class Player : RagnarComponent
             // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER
         }
     }
+
+    public void SetControled(bool var)
+    {
+        controled = var;
+    }
 }
+
 
 
 
