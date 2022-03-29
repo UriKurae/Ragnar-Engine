@@ -8,7 +8,7 @@
 
 #include "IconsFontAwesome5.h"
 #include "Profiling.h"
-#include <ScriptComponent.cpp>
+#include <metadata\debug-helpers.h>
 
 InputActionComponent::InputActionComponent(GameObject* own)
 {
