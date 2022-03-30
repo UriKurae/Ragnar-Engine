@@ -83,6 +83,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if(SDL_GL_SetSwapInterval(vsync) < 0)
 			DEBUG_LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 
+#ifndef DIST
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); 
@@ -95,33 +96,34 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
 		ImGui_ImplOpenGL3_Init();
-
+#endif
+		
 		DEBUG_LOG("Vendor: %s", glGetString(GL_VENDOR));
 		DEBUG_LOG("Renderer: %s", glGetString(GL_RENDERER));
 		DEBUG_LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 		DEBUG_LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 		//Initialize Projection Matrix
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
+		//glMatrixMode(GL_PROJECTION);
+		//glLoadIdentity();
 
 		//Check for error
-		GLenum error = glGetError();
-		if(error != GL_NO_ERROR)
-		{
-			ret = false;
-		}
+		//GLenum error = glGetError();
+		//if(error != GL_NO_ERROR)
+		//{
+		//	ret = false;
+		//}
 
 		//Initialize Modelview Matrix
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+		//glMatrixMode(GL_MODELVIEW);
+		//glLoadIdentity();
 
 		//Check for error
-		error = glGetError();
-		if(error != GL_NO_ERROR)
-		{
-			ret = false;
-		}
+		//error = glGetError();
+		//if(error != GL_NO_ERROR)
+		//{
+		//	ret = false;
+		//}
 		
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glClearDepth(1.0f);
@@ -131,11 +133,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
 		//Check for error
-		error = glGetError();
-		if(error != GL_NO_ERROR)
-		{
-			ret = false;
-		}
+		//error = glGetError();
+		//if(error != GL_NO_ERROR)
+		//{
+		//	ret = false;
+		//}
 		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
@@ -163,7 +165,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	
 	fbo = new Framebuffer(w, h, 1);
 	fbo->Unbind();
-	mainCameraFbo = new Framebuffer(w, h, 0);
+	mainCameraFbo = new Framebuffer(w, h, 0, true);
 	mainCameraFbo->Unbind();	
 
 	grid.SetPos(0, 0, 0);
@@ -184,6 +186,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
+#ifndef DIST
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
 	fbo->Bind();
@@ -191,11 +194,11 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+#endif
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -204,11 +207,18 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
 	std::set<GameObject*> objects;
-	if(drawGrid) grid.Render();
 
 	// TODO: wtf quadtree man.
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
+	
+#ifndef DIST
+	if(drawGrid) grid.Render();
 
 	if (rayCast)
 	{
@@ -261,35 +271,44 @@ bool ModuleRenderer3D::PostUpdate()
 	}
 
 	fbo->Unbind();
-		
+
+#endif
+
 	// Camera Component FBO
-	mainCameraFbo->Bind();
+	//mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	PushCamera(app->sceneManager->GetCurrentScene()->mainCamera->matrixProjectionFrustum, app->sceneManager->GetCurrentScene()->mainCamera->matrixViewFrustum);
+	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+	//mainCameraFbo->ResizeFramebuffer(size.x, size.y);
+	OnResize(size.x, size.y);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
 
-	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-	{
-		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
-	}
+	//PushCamera(app->sceneManager->GetCurrentScene()->mainCamera->matrixProjectionFrustum, app->sceneManager->GetCurrentScene()->mainCamera->matrixViewFrustum);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glPopMatrix();
+	//for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+	//{
+	//	(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+	//}
+
+	app->sceneManager->GetCurrentScene()->Draw();
+
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 
 	glEnable(GL_BLEND);
 
 	// DRAW UI
 	app->userInterface->Draw();
 
-	mainCameraFbo->Unbind();
+	//mainCameraFbo->Unbind();
 
+#ifndef DIST
 	// Draw both buffers
 	app->editor->Draw(fbo, mainCameraFbo);
-
+#endif
 	SDL_GL_SwapWindow(app->window->window);
 
 	glDisable(GL_BLEND);
@@ -321,10 +340,11 @@ bool ModuleRenderer3D::CleanUp()
 	}
 	spotLights.clear();
 
+#ifndef DIST
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-
+#endif
 	SDL_GL_DeleteContext(context);
 
 	return true;

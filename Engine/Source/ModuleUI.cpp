@@ -441,9 +441,15 @@ bool ModuleUI::PreUpdate(float dt)
 	{*/
 		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
-		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
-		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-		
+		float2 mPos = float2::zero;
+
+		// TODO: Dont know if this works. Temporary until gets fixed by UI (maybe u need mPos when using imgui
+		//float2 mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+#ifndef DIST
+		mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+#else
+		mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+#endif
 		float4 viewport = app->editor->GetGameView()->GetBounds();
 		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
 		

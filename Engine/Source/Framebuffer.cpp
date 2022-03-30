@@ -3,10 +3,10 @@
 
 #include "glew/include/GL/glew.h"
 
-Framebuffer::Framebuffer(int w, int h, int channel) : width(w), height(h), channelId(channel)
+Framebuffer::Framebuffer(int w, int h, int channel, bool genNormalTexture) : width(w), height(h), channelId(channel), genNormalTex(genNormalTexture)
 {
 	framebuffer = 0;
-	textureColorbuffer = 0;
+	colorTexture = 0;
 	rboDepthStencil = 0;
 	SetFramebuffer();
 }
@@ -14,7 +14,7 @@ Framebuffer::Framebuffer(int w, int h, int channel) : width(w), height(h), chann
 Framebuffer::~Framebuffer()
 {
 	glDeleteFramebuffers(1, &framebuffer);
-	glDeleteTextures(1, &textureColorbuffer);
+	glDeleteTextures(1, &colorTexture);
 	glDeleteRenderbuffers(1, &rboDepthStencil);
 }
 
@@ -34,23 +34,37 @@ void Framebuffer::SetFramebuffer()
 	if (framebuffer > 0)
 	{
 		glDeleteFramebuffers(1, &framebuffer);
-		glDeleteTextures(1, &textureColorbuffer);
+		glDeleteTextures(1, &colorTexture);
 		glDeleteRenderbuffers(1, &rboDepthStencil);
 	}
 
 	glGenFramebuffers(1, &framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
-	glGenTextures(1, &textureColorbuffer);
-	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+	glGenTextures(1, &colorTexture);
+	glBindTexture(GL_TEXTURE_2D, colorTexture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// attach it to currently bound framebuffer object
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
-
+	// Attach it to currently bound framebuffer object
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0);
+	
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	if (genNormalTex)
+	{
+		glGenTextures(1, &normalTexture);
+		glBindTexture(GL_TEXTURE_2D, normalTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		// Attach it to currently bound framebuffer object
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, normalTexture, 0);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 
 	glGenRenderbuffers(1, &rboDepthStencil);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);

@@ -5,7 +5,7 @@ typedef unsigned int GLuint;
 class Framebuffer
 {
 public:
-	Framebuffer(int w, int h, int channel);
+	Framebuffer(int w, int h, int channel, bool genNormalTexture = false);
 	~Framebuffer();
 
 	void Bind();
@@ -23,5 +23,9 @@ private:
 
 	GLuint framebuffer;
 	GLuint rboDepthStencil;
-	GLuint textureColorbuffer;
+	GLuint colorTexture;
+	GLuint normalTexture;
+
+	// Post-Processing purposes
+	bool genNormalTex;
 };
