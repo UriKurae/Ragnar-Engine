@@ -61,8 +61,8 @@ private:
 
 	float nearPlane;
 	float farPlane;
-	float verticalFov;
-	float horizontalFov;
+	float verticalFov = 45;
+	float horizontalFov = 45;
 
 	float currentScreenWidth;
 	float currentScreenHeight;
@@ -82,6 +82,7 @@ private:
 
 	GameObject* defTarget = nullptr; // FreeMovement Target
 	GameObject* target = nullptr;
+	TransformComponent* controllerTrans = nullptr;
 
 	float movementSpeed = 0.05f;
 	float verticalAngle = -40.0f;

@@ -32,6 +32,9 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	CalculateVerticalFov(horizontalFov, currentScreenWidth, currentScreenHeight);
 	camera.SetPerspective(horizontalFov, verticalFov);
 	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
+	//camera.SetPos(math::vec(0, 0, 0));
+
+	controllerTrans = owner->GetParent()->GetComponent<TransformComponent>();
 
 	srand(time(NULL));
 	CompileBuffers();
@@ -157,6 +160,7 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
+	camera.SetPos(transform->GetGlobalTransform().TranslatePart());
 	if (app->camera->updateGameView)
 	{
 		//TODO: Make the click work properly
@@ -176,9 +180,6 @@ bool CameraComponent::Update(float dt)
 				LineSegment prevLine = picking;
 				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
-
-				DEBUG_LOG("POSITION X %f, POSITION Y %f", mousePos.x, mousePos.y);
-				DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
 			}
 		}
 	}
@@ -190,13 +191,15 @@ bool CameraComponent::Update(float dt)
 		targetUID = 0;
 	}
 
-	float4 viewport = app->editor->GetGameView()->GetBounds();
-	camera.SetOrthographic(viewport.z / zoom, viewport.w / zoom);
+	//float4 viewport = app->editor->GetGameView()->GetBounds();
+	//camera.SetOrthographic(viewport.z / zoom, viewport.w / zoom);
 	zoom = Clamp(zoom + app->input->GetMouseZ(), zoomMin, zoomMax);
 
 	float z = app->input->GetMouseZ();
 
-	camera.SetPos(transform->GetPosition());
+	//camera.SetPos(transform->GetPosition());
+	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
+	matrixViewFrustum = camera.ComputeViewMatrix();
 
 	if (target && app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 	{
@@ -236,10 +239,9 @@ bool CameraComponent::Update(float dt)
 
 	// -------------MOVEMENT---------------
 	UpdateMovement(mouseDragRight, horizontalDrag);
-	CalculateOffsetPos();
+	//CalculateOffsetPos();
 
-	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
-	matrixViewFrustum = camera.ComputeViewMatrix();
+	
 
 	return true;
 }
@@ -257,7 +259,7 @@ void CameraComponent::UpdateMovement(bool mouseDragRight, float horizontalDrag)
 
 	if (freeMovement)
 	{
-		float3 pos = defTarget->GetComponent<TransformComponent>()->GetPosition();
+		float3 pos = controllerTrans->GetPosition();
 		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
 		float verticalDrag = app->input->GetMouseYMotion();
 
@@ -271,7 +273,8 @@ void CameraComponent::UpdateMovement(bool mouseDragRight, float horizontalDrag)
 			pos.x -= movementSpeed * -verticalDrag / zoom * sin(DEGTORAD * horizontalAngle);
 			pos.z -= movementSpeed * -verticalDrag / zoom * cos(DEGTORAD * horizontalAngle);
 		}
-		defTarget->GetComponent<TransformComponent>()->SetPosition(float3(pos.x, 0, pos.z));
+		//controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
+		controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
 	}
 }
 
@@ -290,12 +293,12 @@ void CameraComponent::CalculateOffsetPos()
 	float3 directionFrustum = targetPos - newPos;
 	directionFrustum.Normalize();
 
-	float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
-	camera.SetFront(lookAt.MulDir(camera.Front()).Normalized());
-	camera.SetUp(lookAt.MulDir(camera.Up()).Normalized());
+	//float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
+	//camera.SetFront(lookAt.MulDir(camera.Front()).Normalized());
+	//camera.SetUp(lookAt.MulDir(camera.Up()).Normalized());
 
-	transform->SetRotation(lookAt.ToQuat());
-	transform->SetPosition(newPos);
+	//transform->SetRotation(lookAt.ToQuat());
+	//transform->SetPosition(newPos);
 }
 
 void CameraComponent::Draw(CameraComponent* gameCam)
