@@ -38,13 +38,14 @@ void DialogueSystem::OnEditor()
 	int counterId = 0;
 	for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
 	{
-		//ImGui::InputInt("Id", &(*it).id);
+		ImGui::PushID(counterId);
 
 		ImGui::Text("Dialogue ID: %d", counterId);
 
+		ImGui::Separator();
+
 		(*it).id = counterId;
 
-		char textAuthor[32];
 		char text[256];
 
 		int counter = 0;
@@ -52,30 +53,53 @@ void DialogueSystem::OnEditor()
 		{
 			ImGui::PushID(counter);
 
-			strcpy_s(textAuthor, (*it2).author.c_str());
-			ImGui::InputText("Author", textAuthor, IM_ARRAYSIZE(textAuthor));
-			(*it2).author = textAuthor;
+			strcpy_s(text, (*it2).author.c_str());
+			ImGui::InputText("Author", text, IM_ARRAYSIZE(text));
+			(*it2).author = text;
 
 			strcpy_s(text, (*it2).line.c_str());
 			ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 			(*it2).line = text;
 
 			ImGui::PopID();
+
 			counter++;
+			ImGui::Spacing();
+			ImGui::Spacing();
 		}
 
 		if (ImGui::Button(ICON_FA_PLUS" Add Line"))
 		{
-			std::string aux = "";
-			//dialogues.push_back(aux);
+			DialogueLine newLine;
+			newLine.line = "";
+			newLine.author = "";
+			(*it).dialogue.push_back(newLine);
 		}
 
-		if (ImGui::Button(ICON_FA_FILE" Create Dialogue Archive"))
-		{
-
-		}
-
+		ImGui::PopID();
 		counterId++;
+	}
+
+	ImGui::Separator();
+
+	if (ImGui::Button(ICON_FA_PLUS" New Dialogue"))
+	{
+		DialogueLine newLine;
+		newLine.line = "";
+		newLine.author = "";
+
+		Dialogue newDialog;
+		newDialog.id = counterId + 1;
+		newDialog.dialogue.push_back(newLine);
+
+		dialogues.push_back(newDialog);
+	}
+
+	ImGui::Separator();
+
+	if (ImGui::Button(ICON_FA_FILE" Save File"))
+	{
+		SaveDialogue();
 	}
 
 	ImGui::End();
@@ -101,15 +125,15 @@ void DialogueSystem::ShowDialogueFiles()
 			}
 			dialogues.clear();
 
-			DialogueLine auxLine;
-			auxLine.line = "";
-			auxLine.author = "";
+			//DialogueLine auxLine;
+			//auxLine.line = "";
+			//auxLine.author = "";
 
-			Dialogue auxDialog;
-			auxDialog.id = 0;
-			auxDialog.dialogue.push_back(auxLine);
+			//Dialogue auxDialog;
+			//auxDialog.id = 0;
+			//auxDialog.dialogue.push_back(auxLine);
 
-			dialogues.push_back(auxDialog);
+			//dialogues.push_back(auxDialog);
 		}
 
 		for (int i = 0; i < files.size(); ++i)
@@ -162,9 +186,15 @@ void DialogueSystem::LoadDialogue(std::string path)
 		{
 			JsonParsing dialogue = dialogFile.GetJsonArrayValue(jsonArray, i);
 
-			Dialogue* aux = &dialogues[i];
+			int auxId = dialogue.GetJsonNumber("Id");
 
-			aux->id = dialogue.GetJsonNumber("Id");
+			Dialogue aux;
+
+			/*for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
+			{
+				if ((*it).id == auxId)
+					
+			}*/
 
 			JSON_Array* linesArray = dialogue.GetJsonArray(dialogue.ValueToObject(dialogue.GetRootValue()), "Dialogue Lines");
 			
@@ -173,16 +203,20 @@ void DialogueSystem::LoadDialogue(std::string path)
 			{
 				JsonParsing dialogueLine = dialogue.GetJsonArrayValue(linesArray, j);
 
-				DialogueLine* auxLine = &aux->dialogue[j];
+				DialogueLine auxLine = aux.dialogue[j];
 
-				auxLine->author = dialogueLine.GetJsonString("Author");
-				auxLine->line = dialogueLine.GetJsonString("Line");
+				auxLine.author = dialogueLine.GetJsonString("Author");
+				auxLine.line = dialogueLine.GetJsonString("Line");
+
+				aux.dialogue[j] = auxLine;
 			}
+
+			dialogues[i] = aux;
 		}
 	}
 }
 
-void DialogueSystem::SaveDialogue(Dialogue& dialogue)
+void DialogueSystem::SaveDialogue()
 {
 	JsonParsing dialogueFile;
 	JSON_Array* arrayDialogue = dialogueFile.SetNewJsonArray(dialogueFile.GetRootValue(), "Dialogues");
@@ -201,8 +235,8 @@ void DialogueSystem::SaveDialogue(Dialogue& dialogue)
 		{
 			JsonParsing file2 = JsonParsing();
 
-			file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Author", (*it2).author.c_str());
-			file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Line", (*it2).line.c_str());
+			file2.SetNewJsonString(file2.ValueToObject(file2.GetRootValue()), "Author", (*it2).author.c_str());
+			file2.SetNewJsonString(file2.ValueToObject(file2.GetRootValue()), "Line", (*it2).line.c_str());
 
 			file.SetValueToArray(arrayLines, file2.GetRootValue());
 		}

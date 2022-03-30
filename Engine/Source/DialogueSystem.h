@@ -29,7 +29,7 @@ public:
 
 	void LoadDialogue(std::vector<std::string>& dialogs, std::string path);
 	void LoadDialogue(std::string path);
-	void SaveDialogue(Dialogue& dialogue);
+	void SaveDialogue();
 
 	bool createDialogue;
 
