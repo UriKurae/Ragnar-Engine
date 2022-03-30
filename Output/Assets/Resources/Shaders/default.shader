@@ -74,7 +74,8 @@ in vec3 vCamPos;
 in vec3 vAmbientColor;
 in float vTextureAlpha;
 
-out vec4 fragColor;
+layout(location = 0) out vec4 fragColor;
+layout(location = 1) out vec3 fragNormals;
 
 layout(location = 0) uniform sampler2D tex;
 
@@ -87,7 +88,6 @@ struct Material
 	bool gammaCorrection;
 	float gammaCorrectionAmount;
 };
-
 uniform Material material;
 
 struct DirLight
@@ -255,14 +255,6 @@ void main()
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
-	//float inten = max(0.0f, dot(norm, -viewDir));
-	//
-	//if (inten > 0.95)      result += vec3(1.0, 1.0, 1.0);
-	//else if (inten > 0.75) result += vec3(0.8, 0.8, 0.8);
-	//else if (inten > 0.50) result += vec3(0.6, 0.6, 0.6);
-	//else if (inten > 0.25) result += vec3(0.4, 0.4, 0.4);
-	//else                   result += vec3(0.2, 0.2, 0.2);
-
 	vec3 finalColor = result;
 	if (material.gammaCorrection)
 	{
@@ -270,6 +262,7 @@ void main()
 	}
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
+	fragNormals = vNormal; // Is this correct ??
 }
 
 

@@ -7,7 +7,10 @@
 
 #define MAX_LIGHTS 8
 
+class VertexArray;
+class VertexBuffer;
 class Framebuffer;
+class TextureBuffer;
 class Material;
 class Shader;
 class GameObject;
@@ -114,4 +117,8 @@ private:
 
 	std::vector<Shader*> shaders;
 	std::vector<Material*> materials;
+
+	VertexArray* distVao;
+	VertexBuffer* distVbo;
+	std::shared_ptr<Shader> postProcessingShader;
 };

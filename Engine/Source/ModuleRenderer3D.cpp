@@ -16,6 +16,10 @@
 #include "Scene.h"
 #include "Lights.h"
 #include "Framebuffer.h"
+#include "VertexArray.h"
+#include "VertexBuffer.h"
+#include "TextureBuffer.h"
+#include "Shader.h"
 #include "NavMeshBuilder.h"
 
 #include "GL/glew.h"
@@ -168,6 +172,32 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo = new Framebuffer(w, h, 0, true);
 	mainCameraFbo->Unbind();	
 
+#ifdef DIST
+	distVao = new VertexArray();
+
+	float vertices[] =
+	{
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f
+	};
+
+	distVbo = new VertexBuffer(vertices, 5 * 6);
+	distVbo->SetLayout({
+		{ShaderDataType::VEC3F, "position"},
+		{ShaderDataType::VEC2F, "texCoords"},
+	});
+	distVao->AddVertexBuffer(*distVbo);
+
+	//distTexture = new TextureBuffer(mainCameraFbo->GetId(), *app->window->GetWindowWidth(), *app->window->GetWindowHeight());
+	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
+
+#endif
+
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
 	grid.axis = true;
@@ -275,12 +305,12 @@ bool ModuleRenderer3D::PostUpdate()
 #endif
 
 	// Camera Component FBO
-	//mainCameraFbo->Bind();
+	mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
-	//mainCameraFbo->ResizeFramebuffer(size.x, size.y);
+	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
 	OnResize(size.x, size.y);
 	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
 
@@ -303,11 +333,21 @@ bool ModuleRenderer3D::PostUpdate()
 	// DRAW UI
 	app->userInterface->Draw();
 
-	//mainCameraFbo->Unbind();
+	mainCameraFbo->Unbind();
 
 #ifndef DIST
 	// Draw both buffers
 	app->editor->Draw(fbo, mainCameraFbo);
+#else
+
+	// Should create a texture ???
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetId());
+	postProcessingShader->Bind();
+	distVao->Bind();
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	distVao->Unbind();
+	postProcessingShader->Unbind();
+
 #endif
 	SDL_GL_SwapWindow(app->window->window);
 
@@ -344,6 +384,9 @@ bool ModuleRenderer3D::CleanUp()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
+#else
+	RELEASE(distVao);
+	RELEASE(distVbo);
 #endif
 	SDL_GL_DeleteContext(context);
 
