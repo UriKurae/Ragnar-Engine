@@ -17,22 +17,23 @@ public class PlayerManager : RagnarComponent
         {
             characterSelected = 0;
             ChangeCharacter(characterSelected);
-            Debug.Log("entra");
-
+            Debug.Log("Character Changed");
         }
         
         if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
         {
- 				characterSelected = 1;
-                ChangeCharacter(characterSelected);
-                Debug.Log("entra");
+ 		    characterSelected = 1;
+            ChangeCharacter(characterSelected); 
+            Debug.Log("Character Changed");
         }
-        /*
+
         if (Input.GetKey(KeyCode.F3) == KeyState.KEY_DOWN)
         {
-
+            characterSelected = 2;
+            ChangeCharacter(characterSelected);
+            Debug.Log("Character Changed");
         }
-        */
+
     }
     void ChangeCharacter(int id)
     {

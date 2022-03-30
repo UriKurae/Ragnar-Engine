@@ -33,8 +33,6 @@ public class Player : RagnarComponent
                 agent.CalculatePath(agent.hitPosition);
                 gameObject.GetComponent<Animation>().PlayAnimation("Walk");
             }
-        }else{
-            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
         }
 
         if (agent.MovePath())
@@ -56,10 +54,10 @@ public class Player : RagnarComponent
         }
 
         // Shoot sound
-        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
+        /*if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Shoot");
-        }
+        }*/
         //////////////////////////
 
         ///////// MOVEMENT /////////
@@ -145,6 +143,8 @@ public class Player : RagnarComponent
         controled = var;
     }
 }
+
+
 
 
 
