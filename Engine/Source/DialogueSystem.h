@@ -25,7 +25,10 @@ public:
 	~DialogueSystem();
 
 	void OnEditor();
+	void ShowDialogueFiles();
+
 	void LoadDialogue(std::vector<std::string>& dialogs, std::string path);
+	void LoadDialogue(std::string path);
 	void SaveDialogue(Dialogue& dialogue);
 
 	bool createDialogue;
@@ -33,7 +36,7 @@ public:
 private:
 	DialogueSystem();
 
-	int numOfLines;
+	std::string fileName;
 	std::vector<Dialogue> dialogues;
 
 	Dialogue currDialogue;

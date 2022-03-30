@@ -40,6 +40,8 @@ void Log(const char file[], int line, const char* format, ...);
 #define PREFABS_ASSETS_FOLDER "Assets/Prefabs/"
 #define PREFABS_FOLDER "Library/Prefabs/"
 #define PARTICLES_FOLDER "Assets/ParticlesTemplates/"
+#define DIALOGUES_ASSETS_FOLDER "Assets/Dialogues/"
+#define DIALOGUES_FOLDER "Library/Dialogues/"
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\
