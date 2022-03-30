@@ -99,6 +99,12 @@ void ComponentTransform2D::OnEditor()
 			ImGui::DragFloat("Position X", &position.x, 0.5f);
 			ImGui::DragFloat("Position Y", &position.y, 0.5f);
 			ImGui::DragFloat("Position Z", &position.z, 0.5f);
+
+			if (lastZ != position.z) 
+			{
+				app->userInterface->oredenateButtons();
+			}
+			lastZ = position.z;
 		}
 	}
 }

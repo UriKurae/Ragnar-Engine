@@ -47,5 +47,6 @@ private:
 	bool showEdit = true;
 	float buttonWidth = 30;
 	float buttonHeight = 100;
+	float lastZ = 100.0f;
 	bool firstTime = true;
 };

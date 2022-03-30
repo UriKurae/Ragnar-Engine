@@ -40,9 +40,13 @@ public:
 	inline MaterialComponent* GetDisabledMaterial() { return disabledMaterial; };
 	inline MaterialComponent* GetActualMaterial() { return actual; };
 
+
+	inline void SetAlpha(float Alpha) { alpha = Alpha; };
+	inline float GetAlpha() { return alpha; };
 	MyPlane* planeToDraw;
 	
 private:
+	float alpha = 1.0f;
 	Text buttonText;
 	State state = State::NORMAL;
 	bool fadeUI = false;

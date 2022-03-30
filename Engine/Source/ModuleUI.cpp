@@ -134,7 +134,8 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	if (theButton)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, 1);
+		//theButton->GetAlpha()
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
 	else if (theSlider) 
 	{
@@ -157,15 +158,15 @@ void MyPlane::DrawPlane2D(Texture* texture)
 			}
 		}
 		
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, theSlider->GetAlpha());
 	}
 	else if (theCheckbox)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, theCheckbox->GetAlpha());
 	}
 	else if (theImage)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
 	}
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
@@ -574,7 +575,22 @@ bool ModuleUI::Update(float dt)
 	
 	return true;
 }
+void ModuleUI::oredenateButtons() 
+{
+	bool cont = false;
+	while (cont == false) {
+		cont = true;
+		for (int i = 0; i < UIGameObjects.size() - 1; i++) {
+			if (UIGameObjects[i + 1]->GetComponent<ComponentTransform2D>()->GetPosition().z < UIGameObjects[i]->GetComponent<ComponentTransform2D>()->GetPosition().z) {
+				GameObject* aux = UIGameObjects[i + 1];
+				UIGameObjects[i + 1] = UIGameObjects[i];
+				UIGameObjects[i] = aux;
+				cont = false;
+			}
 
+		}
+	}
+}
 void ModuleUI::Draw()
 {
 	for (int a = 0; a < UIGameObjects.size(); a++)

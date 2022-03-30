@@ -26,10 +26,11 @@ ButtonComponent::ButtonComponent(GameObject* own)
 		disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		actual = normalMaterial;
 	}	
-
+	
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
+	app->userInterface->oredenateButtons();
 }
 
 ButtonComponent::~ButtonComponent()
@@ -103,7 +104,8 @@ void ButtonComponent::OnEditor()
 
 		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
-		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
+		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
+
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 		
 		
@@ -132,7 +134,7 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");
 	textColor.b = node.GetJsonNumber("textColor.b");
-
+	alpha = node.GetJsonNumber("alpha");
 	int cont = 0;
 
 	for (int a = 0; a < owner->components.size(); a++) {
@@ -172,6 +174,7 @@ bool ButtonComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.b", textColor.b);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
