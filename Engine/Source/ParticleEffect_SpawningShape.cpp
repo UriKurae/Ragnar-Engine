@@ -4,7 +4,8 @@ ParticleEffect_SpawningShape::ParticleEffect_SpawningShape(TransformComponent* t
 hasInitialSpeed(false), 
 particlesVelocity(0.0f), 
 randomVelocityMultiplier(0.0f),
-spawnShape(nullptr)
+spawnShape(nullptr),
+transformComponent(transform)
 {
 	memset(shapeOffset, 0.0f, sizeof(shapeOffset));
 	transformComponent = transform;
@@ -39,7 +40,7 @@ void ParticleEffect_SpawningShape::Init(Particle& particle)
 
 		if (transformComponent != nullptr)
 		{
-			spawnShape->Spawn(particle, hasInitialSpeed, initSpeed, transformComponent->GetGlobalTransform(), shapeOffset);
+			spawnShape->Spawn(particle, hasInitialSpeed, 0.01f, transformComponent->GetGlobalTransform(), shapeOffset);
 		}
 	}
 }
@@ -50,8 +51,9 @@ void ParticleEffect_SpawningShape::OnEditor(int emitterIndex)
 	suffixLabel += emitterIndex;
 	if (ImGui::CollapsingHeader(suffixLabel.c_str(), ImGuiTreeNodeFlags_Bullet))
 	{
-		suffixLabel = "Delete Shape Effect##";
+		suffixLabel = "Delete effect##";
 		suffixLabel += emitterIndex;
+
 		if (ImGui::Button(suffixLabel.c_str()))//TODO all particle effects delete buttons should look like this fix them
 			this->toDelete = true;
 
@@ -61,9 +63,9 @@ void ParticleEffect_SpawningShape::OnEditor(int emitterIndex)
 
 		suffixLabel = "Has Initial Speed##PaShapeEf";
 		suffixLabel += emitterIndex;
-		ImGui::Checkbox(suffixLabel.c_str(), &hasInitialSpeed);
+		//ImGui::Checkbox(suffixLabel.c_str(), &hasInitialSpeed);
 
-		if (hasInitialSpeed)
+		/*if (hasInitialSpeed)
 		{
 			suffixLabel = "Initial Out Speed##PaShapeEf";
 			suffixLabel += emitterIndex;
@@ -73,14 +75,12 @@ void ParticleEffect_SpawningShape::OnEditor(int emitterIndex)
 			suffixLabel += emitterIndex;
 			ImGui::DragFloat(suffixLabel.c_str(), &randomVelocityMultiplier);
 
-		}
+		}*/
 
-		suffixLabel = "Shape Offset##PaShapeEf";
+		suffixLabel = "Offset##PaShapeEf";
 		suffixLabel += emitterIndex;
 		ImGui::DragFloat3(suffixLabel.c_str(), shapeOffset);
 
-
-		//=========================================== Combo
 		suffixLabel = "Shape Type##PaShapeEf";
 		suffixLabel += emitterIndex;
 
@@ -102,7 +102,6 @@ void ParticleEffect_SpawningShape::OnEditor(int emitterIndex)
 			if (noneSelected)
 				ImGui::SetItemDefaultFocus();
 
-			//================================
 			for (int n = 0; n < (int)SPAWN_SHAPE_TYPE::CIRCUMFERENCE; ++n)
 			{
 				SPAWN_SHAPE_TYPE iterType = (SPAWN_SHAPE_TYPE)n;
@@ -129,7 +128,6 @@ void ParticleEffect_SpawningShape::OnEditor(int emitterIndex)
 
 			ImGui::EndCombo();
 		}
-		//=========================================== end combo
 
 		if (spawnShape != nullptr)
 		{

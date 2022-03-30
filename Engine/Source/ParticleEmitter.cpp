@@ -88,6 +88,8 @@ ParticleEmitter::~ParticleEmitter()
 
 	effect = nullptr;
 	effects.clear();
+
+	transform = nullptr;
 }
 
 void ParticleEmitter::Emit(float dt)
@@ -504,8 +506,12 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effects[(int)ParticleEffectType::NO_TYPE] = effect;
 		break;
 	case ParticleEffectType::SPAWNING_SHAPE:
-		effect = new ParticleEffect_SpawningShape(transform);
-		effects[(int)ParticleEffectType::SPAWNING_SHAPE] = effect;
+		transform = own->GetComponent<TransformComponent>();
+		if (transform != nullptr)
+		{
+			effect = new ParticleEffect_SpawningShape(transform);
+			effects[(int)ParticleEffectType::SPAWNING_SHAPE] = effect;
+		}
 		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		effect = new ParticleEffect_Velocity();
@@ -515,13 +521,13 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effect = new ParticleEffect_Acceleration();
 		effects[(int)ParticleEffectType::ACCELERATION_OVER_LIFETIME] = effect;
 		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		effect = new ParticleEffect_Color();
-		effects[(int)ParticleEffectType::COLOR_OVER_LIFETIME] = effect;
-		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		effect = new ParticleEffect_Size();
 		effects[(int)ParticleEffectType::SIZE_OVER_LIFETIME] = effect;
+		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		effect = new ParticleEffect_Color();
+		effects[(int)ParticleEffectType::COLOR_OVER_LIFETIME] = effect;
 		break;
 	default:
 		break;
@@ -556,11 +562,11 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 	case ParticleEffectType::ACCELERATION_OVER_LIFETIME:
 		return "Acceleration Effect";
 		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		return "Color Effect";
-		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		return "Size Effect";
+		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		return "Color Effect";
 		break;
 	default:
 		break;
@@ -712,7 +718,6 @@ void ParticleEmitter::ShowTextureMenu()
 			}
 		}
 	}
-
 	ImGui::End();
 }
 

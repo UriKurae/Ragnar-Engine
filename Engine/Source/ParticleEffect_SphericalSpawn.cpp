@@ -22,9 +22,13 @@ void ParticleEffect_SphericalSpawn::Spawn(Particle& particle, bool hasInitialSpe
 	float x3 = random.Float(-radius, radius);
 
 	float mag = sqrt(x1 * x1 + x2 * x2 + x3 * x3);
-	x1 /= mag; x2 /= mag; x3 /= mag;
+	x1 /= mag; 
+	x2 /= mag; 
+	x3 /= mag;
+
 	float c = cbrt(u);
 	float3 localPos;
+
 	localPos.x = offset[0] + x1 * c;
 	localPos.y = offset[1] + x2 * c;
 	localPos.z = offset[2] + x3 * c;
@@ -56,20 +60,19 @@ void ParticleEffect_SphericalSpawn::Spawn(Particle& particle, bool hasInitialSpe
 	}
 }
 
-
 void ParticleEffect_SphericalSpawn::OnEditor(int emitterIndex)
 {
-	std::string suffixLabel = "Radius##PaShapeSphere";
+	std::string suffixLabel = "Radius##SphereSpawn";
 	suffixLabel += emitterIndex;
 	ImGui::DragFloat(suffixLabel.c_str(), &radius);
 
-	suffixLabel = "Face Direction##PaShapeCone";
+	suffixLabel = "Face Direction##ConeShape";
 	suffixLabel += emitterIndex;
 	ImGui::Checkbox(suffixLabel.c_str(), &useDirection);
 
 	if (useDirection)
 	{
-		suffixLabel = "Set Angle##PaShapeCone";
+		suffixLabel = "Set Angle##ConeShape";
 		suffixLabel += emitterIndex;
 		ImGui::DragFloat(suffixLabel.c_str(), &angle);
 	}
@@ -77,10 +80,17 @@ void ParticleEffect_SphericalSpawn::OnEditor(int emitterIndex)
 
 bool ParticleEffect_SphericalSpawn::OnLoad(JsonParsing& node)
 {
-	return false;
+	radius = node.GetJsonNumber("Radius");
+	angle = node.GetJsonNumber("Angle");
+	useDirection = node.GetJsonBool("UseDirection");
+	return true;
 }
 
 bool ParticleEffect_SphericalSpawn::OnSave(JsonParsing& node, JSON_Array* array)
 {
-	return false;
+	JsonParsing file = JsonParsing();
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", radius);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Angle", angle);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "UseDirection", useDirection);
+	return true;
 }
