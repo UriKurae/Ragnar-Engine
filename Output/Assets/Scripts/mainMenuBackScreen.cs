@@ -8,7 +8,7 @@ public class mainMenuBackScreen : RagnarComponent
 	bool isFirstE = true;
 	public void Start()
 	{
-
+		gameObject.GetComponent<AudioSource>().PlayClip("MainMenuBackgroundMusic");
 	}
 	public void Update()
 	{

@@ -9,7 +9,7 @@ public class winScren : RagnarComponent
 
 	public void Start()
     {
-
+		gameObject.GetComponent<AudioSource>().PlayClip("WinBackgroundMusic");
 	}
 	
 	public void Update()

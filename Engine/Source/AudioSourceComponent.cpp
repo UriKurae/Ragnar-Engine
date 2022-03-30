@@ -227,3 +227,8 @@ void AudioSourceComponent::ResumeClip()
 {
 	AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Resume, playingID);
 }
+
+void AudioSourceComponent::SetClipVolume(float vol)
+{
+	AK::SoundEngine::SetRTPCValue("Volume", vol, owner->GetUUID());
+}

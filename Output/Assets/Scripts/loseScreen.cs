@@ -11,7 +11,7 @@ public class loseScreen : RagnarComponent
 
 	public void Start()
     {
-
+		gameObject.GetComponent<AudioSource>().PlayClip("LoseBackgroundMusic");
 	}
 	
 	public void Update()

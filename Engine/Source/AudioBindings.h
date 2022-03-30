@@ -23,6 +23,11 @@ void StopCurrentClip(MonoObject* go)
 	GetComponentMono<AudioSourceComponent*>(go)->StopClip();
 }
 
+void SetClipVolume(MonoObject* go, float vol)
+{
+	GetComponentMono<AudioSourceComponent*>(go)->SetClipVolume(vol);
+}
+
 // AUDIO LISTENER ============================================
 void TestListener(MonoObject* go)
 {

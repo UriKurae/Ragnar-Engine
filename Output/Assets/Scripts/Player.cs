@@ -19,7 +19,6 @@ public class Player : RagnarComponent
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<AudioSource>().PlayClip("Level1BgMusic");
     }
 
     public void Update()
@@ -28,10 +27,14 @@ public class Player : RagnarComponent
         {
             agent.CalculatePath(agent.hitPosition);
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
         }
 
         if (agent.MovePath())
+        {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            gameObject.GetComponent<AudioSource>().StopCurrentClip();
+        }
 
         ///////// SOUNDS /////////
         // Movement Sound

@@ -28,6 +28,7 @@ public:
 	void StopClip();
 	void PauseClip();
 	void ResumeClip();
+	void SetClipVolume(float vol);
 
 	inline void ChangePosition() { changePosition = true; }
 private:

@@ -17,5 +17,8 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void StopCurrentClip();
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetClipVolume(float vol);
+
     }
 }
