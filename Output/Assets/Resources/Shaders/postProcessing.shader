@@ -15,14 +15,17 @@ void main()
 #type fragment
 #version 430 core
 
+in vec2 vTexCoords;
+
 out vec4 fragColor;
-layout(location = 0) uniform sampler2D tex;
+uniform sampler2D tex;
 
 void main()
 {
 	// Process data with normals etc (double for and check surroundings)
 
 	fragColor = texture(tex, vTexCoords);
+	//fragColor = vec4(1, 0, 0, 1);
 }
 
 

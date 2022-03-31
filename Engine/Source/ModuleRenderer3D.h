@@ -9,6 +9,7 @@
 
 class VertexArray;
 class VertexBuffer;
+class IndexBuffer;
 class Framebuffer;
 class TextureBuffer;
 class Material;
@@ -120,5 +121,6 @@ private:
 
 	VertexArray* distVao;
 	VertexBuffer* distVbo;
+	IndexBuffer* distIbo;
 	std::shared_ptr<Shader> postProcessingShader;
 };

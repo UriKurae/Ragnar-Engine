@@ -63,8 +63,8 @@ uint ResourceManager::CreateResource(ResourceType type, std::string assets, std:
 {
 	std::shared_ptr<Resource> resource = nullptr;
 
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
-
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
+	
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		if ((*it).second->GetAssetsPath() == assets)
@@ -154,7 +154,7 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
 {
 	std::shared_ptr<Resource> res = nullptr;
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 	it = map.find(uid);
 	if (it != map.end())
 	{
@@ -167,7 +167,7 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
 
 std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		std::shared_ptr<Resource> res = (*it).second;
@@ -182,7 +182,7 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 
 bool ResourceManager::CheckResource(std::string& path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		if ((*it).second->GetAssetsPath() == path)
@@ -302,7 +302,7 @@ std::shared_ptr<Resource> ResourceManager::GetResource(uint uid)
 
 std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin();
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it = map.begin();
 
 	for (; it != map.end(); ++it)
 	{
@@ -315,7 +315,7 @@ std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 
 void ResourceManager::DeleteResource(std::string& path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 
 	for (it = map.begin(); it != map.end(); ++it)
 	{
@@ -418,7 +418,7 @@ std::vector<std::shared_ptr<Scene>> ResourceManager::GetScenes()
 {
 	std::vector<std::shared_ptr<Scene>> scenes;
 	
-	for (std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
+	for (std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
 	{
 		if ((*it).second->GetType() == ResourceType::SCENE)
 		{

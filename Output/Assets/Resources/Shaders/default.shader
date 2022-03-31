@@ -77,7 +77,7 @@ in float vTextureAlpha;
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec3 fragNormals;
 
-layout(location = 0) uniform sampler2D tex;
+uniform sampler2D tex;
 
 struct Material
 {
@@ -261,7 +261,8 @@ void main()
 		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
 	}
 
-	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
+	//fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
+	fragColor = vec4(vNormal, 1);
 	fragNormals = vNormal; // Is this correct ??
 }
 

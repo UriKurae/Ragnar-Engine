@@ -18,7 +18,7 @@
 #include "Framebuffer.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
-#include "TextureBuffer.h"
+#include "IndexBuffer.h"
 #include "Shader.h"
 #include "NavMeshBuilder.h"
 
@@ -169,34 +169,42 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	
 	fbo = new Framebuffer(w, h, 1);
 	fbo->Unbind();
-	mainCameraFbo = new Framebuffer(w, h, 0, true);
+	mainCameraFbo = new Framebuffer(w, h, 0);
 	mainCameraFbo->Unbind();	
 
-#ifdef DIST
+//#ifdef DIST
 	distVao = new VertexArray();
 
 	float vertices[] =
 	{
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f
-		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-
-		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f
+		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f
 	};
+	
+	unsigned int indices[] = { 0,1,2,2,3,0 };
+	//data.vertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+	//data.vertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
+	//data.vertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
+	//data.vertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+	//{ 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f }
 
-	distVbo = new VertexBuffer(vertices, 5 * 6);
+	distVbo = new VertexBuffer();
+	distVbo->SetData(vertices, sizeof(vertices));
 	distVbo->SetLayout({
 		{ShaderDataType::VEC3F, "position"},
 		{ShaderDataType::VEC2F, "texCoords"},
 	});
 	distVao->AddVertexBuffer(*distVbo);
 
-	//distTexture = new TextureBuffer(mainCameraFbo->GetId(), *app->window->GetWindowWidth(), *app->window->GetWindowHeight());
-	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
+	distIbo = new IndexBuffer(indices, 6);
+	distVao->SetIndexBuffer(*distIbo);
 
-#endif
+	//distTexture = new TextureBuffer(mainCameraFbo->GetId(), *app->window->GetWindowWidth(), *app->window->GetWindowHeight());
+
+//#endif
+	//postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
 
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
@@ -217,10 +225,10 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
 #ifndef DIST
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Editor Camera FBO
 	fbo->Bind();
-	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+	//PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -242,11 +250,20 @@ bool ModuleRenderer3D::PostUpdate()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+	fbo->ResizeFramebuffer(size.x, size.y);
+	OnResize(size.x, size.y);
+	app->camera->UpdateFovAndScreen(size.x, size.y);
+
 	std::set<GameObject*> objects;
 
 	// TODO: wtf quadtree man.
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
 	
+	// Doesnt work in Init()
+	if(!postProcessingShader)
+		postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
+
 #ifndef DIST
 	if(drawGrid) grid.Render();
 
@@ -305,15 +322,16 @@ bool ModuleRenderer3D::PostUpdate()
 #endif
 
 	// Camera Component FBO
-	mainCameraFbo->Bind();
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	//mainCameraFbo->Bind();
+	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#ifdef DIST
+	//float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
 	OnResize(size.x, size.y);
 	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
-
+#endif
 	//PushCamera(app->sceneManager->GetCurrentScene()->mainCamera->matrixProjectionFrustum, app->sceneManager->GetCurrentScene()->mainCamera->matrixViewFrustum);
 
 	//for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
@@ -321,7 +339,9 @@ bool ModuleRenderer3D::PostUpdate()
 	//	(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	//}
 
-	app->sceneManager->GetCurrentScene()->Draw();
+	
+	
+	//app->sceneManager->GetCurrentScene()->Draw();
 
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadIdentity();
@@ -331,24 +351,37 @@ bool ModuleRenderer3D::PostUpdate()
 	glEnable(GL_BLEND);
 
 	// DRAW UI
-	app->userInterface->Draw();
+	//app->userInterface->Draw();
 
-	mainCameraFbo->Unbind();
+	//mainCameraFbo->Unbind();
 
-#ifndef DIST
-	// Draw both buffers
-	app->editor->Draw(fbo, mainCameraFbo);
-#else
+	//app->editor->Draw(fbo, mainCameraFbo);
 
-	// Should create a texture ???
-	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetId());
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo->GetId());
+	//glBlitFramebuffer(0, 0, *app->window->GetWindowWidth(), , 0, 0, viewPortWidth, viewPortHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	//glBlitFramebuffer(0, 0, *app->window->GetWindowWidth(), *app->window->GetWindowHeight(), 0, 0, *app->window->GetWindowWidth(), *app->window->GetWindowHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+	//glClear(GL_DEPTH_BUFFER_BIT);
+	glBindTexture(GL_TEXTURE_2D, fbo->GetColorId());
 	postProcessingShader->Bind();
-	distVao->Bind();
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	distVao->Unbind();
-	postProcessingShader->Unbind();
+	//postProcessingShader->SetUniform1i("tex", fbo->GetrId());
 
-#endif
+//#ifdef DIST
+	distVao->Bind();
+	distIbo->Bind();
+	//fbo->Bind();
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	//fbo->Unbind();
+	distIbo->Unbind();
+	distVao->Unbind();
+
+//#else
+	// Draw both buffers
+//#endif
+
+	postProcessingShader->Unbind();
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	SDL_GL_SwapWindow(app->window->window);
 
 	glDisable(GL_BLEND);
