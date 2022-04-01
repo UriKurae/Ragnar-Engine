@@ -25,10 +25,34 @@ uniform sampler2D colorTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D depthTexture;
 
+uniform vec2 nearFar;
+
 void main()
 {
-	fragColor = texture(colorTexture, vTexCoords) + texture(normalTexture, vTexCoords) + texture(depthTexture, vTexCoords);
+	vec2 texCoord = vec2(0);
+	vec2 texSize = textureSize(colorTexture, 0).xy;
 
+	float minDistance = 0.5;
+	float maxDistance = 2.0;
+
+	float mx = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			// Get the current surrounding pixel texCoords
+			texCoord = (gl_FragCoord.xy + vec2(i, j)) / texSize;
+			vec4 currentPixelNormal = texture(normalTexture, texCoord);
+			vec4 currentPixelDepth = texture(depthTexture, texCoord);
+			
+			// Not sure what to put in here
+			//mx = max(mx, abs(currentPixelDepth.y - currentPixelNormal.y));
+		}
+	}
+
+	float diff = smoothstep(minDistance, maxDistance, mx);
+
+	fragColor = texture(colorTexture, vTexCoords) * vec4(diff, diff, diff, 1);
 }
 
 

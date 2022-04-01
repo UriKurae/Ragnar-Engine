@@ -322,6 +322,10 @@ bool ModuleRenderer3D::PostUpdate()
 	GLuint textLoc3 = glGetUniformLocation(postProcessingShader->GetId(), "depthTexture");
 	glUniform1i(textLoc3, 2);
 
+	Frustum* f = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
+	float2 nearFar = { f->nearPlaneDistance, f->farPlaneDistance };
+	postProcessingShader->SetUnifromVec2f("nearFar", nearFar);
+
 	distVao->Bind();
 	distIbo->Bind();
 
