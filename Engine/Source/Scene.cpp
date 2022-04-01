@@ -55,7 +55,7 @@ bool Scene::Start()
 	//player->SetName("Player");
 	//player->tag = "Player";
 	
-	qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
+	//qTree.Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 
 	//AkAuxSendValue aEnvs[1];
 	//root->GetChilds()[1]->GetChilds()[1]->CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
@@ -69,7 +69,7 @@ bool Scene::Start()
 	//	DEBUG_LOG("Couldnt set aux send values");
 	//}
 
-	LoadScene("Assets/Scenes/build.ragnar");
+	//LoadScene("Assets/Scenes/build.ragnar");
 
 	return true;
 }

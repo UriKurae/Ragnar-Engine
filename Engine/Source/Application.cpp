@@ -65,13 +65,14 @@ Application::~Application()
 {
 	std::list<Module*>::reverse_iterator item;
 
+	ResourceManager::ReleaseInstance();
+
 	for (item = listModules.rbegin(); item != listModules.rend(); ++item)
 	{
 		RELEASE(*item);
 	}
 
 	RELEASE(fs);
-	ResourceManager::ReleaseInstance();
 	AudioManager::Release();
 	PrefabManager::ReleaseInstance();
 

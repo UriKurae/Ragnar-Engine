@@ -66,5 +66,10 @@ namespace RagnarEngine
             get;
         }
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 RotateY(Vector3 vector, int anglesDegrees);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern float GetAngleBetween(Vector3 vec1, Vector3 vec2);
     }
 }

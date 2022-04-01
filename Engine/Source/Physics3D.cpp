@@ -138,9 +138,6 @@ bool Physics3D::PreUpdate(float dt)
 
 bool Physics3D::Update(float dt)
 {
-	//if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		//debug = !debug;
-
 	if (debug == true)
 		world->debugDrawWorld();
 
