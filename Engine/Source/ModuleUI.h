@@ -94,7 +94,7 @@ public:
     void DeleteUIGameObjects(GameObject* ui);
 	inline std::vector<GameObject*>::const_iterator FindUI(GameObject* child) { return std::find(std::begin(UIGameObjects), std::end(UIGameObjects), child); };
 	void updateText();
-	void oredenateButtons();
+	void OrderButtons();
 public:
     std::map<char, Character> characters;
     Shadert* shader = nullptr;

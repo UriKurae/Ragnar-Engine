@@ -13,18 +13,18 @@
 
 #include <math.h>
 
-
+#define CONVERSION_FACTOR 45
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
-	position = { 0,0,84.5f };
+	position = { 0,0,36.0f };
 	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;
 
 	//rotationEuler = rot;
 	rotationEuler = float3(0, 0, 0);
-	buttonWidth = 300;
+	buttonWidth = 100;
 	buttonHeight = 100;
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
@@ -46,6 +46,7 @@ bool ComponentTransform2D::Update(float dt)
 	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float4 viewport = app->editor->GetGameView()->GetBounds();
 
+	
 	if (firstTime) 
 	{
 		lastViewportBounds.w = app->editor->GetGameView()->GetBounds().w;
@@ -55,25 +56,45 @@ bool ComponentTransform2D::Update(float dt)
 	
 	if (lastViewportBounds.w != viewport.w)
 	{
-		//position.y +=(viewport.w - lastViewportBounds.w)/100;
+		float change;
+		change = lastViewportBounds.w - viewport.w;
+		if ((lastViewportBounds.w / 2) + position.y < (lastViewportBounds.w / 2))
+		{
+
+			position.y += (change / 2);
+		}
+		else if ((lastViewportBounds.w / 2) + position.y > (lastViewportBounds.w / 2))
+		{
+			position.y -= (change / 2);
+		}
+
 		
 	}
-	else if (lastViewportBounds.z != viewport.z) 
+	if (lastViewportBounds.z != viewport.z) 
 	{
-			position.x -=( viewport.z - lastViewportBounds.z)/3.5;
+		float change;
+		change = lastViewportBounds.z-viewport.z;
+		if ((lastViewportBounds.z /2)+position.x < (lastViewportBounds.z / 2))
+		{
+			
+			position.x += (change/2);
+		}
+		else if((lastViewportBounds.z / 2)+position.x > (lastViewportBounds.z / 2))
+		{
+			position.x -= (change/2 );
+		}		
 		
+			
 	}
+	lastViewportBounds = viewport;	
 	
-	internalPosition.x = ((position.x)/24) / zoomRatio;
-	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;	
+	internalPosition.x = (position.x/ CONVERSION_FACTOR) / zoomRatio;
+	internalPosition.y = (position.y / CONVERSION_FACTOR) / zoomRatio;
 	internalPosition.z = position.z;
 
-	lastViewportBounds = viewport;
-	scale.x = (((buttonWidth - 130) * (viewport.z / 25)) / viewport.z) / zoomRatio;
-	scale.y = (((buttonHeight - 50) * (viewport.w / 23)) / viewport.w) / zoomRatio;
-
-	/*internalPosition.x = position.x/1;
-	internalPosition.y = position.y/8;*/
+	scale.x = (buttonWidth/ CONVERSION_FACTOR) / zoomRatio;
+	scale.y = (buttonHeight / CONVERSION_FACTOR) / zoomRatio;
+	
 
 	rotationQuat = FromEulerToQuat(rotationEuler);
 
@@ -102,7 +123,7 @@ void ComponentTransform2D::OnEditor()
 
 			if (lastZ != position.z) 
 			{
-				app->userInterface->oredenateButtons();
+				app->userInterface->OrderButtons();
 			}
 			lastZ = position.z;
 		}

@@ -28,13 +28,13 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	position = pos;
 	scale = sca;
 
-	vertices.push_back({ -0.5,0.5,-2});
-	vertices.push_back({ -0.5,-0.5,-2 });
-	vertices.push_back({ 0.5,-0.5,-2 });
+	vertices.push_back({ -0.5,0.5,0});
+	vertices.push_back({ -0.5,-0.5,0 });
+	vertices.push_back({ 0.5,-0.5,0 });
 
-	vertices.push_back({ 0.5,-0.5,-2 });
-	vertices.push_back({ 0.5,0.5,-2 });
-	vertices.push_back({ -0.5,0.5,-2 });
+	vertices.push_back({ 0.5,-0.5,0 });
+	vertices.push_back({ 0.5,0.5,0 });
+	vertices.push_back({ -0.5,0.5,0 });
 
 	texCoords.push_back(0);
 	texCoords.push_back(0);
@@ -393,7 +393,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	math::float3 center = math::float3(x, y, 1.0f);
 	model = model.Scale(scl, center);
 	model.SetTranslatePart(center);
-
+	
 	auto p = frustum.ProjectionMatrix();
 	glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
@@ -482,11 +482,12 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
 		// Whats does this do?
-		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
-
-		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
-		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
+		DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+		float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
+		float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
+		
+		float posYMin = ((viewport.w / 2) + (-(position.y - 15))) - (button->GetButtonHeight() / 2);
+		float posYMax = ((viewport.w / 2) + (-(position.y - 15))) + (button->GetButtonHeight() / 2);
 
 		//ImageComponent* image = go->GetComponent<ImageComponent>();
 		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
@@ -502,9 +503,9 @@ void ModuleUI::SetFocusedObject()
 	if (hitObjs.size() > 0)
 	{
 		std::vector<float> distance;
-		float nearestDistance = -100000.0f;
+		float nearestDistance = 100000.0f;
 		int nearObj = 0;
-		for (int i = 0; i < hitObjs.size(); ++i)
+		for (int i = 0; i > hitObjs.size(); ++i)
 		{
 			ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
 
@@ -575,7 +576,7 @@ bool ModuleUI::Update(float dt)
 	
 	return true;
 }
-void ModuleUI::oredenateButtons() 
+void ModuleUI::OrderButtons() 
 {
 	bool cont = false;
 	while (cont == false) {

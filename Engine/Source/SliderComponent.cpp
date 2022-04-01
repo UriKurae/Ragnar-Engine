@@ -43,7 +43,7 @@ SliderComponent::SliderComponent(GameObject* own)
 	planeToDraw->own = own;
 	frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	frontPlaneToDraw->own = own;
-	app->userInterface->oredenateButtons();
+	app->userInterface->OrderButtons();
 }
 
 SliderComponent::~SliderComponent()

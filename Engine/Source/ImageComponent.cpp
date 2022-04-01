@@ -26,7 +26,7 @@ ImageComponent::ImageComponent(GameObject* own)
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
-	app->userInterface->oredenateButtons();
+	app->userInterface->OrderButtons();
 }
 
 ImageComponent::~ImageComponent()

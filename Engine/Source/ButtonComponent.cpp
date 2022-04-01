@@ -30,7 +30,7 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
-	app->userInterface->oredenateButtons();
+	app->userInterface->OrderButtons();
 }
 
 ButtonComponent::~ButtonComponent()
@@ -40,7 +40,7 @@ ButtonComponent::~ButtonComponent()
 
 bool ButtonComponent::Update(float dt)
 {
-	buttonText.SetOnlyPosition(float2((GetParentPosition().x / 1.07) + 5, (GetParentPosition().y / 1.07) + 10));
+	buttonText.SetOnlyPosition(float2(GetParentPosition().x+textPos.x, GetParentPosition().y + textPos.y));
 
 	if (!active)
 		state = State::DISABLED;
@@ -95,6 +95,9 @@ void ButtonComponent::OnEditor()
 
 		ImGui::Separator();
 
+		ImGui::DragFloat("Position X", &textPos.x, 0.2f);
+		ImGui::DragFloat("Position Y", &textPos.y, 0.2f);
+
 		ImGui::Text("Text Color"); ImGui::SameLine();
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
 			textColorEditable = !textColorEditable;
@@ -122,7 +125,8 @@ float2 ButtonComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
+	
+	return{ position.x/2 ,position.y/2 };
 }
 bool ButtonComponent::OnLoad(JsonParsing& node)
 {
@@ -134,6 +138,9 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");
 	textColor.b = node.GetJsonNumber("textColor.b");
+
+	textPos.x = node.GetJsonNumber("textPositionX");
+	textPos.y = node.GetJsonNumber("textPositionY");
 	alpha = node.GetJsonNumber("alpha");
 	int cont = 0;
 
@@ -174,6 +181,8 @@ bool ButtonComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.b", textColor.b);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textPositionX", textPos.x);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textPositionY", textPos.y);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
 	node.SetValueToArray(array, file.GetRootValue());
 

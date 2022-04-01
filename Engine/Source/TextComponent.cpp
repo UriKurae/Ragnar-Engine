@@ -27,7 +27,7 @@ TextComponent::TextComponent(GameObject* own)
 		own->CreateComponent(ComponentType::MATERIAL);
 		app->userInterface->UIGameObjects.push_back(own);
 	}	
-	app->userInterface->oredenateButtons();
+	app->userInterface->OrderButtons();
 	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	//planeToDraw->own = own;
 }
