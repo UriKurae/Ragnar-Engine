@@ -196,6 +196,7 @@ bool ContentBrowserMenu::Update(float dt)
 		{
 			InputActionMenu* iAM = static_cast<InputActionMenu*>(app->editor->GetMainMenuBar().GetMenus()[(int)Menus::INPUT_ACTION]);
 			iAM->active = true;
+			iAM->ResetCurrent();
 			iAM->LoadInputActionFile((*it).c_str());
 		}
 		if (ImGui::IsItemClicked())

@@ -55,6 +55,7 @@ public:
 	void ColumnActionMaps();
 
 	bool CleanUp() override;
+	void ResetCurrent();
 
 	bool SaveInputActionFile(const char* path);
 	bool LoadInputActionFile(const char* path);

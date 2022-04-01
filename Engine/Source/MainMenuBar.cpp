@@ -60,7 +60,7 @@ MainMenuBar::MainMenuBar() : Menu(true, "MainMenu")
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
-	iconList = { ICON_FA_WINDOW_MAXIMIZE, ICON_FA_WRENCH, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_CODE, ICON_FA_CLOUD, ICON_FA_WALKING, ICON_FA_INFO_CIRCLE };
+	iconList = { ICON_FA_WINDOW_MAXIMIZE, ICON_FA_WRENCH, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_CODE, ICON_FA_CLOUD, ICON_FA_KEYBOARD, ICON_FA_WALKING, ICON_FA_INFO_CIRCLE };
 }
 
 MainMenuBar::~MainMenuBar()
@@ -333,6 +333,12 @@ void MainMenuBar::CreateGameObjectMenu()
 			app->sceneManager->showCreateNotLightSensibleShaderWindow = true;
 
 		ImGui::EndMenu();
+	}
+	//Input Action
+	if (ImGui::MenuItem(ICON_FA_KEYBOARD" Create Input Action"))
+	{
+		InputActionMenu* iAMenu = static_cast<InputActionMenu*>(menus[(int)Menus::INPUT_ACTION]);
+		iAMenu->SaveInputActionFile("Assets/Resources/InputAction.inputaction");
 	}
 }
 

@@ -219,6 +219,14 @@ bool InputActionMenu::CleanUp()
 	return ret;
 }
 
+void InputActionMenu::ResetCurrent()
+{
+	currentMap = 0;
+	currentAction = 0;
+	currentBinding = 0;
+	currentBindingItem = NULL;
+}
+
 bool InputActionMenu::SaveInputActionFile(const char* path)
 {
 	DEBUG_LOG("Saving Input Action: %s", path);

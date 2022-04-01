@@ -1,10 +1,14 @@
 
 #include "Application.h"
+#include "Globals.h"
+
+#include "ModuleInput.h"
+#include "GameObject.h"
 #include "FileSystem.h"
+#include "ModuleSceneManager.h"
 #include "InputActionComponent.h"
 #include "InputActionMenu.h"
 #include "MonoManager.h"
-#include "Globals.h"
 
 #include "IconsFontAwesome5.h"
 #include "Profiling.h"
@@ -148,7 +152,29 @@ void InputActionComponent::OnEditor()
 
 bool InputActionComponent::Update(float dt)
 {
-	return false;
+	bool ret = true;
+
+	//Check if bindings have been pressed
+	if (app->sceneManager->GetGameState() == GameState::PLAYING)
+	{
+		for (std::vector<std::shared_ptr<ActionMaps>>::iterator actionMap = currentActionMaps.begin(); actionMap < currentActionMaps.end(); actionMap++)
+		{
+			int i = actionMap - currentActionMaps.begin();
+			for (std::vector<std::shared_ptr<Actions>>::iterator action = (*actionMap)->GetActions()->begin(); action < (*actionMap)->GetActions()->end(); action++)
+			{
+				int j = action - (*actionMap)->GetActions()->begin();
+				for (std::vector<int>::iterator bind = (*action)->GetBindings()->begin(); bind < (*action)->GetBindings()->end(); bind++)
+				{
+					if (app->input->GetKey(*bind) == KeyState::KEY_DOWN)
+					{
+						DEBUG_LOG("Input clicked");
+					}
+				}
+			}
+		}
+	}
+
+	return ret;
 }
 
 bool InputActionComponent::OnLoad(JsonParsing& node)
@@ -167,7 +193,7 @@ bool InputActionComponent::OnLoad(JsonParsing& node)
 	}
 	currentAssetName = node.GetJsonString("Path");
 
-	return false;
+	return true;
 }
 
 bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
@@ -184,7 +210,7 @@ bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	node.SetValueToArray(array, file.GetRootValue());
 
-	return false;
+	return true;
 }
 
 bool InputActionComponent::LoadInputAsset(const char* path)
