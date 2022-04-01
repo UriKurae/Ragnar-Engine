@@ -106,28 +106,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		DEBUG_LOG("Renderer: %s", glGetString(GL_RENDERER));
 		DEBUG_LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 		DEBUG_LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-
-		//Initialize Projection Matrix
-		//glMatrixMode(GL_PROJECTION);
-		//glLoadIdentity();
-
-		//Check for error
-		//GLenum error = glGetError();
-		//if(error != GL_NO_ERROR)
-		//{
-		//	ret = false;
-		//}
-
-		//Initialize Modelview Matrix
-		//glMatrixMode(GL_MODELVIEW);
-		//glLoadIdentity();
-
-		//Check for error
-		//error = glGetError();
-		//if(error != GL_NO_ERROR)
-		//{
-		//	ret = false;
-		//}
 		
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glClearDepth(1.0f);
@@ -135,13 +113,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		//Initialize clear color
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
-		//Check for error
-		//error = glGetError();
-		//if(error != GL_NO_ERROR)
-		//{
-		//	ret = false;
-		//}
 		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
@@ -162,7 +133,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (blending) SetBlending();
 		if (wireMode) SetWireMode();		
 	}
-	//// Projection matrix for
+	
 	int w = *app->window->GetWindowWidth();
 	int h = *app->window->GetWindowHeight();
 	OnResize(w, h);
@@ -172,7 +143,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo = new Framebuffer(w, h, 0);
 	mainCameraFbo->Unbind();	
 
-//#ifdef DIST
+#ifdef DIST
 	distVao = new VertexArray();
 
 	float vertices[] =
@@ -184,11 +155,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	};
 	
 	unsigned int indices[] = { 0,1,2,2,3,0 };
-	//data.vertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
-	//data.vertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
-	//data.vertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
-	//data.vertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
-	//{ 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f }
 
 	distVbo = new VertexBuffer();
 	distVbo->SetData(vertices, sizeof(vertices));
@@ -201,14 +167,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	distIbo = new IndexBuffer(indices, 6);
 	distVao->SetIndexBuffer(*distIbo);
 
-	//distTexture = new TextureBuffer(mainCameraFbo->GetId(), *app->window->GetWindowWidth(), *app->window->GetWindowHeight());
-
-//#endif
-	//postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
-
+#else
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
 	grid.axis = true;
+#endif
 
 	dirLight = new DirectionalLight();
 	goDirLight = app->sceneManager->GetCurrentScene()->CreateGameObject(0);
@@ -225,18 +188,10 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
 #ifndef DIST
-	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// Editor Camera FBO
 	fbo->Bind();
-	//PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
-
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 #endif
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -244,13 +199,6 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
-
-	// Inside each function there is a comprobation so it does not get resized each frame
-	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
-	fbo->ResizeFramebuffer(size.x, size.y);
-	// OnResize gets called when an SDL event of window resize is triggered
-	//OnResize(size.x, size.y);
-	app->camera->UpdateFovAndScreen(size.x, size.y);
 
 	std::set<GameObject*> objects;
 
@@ -278,8 +226,8 @@ bool ModuleRenderer3D::PostUpdate()
 		glLineWidth(1.0f);
 	}
 	fbo->Bind();
-	GLuint drawBuffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
-	glDrawBuffers(2, drawBuffers);
+	//GLuint drawBuffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+	//glDrawBuffers(2, drawBuffers);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
@@ -325,78 +273,60 @@ bool ModuleRenderer3D::PostUpdate()
 #endif
 
 	// Camera Component FBO
-	//mainCameraFbo->Bind();
-	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	mainCameraFbo->Bind();
+	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, drawBuffers);
 
-#ifdef DIST
-	//float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
-	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
-	OnResize(size.x, size.y);
-	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
-#endif
-	//PushCamera(app->sceneManager->GetCurrentScene()->mainCamera->matrixProjectionFrustum, app->sceneManager->GetCurrentScene()->mainCamera->matrixViewFrustum);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+	// TODO: To check if game cam works, uncomment the for loop, otherwise use the draw of the sceneManager
 	//for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	//{
 	//	(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	//}
-
-	
-	
-	//app->sceneManager->GetCurrentScene()->Draw();
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
+	app->sceneManager->GetCurrentScene()->Draw();
 
 	glEnable(GL_BLEND);
 
 	// DRAW UI
-	//app->userInterface->Draw();
+	app->userInterface->Draw();
 
-	//mainCameraFbo->Unbind();
+	mainCameraFbo->Unbind();
 
-	//app->editor->Draw(fbo, mainCameraFbo);
-
-	//glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo->GetId());
-	//glBlitFramebuffer(0, 0, *app->window->GetWindowWidth(), , 0, 0, viewPortWidth, viewPortHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	//glBlitFramebuffer(0, 0, *app->window->GetWindowWidth(), *app->window->GetWindowHeight(), 0, 0, *app->window->GetWindowWidth(), *app->window->GetWindowHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
-
+#ifdef DIST
 	
+	// Inside each function there is a comprobation so it does not get resized each frame
+	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
+	// OnResize gets called when an SDL event of window resize is triggered
+	//OnResize(size.x, size.y);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.x, size.y);
 
-
-	//postProcessingShader->SetUniform1i("tex", fbo->GetrId());
-
-//#ifdef DIST
-
-	
-	
-//#else
-	// Draw both buffers
-//#endif
-
-	//fbo->Bind();
-	//glClear(GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_DEPTH_TEST);
 	postProcessingShader->Bind();
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, fbo->GetColorId());
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetColorId());
 	GLuint textLoc = glGetUniformLocation(postProcessingShader->GetId(), "tex");
 	glUniform1i(textLoc, 0);
-	
+
 	distVao->Bind();
 	distIbo->Bind();
-	
+
 	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
-	//fbo->Unbind();
+	
 	distIbo->Unbind();
 	distVao->Unbind();
 	postProcessingShader->Unbind();
 	glEnable(GL_DEPTH_TEST);
+
+#else
+	app->editor->Draw(fbo, mainCameraFbo);
+#endif
+
 	SDL_GL_SwapWindow(app->window->window);
+	
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, 0);
 

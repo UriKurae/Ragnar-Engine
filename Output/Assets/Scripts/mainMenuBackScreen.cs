@@ -18,6 +18,11 @@ public class mainMenuBackScreen : RagnarComponent
 		ExitButtonAction();
 		// Image back
 		BackgroundImageAction();
+
+		if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
+		{
+			SceneManager.NextScene();
+		}
 	}
 	void PlayButtonAction()
 	{

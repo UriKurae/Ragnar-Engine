@@ -51,8 +51,8 @@ bool ModuleSceneManager::Start()
 
 	referenceMap.clear();
 	
-	// DELIVERY!!
-#if 0
+	
+#ifdef DIST
 	Play();
 #endif
 

@@ -1,5 +1,6 @@
-﻿#include "ModuleUI.h"
-#include "Application.h"
+﻿#include "Application.h"
+#include "ModuleWindow.h"
+#include "ModuleUI.h"
 #include "Globals.h"
 
 #include "ModuleSceneManager.h"
@@ -442,17 +443,17 @@ bool ModuleUI::PreUpdate(float dt)
 		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 		
 		float2 mPos = float2::zero;
-
+		float4 viewport = float4::zero;
 		// TODO: Dont know if this works. Temporary until gets fixed by UI (maybe u need mPos when using imgui
 		//float2 mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
 #ifndef DIST
 		mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+		viewport = app->editor->GetGameView()->GetBounds();
 #else
 		mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+		viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 #endif
-		float4 viewport = app->editor->GetGameView()->GetBounds();
 		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-		
 		
 		// Check if mouse is hovered on Game View
 		if (app->editor->GetGameView()->GetState())
