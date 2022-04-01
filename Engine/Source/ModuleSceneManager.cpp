@@ -29,16 +29,11 @@ ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState:
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
-	AddScene(currentScene);
 }
 
 ModuleSceneManager::~ModuleSceneManager()
 {
 	currentScene = nullptr;
-	//for (int i = 0; i < scenes.size(); ++i)
-	//{
-	//	RELEASE(scenes[i]);
-	//}
 }
 
 bool ModuleSceneManager::Start()
@@ -46,6 +41,12 @@ bool ModuleSceneManager::Start()
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
 	ResourceManager::GetInstance()->ImportAllResources();
 	ImportPrimitives();
+
+	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
+	currentScene = nullptr;
+
+	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(std::string("Assets/Scenes/build.ragnar")));
+	currentScene->Load();
 
 	currentScene->Start();
 
@@ -200,6 +201,8 @@ void ModuleSceneManager::LoadBuild()
 			}
 		}
 	}
+
+	RELEASE_ARRAY(buffer);
 }
 
 void ModuleSceneManager::SaveBuild()

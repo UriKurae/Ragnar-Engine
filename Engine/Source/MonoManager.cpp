@@ -61,6 +61,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform::get_up", GetUp);
 	mono_add_internal_call("RagnarEngine.Transform::get_right", GetRight);
 	mono_add_internal_call("RagnarEngine.Transform::get_forward", GetForward);
+	mono_add_internal_call("RagnarEngine.Transform::GetAngleBetween", GetAngleBetween);
+	mono_add_internal_call("RagnarEngine.Transform::RotateY", RotateY);
 	
 	mono_add_internal_call("RagnarEngine.Transform::set_localPosition", SetPosition);
 	mono_add_internal_call("RagnarEngine.Transform::set_localRotation", SetRotation);
