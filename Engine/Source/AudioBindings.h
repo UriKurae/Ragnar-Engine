@@ -18,9 +18,11 @@ void PlayClip(MonoObject* clipName, MonoObject* owner)
 	GetComponentMono<AudioSourceComponent*>(clipName)->PlayClip(name);
 }
 
-void StopCurrentClip(MonoObject* go)
+void StopCurrentClip(MonoObject* go, MonoObject* clipName)
 {
-	GetComponentMono<AudioSourceComponent*>(go)->StopClip();
+	char* audioName = mono_string_to_utf8(mono_object_to_string(clipName, 0));
+	std::string nameState = audioName;
+	GetComponentMono<AudioSourceComponent*>(go)->StopClip(nameState);
 }
 
 void SetClipVolume(MonoObject* go, float vol)

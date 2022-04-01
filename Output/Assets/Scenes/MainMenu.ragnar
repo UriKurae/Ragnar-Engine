@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.77191311120986938,
+                    "Vertical Fov": 1.0155770778656006,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         11.233668327331543,
@@ -201,7 +201,7 @@
                     ],
                     "Scale": [
                         145.80000305175781,
-                        75.228256225585938,
+                        75.228263854980469,
                         1
                     ],
                     "rotationEuler": [
@@ -224,7 +224,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 30670232,
+                    "pointer": 338630136,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -251,7 +251,7 @@
                     ],
                     "Scale": [
                         65.069999694824219,
-                        22.989131927490234,
+                        22.989130020141602,
                         1
                     ],
                     "rotationEuler": [
@@ -293,8 +293,8 @@
                         88
                     ],
                     "Scale": [
-                        30.600000381469727,
-                        2.6413044929504395,
+                        30.599998474121094,
+                        2.6413042545318604,
                         1
                     ],
                     "rotationEuler": [
@@ -359,7 +359,7 @@
                         86
                     ],
                     "Scale": [
-                        30.600000381469727,
+                        30.599998474121094,
                         2.4456520080566406,
                         1
                     ],
@@ -402,6 +402,55 @@
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1
+                }
+            ]
+        },
+        {
+            "UUID": 828963847,
+            "Parent UUID": 417171234,
+            "Name": "AudioController",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "None"
+                        }
+                    ]
                 }
             ]
         }

@@ -103,17 +103,17 @@ void AudioSourceComponent::OnEditor()
 		ImGui::SameLine();
 		if (ImGui::Button("Pause"))
 		{
-			PauseClip();
+			PauseClip(audioClip[0].clipName.c_str());
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Resume"))
 		{
-			ResumeClip();
+			ResumeClip(audioClip[0].clipName.c_str());
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Stop"))
 		{
-			StopClip();
+			StopClip(audioClip[0].clipName.c_str());
 		}
 
 		ComponentOptions(this);
@@ -195,37 +195,72 @@ bool AudioSourceComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void AudioSourceComponent::SwapAudioClip(const char* clipName)
+void AudioSourceComponent::PlayClip(std::string clipName)
 {
-//	audioClip = clipName;
-}
-
-void AudioSourceComponent::PlayClip(const char* clipName)
-{
- 	playingID = AudioManager::Get()->PostEvent(clipName, owner->GetUUID());
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		if (audioClip[i].clipName.c_str() == clipName)
+		{
+			audioClip[i].playingID = AudioManager::Get()->PostEvent(clipName.c_str(), owner->GetUUID());
+		}
+	}
 }
 
 void AudioSourceComponent::PlayClipsOnAwake()
 {
 	for (int i = 0; i < audioClip.size(); ++i)
 	{
-		if (audioClip[0].playOnAwake) playingID = AudioManager::Get()->PostEvent(audioClip[i].clipName.c_str(), owner->GetUUID());
+		if (audioClip[i].playOnAwake) AudioManager::Get()->PostEvent(audioClip[i].clipName.c_str(), owner->GetUUID());
 	}
 }
 
-void AudioSourceComponent::StopClip()
+void AudioSourceComponent::StopClip(std::string audioName)
 {
-	AK::SoundEngine::StopPlayingID(playingID);
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		if (audioClip[i].clipName == audioName)
+		{
+			AK::SoundEngine::StopPlayingID(audioClip[i].playingID);
+		}
+	}
+}
+
+void AudioSourceComponent::PauseClip(std::string audioName)
+{
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		if (audioClip[i].clipName == audioName)
+		{
+			AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Pause, audioClip[i].playingID);
+		}
+	}
 }
 
 void AudioSourceComponent::PauseClip()
 {
-	AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Pause, playingID);
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Pause, audioClip[i].playingID);
+	}
+}
+
+void AudioSourceComponent::ResumeClip(std::string audioName)
+{
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		if (audioClip[i].clipName == audioName)
+		{
+			AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Resume, audioClip[i].playingID);
+		}
+	}
 }
 
 void AudioSourceComponent::ResumeClip()
 {
-	AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Resume, playingID);
+	for (int i = 0; i < audioClip.size(); ++i)
+	{
+		AK::SoundEngine::ExecuteActionOnPlayingID(AK::SoundEngine::AkActionOnEventType_Resume, audioClip[i].playingID);
+	}
 }
 
 void AudioSourceComponent::SetClipVolume(float vol)

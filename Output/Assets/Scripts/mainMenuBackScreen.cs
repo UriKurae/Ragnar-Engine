@@ -6,9 +6,11 @@ public class mainMenuBackScreen : RagnarComponent
 	Vector3 imagePos;
 	bool isFirstS = true;
 	bool isFirstE = true;
+	GameObject AudioController;
 	public void Start()
 	{
-		gameObject.GetComponent<AudioSource>().PlayClip("MainMenuBackgroundMusic");
+		AudioController = GameObject.Find("AudioController");
+		AudioController.GetComponent<AudioSource>().PlayClip("MAINMENUBACKGROUNDMUSIC");
 	}
 	public void Update()
 	{

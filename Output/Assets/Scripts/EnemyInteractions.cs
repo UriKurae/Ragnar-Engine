@@ -36,7 +36,7 @@ public class EnemyInteraction : RagnarComponent
         if (PlayerDetection(12) && canShoot)
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Shoot");
+            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
             InternalCalls.InstancePrefab("Assets/Prefabs/EnemyBullet.rgprefab");
@@ -75,7 +75,7 @@ public class EnemyInteraction : RagnarComponent
     {
         if (other.gameObject.name == "Knife")
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
+            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
             pendingToDelete = true;               
         }
     }

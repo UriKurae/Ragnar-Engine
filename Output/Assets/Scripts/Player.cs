@@ -27,13 +27,13 @@ public class Player : RagnarComponent
         {
             agent.CalculatePath(agent.hitPosition);
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-            gameObject.GetComponent<AudioSource>().PlayClip("footSteps");
+            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
         }
 
         if (agent.MovePath())
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            gameObject.GetComponent<AudioSource>().StopCurrentClip();
+            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
         }
 
         ///////// SOUNDS /////////
@@ -48,7 +48,7 @@ public class Player : RagnarComponent
         // Reload Sound
         if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Reload");
+            gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
         }
 
         // Shoot sound
@@ -64,7 +64,7 @@ public class Player : RagnarComponent
             || Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            gameObject.GetComponent<AudioSource>().StopCurrentClip();
+            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
 
             if (rb.linearVelocity != Vector3.zero)
                 rb.linearVelocity = new Vector3(0, 0, 0);
@@ -129,7 +129,7 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "EnemyBullet")
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("PlayerDeath");
+            gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
             gameObject.GetComponent<Animation>().PlayAnimation("Death");
             pendingToDelete = true;
             // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER
