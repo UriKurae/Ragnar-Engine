@@ -5,6 +5,12 @@ using System.Collections.Generic;
 
 namespace RagnarEngine
 {
+    static class Constants
+    {
+        public const double PI = 3.14159;
+        public const float DEGTORAD = 0.0174532925199432957f;
+        public const float RADTODEG = 57.295779513082320876f;
+    }
     public enum ComponentType
     {
         NONE = -1,

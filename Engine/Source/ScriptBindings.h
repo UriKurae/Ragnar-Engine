@@ -145,6 +145,17 @@ void SetScale(MonoObject* go, MonoObject* scale)
 		tr->UpdateTransform();
 	}
 }
+float GetAngleBetween(MonoObject* go, MonoObject* vector1, MonoObject* vector2)
+{
+	float3 vec1 = app->moduleMono->UnboxVector(vector1);
+	float3 vec2 = app->moduleMono->UnboxVector(vector2);	
+	return vec1.AngleBetween(vec2);
+}
+MonoObject* RotateY(MonoObject* go, MonoObject* vector, int anglesDegrees)
+{
+	float3 dirV = app->moduleMono->UnboxVector(vector);
+	return app->moduleMono->Float3ToCS(dirV * math::float3x3::RotateY(anglesDegrees * DEGTORAD));
+}
 // Transform ========
 
 
