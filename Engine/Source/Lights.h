@@ -21,7 +21,7 @@ public:
     float intensity = 10.0f;
     float3 ambient = { 0.25f, 0.25f, 0.25f };
     float3 diffuse = { 0.75f, 0.75f, 0.75f };
-    float3 specular = { 1,1,1 };
+    float3 specular = { 0,0,0 };
 };
 
 class DirectionalLight : public Light

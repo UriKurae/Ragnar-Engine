@@ -33,7 +33,7 @@ public class EnemyInteraction : RagnarComponent
         float zDiff = player.transform.globalPosition.z - gameObject.transform.globalPosition.z;
         double distance = Math.Sqrt(zDiff * zDiff + xDiff * xDiff);
 
-        if (distance < 12.0f && canShoot)
+        if (PlayerDetection(12) && canShoot)
         {
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Shoot");
@@ -54,6 +54,21 @@ public class EnemyInteraction : RagnarComponent
                 }
             }
         }
+    }
+
+    bool PlayerDetection(int radius)
+    {
+        Vector3 enemyPos = gameObject.transform.globalPosition;
+        Vector3 distance = player.transform.globalPosition - enemyPos;
+        if (distance.magnitude < radius)
+        {
+            float angle = gameObject.transform.GetAngleBetween(gameObject.transform.forward, distance) * Constants.RADTODEG;
+            Debug.Log(angle.ToString());
+            if (angle < 30) // 30º to right and 30º to left, total 60º
+                return true;
+        }
+        
+        return false;
     }
 
     public void OnCollision(Rigidbody other)

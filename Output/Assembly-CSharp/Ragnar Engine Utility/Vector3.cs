@@ -57,6 +57,7 @@ namespace RagnarEngine
         public static Vector3 operator +(Vector3 a, Vector3 b) { return new Vector3(a.x + b.x, a.y + b.y, a.z + b.z); }
         public static Vector3 operator /(Vector3 a, float d) { return new Vector3(a.x / d, a.y / d, a.z / d); }
         public static Vector3 operator -(Vector3 a, float d) { return new Vector3(a.x - d, a.y - d, a.z - d); }
+        public static Vector3 operator -(Vector3 a, Vector3 b) { return new Vector3(a.x - b.x, a.y - b.y, a.z - b.z); }
 
         static readonly Vector3 zeroVector = new Vector3(0F, 0F, 0F);
         static readonly Vector3 oneVector = new Vector3(1F, 1F, 1F);
