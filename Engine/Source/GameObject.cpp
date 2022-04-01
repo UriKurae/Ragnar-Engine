@@ -38,13 +38,6 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 
 GameObject::~GameObject()
 {
-	// Delete object from qTree list if this is in the list
-	AABB aabb;
-	aabb.SetNegativeInfinity();
-	if ((!globalAabb.Equals(aabb) && (GetComponent<MeshComponent>() || GetComponent<ScriptComponent>()))
-		&& app->sceneManager->GetCurrentScene()->GetQuadtree().getRoot() != nullptr)
-		app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
-
 	// Delete all components
 	for (int i = 0; i < components.size(); ++i)
 	{

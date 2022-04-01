@@ -569,6 +569,26 @@ void ModuleRenderer3D::RemovePointLight(PointLight* light)
 	}
 }
 
+void ModuleRenderer3D::RemoveSpotLight(SpotLight* light)
+{
+	for (std::vector<SpotLight*>::iterator it = spotLights.begin(); it != spotLights.end(); ++it)
+	{
+		if ((*it) == light)
+		{
+			light->intensity = 0;
+			(*it)->toDelete = false;
+			//delete (*it);
+			//*it = nullptr;
+			//delete* it;
+			//delete light;
+			//light = 0;
+			//*it = 0;
+			//pointLights.erase(it);
+			break;
+		}
+	}
+}
+
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 {
 	//glPushMatrix();

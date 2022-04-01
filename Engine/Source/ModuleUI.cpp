@@ -619,6 +619,10 @@ bool ModuleUI::CleanUp()
 
 void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 {
-	UIGameObjects.erase(FindUI(ui));
+	if (UIGameObjects.empty()) 
+		return;
+
+	auto obj = FindUI(ui);
+	UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
 }
