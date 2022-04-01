@@ -35,6 +35,8 @@ void Framebuffer::SetFramebuffer()
 	{
 		glDeleteFramebuffers(1, &framebuffer);
 		glDeleteTextures(1, &colorTexture);
+		glDeleteTextures(1, &normalTexture);
+		glDeleteTextures(1, &depthTexture);
 		glDeleteRenderbuffers(1, &rboDepthStencil);
 	}
 
@@ -69,8 +71,17 @@ void Framebuffer::SetFramebuffer()
 	// Attach it to currently bound framebuffer object
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, normalTexture, 0);
 
-	GLenum buffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, buffers);
+	glGenTextures(1, &depthTexture);
+	glBindTexture(GL_TEXTURE_2D, depthTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Attach it to currently bound framebuffer object
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTexture, 0);
+
+	GLenum buffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_DEPTH_ATTACHMENT };
+	glDrawBuffers(3, buffers);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 

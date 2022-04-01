@@ -17,6 +17,7 @@ public:
 	inline const GLuint GetId() const { return framebuffer; }
 	inline const GLuint GetColorId() const { return colorTexture; }
 	inline const GLuint GetNormalId() const { return normalTexture; }
+	inline const GLuint GetDepthId() const { return depthTexture; }
 private:
 	int width;
 	int height;
@@ -30,4 +31,5 @@ private:
 	GLuint rboDepthStencil;
 	GLuint colorTexture;
 	GLuint normalTexture;
+	GLuint depthTexture;
 };

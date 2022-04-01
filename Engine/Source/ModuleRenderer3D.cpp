@@ -274,8 +274,8 @@ bool ModuleRenderer3D::PostUpdate()
 
 	// Camera Component FBO
 	mainCameraFbo->Bind();
-	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, drawBuffers);
+	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_DEPTH_ATTACHMENT };
+	glDrawBuffers(3, drawBuffers);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -305,11 +305,21 @@ bool ModuleRenderer3D::PostUpdate()
 
 	glDisable(GL_DEPTH_TEST);
 	postProcessingShader->Bind();
-
+	
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetColorId());
-	GLuint textLoc = glGetUniformLocation(postProcessingShader->GetId(), "tex");
-	glUniform1i(textLoc, 0);
+	GLuint textLoc1 = glGetUniformLocation(postProcessingShader->GetId(), "colorTexture");
+	glUniform1i(textLoc1, 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetNormalId());
+	GLuint textLoc2 = glGetUniformLocation(postProcessingShader->GetId(), "normalTexture");
+	glUniform1i(textLoc2, 1);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetDepthId());
+	GLuint textLoc3 = glGetUniformLocation(postProcessingShader->GetId(), "depthTexture");
+	glUniform1i(textLoc3, 2);
 
 	distVao->Bind();
 	distIbo->Bind();
