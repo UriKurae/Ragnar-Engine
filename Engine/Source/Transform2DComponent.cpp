@@ -22,6 +22,9 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 	scale.y = 15;
 	scale.z = 1;
 
+	lastPosition= position;
+	lastScale.x=buttonWidth;
+	lastScale.y = buttonHeight;
 	//rotationEuler = rot;
 	rotationEuler = float3(0, 0, 0);
 	buttonWidth = 100;
@@ -40,7 +43,19 @@ ComponentTransform2D::~ComponentTransform2D()
 {
 	app->userInterface->DeleteUIGameObjects(owner);
 }
+void ComponentTransform2D::UpdateChilds(float3 newPosition, float2 newScale) {
+	std::vector<GameObject*> auxiliar;
+	auxiliar=owner->GetChilds();
 
+	position += newPosition;
+	buttonWidth += newScale.x;
+	buttonHeight += newScale.y;
+	for (int a = 0; a < auxiliar.size(); a++) 
+	{		
+		ComponentTransform2D* aux=auxiliar[a]->GetComponent<ComponentTransform2D>();
+		aux->UpdateChilds(newPosition, newScale);
+	}
+}
 bool ComponentTransform2D::Update(float dt)
 {
 	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
@@ -120,7 +135,18 @@ void ComponentTransform2D::OnEditor()
 			ImGui::DragFloat("Position X", &position.x, 0.5f);
 			ImGui::DragFloat("Position Y", &position.y, 0.5f);
 			ImGui::DragFloat("Position Z", &position.z, 0.5f);
-
+			if (position.x != lastPosition.x || position.y != lastPosition.y || position.z != lastPosition.z || scale.x != lastScale.x || scale.y != lastScale.y) 
+			{
+				float3 diferencePosition = position - lastPosition;
+				float2 diferenceScale = { buttonWidth - lastScale.x ,buttonHeight - lastScale.y };
+				UpdateChilds(diferencePosition, diferenceScale);
+				position -= (diferencePosition);
+				buttonWidth -= (diferenceScale.x);
+				buttonHeight -= (diferenceScale.y);
+				lastPosition = position;
+				lastScale.x= buttonWidth;
+				lastScale.y = buttonHeight;
+			}
 			if (lastZ != position.z) 
 			{
 				app->userInterface->OrderButtons();
@@ -161,6 +187,10 @@ bool ComponentTransform2D::OnLoad(JsonParsing& node)
 	transMatrix = float4x4::FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
+
+	lastPosition = position;
+	lastScale.x = buttonWidth;
+	lastScale.y = buttonHeight;
 	return true;
 }
 
