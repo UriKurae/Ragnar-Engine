@@ -39,8 +39,18 @@ void Framebuffer::SetFramebuffer()
 	}
 
 	glGenFramebuffers(1, &framebuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	glGenRenderbuffers(1, &renderedBufferRenderer);
+	glGenRenderbuffers(1, &depthRenderbuffer);
 
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, renderedBufferRenderer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, width, height);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderedBufferRenderer);
+
+	glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
+	
 	glGenTextures(1, &colorTexture);
 	glBindTexture(GL_TEXTURE_2D, colorTexture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
@@ -63,12 +73,7 @@ void Framebuffer::SetFramebuffer()
 	glDrawBuffers(2, buffers);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-	
 
-	glGenRenderbuffers(1, &rboDepthStencil);
-	glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -83,7 +88,10 @@ void Framebuffer::SetFramebuffer()
 
 void Framebuffer::ResizeFramebuffer(int w, int h)
 {
-	width = w;
-	height = h;
-	SetFramebuffer();
+	if (w != width || height != h)
+	{
+		width = w;
+		height = h;
+		SetFramebuffer();
+	}
 }

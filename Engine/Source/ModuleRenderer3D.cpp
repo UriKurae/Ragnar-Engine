@@ -245,14 +245,11 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	RG_PROFILING_FUNCTION("Rendering");
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
+	// Inside each function there is a comprobation so it does not get resized each frame
 	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 	fbo->ResizeFramebuffer(size.x, size.y);
-	OnResize(size.x, size.y);
+	// OnResize gets called when an SDL event of window resize is triggered
+	//OnResize(size.x, size.y);
 	app->camera->UpdateFovAndScreen(size.x, size.y);
 
 	std::set<GameObject*> objects;
@@ -280,7 +277,12 @@ bool ModuleRenderer3D::PostUpdate()
 		glEnd();
 		glLineWidth(1.0f);
 	}
-
+	fbo->Bind();
+	GLuint drawBuffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+	glDrawBuffers(2, drawBuffers);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	
 	GameObject* objSelected = app->editor->GetGO();
 	if (app->camera->visualizeFrustum)
 	{
@@ -302,6 +304,7 @@ bool ModuleRenderer3D::PostUpdate()
 			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
 	}
 
+	/*
 	if (stencil && objSelected && objSelected->GetActive())
 	{
 		glColor3f(0.25f, 0.87f, 0.81f);
@@ -316,7 +319,7 @@ bool ModuleRenderer3D::PostUpdate()
 		glColor3f(1.0f, 1.0f, 1.0f);
 		objSelected->Draw(nullptr);
 	}
-
+	*/
 	fbo->Unbind();
 
 #endif
@@ -361,31 +364,42 @@ bool ModuleRenderer3D::PostUpdate()
 	//glBlitFramebuffer(0, 0, *app->window->GetWindowWidth(), , 0, 0, viewPortWidth, viewPortHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	//glBlitFramebuffer(0, 0, *app->window->GetWindowWidth(), *app->window->GetWindowHeight(), 0, 0, *app->window->GetWindowWidth(), *app->window->GetWindowHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
-	//glClear(GL_DEPTH_BUFFER_BIT);
-	glBindTexture(GL_TEXTURE_2D, fbo->GetColorId());
-	postProcessingShader->Bind();
+	
+
+
 	//postProcessingShader->SetUniform1i("tex", fbo->GetrId());
 
 //#ifdef DIST
-	distVao->Bind();
-	distIbo->Bind();
-	//fbo->Bind();
-	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
-	//fbo->Unbind();
-	distIbo->Unbind();
-	distVao->Unbind();
 
+	
+	
 //#else
 	// Draw both buffers
 //#endif
 
+	//fbo->Bind();
+	//glClear(GL_DEPTH_BUFFER_BIT);
+	glDisable(GL_DEPTH_TEST);
+	postProcessingShader->Bind();
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, fbo->GetColorId());
+	GLuint textLoc = glGetUniformLocation(postProcessingShader->GetId(), "tex");
+	glUniform1i(textLoc, 0);
+	
+	distVao->Bind();
+	distIbo->Bind();
+	
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	//fbo->Unbind();
+	distIbo->Unbind();
+	distVao->Unbind();
 	postProcessingShader->Unbind();
+	glEnable(GL_DEPTH_TEST);
+	SDL_GL_SwapWindow(app->window->window);
+	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	SDL_GL_SwapWindow(app->window->window);
-
-	glDisable(GL_BLEND);
-	
 	return true;
 }
 

@@ -23,6 +23,10 @@ private:
 	int channelId;
 
 	GLuint framebuffer;
+	GLuint quadFramebuffer;
+	GLuint renderedBufferRenderer;
+	GLuint depthRenderbuffer;
+	
 	GLuint rboDepthStencil;
 	GLuint colorTexture;
 	GLuint normalTexture;

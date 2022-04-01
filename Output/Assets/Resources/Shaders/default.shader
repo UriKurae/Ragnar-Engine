@@ -261,8 +261,7 @@ void main()
 		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
 	}
 
-	//fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-	fragColor = vec4(vNormal, 1);
+	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 	fragNormals = vNormal; // Is this correct ??
 }
 
