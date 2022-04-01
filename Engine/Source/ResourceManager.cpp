@@ -41,7 +41,7 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
-	for (int i = 0; i < textures.size(); ++i)
+	/*for (int i = 0; i < textures.size(); ++i)
 	{
 		RELEASE(textures[i]);
 	}
@@ -51,7 +51,7 @@ ResourceManager::~ResourceManager()
 	{
 		RELEASE(meshes[i]);
 	}
-	meshes.clear();
+	meshes.clear();*/
 }
 
 void ResourceManager::CheckForNewResources()
