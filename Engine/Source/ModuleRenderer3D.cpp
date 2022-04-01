@@ -274,8 +274,9 @@ bool ModuleRenderer3D::PostUpdate()
 
 	// Camera Component FBO
 	mainCameraFbo->Bind();
-	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_DEPTH_ATTACHMENT };
-	glDrawBuffers(3, drawBuffers);
+	// Weird but it works like this
+	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
+	glDrawBuffers(2, drawBuffers);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
