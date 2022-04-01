@@ -16,10 +16,14 @@ ComponentLight::~ComponentLight()
 {
 	switch (light->type)
 	{
-		case LightType::POINT:
-		{
-			app->renderer3D->RemovePointLight((PointLight*)light);
-		}
+	case LightType::POINT:
+		app->renderer3D->RemovePointLight((PointLight*)light);
+		break;
+	case LightType::SPOT:
+		app->renderer3D->RemoveSpotLight((SpotLight*)light);
+		break;
+	default:
+		break;
 	}
 }
 

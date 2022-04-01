@@ -76,11 +76,10 @@ in float vTextureAlpha;
 
 out vec4 fragColor;
 
-//uniform sampler2D tex;
 layout(location = 0) uniform sampler2D tex;
 
-
-struct Material {
+struct Material
+{
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
@@ -103,15 +102,13 @@ struct DirLight
 };
 uniform DirLight dirLight;
 
-struct PointLight {
+struct PointLight
+{
 	vec3 position;
 
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
-
-	// 0 -> constant, 1 -> linear (lin), 2 -> quadratic
-	vec3 properties;
 
 	float intensity;
 	float constant;
@@ -132,10 +129,19 @@ struct SpotLight
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
-
 };
 #define MAX_SPOT_LIGHTS 4
 uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
+
+
+struct CelShadingProps
+{
+	float a;
+	float b;
+	float c;
+	float d;
+};
+const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
 
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
@@ -145,9 +151,15 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 	
+	if (diff < csp.a) diff = 0.0f;
+	else if (diff < csp.b) diff = csp.b;
+	else if (diff < csp.c) diff = csp.c;
+	else diff = csp.d;
+
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	spec = step(0.5f, spec);
 	
 	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
@@ -163,15 +175,19 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 
+	if (diff < csp.a) diff = 0.0f;
+	else if (diff < csp.b) diff = csp.b;
+	else if (diff < csp.c) diff = csp.c;
+	else diff = csp.d;
+
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	spec = step(0.5f, spec);
 
 	// Attenuation
 	float distance = length(fragPos - light.position);
 	float attenuation = 1.0 / (1 + light.constant + light.lin * distance + light.quadratic * (distance * distance));
-	//float attenuation = 1.0 / (light.constant + light.lin * distance + light.quadratic * (distance * distance));
-	//float attenuation = 1.0 / (light.properties[0] + light.properties[1] * distance + light.properties[2] * (distance * distance));
 	
 	attenuation *= light.intensity;
 
@@ -188,20 +204,28 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
+	// TODO: Should anti-aliasing be revised when calulating cel shading?
+	// The camera is far enough and as far as i looked into it, i did not see any aliasing going on.
+	
 	vec3 lightDir = normalize(light.position - fragPos);
-	// diffuse shading
+	
 	float diff = max(dot(normal, lightDir), 0.0);
-	// specular shading
+	
+	if (diff < csp.a) diff = 0.0f;
+	else if (diff < csp.b) diff = csp.b;
+	else if (diff < csp.c) diff = csp.c;
+	else diff = csp.d;
+	
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-	// attenuation
-	float distance = length(light.position - fragPos);
-	//float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
-	// spotlight intensity
+	spec = step(0.5f, spec);
+
+	//float distance = length(light.position - fragPos);
+	
 	float theta = dot(lightDir, normalize(-light.direction));
 	float epsilon = light.cutOff - light.outerCutOff;
 	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
-	// combine results
+	
 	//vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
 	//vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
 	//vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
@@ -230,6 +254,14 @@ void main()
 	
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
+
+	//float inten = max(0.0f, dot(norm, -viewDir));
+	//
+	//if (inten > 0.95)      result += vec3(1.0, 1.0, 1.0);
+	//else if (inten > 0.75) result += vec3(0.8, 0.8, 0.8);
+	//else if (inten > 0.50) result += vec3(0.6, 0.6, 0.6);
+	//else if (inten > 0.25) result += vec3(0.4, 0.4, 0.4);
+	//else                   result += vec3(0.2, 0.2, 0.2);
 
 	vec3 finalColor = result;
 	if (material.gammaCorrection)

@@ -78,6 +78,7 @@ bool ModuleEditor::Update(float dt)
 		if (selected && selected->GetComponent<CameraComponent>() == nullptr)
 		{
 			selected->GetParent()->GetChilds().erase(selected->GetParent()->FindChildren(selected));
+			app->sceneManager->GetCurrentScene()->ResetQuadtree();
 			RELEASE(selected);
 		}
 	}
