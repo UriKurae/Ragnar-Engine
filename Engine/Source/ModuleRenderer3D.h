@@ -75,6 +75,7 @@ public:
 	void ClearSpotLights();
 
 	void RemovePointLight(PointLight* light);
+	void RemoveSpotLight(SpotLight* light);
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
