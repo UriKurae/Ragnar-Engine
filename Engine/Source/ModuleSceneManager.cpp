@@ -37,7 +37,9 @@ ModuleSceneManager::~ModuleSceneManager()
 bool ModuleSceneManager::Start()
 {
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
+
 	ResourceManager::GetInstance()->ImportAllResources();
+
 	ImportPrimitives();
 
 	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());

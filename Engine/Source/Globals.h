@@ -37,6 +37,7 @@ void Log(const char file[], int line, const char* format, ...);
 #define ANIMATIONS_FOLDER "Library/Animations/"
 #define BONES_FOLDER "Library/Bones/"
 #define SCENES_FOLDER "Assets/Scenes/"
+#define SCENES_LIBRARY_FOLDER "Library/Scenes/"
 #define PREFABS_FOLDER "Assets/Prefabs/"
 #define PARTICLES_FOLDER "Assets/ParticlesTemplates/"
 

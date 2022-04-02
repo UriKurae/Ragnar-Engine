@@ -262,7 +262,7 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 std::string Shader::ReadFile()
 {
 	std::string ret;
-	std::ifstream in(assetsPath, std::ios::in, std::ios::binary);
+	std::ifstream in(libraryPath, std::ios::in, std::ios::binary);
 
 	if (in)
 	{
