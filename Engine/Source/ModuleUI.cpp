@@ -479,20 +479,27 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
 
 		float3 position = transform2D->GetPosition();
-		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
-		// Whats does this do?
-		DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
-		float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
-		
-		float posYMin = ((viewport.w / 2) + (-(position.y - 15))) - (button->GetButtonHeight() / 2);
-		float posYMax = ((viewport.w / 2) + (-(position.y - 15))) + (button->GetButtonHeight() / 2);
-
-		//ImageComponent* image = go->GetComponent<ImageComponent>();
-		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
+		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
+		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
+		if (buttonComp|| checkComp|| sliderComp)
 		{
-			hitObjs.push_back(go);
+			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
+
+			// Whats does this do?
+			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
+			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
+
+			float posYMin = ((viewport.w / 2) + (-(position.y - 15))) - (button->GetButtonHeight() / 2);
+			float posYMax = ((viewport.w / 2) + (-(position.y - 15))) + (button->GetButtonHeight() / 2);
+
+			//ImageComponent* image = go->GetComponent<ImageComponent>();
+			if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+			{
+				hitObjs.push_back(go);
+			}
 		}
 	}
 }

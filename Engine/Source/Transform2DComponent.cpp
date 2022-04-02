@@ -66,10 +66,12 @@ bool ComponentTransform2D::Update(float dt)
 	{
 		lastViewportBounds.w = app->editor->GetGameView()->GetBounds().w;
 		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
+
+		position.x += (z - viewport.z)/2;
 		firstTime = false;
 	}
 	
-	if (lastViewportBounds.w != viewport.w)
+	/*if (lastViewportBounds.w != viewport.w)
 	{
 		float change;
 		change = lastViewportBounds.w - viewport.w;
@@ -84,7 +86,7 @@ bool ComponentTransform2D::Update(float dt)
 		}
 
 		
-	}
+	}*/
 	if (lastViewportBounds.z != viewport.z) 
 	{
 		float change;
@@ -184,6 +186,9 @@ bool ComponentTransform2D::OnLoad(JsonParsing& node)
 	buttonWidth = node.GetJsonNumber("buttonWidth");
 	buttonHeight = node.GetJsonNumber("buttonHeight");
 
+	z = node.GetJsonNumber("lastButtonWidth");
+	w = node.GetJsonNumber("lastButtonHeight");
+
 	transMatrix = float4x4::FromTRS(position, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
@@ -205,6 +210,10 @@ bool ComponentTransform2D::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJson3Number(file, "rotationEuler", rotationEuler);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "buttonWidth", buttonWidth);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "buttonHeight", buttonHeight);
+
+	float4 viewport = app->editor->GetGameView()->GetBounds();
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "lastButtonWidth", viewport.z);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "lastButtonHeight", viewport.w);
 
 	node.SetValueToArray(array, file.GetRootValue());
 
