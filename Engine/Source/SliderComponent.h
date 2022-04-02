@@ -30,9 +30,6 @@ public:
 
 	inline void SetSecondMaterial(MaterialComponent* mat) { secondMaterial = mat; };
 
-	inline void SetAlpha(float Alpha) { alpha = Alpha; };
-	inline float GetAlpha() { return alpha; };
-
 	MyPlane* planeToDraw;
 	MyPlane* frontPlaneToDraw;
 private:
@@ -43,7 +40,7 @@ private:
 	
 	bool completed;
 	float barProgres;
-	float alpha = 1.0f;
+
 	State state;
 	Color actualColor;
 	Color disabledColor = white;

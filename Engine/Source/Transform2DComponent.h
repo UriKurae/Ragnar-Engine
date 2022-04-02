@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "Math/float4x4.h"
 #include <vector>
-#include"Math/float2.h"
+
 class GameObject;
 
 class ComponentTransform2D : public Component
@@ -33,7 +33,6 @@ public:
 	inline void SetButtonWidth(float width) { buttonWidth = width; };
 	inline void SetButtonHeight(float height) { buttonHeight = height; };
 
-	void UpdateChilds(float3 newPosition, float2 newScale);
 private:
 	std::vector<float3> vertices_aux;
 	float4x4 transMatrix;
@@ -48,10 +47,5 @@ private:
 	bool showEdit = true;
 	float buttonWidth = 30;
 	float buttonHeight = 100;
-	float lastZ = 100.0f;
 	bool firstTime = true;
-	float3 lastPosition;
-	float2 lastScale;
-	int z;
-	int w;
 };

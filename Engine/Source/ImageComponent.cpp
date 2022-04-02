@@ -26,7 +26,6 @@ ImageComponent::ImageComponent(GameObject* own)
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
-	app->userInterface->OrderButtons();
 }
 
 ImageComponent::~ImageComponent()
@@ -54,17 +53,9 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 
 void ImageComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("ButtonComponent"))
-	{
-		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
-
-		ComponentOptions(this);
-		ImGui::Separator();
-	}
 }
 bool ImageComponent::OnLoad(JsonParsing& node)
 {
-	alpha = node.GetJsonNumber("alpha");
 	return true;
 }
 
@@ -73,7 +64,6 @@ bool ImageComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
 	node.SetValueToArray(array, file.GetRootValue());	
 
 	return true;

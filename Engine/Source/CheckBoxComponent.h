@@ -36,15 +36,12 @@ public:
 	inline bool GetChecked() { return checked; };
 	inline State GetState() { return state; };
 
-	inline void SetAlpha(float Alpha) { alpha = Alpha; };
-	inline float GetAlpha() { return alpha; };
-
 	MyPlane* planeToDraw;
 private:
 	MaterialComponent* noSelectedMaterial;
 	MaterialComponent* selectedMaterial;
 	MaterialComponent* actual;
-	float alpha = 1.0f;
+
 	Color disabledColor = white;
 	Color pressedColor = white;//red
 	Color focusedColor = white;//green

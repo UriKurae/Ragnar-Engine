@@ -24,11 +24,10 @@ CheckboxComponent::CheckboxComponent(GameObject* own)
 		noSelectedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		actual = noSelectedMaterial;
 	}
-	
+
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
-	app->userInterface->OrderButtons();
 }
 
 CheckboxComponent::~CheckboxComponent()
@@ -162,7 +161,7 @@ void CheckboxComponent::OnEditor()
 		if (textColorEditable)
 			ImGui::ColorPicker3("Text Color", &textColor);
 
-		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
+		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 		ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 		ImGui::DragFloat("Font Size", &checkboxText.Scale, 0.1, 0, 10);
@@ -198,7 +197,7 @@ bool CheckboxComponent::OnLoad(JsonParsing& node)
 			}
 		}
 	}
-	alpha = node.GetJsonNumber("alpha");
+	
 	const char* sel = new char[selected.size()];
 	sel = selected.c_str();
 	if (sel[0] == 'n')
@@ -219,7 +218,7 @@ bool CheckboxComponent::OnSave(JsonParsing& node, JSON_Array* array)
 		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "noSelected");	
 	else 
 		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "selected", "Selected");
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
+
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;

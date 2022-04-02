@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.98558032512664795,
+                    "Vertical Fov": 0.77191311120986938,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         11.233668327331543,
@@ -160,7 +160,7 @@
                         1.3589518070220947
                     ],
                     "Type": 3,
-                    "Zoom": 62,
+                    "Zoom": 10,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "UUID": 547190327,
+            "UUID": 651135605,
             "Parent UUID": 417171234,
             "Name": "Background",
             "Active": true,
@@ -195,13 +195,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
+                        -38,
                         0,
-                        0,
-                        36
+                        84.5
                     ],
                     "Scale": [
-                        1.6129032373428345,
-                        1.6129032373428345,
+                        145.80000305175781,
+                        75.228256225585938,
                         1
                     ],
                     "rotationEuler": [
@@ -209,32 +209,29 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "buttonWidth": 940,
+                    "buttonHeight": 434.5
+                },
+                {
+                    "Type": 13
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/mainMenuScreen.png",
+                    "Path": "Assets\/Resources\/UI\/mainMenuScreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 13,
-                    "alpha": 1
-                },
-                {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 204336496,
+                    "pointer": 30670232,
                     "type": 4,
                     "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 1838526428,
+            "UUID": 1783704250,
             "Parent UUID": 417171234,
             "Name": "UI Rectangle",
             "Active": true,
@@ -248,13 +245,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -579.5,
-                        0,
-                        36
+                        -421.5,
+                        7.5,
+                        85
                     ],
                     "Scale": [
-                        6.4516129493713379,
-                        3.2822577953338623,
+                        65.069999694824219,
+                        22.989131927490234,
                         1
                     ],
                     "rotationEuler": [
@@ -262,26 +259,23 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 203.5,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "buttonWidth": 491.5,
+                    "buttonHeight": 167.5
+                },
+                {
+                    "Type": 13
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/MainMenuBox.png",
+                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0.60399997234344482
                 }
             ]
         },
         {
-            "UUID": 673559679,
-            "Parent UUID": 1838526428,
+            "UUID": 864873950,
+            "Parent UUID": 417171234,
             "Name": "Button Start",
             "Active": true,
             "Static": true,
@@ -294,13 +288,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -676,
-                        25,
-                        36.099998474121094
+                        -405.5,
+                        30.5,
+                        88
                     ],
                     "Scale": [
-                        2.8548386096954346,
-                        0.46774193644523621,
+                        30.600000381469727,
+                        2.6413044929504395,
                         1
                     ],
                     "rotationEuler": [
@@ -308,20 +302,18 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "buttonWidth": 300,
+                    "buttonHeight": 63.5
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/building05 _c.tga",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -343,16 +335,13 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.5999999046325684,
-                    "alpha": 1
+                    "textColor.b": 1
                 }
             ]
         },
         {
-            "UUID": 792698622,
-            "Parent UUID": 1838526428,
+            "UUID": 166393221,
+            "Parent UUID": 417171234,
             "Name": "Button Exit",
             "Active": true,
             "Static": true,
@@ -365,13 +354,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -673,
-                        -31,
-                        36.099998474121094
+                        -405,
+                        0,
+                        86
                     ],
                     "Scale": [
-                        2.8548386096954346,
-                        0.46774193644523621,
+                        30.600000381469727,
+                        2.4456520080566406,
                         1
                     ],
                     "rotationEuler": [
@@ -379,10 +368,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "buttonWidth": 300,
+                    "buttonHeight": 62.5
                 },
                 {
                     "Type": 2,
@@ -392,7 +379,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/CharacterTex\/char_paul_albedo.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -414,10 +401,7 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.8000001907348633,
-                    "alpha": 1
+                    "textColor.b": 1
                 }
             ]
         }
