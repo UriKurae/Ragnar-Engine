@@ -12,26 +12,40 @@ public class PlayerManager : RagnarComponent
     }
 	public void Update()
 	{
-
-        if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
+        switch (players.Length)
         {
-            characterSelected = 0;
-            ChangeCharacter(characterSelected);
-            Debug.Log("Character Changed");
-        }
-        
-        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
-        {
- 		    characterSelected = 1;
-            ChangeCharacter(characterSelected); 
-            Debug.Log("Character Changed");
-        }
-
-        if (Input.GetKey(KeyCode.F3) == KeyState.KEY_DOWN)
-        {
-            characterSelected = 2;
-            ChangeCharacter(characterSelected);
-            Debug.Log("Character Changed");
+            case 4:
+                if (Input.GetKey(KeyCode.F4) == KeyState.KEY_DOWN)
+                {
+                    characterSelected = 3;
+                    ChangeCharacter(characterSelected);
+                    Debug.Log("Character Changed");
+                }
+                goto case 3;
+            case 3:
+                if (Input.GetKey(KeyCode.F3) == KeyState.KEY_DOWN)
+                {
+                    characterSelected = 2;
+                    ChangeCharacter(characterSelected);
+                    Debug.Log("Character Changed");
+                }
+                goto case 2;
+            case 2:
+                if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
+                {
+                    characterSelected = 1;
+                    ChangeCharacter(characterSelected);
+                    Debug.Log("Character Changed");
+                }
+                goto case 1;
+            case 1:
+                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
+                {
+                    characterSelected = 0;
+                    ChangeCharacter(characterSelected);
+                    Debug.Log("Character Changed");
+                }
+                break;
         }
 
     }
@@ -42,6 +56,7 @@ public class PlayerManager : RagnarComponent
             players[i].GetComponent<Player>().SetControled(false);
 
         }
-        players[characterSelected].GetComponent<Player>().SetControled(true);
+        players[id].GetComponent<Player>().SetControled(true);
     }
 }
+
