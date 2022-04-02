@@ -11,16 +11,19 @@ Event	ID	Name			Wwise Object Path	Notes
 	2769082178	Enemy1Death			\Default Work Unit\Enemy1Death	
 	4234860738	ThrowKnife			\Default Work Unit\ThrowKnife	
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	2415836739	Volume			\Default Work Unit\Volume	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	113564842	shot	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\shot_10C4C929.wem		\Actor-Mixer Hierarchy\Player\Shot\shot		359488
-	248508106	player_death	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\char_paulatreides_death_sand_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Player\Death\player_death		865072
-	341785350	enemy1_shoot	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\nme_enemy1_shoot_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Enemy1\Shoot\enemy1_shoot		89494
-	470470188	level1_bg	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\level1_music_10C4C929.wem		\Actor-Mixer Hierarchy\BackgroundMusic\BGMusic\BGList\level1_bg		4618540
-	493101304	throw_knife	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\char_paulatreides_throw_knife_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Player\ThrowKnife\throw_knife		27056
-	689931038	mainmenu_bg	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\mainmenu_music_10C4C929.wem		\Actor-Mixer Hierarchy\BackgroundMusic\BGMusic\BGList\mainmenu_bg		17287344
-	756390645	reload	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\reload_10C4C929.wem		\Actor-Mixer Hierarchy\Player\Reload\reload		926272
-	793852379	enemy1_death	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\nme_enemy1_death_sand_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Enemy1\Death\enemy1_death		618648
-	903503596	throw_rock	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\char_paulatreides_throw_rock_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Player\ThrowRock\throw_rock		28580
-	988044120	level1_combatbg	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\level1_combat_music_10C4C929.wem		\Actor-Mixer Hierarchy\BackgroundMusic\BGMusic\BGList\level1_combatbg		3079048
-	1011617347	footsteps	D:\Descargas\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\footsteps_10C4C929.wem		\Actor-Mixer Hierarchy\Player\FootSteps\FootStepsSequence\footsteps		1801792
+	113564842	shot	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\shot_10C4C929.wem		\Actor-Mixer Hierarchy\Player\Shot\shot		359488
+	248508106	player_death	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\char_paulatreides_death_sand_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Player\Death\player_death		865072
+	341785350	enemy1_shoot	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\nme_enemy1_shoot_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Enemy1\Shoot\enemy1_shoot		89494
+	470470188	level1_bg	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\level1_music_D79FB2B7.wem		\Actor-Mixer Hierarchy\BackgroundMusic\BGMusic\BGList\level1_bg		4618540
+	493101304	throw_knife	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\char_paulatreides_throw_knife_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Player\ThrowKnife\throw_knife		27056
+	689931038	mainmenu_bg	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\mainmenu_music_10C4C929.wem		\Actor-Mixer Hierarchy\BackgroundMusic\BGMusic\BGList\mainmenu_bg		17287344
+	756390645	reload	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\reload_10C4C929.wem		\Actor-Mixer Hierarchy\Player\Reload\reload		926272
+	793852379	enemy1_death	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\nme_enemy1_death_sand_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Enemy1\Death\enemy1_death		618648
+	903503596	throw_rock	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\char_paulatreides_throw_rock_sfx_10C4C929.wem		\Actor-Mixer Hierarchy\Player\ThrowRock\throw_rock		28580
+	988044120	level1_combatbg	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\level1_combat_music_10C4C929.wem		\Actor-Mixer Hierarchy\BackgroundMusic\BGMusic\BGList\level1_combatbg		3079048
+	1011617347	footsteps	F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\SFX\footsteps_10C4C929.wem		\Actor-Mixer Hierarchy\Player\FootSteps\FootStepsSequence\footsteps		1801792
 

@@ -31,6 +31,7 @@ public:
 	void ResumeClip(std::string audioName);
 	void ResumeClip();
 	void SetClipVolume(float vol);
+	float GetClipVolume();
 
 	inline void ChangePosition() { changePosition = true; }
 private:

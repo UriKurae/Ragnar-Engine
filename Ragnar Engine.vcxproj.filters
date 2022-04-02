@@ -648,9 +648,6 @@
     <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Application.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\FileSystem.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -1678,6 +1675,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ParticleEffect_SpawningShape.cpp">
       <Filter>Particles\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\Application.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

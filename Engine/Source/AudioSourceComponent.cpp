@@ -265,5 +265,11 @@ void AudioSourceComponent::ResumeClip()
 
 void AudioSourceComponent::SetClipVolume(float vol)
 {
+	volume = vol;
 	AK::SoundEngine::SetRTPCValue("Volume", vol, owner->GetUUID());
+}
+
+float AudioSourceComponent::GetClipVolume()
+{
+	return volume;
 }

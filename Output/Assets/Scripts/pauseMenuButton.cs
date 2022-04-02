@@ -13,6 +13,8 @@ public class pauseMenuButton : RagnarComponent
 	GameObject Opt;
 	GameObject Rect;
 	GameObject SceneAudio;
+
+	float currVolume = 0.0f;
 	public void Start()
     {
 		SceneAudio = GameObject.Find("AudioController");
@@ -72,7 +74,9 @@ public class pauseMenuButton : RagnarComponent
 			}
 			else
 			{
-				SceneAudio.GetComponent<AudioSource>().SetClipVolume(20.0f);
+				
+				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
+				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				ImageHide();
 				RectangleHide();
 				ResumeButtonHide();
@@ -126,6 +130,7 @@ public class pauseMenuButton : RagnarComponent
 				// pressed mode
 				isSowing = false;
 				//Quitar menu de pausa
+				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				break;
 		}
 	}
