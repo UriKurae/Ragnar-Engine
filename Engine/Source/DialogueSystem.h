@@ -27,19 +27,31 @@ public:
 	void OnEditor();
 	void ShowDialogueFiles();
 
-	void LoadDialogue(std::vector<std::string>& dialogs, std::string path);
 	void LoadDialogue(std::string path);
 	void SaveDialogue();
+
+	void Reset();
+
+	inline Dialogue* GetCurrentDialogue() { return currDialogue; }
+	Dialogue* GetDialogueById(int id);
+	inline void SetDialogueAsCurrent(Dialogue* newDialog) { currDialogue = newDialog; }
+	void StartDialogue();
+	void NextLine();
+	inline std::string GetCurrentLine() { return currLine->line; }
+	inline std::string GetOwnerOfLine() { return currLine->author; }
 
 	bool createDialogue;
 
 private:
 	DialogueSystem();
 
+	bool newDialogueFile;
+
 	std::string fileName;
 	std::vector<Dialogue> dialogues;
 
-	Dialogue currDialogue;
+	Dialogue* currDialogue;
+	DialogueLine* currLine;
 
 	static DialogueSystem* instance;
 };

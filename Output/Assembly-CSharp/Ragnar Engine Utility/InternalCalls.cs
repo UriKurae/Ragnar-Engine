@@ -63,7 +63,25 @@ namespace RagnarEngine
         public static extern void Log(object logText);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    public class Dialogue
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void LoadDialogueFile(string fileName);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void StartDialogueById(int id);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern string GetDialogueLine();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern string GetDialogueLineAuthor();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void NextLine();
+    }
+
+        [StructLayout(LayoutKind.Sequential)]
     public partial struct mat4x4
     {
         //    |  0   1   2   3

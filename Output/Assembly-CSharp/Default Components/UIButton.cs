@@ -18,7 +18,7 @@ namespace RagnarEngine
         public extern int GetButtonState();
 
         
-        public extern char text
+        public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;

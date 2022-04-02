@@ -61,13 +61,14 @@ int GetButtonState(MonoObject* go)
 
 	return (int)tr->GetState();
 }
-void SetText(MonoObject* go, const char* text)
+void SetText(MonoObject* go, MonoString* text)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
 	//float3 position = ;
 	tr->GetButtonText().textt.clear();
-	tr->GetButtonText().textt = text;
-
+	//tr->GetButtonText().textt = mono_string_to_utf8(text);
+	char* aux = mono_string_to_utf8(text);
+	tr->SetText(aux);
 	
 }
 const char* GetText(MonoObject* go)

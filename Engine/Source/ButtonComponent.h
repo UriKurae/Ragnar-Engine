@@ -23,6 +23,11 @@ public:
 	State GetState() { return state; };
 	inline Text GetButtonText() { return buttonText; };
 	inline char* GetText() { return text; };
+	void SetText(char* newText) 
+	{ 
+		buttonText.setOnlyText(newText);
+		strcpy(text, newText);
+	}
 
 	inline Color GetActualColor() { return actualColor; };
 	inline Color GetTextColor() { return textColor; };

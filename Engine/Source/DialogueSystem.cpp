@@ -22,18 +22,34 @@ void DialogueSystem::ReleaseInstance()
 
 DialogueSystem::DialogueSystem()
 {
+	newDialogueFile = false;
 	createDialogue = false;
+	fileName = "";
 }
 
 DialogueSystem::~DialogueSystem()
 {
+	for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
+	{
+		(*it).dialogue.clear();
+	}
+	dialogues.clear();
 }
 
 void DialogueSystem::OnEditor()
 {
-	ImGui::Begin("Create Dialogue", &createDialogue);
+	ImGui::Begin("Dialogue Editor", &createDialogue);
 
 	ShowDialogueFiles();
+
+	if (newDialogueFile)
+	{
+		char text[16];
+
+		strcpy_s(text, fileName.c_str());
+		ImGui::InputText("Dialogue Name File", text, IM_ARRAYSIZE(text));
+		fileName = text;
+	}
 
 	int counterId = 0;
 	for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
@@ -100,6 +116,9 @@ void DialogueSystem::OnEditor()
 	if (ImGui::Button(ICON_FA_FILE" Save File"))
 	{
 		SaveDialogue();
+		if (newDialogueFile)
+			newDialogueFile = false;
+		Reset();
 	}
 
 	ImGui::End();
@@ -111,12 +130,12 @@ void DialogueSystem::ShowDialogueFiles()
 	std::vector<std::string> files;
 	app->fs->DiscoverFiles(DIALOGUES_FOLDER, files);
 
-	guiName = guiName.substr(0, guiName.find_last_of("."));
+	std::string preview = fileName;
+	if (preview == "")
+		preview = "Select File";
 
-	if (ImGui::BeginCombo(guiName.c_str(), "Select Dialogue To Edit"))
+	if (ImGui::BeginCombo(guiName.c_str(), preview.c_str()))
 	{
-		std::string name;
-
 		if (ImGui::Selectable("New Dialogue File"))
 		{
 			for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
@@ -125,16 +144,11 @@ void DialogueSystem::ShowDialogueFiles()
 			}
 			dialogues.clear();
 
-			//DialogueLine auxLine;
-			//auxLine.line = "";
-			//auxLine.author = "";
-
-			//Dialogue auxDialog;
-			//auxDialog.id = 0;
-			//auxDialog.dialogue.push_back(auxLine);
-
-			//dialogues.push_back(auxDialog);
+			fileName = "";
+			newDialogueFile = true;
 		}
+
+		std::string name;
 
 		for (int i = 0; i < files.size(); ++i)
 		{
@@ -150,6 +164,8 @@ void DialogueSystem::ShowDialogueFiles()
 
 				if (particleFile.ParseFile(path.c_str()) > 0)
 				{
+					fileName = guiName;
+					newDialogueFile = false;
 					LoadDialogue(path);
 				}
 			}
@@ -159,24 +175,18 @@ void DialogueSystem::ShowDialogueFiles()
 	}
 }
 
-void DialogueSystem::LoadDialogue(std::vector<std::string>& lines, std::string path)
-{
-	JsonParsing dialogFile = JsonParsing();
-
-	if (dialogFile.ParseFile(path.c_str()) > 0)
-	{
-		JSON_Array* jsonArray = dialogFile.GetJsonArray(dialogFile.ValueToObject(dialogFile.GetRootValue()), "Dialogues");
-
-
-	}
-}
-
 void DialogueSystem::LoadDialogue(std::string path)
 {
 	JsonParsing dialogFile = JsonParsing();
 
 	if (dialogFile.ParseFile(path.c_str()) > 0)
 	{
+		for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
+		{
+			(*it).dialogue.clear();
+		}
+		dialogues.clear();
+
 		JSON_Array* jsonArray = dialogFile.GetJsonArray(dialogFile.ValueToObject(dialogFile.GetRootValue()), "Dialogues");
 
 		fileName = dialogFile.GetJsonString("Name");
@@ -186,15 +196,8 @@ void DialogueSystem::LoadDialogue(std::string path)
 		{
 			JsonParsing dialogue = dialogFile.GetJsonArrayValue(jsonArray, i);
 
-			int auxId = dialogue.GetJsonNumber("Id");
-
 			Dialogue aux;
-
-			/*for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
-			{
-				if ((*it).id == auxId)
-					
-			}*/
+			aux.id = dialogue.GetJsonNumber("Id");
 
 			JSON_Array* linesArray = dialogue.GetJsonArray(dialogue.ValueToObject(dialogue.GetRootValue()), "Dialogue Lines");
 			
@@ -203,15 +206,15 @@ void DialogueSystem::LoadDialogue(std::string path)
 			{
 				JsonParsing dialogueLine = dialogue.GetJsonArrayValue(linesArray, j);
 
-				DialogueLine auxLine = aux.dialogue[j];
+				DialogueLine auxLine;
 
 				auxLine.author = dialogueLine.GetJsonString("Author");
 				auxLine.line = dialogueLine.GetJsonString("Line");
 
-				aux.dialogue[j] = auxLine;
+				aux.dialogue.push_back(auxLine);
 			}
 
-			dialogues[i] = aux;
+			dialogues.push_back(aux);
 		}
 	}
 }
@@ -262,4 +265,47 @@ void DialogueSystem::SaveDialogue()
 	app->fs->Save(savePath.c_str(), buf, size);
 
 	RELEASE_ARRAY(buf);
+}
+
+void DialogueSystem::Reset()
+{
+	for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
+	{
+		(*it).dialogue.clear();
+	}
+	dialogues.clear();
+}
+
+Dialogue* DialogueSystem::GetDialogueById(int id)
+{
+	for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
+	{
+		if ((*it).id == id)
+		{
+			return it._Ptr;
+		}
+	}
+
+	return nullptr;
+}
+
+void DialogueSystem::StartDialogue()
+{
+	currLine = &currDialogue->dialogue.front();
+}
+
+void DialogueSystem::NextLine()
+{
+	bool found = false;
+	for (std::vector<DialogueLine>::iterator it = currDialogue->dialogue.begin(); it != currDialogue->dialogue.end(); ++it)
+	{
+		if (found)
+		{
+			currLine = &(*it);
+			break;
+		}
+
+		if ((*it).line == currLine->line)
+			found = true;
+	}
 }
