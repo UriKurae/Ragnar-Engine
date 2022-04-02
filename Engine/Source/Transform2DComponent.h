@@ -52,6 +52,6 @@ private:
 	bool firstTime = true;
 	float3 lastPosition;
 	float2 lastScale;
-	int z=0;
-	int w=0;
+	int z;
+	int w;
 };

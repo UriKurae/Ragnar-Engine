@@ -66,8 +66,8 @@ bool ComponentTransform2D::Update(float dt)
 	{
 		lastViewportBounds.w = app->editor->GetGameView()->GetBounds().w;
 		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
-		if(position.x!=0) 
-			position.x += (z - viewport.z)/2;
+
+		position.x += (z - viewport.z)/2;
 		firstTime = false;
 	}
 	
