@@ -27,7 +27,7 @@ TextComponent::TextComponent(GameObject* own)
 		own->CreateComponent(ComponentType::MATERIAL);
 		app->userInterface->UIGameObjects.push_back(own);
 	}	
-
+	app->userInterface->OrderButtons();
 	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	//planeToDraw->own = own;
 }
@@ -54,15 +54,20 @@ void TextComponent::Draw(CameraComponent* gameCam)
 
 void TextComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("Text"))
+	if (ImGui::CollapsingHeader("TextComponent"))
 	{
 		static float multiplier = 1;
 		static float fadeDuration = 0.1f;
-
+		static bool textColorEditable = false;
 		Checkbox(this, "Active", active);
 		ImGui::Text("Text Color"); ImGui::SameLine();
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
-			textToShow.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+			textColorEditable = !textColorEditable;
+
+		if (textColorEditable)
+			ImGui::ColorPicker3("Text Color", &textColor);
+
+		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);

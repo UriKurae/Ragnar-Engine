@@ -28,13 +28,13 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	position = pos;
 	scale = sca;
 
-	vertices.push_back({ -0.5,0.5,-2});
-	vertices.push_back({ -0.5,-0.5,-2 });
-	vertices.push_back({ 0.5,-0.5,-2 });
+	vertices.push_back({ -0.5,0.5,0});
+	vertices.push_back({ -0.5,-0.5,0 });
+	vertices.push_back({ 0.5,-0.5,0 });
 
-	vertices.push_back({ 0.5,-0.5,-2 });
-	vertices.push_back({ 0.5,0.5,-2 });
-	vertices.push_back({ -0.5,0.5,-2 });
+	vertices.push_back({ 0.5,-0.5,0 });
+	vertices.push_back({ 0.5,0.5,0 });
+	vertices.push_back({ -0.5,0.5,0 });
 
 	texCoords.push_back(0);
 	texCoords.push_back(0);
@@ -134,7 +134,8 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	if (theButton)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, 1);
+		//theButton->GetAlpha()
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
 	else if (theSlider) 
 	{
@@ -157,15 +158,15 @@ void MyPlane::DrawPlane2D(Texture* texture)
 			}
 		}
 		
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, theSlider->GetAlpha());
 	}
 	else if (theCheckbox)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, theCheckbox->GetAlpha());
 	}
 	else if (theImage)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
 	}
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
@@ -392,7 +393,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	math::float3 center = math::float3(x, y, 1.0f);
 	model = model.Scale(scl, center);
 	model.SetTranslatePart(center);
-
+	
 	auto p = frustum.ProjectionMatrix();
 	glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
@@ -478,19 +479,27 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
 
 		float3 position = transform2D->GetPosition();
-		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
-		// Whats does this do?
-		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
-
-		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
-		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
-
-		//ImageComponent* image = go->GetComponent<ImageComponent>();
-		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
+		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
+		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
+		if (buttonComp|| checkComp|| sliderComp)
 		{
-			hitObjs.push_back(go);
+			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
+
+			// Whats does this do?
+			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
+			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
+
+			float posYMin = ((viewport.w / 2) + (-(position.y - 15))) - (button->GetButtonHeight() / 2);
+			float posYMax = ((viewport.w / 2) + (-(position.y - 15))) + (button->GetButtonHeight() / 2);
+
+			//ImageComponent* image = go->GetComponent<ImageComponent>();
+			if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+			{
+				hitObjs.push_back(go);
+			}
 		}
 	}
 }
@@ -501,9 +510,9 @@ void ModuleUI::SetFocusedObject()
 	if (hitObjs.size() > 0)
 	{
 		std::vector<float> distance;
-		float nearestDistance = -100000.0f;
+		float nearestDistance = 100000.0f;
 		int nearObj = 0;
-		for (int i = 0; i < hitObjs.size(); ++i)
+		for (int i = 0; i > hitObjs.size(); ++i)
 		{
 			ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
 
@@ -574,7 +583,22 @@ bool ModuleUI::Update(float dt)
 	
 	return true;
 }
+void ModuleUI::OrderButtons() 
+{
+	bool cont = false;
+	while (cont == false) {
+		cont = true;
+		for (int i = 0; i < UIGameObjects.size() - 1; i++) {
+			if (UIGameObjects[i + 1]->GetComponent<ComponentTransform2D>()->GetPosition().z < UIGameObjects[i]->GetComponent<ComponentTransform2D>()->GetPosition().z) {
+				GameObject* aux = UIGameObjects[i + 1];
+				UIGameObjects[i + 1] = UIGameObjects[i];
+				UIGameObjects[i] = aux;
+				cont = false;
+			}
 
+		}
+	}
+}
 void ModuleUI::Draw()
 {
 	for (int a = 0; a < UIGameObjects.size(); a++)

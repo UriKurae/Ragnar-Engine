@@ -133,10 +133,10 @@
                         13.361886978149414
                     ],
                     "Quaternion": [
-                        -0.023094482719898224,
-                        0.69489204883575439,
-                        0.086363524198532104,
-                        0.7135356068611145
+                        0.32010757923126221,
+                        0.60701227188110352,
+                        -0.14153954386711121,
+                        0.71346604824066162
                     ],
                     "RotationEditor": [
                         0,
@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.08711838722229,
+                    "Vertical Fov": 1.0117520093917847,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -10.509864807128906,
@@ -160,7 +160,7 @@
                         13.361886978149414
                     ],
                     "Type": 3,
-                    "Zoom": 24,
+                    "Zoom": 18,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "UUID": 1860226665,
+            "UUID": 1657689093,
             "Parent UUID": 417171234,
             "Name": "Background",
             "Active": true,
@@ -197,11 +197,11 @@
                     "Position": [
                         0,
                         0,
-                        84.5
+                        35
                     ],
                     "Scale": [
-                        60.974998474121094,
-                        36.317935943603516,
+                        5.5555558204650879,
+                        5.5555558204650879,
                         1
                     ],
                     "rotationEuler": [
@@ -209,72 +209,32 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 943,
-                    "buttonHeight": 495.5
-                },
-                {
-                    "Type": 13
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 616
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Path": "Assets\/Resources\/win_lose_background.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
+                    "Type": 13,
+                    "alpha": 1
+                },
+                {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 259259304,
+                    "pointer": 28166552,
                     "type": 4,
                     "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 1337177436,
-            "Parent UUID": 417171234,
-            "Name": "Image",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        62,
-                        90.5
-                    ],
-                    "Scale": [
-                        35.849994659423828,
-                        5.1358695030212402,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 608,
-                    "buttonHeight": 113
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/victory_logo.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 1450299337,
+            "UUID": 499054760,
             "Parent UUID": 417171234,
             "Name": "ButtonMenu",
             "Active": true,
@@ -288,13 +248,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
+                        -445,
                         0,
-                        -103.5,
-                        86.5
+                        36
                     ],
                     "Scale": [
-                        4.9874992370605469,
-                        1.6711955070495605,
+                        11.111111640930176,
+                        1.388888955116272,
                         1
                     ],
                     "rotationEuler": [
@@ -302,12 +262,14 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 196.5,
-                    "buttonHeight": 70.5
+                    "buttonWidth": 200,
+                    "buttonHeight": 25,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 616
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -333,9 +295,58 @@
                     "Type": 12,
                     "buttonText": "Menu",
                     "fontScale": 1,
-                    "textColor.r": 0.81568628549575806,
-                    "textColor.g": 0.81568628549575806,
-                    "textColor.b": 0.81568628549575806
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -32.599998474121094,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 963182707,
+            "Parent UUID": 417171234,
+            "Name": "Image",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        36
+                    ],
+                    "Scale": [
+                        5.5555558204650879,
+                        5.5555558204650879,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 616
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/victory_logo.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
                 }
             ]
         }
