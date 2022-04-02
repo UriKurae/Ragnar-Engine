@@ -225,9 +225,8 @@ bool ModuleRenderer3D::PostUpdate()
 		glEnd();
 		glLineWidth(1.0f);
 	}
+
 	fbo->Bind();
-	//GLuint drawBuffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
-	//glDrawBuffers(2, drawBuffers);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
@@ -239,10 +238,7 @@ bool ModuleRenderer3D::PostUpdate()
 			if ((*it) != objSelected)(*it)->Draw(nullptr);
 		}
 	}
-	else
-	{
-		app->sceneManager->GetCurrentScene()->Draw();
-	}
+	else app->sceneManager->GetCurrentScene()->Draw();
 
 	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
 	{
@@ -286,15 +282,11 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
-	//app->sceneManager->GetCurrentScene()->Draw();
 
-	//glEnable(GL_BLEND);
-	//mainCameraFbo->Unbind();
 
-	//mainCameraFbo->Bind();
-	//GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
-	//glDrawBuffers(2, drawBuffers);
-	// DRAW UI
+#ifndef DIST 
+	app->userInterface->Draw();
+#endif
 
 	mainCameraFbo->Unbind();
 
@@ -338,20 +330,20 @@ bool ModuleRenderer3D::PostUpdate()
 	app->editor->Draw(fbo, mainCameraFbo);
 #endif
 
-	glEnable(GL_BLEND);
-
-	//mainCameraFbo->Bind();
-	app->userInterface->Draw();
-	//mainCameraFbo->Unbind();
+#ifdef DIST
 	
+	glEnable(GL_BLEND);
+	app->userInterface->Draw();
 	glDisable(GL_BLEND);
-
-
+	
 	glEnable(GL_DEPTH_TEST);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+#endif
+
 	SDL_GL_SwapWindow(app->window->window);
 	
-	glDisable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glDisable(GL_BLEND);
 
 	return true;
 }
