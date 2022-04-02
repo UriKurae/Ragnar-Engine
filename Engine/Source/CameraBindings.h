@@ -54,7 +54,7 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	else
 	{
 		triangleMap.clear();
-		picking.b.y = 0.2f;
+		picking.b.y -= 0.5f;
 		app->camera->ThrowRayCastOnlyOBB(gameObjects, picking, triangleMap, hit);
 		if (!triangleMap.empty() && (*triangleMap.begin()).second->tag == tagName)
 			return true;
