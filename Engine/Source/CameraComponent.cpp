@@ -35,6 +35,8 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	//camera.SetPos(math::vec(0, 0, 0));
 
 	controllerTrans = owner->GetParent()->GetComponent<TransformComponent>();
+	transform->SetPosition(float3(-10.0f, 20.0f, -10.0f));
+	transform->SetRotation(Quat::FromEulerXYZ(50.0f, 0, 0));
 
 	srand(time(NULL));
 	CompileBuffers();
@@ -133,6 +135,7 @@ void CameraComponent::OnEditorMovement()
 	}
 
 	ImGui::DragFloat("verticalAngle", &verticalAngle, 0.01f, 0.0f);
+	ImGui::DragFloat("horizontalAngle", &horizontalAngle, 0.01f, 0.0f);
 	ImGui::Checkbox("lockVerticalAngle", &lockVerticalAngle);
 
 	ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f);
@@ -160,7 +163,8 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
-	camera.SetPos(transform->GetGlobalTransform().TranslatePart());
+	camera.SetFrame(transform->GetGlobalTransform().TranslatePart(), transform->GetGlobalTransform().Col3(2), transform->GetGlobalTransform().Col3(1));
+
 	if (app->camera->updateGameView)
 	{
 		//TODO: Make the click work properly
@@ -234,22 +238,17 @@ bool CameraComponent::Update(float dt)
 		camera.SetFront(newFront);
 	}
 
-	bool mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
-	float horizontalDrag = app->input->GetMouseXMotion();
-
 	// -------------MOVEMENT---------------
-	UpdateMovement(mouseDragRight, horizontalDrag);
-	//CalculateOffsetPos();
+	UpdateMovement();
+	CalculateOffsetPos();
 
 	
 
 	return true;
 }
 
-void CameraComponent::UpdateMovement(bool mouseDragRight, float horizontalDrag)
+void CameraComponent::UpdateMovement()
 {
-	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_LEFT) == KeyState::KEY_REPEAT) || (mouseDragRight && horizontalDrag > 1)) horizontalAngle -= rotationSpeed;
-	if ((arrowRot && app->input->GetKey(SDL_SCANCODE_RIGHT) == KeyState::KEY_REPEAT) || (mouseDragRight && horizontalDrag < -1)) horizontalAngle += rotationSpeed;
 	if (!lockVerticalAngle)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_REPEAT) verticalAngle -= rotationSpeed;
@@ -261,44 +260,62 @@ void CameraComponent::UpdateMovement(bool mouseDragRight, float horizontalDrag)
 	{
 		float3 pos = controllerTrans->GetPosition();
 		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
+		float horizontalDrag = app->input->GetMouseXMotion();
 		float verticalDrag = app->input->GetMouseYMotion();
 
-		if (mouseDragMid && horizontalDrag)
+		if (mouseDragMid)
 		{
-			pos.x += movementSpeed * horizontalDrag / zoom / 2 * sin(DEGTORAD * (horizontalAngle + 90));
-			pos.z += movementSpeed * horizontalDrag / zoom / 2 * cos(DEGTORAD * (horizontalAngle + 90));
+			if (horizontalDrag)
+			{
+				pos.x += movementSpeed * horizontalDrag / zoom / 2 * sin(DEGTORAD * (horizontalAngle + 90));
+				pos.z += movementSpeed * horizontalDrag / zoom / 2 * cos(DEGTORAD * (horizontalAngle + 90));
+			}
+			if (verticalDrag)
+			{
+				pos.x -= movementSpeed * -verticalDrag / zoom * sin(DEGTORAD * horizontalAngle);
+				pos.z -= movementSpeed * -verticalDrag / zoom * cos(DEGTORAD * horizontalAngle);
+			}
+
+			controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
+			controllerTrans->ForceUpdateTransform();
 		}
-		if (mouseDragMid && verticalDrag)
-		{
-			pos.x -= movementSpeed * -verticalDrag / zoom * sin(DEGTORAD * horizontalAngle);
-			pos.z -= movementSpeed * -verticalDrag / zoom * cos(DEGTORAD * horizontalAngle);
-		}
-		//controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
-		controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
 	}
 }
 
 void CameraComponent::CalculateOffsetPos()
 {
-	float3 targetPos = float3(0, 0, 0);
-	if (freeMovement) targetPos = defTarget->GetComponent<TransformComponent>()->GetPosition();
-	else if (target) targetPos = target->GetComponent<TransformComponent>()->GetPosition();
-	float3 newPos = targetPos;
+	bool mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
+	float horizontalDrag = app->input->GetMouseXMotion();
+	if (mouseDragRight && horizontalDrag > 1)
+	{
+		horizontalAngle -= rotationSpeed;
+		if (horizontalAngle < 0) horizontalAngle += 360;
+		controllerTrans->SetRotation(controllerTrans->GetRotation().RotateY(DEGTORAD * horizontalAngle));
+		controllerTrans->ForceUpdateTransform();
+	}
+	if (mouseDragRight && horizontalDrag < -1)
+	{
+		horizontalAngle += rotationSpeed;
+		if (horizontalAngle > 360) horizontalAngle -= 360;
+		controllerTrans->SetRotation(controllerTrans->GetRotation().RotateY(DEGTORAD * horizontalAngle));
+		controllerTrans->ForceUpdateTransform();
+	}
 
-	// offset
-	newPos.z += radius * sin(DEGTORAD * verticalAngle) * cos(DEGTORAD * horizontalAngle);
-	newPos.x += radius * sin(DEGTORAD * verticalAngle) * sin(DEGTORAD * horizontalAngle);
-	newPos.y += radius * cos(DEGTORAD * verticalAngle);
+	/*if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT)
+	{
+		horizontalAngle -= rotationSpeed;
+		if (horizontalAngle < 0) horizontalAngle += 360;
+		controllerTrans->SetRotation(controllerTrans->GetRotation().RotateY(DEGTORAD * horizontalAngle));
+		controllerTrans->ForceUpdateTransform();
+	}
 
-	float3 directionFrustum = targetPos - newPos;
-	directionFrustum.Normalize();
-
-	//float3x3 lookAt = float3x3::LookAt(camera.Front(), directionFrustum, camera.Up(), float3(0.0f, 1.0f, 0.0f));
-	//camera.SetFront(lookAt.MulDir(camera.Front()).Normalized());
-	//camera.SetUp(lookAt.MulDir(camera.Up()).Normalized());
-
-	//transform->SetRotation(lookAt.ToQuat());
-	//transform->SetPosition(newPos);
+	if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT)
+	{
+		horizontalAngle += rotationSpeed;
+		if (horizontalAngle > 360) horizontalAngle -= 360;
+		controllerTrans->SetRotation(controllerTrans->GetRotation().RotateY(DEGTORAD * horizontalAngle));
+		controllerTrans->ForceUpdateTransform();
+	}*/
 }
 
 void CameraComponent::Draw(CameraComponent* gameCam)
@@ -428,6 +445,8 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	shakeStrength = node.GetJsonNumber("Shake Strength");
 	shakeDuration = node.GetJsonNumber("Shake Duration");
 	smooth = node.GetJsonNumber("Shake Smooth");
+
+	SetPlanes();
 
 	return true;
 }

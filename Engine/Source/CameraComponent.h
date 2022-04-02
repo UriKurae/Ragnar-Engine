@@ -14,7 +14,7 @@ public:
 
 	bool Update(float dt) override;
 	void CalculateOffsetPos();
-	void UpdateMovement(bool mouseDragRight, float horizontalDrag);
+	void UpdateMovement();
 
 	void Draw(CameraComponent* gameCam = nullptr) override;
 
@@ -88,7 +88,7 @@ private:
 	float verticalAngle = -40.0f;
 	float rotationSpeed = 0.5f;
 	float radius = 20.0f;
-	float horizontalAngle = 0;
+	float horizontalAngle = 0.0f;
 	
 	// Controls
 	bool arrowRot = false;
