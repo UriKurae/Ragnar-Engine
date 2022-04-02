@@ -352,6 +352,30 @@ void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 	gameObject->active = value;
 }
+MonoObject* GetSizeAABB(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetAABB().Size());
+}
+MonoObject* GetMinAABB(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetAABB().minPoint);
+}
+MonoObject* GetMaxAABB(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetAABB().maxPoint);
+}
+void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	float3 minPoint = app->moduleMono->UnboxVector(min);
+	float3 maxPoint = app->moduleMono->UnboxVector(max);
+
+	OBB newObb = AABB(minPoint, maxPoint).ToOBB();
+	gameObject->SetAABB(newObb);
+}
 // GameObject =======================
 
 // UI ===============================

@@ -24,9 +24,6 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
     sizeAABB = { 10,10,10 };
     offsetAABB = { 0,0,0 };
 
-    if (own->GetComponent<MeshComponent>() == nullptr)
-        app->sceneManager->GetCurrentScene()->GetQuadtree().Insert(own);
-
     if (own->GetComponent<BillboardParticleComponent>() == nullptr)
         own->CreateComponent(ComponentType::BILLBOARD);
 }
