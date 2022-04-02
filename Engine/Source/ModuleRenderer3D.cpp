@@ -288,10 +288,13 @@ bool ModuleRenderer3D::PostUpdate()
 	}
 	//app->sceneManager->GetCurrentScene()->Draw();
 
-	glEnable(GL_BLEND);
+	//glEnable(GL_BLEND);
+	//mainCameraFbo->Unbind();
 
+	//mainCameraFbo->Bind();
+	//GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
+	//glDrawBuffers(2, drawBuffers);
 	// DRAW UI
-	app->userInterface->Draw();
 
 	mainCameraFbo->Unbind();
 
@@ -330,12 +333,21 @@ bool ModuleRenderer3D::PostUpdate()
 	distIbo->Unbind();
 	distVao->Unbind();
 	postProcessingShader->Unbind();
-	glEnable(GL_DEPTH_TEST);
 
 #else
 	app->editor->Draw(fbo, mainCameraFbo);
 #endif
 
+	glEnable(GL_BLEND);
+
+	//mainCameraFbo->Bind();
+	app->userInterface->Draw();
+	//mainCameraFbo->Unbind();
+	
+	glDisable(GL_BLEND);
+
+
+	glEnable(GL_DEPTH_TEST);
 	SDL_GL_SwapWindow(app->window->window);
 	
 	glDisable(GL_BLEND);

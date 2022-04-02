@@ -47,15 +47,18 @@ void main()
 			vec4 currentPixelDepth = texture(depthTexture, texCoord);
 			vec4 currentPixelNormal = texture(normalTexture, texCoord);
 			
-			maxDepth = max(maxDepth, abs(currentPixelDepth.y - realPixelDepth.y));
-			maxNormal = max(maxNormal, abs(currentPixelNormal.y - realPixelNormal.y));
+			//maxDepth = length(currentPixelDepth - realPixelDepth);
+			maxDepth = max(maxDepth, length(currentPixelDepth - realPixelDepth));
+			//maxNormal = max(maxNormal, abs(currentPixelNormal.y - realPixelNormal.y));
+			maxNormal = max(maxNormal, length(currentPixelNormal - realPixelNormal));
 		}
 	}
 
 	vec4 result = texture(colorTexture, vTexCoords);
-	float threshold = 0.1f;
+	float normalThreshold = 0.4f;
+	float depthThreshold = 0.01f;
 	
-	if (maxNormal > threshold)
+	if (maxNormal > normalThreshold || maxDepth > depthThreshold)
 		result = vec4(0, 0, 0, 1);
 
 	fragColor = result;
