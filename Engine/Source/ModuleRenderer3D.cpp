@@ -282,11 +282,11 @@ bool ModuleRenderer3D::PostUpdate()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	// TODO: To check if game cam works, uncomment the for loop, otherwise use the draw of the sceneManager
-	//for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-	//{
-	//	(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
-	//}
-	app->sceneManager->GetCurrentScene()->Draw();
+	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+	{
+		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+	}
+	//app->sceneManager->GetCurrentScene()->Draw();
 
 	glEnable(GL_BLEND);
 
@@ -296,7 +296,7 @@ bool ModuleRenderer3D::PostUpdate()
 	mainCameraFbo->Unbind();
 
 #ifdef DIST
-	
+	//app->camera->updateGameView = true;
 	// Inside each function there is a comprobation so it does not get resized each frame
 	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
@@ -321,10 +321,6 @@ bool ModuleRenderer3D::PostUpdate()
 	glBindTexture(GL_TEXTURE_2D, mainCameraFbo->GetDepthId());
 	GLuint textLoc3 = glGetUniformLocation(postProcessingShader->GetId(), "depthTexture");
 	glUniform1i(textLoc3, 2);
-
-	Frustum* f = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
-	float2 nearFar = { f->nearPlaneDistance, f->farPlaneDistance };
-	postProcessingShader->SetUnifromVec2f("nearFar", nearFar);
 
 	distVao->Bind();
 	distIbo->Bind();

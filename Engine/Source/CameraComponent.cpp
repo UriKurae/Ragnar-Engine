@@ -157,10 +157,18 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
+
+	float4 size = float4::zero;
+#ifndef DIST
+	size = app->editor->GetGameView()->GetBounds();
+#else
+	size = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+
 	if (app->camera->updateGameView)
 	{
 		//TODO: Make the click work properly
-		float4 size = app->editor->GetGameView()->GetBounds();
+
 		//	DEBUG_LOG("SIZE X %f, SIZE Y Y %f", size.x, size.y);
 		float2 pos(app->input->GetMouseX(), app->input->GetMouseY());
 		if (app->editor->GetGameView()->GetState() && pos.x > size.x && pos.x < size.x + size.z && pos.y > size.y && pos.y < size.y + size.w)
@@ -190,8 +198,8 @@ bool CameraComponent::Update(float dt)
 		targetUID = 0;
 	}
 
-	float4 viewport = app->editor->GetGameView()->GetBounds();
-	camera.SetOrthographic(viewport.z / zoom, viewport.w / zoom);
+	//float4 viewport = app->editor->GetGameView()->GetBounds();
+	camera.SetOrthographic(size.z / zoom, size.w / zoom);
 	zoom = Clamp(zoom + app->input->GetMouseZ(), zoomMin, zoomMax);
 
 	float z = app->input->GetMouseZ();

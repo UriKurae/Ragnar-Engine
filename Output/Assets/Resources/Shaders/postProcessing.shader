@@ -25,8 +25,6 @@ uniform sampler2D colorTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D depthTexture;
 
-uniform vec2 nearFar;
-
 void main()
 {
 	vec2 texCoord = vec2(0);
