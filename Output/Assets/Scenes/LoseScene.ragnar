@@ -133,10 +133,10 @@
                         14.100016593933105
                     ],
                     "Quaternion": [
-                        -0.30002456903457642,
-                        0.65696793794631958,
-                        -0.28076925873756409,
-                        0.63209736347198486
+                        0.055457059293985367,
+                        0.6042906641960144,
+                        -0.48200556635856628,
+                        0.63200312852859497
                     ],
                     "RotationEditor": [
                         0,
@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.08711838722229,
+                    "Vertical Fov": 1.0394155979156494,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -2.239762544631958,
@@ -160,7 +160,7 @@
                         14.100016593933105
                     ],
                     "Type": 3,
-                    "Zoom": 70,
+                    "Zoom": 100,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "UUID": 792537890,
+            "UUID": 2001316928,
             "Parent UUID": 417171234,
             "Name": "Background",
             "Active": true,
@@ -197,11 +197,11 @@
                     "Position": [
                         0,
                         0,
-                        84.5
+                        35
                     ],
                     "Scale": [
-                        20.571428298950195,
-                        10.271738052368164,
+                        1,
+                        1,
                         1
                     ],
                     "rotationEuler": [
@@ -209,29 +209,103 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 930,
-                    "buttonHeight": 417.5
-                },
-                {
-                    "Type": 13
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1150,
+                    "lastButtonHeight": 658
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Path": "Assets\/Resources\/win_lose_background.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
+                    "Type": 13,
+                    "alpha": 1
+                },
+                {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 274939128,
+                    "pointer": 37784248,
                     "type": 4,
                     "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 407713614,
+            "UUID": 728783742,
+            "Parent UUID": 417171234,
+            "Name": "ButtonRetry",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -462.5,
+                        -35,
+                        36
+                    ],
+                    "Scale": [
+                        1.994999885559082,
+                        0.32999998331069946,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 199.5,
+                    "buttonHeight": 33,
+                    "lastButtonWidth": 1150,
+                    "lastButtonHeight": 658
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/bakeHouse.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Retry",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -20.799999237060547,
+                    "textPositionY": -4.1999998092651367,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1227373047,
             "Parent UUID": 417171234,
             "Name": "ButtonMenu",
             "Active": true,
@@ -245,13 +319,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        50,
-                        -103.5,
-                        87.5
+                        -462.5,
+                        25.5,
+                        36
                     ],
                     "Scale": [
-                        1.529999852180481,
-                        0.55900615453720093,
+                        2,
+                        0.32999998331069946,
                         1
                     ],
                     "rotationEuler": [
@@ -259,12 +333,14 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 189.5,
-                    "buttonHeight": 70
+                    "buttonWidth": 200,
+                    "buttonHeight": 33,
+                    "lastButtonWidth": 1150,
+                    "lastButtonHeight": 658
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -290,14 +366,17 @@
                     "Type": 12,
                     "buttonText": "Menu",
                     "fontScale": 1,
-                    "textColor.r": 0.81746029853820801,
-                    "textColor.g": 0.81746029853820801,
-                    "textColor.b": 0.81746029853820801
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -22,
+                    "textPositionY": -3.5999999046325684,
+                    "alpha": 1
                 }
             ]
         },
         {
-            "UUID": 2128208653,
+            "UUID": 213403760,
             "Parent UUID": 417171234,
             "Name": "Image",
             "Active": true,
@@ -312,12 +391,12 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        62.5,
-                        89.5
+                        0,
+                        36
                     ],
                     "Scale": [
-                        10.50428581237793,
-                        1.8027949333190918,
+                        1,
+                        1,
                         1
                     ],
                     "rotationEuler": [
@@ -325,83 +404,20 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 538.5,
-                    "buttonHeight": 114.5
-                },
-                {
-                    "Type": 13
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1150,
+                    "lastButtonHeight": 658
                 },
                 {
                     "Type": 2,
                     "Path": "Assets\/Resources\/UI\/defeat_logo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 341861695,
-            "Parent UUID": 417171234,
-            "Name": "ButtonRetry",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -50,
-                        -103.5,
-                        85
-                    ],
-                    "Scale": [
-                        1.9799998998641968,
-                        0.55900615453720093,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 207,
-                    "buttonHeight": 70
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Retry",
-                    "fontScale": 1,
-                    "textColor.r": 0.81568628549575806,
-                    "textColor.g": 0.81568628549575806,
-                    "textColor.b": 0.81568628549575806
+                    "Type": 13,
+                    "alpha": 1
                 }
             ]
         }
