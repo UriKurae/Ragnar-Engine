@@ -42,6 +42,11 @@ namespace RagnarEngine
         public static extern Vector3 GetRegionGame();
     }
 
+    public class RayCast
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool HitToTag(Vector3 initPos, Vector3 endPos, object tag);
+    }
     public class Input
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

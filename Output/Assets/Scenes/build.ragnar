@@ -133,8 +133,8 @@
                         84
                     ],
                     "Scale": [
-                        0.66666662693023682,
-                        0.83333331346511841,
+                        1.6363635063171387,
+                        2.0454545021057129,
                         1
                     ],
                     "rotationEuler": [
@@ -199,8 +199,8 @@
                         84
                     ],
                     "Scale": [
-                        0.71666663885116577,
-                        0.57971012592315674,
+                        1.7590909004211426,
+                        1.4229248762130737,
                         1
                     ],
                     "rotationEuler": [
@@ -265,8 +265,8 @@
                         83.5
                     ],
                     "Scale": [
-                        7.0333333015441895,
-                        3.1340579986572266,
+                        17.263637542724609,
+                        7.69268798828125,
                         1
                     ],
                     "rotationEuler": [
@@ -308,8 +308,8 @@
                         83.5
                     ],
                     "Scale": [
-                        9.1166667938232422,
-                        1.9202898740768433,
+                        22.377273559570312,
+                        4.7134389877319336,
                         1
                     ],
                     "rotationEuler": [
@@ -389,8 +389,8 @@
                         84
                     ],
                     "Scale": [
-                        33.75,
-                        17.540493011474609,
+                        82.840911865234375,
+                        43.053936004638672,
                         1
                     ],
                     "rotationEuler": [
@@ -413,7 +413,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 32933072,
+                    "pointer": 127432200,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -439,8 +439,8 @@
                         88.199996948242188
                     ],
                     "Scale": [
-                        12.049999237060547,
-                        4.2572464942932129,
+                        29.577272415161133,
+                        10.449604988098145,
                         1
                     ],
                     "rotationEuler": [
@@ -482,8 +482,8 @@
                         90
                     ],
                     "Scale": [
-                        5.6666665077209473,
-                        0.48913043737411499,
+                        13.909090995788574,
+                        1.2005929946899414,
                         1
                     ],
                     "rotationEuler": [
@@ -548,8 +548,8 @@
                         90
                     ],
                     "Scale": [
-                        5.6666665077209473,
-                        0.48913043737411499,
+                        13.909090995788574,
+                        1.2005929946899414,
                         1
                     ],
                     "rotationEuler": [
@@ -614,8 +614,8 @@
                         90
                     ],
                     "Scale": [
-                        5.6666665077209473,
-                        0.48913043737411499,
+                        13.909090995788574,
+                        1.2005929946899414,
                         1
                     ],
                     "rotationEuler": [
@@ -713,15 +713,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        10.005281448364258,
+                        -1.6136534214019775,
                         11.183857917785645,
-                        4.9062695503234863
+                        -18.50018310546875
                     ],
                     "Quaternion": [
-                        -0.081114888191223145,
-                        -0.72731471061706543,
-                        -0.0051992773078382015,
-                        0.68147391080856323
+                        0.45147177577018738,
+                        0.22924865782260895,
+                        0.084840364754199982,
+                        0.85814940929412842
                     ],
                     "RotationEditor": [
                         0,
@@ -740,12 +740,12 @@
                     "Vertical Fov": 1.0349963903427124,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        10.005281448364258,
+                        -1.6136534214019775,
                         11.183857917785645,
-                        4.9062695503234863
+                        -18.50018310546875
                     ],
                     "Type": 3,
-                    "Zoom": 54,
+                    "Zoom": 22,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -757,7 +757,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 2,
                     "Radius": 20,
-                    "Horizontal Angle": -835.60028076171875,
+                    "Horizontal Angle": -731.60028076171875,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -770,7 +770,7 @@
             "Parent UUID": 417171234,
             "Name": "Enemy",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Enemy.rgprefab",
             "tag": "Untagged",
@@ -863,7 +863,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 32933992,
+                    "pointer": 127432568,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -875,7 +875,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 32933440,
+                    "pointer": 127433120,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -6571,7 +6571,7 @@
             "Parent UUID": 417171234,
             "Name": "Player",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Player.rgprefab",
             "tag": "Player",
@@ -6581,9 +6581,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        -0.80000001192092896,
-                        0
+                        5.7251930236816406,
+                        -0.79999983310699463,
+                        2.4606697559356689
                     ],
                     "Quaternion": [
                         0,
@@ -6689,7 +6689,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 361358016,
+                    "pointer": 345658744,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -6699,7 +6699,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 377244640,
+                    "pointer": 345655248,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -7046,6 +7046,104 @@
                             ]
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "UUID": 743388070,
+            "Parent UUID": 417171234,
+            "Name": "Cube",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        7.2611141204833984,
+                        0.25497478246688843,
+                        7.0934162139892578
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        4.3838014602661133,
+                        2.4738798141479492,
+                        0.65591078996658325
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 49533757,
+            "Parent UUID": 417171234,
+            "Name": "Cube",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        3.534466028213501,
+                        -0.24455651640892029,
+                        11.598676681518555
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.22752480208873749,
+                        0,
+                        0.97377228736877441
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0.7426447868347168,
+                        -0
+                    ],
+                    "Scale": [
+                        2.591153621673584,
+                        1.4612555503845215,
+                        0.58594596385955811
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
                 }
             ]
         }
