@@ -20,12 +20,22 @@ public class EnemyInteraction : RagnarComponent
     }
     public void Update()
     {
+        PerceptionCone(8);
         Shoot();
         if (pendingToDelete)
         {
             InternalCalls.Destroy(gameObject);
             SceneManager.LoadScene("WinScene");
         }
+    }
+
+    private void PerceptionCone(int radius)
+    {
+        Vector3 enemyPos = gameObject.transform.globalPosition;
+        Vector3 enemyForward = gameObject.transform.forward;
+        Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y, enemyPos.z + enemyForward.z * offset.z);
+
+        RayCast.PerceptionCone(initPos, enemyForward, 60, 10, radius);
     }
 
     private void Shoot()
@@ -67,7 +77,7 @@ public class EnemyInteraction : RagnarComponent
         if (distance.magnitude < radius)
         {
             float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
-            Vector3 initPos = new Vector3(enemyPos.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z* offset.z);
+            Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z* offset.z);
             Vector3 endPos = initPos + distance.normalized * radius;
             endPos.y = initPos.y;
 

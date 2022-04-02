@@ -173,7 +173,7 @@ void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::L
 							{
 								triangleMap[distance] = (*it);
 								if ((*triangleMap.begin()).second == (*it))
-									hitPoint = hitP;
+									hitPoint = picking.a + picking.Dir() * distance * picking.Length();
 								DEBUG_LOG("Intersected with %s", (*it)->GetName());
 								break;
 							}

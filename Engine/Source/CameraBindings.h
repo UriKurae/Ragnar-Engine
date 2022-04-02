@@ -62,3 +62,40 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 
 	return false;
 }
+
+void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius)
+{
+	float3 pointA = app->moduleMono->UnboxVector(initPos);
+	float3 forward = app->moduleMono->UnboxVector(_forward);
+	float3 forwardAux = forward;
+	float angle = _angle * DEGTORAD;
+
+	forward = forward * float3x3::RotateY((360-(_angle/2)) * DEGTORAD);
+	std::vector<float3> vertex;
+	vertex.reserve(rays + 1);
+
+	std::stack<QuadtreeNode*> nodes;
+	std::vector<GameObject*> gameObjects;
+	std::map<float, GameObject*> triangleMap;
+	float3 arrayPos[] = { forward * radius, forwardAux * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		LineSegment ray(pointA, pointA + arrayPos[i]);
+		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, ray);
+		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
+		std::stack<QuadtreeNode*>().swap(nodes);
+	}
+
+	float3 hit = float3::zero;
+	for (int i = 0; i < rays; i++)
+	{
+		LineSegment ray(pointA, pointA + (forward * float3x3::RotateY(angle/rays * i) * radius));
+		
+		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
+		if (hit.Equals(float3::zero)) hit = ray.b;
+		vertex.push_back(hit);
+		triangleMap.clear();
+		hit = float3::zero;
+	}
+}
