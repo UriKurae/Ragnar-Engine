@@ -35,24 +35,32 @@ void main()
 	float minDistance = 0.5;
 	float maxDistance = 2.0;
 
-	float mx = 0;
+	vec4 realPixelDepth = texture(depthTexture, vTexCoords);
+	vec4 realPixelNormal = texture(normalTexture, vTexCoords);
+
+	float maxDepth = 0;
+	float maxNormal = 0;
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
 			// Get the current surrounding pixel texCoords
 			texCoord = (gl_FragCoord.xy + vec2(i, j)) / texSize;
-			vec4 currentPixelNormal = texture(normalTexture, texCoord);
 			vec4 currentPixelDepth = texture(depthTexture, texCoord);
+			vec4 currentPixelNormal = texture(normalTexture, texCoord);
 			
-			// Not sure what to put in here
-			//mx = max(mx, abs(currentPixelDepth.y - currentPixelNormal.y));
+			maxDepth = max(maxDepth, abs(currentPixelDepth.y - realPixelDepth.y));
+			maxNormal = max(maxNormal, abs(currentPixelNormal.y - realPixelNormal.y));
 		}
 	}
 
-	float diff = smoothstep(minDistance, maxDistance, mx);
+	vec4 result = texture(colorTexture, vTexCoords);
+	float threshold = 0.1f;
+	
+	if (maxNormal > threshold)
+		result = vec4(0, 0, 0, 1);
 
-	fragColor = texture(colorTexture, vTexCoords) * vec4(diff, diff, diff, 1);
+	fragColor = result;
 }
 
 
