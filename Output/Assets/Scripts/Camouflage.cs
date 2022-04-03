@@ -1,0 +1,19 @@
+using System;
+using RagnarEngine;
+
+public class Camouflage : RagnarComponent
+{
+	public void Start()
+	{
+
+	}
+	public void Update()
+	{
+		ChooseMesh();
+	}
+	private void ChooseMesh()
+    {
+		//this.gameObject.GetComponent<Mesh>
+    }
+
+}

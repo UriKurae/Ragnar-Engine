@@ -6,7 +6,7 @@ public class PlayerManager : RagnarComponent
     public GameObject[] players;
     int characterSelected = 0;
 
-    public Characters[] characters = new Characters[1];
+    public Characters[] characters = new Characters[3];
     public Characters playableCharacter;
 
     public void Start()
@@ -43,6 +43,54 @@ public class PlayerManager : RagnarComponent
         };
 
         // Player 2
+        characters[1] = new Characters
+        {
+            name = "Chani",
+            prefabPath = "Assets/Prefabs/Player_2.rgprefab",
+            state = State.NONE,
+            abilities = new Abilities[2]
+        };
+        characters[1].abilities[0] = new Abilities
+        {
+            name = "Backstab",
+            prefabPath = "Assets/Prefabs/Knife.rgprefab",
+            range = 5,
+            charges = -1,
+            cooldown = 0f
+        };
+        characters[1].abilities[1] = new Abilities
+        {
+            name = "Camouflage",
+            prefabPath = "Assets/Prefabs/Rock.rgprefab",
+            range = 50,
+            charges = -1,
+            cooldown = 30f
+        };
+
+        // Player 3
+        characters[2] = new Characters
+        {
+            name = "Stilgar",
+            prefabPath = "Assets/Prefabs/Player_3.rgprefab",
+            state = State.NONE,
+            abilities = new Abilities[2]
+        };
+        characters[2].abilities[0] = new Abilities
+        {
+            name = "Sword Slash",
+            prefabPath = "Assets/Prefabs/Knife.rgprefab",
+            range = 5,
+            charges = -1,
+            cooldown = 0f
+        };
+        characters[2].abilities[1] = new Abilities
+        {
+            name = "Stunner",
+            prefabPath = "Assets/Prefabs/Rock.rgprefab",
+            range = 50,
+            charges = 4,
+            cooldown = 5f
+        };
 
         foreach (Characters c in characters)
         {
@@ -179,4 +227,5 @@ public class PlayerManager : RagnarComponent
         players[id].GetComponent<Player>().SetControled(true);
     }
 }
+
 
