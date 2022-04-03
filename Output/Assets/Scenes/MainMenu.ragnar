@@ -321,7 +321,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
