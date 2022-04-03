@@ -87,7 +87,7 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        if (Input.GetKey(KeyCode.Q) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
+        if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
         {
             if (!playableCharacter.abilities[0].onCooldown)
             {
@@ -98,7 +98,7 @@ public class PlayerManager : RagnarComponent
                 Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[0].cooldown - playableCharacter.abilities[0].counter) + "seconds left to use it again!");
             }
         }
-        if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_2)
+        if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_2)
         {
             if (!playableCharacter.abilities[1].onCooldown)
             {
