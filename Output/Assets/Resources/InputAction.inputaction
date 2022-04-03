@@ -7,9 +7,26 @@
                     "Name": "Move",
                     "Bindings": [
                         {
-                            "Path": 9
+                            "Path": 22
                         }
                     ]
+                },
+                {
+                    "Name": "Move",
+                    "Bindings": [
+                        {
+                            "Path": 8
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "Player",
+            "Actions": [
+                {
+                    "Name": "Move",
+                    "Bindings": []
                 }
             ]
         }

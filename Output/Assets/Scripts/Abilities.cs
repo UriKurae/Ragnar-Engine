@@ -16,12 +16,12 @@ public class Abilities : RagnarComponent
     {
         ///////// ABILITIES /////////
         // Rock Throw
-        if ((Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || SkillNade.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Rock") == null)
-        {
-            //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("ThrowRock");
-            InternalCalls.InstancePrefab("Assets/Prefabs/Rock.rgprefab");
-        }
+        //if ((Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || SkillNade.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Rock") == null)
+        //{
+        //    //TODO_AUDIO
+        //    gameObject.GetComponent<AudioSource>().PlayClip("ThrowRock");
+        //    InternalCalls.InstancePrefab("Assets/Prefabs/Rock.rgprefab");
+        //}
 
         // Knife Throw
         if ((Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || SkillKnife.GetComponent<UIButton>().GetButtonState() == 3) && GameObject.Find("Knife") == null)
@@ -31,5 +31,15 @@ public class Abilities : RagnarComponent
             InternalCalls.InstancePrefab("Assets/Prefabs/Knife.rgprefab");
         }
         /////////////////////////////
+    }
+
+    public void Rock()
+    {
+        if (SkillNade.GetComponent<UIButton>().GetButtonState() == 3 && GameObject.Find("Rock") == null)
+        {
+            //TODO_AUDIO
+            gameObject.GetComponent<AudioSource>().PlayClip("ThrowRock");
+            InternalCalls.InstancePrefab("Assets/Prefabs/Rock.rgprefab");
+        }
     }
 }
