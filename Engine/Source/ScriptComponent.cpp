@@ -11,6 +11,8 @@
 #include <mono/metadata/debug-helpers.h>
 #include <mono/metadata/object-forward.h>
 
+#include "Profiling.h"
+
 ScriptComponent* ScriptComponent::runningScript = nullptr;
 ScriptComponent::ScriptComponent(GameObject* own, const char* scriptName) : callStart(true)
 {
@@ -48,6 +50,8 @@ ScriptComponent::~ScriptComponent()
 
 bool ScriptComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Script Update");
+
 	if (app->sceneManager->GetGameState() != GameState::PLAYING 
 		|| updateMethod == nullptr || startMethod == nullptr)
 	{

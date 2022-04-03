@@ -49,6 +49,8 @@ bool ModuleCamera3D::Start()
 
 bool ModuleCamera3D::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Module Camera Update");
+
 	if (updateViewPort)
 	{
 		// Auxiliar variables

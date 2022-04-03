@@ -10,6 +10,8 @@
 #include "Transform2DComponent.h"
 #include "GL/glew.h"
 
+#include "Profiling.h"
+
 ButtonComponent::ButtonComponent(GameObject* own)
 {
 	type = ComponentType::UI_BUTTON;
@@ -39,6 +41,8 @@ ButtonComponent::~ButtonComponent()
 
 bool ButtonComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Button Update");
+
 	buttonText.SetOnlyPosition(float2((GetParentPosition().x / 1.07) + 5, (GetParentPosition().y / 1.07) + 10));
 
 	if (!active)

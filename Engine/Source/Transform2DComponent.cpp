@@ -13,6 +13,7 @@
 
 #include <math.h>
 
+#include "Profiling.h"
 
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
@@ -43,6 +44,8 @@ ComponentTransform2D::~ComponentTransform2D()
 
 bool ComponentTransform2D::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Transform2D Update");
+
 	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float4 viewport = app->editor->GetGameView()->GetBounds();
 
