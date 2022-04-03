@@ -29,8 +29,10 @@ namespace RagnarEngine
             goName = name;
             pointer = ptr;
 
-            trans = new Transform();
-            trans.pointer = transPTR;
+            trans = new Transform
+            {
+                pointer = transPTR
+            };
 
             components = new List<RagnarComponent>();
             components.Add(trans);

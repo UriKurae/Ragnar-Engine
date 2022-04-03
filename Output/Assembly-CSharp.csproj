@@ -80,6 +80,7 @@
 		<Compile Include="Assets\Scripts\EnemyInteractions.cs" />
 		<Compile Include="Assets\Scripts\WinScreen.cs" />
 		<Compile Include="Assets\Scripts\PlayerManager.cs" />
+		<Compile Include="Assets\Scripts\Characters.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Assembly-CSharp\App.config" />

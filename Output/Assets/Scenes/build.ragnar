@@ -13,6 +13,53 @@
             "Components": []
         },
         {
+            "UUID": 1906640800,
+            "Parent UUID": 417171234,
+            "Name": "PlayerManager",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "PlayerManager",
+                    "pointer": 64813128,
+                    "type": 4,
+                    "componentTable": 0,
+                    "players": 0,
+                    "characters": 0
+                }
+            ]
+        },
+        {
             "UUID": 1340834673,
             "Parent UUID": 417171234,
             "Name": "Directional Light",
@@ -133,8 +180,8 @@
                         84
                     ],
                     "Scale": [
-                        1.4999998807907104,
-                        1.8749998807907104,
+                        2,
+                        2.5,
                         1
                     ],
                     "rotationEuler": [
@@ -199,8 +246,8 @@
                         84
                     ],
                     "Scale": [
-                        1.6124999523162842,
-                        1.3043477535247803,
+                        2.1500000953674316,
+                        1.7391304969787598,
                         1
                     ],
                     "rotationEuler": [
@@ -265,8 +312,8 @@
                         83.5
                     ],
                     "Scale": [
-                        15.824999809265137,
-                        7.0516304969787598,
+                        21.100000381469727,
+                        9.4021739959716797,
                         1
                     ],
                     "rotationEuler": [
@@ -308,8 +355,8 @@
                         83.5
                     ],
                     "Scale": [
-                        20.512500762939453,
-                        4.3206524848937988,
+                        27.350000381469727,
+                        5.7608695030212402,
                         1
                     ],
                     "rotationEuler": [
@@ -389,8 +436,8 @@
                         84
                     ],
                     "Scale": [
-                        75.937492370605469,
-                        39.466106414794922,
+                        101.25,
+                        52.621479034423828,
                         1
                     ],
                     "rotationEuler": [
@@ -413,7 +460,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 142232024,
+                    "pointer": 64812576,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -439,8 +486,8 @@
                         88.199996948242188
                     ],
                     "Scale": [
-                        27.112499237060547,
-                        9.5788040161132812,
+                        36.149997711181641,
+                        12.77173900604248,
                         1
                     ],
                     "rotationEuler": [
@@ -482,8 +529,8 @@
                         90
                     ],
                     "Scale": [
-                        12.75,
-                        1.1005434989929199,
+                        16.999998092651367,
+                        1.4673912525177002,
                         1
                     ],
                     "rotationEuler": [
@@ -548,8 +595,8 @@
                         90
                     ],
                     "Scale": [
-                        12.75,
-                        1.1005434989929199,
+                        16.999998092651367,
+                        1.4673912525177002,
                         1
                     ],
                     "rotationEuler": [
@@ -614,8 +661,8 @@
                         90
                     ],
                     "Scale": [
-                        12.75,
-                        1.1005434989929199,
+                        16.999998092651367,
+                        1.4673912525177002,
                         1
                     ],
                     "rotationEuler": [
@@ -718,10 +765,10 @@
                         -16.951992034912109
                     ],
                     "Quaternion": [
-                        0.27656680345535278,
-                        -0.28762644529342651,
-                        -0.29331919550895691,
-                        0.86876100301742554
+                        0.46413952112197876,
+                        -0.019342128187417984,
+                        -0.17641690373420715,
+                        0.86780047416687012
                     ],
                     "RotationEditor": [
                         0,
@@ -737,7 +784,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0349963903427124,
+                    "Vertical Fov": 0.92614549398422241,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         2.7341175079345703,
@@ -745,7 +792,7 @@
                         -16.951992034912109
                     ],
                     "Type": 3,
-                    "Zoom": 24,
+                    "Zoom": 18,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -6851,7 +6898,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 279640752,
+                    "pointer": 64814416,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -6863,7 +6910,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 279641976,
+                    "pointer": 64812760,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -6884,362 +6931,6 @@
                     "NumPolys": 0,
                     "NumStraight": 0,
                     "NumSmooth": 0
-                }
-            ]
-        },
-        {
-            "UUID": 2021177439,
-            "Parent UUID": 417171234,
-            "Name": "Player",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Player.rgprefab",
-            "tag": "Player",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -3.5557270050048828,
-                        0,
-                        -10.039143562316895
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/CharacterTex\/char_paul_albedo.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/Dying__Malla.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "Death",
-                    "Animations": [
-                        {
-                            "State": "Walk",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walking__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Idle__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Shoot",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Gunplay__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Crouch",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/IdleCrouch__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Death",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Dying__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        }
-                    ]
-                },
-                {
-                    "Type": 5,
-                    "Volume": 50,
-                    "Pitch": 0,
-                    "Mute": false,
-                    "AudioClips": [
-                        {
-                            "0": "None"
-                        }
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 2,
-                    "Radius": 0.30000001192092896,
-                    "Height": 1.6000000238418579,
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 60,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                },
-                {
-                    "Type": 6,
-                    "Active": true
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Player",
-                    "pointer": 279641704,
-                    "type": 4,
-                    "componentTable": 0,
-                    "velocity": 1000,
-                    "force": 100,
-                    "rockSoundRadius": 4
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Abilities",
-                    "pointer": 279639256,
-                    "type": 4,
-                    "componentTable": 0
-                },
-                {
-                    "Type": 20,
-                    "Active": true,
-                    "Radius": 0.30000001192092896,
-                    "Height": 2,
-                    "StopHeight": 0.89999997615814209,
-                    "MaxSlope": 45,
-                    "Speed": 6,
-                    "AngularSpeed": 180,
-                    "Acceleration": 1,
-                    "StoppingDistance": 0,
-                    "PathType": 1,
-                    "NumPolys": 0,
-                    "NumStraight": 0,
-                    "NumSmooth": 0
-                }
-            ]
-        },
-        {
-            "UUID": 2021177439,
-            "Parent UUID": 417171234,
-            "Name": "Player2",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Player.rgprefab",
-            "tag": "Player",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -0.034871101379394531,
-                        0,
-                        -11.392264366149902
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Paul_low_blinn1_BaseColor.1001.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/Dying__Malla.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "Death",
-                    "Animations": [
-                        {
-                            "State": "Walk",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walking__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Idle__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Shoot",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Gunplay__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Crouch",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/IdleCrouch__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Death",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Dying__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        }
-                    ]
-                },
-                {
-                    "Type": 5,
-                    "Volume": 50,
-                    "Pitch": 0,
-                    "Mute": false,
-                    "AudioClips": [
-                        {
-                            "0": "None"
-                        }
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 2,
-                    "Radius": 0.30000001192092896,
-                    "Height": 1.6000000238418579,
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 60,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                },
-                {
-                    "Type": 6,
-                    "Active": true
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Player",
-                    "pointer": 279641024,
-                    "type": 4,
-                    "componentTable": 0,
-                    "velocity": 1000,
-                    "force": 100,
-                    "rockSoundRadius": 4
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Abilities",
-                    "pointer": 279640072,
-                    "type": 4,
-                    "componentTable": 0
-                },
-                {
-                    "Type": 20,
-                    "Active": true,
-                    "Radius": 0.30000001192092896,
-                    "Height": 2,
-                    "StopHeight": 0.89999997615814209,
-                    "MaxSlope": 45,
-                    "Speed": 6,
-                    "AngularSpeed": 180,
-                    "Acceleration": 1,
-                    "StoppingDistance": 0,
-                    "PathType": 1,
-                    "NumPolys": 0,
-                    "NumStraight": 0,
-                    "NumSmooth": 0
-                }
-            ]
-        },
-        {
-            "UUID": 1906640800,
-            "Parent UUID": 417171234,
-            "Name": "Manager",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "PlayerManager",
-                    "pointer": 279638712,
-                    "type": 4,
-                    "componentTable": 0,
-                    "players": 0
                 }
             ]
         }
