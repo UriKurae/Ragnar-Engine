@@ -277,7 +277,6 @@ void ModuleSceneManager::NextScene(const char* name)
 
 void ModuleSceneManager::Play()
 {
-#ifndef DIST
 	DEBUG_LOG("Saving Scene");
 
 	JsonParsing sceneFile;
@@ -289,13 +288,13 @@ void ModuleSceneManager::Play()
 	char* buf;
 	uint size = sceneFile.Save(&buf);
 
-	if (app->fs->Save(SCENES_FOLDER "scenePlay.ragnar", buf, size) > 0)
+	if (app->fs->Save(SCENES_LIBRARY_FOLDER "scenePlay.ragnar", buf, size) > 0)
 		DEBUG_LOG("Scene saved succesfully");
 	else
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-#endif
+
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 
@@ -316,10 +315,8 @@ void ModuleSceneManager::Stop()
 
 	currentScene->UnLoad();
 	currentScene = scenes[lastIndex];
-#ifndef DIST
-	currentScene->LoadScene("Assets/Scenes/scenePlay.ragnar");
-	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
-#endif
+	currentScene->LoadScene("Library/Scenes/scenePlay.ragnar");
+	app->fs->RemoveFile("Library/Scenes/scenePlay.ragnar");
 	currentScene->GetQuadtree().Clear();
 	currentScene->GetQuadtree().Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	gameState = GameState::NOT_PLAYING;
