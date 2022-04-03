@@ -2,7 +2,6 @@
 #include "glmath.h"
 #include "Component.h"
 #include "Math/float4x4.h"
-#include "Math/float2.h"
 #include <vector>
 
 class GameObject;
