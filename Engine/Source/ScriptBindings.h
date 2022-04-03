@@ -1,5 +1,6 @@
 #pragma once
 #include "Application.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
@@ -453,7 +454,12 @@ void Exit()
 
 MonoObject* GetRegionGame()
 {
-	float4 vec4(app->editor->GetGameView()->GetBounds());
-	float3 vec3 = { vec4.z / 1.6f, vec4.w / 1.7f, 0 };
+	float4 vec4 = float4::zero;
+#ifdef DIST
+	vec4 = { 0,0,(float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#else
+	vec4 = app->editor->GetGameView()->GetBounds();
+#endif
+	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
 }

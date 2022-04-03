@@ -322,7 +322,7 @@ bool ModuleRenderer3D::PostUpdate()
 	distVao->Bind();
 	distIbo->Bind();
 
-	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	//glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
 	
 	distIbo->Unbind();
 	distVao->Unbind();

@@ -18,11 +18,6 @@ public class mainMenuBackScreen : RagnarComponent
 		ExitButtonAction();
 		// Image back
 		BackgroundImageAction();
-
-		if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
-		{
-			SceneManager.NextScene();
-		}
 	}
 	void PlayButtonAction()
 	{
@@ -30,26 +25,26 @@ public class mainMenuBackScreen : RagnarComponent
 		int a = start.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
-		case 0:
-			// disabled Mode
-			break;
-		case 1:
-			isFirstS = true;
-			// normal Mode
-			break;
-		case 2:
-			// focused mode
-			if (isFirstS)
-			{
-				isFirstS = false;
-				//poner sonido
-			}
-			break;
-		case 3:
-			// pressed mode
-			SceneManager.NextScene();
-			//cambiar de escena
-			break;
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				isFirstS = true;
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (isFirstS)
+				{
+					isFirstS = false;
+					//poner sonido
+				}
+				break;
+			case 3:
+				// pressed mode
+				SceneManager.NextScene();
+				//cambiar de escena
+				break;
 		}
 	}
 	void ExitButtonAction()
@@ -58,27 +53,27 @@ public class mainMenuBackScreen : RagnarComponent
 		int a = exit.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
-		case 0:
-			// disabled Mode
-			break;
-		case 1:
-			isFirstE = true;
-			// normal Mode
-			break;
-		case 2:
-			// focused mode
-			if (isFirstE)
-			{
-				isFirstE = false;
-				//poner sonido
-			}
-			break;
-		case 3:
-			// pressed mode
-			isFirstE = true;
-			SceneManager.Exit();
-			//salir del Juego
-			break;
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				isFirstE = true;
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (isFirstE)
+				{
+					isFirstE = false;
+					//poner sonido
+				}
+				break;
+			case 3:
+				// pressed mode
+				isFirstE = true;
+				SceneManager.Exit();
+				//salir del Juego
+				break;
 		}
 
 	}
@@ -86,10 +81,10 @@ public class mainMenuBackScreen : RagnarComponent
 	void BackgroundImageAction()
 	{
 		GameObject image = GameObject.Find("Background");
-		image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());		
+		image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 
 		imagePos = image.GetComponent<Transform2D>().position2D;
-		imagePos.Set(0.0f, -11.5f, 84.5f);
+		imagePos.Set(0.0f, 0.0f, 35.0f);
 		image.GetComponent<Transform2D>().position2D = imagePos;
 	}
 }
