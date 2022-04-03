@@ -27,6 +27,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init(JsonParsing& node) override;
+	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();

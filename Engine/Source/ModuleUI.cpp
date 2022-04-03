@@ -268,7 +268,9 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	focusedGameObject = nullptr;
-	UIGameObjectSelected = nullptr;	
+	UIGameObjectSelected = nullptr;
+
+	name = "UI";
 }
 
 ModuleUI::~ModuleUI()
@@ -287,9 +289,17 @@ bool ModuleUI::Start()
 	}
 
 	FT_Face face;
-	if (FT_New_Face(ft, "Assets/Resources/Fonts/Montserrat-Bold.ttf", 0, &face))
+
+	std::string path = "";
+#ifdef DIST
+	path = "Library/Fonts/Montserrat-Bold.ttf";
+#else
+	path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
+#endif
+
+	if (FT_New_Face(ft, path.c_str(), 0, &face))
 	{
-		//LOG("ERROR::FREETYPE: Failed to load font");
+		DEBUG_LOG("ERROR::FREETYPE: Failed to load font");
 		return false;
 	}
 	else {

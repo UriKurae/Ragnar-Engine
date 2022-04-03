@@ -27,6 +27,8 @@ ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState:
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
+
+	name = "SceneManager";
 }
 
 ModuleSceneManager::~ModuleSceneManager()

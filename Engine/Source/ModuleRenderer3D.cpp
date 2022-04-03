@@ -185,6 +185,12 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	return ret;
 }
 
+bool ModuleRenderer3D::Start()
+{
+	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
+	return true;
+}
+
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
 #ifndef DIST
@@ -205,10 +211,6 @@ bool ModuleRenderer3D::PostUpdate()
 	// TODO: wtf quadtree man.
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
 	
-	// Doesnt work in Init()
-	if(!postProcessingShader)
-		postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
-
 #ifndef DIST
 	if(drawGrid) grid.Render();
 
