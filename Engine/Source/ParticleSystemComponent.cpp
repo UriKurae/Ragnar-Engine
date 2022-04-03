@@ -10,6 +10,8 @@
 #include "Geometry/Sphere.h"
 #include "MeshComponent.h"
 
+#include "Profiling.h"
+
 ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformComponent* trans, uint numParticles)
 {
 	type = ComponentType::PARTICLE_SYSTEM;
@@ -44,6 +46,8 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 
 bool ParticleSystemComponent::Update(float dt)
 {
+    RG_PROFILING_FUNCTION("Particle System Update");
+
     if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {
         if (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true)

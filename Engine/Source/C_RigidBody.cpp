@@ -13,6 +13,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "Math/float3x3.h"
 
+#include "Profiling.h"
 
 RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, float mass, bool isKinematic) : Component(), collisionType(type), mass(mass), isKinematic(isKinematic)
 {
@@ -109,6 +110,8 @@ void RigidBodyComponent::SetBoundingBox()
 //When the engine state is "playing" the GameObject follows the RigidBody
 bool RigidBodyComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Rigidbody Update");
+
 	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		TransformComponent* trans = owner->GetComponent<TransformComponent>();

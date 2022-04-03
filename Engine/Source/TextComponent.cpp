@@ -11,6 +11,8 @@
 
 #include "GL/glew.h"
 
+#include "Profiling.h"
+
 TextComponent::TextComponent(GameObject* own)
 {
 	type = ComponentType::UI_TEXT;
@@ -38,6 +40,8 @@ TextComponent::~TextComponent()
 
 bool TextComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Text Update");
+
 	textToShow.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 	textToShow.setOnlyText(text);
 	if (!active)

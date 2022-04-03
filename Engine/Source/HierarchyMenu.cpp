@@ -23,6 +23,8 @@ HierarchyMenu::~HierarchyMenu()
 
 bool HierarchyMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Hierarchy Menu Update");
+
 	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
 
 	int size = app->sceneManager->GetCurrentScene()->GetGameObjectsList().size();

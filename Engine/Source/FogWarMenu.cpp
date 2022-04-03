@@ -5,6 +5,8 @@
 #include "Scene.h"
 #include "GL/glew.h"
 
+#include "Profiling.h"
+
 FogWarMenu::FogWarMenu() : Menu(true, "Fog War")
 {
 }
@@ -14,6 +16,8 @@ FogWarMenu::~FogWarMenu()
 
 bool FogWarMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("FogOfWar Menu Update");
+
 	if (ImGui::Begin(ICON_FA_CLOUD" Fog War", &active))
 	{
 		Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();

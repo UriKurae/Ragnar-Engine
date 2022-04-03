@@ -9,6 +9,8 @@
 
 #include <queue>
 
+#include "Profiling.h"
+
 PrefabManager* PrefabManager::instance = nullptr;
 
 PrefabManager* PrefabManager::GetInstance()
@@ -218,6 +220,8 @@ void PrefabManager::LoadPrefab(const char* path)
 
 void PrefabManager::UpdatePrefabs(GameObject* gameObject)
 {
+	RG_PROFILING_FUNCTION("Update Prefabs");
+
 	std::queue<GameObject*> que;
 	que.push(app->sceneManager->GetCurrentScene()->GetRoot());
 

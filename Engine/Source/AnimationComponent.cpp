@@ -12,6 +12,8 @@
 #include "Math/TransformOps.h"
 #include "Imgui/imgui_stdlib.h"
 
+#include "Profiling.h"
+
 AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(1.0f)
 {
 	type = ComponentType::ANIMATION;
@@ -169,6 +171,8 @@ void AnimationComponent::AnimationInfo()
 
 bool AnimationComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Animation Update");
+
 	deltaTime = dt;
 	if (currAnim && playing && app->sceneManager->GetGameState() == GameState::PLAYING)
 	{

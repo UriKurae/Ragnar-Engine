@@ -55,6 +55,8 @@ GameObject::~GameObject()
 
 bool GameObject::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Game Object Update");
+
 	for (int i = 0; i < components.size(); ++i)
 		components[i]->Update(dt);
 

@@ -55,6 +55,8 @@ TransformComponent::~TransformComponent()
 
 bool TransformComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Transform Update");
+
 	if (changeTransform)
 	{
 		std::stack<GameObject*> stack;
