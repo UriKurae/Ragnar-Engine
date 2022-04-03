@@ -305,6 +305,8 @@ void ParticleEmitter::UpdateParticle(float dt)
 
 void ParticleEmitter::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Particles Update");
+
 	UpdateParticle(dt);
 	for (int i = 0; i < particlePool.size(); ++i)
 	//for (auto& particle : particlePool)

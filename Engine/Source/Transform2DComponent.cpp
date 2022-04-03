@@ -14,6 +14,8 @@
 #include <math.h>
 
 #define CONVERSION_FACTOR 45
+#include "Profiling.h"
+
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
@@ -58,6 +60,8 @@ void ComponentTransform2D::UpdateChilds(float3 newPosition, float2 newScale) {
 }
 bool ComponentTransform2D::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Transform2D Update");
+
 	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float4 viewport = app->editor->GetGameView()->GetBounds();
 

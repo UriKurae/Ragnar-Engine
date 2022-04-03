@@ -11,6 +11,8 @@
 
 #include "GL/glew.h"
 
+#include "Profiling.h"
+
 CheckboxComponent::CheckboxComponent(GameObject* own)
 {
 	type = ComponentType::UI_CHECKBOX;
@@ -38,6 +40,8 @@ CheckboxComponent::~CheckboxComponent()
 
 bool CheckboxComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Checkbox Update");
+
 	checkboxText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 
 	if (!active)

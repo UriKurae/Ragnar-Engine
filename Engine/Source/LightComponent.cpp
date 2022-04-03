@@ -7,6 +7,8 @@
 #include "TransformComponent.h"
 #include "Lights.h"
 
+#include "Profiling.h"
+
 ComponentLight::ComponentLight()
 {
 	this->type = ComponentType::LIGHT;
@@ -29,6 +31,8 @@ ComponentLight::~ComponentLight()
 
 bool ComponentLight::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Light Component Update");
+
 	if (light->type == LightType::DIRECTIONAL)
 	{			
 		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())

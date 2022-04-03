@@ -15,6 +15,8 @@
 #include "GL/glew.h"
 #include "GameView.h"
 
+#include "Profiling.h"
+
 SliderComponent::SliderComponent(GameObject* own)
 {
 	type = ComponentType::UI_SLIDER;
@@ -54,6 +56,8 @@ SliderComponent::~SliderComponent()
 
 bool SliderComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Slider Update");
+
 	if (!active)
 		state = State::DISABLED;
 	else

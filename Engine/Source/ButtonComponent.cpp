@@ -10,6 +10,8 @@
 #include "Transform2DComponent.h"
 #include "GL/glew.h"
 
+#include "Profiling.h"
+
 ButtonComponent::ButtonComponent(GameObject* own)
 {
 	type = ComponentType::UI_BUTTON;
