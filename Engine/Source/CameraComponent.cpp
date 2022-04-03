@@ -971,7 +971,7 @@ int CameraComponent::ContainsAaBox(const AABB& boundingBox)
 // 	}
 // 	return -1;
 // >>>>>>> develop
-// }
+}
 
 float4x4 CameraComponent::ViewMatrixOpenGL()
 {
