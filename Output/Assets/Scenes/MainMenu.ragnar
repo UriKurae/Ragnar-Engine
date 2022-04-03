@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.98558032512664795,
+                    "Vertical Fov": 0.96868222951889038,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         11.233668327331543,
@@ -211,8 +211,10 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "lastButtonWidth": 1205,
+                    "lastButtonHeight": 634,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -227,7 +229,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 204336496,
+                    "pointer": 218465264,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -248,7 +250,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -579.5,
+                        -404.5,
                         0,
                         36
                     ],
@@ -264,8 +266,10 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 203.5,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "lastButtonWidth": 1205,
+                    "lastButtonHeight": 634,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -294,7 +298,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -676,
+                        -501,
                         25,
                         36.099998474121094
                     ],
@@ -310,8 +314,10 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "lastButtonWidth": 1205,
+                    "lastButtonHeight": 634,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
@@ -365,7 +371,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -673,
+                        -498,
                         -31,
                         36.099998474121094
                     ],
@@ -381,8 +387,10 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1555,
-                    "lastButtonHeight": 835
+                    "lastButtonWidth": 1205,
+                    "lastButtonHeight": 634,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
