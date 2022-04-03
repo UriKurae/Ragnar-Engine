@@ -454,6 +454,6 @@ void Exit()
 MonoObject* GetRegionGame()
 {
 	float4 vec4(app->editor->GetGameView()->GetBounds());
-	float3 vec3 = { vec4.z / 1.6f, vec4.w / 1.7f, 0 };
+	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
 }

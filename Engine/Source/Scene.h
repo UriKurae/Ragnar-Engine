@@ -55,7 +55,7 @@ public:
 	void Load() override;
 	void UnLoad() override;
 	
-	bool LoadScene(const char* name, bool fromLibrary = false);
+	bool LoadScene(const char* name);
 	bool SaveScene(const char* name);
 
 	void DuplicateGO(GameObject* go, GameObject* parent);

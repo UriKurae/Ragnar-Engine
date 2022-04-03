@@ -39,12 +39,13 @@ SliderComponent::SliderComponent(GameObject* own)
 		own->CreateComponent(ComponentType::MATERIAL);
 		secondMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 	}
-
+	
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
 	frontPlaneToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	frontPlaneToDraw->own = own;
+	app->userInterface->OrderButtons();
 }
 
 SliderComponent::~SliderComponent()
@@ -173,7 +174,7 @@ void SliderComponent::OnEditor()
 	static bool selectedEditable = false;
 	static bool textColorEditable = false;
 
-	if (ImGui::CollapsingHeader("Slider"))
+	if (ImGui::CollapsingHeader("SliderComponent"))
 	{
 		ImGui::Checkbox("Interactable", &active);
 
@@ -217,7 +218,7 @@ void SliderComponent::OnEditor()
 			ImGui::ColorPicker3("Selected Color", &selectedColor);		
 		if (textColorEditable)
 			ImGui::ColorPicker3("Text Color", &textColor);		
-
+		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
 		ImGui::InputFloat("Min Value", &minValue);
 		ImGui::InputFloat("Max Value", &maxValue);
 		ImGui::SliderFloat("Value", &value, minValue, maxValue);
@@ -253,7 +254,7 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 			contm++;
 		}
 	}
-
+	alpha = node.GetJsonNumber("alpha");
 	return true;
 }
 
@@ -263,6 +264,7 @@ bool SliderComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "barProgres", barProgres);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
