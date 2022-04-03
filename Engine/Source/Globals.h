@@ -86,4 +86,4 @@ static void CMDCompileCS()
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "Dune Commandos"
+#define TITLE "Dune: Fremen's Rising"
