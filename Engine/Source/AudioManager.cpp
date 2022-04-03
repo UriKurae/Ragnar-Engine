@@ -1,3 +1,5 @@
+#include "Application.h"
+#include "FileSystem.h"
 #include "AudioManager.h"
 #include "Globals.h"
 
@@ -126,8 +128,15 @@ bool AudioManager::Init()
 
 #endif
 
+#ifdef DIST
+	lowLevelIO.SetBasePath(AKTEXT("Library/Wwise/"));
+#else
 	lowLevelIO.SetBasePath(AKTEXT("Assets/Wwise/"));
-
+	if (!app->fs->Exists("Library/Wwise"))
+	{
+		// Copy recursively the folder to library
+	}
+#endif
 	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
 
 	ReadIDs();
