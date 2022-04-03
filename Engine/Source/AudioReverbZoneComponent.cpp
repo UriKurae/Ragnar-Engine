@@ -8,6 +8,8 @@
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 
+#include "Profiling.h"
+
 AudioReverbZoneComponent::AudioReverbZoneComponent(GameObject* own, TransformComponent* trans) : changePosition(true), transform(trans), Component(), busReverb("None"), vbo(nullptr), ebo(nullptr), dimensions(5.0f, 5.0f, 5.0f)
 {
 	owner = own;
@@ -99,6 +101,8 @@ void AudioReverbZoneComponent::Draw(CameraComponent* gameCam)
 
 bool AudioReverbZoneComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Reverb Zone Update");
+
 	if (changePosition)
 	{
 		float3 position = transform->GetPosition();

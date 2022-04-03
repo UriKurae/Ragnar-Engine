@@ -9,6 +9,8 @@
 #include <gl/GL.h>
 #include "Math/float3x3.h"
 
+#include "Profiling.h"
+
 BillboardParticleComponent::BillboardParticleComponent(GameObject* own, TransformComponent* trans) :
 	particleAlignment(Particle_Alignment::CAMERA_ALIGNED),
 	isHorizontalAligned(true)

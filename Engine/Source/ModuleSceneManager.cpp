@@ -76,6 +76,8 @@ bool ModuleSceneManager::PreUpdate(float dt)
 
 bool ModuleSceneManager::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Scene Manager Update");
+
 	if (changeScene)
 	{
 		currentScene->UnLoad();

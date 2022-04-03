@@ -48,4 +48,11 @@ private:
 	float buttonWidth = 30;
 	float buttonHeight = 100;
 	bool firstTime = true;
+
+	float3 lastPosition;
+	float2 lastScale;
+	bool moveElementX = true;
+	bool moveElementY = true;
+	int z=0;
+	int w=0;
 };

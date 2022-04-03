@@ -17,7 +17,8 @@ public:
 	bool CleanUp();
 	
 	void MousePicking(math::float3& newPos, math::float3& newFront, float speed);
-	void ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, math::LineSegment& prevLine, bool& hit, std::map<float, GameObject*>& triangleMap);
+	void ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& triangleMap, float3& hitPoint);
+	void ThrowRayCastOnlyOBB(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& aabbMap, float3& hitPoint);
 	void OrbitAround(float& dt, math::float3& newUp, math::float3& newFront, math::float3& newPos);
 	void RotateAround(float dt, math::float3& newFront, math::float3& newUp);
 	void Focus(math::float3& newFront, math::float3& newUp, math::float3& newPos);

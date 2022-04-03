@@ -13,6 +13,8 @@
 
 #include <math.h>
 
+#define CONVERSION_FACTOR 45
+#include "Profiling.h"
 
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
@@ -43,6 +45,8 @@ ComponentTransform2D::~ComponentTransform2D()
 
 bool ComponentTransform2D::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Transform2D Update");
+
 	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float4 viewport = app->editor->GetGameView()->GetBounds();
 
@@ -52,17 +56,46 @@ bool ComponentTransform2D::Update(float dt)
 		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
 		firstTime = false;
 	}
-	
-	//if (lastViewportBounds.w != viewport.w)
-	//{
-	//	//position.y +=(viewport.w - lastViewportBounds.w)/100;
-	//	
-	//}
-	//else if (lastViewportBounds.z != viewport.z) 
-	//{
-	//		position.x -=( viewport.z - lastViewportBounds.z)/2;
-	//	
-	//}
+
+	if (moveElementY)
+	{
+		if (lastViewportBounds.w != viewport.w)
+		{
+			float change;
+			change = lastViewportBounds.w - viewport.w;
+			if ((lastViewportBounds.w / 2) + position.y < (lastViewportBounds.w / 2))
+			{
+
+				position.y += (change / 2);
+			}
+			else if ((lastViewportBounds.w / 2) + position.y > (lastViewportBounds.w / 2))
+			{
+				position.y -= (change / 2);
+			}
+
+
+		}
+	}
+	if (moveElementX) 
+	{
+		if (lastViewportBounds.z != viewport.z)
+		{
+			float change;
+			change = lastViewportBounds.z - viewport.z;
+			if ((lastViewportBounds.z / 2) + position.x < (lastViewportBounds.z / 2))
+			{
+
+				position.x += (change / 2);
+			}
+			else if ((lastViewportBounds.z / 2) + position.x > (lastViewportBounds.z / 2))
+			{
+				position.x -= (change / 2);
+			}
+
+
+		}
+		lastViewportBounds = viewport;
+	}
 	
 	internalPosition.x = ((position.x)/24) / zoomRatio;
 	internalPosition.y = (((position.y)/24)+0.5) / zoomRatio;	
@@ -90,6 +123,8 @@ void ComponentTransform2D::OnEditor()
 	if (showEdit) {
 		if (ImGui::CollapsingHeader("2D Transform"))
 		{
+			ImGui::Checkbox("Move on Resize X", &moveElementX);
+			ImGui::Checkbox("Move on Resize Y", &moveElementY);
 			ImGui::TextColored(ImVec4(0, 0, 255, 255), "Size");
 			ImGui::DragFloat("Width", &buttonWidth, 0.5f, 0, 1000000);
 			ImGui::DragFloat("Height", &buttonHeight, 0.5f, 0, 1000000);
@@ -125,6 +160,8 @@ float3 ComponentTransform2D::FromQuatToEuler(Quat quatAngles)
 bool ComponentTransform2D::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
+	moveElementX = node.GetJsonBool("MoveOnResizeX");
+	moveElementY = node.GetJsonBool("MoveOnResizeY");
 	position = node.GetJson3Number(node, "Position");
 	scale = node.GetJson3Number(node, "Scale");
 	rotationEuler = node.GetJson3Number(node, "rotationEuler");
@@ -148,6 +185,12 @@ bool ComponentTransform2D::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJson3Number(file, "rotationEuler", rotationEuler);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "buttonWidth", buttonWidth);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "buttonHeight", buttonHeight);
+
+	float4 viewport = app->editor->GetGameView()->GetBounds();
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "lastButtonWidth", viewport.z);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "lastButtonHeight", viewport.w); 
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "MoveOnResizeX", moveElementX);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "MoveOnResizeY", moveElementY);
 
 	node.SetValueToArray(array, file.GetRootValue());
 

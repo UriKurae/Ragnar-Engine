@@ -4,6 +4,7 @@
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
 #include "MonoManager.h"
 
 #include "FileSystem.h"
@@ -58,11 +59,14 @@ bool ContentBrowserMenu::Update(float dt)
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
-	refreshTime += dt;
-	if (refreshTime >= 5.0f)
+	if (app->sceneManager->GetGameState() == GameState::NOT_PLAYING)
 	{
-		ResourceManager::GetInstance()->ImportAllResources();
-		refreshTime = 0.0f;
+		refreshTime += dt;
+		if (refreshTime >= 5.0f)
+		{
+			ResourceManager::GetInstance()->ImportAllResources();
+			refreshTime = 0.0f;
+		}
 	}
 	
 	app->fs->DiscoverFilesAndDirs("Assets/", files, dirs);

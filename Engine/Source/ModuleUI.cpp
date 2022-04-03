@@ -531,6 +531,8 @@ void ModuleUI::SetFocusedObject()
 
 bool ModuleUI::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Module UI Update");
+
 	// Update All UI Components
 
 	if (!UIGameObjects.empty() && app->input->GetKey(SDL_SCANCODE_TAB) == KeyState::KEY_DOWN)
