@@ -19,16 +19,13 @@ TextComponent::TextComponent(GameObject* own)
 	own->isUI = true;
 	active = true;
 	textToShow.setText("Button", 5, 5, 0.5, { 255,255,255 });
-	
-	state = State::NORMAL;
-	actualColor = normalColor;
 
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
 		own->CreateComponent(ComponentType::TRANFORM2D);
 		own->CreateComponent(ComponentType::MATERIAL);
-		app->userInterface->UIGameObjects.push_back(own);
 	}	
+	app->userInterface->UIGameObjects.push_back(own);
 	app->userInterface->OrderButtons();
 	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	//planeToDraw->own = own;
@@ -44,16 +41,13 @@ bool TextComponent::Update(float dt)
 
 	textToShow.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 	textToShow.setOnlyText(text);
-	if (!active)
-		state = State::DISABLED;
-	else
-		state = State::NORMAL;
 
 	return true;
 }
 
 void TextComponent::Draw(CameraComponent* gameCam)
 {
+
 }
 
 void TextComponent::OnEditor()
@@ -71,7 +65,7 @@ void TextComponent::OnEditor()
 		if (textColorEditable)
 			ImGui::ColorPicker3("Text Color", &textColor);
 
-		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+		textToShow.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);

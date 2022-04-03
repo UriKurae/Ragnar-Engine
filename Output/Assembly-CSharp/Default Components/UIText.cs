@@ -4,17 +4,13 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
-    class UIButton : RagnarComponent
+    class UIText : RagnarComponent
     {
-        public UIButton(UIntPtr ptr) : base(ptr)
+        public UIText(UIntPtr ptr) : base(ptr)
         {
-            type = ComponentType.UI_BUTTON;
+            type = ComponentType.UI_TEXT;
         }
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern int GetButtonState();
-
-        
         public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]

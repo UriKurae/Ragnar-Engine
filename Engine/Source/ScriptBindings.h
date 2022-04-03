@@ -378,21 +378,6 @@ void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
 }
 // GameObject =======================
 
-// UI ===============================
-MonoString* GetButtonText(MonoObject* go)
-{
-	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
-	return mono_string_new(app->moduleMono->domain, button->GetText());
-}
-
-void SetButtonText(MonoObject* go, MonoString* text)
-{
-	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
-	//button->SetText(mono_string_to_utf8(text));
-}
-// UI ===============================
-
-
 // Particle System ==================
 MonoArray* GetEmitters(MonoObject* go)
 {

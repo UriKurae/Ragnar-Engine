@@ -23,18 +23,17 @@ public:
 
 	float2 GetParentPosition();
 
-public:
-	float buttonWidth;
-	float buttonHeight;
+	inline char* GetText() { return text; };
+	void SetText(char* newText)
+	{		
+		textToShow.setOnlyText(newText);
+		strcpy(text, newText);
+	}
+
 	Text textToShow;
+private:
+
 	bool fadeUI = false;
-	State state;
-	Color disabledColor = white;
-	Color actualColor;
-	Color pressedColor = red;
-	Color focusedColor = blue;
-	Color normalColor = green;
-	Color selectedColor = black;
 	Color textColor = white;
 	char text[64] = "Text";
 	float fontScale = 1;

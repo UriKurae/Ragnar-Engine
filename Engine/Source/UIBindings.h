@@ -6,34 +6,11 @@
 #include "SliderComponent.h"
 #include "CheckBoxComponent.h"
 #include "Transform2DComponent.h"
+#include "TextComponent.h"
 
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
 #include <metadata/class.h>
-
-// Button ==================================================
-void UIFunctionButton(MonoObject* go)
-{
-
-}
-
-// Checkbox ==================================================
-void UIFunctionCheckbox(MonoObject* go)
-{
-
-}
-
-// Slider ==================================================
-void UIFunctionSlider(MonoObject* go)
-{
-
-}
-
-// Transform2D ==================================================
-void UIFunctionTransform2D(MonoObject* go)
-{
-
-}
 
 MonoObject* Get2DPosition(MonoObject* go)
 {
@@ -52,7 +29,7 @@ void Set2DPosition(MonoObject* go, MonoObject* position)
 		tr->SetPosition(app->moduleMono->UnboxVector(position));
 	}
 }
-
+ // Button ==============================
 int GetButtonState(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
@@ -61,25 +38,21 @@ int GetButtonState(MonoObject* go)
 
 	return (int)tr->GetState();
 }
-void SetText(MonoObject* go, MonoString* text)
+void SetButtonText(MonoObject* go, MonoString* text)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
-	//float3 position = ;
 	tr->GetButtonText().textt.clear();
-	//tr->GetButtonText().textt = mono_string_to_utf8(text);
 	char* aux = mono_string_to_utf8(text);
 	tr->SetText(aux);
 	
 }
-const char* GetText(MonoObject* go)
+const char* GetButtonText(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
-	//float3 position = ;
-	
-
 	return tr->GetButtonText().textt.c_str();
 }
 
+// Checkbox =================================
 const bool GetIsChecked(MonoObject* go)
 {
 	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
@@ -95,6 +68,8 @@ int GetCheckboxState(MonoObject* go)
 
 	return (int)tr->GetState();
 }
+
+// Slider =========================================
 float GetSliderActualValue(MonoObject* go)
 {
 	SliderComponent* tr = GetComponentMono<SliderComponent*>(go);
@@ -104,6 +79,22 @@ float GetSliderActualValue(MonoObject* go)
 	return tr->GetBarProgress();
 }
 
+// Text ==================================
+void SetText(MonoObject* go, MonoString* text)
+{
+	TextComponent* tr = GetComponentMono<TextComponent*>(go);
+	char* aux = mono_string_to_utf8(text);
+	tr->SetText(aux);
+
+}
+const char* GetText(MonoObject* go)
+{
+	TextComponent* tr = GetComponentMono<TextComponent*>(go);
+	return tr->GetText();
+}
+
+
+// Transform 2D ========================================
 Vec3 GetSize(MonoObject* go)
 {
 	ComponentTransform2D* tr = GetComponentMono<ComponentTransform2D*>(go);	
