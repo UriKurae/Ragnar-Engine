@@ -102,6 +102,13 @@ public class Player : RagnarComponent
             gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
             rb.SetHeight(0.6f); // 0.6 = 60%
         }
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_REPEAT)
+        {
+            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+            Vector3 maxPoint = gameObject.GetMaxAABB();
+            maxPoint.y *= 0.6f;
+            gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
+        }
         if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");

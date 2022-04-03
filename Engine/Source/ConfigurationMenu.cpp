@@ -28,6 +28,8 @@ ConfigurationMenu::~ConfigurationMenu()
 
 bool ConfigurationMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Configuration Menu Update");
+
 	static sMStats stats = m_getMemoryStatistics();
 	++memoryCount;
 	if (memoryCount > 15)

@@ -5,6 +5,8 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
+#include "Profiling.h"
+
 AudioSourceComponent::AudioSourceComponent(GameObject* own, TransformComponent* trans) : changePosition(true), volume(50.0f), mute(false), transform(trans), pitch(0.0f), playingID(-1)
 {
 	owner = own;
@@ -124,6 +126,8 @@ void AudioSourceComponent::OnEditor()
 
 bool AudioSourceComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Audio Source Update");
+
 	if (changePosition)
 	{
 		float3 position = transform->GetPosition();

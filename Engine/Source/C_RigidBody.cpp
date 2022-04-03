@@ -13,6 +13,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "Math/float3x3.h"
 
+#include "Profiling.h"
 
 RigidBodyComponent::RigidBodyComponent(GameObject* obj, CollisionType type, float mass, bool isKinematic) : Component(), collisionType(type), mass(mass), isKinematic(isKinematic)
 {
@@ -109,6 +110,8 @@ void RigidBodyComponent::SetBoundingBox()
 //When the engine state is "playing" the GameObject follows the RigidBody
 bool RigidBodyComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Rigidbody Update");
+
 	if (app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
 		TransformComponent* trans = owner->GetComponent<TransformComponent>();
@@ -706,6 +709,7 @@ void RigidBodyComponent::SetHeight(float height)
 		OBB obb = owner->GetOOB();
 		float3 pos = body->getCenterOfMassPosition();
 
+		capsule.transform.Rotate(body->getWorldTransform().getRotation().getAngle() * RADTODEG, Vec3(0,1,0));
 		capsule.SetPos(pos.x, pos.y - offset.y, pos.z);
 		capsule.radius *= obb.r.MaxElementXZ();
 		capsule.height *= obb.Size().y * 0.5 * height;

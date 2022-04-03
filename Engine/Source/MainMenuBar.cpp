@@ -76,6 +76,8 @@ bool MainMenuBar::Start()
 
 bool MainMenuBar::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Main Menu Bar Update");
+
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (!FileMenu()) return false;		
