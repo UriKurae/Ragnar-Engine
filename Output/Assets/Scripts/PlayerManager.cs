@@ -15,7 +15,7 @@ public class PlayerManager : RagnarComponent
         // Esto de aquí está hardcodeadísimo
         // Pero no hay otra manera de hacerlo
         // Cuando se puedan meter cositas desde inspector
-        // Se solucionará este problema
+        // Se solucionará este problema ^^
 
         // Player 1
         characters[0] = new Characters
