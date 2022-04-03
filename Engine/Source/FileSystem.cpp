@@ -34,11 +34,20 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 	if (PHYSFS_setWriteDir(".") == 0)
 		DEBUG_LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
 
+#ifdef DIST
+	const char* dirs[] = {
+		SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_LIBRARY_FOLDER,
+		MODELS_FOLDER, SHADERS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER
+	};
+
+
+#else
 	// Make sure standard paths exist
 	const char* dirs[] = {
 		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, SCENES_LIBRARY_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER, PARTICLES_FOLDER
 	};
 
+#endif
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
 	{
 		if (PHYSFS_exists(dirs[i]) == 0)
