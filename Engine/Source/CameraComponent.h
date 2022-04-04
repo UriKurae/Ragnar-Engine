@@ -13,7 +13,7 @@ public:
 	~CameraComponent();
 
 	bool Update(float dt) override;
-	void CalculateOffsetPos();
+	void UpdateRotation();
 	void UpdateMovement();
 
 	void Draw(CameraComponent* gameCam = nullptr) override;
@@ -41,13 +41,11 @@ public:
 
 	inline float GetCurrentScreenWidth() { return currentScreenWidth; }
 	inline float GetCurrentScreenHeight() { return currentScreenHeight; }
-	inline float GetZoomRatio() { return zoom / ((zoomMax - zoomMin) / 2); };
 
 	float4x4 ViewMatrixOpenGL();
 
 	float4x4 matrixViewFrustum;
 	float4x4 matrixProjectionFrustum;
-	float zoom = zoomMax;
 
 private:
 	void Shake(float dt);
@@ -71,21 +69,19 @@ private:
 	VertexBuffer* vbo;
 
 	//----------------------------------------------
-	const float zoomMin = 10;
-	const float zoomMax = 100;
-	
+	float zoomMin = 45.0f;
+	float zoomMax = 20.0f;
+	float zoomSpeed = 1.0f;
 
 	bool fixingToTarget = false;
 	bool freeMovement = true;
 	bool followTarget = false;
-	bool lockVerticalAngle = false;
 
 	GameObject* defTarget = nullptr; // FreeMovement Target
 	GameObject* target = nullptr;
 	TransformComponent* controllerTrans = nullptr;
 
 	float movementSpeed = 0.05f;
-	float verticalAngle = -40.0f;
 	float rotationSpeed = 0.5f;
 	float radius = 20.0f;
 	float horizontalAngle = 0.0f;
