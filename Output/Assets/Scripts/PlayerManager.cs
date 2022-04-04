@@ -59,7 +59,7 @@ public class PlayerManager : RagnarComponent
         characters[1].abilities[1] = new Abilities
         {
             name = "Camouflage",
-            prefabPath = "Assets/Prefabs/Rock.rgprefab",
+            prefabPath = "Assets/Prefabs/Camouflage.rgprefab",
             charges = -1,
             cooldown = 30f
         };

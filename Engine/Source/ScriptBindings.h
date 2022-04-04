@@ -174,6 +174,10 @@ void SetTexturePath(MonoObject* go, MonoObject* texturePath)
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
 	matComp->SetTexture(newTexture);
+
+	/*res->Load();
+	if (diff.use_count() - 1 == 1) diff->UnLoad();
+	SetTexture(res);*/
 }
 
 

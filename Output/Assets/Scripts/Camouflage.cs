@@ -13,7 +13,7 @@ public class Camouflage : RagnarComponent
 	}
 	private void ChooseMesh()
     {
-		this.gameObject.GetComponent<Material>().texture = "";
+		this.gameObject.GetComponent<Material>().texture = "Assets/Resources/UI/transparent_tex.png";
     }
 
 }
