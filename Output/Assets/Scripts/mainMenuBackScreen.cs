@@ -11,7 +11,7 @@ public class mainMenuBackScreen : RagnarComponent
 	public void Start()
 	{
 		GameObject start = GameObject.Find("Button Start");
-		textPositionX= start.GetComponent<UIButton>().GetTextPosition().x;
+		textPositionX = start.GetComponent<UIButton>().GetTextPosition().x;
 		textPositiony = start.GetComponent<UIButton>().GetTextPosition().y;
 	}
 	public void Update()
@@ -29,36 +29,37 @@ public class mainMenuBackScreen : RagnarComponent
 		int a = start.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
-		case 0:
-			// disabled Mode
-			break;
-		case 1:
-				if (isFirstS == false)
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				if (!isFirstS)
 				{
-					
+
 					start.GetComponent<UIButton>().SetTextPosition(-23.6f, -4.6f);
 					isFirstS = true;
 				}
-			
-				
-			
-			// normal Mode
-			break;
-		case 2:
-			// focused mode
-			if (isFirstS)
-			{
-				
+
+
+
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (isFirstS)
+				{
+
 					start.GetComponent<UIButton>().SetTextPosition(-13.6f, -4.6f);
 					isFirstS = false;
-				//poner sonido
-			}
-			break;
-		case 3:
-			// pressed mode
-			SceneManager.NextScene();
-			//cambiar de escena
-			break;
+					//poner sonido
+				}
+				break;
+			case 3:
+				// pressed mode
+				start.GetComponent<UIButton>().SetTextPosition(-0.0f, -4.6f);
+				SceneManager.NextScene();
+				//cambiar de escena
+				break;
 		}
 	}
 	void ExitButtonAction()
@@ -67,27 +68,33 @@ public class mainMenuBackScreen : RagnarComponent
 		int a = exit.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
-		case 0:
-			// disabled Mode
-			break;
-		case 1:
-			isFirstE = true;
-			// normal Mode
-			break;
-		case 2:
-			// focused mode
-			if (isFirstE)
-			{
-				isFirstE = false;
-				//poner sonido
-			}
-			break;
-		case 3:
-			// pressed mode
-			isFirstE = true;
-			SceneManager.Exit();
-			//salir del Juego
-			break;
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				if (!isFirstE)
+				{
+
+					exit.GetComponent<UIButton>().SetTextPosition(-23.6f, -4.8f);
+					isFirstE = true;
+				}
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (isFirstE)
+				{
+					exit.GetComponent<UIButton>().SetTextPosition(-13.6f, -4.8f);
+					isFirstE = false;
+					//poner sonido
+				}
+				break;
+			case 3:
+				// pressed mode
+				exit.GetComponent<UIButton>().SetTextPosition(-0.0f, -4.8f);
+				SceneManager.Exit();
+				//salir del Juego
+				break;
 		}
 
 	}
@@ -95,7 +102,7 @@ public class mainMenuBackScreen : RagnarComponent
 	void BackgroundImageAction()
 	{
 		GameObject image = GameObject.Find("Background");
-		image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());		
+		image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 
 		imagePos = image.GetComponent<Transform2D>().position2D;
 		imagePos.Set(0.0f, 0.0f, 35.0f);
