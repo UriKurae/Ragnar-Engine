@@ -9,6 +9,9 @@ public class PlayerManager : RagnarComponent
     public Characters[] characters = new Characters[3];
     public Characters playableCharacter;
 
+    GameObject[] area = null;
+    public bool drawnArea = false;
+
     public void Start()
 	{
         ///////////////////////////////////////////////////////////////////
@@ -30,6 +33,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Knife Throw",
             prefabPath = "Assets/Prefabs/Knife.rgprefab",
+            prefabArea = "Assets/Prefabs/Knife Area.rgprefab",
             charges = -1,
             cooldown = 25f
         };
@@ -37,6 +41,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Rock Throw",
             prefabPath = "Assets/Prefabs/Rock.rgprefab",
+            prefabArea = "Assets/Prefabs/Rock Area.rgprefab",
             charges = -1,
             cooldown = 20f
         };
@@ -53,6 +58,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Backstab",
             prefabPath = "Assets/Prefabs/BackStab.rgprefab",
+            prefabArea = "Assets/Prefabs/BackStab Area.rgprefab",
             charges = -1,
             cooldown = 0f
         };
@@ -60,6 +66,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Camouflage",
             prefabPath = "Assets/Prefabs/Camouflage.rgprefab",
+            prefabArea = "Assets/Prefabs/Backstab Area.rgprefab",
             charges = -1,
             cooldown = 30f
         };
@@ -76,6 +83,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Sword Slash",
             prefabPath = "Assets/Prefabs/SwordSlash.rgprefab",
+            prefabArea = "Assets/Prefabs/SwordSlash Area.rgprefab",
             charges = -1,
             cooldown = 0f
         };
@@ -83,6 +91,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Stunner",
             prefabPath = "Assets/Prefabs/StunnerShot.rgprefab",
+            prefabArea = "Assets/Prefabs/Stunner Area.rgprefab",
             charges = 4,
             cooldown = 5f
         };
@@ -130,6 +139,12 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
+        // Update posición áreas
+        if (area != null)
+        {
+            area[0].transform.globalPosition.Set(players[characterSelected].transform.globalPosition.x, area[0].transform.localPosition.y, players[characterSelected].transform.globalPosition.z);
+        }
+
         // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
         {
@@ -142,6 +157,16 @@ public class PlayerManager : RagnarComponent
             else if (!playableCharacter.abilities[0].onCooldown)
             {
                 playableCharacter.state = State.ABILITY_1;
+
+                // Dibujado del área de rango.
+                if(!drawnArea)
+                {
+                    drawnArea = true;
+                    InternalCalls.InstancePrefab(playableCharacter.abilities[0].prefabArea);
+                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
+                    //players[characterSelected].AddChild(area[0]);
+                }
+
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
             }
             // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
@@ -162,6 +187,15 @@ public class PlayerManager : RagnarComponent
             else if (!playableCharacter.abilities[1].onCooldown)
             {
                 playableCharacter.state = State.ABILITY_2;
+
+                if (!drawnArea)
+                {
+                    drawnArea = true;
+                    InternalCalls.InstancePrefab(playableCharacter.abilities[1].prefabArea);
+                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
+                    //players[characterSelected].AddChild(area[0]);
+                }
+
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
             }
             else
@@ -198,14 +232,29 @@ public class PlayerManager : RagnarComponent
             // Pone la habilidad en cooldown y el player en estado de NONE
             playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
             playableCharacter.state = State.NONE;
+
             // Se cambia el estado a POSTCAST para evitar que se mueva directamente después de castear la habilidad. En el update de los players se cambiará a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
             players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
+
+            for (int i = 0; i < area.Length; i++)
+            {
+                InternalCalls.Destroy(area[i]);
+            }
+            area = null;
+            drawnArea = false;
         }
         // Se cancela el estado de la habilidad para que el área de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
             playableCharacter.state = State.NONE;
             players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+
+            for (int i = 0; i < area.Length; i++)
+            {
+                InternalCalls.Destroy(area[i]);
+            }
+            area = null;
+            drawnArea = false;
         }
     }
 
