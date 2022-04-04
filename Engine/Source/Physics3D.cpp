@@ -308,6 +308,7 @@ void Physics3D::DeleteBody(RigidBodyComponent* body, std::string name)
 {
 	if (body != nullptr)
 	{
+		world->removeRigidBody(body->GetBody());
 		if (body->constraintBodies.empty() == false)
 		{
 			std::vector<RigidBodyComponent*>::const_iterator k;
@@ -354,7 +355,6 @@ void Physics3D::DeleteBody(RigidBodyComponent* body, std::string name)
 				break;
 			}
 		}
-		world->removeRigidBody(body->GetBody());
 	}
 }
 

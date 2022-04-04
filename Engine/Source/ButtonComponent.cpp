@@ -27,7 +27,8 @@ ButtonComponent::ButtonComponent(GameObject* own)
 		pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		actual = normalMaterial;
-	}	
+	}
+
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
@@ -41,7 +42,7 @@ ButtonComponent::~ButtonComponent()
 
 bool ButtonComponent::Update(float dt)
 {
-	buttonText.SetOnlyPosition(float2(GetParentPosition().x+textPos.x, GetParentPosition().y + textPos.y));
+	buttonText.SetOnlyPosition(float2(GetParentPosition().x + textPos.x, GetParentPosition().y + textPos.y));
 
 	if (!active)
 		state = State::DISABLED;
@@ -82,7 +83,7 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 }
 
 void ButtonComponent::OnEditor()
-{	
+{
 	if (ImGui::CollapsingHeader("ButtonComponent"))
 	{
 		static float multiplier = 1;
@@ -126,8 +127,8 @@ float2 ButtonComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	
-	return{ position.x/2 ,position.y/2 };
+
+	return{ position.x / 2 ,position.y / 2 };
 }
 bool ButtonComponent::OnLoad(JsonParsing& node)
 {

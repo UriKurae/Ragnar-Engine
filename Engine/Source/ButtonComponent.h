@@ -50,7 +50,7 @@ private:
 	Text buttonText;
 	State state = State::NORMAL;
 	bool fadeUI = false;
-	float2 textPos={0,0};
+	float2 textPos = { 0,0 };
 	MaterialComponent* normalMaterial;
 	MaterialComponent* focusedMaterial;
 	MaterialComponent* pressedMaterial;

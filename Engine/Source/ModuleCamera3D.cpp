@@ -322,10 +322,13 @@ void ModuleCamera3D::CalculateViewMatrix()
 
 void ModuleCamera3D::UpdateFovAndScreen(float width, float height)
 {
-	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (height / width));
-	cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
-	currentScreenHeight = height;
-	currentScreenWidth = width;
+	if (currentScreenHeight != height || currentScreenWidth != width)
+	{
+		verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (height / width));
+		cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
+		currentScreenHeight = height;
+		currentScreenWidth = width;
+	}
 }
 
 void ModuleCamera3D::UpdateFov()

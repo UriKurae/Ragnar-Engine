@@ -7,7 +7,11 @@
 
 #define MAX_LIGHTS 8
 
+class VertexArray;
+class VertexBuffer;
+class IndexBuffer;
 class Framebuffer;
+class TextureBuffer;
 class Material;
 class Shader;
 class GameObject;
@@ -23,6 +27,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init(JsonParsing& node) override;
+	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
@@ -115,4 +120,9 @@ private:
 
 	std::vector<Shader*> shaders;
 	std::vector<Material*> materials;
+
+	VertexArray* distVao;
+	VertexBuffer* distVbo;
+	IndexBuffer* distIbo;
+	std::shared_ptr<Shader> postProcessingShader;
 };

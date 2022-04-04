@@ -35,7 +35,8 @@ public:
 	Color focusedColor = blue;
 	Color normalColor = green;
 	Color selectedColor = black;
+	MyPlane* planeToDraw;
 	Color textColor = white;
-	char text[64] = "Text";
+	std::string text;
 	float fontScale = 1;
 };

@@ -50,7 +50,9 @@ Application::Application()
 	
 	// Scenes
 	AddModule(sceneManager);
+#ifndef DIST
 	AddModule(editor);
+#endif
 	AddModule(userInterface);
 
 	AddModule(renderer3D);

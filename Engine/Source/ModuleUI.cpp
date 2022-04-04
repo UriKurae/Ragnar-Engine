@@ -30,7 +30,6 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	scale = sca;
 
 	vertices.push_back({ -0.5,0.5,0 });
-	vertices.push_back({ -0.5,0.5,0});
 	vertices.push_back({ -0.5,-0.5,0 });
 	vertices.push_back({ 0.5,-0.5,0 });
 
@@ -271,7 +270,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	focusedGameObject = nullptr;
-	UIGameObjectSelected = nullptr;	
+	UIGameObjectSelected = nullptr;
 }
 
 ModuleUI::~ModuleUI()
@@ -362,9 +361,9 @@ bool ModuleUI::Start()
 	shader = new Shadert("", "");
 	return true;
 }
-void ModuleUI::updateText() 
+void ModuleUI::updateText()
 {
-	float4 size=app->editor->GetGameView()->GetBounds();
+	float4 size = app->editor->GetGameView()->GetBounds();
 	app->renderer3D->OnResize(size.z, size.w);
 	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
 }
@@ -395,7 +394,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	math::float3 center = math::float3(x, y, 1.0f);
 	model = model.Scale(scl, center);
 	model.SetTranslatePart(center);
-	
+
 	auto p = frustum.ProjectionMatrix();
 	glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
@@ -467,6 +466,7 @@ bool ModuleUI::PreUpdate(float dt)
 		SetFocusedObject();
 	}
 
+
 	return true;
 }
 
@@ -483,8 +483,7 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
 		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
 		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
-
-		if (buttonComp|| checkComp|| sliderComp)
+		if (buttonComp || checkComp || sliderComp)
 		{
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
@@ -582,8 +581,8 @@ bool ModuleUI::Update(float dt)
 			textExample = sliderComp->GetText().textt;
 			color = sliderComp->GetTextColor();
 		}
-	}	
-	
+	}
+
 	return true;
 }
 void ModuleUI::OrderButtons()

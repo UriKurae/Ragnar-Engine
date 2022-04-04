@@ -204,7 +204,8 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 	{
 		char infoLog[512];
 		glGetShaderInfoLog(vs, 512, NULL, infoLog);
-		DEBUG_LOG("Vertex shader compilation failed: %s", infoLog);
+		std::string msg = name + " Vertex shader compilation failed: " + infoLog;
+		DEBUG_LOG(msg.c_str());
 	}
 
 	unsigned int fs = glCreateShader(GL_FRAGMENT_SHADER);
@@ -217,7 +218,8 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 	{
 		char infoLog[512];
 		glGetShaderInfoLog(fs, 512, NULL, infoLog);
-		DEBUG_LOG("Fragment shader compilation failed: %s", infoLog);
+		std::string msg = name + " Fragment shader compilation failed: " + infoLog;
+		DEBUG_LOG(msg.c_str());
 	}
 
 	rendererID = glCreateProgram();
@@ -232,7 +234,8 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 	{
 		char infoLog[512];
 		glGetProgramInfoLog(rendererID, 512, NULL, infoLog);
-		DEBUG_LOG("Program Linking failed: %s", infoLog);
+		std::string msg = name + " Program Linking failed: " + infoLog;
+		DEBUG_LOG(msg.c_str());
 	}
 	else
 	{
@@ -259,7 +262,7 @@ unsigned int Shader::CreateShader(const std::string& vertexSource, const std::st
 std::string Shader::ReadFile()
 {
 	std::string ret;
-	std::ifstream in(assetsPath, std::ios::in, std::ios::binary);
+	std::ifstream in(libraryPath, std::ios::in, std::ios::binary);
 
 	if (in)
 	{
