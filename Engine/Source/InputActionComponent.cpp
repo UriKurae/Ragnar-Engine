@@ -198,9 +198,6 @@ bool InputActionComponent::OnLoad(JsonParsing& node)
 
 	currentAssetName = node.GetJsonString("Path");
 
-	LoadScriptsList(node);
-	LoadCurrentMethodList(node);
-
 	return true;
 }
 
@@ -211,11 +208,23 @@ bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", currentAssetPath.c_str());
 
-	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Scripts List");
-	SaveScriptsList(file, newArray);
-	
-	newArray = file.SetNewJsonArray(file.GetRootValue(), "Current Method List");
-	SaveCurrentMethodList(file, newArray);
+	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Action Maps List");
+	JsonParsing actionMapFile = JsonParsing();
+	for (size_t i = 0; i < currentActionMaps.size(); i++)
+	{
+		JSON_Array* actionMaps = actionMapFile.SetNewJsonArray(actionMapFile.GetRootValue(), std::to_string(i).c_str());
+		JsonParsing actionsFile = JsonParsing();
+		for (size_t j = 0; j < currentActionMaps[i]->GetActions()->size(); j++)
+		{
+			JSON_Array* actions = actionsFile.SetNewJsonArray(actionsFile.GetRootValue(), std::to_string(j).c_str());
+			JsonParsing actionsInfoFile = JsonParsing();
+			actionsInfoFile.SetNewJsonString(actionsInfoFile.ValueToObject(actionsInfoFile.GetRootValue()), "Script", scriptsNameList[i][j].c_str());
+			actionsInfoFile.SetNewJsonString(actionsInfoFile.ValueToObject(actionsInfoFile.GetRootValue()), "Method", scriptsMethodsList[i][j][currentMethodList[i][j]].c_str());
+			actionsFile.SetValueToArray(actions, actionsInfoFile.GetRootValue());
+		}
+		actionMapFile.SetValueToArray(actionMaps, actionsFile.GetRootValue());
+	}
+	file.SetValueToArray(newArray, actionMapFile.GetRootValue());
 
 	node.SetValueToArray(array, file.GetRootValue());
 
@@ -279,77 +288,5 @@ void InputActionComponent::LoadAllInputAssets(const char* folder)
 	for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
 	{
 		LoadAllInputAssets((*it).c_str());
-	}
-}
-
-void InputActionComponent::SaveScriptsList(JsonParsing& node, JSON_Array* array)
-{
-	JsonParsing file = JsonParsing();
-
-	for (size_t i = 0; i < scriptsNameList.size(); i++)
-	{
-		JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), std::to_string(i).c_str());
-		for (size_t j = 0; j < scriptsNameList[i].size(); j++)
-		{
-			JsonParsing newFile = JsonParsing();
-			newFile.SetNewJsonString(newFile.ValueToObject(newFile.GetRootValue()), std::to_string(j).c_str(), scriptsNameList[i][j].c_str());
-			file.SetValueToArray(newArray, newFile.GetRootValue());
-		}
-	}
-
-	node.SetValueToArray(array, file.GetRootValue());
-}
-
-void InputActionComponent::LoadScriptsList(JsonParsing& node)
-{
-	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Scripts List");
-
-	size_t size = node.GetJsonArrayCount(jsonArray);
-	for (int i = 0; i < size; ++i)
-	{
-		JsonParsing go = node.GetJsonArrayValue(jsonArray, i);
-		JSON_Array* jsonArray2 = go.GetJsonArray(go.ValueToObject(go.GetRootValue()), std::to_string(i).c_str());
-		size_t size2 = node.GetJsonArrayCount(jsonArray2);
-		for (size_t j = 0; j < size2; j++)
-		{
-			JsonParsing scriptName = node.GetJsonArrayValue(jsonArray2, j);
-			scriptsNameList[i][j] = scriptName.GetJsonString(std::to_string(j).c_str());
-		}
-	}
-}
-
-void InputActionComponent::SaveCurrentMethodList(JsonParsing& node, JSON_Array* array)
-{
-	JsonParsing file = JsonParsing();
-
-	for (size_t i = 0; i < currentMethodList.size(); i++)
-	{
-		JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), std::to_string(i).c_str());
-		for (size_t j = 0; j < currentMethodList[i].size(); j++)
-		{
-			JsonParsing newFile = JsonParsing();
-			newFile.SetNewJsonNumber(newFile.ValueToObject(newFile.GetRootValue()), std::to_string(j).c_str(), currentMethodList[i][j]);
-			file.SetValueToArray(newArray, newFile.GetRootValue());
-		}
-	}
-
-	node.SetValueToArray(array, file.GetRootValue());
-}
-
-void InputActionComponent::LoadCurrentMethodList(JsonParsing& node)
-{
-	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Current Method List");
-
-	size_t size = node.GetJsonArrayCount(jsonArray);
-	for (int i = 0; i < size; ++i)
-	{
-		JsonParsing go = node.GetJsonArrayValue(jsonArray, i);
-		JSON_Array* jsonArray2 = go.GetJsonArray(go.ValueToObject(go.GetRootValue()), std::to_string(i).c_str());
-		size_t size2 = node.GetJsonArrayCount(jsonArray2);
-		for (size_t j = 0; j < size2; j++)
-		{
-			JsonParsing scriptName = node.GetJsonArrayValue(jsonArray2, j);
-			currentMethodList[i][j] = scriptName.GetJsonNumber(std::to_string(j).c_str());
-		}
 	}
 }

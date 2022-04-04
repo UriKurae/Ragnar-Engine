@@ -22,12 +22,6 @@ public:
 	bool LoadInputAsset(const char* path);
 	void LoadAllInputAssets(const char* folder);
 
-	void SaveScriptsList(JsonParsing& node, JSON_Array* array);
-	void LoadScriptsList(JsonParsing& node);
-
-	void SaveCurrentMethodList(JsonParsing& node, JSON_Array* array);
-	void LoadCurrentMethodList(JsonParsing& node);
-
 private:
 
 	std::vector<std::shared_ptr<ActionMaps>> currentActionMaps;
