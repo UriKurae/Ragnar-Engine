@@ -5,7 +5,8 @@ public class Abilities
 {
     public string name;
     public string prefabPath;
-    public int range;
+    public int lightY;
+    public int linear;
 
     // -1 is infinite charges
     public int charges;

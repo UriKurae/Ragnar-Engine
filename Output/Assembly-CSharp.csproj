@@ -83,6 +83,8 @@
 		<Compile Include="Assets\Scripts\Characters.cs" />
 		<Compile Include="Assets\Scripts\Camouflage.cs" />
 		<Compile Include="Assets\Scripts\BackStab.cs" />
+		<Compile Include="Assets\Scripts\StunnerShot.cs" />
+		<Compile Include="Assets\Scripts\SwordSlash.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Assembly-CSharp\App.config" />

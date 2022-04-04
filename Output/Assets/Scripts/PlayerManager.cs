@@ -30,7 +30,6 @@ public class PlayerManager : RagnarComponent
         {
             name = "Knife Throw",
             prefabPath = "Assets/Prefabs/Knife.rgprefab",
-            range = 70,
             charges = -1,
             cooldown = 25f
         };
@@ -38,7 +37,6 @@ public class PlayerManager : RagnarComponent
         {
             name = "Rock Throw",
             prefabPath = "Assets/Prefabs/Rock.rgprefab",
-            range = 50,
             charges = -1,
             cooldown = 20f
         };
@@ -55,7 +53,6 @@ public class PlayerManager : RagnarComponent
         {
             name = "Backstab",
             prefabPath = "Assets/Prefabs/BackStab.rgprefab",
-            range = 5,
             charges = -1,
             cooldown = 0f
         };
@@ -63,7 +60,6 @@ public class PlayerManager : RagnarComponent
         {
             name = "Camouflage",
             prefabPath = "Assets/Prefabs/Rock.rgprefab",
-            range = 50,
             charges = -1,
             cooldown = 30f
         };
@@ -79,16 +75,14 @@ public class PlayerManager : RagnarComponent
         characters[2].abilities[0] = new Abilities
         {
             name = "Sword Slash",
-            prefabPath = "Assets/Prefabs/Knife.rgprefab",
-            range = 5,
+            prefabPath = "Assets/Prefabs/SwordSlash.rgprefab",
             charges = -1,
             cooldown = 0f
         };
         characters[2].abilities[1] = new Abilities
         {
             name = "Stunner",
-            prefabPath = "Assets/Prefabs/Rock.rgprefab",
-            range = 50,
+            prefabPath = "Assets/Prefabs/StunnerShot.rgprefab",
             charges = 4,
             cooldown = 5f
         };
@@ -130,7 +124,6 @@ public class PlayerManager : RagnarComponent
                     a.onCooldown = false;
                     a.counter = 0f;
                 }
-
             }
         }
     }
@@ -175,6 +168,7 @@ public class PlayerManager : RagnarComponent
             {
                 Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[1].cooldown - playableCharacter.abilities[1].counter) + "seconds left to use it again!");
                 playableCharacter.state = State.NONE;
+
             }
         }
 
