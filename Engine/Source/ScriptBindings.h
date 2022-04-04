@@ -230,6 +230,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 
 	return app->moduleMono->GoToCSGO(go);
 }
+
 void InstancePrefab(MonoObject* path)
 {
 	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
@@ -380,6 +381,15 @@ void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
 	OBB newObb = AABB(minPoint, maxPoint).ToOBB();
 	gameObject->SetAABB(newObb);
 }
+
+void AddChild(MonoObject* go, MonoObject* child)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	GameObject* newChild = app->moduleMono->GameObjectFromCSGO(child);
+
+	parent->AddChild(newChild);
+}
+
 // GameObject =======================
 
 // UI ===============================
