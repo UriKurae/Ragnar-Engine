@@ -114,6 +114,8 @@ public:
 	std::vector<PointLight*> pointLights;
 	std::vector<SpotLight*> spotLights;
 
+	std::vector<float3> enemyCones;
+
 private:
 	Material* defaultMaterial;
 	unsigned int defaultShader;
@@ -125,4 +127,8 @@ private:
 	VertexBuffer* distVbo;
 	IndexBuffer* distIbo;
 	std::shared_ptr<Shader> postProcessingShader;
+	
+
+	VertexBuffer* vbo;
+	std::shared_ptr<Shader> coneShader;
 };
