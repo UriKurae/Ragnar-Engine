@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
 	<RootPaths>
-		<ProjectRoot>F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\</ProjectRoot>
-		<SourceFilesRoot>F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>F:\uni\3r any\Github\ProjectIII\Output\Assets\Wwise\</SoundBanksRoot>
+		<ProjectRoot>D:\Uni\3any\2n semestre\Project 3 WWise\RagnarEngineSound\</ProjectRoot>
+		<SourceFilesRoot>D:\Uni\3any\2n semestre\Project 3 WWise\RagnarEngineSound\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\Uni\3any\2n semestre\Project 3 WWise\Export\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>F:\uni\3r any\Wwise\RagnarEngineSound\RagnarEngineSound\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>D:\Uni\3any\2n semestre\Project 3 WWise\RagnarEngineSound\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="87917746" Language="SFX" Hash="2356513621">
+		<SoundBank Id="87917746" Language="SFX" Hash="2133936386">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine</ObjectPath>
 			<ShortName>ragnarEngine</ShortName>
 			<Path>ragnarEngine.bnk</Path>
 			<IncludedEvents>
+				<Event Id="2749062944" Name="CharBulletHit" ObjectPath="\Events\SFX\CharBulletHit">
+					<IncludedMemoryFiles>
+						<File Id="244076160" Language="SFX">
+							<ShortName>char_bullethit.wav</ShortName>
+							<Path>SFX\char_bullethit_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2875345708" Name="CharDropBodySand" ObjectPath="\Events\SFX\CharDropBodySand">
+					<IncludedMemoryFiles>
+						<File Id="923508464" Language="SFX">
+							<ShortName>char_dropbody_sand.wav</ShortName>
+							<Path>SFX\char_dropbody_sand_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1895938626" Name="CharFall" ObjectPath="\Events\SFX\CharFall">
+					<IncludedMemoryFiles>
+						<File Id="438459872" Language="SFX">
+							<ShortName>char_fall.wav</ShortName>
+							<Path>SFX\char_fall_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="800229104" Name="CharMaleDeath" ObjectPath="\Events\SFX\CharMaleDeath">
+					<IncludedMemoryFiles>
+						<File Id="350514896" Language="SFX">
+							<ShortName>char_male_death.wav</ShortName>
+							<Path>SFX\char_male_death_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1489983796" Name="CharSandSteps" ObjectPath="\Events\SFX\CharSandSteps">
+					<IncludedMemoryFiles>
+						<File Id="1027652605" Language="SFX">
+							<ShortName>char_snadsteps.wav</ShortName>
+							<Path>SFX\char_snadsteps_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="2769082178" Name="Enemy1Death" ObjectPath="\Events\Default Work Unit\Enemy1Death">
 					<IncludedMemoryFiles>
 						<File Id="793852379" Language="SFX">
@@ -29,6 +69,38 @@
 						<File Id="341785350" Language="SFX">
 							<ShortName>nme_enemy1_shoot_sfx.wav</ShortName>
 							<Path>SFX\nme_enemy1_shoot_sfx_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3052513979" Name="EnemyMaleDeath1" ObjectPath="\Events\SFX\EnemyMaleDeath1">
+					<IncludedMemoryFiles>
+						<File Id="157690958" Language="SFX">
+							<ShortName>enemy_male_death1.wav</ShortName>
+							<Path>SFX\enemy_male_death1_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3052513976" Name="EnemyMaleDeath2" ObjectPath="\Events\SFX\EnemyMaleDeath2">
+					<IncludedMemoryFiles>
+						<File Id="128218371" Language="SFX">
+							<ShortName>enemy_male_death2.wav</ShortName>
+							<Path>SFX\enemy_male_death2_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3052513977" Name="EnemyMaleDeath3" ObjectPath="\Events\SFX\EnemyMaleDeath3">
+					<IncludedMemoryFiles>
+						<File Id="804361737" Language="SFX">
+							<ShortName>enemy_male_death3.wav</ShortName>
+							<Path>SFX\enemy_male_death3_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3052513982" Name="EnemyMaleDeath4" ObjectPath="\Events\SFX\EnemyMaleDeath4">
+					<IncludedMemoryFiles>
+						<File Id="920634880" Language="SFX">
+							<ShortName>enemy_male_death4.wav</ShortName>
+							<Path>SFX\enemy_male_death4_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -101,6 +173,262 @@
 						<File Id="903503596" Language="SFX">
 							<ShortName>char_paulatreides_throw_rock_sfx.wav</ShortName>
 							<Path>SFX\char_paulatreides_throw_rock_sfx_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4026503704" Name="UIAchievement" ObjectPath="\Events\SFX\UIAchievement">
+					<IncludedMemoryFiles>
+						<File Id="612307505" Language="SFX">
+							<ShortName>ui_archievement.wav</ShortName>
+							<Path>SFX\ui_archievement_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4097488049" Name="UICloseMap" ObjectPath="\Events\SFX\UICloseMap">
+					<IncludedMemoryFiles>
+						<File Id="219833571" Language="SFX">
+							<ShortName>ui_closemap.wav</ShortName>
+							<Path>SFX\ui_closemap_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3688828052" Name="UIDialogPass" ObjectPath="\Events\SFX\UIDialogPass">
+					<IncludedMemoryFiles>
+						<File Id="550451911" Language="SFX">
+							<ShortName>ui_dialoguepass.wav</ShortName>
+							<Path>SFX\ui_dialoguepass_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="199363535" Name="UIHover" ObjectPath="\Events\SFX\UIHover">
+					<IncludedMemoryFiles>
+						<File Id="884927929" Language="SFX">
+							<ShortName>ui_hover.wav</ShortName>
+							<Path>SFX\ui_hover_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1925303288" Name="UIJournal" ObjectPath="\Events\SFX\UIJournal">
+					<IncludedMemoryFiles>
+						<File Id="555056307" Language="SFX">
+							<ShortName>ui_journal.wav</ShortName>
+							<Path>SFX\ui_journal_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2103772390" Name="UILogro" ObjectPath="\Events\SFX\UILogro">
+					<IncludedMemoryFiles>
+						<File Id="640201244" Language="SFX">
+							<ShortName>ui_logro.wav</ShortName>
+							<Path>SFX\ui_logro_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2025717524" Name="UILoseScreen" ObjectPath="\Events\SFX\UILoseScreen">
+					<IncludedMemoryFiles>
+						<File Id="1046175146" Language="SFX">
+							<ShortName>ui_losescreen.wav</ShortName>
+							<Path>SFX\ui_losescreen_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="934498775" Name="UIOpenMap" ObjectPath="\Events\SFX\UIOpenMap">
+					<IncludedMemoryFiles>
+						<File Id="253607662" Language="SFX">
+							<ShortName>ui_openmap.wav</ShortName>
+							<Path>SFX\ui_openmap_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1816659375" Name="UISelect" ObjectPath="\Events\SFX\UISelect">
+					<IncludedMemoryFiles>
+						<File Id="554193888" Language="SFX">
+							<ShortName>ui_select.wav</ShortName>
+							<Path>SFX\ui_select_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4032367875" Name="UIUNavailable" ObjectPath="\Events\SFX\UIUNavailable">
+					<IncludedMemoryFiles>
+						<File Id="997151875" Language="SFX">
+							<ShortName>ui_unavaliable.wav</ShortName>
+							<Path>SFX\ui_unavaliable_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3646480314" Name="WeaponCamouflageActivate" ObjectPath="\Events\SFX\WeaponCamouflageActivate">
+					<IncludedMemoryFiles>
+						<File Id="790697357" Language="SFX">
+							<ShortName>wpn_camouflage_activate.wav</ShortName>
+							<Path>SFX\wpn_camouflage_activate_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2286958283" Name="WeaponCamouflageDeactivate" ObjectPath="\Events\SFX\WeaponCamouflageDeactivate">
+					<IncludedMemoryFiles>
+						<File Id="1062405570" Language="SFX">
+							<ShortName>wpn_camouflage_deactivate.wav</ShortName>
+							<Path>SFX\wpn_camouflage_deactivate_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="879059569" Name="WeaponCrysKnifeStab" ObjectPath="\Events\SFX\WeaponCrysKnifeStab">
+					<IncludedMemoryFiles>
+						<File Id="1003087338" Language="SFX">
+							<ShortName>wpn_crysknife_stab.wav</ShortName>
+							<Path>SFX\wpn_crysknife_stab_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="257223406" Name="WeaponCrysKnifeStabShield" ObjectPath="\Events\SFX\WeaponCrysKnifeStabShield">
+					<IncludedMemoryFiles>
+						<File Id="542191240" Language="SFX">
+							<ShortName>wpn_crysknife_stabshield.wav</ShortName>
+							<Path>SFX\wpn_crysknife_stabshield_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4005152286" Name="WeaponCrysKnifeUnseathe" ObjectPath="\Events\SFX\WeaponCrysKnifeUnseathe">
+					<IncludedMemoryFiles>
+						<File Id="169814397" Language="SFX">
+							<ShortName>wpn_crysknife_unseathe.wav</ShortName>
+							<Path>SFX\wpn_crysknife_unseathe_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="781129385" Name="WeaponEagleOrder" ObjectPath="\Events\SFX\WeaponEagleOrder">
+					<IncludedMemoryFiles>
+						<File Id="1005878570" Language="SFX">
+							<ShortName>wpn_eagle_order.wav</ShortName>
+							<Path>SFX\wpn_eagle_order_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2947257792" Name="WeaponEagleScream" ObjectPath="\Events\SFX\WeaponEagleScream">
+					<IncludedMemoryFiles>
+						<File Id="1019569489" Language="SFX">
+							<ShortName>wpn_eagle_scream.wav</ShortName>
+							<Path>SFX\wpn_eagle_scream_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1152200962" Name="WeaponGrenadeExplosion" ObjectPath="\Events\SFX\WeaponGrenadeExplosion">
+					<IncludedMemoryFiles>
+						<File Id="567366955" Language="SFX">
+							<ShortName>wpn_granade_explosion.wav</ShortName>
+							<Path>SFX\wpn_granade_explosion_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2861432993" Name="WeaponHunterSeekerActivate" ObjectPath="\Events\SFX\WeaponHunterSeekerActivate">
+					<IncludedMemoryFiles>
+						<File Id="904927342" Language="SFX">
+							<ShortName>wpn_hunterseeker_activate.wav</ShortName>
+							<Path>SFX\wpn_hunterseeker_activate_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3951004687" Name="WeaponHunterSeekerFlying" ObjectPath="\Events\SFX\WeaponHunterSeekerFlying">
+					<IncludedMemoryFiles>
+						<File Id="755783003" Language="SFX">
+							<ShortName>wpn_hunterseeker_flying.wav</ShortName>
+							<Path>SFX\wpn_hunterseeker_flying_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2111300767" Name="WeaponHunterSeekerNeedle" ObjectPath="\Events\SFX\WeaponHunterSeekerNeedle">
+					<IncludedMemoryFiles>
+						<File Id="415260747" Language="SFX">
+							<ShortName>wpn_hunterseeker_needle.wav</ShortName>
+							<Path>SFX\wpn_hunterseeker_needle_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3273587666" Name="WeaponReload" ObjectPath="\Events\SFX\WeaponReload">
+					<IncludedMemoryFiles>
+						<File Id="274467998" Language="SFX">
+							<ShortName>wpn_reload.wav</ShortName>
+							<Path>SFX\wpn_reload_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2291108256" Name="WeaponRockHitGround" ObjectPath="\Events\SFX\WeaponRockHitGround">
+					<IncludedMemoryFiles>
+						<File Id="613801772" Language="SFX">
+							<ShortName>wpn_rock_hitground.wav</ShortName>
+							<Path>SFX\wpn_rock_hitground_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="866116580" Name="WeaponStunnerShot" ObjectPath="\Events\SFX\WeaponStunnerShot">
+					<IncludedMemoryFiles>
+						<File Id="606934601" Language="SFX">
+							<ShortName>wpn_stunnershot.wav</ShortName>
+							<Path>SFX\wpn_stunnershot_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3197618795" Name="WeaponSwordHit" ObjectPath="\Events\SFX\WeaponSwordHit">
+					<IncludedMemoryFiles>
+						<File Id="765016676" Language="SFX">
+							<ShortName>wpn_sword_hit.wav</ShortName>
+							<Path>SFX\wpn_sword_hit_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="939814239" Name="WeaponSwordUnseathe" ObjectPath="\Events\SFX\WeaponSwordUnseathe">
+					<IncludedMemoryFiles>
+						<File Id="4101192" Language="SFX">
+							<ShortName>wpn_sowrd_unseathe.wav</ShortName>
+							<Path>SFX\wpn_sowrd_unseathe_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2016332859" Name="WeaponThrowingKnifeHit" ObjectPath="\Events\SFX\WeaponThrowingKnifeHit">
+					<IncludedMemoryFiles>
+						<File Id="804295339" Language="SFX">
+							<ShortName>wpn_throwingknife_hit.wav</ShortName>
+							<Path>SFX\wpn_throwingknife_hit_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2475543772" Name="WeaponThrowingKnifeHitShield" ObjectPath="\Events\SFX\WeaponThrowingKnifeHitShield">
+					<IncludedMemoryFiles>
+						<File Id="723872585" Language="SFX">
+							<ShortName>wpn_throwingknife_hitshield.wav</ShortName>
+							<Path>SFX\wpn_throwingknife_hitshield_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3383480840" Name="WeaponThrowingKnifeRecover" ObjectPath="\Events\SFX\WeaponThrowingKnifeRecover">
+					<IncludedMemoryFiles>
+						<File Id="198244761" Language="SFX">
+							<ShortName>wpn_throwingknife_recover.wav</ShortName>
+							<Path>SFX\wpn_throwingknife_recover_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1918169630" Name="WeaponThrowingKnifeRecoverSand" ObjectPath="\Events\SFX\WeaponThrowingKnifeRecoverSand">
+					<IncludedMemoryFiles>
+						<File Id="1058376367" Language="SFX">
+							<ShortName>wpn_throwingknife_recoversnad.wav</ShortName>
+							<Path>SFX\wpn_throwingknife_recoversnad_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1079115772" Name="WeaponThrowingKnifeThrow" ObjectPath="\Events\SFX\WeaponThrowingKnifeThrow">
+					<IncludedMemoryFiles>
+						<File Id="934003413" Language="SFX">
+							<ShortName>wpn_thorwingknife_throw.wav</ShortName>
+							<Path>SFX\wpn_thorwingknife_throw_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1258894737" Name="WeaponVoice" ObjectPath="\Events\SFX\WeaponVoice">
+					<IncludedMemoryFiles>
+						<File Id="699525885" Language="SFX">
+							<ShortName>wpn_voice.wav</ShortName>
+							<Path>SFX\wpn_voice_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
