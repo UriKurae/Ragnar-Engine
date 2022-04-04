@@ -13,7 +13,7 @@ public class Camouflage : RagnarComponent
 	}
 	private void ChooseMesh()
     {
-		//this.gameObject.GetComponent<Mesh>
+		this.gameObject.GetComponent<Material>().texture = "";
     }
 
 }

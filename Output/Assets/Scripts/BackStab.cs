@@ -22,13 +22,17 @@ public class BackStab : RagnarComponent
 	public void Update()
 	{
 		selectedEnemy = CalculateDistancePlayerEnemies();
+		Debug.Log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		if (selectedEnemy != null && backstabed == false)
         {
-			Debug.Log("BackStabed");
 			backstabed = true;
+			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
+			behind.y = -0.8f;
+			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
 			InternalCalls.Destroy(selectedEnemy);
-			InternalCalls.Destroy(this.gameObject);
 		}
+		InternalCalls.Destroy(this.gameObject);
+  
 	}
 	public bool Timer()//moltes gracies Isaac
     {
@@ -51,10 +55,10 @@ public class BackStab : RagnarComponent
 			Vector3 enemyPos = enemies[i].transform.globalPosition;
 			Vector3 distance = player.transform.globalPosition - enemyPos;
 			distance.y = 0;
-			if (distance.magnitude <= 5)
+			if (distance.magnitude <= 3)
 			{
 				return enemies[i];
-			}
+            }
 		}
 		return null;
     }
