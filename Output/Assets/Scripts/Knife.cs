@@ -3,7 +3,7 @@ using RagnarEngine;
 
 public class Knife : RagnarComponent
 {
-	private float force = 2000;
+	private float force = 1500;
 	private bool canReload = false;
 	private bool pendingToDelete = false;
 	
