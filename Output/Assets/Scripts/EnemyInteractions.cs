@@ -90,7 +90,7 @@ public class EnemyInteraction : RagnarComponent
 
     public void OnCollision(Rigidbody other)
     {
-        if (other.gameObject.name == "Knife")
+        if (other.gameObject.name == "Knife" || other.gameObject.name == "StunnerShot")
         {
             gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
             pendingToDelete = true;               
