@@ -24,6 +24,10 @@ public class Player : RagnarComponent
 
     public void Update()
     {
+        
+        //GameObject child = GameObject.Find("Floor_01");
+        //gameObject.AddChild(child);
+        
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
             agent.CalculatePath(agent.hitPosition);
