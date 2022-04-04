@@ -40,7 +40,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particlePool.resize(maxParticles);
 
 	//particleReference = new Particle(own);
-	effects.resize(4);
+	effects.resize(5);
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
@@ -271,9 +271,6 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 		TransformComponent* tr = own->GetComponent<TransformComponent>();
 		data.shader->SetUniformMatrix4f("model", tr->GetGlobalTransform().Transposed());
 
-		//for (int i = 0; i < data.textureSlots; ++i)
-		//	data.textureSlots[i]->;
-
 		data.vertexBuffer->Bind();
 		data.indexBuffer->Bind();
 		glDrawElements(GL_TRIANGLES, data.indexCount, GL_UNSIGNED_INT, 0);
@@ -309,7 +306,6 @@ void ParticleEmitter::Update(float dt)
 {
 	UpdateParticle(dt);
 	for (int i = 0; i < particlePool.size(); ++i)
-	//for (auto& particle : particlePool)
 	{
 		Particle& particle = particlePool[i];
 
@@ -396,7 +392,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 				SetUpBuffers();
 		ImGui::PopItemWidth();
 
-
 		guiName = "Particle lifetime" + suffixLabel;
 		ImGui::PushItemWidth(200);
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
@@ -407,9 +402,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::PopItemWidth();
 		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
-		ImGui::PopItemWidth();
-		ImGui::PushItemWidth(200);
-		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
 		ImGui::PopItemWidth();
 	
 		/*guiName = "Color (RGBA)" + suffixLabel;
@@ -472,7 +464,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		textNameDisplay += emitterIndex;
 		if (ImGui::BeginCombo(guiName.c_str(), textNameDisplay.c_str()))
 		{
-			for (int j = (int)ParticleEffectType::NO_TYPE + 1; j <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; j++)
+			for (int j = (int)ParticleEffectType::SPAWNING_SHAPE; j <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; j++)
 			{
 				guiName = (GetNameFromEffect((ParticleEffectType)j)) + suffixLabel;
 
