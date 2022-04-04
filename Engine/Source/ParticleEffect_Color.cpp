@@ -3,6 +3,8 @@
 
 #include <Imgui/imgui.h>
 
+#include "Profiling.h"
+
 ParticleEffect_Color::ParticleEffect_Color() : ParticleEffect(ParticleEffectType::COLOR_OVER_LIFETIME),
 startColor({ 1.0f,0.0f,0.0f,1.0f }),
 endColor({ 0.0f,1.0f,0.0f,1.0f })
@@ -15,6 +17,8 @@ ParticleEffect_Color::~ParticleEffect_Color()
 
 void ParticleEffect_Color::Update(Particle& particle, float dt)
 {
+	RG_PROFILING_FUNCTION("Color Effect");
+
 	float porcentage = particle.lifeRemaining / particle.lifeTime;
 	float4 color = float4::Lerp(endColor, startColor, porcentage);
 	//color.w *= porcentage;

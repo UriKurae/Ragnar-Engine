@@ -5,7 +5,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include <stack>
+#include "Geometry/LineSegment.h"
 #include "Profiling.h"
 
 Quadtree::Quadtree() : root(nullptr)
@@ -124,7 +124,19 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 	}
 }
 
-void Quadtree::CollectGo(std::vector<GameObject*>& gos)
+void Quadtree::CollectGo(std::vector<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes)
+{
+	while (!nodes.empty())
+	{
+		QuadtreeNode* node = nodes.top();
+		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+			gos.push_back(*it);
+
+		nodes.pop();
+	}
+}
+
+void Quadtree::CollectNodes(std::stack<QuadtreeNode*>& nodes, LineSegment ray)
 {
 	std::stack<QuadtreeNode*> stack;
 	stack.push(root);
@@ -132,8 +144,8 @@ void Quadtree::CollectGo(std::vector<GameObject*>& gos)
 	while (!stack.empty())
 	{
 		QuadtreeNode* node = stack.top();
-		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
-			gos.push_back(*it);
+		if (ray.Intersects(node->GetBox()))
+			nodes.push(node);
 
 		stack.pop();
 

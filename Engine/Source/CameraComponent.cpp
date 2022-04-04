@@ -163,6 +163,8 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Camera Component Update");
+	
 	camera.SetFrame(transform->GetGlobalTransform().TranslatePart(), transform->GetGlobalTransform().Col3(2), transform->GetGlobalTransform().Col3(1));
 
 	if (app->camera->updateGameView)
@@ -196,14 +198,14 @@ bool CameraComponent::Update(float dt)
 	}
 
 	//Zoom through fov
-	int zoom2 = app->input->GetMouseZ();
-	if (zoom2 > 0 && (RADTODEG * horizontalFov > zoomMax))
+	int zoom = app->input->GetMouseZ();
+	if (zoom > 0 && (RADTODEG * horizontalFov > zoomMax))
 	{
 		horizontalFov = DegToRad(RADTODEG * horizontalFov - zoomSpeed);
 		UpdateFov();
 		CompileBuffers();
 	}
-	else if (zoom2 < 0 && (RADTODEG * horizontalFov < zoomMin))
+	else if (zoom < 0 && (RADTODEG * horizontalFov < zoomMin))
 	{
 		horizontalFov = DegToRad(RADTODEG * horizontalFov + zoomSpeed);
 		UpdateFov();
@@ -250,8 +252,6 @@ bool CameraComponent::Update(float dt)
 	// -------------MOVEMENT---------------
 	UpdateMovement();
 	UpdateRotation();
-
-	
 
 	return true;
 }
