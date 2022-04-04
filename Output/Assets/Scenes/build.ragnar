@@ -128,13 +128,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -64.5,
+                        -596,
                         -209,
                         84
                     ],
                     "Scale": [
-                        1.6363635063171387,
-                        2.0454545021057129,
+                        10.714284896850586,
+                        5.2142853736877441,
                         1
                     ],
                     "rotationEuler": [
@@ -143,7 +143,11 @@
                         0
                     ],
                     "buttonWidth": 150,
-                    "buttonHeight": 73
+                    "buttonHeight": 73,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -175,7 +179,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -194,13 +201,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -28.5,
+                        -560,
                         -210,
                         84
                     ],
                     "Scale": [
-                        1.7590909004211426,
-                        1.4229248762130737,
+                        10.821428298950195,
+                        4.7142858505249023,
                         1
                     ],
                     "rotationEuler": [
@@ -209,7 +216,11 @@
                         0
                     ],
                     "buttonWidth": 151.5,
-                    "buttonHeight": 66
+                    "buttonHeight": 66,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -241,7 +252,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -260,13 +274,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -364.5,
+                        -896,
                         -214,
                         83.5
                     ],
                     "Scale": [
-                        17.263637542724609,
-                        7.69268798828125,
+                        24.357141494750977,
+                        9.75,
                         1
                     ],
                     "rotationEuler": [
@@ -275,10 +289,15 @@
                         0
                     ],
                     "buttonWidth": 341,
-                    "buttonHeight": 136.5
+                    "buttonHeight": 136.5,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -303,13 +322,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        7,
+                        -524.5,
                         -226,
                         83.5
                     ],
                     "Scale": [
-                        22.377273559570312,
-                        4.7134389877319336,
+                        28.821426391601563,
+                        7.3571429252624512,
                         1
                     ],
                     "rotationEuler": [
@@ -318,10 +337,15 @@
                         0
                     ],
                     "buttonWidth": 403.5,
-                    "buttonHeight": 103
+                    "buttonHeight": 103,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -389,8 +413,8 @@
                         84
                     ],
                     "Scale": [
-                        82.840911865234375,
-                        43.053936004638672,
+                        81.607139587402344,
+                        38.151256561279297,
                         1
                     ],
                     "rotationEuler": [
@@ -399,10 +423,15 @@
                         0
                     ],
                     "buttonWidth": 1142.5,
-                    "buttonHeight": 534.11761474609375
+                    "buttonHeight": 534.11761474609375,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -413,7 +442,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 35388872,
+                    "pointer": 287606064,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -434,13 +463,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -326,
+                        -857.5,
                         7.5,
                         88.199996948242188
                     ],
                     "Scale": [
-                        29.577272415161133,
-                        10.449604988098145,
+                        35.107139587402344,
+                        11.964285850524902,
                         1
                     ],
                     "rotationEuler": [
@@ -449,10 +478,15 @@
                         0
                     ],
                     "buttonWidth": 491.5,
-                    "buttonHeight": 167.5
+                    "buttonHeight": 167.5,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -477,13 +511,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -363,
+                        -894.5,
                         30,
                         90
                     ],
                     "Scale": [
-                        13.909090995788574,
-                        1.2005929946899414,
+                        21.428569793701172,
+                        4.5357141494750977,
                         1
                     ],
                     "rotationEuler": [
@@ -492,7 +526,11 @@
                         0
                     ],
                     "buttonWidth": 300,
-                    "buttonHeight": 63.5
+                    "buttonHeight": 63.5,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -524,7 +562,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -543,13 +584,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -363,
+                        -894.5,
                         -28,
                         90
                     ],
                     "Scale": [
-                        13.909090995788574,
-                        1.2005929946899414,
+                        21.428569793701172,
+                        4.5357141494750977,
                         1
                     ],
                     "rotationEuler": [
@@ -558,7 +599,11 @@
                         0
                     ],
                     "buttonWidth": 300,
-                    "buttonHeight": 63.5
+                    "buttonHeight": 63.5,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -590,7 +635,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -609,13 +657,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -356.5,
+                        -888,
                         0,
                         90
                     ],
                     "Scale": [
-                        13.909090995788574,
-                        1.2005929946899414,
+                        21.428569793701172,
+                        4.5357141494750977,
                         1
                     ],
                     "rotationEuler": [
@@ -624,7 +672,11 @@
                         0
                     ],
                     "buttonWidth": 300,
-                    "buttonHeight": 63.5
+                    "buttonHeight": 63.5,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -656,7 +708,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -718,10 +773,10 @@
                         -18.452083587646484
                     ],
                     "Quaternion": [
-                        -0.024449555203318596,
-                        0.43756759166717529,
-                        -0.070740021765232086,
-                        0.8960651159286499
+                        0.26882320642471313,
+                        -0.3211514949798584,
+                        0.14732076227664948,
+                        0.89604264497756958
                     ],
                     "RotationEditor": [
                         0,
@@ -737,7 +792,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0349963903427124,
+                    "Vertical Fov": 1.0686203241348267,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -8.5081424713134766,
@@ -745,7 +800,7 @@
                         -18.452083587646484
                     ],
                     "Type": 3,
-                    "Zoom": 22,
+                    "Zoom": 14,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -863,7 +918,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 35387216,
+                    "pointer": 287606432,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -875,7 +930,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 35390896,
+                    "pointer": 287606800,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -1458,7 +1513,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        92.525833129882812,
+                        92.525833129882813,
                         2.2737367544323206e-13,
                         -16.057146072387695
                     ],
@@ -1585,7 +1640,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        21.418655395507812,
+                        21.418655395507813,
                         9.3179587309921708e-13,
                         -51.225345611572266
                     ],
@@ -2342,7 +2397,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -63.902603149414062,
+                        -63.902603149414063,
                         -9.0949470177292824e-13,
                         45.437911987304688
                     ],
@@ -2621,7 +2676,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        49.983169555664062,
+                        49.983169555664063,
                         -1.1368683772161603e-13,
                         7.4482307434082031
                     ],
@@ -3324,7 +3379,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        28.489822387695312,
+                        28.489822387695313,
                         1.1368683772161603e-13,
                         -2.9738852977752686
                     ],
@@ -3524,7 +3579,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        71.183181762695312,
+                        71.183181762695313,
                         4.5474735088646412e-13,
                         -31.695037841796875
                     ],
@@ -3731,7 +3786,7 @@
                     "Position": [
                         -67.671066284179688,
                         -2.7284841053187847e-12,
-                        85.158279418945312
+                        85.158279418945313
                     ],
                     "Quaternion": [
                         0,
@@ -4263,7 +4318,7 @@
                     "Position": [
                         1.0848355293273926,
                         -4.5474735088646412e-13,
-                        31.037124633789062
+                        31.037124633789063
                     ],
                     "Quaternion": [
                         0,
@@ -4408,9 +4463,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        34.722244262695312,
+                        34.722244262695313,
                         9.1846300530329383e-13,
-                        -44.113845825195312
+                        -44.113845825195313
                     ],
                     "Quaternion": [
                         0,
@@ -4898,7 +4953,7 @@
                     "Position": [
                         35.914356231689453,
                         -2.2737367544323206e-13,
-                        8.8782119750976562
+                        8.8782119750976563
                     ],
                     "Quaternion": [
                         0,
@@ -5199,7 +5254,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        91.582473754882812,
+                        91.582473754882813,
                         4.5474735088646412e-13,
                         -29.861276626586914
                     ],
@@ -6039,7 +6094,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -35.553298950195312,
+                        -35.553298950195313,
                         -5.6843418860808015e-14,
                         2.5179390907287598
                     ],
@@ -6188,7 +6243,7 @@
                     "Position": [
                         -0.19964806735515594,
                         -9.0949470177292824e-13,
-                        48.219497680664062
+                        48.219497680664063
                     ],
                     "Quaternion": [
                         0,
@@ -6235,7 +6290,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        77.873733520507812,
+                        77.873733520507813,
                         9.0949470177292824e-13,
                         -45.601097106933594
                     ],
@@ -6689,7 +6744,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 354537664,
+                    "pointer": 287609008,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -6699,7 +6754,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Abilities",
-                    "pointer": 354536376,
+                    "pointer": 287609744,
                     "type": 4,
                     "componentTable": 0
                 },
@@ -6738,7 +6793,7 @@
                     "Position": [
                         15.653947830200195,
                         0,
-                        -18.625564575195312
+                        -18.625564575195313
                     ],
                     "Quaternion": [
                         0,
@@ -7095,6 +7150,65 @@
                     "Type": 1,
                     "Path": "Settings\/EngineResources\/__Cube.mesh",
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1558469983,
+            "Parent UUID": 417171234,
+            "Name": "UI Text",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        36
+                    ],
+                    "Scale": [
+                        7.1428570747375488,
+                        7.1428570747375488,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1063,
+                    "lastButtonHeight": 629,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "dialogue",
+                    "pointer": 338886464,
+                    "type": 4,
+                    "componentTable": 0
                 }
             ]
         }
