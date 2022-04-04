@@ -3,24 +3,32 @@ using RagnarEngine;
 
 public class Rock : RagnarComponent
 {
-	private float force = 400;
+	private float force = 800;
 	public float soundRadius = 6f;
 	private float cooldown = 0f;
 	private bool pendingToDelete = false;
 
 	public void Start()
 	{
-		Debug.Log("Start Rock");
+		AimMethod();
+	}
+
+	private void AimMethod()
+	{
 		GameObject player = GameObject.Find("Player");
+		NavAgent agent = player.GetComponent<NavAgent>();
+
 		Vector3 pos = player.transform.globalPosition;
 		pos.y += 1;
 		gameObject.transform.localPosition = pos;
 
-		Rigidbody rockRb = gameObject.GetComponent<Rigidbody>();
-		rockRb.SetBodyPosition(pos);
-		rockRb.IgnoreCollision(player, true);
-		Vector3 vectorDir = new Vector3(player.transform.forward.x, 1, player.transform.forward.z);
-		rockRb.ApplyCentralForce(vectorDir.normalized * force);
+		Vector3 direction = agent.hitPosition - player.transform.globalPosition;
+		direction.y = 0;
+
+		Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
+		goRB.SetBodyPosition(pos);
+		goRB.IgnoreCollision(player, true);
+		goRB.ApplyCentralForce(direction.normalized * force);
 	}
 
 	public void Update()

@@ -31,7 +31,7 @@ public class PlayerManager : RagnarComponent
             prefabPath = "Assets/Prefabs/Knife.rgprefab",
             range = 50,
             charges = -1,
-            cooldown = 25f
+            cooldown = 0f
         };
         characters[0].abilities[1] = new Abilities
         {
@@ -140,6 +140,7 @@ public class PlayerManager : RagnarComponent
             if (!playableCharacter.abilities[0].onCooldown)
             {
                 playableCharacter.state = State.ABILITY_1;
+                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
             }
             else
             {
@@ -151,6 +152,7 @@ public class PlayerManager : RagnarComponent
             if (!playableCharacter.abilities[1].onCooldown)
             {
                 playableCharacter.state = State.ABILITY_2;
+                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
             }
             else
             {
@@ -162,15 +164,17 @@ public class PlayerManager : RagnarComponent
 
     private void CastOrCancel()
     {
-        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && playableCharacter.state != State.NONE)
+        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP && playableCharacter.state != State.NONE)
         {
             InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
             playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
             playableCharacter.state = State.NONE;
+            players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
         }
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && playableCharacter.state != State.NONE)
         {
             playableCharacter.state = State.NONE;
+            players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
         }
     }
 
@@ -181,7 +185,9 @@ public class PlayerManager : RagnarComponent
             case 4:
                 if (Input.GetKey(KeyCode.F4) == KeyState.KEY_DOWN)
                 {
+                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 3;
+                    playableCharacter.state = State.NONE;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -190,7 +196,9 @@ public class PlayerManager : RagnarComponent
             case 3:
                 if (Input.GetKey(KeyCode.F3) == KeyState.KEY_DOWN)
                 {
+                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 2;
+                    playableCharacter.state = State.NONE;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -199,7 +207,9 @@ public class PlayerManager : RagnarComponent
             case 2:
                 if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
                 {
+                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 1;
+                    playableCharacter.state = State.NONE;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -208,7 +218,9 @@ public class PlayerManager : RagnarComponent
             case 1:
                 if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
                 {
+                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 0;
+                    playableCharacter.state = State.NONE;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -225,6 +237,7 @@ public class PlayerManager : RagnarComponent
 
         }
         players[id].GetComponent<Player>().SetControled(true);
+        
     }
 }
 

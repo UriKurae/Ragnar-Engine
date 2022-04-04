@@ -11,11 +11,13 @@ public class Player : RagnarComponent
     private bool paused = false;
     private bool crouched = false;
 
+
     Rigidbody rb;
     Material materialComponent;
     NavAgent agent;
 
     bool controled = false;
+    int state = 0;
 
     public void Start()
     {
@@ -29,7 +31,7 @@ public class Player : RagnarComponent
     {
         if (controled)
         {
-            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            if (state == (int)State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
             {
                 agent.CalculatePath(agent.hitPosition);
                 gameObject.GetComponent<Animation>().PlayAnimation("Walk");
@@ -93,6 +95,10 @@ public class Player : RagnarComponent
 
             // Pause menu
         }
+        if(state == (int)State.POSTCAST)
+        {
+            state = (int)State.NONE;
+        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -109,6 +115,11 @@ public class Player : RagnarComponent
     public void SetControled(bool var)
     {
         controled = var;
+    }
+
+    public void SetState(int var)
+    {
+        state = var;
     }
 }
 
