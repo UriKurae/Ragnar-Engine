@@ -11,6 +11,7 @@ public class PlayerManager : RagnarComponent
 
     public void Start()
 	{
+        ///////////////////////////////////////////////////////////////////
         // AVISO
         // Esto de aquí está hardcodeadísimo
         // Pero no hay otra manera de hacerlo
@@ -29,7 +30,7 @@ public class PlayerManager : RagnarComponent
         {
             name = "Knife Throw",
             prefabPath = "Assets/Prefabs/Knife.rgprefab",
-            range = 50,
+            range = 70,
             charges = -1,
             cooldown = 25f
         };
@@ -91,6 +92,7 @@ public class PlayerManager : RagnarComponent
             charges = 4,
             cooldown = 5f
         };
+        ///////////////////////////////////////////////////////////////////
 
         foreach (Characters c in characters)
         {
@@ -106,13 +108,13 @@ public class PlayerManager : RagnarComponent
     {
         PlayerCases();
 
-        // Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
-        // muestre el rango de habilidad (por implementar), y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-        // Aquí debería ir la zona de rango de cada habilidad.
+        /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
+        muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
+        Aquí debería ir la zona de rango de cada habilidad.*/
         AbilityStateChanger();
 
-        // Contador de cooldown para cada habilidad
-        // Funciona en todos los casos con todos los pjs
+        /*Contador de cooldown para cada habilidad
+        Funciona en todos los casos con todos los pjs.*/
         CooldownCounter();
     }
 
@@ -135,21 +137,36 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
+        // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
         {
-            if (!playableCharacter.abilities[0].onCooldown)
+            // Comprobador de cargas de habilidad. Si entra aquí, significa que la habilidad no tiene cargas
+            if(playableCharacter.abilities[0].charges == 0)
+            {
+                playableCharacter.state = State.NONE;
+            }
+            // Entra aquí si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
+            else if (!playableCharacter.abilities[0].onCooldown)
             {
                 playableCharacter.state = State.ABILITY_1;
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
             }
+            // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
             else
             {
                 Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[0].cooldown - playableCharacter.abilities[0].counter) + "seconds left to use it again!");
+                playableCharacter.state = State.NONE;
             }
         }
+
+        // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_2)
         {
-            if (!playableCharacter.abilities[1].onCooldown)
+            if (playableCharacter.abilities[1].charges == 0)
+            {
+                playableCharacter.state = State.NONE;
+            }
+            else if (!playableCharacter.abilities[1].onCooldown)
             {
                 playableCharacter.state = State.ABILITY_2;
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
@@ -157,21 +174,41 @@ public class PlayerManager : RagnarComponent
             else
             {
                 Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[1].cooldown - playableCharacter.abilities[1].counter) + "seconds left to use it again!");
+                playableCharacter.state = State.NONE;
             }
         }
-        CastOrCancel();
+
+        // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
+        // TODO
+
+        // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
+        // TODO
+
+        // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
+        if (playableCharacter.state != State.NONE) CastOrCancel();
     }
 
     private void CastOrCancel()
     {
-        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP && playableCharacter.state != State.NONE)
+        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
+            // Instancia la habilidad en cuestión. 
             InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
+
+            // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
+            if(playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
+            {
+                playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
+            }
+
+            // Pone la habilidad en cooldown y el player en estado de NONE
             playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
             playableCharacter.state = State.NONE;
+            // Se cambia el estado a POSTCAST para evitar que se mueva directamente después de castear la habilidad. En el update de los players se cambiará a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
             players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
         }
-        if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && playableCharacter.state != State.NONE)
+        // Se cancela el estado de la habilidad para que el área de rango deje de mostrarse.
+        if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
             playableCharacter.state = State.NONE;
             players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);

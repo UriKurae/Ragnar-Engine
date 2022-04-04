@@ -7,6 +7,7 @@ public class Rock : RagnarComponent
 	public float soundRadius = 6f;
 	private float cooldown = 0f;
 	private bool pendingToDelete = false;
+	Rigidbody goRB;
 
 	public void Start()
 	{
@@ -25,7 +26,7 @@ public class Rock : RagnarComponent
 		Vector3 direction = agent.hitPosition - player.transform.globalPosition;
 		direction.y = 0;
 
-		Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
+		goRB = gameObject.GetComponent<Rigidbody>();
 		goRB.SetBodyPosition(pos);
 		goRB.IgnoreCollision(player, true);
 		goRB.ApplyCentralForce(direction.normalized * force);
@@ -47,6 +48,7 @@ public class Rock : RagnarComponent
 
 	public void OnCollisionEnter(Rigidbody other)
 	{
+		goRB.SetAsStatic();
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
 		CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);
 		cooldown = 2f;
