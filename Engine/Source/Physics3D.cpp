@@ -52,6 +52,11 @@ bool Physics3D::Start()
 	return true;
 }
 
+void Physics3D::DebugDraw()
+{
+	world->debugDrawWorld();
+}
+
 bool Physics3D::PreUpdate(float dt)
 {
 	if (app->sceneManager->GetGameState() == GameState::NOT_PLAYING)
@@ -141,9 +146,6 @@ bool Physics3D::PreUpdate(float dt)
 bool Physics3D::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Physics3D Update");
-
-	if (debug == true)
-		world->debugDrawWorld();
 
 	return true;
 }

@@ -63,6 +63,8 @@ public:
 	inline std::vector<std::string> GetBodiesNames() { return bodiesNames; };
 	inline bool* GetDebugMode() { return &debug; };
 
+	void DebugDraw();
+
 	void SleepAllBodies();
 	void ActiveAllBodies();
 

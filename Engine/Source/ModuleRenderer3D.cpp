@@ -7,6 +7,7 @@
 #include "ModuleEditor.h"
 #include "ModuleSceneManager.h"
 #include "ModuleUI.h"
+#include "Physics3D.h"
 
 #include "LightComponent.h"
 #include "TransformComponent.h"
@@ -194,9 +195,20 @@ bool ModuleRenderer3D::Start()
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
 #ifndef DIST
-	fbo->Bind();
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//// Editor Camera FBO
+	//fbo->Bind();
+	//PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+	//
+	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	//
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+
 #endif
 	return true;
 }
@@ -248,6 +260,13 @@ bool ModuleRenderer3D::PostUpdate()
 
 		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
 			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
+	}
+
+	if (app->physics->GetDebugMode())
+	{
+		PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+		app->physics->DebugDraw();
+		PushCamera(float4x4::identity, float4x4::identity);
 	}
 
 	/*
