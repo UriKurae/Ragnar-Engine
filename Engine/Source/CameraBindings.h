@@ -72,7 +72,7 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 
 	forward = forward * float3x3::RotateY((360-(_angle/2)) * DEGTORAD);
 	std::vector<float3> vertex;
-	vertex.reserve(rays + 1);
+	vertex.reserve(rays);
 
 	std::stack<QuadtreeNode*> nodes;
 	std::vector<GameObject*> gameObjects;
@@ -94,8 +94,12 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 		
 		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
 		if (hit.Equals(float3::zero)) hit = ray.b;
-		vertex.push_back(hit);
+		vertex.push_back(pointA); // origin
+		if(i != 0) vertex.push_back(vertex.at(vertex.size()-2)); // previous 
+		vertex.push_back(hit); // this
 		triangleMap.clear();
 		hit = float3::zero;
 	}
+	//Close triangle
+	vertex.push_back(pointA);
 }

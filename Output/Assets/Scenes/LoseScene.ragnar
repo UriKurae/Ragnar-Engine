@@ -216,7 +216,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/win_lose_background.png",
+                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -275,9 +275,9 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/bakeHouse.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                   "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
+                   "Active": true,
+                   "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
@@ -346,7 +346,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
