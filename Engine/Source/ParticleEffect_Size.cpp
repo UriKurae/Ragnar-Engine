@@ -3,6 +3,8 @@
 
 #include <Imgui/imgui.h>
 
+#include "Profiling.h"
+
 ParticleEffect_Size::ParticleEffect_Size() : ParticleEffect(ParticleEffectType::SIZE_OVER_LIFETIME),
 	startSize(0.5f),
 	endSize(1.0f)
@@ -15,6 +17,8 @@ ParticleEffect_Size::~ParticleEffect_Size()
 
 void ParticleEffect_Size::Update(Particle& particle, float dt)
 {
+	RG_PROFILING_FUNCTION("Size Effect");
+
 	if (particle.lifeTime != 0.0f)
 	{
 		float percentatge = particle.lifeRemaining / particle.lifeTime;

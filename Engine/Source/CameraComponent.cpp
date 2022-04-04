@@ -157,6 +157,8 @@ void CameraComponent::OnEditorShake()
 
 bool CameraComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Camera Component Update");
+
 	if (app->camera->updateGameView)
 	{
 		//TODO: Make the click work properly

@@ -17,6 +17,8 @@ AboutMenu::~AboutMenu()
 
 bool AboutMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("About Menu Update");
+
 	if (ImGui::Begin("About Ragnar Engine", &active))
 	{
 		ImGui::TextWrapped("Ragnar Engine v0.3");

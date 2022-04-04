@@ -86,14 +86,15 @@ public:
 	bool CleanUp();
 
 	void SetFocusedObject();
-	void HitPosibleFocusedObjects(math::float4& viewport);
+	void HitPosibleFocusedObjects(const math::float4& viewport);
 
 	void RenderText(std::string text, float x, float y, float scale, float3 color);
 	void DrawCharacters(std::string& text, float& x, float scale, float y);
 
     void DeleteUIGameObjects(GameObject* ui);
 	inline std::vector<GameObject*>::const_iterator FindUI(GameObject* child) { return std::find(std::begin(UIGameObjects), std::end(UIGameObjects), child); };
-
+	void updateText();
+	void OrderButtons();
 public:
     std::map<char, Character> characters;
     Shadert* shader = nullptr;

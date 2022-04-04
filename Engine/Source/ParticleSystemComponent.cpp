@@ -10,6 +10,8 @@
 #include "Geometry/Sphere.h"
 #include "MeshComponent.h"
 
+#include "Profiling.h"
+
 ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformComponent* trans, uint numParticles)
 {
 	type = ComponentType::PARTICLE_SYSTEM;
@@ -23,9 +25,6 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
     own->SetAABB(AABB(s));
     sizeAABB = { 10,10,10 };
     offsetAABB = { 0,0,0 };
-
-    if (own->GetComponent<MeshComponent>() == nullptr)
-        app->sceneManager->GetCurrentScene()->GetQuadtree().Insert(own);
 
     if (own->GetComponent<BillboardParticleComponent>() == nullptr)
         own->CreateComponent(ComponentType::BILLBOARD);
@@ -47,6 +46,8 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 
 bool ParticleSystemComponent::Update(float dt)
 {
+    RG_PROFILING_FUNCTION("Particle System Update");
+
     if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {
         if (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true)

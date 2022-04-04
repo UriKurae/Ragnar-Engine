@@ -22,8 +22,12 @@ public:
 	inline Color GetActualColor() { return actualColor; };
 	inline std::string GetText() { return text; };
 
+	inline void SetAlpha(float Alpha) { alpha = Alpha; };
+	inline float GetAlpha() { return alpha; };
+
 	MyPlane* planeToDraw;
 private:
+	float alpha = 1.0f;
 	State state = State::NORMAL;
 	Color color = white;
 	Color actualColor = color;
