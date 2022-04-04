@@ -6,14 +6,12 @@ public class mainMenuBackScreen : RagnarComponent
 	Vector3 imagePos;
 	bool isFirstS = true;
 	bool isFirstE = true;
-	float textPositionX;
-	float textPositiony;
+	GameObject start;
 	public void Start()
 	{
-		GameObject start = GameObject.Find("Button Start");
-		textPositionX = start.GetComponent<UIButton>().GetTextPosition().x;
-		textPositiony = start.GetComponent<UIButton>().GetTextPosition().y;
+		start = GameObject.Find("Button Start");
 	}
+
 	public void Update()
 	{
 		// Button start
@@ -23,9 +21,9 @@ public class mainMenuBackScreen : RagnarComponent
 		// Image back
 		BackgroundImageAction();
 	}
+	
 	void PlayButtonAction()
 	{
-		GameObject start = GameObject.Find("Button Start");
 		int a = start.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
