@@ -114,9 +114,10 @@ bool ModuleSceneManager::Draw()
 
 bool ModuleSceneManager::CleanUp()
 {
+	currentScene->UnLoad();
 	for (int i = 0; i < scenes.size(); ++i)
 	{
-		scenes[i]->CleanUp();
+		scenes[i]->UnLoad();
 	}
 
 	return true;
@@ -244,6 +245,7 @@ void ModuleSceneManager::DeleteScene(std::shared_ptr<Scene> scene)
 
 void ModuleSceneManager::ChangeScene(const char* sceneName)
 {
+	currentScene->UnLoad();
 	if (currentScene->GetAssetsPath() == "")
 	{
 		ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
