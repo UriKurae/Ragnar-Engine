@@ -33,7 +33,9 @@ public:
 	inline void SetDisabledMaterial(MaterialComponent* texture) { disabledMaterial = texture; };
 	inline void SetActualMaterial(MaterialComponent* texture) { actual = texture; };
 
-
+	inline void SetTextPosition(float3 newPoistion) {textPos = newPoistion;}
+	inline float3 GetTextPosition() { return textPos; }
+	
 	inline MaterialComponent* GetNormalMaterial() { return normalMaterial; };
 	inline MaterialComponent* GetFocusedMaterial() { return focusedMaterial; };
 	inline MaterialComponent* GetPressedMaterial() { return pressedMaterial; };
@@ -46,11 +48,12 @@ public:
 	MyPlane* planeToDraw;
 
 private:
+	
 	float alpha = 1.0f;
 	Text buttonText;
 	State state = State::NORMAL;
 	bool fadeUI = false;
-	float2 textPos = { 0,0 };
+	float3 textPos={0,0,0};
 	MaterialComponent* normalMaterial;
 	MaterialComponent* focusedMaterial;
 	MaterialComponent* pressedMaterial;

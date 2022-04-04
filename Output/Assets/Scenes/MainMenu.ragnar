@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.96868222951889038,
+                    "Vertical Fov": 0.88942557573318481,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         11.233668327331543,
@@ -160,7 +160,7 @@
                         1.3589518070220947
                     ],
                     "Type": 3,
-                    "Zoom": 62,
+                    "Zoom": 52,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -200,8 +200,8 @@
                         36
                     ],
                     "Scale": [
-                        1.6129032373428345,
-                        1.6129032373428345,
+                        1.9230769872665405,
+                        1.9230769872665405,
                         1
                     ],
                     "rotationEuler": [
@@ -211,8 +211,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 630,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -229,7 +229,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 218465264,
+                    "pointer": 293272360,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -250,14 +250,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                      //-404.5,
-                      0,
-                      0,
-                      36
+                        -463,
+                        0,
+                        36
                     ],
                     "Scale": [
-                        6.4516129493713379,
-                        3.2822577953338623,
+                        7.6923079490661621,
+                        3.9134612083435059,
                         1
                     ],
                     "rotationEuler": [
@@ -267,8 +266,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 203.5,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 630,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -299,13 +298,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -501,
+                        -559.5,
                         25,
                         36.099998474121094
                     ],
                     "Scale": [
-                        2.8548386096954346,
-                        0.46774193644523621,
+                        3.4038460254669189,
+                        0.55769228935241699,
                         1
                     ],
                     "rotationEuler": [
@@ -315,10 +314,16 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 630,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
@@ -328,13 +333,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -372,13 +371,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -498,
+                        -556.5,
                         -31,
                         36.099998474121094
                     ],
                     "Scale": [
-                        2.8548386096954346,
-                        0.46774193644523621,
+                        3.4038460254669189,
+                        0.55769228935241699,
                         1
                     ],
                     "rotationEuler": [
@@ -388,10 +387,16 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 630,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
@@ -401,13 +406,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/CharacterTex\/char_paul_albedo.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

@@ -45,6 +45,7 @@ public:
 	inline float4x4 GetLocalTransform() const { return localMatrix; }
 	inline float4x4 GetGlobalTransform() const { return globalMatrix; }
 	inline float3 GetPosition() const { return position; }
+	inline float3 GetGlobalPosition() const { return globalMatrix.Col3(3); }
 	inline Quat GetRotation() const { return rotation; }
 	inline float3 GetScale() const { return scale; }
 	inline float3 GetRotEditor() const { return rotationEditor; }
