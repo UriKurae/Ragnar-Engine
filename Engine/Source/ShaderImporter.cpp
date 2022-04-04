@@ -10,7 +10,6 @@ uint ShaderImporter::SaveShader(std::string& assets, std::string& source)
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, assets, lib);
 	bool failed = false;
 	CopyFileA(assets.c_str(), lib.c_str(), failed);
-	// TODO: Should create a .meta?
 
 	if (failed) DEBUG_LOG("Failed to save the shader %s into Library", assets.c_str());
 

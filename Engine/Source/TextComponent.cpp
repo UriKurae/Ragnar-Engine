@@ -22,7 +22,6 @@ TextComponent::TextComponent(GameObject* own)
 	
 	state = State::NORMAL;
 	actualColor = normalColor;
-	text = "Text";
 
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
@@ -30,9 +29,9 @@ TextComponent::TextComponent(GameObject* own)
 		own->CreateComponent(ComponentType::MATERIAL);
 		app->userInterface->UIGameObjects.push_back(own);
 	}	
-
-	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
-	planeToDraw->own = own;
+	app->userInterface->OrderButtons();
+	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	//planeToDraw->own = own;
 }
 
 TextComponent::~TextComponent()
@@ -55,31 +54,29 @@ bool TextComponent::Update(float dt)
 
 void TextComponent::Draw(CameraComponent* gameCam)
 {
-	glAlphaFunc(GL_GREATER, 0.5);
-	glEnable(GL_ALPHA_TEST);
-
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
-
-	glDisable(GL_ALPHA_TEST);
-	glColor3f(255, 255, 255);
 }
 
 void TextComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("Text"))
+	if (ImGui::CollapsingHeader("TextComponent"))
 	{
 		static float multiplier = 1;
 		static float fadeDuration = 0.1f;
-
+		static bool textColorEditable = false;
 		Checkbox(this, "Active", active);
 		ImGui::Text("Text Color"); ImGui::SameLine();
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
-			buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });		
+			textColorEditable = !textColorEditable;
+
+		if (textColorEditable)
+			ImGui::ColorPicker3("Text Color", &textColor);
+
+		buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 
-		if(ImGui::InputText("Text", (char*)text.c_str(), IM_ARRAYSIZE(text.c_str())))
+		if(ImGui::InputText("Text", text, IM_ARRAYSIZE(text)))
 			buttonText.setOnlyText(text);
 		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
 
@@ -92,11 +89,12 @@ float2 TextComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	return { position.x - (strlen(text.c_str()) * 12 * buttonText.Scale), position.y - 5 };
+	return { position.x - (strlen(text) * 12 * buttonText.Scale), position.y - 5 };
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
-	text = node.GetJsonString("buttonText");
+	std::string aux = node.GetJsonString("buttonText");
+	strcpy(text, aux.c_str());
 	buttonText.textt = text;
 
 	fontScale = node.GetJsonNumber("fontScale");
@@ -112,7 +110,7 @@ bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "fontScale", fontScale);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);

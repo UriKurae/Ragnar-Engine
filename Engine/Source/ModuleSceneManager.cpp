@@ -27,8 +27,6 @@ ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState:
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
-
-	name = "SceneManager";
 }
 
 ModuleSceneManager::~ModuleSceneManager()
@@ -39,9 +37,7 @@ ModuleSceneManager::~ModuleSceneManager()
 bool ModuleSceneManager::Start()
 {
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
-
 	ResourceManager::GetInstance()->ImportAllResources();
-
 	ImportPrimitives();
 
 	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
@@ -56,8 +52,8 @@ bool ModuleSceneManager::Start()
 
 	referenceMap.clear();
 	
-	
-#ifdef DIST
+	// DELIVERY!!
+#if 0
 	Play();
 #endif
 
@@ -277,7 +273,6 @@ void ModuleSceneManager::NextScene(const char* name)
 
 void ModuleSceneManager::Play()
 {
-#ifndef DIST
 	DEBUG_LOG("Saving Scene");
 
 	JsonParsing sceneFile;
@@ -295,7 +290,7 @@ void ModuleSceneManager::Play()
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-#endif
+
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 
@@ -316,10 +311,8 @@ void ModuleSceneManager::Stop()
 
 	currentScene->UnLoad();
 	currentScene = scenes[lastIndex];
-#ifndef DIST
 	currentScene->LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
-#endif
 	currentScene->GetQuadtree().Clear();
 	currentScene->GetQuadtree().Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	gameState = GameState::NOT_PLAYING;

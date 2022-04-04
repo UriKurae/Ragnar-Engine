@@ -16,10 +16,6 @@
 #include "Scene.h"
 #include "Lights.h"
 #include "Framebuffer.h"
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
 #include "NavMeshBuilder.h"
 
 #include "GL/glew.h"
@@ -87,7 +83,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if(SDL_GL_SetSwapInterval(vsync) < 0)
 			DEBUG_LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 
-#ifndef DIST
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); 
@@ -100,12 +95,33 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
 		ImGui_ImplOpenGL3_Init();
-#endif
-		
+
 		DEBUG_LOG("Vendor: %s", glGetString(GL_VENDOR));
 		DEBUG_LOG("Renderer: %s", glGetString(GL_RENDERER));
 		DEBUG_LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 		DEBUG_LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+		//Initialize Projection Matrix
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+
+		//Check for error
+		GLenum error = glGetError();
+		if(error != GL_NO_ERROR)
+		{
+			ret = false;
+		}
+
+		//Initialize Modelview Matrix
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		//Check for error
+		error = glGetError();
+		if(error != GL_NO_ERROR)
+		{
+			ret = false;
+		}
 		
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glClearDepth(1.0f);
@@ -113,6 +129,13 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		//Initialize clear color
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		//Check for error
+		error = glGetError();
+		if(error != GL_NO_ERROR)
+		{
+			ret = false;
+		}
 		
 		depthTest = node.GetJsonBool("depth test");
 		cullFace = node.GetJsonBool("cull face");
@@ -133,7 +156,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		if (blending) SetBlending();
 		if (wireMode) SetWireMode();		
 	}
-	
+	//// Projection matrix for
 	int w = *app->window->GetWindowWidth();
 	int h = *app->window->GetWindowHeight();
 	OnResize(w, h);
@@ -143,35 +166,9 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo = new Framebuffer(w, h, 0);
 	mainCameraFbo->Unbind();	
 
-#ifdef DIST
-	distVao = new VertexArray();
-
-	float vertices[] =
-	{
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f
-	};
-	
-	unsigned int indices[] = { 0,1,2,2,3,0 };
-
-	distVbo = new VertexBuffer();
-	distVbo->SetData(vertices, sizeof(vertices));
-	distVbo->SetLayout({
-		{ShaderDataType::VEC3F, "position"},
-		{ShaderDataType::VEC2F, "texCoords"},
-	});
-	distVao->AddVertexBuffer(*distVbo);
-
-	distIbo = new IndexBuffer(indices, 6);
-	distVao->SetIndexBuffer(*distIbo);
-
-#else
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
 	grid.axis = true;
-#endif
 
 	dirLight = new DirectionalLight();
 	goDirLight = app->sceneManager->GetCurrentScene()->CreateGameObject(0);
@@ -185,19 +182,20 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	return ret;
 }
 
-bool ModuleRenderer3D::Start()
-{
-	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
-	return true;
-}
-
 bool ModuleRenderer3D::PreUpdate(float dt)
 {
-#ifndef DIST
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Editor Camera FBO
 	fbo->Bind();
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-#endif
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
 	return true;
 }
 
@@ -207,12 +205,10 @@ bool ModuleRenderer3D::PostUpdate()
 	RG_PROFILING_FUNCTION("Rendering");
 
 	std::set<GameObject*> objects;
+	if(drawGrid) grid.Render();
 
 	// TODO: wtf quadtree man.
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
-	
-#ifndef DIST
-	if(drawGrid) grid.Render();
 
 	if (rayCast)
 	{
@@ -228,10 +224,6 @@ bool ModuleRenderer3D::PostUpdate()
 		glLineWidth(1.0f);
 	}
 
-	fbo->Bind();
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
 	GameObject* objSelected = app->editor->GetGO();
 	if (app->camera->visualizeFrustum)
 	{
@@ -240,7 +232,10 @@ bool ModuleRenderer3D::PostUpdate()
 			if ((*it) != objSelected)(*it)->Draw(nullptr);
 		}
 	}
-	else app->sceneManager->GetCurrentScene()->Draw();
+	else
+	{
+		app->sceneManager->GetCurrentScene()->Draw();
+	}
 
 	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
 	{
@@ -250,7 +245,6 @@ bool ModuleRenderer3D::PostUpdate()
 			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
 	}
 
-	/*
 	if (stencil && objSelected && objSelected->GetActive())
 	{
 		glColor3f(0.25f, 0.87f, 0.81f);
@@ -265,30 +259,31 @@ bool ModuleRenderer3D::PostUpdate()
 		glColor3f(1.0f, 1.0f, 1.0f);
 		objSelected->Draw(nullptr);
 	}
-	*/
+
 	fbo->Unbind();
-
-#endif
-
+		
 	// Camera Component FBO
 	mainCameraFbo->Bind();
-	// Weird but it works like this
-	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
-	glDrawBuffers(2, drawBuffers);
-
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	// TODO: To check if game cam works, uncomment the for loop, otherwise use the draw of the sceneManager
+	PushCamera(app->sceneManager->GetCurrentScene()->mainCamera->matrixProjectionFrustum, app->sceneManager->GetCurrentScene()->mainCamera->matrixViewFrustum);
+
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glPopMatrix();
 
-#ifndef DIST 
+	glEnable(GL_BLEND);
+
+	// DRAW UI
 	app->userInterface->Draw();
-#endif
 
 	mainCameraFbo->Unbind();
 
@@ -329,24 +324,14 @@ bool ModuleRenderer3D::PostUpdate()
 	postProcessingShader->Unbind();
 
 #else
+	// Draw both buffers
 	app->editor->Draw(fbo, mainCameraFbo);
 #endif
 
-#ifdef DIST
-	
-	glEnable(GL_BLEND);
-	app->userInterface->Draw();
+	SDL_GL_SwapWindow(app->window->window);
+
 	glDisable(GL_BLEND);
 	
-	glEnable(GL_DEPTH_TEST);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-#endif
-
-	SDL_GL_SwapWindow(app->window->window);
-	
-	//glDisable(GL_BLEND);
-
 	return true;
 }
 
@@ -374,14 +359,10 @@ bool ModuleRenderer3D::CleanUp()
 	}
 	spotLights.clear();
 
-#ifndef DIST
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-#else
-	RELEASE(distVao);
-	RELEASE(distVbo);
-#endif
+
 	SDL_GL_DeleteContext(context);
 
 	return true;
