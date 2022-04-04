@@ -442,6 +442,7 @@ bool Scene::LoadScene(const char* path, bool fromLibrary)
 		//	}
 		//}
 		app->physics->LoadConstraints();
+		DEBUG_LOG("Scene loaded");
 	}
 	else
 	{

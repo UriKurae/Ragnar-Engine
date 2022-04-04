@@ -176,7 +176,7 @@ void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::L
 								triangleMap[distance] = (*it);
 								if ((*triangleMap.begin()).second == (*it))
 									hitPoint = picking.a + picking.Dir() * distance * picking.Length();
-								DEBUG_LOG("Intersected with %s", (*it)->GetName());
+								//DEBUG_LOG("Intersected with %s", (*it)->GetName());
 								break;
 							}
 						}
@@ -200,7 +200,7 @@ void ModuleCamera3D::ThrowRayCastOnlyOBB(std::vector<GameObject*>& gameObjects, 
 			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
 			{
 				aabbMap[dNear] = (*it);
-				DEBUG_LOG("Intersected with %s", (*it)->GetName());
+				//DEBUG_LOG("Intersected with %s", (*it)->GetName());
 				break;
 			}
 		}

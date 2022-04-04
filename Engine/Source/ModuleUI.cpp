@@ -289,7 +289,14 @@ bool ModuleUI::Start()
 	}
 
 	FT_Face face;
-	if (FT_New_Face(ft, "Assets/Resources/Fonts/Montserrat-Bold.ttf", 0, &face))
+
+#ifdef DIST
+	const char* path = "Library/Fonts/Montserrat-Bold.ttf";
+#else
+	const char* path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
+#endif
+
+	if (FT_New_Face(ft, path, 0, &face))
 	{
 		//LOG("ERROR::FREETYPE: Failed to load font");
 		return false;
@@ -488,7 +495,7 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
 			// Whats does this do?
-			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			//DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
 			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
 			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
