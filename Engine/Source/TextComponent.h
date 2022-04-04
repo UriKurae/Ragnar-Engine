@@ -23,11 +23,16 @@ public:
 
 	float2 GetParentPosition();
 
-	inline char* GetText() { return text; };
+	char* GetText() 
+	{ 
+		char* rText{};
+		strcpy(rText, textToShow.textt.c_str());
+		return rText;
+	}
 	void SetText(char* newText)
 	{		
 		textToShow.setOnlyText(newText);
-		strcpy(text, newText);
+		//strcpy(text, newText);
 	}
 
 	Text textToShow;
@@ -35,6 +40,6 @@ private:
 
 	bool fadeUI = false;
 	Color textColor = white;
-	char text[64] = "Text";
+	//char text[358] = "Text";
 	float fontScale = 1;
 };

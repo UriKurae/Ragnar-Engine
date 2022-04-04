@@ -18,7 +18,7 @@ TextComponent::TextComponent(GameObject* own)
 	type = ComponentType::UI_TEXT;
 	own->isUI = true;
 	active = true;
-	textToShow.setText("Button", 5, 5, 0.5, { 255,255,255 });
+	textToShow.setText("Text", 5, 5, 0.5, { 255,255,255 });
 
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
@@ -40,7 +40,7 @@ bool TextComponent::Update(float dt)
 	RG_PROFILING_FUNCTION("Text Update");
 
 	textToShow.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
-	textToShow.setOnlyText(text);
+	//textToShow.setOnlyText(text);
 
 	return true;
 }
@@ -70,6 +70,8 @@ void TextComponent::OnEditor()
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 
+		char text[384];
+		strcpy(text, textToShow.textt.c_str());
 		if(ImGui::InputText("Texte", text, IM_ARRAYSIZE(text)))
 			textToShow.setOnlyText(text);
 		ImGui::DragFloat("Font Size", &textToShow.Scale, 0.1, 0, 10);
@@ -83,13 +85,13 @@ float2 TextComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	return { position.x - (strlen(text) * 12 * textToShow.Scale), position.y - 5 };
+	return { position.x - (textToShow.textt.size() * 12 * textToShow.Scale), position.y - 5 };
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
 	std::string aux = node.GetJsonString("buttonText");
-	strcpy(text, aux.c_str());
-	textToShow.textt = text;
+	//strcpy(text, aux.c_str());
+	textToShow.textt = aux;
 
 	fontScale = node.GetJsonNumber("fontScale");
 	textColor.r = node.GetJsonNumber("textColor.r");
@@ -104,7 +106,7 @@ bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", text);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", textToShow.textt.c_str());
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "fontScale", fontScale);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
