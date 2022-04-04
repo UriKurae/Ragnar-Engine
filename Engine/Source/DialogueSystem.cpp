@@ -34,6 +34,9 @@ DialogueSystem::~DialogueSystem()
 		(*it).dialogue.clear();
 	}
 	dialogues.clear();
+
+	currDialogue = nullptr;
+	currLine = nullptr;
 }
 
 void DialogueSystem::OnEditor()
@@ -65,7 +68,7 @@ void DialogueSystem::OnEditor()
 
 		(*it).id = counterId;
 
-		char text[256];
+		char text[384];
 		bool addLine = false;
 		bool deleteLine = false;
 		std::vector<DialogueLine>::iterator auxIt2;
