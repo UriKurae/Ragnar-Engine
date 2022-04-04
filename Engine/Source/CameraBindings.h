@@ -2,6 +2,7 @@
 #include "ScriptComponent.h"
 #include "CameraComponent.h"
 #include "ModuleCamera3D.h"
+#include "ModuleRenderer3D.h"
 
 #include "Math/float3x3.h"
 #include "Geometry/LineSegment.h"
@@ -95,11 +96,15 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
 		if (hit.Equals(float3::zero)) hit = ray.b;
 		vertex.push_back(pointA); // origin
-		if(i != 0) vertex.push_back(vertex.at(vertex.size()-2)); // previous 
+		if (i != 0) vertex.push_back(vertex.at(vertex.size() - 2)); // previous 
 		vertex.push_back(hit); // this
 		triangleMap.clear();
 		hit = float3::zero;
 	}
 	//Close triangle
 	vertex.push_back(pointA);
+
+	app->renderer3D->enemyCones.resize(vertex.size());
+	memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
+
 }

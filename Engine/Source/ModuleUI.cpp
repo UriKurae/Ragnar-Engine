@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleWindow.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 #include "ModuleInput.h"
@@ -28,7 +29,7 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	position = pos;
 	scale = sca;
 
-	vertices.push_back({ -0.5,0.5,0});
+	vertices.push_back({ -0.5,0.5,0 });
 	vertices.push_back({ -0.5,-0.5,0 });
 	vertices.push_back({ 0.5,-0.5,0 });
 
@@ -121,12 +122,12 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	ImageComponent* theImage = nullptr;
 
 	float4x4 transform = float4x4::FromTRS(auxTrans->GetInternalPosition(), auxTrans->GetRotationQuat(), float3(auxTrans->GetScale().x, auxTrans->GetScale().y, 1));
-	
+
 	theButton = own->GetComponent<ButtonComponent>();
-	theSlider=own->GetComponent<SliderComponent>();
+	theSlider = own->GetComponent<SliderComponent>();
 	theCheckbox = own->GetComponent<CheckboxComponent>();
 	theImage = own->GetComponent<ImageComponent>();
-	if(texture)
+	if (texture)
 		texture->Bind();
 	shader->Use();
 
@@ -137,7 +138,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		//theButton->GetAlpha()
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
-	else if (theSlider) 
+	else if (theSlider)
 	{
 		if (theSlider->GetFirstDraw()) {
 			int cont = 0;
@@ -157,7 +158,7 @@ void MyPlane::DrawPlane2D(Texture* texture)
 				}
 			}
 		}
-		
+
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, theSlider->GetAlpha());
 	}
 	else if (theCheckbox)
@@ -188,9 +189,9 @@ Shadert::Shadert(const std::string& vertexSource, const std::string& fragmentSou
 	// 1. retrieve the vertex/fragment source code from filePath
 	std::string vertexCode = vertexSource;
 	std::string fragmentCode = fragmentSource;
-	if(vertexSource.empty())
+	if (vertexSource.empty())
 		vertexCode = "#version 330 core\n  in vec4 vertex;\n out vec2 TexCoords;\n uniform mat4 model;\n  uniform mat4 projection;\n  void main() {\n  gl_Position = projection * model *vec4(vertex.xy, 0.0, 1.0);\n  TexCoords = vertex.zw; };";
-	if(fragmentSource.empty())
+	if (fragmentSource.empty())
 		fragmentCode = "#version 330 core\n  in vec2 TexCoords;\n  out vec4 color;\n  uniform sampler2D text;\n  uniform vec3 textColor;\n  void main() {\n  vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);\n  color = vec4(textColor, 1.0) * sampled;};"; //color = vec4(textColor, 1.0) * sampled;};";
 
 	const char* vShaderCode = vertexCode.c_str();
@@ -246,7 +247,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 		if (!success)
 		{
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			
+
 			DEBUG_LOG("ERROR::SHADER_COMPILATION_ERROR of type: %s\n%s ", type, infoLog);
 		}
 	}
@@ -269,7 +270,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	focusedGameObject = nullptr;
-	UIGameObjectSelected = nullptr;	
+	UIGameObjectSelected = nullptr;
 }
 
 ModuleUI::~ModuleUI()
@@ -288,7 +289,14 @@ bool ModuleUI::Start()
 	}
 
 	FT_Face face;
-	if (FT_New_Face(ft, "Assets/Resources/Fonts/Montserrat-Bold.ttf", 0, &face))
+
+#ifdef DIST
+	const char* path = "Library/Fonts/Montserrat-Bold.ttf";
+#else
+	const char* path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
+#endif
+
+	if (FT_New_Face(ft, path, 0, &face))
 	{
 		//LOG("ERROR::FREETYPE: Failed to load font");
 		return false;
@@ -360,40 +368,40 @@ bool ModuleUI::Start()
 	shader = new Shadert("", "");
 	return true;
 }
-void ModuleUI::updateText() 
+void ModuleUI::updateText()
 {
-	float4 size=app->editor->GetGameView()->GetBounds();
+	float4 size = app->editor->GetGameView()->GetBounds();
 	app->renderer3D->OnResize(size.z, size.w);
 	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
 }
 void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
 {
 	// activate corresponding render state	
-	
+
 	shader->Use();
 	updateText();
 	Frustum frustum;
-	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
-	
+	CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
+
 	frustum.pos = camera->GetFrustum()->pos;
-	
+
 	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
 	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
 	frustum.type = FrustumType::OrthographicFrustum;
-	
+
 	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.nearPlaneDistance = -1.0f;
 	frustum.farPlaneDistance = 1.0f;
-	
+
 	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-	
+
 	math::float4x4 model = math::float4x4::identity;
 	math::float3 scl = math::float3(1, 1, 1.0f);
 	math::float3 center = math::float3(x, y, 1.0f);
 	model = model.Scale(scl, center);
 	model.SetTranslatePart(center);
-	
+
 	auto p = frustum.ProjectionMatrix();
 	glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
@@ -446,26 +454,25 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	/*if (app->gameMode)
-	{*/
-		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
-		
-		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	float2 mPos = float2::zero;
+	float4 viewport = float4::zero;
+#ifndef DIST
+	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+	viewport = app->editor->GetGameView()->GetBounds();
+#else
+	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+	fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
 
-		// TODO: Change this
-		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-		
-		float4 viewport = app->editor->GetGameView()->GetBounds();
-		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-		
-		
-		// Check if mouse is hovered on Game View
-		if (app->editor->GetGameView()->GetState())
-		{
-			HitPosibleFocusedObjects(viewport);
-			SetFocusedObject();
-		}
-	
+
+	// Check if mouse is hovered on Game View
+	if (app->editor->GetGameView()->GetState())
+	{
+		HitPosibleFocusedObjects(viewport);
+		SetFocusedObject();
+	}
+
 
 	return true;
 }
@@ -483,12 +490,12 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
 		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
 		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
-		if (buttonComp|| checkComp|| sliderComp)
+		if (buttonComp || checkComp || sliderComp)
 		{
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
 			// Whats does this do?
-			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			//DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
 			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
 			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
@@ -556,7 +563,7 @@ bool ModuleUI::Update(float dt)
 			}
 		}
 	}
-	
+
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
@@ -573,7 +580,7 @@ bool ModuleUI::Update(float dt)
 		}
 		else if (ImageComponent* imageComp = go->GetComponent<ImageComponent>())
 		{
-			textExample = imageComp->GetText();
+			//textExample = imageComp->GetText();
 			color = imageComp->GetColor();
 		}
 		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
@@ -581,11 +588,11 @@ bool ModuleUI::Update(float dt)
 			textExample = sliderComp->GetText().textt;
 			color = sliderComp->GetTextColor();
 		}
-	}	
-	
+	}
+
 	return true;
 }
-void ModuleUI::OrderButtons() 
+void ModuleUI::OrderButtons()
 {
 	bool cont = false;
 	while (cont == false) {
@@ -645,7 +652,7 @@ bool ModuleUI::CleanUp()
 
 void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 {
-	if (UIGameObjects.empty()) 
+	if (UIGameObjects.empty())
 		return;
 
 	auto obj = FindUI(ui);
