@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 64813128,
+                    "pointer": 57883472,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 0
+                    "characters": 158318336
                 }
             ]
         },
@@ -175,13 +175,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -64.5,
+                        1.5816464369601856e+38,
                         -209,
                         84
                     ],
                     "Scale": [
-                        2,
-                        2.5,
+                        5.7692303657531738,
+                        2.8076920509338379,
                         1
                     ],
                     "rotationEuler": [
@@ -190,7 +190,11 @@
                         0
                     ],
                     "buttonWidth": 150,
-                    "buttonHeight": 73
+                    "buttonHeight": 73,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -222,7 +226,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -241,13 +248,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -28.5,
+                        1.5816464369601856e+38,
                         -210,
                         84
                     ],
                     "Scale": [
-                        2.1500000953674316,
-                        1.7391304969787598,
+                        5.8269224166870117,
+                        2.538461446762085,
                         1
                     ],
                     "rotationEuler": [
@@ -256,7 +263,11 @@
                         0
                     ],
                     "buttonWidth": 151.5,
-                    "buttonHeight": 66
+                    "buttonHeight": 66,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -288,7 +299,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -307,13 +321,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -364.5,
+                        1.5816464369601856e+38,
                         -214,
                         83.5
                     ],
                     "Scale": [
-                        21.100000381469727,
-                        9.4021739959716797,
+                        13.115384101867676,
+                        5.2499995231628418,
                         1
                     ],
                     "rotationEuler": [
@@ -322,10 +336,15 @@
                         0
                     ],
                     "buttonWidth": 341,
-                    "buttonHeight": 136.5
+                    "buttonHeight": 136.5,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -350,13 +369,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        7,
+                        1.5816464369601856e+38,
                         -226,
                         83.5
                     ],
                     "Scale": [
-                        27.350000381469727,
-                        5.7608695030212402,
+                        15.519228935241699,
+                        3.9615383148193359,
                         1
                     ],
                     "rotationEuler": [
@@ -365,10 +384,15 @@
                         0
                     ],
                     "buttonWidth": 403.5,
-                    "buttonHeight": 103
+                    "buttonHeight": 103,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -436,8 +460,8 @@
                         84
                     ],
                     "Scale": [
-                        101.25,
-                        52.621479034423828,
+                        43.942306518554688,
+                        20.542984008789062,
                         1
                     ],
                     "rotationEuler": [
@@ -446,10 +470,15 @@
                         0
                     ],
                     "buttonWidth": 1142.5,
-                    "buttonHeight": 534.11761474609375
+                    "buttonHeight": 534.11761474609375,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -460,7 +489,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 64812576,
+                    "pointer": 57883200,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -481,13 +510,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -326,
+                        1.5816464369601856e+38,
                         7.5,
                         88.199996948242188
                     ],
                     "Scale": [
-                        36.149997711181641,
-                        12.77173900604248,
+                        18.903844833374023,
+                        6.4423074722290039,
                         1
                     ],
                     "rotationEuler": [
@@ -496,10 +525,15 @@
                         0
                     ],
                     "buttonWidth": 491.5,
-                    "buttonHeight": 167.5
+                    "buttonHeight": 167.5,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
-                    "Type": 13
+                    "Type": 13,
+                    "alpha": 0
                 },
                 {
                     "Type": 2,
@@ -524,13 +558,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -363,
+                        1.5816464369601856e+38,
                         30,
                         90
                     ],
                     "Scale": [
-                        16.999998092651367,
-                        1.4673912525177002,
+                        11.538460731506348,
+                        2.442307710647583,
                         1
                     ],
                     "rotationEuler": [
@@ -539,7 +573,11 @@
                         0
                     ],
                     "buttonWidth": 300,
-                    "buttonHeight": 63.5
+                    "buttonHeight": 63.5,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -571,7 +609,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -590,13 +631,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -363,
+                        1.5816464369601856e+38,
                         -28,
                         90
                     ],
                     "Scale": [
-                        16.999998092651367,
-                        1.4673912525177002,
+                        11.538460731506348,
+                        2.442307710647583,
                         1
                     ],
                     "rotationEuler": [
@@ -605,7 +646,11 @@
                         0
                     ],
                     "buttonWidth": 300,
-                    "buttonHeight": 63.5
+                    "buttonHeight": 63.5,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -637,7 +682,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -656,13 +704,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -356.5,
+                        1.5816464369601856e+38,
                         0,
                         90
                     ],
                     "Scale": [
-                        16.999998092651367,
-                        1.4673912525177002,
+                        11.538460731506348,
+                        2.442307710647583,
                         1
                     ],
                     "rotationEuler": [
@@ -671,7 +719,11 @@
                         0
                     ],
                     "buttonWidth": 300,
-                    "buttonHeight": 63.5
+                    "buttonHeight": 63.5,
+                    "lastButtonWidth": 1112,
+                    "lastButtonHeight": 478,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -703,7 +755,10 @@
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
-                    "textColor.b": 1
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 0
                 }
             ]
         },
@@ -760,15 +815,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        2.7341175079345703,
+                        -6.219724178314209,
                         11.183857917785645,
-                        -16.951992034912109
+                        -18.789997100830078
                     ],
                     "Quaternion": [
-                        0.46413952112197876,
-                        -0.019342128187417984,
-                        -0.17641690373420715,
-                        0.86780047416687012
+                        0.36623352766036987,
+                        -0.29853364825248718,
+                        -0.034525088965892792,
+                        0.88065809011459351
                     ],
                     "RotationEditor": [
                         0,
@@ -784,15 +839,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.92614549398422241,
+                    "Vertical Fov": 0.81195324659347534,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        2.7341175079345703,
+                        -6.219724178314209,
                         11.183857917785645,
-                        -16.951992034912109
+                        -18.789997100830078
                     ],
                     "Type": 3,
-                    "Zoom": 18,
+                    "Zoom": 26,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -804,7 +859,7 @@
                     "Lock Vertical Angle": false,
                     "Rotation Speed": 2,
                     "Radius": 20,
-                    "Horizontal Angle": -747.60028076171875,
+                    "Horizontal Angle": -715.60028076171875,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -6803,7 +6858,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Enemy.rgprefab",
-            "tag": "Untagged",
+            "tag": "Enemies",
             "layer": "Default",
             "Components": [
                 {
@@ -6898,7 +6953,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 64814416,
+                    "pointer": 57881568,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -6910,7 +6965,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 64812760,
+                    "pointer": 57882112,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,

@@ -53,7 +53,7 @@ public class PlayerManager : RagnarComponent
         characters[1].abilities[0] = new Abilities
         {
             name = "Backstab",
-            prefabPath = "Assets/Prefabs/Knife.rgprefab",
+            prefabPath = "Assets/Prefabs/BackStab.rgprefab",
             range = 5,
             charges = -1,
             cooldown = 0f
