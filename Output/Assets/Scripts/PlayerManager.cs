@@ -31,7 +31,7 @@ public class PlayerManager : RagnarComponent
             prefabPath = "Assets/Prefabs/Knife.rgprefab",
             range = 50,
             charges = -1,
-            cooldown = 25f
+            cooldown = 0f
         };
         characters[0].abilities[1] = new Abilities
         {

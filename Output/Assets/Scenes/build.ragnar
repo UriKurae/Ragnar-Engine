@@ -51,19 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-<<<<<<< Updated upstream
                     "pointer": 57883472,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characters": 158318336
-=======
-                    "pointer": 270948184,
-                    "type": 4,
-                    "componentTable": 0,
-                    "players": 0,
-                    "characters": 57252384
->>>>>>> Stashed changes
                 }
             ]
         },
@@ -183,22 +175,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -737.5,
->>>>>>> Stashed changes
                         -209,
                         84
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         5.7692303657531738,
                         2.8076920509338379,
-=======
-                        8.3333330154418945,
-                        4.0555553436279297,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -208,13 +191,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 73,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -270,22 +248,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -701.5,
->>>>>>> Stashed changes
                         -210,
                         84
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         5.8269224166870117,
                         2.538461446762085,
-=======
-                        8.4166660308837891,
-                        3.6666667461395264,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -295,13 +264,8 @@
                     ],
                     "buttonWidth": 151.5,
                     "buttonHeight": 66,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -357,22 +321,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -1037.5,
->>>>>>> Stashed changes
                         -214,
                         83.5
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         13.115384101867676,
                         5.2499995231628418,
-=======
-                        18.94444465637207,
-                        7.5833330154418945,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -382,13 +337,8 @@
                     ],
                     "buttonWidth": 341,
                     "buttonHeight": 136.5,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -419,22 +369,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -666,
->>>>>>> Stashed changes
                         -226,
                         83.5
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         15.519228935241699,
                         3.9615383148193359,
-=======
-                        22.416666030883789,
-                        5.7222223281860352,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -444,13 +385,8 @@
                     ],
                     "buttonWidth": 403.5,
                     "buttonHeight": 103,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -524,13 +460,8 @@
                         84
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         43.942306518554688,
                         20.542984008789062,
-=======
-                        63.472221374511719,
-                        29.673198699951172,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -540,13 +471,8 @@
                     ],
                     "buttonWidth": 1142.5,
                     "buttonHeight": 534.11761474609375,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -563,11 +489,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-<<<<<<< Updated upstream
                     "pointer": 57883200,
-=======
-                    "pointer": 270951720,
->>>>>>> Stashed changes
                     "type": 4,
                     "componentTable": 0
                 }
@@ -588,22 +510,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -999,
->>>>>>> Stashed changes
                         7.5,
                         88.199996948242188
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         18.903844833374023,
                         6.4423074722290039,
-=======
-                        27.30555534362793,
-                        9.3055553436279297,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -613,13 +526,8 @@
                     ],
                     "buttonWidth": 491.5,
                     "buttonHeight": 167.5,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -650,22 +558,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -1036,
->>>>>>> Stashed changes
                         30,
                         90
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         11.538460731506348,
                         2.442307710647583,
-=======
-                        16.666666030883789,
-                        3.5277776718139648,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -675,13 +574,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -737,22 +631,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -1036,
->>>>>>> Stashed changes
                         -28,
                         90
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         11.538460731506348,
                         2.442307710647583,
-=======
-                        16.666666030883789,
-                        3.5277776718139648,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -762,13 +647,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -824,22 +704,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-<<<<<<< Updated upstream
                         1.5816464369601856e+38,
-=======
-                        -1029.5,
->>>>>>> Stashed changes
                         0,
                         90
                     ],
                     "Scale": [
-<<<<<<< Updated upstream
                         11.538460731506348,
                         2.442307710647583,
-=======
-                        16.666666030883789,
-                        3.5277776718139648,
->>>>>>> Stashed changes
                         1
                     ],
                     "rotationEuler": [
@@ -849,13 +720,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-<<<<<<< Updated upstream
                     "lastButtonWidth": 1112,
                     "lastButtonHeight": 478,
-=======
-                    "lastButtonWidth": 1346,
-                    "lastButtonHeight": 841,
->>>>>>> Stashed changes
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -954,17 +820,10 @@
                         -18.789997100830078
                     ],
                     "Quaternion": [
-<<<<<<< Updated upstream
                         0.36623352766036987,
                         -0.29853364825248718,
                         -0.034525088965892792,
                         0.88065809011459351
-=======
-                        0.37534147500991821,
-                        0.02335626631975174,
-                        0.32501092553138733,
-                        0.8677217960357666
->>>>>>> Stashed changes
                     ],
                     "RotationEditor": [
                         0,
@@ -980,11 +839,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-<<<<<<< Updated upstream
                     "Vertical Fov": 0.81195324659347534,
-=======
-                    "Vertical Fov": 1.1169314384460449,
->>>>>>> Stashed changes
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -6.219724178314209,
@@ -1028,7 +883,7 @@
                     "Active": true,
                     "Position": [
                         6.3106880187988281,
-                        0.10000000149011612,
+                        1,
                         10.506481170654297
                     ],
                     "Quaternion": [
@@ -1066,7 +921,7 @@
                     "Active": true,
                     "Position": [
                         17.311189651489258,
-                        0.10000000149011612,
+                        1,
                         17.078973770141602
                     ],
                     "Quaternion": [
@@ -1104,7 +959,7 @@
                     "Active": true,
                     "Position": [
                         4.4863696098327637,
-                        0.10000000149011612,
+                        1,
                         24.365568161010742
                     ],
                     "Quaternion": [
@@ -7098,11 +6953,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-<<<<<<< Updated upstream
                     "pointer": 57881568,
-=======
-                    "pointer": 270951584,
->>>>>>> Stashed changes
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -7114,11 +6965,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-<<<<<<< Updated upstream
                     "pointer": 57882112,
-=======
-                    "pointer": 270951992,
->>>>>>> Stashed changes
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
