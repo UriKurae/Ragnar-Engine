@@ -7,6 +7,7 @@
 #include "TransformComponent.h"
 #include "ParticleEffect_Velocity.h"
 #include "ParticleEffect_Acceleration.h"
+#include "ParticleEffect_Rotation.h"
 #include "ParticleEffect_Size.h"
 #include "ParticleEffect_Color.h"
 #include "ParticleEffect_SpawningShape.h"
@@ -40,7 +41,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particlePool.resize(maxParticles);
 
 	//particleReference = new Particle(own);
-	effects.resize(5);
+	effects.resize(6);
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
@@ -515,6 +516,11 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effect = new ParticleEffect_Acceleration();
 		effects[(int)ParticleEffectType::ACCELERATION_OVER_LIFETIME] = effect;
 		break;
+	case ParticleEffectType::ROTATION_OVER_LIFETIME:
+		//TODO
+		//effect = new ParticleEffect_Rotation();
+		effects[(int)ParticleEffectType::ROTATION_OVER_LIFETIME] = effect;
+		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		effect = new ParticleEffect_Size();
 		effects[(int)ParticleEffectType::SIZE_OVER_LIFETIME] = effect;
@@ -555,6 +561,9 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 		break;
 	case ParticleEffectType::ACCELERATION_OVER_LIFETIME:
 		return "Acceleration Effect";
+		break;
+	case ParticleEffectType::ROTATION_OVER_LIFETIME:
+		return "Rotation Effect";
 		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		return "Size Effect";

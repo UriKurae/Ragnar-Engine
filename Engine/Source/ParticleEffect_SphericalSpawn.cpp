@@ -2,9 +2,7 @@
 #include <Globals.h>
 
 ParticleEffect_SphericalSpawn::ParticleEffect_SphericalSpawn() : SpawnShape(SPAWN_SHAPE_TYPE::SPHERE),
-	radius(1.0f), 
-	angle(0.0f),
-	useDirection(false)
+	radius(1.0f)
 {
 }
 
@@ -33,31 +31,6 @@ void ParticleEffect_SphericalSpawn::Spawn(Particle& particle, bool hasInitialSpe
 	localPos.y = offset[1] + x2 * c;
 	localPos.z = offset[2] + x3 * c;
 	particle.position = gTrans.TransformPos(localPos);
-
-	if (hasInitialSpeed)
-	{
-		float3 localSpeed = (localPos - float3(offset[0], offset[1], offset[2])).Normalized() * speed;
-		particle.velocity = gTrans.TransformDir(localSpeed).Normalized() * speed;
-
-		if (useDirection)
-		{
-			float3 direction = (localPos - float3(offset[0], offset[1], offset[2]));
-			direction = gTrans.TransformDir(direction).Normalized();
-
-			float4x4 cameraView = app->sceneManager->GetCurrentScene()->mainCamera->ViewMatrixOpenGL().Transposed();
-
-			direction = cameraView.TransformDir(direction);
-
-			float2 directionViewProj = float2(direction.x, direction.y).Normalized();
-			float2 xAxis = float2(1, 0);
-			float finalAngle = xAxis.AngleBetween(directionViewProj);
-			if (directionViewProj.y < 0)
-				finalAngle = 360 * DEGTORAD - finalAngle;
-			finalAngle += angle * DEGTORAD;
-
-			particle.rotation = finalAngle;
-		}
-	}
 }
 
 void ParticleEffect_SphericalSpawn::OnEditor(int emitterIndex)
@@ -68,21 +41,11 @@ void ParticleEffect_SphericalSpawn::OnEditor(int emitterIndex)
 
 	suffixLabel = "Face Direction##ConeShape";
 	suffixLabel += emitterIndex;
-	ImGui::Checkbox(suffixLabel.c_str(), &useDirection);
-
-	if (useDirection)
-	{
-		suffixLabel = "Set Angle##ConeShape";
-		suffixLabel += emitterIndex;
-		ImGui::DragFloat(suffixLabel.c_str(), &angle);
-	}
 }
 
 bool ParticleEffect_SphericalSpawn::OnLoad(JsonParsing& node)
 {
 	radius = node.GetJsonNumber("Radius");
-	angle = node.GetJsonNumber("Angle");
-	useDirection = node.GetJsonBool("UseDirection");
 	return true;
 }
 
@@ -90,7 +53,5 @@ bool ParticleEffect_SphericalSpawn::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", radius);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Angle", angle);
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "UseDirection", useDirection);
 	return true;
 }
