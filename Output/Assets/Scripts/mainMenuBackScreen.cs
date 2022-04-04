@@ -38,6 +38,7 @@ public class mainMenuBackScreen : RagnarComponent
 			// focused mode
 			if (isFirstS)
 			{
+				AudioController.GetComponent<AudioSource>().PlayClip("FOCUSEDBUTTON");
 				isFirstS = false;
 				//poner sonido
 			}
@@ -45,8 +46,9 @@ public class mainMenuBackScreen : RagnarComponent
 		case 3:
 			// pressed mode
 			SceneManager.NextScene();
-			//cambiar de escena
-			break;
+			AudioController.GetComponent<AudioSource>().PlayClip("PRESSEDBUTTON");
+				//cambiar de escena
+				break;
 		}
 	}
 	void ExitButtonAction()
@@ -66,13 +68,15 @@ public class mainMenuBackScreen : RagnarComponent
 			// focused mode
 			if (isFirstE)
 			{
-				isFirstE = false;
 				//poner sonido
+				AudioController.GetComponent<AudioSource>().PlayClip("FOCUSEDBUTTON");
+				isFirstE = false;
 			}
 			break;
 		case 3:
 			// pressed mode
 			isFirstE = true;
+			AudioController.GetComponent<AudioSource>().PlayClip("PRESSEDBUTTON");
 			SceneManager.Exit();
 			//salir del Juego
 			break;

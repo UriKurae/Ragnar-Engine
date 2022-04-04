@@ -121,7 +121,7 @@ public class pauseMenuButton : RagnarComponent
 				if (isFirstS)
 				{
 					isFirstS = false;
-
+					SceneAudio.GetComponent<AudioSource>().PlayClip("FOCUSEDBUTTON");
 					//poner sonido
 				}
 
@@ -131,6 +131,7 @@ public class pauseMenuButton : RagnarComponent
 				isSowing = false;
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				SceneAudio.GetComponent<AudioSource>().PlayClip("PRESSEDBUTTON");
 				break;
 		}
 	}
