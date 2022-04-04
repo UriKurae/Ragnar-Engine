@@ -6,9 +6,13 @@ public class mainMenuBackScreen : RagnarComponent
 	Vector3 imagePos;
 	bool isFirstS = true;
 	bool isFirstE = true;
+	float textPositionX;
+	float textPositiony;
 	public void Start()
 	{
-
+		GameObject start = GameObject.Find("Button Start");
+		textPositionX= start.GetComponent<UIButton>().GetTextPosition().x;
+		textPositiony = start.GetComponent<UIButton>().GetTextPosition().y;
 	}
 	public void Update()
 	{
@@ -29,14 +33,24 @@ public class mainMenuBackScreen : RagnarComponent
 			// disabled Mode
 			break;
 		case 1:
-			isFirstS = true;
+				if (isFirstS == false)
+				{
+					
+					start.GetComponent<UIButton>().SetTextPosition(-23.6f, -4.6f);
+					isFirstS = true;
+				}
+			
+				
+			
 			// normal Mode
 			break;
 		case 2:
 			// focused mode
 			if (isFirstS)
 			{
-				isFirstS = false;
+				
+					start.GetComponent<UIButton>().SetTextPosition(-13.6f, -4.6f);
+					isFirstS = false;
 				//poner sonido
 			}
 			break;

@@ -184,6 +184,9 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetText);
 	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetText);
 
+	mono_add_internal_call("RagnarEngine.UIButton::SetTextPosition", SetTextPosition);
+	mono_add_internal_call("RagnarEngine.UIButton::GetTextPosition", GetTextPosition);
+
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
 
