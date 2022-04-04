@@ -43,6 +43,10 @@ public class Player : RagnarComponent
                 crouched = true;
                 gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
                 rb.SetHeight(0.6f); // 0.6 = 60%
+
+                Vector3 maxPoint = gameObject.GetMaxAABB();
+                maxPoint.y *= 0.6f;
+                gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
             }
             if (crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
             {
