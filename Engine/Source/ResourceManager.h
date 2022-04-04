@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 class Texture;
@@ -51,7 +51,7 @@ private:
 
 	static ResourceManager* instance;
 
-	std::map<uint, std::shared_ptr<Resource>> map;
+	std::unordered_map<uint, std::shared_ptr<Resource>> map;
 	std::vector<Texture*> textures;
 	std::vector<Mesh*> meshes;
 };

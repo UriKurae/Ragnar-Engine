@@ -27,7 +27,7 @@ public:
 	inline Color GetActualColor() { return actualColor; };
 	inline Color GetTextColor() { return textColor; };
 
-	inline void SetNormalMaterial(MaterialComponent* texture) {normalMaterial = texture;};
+	inline void SetNormalMaterial(MaterialComponent* texture) { normalMaterial = texture; };
 	inline void SetFocusedMaterial(MaterialComponent* texture) { focusedMaterial = texture; };
 	inline void SetPressedMaterial(MaterialComponent* texture) { pressedMaterial = texture; };
 	inline void SetDisabledMaterial(MaterialComponent* texture) { disabledMaterial = texture; };
@@ -46,7 +46,7 @@ public:
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
 	inline float GetAlpha() { return alpha; };
 	MyPlane* planeToDraw;
-	
+
 private:
 	
 	float alpha = 1.0f;

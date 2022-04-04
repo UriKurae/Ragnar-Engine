@@ -125,6 +125,9 @@ JsonParsing JsonParsing::SetChild(JSON_Value* parent, const char* name)
 
 size_t JsonParsing::ParseFile(const char* fileName)
 {
+	if (rootObject)
+		json_value_free(rootObject);
+
 	JSON_Value* config = json_parse_file(fileName);
 	rootObject = config;
 	

@@ -90,6 +90,7 @@ void SetTextPosition(MonoObject* go, float posx,float posy)
 }
 float3 GetTextPosition(MonoObject* go)
 {
+	const char* name = mono_class_get_name(mono_object_get_class(go));
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
 	//float3 position = ;
 

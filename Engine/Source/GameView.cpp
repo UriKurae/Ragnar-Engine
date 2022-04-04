@@ -1,5 +1,6 @@
 #include "GameView.h"
 #include "Application.h"
+#include "ModuleWindow.h"
 
 #include "ModuleCamera3D.h"
 #include "ModuleRenderer3D.h"
@@ -55,7 +56,7 @@ void GameView::Draw(Framebuffer* framebuffer)
 		bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
 		selected = ImGui::IsWindowFocused();
 
-		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image((ImTextureID)framebuffer->GetColorId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 	}
 	else
 	{
@@ -64,4 +65,13 @@ void GameView::Draw(Framebuffer* framebuffer)
 
 	ImGui::End();
 	style.WindowPadding = ImVec2(8.0f, 8.0f);
+}
+
+float4 GameView::GetBounds()
+{
+#ifdef DIST
+	return float4(0, 0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight());
+#else
+	return bounds;
+#endif
 }
