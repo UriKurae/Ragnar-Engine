@@ -51,6 +51,9 @@ void DialogueSystem::OnEditor()
 		fileName = text;
 	}
 
+	bool addDialogue = false;
+	bool deleteDialogue = false;
+	std::vector<Dialogue>::iterator auxIt;
 	int counterId = 0;
 	for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
 	{
@@ -63,7 +66,9 @@ void DialogueSystem::OnEditor()
 		(*it).id = counterId;
 
 		char text[256];
-
+		bool addLine = false;
+		bool deleteLine = false;
+		std::vector<DialogueLine>::iterator auxIt2;
 		int counter = 0;
 		for (std::vector<DialogueLine>::iterator it2 = (*it).dialogue.begin(); it2 != (*it).dialogue.end(); ++it2)
 		{
@@ -77,6 +82,18 @@ void DialogueSystem::OnEditor()
 			ImGui::InputText("Text", text, IM_ARRAYSIZE(text));
 			(*it2).line = text;
 
+			if (ImGui::Button(ICON_FA_PLUS" Add Line"))
+			{
+				auxIt2 = it2;
+				addLine = true;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_FA_MINUS" Delete Line"))
+			{
+				auxIt2 = it2;
+				deleteLine = true;
+			}
+
 			ImGui::PopID();
 
 			counter++;
@@ -84,21 +101,51 @@ void DialogueSystem::OnEditor()
 			ImGui::Spacing();
 		}
 
-		if (ImGui::Button(ICON_FA_PLUS" Add Line"))
+		if (addLine)
 		{
 			DialogueLine newLine;
 			newLine.line = "";
 			newLine.author = "";
-			(*it).dialogue.push_back(newLine);
+			(*it).dialogue.insert((++auxIt2), newLine);
+		}
+		if (deleteLine)
+		{
+			(*it).dialogue.erase(auxIt2);
+		}
+
+		if (ImGui::Button(ICON_FA_PLUS" New Dialogue"))
+		{
+			auxIt = it;
+			addDialogue = true;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button(ICON_FA_TRASH" Delete Dialogue"))
+		{
+			auxIt = it;
+			deleteDialogue = true;
 		}
 
 		ImGui::PopID();
 		counterId++;
 	}
 
-	ImGui::Separator();
+	if (dialogues.size() == 0)
+	{
+		if (ImGui::Button(ICON_FA_PLUS" New Dialogue"))
+		{
+			DialogueLine newLine;
+			newLine.line = "";
+			newLine.author = "";
 
-	if (ImGui::Button(ICON_FA_PLUS" New Dialogue"))
+			Dialogue newDialog;
+			newDialog.id = counterId + 1;
+			newDialog.dialogue.push_back(newLine);
+
+			dialogues.push_back(newDialog);
+		}
+	}
+
+	if (addDialogue)
 	{
 		DialogueLine newLine;
 		newLine.line = "";
@@ -108,7 +155,11 @@ void DialogueSystem::OnEditor()
 		newDialog.id = counterId + 1;
 		newDialog.dialogue.push_back(newLine);
 
-		dialogues.push_back(newDialog);
+		dialogues.insert((++auxIt), newDialog);
+	}
+	if (deleteDialogue)
+	{
+		dialogues.erase(auxIt);
 	}
 
 	ImGui::Separator();

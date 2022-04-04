@@ -776,7 +776,7 @@
       <Filter>Sources\GameObject\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\DialogueSystem.h">
-      <Filter>Sources\GameObject\Components\UI</Filter>
+      <Filter>Sources\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1683,7 +1683,7 @@
       <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\DialogueSystem.cpp">
-      <Filter>Sources\GameObject\Components\UI</Filter>
+      <Filter>Sources\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
