@@ -27,7 +27,7 @@ public class winScren : RagnarComponent
 		MenuImage = GameObject.Find("Main Menu Image");
 		NextImage = GameObject.Find("Next Level Image");
 		ReplayImage = GameObject.Find("Replay Image");
-		AudioManager = GameObject.Find("AudioWinScene");
+		AudioManager = GameObject.Find("AudioWinMenu");
 
 		Pos = new Vector3(0, 0, 0);
 	}
