@@ -130,8 +130,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        66.099075317382813,
-                        -60.090141296386719
+                        55,
+                        -50
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -153,12 +153,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.98622679710388184,
+                    "Vertical Fov": 1.0064557790756226,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
-                        66.099075317382813,
-                        -62.348247528076172
+                        55,
+                        -52.258106231689453
                     ],
                     "Type": 3,
                     "Zoom": 79,
@@ -213,7 +213,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -230,7 +230,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 268168936,
+                    "pointer": 329966112,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -268,7 +268,7 @@
                     "buttonWidth": 290,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -341,7 +341,7 @@
                     "buttonWidth": 290,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -414,7 +414,7 @@
                     "buttonWidth": 290,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -462,7 +462,7 @@
                     "buttonWidth": 290,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -510,7 +510,7 @@
                     "buttonWidth": 376,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -532,8 +532,8 @@
             "Name": "AudioLoseScene",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/AudioLoseScene.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Components": [
@@ -575,6 +575,10 @@
                             "1": "UISELECT"
                         }
                     ]
+                },
+                {
+                    "Type": 6,
+                    "Active": true
                 }
             ]
         }
