@@ -46,6 +46,8 @@ public class Knife : RagnarComponent
 
 		if (distance < 1.0f)
 		{
+			gameObject.GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFERECOVERSAND");
+
 			pendingToDelete = true;
 			canReload = false;
 		}

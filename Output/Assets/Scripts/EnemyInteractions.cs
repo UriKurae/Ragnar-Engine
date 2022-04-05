@@ -42,7 +42,6 @@ public class EnemyInteractions : RagnarComponent
 
     private void Shoot()
     {
-
         if (PlayerDetection(8) && canShoot)
         {
             //TODO_AUDIO
@@ -106,7 +105,7 @@ public class EnemyInteractions : RagnarComponent
     {
         if(other.gameObject.name == "SwordSlash")
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
+            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
             pendingToDelete = true;
         }
     }

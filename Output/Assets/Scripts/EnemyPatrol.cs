@@ -21,6 +21,7 @@ public class EnemyPatrol : RagnarComponent
     {
         agents = gameObject.GetComponent<NavAgent>();
         waypoints = GameObject.FindGameObjectsWithTag("Waypoints");
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
         GotoNextPoint();
     }
 
@@ -35,6 +36,7 @@ public class EnemyPatrol : RagnarComponent
         {
             if (stoppedTime >= 0)
             {
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
                 stoppedTime -= Time.deltaTime;
                 if (stoppedTime < 0)
                 {
@@ -54,6 +56,8 @@ public class EnemyPatrol : RagnarComponent
 
     void GotoNextPoint()
     {
+        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;
     }

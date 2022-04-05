@@ -59,7 +59,14 @@ public class Player : RagnarComponent
         {
             agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
             agent.CalculatePath(agent.hitPosition);
-            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            if (crouched)
+            {
+                gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+            }
+            else
+            {
+                gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            }
             gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
         }
         if (agent.MovePath())
@@ -75,21 +82,6 @@ public class Player : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
         }
         //////////////////////////
-
-        ///////// MOVEMENT /////////
-        // Idle
-        if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
-            || Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
-        {
-            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
-
-            if (rb.linearVelocity != Vector3.zero)
-                rb.linearVelocity = new Vector3(0, 0, 0);
-
-            if (rb.totalForce != Vector3.zero)
-                rb.ClearForces();
-        }
         
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
