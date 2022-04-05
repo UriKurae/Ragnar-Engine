@@ -230,7 +230,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 299333712,
+                    "pointer": 336148160,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -696,6 +696,10 @@
                             "1": "UISELECT"
                         }
                     ]
+                },
+                {
+                    "Type": 6,
+                    "Active": true
                 }
             ]
         }
