@@ -80,7 +80,12 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 		uint size = prefabFile.Save(&buf);
 
 		if (app->fs->Save(savePath.c_str(), buf, size) > 0)
+		{
 			DEBUG_LOG("Prefab saved succesfully");
+			savePath = PREFABS_FOLDER;
+			savePath += fileName;
+			app->fs->Save(savePath.c_str(), buf, size);
+		}
 		else
 			DEBUG_LOG("Prefab couldn't be saved");
 
@@ -99,7 +104,14 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 		uint size = prefabFile.Save(&buf);
 
 		if (app->fs->Save(gameObject->prefabPath.c_str(), buf, size) > 0)
+		{
 			DEBUG_LOG("Prefab saved succesfully");
+			std::string name = gameObject->prefabPath;
+			app->fs->GetFilenameWithExtension(name);
+			std::string savePath = PREFABS_FOLDER;
+			savePath += name;
+			app->fs->Save(savePath.c_str(), buf, size);
+		}
 		else
 			DEBUG_LOG("Prefab couldn't be saved");
 
@@ -147,7 +159,12 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 		uint size = prefabFile.Save(&buf);
 
 		if (app->fs->Save(savePath.c_str(), buf, size) > 0)
+		{
 			DEBUG_LOG("Prefab saved succesfully");
+			savePath = PREFABS_FOLDER;
+			savePath += fileName;
+			app->fs->Save(savePath.c_str(), buf, size);
+		}
 		else
 			DEBUG_LOG("Prefab couldn't be saved");
 
@@ -184,6 +201,8 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 			DEBUG_LOG("Prefab saved succesfully");
 		else
 			DEBUG_LOG("Prefab couldn't be saved");
+
+
 
 		RELEASE_ARRAY(buf);
 	}

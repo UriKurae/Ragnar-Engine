@@ -663,6 +663,36 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<ParticleSystemComponent>()->OnLoad(c);
 			break;
+		case ComponentType::UI_BUTTON:
+			if (GetComponent<ButtonComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_BUTTON);
+
+			GetComponent<ButtonComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_CHECKBOX:
+			if (GetComponent<CheckboxComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_CHECKBOX);
+
+			GetComponent<CheckboxComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_IMAGE:
+			if (GetComponent<ImageComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_BUTTON);
+
+			GetComponent<ImageComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_SLIDER:
+			if (GetComponent<SliderComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_BUTTON);
+
+			GetComponent<SliderComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_TEXT:
+			if (GetComponent<TextComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_TEXT);
+
+			GetComponent<TextComponent>()->OnLoad(c);
+			break;
 		}
 	}
 
@@ -728,6 +758,21 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::PARTICLE_SYSTEM:
 			RemoveComponent(GetComponent<ParticleSystemComponent>());
+			break;
+		case ComponentType::UI_BUTTON:
+			RemoveComponent(GetComponent<ButtonComponent>());
+			break;
+		case ComponentType::UI_CHECKBOX:
+			RemoveComponent(GetComponent<CheckboxComponent>());
+			break;
+		case ComponentType::UI_SLIDER:
+			RemoveComponent(GetComponent<SliderComponent>());
+			break;
+		case ComponentType::UI_IMAGE:
+			RemoveComponent(GetComponent<ImageComponent>());
+			break;
+		case ComponentType::UI_TEXT:
+			RemoveComponent(GetComponent<TextComponent>());
 			break;
 		}
 	}
