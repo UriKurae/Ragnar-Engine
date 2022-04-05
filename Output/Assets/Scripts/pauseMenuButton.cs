@@ -6,6 +6,7 @@ public class pauseMenuButton : RagnarComponent
 	Vector3 pos;
 	bool isSowing = false;
 	bool isFirstS = true;
+	bool isFirstE = true;
 	GameObject Image;
 	GameObject Resume;
 	GameObject MainM;
@@ -149,15 +150,15 @@ public class pauseMenuButton : RagnarComponent
 				// disabled Mode
 				break;
 			case 1:
-				isFirstS = true;
+				isFirstE = true;
 				// normal Mode
 				break;
 			case 2:
 				// focused mode
-				if (isFirstS)
+				if (isFirstE)
 				{
 					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					isFirstS = false;
+					isFirstE = false;
 
 					//poner sonido
 				}
