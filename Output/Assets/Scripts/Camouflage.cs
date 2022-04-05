@@ -3,17 +3,18 @@ using RagnarEngine;
 
 public class Camouflage : RagnarComponent
 {
+	public GameObject player;
 	public void Start()
 	{
-
+		player = GameObject.Find("Player_2");
 	}
 	public void Update()
 	{
-		ChooseMesh();
+		SetMaterialTransparent();
 	}
-	private void ChooseMesh()
+	private void SetMaterialTransparent()
     {
-		this.gameObject.GetComponent<Material>().texture = "Assets/Resources/UI/transparent_tex.png";
+		player.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/transparent_tex.png");
     }
 
 }

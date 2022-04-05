@@ -70,8 +70,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Transform =================
 
 	// Material Comp =============
-	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
-	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
+	//mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::SetTexturePath", SetTexturePath);
 	// Material Comp =============
 	
 	// Internall Calls =============

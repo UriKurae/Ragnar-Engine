@@ -167,10 +167,11 @@ MonoString* GetTexturePath(MonoObject* go)
 	return mono_string_new(app->moduleMono->domain, p.c_str());
 }
 
-void SetTexturePath(MonoObject* go, MonoObject* texturePath)
+void SetTexturePath(MonoObject* go, MonoString* texturePath)
 {
+	char* goName = mono_string_to_utf8(mono_object_to_string(go, 0));
 	MaterialComponent* matComp = GetComponentMono<MaterialComponent*>(go);
-	char* path = mono_string_to_utf8(mono_object_to_string(texturePath, 0));
+	char* path = mono_string_to_utf8(texturePath);
 	std::string p = path;
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
