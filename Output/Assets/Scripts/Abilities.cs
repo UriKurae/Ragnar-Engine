@@ -35,7 +35,7 @@ public class Abilities : RagnarComponent
 
     public void Rock()
     {
-        if (SkillNade.GetComponent<UIButton>().GetButtonState() == 3 && GameObject.Find("Rock") == null)
+        if (/*SkillNade.GetComponent<UIButton>().GetButtonState() == 3 &&*/ GameObject.Find("Rock") == null)
         {
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ThrowRock");

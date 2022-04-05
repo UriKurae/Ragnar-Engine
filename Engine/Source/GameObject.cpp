@@ -138,6 +138,7 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Plyer Input Component"))
 		{
 			CreateComponent(ComponentType::INPUT_ACTION);
+			newComponent = false;
 		}
 		if (ImGui::Selectable("Particle System Component"))
 		{
@@ -659,6 +660,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<AnimationComponent>()->OnLoad(c);
 			break;
+		case ComponentType::INPUT_ACTION:
+			if (GetComponent<InputActionComponent>() == nullptr)
+				CreateComponent(ComponentType::INPUT_ACTION);
+
+			GetComponent<InputActionComponent>()->OnLoad(c);
+			break;
 		case ComponentType::BILLBOARD:
 			if (GetComponent<BillboardParticleComponent>() == nullptr)
 				CreateComponent(ComponentType::BILLBOARD);
@@ -730,6 +737,9 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::ANIMATION:
 			RemoveComponent(GetComponent<AnimationComponent>());
+			break;
+		case ComponentType::INPUT_ACTION:
+			RemoveComponent(GetComponent<InputActionComponent>());
 			break;
 		case ComponentType::BILLBOARD:
 			RemoveComponent(GetComponent<BillboardParticleComponent>());

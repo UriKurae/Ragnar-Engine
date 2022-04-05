@@ -198,14 +198,16 @@ bool InputActionComponent::OnLoad(JsonParsing& node)
 			JsonParsing a = aM.GetJsonArrayValue(jArr, 0);
 			scriptsNameList[i][j] = a.GetJsonString("Script");
 			currentMethodList[i][j] = a.GetJsonNumber("Method");
-			app->moduleMono->DebugAllMethodsShortName(USER_SCRIPTS_NAMESPACE, a.GetJsonString("Script"), scriptsMethodsList[i][j]);
-
-			std::string methodName = scriptsMethodsList[i][j][currentMethodList[i][j]];
-			MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, a.GetJsonString("Script"));
-			std::string methodN = ":" + methodName;
-			MonoMethodDesc* mdesc = mono_method_desc_new(methodN.c_str(), false);
-			monoMethodList[i][j] = mono_method_desc_search_in_class(mdesc, klass);
-			mono_method_desc_free(mdesc);
+			if (scriptsNameList[i][j] != "")
+			{
+				app->moduleMono->DebugAllMethodsShortName(USER_SCRIPTS_NAMESPACE, a.GetJsonString("Script"), scriptsMethodsList[i][j]);
+				std::string methodName = scriptsMethodsList[i][j][currentMethodList[i][j]];
+				MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, a.GetJsonString("Script"));
+				std::string methodN = ":" + methodName;
+				MonoMethodDesc* mdesc = mono_method_desc_new(methodN.c_str(), false);
+				monoMethodList[i][j] = mono_method_desc_search_in_class(mdesc, klass);
+				mono_method_desc_free(mdesc);
+			}
 		}
 	}
 
