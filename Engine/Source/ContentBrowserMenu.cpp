@@ -4,7 +4,6 @@
 
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
-#include "InputActionMenu.h"
 #include "ModuleSceneManager.h"
 #include "MonoManager.h"
 
@@ -195,13 +194,6 @@ bool ContentBrowserMenu::Update(float dt)
 				ImGui::Button(item.c_str());
 			}
 			break;
-		}
-		if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0) && type == ResourceType::INPUT_ACTION)
-		{
-			InputActionMenu* iAM = static_cast<InputActionMenu*>(app->editor->GetMainMenuBar().GetMenus()[(int)Menus::INPUT_ACTION]);
-			iAM->active = true;
-			iAM->ResetCurrent();
-			iAM->LoadInputActionFile((*it).c_str());
 		}
 		if (ImGui::IsItemClicked())
 		{

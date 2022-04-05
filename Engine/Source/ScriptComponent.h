@@ -32,8 +32,6 @@ public:
 	void CallOnCollisionEnter(RigidBodyComponent* other);
 	void CallOnCollision(RigidBodyComponent* other);
 
-	inline uint32_t GetScriptGO() { return noGCobject; }
-
 
 private:
 //#ifndef STANDALONE

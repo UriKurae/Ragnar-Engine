@@ -339,8 +339,6 @@ ResourceType FileSystem::CheckExtension(const std::string& path)
 	if (extension.data() == std::string(".shader")) return ResourceType::SHADER;
 
 
-	if (extension.data() == std::string(".inputaction")) return ResourceType::INPUT_ACTION;
-
 	for (s = modelExtension.begin(); s != end; ++s)
 	{
 		if (*s == extension)

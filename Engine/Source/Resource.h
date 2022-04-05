@@ -10,7 +10,6 @@ enum class ResourceType
 	MESH,
 	MODEL,
 	SCENE,
-	INPUT_ACTION,
 	SCRIPT,
 	MATERIAL,
 	SHADER,

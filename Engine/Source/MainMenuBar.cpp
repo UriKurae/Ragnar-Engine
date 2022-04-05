@@ -16,7 +16,6 @@
 #include "ContentBrowserMenu.h"
 #include "TextEditorMenu.h"
 #include "FogWarMenu.h"
-#include "InputActionMenu.h"
 #include "NavigatorMenu.h"
 
 #include "TransformComponent.h"
@@ -46,9 +45,7 @@
 
 MainMenuBar::MainMenuBar() : Menu(true, "MainMenu")
 {
-	showMenu = false;
-
-	menus.reserve(10);
+	menus.reserve(9);
 	menus.emplace_back(new ConsoleMenu());
 	menus.emplace_back(new ConfigurationMenu());
 	menus.emplace_back(new AboutMenu());
@@ -56,12 +53,11 @@ MainMenuBar::MainMenuBar() : Menu(true, "MainMenu")
 	menus.emplace_back(new ContentBrowserMenu());
 	menus.emplace_back(new TextEditorMenu());
 	menus.emplace_back(new FogWarMenu());
-	menus.emplace_back(new InputActionMenu());
 	menus.emplace_back(new NavigatorMenu());
 	menus.emplace_back(new InspectorMenu()); // Inspector must be the LAST!!!
 
 	stylesList = { "Deep Dark", "Red & Dark", "Green & Blue", "Classic Dark", "Visual Studio", "Dark Visual", "Gold & Black", "Smooth Dark" };
-	iconList = { ICON_FA_WINDOW_MAXIMIZE, ICON_FA_WRENCH, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_CODE, ICON_FA_CLOUD, ICON_FA_KEYBOARD, ICON_FA_WALKING, ICON_FA_INFO_CIRCLE };
+	iconList = { ICON_FA_WINDOW_MAXIMIZE, ICON_FA_WRENCH, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_SITEMAP, ICON_FA_CODE, ICON_FA_CLOUD, ICON_FA_WALKING, ICON_FA_INFO_CIRCLE };
 }
 
 MainMenuBar::~MainMenuBar()
@@ -341,13 +337,6 @@ void MainMenuBar::CreateGameObjectMenu()
 
 		ImGui::EndMenu();
 	}
-	//Input Action
-	if (ImGui::MenuItem(ICON_FA_KEYBOARD" Create Input Action"))
-	{
-		InputActionMenu* iAMenu = static_cast<InputActionMenu*>(menus[(int)Menus::INPUT_ACTION]);
-		iAMenu->SaveInputActionFile("Assets/Resources/InputAction.inputaction");
-	}
-
 	// Dialogue
 	if (ImGui::BeginMenu(ICON_FA_FILE " Dialogue"))
 	{

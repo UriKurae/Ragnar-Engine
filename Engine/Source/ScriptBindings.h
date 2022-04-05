@@ -228,22 +228,10 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	return app->moduleMono->GoToCSGO(go);
 }
 
-void InstancePrefab(MonoObject* name)
+void InstancePrefab(MonoObject* path)
 {
-	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
-
-	std::string	path;
-
-#ifdef DIST
-	path = PREFABS_FOLDER;
-#else
-	path = PREFABS_ASSETS_FOLDER;
-#endif
-
-	path += goName;
-	path += ".rgdialogue";
-
-	PrefabManager::GetInstance()->LoadPrefab(path.c_str());
+	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
+	PrefabManager::GetInstance()->LoadPrefab(goPath);
 }
 
 MonoObject* Destroy(MonoObject* go)
@@ -499,14 +487,7 @@ void StartDialogueById(int id)
 void LoadDialogueFile(MonoString* name)
 {
 	char* fileName = mono_string_to_utf8(name);
-	std::string path;
-
-#ifdef DIST
-	path = DIALOGUES_FOLDER;
-#else
-	path = DIALOGUES_ASSETS_FOLDER;
-#endif
-	
+	std::string path = DIALOGUES_FOLDER;
 	path += fileName;
 	path += ".rgdialogue";
 	DialogueSystem::GetInstance()->LoadDialogue(path);

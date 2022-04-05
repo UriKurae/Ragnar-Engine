@@ -36,7 +36,6 @@ public:
 
 	void LogConsole(const char* string);
 	inline std::string& GetCurrentDir() { return mainMenuBar.GetCurrentDir(); }
-	inline MainMenuBar GetMainMenuBar() { return mainMenuBar; }
 
 	inline Viewport* GetViewport() { return viewport; }
 	std::vector<std::string> GetTags();

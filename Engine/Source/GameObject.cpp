@@ -15,7 +15,6 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
-#include "InputActionComponent.h"
 #include "AnimationComponent.h"
 #include "BillboardParticleComponent.h"
 #include "ButtonComponent.h"
@@ -133,11 +132,6 @@ void GameObject::DrawEditor()
 		if (ImGui::Selectable("Audio Reverb Zone Component"))
 		{
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
-			newComponent = false;
-		}
-		if (ImGui::Selectable("Plyer Input Component"))
-		{
-			CreateComponent(ComponentType::INPUT_ACTION);
 			newComponent = false;
 		}
 		if (ImGui::Selectable("Particle System Component"))
@@ -262,9 +256,6 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
-	case ComponentType::INPUT_ACTION:
-		component = new InputActionComponent(this);
-		break;
 	case ComponentType::ANIMATION:
 		component = new AnimationComponent(this);
 		break;
@@ -273,7 +264,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
     	break;
 	case ComponentType::NAVAGENT:
 		component = new NavAgentComponent(this);
-		break;
+		break;	
 	case ComponentType::MATERIAL:
 	{
 		MaterialComponent* matComp = GetComponent<MaterialComponent>();
@@ -660,12 +651,6 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<AnimationComponent>()->OnLoad(c);
 			break;
-		case ComponentType::INPUT_ACTION:
-			if (GetComponent<InputActionComponent>() == nullptr)
-				CreateComponent(ComponentType::INPUT_ACTION);
-
-			GetComponent<InputActionComponent>()->OnLoad(c);
-			break;
 		case ComponentType::BILLBOARD:
 			if (GetComponent<BillboardParticleComponent>() == nullptr)
 				CreateComponent(ComponentType::BILLBOARD);
@@ -677,36 +662,6 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 				CreateComponent(ComponentType::ANIMATION);
 
 			GetComponent<ParticleSystemComponent>()->OnLoad(c);
-			break;
-		case ComponentType::UI_BUTTON:
-			if (GetComponent<ButtonComponent>() == nullptr)
-				CreateComponent(ComponentType::UI_BUTTON);
-
-			GetComponent<ButtonComponent>()->OnLoad(c);
-			break;
-		case ComponentType::UI_CHECKBOX:
-			if (GetComponent<CheckboxComponent>() == nullptr)
-				CreateComponent(ComponentType::UI_CHECKBOX);
-
-			GetComponent<CheckboxComponent>()->OnLoad(c);
-			break;
-		case ComponentType::UI_IMAGE:
-			if (GetComponent<ImageComponent>() == nullptr)
-				CreateComponent(ComponentType::UI_BUTTON);
-
-			GetComponent<ImageComponent>()->OnLoad(c);
-			break;
-		case ComponentType::UI_SLIDER:
-			if (GetComponent<SliderComponent>() == nullptr)
-				CreateComponent(ComponentType::UI_BUTTON);
-
-			GetComponent<SliderComponent>()->OnLoad(c);
-			break;
-		case ComponentType::UI_TEXT:
-			if (GetComponent<TextComponent>() == nullptr)
-				CreateComponent(ComponentType::UI_TEXT);
-
-			GetComponent<TextComponent>()->OnLoad(c);
 			break;
 		}
 	}
@@ -768,29 +723,11 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 		case ComponentType::ANIMATION:
 			RemoveComponent(GetComponent<AnimationComponent>());
 			break;
-		case ComponentType::INPUT_ACTION:
-			RemoveComponent(GetComponent<InputActionComponent>());
-			break;
 		case ComponentType::BILLBOARD:
 			RemoveComponent(GetComponent<BillboardParticleComponent>());
 			break;
 		case ComponentType::PARTICLE_SYSTEM:
 			RemoveComponent(GetComponent<ParticleSystemComponent>());
-			break;
-		case ComponentType::UI_BUTTON:
-			RemoveComponent(GetComponent<ButtonComponent>());
-			break;
-		case ComponentType::UI_CHECKBOX:
-			RemoveComponent(GetComponent<CheckboxComponent>());
-			break;
-		case ComponentType::UI_SLIDER:
-			RemoveComponent(GetComponent<SliderComponent>());
-			break;
-		case ComponentType::UI_IMAGE:
-			RemoveComponent(GetComponent<ImageComponent>());
-			break;
-		case ComponentType::UI_TEXT:
-			RemoveComponent(GetComponent<TextComponent>());
 			break;
 		}
 	}
