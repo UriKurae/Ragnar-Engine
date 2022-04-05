@@ -23,20 +23,24 @@ public:
 
 	float2 GetParentPosition();
 
-public:
-	float buttonWidth;
-	float buttonHeight;
-	Text buttonText;
+	char* GetText() 
+	{ 
+		char* rText{};
+		strcpy(rText, textToShow.textt.c_str());
+		return rText;
+	}
+	void SetText(char* newText)
+	{		
+		textToShow.setOnlyText(newText);
+		//strcpy(text, newText);
+	}
+
+	Text textToShow;
+private:
+
 	bool fadeUI = false;
-	State state;
-	Color disabledColor = white;
-	Color actualColor;
-	Color pressedColor = red;
-	Color focusedColor = blue;
-	Color normalColor = green;
-	Color selectedColor = black;
-	MyPlane* planeToDraw;
 	Color textColor = white;
-	std::string text;
+	MyPlane* planeToDraw;
+	//char text[358] = "Text";
 	float fontScale = 1;
 };

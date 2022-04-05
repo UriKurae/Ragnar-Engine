@@ -42,6 +42,7 @@ ButtonComponent::~ButtonComponent()
 
 bool ButtonComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Button Update");
 	buttonText.SetOnlyPosition(float2(GetParentPosition().x + textPos.x, GetParentPosition().y + textPos.y));
 
 	if (!active)

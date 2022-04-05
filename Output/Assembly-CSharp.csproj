@@ -61,6 +61,7 @@
     <Compile Include="Assembly-CSharp\Default Components\UICheckbox.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIImage.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UISlider.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\UIText.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Emitter.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\SceneManager.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\GameObject.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\Scripts\BackStab.cs" />
     <Compile Include="Assets\Scripts\StunnerShot.cs" />
     <Compile Include="Assets\Scripts\SwordSlash.cs" />
+    <Compile Include="Assets\Scripts\dialogue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />

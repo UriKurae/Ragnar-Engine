@@ -115,6 +115,9 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	ComponentTransform2D* auxTrans = own->GetComponent<ComponentTransform2D>();
 
+	/*float4 size = app->editor->GetGameView()->GetBounds();
+	app->renderer3D->OnResize(size.z, size.w);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);*/
 
 	ButtonComponent* theButton = nullptr;
 	SliderComponent* theSlider = nullptr;
@@ -131,10 +134,34 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		texture->Bind();
 	shader->Use();
 
-	CameraComponent* cam = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
+	Frustum frustum;
+	CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 
+	frustum.pos = camera->GetFrustum()->pos;
+
+	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.type = FrustumType::OrthographicFrustum;
+
+	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.nearPlaneDistance = -1.0f;
+	frustum.farPlaneDistance = 1.0f;
+
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+
+
+	
+	
+	math::float4x4 model = math::float4x4::identity;
 	if (theButton)
 	{
+		
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x* CONVERSION_FACTOR, w->GetScale().y* CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		//theButton->GetAlpha()
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
@@ -153,6 +180,9 @@ void MyPlane::DrawPlane2D(Texture* texture)
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
 						transform = float4x4::FromTRS(r->GetInternalPosition(), r->GetRotationQuat(), float3(r->GetScale().x, r->GetScale().y, 1));
+
+
+
 						break;
 					}
 				}
@@ -167,10 +197,17 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theImage)
 	{
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
 	}
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
+	auto p = frustum.ProjectionMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
+	//glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, frustum.projectionMatrix.Transposed().ptr());
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_TRUE, (const float*)&model);
 
 	glBindVertexArray(VAO);
 
@@ -378,6 +415,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 {
 	// activate corresponding render state	
 
+
 	shader->Use();
 	updateText();
 	Frustum frustum;
@@ -418,37 +456,57 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 // Draw all text letters 
 void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 {
+	float auxX = x;
+	int line = 0;
+	std::string u;
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++)
 	{
 		Character ch = characters[*c];
 
-		float xpos = x + ch.Bearing.x * scale;
-		float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+		bool newLine = false;
+		u = (*c);
+		if (u == "\n")
+		{
+			line++;
+			newLine = true;
+		}
 
 		float w = ch.Size.x * scale;
 		float h = ch.Size.y * scale;
-		// update VBO for each character
-		float vertices[6][4] = {
-			{ xpos,     ypos + h,   0.0f, 0.0f },
-			{ xpos,     ypos,       0.0f, 1.0f },
-			{ xpos + w, ypos,       1.0f, 1.0f },
 
-			{ xpos,     ypos + h,   0.0f, 0.0f },
-			{ xpos + w, ypos,       1.0f, 1.0f },
-			{ xpos + w, ypos + h,   1.0f, 0.0f }
-		};
-		// render glyph texture over quad
-		glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-		// update content of VBO memory
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // be sure to use glBufferSubData and not glBufferData
+		float xpos = x + ch.Bearing.x * scale;
+		float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - line * 46 * scale;
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		// render quad
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		// now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-		x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+		if (newLine)
+		{
+			x = auxX;
+			//x -= (ch.Advance >> 6) * scale;
+		}
+		else
+		{
+			// update VBO for each character
+			float vertices[6][4] = {
+				{ xpos,     ypos + h,   0.0f, 0.0f },
+				{ xpos,     ypos,       0.0f, 1.0f },
+				{ xpos + w, ypos,       1.0f, 1.0f },
+
+				{ xpos,     ypos + h,   0.0f, 0.0f },
+				{ xpos + w, ypos,       1.0f, 1.0f },
+				{ xpos + w, ypos + h,   1.0f, 0.0f }
+			};
+			// render glyph texture over quad
+			glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+			// update content of VBO memory
+			glBindBuffer(GL_ARRAY_BUFFER, VBO);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // be sure to use glBufferSubData and not glBufferData
+
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			// render quad
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			// now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+			x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+		}
 	}
 }
 
@@ -495,12 +553,12 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
 			// Whats does this do?
-			//DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
 			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
 			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
-			float posYMin = ((viewport.w / 2) + (-(position.y - 15))) - (button->GetButtonHeight() / 2);
-			float posYMax = ((viewport.w / 2) + (-(position.y - 15))) + (button->GetButtonHeight() / 2);
+			float posYMin = ((viewport.w / 2) + (-(position.y))) - (button->GetButtonHeight() / 2);
+			float posYMax = ((viewport.w / 2) + (-(position.y))) + (button->GetButtonHeight() / 2);
 
 			//ImageComponent* image = go->GetComponent<ImageComponent>();
 			if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
@@ -622,7 +680,7 @@ void ModuleUI::Draw()
 		}
 		else if (TextComponent* text = go->GetComponent<TextComponent>())
 		{
-			RenderText(text->buttonText.textt, text->buttonText.X, text->buttonText.Y, text->buttonText.Scale, text->buttonText.Color);
+			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color);
 			text = nullptr;
 		}
 		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())

@@ -13,13 +13,13 @@
 
 #include <math.h>
 
-#define CONVERSION_FACTOR 45
+
 #include "Profiling.h"
 
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
-	position = { 0,0,36.0f };
+	position = { 0,0,-1.3f };
 	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;

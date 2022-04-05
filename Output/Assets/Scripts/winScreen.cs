@@ -11,13 +11,10 @@ public class winScren : RagnarComponent
 		Back = GameObject.Find("Background");
 		Menu = GameObject.Find("ButtonMenu");
 		Next = GameObject.Find("ButtonNextLevel");
-
 	}
 	
 	public void Update()
 	{
-		
-
 		Back.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 
 		if (Menu.GetComponent<UIButton>().GetButtonState() == 3)

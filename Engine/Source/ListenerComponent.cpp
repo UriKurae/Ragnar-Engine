@@ -12,12 +12,14 @@ ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans)
 	type = ComponentType::AUDIO_LISTENER;
 	
 	// Register this listener
+	AkGameObjectID cameraID = owner->GetUUID();
 	if (!owner->CheckAudioRegister())
 	{
-		AkGameObjectID cameraID = owner->GetUUID();
 		AudioManager::Get()->RegisterGameObject(cameraID);
 		owner->SetAudioRegister(true);
 	}
+	
+	AudioManager::Get()->SetDefaultListener(&cameraID, owner->GetComponent<TransformComponent>());
 }
 
 ListenerComponent::~ListenerComponent()

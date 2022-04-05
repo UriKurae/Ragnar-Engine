@@ -205,24 +205,7 @@ bool CameraComponent::Update(float dt)
 		targetUID = 0;
 	}
 
-	//Zoom through fov
-	int zoom = app->input->GetMouseZ();
-	if (zoom > 0 && (RADTODEG * horizontalFov > zoomMax))
-	{
-		horizontalFov = DegToRad(RADTODEG * horizontalFov - zoomSpeed);
-		UpdateFov();
-		CompileBuffers();
-	}
-	else if (zoom < 0 && (RADTODEG * horizontalFov < zoomMin))
-	{
-		horizontalFov = DegToRad(RADTODEG * horizontalFov + zoomSpeed);
-		UpdateFov();
-		CompileBuffers();
-	}
-
-	//camera.SetPos(transform->GetPosition());
-	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
-	matrixViewFrustum = camera.ComputeViewMatrix();
+	Zoom();
 
 	if (target && app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 	{
@@ -261,7 +244,29 @@ bool CameraComponent::Update(float dt)
 	UpdateMovement();
 	UpdateRotation();
 
+
+	//camera.SetPos(transform->GetPosition());
+	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
+	matrixViewFrustum = camera.ComputeViewMatrix();
+
 	return true;
+}
+
+void CameraComponent::Zoom()
+{
+
+	if (app->input->GetMouseZ() > 0 && zoom < zoomMax)
+	{
+		zoom += zoomSpeed;
+		transform->SetPosition(transform->GetPosition() + (controllerTrans->GetPosition() - transform->GetPosition()).Normalized() * zoomSpeed);
+		transform->ForceUpdateTransform();
+	}
+	else if (app->input->GetMouseZ() < 0 && zoom > zoomMin)
+	{
+		zoom -= zoomSpeed;
+		transform->SetPosition(transform->GetPosition() - (controllerTrans->GetPosition() - transform->GetPosition()).Normalized() * zoomSpeed);
+		transform->ForceUpdateTransform();
+	}
 }
 
 void CameraComponent::UpdateMovement()
@@ -422,6 +427,7 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	verticalFov = node.GetJsonNumber("Vertical Fov");
 	horizontalFov = node.GetJsonNumber("Horizontal Fov");
 	camera.SetPos(node.GetJson3Number(node, "Camera Pos"));
+	zoom = node.GetJsonNumber("Zoom");
 	zoomMin = node.GetJsonNumber("Zoom Min");
 	zoomMax = node.GetJsonNumber("Zoom Max");
 
@@ -458,6 +464,7 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Horizontal Fov", horizontalFov);
 	file.SetNewJson3Number(file, "Camera Pos", camera.Pos());
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom", zoom);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom Min", zoomMin);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom Max", zoomMax);
 
