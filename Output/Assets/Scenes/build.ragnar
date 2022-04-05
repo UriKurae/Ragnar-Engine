@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 300710232,
+                    "pointer": 182375960,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 194297408,
+                    "characters": 203734848,
                     "drawnArea": false
                 }
             ]
@@ -176,13 +176,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        3.3333332538604736,
-                        1.6222221851348877,
+                        0.25,
+                        0.12166666984558105,
                         1
                     ],
                     "rotationEuler": [
@@ -192,8 +192,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 73,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -249,13 +249,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        3.3666665554046631,
-                        1.4666666984558105,
+                        0.25249999761581421,
+                        0.10999999940395355,
                         1
                     ],
                     "rotationEuler": [
@@ -265,8 +265,8 @@
                     ],
                     "buttonWidth": 151.5,
                     "buttonHeight": 66,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -322,13 +322,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        7.5777778625488281,
-                        3.0333333015441895,
+                        0.56833332777023315,
+                        0.22750000655651093,
                         1
                     ],
                     "rotationEuler": [
@@ -338,8 +338,8 @@
                     ],
                     "buttonWidth": 341,
                     "buttonHeight": 136.5,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -370,13 +370,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        8.9666662216186523,
-                        2.2888889312744141,
+                        0.67250001430511475,
+                        0.17166666686534882,
                         1
                     ],
                     "rotationEuler": [
@@ -386,8 +386,8 @@
                     ],
                     "buttonWidth": 403.5,
                     "buttonHeight": 103,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -461,8 +461,8 @@
                         84
                     ],
                     "Scale": [
-                        25.388889312744141,
-                        11.869279861450195,
+                        1.9041666984558105,
+                        0.89019602537155151,
                         1
                     ],
                     "rotationEuler": [
@@ -472,8 +472,8 @@
                     ],
                     "buttonWidth": 1142.5,
                     "buttonHeight": 534.11761474609375,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -490,7 +490,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 300715536,
+                    "pointer": 182377456,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -511,13 +511,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        10.922222137451172,
-                        3.7222223281860352,
+                        0.81916666030883789,
+                        0.27916666865348816,
                         1
                     ],
                     "rotationEuler": [
@@ -527,8 +527,8 @@
                     ],
                     "buttonWidth": 491.5,
                     "buttonHeight": 167.5,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -559,13 +559,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        6.6666665077209473,
-                        1.4111111164093018,
+                        0.5,
+                        0.10583333671092987,
                         1
                     ],
                     "rotationEuler": [
@@ -575,8 +575,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -632,13 +632,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        0,
                         0,
                         0
                     ],
                     "Scale": [
-                        6.6666665077209473,
-                        1.4111111164093018,
+                        0.5,
+                        0.10583333671092987,
                         1
                     ],
                     "rotationEuler": [
@@ -648,8 +648,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -710,8 +710,8 @@
                         0
                     ],
                     "Scale": [
-                        6.6666665077209473,
-                        1.4111111164093018,
+                        0.5,
+                        0.10583333671092987,
                         1
                     ],
                     "rotationEuler": [
@@ -721,8 +721,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1239,
-                    "lastButtonHeight": 706,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -840,7 +840,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0358568429946899,
+                    "Vertical Fov": 1.0794777870178223,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         19.463306427001953,
@@ -848,8 +848,9 @@
                         -77.746482849121094
                     ],
                     "Type": 3,
+                    "Zoom": 0,
                     "Zoom Min": 0,
-                    "Zoom Max": 0,
+                    "Zoom Max": 30,
                     "Free Movement": true,
                     "Default Target Pos": [
                         19.463306427001953,
@@ -965,7 +966,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 300712952,
+                    "pointer": 182382760,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -977,7 +978,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 300719752,
+                    "pointer": 182383168,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -2754,6 +2755,61 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1011093402,
+            "Parent UUID": 417171234,
+            "Name": "AudioLevel1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/AudioLevel1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "LEVEL1BGMUSIC"
+                        },
+                        {
+                            "1": "UIHOVER"
+                        },
+                        {
+                            "2": "UISELECT"
+                        }
+                    ]
                 }
             ]
         }
