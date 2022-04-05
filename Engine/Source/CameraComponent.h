@@ -73,9 +73,9 @@ private:
 	/*float zoomMin = 45.0f;
 	float zoomMax = 20.0f;*/
 	float zoomSpeed = 0.5f;
-	float zoom = 50.0f;
-	float zoomMin = 10.0f;
-	float zoomMax = 100.0f;
+	float zoom = 10.0f;
+	float zoomMin = 0.0f;
+	float zoomMax = 30.0f;
 
 	bool fixingToTarget = false;
 	bool freeMovement = true;

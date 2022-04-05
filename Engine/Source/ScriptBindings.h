@@ -7,6 +7,7 @@
 
 #include "ResourceManager.h"
 #include "PrefabManager.h"
+#include "DialogueSystem.h"
 
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
@@ -388,21 +389,6 @@ void AddChild(MonoObject* go, MonoObject* child)
 
 // GameObject =======================
 
-// UI ===============================
-MonoString* GetButtonText(MonoObject* go)
-{
-	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
-	return mono_string_new(app->moduleMono->domain, button->GetText());
-}
-
-void SetButtonText(MonoObject* go, MonoString* text)
-{
-	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
-	//button->SetText(mono_string_to_utf8(text));
-}
-// UI ===============================
-
-
 // Particle System ==================
 MonoArray* GetEmitters(MonoObject* go)
 {
@@ -472,4 +458,37 @@ MonoObject* GetRegionGame()
 #endif
 	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
+}
+
+// Dialogue System ======================================
+MonoString* GetDialogueLine()
+{
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+}
+
+MonoString* GetDialogueLineAuthor()
+{
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+}
+
+void NextLine()
+{
+	DialogueSystem::GetInstance()->NextLine();
+}
+
+void StartDialogueById(int id)
+{
+	DialogueSystem* sys = DialogueSystem::GetInstance();
+	Dialogue* aux = sys->GetDialogueById(id);
+	sys->SetDialogueAsCurrent(aux);
+	sys->StartDialogue();
+}
+
+void LoadDialogueFile(MonoString* name)
+{
+	char* fileName = mono_string_to_utf8(name);
+	std::string path = DIALOGUES_FOLDER;
+	path += fileName;
+	path += ".rgdialogue";
+	DialogueSystem::GetInstance()->LoadDialogue(path);
 }

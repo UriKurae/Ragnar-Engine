@@ -32,6 +32,7 @@
 #include "ResourceManager.h"
 #include "AudioManager.h"
 #include "FileSystem.h"
+#include "DialogueSystem.h"
 
 #include "Lights.h"
 #include "Texture.h"
@@ -107,6 +108,9 @@ bool MainMenuBar::Update(float dt)
 	{
 		if (menus[i]->active) menus[i]->Update(dt);
 	}
+
+	if (DialogueSystem::GetInstance()->createDialogue)
+		DialogueSystem::GetInstance()->OnEditor();
 
 	return true;
 }
@@ -342,6 +346,15 @@ void MainMenuBar::CreateGameObjectMenu()
 	{
 		InputActionMenu* iAMenu = static_cast<InputActionMenu*>(menus[(int)Menus::INPUT_ACTION]);
 		iAMenu->SaveInputActionFile("Assets/Resources/InputAction.inputaction");
+	}
+
+	// Dialogue
+	if (ImGui::BeginMenu(ICON_FA_FILE " Dialogue"))
+	{
+		if (ImGui::MenuItem("Dialogue"))
+			DialogueSystem::GetInstance()->createDialogue = true;
+
+		ImGui::EndMenu();
 	}
 }
 

@@ -12,9 +12,6 @@ namespace RagnarEngine
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 UIFunctionButton();
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern int GetButtonState();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -23,7 +20,7 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetTextPosition(float posx,float posy);
 
-        public extern char text
+        public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
