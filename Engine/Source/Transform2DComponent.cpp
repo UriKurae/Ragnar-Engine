@@ -19,7 +19,7 @@
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
-	position = { 0,0,-1.3f };
+	position = { 0,0,-10.4f };
 	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;
@@ -71,6 +71,8 @@ bool ComponentTransform2D::Update(float dt)
 		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
 		if(position.x!=0) 
 			position.x += (z - viewport.z)/2;
+		/*if (position.y != 0)
+			position.y -= (w - viewport.w) / 2;*/
 		firstTime = false;
 	}
 

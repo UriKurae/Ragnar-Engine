@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 182375960,
+                    "pointer": 84402696,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 203734848,
+                    "characters": 81575744,
                     "drawnArea": false
                 }
             ]
@@ -106,14 +106,14 @@
                         0.42233258485794067
                     ],
                     "Ambient": [
-                        0.25,
-                        0.25,
-                        0.25
+                        1,
+                        0,
+                        0
                     ],
                     "Diffuse": [
-                        0.75,
-                        0.75,
-                        0.75
+                        0.82745099067687988,
+                        0.64705884456634521,
+                        0.40784314274787903
                     ],
                     "Specular": [
                         0,
@@ -192,8 +192,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 73,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -265,8 +265,8 @@
                     ],
                     "buttonWidth": 151.5,
                     "buttonHeight": 66,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -338,8 +338,8 @@
                     ],
                     "buttonWidth": 341,
                     "buttonHeight": 136.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -386,8 +386,8 @@
                     ],
                     "buttonWidth": 403.5,
                     "buttonHeight": 103,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -472,8 +472,8 @@
                     ],
                     "buttonWidth": 1142.5,
                     "buttonHeight": 534.11761474609375,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -490,7 +490,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 182377456,
+                    "pointer": 84403432,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -527,8 +527,8 @@
                     ],
                     "buttonWidth": 491.5,
                     "buttonHeight": 167.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -575,8 +575,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -648,8 +648,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -706,7 +706,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        90,
+                        81.5,
                         0
                     ],
                     "Scale": [
@@ -721,8 +721,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1097,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -817,8 +817,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        45,
-                        -41
+                        55,
+                        -55
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -840,8 +840,8 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0794777870178223,
-                    "Horizontal Fov": 1.5707963705062866,
+                    "Vertical Fov": 0.51468604803085327,
+                    "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
                         19.463306427001953,
                         45,
@@ -857,10 +857,10 @@
                         0,
                         -36.746482849121094
                     ],
-                    "Movement Speed": 0.5,
+                    "Movement Speed": 0.012000000104308128,
                     "Rotation Speed": 2,
                     "Radius": 20,
-                    "Horizontal Angle": -459.600341796875,
+                    "Horizontal Angle": 0,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -966,7 +966,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 182382760,
+                    "pointer": 84403616,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -978,7 +978,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 182383168,
+                    "pointer": 84403800,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -1184,7 +1184,7 @@
                     "Position": [
                         15.653947830200195,
                         0,
-                        -18.625564575195312
+                        -18.625564575195313
                     ],
                     "Quaternion": [
                         0,
@@ -1623,7 +1623,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164062
+                        -46.558364868164063
                     ],
                     "Quaternion": [
                         0,
@@ -1840,7 +1840,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789062,
+                        -11.089859008789063,
                         0,
                         6.886474609375
                     ],
@@ -1915,7 +1915,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414062
+                        27.392837524414063
                     ],
                     "Quaternion": [
                         0,
@@ -2002,9 +2002,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945312,
+                        1.0000076293945313,
                         1,
-                        1.0000076293945312
+                        1.0000076293945313
                     ]
                 },
                 {
@@ -2764,7 +2764,7 @@
             "Name": "AudioLevel1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/AudioLevel1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",

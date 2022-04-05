@@ -229,6 +229,9 @@ bool ModuleRenderer3D::PostUpdate()
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
 	
 #ifndef DIST
+
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
 	if(drawGrid) grid.Render();
 
 	if (rayCast)

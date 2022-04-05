@@ -152,7 +152,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.02154541015625,
+                    "Vertical Fov": 1.3691918849945068,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
@@ -197,7 +197,7 @@
                     "Position": [
                         0,
                         0,
-                        35
+                        36
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -211,8 +211,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -229,7 +229,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 329848096,
+                    "pointer": 313227384,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -250,8 +250,8 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -648,
-                        -378.5,
+                        -187,
+                        -260,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -266,8 +266,8 @@
                     ],
                     "buttonWidth": 326,
                     "buttonHeight": 51,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -323,9 +323,9 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -656,
-                        -388,
-                        36
+                        -195,
+                        -260,
+                        36.099998474121094
                     ],
                     "Scale": [
                         0.54583334922790527,
@@ -339,8 +339,8 @@
                     ],
                     "buttonWidth": 327.5,
                     "buttonHeight": 54,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -372,7 +372,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -377.5,
+                        -260,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -387,8 +387,8 @@
                     ],
                     "buttonWidth": 301.5,
                     "buttonHeight": 51.5,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -445,8 +445,8 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -383,
-                        36
+                        -260,
+                        36.099998474121094
                     ],
                     "Scale": [
                         0.49000000953674316,
@@ -460,8 +460,8 @@
                     ],
                     "buttonWidth": 294,
                     "buttonHeight": 46.5,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -492,8 +492,8 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        604.5,
-                        -376,
+                        779,
+                        -260,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -508,8 +508,8 @@
                     ],
                     "buttonWidth": 292.5,
                     "buttonHeight": 52,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -565,9 +565,9 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        609,
-                        -378,
-                        36
+                        779,
+                        -260,
+                        36.099998474121094
                     ],
                     "Scale": [
                         0.50166666507720947,
@@ -581,14 +581,62 @@
                     ],
                     "buttonWidth": 301,
                     "buttonHeight": 54,
-                    "lastButtonWidth": 1499,
-                    "lastButtonHeight": 840,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
                     "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1831627748,
+            "Parent UUID": 417171234,
+            "Name": "WinText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -32,
+                        207.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.65166664123535156,
+                        0.29249998927116394,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 391,
+                    "buttonHeight": 175.5,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_level_completed_text.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

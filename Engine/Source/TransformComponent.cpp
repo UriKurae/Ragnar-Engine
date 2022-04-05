@@ -369,3 +369,11 @@ void TransformComponent::AlignViewWithSelected()
 	app->camera->cameraFrustum.SetFrame(position, rot.Col3(2), rot.Col3(1));
 	app->camera->CalculateViewMatrix();
 }
+
+void TransformComponent::SetGlobalPosition(const float3 pos)
+{
+	// Posición relativa al padre
+	globalMatrix.SetTranslatePart(float4(pos.x, pos.y, pos.z, 1));
+	localMatrix = owner->GetParent()->GetComponent<TransformComponent>()->globalMatrix.Inverted().Mul(globalMatrix);
+	localMatrix.Decompose(position, rotation, scale);
+}

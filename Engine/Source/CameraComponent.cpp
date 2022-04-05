@@ -1,4 +1,3 @@
-//<<<<<<< HEAD
 #include "CameraComponent.h"
 #include "Application.h"
 #include "Globals.h"
@@ -36,7 +35,7 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	//camera.SetPos(math::vec(0, 0, 0));
 
 	controllerTrans = owner->GetParent()->GetComponent<TransformComponent>();
-	transform->SetPosition(float3(0.0f, 45.0f, -41.0f));
+	transform->SetPosition(float3(0.0f, 55.0f, -50.0f));
 	transform->SetRotation(Quat::RotateX(DEGTORAD * 45));
 
 	srand(time(NULL));
@@ -82,6 +81,8 @@ void CameraComponent::OnEditor()
 		ImGui::SameLine();
 		if (ImGui::DragFloat("", &farPlane, 0.5f, 0.1f)) SetPlanes();
 		ImGui::PopID();
+
+		ImGui::Text("horizontal angle: %f", horizontalAngle);
 
 		ImGui::Text("- - - - MOVEMENT - - - -");
 		OnEditorMovement();
@@ -245,7 +246,6 @@ bool CameraComponent::Update(float dt)
 	UpdateRotation();
 
 
-	//camera.SetPos(transform->GetPosition());
 	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
 	matrixViewFrustum = camera.ComputeViewMatrix();
 
@@ -258,14 +258,12 @@ void CameraComponent::Zoom()
 	if (app->input->GetMouseZ() > 0 && zoom < zoomMax)
 	{
 		zoom += zoomSpeed;
-		transform->SetPosition(transform->GetPosition() + (controllerTrans->GetPosition() - transform->GetPosition()).Normalized() * zoomSpeed);
-		transform->ForceUpdateTransform();
+		transform->SetGlobalPosition(transform->GetGlobalPosition() + (controllerTrans->GetGlobalPosition() - transform->GetGlobalPosition()).Normalized() * zoomSpeed);
 	}
 	else if (app->input->GetMouseZ() < 0 && zoom > zoomMin)
 	{
 		zoom -= zoomSpeed;
-		transform->SetPosition(transform->GetPosition() - (controllerTrans->GetPosition() - transform->GetPosition()).Normalized() * zoomSpeed);
-		transform->ForceUpdateTransform();
+		transform->SetGlobalPosition(transform->GetGlobalPosition() - (controllerTrans->GetGlobalPosition() - transform->GetGlobalPosition()).Normalized() * zoomSpeed);
 	}
 }
 
@@ -309,6 +307,7 @@ void CameraComponent::UpdateRotation()
 			horizontalAngle -= rotationSpeed;
 			if (horizontalAngle < 0) horizontalAngle += 360;
 			controllerTrans->SetRotation(Quat::RotateY(DEGTORAD * horizontalAngle));
+			controllerTrans->UpdateEditorRotation();
 			controllerTrans->ForceUpdateTransform();
 		}
 		else if (horizontalDrag < -1)
@@ -316,6 +315,7 @@ void CameraComponent::UpdateRotation()
 			horizontalAngle += rotationSpeed;
 			if (horizontalAngle > 360) horizontalAngle -= 360;
 			controllerTrans->SetRotation(Quat::RotateY(DEGTORAD * horizontalAngle));
+			controllerTrans->UpdateEditorRotation();
 			controllerTrans->ForceUpdateTransform();
 		}
 	}
