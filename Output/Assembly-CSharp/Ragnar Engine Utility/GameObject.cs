@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
-
     public sealed class GameObject
     {
         private string goName;
@@ -91,6 +90,9 @@ namespace RagnarEngine
         extern internal T AddComponent<T>(int componentType);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern GameObject AddChild(GameObject child);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern public GameObject Find(string name);
 
         //[MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -133,5 +135,17 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern public Vector3 GetSizeAABB();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern public Vector3 GetMinAABB();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern public Vector3 GetMaxAABB();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern public void SetSizeAABB(Vector3 min, Vector3 max);
     }
 }

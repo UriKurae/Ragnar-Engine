@@ -348,6 +348,8 @@ void MaterialComponent::ShowUniforms()
 
 bool MaterialComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Material Update");
+
 	if (refreshShaderTimer <= MAX_TIME_TO_REFRESH_SHADER)
 		refreshShaderTimer += dt;
 	else

@@ -79,6 +79,25 @@ const char* GetText(MonoObject* go)
 	return tr->GetButtonText().textt.c_str();
 }
 
+void SetTextPosition(MonoObject* go, float posx,float posy)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	float3 i = { posx ,posy,0 };
+	tr->SetTextPosition(i);
+
+
+
+}
+float3 GetTextPosition(MonoObject* go)
+{
+	const char* name = mono_class_get_name(mono_object_get_class(go));
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	//float3 position = ;
+
+
+	return tr->GetTextPosition();
+}
+
 const bool GetIsChecked(MonoObject* go)
 {
 	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);

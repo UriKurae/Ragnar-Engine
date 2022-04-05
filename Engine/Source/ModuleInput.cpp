@@ -145,7 +145,9 @@ bool ModuleInput::PreUpdate(float dt)
 
 	while(SDL_PollEvent(&e))
 	{
+#ifndef DIST
 		ImGui_ImplSDL2_ProcessEvent(&e);
+#endif
 		switch(e.type)
 		{
 			case SDL_MOUSEWHEEL:

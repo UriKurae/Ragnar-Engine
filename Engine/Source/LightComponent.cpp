@@ -7,6 +7,8 @@
 #include "TransformComponent.h"
 #include "Lights.h"
 
+#include "Profiling.h"
+
 ComponentLight::ComponentLight()
 {
 	this->type = ComponentType::LIGHT;
@@ -16,15 +18,21 @@ ComponentLight::~ComponentLight()
 {
 	switch (light->type)
 	{
-		case LightType::POINT:
-		{
-			app->renderer3D->RemovePointLight((PointLight*)light);
-		}
+	case LightType::POINT:
+		app->renderer3D->RemovePointLight((PointLight*)light);
+		break;
+	case LightType::SPOT:
+		app->renderer3D->RemoveSpotLight((SpotLight*)light);
+		break;
+	default:
+		break;
 	}
 }
 
 bool ComponentLight::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Light Component Update");
+
 	if (light->type == LightType::DIRECTIONAL)
 	{			
 		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
@@ -39,9 +47,10 @@ bool ComponentLight::Update(float dt)
 		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
 		{
 			PointLight* l = (PointLight*)light;
-			if (tr->GetPosition().x != l->position.x || tr->GetPosition().y != l->position.y || tr->GetPosition().z != l->position.z)
+			float3 pos = tr->GetGlobalPosition();
+			if (pos.x != l->position.x || pos.y != l->position.y || pos.z != l->position.z)
 			{
-				l->position = tr->GetPosition();
+				l->position = pos;
 				light = l;
 			}
 		}
@@ -51,9 +60,10 @@ bool ComponentLight::Update(float dt)
 		if (TransformComponent* tr = owner->GetComponent<TransformComponent>())
 		{
 			SpotLight* l = (SpotLight*)light;
-			if (tr->GetPosition().x != l->position.x || tr->GetPosition().y != l->position.y || tr->GetPosition().z != l->position.z)
+			float3 pos = tr->GetGlobalPosition();
+			if (pos.x != l->position.x || pos.y != l->position.y || pos.z != l->position.z)
 			{
-				l->position = tr->GetPosition();
+				l->position = pos;
 				light = l;
 			}
 			
@@ -193,6 +203,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->ambient = node.GetJson3Number(node, "Ambient");
 			l->diffuse = node.GetJson3Number(node, "Diffuse");
 			l->specular = node.GetJson3Number(node, "Specular");
+			l->intensity = node.GetJsonNumber("Intensity");
 			l->constant = node.GetJsonNumber("Constant");
 			l->lin = node.GetJsonNumber("Linear");
 			l->quadratic = node.GetJsonNumber("Quadratic");
@@ -251,6 +262,7 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 			file.SetNewJson3Number(file, "Ambient", l->ambient);
 			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
 			file.SetNewJson3Number(file, "Specular", l->specular);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Intensity", l->intensity);
 			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Constant", l->constant);
 			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Linear", l->lin);
 			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Quadratic", l->quadratic);

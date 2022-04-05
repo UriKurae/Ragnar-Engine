@@ -50,7 +50,9 @@ Application::Application()
 	
 	// Scenes
 	AddModule(sceneManager);
+#ifndef DIST
 	AddModule(editor);
+#endif
 	AddModule(userInterface);
 
 	AddModule(renderer3D);
@@ -63,13 +65,14 @@ Application::~Application()
 {
 	std::list<Module*>::reverse_iterator item;
 
+	ResourceManager::ReleaseInstance();
+
 	for (item = listModules.rbegin(); item != listModules.rend(); ++item)
 	{
 		RELEASE(*item);
 	}
 
 	RELEASE(fs);
-	ResourceManager::ReleaseInstance();
 	AudioManager::Release();
 	PrefabManager::ReleaseInstance();
 

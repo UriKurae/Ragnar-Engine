@@ -3,7 +3,7 @@ using RagnarEngine;
 
 public class EnemyBullet : RagnarComponent
 {
-	public int force = 1000;
+	public int vel = 40;
 	private bool pendingToDelete = false;
 	public void Start()
 	{
@@ -19,7 +19,7 @@ public class EnemyBullet : RagnarComponent
 		float xDiff = GameObject.Find("Player").transform.globalPosition.x - gameObject.transform.globalPosition.x;
 		float zDiff = GameObject.Find("Player").transform.globalPosition.z - gameObject.transform.globalPosition.z;
 		Vector3 shotDirection = new Vector3(xDiff, pos.y, zDiff);
-		knifeRb.ApplyCentralForce(shotDirection.normalized * force);
+		knifeRb.linearVelocity = shotDirection.normalized * vel;
 	}
 	public void Update()
 	{

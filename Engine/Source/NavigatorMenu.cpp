@@ -4,6 +4,8 @@
 
 #include "NavMeshBuilder.h"
 
+#include "Profiling.h"
+
 NavigatorMenu::NavigatorMenu() : Menu(true, "Navigator")
 {
 }
@@ -24,6 +26,8 @@ bool NavigatorMenu::Start()
 
 bool NavigatorMenu::Update(float dt)
 {
+    RG_PROFILING_FUNCTION("Navigator Menu");
+
     ImGui::Begin(ICON_FA_WALKING" Navigator", &active);
     ImGui::Dummy({ 0,10 });
     ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x - 180) / 2);

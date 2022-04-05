@@ -80,6 +80,8 @@ bool MainMenuBar::Start()
 
 bool MainMenuBar::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Main Menu Bar Update");
+
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (!FileMenu()) return false;		
@@ -218,6 +220,7 @@ void MainMenuBar::ViewMenu()
 			app->renderer3D->SetWireMode();
 		if (ImGui::MenuItem("Show Raycast", NULL, app->renderer3D->GetRayCast()))
 			app->renderer3D->SetWireMode();
+		ImGui::MenuItem("Show Colliders", NULL, app->physics->GetDebugMode());
 
 		ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh());
 		ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid());

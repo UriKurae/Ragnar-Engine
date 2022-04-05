@@ -49,6 +49,8 @@ bool ModuleCamera3D::Start()
 
 bool ModuleCamera3D::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Module Camera Update");
+
 	if (updateViewPort)
 	{
 		// Auxiliar variables
@@ -110,7 +112,6 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 
 			// Build RayCast
 			LineSegment picking = cameraFrustum.UnProjectLineSegment(mousePos.x, mousePos.y);
-			LineSegment prevLine = picking;
 			rayCastToDraw = picking.ToLine();
 
 			// Send ray to NavMesh
@@ -121,12 +122,14 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 			//DEBUG_LOG("SIZE X %f, SIZE Y %f", size.x, size.y);
 
 			// Fill gameObjects list 
+			std::stack<QuadtreeNode*> nodes;
+			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
 			std::vector<GameObject*> gameObjects;
-			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects);
-			bool hit = false;
+			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
 
 			std::map<float, GameObject*> triangleMap;
-			ThrowRayCast(gameObjects, picking, prevLine, hit, triangleMap);
+			float3 hit;
+			ThrowRayCast(gameObjects, picking, triangleMap, hit);
 
 			if (!triangleMap.empty()) app->editor->SetGO((*triangleMap.begin()).second);
 			else if (triangleMap.empty() && !ImGuizmo::IsUsing())
@@ -138,49 +141,67 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 	}
 }
 
-void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, math::LineSegment& prevLine, bool& hit, std::map<float, GameObject*>& triangleMap)
+void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& triangleMap, float3& hitPoint)
 {
+	LineSegment prevLine = picking;
 	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it < gameObjects.end(); ++it)
 	{
 		TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 		if ((*it)->GetAABB().IsFinite() && transform)
 		{
 			picking = prevLine;
-			hit = picking.Intersects((*it)->GetAABB());
-			if (hit)
+			if (picking.Intersects((*it)->GetAABB()))
 			{
 				MeshComponent* meshComponent = (*it)->GetComponent<MeshComponent>();
 				if (meshComponent)
 				{
-					const std::vector<Vertex>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
-					const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
-
-					float distance = 0.0f;
-					float closestDistance = 0.0f;
-					math::vec hitPoint = { 0.0f, 0.0f, 0.0f };
 					int size = 0;
 					if (meshComponent->GetMesh())
-					{
 						size = meshComponent->GetMesh()->GetIndicesSize();
-					}
 
-					int hits = 0;
-					picking.Transform(transform->GetGlobalTransform().Inverted());
-					for (int i = 0; i < size; i += 3)
+					if (size > 0)
 					{
-						// TODO: Is this ok?
-						const math::Triangle tri(meshVertices[meshIndices[i]].position, meshVertices[meshIndices[i + 1]].position, meshVertices[meshIndices[i + 2]].position);
-						if (picking.Intersects(tri, &distance, &hitPoint))
+						float distance = 0.0f;
+						math::vec hitP = { 0.0f, 0.0f, 0.0f };
+						const std::vector<Vertex>& meshVertices = meshComponent->GetMesh()->GetVerticesVector();
+						const std::vector<unsigned int>& meshIndices = meshComponent->GetMesh()->GetIndicesVector();
+
+						picking.Transform(transform->GetGlobalTransform().Inverted());
+						for (int i = 0; i < size; i += 3)
 						{
-							closestDistance = distance;
-							triangleMap[distance] = (*it);
-							hits++;
-							DEBUG_LOG("Intersected with %s", (*it)->GetName());
-							break;
+							// TODO: Is this ok?
+							const math::Triangle tri(meshVertices[meshIndices[i]].position, meshVertices[meshIndices[i + 1]].position, meshVertices[meshIndices[i + 2]].position);
+							if (picking.Intersects(tri, &distance, &hitP))
+							{
+								triangleMap[distance] = (*it);
+								if ((*triangleMap.begin()).second == (*it))
+									hitPoint = picking.a + picking.Dir() * distance * picking.Length();
+								//DEBUG_LOG("Intersected with %s", (*it)->GetName());
+								break;
+							}
 						}
 					}
-					DEBUG_LOG("%d times", hits);
 				}
+			}
+		}
+	}
+}
+
+void ModuleCamera3D::ThrowRayCastOnlyOBB(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& aabbMap, float3& hitPoint)
+{
+	LineSegment prevLine = picking;
+	float dNear, dFar = 0;
+	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it < gameObjects.end(); ++it)
+	{
+		TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
+		if ((*it)->GetAABB().IsFinite() && transform)
+		{
+			picking = prevLine;
+			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
+			{
+				aabbMap[dNear] = (*it);
+				//DEBUG_LOG("Intersected with %s", (*it)->GetName());
+				break;
 			}
 		}
 	}
@@ -301,10 +322,13 @@ void ModuleCamera3D::CalculateViewMatrix()
 
 void ModuleCamera3D::UpdateFovAndScreen(float width, float height)
 {
-	verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (height / width));
-	cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
-	currentScreenHeight = height;
-	currentScreenWidth = width;
+	if (currentScreenHeight != height || currentScreenWidth != width)
+	{
+		verticalFov = 2 * Atan((Tan(horizontalFov / 2)) * (height / width));
+		cameraFrustum.SetVerticalFovAndAspectRatio(verticalFov, (width / height));
+		currentScreenHeight = height;
+		currentScreenWidth = width;
+	}
 }
 
 void ModuleCamera3D::UpdateFov()

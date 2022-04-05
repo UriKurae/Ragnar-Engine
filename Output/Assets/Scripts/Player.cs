@@ -24,6 +24,10 @@ public class Player : RagnarComponent
 
     public void Update()
     {
+        
+        //GameObject child = GameObject.Find("Floor_01");
+        //gameObject.AddChild(child);
+        
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
             agent.CalculatePath(agent.hitPosition);
@@ -96,6 +100,13 @@ public class Player : RagnarComponent
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
             rb.SetHeight(0.6f); // 0.6 = 60%
+        }
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_REPEAT)
+        {
+            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+            Vector3 maxPoint = gameObject.GetMaxAABB();
+            maxPoint.y *= 0.6f;
+            gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
         }
         if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
         {

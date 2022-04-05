@@ -7,7 +7,11 @@
 
 #define MAX_LIGHTS 8
 
+class VertexArray;
+class VertexBuffer;
+class IndexBuffer;
 class Framebuffer;
+class TextureBuffer;
 class Material;
 class Shader;
 class GameObject;
@@ -23,6 +27,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init(JsonParsing& node) override;
+	bool Start() override;
 	bool PreUpdate(float dt) override;
 	bool PostUpdate();
 	bool CleanUp();
@@ -75,6 +80,7 @@ public:
 	void ClearSpotLights();
 
 	void RemovePointLight(PointLight* light);
+	void RemoveSpotLight(SpotLight* light);
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
@@ -108,10 +114,21 @@ public:
 	std::vector<PointLight*> pointLights;
 	std::vector<SpotLight*> spotLights;
 
+	std::vector<float3> enemyCones;
+
 private:
 	Material* defaultMaterial;
 	unsigned int defaultShader;
 
 	std::vector<Shader*> shaders;
 	std::vector<Material*> materials;
+
+	VertexArray* distVao;
+	VertexBuffer* distVbo;
+	IndexBuffer* distIbo;
+	std::shared_ptr<Shader> postProcessingShader;
+	
+
+	VertexBuffer* vbo;
+	std::shared_ptr<Shader> coneShader;
 };

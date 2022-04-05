@@ -2,10 +2,12 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleWindow.h"
 #include "ModuleSceneManager.h"
 #include "Scene.h"
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
+#include "ModuleRenderer3D.h"
 
 #include "Transform2DComponent.h"
 #include "ButtonComponent.h"
@@ -27,13 +29,13 @@ MyPlane::MyPlane(float3 pos, float3 sca) {
 	position = pos;
 	scale = sca;
 
-	vertices.push_back({ -0.5,0.5,-2});
-	vertices.push_back({ -0.5,-0.5,-2 });
-	vertices.push_back({ 0.5,-0.5,-2 });
+	vertices.push_back({ -0.5,0.5,0 });
+	vertices.push_back({ -0.5,-0.5,0 });
+	vertices.push_back({ 0.5,-0.5,0 });
 
-	vertices.push_back({ 0.5,-0.5,-2 });
-	vertices.push_back({ 0.5,0.5,-2 });
-	vertices.push_back({ -0.5,0.5,-2 });
+	vertices.push_back({ 0.5,-0.5,0 });
+	vertices.push_back({ 0.5,0.5,0 });
+	vertices.push_back({ -0.5,0.5,0 });
 
 	texCoords.push_back(0);
 	texCoords.push_back(0);
@@ -113,6 +115,9 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	ComponentTransform2D* auxTrans = own->GetComponent<ComponentTransform2D>();
 
+	/*float4 size = app->editor->GetGameView()->GetBounds();
+	app->renderer3D->OnResize(size.z, size.w);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);*/
 
 	ButtonComponent* theButton = nullptr;
 	SliderComponent* theSlider = nullptr;
@@ -120,22 +125,47 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	ImageComponent* theImage = nullptr;
 
 	float4x4 transform = float4x4::FromTRS(auxTrans->GetInternalPosition(), auxTrans->GetRotationQuat(), float3(auxTrans->GetScale().x, auxTrans->GetScale().y, 1));
-	
+
 	theButton = own->GetComponent<ButtonComponent>();
-	theSlider=own->GetComponent<SliderComponent>();
+	theSlider = own->GetComponent<SliderComponent>();
 	theCheckbox = own->GetComponent<CheckboxComponent>();
 	theImage = own->GetComponent<ImageComponent>();
-	if(texture)
+	if (texture)
 		texture->Bind();
 	shader->Use();
 
-	CameraComponent* cam = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
+	Frustum frustum;
+	CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 
+	frustum.pos = camera->GetFrustum()->pos;
+
+	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.type = FrustumType::OrthographicFrustum;
+
+	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.nearPlaneDistance = -1.0f;
+	frustum.farPlaneDistance = 1.0f;
+
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+
+
+	
+	
+	math::float4x4 model = math::float4x4::identity;
 	if (theButton)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, 1);
+		
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x* CONVERSION_FACTOR, w->GetScale().y* CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
+		//theButton->GetAlpha()
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
-	else if (theSlider) 
+	else if (theSlider)
 	{
 		if (theSlider->GetFirstDraw()) {
 			int cont = 0;
@@ -150,24 +180,34 @@ void MyPlane::DrawPlane2D(Texture* texture)
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
 						transform = float4x4::FromTRS(r->GetInternalPosition(), r->GetRotationQuat(), float3(r->GetScale().x, r->GetScale().y, 1));
+
+
+
 						break;
 					}
 				}
 			}
 		}
-		
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, 1);
+
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theSlider->GetActualColor().r, theSlider->GetActualColor().g, theSlider->GetActualColor().b, theSlider->GetAlpha());
 	}
 	else if (theCheckbox)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, 1);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, theCheckbox->GetAlpha());
 	}
 	else if (theImage)
 	{
-		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, 1);
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
 	}
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
+	auto p = frustum.ProjectionMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
+	//glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, frustum.projectionMatrix.Transposed().ptr());
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_TRUE, (const float*)&model);
 
 	glBindVertexArray(VAO);
 
@@ -186,9 +226,9 @@ Shadert::Shadert(const std::string& vertexSource, const std::string& fragmentSou
 	// 1. retrieve the vertex/fragment source code from filePath
 	std::string vertexCode = vertexSource;
 	std::string fragmentCode = fragmentSource;
-	if(vertexSource.empty())
+	if (vertexSource.empty())
 		vertexCode = "#version 330 core\n  in vec4 vertex;\n out vec2 TexCoords;\n uniform mat4 model;\n  uniform mat4 projection;\n  void main() {\n  gl_Position = projection * model *vec4(vertex.xy, 0.0, 1.0);\n  TexCoords = vertex.zw; };";
-	if(fragmentSource.empty())
+	if (fragmentSource.empty())
 		fragmentCode = "#version 330 core\n  in vec2 TexCoords;\n  out vec4 color;\n  uniform sampler2D text;\n  uniform vec3 textColor;\n  void main() {\n  vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);\n  color = vec4(textColor, 1.0) * sampled;};"; //color = vec4(textColor, 1.0) * sampled;};";
 
 	const char* vShaderCode = vertexCode.c_str();
@@ -244,7 +284,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 		if (!success)
 		{
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			
+
 			DEBUG_LOG("ERROR::SHADER_COMPILATION_ERROR of type: %s\n%s ", type, infoLog);
 		}
 	}
@@ -267,7 +307,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	focusedGameObject = nullptr;
-	UIGameObjectSelected = nullptr;	
+	UIGameObjectSelected = nullptr;
 }
 
 ModuleUI::~ModuleUI()
@@ -286,7 +326,14 @@ bool ModuleUI::Start()
 	}
 
 	FT_Face face;
-	if (FT_New_Face(ft, "Assets/Resources/Fonts/Montserrat-Bold.ttf", 0, &face))
+
+#ifdef DIST
+	const char* path = "Library/Fonts/Montserrat-Bold.ttf";
+#else
+	const char* path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
+#endif
+
+	if (FT_New_Face(ft, path, 0, &face))
 	{
 		//LOG("ERROR::FREETYPE: Failed to load font");
 		return false;
@@ -358,27 +405,35 @@ bool ModuleUI::Start()
 	shader = new Shadert("", "");
 	return true;
 }
+void ModuleUI::updateText()
+{
+	float4 size = app->editor->GetGameView()->GetBounds();
+	app->renderer3D->OnResize(size.z, size.w);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
+}
 void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
 {
 	// activate corresponding render state	
-	
+
+
 	shader->Use();
+	updateText();
 	Frustum frustum;
-	CameraComponent* camera= app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
-	
+	CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
+
 	frustum.pos = camera->GetFrustum()->pos;
-	
+
 	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
 	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
 	frustum.type = FrustumType::OrthographicFrustum;
-	
+
 	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
 	frustum.nearPlaneDistance = -1.0f;
 	frustum.farPlaneDistance = 1.0f;
-	
+
 	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-	
+
 	math::float4x4 model = math::float4x4::identity;
 	math::float3 scl = math::float3(1, 1, 1.0f);
 	math::float3 center = math::float3(x, y, 1.0f);
@@ -437,30 +492,31 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	/*if (app->gameMode)
-	{*/
-		CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
-		
-		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
-		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-		
-		float4 viewport = app->editor->GetGameView()->GetBounds();
-		fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-		
-		
-		// Check if mouse is hovered on Game View
-		if (app->editor->GetGameView()->GetState())
-		{
-			HitPosibleFocusedObjects(viewport);
-			SetFocusedObject();
-		}
-	
+	float2 mPos = float2::zero;
+	float4 viewport = float4::zero;
+#ifndef DIST
+	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+	viewport = app->editor->GetGameView()->GetBounds();
+#else
+	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+	fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
+
+
+	// Check if mouse is hovered on Game View
+	if (app->editor->GetGameView()->GetState())
+	{
+		HitPosibleFocusedObjects(viewport);
+		SetFocusedObject();
+	}
+
 
 	return true;
 }
 
 // Check if mouse is hovered on some object UI
-void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
+void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 {
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
@@ -468,31 +524,40 @@ void ModuleUI::HitPosibleFocusedObjects(math::float4& viewport)
 		ComponentTransform2D* transform2D = go->GetComponent<ComponentTransform2D>();
 
 		float3 position = transform2D->GetPosition();
-		ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
-		float posXMin = ((viewport.z / 2) + (position.x * 1.7)) - (button->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (position.x * 1.7)) + (button->GetButtonWidth() / 2);
-
-		float posYMin = ((viewport.w / 2) + (-position.y * 1.7)) - (button->GetButtonHeight() / 2);
-		float posYMax = ((viewport.w / 2) + (-position.y * 1.7)) + (button->GetButtonHeight() / 2);
-
-		ImageComponent* image = nullptr;
-		image = go->GetComponent<ImageComponent>();
-		if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
+		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
+		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
+		if (buttonComp || checkComp || sliderComp)
 		{
-			hitObjs.push_back(go);
+			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
+
+			// Whats does this do?
+			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
+			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
+
+			float posYMin = ((viewport.w / 2) + (-(position.y))) - (button->GetButtonHeight() / 2);
+			float posYMax = ((viewport.w / 2) + (-(position.y))) + (button->GetButtonHeight() / 2);
+
+			//ImageComponent* image = go->GetComponent<ImageComponent>();
+			if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
+			{
+				hitObjs.push_back(go);
+			}
 		}
 	}
 }
+
 // Check depending on the distance of the object from the camera what object is focused 
 void ModuleUI::SetFocusedObject()
 {
 	if (hitObjs.size() > 0)
 	{
 		std::vector<float> distance;
-		float nearestDistance = -100000.0f;
+		float nearestDistance = 100000.0f;
 		int nearObj = 0;
-		for (int i = 0; i < hitObjs.size(); ++i)
+		for (int i = 0; i > hitObjs.size(); ++i)
 		{
 			ComponentTransform2D* transform2D = hitObjs[i]->GetComponent<ComponentTransform2D>();
 
@@ -514,6 +579,8 @@ void ModuleUI::SetFocusedObject()
 
 bool ModuleUI::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Module UI Update");
+
 	// Update All UI Components
 
 	if (!UIGameObjects.empty() && app->input->GetKey(SDL_SCANCODE_TAB) == KeyState::KEY_DOWN)
@@ -534,87 +601,82 @@ bool ModuleUI::Update(float dt)
 			}
 		}
 	}
-	ButtonComponent* aux = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3= nullptr;	
-	SliderComponent*aux5= nullptr;
+
 	for (int i = 0; i < UIGameObjects.size(); i++)
 	{
 		GameObject* go = UIGameObjects[i];
-		
-		aux = go->GetComponent<ButtonComponent>();
-		
-		aux2 = go->GetComponent<CheckboxComponent>();
-		aux3 = go->GetComponent<ImageComponent>();
-	
-		aux5 = go->GetComponent<SliderComponent>();
-		if (aux != nullptr) 
+
+		if (ButtonComponent* buttonComp = go->GetComponent<ButtonComponent>())
 		{
-			textExample = aux->GetText();
-			color = aux->GetTextColor();
+			textExample = buttonComp->GetText();
+			color = buttonComp->GetTextColor();
 		}
-		else if (aux2 != nullptr)
+		else if (CheckboxComponent* checkboxComp = go->GetComponent<CheckboxComponent>())
 		{
-			textExample = aux2->GetText();
-			color = aux2->GetTextColor();
+			textExample = checkboxComp->GetText();
+			color = checkboxComp->GetTextColor();
 		}
-		else if (aux3 != nullptr)
+		else if (ImageComponent* imageComp = go->GetComponent<ImageComponent>())
 		{
-			textExample = aux3->GetText();
-			color = aux3->GetColor();
+			//textExample = imageComp->GetText();
+			color = imageComp->GetColor();
 		}
-		else if (aux5 != nullptr)
+		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
 		{
-			textExample = aux5->GetText().textt;
-			color = aux5->GetTextColor();
-		}		
-	}	
-	
+			textExample = sliderComp->GetText().textt;
+			color = sliderComp->GetTextColor();
+		}
+	}
+
 	return true;
 }
+void ModuleUI::OrderButtons()
+{
+	bool cont = false;
+	while (cont == false) {
+		cont = true;
+		for (int i = 0; i < UIGameObjects.size() - 1; i++) {
+			if (UIGameObjects[i + 1]->GetComponent<ComponentTransform2D>()->GetPosition().z < UIGameObjects[i]->GetComponent<ComponentTransform2D>()->GetPosition().z) {
+				GameObject* aux = UIGameObjects[i + 1];
+				UIGameObjects[i + 1] = UIGameObjects[i];
+				UIGameObjects[i] = aux;
+				cont = false;
+			}
 
+		}
+	}
+}
 void ModuleUI::Draw()
 {
-	ButtonComponent* aux = nullptr;
-	TextComponent* aux1 = nullptr;
-	CheckboxComponent* aux2 = nullptr;
-	ImageComponent* aux3 = nullptr;
-	SliderComponent* aux5 = nullptr;
-
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
-		GameObject* UI = app->userInterface->UIGameObjects[a];
-		aux = UI->GetComponent<ButtonComponent>();
-		aux1 = UI->GetComponent<TextComponent>();
-		aux2 = UI->GetComponent<CheckboxComponent>();
-		aux3 = UI->GetComponent<ImageComponent>();
-		aux5 = UI->GetComponent<SliderComponent>();
+		GameObject* go = app->userInterface->UIGameObjects[a];
 
-		if (aux != nullptr)
+		if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 		{
-			UI->Draw(nullptr);
-			RenderText(aux->GetButtonText().textt, aux->GetButtonText().X, aux->GetButtonText().Y, aux->GetButtonText().Scale, aux->GetButtonText().Color);
-			aux = nullptr;
+			go->Draw(nullptr);
+			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color);
+			button = nullptr;
 		}
-		else if (aux1 != nullptr)
+		else if (TextComponent* text = go->GetComponent<TextComponent>())
 		{
-			RenderText(aux1->buttonText.textt, aux1->buttonText.X, aux1->buttonText.Y, aux1->buttonText.Scale, aux1->buttonText.Color);
-			aux1 = nullptr;
+			RenderText(text->buttonText.textt, text->buttonText.X, text->buttonText.Y, text->buttonText.Scale, text->buttonText.Color);
+			text = nullptr;
 		}
-		else if (aux2 != nullptr)
+		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
 		{
-			UI->Draw(nullptr);
-			aux2 = nullptr;
+			go->Draw(nullptr);
+			check = nullptr;
 		}
-		else if (aux3 != nullptr)
+		else if (ImageComponent* image = go->GetComponent<ImageComponent>())
 		{
-			UI->Draw(nullptr);
-			aux3 = nullptr;
+			go->Draw(nullptr);
+			image = nullptr;
 		}
-		else if (aux5 != nullptr)
+		else if (SliderComponent* slider = go->GetComponent<SliderComponent>())
 		{
-			UI->Draw(nullptr);
-			aux5 = nullptr;
+			go->Draw(nullptr);
+			slider = nullptr;
 		}
 	}
 }
@@ -628,6 +690,10 @@ bool ModuleUI::CleanUp()
 
 void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 {
-	UIGameObjects.erase(FindUI(ui));
+	if (UIGameObjects.empty())
+		return;
+
+	auto obj = FindUI(ui);
+	UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
 }

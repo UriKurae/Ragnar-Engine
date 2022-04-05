@@ -128,15 +128,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -10.509864807128906,
-                        11.183857917785645,
-                        13.361886978149414
+                        0,
+                        45,
+                        -41
                     ],
                     "Quaternion": [
-                        -0.023094482719898224,
-                        0.69489204883575439,
-                        0.086363524198532104,
-                        0.7135356068611145
+                        0.38268345594406128,
+                        0,
+                        0,
+                        0.92387950420379639
                     ],
                     "RotationEditor": [
                         0,
@@ -152,15 +152,17 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.08711838722229,
+                    "Vertical Fov": 1.02154541015625,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -10.509864807128906,
-                        11.183857917785645,
-                        13.361886978149414
+                        -4.9477472305297852,
+                        45,
+                        -43.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 24,
+                    "Zoom": 12,
+                    "Zoom Min": 0,
+                    "Zoom Max": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -168,8 +170,6 @@
                         -2.2581052780151367
                     ],
                     "Movement Speed": 0.5,
-                    "Vertical Angle": -56,
-                    "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 160.39971923828125,
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "UUID": 1860226665,
+            "UUID": 1657689093,
             "Parent UUID": 417171234,
             "Name": "Background",
             "Active": true,
@@ -197,11 +197,11 @@
                     "Position": [
                         0,
                         0,
-                        84.5
+                        35
                     ],
                     "Scale": [
-                        60.974998474121094,
-                        36.317935943603516,
+                        0.1666666716337204,
+                        0.1666666716337204,
                         1
                     ],
                     "rotationEuler": [
@@ -209,72 +209,34 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 943,
-                    "buttonHeight": 495.5
-                },
-                {
-                    "Type": 13
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
+                    "Type": 13,
+                    "alpha": 1
+                },
+                {
                     "Type": 4,
                     "ScriptName": "winScren",
-                    "pointer": 259259304,
+                    "pointer": 329848096,
                     "type": 4,
                     "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 1337177436,
-            "Parent UUID": 417171234,
-            "Name": "Image",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        62,
-                        90.5
-                    ],
-                    "Scale": [
-                        35.849994659423828,
-                        5.1358695030212402,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 608,
-                    "buttonHeight": 113
-                },
-                {
-                    "Type": 13
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/victory_logo.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 1450299337,
+            "UUID": 597052281,
             "Parent UUID": 417171234,
             "Name": "ButtonMenu",
             "Active": true,
@@ -288,13 +250,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        0,
-                        -103.5,
-                        86.5
+                        -648,
+                        -378.5,
+                        36.099998474121094
                     ],
                     "Scale": [
-                        4.9874992370605469,
-                        1.6711955070495605,
+                        0.54333335161209106,
+                        0.085000000894069672,
                         1
                     ],
                     "rotationEuler": [
@@ -302,24 +264,28 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 196.5,
-                    "buttonHeight": 70.5
+                    "buttonWidth": 326,
+                    "buttonHeight": 51,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -331,11 +297,304 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Menu",
+                    "buttonText": "Main Menu",
                     "fontScale": 1,
-                    "textColor.r": 0.81568628549575806,
-                    "textColor.g": 0.81568628549575806,
-                    "textColor.b": 0.81568628549575806
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -28.799999237060547,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1756240318,
+            "Parent UUID": 417171234,
+            "Name": "Main Menu Image",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -656,
+                        -388,
+                        36
+                    ],
+                    "Scale": [
+                        0.54583334922790527,
+                        0.090000003576278687,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 327.5,
+                    "buttonHeight": 54,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1652881187,
+            "Parent UUID": 417171234,
+            "Name": "ButtonReplay",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        -377.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.50249999761581421,
+                        0.085833333432674408,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 301.5,
+                    "buttonHeight": 51.5,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Replay",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -18.799999237060547,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1694318348,
+            "Parent UUID": 417171234,
+            "Name": "Replay Image",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        -383,
+                        36
+                    ],
+                    "Scale": [
+                        0.49000000953674316,
+                        0.077500000596046448,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 294,
+                    "buttonHeight": 46.5,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_replay_button_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 839817843,
+            "Parent UUID": 417171234,
+            "Name": "ButtonNextLevel",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        604.5,
+                        -376,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.48750001192092896,
+                        0.086666665971279144,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 292.5,
+                    "buttonHeight": 52,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Next Level",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -31,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 865847563,
+            "Parent UUID": 417171234,
+            "Name": "Next Level Image",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        609,
+                        -378,
+                        36
+                    ],
+                    "Scale": [
+                        0.50166666507720947,
+                        0.090000003576278687,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 301,
+                    "buttonHeight": 54,
+                    "lastButtonWidth": 1499,
+                    "lastButtonHeight": 840,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
                 }
             ]
         }

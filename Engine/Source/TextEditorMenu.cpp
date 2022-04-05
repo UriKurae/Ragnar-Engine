@@ -29,6 +29,8 @@ bool TextEditorMenu::Start()
 
 bool TextEditorMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Text Editor Menu Update");
+
 	ImGui::Begin(ICON_FA_CODE" Text Editor", &active, ImGuiWindowFlags_MenuBar);
 
 	auto pos = textEditor.GetCursorPosition();
