@@ -1,5 +1,7 @@
 #include "ParticleEffect_SpawningShape.h"
 
+#include "Globals.h"
+
 ParticleEffect_SpawningShape::ParticleEffect_SpawningShape(TransformComponent* transform) : ParticleEffect(ParticleEffectType::SPAWNING_SHAPE),
 hasInitialSpeed(false), 
 particlesVelocity(0.0f), 
@@ -9,13 +11,14 @@ transformComponent(transform)
 {
 	memset(shapeOffset, 0.0f, sizeof(shapeOffset));
 	transformComponent = transform;
+	type = ParticleEffectType::SPAWNING_SHAPE;
 }
 
 ParticleEffect_SpawningShape::~ParticleEffect_SpawningShape()
 {
 	if (spawnShape != nullptr)
 	{
-		delete(spawnShape);
+		RELEASE(spawnShape);
 		spawnShape = nullptr;
 	}
 	transformComponent = nullptr;
@@ -153,7 +156,7 @@ SpawnShape* ParticleEffect_SpawningShape::ChangeSpawnShape(SPAWN_SHAPE_TYPE newT
 	}
 	else if (newType != spawnShape->GetType())
 	{
-		delete(spawnShape);
+		RELEASE(spawnShape);
 		spawnShape = CreateSpawnShape(newType);
 	}
 
@@ -188,6 +191,9 @@ void ParticleEffect_SpawningShape::GetShapeTypeString(SPAWN_SHAPE_TYPE newType, 
 
 	switch (newType)
 	{
+	case SPAWN_SHAPE_TYPE::NONE:
+		out = "NONE";
+		break;
 	case SPAWN_SHAPE_TYPE::SPHERE:
 		out = "SPHERE";
 		break;
@@ -204,10 +210,64 @@ void ParticleEffect_SpawningShape::GetShapeTypeString(SPAWN_SHAPE_TYPE newType, 
 
 bool ParticleEffect_SpawningShape::OnLoad(JsonParsing& node)
 {
-	return false;
+	particlesVelocity = node.GetJsonNumber("PEShape: Velocity");
+	randomVelocityMultiplier = node.GetJsonNumber("PEShape: Random Velocity Multiplier");
+
+	shapeOffset[0] = node.GetJsonNumber("PEShape: Offset X");
+	shapeOffset[1] = node.GetJsonNumber("PEShape: Offset Y");
+	shapeOffset[2] = node.GetJsonNumber("PEShape: Offset Z");
+
+	if ((SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type") != SPAWN_SHAPE_TYPE::NONE)
+		ChangeSpawnShape((SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type"));
+	else
+	{
+		if (spawnShape != nullptr)
+			RELEASE(spawnShape);
+		spawnShape = new SpawnShape(SPAWN_SHAPE_TYPE::NONE);
+	}
+
+	return true;
 }
 
 bool ParticleEffect_SpawningShape::OnSave(JsonParsing& node, JSON_Array* array)
 {
-	return false;
+	JsonParsing file = JsonParsing();
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Velocity", particlesVelocity);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Random Velocity Multiplier", randomVelocityMultiplier);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Offset X", shapeOffset[0]);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Offset Y", shapeOffset[1]);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Offset Z", shapeOffset[2]);
+
+	/*file.SetNewJson3Number(file, "PEShape: Position", transformComponent->GetPosition());
+	file.SetNewJson4Number(file, "PEShape: Rotation", transformComponent->GetRotation());
+	file.SetNewJson3Number(file, "PEShape: Scale", transformComponent->GetScale());
+
+	float4 row(transformComponent->GetGlobalTransform().At(1, 1), transformComponent->GetGlobalTransform().At(1, 2), transformComponent->GetGlobalTransform().At(1, 3), transformComponent->GetGlobalTransform().At(1, 4));
+	file.SetNewJson4Number(file, "PEShape: Gl Mat 1x4", row);
+	row = { transformComponent->GetGlobalTransform().At(2, 1), transformComponent->GetGlobalTransform().At(2, 2), transformComponent->GetGlobalTransform().At(2, 3), transformComponent->GetGlobalTransform().At(2, 4) };
+	file.SetNewJson4Number(file, "PEShape: Gl Mat 2x4", row);
+	row = { transformComponent->GetGlobalTransform().At(3, 1), transformComponent->GetGlobalTransform().At(3, 2), transformComponent->GetGlobalTransform().At(3, 3), transformComponent->GetGlobalTransform().At(3, 4) };
+	file.SetNewJson4Number(file, "PEShape: Gl Mat 3x4", row);
+	row = { transformComponent->GetGlobalTransform().At(4, 1), transformComponent->GetGlobalTransform().At(4, 2), transformComponent->GetGlobalTransform().At(4, 3), transformComponent->GetGlobalTransform().At(4, 4) };
+	file.SetNewJson4Number(file, "PEShape: Gl Mat 4x4", row);
+	
+	row = { transformComponent->GetLocalTransform().At(1, 1), transformComponent->GetLocalTransform().At(1, 2), transformComponent->GetLocalTransform().At(1, 3), transformComponent->GetLocalTransform().At(1, 4) };
+	file.SetNewJson4Number(file, "PEShape: Local Mat 1x4", row);
+	row = { transformComponent->GetLocalTransform().At(2, 1), transformComponent->GetLocalTransform().At(2, 2), transformComponent->GetLocalTransform().At(2, 3), transformComponent->GetLocalTransform().At(2, 4) };
+	file.SetNewJson4Number(file, "PEShape: Local Mat 2x4", row);
+	row = { transformComponent->GetLocalTransform().At(3, 1), transformComponent->GetLocalTransform().At(3, 2), transformComponent->GetLocalTransform().At(3, 3), transformComponent->GetLocalTransform().At(3, 4) };
+	file.SetNewJson4Number(file, "PEShape: Local Mat 3x4", row);
+	row = { transformComponent->GetLocalTransform().At(4, 1), transformComponent->GetLocalTransform().At(4, 2), transformComponent->GetLocalTransform().At(4, 3), transformComponent->GetLocalTransform().At(4, 4) };
+	file.SetNewJson4Number(file, "PEShape: Local Mat 4x4", row);
+
+	file.SetNewJson3Number(file, "PEShape: Rotation Editor", transformComponent->GetRotEditor());*/
+
+	if (spawnShape != nullptr)
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Shape Type", (int)spawnShape->GetType());
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
+
+	node.SetValueToArray(array, file.GetRootValue());
+	return true;
 }

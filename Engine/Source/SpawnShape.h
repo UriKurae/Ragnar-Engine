@@ -5,6 +5,7 @@ struct Particle;
 
 enum class SPAWN_SHAPE_TYPE : int
 {
+	NONE,
 	SPHERE,
 	CONE,
 	CIRCUMFERENCE,
@@ -22,12 +23,15 @@ public:
 
 	virtual void OnEditor(int emitterIndex){}
 
-	virtual bool OnLoad(JsonParsing& node) {
+	virtual bool OnLoad(JsonParsing& node) 
+	{
 		return true;
 	}
-	virtual bool OnSave(JsonParsing& node, JSON_Array* array) {
+	virtual bool OnSave(JsonParsing& node, JSON_Array* array)
+	{
 		return true;
 	}
+	
 
 	SPAWN_SHAPE_TYPE GetType()const;
 

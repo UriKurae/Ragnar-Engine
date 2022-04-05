@@ -45,13 +45,21 @@ void ParticleEffect_SphericalSpawn::OnEditor(int emitterIndex)
 
 bool ParticleEffect_SphericalSpawn::OnLoad(JsonParsing& node)
 {
-	radius = node.GetJsonNumber("Radius");
+	radius = node.GetJsonNumber("PESpawn: Radius");
+	//angle = node.GetJsonNumber("PESpawn: Angle");
+	//useDirection = node.GetJsonBool("PESpawn: Use Direction");
+
 	return true;
 }
 
 bool ParticleEffect_SphericalSpawn::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", radius);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PESpawn: Radius", radius);
+	//file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PESpawn: Angle", angle);
+	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PESpawn: Use Direction", useDirection);
+
+	node.SetValueToArray(array, file.GetRootValue());
 	return true;
 }
