@@ -195,9 +195,6 @@
     <ClCompile Include="Engine\Source\TransformComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\TextComponent.cpp">
-      <Filter>Sources\GameObject\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\ScriptComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
@@ -1690,6 +1687,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\DialogueSystem.cpp">
       <Filter>Sources\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
