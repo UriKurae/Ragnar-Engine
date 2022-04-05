@@ -60,8 +60,7 @@ public:
 	bool isActive, toDelete;
 
 	std::vector<ParticleEffect*> effects;
-	//std::vector<Particle> particlesBuff;
-	//Particle* particleReference;
+
 	GameObject* own;
 
 	float minLifeTime;

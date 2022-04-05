@@ -31,6 +31,6 @@ private:
 
 	float shapeOffset[3];// (x, y, z)
 
-	TransformComponent* transformComponent; 
+	TransformComponent* transformComponent;
 	SpawnShape* spawnShape;
 };

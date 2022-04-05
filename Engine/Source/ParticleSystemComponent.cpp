@@ -313,6 +313,8 @@ bool ParticleSystemComponent::OnLoad(JsonParsing& node)
     owner->EditAABB(offsetAABB, sizeAABB);
     JSON_Array* emittersArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Emitters");
     size_t size = node.GetJsonArrayCount(emittersArray);
+    maxDuration = node.GetJsonNumber("MaxDuration");
+    looping = node.GetJsonBool("Looping");
 
     for (int i = 0; i < size; ++i)
     {
@@ -335,6 +337,8 @@ bool ParticleSystemComponent::OnSave(JsonParsing& node, JSON_Array* array)
     file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
     file.SetNewJson3Number(file, "Size", sizeAABB);
     file.SetNewJson3Number(file, "Offset", offsetAABB);
+    file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "MaxDuration", maxDuration);
+    file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Looping", looping);
 
     JSON_Array* emittersArray = file.SetNewJsonArray(file.GetRootValue(), "Emitters");
 

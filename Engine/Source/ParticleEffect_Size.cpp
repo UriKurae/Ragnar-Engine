@@ -60,7 +60,6 @@ bool ParticleEffect_Size::OnLoad(JsonParsing& node)
 {
 	startSize = node.GetJsonNumber("PES: Start size");
 	endSize = node.GetJsonNumber ("PES: End size");
-	//toDelete = node.GetJsonBool("PES: To Delete");
 	return true;
 }
 
@@ -70,7 +69,6 @@ bool ParticleEffect_Size::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PES: Start size", startSize);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PES: End size", endSize);
-	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PES: To Delete", toDelete);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
 	node.SetValueToArray(array, file.GetRootValue());
 	return true;

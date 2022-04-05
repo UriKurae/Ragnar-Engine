@@ -19,7 +19,7 @@ public:
 	void OnEditor(int emitterIndex) override;
 
 	bool OnLoad(JsonParsing& node) override;
-	bool OnSave(JsonParsing& node, JSON_Array* array)override;
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 private:
 

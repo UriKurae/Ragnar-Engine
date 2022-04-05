@@ -7,6 +7,7 @@
 #include "TransformComponent.h"
 #include "ParticleEffect_Velocity.h"
 #include "ParticleEffect_Acceleration.h"
+#include "ParticleEffect_Rotation.h"
 #include "ParticleEffect_Size.h"
 #include "ParticleEffect_Color.h"
 #include "ParticleEffect_SpawningShape.h"
@@ -40,7 +41,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particlePool.resize(maxParticles);
 
 	//particleReference = new Particle(own);
-	effects.resize(4);
+	effects.resize(6);
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
@@ -88,6 +89,8 @@ ParticleEmitter::~ParticleEmitter()
 
 	effect = nullptr;
 	effects.clear();
+
+	transform = nullptr;
 }
 
 void ParticleEmitter::Emit(float dt)
@@ -269,9 +272,6 @@ void ParticleEmitter::Render(CameraComponent* gameCam)
 		TransformComponent* tr = own->GetComponent<TransformComponent>();
 		data.shader->SetUniformMatrix4f("model", tr->GetGlobalTransform().Transposed());
 
-		//for (int i = 0; i < data.textureSlots; ++i)
-		//	data.textureSlots[i]->;
-
 		data.vertexBuffer->Bind();
 		data.indexBuffer->Bind();
 		glDrawElements(GL_TRIANGLES, data.indexCount, GL_UNSIGNED_INT, 0);
@@ -309,7 +309,6 @@ void ParticleEmitter::Update(float dt)
 
 	UpdateParticle(dt);
 	for (int i = 0; i < particlePool.size(); ++i)
-	//for (auto& particle : particlePool)
 	{
 		Particle& particle = particlePool[i];
 
@@ -396,7 +395,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 				SetUpBuffers();
 		ImGui::PopItemWidth();
 
-
 		guiName = "Particle lifetime" + suffixLabel;
 		ImGui::PushItemWidth(200);
 		ImGui::DragFloat(guiName.c_str(), &particleReference.lifeTime, 0.01f, 0.0f, 10.0f);
@@ -407,9 +405,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::PopItemWidth();
 		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
-		ImGui::PopItemWidth();
-		ImGui::PushItemWidth(200);
-		ImGui::DragFloat("Rotation Amount", &particleReference.deltaRotation, 0.01f);
 		ImGui::PopItemWidth();
 	
 		/*guiName = "Color (RGBA)" + suffixLabel;
@@ -442,7 +437,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//	ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
 		//}
 
-		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; i++)
+		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; i++)
 		{
 			if (isEffectActive((ParticleEffectType)i))
 			{
@@ -472,7 +467,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		textNameDisplay += emitterIndex;
 		if (ImGui::BeginCombo(guiName.c_str(), textNameDisplay.c_str()))
 		{
-			for (int j = (int)ParticleEffectType::NO_TYPE + 1; j <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; j++)
+			for (int j = (int)ParticleEffectType::NO_TYPE + 1; j <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; j++)
 			{
 				guiName = (GetNameFromEffect((ParticleEffectType)j)) + suffixLabel;
 
@@ -506,8 +501,12 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effects[(int)ParticleEffectType::NO_TYPE] = effect;
 		break;
 	case ParticleEffectType::SPAWNING_SHAPE:
-		effect = new ParticleEffect_SpawningShape(transform);
-		effects[(int)ParticleEffectType::SPAWNING_SHAPE] = effect;
+		transform = own->GetComponent<TransformComponent>();
+		if (transform != nullptr)
+		{
+			effect = new ParticleEffect_SpawningShape(transform);
+			effects[(int)ParticleEffectType::SPAWNING_SHAPE] = effect;
+		}
 		break;
 	case ParticleEffectType::VELOCITY_OVER_LIFETIME:
 		effect = new ParticleEffect_Velocity();
@@ -517,13 +516,18 @@ void ParticleEmitter::CreateParticleEffect(ParticleEffectType type)
 		effect = new ParticleEffect_Acceleration();
 		effects[(int)ParticleEffectType::ACCELERATION_OVER_LIFETIME] = effect;
 		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		effect = new ParticleEffect_Color();
-		effects[(int)ParticleEffectType::COLOR_OVER_LIFETIME] = effect;
+	case ParticleEffectType::ROTATION_OVER_LIFETIME:
+		//TODO
+		//effect = new ParticleEffect_Rotation();
+		effects[(int)ParticleEffectType::ROTATION_OVER_LIFETIME] = effect;
 		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		effect = new ParticleEffect_Size();
 		effects[(int)ParticleEffectType::SIZE_OVER_LIFETIME] = effect;
+		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		effect = new ParticleEffect_Color();
+		effects[(int)ParticleEffectType::COLOR_OVER_LIFETIME] = effect;
 		break;
 	default:
 		break;
@@ -558,11 +562,14 @@ std::string ParticleEmitter::GetNameFromEffect(ParticleEffectType type)
 	case ParticleEffectType::ACCELERATION_OVER_LIFETIME:
 		return "Acceleration Effect";
 		break;
-	case ParticleEffectType::COLOR_OVER_LIFETIME:
-		return "Color Effect";
+	case ParticleEffectType::ROTATION_OVER_LIFETIME:
+		return "Rotation Effect";
 		break;
 	case ParticleEffectType::SIZE_OVER_LIFETIME:
 		return "Size Effect";
+		break;
+	case ParticleEffectType::COLOR_OVER_LIFETIME:
+		return "Color Effect";
 		break;
 	default:
 		break;
@@ -714,7 +721,6 @@ void ParticleEmitter::ShowTextureMenu()
 			}
 		}
 	}
-
 	ImGui::End();
 }
 

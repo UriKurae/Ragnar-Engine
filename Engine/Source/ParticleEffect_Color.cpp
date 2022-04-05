@@ -21,7 +21,6 @@ void ParticleEffect_Color::Update(Particle& particle, float dt)
 
 	float porcentage = particle.lifeRemaining / particle.lifeTime;
 	float4 color = float4::Lerp(endColor, startColor, porcentage);
-	//color.w *= porcentage;
 	particle.color = color;
 }
 
@@ -57,9 +56,8 @@ void ParticleEffect_Color::OnEditor(int emitterIndex)
 
 bool ParticleEffect_Color::OnLoad(JsonParsing& node)
 {
-	startColor = node.GetJson4Number(node, "PEC: start color");
-	endColor = node.GetJson4Number(node, "PEC: start color");
-	//toDelete = node.GetJsonBool("PEC: To Delete");
+	startColor = node.GetJson4Number(node, "PEC: Start color");
+	endColor = node.GetJson4Number(node, "PEC: End color");
 	return true;
 }
 
@@ -67,9 +65,8 @@ bool ParticleEffect_Color::OnSave(JsonParsing& node, JSON_Array* array)
 {
 	JsonParsing file = JsonParsing();
 
-	file.SetNewJson4Number(file, "PEC: start color", startColor);
-	file.SetNewJson4Number(file, "PEC: start color", endColor);
-	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PEC: To Delete", toDelete);
+	file.SetNewJson4Number(file, "PEC: Start color", startColor);
+	file.SetNewJson4Number(file, "PEC: End color", endColor);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
 	node.SetValueToArray(array, file.GetRootValue());
 	return true;
