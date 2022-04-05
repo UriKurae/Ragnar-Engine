@@ -10,6 +10,7 @@ public class Player : RagnarComponent
     private bool pendingToDelete = false;
     private bool paused = false;
     private bool crouched = false;
+    public bool invisible = false;
 
 
     Rigidbody rb;

@@ -70,22 +70,25 @@ public class EnemyInteractions : RagnarComponent
     {
         for (int i = 0; i < players.Length; i++)
         {
-            Vector3 enemyPos = gameObject.transform.globalPosition;
-            Vector3 enemyForward = gameObject.transform.forward;
-            Vector3 playerPos = players[i].transform.globalPosition;
-            Vector3 distance = playerPos - enemyPos;
-            distance.y = 0;
-            if (distance.magnitude < radius)
+            if (!players[i].GetComponent<Player>().invisible)
             {
-                float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
-                Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z);
-                Vector3 endPos = initPos + distance.normalized * radius;
-                endPos.y = initPos.y;
-
-                if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
+                Vector3 enemyPos = gameObject.transform.globalPosition;
+                Vector3 enemyForward = gameObject.transform.forward;
+                Vector3 playerPos = players[i].transform.globalPosition;
+                Vector3 distance = playerPos - enemyPos;
+                distance.y = 0;
+                if (distance.magnitude < radius)
                 {
-                    index = i;
-                    return true;
+                    float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
+                    Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z);
+                    Vector3 endPos = initPos + distance.normalized * radius;
+                    endPos.y = initPos.y;
+
+                    if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
+                    {
+                        index = i;
+                        return true;
+                    }
                 }
             }
         }
