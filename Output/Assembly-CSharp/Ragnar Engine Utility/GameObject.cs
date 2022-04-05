@@ -90,6 +90,9 @@ namespace RagnarEngine
         extern internal T AddComponent<T>(int componentType);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern GameObject AddChild(GameObject child);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern public GameObject Find(string name);
 
         //[MethodImplAttribute(MethodImplOptions.InternalCall)]

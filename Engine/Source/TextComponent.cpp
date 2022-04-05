@@ -29,6 +29,9 @@ TextComponent::TextComponent(GameObject* own)
 	app->userInterface->OrderButtons();
 	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	//planeToDraw->own = own;
+
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
 }
 
 TextComponent::~TextComponent()
@@ -47,16 +50,22 @@ bool TextComponent::Update(float dt)
 
 void TextComponent::Draw(CameraComponent* gameCam)
 {
+	glAlphaFunc(GL_GREATER, 0.5);
+	glEnable(GL_ALPHA_TEST);
 
+	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+
+	glDisable(GL_ALPHA_TEST);
+	glColor3f(255, 255, 255);
 }
 
 void TextComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("TextComponent"))
+	if (ImGui::CollapsingHeader("Text"))
 	{
 		static float multiplier = 1;
 		static float fadeDuration = 0.1f;
-		static bool textColorEditable = false;
+
 		Checkbox(this, "Active", active);
 		ImGui::Text("Text Color"); ImGui::SameLine();
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))

@@ -1,5 +1,6 @@
 #pragma once
 #include "Application.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
@@ -226,6 +227,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 
 	return app->moduleMono->GoToCSGO(go);
 }
+
 void InstancePrefab(MonoObject* path)
 {
 	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
@@ -376,6 +378,15 @@ void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
 	OBB newObb = AABB(minPoint, maxPoint).ToOBB();
 	gameObject->SetAABB(newObb);
 }
+
+void AddChild(MonoObject* go, MonoObject* child)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	GameObject* newChild = app->moduleMono->GameObjectFromCSGO(child);
+
+	parent->AddChild(newChild);
+}
+
 // GameObject =======================
 
 // Particle System ==================
@@ -439,7 +450,12 @@ void Exit()
 
 MonoObject* GetRegionGame()
 {
-	float4 vec4(app->editor->GetGameView()->GetBounds());
+	float4 vec4 = float4::zero;
+#ifdef DIST
+	vec4 = { 0,0,(float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#else
+	vec4 = app->editor->GetGameView()->GetBounds();
+#endif
 	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
 }

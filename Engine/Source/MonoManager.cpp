@@ -73,7 +73,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
 	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
-
+	
 	// Internall Calls =============
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
 
@@ -109,6 +109,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::GetMinAABB", GetMinAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
+	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	// Utility ===================
 
 	// UI ========================
@@ -178,6 +179,9 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
 	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetButtonText);
 	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetButtonText);
+
+	mono_add_internal_call("RagnarEngine.UIButton::SetTextPosition", SetTextPosition);
+	mono_add_internal_call("RagnarEngine.UIButton::GetTextPosition", GetTextPosition);
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);

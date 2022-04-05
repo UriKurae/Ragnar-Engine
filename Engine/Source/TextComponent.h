@@ -40,6 +40,7 @@ private:
 
 	bool fadeUI = false;
 	Color textColor = white;
+	MyPlane* planeToDraw;
 	//char text[358] = "Text";
 	float fontScale = 1;
 };

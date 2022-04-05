@@ -14,7 +14,7 @@ typedef unsigned short GLushort;
 typedef unsigned int GLuint;
 typedef float GLfloat;
 typedef unsigned int uint;
-
+#define CONVERSION_FACTOR 600
 class Shadert
 {
 public:

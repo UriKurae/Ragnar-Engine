@@ -14,7 +14,12 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern int GetButtonState();
 
-        
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 GetTextPosition();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetTextPosition(float posx,float posy);
+
         public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -23,5 +28,6 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
+       
     }
 }
