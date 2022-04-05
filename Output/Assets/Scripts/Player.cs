@@ -33,8 +33,8 @@ public class Player : RagnarComponent
         {
             if (state == (int)State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
             {
-                agent.CalculatePath(agent.hitPosition);
-                gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                if (agent.CalculatePath(agent.hitPosition).Length > 0)
+                    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
             }
 
             // Crouch
