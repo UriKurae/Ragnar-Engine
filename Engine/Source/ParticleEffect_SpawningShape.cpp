@@ -217,8 +217,12 @@ bool ParticleEffect_SpawningShape::OnLoad(JsonParsing& node)
 	shapeOffset[1] = node.GetJsonNumber("PEShape: Offset Y");
 	shapeOffset[2] = node.GetJsonNumber("PEShape: Offset Z");
 
-	if ((SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type") != SPAWN_SHAPE_TYPE::NONE)
+	SPAWN_SHAPE_TYPE tope = (SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type");
+	if (tope != SPAWN_SHAPE_TYPE::NONE)
+	{
 		ChangeSpawnShape((SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type"));
+		spawnShape->OnLoad(node);
+	}
 	else
 	{
 		if (spawnShape != nullptr)
@@ -264,7 +268,10 @@ bool ParticleEffect_SpawningShape::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJson3Number(file, "PEShape: Rotation Editor", transformComponent->GetRotEditor());*/
 
 	if (spawnShape != nullptr)
+	{
 		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PEShape: Shape Type", (int)spawnShape->GetType());
+		spawnShape->OnSave(file, array);
+	}
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Effect Type", (int)type);
 

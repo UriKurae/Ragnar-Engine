@@ -54,12 +54,12 @@ bool ParticleEffect_SphericalSpawn::OnLoad(JsonParsing& node)
 
 bool ParticleEffect_SphericalSpawn::OnSave(JsonParsing& node, JSON_Array* array)
 {
-	JsonParsing file = JsonParsing();
+	//JsonParsing file = JsonParsing();
 
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PESpawn: Radius", radius);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "PESpawn: Radius", radius);
 	//file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "PESpawn: Angle", angle);
 	//file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "PESpawn: Use Direction", useDirection);
 
-	node.SetValueToArray(array, file.GetRootValue());
+	//node.SetValueToArray(array, node.GetRootValue());
 	return true;
 }
