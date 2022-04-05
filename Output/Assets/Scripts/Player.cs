@@ -24,6 +24,7 @@ public class Player : RagnarComponent
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
 
     public void Update()
