@@ -18,7 +18,9 @@ public class pauseMenuButton : RagnarComponent
 	public void Start()
     {
 		SceneAudio = GameObject.Find("AudioLevel1");
-		SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
+		//SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
 	}
 	
 	public void Update()
@@ -90,20 +92,20 @@ public class pauseMenuButton : RagnarComponent
 
 	void ImageShow()
     {
-		pos.Set(0.0f, 0.0f, 84.0f);
+		pos.Set(0.0f, 0.0f, 35.0f);
 		Image.GetComponent<Transform2D>().position2D = pos;
 		Image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 	}
 
 	void ImageHide()
     {
-		pos.Set(0.0f, 1000.0f, 84.0f);
+		pos.Set(0.0f, 2000.0f, 35.0f);
 		Image.GetComponent<Transform2D>().position2D = pos;
 	}
 
 	void ResumeButtonShow()
 	{
-		pos.Set(-363.0f, 30.0f, 90.0f);
+		pos.Set(-363.0f, 30.0f, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
 
 		int a = Resume.GetComponent<UIButton>().GetButtonState();
@@ -137,13 +139,13 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void ResumeButtonHide()
 	{
-		pos.Set(0.0f, 1000.0f, 90.0f);
+		pos.Set(0.0f,2000.0f, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
 	}
 
 	void MainMenuButtonShow()
 	{
-		pos.Set(-363.0f, -28.0f, 90.0f);
+		pos.Set(-363.0f, -28.0f, 36.1f);
 		MainM.GetComponent<Transform2D>().position2D = pos;
 
 		int a = MainM.GetComponent<UIButton>().GetButtonState();
@@ -177,31 +179,31 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void MainMenuButtonHide()
 	{
-		pos.Set(0.0f, 1000.0f, 90.0f);
+		pos.Set(0.0f, 2000.0f, 36.1f);
 		MainM.GetComponent<Transform2D>().position2D = pos;
 	}
 
 
 	void OptionsButtonShow()
 	{
-		pos.Set(-356.5f, -0.0f, 90.0f);
+		pos.Set(-356.5f, 0.0f, 36.1f);
 		Opt.GetComponent<Transform2D>().position2D = pos;
 
 		// Options button logic
 	}
 	void OptionsButtonHide()
 	{
-		pos.Set(0.0f, 1000.0f, 90.0f);
+		pos.Set(0.0f, 2000.0f, 36.1f);
 		Opt.GetComponent<Transform2D>().position2D = pos;
 	}
 	void RectangleShow()
 	{
-		pos.Set(-326.0f, 7.5f, 88.2f);
+		pos.Set(-326.0f, 7.5f, 36.1f);
 		Rect.GetComponent<Transform2D>().position2D = pos;
 	}
 	void RectangleHide()
 	{
-		pos.Set(0.0f, 1000.0f, 88.2f);
+		pos.Set(0.0f, 2000.0f, 36.1f);
 		Rect.GetComponent<Transform2D>().position2D = pos;
 	}
 }

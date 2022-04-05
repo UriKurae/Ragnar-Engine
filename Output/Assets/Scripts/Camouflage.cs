@@ -15,12 +15,14 @@ public class Camouflage : RagnarComponent
 		if(Timer())
         {
 			SetMaterialTransparent("Assets/Resources/CharacterTex/char_chani_albedo.png");
+			player.GetComponent<Player>().invisible = false;
 			InternalCalls.Destroy(gameObject);
 		}
 	}
 	private void SetMaterialTransparent(string path)
     {
 		player.GetComponent<Material>().SetTexturePath(path);
+		player.GetComponent<Player>().invisible = true;
     }
 	public bool Timer()//moltes gracies Isaac
 	{

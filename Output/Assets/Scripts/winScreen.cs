@@ -12,6 +12,8 @@ public class winScren : RagnarComponent
 	GameObject MenuImage;
 	GameObject NextImage;
 	GameObject ReplayImage;
+	GameObject AudioManager;
+
 	bool isFirstM = true;
 	bool isFirstA = true;
 	bool isFirstR = true;
@@ -25,6 +27,7 @@ public class winScren : RagnarComponent
 		MenuImage = GameObject.Find("Main Menu Image");
 		NextImage = GameObject.Find("Next Level Image");
 		ReplayImage = GameObject.Find("Replay Image");
+		AudioManager = GameObject.Find("AudioWinScene");
 
 		Pos = new Vector3(0, 0, 0);
 	}
@@ -56,7 +59,6 @@ public class winScren : RagnarComponent
 				// focused mode
 				if (isFirstM)
 				{
-
 					Pos.Set(Menu.GetComponent<Transform2D>().position2D.x + 20, Menu.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Menu.GetComponent<Transform2D>().position2D = Pos;
 
@@ -64,10 +66,12 @@ public class winScren : RagnarComponent
 					MenuImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstM = false;
 					//poner sonido
+					AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
 				}
 				break;
 			case 3:
 				// pressed mode
+				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
 				Menu.GetComponent<UIButton>().SetAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena

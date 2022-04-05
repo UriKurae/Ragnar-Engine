@@ -277,3 +277,8 @@ float AudioSourceComponent::GetClipVolume()
 {
 	return volume;
 }
+
+void AudioSourceComponent::SetState(const char* group, const char* state)
+{
+	AK::SoundEngine::SetState(group, state);
+}

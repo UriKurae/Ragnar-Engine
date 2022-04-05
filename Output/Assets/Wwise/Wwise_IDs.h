@@ -28,6 +28,7 @@ namespace AK
         static const AkUniqueID LEVEL1BGCOMBATMUSIC = 1286730336U;
         static const AkUniqueID LEVEL1BGMUSIC = 1040789284U;
         static const AkUniqueID MENUBGMUSIC = 2739288618U;
+        static const AkUniqueID MUSICPLAY = 1205645828U;
         static const AkUniqueID PLAYERDEATH = 1656947812U;
         static const AkUniqueID RELOAD = 456382354U;
         static const AkUniqueID SHOT = 251412229U;
@@ -66,6 +67,23 @@ namespace AK
         static const AkUniqueID WEAPONTHROWINGKNIFETHROW = 1079115772U;
         static const AkUniqueID WEAPONVOICE = 1258894737U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace MUSIC
+        {
+            static const AkUniqueID GROUP = 3991942870U;
+
+            namespace STATE
+            {
+                static const AkUniqueID LEVEL1_BASE = 706284710U;
+                static const AkUniqueID LEVEL1_BATTLE = 3739419631U;
+                static const AkUniqueID MAINMENU = 3604647259U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace MUSIC
+
+    } // namespace STATES
 
     namespace GAME_PARAMETERS
     {
