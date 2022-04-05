@@ -107,7 +107,9 @@ bool ModuleEditor::Draw(Framebuffer* editorBuffer, Framebuffer* gameBuffer)
 
 bool ModuleEditor::CleanUp()
 {
+#ifndef DIST
 	mainMenuBar.CleanUp();
+#endif
 
 	RELEASE(viewport);
 	RELEASE(gameView);

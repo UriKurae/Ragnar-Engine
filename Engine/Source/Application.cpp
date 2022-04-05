@@ -78,6 +78,10 @@ Application::~Application()
 	PrefabManager::ReleaseInstance();
 	DialogueSystem::ReleaseInstance();
 	
+#ifdef DIST
+	RELEASE(editor);
+#endif
+
 
 	listModules.clear();
 }
@@ -181,6 +185,10 @@ bool Application::CleanUp()
 	{
 		ret = (*item)->CleanUp();
 	}
+
+#ifdef DIST
+	editor->CleanUp();
+#endif
 
 	return ret;
 }
