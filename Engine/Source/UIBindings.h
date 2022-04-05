@@ -30,6 +30,18 @@ void Set2DPosition(MonoObject* go, MonoObject* position)
 	}
 }
  // Button ==============================
+
+float GetAlpha(MonoObject* go)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	return tr->GetAlpha();
+}
+void SetAlpha(MonoObject* go,float newAlpha)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	tr->SetAlpha(newAlpha);
+}
+
 int GetButtonState(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);

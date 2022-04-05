@@ -20,6 +20,11 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetTextPosition(float posx,float posy);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetAlpha(float NewAlpha);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern float GetAlpha();
+
         public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
