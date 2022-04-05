@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 172811776,
+                    "pointer": 156850656,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 95469376,
+                    "characters": 80527168,
                     "drawnArea": false
                 }
             ]
@@ -139,7 +139,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -49.884048461914062,
+                        -49.884048461914063,
                         0,
                         90.369331359863281
                     ],
@@ -177,9 +177,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.9073486328125e-06,
-                        54.26007080078125,
-                        -49.327339172363281
+                        2.86102294921875e-05,
+                        57.959716796875,
+                        -52.690650939941406
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -201,20 +201,20 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.43805000185966492,
+                    "Vertical Fov": 0.44838371872901917,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -63.807746887207031,
-                        54.26007080078125,
-                        137.69210815429688
+                        -64.75714111328125,
+                        57.959716796875,
+                        140.91873168945313
                     ],
                     "Type": 3,
-                    "Zoom": 20,
+                    "Zoom": 16,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -49.884048461914062,
+                        -49.884048461914063,
                         0,
                         90.369331359863281
                     ],
@@ -327,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 172804976,
+                    "pointer": 238387840,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -339,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 172806608,
+                    "pointer": 238390968,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -545,7 +545,7 @@
                     "Position": [
                         15.653947830200195,
                         0,
-                        -18.625564575195312
+                        -18.625564575195313
                     ],
                     "Quaternion": [
                         0,
@@ -577,6 +577,8 @@
                         0,
                         0
                     ],
+                    "MaxDuration": 0,
+                    "Looping": true,
                     "Emitters": [
                         {
                             "Emitter: Max Particles": 2000,
@@ -617,18 +619,23 @@
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
                                 {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
+                                    "PES: Start size": 0,
+                                    "PES: End size": 0,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
                                         0,
                                         0,
                                         0
                                     ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
+                                    "PEC: End color": [
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ],
                                     "Effect Type": 3
                                 }
                             ]
@@ -672,18 +679,23 @@
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
                                 {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
+                                    "PES: Start size": 0,
+                                    "PES: End size": 0,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
                                         0,
                                         0,
                                         0
                                     ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
+                                    "PEC: End color": [
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ],
                                     "Effect Type": 3
                                 }
                             ]
@@ -741,6 +753,8 @@
                         0,
                         0
                     ],
+                    "MaxDuration": 0,
+                    "Looping": true,
                     "Emitters": [
                         {
                             "Emitter: Max Particles": 2000,
@@ -781,18 +795,23 @@
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
                                 {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
+                                    "PES: Start size": 0,
+                                    "PES: End size": 0,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
                                         0,
                                         0,
                                         0
                                     ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
+                                    "PEC: End color": [
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ],
                                     "Effect Type": 3
                                 }
                             ]
@@ -836,18 +855,23 @@
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
                                 {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
+                                    "PES: Start size": 0,
+                                    "PES: End size": 0,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0,
                                         0,
                                         0,
                                         0
                                     ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
+                                    "PEC: End color": [
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ],
                                     "Effect Type": 3
                                 }
                             ]
@@ -984,7 +1008,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164062
+                        -46.558364868164063
                     ],
                     "Quaternion": [
                         0,
@@ -1201,7 +1225,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789062,
+                        -11.089859008789063,
                         0,
                         6.886474609375
                     ],
@@ -1276,7 +1300,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414062
+                        27.392837524414063
                     ],
                     "Quaternion": [
                         0,
@@ -1363,9 +1387,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945312,
+                        1.0000076293945313,
                         1,
-                        1.0000076293945312
+                        1.0000076293945313
                     ]
                 },
                 {
@@ -2162,7 +2186,7 @@
                     "Mute": false,
                     "AudioClips": [
                         {
-                            "0": "LEVEL1BGMUSIC"
+                            "0": "MUSICPLAY"
                         },
                         {
                             "1": "UIHOVER"
@@ -2189,7 +2213,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
+                        3.1632928739203712e+38,
                         -391,
                         -10.399999618530273
                     ],
@@ -2206,7 +2230,7 @@
                     "buttonWidth": 271,
                     "buttonHeight": 143,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2254,7 +2278,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2271,7 +2295,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 172807560,
+                    "pointer": 238389472,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2309,7 +2333,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2382,7 +2406,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2455,7 +2479,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2503,7 +2527,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1297,
-                    "lastButtonHeight": 697,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },

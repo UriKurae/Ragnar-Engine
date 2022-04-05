@@ -196,10 +196,10 @@ bool ParticleEffect_SpawningShape::OnLoad(JsonParsing& node)
 	shapeOffset[1] = node.GetJsonNumber("PEShape: Offset Y");
 	shapeOffset[2] = node.GetJsonNumber("PEShape: Offset Z");
 
-	SPAWN_SHAPE_TYPE tope = (SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type");
+	SPAWN_SHAPE_TYPE tope = (SPAWN_SHAPE_TYPE)(int)node.GetJsonNumber("PEShape: Shape Type");
 	if (tope != SPAWN_SHAPE_TYPE::NONE)
 	{
-		ChangeSpawnShape((SPAWN_SHAPE_TYPE)node.GetJsonNumber("PEShape: Shape Type"));
+		ChangeSpawnShape((SPAWN_SHAPE_TYPE)(int)node.GetJsonNumber("PEShape: Shape Type"));
 		spawnShape->OnLoad(node);
 	}
 	else
