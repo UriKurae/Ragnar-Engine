@@ -104,7 +104,7 @@ bool ModuleSceneManager::PostUpdate()
 
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
-	currentScene->PostUpdate();
+	//currentScene->PostUpdate();
 
 	return true;
 }

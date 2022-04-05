@@ -17,7 +17,7 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 	public void Start()
     {
-		SceneAudio = GameObject.Find("AudioController");
+		SceneAudio = GameObject.Find("AudioLevel1");
 		SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
 	}
 	
@@ -121,7 +121,7 @@ public class pauseMenuButton : RagnarComponent
 				if (isFirstS)
 				{
 					isFirstS = false;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("FOCUSEDBUTTON");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
 					//poner sonido
 				}
 
@@ -131,7 +131,7 @@ public class pauseMenuButton : RagnarComponent
 				isSowing = false;
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("PRESSEDBUTTON");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 				break;
 		}
 	}
@@ -160,6 +160,7 @@ public class pauseMenuButton : RagnarComponent
 				// focused mode
 				if (isFirstS)
 				{
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
 					isFirstS = false;
 
 					//poner sonido
@@ -168,6 +169,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
 				break;

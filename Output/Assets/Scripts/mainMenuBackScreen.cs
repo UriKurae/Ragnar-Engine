@@ -9,7 +9,7 @@ public class mainMenuBackScreen : RagnarComponent
 	GameObject AudioController;
 	public void Start()
 	{
-		AudioController = GameObject.Find("AudioController");
+		AudioController = GameObject.Find("AudioMainMenu");
 		AudioController.GetComponent<AudioSource>().PlayClip("MAINMENUBACKGROUNDMUSIC");
 	}
 	public void Update()
@@ -38,15 +38,15 @@ public class mainMenuBackScreen : RagnarComponent
 			// focused mode
 			if (isFirstS)
 			{
-				AudioController.GetComponent<AudioSource>().PlayClip("FOCUSEDBUTTON");
+				AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
 				isFirstS = false;
 				//poner sonido
 			}
 			break;
 		case 3:
 			// pressed mode
+			AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
 			SceneManager.NextScene();
-			AudioController.GetComponent<AudioSource>().PlayClip("PRESSEDBUTTON");
 				//cambiar de escena
 				break;
 		}
@@ -69,14 +69,14 @@ public class mainMenuBackScreen : RagnarComponent
 			if (isFirstE)
 			{
 				//poner sonido
-				AudioController.GetComponent<AudioSource>().PlayClip("FOCUSEDBUTTON");
+				AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
 				isFirstE = false;
 			}
 			break;
 		case 3:
 			// pressed mode
 			isFirstE = true;
-			AudioController.GetComponent<AudioSource>().PlayClip("PRESSEDBUTTON");
+			AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
 			SceneManager.Exit();
 			//salir del Juego
 			break;
