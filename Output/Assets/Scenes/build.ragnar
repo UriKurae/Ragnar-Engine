@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 134548280,
+                    "pointer": 137721056,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 190693184,
+                    "characters": 193642304,
                     "drawnArea": false
                 }
             ]
@@ -139,9 +139,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -49.884048461914063,
+                        -49.884101867675781,
                         0,
-                        90.369331359863281
+                        76.665283203125
                     ],
                     "Quaternion": [
                         0,
@@ -178,8 +178,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        55,
-                        -50
+                        49.08056640625,
+                        -44.618728637695313
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -201,22 +201,22 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 130,
-                    "Vertical Fov": 0.52476203441619873,
+                    "Vertical Fov": 0.43805000185966492,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -63.99761962890625,
-                        55,
-                        138.33743286132813
+                        -62.478691101074219,
+                        49.08056640625,
+                        119.47079467773438
                     ],
                     "Type": 3,
-                    "Zoom": 14,
+                    "Zoom": 22,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -49.884048461914063,
+                        -49.884101867675781,
                         0,
-                        90.369331359863281
+                        76.665283203125
                     ],
                     "Movement Speed": 0.012000000104308128,
                     "Rotation Speed": 2,
@@ -327,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 134548416,
+                    "pointer": 137720512,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -339,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 134547464,
+                    "pointer": 137719288,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -524,358 +524,6 @@
                         1,
                         1,
                         1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 382565728,
-            "Parent UUID": 417171234,
-            "Name": "SandParicle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        15.653947830200195,
-                        0,
-                        -18.625564575195313
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        3.1699998378753662,
-                        3.1699998378753662,
-                        3.1699998378753662
-                    ]
-                },
-                {
-                    "Type": 21,
-                    "Active": true,
-                    "Size": [
-                        10,
-                        10,
-                        10
-                    ],
-                    "Offset": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "MaxDuration": 0,
-                    "Looping": true,
-                    "Emitters": [
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.86000001430511475,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.05000000074505806,
-                                0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0.0099999997764825821,
-                                0,
-                                0.0099999997764825821
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "PEC: End color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 3
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.75,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.0099999997764825821,
-                                -0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "PEC: End color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 3
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 382565728,
-            "Parent UUID": 417171234,
-            "Name": "SandParicle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -18.732231140136719,
-                        0,
-                        9.7206764221191406
-                    ],
-                    "Quaternion": [
-                        0,
-                        -0.32315078377723694,
-                        0,
-                        0.94634759426116943
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        3.1700024604797363,
-                        3.1700000762939453,
-                        3.1700024604797363
-                    ]
-                },
-                {
-                    "Type": 21,
-                    "Active": true,
-                    "Size": [
-                        10,
-                        10,
-                        10
-                    ],
-                    "Offset": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "MaxDuration": 0,
-                    "Looping": true,
-                    "Emitters": [
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.86000001430511475,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.05000000074505806,
-                                0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0.0099999997764825821,
-                                0,
-                                0.0099999997764825821
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "PEC: End color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 3
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.75,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.0099999997764825821,
-                                -0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PEC: Start color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "PEC: End color": [
-                                        0,
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 3
-                                }
-                            ]
-                        }
                     ]
                 }
             ]
@@ -2213,8 +1861,8 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        1.5816464369601856e+38,
-                        -10.399999618530273,
+                        3.1632928739203712e+38,
+                        -1.8999996185302734,
                         0
                     ],
                     "Scale": [
@@ -2229,8 +1877,8 @@
                     ],
                     "buttonWidth": 271,
                     "buttonHeight": 143,
-                    "lastButtonWidth": 1368,
-                    "lastButtonHeight": 887,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2277,8 +1925,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1368,
-                    "lastButtonHeight": 887,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2295,7 +1943,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 134546512,
+                    "pointer": 137719560,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2332,8 +1980,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1368,
-                    "lastButtonHeight": 887,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2405,8 +2053,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1368,
-                    "lastButtonHeight": 887,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2463,7 +2111,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -391,
+                        -382.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2478,8 +2126,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1368,
-                    "lastButtonHeight": 887,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2526,8 +2174,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1368,
-                    "lastButtonHeight": 887,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 697,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2920,6 +2568,182 @@
                     "LinearDamping": 0,
                     "AngularDamping": 0,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1672721249,
+            "Parent UUID": 417171234,
+            "Name": "SandParticle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/SandParticle.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -12.63680362701416,
+                        4.028472900390625,
+                        -4.6380863189697266
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.17417608201503754,
+                        0,
+                        0.98471450805664063
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        3.9249019622802734,
+                        3.9249002933502197,
+                        3.9249019622802734
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        100,
+                        10,
+                        100
+                    ],
+                    "Offset": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "MaxDuration": 0,
+                    "Looping": true,
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 15,
+                            "Cubical: Spread on Y": 0.86000001430511475,
+                            "Cubical: Spread on Z": 15,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.05000000074505806,
+                                0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0.0099999997764825821,
+                                0,
+                                0.0099999997764825821
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 5,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 0.10000000149011612,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0.7666667103767395,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0.69999998807907104,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 15,
+                            "Cubical: Spread on Y": 0.75,
+                            "Cubical: Spread on Z": 15,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.0099999997764825821,
+                                -0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 3,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 0.10000000149011612,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0.66666662693023682,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0.7333332896232605,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
