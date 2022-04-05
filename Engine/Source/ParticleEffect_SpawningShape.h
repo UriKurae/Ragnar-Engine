@@ -16,7 +16,6 @@ public:
 
 	SpawnShape* ChangeSpawnShape(SPAWN_SHAPE_TYPE newType);
 
-	//DO NOT USE THIS ONE, USE ChangeSpawnShape() instead
 	SpawnShape* CreateSpawnShape(SPAWN_SHAPE_TYPE newType);
 	void GetShapeTypeString(SPAWN_SHAPE_TYPE newType, std::string& out);
 
@@ -24,10 +23,6 @@ public:
 	bool OnSave(JsonParsing& node, JSON_Array* array)override;
 
 private:
-
-	bool hasInitialSpeed;
-	float particlesVelocity; //velocity in the spawn direction
-	float randomVelocityMultiplier;
 
 	float shapeOffset[3];// (x, y, z)
 
