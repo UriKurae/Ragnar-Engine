@@ -437,7 +437,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		//	ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
 		//}
 
-		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; i++)
+		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; i++)
 		{
 			if (isEffectActive((ParticleEffectType)i))
 			{
@@ -467,7 +467,7 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		textNameDisplay += emitterIndex;
 		if (ImGui::BeginCombo(guiName.c_str(), textNameDisplay.c_str()))
 		{
-			for (int j = (int)ParticleEffectType::SPAWNING_SHAPE; j <= (int)ParticleEffectType::COLOR_OVER_LIFETIME; j++)
+			for (int j = (int)ParticleEffectType::NO_TYPE + 1; j <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; j++)
 			{
 				guiName = (GetNameFromEffect((ParticleEffectType)j)) + suffixLabel;
 
