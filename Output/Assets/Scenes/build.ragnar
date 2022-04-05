@@ -2543,6 +2543,227 @@
                     "alpha": 1
                 }
             ]
+        },
+        {
+            "UUID": 950603529,
+            "Parent UUID": 417171234,
+            "Name": "RootNode",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8.3320608139038086,
+                        0,
+                        22.889980316162109
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.16515888273715973,
+                        0,
+                        0.98626697063446045
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1.0000001192092896,
+                        1,
+                        1.0000001192092896
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1060604709,
+            "Parent UUID": 950603529,
+            "Name": "RockArc_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        -292.29998779296875,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/prop_rock_arc__RockArc_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/prop_rock_arc_basecolor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2037765178,
+            "Parent UUID": 950603529,
+            "Name": "Collider1 Arc",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        12.867339134216309,
+                        3.7222509384155273,
+                        7.435638427734375
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13646896183490753,
+                        0,
+                        0.99064439535140991
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.2737923264503479,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999958276748657,
+                        1,
+                        0.99999958276748657
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        5.3000001907348633,
+                        7.5999999046325684,
+                        7.0999999046325684
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 830805505,
+            "Parent UUID": 950603529,
+            "Name": "Collider2 Arc",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7.8244142532348633,
+                        2.1000230312347412,
+                        5.6901741027832031
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13646896183490753,
+                        0,
+                        0.99064439535140991
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.60562926530838013,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999958276748657,
+                        1,
+                        0.99999958276748657
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        5.1999998092651367,
+                        4.0999999046325684,
+                        7.5999999046325684
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
         }
     ]
 }
