@@ -5,6 +5,7 @@ public class EnemyInteractions : RagnarComponent
 {
     // Player tracker
     public GameObject[] players;
+    GameObject SceneAudio;
     private Vector3 offset;
     public int index = 0;
 
@@ -18,7 +19,7 @@ public class EnemyInteractions : RagnarComponent
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
-
+        SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
     }
     public void Update()
@@ -43,6 +44,8 @@ public class EnemyInteractions : RagnarComponent
 
     private void Shoot()
     {
+        if (PlayerDetection(8)) SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
+        else SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
 
         if (PlayerDetection(8) && canShoot)
         {

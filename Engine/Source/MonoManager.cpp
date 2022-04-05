@@ -123,6 +123,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.AudioSource::PlayClip", PlayClip);
 	mono_add_internal_call("RagnarEngine.AudioSource::StopCurrentClip", StopCurrentClip);
 	mono_add_internal_call("RagnarEngine.AudioSource::SetClipVolume", SetClipVolume);
+	mono_add_internal_call("RagnarEngine.AudioSource::SetState", SetState);
 	mono_add_internal_call("RagnarEngine.AudioSource::GetClipVolume", GetClipVolume);
 	mono_add_internal_call("RagnarEngine.AudioListener::TestListener", TestListener);
 	// Audio Source ==============

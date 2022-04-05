@@ -19,7 +19,7 @@ public class loseScreen : RagnarComponent
 		MenuImage = GameObject.Find("MenuImage");
 		RetryImage = GameObject.Find("RetryImage");
 		Pos = new Vector3(0, 0, 0);
-		gameObject.GetComponent<AudioSource>().PlayClip("LoseBackgroundMusic");
+		//gameObject.GetComponent<AudioSource>().PlayClip("LoseBackgroundMusic");
 	}
 	void MenuAction()
 	{

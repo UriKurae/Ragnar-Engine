@@ -32,6 +32,7 @@ public:
 	void ResumeClip();
 	void SetClipVolume(float vol);
 	float GetClipVolume();
+	void SetState(const char* group, const char* state);
 
 	inline void ChangePosition() { changePosition = true; }
 private:

@@ -11,7 +11,8 @@ public class mainMenuBackScreen : RagnarComponent
 	public void Start()
 	{
 		AudioController = GameObject.Find("AudioMainMenu");
-		AudioController.GetComponent<AudioSource>().PlayClip("MAINMENUBACKGROUNDMUSIC");
+		AudioController.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+		AudioController.GetComponent<AudioSource>().SetState("MUSIC", "MAINMENU");
 		start = GameObject.Find("Button Start");
 	}
 
