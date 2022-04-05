@@ -100,7 +100,7 @@ public class pauseMenuButton : RagnarComponent
 
 	void ResumeButtonShow()
 	{
-		pos.Set(-850.0f, 30.0f, 36.1f);
+		pos.Set(-850.0f, 0.0f, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
 
 		int a = Resume.GetComponent<UIButton>().GetButtonState();
@@ -140,7 +140,7 @@ public class pauseMenuButton : RagnarComponent
 
 	void MainMenuButtonShow()
 	{
-		pos.Set(-850.0f, -30f, 36.1f);
+		pos.Set(-850.0f, 0.0f, 36.1f);
 		MainM.GetComponent<Transform2D>().position2D = pos;
 
 		int a = MainM.GetComponent<UIButton>().GetButtonState();
