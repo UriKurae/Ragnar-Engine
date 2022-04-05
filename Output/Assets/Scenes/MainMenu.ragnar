@@ -219,7 +219,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/mainMenuScreen.png",
+                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

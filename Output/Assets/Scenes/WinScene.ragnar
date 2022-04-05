@@ -219,7 +219,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
+                    "Path": "Assets\/Resources\/UI\/dunes_rising_winscene.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
