@@ -48,6 +48,11 @@ public class Rock : RagnarComponent
 
 	public void OnCollisionEnter(Rigidbody other)
 	{
+		if (other.gameObject.name == "Ground")
+        {
+			gameObject.GetComponent<AudioSource>().PlayClip("WEAPONROCKHITGROUND");
+        }
+
 		goRB.SetAsStatic();
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
 		CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);

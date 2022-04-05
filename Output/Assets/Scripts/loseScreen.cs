@@ -9,6 +9,8 @@ public class loseScreen : RagnarComponent
 	GameObject Retry;
 	GameObject MenuImage;
 	GameObject RetryImage;
+	GameObject AudioManager;
+
 	bool isFirstM = true;
 	bool isFirstR = true;
 	public void Start()
@@ -18,6 +20,7 @@ public class loseScreen : RagnarComponent
 		Retry = GameObject.Find("ButtonRetry");
 		MenuImage = GameObject.Find("MenuImage");
 		RetryImage = GameObject.Find("RetryImage");
+		AudioManager = GameObject.Find("AudioLoseScene");
 		Pos = new Vector3(0, 0, 0);
 		//gameObject.GetComponent<AudioSource>().PlayClip("LoseBackgroundMusic");
 	}
@@ -56,10 +59,12 @@ public class loseScreen : RagnarComponent
 
 					isFirstM = false;
 					//poner sonido
+					AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
 				}
 				break;
 			case 3:
 				// pressed mode
+				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
 				Menu.GetComponent<UIButton>().SetAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena

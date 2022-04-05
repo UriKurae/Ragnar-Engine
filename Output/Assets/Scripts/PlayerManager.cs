@@ -11,6 +11,7 @@ public class PlayerManager : RagnarComponent
 
     GameObject[] area = null;
     public bool drawnArea = false;
+    bool crouched = false;
 
     public void Start()
 	{
@@ -109,6 +110,14 @@ public class PlayerManager : RagnarComponent
 
 	public void Update()
     {
+        if(players.Length == 0 )
+            SceneManager.LoadScene("LoseScene");
+        
+        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+        {
+            crouched = !crouched;
+        }
+
         PlayerCases();
 
         /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
@@ -216,6 +225,46 @@ public class PlayerManager : RagnarComponent
     {
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
+            if (crouched)
+            {
+                players[characterSelected].GetComponent<Animation>().PlayAnimation("CrouchShoot");
+            }
+            else
+            {
+                players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
+            }
+
+            if (playableCharacter.state == State.ABILITY_1)
+            {
+                if (playableCharacter == characters[0])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFETHROW");
+                }
+                else if (playableCharacter == characters[1])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCRYSKNIFESTAB");
+                }
+                else if (playableCharacter == characters[2])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
+                }
+            }
+            if (playableCharacter.state == State.ABILITY_2)
+            {
+                if (playableCharacter == characters[0])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                }
+                else if (playableCharacter == characters[1])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                }
+                else if (playableCharacter == characters[2])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                }
+            }
+
             // Instancia la habilidad en cuestión. 
             InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
 

@@ -10,6 +10,7 @@ public class Player : RagnarComponent
     private bool pendingToDelete = false;
     private bool paused = false;
     private bool crouched = false;
+    public bool invisible = false;
 
 
     Rigidbody rb;
@@ -59,7 +60,14 @@ public class Player : RagnarComponent
         {
             agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
             agent.CalculatePath(agent.hitPosition);
-            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            if (crouched)
+            {
+                gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+            }
+            else
+            {
+                gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            }
             gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
         }
         if (agent.MovePath())
@@ -75,25 +83,9 @@ public class Player : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
         }
         //////////////////////////
-
-        ///////// MOVEMENT /////////
-        // Idle
-        if (Input.GetKey(KeyCode.D) == KeyState.KEY_UP || Input.GetKey(KeyCode.A) == KeyState.KEY_UP
-            || Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
-        {
-            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
-
-            if (rb.linearVelocity != Vector3.zero)
-                rb.linearVelocity = new Vector3(0, 0, 0);
-
-            if (rb.totalForce != Vector3.zero)
-                rb.ClearForces();
-        }
         
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
-            SceneManager.LoadScene("LoseScene");
             InternalCalls.Destroy(gameObject);
         }
 
@@ -127,6 +119,12 @@ public class Player : RagnarComponent
                 InternalCalls.Destroy(GameObject.Find("Knife"));
             }
         }
+    }
+
+    public void OnTrigger(Rigidbody other)
+    {
+        if (other.gameObject.name == "WinCondition")
+            SceneManager.LoadScene("WinScene");
     }
 
     public void SetControled(bool var)
