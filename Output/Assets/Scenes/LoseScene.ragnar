@@ -128,15 +128,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -2.239762544631958,
-                        11.183857917785645,
-                        14.100016593933105
+                        0,
+                        45,
+                        -41
                     ],
                     "Quaternion": [
-                        0.055457059293985367,
-                        0.6042906641960144,
-                        -0.48200556635856628,
-                        0.63200312852859497
+                        0.38268345594406128,
+                        0,
+                        0,
+                        0.92387950420379639
                     ],
                     "RotationEditor": [
                         0,
@@ -152,15 +152,17 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0394155979156494,
+                    "Vertical Fov": 1.3691918849945068,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -2.239762544631958,
-                        11.183857917785645,
-                        14.100016593933105
+                        -4.9477472305297852,
+                        45,
+                        -43.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 100,
+                    "Zoom": 94,
+                    "Zoom Min": 0,
+                    "Zoom Max": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -168,8 +170,6 @@
                         -2.2581052780151367
                     ],
                     "Movement Speed": 0.5,
-                    "Vertical Angle": -56,
-                    "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 189.39971923828125,
@@ -200,8 +200,8 @@
                         35
                     ],
                     "Scale": [
-                        1,
-                        1,
+                        0.1666666716337204,
+                        0.1666666716337204,
                         1
                     ],
                     "rotationEuler": [
@@ -211,12 +211,14 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1150,
-                    "lastButtonHeight": 658
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/win_lose_background.png",
+                    "Path": "Assets\/Resources\/UI\/ui_losescreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -227,7 +229,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 37784248,
+                    "pointer": 317362152,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -248,13 +250,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -462.5,
-                        -35,
-                        36
+                        -196,
+                        -100.5,
+                        36.099998474121094
                     ],
                     "Scale": [
-                        1.994999885559082,
-                        0.32999998331069946,
+                        0.48333331942558289,
+                        0.07083333283662796,
                         1
                     ],
                     "rotationEuler": [
@@ -262,26 +264,28 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 199.5,
-                    "buttonHeight": 33,
-                    "lastButtonWidth": 1150,
-                    "lastButtonHeight": 658
+                    "buttonWidth": 290,
+                    "buttonHeight": 42.5,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/bakeHouse.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -293,7 +297,7 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Retry",
+                    "buttonText": "Restart",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -319,13 +323,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -462.5,
-                        25.5,
-                        36
+                        -198.5,
+                        -196,
+                        36.099998474121094
                     ],
                     "Scale": [
-                        2,
-                        0.32999998331069946,
+                        0.48333331942558289,
+                        0.07083333283662796,
                         1
                     ],
                     "rotationEuler": [
@@ -333,26 +337,28 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 200,
-                    "buttonHeight": 33,
-                    "lastButtonWidth": 1150,
-                    "lastButtonHeight": 658
+                    "buttonWidth": 290,
+                    "buttonHeight": 42.5,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -364,7 +370,7 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Menu",
+                    "buttonText": "Main Menu",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -378,7 +384,7 @@
         {
             "UUID": 213403760,
             "Parent UUID": 417171234,
-            "Name": "Image",
+            "Name": "MenuImage",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -390,13 +396,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        0,
-                        0,
-                        36
+                        -208,
+                        -206,
+                        36.099998474121094
                     ],
                     "Scale": [
-                        1,
-                        1,
+                        0.48333331942558289,
+                        0.074166662991046906,
                         1
                     ],
                     "rotationEuler": [
@@ -404,14 +410,112 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1150,
-                    "lastButtonHeight": 658
+                    "buttonWidth": 290,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/defeat_logo.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1218133383,
+            "Parent UUID": 417171234,
+            "Name": "RetryImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -205,
+                        -109.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.48333331942558289,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 290,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1234207866,
+            "Parent UUID": 417171234,
+            "Name": "textImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        -39,
+                        132.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.62666666507720947,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 376,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 577,
+                    "lastButtonHeight": 471,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_game_over_text.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

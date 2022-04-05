@@ -22,7 +22,7 @@ ImageComponent::ImageComponent(GameObject* own)
 		own->CreateComponent(ComponentType::TRANFORM2D);
 		own->CreateComponent(ComponentType::MATERIAL);
 	}
-	
+
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
@@ -74,7 +74,7 @@ bool ImageComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
-	node.SetValueToArray(array, file.GetRootValue());	
+	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
 }

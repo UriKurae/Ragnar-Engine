@@ -3,24 +3,34 @@ using RagnarEngine;
 
 public class Knife : RagnarComponent
 {
-	private float force = 1000;
+	private float force = 1500;
 	private bool canReload = false;
 	private bool pendingToDelete = false;
+	
 	public void Start()
-	{
-		Debug.Log("Start Knife");
-		GameObject player = GameObject.Find("Player");
-		Vector3 pos = player.transform.globalPosition;
-		pos.y += 1;
-		gameObject.transform.localPosition = pos;
+    {
+        AimMethod();
+    }
 
-		Rigidbody knifeRb = gameObject.GetComponent<Rigidbody>();
-		knifeRb.SetBodyPosition(pos);
-		knifeRb.IgnoreCollision(player, true);
-		knifeRb.ApplyCentralForce(player.transform.forward * force);
-	}
+    private void AimMethod()
+    {
+        GameObject player = GameObject.Find("Player");
+        NavAgent agent = player.GetComponent<NavAgent>();
 
-	public void Update()
+        Vector3 pos = player.transform.globalPosition;
+        pos.y += 1;
+        gameObject.transform.localPosition = pos;
+
+        Vector3 direction = agent.hitPosition - player.transform.globalPosition;
+        direction.y = 0;
+
+        Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
+        goRB.SetBodyPosition(pos);
+        goRB.IgnoreCollision(player, true);
+        goRB.ApplyCentralForce(direction.normalized * force);
+    }
+
+    public void Update()
 	{
 		if (canReload) ReloadKnife();
 		if (pendingToDelete) InternalCalls.Destroy(gameObject);

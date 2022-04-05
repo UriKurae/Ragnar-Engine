@@ -128,15 +128,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        11.233668327331543,
-                        11.183857917785645,
-                        1.3589518070220947
+                        0,
+                        45,
+                        -41
                     ],
                     "Quaternion": [
-                        -1.1548390688176369e-07,
-                        4.5448541641235352e-07,
-                        -1.0430807151351473e-07,
-                        1
+                        0.38268345594406128,
+                        0,
+                        0,
+                        0.92387950420379639
                     ],
                     "RotationEditor": [
                         0,
@@ -152,15 +152,17 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.96868222951889038,
+                    "Vertical Fov": 1.0794777870178223,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        11.233668327331543,
-                        11.183857917785645,
-                        1.3589518070220947
+                        -4.9477472305297852,
+                        45,
+                        -43.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 62,
+                    "Zoom": 52,
+                    "Zoom Min": 0,
+                    "Zoom Max": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -168,8 +170,6 @@
                         -2.2581052780151367
                     ],
                     "Movement Speed": 0.5,
-                    "Vertical Angle": -56,
-                    "Lock Vertical Angle": false,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 257.39971923828125,
@@ -200,8 +200,8 @@
                         36
                     ],
                     "Scale": [
-                        1.6129032373428345,
-                        1.6129032373428345,
+                        0.1666666716337204,
+                        0.1666666716337204,
                         1
                     ],
                     "rotationEuler": [
@@ -211,8 +211,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -229,7 +229,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 218465264,
+                    "pointer": 8459440,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -250,13 +250,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -404.5,
+                        -450.5,
                         0,
                         36
                     ],
                     "Scale": [
-                        6.4516129493713379,
-                        3.2822577953338623,
+                        0.66666668653488159,
+                        0.33916667103767395,
                         1
                     ],
                     "rotationEuler": [
@@ -266,8 +266,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 203.5,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -298,13 +298,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -501,
+                        -547,
                         25,
                         36.099998474121094
                     ],
                     "Scale": [
-                        2.8548386096954346,
-                        0.46774193644523621,
+                        0.29499998688697815,
+                        0.048333331942558289,
                         1
                     ],
                     "rotationEuler": [
@@ -314,10 +314,16 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
@@ -327,13 +333,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -371,13 +371,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -498,
+                        -544,
                         -31,
                         36.099998474121094
                     ],
                     "Scale": [
-                        2.8548386096954346,
-                        0.46774193644523621,
+                        0.29499998688697815,
+                        0.048333331942558289,
                         1
                     ],
                     "rotationEuler": [
@@ -387,10 +387,16 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1205,
-                    "lastButtonHeight": 634,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
@@ -400,13 +406,7 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/CharacterTex\/char_paul_albedo.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -426,6 +426,62 @@
                     "textPositionX": -23.799999237060547,
                     "textPositionY": -4.8000001907348633,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 828963847,
+            "Parent UUID": 417171234,
+            "Name": "AudioMainMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/AudioMainMenu.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "UIHOVER"
+                        },
+                        {
+                            "1": "UISELECT"
+                        }
+                    ]
+                },
+                {
+                    "Type": 6,
+                    "Active": true
                 }
             ]
         }

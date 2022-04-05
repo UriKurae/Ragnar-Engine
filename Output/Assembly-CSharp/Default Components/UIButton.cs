@@ -12,13 +12,20 @@ namespace RagnarEngine
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 UIFunctionButton();
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern int GetButtonState();
 
-        
-        public extern char text
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 GetTextPosition();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetTextPosition(float posx,float posy);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetAlpha(float NewAlpha);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern float GetAlpha();
+
+        public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -26,5 +33,6 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
+       
     }
 }

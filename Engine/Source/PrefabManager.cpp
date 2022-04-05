@@ -37,6 +37,10 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 {
 	std::string fileName = gameObject->name.c_str();
 	fileName += ".rgprefab";
+	
+	// option = 1 --> New Prefab
+	// option = 2 --> OverWrite Prefab
+	// option = 3 --> New Prefab Variant
 
 	if (option == 1)
 	{
@@ -45,13 +49,127 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 		prefabFile = prefabFile.SetChild(prefabFile.GetRootValue(), "Prefab");
 		JSON_Array* array = prefabFile.SetNewJsonArray(prefabFile.GetRootValue(), "Game Objects");
 
-		std::string savePath = PREFABS_FOLDER;
+		std::string savePath = PREFABS_ASSETS_FOLDER;
+		savePath += fileName;
+
+		if (app->fs->Exists(savePath.c_str()) != 0)
+		{
+			int count = 0;
+			bool nameDone = false;
+			while (!nameDone)
+			{
+				if (app->fs->Exists(gameObject->prefabPath.c_str()) != 0)
+				{
+					count++;
+					fileName = gameObject->name.substr(0, gameObject->name.find_last_of("(")) + "(" + std::to_string(count) + ")" + ".rgprefab";
+					gameObject->prefabPath = "Assets/Prefabs/" + fileName;
+				}
+				else
+					nameDone = true;
+			}
+
+			savePath = PREFABS_ASSETS_FOLDER;
+			savePath += fileName;
+		}
+
+		gameObject->prefabPath = savePath;
+
+		gameObject->OnSavePrefab(prefabFile, array, option);
+
+		char* buf;
+		uint size = prefabFile.Save(&buf);
+
+		if (app->fs->Save(savePath.c_str(), buf, size) > 0)
+			DEBUG_LOG("Prefab saved succesfully");
+		else
+			DEBUG_LOG("Prefab couldn't be saved");
+
+		RELEASE_ARRAY(buf);
+	}
+	if (option == 2)
+	{
+		JsonParsing prefabFile;
+
+		prefabFile = prefabFile.SetChild(prefabFile.GetRootValue(), "Prefab");
+		JSON_Array* array = prefabFile.SetNewJsonArray(prefabFile.GetRootValue(), "Game Objects");
+
+		gameObject->OnSavePrefab(prefabFile, array, option);
+
+		char* buf;
+		uint size = prefabFile.Save(&buf);
+
+		if (app->fs->Save(gameObject->prefabPath.c_str(), buf, size) > 0)
+			DEBUG_LOG("Prefab saved succesfully");
+		else
+			DEBUG_LOG("Prefab couldn't be saved");
+
+		RELEASE_ARRAY(buf);
+	}
+	if (option == 3)
+	{
+		JsonParsing prefabFile;
+
+		prefabFile = prefabFile.SetChild(prefabFile.GetRootValue(), "Prefab");
+		JSON_Array* array = prefabFile.SetNewJsonArray(prefabFile.GetRootValue(), "Game Objects");
+
+		std::string savePath = PREFABS_ASSETS_FOLDER;
+		savePath += fileName;
+
+		if (app->fs->Exists(savePath.c_str()) != 0)
+		{
+			int count = 0;
+			bool nameDone = false;
+			while (!nameDone)
+			{
+				if (app->fs->Exists(gameObject->prefabPath.c_str()) != 0)
+				{
+					count++;
+					fileName = gameObject->name.substr(0, gameObject->name.find_last_of("(")) + "(" + std::to_string(count) + ")" + ".rgprefab";
+					gameObject->prefabPath = "Assets/Prefabs/" + fileName;
+				}
+				else
+					nameDone = true;
+			}
+
+			savePath = PREFABS_ASSETS_FOLDER;
+			savePath += fileName;
+		}
+
+		gameObject->prefabPath = savePath;
+
+		std::string saveName = fileName;
+		app->fs->GetFilenameWithoutExtension(saveName);
+		gameObject->SetName(saveName.c_str());
+
+		gameObject->OnSavePrefab(prefabFile, array, option);
+
+		char* buf;
+		uint size = prefabFile.Save(&buf);
+
+		if (app->fs->Save(savePath.c_str(), buf, size) > 0)
+			DEBUG_LOG("Prefab saved succesfully");
+		else
+			DEBUG_LOG("Prefab couldn't be saved");
+
+		RELEASE_ARRAY(buf);
+
+		option = 1;
+	}
+
+	/*if (option == 1)
+	{
+		JsonParsing prefabFile;
+
+		prefabFile = prefabFile.SetChild(prefabFile.GetRootValue(), "Prefab");
+		JSON_Array* array = prefabFile.SetNewJsonArray(prefabFile.GetRootValue(), "Game Objects");
+
+		std::string savePath = PREFABS_ASSETS_FOLDER;
 		savePath += fileName;
 
 		if (app->fs->Exists(savePath.c_str()) != 0)
 		{
 			fileName = RenameFile(gameObject, fileName);
-			savePath = PREFABS_FOLDER;
+			savePath = PREFABS_ASSETS_FOLDER;
 			savePath += fileName;
 		}
 
@@ -102,7 +220,7 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 			prefabFile = prefabFile.SetChild(prefabFile.GetRootValue(), "Prefab");
 			JSON_Array* array = prefabFile.SetNewJsonArray(prefabFile.GetRootValue(), "Game Objects");
 
-			std::string savePath = PREFABS_FOLDER;
+			std::string savePath = PREFABS_ASSETS_FOLDER;
 			savePath += fileName;
 			gameObject->prefabPath = savePath;
 
@@ -131,7 +249,7 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 			prefabFile = prefabFile.SetChild(prefabFile.GetRootValue(), "Prefab");
 			JSON_Array* array = prefabFile.SetNewJsonArray(prefabFile.GetRootValue(), "Game Objects");
 
-			std::string savePath = PREFABS_FOLDER;
+			std::string savePath = PREFABS_ASSETS_FOLDER;
 			savePath += fileName;
 			gameObject->prefabPath = savePath;
 
@@ -147,7 +265,7 @@ void PrefabManager::SavePrefab(GameObject* gameObject, int option)
 
 			RELEASE_ARRAY(buf);
 		}
-	}
+	}*/
 
 	if (option != 1)
 		UpdatePrefabs(gameObject);

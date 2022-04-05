@@ -14,7 +14,7 @@ typedef unsigned short GLushort;
 typedef unsigned int GLuint;
 typedef float GLfloat;
 typedef unsigned int uint;
-
+#define CONVERSION_FACTOR 600
 class Shadert
 {
 public:
@@ -94,6 +94,7 @@ public:
     void DeleteUIGameObjects(GameObject* ui);
 	inline std::vector<GameObject*>::const_iterator FindUI(GameObject* child) { return std::find(std::begin(UIGameObjects), std::end(UIGameObjects), child); };
 	void updateText();
+
 	void OrderButtons();
 public:
     std::map<char, Character> characters;

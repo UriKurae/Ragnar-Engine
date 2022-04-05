@@ -18,7 +18,7 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	own->isUI = true;
 	active = true;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
-	
+
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
 		own->CreateComponent(ComponentType::TRANFORM2D);
@@ -27,8 +27,8 @@ ButtonComponent::ButtonComponent(GameObject* own)
 		pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		actual = normalMaterial;
-	}	
-	
+	}
+
 	app->userInterface->UIGameObjects.push_back(own);
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
@@ -36,13 +36,14 @@ ButtonComponent::ButtonComponent(GameObject* own)
 }
 
 ButtonComponent::~ButtonComponent()
-{	
+{
 	RELEASE(planeToDraw);
 }
 
 bool ButtonComponent::Update(float dt)
 {
-	buttonText.SetOnlyPosition(float2(GetParentPosition().x+textPos.x, GetParentPosition().y + textPos.y));
+	RG_PROFILING_FUNCTION("Button Update");
+	buttonText.SetOnlyPosition(float2(GetParentPosition().x + textPos.x, GetParentPosition().y + textPos.y));
 
 	if (!active)
 		state = State::DISABLED;
@@ -50,18 +51,18 @@ bool ButtonComponent::Update(float dt)
 		state = State::NORMAL;
 
 	if (state != State::DISABLED)
-	{		
+	{
 		if (app->userInterface->focusedGameObject == owner)
 		{
 			state = State::FOCUSED;
 			actual = focusedMaterial;
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) 
+			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = State::PRESSED;
 				actual = pressedMaterial;
 			}
 		}
-		else 
+		else
 		{
 			state = State::NORMAL;
 			actual = normalMaterial;
@@ -77,13 +78,13 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 	glEnable(GL_ALPHA_TEST);
 
 	planeToDraw->DrawPlane2D(actual->GetTexture().get());
-	
+
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
 
 void ButtonComponent::OnEditor()
-{	
+{
 	if (ImGui::CollapsingHeader("ButtonComponent"))
 	{
 		static float multiplier = 1;
@@ -112,12 +113,12 @@ void ButtonComponent::OnEditor()
 		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
 
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
-		
-		
-		if(ImGui::InputText("Text", text, IM_ARRAYSIZE(text)))
+
+
+		if (ImGui::InputText("Text", text, IM_ARRAYSIZE(text)))
 			buttonText.setOnlyText(text);
-		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);		
-		
+		ImGui::DragFloat("Font Size", &buttonText.Scale, 0.1, 0, 10);
+
 		ComponentOptions(this);
 		ImGui::Separator();
 	}
@@ -127,8 +128,8 @@ float2 ButtonComponent::GetParentPosition()
 {
 	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
 	float3 position = transform2D->GetPosition();
-	
-	return{ position.x/2 ,position.y/2 };
+
+	return{ position.x / 2 ,position.y / 2 };
 }
 bool ButtonComponent::OnLoad(JsonParsing& node)
 {
@@ -152,7 +153,7 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 			switch (cont)
 			{
 			case 0:
-				normalMaterial=(MaterialComponent*)owner->components[a];
+				normalMaterial = (MaterialComponent*)owner->components[a];
 				break;
 			case 1:
 				focusedMaterial = (MaterialComponent*)owner->components[a];

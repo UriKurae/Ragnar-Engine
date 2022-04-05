@@ -31,6 +31,7 @@
 #include "ResourceManager.h"
 #include "AudioManager.h"
 #include "FileSystem.h"
+#include "DialogueSystem.h"
 
 #include "Lights.h"
 #include "Texture.h"
@@ -103,6 +104,9 @@ bool MainMenuBar::Update(float dt)
 	{
 		if (menus[i]->active) menus[i]->Update(dt);
 	}
+
+	if (DialogueSystem::GetInstance()->createDialogue)
+		DialogueSystem::GetInstance()->OnEditor();
 
 	return true;
 }
@@ -333,6 +337,14 @@ void MainMenuBar::CreateGameObjectMenu()
 
 		ImGui::EndMenu();
 	}
+	// Dialogue
+	if (ImGui::BeginMenu(ICON_FA_FILE " Dialogue"))
+	{
+		if (ImGui::MenuItem("Dialogue"))
+			DialogueSystem::GetInstance()->createDialogue = true;
+
+		ImGui::EndMenu();
+	}
 }
 
 void MainMenuBar::HelpMenu()
@@ -415,7 +427,6 @@ void MainMenuBar::PlayBar()
 	{
 		if (ImGui::Button(ICON_FA_STOP))
 		{
-			AudioManager::Get()->StopAllAudioSources();
 			app->sceneManager->Stop();
 			app->physics->SleepAllBodies();
 		}

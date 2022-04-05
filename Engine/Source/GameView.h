@@ -13,7 +13,7 @@ public:
 
 	void Draw(Framebuffer* framebuffer);
 
-	inline float4 GetBounds() { return bounds; }
+	float4 GetBounds();
 	inline const bool GetState() const { return selected; }	
 
 	inline bool IsFocused() { return isFocused; }

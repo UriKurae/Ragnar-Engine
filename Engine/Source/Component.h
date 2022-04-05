@@ -26,7 +26,7 @@ enum class ComponentType
 	UI_CHECKBOX =		14,
 	UI_SLIDER =			15,
 	UI_TEXT =			16,
-	UI_INPUTBOX =		17,	
+	UI_INPUTBOX =		17,
 	TRANFORM2D =		18,
 	// 19
 	NAVAGENT =			20,

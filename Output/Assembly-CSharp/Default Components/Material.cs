@@ -11,13 +11,8 @@ namespace RagnarEngine
             type = ComponentType.MATERIAL;
         }
 
-        public extern string texture
-        {
-            [MethodImplAttribute(MethodImplOptions.InternalCall)]
-            get;
-            [MethodImplAttribute(MethodImplOptions.InternalCall)]
-            set;
-        }
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetTexturePath(string path);
     }
 
 }

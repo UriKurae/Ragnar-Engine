@@ -13,13 +13,13 @@
 
 #include <math.h>
 
-#define CONVERSION_FACTOR 45
+
 #include "Profiling.h"
 
 ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,*/ GameObject* own)
 {
 	internalPosition = { 0,0,0 };
-	position = { 0,0,36.0f };
+	position = { 0,0,-10.4f };
 	scale.x = 30;
 	scale.y = 15;
 	scale.z = 1;
@@ -62,7 +62,6 @@ bool ComponentTransform2D::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Transform2D Update");
 
-	float zoomRatio = app->sceneManager->GetCurrentScene()->mainCamera->GetZoomRatio();
 	float4 viewport = app->editor->GetGameView()->GetBounds();
 
 	
@@ -72,6 +71,8 @@ bool ComponentTransform2D::Update(float dt)
 		lastViewportBounds.z = app->editor->GetGameView()->GetBounds().z;
 		if(position.x!=0) 
 			position.x += (z - viewport.z)/2;
+		/*if (position.y != 0)
+			position.y -= (w - viewport.w) / 2;*/
 		firstTime = false;
 	}
 
@@ -115,12 +116,12 @@ bool ComponentTransform2D::Update(float dt)
 		lastViewportBounds = viewport;
 	}
 	
-	internalPosition.x = (position.x/ CONVERSION_FACTOR) / zoomRatio;
-	internalPosition.y = (position.y / CONVERSION_FACTOR) / zoomRatio;
+	internalPosition.x = (position.x/ CONVERSION_FACTOR);
+	internalPosition.y = (position.y / CONVERSION_FACTOR);
 	internalPosition.z = position.z;
 
-	scale.x = (buttonWidth/ CONVERSION_FACTOR) / zoomRatio;
-	scale.y = (buttonHeight / CONVERSION_FACTOR) / zoomRatio;
+	scale.x = (buttonWidth/ CONVERSION_FACTOR);
+	scale.y = (buttonHeight / CONVERSION_FACTOR);
 	
 
 	rotationQuat = FromEulerToQuat(rotationEuler);

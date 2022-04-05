@@ -9,6 +9,8 @@
 #include "ModuleEditor.h"
 #include "ResourceManager.h"
 
+#include "AudioManager.h"
+
 #include "TransformComponent.h"
 
 #include "FileSystem.h"
@@ -27,6 +29,8 @@ ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState:
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
+
+	name = "SceneManager";
 }
 
 ModuleSceneManager::~ModuleSceneManager()
@@ -37,7 +41,9 @@ ModuleSceneManager::~ModuleSceneManager()
 bool ModuleSceneManager::Start()
 {
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
+
 	ResourceManager::GetInstance()->ImportAllResources();
+
 	ImportPrimitives();
 
 	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
@@ -52,8 +58,8 @@ bool ModuleSceneManager::Start()
 
 	referenceMap.clear();
 	
-	// DELIVERY!!
-#if 0
+	
+#ifdef DIST
 	Play();
 #endif
 
@@ -73,7 +79,7 @@ bool ModuleSceneManager::PreUpdate(float dt)
 bool ModuleSceneManager::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Scene Manager Update");
-
+	
 	if (changeScene)
 	{
 		currentScene->UnLoad();
@@ -85,6 +91,8 @@ bool ModuleSceneManager::Update(float dt)
 	}
 
 	currentScene->Update(gameTimer.GetDeltaTime());
+
+	AudioManager::Get()->Render();
 	
 	return !exit;
 }
@@ -100,7 +108,7 @@ bool ModuleSceneManager::PostUpdate()
 
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
-	currentScene->PostUpdate();
+	//currentScene->PostUpdate();
 
 	return true;
 }
@@ -255,6 +263,7 @@ void ModuleSceneManager::ChangeScene(const char* sceneName)
 
 void ModuleSceneManager::NextScene()
 {
+	AudioManager::Get()->StopAllAudioSources();
 	if (index == scenes.size() - 1) index = 0;
 	else ++index;
 	changeScene = true;
@@ -266,6 +275,7 @@ void ModuleSceneManager::NextScene(const char* name)
 	{
 		if (scenes[i]->GetName() == name)
 		{
+			AudioManager::Get()->StopAllAudioSources();
 			index = i;
 			changeScene = true;
 			break;
@@ -275,6 +285,7 @@ void ModuleSceneManager::NextScene(const char* name)
 
 void ModuleSceneManager::Play()
 {
+#ifndef DIST
 	DEBUG_LOG("Saving Scene");
 
 	JsonParsing sceneFile;
@@ -292,7 +303,7 @@ void ModuleSceneManager::Play()
 		DEBUG_LOG("Scene couldn't be saved");
 
 	RELEASE_ARRAY(buf);
-
+#endif
 	gameState = GameState::PLAYING;
 	gameTimer.ResetTimer();
 
@@ -308,13 +319,16 @@ void ModuleSceneManager::Play()
 
 void ModuleSceneManager::Stop()
 {
+	AudioManager::Get()->StopAllAudioSources();
 	app->renderer3D->ClearPointLights();
 	app->renderer3D->ClearSpotLights();
 
 	currentScene->UnLoad();
 	currentScene = scenes[lastIndex];
+#ifndef DIST
 	currentScene->LoadScene("Assets/Scenes/scenePlay.ragnar");
 	app->fs->RemoveFile("Assets/Scenes/scenePlay.ragnar");
+#endif
 	currentScene->GetQuadtree().Clear();
 	currentScene->GetQuadtree().Create(AABB(float3(-200, -50, -200), float3(200, 50, 200)));
 	gameState = GameState::NOT_PLAYING;

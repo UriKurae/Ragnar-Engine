@@ -37,8 +37,12 @@ void Log(const char file[], int line, const char* format, ...);
 #define ANIMATIONS_FOLDER "Library/Animations/"
 #define BONES_FOLDER "Library/Bones/"
 #define SCENES_FOLDER "Assets/Scenes/"
-#define PREFABS_FOLDER "Assets/Prefabs/"
+#define PREFABS_ASSETS_FOLDER "Assets/Prefabs/"
+#define PREFABS_FOLDER "Library/Prefabs/"
+#define SCENES_LIBRARY_FOLDER "Library/Scenes/"
 #define PARTICLES_FOLDER "Assets/ParticlesTemplates/"
+#define DIALOGUES_ASSETS_FOLDER "Assets/Dialogues/"
+#define DIALOGUES_FOLDER "Library/Dialogues/"
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\
@@ -85,4 +89,4 @@ static void CMDCompileCS()
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "Dune Commandos"
+#define TITLE "Dune: Fremen's Rising"

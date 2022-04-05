@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 class Texture;
@@ -17,8 +17,6 @@ public:
 	static ResourceManager* GetInstance();
 	static void ReleaseInstance();
 	~ResourceManager();
-
-	void CheckForNewResources();
 
 	uint CreateResource(ResourceType type, std::string assets, std::string& library);
 	void CreateResourceCreated(ResourceType type, uint uid, std::string& assets, std::string& library);
@@ -36,14 +34,6 @@ public:
 	void DeleteResource(std::string& path);
 	void DeleteResource(uint uid);
 
-	void AddTexture(Texture* tex);
-	Texture* IsTextureLoaded(std::string path);
-	void RemoveTexture(Texture* tex);
-
-	void AddMesh(Mesh* mesh);
-	Mesh* IsMeshLoaded(std::string path);
-	void RemoveMesh(Mesh* mesh);
-
 	std::vector<std::shared_ptr<Scene>> GetScenes();
 
 private:
@@ -51,7 +41,5 @@ private:
 
 	static ResourceManager* instance;
 
-	std::map<uint, std::shared_ptr<Resource>> map;
-	std::vector<Texture*> textures;
-	std::vector<Mesh*> meshes;
+	std::unordered_map<uint, std::shared_ptr<Resource>> map;
 };

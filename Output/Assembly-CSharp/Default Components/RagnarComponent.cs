@@ -30,10 +30,10 @@ namespace RagnarEngine
         UI_IMAGE,
         UI_CHECKBOX,
         UI_SLIDER,
-        UI_INPUTBOX,
-        UI_CANVAS,
-        TRANFORM2D,
         UI_TEXT,
+        UI_INPUTBOX,
+        TRANFORM2D,
+        UI_CANVAS,
         NAVAGENT,
         PARTICLE_SYSTEM,
         BILLBOARD,
@@ -60,6 +60,7 @@ namespace RagnarEngine
             { typeof(UIImage), ComponentType.UI_IMAGE},
             { typeof(UICheckbox), ComponentType.UI_CHECKBOX},
             { typeof(UISlider), ComponentType.UI_SLIDER},
+            { typeof(UIText), ComponentType.UI_TEXT},
         };
 
         public RagnarComponent()
