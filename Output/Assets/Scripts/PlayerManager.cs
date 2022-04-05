@@ -139,12 +139,6 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        // Update posición áreas
-        if (area != null)
-        {
-            area[0].transform.localPosition.Set(players[characterSelected].transform.localPosition.x, area[0].transform.localPosition.y, players[characterSelected].transform.localPosition.z);
-        }
-
         // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
         {
