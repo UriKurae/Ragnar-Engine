@@ -427,7 +427,6 @@ void MainMenuBar::PlayBar()
 	{
 		if (ImGui::Button(ICON_FA_STOP))
 		{
-			AudioManager::Get()->StopAllAudioSources();
 			app->sceneManager->Stop();
 			app->physics->SleepAllBodies();
 		}

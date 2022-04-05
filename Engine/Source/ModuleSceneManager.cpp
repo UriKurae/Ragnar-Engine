@@ -9,6 +9,8 @@
 #include "ModuleEditor.h"
 #include "ResourceManager.h"
 
+#include "AudioManager.h"
+
 #include "TransformComponent.h"
 
 #include "FileSystem.h"
@@ -77,7 +79,7 @@ bool ModuleSceneManager::PreUpdate(float dt)
 bool ModuleSceneManager::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Scene Manager Update");
-
+	
 	if (changeScene)
 	{
 		currentScene->UnLoad();
@@ -89,6 +91,8 @@ bool ModuleSceneManager::Update(float dt)
 	}
 
 	currentScene->Update(gameTimer.GetDeltaTime());
+
+	AudioManager::Get()->Render();
 	
 	return !exit;
 }
@@ -104,7 +108,7 @@ bool ModuleSceneManager::PostUpdate()
 
 	if (gameState == GameState::PLAYING) gameTimer.FinishUpdate();
 
-	currentScene->PostUpdate();
+	//currentScene->PostUpdate();
 
 	return true;
 }
@@ -259,6 +263,7 @@ void ModuleSceneManager::ChangeScene(const char* sceneName)
 
 void ModuleSceneManager::NextScene()
 {
+	AudioManager::Get()->StopAllAudioSources();
 	if (index == scenes.size() - 1) index = 0;
 	else ++index;
 	changeScene = true;
@@ -270,6 +275,7 @@ void ModuleSceneManager::NextScene(const char* name)
 	{
 		if (scenes[i]->GetName() == name)
 		{
+			AudioManager::Get()->StopAllAudioSources();
 			index = i;
 			changeScene = true;
 			break;
@@ -313,6 +319,7 @@ void ModuleSceneManager::Play()
 
 void ModuleSceneManager::Stop()
 {
+	AudioManager::Get()->StopAllAudioSources();
 	app->renderer3D->ClearPointLights();
 	app->renderer3D->ClearSpotLights();
 

@@ -19,7 +19,6 @@ public class Player : RagnarComponent
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<AudioSource>().PlayClip("Level1BgMusic");
     }
 
     public void Update()
@@ -32,10 +31,14 @@ public class Player : RagnarComponent
         {
             agent.CalculatePath(agent.hitPosition);
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
         }
 
         if (agent.MovePath())
+        {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+        }
 
         ///////// SOUNDS /////////
         // Movement Sound
@@ -49,7 +52,7 @@ public class Player : RagnarComponent
         // Reload Sound
         if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Reload");
+            gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
         }
 
         // Shoot sound
@@ -65,7 +68,7 @@ public class Player : RagnarComponent
             || Input.GetKey(KeyCode.W) == KeyState.KEY_UP || Input.GetKey(KeyCode.S) == KeyState.KEY_UP)
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            gameObject.GetComponent<AudioSource>().StopCurrentClip();
+            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
 
             if (rb.linearVelocity != Vector3.zero)
                 rb.linearVelocity = new Vector3(0, 0, 0);
@@ -115,8 +118,8 @@ public class Player : RagnarComponent
         }
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
-            InternalCalls.Destroy(gameObject);
             SceneManager.LoadScene("LoseScene");
+            InternalCalls.Destroy(gameObject);
         }
 
         if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
@@ -137,7 +140,7 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "EnemyBullet")
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("PlayerDeath");
+            gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
             gameObject.GetComponent<Animation>().PlayAnimation("Death");
             pendingToDelete = true;
             // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER

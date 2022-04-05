@@ -35,28 +35,10 @@ void ResourceManager::ReleaseInstance()
 
 ResourceManager::ResourceManager()
 {
-	//std::stack<std::string> stack;
-	//app->fs->DiscoverFiles();
 }
 
 ResourceManager::~ResourceManager()
 {
-	/*for (int i = 0; i < textures.size(); ++i)
-	{
-		RELEASE(textures[i]);
-	}
-	textures.clear();
-
-	for (int i = 0; i < meshes.size(); ++i)
-	{
-		RELEASE(meshes[i]);
-	}
-	meshes.clear();*/
-}
-
-void ResourceManager::CheckForNewResources()
-{
-
 }
 
 uint ResourceManager::CreateResource(ResourceType type, std::string assets, std::string& library)
@@ -364,79 +346,6 @@ void ResourceManager::DeleteResource(uint uid)
 	if (map.find(uid) != map.end())
 	{
 		map.erase(uid);
-	}
-}
-
-void ResourceManager::AddTexture(Texture* tex)
-{
-	textures.emplace_back(tex);
-}
-
-Texture* ResourceManager::IsTextureLoaded(std::string path)
-{
-	std::string p = path;
-	if (p.find(".dds") == std::string::npos)
-	{
-		app->fs->GetFilenameWithoutExtension(p);
-		p = TEXTURES_FOLDER + p + ".dds";
-	}
-
-	for (int i = 0; i < textures.size(); ++i)
-	{
-		if (textures[i]->GetPath() == p)
-			return textures[i];
-	}
-	
-	return /*TextureImporter::LoadTexture(p.c_str())*/ nullptr;
-}
-
-void ResourceManager::RemoveTexture(Texture* tex)
-{
-	for (std::vector<Texture*>::const_iterator it = textures.begin(); it != textures.end(); ++it)
-	{
-		if ((*it) == tex)
-		{
-			RELEASE(tex);
-			textures.erase(it);
-			textures.shrink_to_fit();
-			break;
-		}
-	}
-}
-
-void ResourceManager::AddMesh(Mesh* mesh)
-{
-	meshes.emplace_back(mesh);
-}
-
-Mesh* ResourceManager::IsMeshLoaded(std::string path)
-{
-	std::string p = path;
-	if (p.find(".rgmesh") == std::string::npos)
-	{
-		app->fs->GetFilenameWithoutExtension(p);
-		p = MESHES_FOLDER + p + ".dds";
-	}
-
-	for (int i = 0; i < meshes.size(); ++i)
-	{
-		if (meshes[i]->GetPath() == p)
-			return meshes[i];
-	}
-	return /*MeshImporter::LoadMesh(p.c_str())*/ nullptr;
-}
-
-void ResourceManager::RemoveMesh(Mesh* mesh)
-{
-	for (std::vector<Mesh*>::const_iterator it = meshes.begin(); it != meshes.end(); ++it)
-	{
-		if ((*it) == mesh)
-		{
-			RELEASE(mesh);
-			meshes.erase(it);
-			meshes.shrink_to_fit();
-			break;
-		}
 	}
 }
 

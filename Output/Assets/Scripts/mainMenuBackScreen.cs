@@ -6,9 +6,12 @@ public class mainMenuBackScreen : RagnarComponent
 	Vector3 imagePos;
 	bool isFirstS = true;
 	bool isFirstE = true;
+	GameObject AudioController;
 	GameObject start;
 	public void Start()
 	{
+		AudioController = GameObject.Find("AudioMainMenu");
+		AudioController.GetComponent<AudioSource>().PlayClip("MAINMENUBACKGROUNDMUSIC");
 		start = GameObject.Find("Button Start");
 	}
 
@@ -33,20 +36,16 @@ public class mainMenuBackScreen : RagnarComponent
 			case 1:
 				if (!isFirstS)
 				{
-
 					start.GetComponent<UIButton>().SetTextPosition(-23.6f, -4.6f);
 					isFirstS = true;
 				}
-
-
-
 				// normal Mode
 				break;
 			case 2:
 				// focused mode
 				if (isFirstS)
 				{
-
+					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
 					start.GetComponent<UIButton>().SetTextPosition(-13.6f, -4.6f);
 					isFirstS = false;
 					//poner sonido
@@ -54,6 +53,7 @@ public class mainMenuBackScreen : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
+				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
 				start.GetComponent<UIButton>().SetTextPosition(-0.0f, -4.6f);
 				SceneManager.NextScene();
 				//cambiar de escena
@@ -72,7 +72,6 @@ public class mainMenuBackScreen : RagnarComponent
 			case 1:
 				if (!isFirstE)
 				{
-
 					exit.GetComponent<UIButton>().SetTextPosition(-23.6f, -4.8f);
 					isFirstE = true;
 				}
@@ -82,6 +81,7 @@ public class mainMenuBackScreen : RagnarComponent
 				// focused mode
 				if (isFirstE)
 				{
+					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
 					exit.GetComponent<UIButton>().SetTextPosition(-13.6f, -4.8f);
 					isFirstE = false;
 					//poner sonido
@@ -89,6 +89,7 @@ public class mainMenuBackScreen : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
+				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
 				exit.GetComponent<UIButton>().SetTextPosition(-0.0f, -4.8f);
 				SceneManager.Exit();
 				//salir del Juego
