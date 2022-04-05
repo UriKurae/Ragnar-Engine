@@ -96,7 +96,7 @@ void InputActionComponent::OnEditor()
 										{
 											currentMethodList[i][j] = actualMethod;
 
-											MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, methodName);
+											MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, scriptsNameList[i][j].c_str());
 											std::string methodN = ":" + std::string(methodName);
 											MonoMethodDesc* mdesc = mono_method_desc_new(methodN.c_str(), false);
 											monoMethodList[i][j] = mono_method_desc_search_in_class(mdesc, klass);
@@ -168,7 +168,6 @@ bool InputActionComponent::Update(float dt)
 				{
 					if (app->input->GetKey(*bind) == KeyState::KEY_DOWN && monoMethodList[i][j] != nullptr)
 					{
-						DEBUG_LOG("AAAAAAAAAAAAAAAAAAA");
 						MonoObject* exec = nullptr;
 						uint32_t objOwner = dynamic_cast<ScriptComponent*>(owner->GetComponent(ComponentType::SCRIPT))->GetScriptGO();
 						mono_runtime_invoke(monoMethodList[i][j], mono_gchandle_get_target(objOwner), NULL, &exec);
@@ -185,18 +184,31 @@ bool InputActionComponent::OnLoad(JsonParsing& node)
 {
 	LoadInputAsset(node.GetJsonString("Path"));
 
-	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Action Maps");
+	currentAssetName = node.GetJsonString("Path");
 
-	size_t size = node.GetJsonArrayCount(jsonArray);
-	for (int i = 0; i < size; ++i)
+	JSON_Array* actionMapsList = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Action Maps List");
+	JsonParsing mainFile = node.GetJsonArrayValue(actionMapsList, 0);
+	for (size_t i = 0; i < currentActionMaps.size(); i++)
 	{
-		JsonParsing go = node.GetJsonArrayValue(jsonArray, i);
-		std::shared_ptr<ActionMaps> aM(new ActionMaps());
-		aM->OnLoad(go);
-		currentActionMaps.push_back(aM);
+		JSON_Array* iArr = mainFile.GetJsonArray(mainFile.ValueToObject(mainFile.GetRootValue()), std::to_string(i).c_str());
+		JsonParsing aM = mainFile.GetJsonArrayValue(iArr, 0);
+		for (size_t j = 0; j < currentActionMaps[i]->GetActions()->size(); j++)
+		{
+			JSON_Array* jArr = aM.GetJsonArray(aM.ValueToObject(aM.GetRootValue()), std::to_string(j).c_str());
+			JsonParsing a = aM.GetJsonArrayValue(jArr, 0);
+			scriptsNameList[i][j] = a.GetJsonString("Script");
+			currentMethodList[i][j] = a.GetJsonNumber("Method");
+			app->moduleMono->DebugAllMethodsShortName(USER_SCRIPTS_NAMESPACE, a.GetJsonString("Script"), scriptsMethodsList[i][j]);
+
+			std::string methodName = scriptsMethodsList[i][j][currentMethodList[i][j]];
+			MonoClass* klass = mono_class_from_name(app->moduleMono->image, USER_SCRIPTS_NAMESPACE, a.GetJsonString("Script"));
+			std::string methodN = ":" + methodName;
+			MonoMethodDesc* mdesc = mono_method_desc_new(methodN.c_str(), false);
+			monoMethodList[i][j] = mono_method_desc_search_in_class(mdesc, klass);
+			mono_method_desc_free(mdesc);
+		}
 	}
 
-	currentAssetName = node.GetJsonString("Path");
 
 	return true;
 }
@@ -210,16 +222,16 @@ bool InputActionComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Action Maps List");
 	JsonParsing actionMapFile = JsonParsing();
-	for (size_t i = 0; i < currentActionMaps.size(); i++)
+	for (size_t i = 0; i < currentActionMaps.size(); ++i)
 	{
 		JSON_Array* actionMaps = actionMapFile.SetNewJsonArray(actionMapFile.GetRootValue(), std::to_string(i).c_str());
 		JsonParsing actionsFile = JsonParsing();
-		for (size_t j = 0; j < currentActionMaps[i]->GetActions()->size(); j++)
+		for (size_t j = 0; j < currentActionMaps[i]->GetActions()->size(); ++j)
 		{
 			JSON_Array* actions = actionsFile.SetNewJsonArray(actionsFile.GetRootValue(), std::to_string(j).c_str());
 			JsonParsing actionsInfoFile = JsonParsing();
 			actionsInfoFile.SetNewJsonString(actionsInfoFile.ValueToObject(actionsInfoFile.GetRootValue()), "Script", scriptsNameList[i][j].c_str());
-			actionsInfoFile.SetNewJsonString(actionsInfoFile.ValueToObject(actionsInfoFile.GetRootValue()), "Method", scriptsMethodsList[i][j][currentMethodList[i][j]].c_str());
+			actionsInfoFile.SetNewJsonNumber(actionsInfoFile.ValueToObject(actionsInfoFile.GetRootValue()), "Method", currentMethodList[i][j]);
 			actionsFile.SetValueToArray(actions, actionsInfoFile.GetRootValue());
 		}
 		actionMapFile.SetValueToArray(actionMaps, actionsFile.GetRootValue());
