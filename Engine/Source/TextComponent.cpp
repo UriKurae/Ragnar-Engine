@@ -65,6 +65,7 @@ void TextComponent::OnEditor()
 	{
 		static float multiplier = 1;
 		static float fadeDuration = 0.1f;
+		static bool textColorEditable = false;
 
 		Checkbox(this, "Active", active);
 		ImGui::Text("Text Color"); ImGui::SameLine();
