@@ -13,6 +13,7 @@ public:
 	~CameraComponent();
 
 	bool Update(float dt) override;
+	void Zoom();
 	void UpdateRotation();
 	void UpdateMovement();
 
@@ -69,9 +70,12 @@ private:
 	VertexBuffer* vbo;
 
 	//----------------------------------------------
-	float zoomMin = 45.0f;
-	float zoomMax = 20.0f;
-	float zoomSpeed = 1.0f;
+	/*float zoomMin = 45.0f;
+	float zoomMax = 20.0f;*/
+	float zoomSpeed = 0.5f;
+	float zoom = 50.0f;
+	float zoomMin = 10.0f;
+	float zoomMax = 100.0f;
 
 	bool fixingToTarget = false;
 	bool freeMovement = true;

@@ -115,6 +115,9 @@ void MyPlane::DrawPlane2D(Texture* texture)
 
 	ComponentTransform2D* auxTrans = own->GetComponent<ComponentTransform2D>();
 
+	/*float4 size = app->editor->GetGameView()->GetBounds();
+	app->renderer3D->OnResize(size.z, size.w);
+	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);*/
 
 	ButtonComponent* theButton = nullptr;
 	SliderComponent* theSlider = nullptr;
@@ -131,10 +134,34 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		texture->Bind();
 	shader->Use();
 
-	CameraComponent* cam = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
+	Frustum frustum;
+	CameraComponent* camera = app->sceneManager->GetCurrentScene()->camera->GetComponent<CameraComponent>();
 
+	frustum.pos = camera->GetFrustum()->pos;
+
+	frustum.front = camera->GetFrustum()->front; //COGED EL FRONT DE LA CAMARA DE JUEGO
+	frustum.up = camera->GetFrustum()->up; //COGED EL UP DE LA CAMARA DE JUEGO
+	frustum.type = FrustumType::OrthographicFrustum;
+
+	frustum.orthographicHeight = camera->GetCurrentScreenHeight();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.orthographicWidth = camera->GetCurrentScreenWidth();//PONER EL TAMAÑO DEL VIEWPORT DONDE QUERAIS PINTAR
+	frustum.nearPlaneDistance = -1.0f;
+	frustum.farPlaneDistance = 1.0f;
+
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+
+
+	
+	
+	math::float4x4 model = math::float4x4::identity;
 	if (theButton)
 	{
+		
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x* CONVERSION_FACTOR, w->GetScale().y* CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		//theButton->GetAlpha()
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theButton->GetActualColor().r, theButton->GetActualColor().g, theButton->GetActualColor().b, theButton->GetAlpha());
 	}
@@ -153,6 +180,9 @@ void MyPlane::DrawPlane2D(Texture* texture)
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
 						transform = float4x4::FromTRS(r->GetInternalPosition(), r->GetRotationQuat(), float3(r->GetScale().x, r->GetScale().y, 1));
+
+
+
 						break;
 					}
 				}
@@ -167,10 +197,17 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theImage)
 	{
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
 	}
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, cam->matrixProjectionFrustum.Transposed().ptr());
-	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_FALSE, transform.Transposed().ptr());
+	auto p = frustum.ProjectionMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
+	//glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, frustum.projectionMatrix.Transposed().ptr());
+	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "model"), 1, GL_TRUE, (const float*)&model);
 
 	glBindVertexArray(VAO);
 
@@ -378,6 +415,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 {
 	// activate corresponding render state	
 
+
 	shader->Use();
 	updateText();
 	Frustum frustum;
@@ -495,12 +533,12 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
 			// Whats does this do?
-			//DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
 			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
 			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
-			float posYMin = ((viewport.w / 2) + (-(position.y - 15))) - (button->GetButtonHeight() / 2);
-			float posYMax = ((viewport.w / 2) + (-(position.y - 15))) + (button->GetButtonHeight() / 2);
+			float posYMin = ((viewport.w / 2) + (-(position.y))) - (button->GetButtonHeight() / 2);
+			float posYMax = ((viewport.w / 2) + (-(position.y))) + (button->GetButtonHeight() / 2);
 
 			//ImageComponent* image = go->GetComponent<ImageComponent>();
 			if ((fMousePos.x > posXMin && fMousePos.x < posXMax && fMousePos.y > posYMin && fMousePos.y < posYMax))
