@@ -121,6 +121,10 @@ public class Player : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
             gameObject.GetComponent<Animation>().PlayAnimation("Death");
             pendingToDelete = true;
+            if(GameObject.Find("Knife") != null)
+            {
+                InternalCalls.Destroy(GameObject.Find("Knife"));
+            }
         }
     }
 
