@@ -18,7 +18,7 @@ public class pauseMenuButton : RagnarComponent
 	public void Start()
 	{
 		SceneAudio = GameObject.Find("AudioLevel1");
-		//SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
+		SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
 
 		Image = GameObject.Find("Background");
 
