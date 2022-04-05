@@ -6,6 +6,7 @@ public class Knife : RagnarComponent
 	private float force = 1500;
 	private bool canReload = false;
 	private bool pendingToDelete = false;
+	private bool grabOnce = false;
 	
 	public void Start()
     {
@@ -46,7 +47,11 @@ public class Knife : RagnarComponent
 
 		if (distance < 1.0f)
 		{
-			gameObject.GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFERECOVERSAND");
+			if (!grabOnce)
+			{
+				grabOnce = true;
+				gameObject.GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFERECOVERSAND");
+			}
 
 			pendingToDelete = true;
 			canReload = false;

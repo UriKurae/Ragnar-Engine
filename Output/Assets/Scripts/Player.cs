@@ -11,6 +11,7 @@ public class Player : RagnarComponent
     private bool paused = false;
     private bool crouched = false;
     public bool invisible = false;
+    private bool firstTime = false;
 
 
     Rigidbody rb;
@@ -36,6 +37,15 @@ public class Player : RagnarComponent
             {
                 if (agent.CalculatePath(agent.hitPosition).Length > 0)
                     gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+               
+                if (firstTime)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+                }
+                else
+                {
+                    firstTime = true;
+                }
             }
 
             // Crouch
@@ -68,11 +78,12 @@ public class Player : RagnarComponent
             {
                 gameObject.GetComponent<Animation>().PlayAnimation("Walk");
             }
-            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+            //gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
         }
         if (agent.MovePath())
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+
             gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
         }
 
