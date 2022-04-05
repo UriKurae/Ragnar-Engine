@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 156850656,
+                    "pointer": 306942848,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 80527168,
+                    "characters": 199081792,
                     "drawnArea": false
                 }
             ]
@@ -177,9 +177,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        2.86102294921875e-05,
-                        57.959716796875,
-                        -52.690650939941406
+                        2.09808349609375e-05,
+                        57.21978759765625,
+                        -52.017982482910156
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -204,12 +204,12 @@
                     "Vertical Fov": 0.44838371872901917,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -64.75714111328125,
-                        57.959716796875,
-                        140.91873168945313
+                        -64.5672607421875,
+                        57.21978759765625,
+                        140.27340698242188
                     ],
                     "Type": 3,
-                    "Zoom": 16,
+                    "Zoom": 14,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Free Movement": true,
@@ -327,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 238387840,
+                    "pointer": 306942032,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -339,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 238390968,
+                    "pointer": 306942440,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -885,7 +885,7 @@
             "Parent UUID": 417171234,
             "Name": "RootNode",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -923,7 +923,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_01",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -996,7 +996,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_02",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1069,7 +1069,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_03",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1142,7 +1142,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_04",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1215,7 +1215,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_05",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1288,7 +1288,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_06",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1361,7 +1361,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_07",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1434,7 +1434,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_08",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1507,7 +1507,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_09",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1580,7 +1580,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_10",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1653,7 +1653,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_11",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1726,7 +1726,7 @@
             "Parent UUID": 1770629622,
             "Name": "SmallRocks",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1775,7 +1775,7 @@
             "Parent UUID": 1770629622,
             "Name": "RocksObstacle",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1824,7 +1824,7 @@
             "Parent UUID": 1770629622,
             "Name": "LeftSideRocks",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1873,7 +1873,7 @@
             "Parent UUID": 1770629622,
             "Name": "RightSideRocks",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2186,7 +2186,7 @@
                     "Mute": false,
                     "AudioClips": [
                         {
-                            "0": "MUSICPLAY"
+                            "0": "LEVEL1BGMUSIC"
                         },
                         {
                             "1": "UIHOVER"
@@ -2213,7 +2213,6 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
                         -391,
                         -10.399999618530273
                     ],
@@ -2295,7 +2294,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 238389472,
+                    "pointer": 306945840,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2660,7 +2659,7 @@
             "Parent UUID": 950603529,
             "Name": "Collider1 Arc",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2727,7 +2726,7 @@
             "Parent UUID": 950603529,
             "Name": "Collider2 Arc",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2770,6 +2769,140 @@
                     "Kinematic": false,
                     "Trigger": false,
                     "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 892262844,
+            "Parent UUID": 417171234,
+            "Name": "WinCondition",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        43.4840087890625,
+                        2.9792740345001221,
+                        -31.020862579345703
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.24615523219108582,
+                        0,
+                        0.96923041343688965
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0.49741882085800171,
+                        0
+                    ],
+                    "Scale": [
+                        1.000001072883606,
+                        1,
+                        1.000001072883606
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        3.5,
+                        5,
+                        4.3000001907348633
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1651812048,
+            "Parent UUID": 417171234,
+            "Name": "CollisionMap",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -54.331443786621094,
+                        1.7295724153518677,
+                        94.103294372558594
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.21454648673534393,
+                        0,
+                        0.97671377658843994
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        7.9000000953674316,
+                        3.2999999523162842,
+                        3.4000000953674316
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
                     "MovementConstraint": [
