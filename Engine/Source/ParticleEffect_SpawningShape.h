@@ -3,6 +3,7 @@
 #include "TransformComponent.h"
 #include "SpawnShape.h"
 #include "ParticleEffect_SphericalSpawn.h"
+#include "ParticleEffect_ConeSpawn.h"
 #include "Algorithm/Random/LCG.h"
 
 class ParticleEffect_SpawningShape : public ParticleEffect
