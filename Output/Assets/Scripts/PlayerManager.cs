@@ -165,6 +165,7 @@ public class PlayerManager : RagnarComponent
                     InternalCalls.InstancePrefab(playableCharacter.abilities[0].prefabArea);
 					area = GameObject.FindGameObjectsWithTag("AbilityRange");
                     players[characterSelected].AddChild(area[0]);
+                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
                 }
 
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
@@ -194,6 +195,7 @@ public class PlayerManager : RagnarComponent
                     InternalCalls.InstancePrefab(playableCharacter.abilities[1].prefabArea);
                     area = GameObject.FindGameObjectsWithTag("AbilityRange");
                     players[characterSelected].AddChild(area[0]);
+                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
                 }
 
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
