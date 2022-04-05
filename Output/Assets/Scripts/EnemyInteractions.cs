@@ -97,5 +97,14 @@ public class EnemyInteraction : RagnarComponent
         }
     }
 
+    public void OnTrigger(Rigidbody other)
+    {
+        if(other.gameObject.name == "SwordSlash")
+        {
+            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
+            pendingToDelete = true;
+        }
+    }
+
 
 }

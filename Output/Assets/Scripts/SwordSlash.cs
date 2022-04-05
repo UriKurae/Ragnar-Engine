@@ -8,6 +8,8 @@ public class SwordSlash : RagnarComponent
 	public void Start()
 	{
 		timeAlive = 2f;
+		Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+		rb.SetBodyPosition(GameObject.Find("Player_3").transform.globalPosition);
 	}
 	public void Update()
 	{
