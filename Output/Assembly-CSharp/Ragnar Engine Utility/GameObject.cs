@@ -28,8 +28,10 @@ namespace RagnarEngine
             goName = name;
             pointer = ptr;
 
-            trans = new Transform();
-            trans.pointer = transPTR;
+            trans = new Transform
+            {
+                pointer = transPTR
+            };
 
             components = new List<RagnarComponent>();
             components.Add(trans);
@@ -91,6 +93,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern GameObject AddChild(GameObject child);
+		
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern GameObject EraseChild(GameObject child);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern public GameObject Find(string name);

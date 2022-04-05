@@ -13,6 +13,54 @@
             "Components": []
         },
         {
+            "UUID": 2102177724,
+            "Parent UUID": 417171234,
+            "Name": "PlayerManager",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "PlayerManager",
+                    "pointer": 182375960,
+                    "type": 4,
+                    "componentTable": 0,
+                    "players": 0,
+                    "characters": 203734848,
+                    "drawnArea": false
+                }
+            ]
+        },
+        {
             "UUID": 1340834673,
             "Parent UUID": 417171234,
             "Name": "Directional Light",
@@ -128,7 +176,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -144,8 +192,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 73,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -201,7 +249,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -217,8 +265,8 @@
                     ],
                     "buttonWidth": 151.5,
                     "buttonHeight": 66,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -274,7 +322,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -290,8 +338,8 @@
                     ],
                     "buttonWidth": 341,
                     "buttonHeight": 136.5,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -322,7 +370,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -338,8 +386,8 @@
                     ],
                     "buttonWidth": 403.5,
                     "buttonHeight": 103,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -424,8 +472,8 @@
                     ],
                     "buttonWidth": 1142.5,
                     "buttonHeight": 534.11761474609375,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -442,7 +490,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 137284200,
+                    "pointer": 182377456,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -463,7 +511,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -479,8 +527,8 @@
                     ],
                     "buttonWidth": 491.5,
                     "buttonHeight": 167.5,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -511,7 +559,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -527,8 +575,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -584,7 +632,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        3.1632928739203712e+38,
+                        0,
                         0,
                         0
                     ],
@@ -600,8 +648,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -658,7 +706,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        221.5,
+                        90,
                         0
                     ],
                     "Scale": [
@@ -673,8 +721,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 735,
-                    "lastButtonHeight": 465,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 777,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -730,9 +778,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -5.7632999420166016,
+                        19.463306427001953,
                         0,
-                        20.680545806884766
+                        -36.746482849121094
                     ],
                     "Quaternion": [
                         0,
@@ -779,7 +827,7 @@
                         0.92387950420379639
                     ],
                     "RotationEditor": [
-                        0.78539818525314331,
+                        0,
                         0,
                         0
                     ],
@@ -792,12 +840,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.51258111000061035,
-                    "Horizontal Fov": 0.78539818525314331,
+                    "Vertical Fov": 1.0794777870178223,
+                    "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        -5.7632999420166016,
+                        19.463306427001953,
                         45,
-                        -20.319454193115234
+                        -77.746482849121094
                     ],
                     "Type": 3,
                     "Zoom": 0,
@@ -805,14 +853,14 @@
                     "Zoom Max": 30,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -5.7632999420166016,
+                        19.463306427001953,
                         0,
-                        20.680545806884766
+                        -36.746482849121094
                     ],
-                    "Movement Speed": 0.012000000104308128,
+                    "Movement Speed": 0.5,
                     "Rotation Speed": 2,
                     "Radius": 20,
-                    "Horizontal Angle": 0,
+                    "Horizontal Angle": -459.600341796875,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -828,7 +876,7 @@
             "Static": false,
             "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Enemy.rgprefab",
-            "tag": "Untagged",
+            "tag": "Enemies",
             "layer": "Default",
             "Components": [
                 {
@@ -918,7 +966,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 137283248,
+                    "pointer": 182382760,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -929,10 +977,12 @@
                 },
                 {
                     "Type": 4,
-                    "ScriptName": "EnemyInteraction",
-                    "pointer": 137283384,
+                    "ScriptName": "EnemyInteractions",
+                    "pointer": 182383168,
                     "type": 4,
                     "componentTable": 0,
+                    "players": 0,
+                    "index": 0,
                     "canShoot": true,
                     "shootCooldown": 0
                 },
@@ -1118,161 +1168,6 @@
             ]
         },
         {
-            "UUID": 2021177439,
-            "Parent UUID": 417171234,
-            "Name": "Player",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Player.rgprefab",
-            "tag": "Player",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        5.7251930236816406,
-                        0,
-                        -8.1375179290771484
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/CharacterTex\/char_paul_albedo.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Animations\/Dying__Malla.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "Death",
-                    "Animations": [
-                        {
-                            "State": "Walk",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walking__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Idle__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Shoot",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Gunplay__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        },
-                        {
-                            "State": "Crouch",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/IdleCrouch__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Death",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Dying__Armature|Armature|mixamo.com|Layer0.fbx",
-                            "Loop": false
-                        }
-                    ]
-                },
-                {
-                    "Type": 5,
-                    "Volume": 50,
-                    "Pitch": 0,
-                    "Mute": false,
-                    "AudioClips": [
-                        {
-                            "0": "None"
-                        }
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 2,
-                    "Radius": 0.30000001192092896,
-                    "Height": 1.6000000238418579,
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 60,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                },
-                {
-                    "Type": 6,
-                    "Active": true
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Player",
-                    "pointer": 137284744,
-                    "type": 4,
-                    "componentTable": 0,
-                    "velocity": 1000,
-                    "force": 100,
-                    "rockSoundRadius": 4
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Abilities",
-                    "pointer": 137283792,
-                    "type": 4,
-                    "componentTable": 0
-                },
-                {
-                    "Type": 20,
-                    "Active": true,
-                    "Radius": 0.30000001192092896,
-                    "Height": 2,
-                    "StopHeight": 0.89999997615814209,
-                    "MaxSlope": 45,
-                    "Speed": 6,
-                    "AngularSpeed": 180,
-                    "Acceleration": 1,
-                    "StoppingDistance": 0,
-                    "PathType": 1,
-                    "NumPolys": 0,
-                    "NumStraight": 0,
-                    "NumSmooth": 0
-                }
-            ]
-        },
-        {
             "UUID": 382565728,
             "Parent UUID": 417171234,
             "Name": "SandParicle",
@@ -1289,7 +1184,7 @@
                     "Position": [
                         15.653947830200195,
                         0,
-                        -18.625564575195313
+                        -18.625564575195312
                     ],
                     "Quaternion": [
                         0,
@@ -1728,7 +1623,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164063
+                        -46.558364868164062
                     ],
                     "Quaternion": [
                         0,
@@ -1945,7 +1840,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789063,
+                        -11.089859008789062,
                         0,
                         6.886474609375
                     ],
@@ -2020,7 +1915,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414063
+                        27.392837524414062
                     ],
                     "Quaternion": [
                         0,
@@ -2107,9 +2002,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945313,
+                        1.0000076293945312,
                         1,
-                        1.0000076293945313
+                        1.0000076293945312
                     ]
                 },
                 {
@@ -2860,6 +2755,61 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 1011093402,
+            "Parent UUID": 417171234,
+            "Name": "AudioLevel1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/AudioLevel1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "LEVEL1BGMUSIC"
+                        },
+                        {
+                            "1": "UIHOVER"
+                        },
+                        {
+                            "2": "UISELECT"
+                        }
+                    ]
                 }
             ]
         }

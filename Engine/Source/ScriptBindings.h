@@ -168,14 +168,19 @@ MonoString* GetTexturePath(MonoObject* go)
 	return mono_string_new(app->moduleMono->domain, p.c_str());
 }
 
-void SetTexturePath(MonoObject* go, MonoObject* texturePath)
+void SetTexturePath(MonoObject* go, MonoString* texturePath)
 {
+	char* goName = mono_string_to_utf8(mono_object_to_string(go, 0));
 	MaterialComponent* matComp = GetComponentMono<MaterialComponent*>(go);
-	char* path = mono_string_to_utf8(mono_object_to_string(texturePath, 0));
+	char* path = mono_string_to_utf8(texturePath);
 	std::string p = path;
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
 	matComp->SetTexture(newTexture);
+
+	/*res->Load();
+	if (diff.use_count() - 1 == 1) diff->UnLoad();
+	SetTexture(res);*/
 }
 
 
@@ -228,10 +233,24 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	return app->moduleMono->GoToCSGO(go);
 }
 
-void InstancePrefab(MonoObject* path)
+void InstancePrefab(MonoObject* name)
 {
-	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
-	PrefabManager::GetInstance()->LoadPrefab(goPath);
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+
+	std::string	path;
+
+#ifdef DIST
+	path = PREFABS_FOLDER;
+#else
+	path = PREFABS_ASSETS_FOLDER;
+#endif
+
+	path += goName;
+	path += ".rgprefab";
+
+	PrefabManager::GetInstance()->LoadPrefab(path.c_str());
+
+	mono_free(goName);
 }
 
 MonoObject* Destroy(MonoObject* go)
@@ -385,6 +404,16 @@ void AddChild(MonoObject* go, MonoObject* child)
 	GameObject* newChild = app->moduleMono->GameObjectFromCSGO(child);
 
 	parent->AddChild(newChild);
+	newChild->SetParent(parent);
+	parent->GetParent()->RemoveChild(newChild);
+}
+
+void EraseChild(MonoObject* go, MonoObject* child)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	GameObject* newChild = app->moduleMono->GameObjectFromCSGO(child);
+
+	parent->RemoveChild(newChild);
 }
 
 // GameObject =======================

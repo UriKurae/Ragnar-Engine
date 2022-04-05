@@ -70,8 +70,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Transform =================
 
 	// Material Comp =============
-	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
-	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
+	//mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::SetTexturePath", SetTexturePath);
 	// Material Comp =============
 	
 	// Internall Calls =============
@@ -110,6 +110,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
+	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
 	// Utility ===================
 
 	// UI ========================

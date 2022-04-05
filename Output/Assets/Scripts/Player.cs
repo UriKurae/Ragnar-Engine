@@ -9,10 +9,15 @@ public class Player : RagnarComponent
     public float rockSoundRadius = 4f;
     private bool pendingToDelete = false;
     private bool paused = false;
+    private bool crouched = false;
+
 
     Rigidbody rb;
     Material materialComponent;
     NavAgent agent;
+
+    bool controled = false;
+    int state = 0;
 
     public void Start()
     {
@@ -23,17 +28,39 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-        
-        //GameObject child = GameObject.Find("Floor_01");
-        //gameObject.AddChild(child);
-        
-        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+        if (controled)
         {
+            if (state == (int)State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                if (agent.CalculatePath(agent.hitPosition).Length > 0)
+                    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            }
+
+            // Crouch
+            if (!crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            {
+                crouched = true;
+                gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+                rb.SetHeight(0.6f); // 0.6 = 60%
+
+                Vector3 maxPoint = gameObject.GetMaxAABB();
+                maxPoint.y *= 0.6f;
+                gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
+            }
+            if (crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            {
+                crouched = false;
+                gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+                rb.SetHeight(1); // 1 = 100% = Reset
+            }
+        }
+        if(state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2)
+        {
+            agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
             agent.CalculatePath(agent.hitPosition);
             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
             gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
         }
-
         if (agent.MovePath())
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
@@ -41,24 +68,10 @@ public class Player : RagnarComponent
         }
 
         ///////// SOUNDS /////////
-        // Movement Sound
-        /* if (Input.GetKey(KeyCode.W) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN
-             || Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
-         {
-             gameObject.GetComponent<AudioSource>().PlayClip("FootSteps");
-             gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-         }*/
-
         // Reload Sound
         if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
         {
             gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
-        }
-
-        // Shoot sound
-        if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
-        {
-            gameObject.GetComponent<Animation>().PlayAnimation("Shoot");
         }
         //////////////////////////
 
@@ -76,46 +89,7 @@ public class Player : RagnarComponent
             if (rb.totalForce != Vector3.zero)
                 rb.ClearForces();
         }
-        // WASD Movement
-        /*if (Input.GetKey(KeyCode.W) == KeyState.KEY_REPEAT)
-        {
-            Vector3 f = new Vector3(0, 0, velocity);
-            rb.ApplyCentralForce(f);
-        }
-        else if (Input.GetKey(KeyCode.A) == KeyState.KEY_REPEAT)
-        {
-            Vector3 f = new Vector3(velocity, 0, 0);
-            rb.ApplyCentralForce(f);
-        }
-        else if (Input.GetKey(KeyCode.S) == KeyState.KEY_REPEAT)
-        {
-            Vector3 f = new Vector3(0, 0, -velocity);
-            rb.ApplyCentralForce(f);
-        }
-        else if (Input.GetKey(KeyCode.D) == KeyState.KEY_REPEAT)
-        {
-            Vector3 f = new Vector3(-velocity, 0, 0);
-            rb.ApplyCentralForce(f);
-        }*/
-
-        // Crouch
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
-        {
-            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
-            rb.SetHeight(0.6f); // 0.6 = 60%
-        }
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_REPEAT)
-        {
-            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
-            Vector3 maxPoint = gameObject.GetMaxAABB();
-            maxPoint.y *= 0.6f;
-            gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
-        }
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_UP)
-        {
-            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            rb.SetHeight(1); // 1 = 100% = Reset
-        }
+        
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
             SceneManager.LoadScene("LoseScene");
@@ -133,6 +107,10 @@ public class Player : RagnarComponent
 
             // Pause menu
         }
+        if(state == (int)State.POSTCAST)
+        {
+            state = (int)State.NONE;
+        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -143,10 +121,22 @@ public class Player : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
             gameObject.GetComponent<Animation>().PlayAnimation("Death");
             pendingToDelete = true;
-            // AÑADIR AQUÍ EL CAMBIO DE ESCENA A GAME OVER
         }
     }
+
+    public void SetControled(bool var)
+    {
+        controled = var;
+    }
+
+    public void SetState(int var)
+    {
+        state = var;
+    }
 }
+
+
+
 
 
 
