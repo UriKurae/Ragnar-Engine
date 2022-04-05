@@ -207,10 +207,6 @@ bool CameraComponent::Update(float dt)
 
 	Zoom();
 
-	//camera.SetPos(transform->GetPosition());
-	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
-	matrixViewFrustum = camera.ComputeViewMatrix();
-
 	if (target && app->input->GetKey(SDL_SCANCODE_F) == KeyState::KEY_DOWN)
 	{
 		fixingToTarget ^= true;
@@ -248,6 +244,11 @@ bool CameraComponent::Update(float dt)
 	UpdateMovement();
 	UpdateRotation();
 
+
+	//camera.SetPos(transform->GetPosition());
+	matrixProjectionFrustum = camera.ComputeProjectionMatrix();
+	matrixViewFrustum = camera.ComputeViewMatrix();
+
 	return true;
 }
 
@@ -257,14 +258,14 @@ void CameraComponent::Zoom()
 	if (app->input->GetMouseZ() > 0 && zoom < zoomMax)
 	{
 		zoom += zoomSpeed;
-		controllerTrans->SetPosition(controllerTrans->GetPosition() + camera.Front().Normalized() * zoomSpeed);
-		controllerTrans->ForceUpdateTransform();
+		transform->SetPosition(transform->GetPosition() + (controllerTrans->GetPosition() - transform->GetPosition()).Normalized() * zoomSpeed);
+		transform->ForceUpdateTransform();
 	}
 	else if (app->input->GetMouseZ() < 0 && zoom > zoomMin)
 	{
 		zoom -= zoomSpeed;
-		controllerTrans->SetPosition(controllerTrans->GetPosition() - camera.Front().Normalized() * zoomSpeed);
-		controllerTrans->ForceUpdateTransform();
+		transform->SetPosition(transform->GetPosition() - (controllerTrans->GetPosition() - transform->GetPosition()).Normalized() * zoomSpeed);
+		transform->ForceUpdateTransform();
 	}
 }
 
