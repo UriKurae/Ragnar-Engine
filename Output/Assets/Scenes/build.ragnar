@@ -413,7 +413,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 121764992,
+                    "pointer": 25769936,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -482,8 +482,8 @@
                         90
                     ],
                     "Scale": [
-                        30.599998474121094,
-                        2.6413044929504395,
+                        30.600000381469727,
+                        2.6413042545318604,
                         1
                     ],
                     "rotationEuler": [
@@ -548,8 +548,8 @@
                         90
                     ],
                     "Scale": [
-                        30.599998474121094,
-                        2.6413044929504395,
+                        30.600000381469727,
+                        2.6413042545318604,
                         1
                     ],
                     "rotationEuler": [
@@ -614,8 +614,8 @@
                         90
                     ],
                     "Scale": [
-                        30.599998474121094,
-                        2.6413044929504395,
+                        30.600000381469727,
+                        2.6413042545318604,
                         1
                     ],
                     "rotationEuler": [
@@ -718,10 +718,10 @@
                         -16.951992034912109
                     ],
                     "Quaternion": [
-                        0.49097141623497009,
-                        0.062507808208465576,
-                        -0.02072746679186821,
-                        0.86868304014205933
+                        0.48796668648719788,
+                        0.042386751621961594,
+                        -0.074250079691410065,
+                        0.86866497993469238
                     ],
                     "RotationEditor": [
                         0,
@@ -737,7 +737,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.98442250490188599,
+                    "Vertical Fov": 0.87777876853942871,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         2.7341175079345703,
@@ -863,7 +863,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 121766280,
+                    "pointer": 25768832,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -875,7 +875,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteraction",
-                    "pointer": 121764072,
+                    "pointer": 25769568,
                     "type": 4,
                     "componentTable": 0,
                     "canShoot": true,
@@ -6688,20 +6688,20 @@
                 },
                 {
                     "Type": 4,
+                    "ScriptName": "Abilities",
+                    "pointer": 292441616,
+                    "type": 4,
+                    "componentTable": 0
+                },
+                {
+                    "Type": 4,
                     "ScriptName": "Player",
-                    "pointer": 294922632,
+                    "pointer": 292440328,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
                     "force": 100,
                     "rockSoundRadius": 4
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "Abilities",
-                    "pointer": 294922264,
-                    "type": 4,
-                    "componentTable": 0
                 },
                 {
                     "Type": 20,
