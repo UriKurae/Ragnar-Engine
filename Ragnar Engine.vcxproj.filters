@@ -195,9 +195,6 @@
     <ClCompile Include="Engine\Source\TransformComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\TextComponent.cpp">
-      <Filter>Sources\GameObject\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\ScriptComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
@@ -648,6 +645,9 @@
     <ClCompile Include="Dependencies\MathGeoLib\include\Geometry\TriangleMesh.cpp">
       <Filter>Sources\Libraries\MathGeoLib</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Source\Application.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Source\FileSystem.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -771,6 +771,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\ParticleEffect_SpawningShape.h">
       <Filter>Particles\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\TextComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\DialogueSystem.h">
+      <Filter>Sources\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1676,8 +1682,14 @@
     <ClCompile Include="Engine\Source\ParticleEffect_SpawningShape.cpp">
       <Filter>Particles\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\Application.cpp">
-      <Filter>Sources\Tools</Filter>
+    <ClCompile Include="Engine\Source\TextComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\DialogueSystem.cpp">
+      <Filter>Sources\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\TextComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

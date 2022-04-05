@@ -318,7 +318,8 @@ void Scene::Load()
 	RELEASE(root);
 	if (root == nullptr)
 	{
-		LoadScene(assetsPath.c_str());
+		//LoadScene(assetsPath.c_str());
+		LoadScene(libraryPath.c_str(), true);
 	}
 }
 
@@ -353,7 +354,7 @@ GameObject* Scene::GetGoByUuid(double uuid) const
 	return nullptr;
 }
 
-bool Scene::LoadScene(const char* assetsName)
+bool Scene::LoadScene(const char* path, bool fromLibrary)
 {
 	RG_PROFILING_FUNCTION("Loading Scene");
 
@@ -362,17 +363,29 @@ bool Scene::LoadScene(const char* assetsName)
 	RELEASE(root);
 	app->userInterface->UIGameObjects.clear();
 
-	if (std::string(assetsName).find("scenePlay") == -1)
+	if (std::string(path).find("scenePlay") == -1)
 	{
-		assetsPath = assetsName;
-		name = assetsPath;
+		if (fromLibrary)
+		{
+			libraryPath = path;
+			//name = libraryPath;
+		}
+		else
+		{
+			assetsPath = path;
+			name = assetsPath;
+		}
 	}
 	
-	app->fs->GetFilenameWithoutExtension(name);
 
 	JsonParsing sceneFile = JsonParsing();
 
-	if (sceneFile.ParseFile(assetsPath.c_str()) > 0)
+
+	if(!fromLibrary)
+		app->fs->GetFilenameWithoutExtension(name);
+
+	std::string p = fromLibrary ? libraryPath : assetsPath;
+	if (sceneFile.ParseFile(p.c_str()) > 0)
 	{
 		JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Game Objects");
 
@@ -382,6 +395,7 @@ bool Scene::LoadScene(const char* assetsName)
 			JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
 			if (go.GetJsonNumber("Parent UUID") == 0)
 			{
+				name = go.GetJsonString("Name");
 				root = new GameObject();
 				root->OnLoad(go);
 			}
@@ -425,6 +439,7 @@ bool Scene::LoadScene(const char* assetsName)
 		//	}
 		//}
 		app->physics->LoadConstraints();
+		DEBUG_LOG("Scene loaded");
 	}
 	else
 	{

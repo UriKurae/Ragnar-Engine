@@ -42,6 +42,14 @@ namespace RagnarEngine
         public static extern Vector3 GetRegionGame();
     }
 
+    public class RayCast
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool HitToTag(Vector3 initPos, Vector3 endPos, object tag);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius);
+    }
     public class Input
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -63,7 +71,25 @@ namespace RagnarEngine
         public static extern void Log(object logText);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    public class Dialogue
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void LoadDialogueFile(string fileName);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void StartDialogueById(int id);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern string GetDialogueLine();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern string GetDialogueLineAuthor();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void NextLine();
+    }
+
+        [StructLayout(LayoutKind.Sequential)]
     public partial struct mat4x4
     {
         //    |  0   1   2   3

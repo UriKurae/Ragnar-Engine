@@ -1,11 +1,13 @@
 #pragma once
 #include "Application.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
 
 #include "ResourceManager.h"
 #include "PrefabManager.h"
+#include "DialogueSystem.h"
 
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
@@ -225,6 +227,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 
 	return app->moduleMono->GoToCSGO(go);
 }
+
 void InstancePrefab(MonoObject* path)
 {
 	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
@@ -351,22 +354,40 @@ void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 	gameObject->active = value;
 }
+MonoObject* GetSizeAABB(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetAABB().Size());
+}
+MonoObject* GetMinAABB(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetAABB().minPoint);
+}
+MonoObject* GetMaxAABB(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetAABB().maxPoint);
+}
+void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	float3 minPoint = app->moduleMono->UnboxVector(min);
+	float3 maxPoint = app->moduleMono->UnboxVector(max);
+
+	OBB newObb = AABB(minPoint, maxPoint).ToOBB();
+	gameObject->SetAABB(newObb);
+}
+
+void AddChild(MonoObject* go, MonoObject* child)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	GameObject* newChild = app->moduleMono->GameObjectFromCSGO(child);
+
+	parent->AddChild(newChild);
+}
+
 // GameObject =======================
-
-// UI ===============================
-MonoString* GetButtonText(MonoObject* go)
-{
-	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
-	return mono_string_new(app->moduleMono->domain, button->GetText());
-}
-
-void SetButtonText(MonoObject* go, MonoString* text)
-{
-	ButtonComponent* button = GetComponentMono<ButtonComponent*>(go);
-	//button->SetText(mono_string_to_utf8(text));
-}
-// UI ===============================
-
 
 // Particle System ==================
 MonoArray* GetEmitters(MonoObject* go)
@@ -429,7 +450,45 @@ void Exit()
 
 MonoObject* GetRegionGame()
 {
-	float4 vec4(app->editor->GetGameView()->GetBounds());
-	float3 vec3 = { vec4.z / 1.6f, vec4.w / 1.7f, 0 };
+	float4 vec4 = float4::zero;
+#ifdef DIST
+	vec4 = { 0,0,(float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#else
+	vec4 = app->editor->GetGameView()->GetBounds();
+#endif
+	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
+}
+
+// Dialogue System ======================================
+MonoString* GetDialogueLine()
+{
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+}
+
+MonoString* GetDialogueLineAuthor()
+{
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+}
+
+void NextLine()
+{
+	DialogueSystem::GetInstance()->NextLine();
+}
+
+void StartDialogueById(int id)
+{
+	DialogueSystem* sys = DialogueSystem::GetInstance();
+	Dialogue* aux = sys->GetDialogueById(id);
+	sys->SetDialogueAsCurrent(aux);
+	sys->StartDialogue();
+}
+
+void LoadDialogueFile(MonoString* name)
+{
+	char* fileName = mono_string_to_utf8(name);
+	std::string path = DIALOGUES_FOLDER;
+	path += fileName;
+	path += ".rgdialogue";
+	DialogueSystem::GetInstance()->LoadDialogue(path);
 }

@@ -11,6 +11,8 @@
 
 #include "btBulletDynamicsCommon.h"
 
+#include "Profiling.h"
+
 Physics3D::Physics3D(bool start_enabled) : Module(start_enabled)
 {
 	// Collision configuration contains default setup for memory, collision setup. Advanced
@@ -48,6 +50,11 @@ bool Physics3D::Start()
 	world->setGravity(GRAVITY);
 
 	return true;
+}
+
+void Physics3D::DebugDraw()
+{
+	world->debugDrawWorld();
 }
 
 bool Physics3D::PreUpdate(float dt)
@@ -138,8 +145,7 @@ bool Physics3D::PreUpdate(float dt)
 
 bool Physics3D::Update(float dt)
 {
-	if (debug == true)
-		world->debugDrawWorld();
+	RG_PROFILING_FUNCTION("Physics3D Update");
 
 	return true;
 }

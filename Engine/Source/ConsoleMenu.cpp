@@ -14,6 +14,8 @@ ConsoleMenu::~ConsoleMenu()
 
 bool ConsoleMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Console Menu Update");
+
 	bool ret = false;
 
 	ImGui::Begin(ICON_FA_WINDOW_MAXIMIZE" Console", &active);

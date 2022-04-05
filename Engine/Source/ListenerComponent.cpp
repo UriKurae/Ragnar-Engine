@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
+#include "Profiling.h"
+
 ListenerComponent::ListenerComponent(GameObject* own, TransformComponent* trans) : changePosition(true), activeListener(true), transform(trans)
 {
 	owner = own;
@@ -44,6 +46,8 @@ void ListenerComponent::OnEditor()
 
 bool ListenerComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Listener Update");
+
 	if (changePosition)
 	{
 		float3 position = transform->GetPosition();

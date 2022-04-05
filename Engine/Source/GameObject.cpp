@@ -55,6 +55,8 @@ GameObject::~GameObject()
 
 bool GameObject::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Game Object Update");
+
 	for (int i = 0; i < components.size(); ++i)
 		components[i]->Update(dt);
 
@@ -331,7 +333,7 @@ void GameObject::RemoveComponent(Component* component)
 			components.erase(it);
 			RELEASE(component);
 			if (GetComponent<MeshComponent>() == nullptr && GetComponent<ParticleSystemComponent>() == nullptr)
-				app->sceneManager->GetCurrentScene()->GetQuadtree().Remove(this);
+				app->sceneManager->GetCurrentScene()->ResetQuadtree();
 			break;
 		}
 	}
@@ -411,7 +413,7 @@ void GameObject::SetAABB(AABB newAABB, bool needToClean)
 void GameObject::SetAABB(OBB newOBB)
 {
 	globalObb = newOBB;
-	globalAabb.Enclose(newOBB);
+	globalAabb.Enclose(globalObb);
 }
 
 void GameObject::SetNewAABB()

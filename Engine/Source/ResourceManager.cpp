@@ -45,8 +45,8 @@ uint ResourceManager::CreateResource(ResourceType type, std::string assets, std:
 {
 	std::shared_ptr<Resource> resource = nullptr;
 
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
-
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
+	
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		if ((*it).second->GetAssetsPath() == assets)
@@ -64,7 +64,7 @@ uint ResourceManager::CreateResource(ResourceType type, std::string assets, std:
 	case ResourceType::NONE:
 		break;
 	case ResourceType::SCENE:
-		library = SCENES_FOLDER + std::string("scenes_") + std::to_string(uid) + ".ragnar";
+		library = SCENES_LIBRARY_FOLDER + std::string("scenes_") + std::to_string(uid) + ".ragnar";
 		resource = std::make_shared<Scene>(uid, assets, library);
 		break;
 	case ResourceType::TEXTURE:
@@ -126,17 +126,21 @@ void ResourceManager::CreateResourceCreated(ResourceType type, uint uid, std::st
 	case ResourceType::SHADER:
 		resource = std::make_shared<Shader>(uid, assets, library);
 		break;
+	case ResourceType::SCENE:
+		resource = std::make_shared<Scene>(uid, assets, library);
+		break;
 	default:
 		break;
 	}
 
-	if (resource != nullptr && resource) map[uid] = resource;
+	if (resource != nullptr && resource)
+		map[uid] = resource;
 }
 
 std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
 {
 	std::shared_ptr<Resource> res = nullptr;
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 	it = map.find(uid);
 	if (it != map.end())
 	{
@@ -149,7 +153,7 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(uint uid)
 
 std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		std::shared_ptr<Resource> res = (*it).second;
@@ -164,7 +168,7 @@ std::shared_ptr<Resource> ResourceManager::LoadResource(std::string& path)
 
 bool ResourceManager::CheckResource(std::string& path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 	for (it = map.begin(); it != map.end(); ++it)
 	{
 		if ((*it).second->GetAssetsPath() == path)
@@ -197,7 +201,8 @@ void ResourceManager::ImportResourcesFromLibrary()
 
 		for (int i = 0; i < files.size(); ++i)
 		{
-			if (files[i].find(".rg") != std::string::npos || files[i].find(".shader") != std::string::npos)
+			if (files[i].find(".rg") != std::string::npos || files[i].find(".shader") != std::string::npos
+				|| files[i].find(".ragnar") != std::string::npos)
 			{
 				std::string extension = files[i].substr(files[i].find_last_of("."), files[i].length());
 				std::string metaFile = dir + files[i].substr(0, files[i].find_last_of(".")) + ".meta";
@@ -216,7 +221,10 @@ void ResourceManager::ImportResourcesFromLibrary()
 					else if (files[i].find(".rgmesh") != std::string::npos) CreateResourceCreated(ResourceType::MESH, uid, assets, dir + files[i]);
 					else if (files[i].find(".rganim") != std::string::npos) CreateResourceCreated(ResourceType::ANIMATION, uid, assets, dir + files[i]);
 					else if (files[i].find(".rgbone") != std::string::npos) CreateResourceCreated(ResourceType::BONE, uid, assets, dir + files[i]);
-					else if (files[i].find(".shader") != std::string::npos) CreateResourceCreated(ResourceType::SHADER, uid, assets, dir + files[i]);
+					else if (files[i].find(".shader") != std::string::npos)
+						CreateResourceCreated(ResourceType::SHADER, uid, assets, dir + files[i]);
+					else if(files[i].find(".ragnar") != std::string::npos)
+						CreateResourceCreated(ResourceType::SCENE, uid, assets, dir + files[i]);
 
 					RELEASE_ARRAY(buffer);
 				}
@@ -261,7 +269,25 @@ void ResourceManager::ImportAllResources()
 				//ResourceManager::GetInstance()->CreateResource(ResourceType::SHADER, std::string("Assets/Resources/Shaders/default.shader"), std::string());
 				break;
 			case ResourceType::SCENE:
-				CreateResource(ResourceType::SCENE, *it, *it);
+				uint uuid = CreateResource(ResourceType::SCENE, *it, *it);
+				std::shared_ptr<Scene> scene = std::static_pointer_cast<Scene>(GetResource(uuid));
+
+				// We dont really need to encrypt the data, so the file gets copied
+				CopyFileA(scene->GetAssetsPath().c_str(), scene->GetLibraryPath().c_str(), true);
+				
+				JsonParsing metaFile;
+
+				metaFile.SetNewJsonString(metaFile.ValueToObject(metaFile.GetRootValue()), "Assets Path", scene->GetAssetsPath().c_str());
+				metaFile.SetNewJsonNumber(metaFile.ValueToObject(metaFile.GetRootValue()), "Uuid", uuid);
+
+				char* buffer = nullptr;
+				size_t size = metaFile.Save(&buffer);
+				
+				std::string p = scene->GetLibraryPath().substr(0, scene->GetLibraryPath().find("."));
+				p += ".meta";
+				app->fs->Save(p.c_str(), buffer, size);
+
+				RELEASE_ARRAY(buffer);
 				break;
 			}
 		}
@@ -284,7 +310,7 @@ std::shared_ptr<Resource> ResourceManager::GetResource(uint uid)
 
 std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin();
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it = map.begin();
 
 	for (; it != map.end(); ++it)
 	{
@@ -297,7 +323,7 @@ std::shared_ptr<Resource> ResourceManager::GetResource(std::string path)
 
 void ResourceManager::DeleteResource(std::string& path)
 {
-	std::map<uint, std::shared_ptr<Resource>>::iterator it;
+	std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it;
 
 	for (it = map.begin(); it != map.end(); ++it)
 	{
@@ -327,7 +353,7 @@ std::vector<std::shared_ptr<Scene>> ResourceManager::GetScenes()
 {
 	std::vector<std::shared_ptr<Scene>> scenes;
 	
-	for (std::map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
+	for (std::unordered_map<uint, std::shared_ptr<Resource>>::iterator it = map.begin(); it != map.end(); ++it)
 	{
 		if ((*it).second->GetType() == ResourceType::SCENE)
 		{

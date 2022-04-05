@@ -17,6 +17,7 @@
 #include "ResourceManager.h"
 #include "AudioManager.h"
 #include "PrefabManager.h"
+#include "DialogueSystem.h"
 
 #include "Profiling.h"
 
@@ -50,7 +51,9 @@ Application::Application()
 	
 	// Scenes
 	AddModule(sceneManager);
+#ifndef DIST
 	AddModule(editor);
+#endif
 	AddModule(userInterface);
 
 	AddModule(renderer3D);
@@ -73,6 +76,8 @@ Application::~Application()
 	RELEASE(fs);
 	AudioManager::Release();
 	PrefabManager::ReleaseInstance();
+	DialogueSystem::ReleaseInstance();
+	
 
 	listModules.clear();
 }

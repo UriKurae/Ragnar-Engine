@@ -73,18 +73,23 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
 	mono_add_internal_call("RagnarEngine.Material::set_texture", SetTexturePath);
 	// Material Comp =============
-
+	
 	// Internall Calls =============
 	mono_add_internal_call("RagnarEngine.RagnarComponent::get_gameObject", GetGameObjectMonoObject);
+
 	mono_add_internal_call("RagnarEngine.InternalCalls::CreateGameObject", InstantiateGameObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DObject);     
 	mono_add_internal_call("RagnarEngine.InternalCalls::Create3DObject", Instantiate3DGameObject);
 	mono_add_internal_call("RagnarEngine.InternalCalls::InstancePrefab", InstancePrefab);
 	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetRegionGame", GetRegionGame);
+
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+
+	mono_add_internal_call("RagnarEngine.RayCast::HitToTag", HitToTag);
+	mono_add_internal_call("RagnarEngine.RayCast::PerceptionCone", PerceptionCone);
 	// Internal Calls =============
 
 	// Utility ===================
@@ -100,6 +105,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::GetSizeAABB", GetSizeAABB);
+	mono_add_internal_call("RagnarEngine.GameObject::GetMinAABB", GetMinAABB);
+	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
+	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
+	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	// Utility ===================
 
 	// UI ========================
@@ -165,16 +175,15 @@ bool MonoManager::Init(JsonParsing& node)
 	// Scene Manager =============
 
 	// UI =======================
-	mono_add_internal_call("RagnarEngine.UIButton::UIFunctionButton", UIFunctionButton);
-	mono_add_internal_call("RagnarEngine.UICheckbox::UIFunctionCheckbox", UIFunctionCheckbox);
-	mono_add_internal_call("RagnarEngine.UISlider::UIFunctionSlider", UIFunctionSlider);
-	mono_add_internal_call("RagnarEngine.Transform2D::UIFunctionTransform2D", UIFunctionTransform2D);
 	mono_add_internal_call("RagnarEngine.Transform2D::get_position2D", Get2DPosition);
 	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
 
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
-	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetText);
-	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetText);
+	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetButtonText);
+	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetButtonText);
+
+	mono_add_internal_call("RagnarEngine.UIButton::SetTextPosition", SetTextPosition);
+	mono_add_internal_call("RagnarEngine.UIButton::GetTextPosition", GetTextPosition);
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
@@ -183,7 +192,19 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.Transform2D::GetSize", GetSize);
 	mono_add_internal_call("RagnarEngine.Transform2D::SetSize", SetSize);
+
+	mono_add_internal_call("RagnarEngine.UIText::set_text", SetText);
+	mono_add_internal_call("RagnarEngine.UIText::get_text", GetText);
 	// UI =======================
+
+	// Dialogue System =======================
+	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLine", GetDialogueLine);
+	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLineAuthor", GetDialogueLineAuthor);
+	mono_add_internal_call("RagnarEngine.Dialogue::NextLine", NextLine);
+	mono_add_internal_call("RagnarEngine.Dialogue::StartDialogueById", StartDialogueById);
+	mono_add_internal_call("RagnarEngine.Dialogue::LoadDialogueFile", LoadDialogueFile);
+	// Dialogue System =======================
+
 	InitMono();
 
 	return ret;

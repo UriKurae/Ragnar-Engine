@@ -20,6 +20,8 @@ InspectorMenu::~InspectorMenu()
 
 bool InspectorMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Inspector Menu");
+
 	ImGui::Begin(ICON_FA_INFO_CIRCLE" Inspector", &active);
 	if (!app->sceneManager->GetCurrentScene()->GetRoot()->GetChilds().empty())
 	{

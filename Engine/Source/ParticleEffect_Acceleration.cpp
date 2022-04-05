@@ -3,6 +3,8 @@
 
 #include "imgui/imgui.h"
 
+#include "Profiling.h"
+
 ParticleEffect_Acceleration::ParticleEffect_Acceleration() : ParticleEffect(ParticleEffectType::ACCELERATION_OVER_LIFETIME)
 {
 	type = ParticleEffectType::ACCELERATION_OVER_LIFETIME;
@@ -16,6 +18,8 @@ ParticleEffect_Acceleration::~ParticleEffect_Acceleration()
 
 void ParticleEffect_Acceleration::Update(Particle& particle, float dt)
 {
+	RG_PROFILING_FUNCTION("Acceleration Effect");
+
 	particle.acceleration = acceleration;
 	if (hasGravity)
 	{
