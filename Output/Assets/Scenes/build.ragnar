@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 121157696,
+                    "pointer": 138996264,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 176865088,
+                    "characters": 194625344,
                     "drawnArea": false
                 }
             ]
@@ -193,8 +193,8 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 73,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -266,8 +266,8 @@
                     ],
                     "buttonWidth": 151.5,
                     "buttonHeight": 66,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -339,8 +339,8 @@
                     ],
                     "buttonWidth": 341,
                     "buttonHeight": 136.5,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -387,8 +387,8 @@
                     ],
                     "buttonWidth": 403.5,
                     "buttonHeight": 103,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -473,8 +473,8 @@
                     ],
                     "buttonWidth": 1142.5,
                     "buttonHeight": 534.11761474609375,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -491,7 +491,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 121154296,
+                    "pointer": 138998848,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -528,8 +528,8 @@
                     ],
                     "buttonWidth": 491.5,
                     "buttonHeight": 167.5,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -576,8 +576,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -649,8 +649,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -722,8 +722,8 @@
                     ],
                     "buttonWidth": 300,
                     "buttonHeight": 63.5,
-                    "lastButtonWidth": 1230,
-                    "lastButtonHeight": 869,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -841,7 +841,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.56938838958740234,
+                    "Vertical Fov": 0.44838371872901917,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
                         -63.99761962890625,
@@ -967,7 +967,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 121153616,
+                    "pointer": 139000072,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -979,7 +979,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 121153752,
+                    "pointer": 139000208,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -2811,6 +2811,73 @@
                             "2": "UISELECT"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "UUID": 2024904189,
+            "Parent UUID": 417171234,
+            "Name": "WinCondition",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        42.854087829589844,
+                        2.0538372993469238,
+                        -31.078062057495117
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.24428658187389374,
+                        0,
+                        0.9697030782699585
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        6.5,
+                        4,
+                        7.8000001907348633
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         }

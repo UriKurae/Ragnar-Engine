@@ -93,7 +93,6 @@ public class Player : RagnarComponent
         
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
-            SceneManager.LoadScene("LoseScene");
             InternalCalls.Destroy(gameObject);
         }
 
@@ -127,6 +126,12 @@ public class Player : RagnarComponent
                 InternalCalls.Destroy(GameObject.Find("Knife"));
             }
         }
+    }
+
+    public void OnTrigger(Rigidbody other)
+    {
+        if (other.gameObject.name == "WinCondition")
+            SceneManager.LoadScene("WinScene");
     }
 
     public void SetControled(bool var)

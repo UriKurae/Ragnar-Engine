@@ -27,7 +27,6 @@ public class EnemyInteractions : RagnarComponent
         Shoot();
         if (pendingToDelete)
         {
-            SceneManager.LoadScene("WinScene");
             InternalCalls.Destroy(gameObject);
         }
     }

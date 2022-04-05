@@ -109,6 +109,9 @@ public class PlayerManager : RagnarComponent
 
 	public void Update()
     {
+        if(players.Length == 0 )
+            SceneManager.LoadScene("LoseScene");
+
         PlayerCases();
 
         /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
