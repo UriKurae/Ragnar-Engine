@@ -25,23 +25,23 @@ public class PlayerManager : RagnarComponent
         characters[0] = new Characters
         {
             name = "Paul Atreides",
-            prefabPath = "Assets/Prefabs/Player.rgprefab",
+            prefabPath = "Player",
             state = State.NONE,
             abilities = new Abilities[2]
         };
         characters[0].abilities[0] = new Abilities
         {
             name = "Knife Throw",
-            prefabPath = "Assets/Prefabs/Knife.rgprefab",
-            prefabArea = "Assets/Prefabs/Knife Area.rgprefab",
+            prefabPath = "Knife",
+            prefabArea = "Knife Area",
             charges = -1,
             cooldown = 25f
         };
         characters[0].abilities[1] = new Abilities
         {
             name = "Rock Throw",
-            prefabPath = "Assets/Prefabs/Rock.rgprefab",
-            prefabArea = "Assets/Prefabs/Rock Area.rgprefab",
+            prefabPath = "Rock",
+            prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f
         };
@@ -50,23 +50,23 @@ public class PlayerManager : RagnarComponent
         characters[1] = new Characters
         {
             name = "Chani",
-            prefabPath = "Assets/Prefabs/Player_2.rgprefab",
+            prefabPath = "Player_2",
             state = State.NONE,
             abilities = new Abilities[2]
         };
         characters[1].abilities[0] = new Abilities
         {
             name = "Backstab",
-            prefabPath = "Assets/Prefabs/BackStab.rgprefab",
-            prefabArea = "Assets/Prefabs/BackStab Area.rgprefab",
+            prefabPath = "BackStab",
+            prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 0f
         };
         characters[1].abilities[1] = new Abilities
         {
             name = "Camouflage",
-            prefabPath = "Assets/Prefabs/Camouflage.rgprefab",
-            prefabArea = "Assets/Prefabs/Backstab Area.rgprefab",
+            prefabPath = "Camouflage",
+            prefabArea = "Backstab Area",
             charges = -1,
             cooldown = 30f
         };
@@ -75,23 +75,23 @@ public class PlayerManager : RagnarComponent
         characters[2] = new Characters
         {
             name = "Stilgar",
-            prefabPath = "Assets/Prefabs/Player_3.rgprefab",
+            prefabPath = "Player_3",
             state = State.NONE,
             abilities = new Abilities[2]
         };
         characters[2].abilities[0] = new Abilities
         {
             name = "Sword Slash",
-            prefabPath = "Assets/Prefabs/SwordSlash.rgprefab",
-            prefabArea = "Assets/Prefabs/SwordSlash Area.rgprefab",
+            prefabPath = "SwordSlash",
+            prefabArea = "SwordSlash Area",
             charges = -1,
             cooldown = 0f
         };
         characters[2].abilities[1] = new Abilities
         {
             name = "Stunner",
-            prefabPath = "Assets/Prefabs/StunnerShot.rgprefab",
-            prefabArea = "Assets/Prefabs/Stunner Area.rgprefab",
+            prefabPath = "StunnerShot",
+            prefabArea = "Stunner Area",
             charges = 4,
             cooldown = 5f
         };

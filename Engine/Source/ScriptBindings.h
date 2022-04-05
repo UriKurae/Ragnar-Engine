@@ -233,10 +233,24 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	return app->moduleMono->GoToCSGO(go);
 }
 
-void InstancePrefab(MonoObject* path)
+void InstancePrefab(MonoObject* name)
 {
-	char* goPath = mono_string_to_utf8(mono_object_to_string(path, 0));
-	PrefabManager::GetInstance()->LoadPrefab(goPath);
+	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+
+	std::string	path;
+
+#ifdef DIST
+	path = PREFABS_FOLDER;
+#else
+	path = PREFABS_ASSETS_FOLDER;
+#endif
+
+	path += goName;
+	path += ".rgprefab";
+
+	PrefabManager::GetInstance()->LoadPrefab(path.c_str());
+
+	mono_free(goName);
 }
 
 MonoObject* Destroy(MonoObject* go)

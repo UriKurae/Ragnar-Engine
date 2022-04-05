@@ -50,7 +50,7 @@ public class EnemyInteractions : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
-            InternalCalls.InstancePrefab("Assets/Prefabs/EnemyBullet.rgprefab");
+            InternalCalls.InstancePrefab("EnemyBullet");
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
         }
 
