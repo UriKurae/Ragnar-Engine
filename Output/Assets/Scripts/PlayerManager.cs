@@ -163,8 +163,8 @@ public class PlayerManager : RagnarComponent
                 {
                     drawnArea = true;
                     InternalCalls.InstancePrefab(playableCharacter.abilities[0].prefabArea);
-                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    //players[characterSelected].AddChild(area[0]);
+					area = GameObject.FindGameObjectsWithTag("AbilityRange");
+                    players[characterSelected].AddChild(area[0]);
                 }
 
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
@@ -193,7 +193,7 @@ public class PlayerManager : RagnarComponent
                     drawnArea = true;
                     InternalCalls.InstancePrefab(playableCharacter.abilities[1].prefabArea);
                     area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    //players[characterSelected].AddChild(area[0]);
+                    players[characterSelected].AddChild(area[0]);
                 }
 
                 players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
@@ -238,6 +238,7 @@ public class PlayerManager : RagnarComponent
 
             for (int i = 0; i < area.Length; i++)
             {
+				gameObject.EraseChild(area[i]);
                 InternalCalls.Destroy(area[i]);
             }
             area = null;
@@ -250,8 +251,9 @@ public class PlayerManager : RagnarComponent
             players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
 
             for (int i = 0; i < area.Length; i++)
-            {
-                InternalCalls.Destroy(area[i]);
+			{
+				gameObject.EraseChild(area[i]);
+				InternalCalls.Destroy(area[i]);
             }
             area = null;
             drawnArea = false;
