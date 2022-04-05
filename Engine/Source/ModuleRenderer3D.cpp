@@ -274,7 +274,6 @@ bool ModuleRenderer3D::PostUpdate()
 		PushCamera(float4x4::identity, float4x4::identity);
 	}
 
-	/*
 	if (stencil && objSelected && objSelected->GetActive())
 	{
 		glColor3f(0.25f, 0.87f, 0.81f);
@@ -289,7 +288,7 @@ bool ModuleRenderer3D::PostUpdate()
 		glColor3f(1.0f, 1.0f, 1.0f);
 		objSelected->Draw(nullptr);
 	}
-	*/
+	
 	fbo->Unbind();
 
 #endif
