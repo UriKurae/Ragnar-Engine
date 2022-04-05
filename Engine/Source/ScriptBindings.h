@@ -389,7 +389,9 @@ void AddChild(MonoObject* go, MonoObject* child)
 
 	parent->AddChild(newChild);
 	newChild->SetParent(parent);
+	parent->GetParent()->RemoveChild(newChild);
 }
+
 void EraseChild(MonoObject* go, MonoObject* child)
 {
 	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);

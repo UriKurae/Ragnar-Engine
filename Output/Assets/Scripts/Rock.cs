@@ -3,7 +3,7 @@ using RagnarEngine;
 
 public class Rock : RagnarComponent
 {
-	private float force = 800;
+	private float force = 1050;
 	public float soundRadius = 6f;
 	private float cooldown = 0f;
 	private bool pendingToDelete = false;
