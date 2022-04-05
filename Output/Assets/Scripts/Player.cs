@@ -86,6 +86,7 @@ public class Player : RagnarComponent
         
         if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
         {
+            SceneManager.LoadScene("LoseScene");
             InternalCalls.Destroy(gameObject);
         }
 

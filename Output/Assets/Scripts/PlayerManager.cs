@@ -109,10 +109,7 @@ public class PlayerManager : RagnarComponent
     }
 
 	public void Update()
-    {
-        if(players.Length == 0 )
-            SceneManager.LoadScene("LoseScene");
-        
+    {        
         if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
         {
             crouched = !crouched;
