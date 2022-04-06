@@ -71,7 +71,8 @@
                         1,
                         1,
                         1
-                    ]
+                    ],
+                    "Intensity": 0
                 }
             ]
         },
@@ -129,8 +130,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        45,
-                        -41
+                        55,
+                        -50
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -152,15 +153,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.3691918849945068,
+                    "Vertical Fov": 1.0064557790756226,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
-                        45,
-                        -43.258106231689453
+                        55,
+                        -52.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 94,
+                    "Zoom": 79,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
                     "Free Movement": true,
@@ -211,8 +212,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 577,
-                    "lastButtonHeight": 471,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -229,7 +230,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "loseScreen",
-                    "pointer": 317362152,
+                    "pointer": 329966112,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -250,7 +251,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -196,
+                        -556,
                         -100.5,
                         36.099998474121094
                     ],
@@ -266,8 +267,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 577,
-                    "lastButtonHeight": 471,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -323,7 +324,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -198.5,
+                        -558.5,
                         -196,
                         36.099998474121094
                     ],
@@ -339,8 +340,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 577,
-                    "lastButtonHeight": 471,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -396,7 +397,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -208,
+                        -568,
                         -206,
                         36.099998474121094
                     ],
@@ -412,8 +413,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 577,
-                    "lastButtonHeight": 471,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -444,7 +445,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -205,
+                        -565,
                         -109.5,
                         36.099998474121094
                     ],
@@ -460,8 +461,8 @@
                     ],
                     "buttonWidth": 290,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 577,
-                    "lastButtonHeight": 471,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -492,7 +493,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -39,
+                        -399,
                         132.5,
                         36.099998474121094
                     ],
@@ -508,8 +509,8 @@
                     ],
                     "buttonWidth": 376,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 577,
-                    "lastButtonHeight": 471,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -522,6 +523,62 @@
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 355691705,
+            "Parent UUID": 417171234,
+            "Name": "AudioLoseScene",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/AudioLoseScene.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "UIHOVER"
+                        },
+                        {
+                            "1": "UISELECT"
+                        }
+                    ]
+                },
+                {
+                    "Type": 6,
+                    "Active": true
                 }
             ]
         }

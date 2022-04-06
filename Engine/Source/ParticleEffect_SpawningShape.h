@@ -3,6 +3,7 @@
 #include "TransformComponent.h"
 #include "SpawnShape.h"
 #include "ParticleEffect_SphericalSpawn.h"
+#include "ParticleEffect_ConeSpawn.h"
 #include "Algorithm/Random/LCG.h"
 
 class ParticleEffect_SpawningShape : public ParticleEffect
@@ -16,7 +17,6 @@ public:
 
 	SpawnShape* ChangeSpawnShape(SPAWN_SHAPE_TYPE newType);
 
-	//DO NOT USE THIS ONE, USE ChangeSpawnShape() instead
 	SpawnShape* CreateSpawnShape(SPAWN_SHAPE_TYPE newType);
 	void GetShapeTypeString(SPAWN_SHAPE_TYPE newType, std::string& out);
 
@@ -25,12 +25,8 @@ public:
 
 private:
 
-	bool hasInitialSpeed;
-	float particlesVelocity; //velocity in the spawn direction
-	float randomVelocityMultiplier;
-
 	float shapeOffset[3];// (x, y, z)
 
-	TransformComponent* transformComponent; 
+	TransformComponent* transformComponent;
 	SpawnShape* spawnShape;
 };

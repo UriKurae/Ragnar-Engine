@@ -187,6 +187,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->ambient = node.GetJson3Number(node, "Ambient");
 			l->diffuse = node.GetJson3Number(node, "Diffuse");
 			l->specular = node.GetJson3Number(node, "Specular");
+			l->intensity = node.GetJsonNumber("Intensity");
 
 			light = l;
 
@@ -252,6 +253,7 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 			file.SetNewJson3Number(file, "Ambient", l->ambient);
 			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
 			file.SetNewJson3Number(file, "Specular", l->specular);
+			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Intensity", l->intensity);
 
 			break;
 		}

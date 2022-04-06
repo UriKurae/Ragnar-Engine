@@ -12,6 +12,8 @@ public class winScren : RagnarComponent
 	GameObject MenuImage;
 	GameObject NextImage;
 	GameObject ReplayImage;
+	GameObject AudioManager;
+
 	bool isFirstM = true;
 	bool isFirstA = true;
 	bool isFirstR = true;
@@ -25,6 +27,7 @@ public class winScren : RagnarComponent
 		MenuImage = GameObject.Find("Main Menu Image");
 		NextImage = GameObject.Find("Next Level Image");
 		ReplayImage = GameObject.Find("Replay Image");
+		AudioManager = GameObject.Find("AudioWinMenu");
 
 		Pos = new Vector3(0, 0, 0);
 	}
@@ -56,7 +59,6 @@ public class winScren : RagnarComponent
 				// focused mode
 				if (isFirstM)
 				{
-
 					Pos.Set(Menu.GetComponent<Transform2D>().position2D.x + 20, Menu.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Menu.GetComponent<Transform2D>().position2D = Pos;
 
@@ -64,10 +66,12 @@ public class winScren : RagnarComponent
 					MenuImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstM = false;
 					//poner sonido
+					AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
 				}
 				break;
 			case 3:
 				// pressed mode
+				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
 				Menu.GetComponent<UIButton>().SetAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
@@ -78,6 +82,8 @@ public class winScren : RagnarComponent
 	}
 	void nextAction()
 	{
+
+		
 		int a = Next.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -87,11 +93,11 @@ public class winScren : RagnarComponent
 			case 1:
 				if (!isFirstA)
 				{
-					Pos.Set(Next.GetComponent<Transform2D>().position2D.x + 20, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(InternalCalls.GetRegionGame().x / 2-10 + 20, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Next.GetComponent<Transform2D>().position2D = Pos;
 
 
-					Pos.Set(NextImage.GetComponent<Transform2D>().position2D.x + 20, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(InternalCalls.GetRegionGame().x / 2 - 10 + 20, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					NextImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstA = true;
 				}
@@ -105,10 +111,10 @@ public class winScren : RagnarComponent
 				if (isFirstA)
 				{
 
-					Pos.Set(Next.GetComponent<Transform2D>().position2D.x - 20, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(InternalCalls.GetRegionGame().x / 2 - 10 - 20, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Next.GetComponent<Transform2D>().position2D = Pos;
 
-					Pos.Set(NextImage.GetComponent<Transform2D>().position2D.x - 20, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(InternalCalls.GetRegionGame().x / 2 - 10 - 20, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					NextImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstA = false;
 					//poner sonido
@@ -117,7 +123,7 @@ public class winScren : RagnarComponent
 			case 3:
 				// pressed mode
 				Next.GetComponent<UIButton>().SetAlpha(0.75f);
-				SceneManager.NextScene();
+				SceneManager.LoadScene("build");
 				//cambiar de escena
 				break;
 

@@ -301,7 +301,14 @@ AudioManager::AudioManager() : currentListenerPosition(nullptr)
 
 void AudioManager::ReadIDs()
 {
-	std::ifstream file("Assets/Wwise/Wwise_IDs.h");
+	const char* path = "";
+#ifdef DIST
+	path = "Library/Wwise/Wwise_IDs.h";
+#else
+	path = "Assets/Wwise/Wwise_IDs.h";
+#endif
+
+	std::ifstream file(path);
 	
 	std::string line;
 

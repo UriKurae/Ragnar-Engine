@@ -5,6 +5,7 @@ public class EnemyInteractions : RagnarComponent
 {
     // Player tracker
     public GameObject[] players;
+    GameObject SceneAudio;
     private Vector3 offset;
     public int index = 0;
 
@@ -18,7 +19,7 @@ public class EnemyInteractions : RagnarComponent
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
-
+        SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
     }
     public void Update()
@@ -27,7 +28,6 @@ public class EnemyInteractions : RagnarComponent
         Shoot();
         if (pendingToDelete)
         {
-            SceneManager.LoadScene("WinScene");
             InternalCalls.Destroy(gameObject);
         }
     }
@@ -43,6 +43,8 @@ public class EnemyInteractions : RagnarComponent
 
     private void Shoot()
     {
+        if (PlayerDetection(8)) SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
+        else SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
 
         if (PlayerDetection(8) && canShoot)
         {
@@ -72,22 +74,25 @@ public class EnemyInteractions : RagnarComponent
     {
         for (int i = 0; i < players.Length; i++)
         {
-            Vector3 enemyPos = gameObject.transform.globalPosition;
-            Vector3 enemyForward = gameObject.transform.forward;
-            Vector3 playerPos = players[i].transform.globalPosition;
-            Vector3 distance = playerPos - enemyPos;
-            distance.y = 0;
-            if (distance.magnitude < radius)
+            if (!players[i].GetComponent<Player>().invisible)
             {
-                float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
-                Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z);
-                Vector3 endPos = initPos + distance.normalized * radius;
-                endPos.y = initPos.y;
-
-                if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
+                Vector3 enemyPos = gameObject.transform.globalPosition;
+                Vector3 enemyForward = gameObject.transform.forward;
+                Vector3 playerPos = players[i].transform.globalPosition;
+                Vector3 distance = playerPos - enemyPos;
+                distance.y = 0;
+                if (distance.magnitude < radius)
                 {
-                    index = i;
-                    return true;
+                    float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
+                    Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z);
+                    Vector3 endPos = initPos + distance.normalized * radius;
+                    endPos.y = initPos.y;
+
+                    if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
+                    {
+                        index = i;
+                        return true;
+                    }
                 }
             }
         }
@@ -107,7 +112,7 @@ public class EnemyInteractions : RagnarComponent
     {
         if(other.gameObject.name == "SwordSlash")
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("Enemy1Death");
+            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
             pendingToDelete = true;
         }
     }

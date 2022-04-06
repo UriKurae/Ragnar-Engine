@@ -15,11 +15,11 @@ public:
 	ParticleEffect_SphericalSpawn();
 	~ParticleEffect_SphericalSpawn() override;
 
-	void Spawn(Particle& particle, bool hasInitialSpeed, float speed, float4x4& gTrans, float* offset) override;
+	void Spawn(Particle& particle, float4x4& gTrans, float* offset) override;
 	void OnEditor(int emitterIndex) override;
 
 	bool OnLoad(JsonParsing& node) override;
-	bool OnSave(JsonParsing& node, JSON_Array* array)override;
+	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
 private:
 

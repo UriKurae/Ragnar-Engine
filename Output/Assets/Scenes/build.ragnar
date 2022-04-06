@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 84402696,
+                    "pointer": 295032088,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 81575744,
+                    "characters": 198360896,
                     "drawnArea": false
                 }
             ]
@@ -119,647 +119,8 @@
                         0,
                         0,
                         0
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1973886103,
-            "Parent UUID": 417171234,
-            "Name": "UI",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
                     ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 556679081,
-            "Parent UUID": 1973886103,
-            "Name": "SkillKnife",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.25,
-                        0.12166666984558105,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 150,
-                    "buttonHeight": 73,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 0
-                }
-            ]
-        },
-        {
-            "UUID": 1090268186,
-            "Parent UUID": 1973886103,
-            "Name": "SkillNade",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.25249999761581421,
-                        0.10999999940395355,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 151.5,
-                    "buttonHeight": 66,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 0
-                }
-            ]
-        },
-        {
-            "UUID": 1853976858,
-            "Parent UUID": 1973886103,
-            "Name": "Characters",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.56833332777023315,
-                        0.22750000655651093,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 341,
-                    "buttonHeight": 136.5,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/UI_chra.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 892713844,
-            "Parent UUID": 1973886103,
-            "Name": "Abilities",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.67250001430511475,
-                        0.17166666686534882,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 403.5,
-                    "buttonHeight": 103,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/UI_skill.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 946842857,
-            "Parent UUID": 1973886103,
-            "Name": "Pause UI",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1022231576,
-            "Parent UUID": 946842857,
-            "Name": "Background",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        84
-                    ],
-                    "Scale": [
-                        1.9041666984558105,
-                        0.89019602537155151,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 1142.5,
-                    "buttonHeight": 534.11761474609375,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "pauseMenuButton",
-                    "pointer": 84403432,
-                    "type": 4,
-                    "componentTable": 0
-                }
-            ]
-        },
-        {
-            "UUID": 801014828,
-            "Parent UUID": 946842857,
-            "Name": "UI Rectangle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.81916666030883789,
-                        0.27916666865348816,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 491.5,
-                    "buttonHeight": 167.5,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                }
-            ]
-        },
-        {
-            "UUID": 236607230,
-            "Parent UUID": 946842857,
-            "Name": "Button Resume",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.5,
-                        0.10583333671092987,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 300,
-                    "buttonHeight": 63.5,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Resume",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 0
-                }
-            ]
-        },
-        {
-            "UUID": 58210541,
-            "Parent UUID": 946842857,
-            "Name": "Button MainMenu",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.5,
-                        0.10583333671092987,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 300,
-                    "buttonHeight": 63.5,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Main Menu",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 0
-                }
-            ]
-        },
-        {
-            "UUID": 794518623,
-            "Parent UUID": 946842857,
-            "Name": "Button Options",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        81.5,
-                        0
-                    ],
-                    "Scale": [
-                        0.5,
-                        0.10583333671092987,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 300,
-                    "buttonHeight": 63.5,
-                    "lastButtonWidth": 1097,
-                    "lastButtonHeight": 697,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/SelectorFocused.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Options",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 0
+                    "Intensity": 4
                 }
             ]
         },
@@ -778,15 +139,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        19.463306427001953,
+                        -49.884101867675781,
                         0,
-                        -36.746482849121094
+                        76.665283203125
                     ],
                     "Quaternion": [
                         0,
+                        0.98978197574615479,
                         0,
-                        0,
-                        1
+                        0.14258897304534912
                     ],
                     "RotationEditor": [
                         0,
@@ -794,9 +155,9 @@
                         0
                     ],
                     "Scale": [
+                        1.0000262260437012,
                         1,
-                        1,
-                        1
+                        1.0000262260437012
                     ]
                 }
             ]
@@ -818,7 +179,7 @@
                     "Position": [
                         0,
                         55,
-                        -55
+                        -50
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -827,9 +188,9 @@
                         0.92387950420379639
                     ],
                     "RotationEditor": [
+                        0.78539824485778809,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1.4142135381698608,
@@ -839,23 +200,23 @@
                 },
                 {
                     "Near Plane": 1,
-                    "Far Plane": 100,
-                    "Vertical Fov": 0.51468604803085327,
+                    "Far Plane": 130,
+                    "Vertical Fov": 0.44838371872901917,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        19.463306427001953,
-                        45,
-                        -77.746482849121094
+                        -63.997673034667969,
+                        55,
+                        124.63337707519531
                     ],
                     "Type": 3,
-                    "Zoom": 0,
+                    "Zoom": 30,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        19.463306427001953,
+                        -49.884101867675781,
                         0,
-                        -36.746482849121094
+                        76.665283203125
                     ],
                     "Movement Speed": 0.012000000104308128,
                     "Rotation Speed": 2,
@@ -966,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 84403616,
+                    "pointer": 295032632,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -978,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 84403800,
+                    "pointer": 295033448,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -1168,339 +529,11 @@
             ]
         },
         {
-            "UUID": 382565728,
-            "Parent UUID": 417171234,
-            "Name": "SandParicle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        15.653947830200195,
-                        0,
-                        -18.625564575195313
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        3.1699998378753662,
-                        3.1699998378753662,
-                        3.1699998378753662
-                    ]
-                },
-                {
-                    "Type": 21,
-                    "Active": true,
-                    "Size": [
-                        10,
-                        10,
-                        10
-                    ],
-                    "Offset": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Emitters": [
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.86000001430511475,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.05000000074505806,
-                                0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0.0099999997764825821,
-                                0,
-                                0.0099999997764825821
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 3
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.75,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.0099999997764825821,
-                                -0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 3
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 382565728,
-            "Parent UUID": 417171234,
-            "Name": "SandParicle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/SandParicle.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -18.732231140136719,
-                        0,
-                        9.7206764221191406
-                    ],
-                    "Quaternion": [
-                        0,
-                        -0.32315078377723694,
-                        0,
-                        0.94634759426116943
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        3.1700024604797363,
-                        3.1700000762939453,
-                        3.1700024604797363
-                    ]
-                },
-                {
-                    "Type": 21,
-                    "Active": true,
-                    "Size": [
-                        10,
-                        10,
-                        10
-                    ],
-                    "Offset": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Emitters": [
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.86000001430511475,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.05000000074505806,
-                                0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0.0099999997764825821,
-                                0,
-                                0.0099999997764825821
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 3
-                                }
-                            ]
-                        },
-                        {
-                            "Emitter: Max Particles": 2000,
-                            "Emitter: Particles Per Second": 2000,
-                            "Emitter: Is Active": true,
-                            "Emitter: To Delete": false,
-                            "Emitter: Timer": 0.00050000002374872565,
-                            "Emitter: Current Timer": 0.00050000002374872565,
-                            "Emitter: Is Cubical": true,
-                            "Cubical: Spread on X": 10,
-                            "Cubical: Spread on Y": 0.75,
-                            "Cubical: Spread on Z": 10,
-                            "Particle Reference Position": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Velocity": [
-                                0.0099999997764825821,
-                                -0.0099999997764825821,
-                                0.10000000149011612
-                            ],
-                            "Particle Reference Acceleration": [
-                                0,
-                                0,
-                                0
-                            ],
-                            "Particle Reference Color Begin": [
-                                1,
-                                0,
-                                0,
-                                1
-                            ],
-                            "Particle Reference Size Begin": 0.5,
-                            "Particle Reference Lifetime": 3,
-                            "Particle Reference Rotation Amount": 0,
-                            "Texture Assets Path": "Assets\/Resources\/white.png",
-                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
-                            "Effects": [
-                                {
-                                    "PEA: Has Gravity": true,
-                                    "PEA: Gravity": 0,
-                                    "PEA: Acceleration": [
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "Effect Type": 2
-                                },
-                                {
-                                    "PES: Start size": 0,
-                                    "PES: End size": 0,
-                                    "Effect Type": 3
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "UUID": 1770629622,
             "Parent UUID": 417171234,
             "Name": "RootNode",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1538,7 +571,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_01",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1611,7 +644,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_02",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1623,7 +656,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164063
+                        -46.558364868164062
                     ],
                     "Quaternion": [
                         0,
@@ -1684,7 +717,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_03",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1757,7 +790,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_04",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1830,7 +863,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_05",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1840,7 +873,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789063,
+                        -11.089859008789062,
                         0,
                         6.886474609375
                     ],
@@ -1903,7 +936,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_06",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -1915,7 +948,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414063
+                        27.392837524414062
                     ],
                     "Quaternion": [
                         0,
@@ -1976,7 +1009,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_07",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2002,9 +1035,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945313,
+                        1.0000076293945312,
                         1,
-                        1.0000076293945313
+                        1.0000076293945312
                     ]
                 },
                 {
@@ -2049,7 +1082,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_08",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2122,7 +1155,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_09",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2195,7 +1228,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_10",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2268,7 +1301,7 @@
             "Parent UUID": 1770629622,
             "Name": "Collider_11",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2341,7 +1374,7 @@
             "Parent UUID": 1770629622,
             "Name": "SmallRocks",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2390,7 +1423,7 @@
             "Parent UUID": 1770629622,
             "Name": "RocksObstacle",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2439,7 +1472,7 @@
             "Parent UUID": 1770629622,
             "Name": "LeftSideRocks",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2488,7 +1521,7 @@
             "Parent UUID": 1770629622,
             "Name": "RightSideRocks",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -2810,6 +1843,1294 @@
                             "2": "UISELECT"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "UUID": 196072436,
+            "Parent UUID": 417171234,
+            "Name": "Background",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "pauseMenuButton",
+                    "pointer": 322907992,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 196579740,
+            "Parent UUID": 417171234,
+            "Name": "Button Options",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.35833331942558289,
+                        0.041666667908430099,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 215,
+                    "buttonHeight": 25,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Options",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1790159456,
+            "Parent UUID": 417171234,
+            "Name": "Button MainMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.35833331942558289,
+                        0.041666667908430099,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 215,
+                    "buttonHeight": 25,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Main Menu",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1574116800,
+            "Parent UUID": 417171234,
+            "Name": "AbilImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        -365.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.83416664600372314,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 500.5,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/UI_skill.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1991803838,
+            "Parent UUID": 417171234,
+            "Name": "Button Resume",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.35833331942558289,
+                        0.041666667908430099,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 215,
+                    "buttonHeight": 25,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Resume",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 950603529,
+            "Parent UUID": 417171234,
+            "Name": "RootNode",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8.3320608139038086,
+                        0,
+                        22.889980316162109
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.16515888273715973,
+                        0,
+                        0.98626697063446045
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1.0000001192092896,
+                        1,
+                        1.0000001192092896
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1060604709,
+            "Parent UUID": 950603529,
+            "Name": "RockArc_low",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        -292.29998779296875,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/BlockOut\/Props\/prop_rock_arc__RockArc_low.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/BlockOut\/prop_rock_arc_basecolor.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                }
+            ]
+        },
+        {
+            "UUID": 2037765178,
+            "Parent UUID": 950603529,
+            "Name": "Collider1 Arc",
+            "Active": true,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        12.867339134216309,
+                        3.7222509384155273,
+                        7.435638427734375
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13646896183490753,
+                        0,
+                        0.99064439535140991
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.2737923264503479,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999958276748657,
+                        1,
+                        0.99999958276748657
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        5.3000001907348633,
+                        7.5999999046325684,
+                        7.0999999046325684
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 830805505,
+            "Parent UUID": 950603529,
+            "Name": "Collider2 Arc",
+            "Active": true,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7.8244142532348633,
+                        2.1000230312347412,
+                        5.6901741027832031
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.13646896183490753,
+                        0,
+                        0.99064439535140991
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.60562926530838013,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999958276748657,
+                        1,
+                        0.99999958276748657
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        5.1999998092651367,
+                        4.0999999046325684,
+                        7.5999999046325684
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 892262844,
+            "Parent UUID": 417171234,
+            "Name": "WinCondition",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        43.4840087890625,
+                        2.9792740345001221,
+                        -31.020862579345703
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.24615523219108582,
+                        0,
+                        0.96923041343688965
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0.49741882085800171,
+                        0
+                    ],
+                    "Scale": [
+                        1.000001072883606,
+                        1,
+                        1.000001072883606
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        3.5,
+                        5,
+                        4.3000001907348633
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1651812048,
+            "Parent UUID": 417171234,
+            "Name": "CollisionMap",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -54.331443786621094,
+                        1.7295724153518677,
+                        94.103294372558594
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.21454648673534393,
+                        0,
+                        0.97671377658843994
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        7.9000000953674316,
+                        3.2999999523162842,
+                        3.4000000953674316
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1672721249,
+            "Parent UUID": 417171234,
+            "Name": "SandParticle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/SandParticle.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -12.63680362701416,
+                        4.028472900390625,
+                        -4.6380863189697266
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.17417608201503754,
+                        0,
+                        0.98471450805664062
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        3.9249019622802734,
+                        3.9249002933502197,
+                        3.9249019622802734
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        100,
+                        10,
+                        100
+                    ],
+                    "Offset": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "MaxDuration": 0,
+                    "Looping": true,
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 15,
+                            "Cubical: Spread on Y": 0.86000001430511475,
+                            "Cubical: Spread on Z": 15,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.05000000074505806,
+                                0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0.0099999997764825821,
+                                0,
+                                0.0099999997764825821
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 5,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 0.10000000149011612,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0.7666667103767395,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0.69999998807907104,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 2000,
+                            "Emitter: Particles Per Second": 2000,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.00050000002374872565,
+                            "Emitter: Current Timer": 0.00050000002374872565,
+                            "Emitter: Is Cubical": true,
+                            "Cubical: Spread on X": 15,
+                            "Cubical: Spread on Y": 0.75,
+                            "Cubical: Spread on Z": 15,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0.0099999997764825821,
+                                -0.0099999997764825821,
+                                0.10000000149011612
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 3,
+                            "Particle Reference Rotation Amount": 0,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PES: Start size": 0.10000000149011612,
+                                    "PES: End size": 0.10000000149011612,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0.66666662693023682,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0.7333332896232605,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 753440923,
+            "Parent UUID": 417171234,
+            "Name": "Char",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        3.1632928739203712e+38,
+                        -343.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.44999998807907104,
+                        0.22416666150093079,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 270,
+                    "buttonHeight": 134.5,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/UI_chra.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1727813979,
+            "Parent UUID": 417171234,
+            "Name": "ab1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        -334.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 411597186,
+            "Parent UUID": 417171234,
+            "Name": "ab2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        3.1632928739203712e+38,
+                        -334.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1159540693,
+            "Parent UUID": 417171234,
+            "Name": "DialogueBox",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/DialogueBox.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 437528934,
+            "Parent UUID": 1159540693,
+            "Name": "DialogueBox",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        276.5,
+                        -10
+                    ],
+                    "Scale": [
+                        1.5266666412353516,
+                        0.37250000238418579,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 916,
+                    "buttonHeight": 223.5,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 901188704,
+            "Parent UUID": 1159540693,
+            "Name": "DialogueText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        157.5,
+                        1
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueManager",
+                    "pointer": 322906768,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 301589498,
+            "Parent UUID": 1159540693,
+            "Name": "DialoguePaul",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        276.5,
+                        0
+                    ],
+                    "Scale": [
+                        1.5116666555404663,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 907,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 107698142,
+            "Parent UUID": 1159540693,
+            "Name": "DialogueChani",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 18,
+                    "Position": [
+                        0,
+                        276.5,
+                        0
+                    ],
+                    "Scale": [
+                        1.5116666555404663,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 907,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1297,
+                    "lastButtonHeight": 714,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
                 }
             ]
         }

@@ -27,6 +27,10 @@ ContentBrowserMenu::~ContentBrowserMenu()
 	RELEASE(sceneIcon);
 	RELEASE(prefabIcon);
 	RELEASE(scriptIcon);
+
+	currentDirectory.clear();
+	mainDirectory.clear();
+	currentFile.clear();
 }
 
 bool ContentBrowserMenu::Start()

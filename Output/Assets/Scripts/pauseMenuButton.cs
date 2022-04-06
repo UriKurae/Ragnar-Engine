@@ -5,52 +5,49 @@ public class pauseMenuButton : RagnarComponent
 {
 	Vector3 pos;
 	bool isSowing = false;
-	bool firstTime = true;
 	bool isFirstS = true;
+	bool isFirstE = true;
 	GameObject Image;
 	GameObject Resume;
 	GameObject MainM;
 	GameObject Opt;
-	GameObject Rect;
+	//GameObject Rect;
 	GameObject SceneAudio;
 
 	float currVolume = 0.0f;
 	public void Start()
-    {
+	{
 		SceneAudio = GameObject.Find("AudioLevel1");
 		SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
+
+		Image = GameObject.Find("Background");
+
+		//Rect = GameObject.Find("UI Rectangle");
+		Resume = GameObject.Find("Button Resume");
+		MainM = GameObject.Find("Button MainMenu");
+		Opt = GameObject.Find("Button Options");
+
+		pos = new Vector3(0.0f, 0.0f, 0.0f);
+
+		ImageHide();
+		RectangleHide();
+		ResumeButtonHide();
+		MainMenuButtonHide();
+		OptionsButtonHide();
 	}
-	
+
 	public void Update()
 	{
-		if (firstTime)
+
+		if (isSowing)
 		{
-			Image = GameObject.Find("Background");
-			Rect = GameObject.Find("UI Rectangle");
-			Resume = GameObject.Find("Button Resume");
-			MainM = GameObject.Find("Button MainMenu");
-			Opt = GameObject.Find("Button Options");
-
-			pos = new Vector3(0.0f, 0.0f, 0.0f);
-
-			ImageHide();
-			RectangleHide();
-			ResumeButtonHide();
-			MainMenuButtonHide();
-			OptionsButtonHide();
-
-			firstTime = false;
-		}
-
-		if(isSowing)
-        {
 			ImageShow();
 			RectangleShow();
 			ResumeButtonShow();
 			MainMenuButtonShow();
 			OptionsButtonShow();
-			if(isSowing == false)
-            {
+			if (isSowing == false)
+			{
 				ImageHide();
 				RectangleHide();
 				ResumeButtonHide();
@@ -74,7 +71,7 @@ public class pauseMenuButton : RagnarComponent
 			}
 			else
 			{
-				
+
 				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				ImageHide();
@@ -83,27 +80,27 @@ public class pauseMenuButton : RagnarComponent
 				MainMenuButtonHide();
 				OptionsButtonHide();
 				isSowing = true;
-				
+
 			}
 		}
 	}
 
 	void ImageShow()
-    {
-		pos.Set(0.0f, 0.0f, 84.0f);
+	{
+		pos.Set(0.0f, 0.0f, 30.0f);
 		Image.GetComponent<Transform2D>().position2D = pos;
 		Image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 	}
 
 	void ImageHide()
-    {
-		pos.Set(0.0f, 1000.0f, 84.0f);
+	{
+		pos.Set(0.0f, 2000.0f, 30.0f);
 		Image.GetComponent<Transform2D>().position2D = pos;
 	}
 
 	void ResumeButtonShow()
 	{
-		pos.Set(-363.0f, 30.0f, 90.0f);
+		pos.Set(-850.0f, 0.0f, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
 
 		int a = Resume.GetComponent<UIButton>().GetButtonState();
@@ -137,13 +134,13 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void ResumeButtonHide()
 	{
-		pos.Set(0.0f, 1000.0f, 90.0f);
+		pos.Set(0.0f, 2000.0f, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
 	}
 
 	void MainMenuButtonShow()
 	{
-		pos.Set(-363.0f, -28.0f, 90.0f);
+		pos.Set(-850.0f, 0.0f, 36.1f);
 		MainM.GetComponent<Transform2D>().position2D = pos;
 
 		int a = MainM.GetComponent<UIButton>().GetButtonState();
@@ -153,15 +150,15 @@ public class pauseMenuButton : RagnarComponent
 				// disabled Mode
 				break;
 			case 1:
-				isFirstS = true;
+				isFirstE = true;
 				// normal Mode
 				break;
 			case 2:
 				// focused mode
-				if (isFirstS)
+				if (isFirstE)
 				{
 					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					isFirstS = false;
+					isFirstE = false;
 
 					//poner sonido
 				}
@@ -177,32 +174,32 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void MainMenuButtonHide()
 	{
-		pos.Set(0.0f, 1000.0f, 90.0f);
+		pos.Set(0.0f, 2000.0f, 36.1f);
 		MainM.GetComponent<Transform2D>().position2D = pos;
 	}
 
 
 	void OptionsButtonShow()
 	{
-		pos.Set(-356.5f, -0.0f, 90.0f);
-		Opt.GetComponent<Transform2D>().position2D = pos;
+		//pos.Set(-650.5f, 0.0f, 36.1f);
+		//Opt.GetComponent<Transform2D>().position2D = pos;
 
 		// Options button logic
 	}
 	void OptionsButtonHide()
 	{
-		pos.Set(0.0f, 1000.0f, 90.0f);
+		pos.Set(0.0f, 2000.0f, 36.1f);
 		Opt.GetComponent<Transform2D>().position2D = pos;
 	}
 	void RectangleShow()
 	{
-		pos.Set(-326.0f, 7.5f, 88.2f);
-		Rect.GetComponent<Transform2D>().position2D = pos;
+		//pos.Set(-326.0f, 7.5f, 36.1f);
+		//Rect.GetComponent<Transform2D>().position2D = pos;
 	}
 	void RectangleHide()
 	{
-		pos.Set(0.0f, 1000.0f, 88.2f);
-		Rect.GetComponent<Transform2D>().position2D = pos;
+		//pos.Set(0.0f, 2000.0f, 36.1f);
+		//Rect.GetComponent<Transform2D>().position2D = pos;
 	}
 }
 

@@ -71,7 +71,8 @@
                         1,
                         1,
                         1
-                    ]
+                    ],
+                    "Intensity": 0
                 }
             ]
         },
@@ -129,8 +130,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        45,
-                        -41
+                        77.1982421875,
+                        -70.180191040039063
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -152,15 +153,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0794777870178223,
+                    "Vertical Fov": 0.91950476169586182,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
-                        45,
-                        -43.258106231689453
+                        77.1982421875,
+                        -72.43829345703125
                     ],
                     "Type": 3,
-                    "Zoom": 52,
+                    "Zoom": 22,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
                     "Free Movement": true,
@@ -211,14 +212,14 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1852,
+                    "lastButtonHeight": 917,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/mainMenuScreen.png",
+                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -229,7 +230,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 8459440,
+                    "pointer": 341195368,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -250,7 +251,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -450.5,
+                        -728,
                         0,
                         36
                     ],
@@ -266,8 +267,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 203.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1852,
+                    "lastButtonHeight": 917,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -298,7 +299,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -547,
+                        -824.5,
                         25,
                         36.099998474121094
                     ],
@@ -314,8 +315,8 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1852,
+                    "lastButtonHeight": 917,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -371,7 +372,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -544,
+                        -821.5,
                         -31,
                         36.099998474121094
                     ],
@@ -387,8 +388,8 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 777,
+                    "lastButtonWidth": 1852,
+                    "lastButtonHeight": 917,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -435,7 +436,7 @@
             "Name": "AudioMainMenu",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/AudioMainMenu.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -476,6 +477,9 @@
                         },
                         {
                             "1": "UISELECT"
+                        },
+                        {
+                            "2": "MUSICPLAY"
                         }
                     ]
                 },

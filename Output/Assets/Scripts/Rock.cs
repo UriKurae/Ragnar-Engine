@@ -7,6 +7,7 @@ public class Rock : RagnarComponent
 	public float soundRadius = 6f;
 	private float cooldown = 0f;
 	private bool pendingToDelete = false;
+	private bool hitOnce = false;
 	Rigidbody goRB;
 
 	public void Start()
@@ -48,6 +49,12 @@ public class Rock : RagnarComponent
 
 	public void OnCollisionEnter(Rigidbody other)
 	{
+		if (other.gameObject.name == "Ground" && !hitOnce)
+        {
+			gameObject.GetComponent<AudioSource>().PlayClip("WEAPONROCKHITGROUND");
+			hitOnce = true;
+        }
+
 		goRB.SetAsStatic();
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
 		CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);

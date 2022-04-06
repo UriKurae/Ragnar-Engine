@@ -104,7 +104,7 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 	//Close triangle
 	vertex.push_back(pointA);
 
-	app->renderer3D->enemyCones.resize(vertex.size());
-	memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
+	//app->renderer3D->enemyCones.resize(vertex.size());
+	//memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
 
 }
