@@ -3,16 +3,22 @@
 
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
 
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
 #include "AnimationComponent.h"
+#include "CameraComponent.h"
+#include "GameView.h"
 
 #include "FileSystem.h"
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Lights.h"
+#include "Framebuffer.h"
 
 #include "GL/glew.h"
 #include <fstream>
@@ -389,10 +395,16 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (!this)
 		return;
 
-	if (diff)
-		diff->Bind();
-
 	shader->Bind();
+
+	if (diff)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		diff->Bind();
+		GLuint textLoc2 = glGetUniformLocation(shader->GetId(), "tex");
+		glUniform1i(textLoc2, 0);
+	}
+
 
 	// Could not do view and proj each frame.
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
@@ -400,21 +412,29 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
+	Framebuffer* fbo = nullptr;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
+		fbo = app->renderer3D->mainCameraFbo;
 	}
 	else
 	{
 		view = app->camera->matrixViewFrustum;
 		proj = app->camera->matrixProjectionFrustum;
+		fbo = app->renderer3D->fbo;
 	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
 	float4x4 normalMat = view;
 	normalMat.Inverse();
 	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, fbo->GetDepthId());
+	GLuint textLoc2 = glGetUniformLocation(shader->GetId(), "depthTexture");
+	glUniform1i(textLoc2, 1);
 
 	// Get matrices to animate the model
 	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
@@ -443,6 +463,22 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
 		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
+
+		
+		//TransformComponent* tr = app->renderer3D->goDirLight->GetComponent<TransformComponent>();
+		//if (tr)
+		{
+			Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
+			
+			float3 rot = app->renderer3D->dirLight->dir;
+			float4x4 lightView = float4x4::LookAt({ 0,6,0 }, rot, { 0,1,0 }, /*frustum->up*/{ 0,1,0 });
+
+			float4 bounds = app->editor->GetGameView()->GetBounds();
+			float4x4 lightProjection = float4x4::OpenGLOrthoProjRH(frustum->nearPlaneDistance, frustum->farPlaneDistance, bounds.z, bounds.w);
+			
+			float4x4 lightSpace = lightProjection * lightView;
+			shader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace);
+		}
 	}
 	else
 	{
