@@ -155,7 +155,7 @@ SpawnShape* ParticleEffect_SpawningShape::CreateSpawnShape(SPAWN_SHAPE_TYPE newT
 		newShape = new ParticleEffect_SphericalSpawn();
 		break;
 	case SPAWN_SHAPE_TYPE::CONE:
-		//TODO
+		newShape = new ParticleEffect_ConeSpawn();
 		break;
 	case SPAWN_SHAPE_TYPE::CIRCUMFERENCE:
 		//TODO

@@ -94,6 +94,9 @@
     <Filter Include="Sources\Libraries\RecastDetour\DebugUtils">
       <UniqueIdentifier>{f4ea8377-05e1-4c9f-bec2-0007fcd46baf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles\Effects\SpawningShapes">
+      <UniqueIdentifier>{2df73535-23b9-4464-9a07-0db8ba2300b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -763,12 +766,6 @@
     <ClInclude Include="Engine\Source\NavAgentComponent.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Source\SpawnShape.h">
-      <Filter>Particles\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\ParticleEffect_SphericalSpawn.h">
-      <Filter>Particles\Effects</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Source\ParticleEffect_SpawningShape.h">
       <Filter>Particles\Effects</Filter>
     </ClInclude>
@@ -777,6 +774,15 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\DialogueSystem.h">
       <Filter>Sources\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_SphericalSpawn.h">
+      <Filter>Particles\Effects\SpawningShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\SpawnShape.h">
+      <Filter>Particles\Effects\SpawningShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\ParticleEffect_ConeSpawn.h">
+      <Filter>Particles\Effects\SpawningShapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1673,12 +1679,6 @@
     <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Source\SpawnShape.cpp">
-      <Filter>Particles\Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Source\ParticleEffect_SphericalSpawn.cpp">
-      <Filter>Particles\Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Source\ParticleEffect_SpawningShape.cpp">
       <Filter>Particles\Effects</Filter>
     </ClCompile>
@@ -1690,6 +1690,15 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\TextComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_SphericalSpawn.cpp">
+      <Filter>Particles\Effects\SpawningShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\SpawnShape.cpp">
+      <Filter>Particles\Effects\SpawningShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\ParticleEffect_ConeSpawn.cpp">
+      <Filter>Particles\Effects\SpawningShapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -332,6 +332,7 @@
     <ClInclude Include="Engine\Source\ModuleInput.h" />
     <ClInclude Include="Engine\Source\ModuleNavMesh.h" />
     <ClInclude Include="Engine\Source\ModuleRenderer3D.h" />
+    <ClInclude Include="Engine\Source\ParticleEffect_ConeSpawn.h" />
     <ClInclude Include="Engine\Source\ParticleEffect_SpawningShape.h" />
     <ClInclude Include="Engine\Source\SpawnShape.h" />
     <ClInclude Include="Engine\Source\ParticleEffect_SphericalSpawn.h" />
@@ -532,6 +533,7 @@
     <ClCompile Include="Engine\Source\ModuleInput.cpp" />
     <ClCompile Include="Engine\Source\ModuleNavMesh.cpp" />
     <ClCompile Include="Engine\Source\ModuleRenderer3D.cpp" />
+    <ClCompile Include="Engine\Source\ParticleEffect_ConeSpawn.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect_SpawningShape.cpp" />
     <ClCompile Include="Engine\Source\SpawnShape.cpp" />
     <ClCompile Include="Engine\Source\ParticleEffect_SphericalSpawn.cpp" />
