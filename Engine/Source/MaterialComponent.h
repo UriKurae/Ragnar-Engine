@@ -38,6 +38,8 @@ public:
 	void SetTexture(std::shared_ptr<Resource> tex);
 	void EditorShader();
 
+	std::shared_ptr<Shader> GetOutlineShader() { return outlineShader; }
+
 private:
 	bool checker = false;
 	bool showTexMenu = false;
@@ -50,6 +52,8 @@ private:
 	std::shared_ptr<Shader> shadertoRecompily;
 	std::shared_ptr<Texture> diff = nullptr;
 	std::shared_ptr<Shader> shader;
+	std::shared_ptr<Shader> outlineShader;
+
 
 	// TODO: Temporary, should go in Material.h
 	float3 ambientColor;
