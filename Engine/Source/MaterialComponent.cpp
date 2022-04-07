@@ -30,6 +30,8 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	shader->SetUniforms(GetShaderUniforms());
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
+	outlineShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/outlineStencil.shader")));
+
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
 	specularColor = { 0.5,0.5,0.5 };

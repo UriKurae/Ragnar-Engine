@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleCamera3D.h"
+
 #include "Scene.h"
 
 #include "TransformComponent.h"
@@ -53,20 +55,20 @@ void MeshComponent::DrawOutline()
 	if (mesh)
 	{
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-		glPushMatrix();
-		float4x4 testGlobal;
-		testGlobal = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
-
-		glMultMatrixf(testGlobal.Transposed().ptr());
+		float4x4 model = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
+		
+		std::shared_ptr<Shader> s = material->GetOutlineShader();
+		s->Bind();
+		s->SetUniformMatrix4f("model", model.Transposed());
+		s->SetUniformMatrix4f("view", app->camera->matrixViewFrustum.Transposed());
+		s->SetUniformMatrix4f("projection", app->camera->matrixProjectionFrustum.Transposed());
 
 		mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 
-		glPopMatrix();
+		s->Unbind();
 
 		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
 }
 

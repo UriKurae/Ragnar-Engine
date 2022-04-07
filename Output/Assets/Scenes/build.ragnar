@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 295032088,
+                    "pointer": 332248608,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 198360896,
+                    "characters": 223199040,
                     "drawnArea": false
                 }
             ]
@@ -201,7 +201,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 130,
-                    "Vertical Fov": 0.44838371872901917,
+                    "Vertical Fov": 0.47030121088027954,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
                         -63.997673034667969,
@@ -327,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 295032632,
+                    "pointer": 332248744,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -339,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 295033448,
+                    "pointer": 332247112,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -1877,8 +1877,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1895,7 +1895,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 322907992,
+                    "pointer": 332249696,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1932,8 +1932,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2005,8 +2005,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2078,8 +2078,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2126,8 +2126,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2730,8 +2730,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2778,8 +2778,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2826,8 +2826,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 841,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2839,297 +2839,6 @@
                 },
                 {
                     "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1159540693,
-            "Parent UUID": 417171234,
-            "Name": "DialogueBox",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/DialogueBox.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 437528934,
-            "Parent UUID": 1159540693,
-            "Name": "DialogueBox",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        276.5,
-                        -10
-                    ],
-                    "Scale": [
-                        1.5266666412353516,
-                        0.37250000238418579,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 916,
-                    "buttonHeight": 223.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 901188704,
-            "Parent UUID": 1159540693,
-            "Name": "DialogueText",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        157.5,
-                        1
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "DialogueManager",
-                    "pointer": 322906768,
-                    "type": 4,
-                    "componentTable": 0
-                }
-            ]
-        },
-        {
-            "UUID": 301589498,
-            "Parent UUID": 1159540693,
-            "Name": "DialoguePaul",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        276.5,
-                        0
-                    ],
-                    "Scale": [
-                        1.5116666555404663,
-                        0.37166666984558105,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 907,
-                    "buttonHeight": 223,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 107698142,
-            "Parent UUID": 1159540693,
-            "Name": "DialogueChani",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        0,
-                        276.5,
-                        0
-                    ],
-                    "Scale": [
-                        1.5116666555404663,
-                        0.37166666984558105,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 907,
-                    "buttonHeight": 223,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
                     "alpha": 1
                 }
             ]
