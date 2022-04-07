@@ -276,10 +276,10 @@ bool ModuleRenderer3D::PostUpdate()
 		app->physics->DebugDraw();
 		PushCamera(float4x4::identity, float4x4::identity);
 	}
-
+	
 	if (stencil && objSelected && objSelected->GetActive())
 	{
-		glColor3f(0.25f, 0.87f, 0.81f);
+		//glColor3f(0.25f, 0.87f, 0.81f);
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
@@ -288,7 +288,7 @@ bool ModuleRenderer3D::PostUpdate()
 		glStencilMask(0xFF);
 		glStencilFunc(GL_ALWAYS, 0, 0xFF);
 		if (depthTest) glEnable(GL_DEPTH_TEST);
-		glColor3f(1.0f, 1.0f, 1.0f);
+		//glColor3f(1.0f, 1.0f, 1.0f);
 		objSelected->Draw(nullptr);
 	}
 	
