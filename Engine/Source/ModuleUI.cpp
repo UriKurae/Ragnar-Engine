@@ -552,7 +552,8 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		{
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
-			//DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			// Whats does this do?
+			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
 			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
 			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 

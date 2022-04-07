@@ -14,7 +14,6 @@ uniform mat3 normalMatrix;
 uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
-uniform mat4 lightSpaceMatrix;
 
 const int MAX_BONES = 100;
 const int MAX_BONE_INFLUENCE = 4;
@@ -26,7 +25,7 @@ out vec2 vTexCoords;
 out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
-out vec4 fragPosLightSpace;
+out vec4 vb;
 
 void main()
 {
@@ -54,11 +53,13 @@ void main()
 
 	vTexCoords = texCoords;
 	vPosition = vec3(model * vec4(position, 1));
+	//vNormal = normal * normal;
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
 	vTextureAlpha = 1.0f;
-	fragPosLightSpace = lightSpaceMatrix * vec4(position, 1);
+
 	vCamPos = camPos;
+	vb = boneIds;
 }
 
 
@@ -73,13 +74,10 @@ in vec3 vCamPos;
 in vec3 vAmbientColor;
 in float vTextureAlpha;
 
-in vec4 fragPosLightSpace;
-
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec3 fragNormals;
 
 uniform sampler2D tex;
-uniform sampler2D depthTexture;
 
 struct Material
 {
@@ -146,21 +144,6 @@ struct CelShadingProps
 const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
 
 
-float CalculateShadow(vec4 fp)
-{
-	// FP already in light coordinates
-	vec4 projCoords = fp / fp.w;
-
-	projCoords = projCoords * 0.5 + 0.5;
-
-	float closestDepth = texture(depthTexture, projCoords.xy).x;
-	float currentDepth = projCoords.z;
-
-	float shadow = currentDepth > closestDepth ? 1.0 : 0.0;
-
-	return shadow;
-}
-
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
@@ -182,9 +165,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	float shadow = CalculateShadow(fragPosLightSpace);
-
-	return (ambient + (1.0 - (max(shadow, 0.001))) * (diffuse + specular)) * light.intensity;
+	return (ambient + diffuse + specular) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
