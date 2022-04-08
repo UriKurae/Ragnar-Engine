@@ -10,7 +10,11 @@ namespace RagnarEngine
         {
             type = ComponentType.UI_IMAGE;
         }
-        
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern int LoadTexture(string path);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void UseTexture(int ID);
 
     }
 }

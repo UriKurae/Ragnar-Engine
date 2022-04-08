@@ -19,7 +19,7 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
-	GameObject Character;
+	GameObject CharacterBar;
 	GameObject AbilityImage;
 	GameObject Ability1;
 	GameObject Ability2;
@@ -45,7 +45,7 @@ public class pauseMenuButton : RagnarComponent
 		OptionsButtonHide();
 
 		//////////////GAME//////////////
-		Character = GameObject.Find("Char");
+		CharacterBar = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
 		AbilityImage = GameObject.Find("AbilImage");
@@ -128,9 +128,8 @@ public class pauseMenuButton : RagnarComponent
 		Ability2.GetComponent<Transform2D>().position2D = pos;
 
 		////////////////
-		///
 		pos.Set(x, y, -10.400f);
-		Character.GetComponent<Transform2D>().position2D = pos;
+		CharacterBar.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(0.0f, y, -10.400f);
 		AbilityImage.GetComponent<Transform2D>().position2D = pos;

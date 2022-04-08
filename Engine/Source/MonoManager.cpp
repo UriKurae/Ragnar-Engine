@@ -184,6 +184,9 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetButtonText);
 	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetButtonText);
 
+	mono_add_internal_call("RagnarEngine.UIImage::LoadTexture", LoadTexture);
+	mono_add_internal_call("RagnarEngine.UIImage::UseTexture", UseTexture);
+
 	mono_add_internal_call("RagnarEngine.UIButton::SetAlpha", SetAlpha);
 	mono_add_internal_call("RagnarEngine.UIButton::GetAlpha", GetAlpha);
 

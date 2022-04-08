@@ -1,10 +1,11 @@
 #pragma once
 #include "Component.h"
 #include "Color.h"
+#include<vector>
 
 class MyPlane;
 class GameObject;
-
+class MaterialComponent;
 class ImageComponent : public Component
 {
 public:
@@ -25,8 +26,12 @@ public:
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
 	inline float GetAlpha() { return alpha; };
 
+	int LoadTexture(std::string newTexture);
+	void UseTexture(int ID);
 	MyPlane* planeToDraw;
 private:
+	MaterialComponent* principal;
+	std::vector<MaterialComponent*> materialList;
 	float alpha = 1.0f;
 	State state = State::NORMAL;
 	Color color = white;

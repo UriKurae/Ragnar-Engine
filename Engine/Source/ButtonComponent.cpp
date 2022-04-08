@@ -18,7 +18,7 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	own->isUI = true;
 	active = true;
 	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
-
+	
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
 		own->CreateComponent(ComponentType::TRANFORM2D);

@@ -7,6 +7,7 @@
 #include "CheckBoxComponent.h"
 #include "Transform2DComponent.h"
 #include "TextComponent.h"
+#include "ImageComponent.h"
 
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
@@ -140,5 +141,18 @@ void SetSize(MonoObject* go, MonoObject* size)
 		tr->SetButtonHeight(app->moduleMono->UnboxVector2D(size).y);		
 	}
 }
+// Image ========================================
 
+int LoadTexture(MonoObject* go, MonoString* text)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	std::string y=mono_string_to_utf8(text);	
+	return tr->LoadTexture(y);
+}
+void UseTexture(MonoObject* go, int ID)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	
+	tr->UseTexture(ID);
+}
 
