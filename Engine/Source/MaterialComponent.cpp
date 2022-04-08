@@ -418,6 +418,9 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	normalMat.Inverse();
 	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
+	float thickness = std::string(owner->GetName()).find("Player") == std::string::npos ? 1 : 0;
+	shader->SetUniform1f("normalsThickness", thickness);
+
 	// Get matrices to animate the model
 	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
 	if (anim)

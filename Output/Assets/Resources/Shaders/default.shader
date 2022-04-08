@@ -25,7 +25,6 @@ out vec2 vTexCoords;
 out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
-out vec4 vb;
 
 void main()
 {
@@ -59,7 +58,6 @@ void main()
 	vTextureAlpha = 1.0f;
 
 	vCamPos = camPos;
-	vb = boneIds;
 }
 
 
@@ -78,6 +76,7 @@ layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec3 fragNormals;
 
 uniform sampler2D tex;
+uniform float normalsThickness;
 
 struct Material
 {
@@ -262,7 +261,7 @@ void main()
 	}
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-	fragNormals = vNormal; // Is this correct ??
+	fragNormals = vec3(vNormal) * normalsThickness;
 }
 
 
