@@ -167,6 +167,11 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theSlider)
 	{
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		if (theSlider->GetFirstDraw()) {
 			int cont = 0;
 			for (int a = 0; a < own->components.size(); a++) {
@@ -179,10 +184,12 @@ void MyPlane::DrawPlane2D(Texture* texture)
 					else
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
+
+						scl = math::float3(r->GetScale().x * CONVERSION_FACTOR, r->GetScale().y * CONVERSION_FACTOR, 1.0f);
+						center = math::float3(r->GetPosition().x, r->GetPosition().y, 1.0f);
+						model = model.Scale(scl, center);
+						model.SetTranslatePart(center);
 						transform = float4x4::FromTRS(r->GetInternalPosition(), r->GetRotationQuat(), float3(r->GetScale().x, r->GetScale().y, 1));
-
-
-
 						break;
 					}
 				}
@@ -193,6 +200,11 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theCheckbox)
 	{
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, theCheckbox->GetAlpha());
 	}
 	else if (theImage)
@@ -643,8 +655,7 @@ bool ModuleUI::Update(float dt)
 		}
 		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
 		{
-			textExample = sliderComp->GetText().textt;
-			color = sliderComp->GetTextColor();
+			
 		}
 	}
 
