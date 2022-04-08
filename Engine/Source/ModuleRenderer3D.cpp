@@ -185,6 +185,8 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 	//vbo = new VertexBuffer();
 	
+	genShadows = true;
+
 	return ret;
 }
 
@@ -247,12 +249,41 @@ bool ModuleRenderer3D::PostUpdate()
 		glEnd();
 		glLineWidth(1.0f);
 	}
+	PushCamera(float4x4::identity, float4x4::identity);
+
 
 	fbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
+	//GLuint shadowsDrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT };
+	//glDrawBuffers(2, shadowsDrawBuffers);
+
 	GameObject* objSelected = app->editor->GetGO();
+	
+	glCullFace(GL_FRONT);
+	genShadows = true;
+	if (app->camera->visualizeFrustum)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			if ((*it) != objSelected)(*it)->Draw(nullptr);
+		}
+	}
+	else app->sceneManager->GetCurrentScene()->Draw();
+	fbo->Unbind();
+	glCullFace(GL_BACK);
+	
+	glFlush();
+
+	fbo->Bind();
+	//glClear(GL_DEPTH_BUFFER_BIT);
+	GLuint shadowsDrawBuffers[2];
+	shadowsDrawBuffers[0] = { GL_COLOR_ATTACHMENT0 };
+	shadowsDrawBuffers[1] = { GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, shadowsDrawBuffers);
+
+	genShadows = false;
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
@@ -300,17 +331,42 @@ bool ModuleRenderer3D::PostUpdate()
 	// Camera Component FBO
 	mainCameraFbo->Bind();
 	// Weird but it works like this
-	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
+	//GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
+	//glDrawBuffers(2, drawBuffers);
+	
+	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT };
 	glDrawBuffers(2, drawBuffers);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	// TODO: To check if game cam works, uncomment the for loop, otherwise use the draw of the sceneManager
+	genShadows = true;
+	glCullFace(GL_FRONT);
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
+	mainCameraFbo->Unbind();
+	glCullFace(GL_BACK);
+
+	glFlush();
+
+	genShadows = false;
+
+
+	mainCameraFbo->Bind();
+	//glClear(GL_DEPTH_BUFFER_BIT);
+	drawBuffers[0] = { GL_COLOR_ATTACHMENT0 };
+	drawBuffers[1] = { GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, drawBuffers);
+
+	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+	{
+		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+	}
+	mainCameraFbo->Unbind();
+
+	glFlush();
 
 	//vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
 	//vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
@@ -326,9 +382,10 @@ bool ModuleRenderer3D::PostUpdate()
 	//glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
 	//vbo->Unbind();
 
-	coneShader->Unbind();
+	//coneShader->Unbind();
 
-#ifndef DIST 
+#ifndef DIST
+	mainCameraFbo->Bind();
 	app->userInterface->Draw();
 #endif
 

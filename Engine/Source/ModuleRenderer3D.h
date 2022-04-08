@@ -115,6 +115,8 @@ public:
 	std::vector<SpotLight*> spotLights;
 
 	std::vector<float3> enemyCones;
+	
+	bool genShadows;
 
 private:
 	Material* defaultMaterial;

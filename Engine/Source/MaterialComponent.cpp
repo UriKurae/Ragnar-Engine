@@ -3,6 +3,10 @@
 
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+#include "GameView.h"
 
 #include "GameObject.h"
 #include "TransformComponent.h"
@@ -13,6 +17,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Lights.h"
+#include "Framebuffer.h"
 
 #include "GL/glew.h"
 #include <fstream>
@@ -31,6 +36,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	outlineShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/outlineStencil.shader")));
+	shadowShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/shadows.shader")));
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -385,11 +391,32 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void MaterialComponent::Bind(CameraComponent* gameCam)
+void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 {
 	// Crash when creating a primitive
 	if (!this)
 		return;
+
+	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
+
+	Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
+	//Frustum* frustum = app->camera->cameraFrustum;
+	float3 rot = app->renderer3D->dirLight->dir;
+	float4x4 lightView = float4x4::LookAt({ 10,15,0 }, rot, { 0,1,0 }, /*frustum->up*/{ 0,1,0 });
+
+	float4 bounds = app->editor->GetGameView()->GetBounds();
+	float4x4 lightProjection = float4x4::OpenGLOrthoProjRH(frustum->nearPlaneDistance, frustum->farPlaneDistance, bounds.z, bounds.w);
+
+	float4x4 lightSpace = lightProjection * lightView;
+
+	if (genShadows)
+	{
+		shadowShader->Bind();
+		shadowShader->SetUniformMatrix4f("model", model.Transposed());
+		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
+		
+		return;
+	}
 
 	if (diff)
 		diff->Bind();
@@ -397,20 +424,23 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	shader->Bind();
 
 	// Could not do view and proj each frame.
-	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	shader->SetUniformMatrix4f("model", model.Transposed());
+	shader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
+	Framebuffer* fbo;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
+		fbo = app->renderer3D->mainCameraFbo;
 	}
 	else
 	{
 		view = app->camera->matrixViewFrustum;
 		proj = app->camera->matrixProjectionFrustum;
+		fbo = app->renderer3D->fbo;
 	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
@@ -420,6 +450,11 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	float thickness = std::string(owner->GetName()).find("Player") == std::string::npos ? 1 : 0;
 	shader->SetUniform1f("normalsThickness", thickness);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, fbo->GetDepthId());
+	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
+	glUniform1i(textLoc3, 1);
 
 	// Get matrices to animate the model
 	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
@@ -503,12 +538,13 @@ void MaterialComponent::ShaderSetUniforms()
 	}
 }
 
-void MaterialComponent::Unbind()
+void MaterialComponent::Unbind(bool genShadows)
 {
 	// Crash when creating a primitive
 	if (!this) return;
 	if (diff) diff->Unbind();
-	shader->Unbind();
+
+	genShadows ? shadowShader->Unbind() : shader->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)

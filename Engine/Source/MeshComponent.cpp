@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include "ModuleCamera3D.h"
+#include "ModuleRenderer3D.h"
 
 #include "Scene.h"
 
@@ -43,11 +44,11 @@ MeshComponent::~MeshComponent()
 
 void MeshComponent::Draw(CameraComponent* gameCam)
 {
-	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
+	if (material != nullptr && material->GetActive()) material->Bind(gameCam, app->renderer3D->genShadows);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	
-	if (material != nullptr && material->GetActive()) material->Unbind();
+	if (material != nullptr && material->GetActive()) material->Unbind(app->renderer3D->genShadows);
 }
 
 void MeshComponent::DrawOutline()

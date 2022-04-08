@@ -14,6 +14,7 @@ uniform mat3 normalMatrix;
 uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
+uniform mat4 lightSpaceMatrix;
 
 const int MAX_BONES = 100;
 const int MAX_BONE_INFLUENCE = 4;
@@ -25,6 +26,7 @@ out vec2 vTexCoords;
 out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
+out vec4 fragPosLightSpace;
 
 void main()
 {
@@ -52,12 +54,11 @@ void main()
 
 	vTexCoords = texCoords;
 	vPosition = vec3(model * vec4(position, 1));
-	//vNormal = normal * normal;
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
-	vTextureAlpha = 1.0f;
-
+	fragPosLightSpace = lightSpaceMatrix * totalPosition;
 	vCamPos = camPos;
+	vTextureAlpha = 1.0f;
 }
 
 
@@ -72,10 +73,14 @@ in vec3 vCamPos;
 in vec3 vAmbientColor;
 in float vTextureAlpha;
 
+in vec4 fragPosLightSpace;
+
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec3 fragNormals;
+//layout(location = 2) out vec3 fragDepth;
 
 uniform sampler2D tex;
+uniform sampler2D depthTexture;
 uniform float normalsThickness;
 
 struct Material
@@ -143,6 +148,29 @@ struct CelShadingProps
 const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
 
 
+float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+{
+	// Perform perspective divide
+	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+	// Transform to [0,1] range
+	projCoords = projCoords * 0.5 + 0.5;
+	
+	if (projCoords.z > 1.0)
+		return 0.0;
+
+	// Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+	float closestDepth = texture(depthTexture, projCoords.xy).r;
+	// Get depth of current fragment from light's perspective
+	float currentDepth = projCoords.z;
+
+	//float bias = 0.005;
+	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+	// Check whether current frag pos is in shadow
+	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+
+	return shadow;
+}
+
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
@@ -164,7 +192,9 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	return (ambient + diffuse + specular) * light.intensity;
+	float shadow = CalculateShadow(fragPosLightSpace, normal, lightDir);
+
+	return ((ambient + 1 - shadow) * (diffuse + specular)) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
@@ -262,6 +292,7 @@ void main()
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 	fragNormals = vec3(vNormal) * normalsThickness;
+	//fragDepth = gl_FragDepth * normalsThickness;
 }
 
 

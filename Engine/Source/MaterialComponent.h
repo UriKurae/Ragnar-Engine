@@ -29,9 +29,9 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void Bind(CameraComponent* gameCam);
+	void Bind(CameraComponent* gameCam, bool genShadows = true);
 	void ShaderSetUniforms();
-	void Unbind();
+	void Unbind(bool genShadows);
 	bool IsDefaultMat() const { return defaultMat; }
 
 	std::shared_ptr<Texture> GetTexture() { return diff; }
@@ -53,6 +53,7 @@ private:
 	std::shared_ptr<Texture> diff = nullptr;
 	std::shared_ptr<Shader> shader;
 	std::shared_ptr<Shader> outlineShader;
+	std::shared_ptr<Shader> shadowShader;
 
 
 	// TODO: Temporary, should go in Material.h
