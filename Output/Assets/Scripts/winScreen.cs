@@ -4,6 +4,7 @@ using RagnarEngine;
 public class winScren : RagnarComponent
 {
 	Vector3 Pos;
+	Vector3 Size;
 	GameObject Back;
 	GameObject Menu;
 	GameObject Next;
@@ -30,6 +31,12 @@ public class winScren : RagnarComponent
 		AudioManager = GameObject.Find("AudioWinMenu");
 
 		Pos = new Vector3(0, 0, 0);
+		Size = new Vector3(350, 94, 0);
+		Pos.Set(InternalCalls.GetRegionGame().x / 2 + 200, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
+		Next.GetComponent<Transform2D>().position2D = Pos;
+
+		Pos.Set(InternalCalls.GetRegionGame().x / 2 +200, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+		NextImage.GetComponent<Transform2D>().position2D = Pos;
 	}
 	void MenuAction()
 	{
@@ -42,11 +49,11 @@ public class winScren : RagnarComponent
 			case 1:
 				if (!isFirstM)
 				{
-					Pos.Set(Menu.GetComponent<Transform2D>().position2D.x - 20, Menu.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(Menu.GetComponent<Transform2D>().position2D.x - 20, Menu.GetComponent<Transform2D>().position2D.y , 36.1f);
 					Menu.GetComponent<Transform2D>().position2D = Pos;
 
 
-					Pos.Set(MenuImage.GetComponent<Transform2D>().position2D.x - 20, MenuImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(MenuImage.GetComponent<Transform2D>().position2D.x - 20, MenuImage.GetComponent<Transform2D>().position2D.y , 36.1f);
 					MenuImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstM = true;
 				}
@@ -62,7 +69,7 @@ public class winScren : RagnarComponent
 					Pos.Set(Menu.GetComponent<Transform2D>().position2D.x + 20, Menu.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Menu.GetComponent<Transform2D>().position2D = Pos;
 
-					Pos.Set(MenuImage.GetComponent<Transform2D>().position2D.x + 20, MenuImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set(MenuImage.GetComponent<Transform2D>().position2D.x + 20, MenuImage.GetComponent<Transform2D>().position2D.y , 36.1f);
 					MenuImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstM = false;
 					//poner sonido
@@ -93,11 +100,11 @@ public class winScren : RagnarComponent
 			case 1:
 				if (!isFirstA)
 				{
-					Pos.Set(InternalCalls.GetRegionGame().x / 2-10 + 20, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set((InternalCalls.GetRegionGame().x / 2)-100, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Next.GetComponent<Transform2D>().position2D = Pos;
 
 
-					Pos.Set(InternalCalls.GetRegionGame().x / 2 - 10 + 20, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set((InternalCalls.GetRegionGame().x / 2)-100, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					NextImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstA = true;
 				}
@@ -111,11 +118,12 @@ public class winScren : RagnarComponent
 				if (isFirstA)
 				{
 
-					Pos.Set(InternalCalls.GetRegionGame().x / 2 - 10 - 20, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set((InternalCalls.GetRegionGame().x / 2) - 120, Next.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Next.GetComponent<Transform2D>().position2D = Pos;
 
-					Pos.Set(InternalCalls.GetRegionGame().x / 2 - 10 - 20, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+					Pos.Set((InternalCalls.GetRegionGame().x / 2) - 120, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					NextImage.GetComponent<Transform2D>().position2D = Pos;
+					AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
 					isFirstA = false;
 					//poner sonido
 				}
@@ -143,11 +151,11 @@ public class winScren : RagnarComponent
 				if (!isFirstR)
 				{
 
-					Pos.Set(Replay.GetComponent<Transform2D>().position2D.x, Replay.GetComponent<Transform2D>().position2D.y - 20, 0);
-					Replay.GetComponent<Transform2D>().position2D = Pos;
+					Size.Set(301.5f - 20,51.5f, 0);
+					Replay.GetComponent<Transform2D>().SetSize(Size);
 
-					Pos.Set(ReplayImage.GetComponent<Transform2D>().position2D.x, ReplayImage.GetComponent<Transform2D>().position2D.y - 20, 0);
-					ReplayImage.GetComponent<Transform2D>().position2D = Pos;
+					Size.Set(294 - 20, 46.5f, 0);
+					ReplayImage.GetComponent<Transform2D>().SetSize(Size);
 					isFirstR = true;
 				}
 
@@ -160,13 +168,16 @@ public class winScren : RagnarComponent
 				if (isFirstR)
 				{
 
-					Pos.Set(Replay.GetComponent<Transform2D>().position2D.x, Replay.GetComponent<Transform2D>().position2D.y + 20, 0);
-					Replay.GetComponent<Transform2D>().position2D = Pos;
+                    Size.Set(301.5f + 20, 51.5f, 0);
+                    Replay.GetComponent<Transform2D>().SetSize(Size);
 
-					Pos.Set(ReplayImage.GetComponent<Transform2D>().position2D.x, ReplayImage.GetComponent<Transform2D>().position2D.y + 20, 0);
-					ReplayImage.GetComponent<Transform2D>().position2D = Pos;
+					Size.Set(294 + 20, 46.5f, 0);
+                    ReplayImage.GetComponent<Transform2D>().SetSize(Size);
+
+
 					isFirstR = false;
 					//poner sonido
+					AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
 				}
 				break;
 			case 3:

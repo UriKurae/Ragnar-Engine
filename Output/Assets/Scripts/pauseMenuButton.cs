@@ -7,38 +7,72 @@ public class pauseMenuButton : RagnarComponent
 	bool isSowing = false;
 	bool isFirstS = true;
 	bool isFirstE = true;
+
+	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
 	GameObject MainM;
 	GameObject Opt;
-	//GameObject Rect;
-	GameObject SceneAudio;
 
+	//////////////AUDIO//////////////
+	GameObject SceneAudio;
 	float currVolume = 0.0f;
+
+	//////////////GAME//////////////
+	GameObject Character;
+	GameObject AbilityImage;
+	GameObject Ability1;
+	GameObject Ability2;
+	
 	public void Start()
 	{
+		pos = new Vector3(0.0f, 0.0f, 0.0f);
+
+		//////////////AUDIO//////////////
 		SceneAudio = GameObject.Find("AudioLevel1");
 		SceneAudio.GetComponent<AudioSource>().PlayClip("LEVEL1BGMUSIC");
 
+		//////////////PAUSE//////////////
 		Image = GameObject.Find("Background");
-
-		//Rect = GameObject.Find("UI Rectangle");
 		Resume = GameObject.Find("Button Resume");
 		MainM = GameObject.Find("Button MainMenu");
 		Opt = GameObject.Find("Button Options");
-
-		pos = new Vector3(0.0f, 0.0f, 0.0f);
 
 		ImageHide();
 		RectangleHide();
 		ResumeButtonHide();
 		MainMenuButtonHide();
 		OptionsButtonHide();
-	}
 
+		//////////////GAME//////////////
+		Character = GameObject.Find("Char");
+		Ability1 = GameObject.Find("ab1");
+		Ability2 = GameObject.Find("ab2");
+		AbilityImage = GameObject.Find("AbilImage");
+
+		
+	}
+	
 	public void Update()
 	{
+		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
+		{
+			SceneManager.LoadScene("WinScene");
 
+		}
+		if (Input.GetKey(KeyCode.G) == KeyState.KEY_DOWN)
+		{
+			SceneManager.LoadScene("LoseScene");
+		}
+
+
+		SetAllPositions();
+		updateMenu();
+		
+
+	}
+	void updateMenu()
+    {
 		if (isSowing)
 		{
 			ImageShow();
@@ -61,35 +95,59 @@ public class pauseMenuButton : RagnarComponent
 			if (isSowing)
 			{
 				isSowing = false;
-
-				ImageShow();
-				RectangleShow();
-				ResumeButtonShow();
-				MainMenuButtonShow();
-				OptionsButtonShow();
-
-			}
-			else
-			{
-
-				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
-				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				ImageHide();
 				RectangleHide();
 				ResumeButtonHide();
 				MainMenuButtonHide();
 				OptionsButtonHide();
+			}
+			else
+			{
+				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
+				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				isSowing = true;
-
+				
 			}
 		}
 	}
+	void SetAllPositions()
+	{
+		float sum = 100.0f;
 
+		if (isSowing)
+        {
+			sum = 2000;
+        }
+		float y = -(InternalCalls.GetRegionGame().y / 2) + sum;
+		float x = -(InternalCalls.GetRegionGame().x / 2) + 150;
+
+		pos.Set(-136.0f, y + 30, -10.400f);
+		Ability1.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-69.0f, y+30, -10.400f);
+		Ability2.GetComponent<Transform2D>().position2D = pos;
+
+		////////////////
+		///
+		pos.Set(x, y, -10.400f);
+		Character.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(0.0f, y, -10.400f);
+		AbilityImage.GetComponent<Transform2D>().position2D = pos;
+
+		//pos.Set(0.0f, y, -10.400f);
+		//Ability3.GetComponent<Transform2D>().position2D = pos;
+		//pos.Set(69.0f, y, -10.400f);
+		//Ability4.GetComponent<Transform2D>().position2D = pos;
+		//pos.Set(136.0f, y, -10.400f);
+		//Ability5.GetComponent<Transform2D>().position2D = pos;
+	}
 	void ImageShow()
 	{
-		pos.Set(0.0f, 0.0f, 30.0f);
+		pos.Set(0.0f, 0.0f, -10.400f);
 		Image.GetComponent<Transform2D>().position2D = pos;
 		Image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
+
 	}
 
 	void ImageHide()
@@ -100,9 +158,9 @@ public class pauseMenuButton : RagnarComponent
 
 	void ResumeButtonShow()
 	{
+
 		pos.Set(-850.0f, 0.0f, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
-
 		int a = Resume.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -111,6 +169,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 			case 1:
 				isFirstS = true;
+
 				// normal Mode
 				break;
 			case 2:
@@ -140,9 +199,9 @@ public class pauseMenuButton : RagnarComponent
 
 	void MainMenuButtonShow()
 	{
-		pos.Set(-850.0f, 0.0f, 36.1f);
-		MainM.GetComponent<Transform2D>().position2D = pos;
 
+		pos.Set(-850.0f, 50.0f, 36.1f);
+		MainM.GetComponent<Transform2D>().position2D = pos;
 		int a = MainM.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -151,6 +210,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 			case 1:
 				isFirstE = true;
+				
 				// normal Mode
 				break;
 			case 2:
@@ -181,11 +241,11 @@ public class pauseMenuButton : RagnarComponent
 
 	void OptionsButtonShow()
 	{
-		//pos.Set(-650.5f, 0.0f, 36.1f);
-		//Opt.GetComponent<Transform2D>().position2D = pos;
+        pos.Set(-850.0f, -50.0f, 36.1f);
+        Opt.GetComponent<Transform2D>().position2D = pos;
 
-		// Options button logic
-	}
+        // Options button logic
+    }
 	void OptionsButtonHide()
 	{
 		pos.Set(0.0f, 2000.0f, 36.1f);
