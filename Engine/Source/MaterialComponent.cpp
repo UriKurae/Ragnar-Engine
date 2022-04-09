@@ -160,6 +160,8 @@ void MaterialComponent::MenuTextureList()
 		if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
 	}
 
+	std::vector<std::shared_ptr<Resource>> res;
+
 	std::vector<std::string> files;
 	app->fs->DiscoverFiles("Library/Textures/", files);
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -169,13 +171,21 @@ void MaterialComponent::MenuTextureList()
 			app->fs->GetFilenameWithoutExtension(*it);
 			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 			uint uid = std::stoll(*it);
-			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
-			if (ImGui::Selectable(res->GetName().c_str()))
-			{
-				res->Load();
-				if (diff.use_count() - 1 == 1) diff->UnLoad();
-				SetTexture(res);
-			}
+			res.push_back(ResourceManager::GetInstance()->GetResource(uid));
+		}
+	}
+
+	std::sort(res.begin(), res.end(), [](std::shared_ptr<Resource> a, std::shared_ptr<Resource> b) {
+		return (a.get()->GetName() < b.get()->GetName());
+		});
+
+	for (std::vector<std::shared_ptr<Resource>>::iterator it = res.begin(); it != res.end(); ++it)
+	{
+		if (ImGui::Selectable((*it).get()->GetName().c_str()))
+		{
+			(*it)->Load();
+			if (diff.use_count() - 1 == 1) diff->UnLoad();
+			SetTexture((*it));
 		}
 	}
 
