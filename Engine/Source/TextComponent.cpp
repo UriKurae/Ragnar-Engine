@@ -68,6 +68,11 @@ void TextComponent::OnEditor()
 		static bool textColorEditable = false;
 
 		Checkbox(this, "Active", active);
+		char* aux=new char[fileText.size()];
+		strcpy(aux, fileText.c_str());
+		ImGui::InputText("Text Path", aux, 50);
+		fileText = aux;
+		delete[] aux;
 		ImGui::Text("Text Color"); ImGui::SameLine();
 		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
 			textColorEditable = !textColorEditable;
@@ -107,14 +112,14 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	textColor.r = node.GetJsonNumber("textColor.r");
 	textColor.g = node.GetJsonNumber("textColor.g");
 	textColor.b = node.GetJsonNumber("textColor.b");
-	std::string filePath = node.GetJsonString("TextFile");
-	if (filePath == "-") 
+	fileText = node.GetJsonString("TextFile");
+	if (fileText == "-")
 	{
 		textToShow.textt = aux;
 	}
 	else 
 	{
-		loadtext(filePath);
+		loadtext(fileText);
 	}
 	
 
@@ -132,7 +137,7 @@ bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.b", textColor.b);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "TextFile", "Library/Dialogues/Credits.rgdialogue");
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "TextFile", fileText.c_str());
 	node.SetValueToArray(array, file.GetRootValue());
 	
 
