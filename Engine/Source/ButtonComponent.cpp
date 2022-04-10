@@ -82,7 +82,17 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
-
+void ButtonComponent::setTextColor(float Red, float Green, float Blue)
+{
+	textColor.r = Red;
+	textColor.g = Green;
+	textColor.b = Blue;
+	buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+}
+float3 ButtonComponent::GetTextColor()
+{
+	return float3(textColor.r, textColor.g, textColor.b);
+}
 void ButtonComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("ButtonComponent"))

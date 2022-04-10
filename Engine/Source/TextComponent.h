@@ -34,7 +34,8 @@ public:
 		textToShow.setOnlyText(newText);
 		//strcpy(text, newText);
 	}
-
+	void setTextColor(float Red, float Green, float Blue);
+	float3 GetTextColor();
 	Text textToShow;
 private:
 

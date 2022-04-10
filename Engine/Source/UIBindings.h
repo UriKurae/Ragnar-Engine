@@ -32,15 +32,28 @@ void Set2DPosition(MonoObject* go, MonoObject* position)
 }
  // Button ==============================
 
-float GetAlpha(MonoObject* go)
+float GetButtonAlpha(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
 	return tr->GetAlpha();
 }
-void SetAlpha(MonoObject* go,float newAlpha)
+void SetButtonAlpha(MonoObject* go,float newAlpha)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
 	tr->SetAlpha(newAlpha);
+}
+
+void SetButtonTextColor(MonoObject* go, float Red, float Green, float Blue)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+
+	tr->setTextColor(Red, Green, Blue);
+
+}
+const Vec3 GetButtonTextColor(MonoObject* go)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	return Vec3(tr->GetTextColor().x, tr->GetTextColor().y, tr->GetTextColor().z);
 }
 
 int GetButtonState(MonoObject* go)
@@ -123,7 +136,18 @@ const char* GetText(MonoObject* go)
 	TextComponent* tr = GetComponentMono<TextComponent*>(go);
 	return tr->GetText();
 }
+void SetTextTextColor(MonoObject* go, float Red,float Green,float Blue)
+{
+	TextComponent* tr = GetComponentMono<TextComponent*>(go);
+	
+	tr->setTextColor(Red,Green,Blue);
 
+}
+const Vec3 GetTextTextColor(MonoObject* go)
+{
+	TextComponent* tr = GetComponentMono<TextComponent*>(go);	
+	return Vec3(tr->GetTextColor().x, tr->GetTextColor().y, tr->GetTextColor().z);
+}
 
 // Transform 2D ========================================
 Vec3 GetSize(MonoObject* go)

@@ -58,7 +58,17 @@ void TextComponent::Draw(CameraComponent* gameCam)
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
-
+void TextComponent::setTextColor(float Red, float Green, float Blue)
+{
+	textColor.r = Red;
+	textColor.g = Green;
+	textColor.b = Blue;
+	textToShow.setOnlyColor({ textColor.r, textColor.g, textColor.b });
+}
+float3 TextComponent::GetTextColor() 
+{
+	return float3(textColor.r, textColor.g, textColor.b);
+}
 void TextComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Text"))

@@ -102,7 +102,7 @@ public class Credits : RagnarComponent
 			case 3:
 				// pressed mode
 				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
-				Menu.GetComponent<UIButton>().SetAlpha(0.75f);
+				Menu.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
 				break;

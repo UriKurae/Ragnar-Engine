@@ -641,7 +641,9 @@ bool ModuleUI::Update(float dt)
 		if (ButtonComponent* buttonComp = go->GetComponent<ButtonComponent>())
 		{
 			textExample = buttonComp->GetText();
-			color = buttonComp->GetTextColor();
+			color.r = buttonComp->GetTextColor().x;
+			color.g = buttonComp->GetTextColor().y;
+			color.b = buttonComp->GetTextColor().z;
 		}
 		else if (CheckboxComponent* checkboxComp = go->GetComponent<CheckboxComponent>())
 		{

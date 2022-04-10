@@ -79,7 +79,7 @@ public class winScren : RagnarComponent
 			case 3:
 				// pressed mode
 				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
-				Menu.GetComponent<UIButton>().SetAlpha(0.75f);
+				Menu.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
 				break;
@@ -130,7 +130,7 @@ public class winScren : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				Next.GetComponent<UIButton>().SetAlpha(0.75f);
+				Next.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("build");
 				//cambiar de escena
 				break;
@@ -182,7 +182,7 @@ public class winScren : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				Replay.GetComponent<UIButton>().SetAlpha(0.75f);
+				Replay.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("build");
 				//cambiar de escena
 				break;

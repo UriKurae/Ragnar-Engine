@@ -30,7 +30,6 @@ public:
 	}
 
 	inline Color GetActualColor() { return actualColor; };
-	inline Color GetTextColor() { return textColor; };
 
 	inline void SetNormalMaterial(MaterialComponent* texture) { normalMaterial = texture; };
 	inline void SetFocusedMaterial(MaterialComponent* texture) { focusedMaterial = texture; };
@@ -47,6 +46,8 @@ public:
 	inline MaterialComponent* GetDisabledMaterial() { return disabledMaterial; };
 	inline MaterialComponent* GetActualMaterial() { return actual; };
 
+	void setTextColor(float Red, float Green, float Blue);
+	float3 GetTextColor();
 
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
 	inline float GetAlpha() { return alpha; };
