@@ -38,9 +38,12 @@ public:
 	Text textToShow;
 private:
 
+	void loadtext(std::string path);
+	/*void savetext();*/
 	bool fadeUI = false;
 	Color textColor = white;
 	MyPlane* planeToDraw;
 	//char text[358] = "Text";
 	float fontScale = 1;
+	std::string fileText = "-";
 };

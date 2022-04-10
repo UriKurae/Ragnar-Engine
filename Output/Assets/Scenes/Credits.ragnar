@@ -1,9 +1,9 @@
 {
     "Game Objects": [
         {
-            "UUID": 417171234,
+            "UUID": 566911234,
             "Parent UUID": 0,
-            "Name": "MainMenu",
+            "Name": "Credits",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -14,7 +14,7 @@
         },
         {
             "UUID": 1340834673,
-            "Parent UUID": 417171234,
+            "Parent UUID": 566911234,
             "Name": "Directional Light",
             "Active": true,
             "Static": true,
@@ -78,7 +78,7 @@
         },
         {
             "UUID": 2128337088,
-            "Parent UUID": 417171234,
+            "Parent UUID": 566911234,
             "Name": "cameraController",
             "Active": true,
             "Static": true,
@@ -145,15 +145,15 @@
                         0
                     ],
                     "Scale": [
-                        1.4142423868179321,
-                        0.99999988079071045,
-                        1.0000045299530029
+                        1.4142135381698608,
+                        1,
+                        1
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.90627831220626831,
+                    "Vertical Fov": 0.92509317398071289,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
@@ -161,7 +161,7 @@
                         -52.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 3,
+                    "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
                     "Free Movement": true,
@@ -173,7 +173,7 @@
                     "Movement Speed": 0.5,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 257.39971923828125,
+                    "Horizontal Angle": 160.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -182,8 +182,8 @@
             ]
         },
         {
-            "UUID": 547190327,
-            "Parent UUID": 417171234,
+            "UUID": 1657689093,
+            "Parent UUID": 566911234,
             "Name": "Background",
             "Active": true,
             "Static": true,
@@ -213,13 +213,13 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1454,
-                    "lastButtonHeight": 708,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
+                    "Path": "Assets\/Resources\/UI\/black.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -229,65 +229,17 @@
                 },
                 {
                     "Type": 4,
-                    "ScriptName": "mainMenuBackScreen",
-                    "pointer": 191953512,
+                    "ScriptName": "Credits",
+                    "pointer": 191779296,
                     "type": 4,
                     "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 1838526428,
-            "Parent UUID": 417171234,
-            "Name": "UI Rectangle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -529,
-                        0,
-                        36
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.33916667103767395,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 203.5,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 708,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0.60399997234344482
-                }
-            ]
-        },
-        {
-            "UUID": 673559679,
-            "Parent UUID": 1838526428,
-            "Name": "Button Start",
+            "UUID": 597052281,
+            "Parent UUID": 566911234,
+            "Name": "ButtonMenu",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -300,12 +252,12 @@
                     "Type": 18,
                     "Position": [
                         -625.5,
-                        25,
+                        -405,
                         36.099998474121094
                     ],
                     "Scale": [
-                        0.29499998688697815,
-                        0.048333331942558289,
+                        0.54333335161209106,
+                        0.085000000894069672,
                         1
                     ],
                     "rotationEuler": [
@@ -313,28 +265,28 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
+                    "buttonWidth": 326,
+                    "buttonHeight": 51,
                     "lastButtonWidth": 1454,
-                    "lastButtonHeight": 708,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -346,21 +298,21 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Start",
+                    "buttonText": "Main Menu",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.5999999046325684,
+                    "textPositionX": -28.799999237060547,
+                    "textPositionY": -3.4000000953674316,
                     "alpha": 1
                 }
             ]
         },
         {
-            "UUID": 792698622,
-            "Parent UUID": 1838526428,
-            "Name": "Button Exit",
+            "UUID": 1756240318,
+            "Parent UUID": 566911234,
+            "Name": "Main Menu Image",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -372,13 +324,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -622.5,
-                        -31,
+                        -633.5,
+                        -405,
                         36.099998474121094
                     ],
                     "Scale": [
-                        0.29499998688697815,
-                        0.048333331942558289,
+                        0.54583334922790527,
+                        0.090000003576278687,
                         1
                     ],
                     "rotationEuler": [
@@ -386,58 +338,33 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
+                    "buttonWidth": 327.5,
+                    "buttonHeight": 54,
                     "lastButtonWidth": 1454,
-                    "lastButtonHeight": 708,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Exit",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.8000001907348633,
+                    "Type": 13,
                     "alpha": 1
                 }
             ]
         },
         {
-            "UUID": 828963847,
-            "Parent UUID": 417171234,
-            "Name": "AudioMainMenu",
+            "UUID": 1913840108,
+            "Parent UUID": 566911234,
+            "Name": "AudioWinMenu",
             "Active": true,
             "Static": true,
             "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/AudioMainMenu.rgprefab",
+            "Prefab Path": "Assets\/Prefabs\/AudioWinMenu.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Components": [
@@ -477,9 +404,6 @@
                         },
                         {
                             "1": "UISELECT"
-                        },
-                        {
-                            "2": "MUSICPLAY"
                         }
                     ]
                 },
@@ -490,9 +414,9 @@
             ]
         },
         {
-            "UUID": 392827484,
-            "Parent UUID": 417171234,
-            "Name": "Button Credits",
+            "UUID": 707615095,
+            "Parent UUID": 566911234,
+            "Name": "Names List",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -504,13 +428,13 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -622.5,
-                        -92,
+                        0,
+                        0,
                         36.099998474121094
                     ],
                     "Scale": [
-                        0.29499998688697815,
-                        0.048333331942558289,
+                        0.1666666716337204,
+                        0.1666666716337204,
                         1
                     ],
                     "rotationEuler": [
@@ -518,30 +442,12 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
                     "lastButtonWidth": 1454,
-                    "lastButtonHeight": 708,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
@@ -550,15 +456,13 @@
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 12,
-                    "buttonText": "Credits",
+                    "Type": 16,
+                    "buttonText": "Text",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.5999999046325684,
-                    "alpha": 1
+                    "TextFile": "Library\/Dialogues\/Credits.rgdialogue"
                 }
             ]
         }

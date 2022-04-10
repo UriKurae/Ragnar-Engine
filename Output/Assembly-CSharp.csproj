@@ -69,6 +69,7 @@
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Quaternion.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Time.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
+    <Compile Include="Assets\Scripts\Credits.cs" />
     <Compile Include="Assets\Scripts\DialoguesManager.cs" />
     <Compile Include="Assets\Scripts\LoseScreen.cs" />
     <Compile Include="Assets\Scripts\MainMenuBackScreen.cs" />

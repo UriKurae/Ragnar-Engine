@@ -6,14 +6,21 @@ public class mainMenuBackScreen : RagnarComponent
 	Vector3 imagePos;
 	bool isFirstS = true;
 	bool isFirstE = true;
+	bool isFirstC = true;
 	GameObject AudioController;
 	GameObject start;
+	GameObject exit;
+	GameObject credits;
+	GameObject image ;
 	public void Start()
 	{
 		AudioController = GameObject.Find("AudioMainMenu");
 		AudioController.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
 		AudioController.GetComponent<AudioSource>().SetState("MUSIC", "MAINMENU");
-		start = GameObject.Find("Button Start");
+		start = GameObject.Find("Button Start"); 
+		exit = GameObject.Find("Button Exit");
+		credits = GameObject.Find("Button Credits");
+		image = GameObject.Find("Background");
 	}
 
 	public void Update()
@@ -22,10 +29,46 @@ public class mainMenuBackScreen : RagnarComponent
 		PlayButtonAction();
 		// Button exit
 		ExitButtonAction();
+		// Button credits
+		CreditsButtonAction();
 		// Image back
 		BackgroundImageAction();
 	}
-	
+	void CreditsButtonAction()
+	{
+		int a = credits.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				if (!isFirstC)
+				{
+					credits.GetComponent<UIButton>().SetTextPosition(-23.6f, -4.6f);
+					isFirstC = true;
+				}
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (isFirstC)
+				{
+					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					credits.GetComponent<UIButton>().SetTextPosition(-13.6f, -4.6f);
+					isFirstC = false;
+					//poner sonido
+				}
+				break;
+			case 3:
+				// pressed mode
+				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
+				credits.GetComponent<UIButton>().SetTextPosition(-0.0f, -4.6f);
+				SceneManager.LoadScene("Credits");
+				//cambiar de escena
+				break;
+		}
+	}
 	void PlayButtonAction()
 	{
 		int a = start.GetComponent<UIButton>().GetButtonState();
@@ -56,14 +99,14 @@ public class mainMenuBackScreen : RagnarComponent
 				// pressed mode
 				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
 				start.GetComponent<UIButton>().SetTextPosition(-0.0f, -4.6f);
-				SceneManager.NextScene();
+				SceneManager.LoadScene("build");
 				//cambiar de escena
 				break;
 		}
 	}
 	void ExitButtonAction()
 	{
-		GameObject exit = GameObject.Find("Button Exit");
+		
 		int a = exit.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -101,7 +144,7 @@ public class mainMenuBackScreen : RagnarComponent
 
 	void BackgroundImageAction()
 	{
-		GameObject image = GameObject.Find("Background");
+		
 		image.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 
 		imagePos = image.GetComponent<Transform2D>().position2D;
