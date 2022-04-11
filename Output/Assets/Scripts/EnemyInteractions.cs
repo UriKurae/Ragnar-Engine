@@ -38,7 +38,7 @@ public class EnemyInteractions : RagnarComponent
         Vector3 enemyForward = gameObject.transform.forward;
         Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y, enemyPos.z + enemyForward.z * offset.z);
 
-        RayCast.PerceptionCone(initPos, enemyForward, 60, 10, radius);
+        RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, radius);
     }
 
     private void Shoot()
