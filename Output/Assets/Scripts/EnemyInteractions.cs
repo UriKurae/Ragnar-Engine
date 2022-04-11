@@ -24,29 +24,28 @@ public class EnemyInteractions : RagnarComponent
     }
     public void Update()
     {
-        PerceptionCone(8);
-        Shoot();
+        if(PerceptionCone())
+            Shoot();
         if (pendingToDelete)
         {
             InternalCalls.Destroy(gameObject);
         }
     }
 
-    private void PerceptionCone(int radius)
+    private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
         Vector3 enemyForward = gameObject.transform.forward;
-        Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
+        Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        RayCast.PerceptionCone(initPos, enemyForward, 60, 16, radius);
+        return RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
     }
 
     private void Shoot()
     {
-        if (PlayerDetection(8)) SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
-        else SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
 
-        if (PlayerDetection(8) && canShoot)
+        if (canShoot)
         {
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
@@ -68,34 +67,6 @@ public class EnemyInteractions : RagnarComponent
                 }
             }
         }
-    }
-
-    bool PlayerDetection(int radius)
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (!players[i].GetComponent<Player>().invisible)
-            {
-                Vector3 enemyPos = gameObject.transform.globalPosition;
-                Vector3 enemyForward = gameObject.transform.forward;
-                Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x * 0.6f, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z * 0.6f);
-                Vector3 playerPos = players[i].transform.globalPosition;
-                playerPos.y = initPos.y;
-                Vector3 dirVec = playerPos - initPos;
-                if (dirVec.magnitude < radius)
-                {
-                    float angle = gameObject.transform.GetAngleBetween(enemyForward, dirVec.normalized) * Constants.RADTODEG;
-                    Vector3 endPos = initPos + dirVec.normalized * radius;
-
-                    if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
-                    {
-                        index = i;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public void OnCollision(Rigidbody other)

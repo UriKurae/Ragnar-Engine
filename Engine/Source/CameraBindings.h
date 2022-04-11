@@ -6,7 +6,9 @@
 
 #include "Math/float3x3.h"
 #include "Geometry/LineSegment.h"
+#include "Geometry/Triangle.h"
 
+#include "ScriptBindings.h"
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
 #include <metadata/class.h>
@@ -64,10 +66,11 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	return false;
 }
 
-void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius)
+bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 forward = app->moduleMono->UnboxVector(_forward);
+	std::vector<GameObject*> gos = app->moduleMono->UnboxArray(arr, size);
 	float3 forwardAux = forward;
 	float angle = _angle * DEGTORAD;
 
@@ -106,11 +109,28 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 		triangleMap.clear();
 		hit = float3::zero;
 	}
+
+	bool ret = false;
+	for (size_t i = 0; i < vertex.size() && !ret; i+=3)
+	{
+		Triangle t(vertex[i], vertex[i+1], vertex[i+2]);
+		for (size_t j = 0; j < gos.size(); j++)
+		{
+			if (t.Intersects(gos.at(j)->GetOOB()))
+			{
+				ret = true;
+				break;
+			}
+		}		
+	}
+
 	//Close triangle
 	vertex.push_back(pointA);
+	
 	std::reverse(vertex.begin(), vertex.end());
 
 	app->renderer3D->enemyCones.resize(vertex.size());
 	memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
 
+	return ret;
 }

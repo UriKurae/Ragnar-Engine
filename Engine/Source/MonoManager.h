@@ -49,6 +49,7 @@ public:
 
 	static Quat UnboxQuat(MonoObject* _obj);
 	static float3 UnboxVector(MonoObject* _obj);
+	static std::vector<GameObject*> UnboxArray(MonoArray* arr, int size);
 	static float2 UnboxVector2D(MonoObject* _obj);
 
 	static void LoadFieldData(SerializedField& _field, MonoObject* _object);
