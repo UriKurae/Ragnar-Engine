@@ -2,14 +2,16 @@ using System;
 using RagnarEngine;
 public enum Type
 {
-    Ground
+    BASIC,
+    TANK,
+    UNDISTRACTABLE,
+    AIR
 }
 
 public class Enemies
 {
-    // Basic Character info
+    // Basic Enemy info
     public string name;
     public string prefabPath;
     public Type type;
-
 }

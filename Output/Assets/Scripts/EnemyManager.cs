@@ -10,8 +10,9 @@ public class EnemyManager : RagnarComponent
 		{
 			name = "Ground Enemy",
 			prefabPath = "Enemy",
-			type = Type.Ground,
+			type = Type.BASIC,
 		};
+
 		foreach (Enemies c in enemies)
 		{
 			InternalCalls.InstancePrefab(c.prefabPath);
