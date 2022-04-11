@@ -199,11 +199,7 @@ void ModuleCamera3D::ThrowRayCastOnlyOBB(std::set<GameObject*>& gameObjects, mat
 		{
 			picking = prevLine;
 			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
-			{
 				aabbMap[dNear] = (*it);
-				//DEBUG_LOG("Intersected with %s", (*it)->GetName());
-				break;
-			}
 		}
 	}
 }

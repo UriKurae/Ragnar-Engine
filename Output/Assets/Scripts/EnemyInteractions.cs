@@ -78,15 +78,14 @@ public class EnemyInteractions : RagnarComponent
             {
                 Vector3 enemyPos = gameObject.transform.globalPosition;
                 Vector3 enemyForward = gameObject.transform.forward;
+                Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x * 0.6f, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z * 0.6f);
                 Vector3 playerPos = players[i].transform.globalPosition;
-                Vector3 distance = playerPos - enemyPos;
-                distance.y = 0;
-                if (distance.magnitude < radius)
+                playerPos.y = initPos.y;
+                Vector3 dirVec = playerPos - initPos;
+                if (dirVec.magnitude < radius)
                 {
-                    float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
-                    Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z);
-                    Vector3 endPos = initPos + distance.normalized * radius;
-                    endPos.y = initPos.y;
+                    float angle = gameObject.transform.GetAngleBetween(enemyForward, dirVec.normalized) * Constants.RADTODEG;
+                    Vector3 endPos = initPos + dirVec.normalized * radius;
 
                     if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
                     {
