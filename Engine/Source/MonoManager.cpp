@@ -181,11 +181,18 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
 
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
+	mono_add_internal_call("RagnarEngine.UIButton::SetButtonState", SetButtonState);
 	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetButtonText);
 	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetButtonText);
 
 	mono_add_internal_call("RagnarEngine.UIImage::LoadTexture", LoadTexture);
 	mono_add_internal_call("RagnarEngine.UIImage::UseTexture", UseTexture);
+
+	mono_add_internal_call("RagnarEngine.UIImage::SetImageGeneralColor", SetImageGeneralColor);
+	mono_add_internal_call("RagnarEngine.UIImage::GetImageGeneralColor", GetImageGeneralColor);
+
+	mono_add_internal_call("RagnarEngine.UIImage::SetImageAlpha", SetImageAlpha);
+	mono_add_internal_call("RagnarEngine.UIImage::GetImageAlpha", GetImageAlpha);
 
 	mono_add_internal_call("RagnarEngine.UIButton::SetButtonAlpha", SetButtonAlpha);
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonAlpha", GetButtonAlpha);
@@ -195,6 +202,9 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIButton::SetButtonTextColor", SetButtonTextColor);
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonTextColor", GetButtonTextColor);
+
+	mono_add_internal_call("RagnarEngine.UIButton::SetButtonGeneralColor", SetButtonGeneralColor);
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonGeneralColor", GetButtonGeneralColor);
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);

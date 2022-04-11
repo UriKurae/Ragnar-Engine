@@ -39,13 +39,16 @@ bool ImageComponent::Update(float dt)
 {
 	return true;
 }
-
+void ImageComponent::SetActualColor(float Red, float Green, float Blue)
+{
+	actualColor.r = Red / 255;
+	actualColor.g = Green / 255;
+	actualColor.b = Blue / 255;
+}
 void ImageComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
-
-	glColor4f(color.r, color.g, color.b, color.a);
 	planeToDraw->DrawPlane2D(principal->GetTexture().get());
 
 	glDisable(GL_ALPHA_TEST);

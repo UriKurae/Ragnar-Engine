@@ -45,6 +45,11 @@ public class mainMenuBackScreen : RagnarComponent
 
 
 		back = GameObject.Find("Background");
+
+
+		continueB.GetComponent<UIButton>().SetButtonState(0);
+		continueB.GetComponent<UIButton>().SetButtonTextColor(121,121,121);
+		continueB.GetComponent<UIButton>().SetButtonGeneralColor(121, 121, 121);
 	}
 
 	public void Update()

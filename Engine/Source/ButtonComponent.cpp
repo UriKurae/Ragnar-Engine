@@ -45,10 +45,10 @@ bool ButtonComponent::Update(float dt)
 	RG_PROFILING_FUNCTION("Button Update");
 	buttonText.SetOnlyPosition(float2(GetParentPosition().x + textPos.x, GetParentPosition().y + textPos.y));
 
-	if (!active)
+	/*if (!active)
 		state = State::DISABLED;
 	else
-		state = State::NORMAL;
+		state = State::NORMAL;*/
 
 	if (state != State::DISABLED)
 	{
@@ -82,11 +82,18 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
+void ButtonComponent::SetActualColor(float Red, float Green, float Blue)
+{
+	generalColor.r = Red / 255;
+	generalColor.g = Green / 255;
+	generalColor.b = Blue / 255;
+}
 void ButtonComponent::setTextColor(float Red, float Green, float Blue)
 {
-	textColor.r = Red;
-	textColor.g = Green;
-	textColor.b = Blue;
+
+	textColor.r = Red/255;
+	textColor.g = Green / 255;
+	textColor.b = Blue / 255;
 	buttonText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
 }
 float3 ButtonComponent::GetTextColor()

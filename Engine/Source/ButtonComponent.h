@@ -21,6 +21,10 @@ public:
 
 	float2 GetParentPosition();
 	State GetState() { return state; };
+	void SetState(int newState) {state=(State)newState; }; 
+		
+		
+		
 	inline Text GetButtonText() { return buttonText; };
 	inline char* GetText() { return text; };
 	void SetText(char* newText) 
@@ -29,7 +33,9 @@ public:
 		strcpy(text, newText);
 	}
 
-	inline Color GetActualColor() { return actualColor; };
+	inline Color GetActualColor() { return generalColor; };
+
+	void SetActualColor(float Red, float Green, float Blue);
 
 	inline void SetNormalMaterial(MaterialComponent* texture) { normalMaterial = texture; };
 	inline void SetFocusedMaterial(MaterialComponent* texture) { focusedMaterial = texture; };
@@ -67,8 +73,7 @@ private:
 	MaterialComponent* actual;
 
 	Color textColor = white;
-	Color actualColor = white;
-
+	Color generalColor = white;
 	char text[64] = "Button";
 	float fontScale = 1;
 };

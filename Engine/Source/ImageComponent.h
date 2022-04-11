@@ -19,7 +19,7 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	inline Color GetColor() { return color; };
+	void SetActualColor(float Red, float Green, float Blue);
 	inline Color GetActualColor() { return actualColor; };
 	inline std::string GetText() { return text; };
 
@@ -34,7 +34,6 @@ private:
 	std::vector<MaterialComponent*> materialList;
 	float alpha = 1.0f;
 	State state = State::NORMAL;
-	Color color = white;
-	Color actualColor = color;
+	Color actualColor = white;
 	std::string text;
 };

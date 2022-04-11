@@ -16,5 +16,16 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void UseTexture(int ID);
 
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetImageGeneralColor(float Red, float Green, float Blue);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 GetImageGeneralColor();
+
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetImageAlpha(float NewAlpha);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern float GetImageAlpha();
     }
 }

@@ -56,6 +56,21 @@ const Vec3 GetButtonTextColor(MonoObject* go)
 	return Vec3(tr->GetTextColor().x, tr->GetTextColor().y, tr->GetTextColor().z);
 }
 
+
+void SetButtonGeneralColor(MonoObject* go, float Red, float Green, float Blue)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+
+	tr->SetActualColor(Red, Green, Blue);
+
+}
+const Vec3 GetButtonGeneralColor(MonoObject* go)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	return Vec3(tr->GetActualColor().r, tr->GetActualColor().g, tr->GetActualColor().b);
+}
+
+
 int GetButtonState(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
@@ -63,6 +78,14 @@ int GetButtonState(MonoObject* go)
 	
 
 	return (int)tr->GetState();
+}
+void SetButtonState(MonoObject* go,int newState)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	//float3 position = ;
+	tr->SetState(newState);
+
+	
 }
 void SetButtonText(MonoObject* go, MonoString* text)
 {
@@ -180,3 +203,26 @@ void UseTexture(MonoObject* go, int ID)
 	tr->UseTexture(ID);
 }
 
+void SetImageGeneralColor(MonoObject* go, float Red, float Green, float Blue)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+
+	tr->SetActualColor(Red, Green, Blue);
+
+}
+const Vec3 GetImageGeneralColor(MonoObject* go)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	return Vec3(tr->GetActualColor().r, tr->GetActualColor().g, tr->GetActualColor().b);
+}
+
+float GetImageAlpha(MonoObject* go)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	return tr->GetAlpha();
+}
+void SetImageAlpha(MonoObject* go, float newAlpha)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	tr->SetAlpha(newAlpha);
+}

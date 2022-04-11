@@ -653,7 +653,7 @@ bool ModuleUI::Update(float dt)
 		else if (ImageComponent* imageComp = go->GetComponent<ImageComponent>())
 		{
 			//textExample = imageComp->GetText();
-			color = imageComp->GetColor();
+			//color = imageComp->GetColor();
 		}
 		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
 		{
