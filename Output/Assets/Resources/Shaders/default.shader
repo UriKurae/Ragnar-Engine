@@ -56,7 +56,7 @@ void main()
 	vPosition = vec3(model * vec4(position, 1));
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
-	fragPosLightSpace = lightSpaceMatrix * totalPosition;
+	fragPosLightSpace = lightSpaceMatrix * model * totalPosition;
 	vCamPos = camPos;
 	vTextureAlpha = 1.0f;
 }
@@ -157,9 +157,9 @@ float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	
 	bool isLit = !(projCoords.x >= .0f && projCoords.x <= 1.f
 		&& projCoords.y >= .0f && projCoords.y <= 1.f
-		&& texture2D(depthTexture, projCoords.xy).x < clamp(projCoords.z, 0, 1) - 0.0005f);
+		&& texture2D(depthTexture, projCoords.xy).x < clamp(projCoords.z, 0, 1) /*- 0.000005f*/);
 
-	float shadow = isLit ? 0.1 : 1;
+	float shadow = isLit ? 0 : 1;
 	return shadow;
 
 	//if (projCoords.z > 1.0)

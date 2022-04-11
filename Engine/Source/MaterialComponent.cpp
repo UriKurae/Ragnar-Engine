@@ -399,24 +399,12 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 
-	//Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
-	//Frustum* frustum = nullptr;
-	//if (gameCam)
-	//{
-	//	frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
-	//}
-	//else
-	//{
-	//	frustum = &app->camera->cameraFrustum;
-	//}
-
 	Frustum frustum;
 	frustum.pos = app->renderer3D->dirLight->dir;
 
 	frustum.front = app->renderer3D->dirLight->dir;
 	float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
-	//frustum.up = right.Cross(frustum.front).Normalized();
-	frustum.up = { 0,1,0 };
+	frustum.up = right.Cross(frustum.front).Normalized();
 	frustum.type = FrustumType::OrthographicFrustum;
 
 	frustum.orthographicHeight = 256;
@@ -429,17 +417,14 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 	float4x4 lightView = frustum.ViewMatrix();
 	float4x4 lightProjection = frustum.projectionMatrix;
 
-	//float4x4 lightSpace = lightProjection * lightView;
-	float4x4 lightSpace = frustum.viewProjMatrix;
+	float4x4 lightSpace = lightProjection * lightView;
 	
 	if (genShadows)
 	{
-		glViewport(0, 0, 512, 512);
+		glViewport(0, 0, 2048, 2048);
 		shadowShader->Bind();
 		shadowShader->SetUniformMatrix4f("model", model.Transposed());
 		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
-		
-		//glViewport(app->editor->GetViewport())
 
 		return;
 	}
