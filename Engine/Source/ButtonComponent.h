@@ -2,10 +2,15 @@
 #include "Component.h"
 #include "Color.h"
 #include "Text.h"
-
+#include "ModuleUI.h"
+#include <map>
+#include <string>
 class MyPlane;
 class GameObject;
 class MaterialComponent;
+class Character;
+class Shadert;
+typedef unsigned int uint;
 class ButtonComponent : public Component
 {
 public:
@@ -58,9 +63,12 @@ public:
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
 	inline float GetAlpha() { return alpha; };
 	MyPlane* planeToDraw;
-
+	void loadFont(const char* path);
+	uint VAO = 0, VBO = 0;
+	std::map<char, Character> characters;
+	Shadert* shader = nullptr;
 private:
-	
+
 	float alpha = 1.0f;
 	Text buttonText;
 	State state = State::NORMAL;
@@ -71,7 +79,7 @@ private:
 	MaterialComponent* pressedMaterial;
 	MaterialComponent* disabledMaterial;
 	MaterialComponent* actual;
-
+	std::string fontPath;
 	Color textColor = white;
 	Color generalColor = white;
 	char text[64] = "Button";

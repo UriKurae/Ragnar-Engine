@@ -2,15 +2,18 @@
 #include "Application.h"
 
 #include "ModuleInput.h"
-#include "ModuleUI.h"
+
 #include"FileSystem.h"
 #include "GameObject.h"
+
+#include "ModuleSceneManager.h"
 #include "TransformComponent.h"
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
 #include "Globals.h"
 #include "GL/glew.h"
-
+#include "freetype-2.10.0/include/ft2build.h"
+#include FT_FREETYPE_H 
 #include "Profiling.h"
 
 TextComponent::TextComponent(GameObject* own)
@@ -19,17 +22,20 @@ TextComponent::TextComponent(GameObject* own)
 	own->isUI = true;
 	active = true;
 	textToShow.setText("Text", 5, 5, 0.5, { 255,255,255 });
-
+	fontPath = "Library/Fonts/Montserrat-Bold.ttf";
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
 		own->CreateComponent(ComponentType::TRANFORM2D);
 		own->CreateComponent(ComponentType::MATERIAL);
-	}	
+		loadFont(fontPath);	
+	}
+	//app->userInterface->loadFont("Library/Fonts/Montserrat-Bold.ttf", &characters, shader, VAO, VBO);
+	shader = new Shadert("", "");
 	app->userInterface->UIGameObjects.push_back(own);
 	app->userInterface->OrderButtons();
 	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	//planeToDraw->own = own;
-
+	
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
 }
@@ -95,6 +101,23 @@ void TextComponent::OnEditor()
 		ImGui::SliderFloat("Color Multiplier", &multiplier, 1, 5);
 		ImGui::InputFloat("Fade Duration", &fadeDuration);
 
+		char au[384];
+		strcpy(au, fontPath.c_str());
+		if (ImGui::InputText("Font Path", au, IM_ARRAYSIZE(au)))
+
+			fontPath = au;
+		if (ImGui::Button("Set Font"))
+		{
+
+			RELEASE(shader);
+			shader = nullptr;
+			VAO = 0;
+			VBO = 0;
+			characters.clear();
+			loadFont(fontPath.c_str());
+		}
+
+
 		char text[384];
 		strcpy(text, textToShow.textt.c_str());
 		if(ImGui::InputText("Texte", text, IM_ARRAYSIZE(text)))
@@ -131,7 +154,11 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	{
 		loadtext(fileText);
 	}
-	
+	if (node.GetJsonString("fontPath")) {
+		fontPath = node.GetJsonString("fontPath");
+	}
+
+	loadFont(fontPath);
 
 
 	return true;
@@ -143,6 +170,7 @@ bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "buttonText", textToShow.textt.c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "fontPath", fontPath.c_str());
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "fontScale", fontScale);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.r", textColor.r);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "textColor.g", textColor.g);
@@ -166,8 +194,92 @@ void TextComponent::loadtext(std::string path)
 		std::string aux = c.GetJsonString("Text");
 
 		textToShow.textt = aux;
+
 	}
 
+}
+
+void TextComponent::loadFont(std::string path) {
+	FT_Library ft;
+	if (FT_Init_FreeType(&ft))
+	{
+		//LOG("ERROR::FREETYPE: Could not init FreeType Library");
+		//return false;
+	}
+
+	FT_Face face;
+	//"Library/Fonts/Montserrat-Bold.ttf"
+
+	if (FT_New_Face(ft, path.c_str(), 0, &face))
+	{
+		//LOG("ERROR::FREETYPE: Failed to load font");
+		//return false;
+	}
+	else {
+		// set size to load glyphs as
+		FT_Set_Pixel_Sizes(face, 0, 48);
+
+		// disable byte-alignment restriction
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+		// load first 128 characters of ASCII set
+		for (unsigned char c = 0; c < 128; c++)
+		{
+			// Load character glyph 
+			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+			{
+				DEBUG_LOG("ERROR::FREETYTPE: Failed to load Glyph");
+				continue;
+			}
+			// generate texture
+			unsigned int texture;
+			glGenTextures(1, &texture);
+			glBindTexture(GL_TEXTURE_2D, texture);
+			glTexImage2D(
+				GL_TEXTURE_2D,
+				0,
+				GL_RED,
+				face->glyph->bitmap.width,
+				face->glyph->bitmap.rows,
+				0,
+				GL_RED,
+				GL_UNSIGNED_BYTE,
+				face->glyph->bitmap.buffer
+			);
+			// set texture options
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			// now store character for later use
+			Character character = {
+				texture,
+				IVec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+				IVec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+				static_cast<unsigned int>(face->glyph->advance.x)
+			};
+			characters.insert(std::pair<char, Character>(c, character));
+		}
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	// destroy FreeType once we're finished
+	FT_Done_Face(face);
+	FT_Done_FreeType(ft);
+
+
+	// configure VAO/VBO for texture quads
+	// -----------------------------------
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	shader = new Shadert("", "");
 }
 //void TextComponent::savetext()
 //{

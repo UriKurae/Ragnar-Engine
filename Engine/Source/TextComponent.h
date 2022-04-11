@@ -3,11 +3,15 @@
 #include "Component.h"
 #include "Color.h"
 #include "Text.h"
-
+#include "ModuleUI.h"
+#include <map>
 class SDL_Rect;
 class SDL_Texture;
 class MyPlane;
 class GameObject;
+class Character;
+class Shadert;
+typedef unsigned int uint;
 class TextComponent : public Component
 {
 public:
@@ -37,8 +41,13 @@ public:
 	void setTextColor(float Red, float Green, float Blue);
 	float3 GetTextColor();
 	Text textToShow;
+	
+	uint VAO = 0, VBO = 0;
+	void loadFont(std::string path);
+	std::map<char, Character> characters;
+	Shadert* shader = nullptr;
 private:
-
+	std::string fontPath;
 	void loadtext(std::string path);
 	/*void savetext();*/
 	bool fadeUI = false;

@@ -330,25 +330,27 @@ ModuleUI::~ModuleUI()
 
 bool ModuleUI::Start()
 {
+	
+	return true;
+}
+void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shadert* shade, uint VAO, uint VBO)
+{
+
+
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
 	{
 		//LOG("ERROR::FREETYPE: Could not init FreeType Library");
-		return false;
+		//return false;
 	}
 
 	FT_Face face;
+	//"Library/Fonts/Montserrat-Bold.ttf"
 
-#ifdef DIST
-	const char* path = "Library/Fonts/Montserrat-Bold.ttf";
-#else
-	const char* path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
-#endif
-
-	if (FT_New_Face(ft, path, 0, &face))
+	if (FT_New_Face(ft, path.c_str(), 0, &face))
 	{
 		//LOG("ERROR::FREETYPE: Failed to load font");
-		return false;
+		//return false;
 	}
 	else {
 		// set size to load glyphs as
@@ -393,7 +395,7 @@ bool ModuleUI::Start()
 				IVec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
 				static_cast<unsigned int>(face->glyph->advance.x)
 			};
-			characters.insert(std::pair<char, Character>(c, character));
+			(*chara).insert(std::pair<char, Character>(c, character));
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -414,8 +416,7 @@ bool ModuleUI::Start()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	shader = new Shadert("", "");
-	return true;
+	//shade = new Shadert("", "");
 }
 void ModuleUI::updateText()
 {
@@ -423,10 +424,9 @@ void ModuleUI::updateText()
 	app->renderer3D->OnResize(size.z, size.w);
 	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
 }
-void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
+void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color, Shadert* shader, std::map<char, Character>* characters, uint VAO, uint VBO)
 {
 	// activate corresponding render state	
-
 
 	shader->Use();
 	updateText();
@@ -460,13 +460,13 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	glBindVertexArray(VAO);
 
 	// iterate through all characters
-	DrawCharacters(text, x, scale, y);
+	DrawCharacters(text, x, scale, y, characters,  VAO, VBO);
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	shader->StopUse();
 }
 // Draw all text letters 
-void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
+void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO)
 {
 	float auxX = x;
 	int line = 0;
@@ -474,7 +474,7 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++)
 	{
-		Character ch = characters[*c];
+		Character ch = (*characters)[*c];
 
 		bool newLine = false;
 		u = (*c);
@@ -688,12 +688,14 @@ void ModuleUI::Draw()
 		if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 		{
 			go->Draw(nullptr);
-			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color);
+			
+			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color, button->shader, &button->characters, button->VAO, button->VBO);
 			button = nullptr;
 		}
 		else if (TextComponent* text = go->GetComponent<TextComponent>())
 		{
-			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color);
+			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color, text->shader, &text->characters, text->VAO, text->VBO);
+			
 			text = nullptr;
 		}
 		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
@@ -717,7 +719,7 @@ void ModuleUI::Draw()
 
 bool ModuleUI::CleanUp()
 {
-	RELEASE(shader);
+	//RELEASE(shader);
 	return true;
 }
 
