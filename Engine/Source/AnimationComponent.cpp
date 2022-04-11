@@ -12,8 +12,6 @@
 #include "Math/TransformOps.h"
 #include "Imgui/imgui_stdlib.h"
 
-#include "Profiling.h"
-
 AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(1.0f)
 {
 	type = ComponentType::ANIMATION;
@@ -78,8 +76,6 @@ void AnimationComponent::OnEditor()
 					currState->loop = false;
 				}
 
-				std::vector<std::shared_ptr<Animation>> res;
-
 				std::vector<std::string> files;
 				app->fs->DiscoverFiles("Library/Animations", files);
 				for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -90,23 +86,15 @@ void AnimationComponent::OnEditor()
 						app->fs->GetFilenameWithoutExtension(*it);
 						*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 						uint uid = std::stoll(*it);
-						res.push_back(std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid)));
+						std::shared_ptr<Animation> res = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid));
+						if (ImGui::Selectable(res->GetName().c_str()))
+						{
+							res->Load();
+							currState->anim = res;
+							if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
+							currAnim = currState;
+						}
 						ImGui::PopID();
-					}
-				}
-
-				std::sort(res.begin(), res.end(), [](std::shared_ptr<Resource> a, std::shared_ptr<Resource> b) {
-					return (a.get()->GetName() < b.get()->GetName());
-					});
-
-				for (std::vector<std::shared_ptr<Animation>>::iterator it = res.begin(); it != res.end(); ++it)
-				{
-					if (ImGui::Selectable((*it).get()->GetName().c_str()))
-					{
-						(*it)->Load();
-						currState->anim = (*it);
-						if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
-						currAnim = currState;
 					}
 				}
 
@@ -181,8 +169,6 @@ void AnimationComponent::AnimationInfo()
 
 bool AnimationComponent::Update(float dt)
 {
-	RG_PROFILING_FUNCTION("Animation Update");
-
 	deltaTime = dt;
 	if (currAnim && playing && app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
@@ -227,6 +213,7 @@ bool AnimationComponent::Update(float dt)
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
+		//CalculateBoneTransform(currAnim->anim->GetBones(), float4x4::identity);
 	}
 
 	return true;
@@ -272,6 +259,64 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 		CalculateBoneTransform(data.children[i], globalTransformation);
 }
 
+void AnimationComponent::CalculateBoneTransform(std::vector<Bone>& bones, float4x4 parentTransform)
+{
+	float4x4 nodeTransform = bones[0].GetTransform();
+
+	std::vector<Bone> currentBones = currAnim->anim->GetBones();
+	std::vector<Bone> lastBones = currAnim->anim->GetBones();
+
+	if (!interpolating)
+	{
+		for (int i = 0; i < currentBones.size(); ++i)
+		{
+			Bone* currBone = &currentBones[i];
+			if (currBone)
+			{
+				currBone->Update(currentTime);
+				nodeTransform = currBone->GetTransform();
+			}
+			float4x4 globalTransformation;
+			if (currentBones[i].GetParentId() != -1) globalTransformation = currentBones[currentBones[i].GetParentId()].GetTransform() * currBone->GetTransform();
+			else
+				currBone->GetTransform();
+
+			auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
+			if (boneInfoMap.find(currentBones[i].GetName()) != boneInfoMap.end())
+			{
+				int index = boneInfoMap[currentBones[i].GetName()].id;
+				float4x4 offset = boneInfoMap[currentBones[i].GetName()].offset;
+				finalBoneMatrices[index] = globalTransformation * offset;
+			}
+		}
+	}
+	else if (lastAnim != currAnim)
+	{
+		for (int i = 0; i < currentBones.size(); ++i)
+		{
+			Bone* currBone = &currentBones[i];
+			Bone* lastBone = &lastBones[i];
+			if (currBone && lastBone)
+			{
+				currBone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
+				nodeTransform = currBone->GetTransform();
+			}
+			float4x4 globalTransformation;
+			if (currentBones[i].GetParentId() != -1) globalTransformation = currentBones[currentBones[i].GetParentId()].GetTransform() * currBone->GetTransform();
+			else
+				currBone->GetTransform();
+
+			auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
+			if (boneInfoMap.find(currentBones[i].GetName()) != boneInfoMap.end())
+			{
+				int index = boneInfoMap[currentBones[i].GetName()].id;
+				float4x4 offset = boneInfoMap[currentBones[i].GetName()].offset;
+				finalBoneMatrices[index] = globalTransformation * offset;
+			}
+		}
+	}
+}
+
 float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform)
 {
 	float3 lastPosition;
@@ -287,7 +332,7 @@ float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4
 	transform.Decompose(position, rotation, scale);
 
 	float scaleFactor = 0.0f;
-	float midWayLength = currentTime - 0; 
+	float midWayLength = currentTime - 0;
 	float framesDiff = 60 - 0;
 	scaleFactor = midWayLength / framesDiff;
 	if (scaleFactor < 0) scaleFactor = 0.0f;
@@ -298,7 +343,7 @@ float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4
 	float4x4 rot = float4x4(Slerp(lastRotation, rotation, scaleFactor));
 	float4x4 sca = float4x4::Scale(Lerp(lastScale, scale, scaleFactor));
 
-	if (scaleFactor >= 1.0f) 
+	if (scaleFactor >= 1.0f)
 		interpolating = false;
 
 	return pos * rot * sca;
@@ -330,7 +375,7 @@ float4x4 AnimationComponent::InterpolateWithOneBone(float4x4& transform, Bone& b
 	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
 	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
 
-	if (scaleFactor >= 1.0f) 
+	if (scaleFactor >= 1.0f)
 		interpolating = false;
 
 	return pos * rot * sca;
@@ -366,7 +411,7 @@ float4x4 AnimationComponent::InterpolateWithOneBone(Bone& bone, float4x4& transf
 	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
 	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
 
-	if (scaleFactor >= 1.0f) 
+	if (scaleFactor >= 1.0f)
 		interpolating = false;
 
 	return pos * rot * sca;
@@ -421,9 +466,9 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 		JsonParsing animF = JsonParsing();
 
 		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "State", (*it).state.c_str());
-		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets",(*it).anim != nullptr ? (*it).anim.get()->GetAssetsPath().c_str() : "");
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets", (*it).anim != nullptr ? (*it).anim.get()->GetAssetsPath().c_str() : "");
 		animF.SetNewJsonBool(animF.ValueToObject(animF.GetRootValue()), "Loop", (*it).loop);
-		
+
 		file.SetValueToArray(newArray, animF.GetRootValue());
 	}
 

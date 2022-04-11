@@ -15,19 +15,20 @@ struct Keys
 	float timeStamp = 0.0f;
 };
 
-struct BoneData 
+struct BoneData
 {
 	std::vector<Keys> keyFrames = {};
 
 	std::string name = "";
+	int parentId = -1;
 	int id = 0;
 };
 
 class Bone
 {
 public:
-	Bone(){}
-	Bone(BoneData boneData);
+	Bone() {}
+	Bone(BoneData boneData, int Id = 0);
 	~Bone();
 
 	void Update(float animationTime);
@@ -36,6 +37,7 @@ public:
 	BoneData& GetData() { return data; }
 
 	inline const std::string& GetName() const { return data.name; }
+	const int GetParentId() const { return parentId; }
 
 	inline math::float4x4 GetTransform() { return localTransform; }
 
@@ -58,14 +60,14 @@ private:
 
 private:
 	BoneData data;
-
+	int parentId;
 	math::float4x4 localTransform;
 };
 
 
 
 
-struct Weight 
+struct Weight
 {
 public:
 	Weight(unsigned int v, float w) : vertexId(v), weight(w) {}

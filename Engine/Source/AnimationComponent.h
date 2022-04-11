@@ -19,7 +19,7 @@ struct AnimState
 
 class AnimationComponent : public Component
 {
-public: 
+public:
 	AnimationComponent(GameObject* own);
 	AnimationComponent(AnimationComponent* animation);
 	~AnimationComponent();
@@ -29,6 +29,7 @@ public:
 	bool Update(float dt) override;
 
 	void CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform);
+	void CalculateBoneTransform(std::vector<Bone>& bones, float4x4 parentTransform);
 
 	float4x4 InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform);
 	float4x4 InterpolateWithOneBone(float4x4& transform, Bone& bone);
@@ -39,7 +40,7 @@ public:
 
 	void SetAnimation(std::shared_ptr<Resource> a);
 	void Play(std::string state);
-	
+
 	void GetAnimations();
 	bool HasFinished() { return currAnim->hasFinished; }
 
