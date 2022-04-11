@@ -78,9 +78,9 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 	std::stack<QuadtreeNode*> nodes;
 	std::vector<GameObject*> gameObjects;
 	std::map<float, GameObject*> triangleMap;
-	float3 arrayPos[] = { forward * radius, forwardAux * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
+	float3 arrayPos[] = { forward * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
 
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 0; i < 2; i++)
 	{
 		LineSegment ray(pointA, pointA + arrayPos[i]);
 		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, ray);
@@ -92,13 +92,12 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 	for (int i = 0; i < rays; i++)
 	{
 		LineSegment ray(pointA, pointA + (forward * float3x3::RotateY(angle/rays * i) * radius));
+		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
 		
-		//app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
-		if (hit.Equals(float3::zero)) 
-			hit = ray.b;
 		vertex.push_back(pointA); // origin
 		if (i != 0) vertex.push_back(vertex.at(vertex.size() - 2)); // previous 
 		vertex.push_back(hit); // this
+
 		if (i == 1)
 		{
 			vertex.erase(vertex.begin());
