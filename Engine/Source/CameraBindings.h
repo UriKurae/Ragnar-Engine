@@ -41,7 +41,7 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 
 	std::stack<QuadtreeNode*> nodes;
 	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
-	std::vector<GameObject*> gameObjects;
+	std::set<GameObject*> gameObjects;
 	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
 
 	std::map<float, GameObject*> triangleMap;
@@ -76,7 +76,7 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 	vertex.reserve(rays);
 
 	std::stack<QuadtreeNode*> nodes;
-	std::vector<GameObject*> gameObjects;
+	std::set<GameObject*> gameObjects;
 	std::map<float, GameObject*> triangleMap;
 	float3 arrayPos[] = { forward * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
 

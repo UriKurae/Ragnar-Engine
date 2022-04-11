@@ -124,13 +124,13 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 	}
 }
 
-void Quadtree::CollectGo(std::vector<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes)
+void Quadtree::CollectGo(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes)
 {
 	while (!nodes.empty())
 	{
 		QuadtreeNode* node = nodes.top();
 		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
-			gos.push_back(*it);
+			gos.insert(*it);
 
 		nodes.pop();
 	}

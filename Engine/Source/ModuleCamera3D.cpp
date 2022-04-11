@@ -124,7 +124,7 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 			// Fill gameObjects list 
 			std::stack<QuadtreeNode*> nodes;
 			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
-			std::vector<GameObject*> gameObjects;
+			std::set<GameObject*> gameObjects;
 			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
 
 			std::map<float, GameObject*> triangleMap;
@@ -141,10 +141,10 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 	}
 }
 
-void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& triangleMap, float3& hitPoint)
+void ModuleCamera3D::ThrowRayCast(std::set<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& triangleMap, float3& hitPoint)
 {
 	LineSegment prevLine = picking;
-	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it < gameObjects.end(); ++it)
+	for (std::set<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
 	{
 		TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 		if ((*it)->GetAABB().IsFinite() && transform)
@@ -188,11 +188,11 @@ void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::L
 		hitPoint = prevLine.b;
 }
 
-void ModuleCamera3D::ThrowRayCastOnlyOBB(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& aabbMap, float3& hitPoint)
+void ModuleCamera3D::ThrowRayCastOnlyOBB(std::set<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& aabbMap, float3& hitPoint)
 {
 	LineSegment prevLine = picking;
 	float dNear, dFar = 0;
-	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it < gameObjects.end(); ++it)
+	for (std::set<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
 	{
 		TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 		if ((*it)->GetAABB().IsFinite() && transform)
