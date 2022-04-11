@@ -148,7 +148,7 @@ struct CelShadingProps
 const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
 
 
-float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
 	// Perform perspective divide
 	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
@@ -157,25 +157,31 @@ float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	
 	bool isLit = !(projCoords.x >= .0f && projCoords.x <= 1.f
 		&& projCoords.y >= .0f && projCoords.y <= 1.f
-		&& texture2D(depthTexture, projCoords.xy).x < clamp(projCoords.z, 0, 1) /*- 0.000005f*/);
+		&& texture2D(depthTexture, projCoords.xy).x < clamp(projCoords.z, 0, 1));
 
 	float shadow = isLit ? 0 : 1;
-	return shadow;
 
-	//if (projCoords.z > 1.0)
-	//	return 0.0;
+	vec2 texSize = textureSize(tex, 0).xy;
 
-	// Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
-	//float closestDepth = texture(depthTexture, projCoords.xy).r;
-	//// Get depth of current fragment from light's perspective
-	//float currentDepth = projCoords.z;
-	//
-	//
-	//// Check whether current frag pos is in shadow
-	//float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
-	//
-	////return length(fragPosLightSpace.xyz);
-	//return shadow;
+	// Change the color so it is not full black
+	// ========================
+	vec4 colorSum = vec4(0);
+	vec2 texCoord = vec2(0);
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			texCoord = (gl_FragCoord.xy + vec2(i, j)) / texSize;
+			colorSum += texture(tex, texCoord);
+		}
+	}
+	colorSum = colorSum / 9;
+	// ========================
+
+	vec4 result = mix(vec4(1), normalize(colorSum), shadow);
+
+	// TODO: Maybe do the blur with depth texture?
+	
 }
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
@@ -199,9 +205,9 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	float shadow = CalculateShadow(fragPosLightSpace, normal, lightDir);
+	vec4 shadow = CalculateShadow(fragPosLightSpace, normal, lightDir);
 	//return vec3(shadow);
-	return ((ambient + 1 - shadow) * (diffuse + specular)) * light.intensity;
+	return ((ambient + shadow.rgb * shadow.a) * (diffuse + specular)) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
