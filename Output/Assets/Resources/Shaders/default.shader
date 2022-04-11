@@ -155,21 +155,27 @@ float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	// Transform to [0,1] range
 	projCoords = projCoords * 0.5 + 0.5;
 	
+	bool isLit = !(projCoords.x >= .0f && projCoords.x <= 1.f
+		&& projCoords.y >= .0f && projCoords.y <= 1.f
+		&& texture2D(depthTexture, projCoords.xy).x < clamp(projCoords.z, 0, 1) - 0.0005f);
+
+	float shadow = isLit ? 0.1 : 1;
+	return shadow;
+
 	//if (projCoords.z > 1.0)
 	//	return 0.0;
 
 	// Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
-	float closestDepth = texture(depthTexture, projCoords.xy).r;
-	// Get depth of current fragment from light's perspective
-	float currentDepth = projCoords.z;
-
-	//float bias = 0.005;
-	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-	// Check whether current frag pos is in shadow
-	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
-
-	//return length(fragPosLightSpace.xyz);
-	return shadow;
+	//float closestDepth = texture(depthTexture, projCoords.xy).r;
+	//// Get depth of current fragment from light's perspective
+	//float currentDepth = projCoords.z;
+	//
+	//
+	//// Check whether current frag pos is in shadow
+	//float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+	//
+	////return length(fragPosLightSpace.xyz);
+	//return shadow;
 }
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)

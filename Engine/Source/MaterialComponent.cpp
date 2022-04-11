@@ -415,8 +415,8 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 
 	frustum.front = app->renderer3D->dirLight->dir;
 	float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
-	frustum.up = right.Cross(frustum.front).Normalized();
-
+	//frustum.up = right.Cross(frustum.front).Normalized();
+	frustum.up = { 0,1,0 };
 	frustum.type = FrustumType::OrthographicFrustum;
 
 	frustum.orthographicHeight = 256;
@@ -431,7 +431,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 
 	//float4x4 lightSpace = lightProjection * lightView;
 	float4x4 lightSpace = frustum.viewProjMatrix;
-
+	
 	if (genShadows)
 	{
 		glViewport(0, 0, 512, 512);

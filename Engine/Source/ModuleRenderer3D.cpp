@@ -324,6 +324,7 @@ bool ModuleRenderer3D::PostUpdate()
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glDrawBuffers(0, nullptr);
 
 	// Shadow Pass ===================================
 	genShadows = true;
@@ -345,41 +346,25 @@ bool ModuleRenderer3D::PostUpdate()
 
 	// Scene Pass ====================================
 	mainCameraFbo->Bind();
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
 	GLenum drawBuffers2[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
 	glDrawBuffers(2, drawBuffers2);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
-	mainCameraFbo->Unbind();
+	//mainCameraFbo->Unbind();
 	// Scene Pass ====================================
 	
-	glFlush();
+	//glFlush();
 	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-
-
-	//vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
-	//vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
-	//
-	//CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
-	//coneShader->Bind();
-	//coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
-	//coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
-	//
-	//vbo->Bind();
-	//glVertexPointer(3, GL_FLOAT, 0, NULL);
-	//glEnableClientState(GL_VERTEX_ARRAY);
-	//glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
-	//vbo->Unbind();
-
-	//coneShader->Unbind();
-
 #ifndef DIST
-	mainCameraFbo->Bind();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//mainCameraFbo->Bind();
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	app->userInterface->Draw();
 #endif
 
