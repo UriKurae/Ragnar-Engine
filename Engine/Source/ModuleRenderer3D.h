@@ -85,8 +85,10 @@ public:
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 
+	void DebugDraw(GameObject* objSelected);
 public:
 	PPlane grid;
+	unsigned int shadowsDepthTexture;
 
 	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
@@ -133,4 +135,8 @@ private:
 
 	VertexBuffer* vbo;
 	std::shared_ptr<Shader> coneShader;
+
+	unsigned int shadowsFbo;
+	//unsigned int shadowsDepthTexture;
+
 };

@@ -399,22 +399,48 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 
-	Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
-	//Frustum* frustum = app->camera->cameraFrustum;
-	float3 rot = app->renderer3D->dirLight->dir;
-	float4x4 lightView = float4x4::LookAt({ 10,15,0 }, rot, { 0,1,0 }, /*frustum->up*/{ 0,1,0 });
+	//Frustum* frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
+	//Frustum* frustum = nullptr;
+	//if (gameCam)
+	//{
+	//	frustum = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum();
+	//}
+	//else
+	//{
+	//	frustum = &app->camera->cameraFrustum;
+	//}
 
-	float4 bounds = app->editor->GetGameView()->GetBounds();
-	float4x4 lightProjection = float4x4::OpenGLOrthoProjRH(frustum->nearPlaneDistance, frustum->farPlaneDistance, bounds.z, bounds.w);
+	Frustum frustum;
+	frustum.pos = app->renderer3D->dirLight->dir;
 
-	float4x4 lightSpace = lightProjection * lightView;
+	frustum.front = app->renderer3D->dirLight->dir;
+	float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
+	frustum.up = right.Cross(frustum.front).Normalized();
+
+	frustum.type = FrustumType::OrthographicFrustum;
+
+	frustum.orthographicHeight = 256;
+	frustum.orthographicWidth = 256;
+	frustum.nearPlaneDistance = 0.001;
+	frustum.farPlaneDistance = 10000;
+
+	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+
+	float4x4 lightView = frustum.ViewMatrix();
+	float4x4 lightProjection = frustum.projectionMatrix;
+
+	//float4x4 lightSpace = lightProjection * lightView;
+	float4x4 lightSpace = frustum.viewProjMatrix;
 
 	if (genShadows)
 	{
+		glViewport(0, 0, 512, 512);
 		shadowShader->Bind();
 		shadowShader->SetUniformMatrix4f("model", model.Transposed());
 		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
 		
+		//glViewport(app->editor->GetViewport())
+
 		return;
 	}
 
@@ -452,7 +478,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 	shader->SetUniform1f("normalsThickness", thickness);
 
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, fbo->GetDepthId());
+	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
 	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
 	glUniform1i(textLoc3, 1);
 

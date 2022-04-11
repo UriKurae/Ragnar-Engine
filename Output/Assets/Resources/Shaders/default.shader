@@ -76,7 +76,7 @@ in float vTextureAlpha;
 in vec4 fragPosLightSpace;
 
 layout(location = 0) out vec4 fragColor;
-layout(location = 1) out vec3 fragNormals;
+layout(location = 1) out vec4 fragNormals;
 //layout(location = 2) out vec3 fragDepth;
 
 uniform sampler2D tex;
@@ -155,8 +155,8 @@ float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	// Transform to [0,1] range
 	projCoords = projCoords * 0.5 + 0.5;
 	
-	if (projCoords.z > 1.0)
-		return 0.0;
+	//if (projCoords.z > 1.0)
+	//	return 0.0;
 
 	// Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
 	float closestDepth = texture(depthTexture, projCoords.xy).r;
@@ -168,6 +168,7 @@ float CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	// Check whether current frag pos is in shadow
 	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
 
+	//return length(fragPosLightSpace.xyz);
 	return shadow;
 }
 
@@ -193,7 +194,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 specular = light.specular * spec * material.specular;
 
 	float shadow = CalculateShadow(fragPosLightSpace, normal, lightDir);
-
+	//return vec3(shadow);
 	return ((ambient + 1 - shadow) * (diffuse + specular)) * light.intensity;
 }
 
@@ -291,7 +292,7 @@ void main()
 	}
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-	fragNormals = vec3(vNormal) * normalsThickness;
+	fragNormals = vec4(vNormal, normalsThickness);
 	//fragDepth = gl_FragDepth * normalsThickness;
 }
 

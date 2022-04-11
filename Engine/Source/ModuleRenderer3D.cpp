@@ -22,6 +22,8 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 #include "NavMeshBuilder.h"
+#include "GameView.h"
+#include "Viewport.h"
 
 #include "GL/glew.h"
 #include "Imgui/imgui_impl_sdl.h"
@@ -187,6 +189,17 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	
 	genShadows = true;
 
+
+	glGenFramebuffers(1, &shadowsFbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	glGenTextures(1, &shadowsDepthTexture);
+	glBindTexture(GL_TEXTURE_2D, shadowsDepthTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 512, 512, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowsDepthTexture, 0);
+
+
 	return ret;
 }
 
@@ -252,15 +265,17 @@ bool ModuleRenderer3D::PostUpdate()
 	PushCamera(float4x4::identity, float4x4::identity);
 
 
-	fbo->Bind();
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	
-	//GLuint shadowsDrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT };
-	//glDrawBuffers(2, shadowsDrawBuffers);
+	//GLuint shadowsDrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	//GLenum shadowsDrawBuffers[] = { GL_DEPTH_ATTACHMENT };
+	//glDrawBuffers(1, shadowsDrawBuffers);
 
 	GameObject* objSelected = app->editor->GetGO();
 	
+	// Shadow Pass ===================================
 	glCullFace(GL_FRONT);
 	genShadows = true;
 	if (app->camera->visualizeFrustum)
@@ -271,17 +286,22 @@ bool ModuleRenderer3D::PostUpdate()
 		}
 	}
 	else app->sceneManager->GetCurrentScene()->Draw();
-	fbo->Unbind();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glCullFace(GL_BACK);
+	// Shadow Pass ===================================
 	
-	glFlush();
+	//glFlush();
 
-	fbo->Bind();
-	//glClear(GL_DEPTH_BUFFER_BIT);
-	GLuint shadowsDrawBuffers[2];
-	shadowsDrawBuffers[0] = { GL_COLOR_ATTACHMENT0 };
-	shadowsDrawBuffers[1] = { GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, shadowsDrawBuffers);
+
+	// Scene Pass ====================================
+	fbo->Bind();	
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	//glViewport(b.x, b.y, b.z, b.w);
+
+	GLenum shadowsDrawBuffers2[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, shadowsDrawBuffers2);
 
 	genShadows = false;
 	if (app->camera->visualizeFrustum)
@@ -292,81 +312,54 @@ bool ModuleRenderer3D::PostUpdate()
 		}
 	}
 	else app->sceneManager->GetCurrentScene()->Draw();
+	// Scene Pass ====================================
 
-	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
-	{
-		app->navMesh->GetNavMeshBuilder()->DebugDraw();
-
-		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
-			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
-	}
-
-	if (app->physics->GetDebugMode())
-	{
-		PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
-		app->physics->DebugDraw();
-		PushCamera(float4x4::identity, float4x4::identity);
-	}
-
+	DebugDraw(objSelected);
 	
-	if (stencil && objSelected && objSelected->GetActive())
-	{
-		//glColor3f(0.25f, 0.87f, 0.81f);
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilMask(0x00);
-		glDisable(GL_DEPTH_TEST);
-		objSelected->DrawOutline();
-
-		glStencilMask(0xFF);
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		if (depthTest) glEnable(GL_DEPTH_TEST);
-		//glColor3f(1.0f, 1.0f, 1.0f);
-		objSelected->Draw(nullptr);
-	}
-	
+	//glClear(GL_DEPTH_BUFFER_BIT);
 	fbo->Unbind();
 
 #endif
 
-	// Camera Component FBO
-	mainCameraFbo->Bind();
-	// Weird but it works like this
-	//GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
-	//glDrawBuffers(2, drawBuffers);
-	
-	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT };
-	glDrawBuffers(2, drawBuffers);
-
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+	// Shadow Pass ===================================
 	genShadows = true;
 	glCullFace(GL_FRONT);
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
-	mainCameraFbo->Unbind();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glCullFace(GL_BACK);
+	// Shadow Pass ===================================
 
-	glFlush();
+	//glFlush();
+	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//glClear(GL_DEPTH_BUFFER_BIT);
 
 	genShadows = false;
 
 
+	// Scene Pass ====================================
 	mainCameraFbo->Bind();
-	//glClear(GL_DEPTH_BUFFER_BIT);
-	drawBuffers[0] = { GL_COLOR_ATTACHMENT0 };
-	drawBuffers[1] = { GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, drawBuffers);
+	GLenum drawBuffers2[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, drawBuffers2);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
 	mainCameraFbo->Unbind();
-
+	// Scene Pass ====================================
+	
 	glFlush();
+	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+
 
 	//vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
 	//vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
@@ -386,6 +379,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 #ifndef DIST
 	mainCameraFbo->Bind();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	app->userInterface->Draw();
 #endif
 
@@ -755,4 +749,39 @@ void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 	//glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(view.Transposed().ptr());
+}
+
+void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
+{
+
+	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	{
+		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
+		if (objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
+			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
+	}
+
+	if (app->physics->GetDebugMode())
+	{
+		PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+		app->physics->DebugDraw();
+		PushCamera(float4x4::identity, float4x4::identity);
+	}
+
+
+	if (stencil && objSelected && objSelected->GetActive())
+	{
+		//glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		objSelected->DrawOutline();
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		//glColor3f(1.0f, 1.0f, 1.0f);
+		objSelected->Draw(nullptr);
+	}
 }

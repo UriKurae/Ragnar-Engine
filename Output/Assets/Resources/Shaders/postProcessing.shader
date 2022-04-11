@@ -46,7 +46,7 @@ void main()
 			for (int j = 0; j < 3; j++)
 			{
 				// Get the current surrounding pixel texCoords
-				texCoord = (gl_FragCoord.xy + vec2(i, j)) / texSize;
+				texCoord = (gl_FragCoord.xy + vec2(i, j) * realPixelNormal.a) / texSize;
 				vec4 currentPixelDepth = texture(depthTexture, texCoord);
 				vec4 currentPixelNormal = texture(normalTexture, texCoord);
 
