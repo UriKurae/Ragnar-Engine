@@ -132,18 +132,18 @@ void MaterialComponent::OnEditor()
 
 		ShowUniforms();
 
+		if (showShaderEditor)
+			ShaderEditor();
+
+		if (showTexMenu)
+			MenuTextureList();
+
+		if (showShaderMenu)
+			MenuShaderList();
+
 		ComponentOptions(this);
 		ImGui::Separator();
 	}
-
-	if (showShaderEditor)
-		ShaderEditor();
-
-	if (showTexMenu)
-		MenuTextureList();
-
-	if (showShaderMenu)
-		MenuShaderList();
 	
 	ImGui::PopID();
 }
