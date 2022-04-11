@@ -71,6 +71,7 @@
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
     <Compile Include="Assets\Scripts\DialoguesManager.cs" />
     <Compile Include="Assets\Scripts\Enemies.cs" />
+    <Compile Include="Assets\Scripts\EnemyAbilities.cs" />
     <Compile Include="Assets\Scripts\LoseScreen.cs" />
     <Compile Include="Assets\Scripts\MainMenuBackScreen.cs" />
     <Compile Include="Assets\Scripts\PauseMenuButton.cs" />
