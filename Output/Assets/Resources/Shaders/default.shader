@@ -150,38 +150,41 @@ const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
 
 vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 {
-	// Perform perspective divide
 	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-	// Transform to [0,1] range
 	projCoords = projCoords * 0.5 + 0.5;
 	
-	bool isLit = !(projCoords.x >= .0f && projCoords.x <= 1.f
-		&& projCoords.y >= .0f && projCoords.y <= 1.f
-		&& texture2D(depthTexture, projCoords.xy).x < clamp(projCoords.z, 0, 1));
-
-	float shadow = isLit ? 0 : 1;
+	float closestDepth = texture(depthTexture, projCoords.xy).x;
+	float currentDepth = projCoords.z;
 
 	vec2 texSize = textureSize(tex, 0).xy;
+	vec2 depthTexSize = textureSize(depthTexture, 0).xy;
 
-	// Change the color so it is not full black
+	// Change the color and apply blur so it is not full black
 	// ========================
 	vec4 colorSum = vec4(0);
 	vec2 texCoord = vec2(0);
+	float shadow = 0;
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
 			texCoord = (gl_FragCoord.xy + vec2(i, j)) / texSize;
 			colorSum += texture(tex, texCoord);
+
+			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i, j) * depthTexSize).x;
+			shadow += currentDepth > pcfDepth - 0.00005 ? 1 : 0;
+
 		}
 	}
 	colorSum = colorSum / 9;
+	shadow = shadow / 9;
+	shadow = smoothstep(0, 2, shadow);
 	// ========================
+
 
 	vec4 result = mix(vec4(1), normalize(colorSum), shadow);
 
-	// TODO: Maybe do the blur with depth texture?
-	
+	return result;	
 }
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)

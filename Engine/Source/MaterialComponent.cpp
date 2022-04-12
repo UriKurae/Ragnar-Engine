@@ -421,7 +421,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 	
 	if (genShadows)
 	{
-		glViewport(0, 0, 2048, 2048);
+		glViewport(0, 0, 4096, 4096);
 		shadowShader->Bind();
 		shadowShader->SetUniformMatrix4f("model", model.Transposed());
 		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
