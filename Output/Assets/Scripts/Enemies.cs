@@ -1,6 +1,7 @@
 using System;
 using RagnarEngine;
-public enum Type
+
+public enum EnemyType
 {
     BASIC,
     TANK,
@@ -22,7 +23,7 @@ public class Enemies
     // Basic Enemy info
     public string name;
     public string prefabPath;
-    public Type type;
+    public EnemyType type;
     public EnemyState state;
 
     // Abilities
