@@ -55,6 +55,8 @@ public:
 	inline std::vector<std::string> GetEventsList() const { return wwiseInfo.events; }
 	inline std::vector<std::string> GetBussesList() const { return wwiseInfo.busses; }
 
+	void ImportToLibrary();
+
 private:
 	AudioManager();
 

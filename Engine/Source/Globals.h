@@ -43,6 +43,8 @@ void Log(const char file[], int line, const char* format, ...);
 #define PARTICLES_FOLDER "Assets/ParticlesTemplates/"
 #define DIALOGUES_ASSETS_FOLDER "Assets/Dialogues/"
 #define DIALOGUES_FOLDER "Library/Dialogues/"
+#define AUDIO_FOLDER "Library/Wwise/"
+#define FONTS_FOLDER "Library/Fonts/"
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x )\
