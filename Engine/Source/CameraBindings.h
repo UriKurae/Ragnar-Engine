@@ -123,7 +123,7 @@ bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 			}
 		}		
 	}
-
+	//Adiooooos
 	//Close triangle
 	vertex.push_back(pointA);
 	
