@@ -52,12 +52,12 @@ public class EnemyManager : RagnarComponent
 
         enemyGOs = GameObject.FindGameObjectsWithTag("Enemies");
 
-        for(int i = 0; i<enemyGOs.Length; i++)
+        for(int i = 0; i < enemyGOs.Length; i++)
         {
             enemyGOs[i].name = enemies[i].name;
             if (enemies[i].waypoints.Length != 0)
             {
-                enemyGOs[i].GetComponent<EnemyPatrol>().waypoints = enemies[i].waypoints;
+                enemyGOs[i].GetComponent<EnemyInteractions>().waypoints = enemies[i].waypoints;
                 enemies[i].state = EnemyState.PATROLING;
             }
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
@@ -73,6 +73,32 @@ public class EnemyManager : RagnarComponent
         // al de enemies pero sin los muertos. Así evitamos problemas de updates de GO inexistentes.
         // IMPORTANTE: Esto irá arriba del todo para hacer la comprobación cada vez que haya un callback :3
 
+        if(enemyGOs.Length > 0)
+        {
+            foreach(GameObject go in enemyGOs)
+            {
+                if(go.GetComponent<EnemyInteractions>().pendingToDelete)
+                {
+                    GameObject[] aux = new GameObject[enemyGOs.Length-1];
+                    Enemies[] aux2 = new Enemies[enemies.Length-1];
+                    for (int i = 0, j = 0; i < enemyGOs.Length; i++, j++)
+                    {
+                        if (enemyGOs[i] == go)
+                        {
+                            j--;
+                        }
+                        else
+                        {
+                            aux[j] = enemyGOs[i];
+                            aux2[j] = enemies[i];
+                        }
+                    }
+                    enemyGOs = aux;
+                    enemies = aux2;
+                    InternalCalls.Destroy(go);
+                }
+            }
+        }
     }
 
 }
