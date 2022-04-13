@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "ModuleEditor.h"
 #include"GameView.h"
+#include "ModuleWindow.h"
 
 #include"GameObject.h"
 #include "MaterialComponent.h"

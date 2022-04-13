@@ -57,6 +57,8 @@
     <Compile Include="Assembly-CSharp\Default Components\Rigidbody.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform2D.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\UIInputBox.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\UIDropDown.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIButton.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UICheckbox.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIImage.cs" />

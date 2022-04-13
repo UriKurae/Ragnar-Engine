@@ -38,7 +38,6 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 	transMatrix = aux.FromTRS(internalPosition, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	type = ComponentType::TRANFORM2D;	
 }
 
 ComponentTransform2D::~ComponentTransform2D()
