@@ -37,6 +37,27 @@ ButtonComponent::ButtonComponent(GameObject* own)
 	planeToDraw->own = own;
 	app->userInterface->OrderButtons();
 }
+ButtonComponent::ButtonComponent(GameObject* own,bool isPart)
+{
+	type = ComponentType::UI_BUTTON;
+	own->isUI = true;
+	active = true;
+	buttonText.setText("Button", 5, 5, 0.5, { 255,255,255 });
+	fontPath = "Library/Fonts/Montserrat-Bold.ttf";
+	
+	own->CreateComponent(ComponentType::TRANFORM2D);
+	normalMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	focusedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
+	actual = normalMaterial;
+	loadFont(fontPath.c_str());
+	
+
+	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
+	planeToDraw->own = own;
+
+}
 void ButtonComponent::loadFont(const char* path) {
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
@@ -126,6 +147,7 @@ ButtonComponent::~ButtonComponent()
 
 bool ButtonComponent::Update(float dt)
 {
+	
 	RG_PROFILING_FUNCTION("Button Update");
 	buttonText.SetOnlyPosition(float2(GetParentPosition().x + textPos.x, GetParentPosition().y + textPos.y));
 
@@ -158,6 +180,7 @@ bool ButtonComponent::Update(float dt)
 
 void ButtonComponent::Draw(CameraComponent* gameCam)
 {
+
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
@@ -165,6 +188,7 @@ void ButtonComponent::Draw(CameraComponent* gameCam)
 
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
+	
 }
 void ButtonComponent::SetActualColor(float Red, float Green, float Blue)
 {

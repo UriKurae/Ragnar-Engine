@@ -194,7 +194,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
                         0,
@@ -249,7 +249,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -625.5,
                         -405,
@@ -322,7 +322,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -633.5,
                         -405,
@@ -426,7 +426,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
                         0,

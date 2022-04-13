@@ -15,6 +15,7 @@
 #include "SliderComponent.h"
 #include "CheckBoxComponent.h"
 #include "TextComponent.h"
+#include "DropDownComponent.h"
 
 #include "freetype-2.10.0/include/ft2build.h"
 #include "Texture.h"
@@ -123,9 +124,10 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	SliderComponent* theSlider = nullptr;
 	CheckboxComponent* theCheckbox = nullptr;
 	ImageComponent* theImage = nullptr;
+	DropDownComponent* theDrop = nullptr;
 
 	float4x4 transform = float4x4::FromTRS(auxTrans->GetInternalPosition(), auxTrans->GetRotationQuat(), float3(auxTrans->GetScale().x, auxTrans->GetScale().y, 1));
-
+	theDrop = own->GetComponent<DropDownComponent>();
 	theButton = own->GetComponent<ButtonComponent>();
 	theSlider = own->GetComponent<SliderComponent>();
 	theCheckbox = own->GetComponent<CheckboxComponent>();
@@ -215,6 +217,17 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
+	}
+	if (theDrop)
+	{
+
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
+		//theButton->GetAlpha()
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theDrop->GetActualColor().r, theDrop->GetActualColor().g, theDrop->GetActualColor().b, theDrop->GetAlpha());
 	}
 	auto p = frustum.ProjectionMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
@@ -560,7 +573,8 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
 		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
 		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
-		if (buttonComp || checkComp || sliderComp)
+		DropDownComponent* DropComp = (DropDownComponent*)go->GetComponent<DropDownComponent>();
+		if (buttonComp || checkComp || sliderComp|| DropComp)
 		{
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
@@ -712,6 +726,11 @@ void ModuleUI::Draw()
 		{
 			go->Draw(nullptr);
 			slider = nullptr;
+		}
+		else if (DropDownComponent* Drop = go->GetComponent<DropDownComponent>())
+		{
+			go->Draw(nullptr);
+			RenderText(Drop->GetDropDownText().textt, Drop->GetDropDownText().X, Drop->GetDropDownText().Y, Drop->GetDropDownText().Scale, Drop->GetDropDownText().Color, Drop->shader, &Drop->characters, Drop->VAO, Drop->VBO);
 		}
 	}
 }

@@ -219,7 +219,7 @@ bool ComponentTransform2D::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)18);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJson3Number(file, "Position", position);
 	file.SetNewJson3Number(file, "Scale", scale);
 	file.SetNewJson3Number(file, "rotationEuler", rotationEuler);
