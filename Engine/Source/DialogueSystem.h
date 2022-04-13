@@ -4,6 +4,9 @@
 #include <string>
 #include <list>
 
+//MHF
+#include "PugiXML/pugixml.hpp"
+
 class DialogueLine
 {
 public:
@@ -17,7 +20,6 @@ public:
 	int id;
 	std::vector<DialogueLine> dialogue;
 };
-
 
 //MHF
 class DialogueLineXML
@@ -49,8 +51,27 @@ public:
 	void LoadDialogue(std::string path);
 
 	//MHF
-	void LoadDialogueXML(std::string path);
-	//void LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg);
+	void LoadDialogueXML();
+	void LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg);
+	void SetCurrentDialogueIdXML(int id) { 
+		for (int i = 0; i < aDialogueXML.size(); i++){
+			if (id == aDialogueXML[i]->id){
+				currDialogXML = aDialogueXML[i];
+			}
+		}
+	}
+	// If it returns false it means that the dialog is finished
+	bool NextLineXML(){
+		indexLine ++;
+
+		if (currDialogXML->dialogue.size() < indexLine)
+			return false;
+
+		currLineXML = currDialogXML->dialogue[indexLine];
+		return true;
+	}
+	inline std::string GetCurrentLineXML() { return currLineXML->line; }
+	inline std::string GetOwnerOfLineXML() { return authorList[currLineXML->authorId]; }
 	//
 
 	void SaveDialogue();
@@ -64,6 +85,8 @@ public:
 	void NextLine();
 	inline std::string GetCurrentLine() { return currLine->line; }
 	inline std::string GetOwnerOfLine() { return currLine->author; }
+	
+
 
 	bool createDialogue;
 
@@ -75,14 +98,18 @@ private:
 	std::string fileName;
 	std::vector<Dialogue> dialogues;
 
-	//MHF
-	pugi::xml_document dialoguesXML;
-	std::vector<DialogueXML*> aDialogueXML;
-	std::list<std::string> authorList = {"a","b","c"};
-	//
-
 	Dialogue* currDialogue;
 	DialogueLine* currLine;
+
+	//MHF
+	int indexLine=0;
+	std::string authorList[16];
+	pugi::xml_document dialoguesXML;
+	std::vector<DialogueXML*> aDialogueXML;
+	DialogueXML* currDialogXML;
+	DialogueLineXML* currLineXML;
+	//
+
 
 	static DialogueSystem* instance;
 };

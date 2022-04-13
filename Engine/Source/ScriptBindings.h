@@ -520,4 +520,5 @@ void LoadDialogueFile(MonoString* name)
 	path += fileName;
 	path += ".rgdialogue";
 	DialogueSystem::GetInstance()->LoadDialogue(path);
+
 }

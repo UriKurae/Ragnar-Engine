@@ -233,7 +233,7 @@ void DialogueSystem::ShowDialogueFiles()
 void DialogueSystem::LoadDialogue(std::string path)
 {
 	JsonParsing dialogFile = JsonParsing();
-
+	LoadDialogueXML();
 	if (dialogFile.ParseFile(path.c_str()) > 0)
 	{
 		for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
@@ -275,65 +275,39 @@ void DialogueSystem::LoadDialogue(std::string path)
 }
 
 //MHF
-void DialogueSystem::LoadDialogueXML(std::string path)
+void DialogueSystem::LoadDialogueXML()
 {
 	std::string a = "dialogos_esp2.xml";
-	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file(strcat(DIALOGUES_FOLDER,a.c_str()));
-	if (result == NULL)
-	{
-		LOG("Could not load map xml file %s. pugi error: %s", file, result.description());
-	}
-	else
-	{
-		// instead of saving the name of the author we save an id, 
-		// then we relate this id to the name saved to this list
-		pugi::xml_node n = dialoguesXML.first_child().child("AuthorList");
-		for (pugi::xml_node m = n.child("node"); m != NULL; m = m.next_sibling("node"))
-		{
-			authorList.push_back(m.attribute("name").as_string());
-		}
-		//-----------
-		
-		std::list<std::string>::iterator s;
-		std::list<std::string>::iterator end = authorList.end();
-		//ejemplo para coger el string que se quiera 
-		
-		for (s = authorList.begin(); s != end; ++s)
-		{
-			/*if (*s == extension)
-			{
-				RG_PROFILING_FUNCTION("Loading Model");
-				ModelImporter::LoadModel(path);
-				return;
-			}*/
-		}
-		
+	std::string path = DIALOGUES_ASSETS_FOLDER + a;
+	pugi::xml_parse_result result = dialoguesXML.load_file(path.c_str());
 
-		//We save the information of each conversation 
-		n = dialoguesXML.first_child().child("Dialogue");
-		for (n; n != NULL; n = n.next_sibling("Dialogue"))
-		{
-			DialogueXML* aDialogue = new DialogueXML;
-			aDialogue->id = n.attribute("Id").as_int();
-			
-			//LoadLinesXML(n,aDialogue);
-			for (pugi::xml_node m = n.child("node"); m != NULL; m = m.next_sibling("node"))
-			{
-				DialogueLineXML* node = new DialogueLineXML;
-				node->authorId = m.attribute("AuthorId").as_int();
-				node->line.assign(m.attribute("Line").as_string());
-				aDialogue->dialogue.push_back(node);
-			}
-
-			aDialogueXML.push_back(aDialogue);
-		}
+	// instead of saving the name of the author we save an id, 
+	// then we relate this id to the name saved to this list
+	pugi::xml_node n = dialoguesXML.first_child().child("AuthorList");
+	int i = 0;
+	for (n; n != NULL; n = n.next_sibling("AuthorList"))
+	{
+		authorList[i] = n.attribute("name").as_string();
+		i++;
 	}
+
+	//We save the information of each conversation 
+	n = dialoguesXML.first_child().child("Dialogue");
+	for (n; n != NULL; n = n.next_sibling("Dialogue"))
+	{
+		DialogueXML* aDialogue = new DialogueXML;
+		aDialogue->id = n.attribute("Id").as_int();
+		
+		LoadLinesXML(n,aDialogue);
+
+		aDialogueXML.push_back(aDialogue);
+	}
+	//}
 
 }
 
 // Reads each node with the variables associated with each line
-/*void DialogueSystem::LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg)
+void DialogueSystem::LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg)
 {
 	for (pugi::xml_node m = node.child("node"); m != NULL; m = m.next_sibling("node"))
 	{
@@ -342,10 +316,13 @@ void DialogueSystem::LoadDialogueXML(std::string path)
 		node->line.assign(m.attribute("Line").as_string());
 		dlg->dialogue.push_back(node);
 	}
-}*/
+}
+
 
 
 //--------------------------------
+
+
 void DialogueSystem::SaveDialogue()
 {
 	JsonParsing dialogueFile;
