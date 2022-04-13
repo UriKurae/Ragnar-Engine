@@ -205,6 +205,11 @@ void MaterialComponent::MenuShaderList()
 
 	std::vector<std::string> files;
 	app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
+
+	std::sort(files.begin(), files.end(), [](std::string a, std::string b) {
+		return (a < b);
+		});
+
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 	{
 		if ((*it).find(".shader") != std::string::npos)
