@@ -44,11 +44,11 @@ MeshComponent::~MeshComponent()
 
 void MeshComponent::Draw(CameraComponent* gameCam)
 {
-	if (material != nullptr && material->GetActive()) material->Bind(gameCam, app->renderer3D->genShadows);
+	if (material != nullptr && material->GetActive()) material->Bind(gameCam);
 	
 	if (mesh != nullptr) mesh->Draw(verticesNormals, faceNormals, colorNormal, normalLength);
 	
-	if (material != nullptr && material->GetActive()) material->Unbind(app->renderer3D->genShadows);
+	if (material != nullptr && material->GetActive()) material->Unbind();
 }
 
 void MeshComponent::DrawOutline()

@@ -10,6 +10,7 @@
 #include "Physics3D.h"
 
 #include "LightComponent.h"
+#include "CameraComponent.h"
 #include "TransformComponent.h"
 #include "NavAgentComponent.h"
 
@@ -265,45 +266,23 @@ bool ModuleRenderer3D::PostUpdate()
 	PushCamera(float4x4::identity, float4x4::identity);
 
 
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
-	//GLuint shadowsDrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	//GLenum shadowsDrawBuffers[] = { GL_DEPTH_ATTACHMENT };
-	//glDrawBuffers(1, shadowsDrawBuffers);
-
-	GameObject* objSelected = app->editor->GetGO();
-	
 	// Shadow Pass ===================================
-	glCullFace(GL_FRONT);
-	genShadows = true;
-	if (app->camera->visualizeFrustum)
+	if (dirLight->generateShadows)
 	{
-		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-			if ((*it) != objSelected)(*it)->Draw(nullptr);
-		}
+		GenerateShadows(objects, nullptr);
 	}
-	else app->sceneManager->GetCurrentScene()->Draw();
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glCullFace(GL_BACK);
-	// Shadow Pass ===================================
-	
-	//glFlush();
-
 
 	// Scene Pass ====================================
 	fbo->Bind();	
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	//glViewport(b.x, b.y, b.z, b.w);
 
-	GLenum shadowsDrawBuffers2[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, shadowsDrawBuffers2);
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, drawBuffers);
 
-	genShadows = false;
+	GameObject* objSelected = app->editor->GetGO();
+
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
@@ -321,21 +300,23 @@ bool ModuleRenderer3D::PostUpdate()
 
 #endif
 
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	if (dirLight->generateShadows)
+	{
+		GenerateShadows(objects, app->sceneManager->GetCurrentScene()->mainCamera);
+	}
+
+
+	// Scene Pass ====================================
+	mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	glDrawBuffers(0, nullptr);
 
-	// Shadow Pass ===================================
-	genShadows = true;
-	glCullFace(GL_FRONT);
+	glDrawBuffers(2, drawBuffers);
+
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glCullFace(GL_BACK);
-	// Shadow Pass ===================================
 
 	//vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
 	//vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
@@ -349,37 +330,13 @@ bool ModuleRenderer3D::PostUpdate()
 	//glVertexPointer(3, GL_FLOAT, 0, NULL);
 	//glEnableClientState(GL_VERTEX_ARRAY);
 	//glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
-	vbo->Unbind();
-
-	genShadows = false;
-
-
-	// Scene Pass ====================================
-	mainCameraFbo->Bind();
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-	GLenum drawBuffers2[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, drawBuffers2);
-
-	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-	{
-		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
-	}
-	//mainCameraFbo->Unbind();
-	// Scene Pass ====================================
-	
-	//glFlush();
-	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//vbo->Unbind();
 
 #ifndef DIST
-	//mainCameraFbo->Bind();
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	app->userInterface->Draw();
 #endif
 
 	mainCameraFbo->Unbind();
-
 
 #ifdef DIST
 	//app->camera->updateGameView = true;
@@ -779,4 +736,40 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 		//glColor3f(1.0f, 1.0f, 1.0f);
 		objSelected->Draw(nullptr);
 	}
+}
+
+void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam)
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glDrawBuffers(0, nullptr);
+
+	GameObject* objSelected = app->editor->GetGO();
+
+	glCullFace(GL_FRONT);
+	genShadows = true;
+
+	if (!gameCam)
+	{
+		if (app->camera->visualizeFrustum)
+		{
+			for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+			{
+				if ((*it) != objSelected)(*it)->Draw(gameCam);
+			}
+		}
+		else app->sceneManager->GetCurrentScene()->Draw();
+	}
+	else
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+		}
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glCullFace(GL_BACK);
+	genShadows = false;
 }

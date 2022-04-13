@@ -406,40 +406,20 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
+void MaterialComponent::Bind(CameraComponent* gameCam)
 {
 	// Crash when creating a primitive
 	if (!this)
 		return;
 
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
-
-	Frustum frustum;
-	frustum.pos = app->renderer3D->dirLight->dir;
-
-	frustum.front = app->renderer3D->dirLight->dir;
-	float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
-	frustum.up = right.Cross(frustum.front).Normalized();
-	frustum.type = FrustumType::OrthographicFrustum;
-
-	frustum.orthographicHeight = 256;
-	frustum.orthographicWidth = 256;
-	frustum.nearPlaneDistance = 0.001;
-	frustum.farPlaneDistance = 10000;
-
-	frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
-
-	float4x4 lightView = frustum.ViewMatrix();
-	float4x4 lightProjection = frustum.projectionMatrix;
-
-	float4x4 lightSpace = lightProjection * lightView;
 	
-	if (genShadows)
+	if (app->renderer3D->genShadows)
 	{
 		glViewport(0, 0, 4096, 4096);
 		shadowShader->Bind();
 		shadowShader->SetUniformMatrix4f("model", model.Transposed());
-		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
+		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
 
 		return;
 	}
@@ -449,9 +429,8 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 
 	shader->Bind();
 
-	// Could not do view and proj each frame.
 	shader->SetUniformMatrix4f("model", model.Transposed());
-	shader->SetUniformMatrix4f("lightSpaceMatrix", lightSpace.Transposed());
+	shader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
@@ -480,7 +459,10 @@ void MaterialComponent::Bind(CameraComponent* gameCam, bool genShadows)
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
 	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
-	glUniform1i(textLoc3, 1);
+	//if (app->renderer3D->dirLight->generateShadows)
+		glUniform1i(textLoc3, 1);
+	//else
+		//glUniform1i(textLoc3, 0);
 
 	// Get matrices to animate the model
 	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
@@ -509,6 +491,7 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
 		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
+		shader->SetUniform1i("dirLight.genShadows", app->renderer3D->dirLight->generateShadows);
 	}
 	else
 	{
@@ -564,13 +547,13 @@ void MaterialComponent::ShaderSetUniforms()
 	}
 }
 
-void MaterialComponent::Unbind(bool genShadows)
+void MaterialComponent::Unbind()
 {
 	// Crash when creating a primitive
 	if (!this) return;
 	if (diff) diff->Unbind();
 
-	genShadows ? shadowShader->Unbind() : shader->Unbind();
+	app->renderer3D->genShadows ? shadowShader->Unbind() : shader->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)

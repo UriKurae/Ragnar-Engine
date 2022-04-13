@@ -103,6 +103,7 @@ struct DirLight
 	vec3 specular;
 
 	float intensity;
+	bool genShadows;
 };
 uniform DirLight dirLight;
 
@@ -208,8 +209,8 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	vec4 shadow = CalculateShadow(fragPosLightSpace, normal, lightDir);
-	//return vec3(shadow);
+	vec4 shadow = light.genShadows ? CalculateShadow(fragPosLightSpace, normal, lightDir) : vec4(1);
+	
 	return ((ambient + shadow.rgb * shadow.a) * (diffuse + specular)) * light.intensity;
 }
 

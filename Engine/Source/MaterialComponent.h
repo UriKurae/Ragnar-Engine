@@ -29,9 +29,9 @@ public:
 	bool OnLoad(JsonParsing& node) override;
 	bool OnSave(JsonParsing& node, JSON_Array* array) override;
 
-	void Bind(CameraComponent* gameCam, bool genShadows = true);
+	void Bind(CameraComponent* gameCam);
 	void ShaderSetUniforms();
-	void Unbind(bool genShadows);
+	void Unbind();
 	bool IsDefaultMat() const { return defaultMat; }
 
 	std::shared_ptr<Texture> GetTexture() { return diff; }
