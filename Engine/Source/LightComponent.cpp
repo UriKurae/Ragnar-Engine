@@ -43,6 +43,7 @@ bool ComponentLight::Update(float dt)
 
 			Frustum frustum;
 			frustum.pos = app->renderer3D->dirLight->dir;
+			frustum.pos.z -= 50;
 
 			frustum.front = app->renderer3D->dirLight->dir;
 			float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();

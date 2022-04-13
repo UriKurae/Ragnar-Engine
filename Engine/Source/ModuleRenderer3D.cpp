@@ -310,7 +310,9 @@ bool ModuleRenderer3D::PostUpdate()
 	mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+#ifdef DIST
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+#endif
 	glDrawBuffers(2, drawBuffers);
 
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
