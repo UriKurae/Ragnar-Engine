@@ -185,7 +185,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
 	lightComp->SetLight(dirLight);
 
-	//vbo = new VertexBuffer();
+	vbo = new VertexBuffer();
 	
 	genShadows = true;
 
@@ -337,9 +337,19 @@ bool ModuleRenderer3D::PostUpdate()
 	glCullFace(GL_BACK);
 	// Shadow Pass ===================================
 
-	//glFlush();
-	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	//glClear(GL_DEPTH_BUFFER_BIT);
+	//vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
+	//vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
+	//
+	//CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	//coneShader->Bind();
+	//coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
+	//coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
+	//
+	//vbo->Bind();
+	//glVertexPointer(3, GL_FLOAT, 0, NULL);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
+	vbo->Unbind();
 
 	genShadows = false;
 

@@ -26,7 +26,6 @@ ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f
 	cameraFrustum.SetViewPlaneDistances(nearPlane, farPlane);
 	CalculateVerticalFov(horizontalFov, SCREEN_WIDTH, SCREEN_HEIGHT);
 	cameraFrustum.SetPerspective(horizontalFov, verticalFov);
-	//cameraFrustum.SetOrthographic(SCREEN_WIDTH, SCREEN_HEIGHT);
 	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
 	
 	visualizeFrustum = false;
@@ -124,7 +123,7 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 			// Fill gameObjects list 
 			std::stack<QuadtreeNode*> nodes;
 			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
-			std::vector<GameObject*> gameObjects;
+			std::set<GameObject*> gameObjects;
 			app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
 
 			std::map<float, GameObject*> triangleMap;
@@ -141,10 +140,10 @@ void ModuleCamera3D::MousePicking(math::float3& newPos, math::float3& newFront, 
 	}
 }
 
-void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& triangleMap, float3& hitPoint)
+void ModuleCamera3D::ThrowRayCast(std::set<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& triangleMap, float3& hitPoint)
 {
 	LineSegment prevLine = picking;
-	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it < gameObjects.end(); ++it)
+	for (std::set<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
 	{
 		TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 		if ((*it)->GetAABB().IsFinite() && transform)
@@ -175,8 +174,7 @@ void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::L
 							{
 								triangleMap[distance] = (*it);
 								if ((*triangleMap.begin()).second == (*it))
-									hitPoint = picking.a + picking.Dir() * distance * picking.Length();
-								//DEBUG_LOG("Intersected with %s", (*it)->GetName());
+									hitPoint = prevLine.a + prevLine.Dir() * distance * prevLine.Length();
 								break;
 							}
 						}
@@ -185,24 +183,22 @@ void ModuleCamera3D::ThrowRayCast(std::vector<GameObject*>& gameObjects, math::L
 			}
 		}
 	}
+	if (hitPoint.Equals(float3::zero))
+		hitPoint = prevLine.b;
 }
 
-void ModuleCamera3D::ThrowRayCastOnlyOBB(std::vector<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& aabbMap, float3& hitPoint)
+void ModuleCamera3D::ThrowRayCastOnlyOBB(std::set<GameObject*>& gameObjects, math::LineSegment& picking, std::map<float, GameObject*>& aabbMap, float3& hitPoint)
 {
 	LineSegment prevLine = picking;
 	float dNear, dFar = 0;
-	for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it < gameObjects.end(); ++it)
+	for (std::set<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
 	{
 		TransformComponent* transform = (*it)->GetComponent<TransformComponent>();
 		if ((*it)->GetAABB().IsFinite() && transform)
 		{
 			picking = prevLine;
 			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
-			{
 				aabbMap[dNear] = (*it);
-				//DEBUG_LOG("Intersected with %s", (*it)->GetName());
-				break;
-			}
 		}
 	}
 }

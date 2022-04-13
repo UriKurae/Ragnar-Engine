@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleRenderer3D.h"
+#include "FileSystem.h"
 
 #include "Transform2DComponent.h"
 #include "ButtonComponent.h"
@@ -330,6 +331,7 @@ bool ModuleUI::Start()
 #ifdef DIST
 	const char* path = "Library/Fonts/Montserrat-Bold.ttf";
 #else
+	ImportToLibrary();
 	const char* path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
 #endif
 
@@ -665,6 +667,7 @@ void ModuleUI::OrderButtons()
 		}
 	}
 }
+
 void ModuleUI::Draw()
 {
 	for (int a = 0; a < UIGameObjects.size(); a++)
@@ -700,7 +703,6 @@ void ModuleUI::Draw()
 	}
 }
 
-
 bool ModuleUI::CleanUp()
 {
 	RELEASE(shader);
@@ -715,4 +717,19 @@ void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 	auto obj = FindUI(ui);
 	UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
+}
+
+void ModuleUI::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Resources/Fonts/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string assetsPath = "Assets/Resources/Fonts/";
+		assetsPath += (*it);
+		std::string libraryPath = FONTS_FOLDER;
+		libraryPath += (*it);
+		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+	}
 }

@@ -27,6 +27,16 @@ GameObject* GetGameObjectMono(MonoObject* component)
 	return reinterpret_cast<Component*>(ptr)->owner;
 }
 
+GameObject* GetGameObject(MonoObject* obj)
+{
+	uintptr_t ptr = 0;
+	MonoClass* goClass = mono_object_get_class(obj);
+	const char* name = mono_class_get_name(goClass);
+	mono_field_get_value(obj, mono_class_get_field_from_name(goClass, "pointer"), &ptr);
+
+	return reinterpret_cast<GameObject*>(ptr);
+}
+
 MonoObject* GetGameObjectMonoObject(MonoObject* comp)
 {
 	MonoObject* ret = app->moduleMono->GoToCSGO(GetGameObjectMono(comp));

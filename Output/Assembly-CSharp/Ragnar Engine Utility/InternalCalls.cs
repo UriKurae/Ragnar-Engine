@@ -48,7 +48,7 @@ namespace RagnarEngine
         public static extern bool HitToTag(Vector3 initPos, Vector3 endPos, object tag);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius);
+        public static extern bool PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius, GameObject[] arr, int size);
     }
     public class Input
     {
