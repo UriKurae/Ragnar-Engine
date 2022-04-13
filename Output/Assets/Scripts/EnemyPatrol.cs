@@ -20,9 +20,12 @@ public class EnemyPatrol : RagnarComponent
     public void Start()
     {
         agents = gameObject.GetComponent<NavAgent>();
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoints");
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-        GotoNextPoint();
+        if (waypoints.Length != 0)
+        {
+            GotoNextPoint();
+            patrol = false;
+        }
     }
 
     public void Update()
@@ -42,13 +45,16 @@ public class EnemyPatrol : RagnarComponent
                 {
                     stoppedTime = 0f;
                     stopState = false;
-                    patrol = true;
-                    GotoNextPoint();
+                    if (waypoints.Length != 0)
+                    {
+                        patrol = true;
+                        GotoNextPoint();
+                    }
                 }
             }
         }
 
-        if (agents.MovePath() && patrol && !stopState)
+        if (agents.MovePath() && waypoints.Length != 0 && patrol && !stopState )
         {
             GotoNextPoint();
         }

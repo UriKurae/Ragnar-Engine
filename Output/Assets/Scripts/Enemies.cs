@@ -12,6 +12,7 @@ public enum EnemyType
 public enum EnemyState
 {
     IDLE,
+    PATROLING,
     CAUTIOUS,
     SEARCHING,
     ANGRY,
@@ -25,6 +26,12 @@ public class Enemies
     public string prefabPath;
     public EnemyType type;
     public EnemyState state;
+
+    // Position
+    public Vector3 pos;
+
+    // Patroling
+    public GameObject[] waypoints;
 
     // Abilities
     public EnemyAbilities[] abilities;

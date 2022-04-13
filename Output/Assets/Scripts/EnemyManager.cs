@@ -3,27 +3,68 @@ using RagnarEngine;
 
 public class EnemyManager : RagnarComponent
 {
-    public Enemies[] enemies = new Enemies[1];
+    public Enemies[] enemies = new Enemies[3];
+    public GameObject[] enemyGOs;
+
     public void Start()
     {
         enemies[0] = new Enemies
         {
-            name = "Ground Enemy",
-            prefabPath = "Enemy",
+            name = "Ground Enemy 1",
+            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
-            state = EnemyState.IDLE
+            state = EnemyState.IDLE,
+            pos = new Vector3(3.59f, 0f, 18.03f),
+            waypoints = new GameObject[3]
         };
+        enemies[0].waypoints[0] = GameObject.Find("1");
+        enemies[0].waypoints[1] = GameObject.Find("2");
+        enemies[0].waypoints[2] = GameObject.Find("3");
 
-        foreach (Enemies c in enemies)
+        enemies[1] = new Enemies
         {
-            InternalCalls.InstancePrefab(c.prefabPath);
+            name = "Ground Enemy 2",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(4.23f, 0f, -6.68f),
+            waypoints = new GameObject[3]
+        };
+        enemies[1].waypoints[0] = GameObject.Find("4");
+        enemies[1].waypoints[1] = GameObject.Find("5");
+        enemies[1].waypoints[2] = GameObject.Find("6");
+
+        enemies[2] = new Enemies
+        {
+            name = "Ground Enemy 3",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-7.52f, 0f, 31.44f),
+            waypoints = new GameObject[1]
+        };
+        enemies[2].waypoints[0] = GameObject.Find("7");
+
+        foreach (Enemies e in enemies)
+        {
+            InternalCalls.InstancePrefab(e.prefabPath);
+        }
+
+        enemyGOs = GameObject.FindGameObjectsWithTag("Enemies");
+
+        for(int i = 0; i<enemyGOs.Length; i++)
+        {
+            enemyGOs[i].name = enemies[i].name;
+            if (enemies[i].waypoints.Length != 0)
+            {
+                enemyGOs[i].GetComponent<EnemyPatrol>().waypoints = enemies[i].waypoints;
+                enemies[i].state = EnemyState.PATROLING;
+            }
+            enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
         }
     }
     public void Update()
     {
-        // PATROLING
-        // La idea es que dentro de la clase propia de Enemies haya un array con los waypoints. Si la lenght es 0 o es null (que lo será por defecto), significa que el enemigo es estático.
-
         // ACCIONES
         // La parte que debería ser la más sencilla, si los enemigos detectan players, que actuen de acuerdo al estado en el que se encuentran.
 
