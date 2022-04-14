@@ -121,14 +121,22 @@ void ScriptComponent::SelectScript()
 {
 	if (ImGui::BeginCombo("Select Script", "New Script"))
 	{
-		const char* scriptName;
-		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		std::vector<std::string> scriptName;
+		int size = app->moduleMono->userScripts.size();
+		//const char* scriptName;
+		for (int i = 0; i < size; i++)
+			scriptName.push_back(mono_class_get_name(app->moduleMono->userScripts[i]));
+
+		std::sort(scriptName.begin(), scriptName.end(), [](std::string a, std::string b) {
+			return (a < b);
+			});
+
+		for (int i = 0; i < size; i++)
 		{
-			scriptName = mono_class_get_name(app->moduleMono->userScripts[i]);
-			if (ImGui::Selectable(scriptName))
+			if (ImGui::Selectable(scriptName.at(i).c_str()))
 			{
-				name = scriptName;
-				LoadScriptData(scriptName);
+				name = scriptName.at(i);
+				LoadScriptData(scriptName.at(i).c_str());
 			}
 		}
 		ImGui::EndCombo();
