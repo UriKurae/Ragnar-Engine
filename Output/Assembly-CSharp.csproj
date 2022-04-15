@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\SwordSlash.cs" />
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemies.cs" />
+    <Compile Include="Assets\Scripts\Voice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />

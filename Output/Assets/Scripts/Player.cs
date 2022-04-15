@@ -18,7 +18,7 @@ public class Player : RagnarComponent
     Material materialComponent;
     NavAgent agent;
 
-    bool controled = false;
+    public bool controled = false;
     int state = 0;
 
     public void Start()

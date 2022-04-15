@@ -4,7 +4,7 @@ using RagnarEngine;
 public class PlayerManager : RagnarComponent
 {
     public GameObject[] players;
-    int characterSelected = 0;
+    public int characterSelected = 0;
 
     public Characters[] characters = new Characters[3];
     public Characters playableCharacter;
@@ -28,7 +28,7 @@ public class PlayerManager : RagnarComponent
             name = "Paul Atreides",
             prefabPath = "Player",
             state = State.NONE,
-            abilities = new Abilities[2]
+            abilities = new Abilities[3]
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -42,6 +42,14 @@ public class PlayerManager : RagnarComponent
         {
             name = "Rock Throw",
             prefabPath = "Rock",
+            prefabArea = "Rock Area",
+            charges = -1,
+            cooldown = 20f
+        };
+        characters[0].abilities[2] = new Abilities
+        {
+            name = "The Voice",
+            prefabPath = "Voice",
             prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f
@@ -210,7 +218,34 @@ public class PlayerManager : RagnarComponent
 
         // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
         // TODO
+        if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_3)
+        {
+            if (playableCharacter.abilities[2].charges == 0)
+            {
+                playableCharacter.state = State.NONE;
+            }
+            else if (!playableCharacter.abilities[2].onCooldown)
+            {
+                playableCharacter.state = State.ABILITY_3;
 
+                if (!drawnArea)
+                {
+                    drawnArea = true;
+                    InternalCalls.InstancePrefab(playableCharacter.abilities[2].prefabArea);
+                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
+                    players[characterSelected].AddChild(area[0]);
+                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
+                }
+
+                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_3);
+            }
+            else
+            {
+                Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[2].cooldown - playableCharacter.abilities[2].counter) + "seconds left to use it again!");
+                playableCharacter.state = State.NONE;
+
+            }
+        }
         // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
         // TODO
 
@@ -262,6 +297,21 @@ public class PlayerManager : RagnarComponent
                 }
             }
 
+            if (playableCharacter.state == State.ABILITY_3)
+            {
+                if (playableCharacter == characters[0])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                }
+                else if (playableCharacter == characters[1])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                }
+                else if (playableCharacter == characters[2])
+                {
+                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                }
+            }
             // Instancia la habilidad en cuestión. 
             InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
 
