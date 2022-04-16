@@ -156,101 +156,61 @@ public class PlayerManager : RagnarComponent
         // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
         {
-            // Comprobador de cargas de habilidad. Si entra aquí, significa que la habilidad no tiene cargas
-            if(playableCharacter.abilities[0].charges == 0)
-            {
-                playableCharacter.state = State.NONE;
-            }
-            // Entra aquí si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
-            else if (!playableCharacter.abilities[0].onCooldown)
-            {
-                playableCharacter.state = State.ABILITY_1;
-
-                // Dibujado del área de rango.
-                if(!drawnArea)
-                {
-                    drawnArea = true;
-                    InternalCalls.InstancePrefab(playableCharacter.abilities[0].prefabArea);
-					area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    players[characterSelected].AddChild(area[0]);
-                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
-                }
-
-                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
-            }
-            // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
-            else
-            {
-                Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[0].cooldown - playableCharacter.abilities[0].counter) + "seconds left to use it again!");
-                playableCharacter.state = State.NONE;
-            }
+            SpawnArea((int)State.ABILITY_1);
         }
 
         // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_2)
         {
-            if (playableCharacter.abilities[1].charges == 0)
-            {
-                playableCharacter.state = State.NONE;
-            }
-            else if (!playableCharacter.abilities[1].onCooldown)
-            {
-                playableCharacter.state = State.ABILITY_2;
-
-                if (!drawnArea)
-                {
-                    drawnArea = true;
-                    InternalCalls.InstancePrefab(playableCharacter.abilities[1].prefabArea);
-                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    players[characterSelected].AddChild(area[0]);
-                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
-                }
-
-                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
-            }
-            else
-            {
-                Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[1].cooldown - playableCharacter.abilities[1].counter) + "seconds left to use it again!");
-                playableCharacter.state = State.NONE;
-
-            }
+            SpawnArea((int)State.ABILITY_2);
         }
 
         // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
-        // TODO
         if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_3)
         {
-            if (playableCharacter.abilities[2].charges == 0)
-            {
-                playableCharacter.state = State.NONE;
-            }
-            else if (!playableCharacter.abilities[2].onCooldown)
-            {
-                playableCharacter.state = State.ABILITY_3;
-
-                if (!drawnArea)
-                {
-                    drawnArea = true;
-                    InternalCalls.InstancePrefab(playableCharacter.abilities[2].prefabArea);
-                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    players[characterSelected].AddChild(area[0]);
-                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
-                }
-
-                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_3);
-            }
-            else
-            {
-                Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[2].cooldown - playableCharacter.abilities[2].counter) + "seconds left to use it again!");
-                playableCharacter.state = State.NONE;
-
-            }
+            SpawnArea((int)State.ABILITY_3);
         }
+
         // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
-        // TODO
+        if (Input.GetKey(KeyCode.F) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_4)
+        {
+            SpawnArea((int)State.ABILITY_4);
+        }
 
         // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
         if (playableCharacter.state != State.NONE) CastOrCancel();
+    }
+
+    private void SpawnArea(int ability)
+    {
+        // Comprobador de cargas de habilidad. Si entra aquí, significa que la habilidad no tiene cargas
+        if (playableCharacter.abilities[ability - 1].charges == 0)
+        {
+            playableCharacter.state = State.NONE;
+        }
+        // Entra aquí si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
+        else if (!playableCharacter.abilities[ability - 1].onCooldown)
+        {
+            playableCharacter.state = (State)ability;
+
+            // Dibujado del área de rango.
+            if (!drawnArea)
+            {
+                drawnArea = true;
+                InternalCalls.InstancePrefab(playableCharacter.abilities[ability - 1].prefabArea);
+                area = GameObject.FindGameObjectsWithTag("AbilityRange");
+                players[characterSelected].AddChild(area[0]);
+                area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
+            }
+
+            players[characterSelected].GetComponent<Player>().SetState(ability);
+        }
+        // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
+        else
+        {
+            Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
+            playableCharacter.state = State.NONE;
+        }
     }
 
     private void CastOrCancel()
@@ -266,52 +226,77 @@ public class PlayerManager : RagnarComponent
                 players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
             }
 
-            if (playableCharacter.state == State.ABILITY_1)
+            switch(playableCharacter.state)
             {
-                if (playableCharacter == characters[0])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFETHROW");
-                }
-                else if (playableCharacter == characters[1])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCRYSKNIFESTAB");
-                }
-                else if (playableCharacter == characters[2])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
-                }
-            }
-            if (playableCharacter.state == State.ABILITY_2)
-            {
-                if (playableCharacter == characters[0])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
-                }
-                else if (playableCharacter == characters[1])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
-                }
-                else if (playableCharacter == characters[2])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
-                }
+                case State.ABILITY_1:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFETHROW");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCRYSKNIFESTAB");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
+                        }
+                        break;
+                    }
+                case State.ABILITY_2:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                        }
+                        break;
+                    }
+                case State.ABILITY_3:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                        }
+                        break;
+                    }
+                case State.ABILITY_4:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                        }
+                        break;
+                    }
+                default:
+                    break;
+
             }
 
-            if (playableCharacter.state == State.ABILITY_3)
-            {
-                if (playableCharacter == characters[0])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
-                }
-                else if (playableCharacter == characters[1])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
-                }
-                else if (playableCharacter == characters[2])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
-                }
-            }
             // Instancia la habilidad en cuestión. 
             InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
 

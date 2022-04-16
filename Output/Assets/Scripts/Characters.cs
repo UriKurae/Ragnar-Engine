@@ -6,6 +6,7 @@ public enum State
     ABILITY_1,
     ABILITY_2,
     ABILITY_3,
+    ABILITY_4,
     POSTCAST,
     DEATH
 }

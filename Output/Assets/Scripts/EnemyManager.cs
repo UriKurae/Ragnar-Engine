@@ -65,14 +65,7 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
-        // ACCIONES
-        // La parte que debería ser la más sencilla, si los enemigos detectan players, que actuen de acuerdo al estado en el que se encuentran.
-
         // CONTROL DE MUERTES
-        // Idea: en el mismo instante que el gameobject se destruye, se debe quitar del array de enemies, para que se cree un array auxiliar que se rellene con los datos de todos y se devuelva este array
-        // al de enemies pero sin los muertos. Así evitamos problemas de updates de GO inexistentes.
-        // IMPORTANTE: Esto irá arriba del todo para hacer la comprobación cada vez que haya un callback :3
-
         if(enemyGOs.Length > 0)
         {
             foreach(GameObject go in enemyGOs)
