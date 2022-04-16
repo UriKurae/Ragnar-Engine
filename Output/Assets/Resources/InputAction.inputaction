@@ -1,0 +1,17 @@
+{
+    "Action Maps": [
+        {
+            "Name": "Player",
+            "Actions": [
+                {
+                    "Name": "Move",
+                    "Bindings": [
+                        {
+                            "Path": 22
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
