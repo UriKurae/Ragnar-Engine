@@ -327,6 +327,17 @@ void MonoManager::DebugAllMethods(const char* nsName, const char* className, std
 	}
 }
 
+void MonoManager::DebugAllMethodsShortName(const char* nsName, const char* className, std::vector<std::string>& _data)
+{
+	void* iter = NULL;
+	MonoMethod* method2;
+	MonoClass* klass = mono_class_from_name(mono_assembly_get_image(app->moduleMono->assembly), nsName, className);
+	while (method2 = mono_class_get_methods(klass, &iter))
+	{
+		_data.push_back(mono_method_get_name(method2));
+	}
+}
+
 MonoObject* MonoManager::GoToCSGO(GameObject* inGo) const
 {
 	MonoClass* goClass = mono_class_from_name(image, SCRIPTS_NAMESPACE, "GameObject");

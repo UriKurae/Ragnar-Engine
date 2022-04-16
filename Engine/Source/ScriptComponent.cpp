@@ -2,6 +2,7 @@
 
 #include "ModuleSceneManager.h"
 #include "Scene.h"
+#include "Globals.h"
 #include "MonoManager.h"
 
 #include "C_RigidBody.h"
@@ -76,11 +77,11 @@ bool ScriptComponent::Update(float dt)
 	{
 		if (strcmp(mono_class_get_name(mono_object_get_class(exec)), "NullReferenceException") == 0)
 		{
-			LOG(LogType::L_ERROR, "Null reference exception detected");
+			DEBUG_LOG("Null reference exception detected");
 		}
 		else
 		{
-			LOG(LogType::L_ERROR, mono_class_get_name(mono_object_get_class(exec)));
+			DEBUG_LOG(mono_class_get_name(mono_object_get_class(exec)));
 		}
 	}
 	return true;

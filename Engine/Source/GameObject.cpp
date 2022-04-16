@@ -15,6 +15,7 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
+#include "InputActionComponent.h"
 #include "AnimationComponent.h"
 #include "BillboardParticleComponent.h"
 #include "ButtonComponent.h"
@@ -256,6 +257,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::INPUT_ACTION:
+		component = new InputActionComponent(this);
+		break;
 	case ComponentType::ANIMATION:
 		component = new AnimationComponent(this);
 		break;
@@ -264,7 +268,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
     	break;
 	case ComponentType::NAVAGENT:
 		component = new NavAgentComponent(this);
-		break;	
+		break;
 	case ComponentType::MATERIAL:
 	{
 		MaterialComponent* matComp = GetComponent<MaterialComponent>();
@@ -651,6 +655,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<AnimationComponent>()->OnLoad(c);
 			break;
+		case ComponentType::INPUT_ACTION:
+			if (GetComponent<InputActionComponent>() == nullptr)
+				CreateComponent(ComponentType::INPUT_ACTION);
+
+			GetComponent<InputActionComponent>()->OnLoad(c);
+			break;
 		case ComponentType::BILLBOARD:
 			if (GetComponent<BillboardParticleComponent>() == nullptr)
 				CreateComponent(ComponentType::BILLBOARD);
@@ -752,6 +762,9 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			break;
 		case ComponentType::ANIMATION:
 			RemoveComponent(GetComponent<AnimationComponent>());
+			break;
+		case ComponentType::INPUT_ACTION:
+			RemoveComponent(GetComponent<InputActionComponent>());
 			break;
 		case ComponentType::BILLBOARD:
 			RemoveComponent(GetComponent<BillboardParticleComponent>());
