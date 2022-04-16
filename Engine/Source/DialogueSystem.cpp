@@ -229,7 +229,6 @@ void DialogueSystem::ShowDialogueFiles()
 	}
 }
 
-//MHF Cargar archibo de dialogo
 void DialogueSystem::LoadDialogue(std::string path)
 {
 	JsonParsing dialogFile = JsonParsing();
@@ -313,9 +312,10 @@ void DialogueSystem::LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg)
 	{
 		DialogueLineXML* node = new DialogueLineXML;
 		node->authorId = m.attribute("AuthorId").as_int();
-		node->line.assign(m.attribute("Line").as_string());
+		//node->line.assign(m.attribute("Line").as_string());
 
-		node->line = TextWrap(node->line, MARGIN_IN_TEXT);
+		//Put enters in a text, never pass de number:MARGIN_IN_TEXT of chars in line
+		node->line.assign(TextWrap(m.attribute("Line").as_string(), MARGIN_IN_TEXT));
 
 		dlg->dialogue.push_back(node);
 	}

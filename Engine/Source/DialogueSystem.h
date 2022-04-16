@@ -3,11 +3,12 @@
 #include <vector>
 #include <string>
 #include <list>
+#include "Application.h"
 
 //MHF
 #include "PugiXML/pugixml.hpp"
-
 #define MARGIN_IN_TEXT 50
+//-------------------------
 
 class DialogueLine
 {
@@ -37,7 +38,6 @@ public:
 	int id;
 	std::vector<DialogueLineXML*> dialogue;
 };
-
 //-------------------------
 
 class DialogueSystem
@@ -62,21 +62,32 @@ public:
 			}
 		}
 	}
+	DialogueXML* GetCurrentDialogueXML() {
+		return currDialogXML;
+	}
+	void StartDialogueXML() {
+		currLineXML = currDialogXML->dialogue.front();
+		indexLine = 0;
+	}
 	// If it returns false it means that the dialog is finished
 	bool NextLineXML(){
-		indexLine ++;
-
-		if (currDialogXML->dialogue.size() < indexLine)
-			return false;
-
+		if (currDialogXML->dialogue.size() < indexLine+1) {
+			return true;
+		}
+		indexLine++;
 		currLineXML = currDialogXML->dialogue[indexLine];
-		return true;
+		return false;
 	}
-	inline std::string GetCurrentLineXML() { return currLineXML->line; }
+	inline std::string GetCurrentLineXML() { 
+
+		LOG("%s",currLineXML->line.c_str());
+
+		return currLineXML->line; 
+	}
 	inline std::string GetOwnerOfLineXML() { return authorList[currLineXML->authorId]; }
 
 	std::string TextWrap(std::string text, int margin);
-	//
+	//-------------------------
 
 	void SaveDialogue();
 
@@ -90,8 +101,6 @@ public:
 	inline std::string GetCurrentLine() { return currLine->line; }
 	inline std::string GetOwnerOfLine() { return currLine->author; }
 	
-
-
 	bool createDialogue;
 
 private:
@@ -105,15 +114,14 @@ private:
 	Dialogue* currDialogue;
 	DialogueLine* currLine;
 
+	static DialogueSystem* instance;
+
 	//MHF
 	int indexLine=0;
 	std::string authorList[16];
 	pugi::xml_document dialoguesXML;
 	std::vector<DialogueXML*> aDialogueXML;
-	DialogueXML* currDialogXML;
-	DialogueLineXML* currLineXML;
-	//
-
-
-	static DialogueSystem* instance;
+	DialogueXML* currDialogXML = nullptr;
+	DialogueLineXML* currLineXML = nullptr;
+	//-------------------------
 };

@@ -12,6 +12,7 @@ public class DialogueManager : RagnarComponent
 	//bool dialogEnd = false;
 	int id;
 	bool firstTime = true;
+	bool endDialogue;
 	public void Start()
 	{
 		//toxt = gameObject.GetComponent<UIText>();
@@ -21,6 +22,7 @@ public class DialogueManager : RagnarComponent
 		auth = "";
 		id = 0;
 		Pos = new Vector3(0, 0, 0);
+		endDialogue = false;
 	}
 	public void Update()
 	{
@@ -30,6 +32,9 @@ public class DialogueManager : RagnarComponent
 			text.GetComponent<Transform2D>().position2D = Pos;
 			firstTime = false;
         }
+		
+		
+		
 		if (Input.GetKey(KeyCode.J) == KeyState.KEY_UP)
 		{
 			Dialogue.LoadDialogueFile("dialogos_esp");
@@ -49,10 +54,16 @@ public class DialogueManager : RagnarComponent
 
 		if (Input.GetKey(KeyCode.L) == KeyState.KEY_UP)
 		{
-			Dialogue.NextLine();
-			text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
-			auth = Dialogue.GetDialogueLineAuthor();
+			endDialogue = Dialogue.NextLine();
+			if (endDialogue == false){
+				text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
+				auth = Dialogue.GetDialogueLineAuthor();
+			}
+			else{
+				Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+			}
 		}
+
 
 		if (auth == "Paul")
 		{
