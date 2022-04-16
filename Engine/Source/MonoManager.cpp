@@ -275,6 +275,15 @@ float3 MonoManager::UnboxVector(MonoObject* _obj)
 	mono_field_get_value(_obj, mono_class_get_field_from_name(klass, "z"), &ret.z);
 	return ret;
 }
+std::vector<GameObject*> MonoManager::UnboxArray(MonoArray* arr, int size)
+{
+	std::vector<GameObject*> obj;
+
+	for (int i = 0; i < size; ++i)
+		obj.push_back(GetGameObject(mono_array_get(arr, MonoObject*, i)));
+
+	return obj;
+}
 //ASK: Is this the worst idea ever? TOO SLOW
 Quat MonoManager::UnboxQuat(MonoObject* _obj)
 {

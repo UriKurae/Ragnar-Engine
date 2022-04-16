@@ -22,6 +22,8 @@ public:
 	void RemoveObjectFromPrefabs(std::vector<uint>& idToDeletePrefab, std::vector<uint>& idToDeleteScene, std::vector<GameObject*>& listGo);
 	void FillListGoParents(std::queue<GameObject*>& que, std::vector<GameObject*>& listGo, std::vector<uint>& idToDeleteScene, std::vector<GameObject*>& listParents);
 
+	void ImportToLibrary();
+
 private:
 	PrefabManager();
 	std::string RenameFile(GameObject* gameObject, std::string& fileName);

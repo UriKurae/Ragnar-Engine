@@ -35,8 +35,6 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	//camera.SetPos(math::vec(0, 0, 0));
 
 	controllerTrans = owner->GetParent()->GetComponent<TransformComponent>();
-	transform->SetPosition(float3(0.0f, 55.0f, -50.0f));
-	transform->SetRotation(Quat::RotateX(DEGTORAD * 45));
 
 	srand(time(NULL));
 	CompileBuffers();

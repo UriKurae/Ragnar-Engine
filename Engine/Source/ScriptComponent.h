@@ -2,6 +2,7 @@
 #include "Component.h"
 #include <vector>
 #include <string>
+#include <algorithm>
 
 class GameObject;
 class RigidBodyComponent;

@@ -363,3 +363,18 @@ void DialogueSystem::NextLine()
 			found = true;
 	}
 }
+
+void DialogueSystem::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles(DIALOGUES_ASSETS_FOLDER, files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string assetsPath = DIALOGUES_ASSETS_FOLDER;
+		assetsPath += (*it);
+		std::string libraryPath = DIALOGUES_FOLDER;
+		libraryPath += (*it);
+		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+	}
+}
