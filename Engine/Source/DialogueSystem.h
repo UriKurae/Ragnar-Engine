@@ -7,6 +7,8 @@
 //MHF
 #include "PugiXML/pugixml.hpp"
 
+#define MARGIN_IN_TEXT 50
+
 class DialogueLine
 {
 public:
@@ -72,6 +74,8 @@ public:
 	}
 	inline std::string GetCurrentLineXML() { return currLineXML->line; }
 	inline std::string GetOwnerOfLineXML() { return authorList[currLineXML->authorId]; }
+
+	std::string TextWrap(std::string text, int margin);
 	//
 
 	void SaveDialogue();

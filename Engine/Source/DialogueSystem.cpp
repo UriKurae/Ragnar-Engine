@@ -314,14 +314,49 @@ void DialogueSystem::LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg)
 		DialogueLineXML* node = new DialogueLineXML;
 		node->authorId = m.attribute("AuthorId").as_int();
 		node->line.assign(m.attribute("Line").as_string());
+
+		node->line = TextWrap(node->line, MARGIN_IN_TEXT);
+
 		dlg->dialogue.push_back(node);
 	}
 }
 
+std::string DialogueSystem::TextWrap(std::string text, int margin)
+{
+	unsigned lineBegin = 0;
 
+	while (lineBegin < text.size())
+	{
+		const unsigned idealEnd = lineBegin + margin;
+		unsigned lineEnd = idealEnd <= text.size() ? idealEnd : text.size() - 1;
 
+		if (lineEnd == text.size() - 1)
+			++lineEnd;
+		else if (std::isspace(text[lineEnd]))
+		{
+			text[lineEnd] = '\n';
+			++lineEnd;
+		}
+		else    // backtrack
+		{
+			unsigned end = lineEnd;
+			while (end > lineBegin && !std::isspace(text[end]))
+				--end;
+
+			if (end != lineBegin)
+			{
+				lineEnd = end;
+				text[lineEnd++] = '\n';
+			}
+			else
+				text.insert(lineEnd++, 1, '\n');
+		}
+
+		lineBegin = lineEnd;
+	}
+	return text;
+}
 //--------------------------------
-
 
 void DialogueSystem::SaveDialogue()
 {
