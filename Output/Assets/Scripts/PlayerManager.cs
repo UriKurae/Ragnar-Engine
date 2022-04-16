@@ -28,7 +28,7 @@ public class PlayerManager : RagnarComponent
             name = "Paul Atreides",
             prefabPath = "Player",
             state = State.NONE,
-            abilities = new Abilities[3]
+            abilities = new Abilities[4]
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -54,6 +54,14 @@ public class PlayerManager : RagnarComponent
             charges = -1,
             cooldown = 20f
         };
+        characters[0].abilities[3] = new Abilities
+        {
+            name = "Rock Throw",
+            prefabPath = "Rock",
+            prefabArea = "Rock Area",
+            charges = -1,
+            cooldown = 20f
+        };
 
         // Player 2
         characters[1] = new Characters
@@ -61,7 +69,7 @@ public class PlayerManager : RagnarComponent
             name = "Chani",
             prefabPath = "Player_2",
             state = State.NONE,
-            abilities = new Abilities[2]
+            abilities = new Abilities[4]
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -79,6 +87,22 @@ public class PlayerManager : RagnarComponent
             charges = -1,
             cooldown = 30f
         };
+        characters[1].abilities[2] = new Abilities
+        {
+            name = "Backstab",
+            prefabPath = "BackStab",
+            prefabArea = "BackStab Area",
+            charges = -1,
+            cooldown = 0f
+        };
+        characters[1].abilities[3] = new Abilities
+        {
+            name = "Backstab",
+            prefabPath = "BackStab",
+            prefabArea = "BackStab Area",
+            charges = -1,
+            cooldown = 0f
+        };
 
         // Player 3
         characters[2] = new Characters
@@ -86,7 +110,7 @@ public class PlayerManager : RagnarComponent
             name = "Stilgar",
             prefabPath = "Player_3",
             state = State.NONE,
-            abilities = new Abilities[2]
+            abilities = new Abilities[4]
         };
         characters[2].abilities[0] = new Abilities
         {
@@ -97,6 +121,22 @@ public class PlayerManager : RagnarComponent
             cooldown = 0f
         };
         characters[2].abilities[1] = new Abilities
+        {
+            name = "Stunner",
+            prefabPath = "StunnerShot",
+            prefabArea = "Stunner Area",
+            charges = 4,
+            cooldown = 5f
+        };
+        characters[2].abilities[2] = new Abilities
+        {
+            name = "Stunner",
+            prefabPath = "StunnerShot",
+            prefabArea = "Stunner Area",
+            charges = 4,
+            cooldown = 5f
+        };
+        characters[2].abilities[3] = new Abilities
         {
             name = "Stunner",
             prefabPath = "StunnerShot",
