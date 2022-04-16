@@ -8,6 +8,7 @@ public class EnemyManager : RagnarComponent
 
     public void Start()
     {
+        // Basic Enemy with Patrol
         enemies[0] = new Enemies
         {
             name = "Ground Enemy 1",
@@ -34,6 +35,7 @@ public class EnemyManager : RagnarComponent
         enemies[1].waypoints[1] = GameObject.Find("5");
         enemies[1].waypoints[2] = GameObject.Find("6");
 
+        // Basic Enemy without Patrol
         enemies[2] = new Enemies
         {
             name = "Ground Enemy 3",
@@ -65,7 +67,7 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
-        // CONTROL DE MUERTES
+        // Death Control
         if(enemyGOs.Length > 0)
         {
             foreach(GameObject go in enemyGOs)
