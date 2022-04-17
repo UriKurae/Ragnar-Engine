@@ -26,7 +26,6 @@ ModuleCamera3D::ModuleCamera3D(bool startEnabled) : horizontalFov(DegToRad(70.0f
 	cameraFrustum.SetViewPlaneDistances(nearPlane, farPlane);
 	CalculateVerticalFov(horizontalFov, SCREEN_WIDTH, SCREEN_HEIGHT);
 	cameraFrustum.SetPerspective(horizontalFov, verticalFov);
-	//cameraFrustum.SetOrthographic(SCREEN_WIDTH, SCREEN_HEIGHT);
 	cameraFrustum.SetFrame(float3(0.0f, 1.5f, 5.0f), float3(0.0f, 0.0f, -1.0f), float3(0.0f, 1.0f, 0.0f));
 	
 	visualizeFrustum = false;

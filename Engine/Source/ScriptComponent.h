@@ -2,6 +2,7 @@
 #include "Component.h"
 #include <vector>
 #include <string>
+#include <algorithm>
 
 class GameObject;
 class RigidBodyComponent;
@@ -31,6 +32,8 @@ public:
 
 	void CallOnCollisionEnter(RigidBodyComponent* other);
 	void CallOnCollision(RigidBodyComponent* other);
+
+	inline uint32_t GetScriptGO() { return noGCobject; }
 
 
 private:

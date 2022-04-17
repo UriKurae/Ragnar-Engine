@@ -54,6 +54,7 @@ public:
 
 	static void LoadFieldData(SerializedField& _field, MonoObject* _object);
 	static void DebugAllMethods(const char* nsName, const char* className, std::vector<std::string>& _data);
+	static void DebugAllMethodsShortName(const char* nsName, const char* className, std::vector<std::string>& _data);
 	static void DebugAllFields(const char* className, std::vector<SerializedField>& _data, MonoObject* obj, ScriptComponent* script, const char* nameSpace);
 
 	void CreateAssetsScript(const char* localPath);

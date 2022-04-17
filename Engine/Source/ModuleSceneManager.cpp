@@ -65,6 +65,7 @@ bool ModuleSceneManager::Start()
 #else
 	PrefabManager::GetInstance()->ImportToLibrary();
 	DialogueSystem::GetInstance()->ImportToLibrary();
+	AudioManager::Get()->ImportToLibrary();
 #endif
 
 	return true;

@@ -96,6 +96,9 @@ public:
 	void updateText();
 
 	void OrderButtons();
+
+	void ImportToLibrary();
+
 public:
     std::map<char, Character> characters;
     Shadert* shader = nullptr;

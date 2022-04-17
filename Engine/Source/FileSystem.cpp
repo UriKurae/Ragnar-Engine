@@ -44,7 +44,7 @@ FileSystem::FileSystem(const char* assetsPath) : name("FileSystem")
 #else
 	// Make sure standard paths exist
 	const char* dirs[] = {
-		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, SCENES_LIBRARY_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_ASSETS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER, PARTICLES_FOLDER, DIALOGUES_ASSETS_FOLDER, DIALOGUES_FOLDER
+		RESOURCES_FOLDER, SETTINGS_FOLDER, LIBRARY_FOLDER, TEXTURES_FOLDER, MESHES_FOLDER, SCENES_FOLDER, SCENES_LIBRARY_FOLDER, MODELS_FOLDER, SHADERS_FOLDER, PREFABS_ASSETS_FOLDER, PREFABS_FOLDER, SCRIPTS_FOLDER, ANIMATIONS_FOLDER, BONES_FOLDER, PARTICLES_FOLDER, DIALOGUES_ASSETS_FOLDER, DIALOGUES_FOLDER, AUDIO_FOLDER, FONTS_FOLDER
 	};
 
 #endif
@@ -338,6 +338,8 @@ ResourceType FileSystem::CheckExtension(const std::string& path)
 	if (extension.data() == std::string(".cs")) return ResourceType::SCRIPT;
 	if (extension.data() == std::string(".shader")) return ResourceType::SHADER;
 
+
+	if (extension.data() == std::string(".inputaction")) return ResourceType::INPUT_ACTION;
 
 	for (s = modelExtension.begin(); s != end; ++s)
 	{
