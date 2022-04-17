@@ -124,13 +124,13 @@ bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 		}		
 	}
 
-	//Close triangle
-	vertex.push_back(pointA);
-	
+	// Inverse triangle
 	std::reverse(vertex.begin(), vertex.end());
 
-	app->renderer3D->enemyCones.resize(vertex.size());
-	memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
+	// Add to enemyCones list
+	int sizeCon = app->renderer3D->enemyCones.size();
+	app->renderer3D->enemyCones.resize(sizeCon + vertex.size());
+	memcpy(&app->renderer3D->enemyCones[sizeCon], &vertex[0], vertex.size() * sizeof(float3));
 
 	return ret;
 }
