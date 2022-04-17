@@ -56,3 +56,15 @@ void SetAgentPath(MonoObject* go, MonoArray* path)
 	agent->agentProperties->path.clear();
 	agent->agentProperties->path = wayPoints;
 }
+
+void SetAgentSpeed(MonoObject* go, float speed)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	agent->agentProperties->speed = speed;
+}
+
+float GetAgentSpeed(MonoObject* go)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	return agent->agentProperties->speed;
+}
