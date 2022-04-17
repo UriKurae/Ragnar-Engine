@@ -66,7 +66,7 @@ public class Player : RagnarComponent
                 rb.SetHeight(1); // 1 = 100% = Reset
             }
         }
-        if(state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2)
+        if(state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 ||state == (int)State.ABILITY_3)
         {
             agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
             agent.CalculatePath(agent.hitPosition);

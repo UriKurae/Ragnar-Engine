@@ -90,7 +90,7 @@ public class PlayerManager : RagnarComponent
         characters[1].abilities[2] = new Abilities
         {
             name = "Spice Bomb",
-            prefabPath = "BackStab",
+            prefabPath = "Spice Granade",
             prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 0f
