@@ -37,7 +37,7 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Knife Area",
             charges = -1,
             cooldown = 25f
-        };
+        }; // Throwing Knife
         characters[0].abilities[1] = new Abilities
         {
             name = "Rock Throw",
@@ -45,7 +45,7 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f
-        };
+        }; // Rock/Eagle
         characters[0].abilities[2] = new Abilities
         {
             name = "The Voice",
@@ -53,15 +53,15 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f
-        };
+        }; // The Voice
         characters[0].abilities[3] = new Abilities
         {
-            name = "Rock Throw",
-            prefabPath = "Rock",
-            prefabArea = "Rock Area",
+            name = "BackStab",
+            prefabPath = "BackStab_2",
+            prefabArea = "BackStab Area",
             charges = -1,
-            cooldown = 20f
-        };
+            cooldown = 0f
+        }; // BackStab
 
         // Player 2
         characters[1] = new Characters
@@ -78,7 +78,7 @@ public class PlayerManager : RagnarComponent
             prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 0f
-        };
+        }; // BackStab
         characters[1].abilities[1] = new Abilities
         {
             name = "Camouflage",
@@ -86,23 +86,23 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Backstab Area",
             charges = -1,
             cooldown = 30f
-        };
+        }; // Camouflage
         characters[1].abilities[2] = new Abilities
         {
-            name = "Backstab",
+            name = "Spice Bomb",
             prefabPath = "BackStab",
             prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 0f
-        };
+        }; // Spice Bomb
         characters[1].abilities[3] = new Abilities
         {
-            name = "Backstab",
+            name = "Hunter Seeker",
             prefabPath = "BackStab",
             prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 0f
-        };
+        }; // Hunter Seeker
 
         // Player 3
         characters[2] = new Characters
@@ -119,7 +119,7 @@ public class PlayerManager : RagnarComponent
             prefabArea = "SwordSlash Area",
             charges = -1,
             cooldown = 0f
-        };
+        }; // Sword Slash
         characters[2].abilities[1] = new Abilities
         {
             name = "Stunner",
@@ -127,23 +127,23 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Stunner Area",
             charges = 4,
             cooldown = 5f
-        };
+        }; // Stunner Shot
         characters[2].abilities[2] = new Abilities
         {
-            name = "Stunner",
-            prefabPath = "StunnerShot",
-            prefabArea = "Stunner Area",
-            charges = 4,
-            cooldown = 5f
-        };
+            name = "Whistle",
+            prefabPath = "Whistle",
+            prefabArea = "Whistle Area",
+            charges = -1,
+            cooldown = 6f
+        }; // Whistle
         characters[2].abilities[3] = new Abilities
         {
-            name = "Stunner",
-            prefabPath = "StunnerShot",
-            prefabArea = "Stunner Area",
-            charges = 4,
-            cooldown = 5f
-        };
+            name = "Trap",
+            prefabPath = "Trap",
+            prefabArea = "Trap Area",
+            charges = 1,
+            cooldown = 0f
+        }; // Trap
         ///////////////////////////////////////////////////////////////////
 
         foreach (Characters c in characters)

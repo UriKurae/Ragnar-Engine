@@ -109,7 +109,7 @@ public class EnemyInteractions : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
             pendingToDelete = true;
         }
-        if (other.gameObject.name == "Rock")
+        if (other.gameObject.name == "Rock" || other.gameObject.name == "Whistle")
         {
             patrol = false;
             stoppedTime = 2f;
