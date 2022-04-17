@@ -326,6 +326,7 @@ bool ModuleRenderer3D::PostUpdate()
 	vbo->Unbind();
 
 	coneShader->Unbind();
+	enemyCones.clear();
 
 #ifndef DIST 
 	app->userInterface->Draw();

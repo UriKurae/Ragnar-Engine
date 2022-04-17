@@ -66,7 +66,7 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	return false;
 }
 
-bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)
+int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 forward = app->moduleMono->UnboxVector(_forward);
@@ -110,26 +110,27 @@ bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 		hit = float3::zero;
 	}
 
-	bool ret = false;
-	for (size_t i = 0; i < vertex.size() && !ret; i+=3)
+	int ret = -1;
+	for (size_t i = 0; i < vertex.size() && ret == -1 ; i+=3)
 	{
 		Triangle t(vertex[i], vertex[i+1], vertex[i+2]);
 		for (size_t j = 0; j < gos.size(); j++)
 		{
 			if (t.Intersects(gos.at(j)->GetOOB()))
 			{
-				ret = true;
+				ret = j;
 				break;
 			}
 		}		
 	}
-	//Close triangle
-	vertex.push_back(pointA);
-	
+
+	// Inverse triangle
 	std::reverse(vertex.begin(), vertex.end());
 
-	app->renderer3D->enemyCones.resize(vertex.size());
-	memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
+	// Add to enemyCones list
+	int sizeCon = app->renderer3D->enemyCones.size();
+	app->renderer3D->enemyCones.resize(sizeCon + vertex.size());
+	memcpy(&app->renderer3D->enemyCones[sizeCon], &vertex[0], vertex.size() * sizeof(float3));
 
 	return ret;
 }
