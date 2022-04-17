@@ -66,7 +66,7 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	return false;
 }
 
-bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)
+int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 forward = app->moduleMono->UnboxVector(_forward);
@@ -110,15 +110,15 @@ bool PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 		hit = float3::zero;
 	}
 
-	bool ret = false;
-	for (size_t i = 0; i < vertex.size() && !ret; i+=3)
+	int ret = -1;
+	for (size_t i = 0; i < vertex.size() && ret == -1 ; i+=3)
 	{
 		Triangle t(vertex[i], vertex[i+1], vertex[i+2]);
 		for (size_t j = 0; j < gos.size(); j++)
 		{
 			if (t.Intersects(gos.at(j)->GetOOB()))
 			{
-				ret = true;
+				ret = j;
 				break;
 			}
 		}		

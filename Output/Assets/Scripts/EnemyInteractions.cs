@@ -62,7 +62,9 @@ public class EnemyInteractions : RagnarComponent
         Vector3 enemyForward = gameObject.transform.forward;
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        return RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
+        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
+        if (index != -1) canShoot = true;
+        return (index == -1) ? false : true;
     }
 
     private void Shoot()
