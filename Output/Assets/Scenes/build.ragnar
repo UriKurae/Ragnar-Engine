@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 332248608,
+                    "pointer": 57377768,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 223199040,
+                    "characters": 224182080,
                     "drawnArea": false
                 }
             ]
@@ -177,9 +177,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        1.33514404296875e-05,
+                        55.73992919921875,
+                        -50.672660827636719
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -201,15 +201,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 130,
-                    "Vertical Fov": 0.47030121088027954,
+                    "Vertical Fov": 0.35794177651405334,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -63.997673034667969,
-                        55,
-                        124.63337707519531
+                        -64.187553405761719,
+                        55.73992919921875,
+                        125.27870178222656
                     ],
                     "Type": 3,
-                    "Zoom": 30,
+                    "Zoom": 29,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Free Movement": true,
@@ -327,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 332248744,
+                    "pointer": 57377400,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -339,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 332247112,
+                    "pointer": 57376296,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -656,7 +656,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164062
+                        -46.558364868164063
                     ],
                     "Quaternion": [
                         0,
@@ -873,7 +873,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789062,
+                        -11.089859008789063,
                         0,
                         6.886474609375
                     ],
@@ -948,7 +948,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414062
+                        27.392837524414063
                     ],
                     "Quaternion": [
                         0,
@@ -1035,9 +1035,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945312,
+                        1.0000076293945313,
                         1,
-                        1.0000076293945312
+                        1.0000076293945313
                     ]
                 },
                 {
@@ -1877,8 +1877,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1895,7 +1895,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 332249696,
+                    "pointer": 57378136,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1932,8 +1932,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2005,8 +2005,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2078,8 +2078,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2126,8 +2126,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2546,7 +2546,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -2730,8 +2730,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2778,8 +2778,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2826,8 +2826,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 841,
+                    "lastButtonWidth": 1328,
+                    "lastButtonHeight": 580,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2840,6 +2840,62 @@
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 972043276,
+            "Parent UUID": 417171234,
+            "Name": "Boss",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Boss.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.0531272888183594,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Boss",
+                    "pointer": 360622952,
+                    "type": 4,
+                    "componentTable": 0
                 }
             ]
         }

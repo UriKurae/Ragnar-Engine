@@ -71,7 +71,6 @@ public class pauseMenuButton : RagnarComponent
 			}
 			else
 			{
-
 				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				ImageHide();
@@ -80,7 +79,6 @@ public class pauseMenuButton : RagnarComponent
 				MainMenuButtonHide();
 				OptionsButtonHide();
 				isSowing = true;
-
 			}
 		}
 	}
