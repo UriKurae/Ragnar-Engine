@@ -71,6 +71,7 @@
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
     <Compile Include="Assets\Scripts\AirEnemy.cs" />
     <Compile Include="Assets\Scripts\BasicEnemy.cs" />
+    <Compile Include="Assets\Scripts\HunterSeeker.cs" />
     <Compile Include="Assets\Scripts\DialoguesManager.cs" />
     <Compile Include="Assets\Scripts\EnemyAbilities.cs" />
     <Compile Include="Assets\Scripts\LoseScreen.cs" />
