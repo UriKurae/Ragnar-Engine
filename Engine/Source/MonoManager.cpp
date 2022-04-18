@@ -105,6 +105,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::GetActiveComponent", GetActiveComponent);
+	mono_add_internal_call("RagnarEngine.GameObject::SetActiveComponent", SetActiveComponent);
 	mono_add_internal_call("RagnarEngine.GameObject::GetSizeAABB", GetSizeAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::GetMinAABB", GetMinAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
@@ -324,6 +326,17 @@ void MonoManager::DebugAllMethods(const char* nsName, const char* className, std
 	{
 		_data.push_back(mono_method_full_name(method2, 1));
 		//LOG(LogType::L_NORMAL, mono_method_full_name(method2, 1));
+	}
+}
+
+void MonoManager::DebugAllMethodsShortName(const char* nsName, const char* className, std::vector<std::string>& _data)
+{
+	void* iter = NULL;
+	MonoMethod* method2;
+	MonoClass* klass = mono_class_from_name(mono_assembly_get_image(app->moduleMono->assembly), nsName, className);
+	while (method2 = mono_class_get_methods(klass, &iter))
+	{
+		_data.push_back(mono_method_get_name(method2));
 	}
 }
 

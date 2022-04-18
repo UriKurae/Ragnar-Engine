@@ -100,6 +100,12 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern public GameObject Find(string name);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern bool GetActiveComponent(object child);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetActiveComponent(object child, bool value);
+
         //[MethodImplAttribute(MethodImplOptions.InternalCall)]
         //static extern public GameObject FindGameObjectWithTag(string tag);
 

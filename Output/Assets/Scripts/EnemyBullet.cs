@@ -8,24 +8,27 @@ public class EnemyBullet : RagnarComponent
 
 	public GameObject[] players = new GameObject[3];
 	public int index = 0;
+	public GameObject enemy;
 
 	public void Start()
 	{
 		players = GameObject.FindGameObjectsWithTag("Player");
+		Debug.Log(enemy.name);
 
-		GameObject enemy = GameObject.Find("Enemy");
 		Vector3 pos = enemy.transform.globalPosition;
 		pos.y += 1;
 		gameObject.transform.localPosition = pos;
 
-		Rigidbody knifeRb = gameObject.GetComponent<Rigidbody>();
-		knifeRb.SetBodyPosition(pos);
-		knifeRb.IgnoreCollision(enemy, true);
+		Rigidbody bulletRb = gameObject.GetComponent<Rigidbody>();
+		bulletRb.SetBodyPosition(pos);
+		bulletRb.IgnoreCollision(enemy, true);
+
+		Debug.Log(index.ToString());
 
         float xDiff = players[index].transform.globalPosition.x - gameObject.transform.globalPosition.x;
         float zDiff = players[index].transform.globalPosition.z - gameObject.transform.globalPosition.z;
         Vector3 shotDirection = new Vector3(xDiff, pos.y, zDiff);
-        knifeRb.linearVelocity = shotDirection.normalized * vel;
+        bulletRb.linearVelocity = shotDirection.normalized * vel;
     }
     public void Update()
 	{

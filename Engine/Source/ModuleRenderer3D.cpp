@@ -334,7 +334,10 @@ bool ModuleRenderer3D::PostUpdate()
 	//glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
 	//vbo->Unbind();
 
-#ifndef DIST
+	coneShader->Unbind();
+    enemyCones.clear();
+
+#ifndef DIST 
 	app->userInterface->Draw();
 #endif
 

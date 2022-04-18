@@ -2,6 +2,7 @@
 
 #include "ModuleSceneManager.h"
 #include "Scene.h"
+#include "Globals.h"
 #include "MonoManager.h"
 
 #include "C_RigidBody.h"
@@ -76,11 +77,11 @@ bool ScriptComponent::Update(float dt)
 	{
 		if (strcmp(mono_class_get_name(mono_object_get_class(exec)), "NullReferenceException") == 0)
 		{
-			LOG(LogType::L_ERROR, "Null reference exception detected");
+			DEBUG_LOG("Null reference exception detected");
 		}
 		else
 		{
-			LOG(LogType::L_ERROR, mono_class_get_name(mono_object_get_class(exec)));
+			DEBUG_LOG(mono_class_get_name(mono_object_get_class(exec)));
 		}
 	}
 	return true;
@@ -121,14 +122,22 @@ void ScriptComponent::SelectScript()
 {
 	if (ImGui::BeginCombo("Select Script", "New Script"))
 	{
-		const char* scriptName;
-		for (int i = 0; i < app->moduleMono->userScripts.size(); i++)
+		std::vector<std::string> scriptName;
+		int size = app->moduleMono->userScripts.size();
+		//const char* scriptName;
+		for (int i = 0; i < size; i++)
+			scriptName.push_back(mono_class_get_name(app->moduleMono->userScripts[i]));
+
+		std::sort(scriptName.begin(), scriptName.end(), [](std::string a, std::string b) {
+			return (a < b);
+			});
+
+		for (int i = 0; i < size; i++)
 		{
-			scriptName = mono_class_get_name(app->moduleMono->userScripts[i]);
-			if (ImGui::Selectable(scriptName))
+			if (ImGui::Selectable(scriptName.at(i).c_str()))
 			{
-				name = scriptName;
-				LoadScriptData(scriptName);
+				name = scriptName.at(i);
+				LoadScriptData(scriptName.at(i).c_str());
 			}
 		}
 		ImGui::EndCombo();
