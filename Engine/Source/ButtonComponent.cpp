@@ -74,13 +74,15 @@ bool ButtonComponent::Update(float dt)
 
 void ButtonComponent::Draw(CameraComponent* gameCam)
 {
-	glAlphaFunc(GL_GREATER, 0.5);
-	glEnable(GL_ALPHA_TEST);
+	if (owner->active) {
+		glAlphaFunc(GL_GREATER, 0.5);
+		glEnable(GL_ALPHA_TEST);
 
-	planeToDraw->DrawPlane2D(actual->GetTexture().get());
+		planeToDraw->DrawPlane2D(actual->GetTexture().get());
 
-	glDisable(GL_ALPHA_TEST);
-	glColor3f(255, 255, 255);
+		glDisable(GL_ALPHA_TEST);
+		glColor3f(255, 255, 255);
+	}
 }
 
 void ButtonComponent::OnEditor()

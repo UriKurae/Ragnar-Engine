@@ -42,14 +42,17 @@ bool ImageComponent::Update(float dt)
 
 void ImageComponent::Draw(CameraComponent* gameCam)
 {
-	glAlphaFunc(GL_GREATER, 0.5);
-	glEnable(GL_ALPHA_TEST);
+	if (owner->active) {
 
-	glColor4f(color.r, color.g, color.b, color.a);
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+		glAlphaFunc(GL_GREATER, 0.5);
+		glEnable(GL_ALPHA_TEST);
 
-	glDisable(GL_ALPHA_TEST);
-	glColor3f(255, 255, 255);
+		glColor4f(color.r, color.g, color.b, color.a);
+		planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+
+		glDisable(GL_ALPHA_TEST);
+		glColor3f(255, 255, 255);
+	}
 }
 
 void ImageComponent::OnEditor()

@@ -7,7 +7,7 @@
 
 //MHF
 #include "PugiXML/pugixml.hpp"
-#define MARGIN_IN_TEXT 50
+#define MARGIN_IN_TEXT 45
 //-------------------------
 
 class DialogueLine
