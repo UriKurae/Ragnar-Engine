@@ -51,11 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 402102864,
+                    "pointer": 147403896,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 210127232,
+                    "characterSelected": 0,
+                    "characters": 206225216,
                     "drawnArea": false
                 }
             ]
@@ -75,9 +76,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        50,
-                        50,
-                        50
+                        -81.704513549804688,
+                        -15.667804718017578,
+                        -39.428794860839844
                     ],
                     "Quaternion": [
                         0.67389911413192749,
@@ -100,6 +101,11 @@
                     "Type": 8,
                     "Active": true,
                     "Light Type": 1,
+                    "Position": [
+                        -81.704513549804688,
+                        -15.667804718017578,
+                        -39.428794860839844
+                    ],
                     "Direction": [
                         0.67802053689956665,
                         -0.60160064697265625,
@@ -120,7 +126,8 @@
                         0,
                         0
                     ],
-                    "Intensity": 4
+                    "Intensity": 4,
+                    "Shadows": true
                 }
             ]
         },
@@ -201,7 +208,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 135,
-                    "Vertical Fov": 0.47030121088027954,
+                    "Vertical Fov": 0.44796112179756165,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
                         -70.034164428710938,
@@ -534,10 +541,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 402105720,
+                    "pointer": 147402944,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 210127168,
+                    "enemies": 206225152,
                     "enemyGOs": 0
                 }
             ]
@@ -1929,8 +1936,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1947,7 +1954,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 321332664,
+                    "pointer": 304059968,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1984,8 +1991,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2057,8 +2064,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2130,8 +2137,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2178,8 +2185,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2782,8 +2789,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2830,8 +2837,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2878,8 +2885,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1370,
-                    "lastButtonHeight": 759,
+                    "lastButtonWidth": 1411,
+                    "lastButtonHeight": 776,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
