@@ -6,43 +6,33 @@ public class HunterSeeker : RagnarComponent
 	NavAgent agent;
 	public GameObject[] enemies;
 	Rigidbody rb;
-	bool waitHit;
 
 	public void Start()
 	{
-		waitHit = false;
-
 		agent = gameObject.GetComponent<NavAgent>();
-		rb = gameObject.GetComponent<Rigidbody>();
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
 		GameObject player = GameObject.Find("Player");
-
-		player.GetComponent<Player>().controled = false;
-
-		//not working position
-		Vector3 pos = player.transform.globalPosition;
-		gameObject.transform.localPosition = pos;
-		rb.SetBodyPosition(player.transform.globalPosition);
+		player.GetComponent<Player>().SetControled(false);
+		Vector3 pos = player.transform.globalPosition + new Vector3(0, 1, 0);
+		rb = gameObject.GetComponent<Rigidbody>();
+		rb.SetBodyPosition(pos);
 		rb.IgnoreCollision(player, true);
 	}
 	public void Update()
 	{
-		//set const height? gameObject.transform.globalPosition.y = 1;
-		if (!waitHit && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+		if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
 		{
-			waitHit = true;
 			if (agent.CalculatePath(agent.hitPosition).Length > 0)
-			{
-				agent.CalculatePath(gameObject.transform.globalPosition);
-				agent.CalculatePath(agent.hitPosition);
-			}
+			{ }
 		}
-		if (waitHit && Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_UP)
+		if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_UP)
 		{
 			if (Attack())
 			{
+				GameObject player = GameObject.Find("Player");
+				player.GetComponent<Player>().SetControled(true);
+
 				InternalCalls.Destroy(gameObject);
-				waitHit = false;
 			}
 		}
 	}

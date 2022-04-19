@@ -98,7 +98,7 @@ public class PlayerManager : RagnarComponent
         characters[1].abilities[3] = new Abilities
         {
             name = "Hunter Seeker",
-            prefabPath = "Cube",
+            prefabPath = "HunterSeeker",
             prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 4f
