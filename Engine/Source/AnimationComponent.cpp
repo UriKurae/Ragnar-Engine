@@ -12,6 +12,8 @@
 #include "Math/TransformOps.h"
 #include "Imgui/imgui_stdlib.h"
 
+#include "Profiling.h"
+
 AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), deltaTime(0.0f), currAnim(nullptr), playing(false), loopTime(0.0f), interpolating(false), lastAnim(nullptr), lastCurrentTime(0.0f), interpolatingVel(1.0f)
 {
 	type = ComponentType::ANIMATION;
@@ -24,6 +26,11 @@ AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), d
 	for (int i = 0; i < 100; i++)
 	{
 		finalBoneMatrices.push_back(float4x4::identity);
+	}
+
+	if (MeshComponent* mesh = owner->GetComponent<MeshComponent>())
+	{
+		boneInfoMap = mesh->GetBoneMap();
 	}
 
 	animations.push_back({ "None", nullptr, false });
@@ -169,6 +176,8 @@ void AnimationComponent::AnimationInfo()
 
 bool AnimationComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Animation Component Update");
+
 	deltaTime = dt;
 	if (currAnim && playing && app->sceneManager->GetGameState() == GameState::PLAYING)
 	{
@@ -212,6 +221,7 @@ bool AnimationComponent::Update(float dt)
 			currentTime += 24.0f * dt;
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
+		//auto& boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
 		//CalculateBoneTransform(currAnim->anim->GetBones(), float4x4::identity);
 	}
@@ -221,38 +231,26 @@ bool AnimationComponent::Update(float dt)
 
 void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform)
 {
+	RG_PROFILING_FUNCTION("Calculate Bone Transform");
+
 	std::string nodeName = data.name;
-	float4x4 nodeTransform = data.transform;
 
-	Bone* bone = currAnim->anim->FindBone(nodeName);
-	Bone* lastBone = lastAnim->anim->FindBone(nodeName);
+	float4x4 globalTransformation = float4x4::identity;
 
-	if (bone)
+	if (GetBoneInfo(nodeName, boneInfoMap) != boneInfoMap.end())
 	{
-		if (!interpolating)
-		{
-			bone->Update(currentTime);
-		}
-		else if (lastBone && lastAnim != currAnim)
-		{
-			bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
-			if (!interpolating)
-			{
-				loopTime = 0.0f;
-				currentTime = 0.0f;
-			}
-		}
-		nodeTransform = bone->GetTransform();
-	}
+		Bone* bone = currAnim->anim->FindBone(nodeName);
+		Bone* lastBone = lastAnim->anim->FindBone(nodeName);
 
-	float4x4 globalTransformation = parentTransform * nodeTransform;
+		if (bone)
+		{
+			globalTransformation = UpdateBone(bone, lastBone, parentTransform);
 
-	auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
-	if (boneInfoMap.find(nodeName) != boneInfoMap.end())
-	{
-		int index = boneInfoMap[nodeName].id;
-		float4x4 offset = boneInfoMap[nodeName].offset;
-		finalBoneMatrices[index] = globalTransformation * offset;
+			const BoneInfo& boneInfo = boneInfoMap.at(nodeName);
+			int index = boneInfo.id;
+			const float4x4& offset = boneInfo.offset;
+			finalBoneMatrices[index] = globalTransformation * offset;
+		}
 	}
 
 	for (int i = 0; i < data.childrenCount; ++i)
@@ -543,4 +541,31 @@ void AnimationComponent::GetAnimations()
 			}
 		}
 	}
+}
+
+const float4x4& AnimationComponent::UpdateBone(Bone* bone, Bone* lastBone, float4x4& parentTransform)
+{
+	RG_PROFILING_FUNCTION("Updating Bone");
+
+	if (!interpolating)
+	{
+		bone->Update(currentTime);
+	}
+	else if (lastBone && lastAnim != currAnim)
+	{
+		bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
+		if (!interpolating)
+		{
+			loopTime = 0.0f;
+			currentTime = 0.0f;
+		}
+	}
+
+	return parentTransform * bone->GetTransform();
+}
+
+std::map<std::string, BoneInfo>::const_iterator AnimationComponent::GetBoneInfo(std::string name, const std::map<std::string, BoneInfo>& map)
+{
+	RG_PROFILING_FUNCTION("Finding Bone Info in Map");
+	return map.find(name);
 }

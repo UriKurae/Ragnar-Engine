@@ -39,14 +39,14 @@ public:
 	inline const std::string& GetName() const { return data.name; }
 	const int GetParentId() const { return parentId; }
 
-	inline math::float4x4 GetTransform() { return localTransform; }
+	inline const math::float4x4& GetTransform() { return localTransform; }
 
 	int GetPositionIndex(float animationTime);
 	int GetRotationIndex(float animationTime);
 	int GetScalingIndex(float animationTime);
 private:
 	// Interpolations for normal animations
-	float4x4 InterpolatePosition(float animationTime);
+	const float4x4& InterpolatePosition(float animationTime);
 	float4x4 InterpolateRotation(float animationTime);
 	float4x4 InterpolateScaling(float animationTime);
 

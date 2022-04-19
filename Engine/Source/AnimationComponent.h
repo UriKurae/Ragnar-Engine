@@ -1,11 +1,11 @@
 #pragma once
 #include "Component.h"
 
+#include "Bone.h"
 #include <map>
 
 #include <queue>
 
-class Bone;
 class Animation;
 struct HierarchyData;
 
@@ -46,6 +46,9 @@ public:
 
 	inline std::vector<float4x4> GetFinalBoneMatrices() { return finalBoneMatrices; };
 
+	const float4x4& UpdateBone(Bone* bone, Bone* lastBone, float4x4& parentTransform);
+
+	std::map<std::string, BoneInfo>::const_iterator GetBoneInfo(std::string name, const std::map<std::string, BoneInfo>& map);
 public:
 	bool showAnimMenu = false;
 	bool playing;
@@ -60,6 +63,8 @@ public:
 
 	AnimState* lastAnim;
 	AnimState* currAnim;
+
+	std::map<std::string, BoneInfo> boneInfoMap;
 
 	std::vector<float4x4> finalBoneMatrices;
 	std::vector<AnimState> animations;

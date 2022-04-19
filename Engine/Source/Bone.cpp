@@ -102,7 +102,7 @@ void Bone::UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTi
 	localTransform = InterpolatePosition(bone, animationTime, lastAnimTime, interpolating, velocity);
 }
 
-float4x4 Bone::InterpolatePosition(float animationTime)
+const float4x4& Bone::InterpolatePosition(float animationTime)
 {
 	if (data.keyFrames.size() == 1)
 		return data.keyFrames[0].matrix;
