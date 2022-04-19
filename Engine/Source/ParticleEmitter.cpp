@@ -45,6 +45,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
+	loopTimer = 2.0f;
 	particleReference.color = { 1,0,0,1 };
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
@@ -67,6 +68,9 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	data.drawCalls = 0;
+
+	tilesX = 1;
+	tilesY = 1;
 
 	showTexMenu = false;
 
@@ -148,21 +152,47 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	if (data.indexCount >= data.maxIndices)
 		NextBatch();
 
-	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-
-	Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
-	float4x4 transform = float4x4::FromTRS(pos, q, size);
-
-	const int quadVertexCount = 4;
-	for (int i = 0; i < quadVertexCount; i++)
+	/*if (timer <= 0.0f)
 	{
-		float4 p = transform * data.vertexPositions[i];
-		data.vertexBufferPtr->position = p.Float3Part();
-		data.vertexBufferPtr->texCoords = texCoords[i];
-		data.vertexBufferPtr->color = color;
-
-		data.vertexBufferPtr++;
+	texCoords[0] = { 0.0f, 0.0f };
+	texCoords[1] = { 1.0f / tilesX, 0.0f };
+	texCoords[2] = { 1.0f / tilesX, 1.0f / tilesY };
+	texCoords[3] = { 0.0f, 1.0f / tilesY };*/
+	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+	//float i = 0;
+	/*if (loopTimer <= 0.0f) loopTimer = 2.0f;
+	if (loopTimer > 1.0f)
+	{
+		const float2 texCoords[] = { { i / tilesX, i / tilesY }, { (1.0f / tilesX) + (i / tilesX) , i / tilesY }, { (1.0f / tilesX) + (i / tilesX), (1.0f / tilesY) + (i / tilesY) }, {i / tilesX, (1.0f / tilesY) + (i / tilesY) } };
+		i++;
 	}
+	if (loopTimer > 0.5f && loopTimer < 1.0f)
+	{
+		const float2 texCoords[] = { { i / tilesX, i / tilesY }, { (1.0f / tilesX) + (i / tilesX) , i / tilesY }, { (1.0f / tilesX) + (i / tilesX), (1.0f / tilesY) + (i / tilesY) }, {i / tilesX, (1.0f / tilesY) + (i / tilesY) } };
+		i++;
+	}
+	if (loopTimer < 0.5f)
+	{
+		const float2 texCoords[] = { { i / tilesX, i / tilesY }, { (1.0f / tilesX) + (i / tilesX) , i / tilesY }, { (1.0f / tilesX) + (i / tilesX), (1.0f / tilesY) + (i / tilesY) }, {i / tilesX, (1.0f / tilesY) + (i / tilesY) } };
+		i++;
+	}*/
+
+		Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
+		float4x4 transform = float4x4::FromTRS(pos, q, size);
+
+		const int quadVertexCount = 4;
+		for (int i = 0; i < quadVertexCount; i++)
+		{
+			float4 p = transform * data.vertexPositions[i];
+			data.vertexBufferPtr->position = p.Float3Part();
+			
+
+			data.vertexBufferPtr->texCoords = texCoords[i];
+			data.vertexBufferPtr->color = color;
+			data.vertexBufferPtr++;
+		}
+
+	//}
 	data.indexCount += 6;
 }
 
@@ -306,7 +336,7 @@ void ParticleEmitter::UpdateParticle(float dt)
 void ParticleEmitter::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Particles Update");
-
+	loopTimer -= dt;
 	UpdateParticle(dt);
 	for (int i = 0; i < particlePool.size(); ++i)
 	{
@@ -413,6 +443,9 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());*/
 
 		//ImGui::Indent();
+
+		ImGui::DragInt("Tiles: X", &tilesX, 1.0f, 1, 100);
+		ImGui::DragInt("Tiles: Y", &tilesY, 1.0f, 1, 100);
 
 		ImGui::Text("Texture");
 		if (ImGui::ImageButton((void*)texture->GetId(), { 150,150 }))

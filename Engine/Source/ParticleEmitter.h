@@ -68,7 +68,12 @@ public:
 
 	float timer;
 	float currTimer;
+	float loopTimer;
 
+	int tilesX;
+	int tilesY;
+
+	//float2 texCoords[4] = {};
 private:
 
 	struct EmitterData
