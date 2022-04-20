@@ -16,8 +16,24 @@ public class Boss : RagnarComponent
 	
 	public BossState state;
 	NavAgent agent;
+
+	// Arrays for the enemies and players
 	GameObject[] enemies = new GameObject[10];
 	GameObject[] players = new GameObject[3];
+
+	// Phase 2 mechanics
+
+	// Jump attack variables
+	bool playerDetected = false;
+
+	// Phase 3 mechanics
+
+	bool phase3Location = false;
+	GameObject[] barrels = new GameObject[3];
+	float barrelCooldown = 15.0f;
+	int barrelCount = 0;
+	bool shieldInmunity = false;
+
 	public void Start()
 	{
 		material = gameObject.GetComponent<Material>();
@@ -37,22 +53,58 @@ public class Boss : RagnarComponent
 			NextState();
 		}
 
+		if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
+		{
+			playerDetected = true;
+		}
+
 		if (state == BossState.PHASE2)
-        {
-			Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
-			Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
-			for (int i = 0; i < players.Length; ++i)
+		{
+            // this instakills
+            if (playerDetected)
             {
-				if (players[i].transform.localPosition.magnitude <= area.magnitude && 
-					players[i].transform.localPosition.magnitude < jumpTo.magnitude)
+                Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
+                Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
+                for (int i = 0; i < players.Length; ++i)
                 {
-					jumpTo = players[i].transform.localPosition;
-				}
+                    if (players[i].transform.localPosition.magnitude <= area.magnitude &&
+                        players[i].transform.localPosition.magnitude < jumpTo.magnitude)
+                    {
+                        jumpTo = players[i].transform.localPosition;
+                    }
+                }
+
+                if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f))
+                {
+                    agent.MoveTo(jumpTo);
+                } 
+            }
+		}
+		else if (state == BossState.PHASE3)
+        {
+			if (phase3Location == false)
+            {
+				// Move to new location as soon as phase 3 starts
+				Vector3 destination = new Vector3(1.0f, 1.0f, 1.0f);
+
+				agent.MoveTo(destination);
+				
+				if (this.gameObject.transform.localPosition == destination) phase3Location = false;
+
+				shieldInmunity = true;
             }
 
-			if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f))
-				agent.MoveTo(jumpTo);
-		}
+			if (barrelCooldown <= 0.0f)
+			{
+				while (barrelCount < 3)
+                {
+					// Need to know the name of the prefab
+					InternalCalls.InstancePrefab("BarrelPrefab");
+				}
+			}
+
+
+        }
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
         {
@@ -73,8 +125,12 @@ public class Boss : RagnarComponent
 				material.SetTexturePath("Assets/Resources/white.png");
 				break;
 			case BossState.PHASE4:
-				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
-				material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
+				if (!shieldInmunity)
+				{
+					rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
+					material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
+				}
+				else state--;
 				break;
 		}
     }
@@ -83,11 +139,8 @@ public class Boss : RagnarComponent
 	{
 		if (other.gameObject.tag == "Backstab")
         {
-			if (enemies.Length == 0 && state == BossState.PHASE1)
-            {
-				state = BossState.PHASE2;
-				NextState();
-            }
+			state++;
+			NextState();
 		}
 	}
 
