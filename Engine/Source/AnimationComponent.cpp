@@ -78,6 +78,8 @@ void AnimationComponent::OnEditor()
 					currState->loop = false;
 				}
 
+				std::vector<std::shared_ptr<Animation>> res;
+
 				std::vector<std::string> files;
 				app->fs->DiscoverFiles("Library/Animations", files);
 				for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -88,15 +90,23 @@ void AnimationComponent::OnEditor()
 						app->fs->GetFilenameWithoutExtension(*it);
 						*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 						uint uid = std::stoll(*it);
-						std::shared_ptr<Animation> res = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid));
-						if (ImGui::Selectable(res->GetName().c_str()))
-						{
-							res->Load();
-							currState->anim = res;
-							if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
-							currAnim = currState;
-						}
+						res.push_back(std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid)));
 						ImGui::PopID();
+					}
+				}
+
+				std::sort(res.begin(), res.end(), [](std::shared_ptr<Resource> a, std::shared_ptr<Resource> b) {
+					return (a.get()->GetName() < b.get()->GetName());
+					});
+
+				for (std::vector<std::shared_ptr<Animation>>::iterator it = res.begin(); it != res.end(); ++it)
+				{
+					if (ImGui::Selectable((*it).get()->GetName().c_str()))
+					{
+						(*it)->Load();
+						currState->anim = (*it);
+						if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
+						currAnim = currState;
 					}
 				}
 

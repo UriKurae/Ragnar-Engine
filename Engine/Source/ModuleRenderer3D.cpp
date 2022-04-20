@@ -183,7 +183,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	ComponentLight* lightComp = (ComponentLight*)goDirLight->CreateComponent(ComponentType::LIGHT);
 	lightComp->SetLight(dirLight);
 
-	//vbo = new VertexBuffer();
+	vbo = new VertexBuffer();
 	
 	return ret;
 }
@@ -311,21 +311,21 @@ bool ModuleRenderer3D::PostUpdate()
 		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 	}
 
-	//vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
-	//vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
-	//
-	//CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
-	//coneShader->Bind();
-	//coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
-	//coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
-	//
-	//vbo->Bind();
-	//glVertexPointer(3, GL_FLOAT, 0, NULL);
-	//glEnableClientState(GL_VERTEX_ARRAY);
-	//glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
-	//vbo->Unbind();
+	vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
+	vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
+	
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	coneShader->Bind();
+	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
+	coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
+	vbo->Bind();
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glDrawArrays(GL_TRIANGLES, 0, enemyCones.size());
+	vbo->Unbind();
 
 	coneShader->Unbind();
+	enemyCones.clear();
 
 #ifndef DIST 
 	app->userInterface->Draw();

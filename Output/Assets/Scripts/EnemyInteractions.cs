@@ -3,6 +3,19 @@ using RagnarEngine;
 
 public class EnemyInteractions : RagnarComponent
 {
+    public int velocity = 1000;
+
+    public NavAgent agents;
+    public GameObject[] waypoints;
+    private int destPoint = 0;
+
+    // States
+    public bool patrol;
+    public bool stopState = false;
+
+    // Timers
+    public float stoppedTime = 0f;
+
     // Player tracker
     public GameObject[] players;
     GameObject SceneAudio;
@@ -11,7 +24,7 @@ public class EnemyInteractions : RagnarComponent
 
     // States
     public bool canShoot = true;
-    private bool pendingToDelete = false;
+    public bool pendingToDelete = false;
 
     // Timers
     public float shootCooldown = 0f;
@@ -21,38 +34,50 @@ public class EnemyInteractions : RagnarComponent
         players = GameObject.FindGameObjectsWithTag("Player");
         SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
-    }
-    public void Update()
-    {
-        PerceptionCone(8);
-        Shoot();
-        if (pendingToDelete)
+
+        agents = gameObject.GetComponent<NavAgent>();
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        if (waypoints.Length != 0)
         {
-            InternalCalls.Destroy(gameObject);
+            GotoNextPoint();
+            patrol = false;
         }
     }
 
-    private void PerceptionCone(int radius)
+    public void Update()
+    {
+        if(!pendingToDelete)
+        {
+            Patrol();
+            if (PerceptionCone())
+            {
+                Shoot();
+            }
+        }
+    }
+
+    private bool PerceptionCone()
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
         Vector3 enemyForward = gameObject.transform.forward;
-        Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y, enemyPos.z + enemyForward.z * offset.z);
+        Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        RayCast.PerceptionCone(initPos, enemyForward, 60, 10, radius);
+        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
+        return (index == -1) ? false : true;
     }
 
     private void Shoot()
     {
-        if (PlayerDetection(8)) SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
-        else SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
 
-        if (PlayerDetection(8) && canShoot)
+        if (canShoot)
         {
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
             InternalCalls.InstancePrefab("EnemyBullet");
+            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
         }
 
@@ -68,35 +93,6 @@ public class EnemyInteractions : RagnarComponent
                 }
             }
         }
-    }
-
-    bool PlayerDetection(int radius)
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (!players[i].GetComponent<Player>().invisible)
-            {
-                Vector3 enemyPos = gameObject.transform.globalPosition;
-                Vector3 enemyForward = gameObject.transform.forward;
-                Vector3 playerPos = players[i].transform.globalPosition;
-                Vector3 distance = playerPos - enemyPos;
-                distance.y = 0;
-                if (distance.magnitude < radius)
-                {
-                    float angle = gameObject.transform.GetAngleBetween(enemyForward, distance) * Constants.RADTODEG;
-                    Vector3 initPos = new Vector3(enemyPos.x + enemyForward.x * offset.x, enemyPos.y + offset.y * 0.9f, enemyPos.z + enemyForward.z * offset.z);
-                    Vector3 endPos = initPos + distance.normalized * radius;
-                    endPos.y = initPos.y;
-
-                    if (angle < 30 && RayCast.HitToTag(initPos, endPos, "Player")) // 30º to right and 30º to left, total 60º
-                    {
-                        index = i;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public void OnCollision(Rigidbody other)
@@ -115,6 +111,12 @@ public class EnemyInteractions : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
             pendingToDelete = true;
         }
+        if (other.gameObject.name == "Rock" || other.gameObject.name == "Whistle")
+        {
+            patrol = false;
+            stoppedTime = 2f;
+            agents.CalculatePath(other.gameObject.transform.globalPosition);
+        }
     }
 
     public int GetIndex()
@@ -122,4 +124,48 @@ public class EnemyInteractions : RagnarComponent
         return index;
     }
 
+    public void SetPendingToDelete()
+    {
+        pendingToDelete = true;
+    }
+
+    public void GotoNextPoint()
+    {
+        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+        destPoint = (destPoint + 1) % waypoints.Length;
+    }
+
+    public void Patrol()
+    {
+        if (GameObject.Find("Rock") == null && agents.MovePath())
+        {
+            stopState = true;
+        }
+
+        if (stopState)
+        {
+            if (stoppedTime >= 0)
+            {
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+                stoppedTime -= Time.deltaTime;
+                if (stoppedTime < 0)
+                {
+                    stoppedTime = 0f;
+                    stopState = false;
+                    if (waypoints.Length != 0)
+                    {
+                        patrol = true;
+                        GotoNextPoint();
+                    }
+                }
+            }
+        }
+
+        if (agents.MovePath() && waypoints.Length != 0 && patrol && !stopState)
+        {
+            GotoNextPoint();
+        }
+    }
 }

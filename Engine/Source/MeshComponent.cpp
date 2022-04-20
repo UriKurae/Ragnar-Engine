@@ -125,6 +125,8 @@ void MeshComponent::MenuChangeMesh()
 		if (ImGui::GetIO().MouseClicked[0]) showMeshMenu = false;
 	}
 
+	std::vector<std::shared_ptr<Resource>> res;
+
 	std::vector<std::string> files;
 	app->fs->DiscoverFiles("Library/Meshes/", files);
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -134,12 +136,20 @@ void MeshComponent::MenuChangeMesh()
 			app->fs->GetFilenameWithoutExtension(*it);
 			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 			uint uid = std::stoll(*it);
-			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(uid);
-			if (ImGui::Selectable(res->GetName().c_str()))
-			{
-				if (mesh.use_count() - 1 == 1) mesh->UnLoad();
-				SetMesh(res);
-			}
+			res.push_back(ResourceManager::GetInstance()->LoadResource(uid));
+		}
+	}
+
+	std::sort(res.begin(), res.end(), [](std::shared_ptr<Resource> a, std::shared_ptr<Resource> b) {
+		return (a.get()->GetName() < b.get()->GetName());
+		});
+
+	for (std::vector<std::shared_ptr<Resource>>::iterator it = res.begin(); it != res.end(); ++it)
+	{
+		if (ImGui::Selectable((*it).get()->GetName().c_str()))
+		{
+			if (mesh.use_count() - 1 == 1) mesh->UnLoad();
+			SetMesh((*it));
 		}
 	}
 
