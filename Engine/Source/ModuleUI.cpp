@@ -358,7 +358,7 @@ void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shad
 		//return false;
 	}
 
-
+	FT_Face face;
 
 	if (FT_New_Face(ft, path.c_str(), 0, &face))
 	{

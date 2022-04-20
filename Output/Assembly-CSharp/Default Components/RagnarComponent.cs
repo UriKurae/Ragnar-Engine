@@ -34,7 +34,6 @@ namespace RagnarEngine
         UI_INPUTBOX,
         UI_DROPDOWN,
         TRANFORM2D,
-        UI_CANVAS,
         NAVAGENT,
         PARTICLE_SYSTEM,
         BILLBOARD,
