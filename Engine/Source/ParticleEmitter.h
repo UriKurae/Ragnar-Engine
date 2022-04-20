@@ -120,4 +120,7 @@ private:
 	float spreadDistanceZ;
 
 	TransformComponent* transform;
+
+	float iterTileX = 0;
+	float iterTileY = 0;
 };

@@ -45,7 +45,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
-	loopTimer = 2.0f;
+	loopTimer = 0.2f;
 	particleReference.color = { 1,0,0,1 };
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
@@ -158,8 +158,30 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	texCoords[1] = { 1.0f / tilesX, 0.0f };
 	texCoords[2] = { 1.0f / tilesX, 1.0f / tilesY };
 	texCoords[3] = { 0.0f, 1.0f / tilesY };*/
-	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+	//const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 	//float i = 0;
+	float2 texCoords[] = { { 0.0f / tilesX, 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX) , 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX), (1.0f / tilesY) + (0.0f / tilesY) }, {0.0f / tilesX, (1.0f / tilesY) + (0.0f / tilesY) } };
+	if (loopTimer <= 0.0f)
+	{
+		loopTimer = 0.2f;
+		iterTileX++;
+	}
+	
+	if (iterTileX == tilesX && tilesX > 1)
+	{
+		iterTileX = 0;
+		iterTileY++;
+	}
+	if (iterTileY == tilesY)
+	{
+		iterTileY = 0;
+	}
+
+	texCoords[0] = { iterTileX / tilesX, iterTileY / tilesY };
+	texCoords[1] = { (1.0f / tilesX) + (iterTileX / tilesX) , iterTileY / tilesY };
+	texCoords[2] = { (1.0f / tilesX) + (iterTileX / tilesX), (1.0f / tilesY) + (iterTileY / tilesY) };
+	texCoords[3] = { iterTileX / tilesX, (1.0f / tilesY) + (iterTileY / tilesY) };
+
 	/*if (loopTimer <= 0.0f) loopTimer = 2.0f;
 	if (loopTimer > 1.0f)
 	{
