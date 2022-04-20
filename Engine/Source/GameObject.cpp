@@ -15,6 +15,7 @@
 #include "ListenerComponent.h"
 #include "AudioReverbZoneComponent.h"
 #include "ScriptComponent.h"
+#include "InputActionComponent.h"
 #include "AnimationComponent.h"
 #include "BillboardParticleComponent.h"
 #include "ButtonComponent.h"
@@ -58,7 +59,7 @@ bool GameObject::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Game Object Update");
 
-	for (int i = 0; i < components.size(); ++i)
+	for (int i = 0; i < components.size() && components[i]->active; ++i)
 		components[i]->Update(dt);
 
 	for (int i = 0; i < children.size(); ++i)
@@ -105,24 +106,9 @@ void GameObject::DrawEditor()
 	ImGui::SetNextItemWidth(120);
 	if (ImGui::BeginCombo(" ", "New Component"))
 	{
-		if (ImGui::Selectable("Mesh Component"))
+		if (ImGui::Selectable("Animation Component"))
 		{
-			CreateComponent(ComponentType::MESH_RENDERER);
-			newComponent = false;
-		}
-		if (ImGui::Selectable("Material Component"))
-		{
-			CreateComponent(ComponentType::MATERIAL);
-			newComponent = false;
-		}
-		if (ImGui::Selectable("Script Component"))
-		{
-			CreateComponent(ComponentType::SCRIPT);
-			newComponent = false;
-		}	
-		if (ImGui::Selectable("Audio Source Component"))
-		{
-			CreateComponent(ComponentType::AUDIO_SOURCE);
+			CreateComponent(ComponentType::ANIMATION);
 			newComponent = false;
 		}
 		if (ImGui::Selectable("Audio Listener Component"))
@@ -135,24 +121,19 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::AUDIO_REVERB_ZONE);
 			newComponent = false;
 		}
-		if (ImGui::Selectable("Particle System Component"))
+		if (ImGui::Selectable("Audio Source Component"))
 		{
-			CreateComponent(ComponentType::PARTICLE_SYSTEM);
+			CreateComponent(ComponentType::AUDIO_SOURCE);
 			newComponent = false;
 		}
-		/*if (ImGui::Selectable("Billboard Component"))
+		if (ImGui::Selectable("Material Component"))
 		{
-			CreateComponent(ComponentType::BILLBOARD);
-			newComponent = false;
-		}*/
-		if (ImGui::Selectable("Animation Component"))
-		{
-			CreateComponent(ComponentType::ANIMATION);
+			CreateComponent(ComponentType::MATERIAL);
 			newComponent = false;
 		}
-		if (ImGui::Selectable("Rigid Body"))
+		if (ImGui::Selectable("Mesh Component"))
 		{
-			CreateComponent(ComponentType::RIGID_BODY);
+			CreateComponent(ComponentType::MESH_RENDERER);
 			newComponent = false;
 		}
 		if (ImGui::Selectable("NavAgent"))
@@ -160,6 +141,26 @@ void GameObject::DrawEditor()
 			CreateComponent(ComponentType::NAVAGENT);
 			newComponent = false;
 		}
+		if (ImGui::Selectable("Particle System Component"))
+		{
+			CreateComponent(ComponentType::PARTICLE_SYSTEM);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Rigid Body"))
+		{
+			CreateComponent(ComponentType::RIGID_BODY);
+			newComponent = false;
+		}
+		if (ImGui::Selectable("Script Component"))
+		{
+			CreateComponent(ComponentType::SCRIPT);
+			newComponent = false;
+		}
+		/*if (ImGui::Selectable("Billboard Component"))
+		{
+			CreateComponent(ComponentType::BILLBOARD);
+			newComponent = false;
+		}*/
 		else if (!ImGui::IsAnyItemHovered() && ((ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1])))
 		{
 			newComponent = false;
@@ -260,6 +261,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	case ComponentType::AUDIO_REVERB_ZONE:
 		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
 		break;
+	case ComponentType::INPUT_ACTION:
+		component = new InputActionComponent(this);
+		break;
 	case ComponentType::ANIMATION:
 		component = new AnimationComponent(this);
 		break;
@@ -268,7 +272,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
     	break;
 	case ComponentType::NAVAGENT:
 		component = new NavAgentComponent(this);
-		break;	
+		break;
 	case ComponentType::MATERIAL:
 	{
 		MaterialComponent* matComp = GetComponent<MaterialComponent>();
@@ -655,6 +659,12 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 
 			GetComponent<AnimationComponent>()->OnLoad(c);
 			break;
+		case ComponentType::INPUT_ACTION:
+			if (GetComponent<InputActionComponent>() == nullptr)
+				CreateComponent(ComponentType::INPUT_ACTION);
+
+			GetComponent<InputActionComponent>()->OnLoad(c);
+			break;
 		case ComponentType::BILLBOARD:
 			if (GetComponent<BillboardParticleComponent>() == nullptr)
 				CreateComponent(ComponentType::BILLBOARD);
@@ -666,6 +676,36 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 				CreateComponent(ComponentType::ANIMATION);
 
 			GetComponent<ParticleSystemComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_BUTTON:
+			if (GetComponent<ButtonComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_BUTTON);
+
+			GetComponent<ButtonComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_CHECKBOX:
+			if (GetComponent<CheckboxComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_CHECKBOX);
+
+			GetComponent<CheckboxComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_IMAGE:
+			if (GetComponent<ImageComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_BUTTON);
+
+			GetComponent<ImageComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_SLIDER:
+			if (GetComponent<SliderComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_BUTTON);
+
+			GetComponent<SliderComponent>()->OnLoad(c);
+			break;
+		case ComponentType::UI_TEXT:
+			if (GetComponent<TextComponent>() == nullptr)
+				CreateComponent(ComponentType::UI_TEXT);
+
+			GetComponent<TextComponent>()->OnLoad(c);
 			break;
 		}
 	}
@@ -727,11 +767,29 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 		case ComponentType::ANIMATION:
 			RemoveComponent(GetComponent<AnimationComponent>());
 			break;
+		case ComponentType::INPUT_ACTION:
+			RemoveComponent(GetComponent<InputActionComponent>());
+			break;
 		case ComponentType::BILLBOARD:
 			RemoveComponent(GetComponent<BillboardParticleComponent>());
 			break;
 		case ComponentType::PARTICLE_SYSTEM:
 			RemoveComponent(GetComponent<ParticleSystemComponent>());
+			break;
+		case ComponentType::UI_BUTTON:
+			RemoveComponent(GetComponent<ButtonComponent>());
+			break;
+		case ComponentType::UI_CHECKBOX:
+			RemoveComponent(GetComponent<CheckboxComponent>());
+			break;
+		case ComponentType::UI_SLIDER:
+			RemoveComponent(GetComponent<SliderComponent>());
+			break;
+		case ComponentType::UI_IMAGE:
+			RemoveComponent(GetComponent<ImageComponent>());
+			break;
+		case ComponentType::UI_TEXT:
+			RemoveComponent(GetComponent<TextComponent>());
 			break;
 		}
 	}

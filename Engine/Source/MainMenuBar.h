@@ -16,8 +16,9 @@ enum class Menus
 	CONTENT_BROWSER,
 	TEXT_EDITOR,
 	FOGWAR,
+	INPUT_ACTION,
 	NAVIGATOR,
-	INSPECTOR
+	INSPECTOR,
 };
 
 class MainMenuBar : public Menu

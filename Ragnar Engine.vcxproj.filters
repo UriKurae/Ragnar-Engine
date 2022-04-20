@@ -252,6 +252,12 @@
     <ClInclude Include="Engine\Source\CommandsDispatcher.h">
       <Filter>Sources\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\InputActionMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\InputActionComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Source\VertexArray.h">
       <Filter>Sources\Buffers</Filter>
     </ClInclude>
@@ -1678,6 +1684,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp">
       <Filter>Sources\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\InputActionMenu.cpp">
+      <Filter>Sources\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\InputActionComponent.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Source\NavAgentComponent.cpp">
       <Filter>Sources\GameObject\Components</Filter>

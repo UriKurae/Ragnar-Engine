@@ -31,7 +31,8 @@ enum class ComponentType
 	TRANFORM2D =		19,
 	NAVAGENT =			20,
 	PARTICLE_SYSTEM =	21,
-	BILLBOARD =			22
+	BILLBOARD =			22,
+	INPUT_ACTION =		23,
 };
 
 enum class State

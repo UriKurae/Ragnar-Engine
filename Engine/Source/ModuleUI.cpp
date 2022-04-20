@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleRenderer3D.h"
+#include "FileSystem.h"
 
 #include "Transform2DComponent.h"
 #include "ButtonComponent.h"
@@ -357,8 +358,7 @@ void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shad
 		//return false;
 	}
 
-	FT_Face face;
-	//"Library/Fonts/Montserrat-Bold.ttf"
+
 
 	if (FT_New_Face(ft, path.c_str(), 0, &face))
 	{
@@ -579,7 +579,7 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
 			// Whats does this do?
-			DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
+			//DEBUG_LOG("POSITION X %f, POSITION Y %f viewport.z %f", fMousePos.x, fMousePos.y, viewport.z);
 			float posXMin = ((viewport.z / 2) + (position.x)) - (button->GetButtonWidth() / 2);
 			float posXMax = ((viewport.z / 2) + (position.x)) + (button->GetButtonWidth() / 2);
 
@@ -693,6 +693,7 @@ void ModuleUI::OrderButtons()
 		}
 	}
 }
+
 void ModuleUI::Draw()
 {
 	for (int a = 0; a < UIGameObjects.size(); a++)
@@ -735,7 +736,6 @@ void ModuleUI::Draw()
 	}
 }
 
-
 bool ModuleUI::CleanUp()
 {
 	//RELEASE(shader);
@@ -750,4 +750,19 @@ void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 	auto obj = FindUI(ui);
 	UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
+}
+
+void ModuleUI::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Resources/Fonts/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string assetsPath = "Assets/Resources/Fonts/";
+		assetsPath += (*it);
+		std::string libraryPath = FONTS_FOLDER;
+		libraryPath += (*it);
+		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+	}
 }

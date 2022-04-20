@@ -97,6 +97,9 @@ public:
 
 	void OrderButtons();
 	void loadFont(std::string path,std::map<char, Character>* chara, Shadert* shade, uint VAO, uint VBO);
+
+	void ImportToLibrary();
+
 public:
     
     

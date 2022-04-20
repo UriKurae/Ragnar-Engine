@@ -73,10 +73,10 @@
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
     <Compile Include="Assets\Scripts\Credits.cs" />
     <Compile Include="Assets\Scripts\DialoguesManager.cs" />
+    <Compile Include="Assets\Scripts\EnemyAbilities.cs" />
     <Compile Include="Assets\Scripts\LoseScreen.cs" />
     <Compile Include="Assets\Scripts\MainMenuBackScreen.cs" />
     <Compile Include="Assets\Scripts\PauseMenuButton.cs" />
-    <Compile Include="Assets\Scripts\EnemyPatrol.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Abilities.cs" />
     <Compile Include="Assets\Scripts\Knife.cs" />
@@ -90,6 +90,14 @@
     <Compile Include="Assets\Scripts\BackStab.cs" />
     <Compile Include="Assets\Scripts\StunnerShot.cs" />
     <Compile Include="Assets\Scripts\SwordSlash.cs" />
+    <Compile Include="Assets\Scripts\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies.cs" />
+    <Compile Include="Assets\Scripts\Voice.cs" />
+    <Compile Include="Assets\Scripts\BackStab_2.cs" />
+    <Compile Include="Assets\Scripts\Whistle.cs" />
+    <Compile Include="Assets\Scripts\Trap.cs" />
+    <Compile Include="Assets\Scripts\Eagle.cs" />
+    <Compile Include="Assets\Scripts\SpiceGranade.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />

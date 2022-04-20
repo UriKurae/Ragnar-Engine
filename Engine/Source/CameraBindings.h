@@ -6,7 +6,9 @@
 
 #include "Math/float3x3.h"
 #include "Geometry/LineSegment.h"
+#include "Geometry/Triangle.h"
 
+#include "ScriptBindings.h"
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
 #include <metadata/class.h>
@@ -41,7 +43,7 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 
 	std::stack<QuadtreeNode*> nodes;
 	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
-	std::vector<GameObject*> gameObjects;
+	std::set<GameObject*> gameObjects;
 	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
 
 	std::map<float, GameObject*> triangleMap;
@@ -64,10 +66,11 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	return false;
 }
 
-void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius)
+int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 forward = app->moduleMono->UnboxVector(_forward);
+	std::vector<GameObject*> gos = app->moduleMono->UnboxArray(arr, size);
 	float3 forwardAux = forward;
 	float angle = _angle * DEGTORAD;
 
@@ -76,11 +79,11 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 	vertex.reserve(rays);
 
 	std::stack<QuadtreeNode*> nodes;
-	std::vector<GameObject*> gameObjects;
+	std::set<GameObject*> gameObjects;
 	std::map<float, GameObject*> triangleMap;
-	float3 arrayPos[] = { forward * radius, forwardAux * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
+	float3 arrayPos[] = { forward * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
 
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 0; i < 2; i++)
 	{
 		LineSegment ray(pointA, pointA + arrayPos[i]);
 		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, ray);
@@ -92,19 +95,42 @@ void PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int r
 	for (int i = 0; i < rays; i++)
 	{
 		LineSegment ray(pointA, pointA + (forward * float3x3::RotateY(angle/rays * i) * radius));
-		
 		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
-		if (hit.Equals(float3::zero)) hit = ray.b;
+		
 		vertex.push_back(pointA); // origin
 		if (i != 0) vertex.push_back(vertex.at(vertex.size() - 2)); // previous 
 		vertex.push_back(hit); // this
+
+		if (i == 1)
+		{
+			vertex.erase(vertex.begin());
+			vertex.erase(vertex.begin());
+		}
 		triangleMap.clear();
 		hit = float3::zero;
 	}
-	//Close triangle
-	vertex.push_back(pointA);
 
-	//app->renderer3D->enemyCones.resize(vertex.size());
-	//memcpy(&app->renderer3D->enemyCones[0], &vertex[0], vertex.size() * sizeof(float3));
+	int ret = -1;
+	for (size_t i = 0; i < vertex.size() && ret == -1 ; i+=3)
+	{
+		Triangle t(vertex[i], vertex[i+1], vertex[i+2]);
+		for (size_t j = 0; j < gos.size(); j++)
+		{
+			if (t.Intersects(gos.at(j)->GetOOB()))
+			{
+				ret = j;
+				break;
+			}
+		}		
+	}
 
+	// Inverse triangle
+	std::reverse(vertex.begin(), vertex.end());
+
+	// Add to enemyCones list
+	int sizeCon = app->renderer3D->enemyCones.size();
+	app->renderer3D->enemyCones.resize(sizeCon + vertex.size());
+	memcpy(&app->renderer3D->enemyCones[sizeCon], &vertex[0], vertex.size() * sizeof(float3));
+
+	return ret;
 }
