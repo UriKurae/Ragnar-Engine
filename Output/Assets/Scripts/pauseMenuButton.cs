@@ -9,12 +9,17 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstS = true;
 	bool isFirstE = true;
 	bool isFirstO = true;
+
+	bool isFirstOBB = true;
 	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
 	GameObject MainM;
 	GameObject Opt;
-
+	//////////////OPTIONS//////////////
+	GameObject optionsBack;
+	GameObject optionsBackImage;
+	GameObject optionsBackButton;
 	//////////////AUDIO//////////////
 	GameObject SceneAudio;
 	float currVolume = 0.0f;
@@ -36,15 +41,21 @@ public class pauseMenuButton : RagnarComponent
 		//////////////PAUSE//////////////
 		Image = GameObject.Find("Background");
 		Resume = GameObject.Find("Button Resume");
-		MainM = GameObject.Find("Button MainMenu");
-		Opt = GameObject.Find("Button Options");
-
+		MainM = GameObject.Find("Button MainMenu"); 
+		 Opt = GameObject.Find("Button Options");
+		
 		ImageHide();
 		RectangleHide();
 		ResumeButtonHide();
 		MainMenuButtonHide();
 		OptionsButtonHide();
+		//////////////OPTIONS//////////////
+		
+		optionsBack = GameObject.Find("optionsBack");
+		optionsBackImage = GameObject.Find("optionsBackImage");
+		optionsBackButton = GameObject.Find("optionsBackButton");
 
+		OptionsBackHide();
 		//////////////GAME//////////////
 		CharacterBar = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
@@ -73,17 +84,89 @@ public class pauseMenuButton : RagnarComponent
 
 
 	}
+	//////////////OPTIONS//////////////
 	void updateOptions()
     {
         if (isOptions)
         {
-
-        }
+			OptionsBackShow();
+			OptionsBackButtonShow();
+		}
         else
         {
-
-        }
+			OptionsBackHide();
+			OptionsBackButtonHide();
+		}
     }
+	void OptionsBackShow()
+    {
+		pos.Set(0.0f, 0.0f, -10.400f);
+		optionsBack.GetComponent<Transform2D>().position2D = pos;
+		optionsBack.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
+	}
+	void OptionsBackHide()
+	{
+		pos.Set(0.0f, 2000.0f, 30.0f);
+		optionsBack.GetComponent<Transform2D>().position2D = pos;
+	}
+	void OptionsBackButtonShow()
+    {
+		
+		int a = optionsBackButton.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+                if (isFirstOBB) {
+					
+					isFirstOBB = false;
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 80, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+					
+					optionsBackButton.GetComponent<Transform2D>().position2D = pos;
+
+
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 80, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+					optionsBackImage.GetComponent<Transform2D>().position2D = pos;
+				}
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (!isFirstOBB)
+				{
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 120, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+					optionsBackButton.GetComponent<Transform2D>().position2D = pos;
+
+
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 120, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+					optionsBackImage.GetComponent<Transform2D>().position2D = pos;
+
+					isFirstOBB = true;
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					//poner sonido
+				}
+
+				break;
+			case 3:
+				// pressed mode
+				isSowing = true;
+				isOptions = false;
+				isFirstOBB = true;
+				//Quitar menu de pausa
+				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				break;
+		}
+	}
+	void OptionsBackButtonHide()
+	{
+		pos.Set(0.0f, 2000.0f, 36.1f);
+		optionsBackButton.GetComponent<Transform2D>().position2D = pos;
+		optionsBackImage.GetComponent<Transform2D>().position2D = pos;
+	}
+	//////////////PAUSE//////////////
 	void updateMenu()
     {
 		if (isSowing)
