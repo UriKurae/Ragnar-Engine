@@ -311,9 +311,13 @@ void main()
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 	fragNormals = vec4(vNormal, normalsThickness);
 
-	if (fragColor.a < 0.1)
+	if (fragColor.a > 0 && fragColor.a <= 0.1)
 	{
-		//fragNormals.a = -1;
+		fragColor = vec4(vec3(0.5), 0);
+		fragNormals.a = -1;
+	}
+	else if (fragColor.a == 0)
+	{
 		discard;
 	}
 }
