@@ -7,7 +7,6 @@
 
 //MHF
 #include "PugiXML/pugixml.hpp"
-#define MARGIN_IN_TEXT 45
 //-------------------------
 
 class DialogueLine
@@ -71,7 +70,7 @@ public:
 	}
 	// If it returns false it means that the dialog is finished
 	bool NextLineXML(){
-		if (currDialogXML->dialogue.size() < indexLine+1) {
+		if (currDialogXML->dialogue.size() <= (indexLine+1)) {
 			return true;
 		}
 		indexLine++;

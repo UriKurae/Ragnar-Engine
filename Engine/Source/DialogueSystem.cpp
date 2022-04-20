@@ -6,6 +6,8 @@
 #include "Imgui/imgui.h"
 #include "IconsFontAwesome5.h"
 
+#define MARGIN_IN_TEXT 45
+
 DialogueSystem* DialogueSystem::instance = nullptr;
 
 DialogueSystem* DialogueSystem::GetInstance()

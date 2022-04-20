@@ -10,7 +10,7 @@ public class DialogueManager : RagnarComponent
 	Vector3 Pos;
 	string auth;
 	//bool dialogEnd = false;
-	int id;
+	int idDialogue;
 	bool firstTime = true;
 	bool endDialogue;
 	public void Start()
@@ -20,7 +20,7 @@ public class DialogueManager : RagnarComponent
 		paul = GameObject.Find("DialoguePaul");
 		chani = GameObject.Find("DialogueChani");
 		auth = "";
-		id = 0;
+		idDialogue = 0;
 		Pos = new Vector3(0, 0, 0);
 		endDialogue = false;
 	}
@@ -33,39 +33,20 @@ public class DialogueManager : RagnarComponent
 			firstTime = false;
         }
 		
-		
-		
 		if (Input.GetKey(KeyCode.J) == KeyState.KEY_UP)
 		{
-			Dialogue.LoadDialogueFile("dialogos_esp");
-			Dialogue.StartDialogueById(id);
-			text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
-			//toxt.text = Dialogue.GetDialogueLine();
-			auth = Dialogue.GetDialogueLineAuthor();
-		}
-
-		if (Input.GetKey(KeyCode.K) == KeyState.KEY_UP)
-		{
-			id++;
-			Dialogue.StartDialogueById(id);
+			Dialogue.StartDialogueById(idDialogue);
 			text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
 			auth = Dialogue.GetDialogueLineAuthor();
 		}
 
 		if (Input.GetKey(KeyCode.L) == KeyState.KEY_UP)
-		{
-			endDialogue = Dialogue.NextLine();
-			if (endDialogue == false){
-				text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
-				auth = Dialogue.GetDialogueLineAuthor();
-			}
-			else{
-				Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-			}
-		}
+        {
+            NextLine();
+        }
 
 
-		if (auth == "Paul")
+        if (auth == "Paul")
 		{
 			paul.GetComponent<UIButton>().SetAlpha(1.0f);
 			chani.GetComponent<UIButton>().SetAlpha(0.0f);
@@ -80,5 +61,27 @@ public class DialogueManager : RagnarComponent
 			paul.GetComponent<UIButton>().SetAlpha(0.0f);
 			chani.GetComponent<UIButton>().SetAlpha(0.0f);
 		}
+
+    }
+	void NextLine()
+	{
+		endDialogue = Dialogue.NextLine();
+		if (endDialogue == false)
+		{
+			text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
+			auth = Dialogue.GetDialogueLineAuthor();
+		}
+		else
+		{
+			// End the current dialogue
+
+
+		}
+	}
+	void StartNewDialogue(int id)
+    {
+		Dialogue.StartDialogueById(id);
+		text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
+		auth = Dialogue.GetDialogueLineAuthor();
 	}
 }
