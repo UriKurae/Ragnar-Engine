@@ -36,7 +36,9 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 
 	controllerTrans = owner->GetParent()->GetComponent<TransformComponent>();
 	transform->SetPosition(float3(0.0f, 55.0f, -50.0f));
-	transform->SetRotation(Quat::RotateX(DEGTORAD * 45));
+
+	float verticalAngle = 40; // TODO: TEST VARIOUS CAMERA ANGLES
+	transform->SetRotation(Quat::RotateX(DEGTORAD * verticalAngle));
 
 	srand(time(NULL));
 	CompileBuffers();
