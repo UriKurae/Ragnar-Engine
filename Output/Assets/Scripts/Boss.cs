@@ -3,6 +3,19 @@ using RagnarEngine;
 
 public class Boss : RagnarComponent
 {
+	struct BarrelSpawnLocation
+	{
+		public BarrelSpawnLocation(int num, Vector3 location, bool destroyed)
+		{
+			barrelNum = num;
+			spawnLocation = location;
+			isDestroyed = destroyed;
+		}
+
+		public bool isDestroyed;
+		public int barrelNum;
+		public Vector3 spawnLocation;
+	}
 	public enum BossState
 	{
 		PHASE1,
@@ -17,8 +30,7 @@ public class Boss : RagnarComponent
 	public BossState state;
 	NavAgent agent;
 
-	// Arrays for the enemies and players
-	GameObject[] enemies = new GameObject[10];
+	// Arrays for the players
 	GameObject[] players = new GameObject[3];
 
 	// Phase 2 mechanics
@@ -30,20 +42,24 @@ public class Boss : RagnarComponent
 
 	bool phase3Location = false;
 	GameObject[] barrels = new GameObject[3];
-	float barrelCooldown = 15.0f;
+	float barrelCooldown = 0.0f;
 	int barrelCount = 0;
 	bool shieldInmunity = false;
+	BarrelSpawnLocation[] barrelLocations = new BarrelSpawnLocation[3];
 
 	public void Start()
 	{
 		material = gameObject.GetComponent<Material>();
 		state = BossState.PHASE1;
 
-		enemies = GameObject.FindGameObjectsWithTag("EnemiesBoss");
 		players = GameObject.FindGameObjectsWithTag("Player");
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 
 		agent = gameObject.GetComponent<NavAgent>();
+
+		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(0.0f, 1.5f, 0.0f), true);
+		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(2.0f, 1.5f, 2.0f), true);
+		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(4.0f, 1.5f, 4.0f), true);
 	}
 	public void Update()
 	{
@@ -94,16 +110,7 @@ public class Boss : RagnarComponent
 				shieldInmunity = true;
             }
 
-			if (barrelCooldown <= 0.0f)
-			{
-				while (barrelCount < 3)
-                {
-					// Need to know the name of the prefab
-					InternalCalls.InstancePrefab("BarrelPrefab");
-				}
-			}
-
-
+			GenerateBarrels();
         }
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
@@ -123,6 +130,8 @@ public class Boss : RagnarComponent
 			case BossState.PHASE3:
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.8f;
 				material.SetTexturePath("Assets/Resources/white.png");
+				barrelCooldown = 0.0f;
+				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
 				if (!shieldInmunity)
@@ -153,5 +162,26 @@ public class Boss : RagnarComponent
 		InternalCalls.InstancePrefab("Enemy2Boss");
 		enemy1 = GameObject.Find("Enemy2Boss");
 		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(-5.0f, 0.0f, 0.0f));
+	}
+
+	private void GenerateBarrels()
+    {
+		if (barrelCooldown <= 0.0f)
+		{
+			while (barrelCount < 3)
+			{
+				if (barrelLocations[barrelCount].isDestroyed)
+				{
+					string barrelName = "Barrel" + (barrelCount + 1);
+					// Need to know the name of the prefab
+					InternalCalls.InstancePrefab(barrelName);
+					GameObject barrel = GameObject.Find(barrelName);
+					barrel.GetComponent<Rigidbody>().SetBodyPosition(barrelLocations[barrelCount].spawnLocation);
+					barrelLocations[barrelCount].isDestroyed = false;
+				}
+				barrelCount++;
+			}
+			barrelCooldown = 15.0f;
+		}
 	}
 }

@@ -51,11 +51,11 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 57377768,
+                    "pointer": 157399152,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 224182080,
+                    "characters": 213368640,
                     "drawnArea": false
                 }
             ]
@@ -177,9 +177,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.33514404296875e-05,
-                        55.73992919921875,
-                        -50.672660827636719
+                        4.76837158203125e-05,
+                        59.4395751953125,
+                        -54.035972595214844
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -201,15 +201,15 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 130,
-                    "Vertical Fov": 0.35794177651405334,
+                    "Vertical Fov": 0.36894810199737549,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -64.187553405761719,
-                        55.73992919921875,
-                        125.27870178222656
+                        -65.136955261230469,
+                        59.4395751953125,
+                        128.50532531738281
                     ],
                     "Type": 3,
-                    "Zoom": 29,
+                    "Zoom": 2,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Free Movement": true,
@@ -327,7 +327,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyPatrol",
-                    "pointer": 57377400,
+                    "pointer": 157400920,
                     "type": 4,
                     "componentTable": 0,
                     "velocity": 1000,
@@ -339,7 +339,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyInteractions",
-                    "pointer": 57376296,
+                    "pointer": 157400376,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
@@ -1877,8 +1877,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1895,7 +1895,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 57378136,
+                    "pointer": 157398880,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1932,8 +1932,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2005,8 +2005,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2078,8 +2078,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2126,8 +2126,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2730,8 +2730,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2778,8 +2778,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2826,8 +2826,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1328,
-                    "lastButtonHeight": 580,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 655,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2844,13 +2844,13 @@
             ]
         },
         {
-            "UUID": 972043276,
+            "UUID": 1724506246,
             "Parent UUID": 417171234,
-            "Name": "Boss",
+            "Name": "Cube",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
-            "Prefab Path": "Assets\/Prefabs\/Boss.rgprefab",
+            "PrefabID": false,
+            "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
             "Components": [
@@ -2859,7 +2859,7 @@
                     "Active": true,
                     "Position": [
                         0,
-                        1.0531272888183594,
+                        1.252105712890625,
                         0
                     ],
                     "Quaternion": [
@@ -2893,9 +2893,55 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 360622952,
+                    "pointer": 319724264,
                     "type": 4,
-                    "componentTable": 0
+                    "componentTable": 0,
+                    "state": 0
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 20,
+                    "Active": true,
+                    "Radius": 0.5,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 1,
+                    "AngularSpeed": 1,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
                 }
             ]
         }
