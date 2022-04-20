@@ -41,7 +41,7 @@ public class PlayerManager : RagnarComponent
         characters[0].abilities[1] = new Abilities
         {
             name = "Rock Throw",
-            prefabPath = "Rock",
+            prefabPath = "Eagle",
             prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f

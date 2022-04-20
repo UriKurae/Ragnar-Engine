@@ -21,16 +21,16 @@ public class Eagle : RagnarComponent
     }
 	public void Update()
 	{
-        //if (controled)
-        //{
-        //    Debug.Log("Controlled");
-        //    if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
-        //    {
-        //        agent.CalculatePath(agent.hitPosition);
+        if (controled)
+        {
+            Debug.Log("Controlled");
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                agent.CalculatePath(agent.hitPosition);
 
-        //    }
-        //    agent.MovePath();
-        //}
+            }
+            agent.MovePath();
+        }
     }
 
 }

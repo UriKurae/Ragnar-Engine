@@ -691,7 +691,11 @@ bool Pathfinder::MovePath(NavAgentComponent* agent)
 		MoveTo(agent, agent->agentProperties->path[0]))
 	{
 		agent->agentProperties->path.erase(agent->agentProperties->path.begin());
-		if (agent->agentProperties->path.empty()) return true;
+		if (agent->agentProperties->path.empty())
+		{
+			agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity({0,0,0});
+			return true;
+		}
 	}
 
 	return false;
