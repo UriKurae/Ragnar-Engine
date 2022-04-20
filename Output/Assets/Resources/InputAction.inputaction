@@ -1,10 +1,10 @@
 {
     "Action Maps": [
         {
-            "Name": "Player",
+            "Name": "Player1",
             "Actions": [
                 {
-                    "Name": "Move",
+                    "Name": "ThrowKnife",
                     "Bindings": [
                         {
                             "Path": 22
