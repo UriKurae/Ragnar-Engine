@@ -34,6 +34,18 @@ MonoObject* GetHitPosition(MonoObject* go)
 	return app->moduleMono->Float3ToCS(agent->pathfinding->hitPosition);
 }
 
+MonoObject* GetRayCastA(MonoObject* go)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	return app->moduleMono->Float3ToCS(agent->pathfinding->rayCast[0]);
+}
+
+MonoObject* GetRayCastB(MonoObject* go)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	return app->moduleMono->Float3ToCS(agent->pathfinding->rayCast[1]);
+}
+
 bool MoveAgentTo(MonoObject* go, MonoObject* dest)
 {
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
