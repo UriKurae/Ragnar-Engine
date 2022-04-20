@@ -163,14 +163,15 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	// Change the color and apply blur so it is not full black
 	// ========================
 	vec4 colorSum = vec4(0);
-	vec2 texCoord = vec2(0);
+	vec2 texCoord = gl_FragCoord.xy / texSize;
 	float shadow = 0;
-
+	float dx = dFdx(texCoord.s);
+	float dy = dFdy(texCoord.t);
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			texCoord = (gl_FragCoord.xy + vec2(i, j)) / texSize;
+			texCoord += vec2(dx * i, dy * j);
 			colorSum += texture(tex, texCoord);
 
 			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
@@ -309,7 +310,12 @@ void main()
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 	fragNormals = vec4(vNormal, normalsThickness);
-	//fragDepth = gl_FragDepth * normalsThickness;
+
+	if (fragColor.a < 0.1)
+	{
+		//fragNormals.a = -1;
+		discard;
+	}
 }
 
 

@@ -414,12 +414,21 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	
+	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
+	
 	if (app->renderer3D->genShadows)
 	{
 		glViewport(0, 0, 4096, 4096);
 		shadowShader->Bind();
 		shadowShader->SetUniformMatrix4f("model", model.Transposed());
 		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
+
+		if (anim)
+		{
+			auto transforms = anim->GetFinalBoneMatrices();
+			for (int i = 0; i < transforms.size(); ++i)
+				shader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
+		}
 
 		return;
 	}
@@ -465,7 +474,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		//glUniform1i(textLoc3, 0);
 
 	// Get matrices to animate the model
-	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
+	//AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
 	if (anim)
 	{
 		auto transforms = anim->GetFinalBoneMatrices();
