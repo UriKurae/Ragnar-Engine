@@ -4,10 +4,11 @@ using RagnarEngine;
 public class pauseMenuButton : RagnarComponent
 {
 	Vector3 pos;
+	bool isOptions = false;
 	bool isSowing = false;
 	bool isFirstS = true;
 	bool isFirstE = true;
-
+	bool isFirstO = true;
 	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
@@ -68,9 +69,21 @@ public class pauseMenuButton : RagnarComponent
 
 		SetAllPositions();
 		updateMenu();
-		
+		updateOptions();
+
 
 	}
+	void updateOptions()
+    {
+        if (isOptions)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 	void updateMenu()
     {
 		if (isSowing)
@@ -235,6 +248,7 @@ public class pauseMenuButton : RagnarComponent
 	{
 		pos.Set(0.0f, 2000.0f, 36.1f);
 		MainM.GetComponent<Transform2D>().position2D = pos;
+
 	}
 
 
@@ -242,9 +256,38 @@ public class pauseMenuButton : RagnarComponent
 	{
         pos.Set(-850.0f, -50.0f, 36.1f);
         Opt.GetComponent<Transform2D>().position2D = pos;
+		int a = Opt.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				isFirstO = true;
 
-        // Options button logic
-    }
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				if (isFirstO)
+				{
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					isFirstO = false;
+
+					//poner sonido
+				}
+
+				break;
+			case 3:
+				// pressed mode
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				isOptions = true;
+				isSowing = false;
+				//cambiar de escena
+				break;
+		}
+		// Options button logic
+	}
 	void OptionsButtonHide()
 	{
 		pos.Set(0.0f, 2000.0f, 36.1f);
