@@ -95,7 +95,7 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	for (int i = 0; i < rays; i++)
 	{
 		LineSegment ray(pointA, pointA + (forward * float3x3::RotateY(angle/rays * i) * radius));
-		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
+		app->camera->ThrowRayCastOnlyOBB(gameObjects, ray, triangleMap, hit);
 		
 		vertex.push_back(pointA); // origin
 		if (i != 0) vertex.push_back(vertex.at(vertex.size() - 2)); // previous 

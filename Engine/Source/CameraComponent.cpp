@@ -23,7 +23,7 @@
 #include "Profiling.h"
 
 
-CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(-100.0f), farPlane(100.0f), transform(trans), currentRotation(0,0,0,1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
+CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : horizontalFov(DegToRad(90.0f)), verticalFov(0.0f), nearPlane(-100.0f), farPlane(100.0f), transform(trans), currentRotation(0, 0, 0, 1), currentScreenHeight(SCREEN_HEIGHT), currentScreenWidth(SCREEN_WIDTH), vbo(nullptr), ebo(nullptr)
 {
 	type = ComponentType::CAMERA;
 	owner = own;
@@ -31,10 +31,14 @@ CameraComponent::CameraComponent(GameObject* own, TransformComponent* trans) : h
 	camera.SetViewPlaneDistances(nearPlane, farPlane);
 	CalculateVerticalFov(horizontalFov, currentScreenWidth, currentScreenHeight);
 	camera.SetPerspective(horizontalFov, verticalFov);
-	camera.SetFrame(float3(0.0f,0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
+	camera.SetFrame(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 1.0f), float3(0.0f, 1.0f, 0.0f));
 	//camera.SetPos(math::vec(0, 0, 0));
 
 	controllerTrans = owner->GetParent()->GetComponent<TransformComponent>();
+	transform->SetPosition(float3(0.0f, 55.0f, -50.0f));
+
+	float verticalAngle = 40; // TODO: TEST VARIOUS CAMERA ANGLES
+	transform->SetRotation(Quat::RotateX(DEGTORAD * verticalAngle));
 
 	srand(time(NULL));
 	CompileBuffers();
@@ -97,9 +101,7 @@ void CameraComponent::OnEditor()
 void CameraComponent::OnEditorMovement()
 {
 
-	ImGui::Checkbox("ArrowRotation", &arrowRot);
-	
-	if (ImGui::Button("Switch camera movement"))
+	/*if (ImGui::Button("Switch camera movement"))
 	{
 		if (freeMovement)
 		{
@@ -111,7 +113,7 @@ void CameraComponent::OnEditorMovement()
 			freeMovement = true;
 			followTarget = false;
 		}
-	}
+	}*/
 
 	if (freeMovement)
 	{
@@ -119,7 +121,7 @@ void CameraComponent::OnEditorMovement()
 		ImGui::DragFloat("movementSpeed", &movementSpeed, 0.002f, 0.01f, 1.0f);
 	}
 
-	else if (followTarget)
+	/*else if (followTarget)
 	{
 		ImGui::Text("Movement: target-locked");
 
@@ -136,7 +138,7 @@ void CameraComponent::OnEditorMovement()
 			}
 			ImGui::EndDragDropTarget();
 		}
-	}
+	}*/
 
 	ImGui::DragFloat("rotationSpeed", &rotationSpeed, 0.001f, 0.0f);
 	ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f);
@@ -171,7 +173,7 @@ bool CameraComponent::Update(float dt)
 #else
 	size = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 #endif
-	
+
 	camera.SetFrame(transform->GetGlobalTransform().TranslatePart(), transform->GetGlobalTransform().Col3(2), transform->GetGlobalTransform().Col3(1));
 
 	if (app->camera->updateGameView)
@@ -198,11 +200,11 @@ bool CameraComponent::Update(float dt)
 	}
 
 	// This is bad!
-	if (targetUID != 0)
+	/*if (targetUID != 0)
 	{
 		target = app->sceneManager->GetCurrentScene()->GetGoByUuid(targetUID);
 		targetUID = 0;
-	}
+	}*/
 
 	Zoom();
 
@@ -210,7 +212,7 @@ bool CameraComponent::Update(float dt)
 	{
 		fixingToTarget ^= true;
 	}
-	if (target&&fixingToTarget)
+	if (target && fixingToTarget)
 	{
 		float3 pos_ = target->GetComponent<TransformComponent>()->GetPosition() - camera.Pos();
 		camera.Translate(pos_ * dt);
@@ -219,22 +221,22 @@ bool CameraComponent::Update(float dt)
 
 	if (shake)
 		Shake(dt);
-	
+
 	if (!CompareRotations(currentRotation, transform->GetRotation()))
 	{
 		currentRotation = transform->GetRotation();
-	
+
 		float3 newUp = float3::unitY;
 		float3 newFront = float3::unitZ;
-		
+
 		newUp = transform->GetRotation() * newUp;
-		
+
 		newUp.Normalize();
 		newFront = transform->GetRotation() * newFront;
 		newFront.Normalize();
 
 		float3::Orthonormalize(newUp, newFront);
-		
+
 		camera.SetUp(newUp);
 		camera.SetFront(newFront);
 	}
@@ -270,21 +272,44 @@ void CameraComponent::UpdateMovement()
 	if (freeMovement)
 	{
 		float3 pos = controllerTrans->GetPosition();
-		bool mouseDragMid = (app->input->GetMouseButton(2) == KeyState::KEY_REPEAT);
-		float horizontalDrag = app->input->GetMouseXMotion();
-		float verticalDrag = app->input->GetMouseYMotion();
-
-		if (mouseDragMid)
+		bool moved = false;
+		float horizontalDrag = 0;
+		float verticalDrag = 0;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KeyState::KEY_REPEAT)
 		{
-			if (horizontalDrag)
+			verticalDrag += movementSpeed;
+			moved = true;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KeyState::KEY_REPEAT)
+		{
+			verticalDrag -= movementSpeed;
+			moved = true;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_REPEAT)
+		{
+			horizontalDrag += movementSpeed;
+			moved = true;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_REPEAT)
+		{
+			horizontalDrag -= movementSpeed;
+			moved = true;
+		}
+
+		if (moved)
+		{
+			if (horizontalDrag != 0)
 			{
-				pos.x += movementSpeed * horizontalDrag * sin(DEGTORAD * (horizontalAngle + 90));
-				pos.z += movementSpeed * horizontalDrag* cos(DEGTORAD * (horizontalAngle + 90));
+				pos.x += horizontalDrag * sin(DEGTORAD * (horizontalAngle + 90));
+				pos.z += horizontalDrag * cos(DEGTORAD * (horizontalAngle + 90));
 			}
-			if (verticalDrag)
+			if (verticalDrag != 0)
 			{
-				pos.x -= movementSpeed * -verticalDrag * sin(DEGTORAD * horizontalAngle);
-				pos.z -= movementSpeed * -verticalDrag * cos(DEGTORAD * horizontalAngle);
+				pos.x -= -verticalDrag * sin(DEGTORAD * horizontalAngle);
+				pos.z -= -verticalDrag * cos(DEGTORAD * horizontalAngle);
 			}
 
 			controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
@@ -295,27 +320,21 @@ void CameraComponent::UpdateMovement()
 
 void CameraComponent::UpdateRotation()
 {
-	bool mouseDragRight = (app->input->GetMouseButton(3) == KeyState::KEY_REPEAT);
-	float horizontalDrag = app->input->GetMouseXMotion();
-
-	if (app->input->GetKey(SDL_SCANCODE_LCTRL) == KeyState::KEY_REPEAT && mouseDragRight)
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_REPEAT)
 	{
-		if (horizontalDrag > 1)
-		{
-			horizontalAngle -= rotationSpeed;
-			if (horizontalAngle < 0) horizontalAngle += 360;
-			controllerTrans->SetRotation(Quat::RotateY(DEGTORAD * horizontalAngle));
-			controllerTrans->UpdateEditorRotation();
-			controllerTrans->ForceUpdateTransform();
-		}
-		else if (horizontalDrag < -1)
-		{
-			horizontalAngle += rotationSpeed;
-			if (horizontalAngle > 360) horizontalAngle -= 360;
-			controllerTrans->SetRotation(Quat::RotateY(DEGTORAD * horizontalAngle));
-			controllerTrans->UpdateEditorRotation();
-			controllerTrans->ForceUpdateTransform();
-		}
+		horizontalAngle -= rotationSpeed;
+		if (horizontalAngle < 0) horizontalAngle += 360;
+		controllerTrans->SetRotation(Quat::RotateY(DEGTORAD * horizontalAngle));
+		controllerTrans->UpdateEditorRotation();
+		controllerTrans->ForceUpdateTransform();
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_REPEAT)
+	{
+		horizontalAngle += rotationSpeed;
+		if (horizontalAngle > 360) horizontalAngle -= 360;
+		controllerTrans->SetRotation(Quat::RotateY(DEGTORAD * horizontalAngle));
+		controllerTrans->UpdateEditorRotation();
+		controllerTrans->ForceUpdateTransform();
 	}
 }
 
@@ -413,7 +432,7 @@ void CameraComponent::CompileBuffers()
 
 bool CameraComponent::CompareRotations(Quat& quat1, Quat& quat2)
 {
-	if (quat1.x == quat2.x && quat1.y == quat2.y && quat1.z == quat2.z && quat1.w == quat2.w) 
+	if (quat1.x == quat2.x && quat1.y == quat2.y && quat1.z == quat2.z && quat1.w == quat2.w)
 		return true;
 	return false;
 }
@@ -428,6 +447,7 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	zoom = node.GetJsonNumber("Zoom");
 	zoomMin = node.GetJsonNumber("Zoom Min");
 	zoomMax = node.GetJsonNumber("Zoom Max");
+	zoomSpeed = node.GetJsonNumber("Zoom Speed");
 
 	// MOVEMENT
 	freeMovement = node.GetJsonBool("Free Movement");
@@ -435,13 +455,11 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	defTarget = owner->GetParent();
 	//defTarget->GetComponent<TransformComponent>()->SetPosition(node.GetJson3Number(node, "Default Target Pos"));
 	movementSpeed = node.GetJsonNumber("Movement Speed");
-	targetUID = node.GetJsonNumber("Target Pos");
+	//targetUID = node.GetJsonNumber("Target Pos");
 	// ANGLES
 	rotationSpeed = node.GetJsonNumber("Rotation Speed");
 	radius = node.GetJsonNumber("Radius");
 	horizontalAngle = node.GetJsonNumber("Horizontal Angle");
-	// CONTROLS
-	arrowRot = node.GetJsonBool("Arrow Rotation");
 	// SHAKE
 	shakeStrength = node.GetJsonNumber("Shake Strength");
 	shakeDuration = node.GetJsonNumber("Shake Duration");
@@ -465,18 +483,19 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom", zoom);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom Min", zoomMin);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom Max", zoomMax);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Zoom Speed", zoomSpeed);
 
 	// MOVEMENT
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Free Movement", freeMovement);
 	file.SetNewJson3Number(file, "Default Target Pos", defTarget->GetComponent<TransformComponent>()->GetPosition());
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Movement Speed", movementSpeed);
-	if(target) file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Target Pos", target->GetUUID());
+	if (target) file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Target Pos", target->GetUUID());
+
 	// ANGLES
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Rotation Speed", rotationSpeed);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Radius", radius);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Horizontal Angle", horizontalAngle);
-	// CONTROLS
-	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Arrow Rotation", arrowRot);
+
 	// SHAKE
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Strength", shakeStrength);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Duration", shakeDuration);
@@ -523,7 +542,7 @@ void CameraComponent::RequestShake(float strength, float duration)
 	if (smooth != 0) currentStrength = 0;
 	else currentStrength = strength;
 	shake = true;
-	originalPos = transform->GetPosition();
+	originalPos = transform->GetGlobalPosition();
 }
 
 void CameraComponent::Shake(float dt)
@@ -551,7 +570,7 @@ void CameraComponent::Shake(float dt)
 		float x = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
 		float y = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
 		float z = -currentStrength + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (currentStrength - -currentStrength)));
-		float3 lastPos = transform->GetPosition();
+		float3 lastPos = transform->GetGlobalPosition();
 		lastPos.x += x;
 		lastPos.y += y;
 		lastPos.z += z;
