@@ -3,7 +3,8 @@ using RagnarEngine;
 
 public class Boss : RagnarComponent
 {
-	struct BarrelSpawnLocation
+	Player test = new Player();
+	public struct BarrelSpawnLocation
 	{
 		public BarrelSpawnLocation(int num, Vector3 location, bool destroyed)
 		{
@@ -40,12 +41,13 @@ public class Boss : RagnarComponent
 
 	// Phase 3 mechanics
 
-	bool phase3Location = false;
 	GameObject[] barrels = new GameObject[3];
+	public BarrelSpawnLocation[] barrelLocations = new BarrelSpawnLocation[3];
+	public int barrelCount = 0;
+	public int stunnedHits = 0;
 	float barrelCooldown = 0.0f;
-	int barrelCount = 0;
 	bool shieldInmunity = false;
-	BarrelSpawnLocation[] barrelLocations = new BarrelSpawnLocation[3];
+	bool phase3Location = false;
 
 	public void Start()
 	{
@@ -57,9 +59,9 @@ public class Boss : RagnarComponent
 
 		agent = gameObject.GetComponent<NavAgent>();
 
-		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(0.0f, 1.5f, 0.0f), true);
-		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(2.0f, 1.5f, 2.0f), true);
-		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(4.0f, 1.5f, 4.0f), true);
+		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(8.0f, 1.5f, 0.0f), true);
+		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(12.0f, 1.5f, 2.0f), true);
+		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(12.0f, 1.5f, 5.0f), true);
 	}
 	public void Update()
 	{
@@ -109,8 +111,10 @@ public class Boss : RagnarComponent
 
 				shieldInmunity = true;
             }
-
+			ExplodeBarrels();
 			GenerateBarrels();
+			if (barrelCount < 3) barrelCooldown -= Time.deltaTime;
+			Debug.Log(barrelCooldown.ToString());
         }
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
@@ -166,22 +170,34 @@ public class Boss : RagnarComponent
 
 	private void GenerateBarrels()
     {
-		if (barrelCooldown <= 0.0f)
+		if (barrelCooldown <= 0.0f && barrelCount < 3)
 		{
-			while (barrelCount < 3)
-			{
-				if (barrelLocations[barrelCount].isDestroyed)
+            for (int i = 0; i < 3; ++i)
+            {
+				if (barrelLocations[i].isDestroyed)
 				{
-					string barrelName = "Barrel" + (barrelCount + 1);
+					string barrelName = "Barrel" + (i + 1);
 					// Need to know the name of the prefab
 					InternalCalls.InstancePrefab(barrelName);
 					GameObject barrel = GameObject.Find(barrelName);
-					barrel.GetComponent<Rigidbody>().SetBodyPosition(barrelLocations[barrelCount].spawnLocation);
-					barrelLocations[barrelCount].isDestroyed = false;
+					barrel.GetComponent<Rigidbody>().SetBodyPosition(barrelLocations[i].spawnLocation);
+					barrelLocations[i].isDestroyed = false;
+					barrelCount++;
 				}
-				barrelCount++;
 			}
 			barrelCooldown = 15.0f;
+		}
+	}
+
+	private void ExplodeBarrels()
+    {
+		if (stunnedHits == 3)
+        {
+
+        }
+		else if (stunnedHits == 1)
+		{
+			material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
 		}
 	}
 }

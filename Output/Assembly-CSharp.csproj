@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\StunnerShot.cs" />
     <Compile Include="Assets\Scripts\SwordSlash.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
+    <Compile Include="Assets\Scripts\Barrel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />
