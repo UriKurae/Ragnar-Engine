@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 361207320,
+                    "pointer": 154732392,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 131381792,
+                    "characters": 212254528,
                     "drawnArea": false
                 }
             ]
@@ -140,9 +140,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -46.559967041015625,
+                        -51.958839416503906,
                         0,
-                        82.836395263671875
+                        92.990142822265625
                     ],
                     "Quaternion": [
                         0,
@@ -178,15 +178,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.0001678466796875,
-                        68.3187255859375,
-                        -62.107879638671875
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.38268345594406128,
+                        0.34202012419700623,
                         0,
                         0,
-                        0.92387950420379639
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -202,12 +202,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.55328744649887085,
+                    "Vertical Fov": 0.49300423264503479,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -75.718765258789062,
-                        68.3187255859375,
-                        137.67575073242188
+                        -75.433029174804688,
+                        55,
+                        137.138671875
                     ],
                     "Type": 3,
                     "Zoom": 5,
@@ -216,9 +216,9 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -46.559967041015625,
+                        -51.958839416503906,
                         0,
-                        82.836395263671875
+                        92.990142822265625
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -535,10 +535,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 361205008,
+                    "pointer": 154732528,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 131381728,
+                    "enemies": 212254464,
                     "enemyGOs": 0
                 }
             ]
@@ -709,7 +709,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164063
+                        -46.558364868164062
                     ],
                     "Quaternion": [
                         0,
@@ -926,7 +926,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789063,
+                        -11.089859008789062,
                         0,
                         6.886474609375
                     ],
@@ -1001,7 +1001,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414063
+                        27.392837524414062
                     ],
                     "Quaternion": [
                         0,
@@ -1088,9 +1088,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945313,
+                        1.0000076293945312,
                         1,
-                        1.0000076293945313
+                        1.0000076293945312
                     ]
                 },
                 {
@@ -2017,8 +2017,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2035,7 +2035,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 55340840,
+                    "pointer": 155213824,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2072,8 +2072,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2145,8 +2145,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2218,8 +2218,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2266,8 +2266,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2686,7 +2686,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664063
+                        0.98471450805664062
                     ],
                     "RotationEditor": [
                         -0,
@@ -2870,8 +2870,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2918,8 +2918,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2966,8 +2966,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 814,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2986,7 +2986,7 @@
         {
             "UUID": 1724506246,
             "Parent UUID": 417171234,
-            "Name": "Cube",
+            "Name": "Boss",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -3033,10 +3033,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 319724264,
+                    "pointer": 314369104,
                     "type": 4,
                     "componentTable": 0,
-                    "state": 0
+                    "state": 0,
+                    "barrelLocations": 212311832,
+                    "barrelCount": 0,
+                    "stunnedHits": 0
                 },
                 {
                     "Type": 11,
