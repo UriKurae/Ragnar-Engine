@@ -425,8 +425,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		{
 			auto transforms = anim->GetFinalBoneMatrices();
 			for (int i = 0; i < transforms.size(); ++i)
-				if(!transforms[i].Equals(float4x4::zero))
-					shadowShader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
+				shadowShader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
 		}
 
 		return;
