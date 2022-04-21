@@ -51,11 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 157399152,
+                    "pointer": 361207320,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
-                    "characters": 213368640,
+                    "characterSelected": 0,
+                    "characters": 131381792,
                     "drawnArea": false
                 }
             ]
@@ -139,20 +140,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -49.884101867675781,
+                        -46.559967041015625,
                         0,
-                        76.665283203125
+                        82.836395263671875
                     ],
                     "Quaternion": [
                         0,
-                        0.98978197574615479,
+                        0.97029572725296021,
                         0,
-                        0.14258897304534912
+                        0.24192190170288086
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        -3.1415927410125732,
+                        0.48869219422340393,
+                        -3.1415927410125732
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -177,9 +178,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        4.76837158203125e-05,
-                        59.4395751953125,
-                        -54.035972595214844
+                        0.0001678466796875,
+                        68.3187255859375,
+                        -62.107879638671875
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -200,29 +201,29 @@
                 },
                 {
                     "Near Plane": 1,
-                    "Far Plane": 130,
-                    "Vertical Fov": 0.36894810199737549,
+                    "Far Plane": 155,
+                    "Vertical Fov": 0.55328744649887085,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -65.136955261230469,
-                        59.4395751953125,
-                        128.50532531738281
+                        -75.718765258789062,
+                        68.3187255859375,
+                        137.67575073242188
                     ],
                     "Type": 3,
-                    "Zoom": 2,
+                    "Zoom": 5,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
+                    "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -49.884101867675781,
+                        -46.559967041015625,
                         0,
-                        76.665283203125
+                        82.836395263671875
                     ],
-                    "Movement Speed": 0.012000000104308128,
-                    "Rotation Speed": 2,
+                    "Movement Speed": 0.25,
+                    "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 0,
-                    "Arrow Rotation": false,
+                    "Horizontal Angle": 152,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -230,156 +231,9 @@
             ]
         },
         {
-            "UUID": 2021177439,
-            "Parent UUID": 417171234,
-            "Name": "Enemy",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Enemy.rgprefab",
-            "tag": "Enemies",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        3.5858135223388672,
-                        0,
-                        18.033758163452148
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/AnimatedDummy__BlueGuy.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 9,
-                    "Active": true,
-                    "Current Anim": "Shoot",
-                    "Animations": [
-                        {
-                            "State": "Walk",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Walk_Forward__Walk Forward.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Idle",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Rifle_Idle__Idle.fbx",
-                            "Loop": true
-                        },
-                        {
-                            "State": "Shoot",
-                            "Path Anim Assets": "Assets\/Resources\/Animations\/Shoot__Shoot.fbx",
-                            "Loop": false
-                        }
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 2,
-                    "Radius": 0.30000001192092896,
-                    "Height": 1.6000000238418579,
-                    "Gravity": true,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 60,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "EnemyPatrol",
-                    "pointer": 157400920,
-                    "type": 4,
-                    "componentTable": 0,
-                    "velocity": 1000,
-                    "waypoints": 0,
-                    "patrol": false,
-                    "stopState": false,
-                    "stoppedTime": 0
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "EnemyInteractions",
-                    "pointer": 157400376,
-                    "type": 4,
-                    "componentTable": 0,
-                    "players": 0,
-                    "index": 0,
-                    "canShoot": true,
-                    "shootCooldown": 0
-                },
-                {
-                    "Type": 20,
-                    "Active": true,
-                    "Radius": 0.30000001192092896,
-                    "Height": 2,
-                    "StopHeight": 0.89999997615814209,
-                    "MaxSlope": 45,
-                    "Speed": 6,
-                    "AngularSpeed": 180,
-                    "Acceleration": 1,
-                    "StoppingDistance": 0,
-                    "PathType": 1,
-                    "NumPolys": 0,
-                    "NumStraight": 0,
-                    "NumSmooth": 0
-                },
-                {
-                    "Type": 5,
-                    "Volume": 50,
-                    "Pitch": 0,
-                    "Mute": false,
-                    "AudioClips": [
-                        {
-                            "0": "None"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "UUID": 279655738,
             "Parent UUID": 417171234,
-            "Name": "Game Object",
+            "Name": "1",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -417,7 +271,7 @@
         {
             "UUID": 1676813773,
             "Parent UUID": 417171234,
-            "Name": "Game Object",
+            "Name": "2",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -455,7 +309,7 @@
         {
             "UUID": 1245657567,
             "Parent UUID": 417171234,
-            "Name": "Game Object",
+            "Name": "3",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -487,6 +341,205 @@
                         1,
                         1
                     ]
+                }
+            ]
+        },
+        {
+            "UUID": 1256824484,
+            "Parent UUID": 417171234,
+            "Name": "4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -1.9917702674865723,
+                        0,
+                        1.3715095520019531
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        -0,
+                        0,
+                        -0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1058988841,
+            "Parent UUID": 417171234,
+            "Name": "5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -1.0667538642883301,
+                        0,
+                        -9.7678709030151367
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 289008200,
+            "Parent UUID": 417171234,
+            "Name": "6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.3692140579223633,
+                        0,
+                        -5.444669246673584
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 401175470,
+            "Parent UUID": 417171234,
+            "Name": "7",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Waypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7.5199999809265137,
+                        0,
+                        31.440000534057617
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1932817326,
+            "Parent UUID": 417171234,
+            "Name": "EnemyManager",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "EnemyManager",
+                    "pointer": 361205008,
+                    "type": 4,
+                    "componentTable": 0,
+                    "enemies": 131381728,
+                    "enemyGOs": 0
                 }
             ]
         },
@@ -1690,6 +1743,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1739,6 +1821,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1788,6 +1899,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1877,8 +2017,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1895,7 +2035,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 157398880,
+                    "pointer": 55340840,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1932,8 +2072,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2005,8 +2145,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2063,7 +2203,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -365.5,
+                        -348.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2078,8 +2218,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2126,8 +2266,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2715,7 +2855,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -343.5,
+                        -326.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2730,8 +2870,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2763,7 +2903,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -334.5,
+                        -317.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2778,8 +2918,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2811,7 +2951,7 @@
                     "Type": 18,
                     "Position": [
                         0,
-                        -334.5,
+                        -317.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2826,8 +2966,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 655,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },

@@ -20,6 +20,8 @@
 #include "Bone.h"
 #include "Dialogs.h"
 #include "ShaderHelpers.h"
+#include "PrefabManager.h"
+#include "DialogueSystem.h"
 
 #include "imgui/imgui_stdlib.h"
 #include <fstream>
@@ -58,9 +60,12 @@ bool ModuleSceneManager::Start()
 
 	referenceMap.clear();
 	
-	
 #ifdef DIST
 	Play();
+#else
+	PrefabManager::GetInstance()->ImportToLibrary();
+	DialogueSystem::GetInstance()->ImportToLibrary();
+	AudioManager::Get()->ImportToLibrary();
 #endif
 
 	return true;
