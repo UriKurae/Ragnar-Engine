@@ -130,14 +130,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        88.297409057617188,
-                        -80.270217895507812
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.38268345594406128,
+                        0.34202012419700623,
                         0,
                         0,
-                        0.92387950420379639
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0,
@@ -153,17 +153,18 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.1671713590621948,
+                    "Vertical Fov": 1.0731390714645386,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
-                        88.297409057617188,
-                        -82.5283203125
+                        55,
+                        -52.258106231689453
                     ],
                     "Type": 3,
                     "Zoom": 7,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
+                    "Zoom Speed": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -174,7 +175,6 @@
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 257.39971923828125,
-                    "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -212,8 +212,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1048,
-                    "lastButtonHeight": 692,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 797,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -230,7 +230,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 140669104,
+                    "pointer": 322820152,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -251,7 +251,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -326,
+                        -472,
                         0,
                         -301
                     ],
@@ -267,8 +267,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 203.5,
-                    "lastButtonWidth": 1048,
-                    "lastButtonHeight": 692,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 797,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -299,7 +299,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -20.5,
+                        -570,
                         25,
                         -311.89999389648438
                     ],
@@ -315,8 +315,8 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1048,
-                    "lastButtonHeight": 692,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 797,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -372,7 +372,7 @@
                     "Active": true,
                     "Type": 18,
                     "Position": [
-                        -17.5,
+                        -570,
                         -31,
                         -311.39999389648438
                     ],
@@ -388,8 +388,8 @@
                     ],
                     "buttonWidth": 177,
                     "buttonHeight": 29,
-                    "lastButtonWidth": 1048,
-                    "lastButtonHeight": 692,
+                    "lastButtonWidth": 1340,
+                    "lastButtonHeight": 797,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
