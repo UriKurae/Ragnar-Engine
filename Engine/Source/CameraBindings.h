@@ -34,7 +34,7 @@ void ChangeFov(MonoObject* go, float newFov)
 	camComp->CompileBuffers();
 }
 
-bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
+GameObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 pointB = app->moduleMono->UnboxVector(endPos);
@@ -52,7 +52,7 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 
 	// Throw Ray from enemy head to player head
 	if (!triangleMap.empty() && (*triangleMap.begin()).second->tag == tagName)
-		return true;
+		return (*triangleMap.begin()).second;
 	// If don't match, Throw Ray from enemy head to player feets
 	else
 	{
@@ -60,10 +60,10 @@ bool HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 		picking.b.y -= 0.5f;
 		app->camera->ThrowRayCastOnlyOBB(gameObjects, picking, triangleMap, hit);
 		if (!triangleMap.empty() && (*triangleMap.begin()).second->tag == tagName)
-			return true;
+			return (*triangleMap.begin()).second;
 	}
 
-	return false;
+	return nullptr;
 }
 
 int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* arr, int size)

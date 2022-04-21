@@ -59,7 +59,23 @@ public class EnemyManager : RagnarComponent
             enemyGOs[i].name = enemies[i].name;
             if (enemies[i].waypoints.Length != 0)
             {
-                enemyGOs[i].GetComponent<EnemyInteractions>().waypoints = enemies[i].waypoints;
+                //enemyGOs[i].GetComponent<EnemyInteractions>().waypoints = enemies[i].waypoints;
+                switch (enemies[i].type)
+                {
+                    case EnemyType.BASIC:
+                        enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
+                        break;
+                    case EnemyType.TANK:
+                        enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
+                        break;
+                    case EnemyType.UNDISTRACTABLE:
+                        enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
+                        break;
+                    case EnemyType.AIR:
+                        enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
+                        break;
+                }
+
                 enemies[i].state = EnemyState.PATROLING;
             }
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);

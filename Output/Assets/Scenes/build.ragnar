@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 310813688,
+                    "pointer": 361207320,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 160153408,
+                    "characters": 131381792,
                     "drawnArea": false
                 }
             ]
@@ -184,9 +184,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        0.0001678466796875,
+                        68.3187255859375,
+                        -62.107879638671875
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -211,12 +211,12 @@
                     "Vertical Fov": 0.55328744649887085,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -70.034164428710938,
-                        55,
-                        126.98492431640625
+                        -75.718765258789062,
+                        68.3187255859375,
+                        137.67575073242188
                     ],
                     "Type": 3,
-                    "Zoom": 23,
+                    "Zoom": 5,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -541,10 +541,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 310814368,
+                    "pointer": 361205008,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 160153344,
+                    "enemies": 131381728,
                     "enemyGOs": 0
                 }
             ]
@@ -1749,6 +1749,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1798,6 +1827,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1847,6 +1905,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1954,7 +2041,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 310814776,
+                    "pointer": 55340840,
                     "type": 4,
                     "componentTable": 0
                 }

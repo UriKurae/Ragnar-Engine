@@ -156,9 +156,13 @@ bool MonoManager::Init(JsonParsing& node)
 	// NavAgent ==================
 	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_hitPosition", GetHitPosition);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastA", GetRayCastA);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastB", GetRayCastB);
 	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
 	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::set_speed", SetAgentSpeed);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_speed", GetAgentSpeed);
 	// NavAgent ==================
 
 	// Particle System ==========
