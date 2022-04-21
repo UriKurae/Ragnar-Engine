@@ -196,7 +196,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 	
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else diff = csp.d;
@@ -222,7 +222,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else diff = csp.d;
@@ -258,7 +258,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	
 	float diff = max(dot(normal, lightDir), 0.0);
 	
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else diff = csp.d;
