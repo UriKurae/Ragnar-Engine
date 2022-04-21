@@ -41,7 +41,7 @@ public class PlayerManager : RagnarComponent
         characters[0].abilities[1] = new Abilities
         {
             name = "Rock Throw",
-            prefabPath = "Rock",
+            prefabPath = "Eagle",
             prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f
@@ -98,10 +98,10 @@ public class PlayerManager : RagnarComponent
         characters[1].abilities[3] = new Abilities
         {
             name = "Hunter Seeker",
-            prefabPath = "BackStab",
+            prefabPath = "HunterSeeker",
             prefabArea = "BackStab Area",
             charges = -1,
-            cooldown = 0f
+            cooldown = 4f
         }; // Hunter Seeker
 
         // Player 3

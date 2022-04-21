@@ -81,6 +81,7 @@ public:
 	NavMeshBuilder* m_navMeshBuilder;
 
 	float3 hitPosition = float3::zero;
+	float3 rayCast[2] = { float3::zero, float3::zero };
 };
 
 struct BuildSettings

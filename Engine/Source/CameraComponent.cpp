@@ -192,7 +192,7 @@ bool CameraComponent::Update(float dt)
 				mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
 
 				LineSegment picking = camera.UnProjectLineSegment(mousePos.x, mousePos.y);
-				LineSegment prevLine = picking;
+				
 				if (app->sceneManager->GetGameState() == GameState::PLAYING)
 					app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
 			}
