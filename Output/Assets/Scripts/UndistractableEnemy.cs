@@ -51,7 +51,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete)
+        if (!pendingToDelete && deathTimer == -1)
         {
             Patrol();
             if (PerceptionCone())
@@ -82,6 +82,7 @@ public class UndistractableEnemy : RagnarComponent
         if (other.gameObject.name == "Knife")
         {
             deathTimer = 4f;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
 
             // WHEN RUNES FUNCTIONAL
             // deathTimer = 0f;
@@ -89,10 +90,12 @@ public class UndistractableEnemy : RagnarComponent
         if (other.gameObject.name == "StunnerShot")
         {
             deathTimer = 2f;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
         }
         if (other.gameObject.name == "HunterSeeker")
         {
             deathTimer = 5f;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
 
             // WHEN RUNES FUNCTIONAL
             // EXPLOSION AREA
@@ -115,6 +118,7 @@ public class UndistractableEnemy : RagnarComponent
         if (other.gameObject.name == "SwordSlash")
         {
             deathTimer = 2f;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
         }
         if (other.gameObject.name == "Whistle")
         {

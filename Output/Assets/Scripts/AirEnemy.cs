@@ -51,7 +51,7 @@ public class AirEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete)
+        if (!pendingToDelete && deathTimer == -1)
         {
             Patrol();
             if (PerceptionCone())
@@ -82,6 +82,7 @@ public class AirEnemy : RagnarComponent
         if (other.gameObject.name == "Knife")
         {
             deathTimer = 4f;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
 
             // WHEN RUNES FUNCTIONAL
             // deathTimer = 0f;
@@ -89,6 +90,7 @@ public class AirEnemy : RagnarComponent
         if (other.gameObject.name == "StunnerShot")
         {
             deathTimer = 2f;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
         }
         if (other.gameObject.name == "HunterSeeker")
         {
@@ -103,6 +105,7 @@ public class AirEnemy : RagnarComponent
         if (other.gameObject.name == "Trap")
         {
             pendingToDelete = true;
+            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
         }
     }
 
