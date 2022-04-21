@@ -73,8 +73,8 @@ void main()
 		if (maxNormal > normalThreshold || maxDepth > depthThreshold)
 		{
 			result = vec4(0, 0, 0, 1);
-			realPixelNormal.a == -1 ? result.a = 0 : result.a = 1;
-
+			if (realPixelNormal.a == -1)
+				result.a = 0;
 		}
 	}
 
