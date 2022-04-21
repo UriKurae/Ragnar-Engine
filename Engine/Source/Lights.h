@@ -44,9 +44,6 @@ public:
     float3 dir;
     bool generateShadows;
     float4x4 lightSpace;
-
-    // Don't use, shadows meaning
-    float3 position = float3::zero;
 };
 
 class PointLight : public Light

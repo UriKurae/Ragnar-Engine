@@ -40,10 +40,9 @@ bool ComponentLight::Update(float dt)
 			DirectionalLight* l = (DirectionalLight*)light;
 			l->dir = tr->GetRotation().CastToFloat4().Float3Part();
 			l->dir.Normalize();
-			l->position = tr->GetGlobalPosition();
 			
 			Frustum frustum;
-			frustum.pos = l->position;
+			frustum.pos = tr->GetGlobalPosition();
 
 			frustum.front = app->renderer3D->dirLight->dir;
 			float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
@@ -207,7 +206,6 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			DirectionalLight* l = new DirectionalLight();
 
 			l->dir = node.GetJson3Number(node, "Direction");
-			l->dir = node.GetJson3Number(node, "Position");
 			l->ambient = node.GetJson3Number(node, "Ambient");
 			l->diffuse = node.GetJson3Number(node, "Diffuse");
 			l->specular = node.GetJson3Number(node, "Specular");
@@ -274,7 +272,7 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 		{
 			DirectionalLight* l = (DirectionalLight*)light;
 
-			file.SetNewJson3Number(file, "Position", l->position);
+			//file.SetNewJson3Number(file, "Position", l->position);
 			file.SetNewJson3Number(file, "Direction", l->dir);
 			file.SetNewJson3Number(file, "Ambient", l->ambient);
 			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
