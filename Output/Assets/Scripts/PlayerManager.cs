@@ -6,7 +6,7 @@ public class PlayerManager : RagnarComponent
     public GameObject[] players;
     public int characterSelected = 0;
 
-    public Characters[] characters = new Characters[3];
+    public Characters[] characters;
     public Characters playableCharacter;
 
     GameObject[] area = null;
@@ -15,137 +15,6 @@ public class PlayerManager : RagnarComponent
 
     public void Start()
 	{
-        ///////////////////////////////////////////////////////////////////
-        // AVISO
-        // Esto de aquí está hardcodeadísimo
-        // Pero no hay otra manera de hacerlo
-        // Cuando se puedan meter cositas desde inspector
-        // Se solucionará este problema ^^
-
-        // Player 1
-        characters[0] = new Characters
-        {
-            name = "Paul Atreides",
-            prefabPath = "Player",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[0].abilities[0] = new Abilities
-        {
-            name = "Knife Throw",
-            prefabPath = "Knife",
-            prefabArea = "Knife Area",
-            charges = -1,
-            cooldown = 25f
-        }; // Throwing Knife
-        characters[0].abilities[1] = new Abilities
-        {
-            name = "Rock Throw",
-            prefabPath = "Eagle",
-            prefabArea = "Rock Area",
-            charges = -1,
-            cooldown = 20f
-        }; // Rock/Eagle
-        characters[0].abilities[2] = new Abilities
-        {
-            name = "The Voice",
-            prefabPath = "Voice",
-            prefabArea = "Rock Area",
-            charges = -1,
-            cooldown = 20f
-        }; // The Voice
-        characters[0].abilities[3] = new Abilities
-        {
-            name = "BackStab",
-            prefabPath = "BackStab_2",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-
-        // Player 2
-        characters[1] = new Characters
-        {
-            name = "Chani",
-            prefabPath = "Player_2",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[1].abilities[0] = new Abilities
-        {
-            name = "Backstab",
-            prefabPath = "BackStab",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-        characters[1].abilities[1] = new Abilities
-        {
-            name = "Camouflage",
-            prefabPath = "Camouflage",
-            prefabArea = "Backstab Area",
-            charges = -1,
-            cooldown = 30f
-        }; // Camouflage
-        characters[1].abilities[2] = new Abilities
-        {
-            name = "Spice Bomb",
-            prefabPath = "Spice Granade",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // Spice Bomb
-        characters[1].abilities[3] = new Abilities
-        {
-            name = "Hunter Seeker",
-            prefabPath = "HunterSeeker",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 4f
-        }; // Hunter Seeker
-
-        // Player 3
-        characters[2] = new Characters
-        {
-            name = "Stilgar",
-            prefabPath = "Player_3",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[2].abilities[0] = new Abilities
-        {
-            name = "Sword Slash",
-            prefabPath = "SwordSlash",
-            prefabArea = "SwordSlash Area",
-            charges = -1,
-            cooldown = 0f
-        }; // Sword Slash
-        characters[2].abilities[1] = new Abilities
-        {
-            name = "Stunner",
-            prefabPath = "StunnerShot",
-            prefabArea = "Stunner Area",
-            charges = 4,
-            cooldown = 5f
-        }; // Stunner Shot
-        characters[2].abilities[2] = new Abilities
-        {
-            name = "Whistle",
-            prefabPath = "Whistle",
-            prefabArea = "Whistle Area",
-            charges = -1,
-            cooldown = 6f
-        }; // Whistle
-        characters[2].abilities[3] = new Abilities
-        {
-            name = "Trap",
-            prefabPath = "Trap",
-            prefabArea = "Trap Area",
-            charges = 1,
-            cooldown = 0f
-        }; // Trap
-        ///////////////////////////////////////////////////////////////////
-
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
