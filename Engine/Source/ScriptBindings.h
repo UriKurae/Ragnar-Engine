@@ -533,7 +533,6 @@ void StartDialogueById(int id)
 	//MHF
 	DialogueSystem* sys = DialogueSystem::GetInstance();
 	sys->SetCurrentDialogueIdXML(id);
-	sys->GetCurrentDialogueXML();
 	sys->StartDialogueXML();
 }
 

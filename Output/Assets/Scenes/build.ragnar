@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 140205008,
+                    "pointer": 339163328,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 162905920,
+                    "characters": 201056224,
                     "drawnArea": false
                 }
             ]
@@ -179,15 +179,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.62939453125e-06,
-                        56.479866027832031,
-                        -51.345329284667969
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
+                        0.34202012419700623,
                         0,
                         0,
-                        0.93969273567199707
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -203,12 +203,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.44560569524765015,
+                    "Vertical Fov": 0.48619174957275391,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -24.427366256713867,
-                        56.479866027832031,
-                        128.06240844726562
+                        -25.058980941772461,
+                        55,
+                        126.87451934814453
                     ],
                     "Type": 3,
                     "Zoom": 0,
@@ -536,10 +536,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 138567600,
+                    "pointer": 339164552,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 162905856,
+                    "enemies": 201056160,
                     "enemyGOs": 0
                 }
             ]
@@ -2019,7 +2019,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2036,7 +2036,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 257428008,
+                    "pointer": 339165368,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2074,7 +2074,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2148,7 +2148,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2222,7 +2222,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2270,7 +2270,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2881,7 +2881,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2929,7 +2929,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2977,7 +2977,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3025,7 +3025,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3073,7 +3073,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3121,7 +3121,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3169,8 +3169,8 @@
             "Name": "Dialogue",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Dialogue.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Components": [
@@ -3207,7 +3207,7 @@
             "Name": "DialogueBox",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3218,7 +3218,7 @@
                     "Position": [
                         0,
                         268,
-                        -10
+                        100
                     ],
                     "Scale": [
                         1.5266666412353516,
@@ -3233,7 +3233,7 @@
                     "buttonWidth": 916,
                     "buttonHeight": 223.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3281,7 +3281,7 @@
             "Name": "DialogueText",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3307,7 +3307,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3330,7 +3330,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 271548208,
+                    "pointer": 422058264,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -3342,7 +3342,7 @@
             "Name": "DialoguePaul",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3368,7 +3368,7 @@
                     "buttonWidth": 907,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3398,7 +3398,7 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Button",
+                    "buttonText": "",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
@@ -3416,7 +3416,7 @@
             "Name": "DialogueChani",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3442,7 +3442,7 @@
                     "buttonWidth": 907,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 687,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3472,7 +3472,7 @@
                 },
                 {
                     "Type": 12,
-                    "buttonText": "Button",
+                    "buttonText": "",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,

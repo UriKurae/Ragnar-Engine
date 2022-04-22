@@ -15,6 +15,7 @@ public class DialogueManager : RagnarComponent
 	bool endDialogue;
 	public void Start()
 	{
+		Dialogue.LoadDialogueFile("");
 		//toxt = gameObject.GetComponent<UIText>();
 		text = GameObject.Find("DialogueText");
 		paul = GameObject.Find("DialoguePaul");
