@@ -32,6 +32,11 @@ public class BasicEnemy : RagnarComponent
 
     float initialSpeed;
 
+    bool distracted = false;
+    float distractedTimer = -1f;
+    bool stunned = false;
+    float stunnedTimer = -1f;
+
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -53,15 +58,21 @@ public class BasicEnemy : RagnarComponent
     {
         if (!pendingToDelete && deathTimer == -1)
         {
-            Patrol();
-            if (PerceptionCone())
+            if (!stunned)
             {
-                agents.speed = initialSpeed * 1.2f;
-                Shoot();
-            }
-            else
-            {
-                agents.speed = initialSpeed;
+                if (!distracted)
+                {
+                    Patrol();
+                }
+                if (PerceptionCone())
+                {
+                    agents.speed = initialSpeed * 1.2f;
+                    Shoot();
+                }
+                else
+                {
+                    agents.speed = initialSpeed;
+                }
             }
         }
 
@@ -73,6 +84,26 @@ public class BasicEnemy : RagnarComponent
                 gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
                 deathTimer = -1f;
                 pendingToDelete = true;
+            }
+        }
+
+        if (stunnedTimer >= 0)
+        {
+            stunnedTimer -= Time.deltaTime;
+            if (stunnedTimer < 0)
+            {
+                stunned = false;
+                stunnedTimer = -1f;
+            }
+        }
+
+        if (distractedTimer >= 0)
+        {
+            distractedTimer -= Time.deltaTime;
+            if (distractedTimer < 0)
+            {
+                distracted = false;
+                distractedTimer = -1f;
             }
         }
     }
@@ -105,12 +136,16 @@ public class BasicEnemy : RagnarComponent
     public void OnTrigger(Rigidbody other)
     {
         //// Paul ========================================
+
         if (other.gameObject.name == "Rock")
         {
             // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-            patrol = false;
-            stoppedTime = 5f;
-            agents.CalculatePath(other.gameObject.transform.globalPosition);
+
+            distracted = true;
+            distractedTimer = 5f;
+            //stoppedTime = 5f;
+            Distraction(other.gameObject.transform.globalPosition);
+            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
         if (other.gameObject.name == "Eagle")
         {
@@ -121,11 +156,13 @@ public class BasicEnemy : RagnarComponent
         }
 
         //// Chani =======================================
-        if (other.gameObject.name == "SpiceGrenade")
+        if (other.gameObject.name == "Spice Grenade")
         {
             // STUN (BLIND)
-            patrol = false;
-            stoppedTime = 5f;
+            Stun(5f);
+
+            //patrol = false;
+            //stoppedTime = 5f;
             //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
 
@@ -149,8 +186,10 @@ public class BasicEnemy : RagnarComponent
         if (other.gameObject.name == "Trap")
         {
             // STUN (BLIND)
-            patrol = false;
-            stoppedTime = 5f;
+            Stun(5f);
+
+            //patrol = false;
+            //stoppedTime = 5f;
             //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
     }
@@ -242,5 +281,30 @@ public class BasicEnemy : RagnarComponent
         {
             GotoNextPoint();
         }
+    }
+
+    public void Distraction(Vector3 distractionItem)
+    {
+        Vector3 forward = gameObject.transform.forward;
+        Vector3 newForward = (distractionItem - gameObject.transform.globalPosition).normalized;
+
+        float dot = (forward.x * newForward.x) + (forward.y * newForward.y) + (forward.z * newForward.z);
+        float mag = forward.magnitude * newForward.magnitude;
+        float angleInRadians = (float)Math.Acos(dot / mag);
+
+        Quaternion newRot = Quaternion.RotateAroundAxis(gameObject.transform.up, angleInRadians);
+
+        gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
+
+        //gameObject.transform.localRotation = newRot;
+
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+    }
+
+    public void Stun(float timeStunned)
+    {
+        stunned = true;
+        stunnedTimer = timeStunned;
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
 }

@@ -113,6 +113,12 @@ MonoObject* GetGlobalRotation(MonoObject* go)
 	return app->moduleMono->QuatToCS(rotation);
 }
 
+void SetGlobalRotation(MonoObject* go, MonoObject* newRot)
+{
+	TransformComponent* tr = GetComponentMono<TransformComponent*>(go);
+	tr->SetRotation(app->moduleMono->UnboxQuat(newRot));
+}
+
 MonoObject* GetScale(MonoObject* go)
 {
 	TransformComponent* tr = GetComponentMono<TransformComponent*>(go);

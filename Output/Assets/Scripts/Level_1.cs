@@ -79,9 +79,9 @@ public class Level_1 : RagnarComponent
         }; // Camouflage
         characters[1].abilities[2] = new Abilities
         {
-            name = "Spice Bomb",
-            prefabPath = "Spice Granade",
-            prefabArea = "BackStab Area",
+            name = "Spice Grenade",
+            prefabPath = "Spice Grenade",
+            prefabArea = "Rock Area",
             charges = -1,
             cooldown = 0f
         }; // Spice Bomb
@@ -89,7 +89,7 @@ public class Level_1 : RagnarComponent
         {
             name = "Hunter Seeker",
             prefabPath = "HunterSeeker",
-            prefabArea = "BackStab Area",
+            prefabArea = "Rock Area",
             charges = -1,
             cooldown = 4f
         }; // Hunter Seeker

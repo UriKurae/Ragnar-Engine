@@ -67,25 +67,25 @@ public class PlayerManager : RagnarComponent
     private void AbilityStateChanger()
     {
         // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_1);
         }
 
         // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_2);
         }
 
         // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_3);
         }
 
         // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.F) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_4);
         }

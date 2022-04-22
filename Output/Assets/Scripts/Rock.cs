@@ -31,6 +31,8 @@ public class Rock : RagnarComponent
 		goRB.SetBodyPosition(pos);
 		goRB.IgnoreCollision(player, true);
 		goRB.ApplyCentralForce(direction.normalized * force);
+
+		agent.hitPosition = player.transform.globalPosition;
 	}
 
 	public void Update()
