@@ -6,7 +6,8 @@ public class Credits : RagnarComponent
 	Vector3 Pos;
 	GameObject Back;
 	GameObject Menu;
-	GameObject Text;
+	GameObject TextJob;
+	GameObject TextName;
 	GameObject MenuImage;
 	GameObject AudioManager;
 	float textCounter = 0;
@@ -20,13 +21,16 @@ public class Credits : RagnarComponent
 
 
 		MenuImage = GameObject.Find("Main Menu Image");
-		Text = GameObject.Find("Names List");
+		TextJob = GameObject.Find("Jobs List");
+		TextName= GameObject.Find("Names List");
 		AudioManager = GameObject.Find("AudioWinMenu");
 		
 		Pos = new Vector3(0, 0, 0);
 
-		Pos.Set(0, 0, 36.1f);
-		Text.GetComponent<Transform2D>().position2D = Pos;
+		Pos.Set(-150, -(InternalCalls.GetRegionGame().y / 2)+200, 36.1f);
+		TextJob.GetComponent<Transform2D>().position2D = Pos;
+		Pos.Set(-40, -(InternalCalls.GetRegionGame().y / 2)+200, 36.1f);
+		TextName.GetComponent<Transform2D>().position2D = Pos;
 	}
 	public void Update()
 	{
@@ -43,9 +47,13 @@ public class Credits : RagnarComponent
 		if (textCounter >= 5)
         {			
 			float vel = newDelta * velocity;
-			Pos.Set(0, Text.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
-			Text.GetComponent<Transform2D>().position2D = Pos;
-        }
+			Pos.Set(-150, TextJob.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
+			TextJob.GetComponent<Transform2D>().position2D = Pos;
+
+			Pos.Set(30, TextName.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
+			TextName.GetComponent<Transform2D>().position2D = Pos;
+
+		}
         else
         {
 			textCounter += newDelta;

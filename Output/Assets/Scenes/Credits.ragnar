@@ -414,7 +414,7 @@
             ]
         },
         {
-            "UUID": 707615095,
+            "UUID": 767415075,
             "Parent UUID": 566911234,
             "Name": "Names List",
             "Active": true,
@@ -462,7 +462,60 @@
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "TextFile": "Library\/Dialogues\/Credits.rgdialogue"
+                    "TextFile": "Library\/Dialogues\/CreditsNames.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 707615095,
+            "Parent UUID": 566911234,
+            "Name": "Jobs List",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 725,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/CreditsJobs.rgdialogue"
                 }
             ]
         }

@@ -35,7 +35,7 @@ TextComponent::TextComponent(GameObject* own)
 	app->userInterface->OrderButtons();
 	//planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	//planeToDraw->own = own;
-	
+	savetext();
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
 }
@@ -118,7 +118,7 @@ void TextComponent::OnEditor()
 		}
 
 
-		char text[384];
+		char text[500];
 		strcpy(text, textToShow.textt.c_str());
 		if(ImGui::InputText("Texte", text, IM_ARRAYSIZE(text)))
 			textToShow.setOnlyText(text);
@@ -185,17 +185,20 @@ bool TextComponent::OnSave(JsonParsing& node, JSON_Array* array)
 void TextComponent::loadtext(std::string path)
 {
 	JsonParsing dialogFile = JsonParsing();
-
 	if (dialogFile.ParseFile(path.c_str()) > 0)
 	{
-		
+		std::string total;
+
 		JSON_Array* jsonArray = dialogFile.GetJsonArray(dialogFile.ValueToObject(dialogFile.GetRootValue()), "AllText");
 		JsonParsing c = dialogFile.GetJsonArrayValue(jsonArray, 0);
 		std::string aux = c.GetJsonString("Text");
 
-		textToShow.textt = aux;
 
+		total = aux;
+		textToShow.textt = total;
 	}
+
+	
 
 }
 
@@ -281,31 +284,33 @@ void TextComponent::loadFont(std::string path) {
 
 	shader = new Shadert("", "");
 }
-//void TextComponent::savetext()
-//{
-//	JsonParsing TextFile;
-//	JSON_Array* arrayDialogue = TextFile.SetNewJsonArray(TextFile.GetRootValue(), "AllText");
-//
-//
-//	JsonParsing file2 = JsonParsing();
-//
-//	file2.SetNewJsonString(file2.ValueToObject(file2.GetRootValue()), "Text", "vvvvvvvvv");
-//	TextFile.SetValueToArray(arrayDialogue, file2.GetRootValue());
-//
-//
-//	char* buf;
-//	uint size = TextFile.Save(&buf);
-//
-//	std::string savePath = "Assets/Dialogues/";
-//	savePath += "Credits";
-//	savePath += ".rgdialogue";
-//
-//	if (app->fs->Save(savePath.c_str(), buf, size) > 0)
-//		//DEBUG_LOG("Dialogue saved succesfully");
-//	
-//		//DEBUG_LOG("Dialogue couldn't be saved");
-//
-//	RELEASE_ARRAY(buf);
-//
-//
-//}
+void TextComponent::savetext()
+{
+	JsonParsing TextFile;
+	JSON_Array* arrayDialogue = TextFile.SetNewJsonArray(TextFile.GetRootValue(), "AllText");
+
+
+	JsonParsing file2 = JsonParsing();
+
+	file2.SetNewJsonString(file2.ValueToObject(file2.GetRootValue()), "Text", "vvvvvvvvv");
+	file2.SetNewJsonString(file2.ValueToObject(file2.GetRootValue()), "Text1", "oooo");
+	file2.SetNewJsonString(file2.ValueToObject(file2.GetRootValue()), "Text2", "eeeeeeeeoo");
+	TextFile.SetValueToArray(arrayDialogue, file2.GetRootValue());
+
+
+	char* buf;
+	uint size = TextFile.Save(&buf);
+
+	std::string savePath = "Assets/Dialogues/";
+	savePath += "Credits";
+	savePath += ".rgdialogue";
+
+	if (app->fs->Save(savePath.c_str(), buf, size) > 0)
+		//DEBUG_LOG("Dialogue saved succesfully");
+	
+		//DEBUG_LOG("Dialogue couldn't be saved");
+
+	RELEASE_ARRAY(buf);
+
+
+}

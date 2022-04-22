@@ -49,7 +49,7 @@ public:
 private:
 	std::string fontPath;
 	void loadtext(std::string path);
-	/*void savetext();*/
+	void savetext();
 	bool fadeUI = false;
 	Color textColor = white;
 	MyPlane* planeToDraw;
