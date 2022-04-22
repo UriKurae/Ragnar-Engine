@@ -4,17 +4,17 @@ using System.Runtime.InteropServices;
 
 namespace RagnarEngine
 {
-    class UIButton : RagnarComponent
+    class UIDropDown : RagnarComponent
     {
-        public UIButton(UIntPtr ptr) : base(ptr)
+        public UIDropDown(UIntPtr ptr) : base(ptr)
         {
-            type = ComponentType.UI_BUTTON;
+            type = ComponentType.UI_DROPDOWN;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern int GetButtonState();
+        public extern int GetDropState();
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void SetButtonState(int newState);
+        public extern void SetDropState(int newState);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern Vector3 GetTextPosition();
@@ -23,19 +23,19 @@ namespace RagnarEngine
         public extern void SetTextPosition(float posx,float posy);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void SetButtonAlpha(float NewAlpha);
+        public extern void SetDropAlpha(float NewAlpha);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern float GetButtonAlpha();
+        public extern float GetDropAlpha();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void SetButtonTextColor(float Red, float Green,float Blue);
+        public extern void SetDropTextColor(float Red, float Green,float Blue);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 GetButtonTextColor();
+        public extern Vector3 GetDropTextColor();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void SetButtonGeneralColor(float Red, float Green, float Blue);
+        public extern void SetDropGeneralColor(float Red, float Green, float Blue);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 GetButtonGeneralColor();
+        public extern Vector3 GetDropGeneralColor();
         public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
