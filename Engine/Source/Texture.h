@@ -3,6 +3,13 @@
 
 typedef unsigned char GLubyte;
 
+enum class TextureType
+{
+	NONE = -1,
+	DIFFUSE,
+	NORMAL,
+};
+
 struct TextureParameters
 {
 	bool alienify = false;
@@ -48,6 +55,5 @@ private:
 
 	std::string path;
 	GLubyte* data;
-
 	TextureParameters parameters;
 };

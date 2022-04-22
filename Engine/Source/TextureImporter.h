@@ -6,6 +6,7 @@ typedef unsigned int uint;
 class aiMaterial;
 enum aiTextureType;
 
+enum class TextureType;
 struct TextureParameters;
 
 namespace TextureImporter
