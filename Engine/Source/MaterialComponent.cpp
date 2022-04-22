@@ -456,12 +456,18 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
-	float4x4 normalMat = view;
-	normalMat.Inverse();
-	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
+	//float4x4 normalMat = view;
+	//normalMat.Inverse();
+	//shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
-	float thickness = std::string(owner->GetName()).find("Player") == std::string::npos ? 1 : 0;
-	shader->SetUniform1f("normalsThickness", thickness);
+	if(std::string(owner->GetName()).find("Player") != std::string::npos)
+		shader->SetUniform1f("normalsThickness", 0);
+	else if(std::string(owner->GetName()).find("Enemy") != std::string::npos)
+		shader->SetUniform1f("normalsThickness", 0);
+	else
+		shader->SetUniform1f("normalsThickness", 1);
+
+	//float thickness = ((std::string(owner->GetName()).find("Player") == std::string::npos) || (std::string(owner->GetName()).find("Enemy") == std::string::npos)) ? 1 : 0;
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
