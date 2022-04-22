@@ -8,6 +8,7 @@ public class Credits : RagnarComponent
 	GameObject Menu;
 	GameObject TextJob;
 	GameObject TextName;
+	GameObject TextTitles;
 	GameObject MenuImage;
 	GameObject AudioManager;
 	float textCounter = 0;
@@ -23,6 +24,7 @@ public class Credits : RagnarComponent
 		MenuImage = GameObject.Find("Main Menu Image");
 		TextJob = GameObject.Find("Jobs List");
 		TextName= GameObject.Find("Names List");
+		TextTitles = GameObject.Find("Tiles List");
 		AudioManager = GameObject.Find("AudioWinMenu");
 		
 		Pos = new Vector3(0, 0, 0);
@@ -31,6 +33,8 @@ public class Credits : RagnarComponent
 		TextJob.GetComponent<Transform2D>().position2D = Pos;
 		Pos.Set(-40, -(InternalCalls.GetRegionGame().y / 2)+200, 36.1f);
 		TextName.GetComponent<Transform2D>().position2D = Pos;
+		Pos.Set(-140, -(InternalCalls.GetRegionGame().y / 2) + 230, 36.1f);
+		TextTitles.GetComponent<Transform2D>().position2D = Pos;
 	}
 	public void Update()
 	{
@@ -52,6 +56,9 @@ public class Credits : RagnarComponent
 
 			Pos.Set(30, TextName.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 			TextName.GetComponent<Transform2D>().position2D = Pos;
+
+			Pos.Set(-100, TextTitles.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
+			TextTitles.GetComponent<Transform2D>().position2D = Pos;
 
 		}
         else
