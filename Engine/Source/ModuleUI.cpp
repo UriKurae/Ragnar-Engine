@@ -332,6 +332,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
+
 	focusedGameObject = nullptr;
 	UIGameObjectSelected = nullptr;
 }
@@ -344,7 +345,7 @@ ModuleUI::~ModuleUI()
 
 bool ModuleUI::Start()
 {
-	
+
 	return true;
 }
 void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shadert* shade, uint VAO, uint VBO)

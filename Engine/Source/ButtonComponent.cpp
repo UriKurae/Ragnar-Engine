@@ -28,7 +28,7 @@ ButtonComponent::ButtonComponent(GameObject* own)
 		pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 		actual = normalMaterial;
-		loadFont(fontPath.c_str());
+		LoadFont(fontPath.c_str());
 	}
 	
 	//app->userInterface->loadFont("Library/Fonts/Montserrat-Bold.ttf", &characters, shader, VAO, VBO);
@@ -51,14 +51,14 @@ ButtonComponent::ButtonComponent(GameObject* own,bool isPart)
 	pressedMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 	disabledMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 	actual = normalMaterial;
-	loadFont(fontPath.c_str());
+	LoadFont(fontPath.c_str());
 	
 
 	planeToDraw = new MyPlane(float3{ 0,0,0 }, float3{ 1,1,1 });
 	planeToDraw->own = own;
 
 }
-void ButtonComponent::loadFont(const char* path) {
+void ButtonComponent::LoadFont(const char* path) {
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
 	{
@@ -252,7 +252,7 @@ void ButtonComponent::OnEditor()
 			VAO = 0;
 			VBO = 0;
 			characters.clear();
-			loadFont(fontPath.c_str());
+			LoadFont(fontPath.c_str());
 		}
 		if (ImGui::InputText("Text", text, IM_ARRAYSIZE(text)))
 			buttonText.setOnlyText(text);
@@ -289,7 +289,7 @@ bool ButtonComponent::OnLoad(JsonParsing& node)
 		fontPath = node.GetJsonString("fontPath");
 	}
 	
-	loadFont(fontPath.c_str());
+	LoadFont(fontPath.c_str());
 	for (int a = 0; a < owner->components.size(); a++) {
 		if (owner->components[a]->type == ComponentType::MATERIAL)
 		{

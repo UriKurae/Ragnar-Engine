@@ -71,7 +71,7 @@ public:
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
 	inline float GetAlpha() { return alpha; };
 	MyPlane* planeToDraw;
-	void loadFont(const char* path);
+	void LoadFont(const char* path);
 	uint VAO = 0, VBO = 0;
 	std::map<char, Character> characters;
 	Shadert* shader = nullptr;

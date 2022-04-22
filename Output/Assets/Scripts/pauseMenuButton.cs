@@ -49,15 +49,15 @@ public class pauseMenuButton : RagnarComponent
 		ResumeButtonHide();
 		MainMenuButtonHide();
 		OptionsButtonHide();
-		//////////////OPTIONS//////////////
-		
-		optionsBack = GameObject.Find("optionsBack");
-		optionsBackImage = GameObject.Find("optionsBackImage");
-		optionsBackButton = GameObject.Find("optionsBackButton");
+        //////////////OPTIONS//////////////
 
-		OptionsBackHide();
-		//////////////GAME//////////////
-		CharacterBar = GameObject.Find("Char");
+        optionsBack = GameObject.Find("optionsBack");
+        optionsBackImage = GameObject.Find("optionsBackImage");
+        optionsBackButton = GameObject.Find("optionsBackButton");
+
+        OptionsBackHide();
+        //////////////GAME//////////////
+        CharacterBar = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
 		AbilityImage = GameObject.Find("AbilImage");
