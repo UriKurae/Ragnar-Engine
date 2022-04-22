@@ -194,7 +194,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
                         0,
@@ -249,10 +249,10 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -547,
-                        -251.5,
+                        -430.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -322,10 +322,10 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -555,
-                        -251.5,
+                        -430.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -370,10 +370,10 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
-                        -251.5,
+                        -430.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -443,10 +443,10 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
-                        -251.5,
+                        -430.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -491,10 +491,10 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         419,
-                        -251.5,
+                        -430.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -564,10 +564,10 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         419,
-                        -251.5,
+                        -430.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -612,7 +612,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -392,
                         199,

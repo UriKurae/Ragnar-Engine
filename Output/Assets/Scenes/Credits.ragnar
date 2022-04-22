@@ -1,9 +1,9 @@
 {
     "Game Objects": [
         {
-            "UUID": 417171234,
+            "UUID": 566911234,
             "Parent UUID": 0,
-            "Name": "LoseScene",
+            "Name": "Credits",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -14,7 +14,7 @@
         },
         {
             "UUID": 1340834673,
-            "Parent UUID": 417171234,
+            "Parent UUID": 566911234,
             "Name": "Directional Light",
             "Active": true,
             "Static": true,
@@ -78,7 +78,7 @@
         },
         {
             "UUID": 2128337088,
-            "Parent UUID": 417171234,
+            "Parent UUID": 566911234,
             "Name": "cameraController",
             "Active": true,
             "Static": true,
@@ -153,7 +153,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0064557790756226,
+                    "Vertical Fov": 0.92509317398071289,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
@@ -161,7 +161,7 @@
                         -52.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 79,
+                    "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
                     "Free Movement": true,
@@ -173,7 +173,7 @@
                     "Movement Speed": 0.5,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 189.39971923828125,
+                    "Horizontal Angle": 160.39971923828125,
                     "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
@@ -182,8 +182,8 @@
             ]
         },
         {
-            "UUID": 2001316928,
-            "Parent UUID": 417171234,
+            "UUID": 1657689093,
+            "Parent UUID": 566911234,
             "Name": "Background",
             "Active": true,
             "Static": true,
@@ -198,7 +198,7 @@
                     "Position": [
                         0,
                         0,
-                        35
+                        36
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -212,14 +212,14 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_losescreen.png",
+                    "Path": "Assets\/Resources\/UI\/black.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -229,89 +229,16 @@
                 },
                 {
                     "Type": 4,
-                    "ScriptName": "loseScreen",
-                    "pointer": 329966112,
+                    "ScriptName": "Credits",
+                    "pointer": 191779296,
                     "type": 4,
                     "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 728783742,
-            "Parent UUID": 417171234,
-            "Name": "ButtonRetry",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        -556,
-                        -100.5,
-                        36.099998474121094
-                    ],
-                    "Scale": [
-                        0.48333331942558289,
-                        0.07083333283662796,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 290,
-                    "buttonHeight": 42.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Restart",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -20.799999237060547,
-                    "textPositionY": -4.1999998092651367,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1227373047,
-            "Parent UUID": 417171234,
+            "UUID": 597052281,
+            "Parent UUID": 566911234,
             "Name": "ButtonMenu",
             "Active": true,
             "Static": true,
@@ -324,13 +251,13 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -558.5,
-                        -196,
+                        -625.5,
+                        -405,
                         36.099998474121094
                     ],
                     "Scale": [
-                        0.48333331942558289,
-                        0.07083333283662796,
+                        0.54333335161209106,
+                        0.085000000894069672,
                         1
                     ],
                     "rotationEuler": [
@@ -338,12 +265,12 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 290,
-                    "buttonHeight": 42.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "buttonWidth": 326,
+                    "buttonHeight": 51,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
@@ -376,16 +303,16 @@
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "textPositionX": -22,
-                    "textPositionY": -3.5999999046325684,
+                    "textPositionX": -28.799999237060547,
+                    "textPositionY": -3.4000000953674316,
                     "alpha": 1
                 }
             ]
         },
         {
-            "UUID": 213403760,
-            "Parent UUID": 417171234,
-            "Name": "MenuImage",
+            "UUID": 1756240318,
+            "Parent UUID": 566911234,
+            "Name": "Main Menu Image",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -397,13 +324,13 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -568,
-                        -206,
+                        -633.5,
+                        -405,
                         36.099998474121094
                     ],
                     "Scale": [
-                        0.48333331942558289,
-                        0.074166662991046906,
+                        0.54583334922790527,
+                        0.090000003576278687,
                         1
                     ],
                     "rotationEuler": [
@@ -411,112 +338,16 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 290,
-                    "buttonHeight": 44.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1218133383,
-            "Parent UUID": 417171234,
-            "Name": "RetryImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        -565,
-                        -109.5,
-                        36.099998474121094
-                    ],
-                    "Scale": [
-                        0.48333331942558289,
-                        0.074166662991046906,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 290,
-                    "buttonHeight": 44.5,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1234207866,
-            "Parent UUID": 417171234,
-            "Name": "textImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        -399,
-                        132.5,
-                        36.099998474121094
-                    ],
-                    "Scale": [
-                        0.62666666507720947,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 376,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1297,
-                    "lastButtonHeight": 714,
+                    "buttonWidth": 327.5,
+                    "buttonHeight": 54,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 725,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_game_over_text.png",
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -527,13 +358,13 @@
             ]
         },
         {
-            "UUID": 355691705,
-            "Parent UUID": 417171234,
-            "Name": "AudioLoseScene",
+            "UUID": 1913840108,
+            "Parent UUID": 566911234,
+            "Name": "AudioWinMenu",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
-            "Prefab Path": "Assets\/Prefabs\/AudioLoseScene.rgprefab",
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/AudioWinMenu.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Components": [
@@ -579,6 +410,112 @@
                 {
                     "Type": 6,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 767415075,
+            "Parent UUID": 566911234,
+            "Name": "Names List",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 725,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/CreditsNames.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 707615095,
+            "Parent UUID": 566911234,
+            "Name": "Jobs List",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 725,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/CreditsJobs.rgdialogue"
                 }
             ]
         }

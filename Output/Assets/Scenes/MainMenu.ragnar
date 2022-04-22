@@ -134,10 +134,10 @@
                         -50
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.38268345594406128,
                         0,
                         0,
-                        0.93969261646270752
+                        0.92387950420379639
                     ],
                     "RotationEditor": [
                         0,
@@ -153,7 +153,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0731390714645386,
+                    "Vertical Fov": 1.0672310590744019,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
@@ -161,10 +161,9 @@
                         -52.258106231689453
                     ],
                     "Type": 3,
-                    "Zoom": 7,
+                    "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
-                    "Zoom Speed": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -175,6 +174,7 @@
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 257.39971923828125,
+                    "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -194,7 +194,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
                         0,
@@ -212,8 +212,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1340,
-                    "lastButtonHeight": 797,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -230,203 +230,9 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 322820152,
+                    "pointer": 191474336,
                     "type": 4,
                     "componentTable": 0
-                }
-            ]
-        },
-        {
-            "UUID": 1838526428,
-            "Parent UUID": 417171234,
-            "Name": "UI Rectangle",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -472,
-                        0,
-                        -301
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.33916667103767395,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 203.5,
-                    "lastButtonWidth": 1340,
-                    "lastButtonHeight": 797,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 0.60399997234344482
-                }
-            ]
-        },
-        {
-            "UUID": 673559679,
-            "Parent UUID": 1838526428,
-            "Name": "Button Start",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -570,
-                        25,
-                        -311.89999389648438
-                    ],
-                    "Scale": [
-                        0.29499998688697815,
-                        0.048333331942558289,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
-                    "lastButtonWidth": 1340,
-                    "lastButtonHeight": 797,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Start",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.5999999046325684,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 792698622,
-            "Parent UUID": 1838526428,
-            "Name": "Button Exit",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 18,
-                    "Position": [
-                        -570,
-                        -31,
-                        -311.39999389648438
-                    ],
-                    "Scale": [
-                        0.29499998688697815,
-                        0.048333331942558289,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 177,
-                    "buttonHeight": 29,
-                    "lastButtonWidth": 1340,
-                    "lastButtonHeight": 797,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": false
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Exit",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -23.799999237060547,
-                    "textPositionY": -4.8000001907348633,
-                    "alpha": 1
                 }
             ]
         },
@@ -486,6 +292,611 @@
                 {
                     "Type": 6,
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 392827484,
+            "Parent UUID": 417171234,
+            "Name": "Button Credits",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -702.5,
+                        -98.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.53833335638046265,
+                        0.078333333134651184,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 323,
+                    "buttonHeight": 47,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Credits",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -1.6000000238418579,
+                    "textPositionY": -4.5999999046325684,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1691310750,
+            "Parent UUID": 417171234,
+            "Name": "Button Start",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -595,
+                        27,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.57583332061767578,
+                        0.07916666567325592,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 345.5,
+                    "buttonHeight": 47.5,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "New Game",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -55,
+                    "textPositionY": -3,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 735941264,
+            "Parent UUID": 417171234,
+            "Name": "Button Exit",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -743.5,
+                        -157.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.50416666269302368,
+                        0.078333333134651184,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 302.5,
+                    "buttonHeight": 47,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Exit",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 17,
+                    "textPositionY": -4,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 365195315,
+            "Parent UUID": 417171234,
+            "Name": "Button Options",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -643,
+                        -36.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.52666664123535156,
+                        0.078333333134651184,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 316,
+                    "buttonHeight": 47,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Options",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -4.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 731339464,
+            "Parent UUID": 417171234,
+            "Name": "Button Continue",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -553.5,
+                        89.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.67916667461395264,
+                        0.07916666567325592,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 407.5,
+                    "buttonHeight": 47.5,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Continue",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -75,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1473016993,
+            "Parent UUID": 417171234,
+            "Name": "Image Continue",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -557,
+                        88,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.68333333730697632,
+                        0.073333330452442169,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 410,
+                    "buttonHeight": 44,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 552672263,
+            "Parent UUID": 417171234,
+            "Name": "Image Start",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -613.5,
+                        25,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.64499998092651367,
+                        0.073333330452442169,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 387,
+                    "buttonHeight": 44,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 83741841,
+            "Parent UUID": 417171234,
+            "Name": "Image Options",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -670,
+                        -40,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.62083333730697632,
+                        0.073333330452442169,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 372.5,
+                    "buttonHeight": 44,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1352949494,
+            "Parent UUID": 417171234,
+            "Name": "Image Credits",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -699.5,
+                        -102,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.51499998569488525,
+                        0.073333330452442169,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 309,
+                    "buttonHeight": 44,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 120652452,
+            "Parent UUID": 417171234,
+            "Name": "Image Exit",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -743,
+                        -160,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.49166667461395264,
+                        0.073333330452442169,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 295,
+                    "buttonHeight": 44,
+                    "lastButtonWidth": 1454,
+                    "lastButtonHeight": 859,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
                 }
             ]
         }
