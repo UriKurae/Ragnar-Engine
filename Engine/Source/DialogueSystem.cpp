@@ -465,3 +465,18 @@ void DialogueSystem::ImportToLibrary()
 		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
 	}
 }
+
+void DialogueSystem::SetCurrentDialogueIdXML(int id) {
+	for (int i = 0; i < aDialogueXML.size(); i++) {
+		if (id == aDialogueXML[i]->id) {
+			currDialogXML = aDialogueXML[i];
+		}
+	}
+}
+DialogueXML* DialogueSystem::GetCurrentDialogueXML() {
+	return currDialogXML;
+}
+void DialogueSystem::StartDialogueXML() {
+	currLineXML = currDialogXML->dialogue.front();
+	indexLine = 0;
+}

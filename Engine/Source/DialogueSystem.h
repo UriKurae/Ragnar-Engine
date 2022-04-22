@@ -54,20 +54,9 @@ public:
 	//MHF
 	void LoadDialogueXML();
 	void LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg);
-	void SetCurrentDialogueIdXML(int id) { 
-		for (int i = 0; i < aDialogueXML.size(); i++){
-			if (id == aDialogueXML[i]->id){
-				currDialogXML = aDialogueXML[i];
-			}
-		}
-	}
-	DialogueXML* GetCurrentDialogueXML() {
-		return currDialogXML;
-	}
-	void StartDialogueXML() {
-		currLineXML = currDialogXML->dialogue.front();
-		indexLine = 0;
-	}
+	void SetCurrentDialogueIdXML(int id);
+	DialogueXML* GetCurrentDialogueXML();
+	void StartDialogueXML();
 	// If it returns false it means that the dialog is finished
 	bool NextLineXML(){
 		if (currDialogXML->dialogue.size() <= (indexLine+1)) {
