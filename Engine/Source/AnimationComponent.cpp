@@ -28,6 +28,11 @@ AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), d
 		finalBoneMatrices.push_back(float4x4::identity);
 	}
 
+	if (MeshComponent* mesh = owner->GetComponent<MeshComponent>())
+	{
+		boneInfoMap = mesh->GetBoneMap();
+	}
+
 	animations.push_back({ "None", nullptr, false });
 
 	active = true;
@@ -78,8 +83,6 @@ void AnimationComponent::OnEditor()
 					currState->loop = false;
 				}
 
-				std::vector<std::shared_ptr<Animation>> res;
-
 				std::vector<std::string> files;
 				app->fs->DiscoverFiles("Library/Animations", files);
 				for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -90,23 +93,15 @@ void AnimationComponent::OnEditor()
 						app->fs->GetFilenameWithoutExtension(*it);
 						*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 						uint uid = std::stoll(*it);
-						res.push_back(std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid)));
+						std::shared_ptr<Animation> res = std::static_pointer_cast<Animation>(ResourceManager::GetInstance()->GetResource(uid));
+						if (ImGui::Selectable(res->GetName().c_str()))
+						{
+							res->Load();
+							currState->anim = res;
+							if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
+							currAnim = currState;
+						}
 						ImGui::PopID();
-					}
-				}
-
-				std::sort(res.begin(), res.end(), [](std::shared_ptr<Resource> a, std::shared_ptr<Resource> b) {
-					return (a.get()->GetName() < b.get()->GetName());
-					});
-
-				for (std::vector<std::shared_ptr<Animation>>::iterator it = res.begin(); it != res.end(); ++it)
-				{
-					if (ImGui::Selectable((*it).get()->GetName().c_str()))
-					{
-						(*it)->Load();
-						currState->anim = (*it);
-						if (currAnim && currAnim->anim.use_count() - 1 == 1) currAnim->anim->UnLoad();
-						currAnim = currState;
 					}
 				}
 
@@ -181,7 +176,7 @@ void AnimationComponent::AnimationInfo()
 
 bool AnimationComponent::Update(float dt)
 {
-	RG_PROFILING_FUNCTION("Animation Update");
+	RG_PROFILING_FUNCTION("Animation Component Update");
 
 	deltaTime = dt;
 	if (currAnim && playing && app->sceneManager->GetGameState() == GameState::PLAYING)
@@ -226,7 +221,9 @@ bool AnimationComponent::Update(float dt)
 			currentTime += 24.0f * dt;
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
+		//auto& boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
+		//CalculateBoneTransform(currAnim->anim->GetBones(), float4x4::identity);
 	}
 
 	return true;
@@ -234,42 +231,88 @@ bool AnimationComponent::Update(float dt)
 
 void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform)
 {
+	RG_PROFILING_FUNCTION("Calculate Bone Transform");
+
 	std::string nodeName = data.name;
-	float4x4 nodeTransform = data.transform;
 
-	Bone* bone = currAnim->anim->FindBone(nodeName);
-	Bone* lastBone = lastAnim->anim->FindBone(nodeName);
+	float4x4 globalTransformation = float4x4::identity;
 
-	if (bone)
+	if (GetBoneInfo(nodeName, boneInfoMap) != boneInfoMap.end())
 	{
-		if (!interpolating)
-		{
-			bone->Update(currentTime);
-		}
-		else if (lastBone && lastAnim != currAnim)
-		{
-			bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
-			if (!interpolating)
-			{
-				loopTime = 0.0f;
-				currentTime = 0.0f;
-			}
-		}
-		nodeTransform = bone->GetTransform();
-	}
+		Bone* bone = currAnim->anim->FindBone(nodeName);
+		Bone* lastBone = lastAnim->anim->FindBone(nodeName);
 
-	float4x4 globalTransformation = parentTransform * nodeTransform;
+		if (bone)
+		{
+			globalTransformation = UpdateBone(bone, lastBone, parentTransform);
 
-	auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
-	if (boneInfoMap.find(nodeName) != boneInfoMap.end())
-	{
-		int index = boneInfoMap[nodeName].id;
-		float4x4 offset = boneInfoMap[nodeName].offset;
-		finalBoneMatrices[index] = globalTransformation * offset;
+			const BoneInfo& boneInfo = boneInfoMap.at(nodeName);
+			int index = boneInfo.id;
+			const float4x4& offset = boneInfo.offset;
+			finalBoneMatrices[index] = globalTransformation * offset;
+		}
 	}
 
 	for (int i = 0; i < data.childrenCount; ++i)
 		CalculateBoneTransform(data.children[i], globalTransformation);
+}
+
+void AnimationComponent::CalculateBoneTransform(std::vector<Bone>& bones, float4x4 parentTransform)
+{
+	float4x4 nodeTransform = bones[0].GetTransform();
+
+	std::vector<Bone> currentBones = currAnim->anim->GetBones();
+	std::vector<Bone> lastBones = currAnim->anim->GetBones();
+
+	if (!interpolating)
+	{
+		for (int i = 0; i < currentBones.size(); ++i)
+		{
+			Bone* currBone = &currentBones[i];
+			if (currBone)
+			{
+				currBone->Update(currentTime);
+				nodeTransform = currBone->GetTransform();
+			}
+			float4x4 globalTransformation;
+			if (currentBones[i].GetParentId() != -1) globalTransformation = currentBones[currentBones[i].GetParentId()].GetTransform() * currBone->GetTransform();
+			else
+				currBone->GetTransform();
+
+			auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
+			if (boneInfoMap.find(currentBones[i].GetName()) != boneInfoMap.end())
+			{
+				int index = boneInfoMap[currentBones[i].GetName()].id;
+				float4x4 offset = boneInfoMap[currentBones[i].GetName()].offset;
+				finalBoneMatrices[index] = globalTransformation * offset;
+			}
+		}
+	}
+	else if (lastAnim != currAnim)
+	{
+		for (int i = 0; i < currentBones.size(); ++i)
+		{
+			Bone* currBone = &currentBones[i];
+			Bone* lastBone = &lastBones[i];
+			if (currBone && lastBone)
+			{
+				currBone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
+				nodeTransform = currBone->GetTransform();
+			}
+			float4x4 globalTransformation;
+			if (currentBones[i].GetParentId() != -1) globalTransformation = currentBones[currentBones[i].GetParentId()].GetTransform() * currBone->GetTransform();
+			else
+				currBone->GetTransform();
+
+			auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
+			if (boneInfoMap.find(currentBones[i].GetName()) != boneInfoMap.end())
+			{
+				int index = boneInfoMap[currentBones[i].GetName()].id;
+				float4x4 offset = boneInfoMap[currentBones[i].GetName()].offset;
+				finalBoneMatrices[index] = globalTransformation * offset;
+			}
+		}
+	}
 }
 
 float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform)
@@ -287,7 +330,7 @@ float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4
 	transform.Decompose(position, rotation, scale);
 
 	float scaleFactor = 0.0f;
-	float midWayLength = currentTime - 0; 
+	float midWayLength = currentTime - 0;
 	float framesDiff = 60 - 0;
 	scaleFactor = midWayLength / framesDiff;
 	if (scaleFactor < 0) scaleFactor = 0.0f;
@@ -298,7 +341,7 @@ float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4
 	float4x4 rot = float4x4(Slerp(lastRotation, rotation, scaleFactor));
 	float4x4 sca = float4x4::Scale(Lerp(lastScale, scale, scaleFactor));
 
-	if (scaleFactor >= 1.0f) 
+	if (scaleFactor >= 1.0f)
 		interpolating = false;
 
 	return pos * rot * sca;
@@ -330,7 +373,7 @@ float4x4 AnimationComponent::InterpolateWithOneBone(float4x4& transform, Bone& b
 	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
 	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
 
-	if (scaleFactor >= 1.0f) 
+	if (scaleFactor >= 1.0f)
 		interpolating = false;
 
 	return pos * rot * sca;
@@ -366,7 +409,7 @@ float4x4 AnimationComponent::InterpolateWithOneBone(Bone& bone, float4x4& transf
 	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
 	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
 
-	if (scaleFactor >= 1.0f) 
+	if (scaleFactor >= 1.0f)
 		interpolating = false;
 
 	return pos * rot * sca;
@@ -421,9 +464,9 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 		JsonParsing animF = JsonParsing();
 
 		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "State", (*it).state.c_str());
-		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets",(*it).anim != nullptr ? (*it).anim.get()->GetAssetsPath().c_str() : "");
+		animF.SetNewJsonString(animF.ValueToObject(animF.GetRootValue()), "Path Anim Assets", (*it).anim != nullptr ? (*it).anim.get()->GetAssetsPath().c_str() : "");
 		animF.SetNewJsonBool(animF.ValueToObject(animF.GetRootValue()), "Loop", (*it).loop);
-		
+
 		file.SetValueToArray(newArray, animF.GetRootValue());
 	}
 
@@ -498,4 +541,31 @@ void AnimationComponent::GetAnimations()
 			}
 		}
 	}
+}
+
+const float4x4& AnimationComponent::UpdateBone(Bone* bone, Bone* lastBone, float4x4& parentTransform)
+{
+	RG_PROFILING_FUNCTION("Updating Bone");
+
+	if (!interpolating)
+	{
+		bone->Update(currentTime);
+	}
+	else if (lastBone && lastAnim != currAnim)
+	{
+		bone->UpdateInterpolation(*lastBone, currentTime, lastCurrentTime, interpolating, interpolatingVel);
+		if (!interpolating)
+		{
+			loopTime = 0.0f;
+			currentTime = 0.0f;
+		}
+	}
+
+	return parentTransform * bone->GetTransform();
+}
+
+std::map<std::string, BoneInfo>::const_iterator AnimationComponent::GetBoneInfo(std::string name, const std::map<std::string, BoneInfo>& map)
+{
+	RG_PROFILING_FUNCTION("Finding Bone Info in Map");
+	return map.find(name);
 }

@@ -75,7 +75,7 @@ void Bone2::Load()
 	RELEASE_ARRAY(buffer);
 }
 
-Bone::Bone(BoneData boneData) : data(boneData)
+Bone::Bone(BoneData boneData, int id) : data(boneData), parentId(id)
 {
 }
 
@@ -102,7 +102,7 @@ void Bone::UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTi
 	localTransform = InterpolatePosition(bone, animationTime, lastAnimTime, interpolating, velocity);
 }
 
-float4x4 Bone::InterpolatePosition(float animationTime)
+const float4x4& Bone::InterpolatePosition(float animationTime)
 {
 	if (data.keyFrames.size() == 1)
 		return data.keyFrames[0].matrix;
@@ -125,7 +125,7 @@ float4x4 Bone::InterpolatePosition(float animationTime)
 	float3 finalPosition = math::Lerp(p, p2, scaleFactor);
 	Quat finalRotation = math::Slerp(r, r2, scaleFactor);
 	float3 finalScale = math::Lerp(s, s2, scaleFactor);
-	
+
 	return float4x4::FromTRS(finalPosition, finalRotation, finalScale);
 }
 
@@ -140,7 +140,7 @@ float4x4 Bone::InterpolateRotation(float animationTime)
 	int p0Index = GetRotationIndex(animationTime);
 	int p1Index = p0Index + 1;
 	float scaleFactor = GetScaleFactor(data.rotations[p0Index].timeStamp, data.rotations[p1Index].timeStamp, animationTime);
-	
+
 	Quat finalRotation = Slerp(data.rotations[p0Index].orientation, data.rotations[p1Index].orientation, scaleFactor);
 	finalRotation = finalRotation.Normalized();
 
@@ -158,7 +158,7 @@ float4x4 Bone::InterpolateScaling(float animationTime)
 	float scaleFactor = GetScaleFactor(data.scales[p0Index].timeStamp,
 		data.scales[p1Index].timeStamp, animationTime);
 	float3 finalScale = math::Lerp(data.scales[p0Index].scale, data.scales[p1Index].scale, scaleFactor);
-	
+
 	return float4x4::Scale(finalScale);*/
 	return float4x4();
 }

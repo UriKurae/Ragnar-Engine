@@ -2,6 +2,7 @@
 
 #include "ResourceManager.h"
 #include <vector>
+#include <stack>
 #include "Globals.h"
 #include "FileSystem.h"
 #include "Application.h"
@@ -47,7 +48,7 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 		int keyScales = animation->mChannels[i]->mNumScalingKeys;
 		int keyRotations = animation->mChannels[i]->mNumRotationKeys;
 		int size = keyRotations;
-		
+
 		if (size < keyScales)
 		{
 			size = keyScales;
@@ -69,9 +70,12 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 
 			float3 scales;
 			if (k == keyScales) k = keyScales - 1;
-			scales.x = animation->mChannels[i]->mScalingKeys[k].mValue.x;
+			/*scales.x = animation->mChannels[i]->mScalingKeys[k].mValue.x;
 			scales.y = animation->mChannels[i]->mScalingKeys[k].mValue.y;
-			scales.z = animation->mChannels[i]->mScalingKeys[k].mValue.z;
+			scales.z = animation->mChannels[i]->mScalingKeys[k].mValue.z;*/
+			scales.x = 1.0f;
+			scales.y = 1.0f;
+			scales.z = 1.0f;
 
 			Quat rot;
 			if (l == keyRotations) l = keyRotations - 1;
@@ -82,7 +86,7 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 
 			keyframes.matrix = keyframes.matrix.FromTRS(pos, rot, scales);
 			keyframes.timeStamp = animation->mChannels[i]->mRotationKeys[l].mTime;
-		
+
 			if (size < keyScales)
 			{
 				keyframes.timeStamp = animation->mChannels[i]->mScalingKeys[k].mTime;
@@ -139,6 +143,8 @@ void AnimationImporter::ImportAnimation2(std::string& path, const aiScene* scene
 		}
 	}
 
+	ParentBones(bones, data);
+
 	std::string animName;
 	std::string assetsPath(path);
 	std::string name("__");
@@ -172,7 +178,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 	jsonName = jsonName.substr(0, index);
 	jsonName += ".json";
 
-	unsigned int header[4] = { duration, ticksPerSecond, boneData.size(), jsonName.size()};
+	unsigned int header[4] = { duration, ticksPerSecond, boneData.size(), jsonName.size() };
 
 	uint size = sizeof(header) + sizeof(BoneData) * boneData.size() + jsonName.size();
 
@@ -195,7 +201,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 		bone.SetNewJsonNumber(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), boneData[i].id);
 		itemName = "Name" + std::to_string(i);
 		bone.SetNewJsonString(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), boneData[i].name.c_str());
-		
+
 		int sizeKeys = boneData[i].keyFrames.size();
 		itemName = "KeyFrameSize" + std::to_string(i);
 		bone.SetNewJsonNumber(bone.ValueToObject(bone.GetRootValue()), itemName.c_str(), sizeKeys);
@@ -209,6 +215,9 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 
 		std::string rotationName = "Rotations" + std::to_string(i);
 		JSON_Array* rotationsArray = bone.SetNewJsonArray(bone.GetRootValue(), rotationName.c_str());
+
+		std::string parentIdName = "ParentId" + std::to_string(i);
+		bone.SetNewJsonNumber(bone.ValueToObject(bone.GetRootValue()), parentIdName.c_str(), boneData[i].parentId);
 
 		for (int j = 0; j < sizeKeys; ++j)
 		{
@@ -259,7 +268,7 @@ void AnimationImporter::SaveAnimation2(std::string& name, float duration, float 
 	json.SetValueToArray(array, hierJson.GetRootValue());
 
 	int jsonSize = json.SaveFile(jsonName.c_str());
-	
+
 	if (app->fs->Save(name.c_str(), buffer, size) > 0)
 		DEBUG_LOG("Animation %s saved succesfully", name.c_str());
 
@@ -302,7 +311,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 
 		// Load bones
 		JSON_Array* jsonArray = file.GetJsonArray(file.ValueToObject(file.GetRootValue()), "Bones");
-		
+
 		JsonParsing jsonBone = file.GetJsonArrayValue(jsonArray, 0);
 		std::string aux;
 		for (int i = 0; i < ranges[2]; ++i)
@@ -312,6 +321,9 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 			boneData.id = jsonBone.GetJsonNumber(aux.c_str());
 			aux = "Name" + std::to_string(i);
 			boneData.name = jsonBone.GetJsonString(aux.c_str());
+
+			std::string parentIdName = "ParentId" + std::to_string(i);
+			boneData.parentId = jsonBone.GetJsonNumber(parentIdName.c_str());
 
 			aux = "Positions" + std::to_string(i);
 			JSON_Array* positionsArray = jsonBone.GetJsonArray(jsonBone.ValueToObject(jsonBone.GetRootValue()), aux.c_str());
@@ -361,7 +373,7 @@ void AnimationImporter::LoadAnimation2(const char* path, float& ticks, float& ti
 				boneData.keyFrames.push_back(keys);
 			}
 
-			Bone bone(boneData);
+			Bone bone(boneData, boneData.parentId);
 			boneVector.push_back(bone);
 		}
 		jsonBone = file.GetJsonArrayValue(jsonArray, 1);
@@ -402,7 +414,7 @@ void AnimationImporter::ReadHierarchyData(HierarchyData& data, aiNode* node, std
 		BoneData boneData;
 		boneData.id = count;
 		boneData.name = data.name;
-		
+
 		Keys keyframe;
 		keyframe.matrix = data.transform;
 		keyframe.timeStamp = 0.0f;
@@ -857,7 +869,7 @@ void AnimationImporter::CreateMetaBones(std::string& library, std::string& asset
 	RELEASE_ARRAY(buffer);
 }
 
-void AnimationImporter::SaveBone(std::string& name,unsigned int numWeights, float* pos, float* rot, float* scale, std::vector<Weight>& weights)
+void AnimationImporter::SaveBone(std::string& name, unsigned int numWeights, float* pos, float* rot, float* scale, std::vector<Weight>& weights)
 {
 	uint header = numWeights;
 	uint size = sizeof(header);
@@ -923,7 +935,7 @@ void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
 					int size = dollarsVisited[j].keyFrames.size();
 					if (bones[i].keyFrames.size() < size)
 					{
-						for (int l = bones[i].keyFrames.size()-1; l < size-1; ++l)
+						for (int l = bones[i].keyFrames.size() - 1; l < size - 1; ++l)
 						{
 							bones[i].keyFrames.push_back(bones[i].keyFrames[l]);
 						}
@@ -933,9 +945,9 @@ void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
 					int index = 0;
 					for (k = 0; k < size; k++)
 					{
-						bones[i].keyFrames[k].matrix = bones[i].keyFrames[k].matrix * dollarsVisited[j].keyFrames[k].matrix ;
+						bones[i].keyFrames[k].matrix = bones[i].keyFrames[k].matrix * dollarsVisited[j].keyFrames[k].matrix;
 						bones[i].keyFrames[k].timeStamp = dollarsVisited[j].keyFrames[k].timeStamp;
-			
+
 						index = k;
 					}
 					if (bones[i].keyFrames.size() > k)
@@ -949,6 +961,41 @@ void AnimationImporter::FilterBones(std::vector<BoneData>& bones)
 				}
 				dollarsVisited.clear();
 			}
+		}
+	}
+}
+
+void AnimationImporter::ParentBones(std::vector<BoneData>& bones, HierarchyData& data)
+{
+	std::stack<HierarchyData> dataStack;
+
+	dataStack.push(data);
+
+	while (!dataStack.empty())
+	{
+
+		HierarchyData parent = dataStack.top();
+		dataStack.pop();
+
+		int idParent = 0;
+		// Find the Id from the parent in the bones vector
+		for (int i = 0; i < bones.size(); ++i)
+		{
+			if (bones[i].name == parent.name) idParent = bones[i].id;
+		}
+
+		// Iterate through the childrens of the parent
+		for (int i = 0; i < parent.childrenCount; ++i)
+		{
+			for (int j = 0; j < bones.size(); ++j)
+			{
+				// If we find the bone of the children in the bones vector, we can put his parent's ID
+				if (parent.children[i].name == bones[j].name)
+				{
+					bones[j].parentId = idParent;
+				}
+			}
+			dataStack.push(parent.children[i]);
 		}
 	}
 }
