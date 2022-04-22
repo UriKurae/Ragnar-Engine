@@ -158,11 +158,9 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 
 	ExtractBonesAndWeights(vertices, mesh, scene, bones);
-
-	//for (unsigned int i = 0; i < numBones; i++)
-	//{
-	//	AnimationImporter::ImportBones(path, mesh->mBones[i], json, uids, bonesUid);
-	//}
+	
+	if (!mesh->HasTangentsAndBitangents())
+		ComputeTangents(vertices, indices.size());
 
 	std::string meshName;
 	std::string assetsPath(path);
@@ -417,6 +415,30 @@ void MeshImporter::ExtractBonesAndWeights(std::vector<Vertex>& vertices, const a
 		}
 	}
 }
+
+void MeshImporter::ComputeTangents(std::vector<Vertex>& vertices, unsigned int indicesSize)
+{
+	for (int i = 0; i < indicesSize; i += 3)
+	{
+		float2 uv1 = { vertices[i * 2].texCoords };
+		float2 uv2 = { vertices[i * 2 + 1].texCoords };
+		float2 uv3 = { vertices[i * 2 + 2].texCoords };
+
+		float2 deltaUv1 = uv2 - uv1;
+		float2 deltaUv2 = uv3 - uv1;
+
+		float3 edge1 = vertices[i + 1].position - vertices[i].position;
+		float3 edge2 = vertices[i + 2].position - vertices[i].position;
+
+		float f = 1.0f / (deltaUv1.x * deltaUv2.y - deltaUv2.x * deltaUv1.y);
+
+		vertices[i].tangents.x = f * (deltaUv2.y * edge1.x - deltaUv1.y * edge2.x);
+		vertices[i].tangents.y = f * (deltaUv2.y * edge1.y - deltaUv1.y * edge2.y);
+		vertices[i].tangents.z = f * (deltaUv2.y * edge1.z - deltaUv1.y * edge2.z);
+		vertices[i].tangents.Normalize();
+	}
+}
+
 
 float4x4 MeshImporter::FromAssimpMatrixToMathGeoLib(aiMatrix4x4& matrix)
 {

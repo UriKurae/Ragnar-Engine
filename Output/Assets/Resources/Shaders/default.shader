@@ -31,6 +31,10 @@ out float vTextureAlpha;
 out vec4 fragPosLightSpace;
 out mat3 tbnMatrix;
 
+out vec3 tangentLightPos;
+out vec3 tangentViewPos;
+out vec3 tangentFragPos;
+
 void main()
 {
 	vec4 totalPosition = vec4(0.0f);
@@ -63,13 +67,10 @@ void main()
 	vCamPos = camPos;
 	vTextureAlpha = 1.0f;
 
-	mat3 normalMatrix = transpose(inverse(mat3(model)));
-	vec3 t = normalize(normalMatrix * tangents);
-	vec3 n = normalize(normalMatrix * normal);
-	t = normalize(t - dot(t, n) * n);
-	vec3 b = cross(n, t);
-
-	mat3 tbnMatrix = transpose(mat3(t, b, n));
+	vec3 T = normalize(vec3(model * vec4(tangents, 0.0)));
+	vec3 B = normalize(vec3(model * vec4(biTangents, 0.0)));
+	vec3 N = normalize(vec3(model * vec4(normal, 0.0)));
+	tbnMatrix = mat3(T, B, N);
 }
 
 
@@ -90,7 +91,7 @@ layout(location = 1) out vec4 fragNormals;
 
 layout(location = 0) uniform sampler2D tex;
 layout(location = 1) uniform sampler2D depthTexture;
-layout(location = 2) uniform sampler2D normalTexture;
+layout(location = 2) uniform sampler2D normalMap;
 uniform float normalsThickness;
 
 struct Material
@@ -202,7 +203,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
-	
+
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 	
@@ -299,8 +300,9 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 void main()
 {
 	//vec3 norm = normalize(vNormal);
-	vec3 norm = texture(normalTexture, vTexCoords).rgb;
-	norm = normalize(vNormal * 2 - 1);
+	vec3 norm = texture(normalMap, vTexCoords).rgb;
+	norm = normalize(norm * 2.0 - 1.0);
+	
 	vec3 viewDir = normalize(vCamPos - vPosition);
 	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);

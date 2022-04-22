@@ -548,6 +548,11 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
 	glUniform1i(textLoc3, 1);
 
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, normalMap->GetId());
+	textLoc3 = glGetUniformLocation(shader->GetId(), "normalMap");
+	glUniform1i(textLoc3, 2);
+
 	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
 		auto transforms = anim->GetFinalBoneMatrices();

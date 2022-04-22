@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 149246184,
+                    "pointer": 145794840,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 208846656,
+                    "characters": 204193600,
                     "drawnArea": false
                 }
             ]
@@ -121,7 +121,7 @@
                         0,
                         0
                     ],
-                    "Intensity": 4,
+                    "Intensity": 11,
                     "Shadows": true
                 }
             ]
@@ -141,20 +141,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -38.093219757080078,
+                        44.312896728515625,
                         0,
-                        190.25376892089844
+                        165.28062438964844
                     ],
                     "Quaternion": [
                         0,
-                        0.83676260709762573,
+                        0.56496793031692505,
                         0,
-                        -0.54756581783294678
+                        -0.82511287927627563
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        -1.1589047908782959,
-                        -3.1415927410125732
+                        -0,
+                        -1.2007888555526733,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -206,9 +206,9 @@
                     "Vertical Fov": 0.49674096703529358,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        7.7262420654296875,
+                        90.930351257324219,
                         55,
-                        210.27145385742188
+                        147.19903564453125
                     ],
                     "Type": 3,
                     "Zoom": 6,
@@ -217,14 +217,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -38.093219757080078,
+                        44.312896728515625,
                         0,
-                        190.25376892089844
+                        165.28062438964844
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 246.40036010742188,
+                    "Horizontal Angle": 291.19985961914062,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -536,10 +536,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 149246920,
+                    "pointer": 146370904,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 208846592,
+                    "enemies": 204193536,
                     "enemyGOs": 0
                 }
             ]
@@ -2056,7 +2056,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 149247104,
+                    "pointer": 146371856,
                     "type": 4,
                     "componentTable": 0
                 }
