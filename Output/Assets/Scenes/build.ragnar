@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 74665192,
+                    "pointer": 361207320,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 87998272,
+                    "characters": 131381792,
                     "drawnArea": false
                 }
             ]
@@ -76,9 +76,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        50,
-                        50,
-                        50
+                        -81.704513549804688,
+                        -15.667804718017578,
+                        -39.428794860839844
                     ],
                     "Quaternion": [
                         0.67389911413192749,
@@ -101,6 +101,11 @@
                     "Type": 8,
                     "Active": true,
                     "Light Type": 1,
+                    "Position": [
+                        -81.704513549804688,
+                        -15.667804718017578,
+                        -39.428794860839844
+                    ],
                     "Direction": [
                         0.67802053689956665,
                         -0.60160064697265625,
@@ -121,7 +126,8 @@
                         0,
                         0
                     ],
-                    "Intensity": 4
+                    "Intensity": 4,
+                    "Shadows": true
                 }
             ]
         },
@@ -178,9 +184,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.62939453125e-06,
-                        52.040283203125,
-                        -47.309310913085938
+                        0.0001678466796875,
+                        68.3187255859375,
+                        -62.107879638671875
                     ],
                     "Quaternion": [
                         0.38268345594406128,
@@ -201,29 +207,29 @@
                 },
                 {
                     "Near Plane": 1,
-                    "Far Plane": 135,
-                    "Vertical Fov": 0.46795535087585449,
+                    "Far Plane": 155,
+                    "Vertical Fov": 0.55328744649887085,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -68.770919799804688,
-                        52.040283203125,
-                        124.609130859375
+                        -75.718765258789062,
+                        68.3187255859375,
+                        137.67575073242188
                     ],
                     "Type": 3,
-                    "Zoom": 27,
+                    "Zoom": 5,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
+                    "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -46.559967041015625,
                         0,
                         82.836395263671875
                     ],
-                    "Movement Speed": 0.012000000104308128,
-                    "Rotation Speed": 2,
+                    "Movement Speed": 0.25,
+                    "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
                     "Horizontal Angle": 152,
-                    "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -535,10 +541,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 74665600,
+                    "pointer": 361205008,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 87998208,
+                    "enemies": 131381728,
                     "enemyGOs": 0
                 }
             ]
@@ -709,7 +715,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164062
+                        -46.558364868164063
                     ],
                     "Quaternion": [
                         0,
@@ -926,7 +932,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789062,
+                        -11.089859008789063,
                         0,
                         6.886474609375
                     ],
@@ -1001,7 +1007,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414062
+                        27.392837524414063
                     ],
                     "Quaternion": [
                         0,
@@ -1088,9 +1094,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945312,
+                        1.0000076293945313,
                         1,
-                        1.0000076293945312
+                        1.0000076293945313
                     ]
                 },
                 {
@@ -1743,6 +1749,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1792,6 +1827,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1841,6 +1905,35 @@
                     "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -1912,7 +2005,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         0,
@@ -1930,8 +2023,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1948,7 +2041,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 74663016,
+                    "pointer": 55340840,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1967,7 +2060,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         0,
@@ -1985,8 +2078,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2017,7 +2110,6 @@
                 {
                     "Type": 12,
                     "buttonText": "Options",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -2041,7 +2133,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         0,
@@ -2059,8 +2151,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2091,7 +2183,6 @@
                 {
                     "Type": 12,
                     "buttonText": "Main Menu",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -2115,7 +2206,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         -348.5,
@@ -2133,8 +2224,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2163,7 +2254,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         0,
@@ -2181,8 +2272,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2213,7 +2304,6 @@
                 {
                     "Type": 12,
                     "buttonText": "Resume",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -2602,7 +2692,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -2768,7 +2858,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         -326.5,
@@ -2786,8 +2876,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2816,7 +2906,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         -317.5,
@@ -2834,8 +2924,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2864,7 +2954,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 19,
+                    "Type": 18,
                     "Position": [
                         0,
                         -317.5,
@@ -2882,222 +2972,14 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
+                    "lastButtonWidth": 1313,
+                    "lastButtonHeight": 900,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
                     "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 442275375,
-            "Parent UUID": 417171234,
-            "Name": "Options",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 2028760720,
-            "Parent UUID": 442275375,
-            "Name": "optionsBack",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/Paul_low_blinn1_BaseColor.1001.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 2093945401,
-            "Parent UUID": 442275375,
-            "Name": "optionsBackButton",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        -400.0,
-                        -400.0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.35833331942558289,
-                        0.067500002682209015,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 215,
-                    "buttonHeight": 40.5,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Back",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -19.399999618530273,
-                    "textPositionY": -1.7999999523162842,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 2071234128,
-            "Parent UUID": 442275375,
-            "Name": "optionsBackImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        -400.0,
-                        -400.0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.35916665196418762,
-                        0.067500002682209015,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 215.5,
-                    "buttonHeight": 40.5,
-                    "lastButtonWidth": 1399,
-                    "lastButtonHeight": 805,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

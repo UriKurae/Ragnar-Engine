@@ -795,6 +795,24 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 	}
 }
 
+void GameObject::EnableDisableActive(bool ret)
+{
+	active = ret;
+	for (int i = 0; i < children.size(); i++)
+	{
+		children[i]->EnableDisableActive(ret);
+	}
+}
+
+void GameObject::EnableDisableStatic(bool ret)
+{
+	staticObj = ret;
+	for (int i = 0; i < children.size(); i++)
+	{
+		children[i]->EnableDisableStatic(ret);
+	}
+}
+
 Component* GameObject::GetComponent(ComponentType type)
 {
 	for (auto& comp : components)

@@ -27,10 +27,31 @@ namespace RagnarEngine
             get;
         }
 
+        public extern Vector3 rayCastA
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }        
+
+        public extern Vector3 rayCastB
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
+
         public extern Vector3 path
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
+        }
+
+        public extern float speed
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
         }
     }
 }

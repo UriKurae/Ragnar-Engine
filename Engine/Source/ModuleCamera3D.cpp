@@ -198,9 +198,17 @@ void ModuleCamera3D::ThrowRayCastOnlyOBB(std::set<GameObject*>& gameObjects, mat
 		{
 			picking = prevLine;
 			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
+			{
 				aabbMap[dNear] = (*it);
+				if ((*aabbMap.begin()).second == (*it))
+					hitPoint = prevLine.a + prevLine.Dir() * dFar * prevLine.Length();
+				break;
+			}		
 		}
 	}
+
+	if (hitPoint.Equals(float3::zero))
+		hitPoint = prevLine.b;
 }
 
 void ModuleCamera3D::RotateAround(float dt, math::float3& newFront, math::float3& newUp)

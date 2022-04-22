@@ -1,21 +1,5 @@
 #pragma once
 
-//#include "Component.h"
-//
-//#include "TransformComponent.h"
-//#include "MeshComponent.h"
-//#include "MaterialComponent.h"
-//#include "CameraComponent.h"
-//#include "AudioSourceComponent.h"
-//#include "ListenerComponent.h"
-//#include "AudioReverbZoneComponent.h"
-////#include "ParticleSystemComponent.h"
-//#include "BillboardParticleComponent.h"
-//
-//#include "MathGeoLib/src/MathGeoLib.h"
-//#include <string>
-//#include <vector>
-
 #include <string>
 #include <vector>
 
@@ -90,11 +74,11 @@ public:
 	inline float3 GetOffsetCM() { return offsetCM; };
 	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
 
+	void EnableDisableActive(bool ret);
+	void EnableDisableStatic(bool ret);
+
 	template<typename T>
 	T* GetComponent();
-
-	//Component* GetComponent(ComponentType type);
-
 	
 public:
 	std::string name;

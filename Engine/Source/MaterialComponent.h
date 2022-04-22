@@ -53,6 +53,7 @@ private:
 	std::shared_ptr<Texture> diff = nullptr;
 	std::shared_ptr<Shader> shader;
 	std::shared_ptr<Shader> outlineShader;
+	std::shared_ptr<Shader> shadowShader;
 
 
 	// TODO: Temporary, should go in Material.h
