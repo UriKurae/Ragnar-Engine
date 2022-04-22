@@ -8,7 +8,7 @@
 #include "GameObject.h"
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
-
+#include"ResourceManager.h"
 #include "GL/glew.h"
 
 ImageComponent::ImageComponent(GameObject* own)
@@ -20,7 +20,7 @@ ImageComponent::ImageComponent(GameObject* own)
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
 		own->CreateComponent(ComponentType::TRANFORM2D);
-		own->CreateComponent(ComponentType::MATERIAL);
+		principal=(MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 	}
 
 	app->userInterface->UIGameObjects.push_back(own);
@@ -39,19 +39,36 @@ bool ImageComponent::Update(float dt)
 {
 	return true;
 }
-
+void ImageComponent::SetActualColor(float Red, float Green, float Blue)
+{
+	actualColor.r = Red / 255;
+	actualColor.g = Green / 255;
+	actualColor.b = Blue / 255;
+}
 void ImageComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
-
-	glColor4f(color.r, color.g, color.b, color.a);
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+	planeToDraw->DrawPlane2D(principal->GetTexture().get());
 
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
+int ImageComponent::LoadTexture(std::string newTexture) 
+{
+	MaterialComponent* auxiliar = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
+	ResourceManager* aux =ResourceManager::GetInstance();
 
+	auxiliar->SetTexture(aux->GetInstance()->LoadResource(std::string(newTexture)));
+	materialList.push_back(auxiliar);
+
+	ResourceManager::ReleaseInstance();
+	return materialList.size();
+}
+void ImageComponent::UseTexture(int ID) 
+{
+	principal = materialList[ID-1];
+}
 void ImageComponent::OnEditor()
 {
 	if (ImGui::CollapsingHeader("ButtonComponent"))
@@ -65,6 +82,16 @@ void ImageComponent::OnEditor()
 bool ImageComponent::OnLoad(JsonParsing& node)
 {
 	alpha = node.GetJsonNumber("alpha");
+	
+	for (int a = 0; a < owner->components.size(); a++) {
+		if (owner->components[a]->type == ComponentType::MATERIAL) 
+		{
+			principal = (MaterialComponent*)owner->components[a];
+			break;
+		}
+		
+	}
+	
 	return true;
 }
 

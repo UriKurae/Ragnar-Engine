@@ -68,7 +68,13 @@ public:
 
 	float timer;
 	float currTimer;
+	float loopTimer;
+	float loopTimerOnEditor;
 
+	int tilesX;
+	int tilesY;
+
+	//float2 texCoords[4] = {};
 private:
 
 	struct EmitterData
@@ -115,4 +121,7 @@ private:
 	float spreadDistanceZ;
 
 	TransformComponent* transform;
+
+	float iterTileX = 0;
+	float iterTileY = 0;
 };

@@ -57,6 +57,8 @@
     <Compile Include="Assembly-CSharp\Default Components\Rigidbody.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Transform2D.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\UIInputBox.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\UIDropDown.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIButton.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UICheckbox.cs" />
     <Compile Include="Assembly-CSharp\Default Components\UIImage.cs" />
@@ -69,6 +71,10 @@
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Quaternion.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Time.cs" />
     <Compile Include="Assembly-CSharp\Ragnar Engine Utility\Vector3.cs" />
+    <Compile Include="Assets\Scripts\Credits.cs" />
+    <Compile Include="Assets\Scripts\AirEnemy.cs" />
+    <Compile Include="Assets\Scripts\BasicEnemy.cs" />
+    <Compile Include="Assets\Scripts\HunterSeeker.cs" />
     <Compile Include="Assets\Scripts\DialoguesManager.cs" />
     <Compile Include="Assets\Scripts\EnemyAbilities.cs" />
     <Compile Include="Assets\Scripts\LoseScreen.cs" />
@@ -80,6 +86,8 @@
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\EnemyInteractions.cs" />
+    <Compile Include="Assets\Scripts\TankEnemy.cs" />
+    <Compile Include="Assets\Scripts\UndistractableEnemy.cs" />
     <Compile Include="Assets\Scripts\WinScreen.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Characters.cs" />
