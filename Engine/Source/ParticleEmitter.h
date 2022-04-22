@@ -69,6 +69,7 @@ public:
 	float timer;
 	float currTimer;
 	float loopTimer;
+	float loopTimerOnEditor;
 
 	int tilesX;
 	int tilesY;

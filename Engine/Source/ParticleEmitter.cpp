@@ -45,7 +45,8 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
-	loopTimer = 0.2f;
+	loopTimer = 0.0f;
+	loopTimerOnEditor = 1.0f;
 	particleReference.color = { 1,0,0,1 };
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
@@ -163,16 +164,16 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	float2 texCoords[] = { { 0.0f / tilesX, 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX) , 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX), (1.0f / tilesY) + (0.0f / tilesY) }, {0.0f / tilesX, (1.0f / tilesY) + (0.0f / tilesY) } };
 	if (loopTimer <= 0.0f)
 	{
-		loopTimer = 0.2f;
+		loopTimer = loopTimerOnEditor;
 		iterTileX++;
 	}
 	
-	if (iterTileX == tilesX && tilesX > 1)
+	if (iterTileX >= tilesX)
 	{
 		iterTileX = 0;
 		iterTileY++;
 	}
-	if (iterTileY == tilesY)
+	if (iterTileY >= tilesY)
 	{
 		iterTileY = 0;
 	}
@@ -469,6 +470,8 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::DragInt("Tiles: X", &tilesX, 1.0f, 1, 100);
 		ImGui::DragInt("Tiles: Y", &tilesY, 1.0f, 1, 100);
 
+		ImGui::DragFloat("Loop Timer", &loopTimerOnEditor, 0.1f, 0.0f, 2.0f);
+
 		ImGui::Text("Texture");
 		if (ImGui::ImageButton((void*)texture->GetId(), { 150,150 }))
 			showTexMenu = true;
@@ -664,6 +667,10 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	particleReference.lifeTime = node.GetJsonNumber ("Particle Reference Lifetime");
 	particleReference.deltaRotation = node.GetJsonNumber ("Particle Reference Rotation Amount");
 
+	loopTimerOnEditor = node.GetJsonNumber("Loop Timer");
+	tilesX = node.GetJsonNumber("Tiles: X");
+	tilesY = node.GetJsonNumber("Tiles: Y");
+
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Texture Assets Path"))));
 	data.shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 	
@@ -714,6 +721,10 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Size Begin", particleReference.size);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Lifetime", particleReference.lifeTime);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Rotation Amount", particleReference.deltaRotation);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Loop Timer", loopTimerOnEditor);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Tiles: X", tilesX);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Tiles: Y", tilesY);
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Texture Assets Path", texture->GetAssetsPath().c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", data.shader->GetAssetsPath().c_str());
