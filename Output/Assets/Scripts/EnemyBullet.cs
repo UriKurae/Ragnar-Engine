@@ -3,7 +3,7 @@ using RagnarEngine;
 
 public class EnemyBullet : RagnarComponent
 {
-	public int vel = 40;
+	public int vel = 100;
 	private bool pendingToDelete = false;
 
 	public GameObject[] players = new GameObject[3];
@@ -16,7 +16,7 @@ public class EnemyBullet : RagnarComponent
 		Debug.Log(enemy.name);
 
 		Vector3 pos = enemy.transform.globalPosition;
-		pos.y += 1;
+		pos.y += 0.5f;
 		gameObject.transform.localPosition = pos;
 
 		Rigidbody bulletRb = gameObject.GetComponent<Rigidbody>();

@@ -3,16 +3,14 @@ using RagnarEngine;
 
 public class Player : RagnarComponent
 {
-    public int velocity = 1000;
-    public GameObject target = null;
+    public int hitPoints;
     public float force = 100;
-    public float rockSoundRadius = 4f;
     private bool pendingToDelete = false;
     private bool paused = false;
     private bool crouched = false;
     public bool invisible = false;
     private bool firstTime = false;
-
+    private bool dead = false;
 
     Rigidbody rb;
     Material materialComponent;
@@ -31,7 +29,13 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-        if (controled)
+        if (hitPoints <= 0 && !dead)
+        {
+            dead = true;
+            Die();
+        }
+
+        if (controled && hitPoints > 0)
         {
             if (state == (int)State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
             {
@@ -122,14 +126,18 @@ public class Player : RagnarComponent
     {
         if (other.gameObject.name == "EnemyBullet")
         {
-            //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
-            gameObject.GetComponent<Animation>().PlayAnimation("Death");
-            pendingToDelete = true;
-            if(GameObject.Find("Knife") != null)
-            {
-                InternalCalls.Destroy(GameObject.Find("Knife"));
-            }
+            hitPoints -= 1;
+        }
+    }
+
+    private void Die()
+    {
+        gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
+        gameObject.GetComponent<Animation>().PlayAnimation("Death");
+        pendingToDelete = true;
+        if (GameObject.Find("Knife") != null)
+        {
+            InternalCalls.Destroy(GameObject.Find("Knife"));
         }
     }
 

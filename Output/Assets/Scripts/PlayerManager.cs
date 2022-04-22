@@ -23,6 +23,10 @@ public class PlayerManager : RagnarComponent
         players = GameObject.FindGameObjectsWithTag("Player");
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Player>().hitPoints = characters[i].hitPoints;
+        }
     }
 
 	public void Update()

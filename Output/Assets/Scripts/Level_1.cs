@@ -8,7 +8,6 @@ public class Level_1 : RagnarComponent
 
     public void Start()
 	{
-		
         // PLAYERS
         characters = new Characters[3];
         // Player 1
@@ -17,7 +16,8 @@ public class Level_1 : RagnarComponent
             name = "Paul Atreides",
             prefabPath = "Player",
             state = State.NONE,
-            abilities = new Abilities[4]
+            abilities = new Abilities[4],
+            hitPoints = 3,
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -58,7 +58,8 @@ public class Level_1 : RagnarComponent
             name = "Chani",
             prefabPath = "Player_2",
             state = State.NONE,
-            abilities = new Abilities[4]
+            abilities = new Abilities[4],
+            hitPoints = 2,
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -99,7 +100,8 @@ public class Level_1 : RagnarComponent
             name = "Stilgar",
             prefabPath = "Player_3",
             state = State.NONE,
-            abilities = new Abilities[4]
+            abilities = new Abilities[4],
+            hitPoints = 4,
         };
         characters[2].abilities[0] = new Abilities
         {
