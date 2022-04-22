@@ -29,7 +29,7 @@ public:
 	void UpdateFov();
 
 	void SetNewFov(float horizontalFovRadians);
-	
+
 	void CompileBuffers();
 	bool CompareRotations(Quat& quat1, Quat& quat2);
 	void RequestShake(float strength, float duration);
@@ -70,9 +70,7 @@ private:
 	VertexBuffer* vbo;
 
 	//----------------------------------------------
-	/*float zoomMin = 45.0f;
-	float zoomMax = 20.0f;*/
-	float zoomSpeed = 0.5f;
+	float zoomSpeed = 1.0f;
 	float zoom = 10.0f;
 	float zoomMin = 0.0f;
 	float zoomMax = 30.0f;
@@ -89,11 +87,8 @@ private:
 	float rotationSpeed = 0.5f;
 	float radius = 20.0f;
 	float horizontalAngle = 0.0f;
-	
-	// Controls
-	bool arrowRot = false;
 
-	int targetUID = 0;
+	//int targetUID = 0;
 
 	float shakeStrength = 0.6f;
 	float shakeDuration = 1.0f;

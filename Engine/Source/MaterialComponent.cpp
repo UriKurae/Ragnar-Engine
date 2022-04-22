@@ -3,6 +3,10 @@
 
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+#include "GameView.h"
 
 #include "GameObject.h"
 #include "TransformComponent.h"
@@ -13,6 +17,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Lights.h"
+#include "Framebuffer.h"
 
 #include "GL/glew.h"
 #include <fstream>
@@ -31,6 +36,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	outlineShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/outlineStencil.shader")));
+	shadowShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/shadows.shader")));
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -406,26 +412,47 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (!this)
 		return;
 
+	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
+	
+	if (app->renderer3D->genShadows)
+	{
+		glViewport(0, 0, 4096, 4096);
+		shadowShader->Bind();
+		shadowShader->SetUniformMatrix4f("model", model.Transposed());
+		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
+
+		if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
+		{
+			auto transforms = anim->GetFinalBoneMatrices();
+			for (int i = 0; i < transforms.size(); ++i)
+				shadowShader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
+		}
+
+		return;
+	}
+
 	if (diff)
 		diff->Bind();
 
 	shader->Bind();
 
-	// Could not do view and proj each frame.
-	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	shader->SetUniformMatrix4f("model", model.Transposed());
+	shader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
+	Framebuffer* fbo;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
+		fbo = app->renderer3D->mainCameraFbo;
 	}
 	else
 	{
 		view = app->camera->matrixViewFrustum;
 		proj = app->camera->matrixProjectionFrustum;
+		fbo = app->renderer3D->fbo;
 	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
@@ -433,9 +460,15 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	normalMat.Inverse();
 	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
-	// Get matrices to animate the model
-	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
-	if (anim)
+	float thickness = std::string(owner->GetName()).find("Player") == std::string::npos ? 1 : 0;
+	shader->SetUniform1f("normalsThickness", thickness);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
+	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
+	glUniform1i(textLoc3, 1);
+
+	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
 		auto transforms = anim->GetFinalBoneMatrices();
 		for (int i = 0; i < transforms.size(); ++i)
@@ -460,6 +493,7 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
 		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
+		shader->SetUniform1i("dirLight.genShadows", app->renderer3D->dirLight->generateShadows);
 	}
 	else
 	{
@@ -520,7 +554,8 @@ void MaterialComponent::Unbind()
 	// Crash when creating a primitive
 	if (!this) return;
 	if (diff) diff->Unbind();
-	shader->Unbind();
+
+	app->renderer3D->genShadows ? shadowShader->Unbind() : shader->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)

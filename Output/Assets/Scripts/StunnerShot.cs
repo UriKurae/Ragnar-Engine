@@ -20,7 +20,7 @@ public class StunnerShot : RagnarComponent
         pos.y += 1;
         gameObject.transform.localPosition = pos;
 
-        Vector3 direction = agent.hitPosition - player.transform.globalPosition;
+        Vector3 direction = HitEnemy(agent, player);
         direction.y = 0;
 
         Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
@@ -37,5 +37,15 @@ public class StunnerShot : RagnarComponent
     public void OnCollisionEnter(Rigidbody other)
     {
         pendingToDelete = true;
+    }
+
+    private Vector3 HitEnemy(NavAgent agent, GameObject player)
+    {
+        GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+
+        if (obj != null) 
+            return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
+
+        return agent.hitPosition - player.transform.globalPosition;
     }
 }
