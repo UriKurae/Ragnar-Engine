@@ -3,7 +3,6 @@ using RagnarEngine;
 
 public class Boss : RagnarComponent
 {
-	Player test = new Player();
 	public struct BarrelSpawnLocation
 	{
 		public BarrelSpawnLocation(int num, Vector3 location, bool destroyed)
@@ -31,13 +30,11 @@ public class Boss : RagnarComponent
 	public BossState state;
 	NavAgent agent;
 
+	private Vector3 offset;
+	public int index = 0;
+
 	// Arrays for the players
 	GameObject[] players = new GameObject[3];
-
-	// Phase 2 mechanics
-
-	// Jump attack variables
-	bool playerDetected = false;
 
 	// Phase 3 mechanics
 
@@ -46,13 +43,23 @@ public class Boss : RagnarComponent
 	public int barrelCount = 0;
 	public int stunnedHits = 0;
 	float barrelCooldown = 0.0f;
-	bool shieldInmunity = false;
+	//bool shieldInmunity = false;
 	bool phase3Location = false;
+
+	// Phase 4 mechanics
+	int throwedRocks = 0;
+	float hitGroundCooldown = 0.0f;
+	bool rocksAvailable = false;
+	bool tired = false;
+	GameObject nextRock;
+	//float throwRockCooldown = 5.0f;
 
 	public void Start()
 	{
 		material = gameObject.GetComponent<Material>();
 		state = BossState.PHASE1;
+
+		offset = gameObject.GetSizeAABB();
 
 		players = GameObject.FindGameObjectsWithTag("Player");
 		rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -71,15 +78,10 @@ public class Boss : RagnarComponent
 			NextState();
 		}
 
-		if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
-		{
-			playerDetected = true;
-		}
-
 		if (state == BossState.PHASE2)
 		{
             // this instakills
-            if (playerDetected)
+            if (PerceptionCone(90))
             {
                 Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
                 Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
@@ -109,13 +111,49 @@ public class Boss : RagnarComponent
 				
 				if (this.gameObject.transform.localPosition == destination) phase3Location = false;
 
-				shieldInmunity = true;
+				//shieldInmunity = true;
             }
 			ExplodeBarrels();
 			GenerateBarrels();
 			if (barrelCount < 3) barrelCooldown -= Time.deltaTime;
 			Debug.Log(barrelCooldown.ToString());
         }
+		else if (state == BossState.PHASE4)
+        {
+			if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
+            {
+				GenerateRocks();
+				hitGroundCooldown = 5.0f;
+            }
+			else if (tired == false && rocksAvailable == true)
+            {
+				Debug.Log("ESTOY TIRANDOLA");
+				ThrowRock();
+				rocksAvailable = false;
+			}
+			else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
+			{
+                if (nextRock == null)
+                {
+					for (int i = 0; i < 5; ++i)
+					{
+						string rockPrefab = "Rock" + (i + 1);
+						nextRock = GameObject.Find(rockPrefab);
+						if (nextRock != null)
+							break;
+					}
+                }
+				else
+                {
+					agent.MoveTo(nextRock.transform.localPosition);
+                }
+			}
+			else
+            {
+				tired = true;
+				hitGroundCooldown -= Time.deltaTime;
+			}
+		}
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
         {
@@ -138,24 +176,15 @@ public class Boss : RagnarComponent
 				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
-				if (!shieldInmunity)
-				{
+				//if (!shieldInmunity)
+				//{
 					rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
 					material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
-				}
-				else state--;
+				//}
+				//else state--;
 				break;
 		}
     }
-
-	public void OnCollisionEnter(Rigidbody other)
-	{
-		if (other.gameObject.tag == "Backstab")
-        {
-			state++;
-			NextState();
-		}
-	}
 
 	private void GenerateEnemies()
     {
@@ -167,7 +196,31 @@ public class Boss : RagnarComponent
 		enemy1 = GameObject.Find("Enemy2Boss");
 		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(-5.0f, 0.0f, 0.0f));
 	}
+	private void GenerateRocks()
+    {
+		for (int i = 0; i < 5; ++i)
+		{
+			string rockPrefab = "Rock" + (i + 1);
+			GameObject rock = GameObject.Find(rockPrefab);
+			if (rock != null)
+				InternalCalls.Destroy(rock);
+		}
+		Vector3 bossPos = gameObject.transform.localPosition;
+        for (int i = 0; i < 5; ++i)
+        {
+			string rockPrefab = "Rock" + (i + 1);
+			InternalCalls.InstancePrefab(rockPrefab);
+			GameObject rock = GameObject.Find(rockPrefab);
 
+			if (i % 2 == 0) rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x, 25.0f, bossPos.z + i));
+			else rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x + i, 25.0f, bossPos.z));
+		}
+    }
+
+	private void ThrowRock()
+    {
+		InternalCalls.InstancePrefab("RockBoss");
+    }
 	private void GenerateBarrels()
     {
 		if (barrelCooldown <= 0.0f && barrelCount < 3)
@@ -199,5 +252,30 @@ public class Boss : RagnarComponent
 		{
 			material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
 		}
+	}
+
+	private bool PerceptionCone(int angleDegrees)
+	{
+		Vector3 bossPos = gameObject.transform.globalPosition;
+		Vector3 bossForward = gameObject.transform.forward;
+		Vector3 initPos = new Vector3(bossPos.x + (bossForward.x * offset.x * 0.6f), bossPos.y + 0.1f, bossPos.z + (bossForward.z * offset.z * 0.6f));
+
+		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length);
+		return (index == -1) ? false : true;
+	}
+	public void OnCollision(Rigidbody other)
+	{
+		if (other.gameObject.tag == "Backstab")
+		{
+			state++;
+			NextState();
+		}
+		else if(other.gameObject.tag == "Rocks")
+        {
+			Debug.Log("HOLA ");
+			rocksAvailable = true;
+			InternalCalls.Destroy(other.gameObject);
+			nextRock = null;
+        }
 	}
 }
