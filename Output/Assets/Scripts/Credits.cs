@@ -27,9 +27,9 @@ public class Credits : RagnarComponent
 		
 		Pos = new Vector3(0, 0, 0);
 
-		Pos.Set(-150, -(InternalCalls.GetRegionGame().y / 2)+200, 36.1f);
+		Pos.Set(-150, -(InternalCalls.GetRegionGame().y / 2)+230, 36.1f);
 		TextJob.GetComponent<Transform2D>().position2D = Pos;
-		Pos.Set(-40, -(InternalCalls.GetRegionGame().y / 2)+200, 36.1f);
+		Pos.Set(-40, -(InternalCalls.GetRegionGame().y / 2)+230, 36.1f);
 		TextName.GetComponent<Transform2D>().position2D = Pos;
 	}
 	public void Update()
