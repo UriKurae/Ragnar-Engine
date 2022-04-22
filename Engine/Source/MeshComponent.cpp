@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include "ModuleCamera3D.h"
+#include "ModuleRenderer3D.h"
 
 #include "Scene.h"
 

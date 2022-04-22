@@ -28,7 +28,6 @@ private:
 	void DrawDefaultInspector(GameObject* obj);
 	void DrawEditLists();
 
-	void RecursiveSetStaticObjects(GameObject* obj, bool ret);
 	std::string DrawList(const char* label, std::vector<std::string>* list, std::string& item);
 	void AddItem(const char* label);
 

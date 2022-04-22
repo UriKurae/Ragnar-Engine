@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ResourceManager.h"
+#include "ModuleUI.h"
 
 #include "AudioManager.h"
 
@@ -47,7 +48,10 @@ bool ModuleSceneManager::Start()
 	ResourceManager::GetInstance()->ImportAllResources();
 
 	ImportPrimitives();
-
+#ifndef DIST
+	app->userInterface->ImportToLibrary();
+#endif
+	
 	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
 	currentScene = nullptr;
 
@@ -65,6 +69,8 @@ bool ModuleSceneManager::Start()
 #else
 	PrefabManager::GetInstance()->ImportToLibrary();
 	DialogueSystem::GetInstance()->ImportToLibrary();
+	AudioManager::Get()->ImportToLibrary();
+	
 #endif
 
 	return true;

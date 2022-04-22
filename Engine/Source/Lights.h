@@ -1,5 +1,5 @@
 #pragma once
-#include "Math/float3.h"
+#include "Math/float4x4.h"
 
 enum class LightType
 {
@@ -14,10 +14,6 @@ class Light
 public:
     LightType type = LightType::NONE;
 
-    //float3 ambient = { 1,0,0 };
-    //float3 diffuse = { 1,1,1 };
-    //float3 specular = { 0,0,1 };
-    
     float intensity = 10.0f;
     float3 ambient = { 0.25f, 0.25f, 0.25f };
     float3 diffuse = { 0.75f, 0.75f, 0.75f };
@@ -37,15 +33,17 @@ public:
         intensity = 5.0f;
         
         type = LightType::DIRECTIONAL;
+        generateShadows = true;
+
+        lightSpace = float4x4::identity;
 
         Light();
     }
 
 public:
     float3 dir;
-    //loat3 ambient;
-    //loat3 diffuse;
-    //loat3 specular;
+    bool generateShadows;
+    float4x4 lightSpace;
 };
 
 class PointLight : public Light

@@ -4,7 +4,7 @@ using RagnarEngine;
 public class PlayerManager : RagnarComponent
 {
     public GameObject[] players;
-    int characterSelected = 0;
+    public int characterSelected = 0;
 
     public Characters[] characters = new Characters[3];
     public Characters playableCharacter;
@@ -28,7 +28,7 @@ public class PlayerManager : RagnarComponent
             name = "Paul Atreides",
             prefabPath = "Player",
             state = State.NONE,
-            abilities = new Abilities[2]
+            abilities = new Abilities[4]
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -37,15 +37,31 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Knife Area",
             charges = -1,
             cooldown = 25f
-        };
+        }; // Throwing Knife
         characters[0].abilities[1] = new Abilities
         {
             name = "Rock Throw",
-            prefabPath = "Rock",
+            prefabPath = "Eagle",
             prefabArea = "Rock Area",
             charges = -1,
             cooldown = 20f
-        };
+        }; // Rock/Eagle
+        characters[0].abilities[2] = new Abilities
+        {
+            name = "The Voice",
+            prefabPath = "Voice",
+            prefabArea = "Rock Area",
+            charges = -1,
+            cooldown = 20f
+        }; // The Voice
+        characters[0].abilities[3] = new Abilities
+        {
+            name = "BackStab",
+            prefabPath = "BackStab_2",
+            prefabArea = "BackStab Area",
+            charges = -1,
+            cooldown = 0f
+        }; // BackStab
 
         // Player 2
         characters[1] = new Characters
@@ -53,7 +69,7 @@ public class PlayerManager : RagnarComponent
             name = "Chani",
             prefabPath = "Player_2",
             state = State.NONE,
-            abilities = new Abilities[2]
+            abilities = new Abilities[4]
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -62,7 +78,7 @@ public class PlayerManager : RagnarComponent
             prefabArea = "BackStab Area",
             charges = -1,
             cooldown = 0f
-        };
+        }; // BackStab
         characters[1].abilities[1] = new Abilities
         {
             name = "Camouflage",
@@ -70,7 +86,23 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Backstab Area",
             charges = -1,
             cooldown = 30f
-        };
+        }; // Camouflage
+        characters[1].abilities[2] = new Abilities
+        {
+            name = "Spice Bomb",
+            prefabPath = "Spice Granade",
+            prefabArea = "BackStab Area",
+            charges = -1,
+            cooldown = 0f
+        }; // Spice Bomb
+        characters[1].abilities[3] = new Abilities
+        {
+            name = "Hunter Seeker",
+            prefabPath = "HunterSeeker",
+            prefabArea = "BackStab Area",
+            charges = -1,
+            cooldown = 4f
+        }; // Hunter Seeker
 
         // Player 3
         characters[2] = new Characters
@@ -78,7 +110,7 @@ public class PlayerManager : RagnarComponent
             name = "Stilgar",
             prefabPath = "Player_3",
             state = State.NONE,
-            abilities = new Abilities[2]
+            abilities = new Abilities[4]
         };
         characters[2].abilities[0] = new Abilities
         {
@@ -87,7 +119,7 @@ public class PlayerManager : RagnarComponent
             prefabArea = "SwordSlash Area",
             charges = -1,
             cooldown = 0f
-        };
+        }; // Sword Slash
         characters[2].abilities[1] = new Abilities
         {
             name = "Stunner",
@@ -95,7 +127,23 @@ public class PlayerManager : RagnarComponent
             prefabArea = "Stunner Area",
             charges = 4,
             cooldown = 5f
-        };
+        }; // Stunner Shot
+        characters[2].abilities[2] = new Abilities
+        {
+            name = "Whistle",
+            prefabPath = "Whistle",
+            prefabArea = "Whistle Area",
+            charges = -1,
+            cooldown = 6f
+        }; // Whistle
+        characters[2].abilities[3] = new Abilities
+        {
+            name = "Trap",
+            prefabPath = "Trap",
+            prefabArea = "Trap Area",
+            charges = 1,
+            cooldown = 0f
+        }; // Trap
         ///////////////////////////////////////////////////////////////////
 
         foreach (Characters c in characters)
@@ -146,76 +194,63 @@ public class PlayerManager : RagnarComponent
     private void AbilityStateChanger()
     {
         // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_1)
+        if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN)
         {
-            // Comprobador de cargas de habilidad. Si entra aquí, significa que la habilidad no tiene cargas
-            if(playableCharacter.abilities[0].charges == 0)
-            {
-                playableCharacter.state = State.NONE;
-            }
-            // Entra aquí si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
-            else if (!playableCharacter.abilities[0].onCooldown)
-            {
-                playableCharacter.state = State.ABILITY_1;
-
-                // Dibujado del área de rango.
-                if(!drawnArea)
-                {
-                    drawnArea = true;
-                    InternalCalls.InstancePrefab(playableCharacter.abilities[0].prefabArea);
-					area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    players[characterSelected].AddChild(area[0]);
-                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
-                }
-
-                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_1);
-            }
-            // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
-            else
-            {
-                Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[0].cooldown - playableCharacter.abilities[0].counter) + "seconds left to use it again!");
-                playableCharacter.state = State.NONE;
-            }
+            SpawnArea((int)State.ABILITY_1);
         }
 
         // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN || playableCharacter.state == State.ABILITY_2)
+        if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN)
         {
-            if (playableCharacter.abilities[1].charges == 0)
-            {
-                playableCharacter.state = State.NONE;
-            }
-            else if (!playableCharacter.abilities[1].onCooldown)
-            {
-                playableCharacter.state = State.ABILITY_2;
-
-                if (!drawnArea)
-                {
-                    drawnArea = true;
-                    InternalCalls.InstancePrefab(playableCharacter.abilities[1].prefabArea);
-                    area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                    players[characterSelected].AddChild(area[0]);
-                    area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
-                }
-
-                players[characterSelected].GetComponent<Player>().SetState((int)State.ABILITY_2);
-            }
-            else
-            {
-                Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[1].cooldown - playableCharacter.abilities[1].counter) + "seconds left to use it again!");
-                playableCharacter.state = State.NONE;
-
-            }
+            SpawnArea((int)State.ABILITY_2);
         }
 
         // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
-        // TODO
+        if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
+        {
+            SpawnArea((int)State.ABILITY_3);
+        }
 
         // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
-        // TODO
+        if (Input.GetKey(KeyCode.F) == KeyState.KEY_DOWN)
+        {
+            SpawnArea((int)State.ABILITY_4);
+        }
 
         // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
         if (playableCharacter.state != State.NONE) CastOrCancel();
+    }
+
+    private void SpawnArea(int ability)
+    {
+        // Comprobador de cargas de habilidad. Si entra aquí, significa que la habilidad no tiene cargas
+        if (playableCharacter.abilities[ability - 1].charges == 0)
+        {
+            playableCharacter.state = State.NONE;
+        }
+        // Entra aquí si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
+        else if (!playableCharacter.abilities[ability - 1].onCooldown)
+        {
+            playableCharacter.state = (State)ability;
+
+            // Dibujado del área de rango.
+            if (!drawnArea)
+            {
+                drawnArea = true;
+                InternalCalls.InstancePrefab(playableCharacter.abilities[ability - 1].prefabArea);
+                area = GameObject.FindGameObjectsWithTag("AbilityRange");
+                players[characterSelected].AddChild(area[0]);
+                area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
+            }
+
+            players[characterSelected].GetComponent<Player>().SetState(ability);
+        }
+        // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
+        else
+        {
+            Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
+            playableCharacter.state = State.NONE;
+        }
     }
 
     private void CastOrCancel()
@@ -231,35 +266,75 @@ public class PlayerManager : RagnarComponent
                 players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
             }
 
-            if (playableCharacter.state == State.ABILITY_1)
+            switch(playableCharacter.state)
             {
-                if (playableCharacter == characters[0])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFETHROW");
-                }
-                else if (playableCharacter == characters[1])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCRYSKNIFESTAB");
-                }
-                else if (playableCharacter == characters[2])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
-                }
-            }
-            if (playableCharacter.state == State.ABILITY_2)
-            {
-                if (playableCharacter == characters[0])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
-                }
-                else if (playableCharacter == characters[1])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
-                }
-                else if (playableCharacter == characters[2])
-                {
-                    players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
-                }
+                case State.ABILITY_1:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFETHROW");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCRYSKNIFESTAB");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
+                        }
+                        break;
+                    }
+                case State.ABILITY_2:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                        }
+                        break;
+                    }
+                case State.ABILITY_3:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                        }
+                        break;
+                    }
+                case State.ABILITY_4:
+                    {
+                        if (playableCharacter == characters[0])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                        }
+                        else if (playableCharacter == characters[1])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                        }
+                        else if (playableCharacter == characters[2])
+                        {
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                        }
+                        break;
+                    }
+                default:
+                    break;
+
             }
 
             // Instancia la habilidad en cuestión. 

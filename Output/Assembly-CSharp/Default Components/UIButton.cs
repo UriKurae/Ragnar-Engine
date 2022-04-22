@@ -13,6 +13,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern int GetButtonState();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetButtonState(int newState);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern Vector3 GetTextPosition();
@@ -21,10 +23,19 @@ namespace RagnarEngine
         public extern void SetTextPosition(float posx,float posy);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void SetAlpha(float NewAlpha);
+        public extern void SetButtonAlpha(float NewAlpha);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern float GetAlpha();
+        public extern float GetButtonAlpha();
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetButtonTextColor(float Red, float Green,float Blue);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 GetButtonTextColor();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetButtonGeneralColor(float Red, float Green, float Blue);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern Vector3 GetButtonGeneralColor();
         public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]

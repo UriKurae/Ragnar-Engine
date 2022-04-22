@@ -32,7 +32,9 @@ public:
 	inline float GetButtonHeight() { return buttonHeight; };
 	inline void SetButtonWidth(float width) { buttonWidth = width; };
 	inline void SetButtonHeight(float height) { buttonHeight = height; };
-
+	inline void SetShowEdit(bool Set) {showEdit = Set;};
+		
+	
 	void UpdateChilds(float3 newPosition, float2 newScale);
 private:
 	std::vector<float3> vertices_aux;

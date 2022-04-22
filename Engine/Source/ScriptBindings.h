@@ -373,6 +373,16 @@ void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
 	gameObject->active = value;
 }
+MonoBoolean GetActiveComponent(MonoObject* go)
+{
+	Component* comp = GetComponentMono<Component*>(go);
+	return comp->active;
+}
+void SetActiveComponent(MonoObject* go, MonoBoolean value)
+{
+	Component* comp = GetComponentMono<Component*>(go);
+	comp->active = value;
+}
 MonoObject* GetSizeAABB(MonoObject* go)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);

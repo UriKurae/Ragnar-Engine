@@ -294,6 +294,7 @@
     <ClInclude Include="Engine\Source\CommandsDispatcher.h" />
     <ClInclude Include="Engine\Source\C_RigidBody.h" />
     <ClInclude Include="Engine\Source\DialogueSystem.h" />
+    <ClInclude Include="Engine\Source\DropDownComponent.h" />
     <ClInclude Include="Engine\Source\ImageComponent.h" />
     <ClInclude Include="Engine\Source\LightComponent.h" />
     <ClInclude Include="Engine\Source\Lights.h" />
@@ -500,6 +501,7 @@
     <ClCompile Include="Engine\Source\Color.cpp" />
     <ClCompile Include="Engine\Source\Component.cpp" />
     <ClCompile Include="Engine\Source\DialogueSystem.cpp" />
+    <ClCompile Include="Engine\Source\DropDownComponent.cpp" />
     <ClCompile Include="Engine\Source\ImageComponent.cpp" />
     <ClCompile Include="Engine\Source\LightComponent.cpp" />
     <ClCompile Include="Engine\Source\CommandsDispatcher.cpp" />
@@ -516,6 +518,8 @@
     <ClCompile Include="Engine\Source\glmath.cpp" />
     <ClCompile Include="Engine\Source\HierarchyMenu.cpp" />
     <ClCompile Include="Engine\Source\IndexBuffer.cpp" />
+    <ClCompile Include="Engine\Source\InputActionComponent.cpp" />
+    <ClCompile Include="Engine\Source\InputActionMenu.cpp" />
     <ClCompile Include="Engine\Source\InspectorMenu.cpp" />
     <ClCompile Include="Engine\Source\JsonParsing.cpp" />
     <ClCompile Include="Engine\Source\ListenerComponent.cpp" />

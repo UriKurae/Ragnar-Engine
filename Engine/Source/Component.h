@@ -27,11 +27,12 @@ enum class ComponentType
 	UI_SLIDER =			15,
 	UI_TEXT =			16,
 	UI_INPUTBOX =		17,
-	TRANFORM2D =		18,
-	// 19
+	UI_DROPDOWN =       18,
+	TRANFORM2D =		19,
 	NAVAGENT =			20,
 	PARTICLE_SYSTEM =	21,
-	BILLBOARD =			22
+	BILLBOARD =			22,
+	INPUT_ACTION =		23,
 };
 
 enum class State
