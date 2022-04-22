@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 361207320,
+                    "pointer": 149246184,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 131381792,
+                    "characters": 208846656,
                     "drawnArea": false
                 }
             ]
@@ -101,11 +101,6 @@
                     "Type": 8,
                     "Active": true,
                     "Light Type": 1,
-                    "Position": [
-                        -81.704513549804688,
-                        -15.667804718017578,
-                        -39.428794860839844
-                    ],
                     "Direction": [
                         0.67802053689956665,
                         -0.60160064697265625,
@@ -146,19 +141,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -46.559967041015625,
+                        -38.093219757080078,
                         0,
-                        82.836395263671875
+                        190.25376892089844
                     ],
                     "Quaternion": [
                         0,
-                        0.97029572725296021,
+                        0.83676260709762573,
                         0,
-                        0.24192190170288086
+                        -0.54756581783294678
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.48869219422340393,
+                        -1.1589047908782959,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -184,15 +179,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0.0001678466796875,
-                        68.3187255859375,
-                        -62.107879638671875
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.38268345594406128,
+                        0.34202012419700623,
                         0,
                         0,
-                        0.92387950420379639
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -208,28 +203,28 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.55328744649887085,
+                    "Vertical Fov": 0.49674096703529358,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -75.718765258789062,
-                        68.3187255859375,
-                        137.67575073242188
+                        7.7262420654296875,
+                        55,
+                        210.27145385742188
                     ],
                     "Type": 3,
-                    "Zoom": 5,
+                    "Zoom": 6,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -46.559967041015625,
+                        -38.093219757080078,
                         0,
-                        82.836395263671875
+                        190.25376892089844
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 152,
+                    "Horizontal Angle": 246.40036010742188,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -541,10 +536,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 361205008,
+                    "pointer": 149246920,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 131381728,
+                    "enemies": 208846592,
                     "enemyGOs": 0
                 }
             ]
@@ -663,7 +658,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -715,7 +711,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164063
+                        -46.558364868164062
                     ],
                     "Quaternion": [
                         0,
@@ -736,7 +732,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -809,7 +806,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -882,7 +880,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -932,7 +931,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789063,
+                        -11.089859008789062,
                         0,
                         6.886474609375
                     ],
@@ -955,7 +954,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1007,7 +1007,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414063
+                        27.392837524414062
                     ],
                     "Quaternion": [
                         0,
@@ -1028,7 +1028,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1094,14 +1095,15 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945313,
+                        1.0000076293945312,
                         1,
-                        1.0000076293945313
+                        1.0000076293945312
                     ]
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1174,7 +1176,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1247,7 +1250,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1320,7 +1324,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1393,7 +1398,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1471,7 +1477,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/Small\/prop_rock_small_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/Props\/Rocks\/Small\/prop_rock_small_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1520,7 +1527,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_rock_medium_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_rock_medium_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1569,7 +1577,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_rock_medium_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_rock_medium_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1618,7 +1627,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_rock_medium_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_rock_medium_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1667,7 +1677,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1746,7 +1757,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1824,7 +1836,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -1902,7 +1915,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2023,14 +2037,15 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2041,7 +2056,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 55340840,
+                    "pointer": 149247104,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2078,32 +2093,36 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2151,32 +2170,36 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2224,14 +2247,15 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/UI_skill.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/UI_skill.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2272,32 +2296,36 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2395,7 +2423,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/BlockOut\/prop_rock_arc_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/BlockOut\/prop_rock_arc_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/BlockOut\/prop_rock_arc_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2692,7 +2721,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664063
+                        0.98471450805664062
                     ],
                     "RotationEditor": [
                         -0,
@@ -2876,14 +2905,15 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/UI_chra.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/UI_chra.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2924,14 +2954,15 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2972,14 +3003,15 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1313,
-                    "lastButtonHeight": 900,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

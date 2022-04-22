@@ -7,7 +7,7 @@ enum class TextureType
 {
 	NONE = -1,
 	DIFFUSE,
-	NORMAL,
+	NORMAL = 6, // Because of assimp textures
 };
 
 struct TextureParameters

@@ -457,7 +457,8 @@ bool MaterialComponent::Update(float dt)
 
 bool MaterialComponent::OnLoad(JsonParsing& node)
 {
-	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
+	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Diffuse Path"))));
+	normalMap = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Normal Map Path"))));
 	active = node.GetJsonBool("Active");
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 
@@ -469,7 +470,8 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", diff->GetAssetsPath().c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Diffuse Path", diff->GetAssetsPath().c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Normal Map Path", normalMap->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	
