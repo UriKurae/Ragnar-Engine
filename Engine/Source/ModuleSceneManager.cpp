@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ResourceManager.h"
+#include "ModuleUI.h"
 
 #include "AudioManager.h"
 
@@ -20,6 +21,8 @@
 #include "Bone.h"
 #include "Dialogs.h"
 #include "ShaderHelpers.h"
+#include "PrefabManager.h"
+#include "DialogueSystem.h"
 
 #include "imgui/imgui_stdlib.h"
 #include <fstream>
@@ -45,7 +48,10 @@ bool ModuleSceneManager::Start()
 	ResourceManager::GetInstance()->ImportAllResources();
 
 	ImportPrimitives();
-
+#ifndef DIST
+	app->userInterface->ImportToLibrary();
+#endif
+	
 	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
 	currentScene = nullptr;
 
@@ -58,9 +64,13 @@ bool ModuleSceneManager::Start()
 
 	referenceMap.clear();
 	
-	
 #ifdef DIST
 	Play();
+#else
+	PrefabManager::GetInstance()->ImportToLibrary();
+	DialogueSystem::GetInstance()->ImportToLibrary();
+	AudioManager::Get()->ImportToLibrary();
+	
 #endif
 
 	return true;

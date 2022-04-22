@@ -384,3 +384,19 @@ void AudioManager::ReadIDs()
 		}
 	}
 }
+
+
+void AudioManager::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Wwise/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string assetsPath = "Assets/Wwise/";
+		assetsPath += (*it);
+		std::string libraryPath = AUDIO_FOLDER;
+		libraryPath += (*it);
+		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+	}
+}

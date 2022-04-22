@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ModuleRenderer3D.h"
+#include "FileSystem.h"
 
 #include "Transform2DComponent.h"
 #include "ButtonComponent.h"
@@ -15,6 +16,7 @@
 #include "SliderComponent.h"
 #include "CheckBoxComponent.h"
 #include "TextComponent.h"
+#include "DropDownComponent.h"
 
 #include "freetype-2.10.0/include/ft2build.h"
 #include "Texture.h"
@@ -123,9 +125,10 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	SliderComponent* theSlider = nullptr;
 	CheckboxComponent* theCheckbox = nullptr;
 	ImageComponent* theImage = nullptr;
+	DropDownComponent* theDrop = nullptr;
 
 	float4x4 transform = float4x4::FromTRS(auxTrans->GetInternalPosition(), auxTrans->GetRotationQuat(), float3(auxTrans->GetScale().x, auxTrans->GetScale().y, 1));
-
+	theDrop = own->GetComponent<DropDownComponent>();
 	theButton = own->GetComponent<ButtonComponent>();
 	theSlider = own->GetComponent<SliderComponent>();
 	theCheckbox = own->GetComponent<CheckboxComponent>();
@@ -167,6 +170,11 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theSlider)
 	{
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		if (theSlider->GetFirstDraw()) {
 			int cont = 0;
 			for (int a = 0; a < own->components.size(); a++) {
@@ -179,10 +187,12 @@ void MyPlane::DrawPlane2D(Texture* texture)
 					else
 					{
 						ComponentTransform2D* r = (ComponentTransform2D*)own->components[a];
+
+						scl = math::float3(r->GetScale().x * CONVERSION_FACTOR, r->GetScale().y * CONVERSION_FACTOR, 1.0f);
+						center = math::float3(r->GetPosition().x, r->GetPosition().y, 1.0f);
+						model = model.Scale(scl, center);
+						model.SetTranslatePart(center);
 						transform = float4x4::FromTRS(r->GetInternalPosition(), r->GetRotationQuat(), float3(r->GetScale().x, r->GetScale().y, 1));
-
-
-
 						break;
 					}
 				}
@@ -193,6 +203,11 @@ void MyPlane::DrawPlane2D(Texture* texture)
 	}
 	else if (theCheckbox)
 	{
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 1.0f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 1.0f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theCheckbox->GetActualColor().r, theCheckbox->GetActualColor().g, theCheckbox->GetActualColor().b, theCheckbox->GetAlpha());
 	}
 	else if (theImage)
@@ -203,6 +218,17 @@ void MyPlane::DrawPlane2D(Texture* texture)
 		model = model.Scale(scl, center);
 		model.SetTranslatePart(center);
 		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theImage->GetActualColor().r, theImage->GetActualColor().g, theImage->GetActualColor().b, theImage->GetAlpha());
+	}
+	if (theDrop)
+	{
+
+		ComponentTransform2D* w = (ComponentTransform2D*)own->GetComponent<ComponentTransform2D>();
+		math::float3 scl = math::float3(w->GetScale().x * CONVERSION_FACTOR, w->GetScale().y * CONVERSION_FACTOR, 0.9f);
+		math::float3 center = math::float3(w->GetPosition().x, w->GetPosition().y, 0.9f);
+		model = model.Scale(scl, center);
+		model.SetTranslatePart(center);
+		//theButton->GetAlpha()
+		glUniform4f(glGetUniformLocation(shader->ID, "Color"), theDrop->GetActualColor().r, theDrop->GetActualColor().g, theDrop->GetActualColor().b, theDrop->GetAlpha());
 	}
 	auto p = frustum.ProjectionMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_TRUE, p.Transposed().ptr());
@@ -306,6 +332,7 @@ void Shadert::CheckCompileErrors(GLuint shader, std::string type)
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
+
 	focusedGameObject = nullptr;
 	UIGameObjectSelected = nullptr;
 }
@@ -318,25 +345,26 @@ ModuleUI::~ModuleUI()
 
 bool ModuleUI::Start()
 {
+
+	return true;
+}
+void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shadert* shade, uint VAO, uint VBO)
+{
+
+
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
 	{
 		//LOG("ERROR::FREETYPE: Could not init FreeType Library");
-		return false;
+		//return false;
 	}
 
 	FT_Face face;
 
-#ifdef DIST
-	const char* path = "Library/Fonts/Montserrat-Bold.ttf";
-#else
-	const char* path = "Assets/Resources/Fonts/Montserrat-Bold.ttf";
-#endif
-
-	if (FT_New_Face(ft, path, 0, &face))
+	if (FT_New_Face(ft, path.c_str(), 0, &face))
 	{
 		//LOG("ERROR::FREETYPE: Failed to load font");
-		return false;
+		//return false;
 	}
 	else {
 		// set size to load glyphs as
@@ -381,7 +409,7 @@ bool ModuleUI::Start()
 				IVec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
 				static_cast<unsigned int>(face->glyph->advance.x)
 			};
-			characters.insert(std::pair<char, Character>(c, character));
+			(*chara).insert(std::pair<char, Character>(c, character));
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -402,8 +430,7 @@ bool ModuleUI::Start()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	shader = new Shadert("", "");
-	return true;
+	//shade = new Shadert("", "");
 }
 void ModuleUI::updateText()
 {
@@ -411,10 +438,9 @@ void ModuleUI::updateText()
 	app->renderer3D->OnResize(size.z, size.w);
 	app->sceneManager->GetCurrentScene()->mainCamera->UpdateFovAndScreen(size.z, size.w);
 }
-void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color)
+void ModuleUI::RenderText(std::string text, float x, float y, float scale, float3 color, Shadert* shader, std::map<char, Character>* characters, uint VAO, uint VBO)
 {
 	// activate corresponding render state	
-
 
 	shader->Use();
 	updateText();
@@ -448,13 +474,13 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	glBindVertexArray(VAO);
 
 	// iterate through all characters
-	DrawCharacters(text, x, scale, y);
+	DrawCharacters(text, x, scale, y, characters,  VAO, VBO);
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	shader->StopUse();
 }
 // Draw all text letters 
-void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
+void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO)
 {
 	float auxX = x;
 	int line = 0;
@@ -462,7 +488,7 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y)
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++)
 	{
-		Character ch = characters[*c];
+		Character ch = (*characters)[*c];
 
 		bool newLine = false;
 		u = (*c);
@@ -548,7 +574,8 @@ void ModuleUI::HitPosibleFocusedObjects(const math::float4& viewport)
 		ButtonComponent* buttonComp = (ButtonComponent*)go->GetComponent<ButtonComponent>();
 		CheckboxComponent* checkComp = (CheckboxComponent*)go->GetComponent<CheckboxComponent>();
 		SliderComponent* sliderComp = (SliderComponent*)go->GetComponent<SliderComponent>();
-		if (buttonComp || checkComp || sliderComp)
+		DropDownComponent* DropComp = (DropDownComponent*)go->GetComponent<DropDownComponent>();
+		if (buttonComp || checkComp || sliderComp|| DropComp)
 		{
 			ComponentTransform2D* button = (ComponentTransform2D*)go->GetComponent<ComponentTransform2D>();
 
@@ -629,7 +656,9 @@ bool ModuleUI::Update(float dt)
 		if (ButtonComponent* buttonComp = go->GetComponent<ButtonComponent>())
 		{
 			textExample = buttonComp->GetText();
-			color = buttonComp->GetTextColor();
+			color.r = buttonComp->GetTextColor().x;
+			color.g = buttonComp->GetTextColor().y;
+			color.b = buttonComp->GetTextColor().z;
 		}
 		else if (CheckboxComponent* checkboxComp = go->GetComponent<CheckboxComponent>())
 		{
@@ -639,12 +668,11 @@ bool ModuleUI::Update(float dt)
 		else if (ImageComponent* imageComp = go->GetComponent<ImageComponent>())
 		{
 			//textExample = imageComp->GetText();
-			color = imageComp->GetColor();
+			//color = imageComp->GetColor();
 		}
 		else if (SliderComponent* sliderComp = go->GetComponent<SliderComponent>())
 		{
-			textExample = sliderComp->GetText().textt;
-			color = sliderComp->GetTextColor();
+			
 		}
 	}
 
@@ -666,6 +694,7 @@ void ModuleUI::OrderButtons()
 		}
 	}
 }
+
 void ModuleUI::Draw()
 {
 	for (int a = 0; a < UIGameObjects.size(); a++)
@@ -675,12 +704,14 @@ void ModuleUI::Draw()
 		if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 		{
 			go->Draw(nullptr);
-			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color);
+			
+			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color, button->shader, &button->characters, button->VAO, button->VBO);
 			button = nullptr;
 		}
 		else if (TextComponent* text = go->GetComponent<TextComponent>())
 		{
-			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color);
+			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color, text->shader, &text->characters, text->VAO, text->VBO);
+			
 			text = nullptr;
 		}
 		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
@@ -698,13 +729,17 @@ void ModuleUI::Draw()
 			go->Draw(nullptr);
 			slider = nullptr;
 		}
+		else if (DropDownComponent* Drop = go->GetComponent<DropDownComponent>())
+		{
+			go->Draw(nullptr);
+			RenderText(Drop->GetDropDownText().textt, Drop->GetDropDownText().X, Drop->GetDropDownText().Y, Drop->GetDropDownText().Scale, Drop->GetDropDownText().Color, Drop->shader, &Drop->characters, Drop->VAO, Drop->VBO);
+		}
 	}
 }
 
-
 bool ModuleUI::CleanUp()
 {
-	RELEASE(shader);
+	//RELEASE(shader);
 	return true;
 }
 
@@ -716,4 +751,19 @@ void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 	auto obj = FindUI(ui);
 	UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
+}
+
+void ModuleUI::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Resources/Fonts/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string assetsPath = "Assets/Resources/Fonts/";
+		assetsPath += (*it);
+		std::string libraryPath = FONTS_FOLDER;
+		libraryPath += (*it);
+		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+	}
 }

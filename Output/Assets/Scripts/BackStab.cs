@@ -29,12 +29,13 @@ public class BackStab : RagnarComponent
 			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
 			behind.y = -0.8f;
 			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
-			InternalCalls.Destroy(selectedEnemy);
+			// Con los distintos tipos de enemigos, switch al canto :D
+			selectedEnemy.GetComponent<EnemyInteractions>().pendingToDelete = true;
 		}
 		InternalCalls.Destroy(gameObject);
   
 	}
-	public bool Timer()//moltes gracies Isaac
+	public bool Timer() //moltes gracies Isaac
     {
 		float time1 = 0.5f;
 

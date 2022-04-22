@@ -99,7 +99,9 @@ public:
 	void NextLine();
 	inline std::string GetCurrentLine() { return currLine->line; }
 	inline std::string GetOwnerOfLine() { return currLine->author; }
-	
+
+	void ImportToLibrary();
+
 	bool createDialogue;
 
 private:

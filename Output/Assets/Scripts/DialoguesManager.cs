@@ -48,18 +48,18 @@ public class DialogueManager : RagnarComponent
 
         if (auth == "Paul")
 		{
-			paul.GetComponent<UIButton>().SetAlpha(1.0f);
-			chani.GetComponent<UIButton>().SetAlpha(0.0f);
+			paul.GetComponent<UIButton>().SetButtonAlpha(1.0f);
+			chani.GetComponent<UIButton>().SetButtonAlpha(0.0f);
 		}
 		else if (auth == "Chani")
 		{
-			paul.GetComponent<UIButton>().SetAlpha(0.0f);
-			chani.GetComponent<UIButton>().SetAlpha(1.0f);
+			paul.GetComponent<UIButton>().SetButtonAlpha(0.0f);
+			chani.GetComponent<UIButton>().SetButtonAlpha(1.0f);
 		}
 		else
 		{
-			paul.GetComponent<UIButton>().SetAlpha(0.0f);
-			chani.GetComponent<UIButton>().SetAlpha(0.0f);
+			paul.GetComponent<UIButton>().SetButtonAlpha(0.0f);
+			chani.GetComponent<UIButton>().SetButtonAlpha(0.0f);
 		}
 
     }

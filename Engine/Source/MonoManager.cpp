@@ -105,6 +105,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::get_childs", GetGameObjectChilds);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isActive", GetGameObjectIsActive);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isActive", SetGameObjectIsActive);
+	mono_add_internal_call("RagnarEngine.GameObject::GetActiveComponent", GetActiveComponent);
+	mono_add_internal_call("RagnarEngine.GameObject::SetActiveComponent", SetActiveComponent);
 	mono_add_internal_call("RagnarEngine.GameObject::GetSizeAABB", GetSizeAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::GetMinAABB", GetMinAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
@@ -154,9 +156,13 @@ bool MonoManager::Init(JsonParsing& node)
 	// NavAgent ==================
 	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_hitPosition", GetHitPosition);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastA", GetRayCastA);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastB", GetRayCastB);
 	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
 	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::set_speed", SetAgentSpeed);
+	mono_add_internal_call("RagnarEngine.NavAgent::get_speed", GetAgentSpeed);
 	// NavAgent ==================
 
 	// Particle System ==========
@@ -181,14 +187,30 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform2D::set_position2D", Set2DPosition);
 
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonState", GetButtonState);
+	mono_add_internal_call("RagnarEngine.UIButton::SetButtonState", SetButtonState);
 	mono_add_internal_call("RagnarEngine.UIButton::set_text", SetButtonText);
 	mono_add_internal_call("RagnarEngine.UIButton::get_text", GetButtonText);
 
-	mono_add_internal_call("RagnarEngine.UIButton::SetAlpha", SetAlpha);
-	mono_add_internal_call("RagnarEngine.UIButton::GetAlpha", GetAlpha);
+	mono_add_internal_call("RagnarEngine.UIImage::LoadTexture", LoadTexture);
+	mono_add_internal_call("RagnarEngine.UIImage::UseTexture", UseTexture);
+
+	mono_add_internal_call("RagnarEngine.UIImage::SetImageGeneralColor", SetImageGeneralColor);
+	mono_add_internal_call("RagnarEngine.UIImage::GetImageGeneralColor", GetImageGeneralColor);
+
+	mono_add_internal_call("RagnarEngine.UIImage::SetImageAlpha", SetImageAlpha);
+	mono_add_internal_call("RagnarEngine.UIImage::GetImageAlpha", GetImageAlpha);
+
+	mono_add_internal_call("RagnarEngine.UIButton::SetButtonAlpha", SetButtonAlpha);
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonAlpha", GetButtonAlpha);
 
 	mono_add_internal_call("RagnarEngine.UIButton::SetTextPosition", SetTextPosition);
 	mono_add_internal_call("RagnarEngine.UIButton::GetTextPosition", GetTextPosition);
+
+	mono_add_internal_call("RagnarEngine.UIButton::SetButtonTextColor", SetButtonTextColor);
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonTextColor", GetButtonTextColor);
+
+	mono_add_internal_call("RagnarEngine.UIButton::SetButtonGeneralColor", SetButtonGeneralColor);
+	mono_add_internal_call("RagnarEngine.UIButton::GetButtonGeneralColor", GetButtonGeneralColor);
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
@@ -200,6 +222,9 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIText::set_text", SetText);
 	mono_add_internal_call("RagnarEngine.UIText::get_text", GetText);
+
+	mono_add_internal_call("RagnarEngine.UIText::SetTextTextColor", SetTextTextColor);
+	mono_add_internal_call("RagnarEngine.UIText::GetTextTextColor", GetTextTextColor);
 	// UI =======================
 
 	// Dialogue System =======================
@@ -275,6 +300,15 @@ float3 MonoManager::UnboxVector(MonoObject* _obj)
 	mono_field_get_value(_obj, mono_class_get_field_from_name(klass, "z"), &ret.z);
 	return ret;
 }
+std::vector<GameObject*> MonoManager::UnboxArray(MonoArray* arr, int size)
+{
+	std::vector<GameObject*> obj;
+
+	for (int i = 0; i < size; ++i)
+		obj.push_back(GetGameObject(mono_array_get(arr, MonoObject*, i)));
+
+	return obj;
+}
 //ASK: Is this the worst idea ever? TOO SLOW
 Quat MonoManager::UnboxQuat(MonoObject* _obj)
 {
@@ -315,6 +349,17 @@ void MonoManager::DebugAllMethods(const char* nsName, const char* className, std
 	{
 		_data.push_back(mono_method_full_name(method2, 1));
 		//LOG(LogType::L_NORMAL, mono_method_full_name(method2, 1));
+	}
+}
+
+void MonoManager::DebugAllMethodsShortName(const char* nsName, const char* className, std::vector<std::string>& _data)
+{
+	void* iter = NULL;
+	MonoMethod* method2;
+	MonoClass* klass = mono_class_from_name(mono_assembly_get_image(app->moduleMono->assembly), nsName, className);
+	while (method2 = mono_class_get_methods(klass, &iter))
+	{
+		_data.push_back(mono_method_get_name(method2));
 	}
 }
 

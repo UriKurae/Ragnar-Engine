@@ -3,6 +3,10 @@
 
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+#include "GameView.h"
 
 #include "GameObject.h"
 #include "TransformComponent.h"
@@ -13,6 +17,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Lights.h"
+#include "Framebuffer.h"
 
 #include "GL/glew.h"
 #include <fstream>
@@ -31,6 +36,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	outlineShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/outlineStencil.shader")));
+	shadowShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/shadows.shader")));
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -132,18 +138,18 @@ void MaterialComponent::OnEditor()
 
 		ShowUniforms();
 
+		if (showShaderEditor)
+			ShaderEditor();
+
+		if (showTexMenu)
+			MenuTextureList();
+
+		if (showShaderMenu)
+			MenuShaderList();
+
 		ComponentOptions(this);
 		ImGui::Separator();
 	}
-
-	if (showShaderEditor)
-		ShaderEditor();
-
-	if (showTexMenu)
-		MenuTextureList();
-
-	if (showShaderMenu)
-		MenuShaderList();
 	
 	ImGui::PopID();
 }
@@ -160,6 +166,8 @@ void MaterialComponent::MenuTextureList()
 		if (ImGui::GetIO().MouseClicked[0]) showTexMenu = false;
 	}
 
+	std::vector<std::shared_ptr<Resource>> res;
+
 	std::vector<std::string> files;
 	app->fs->DiscoverFiles("Library/Textures/", files);
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
@@ -169,13 +177,21 @@ void MaterialComponent::MenuTextureList()
 			app->fs->GetFilenameWithoutExtension(*it);
 			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
 			uint uid = std::stoll(*it);
-			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
-			if (ImGui::Selectable(res->GetName().c_str()))
-			{
-				res->Load();
-				if (diff.use_count() - 1 == 1) diff->UnLoad();
-				SetTexture(res);
-			}
+			res.push_back(ResourceManager::GetInstance()->GetResource(uid));
+		}
+	}
+
+	std::sort(res.begin(), res.end(), [](std::shared_ptr<Resource> a, std::shared_ptr<Resource> b) {
+		return (a.get()->GetName() < b.get()->GetName());
+		});
+
+	for (std::vector<std::shared_ptr<Resource>>::iterator it = res.begin(); it != res.end(); ++it)
+	{
+		if (ImGui::Selectable((*it).get()->GetName().c_str()))
+		{
+			(*it)->Load();
+			if (diff.use_count() - 1 == 1) diff->UnLoad();
+			SetTexture((*it));
 		}
 	}
 
@@ -195,6 +211,11 @@ void MaterialComponent::MenuShaderList()
 
 	std::vector<std::string> files;
 	app->fs->DiscoverFiles("Assets/Resources/Shaders", files);
+
+	std::sort(files.begin(), files.end(), [](std::string a, std::string b) {
+		return (a < b);
+		});
+
 	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 	{
 		if ((*it).find(".shader") != std::string::npos)
@@ -391,36 +412,69 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (!this)
 		return;
 
+	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
+	
+	if (app->renderer3D->genShadows)
+	{
+		glViewport(0, 0, 4096, 4096);
+		shadowShader->Bind();
+		shadowShader->SetUniformMatrix4f("model", model.Transposed());
+		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
+
+		if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
+		{
+			auto transforms = anim->GetFinalBoneMatrices();
+			for (int i = 0; i < transforms.size(); ++i)
+				shadowShader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
+		}
+
+		return;
+	}
+
 	if (diff)
 		diff->Bind();
 
 	shader->Bind();
 
-	// Could not do view and proj each frame.
-	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	shader->SetUniformMatrix4f("model", model.Transposed());
+	shader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
+	Framebuffer* fbo;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
+		fbo = app->renderer3D->mainCameraFbo;
 	}
 	else
 	{
 		view = app->camera->matrixViewFrustum;
 		proj = app->camera->matrixProjectionFrustum;
+		fbo = app->renderer3D->fbo;
 	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
-	float4x4 normalMat = view;
-	normalMat.Inverse();
-	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
+	//float4x4 normalMat = view;
+	//normalMat.Inverse();
+	//shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
-	// Get matrices to animate the model
-	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
-	if (anim)
+	if(std::string(owner->GetName()).find("Player") != std::string::npos)
+		shader->SetUniform1f("normalsThickness", 0);
+	else if(std::string(owner->GetName()).find("Enemy") != std::string::npos)
+		shader->SetUniform1f("normalsThickness", 0);
+	else
+		shader->SetUniform1f("normalsThickness", 1);
+
+	//float thickness = ((std::string(owner->GetName()).find("Player") == std::string::npos) || (std::string(owner->GetName()).find("Enemy") == std::string::npos)) ? 1 : 0;
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
+	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
+	glUniform1i(textLoc3, 1);
+
+	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
 		auto transforms = anim->GetFinalBoneMatrices();
 		for (int i = 0; i < transforms.size(); ++i)
@@ -445,6 +499,7 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
 		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
+		shader->SetUniform1i("dirLight.genShadows", app->renderer3D->dirLight->generateShadows);
 	}
 	else
 	{
@@ -505,7 +560,8 @@ void MaterialComponent::Unbind()
 	// Crash when creating a primitive
 	if (!this) return;
 	if (diff) diff->Unbind();
-	shader->Unbind();
+
+	app->renderer3D->genShadows ? shadowShader->Unbind() : shader->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)
