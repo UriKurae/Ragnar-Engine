@@ -14,6 +14,7 @@
         },
         {
             "UUID": 1340834673,
+            "UUID": 1340834673,
             "Parent UUID": 417171234,
             "Name": "Directional Light",
             "Active": true,
@@ -219,7 +220,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_losescreen.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_losescreen.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -274,25 +276,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -347,25 +353,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -420,7 +430,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -468,7 +479,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -516,7 +528,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_game_over_text.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_game_over_text.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },

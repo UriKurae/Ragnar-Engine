@@ -219,7 +219,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -274,7 +275,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/MainMenuBox.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/MainMenuBox.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -322,25 +324,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -395,25 +401,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/transparent_tex.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selector.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path" : "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
