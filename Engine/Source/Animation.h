@@ -57,7 +57,6 @@ public:
 	void UnLoad() override;
 
 	Bone* FindBone(const std::string& name);
-	std::vector<Bone>& GetBones() { return bones; }
 
 	inline const float& GetTicks() const { return ticks; }
 	inline const float& GetTicksPerSecond() const { return ticksPerSecond; }

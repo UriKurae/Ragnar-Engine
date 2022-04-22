@@ -28,7 +28,6 @@ void Animation::Load()
 	if (id == 0)
 	{
 		AnimationImporter::LoadAnimation2(libraryPath.c_str(), ticks, ticksPerSecond, bones, hierarchy);
-		id = 1;
 	}
 }
 
