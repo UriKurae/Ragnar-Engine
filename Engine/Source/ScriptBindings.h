@@ -353,12 +353,16 @@ MonoObject* Destroy(MonoObject* go)
 
 MonoObject* AddComponentMono(MonoObject* go, int componentType)
 {
-	char* goName = mono_string_to_utf8(mono_object_to_string(go, 0));
-
 	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
 	Component* comp = owner->CreateComponent(static_cast<ComponentType>(componentType));
 
 	return app->moduleMono->ComponentToCS(comp);
+}
+
+void DeleteComponentMono(MonoObject* go, MonoObject* component)
+{
+	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
+	owner->RemoveComponent(GetComponentMono<Component*>(component));
 }
 
 MonoObject* FindGameObjectWithName(MonoObject* name)

@@ -76,6 +76,9 @@ namespace RagnarEngine
         extern internal T AddComponent<T>(int componentType);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern internal T DeleteComponent<T>(object component);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern GameObject AddChild(GameObject child);
 		
 		[MethodImplAttribute(MethodImplOptions.InternalCall)]

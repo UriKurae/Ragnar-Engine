@@ -88,6 +88,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
 	mono_add_internal_call("RagnarEngine.GameObject::AddComponent", AddComponentMono);
+	mono_add_internal_call("RagnarEngine.GameObject::DeleteComponent", DeleteComponentMono);
 
 	mono_add_internal_call("RagnarEngine.RayCast::HitToTag", HitToTag);
 	mono_add_internal_call("RagnarEngine.RayCast::PerceptionCone", PerceptionCone);
