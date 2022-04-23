@@ -67,12 +67,10 @@ public:
 		return false;
 	}
 	inline std::string GetCurrentLineXML() { 
-
-		LOG("%s",currLineXML->line.c_str());
-
 		return currLineXML->line; 
 	}
 	inline std::string GetOwnerOfLineXML() { return authorList[currLineXML->authorId]; }
+	inline int GetOwnerIdOfLineXML() { return currLineXML->authorId; }
 
 	std::string TextWrap(std::string text, int margin);
 	//-------------------------

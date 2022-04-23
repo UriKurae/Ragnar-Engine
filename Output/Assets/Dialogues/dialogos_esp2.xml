@@ -2,7 +2,7 @@
 
 	<!-- 
 		<Dialogue Id="">
-		<node Author="" Line=""> 
+		<node AuthorId="" Line=""> 
 		</node>
 	</Dialogue>
 	-->
@@ -57,60 +57,60 @@
 	
 	<!-- AuthorId:  0=Paul / 1=Chani -->
 	<Dialogue Id="2">
-		<node Author="1" Line="Los tenemos en nuestra propia puerta, la oportunidad ha venido hacia nosotros, hoy es el dia Paul, podemos acabar con esto de una vez."> 
+		<node AuthorId="1" Line="Los tenemos en nuestra propia puerta, la oportunidad ha venido hacia nosotros, hoy es el dia Paul, podemos acabar con esto de una vez."> 
 		</node>
-		<node Author="0" Line="Espera, no podemos actuar así sin más."> 
+		<node AuthorId="0" Line="Espera, no podemos actuar así sin más."> 
 		</node>
-		<node Author="1" Line="Creo que no nos queda otra."> 
+		<node AuthorId="1" Line="Creo que no nos queda otra."> 
 		</node>
 	</Dialogue>
 	
 	<!-- AuthorId:  0=Paul / 3=Rabban / 5=Soldado -->
 	<Dialogue Id="3">
-		<node Author="3" Line="Creia que serias mas astuto que tu padre, pero tienes naries para venir ante mi. Yo le tendria mas respeto a la muerte chico."> 
+		<node AuthorId="3" Line="Creia que serias mas astuto que tu padre, pero tienes naries para venir ante mi. Yo le tendria mas respeto a la muerte chico."> 
 		</node>
-		<node Author="0" Line="No tienes respeto por la vida de nadie, este desierto y su gente te lo haran pagar, tu actos no quedaran impunes Rabban."> 
+		<node AuthorId="0" Line="No tienes respeto por la vida de nadie, este desierto y su gente te lo haran pagar, tu actos no quedaran impunes Rabban."> 
 		</node>
-		<node Author="3" Line="Vas a lamentar tu existencia perro Atreides, voy a acabar con todo lo que hamas y conoces, y despues, y solo despues terminare contigo cuando no te quede absolutamente nada alimaña de Caladan."> 
+		<node AuthorId="3" Line="Vas a lamentar tu existencia perro Atreides, voy a acabar con todo lo que hamas y conoces, y despues, y solo despues terminare contigo cuando no te quede absolutamente nada alimaña de Caladan."> 
 		</node>
-		<node Author="5" Line="Señor, nos comunican que tras su marcha para liquidar a los Fremen se estan generando disturbios para sabotear la produccion de especia de la ciudad."> 
+		<node AuthorId="5" Line="Señor, nos comunican que tras su marcha para liquidar a los Fremen se estan generando disturbios para sabotear la produccion de especia de la ciudad."> 
 		</node>
-		<node Author="3" Line="Es una pena que no pueda se aqui y ahora, pero tendre tiempo para ver tu caída Principe de la nada."> 
+		<node AuthorId="3" Line="Es una pena que no pueda se aqui y ahora, pero tendre tiempo para ver tu caída Principe de la nada."> 
 		</node>
-		<node Author="3" Line="Esperad que llegue otro carguero y llevadlo a Palacio, tengo asuntos que solucionar en la ciudad antes de poder disfrutar de este espectáculo."> 
+		<node AuthorId="3" Line="Esperad que llegue otro carguero y llevadlo a Palacio, tengo asuntos que solucionar en la ciudad antes de poder disfrutar de este espectáculo."> 
 		</node>
 	</Dialogue>
 	
 	<!-- AuthorId:  0=Paul / 1=Chani / 5=Soldado / 6=Lady Jessica / 7=Stilgar -->
 	<Dialogue Id="4">
-		<node Author="6" Line="¿Te das cuenta de lo que podria haber pasado?"> 
+		<node AuthorId="6" Line="¿Te das cuenta de lo que podria haber pasado?"> 
 		</node>
-		<node Author="0" Line="Lo tenía delante, solo necesitaba algo más de tiempo."> 
+		<node AuthorId="0" Line="Lo tenía delante, solo necesitaba algo más de tiempo."> 
 		</node>
-		<node Author="7" Line="¡¿Tiempo? ¿Eres siquiera consciente de las vidas que hay en juego? No todo gira en torno al honor de los Atreides, Paul, te has arriesgado demasiado."> 
+		<node AuthorId="7" Line="¡¿Tiempo? ¿Eres siquiera consciente de las vidas que hay en juego? No todo gira en torno al honor de los Atreides, Paul, te has arriesgado demasiado."> 
 		</node>
-		<node Author="0" Line="¿Y qué habríais hecho vosotros?"> 
+		<node AuthorId="0" Line="¿Y qué habríais hecho vosotros?"> 
 		</node>
-		<node Author="7" Line="No puedes ir solo contra ese malnacido!"> 
+		<node AuthorId="7" Line="No puedes ir solo contra ese malnacido!"> 
 		</node>
-		<node Author="1" Line="Odio darle la razon, pero no puedes ir de cara a por el, al menos no sin su ayuda."> 
+		<node AuthorId="1" Line="Odio darle la razon, pero no puedes ir de cara a por el, al menos no sin su ayuda."> 
 		</node>
-		<node Author="7" Line="Vale, hay un cambio de planes, al menos esta incursión tambien se ha llevado a unos cuantos de los suyos."> 
+		<node AuthorId="7" Line="Vale, hay un cambio de planes, al menos esta incursión tambien se ha llevado a unos cuantos de los suyos."> 
 		</node>
-		<node Author="1" Line="¿Vas a ir a Arrakeen?"> 
+		<node AuthorId="1" Line="¿Vas a ir a Arrakeen?"> 
 		</node>
-		<node Author="7" Line="Esos soldados estarán tramando algo contra otros asentamientos, tenemos que hacer algo; Paul, Chani, vendreis conmigo y Lady Jessica, pero os mantendreis al margen."> 
+		<node AuthorId="7" Line="Esos soldados estarán tramando algo contra otros asentamientos, tenemos que hacer algo; Paul, Chani, vendreis conmigo y Lady Jessica, pero os mantendreis al margen."> 
 		</node>
-		<node Author="7" Line="No quiero lios y menos lamentar bajas"> 
+		<node AuthorId="7" Line="No quiero lios y menos lamentar bajas"> 
 		</node>
-		<node Author="0" Line="Pero y si..."> 
+		<node AuthorId="0" Line="Pero y si..."> 
 		</node>
-		<node Author="7" Line="Ni una palabra mas chico, haras lo que se te ordena."> 
+		<node AuthorId="7" Line="Ni una palabra mas chico, haras lo que se te ordena."> 
 		</node>
 	</Dialogue>
 	<!-- 
 	<Dialogue Id="">
-		<node Author="" Line=""> 
+		<node AuthorId="" Line=""> 
 		</node>
 	</Dialogue>
 	-->

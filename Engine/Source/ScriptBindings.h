@@ -176,6 +176,7 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	std::string p = path;
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
+	matComp->SetTextureType(TextureType::DIFFUSE);
 	matComp->SetTexture(newTexture);
 
 	/*res->Load();
@@ -371,7 +372,7 @@ MonoBoolean GetGameObjectIsActive(MonoObject* go)
 void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
-	gameObject->active = value;
+	gameObject->EnableDisableActive(value);
 }
 MonoBoolean GetActiveComponent(MonoObject* go)
 {
@@ -513,6 +514,10 @@ MonoString* GetDialogueLineAuthor()
 	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
 	//MHF
 	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLineXML().c_str());
+}
+
+int GetDialogueLineAuthorId() {
+	return DialogueSystem::GetInstance()->GetOwnerIdOfLineXML();
 }
 
 bool NextLine()

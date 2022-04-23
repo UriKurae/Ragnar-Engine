@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 184414472,
+                    "pointer": 7213176,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 205700928,
+                    "characters": 147439424,
                     "drawnArea": false
                 }
             ]
@@ -141,9 +141,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -52.500740051269531,
+                        -53.325843811035156,
                         0,
-                        85.294082641601562
+                        85.859054565429688
                     ],
                     "Quaternion": [
                         0,
@@ -179,15 +179,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        7.62939453125e-06,
-                        56.479866027832031,
-                        -51.345333099365234
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        7.9287429954888466e-09,
-                        -7.9287429954888466e-09,
-                        0.93969273567199707
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -203,23 +203,23 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.49674096703529358,
+                    "Vertical Fov": 0.48557034134864807,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -23.491382598876953,
-                        56.479866027832031,
-                        127.66079711914062
+                        -25.076576232910156,
+                        55,
+                        127.11569213867188
                     ],
                     "Type": 3,
-                    "Zoom": 0,
+                    "Zoom": 2,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -52.500740051269531,
+                        -53.325843811035156,
                         0,
-                        85.294082641601562
+                        85.859054565429688
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -542,10 +542,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 184413248,
+                    "pointer": 7213992,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 205700864,
+                    "enemies": 147439360,
                     "enemyGOs": 0
                 }
             ]
@@ -717,7 +717,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164062
+                        -46.558364868164063
                     ],
                     "Quaternion": [
                         0,
@@ -937,7 +937,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789062,
+                        -11.089859008789063,
                         0,
                         6.886474609375
                     ],
@@ -1013,7 +1013,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414062
+                        27.392837524414063
                     ],
                     "Quaternion": [
                         0,
@@ -1101,9 +1101,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945312,
+                        1.0000076293945313,
                         1,
-                        1.0000076293945312
+                        1.0000076293945313
                     ]
                 },
                 {
@@ -2044,7 +2044,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2062,7 +2062,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 184413928,
+                    "pointer": 7214808,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2100,7 +2100,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2178,7 +2178,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2256,7 +2256,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2305,7 +2305,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2730,7 +2730,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -2921,7 +2921,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2970,7 +2970,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3019,7 +3019,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3068,7 +3068,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3117,7 +3117,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3166,7 +3166,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3216,7 +3216,7 @@
             "UUID": 2068571281,
             "Parent UUID": 417171234,
             "Name": "Dialogue",
-            "Active": true,
+            "Active": false,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -3247,6 +3247,13 @@
                         1,
                         1
                     ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueManager",
+                    "pointer": 7212768,
+                    "type": 4,
+                    "componentTable": 0
                 }
             ]
         },
@@ -3254,7 +3261,7 @@
             "UUID": 883223667,
             "Parent UUID": 2068571281,
             "Name": "DialogueBox",
-            "Active": true,
+            "Active": false,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -3282,7 +3289,7 @@
                     "buttonWidth": 916,
                     "buttonHeight": 223.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3332,7 +3339,7 @@
             "UUID": 613043945,
             "Parent UUID": 2068571281,
             "Name": "DialogueText",
-            "Active": true,
+            "Active": false,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -3360,7 +3367,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3380,21 +3387,14 @@
                     "textColor.g": 1,
                     "textColor.b": 1,
                     "TextFile": "-"
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "DialogueManager",
-                    "pointer": 321024184,
-                    "type": 4,
-                    "componentTable": 0
                 }
             ]
         },
         {
-            "UUID": 130654469,
+            "UUID": 935212023,
             "Parent UUID": 2068571281,
-            "Name": "DialoguePaul",
-            "Active": true,
+            "Name": "DialogueAuth",
+            "Active": false,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
@@ -3422,7 +3422,7 @@
                     "buttonWidth": 908,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 751,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3434,114 +3434,7 @@
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1625323469,
-            "Parent UUID": 2068571281,
-            "Name": "DialogueChani",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        268,
-                        0
-                    ],
-                    "Scale": [
-                        1.5133333206176758,
-                        0.37166666984558105,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 908,
-                    "buttonHeight": 223,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": 0,
-                    "textPositionY": 0,
+                    "Type": 13,
                     "alpha": 1
                 }
             ]
