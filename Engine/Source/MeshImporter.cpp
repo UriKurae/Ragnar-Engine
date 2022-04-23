@@ -436,6 +436,9 @@ void MeshImporter::ComputeTangents(std::vector<Vertex>& vertices, unsigned int i
 		vertices[i].tangents.y = f * (deltaUv2.y * edge1.y - deltaUv1.y * edge2.y);
 		vertices[i].tangents.z = f * (deltaUv2.y * edge1.z - deltaUv1.y * edge2.z);
 		vertices[i].tangents.Normalize();
+
+		if (i + 3 >= indicesSize)
+			break;
 	}
 }
 
