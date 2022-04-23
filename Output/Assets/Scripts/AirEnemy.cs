@@ -32,6 +32,10 @@ public class AirEnemy : RagnarComponent
 
     float initialSpeed;
 
+    bool distracted = false;
+    float distractedTimer = -1f;
+    bool stunned = false;
+    float stunnedTimer = -1f;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -53,15 +57,24 @@ public class AirEnemy : RagnarComponent
     {
         if (!pendingToDelete && deathTimer == -1)
         {
-            Patrol();
-            if (PerceptionCone())
+            if (!pendingToDelete && deathTimer == -1)
             {
-                agents.speed = initialSpeed * 1.8f;
-                Shoot();
-            }
-            else
-            {
-                agents.speed = initialSpeed * 1.2f;
+                if (!stunned)
+                {
+                    if (!distracted)
+                    {
+                        Patrol();
+                    }
+                    if (PerceptionCone())
+                    {
+                        agents.speed = initialSpeed * 1.2f;
+                        Shoot();
+                    }
+                    else
+                    {
+                        agents.speed = initialSpeed;
+                    }
+                }
             }
         }
 
@@ -73,6 +86,26 @@ public class AirEnemy : RagnarComponent
                 gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
                 deathTimer = -1f;
                 pendingToDelete = true;
+            }
+        }
+
+        if (stunnedTimer >= 0)
+        {
+            stunnedTimer -= Time.deltaTime;
+            if (stunnedTimer < 0)
+            {
+                stunned = false;
+                stunnedTimer = -1f;
+            }
+        }
+
+        if (distractedTimer >= 0)
+        {
+            distractedTimer -= Time.deltaTime;
+            if (distractedTimer < 0)
+            {
+                distracted = false;
+                distractedTimer = -1f;
             }
         }
     }
@@ -168,7 +201,7 @@ public class AirEnemy : RagnarComponent
 
     public void Patrol()
     {
-        if (GameObject.Find("Rock") == null && agents.MovePath())
+        if (agents.MovePath())
         {
             stopState = true;
         }
@@ -196,5 +229,24 @@ public class AirEnemy : RagnarComponent
         {
             GotoNextPoint();
         }
+    }
+    public void Distraction(Vector3 distractionItem)
+    {
+        Vector3 newForward = (distractionItem - gameObject.transform.globalPosition).normalized;
+
+        double angle = Math.Atan2(newForward.x, newForward.z);
+
+        Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+
+        gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
+
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+    }
+
+    public void Stun(float timeStunned)
+    {
+        stunned = true;
+        stunnedTimer = timeStunned;
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
 }

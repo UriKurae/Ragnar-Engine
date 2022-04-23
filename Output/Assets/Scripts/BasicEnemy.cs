@@ -169,19 +169,16 @@ public class BasicEnemy : RagnarComponent
         if (other.gameObject.name == "Rock")
         {
             // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-
             distracted = true;
             distractedTimer = 5f;
-            //stoppedTime = 5f;
             Distraction(other.gameObject.transform.globalPosition);
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
         if (other.gameObject.name == "Eagle")
         {
             // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-            patrol = false;
-            stoppedTime = 6f;
-            agents.CalculatePath(other.gameObject.transform.globalPosition);
+            distracted = true;
+            distractedTimer = 6f;
+            Distraction(other.gameObject.transform.globalPosition);
         }
 
         //// Chani =======================================
@@ -189,10 +186,6 @@ public class BasicEnemy : RagnarComponent
         {
             // STUN (BLIND)
             Stun(5f);
-
-            //patrol = false;
-            //stoppedTime = 5f;
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
 
 
@@ -216,10 +209,6 @@ public class BasicEnemy : RagnarComponent
         {
             // STUN (BLIND)
             Stun(5f);
-
-            //patrol = false;
-            //stoppedTime = 5f;
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
     }
 
@@ -287,7 +276,7 @@ public class BasicEnemy : RagnarComponent
 
     public void Patrol()
     {
-        if (GameObject.Find("Rock") == null && agents.MovePath())
+        if (agents.MovePath())
         {
             stopState = true;
         }
@@ -319,18 +308,13 @@ public class BasicEnemy : RagnarComponent
 
     public void Distraction(Vector3 distractionItem)
     {
-        Vector3 forward = gameObject.transform.forward;
         Vector3 newForward = (distractionItem - gameObject.transform.globalPosition).normalized;
 
-        float dot = (forward.x * newForward.x) + (forward.y * newForward.y) + (forward.z * newForward.z);
-        float mag = forward.magnitude * newForward.magnitude;
-        float angleInRadians = (float)Math.Acos(dot / mag);
+        double angle = Math.Atan2(newForward.x, newForward.z);
 
-        Quaternion newRot = Quaternion.RotateAroundAxis(gameObject.transform.up, angleInRadians);
+        Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 
         gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
-
-        //gameObject.transform.localRotation = newRot;
 
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
