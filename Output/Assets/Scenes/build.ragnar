@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 87145776,
+                    "pointer": 133969944,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 100450112,
+                    "characters": 192003904,
                     "drawnArea": false
                 }
             ]
@@ -112,9 +112,9 @@
                         0
                     ],
                     "Diffuse": [
-                        0.96111112833023071,
-                        0.84633666276931763,
-                        0.69413578510284424
+                        1,
+                        0.77788156270980835,
+                        0.48333334922790527
                     ],
                     "Specular": [
                         0,
@@ -141,20 +141,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        117.32099151611328,
+                        -46.559967041015625,
                         0,
-                        96.470596313476562
+                        82.836395263671875
                     ],
                     "Quaternion": [
                         0,
-                        0.4817560613155365,
+                        0.97029572725296021,
                         0,
-                        -0.87630534172058105
+                        0.24192190170288086
                     ],
                     "RotationEditor": [
-                        -0,
-                        -1.0053150653839111,
-                        -0
+                        -3.1415927410125732,
+                        0.48869219422340393,
+                        -3.1415927410125732
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -217,14 +217,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        117.32099151611328,
+                        -46.559967041015625,
                         0,
-                        96.470596313476562
+                        82.836395263671875
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 302.39968872070312,
+                    "Horizontal Angle": 152,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -536,10 +536,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 87144416,
+                    "pointer": 133970488,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 100450048,
+                    "enemies": 192003840,
                     "enemyGOs": 0
                 }
             ]
@@ -2038,7 +2038,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2056,7 +2056,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 87143736,
+                    "pointer": 289681256,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2094,7 +2094,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2172,7 +2172,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2234,7 +2234,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -348.5,
+                        -331.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2250,7 +2250,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2299,7 +2299,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2788,6 +2788,9 @@
                             "Particle Reference Size Begin": 0.5,
                             "Particle Reference Lifetime": 5,
                             "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 0,
+                            "Tiles: X": 0,
+                            "Tiles: Y": 0,
                             "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
@@ -2848,6 +2851,9 @@
                             "Particle Reference Size Begin": 0.5,
                             "Particle Reference Lifetime": 3,
                             "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 0,
+                            "Tiles: X": 0,
+                            "Tiles: Y": 0,
                             "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
@@ -2893,7 +2899,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -326.5,
+                        -309.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2909,7 +2915,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2942,7 +2948,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -317.5,
+                        -300.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2958,7 +2964,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2991,7 +2997,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -317.5,
+                        -300.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3007,7 +3013,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3056,13 +3062,14 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3104,13 +3111,14 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3152,31 +3160,35 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 752,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
