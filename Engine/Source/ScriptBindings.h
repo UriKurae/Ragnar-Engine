@@ -205,6 +205,60 @@ void SetLightIntensity(MonoObject* go, float intensity)
 	lightComp->GetLight()->intensity = intensity;
 }
 
+float GetLightLinear(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->lin;
+}
+
+void SetLightLinear(MonoObject* go, float lin)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->lin = lin;
+}
+
+float GetLightQuadratic(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->quadratic;
+}
+
+void SetLightQuadratic(MonoObject* go, float quadratic)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->quadratic = quadratic;
+}
+
+float GetLightConstant(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->constant;
+}
+
+void SetLightConstant(MonoObject* go, float constant)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->quadratic = constant;
+}
+
 MonoObject* GetLightAmbient(MonoObject* go)
 {
 	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);

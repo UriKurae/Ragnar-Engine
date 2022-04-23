@@ -27,5 +27,25 @@ namespace RagnarEngine
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
         }
+
+        // ONLY FOR POINT LIGHT !!
+        public extern float linear
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
+
+        // ONLY FOR POINT LIGHT !!
+        public extern float quadratic
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
     }
 }

@@ -157,6 +157,12 @@ bool MonoManager::Init(JsonParsing& node)
 	// Light =====================
 	mono_add_internal_call("RagnarEngine.Light::get_intensity", GetLightIntensity);
 	mono_add_internal_call("RagnarEngine.Light::set_intensity", SetLightIntensity);
+	mono_add_internal_call("RagnarEngine.Light::get_linear", GetLightLinear);
+	mono_add_internal_call("RagnarEngine.Light::set_linear", SetLightLinear);
+	mono_add_internal_call("RagnarEngine.Light::get_quadratic", GetLightQuadratic);
+	mono_add_internal_call("RagnarEngine.Light::set_quadratic", SetLightQuadratic);
+	mono_add_internal_call("RagnarEngine.Light::get_constant", GetLightConstant);
+	mono_add_internal_call("RagnarEngine.Light::set_constant", SetLightConstant);
 	mono_add_internal_call("RagnarEngine.Light::get_ambient", GetLightAmbient);
 	mono_add_internal_call("RagnarEngine.Light::set_ambient", SetLightAmbient);
 	// Light =====================
