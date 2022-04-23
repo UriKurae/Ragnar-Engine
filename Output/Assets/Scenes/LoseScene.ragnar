@@ -195,7 +195,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         0,
                         0,
@@ -251,7 +251,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -556,
                         -100.5,
@@ -328,7 +328,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -558.5,
                         -196,
@@ -405,7 +405,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -568,
                         -206,
@@ -454,7 +454,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -565,
                         -109.5,
@@ -503,7 +503,7 @@
             "Components": [
                 {
                     "Active": true,
-                    "Type": 18,
+                    "Type": 19,
                     "Position": [
                         -399,
                         132.5,
