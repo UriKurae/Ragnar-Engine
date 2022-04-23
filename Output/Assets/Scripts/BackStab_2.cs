@@ -21,7 +21,6 @@ public class BackStab_2 : RagnarComponent
 	}
 	public void Update()
 	{
-		Debug.Log(enemies.Length.ToString());
 		selectedEnemy = CalculateDistancePlayerEnemies();
 		if (selectedEnemy != null && backstabed == false)
 		{
@@ -29,8 +28,8 @@ public class BackStab_2 : RagnarComponent
 			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
 			behind.y = -0.8f;
 			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
-			// Con los distintos tipos de enemigos, switch al canto :D
-			selectedEnemy.GetComponent<EnemyInteractions>().pendingToDelete = true;
+			selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
+			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
 		}
 		InternalCalls.Destroy(gameObject);
 

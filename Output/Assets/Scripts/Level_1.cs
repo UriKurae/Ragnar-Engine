@@ -23,7 +23,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Knife Throw",
             prefabPath = "Knife",
-            prefabArea = "Knife Area",
+            transformY = 1.32f,
+            intensity = 4.0f,
+            constant = 1.232f,
+            linear = -0.172f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 25f
         }; // Throwing Knife
@@ -31,7 +35,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Rock Throw",
             prefabPath = "Rock",
-            prefabArea = "Rock Area",
+            transformY = 1.15f,
+            intensity = 4.0f,
+            constant = 1.129f,
+            linear = -0.188f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 20f
         }; // Rock/Eagle
@@ -39,7 +47,11 @@ public class Level_1 : RagnarComponent
         {
             name = "The Voice",
             prefabPath = "Voice",
-            prefabArea = "Rock Area",
+            transformY = 1.32f,
+            intensity = 4.0f,
+            constant = 1.232f,
+            linear = -0.172f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 20f
         }; // The Voice
@@ -47,7 +59,11 @@ public class Level_1 : RagnarComponent
         {
             name = "BackStab",
             prefabPath = "BackStab_2",
-            prefabArea = "BackStab Area",
+            transformY = 0.2f,
+            intensity = 4.0f,
+            constant = 0.1f,
+            linear = -0.574f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 0f
         }; // BackStab
@@ -65,7 +81,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Backstab",
             prefabPath = "BackStab",
-            prefabArea = "BackStab Area",
+            transformY = 0.2f,
+            intensity = 4.0f,
+            constant = 0.1f,
+            linear = -0.574f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 0f
         }; // BackStab
@@ -73,7 +93,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Camouflage",
             prefabPath = "Camouflage",
-            prefabArea = "Backstab Area",
+            transformY = 0.2f,
+            intensity = 4.0f,
+            constant = 0.1f,
+            linear = -0.574f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 30f
         }; // Camouflage
@@ -81,7 +105,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Spice Grenade",
             prefabPath = "Spice Grenade",
-            prefabArea = "Rock Area",
+            transformY = 1.32f,
+            intensity = 4.0f,
+            constant = 1.232f,
+            linear = -0.172f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 0f
         }; // Spice Bomb
@@ -89,7 +117,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Hunter Seeker",
             prefabPath = "HunterSeeker",
-            prefabArea = "Rock Area",
+            transformY = 1.32f,
+            intensity = 4.0f,
+            constant = 1.232f,
+            linear = -0.172f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 4f
         }; // Hunter Seeker
@@ -107,7 +139,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Sword Slash",
             prefabPath = "SwordSlash",
-            prefabArea = "SwordSlash Area",
+            transformY = 0.2f,
+            intensity = 4.0f,
+            constant = 0.1f,
+            linear = -0.574f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 0f
         }; // Sword Slash
@@ -115,7 +151,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Stunner",
             prefabPath = "StunnerShot",
-            prefabArea = "Stunner Area",
+            transformY = 1.32f,
+            intensity = 4.0f,
+            constant = 1.232f,
+            linear = -0.172f,
+            quadratic = 0f,
             charges = 4,
             cooldown = 5f
         }; // Stunner Shot
@@ -123,7 +163,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Whistle",
             prefabPath = "Whistle",
-            prefabArea = "Whistle Area",
+            transformY = 1.12f,
+            intensity = 4.0f,
+            constant = 1.232f,
+            linear = -0.201f,
+            quadratic = 0f,
             charges = -1,
             cooldown = 6f
         }; // Whistle
@@ -131,7 +175,11 @@ public class Level_1 : RagnarComponent
         {
             name = "Trap",
             prefabPath = "Trap",
-            prefabArea = "Trap Area",
+            transformY = 0.12f,
+            intensity = 4.0f,
+            constant = 0.100f,
+            linear = -0.942f,
+            quadratic = 0f,
             charges = 1,
             cooldown = 0f
         }; // Trap

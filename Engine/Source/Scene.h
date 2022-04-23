@@ -38,7 +38,23 @@ public:
 	GameObject* CreateGameObjectParent(const char* name, GameObject* child);
 	inline std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
-		return root->GetChilds(); 
+		std::stack<GameObject*> objects;
+		std::vector<GameObject*> sceneObjects;
+		objects.push(root);
+
+		while (!objects.empty())
+		{
+			GameObject* go = objects.top();
+			objects.pop();
+
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+			{
+				objects.push(go->GetChilds()[i]);
+				sceneObjects.push_back(go->GetChilds()[i]);
+			}
+		}
+
+		return sceneObjects; 
 	}
 
 	inline GameObject* GetRoot() const { return root; }

@@ -8,6 +8,7 @@ public class AirEnemy : RagnarComponent
     public NavAgent agents;
     public GameObject[] waypoints;
     private int destPoint = 0;
+    public EnemyState state;
 
     // States
     public bool patrol;
@@ -55,90 +56,100 @@ public class AirEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete && deathTimer == -1)
+        if(state != EnemyState.DEATH)
         {
             if (!pendingToDelete && deathTimer == -1)
             {
-                if (!stunned)
+                if (!pendingToDelete && deathTimer == -1)
                 {
-                    if (!distracted)
+                    if (!stunned)
                     {
-                        Patrol();
-                    }
-                    if (PerceptionCone())
-                    {
-                        agents.speed = initialSpeed * 1.2f;
-                        Shoot();
-                    }
-                    else
-                    {
-                        agents.speed = initialSpeed;
+                        if (!distracted)
+                        {
+                            Patrol();
+                        }
+                        if (PerceptionCone())
+                        {
+                            agents.speed = initialSpeed * 1.2f;
+                            Shoot();
+                        }
+                        else
+                        {
+                            agents.speed = initialSpeed;
+                        }
                     }
                 }
             }
-        }
 
-        if (deathTimer >= 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (deathTimer >= 0)
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
-                deathTimer = -1f;
-                pendingToDelete = true;
+                deathTimer -= Time.deltaTime;
+                if (deathTimer < 0)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    deathTimer = -1f;
+                    pendingToDelete = true;
+                }
             }
-        }
 
-        if (stunnedTimer >= 0)
-        {
-            stunnedTimer -= Time.deltaTime;
-            if (stunnedTimer < 0)
+            if (stunnedTimer >= 0)
             {
-                stunned = false;
-                stunnedTimer = -1f;
+                stunnedTimer -= Time.deltaTime;
+                if (stunnedTimer < 0)
+                {
+                    stunned = false;
+                    stunnedTimer = -1f;
+                }
             }
-        }
 
-        if (distractedTimer >= 0)
-        {
-            distractedTimer -= Time.deltaTime;
-            if (distractedTimer < 0)
+            if (distractedTimer >= 0)
             {
-                distracted = false;
-                distractedTimer = -1f;
+                distractedTimer -= Time.deltaTime;
+                if (distractedTimer < 0)
+                {
+                    distracted = false;
+                    distractedTimer = -1f;
+                }
             }
         }
     }
 
     public void OnCollision(Rigidbody other)
     {
-        if (other.gameObject.name == "Knife")
+        if (state != EnemyState.DEATH)
         {
-            deathTimer = 4f;
-            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            if (other.gameObject.name == "Knife")
+            {
+                deathTimer = 4f;
+                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
 
-            // WHEN RUNES FUNCTIONAL
-            // deathTimer = 0f;
-        }
-        if (other.gameObject.name == "StunnerShot")
-        {
-            deathTimer = 2f;
-            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
-        }
-        if (other.gameObject.name == "HunterSeeker")
-        {
-            // WHEN RUNES FUNCTIONAL
+                // WHEN RUNES FUNCTIONAL
+                // deathTimer = 0f;
+            }
+            if (other.gameObject.name == "StunnerShot")
+            {
+                deathTimer = 2f;
+                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            }
+            if (other.gameObject.name == "HunterSeeker")
+            {
+                // WHEN RUNES FUNCTIONAL
+
+            }
             // EXPLOSION AREA
         }
     }
 
     public void OnTrigger(Rigidbody other)
     {
-        //// Stilgar =====================================
-        if (other.gameObject.name == "Trap")
+        if (state != EnemyState.DEATH)
         {
-            pendingToDelete = true;
-            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            //// Stilgar =====================================
+            if (other.gameObject.name == "Trap")
+            {
+                pendingToDelete = true;
+                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            }
         }
     }
 
