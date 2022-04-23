@@ -91,7 +91,7 @@ void Bone::Update(float animationTime)
 	//float4x4 translation = InterpolatePosition(animationTime);
 	//float4x4 rotation = InterpolateRotation(animationTime);
 	//float4x4 scale = InterpolateScaling(animationTime);
-	localTransform = InterpolatePosition(animationTime);
+	localTransform = Interpolate(animationTime);
 }
 
 void Bone::UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity)
@@ -99,15 +99,15 @@ void Bone::UpdateInterpolation(Bone& bone, float animationTime, float lastAnimTi
 	/*float4x4 translation = InterpolatePosition(bone, animationTime, lastAnimTime, interpolating, velocity);
 	float4x4 rotation = InterpolateRotation(bone, animationTime, lastAnimTime, interpolating, velocity);
 	float4x4 scale = InterpolateScaling(bone, animationTime, lastAnimTime, interpolating, velocity);*/
-	localTransform = InterpolatePosition(bone, animationTime, lastAnimTime, interpolating, velocity);
+	localTransform = InterpolateBetweenLastAnim(bone, animationTime, lastAnimTime, interpolating, velocity);
 }
 
-float4x4 Bone::InterpolatePosition(float animationTime)
+const float4x4& Bone::Interpolate(float animationTime)
 {
 	if (data.keyFrames.size() == 1)
 		return data.keyFrames[0].matrix;
 
-	int p0Index = GetPositionIndex(animationTime);
+	int p0Index = GetIndex(animationTime);
 	int p1Index = p0Index + 1;
 	float scaleFactor = GetScaleFactor(data.keyFrames[p0Index].timeStamp,
 		data.keyFrames[p1Index].timeStamp, animationTime);
@@ -129,43 +129,9 @@ float4x4 Bone::InterpolatePosition(float animationTime)
 	return float4x4::FromTRS(finalPosition, finalRotation, finalScale);
 }
 
-float4x4 Bone::InterpolateRotation(float animationTime)
+float4x4 Bone::InterpolateBetweenLastAnim(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity)
 {
-	/*if (data.rotations.size() == 1)
-	{
-		Quat rotation = data.rotations[0].orientation.Normalized();
-		return float4x4(rotation);
-	}
-
-	int p0Index = GetRotationIndex(animationTime);
-	int p1Index = p0Index + 1;
-	float scaleFactor = GetScaleFactor(data.rotations[p0Index].timeStamp, data.rotations[p1Index].timeStamp, animationTime);
-	
-	Quat finalRotation = Slerp(data.rotations[p0Index].orientation, data.rotations[p1Index].orientation, scaleFactor);
-	finalRotation = finalRotation.Normalized();
-
-	return float4x4(finalRotation);*/
-	return float4x4();
-}
-
-float4x4 Bone::InterpolateScaling(float animationTime)
-{
-	/*if (data.scales.size() == 1)
-		return float4x4::Scale(data.scales[0].scale);
-
-	int p0Index = GetScalingIndex(animationTime);
-	int p1Index = p0Index + 1;
-	float scaleFactor = GetScaleFactor(data.scales[p0Index].timeStamp,
-		data.scales[p1Index].timeStamp, animationTime);
-	float3 finalScale = math::Lerp(data.scales[p0Index].scale, data.scales[p1Index].scale, scaleFactor);
-	
-	return float4x4::Scale(finalScale);*/
-	return float4x4();
-}
-
-float4x4 Bone::InterpolatePosition(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity)
-{
-	int index = bone.GetPositionIndex(lastAnimTime);
+	int index = bone.GetIndex(lastAnimTime);
 	float scaleFactor = GetScaleFactor(0.0f, velocity, animationTime);
 
 	if (scaleFactor >= 1.0f)
@@ -188,64 +154,7 @@ float4x4 Bone::InterpolatePosition(Bone& bone, float animationTime, float lastAn
 	return float4x4::FromTRS(finalPosition, finalRotation, finalScale);
 }
 
-float4x4 Bone::InterpolateRotation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity)
-{
-	/*int index = bone.GetRotationIndex(lastAnimTime);
-	float scaleFactor = GetScaleFactor(0.0f, velocity, animationTime);
-
-	Quat finalRotation = math::Slerp(bone.data.rotations[index].orientation, data.rotations[0].orientation, scaleFactor);
-	finalRotation = finalRotation.Normalized();
-
-	if (scaleFactor >= 1.0f)
-		interpolating = false;
-
-	return float4x4(finalRotation);*/
-	return float4x4();
-}
-
-float4x4 Bone::InterpolateScaling(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity)
-{
-	/*int index = bone.GetScalingIndex(lastAnimTime);
-	float scaleFactor = GetScaleFactor(0, velocity, animationTime);
-
-	float3 finalScale = math::Lerp(bone.data.scales[index].scale, data.scales[0].scale, scaleFactor);
-
-	if (scaleFactor >= 1.0f)
-		interpolating = false;
-
-	return float4x4::Scale(finalScale);*/
-	return float4x4();
-}
-
-int Bone::GetPositionIndex(float animationTime)
-{
-	for (int index = 0; index < data.keyFrames.size(); ++index)
-	{
-		if (index + 1 < data.keyFrames.size())
-		{
-			if (animationTime < data.keyFrames[index + 1].timeStamp)
-				return index;
-		}
-	}
-
-	return 0;
-}
-
-int Bone::GetRotationIndex(float animationTime)
-{
-	for (int index = 0; index < data.keyFrames.size(); ++index)
-	{
-		if (index + 1 < data.keyFrames.size())
-		{
-			if (animationTime < data.keyFrames[index + 1].timeStamp)
-				return index;
-		}
-	}
-
-	return 0;
-}
-
-int Bone::GetScalingIndex(float animationTime)
+int Bone::GetIndex(float animationTime)
 {
 	for (int index = 0; index < data.keyFrames.size(); ++index)
 	{
