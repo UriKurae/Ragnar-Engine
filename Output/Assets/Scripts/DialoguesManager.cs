@@ -7,6 +7,7 @@ public class DialogueManager : RagnarComponent
 	GameObject box;
 	GameObject text;
 	GameObject image;
+    GameObject name;
 	Vector3 Pos;
 	string auth;
     int authId;
@@ -22,7 +23,8 @@ public class DialogueManager : RagnarComponent
 		Dialogue.LoadDialogueFile("");
 		box = GameObject.Find("DialogueBox");
 		text = GameObject.Find("DialogueText");
-		image = GameObject.Find("DialogueAuth");
+		image = GameObject.Find("DialogueAuthImg");
+        name = GameObject.Find("DialogueAuthName");
 		auth = "";
         authId = -1;
         idDialogue = 0;
@@ -95,6 +97,7 @@ public class DialogueManager : RagnarComponent
 			text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
             authId = Dialogue.GetDialogueLineAuthorId();
             auth = Dialogue.GetDialogueLineAuthor();
+            name.GetComponent<UIText>().text = auth;
             DrawAuthor();
             Debug.Log(authId.ToString());
         }
@@ -112,6 +115,7 @@ public class DialogueManager : RagnarComponent
         Dialogue.StartDialogueById(id);
         text.GetComponent<UIText>().text = Dialogue.GetDialogueLine();
 		auth = Dialogue.GetDialogueLineAuthor();
+        name.GetComponent<UIText>().text = auth;
         authId = Dialogue.GetDialogueLineAuthorId();
         DrawAuthor();
         Debug.Log(authId.ToString());
