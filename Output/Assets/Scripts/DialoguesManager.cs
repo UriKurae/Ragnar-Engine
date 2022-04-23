@@ -108,7 +108,7 @@ public class DialogueManager : RagnarComponent
 
 		}
 	}
-	void StartNewDialogue(int id)
+	public void StartNewDialogue(int id)
     {
         gameObject.isActive = true;
         endDialogue = false;
