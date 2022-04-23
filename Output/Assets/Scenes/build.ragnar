@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 155274272,
+                    "pointer": 184414472,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 211402560,
+                    "characters": 205700928,
                     "drawnArea": false
                 }
             ]
@@ -141,19 +141,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -46.559967041015625,
+                        -52.500740051269531,
                         0,
-                        82.836395263671875
+                        85.294082641601562
                     ],
                     "Quaternion": [
                         0,
-                        0.97029572725296021,
+                        0.95527774095535278,
                         0,
-                        0.24192190170288086
+                        -0.29571005702018738
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.48869219422340393,
+                        -0.60039746761322021,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -179,15 +179,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        7.62939453125e-06,
+                        56.479866027832031,
+                        -51.345333099365234
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
+                        0.34202015399932861,
+                        7.9287429954888466e-09,
+                        -7.9287429954888466e-09,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -195,7 +195,7 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142135381698608,
+                        1.4142137765884399,
                         1,
                         1
                     ]
@@ -206,25 +206,25 @@
                     "Vertical Fov": 0.49674096703529358,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -70.034164428710938,
-                        55,
-                        126.98492431640625
+                        -23.491382598876953,
+                        56.479866027832031,
+                        127.66079711914062
                     ],
                     "Type": 3,
-                    "Zoom": 18,
+                    "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -46.559967041015625,
+                        -52.500740051269531,
                         0,
-                        82.836395263671875
+                        85.294082641601562
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 152,
+                    "Horizontal Angle": 214.40023803710938,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -542,10 +542,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 155274816,
+                    "pointer": 184413248,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 211402496,
+                    "enemies": 205700864,
                     "enemyGOs": 0
                 }
             ]
@@ -2062,7 +2062,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 155277400,
+                    "pointer": 184413928,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -3201,6 +3201,340 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2068571281,
+            "Parent UUID": 417171234,
+            "Name": "Dialogue",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 883223667,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueBox",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        268,
+                        100
+                    ],
+                    "Scale": [
+                        1.5266666412353516,
+                        0.37250000238418579,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 916,
+                    "buttonHeight": 223.5,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 613043945,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        149,
+                        1
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueManager",
+                    "pointer": 321024184,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 130654469,
+            "Parent UUID": 2068571281,
+            "Name": "DialoguePaul",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        268,
+                        0
+                    ],
+                    "Scale": [
+                        1.5133333206176758,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 908,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_paul.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1625323469,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueChani",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        268,
+                        0
+                    ],
+                    "Scale": [
+                        1.5133333206176758,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 908,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_face_chani.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
