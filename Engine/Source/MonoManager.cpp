@@ -154,6 +154,12 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Animation::HasFinished", HasFinished);
 	// Animation =================
 
+	// Light =====================
+	mono_add_internal_call("RagnarEngine.Light::get_intensity", GetLightIntensity);
+	mono_add_internal_call("RagnarEngine.Light::set_intensity", SetLightIntensity);
+	mono_add_internal_call("RagnarEngine.Light::get_ambient", GetLightAmbient);
+	mono_add_internal_call("RagnarEngine.Light::set_ambient", SetLightAmbient);
+	// Light =====================
 
 	// NavAgent ==================
 	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);

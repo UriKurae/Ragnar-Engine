@@ -13,10 +13,6 @@ namespace RagnarEngine
         List<RagnarComponent> components;
 
         private Transform trans;
-        //public AudioSource audioSource;
-        //public Rigidbody rigidBody;
-        //public Animation animation;
-        //public Camera camera;
 
         public GameObject()
         {
@@ -35,18 +31,6 @@ namespace RagnarEngine
 
             components = new List<RagnarComponent>();
             components.Add(trans);
-
-            //audioSource = new AudioSource();
-            //audioSource.pointer = audioPTR;
-            //
-            //rigidBody = new Rigidbody();
-            //rigidBody.pointer = rbPTR;
-            //
-            //animation = new Animation();
-            //animation.pointer = animPTR;
-            //
-            //camera = new Camera();
-            //camera.pointer = camPTR;
         }
 
         public T[] GetComponents<T>() where T : RagnarComponent

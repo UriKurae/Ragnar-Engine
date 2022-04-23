@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -50,6 +50,7 @@
     <Compile Include="Assembly-CSharp\Default Components\AudioListener.cs" />
     <Compile Include="Assembly-CSharp\Default Components\AudioSource.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\Light.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Material.cs" />
     <Compile Include="Assembly-CSharp\Default Components\NavAgent.cs" />
     <Compile Include="Assembly-CSharp\Default Components\ParticleSystem.cs" />
@@ -104,8 +105,8 @@
     <Compile Include="Assets\Scripts\Eagle.cs" />
     <Compile Include="Assets\Scripts\SpiceGranade.cs" />
     <Compile Include="Assets\Scripts\Level_1.cs" />
-		<Compile Include="Assets\Scripts\Level_2.cs" />
-		<Compile Include="Assets\Scripts\Level_3.cs" />
+    <Compile Include="Assets\Scripts\Level_2.cs" />
+    <Compile Include="Assets\Scripts\Level_3.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />
