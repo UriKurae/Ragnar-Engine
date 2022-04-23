@@ -6,6 +6,8 @@ layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texCoords;
 layout(location = 3) in vec4 boneIds;
 layout(location = 4) in vec4 weights;
+layout(location = 5) in vec3 tangents;
+layout(location = 6) in vec3 biTangents;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -27,6 +29,11 @@ out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
 out vec4 fragPosLightSpace;
+out mat3 tbnMatrix;
+
+out vec3 tangentLightPos;
+out vec3 tangentViewPos;
+out vec3 tangentFragPos;
 
 void main()
 {
@@ -59,6 +66,11 @@ void main()
 	fragPosLightSpace = lightSpaceMatrix * model * totalPosition;
 	vCamPos = camPos;
 	vTextureAlpha = 1.0f;
+
+	vec3 T = normalize(vec3(model * vec4(tangents, 0.0)));
+	vec3 B = normalize(vec3(model * vec4(biTangents, 0.0)));
+	vec3 N = normalize(vec3(model * vec4(normal, 0.0)));
+	tbnMatrix = mat3(T, B, N);
 }
 
 
@@ -69,18 +81,17 @@ in vec3 vPosition;
 in vec3 vNormal;
 in vec2 vTexCoords;
 in vec3 vCamPos;
-
 in vec3 vAmbientColor;
 in float vTextureAlpha;
-
 in vec4 fragPosLightSpace;
+in mat3 tbnMatrix;
 
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec4 fragNormals;
-//layout(location = 2) out vec3 fragDepth;
 
-uniform sampler2D tex;
-uniform sampler2D depthTexture;
+layout(location = 0) uniform sampler2D tex;
+layout(location = 1) uniform sampler2D depthTexture;
+layout(location = 2) uniform sampler2D normalMap;
 uniform float normalsThickness;
 
 struct Material
@@ -192,7 +203,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
-	
+
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 	
@@ -250,10 +261,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 }
 
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
-{
-	// TODO: Should anti-aliasing be revised when calulating cel shading?
-	// The camera is far enough and as far as i looked into it, i did not see any aliasing going on.
-	
+{	
 	vec3 lightDir = normalize(light.position - fragPos);
 	
 	float diff = max(dot(normal, lightDir), 0.0);
@@ -291,7 +299,10 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 void main()
 {
-	vec3 norm = normalize(vNormal);
+	//vec3 norm = normalize(vNormal);
+	vec3 norm = texture(normalMap, vTexCoords).rgb;
+	norm = normalize(norm * 2.0 - 1.0);
+	
 	vec3 viewDir = normalize(vCamPos - vPosition);
 	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);

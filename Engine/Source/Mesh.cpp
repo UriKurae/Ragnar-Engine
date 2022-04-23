@@ -45,7 +45,9 @@ void Mesh::Load()
 			{ShaderDataType::VEC3F, "normal"},
 			{ShaderDataType::VEC2F, "texCoords"},
 			{ShaderDataType::VEC4I, "boneIds"},
-			{ShaderDataType::VEC4F, "weights"}
+			{ShaderDataType::VEC4F, "weights"},
+			{ShaderDataType::VEC3F, "tangents"},
+			{ShaderDataType::VEC3F, "biTangents"},
 		});
 		vao->AddVertexBuffer(*vbo);
 
