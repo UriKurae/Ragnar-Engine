@@ -25,10 +25,12 @@ public class BasicEnemy : RagnarComponent
     // States
     public bool canShoot = true;
     public bool pendingToDelete = false;
+    public bool controlled = false;
 
     // Timers
     public float shootCooldown = 0f;
     float deathTimer = -1f;
+    float controlledCooldown = 10;
 
     float initialSpeed;
 
@@ -56,56 +58,83 @@ public class BasicEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete && deathTimer == -1)
+
+        if (!controlled)
         {
-            if (!stunned)
+            if (!pendingToDelete && deathTimer == -1)
             {
-                if (!distracted)
+                if (!stunned)
                 {
-                    Patrol();
-                }
-                if (PerceptionCone())
-                {
-                    agents.speed = initialSpeed * 1.2f;
-                    Shoot();
-                }
-                else
-                {
-                    agents.speed = initialSpeed;
+                    if (!distracted)
+                    {
+                        Patrol();
+                    }
+                    if (PerceptionCone())
+                    {
+                        agents.speed = initialSpeed * 1.2f;
+                        Shoot();
+                    }
+                    else
+                    {
+                        agents.speed = initialSpeed;
+                    }
                 }
             }
+
+            if (deathTimer >= 0)
+            {
+                deathTimer -= Time.deltaTime;
+                if (deathTimer < 0)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    deathTimer = -1f;
+                    pendingToDelete = true;
+                }
+            }
+
+            if (stunnedTimer >= 0)
+            {
+                stunnedTimer -= Time.deltaTime;
+                if (stunnedTimer < 0)
+                {
+                    stunned = false;
+                    stunnedTimer = -1f;
+                }
+            }
+
+            if (distractedTimer >= 0)
+            {
+                distractedTimer -= Time.deltaTime;
+                if (distractedTimer < 0)
+                {
+                    distracted = false;
+                    distractedTimer = -1f;
+                }
+            }
+        }
+        else
+        {
+            Vector3 dis = this.gameObject.transform.globalPosition - players[0].transform.globalPosition;
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                agents.CalculatePath(agents.hitPosition);
+
+            }
+            agents.MovePath();
+            //Poner que puede hacer el enemigo
+
+            //
+            controlledCooldown -= Time.deltaTime;
+            if (controlledCooldown < 0)
+            {
+                controlledCooldown = 0f;
+                controlled = false;
+                players[0].GetComponent<Player>().SetControled(true);
+                agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+            }
+            
         }
 
-        if (deathTimer >= 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
-            {
-                gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
-                deathTimer = -1f;
-                pendingToDelete = true;
-            }
-        }
-
-        if (stunnedTimer >= 0)
-        {
-            stunnedTimer -= Time.deltaTime;
-            if (stunnedTimer < 0)
-            {
-                stunned = false;
-                stunnedTimer = -1f;
-            }
-        }
-
-        if (distractedTimer >= 0)
-        {
-            distractedTimer -= Time.deltaTime;
-            if (distractedTimer < 0)
-            {
-                distracted = false;
-                distractedTimer = -1f;
-            }
-        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -140,19 +169,16 @@ public class BasicEnemy : RagnarComponent
         if (other.gameObject.name == "Rock")
         {
             // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-
             distracted = true;
             distractedTimer = 5f;
-            //stoppedTime = 5f;
             Distraction(other.gameObject.transform.globalPosition);
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
         if (other.gameObject.name == "Eagle")
         {
             // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-            patrol = false;
-            stoppedTime = 6f;
-            agents.CalculatePath(other.gameObject.transform.globalPosition);
+            distracted = true;
+            distractedTimer = 6f;
+            Distraction(other.gameObject.transform.globalPosition);
         }
 
         //// Chani =======================================
@@ -160,10 +186,6 @@ public class BasicEnemy : RagnarComponent
         {
             // STUN (BLIND)
             Stun(5f);
-
-            //patrol = false;
-            //stoppedTime = 5f;
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
 
 
@@ -187,10 +209,6 @@ public class BasicEnemy : RagnarComponent
         {
             // STUN (BLIND)
             Stun(5f);
-
-            //patrol = false;
-            //stoppedTime = 5f;
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
         }
     }
 
@@ -202,6 +220,11 @@ public class BasicEnemy : RagnarComponent
 
         index = RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
         return (index == -1) ? false : true;
+    }
+    public void SetControled(bool flag)
+    {
+        controlled = flag;
+        if (flag) controlledCooldown = 10;
     }
 
     private void Shoot()
@@ -253,7 +276,7 @@ public class BasicEnemy : RagnarComponent
 
     public void Patrol()
     {
-        if (GameObject.Find("Rock") == null && agents.MovePath())
+        if (agents.MovePath())
         {
             stopState = true;
         }
@@ -285,18 +308,13 @@ public class BasicEnemy : RagnarComponent
 
     public void Distraction(Vector3 distractionItem)
     {
-        Vector3 forward = gameObject.transform.forward;
         Vector3 newForward = (distractionItem - gameObject.transform.globalPosition).normalized;
 
-        float dot = (forward.x * newForward.x) + (forward.y * newForward.y) + (forward.z * newForward.z);
-        float mag = forward.magnitude * newForward.magnitude;
-        float angleInRadians = (float)Math.Acos(dot / mag);
+        double angle = Math.Atan2(newForward.x, newForward.z);
 
-        Quaternion newRot = Quaternion.RotateAroundAxis(gameObject.transform.up, angleInRadians);
+        Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 
         gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
-
-        //gameObject.transform.localRotation = newRot;
 
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }

@@ -12,9 +12,11 @@ public class UndistractableEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
+    public bool controlled = false;
 
     // Timers
     public float stoppedTime = 0f;
+    float controlledCooldown = 10;
 
     // Player tracker
     public GameObject[] players;
@@ -31,6 +33,11 @@ public class UndistractableEnemy : RagnarComponent
     float deathTimer = -1f;
 
     float initialSpeed;
+
+    bool distracted = false;
+    float distractedTimer = -1f;
+    bool stunned = false;
+    float stunnedTimer = -1f;
 
     public void Start()
     {
@@ -51,30 +58,81 @@ public class UndistractableEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete && deathTimer == -1)
+        if (!controlled)
         {
-            Patrol();
-            if (PerceptionCone())
+            if (!pendingToDelete && deathTimer == -1)
             {
-                agents.speed = initialSpeed * 1.2f;
-                Shoot();
+                if (!stunned)
+                {
+                    if (!distracted)
+                    {
+                        Patrol();
+                    }
+                    if (PerceptionCone())
+                    {
+                        agents.speed = initialSpeed * 1.2f;
+                        Shoot();
+                    }
+                    else
+                    {
+                        agents.speed = initialSpeed;
+                    }
+                }
             }
-            else
-            {
-                agents.speed = initialSpeed;
-            }
-        }
 
-        if (deathTimer >= 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (deathTimer >= 0)
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
-                deathTimer = -1f;
-                pendingToDelete = true;
+                deathTimer -= Time.deltaTime;
+                if (deathTimer < 0)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    deathTimer = -1f;
+                    pendingToDelete = true;
+                }
+            }
+
+            if (stunnedTimer >= 0)
+            {
+                stunnedTimer -= Time.deltaTime;
+                if (stunnedTimer < 0)
+                {
+                    stunned = false;
+                    stunnedTimer = -1f;
+                }
+            }
+
+            if (distractedTimer >= 0)
+            {
+                distractedTimer -= Time.deltaTime;
+                if (distractedTimer < 0)
+                {
+                    distracted = false;
+                    distractedTimer = -1f;
+                }
             }
         }
+        else
+        {
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                agents.CalculatePath(agents.hitPosition);
+
+            }
+            agents.MovePath();
+            controlledCooldown -= Time.deltaTime;
+            if (controlledCooldown < 0)
+            {
+                controlledCooldown = 0f;
+                controlled = false;
+                players[0].GetComponent<Player>().SetControled(true);
+            }
+
+        }
+    }
+    public void SetControled(bool flag)
+    {
+        controlled = flag;
+        if (flag) controlledCooldown = 10;
     }
 
     public void OnCollision(Rigidbody other)
@@ -108,9 +166,7 @@ public class UndistractableEnemy : RagnarComponent
         if (other.gameObject.name == "SpiceGrenade")
         {
             // STUN (BLIND)
-            patrol = false;
-            stoppedTime = 5f;
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
+            Stun(5f);
         }
 
 
@@ -133,9 +189,7 @@ public class UndistractableEnemy : RagnarComponent
         if (other.gameObject.name == "Trap")
         {
             // STUN (BLIND)
-            patrol = false;
-            stoppedTime = 5f;
-            //agents.CalculatePath(other.gameObject.transform.globalPosition);
+            Stun(5f);
         }
     }
 
@@ -198,7 +252,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void Patrol()
     {
-        if (GameObject.Find("Rock") == null && agents.MovePath())
+        if (agents.MovePath())
         {
             stopState = true;
         }
@@ -226,5 +280,25 @@ public class UndistractableEnemy : RagnarComponent
         {
             GotoNextPoint();
         }
+    }
+
+    public void Distraction(Vector3 distractionItem)
+    {
+        Vector3 newForward = (distractionItem - gameObject.transform.globalPosition).normalized;
+
+        double angle = Math.Atan2(newForward.x, newForward.z);
+
+        Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+
+        gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
+
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+    }
+
+    public void Stun(float timeStunned)
+    {
+        stunned = true;
+        stunnedTimer = timeStunned;
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
 }

@@ -25,11 +25,15 @@ public class EnemyBullet : RagnarComponent
 
 		Debug.Log(index.ToString());
 
-        float xDiff = players[index].transform.globalPosition.x - gameObject.transform.globalPosition.x;
-        float zDiff = players[index].transform.globalPosition.z - gameObject.transform.globalPosition.z;
-        Vector3 shotDirection = new Vector3(xDiff, pos.y, zDiff);
-        bulletRb.linearVelocity = shotDirection.normalized * vel;
-    }
+		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
+		diff.y = gameObject.transform.globalPosition.y;
+
+		GameObject obj = RayCast.HitToTag(pos, diff, "Player");
+		if (obj != null) obj.GetComponent<Player>().hitPoints -= 1;
+		Debug.Log(obj.GetComponent<Player>().hitPoints.ToString());
+
+		bulletRb.linearVelocity = diff.normalized * vel;
+	}
     public void Update()
 	{
 		if (pendingToDelete) InternalCalls.Destroy(gameObject);

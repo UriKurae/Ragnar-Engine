@@ -122,14 +122,6 @@ public class Player : RagnarComponent
         }
     }
 
-    public void OnCollision(Rigidbody other)
-    {
-        if (other.gameObject.name == "EnemyBullet")
-        {
-            hitPoints -= 1;
-        }
-    }
-
     private void Die()
     {
         gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
