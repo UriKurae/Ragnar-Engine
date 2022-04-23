@@ -6,6 +6,8 @@ layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texCoords;
 layout(location = 3) in vec4 boneIds;
 layout(location = 4) in vec4 weights;
+layout(location = 5) in vec3 tangents;
+layout(location = 6) in vec3 biTangents;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -14,6 +16,7 @@ uniform mat3 normalMatrix;
 uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
+uniform mat4 lightSpaceMatrix;
 
 const int MAX_BONES = 100;
 const int MAX_BONE_INFLUENCE = 4;
@@ -25,7 +28,12 @@ out vec2 vTexCoords;
 out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
-out vec4 vb;
+out vec4 fragPosLightSpace;
+out mat3 tbnMatrix;
+
+out vec3 tangentLightPos;
+out vec3 tangentViewPos;
+out vec3 tangentFragPos;
 
 void main()
 {
@@ -53,13 +61,16 @@ void main()
 
 	vTexCoords = texCoords;
 	vPosition = vec3(model * vec4(position, 1));
-	//vNormal = normal * normal;
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
+	fragPosLightSpace = lightSpaceMatrix * model * totalPosition;
+	vCamPos = camPos;
 	vTextureAlpha = 1.0f;
 
-	vCamPos = camPos;
-	vb = boneIds;
+	vec3 T = normalize(vec3(model * vec4(tangents, 0.0)));
+	vec3 B = normalize(vec3(model * vec4(biTangents, 0.0)));
+	vec3 N = normalize(vec3(model * vec4(normal, 0.0)));
+	tbnMatrix = mat3(T, B, N);
 }
 
 
@@ -70,14 +81,18 @@ in vec3 vPosition;
 in vec3 vNormal;
 in vec2 vTexCoords;
 in vec3 vCamPos;
-
 in vec3 vAmbientColor;
 in float vTextureAlpha;
+in vec4 fragPosLightSpace;
+in mat3 tbnMatrix;
 
 layout(location = 0) out vec4 fragColor;
-layout(location = 1) out vec3 fragNormals;
+layout(location = 1) out vec4 fragNormals;
 
-uniform sampler2D tex;
+layout(location = 0) uniform sampler2D tex;
+layout(location = 1) uniform sampler2D depthTexture;
+layout(location = 2) uniform sampler2D normalMap;
+uniform float normalsThickness;
 
 struct Material
 {
@@ -99,6 +114,7 @@ struct DirLight
 	vec3 specular;
 
 	float intensity;
+	bool genShadows;
 };
 uniform DirLight dirLight;
 
@@ -144,14 +160,54 @@ struct CelShadingProps
 const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
 
 
+vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+{
+	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+	projCoords = projCoords * 0.5 + 0.5;
+	
+	float closestDepth = texture(depthTexture, projCoords.xy).x;
+	float currentDepth = projCoords.z;
+
+	vec2 texSize = textureSize(tex, 0).xy;
+	vec2 depthTexSize = textureSize(depthTexture, 0).xy;
+
+	// Change the color and apply blur so it is not full black
+	// ========================
+	vec4 colorSum = vec4(0);
+	vec2 texCoord = gl_FragCoord.xy / texSize;
+	float shadow = 0;
+	float dx = dFdx(texCoord.s);
+	float dy = dFdy(texCoord.t);
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			texCoord += vec2(dx * i, dy * j);
+			colorSum += texture(tex, texCoord);
+
+			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
+			shadow += currentDepth > pcfDepth - 0.00005 ? 1 : 0;
+		}
+	}
+	
+	colorSum = colorSum / 9;
+	shadow = shadow / 9;
+	shadow = smoothstep(0, 2, shadow);
+	// ========================
+
+	vec4 result = mix(vec4(1), normalize(colorSum), shadow);
+
+	return result;	
+}
+
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
-	
+
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 	
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else diff = csp.d;
@@ -165,7 +221,9 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	return (ambient + diffuse + specular) * light.intensity;
+	vec4 shadow = light.genShadows ? CalculateShadow(fragPosLightSpace, normal, lightDir) : vec4(1);
+	
+	return ((ambient + shadow.rgb * shadow.a) * (diffuse + specular)) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
@@ -175,7 +233,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else diff = csp.d;
@@ -203,15 +261,12 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 }
 
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
-{
-	// TODO: Should anti-aliasing be revised when calulating cel shading?
-	// The camera is far enough and as far as i looked into it, i did not see any aliasing going on.
-	
+{	
 	vec3 lightDir = normalize(light.position - fragPos);
 	
 	float diff = max(dot(normal, lightDir), 0.0);
 	
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else diff = csp.d;
@@ -244,7 +299,10 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 void main()
 {
-	vec3 norm = normalize(vNormal);
+	//vec3 norm = normalize(vNormal);
+	vec3 norm = texture(normalMap, vTexCoords).rgb;
+	norm = normalize(norm * 2.0 - 1.0);
+	
 	vec3 viewDir = normalize(vCamPos - vPosition);
 	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
@@ -262,7 +320,17 @@ void main()
 	}
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-	fragNormals = vNormal; // Is this correct ??
+	fragNormals = vec4(vNormal, normalsThickness);
+
+	if (fragColor.a > 0 && fragColor.a <= 0.1)
+	{
+		fragColor = vec4(vec3(0.5), 0);
+		fragNormals.a = -1;
+	}
+	else if (fragColor.a == 0)
+	{
+		discard;
+	}
 }
 
 

@@ -4,6 +4,7 @@
 #include "Shapes.h"
 #include "SDL_video.h"
 #include <vector>
+#include <set>
 
 #define MAX_LIGHTS 8
 
@@ -15,6 +16,7 @@ class TextureBuffer;
 class Material;
 class Shader;
 class GameObject;
+class CameraComponent;
 
 class PointLight;
 class SpotLight;
@@ -84,9 +86,11 @@ public:
 
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
-
+	void DebugDraw(GameObject* objSelected);
+	void GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam);
 public:
 	PPlane grid;
+	unsigned int shadowsDepthTexture;
 
 	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
@@ -115,6 +119,8 @@ public:
 	std::vector<SpotLight*> spotLights;
 
 	std::vector<float3> enemyCones;
+	
+	bool genShadows;
 
 private:
 	Material* defaultMaterial;
@@ -131,4 +137,8 @@ private:
 
 	VertexBuffer* vbo;
 	std::shared_ptr<Shader> coneShader;
+
+	unsigned int shadowsFbo;
+	//unsigned int shadowsDepthTexture;
+
 };

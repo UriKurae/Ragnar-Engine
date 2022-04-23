@@ -19,6 +19,7 @@
 #include "AnimationComponent.h"
 #include "BillboardParticleComponent.h"
 #include "ButtonComponent.h"
+#include "DropDownComponent.h"
 #include "SliderComponent.h"
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
@@ -237,6 +238,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::UI_CHECKBOX:
 		component = new CheckboxComponent(this);
+		break;
+	case ComponentType::UI_DROPDOWN:
+		component = new DropDownComponent(this);
 		break;
 	case ComponentType::UI_IMAGE:
 		component = new ImageComponent(this);

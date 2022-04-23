@@ -88,21 +88,21 @@ public:
 	void SetFocusedObject();
 	void HitPosibleFocusedObjects(const math::float4& viewport);
 
-	void RenderText(std::string text, float x, float y, float scale, float3 color);
-	void DrawCharacters(std::string& text, float& x, float scale, float y);
+	void RenderText(std::string text, float x, float y, float scale, float3 color, Shadert* shader, std::map<char, Character>* characters, uint VAO, uint VBO);
+	void DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO);
 
     void DeleteUIGameObjects(GameObject* ui);
 	inline std::vector<GameObject*>::const_iterator FindUI(GameObject* child) { return std::find(std::begin(UIGameObjects), std::end(UIGameObjects), child); };
 	void updateText();
 
 	void OrderButtons();
+	void loadFont(std::string path,std::map<char, Character>* chara, Shadert* shade, uint VAO, uint VBO);
 
 	void ImportToLibrary();
 
 public:
-    std::map<char, Character> characters;
-    Shadert* shader = nullptr;
-    uint VAO = 0, VBO = 0;
+    
+    
 	LineSegment myRay;
 	float3 corners[8];
 	std::vector<GameObject*> hitObjs;

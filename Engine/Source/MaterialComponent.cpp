@@ -3,6 +3,10 @@
 
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
+#include "ModuleSceneManager.h"
+#include "Scene.h"
+#include "GameView.h"
 
 #include "GameObject.h"
 #include "TransformComponent.h"
@@ -13,6 +17,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Lights.h"
+#include "Framebuffer.h"
 
 #include "GL/glew.h"
 #include <fstream>
@@ -29,8 +34,10 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
 	shader->SetUniforms(GetShaderUniforms());
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
+	normalMap = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	outlineShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/outlineStencil.shader")));
+	shadowShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/shadows.shader")));
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -44,6 +51,7 @@ MaterialComponent::MaterialComponent(MaterialComponent* mat)
 {
 	checker = mat->checker;
 	diff = mat->diff;
+	normalMap = mat->normalMap;
 
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
 	//shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->GetResource("Assets/Resources/Shaders/default.shader"));
@@ -74,35 +82,45 @@ void MaterialComponent::OnEditor()
 	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
 	{
 		Checkbox(this, "Active", active);
+		ImGui::PushID(diff->GetUID());
 		if (diff != nullptr)
 		{
-			ImGui::Text("Select texture: ");
+			ImGui::Text("Select Diffuse texture: ");
 			ImGui::SameLine();
 			if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
 			{
 				showTexMenu = true;
+				textureTypeToChange = TextureType::DIFFUSE;
+
 			}
-			ImGui::Text("Path: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diff->GetAssetsPath().c_str());
-			ImGui::Text("Width: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetWidth());
-			ImGui::Text("Height: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
-			ImGui::Text("Reference Count: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
+
 			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
+			ImGui::Indent();
+			if (ImGui::CollapsingHeader("Info##Diff"))
+			{
+				ImGui::Text("Path: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diff->GetAssetsPath().c_str());
+				ImGui::Text("Width: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetWidth());
+				ImGui::Text("Height: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
+				ImGui::Text("Reference Count: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
+			}
+			ImGui::Unindent();
 		}
 		else
 		{
-			ImGui::Text("Select texture: ");
+			ImGui::Text("Select Diffuse texture: ");
 			ImGui::SameLine();
 			if (ImGui::Button("No Texture"))
 			{
 				showTexMenu = true;
+				textureTypeToChange = TextureType::DIFFUSE;
 			}
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
 			ImGui::Text("Width: ");
@@ -112,6 +130,61 @@ void MaterialComponent::OnEditor()
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 		}
+		ImGui::PopID();
+
+		ImGui::Separator();
+		
+		ImGui::PushID(normalMap->GetUID());
+		if (normalMap != nullptr)
+		{
+			ImGui::Text("Select Normal texture: ");
+			ImGui::SameLine();
+			if (ImGui::Button(((normalMap ? normalMap->GetName() : "") + "##Foo").c_str()))
+			{
+				showTexMenu = true;
+				textureTypeToChange = TextureType::NORMAL;
+			}
+			
+			ImGui::Image((ImTextureID)normalMap->GetId(), ImVec2(128, 128));
+			
+			ImGui::Indent();
+			if (ImGui::CollapsingHeader("Info##Normal"))
+			{
+				ImGui::Text("Path: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", normalMap->GetAssetsPath().c_str());
+				ImGui::Text("Width: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", normalMap->GetWidth());
+				ImGui::Text("Height: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", normalMap->GetHeight());
+				ImGui::Text("Reference Count: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", normalMap.use_count());
+			}
+			ImGui::Unindent();
+		}
+		else
+		{
+			ImGui::Text("Select Normal texture: ");
+			ImGui::SameLine();
+			if (ImGui::Button("No Texture"))
+			{
+				showTexMenu = true;
+				textureTypeToChange = TextureType::NORMAL;
+			}
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+		}
+		ImGui::PopID();
+
+		ImGui::Separator();
 
 		ImGui::Text("Select shader: ");
 		ImGui::SameLine();
@@ -184,7 +257,12 @@ void MaterialComponent::MenuTextureList()
 		if (ImGui::Selectable((*it).get()->GetName().c_str()))
 		{
 			(*it)->Load();
-			if (diff.use_count() - 1 == 1) diff->UnLoad();
+
+			if (textureTypeToChange == TextureType::DIFFUSE)
+				if (diff.use_count() - 1 == 1) diff->UnLoad();
+			else if(textureTypeToChange == TextureType::NORMAL)
+				if (normalMap.use_count() - 1 == 1) normalMap->UnLoad();
+
 			SetTexture((*it));
 		}
 	}
@@ -379,7 +457,8 @@ bool MaterialComponent::Update(float dt)
 
 bool MaterialComponent::OnLoad(JsonParsing& node)
 {
-	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Path"))));
+	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Diffuse Path"))));
+	normalMap = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Normal Map Path"))));
 	active = node.GetJsonBool("Active");
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 
@@ -391,7 +470,8 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
-	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Path", diff->GetAssetsPath().c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Diffuse Path", diff->GetAssetsPath().c_str());
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Normal Map Path", normalMap->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	
@@ -406,36 +486,74 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (!this)
 		return;
 
+	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
+	
+	if (app->renderer3D->genShadows)
+	{
+		glViewport(0, 0, 4096, 4096);
+		shadowShader->Bind();
+		shadowShader->SetUniformMatrix4f("model", model.Transposed());
+		shadowShader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
+
+		if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
+		{
+			auto transforms = anim->GetFinalBoneMatrices();
+			for (int i = 0; i < transforms.size(); ++i)
+				shadowShader->SetUniformMatrix4f("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i].Transposed());
+		}
+
+		return;
+	}
+
 	if (diff)
 		diff->Bind();
 
 	shader->Bind();
 
-	// Could not do view and proj each frame.
-	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	shader->SetUniformMatrix4f("model", model.Transposed());
+	shader->SetUniformMatrix4f("lightSpaceMatrix", app->renderer3D->dirLight->lightSpace.Transposed());
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
+	Framebuffer* fbo;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
+		fbo = app->renderer3D->mainCameraFbo;
 	}
 	else
 	{
 		view = app->camera->matrixViewFrustum;
 		proj = app->camera->matrixProjectionFrustum;
+		fbo = app->renderer3D->fbo;
 	}
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
-	float4x4 normalMat = view;
-	normalMat.Inverse();
-	shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
+	//float4x4 normalMat = view;
+	//normalMat.Inverse();
+	//shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
-	// Get matrices to animate the model
-	AnimationComponent* anim = owner->GetComponent<AnimationComponent>();
-	if (anim)
+	if(std::string(owner->GetName()).find("Player") != std::string::npos)
+		shader->SetUniform1f("normalsThickness", 0);
+	else if(std::string(owner->GetName()).find("Enemy") != std::string::npos)
+		shader->SetUniform1f("normalsThickness", 0);
+	else
+		shader->SetUniform1f("normalsThickness", 1);
+
+	//float thickness = ((std::string(owner->GetName()).find("Player") == std::string::npos) || (std::string(owner->GetName()).find("Enemy") == std::string::npos)) ? 1 : 0;
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
+	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
+	glUniform1i(textLoc3, 1);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, normalMap->GetId());
+	textLoc3 = glGetUniformLocation(shader->GetId(), "normalMap");
+	glUniform1i(textLoc3, 2);
+
+	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
 		auto transforms = anim->GetFinalBoneMatrices();
 		for (int i = 0; i < transforms.size(); ++i)
@@ -460,6 +578,7 @@ void MaterialComponent::ShaderSetUniforms()
 		shader->SetUniformVec3f("dirLight.diffuse", app->renderer3D->dirLight->diffuse);
 		shader->SetUniformVec3f("dirLight.specular", app->renderer3D->dirLight->specular);
 		shader->SetUniform1f("dirLight.intensity", app->renderer3D->dirLight->intensity);
+		shader->SetUniform1i("dirLight.genShadows", app->renderer3D->dirLight->generateShadows);
 	}
 	else
 	{
@@ -520,12 +639,17 @@ void MaterialComponent::Unbind()
 	// Crash when creating a primitive
 	if (!this) return;
 	if (diff) diff->Unbind();
-	shader->Unbind();
+
+	app->renderer3D->genShadows ? shadowShader->Unbind() : shader->Unbind();
 }
 
 void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)
 {
-	diff = std::static_pointer_cast<Texture>(tex);
+	if (textureTypeToChange == TextureType::DIFFUSE)
+		diff = std::static_pointer_cast<Texture>(tex);
+	else if (textureTypeToChange == TextureType::NORMAL)
+		normalMap = std::static_pointer_cast<Texture>(tex);
+
 }
 
 void MaterialComponent::EditorShader()

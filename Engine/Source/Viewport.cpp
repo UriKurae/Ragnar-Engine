@@ -57,7 +57,7 @@ void Viewport::Draw(Framebuffer* framebuffer, Framebuffer* gameBuffer)
 		bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
 		selected = ImGui::IsWindowFocused();
 
-		ImGui::Image((ImTextureID)framebuffer->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image((ImTextureID)framebuffer->GetColorId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 		GameObject* goSel = app->editor->GetGO();
 		if (goSel)

@@ -3,6 +3,7 @@
 #include "Globals.h"
 
 #include "ModuleCamera3D.h"
+#include "ModuleRenderer3D.h"
 
 #include "Scene.h"
 
@@ -206,7 +207,7 @@ bool MeshComponent::HasMaterial()
 	
 	return false;
 }
-const std::map<std::string, BoneInfo> MeshComponent::GetBoneMap()
+const std::map<std::string, BoneInfo>& MeshComponent::GetBoneMap()
 {
 	return mesh->GetBoneMap();
 }

@@ -55,20 +55,19 @@ bool CheckboxComponent::Update(float dt)
 		{
 			state = State::FOCUSED;
 
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
-				state = State::PRESSED;
-
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
-				if (actual == noSelectedMaterial)
+				if (checked == true) {
+					actual = noSelectedMaterial;
+					checked = false;
+				}
+				else {
 					actual = selectedMaterial;
-				checked = true;
-			}
-			else
-			{
-				checked = false;
-				actual = noSelectedMaterial;
+					checked = true;
+				}
+				
+				
 			}
 		}
 	}
@@ -81,32 +80,6 @@ void CheckboxComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
-
-	switch (state)
-	{
-	case State::DISABLED:
-		glColor4f(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::NORMAL:
-		glColor4f(normalColor.r, normalColor.g, normalColor.b, normalColor.a);
-		actualColor = normalColor;
-		break;
-	case State::FOCUSED:
-		glColor4f(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a);
-		actualColor = focusedColor;
-		break;
-	case State::PRESSED:
-		glColor4f(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a);
-		actualColor = pressedColor;
-		break;
-	case State::SELECTED:
-		glColor4f(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a);
-		actualColor = selectedColor;
-		break;
-	default:
-		break;
-	}
 
 	planeToDraw->DrawPlane2D(actual->GetTexture().get());
 

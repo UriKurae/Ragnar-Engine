@@ -65,7 +65,7 @@ public class loseScreen : RagnarComponent
 			case 3:
 				// pressed mode
 				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
-				Menu.GetComponent<UIButton>().SetAlpha(0.75f);
+				Menu.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
 				break;
@@ -111,7 +111,7 @@ public class loseScreen : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				Retry.GetComponent<UIButton>().SetAlpha(0.75f);
+				Retry.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("build");
 				//cambiar de escena
 				break;

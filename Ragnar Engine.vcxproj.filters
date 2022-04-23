@@ -252,6 +252,12 @@
     <ClInclude Include="Engine\Source\CommandsDispatcher.h">
       <Filter>Sources\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\InputActionMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\InputActionComponent.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Source\VertexArray.h">
       <Filter>Sources\Buffers</Filter>
     </ClInclude>
@@ -784,6 +790,12 @@
     <ClInclude Include="Engine\Source\ParticleEffect_ConeSpawn.h">
       <Filter>Particles\Effects\SpawningShapes</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\DropDownComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Source\CheckBoxComponent.h">
+      <Filter>Sources\GameObject\Components\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\C_RigidBody.h">
@@ -833,12 +845,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\Style.h">
       <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\InputActionMenu.h">
-      <Filter>Sources\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\InputActionComponent.h">
-      <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\Lights.h">
       <Filter>Sources\Materials\Helpers</Filter>
@@ -973,9 +979,6 @@
       <Filter>Sources\GameObject\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\ButtonComponent.h">
-      <Filter>Sources\GameObject\Components\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Source\CheckBoxComponent.h">
       <Filter>Sources\GameObject\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Source\PrefabManager.h">
@@ -1711,6 +1714,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\ParticleEffect_ConeSpawn.cpp">
       <Filter>Particles\Effects\SpawningShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Source\DropDownComponent.cpp">
+      <Filter>Sources\GameObject\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

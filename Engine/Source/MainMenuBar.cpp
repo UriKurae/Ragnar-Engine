@@ -299,7 +299,7 @@ void MainMenuBar::CreateGameObjectMenu()
 	// UI Object
 	if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
 	{
-		static std::vector<std::string> uiComponents = { "UI Button", "UI Image", "UI Check Box", "UI Slider", "UI Text" };
+		static std::vector<std::string> uiComponents = { "UI Button", "UI Image", "UI Check Box", "UI Slider", "UI Text","UI InputBox","UI DropDown"};
 		for (int i = 0; i < uiComponents.size(); i++)
 		{
 			if (ImGui::MenuItem(uiComponents.at(i).c_str()))

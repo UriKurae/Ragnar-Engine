@@ -1,7 +1,7 @@
 #include "SliderComponent.h"
 #include "Application.h"
 #include "Globals.h"
-
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleUI.h"
 #include "ModuleEditor.h"
@@ -31,11 +31,14 @@ SliderComponent::SliderComponent(GameObject* own)
 	barProgres = 0.0f;
 	completed = false;
 	drawRect = false;
-	actualColor = normalColor;
 
 	if (!own->GetComponent<ComponentTransform2D>()) // If comes from Load not enter
 	{
 		own->CreateComponent(ComponentType::TRANFORM2D);
+		
+		smallCuad =(ComponentTransform2D*)own->CreateComponent(ComponentType::TRANFORM2D);
+		smallCuad->SetButtonWidth(20);
+		smallCuad->SetShowEdit(false);
 		own->CreateComponent(ComponentType::MATERIAL);
 		secondMaterial = (MaterialComponent*)own->CreateComponent(ComponentType::MATERIAL);
 	}
@@ -57,6 +60,52 @@ SliderComponent::~SliderComponent()
 bool SliderComponent::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Slider Update");
+	int cont = 0;
+	ComponentTransform2D* q;
+	ComponentTransform2D* r;
+	for (int a = 0; a < owner->components.size(); a++) {
+		if (owner->components[a]->type == ComponentType::TRANFORM2D)
+		{
+			cont++;
+			if (cont == 1) {
+				q = (ComponentTransform2D*)owner->components[a];
+			}
+			else
+			{
+				r = (ComponentTransform2D*)owner->components[a];
+
+				
+				break;
+			}
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	float2 mPos = float2::zero;
+	float4 viewport = float4::zero;
+#ifndef DIST
+	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+	viewport = app->editor->GetGameView()->GetBounds();
+#else
+	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+
+	float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	float2 fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
+
+	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
+	float posXMin = ((viewport.z / 2) + (transform2D->GetPosition().x)) - (transform2D->GetButtonWidth() / 2);
+	float posXMax = ((viewport.z / 2) + (transform2D->GetPosition().x)) + (transform2D->GetButtonWidth() / 2);
+	float total = posXMax - posXMin;
+	float thePos = total*barProgres;
+
+	r->SetPosition(float3(thePos + q->GetPosition().x - (q->GetButtonWidth() / 2), q->GetPosition().y, r->GetPosition().z));
+	r->SetButtonHeight(q->GetButtonHeight());
+	r->Update(0);
+
+
+
 
 	if (!active)
 		state = State::DISABLED;
@@ -81,43 +130,15 @@ bool SliderComponent::Update(float dt)
 	}
 	
 	if (state == State::PRESSED) {
-		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
-		float2 mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-		float4 viewport = app->editor->GetGameView()->GetBounds();
-		float2 fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
-
-		ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
-		float posXMin = ((viewport.z / 2) + (transform2D->GetPosition().x)) - (transform2D->GetButtonWidth() / 2);
-		float posXMax = ((viewport.z / 2) + (transform2D->GetPosition().x)) + (transform2D->GetButtonWidth() / 2);
-
+		
 		if (fMousePos.x > posXMin && fMousePos.x < posXMax)
-		{
-			float thePos = fMousePos.x - posXMin;
-			float total = posXMax - posXMin;
-
-
+		{	
+			thePos = fMousePos.x - posXMin;		
 			barProgres = thePos / total;
-			int cont = 0;
-			ComponentTransform2D* q;
-			for (int a = 0; a < owner->components.size(); a++) {
-				if (owner->components[a]->type == ComponentType::TRANFORM2D)
-				{					
-					cont++;
-					if (cont == 1) {
-						q = (ComponentTransform2D*)owner->components[a];
-					}
-					else
-					{
-						ComponentTransform2D* r = (ComponentTransform2D*)owner->components[a];
-						float res = (viewport.z * 70) / 747;
-
-						r->SetPosition(float3(thePos - (r->GetButtonWidth() * 5), q->GetPosition().y,r->GetPosition().z));
-						r->SetButtonHeight(q->GetButtonHeight());
-						r->Update(0);
-						break;
-					}
-				}
-			}
+			
+			r->SetPosition(float3(thePos +q->GetPosition().x-(q->GetButtonWidth()/2), q->GetPosition().y, r->GetPosition().z));
+			
+			r->Update(0);																
 		}
 	}
 	return true;
@@ -129,37 +150,16 @@ void SliderComponent::Draw(CameraComponent* gameCam)
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
 
-	switch (state)
-	{
-	case State::DISABLED:
-		glColor4f(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::NORMAL:
-		glColor4f(normalColor.r, normalColor.g, normalColor.b, normalColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::FOCUSED:
-		glColor4f(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::PRESSED:
-		glColor4f(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::SELECTED:
-		glColor4f(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a);
-		actualColor = disabledColor;
-		break;
-	default:
-		break;
-	}
+	
 
 	firstDraw = false;
 	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
 	firstDraw = true;
 
 	frontPlaneToDraw->DrawPlane2D(secondMaterial->GetTexture().get());
+
+	
+
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
@@ -178,46 +178,11 @@ void SliderComponent::OnEditor()
 	{
 		ImGui::Checkbox("Interactable", &active);
 
-		ImGui::Text("Normal Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Normal Color", ImVec4(normalColor.r, normalColor.g, normalColor.b, normalColor.a)))
-			normalEditable = !normalEditable;
-
-		ImGui::Text("Pressed Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Pressed Color", ImVec4(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a)))
-			pressedEditable = !pressedEditable;
-
-		ImGui::Text("Focused Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Focused Color", ImVec4(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a)))
-			focusedEditable = !focusedEditable;
-
-		ImGui::Text("Disabled Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Disabled Color", ImVec4(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a)))
-			disabledEditable = !disabledEditable;
-
-		ImGui::Text("Selected Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Selected Color", ImVec4(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a)))
-			selectedEditable = !selectedEditable;
+		
 
 		ImGui::Separator();
 
-		ImGui::Text("Text Color"); ImGui::SameLine();
-		if (ImGui::ColorButton("Text Color", ImVec4(textColor.r, textColor.g, textColor.b, textColor.a)))
-			textColorEditable = !textColorEditable;
-
-		sliderText.setOnlyColor({ textColor.r, textColor.g, textColor.b });
-
-		if (normalEditable)
-			ImGui::ColorPicker3("Normal Color", &normalColor);
-		if (pressedEditable)
-			ImGui::ColorPicker3("Pressed Color", &pressedColor);		
-		if (focusedEditable)
-			ImGui::ColorPicker3("Focused Color", &focusedColor);		
-		if (disabledEditable)
-			ImGui::ColorPicker3("Disabled Color", &disabledColor);		
-		if (selectedEditable)
-			ImGui::ColorPicker3("Selected Color", &selectedColor);		
-		if (textColorEditable)
-			ImGui::ColorPicker3("Text Color", &textColor);		
+				
 		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
 		ImGui::InputFloat("Min Value", &minValue);
 		ImGui::InputFloat("Max Value", &maxValue);
@@ -242,6 +207,7 @@ float2 SliderComponent::GetParentPosition()
 bool SliderComponent::OnLoad(JsonParsing& node)
 {
 	int contm = 0;
+	int contt = 0;
 	for (int a = 0; a < owner->components.size(); a++) 
 	{
 		if (owner->components[a]->type == ComponentType::MATERIAL) 
@@ -249,11 +215,22 @@ bool SliderComponent::OnLoad(JsonParsing& node)
 			if (contm != 0)
 			{
 				secondMaterial = (MaterialComponent*)owner->components[a];
-				break;
+				
 			}
 			contm++;
 		}
+		else if (owner->components[a]->type == ComponentType::TRANFORM2D) {
+			if (contt != 0)
+			{
+				smallCuad =(ComponentTransform2D*)owner->components[a];
+				smallCuad->SetButtonWidth(20);
+				smallCuad->SetShowEdit(false);
+				
+			}
+			contt++;
+		}
 	}
+	barProgres = node.GetJsonNumber("barProgres");
 	alpha = node.GetJsonNumber("alpha");
 	return true;
 }
