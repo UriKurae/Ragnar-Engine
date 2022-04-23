@@ -31,7 +31,17 @@ void Set2DPosition(MonoObject* go, MonoObject* position)
 	}
 }
  // Button ==============================
-
+int LoadButtonTexture(MonoObject* go, MonoString* text)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	std::string y = mono_string_to_utf8(text);
+	
+	tr->GetNormalMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	tr->GetFocusedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	tr->GetPressedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	tr->GetActualMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	return 0;
+}
 float GetButtonAlpha(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);

@@ -44,6 +44,7 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
+	GameObject selectedPlayer;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
 	bool isFirstA3 = true;
@@ -64,6 +65,10 @@ public class pauseMenuButton : RagnarComponent
 	GameObject UICharBor3;
 	GameObject UISelector;
 	GameObject UICharacterName;
+
+	GameObject UIPaulImage;
+	GameObject UIChaniImage;
+	GameObject UIStilgarImage;
 	public void Start()
 	{
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
@@ -76,7 +81,7 @@ public class pauseMenuButton : RagnarComponent
 		Image = GameObject.Find("Background");
 		Resume = GameObject.Find("Button Resume");
 		MainM = GameObject.Find("Button MainMenu"); 
-		 Opt = GameObject.Find("Button Options");
+		Opt = GameObject.Find("Button Options");
 		
 		ImageHide();
 
@@ -125,8 +130,10 @@ public class pauseMenuButton : RagnarComponent
 		UICharBor1 = GameObject.Find("UICharBor1"); 
 		UICharBor2 = GameObject.Find("UICharBor2"); 
 		UICharBor3 = GameObject.Find("UICharBor3"); 
-		UISelector = GameObject.Find("UISelector"); 
-
+		UISelector = GameObject.Find("UISelector");
+		UIPaulImage = GameObject.Find("UIPaulImage");
+		UIChaniImage = GameObject.Find("UIChaniImage");
+		UIStilgarImage = GameObject.Find("UIStilgarImage");
 	}
 	
 	public void Update()
@@ -140,7 +147,8 @@ public class pauseMenuButton : RagnarComponent
 		{
 			SceneManager.LoadScene("LoseScene");
 		}
-
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 
 		SetAllPositions();
 		updateMenu();
@@ -606,7 +614,7 @@ public class pauseMenuButton : RagnarComponent
 
 		float sum = 100.0f;
 
-		if (isSowing)
+		if (isSowing||isOptions)
         {
 			sum = 2000;
         }
@@ -614,7 +622,7 @@ public class pauseMenuButton : RagnarComponent
 		float x = -(InternalCalls.GetRegionGame().x / 2) + 150;
 
 		//UPDATE ABILITYS BUTTONS
-
+		
 		UpdateAbilityButton(x,y);
 
 		//UPDATE THE REST ELEMENTS
@@ -630,8 +638,7 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(650, 90f, 0);
 		AbilityBord.GetComponent<Transform2D>().SetSize(bounds);
 
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-		GameObject selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+		
 		
 		
 		
@@ -687,6 +694,23 @@ public class pauseMenuButton : RagnarComponent
 		UICharacterName.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(214, 214f, 0);
 		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);
+
+
+
+		pos.Set(x+150 , y, -10.400f);
+		UIPaulImage.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(60, 60, 0);
+		UIPaulImage.GetComponent<Transform2D>().SetSize(bounds);
+
+		pos.Set(x+230, y , -10.400f);
+		UIChaniImage.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(60, 60, 0);
+		UIChaniImage.GetComponent<Transform2D>().SetSize(bounds);
+
+		pos.Set(x+310, y , -10.400f);
+		UIStilgarImage.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(60, 60, 0);
+		UIStilgarImage.GetComponent<Transform2D>().SetSize(bounds);
 	}
 	void ImageShow()
 	{
@@ -829,12 +853,39 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void UpdateAbilityButton(float x,float y)
     {
+		
+
+		if (selectedPlayer.name == "Player")//paul
+		{
+			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throw_stone.png");
+			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
+			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_voice.png");
+			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_crysknife.png");
+			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+		}
+		else if (selectedPlayer.name == "Player_2")//chani
+		{
+			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_camouflage.png");
+			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_crysknife.png");
+			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+		}
+		else if (selectedPlayer.name == "Player_3")//stilgar
+		{
+			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_stunner.png");
+			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_sword.png");
+			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+		}
 		////////////////////////////////////////////////
 		/// ABILITY1 BUTTON
 		////////////////////////////////////////////////
 		int a = Ability1.GetComponent<UIButton>().GetButtonState();
 		pos.Set(x + 625, y, -10.400f);
 		Ability1.GetComponent<Transform2D>().position2D = pos;
+
 		switch (a)
 		{
 			case 0:
@@ -843,7 +894,7 @@ public class pauseMenuButton : RagnarComponent
 			case 1:
 				if (isFirstA1)
 				{
-
+					
 					isFirstA1 = false;
 					
 				}
