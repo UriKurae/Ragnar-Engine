@@ -120,10 +120,6 @@ public class BasicEnemy : RagnarComponent
                 agents.CalculatePath(agents.hitPosition);
 
             }
-            if (dis.magnitude > 10)
-            {
-                agents.CalculatePath(agents.hitPosition - dis);
-            }
             agents.MovePath();
             //Poner que puede hacer el enemigo
 
