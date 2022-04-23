@@ -38,7 +38,11 @@ void TextureImporter::ImportTexture(aiMaterial* material, aiTextureType type, co
 		json.SetNewJsonNumber(json.ValueToObject(json.GetRootValue()), "Type", (int)ComponentType::MATERIAL);
 		json.SetNewJsonString(json.ValueToObject(json.GetRootValue()), "Texture Path", libraryPath.c_str());
 
-		SaveTexture(libraryPath);
+		if(type == aiTextureType::aiTextureType_NORMALS)
+			SaveTexture(libraryPath, false);
+		else
+			SaveTexture(libraryPath);
+
 		ilDeleteImages(1, &image);
 	}
 }
@@ -59,8 +63,10 @@ void TextureImporter::ImportTexture(std::string& fileName)
 		std::string libraryPath;
 
 		ResourceManager::GetInstance()->CreateResource(ResourceType::TEXTURE, fileName, libraryPath);
-
-		SaveTexture(libraryPath);
+		if (fileName.find("normal") != std::string::npos)
+			SaveTexture(libraryPath, false);
+		else	
+			SaveTexture(libraryPath);
 		ilDeleteImages(1, &image);
 	}
 }
@@ -75,15 +81,22 @@ void TextureImporter::ImportTexture2(std::string& fileName)
 	app->fs->GetFilenameWithoutExtension(fileName);
 	std::string libraryPath = SETTINGS_FOLDER + std::string("EngineResources/") + fileName + ".rgtexture";
 
-	SaveTexture(libraryPath);
+	if (fileName.find("normal") != std::string::npos)
+		SaveTexture(libraryPath, false);
+	else
+		SaveTexture(libraryPath);
+
 	ilDeleteImages(1, &image);
 }
 
-void TextureImporter::SaveTexture(std::string& fileName)
+void TextureImporter::SaveTexture(std::string& fileName, bool compress)
 {
 	ILuint size;
 	ILubyte* data;
-	ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+	
+	if(compress)
+		ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+	
 	size = ilSaveL(IL_DDS, nullptr, 0);
 
 	if (size > 0)
