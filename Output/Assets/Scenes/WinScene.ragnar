@@ -219,7 +219,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/dunes_rising_winscene.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/dunes_rising_winscene.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -274,25 +275,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -347,7 +352,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -395,25 +401,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -468,7 +478,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_replay_button_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -516,25 +527,29 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -589,7 +604,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -637,7 +653,8 @@
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_level_completed_text.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_level_completed_text.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
