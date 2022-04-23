@@ -25,10 +25,12 @@ public class BasicEnemy : RagnarComponent
     // States
     public bool canShoot = true;
     public bool pendingToDelete = false;
+    public bool controlled = false;
 
     // Timers
     public float shootCooldown = 0f;
     float deathTimer = -1f;
+    float controlledCooldown = 10;
 
     float initialSpeed;
 
@@ -56,56 +58,87 @@ public class BasicEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete && deathTimer == -1)
+
+        if (!controlled)
         {
-            if (!stunned)
+            if (!pendingToDelete && deathTimer == -1)
             {
-                if (!distracted)
+                if (!stunned)
                 {
-                    Patrol();
-                }
-                if (PerceptionCone())
-                {
-                    agents.speed = initialSpeed * 1.2f;
-                    Shoot();
-                }
-                else
-                {
-                    agents.speed = initialSpeed;
+                    if (!distracted)
+                    {
+                        Patrol();
+                    }
+                    if (PerceptionCone())
+                    {
+                        agents.speed = initialSpeed * 1.2f;
+                        Shoot();
+                    }
+                    else
+                    {
+                        agents.speed = initialSpeed;
+                    }
                 }
             }
+
+            if (deathTimer >= 0)
+            {
+                deathTimer -= Time.deltaTime;
+                if (deathTimer < 0)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    deathTimer = -1f;
+                    pendingToDelete = true;
+                }
+            }
+
+            if (stunnedTimer >= 0)
+            {
+                stunnedTimer -= Time.deltaTime;
+                if (stunnedTimer < 0)
+                {
+                    stunned = false;
+                    stunnedTimer = -1f;
+                }
+            }
+
+            if (distractedTimer >= 0)
+            {
+                distractedTimer -= Time.deltaTime;
+                if (distractedTimer < 0)
+                {
+                    distracted = false;
+                    distractedTimer = -1f;
+                }
+            }
+        }
+        else
+        {
+            Vector3 dis = this.gameObject.transform.globalPosition - players[0].transform.globalPosition;
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                agents.CalculatePath(agents.hitPosition);
+
+            }
+            if (dis.magnitude > 10)
+            {
+                agents.CalculatePath(agents.hitPosition - dis);
+            }
+            agents.MovePath();
+            //Poner que puede hacer el enemigo
+
+            //
+            controlledCooldown -= Time.deltaTime;
+            if (controlledCooldown < 0)
+            {
+                controlledCooldown = 0f;
+                controlled = false;
+                players[0].GetComponent<Player>().SetControled(true);
+                agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+            }
+            
         }
 
-        if (deathTimer >= 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
-            {
-                gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
-                deathTimer = -1f;
-                pendingToDelete = true;
-            }
-        }
-
-        if (stunnedTimer >= 0)
-        {
-            stunnedTimer -= Time.deltaTime;
-            if (stunnedTimer < 0)
-            {
-                stunned = false;
-                stunnedTimer = -1f;
-            }
-        }
-
-        if (distractedTimer >= 0)
-        {
-            distractedTimer -= Time.deltaTime;
-            if (distractedTimer < 0)
-            {
-                distracted = false;
-                distractedTimer = -1f;
-            }
-        }
     }
 
     public void OnCollision(Rigidbody other)
@@ -202,6 +235,11 @@ public class BasicEnemy : RagnarComponent
 
         index = RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
         return (index == -1) ? false : true;
+    }
+    public void SetControled(bool flag)
+    {
+        controlled = flag;
+        if (flag) controlledCooldown = 10;
     }
 
     private void Shoot()

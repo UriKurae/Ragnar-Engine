@@ -25,10 +25,12 @@ public class TankEnemy : RagnarComponent
     // States
     public bool canShoot = true;
     public bool pendingToDelete = false;
+    public bool controlled = false;
 
     // Timers
     public float shootCooldown = 0f;
     float deathTimer = -1f;
+    float controlledCooldown = 10;
 
     float initialSpeed;
 
@@ -51,30 +53,55 @@ public class TankEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete && deathTimer == -1)
+        if (!controlled)
         {
-            Patrol();
-            if (PerceptionCone())
+            if (!pendingToDelete && deathTimer == -1)
             {
-                agents.speed = initialSpeed * 1.1f;
-                Shoot();
+                Patrol();
+                if (PerceptionCone())
+                {
+                    agents.speed = initialSpeed * 1.1f;
+                    Shoot();
+                }
+                else
+                {
+                    agents.speed = initialSpeed * 0.8f;
+                }
             }
-            else
-            {
-                agents.speed = initialSpeed * 0.8f;
-            }
-        }
 
-        if (deathTimer >= 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (deathTimer >= 0)
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
-                deathTimer = -1f;
-                pendingToDelete = true;
+                deathTimer -= Time.deltaTime;
+                if (deathTimer < 0)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    deathTimer = -1f;
+                    pendingToDelete = true;
+                }
             }
         }
+        else
+        {
+            if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            {
+                agents.CalculatePath(agents.hitPosition);
+
+            }
+            agents.MovePath();
+            controlledCooldown -= Time.deltaTime;
+            if (controlledCooldown < 0)
+            {
+                controlledCooldown = 0f;
+                controlled = false;
+                players[0].GetComponent<Player>().SetControled(true);
+            }
+
+        }
+    }
+        public void SetControled(bool flag)
+    {
+        controlled = flag;
+        if (flag) controlledCooldown = 10;
     }
 
     public void OnCollision(Rigidbody other)
