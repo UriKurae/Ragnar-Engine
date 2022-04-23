@@ -46,6 +46,8 @@ public class Boss : RagnarComponent
 	//bool shieldInmunity = false;
 	bool phase3Location = false;
 
+	private int destPoint = 0;
+
 	// Phase 4 mechanics
 	int throwedRocks = 0;
 	float hitGroundCooldown = 0.0f;
@@ -53,6 +55,11 @@ public class Boss : RagnarComponent
 	bool tired = false;
 	GameObject nextRock;
 	//float throwRockCooldown = 5.0f;
+
+	GameObject[] waypoints;
+	bool patrol = false;
+	bool bossStop = false;
+	float countDown = 5.0f;
 
 	public void Start()
 	{
@@ -62,6 +69,7 @@ public class Boss : RagnarComponent
 		offset = gameObject.GetSizeAABB();
 
 		players = GameObject.FindGameObjectsWithTag("Player");
+		waypoints = GameObject.FindGameObjectsWithTag("BossWaypoints");
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 
 		agent = gameObject.GetComponent<NavAgent>();
@@ -99,6 +107,8 @@ public class Boss : RagnarComponent
                     agent.MoveTo(jumpTo);
                 } 
             }
+
+			Patrol();
 		}
 		else if (state == BossState.PHASE3)
         {
@@ -145,6 +155,7 @@ public class Boss : RagnarComponent
                 }
 				else
                 {
+					Debug.Log("Searching the rock");
 					agent.MoveTo(nextRock.transform.localPosition);
                 }
 			}
@@ -168,6 +179,7 @@ public class Boss : RagnarComponent
 			case BossState.PHASE2:
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.5f;
 				material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
+				GotoNextPoint();
 				break;
 			case BossState.PHASE3:
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.8f;
@@ -262,6 +274,35 @@ public class Boss : RagnarComponent
 
 		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length);
 		return (index == -1) ? false : true;
+	}
+
+	public void GotoNextPoint()
+	{
+		//gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+		//gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+		Debug.Log(waypoints[destPoint].transform.globalPosition.ToString());
+		agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
+		destPoint = (destPoint + 1) % waypoints.Length;
+	}
+
+	private void Patrol()
+    {
+		if (!bossStop && agent.MovePath())
+        {
+			Debug.Log("Stopped");
+			bossStop = true;
+        }
+
+		if (bossStop)
+        {
+			countDown -= Time.deltaTime;
+			if (countDown <= 0.0f)
+            {
+				bossStop = false;
+				countDown = 5.0f;
+				GotoNextPoint();
+            }
+        }
 	}
 	public void OnCollision(Rigidbody other)
 	{

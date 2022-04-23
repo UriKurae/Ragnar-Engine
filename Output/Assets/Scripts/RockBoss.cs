@@ -21,10 +21,17 @@ public class RockBoss : RagnarComponent
         goRB.IgnoreCollision(boss, true);
         goRB.ApplyCentralForce(direction.normalized * force);
     }
+
+    public void Update()
+    {
+        
+    }
 	
     public void OnCollision (Rigidbody other)
     {
-         InternalCalls.Destroy(gameObject);
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground")
+        {
+            InternalCalls.Destroy(gameObject);
+        }
     }
-
 }
