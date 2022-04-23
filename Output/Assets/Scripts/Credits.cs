@@ -10,6 +10,8 @@ public class Credits : RagnarComponent
 	GameObject TextName;
 	GameObject TextTitles;
 	GameObject MenuImage;
+	GameObject RagnarLogo;
+	GameObject UPCLogo;
 	GameObject AudioManager;
 	float textCounter = 0;
 	float newDelta=0;
@@ -25,6 +27,8 @@ public class Credits : RagnarComponent
 		TextJob = GameObject.Find("Jobs List");
 		TextName= GameObject.Find("Names List");
 		TextTitles = GameObject.Find("Tiles List");
+		RagnarLogo = GameObject.Find("Ragnar Logo");
+		UPCLogo = GameObject.Find("UPC Logo");
 		AudioManager = GameObject.Find("AudioWinMenu");
 		
 		Pos = new Vector3(0, 0, 0);
@@ -35,6 +39,11 @@ public class Credits : RagnarComponent
 		TextName.GetComponent<Transform2D>().position2D = Pos;
 		Pos.Set(-140, -(InternalCalls.GetRegionGame().y / 2) + 230, 36.1f);
 		TextTitles.GetComponent<Transform2D>().position2D = Pos;
+
+		Pos.Set(0, -(InternalCalls.GetRegionGame().y / 2) - 4300, -10.4f);
+		UPCLogo.GetComponent<Transform2D>().position2D = Pos;
+		Pos.Set(0, -(InternalCalls.GetRegionGame().y / 2) - 4450, -10.4f);
+		RagnarLogo.GetComponent<Transform2D>().position2D = Pos;
 	}
 	public void Update()
 	{
@@ -59,6 +68,12 @@ public class Credits : RagnarComponent
 
 			Pos.Set(-100, TextTitles.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 			TextTitles.GetComponent<Transform2D>().position2D = Pos;
+
+			Pos.Set(0, UPCLogo.GetComponent<Transform2D>().position2D.y + (vel*2), 36.1f);
+			UPCLogo.GetComponent<Transform2D>().position2D = Pos;
+
+			Pos.Set(0, RagnarLogo.GetComponent<Transform2D>().position2D.y + (vel * 2), 36.1f);
+			RagnarLogo.GetComponent<Transform2D>().position2D = Pos;
 
 		}
         else
