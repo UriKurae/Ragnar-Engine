@@ -137,6 +137,11 @@ public class Player : RagnarComponent
     {
         if (other.gameObject.name == "WinCondition")
             SceneManager.LoadScene("WinScene");
+
+        if (other.gameObject.name == "DialogueTrigger")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialogue();
+        }
     }
 
     public void SetControled(bool var)
