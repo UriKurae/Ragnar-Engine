@@ -193,8 +193,10 @@ void SetSize(MonoObject* go, MonoObject* size)
 int LoadTexture(MonoObject* go, MonoString* text)
 {
 	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
-	std::string y=mono_string_to_utf8(text);	
-	return tr->LoadTexture(y);
+	std::string y=mono_string_to_utf8(text);
+	
+	tr->principal->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	return 0;
 }
 void UseTexture(MonoObject* go, int ID)
 {

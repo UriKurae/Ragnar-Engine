@@ -219,10 +219,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/black.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/black.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 13,
@@ -274,28 +275,32 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 12,
@@ -348,10 +353,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 13,
@@ -452,10 +458,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 16,
@@ -506,10 +513,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 16,
@@ -560,10 +568,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 16,
@@ -614,10 +623,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/cropped-logo-hack-CITM.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/cropped-logo-hack-CITM.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 13,
@@ -662,10 +672,11 @@
                     "MoveOnResizeY": true
                 },
                 {
-                    "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/logo_1.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/logo_1.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 13,

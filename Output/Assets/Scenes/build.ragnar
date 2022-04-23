@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 133969944,
+                    "pointer": 177537072,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 192003904,
+                    "characters": 81116992,
                     "drawnArea": false
                 }
             ]
@@ -141,19 +141,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -48.992645263671875,
+                        -31.510452270507812,
                         0,
-                        101.03173828125
+                        127.0054931640625
                     ],
                     "Quaternion": [
                         0,
-                        0.64278745651245117,
+                        0.34202492237091064,
                         0,
-                        -0.76604461669921875
+                        -0.93969088792800903
                     ],
                     "RotationEditor": [
                         -0,
-                        -1.3962632417678833,
+                        -0.69814187288284302,
                         -0
                     ],
                     "Scale": [
@@ -179,15 +179,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        -2.6702880859375e-05,
+                        43.161109924316406,
+                        -39.237396240234375
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
+                        0.34202015399932861,
+                        1.9141678464507095e-08,
+                        -7.9287429954888466e-09,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -197,34 +197,34 @@
                     "Scale": [
                         1.4142134189605713,
                         1,
-                        0.99999994039535522
+                        1
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.48619174957275391,
+                    "Vertical Fov": 0.47287800908088684,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        0.24903106689453125,
-                        55,
-                        92.349082946777344
+                        -6.2881922721862793,
+                        43.161109924316406,
+                        96.947357177734375
                     ],
                     "Type": 3,
-                    "Zoom": 0,
+                    "Zoom": 30,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -48.992645263671875,
+                        -31.510452270507812,
                         0,
-                        101.03173828125
+                        127.0054931640625
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 280.00003051757812,
+                    "Horizontal Angle": 319.99942016601562,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0
@@ -536,10 +536,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 133970488,
+                    "pointer": 177539384,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 192003840,
+                    "enemies": 81116928,
                     "enemyGOs": 0
                 }
             ]
@@ -2022,7 +2022,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1949,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2037,8 +2037,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2056,7 +2056,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 289681256,
+                    "pointer": 177538024,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2078,7 +2078,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1949,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2093,8 +2093,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2156,7 +2156,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1949,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2171,8 +2171,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2234,7 +2234,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -331.5,
+                        -314.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2249,8 +2249,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2283,7 +2283,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1949,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2298,8 +2298,8 @@
                     ],
                     "buttonWidth": 215,
                     "buttonHeight": 25,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2899,7 +2899,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -309.5,
+                        -292.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2914,112 +2914,14 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/UI_chra.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1727813979,
-            "Parent UUID": 417171234,
-            "Name": "ab1",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        -300.5,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.075000002980232239,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 45,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 411597186,
-            "Parent UUID": 417171234,
-            "Name": "ab2",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        -300.5,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.075000002980232239,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 45,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/CrysknifeV.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -3046,7 +2948,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1949,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3061,8 +2963,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3094,9 +2996,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        3.1632928739203712e+38,
-                        1983,
-                        -10.399999618530273
+                        -1.8999996185302734,
+                        0
                     ],
                     "Scale": [
                         0.43833333253860474,
@@ -3110,8 +3011,8 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3144,7 +3045,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3159,8 +3060,8 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3222,7 +3123,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3237,14 +3138,15 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3270,7 +3172,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3285,32 +3187,36 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3344,7 +3250,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3359,32 +3265,36 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3418,7 +3328,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3433,14 +3343,15 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3450,8 +3361,8 @@
                 }
             ]
         },
-	{
-            "UUID": 8778606924,
+        {
+            "UUID": 4294967295,
             "Parent UUID": 417171234,
             "Name": "optionsGraphicsButton",
             "Active": true,
@@ -3466,7 +3377,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3481,32 +3392,36 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3540,7 +3455,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3555,14 +3470,15 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3572,7 +3488,7 @@
                 }
             ]
         },
-	{
+        {
             "UUID": 2754706365,
             "Parent UUID": 417171234,
             "Name": "optionsSoundButton",
@@ -3588,7 +3504,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3603,32 +3519,36 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3662,7 +3582,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3677,14 +3597,15 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3694,7 +3615,7 @@
                 }
             ]
         },
-	{
+        {
             "UUID": 3754936763,
             "Parent UUID": 417171234,
             "Name": "optionsControlsButton",
@@ -3710,7 +3631,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3725,32 +3646,36 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -3784,7 +3709,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2000,
+                        1983,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3799,19 +3724,759 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2475174042,
+            "Parent UUID": 417171234,
+            "Name": "UISelector",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/Selected_PJ.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 4294967295,
+            "Parent UUID": 417171234,
+            "Name": "UICharBor1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/PJ_small.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 4294967295,
+            "Parent UUID": 417171234,
+            "Name": "UICharBor2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/PJ_small.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 3669390804,
+            "Parent UUID": 417171234,
+            "Name": "UICharBor3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/PJ_small.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 4294967295,
+            "Parent UUID": 417171234,
+            "Name": "UIAbilityArray",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/Icons_Habs.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 4294967295,
+            "Parent UUID": 417171234,
+            "Name": "UICharPhoto",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 222021447,
+            "Parent UUID": 417171234,
+            "Name": "UICharacterName",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1844609928,
+            "Parent UUID": 417171234,
+            "Name": "ab1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/SpiceNadeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1754414141,
+            "Parent UUID": 417171234,
+            "Name": "ab2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/CrysknifeV.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1499744966,
+            "Parent UUID": 417171234,
+            "Name": "ab3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1383053735,
+            "Parent UUID": 417171234,
+            "Name": "ab4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 886346705,
+            "Parent UUID": 417171234,
+            "Name": "ab5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.075000002980232239,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 45,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1322,
+                    "lastButtonHeight": 769,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
                     "alpha": 1
                 }
             ]
