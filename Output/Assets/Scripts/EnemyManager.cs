@@ -87,19 +87,19 @@ public class EnemyManager : RagnarComponent
 
     private void ChangeEnemyState(GameObject go, EnemyState newState)
     {
-        if (go.GetComponent<AirEnemy>() != null && go.GetComponent<AirEnemy>().state != newState)
+        if (go.GetComponent<AirEnemy>().state != newState && go.GetComponent<AirEnemy>().ToString() == "AirEnemy")
         {
             go.GetComponent<AirEnemy>().state = newState;
         }
-        if (go.GetComponent<BasicEnemy>() != null && go.GetComponent<BasicEnemy>().state != newState)
+        if (go.GetComponent<BasicEnemy>().state != newState && go.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
         {
             go.GetComponent<BasicEnemy>().state = newState;
         }
-        if (go.GetComponent<TankEnemy>() != null && go.GetComponent<TankEnemy>().state != newState)
+        if (go.GetComponent<TankEnemy>().state != newState && go.GetComponent<TankEnemy>().ToString() == "TankEnemy")
         {
             go.GetComponent<TankEnemy>().state = newState;
         }
-        if (go.GetComponent<UndistractableEnemy>() != null && go.GetComponent<UndistractableEnemy>().state != newState)
+        if (go.GetComponent<UndistractableEnemy>().state != newState && go.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
         {
             go.GetComponent<UndistractableEnemy>().state = newState;
         }

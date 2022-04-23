@@ -28,7 +28,18 @@ public class BackStab_2 : RagnarComponent
 			Vector3 behind = selectedEnemy.transform.globalPosition - (selectedEnemy.transform.forward * 1);
 			behind.y = -0.8f;
 			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
-			selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
+			if(selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
+            {
+				selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
+            }
+			if(selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
+            {
+				selectedEnemy.GetComponent<UndistractableEnemy>().pendingToDelete = true;
+            }
+			if(selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
+            {
+				selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
+            }
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
 		}
 		InternalCalls.Destroy(gameObject);

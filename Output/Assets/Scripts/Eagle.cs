@@ -27,7 +27,6 @@ public class Eagle : RagnarComponent
 	{
         if(!agent.MovePath() && cooldown == 0)
         {
-            Debug.Log("algo");
             Rigidbody area = gameObject.CreateComponent<Rigidbody>();
             CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);
             cooldown = 6f;

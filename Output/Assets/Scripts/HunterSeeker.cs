@@ -37,7 +37,6 @@ public class HunterSeeker : RagnarComponent
 				GameObject player = GameObject.Find("Player_2");
 				player.GetComponent<Player>().SetControled(true);
 				gameObject.EraseChild(area);
-				//InternalCalls.Destroy(area);
 				InternalCalls.Destroy(gameObject);
 			}
 		}
