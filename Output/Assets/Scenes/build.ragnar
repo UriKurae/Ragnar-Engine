@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 155274272,
+                    "pointer": 164591008,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 211402560,
+                    "characters": 221626176,
                     "drawnArea": false
                 }
             ]
@@ -141,19 +141,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -46.559967041015625,
+                        100,
                         0,
-                        82.836395263671875
+                        41.955657958984375
                     ],
                     "Quaternion": [
                         0,
-                        0.97029572725296021,
+                        0.94206207990646362,
                         0,
-                        0.24192190170288086
+                        -0.33543857932090759
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.48869219422340393,
+                        -0.68414151668548584,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -195,36 +195,36 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142135381698608,
+                        1.4142137765884399,
                         1,
-                        1
+                        1.0000001192092896
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.49674096703529358,
+                    "Vertical Fov": 0.36588481068611145,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -70.034164428710938,
+                        131.60122680664062,
                         55,
-                        126.98492431640625
+                        80.70477294921875
                     ],
                     "Type": 3,
-                    "Zoom": 18,
+                    "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -46.559967041015625,
+                        100,
                         0,
-                        82.836395263671875
+                        41.955657958984375
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 152,
+                    "Horizontal Angle": 219.19842529296875,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -542,10 +542,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 155274816,
+                    "pointer": 164588152,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 211402496,
+                    "enemies": 221626112,
                     "enemyGOs": 0
                 }
             ]
@@ -2044,7 +2044,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2062,7 +2062,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 155277400,
+                    "pointer": 164589920,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2100,7 +2100,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2178,7 +2178,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2256,7 +2256,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2305,7 +2305,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2921,7 +2921,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2970,7 +2970,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3019,7 +3019,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3068,7 +3068,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3117,7 +3117,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3166,7 +3166,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 769,
+                    "lastButtonHeight": 561,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3209,6 +3209,310 @@
                     "textPositionX": 0,
                     "textPositionY": 0,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1069194251,
+            "Parent UUID": 417171234,
+            "Name": "Boss",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        1.7016549110412598,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Boss",
+                    "pointer": 329758216,
+                    "type": 4,
+                    "componentTable": 0,
+                    "state": 0,
+                    "index": 0,
+                    "barrelLocations": 221687688,
+                    "barrelCount": 0,
+                    "stunnedHits": 0
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 2,
+                    "Radius": 1,
+                    "Height": 2,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 20,
+                    "Active": true,
+                    "Radius": 0.5,
+                    "Height": 2,
+                    "StopHeight": 0.89999997615814209,
+                    "MaxSlope": 45,
+                    "Speed": 4,
+                    "AngularSpeed": 180,
+                    "Acceleration": 1,
+                    "StoppingDistance": 0,
+                    "PathType": 1,
+                    "NumPolys": 0,
+                    "NumStraight": 0,
+                    "NumSmooth": 0
+                }
+            ]
+        },
+        {
+            "UUID": 885765771,
+            "Parent UUID": 417171234,
+            "Name": "WpBoss1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "BossWaypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        -9.509033203125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 567850487,
+            "Parent UUID": 417171234,
+            "Name": "WpBoss2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "BossWaypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        4.2095327377319336
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 810649559,
+            "Parent UUID": 417171234,
+            "Name": "WpBoss3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "BossWaypoints",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        11.479538917541504,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 643116903,
+            "Parent UUID": 417171234,
+            "Name": "Barrel3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Barrel3.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Settings\/EngineResources\/__Cube.mesh",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Barrel",
+                    "pointer": 329761072,
+                    "type": 4,
+                    "componentTable": 0
                 }
             ]
         }
