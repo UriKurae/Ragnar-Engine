@@ -161,6 +161,8 @@ void CameraComponent::OnEditorShake()
 	if (smooth == 3) ImGui::Text("Smoothnes:: out");
 	if (ImGui::Button("Shake"))
 		RequestShake(shakeStrength, shakeDuration);
+
+	ImGui::DragFloat4("##Limits", limits.ptr());
 }
 
 bool CameraComponent::Update(float dt)
@@ -311,6 +313,11 @@ void CameraComponent::UpdateMovement()
 				pos.x -= -verticalDrag * sin(DEGTORAD * horizontalAngle);
 				pos.z -= -verticalDrag * cos(DEGTORAD * horizontalAngle);
 			}
+
+			if (pos.x < limits.x) pos.x = limits.x;
+			else if (pos.x > limits.z) pos.x = limits.z; // limit.z = bound.x + bound.w
+			if (pos.z < limits.y) pos.z = limits.y;
+			else if (pos.z > limits.w) pos.z = limits.w; // limit.w = bound.y + bound.h
 
 			controllerTrans->SetPosition(float3(pos.x, 0, pos.z));
 			controllerTrans->ForceUpdateTransform();
@@ -465,6 +472,9 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	shakeDuration = node.GetJsonNumber("Shake Duration");
 	smooth = node.GetJsonNumber("Shake Smooth");
 
+	// Limits
+	limits = node.GetJson4Number(node, "Limits");
+
 	SetPlanes();
 
 	return true;
@@ -500,6 +510,9 @@ bool CameraComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Strength", shakeStrength);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Duration", shakeDuration);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Shake Smooth", smooth);
+
+	// Limits
+	file.SetNewJson4Number(file, "Limits", limits);
 
 	node.SetValueToArray(array, file.GetRootValue());
 
