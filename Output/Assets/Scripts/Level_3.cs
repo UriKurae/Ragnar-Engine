@@ -187,6 +187,11 @@ public class Level_3 : RagnarComponent
             cooldown = 0f
         }; // Trap
         ///////////////////////////////////////////////////////////////////
+        
+        InternalCalls.InstancePrefab("PlayerManager");
+        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
+        InternalCalls.InstancePrefab("EnemyManager");
+        GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemies = enemies;
     }
     public void Update()
 	{
