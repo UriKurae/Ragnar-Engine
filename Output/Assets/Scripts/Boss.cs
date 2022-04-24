@@ -28,8 +28,12 @@ public class Boss : RagnarComponent
 	public Rigidbody rigidbody;
 	
 	public BossState state;
+	
+	// NavMesh behaviour
 	NavAgent agent;
+	float calculatePathCooldown = 0.0f;
 
+	// Percetion variables
 	private Vector3 offset;
 	public int index = 0;
 
@@ -43,21 +47,21 @@ public class Boss : RagnarComponent
 	public int barrelCount = 0;
 	public int stunnedHits = 0;
 	float barrelCooldown = 0.0f;
-	//bool shieldInmunity = false;
+	bool shieldInmunity = false;
 	bool phase3Location = false;
 
 	private int destPoint = 0;
 
 	// Phase 4 mechanics
 	int throwedRocks = 0;
-	float hitGroundCooldown = 0.0f;
+	float hitGroundCooldown = 10.0f;
 	bool rocksAvailable = false;
+	bool throwingRocks = false;
 	bool tired = false;
 	GameObject nextRock;
-	//float throwRockCooldown = 5.0f;
+	float sweepAttackCooldown = 0.0f;
 
 	GameObject[] waypoints;
-	bool patrol = false;
 	bool bossStop = false;
 	float countDown = 5.0f;
 
@@ -91,6 +95,7 @@ public class Boss : RagnarComponent
             // this instakills
             if (PerceptionCone(90))
             {
+				Debug.Log("Spotted Player");
                 Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
                 Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
                 for (int i = 0; i < players.Length; ++i)
@@ -119,25 +124,31 @@ public class Boss : RagnarComponent
 
 				agent.MoveTo(destination);
 				
-				if (this.gameObject.transform.localPosition == destination) phase3Location = false;
+				if (this.gameObject.transform.localPosition == destination) phase3Location = true;
 
-				//shieldInmunity = true;
+				shieldInmunity = true;
             }
 			ExplodeBarrels();
 			GenerateBarrels();
 			if (barrelCount < 3) barrelCooldown -= Time.deltaTime;
-			Debug.Log(barrelCooldown.ToString());
-        }
+			
+			if (phase3Location) FollowPlayer();
+		}
 		else if (state == BossState.PHASE4)
         {
 			if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
             {
 				GenerateRocks();
-				hitGroundCooldown = 5.0f;
+				hitGroundCooldown = 10.0f;
+				throwingRocks = true;
             }
+			else if (!throwingRocks && hitGroundCooldown > 0.0f && !tired)
+            {
+				FollowPlayer();
+				hitGroundCooldown -= Time.deltaTime;
+			}
 			else if (tired == false && rocksAvailable == true)
             {
-				Debug.Log("ESTOY TIRANDOLA");
 				ThrowRock();
 				rocksAvailable = false;
 			}
@@ -162,8 +173,11 @@ public class Boss : RagnarComponent
 			else
             {
 				tired = true;
+				throwingRocks = false;
 				hitGroundCooldown -= Time.deltaTime;
 			}
+
+			SweepAttack();
 		}
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
@@ -182,18 +196,21 @@ public class Boss : RagnarComponent
 				GotoNextPoint();
 				break;
 			case BossState.PHASE3:
-				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.8f;
+				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.75f;
 				material.SetTexturePath("Assets/Resources/white.png");
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
-				//if (!shieldInmunity)
-				//{
+				if (!shieldInmunity)
+				{
 					rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
 					material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
-				//}
-				//else state--;
+				}
+				else state--;
+				break;
+			default:
+				state--;
 				break;
 		}
     }
@@ -304,6 +321,39 @@ public class Boss : RagnarComponent
             }
         }
 	}
+
+	private void FollowPlayer()
+	{
+		if (calculatePathCooldown <= 0.0f)
+        {
+			agent.CalculatePath(players[0].transform.localPosition);
+			calculatePathCooldown = 3.0f;
+			Debug.Log("Following player");
+		}
+
+		agent.MovePath();
+		calculatePathCooldown -= Time.deltaTime;
+	}
+	public void SweepAttack()
+    {
+		for (int i = 0; i < players.Length; ++i)
+		{
+			if ((players[i].transform.localPosition.magnitude - gameObject.transform.localPosition.magnitude) <= 2.0f)
+			{
+				// Play sweep attack animation
+
+				// Play sweep attack sound
+
+				// Hit player, lower his HP
+
+				// Reset Cooldown
+				sweepAttackCooldown = 5.0f;
+			}
+		}
+   
+
+		sweepAttackCooldown -= Time.deltaTime;
+    }
 	public void OnCollision(Rigidbody other)
 	{
 		if (other.gameObject.tag == "Backstab")
