@@ -60,86 +60,88 @@ SliderComponent::~SliderComponent()
 bool SliderComponent::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Slider Update");
-	int cont = 0;
-	ComponentTransform2D* q;
-	ComponentTransform2D* r;
-	for (int a = 0; a < owner->components.size(); a++) {
-		if (owner->components[a]->type == ComponentType::TRANFORM2D)
-		{
-			cont++;
-			if (cont == 1) {
-				q = (ComponentTransform2D*)owner->components[a];
-			}
-			else
+	if (owner->active) {
+		int cont = 0;
+		ComponentTransform2D* q;
+		ComponentTransform2D* r;
+		for (int a = 0; a < owner->components.size(); a++) {
+			if (owner->components[a]->type == ComponentType::TRANFORM2D)
 			{
-				r = (ComponentTransform2D*)owner->components[a];
+				cont++;
+				if (cont == 1) {
+					q = (ComponentTransform2D*)owner->components[a];
+				}
+				else
+				{
+					r = (ComponentTransform2D*)owner->components[a];
 
-				
-				break;
+
+					break;
+				}
 			}
 		}
-	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	float2 mPos = float2::zero;
-	float4 viewport = float4::zero;
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		float2 mPos = float2::zero;
+		float4 viewport = float4::zero;
 #ifndef DIST
-	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
-	viewport = app->editor->GetGameView()->GetBounds();
+		mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+		viewport = app->editor->GetGameView()->GetBounds();
 #else
-	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
-	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+		mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+		viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 #endif
 
-	float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
-	float2 fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
+		float2 mousePos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+		float2 fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
 
-	ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
-	float posXMin = ((viewport.z / 2) + (transform2D->GetPosition().x)) - (transform2D->GetButtonWidth() / 2);
-	float posXMax = ((viewport.z / 2) + (transform2D->GetPosition().x)) + (transform2D->GetButtonWidth() / 2);
-	float total = posXMax - posXMin;
-	float thePos = total*barProgres;
+		ComponentTransform2D* transform2D = owner->GetComponent<ComponentTransform2D>();
+		float posXMin = ((viewport.z / 2) + (transform2D->GetPosition().x)) - (transform2D->GetButtonWidth() / 2);
+		float posXMax = ((viewport.z / 2) + (transform2D->GetPosition().x)) + (transform2D->GetButtonWidth() / 2);
+		float total = posXMax - posXMin;
+		float thePos = total * barProgres;
 
-	r->SetPosition(float3(thePos + q->GetPosition().x - (q->GetButtonWidth() / 2), q->GetPosition().y, r->GetPosition().z));
-	r->SetButtonHeight(q->GetButtonHeight());
-	r->Update(0);
-
-
+		r->SetPosition(float3(thePos + q->GetPosition().x - (q->GetButtonWidth() / 2), q->GetPosition().y, r->GetPosition().z));
+		r->SetButtonHeight(q->GetButtonHeight());
+		r->Update(0);
 
 
-	if (!active)
-		state = State::DISABLED;
-	else
-		state = State::NORMAL;
 
-	if (state != State::DISABLED)
-	{
-		if (app->userInterface->focusedGameObject == owner)
-		{
-			state = State::FOCUSED;
 
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
-				state = State::PRESSED;
-		}
-		else state = State::NORMAL;
+		
 
-		if (app->userInterface->UIGameObjectSelected == owner)
-		{
-			state = State::SELECTED;
+		
+			if (app->userInterface->focusedGameObject == owner)
+			{
+				state = State::FOCUSED;
+
+				if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+					state = State::PRESSED;
+			}
+			else state = State::NORMAL;
+
+			if (app->userInterface->UIGameObjectSelected == owner)
+			{
+				state = State::SELECTED;
+			}
+		
+
+		if (state == State::PRESSED) {
+
+			if (fMousePos.x > posXMin && fMousePos.x < posXMax)
+			{
+				thePos = fMousePos.x - posXMin;
+				barProgres = thePos / total;
+
+				r->SetPosition(float3(thePos + q->GetPosition().x - (q->GetButtonWidth() / 2), q->GetPosition().y, r->GetPosition().z));
+
+				r->Update(0);
+			}
 		}
 	}
-	
-	if (state == State::PRESSED) {
-		
-		if (fMousePos.x > posXMin && fMousePos.x < posXMax)
-		{	
-			thePos = fMousePos.x - posXMin;		
-			barProgres = thePos / total;
-			
-			r->SetPosition(float3(thePos +q->GetPosition().x-(q->GetButtonWidth()/2), q->GetPosition().y, r->GetPosition().z));
-			
-			r->Update(0);																
-		}
+	else 
+	{
+		state = State::DISABLED;
 	}
 	return true;
 

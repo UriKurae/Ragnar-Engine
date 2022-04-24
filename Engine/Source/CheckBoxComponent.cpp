@@ -44,35 +44,34 @@ bool CheckboxComponent::Update(float dt)
 
 	checkboxText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 
-	if (!active)
-		state = State::DISABLED;
-	else
-		state = State::NORMAL;
+	if (owner->active) {
 
-	if (state != State::DISABLED)
-	{
-		if (app->userInterface->focusedGameObject == owner)
-		{
-			state = State::FOCUSED;
 
-			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+		
+			if (app->userInterface->focusedGameObject == owner)
 			{
-				if (checked == true) {
-					actual = noSelectedMaterial;
-					checked = false;
+				state = State::FOCUSED;
+
+				// If mouse button pressed -> Generate event!
+				if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+				{
+					if (checked == true) {
+						actual = noSelectedMaterial;
+						checked = false;
+					}
+					else {
+						actual = selectedMaterial;
+						checked = true;
+					}
+
+
 				}
-				else {
-					actual = selectedMaterial;
-					checked = true;
-				}
-				
-				
 			}
-		}
 	}
-	else state = State::NORMAL;
-	
+	else 
+	{
+		state = State::DISABLED;
+	}
 	return true;
 }
 
