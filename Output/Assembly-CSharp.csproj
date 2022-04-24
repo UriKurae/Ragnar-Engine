@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -86,7 +86,6 @@
     <Compile Include="Assets\Scripts\Knife.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\EnemyBullet.cs" />
-    <Compile Include="Assets\Scripts\EnemyInteractions.cs" />
     <Compile Include="Assets\Scripts\TankEnemy.cs" />
     <Compile Include="Assets\Scripts\UndistractableEnemy.cs" />
     <Compile Include="Assets\Scripts\WinScreen.cs" />
@@ -97,7 +96,7 @@
     <Compile Include="Assets\Scripts\StunnerShot.cs" />
     <Compile Include="Assets\Scripts\SwordSlash.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
-		<Compile Include="Assets\Scripts\Barrel.cs" />
+    <Compile Include="Assets\Scripts\Barrel.cs" />
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemies.cs" />
     <Compile Include="Assets\Scripts\Voice.cs" />
