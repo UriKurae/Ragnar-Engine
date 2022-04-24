@@ -1659,13 +1659,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockArc_low.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockArc_low.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_rock_arc_basecolor.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_rock_arc_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_rock_arc_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_rock_arc_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1747,13 +1747,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1797,13 +1797,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1847,13 +1847,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1897,13 +1897,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1947,13 +1947,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -1997,13 +1997,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2047,13 +2047,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2097,13 +2097,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2147,13 +2147,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2197,13 +2197,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2247,13 +2247,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2297,13 +2297,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2347,13 +2347,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2397,13 +2397,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2447,13 +2447,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -2497,13 +2497,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Floor_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Floor_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -2615,12 +2615,12 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Arbusto_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Arbusto_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_bush_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_bush_basecolor.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -2665,12 +2665,12 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Arbusto_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Arbusto_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_bush_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_bush_basecolor.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -2715,12 +2715,12 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Arbusto_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Arbusto_01.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_bush_basecolor.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_bush_basecolor.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -2810,7 +2810,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_01.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_01.fbx",
                     "Active": false
                 }
             ]
@@ -2860,7 +2860,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_02.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_02.fbx",
                     "Active": false
                 }
             ]
@@ -2910,7 +2910,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_03.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_03.fbx",
                     "Active": false
                 }
             ]
@@ -2960,7 +2960,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_04.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_04.fbx",
                     "Active": false
                 }
             ]
@@ -3010,7 +3010,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_05.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_05.fbx",
                     "Active": false
                 }
             ]
@@ -3060,7 +3060,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_06.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_06.fbx",
                     "Active": false
                 }
             ]
@@ -3110,7 +3110,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_07.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_07.fbx",
                     "Active": false
                 }
             ]
@@ -3160,7 +3160,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_08.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_08.fbx",
                     "Active": false
                 }
             ]
@@ -3210,7 +3210,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_09.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_09.fbx",
                     "Active": false
                 }
             ]
@@ -3260,7 +3260,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_10.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_10.fbx",
                     "Active": false
                 }
             ]
@@ -3310,7 +3310,7 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__Collider_11.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__Collider_11.fbx",
                     "Active": false
                 }
             ]
@@ -3391,14 +3391,14 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_3.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_3.fbx",
                     "Active": true
                 }
             ]
@@ -3441,13 +3441,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_2.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_2.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3491,13 +3491,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_1.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_1.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3541,13 +3541,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockSmall1_low2.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockSmall1_low2.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3591,13 +3591,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockSmall1_low1.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockSmall1_low1.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3679,13 +3679,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low2.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low2.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3729,13 +3729,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low3.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low3.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3779,13 +3779,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low4.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low4.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3829,13 +3829,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low6.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low6.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3879,13 +3879,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low8.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low8.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3929,13 +3929,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low9.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low9.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -3979,13 +3979,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low12.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low12.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4029,13 +4029,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium2_low6.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium2_low6.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4079,13 +4079,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low22.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low22.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4129,13 +4129,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low23.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low23.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4179,13 +4179,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low24.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low24.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4229,13 +4229,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low27.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low27.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4279,13 +4279,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low29.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low29.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4329,13 +4329,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium2_low19.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium2_low19.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4379,13 +4379,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low32.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low32.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4429,13 +4429,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low33.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low33.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4479,13 +4479,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium1_low34.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium1_low34.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4529,13 +4529,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__RockMedium2_low30.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__RockMedium2_low30.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4579,13 +4579,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_0.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_0.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4629,13 +4629,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_4.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_4.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4679,13 +4679,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_5.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_5.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4729,13 +4729,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_6.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_6.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4779,13 +4779,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_7.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_7.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4829,13 +4829,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_9.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_9.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4879,13 +4879,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_10.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_10.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4929,13 +4929,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_11.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_11.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -4979,13 +4979,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_12.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_12.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5029,13 +5029,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_13.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_13.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5079,13 +5079,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_14.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_14.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5129,13 +5129,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_15.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_15.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5179,13 +5179,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_3001.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_3001.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5229,13 +5229,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_8.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_8.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5279,13 +5279,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_16.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_16.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5329,13 +5329,13 @@
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmartCombine_18.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmartCombine_18.fbx",
                     "Active": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 }
@@ -5417,14 +5417,14 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_mediumrock_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_mediumrock_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__prop_outside_rocks.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__prop_outside_rocks.fbx",
                     "Active": true
                 }
             ]
@@ -5467,14 +5467,14 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmallRocksLD.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmallRocksLD.fbx",
                     "Active": true
                 }
             ]
@@ -5517,14 +5517,14 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_smallrocks_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__SmallRocksRD.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__SmallRocksRD.fbx",
                     "Active": true
                 }
             ]
@@ -5567,14 +5567,14 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_ornithopter_basecolor.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_ornithopter_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_ornithopter_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_ornithopter_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__prop_ornithopter.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__prop_ornithopter.fbx",
                     "Active": true
                 }
             ]
@@ -5617,14 +5617,14 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/BlockOut\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 1,
-                    "Path": "Assets\/Resources\/BlockOut\/level1\/lvl1__prop_dunes.fbx",
+                    "Path": "Assets\/Resources\/Levels\/level1\/lvl1__prop_dunes.fbx",
                     "Active": true
                 }
             ]
