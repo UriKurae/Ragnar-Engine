@@ -17,6 +17,7 @@ public class Characters
     public string name;
     public string prefabPath;
     public State state;
+    public int hitPoints;
 
     // Abilities
     public Abilities[] abilities;

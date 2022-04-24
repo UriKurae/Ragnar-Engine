@@ -13,6 +13,7 @@ public class Rock : RagnarComponent
 	public void Start()
 	{
 		AimMethod();
+		gameObject.GetComponent<ParticleSystem>().Play();
 	}
 
 	private void AimMethod()
@@ -31,6 +32,8 @@ public class Rock : RagnarComponent
 		goRB.SetBodyPosition(pos);
 		goRB.IgnoreCollision(player, true);
 		goRB.ApplyCentralForce(direction.normalized * force);
+
+		agent.hitPosition = player.transform.globalPosition;
 	}
 
 	public void Update()
@@ -49,11 +52,11 @@ public class Rock : RagnarComponent
 
 	public void OnCollisionEnter(Rigidbody other)
 	{
-		if (other.gameObject.name == "Ground" && !hitOnce)
+		if (other.gameObject.tag == "Ground" && !hitOnce)
         {
 			gameObject.GetComponent<AudioSource>().PlayClip("WEAPONROCKHITGROUND");
 			hitOnce = true;
-        }
+		}
 
 		goRB.SetAsStatic();
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();

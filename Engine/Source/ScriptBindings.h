@@ -13,6 +13,8 @@
 #include "MaterialComponent.h"
 #include "Texture.h"
 #include "ParticleSystemComponent.h"
+#include "LightComponent.h"
+#include "Lights.h"
 
 #include "Scene.h"
 #include "TransformBindings.h"
@@ -113,6 +115,12 @@ MonoObject* GetGlobalRotation(MonoObject* go)
 	return app->moduleMono->QuatToCS(rotation);
 }
 
+void SetGlobalRotation(MonoObject* go, MonoObject* newRot)
+{
+	TransformComponent* tr = GetComponentMono<TransformComponent*>(go);
+	tr->SetRotation(app->moduleMono->UnboxQuat(newRot));
+}
+
 MonoObject* GetScale(MonoObject* go)
 {
 	TransformComponent* tr = GetComponentMono<TransformComponent*>(go);
@@ -183,6 +191,88 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	if (diff.use_count() - 1 == 1) diff->UnLoad();
 	SetTexture(res);*/
 }
+
+// Light ============================
+
+float GetLightIntensity(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return lightComp->GetLight()->intensity;
+}
+
+void SetLightIntensity(MonoObject* go, float intensity)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->intensity = intensity;
+}
+
+float GetLightLinear(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->lin;
+}
+
+void SetLightLinear(MonoObject* go, float lin)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->lin = lin;
+}
+
+float GetLightQuadratic(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->quadratic;
+}
+
+void SetLightQuadratic(MonoObject* go, float quadratic)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->quadratic = quadratic;
+}
+
+float GetLightConstant(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->constant;
+}
+
+void SetLightConstant(MonoObject* go, float constant)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->quadratic = constant;
+}
+
+MonoObject* GetLightAmbient(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return app->moduleMono->Float3ToCS(lightComp->GetLight()->ambient);
+}
+
+void SetLightAmbient(MonoObject* go, MonoObject* ambient)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->ambient = app->moduleMono->UnboxVector(ambient);
+}
+
+// Light ============================
 
 
 // GameObject =======================
@@ -264,12 +354,16 @@ MonoObject* Destroy(MonoObject* go)
 
 MonoObject* AddComponentMono(MonoObject* go, int componentType)
 {
-	char* goName = mono_string_to_utf8(mono_object_to_string(go, 0));
-
 	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
 	Component* comp = owner->CreateComponent(static_cast<ComponentType>(componentType));
 
 	return app->moduleMono->ComponentToCS(comp);
+}
+
+void DeleteComponentMono(MonoObject* go, MonoObject* component)
+{
+	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
+	owner->RemoveComponent(GetComponentMono<Component*>(component));
 }
 
 MonoObject* FindGameObjectWithName(MonoObject* name)
@@ -448,16 +542,16 @@ MonoArray* GetEmitters(MonoObject* go)
 	return ret;
 }
 
-void PlayEmitter(MonoObject* emitter)
+void PlayEmitter(MonoObject* go)
 {
-	ParticleEmitter* e = GetEmitterFromCS(emitter);
-	e->isActive = true;
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	particleSystem->Play();
 }
 
-void PauseEmitter(MonoObject* emitter)
+void PauseEmitter(MonoObject* go)
 {
-	ParticleEmitter* e = GetEmitterFromCS(emitter);
-	e->isActive = false;
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	particleSystem->Stop();
 }
 // Particle System ==================
 

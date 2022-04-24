@@ -61,7 +61,6 @@ public:
     float3 position = { 0,0,0 };
 
     float constant = 1.0f;
-    // Linear
     float lin = 0.09f;
     float quadratic = 0.032f;
     bool toDelete = false;
