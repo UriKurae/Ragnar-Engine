@@ -45,6 +45,10 @@ public class mainMenuBackScreen : RagnarComponent
     GameObject optionsSoundImage;
     GameObject optionsControlsButton;
     GameObject optionsControlsImage;
+
+    GameObject optionsScreenSDCH;
+    GameObject optionsScreenVSCH;
+    GameObject optionsScreenFSCH;
     public void Start()
 	{
         pos = new Vector3(0.0f, 0.0f, 0.0f);
@@ -93,7 +97,9 @@ public class mainMenuBackScreen : RagnarComponent
         optionsControlsButton = GameObject.Find("optionsControlsButton");
         optionsControlsImage = GameObject.Find("optionsControlsImage");
 
-
+        optionsScreenSDCH = GameObject.Find("optionsScreenSDCH");
+        optionsScreenVSCH = GameObject.Find("optionsScreenVSCH");
+        optionsScreenFSCH = GameObject.Find("optionsScreenFSCH");
 
 
 
@@ -438,7 +444,7 @@ public class mainMenuBackScreen : RagnarComponent
     {
         if (actualOption != "Screen")
         {
-
+            OptionsScreenHide();
         }
         else if (actualOption != "Controls")
         {
@@ -456,7 +462,7 @@ public class mainMenuBackScreen : RagnarComponent
         if (actualOption == "Screen")
         {
             optionsScreenButton.GetComponent<UIButton>().SetButtonState(2);
-
+            OptionsScreenShow();
         }
         else if (actualOption == "Controls")
         {
@@ -767,5 +773,19 @@ public class mainMenuBackScreen : RagnarComponent
         optionsControlsImage.isActive = false;
 
     }
+    void OptionsScreenShow()
+    {
+        optionsScreenFSCH.isActive = true;
 
+        ////////////////////////////////////////////////
+        /// FULLSCREEN CHECKBOX
+        ////////////////////////////////////////////////
+
+        pos.Set(0, 0, 36.1f);
+        optionsScreenFSCH.GetComponent<Transform2D>().position2D = pos;
+    }
+    void OptionsScreenHide()
+    {
+        optionsScreenFSCH.isActive = false;
+    }
 }

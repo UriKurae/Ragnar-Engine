@@ -7,10 +7,11 @@
 #include "ModuleEditor.h"
 #include"GameView.h"
 #include "ModuleWindow.h"
-
+#include "Resource.h"
+#include"Texture.h"
 #include"GameObject.h"
 #include "MaterialComponent.h"
-
+#include "ResourceManager.h"
 #include "GL/glew.h"
 #include "freetype-2.10.0/include/ft2build.h"
 #include FT_FREETYPE_H 
@@ -515,6 +516,13 @@ bool DropDownComponent::OnLoad(JsonParsing& node)
 		name = name + number;
 		button->SetAlpha(node.GetJsonNumber(name.c_str()));
 
+		name = "text";
+		name = name + number;
+		aux = node.GetJsonString(name.c_str());
+		button->GetNormalMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
+		button->GetFocusedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
+		button->GetPressedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
+		button->GetActualMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
 	}
 
 
@@ -580,6 +588,12 @@ bool DropDownComponent::OnSave(JsonParsing& node, JSON_Array* array)
 		name = "alpha";
 		name = name + number;		
 		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), name.c_str(), auxiliarButton->GetAlpha());
+
+		name = "text";
+		name = name + number;
+		std::shared_ptr<Texture> diff = nullptr;
+		diff=buttonsArray[a]->GetComponent<MaterialComponent>()->GetTexture();		
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), name.c_str(), diff->GetAssetsPath().c_str());
 	}
 	node.SetValueToArray(array, file.GetRootValue());
 

@@ -43,7 +43,7 @@ bool CheckboxComponent::Update(float dt)
 	RG_PROFILING_FUNCTION("Checkbox Update");
 
 	checkboxText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
-
+	isFirstTime = false;
 	if (owner->active) {
 
 
@@ -58,10 +58,12 @@ bool CheckboxComponent::Update(float dt)
 					if (checked == true) {
 						actual = noSelectedMaterial;
 						checked = false;
+						isFirstTime = true;
 					}
 					else {
 						actual = selectedMaterial;
 						checked = true;
+						isFirstTime = true;
 					}
 
 

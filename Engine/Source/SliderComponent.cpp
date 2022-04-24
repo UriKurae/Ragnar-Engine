@@ -102,7 +102,7 @@ bool SliderComponent::Update(float dt)
 		float thePos = total * barProgres;
 
 		r->SetPosition(float3(thePos + q->GetPosition().x - (q->GetButtonWidth() / 2), q->GetPosition().y, r->GetPosition().z));
-		r->SetButtonHeight(q->GetButtonHeight());
+		r->SetButtonHeight(q->GetButtonHeight()+20);
 		r->Update(0);
 
 

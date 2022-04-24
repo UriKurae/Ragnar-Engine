@@ -36,8 +36,21 @@ public class pauseMenuButton : RagnarComponent
 	GameObject optionsSoundImage;
 	GameObject optionsControlsButton;
 	GameObject optionsControlsImage;
-	//////////////AUDIO//////////////
-	GameObject SceneAudio;
+
+	GameObject optionsLanguaje;
+	GameObject optionsScreenSDCH;
+	GameObject optionsScreenVSCH;
+	GameObject optionsScreenFSCH;
+	GameObject optionsSreenText;
+
+	GameObject optionsSoundText;
+    GameObject optionsVoicesSound;
+    GameObject optionsFXcSound;
+    GameObject optionsMusicSound;
+    GameObject optionsGeneralSound;
+
+    //////////////AUDIO//////////////
+    GameObject SceneAudio;
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
@@ -102,11 +115,21 @@ public class pauseMenuButton : RagnarComponent
 		optionsControlsButton = GameObject.Find("optionsControlsButton");
 		optionsControlsImage = GameObject.Find("optionsControlsImage");
 
+		optionsScreenSDCH = GameObject.Find("optionsScreenSDCH");
+		optionsScreenVSCH = GameObject.Find("optionsScreenVSCH");
+		optionsScreenFSCH = GameObject.Find("optionsScreenFSCH"); 
+		optionsSreenText = GameObject.Find("optionsSreenText");
+		optionsLanguaje = GameObject.Find("optionsLanguaje");
+
+		optionsSoundText = GameObject.Find("optionsSoundText");
+
+        optionsVoicesSound = GameObject.Find("optionsVoicesSound");
+        optionsFXcSound = GameObject.Find("optionsFXcSound");
+        optionsMusicSound = GameObject.Find("optionsMusicSound");
+        optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 
 
-		
-
-		OptionsBackHide();
+        OptionsBackHide();
         //////////////GAME//////////////
         CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
@@ -173,25 +196,22 @@ public class pauseMenuButton : RagnarComponent
     {
 		if (actualOption != "Screen")
 		{
-
+			OptionsScreenHide();
 		}
-		else if (actualOption != "Controls")
+		if (actualOption != "Controls")
 		{
 
 		}
-		else if (actualOption != "Sound")
+		if (actualOption != "Sound")
 		{
-
+			OptionsSoundHide();
 		}
-		else if (actualOption != "Graphics")
-		{
 
-		}
 
 		if (actualOption == "Screen")
 		{
 			optionsScreenButton.GetComponent<UIButton>().SetButtonState(2);
-
+			OptionsScreenShow();
 		}
 		else if (actualOption == "Controls")
 		{
@@ -201,24 +221,16 @@ public class pauseMenuButton : RagnarComponent
 		else if (actualOption == "Sound")
 		{
 			optionsSoundButton.GetComponent<UIButton>().SetButtonState(2);
-
+			OptionsSoundShow();
 		}
 
 	}
 	void SelectedOptionHide()
 	{
-		if (actualOption == "Screen")
-		{
-			
-		}
-		else if (actualOption == "Controls")
-		{
-			
-		}
-		else if (actualOption == "Sound")
-		{
-			
-		}
+		
+		OptionsScreenHide();
+		OptionsSoundHide();
+
 
 	}
 	void OptionsBackShow()
@@ -504,6 +516,120 @@ public class pauseMenuButton : RagnarComponent
 		optionsControlsButton.isActive = false;
 		optionsControlsImage.isActive = false;
 	}
+	void OptionsScreenShow()
+	{
+		float y = (InternalCalls.GetRegionGame().y / 2);
+		float x = (InternalCalls.GetRegionGame().x / 2);
+		optionsScreenFSCH.isActive = true;
+		optionsScreenVSCH.isActive = true;
+		optionsScreenSDCH.isActive = true;
+		optionsSreenText.isActive = true;
+		optionsLanguaje.isActive = true;
+		////////////////////////////////////////////////
+		/// FULLSCREEN CHECKBOX
+		////////////////////////////////////////////////
+
+		pos.Set(x - 650, y - 295, 36.1f);
+		optionsScreenFSCH.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(40, 40, 0);
+		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
+		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
+		{
+
+		}
+
+		////////////////////////////////////////////////
+		/// V-SYNC CHECKBOX
+		////////////////////////////////////////////////
+
+		pos.Set(x - 650, y - 365, 36.1f);
+		optionsScreenVSCH.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(40, 40, 0);
+		optionsScreenVSCH.GetComponent<Transform2D>().SetSize(bounds);
+		if (optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked())
+		{
+
+		}
+		////////////////////////////////////////////////
+		/// SHADOWS CHECKBOX
+		////////////////////////////////////////////////
+
+		pos.Set(x - 650, y - 435, 36.1f);
+		optionsScreenSDCH.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(40, 40, 0);
+		optionsScreenSDCH.GetComponent<Transform2D>().SetSize(bounds);
+		if (optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked())
+		{
+
+		}
+
+		pos.Set(0, y - 375, 36.1f);
+		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(x - 550, y - 500, 36.1f);
+		optionsLanguaje.GetComponent<Transform2D>().position2D = pos;
+	}
+	void OptionsScreenHide()
+	{
+		optionsScreenFSCH.isActive = false;
+		optionsScreenVSCH.isActive = false;
+		optionsScreenSDCH.isActive = false;
+		optionsSreenText.isActive = false;
+		optionsLanguaje.isActive = false;
+	}
+	void OptionsSoundShow()
+	{
+		float y = (InternalCalls.GetRegionGame().y / 2);
+		float x = (InternalCalls.GetRegionGame().x / 2);
+		optionsSoundText.isActive = true;
+
+        optionsVoicesSound.isActive = true;
+        optionsFXcSound.isActive = true;
+        optionsMusicSound.isActive = true;
+        optionsGeneralSound.isActive = true;
+
+
+        pos.Set(0, y - 375, 36.1f);
+		optionsSoundText.GetComponent<Transform2D>().position2D = pos;
+
+		float generalSound;
+		float VoicesSound;
+		float FXcSound;
+		float MusicSound;
+
+
+		pos.Set(x-650, y - 260, 36.1f);
+        optionsVoicesSound.GetComponent<Transform2D>().position2D = pos;
+		VoicesSound = 100* optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
+
+
+
+		pos.Set(x - 650, y - 350, 36.1f);
+        optionsFXcSound.GetComponent<Transform2D>().position2D = pos;
+		FXcSound = 100 * optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
+
+
+
+		pos.Set(x - 650, y - 440, 36.1f);
+        optionsMusicSound.GetComponent<Transform2D>().position2D = pos;
+		MusicSound = 100 * optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
+
+
+
+		pos.Set(x - 650, y - 530, 36.1f);
+        optionsGeneralSound.GetComponent<Transform2D>().position2D = pos;
+		generalSound = 100 * optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
+
+
+	}
+	void OptionsSoundHide()
+	{
+		optionsSoundText.isActive = false;
+        optionsVoicesSound.isActive = false;
+        optionsFXcSound.isActive = false;
+        optionsMusicSound.isActive = false;
+        optionsGeneralSound.isActive = false;
+    }
 	//////////////PAUSE//////////////
 	void updateMenu()
     {
@@ -1040,5 +1166,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 		}
 	}
+
+	
 }
 

@@ -155,9 +155,11 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	{
 		loadtext(fileText);
 	}
+
 	if (node.GetJsonString("fontPath")) {
-		fontPath = node.GetJsonString("fontPath");
+		
 	}
+	fontPath = node.GetJsonString("fontPath");
 
 	loadFont(fontPath);
 
