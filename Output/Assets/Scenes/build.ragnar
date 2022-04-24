@@ -51,12 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "PlayerManager",
-                    "pointer": 164490360,
+                    "pointer": 318296544,
                     "type": 4,
                     "componentTable": 0,
                     "players": 0,
                     "characterSelected": 0,
-                    "characters": 221888320,
+                    "characters": 217235264,
                     "drawnArea": false
                 }
             ]
@@ -141,20 +141,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -22.967679977416992,
+                        11.625646591186523,
                         0,
-                        42.49334716796875
+                        49.062477111816406
                     ],
                     "Quaternion": [
                         0,
-                        0.35522750020027161,
+                        0.7432369589805603,
                         0,
-                        -0.93477988243103027
+                        -0.66902822256088257
                     ],
                     "RotationEditor": [
-                        -0,
-                        -0.72631490230560303,
-                        -0
+                        -3.1415927410125732,
+                        -1.4658005237579346,
+                        -3.1415927410125732
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -179,15 +179,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
+                        -3.814697265625e-06,
                         55,
                         -50
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.34202015399932861,
+                        -1.9821859709168166e-09,
                         0,
-                        0,
-                        0.93969261646270752
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -197,7 +197,7 @@
                     "Scale": [
                         1.4142131805419922,
                         1.0000001192092896,
-                        0.99999994039535522
+                        0.99999988079071045
                     ]
                 },
                 {
@@ -206,9 +206,9 @@
                     "Vertical Fov": 0.44560569524765015,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        10.239145278930664,
+                        61.351600646972656,
                         55,
-                        5.11102294921875
+                        54.302734375
                     ],
                     "Type": 3,
                     "Zoom": 0,
@@ -217,14 +217,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -22.967679977416992,
+                        11.625646591186523,
                         0,
-                        42.49334716796875
+                        49.062477111816406
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 318.38522338867188,
+                    "Horizontal Angle": 263.98422241210938,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -542,10 +542,10 @@
                 {
                     "Type": 4,
                     "ScriptName": "EnemyManager",
-                    "pointer": 164491720,
+                    "pointer": 318294096,
                     "type": 4,
                     "componentTable": 0,
-                    "enemies": 221888256,
+                    "enemies": 217235200,
                     "enemyGOs": 0
                 }
             ]
@@ -655,7 +655,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 164492400,
+                    "pointer": 318297088,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1083,7 +1083,7 @@
             "Parent UUID": 417171234,
             "Name": "SandParticle",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/SandParticle.rgprefab",
             "tag": "Untagged",
@@ -1228,9 +1228,9 @@
                             "Particle Reference Size Begin": 0.5,
                             "Particle Reference Lifetime": 3,
                             "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 0,
-                            "Tiles: X": 0,
-                            "Tiles: Y": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
                             "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
