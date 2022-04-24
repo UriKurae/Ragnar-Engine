@@ -6,7 +6,7 @@ public class HunterSeeker : RagnarComponent
 	NavAgent agent;
 	public GameObject[] enemies;
 	Rigidbody rb;
-	GameObject area;
+	//GameObject area;
 
 	public void Start()
 	{
