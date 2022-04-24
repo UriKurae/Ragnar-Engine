@@ -96,4 +96,7 @@ private:
 	int smooth = 0;
 	float elapsedTime = 0.0f;
 	float currentStrength = 0.0f;
+
+	// Limits
+	float4 limits;
 };

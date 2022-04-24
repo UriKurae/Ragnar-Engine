@@ -78,7 +78,7 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	{
 		LineSegment ray(pointA, pointA + arrayPos[i]);
 		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, ray);
-		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
+		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGoOnlyStatic(gameObjects, nodes);
 		std::stack<QuadtreeNode*>().swap(nodes);
 	}
 

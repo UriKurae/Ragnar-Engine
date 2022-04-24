@@ -710,7 +710,7 @@ void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 
 void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 {
-
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
 	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
@@ -720,12 +720,9 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 	}
 
 	if (app->physics->GetDebugMode())
-	{
-		PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 		app->physics->DebugDraw();
-		PushCamera(float4x4::identity, float4x4::identity);
-	}
-
+	
+	PushCamera(float4x4::identity, float4x4::identity);
 
 	if (stencil && objSelected && objSelected->GetActive())
 	{
