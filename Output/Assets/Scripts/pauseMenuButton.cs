@@ -202,7 +202,6 @@ public class pauseMenuButton : RagnarComponent
 				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				isSowing = true;
-				
 			}
 		}
 	}
