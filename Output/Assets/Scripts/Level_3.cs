@@ -36,8 +36,8 @@ public class Level_3 : RagnarComponent
         }; // Throwing Knife
         characters[0].abilities[1] = new Abilities
         {
-            name = "Rock Throw",
-            prefabPath = "Rock",
+            name = "Eagle Throw",
+            prefabPath = "Eagle",
             transformY = 1.15f,
             intensity = 4.0f,
             constant = 1.129f,
