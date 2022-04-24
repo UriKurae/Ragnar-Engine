@@ -649,6 +649,8 @@ void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)
 		diff = std::static_pointer_cast<Texture>(tex);
 	else if (textureTypeToChange == TextureType::NORMAL)
 		normalMap = std::static_pointer_cast<Texture>(tex);
+	else
+		diff = std::static_pointer_cast<Texture>(tex);
 
 }
 

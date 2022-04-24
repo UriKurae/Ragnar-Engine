@@ -54,7 +54,7 @@ public:
 			}
 		}
 
-		return sceneObjects; 
+		return sceneObjects;
 	}
 
 	inline GameObject* GetRoot() const { return root; }

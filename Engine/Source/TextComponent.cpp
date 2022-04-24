@@ -50,7 +50,7 @@ bool TextComponent::Update(float dt)
 
 	textToShow.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
 	//textToShow.setOnlyText(text);
-
+	textToShow.Scale = fontScale;
 	return true;
 }
 
@@ -122,6 +122,7 @@ void TextComponent::OnEditor()
 		strcpy(text, textToShow.textt.c_str());
 		if(ImGui::InputText("Texte", text, IM_ARRAYSIZE(text)))
 			textToShow.setOnlyText(text);
+		textToShow.Scale = fontScale;
 		ImGui::DragFloat("Font Size", &textToShow.Scale, 0.1, 0, 10);
 
 		ComponentOptions(this);
@@ -154,9 +155,11 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	{
 		loadtext(fileText);
 	}
+
 	if (node.GetJsonString("fontPath")) {
-		fontPath = node.GetJsonString("fontPath");
+		
 	}
+	fontPath = node.GetJsonString("fontPath");
 
 	loadFont(fontPath);
 

@@ -700,39 +700,40 @@ void ModuleUI::Draw()
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
 		GameObject* go = app->userInterface->UIGameObjects[a];
+		if (go->active) {
+			if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
+			{
+				go->Draw(nullptr);
 
-		if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
-		{
-			go->Draw(nullptr);
-			
-			RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color, button->shader, &button->characters, button->VAO, button->VBO);
-			button = nullptr;
-		}
-		else if (TextComponent* text = go->GetComponent<TextComponent>())
-		{
-			RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color, text->shader, &text->characters, text->VAO, text->VBO);
-			
-			text = nullptr;
-		}
-		else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
-		{
-			go->Draw(nullptr);
-			check = nullptr;
-		}
-		else if (ImageComponent* image = go->GetComponent<ImageComponent>())
-		{
-			go->Draw(nullptr);
-			image = nullptr;
-		}
-		else if (SliderComponent* slider = go->GetComponent<SliderComponent>())
-		{
-			go->Draw(nullptr);
-			slider = nullptr;
-		}
-		else if (DropDownComponent* Drop = go->GetComponent<DropDownComponent>())
-		{
-			go->Draw(nullptr);
-			RenderText(Drop->GetDropDownText().textt, Drop->GetDropDownText().X, Drop->GetDropDownText().Y, Drop->GetDropDownText().Scale, Drop->GetDropDownText().Color, Drop->shader, &Drop->characters, Drop->VAO, Drop->VBO);
+				RenderText(button->GetButtonText().textt, button->GetButtonText().X, button->GetButtonText().Y, button->GetButtonText().Scale, button->GetButtonText().Color, button->shader, &button->characters, button->VAO, button->VBO);
+				button = nullptr;
+			}
+			else if (TextComponent* text = go->GetComponent<TextComponent>())
+			{
+				RenderText(text->textToShow.textt, text->textToShow.X, text->textToShow.Y, text->textToShow.Scale, text->textToShow.Color, text->shader, &text->characters, text->VAO, text->VBO);
+
+				text = nullptr;
+			}
+			else if (CheckboxComponent* check = go->GetComponent<CheckboxComponent>())
+			{
+				go->Draw(nullptr);
+				check = nullptr;
+			}
+			else if (ImageComponent* image = go->GetComponent<ImageComponent>())
+			{
+				go->Draw(nullptr);
+				image = nullptr;
+			}
+			else if (SliderComponent* slider = go->GetComponent<SliderComponent>())
+			{
+				go->Draw(nullptr);
+				slider = nullptr;
+			}
+			else if (DropDownComponent* Drop = go->GetComponent<DropDownComponent>())
+			{
+				go->Draw(nullptr);
+				RenderText(Drop->GetDropDownText().textt, Drop->GetDropDownText().X, Drop->GetDropDownText().Y, Drop->GetDropDownText().Scale, Drop->GetDropDownText().Color, Drop->shader, &Drop->characters, Drop->VAO, Drop->VBO);
+			}
 		}
 	}
 }
@@ -749,7 +750,8 @@ void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 		return;
 
 	auto obj = FindUI(ui);
-	UIGameObjects.erase(obj);
+	if(!ui->GetComponent<SliderComponent>())
+		UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
 }
 

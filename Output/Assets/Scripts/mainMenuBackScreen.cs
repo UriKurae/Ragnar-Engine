@@ -3,13 +3,16 @@ using RagnarEngine;
 
 public class mainMenuBackScreen : RagnarComponent
 {
-	Vector3 Pos;
+	string actualOption = "Screen";
+	Vector3 pos;
+	Vector3 bounds;
+	float currVolume = 0.0f;
 	bool isFirstS = true;
 	bool isFirstE = true;
 	bool isFirstCre = true;
 	bool isFirstCont = true;
 	bool isFirstOp = true;
-	GameObject AudioController;
+	GameObject SceneAudio;
 	GameObject continueB;
 	GameObject start;
 	GameObject options;
@@ -23,12 +26,37 @@ public class mainMenuBackScreen : RagnarComponent
 	GameObject creditsImage;
 
 	GameObject back ;
-	public void Start()
+
+    //////////////OPTIONS//////////////
+    bool isOptions = false;
+    bool isFirstOBackB = true;
+    bool isFirstOScreenB = true;
+    bool isFirstOSoundB = true;
+    bool isFirstOControlsB = true;
+
+    GameObject optionsBack;
+    GameObject optionsBackImage;
+    GameObject optionsBackButton;
+    GameObject optionsTransCuad;
+    GameObject optionsTitle;
+    GameObject optionsScreenButton;
+    GameObject optionsScreenImage;
+    GameObject optionsSoundButton;
+    GameObject optionsSoundImage;
+    GameObject optionsControlsButton;
+    GameObject optionsControlsImage;
+
+    GameObject optionsScreenSDCH;
+    GameObject optionsScreenVSCH;
+    GameObject optionsScreenFSCH;
+    public void Start()
 	{
-		AudioController = GameObject.Find("AudioMainMenu");
-		AudioController.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
-		AudioController.GetComponent<AudioSource>().SetState("MUSIC", "MAINMENU");
-		continueB = GameObject.Find("Button Continue");
+        pos = new Vector3(0.0f, 0.0f, 0.0f);
+        bounds = new Vector3(0.0f, 0.0f, 0.0f);
+        SceneAudio = GameObject.Find("AudioMainMenu");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "MAINMENU");
+        continueB = GameObject.Find("Button Continue");
 		start = GameObject.Find("Button Start");
 		options = GameObject.Find("Button Options");
 		exit = GameObject.Find("Button Exit");
@@ -50,7 +78,33 @@ public class mainMenuBackScreen : RagnarComponent
 		continueB.GetComponent<UIButton>().SetButtonState(0);
 		continueB.GetComponent<UIButton>().SetButtonTextColor(121,121,121);
 		continueB.GetComponent<UIButton>().SetButtonGeneralColor(121, 121, 121);
-	}
+
+
+        //////////////OPTIONS//////////////
+
+
+
+
+        optionsBack = GameObject.Find("optionsBack");
+        optionsBackImage = GameObject.Find("optionsBackImage");
+        optionsBackButton = GameObject.Find("optionsBackButton");
+        optionsTransCuad = GameObject.Find("optionsTransCuad");
+        optionsTitle = GameObject.Find("optionsTitle");
+        optionsScreenButton = GameObject.Find("optionsScreenButton");
+        optionsScreenImage = GameObject.Find("optionsScreenImage");
+        optionsSoundButton = GameObject.Find("optionsSoundButton");
+        optionsSoundImage = GameObject.Find("optionsSoundImage");
+        optionsControlsButton = GameObject.Find("optionsControlsButton");
+        optionsControlsImage = GameObject.Find("optionsControlsImage");
+
+        optionsScreenSDCH = GameObject.Find("optionsScreenSDCH");
+        optionsScreenVSCH = GameObject.Find("optionsScreenVSCH");
+        optionsScreenFSCH = GameObject.Find("optionsScreenFSCH");
+
+
+
+        OptionsBackHide();
+    }
 
 	public void Update()
 	{
@@ -66,242 +120,672 @@ public class mainMenuBackScreen : RagnarComponent
 		OptionsButtonAction();
 		// Image back
 		BackgroundImageAction();
+
+		updateOptions();
 	}
-    void ContinueButtonAction()
+	void updateOptions()
+	{
+        if (isOptions)
+        {
+            OptionsBackShow();
+            SelectedOptionShow();
+            OptionsAllButtonsShow();
+
+        }
+        else
+        {
+            OptionsBackHide();
+            OptionsAllButtonsHide();
+            SelectedOptionHide();
+
+        }
+    }
+	void ContinueButtonAction()
     {
-		int a = continueB.GetComponent<UIButton>().GetButtonState();
-		switch (a)
-		{
-			case 0:
-				// disabled Mode
-				break;
-			case 1:
-				if (!isFirstCont)
-				{
-					Pos.Set(continueB.GetComponent<Transform2D>().position2D.x - 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
-					continueB.GetComponent<Transform2D>().position2D = Pos;
+        if (!isOptions)
+        {
+            continueImage.isActive = true;
+            continueB.isActive = true;
+            int a = continueB.GetComponent<UIButton>().GetButtonState();
+            switch (a)
+            {
+                case 0:
+                    // disabled Mode
+                    break;
+                case 1:
+                    if (!isFirstCont)
+                    {
+                        pos.Set(continueB.GetComponent<Transform2D>().position2D.x - 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        continueB.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(continueImage.GetComponent<Transform2D>().position2D.x - 20, continueImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					continueImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstCont = true;
-				}
-				// normal Mode
-				break;
-			case 2:
-				// focused mode
-				if (isFirstCont)
-				{
-					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					Pos.Set(continueB.GetComponent<Transform2D>().position2D.x + 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
-					continueB.GetComponent<Transform2D>().position2D = Pos;
+                        pos.Set(continueImage.GetComponent<Transform2D>().position2D.x - 20, continueImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        continueImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstCont = true;
+                    }
+                    // normal Mode
+                    break;
+                case 2:
+                    // focused mode
+                    if (isFirstCont)
+                    {
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        pos.Set(continueB.GetComponent<Transform2D>().position2D.x + 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        continueB.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(continueImage.GetComponent<Transform2D>().position2D.x + 20, continueImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					continueImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstCont = false;
-					//poner sonido
-				}
-				break;
-			case 3:
-				// pressed mode
-				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
-				
-				
-				//cambiar de escena
-				break;
-		}
-	}
+                        pos.Set(continueImage.GetComponent<Transform2D>().position2D.x + 20, continueImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        continueImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstCont = false;
+                        //poner sonido
+                    }
+                    break;
+                case 3:
+                    // pressed mode
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+
+
+                    //cambiar de escena
+                    break;
+            }
+        }
+        else
+        {
+            continueImage.isActive = false;
+            continueB.isActive = false;
+        }
+    }
 	void OptionsButtonAction()
     {
-		int a = options.GetComponent<UIButton>().GetButtonState();
-		switch (a)
-		{
-			case 0:
-				// disabled Mode
-				break;
-			case 1:
-				if (!isFirstOp)
-				{
-					Pos.Set(options.GetComponent<Transform2D>().position2D.x - 20, options.GetComponent<Transform2D>().position2D.y, 36.1f);
-					options.GetComponent<Transform2D>().position2D = Pos;
+        if (!isOptions)
+        {
+            optionsImage.isActive = true;
+            options.isActive = true;
+            int a = options.GetComponent<UIButton>().GetButtonState();
+            switch (a)
+            {
+                case 0:
+                    // disabled Mode
+                    break;
+                case 1:
+                    if (!isFirstOp)
+                    {
+                        pos.Set(options.GetComponent<Transform2D>().position2D.x - 20, options.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        options.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(optionsImage.GetComponent<Transform2D>().position2D.x - 20, optionsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					optionsImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstOp = true;
-				}
-				// normal Mode
-				break;
-			case 2:
-				// focused mode
-				if (isFirstOp)
-				{
-					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					Pos.Set(options.GetComponent<Transform2D>().position2D.x + 20, options.GetComponent<Transform2D>().position2D.y, 36.1f);
-					options.GetComponent<Transform2D>().position2D = Pos;
+                        pos.Set(optionsImage.GetComponent<Transform2D>().position2D.x - 20, optionsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        optionsImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstOp = true;
+                    }
+                    // normal Mode
+                    break;
+                case 2:
+                    // focused mode
+                    if (isFirstOp)
+                    {
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        pos.Set(options.GetComponent<Transform2D>().position2D.x + 20, options.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        options.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(optionsImage.GetComponent<Transform2D>().position2D.x + 20, optionsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					optionsImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstOp = false;
-					//poner sonido
-				}
-				break;
-			case 3:
-				// pressed mode
-				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
-				
+                        pos.Set(optionsImage.GetComponent<Transform2D>().position2D.x + 20, optionsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        optionsImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstOp = false;
+                        //poner sonido
+                    }
+                    break;
+                case 3:
+                    // pressed mode
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                    isOptions = true;
 
-				//cambiar de escena
-				break;
-		}
-	}
+                    //cambiar de escena
+                    break;
+            }
+        }
+        else
+        {
+            optionsImage.isActive = false;
+            options.isActive = false;
+        }
+    }
 	void CreditsButtonAction()
 	{
-		int a = credits.GetComponent<UIButton>().GetButtonState();
-		switch (a)
-		{
-			case 0:
-				// disabled Mode
-				break;
-			case 1:
-				if (!isFirstCre)
-				{
-					Pos.Set(credits.GetComponent<Transform2D>().position2D.x - 20, credits.GetComponent<Transform2D>().position2D.y, 36.1f);
-					credits.GetComponent<Transform2D>().position2D = Pos;
+        if (!isOptions)
+        {
+            credits.isActive = true;
+            creditsImage.isActive = true;
+            int a = credits.GetComponent<UIButton>().GetButtonState();
+            switch (a)
+            {
+                case 0:
+                    // disabled Mode
+                    break;
+                case 1:
+                    if (!isFirstCre)
+                    {
+                        pos.Set(credits.GetComponent<Transform2D>().position2D.x - 20, credits.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        credits.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(creditsImage.GetComponent<Transform2D>().position2D.x - 20, creditsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					creditsImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstCre = true;
-				}
-				// normal Mode
-				break;
-			case 2:
-				// focused mode
-				if (isFirstCre)
-				{
-					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					Pos.Set(credits.GetComponent<Transform2D>().position2D.x + 20, credits.GetComponent<Transform2D>().position2D.y, 36.1f);
-					credits.GetComponent<Transform2D>().position2D = Pos;
+                        pos.Set(creditsImage.GetComponent<Transform2D>().position2D.x - 20, creditsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        creditsImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstCre = true;
+                    }
+                    // normal Mode
+                    break;
+                case 2:
+                    // focused mode
+                    if (isFirstCre)
+                    {
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        pos.Set(credits.GetComponent<Transform2D>().position2D.x + 20, credits.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        credits.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(creditsImage.GetComponent<Transform2D>().position2D.x + 20, creditsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					creditsImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstCre = false;
-					//poner sonido
-				}
-				break;
-			case 3:
-				// pressed mode
-				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
-				
-				SceneManager.LoadScene("Credits");
-				//cambiar de escena
-				break;
-		}
-	}
+                        pos.Set(creditsImage.GetComponent<Transform2D>().position2D.x + 20, creditsImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        creditsImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstCre = false;
+                        //poner sonido
+                    }
+                    break;
+                case 3:
+                    // pressed mode
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+
+                    SceneManager.LoadScene("Credits");
+                    //cambiar de escena
+                    break;
+            }
+        }
+        else
+        {
+            credits.isActive = false;
+            creditsImage.isActive = false;
+        }
+
+    }
 	void PlayButtonAction()
 	{
-		int a = start.GetComponent<UIButton>().GetButtonState();
-		switch (a)
-		{
-			case 0:
-				// disabled Mode
-				break;
-			case 1:
-				if (!isFirstS)
-				{
-					Pos.Set(start.GetComponent<Transform2D>().position2D.x - 20, start.GetComponent<Transform2D>().position2D.y, 36.1f);
-					start.GetComponent<Transform2D>().position2D = Pos;
+        if (!isOptions) 
+        {
+            start.isActive = true;
+            startImage.isActive = true;
+            int a = start.GetComponent<UIButton>().GetButtonState();
+            switch (a)
+            {
+                case 0:
+                    // disabled Mode
+                    break;
+                case 1:
+                    if (!isFirstS)
+                    {
+                        pos.Set(start.GetComponent<Transform2D>().position2D.x - 20, start.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        start.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(startImage.GetComponent<Transform2D>().position2D.x - 20, startImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					startImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstS = true;
-				}
-				// normal Mode
-				break;
-			case 2:
-				// focused mode
-				if (isFirstS)
-				{
-					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					Pos.Set(start.GetComponent<Transform2D>().position2D.x + 20, start.GetComponent<Transform2D>().position2D.y, 36.1f);
-					start.GetComponent<Transform2D>().position2D = Pos;
+                        pos.Set(startImage.GetComponent<Transform2D>().position2D.x - 20, startImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        startImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstS = true;
+                    }
+                    // normal Mode
+                    break;
+                case 2:
+                    // focused mode
+                    if (isFirstS)
+                    {
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        pos.Set(start.GetComponent<Transform2D>().position2D.x + 20, start.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        start.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(startImage.GetComponent<Transform2D>().position2D.x + 20, startImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					startImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstS = false;
-					//poner sonido
-				}
-				break;
-			case 3:
-				// pressed mode
-				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
-				
-				SceneManager.LoadScene("build");
-				//cambiar de escena
-				break;
-		}
-	}
+                        pos.Set(startImage.GetComponent<Transform2D>().position2D.x + 20, startImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        startImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstS = false;
+                        //poner sonido
+                    }
+                    break;
+                case 3:
+                    // pressed mode
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+
+                    SceneManager.LoadScene("build");
+                    //cambiar de escena
+                    break;
+            }
+
+        }
+        else
+        {
+            start.isActive = false;
+            startImage.isActive = false;
+        }
+
+    }
 	void ExitButtonAction()
 	{
-		
-		int a = exit.GetComponent<UIButton>().GetButtonState();
-		switch (a)
-		{
-			case 0:
-				// disabled Mode
-				break;
-			case 1:
-				if (!isFirstE)
-				{
-					Pos.Set(exit.GetComponent<Transform2D>().position2D.x - 20, exit.GetComponent<Transform2D>().position2D.y, 36.1f);
-					exit.GetComponent<Transform2D>().position2D = Pos;
+        if (!isOptions)
+        {
+            exit.isActive = true;
+            exitImage.isActive = true;
+            int a = exit.GetComponent<UIButton>().GetButtonState();
+            switch (a)
+            {
+                case 0:
+                    // disabled Mode
+                    break;
+                case 1:
+                    if (!isFirstE)
+                    {
+                        pos.Set(exit.GetComponent<Transform2D>().position2D.x - 20, exit.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        exit.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(exitImage.GetComponent<Transform2D>().position2D.x - 20, exitImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					exitImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstE = true;
-				}
-				// normal Mode
-				break;
-			case 2:
-				// focused mode
-				if (isFirstE)
-				{
-					AudioController.GetComponent<AudioSource>().PlayClip("UIHOVER");
-					Pos.Set(exit.GetComponent<Transform2D>().position2D.x + 20, exit.GetComponent<Transform2D>().position2D.y, 36.1f);
-					exit.GetComponent<Transform2D>().position2D = Pos;
+                        pos.Set(exitImage.GetComponent<Transform2D>().position2D.x - 20, exitImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        exitImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstE = true;
+                    }
+                    // normal Mode
+                    break;
+                case 2:
+                    // focused mode
+                    if (isFirstE)
+                    {
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        pos.Set(exit.GetComponent<Transform2D>().position2D.x + 20, exit.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        exit.GetComponent<Transform2D>().position2D = pos;
 
 
-					Pos.Set(exitImage.GetComponent<Transform2D>().position2D.x + 20, exitImage.GetComponent<Transform2D>().position2D.y, 36.1f);
-					exitImage.GetComponent<Transform2D>().position2D = Pos;
-					isFirstE = false;
-					//poner sonido
-				}
-				break;
-			case 3:
-				// pressed mode
-				AudioController.GetComponent<AudioSource>().PlayClip("UISELECT");
-				
-				SceneManager.Exit();
-				//salir del Juego
-				break;
-		}
+                        pos.Set(exitImage.GetComponent<Transform2D>().position2D.x + 20, exitImage.GetComponent<Transform2D>().position2D.y, 36.1f);
+                        exitImage.GetComponent<Transform2D>().position2D = pos;
+                        isFirstE = false;
+                        //poner sonido
+                    }
+                    break;
+                case 3:
+                    // pressed mode
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 
-	}
+                    SceneManager.Exit();
+                    //salir del Juego
+                    break;
+            }
+        }
+        else
+        {
+            exit.isActive = false;
+            exitImage.isActive = false;
+        }
+
+    }
 
 	void BackgroundImageAction()
 	{
+        if (!isOptions)
+        {
+            back.isActive = true;
+            back.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
 
-		back.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
+            pos = back.GetComponent<Transform2D>().position2D;
+            pos.Set(0.0f, 0.0f, -8.5f);
+            back.GetComponent<Transform2D>().position2D = pos;
 
-		Pos = back.GetComponent<Transform2D>().position2D;
-		Pos.Set(0.0f, 0.0f, -8.5f);
-		back.GetComponent<Transform2D>().position2D =Pos;
+
+        }
+        else
+        {
+            back.isActive = false;
+        }
 	}
+
+
+    void SelectedOptionShow()
+    {
+        if (actualOption != "Screen")
+        {
+            OptionsScreenHide();
+        }
+        else if (actualOption != "Controls")
+        {
+
+        }
+        else if (actualOption != "Sound")
+        {
+
+        }
+        else if (actualOption != "Graphics")
+        {
+
+        }
+
+        if (actualOption == "Screen")
+        {
+            optionsScreenButton.GetComponent<UIButton>().SetButtonState(2);
+            OptionsScreenShow();
+        }
+        else if (actualOption == "Controls")
+        {
+            optionsControlsButton.GetComponent<UIButton>().SetButtonState(2);
+
+        }
+        else if (actualOption == "Sound")
+        {
+            optionsSoundButton.GetComponent<UIButton>().SetButtonState(2);
+
+        }
+    }
+    void SelectedOptionHide()
+    {
+        if (actualOption == "Screen")
+        {
+
+        }
+        else if (actualOption == "Controls")
+        {
+
+        }
+        else if (actualOption == "Sound")
+        {
+
+        }
+    }
+    void OptionsBackShow()
+    {
+        float X = (InternalCalls.GetRegionGame().x / 2);
+        float Y = (InternalCalls.GetRegionGame().y / 2);
+        pos.Set(0.0f, 0.0f, -10.400f);
+        optionsBack.GetComponent<Transform2D>().position2D = pos;
+        optionsBack.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame());
+        optionsBack.isActive = true;
+        //////////
+
+        pos.Set(X - 600, 0.0f, -10.400f);
+        optionsTransCuad.GetComponent<Transform2D>().position2D = pos;
+        
+
+        bounds.Set(X, (InternalCalls.GetRegionGame().y - 300), -10.400f);
+        optionsTransCuad.GetComponent<Transform2D>().SetSize(bounds);
+        optionsTransCuad.isActive = true;
+        //////////
+
+        pos.Set(X - (InternalCalls.GetRegionGame().x / 3), Y - 100, -10.400f);
+        optionsTitle.GetComponent<Transform2D>().position2D = pos;
+        optionsTitle.isActive = true;
+
+    }
+    void OptionsBackHide()
+    {
+        optionsBack.isActive = false;
+
+        //////////
+        optionsTransCuad.isActive = false;
+
+        //////////
+        optionsTitle.isActive = false;
+    }
+    void OptionsAllButtonsShow()
+    {
+        optionsBackButton.isActive = true;
+        optionsBackImage.isActive = true;
+
+        optionsScreenButton.isActive = true;
+        optionsScreenImage.isActive = true;
+
+        optionsSoundButton.isActive = true;
+        optionsSoundImage.isActive = true;
+
+        optionsControlsButton.isActive = true;
+        optionsControlsImage.isActive = true;
+
+        ////////////////////////////////////////////////
+        /// CONTROLS BUTTON
+        ////////////////////////////////////////////////
+
+        int a = optionsControlsButton.GetComponent<UIButton>().GetButtonState();
+        switch (a)
+        {
+            case 0:
+                // disabled Mode
+                break;
+            case 1:
+                if (isFirstOControlsB)
+                {
+
+                    isFirstOControlsB = false;
+                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+                    optionsControlsButton.GetComponent<Transform2D>().position2D = pos;
+                    bounds.Set(275, 58.5f, 0);
+                    optionsControlsButton.GetComponent<Transform2D>().SetSize(bounds);
+
+                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+                    optionsControlsImage.GetComponent<Transform2D>().position2D = pos;
+                    bounds.Set(273.5f, 48, 0);
+                    optionsControlsImage.GetComponent<Transform2D>().SetSize(bounds);
+                }
+                // normal Mode
+                break;
+            case 2:
+                // focused mode
+                if (!isFirstOControlsB)
+                {
+                    isFirstOControlsB = true;
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                    //poner sonido
+                }
+                pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+                optionsControlsButton.GetComponent<Transform2D>().position2D = pos;
+                bounds.Set(275 + 40, 58.5f, 0);
+                optionsControlsButton.GetComponent<Transform2D>().SetSize(bounds);
+
+                pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+                optionsControlsImage.GetComponent<Transform2D>().position2D = pos;
+                bounds.Set(273.5f + 40, 48, 0);
+                optionsControlsImage.GetComponent<Transform2D>().SetSize(bounds);
+                break;
+            case 3:
+                // pressed mode
+                actualOption = "Controls";
+
+                SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+                SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                break;
+        }
+        ////////////////////////////////////////////////
+        /// SOUND BUTTON
+        ////////////////////////////////////////////////
+
+        a = optionsSoundButton.GetComponent<UIButton>().GetButtonState();
+        switch (a)
+        {
+            case 0:
+                // disabled Mode
+                break;
+            case 1:
+                if (isFirstOSoundB)
+                {
+
+                    isFirstOSoundB = false;
+                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+                    optionsSoundButton.GetComponent<Transform2D>().position2D = pos;
+                    bounds.Set(275, 58.5f, 0);
+                    optionsSoundButton.GetComponent<Transform2D>().SetSize(bounds);
+
+                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+                    optionsSoundImage.GetComponent<Transform2D>().position2D = pos;
+                    bounds.Set(273.5f, 48, 0);
+                    optionsSoundImage.GetComponent<Transform2D>().SetSize(bounds);
+                }
+                // normal Mode
+                break;
+            case 2:
+                // focused mode
+                if (!isFirstOSoundB)
+                {
+                    isFirstOSoundB = true;
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                    //poner sonido
+                }
+                pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+                optionsSoundButton.GetComponent<Transform2D>().position2D = pos;
+                bounds.Set(275 + 40, 58.5f, 0);
+                optionsSoundButton.GetComponent<Transform2D>().SetSize(bounds);
+
+                pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+                optionsSoundImage.GetComponent<Transform2D>().position2D = pos;
+                bounds.Set(273.5f + 40, 48, 0);
+                optionsSoundImage.GetComponent<Transform2D>().SetSize(bounds);
+                break;
+            case 3:
+                // pressed mode
+                actualOption = "Sound";
+
+                SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+                SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                break;
+        }
+
+        ////////////////////////////////////////////////
+        /// SCREEN BUTTON
+        ////////////////////////////////////////////////
+
+        a = optionsScreenButton.GetComponent<UIButton>().GetButtonState();
+        switch (a)
+        {
+            case 0:
+                // disabled Mode
+                break;
+            case 1:
+                if (isFirstOScreenB)
+                {
+
+                    isFirstOScreenB = false;
+                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+                    optionsScreenButton.GetComponent<Transform2D>().position2D = pos;
+                    bounds.Set(275, 58.5f, 0);
+                    optionsScreenButton.GetComponent<Transform2D>().SetSize(bounds);
+
+                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+                    optionsScreenImage.GetComponent<Transform2D>().position2D = pos;
+                    bounds.Set(273.5f, 48, 0);
+                    optionsScreenImage.GetComponent<Transform2D>().SetSize(bounds);
+                }
+                // normal Mode
+                break;
+            case 2:
+                // focused mode
+                if (!isFirstOScreenB)
+                {
+                    isFirstOScreenB = true;
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                    //poner sonido
+                }
+                pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+                optionsScreenButton.GetComponent<Transform2D>().position2D = pos;
+                bounds.Set(275 + 40, 58.5f, 0);
+                optionsScreenButton.GetComponent<Transform2D>().SetSize(bounds);
+
+                pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+                optionsScreenImage.GetComponent<Transform2D>().position2D = pos;
+                bounds.Set(273.5f + 40, 48, 0);
+                optionsScreenImage.GetComponent<Transform2D>().SetSize(bounds);
+                break;
+            case 3:
+                // pressed mode
+                actualOption = "Screen";
+
+                SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+                SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                break;
+        }
+
+        
+
+        ////////////////////////////////////////////////
+        /// BACK BUTTON
+        ////////////////////////////////////////////////
+        a = optionsBackButton.GetComponent<UIButton>().GetButtonState();
+        switch (a)
+        {
+            case 0:
+                // disabled Mode
+                break;
+            case 1:
+                if (isFirstOBackB)
+                {
+
+                    isFirstOBackB = false;
+                    pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 80, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+
+                    optionsBackButton.GetComponent<Transform2D>().position2D = pos;
+
+
+                    pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 80, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+                    optionsBackImage.GetComponent<Transform2D>().position2D = pos;
+                }
+                // normal Mode
+                break;
+            case 2:
+                // focused mode
+                if (!isFirstOBackB)
+                {
+                    pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 120, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+                    optionsBackButton.GetComponent<Transform2D>().position2D = pos;
+
+
+                    pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 120, -(InternalCalls.GetRegionGame().y / 2) + 100, 36.1f);
+                    optionsBackImage.GetComponent<Transform2D>().position2D = pos;
+
+                    isFirstOBackB = true;
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                    //poner sonido
+                }
+
+                break;
+            case 3:
+                // pressed mode
+                isOptions = false;
+
+
+                isFirstOBackB = true;
+                isFirstOScreenB = true;           
+                isFirstOSoundB = true;
+                isFirstOControlsB = true;
+
+                //Quitar menu de pausa
+                SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+                SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                break;
+        }
+    }
+    void OptionsAllButtonsHide()
+    {
+        optionsBackButton.isActive = false;
+        optionsBackImage.isActive = false;
+
+        optionsScreenButton.isActive = false;
+        optionsScreenImage.isActive = false;
+
+        optionsSoundButton.isActive = false;
+        optionsSoundImage.isActive = false;
+
+        optionsControlsButton.isActive = false;
+        optionsControlsImage.isActive = false;
+
+    }
+    void OptionsScreenShow()
+    {
+        optionsScreenFSCH.isActive = true;
+
+        ////////////////////////////////////////////////
+        /// FULLSCREEN CHECKBOX
+        ////////////////////////////////////////////////
+
+        pos.Set(0, 0, 36.1f);
+        optionsScreenFSCH.GetComponent<Transform2D>().position2D = pos;
+    }
+    void OptionsScreenHide()
+    {
+        optionsScreenFSCH.isActive = false;
+    }
 }
