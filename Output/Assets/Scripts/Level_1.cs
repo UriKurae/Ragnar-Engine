@@ -107,7 +107,7 @@ public class Level_1 : RagnarComponent
         characters[1].abilities[2] = new Abilities
         {
             name = "Spice Grenade",
-            prefabPath = "Spice Grenade",
+            prefabPath = "SpiceGrenade",
             transformY = 1.32f,
             intensity = 4.0f,
             constant = 1.232f,

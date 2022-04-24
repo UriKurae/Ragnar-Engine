@@ -184,7 +184,7 @@ public class BasicEnemy : RagnarComponent
             }
 
             //// Chani =======================================
-            if (other.gameObject.name == "Spice Grenade")
+            if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
                 Stun(5f);
