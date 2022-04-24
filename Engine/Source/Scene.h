@@ -36,7 +36,7 @@ public:
 	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true);
 	GameObject* CreateGameObjectChild(const char* name, GameObject* parent);
 	GameObject* CreateGameObjectParent(const char* name, GameObject* child);
-	inline std::vector<GameObject*> GetGameObjectsList() const 
+	std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
 		std::stack<GameObject*> objects;
 		std::vector<GameObject*> sceneObjects;
