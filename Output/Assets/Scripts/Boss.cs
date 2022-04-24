@@ -40,6 +40,10 @@ public class Boss : RagnarComponent
 	// Arrays for the players
 	GameObject[] players = new GameObject[3];
 
+	// Phase 2 mechanics
+	int indexPlayerTarget;
+	bool jumping = false;
+
 	// Phase 3 mechanics
 
 	GameObject[] barrels = new GameObject[3];
@@ -55,7 +59,7 @@ public class Boss : RagnarComponent
 	// Phase 4 mechanics
 	int throwedRocks = 0;
 	float hitGroundCooldown = 10.0f;
-	float tiredCooldown = 0.0f;
+	float tiredCooldown = 10.0f;
 	bool rocksAvailable = false;
 	bool throwingRocks = false;
 	bool tired = false;
@@ -100,49 +104,7 @@ public class Boss : RagnarComponent
 		}
 		else if (state == BossState.PHASE4)
         {
-			if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
-			{
-                GenerateRocks();
-				hitGroundCooldown = 10.0f;
-				throwingRocks = true;
-			}
-			else if (!throwingRocks && hitGroundCooldown > 0.0f && !tired)
-			{
-				FollowPlayer();
-				hitGroundCooldown -= Time.deltaTime;
-			}
-			else if (tired == false && rocksAvailable == true)
-			{
-				ThrowRock();
-				throwedRocks++;
-				rocksAvailable = false;
-			}
-			else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
-			{
-				if (nextRock == null)
-				{
-					for (int i = 0; i < 5; ++i)
-					{
-						string rockPrefab = "Rock" + (i + 1);
-						nextRock = GameObject.Find(rockPrefab);
-						if (nextRock != null)
-							break;
-					}
-				}
-				else
-				{
-					agent.MoveTo(nextRock.transform.localPosition);
-				}
-			}
-			else
-			{
-				tired = true;
-				throwingRocks = false;
-				tiredCooldown -= Time.deltaTime;
-				if (tiredCooldown <= 0.0f) tired = false;
-			}
-
-			SweepAttack();
+			Phase4();
 		}
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
@@ -222,19 +184,35 @@ public class Boss : RagnarComponent
         {
             Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
             Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
-            for (int i = 0; i < players.Length; ++i)
+            if (!jumping)
             {
-                if (players[i].transform.localPosition.magnitude <= area.magnitude &&
-                    players[i].transform.localPosition.magnitude < jumpTo.magnitude)
+                for (int i = 0; i < players.Length; ++i)
                 {
-                    jumpTo = players[i].transform.localPosition;
+                    if (players[i].transform.globalPosition.magnitude <= area.magnitude &&
+                        players[i].transform.globalPosition.magnitude < jumpTo.magnitude)
+                    {
+                        jumpTo = players[i].transform.globalPosition;
+                        indexPlayerTarget = i;
+                    }
                 }
+				agent.speed = 10.0f;
             }
 
-            if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f))
+            if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f) && players[indexPlayerTarget] != null)
             {
                agent.MoveTo(jumpTo);
-            }
+				if ((players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+				{
+					// Play sweep attack animation
+
+					// Play sweep attack sound
+
+					// Hit player, lower his HP
+					players[indexPlayerTarget].GetComponent<Player>().GetHit(100);
+					// Reset Cooldown
+					sweepAttackCooldown = 5.0f;
+				}
+			}
         }
 
         Patrol();
@@ -268,8 +246,54 @@ public class Boss : RagnarComponent
 	// Phase 4
 	public void Phase4()
     {
-		int asd = 0;
-		asd++;
+		if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
+		{
+			GenerateRocks();
+			hitGroundCooldown = 10.0f;
+			throwingRocks = true;
+		}
+		else if (!throwingRocks && hitGroundCooldown > 0.0f && !tired)
+		{
+			FollowPlayer();
+			hitGroundCooldown -= Time.deltaTime;
+		}
+		else if (tired == false && rocksAvailable == true)
+		{
+			ThrowRock();
+			throwedRocks++;
+			rocksAvailable = false;
+		}
+		else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
+		{
+			if (nextRock == null)
+			{
+				for (int i = 0; i < 5; ++i)
+				{
+					string rockPrefab = "Rock" + (i + 1);
+					nextRock = GameObject.Find(rockPrefab);
+					if (nextRock != null)
+						break;
+				}
+			}
+			else
+			{
+				agent.MoveTo(nextRock.transform.localPosition);
+			}
+		}
+		else
+		{
+			tired = true;
+			tiredCooldown -= Time.deltaTime;
+			if (tiredCooldown <= 0.0f)
+			{
+				throwingRocks = false;
+				tired = false;
+				throwedRocks = 0;
+				tiredCooldown = 10.0f;
+			}
+		}
+
+		if (!tired) SweepAttack();
 	}
 
 	private void ThrowRock()
@@ -296,7 +320,7 @@ public class Boss : RagnarComponent
 			barrelCooldown = 15.0f;
 		}
 	}
-
+	
 	private void ExplodeBarrels()
     {
 		if (stunnedHits == 3)
@@ -318,7 +342,7 @@ public class Boss : RagnarComponent
         index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length);
         return (index == -1) ? false : true;
     }
-
+	
 	public void GotoNextPoint()
 	{
         //gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
@@ -364,14 +388,14 @@ public class Boss : RagnarComponent
     {
 		for (int i = 0; i < players.Length; ++i)
 		{
-			if ((players[i].transform.localPosition.magnitude - gameObject.transform.localPosition.magnitude) <= 2.0f)
+			if ((players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
 			{
 				// Play sweep attack animation
 
 				// Play sweep attack sound
 
 				// Hit player, lower his HP
-
+				players[i].GetComponent<Player>().GetHit(1);
 				// Reset Cooldown
 				sweepAttackCooldown = 5.0f;
 			}

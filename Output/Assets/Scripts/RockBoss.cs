@@ -29,9 +29,6 @@ public class RockBoss : RagnarComponent
 	
     public void OnCollision (Rigidbody other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground")
-        {
-            InternalCalls.Destroy(gameObject);
-        }
+        InternalCalls.Destroy(gameObject);
     }
 }
