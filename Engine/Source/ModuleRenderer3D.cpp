@@ -713,6 +713,10 @@ void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 {
 	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	if (app->sceneManager->GetCurrentScene()->GetDebugDrawQuadtree())
+		app->sceneManager->GetCurrentScene()->GetQuadtree().DebugDraw();
+
 	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
 	{
 		app->navMesh->GetNavMeshBuilder()->DebugDraw();
