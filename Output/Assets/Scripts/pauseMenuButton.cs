@@ -29,8 +29,9 @@ public class pauseMenuButton : RagnarComponent
 	GameObject AbilityImage;
 	GameObject Ability1;
 	GameObject Ability2;
-	
-	public void Start()
+    DialogueManager dialogue;
+
+    public void Start()
 	{
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -61,11 +62,12 @@ public class pauseMenuButton : RagnarComponent
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
 		AbilityImage = GameObject.Find("AbilImage");
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
-		
-	}
-	
-	public void Update()
+
+    }
+
+    public void Update()
 	{
 		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
 		{
@@ -183,7 +185,7 @@ public class pauseMenuButton : RagnarComponent
 				ResumeButtonHide();
 				MainMenuButtonHide();
 				OptionsButtonHide();
-			}
+            }
 		}
 
 		if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
@@ -196,10 +198,12 @@ public class pauseMenuButton : RagnarComponent
 				ResumeButtonHide();
 				MainMenuButtonHide();
 				OptionsButtonHide();
-			}
-			else
+                if (dialogue.GetInDialogue()) { dialogue.ContinueDialogue(); }
+            }
+            else
 			{
-				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
+                if (dialogue.GetInDialogue()) { dialogue.DisableDialogue(); }
+                currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				isSowing = true;
 				
