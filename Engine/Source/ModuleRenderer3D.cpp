@@ -324,6 +324,7 @@ bool ModuleRenderer3D::PostUpdate()
 	vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
 	
 	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	glEnable(GL_BLEND);
 	coneShader->Bind();
 	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
 	coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
@@ -336,6 +337,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	coneShader->Unbind();
     enemyCones.clear();
+	glDisable(GL_BLEND);
 
 #ifndef DIST 
 	app->userInterface->Draw();
@@ -344,7 +346,7 @@ bool ModuleRenderer3D::PostUpdate()
 	mainCameraFbo->Unbind();
 
 #ifdef DIST
-	//app->camera->updateGameView = true;
+	
 	// Inside each function there is a comprobation so it does not get resized each frame
 	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
