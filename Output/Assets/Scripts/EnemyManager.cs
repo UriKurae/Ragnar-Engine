@@ -3,50 +3,12 @@ using RagnarEngine;
 
 public class EnemyManager : RagnarComponent
 {
-    public Enemies[] enemies = new Enemies[3];
+    public Enemies[] enemies;
     public GameObject[] enemyGOs;
+    public GameObject[] deadEnemies;
 
     public void Start()
     {
-        // Basic Enemy with Patrol
-        enemies[0] = new Enemies
-        {
-            name = "Ground Enemy 1",
-            prefabPath = "Basic Enemy",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            pos = new Vector3(3.59f, 0f, 18.03f),
-            waypoints = new GameObject[3]
-        };
-        enemies[0].waypoints[0] = GameObject.Find("1");
-        enemies[0].waypoints[1] = GameObject.Find("2");
-        enemies[0].waypoints[2] = GameObject.Find("3");
-
-        enemies[1] = new Enemies
-        {
-            name = "Ground Enemy 2",
-            prefabPath = "Basic Enemy",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            pos = new Vector3(4.23f, 0f, -6.68f),
-            waypoints = new GameObject[3]
-        };
-        enemies[1].waypoints[0] = GameObject.Find("4");
-        enemies[1].waypoints[1] = GameObject.Find("5");
-        enemies[1].waypoints[2] = GameObject.Find("6");
-
-        // Basic Enemy without Patrol
-        enemies[2] = new Enemies
-        {
-            name = "Ground Enemy 3",
-            prefabPath = "Basic Enemy",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            pos = new Vector3(-7.52f, 0f, 31.44f),
-            waypoints = new GameObject[1]
-        };
-        enemies[2].waypoints[0] = GameObject.Find("7");
-
         foreach (Enemies e in enemies)
         {
             InternalCalls.InstancePrefab(e.prefabPath);
@@ -59,27 +21,32 @@ public class EnemyManager : RagnarComponent
             enemyGOs[i].name = enemies[i].name;
             if (enemies[i].waypoints.Length != 0)
             {
-                //enemyGOs[i].GetComponent<EnemyInteractions>().waypoints = enemies[i].waypoints;
                 switch (enemies[i].type)
                 {
                     case EnemyType.BASIC:
                         enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
+                        enemyGOs[i].GetComponent<BasicEnemy>().state = EnemyState.IDLE;
                         break;
                     case EnemyType.TANK:
                         enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
+                        enemyGOs[i].GetComponent<TankEnemy>().state = EnemyState.IDLE;
                         break;
                     case EnemyType.UNDISTRACTABLE:
                         enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
+                        enemyGOs[i].GetComponent<UndistractableEnemy>().state = EnemyState.IDLE;
                         break;
                     case EnemyType.AIR:
                         enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
+                        enemyGOs[i].GetComponent<AirEnemy>().state = EnemyState.IDLE;
                         break;
                 }
 
-                enemies[i].state = EnemyState.PATROLING;
+                enemies[i].state = EnemyState.IDLE;
             }
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
         }
+
+        deadEnemies = new GameObject[enemyGOs.Length];
     }
     public void Update()
     {
@@ -88,7 +55,7 @@ public class EnemyManager : RagnarComponent
         {
             foreach(GameObject go in enemyGOs)
             {
-                if(go.GetComponent<EnemyInteractions>().pendingToDelete)
+                if((go.GetComponent<BasicEnemy>().pendingToDelete && go.GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (go.GetComponent<AirEnemy>().pendingToDelete && go.GetComponent<AirEnemy>().ToString() == "AirEnemy") || (go.GetComponent<TankEnemy>().pendingToDelete && go.GetComponent<TankEnemy>().ToString() == "TankEnemy") || (go.GetComponent<UndistractableEnemy>().pendingToDelete && go.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
                 {
                     GameObject[] aux = new GameObject[enemyGOs.Length-1];
                     Enemies[] aux2 = new Enemies[enemies.Length-1];
@@ -96,7 +63,14 @@ public class EnemyManager : RagnarComponent
                     {
                         if (enemyGOs[i] == go)
                         {
+                            Debug.Log(go.name.ToString());
                             j--;
+                            for(int k = 0; k < deadEnemies.Length; k++)
+                            {
+                                if (deadEnemies[k] == null) deadEnemies[k] = go;
+                            }
+                            enemies[i].state = EnemyState.DEATH;
+                            ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                         }
                         else
                         {
@@ -106,10 +80,28 @@ public class EnemyManager : RagnarComponent
                     }
                     enemyGOs = aux;
                     enemies = aux2;
-                    InternalCalls.Destroy(go);
                 }
             }
         }
     }
 
+    private void ChangeEnemyState(GameObject go, EnemyState newState)
+    {
+        if (go.GetComponent<AirEnemy>().state != newState && go.GetComponent<AirEnemy>().ToString() == "AirEnemy")
+        {
+            go.GetComponent<AirEnemy>().state = newState;
+        }
+        if (go.GetComponent<BasicEnemy>().state != newState && go.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
+        {
+            go.GetComponent<BasicEnemy>().state = newState;
+        }
+        if (go.GetComponent<TankEnemy>().state != newState && go.GetComponent<TankEnemy>().ToString() == "TankEnemy")
+        {
+            go.GetComponent<TankEnemy>().state = newState;
+        }
+        if (go.GetComponent<UndistractableEnemy>().state != newState && go.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
+        {
+            go.GetComponent<UndistractableEnemy>().state = newState;
+        }
+    }
 }

@@ -8,6 +8,7 @@ public class AirEnemy : RagnarComponent
     public NavAgent agents;
     public GameObject[] waypoints;
     private int destPoint = 0;
+    public EnemyState state;
 
     // States
     public bool patrol;
@@ -32,6 +33,10 @@ public class AirEnemy : RagnarComponent
 
     float initialSpeed;
 
+    bool distracted = false;
+    float distractedTimer = -1f;
+    bool stunned = false;
+    float stunnedTimer = -1f;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -51,61 +56,100 @@ public class AirEnemy : RagnarComponent
 
     public void Update()
     {
-        if (!pendingToDelete && deathTimer == -1)
+        if(state != EnemyState.DEATH)
         {
-            Patrol();
-            if (PerceptionCone())
+            if (!pendingToDelete && deathTimer == -1)
             {
-                agents.speed = initialSpeed * 1.8f;
-                Shoot();
+                if (!pendingToDelete && deathTimer == -1)
+                {
+                    if (!stunned)
+                    {
+                        if (!distracted)
+                        {
+                            Patrol();
+                        }
+                        if (PerceptionCone())
+                        {
+                            agents.speed = initialSpeed * 1.2f;
+                            Shoot();
+                        }
+                        else
+                        {
+                            agents.speed = initialSpeed;
+                        }
+                    }
+                }
             }
-            else
-            {
-                agents.speed = initialSpeed * 1.2f;
-            }
-        }
 
-        if (deathTimer >= 0)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer < 0)
+            if (deathTimer >= 0)
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
-                deathTimer = -1f;
-                pendingToDelete = true;
+                deathTimer -= Time.deltaTime;
+                if (deathTimer < 0)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    deathTimer = -1f;
+                    pendingToDelete = true;
+                }
+            }
+
+            if (stunnedTimer >= 0)
+            {
+                stunnedTimer -= Time.deltaTime;
+                if (stunnedTimer < 0)
+                {
+                    stunned = false;
+                    stunnedTimer = -1f;
+                }
+            }
+
+            if (distractedTimer >= 0)
+            {
+                distractedTimer -= Time.deltaTime;
+                if (distractedTimer < 0)
+                {
+                    distracted = false;
+                    distractedTimer = -1f;
+                }
             }
         }
     }
 
     public void OnCollision(Rigidbody other)
     {
-        if (other.gameObject.name == "Knife")
+        if (state != EnemyState.DEATH)
         {
-            deathTimer = 4f;
-            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            if (other.gameObject.name == "Knife")
+            {
+                deathTimer = 4f;
+                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
 
-            // WHEN RUNES FUNCTIONAL
-            // deathTimer = 0f;
-        }
-        if (other.gameObject.name == "StunnerShot")
-        {
-            deathTimer = 2f;
-            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
-        }
-        if (other.gameObject.name == "HunterSeeker")
-        {
-            // WHEN RUNES FUNCTIONAL
+                // WHEN RUNES FUNCTIONAL
+                // deathTimer = 0f;
+            }
+            if (other.gameObject.name == "StunnerShot")
+            {
+                deathTimer = 2f;
+                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            }
+            if (other.gameObject.name == "HunterSeeker")
+            {
+                // WHEN RUNES FUNCTIONAL
+
+            }
             // EXPLOSION AREA
         }
     }
 
     public void OnTrigger(Rigidbody other)
     {
-        //// Stilgar =====================================
-        if (other.gameObject.name == "Trap")
+        if (state != EnemyState.DEATH)
         {
-            pendingToDelete = true;
-            gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            //// Stilgar =====================================
+            if (other.gameObject.name == "Trap")
+            {
+                pendingToDelete = true;
+                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+            }
         }
     }
 
@@ -116,6 +160,7 @@ public class AirEnemy : RagnarComponent
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
         index = RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
+        if (players[index].GetComponent<Player>().invisible) return false;
         return (index == -1) ? false : true;
     }
 
@@ -168,7 +213,7 @@ public class AirEnemy : RagnarComponent
 
     public void Patrol()
     {
-        if (GameObject.Find("Rock") == null && agents.MovePath())
+        if (agents.MovePath())
         {
             stopState = true;
         }
@@ -196,5 +241,24 @@ public class AirEnemy : RagnarComponent
         {
             GotoNextPoint();
         }
+    }
+    public void Distraction(Vector3 distractionItem)
+    {
+        Vector3 newForward = (distractionItem - gameObject.transform.globalPosition).normalized;
+
+        double angle = Math.Atan2(newForward.x, newForward.z);
+
+        Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+
+        gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
+
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+    }
+
+    public void Stun(float timeStunned)
+    {
+        stunned = true;
+        stunnedTimer = timeStunned;
+        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
     }
 }

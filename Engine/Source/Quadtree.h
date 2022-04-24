@@ -51,6 +51,7 @@ public:
 	
 	void Intersect(std::set<GameObject*>& gos, CameraComponent* frustum);
 	void CollectGo(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes);
+	void CollectGoOnlyStatic(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes);
 	void CollectNodes(std::stack<QuadtreeNode*>& nodes, LineSegment ray);
 	void DebugDraw();
 

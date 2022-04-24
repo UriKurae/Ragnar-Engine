@@ -135,8 +135,6 @@ bool Scene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
-	if (drawQuad) qTree.DebugDraw();
-
 	std::stack<GameObject*> stack;
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
