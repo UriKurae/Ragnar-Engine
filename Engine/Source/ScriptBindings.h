@@ -541,16 +541,16 @@ MonoArray* GetEmitters(MonoObject* go)
 	return ret;
 }
 
-void PlayEmitter(MonoObject* emitter)
+void PlayEmitter(MonoObject* go)
 {
-	ParticleEmitter* e = GetEmitterFromCS(emitter);
-	e->isActive = true;
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	particleSystem->Play();
 }
 
-void PauseEmitter(MonoObject* emitter)
+void PauseEmitter(MonoObject* go)
 {
-	ParticleEmitter* e = GetEmitterFromCS(emitter);
-	e->isActive = false;
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	particleSystem->Stop();
 }
 // Particle System ==================
 

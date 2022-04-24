@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 290562824,
+                    "pointer": 166174048,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -139,15 +139,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -60.521255493164062,
+                        -32.819705963134766,
                         0,
-                        85.951705932617188
+                        78.413360595703125
                     ],
                     "Quaternion": [
                         0,
-                        0.8660239577293396,
+                        -0.8660239577293396,
                         0,
-                        -0.50000250339508057
+                        0.50000250339508057
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
@@ -177,14 +177,14 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        7.62939453125e-06,
-                        45.380889892578125,
-                        -41.255386352539062
+                        -0.000213623046875,
+                        68.318771362304688,
+                        -62.10797119140625
                     ],
                     "Quaternion": [
                         0.34202015399932861,
+                        3.828335692901419e-08,
                         -7.9287429954888466e-09,
-                        0,
                         0.93969273567199707
                     ],
                     "RotationEditor": [
@@ -193,7 +193,7 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142135381698608,
+                        1.4142132997512817,
                         1,
                         1
                     ]
@@ -201,23 +201,23 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.49674096703529358,
+                    "Vertical Fov": 0.41854760050773621,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -65.928718566894531,
-                        45.380889892578125,
-                        119.26369476318359
+                        20.969074249267578,
+                        68.318771362304688,
+                        109.46766662597656
                     ],
                     "Type": 3,
-                    "Zoom": 18,
+                    "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -60.521255493164062,
+                        -32.819705963134766,
                         0,
-                        85.951705932617188
+                        78.413360595703125
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
@@ -662,7 +662,7 @@
                     "Position": [
                         3.0405673980712891,
                         0,
-                        -46.558364868164062
+                        -46.558364868164063
                     ],
                     "Quaternion": [
                         0,
@@ -882,7 +882,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -11.089859008789062,
+                        -11.089859008789063,
                         0,
                         6.886474609375
                     ],
@@ -958,7 +958,7 @@
                     "Position": [
                         -33.406295776367188,
                         0,
-                        27.392837524414062
+                        27.392837524414063
                     ],
                     "Quaternion": [
                         0,
@@ -1046,9 +1046,9 @@
                         0
                     ],
                     "Scale": [
-                        1.0000076293945312,
+                        1.0000076293945313,
                         1,
-                        1.0000076293945312
+                        1.0000076293945313
                     ]
                 },
                 {
@@ -1593,7 +1593,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -1673,7 +1673,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -1752,7 +1752,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -1831,7 +1831,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -1989,7 +1989,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2007,7 +2007,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 289681256,
+                    "pointer": 166172416,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -2045,7 +2045,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2123,7 +2123,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2185,7 +2185,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -331.5,
+                        -314.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2201,7 +2201,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2250,7 +2250,7 @@
                     "buttonWidth": 215,
                     "buttonHeight": 25,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2667,15 +2667,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -12.63680362701416,
-                        4.028472900390625,
-                        -4.6380863189697266
+                        -13.810944557189941,
+                        4.0284733772277832,
+                        9.0242958068847656
                     ],
                     "Quaternion": [
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -2723,12 +2723,12 @@
                             "Particle Reference Velocity": [
                                 0.05000000074505806,
                                 0.0099999997764825821,
-                                0.10000000149011612
+                                0.05000000074505806
                             ],
                             "Particle Reference Acceleration": [
-                                0.0099999997764825821,
                                 0,
-                                0.0099999997764825821
+                                0,
+                                0
                             ],
                             "Particle Reference Color Begin": [
                                 1,
@@ -2739,9 +2739,9 @@
                             "Particle Reference Size Begin": 0.5,
                             "Particle Reference Lifetime": 5,
                             "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 0,
-                            "Tiles: X": 0,
-                            "Tiles: Y": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
                             "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
@@ -2786,7 +2786,7 @@
                             "Particle Reference Velocity": [
                                 0.0099999997764825821,
                                 -0.0099999997764825821,
-                                0.10000000149011612
+                                0.059999998658895493
                             ],
                             "Particle Reference Acceleration": [
                                 0,
@@ -2802,9 +2802,9 @@
                             "Particle Reference Size Begin": 0.5,
                             "Particle Reference Lifetime": 3,
                             "Particle Reference Rotation Amount": 0,
-                            "Loop Timer": 0,
-                            "Tiles: X": 0,
-                            "Tiles: Y": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
                             "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
                             "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
                             "Effects": [
@@ -2850,7 +2850,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -309.5,
+                        -292.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2866,7 +2866,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2899,7 +2899,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -300.5,
+                        -283.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2915,7 +2915,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2948,7 +2948,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -300.5,
+                        -283.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2964,7 +2964,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3013,7 +3013,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3062,7 +3062,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3111,7 +3111,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1256,
-                    "lastButtonHeight": 752,
+                    "lastButtonHeight": 644,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
