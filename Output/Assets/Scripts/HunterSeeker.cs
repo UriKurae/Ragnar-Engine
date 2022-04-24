@@ -18,10 +18,10 @@ public class HunterSeeker : RagnarComponent
 		rb = gameObject.GetComponent<Rigidbody>();
 		rb.SetBodyPosition(pos);
 		rb.IgnoreCollision(player, true);
-		InternalCalls.InstancePrefab("Backstab Area");
-		area = GameObject.Find("Backstab Area");
-		gameObject.AddChild(area);
-		area.transform.localPosition = new Vector3(0, area.transform.localPosition.y, 0);
+		//InternalCalls.InstancePrefab("Backstab Area");
+		//area = GameObject.Find("Backstab Area");
+		//gameObject.AddChild(area);
+		//area.transform.localPosition = new Vector3(0, area.transform.localPosition.y, 0);
 	}
 	public void Update()
 	{
@@ -36,7 +36,7 @@ public class HunterSeeker : RagnarComponent
 			{
 				GameObject player = GameObject.Find("Player_2");
 				player.GetComponent<Player>().SetControled(true);
-				gameObject.EraseChild(area);
+				//gameObject.EraseChild(area);
 				InternalCalls.Destroy(gameObject);
 			}
 		}
