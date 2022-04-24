@@ -117,3 +117,10 @@ void SetBodyPosition(MonoObject* go, MonoObject* pos)
 	float3 bPos = app->moduleMono->UnboxVector(pos);
 	rb->GetBody()->getWorldTransform().setOrigin(bPos);
 }
+
+void SetBodyRotation(MonoObject* go, MonoObject* pos)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	Quat bRot = app->moduleMono->UnboxQuat(pos);
+	rb->GetBody()->getWorldTransform().setRotation(bRot);
+}

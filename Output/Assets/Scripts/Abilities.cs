@@ -5,7 +5,13 @@ public class Abilities
 {
     public string name;
     public string prefabPath;
-    public string prefabArea;
+
+    // Range Area Parameters
+    public float transformY;
+    public float intensity;
+    public float constant;
+    public float linear;
+    public float quadratic;
 
     // -1 is infinite charges
     public int charges;

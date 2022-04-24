@@ -63,6 +63,7 @@ namespace RagnarEngine
             { typeof(UICheckbox), ComponentType.UI_CHECKBOX},
             { typeof(UISlider), ComponentType.UI_SLIDER},
             { typeof(UIText), ComponentType.UI_TEXT},
+            { typeof(Light), ComponentType.LIGHT},
         };
 
         public RagnarComponent()
