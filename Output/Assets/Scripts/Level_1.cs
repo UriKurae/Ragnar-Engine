@@ -126,7 +126,7 @@ public class Level_1 : RagnarComponent
             linear = -0.172f,
             quadratic = 0f,
             charges = -1,
-            cooldown = 4f
+            cooldown = 40f
         }; // Hunter Seeker
 
         // ENEMIES
