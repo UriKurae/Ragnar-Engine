@@ -92,92 +92,15 @@ public class Boss : RagnarComponent
 
 		if (state == BossState.PHASE2)
 		{
-            // this instakills
-            if (PerceptionCone(90))
-            {
-				Debug.Log("Spotted Player");
-                Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
-                Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
-                for (int i = 0; i < players.Length; ++i)
-                {
-                    if (players[i].transform.localPosition.magnitude <= area.magnitude &&
-                        players[i].transform.localPosition.magnitude < jumpTo.magnitude)
-                    {
-                        jumpTo = players[i].transform.localPosition;
-                    }
-                }
-
-                if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f))
-                {
-                    agent.MoveTo(jumpTo);
-                } 
-            }
-
-			Patrol();
+			Phase2();
 		}
 		else if (state == BossState.PHASE3)
         {
-			if (phase3Location == false)
-            {
-				// Move to new location as soon as phase 3 starts
-				Vector3 destination = new Vector3(1.0f, 1.0f, 1.0f);
-
-				agent.MoveTo(destination);
-				
-				if (this.gameObject.transform.localPosition == destination) phase3Location = true;
-
-				shieldInmunity = true;
-            }
-			ExplodeBarrels();
-			GenerateBarrels();
-			if (barrelCount < 3) barrelCooldown -= Time.deltaTime;
-			
-			if (phase3Location) FollowPlayer();
+			Phase3();
 		}
 		else if (state == BossState.PHASE4)
         {
-			if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
-            {
-				GenerateRocks();
-				hitGroundCooldown = 10.0f;
-				throwingRocks = true;
-            }
-			else if (!throwingRocks && hitGroundCooldown > 0.0f && !tired)
-            {
-				FollowPlayer();
-				hitGroundCooldown -= Time.deltaTime;
-			}
-			else if (tired == false && rocksAvailable == true)
-            {
-				ThrowRock();
-				rocksAvailable = false;
-			}
-			else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
-			{
-                if (nextRock == null)
-                {
-					for (int i = 0; i < 5; ++i)
-					{
-						string rockPrefab = "Rock" + (i + 1);
-						nextRock = GameObject.Find(rockPrefab);
-						if (nextRock != null)
-							break;
-					}
-                }
-				else
-                {
-					Debug.Log("Searching the rock");
-					agent.MoveTo(nextRock.transform.localPosition);
-                }
-			}
-			else
-            {
-				tired = true;
-				throwingRocks = false;
-				hitGroundCooldown -= Time.deltaTime;
-			}
-
-			SweepAttack();
+			Phase4();
 		}
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
@@ -245,6 +168,101 @@ public class Boss : RagnarComponent
 			else rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x + i, 25.0f, bossPos.z));
 		}
     }
+
+	// Boss behaviour for the phases
+
+	// Phase 2
+	public void Phase2()
+    {
+		// this instakills
+		if (PerceptionCone(90))
+		{
+			Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
+			Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
+			for (int i = 0; i < players.Length; ++i)
+			{
+				if (players[i].transform.localPosition.magnitude <= area.magnitude &&
+					players[i].transform.localPosition.magnitude < jumpTo.magnitude)
+				{
+					jumpTo = players[i].transform.localPosition;
+				}
+			}
+
+			if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f))
+			{
+				agent.MoveTo(jumpTo);
+			}
+		}
+
+		Patrol();
+	}
+	
+	// Phase 3
+	public void Phase3()
+    {
+		if (phase3Location == false)
+		{
+			// Move to new location as soon as phase 3 starts
+			Vector3 destination = new Vector3(1.0f, 1.0f, 1.0f);
+
+			agent.MoveTo(destination);
+
+			if (this.gameObject.transform.localPosition == destination) phase3Location = true;
+
+			shieldInmunity = true;
+		}
+		ExplodeBarrels();
+		GenerateBarrels();
+		if (barrelCount < 3) barrelCooldown -= Time.deltaTime;
+
+		if (phase3Location) FollowPlayer();
+	}
+	
+	// Phase 4
+	public void Phase4()
+    {
+		if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
+		{
+			GenerateRocks();
+			hitGroundCooldown = 10.0f;
+			throwingRocks = true;
+		}
+		else if (!throwingRocks && hitGroundCooldown > 0.0f && !tired)
+		{
+			FollowPlayer();
+			hitGroundCooldown -= Time.deltaTime;
+		}
+		else if (tired == false && rocksAvailable == true)
+		{
+			ThrowRock();
+			rocksAvailable = false;
+		}
+		else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
+		{
+			if (nextRock == null)
+			{
+				for (int i = 0; i < 5; ++i)
+				{
+					string rockPrefab = "Rock" + (i + 1);
+					nextRock = GameObject.Find(rockPrefab);
+					if (nextRock != null)
+						break;
+				}
+			}
+			else
+			{
+				agent.MoveTo(nextRock.transform.localPosition);
+			}
+		}
+		else
+		{
+			tired = true;
+			throwingRocks = false;
+			hitGroundCooldown -= Time.deltaTime;
+		}
+
+		SweepAttack();
+	}
 
 	private void ThrowRock()
     {
