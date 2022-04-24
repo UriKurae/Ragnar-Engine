@@ -8,7 +8,7 @@ public class DialogueManager : RagnarComponent
 	GameObject text;
 	GameObject image;
     GameObject name;
-	Vector3 Pos;
+	Vector3 pos;
 	string auth;
     int authId;
     // 0=Paul / 1=Chani / 2=Rehen Fremen / 3=Rabban / 
@@ -28,7 +28,7 @@ public class DialogueManager : RagnarComponent
 		auth = "";
         authId = -1;
         idDialogue = 0;
-		Pos = new Vector3(0, 0, 0);
+		pos = new Vector3(0, 0, 0);
 		endDialogue = false;
 
         Disable();
@@ -38,8 +38,15 @@ public class DialogueManager : RagnarComponent
     {
         if (firstTime)
         {
-            Pos.Set(text.GetComponent<Transform2D>().position2D.x - 105.0f, text.GetComponent<Transform2D>().position2D.y - 10, text.GetComponent<Transform2D>().position2D.z);
-            text.GetComponent<Transform2D>().position2D = Pos;
+            pos.Set(-25.0f, text.GetComponent<Transform2D>().position2D.y, text.GetComponent<Transform2D>().position2D.z + 20);
+            text.GetComponent<Transform2D>().position2D = pos;
+            pos.Set(0.0f, image.GetComponent<Transform2D>().position2D.y, image.GetComponent<Transform2D>().position2D.z + 20);
+            image.GetComponent<Transform2D>().position2D = pos;
+            pos.Set(-25.0f, name.GetComponent<Transform2D>().position2D.y, image.GetComponent<Transform2D>().position2D.z + 20);
+            name.GetComponent<Transform2D>().position2D = pos;
+            pos.Set(box.GetComponent<Transform2D>().position2D.x, box.GetComponent<Transform2D>().position2D.y, box.GetComponent<Transform2D>().position2D.z-10);
+            box.GetComponent<Transform2D>().position2D = pos;
+
             firstTime = false;
         }
 
@@ -66,22 +73,28 @@ public class DialogueManager : RagnarComponent
         switch (authId)
         {
             case 0:
-                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_face_paul.png");
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_paul.png");
                 break;
             case 1:
-                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_face_chani.png");
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_chani.png");
                 break;
             case 2:
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_fremen_hostage.png");
                 break;
             case 3:
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_rabann.png");
                 break;
             case 4:
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_soldier_1.png");
                 break;
             case 5:
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_soldier_2.png");
                 break;
             case 6:
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_jessica.png");
                 break;
             case 7:
+                image.GetComponent<Material>().SetTexturePath("Assets/Resources/UI/ui_dialog_stilgar.png");
                 break;
 
             default:

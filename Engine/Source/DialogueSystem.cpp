@@ -279,7 +279,7 @@ void DialogueSystem::LoadDialogue(std::string path)
 void DialogueSystem::LoadDialogueXML()
 {
 	std::string a = "dialogos_esp2.xml";
-	std::string path = DIALOGUES_ASSETS_FOLDER + a;
+	std::string path = DIALOGUES_FOLDER + a;
 	pugi::xml_parse_result result = dialoguesXML.load_file(path.c_str());
 
 	// instead of saving the name of the author we save an id, 
