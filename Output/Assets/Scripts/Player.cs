@@ -148,6 +148,11 @@ public class Player : RagnarComponent
     {
         state = var;
     }
+
+    public void GetHit(int dmg)
+    {
+        hitPoints -= dmg;
+    }
 }
 
 
