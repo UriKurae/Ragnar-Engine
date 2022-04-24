@@ -4,9 +4,8 @@ using RagnarEngine;
 public class EnemyBullet : RagnarComponent
 {
 	public int vel = 100;
-	private bool pendingToDelete = false;
 
-	public GameObject[] players = new GameObject[3];
+	public GameObject[] players;
 	public int index = 0;
 	public GameObject enemy;
 
@@ -25,18 +24,21 @@ public class EnemyBullet : RagnarComponent
 		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
 		diff.y = gameObject.transform.globalPosition.y;
 
-		GameObject obj = RayCast.HitToTag(pos, diff, "Player");
-		if (obj != null) obj.GetComponent<Player>().hitPoints -= 1;
+		GameObject obj = RayCast.HitToTag(pos + enemy.transform.forward, diff, "Player");
+		if (obj != null)
+		{
+			Debug.Log(obj.name.ToString());
+			obj.GetComponent<Player>().hitPoints -= 1;
+		}
 
 		bulletRb.linearVelocity = diff.normalized * vel;
 	}
     public void Update()
 	{
-		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 	}
 
 	public void OnCollision()
 	{
-		pendingToDelete = true;
+		InternalCalls.Destroy(gameObject);
 	}
 }
