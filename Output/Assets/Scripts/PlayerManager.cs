@@ -6,7 +6,7 @@ public class PlayerManager : RagnarComponent
     public GameObject[] players;
     public int characterSelected = 0;
 
-    public Characters[] characters = new Characters[3];
+    public Characters[] characters;
     public Characters playableCharacter;
 
     GameObject[] area = null;
@@ -15,137 +15,6 @@ public class PlayerManager : RagnarComponent
 
     public void Start()
 	{
-        ///////////////////////////////////////////////////////////////////
-        // AVISO
-        // Esto de aquí está hardcodeadísimo
-        // Pero no hay otra manera de hacerlo
-        // Cuando se puedan meter cositas desde inspector
-        // Se solucionará este problema ^^
-
-        // Player 1
-        characters[0] = new Characters
-        {
-            name = "Paul Atreides",
-            prefabPath = "Player",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[0].abilities[0] = new Abilities
-        {
-            name = "Knife Throw",
-            prefabPath = "Knife",
-            prefabArea = "Knife Area",
-            charges = -1,
-            cooldown = 25f
-        }; // Throwing Knife
-        characters[0].abilities[1] = new Abilities
-        {
-            name = "Rock Throw",
-            prefabPath = "Eagle",
-            prefabArea = "Rock Area",
-            charges = -1,
-            cooldown = 20f
-        }; // Rock/Eagle
-        characters[0].abilities[2] = new Abilities
-        {
-            name = "The Voice",
-            prefabPath = "Voice",
-            prefabArea = "Rock Area",
-            charges = -1,
-            cooldown = 20f
-        }; // The Voice
-        characters[0].abilities[3] = new Abilities
-        {
-            name = "BackStab",
-            prefabPath = "BackStab_2",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-
-        // Player 2
-        characters[1] = new Characters
-        {
-            name = "Chani",
-            prefabPath = "Player_2",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[1].abilities[0] = new Abilities
-        {
-            name = "Backstab",
-            prefabPath = "BackStab",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-        characters[1].abilities[1] = new Abilities
-        {
-            name = "Camouflage",
-            prefabPath = "Camouflage",
-            prefabArea = "Backstab Area",
-            charges = -1,
-            cooldown = 30f
-        }; // Camouflage
-        characters[1].abilities[2] = new Abilities
-        {
-            name = "Spice Bomb",
-            prefabPath = "Spice Granade",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // Spice Bomb
-        characters[1].abilities[3] = new Abilities
-        {
-            name = "Hunter Seeker",
-            prefabPath = "HunterSeeker",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 4f
-        }; // Hunter Seeker
-
-        // Player 3
-        characters[2] = new Characters
-        {
-            name = "Stilgar",
-            prefabPath = "Player_3",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[2].abilities[0] = new Abilities
-        {
-            name = "Sword Slash",
-            prefabPath = "SwordSlash",
-            prefabArea = "SwordSlash Area",
-            charges = -1,
-            cooldown = 0f
-        }; // Sword Slash
-        characters[2].abilities[1] = new Abilities
-        {
-            name = "Stunner",
-            prefabPath = "StunnerShot",
-            prefabArea = "Stunner Area",
-            charges = 4,
-            cooldown = 5f
-        }; // Stunner Shot
-        characters[2].abilities[2] = new Abilities
-        {
-            name = "Whistle",
-            prefabPath = "Whistle",
-            prefabArea = "Whistle Area",
-            charges = -1,
-            cooldown = 6f
-        }; // Whistle
-        characters[2].abilities[3] = new Abilities
-        {
-            name = "Trap",
-            prefabPath = "Trap",
-            prefabArea = "Trap Area",
-            charges = 1,
-            cooldown = 0f
-        }; // Trap
-        ///////////////////////////////////////////////////////////////////
-
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
@@ -154,6 +23,18 @@ public class PlayerManager : RagnarComponent
         players = GameObject.FindGameObjectsWithTag("Player");
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Player>().hitPoints = characters[i].hitPoints;
+        }
+
+        area = GameObject.FindGameObjectsWithTag("AbilityRange");
+        GameObject[] aux = new GameObject[area.Length];
+        for (int i = 0, j = area.Length - 1; i < area.Length; i++, j--)
+        {
+            aux[j] = area[i];
+        }
+        area = aux;
     }
 
 	public void Update()
@@ -194,25 +75,25 @@ public class PlayerManager : RagnarComponent
     private void AbilityStateChanger()
     {
         // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_1);
         }
 
         // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_2);
         }
 
         // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_3);
         }
 
         // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.F) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_4);
         }
@@ -237,10 +118,7 @@ public class PlayerManager : RagnarComponent
             if (!drawnArea)
             {
                 drawnArea = true;
-                InternalCalls.InstancePrefab(playableCharacter.abilities[ability - 1].prefabArea);
-                area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                players[characterSelected].AddChild(area[0]);
-                area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
+                DrawArea(ability);
             }
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
@@ -251,6 +129,15 @@ public class PlayerManager : RagnarComponent
             Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
             playableCharacter.state = State.NONE;
         }
+    }
+
+    private void DrawArea(int ability)
+    {
+        area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
+        area[characterSelected].GetComponent<Light>().intensity = playableCharacter.abilities[ability - 1].intensity;
+        area[characterSelected].GetComponent<Light>().constant = playableCharacter.abilities[ability - 1].constant;
+        area[characterSelected].GetComponent<Light>().linear = playableCharacter.abilities[ability - 1].linear;
+        area[characterSelected].GetComponent<Light>().quadratic = playableCharacter.abilities[ability - 1].quadratic;
     }
 
     private void CastOrCancel()
@@ -353,12 +240,7 @@ public class PlayerManager : RagnarComponent
             // Se cambia el estado a POSTCAST para evitar que se mueva directamente después de castear la habilidad. En el update de los players se cambiará a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
             players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
 
-            for (int i = 0; i < area.Length; i++)
-            {
-				gameObject.EraseChild(area[i]);
-                InternalCalls.Destroy(area[i]);
-            }
-            area = null;
+            area[characterSelected].GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
         // Se cancela el estado de la habilidad para que el área de rango deje de mostrarse.
@@ -367,12 +249,7 @@ public class PlayerManager : RagnarComponent
             playableCharacter.state = State.NONE;
             players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
 
-            for (int i = 0; i < area.Length; i++)
-			{
-				gameObject.EraseChild(area[i]);
-				InternalCalls.Destroy(area[i]);
-            }
-            area = null;
+            area[characterSelected].GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
     }
@@ -387,6 +264,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
+                    if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -398,6 +276,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
+                    if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -409,6 +288,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
+                    if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -420,6 +300,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
+                    if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");

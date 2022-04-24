@@ -27,7 +27,7 @@ public class SpiceGranade : RagnarComponent
 	}
 	private void AimMethod() //By Ignasi
 	{
-		GameObject player = GameObject.Find("Player");
+		GameObject player = GameObject.Find("Player_2");
 		NavAgent agent = player.GetComponent<NavAgent>();
 
 		Vector3 pos = player.transform.globalPosition;
@@ -41,6 +41,8 @@ public class SpiceGranade : RagnarComponent
 		goRB.SetBodyPosition(pos);
 		goRB.IgnoreCollision(player, true);
 		goRB.ApplyCentralForce(direction.normalized * force);
+
+		agent.hitPosition = player.transform.globalPosition;
 	}
 	public void OnCollisionEnter(Rigidbody other)
 	{

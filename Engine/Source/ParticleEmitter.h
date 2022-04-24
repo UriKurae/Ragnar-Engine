@@ -44,6 +44,8 @@ public:
 	virtual bool OnLoad(JsonParsing& node);
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array);
 
+	void RestartEmitter();
+
 protected:
 	void AddInstancedAttribute(unsigned int vao, unsigned int vbo, int attributeIndex, int dataSize, int instancedDataLength, int offset);
 	void ShowTextureMenu();
