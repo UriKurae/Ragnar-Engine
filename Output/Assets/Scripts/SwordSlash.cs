@@ -9,15 +9,15 @@ public class SwordSlash : RagnarComponent
     {
         timeAlive = 2f;
 
-        Vector3 pos = GameObject.Find("Player").transform.globalPosition;
+        Vector3 pos = GameObject.Find("Player_3").transform.globalPosition;
         pos.y += 1;
         gameObject.transform.localPosition = pos;
 
-        gameObject.transform.forward.Set(GameObject.Find("Player").transform.forward.x, GameObject.Find("Player").transform.forward.y, GameObject.Find("Player").transform.forward.z);
+        gameObject.transform.forward.Set(GameObject.Find("Player_3").transform.forward.x, GameObject.Find("Player_3").transform.forward.y, GameObject.Find("Player_3").transform.forward.z);
 
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         rb.SetBodyPosition(pos);
-        rb.IgnoreCollision(GameObject.Find("Player"), true);
+        rb.IgnoreCollision(GameObject.Find("Player_3"), true);
         rb.SetAsTrigger();
     }
 
