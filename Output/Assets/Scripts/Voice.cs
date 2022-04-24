@@ -16,7 +16,7 @@ public class Voice : RagnarComponent
 	public void Update()
 	{
 		Debug.Log(enemies.Length.ToString());
-		selectedEnemy = CalculateDistancePlayerEnemies();
+		selectedEnemy = EnemyFound();
 		if (selectedEnemy != null)
 		{
 			Debug.Log("A");
@@ -24,7 +24,7 @@ public class Voice : RagnarComponent
 		}
 		InternalCalls.Destroy(gameObject);
 	}
-	public GameObject CalculateDistancePlayerEnemies()
+	public GameObject EnemyFound()
 	{
 		for (int i = 0; i < enemies.Length; i++)
 		{
@@ -41,11 +41,10 @@ public class Voice : RagnarComponent
 	public void AddNewEnemyToPlayer()
     {
 		Debug.Log("Is Changing");
-		//Yo que seh hermanoh, como se hace esta vaina
-		//selectedEnemy.AddComponent<Player>(4);
-		selectedEnemy.SetActiveComponent(selectedEnemy.GetComponent<EnemyInteractions>(),false);
 		playerManager.players[playerManager.characterSelected].GetComponent<Player>().SetControled(false);
-		selectedEnemy.GetComponent<Player>().SetControled(true);
+		if(selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")	selectedEnemy.GetComponent<BasicEnemy>().SetControled(true);
+		if(selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")	selectedEnemy.GetComponent<TankEnemy>().SetControled(true);
+		if(selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")	selectedEnemy.GetComponent<UndistractableEnemy>().SetControled(true);
 		Debug.Log("Is Changed");
 	}
 }

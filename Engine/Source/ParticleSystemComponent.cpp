@@ -75,6 +75,10 @@ bool ParticleSystemComponent::Update(float dt)
         if ((float)timer.GetTime() / 1000.0f >= maxDuration && looping != true)
         {
             isActive = false;
+            for (std::vector<ParticleEmitter*>::iterator it = emitters.begin(); it != emitters.end(); ++it)
+            {
+                (*it)->RestartEmitter();
+            }
             timer.Stop();
         }
     }
@@ -186,6 +190,7 @@ void ParticleSystemComponent::Play()
     isActive = true;
     for (int i = 0; i < emitters.size(); ++i)
     {
+        emitters[i]->isActive = true;
         // TODO: emitters[i]->RestartEmitter();
     }
 }
@@ -194,6 +199,11 @@ void ParticleSystemComponent::Stop()
 {
     timer.Stop();
     isActive = false;
+    for (int i = 0; i < emitters.size(); ++i)
+    {
+        emitters[i]->isActive = false;
+        // TODO: emitters[i]->RestartEmitter();
+    }
 }
 
 void ParticleSystemComponent::SaveConfiguration()
