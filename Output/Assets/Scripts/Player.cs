@@ -132,7 +132,11 @@ public class Player : RagnarComponent
             InternalCalls.Destroy(GameObject.Find("Knife"));
         }
     }
-
+    public void OnCollision(Rigidbody other)
+    {
+        if (other.gameObject.name == "Rocks")
+            GetHit(1);
+    }
     public void OnTrigger(Rigidbody other)
     {
         if (other.gameObject.name == "WinCondition")

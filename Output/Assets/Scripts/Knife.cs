@@ -22,8 +22,8 @@ public class Knife : RagnarComponent
         pos.y += 1;
         gameObject.transform.localPosition = pos;
 
-        Vector3 direction = agent.hitPosition - player.transform.globalPosition;
-        direction.y = 0;
+        Vector3 direction = HitEnemy(agent, player);
+		direction.y = 0;
 
         Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
         goRB.SetBodyPosition(pos);
@@ -58,6 +58,19 @@ public class Knife : RagnarComponent
 			pendingToDelete = true;
 			canReload = false;
 		}
+	}
+
+	private Vector3 HitEnemy(NavAgent agent, GameObject player)
+	{
+		GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+
+		if (obj != null)
+		{
+			Debug.Log(obj.name.ToString());
+			return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
+		}
+
+		return agent.hitPosition - player.transform.globalPosition;
 	}
 
 	public void OnCollisionEnter(Rigidbody other)

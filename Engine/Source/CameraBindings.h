@@ -44,7 +44,7 @@ GameObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	std::stack<QuadtreeNode*> nodes;
 	std::set<GameObject*> gameObjects;
 	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
-	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGoOnlyStatic(gameObjects, nodes);
 
 	std::map<float, GameObject*> triangleMap;
 	float3 hit;
@@ -54,6 +54,7 @@ GameObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	if (!triangleMap.empty() && (*triangleMap.begin()).second->tag == tagName)
 		return (*triangleMap.begin()).second;
 
+	triangleMap.clear();
 	return nullptr;
 }
 

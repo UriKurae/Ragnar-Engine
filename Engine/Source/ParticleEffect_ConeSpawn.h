@@ -14,7 +14,7 @@ public:
 	ParticleEffect_ConeSpawn();
 	~ParticleEffect_ConeSpawn() override;
 
-	void Spawn(Particle& particle, float4x4& gTrans, float* offset) override;
+	void Spawn(Particle& particle, float3& gTrans, float* offset) override;
 	void OnEditor(int emitterIndex) override;
 
 	bool OnLoad(JsonParsing& node) override;

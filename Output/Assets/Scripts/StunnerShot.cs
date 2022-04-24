@@ -45,8 +45,11 @@ public class StunnerShot : RagnarComponent
     {
         GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-        if (obj != null) 
+        if (obj != null)
+        {
+            Debug.Log(obj.name.ToString());
             return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
+        }
 
         return agent.hitPosition - player.transform.globalPosition;
     }
