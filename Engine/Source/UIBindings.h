@@ -168,7 +168,7 @@ const char* GetText(MonoObject* go)
 {
 	TextComponent* tr = GetComponentMono<TextComponent*>(go);
 	return tr->GetText();
-} 
+}
 void SetTextTextColor(MonoObject* go, float Red,float Green,float Blue)
 {
 	TextComponent* tr = GetComponentMono<TextComponent*>(go);
@@ -180,11 +180,6 @@ const Vec3 GetTextTextColor(MonoObject* go)
 {
 	TextComponent* tr = GetComponentMono<TextComponent*>(go);	
 	return Vec3(tr->GetTextColor().x, tr->GetTextColor().y, tr->GetTextColor().z);
-}
-
-void SetTextSize(MonoObject* go, float size) {
-	TextComponent* tr = GetComponentMono<TextComponent*>(go);
-	tr->SetSize(size);
 }
 
 // Transform 2D ========================================
@@ -208,7 +203,7 @@ void SetSize(MonoObject* go, MonoObject* size)
 int LoadTexture(MonoObject* go, MonoString* text)
 {
 	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
-	std::string y =mono_string_to_utf8(text);
+	std::string y=mono_string_to_utf8(text);
 	
 	tr->principal->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
 	return 0;
