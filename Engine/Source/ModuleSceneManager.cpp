@@ -28,7 +28,7 @@
 #include <fstream>
 #include "Profiling.h"
 
-ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled)
+ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled), lastSceneName("")
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
@@ -92,6 +92,7 @@ bool ModuleSceneManager::Update(float dt)
 	
 	if (changeScene)
 	{
+		lastSceneName = currentScene->GetName();
 		currentScene->UnLoad();
 		currentScene = scenes[index];
 		currentScene->Load();
