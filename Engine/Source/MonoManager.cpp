@@ -251,6 +251,7 @@ bool MonoManager::Init(JsonParsing& node)
 	// Dialogue System =======================
 	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLine", GetDialogueLine);
 	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLineAuthor", GetDialogueLineAuthor);
+	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLineAuthorId", GetDialogueLineAuthorId);
 	mono_add_internal_call("RagnarEngine.Dialogue::NextLine", NextLine);
 	mono_add_internal_call("RagnarEngine.Dialogue::StartDialogueById", StartDialogueById);
 	mono_add_internal_call("RagnarEngine.Dialogue::LoadDialogueFile", LoadDialogueFile);

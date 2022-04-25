@@ -184,6 +184,7 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	std::string p = path;
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
+	matComp->SetTextureType(TextureType::DIFFUSE);
 	matComp->SetTexture(newTexture);
 
 	/*res->Load();
@@ -462,7 +463,7 @@ MonoBoolean GetGameObjectIsActive(MonoObject* go)
 void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
-	gameObject->active = value;
+	gameObject->EnableDisableActive(value);
 }
 MonoBoolean GetActiveComponent(MonoObject* go)
 {
@@ -615,32 +616,52 @@ MonoObject* GetRegionGame()
 // Dialogue System ======================================
 MonoString* GetDialogueLine()
 {
-	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+	//MHF
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLineXML().c_str());
 }
 
 MonoString* GetDialogueLineAuthor()
 {
-	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+	
+	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+	//MHF
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLineXML().c_str());
 }
 
-void NextLine()
+int GetDialogueLineAuthorId() {
+	return DialogueSystem::GetInstance()->GetOwnerIdOfLineXML();
+}
+
+bool NextLine()
 {
-	DialogueSystem::GetInstance()->NextLine();
+	//DialogueSystem::GetInstance()->NextLine();
+	//MHF
+	return DialogueSystem::GetInstance()->NextLineXML();
 }
 
 void StartDialogueById(int id)
 {
+	/*
 	DialogueSystem* sys = DialogueSystem::GetInstance();
 	Dialogue* aux = sys->GetDialogueById(id);
 	sys->SetDialogueAsCurrent(aux);
 	sys->StartDialogue();
+	*/
+	//MHF
+	DialogueSystem* sys = DialogueSystem::GetInstance();
+	sys->SetCurrentDialogueIdXML(id);
+	sys->StartDialogueXML();
 }
+
 
 void LoadDialogueFile(MonoString* name)
 {
-	char* fileName = mono_string_to_utf8(name);
-	std::string path = DIALOGUES_FOLDER;
-	path += fileName;
-	path += ".rgdialogue";
-	DialogueSystem::GetInstance()->LoadDialogue(path);
+	//char* fileName = mono_string_to_utf8(name);
+	//std::string path = DIALOGUES_FOLDER;
+	//path += fileName;
+	//path += ".rgdialogue";
+	//DialogueSystem::GetInstance()->LoadDialogue(path);
+	//MHF
+	DialogueSystem::GetInstance()->LoadDialogueXML();
 }

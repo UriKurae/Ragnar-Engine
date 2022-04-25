@@ -60,8 +60,11 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstA3 = true;
 	bool isFirstA4 = true;
 	bool isFirstA5 = true;
+	DialogueManager dialogue;
+	
 	GameObject CharacterPhotoBord;
 	GameObject AbilityBord;
+	GameObject AbilityImage;
 	GameObject Ability1;
 	GameObject Ability2;
 	GameObject Ability3;
@@ -134,6 +137,9 @@ public class pauseMenuButton : RagnarComponent
         CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
+		AbilityImage = GameObject.Find("AbilImage");
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
 		Ability3 = GameObject.Find("ab3");
 		Ability4 = GameObject.Find("ab4");
 		Ability5 = GameObject.Find("ab5");
@@ -152,26 +158,18 @@ public class pauseMenuButton : RagnarComponent
 		UIPaulImage = GameObject.Find("UIPaulImage");
 		UIChaniImage = GameObject.Find("UIChaniImage");
 		UIStilgarImage = GameObject.Find("UIStilgarImage");
-	}
-	
-	public void Update()
-	{
-		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
-		{
-			SceneManager.LoadScene("WinScene");
 
-		}
-		if (Input.GetKey(KeyCode.G) == KeyState.KEY_DOWN)
-		{
-			SceneManager.LoadScene("LoseScene");
-		}
+
+    }
+
+    public void Update()
+	{
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 
 		SetAllPositions();
 		updateMenu();
 		updateOptions();
-
 
 	}
 	//////////////OPTIONS//////////////
@@ -647,7 +645,7 @@ public class pauseMenuButton : RagnarComponent
 				ResumeButtonHide();
 				MainMenuButtonHide();
 				OptionsButtonHide();
-			}
+            }
 		}
 
 		if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN && !isOptions)
@@ -660,10 +658,12 @@ public class pauseMenuButton : RagnarComponent
 				ResumeButtonHide();
 				MainMenuButtonHide();
 				OptionsButtonHide();
-			}
-			else
+                if (dialogue.GetInDialogue()) { dialogue.ContinueDialogue(); }
+            }
+            else
 			{
-				currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
+                if (dialogue.GetInDialogue()) { dialogue.DisableDialogue(); }
+                currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				isSowing = true;
 			}
