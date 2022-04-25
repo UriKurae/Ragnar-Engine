@@ -7,7 +7,7 @@
 struct Particle
 {
 	float3 position;
-	float3 velocity, acceleration;
+	float3 velocity, acceleration, direccion;
 	float4 color;
 	float size;
 	float rotation = 0.0f;
@@ -22,7 +22,7 @@ struct Particle
 struct ParticleReference
 {
 	float3 position;
-	float3 velocity, acceleration;
+	float3 velocity, acceleration, direccion;
 	float4 color;
 	float size;
 	float lifeTime = 1.0f;

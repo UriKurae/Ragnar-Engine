@@ -384,9 +384,6 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 			mono_free(goName);
 			return app->moduleMono->GoToCSGO(curr);
 		}
-
-		for (auto& child : curr->GetChilds())
-			q.push(child);
 	}
 
 	mono_free(goName);
@@ -575,6 +572,16 @@ void LoadScene(MonoString* string)
 {
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
+}
+
+MonoString* GetLastSceneName()
+{
+	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetLastSceneName().c_str());
+}
+
+MonoString* GetCurrentSceneName()
+{
+	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetCurrentSceneName().c_str());
 }
 
 void Exit()

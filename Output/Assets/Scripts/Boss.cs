@@ -26,9 +26,9 @@ public class Boss : RagnarComponent
 
 	public Material material;
 	public Rigidbody rigidbody;
-	
+
 	public BossState state;
-	
+
 	// NavMesh behaviour
 	NavAgent agent;
 	float calculatePathCooldown = 0.0f;
@@ -51,7 +51,7 @@ public class Boss : RagnarComponent
 	public int barrelCount = 0;
 	public int stunnedHits = 0;
 	float barrelCooldown = 0.0f;
-	//bool shieldInmunity = false;
+	bool shieldInmunity = false;
 	bool phase3Location = false;
 
 	//private int destPoint = 0;
@@ -99,52 +99,49 @@ public class Boss : RagnarComponent
 			Phase2();
 		}
 		else if (state == BossState.PHASE3)
-        {
+		{
 			Phase3();
 		}
 		else if (state == BossState.PHASE4)
-        {
+		{
 			Phase4();
 		}
 
 		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN)
-        {
+		{
 			GenerateEnemies();
-        }
+		}
 	}
 
 	private void NextState()
-    {
+	{
 		switch (state)
 		{
 			case BossState.PHASE2:
 				players = GameObject.FindGameObjectsWithTag("Player");
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.5f;
-                material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
-                GotoNextPoint();
-                break;
+				GotoNextPoint();
+				break;
 			case BossState.PHASE3:
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.75f;
-				material.SetTexturePath("Assets/Resources/white.png");
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
-				//if (!shieldInmunity)
-				//{
+				if (!shieldInmunity)
+				{
 					rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
-					material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
-				//}
-				//else state--;
+				}
+				else state--;
 				break;
 			default:
 				state--;
 				break;
 		}
-    }
+	}
 
 	private void GenerateEnemies()
-    {
+	{
 		InternalCalls.InstancePrefab("Enemy1Boss");
 		GameObject enemy1 = GameObject.Find("Enemy1Boss");
 		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(5.0f, 0.0f, 0.0f));
@@ -154,7 +151,7 @@ public class Boss : RagnarComponent
 		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(-5.0f, 0.0f, 0.0f));
 	}
 	public void GenerateRocks()
-    {
+	{
 		for (int i = 0; i < 5; ++i)
 		{
 			string rockPrefab = "Rock" + (i + 1);
@@ -163,8 +160,8 @@ public class Boss : RagnarComponent
 				InternalCalls.Destroy(rock);
 		}
 		Vector3 bossPos = gameObject.transform.localPosition;
-        for (int i = 0; i < 5; ++i)
-        {
+		for (int i = 0; i < 5; ++i)
+		{
 			string rockPrefab = "Rock" + (i + 1);
 			InternalCalls.InstancePrefab(rockPrefab);
 			GameObject rock = GameObject.Find(rockPrefab);
@@ -172,35 +169,35 @@ public class Boss : RagnarComponent
 			if (i % 2 == 0) rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x, 25.0f, bossPos.z + i));
 			else rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x + i, 25.0f, bossPos.z));
 		}
-    }
+	}
 
 	// Boss behaviour for the phases
 
 	// Phase 2
 	public void Phase2()
-    {
-        // this instakills
-        if (PerceptionCone(90))
-        {
-            Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
-            Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
-            if (!jumping)
-            {
-                for (int i = 0; i < players.Length; ++i)
-                {
-                    if (players[i].transform.globalPosition.magnitude <= area.magnitude &&
-                        players[i].transform.globalPosition.magnitude < jumpTo.magnitude)
-                    {
-                        jumpTo = players[i].transform.globalPosition;
-                        indexPlayerTarget = i;
-                    }
-                }
+	{
+		// this instakills
+		if (PerceptionCone(90))
+		{
+			Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
+			Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
+			if (!jumping)
+			{
+				for (int i = 0; i < players.Length; ++i)
+				{
+					if (players[i].transform.globalPosition.magnitude <= area.magnitude &&
+						players[i].transform.globalPosition.magnitude < jumpTo.magnitude)
+					{
+						jumpTo = players[i].transform.globalPosition;
+						indexPlayerTarget = i;
+					}
+				}
 				agent.speed = 10.0f;
-            }
+			}
 
-            if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f) && players[indexPlayerTarget] != null)
-            {
-               agent.MoveTo(jumpTo);
+			if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f) && players[indexPlayerTarget] != null)
+			{
+				agent.MoveTo(jumpTo);
 				if ((players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
 				{
 					// Play sweep attack animation
@@ -209,18 +206,16 @@ public class Boss : RagnarComponent
 
 					// Hit player, lower his HP
 					players[indexPlayerTarget].GetComponent<Player>().GetHit(100);
-					// Reset Cooldown
-					sweepAttackCooldown = 5.0f;
 				}
 			}
-        }
+		}
 
-        Patrol();
-    }
-	
+		Patrol();
+	}
+
 	// Phase 3
 	public void Phase3()
-    {
+	{
 		if (phase3Location == false)
 		{
 			// Move to new location as soon as phase 3 starts
@@ -229,23 +224,23 @@ public class Boss : RagnarComponent
 			agent.MoveTo(destination);
 
 			if (this.gameObject.transform.localPosition == destination) phase3Location = true;
-			
+
 			phase3Location = true;
-			//shieldInmunity = true;
+			shieldInmunity = true;
 		}
 		else
-        {
+		{
 			ExplodeBarrels();
-			GenerateBarrels();
+			if (shieldInmunity) GenerateBarrels();
 			if (barrelCount < 3) barrelCooldown -= Time.deltaTime;
 		}
 
 		if (phase3Location) FollowPlayer();
 	}
-	
+
 	// Phase 4
 	public void Phase4()
-    {
+	{
 		if (tired == false && hitGroundCooldown <= 0.0f && rocksAvailable == false)
 		{
 			GenerateRocks();
@@ -297,15 +292,15 @@ public class Boss : RagnarComponent
 	}
 
 	private void ThrowRock()
-    {
+	{
 		InternalCalls.InstancePrefab("RockBoss");
-    }
+	}
 	private void GenerateBarrels()
-    {
+	{
 		if (barrelCooldown <= 0.0f && barrelCount < 3)
 		{
-            for (int i = 0; i < 3; ++i)
-            {
+			for (int i = 0; i < 3; ++i)
+			{
 				if (barrelLocations[i].isDestroyed)
 				{
 					string barrelName = "Barrel" + (i + 1);
@@ -313,6 +308,7 @@ public class Boss : RagnarComponent
 					InternalCalls.InstancePrefab(barrelName);
 					GameObject barrel = GameObject.Find(barrelName);
 					barrel.GetComponent<Rigidbody>().SetBodyPosition(barrelLocations[i].spawnLocation);
+					barrel.GetComponent<Barrel>().barrelIndex = i;
 					barrelLocations[i].isDestroyed = false;
 					barrelCount++;
 				}
@@ -320,63 +316,60 @@ public class Boss : RagnarComponent
 			barrelCooldown = 15.0f;
 		}
 	}
-	
-	private void ExplodeBarrels()
-    {
-		if (stunnedHits == 3)
-        {
 
-        }
-		else if (stunnedHits == 1)
+	private void ExplodeBarrels()
+	{
+		if (stunnedHits == 3)
 		{
-			material.SetTexturePath("Assets/Resources/UI/mainMenuScreen.png");
+			Debug.Log("shield down");
+			shieldInmunity = false;
 		}
 	}
 
 	private bool PerceptionCone(int angleDegrees)
 	{
-        Vector3 bossPos = gameObject.transform.globalPosition;
-        Vector3 bossForward = gameObject.transform.forward;
-        Vector3 initPos = new Vector3(bossPos.x + (bossForward.x * offset.x * 0.6f), bossPos.y + 0.1f, bossPos.z + (bossForward.z * offset.z * 0.6f));
+		Vector3 bossPos = gameObject.transform.globalPosition;
+		Vector3 bossForward = gameObject.transform.forward;
+		Vector3 initPos = new Vector3(bossPos.x + (bossForward.x * offset.x * 0.6f), bossPos.y + 0.1f, bossPos.z + (bossForward.z * offset.z * 0.6f));
 
-        index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length);
-        return (index == -1) ? false : true;
-    }
-	
+		index = RayCast.PerceptionCone(initPos, bossForward, angleDegrees, 16, 8, players, players.Length);
+		return (index == -1) ? false : true;
+	}
+
 	public void GotoNextPoint()
 	{
-        //gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
-        //gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+		//gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+		//gameObject.GetComponent<Animation>().PlayAnimation("Walk");
 
-        //Debug.Log(waypoints[destPoint].transform.globalPosition.ToString());
-        //agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
-        //destPoint = (destPoint + 1) % waypoints.Length;
-    }
+		//Debug.Log(waypoints[destPoint].transform.globalPosition.ToString());
+		//agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
+		//destPoint = (destPoint + 1) % waypoints.Length;
+	}
 
 	private void Patrol()
-    {
+	{
 		if (!bossStop && agent.MovePath())
-        {
+		{
 			Debug.Log("Stopped");
 			bossStop = true;
-        }
+		}
 
 		if (bossStop)
-        {
+		{
 			countDown -= Time.deltaTime;
 			if (countDown <= 0.0f)
-            {
+			{
 				bossStop = false;
 				countDown = 5.0f;
 				GotoNextPoint();
-            }
-        }
+			}
+		}
 	}
 
 	private void FollowPlayer()
 	{
 		if (calculatePathCooldown <= 0.0f)
-        {
+		{
 			agent.CalculatePath(players[0].transform.localPosition);
 			calculatePathCooldown = 3.0f;
 		}
@@ -385,7 +378,7 @@ public class Boss : RagnarComponent
 		calculatePathCooldown -= Time.deltaTime;
 	}
 	public void SweepAttack()
-    {
+	{
 		for (int i = 0; i < players.Length; ++i)
 		{
 			if ((players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
@@ -400,22 +393,20 @@ public class Boss : RagnarComponent
 				sweepAttackCooldown = 5.0f;
 			}
 		}
-   
-
 		sweepAttackCooldown -= Time.deltaTime;
-    }
+	}
 	public void OnCollision(Rigidbody other)
 	{
-		if (other.gameObject.tag == "Backstab")
+		if (other.gameObject.tag == "Backstab" && !shieldInmunity)
 		{
 			state++;
 			NextState();
 		}
-		else if(other.gameObject.tag == "Rocks" && rocksAvailable == false)
-        {
+		else if (other.gameObject.tag == "Rocks" && rocksAvailable == false)
+		{
 			rocksAvailable = true;
 			InternalCalls.Destroy(other.gameObject);
 			nextRock = null;
-        }
+		}
 	}
 }

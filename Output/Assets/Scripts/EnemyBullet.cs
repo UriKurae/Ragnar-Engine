@@ -21,15 +21,15 @@ public class EnemyBullet : RagnarComponent
 		bulletRb.IgnoreCollision(enemy, true);
 		bulletRb.SetBodyPosition(pos);
 
-		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
-		diff.y = gameObject.transform.globalPosition.y;
-
-		GameObject obj = RayCast.HitToTag(pos + enemy.transform.forward, diff, "Player");
+		GameObject obj = RayCast.HitToTag(pos, players[index].transform.globalPosition, "Player");
 		if (obj != null)
 		{
 			Debug.Log(obj.name.ToString());
 			obj.GetComponent<Player>().hitPoints -= 1;
 		}
+
+		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
+		diff.y = gameObject.transform.globalPosition.y;
 
 		bulletRb.linearVelocity = diff.normalized * vel;
 	}

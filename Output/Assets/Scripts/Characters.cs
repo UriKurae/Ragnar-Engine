@@ -19,6 +19,9 @@ public class Characters
     public State state;
     public int hitPoints;
 
+    // Position
+    public Vector3 pos;
+
     // Abilities
     public Abilities[] abilities;
 }
