@@ -64,6 +64,7 @@ public class pauseMenuButton : RagnarComponent
 	
 	GameObject CharacterPhotoBord;
 	GameObject AbilityBord;
+	GameObject AbilityImage;
 	GameObject Ability1;
 	GameObject Ability2;
 	GameObject Ability3;
