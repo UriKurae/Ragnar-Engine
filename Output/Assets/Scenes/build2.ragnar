@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 500696896,
+                    "pointer": 326810088,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -2305,19 +2305,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        38.782737731933594,
+                        -15.755505561828613,
                         0,
-                        105.23072814941406
+                        101.28672790527344
                     ],
                     "Quaternion": [
                         0,
-                        0.013280902057886124,
+                        0.43142002820968628,
                         0,
-                        0.99991178512573242
+                        0.90215116739273071
                     ],
                     "RotationEditor": [
                         -0,
-                        0.026562584564089775,
+                        0.8921324610710144,
                         -0
                     ],
                     "Scale": [
@@ -2370,9 +2370,9 @@
                     "Vertical Fov": 0.48647212982177734,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        37.454730987548828,
+                        -54.677135467529297,
                         55,
-                        55.247055053710938
+                        69.898231506347656
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -2381,14 +2381,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        38.782737731933594,
+                        -15.755505561828613,
                         0,
-                        105.23072814941406
+                        101.28672790527344
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 1.5219240188598633,
+                    "Horizontal Angle": 51.115425109863281,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -5063,7 +5063,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 500702744,
+                    "pointer": 341851256,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -5405,9 +5405,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -5425,6 +5425,30 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__wall_01.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
                     "Active": true
                 }
             ]
@@ -5475,6 +5499,30 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__wall_02.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
                     "Active": true
                 }
             ]
@@ -8102,6 +8150,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_07.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -8151,6 +8223,30 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_06.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
                     "Active": true
                 }
             ]
@@ -8202,6 +8298,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_05.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -8251,6 +8371,30 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_04.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
                     "Active": true
                 }
             ]
@@ -8302,6 +8446,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_03.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -8351,6 +8519,30 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_02.fbx",
+                    "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
                     "Active": true
                 }
             ]
@@ -8402,6 +8594,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__rocks_01.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -8431,9 +8647,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -8532,6 +8748,33 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__square_statue.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 3,
+                    "Radius": 1,
+                    "Height": 2.5999999046325684,
+                    "Sectors": 24,
+                    "Gravity": true,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 1,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -8582,6 +8825,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level2\/lvl2_blockout__wall_door.fbx",
                     "Active": true
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -8591,7 +8858,7 @@
             "Name": "Dialogue",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Dialogue.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -8624,7 +8891,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 500700704,
+                    "pointer": 310297584,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8636,7 +8903,7 @@
             "Name": "DialogueBox",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8685,7 +8952,7 @@
             "Name": "DialogueText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8740,7 +9007,7 @@
             "Name": "DialogueAuthName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8795,7 +9062,7 @@
             "Name": "DialogueAuthImg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
