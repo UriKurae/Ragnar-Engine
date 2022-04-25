@@ -16,5 +16,11 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static public extern void Exit();
+
+        static public extern String lastSceneName
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }
     }
 }
