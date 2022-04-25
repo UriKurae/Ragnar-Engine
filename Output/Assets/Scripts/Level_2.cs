@@ -186,8 +186,10 @@ public class Level_2 : RagnarComponent
             charges = 1,
             cooldown = 0f
         }; // Trap
-        ///////////////////////////////////////////////////////////////////
-        
+           ///////////////////////////////////////////////////////////////////
+
+        enemies = new Enemies[0];
+
         InternalCalls.InstancePrefab("PlayerManager");
         GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
         InternalCalls.InstancePrefab("EnemyManager");

@@ -25,7 +25,7 @@ public class Rock : RagnarComponent
 		pos.y += 1;
 		gameObject.transform.localPosition = pos;
 
-		Vector3 direction = agent.hitPosition - player.transform.globalPosition;
+		Vector3 direction = HitEnemy(agent, player);
 		direction.y = 0;
 
 		goRB = gameObject.GetComponent<Rigidbody>();
@@ -34,6 +34,18 @@ public class Rock : RagnarComponent
 		goRB.ApplyCentralForce(direction.normalized * force);
 
 		agent.hitPosition = player.transform.globalPosition;
+	}
+	private Vector3 HitEnemy(NavAgent agent, GameObject player)
+	{
+		GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+
+		if (obj != null)
+		{
+			Debug.Log(obj.name.ToString());
+			return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
+		}
+
+		return agent.hitPosition - player.transform.globalPosition;
 	}
 
 	public void Update()

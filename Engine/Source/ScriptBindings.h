@@ -576,6 +576,11 @@ void LoadScene(MonoString* string)
 	app->sceneManager->NextScene(name);
 }
 
+MonoString* GetLastSceneName()
+{
+	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetLastSceneName().c_str());
+}
+
 void Exit()
 {
 	app->sceneManager->Exit();
