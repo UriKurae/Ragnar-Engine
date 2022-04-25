@@ -193,6 +193,28 @@ void ComponentLight::SetAsSpotLight()
 	app->renderer3D->AddSpotLight((SpotLight*)light);
 }
 
+Light* ComponentLight::GetLight()
+{
+	switch (light->type)
+	{
+		case LightType::DIRECTIONAL:
+		{
+			return (DirectionalLight*)light;
+		}
+
+		case LightType::POINT:
+		{
+			return (PointLight*)light;
+		}
+
+		case LightType::SPOT:
+		{
+			return (SpotLight*)light;
+		}
+	}
+	return nullptr;
+}
+
 bool ComponentLight::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");

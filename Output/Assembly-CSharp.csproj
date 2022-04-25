@@ -50,6 +50,7 @@
     <Compile Include="Assembly-CSharp\Default Components\AudioListener.cs" />
     <Compile Include="Assembly-CSharp\Default Components\AudioSource.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\Light.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Material.cs" />
     <Compile Include="Assembly-CSharp\Default Components\NavAgent.cs" />
     <Compile Include="Assembly-CSharp\Default Components\ParticleSystem.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Assets\Scripts\Knife.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\EnemyBullet.cs" />
-    <Compile Include="Assets\Scripts\EnemyInteractions.cs" />
     <Compile Include="Assets\Scripts\TankEnemy.cs" />
     <Compile Include="Assets\Scripts\UndistractableEnemy.cs" />
     <Compile Include="Assets\Scripts\WinScreen.cs" />
@@ -95,6 +95,8 @@
     <Compile Include="Assets\Scripts\BackStab.cs" />
     <Compile Include="Assets\Scripts\StunnerShot.cs" />
     <Compile Include="Assets\Scripts\SwordSlash.cs" />
+    <Compile Include="Assets\Scripts\Boss.cs" />
+    <Compile Include="Assets\Scripts\Barrel.cs" />
     <Compile Include="Assets\Scripts\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemies.cs" />
     <Compile Include="Assets\Scripts\Voice.cs" />
@@ -102,7 +104,11 @@
     <Compile Include="Assets\Scripts\Whistle.cs" />
     <Compile Include="Assets\Scripts\Trap.cs" />
     <Compile Include="Assets\Scripts\Eagle.cs" />
+    <Compile Include="Assets\Scripts\RockBoss.cs" />
     <Compile Include="Assets\Scripts\SpiceGranade.cs" />
+    <Compile Include="Assets\Scripts\Level_1.cs" />
+    <Compile Include="Assets\Scripts\Level_2.cs" />
+    <Compile Include="Assets\Scripts\Level_3.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />

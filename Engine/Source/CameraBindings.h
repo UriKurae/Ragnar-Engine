@@ -42,9 +42,9 @@ GameObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	LineSegment picking(pointA, pointB);
 
 	std::stack<QuadtreeNode*> nodes;
-	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
 	std::set<GameObject*> gameObjects;
-	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, picking);
+	app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGoOnlyStatic(gameObjects, nodes);
 
 	std::map<float, GameObject*> triangleMap;
 	float3 hit;
@@ -53,16 +53,8 @@ GameObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	// Throw Ray from enemy head to player head
 	if (!triangleMap.empty() && (*triangleMap.begin()).second->tag == tagName)
 		return (*triangleMap.begin()).second;
-	// If don't match, Throw Ray from enemy head to player feets
-	else
-	{
-		triangleMap.clear();
-		picking.b.y -= 0.5f;
-		app->camera->ThrowRayCastOnlyOBB(gameObjects, picking, triangleMap, hit);
-		if (!triangleMap.empty() && (*triangleMap.begin()).second->tag == tagName)
-			return (*triangleMap.begin()).second;
-	}
 
+	triangleMap.clear();
 	return nullptr;
 }
 
@@ -87,7 +79,7 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	{
 		LineSegment ray(pointA, pointA + arrayPos[i]);
 		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, ray);
-		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGo(gameObjects, nodes);
+		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGoOnlyStatic(gameObjects, nodes);
 		std::stack<QuadtreeNode*>().swap(nodes);
 	}
 

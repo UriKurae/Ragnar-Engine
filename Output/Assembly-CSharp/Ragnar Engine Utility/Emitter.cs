@@ -14,12 +14,6 @@ namespace RagnarEngine
             psOwner = new ParticleSystem(ownerPtr);
         }
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void Play();
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void Pause();
-
         public ParticleSystem owner
         {
             get { return psOwner; }

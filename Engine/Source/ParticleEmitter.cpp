@@ -802,3 +802,9 @@ void ParticleEmitter::NextBatch()
 	Render(0);
 	StartBatch();
 }
+
+void ParticleEmitter::RestartEmitter()
+{
+	particlePool.clear();
+	particlePool.resize(maxParticles);
+}

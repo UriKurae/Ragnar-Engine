@@ -199,7 +199,7 @@ void ModuleCamera3D::ThrowRayCastOnlyOBB(std::set<GameObject*>& gameObjects, mat
 			picking = prevLine;
 			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
 			{
-				aabbMap[dNear] = (*it);
+				aabbMap[dFar * prevLine.Length()] = (*it);
 				if ((*aabbMap.begin()).second == (*it))
 					hitPoint = prevLine.a + prevLine.Dir() * dFar * prevLine.Length();
 				break;

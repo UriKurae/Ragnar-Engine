@@ -19,7 +19,7 @@ public:
 	SpawnShape(SPAWN_SHAPE_TYPE type);
 	virtual ~SpawnShape(){}
 
-	virtual void Spawn(Particle& particle, float4x4& gTrans, float* offset){}
+	virtual void Spawn(Particle& particle, float3& gTrans, float* offset){}
 
 	virtual void OnEditor(int emitterIndex){}
 

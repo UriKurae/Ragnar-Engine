@@ -54,6 +54,6 @@ private:
 	Color textColor = white;
 	MyPlane* planeToDraw;
 	//char text[358] = "Text";
-	float fontScale = 1;
+	float fontScale = 0.5;
 	std::string fileText = "-";
 };

@@ -56,6 +56,8 @@ public:
 	GameState GetGameState() { return gameState; }
 	GameTimer& GetTimer() { return gameTimer; }
 
+	std::string GetLastSceneName() { return lastSceneName; }
+
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
 	inline void Exit() { exit = true; }
@@ -82,6 +84,8 @@ private:
 	int index = 0;
 	int lastIndex = 0;
 	bool changeScene = false;
+	std::string lastSceneName;
+
 	bool exit = false;
 	GameState gameState;
 	GameTimer gameTimer;

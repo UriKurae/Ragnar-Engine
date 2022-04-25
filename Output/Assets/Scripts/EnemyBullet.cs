@@ -3,40 +3,42 @@ using RagnarEngine;
 
 public class EnemyBullet : RagnarComponent
 {
-	public int vel = 40;
-	private bool pendingToDelete = false;
+	public int vel = 100;
 
-	public GameObject[] players = new GameObject[3];
+	public GameObject[] players;
 	public int index = 0;
 	public GameObject enemy;
 
 	public void Start()
 	{
 		players = GameObject.FindGameObjectsWithTag("Player");
-		Debug.Log(enemy.name);
 
 		Vector3 pos = enemy.transform.globalPosition;
-		pos.y += 1;
+		pos.y += 0.5f;
 		gameObject.transform.localPosition = pos;
 
 		Rigidbody bulletRb = gameObject.GetComponent<Rigidbody>();
-		bulletRb.SetBodyPosition(pos);
 		bulletRb.IgnoreCollision(enemy, true);
+		bulletRb.SetBodyPosition(pos);
 
-		Debug.Log(index.ToString());
+		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
+		diff.y = gameObject.transform.globalPosition.y;
 
-        float xDiff = players[index].transform.globalPosition.x - gameObject.transform.globalPosition.x;
-        float zDiff = players[index].transform.globalPosition.z - gameObject.transform.globalPosition.z;
-        Vector3 shotDirection = new Vector3(xDiff, pos.y, zDiff);
-        bulletRb.linearVelocity = shotDirection.normalized * vel;
-    }
+		GameObject obj = RayCast.HitToTag(pos + enemy.transform.forward, diff, "Player");
+		if (obj != null)
+		{
+			Debug.Log(obj.name.ToString());
+			obj.GetComponent<Player>().hitPoints -= 1;
+		}
+
+		bulletRb.linearVelocity = diff.normalized * vel;
+	}
     public void Update()
 	{
-		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 	}
 
 	public void OnCollision()
 	{
-		pendingToDelete = true;
+		InternalCalls.Destroy(gameObject);
 	}
 }
