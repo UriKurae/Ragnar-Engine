@@ -700,8 +700,8 @@ void ModuleUI::Draw()
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
 		GameObject* go = app->userInterface->UIGameObjects[a];
-		if (go->active)
-		{
+		
+		if (go->active) {
 			if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 			{
 				go->Draw(nullptr);
@@ -751,7 +751,8 @@ void ModuleUI::DeleteUIGameObjects(GameObject* ui)
 		return;
 
 	auto obj = FindUI(ui);
-	UIGameObjects.erase(obj);
+	if(!ui->GetComponent<SliderComponent>())
+		UIGameObjects.erase(obj);
 	UIGameObjectSelected = nullptr;
 }
 

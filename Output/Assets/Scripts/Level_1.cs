@@ -107,7 +107,7 @@ public class Level_1 : RagnarComponent
         characters[1].abilities[2] = new Abilities
         {
             name = "Spice Grenade",
-            prefabPath = "Spice Grenade",
+            prefabPath = "SpiceGrenade",
             transformY = 1.32f,
             intensity = 4.0f,
             constant = 1.232f,
@@ -126,52 +126,315 @@ public class Level_1 : RagnarComponent
             linear = -0.172f,
             quadratic = 0f,
             charges = -1,
-            cooldown = 4f
+            cooldown = 40f
         }; // Hunter Seeker
 
         // ENEMIES
-        enemies = new Enemies[3];
+        enemies = new Enemies[27];
 
-		// Basic Enemy with Patrol
         enemies[0] = new Enemies
         {
-            name = "Ground Enemy 1",
+            name = "Basic Enemy 1",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(3.59f, 0f, 18.03f),
-            waypoints = new GameObject[3]
+            pos = new Vector3(-47.95f, 0f, 70.62f),
+            waypoints = new GameObject[1]
         };
         enemies[0].waypoints[0] = GameObject.Find("1");
-        enemies[0].waypoints[1] = GameObject.Find("2");
-        enemies[0].waypoints[2] = GameObject.Find("3");
 
         enemies[1] = new Enemies
         {
-            name = "Ground Enemy 2",
+            name = "Basic Enemy 2",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(4.23f, 0f, -6.68f),
-            waypoints = new GameObject[3]
-        };
-        enemies[1].waypoints[0] = GameObject.Find("4");
-        enemies[1].waypoints[1] = GameObject.Find("5");
-        enemies[1].waypoints[2] = GameObject.Find("6");
-
-        // Basic Enemy without Patrol
-        enemies[2] = new Enemies
-        {
-            name = "Ground Enemy 3",
-            prefabPath = "Basic Enemy",
-            type = EnemyType.BASIC,
-            state = EnemyState.IDLE,
-            pos = new Vector3(-7.52f, 0f, 31.44f),
+            pos = new Vector3(-41.9f, 0f, 76.72f),
             waypoints = new GameObject[1]
         };
-        enemies[2].waypoints[0] = GameObject.Find("7");
+        enemies[1].waypoints[0] = GameObject.Find("2");
+
+        enemies[2] = new Enemies
+        {
+            name = "Basic Enemy 3",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-36.09f, 0f, 78.52f),
+            waypoints = new GameObject[1]
+        };
+        enemies[2].waypoints[0] = GameObject.Find("3");
+
+        enemies[3] = new Enemies
+        {
+            name = "Basic Enemy 4",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-32.31f, 0f, 83.42f),
+            waypoints = new GameObject[1]
+        };
+        enemies[3].waypoints[0] = GameObject.Find("4");
+
+        enemies[4] = new Enemies
+        {
+            name = "Basic Enemy 5",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-14.31f, 0f, 71.04f),
+            waypoints = new GameObject[1]
+        };
+        enemies[4].waypoints[0] = GameObject.Find("5");
+
+        enemies[5] = new Enemies
+        {
+            name = "Basic Enemy 6",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-14.84f, 0f, 66.57f),
+            waypoints = new GameObject[1]
+        };
+        enemies[5].waypoints[0] = GameObject.Find("6");
+
+        enemies[6] = new Enemies
+        {
+            name = "Basic Enemy 7",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-21.33f, 0f, 51.6f),
+            waypoints = new GameObject[1]
+        };
+        enemies[6].waypoints[0] = GameObject.Find("7");
+
+        enemies[7] = new Enemies
+        {
+            name = "Basic Enemy 8",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-0.96f, 0f, 55.66f),
+            waypoints = new GameObject[1]
+        };
+        enemies[7].waypoints[0] = GameObject.Find("8");
+
+        enemies[8] = new Enemies
+        {
+            name = "Basic Enemy 9",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-39.77f, 0f, 57.01f),
+            waypoints = new GameObject[1]
+        };
+        enemies[8].waypoints[0] = GameObject.Find("9");
+
+        enemies[9] = new Enemies
+        {
+            name = "Basic Enemy 10",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-7.03f, 0f, 17.20f),
+            waypoints = new GameObject[1]
+        };
+        enemies[9].waypoints[0] = GameObject.Find("10");
+
+        enemies[10] = new Enemies
+        {
+            name = "Basic Enemy 11",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(11.87f, 0f, 28.13f),
+            waypoints = new GameObject[1]
+        };
+        enemies[10].waypoints[0] = GameObject.Find("11");
+
+        enemies[11] = new Enemies
+        {
+            name = "Undistractable Enemy 1",
+            prefabPath = "Undistractable Enemy",
+            type = EnemyType.UNDISTRACTABLE,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-38.13f, 0f, -2.73f),
+            waypoints = new GameObject[1]
+        };
+        enemies[11].waypoints[0] = GameObject.Find("12");
+
+        enemies[12] = new Enemies
+        {
+            name = "Basic Enemy 12",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(11.40f, 0f, 11.64f),
+            waypoints = new GameObject[1]
+        };
+        enemies[12].waypoints[0] = GameObject.Find("13");
+
+        enemies[13] = new Enemies
+        {
+            name = "Basic Enemy 13",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-3.54f, 0f, -5.34f),
+            waypoints = new GameObject[1]
+        };
+        enemies[13].waypoints[0] = GameObject.Find("14");
+
+        enemies[14] = new Enemies
+        {
+            name = "Undistractable Enemy 2",
+            prefabPath = "Undistractable Enemy",
+            type = EnemyType.UNDISTRACTABLE,
+            state = EnemyState.IDLE,
+            pos = new Vector3(11.91f, 0f, -6.25f),
+            waypoints = new GameObject[1]
+        };
+        enemies[14].waypoints[0] = GameObject.Find("15");
+
+        enemies[15] = new Enemies
+        {
+            name = "Basic Enemy 14",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(8.02f, 0f, -18.9f),
+            waypoints = new GameObject[1]
+        };
+        enemies[15].waypoints[0] = GameObject.Find("16");
+
+        enemies[16] = new Enemies
+        {
+            name = "Basic Enemy 15",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(-15.74f, 0f, -36.37f),
+            waypoints = new GameObject[1]
+        };
+        enemies[16].waypoints[0] = GameObject.Find("17");
+
+        enemies[17] = new Enemies
+        {
+            name = "Basic Enemy 16",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(1.08f, 0f, -37.19f),
+            waypoints = new GameObject[1]
+        };
+        enemies[17].waypoints[0] = GameObject.Find("18");
+
+        enemies[18] = new Enemies
+        {
+            name = "Basic Enemy 17",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(40.21f, 0f, 0.84f),
+            waypoints = new GameObject[1]
+        };
+        enemies[18].waypoints[0] = GameObject.Find("19");
+
+        enemies[19] = new Enemies
+        {
+            name = "Basic Enemy 18",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(42.43f, 0f, -11.37f),
+            waypoints = new GameObject[1]
+        };
+        enemies[19].waypoints[0] = GameObject.Find("20");
+
+        enemies[20] = new Enemies
+        {
+            name = "Basic Enemy 19",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = new Vector3(44.22f, 0f, -35.61f),
+            waypoints = new GameObject[1]
+        };
+        enemies[20].waypoints[0] = GameObject.Find("21");
+
+        enemies[21] = new Enemies
+        {
+            name = "Basic Enemy 20",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = GameObject.Find("22").transform.globalPosition,
+            waypoints = new GameObject[1]
+        };
+        enemies[21].waypoints[0] = GameObject.Find("22");
+
+        enemies[22] = new Enemies
+        {
+            name = "Basic Enemy 21",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = GameObject.Find("23").transform.globalPosition,
+            waypoints = new GameObject[1]
+        };
+        enemies[22].waypoints[0] = GameObject.Find("23");
+
+        enemies[23] = new Enemies
+        {
+            name = "Basic Enemy 22",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = GameObject.Find("24").transform.globalPosition,
+            waypoints = new GameObject[1]
+        };
+        enemies[23].waypoints[0] = GameObject.Find("24");
+
+        enemies[24] = new Enemies
+        {
+            name = "Basic Enemy 23",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = GameObject.Find("25").transform.globalPosition,
+            waypoints = new GameObject[2]
+        };
+        enemies[24].waypoints[0] = GameObject.Find("25");
+        enemies[24].waypoints[1] = GameObject.Find("26");
+
+        enemies[25] = new Enemies
+        {
+            name = "Basic Enemy 24",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = GameObject.Find("27").transform.globalPosition,
+            waypoints = new GameObject[4]
+        };
+        enemies[25].waypoints[0] = GameObject.Find("27");
+        enemies[25].waypoints[1] = GameObject.Find("28");
+        enemies[25].waypoints[2] = GameObject.Find("29");
+        enemies[25].waypoints[3] = GameObject.Find("30");
+
+        enemies[26] = new Enemies
+        {
+            name = "Basic Enemy 25",
+            prefabPath = "Basic Enemy",
+            type = EnemyType.BASIC,
+            state = EnemyState.IDLE,
+            pos = GameObject.Find("31").transform.globalPosition,
+            waypoints = new GameObject[2]
+        };
+        enemies[26].waypoints[0] = GameObject.Find("31");
+        enemies[26].waypoints[1] = GameObject.Find("32");
         /////////////////////////////////////////////////
-      
+
         InternalCalls.InstancePrefab("PlayerManager");
         GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
         InternalCalls.InstancePrefab("EnemyManager");

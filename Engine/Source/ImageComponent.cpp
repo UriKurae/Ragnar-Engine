@@ -4,7 +4,7 @@
 
 #include "ModuleInput.h"
 #include "ModuleUI.h"
-
+#include "Texture.h"
 #include "GameObject.h"
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
@@ -61,11 +61,10 @@ int ImageComponent::LoadTexture(std::string newTexture)
 {
 	MaterialComponent* auxiliar = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
 	ResourceManager* aux =ResourceManager::GetInstance();
-
-	auxiliar->SetTexture(aux->GetInstance()->LoadResource(std::string(newTexture)));
+	auxiliar->SetTexture(aux->LoadResource(std::string(newTexture)));
 	materialList.push_back(auxiliar);
 
-	ResourceManager::ReleaseInstance();
+	
 	return materialList.size();
 }
 void ImageComponent::UseTexture(int ID) 

@@ -154,7 +154,11 @@ public class Player : RagnarComponent
             InternalCalls.Destroy(GameObject.Find("Knife"));
         }
     }
-
+    public void OnCollision(Rigidbody other)
+    {
+        if (other.gameObject.name == "Rocks")
+            GetHit(1);
+    }
     public void OnTrigger(Rigidbody other)
     {
         if (other.gameObject.name == "WinCondition")
@@ -174,6 +178,11 @@ public class Player : RagnarComponent
     public void SetState(int var)
     {
         state = var;
+    }
+
+    public void GetHit(int dmg)
+    {
+        hitPoints -= dmg;
     }
 }
 

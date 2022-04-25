@@ -25,7 +25,7 @@ public class SpiceGranade : RagnarComponent
 		}
 		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 	}
-	private void AimMethod() //By Ignasi
+	private void AimMethod()
 	{
 		GameObject player = GameObject.Find("Player_2");
 		NavAgent agent = player.GetComponent<NavAgent>();
@@ -46,6 +46,7 @@ public class SpiceGranade : RagnarComponent
 	}
 	public void OnCollisionEnter(Rigidbody other)
 	{
+		gameObject.GetComponent<ParticleSystem>().Play();
 		goRB.SetAsStatic();
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
 		CreateSphereTrigger(area, explosionRadius, gameObject.transform.globalPosition);

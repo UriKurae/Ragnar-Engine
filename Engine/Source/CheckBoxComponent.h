@@ -33,7 +33,10 @@ public:
 	inline void SetSelectedMaterial(MaterialComponent* mat) { selectedMaterial = mat; };
 	inline void SetActual(MaterialComponent* mat) { actual = mat; };
 
-	inline bool GetChecked() { return checked; };
+	inline bool GetChecked() {
+		return checked;
+		
+	};
 	inline State GetState() { return state; };
 
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
@@ -55,7 +58,7 @@ private:
 
 	State state = State::NORMAL;
 	Text checkboxText;
-
+	bool isFirstTime = false;
 	char text[32] = "V-Sync";
 	float fontScale = 0.5;
 	bool checked = false;

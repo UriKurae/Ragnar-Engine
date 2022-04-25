@@ -63,7 +63,6 @@ public class EnemyManager : RagnarComponent
                     {
                         if (enemyGOs[i] == go)
                         {
-                            Debug.Log(go.name.ToString());
                             j--;
                             for(int k = 0; k < deadEnemies.Length; k++)
                             {

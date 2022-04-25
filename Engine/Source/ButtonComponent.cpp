@@ -155,26 +155,29 @@ bool ButtonComponent::Update(float dt)
 		state = State::DISABLED;
 	else
 		state = State::NORMAL;*/
-
-	if (state != State::DISABLED)
-	{
-		if (app->userInterface->focusedGameObject == owner)
-		{
-			state = State::FOCUSED;
-			actual = focusedMaterial;
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+	if (owner->active) {
+		
+			if (app->userInterface->focusedGameObject == owner)
 			{
-				state = State::PRESSED;
-				actual = pressedMaterial;
+				state = State::FOCUSED;
+				actual = focusedMaterial;
+				if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+				{
+					state = State::PRESSED;
+					actual = pressedMaterial;
+				}
 			}
-		}
-		else
-		{
-			state = State::NORMAL;
-			actual = normalMaterial;
-		}
+			else
+			{
+				state = State::NORMAL;
+				actual = normalMaterial;
+			}
+		
 	}
-
+	else 
+	{
+		state = State::DISABLED;
+	}
 	return true;
 }
 
