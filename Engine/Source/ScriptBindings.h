@@ -581,6 +581,11 @@ MonoString* GetLastSceneName()
 	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetLastSceneName().c_str());
 }
 
+MonoString* GetCurrentSceneName()
+{
+	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetCurrentSceneName().c_str());
+}
+
 void Exit()
 {
 	app->sceneManager->Exit();
