@@ -21,7 +21,7 @@ public class Level_2 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 3,
-            pos = new Vector3(-50.72f, 0f, 92f)
+            pos = new Vector3(21.70f, 0f, -160.8f)
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -80,7 +80,7 @@ public class Level_2 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 2,
-            pos = new Vector3(-50.72f, 0f, 92f)
+            pos = new Vector3(29.58f, 0f, -164.22f)
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -139,7 +139,7 @@ public class Level_2 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 4,
-            pos = new Vector3(-50.72f, 0f, 92f)
+            pos = new Vector3(19.31f, 0f, -167.67f)
         };
         characters[2].abilities[0] = new Abilities
         {

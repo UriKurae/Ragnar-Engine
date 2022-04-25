@@ -51,11 +51,87 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 333305632,
+                    "pointer": 318486168,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
                     "enemies": 0
+                }
+            ]
+        },
+        {
+            "UUID": 618826301,
+            "Parent UUID": 417171234,
+            "Name": "Waypoints",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 410166313,
+            "Parent UUID": 618826301,
+            "Name": "1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        2.5828471183776855,
+                        0,
+                        27.439815521240234
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
                 }
             ]
         },
@@ -139,20 +215,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -54.283187866210938,
+                        -6.1551237106323242,
                         0,
-                        -50.222930908203125
+                        51.541824340820312
                     ],
                     "Quaternion": [
                         0,
-                        0.38137713074684143,
+                        0.98932570219039917,
                         0,
-                        -0.92441952228546143
+                        -0.14572100341320038
                     ],
                     "RotationEditor": [
-                        -0,
-                        -0.78257113695144653,
-                        -0
+                        -3.1415927410125732,
+                        -0.29248341917991638,
+                        -3.1415927410125732
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -177,15 +253,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        2.288818359375e-05,
-                        40.201393127441406,
-                        -36.546760559082031
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        -1.5857487767334533e-08,
+                        0.34202012419700623,
                         0,
-                        0.93969273567199707
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -204,9 +280,9 @@
                     "Vertical Fov": 0.44560569524765015,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -28.513193130493164,
-                        40.201393127441406,
-                        -76.139015197753906
+                        8.2618074417114258,
+                        55,
+                        99.41961669921875
                     ],
                     "Type": 3,
                     "Zoom": 26,
@@ -215,14 +291,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -54.283187866210938,
+                        -6.1551237106323242,
                         0,
-                        -50.222930908203125
+                        51.541824340820312
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 315.1619873046875,
+                    "Horizontal Angle": 196.75807189941406,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -2897,7 +2973,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 317172784,
+                    "pointer": 318476104,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -3729,7 +3805,7 @@
                     "Active": true,
                     "Position": [
                         -2.9729554653167725,
-                        5.8924026489257813,
+                        5.8924026489257812,
                         -15.386319160461426
                     ],
                     "Quaternion": [
@@ -4005,7 +4081,7 @@
             "UUID": 492158027,
             "Parent UUID": 155192387,
             "Name": "rock_01",
-            "Active": true,
+            "Active": false,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
