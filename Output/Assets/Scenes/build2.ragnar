@@ -6277,8 +6277,8 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
