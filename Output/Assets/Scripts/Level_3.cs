@@ -9,7 +9,7 @@ public class Level_3 : RagnarComponent
 	public void Start()
 	{
         // Camera Starting Position
-        GameObject.Find("cameraController").transform.localPosition = new Vector3(-52.79f, 0f, 89.05f);
+        GameObject.Find("cameraController").transform.localPosition = new Vector3(2.42f, 0f, 30.47f);
 
         // PLAYERS
         characters = new Characters[3];
@@ -197,7 +197,7 @@ public class Level_3 : RagnarComponent
         {
             name = "Tank Enemy 1",
             prefabPath = "Tank Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.TANK,
             state = EnemyState.IDLE,
             pos = new Vector3(1.97f, 4.38f, 12.26f),
             waypoints = new GameObject[1]
@@ -296,7 +296,7 @@ public class Level_3 : RagnarComponent
         {
             name = "Tank Enemy 2",
             prefabPath = "Tank Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.TANK,
             state = EnemyState.IDLE,
             pos = new Vector3(12.87f, 5.29f, 3.35f),
             waypoints = new GameObject[1]
@@ -307,7 +307,7 @@ public class Level_3 : RagnarComponent
         {
             name = "Undistractable Enemy 1",
             prefabPath = "Undistractable Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             pos = new Vector3(12.31f, 5.29f, -7.62f),
             waypoints = new GameObject[1]
@@ -351,7 +351,7 @@ public class Level_3 : RagnarComponent
         {
             name = "Undistractable Enemy 2",
             prefabPath = "Undistractable Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             pos = new Vector3(-3.29f, 5.29f, -21.28f),
             waypoints = new GameObject[1]
@@ -362,7 +362,7 @@ public class Level_3 : RagnarComponent
         {
             name = "Tank Enemy 3",
             prefabPath = "Tank Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.TANK,
             state = EnemyState.IDLE,
             pos = GameObject.Find("16").transform.globalPosition,
             waypoints = new GameObject[2]
@@ -387,7 +387,7 @@ public class Level_3 : RagnarComponent
         {
             name = "Tank Enemy 4",
             prefabPath = "Tank Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.TANK,
             state = EnemyState.IDLE,
             pos = GameObject.Find("21").transform.globalPosition,
             waypoints = new GameObject[2]
