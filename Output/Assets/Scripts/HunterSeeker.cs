@@ -54,7 +54,7 @@ public class HunterSeeker : RagnarComponent
 				{
 					enemies[i].GetComponent<TankEnemy>().pendingToDelete = true;
 				}
-				enemies[i].GetComponent<Animation>().PlayAnimation("Dying");
+				//enemies[i].GetComponent<Animation>().PlayAnimation("Dying");
 				return true;
 			}
 		}
