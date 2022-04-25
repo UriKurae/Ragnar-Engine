@@ -79,28 +79,34 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
+        // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_1);
         }
 
-        // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
+        // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_2);
         }
 
-        // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
+        // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_3);
         }
 
-        // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
+        // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_4);
+        }
+
+        // LETRA B --> ARRASTRAR CUERPOS
+        if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
+        {
+            CorpseCarrier();
         }
 
         // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
@@ -323,6 +329,20 @@ public class PlayerManager : RagnarComponent
         }
         players[id].GetComponent<Player>().SetControled(true);
         
+    }
+
+    private void CorpseCarrier()
+    {
+        //When left click
+        NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
+
+        GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+        if (obj != null /*&& (obj.transform.globalPosition - players[characterSelected].transform.globalPosition) <= new Vector3(2.0f, 2.0f, 2.0f)*/)
+        {
+            //setear position, animation, whatever de obj
+            //obj is child of players[characterSelected]
+            Debug.Log("Carrying the corpse of" + obj.name.ToString());
+        }
     }
 }
 
