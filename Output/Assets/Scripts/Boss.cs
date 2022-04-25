@@ -54,7 +54,7 @@ public class Boss : RagnarComponent
 	bool shieldInmunity = false;
 	bool phase3Location = false;
 
-	//private int destPoint = 0;
+	private int destPoint = 0;
 
 	// Phase 4 mechanics
 	int throwedRocks = 0;
@@ -66,7 +66,7 @@ public class Boss : RagnarComponent
 	GameObject nextRock;
 	float sweepAttackCooldown = 0.0f;
 
-	//GameObject[] waypoints;
+	GameObject[] waypoints = new GameObject[3];
 	bool bossStop = false;
 	float countDown = 5.0f;
 
@@ -77,7 +77,10 @@ public class Boss : RagnarComponent
 
 		offset = gameObject.GetSizeAABB();
 
-		//waypoints = GameObject.FindGameObjectsWithTag("BossWaypoints");
+		waypoints[0] = GameObject.Find("28");
+		waypoints[1] = GameObject.Find("29");
+		waypoints[2] = GameObject.Find("30");
+
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 
 		agent = gameObject.GetComponent<NavAgent>();
@@ -342,13 +345,14 @@ public class Boss : RagnarComponent
 		//gameObject.GetComponent<Animation>().PlayAnimation("Walk");
 
 		//Debug.Log(waypoints[destPoint].transform.globalPosition.ToString());
-		//agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
-		//destPoint = (destPoint + 1) % waypoints.Length;
+		agent.CalculatePath(waypoints[destPoint].transform.globalPosition);
+		destPoint = (destPoint + 1) % waypoints.Length;
 	}
 
 	private void Patrol()
 	{
-		if (!bossStop && agent.MovePath())
+		agent.MovePath();
+		if (!bossStop && (waypoints[destPoint].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 1.5f)
 		{
 			Debug.Log("Stopped");
 			bossStop = true;
