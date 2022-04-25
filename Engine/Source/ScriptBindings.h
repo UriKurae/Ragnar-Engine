@@ -383,9 +383,6 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 			mono_free(goName);
 			return app->moduleMono->GoToCSGO(curr);
 		}
-
-		for (auto& child : curr->GetChilds())
-			q.push(child);
 	}
 
 	mono_free(goName);

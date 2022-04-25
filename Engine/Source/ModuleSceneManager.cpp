@@ -110,6 +110,12 @@ bool ModuleSceneManager::Update(float dt)
 
 bool ModuleSceneManager::PostUpdate()
 {
+	if (pendingToBake)
+	{
+		pendingToBake = false;
+		app->navMesh->BakeNavMesh();
+	}
+
 	if (saveScene) WarningWindow();
 	if (showBuildMenu) BuildWindow();
 	if (showCreateLightSensibleShaderWindow)
@@ -270,6 +276,8 @@ void ModuleSceneManager::ChangeScene(const char* sceneName)
 		ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
 	}
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->LoadResource(std::string(sceneName)));
+	
+	pendingToBake = true;
 }
 
 void ModuleSceneManager::NextScene()
