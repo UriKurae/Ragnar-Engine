@@ -117,7 +117,8 @@ void ParticleEmitter::Emit(float dt)
 			particle.position.y = particleReference.position.y + random.Float(-spreadDistanceY, spreadDistanceY);
 			particle.position.z = particleReference.position.z + random.Float(-spreadDistanceZ, spreadDistanceZ);
 		}
-		
+		particle.direccion = particleReference.direccion;
+
 		particle.rotation = particleReference.deltaRotation + random.Float() * 2 * pi;
 
 		particle.acceleration = particleReference.acceleration;
@@ -325,8 +326,9 @@ void ParticleEmitter::UpdateParticle(float dt)
 					effects[j]->Update(particlePool[i], dt);
 				}
 			}
+			particlePool[i].direccion += particlePool[i].direccion * dt;
 			particlePool[i].velocity += particlePool[i].acceleration * dt;
-			particlePool[i].position += particlePool[i].velocity;
+			particlePool[i].position += particlePool[i].velocity + particlePool[i].direccion;
 		}
 	}
 }
@@ -444,7 +446,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 
 		if (showTexMenu)
 			ShowTextureMenu();
-
 
 		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; i++)
 		{
