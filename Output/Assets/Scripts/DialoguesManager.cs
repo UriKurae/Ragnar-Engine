@@ -43,11 +43,11 @@ public class DialogueManager : RagnarComponent
         if (firstTime)
         {
 
-            pos.Set(220.0f, text.GetComponent<Transform2D>().position2D.y + 25, text.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(165.0f, text.GetComponent<Transform2D>().position2D.y + 25, text.GetComponent<Transform2D>().position2D.z + 20);
             text.GetComponent<Transform2D>().position2D = pos;
-            pos.Set(0.0f, image.GetComponent<Transform2D>().position2D.y, image.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(0.0f, image.GetComponent<Transform2D>().position2D.y-2, image.GetComponent<Transform2D>().position2D.z + 20);
             image.GetComponent<Transform2D>().position2D = pos;
-            pos.Set(220.0f, name.GetComponent<Transform2D>().position2D.y + 20, image.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(165.0f, name.GetComponent<Transform2D>().position2D.y + 20, image.GetComponent<Transform2D>().position2D.z + 20);
             name.GetComponent<Transform2D>().position2D = pos;
             pos.Set(box.GetComponent<Transform2D>().position2D.x, box.GetComponent<Transform2D>().position2D.y, box.GetComponent<Transform2D>().position2D.z - 10);
             box.GetComponent<Transform2D>().position2D = pos;
