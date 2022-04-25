@@ -51,6 +51,7 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
 	particleReference.velocity = { 0.0f, 0.1f, 0.0f };
+	particleReference.direccion = { 0.0f, 0.0f, 0.0f };
 	particleReference.acceleration = { 0.0f, 0.0f, 0.0f };
 	particleReference.position = { 0.0f, 0.0f, 0.0f };
 
@@ -153,14 +154,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	if (data.indexCount >= data.maxIndices)
 		NextBatch();
 
-	/*if (timer <= 0.0f)
-	{
-	texCoords[0] = { 0.0f, 0.0f };
-	texCoords[1] = { 1.0f / tilesX, 0.0f };
-	texCoords[2] = { 1.0f / tilesX, 1.0f / tilesY };
-	texCoords[3] = { 0.0f, 1.0f / tilesY };*/
-	//const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-	//float i = 0;
 	float2 texCoords[] = { { 0.0f / tilesX, 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX) , 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX), (1.0f / tilesY) + (0.0f / tilesY) }, {0.0f / tilesX, (1.0f / tilesY) + (0.0f / tilesY) } };
 	if (loopTimer <= 0.0f)
 	{
@@ -183,23 +176,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	texCoords[2] = { (1.0f / tilesX) + (iterTileX / tilesX), (1.0f / tilesY) + (iterTileY / tilesY) };
 	texCoords[3] = { iterTileX / tilesX, (1.0f / tilesY) + (iterTileY / tilesY) };
 
-	/*if (loopTimer <= 0.0f) loopTimer = 2.0f;
-	if (loopTimer > 1.0f)
-	{
-		const float2 texCoords[] = { { i / tilesX, i / tilesY }, { (1.0f / tilesX) + (i / tilesX) , i / tilesY }, { (1.0f / tilesX) + (i / tilesX), (1.0f / tilesY) + (i / tilesY) }, {i / tilesX, (1.0f / tilesY) + (i / tilesY) } };
-		i++;
-	}
-	if (loopTimer > 0.5f && loopTimer < 1.0f)
-	{
-		const float2 texCoords[] = { { i / tilesX, i / tilesY }, { (1.0f / tilesX) + (i / tilesX) , i / tilesY }, { (1.0f / tilesX) + (i / tilesX), (1.0f / tilesY) + (i / tilesY) }, {i / tilesX, (1.0f / tilesY) + (i / tilesY) } };
-		i++;
-	}
-	if (loopTimer < 0.5f)
-	{
-		const float2 texCoords[] = { { i / tilesX, i / tilesY }, { (1.0f / tilesX) + (i / tilesX) , i / tilesY }, { (1.0f / tilesX) + (i / tilesX), (1.0f / tilesY) + (i / tilesY) }, {i / tilesX, (1.0f / tilesY) + (i / tilesY) } };
-		i++;
-	}*/
-
 		Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
 		float4x4 transform = float4x4::FromTRS(pos, q, size);
 
@@ -215,7 +191,6 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 			data.vertexBufferPtr++;
 		}
 
-	//}
 	data.indexCount += 6;
 }
 
@@ -377,6 +352,7 @@ void ParticleEmitter::Update(float dt)
 		particle.lifeRemaining -= dt;
 		//particle.position += particle.velocity * dt;
 		//particle.velocity += particleReference.acceleration * dt;
+		particle.acceleration += particleReference.acceleration;
 		particle.rotation += particleReference.deltaRotation * dt;
 	}
 }
@@ -427,12 +403,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::Spacing();
 		ImGui::Spacing();
 		ImGui::Separator();
-		/*ImGui::Indent();*/
-
-		//guiName = "Particle max lifetime" + suffixLabel;
-		//ImGui::DragFloat(guiName.c_str(), &maxLifeTime, 0.1f, 0.0f, 10.0f);
-
-		//particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
 
 		guiName = "Particles per Second" + suffixLabel;
 		ImGui::PushItemWidth(200);
@@ -459,13 +429,9 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
 		ImGui::PopItemWidth();
-	
-		/*guiName = "Color (RGBA)" + suffixLabel;
-		ImGui::ColorEdit4("Beginning Color", particleReference.colorBegin.ptr());
-
-		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());*/
-
-		//ImGui::Indent();
+		ImGui::PushItemWidth(200);
+		ImGui::DragFloat3("Direccion", particleReference.direccion.ptr(), 0.01f, -1.0f, 1.0f);
+		ImGui::PopItemWidth();
 
 		ImGui::DragInt("Tiles: X", &tilesX, 1.0f, 1, 100);
 		ImGui::DragInt("Tiles: Y", &tilesY, 1.0f, 1, 100);
@@ -479,21 +445,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		if (showTexMenu)
 			ShowTextureMenu();
 
-		//if (particleReference->tex != nullptr)
-		//{
-		//	if (ImGui::IsItemHovered())
-		//	{
-		//		ImGui::BeginTooltip();
-		//		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.2f, 0.2f, 1.0f));
-		//		ImGui::Text("Click on the image to erase it");
-		//		ImGui::PopStyleColor();
-		//		ImGui::EndTooltip();
-		//	}
-		//}
-		//else
-		//{
-		//	ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
-		//}
 
 		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; i++)
 		{
