@@ -3213,7 +3213,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_albedo.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -3263,7 +3263,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_plane_desert_albedo.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_albedo.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -4039,7 +4039,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -4089,7 +4089,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -4139,7 +4139,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
@@ -4189,7 +4189,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/level1\/Textures\/prop_smallrocks_color.png",
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
