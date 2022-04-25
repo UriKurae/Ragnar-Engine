@@ -21,6 +21,11 @@ public class PlayerManager : RagnarComponent
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+        }
+
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
         for(int i = 0; i < players.Length; i++)
