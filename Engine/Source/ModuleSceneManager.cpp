@@ -297,6 +297,7 @@ void ModuleSceneManager::NextScene(const char* name)
 			AudioManager::Get()->StopAllAudioSources();
 			index = i;
 			changeScene = true;
+			pendingToBake = true;
 			break;
 		}
 	}
