@@ -600,3 +600,8 @@ void ModuleSceneManager::ShowCreateNotLigthSensibleShaderWindow()
 	}
 	ImGui::End();
 }
+
+std::string ModuleSceneManager::GetCurrentSceneName()
+{
+	return currentScene->GetName();
+}

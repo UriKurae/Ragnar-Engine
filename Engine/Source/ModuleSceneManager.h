@@ -57,6 +57,7 @@ public:
 	GameTimer& GetTimer() { return gameTimer; }
 
 	std::string GetLastSceneName() { return lastSceneName; }
+	std::string GetCurrentSceneName();
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
