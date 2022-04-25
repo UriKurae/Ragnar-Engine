@@ -32,6 +32,10 @@ public class EnemyBullet : RagnarComponent
 		diff.y = gameObject.transform.globalPosition.y;
 
 		bulletRb.linearVelocity = diff.normalized * vel;
+
+		Vector3 dir = diff * -2;
+		gameObject.GetComponent<ParticleSystem>().SetDirectionParticle(dir);
+		gameObject.GetComponent<ParticleSystem>().Play();
 	}
     public void Update()
 	{

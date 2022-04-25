@@ -185,6 +185,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.ParticleSystem::get_emitters", GetEmitters);
 	mono_add_internal_call("RagnarEngine.ParticleSystem::Play", PlayEmitter);
 	mono_add_internal_call("RagnarEngine.ParticleSystem::Pause", PauseEmitter);
+	mono_add_internal_call("RagnarEngine.ParticleSystem::SetDirectionParticle", SetDirectionParticle);
 	// Particle System ==========
 
 	// Camera ====================

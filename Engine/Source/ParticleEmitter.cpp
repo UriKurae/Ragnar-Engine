@@ -614,6 +614,7 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	particleReference.position = node.GetJson3Number(node, "Particle Reference Position");
 	particleReference.velocity = node.GetJson3Number(node, "Particle Reference Velocity");
 	particleReference.acceleration = node.GetJson3Number(node, "Particle Reference Acceleration");
+	particleReference.direccion = node.GetJson3Number(node, "Particle Reference Direction");
 	particleReference.color = node.GetJson4Number(node, "Particle Reference Color Begin");
 	particleReference.size = node.GetJsonNumber("Particle Reference Size Begin");
 	particleReference.lifeTime = node.GetJsonNumber ("Particle Reference Lifetime");
@@ -669,6 +670,7 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJson3Number(file, "Particle Reference Position", particleReference.position);
 	file.SetNewJson3Number(file, "Particle Reference Velocity", particleReference.velocity);
 	file.SetNewJson3Number(file, "Particle Reference Acceleration", particleReference.acceleration);
+	file.SetNewJson3Number(file, "Particle Reference Direction", particleReference.direccion);
 	file.SetNewJson4Number(file, "Particle Reference Color Begin", particleReference.color);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Size Begin", particleReference.size);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Lifetime", particleReference.lifeTime);
@@ -759,4 +761,9 @@ void ParticleEmitter::RestartEmitter()
 {
 	particlePool.clear();
 	particlePool.resize(maxParticles);
+}
+
+void ParticleEmitter::SetDirection(float3 newDirection)
+{
+	particleReference.direccion = newDirection;
 }

@@ -46,6 +46,8 @@ public:
 
 	void RestartEmitter();
 
+	void SetDirection(float3 newDirection);
+
 protected:
 	void AddInstancedAttribute(unsigned int vao, unsigned int vbo, int attributeIndex, int dataSize, int instancedDataLength, int offset);
 	void ShowTextureMenu();

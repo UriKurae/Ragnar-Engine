@@ -561,6 +561,18 @@ void SetTimeScale(float scale)
 	app->sceneManager->GetTimer().SetTimeScale(scale);
 }
 
+void SetDirectionParticle(MonoObject* go, MonoObject* direction)
+{
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	std::vector<ParticleEmitter*> emmiters = particleSystem->GetEmitters();
+
+	for (std::vector<ParticleEmitter*>::iterator it = emmiters.begin(); it != emmiters.end(); ++it)
+	{
+		float3 dir = app->moduleMono->UnboxVector(direction);
+		(*it)->SetDirection(dir);
+	}
+}
+
 // Scene Manager
 void NextScene()
 {
