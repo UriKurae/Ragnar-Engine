@@ -41,6 +41,10 @@ public:
 	void setTextColor(float Red, float Green, float Blue);
 	float3 GetTextColor();
 	Text textToShow;
+
+	void SetSize(float size) {
+		fontScale = size;
+	}
 	
 	uint VAO = 0, VBO = 0;
 	void loadFont(std::string path);

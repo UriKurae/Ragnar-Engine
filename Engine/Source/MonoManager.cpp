@@ -241,6 +241,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIText::set_text", SetText);
 	mono_add_internal_call("RagnarEngine.UIText::get_text", GetText);
 
+	mono_add_internal_call("RagnarEngine.UIText::set_textSize", SetTextSize);
+
 	mono_add_internal_call("RagnarEngine.UIText::SetTextTextColor", SetTextTextColor);
 	mono_add_internal_call("RagnarEngine.UIText::GetTextTextColor", GetTextTextColor);
 	// UI =======================

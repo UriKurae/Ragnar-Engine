@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 236176864,
+                    "pointer": 75257984,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1395,17 +1395,17 @@
                     "Position": [
                         100,
                         0,
-                        -90.846412658691406
+                        -90.211463928222656
                     ],
                     "Quaternion": [
                         0,
-                        0.24920482933521271,
+                        0.16729418933391571,
                         0,
-                        -0.96845078468322754
+                        -0.98590701818466187
                     ],
                     "RotationEditor": [
                         -0,
-                        -0.50371819734573364,
+                        -0.33616906404495239,
                         -0
                     ],
                     "Scale": [
@@ -1432,14 +1432,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        55,
-                        -50
+                        57.959732055664063,
+                        -52.690650939941406
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.34202015399932861,
+                        1.517731185174398e-08,
                         0,
-                        0,
-                        0.93969261646270752
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1447,7 +1447,7 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142129421234131,
+                        1.4142130613327026,
                         1.0000001192092896,
                         0.9999997615814209
                     ]
@@ -1458,12 +1458,12 @@
                     "Vertical Fov": 0.44560569524765015,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        124.13489532470703,
-                        55,
-                        -134.63725280761719
+                        117.38168334960938,
+                        57.959732055664063,
+                        -139.95407104492188
                     ],
                     "Type": 3,
-                    "Zoom": 18,
+                    "Zoom": 14,
                     "Zoom Min": 0,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -1471,12 +1471,12 @@
                     "Default Target Pos": [
                         100,
                         0,
-                        -90.846412658691406
+                        -90.211463928222656
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 331.13906860351562,
+                    "Horizontal Angle": 340.73892211914063,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1701,7 +1701,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -2051,7 +2051,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -56.941055297851562,
+                        -56.941055297851563,
                         0,
                         -170.82443237304688
                     ],
@@ -2201,7 +2201,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -170.82461547851562,
+                        -170.82461547851563,
                         0,
                         -56.941719055175781
                     ],
@@ -2353,7 +2353,7 @@
                     "Position": [
                         170.82505798339844,
                         0,
-                        -56.941360473632812
+                        -56.941360473632813
                     ],
                     "Quaternion": [
                         0,
@@ -2401,7 +2401,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -170.82461547851562,
+                        -170.82461547851563,
                         0,
                         56.941356658935547
                     ],
@@ -2601,7 +2601,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -170.82461547851562,
+                        -170.82461547851563,
                         0,
                         170.82443237304688
                     ],
@@ -2651,7 +2651,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -56.941055297851562,
+                        -56.941055297851563,
                         0,
                         170.82443237304688
                     ],
@@ -3697,7 +3697,7 @@
                     "Position": [
                         -2.2841317653656006,
                         -0.050076842308044434,
-                        18.986648559570312
+                        18.986648559570313
                     ],
                     "Quaternion": [
                         0,
@@ -3797,7 +3797,7 @@
                     "Position": [
                         -42.800018310546875,
                         0.45036020874977112,
-                        17.440017700195312
+                        17.440017700195313
                     ],
                     "Quaternion": [
                         0,
@@ -4134,8 +4134,8 @@
                     "Active": true,
                     "Position": [
                         56.640350341796875,
-                        -9.0912857055664062,
-                        -55.630081176757812
+                        -9.0912857055664063,
+                        -55.630081176757813
                     ],
                     "Quaternion": [
                         0,
@@ -4284,7 +4284,7 @@
                     "Active": true,
                     "Position": [
                         45.662410736083984,
-                        -8.1707534790039062,
+                        -8.1707534790039063,
                         -51.321483612060547
                     ],
                     "Quaternion": [
@@ -4435,7 +4435,7 @@
                     "Position": [
                         41.632289886474609,
                         -9.1601343154907227,
-                        -165.72732543945312
+                        -165.72732543945313
                     ],
                     "Quaternion": [
                         0,
@@ -5333,9 +5333,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        10.862991333007812,
+                        10.862991333007813,
                         -7.9978971481323242,
-                        -143.80642700195312
+                        -143.80642700195313
                     ],
                     "Quaternion": [
                         0,
@@ -5721,7 +5721,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -81.840957641601562,
+                        -81.840957641601563,
                         -14.77801513671875,
                         126.92462158203125
                     ],
@@ -7866,7 +7866,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLENGUAJE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -7921,7 +7921,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -8446,7 +8446,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 236182848,
+                    "pointer": 391520952,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8692,7 +8692,7 @@
             "Name": "Dialogue",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "Assets\/Prefabs\/Dialogue.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -8725,7 +8725,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 236184072,
+                    "pointer": 391521224,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8737,7 +8737,7 @@
             "Name": "DialogueBox",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8781,12 +8781,12 @@
             ]
         },
         {
-            "UUID": 613043945,
+            "UUID": 779138254,
             "Parent UUID": 2068571281,
             "Name": "DialogueText",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8825,9 +8825,9 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "TEXT",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
+                    "fontScale": 0.5,
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
@@ -8836,12 +8836,12 @@
             ]
         },
         {
-            "UUID": 226703106,
+            "UUID": 280564851,
             "Parent UUID": 2068571281,
             "Name": "DialogueAuthName",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8880,9 +8880,9 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Name",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
+                    "fontScale": 0.5,
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
@@ -8896,7 +8896,7 @@
             "Name": "DialogueAuthImg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",

@@ -20,10 +20,13 @@ namespace RagnarEngine
             set;
         }
 
-
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetTextTextColor(float Red, float Green, float Blue);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern Vector3 GetTextTextColor();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetTextSize(float size);
     }
 }
