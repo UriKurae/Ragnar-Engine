@@ -184,7 +184,7 @@ public class BasicEnemy : RagnarComponent
             }
 
             //// Chani =======================================
-            if (other.gameObject.name == "Spice Grenade")
+            if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
                 Stun(5f);
@@ -221,7 +221,8 @@ public class BasicEnemy : RagnarComponent
         Vector3 enemyForward = gameObject.transform.forward;
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 16, 8, players, players.Length);
+        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 8, players, players.Length);
+        if (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead) return false;
         return (index == -1) ? false : true;
     }
     public void SetControled(bool flag)
@@ -240,9 +241,10 @@ public class BasicEnemy : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
-            InternalCalls.InstancePrefab("EnemyBullet");
+            InternalCalls.InstancePrefab("EnemyBullet", true);
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
+            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().offset = offset;
         }
 
         if (!canShoot)

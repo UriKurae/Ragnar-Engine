@@ -27,7 +27,7 @@ void ParticleEffect_SpawningShape::Init(Particle& particle)
 	if (spawnShape != nullptr)
 	{
 		if (transformComponent != nullptr)
-			spawnShape->Spawn(particle, transformComponent->GetGlobalTransform(), shapeOffset);
+			spawnShape->Spawn(particle, transformComponent->GetGlobalPosition(), shapeOffset);
 	}
 }
 

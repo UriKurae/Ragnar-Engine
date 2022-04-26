@@ -29,8 +29,9 @@ public:
 	int LoadTexture(std::string newTexture);
 	void UseTexture(int ID);
 	MyPlane* planeToDraw;
-private:
 	MaterialComponent* principal;
+private:
+	
 	std::vector<MaterialComponent*> materialList;
 	float alpha = 1.0f;
 	State state = State::NORMAL;

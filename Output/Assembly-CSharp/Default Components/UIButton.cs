@@ -36,6 +36,9 @@ namespace RagnarEngine
         public extern void SetButtonGeneralColor(float Red, float Green, float Blue);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern Vector3 GetButtonGeneralColor();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern int LoadButtonTexture(string path);
         public extern string text
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]

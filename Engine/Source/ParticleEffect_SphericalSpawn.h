@@ -15,7 +15,7 @@ public:
 	ParticleEffect_SphericalSpawn();
 	~ParticleEffect_SphericalSpawn() override;
 
-	void Spawn(Particle& particle, float4x4& gTrans, float* offset) override;
+	void Spawn(Particle& particle, float3& gTrans, float* offset) override;
 	void OnEditor(int emitterIndex) override;
 
 	bool OnLoad(JsonParsing& node) override;

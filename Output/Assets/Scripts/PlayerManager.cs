@@ -12,15 +12,33 @@ public class PlayerManager : RagnarComponent
     GameObject[] area = null;
     public bool drawnArea = false;
     bool crouched = false;
+    DialogueManager dialogue;
 
     public void Start()
 	{
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
+            //c.abilities[4] = new Abilities
+            //{
+            //    name = "CorpseCarrier",
+            //    prefabPath = "",
+            //    transformY = 0.0f,
+            //    intensity = 4.0f,
+            //    constant = 0.0f,
+            //    linear = 0.0f,
+            //    quadratic = 0f,
+            //    charges = -1,
+            //    cooldown = 0f
+            //}; // Corpse Carrier Ability
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+        }
+
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
         for(int i = 0; i < players.Length; i++)
@@ -35,25 +53,30 @@ public class PlayerManager : RagnarComponent
             aux[j] = area[i];
         }
         area = aux;
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
     }
 
 	public void Update()
-    {        
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+    {
+        if (!dialogue.GetInDialogue())
         {
-            crouched = !crouched;
+            if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            {
+                crouched = !crouched;
+            }
+
+            PlayerCases();
+
+            /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
+            muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
+            Aquí debería ir la zona de rango de cada habilidad.*/
+            AbilityStateChanger();
+
+            /*Contador de cooldown para cada habilidad
+            Funciona en todos los casos con todos los pjs.*/
+            CooldownCounter();
         }
 
-        PlayerCases();
-
-        /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
-        muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-        Aquí debería ir la zona de rango de cada habilidad.*/
-        AbilityStateChanger();
-
-        /*Contador de cooldown para cada habilidad
-        Funciona en todos los casos con todos los pjs.*/
-        CooldownCounter();
     }
 
     private void CooldownCounter()
@@ -74,28 +97,36 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
+        // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_1);
         }
 
-        // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
+        // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_2);
         }
 
-        // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
+        // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_3);
         }
 
-        // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
+        // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_4);
+        }
+
+        // LETRA B --> ARRASTRAR CUERPOS
+        if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
+        {
+            //SpawnArea((int)State.CARRYING);
+            playableCharacter.state = State.CARRYING;
+            players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
         }
 
         // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
@@ -219,22 +250,61 @@ public class PlayerManager : RagnarComponent
                         }
                         break;
                     }
+                case State.CARRYING:
+                    {
+                        if (playableCharacter.pickedEnemy != null)
+                        {
+                            GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
+
+                            playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
+
+                            Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
+                            playableCharacter.pickedEnemy = null;
+                        }
+                        else
+                        {
+                            NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
+                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+
+                            if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                            {
+                                GameObject[] enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
+                                foreach (GameObject g in enemiesDead)
+                                {
+                                    if (g != null && obj.name == g.name)
+                                    {
+                                        players[characterSelected].AddChild(obj);
+
+                                        //setear position, animation, whatever de obj
+                                        obj.transform.localPosition = new Vector3(0,2,0);
+
+                                        Debug.Log("Carrying the corpse of" + obj.name.ToString());
+                                        playableCharacter.pickedEnemy = obj;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    }
                 default:
                     break;
-
             }
 
-            // Instancia la habilidad en cuestión. 
-            InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
-
-            // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
-            if(playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
+            if (playableCharacter.state != State.CARRYING)
             {
-                playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
-            }
+                // Instancia la habilidad en cuestión. 
+                InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
 
-            // Pone la habilidad en cooldown y el player en estado de NONE
-            playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
+                // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
+                if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
+                {
+                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
+                }
+
+                // Pone la habilidad en cooldown y el player en estado de NONE
+                playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
+            }
             playableCharacter.state = State.NONE;
 
             // Se cambia el estado a POSTCAST para evitar que se mueva directamente después de castear la habilidad. En el update de los players se cambiará a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 

@@ -7,11 +7,13 @@ public class Voice : RagnarComponent
 	public GameObject selectedEnemy;
 	public GameObject[] enemies;
 	public PlayerManager playerManager;
+	NavAgent agent;
 	public void Start()
 	{
 		player = GameObject.Find("Player");
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
 		playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+		agent = player.GetComponent<NavAgent>();
 	}
 	public void Update()
 	{
@@ -26,17 +28,21 @@ public class Voice : RagnarComponent
 	}
 	public GameObject EnemyFound()
 	{
-		for (int i = 0; i < enemies.Length; i++)
-		{
-			Vector3 enemyPos = enemies[i].transform.globalPosition;
-			Vector3 distance = player.transform.globalPosition - enemyPos;
-			distance.y = 0;
-			if (distance.magnitude <= 5)
-			{
-				return enemies[i];
-			}
-		}
-		return null;
+		//for (int i = 0; i < enemies.Length; i++)
+		//{
+		//	Vector3 enemyPos = enemies[i].transform.globalPosition;
+		//	Vector3 distance = player.transform.globalPosition - enemyPos;
+		//	distance.y = 0;
+		//	if (distance.magnitude <= 5)
+		//	{
+		//		return enemies[i];
+		//	}
+		//}
+		//return null;
+		//index = RayCast.PerceptionCone(player.transform.globalPosition, player.transform.forward, 60, 10, 5, enemies, enemies.Length);
+		//Debug.Log(index.ToString());
+		return RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+		
 	}
 	public void AddNewEnemyToPlayer()
     {

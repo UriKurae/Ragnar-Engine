@@ -152,11 +152,6 @@ void ModuleNavMesh::BakeNavMesh()
 		{
 			AddGameObjectToNavMesh(gameObjects[i]);
 		}
-
-		for (size_t j = 0; j < gameObjects[i]->GetChilds().size(); j++)
-		{
-			gameObjects.push_back(gameObjects[i]->GetChilds()[j]);
-		}
 	}
 
 	//Optimize

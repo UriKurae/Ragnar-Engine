@@ -8,7 +8,8 @@ public enum State
     ABILITY_3,
     ABILITY_4,
     POSTCAST,
-    DEATH
+    DEATH,
+    CARRYING
 }
 
 public class Characters
@@ -18,6 +19,10 @@ public class Characters
     public string prefabPath;
     public State state;
     public int hitPoints;
+    public GameObject pickedEnemy = null;
+
+    // Position
+    public Vector3 pos;
 
     // Abilities
     public Abilities[] abilities;
