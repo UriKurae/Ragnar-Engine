@@ -324,7 +324,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	return app->moduleMono->GoToCSGO(go);
 }
 
-void InstancePrefab(MonoObject* name)
+void InstancePrefab(MonoObject* name, bool begin = false)
 {
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
@@ -339,7 +339,7 @@ void InstancePrefab(MonoObject* name)
 	path += goName;
 	path += ".rgprefab";
 
-	PrefabManager::GetInstance()->LoadPrefab(path.c_str());
+	PrefabManager::GetInstance()->LoadPrefab(path.c_str(), begin);
 
 	mono_free(goName);
 }
