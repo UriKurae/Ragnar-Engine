@@ -389,10 +389,11 @@ void GameObject::CopyComponent(Component* component)
 	}
 }
 
-void GameObject::AddChild(GameObject* object)
+void GameObject::AddChild(GameObject* object, bool begin)
 {
 	object->parent = this;
-	children.emplace_back(object);
+	if(!begin) children.emplace_back(object);
+	else children.insert(children.begin(), object);
 	TransformComponent* trans = object->GetComponent<TransformComponent>();
 	if (object->parent != nullptr && trans) trans->NewAttachment();
 }

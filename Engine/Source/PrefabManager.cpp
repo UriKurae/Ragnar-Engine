@@ -335,7 +335,7 @@ void PrefabManager::LoadPrefab(const char* path)
 			{
 				JsonParsing go = prefabFile.GetJsonArrayValue(jsonArray, i);
 				GameObject* parent = app->sceneManager->GetCurrentScene()->GetGoByUuid(0);
-				GameObject* child = app->sceneManager->GetCurrentScene()->CreateGameObject(parent, false);
+				GameObject* child = app->sceneManager->GetCurrentScene()->CreateGameObject(parent, false, true);
 				child->OnLoad(go);
 			}
 			else
