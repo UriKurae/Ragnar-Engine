@@ -93,6 +93,9 @@ public class pauseMenuButton : RagnarComponent
 	GameObject UIStilgarImage;
 
 	GameObject AbilityImageApmliate;
+
+	GameObject pointAnimation;
+	GameObject abilityLeters;
 	public void Start()
 	{
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
@@ -179,6 +182,9 @@ public class pauseMenuButton : RagnarComponent
 		CharFocusedImage = GameObject.Find("CharFocusedImage");
 
 		AbilityImageApmliate = GameObject.Find("AbilityImageApmliate");
+
+		pointAnimation = GameObject.Find("pointAnimation");
+		abilityLeters = GameObject.Find("abilityLeters");
 	}
 
     public void Update()
@@ -722,6 +728,8 @@ public class pauseMenuButton : RagnarComponent
 
 		if (isSowing||isOptions)
         {
+			pointAnimation.isActive = false;
+			abilityLeters.isActive = false;
 			CharacterPhotoBord.isActive = false;
 			AbilityBord.isActive = false;
 			UICharPhoto.isActive = false;
@@ -737,6 +745,8 @@ public class pauseMenuButton : RagnarComponent
         }
         else
         {
+			//pointAnimation.isActive = false;
+			abilityLeters.isActive = true;
 			CharacterPhotoBord.isActive = true;
 			AbilityBord.isActive = true;
 			UICharPhoto.isActive = true;
@@ -758,6 +768,10 @@ public class pauseMenuButton : RagnarComponent
 		UpdateAbilityButton(x,y);
 
 		//UPDATE THE REST ELEMENTS
+		pos.Set(x-50, y-40, -10.400f);
+		bounds.Set(350, 45, 0);
+		abilityLeters.GetComponent<Transform2D>().position2D = pos;
+		abilityLeters.GetComponent<Transform2D>().SetSize(bounds);
 
 		pos.Set(x, y+30, -10.400f);
 		CharacterPhotoBord.GetComponent<Transform2D>().position2D = pos;
