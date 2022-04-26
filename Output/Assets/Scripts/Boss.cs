@@ -86,9 +86,9 @@ public class Boss : RagnarComponent
 
 		agent = gameObject.GetComponent<NavAgent>();
 
-		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(8.0f, 1.5f, 0.0f), true);
-		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(12.0f, 1.5f, 2.0f), true);
-		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(12.0f, 1.5f, 5.0f), true);
+		barrelLocations[0] = new BarrelSpawnLocation(0, new Vector3(-1.10f, 6.66f, -7.0f), true);
+		barrelLocations[1] = new BarrelSpawnLocation(1, new Vector3(3.5f, 6.66f, -4.0f), true);
+		barrelLocations[2] = new BarrelSpawnLocation(2, new Vector3(-3.10f, 6.66f, -4.0f), true);
 	}
 	public void Update()
 	{
@@ -133,6 +133,7 @@ public class Boss : RagnarComponent
 				GenerateBarrels();
 				break;
 			case BossState.PHASE4:
+				shieldInmunity = false;
 				if (!shieldInmunity)
 				{
 					rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;
@@ -196,7 +197,7 @@ public class Boss : RagnarComponent
 			if (PerceptionCone(90))
 			{
 				Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
-				Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
+				Vector3 area = new Vector3(1.0f, 1.0f, 1.0f);
 				if (!jumping)
 				{
 					for (int i = 0; i < players.Length; ++i)
@@ -412,9 +413,17 @@ public class Boss : RagnarComponent
 		}
 		sweepAttackCooldown -= Time.deltaTime;
 	}
+	public void GetBackstabbed()
+    {
+        if (!shieldInmunity)
+        {
+            state++;
+            NextState(); 
+        }
+	}
 	public void OnCollision(Rigidbody other)
 	{
-		if (other.gameObject.tag == "Backstab" && !shieldInmunity)
+		if (other.gameObject.name == "BackStab" && !shieldInmunity)
 		{
 			state++;
 			NextState();
