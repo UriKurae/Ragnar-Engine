@@ -238,6 +238,7 @@ public class TankEnemy : RagnarComponent
             InternalCalls.InstancePrefab("EnemyBullet", true);
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
+            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().offset = offset;
         }
 
         if (!canShoot)

@@ -8,6 +8,7 @@ public class EnemyBullet : RagnarComponent
 	public GameObject[] players;
 	public int index = 0;
 	public GameObject enemy;
+	public Vector3 offset;
 
 	public void Start()
 	{
@@ -21,15 +22,19 @@ public class EnemyBullet : RagnarComponent
 		bulletRb.IgnoreCollision(enemy, true);
 		bulletRb.SetBodyPosition(pos);
 
-		GameObject obj = RayCast.HitToTag(pos, players[index].transform.globalPosition, "Player");
+		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
+		diff.y = gameObject.transform.globalPosition.y;
+
+		pos.x += gameObject.transform.forward.x * offset.x * 0.6f;
+		pos.z += gameObject.transform.forward.z * offset.z * 0.6f;
+		Vector3 objectivePos = players[index].transform.globalPosition;
+		objectivePos.y += 1; 
+		GameObject obj = RayCast.HitToTag(pos, objectivePos, "Player");
 		if (obj != null)
 		{
 			Debug.Log(obj.name.ToString());
 			obj.GetComponent<Player>().hitPoints -= 1;
 		}
-
-		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
-		diff.y = gameObject.transform.globalPosition.y;
 
 		bulletRb.linearVelocity = diff.normalized * vel;
 
