@@ -311,6 +311,21 @@ void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 	}	
 }
 
+void Scene::ReparentGameObjects(GameObject* parent, GameObject* go)
+{
+	GameObject* parentObj = parent->GetParent();
+
+	parentObj->RemoveChild(parent);
+	parent->SetParent(go);
+	go->AddChild(parent);
+
+	if (TransformComponent* trans = parent->GetComponent<TransformComponent>())
+	{
+		trans->NewAttachment();
+		trans->SetAABB();
+	}
+}
+
 void Scene::Load()
 {
 	RELEASE(root);

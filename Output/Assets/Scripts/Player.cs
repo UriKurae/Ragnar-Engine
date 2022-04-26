@@ -11,6 +11,7 @@ public class Player : RagnarComponent
     public bool invisible = false;
     private bool firstTime = false;
     public bool dead = false;
+    public GameObject pickedEnemy = null;
 
     Rigidbody rb;
     Material materialComponent;
@@ -81,7 +82,7 @@ public class Player : RagnarComponent
                     rb.SetHeight(1); // 1 = 100% = Reset
                 }
             }
-            if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3)
+            if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3 || state == (int)State.ABILITY_4 || state == (int)State.CARRYING)
             {
                 agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
                 agent.CalculatePath(agent.hitPosition);
