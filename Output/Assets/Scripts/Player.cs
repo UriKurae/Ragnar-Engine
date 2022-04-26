@@ -6,7 +6,7 @@ public class Player : RagnarComponent
     public int hitPoints;
     public float force = 100;
     private bool pendingToDelete = false;
-    private bool paused = false;
+    public bool paused = false;
     private bool crouched = false;
     public bool invisible = false;
     private bool firstTime = false;
@@ -128,20 +128,19 @@ public class Player : RagnarComponent
 
             gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
         }
-        if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
+
+        if (paused)
         {
-            paused = !paused;
-
-            if (paused)
-            {
-                Time.timeScale = 1.0f;
-            }else
-            {
-                Time.timeScale = 0.0f;
-            }
-
-            // Pause menu
+            Time.timeScale = 0.0f;
         }
+        else
+        {
+            Time.timeScale = 1.0f;
+            
+        }
+
+        // Pause menu
+
     }
 
     private void Die()

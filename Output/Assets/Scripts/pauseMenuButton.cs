@@ -11,8 +11,8 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstS = true;
 	bool isFirstE = true;
 	bool isFirstO = true;
+	GameObject[] players;
 
-	
 	//////////////PAUSE//////////////
 	GameObject Image;
 	GameObject Resume;
@@ -179,14 +179,39 @@ public class pauseMenuButton : RagnarComponent
 
     public void Update()
 	{
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 
 		SetAllPositions();
 		UpdateMenu();
 		UpdateOptions();
+		UpdatePlayerPause();
+		if (Input.GetKey(KeyCode.I) == KeyState.KEY_DOWN)
+        {
+			SceneManager.LoadScene("WinScene");
+        }
 
 	}
+
+	void UpdatePlayerPause()
+    {
+		if(isSowing || isOptions)
+        {
+			for(int a = 0; a < players.Length; a++)
+            {
+				players[a].GetComponent<Player>().paused = true;
+
+			}
+        }
+        else
+        {
+			for (int a = 0; a < players.Length; a++)
+			{
+				players[a].GetComponent<Player>().paused = false;
+
+			}
+		}
+    }
 	//////////////OPTIONS//////////////
 	void UpdateOptions()
     {
