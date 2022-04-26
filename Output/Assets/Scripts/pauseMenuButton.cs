@@ -768,8 +768,8 @@ public class pauseMenuButton : RagnarComponent
 		UpdateAbilityButton(x,y);
 
 		//UPDATE THE REST ELEMENTS
-		pos.Set(x-50, y-40, -10.400f);
-		bounds.Set(350, 45, 0);
+		pos.Set(x+770, y-50, -10.400f);
+		bounds.Set(280, 30, 0);
 		abilityLeters.GetComponent<Transform2D>().position2D = pos;
 		abilityLeters.GetComponent<Transform2D>().SetSize(bounds);
 
