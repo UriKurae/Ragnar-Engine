@@ -91,6 +91,11 @@ public class pauseMenuButton : RagnarComponent
 	GameObject UIPaulImage;
 	GameObject UIChaniImage;
 	GameObject UIStilgarImage;
+
+	GameObject AbilityImageApmliate;
+
+	GameObject pointAnimation;
+	GameObject abilityLeters;
 	public void Start()
 	{
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
@@ -175,6 +180,11 @@ public class pauseMenuButton : RagnarComponent
 
 		CharFocusedText = GameObject.Find("CharFocusedText");
 		CharFocusedImage = GameObject.Find("CharFocusedImage");
+
+		AbilityImageApmliate = GameObject.Find("AbilityImageApmliate");
+
+		pointAnimation = GameObject.Find("pointAnimation");
+		abilityLeters = GameObject.Find("abilityLeters");
 	}
 
     public void Update()
@@ -573,7 +583,7 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-
+			
 		}
 
 		////////////////////////////////////////////////
@@ -718,6 +728,8 @@ public class pauseMenuButton : RagnarComponent
 
 		if (isSowing||isOptions)
         {
+			pointAnimation.isActive = false;
+			abilityLeters.isActive = false;
 			CharacterPhotoBord.isActive = false;
 			AbilityBord.isActive = false;
 			UICharPhoto.isActive = false;
@@ -733,6 +745,8 @@ public class pauseMenuButton : RagnarComponent
         }
         else
         {
+			//pointAnimation.isActive = false;
+			abilityLeters.isActive = true;
 			CharacterPhotoBord.isActive = true;
 			AbilityBord.isActive = true;
 			UICharPhoto.isActive = true;
@@ -754,6 +768,10 @@ public class pauseMenuButton : RagnarComponent
 		UpdateAbilityButton(x,y);
 
 		//UPDATE THE REST ELEMENTS
+		pos.Set(x-50, y-40, -10.400f);
+		bounds.Set(350, 45, 0);
+		abilityLeters.GetComponent<Transform2D>().position2D = pos;
+		abilityLeters.GetComponent<Transform2D>().SetSize(bounds);
 
 		pos.Set(x, y+30, -10.400f);
 		CharacterPhotoBord.GetComponent<Transform2D>().position2D = pos;
@@ -1091,6 +1109,7 @@ public class pauseMenuButton : RagnarComponent
 	{
 		CharFocusedImage.isActive = false;
 		CharFocusedText.isActive = false;
+		AbilityImageApmliate.isActive = false;
 		if (isSowing || isOptions)
 		{
 			Ability1.isActive = false;
@@ -1110,27 +1129,27 @@ public class pauseMenuButton : RagnarComponent
 		}
 		if (selectedPlayer.name == "Player")//paul
 		{
-			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throw_stone.png");
-			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
-			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_voice.png");
-			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_crysknife.png");
+			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_crysknife.png");
+			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_voice.png");
+			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
+			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_throw_stone.png");
 			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
 		}
 		else if (selectedPlayer.name == "Player_2")//chani
 		{
-			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_camouflage.png");
-			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_crysknife.png");
-			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
-			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
-			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_crysknife.png");
+			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_camouflage.png");
+			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_hunter_seeker.png");
+			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_spice_grenade.png");
+			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_chani_portrait.png");
 		}
 		else if (selectedPlayer.name == "Player_3")//stilgar
 		{
-			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_stunner.png");
-			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_sword.png");
-			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
-			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
-			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_paul_portrait.png");
+			Ability1.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_sword.png");
+			Ability2.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_stunner.png");
+			Ability3.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_trap.png");
+			Ability4.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_whistle.png");
+			Ability5.GetComponent<UIButton>().LoadButtonTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
 		}
 		bounds.Set(210, 310, 0);
 		CharFocusedImage.GetComponent<Transform2D>().SetSize(bounds);
@@ -1166,22 +1185,30 @@ public class pauseMenuButton : RagnarComponent
 				}
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
+				AbilityImageApmliate.isActive = true;
 				pos.Set(x + 675, y + 315, -10.400f);
 
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(x + 630, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
 
+				pos.Set(x + 630, y + 300, -10.400f);
+				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
+				
 				if (selectedPlayer.name == "Player")//paul
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_crysknife.png");
+
 					CharFocusedText.GetComponent<UIText>().text = "Kill an enemy\nat a melee\nrange. Drones\ncan’t be killed.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_crysknife.png");
 					CharFocusedText.GetComponent<UIText>().text = "Kill an enemy\nat a melee\nrange. Drones\ncan’t be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_sword.png");
 					CharFocusedText.GetComponent<UIText>().text = "Kill enemies with\na slash in front\nof you.";
 				}
 				break;
@@ -1222,20 +1249,27 @@ public class pauseMenuButton : RagnarComponent
 				}
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
+				AbilityImageApmliate.isActive = true;
 				pos.Set(x + 725, y + 315, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(x + 725, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set(x + 725, y + 300, -10.400f);
+				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_voice.png");
 					CharFocusedText.GetComponent<UIText>().text = "Mind control\nan enemy.\nDrones can’t\nbe affected.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_camouflage.png");
 					CharFocusedText.GetComponent<UIText>().text = "Activate it\nto disappear\nfrom enemy\nvision.\nDrones can\ndetect you.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_stunner.png");
 					CharFocusedText.GetComponent<UIText>().text = "Fire weapon\nthat can\npierce\nenemie’s\nshields.";
 				}
 
@@ -1277,20 +1311,27 @@ public class pauseMenuButton : RagnarComponent
 				}
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
+				AbilityImageApmliate.isActive = true;
 				pos.Set(x + 765, y + 315, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(0, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set(0, y + 300, -10.400f);
+				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
 					CharFocusedText.GetComponent<UIText>().text = "Throw a knife\nto an enemy\nwithin range.\nIt doesn’t\naffect\nshielded\nenemies.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_hunter_seeker.png");
 					CharFocusedText.GetComponent<UIText>().text = "Send a little\nflying drone\nto kill an\nenemy. Drones\ncan’t be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_trap.png");
 					CharFocusedText.GetComponent<UIText>().text = "Set a trap to\nstun enemies\nand destroy\ndrones.";
 				}
 				break;
@@ -1331,20 +1372,27 @@ public class pauseMenuButton : RagnarComponent
 				}
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
+				AbilityImageApmliate.isActive = true;
 				pos.Set(x + 810, y + 315, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(x + 895, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set(x + 895, y + 300, -10.400f);
+				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_throw_stone.png");
 					CharFocusedText.GetComponent<UIText>().text = "Throw a stone\nto make noise\nwithin the\narea.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_spice_grenade.png");
 					CharFocusedText.GetComponent<UIText>().text = "Throw a grenade\nthat stuns\nenemies in an\narea. It\ndoesn’t affect\nshielded enemies\nnor drones.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_whistle.png");
 					CharFocusedText.GetComponent<UIText>().text = "Whistle that\nproduces\nsound around\nthe player to\nattract enemies.";
 				}
 				break;
@@ -1385,22 +1433,29 @@ public class pauseMenuButton : RagnarComponent
 				}
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
+				AbilityImageApmliate.isActive = true;
 				pos.Set(x + 850, y + 315, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 
 				pos.Set(x + 980, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
+
+				pos.Set(x + 980, y + 300, -10.400f);
+				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Order an\neagle to fly\nto a position\nto distract\nenemies when\nactivated.";
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_portrait.png");
+					CharFocusedText.GetComponent<UIText>().text = "Coming Soon";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "-";
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_portrait.png");
+					CharFocusedText.GetComponent<UIText>().text = "Coming Soon";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "-";
+					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
+					CharFocusedText.GetComponent<UIText>().text = "Coming Soon";
 				}
 				break;
 			case 3:
