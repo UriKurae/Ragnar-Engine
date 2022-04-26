@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 633256952,
+                    "pointer": 71701200,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -112,7 +112,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        26.249710083007812,
+                        26.249710083007813,
                         2.2120195353636518e-05,
                         -149.26237487792969
                     ],
@@ -228,7 +228,7 @@
                     "Position": [
                         -16.312864303588867,
                         0,
-                        -138.16616821289062
+                        -138.16616821289063
                     ],
                     "Quaternion": [
                         0,
@@ -570,7 +570,7 @@
                     "Position": [
                         -69.226913452148438,
                         0,
-                        -91.842300415039062
+                        -91.842300415039063
                     ],
                     "Quaternion": [
                         0,
@@ -1404,7 +1404,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        61.658218383789062,
+                        61.658218383789063,
                         0,
                         59.592388153076172
                     ],
@@ -2052,7 +2052,7 @@
                     "Position": [
                         -52.349472045898438,
                         0,
-                        -40.419387817382812
+                        -40.419387817382813
                     ],
                     "Quaternion": [
                         0,
@@ -2202,7 +2202,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        38.050125122070312,
+                        38.050125122070313,
                         0,
                         108.93590545654297
                     ],
@@ -2344,8 +2344,8 @@
                     "Active": true,
                     "Position": [
                         0,
-                        53.520133972167969,
-                        -48.654670715332031
+                        56.479866027832031,
+                        -51.345329284667969
                     ],
                     "Quaternion": [
                         0.34202015399932861,
@@ -2370,12 +2370,12 @@
                     "Vertical Fov": 0.48647212982177734,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -53.629886627197266,
-                        53.520133972167969,
-                        70.742790222167969
+                        -55.724384307861328,
+                        56.479866027832031,
+                        69.053672790527344
                     ],
                     "Type": 3,
-                    "Zoom": -18,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -4330,7 +4330,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        61.460647583007812,
+                        61.460647583007813,
                         3.8297224044799805,
                         75.788681030273438
                     ],
@@ -4532,7 +4532,7 @@
                     "Position": [
                         66.267524719238281,
                         3.8297228813171387,
-                        121.68753051757812
+                        121.68753051757813
                     ],
                     "Quaternion": [
                         0,
@@ -4630,7 +4630,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        83.684585571289062,
+                        83.684585571289063,
                         3.8297224044799805,
                         95.368309020996094
                     ],
@@ -5182,7 +5182,7 @@
                     "Position": [
                         16.979433059692383,
                         3.8297221660614014,
-                        120.05825805664062
+                        120.05825805664063
                     ],
                     "Quaternion": [
                         0,
@@ -5632,7 +5632,7 @@
                     "Position": [
                         12.312355041503906,
                         3.8297226428985596,
-                        55.624099731445312
+                        55.624099731445313
                     ],
                     "Quaternion": [
                         0,
@@ -5980,7 +5980,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -66.755081176757812,
+                        -66.755081176757813,
                         3.8297224044799805,
                         -25.707548141479492
                     ],
@@ -6382,7 +6382,7 @@
                     "Position": [
                         -94.628440856933594,
                         3.8297224044799805,
-                        -67.743667602539062
+                        -67.743667602539063
                     ],
                     "Quaternion": [
                         0,
@@ -6430,7 +6430,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -98.856399536132812,
+                        -98.856399536132813,
                         3.8297224044799805,
                         -85.790763854980469
                     ],
@@ -6670,7 +6670,7 @@
                     "Position": [
                         85.23846435546875,
                         5.8883380889892578,
-                        75.636550903320312
+                        75.636550903320313
                     ],
                     "Quaternion": [
                         0,
@@ -7541,7 +7541,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 633256408,
+                    "pointer": 415245024,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7843,7 +7843,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 633259400,
+                    "pointer": 415245432,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8363,7 +8363,7 @@
             "Name": "UIGame",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIGame.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -8401,7 +8401,7 @@
             "Name": "UICharacterName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8456,7 +8456,7 @@
             "Name": "UIStilgarImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8505,7 +8505,7 @@
             "Name": "UIChaniImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8554,7 +8554,7 @@
             "Name": "UIPaulImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8603,7 +8603,7 @@
             "Name": "ab5",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8681,7 +8681,7 @@
             "Name": "ab4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8759,7 +8759,7 @@
             "Name": "ab3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8837,7 +8837,7 @@
             "Name": "ab2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8915,7 +8915,7 @@
             "Name": "ab1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8993,7 +8993,7 @@
             "Name": "UICharBor3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9042,7 +9042,7 @@
             "Name": "UICharBor2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9091,7 +9091,7 @@
             "Name": "UICharBor1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9140,7 +9140,7 @@
             "Name": "UISelector",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9189,7 +9189,7 @@
             "Name": "Char",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9238,7 +9238,7 @@
             "Name": "AbilImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9287,7 +9287,7 @@
             "Name": "UICharPhoto",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9336,7 +9336,7 @@
             "Name": "UIAbilityArray",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9385,7 +9385,7 @@
             "Name": "CharFocusedImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9434,7 +9434,7 @@
             "Name": "CharFocusedText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9489,7 +9489,7 @@
             "Name": "AbilityImageApmliate",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9538,7 +9538,7 @@
             "Name": "pointAnimation",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9587,7 +9587,7 @@
             "Name": "abilityLeters",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -9627,6 +9627,344 @@
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 256350042,
+            "Parent UUID": 417171234,
+            "Name": "DialoguesLevel2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/DialoguesLevel2.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1719016051,
+            "Parent UUID": 256350042,
+            "Name": "DialogueTrigger10",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/DialogueTrigger.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        30.389745712280273,
+                        2.9792459011077881,
+                        140.48355102539063
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.69736695289611816,
+                        0,
+                        0.71671426296234131
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0.49741882085800171,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        3.2000000476837158,
+                        5.5999999046325684,
+                        22.200000762939453
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueTrigger",
+                    "pointer": 415246384,
+                    "type": 4,
+                    "componentTable": 0,
+                    "dialogueId": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1719016051,
+            "Parent UUID": 256350042,
+            "Name": "DialogueTrigger9",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/DialogueTrigger.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        35.379253387451172,
+                        2.979245662689209,
+                        17.620323181152344
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.77623999118804932,
+                        0,
+                        0.63043749332427979
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0.49741882085800171,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000033378601074,
+                        1,
+                        1.0000033378601074
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        3.2000000476837158,
+                        5.5999999046325684,
+                        78.300003051757813
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueTrigger",
+                    "pointer": 415246520,
+                    "type": 4,
+                    "componentTable": 0,
+                    "dialogueId": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1719016051,
+            "Parent UUID": 256350042,
+            "Name": "DialogueTrigger6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/DialogueTrigger.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        2.8066072463989258,
+                        2.9792451858520508,
+                        -22.271183013916016
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.17526009678840637,
+                        0,
+                        0.98452216386795044
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0.49741882085800171,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999988079071045,
+                        1,
+                        0.99999988079071045
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        6.8000001907348633,
+                        5.6999998092651367,
+                        27.200000762939453
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueTrigger",
+                    "pointer": 415245976,
+                    "type": 4,
+                    "componentTable": 0,
+                    "dialogueId": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1719016051,
+            "Parent UUID": 256350042,
+            "Name": "DialogueTrigger5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/DialogueTrigger.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.3519344329833984,
+                        2.9792096614837646,
+                        -161.87236022949219
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.54345649480819702,
+                        0,
+                        0.83943736553192139
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0.49741882085800171,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000002384185791,
+                        1,
+                        1.0000002384185791
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        32.200000762939453,
+                        5.5999999046325684,
+                        50.900001525878906
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueTrigger",
+                    "pointer": 415248424,
+                    "type": 4,
+                    "componentTable": 0,
+                    "dialogueId": 0
                 }
             ]
         }

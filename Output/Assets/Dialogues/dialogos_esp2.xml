@@ -108,6 +108,42 @@
 		<node AuthorId="7" Line="Ni una palabra mas chico, haras lo que se te ordena."> 
 		</node>
 	</Dialogue>
+	
+	<Dialogue Id="5">
+		<node AuthorId="6" Line="Soy la conversacion 5"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="6">
+		<node AuthorId="0" Line="Soy la conversacion 6"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="7">
+		<node AuthorId="6" Line="Soy la conversacion 7"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="8">
+		<node AuthorId="2" Line="Soy la conversacion 8"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="9">
+		<node AuthorId="6" Line="Soy la conversacion 9"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="10">
+		<node AuthorId="6" Line="Soy la conversacion que hace win condition"> 
+		</node>
+		
+	</Dialogue>
 	<!-- 
 	<Dialogue Id="">
 		<node AuthorId="" Line=""> 
