@@ -14,7 +14,7 @@ public class DialogueManager : RagnarComponent
     // 0=Paul / 1=Chani / 2=Rehen Fremen / 3=Rabban / 
     // 4=Soldado Harkonnen / 5=Soldado / 
     // 6=Lady Jessica / 7=Stilgar
-    int idDialogue;
+    //int idDialogue;
 	bool firstTime;
 
 	bool endDialogue;
@@ -29,7 +29,7 @@ public class DialogueManager : RagnarComponent
         name = GameObject.Find("DialogueAuthName");
 		auth = "";
         authId = -1;
-        idDialogue = 0;
+        //idDialogue = 0;
 		pos = new Vector3(0, 0, 0);
 		endDialogue = false;
         firstTime = true;
@@ -56,26 +56,27 @@ public class DialogueManager : RagnarComponent
             firstTime = false;
         }
 
-        // Active Dialogue ID = 0 (firt dialogue)
-        if (Input.GetKey(KeyCode.J) == KeyState.KEY_UP)
-        {
-            StartNewDialogue(0);
-        }
         // Next Line
         if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP && gameObject.isActive)
         {
             NextLine();
+        }
+        //End Dialogue
+        if (Input.GetKey(KeyCode.P) == KeyState.KEY_UP)
+        {
+            EndDialogue();
+        }
+        /*
+        // Active Dialogue ID = 0 (firt dialogue)
+        if (Input.GetKey(KeyCode.J) == KeyState.KEY_UP)
+        {
+            StartNewDialogue(0);
         }
         // Next Dialogue
         if (Input.GetKey(KeyCode.K) == KeyState.KEY_UP)
         {
             idDialogue++;
             StartNewDialogue(idDialogue);
-        }/*
-        //End Dialogue
-        if (Input.GetKey(KeyCode.I) == KeyState.KEY_UP)
-        {
-            EndDialogue();
         }
         //Desactive Dialogue
         if (Input.GetKey(KeyCode.O) == KeyState.KEY_UP)
@@ -83,7 +84,7 @@ public class DialogueManager : RagnarComponent
             DisableDialogue();
         }
         // Continue dialogue
-        if (Input.GetKey(KeyCode.P) == KeyState.KEY_UP)
+        if (Input.GetKey(KeyCode.I) == KeyState.KEY_UP)
         {
             ContinueDialogue();
         }*/
