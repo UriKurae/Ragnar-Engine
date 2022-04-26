@@ -63,6 +63,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform::get_right", GetRight);
 	mono_add_internal_call("RagnarEngine.Transform::get_forward", GetForward);
 	mono_add_internal_call("RagnarEngine.Transform::GetAngleBetween", GetAngleBetween);
+	mono_add_internal_call("RagnarEngine.Transform::GetDistanceBetween", GetDistanceBetween);
 	mono_add_internal_call("RagnarEngine.Transform::RotateY", RotateY);
 	
 	mono_add_internal_call("RagnarEngine.Transform::set_localPosition", SetPosition);
@@ -113,6 +114,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::GetMinAABB", GetMinAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
+	mono_add_internal_call("RagnarEngine.GameObject::ReparentToRoot", ReparentToRoot);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
 	// Utility ===================

@@ -74,5 +74,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern float GetAngleBetween(Vector3 vec1, Vector3 vec2);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern float GetDistanceBetween(Vector3 vec1, Vector3 vec2);
     }
 }
