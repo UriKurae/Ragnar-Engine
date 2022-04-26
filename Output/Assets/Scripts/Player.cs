@@ -160,12 +160,33 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        if (other.gameObject.name == "WinCondition")
-            SceneManager.LoadScene("WinScene");
-
-        if (other.gameObject.name == "DialogueTrigger")
+        /*
+         * if (other.gameObject.name == "WinCondition")
+           SceneManager.LoadScene("WinScene");
+        */
+        if (other.gameObject.name == "DialogueTrigger0")
         {
-            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialogue();
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
+        }
+        if (other.gameObject.name == "DialogueTrigger3")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
+        }
+        if (other.gameObject.name == "DialogueTrigger5")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(5);
+        }
+        if (other.gameObject.name == "DialogueTrigger6")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
+        }
+        if (other.gameObject.name == "DialogueTrigger9")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(9);
+        }
+        if (other.gameObject.name == "DialogueTrigger10")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
         }
     }
 

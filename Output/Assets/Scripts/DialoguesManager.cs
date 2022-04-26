@@ -176,4 +176,6 @@ public class DialogueManager : RagnarComponent
     }
 
     public bool GetInDialogue() { return inDialogue; }
+
+    public bool GetEndDialogue() { return endDialogue; }
 }
