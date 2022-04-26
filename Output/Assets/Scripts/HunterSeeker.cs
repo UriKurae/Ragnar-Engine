@@ -6,12 +6,13 @@ public class HunterSeeker : RagnarComponent
 	NavAgent agent;
 	public GameObject[] enemies;
 	Rigidbody rb;
+	GameObject player;
 
 	public void Start()
 	{
 		agent = gameObject.GetComponent<NavAgent>();
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
-		GameObject player = GameObject.Find("Player_2");
+		player = GameObject.Find("Player_2");
 		player.GetComponent<Player>().SetControled(false);
 		Vector3 pos = player.transform.globalPosition + new Vector3(0, 1, 0);
 		rb = gameObject.GetComponent<Rigidbody>();
@@ -59,5 +60,14 @@ public class HunterSeeker : RagnarComponent
 			}
 		}
 		return false;
+	}
+	public void OnCollision(Rigidbody other)
+	{
+		if (other.gameObject.tag == "Enemies")
+        {
+			player.GetComponent<Player>().SetControled(true);
+			InternalCalls.Destroy(gameObject);
+			
+        }
 	}
 }
