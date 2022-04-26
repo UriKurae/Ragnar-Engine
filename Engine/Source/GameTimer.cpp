@@ -27,6 +27,7 @@ void GameTimer::Stop()
 void GameTimer::FinishUpdate()
 {
 	lastFrameMs = GetTime();
+	if ((cappedMs > 0) && (lastFrameMs < cappedMs)) SDL_Delay(cappedMs - lastFrameMs);
 }
 
 int GameTimer::GetEngineTimeStartup() const
@@ -60,6 +61,8 @@ void GameTimer::ResetTimer()
 void GameTimer::ReadConfig(JsonParsing& node)
 {
 	cappedMs = (1 / node.GetJsonNumber("gameFPS")) * 1000;
+	int a = 0;
+	a += 5;
 }
 
 void GameTimer::SaveConfig(JsonParsing& node)

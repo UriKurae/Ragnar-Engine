@@ -22,7 +22,8 @@ void EngineTimer::FinishUpdate()
 {
 	lastFrameMs = GetTime();
 
-	if ((cappedMs > 0) && (lastFrameMs < cappedMs)) SDL_Delay(cappedMs - lastFrameMs);
+	if ((cappedMs > 0) && (lastFrameMs < cappedMs))
+		SDL_Delay(cappedMs - lastFrameMs);
 }
 
 int EngineTimer::GetEngineTimeStartup() const
