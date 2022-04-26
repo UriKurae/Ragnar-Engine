@@ -700,6 +700,7 @@ void ModuleUI::Draw()
 	for (int a = 0; a < UIGameObjects.size(); a++)
 	{
 		GameObject* go = app->userInterface->UIGameObjects[a];
+		
 		if (go->active) {
 			if (ButtonComponent* button = go->GetComponent<ButtonComponent>())
 			{

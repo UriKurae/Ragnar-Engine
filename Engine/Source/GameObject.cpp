@@ -389,10 +389,11 @@ void GameObject::CopyComponent(Component* component)
 	}
 }
 
-void GameObject::AddChild(GameObject* object)
+void GameObject::AddChild(GameObject* object, bool begin)
 {
 	object->parent = this;
-	children.emplace_back(object);
+	if(!begin) children.emplace_back(object);
+	else children.insert(children.begin(), object);
 	TransformComponent* trans = object->GetComponent<TransformComponent>();
 	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
@@ -541,6 +542,7 @@ void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());

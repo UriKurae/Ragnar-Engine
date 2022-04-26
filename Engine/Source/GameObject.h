@@ -34,7 +34,7 @@ public:
 	inline const std::vector<Component*> GetComponents() const { return components; }
 	Component* GetComponent(ComponentType type);
 	
-	void AddChild(GameObject* object);
+	void AddChild(GameObject* object, bool begin = false);
 	void RemoveChild(GameObject* object);
 	inline void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
 

@@ -22,5 +22,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void Pause();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetDirectionParticle(Vector3 direction);
     }
 }

@@ -156,6 +156,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Animation =================
 
 	// Light =====================
+	mono_add_internal_call("RagnarEngine.Light::get_shadowsEnabled", GetDirectionalLightShadowsEnabled);
+	mono_add_internal_call("RagnarEngine.Light::set_shadowsEnabled", SetDirectionalLightShadowsEnabled);
 	mono_add_internal_call("RagnarEngine.Light::get_intensity", GetLightIntensity);
 	mono_add_internal_call("RagnarEngine.Light::set_intensity", SetLightIntensity);
 	mono_add_internal_call("RagnarEngine.Light::get_linear", GetLightLinear);
@@ -185,6 +187,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.ParticleSystem::get_emitters", GetEmitters);
 	mono_add_internal_call("RagnarEngine.ParticleSystem::Play", PlayEmitter);
 	mono_add_internal_call("RagnarEngine.ParticleSystem::Pause", PauseEmitter);
+	mono_add_internal_call("RagnarEngine.ParticleSystem::SetDirectionParticle", SetDirectionParticle);
 	// Particle System ==========
 
 	// Camera ====================
@@ -196,6 +199,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::get_lastSceneName", GetLastSceneName);
+	mono_add_internal_call("RagnarEngine.SceneManager::get_currentSceneName", GetCurrentSceneName);
 	mono_add_internal_call("RagnarEngine.SceneManager::Exit", Exit);
 	// Scene Manager =============
 
@@ -249,6 +253,7 @@ bool MonoManager::Init(JsonParsing& node)
 	// Dialogue System =======================
 	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLine", GetDialogueLine);
 	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLineAuthor", GetDialogueLineAuthor);
+	mono_add_internal_call("RagnarEngine.Dialogue::GetDialogueLineAuthorId", GetDialogueLineAuthorId);
 	mono_add_internal_call("RagnarEngine.Dialogue::NextLine", NextLine);
 	mono_add_internal_call("RagnarEngine.Dialogue::StartDialogueById", StartDialogueById);
 	mono_add_internal_call("RagnarEngine.Dialogue::LoadDialogueFile", LoadDialogueFile);

@@ -41,6 +41,10 @@ public:
 
 	std::shared_ptr<Shader> GetOutlineShader() { return outlineShader; }
 
+	void SetTextureType(TextureType type) {
+		textureTypeToChange = type;
+	}
+
 private:
 	bool checker = false;
 	bool showTexMenu = false;

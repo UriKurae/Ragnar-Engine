@@ -51,6 +51,9 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 	glEnable(GL_ALPHA_TEST);
 	planeToDraw->DrawPlane2D(principal->GetTexture().get());
 
+	glColor4f(actualColor.r, actualColor.g, actualColor.b, actualColor.a);
+	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }

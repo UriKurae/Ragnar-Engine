@@ -219,6 +219,10 @@ bool AnimationComponent::Update(float dt)
 			// Loop time increases by our delta time
 			loopTime += dt;
 			currentTime += currAnim->anim->GetTicksPerSecond() * dt;
+			if (!currAnim->loop && currentTime >= currAnim->anim->GetTicks())
+			{
+				currentTime = currAnim->anim->GetTicks() - currAnim->anim->GetTicksPerSecond() * dt;
+			}
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
 		else
@@ -226,8 +230,13 @@ bool AnimationComponent::Update(float dt)
 			loopTime += dt;
 			// 60 is the frames per second that we want
 			currentTime += 24.0f * dt;
+			if (!currAnim->loop && currentTime >= currAnim->anim->GetTicks())
+			{
+				currentTime = currAnim->anim->GetTicks() - currAnim->anim->GetTicksPerSecond() * dt;
+			}
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
+		
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
 	}
 

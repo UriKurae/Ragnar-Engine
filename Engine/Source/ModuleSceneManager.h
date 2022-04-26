@@ -43,6 +43,7 @@ public:
 	void DeleteScene(std::shared_ptr<Scene> scene);
 
 	void ChangeScene(const char* sceneName);
+	inline bool GetChangeScene() { return changeScene; };
 
 	void NextScene();
 	void NextScene(const char* name);
@@ -57,6 +58,7 @@ public:
 	GameTimer& GetTimer() { return gameTimer; }
 
 	std::string GetLastSceneName() { return lastSceneName; }
+	std::string GetCurrentSceneName();
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
@@ -84,6 +86,7 @@ private:
 	int index = 0;
 	int lastIndex = 0;
 	bool changeScene = false;
+	bool pendingToBake = false;
 	std::string lastSceneName;
 
 	bool exit = false;

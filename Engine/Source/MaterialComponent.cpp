@@ -534,9 +534,9 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	//normalMat.Inverse();
 	//shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
 
-	if(std::string(owner->GetName()).find("Player") != std::string::npos)
+	if (std::string(owner->GetName()).find("Player") != std::string::npos)
 		shader->SetUniform1f("normalsThickness", 0);
-	else if(std::string(owner->GetName()).find("Enemy") != std::string::npos)
+	else if (std::string(owner->GetName()).find("Enemy") != std::string::npos)
 		shader->SetUniform1f("normalsThickness", 0);
 	else
 		shader->SetUniform1f("normalsThickness", 1);

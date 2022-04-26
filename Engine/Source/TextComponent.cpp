@@ -49,6 +49,7 @@ bool TextComponent::Update(float dt)
 	RG_PROFILING_FUNCTION("Text Update");
 
 	textToShow.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
+	
 	//textToShow.setOnlyText(text);
 	textToShow.Scale = fontScale;
 	return true;
@@ -56,13 +57,15 @@ bool TextComponent::Update(float dt)
 
 void TextComponent::Draw(CameraComponent* gameCam)
 {
-	glAlphaFunc(GL_GREATER, 0.5);
-	glEnable(GL_ALPHA_TEST);
+	if (owner->active) {
+		glAlphaFunc(GL_GREATER, 0.5);
+		glEnable(GL_ALPHA_TEST);
 
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+		planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
 
-	glDisable(GL_ALPHA_TEST);
-	glColor3f(255, 255, 255);
+		glDisable(GL_ALPHA_TEST);
+		glColor3f(255, 255, 255);
+	}
 }
 void TextComponent::setTextColor(float Red, float Green, float Blue)
 {

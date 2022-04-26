@@ -186,7 +186,7 @@ void Scene::NewScene()
 	app->editor->SetGO(nullptr);
 }
 
-GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
+GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform, bool begin)
 {
 	RG_PROFILING_FUNCTION("Creating Game Object");
 
@@ -200,7 +200,7 @@ GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
 	else
 	{
 		object->SetParent(root);
-		root->AddChild(object);
+		root->AddChild(object, begin);
 	}
 	
 	return object;

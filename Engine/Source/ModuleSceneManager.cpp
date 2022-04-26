@@ -79,8 +79,9 @@ bool ModuleSceneManager::Start()
 bool ModuleSceneManager::PreUpdate(float dt)
 {
 	currentScene->PreUpdate(gameTimer.GetDeltaTime());
+#ifndef DISTRIBUTION
 	ShortCuts();
-
+#endif
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
@@ -110,6 +111,12 @@ bool ModuleSceneManager::Update(float dt)
 
 bool ModuleSceneManager::PostUpdate()
 {
+	if (pendingToBake)
+	{
+		pendingToBake = false;
+		app->navMesh->BakeNavMesh();
+	}
+
 	if (saveScene) WarningWindow();
 	if (showBuildMenu) BuildWindow();
 	if (showCreateLightSensibleShaderWindow)
@@ -270,6 +277,8 @@ void ModuleSceneManager::ChangeScene(const char* sceneName)
 		ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
 	}
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->LoadResource(std::string(sceneName)));
+	
+	pendingToBake = true;
 }
 
 void ModuleSceneManager::NextScene()
@@ -289,6 +298,7 @@ void ModuleSceneManager::NextScene(const char* name)
 			AudioManager::Get()->StopAllAudioSources();
 			index = i;
 			changeScene = true;
+			pendingToBake = true;
 			break;
 		}
 	}
@@ -599,4 +609,9 @@ void ModuleSceneManager::ShowCreateNotLigthSensibleShaderWindow()
 		}
 	}
 	ImGui::End();
+}
+
+std::string ModuleSceneManager::GetCurrentSceneName()
+{
+	return currentScene->GetName();
 }

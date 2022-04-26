@@ -15,6 +15,7 @@ public class Knife : RagnarComponent
 
     private void AimMethod()
     {
+    	gameObject.GetComponent<ParticleSystem>().Play();
         GameObject player = GameObject.Find("Player");
         NavAgent agent = player.GetComponent<NavAgent>();
 
@@ -62,6 +63,8 @@ public class Knife : RagnarComponent
 
 	private Vector3 HitEnemy(NavAgent agent, GameObject player)
 	{
+		gameObject.GetComponent<ParticleSystem>().Pause();
+			
 		GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
 		if (obj != null)
@@ -79,3 +82,5 @@ public class Knife : RagnarComponent
 	}
 
 }
+
+

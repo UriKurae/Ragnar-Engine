@@ -12,6 +12,7 @@ public class PlayerManager : RagnarComponent
     GameObject[] area = null;
     public bool drawnArea = false;
     bool crouched = false;
+    DialogueManager dialogue;
 
     public void Start()
 	{
@@ -21,6 +22,11 @@ public class PlayerManager : RagnarComponent
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+        }
+
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
         for(int i = 0; i < players.Length; i++)
@@ -35,25 +41,30 @@ public class PlayerManager : RagnarComponent
             aux[j] = area[i];
         }
         area = aux;
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
     }
 
 	public void Update()
-    {        
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+    {
+        if (!dialogue.GetInDialogue())
         {
-            crouched = !crouched;
+            if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            {
+                crouched = !crouched;
+            }
+
+            PlayerCases();
+
+            /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
+            muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
+            Aquí debería ir la zona de rango de cada habilidad.*/
+            AbilityStateChanger();
+
+            /*Contador de cooldown para cada habilidad
+            Funciona en todos los casos con todos los pjs.*/
+            CooldownCounter();
         }
 
-        PlayerCases();
-
-        /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
-        muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-        Aquí debería ir la zona de rango de cada habilidad.*/
-        AbilityStateChanger();
-
-        /*Contador de cooldown para cada habilidad
-        Funciona en todos los casos con todos los pjs.*/
-        CooldownCounter();
     }
 
     private void CooldownCounter()
@@ -74,28 +85,34 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
+        // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_1);
         }
 
-        // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
+        // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_2);
         }
 
-        // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
+        // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_3);
         }
 
-        // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
+        // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_4);
+        }
+
+        // LETRA B --> ARRASTRAR CUERPOS
+        if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
+        {
+            CorpseCarrier();
         }
 
         // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
@@ -318,6 +335,20 @@ public class PlayerManager : RagnarComponent
         }
         players[id].GetComponent<Player>().SetControled(true);
         
+    }
+
+    private void CorpseCarrier()
+    {
+        //When left click
+        NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
+
+        GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+        if (obj != null /*&& (obj.transform.globalPosition - players[characterSelected].transform.globalPosition) <= new Vector3(2.0f, 2.0f, 2.0f)*/)
+        {
+            //setear position, animation, whatever de obj
+            //obj is child of players[characterSelected]
+            Debug.Log("Carrying the corpse of" + obj.name.ToString());
+        }
     }
 }
 

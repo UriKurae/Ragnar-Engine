@@ -28,6 +28,16 @@ namespace RagnarEngine
             set;
         }
 
+        // ONLY FOR DIRECTIONAL LIGHT !! 
+        public static extern bool shadowsEnabled
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
+
         // ONLY FOR POINT LIGHT !!
         public extern float linear
         {

@@ -5,6 +5,7 @@ public class Barrel : RagnarComponent
 {
 
     GameObject boss;
+    public int barrelIndex = 0;
 
     // Use this for initialization
     public void Start()
@@ -23,22 +24,23 @@ public class Barrel : RagnarComponent
 
     public void OnColision(Rigidbody other)
     {
-        if (other.gameObject.name == "Boss" && gameObject.name == "Barrel1")
+        if (other.gameObject.name == "Knife")
         {
-            boss.GetComponent<Boss>().stunnedHits++;
+            if (boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude < 2.0f)
+            {
+                boss.GetComponent<Boss>().stunnedHits++;
+            }
+            boss.GetComponent<Boss>().barrelCount--;
+            boss.GetComponent<Boss>().barrelLocations[barrelIndex].isDestroyed = true;
             InternalCalls.Destroy(gameObject);
         }
     }
     void NotifyBoss()
     {
-        if (gameObject.name == "Barrel1")
-        {
-            boss.GetComponent<Boss>().stunnedHits++;
-            boss.GetComponent<Boss>().barrelLocations[0].isDestroyed = true;
-            boss.GetComponent<Boss>().barrelCount--;
-            InternalCalls.Destroy(gameObject);
-        }
+        Debug.Log("Destroying barrel ----------------------------------------------------------------------");
+        boss.GetComponent<Boss>().stunnedHits++;
+        boss.GetComponent<Boss>().barrelLocations[barrelIndex].isDestroyed = true;
+        boss.GetComponent<Boss>().barrelCount--;
+        InternalCalls.Destroy(gameObject);
     }
-
-
 }
