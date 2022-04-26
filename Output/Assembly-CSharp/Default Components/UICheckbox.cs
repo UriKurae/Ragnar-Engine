@@ -16,5 +16,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern int GetCheckboxState();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern int SetCheckboxState(bool newState);
     }
 }

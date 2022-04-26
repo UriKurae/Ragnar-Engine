@@ -690,3 +690,23 @@ void LoadDialogueFile(MonoString* name)
 	//MHF
 	DialogueSystem::GetInstance()->LoadDialogueXML();
 }
+
+//configuration
+
+void SetFullScreen(bool newState) 
+{
+	app->window->SetFullscreenDesktop(newState);
+}
+bool GetFullScreen()
+{
+	return app->window->GetWindowFullscreenDesktop();
+}
+
+void SetVSync(bool newState)
+{
+	app->renderer3D->SetVsync(newState);
+}
+bool GetVSync()
+{
+	return app->renderer3D->GetVsync();
+}

@@ -47,9 +47,7 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
-	//TODO: Save/Load NavMesh
-	void SetNavMeshView();
-	void SetVsync();
+	void SetVsync(bool newValue);
 
 	inline bool* GetDepthTest() { return &depthTest; }
 	inline bool* GetCullFace() { return &cullFace; }
