@@ -12,6 +12,7 @@ public class PlayerManager : RagnarComponent
     GameObject[] area = null;
     public bool drawnArea = false;
     bool crouched = false;
+    DialogueManager dialogue;
 
     public void Start()
 	{
@@ -40,25 +41,30 @@ public class PlayerManager : RagnarComponent
             aux[j] = area[i];
         }
         area = aux;
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
     }
 
 	public void Update()
-    {        
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+    {
+        if (!dialogue.GetInDialogue())
         {
-            crouched = !crouched;
+            if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            {
+                crouched = !crouched;
+            }
+
+            PlayerCases();
+
+            /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
+            muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
+            Aquí debería ir la zona de rango de cada habilidad.*/
+            AbilityStateChanger();
+
+            /*Contador de cooldown para cada habilidad
+            Funciona en todos los casos con todos los pjs.*/
+            CooldownCounter();
         }
 
-        PlayerCases();
-
-        /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
-        muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-        Aquí debería ir la zona de rango de cada habilidad.*/
-        AbilityStateChanger();
-
-        /*Contador de cooldown para cada habilidad
-        Funciona en todos los casos con todos los pjs.*/
-        CooldownCounter();
     }
 
     private void CooldownCounter()

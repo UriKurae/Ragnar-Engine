@@ -6,7 +6,7 @@ public class Player : RagnarComponent
     public int hitPoints;
     public float force = 100;
     private bool pendingToDelete = false;
-    private bool paused = false;
+    public bool paused = false;
     private bool crouched = false;
     public bool invisible = false;
     private bool firstTime = false;
@@ -15,111 +15,132 @@ public class Player : RagnarComponent
     Rigidbody rb;
     Material materialComponent;
     NavAgent agent;
+    DialogueManager dialogue;
 
     public bool controled = false;
     int state = 0;
 
+    /*
+    DialogueManager dialogue;
+    dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+    if (!dialogue.GetInDialogue()){}
+    */
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
     }
 
     public void Update()
     {
-        if (hitPoints <= 0 && !dead)
-        {
-            dead = true;
-            Die();
-        }
 
-        if (controled && hitPoints > 0)
+        if (!dialogue.GetInDialogue())
         {
-            if (state == (int)State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+            if (hitPoints <= 0 && !dead)
             {
-                if (agent.CalculatePath(agent.hitPosition).Length > 0)
-                    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-               
-                if (firstTime)
+                dead = true;
+                Die();
+            }
+
+            if (controled && hitPoints > 0)
+            //if (controled && hitPoints > 0 && dialogue.GetInDialogue())
+            {
+                if (state == (int)State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
-                    gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+                    if (agent.CalculatePath(agent.hitPosition).Length > 0)
+                        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+
+                    if (firstTime)
+                    {
+                        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+                    }
+                    else
+                    {
+                        firstTime = true;
+                    }
+                }
+
+                // Crouch
+                if (!crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+                {
+                    crouched = true;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+                    rb.SetHeight(0.6f); // 0.6 = 60%
+
+                    Vector3 maxPoint = gameObject.GetMaxAABB();
+                    maxPoint.y *= 0.6f;
+                    gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
+                }
+                if (crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+                {
+                    crouched = false;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+                    rb.SetHeight(1); // 1 = 100% = Reset
+                }
+            }
+            if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3)
+            {
+                agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
+                agent.CalculatePath(agent.hitPosition);
+                if (crouched)
+                {
+                    gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
                 }
                 else
                 {
-                    firstTime = true;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
                 }
+                //gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
             }
-
-            // Crouch
-            if (!crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            if (agent.MovePath())
             {
-                crouched = true;
-                gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
-                rb.SetHeight(0.6f); // 0.6 = 60%
-
-                Vector3 maxPoint = gameObject.GetMaxAABB();
-                maxPoint.y *= 0.6f;
-                gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
-            }
-            if (crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
-            {
-                crouched = false;
                 gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-                rb.SetHeight(1); // 1 = 100% = Reset
+
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
             }
-        }
-        if(state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 ||state == (int)State.ABILITY_3)
-        {
-            agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
-            agent.CalculatePath(agent.hitPosition);
-            if (crouched)
+
+            ///////// SOUNDS /////////
+            // Reload Sound
+            if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
             {
-                gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+                gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
             }
-            else
+            //////////////////////////
+
+            if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
-                gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                SceneManager.LoadScene("LoseScene");
+                InternalCalls.Destroy(gameObject);
             }
-            //gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+
+            if (state == (int)State.POSTCAST)
+            {
+                state = (int)State.NONE;
+            }
+
         }
-        if (agent.MovePath())
+        else
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
 
             gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
         }
 
-        ///////// SOUNDS /////////
-        // Reload Sound
-        if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
+        if (paused)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
+            Time.timeScale = 0.0f;
         }
-        //////////////////////////
-        
-        if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
+        else
         {
-            SceneManager.LoadScene("LoseScene");
-            InternalCalls.Destroy(gameObject);
-        }
-
-        if (Input.GetKey(KeyCode.ESCAPE) == KeyState.KEY_DOWN)
-        {
-            paused = !paused;
+            Time.timeScale = 1.0f;
             
-            if (paused)
-                Time.timeScale = 1.0f;
-            else
-                Time.timeScale = 0.0f;
+        }
 
-            // Pause menu
-        }
-        if(state == (int)State.POSTCAST)
-        {
-            state = (int)State.NONE;
-        }
+        // Pause menu
+
     }
 
     private void Die()
@@ -141,6 +162,11 @@ public class Player : RagnarComponent
     {
         if (other.gameObject.name == "WinCondition")
             SceneManager.LoadScene("WinScene");
+
+        if (other.gameObject.name == "DialogueTrigger")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialogue();
+        }
     }
 
     public void SetControled(bool var)

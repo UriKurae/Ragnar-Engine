@@ -184,6 +184,7 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	std::string p = path;
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
+	matComp->SetTextureType(TextureType::DIFFUSE);
 	matComp->SetTexture(newTexture);
 
 	/*res->Load();
@@ -323,7 +324,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	return app->moduleMono->GoToCSGO(go);
 }
 
-void InstancePrefab(MonoObject* name)
+void InstancePrefab(MonoObject* name, bool begin = false)
 {
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
@@ -338,7 +339,7 @@ void InstancePrefab(MonoObject* name)
 	path += goName;
 	path += ".rgprefab";
 
-	PrefabManager::GetInstance()->LoadPrefab(path.c_str());
+	PrefabManager::GetInstance()->LoadPrefab(path.c_str(), begin);
 
 	mono_free(goName);
 }
@@ -383,9 +384,6 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 			mono_free(goName);
 			return app->moduleMono->GoToCSGO(curr);
 		}
-
-		for (auto& child : curr->GetChilds())
-			q.push(child);
 	}
 
 	mono_free(goName);
@@ -465,7 +463,7 @@ MonoBoolean GetGameObjectIsActive(MonoObject* go)
 void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
-	gameObject->active = value;
+	gameObject->EnableDisableActive(value);
 }
 MonoBoolean GetActiveComponent(MonoObject* go)
 {
@@ -564,6 +562,18 @@ void SetTimeScale(float scale)
 	app->sceneManager->GetTimer().SetTimeScale(scale);
 }
 
+void SetDirectionParticle(MonoObject* go, MonoObject* direction)
+{
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	std::vector<ParticleEmitter*> emmiters = particleSystem->GetEmitters();
+
+	for (std::vector<ParticleEmitter*>::iterator it = emmiters.begin(); it != emmiters.end(); ++it)
+	{
+		float3 dir = app->moduleMono->UnboxVector(direction);
+		(*it)->SetDirection(dir);
+	}
+}
+
 // Scene Manager
 void NextScene()
 {
@@ -606,32 +616,52 @@ MonoObject* GetRegionGame()
 // Dialogue System ======================================
 MonoString* GetDialogueLine()
 {
-	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+	//MHF
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLineXML().c_str());
 }
 
 MonoString* GetDialogueLineAuthor()
 {
-	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+	
+	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+	//MHF
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLineXML().c_str());
 }
 
-void NextLine()
+int GetDialogueLineAuthorId() {
+	return DialogueSystem::GetInstance()->GetOwnerIdOfLineXML();
+}
+
+bool NextLine()
 {
-	DialogueSystem::GetInstance()->NextLine();
+	//DialogueSystem::GetInstance()->NextLine();
+	//MHF
+	return DialogueSystem::GetInstance()->NextLineXML();
 }
 
 void StartDialogueById(int id)
 {
+	/*
 	DialogueSystem* sys = DialogueSystem::GetInstance();
 	Dialogue* aux = sys->GetDialogueById(id);
 	sys->SetDialogueAsCurrent(aux);
 	sys->StartDialogue();
+	*/
+	//MHF
+	DialogueSystem* sys = DialogueSystem::GetInstance();
+	sys->SetCurrentDialogueIdXML(id);
+	sys->StartDialogueXML();
 }
+
 
 void LoadDialogueFile(MonoString* name)
 {
-	char* fileName = mono_string_to_utf8(name);
-	std::string path = DIALOGUES_FOLDER;
-	path += fileName;
-	path += ".rgdialogue";
-	DialogueSystem::GetInstance()->LoadDialogue(path);
+	//char* fileName = mono_string_to_utf8(name);
+	//std::string path = DIALOGUES_FOLDER;
+	//path += fileName;
+	//path += ".rgdialogue";
+	//DialogueSystem::GetInstance()->LoadDialogue(path);
+	//MHF
+	DialogueSystem::GetInstance()->LoadDialogueXML();
 }

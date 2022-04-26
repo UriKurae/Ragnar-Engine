@@ -33,7 +33,7 @@ namespace RagnarEngine
         public static extern GameObject Create3DObject(object name, int primitiveType, object position);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern GameObject InstancePrefab(object path);
+        public static extern GameObject InstancePrefab(object path, bool begin = false);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
@@ -86,7 +86,10 @@ namespace RagnarEngine
         public static extern string GetDialogueLineAuthor();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void NextLine();
+        public static extern bool NextLine();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetDialogueLineAuthorId();
     }
 
         [StructLayout(LayoutKind.Sequential)]

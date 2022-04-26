@@ -27,7 +27,6 @@ bool HierarchyMenu::Update(float dt)
 
 	ImGui::Begin(ICON_FA_SITEMAP" Hierarchy", &active, ImGuiWindowFlags_NoCollapse);
 
-	int size = app->sceneManager->GetCurrentScene()->GetGameObjectsList().size();
 	GameObject* root = app->sceneManager->GetCurrentScene()->GetRoot();
 	GameObject* selected = app->editor->GetGO();
 	GameObject* selectedParent = app->editor->GetSelectedParent();

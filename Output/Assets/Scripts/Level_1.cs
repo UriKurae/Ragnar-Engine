@@ -206,7 +206,7 @@ public class Level_1 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-21.33f, 0f, 51.6f),
+            pos = new Vector3(-23.29f, 0f, 49.22f),
             waypoints = new GameObject[1]
         };
         enemies[6].waypoints[0] = GameObject.Find("7");

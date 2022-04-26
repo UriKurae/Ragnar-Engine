@@ -33,7 +33,7 @@ public:
 
 	void NewScene();
 
-	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true);
+	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true, bool begin = false);
 	GameObject* CreateGameObjectChild(const char* name, GameObject* parent);
 	GameObject* CreateGameObjectParent(const char* name, GameObject* child);
 	std::vector<GameObject*> GetGameObjectsList() const 

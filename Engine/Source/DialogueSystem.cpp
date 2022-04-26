@@ -6,6 +6,8 @@
 #include "Imgui/imgui.h"
 #include "IconsFontAwesome5.h"
 
+#define MARGIN_IN_TEXT 45
+
 DialogueSystem* DialogueSystem::instance = nullptr;
 
 DialogueSystem* DialogueSystem::GetInstance()
@@ -232,7 +234,7 @@ void DialogueSystem::ShowDialogueFiles()
 void DialogueSystem::LoadDialogue(std::string path)
 {
 	JsonParsing dialogFile = JsonParsing();
-
+	LoadDialogueXML();
 	if (dialogFile.ParseFile(path.c_str()) > 0)
 	{
 		for (std::vector<Dialogue>::iterator it = dialogues.begin(); it != dialogues.end(); ++it)
@@ -272,6 +274,91 @@ void DialogueSystem::LoadDialogue(std::string path)
 		}
 	}
 }
+
+//MHF
+void DialogueSystem::LoadDialogueXML()
+{
+	std::string a = "dialogos_esp2.xml";
+	std::string path = DIALOGUES_FOLDER + a;
+	pugi::xml_parse_result result = dialoguesXML.load_file(path.c_str());
+
+	// instead of saving the name of the author we save an id, 
+	// then we relate this id to the name saved to this list
+	pugi::xml_node n = dialoguesXML.first_child().child("AuthorList");
+	int i = 0;
+	for (n; n != NULL; n = n.next_sibling("AuthorList"))
+	{
+		authorList[i] = n.attribute("name").as_string();
+		i++;
+	}
+
+	//We save the information of each conversation 
+	n = dialoguesXML.first_child().child("Dialogue");
+	for (n; n != NULL; n = n.next_sibling("Dialogue"))
+	{
+		DialogueXML* aDialogue = new DialogueXML;
+		aDialogue->id = n.attribute("Id").as_int();
+		
+		LoadLinesXML(n,aDialogue);
+
+		aDialogueXML.push_back(aDialogue);
+	}
+	//}
+
+}
+
+// Reads each node with the variables associated with each line
+void DialogueSystem::LoadLinesXML(pugi::xml_node& node, DialogueXML* dlg)
+{
+	for (pugi::xml_node m = node.child("node"); m != NULL; m = m.next_sibling("node"))
+	{
+		DialogueLineXML* node = new DialogueLineXML;
+		node->authorId = m.attribute("AuthorId").as_int();
+		//node->line.assign(m.attribute("Line").as_string());
+
+		//Put enters in a text, never pass de number:MARGIN_IN_TEXT of chars in line
+		node->line.assign(TextWrap(m.attribute("Line").as_string(), MARGIN_IN_TEXT));
+
+		dlg->dialogue.push_back(node);
+	}
+}
+
+std::string DialogueSystem::TextWrap(std::string text, int margin)
+{
+	unsigned lineBegin = 0;
+
+	while (lineBegin < text.size())
+	{
+		const unsigned idealEnd = lineBegin + margin;
+		unsigned lineEnd = idealEnd <= text.size() ? idealEnd : text.size() - 1;
+
+		if (lineEnd == text.size() - 1)
+			++lineEnd;
+		else if (std::isspace(text[lineEnd]))
+		{
+			text[lineEnd] = '\n';
+			++lineEnd;
+		}
+		else    // backtrack
+		{
+			unsigned end = lineEnd;
+			while (end > lineBegin && !std::isspace(text[end]))
+				--end;
+
+			if (end != lineBegin)
+			{
+				lineEnd = end;
+				text[lineEnd++] = '\n';
+			}
+			else
+				text.insert(lineEnd++, 1, '\n');
+		}
+
+		lineBegin = lineEnd;
+	}
+	return text;
+}
+//--------------------------------
 
 void DialogueSystem::SaveDialogue()
 {
@@ -377,4 +464,19 @@ void DialogueSystem::ImportToLibrary()
 		libraryPath += (*it);
 		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
 	}
+}
+
+void DialogueSystem::SetCurrentDialogueIdXML(int id) {
+	for (int i = 0; i < aDialogueXML.size(); i++) {
+		if (id == aDialogueXML[i]->id) {
+			currDialogXML = aDialogueXML[i];
+		}
+	}
+}
+DialogueXML* DialogueSystem::GetCurrentDialogueXML() {
+	return currDialogXML;
+}
+void DialogueSystem::StartDialogueXML() {
+	currLineXML = currDialogXML->dialogue.front();
+	indexLine = 0;
 }

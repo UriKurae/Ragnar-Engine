@@ -235,7 +235,7 @@ public class TankEnemy : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
-            InternalCalls.InstancePrefab("EnemyBullet");
+            InternalCalls.InstancePrefab("EnemyBullet", true);
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
         }
