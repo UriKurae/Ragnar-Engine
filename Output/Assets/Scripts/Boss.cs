@@ -43,6 +43,7 @@ public class Boss : RagnarComponent
 	// Phase 2 mechanics
 	int indexPlayerTarget;
 	bool jumping = false;
+	bool phase2Location = false;
 
 	// Phase 3 mechanics
 
@@ -121,6 +122,7 @@ public class Boss : RagnarComponent
 		switch (state)
 		{
 			case BossState.PHASE2:
+				GenerateEnemies();
 				players = GameObject.FindGameObjectsWithTag("Player");
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.5f;
 				GotoNextPoint();
@@ -145,13 +147,13 @@ public class Boss : RagnarComponent
 
 	private void GenerateEnemies()
 	{
-		InternalCalls.InstancePrefab("Enemy1Boss");
-		GameObject enemy1 = GameObject.Find("Enemy1Boss");
-		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(5.0f, 0.0f, 0.0f));
+		InternalCalls.InstancePrefab("Basic Enemy 15");
+		GameObject enemy1 = GameObject.Find("Basic Enemy 15");
+		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(2.07f, 6.66f, -19.0f));
 
-		InternalCalls.InstancePrefab("Enemy2Boss");
-		enemy1 = GameObject.Find("Enemy2Boss");
-		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(-5.0f, 0.0f, 0.0f));
+		InternalCalls.InstancePrefab("Basic Enemy 16");
+		enemy1 = GameObject.Find("Basic Enemy 16");
+		enemy1.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(0.61f, 6.66f, -8.0f));
 	}
 	public void GenerateRocks()
 	{
@@ -180,40 +182,52 @@ public class Boss : RagnarComponent
 	public void Phase2()
 	{
 		// this instakills
-		if (PerceptionCone(90))
+		if (phase2Location == false)
 		{
-			Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
-			Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
-			if (!jumping)
+				// Move to new location as soon as phase 2 starts
+				Vector3 destination = new Vector3(0.0f, 6.66f, 2.50f);
+
+				agent.MoveTo(destination);
+
+				if (this.gameObject.transform.localPosition == destination) phase2Location = true;
+		}
+		else
+        {
+			if (PerceptionCone(90))
 			{
-				for (int i = 0; i < players.Length; ++i)
+				Vector3 jumpTo = new Vector3(100.0f, 100.0f, 100.0f);
+				Vector3 area = new Vector3(10.0f, 10.0f, 10.0f);
+				if (!jumping)
 				{
-					if (players[i].transform.globalPosition.magnitude <= area.magnitude &&
-						players[i].transform.globalPosition.magnitude < jumpTo.magnitude)
+					for (int i = 0; i < players.Length; ++i)
 					{
-						jumpTo = players[i].transform.globalPosition;
-						indexPlayerTarget = i;
+						if (players[i].transform.globalPosition.magnitude <= area.magnitude &&
+							players[i].transform.globalPosition.magnitude < jumpTo.magnitude)
+						{
+							jumpTo = players[i].transform.globalPosition;
+							indexPlayerTarget = i;
+						}
+					}
+					agent.speed = 10.0f;
+				}
+
+				if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f) && players[indexPlayerTarget] != null)
+				{
+					agent.MoveTo(jumpTo);
+					if ((players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+					{
+						// Play sweep attack animation
+
+						// Play sweep attack sound
+
+						// Hit player, lower his HP
+						players[indexPlayerTarget].GetComponent<Player>().GetHit(100);
 					}
 				}
-				agent.speed = 10.0f;
 			}
 
-			if (jumpTo != new Vector3(100.0f, 100.0f, 100.0f) && players[indexPlayerTarget] != null)
-			{
-				agent.MoveTo(jumpTo);
-				if ((players[indexPlayerTarget].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
-				{
-					// Play sweep attack animation
-
-					// Play sweep attack sound
-
-					// Hit player, lower his HP
-					players[indexPlayerTarget].GetComponent<Player>().GetHit(100);
-				}
-			}
+			Patrol();
 		}
-
-		Patrol();
 	}
 
 	// Phase 3
@@ -222,13 +236,12 @@ public class Boss : RagnarComponent
 		if (phase3Location == false)
 		{
 			// Move to new location as soon as phase 3 starts
-			Vector3 destination = new Vector3(1.0f, 1.0f, 1.0f);
+			Vector3 destination = new Vector3(0.0f, 6.66f, -20.0f);
 
 			agent.MoveTo(destination);
 
 			if (this.gameObject.transform.localPosition == destination) phase3Location = true;
 
-			phase3Location = true;
 			shieldInmunity = true;
 		}
 		else
@@ -385,7 +398,7 @@ public class Boss : RagnarComponent
 	{
 		for (int i = 0; i < players.Length; ++i)
 		{
-			if ((players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
+			if (players[i] != null && (players[i].transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) <= 2.0f)
 			{
 				// Play sweep attack animation
 
