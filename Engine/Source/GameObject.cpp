@@ -542,6 +542,7 @@ void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());
