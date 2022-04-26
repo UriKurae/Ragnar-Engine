@@ -82,7 +82,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	612307505	ui_archievement	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\ui_archievement_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ui_archievement		384064
 	613801772	wpn_rock_hitground	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_rock_hitground_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_rock_hitground		103592
 	644791484	environment_debrisfalling	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\environment_debrisfalling_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Environment\environment_debrisfalling		6205268
-	684554885	wpn_eagle_fly	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_eagle_fly_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_eagle_fly		196752
+	684554885	wpn_eagle_fly	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_eagle_fly_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_eagle_fly		196752
 	699525885	wpn_voice	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_voice_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_voice		1718508
 	700097641	wpn_stunner_hitdrone	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_stunner_hitdrone_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_stunner_hitdrone		184212
 	723872585	wpn_throwingknife_hitshield	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_throwingknife_hitshield_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_throwingknife_hitshield		54880

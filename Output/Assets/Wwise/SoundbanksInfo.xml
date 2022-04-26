@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="87917746" Language="SFX" Hash="1970243560">
+		<SoundBank Id="87917746" Language="SFX" Hash="586862394">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine</ObjectPath>
 			<ShortName>ragnarEngine</ShortName>
 			<Path>ragnarEngine.bnk</Path>
@@ -421,7 +421,7 @@
 					<IncludedMemoryFiles>
 						<File Id="292959931" Language="SFX">
 							<ShortName>char_paul_walk_sand.wav</ShortName>
-							<Path>SFX\char_paul_walk_sand_10C4C929.wem</Path>
+							<Path>SFX\char_paul_walk_sand_D79FB2B7.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -512,7 +512,7 @@
 				</StateGroup>
 			</StateGroups>
 		</SoundBank>
-		<SoundBank Id="534548857" Language="SFX" Hash="1046437538">
+		<SoundBank Id="534548857" Language="SFX" Hash="185069296">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine_2</ObjectPath>
 			<ShortName>ragnarEngine_2</ShortName>
 			<Path>ragnarEngine_2.bnk</Path>
@@ -753,7 +753,7 @@
 					<IncludedMemoryFiles>
 						<File Id="684554885" Language="SFX">
 							<ShortName>wpn_eagle_fly.wav</ShortName>
-							<Path>SFX\wpn_eagle_fly_10C4C929.wem</Path>
+							<Path>SFX\wpn_eagle_fly_D79FB2B7.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

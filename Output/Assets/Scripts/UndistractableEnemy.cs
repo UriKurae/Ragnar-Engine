@@ -255,7 +255,7 @@ public class UndistractableEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("ETANK_WALKSAND");
+        //gameObject.GetComponent<AudioSource>().PlayClip("ETANK_WALKSAND");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;

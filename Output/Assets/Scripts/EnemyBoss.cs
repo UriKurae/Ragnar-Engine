@@ -145,7 +145,7 @@ public class EnemyBoss : RagnarComponent
     {
         if (state != EnemyState.DEATH)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+            //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")
             {
                 deathTimer = 4f;
@@ -249,7 +249,7 @@ public class EnemyBoss : RagnarComponent
         if (canShoot)
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
+            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 4f;
             InternalCalls.InstancePrefab("EnemyBullet", true);

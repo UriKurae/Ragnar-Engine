@@ -138,7 +138,7 @@ public class BasicEnemy : RagnarComponent
     {
         if (state != EnemyState.DEATH)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+            //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")
             {
                 deathTimer = 4f;
@@ -277,7 +277,7 @@ public class BasicEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
+        //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;

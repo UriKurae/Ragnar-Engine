@@ -86,7 +86,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	241386943	char_general_dropbody_rock_city	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_dropbody_rock_city_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_dropbody_rock_city		209444
 	247976966	enemy_drone_destroied	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_drone_destroied_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDrone\enemy_drone_destroied		352360
 	286668354	char_general_shieldeactivate	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_general_shieldeactivate_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\General_Char\char_general_shieldeactivate		369736
-	292959931	char_paul_walk_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_walk_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_walk_sand		113600
+	292959931	char_paul_walk_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_paul_walk_sand_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Paul_Char\char_paul_walk_sand		113600
 	325241364	consumable_smokegranade_smoke	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\consumable_smokegranade_smoke_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Consumable\consumable_smokegranade_smoke		1411264
 	330418600	enemy_drone_flying	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\enemy_drone_flying_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\EnemyDrone\enemy_drone_flying		1144864
 	332929919	char_chani_putdowncorpse_sand	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\char_chani_putdowncorpse_sand_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chani_Char\char_chani_putdowncorpse_sand		124012
