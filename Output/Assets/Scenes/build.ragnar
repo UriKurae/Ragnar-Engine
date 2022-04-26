@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 103849256,
+                    "pointer": 316657664,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1393,19 +1393,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -41.248867034912109,
+                        -17.317468643188477,
                         0,
-                        61.172306060791016
+                        54.241706848144531
                     ],
                     "Quaternion": [
                         0,
-                        0.96668881177902222,
+                        0.98471486568450928,
                         0,
-                        0.2559545636177063
+                        0.17417402565479279
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.51767009496688843,
+                        0.35013380646705627,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -1458,9 +1458,9 @@
                     "Vertical Fov": 0.48647212982177734,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -65.992355346679688,
+                        -34.469093322753906,
                         55,
-                        104.62217712402344
+                        101.20927429199219
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1469,14 +1469,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -41.248867034912109,
+                        -17.317468643188477,
                         0,
-                        61.172306060791016
+                        54.241706848144531
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 150.33969116210938,
+                    "Horizontal Angle": 159.93881225585938,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -2808,7 +2808,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLENGUAJE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -2863,7 +2863,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -3343,7 +3343,7 @@
             "Parent UUID": 1179485366,
             "Name": "Decoration",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -3481,7 +3481,7 @@
             "Parent UUID": 223123506,
             "Name": "RockSmall1_low2",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -3531,7 +3531,7 @@
             "Parent UUID": 223123506,
             "Name": "RockSmall1_low1",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -3591,15 +3591,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        35.74261474609375,
+                        36.041736602783203,
                         0.79004114866256714,
-                        9.0091390609741211
+                        8.9716320037841797
                     ],
                     "Quaternion": [
                         0,
-                        0.70710676908493042,
+                        0.70710664987564087,
                         0,
-                        0.70710676908493042
+                        0.70710688829421997
                     ],
                     "RotationEditor": [
                         0,
@@ -3607,9 +3607,9 @@
                         0
                     ],
                     "Scale": [
+                        0.99999821186065674,
                         1,
-                        1,
-                        1
+                        0.99999821186065674
                     ]
                 },
                 {
@@ -3641,15 +3641,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        33.035419464111328,
+                        33.807712554931641,
                         0.79004114866256714,
-                        10.003783226013184
+                        9.93115234375
                     ],
                     "Quaternion": [
                         0,
-                        0.70710676908493042,
+                        0.70710664987564087,
                         0,
-                        0.70710676908493042
+                        0.70710688829421997
                     ],
                     "RotationEditor": [
                         0,
@@ -3657,9 +3657,9 @@
                         0
                     ],
                     "Scale": [
+                        0.9999966025352478,
                         1,
-                        1,
-                        1
+                        0.9999966025352478
                     ]
                 },
                 {
@@ -5737,7 +5737,7 @@
             "Parent UUID": 1179485366,
             "Name": "Arbustos",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -5775,7 +5775,7 @@
             "Parent UUID": 421548493,
             "Name": "Arbusto_01",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -5825,7 +5825,7 @@
             "Parent UUID": 421548493,
             "Name": "Arbusto_02",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -5875,7 +5875,7 @@
             "Parent UUID": 421548493,
             "Name": "Arbusto_03",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6013,7 +6013,7 @@
             "Parent UUID": 2063257392,
             "Name": "pasted__RockArc_low",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6063,7 +6063,7 @@
             "Parent UUID": 1179485366,
             "Name": "Colliders",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6101,7 +6101,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_03",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6151,7 +6151,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_08",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6201,7 +6201,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_09",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6251,7 +6251,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_02",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6301,7 +6301,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_11",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6351,7 +6351,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_04",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6401,7 +6401,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_05",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6451,7 +6451,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_07",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6501,7 +6501,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_01",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6551,7 +6551,7 @@
             "Parent UUID": 984849919,
             "Name": "pasted__Collider_06",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -6635,7 +6635,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 500735024,
+                    "pointer": 316659432,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6855,7 +6855,7 @@
             "Name": "UIGame",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIGame.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -6893,7 +6893,7 @@
             "Name": "UICharacterName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -6948,7 +6948,7 @@
             "Name": "UIStilgarImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -6997,7 +6997,7 @@
             "Name": "UIChaniImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7046,7 +7046,7 @@
             "Name": "UIPaulImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7095,7 +7095,7 @@
             "Name": "ab5",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7173,7 +7173,7 @@
             "Name": "ab4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7251,7 +7251,7 @@
             "Name": "ab3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7329,7 +7329,7 @@
             "Name": "ab2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7407,7 +7407,7 @@
             "Name": "ab1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7485,7 +7485,7 @@
             "Name": "UICharBor3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7534,7 +7534,7 @@
             "Name": "UICharBor2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7583,7 +7583,7 @@
             "Name": "UICharBor1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7632,7 +7632,7 @@
             "Name": "UISelector",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7681,7 +7681,7 @@
             "Name": "Char",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7730,7 +7730,7 @@
             "Name": "AbilImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7779,7 +7779,7 @@
             "Name": "UICharPhoto",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7828,7 +7828,7 @@
             "Name": "UIAbilityArray",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7877,7 +7877,7 @@
             "Name": "CharFocusedImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7926,7 +7926,7 @@
             "Name": "CharFocusedText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -7981,7 +7981,7 @@
             "Name": "UIPause",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIPause.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -8019,7 +8019,7 @@
             "Name": "Background",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8063,7 +8063,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 500739784,
+                    "pointer": 227783240,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8075,7 +8075,7 @@
             "Name": "Button Options",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8153,7 +8153,7 @@
             "Name": "Button MainMenu",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8231,7 +8231,7 @@
             "Name": "Button Resume",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8309,7 +8309,7 @@
             "Name": "optionsImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8358,7 +8358,7 @@
             "Name": "MainMenuImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8407,7 +8407,7 @@
             "Name": "ResumeImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8456,7 +8456,7 @@
             "Name": "Button Restart",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8534,7 +8534,7 @@
             "Name": "restartImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -8574,6 +8574,56 @@
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2052262109,
+            "Parent UUID": 417171234,
+            "Name": "prop_ornithopter",
+            "Active": true,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        58.094623565673828,
+                        32.789691925048828,
+                        34.813724517822266
+                    ],
+                    "Quaternion": [
+                        -0.17836038768291473,
+                        -0.73915743827819824,
+                        0.26762717962265015,
+                        0.59178507328033447
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        0.99999994039535522,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_ornithopter_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter__prop_ornithopter.fbx",
+                    "Active": true
                 }
             ]
         }
