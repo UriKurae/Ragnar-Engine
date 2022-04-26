@@ -1,6 +1,7 @@
 #pragma once
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
@@ -193,6 +194,16 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 }
 
 // Light ============================
+
+void SetDirectionalLightShadowsEnabled(MonoBoolean* value)
+{
+	app->renderer3D->dirLight->generateShadows = value;
+}
+
+MonoBoolean GetDirectionalLightShadowsEnabled()
+{
+	return app->renderer3D->dirLight->generateShadows;
+}
 
 float GetLightIntensity(MonoObject* go)
 {

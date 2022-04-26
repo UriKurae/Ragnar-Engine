@@ -79,8 +79,9 @@ bool ModuleSceneManager::Start()
 bool ModuleSceneManager::PreUpdate(float dt)
 {
 	currentScene->PreUpdate(gameTimer.GetDeltaTime());
+#ifndef DISTRIBUTION
 	ShortCuts();
-
+#endif
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;

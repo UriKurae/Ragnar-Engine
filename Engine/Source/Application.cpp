@@ -99,6 +99,7 @@ bool Application::Init()
 		jsonFile.ValueToObject(jsonFile.GetRootValue());
 
 		engineTimer.ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
+		app->sceneManager->GetTimer().ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "Game"));
 		std::list<Module*>::iterator item;
 
 		for (item = listModules.begin(); item != listModules.end() && ret; ++item)
@@ -227,6 +228,7 @@ void Application::SaveConfig()
 	JsonParsing jsonFile;
 
 	engineTimer.SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), "App"));
+	app->sceneManager->GetTimer().SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), "Game"));
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
@@ -260,7 +262,7 @@ void Application::LoadConfig()
 		JsonParsing jsonFile((const char*)buffer);
 		jsonFile.ValueToObject(jsonFile.GetRootValue());
 
-		engineTimer.ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
+		//engineTimer.ReadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), "App"));
 
 		std::list<Module*>::iterator item;
 

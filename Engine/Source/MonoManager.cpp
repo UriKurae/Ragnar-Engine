@@ -156,6 +156,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Animation =================
 
 	// Light =====================
+	mono_add_internal_call("RagnarEngine.Light::get_shadowsEnabled", GetDirectionalLightShadowsEnabled);
+	mono_add_internal_call("RagnarEngine.Light::set_shadowsEnabled", SetDirectionalLightShadowsEnabled);
 	mono_add_internal_call("RagnarEngine.Light::get_intensity", GetLightIntensity);
 	mono_add_internal_call("RagnarEngine.Light::set_intensity", SetLightIntensity);
 	mono_add_internal_call("RagnarEngine.Light::get_linear", GetLightLinear);
