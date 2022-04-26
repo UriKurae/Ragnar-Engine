@@ -11,6 +11,7 @@ public class Player : RagnarComponent
     public bool invisible = false;
     private bool firstTime = false;
     public bool dead = false;
+    public GameObject pickedEnemy = null;
 
     Rigidbody rb;
     Material materialComponent;
@@ -81,7 +82,7 @@ public class Player : RagnarComponent
                     rb.SetHeight(1); // 1 = 100% = Reset
                 }
             }
-            if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3)
+            if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3 || state == (int)State.ABILITY_4 || state == (int)State.CARRYING)
             {
                 agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
                 agent.CalculatePath(agent.hitPosition);
@@ -160,12 +161,33 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        if (other.gameObject.name == "WinCondition")
-            SceneManager.LoadScene("WinScene");
-
-        if (other.gameObject.name == "DialogueTrigger")
+        /*
+         * if (other.gameObject.name == "WinCondition")
+           SceneManager.LoadScene("WinScene");
+        */
+        if (other.gameObject.name == "DialogueTrigger0")
         {
-            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialogue();
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
+        }
+        if (other.gameObject.name == "DialogueTrigger3")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
+        }
+        if (other.gameObject.name == "DialogueTrigger5")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(5);
+        }
+        if (other.gameObject.name == "DialogueTrigger6")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
+        }
+        if (other.gameObject.name == "DialogueTrigger9")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(9);
+        }
+        if (other.gameObject.name == "DialogueTrigger10")
+        {
+            other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
         }
     }
 

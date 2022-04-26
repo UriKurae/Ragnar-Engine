@@ -27,7 +27,7 @@
 		</node>
 		<node AuthorId="1" Line="A cada dia que pasa les tengo mas rabia, son una lacra para esta tierra."> 
 		</node>
-		<node AuthorId="0" Line="Sus soldados tienen mas armas para atacar a los nuestros y Stilgar nos a pedido paciencia, no eres la unica que tiene alguna cuenta pendiente con los Harkonnen y creo que el tiene un plan."> 
+		<node AuthorId="0" Line="Sus soldados tienen mas armas para atacar a los nuestros y Stilgar nos ha pedido paciencia, no eres la unica que tiene alguna cuenta pendiente con los Harkonnen y creo que el tiene un plan."> 
 		</node>
 		<node AuthorId="1" Line="No puede ser..."> 
 		</node>
@@ -45,11 +45,11 @@
 		</node>
 		<node AuthorId="4" Line="Pensaba que ya era inutil para nuestra casa, señor."> 
 		</node>
-		<node AuthorId="3" Line="Así que pensar, ¿eh? Cuando he empezado a pagaros por pensar? Un rehen nunca deja de ser util."> 
+		<node AuthorId="3" Line="Asi que pensar, ¿eh? Cuando he empezado a pagaros por pensar? Un rehen nunca deja de ser util."> 
 		</node>
 		<node AuthorId="3" Line="Me decepciona tu comportamiento, asi que espero que sirvas de ejemplo para el resto, creeme, no es nada personal."> 
 		</node>
-		<node AuthorId="3" Line="No quiero que salga nadie de aqui, mandad un par de unidades al otro lado del risco y que alcen un perímetro. El desierto parece haber favorecido a su suerte, pero esa suerte va a terminar hoy.">  
+		<node AuthorId="3" Line="No quiero que salga nadie de aqui, mandad un par de unidades al otro lado del risco y que alcen un perimetro. El desierto parece haber favorecido a su suerte, pero esa suerte va a terminar hoy.">  
 		</node>
 		<node AuthorId="3" Line="Hoy es el dia en que muere el legado de los Atreides."> 
 		</node>
@@ -59,7 +59,7 @@
 	<Dialogue Id="2">
 		<node AuthorId="1" Line="Los tenemos en nuestra propia puerta, la oportunidad ha venido hacia nosotros, hoy es el dia Paul, podemos acabar con esto de una vez."> 
 		</node>
-		<node AuthorId="0" Line="Espera, no podemos actuar así sin más."> 
+		<node AuthorId="0" Line="Espera, no podemos actuar asi sin mas."> 
 		</node>
 		<node AuthorId="1" Line="Creo que no nos queda otra."> 
 		</node>
@@ -75,9 +75,9 @@
 		</node>
 		<node AuthorId="5" Line="Señor, nos comunican que tras su marcha para liquidar a los Fremen se estan generando disturbios para sabotear la produccion de especia de la ciudad."> 
 		</node>
-		<node AuthorId="3" Line="Es una pena que no pueda se aqui y ahora, pero tendre tiempo para ver tu caída Principe de la nada."> 
+		<node AuthorId="3" Line="Es una pena que no pueda se aqui y ahora, pero tendre tiempo para ver tu caida Principe de la nada."> 
 		</node>
-		<node AuthorId="3" Line="Esperad que llegue otro carguero y llevadlo a Palacio, tengo asuntos que solucionar en la ciudad antes de poder disfrutar de este espectáculo."> 
+		<node AuthorId="3" Line="Esperad que llegue otro carguero y llevadlo a Palacio, tengo asuntos que solucionar en la ciudad antes de poder disfrutar de este espectaculo."> 
 		</node>
 	</Dialogue>
 	
@@ -85,21 +85,21 @@
 	<Dialogue Id="4">
 		<node AuthorId="6" Line="¿Te das cuenta de lo que podria haber pasado?"> 
 		</node>
-		<node AuthorId="0" Line="Lo tenía delante, solo necesitaba algo más de tiempo."> 
+		<node AuthorId="0" Line="Lo tenia delante, solo necesitaba algo mas de tiempo."> 
 		</node>
 		<node AuthorId="7" Line="¡¿Tiempo? ¿Eres siquiera consciente de las vidas que hay en juego? No todo gira en torno al honor de los Atreides, Paul, te has arriesgado demasiado."> 
 		</node>
-		<node AuthorId="0" Line="¿Y qué habríais hecho vosotros?"> 
+		<node AuthorId="0" Line="¿Y que habriais hecho vosotros?"> 
 		</node>
 		<node AuthorId="7" Line="No puedes ir solo contra ese malnacido!"> 
 		</node>
 		<node AuthorId="1" Line="Odio darle la razon, pero no puedes ir de cara a por el, al menos no sin su ayuda."> 
 		</node>
-		<node AuthorId="7" Line="Vale, hay un cambio de planes, al menos esta incursión tambien se ha llevado a unos cuantos de los suyos."> 
+		<node AuthorId="7" Line="Vale, hay un cambio de planes, al menos esta incursion tambien se ha llevado a unos cuantos de los suyos."> 
 		</node>
 		<node AuthorId="1" Line="¿Vas a ir a Arrakeen?"> 
 		</node>
-		<node AuthorId="7" Line="Esos soldados estarán tramando algo contra otros asentamientos, tenemos que hacer algo; Paul, Chani, vendreis conmigo y Lady Jessica, pero os mantendreis al margen."> 
+		<node AuthorId="7" Line="Esos soldados estaran tramando algo contra otros asentamientos, tenemos que hacer algo; Paul, Chani, vendreis conmigo y Lady Jessica, pero os mantendreis al margen."> 
 		</node>
 		<node AuthorId="7" Line="No quiero lios y menos lamentar bajas"> 
 		</node>
@@ -107,6 +107,42 @@
 		</node>
 		<node AuthorId="7" Line="Ni una palabra mas chico, haras lo que se te ordena."> 
 		</node>
+	</Dialogue>
+	
+	<Dialogue Id="5">
+		<node AuthorId="6" Line="Soy la conversacion 5"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="6">
+		<node AuthorId="0" Line="Soy la conversacion 6"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="7">
+		<node AuthorId="6" Line="Soy la conversacion 7"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="8">
+		<node AuthorId="2" Line="Soy la conversacion 8"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="9">
+		<node AuthorId="6" Line="Soy la conversacion 9"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="10">
+		<node AuthorId="6" Line="Soy la conversacion que hace win condition"> 
+		</node>
+		
 	</Dialogue>
 	<!-- 
 	<Dialogue Id="">

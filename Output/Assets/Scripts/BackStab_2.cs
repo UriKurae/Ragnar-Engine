@@ -8,6 +8,8 @@ public class BackStab_2 : RagnarComponent
 	public GameObject[] enemies;
 	public GameObject selectedEnemy;
 	public bool backstabed;
+	NavAgent agent;
+	public GameObject boss;
 	public void Start()
 	{
 		Debug.Log("Start Knife");
@@ -16,8 +18,10 @@ public class BackStab_2 : RagnarComponent
 		pos.y += 1;
 		gameObject.transform.localPosition = pos;
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
+		agent = player.GetComponent<NavAgent>();
 		selectedEnemy = null;
 		backstabed = false;
+		boss = GameObject.Find("Boss");
 	}
 	public void Update()
 	{
@@ -42,22 +46,30 @@ public class BackStab_2 : RagnarComponent
             }
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
 		}
+		if (boss != null)
+		{
+			if ((boss.transform.globalPosition.magnitude - gameObject.transform.globalPosition.magnitude) < 3.0f)
+			{
+				boss.GetComponent<Boss>().GetBackstabbed();
+			}
+		}
 		InternalCalls.Destroy(gameObject);
 
 	}
 	public GameObject CalculateDistancePlayerEnemies()
 	{
-		for (int i = 0; i < enemies.Length; i++)
-		{
-			Vector3 enemyPos = enemies[i].transform.globalPosition;
-			Vector3 distance = player.transform.globalPosition - enemyPos;
-			distance.y = 0;
-			if (distance.magnitude <= 3)
-			{
-				return enemies[i];
-			}
-		}
-		return null;
+		//for (int i = 0; i < enemies.Length; i++)
+		//{
+		//	Vector3 enemyPos = enemies[i].transform.globalPosition;
+		//	Vector3 distance = player.transform.globalPosition - enemyPos;
+		//	distance.y = 0;
+		//	if (distance.magnitude <= 3)
+		//	{
+		//		return enemies[i];
+		//	}
+		//}
+		//return null;
+		return RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 	}
 
 }

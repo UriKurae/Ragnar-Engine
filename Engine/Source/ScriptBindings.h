@@ -156,11 +156,17 @@ void SetScale(MonoObject* go, MonoObject* scale)
 		tr->UpdateTransform();
 	}
 }
-float GetAngleBetween(MonoObject* go, MonoObject* vector1, MonoObject* vector2)
+float GetAngleBetween(MonoObject* vector1, MonoObject* vector2)
 {
 	float3 vec1 = app->moduleMono->UnboxVector(vector1);
 	float3 vec2 = app->moduleMono->UnboxVector(vector2);	
 	return vec1.AngleBetween(vec2);
+}
+float GetDistanceBetween(MonoObject* vector1, MonoObject* vector2)
+{
+	float3 vec1 = app->moduleMono->UnboxVector(vector1);
+	float3 vec2 = app->moduleMono->UnboxVector(vector2);
+	return vec1.Distance(vec2);
 }
 MonoObject* RotateY(MonoObject* go, MonoObject* vector, int anglesDegrees)
 {
@@ -509,6 +515,14 @@ void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
 
 	OBB newObb = AABB(minPoint, maxPoint).ToOBB();
 	gameObject->SetAABB(newObb);
+}
+
+void ReparentToRoot(MonoObject* go)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	Scene* currentScene = app->sceneManager->GetCurrentScene();
+
+	currentScene->ReparentGameObjects(parent, currentScene->GetRoot());
 }
 
 void AddChild(MonoObject* go, MonoObject* child)

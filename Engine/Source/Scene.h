@@ -67,6 +67,7 @@ public:
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
 	void ReparentGameObjects(uint uuid, GameObject* go);
+	void ReparentGameObjects(GameObject* parent, GameObject* go);
 
 	void Load() override;
 	void UnLoad() override;
