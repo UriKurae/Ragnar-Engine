@@ -43,6 +43,7 @@ public:
 	void DeleteScene(std::shared_ptr<Scene> scene);
 
 	void ChangeScene(const char* sceneName);
+	inline bool GetChangeScene() { return changeScene; };
 
 	void NextScene();
 	void NextScene(const char* name);

@@ -10,7 +10,7 @@ public class Player : RagnarComponent
     private bool crouched = false;
     public bool invisible = false;
     private bool firstTime = false;
-    private bool dead = false;
+    public bool dead = false;
 
     Rigidbody rb;
     Material materialComponent;
@@ -113,7 +113,7 @@ public class Player : RagnarComponent
             if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
                 SceneManager.LoadScene("LoseScene");
-                InternalCalls.Destroy(gameObject);
+                //InternalCalls.Destroy(gameObject);
             }
 
             if (state == (int)State.POSTCAST)
