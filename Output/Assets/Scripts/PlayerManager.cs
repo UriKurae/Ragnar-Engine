@@ -259,7 +259,7 @@ public class PlayerManager : RagnarComponent
                             playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
 
                             Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
-                            //playableCharacter.pickedEnemy = null;
+                            playableCharacter.pickedEnemy = null;
                         }
                         else
                         {
@@ -271,7 +271,7 @@ public class PlayerManager : RagnarComponent
                                 GameObject[] enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
                                 foreach (GameObject g in enemiesDead)
                                 {
-                                    if (obj.name == g.name)
+                                    if (g != null && obj.name == g.name)
                                     {
                                         players[characterSelected].AddChild(obj);
 
