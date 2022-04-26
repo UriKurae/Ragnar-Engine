@@ -27,7 +27,7 @@ void GameTimer::Stop()
 void GameTimer::FinishUpdate()
 {
 	lastFrameMs = GetTime();
-	if ((cappedMs > 0) && (lastFrameMs < cappedMs)) SDL_Delay(cappedMs - lastFrameMs);
+	//if ((cappedMs > 0) && (lastFrameMs < cappedMs)) SDL_Delay(cappedMs - lastFrameMs);
 }
 
 int GameTimer::GetEngineTimeStartup() const
