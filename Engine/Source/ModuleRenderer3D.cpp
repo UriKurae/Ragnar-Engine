@@ -454,7 +454,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	navMesh = node.GetJsonBool("navmesh");
 	drawGrid = node.GetJsonBool("draw grid");
 
-	SetVsync();
+	SetVsync(vsync);
 	SetDepthTest();
 	SetCullFace();
 	SetLighting();
@@ -549,9 +549,9 @@ void ModuleRenderer3D::SetWireMode()
 	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void ModuleRenderer3D::SetVsync()
+void ModuleRenderer3D::SetVsync(bool newValue)
 {
-	SDL_GL_SetSwapInterval(vsync);
+	SDL_GL_SetSwapInterval(newValue);
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()

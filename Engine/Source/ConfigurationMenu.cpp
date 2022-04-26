@@ -148,7 +148,7 @@ bool ConfigurationMenu::Update(float dt)
 		ImGui::SameLine();
 		if (ImGui::Checkbox("Full desktop", app->window->GetWindowFullscreenDesktop()))
 		{
-			app->window->SetFullscreenDesktop();
+			app->window->SetFullscreenDesktop(app->window->GetWindowFullscreenDesktop());
 		}
 	}
 	ImGui::PushID(this);
@@ -184,7 +184,7 @@ bool ConfigurationMenu::Update(float dt)
 	{
 		if (ImGui::Checkbox("VSync", app->renderer3D->GetVsync()))
 		{
-			app->renderer3D->SetVsync();
+			app->renderer3D->SetVsync(app->renderer3D->GetVsync());
 		}
 	}
 	if (ImGui::CollapsingHeader("Input"))

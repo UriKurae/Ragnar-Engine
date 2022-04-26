@@ -143,7 +143,7 @@ bool ModuleWindow::LoadConfig(JsonParsing& node)
 	borderless = node.GetJsonBool("borderless");
 
 	if (fullscreen) SetFullscreen();
-	else if (fullscreenDesktop) SetFullscreenDesktop();
+	else if (fullscreenDesktop) SetFullscreenDesktop(fullscreenDesktop);
 	if (borderless) SetBorderless();
 	
 	SetWindowSize();
@@ -164,9 +164,9 @@ void ModuleWindow::SetFullscreen() const
 		SDL_SetWindowFullscreen(window, 0);
 }
 
-void ModuleWindow::SetFullscreenDesktop() const
+void ModuleWindow::SetFullscreenDesktop(bool newState) const
 {
-	if (fullscreenDesktop) 
+	if (newState)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	else 
 		SDL_SetWindowFullscreen(window, 0);

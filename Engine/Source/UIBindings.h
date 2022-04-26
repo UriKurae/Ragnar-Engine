@@ -129,7 +129,7 @@ float3 GetTextPosition(MonoObject* go)
 
 	return tr->GetTextPosition();
 }
-
+// Checkbox =========================================
 const bool GetIsChecked(MonoObject* go)
 {
 	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
@@ -145,7 +145,11 @@ int GetCheckboxState(MonoObject* go)
 
 	return (int)tr->GetState();
 }
-
+void SetCheckboxState(MonoObject* go, bool newState) 
+{
+	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
+	tr->setChecker(newState);
+}
 // Slider =========================================
 float GetSliderActualValue(MonoObject* go)
 {

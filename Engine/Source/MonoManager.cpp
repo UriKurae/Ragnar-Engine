@@ -239,6 +239,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
+	mono_add_internal_call("RagnarEngine.UICheckbox::SetCheckboxState", SetCheckboxState);
 
 	mono_add_internal_call("RagnarEngine.UISlider::GetSliderActualValue", GetSliderActualValue);
 
@@ -260,6 +261,15 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Dialogue::StartDialogueById", StartDialogueById);
 	mono_add_internal_call("RagnarEngine.Dialogue::LoadDialogueFile", LoadDialogueFile);
 	// Dialogue System =======================
+
+
+	// Configuration ===================
+	mono_add_internal_call("RagnarEngine.InternalCalls::SetFullScreen", SetFullScreen);
+	mono_add_internal_call("RagnarEngine.InternalCalls::GetFullScreen", GetFullScreen);
+	mono_add_internal_call("RagnarEngine.InternalCalls::GetVSync", GetVSync);
+	mono_add_internal_call("RagnarEngine.InternalCalls::SetVSync", SetVSync);
+	// Configuration ===================
+
 
 	InitMono();
 

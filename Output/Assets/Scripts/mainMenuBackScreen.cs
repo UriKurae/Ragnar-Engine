@@ -118,8 +118,10 @@ public class mainMenuBackScreen : RagnarComponent
         optionsMusicSound = GameObject.Find("optionsMusicSound");
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 
-
-        OptionsBackHide();
+		optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
+		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
+		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
+		OptionsBackHide();
     }
 
 	public void Update()
@@ -799,6 +801,11 @@ public class mainMenuBackScreen : RagnarComponent
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
 
+			InternalCalls.SetFullScreen(true);
+		}
+		else
+		{
+			InternalCalls.SetFullScreen(false);
 		}
 
 		////////////////////////////////////////////////
@@ -811,7 +818,11 @@ public class mainMenuBackScreen : RagnarComponent
 		optionsScreenVSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-
+			InternalCalls.SetVSync(true);
+		}
+		else
+		{
+			InternalCalls.SetVSync(false);
 		}
 		////////////////////////////////////////////////
 		/// SHADOWS CHECKBOX
@@ -824,6 +835,11 @@ public class mainMenuBackScreen : RagnarComponent
 		if (optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
 
+			Light.shadowsEnabled = true;
+		}
+		else
+		{
+			Light.shadowsEnabled = false;
 		}
 
 		pos.Set(0, y - 375, 36.1f);
