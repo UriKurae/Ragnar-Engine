@@ -53,7 +53,7 @@ public class Knife : RagnarComponent
 			if (!grabOnce)
 			{
 				grabOnce = true;
-				gameObject.GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFERECOVERSAND");
+				gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFERECOVERSAND");
 			}
 
 			pendingToDelete = true;

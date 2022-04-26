@@ -8,6 +8,7 @@ public class StunnerShot : RagnarComponent
 
     public void Start()
     {
+        gameObject.GetComponent<AudioSource>().PlayClip("BG_SANDHITROCK");
         AimMethod();
     }
 
@@ -38,6 +39,7 @@ public class StunnerShot : RagnarComponent
 
     public void OnCollisionEnter(Rigidbody other)
     {
+        gameObject.GetComponent<AudioSource>().PlayClip("WPN_STUNNERHIT");
         pendingToDelete = true;
     }
 

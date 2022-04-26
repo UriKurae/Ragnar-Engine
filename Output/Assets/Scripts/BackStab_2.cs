@@ -13,7 +13,8 @@ public class BackStab_2 : RagnarComponent
 	public void Start()
 	{
 		Debug.Log("Start Knife");
-		player = GameObject.Find("Player");
+        gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFETHROW");
+        player = GameObject.Find("Player");
 		pos = player.transform.globalPosition;
 		pos.y += 1;
 		gameObject.transform.localPosition = pos;
@@ -34,15 +35,18 @@ public class BackStab_2 : RagnarComponent
 			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
 			if(selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
             {
-				selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
+                selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
             }
 			if(selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
             {
-				selectedEnemy.GetComponent<UndistractableEnemy>().pendingToDelete = true;
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHITSHIELD");
+                selectedEnemy.GetComponent<UndistractableEnemy>().pendingToDelete = true;
             }
 			if(selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
             {
-				selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
+                selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
             }
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
 		}

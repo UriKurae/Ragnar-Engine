@@ -190,15 +190,15 @@ public class PlayerManager : RagnarComponent
                     {
                         if (playableCharacter == characters[0])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONTHROWINGKNIFETHROW");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFETHROW");
                         }
                         else if (playableCharacter == characters[1])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCRYSKNIFESTAB");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CRYSKNIFESTAB");
                         }
                         else if (playableCharacter == characters[2])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_SWORDHIT");
                         }
                         break;
                     }
@@ -206,15 +206,15 @@ public class PlayerManager : RagnarComponent
                     {
                         if (playableCharacter == characters[0])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
                         }
                         else if (playableCharacter == characters[1])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
                         }
                         else if (playableCharacter == characters[2])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
                         }
                         break;
                     }
@@ -222,15 +222,15 @@ public class PlayerManager : RagnarComponent
                     {
                         if (playableCharacter == characters[0])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
                         }
                         else if (playableCharacter == characters[1])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
                         }
                         else if (playableCharacter == characters[2])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
                         }
                         break;
                     }
@@ -238,15 +238,15 @@ public class PlayerManager : RagnarComponent
                     {
                         if (playableCharacter == characters[0])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("THROWROCK");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
                         }
                         else if (playableCharacter == characters[1])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONCAMOUFLAGEACTIVATE");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
                         }
                         else if (playableCharacter == characters[2])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSTUNNERSHOT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
                         }
                         break;
                     }

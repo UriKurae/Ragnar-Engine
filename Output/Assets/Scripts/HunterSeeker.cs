@@ -10,7 +10,8 @@ public class HunterSeeker : RagnarComponent
 
 	public void Start()
 	{
-		agent = gameObject.GetComponent<NavAgent>();
+        gameObject.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERACTIVATE");
+        agent = gameObject.GetComponent<NavAgent>();
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
 		player = GameObject.Find("Player_2");
 		player.GetComponent<Player>().SetControled(false);
@@ -30,7 +31,8 @@ public class HunterSeeker : RagnarComponent
 		{
 			if (Attack())
 			{
-				GameObject player = GameObject.Find("Player_2");
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
+                GameObject player = GameObject.Find("Player_2");
 				player.GetComponent<Player>().SetControled(true);
 				InternalCalls.Destroy(gameObject);
 			}

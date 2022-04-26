@@ -309,7 +309,8 @@ public class Boss : RagnarComponent
 
 	private void ThrowRock()
 	{
-		InternalCalls.InstancePrefab("RockBoss");
+        gameObject.GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
+        InternalCalls.InstancePrefab("RockBoss");
 	}
 	private void GenerateBarrels()
 	{
@@ -429,7 +430,8 @@ public class Boss : RagnarComponent
 		}
 		else if (other.gameObject.tag == "Rocks" && rocksAvailable == false)
 		{
-			rocksAvailable = true;
+            gameObject.GetComponent<AudioSource>().PlayClip("EBOSS_HITGROUND");
+            rocksAvailable = true;
 			InternalCalls.Destroy(other.gameObject);
 			nextRock = null;
 		}

@@ -94,7 +94,7 @@ public class EnemyBoss : RagnarComponent
                     deathTimer -= Time.deltaTime;
                     if (deathTimer < 0)
                     {
-                        gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                        gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                         deathTimer = -1f;
                         pendingToDelete = true;
                     }
@@ -145,6 +145,7 @@ public class EnemyBoss : RagnarComponent
     {
         if (state != EnemyState.DEATH)
         {
+            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")
             {
                 deathTimer = 4f;
@@ -155,6 +156,7 @@ public class EnemyBoss : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
+                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
                 deathTimer = 2f;
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
@@ -193,6 +195,7 @@ public class EnemyBoss : RagnarComponent
             if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
+                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                 Stun(5f);
             }
 
@@ -200,6 +203,7 @@ public class EnemyBoss : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_SWORDHIT");
                 deathTimer = 2f;
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
@@ -216,6 +220,7 @@ public class EnemyBoss : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
+                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                 Stun(5f);
             }
         }
@@ -279,7 +284,7 @@ public class EnemyBoss : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;
@@ -296,7 +301,7 @@ public class EnemyBoss : RagnarComponent
         {
             if (stoppedTime >= 0)
             {
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("EBASIC_WALKSAND");
                 stoppedTime -= Time.deltaTime;
                 if (stoppedTime < 0)
                 {

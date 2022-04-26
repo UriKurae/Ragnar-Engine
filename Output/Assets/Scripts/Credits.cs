@@ -126,12 +126,12 @@ public class Credits : RagnarComponent
 					MenuImage.GetComponent<Transform2D>().position2D = Pos;
 					isFirstM = false;
 					//poner sonido
-					AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					AudioManager.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 				}
 				break;
 			case 3:
 				// pressed mode
-				AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
+				AudioManager.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				Menu.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
