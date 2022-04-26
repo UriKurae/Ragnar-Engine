@@ -115,7 +115,7 @@ public class Level_1 : RagnarComponent
             constant = 1.232f,
             linear = -0.172f,
             quadratic = 0f,
-            charges = -1,
+            charges = 3,
             cooldown = 40f
         }; // Hunter Seeker
         characters[1].abilities[3] = new Abilities
@@ -128,7 +128,7 @@ public class Level_1 : RagnarComponent
             linear = -0.172f,
             quadratic = 0f,
             charges = -1,
-            cooldown = 0f
+            cooldown = 30f
         }; // Spice Bomb
 
         // ENEMIES
