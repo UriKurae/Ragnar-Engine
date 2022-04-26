@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 92044456,
+                    "pointer": 96914264,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -2808,7 +2808,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLENGUAJE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -2863,7 +2863,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -6635,7 +6635,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 214418464,
+                    "pointer": 391236112,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6937,7 +6937,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 214422408,
+                    "pointer": 391233936,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7448,6 +7448,56 @@
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2052262109,
+            "Parent UUID": 417171234,
+            "Name": "prop_ornithopter",
+            "Active": true,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        58.094623565673828,
+                        32.789691925048828,
+                        34.813724517822266
+                    ],
+                    "Quaternion": [
+                        -0.17836038768291473,
+                        -0.73915743827819824,
+                        0.26762717962265015,
+                        0.59178507328033447
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        0.99999994039535522,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_ornithopter_basecolor.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter__prop_ornithopter.fbx",
+                    "Active": true
                 }
             ]
         },
@@ -8627,52 +8677,51 @@
             ]
         },
         {
-            "UUID": 2052262109,
-            "Parent UUID": 417171234,
-            "Name": "prop_ornithopter",
+            "UUID": 1140844728,
+            "Parent UUID": 1906815624,
+            "Name": "pointAnimation",
             "Active": true,
-            "Static": false,
-            "PrefabID": false,
+            "Static": true,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
             "Components": [
                 {
-                    "Type": 0,
                     "Active": true,
+                    "Type": 19,
                     "Position": [
-                        58.094623565673828,
-                        32.789691925048828,
-                        34.813724517822266
+                        0,
+                        0,
+                        -10.399999618530273
                     ],
-                    "Quaternion": [
-                        -0.17836038768291473,
-                        -0.73915743827819824,
-                        0.26762717962265015,
-                        0.59178507328033447
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
                     ],
-                    "RotationEditor": [
+                    "rotationEuler": [
                         0,
                         0,
                         0
                     ],
-                    "Scale": [
-                        1,
-                        0.99999994039535522,
-                        1
-                    ]
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 786,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_ornithopter_basecolor.png",
-                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter_normal.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter__prop_ornithopter.fbx",
-                    "Active": true
+                    "Type": 13,
+                    "alpha": 1
                 }
             ]
         }

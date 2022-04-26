@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 666913208,
+                    "pointer": 592285384,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -7541,7 +7541,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 666911032,
+                    "pointer": 592290688,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7843,7 +7843,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 666911168,
+                    "pointer": 592289328,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9514,6 +9514,104 @@
                     ],
                     "buttonWidth": 70,
                     "buttonHeight": 70,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 786,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1140844728,
+            "Parent UUID": 1906815624,
+            "Name": "pointAnimation",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 786,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 777455248,
+            "Parent UUID": 1906815624,
+            "Name": "abilityLeters",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
                     "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,

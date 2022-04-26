@@ -577,7 +577,7 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-
+			
 		}
 
 		////////////////////////////////////////////////
@@ -1431,17 +1431,17 @@ public class pauseMenuButton : RagnarComponent
 				if (selectedPlayer.name == "Player")//paul
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_portrait.png");
-					CharFocusedText.GetComponent<UIText>().text = "-";
+					CharFocusedText.GetComponent<UIText>().text = "Coming Soon";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_portrait.png");
-					CharFocusedText.GetComponent<UIText>().text = "-";
+					CharFocusedText.GetComponent<UIText>().text = "Coming Soon";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
-					CharFocusedText.GetComponent<UIText>().text = "-";
+					CharFocusedText.GetComponent<UIText>().text = "Coming Soon";
 				}
 				break;
 			case 3:
