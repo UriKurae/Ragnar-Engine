@@ -31,7 +31,7 @@ out float vTextureAlpha;
 out vec4 fragPosLightSpace;
 out mat3 tbnMatrix;
 
-out vec3 tangentLightPos;
+out vec3 tangentLightDir;
 out vec3 tangentViewPos;
 out vec3 tangentFragPos;
 
@@ -67,10 +67,16 @@ void main()
 	vCamPos = camPos;
 	vTextureAlpha = 1.0f;
 
-	vec3 T = normalize(vec3(model * vec4(tangents, 0.0)));
-	vec3 B = normalize(vec3(model * vec4(biTangents, 0.0)));
-	vec3 N = normalize(vec3(model * vec4(normal, 0.0)));
-	tbnMatrix = mat3(T, B, N);
+	mat3 normalMatrix = transpose(inverse(mat3(model)));
+	vec3 T = normalize(normalMatrix * tangents);
+	vec3 N = normalize(normalMatrix * normal);
+	T = normalize(T - dot(T, N) * N);
+	vec3 B = cross(N, T);
+	tbnMatrix = transpose(mat3(T, B, N));
+
+	//tangentLightDir = tbnMatrix * fragPosLightSpace.xyz;
+	tangentViewPos = tbnMatrix * camPos;
+	tangentFragPos = tbnMatrix * vec3(model * vec4(position, 1));
 }
 
 
@@ -86,6 +92,10 @@ in float vTextureAlpha;
 in vec4 fragPosLightSpace;
 in mat3 tbnMatrix;
 
+//out vec3 tangentLightPos;
+out vec3 tangentViewPos;
+out vec3 tangentFragPos;
+
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec4 fragNormals;
 
@@ -93,6 +103,7 @@ layout(location = 0) uniform sampler2D tex;
 layout(location = 1) uniform sampler2D depthTexture;
 layout(location = 2) uniform sampler2D normalMap;
 uniform float normalsThickness;
+uniform bool hasNormalMap;
 
 struct Material
 {
@@ -203,9 +214,12 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
+	//vec3 lightDir = normalize(tangentLightPos - tangentFragPos);
+	lightDir = tbnMatrix * lightDir;
+	viewDir = normalize(tangentViewPos - tangentFragPos);
 
 	// Diffuse shading
-	float diff = max(dot(normal, lightDir), 0.0);
+	float diff = max(dot(lightDir, normal), 0.0);
 	
 	if (diff < csp.a) diff = 0.25f;
 	else if (diff < csp.b) diff = csp.b;
@@ -214,7 +228,8 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(normal, halfwayDir), 0.0), material.shininess);
 	spec = step(0.5f, spec);
 	
 	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
@@ -299,10 +314,16 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 void main()
 {
-	//vec3 norm = normalize(vNormal);
-	vec3 norm = texture(normalMap, vTexCoords).rgb;
-	norm = normalize(norm * 2.0 - 1.0);
-	
+	vec3 norm = vec3(0);
+	if (hasNormalMap)
+	{
+		norm = texture(normalMap, vTexCoords).rgb;
+		norm = normalize(norm * 2.0 - 1.0);
+	}
+	else
+	{
+		norm = normalize(vNormal);
+	}
 	vec3 viewDir = normalize(vCamPos - vPosition);
 	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);

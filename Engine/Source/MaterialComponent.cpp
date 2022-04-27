@@ -515,21 +515,26 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
+	float3 camPos = float3::zero;
 	Framebuffer* fbo;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
 		fbo = app->renderer3D->mainCameraFbo;
+		camPos = gameCam->GetFrustum()->pos;
 	}
 	else
 	{
 		view = app->camera->matrixViewFrustum;
 		proj = app->camera->matrixProjectionFrustum;
 		fbo = app->renderer3D->fbo;
+		camPos = app->camera->cameraFrustum.pos;
 	}
+
 	shader->SetUniformMatrix4f("view", view.Transposed());
 	shader->SetUniformMatrix4f("projection", proj.Transposed());
+	shader->SetUniformVec3f("camPos", camPos);
 	//float4x4 normalMat = view;
 	//normalMat.Inverse();
 	//shader->SetUniformMatrix3f("normalMatrix", normalMat.Float3x3Part().Transposed());
@@ -547,11 +552,17 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
 	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
 	glUniform1i(textLoc3, 1);
-
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, normalMap->GetId());
-	textLoc3 = glGetUniformLocation(shader->GetId(), "normalMap");
-	glUniform1i(textLoc3, 2);
+	
+	if (normalMap != std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->GetResource("Assets/Resources/white.png")))
+	{
+		shader->SetUniform1i("hasNormalMap", 1);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, normalMap->GetId());
+		textLoc3 = glGetUniformLocation(shader->GetId(), "normalMap");
+		glUniform1i(textLoc3, 2);
+	}
+	else
+		shader->SetUniform1i("hasNormalMap", 0);	
 
 	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
