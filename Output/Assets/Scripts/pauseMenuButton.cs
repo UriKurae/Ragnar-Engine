@@ -150,10 +150,15 @@ public class pauseMenuButton : RagnarComponent
         optionsMusicSound = GameObject.Find("optionsMusicSound");
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 
+		//optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
+		OptionsBackHide();
+		optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
+		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
+		InternalCalls.SetFullScreen(true);
+		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
-        OptionsBackHide();
-        //////////////GAME//////////////
-        CharacterPhotoBord = GameObject.Find("Char");
+		//////////////GAME//////////////
+		CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
 		AbilityImage = GameObject.Find("AbilImage");
@@ -186,9 +191,8 @@ public class pauseMenuButton : RagnarComponent
 		pointAnimation = GameObject.Find("pointAnimation");
 		abilityLeters = GameObject.Find("abilityLeters");
 	}
-
     public void Update()
-	{
+	{     
 		players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 
@@ -583,8 +587,12 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-			
+			InternalCalls.SetFullScreen(true);
+        }else
+        {
+			InternalCalls.SetFullScreen(false);
 		}
+		
 
 		////////////////////////////////////////////////
 		/// V-SYNC CHECKBOX
@@ -596,7 +604,11 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenVSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-
+			InternalCalls.SetVSync(true);
+        }
+        else
+        {
+			InternalCalls.SetVSync(false);
 		}
 		////////////////////////////////////////////////
 		/// SHADOWS CHECKBOX
@@ -606,9 +618,14 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenSDCH.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(40, 40, 0);
 		optionsScreenSDCH.GetComponent<Transform2D>().SetSize(bounds);
+		
 		if (optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-
+			Light.shadowsEnabled = true;
+        }
+        else
+        {
+			Light.shadowsEnabled = false;
 		}
 
 		pos.Set(0, y - 375, 36.1f);
@@ -645,12 +662,14 @@ public class pauseMenuButton : RagnarComponent
 		float FXcSound;
 		float MusicSound;
 
-
+		
 		pos.Set(x-650, y - 260, 36.1f);
         optionsVoicesSound.GetComponent<Transform2D>().position2D = pos;
 		VoicesSound = 100* optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
+		
+		SceneAudio.GetComponent<AudioSource>().SetClipVolume(VoicesSound);
 
-
+		
 
 		pos.Set(x - 650, y - 350, 36.1f);
         optionsFXcSound.GetComponent<Transform2D>().position2D = pos;
@@ -836,7 +855,7 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(20, 20, 0);
 		UISelector.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x+387, y+182, -10.400f);
+		pos.Set(x+387, y+190, -10.400f);
 		UICharacterName.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(214, 214f, 0);
 		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);

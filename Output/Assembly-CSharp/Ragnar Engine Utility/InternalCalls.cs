@@ -40,6 +40,18 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Vector3 GetRegionGame();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetFullScreen(bool newState);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetFullScreen();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetVSync(bool newValue);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetVSync();
     }
 
     public class RayCast

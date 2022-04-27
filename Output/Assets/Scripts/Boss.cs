@@ -132,7 +132,7 @@ public class Boss : RagnarComponent
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
 				break;
-			case BossState.PHASE4
+			case BossState.PHASE4:
 				if (!shieldInmunity)
 				{
 					rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 1.2f;

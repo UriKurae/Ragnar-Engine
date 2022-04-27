@@ -38,7 +38,15 @@ public:
 		
 	};
 	inline State GetState() { return state; };
-
+	inline void setChecker(bool newState) {
+		checked = newState;
+		if (checked == true) {
+			actual = selectedMaterial;
+		}
+		else {			
+			actual = noSelectedMaterial;
+		}
+	}
 	inline void SetAlpha(float Alpha) { alpha = Alpha; };
 	inline float GetAlpha() { return alpha; };
 
