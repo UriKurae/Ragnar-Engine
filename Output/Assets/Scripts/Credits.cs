@@ -15,7 +15,7 @@ public class Credits : RagnarComponent
 	GameObject AudioManager;
 	float textCounter = 0;
 	float newDelta=0;
-	float velocity = 20;
+	float velocity = 30;
 	bool isFirstM = true;
 	public void Start()
 	{
