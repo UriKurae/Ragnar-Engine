@@ -801,7 +801,7 @@ public class mainMenuBackScreen : RagnarComponent
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
 
-			InternalCalls.SetFullScreen(true);
+			InternalCalls.SetFullScreen(false);
 		}
 		else
 		{

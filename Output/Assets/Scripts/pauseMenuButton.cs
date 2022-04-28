@@ -5,6 +5,7 @@ public class pauseMenuButton : RagnarComponent
 {
 	string actualOption = "Screen";
 	Vector3 pos;
+	Vector3 mouseLastposition;
 	Vector3 bounds;
 	bool isOptions = false;
 	bool isSowing = false;
@@ -63,6 +64,8 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
+	int animationState=-1;
+	float animationCounter=0;
 	GameObject selectedPlayer;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
@@ -99,6 +102,7 @@ public class pauseMenuButton : RagnarComponent
 	public void Start()
 	{
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
+		mouseLastposition = new Vector3(0.0f, 0.0f, 0.0f);
 		bounds = new Vector3(0.0f, 0.0f, 0.0f);
 		//////////////AUDIO//////////////
 		SceneAudio = GameObject.Find("AudioLevel1");
@@ -154,10 +158,11 @@ public class pauseMenuButton : RagnarComponent
 		OptionsBackHide();
 		optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
 		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
-		InternalCalls.SetFullScreen(true);
+		InternalCalls.SetFullScreen(false);
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
 		//////////////GAME//////////////
+		animationState = -1;
 		CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
@@ -196,6 +201,9 @@ public class pauseMenuButton : RagnarComponent
 		players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 
+
+
+		UpdatePointAnimationAndPosition();
 		SetAllPositions();
 		UpdateMenu();
 		UpdateOptions();
@@ -206,7 +214,52 @@ public class pauseMenuButton : RagnarComponent
         }
 
 	}
+	void UpdatePointAnimationAndPosition()
+    {
+		
+		bounds.Set(50, 50, 0);
+		pointAnimation.GetComponent<Transform2D>().position2D = mouseLastposition;
+		pointAnimation.GetComponent<Transform2D>().SetSize(bounds);
+		pointAnimation.isActive = false;
+        if (animationState != -1)
+        {
+      
+			pointAnimation.isActive = true;
+			animationCounter +=Time.deltaTime;
+        }
+		if (!isOptions && !isSowing)
+        {
+			
+			if(Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+            {
+				mouseLastposition = InternalCalls.GetMousePosition();
+				animationState = 0;
+				animationCounter = 0;
+				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_3.png");
+			}
 
+            if (animationState == 0 && animationCounter>=0.1f)
+            {
+				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_2.png");
+				animationState = 1;
+			}
+			else if(animationState == 1 && animationCounter >= 0.2f)
+			{
+				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_1.png");
+				animationState = 2;
+			}
+			else if (animationState == 2 && animationCounter >= 0.3f)
+			{
+				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_2.png");
+				animationState = 3;
+			}
+			else if (animationState == 3 && animationCounter >= 0.4f)
+			{
+				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_3.png");
+				animationState = -1;
+			}
+		}
+	}
 	void UpdatePlayerPause()
     {
 		if(isSowing || isOptions)
@@ -587,7 +640,7 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
-			InternalCalls.SetFullScreen(true);
+			InternalCalls.SetFullScreen(false);
         }else
         {
 			InternalCalls.SetFullScreen(false);

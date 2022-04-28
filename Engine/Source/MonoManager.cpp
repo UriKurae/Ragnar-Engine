@@ -268,6 +268,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetFullScreen", GetFullScreen);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetVSync", GetVSync);
 	mono_add_internal_call("RagnarEngine.InternalCalls::SetVSync", SetVSync);
+	mono_add_internal_call("RagnarEngine.InternalCalls::GetMousePosition", GetMousePosition);
 	// Configuration ===================
 
 
