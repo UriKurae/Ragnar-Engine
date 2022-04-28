@@ -79,14 +79,44 @@ void GameObject::Draw(CameraComponent* gameCam)
 		}
 	}
 
-	// If showAABB are enable draw the his bounding boxes
-	if (showAABB == true) {
+	if (showAABB == true)
+	{
+		if (gameCam)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(gameCam->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(gameCam->matrixViewFrustum.Transposed().ptr());
+		}
+		else
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		}
+
 		float3 points[8];
 		globalAabb.GetCornerPoints(points);
 		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
 	}
-	// If showOBB are enable draw the his bounding boxes
-	if (showOBB == true) {
+
+	if (showOBB == true)
+	{
+		if (gameCam)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(gameCam->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(gameCam->matrixViewFrustum.Transposed().ptr());
+		}
+		else
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		}
 		float3 points[8];
 		globalObb.GetCornerPoints(points);
 		DebugColliders(points);

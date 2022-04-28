@@ -61,7 +61,8 @@ public:
 
 	inline std::vector<RigidBodyComponent*> GetBodies() { return bodies; };
 	inline std::vector<std::string> GetBodiesNames() { return bodiesNames; };
-	inline bool* GetDebugMode() { return &debug; };
+	inline bool& GetDebugMode() { return debug; };
+	inline void SetDebugDrawing(bool value) { debug = value; }
 
 	void DebugDraw();
 
