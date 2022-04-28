@@ -244,6 +244,7 @@ bool ModuleRenderer3D::PostUpdate()
 	// TODO: wtf quadtree man.
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
 	
+	AABB shadowsAABB;
 #ifndef DIST
 
 	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
@@ -267,9 +268,10 @@ bool ModuleRenderer3D::PostUpdate()
 
 
 	// Shadow Pass ===================================
+	
 	if (dirLight->generateShadows)
 	{
-		GenerateShadows(objects, nullptr);
+		GenerateShadows(objects, nullptr, shadowsAABB);
 	}
 
 	// Scene Pass ====================================
@@ -302,7 +304,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	if (dirLight->generateShadows)
 	{
-		GenerateShadows(objects, app->sceneManager->GetCurrentScene()->mainCamera);
+		GenerateShadows(objects, app->sceneManager->GetCurrentScene()->mainCamera, shadowsAABB);
 	}
 
 
@@ -727,7 +729,7 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 
 	if (app->physics->GetDebugMode())
 		app->physics->DebugDraw();
-	
+
 	PushCamera(float4x4::identity, float4x4::identity);
 
 	if (stencil && objSelected && objSelected->GetActive())
@@ -746,7 +748,7 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 	}
 }
 
-void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam)
+void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam, AABB& shadAABB)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -758,22 +760,46 @@ void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComp
 	glCullFace(GL_FRONT);
 	genShadows = true;
 
+	AABB shadowsAABB = shadAABB;
+
 	if (!gameCam)
 	{
+		shadowsAABB.SetNegativeInfinity();
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			OBB obb = (*it)->GetOOB();
+			obb.Scale(obb.CenterPoint(), 2);
+			shadowsAABB.Enclose(obb);
+		}
+		AABB intersectionAABB = shadowsAABB.Intersection(app->camera->cameraFrustum.MinimalEnclosingAABB());
+
 		if (app->camera->visualizeFrustum)
 		{
 			for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 			{
-				if ((*it) != objSelected)(*it)->Draw(gameCam);
+				if ((*it) != objSelected && intersectionAABB.Contains((*it)->GetAABB()))
+					(*it)->Draw(gameCam);
 			}
 		}
-		else app->sceneManager->GetCurrentScene()->Draw();
+		else app->sceneManager->GetCurrentScene()->Draw(&intersectionAABB);
 	}
 	else
 	{
+		shadowsAABB.SetNegativeInfinity();
+		
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+			OBB obb = (*it)->GetOOB();
+			obb.Scale(obb.CenterPoint(), 2);
+			shadowsAABB.Enclose(obb);
+		}
+		
+		AABB intersectionAABB = shadowsAABB.Intersection(gameCam->GetFrustum()->MinimalEnclosingAABB());
+
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			if (intersectionAABB.Contains((*it)->GetAABB()))
+				(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
 		}
 	}
 

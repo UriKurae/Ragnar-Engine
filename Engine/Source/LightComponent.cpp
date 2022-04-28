@@ -43,6 +43,8 @@ bool ComponentLight::Update(float dt)
 			
 			Frustum frustum;
 			frustum.pos = tr->GetGlobalPosition();
+			//AABB shadowsAABB = app->renderer3D->shadowsAABB;
+			//frustum.pos = float3((shadowsAABB.MaxX() + shadowsAABB.MinX()) * 0.5f, (shadowsAABB.MaxY() + shadowsAABB.MinY()) * 0.5f, shadowsAABB.MaxZ());
 
 			frustum.front = app->renderer3D->dirLight->dir;
 			float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();

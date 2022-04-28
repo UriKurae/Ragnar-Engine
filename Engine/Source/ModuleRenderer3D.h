@@ -3,6 +3,8 @@
 
 #include "Shapes.h"
 #include "SDL_video.h"
+#include "Geometry/AABB.h"
+
 #include <vector>
 #include <set>
 
@@ -85,7 +87,8 @@ public:
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 	void DebugDraw(GameObject* objSelected);
-	void GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam);
+	void GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam, AABB& shadowsAABB);
+
 public:
 	PPlane grid;
 	unsigned int shadowsDepthTexture;
