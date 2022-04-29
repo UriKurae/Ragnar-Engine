@@ -86,6 +86,7 @@ private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 	void DebugDraw(GameObject* objSelected);
 	void GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam);
+
 public:
 	PPlane grid;
 	unsigned int shadowsDepthTexture;
