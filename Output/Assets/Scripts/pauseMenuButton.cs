@@ -196,10 +196,12 @@ public class pauseMenuButton : RagnarComponent
 		abilityLeters = GameObject.Find("abilityLeters");
 	}
     public void Update()
-	{     
+	{
+		//para pillar el hitPoint del mouse Pick
+		//selectedPlayer.GetComponent<NavAgent>().hitPosition
 		players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
-
+		
 
 
 		UpdatePointAnimationAndPosition();
