@@ -174,6 +174,11 @@ public class AirEnemy : RagnarComponent
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
+            //GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", true);
+            //bullet.GetComponent<EnemyBullet>().enemy = gameObject;
+            //bullet.GetComponent<EnemyBullet>().index = index;
+            //bullet.GetComponent<EnemyBullet>().offset = offset;
+
             InternalCalls.InstancePrefab("EnemyBullet", true);
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
