@@ -148,5 +148,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern public void SetSizeAABB(Vector3 min, Vector3 max);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern public void DrawOutline(Vector3 color);
     }
 }

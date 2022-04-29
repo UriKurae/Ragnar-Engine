@@ -37,7 +37,6 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-
         if (!dialogue.GetInDialogue())
         {
             if (hitPoints <= 0 && !dead)

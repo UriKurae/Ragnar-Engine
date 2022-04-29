@@ -798,12 +798,12 @@ public class mainMenuBackScreen : RagnarComponent
 		optionsScreenFSCH.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(40, 40, 0);
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
-		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
-		{
-
-			InternalCalls.SetFullScreen(true);
-		}
-		else
+		//if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
+		//{
+		//
+		//	InternalCalls.SetFullScreen(true);
+		//}
+		//else
 		{
 			InternalCalls.SetFullScreen(false);
 		}

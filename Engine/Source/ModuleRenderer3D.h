@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <set>
+#include <utility>
 
 #define MAX_LIGHTS 8
 
@@ -92,6 +93,7 @@ private:
 public:
 	PPlane grid;
 	unsigned int shadowsDepthTexture;
+	std::vector<std::pair<GameObject*, float3>> gosToDrawOutline;
 
 	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

@@ -293,6 +293,15 @@ void SetLightAmbient(MonoObject* go, MonoObject* ambient)
 
 
 // GameObject =======================
+
+void GameObjectDrawOutline(MonoObject* gameObject, MonoObject* color)
+{
+	GameObject* go = app->moduleMono->GameObjectFromCSGO(gameObject);
+	float3 col = app->moduleMono->UnboxVector(color);
+	std::pair<GameObject*, float3> p(go, col);
+	app->renderer3D->gosToDrawOutline.push_back(p);
+}
+
 MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
 	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);

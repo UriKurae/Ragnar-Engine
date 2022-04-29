@@ -117,6 +117,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::ReparentToRoot", ReparentToRoot);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
+	mono_add_internal_call("RagnarEngine.GameObject::DrawOutline", GameObjectDrawOutline);
 	// Utility ===================
 
 	// UI ========================

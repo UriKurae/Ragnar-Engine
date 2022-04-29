@@ -19,6 +19,7 @@ public class PlayerManager : RagnarComponent
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
+            
             //c.abilities[4] = new Abilities
             //{
             //    name = "CorpseCarrier",
@@ -37,6 +38,7 @@ public class PlayerManager : RagnarComponent
         for(int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+            players[i].DrawOutline(new Vector3(1, 0, 0));
         }
 
         ChangeCharacter(characterSelected);

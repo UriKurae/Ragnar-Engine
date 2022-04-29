@@ -134,10 +134,10 @@ void GameObject::Draw(CameraComponent* gameCam)
 	}
 }
 
-void GameObject::DrawOutline()
+void GameObject::DrawOutline(CameraComponent* gameCam, const float3& color)
 {
-	if(MeshComponent* border = GetComponent<MeshComponent>())
-		border->DrawOutline();
+	if (MeshComponent* border = GetComponent<MeshComponent>())
+		border->DrawOutline(gameCam, color);
 }
 
 void GameObject::DrawEditor()

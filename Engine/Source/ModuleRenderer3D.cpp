@@ -293,6 +293,20 @@ bool ModuleRenderer3D::PostUpdate()
 	else app->sceneManager->GetCurrentScene()->Draw();
 	// Scene Pass ====================================
 
+	for (auto& p : gosToDrawOutline)
+	{
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		p.first->DrawOutline(nullptr, p.second);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		//glColor3f(1.0f, 1.0f, 1.0f);
+		p.first->Draw(nullptr);
+	}
+
 	DebugDraw(objSelected);
 	
 	//glClear(GL_DEPTH_BUFFER_BIT);
@@ -315,15 +329,29 @@ bool ModuleRenderer3D::PostUpdate()
 #endif
 	glDrawBuffers(2, drawBuffers);
 
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+		(*it)->Draw(cam);
 	}
+
+	for (auto& p : gosToDrawOutline)
+	{
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		p.first->DrawOutline(cam, p.second);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		p.first->Draw(cam);
+	}
+
 
 	vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
 	vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
 	
-	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
 	glEnable(GL_BLEND);
 	coneShader->Bind();
 	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
@@ -736,12 +764,11 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
-		objSelected->DrawOutline();
+		objSelected->DrawOutline(nullptr, { 0.25, 0.87, 0.81, });
 
 		glStencilMask(0xFF);
 		glStencilFunc(GL_ALWAYS, 0, 0xFF);
 		if (depthTest) glEnable(GL_DEPTH_TEST);
-		//glColor3f(1.0f, 1.0f, 1.0f);
 		objSelected->Draw(nullptr);
 	}
 }
