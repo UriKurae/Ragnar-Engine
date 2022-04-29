@@ -47,9 +47,7 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
-	//TODO: Save/Load NavMesh
-	void SetNavMeshView();
-	void SetVsync();
+	void SetVsync(bool newValue);
 
 	inline bool* GetDepthTest() { return &depthTest; }
 	inline bool* GetCullFace() { return &cullFace; }
@@ -88,6 +86,7 @@ private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 	void DebugDraw(GameObject* objSelected);
 	void GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam);
+
 public:
 	PPlane grid;
 	unsigned int shadowsDepthTexture;

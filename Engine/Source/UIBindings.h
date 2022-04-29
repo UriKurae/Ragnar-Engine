@@ -31,7 +31,17 @@ void Set2DPosition(MonoObject* go, MonoObject* position)
 	}
 }
  // Button ==============================
-
+int LoadButtonTexture(MonoObject* go, MonoString* text)
+{
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	std::string y = mono_string_to_utf8(text);
+	
+	tr->GetNormalMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	tr->GetFocusedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	tr->GetPressedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	tr->GetActualMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	return 0;
+}
 float GetButtonAlpha(MonoObject* go)
 {
 	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
@@ -119,7 +129,7 @@ float3 GetTextPosition(MonoObject* go)
 
 	return tr->GetTextPosition();
 }
-
+// Checkbox =========================================
 const bool GetIsChecked(MonoObject* go)
 {
 	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
@@ -135,7 +145,11 @@ int GetCheckboxState(MonoObject* go)
 
 	return (int)tr->GetState();
 }
-
+void SetCheckboxState(MonoObject* go, bool newState) 
+{
+	CheckboxComponent* tr = GetComponentMono<CheckboxComponent*>(go);
+	tr->setChecker(newState);
+}
 // Slider =========================================
 float GetSliderActualValue(MonoObject* go)
 {
@@ -193,8 +207,10 @@ void SetSize(MonoObject* go, MonoObject* size)
 int LoadTexture(MonoObject* go, MonoString* text)
 {
 	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
-	std::string y=mono_string_to_utf8(text);	
-	return tr->LoadTexture(y);
+	std::string y=mono_string_to_utf8(text);
+	
+	tr->principal->SetTexture(ResourceManager::GetInstance()->LoadResource(y));
+	return 0;
 }
 void UseTexture(MonoObject* go, int ID)
 {

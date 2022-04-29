@@ -15,6 +15,7 @@ public class Knife : RagnarComponent
 
     private void AimMethod()
     {
+    	gameObject.GetComponent<ParticleSystem>().Play();
         GameObject player = GameObject.Find("Player");
         NavAgent agent = player.GetComponent<NavAgent>();
 
@@ -22,14 +23,16 @@ public class Knife : RagnarComponent
         pos.y += 1;
         gameObject.transform.localPosition = pos;
 
-        Vector3 direction = agent.hitPosition - player.transform.globalPosition;
-        direction.y = 0;
+        Vector3 direction = HitEnemy(agent, player);
+		direction.y = 0;
 
         Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
         goRB.SetBodyPosition(pos);
         goRB.IgnoreCollision(player, true);
         goRB.ApplyCentralForce(direction.normalized * force);
-    }
+
+		agent.hitPosition = player.transform.globalPosition;
+	}
 
     public void Update()
 	{
@@ -58,9 +61,26 @@ public class Knife : RagnarComponent
 		}
 	}
 
+	private Vector3 HitEnemy(NavAgent agent, GameObject player)
+	{
+		gameObject.GetComponent<ParticleSystem>().Pause();
+			
+		GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+
+		if (obj != null)
+		{
+			Debug.Log(obj.name.ToString());
+			return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
+		}
+
+		return agent.hitPosition - player.transform.globalPosition;
+	}
+
 	public void OnCollisionEnter(Rigidbody other)
 	{
 		canReload = true;
 	}
 
 }
+
+

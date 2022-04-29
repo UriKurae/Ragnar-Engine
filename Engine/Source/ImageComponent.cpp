@@ -4,7 +4,7 @@
 
 #include "ModuleInput.h"
 #include "ModuleUI.h"
-
+#include "Texture.h"
 #include "GameObject.h"
 #include "MaterialComponent.h"
 #include "Transform2DComponent.h"
@@ -51,6 +51,9 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 	glEnable(GL_ALPHA_TEST);
 	planeToDraw->DrawPlane2D(principal->GetTexture().get());
 
+	glColor4f(actualColor.r, actualColor.g, actualColor.b, actualColor.a);
+	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
 }
@@ -58,11 +61,10 @@ int ImageComponent::LoadTexture(std::string newTexture)
 {
 	MaterialComponent* auxiliar = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
 	ResourceManager* aux =ResourceManager::GetInstance();
-
-	auxiliar->SetTexture(aux->GetInstance()->LoadResource(std::string(newTexture)));
+	auxiliar->SetTexture(aux->LoadResource(std::string(newTexture)));
 	materialList.push_back(auxiliar);
 
-	ResourceManager::ReleaseInstance();
+	
 	return materialList.size();
 }
 void ImageComponent::UseTexture(int ID) 

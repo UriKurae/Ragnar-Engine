@@ -10,7 +10,7 @@ ParticleEffect_SphericalSpawn::~ParticleEffect_SphericalSpawn()
 {
 }
 
-void ParticleEffect_SphericalSpawn::Spawn(Particle& particle, float4x4& gTrans, float* offset)
+void ParticleEffect_SphericalSpawn::Spawn(Particle& particle, float3& gTrans, float* offset)
 {
 	LCG random;
 
@@ -30,7 +30,8 @@ void ParticleEffect_SphericalSpawn::Spawn(Particle& particle, float4x4& gTrans, 
 	localPos.x = offset[0] + x1 * c;
 	localPos.y = offset[1] + x2 * c;
 	localPos.z = offset[2] + x3 * c;
-	particle.position = gTrans.TransformPos(localPos);
+
+	particle.position = localPos;
 }
 
 void ParticleEffect_SphericalSpawn::OnEditor(int emitterIndex)

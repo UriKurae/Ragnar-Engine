@@ -79,17 +79,58 @@ void GameObject::Draw(CameraComponent* gameCam)
 		}
 	}
 
-	// If showAABB are enable draw the his bounding boxes
-	if (showAABB == true) {
+	if (showAABB == true)
+	{
+		if (gameCam)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(gameCam->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(gameCam->matrixViewFrustum.Transposed().ptr());
+		}
+		else
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		}
+
 		float3 points[8];
 		globalAabb.GetCornerPoints(points);
 		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 	}
-	// If showOBB are enable draw the his bounding boxes
-	if (showOBB == true) {
+
+	if (showOBB == true)
+	{
+		if (gameCam)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(gameCam->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(gameCam->matrixViewFrustum.Transposed().ptr());
+		}
+		else
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		}
+		
 		float3 points[8];
 		globalObb.GetCornerPoints(points);
 		DebugColliders(points);
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 	}
 }
 
@@ -389,10 +430,11 @@ void GameObject::CopyComponent(Component* component)
 	}
 }
 
-void GameObject::AddChild(GameObject* object)
+void GameObject::AddChild(GameObject* object, bool begin)
 {
 	object->parent = this;
-	children.emplace_back(object);
+	if(!begin) children.emplace_back(object);
+	else children.insert(children.begin(), object);
 	TransformComponent* trans = object->GetComponent<TransformComponent>();
 	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
@@ -541,6 +583,7 @@ void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());

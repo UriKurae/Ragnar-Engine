@@ -6,22 +6,18 @@ public class HunterSeeker : RagnarComponent
 	NavAgent agent;
 	public GameObject[] enemies;
 	Rigidbody rb;
-	GameObject area;
+	GameObject player;
 
 	public void Start()
 	{
 		agent = gameObject.GetComponent<NavAgent>();
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
-		GameObject player = GameObject.Find("Player_2");
+		player = GameObject.Find("Player_2");
 		player.GetComponent<Player>().SetControled(false);
 		Vector3 pos = player.transform.globalPosition + new Vector3(0, 1, 0);
 		rb = gameObject.GetComponent<Rigidbody>();
 		rb.SetBodyPosition(pos);
 		rb.IgnoreCollision(player, true);
-		InternalCalls.InstancePrefab("Backstab Area");
-		area = GameObject.Find("Backstab Area");
-		gameObject.AddChild(area);
-		area.transform.localPosition = new Vector3(0, area.transform.localPosition.y, 0);
 	}
 	public void Update()
 	{
@@ -36,8 +32,6 @@ public class HunterSeeker : RagnarComponent
 			{
 				GameObject player = GameObject.Find("Player_2");
 				player.GetComponent<Player>().SetControled(true);
-				gameObject.EraseChild(area);
-				//InternalCalls.Destroy(area);
 				InternalCalls.Destroy(gameObject);
 			}
 		}
@@ -47,12 +41,33 @@ public class HunterSeeker : RagnarComponent
 		for (int i = 0; i < enemies.Length; i++)
 		{
 			float distance = Vector3.Magnitude(gameObject.transform.globalPosition - enemies[i].transform.globalPosition);
-			if (distance <= 3.633)
+			if (distance <= 5.633)
 			{
-				enemies[i].GetComponent<EnemyInteractions>().pendingToDelete = true;
+				if (enemies[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
+				{
+					enemies[i].GetComponent<BasicEnemy>().pendingToDelete = true;
+				}
+				if (enemies[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
+				{
+					enemies[i].GetComponent<UndistractableEnemy>().pendingToDelete = true;
+				}
+				if (enemies[i].GetComponent<TankEnemy>().ToString() == "TankEnemy")
+				{
+					enemies[i].GetComponent<TankEnemy>().pendingToDelete = true;
+				}
+				//enemies[i].GetComponent<Animation>().PlayAnimation("Dying");
 				return true;
 			}
 		}
 		return false;
+	}
+	public void OnCollision(Rigidbody other)
+	{
+		if (other.gameObject.tag == "Enemies")
+        {
+			player.GetComponent<Player>().SetControled(true);
+			InternalCalls.Destroy(gameObject);
+			
+        }
 	}
 }

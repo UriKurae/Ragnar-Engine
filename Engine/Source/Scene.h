@@ -33,12 +33,28 @@ public:
 
 	void NewScene();
 
-	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true);
+	GameObject* CreateGameObject(GameObject* parent, bool createTransform = true, bool begin = false);
 	GameObject* CreateGameObjectChild(const char* name, GameObject* parent);
 	GameObject* CreateGameObjectParent(const char* name, GameObject* child);
-	inline std::vector<GameObject*> GetGameObjectsList() const 
+	std::vector<GameObject*> GetGameObjectsList() const 
 	{ 
-		return root->GetChilds(); 
+		std::stack<GameObject*> objects;
+		std::vector<GameObject*> sceneObjects;
+		objects.push(root);
+
+		while (!objects.empty())
+		{
+			GameObject* go = objects.top();
+			objects.pop();
+
+			for (int i = 0; i < go->GetChilds().size(); ++i)
+			{
+				objects.push(go->GetChilds()[i]);
+				sceneObjects.push_back(go->GetChilds()[i]);
+			}
+		}
+
+		return sceneObjects;
 	}
 
 	inline GameObject* GetRoot() const { return root; }
@@ -51,6 +67,7 @@ public:
 	void MoveGameObjectUp(GameObject* object);
 	void MoveGameObjectDown(GameObject* object);
 	void ReparentGameObjects(uint uuid, GameObject* go);
+	void ReparentGameObjects(GameObject* parent, GameObject* go);
 
 	void Load() override;
 	void UnLoad() override;
@@ -61,12 +78,19 @@ public:
 	void DuplicateGO(GameObject* go, GameObject* parent);
 
 	inline void ResetQuadtree() { resetQuadtree = true; }
+	
+	// Please do not remove these two getters, if one gets removed and the other is used, some things won't work
+	// ====================================================
 	inline bool* GetDrawQuad() { return &drawQuad; }
+	inline bool GetDebugDrawQuadtree() { return drawQuad; }
+	// ====================================================
 
 	Quadtree& GetQuadtree() { return qTree; }
 
 	inline GameObject* GetPlayer() { return player; };
 
+
+public:
 	CameraComponent* mainCamera;
 	GameObject* camera;
 

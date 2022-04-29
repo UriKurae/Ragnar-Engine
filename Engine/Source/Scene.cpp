@@ -135,8 +135,6 @@ bool Scene::Draw()
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
-	if (drawQuad) qTree.DebugDraw();
-
 	std::stack<GameObject*> stack;
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
@@ -188,7 +186,7 @@ void Scene::NewScene()
 	app->editor->SetGO(nullptr);
 }
 
-GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
+GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform, bool begin)
 {
 	RG_PROFILING_FUNCTION("Creating Game Object");
 
@@ -202,7 +200,7 @@ GameObject* Scene::CreateGameObject(GameObject* parent, bool createTransform)
 	else
 	{
 		object->SetParent(root);
-		root->AddChild(object);
+		root->AddChild(object, begin);
 	}
 	
 	return object;
@@ -311,6 +309,21 @@ void Scene::ReparentGameObjects(uint uuid, GameObject* go)
 		trans->NewAttachment();
 		trans->SetAABB();
 	}	
+}
+
+void Scene::ReparentGameObjects(GameObject* parent, GameObject* go)
+{
+	GameObject* parentObj = parent->GetParent();
+
+	parentObj->RemoveChild(parent);
+	parent->SetParent(go);
+	go->AddChild(parent);
+
+	if (TransformComponent* trans = parent->GetComponent<TransformComponent>())
+	{
+		trans->NewAttachment();
+		trans->SetAABB();
+	}
 }
 
 void Scene::Load()

@@ -72,7 +72,8 @@
                         1,
                         1
                     ],
-                    "Intensity": 0
+                    "Intensity": 0,
+                    "Shadows": true
                 }
             ]
         },
@@ -134,10 +135,10 @@
                         -50
                     ],
                     "Quaternion": [
-                        0.38268345594406128,
+                        0.34202012419700623,
                         0,
                         0,
-                        0.92387950420379639
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0,
@@ -153,7 +154,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 1.0672310590744019,
+                    "Vertical Fov": 1.0010348558425903,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
                         -4.9477472305297852,
@@ -164,6 +165,7 @@
                     "Zoom": 0,
                     "Zoom Min": 0,
                     "Zoom Max": 0,
+                    "Zoom Speed": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -4.9477472305297852,
@@ -174,10 +176,15 @@
                     "Rotation Speed": 0.5,
                     "Radius": 20,
                     "Horizontal Angle": 257.39971923828125,
-                    "Arrow Rotation": false,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
-                    "Shake Smooth": 0
+                    "Shake Smooth": 0,
+                    "Limits": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -212,14 +219,15 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_mainmenuscreen.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -230,7 +238,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 191474336,
+                    "pointer": 366177176,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -310,7 +318,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -702.5,
+                        -603.5,
                         -98.5,
                         36.099998474121094
                     ],
@@ -326,38 +334,43 @@
                     ],
                     "buttonWidth": 323,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 12,
                     "buttonText": "Credits",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -383,7 +396,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -595,
+                        -496,
                         27,
                         36.099998474121094
                     ],
@@ -399,38 +412,43 @@
                     ],
                     "buttonWidth": 345.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 12,
                     "buttonText": "New Game",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -456,7 +474,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -743.5,
+                        -644.5,
                         -157.5,
                         36.099998474121094
                     ],
@@ -472,38 +490,43 @@
                     ],
                     "buttonWidth": 302.5,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 12,
                     "buttonText": "Exit",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -529,7 +552,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -643,
+                        -544,
                         -36.5,
                         36.099998474121094
                     ],
@@ -545,38 +568,43 @@
                     ],
                     "buttonWidth": 316,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 12,
                     "buttonText": "Options",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -602,7 +630,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -553.5,
+                        -454.5,
                         89.5,
                         36.099998474121094
                     ],
@@ -618,38 +646,43 @@
                     ],
                     "buttonWidth": 407.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 12,
                     "buttonText": "Continue",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -675,7 +708,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -557,
+                        -458,
                         88,
                         36.099998474121094
                     ],
@@ -691,14 +724,15 @@
                     ],
                     "buttonWidth": 410,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -723,7 +757,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -613.5,
+                        -514.5,
                         25,
                         36.099998474121094
                     ],
@@ -739,14 +773,15 @@
                     ],
                     "buttonWidth": 387,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -771,7 +806,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -670,
+                        -571,
                         -40,
                         36.099998474121094
                     ],
@@ -787,14 +822,15 @@
                     ],
                     "buttonWidth": 372.5,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -819,7 +855,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -699.5,
+                        -600.5,
                         -102,
                         36.099998474121094
                     ],
@@ -835,14 +871,15 @@
                     ],
                     "buttonWidth": 309,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
@@ -867,7 +904,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -743,
+                        -644,
                         -160,
                         36.099998474121094
                     ],
@@ -883,20 +920,1451 @@
                     ],
                     "buttonWidth": 295,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1454,
-                    "lastButtonHeight": 859,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
                 {
                     "Type": 2,
-                    "Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
                 },
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1058993489,
+            "Parent UUID": 417171234,
+            "Name": "UIOptions",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/UIOptions.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1562043626,
+            "Parent UUID": 1058993489,
+            "Name": "optionsBack",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_lose_background.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 977719760,
+            "Parent UUID": 1058993489,
+            "Name": "optionsBackImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.43833333253860474,
+                        0.087499998509883881,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 263,
+                    "buttonHeight": 52.5,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 832938040,
+            "Parent UUID": 1058993489,
+            "Name": "optionsBackButton",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1781.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.42416667938232422,
+                        0.076666668057441711,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 254.5,
+                    "buttonHeight": 46,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Back",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -1.2000000476837158,
+                    "textPositionY": -2.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 924736064,
+            "Parent UUID": 1058993489,
+            "Name": "optionsTransCuad",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1773,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        1.0833333730697632,
+                        1.0833333730697632,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 650,
+                    "buttonHeight": 650,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1357983958,
+            "Parent UUID": 1058993489,
+            "Name": "optionsTitle",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        2000,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.62749999761581421,
+                        0.07083333283662796,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 376.5,
+                    "buttonHeight": 42.5,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Options",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -38.200000762939453,
+                    "textPositionY": -4.8000001907348633,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1701306281,
+            "Parent UUID": 1058993489,
+            "Name": "optionsScreenButton",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1798.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.4583333432674408,
+                        0.097499996423721313,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 275,
+                    "buttonHeight": 58.5,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Screen",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -27.399999618530273,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 960946603,
+            "Parent UUID": 1058993489,
+            "Name": "optionsScreenImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1798.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.45583334565162659,
+                        0.079999998211860657,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 273.5,
+                    "buttonHeight": 48,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2754706365,
+            "Parent UUID": 1058993489,
+            "Name": "optionsSoundButton",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1798.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.4583333432674408,
+                        0.097499996423721313,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 275,
+                    "buttonHeight": 58.5,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Sound",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -27.399999618530273,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 366565735,
+            "Parent UUID": 1058993489,
+            "Name": "optionsSoundImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1798.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.45583334565162659,
+                        0.079999998211860657,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 273.5,
+                    "buttonHeight": 48,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 3754936763,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlsButton",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1798.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.4583333432674408,
+                        0.097499996423721313,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 275,
+                    "buttonHeight": 58.5,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Controls",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -27.399999618530273,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 266965036,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlsImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1798.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.45583334565162659,
+                        0.079999998211860657,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 273.5,
+                    "buttonHeight": 48,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 55123624,
+            "Parent UUID": 1058993489,
+            "Name": "optionsScreenFSCH",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1888,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.083333335816860199,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 50,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_true.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 14,
+                    "selected": "noSelected",
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1406913781,
+            "Parent UUID": 1058993489,
+            "Name": "optionsScreenVSCH",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1888,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.083333335816860199,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 50,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_true.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 14,
+                    "selected": "noSelected",
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1134840842,
+            "Parent UUID": 1058993489,
+            "Name": "optionsScreenSDCH",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1888,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.083333335816860199,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 50,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_true.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 14,
+                    "selected": "noSelected",
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1609452896,
+            "Parent UUID": 1058993489,
+            "Name": "optionsSreenText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1913.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLENGUAJE",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/optionsScreen.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 421952276,
+            "Parent UUID": 1058993489,
+            "Name": "optionsSoundText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1913.5,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/optionsSound.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 306108626,
+            "Parent UUID": 1058993489,
+            "Name": "optionsGeneralSound",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.91666668653488159,
+                        0.026666667312383652,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 550,
+                    "buttonHeight": 16,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -0.727996826171875,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.033333335071802139,
+                        0.059999998658895493,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 20,
+                    "buttonHeight": 36,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 15,
+                    "barProgres": 0.4986763596534729,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 300789463,
+            "Parent UUID": 1058993489,
+            "Name": "optionsMusicSound",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.91666668653488159,
+                        0.026666667312383652,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 550,
+                    "buttonHeight": 16,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -5.5,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.033333335071802139,
+                        0.059999998658895493,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 20,
+                    "buttonHeight": 36,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 15,
+                    "barProgres": 0.49000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1164985526,
+            "Parent UUID": 1058993489,
+            "Name": "optionsFXcSound",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.91666668653488159,
+                        0.026666667312383652,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 550,
+                    "buttonHeight": 16,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -275,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.033333335071802139,
+                        0.059999998658895493,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 20,
+                    "buttonHeight": 36,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 15,
+                    "barProgres": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 799841340,
+            "Parent UUID": 1058993489,
+            "Name": "optionsVoicesSound",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.91666668653488159,
+                        0.026666667312383652,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 550,
+                    "buttonHeight": 16,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -275,
+                        1983,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.033333335071802139,
+                        0.059999998658895493,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 20,
+                    "buttonHeight": 36,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 15,
+                    "barProgres": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 341514620,
+            "Parent UUID": 1058993489,
+            "Name": "optionsLanguaje",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1991.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.4166666567325592,
+                        0.10000000149011612,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 250,
+                    "buttonHeight": 60,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 687,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 18,
+                    "buttonText": "English",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -28,
+                    "textPositionY": -5,
+                    "alpha": 1,
+                    "numOfButtons": 2,
+                    "buttonText0": "Castellano",
+                    "fontPath0": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale0": 1,
+                    "textColor.r0": 1,
+                    "textColor.g0": 1,
+                    "textColor.b0": 1,
+                    "textPositionX0": -29.600000381469727,
+                    "textPositionY0": -5,
+                    "alpha0": 1,
+                    "text0": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "buttonText1": "English",
+                    "fontPath1": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale1": 1,
+                    "textColor.r1": 1,
+                    "textColor.g1": 1,
+                    "textColor.b1": 1,
+                    "textPositionX1": -29.600000381469727,
+                    "textPositionY1": -5,
+                    "alpha1": 1,
+                    "text1": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png"
                 }
             ]
         }

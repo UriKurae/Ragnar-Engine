@@ -21,7 +21,7 @@ public:
 
 	void SetTitle(const char* title) const;
 	void SetFullscreen() const;
-	void SetFullscreenDesktop() const;
+	void SetFullscreenDesktop(bool newState) const;
 	void SetResizable() const;
 	void SetBorderless() const;
 	void SetBrightness() const;

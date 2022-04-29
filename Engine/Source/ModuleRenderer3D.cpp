@@ -84,8 +84,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		DEBUG_LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-		ilutRenderer(ILUT_OPENGL);
-
 		//Use Vsync
 		vsync = node.GetJsonBool("vsync");
 		if(SDL_GL_SetSwapInterval(vsync) < 0)
@@ -324,6 +322,7 @@ bool ModuleRenderer3D::PostUpdate()
 	vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
 	
 	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	glEnable(GL_BLEND);
 	coneShader->Bind();
 	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
 	coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
@@ -336,6 +335,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	coneShader->Unbind();
     enemyCones.clear();
+	glDisable(GL_BLEND);
 
 #ifndef DIST 
 	app->userInterface->Draw();
@@ -344,7 +344,7 @@ bool ModuleRenderer3D::PostUpdate()
 	mainCameraFbo->Unbind();
 
 #ifdef DIST
-	//app->camera->updateGameView = true;
+	
 	// Inside each function there is a comprobation so it does not get resized each frame
 	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
@@ -452,7 +452,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	navMesh = node.GetJsonBool("navmesh");
 	drawGrid = node.GetJsonBool("draw grid");
 
-	SetVsync();
+	SetVsync(vsync);
 	SetDepthTest();
 	SetCullFace();
 	SetLighting();
@@ -547,9 +547,9 @@ void ModuleRenderer3D::SetWireMode()
 	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void ModuleRenderer3D::SetVsync()
+void ModuleRenderer3D::SetVsync(bool newValue)
 {
-	SDL_GL_SetSwapInterval(vsync);
+	SDL_GL_SetSwapInterval(newValue);
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()
@@ -710,6 +710,10 @@ void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 
 void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 {
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	if (app->sceneManager->GetCurrentScene()->GetDebugDrawQuadtree())
+		app->sceneManager->GetCurrentScene()->GetQuadtree().DebugDraw();
 
 	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
 	{
@@ -720,12 +724,9 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 	}
 
 	if (app->physics->GetDebugMode())
-	{
-		PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
 		app->physics->DebugDraw();
-		PushCamera(float4x4::identity, float4x4::identity);
-	}
-
+	
+	PushCamera(float4x4::identity, float4x4::identity);
 
 	if (stencil && objSelected && objSelected->GetActive())
 	{

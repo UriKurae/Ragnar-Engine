@@ -7,10 +7,11 @@
 #include "ModuleEditor.h"
 #include"GameView.h"
 #include "ModuleWindow.h"
-
+#include "Resource.h"
+#include"Texture.h"
 #include"GameObject.h"
 #include "MaterialComponent.h"
-
+#include "ResourceManager.h"
 #include "GL/glew.h"
 #include "freetype-2.10.0/include/ft2build.h"
 #include FT_FREETYPE_H 
@@ -133,65 +134,68 @@ bool DropDownComponent::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Button Update");
 	DropDownText.SetOnlyPosition(float2(GetParentPosition().x + textPos.x, GetParentPosition().y + textPos.y));
+	if (owner->active) {
 
-
-	if (state != State::DISABLED)
-	{
-		if (app->userInterface->focusedGameObject == owner)
-		{
-			state = State::FOCUSED;
-			actual = focusedMaterial;
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
+		
+			if (app->userInterface->focusedGameObject == owner)
 			{
-				state = State::PRESSED;
-
-				isDeployed = !isDeployed;
-
-				
-				actual = pressedMaterial;
-			}
-		}
-		else
-		{
-			state = State::NORMAL;
-			actual = normalMaterial;
-		}
-	}
-
-	if (isDeployed) 
-	{
-		SetFocusedButtons();
-		for (int a = 0; a < buttonsArray.size(); a++)
-		{
-			
-			ButtonComponent* auxiliarButton = (ButtonComponent*)buttonsArray[a]->GetComponent<ButtonComponent>();
-			ComponentTransform2D* auxiliarTransform = (ComponentTransform2D*)buttonsArray[a]->GetComponent<ComponentTransform2D>();
-			
-			if (auxiliarButton->GetState() == State::PRESSED)
-			{
-				selectedRaw = a+1;
-				char* au = new char[30];
-				strcpy(au, auxiliarButton->GetButtonText().textt.c_str());
-				this->SetText(au);
-				delete[] au;
-			}
-			auxiliarTransform->SetPosition({ transform->GetPosition().x,transform->GetPosition().y - (transform->GetButtonHeight() * (a+1)),transform->GetPosition().z });
-			auxiliarTransform->SetButtonHeight(transform->GetButtonHeight());
-			auxiliarTransform->SetButtonWidth(transform->GetButtonWidth());
-			
-			for (int b = 0; b < buttonsArray[a]->components.size(); b++)
-			{
-				if (buttonsArray[a]->components[b]->type != ComponentType::UI_BUTTON)
+				state = State::FOCUSED;
+				actual = focusedMaterial;
+				if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
 				{
-					buttonsArray[a]->components[b]->Update(dt);
-				}
+					state = State::PRESSED;
 
-				//hacer comprobacion de colision y seteo de estado
+					isDeployed = !isDeployed;
+
+
+					actual = pressedMaterial;
+				}
 			}
-			UpdateButtons(buttonsArray[a]);
+			else
+			{
+				state = State::NORMAL;
+				actual = normalMaterial;
+			}
+		
+
+		if (isDeployed)
+		{
+			SetFocusedButtons();
+			for (int a = 0; a < buttonsArray.size(); a++)
+			{
+
+				ButtonComponent* auxiliarButton = (ButtonComponent*)buttonsArray[a]->GetComponent<ButtonComponent>();
+				ComponentTransform2D* auxiliarTransform = (ComponentTransform2D*)buttonsArray[a]->GetComponent<ComponentTransform2D>();
+
+				if (auxiliarButton->GetState() == State::PRESSED)
+				{
+					selectedRaw = a + 1;
+					char* au = new char[30];
+					strcpy(au, auxiliarButton->GetButtonText().textt.c_str());
+					this->SetText(au);
+					delete[] au;
+				}
+				auxiliarTransform->SetPosition({ transform->GetPosition().x,transform->GetPosition().y - (transform->GetButtonHeight() * (a + 1)),transform->GetPosition().z });
+				auxiliarTransform->SetButtonHeight(transform->GetButtonHeight());
+				auxiliarTransform->SetButtonWidth(transform->GetButtonWidth());
+
+				for (int b = 0; b < buttonsArray[a]->components.size(); b++)
+				{
+					if (buttonsArray[a]->components[b]->type != ComponentType::UI_BUTTON)
+					{
+						buttonsArray[a]->components[b]->Update(dt);
+					}
+
+					//hacer comprobacion de colision y seteo de estado
+				}
+				UpdateButtons(buttonsArray[a]);
+			}
 		}
 	}
-
+	else 
+	{
+		state = State::DISABLED;
+	}
 	
 
 	return true;
@@ -512,6 +516,13 @@ bool DropDownComponent::OnLoad(JsonParsing& node)
 		name = name + number;
 		button->SetAlpha(node.GetJsonNumber(name.c_str()));
 
+		name = "text";
+		name = name + number;
+		aux = node.GetJsonString(name.c_str());
+		button->GetNormalMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
+		button->GetFocusedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
+		button->GetPressedMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
+		button->GetActualMaterial()->SetTexture(ResourceManager::GetInstance()->LoadResource(aux));
 	}
 
 
@@ -577,6 +588,12 @@ bool DropDownComponent::OnSave(JsonParsing& node, JSON_Array* array)
 		name = "alpha";
 		name = name + number;		
 		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), name.c_str(), auxiliarButton->GetAlpha());
+
+		name = "text";
+		name = name + number;
+		std::shared_ptr<Texture> diff = nullptr;
+		diff=buttonsArray[a]->GetComponent<MaterialComponent>()->GetTexture();		
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), name.c_str(), diff->GetAssetsPath().c_str());
 	}
 	node.SetValueToArray(array, file.GetRootValue());
 

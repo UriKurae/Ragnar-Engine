@@ -33,13 +33,25 @@ namespace RagnarEngine
         public static extern GameObject Create3DObject(object name, int primitiveType, object position);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern GameObject InstancePrefab(object path);
+        public static extern GameObject InstancePrefab(object path, bool begin = false);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Vector3 GetRegionGame();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetFullScreen(bool newState);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetFullScreen();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetVSync(bool newValue);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetVSync();
     }
 
     public class RayCast
@@ -86,7 +98,10 @@ namespace RagnarEngine
         public static extern string GetDialogueLineAuthor();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void NextLine();
+        public static extern bool NextLine();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetDialogueLineAuthorId();
     }
 
         [StructLayout(LayoutKind.Sequential)]

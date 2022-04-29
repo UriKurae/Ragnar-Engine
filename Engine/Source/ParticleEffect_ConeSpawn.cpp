@@ -8,7 +8,7 @@ radius(1.0f)
 ParticleEffect_ConeSpawn::~ParticleEffect_ConeSpawn()
 {}
 
-void ParticleEffect_ConeSpawn::Spawn(Particle& particle, float4x4& gTrans, float* offset)
+void ParticleEffect_ConeSpawn::Spawn(Particle& particle, float3& gTrans, float* offset)
 {
 	LCG random;
 
@@ -20,7 +20,7 @@ void ParticleEffect_ConeSpawn::Spawn(Particle& particle, float4x4& gTrans, float
 	localPos.x = (r * cos(t)) + offset[0];
 	localPos.y = h + offset[1];
 	localPos.z = (r * sin(t)) + offset[2];
-	particle.position = gTrans.TransformPos(localPos);
+	particle.position = localPos;
 }
 
 void ParticleEffect_ConeSpawn::OnEditor(int emitterIndex)

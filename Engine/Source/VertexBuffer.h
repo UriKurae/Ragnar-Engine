@@ -11,6 +11,9 @@ struct Vertex
 
 	int boneIDs[4] = { -1, -1, -1, -1 };
 	float weights[4];
+
+	float3 tangents;
+	float3 biTangents;
 };
 
 class VertexBuffer

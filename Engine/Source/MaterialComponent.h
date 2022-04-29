@@ -6,6 +6,7 @@
 #include <string>
 
 class Texture;
+enum class TextureType;
 class Resource;
 class CameraComponent;
 
@@ -40,6 +41,10 @@ public:
 
 	std::shared_ptr<Shader> GetOutlineShader() { return outlineShader; }
 
+	void SetTextureType(TextureType type) {
+		textureTypeToChange = type;
+	}
+
 private:
 	bool checker = false;
 	bool showTexMenu = false;
@@ -51,10 +56,11 @@ private:
 
 	std::shared_ptr<Shader> shadertoRecompily;
 	std::shared_ptr<Texture> diff = nullptr;
+	std::shared_ptr<Texture> normalMap = nullptr;
 	std::shared_ptr<Shader> shader;
 	std::shared_ptr<Shader> outlineShader;
 	std::shared_ptr<Shader> shadowShader;
-
+	TextureType textureTypeToChange;
 
 	// TODO: Temporary, should go in Material.h
 	float3 ambientColor;

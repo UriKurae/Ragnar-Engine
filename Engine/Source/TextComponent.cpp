@@ -49,20 +49,23 @@ bool TextComponent::Update(float dt)
 	RG_PROFILING_FUNCTION("Text Update");
 
 	textToShow.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
+	
 	//textToShow.setOnlyText(text);
-
+	textToShow.Scale = fontScale;
 	return true;
 }
 
 void TextComponent::Draw(CameraComponent* gameCam)
 {
-	glAlphaFunc(GL_GREATER, 0.5);
-	glEnable(GL_ALPHA_TEST);
+	if (owner->active) {
+		glAlphaFunc(GL_GREATER, 0.5);
+		glEnable(GL_ALPHA_TEST);
 
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+		planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
 
-	glDisable(GL_ALPHA_TEST);
-	glColor3f(255, 255, 255);
+		glDisable(GL_ALPHA_TEST);
+		glColor3f(255, 255, 255);
+	}
 }
 void TextComponent::setTextColor(float Red, float Green, float Blue)
 {
@@ -122,6 +125,7 @@ void TextComponent::OnEditor()
 		strcpy(text, textToShow.textt.c_str());
 		if(ImGui::InputText("Texte", text, IM_ARRAYSIZE(text)))
 			textToShow.setOnlyText(text);
+		textToShow.Scale = fontScale;
 		ImGui::DragFloat("Font Size", &textToShow.Scale, 0.1, 0, 10);
 
 		ComponentOptions(this);
@@ -154,9 +158,11 @@ bool TextComponent::OnLoad(JsonParsing& node)
 	{
 		loadtext(fileText);
 	}
+
 	if (node.GetJsonString("fontPath")) {
-		fontPath = node.GetJsonString("fontPath");
+		
 	}
+	fontPath = node.GetJsonString("fontPath");
 
 	loadFont(fontPath);
 

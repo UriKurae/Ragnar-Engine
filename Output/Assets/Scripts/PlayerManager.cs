@@ -6,173 +6,77 @@ public class PlayerManager : RagnarComponent
     public GameObject[] players;
     public int characterSelected = 0;
 
-    public Characters[] characters = new Characters[3];
+    public Characters[] characters;
     public Characters playableCharacter;
 
     GameObject[] area = null;
     public bool drawnArea = false;
     bool crouched = false;
+    DialogueManager dialogue;
 
     public void Start()
 	{
-        ///////////////////////////////////////////////////////////////////
-        // AVISO
-        // Esto de aquí está hardcodeadísimo
-        // Pero no hay otra manera de hacerlo
-        // Cuando se puedan meter cositas desde inspector
-        // Se solucionará este problema ^^
-
-        // Player 1
-        characters[0] = new Characters
-        {
-            name = "Paul Atreides",
-            prefabPath = "Player",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[0].abilities[0] = new Abilities
-        {
-            name = "Knife Throw",
-            prefabPath = "Knife",
-            prefabArea = "Knife Area",
-            charges = -1,
-            cooldown = 25f
-        }; // Throwing Knife
-        characters[0].abilities[1] = new Abilities
-        {
-            name = "Rock Throw",
-            prefabPath = "Eagle",
-            prefabArea = "Rock Area",
-            charges = -1,
-            cooldown = 20f
-        }; // Rock/Eagle
-        characters[0].abilities[2] = new Abilities
-        {
-            name = "The Voice",
-            prefabPath = "Voice",
-            prefabArea = "Rock Area",
-            charges = -1,
-            cooldown = 20f
-        }; // The Voice
-        characters[0].abilities[3] = new Abilities
-        {
-            name = "BackStab",
-            prefabPath = "BackStab_2",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-
-        // Player 2
-        characters[1] = new Characters
-        {
-            name = "Chani",
-            prefabPath = "Player_2",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[1].abilities[0] = new Abilities
-        {
-            name = "Backstab",
-            prefabPath = "BackStab",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // BackStab
-        characters[1].abilities[1] = new Abilities
-        {
-            name = "Camouflage",
-            prefabPath = "Camouflage",
-            prefabArea = "Backstab Area",
-            charges = -1,
-            cooldown = 30f
-        }; // Camouflage
-        characters[1].abilities[2] = new Abilities
-        {
-            name = "Spice Bomb",
-            prefabPath = "Spice Granade",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 0f
-        }; // Spice Bomb
-        characters[1].abilities[3] = new Abilities
-        {
-            name = "Hunter Seeker",
-            prefabPath = "HunterSeeker",
-            prefabArea = "BackStab Area",
-            charges = -1,
-            cooldown = 4f
-        }; // Hunter Seeker
-
-        // Player 3
-        characters[2] = new Characters
-        {
-            name = "Stilgar",
-            prefabPath = "Player_3",
-            state = State.NONE,
-            abilities = new Abilities[4]
-        };
-        characters[2].abilities[0] = new Abilities
-        {
-            name = "Sword Slash",
-            prefabPath = "SwordSlash",
-            prefabArea = "SwordSlash Area",
-            charges = -1,
-            cooldown = 0f
-        }; // Sword Slash
-        characters[2].abilities[1] = new Abilities
-        {
-            name = "Stunner",
-            prefabPath = "StunnerShot",
-            prefabArea = "Stunner Area",
-            charges = 4,
-            cooldown = 5f
-        }; // Stunner Shot
-        characters[2].abilities[2] = new Abilities
-        {
-            name = "Whistle",
-            prefabPath = "Whistle",
-            prefabArea = "Whistle Area",
-            charges = -1,
-            cooldown = 6f
-        }; // Whistle
-        characters[2].abilities[3] = new Abilities
-        {
-            name = "Trap",
-            prefabPath = "Trap",
-            prefabArea = "Trap Area",
-            charges = 1,
-            cooldown = 0f
-        }; // Trap
-        ///////////////////////////////////////////////////////////////////
-
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
+            //c.abilities[4] = new Abilities
+            //{
+            //    name = "CorpseCarrier",
+            //    prefabPath = "",
+            //    transformY = 0.0f,
+            //    intensity = 4.0f,
+            //    constant = 0.0f,
+            //    linear = 0.0f,
+            //    quadratic = 0f,
+            //    charges = -1,
+            //    cooldown = 0f
+            //}; // Corpse Carrier Ability
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+        }
+
         ChangeCharacter(characterSelected);
         playableCharacter = characters[characterSelected];
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Player>().hitPoints = characters[i].hitPoints;
+        }
+
+        area = GameObject.FindGameObjectsWithTag("AbilityRange");
+        GameObject[] aux = new GameObject[area.Length];
+        for (int i = 0, j = area.Length - 1; i < area.Length; i++, j--)
+        {
+            aux[j] = area[i];
+        }
+        area = aux;
+        dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
     }
 
 	public void Update()
-    {        
-        if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+    {
+        if (!dialogue.GetInDialogue())
         {
-            crouched = !crouched;
+            if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            {
+                crouched = !crouched;
+            }
+
+            PlayerCases();
+
+            /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
+            muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
+            Aquí debería ir la zona de rango de cada habilidad.*/
+            AbilityStateChanger();
+
+            /*Contador de cooldown para cada habilidad
+            Funciona en todos los casos con todos los pjs.*/
+            CooldownCounter();
         }
 
-        PlayerCases();
-
-        /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
-        muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-        Aquí debería ir la zona de rango de cada habilidad.*/
-        AbilityStateChanger();
-
-        /*Contador de cooldown para cada habilidad
-        Funciona en todos los casos con todos los pjs.*/
-        CooldownCounter();
     }
 
     private void CooldownCounter()
@@ -193,28 +97,36 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        // LETRA A --> HABILIDAD 1 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.A) == KeyState.KEY_DOWN)
+        // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
+        if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_1);
         }
 
-        // LETRA S --> HABILIDAD 2 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.S) == KeyState.KEY_DOWN)
+        // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
+        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_2);
         }
 
-        // LETRA D --> HABILIDAD 3 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
+        // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
+        if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_3);
         }
 
-        // LETRA F --> HABILIDAD 4 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.F) == KeyState.KEY_DOWN)
+        // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
+        if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
             SpawnArea((int)State.ABILITY_4);
+        }
+
+        // LETRA B --> ARRASTRAR CUERPOS
+        if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
+        {
+            //SpawnArea((int)State.CARRYING);
+            playableCharacter.state = State.CARRYING;
+            players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
         }
 
         // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
@@ -237,10 +149,7 @@ public class PlayerManager : RagnarComponent
             if (!drawnArea)
             {
                 drawnArea = true;
-                InternalCalls.InstancePrefab(playableCharacter.abilities[ability - 1].prefabArea);
-                area = GameObject.FindGameObjectsWithTag("AbilityRange");
-                players[characterSelected].AddChild(area[0]);
-                area[0].transform.localPosition = new Vector3(0, area[0].transform.localPosition.y, 0);
+                DrawArea(ability);
             }
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
@@ -251,6 +160,15 @@ public class PlayerManager : RagnarComponent
             Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
             playableCharacter.state = State.NONE;
         }
+    }
+
+    private void DrawArea(int ability)
+    {
+        area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
+        area[characterSelected].GetComponent<Light>().intensity = playableCharacter.abilities[ability - 1].intensity;
+        area[characterSelected].GetComponent<Light>().constant = playableCharacter.abilities[ability - 1].constant;
+        area[characterSelected].GetComponent<Light>().linear = playableCharacter.abilities[ability - 1].linear;
+        area[characterSelected].GetComponent<Light>().quadratic = playableCharacter.abilities[ability - 1].quadratic;
     }
 
     private void CastOrCancel()
@@ -332,33 +250,67 @@ public class PlayerManager : RagnarComponent
                         }
                         break;
                     }
+                case State.CARRYING:
+                    {
+                        if (playableCharacter.pickedEnemy != null)
+                        {
+                            GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
+
+                            playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
+
+                            Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
+                            playableCharacter.pickedEnemy = null;
+                        }
+                        else
+                        {
+                            NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
+                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+
+                            if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                            {
+                                GameObject[] enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
+                                foreach (GameObject g in enemiesDead)
+                                {
+                                    if (g != null && obj.name == g.name)
+                                    {
+                                        players[characterSelected].AddChild(obj);
+
+                                        //setear position, animation, whatever de obj
+                                        obj.transform.localPosition = new Vector3(0,2,0);
+
+                                        Debug.Log("Carrying the corpse of" + obj.name.ToString());
+                                        playableCharacter.pickedEnemy = obj;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    }
                 default:
                     break;
-
             }
 
-            // Instancia la habilidad en cuestión. 
-            InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
-
-            // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
-            if(playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
+            if (playableCharacter.state != State.CARRYING)
             {
-                playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
-            }
+                // Instancia la habilidad en cuestión. 
+                InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
 
-            // Pone la habilidad en cooldown y el player en estado de NONE
-            playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
+                // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
+                if (playableCharacter.abilities[(int)playableCharacter.state - 1].charges != -1 && playableCharacter.abilities[(int)playableCharacter.state - 1].charges != 0)
+                {
+                    playableCharacter.abilities[(int)playableCharacter.state - 1].charges -= 1;
+                }
+
+                // Pone la habilidad en cooldown y el player en estado de NONE
+                playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
+            }
             playableCharacter.state = State.NONE;
 
             // Se cambia el estado a POSTCAST para evitar que se mueva directamente después de castear la habilidad. En el update de los players se cambiará a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
             players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
 
-            for (int i = 0; i < area.Length; i++)
-            {
-				gameObject.EraseChild(area[i]);
-                InternalCalls.Destroy(area[i]);
-            }
-            area = null;
+            area[characterSelected].GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
         // Se cancela el estado de la habilidad para que el área de rango deje de mostrarse.
@@ -367,12 +319,7 @@ public class PlayerManager : RagnarComponent
             playableCharacter.state = State.NONE;
             players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
 
-            for (int i = 0; i < area.Length; i++)
-			{
-				gameObject.EraseChild(area[i]);
-				InternalCalls.Destroy(area[i]);
-            }
-            area = null;
+            area[characterSelected].GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
     }
@@ -387,6 +334,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
+                    if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -398,6 +346,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
+                    if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -409,6 +358,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
+                    if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -420,6 +370,7 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
+                    if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");

@@ -27,6 +27,8 @@ public class StunnerShot : RagnarComponent
         goRB.SetBodyPosition(pos);
         goRB.IgnoreCollision(player, true);
         goRB.ApplyCentralForce(direction.normalized * force);
+
+        agent.hitPosition = player.transform.globalPosition;
     }
 
     public void Update()
@@ -43,8 +45,11 @@ public class StunnerShot : RagnarComponent
     {
         GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-        if (obj != null) 
+        if (obj != null)
+        {
+            Debug.Log(obj.name.ToString());
             return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
+        }
 
         return agent.hitPosition - player.transform.globalPosition;
     }

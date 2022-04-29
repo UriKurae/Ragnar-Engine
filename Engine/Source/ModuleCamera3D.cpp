@@ -50,6 +50,9 @@ bool ModuleCamera3D::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Module Camera Update");
 
+	if (dt > 0.1)
+		return true;
+
 	if (updateViewPort)
 	{
 		// Auxiliar variables
@@ -199,7 +202,7 @@ void ModuleCamera3D::ThrowRayCastOnlyOBB(std::set<GameObject*>& gameObjects, mat
 			picking = prevLine;
 			if (picking.Intersects((*it)->GetOOB(), dNear, dFar))
 			{
-				aabbMap[dNear] = (*it);
+				aabbMap[dFar * prevLine.Length()] = (*it);
 				if ((*aabbMap.begin()).second == (*it))
 					hitPoint = prevLine.a + prevLine.Dir() * dFar * prevLine.Length();
 				break;

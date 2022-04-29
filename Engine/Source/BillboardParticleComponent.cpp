@@ -157,7 +157,7 @@ Quat BillboardParticleComponent::CameraAlign()
 	float3x3 mat = float3x3::identity;
 	mat.Set(right.x, right.y, right.z, up.x, up.y, up.z, billboardForward.x, billboardForward.y, billboardForward.z);
 
-	Quat ret = mat.Inverted().ToQuat();
+	Quat ret = mat.Transposed().ToQuat();
 	return ret;
 }
 

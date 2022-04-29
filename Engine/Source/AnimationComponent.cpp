@@ -28,6 +28,8 @@ AnimationComponent::AnimationComponent(GameObject* own) : showAnimMenu(false), d
 		finalBoneMatrices.push_back(float4x4::identity);
 	}
 
+	boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
+
 	animations.push_back({ "None", nullptr, false });
 
 	active = true;
@@ -217,6 +219,10 @@ bool AnimationComponent::Update(float dt)
 			// Loop time increases by our delta time
 			loopTime += dt;
 			currentTime += currAnim->anim->GetTicksPerSecond() * dt;
+			if (!currAnim->loop && currentTime >= currAnim->anim->GetTicks())
+			{
+				currentTime = currAnim->anim->GetTicks() - currAnim->anim->GetTicksPerSecond() * dt;
+			}
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
 		else
@@ -224,8 +230,13 @@ bool AnimationComponent::Update(float dt)
 			loopTime += dt;
 			// 60 is the frames per second that we want
 			currentTime += 24.0f * dt;
+			if (!currAnim->loop && currentTime >= currAnim->anim->GetTicks())
+			{
+				currentTime = currAnim->anim->GetTicks() - currAnim->anim->GetTicksPerSecond() * dt;
+			}
 			currentTime = fmod(currentTime, currAnim->anim->GetTicks());
 		}
+		
 		CalculateBoneTransform(currAnim->anim->GetHierarchyData(), float4x4::identity);
 	}
 
@@ -235,7 +246,8 @@ bool AnimationComponent::Update(float dt)
 void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 parentTransform)
 {
 	std::string nodeName = data.name;
-	float4x4 nodeTransform = data.transform;
+
+	float4x4 globalTransformation = float4x4::identity;
 
 	Bone* bone = currAnim->anim->FindBone(nodeName);
 	Bone* lastBone = lastAnim->anim->FindBone(nodeName);
@@ -255,121 +267,20 @@ void AnimationComponent::CalculateBoneTransform(HierarchyData& data, float4x4 pa
 				currentTime = 0.0f;
 			}
 		}
-		nodeTransform = bone->GetTransform();
+
+		globalTransformation = parentTransform * bone->GetTransform();
 	}
 
-	float4x4 globalTransformation = parentTransform * nodeTransform;
-
-	auto boneInfoMap = owner->GetComponent<MeshComponent>()->GetBoneMap();
 	if (boneInfoMap.find(nodeName) != boneInfoMap.end())
 	{
-		int index = boneInfoMap[nodeName].id;
-		float4x4 offset = boneInfoMap[nodeName].offset;
+		const BoneInfo& boneInfo = boneInfoMap.at(nodeName);
+		int index = boneInfo.id;
+		const float4x4& offset = boneInfo.offset;
 		finalBoneMatrices[index] = globalTransformation * offset;
 	}
 
 	for (int i = 0; i < data.childrenCount; ++i)
 		CalculateBoneTransform(data.children[i], globalTransformation);
-}
-
-float4x4 AnimationComponent::InterpolateWithoutBones(float4x4& transform, float4x4& lastTransform)
-{
-	float3 lastPosition;
-	Quat lastRotation;
-	float3 lastScale;
-
-	lastTransform.Decompose(lastPosition, lastRotation, lastScale);
-
-	float3 position;
-	Quat rotation;
-	float3 scale;
-
-	transform.Decompose(position, rotation, scale);
-
-	float scaleFactor = 0.0f;
-	float midWayLength = currentTime - 0; 
-	float framesDiff = 60 - 0;
-	scaleFactor = midWayLength / framesDiff;
-	if (scaleFactor < 0) scaleFactor = 0.0f;
-
-	float3 finalPos = Lerp(lastPosition, position, scaleFactor);
-
-	float4x4 pos = float4x4::Translate(finalPos);
-	float4x4 rot = float4x4(Slerp(lastRotation, rotation, scaleFactor));
-	float4x4 sca = float4x4::Scale(Lerp(lastScale, scale, scaleFactor));
-
-	if (scaleFactor >= 1.0f) 
-		interpolating = false;
-
-	return pos * rot * sca;
-}
-
-float4x4 AnimationComponent::InterpolateWithOneBone(float4x4& transform, Bone& bone)
-{
-	float3 position;
-	Quat rotation;
-	float3 scale;
-
-	transform.Decompose(position, rotation, scale);
-
-	float scaleFactor = 0.0f;
-	float midWayLength = currentTime - 0;
-	float framesDiff = 60 - 0;
-	scaleFactor = midWayLength / framesDiff;
-	if (scaleFactor < 0) scaleFactor = 0.0f;
-
-	float3 p;
-	Quat r;
-	float3 s;
-
-	bone.GetData().keyFrames[0].matrix.Decompose(p, r, s);
-
-	float3 finalPos = Lerp(position, p, scaleFactor);
-
-	float4x4 pos = float4x4::Translate(finalPos);
-	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
-	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
-
-	if (scaleFactor >= 1.0f) 
-		interpolating = false;
-
-	return pos * rot * sca;
-}
-
-float4x4 AnimationComponent::InterpolateWithOneBone(Bone& bone, float4x4& transform)
-{
-	float3 position;
-	Quat rotation;
-	float3 scale;
-
-	transform.Decompose(position, rotation, scale);
-
-	int posIndex = bone.GetPositionIndex(lastCurrentTime);
-	int rotIndex = bone.GetRotationIndex(lastCurrentTime);
-	int scaIndex = bone.GetScalingIndex(lastCurrentTime);
-
-	float scaleFactor = 0.0f;
-	float midWayLength = currentTime - 0;
-	float framesDiff = 60 - 0;
-	scaleFactor = midWayLength / framesDiff;
-	if (scaleFactor < 0) scaleFactor = 0.0f;
-
-	float3 p;
-	Quat r;
-	float3 s;
-
-	bone.GetData().keyFrames[0].matrix.Decompose(p, r, s);
-
-	float3 finalPos = Lerp(position, p, scaleFactor);
-
-	float4x4 pos = float4x4::Translate(finalPos);
-	float4x4 rot = float4x4(Slerp(rotation, r, scaleFactor));
-	float4x4 sca = float4x4::Scale(Lerp(scale, s, scaleFactor));
-
-	if (scaleFactor >= 1.0f) 
-		interpolating = false;
-
-	return pos * rot * sca;
 }
 
 bool AnimationComponent::OnLoad(JsonParsing& node)
@@ -432,11 +343,6 @@ bool AnimationComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	return true;
 }
 
-void AnimationComponent::SetAnimation(std::shared_ptr<Resource> a)
-{
-	//currAnim = std::static_pointer_cast<Animation>(a);
-}
-
 void AnimationComponent::Play(std::string state)
 {
 	if (app->sceneManager->GetTimeScale() == 0.0f)
@@ -465,37 +371,6 @@ void AnimationComponent::Play(std::string state)
 			else
 				animQueue.push(currAnim);
 			break;
-		}
-	}
-}
-
-void AnimationComponent::GetAnimations()
-{
-	ImVec2 winPos = ImGui::GetWindowPos();
-	ImVec2 size = ImGui::GetWindowSize();
-	ImVec2 mouse = ImGui::GetIO().MousePos;
-	if (!(mouse.x < winPos.x + size.x && mouse.x > winPos.x &&
-		mouse.y < winPos.y + size.y && mouse.y > winPos.y))
-	{
-		if (ImGui::GetIO().MouseClicked[0]) showAnimMenu = false;
-	}
-
-	std::vector<std::string> files;
-	app->fs->DiscoverFiles("Library/Animations", files);
-	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-	{
-		if ((*it).find(".rganim") != std::string::npos)
-		{
-			app->fs->GetFilenameWithoutExtension(*it);
-			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-			uint uid = std::stoll(*it);
-			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->GetResource(uid);
-			if (ImGui::Selectable(res->GetName().c_str()))
-			{
-				res->Load();
-				//if (currAnim.use_count() - 1 == 1) currAnim->UnLoad();
-				SetAnimation(res);
-			}
 		}
 	}
 }
