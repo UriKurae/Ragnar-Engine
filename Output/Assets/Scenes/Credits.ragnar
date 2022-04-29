@@ -1,0 +1,688 @@
+{
+    "Game Objects": [
+        {
+            "UUID": 566911234,
+            "Parent UUID": 0,
+            "Name": "Credits",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": []
+        },
+        {
+            "UUID": 1340834673,
+            "Parent UUID": 566911234,
+            "Name": "Directional Light",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        50,
+                        50,
+                        50
+                    ],
+                    "Quaternion": [
+                        0.67389911413192749,
+                        -0.59794372320175171,
+                        0.41976538300514221,
+                        -0.11009232699871063
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.0000151395797729,
+                        1.0000368356704712,
+                        1.0000402927398682
+                    ]
+                },
+                {
+                    "Type": 8,
+                    "Active": true,
+                    "Light Type": 1,
+                    "Direction": [
+                        0.67802053689956665,
+                        -0.60160064697265625,
+                        0.42233258485794067
+                    ],
+                    "Ambient": [
+                        0.25,
+                        0.25,
+                        0.25
+                    ],
+                    "Diffuse": [
+                        0.75,
+                        0.75,
+                        0.75
+                    ],
+                    "Specular": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "Intensity": 0,
+                    "Shadows": true
+                }
+            ]
+        },
+        {
+            "UUID": 2128337088,
+            "Parent UUID": 566911234,
+            "Name": "cameraController",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -19.078588485717773,
+                        0,
+                        -7.2899551391601562
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 360238450,
+            "Parent UUID": 2128337088,
+            "Name": "Camera",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        55,
+                        -50
+                    ],
+                    "Quaternion": [
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1.4142135381698608,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Near Plane": 1,
+                    "Far Plane": 100,
+                    "Vertical Fov": 1.0789645910263062,
+                    "Horizontal Fov": 1.5707963705062866,
+                    "Camera Pos": [
+                        -19.078588485717773,
+                        55,
+                        -57.289955139160156
+                    ],
+                    "Type": 3,
+                    "Zoom": 0,
+                    "Zoom Min": 0,
+                    "Zoom Max": 0,
+                    "Zoom Speed": 0,
+                    "Free Movement": true,
+                    "Default Target Pos": [
+                        -19.078588485717773,
+                        0,
+                        -7.2899551391601562
+                    ],
+                    "Movement Speed": 0.5,
+                    "Rotation Speed": 0.5,
+                    "Radius": 20,
+                    "Horizontal Angle": 160.39971923828125,
+                    "Shake Strength": 0.60000002384185791,
+                    "Shake Duration": 1,
+                    "Shake Smooth": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1657689093,
+            "Parent UUID": 566911234,
+            "Name": "Background",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/black.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "Credits",
+                    "pointer": 415246424,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 597052281,
+            "Parent UUID": 566911234,
+            "Name": "ButtonMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -526.5,
+                        -388,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.54333335161209106,
+                        0.085000000894069672,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 326,
+                    "buttonHeight": 51,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Main Menu",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -28.799999237060547,
+                    "textPositionY": -3.4000000953674316,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1756240318,
+            "Parent UUID": 566911234,
+            "Name": "Main Menu Image",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -534.5,
+                        -388,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.54583334922790527,
+                        0.090000003576278687,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 327.5,
+                    "buttonHeight": 54,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1913840108,
+            "Parent UUID": 566911234,
+            "Name": "AudioWinMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/AudioWinMenu.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 5,
+                    "Volume": 50,
+                    "Pitch": 0,
+                    "Mute": false,
+                    "AudioClips": [
+                        {
+                            "0": "UIHOVER"
+                        },
+                        {
+                            "1": "UISELECT"
+                        }
+                    ]
+                },
+                {
+                    "Type": 6,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 124315567,
+            "Parent UUID": 566911234,
+            "Name": "Tiles List",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "PRODUCTION\n\n\n\n\n      DESIGN\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPROGRAMMING\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    WRITING\n\n\n\n\n\n\n\n\n\n         ART\n\n\n\n\n\n\n\n\n\n\n\n\n\n       AUDIO\n\n\n\n\n\n\n\n       VOICES\n\n\n\n\n\n\n",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.85000002384185791,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/CreditsTitles.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 767415075,
+            "Parent UUID": 566911234,
+            "Name": "Names List",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Denis Deconinck\n\nIsmael Tejada\n\n\n\n\n\n\n\nIsmael Tejada\n\nPol Vazquez\nMax Llovera\nMarc Ruiz\n\n\nAdrian Aroca\nPol Vazquez\n\n\nEnric Morales\nIsmael Tejada\n\n\nPau Motta\nAlbert Pou\n\n\nIsmael Tejada\nAdrian Aroca\nMax Llovera\nAlbert Pou\n\n\nIsmael Tejada\nMarc Pavón\nIsaac Colomer\nPol Vazquez\n\n\nIsmael Tejada\nAdrian Aroca\nAlbert Pou\nMax Llovera\nMarc Ruiz\n\n\n\n\n\n\n\n\n\n\nAlejandro Moreno\n\nOriol Bernal\nLucas Pérez\n\n\n\n\n\n\nAlejandro Moreno\nRaul Cano\n\n\nMagdalena Ostrowska\nCarlos Megia\n\n\nCarlos Megia\nMario Hernandez\n\n\nOriol Bernal\nLucas Perez\n\n\nHimar Bravo\n\nDenis Deconinck\nIsaac Digon\n\n\nUnai Diaz\nOscar Canales\n\n\nArnau Bonada\nDavid Gonzalez\n\n\nRaul Cano\nMario Hernandez\n\n\n\n\n\n\nIgnasi Pardo\nOriol Valverde\n\n\nIgnasi Pardo\nOriol Valverde\nIsaac Digon\n\n\nOriol Bernal\nLucas Perez\n\n\nPersona\n\n\n\n\n\n\n\nEnric Morales\nMarc Ruiz\nIsmael Tejada\n\n\nEnric Morales\n\nEnric Morales\n\nIsmael Tejada\n\n\n\n\n\n\n\nCarles Garriga\n\nPol Pallares\nCarles Garriga\n\n\nMaria Garrigoles\n\nDavid Lira\nOscar Royo\n\n\nMaria Garrigoles\n\nAlex Gesti\n\nMarc Ramos\n\n\n\n\n\n\n\nDavid Carcelen\n\nPol Pallares\n\nArnau Ustrell\nAlbert Pou\n\n\n\n\n\n\n\nDenis Deconinck\nIsmael Tejada\n\n\n",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/CreditsNames.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 707615095,
+            "Parent UUID": 566911234,
+            "Name": "Jobs List",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/white.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Producer\n\nProduction Assistant\n\n\n\n\n\n\n\nDesign Director\n\nCharacter Design\n\n\n\n\nBoss Design\n\n\n\nWorldbuilding\n\n\n\nUI \/ HUD\n\n\n\nFeedback Design\n\n\n\n\n\nLevel Design\n\n\n\n\n\nGameplay Design\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTechnical Director\n\nOriginal Game Engine\n\n\n\n\n\n\n\nPhysics\n\n\n\nParticles\n\n\n\nDialogues\n\n\n\nAnimations\n\n\n\nInput\n\nCamera\n\n\n\nUI\n\n\n\nScripting\n\n\n\nNavMesh\n\n\n\n\n\n\n\nEnemies\n\n\n\nCharacters\n\n\n\n\nBoss\n\n\n\nVisual Feedback\n\n\n\n\n\n\n\nNarrative\n\n\n\n\nDialogues\n\nEnglish Translation\n\nWriting Supervisor\n\n\n\n\n\n\n\nArt Director\n\nUI\/HUD\n\n\n\nConcept Art\n\nModeler\n\n\n\nTexturizer\n\nAnimator\n\nEnvironment\n\n\n\n\n\n\n\nComposer\n\nSFX\n\nSound Design\n\n\n\n\n\n\n\n\nCasting\n\n\n\n",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/CreditsJobs.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 224886808,
+            "Parent UUID": 566911234,
+            "Name": "UPC Logo",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.81999999284744263,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 492,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/cropped-logo-hack-CITM.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 303404008,
+            "Parent UUID": 566911234,
+            "Name": "Ragnar Logo",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        36.099998474121094
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1256,
+                    "lastButtonHeight": 752,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                  "Type": 2,
+                  "Diffuse Path": "Assets\/Resources\/UI\/logo_1.png",
+                  "Normal Map Path": "Assets\/Resources\/white.png",
+                  "Active": true,
+                  "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1
+                }
+            ]
+        }
+    ]
+}

@@ -1,23 +1,24 @@
 #pragma once
-
 #include "EngineTimer.h"
-#include "Module.h"
-
 #include <list>
-#include <string>
-
 #include "JsonParsing.h"
 
+
+class Module;
 class ModuleWindow;
 class ModuleInput;
-class ModuleScene;
+class ModuleSceneManager;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleEditor;
 class FileSystem;
+class MonoManager;
+class Physics3D;
+class ModuleNavMesh;
+class ModuleUI;
 
 #define CONFIG_FILENAME	"config.json"
-#define APPLICATION_NAME "Ragnar Engine"
+#define APPLICATION_NAME "Dune: Fremen's Rising"
 #define ORGANIZATION_NAME "Yggdrasil Studios"
 
 class Application
@@ -29,6 +30,8 @@ public:
 	bool Init();
 	bool Update();
 	bool CleanUp();
+
+	bool StringCmp(const char* str1, const char* str2);
 
 	void RequestBrowser(const char* path);
 	void LogConsole(const char* string);
@@ -54,13 +57,17 @@ private:
 	void LoadConfig();
 
 public:
-	ModuleWindow* window;
-	ModuleInput* input;
-	ModuleRenderer3D* renderer3D;
-	ModuleCamera3D* camera;
-	ModuleEditor* editor;
-	ModuleScene* scene;
-	FileSystem* fs;
+	ModuleWindow* window = nullptr;
+	Physics3D* physics = nullptr;
+	ModuleInput* input = nullptr;
+	ModuleRenderer3D* renderer3D = nullptr;
+	ModuleCamera3D* camera = nullptr;
+	ModuleEditor* editor = nullptr;
+	ModuleSceneManager* sceneManager = nullptr;
+	FileSystem* fs = nullptr;
+	MonoManager* moduleMono = nullptr;
+	ModuleUI* userInterface = nullptr;
+	ModuleNavMesh* navMesh = nullptr;
 
 	JsonParsing jsonFile;
 

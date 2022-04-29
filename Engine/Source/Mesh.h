@@ -1,14 +1,14 @@
 #pragma once
-
 #include "Resource.h"
-
-#include <vector>
-#include "MathGeoLib/src/Math/float3.h"
-#include "MathGeoLib/src/Math/float2.h"
-
 #include "VertexBuffer.h"
-#include "IndexBuffer.h"
 
+#include <map>
+
+#include "Bone.h"
+#include "Shader.h"
+
+class IndexBuffer;
+class VertexArray;
 struct ModelParameters;
 
 class Mesh : public Resource
@@ -27,21 +27,27 @@ public:
 
 	inline const char* GetPath() const { return path.c_str(); }
 	inline const int& GetVerticesSize() const { return vertices.size(); }
-	inline const float3* GetVerticesData() const { return vertices.data(); }
-	inline const std::vector<float3>& GetVerticesVector() const { return vertices; }
+	inline const Vertex* GetVerticesData() const { return vertices.data(); }
+	const std::vector<float3> GetPositions();
+	inline const std::vector<Vertex>& GetVerticesVector() const { return vertices; }
 	inline const int& GetIndicesSize() const { return indices.size(); }
 	inline const std::vector<unsigned int>& GetIndicesVector() const { return indices; }
-
+	inline const std::map<std::string, BoneInfo>& GetBoneMap() { return bones; }
 	void Reimport(ModelParameters& data);
-private:
-	std::vector<float3> vertices;
-	std::vector<unsigned int> indices;
-	std::vector<float3> normals;
-	std::vector<float2> texCoords;
 
+private:
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+
+	VertexArray* vao;
 	VertexBuffer* vbo;
 	IndexBuffer* ebo;
-	unsigned int tbo;
+
+	// Bones
+	std::map<std::string, BoneInfo> bones;
+	unsigned int numBones;
+
+	std::vector<unsigned int> bonesUid;
 
 	std::string path;
 };

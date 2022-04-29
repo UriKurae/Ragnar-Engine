@@ -1,7 +1,5 @@
 #include "EngineTimer.h"
-
-#include "SDL\include\SDL.h"
-
+#include "SDL_timer.h"
 
 EngineTimer::EngineTimer() : engineTimer(0.0f), engineStarted(false), deltaTime(0.0f), frameCounter(0), timer(0.0f), lastFrameMs(0.0f), cappedMs(0.0f)
 {
@@ -24,7 +22,8 @@ void EngineTimer::FinishUpdate()
 {
 	lastFrameMs = GetTime();
 
-	if ((cappedMs > 0) && (lastFrameMs < cappedMs)) SDL_Delay(cappedMs - lastFrameMs);
+	if ((cappedMs > 0) && (lastFrameMs < cappedMs))
+		SDL_Delay(cappedMs - lastFrameMs);
 }
 
 int EngineTimer::GetEngineTimeStartup() const

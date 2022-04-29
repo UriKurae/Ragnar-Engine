@@ -1,8 +1,8 @@
+#include "ModuleWindow.h"
 #include "Application.h"
 #include "Globals.h"
 
-#include "ModuleWindow.h"
-
+#include "SDL.h"
 #include "Profiling.h"
 
 ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
@@ -51,12 +51,12 @@ bool ModuleWindow::Init(JsonParsing& node)
 		borderless = node.GetJsonBool("borderless");
 		
 		//Use OpenGL 3.1
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
@@ -118,7 +118,7 @@ bool ModuleWindow::CleanUp()
 	return true;
 }
 
-bool ModuleWindow::SaveConfig(JsonParsing& node) const
+bool ModuleWindow::SaveConfig(JsonParsing& node)
 {
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "width", width);
 	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "height", height);
@@ -143,7 +143,7 @@ bool ModuleWindow::LoadConfig(JsonParsing& node)
 	borderless = node.GetJsonBool("borderless");
 
 	if (fullscreen) SetFullscreen();
-	else if (fullscreenDesktop) SetFullscreenDesktop();
+	else if (fullscreenDesktop) SetFullscreenDesktop(fullscreenDesktop);
 	if (borderless) SetBorderless();
 	
 	SetWindowSize();
@@ -164,9 +164,9 @@ void ModuleWindow::SetFullscreen() const
 		SDL_SetWindowFullscreen(window, 0);
 }
 
-void ModuleWindow::SetFullscreenDesktop() const
+void ModuleWindow::SetFullscreenDesktop(bool newState) const
 {
-	if (fullscreenDesktop) 
+	if (newState)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	else 
 		SDL_SetWindowFullscreen(window, 0);

@@ -1,15 +1,13 @@
 #include "AboutMenu.h"
 
+#include "assimp/version.h"
+#include "PhysFS/include/physfs.h"
 #include <SDL_syswm.h>
 #include <GL\glew.h>
 
-#include "assimp/version.h"
-#include "DevIL/include/IL/il.h"
-#include "PhysFS/include/physfs.h"
-
 #include "Profiling.h"
 
-AboutMenu::AboutMenu() : Menu(false)
+AboutMenu::AboutMenu() : Menu(false, "About")
 {
 }
 
@@ -19,6 +17,8 @@ AboutMenu::~AboutMenu()
 
 bool AboutMenu::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("About Menu Update");
+
 	if (ImGui::Begin("About Ragnar Engine", &active))
 	{
 		ImGui::TextWrapped("Ragnar Engine v0.3");

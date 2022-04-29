@@ -1,29 +1,21 @@
+#include "Application.h"
+#include "FileSystem.h"
 #include "AudioManager.h"
-#include "TransformComponent.h"
-#include "ListenerComponent.h"
-
 #include "Globals.h"
 
-#include <AK/SoundEngine/Common/AkMemoryMgr.h>
+#include "TransformComponent.h"
+#include "AudioReverbZoneComponent.h"
+#include "AudioSourceComponent.h"
+
 #include <AK/SoundEngine/Common/AkModule.h>
-
-#include <AK/SoundEngine/Common/AkStreamMgrModule.h>
-#include <AK/Tools/Common/AkPlatformFuncs.h>  
-
-#include <AK/SoundEngine/Common/AkSoundEngine.h>
-
 #include <AK/MusicEngine/Common/AkMusicEngine.h>
 #include <AK/SpatialAudio/Common/AkSpatialAudio.h>
-
-#include <AK/SoundEngine/Common/IAkPlugin.h>
-#include <AK/Plugin/AkRoomVerbFXFactory.h>
 
 #ifndef AK_OPTIMIZED
 #include <AK/Comm/AkCommunication.h>
 #endif
 
 #include <fstream>
-
 #include "Profiling.h"
 
 AudioManager* AudioManager::instance = nullptr;
@@ -136,8 +128,15 @@ bool AudioManager::Init()
 
 #endif
 
+#ifdef DIST
+	lowLevelIO.SetBasePath(AKTEXT("Library/Wwise/"));
+#else
 	lowLevelIO.SetBasePath(AKTEXT("Assets/Wwise/"));
-
+	if (!app->fs->Exists("Library/Wwise"))
+	{
+		// Copy recursively the folder to library
+	}
+#endif
 	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
 
 	ReadIDs();
@@ -204,7 +203,7 @@ void AudioManager::PlayAllAudioSources()
 {
 	for (int i = 0; i < audioSources.size(); ++i)
 	{
-		audioSources[i]->PlayClipOnAwake();
+		audioSources[i]->PlayClipsOnAwake();
 	}
 }
 
@@ -302,7 +301,14 @@ AudioManager::AudioManager() : currentListenerPosition(nullptr)
 
 void AudioManager::ReadIDs()
 {
-	std::ifstream file("Assets/Wwise/Wwise_IDs.h");
+	const char* path = "";
+#ifdef DIST
+	path = "Library/Wwise/Wwise_IDs.h";
+#else
+	path = "Assets/Wwise/Wwise_IDs.h";
+#endif
+
+	std::ifstream file(path);
 	
 	std::string line;
 
@@ -376,5 +382,21 @@ void AudioManager::ReadIDs()
 				}
 			}
 		}
+	}
+}
+
+
+void AudioManager::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Wwise/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string assetsPath = "Assets/Wwise/";
+		assetsPath += (*it);
+		std::string libraryPath = AUDIO_FOLDER;
+		libraryPath += (*it);
+		CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
 	}
 }

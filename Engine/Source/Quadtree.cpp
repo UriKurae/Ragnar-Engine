@@ -1,15 +1,11 @@
 #include "Quadtree.h"
-
 #include "Globals.h"
+
 #include "GameObject.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-#include "glew/include/GL/glew.h"
-#include "CameraComponent.h"
-
-#include <stack>
-
+#include "Geometry/LineSegment.h"
 #include "Profiling.h"
 
 Quadtree::Quadtree() : root(nullptr)
@@ -45,7 +41,7 @@ void Quadtree::Insert(GameObject* go)
 void Quadtree::Remove(GameObject* go)
 {
 	std::stack<QuadtreeNode*> nodes;
-	nodes.push(root);
+	if (root) nodes.push(root);
 
 	while (!nodes.empty())
 	{
@@ -100,17 +96,16 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 	{
 		std::stack<QuadtreeNode*> nodes;
 
-		for (int i = 0; i < 4; ++i)
-		{
-			nodes.push(root->GetChild(i));
-		}
+		nodes.push(root);
 
 		while (!nodes.empty())
 		{
 			QuadtreeNode* node = nodes.top();
 			nodes.pop();
 
-			int intersect = frustum->ContainsAaBox(node->GetBox());
+			int intersect = 0;
+			if (node)
+				intersect = frustum->ContainsAaBox(node->GetBox());
 			if (intersect == 1 || intersect == 2)
 			{
 				for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
@@ -129,7 +124,31 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 	}
 }
 
-void Quadtree::CollectGo(std::vector<GameObject*>& gos)
+void Quadtree::CollectGo(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes)
+{
+	while (!nodes.empty())
+	{
+		QuadtreeNode* node = nodes.top();
+		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+			gos.insert(*it);
+
+		nodes.pop();
+	}
+}
+
+void Quadtree::CollectGoOnlyStatic(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes)
+{
+	while (!nodes.empty())
+	{
+		QuadtreeNode* node = nodes.top();
+		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+			if((*it)->staticObj) gos.insert(*it);
+
+		nodes.pop();
+	}
+}
+
+void Quadtree::CollectNodes(std::stack<QuadtreeNode*>& nodes, LineSegment ray)
 {
 	std::stack<QuadtreeNode*> stack;
 	stack.push(root);
@@ -137,8 +156,8 @@ void Quadtree::CollectGo(std::vector<GameObject*>& gos)
 	while (!stack.empty())
 	{
 		QuadtreeNode* node = stack.top();
-		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
-			gos.push_back(*it);
+		if (ray.Intersects(node->GetBox()))
+			nodes.push(node);
 
 		stack.pop();
 
@@ -286,7 +305,7 @@ void QuadtreeNode::DebugDraw()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	ebo->Bind();
 
-	glDrawElements(GL_LINES, ebo->GetSize(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_LINES, ebo->GetCount(), GL_UNSIGNED_INT, NULL);
 
 	vbo->Unbind();
 	ebo->Unbind();

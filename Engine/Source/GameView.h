@@ -1,8 +1,8 @@
 #pragma once
+#include "Math/float2.h"
+#include "Math/float4.h"
 
-#include "Framebuffer.h"
-#include "MathGeoLib/src/Math/float2.h"
-#include "MathGeoLib/src/Math/float4.h"
+class Framebuffer;
 
 class GameView
 {
@@ -13,8 +13,10 @@ public:
 
 	void Draw(Framebuffer* framebuffer);
 
-	inline float4 GetBounds() { return bounds; }
-	inline const bool GetState() const { return selected; }
+	float4 GetBounds();
+	inline const bool GetState() const { return selected; }	
+
+	inline bool IsFocused() { return isFocused; }
 
 private:
 	float2 sizeViewport;
@@ -22,4 +24,5 @@ private:
 	bool active;
 
 	bool selected;
+	bool isFocused;
 };
