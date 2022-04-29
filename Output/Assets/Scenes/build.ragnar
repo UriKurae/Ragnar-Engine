@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 148264240,
+                    "pointer": 160972216,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1393,20 +1393,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        60,
+                        -41.462345123291016,
                         0,
-                        4.0644712448120117
+                        -47.661201477050781
                     ],
                     "Quaternion": [
                         0,
-                        0.97969341278076172,
+                        0.40728667378425598,
                         0,
-                        -0.20050148665904999
+                        -0.91330039501190186
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        -0.40373954176902771,
-                        -3.1415927410125732
+                        -0,
+                        -0.83896243572235107,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -1458,9 +1458,9 @@
                     "Vertical Fov": 0.48647212982177734,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        79.643516540527344,
+                        -4.2638626098632812,
                         55,
-                        50.045597076416016
+                        -81.073837280273438
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1469,14 +1469,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        60,
+                        -41.462345123291016,
                         0,
-                        4.0644712448120117
+                        -47.661201477050781
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 203.132568359375,
+                    "Horizontal Angle": 311.93099975585938,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1541,73 +1541,6 @@
                             "2": "UISELECT"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "UUID": 892262844,
-            "Parent UUID": 417171234,
-            "Name": "WinCondition",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        48.440231323242188,
-                        2.9792723655700684,
-                        -35.193592071533203
-                    ],
-                    "Quaternion": [
-                        0,
-                        -0.031966112554073334,
-                        0,
-                        0.9994889497756958
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0.30368727445602417,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        3.7000000476837158,
-                        5.5,
-                        7.6999998092651367
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": true,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -6243,6 +6176,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_03.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6293,6 +6250,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_08.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6343,6 +6324,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_09.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6393,6 +6398,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_02.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6443,6 +6472,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_11.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6493,6 +6546,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_04.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6543,6 +6620,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_05.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6593,6 +6694,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_07.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6643,6 +6768,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_01.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6693,6 +6842,30 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_06.fbx",
                     "Active": false
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 6,
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": false,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6735,7 +6908,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 376936408,
+                    "pointer": 324175488,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7037,7 +7210,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 376935592,
+                    "pointer": 324182288,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8927,15 +9100,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        47.863616943359375,
-                        2.9792454242706299,
-                        -36.219013214111328
+                        57.001476287841797,
+                        2.9792451858520508,
+                        -34.180351257324219
                     ],
                     "Quaternion": [
                         0,
-                        -0.014711921103298664,
+                        0.014974283054471016,
                         0,
-                        0.99989181756973267
+                        0.99988788366317749
                     ],
                     "RotationEditor": [
                         0,
@@ -8943,9 +9116,9 @@
                         0
                     ],
                     "Scale": [
-                        0.99999922513961792,
+                        0.99999171495437622,
                         1,
-                        0.99999922513961792
+                        0.99999171495437622
                     ]
                 },
                 {
@@ -8954,7 +9127,7 @@
                     "Size": [
                         7,
                         5.5999999046325684,
-                        17.600000381469727
+                        7.9000000953674316
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -8980,7 +9153,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 388163968,
+                    "pointer": 368810944,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9055,7 +9228,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 388160160,
+                    "pointer": 368809720,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0

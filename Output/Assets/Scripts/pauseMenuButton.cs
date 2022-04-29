@@ -1218,12 +1218,12 @@ public class pauseMenuButton : RagnarComponent
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_crysknife.png");
 
-					CharFocusedText.GetComponent<UIText>().text = "Kill an enemy\nat a melee\nrange. Drones\ncan’t be killed.";
+					CharFocusedText.GetComponent<UIText>().text = "Kill an enemy\nat a melee\nrange. Drones\ncanï¿½t be killed.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_crysknife.png");
-					CharFocusedText.GetComponent<UIText>().text = "Kill an enemy\nat a melee\nrange. Drones\ncan’t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Kill an enemy\nat a melee\nrange. Drones\ncanï¿½t be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
@@ -1279,7 +1279,7 @@ public class pauseMenuButton : RagnarComponent
 				if (selectedPlayer.name == "Player")//paul
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_voice.png");
-					CharFocusedText.GetComponent<UIText>().text = "Mind control\nan enemy.\nDrones can’t\nbe affected.";
+					CharFocusedText.GetComponent<UIText>().text = "Mind control\nan enemy.\nDrones canï¿½t\nbe affected.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
@@ -1289,7 +1289,7 @@ public class pauseMenuButton : RagnarComponent
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_stunner.png");
-					CharFocusedText.GetComponent<UIText>().text = "Fire weapon\nthat can\npierce\nenemie’s\nshields.";
+					CharFocusedText.GetComponent<UIText>().text = "Fire weapon\nthat can\npierce\nenemieï¿½s\nshields.";
 				}
 
 				break;
@@ -1341,12 +1341,12 @@ public class pauseMenuButton : RagnarComponent
 				if (selectedPlayer.name == "Player")//paul
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_throwing_knife.png");
-					CharFocusedText.GetComponent<UIText>().text = "Throw a knife\nto an enemy\nwithin range.\nIt doesn’t\naffect\nshielded\nenemies.";
+					CharFocusedText.GetComponent<UIText>().text = "Throw a knife\nto an enemy\nwithin range.\nIt doesnï¿½t\naffect\nshielded\nenemies.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_hunter_seeker.png");
-					CharFocusedText.GetComponent<UIText>().text = "Send a little\nflying drone\nto kill an\nenemy. Drones\ncan’t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Send a little\nflying drone\nto kill an\nenemy. Drones\ncanï¿½t be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
@@ -1407,7 +1407,7 @@ public class pauseMenuButton : RagnarComponent
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
 					AbilityImageApmliate.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_spice_grenade.png");
-					CharFocusedText.GetComponent<UIText>().text = "Throw a grenade\nthat stuns\nenemies in an\narea. It\ndoesn’t affect\nshielded enemies\nnor drones.";
+					CharFocusedText.GetComponent<UIText>().text = "Throw a grenade\nthat stuns\nenemies in an\narea. It\ndoesnï¿½t affect\nshielded enemies\nnor drones.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
