@@ -41,6 +41,11 @@ public class BasicEnemy : RagnarComponent
     bool stunned = false;
     float stunnedTimer = -1f;
 
+    // Cone
+    public bool coneRotate = true;
+    private bool toRight = true;
+    private float angleOffset = 0;
+
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -220,12 +225,39 @@ public class BasicEnemy : RagnarComponent
     {
         Vector3 enemyPos = gameObject.transform.globalPosition;
         Vector3 enemyForward = gameObject.transform.forward;
-        Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 8, players, players.Length, colliders, colliders.Length);
+        if (coneRotate) enemyForward = RotateVector(enemyForward, 80, 2);
+
+        index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 10, players, players.Length, colliders, colliders.Length);
         if (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead) return false;
         return (index == -1) ? false : true;
     }
+    private Vector3 RotateVector(Vector3 vec, int angles, int time)
+    {
+        float w = (angles / time) / (1 / Time.deltaTime); // Angular Velocity in frames
+
+        if (toRight)
+        {
+            angleOffset += w;
+            Vector3 newVec = Transform.RotateY(vec, angleOffset);
+            if (Transform.GetAngleBetween(vec, newVec) > angles * 0.5)
+                toRight = false;
+
+            vec = newVec;
+        }
+        else
+        {
+            angleOffset -= w;
+            Vector3 newVec = Transform.RotateY(vec, angleOffset);
+            if (Transform.GetAngleBetween(vec, newVec) > angles * 0.5)
+                toRight = true;
+
+            vec = newVec;
+        }
+
+        return vec;
+    }
+
     public void SetControled(bool flag)
     {
         controlled = flag;
