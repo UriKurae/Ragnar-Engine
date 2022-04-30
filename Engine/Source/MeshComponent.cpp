@@ -62,10 +62,10 @@ void MeshComponent::DrawOutline(CameraComponent* gameCam, const float3& color)
 	float cmMultiplier = 0;
 #ifdef DIST
 	scaleFactor = 1.0f;
-	cmMultiplier = 0.05f;
+	cmMultiplier = 0.0001f;
 #else
 	scaleFactor = 1.05f;
-	cmMultiplier = 0.0001f;
+	cmMultiplier = 0.05;
 #endif
 
 	float4x4 model = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * cmMultiplier, transform->GetRotation(), transform->GetScale() * scaleFactor);
