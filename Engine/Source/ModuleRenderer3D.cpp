@@ -287,7 +287,8 @@ bool ModuleRenderer3D::PostUpdate()
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			if ((*it) != objSelected)(*it)->Draw(nullptr);
+			if ((*it) != objSelected)
+				(*it)->Draw(nullptr);
 		}
 	}
 	else app->sceneManager->GetCurrentScene()->Draw();
@@ -329,10 +330,16 @@ bool ModuleRenderer3D::PostUpdate()
 #endif
 	glDrawBuffers(2, drawBuffers);
 
+	std::vector<GameObject*> gos;
+	gos.resize(gosToDrawOutline.size());
+	for (int i = 0; i < gosToDrawOutline.size(); ++i)
+		gos.push_back(gosToDrawOutline[i].first);
+
 	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw(cam);
+		if (std::find(gos.begin(), gos.end(), *it) == gos.end())
+			(*it)->Draw(cam);
 	}
 
 	for (auto& p : gosToDrawOutline)
