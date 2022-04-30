@@ -58,8 +58,17 @@ void MeshComponent::DrawOutline(CameraComponent* gameCam, const float3& color)
 		return;
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
+	float scaleFactor = 0;
+	float cmMultiplier = 0;
+#ifdef DIST
+	scaleFactor = 1.0f;
+	cmMultiplier = 0.05f;
+#else
+	scaleFactor = 1.05f;
+	cmMultiplier = 0.0001f;
+#endif
 
-	float4x4 model = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * 0.05f, transform->GetRotation(), transform->GetScale() * 1.05f);
+	float4x4 model = float4x4::FromTRS(transform->GetGlobalTransform().Col3(3) - owner->GetOffsetCM() * cmMultiplier, transform->GetRotation(), transform->GetScale() * scaleFactor);
 	float4x4 view = float4x4::identity;
 	float4x4 projection = float4x4::identity;
 	if (gameCam)
