@@ -84,8 +84,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 		DEBUG_LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-		ilutRenderer(ILUT_OPENGL);
-
 		//Use Vsync
 		vsync = node.GetJsonBool("vsync");
 		if(SDL_GL_SetSwapInterval(vsync) < 0)
