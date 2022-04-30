@@ -156,11 +156,11 @@ void SetScale(MonoObject* go, MonoObject* scale)
 		tr->UpdateTransform();
 	}
 }
-float GetAngleBetween(MonoObject* vector1, MonoObject* vector2)
+float GetAngleBetween(MonoObject* vector1, MonoObject* vector2) // In degrees
 {
 	float3 vec1 = app->moduleMono->UnboxVector(vector1);
 	float3 vec2 = app->moduleMono->UnboxVector(vector2);	
-	return vec1.AngleBetween(vec2);
+	return vec1.AngleBetween(vec2) * RADTODEG;
 }
 float GetDistanceBetween(MonoObject* vector1, MonoObject* vector2)
 {
@@ -168,7 +168,7 @@ float GetDistanceBetween(MonoObject* vector1, MonoObject* vector2)
 	float3 vec2 = app->moduleMono->UnboxVector(vector2);
 	return vec1.Distance(vec2);
 }
-MonoObject* RotateY(MonoObject* go, MonoObject* vector, int anglesDegrees)
+MonoObject* RotateY(MonoObject* vector, float anglesDegrees)
 {
 	float3 dirV = app->moduleMono->UnboxVector(vector);
 	return app->moduleMono->Float3ToCS(dirV * math::float3x3::RotateY(anglesDegrees * DEGTORAD));
