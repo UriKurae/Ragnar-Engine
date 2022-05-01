@@ -606,6 +606,12 @@ void NextScene()
 	app->sceneManager->NextScene();
 }
 
+void SaveScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->SaveScene(name);
+}
+
 void LoadScene(MonoString* string)
 {
 	char* name = mono_string_to_utf8(string);

@@ -304,6 +304,20 @@ void ModuleSceneManager::NextScene(const char* name)
 	}
 }
 
+void ModuleSceneManager::SaveScene(const char* name)
+{
+	DEBUG_LOG("Saving Scene");
+
+	if (currentScene->SaveScene(name))
+	{
+		DEBUG_LOG("Succesfully Saved %s", name);
+	}
+	else
+	{
+		DEBUG_LOG("Couldn't save the scene %s", name);
+	}
+}
+
 void ModuleSceneManager::Play()
 {
 #ifndef DIST
