@@ -8,6 +8,7 @@
 #include "Transform2DComponent.h"
 #include "TextComponent.h"
 #include "ImageComponent.h"
+#include "DropDownComponent.h"
 
 #include <metadata\object-forward.h>
 #include <metadata\object.h>
@@ -242,3 +243,10 @@ void SetImageAlpha(MonoObject* go, float newAlpha)
 	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
 	tr->SetAlpha(newAlpha);
 }
+
+const char* GetSelected(MonoObject* go)
+{
+	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
+	return tr->GetSelect().c_str();
+}
+

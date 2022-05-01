@@ -10,7 +10,33 @@
 #include "Transform2DComponent.h"
 #include"ResourceManager.h"
 #include "GL/glew.h"
-
+void Animation::Update(float dt) 
+{
+	
+	currentDt += dt;
+	for (int a = 0;a < images.size();a++) {
+		
+		if (animatonState == a && currentDt >= timeBetwen) {
+			currentDt =0;
+			if (images.size() == a+1) {
+				if(loop)
+					animatonState = 0;
+				else
+					animatonState = -1;
+			}
+			else {
+				animatonState++;
+			}
+		}
+	}
+	if (animatonState == -1) {
+		isPlayng = false;
+	}
+}
+MaterialComponent* Animation::Draw() 
+{
+	return images[animatonState];
+}
 ImageComponent::ImageComponent(GameObject* own)
 {
 	type = ComponentType::UI_IMAGE;
@@ -37,6 +63,10 @@ ImageComponent::~ImageComponent()
 
 bool ImageComponent::Update(float dt)
 {
+	for (int a = 0;a < animations.size();a++) {
+		if(animations[a]->isPlayng)
+			animations[a]->Update(dt);
+	}
 	return true;
 }
 void ImageComponent::SetActualColor(float Red, float Green, float Blue)
@@ -49,6 +79,11 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
+	for (int a = 0;a < animations.size();a++) {
+		if (animations[a]->isPlayng)
+			principal=animations[a]->Draw();
+	}
+
 	planeToDraw->DrawPlane2D(principal->GetTexture().get());
 
 	glColor4f(actualColor.r, actualColor.g, actualColor.b, actualColor.a);
@@ -73,10 +108,24 @@ void ImageComponent::UseTexture(int ID)
 }
 void ImageComponent::OnEditor()
 {
-	if (ImGui::CollapsingHeader("ButtonComponent"))
+	if (ImGui::CollapsingHeader("ImageComponent"))
 	{
 		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
-
+		if (ImGui::Button("create animation")) {
+			Animation* aux = new Animation();
+			animations.push_back(aux);
+		}
+		for (int b = 0;b < animations.size();b++) {
+			ImGui::Checkbox("isLoop", &animations[b]->loop);
+			ImGui::InputFloat("time Betwen (seconds)", &animations[b]->timeBetwen);
+			if (ImGui::Button("set image")) {
+				MaterialComponent* matAux = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
+				animations[b]->images.push_back(matAux);
+			}
+			for (int c = 0;c < animations[b]->images.size();c++) {
+				animations[b]->images[c]->OnEditor();
+			}
+		}
 		ComponentOptions(this);
 		ImGui::Separator();
 	}

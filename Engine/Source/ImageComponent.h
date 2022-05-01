@@ -6,6 +6,17 @@
 class MyPlane;
 class GameObject;
 class MaterialComponent;
+class Animation {
+public:
+	std::vector<MaterialComponent*> images;
+	bool isPlayng = false;
+	bool loop = false;
+	float currentDt = 0;
+	float timeBetwen = 0;
+	void Update(float dt);
+	MaterialComponent* Draw();
+	int animatonState = -1;
+};
 class ImageComponent : public Component
 {
 public:
@@ -33,6 +44,7 @@ public:
 private:
 	
 	std::vector<MaterialComponent*> materialList;
+	std::vector<Animation*> animations;
 	float alpha = 1.0f;
 	State state = State::NORMAL;
 	Color actualColor = white;
