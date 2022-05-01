@@ -95,6 +95,7 @@ public:
 
 	bool showAABB = false;
 	bool showOBB = false;
+	bool castShadows = true;
 private:
 
 	GameObject* parent;

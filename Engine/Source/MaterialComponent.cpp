@@ -82,6 +82,8 @@ void MaterialComponent::OnEditor()
 	if (ImGui::CollapsingHeader(ICON_FA_LAYER_GROUP" Material"))
 	{
 		Checkbox(this, "Active", active);
+		ImGui::Checkbox("Cast Shadows", &owner->castShadows);
+
 		ImGui::PushID(diff->GetUID());
 		if (diff != nullptr)
 		{
@@ -461,6 +463,7 @@ bool MaterialComponent::OnLoad(JsonParsing& node)
 	normalMap = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Normal Map Path"))));
 	active = node.GetJsonBool("Active");
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
+	owner->castShadows = node.GetJsonBool("Cast Shadows");
 
 	return true;
 }
@@ -474,6 +477,7 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Normal Map Path", normalMap->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Cast Shadows", owner->castShadows);
 	
 	node.SetValueToArray(array, file.GetRootValue());
 
@@ -488,7 +492,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	float4x4 model = owner->GetComponent<TransformComponent>()->GetGlobalTransform();
 	
-	if (app->renderer3D->genShadows)
+	if (owner->castShadows && app->renderer3D->genShadows)
 	{
 		glViewport(0, 0, 4096, 4096);
 		shadowShader->Bind();

@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 362170280,
+                    "pointer": 236092832,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -2240,9 +2240,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -81.704513549804688,
-                        -15.667804718017578,
-                        -39.428794860839844
+                        -192.58009338378906,
+                        -30.298473358154297,
+                        -86.941299438476562
                     ],
                     "Quaternion": [
                         0.67389911413192749,
@@ -2285,7 +2285,7 @@
                         0,
                         0
                     ],
-                    "Intensity": 11,
+                    "Intensity": 4,
                     "Shadows": true
                 }
             ]
@@ -2305,20 +2305,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        52.458148956298828,
+                        113.90290069580078,
                         0,
-                        87.265693664550781
+                        -138.20700073242188
                     ],
                     "Quaternion": [
                         0,
-                        0.98701333999633789,
+                        0.055036976933479309,
                         0,
-                        0.16063819825649261
+                        0.99848431348800659
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        0.32267442345619202,
-                        -3.1415927410125732
+                        -0,
+                        0.11012959480285645,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -2367,12 +2367,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 176,
-                    "Vertical Fov": 0.49297007918357849,
+                    "Vertical Fov": 0.48647212982177734,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        36.602527618408203,
+                        108.40740203857422,
                         55,
-                        134.68647766113281
+                        -187.9053955078125
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -2381,14 +2381,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        52.458148956298828,
+                        113.90290069580078,
                         0,
-                        87.265693664550781
+                        -138.20700073242188
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 161.51211547851562,
+                    "Horizontal Angle": 6.3099613189697266,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -2525,7 +2525,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2535,7 +2535,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_lose_background.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -2574,7 +2575,7 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2584,7 +2585,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -2623,7 +2625,7 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2633,28 +2635,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -2701,7 +2707,7 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2711,7 +2717,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -2750,7 +2757,7 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2760,28 +2767,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_title_box.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -2828,7 +2839,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2838,28 +2849,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -2906,7 +2921,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2916,7 +2931,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -2955,7 +2971,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2965,28 +2981,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -3033,7 +3053,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3043,7 +3063,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -3082,7 +3103,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3092,28 +3113,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_normal_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -3160,7 +3185,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3170,7 +3195,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_nextlevel_button_line.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -3209,7 +3235,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3219,14 +3245,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 14,
@@ -3266,7 +3294,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3276,14 +3304,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 14,
@@ -3323,7 +3353,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3333,14 +3363,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_checkbox_false.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 14,
@@ -3380,7 +3412,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3390,7 +3422,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 16,
@@ -3435,7 +3468,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3445,7 +3478,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 16,
@@ -3490,7 +3524,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3515,7 +3549,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3525,14 +3559,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 15,
@@ -3572,7 +3608,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3597,7 +3633,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3607,14 +3643,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 15,
@@ -3654,7 +3692,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3679,7 +3717,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3689,14 +3727,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 15,
@@ -3736,7 +3776,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3761,7 +3801,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3771,14 +3811,16 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 15,
@@ -3818,7 +3860,7 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3828,28 +3870,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 18,
@@ -4003,7 +4049,8 @@
                     "Diffuse Path": "Assets\/Resources\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4077,7 +4124,8 @@
                     "Diffuse Path": "Assets\/Resources\/prop_mediumrock_color.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4189,7 +4237,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4239,7 +4288,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4289,7 +4339,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4339,7 +4390,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4389,7 +4441,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4439,7 +4492,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4489,7 +4543,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4539,7 +4594,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4589,7 +4645,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4639,7 +4696,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4689,7 +4747,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4739,7 +4798,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4789,7 +4849,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4839,7 +4900,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4889,7 +4951,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4939,7 +5002,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -4989,7 +5053,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5039,7 +5104,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5089,7 +5155,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5139,7 +5206,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5189,7 +5257,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5239,7 +5308,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5289,7 +5359,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5339,7 +5410,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5389,7 +5461,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5439,7 +5512,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5489,7 +5563,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5539,7 +5614,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5589,7 +5665,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5639,7 +5716,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5689,7 +5767,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5739,7 +5818,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5789,7 +5869,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5839,7 +5920,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5889,7 +5971,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5939,7 +6022,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -5989,7 +6073,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6039,7 +6124,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6089,7 +6175,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6139,7 +6226,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6189,7 +6277,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6239,7 +6328,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6289,7 +6379,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6339,7 +6430,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6389,7 +6481,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6439,7 +6532,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6489,7 +6583,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6539,7 +6634,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6627,7 +6723,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6677,7 +6774,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6727,7 +6825,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6801,7 +6900,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6875,7 +6975,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -6949,7 +7050,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -7023,7 +7125,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -7097,7 +7200,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -7171,7 +7275,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -7245,7 +7350,8 @@
                     "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_albedo.png",
                     "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_normal.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": false
                 },
                 {
                     "Type": 1,
@@ -7325,7 +7431,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -7402,7 +7509,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 1,
@@ -7474,7 +7582,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 349488440,
+                    "pointer": 417483256,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7511,7 +7619,7 @@
                     ],
                     "buttonWidth": 914,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7521,7 +7629,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -7560,7 +7669,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7570,7 +7679,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 16,
@@ -7615,7 +7725,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7625,7 +7735,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 16,
@@ -7670,7 +7781,7 @@
                     ],
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7680,7 +7791,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_paul.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -7757,7 +7869,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7767,7 +7879,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -7776,7 +7889,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 349475656,
+                    "pointer": 431350584,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7813,7 +7926,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7823,28 +7936,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -7891,7 +8008,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7901,28 +8018,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -7969,7 +8090,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7979,28 +8100,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8047,7 +8172,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8057,7 +8182,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8096,7 +8222,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8106,7 +8232,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8145,7 +8272,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8155,7 +8282,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8194,7 +8322,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8204,28 +8332,32 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8272,7 +8404,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8282,7 +8414,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8359,7 +8492,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8369,7 +8502,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 16,
@@ -8414,7 +8548,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8424,7 +8558,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_stilgar_portrait.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8463,7 +8598,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8473,7 +8608,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_chani_portrait.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8512,7 +8648,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8522,7 +8658,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_paul_portrait.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -8561,7 +8698,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8571,28 +8708,32 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8639,7 +8780,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8649,28 +8790,32 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8717,7 +8862,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8727,28 +8872,32 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8795,7 +8944,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8805,28 +8954,32 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8873,7 +9026,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8883,28 +9036,32 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 12,
@@ -8951,7 +9108,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8961,7 +9118,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/PJ_small.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9000,7 +9158,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9010,7 +9168,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/PJ_small.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9049,7 +9208,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9059,7 +9218,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/PJ_small.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9098,7 +9258,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9108,7 +9268,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/Selected_PJ.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9147,7 +9308,7 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9157,7 +9318,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/UI_chra.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9196,7 +9358,7 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9206,7 +9368,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/UI_skill.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9245,7 +9408,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9255,7 +9418,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9294,7 +9458,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9304,7 +9468,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/Icons_Habs.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9343,7 +9508,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9353,7 +9518,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_hover_skills.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9392,7 +9558,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9402,7 +9568,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 16,
@@ -9447,7 +9614,7 @@
                     ],
                     "buttonWidth": 70,
                     "buttonHeight": 70,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9457,7 +9624,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9496,7 +9664,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9506,7 +9674,8 @@
                     "Diffuse Path": "Assets\/Resources\/white.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9545,7 +9714,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1294,
+                    "lastButtonWidth": 1312,
                     "lastButtonHeight": 786,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9555,7 +9724,8 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_ability_letters.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true
                 },
                 {
                     "Type": 13,
@@ -9669,7 +9839,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 341911128,
+                    "pointer": 487152888,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9744,7 +9914,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 341910448,
+                    "pointer": 487153704,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9819,7 +9989,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 341909768,
+                    "pointer": 487153024,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9894,7 +10064,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 341912760,
+                    "pointer": 487154792,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0

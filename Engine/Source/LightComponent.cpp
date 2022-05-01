@@ -51,10 +51,10 @@ bool ComponentLight::Update(float dt)
 			frustum.up = right.Cross(frustum.front).Normalized();
 			frustum.type = FrustumType::OrthographicFrustum;
 
-			frustum.orthographicHeight = 256;
-			frustum.orthographicWidth = 256;
+			frustum.orthographicHeight = 512;
+			frustum.orthographicWidth = 512;
 			frustum.nearPlaneDistance = 0.001;
-			frustum.farPlaneDistance = 10000;
+			frustum.farPlaneDistance = 500000;
 
 			frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 
