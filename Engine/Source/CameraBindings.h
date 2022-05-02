@@ -7,6 +7,7 @@
 #include "Math/float3x3.h"
 #include "Geometry/LineSegment.h"
 #include "Geometry/Triangle.h"
+#include "Geometry/Capsule.h"
 
 #include "ScriptBindings.h"
 #include <metadata\object-forward.h>
@@ -99,8 +100,14 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 		{
 			if (t.Intersects(players.at(j)->GetOOB()))
 			{
-				ret = j;
-				break;
+				vec bottomPoint = players.at(j)->GetComponent<TransformComponent>()->GetGlobalPosition();
+				vec topPoint = bottomPoint;
+				topPoint.y += 1;
+				if (t.Intersects(Capsule(bottomPoint, topPoint, 0.60f))) {
+					ret = j;
+					break;
+				}
+				
 			}
 		}		
 	}

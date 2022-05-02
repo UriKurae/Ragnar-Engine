@@ -20,7 +20,6 @@ public class EnemyManager : RagnarComponent
 
         for(int i = 0; i < enemyGOs.Length; i++)
         {
-
             enemyGOs[i].name = enemies[i].name;
             if (enemies[i].waypoints.Length != 0)
             {
