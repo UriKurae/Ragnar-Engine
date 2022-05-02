@@ -100,10 +100,10 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 		{
 			if (t.Intersects(players.at(j)->GetOOB()))
 			{
-				vec bottomPoint = players.at(i)->GetComponent<TransformComponent>()->GetGlobalPosition();
+				vec bottomPoint = players.at(j)->GetComponent<TransformComponent>()->GetGlobalPosition();
 				vec topPoint = bottomPoint;
 				topPoint.y += 1;
-				if (t.Intersects(Capsule(bottomPoint, topPoint, 2))) {
+				if (t.Intersects(Capsule(bottomPoint, topPoint, 0.60f))) {
 					ret = j;
 					break;
 				}
