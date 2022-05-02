@@ -386,6 +386,8 @@
     <ClInclude Include="Engine\Source\VertexArray.h" />
     <ClInclude Include="Engine\Source\VertexBuffer.h" />
     <ClInclude Include="Engine\Source\Viewport.h" />
+    <ClInclude Include="Quest.h" />
+    <ClInclude Include="QuestSystem.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -579,6 +581,8 @@
     <ClCompile Include="Engine\Source\VertexArray.cpp" />
     <ClCompile Include="Engine\Source\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Source\Viewport.cpp" />
+    <ClCompile Include="Quest.cpp" />
+    <ClCompile Include="QuestSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ragnar Engine.rc" />
