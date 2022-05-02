@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 160972216,
+                    "pointer": 343815704,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1393,20 +1393,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -41.462345123291016,
+                        -50.565643310546875,
                         0,
-                        -47.661201477050781
+                        88.622039794921875
                     ],
                     "Quaternion": [
                         0,
-                        0.40728667378425598,
+                        0.97944998741149902,
                         0,
-                        -0.91330039501190186
+                        0.20168723165988922
                     ],
                     "RotationEditor": [
-                        -0,
-                        -0.83896243572235107,
-                        -0
+                        -3.1415927410125732,
+                        0.40616050362586975,
+                        -3.1415927410125732
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -1432,14 +1432,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        55,
+                        55.000038146972656,
                         -50
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
+                        0.34202015399932861,
+                        1.9141694451718649e-08,
+                        -3.9643706095660036e-09,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1447,7 +1447,7 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142110347747803,
+                        1.4142109155654907,
                         1.0000002384185791,
                         1.0000004768371582
                     ]
@@ -1455,12 +1455,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.48647212982177734,
+                    "Vertical Fov": 0.47634795308113098,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -4.2638626098632812,
-                        55,
-                        -81.073837280273438
+                        -70.320419311523438,
+                        55.000038146972656,
+                        134.55546569824219
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1469,14 +1469,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -41.462345123291016,
+                        -50.565643310546875,
                         0,
-                        -47.661201477050781
+                        88.622039794921875
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 311.93099975585938,
+                    "Horizontal Angle": 156.72871398925781,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1857,7 +1857,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2197,
+                        2180,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1873,7 +1873,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1922,7 +1922,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1955,7 +1955,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1987,
+                        1970,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1971,7 +1971,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2033,7 +2033,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1978.5,
+                        1961.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2049,7 +2049,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2082,7 +2082,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2205.5,
+                        2188.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2098,7 +2098,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2160,7 +2160,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2004,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2176,7 +2176,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2238,7 +2238,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2004,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2254,7 +2254,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2287,7 +2287,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2004,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2303,7 +2303,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2365,7 +2365,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2004,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2381,7 +2381,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2414,7 +2414,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2004,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2430,7 +2430,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2492,7 +2492,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2004,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2508,7 +2508,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2541,7 +2541,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2093.5,
+                        2076.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2557,7 +2557,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2598,7 +2598,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2093.5,
+                        2076.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2614,7 +2614,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2655,7 +2655,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2093.5,
+                        2076.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2671,7 +2671,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2712,7 +2712,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2119,
+                        2102,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2728,7 +2728,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2741,7 +2741,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -2767,7 +2767,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2119,
+                        2102,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2783,7 +2783,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2796,7 +2796,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -2822,7 +2822,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2838,7 +2838,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2847,7 +2847,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2863,7 +2863,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2904,7 +2904,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2920,7 +2920,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2929,7 +2929,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2945,7 +2945,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2986,7 +2986,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3002,7 +3002,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3011,7 +3011,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3027,7 +3027,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3068,7 +3068,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3084,7 +3084,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3093,7 +3093,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2188.5,
+                        2171.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3109,7 +3109,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3150,7 +3150,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2197,
+                        2180,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3166,7 +3166,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6092,784 +6092,6 @@
             ]
         },
         {
-            "UUID": 984849919,
-            "Parent UUID": 1179485366,
-            "Name": "Colliders",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1461127180,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_03",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        20.913400650024414,
-                        2.9912068843841553,
-                        0.89652746915817261
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.043619383126497269,
-                        0,
-                        0.99904823303222656
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_03.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 116582526,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_08",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -38.495285034179688,
-                        3.7274575233459473,
-                        67.780899047851562
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.38268345594406128,
-                        0,
-                        0.92387956380844116
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        1,
-                        0.99999994039535522
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_08.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 857558829,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_09",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -19.344076156616211,
-                        3.7496435642242432,
-                        52.343784332275391
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.97629600763320923,
-                        0,
-                        0.21643964946269989
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_09.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1608142830,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_02",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -4.0126543045043945,
-                        7.248779296875,
-                        19.380334854125977
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_02.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 193698692,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_11",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        30.298772811889648,
-                        2.6957864761352539,
-                        -15.344331741333008
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.087155751883983612,
-                        0,
-                        0.99619472026824951
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        1,
-                        0.99999994039535522
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_11.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 937459835,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_04",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        6.6051368713378906,
-                        4.7920384407043457,
-                        -29.525659561157227
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.043619383126497269,
-                        0,
-                        0.99904823303222656
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_04.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1690202087,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_05",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -9.6115169525146484,
-                        3.8196427822113037,
-                        4.3699531555175781
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.25881904363632202,
-                        0,
-                        0.96592581272125244
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_05.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 260650192,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_07",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -36.692363739013672,
-                        3.0479781627655029,
-                        48.412681579589844
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.38268345594406128,
-                        0,
-                        0.92387956380844116
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        0.99999994039535522,
-                        1,
-                        0.99999994039535522
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_07.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 976075588,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_01",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        14.442985534667969,
-                        5.5022258758544922,
-                        45.295417785644531
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_01.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1717260754,
-            "Parent UUID": 984849919,
-            "Name": "pasted__Collider_06",
-            "Active": true,
-            "Static": false,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -34.006736755371094,
-                        4.0841012001037598,
-                        28.382284164428711
-                    ],
-                    "Quaternion": [
-                        0,
-                        0.6755901575088501,
-                        0,
-                        0.73727738857269287
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__pasted__Collider_06.fbx",
-                    "Active": false
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
             "UUID": 2068571281,
             "Parent UUID": 417171234,
             "Name": "Dialogue",
@@ -6908,7 +6130,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 324175488,
+                    "pointer": 340731816,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6930,7 +6152,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        208,
+                        191,
                         1
                     ],
                     "Scale": [
@@ -6946,7 +6168,7 @@
                     "buttonWidth": 914,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6979,7 +6201,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        85,
+                        68,
                         5
                     ],
                     "Scale": [
@@ -6995,7 +6217,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7034,7 +6256,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        109,
+                        92,
                         15
                     ],
                     "Scale": [
@@ -7050,7 +6272,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7089,7 +6311,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        209.5,
+                        192.5,
                         15
                     ],
                     "Scale": [
@@ -7105,7 +6327,7 @@
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7176,7 +6398,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7192,7 +6414,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7210,7 +6432,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 324182288,
+                    "pointer": 376445368,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7232,7 +6454,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1859.5,
+                        1842.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7248,7 +6470,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7310,7 +6532,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1859.5,
+                        1842.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7326,7 +6548,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7388,7 +6610,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1859.5,
+                        1842.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7404,7 +6626,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7466,7 +6688,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7482,7 +6704,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7515,7 +6737,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7531,7 +6753,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7564,7 +6786,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7580,7 +6802,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7613,7 +6835,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7629,7 +6851,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7691,7 +6913,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7707,7 +6929,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7778,7 +7000,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7794,7 +7016,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7833,7 +7055,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7849,7 +7071,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7882,7 +7104,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7898,7 +7120,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7931,7 +7153,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7947,7 +7169,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7980,7 +7202,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7996,7 +7218,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8058,7 +7280,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8074,7 +7296,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8136,7 +7358,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8152,7 +7374,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8214,7 +7436,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8230,7 +7452,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8292,7 +7514,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1998.5,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8308,7 +7530,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8370,7 +7592,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8386,7 +7608,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8419,7 +7641,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8435,7 +7657,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8468,7 +7690,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8484,7 +7706,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8517,7 +7739,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8533,7 +7755,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8566,7 +7788,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -291,
+                        -274,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8582,7 +7804,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8615,7 +7837,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -313,
+                        -296,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8631,7 +7853,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8664,7 +7886,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8680,7 +7902,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8713,7 +7935,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8729,7 +7951,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8778,7 +8000,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8827,7 +8049,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8866,7 +8088,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8882,7 +8104,7 @@
                     "buttonWidth": 70,
                     "buttonHeight": 70,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8915,7 +8137,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8931,7 +8153,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8964,7 +8186,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8980,7 +8202,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 769,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9153,7 +8375,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 368810944,
+                    "pointer": 376442240,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9228,10 +8450,648 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 368809720,
+                    "pointer": 376441968,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
+                }
+            ]
+        },
+        {
+            "UUID": 427133858,
+            "Parent UUID": 417171234,
+            "Name": "Colliders",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -11.859601020812988,
+                        4.5420379638671875,
+                        13.572661399841309
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 802321427,
+            "Parent UUID": 427133858,
+            "Name": "Collider_01",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -5.7637338638305664,
+                        -0.70209121704101562,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.27616378664970398,
+                        0,
+                        0.96111059188842773
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_01.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 1220952500,
+            "Parent UUID": 427133858,
+            "Name": "Collider_02",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        42.148948669433594,
+                        -1.3137439489364624,
+                        -5.1497392654418945
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.2145722508430481,
+                        0,
+                        0.97670811414718628
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_02.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 1714704632,
+            "Parent UUID": 427133858,
+            "Name": "Collider_03",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        32.773002624511719,
+                        -1.5508313179016113,
+                        -12.676133155822754
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.043619383126497269,
+                        0,
+                        0.99904823303222656
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_03.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 2114816519,
+            "Parent UUID": 427133858,
+            "Name": "Collider_04",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        18.464736938476562,
+                        0.2500002384185791,
+                        -43.098320007324219
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.043619383126497269,
+                        0,
+                        0.99904823303222656
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_04.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 350457235,
+            "Parent UUID": 427133858,
+            "Name": "Collider_05",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        2.2480835914611816,
+                        -0.72239542007446289,
+                        -9.2027082443237305
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.25881904363632202,
+                        0,
+                        0.96592581272125244
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_05.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 700581244,
+            "Parent UUID": 427133858,
+            "Name": "Collider_06",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -20.946060180664062,
+                        -0.45793700218200684,
+                        14.809622764587402
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.6755901575088501,
+                        0,
+                        0.73727738857269287
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_06.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 1058920531,
+            "Parent UUID": 427133858,
+            "Name": "Collider_07",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -24.832763671875,
+                        -1.4940600395202637,
+                        34.867847442626953
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.38268345594406128,
+                        0,
+                        0.92387956380844116
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_07.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 1392405121,
+            "Parent UUID": 427133858,
+            "Name": "Collider_08",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -26.635684967041016,
+                        -0.81458067893981934,
+                        54.208236694335938
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.38268345594406128,
+                        0,
+                        0.92387956380844116
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_08.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 1719414958,
+            "Parent UUID": 427133858,
+            "Name": "Collider_09",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -7.4844756126403809,
+                        -0.73648113012313843,
+                        38.771121978759766
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.97629600763320923,
+                        0,
+                        0.21643964946269989
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_09.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 2062716109,
+            "Parent UUID": 427133858,
+            "Name": "Collider_10",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        42.158374786376953,
+                        -1.8462517261505127,
+                        -28.9169921875
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.087155751883983612,
+                        0,
+                        0.99619472026824951
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_10.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 275730000,
+            "Parent UUID": 427133858,
+            "Name": "Collider_11",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        5.2709469795227051,
+                        -3.0979247093200684,
+                        43.821327209472656
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.15003436803817749,
+                        0,
+                        0.98868077993392944
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_11.fbx",
+                    "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 648828939,
+            "Parent UUID": 427133858,
+            "Name": "Collider_12",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Collider",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8.2513694763183594,
+                        -1.0108827352523804,
+                        63.852294921875
+                    ],
+                    "Quaternion": [
+                        0.00037199535290710628,
+                        -0.30117172002792358,
+                        -0.0010465957457199693,
+                        0.95356929302215576
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_12.fbx",
+                    "Active": false
                 }
             ]
         }
