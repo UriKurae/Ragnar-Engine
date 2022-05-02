@@ -96,6 +96,8 @@ public:
 	bool showAABB = false;
 	bool showOBB = false;
 	bool castShadows = true;
+	bool isInteractuable;
+
 private:
 
 	GameObject* parent;

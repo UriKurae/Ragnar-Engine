@@ -50,6 +50,8 @@ private:
 	bool showTexMenu = false;
 	bool showShaderEditor = false;
 	bool showShaderMenu = false;
+	float interIntensity = 1.0f;
+	float3 interColor = { 0,0.3,0 };
 
 	TextEditor editor;
 	std::string fileToEdit;

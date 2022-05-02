@@ -83,6 +83,9 @@ void MaterialComponent::OnEditor()
 	{
 		Checkbox(this, "Active", active);
 		ImGui::Checkbox("Cast Shadows", &owner->castShadows);
+		ImGui::Checkbox("Is Interactuable", &owner->isInteractuable);
+		if (owner->isInteractuable)
+			ImGui::ColorEdit3("Interactuable Color", interColor.ptr());
 
 		ImGui::PushID(diff->GetUID());
 		if (diff != nullptr)
@@ -464,6 +467,7 @@ bool MaterialComponent::OnLoad(JsonParsing& node)
 	active = node.GetJsonBool("Active");
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 	owner->castShadows = node.GetJsonBool("Cast Shadows");
+	interColor = node.GetJson3Number(node, "Interactuable Color");
 
 	return true;
 }
@@ -478,7 +482,8 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Cast Shadows", owner->castShadows);
-	
+	file.SetNewJson3Number(file, "Interactuable Color", interColor);
+
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;
@@ -550,7 +555,13 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	else
 		shader->SetUniform1f("normalsThickness", 1);
 
-	//float thickness = ((std::string(owner->GetName()).find("Player") == std::string::npos) || (std::string(owner->GetName()).find("Enemy") == std::string::npos)) ? 1 : 0;
+	shader->SetUniform1i("isInteractuable", owner->isInteractuable);
+	if (owner->isInteractuable)
+	{
+		shader->SetUniformVec3f("interCol", interColor);
+		//float time = app->sceneManager->GetGameState() == GameState::PLAYING ? app->sceneManager->GetGameDeltaTime() : app->GetEngineDeltaTime();
+		shader->SetUniform1f("time", interIntensity);
+	}
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);

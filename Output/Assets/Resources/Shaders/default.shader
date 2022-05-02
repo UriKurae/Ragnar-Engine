@@ -104,6 +104,11 @@ layout(location = 1) uniform sampler2D depthTexture;
 layout(location = 2) uniform sampler2D normalMap;
 uniform float normalsThickness;
 uniform bool hasNormalMap;
+uniform int isInteractuable; // Acts as a bool
+uniform vec3 interCol;
+uniform float time;
+
+float pi = 3.14159265359;
 
 struct Material
 {
@@ -334,6 +339,8 @@ void main()
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
+	//pos.y = amplitude * 2 * pi * sin((time * 0.1) * speed * 0.1 - pos.x * frequency);
+
 	vec3 finalColor = result;
 	if (material.gammaCorrection)
 	{
@@ -341,6 +348,10 @@ void main()
 	}
 
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
+
+	//float alpha = 5 * 2 * pi * sin((time * 0.1) * 5 * 0.1 - 1 * 1);
+	fragColor.rgb += interCol * isInteractuable;
+
 	fragNormals = vec4(vNormal, normalsThickness);
 
 	if (fragColor.a > 0 && fragColor.a <= 0.1)
