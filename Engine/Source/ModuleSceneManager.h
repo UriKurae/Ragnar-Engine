@@ -48,6 +48,7 @@ public:
 	void NextScene();
 	void NextScene(const char* name);
 	void SaveScene(const char* name);
+	void LoadScene(const char* name);
 
 	// Pop Up
 	void WarningWindow();

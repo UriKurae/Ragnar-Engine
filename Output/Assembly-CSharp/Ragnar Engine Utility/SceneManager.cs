@@ -15,7 +15,10 @@ namespace RagnarEngine
         static public extern void LoadScene(string name);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static public extern void SaveScene(string name);
+        static public extern void SaveCheckpoint(string name);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static public extern void LoadCheckpoint(string name);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static public extern void Exit();

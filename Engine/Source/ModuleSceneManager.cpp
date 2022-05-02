@@ -318,6 +318,20 @@ void ModuleSceneManager::SaveScene(const char* name)
 	}
 }
 
+void ModuleSceneManager::LoadScene(const char* name)
+{
+	DEBUG_LOG("Loading Scene");
+
+	if (currentScene->LoadScene(name))
+	{
+		DEBUG_LOG("Succesfully loaded %s", name);
+	}
+	else
+	{
+		DEBUG_LOG("Couldn't load the scene %s", name);
+	}
+}
+
 void ModuleSceneManager::Play()
 {
 #ifndef DIST
