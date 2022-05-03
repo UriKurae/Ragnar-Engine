@@ -220,6 +220,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIImage::StartAnimation", StartAnimation);
 	mono_add_internal_call("RagnarEngine.UIImage::StopAnimation", StopAnimation);
+	mono_add_internal_call("RagnarEngine.UIImage::StopAnimation", ChangeAnimationVelocity);
 
 	mono_add_internal_call("RagnarEngine.UIImage::SetImageGeneralColor", SetImageGeneralColor);
 	mono_add_internal_call("RagnarEngine.UIImage::GetImageGeneralColor", GetImageGeneralColor);

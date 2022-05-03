@@ -262,3 +262,9 @@ void StopAnimation(MonoObject* go, int animation)
 	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
 	tr->animations[animation]->StopAnim();
 }
+
+void ChangeAnimationVelocity(MonoObject* go, int animation,float velocity)
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	tr->animations[animation]->ChageVelocity(velocity);
+}

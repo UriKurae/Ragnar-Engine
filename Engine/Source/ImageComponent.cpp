@@ -48,7 +48,9 @@ void UIAnimation::StopAnim() {
 	animatonState = -1;
 	currentDt = 0;
 }
-
+void UIAnimation::ChageVelocity(float velocity) {
+	timeBetwen = velocity;
+}
 // IMAGE
 ImageComponent::ImageComponent(GameObject* own)
 {
@@ -92,12 +94,14 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
+	MaterialComponent* auxiliar;
+	auxiliar = principal;
 	for (int a = 0;a < animations.size();a++) {
 		if (animations[a]->isPlayng)
-			principal=animations[a]->Draw();
+			auxiliar =animations[a]->Draw();
 	}
 
-	planeToDraw->DrawPlane2D(principal->GetTexture().get());
+	planeToDraw->DrawPlane2D(auxiliar->GetTexture().get());
 
 	glColor4f(actualColor.r, actualColor.g, actualColor.b, actualColor.a);
 	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
@@ -185,7 +189,9 @@ bool ImageComponent::OnLoad(JsonParsing& node)
 			number = std::to_string(a);
 			number = number + std::to_string(b);
 			name = name + number;
-			MaterialComponent* matAux = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
+
+			//MaterialComponent* matAux = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
+			MaterialComponent* matAux = new MaterialComponent(owner, false);
 			texture=node.GetJsonString(name.c_str());
 			matAux->SetTexture(ResourceManager::GetInstance()->LoadResource(texture));
 			animations[a]->images.push_back(matAux);

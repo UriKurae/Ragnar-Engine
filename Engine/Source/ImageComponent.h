@@ -18,6 +18,7 @@ public:
 	int animatonState = -1;
 	void StartAnim();
 	void StopAnim();
+	void ChageVelocity(float velocity);
 };
 class ImageComponent : public Component
 {
