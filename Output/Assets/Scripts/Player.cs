@@ -113,6 +113,7 @@ public class Player : RagnarComponent
 
             if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
+                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(gameObject.name, gameObject.transform.globalPosition);
                 SceneManager.LoadScene("LoseScene");
                 //InternalCalls.Destroy(gameObject);
             }

@@ -615,3 +615,25 @@ std::string ModuleSceneManager::GetCurrentSceneName()
 {
 	return currentScene->GetName();
 }
+
+
+/////////////////////////
+
+
+void ModuleSceneManager::SaveTesting(int deadCount, std::string playerName, float3 playerPos)
+{
+	DEBUG_LOG("Saving Testing");
+
+	JsonParsing sceneFile;
+
+	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Testing");
+	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Scenes");
+	currentScene.get()->SaveTest(sceneFile, array, deadCount, playerName, playerPos);
+
+	uint size = sceneFile.SaveFile("Testing");
+
+	if (size > 0)
+		DEBUG_LOG("Scene saved succesfully");
+	else
+		DEBUG_LOG("Scene couldn't be saved");
+}
