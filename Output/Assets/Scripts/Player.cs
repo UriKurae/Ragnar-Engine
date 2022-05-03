@@ -113,7 +113,11 @@ public class Player : RagnarComponent
 
             if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
-                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(gameObject.name, gameObject.transform.globalPosition);
+                String name = "";
+                if (gameObject.name == "Player") name = "Paul Atrides";
+                else if (gameObject.name == "Player_2") name = "Chani";
+                else if (gameObject.name == "Player_3") name = "Stilgar";
+                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
                 SceneManager.LoadScene("LoseScene");
                 //InternalCalls.Destroy(gameObject);
             }
