@@ -14,7 +14,7 @@ Quest::~Quest()
 
 }
 
-void Quest::ChangeState(QuestState newState)
+void Quest::ChangeQuestState(QuestState newState)
 {
 	state = newState;
 }

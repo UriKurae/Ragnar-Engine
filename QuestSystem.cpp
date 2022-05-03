@@ -34,7 +34,7 @@ void QuestSystem::AddQuest(Quest* questToAdd)
 void QuestSystem::CompleteQuest(Quest* questToComplete)
 {
 	completedQuestsList.push_back(questToComplete);
-	questToComplete->ChangeState(QuestState::COMPLETED);
+	questToComplete->ChangeQuestState(QuestState::COMPLETED);
 	activeQuestsList.remove(questToComplete);
 }
 
@@ -46,5 +46,5 @@ void QuestSystem::RemoveQuest(Quest *questToDelete)
 
 void QuestSystem::ChangeQuestState(Quest* questToChange, QuestState newState)
 {
-	questToChange->ChangeState(newState);
+	questToChange->ChangeQuestState(newState);
 }

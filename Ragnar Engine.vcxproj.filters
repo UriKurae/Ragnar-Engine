@@ -97,12 +97,6 @@
     <Filter Include="Particles\Effects\SpawningShapes">
       <UniqueIdentifier>{2df73535-23b9-4464-9a07-0db8ba2300b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Systems">
-      <UniqueIdentifier>{c53cffc8-f550-49d7-9474-a68a074fec36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Systems\Quests">
-      <UniqueIdentifier>{68601f2f-e138-436d-8814-77387b7dcf4d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\Module.h">
@@ -795,12 +789,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Source\CheckBoxComponent.h">
       <Filter>Sources\GameObject\Components\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Quest.h">
-      <Filter>Sources\Systems\Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="QuestSystem.h">
-      <Filter>Sources\Systems\Quests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1723,12 +1711,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Source\DropDownComponent.cpp">
       <Filter>Sources\GameObject\Components\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Quest.cpp">
-      <Filter>Sources\Systems\Quests</Filter>
-    </ClCompile>
-    <ClCompile Include="QuestSystem.cpp">
-      <Filter>Sources\Systems\Quests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

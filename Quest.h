@@ -30,7 +30,7 @@ private:
 	QuestState state;
 	QuestType type;
 public:
-	void ChangeState(QuestState newState);
+	void ChangeQuestState(QuestState newState);
 	uint GetQuestId();
 	std::string GetQuestName();
 	std::string GetQuestDescription();
