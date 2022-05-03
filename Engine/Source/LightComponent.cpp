@@ -233,6 +233,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->specular = node.GetJson3Number(node, "Specular");
 			l->intensity = node.GetJsonNumber("Intensity");
 			l->generateShadows = node.GetJsonBool("Shadows");
+			l->type = LightType::DIRECTIONAL;
 
 			light = l;
 
@@ -253,6 +254,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->constant = node.GetJsonNumber("Constant");
 			l->lin = node.GetJsonNumber("Linear");
 			l->quadratic = node.GetJsonNumber("Quadratic");
+			l->type = LightType::POINT;
 
 			light = l;
 			app->renderer3D->AddPointLight(l);
@@ -270,6 +272,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->specular = node.GetJson3Number(node, "Specular");
 			l->cutOff = node.GetJsonNumber("CutOff");
 			l->outerCutOff = node.GetJsonNumber("Outer CutOff");
+			l->type = LightType::SPOT;
 
 			light = l;
 			app->renderer3D->AddSpotLight(l);
