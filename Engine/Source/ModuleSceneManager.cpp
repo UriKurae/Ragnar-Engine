@@ -620,7 +620,7 @@ std::string ModuleSceneManager::GetCurrentSceneName()
 /////////////////////////
 
 
-void ModuleSceneManager::SaveTesting(int deadCount, std::string playerName, float3 playerPos)
+void ModuleSceneManager::SaveTesting(int deadCount, std::string playerName, float3 playerPos, float time)
 {
 	DEBUG_LOG("Saving Testing");
 
@@ -628,7 +628,7 @@ void ModuleSceneManager::SaveTesting(int deadCount, std::string playerName, floa
 
 	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Testing");
 	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Scenes");
-	currentScene.get()->SaveTest(sceneFile, array, deadCount, playerName, playerPos);
+	currentScene.get()->SaveTest(sceneFile, array, deadCount, playerName, playerPos, time);
 
 	uint size = sceneFile.SaveFile("Testing.json");
 
