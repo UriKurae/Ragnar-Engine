@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class PlayerManager : RagnarComponent
@@ -19,18 +20,7 @@ public class PlayerManager : RagnarComponent
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
-            //c.abilities[4] = new Abilities
-            //{
-            //    name = "CorpseCarrier",
-            //    prefabPath = "",
-            //    transformY = 0.0f,
-            //    intensity = 4.0f,
-            //    constant = 0.0f,
-            //    linear = 0.0f,
-            //    quadratic = 0f,
-            //    charges = -1,
-            //    cooldown = 0f
-            //}; // Corpse Carrier Ability
+            
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -281,7 +271,7 @@ public class PlayerManager : RagnarComponent
 
                             if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
-                                GameObject[] enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
+                                List<GameObject> enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
                                 foreach (GameObject g in enemiesDead)
                                 {
                                     if (g != null && obj.name == g.name)

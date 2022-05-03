@@ -1,90 +1,76 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class EnemyManager : RagnarComponent
 {
     public Enemies[] enemies;
-    public GameObject[] enemyGOs;
-    public GameObject[] deadEnemies;
+    public List<GameObject> enemyGOs = new List<GameObject>();
+    public List<GameObject> deadEnemies = new List<GameObject>();
     public GameObject[] colliders;
 
     public void Start()
     {
+        enemyGOs.Clear();
+        deadEnemies.Clear();
+
         foreach (Enemies e in enemies)
         {
-            InternalCalls.InstancePrefab(e.prefabPath);
+            enemyGOs.Add(InternalCalls.InstancePrefab(e.prefabPath));
         }
 
-        enemyGOs = GameObject.FindGameObjectsWithTag("Enemies");
         colliders = GameObject.FindGameObjectsWithTag("Collider");
 
-        for(int i = 0; i < enemyGOs.Length; i++)
+        for(int i = 0; i < enemyGOs.Count; i++)
         {
             enemyGOs[i].name = enemies[i].name;
-            if (enemies[i].waypoints.Length != 0)
+            switch (enemies[i].type)
             {
-                switch (enemies[i].type)
-                {
-                    case EnemyType.BASIC:
-                        enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
-                        enemyGOs[i].GetComponent<BasicEnemy>().state = EnemyState.IDLE;
-                        enemyGOs[i].GetComponent<BasicEnemy>().colliders = colliders;
-                        break;
-                    case EnemyType.TANK:
-                        enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
-                        enemyGOs[i].GetComponent<TankEnemy>().state = EnemyState.IDLE;
-                        enemyGOs[i].GetComponent<TankEnemy>().colliders = colliders;
-                        break;
-                    case EnemyType.UNDISTRACTABLE:
-                        enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
-                        enemyGOs[i].GetComponent<UndistractableEnemy>().state = EnemyState.IDLE;
-                        enemyGOs[i].GetComponent<UndistractableEnemy>().colliders = colliders;
-                        break;
-                    case EnemyType.AIR:
-                        enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
-                        enemyGOs[i].GetComponent<AirEnemy>().state = EnemyState.IDLE;
-                        enemyGOs[i].GetComponent<AirEnemy>().colliders = colliders;
-                        break;
-                }
-
-                enemies[i].state = EnemyState.IDLE;
+                case EnemyType.BASIC:
+                    enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
+                    enemyGOs[i].GetComponent<BasicEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<BasicEnemy>().colliders = colliders;
+                    break;
+                case EnemyType.TANK:
+                    enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
+                    enemyGOs[i].GetComponent<TankEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<TankEnemy>().colliders = colliders;
+                    break;
+                case EnemyType.UNDISTRACTABLE:
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().colliders = colliders;
+                    break;
+                case EnemyType.AIR:
+                    enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
+                    enemyGOs[i].GetComponent<AirEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<AirEnemy>().colliders = colliders;
+                    break;
             }
+            enemies[i].state = EnemyState.IDLE;
+
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
         }
-
-        deadEnemies = new GameObject[enemyGOs.Length];
     }
     public void Update()
     {
         // Death Control
-        if(enemyGOs.Length > 0)
+        if(enemyGOs.Count > 0)
         {
             foreach(GameObject go in enemyGOs)
             {
                 if((go.GetComponent<BasicEnemy>().pendingToDelete && go.GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (go.GetComponent<AirEnemy>().pendingToDelete && go.GetComponent<AirEnemy>().ToString() == "AirEnemy") || (go.GetComponent<TankEnemy>().pendingToDelete && go.GetComponent<TankEnemy>().ToString() == "TankEnemy") || (go.GetComponent<UndistractableEnemy>().pendingToDelete && go.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
                 {
-                    GameObject[] aux = new GameObject[enemyGOs.Length-1];
-                    Enemies[] aux2 = new Enemies[enemies.Length-1];
-                    for (int i = 0, j = 0; i < enemyGOs.Length; i++, j++)
+                    for (int i = 0; i < enemyGOs.Count; i++)
                     {
                         if (enemyGOs[i] == go)
                         {
-                            j--;
-                            for(int k = 0; k < deadEnemies.Length; k++)
-                            {
-                                if (deadEnemies[k] == null) deadEnemies[k] = go;
-                            }
-                            enemies[i].state = EnemyState.DEATH;
                             ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
-                        }
-                        else
-                        {
-                            aux[j] = enemyGOs[i];
-                            aux2[j] = enemies[i];
+                            deadEnemies.Add(enemyGOs[i]);
+                            enemyGOs.RemoveAt(i);
+                            enemies[i].state = EnemyState.DEATH;
                         }
                     }
-                    enemyGOs = aux;
-                    enemies = aux2;
                 }
             }
         }
@@ -136,6 +122,6 @@ public class EnemyManager : RagnarComponent
     public void SaveTest(String name, Vector3 pos)
     {
         // Change deadEnemies[] to a list, if not deadCount is not really
-        SceneManager.SaveTest(deadEnemies.Length, name, pos);
+        SceneManager.SaveTest(deadEnemies.Count, name, pos);
     }
 }
