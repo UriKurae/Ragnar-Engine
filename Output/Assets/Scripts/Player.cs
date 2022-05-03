@@ -200,6 +200,15 @@ public class Player : RagnarComponent
         }
     }
 
+    public void OnTriggerEnter(Rigidbody other)
+    {
+        if (other.gameObject.tag == "CheckPoint")
+        {
+            SaveSystem.SaveScene();
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
+        }
+    }
+
     public void SetControled(bool var)
     {
         controled = var;
