@@ -6,7 +6,7 @@
 class MyPlane;
 class GameObject;
 class MaterialComponent;
-class Animation {
+class UIAnimation {
 public:
 	std::vector<MaterialComponent*> images;
 	bool isPlayng = false;
@@ -16,6 +16,8 @@ public:
 	void Update(float dt);
 	MaterialComponent* Draw();
 	int animatonState = -1;
+	void StartAnim();
+	void StopAnim();
 };
 class ImageComponent : public Component
 {
@@ -41,10 +43,11 @@ public:
 	void UseTexture(int ID);
 	MyPlane* planeToDraw;
 	MaterialComponent* principal;
+	std::vector<UIAnimation*> animations;
 private:
 	
 	std::vector<MaterialComponent*> materialList;
-	std::vector<Animation*> animations;
+	
 	float alpha = 1.0f;
 	State state = State::NORMAL;
 	Color actualColor = white;

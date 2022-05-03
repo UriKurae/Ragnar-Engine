@@ -10,7 +10,7 @@
 #include "Transform2DComponent.h"
 #include"ResourceManager.h"
 #include "GL/glew.h"
-void Animation::Update(float dt) 
+void UIAnimation::Update(float dt) 
 {
 	
 	currentDt += dt;
@@ -30,13 +30,26 @@ void Animation::Update(float dt)
 		}
 	}
 	if (animatonState == -1) {
-		isPlayng = false;
+		StopAnim();
 	}
 }
-MaterialComponent* Animation::Draw() 
+MaterialComponent* UIAnimation::Draw() 
 {
 	return images[animatonState];
 }
+void UIAnimation::StartAnim()
+{
+	isPlayng = true;
+	animatonState = 0;
+	currentDt = 0;
+}
+void UIAnimation::StopAnim() {
+	isPlayng = false;
+	animatonState = -1;
+	currentDt = 0;
+}
+
+// IMAGE
 ImageComponent::ImageComponent(GameObject* own)
 {
 	type = ComponentType::UI_IMAGE;
@@ -112,7 +125,7 @@ void ImageComponent::OnEditor()
 	{
 		ImGui::SliderFloat("Alpha", &alpha, 0.5f, 1.0f);
 		if (ImGui::Button("create animation")) {
-			Animation* aux = new Animation();
+			UIAnimation* aux = new UIAnimation();
 			animations.push_back(aux);
 		}
 		for (int b = 0;b < animations.size();b++) {
@@ -143,6 +156,41 @@ bool ImageComponent::OnLoad(JsonParsing& node)
 		
 	}
 	
+
+	int num=node.GetJsonNumber("numOfAnimations");
+
+	std::string name;
+	std::string number;
+	std::string texture;
+	for (int a = 0; a < num; a++) {
+		UIAnimation* aux = new UIAnimation();
+		animations.push_back(aux);
+		number = std::to_string(a);
+
+
+		name = "loop";
+		name = name + number;
+		aux->loop = node.GetJsonBool(name.c_str());
+		
+		name = "timeBetwen";
+		name = name + number;
+		aux->timeBetwen=node.GetJsonNumber(name.c_str());
+
+		name = "numOfImages";
+		name = name + number;
+		int Images = node.GetJsonNumber(name.c_str());
+		for (int b = 0; b < Images; b++)
+		{
+			name = "text";
+			number = std::to_string(a);
+			number = number + std::to_string(b);
+			name = name + number;
+			MaterialComponent* matAux = (MaterialComponent*)owner->CreateComponent(ComponentType::MATERIAL);
+			texture=node.GetJsonString(name.c_str());
+			matAux->SetTexture(ResourceManager::GetInstance()->LoadResource(texture));
+			animations[a]->images.push_back(matAux);
+		}
+	}
 	return true;
 }
 
@@ -152,6 +200,38 @@ bool ImageComponent::OnSave(JsonParsing& node, JSON_Array* array)
 
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "alpha", alpha);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "numOfAnimations", animations.size());
+	
+	std::string name;
+	std::string number;
+	for (int a = 0; a < animations.size(); a++) 
+	{
+		number = std::to_string(a);
+		name = "numOfImages";
+		name = name + number;
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), name.c_str(), animations[a]->images.size());
+
+		name = "loop";
+		name = name + number;
+		file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), name.c_str(), animations[a]->loop);
+
+		name = "timeBetwen";
+		name = name + number;
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), name.c_str(), animations[a]->timeBetwen);
+		for (int b = 0; b < animations[a]->images.size(); b++) 
+		{
+			number = std::to_string(a);
+			name = "text";			
+			number = number + std::to_string(b);
+
+			name = name + number;
+			std::shared_ptr<Texture> diff = nullptr;
+			diff = animations[a]->images[b]->GetTexture();
+			file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), name.c_str(), diff->GetAssetsPath().c_str());
+		}
+	}
+
 	node.SetValueToArray(array, file.GetRootValue());
 
 	return true;

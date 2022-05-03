@@ -249,4 +249,16 @@ const char* GetSelected(MonoObject* go)
 	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
 	return tr->GetSelect().c_str();
 }
+// Animation ========================================
 
+void StartAnimation(MonoObject* go, int animation) 
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	tr->animations[animation]->StartAnim();
+}
+
+void StopAnimation(MonoObject* go, int animation) 
+{
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	tr->animations[animation]->StopAnim();
+}

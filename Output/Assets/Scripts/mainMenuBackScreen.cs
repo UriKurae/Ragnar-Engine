@@ -146,7 +146,9 @@ public class mainMenuBackScreen : RagnarComponent
         if (!isOptions)
         {
             continueImage.isActive = true;
-            continueB.isActive = true;
+			
+
+			continueB.isActive = true;
             int a = continueB.GetComponent<UIButton>().GetButtonState();
             switch (a)
             {
@@ -156,7 +158,8 @@ public class mainMenuBackScreen : RagnarComponent
                 case 1:
                     if (!isFirstCont)
                     {
-                        pos.Set(continueB.GetComponent<Transform2D>().position2D.x - 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
+
+						pos.Set(continueB.GetComponent<Transform2D>().position2D.x - 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
                         continueB.GetComponent<Transform2D>().position2D = pos;
 
 
