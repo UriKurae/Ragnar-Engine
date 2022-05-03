@@ -4,7 +4,7 @@ using RagnarEngine;
 public class Knife : RagnarComponent
 {
 	private float force = 1500;
-	private bool canReload = false;
+	public bool canReload = false;
 	private bool pendingToDelete = false;
 	private bool grabOnce = false;
 	
@@ -76,7 +76,7 @@ public class Knife : RagnarComponent
 		return agent.hitPosition - player.transform.globalPosition;
 	}
 
-	public void OnCollisionEnter(Rigidbody other)
+	public void OnCollision(Rigidbody other)
 	{
 		canReload = true;
 	}
