@@ -37,7 +37,6 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-
         if (!dialogue.GetInDialogue())
         {
             if (hitPoints <= 0 && !dead)
@@ -165,6 +164,11 @@ public class Player : RagnarComponent
          * if (other.gameObject.name == "WinCondition")
            SceneManager.LoadScene("WinScene");
         */
+        if (other.gameObject.tag == "CheckPoint")
+        {
+            SaveSystem.SaveScene();
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
+        }
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);

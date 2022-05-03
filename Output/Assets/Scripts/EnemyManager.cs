@@ -109,4 +109,28 @@ public class EnemyManager : RagnarComponent
             go.GetComponent<UndistractableEnemy>().state = newState;
         }
     }
+
+    //public void SaveEnemies()
+    //{
+    //    for (int i = 0; i < enemies.Length; ++i)
+    //    {
+    //        SaveSystem.SaveEnemy(enemies[i]);
+    //    }
+    //}
+
+    //public void LoadEnemy()
+    //{
+    //    for (int i = 0; i < enemies.Length; ++i)
+    //    {
+    //        EnemyData data = SaveSystem.LoadEnemy(enemies[i].name);
+
+    //        Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
+    //        enemies[i].pos = pos;
+            
+    //        if (data.state == EnemyState.DEATH)
+    //        {
+
+    //        }
+    //    }
+    //}
 }

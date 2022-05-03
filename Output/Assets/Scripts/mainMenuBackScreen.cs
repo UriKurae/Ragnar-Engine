@@ -186,7 +186,8 @@ public class mainMenuBackScreen : RagnarComponent
                     SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 
 
-                    //cambiar de escena
+					//cambiar de escena
+					SaveSystem.LoadScene();
                     break;
             }
         }
@@ -351,6 +352,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // pressed mode
                     SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 
+					SaveSystem.fromContinue = false;
                     SceneManager.LoadScene("build");
                     //cambiar de escena
                     break;

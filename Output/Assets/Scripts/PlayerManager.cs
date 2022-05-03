@@ -54,10 +54,23 @@ public class PlayerManager : RagnarComponent
         }
         area = aux;
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
+        if (SaveSystem.fromContinue)
+        {
+            LoadPlayer();
+        }
     }
 
 	public void Update()
     {
+        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
+        {
+            LoadPlayer();
+        }
+        if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
+        {
+            SavePlayer();
+        }
         if (!dialogue.GetInDialogue())
         {
             if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
@@ -388,6 +401,31 @@ public class PlayerManager : RagnarComponent
         }
         players[id].GetComponent<Player>().SetControled(true);
         
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SaveScene();
+        for (int i = 0; i < players.Length; ++i)
+        { 
+            SaveSystem.SavePlayer(players[i].GetComponent<Player>());
+        }
+    }
+
+    public void LoadPlayer()
+    {
+        for (int i = 0; i < players.Length; ++i)
+        {
+            PlayerData data = SaveSystem.LoadPlayer(players[i].name);
+
+            players[i].GetComponent<Player>().hitPoints = data.hitPoints;
+
+            Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
+
+            Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+            players[i].GetComponent<Rigidbody>().SetBodyRotation(rot); 
+        }
     }
 }
 
