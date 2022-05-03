@@ -106,7 +106,7 @@ uniform float normalsThickness;
 uniform bool hasNormalMap;
 uniform int isInteractuable; // Acts as a bool
 uniform vec3 interCol;
-uniform float time;
+uniform float interColIntensity;
 
 float pi = 3.14159265359;
 
@@ -350,7 +350,7 @@ void main()
 	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
 
 	//float alpha = 5 * 2 * pi * sin((time * 0.1) * 5 * 0.1 - 1 * 1);
-	fragColor.rgb += interCol * isInteractuable;
+	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
 	fragNormals = vec4(vNormal, normalsThickness);
 

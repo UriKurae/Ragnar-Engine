@@ -18,12 +18,30 @@
 #include "Texture.h"
 #include "Lights.h"
 #include "Framebuffer.h"
+#include "Globals.h"
 
 #include "GL/glew.h"
 #include <fstream>
 #include "Profiling.h"
 
 #define MAX_TIME_TO_REFRESH_SHADER 10
+
+void PingPongFloat(float& value, float speed, float max, float min, bool ascendingFirst)
+{
+	static int dir = ascendingFirst ? 1 : -1;
+	value += speed * dir;
+
+	if (value > max)
+	{
+		value = max;
+		dir = -1;
+	}
+	else if (value < min)
+	{
+		value = min;
+		dir = 1;
+	}
+}
 
 MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : defaultMat(defaultMat)
 {
@@ -559,8 +577,10 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	if (owner->isInteractuable)
 	{
 		shader->SetUniformVec3f("interCol", interColor);
-		//float time = app->sceneManager->GetGameState() == GameState::PLAYING ? app->sceneManager->GetGameDeltaTime() : app->GetEngineDeltaTime();
-		shader->SetUniform1f("time", interIntensity);
+		static float intensity = 0.1;
+		PingPongFloat(intensity, 0.01, 1, 0, true);
+
+		shader->SetUniform1f("interColIntensity", intensity);
 	}
 
 	glActiveTexture(GL_TEXTURE1);
