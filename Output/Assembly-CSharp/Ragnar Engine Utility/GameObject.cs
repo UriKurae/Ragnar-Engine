@@ -151,5 +151,21 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern public void DrawOutline(Vector3 color);
+
+        public extern bool isInteractuable
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
+
+        public extern Vector3 interactuableColor
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
     }
 }

@@ -41,9 +41,10 @@ public:
 
 	std::shared_ptr<Shader> GetOutlineShader() { return outlineShader; }
 
-	void SetTextureType(TextureType type) {
-		textureTypeToChange = type;
-	}
+	inline void SetTextureType(TextureType type) {	textureTypeToChange = type;	}
+	
+	inline void SetInteractuableColor(const float3& color) { interColor = color; }
+	inline float3 GetInteractuableColor() { return interColor; }
 
 private:
 	bool checker = false;

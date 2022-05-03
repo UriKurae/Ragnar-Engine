@@ -553,6 +553,31 @@ void EraseChild(MonoObject* go, MonoObject* child)
 	parent->RemoveChild(newChild);
 }
 
+bool GetGameObjectIsInteractuable(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->isInteractuable;
+}
+
+void SetGameObjectIsInteractuable(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->isInteractuable = value;
+}
+
+MonoObject* GetGameObjectInteractuableColor(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetComponent<MaterialComponent>()->GetInteractuableColor());
+}
+
+void SetGameObjectInteractuableColor(MonoObject* go, MonoObject* color)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	float3 col = app->moduleMono->UnboxVector(color);
+	gameObject->GetComponent<MaterialComponent>()->SetInteractuableColor(col);
+}
+
 // GameObject =======================
 
 // Particle System ==================
