@@ -729,13 +729,20 @@ public class pauseMenuButton : RagnarComponent
 				MainMenuButtonHide();
 				OptionsButtonHide();
                 if (dialogue.GetInDialogue()) { dialogue.ContinueDialogue(); }
-            }
+
+				// Why is it not necessary to put "<Level_2>" and "<Level_3>"?, I don't know
+				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null) 
+					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
+			}
             else
 			{
                 if (dialogue.GetInDialogue()) { dialogue.DisableDialogue(); }
                 currVolume = SceneAudio.GetComponent<AudioSource>().GetClipVolume();
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(15.0f);
 				isSowing = true;
+
+				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
+					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = false;
 			}
 		}
 	}
