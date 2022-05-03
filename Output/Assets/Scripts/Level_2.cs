@@ -5,8 +5,9 @@ public class Level_2 : RagnarComponent
 {
 	public Characters[] characters;
 	public Enemies[] enemies;
-
-	public void Start()
+    private float timer = 0;
+    public bool runGame = true;
+    public void Start()
 	{
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(-23.76f, 0f, -199.01f);
@@ -767,7 +768,7 @@ public class Level_2 : RagnarComponent
     }
     public void Update()
 	{
-
-	}
+        if (runGame) timer += Time.deltaTime;
+    }
 
 }

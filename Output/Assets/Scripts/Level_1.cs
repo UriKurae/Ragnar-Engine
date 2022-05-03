@@ -5,12 +5,19 @@ public class Level_1 : RagnarComponent
 {
     public Characters[] characters;
     public Enemies[] enemies;
+    private float timer = 0;
+    private float sec = 0;
+    private float min = 0;
+    public bool runGame = true;
+    private GameObject timerText;
 
     public void Start()
 	{
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(-52.79f, 0f, 89.05f);
-
+        timerText = GameObject.Find("UI Timer");
+        timerText.GetComponent<Transform2D>().position2D.y = 200;
+        
         // PLAYERS
         characters = new Characters[2];
         // Player 1
@@ -444,7 +451,34 @@ public class Level_1 : RagnarComponent
 	}
 	public void Update()
 	{
-
+        if(runGame) timer += Time.deltaTime;
+        Chronometer();        
 	}
+
+    private void Chronometer()
+    {
+        if (timer < 60)
+        {
+            sec = timer;
+        }
+        else if (timer >= 60)
+        {
+            min = timer / 60;
+            sec = timer % 60;
+        }
+
+        if (timer < 60)
+            timerText.GetComponent<UIText>().text = "00:";
+        else if(min < 10)
+            timerText.GetComponent<UIText>().text = min.ToString().Insert(0, "0").Substring(0, 2) + ":";
+        else
+            timerText.GetComponent<UIText>().text = min.ToString().Substring(0, 2) + ":";
+
+        if (sec < 10)
+            timerText.GetComponent<UIText>().text += sec.ToString().Insert(0, "0").Substring(0, 2);
+        else
+            timerText.GetComponent<UIText>().text += sec.ToString().Substring(0, 2);
+
+    }
 
 }
