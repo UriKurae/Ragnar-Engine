@@ -408,6 +408,7 @@ bool ModuleRenderer3D::CleanUp()
 
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
+	RELEASE(dirLight);
 	//RELEASE(defaultShader);
 
 	for(auto& pl : pointLights)

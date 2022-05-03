@@ -630,7 +630,7 @@ void ModuleSceneManager::SaveTesting(int deadCount, std::string playerName, floa
 	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Scenes");
 	currentScene.get()->SaveTest(sceneFile, array, deadCount, playerName, playerPos);
 
-	uint size = sceneFile.SaveFile("Testing");
+	uint size = sceneFile.SaveFile("Testing.json");
 
 	if (size > 0)
 		DEBUG_LOG("Scene saved succesfully");

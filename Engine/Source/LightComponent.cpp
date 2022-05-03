@@ -18,9 +18,6 @@ ComponentLight::~ComponentLight()
 {
 	switch (light->type)
 	{
-	case LightType::DIRECTIONAL:
-		delete app->renderer3D->dirLight;
-		break;
 	case LightType::POINT:
 		app->renderer3D->RemovePointLight((PointLight*)light);
 		break;
