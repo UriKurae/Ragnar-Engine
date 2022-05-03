@@ -109,4 +109,10 @@ public class EnemyManager : RagnarComponent
             go.GetComponent<UndistractableEnemy>().state = newState;
         }
     }
+
+    public void SaveTest(String name, Vector3 pos)
+    {
+        // Change deadEnemies[] to a list, if not deadCount is not really
+        SceneManager.SaveTest(deadEnemies.Length, name, pos);
+    }
 }
