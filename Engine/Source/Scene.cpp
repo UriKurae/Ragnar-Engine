@@ -13,6 +13,7 @@
 #include "AudioManager.h"
 
 //Scripting
+#include "ScriptComponent.h"
 
 #include "TransformComponent.h"
 #include "MeshComponent.h"
@@ -491,6 +492,37 @@ bool Scene::SaveScene(const char* name)
 		DEBUG_LOG("Scene couldn't be saved");
 
 	return true;
+}
+
+void Scene::SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::string playerName, float3 playerPos)
+{
+	//Load	
+	JsonParsing sceneFile = JsonParsing();
+	sceneFile.ParseFile("Testing.json");
+	JSON_Array* jsonArray = sceneFile.GetJsonArray(sceneFile.ValueToObject(sceneFile.GetRootValue()), "Scenes");
+	int size = sceneFile.GetJsonArrayCount(jsonArray);
+	for (int i = 0; i < size; ++i)
+	{
+		JsonParsing file = JsonParsing();
+		JsonParsing go = sceneFile.GetJsonArrayValue(jsonArray, i);
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Round", go.GetJsonNumber("Round"));
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Scene Name", go.GetJsonString("Scene Name"));
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Dead Count", go.GetJsonNumber("Dead Count"));
+		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Player Dead", go.GetJsonString("Player Dead"));
+		file.SetNewJson3Number(file, "Last Pos", go.GetJson3Number(go, "Last Pos"));
+		node.SetValueToArray(array, file.GetRootValue());
+	}
+	// Open
+	JsonParsing file = JsonParsing();
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Round", size++);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Scene Name", name.c_str());
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Dead Count", deadCount);
+	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Player Dead", playerName.c_str());
+	file.SetNewJson3Number(file, "Last Pos", playerPos);
+	//file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Time", name.c_str()); // InProgress
+
+	//Close
+	node.SetValueToArray(array, file.GetRootValue());
 }
 
 void Scene::DuplicateGO(GameObject* go, GameObject* parent)
