@@ -51,11 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 366905024,
+                    "pointer": 381500616,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
-                    "enemies": 0
+                    "enemies": 0,
+                    "runGame": true
                 }
             ]
         },
@@ -1317,19 +1318,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        20,
+                        -2.7362048625946045,
                         0,
-                        18.539106369018555
+                        15.629526138305664
                     ],
                     "Quaternion": [
                         0,
-                        0.97040951251983643,
+                        0.96303534507751465,
                         0,
-                        -0.24146506190299988
+                        0.2693750262260437
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        -0.48775061964988708,
+                        0.54548805952072144,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -1379,12 +1380,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.48647212982177734,
+                    "Vertical Fov": 0.47992405295372009,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        43.432613372802734,
+                        -28.678651809692383,
                         55,
-                        62.709724426269531
+                        58.374351501464844
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1393,14 +1394,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        20,
+                        -2.7362048625946045,
                         0,
-                        18.539106369018555
+                        15.629526138305664
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 207.94606018066406,
+                    "Horizontal Angle": 148.74583435058594,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1522,7 +1523,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1538,7 +1539,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1587,7 +1588,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1620,7 +1621,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1764.5,
+                        1756,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1636,7 +1637,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1698,7 +1699,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1756,
+                        1747.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1714,7 +1715,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1747,7 +1748,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1763,7 +1764,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1825,7 +1826,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1781.5,
+                        1773,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1841,7 +1842,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1903,7 +1904,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1781.5,
+                        1773,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1919,7 +1920,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1952,7 +1953,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1781.5,
+                        1773,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1968,7 +1969,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2030,7 +2031,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1781.5,
+                        1773,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2046,7 +2047,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2079,7 +2080,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1781.5,
+                        1773,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2095,7 +2096,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2157,7 +2158,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1781.5,
+                        1773,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2173,7 +2174,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2206,7 +2207,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1871,
+                        1862.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2222,7 +2223,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2263,7 +2264,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1871,
+                        1862.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2279,7 +2280,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2320,7 +2321,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1871,
+                        1862.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2336,7 +2337,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2377,7 +2378,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1896.5,
+                        1888,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2393,7 +2394,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2432,7 +2433,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1896.5,
+                        1888,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2448,7 +2449,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2487,7 +2488,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2503,7 +2504,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2512,7 +2513,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2528,7 +2529,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2569,7 +2570,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2585,7 +2586,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2594,7 +2595,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2610,7 +2611,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2651,7 +2652,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2667,7 +2668,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2676,7 +2677,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2692,7 +2693,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2733,7 +2734,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2749,7 +2750,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2758,7 +2759,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        1966,
+                        1957.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2774,7 +2775,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2815,7 +2816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2831,7 +2832,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2949,7 +2950,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 345483384,
+                    "pointer": 158970704,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
@@ -3127,7 +3128,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3143,7 +3144,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3161,7 +3162,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 345485560,
+                    "pointer": 334245376,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -3183,7 +3184,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1851,
+                        1842.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3199,7 +3200,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3261,7 +3262,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1851,
+                        1842.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3277,7 +3278,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3339,7 +3340,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1851,
+                        1842.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3355,7 +3356,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3417,7 +3418,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3433,7 +3434,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3466,7 +3467,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3482,7 +3483,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3515,7 +3516,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3531,7 +3532,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3564,7 +3565,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3580,7 +3581,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3642,7 +3643,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3658,7 +3659,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3714,7 +3715,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 345487192,
+                    "pointer": 334242248,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -3736,7 +3737,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        199.5,
+                        191,
                         1
                     ],
                     "Scale": [
@@ -3752,7 +3753,7 @@
                     "buttonWidth": 914,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3785,7 +3786,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        76.5,
+                        68,
                         5
                     ],
                     "Scale": [
@@ -3801,7 +3802,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3840,7 +3841,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        100.5,
+                        92,
                         15
                     ],
                     "Scale": [
@@ -3856,7 +3857,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3895,7 +3896,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        201,
+                        192.5,
                         15
                     ],
                     "Scale": [
@@ -3911,7 +3912,7 @@
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3982,7 +3983,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3998,7 +3999,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4037,7 +4038,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4053,7 +4054,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4086,7 +4087,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4102,7 +4103,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4135,7 +4136,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4151,7 +4152,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4184,7 +4185,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4200,7 +4201,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4262,7 +4263,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4278,7 +4279,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4340,7 +4341,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4356,7 +4357,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4418,7 +4419,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4434,7 +4435,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4496,7 +4497,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1990,
+                        1981.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4512,7 +4513,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4574,7 +4575,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4590,7 +4591,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4623,7 +4624,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4639,7 +4640,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4672,7 +4673,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4688,7 +4689,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4721,7 +4722,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4737,7 +4738,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4770,7 +4771,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -282.5,
+                        -274,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4786,7 +4787,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4819,7 +4820,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -304.5,
+                        -296,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4835,7 +4836,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4868,7 +4869,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1973,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4884,7 +4885,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4917,7 +4918,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1966,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -4933,7 +4934,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4982,7 +4983,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5031,7 +5032,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5070,7 +5071,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -5086,7 +5087,7 @@
                     "buttonWidth": 70,
                     "buttonHeight": 70,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5119,7 +5120,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -5135,7 +5136,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5168,7 +5169,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        1974.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -5184,7 +5185,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 786,
+                    "lastButtonHeight": 775,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5198,6 +5199,61 @@
                 {
                     "Type": 13,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 795117569,
+            "Parent UUID": 1906815624,
+            "Name": "UI Timer",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 775,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Time",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
                 }
             ]
         },

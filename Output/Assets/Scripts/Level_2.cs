@@ -5,12 +5,16 @@ public class Level_2 : RagnarComponent
 {
 	public Characters[] characters;
 	public Enemies[] enemies;
-    private float timer = 0;
+    private Chronometer timer = null;
     public bool runGame = true;
+    private UIText uiChrono;
     public void Start()
 	{
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(-23.76f, 0f, -199.01f);
+        GameObject.Find("UI Timer").GetComponent<Transform2D>().position2D.y = 200;
+        uiChrono = GameObject.Find("UI Timer").GetComponent<UIText>();
+        timer = new Chronometer();
 
         // PLAYERS
         characters = new Characters[3];
@@ -768,7 +772,8 @@ public class Level_2 : RagnarComponent
     }
     public void Update()
 	{
-        if (runGame) timer += Time.deltaTime;
+        if (runGame) timer.Update();
+        uiChrono.text = timer.GetTimeToString();
     }
 
 }
