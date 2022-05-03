@@ -37,7 +37,7 @@ public:
 
         lightSpace = float4x4::identity;
 
-        //Light();
+        Light();
     }
 
 public:
@@ -54,7 +54,7 @@ public:
         position = { 0,0,0 };
         type = LightType::POINT;
         intensity = 10.0f;
-        //Light();
+        Light();
     }
 
 public:
@@ -79,7 +79,7 @@ public:
 
         type = LightType::SPOT;
 
-        //Light();
+        Light();
     }
 
 public:
