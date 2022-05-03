@@ -646,6 +646,13 @@ void LoadScene(MonoString* string)
 	app->sceneManager->NextScene(name);
 }
 
+void SaveTest(int deadCount, MonoString* playerName, MonoObject* playerPos)
+{
+	char* name = mono_string_to_utf8(playerName);
+	float3 pos = app->moduleMono->UnboxVector(playerPos);
+	app->sceneManager->SaveTesting(deadCount, name, pos);
+}
+
 MonoString* GetLastSceneName()
 {
 	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetLastSceneName().c_str());
