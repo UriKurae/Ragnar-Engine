@@ -75,6 +75,8 @@ public:
 	std::vector<std::shared_ptr<Scene>>& GetScenes() { return scenes; }
 	void ShortCuts();
 
+	void SaveTesting(int deadCount, std::string playerName, float3 playerPos);
+
 	std::multimap<uint, SerializedField*> referenceMap;
 	bool newSceneLoaded;
 
