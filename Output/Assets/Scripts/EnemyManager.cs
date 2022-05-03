@@ -8,12 +8,12 @@ public class EnemyManager : RagnarComponent
     public List<GameObject> enemyGOs = new List<GameObject>();
     public List<GameObject> deadEnemies = new List<GameObject>();
     public GameObject[] colliders;
+    public int enemyCount = 0;
 
     public void Start()
     {
         enemyGOs.Clear();
         deadEnemies.Clear();
-
         foreach (Enemies e in enemies)
         {
             enemyGOs.Add(InternalCalls.InstancePrefab(e.prefabPath));
@@ -51,9 +51,22 @@ public class EnemyManager : RagnarComponent
 
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
         }
+
+        if (SaveSystem.fromContinue)
+        {
+            LoadEnemy();
+        }
     }
     public void Update()
     {
+        if (Input.GetKey(KeyCode.N) == KeyState.KEY_UP)
+        {
+            enemyGOs[0].GetComponent<Animation>().PlayAnimation("Dying"); 
+        }
+        for (int i = 0; i < enemies.Length; ++i)
+        {
+            Debug.Log(enemies[i].name.Trim());
+        }
         // Death Control
         if(enemyGOs.Count > 0)
         {
@@ -65,9 +78,9 @@ public class EnemyManager : RagnarComponent
                     {
                         if (enemyGOs[i] == go)
                         {
-                            ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                             deadEnemies.Add(enemyGOs[i]);
-                            enemyGOs.RemoveAt(i);
+                            ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
+                            enemyCount++;
                             enemies[i].state = EnemyState.DEATH;
                         }
                     }
@@ -96,32 +109,52 @@ public class EnemyManager : RagnarComponent
         }
     }
 
-    //public void SaveEnemies()
-    //{
-    //    for (int i = 0; i < enemies.Length; ++i)
-    //    {
-    //        SaveSystem.SaveEnemy(enemies[i]);
-    //    }
-    //}
+    public void SaveEnemies()
+    {
+        for (int i = 0; i < enemies.Length; ++i)
+        {
+            SaveSystem.SaveEnemy(enemies[i]);
+        }
+    }
 
-    //public void LoadEnemy()
-    //{
-    //    for (int i = 0; i < enemies.Length; ++i)
-    //    {
-    //        EnemyData data = SaveSystem.LoadEnemy(enemies[i].name);
+    public void LoadEnemy()
+    {
+        for (int i = 0; i < enemies.Length; ++i)
+        {
+            EnemyData data = SaveSystem.LoadEnemy(enemies[i].name);
 
-    //        Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
-    //        enemies[i].pos = pos;
-            
-    //        if (data.state == EnemyState.DEATH)
-    //        {
+            Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
+            enemies[i].pos = pos;
+            enemies[i].state = data.state;
+            enemies[i].type = data.type;
 
-    //        }
-    //    }
-    //}
+            enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
+            switch (enemies[i].type)
+            {
+                case EnemyType.BASIC:
+                    enemyGOs[i].GetComponent<BasicEnemy>().state = data.state;
+                    break;
+                case EnemyType.TANK:
+                    enemyGOs[i].GetComponent<TankEnemy>().state = data.state;
+                    break;
+                case EnemyType.UNDISTRACTABLE:
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().state = data.state;
+                    break;
+                case EnemyType.AIR:
+                    enemyGOs[i].GetComponent<AirEnemy>().state = data.state;
+                    break;
+            }
+
+            if (enemies[i].state == EnemyState.DEATH)
+            {
+                enemyGOs[i].GetComponent<Animation>().PlayAnimation("Dying");
+                deadEnemies.Add(enemyGOs[i]);
+            }
+        }
+    }
     public void SaveTest(String name, Vector3 pos)
     {
-        // Change deadEnemies[] to a list, if not deadCount is not really
-        SceneManager.SaveTest(deadEnemies.Count, name, pos);
+        // Change deadEnemies[] to a list, if not deadCount is not 
+        SceneManager.SaveTest(enemyCount, name, pos);
     }
 }

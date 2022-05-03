@@ -56,9 +56,11 @@ public class PlayerManager : RagnarComponent
         if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
         {
             LoadPlayer();
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
         }
         if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
         {
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
             SavePlayer();
         }
         if (!dialogue.GetInDialogue())

@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 343815704,
+                    "pointer": 446977752,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1393,20 +1393,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -50.565643310546875,
+                        26.393980026245117,
                         0,
-                        88.622039794921875
+                        29.929134368896484
                     ],
                     "Quaternion": [
                         0,
-                        0.97944998741149902,
+                        0.54118263721466064,
                         0,
-                        0.20168723165988922
+                        0.84090507030487061
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        0.40616050362586975,
-                        -3.1415927410125732
+                        -0,
+                        1.1436856985092163,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -1432,14 +1432,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        55.000038146972656,
+                        55,
                         -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        1.9141694451718649e-08,
-                        -3.9643706095660036e-09,
-                        0.93969273567199707
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1458,9 +1458,9 @@
                     "Vertical Fov": 0.47634795308113098,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -70.320419311523438,
-                        55.000038146972656,
-                        134.55546569824219
+                        -19.115533828735352,
+                        55,
+                        9.2164554595947266
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1469,14 +1469,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -50.565643310546875,
+                        26.393980026245117,
                         0,
-                        88.622039794921875
+                        29.929134368896484
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 156.72871398925781,
+                    "Horizontal Angle": 65.528366088867188,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -2741,7 +2741,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -2796,7 +2796,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -5374,7 +5374,7 @@
                     ],
                     "RotationEditor": [
                         0,
-                        0,
+                        -1.4835301637649536,
                         0
                     ],
                     "Scale": [
@@ -6130,7 +6130,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 340731816,
+                    "pointer": 442431128,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6432,7 +6432,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 376445368,
+                    "pointer": 373666800,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8375,7 +8375,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 376442240,
+                    "pointer": 373681352,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8450,7 +8450,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 376441968,
+                    "pointer": 373678088,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9092,6 +9092,73 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_12.fbx",
                     "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 225247856,
+            "Parent UUID": 417171234,
+            "Name": "CheckPoint",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "CheckPoint",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -25.453733444213867,
+                        0,
+                        63.788906097412109
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.23461277782917023,
+                        0,
+                        0.97208893299102783
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.47364041209220886,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        20,
+                        20,
+                        7
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         }

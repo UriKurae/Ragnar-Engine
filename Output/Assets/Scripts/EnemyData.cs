@@ -4,6 +4,7 @@ using RagnarEngine;
 [System.Serializable]
 public class EnemyData
 {
+    public EnemyType type;
     public EnemyState state;
     public float[] position;
 
@@ -15,6 +16,7 @@ public class EnemyData
         position[2] = enemy.pos.z;
 
         state = enemy.state;
+        type = enemy.type;
     }
 
 }

@@ -79,9 +79,10 @@ public static class SaveSystem
 
     public static void SaveEnemy(Enemies enemy)
     {
+        // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "/SavedGame/Enemies/" + enemy.name + ".ragnar";
+        string path = "SavedGame/Enemies/" + enemy.name + ".ragnar";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         EnemyData data = new EnemyData(enemy);
@@ -92,7 +93,8 @@ public static class SaveSystem
     }
     public static EnemyData LoadEnemy(string enemyName)
     {
-        string path = "/SavedGame/Enemies/" + enemyName + ".ragnar";
+        string finalName = enemyName.Trim();
+        string path = "SavedGame/Enemies/" + finalName + ".ragnar";
 
         if (File.Exists(path))
         {

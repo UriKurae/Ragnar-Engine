@@ -169,11 +169,6 @@ public class Player : RagnarComponent
          * if (other.gameObject.name == "WinCondition")
            SceneManager.LoadScene("WinScene");
         */
-        if (other.gameObject.tag == "CheckPoint")
-        {
-            SaveSystem.SaveScene();
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
-        }
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
@@ -206,6 +201,7 @@ public class Player : RagnarComponent
         {
             SaveSystem.SaveScene();
             GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
         }
     }
 
