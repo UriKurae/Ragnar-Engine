@@ -12,6 +12,7 @@ public class Player : RagnarComponent
     private bool firstTime = false;
     public bool dead = false;
     public GameObject pickedEnemy = null;
+    public bool isHidden = false;
 
     Rigidbody rb;
     Material materialComponent;
@@ -192,9 +193,16 @@ public class Player : RagnarComponent
         }
     }
 
+    public void OnTriggerEnter(Rigidbody other)
+    {
+        if (other.gameObject.tag == "Hidde")
+            isHidden = true;
+    }
+
     public void OnTriggerExit(Rigidbody other)
     {
-        Debug.Log("I am ouuuuuuuuuuuuuuuuuuuuuuuut");
+        if (other.gameObject.tag == "Hidde")
+            isHidden = false;
     }
 
     public void SetControled(bool var)
