@@ -192,6 +192,11 @@ public class Player : RagnarComponent
         }
     }
 
+    public void OnTriggerExit(Rigidbody other)
+    {
+        Debug.Log("I am ouuuuuuuuuuuuuuuuuuuuuuuut");
+    }
+
     public void SetControled(bool var)
     {
         controled = var;
