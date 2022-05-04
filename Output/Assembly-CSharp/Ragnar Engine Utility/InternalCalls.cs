@@ -52,6 +52,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern bool GetVSync();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void RequestDamageFeedback();
     }
 
     public class RayCast

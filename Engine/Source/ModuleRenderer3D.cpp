@@ -199,7 +199,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowsDepthTexture, 0);
 
-
+	dmgFeedbackRequested = false;
 	
 	return ret;
 }
@@ -209,7 +209,7 @@ bool ModuleRenderer3D::Start()
 	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
 	coneShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/basic.shader")));
 	textureShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/texture.shader")));
-	damageTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/damage.png")));
+	damageTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/test.png")));
 
 	return true;
 }
@@ -418,18 +418,10 @@ bool ModuleRenderer3D::PostUpdate()
 	
 	postProcessingShader->Unbind();
 
-	textureShader->Bind();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, damageTexture->GetId());
-	textLoc1 = glGetUniformLocation(postProcessingShader->GetId(), "tex");
-	glUniform1i(textLoc1, 0);
-
-	textureShader->SetUniform1f("alpha", 0.5f);
-
-	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
-	
-	glBindTexture(GL_TEXTURE_2D, 0);
-	damageTexture->Unbind();
+	if (dmgFeedbackRequested)
+	{
+		DrawDamageFeedback();
+	}
 
 	distIbo->Unbind();
 	distVao->Unbind();
@@ -752,6 +744,11 @@ void ModuleRenderer3D::RemoveSpotLight(SpotLight* light)
 	}
 }
 
+void ModuleRenderer3D::RequestDamageFeedback()
+{
+	dmgFeedbackRequested = true;
+}
+
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 {
 	//glPushMatrix();
@@ -858,4 +855,30 @@ void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComp
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glCullFace(GL_BACK);
 	genShadows = false;
+}
+
+void ModuleRenderer3D::DrawDamageFeedback()
+{
+	static float alpha = 0.6;
+	alpha -= 5.f * app->sceneManager->GetGameDeltaTime();
+	if (alpha < 0)
+	{
+		alpha = 0.6;
+		dmgFeedbackRequested = false;
+		return;
+	}
+
+	textureShader->Bind();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, damageTexture->GetId());
+	GLuint textLoc1 = glGetUniformLocation(textureShader->GetId(), "tex");
+	glUniform1i(textLoc1, 0);
+
+	glEnable(GL_BLEND);
+	textureShader->SetUniform1f("alpha", alpha);
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	damageTexture->Unbind();
 }

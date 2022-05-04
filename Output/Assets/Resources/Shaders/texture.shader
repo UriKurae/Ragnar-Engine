@@ -26,7 +26,5 @@ uniform float alpha;
 
 void main()
 {
-	fragColor = texture(tex, vTexCoords);
-	fragColor.a = alpha;
+	fragColor = texture2D(tex, vTexCoords) * alpha;
 }
-

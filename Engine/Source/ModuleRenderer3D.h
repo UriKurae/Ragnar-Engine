@@ -86,10 +86,14 @@ public:
 	void RemovePointLight(PointLight* light);
 	void RemoveSpotLight(SpotLight* light);
 
+	void RequestDamageFeedback();
+
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
 	void DebugDraw(GameObject* objSelected);
 	void GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam, AABB& shadowsAABB);
+
+	void DrawDamageFeedback();
 
 public:
 	PPlane grid;
@@ -145,6 +149,7 @@ private:
 	std::shared_ptr<Shader> coneShader;
 
 	unsigned int shadowsFbo;
-	//unsigned int shadowsDepthTexture;
+	
+	bool dmgFeedbackRequested;
 
 };

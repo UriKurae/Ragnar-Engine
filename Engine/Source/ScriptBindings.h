@@ -680,6 +680,11 @@ MonoObject* GetRegionGame()
 	return app->moduleMono->Float3ToCS(vec3);
 }
 
+void RequestDamageFeedback()
+{
+	app->renderer3D->RequestDamageFeedback();
+}
+
 // Dialogue System ======================================
 MonoString* GetDialogueLine()
 {

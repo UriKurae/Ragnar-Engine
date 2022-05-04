@@ -37,6 +37,11 @@ public class Player : RagnarComponent
 
     public void Update()
     {
+        if(Input.GetKey(KeyCode.O) == KeyState.KEY_DOWN)
+        {
+            InternalCalls.RequestDamageFeedback();
+        }
+
         if (!dialogue.GetInDialogue())
         {
             if (hitPoints <= 0 && !dead)
