@@ -268,3 +268,7 @@ void ChangeAnimationVelocity(MonoObject* go, int animation,float velocity)
 	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
 	tr->animations[animation]->ChageVelocity(velocity);
 }
+void SetStaticImage(MonoObject* go, int animation, int image) {
+	ImageComponent* tr = GetComponentMono<ImageComponent*>(go);
+	tr->animations[animation]->SetStaticimage(image);
+}

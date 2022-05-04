@@ -36,5 +36,8 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void ChangeAnimationVelocity(int animation, float velocity);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetStaticImage(int animation, int image);
     }
 }
