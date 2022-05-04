@@ -59,13 +59,14 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
+        // TODO save system
         if (Input.GetKey(KeyCode.N) == KeyState.KEY_UP)
         {
-            enemyGOs[0].GetComponent<Animation>().PlayAnimation("Dying"); 
-        }
-        for (int i = 0; i < enemies.Length; ++i)
-        {
-            Debug.Log(enemies[i].name.Trim());
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Enemies/" + "Basic Enemy 1" + ".ragnar");
+            }
+            
         }
         // Death Control
         if(enemyGOs.Count > 0)

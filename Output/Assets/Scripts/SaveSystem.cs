@@ -10,7 +10,7 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "SavedGame/Scene/SceneSaved.ragnar";
+        string path = "Library/SavedGame/Scenes/SceneSaved.ragnar";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         string data = SceneManager.currentSceneName;
@@ -21,7 +21,7 @@ public static class SaveSystem
     }
     public static void LoadScene()
     {
-        string path = "SavedGame/Scene/SceneSaved.ragnar";
+        string path = "Library/SavedGame/Scenes/SceneSaved.ragnar";
 
         if (File.Exists(path))
         {
@@ -45,7 +45,7 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "SavedGame/Players/" + player.gameObject.name + ".ragnar";
+        string path = "Library/SavedGame/Players/" + player.gameObject.name + ".ragnar";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(player);
@@ -57,7 +57,7 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer(string playerName)
     {
-        string path = "SavedGame/Players/" + playerName + ".ragnar";
+        string path = "Library/SavedGame/Players/" + playerName + ".ragnar";
 
         if (File.Exists(path))
         {
@@ -82,7 +82,8 @@ public static class SaveSystem
         // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "SavedGame/Enemies/" + enemy.name + ".ragnar";
+        string path = "Library/SavedGame/Enemies/" + enemy.name + ".ragnar";
+        ///DeleteDirectoryFiles(path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         EnemyData data = new EnemyData(enemy);
@@ -94,7 +95,7 @@ public static class SaveSystem
     public static EnemyData LoadEnemy(string enemyName)
     {
         string finalName = enemyName.Trim();
-        string path = "SavedGame/Enemies/" + finalName + ".ragnar";
+        string path = "Library/SavedGame/Enemies/" + finalName + ".ragnar";
 
         if (File.Exists(path))
         {
@@ -111,6 +112,20 @@ public static class SaveSystem
         {
             Debug.Log("Save file not found in " + path);
             return null;
+        }
+    }
+
+    public static void DeleteDirectoryFiles(string path)
+    {
+        System.IO.DirectoryInfo di = new DirectoryInfo(path);
+
+        foreach (FileInfo file in di.GetFiles())
+        {
+            file.Delete();
+        }
+        foreach (DirectoryInfo dir in di.GetDirectories())
+        {
+            dir.Delete(true);
         }
     }
 }

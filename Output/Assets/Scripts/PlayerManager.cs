@@ -19,8 +19,7 @@ public class PlayerManager : RagnarComponent
 	{
         foreach (Characters c in characters)
         {
-            InternalCalls.InstancePrefab(c.prefabPath);
-            
+            InternalCalls.InstancePrefab(c.prefabPath);   
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
