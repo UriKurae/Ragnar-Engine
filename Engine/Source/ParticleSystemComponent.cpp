@@ -48,6 +48,8 @@ bool ParticleSystemComponent::Update(float dt)
 {
     RG_PROFILING_FUNCTION("Particle System Update");
 
+    this->owner->GetAABB().Translate(transform->GetGlobalPosition());
+
     if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {
         if (((float)timer.GetTime()) / 1000.0f < maxDuration || looping == true)
