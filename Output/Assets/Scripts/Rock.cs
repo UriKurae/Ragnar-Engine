@@ -62,7 +62,7 @@ public class Rock : RagnarComponent
 		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 	}
 
-	public void OnCollisionEnter(Rigidbody other)
+	public void OnCollision(Rigidbody other)
 	{
 		if (other.gameObject.tag == "Ground" && !hitOnce)
         {

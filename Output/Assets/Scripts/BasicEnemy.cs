@@ -13,6 +13,7 @@ public class BasicEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
+    private bool stay = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -306,10 +307,18 @@ public class BasicEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
-        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-        agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
-        destPoint = (destPoint + 1) % waypoints.Length;
+        if (!stay)
+        {
+            if (waypoints.Length == 1)
+            {
+                stay = true;
+                gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            }
+            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+            destPoint = (destPoint + 1) % waypoints.Length;
+        }
     }
 
     public void Patrol()
