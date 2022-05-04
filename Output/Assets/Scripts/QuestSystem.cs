@@ -49,6 +49,13 @@ public class QuestSystem : RagnarComponent
 	public List<Quest> completedQuestList;
 	public List<Quest> activeQuestList;
 
+	public GameObject questTitle;
+	public GameObject questDescription;
+	public GameObject questId;
+	public GameObject questType;
+	public GameObject questState;
+
+	public Vector3 position;
 	// Methods
 	public void CreateQuest(uint _id, string _name, string _description, QuestState _state, QuestType _type)
     {
@@ -85,6 +92,14 @@ public class QuestSystem : RagnarComponent
 		completedQuestList = new List<Quest>();
 		activeQuestList = new List<Quest>();
 
+		questTitle = GameObject.Find("Titulo");
+		questDescription = GameObject.Find("Descripcion");
+		questId = GameObject.Find("Id");
+		questState = GameObject.Find("Estado");
+		questType = GameObject.Find("Tipo");
+
+		position = new Vector3(0.0f, 0.0f, 0.0f);
+
 		// Testing --------------------------------------------------------------------------------------------------
 		CreateQuest(0, "Quest de Prueba", "Soy una Quest de prueba", QuestState.ACTIVE, QuestType.UNKNOWN);
 		CreateQuest(1, "Quest de Prueba 2", "Soy una Quest de prueba 2", QuestState.ACTIVE, QuestType.MAIN);
@@ -103,24 +118,29 @@ public class QuestSystem : RagnarComponent
 	}
 	public void Update()
 	{
+		questTitle.GetComponent<UIText>().text = activeQuestList[4].GetQuestName().ToString();
+		position.Set(0.0f, 0.0f, 0.0f);
+		questTitle.GetComponent<Transform2D>().position2D = position;
+
+		questDescription.GetComponent<UIText>().text = activeQuestList[4].GetQuestDescription().ToString();
+		position.Set(0.0f, 10.0f, 0.0f);
+		questDescription.GetComponent<Transform2D>().position2D = position;
+
+		questId.GetComponent<UIText>().text = activeQuestList[4].GetQuestId().ToString();
+		position.Set(0.0f, 20.0f, 0.0f);
+		questId.GetComponent<Transform2D>().position2D = position;
+
+		questState.GetComponent<UIText>().text = activeQuestList[4].GetQuestState().ToString();
+		position.Set(0.0f, 30.0f, 0.0f);
+		questState.GetComponent<Transform2D>().position2D = position;
+
+		questType.GetComponent<UIText>().text = activeQuestList[4].GetQuestType().ToString();
+		position.Set(0.0f, 40.0f, 0.0f);
+		questType.GetComponent<Transform2D>().position2D = position;
 		// Testing --------------------------------------------------------------------------------------------------
 		if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
 		{
-			if (activeQuestList.Count > 0)
-			{
-				Debug.Log("ACTIVAS");
-				Debug.Log(activeQuestList.Count.ToString());
-				Debug.Log("COMPLETADAS");
-				Debug.Log(completedQuestList.Count.ToString());
-				for (int i = 0; i < activeQuestList.Count; ++i)
-				{
-					CompleteQuest(activeQuestList[i]);
-				}
-				Debug.Log("ACTIVAS");
-				Debug.Log(activeQuestList.Count.ToString());
-				Debug.Log("COMPLETADAS");
-				Debug.Log(completedQuestList.Count.ToString());
-			}
+			ChangeQuestState(activeQuestList[0], QuestState.COMPLETED);
 		}
 
 		if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
