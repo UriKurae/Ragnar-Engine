@@ -115,6 +115,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::ReparentToRoot", ReparentToRoot);
+	mono_add_internal_call("RagnarEngine.GameObject::ChangeMesh", ChangeMesh);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
 	// Utility ===================

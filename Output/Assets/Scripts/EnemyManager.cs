@@ -79,6 +79,10 @@ public class EnemyManager : RagnarComponent
                         if (enemyGOs[i] == go)
                         {
                             deadEnemies.Add(enemyGOs[i]);
+
+                            enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                            enemyGOs[i].ChangeMesh("Library/Meshes/dead");
+
                             ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                             enemyCount++;
                             enemies[i].state = EnemyState.DEATH;
