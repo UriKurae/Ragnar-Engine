@@ -682,7 +682,7 @@ public class pauseMenuButton : RagnarComponent
 			Light.shadowsEnabled = false;
 		}
 
-		pos.Set(0, y - 375, 36.1f);
+		pos.Set(0, y - 235, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(x - 550, y - 500, 36.1f);
@@ -708,7 +708,7 @@ public class pauseMenuButton : RagnarComponent
         optionsGeneralSound.isActive = true;
 
 
-        pos.Set(0, y - 375, 36.1f);
+        pos.Set(0, y - 235, 36.1f);
 		optionsSoundText.GetComponent<Transform2D>().position2D = pos;
 
 		float generalSound;
@@ -909,7 +909,7 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(20, 20, 0);
 		UISelector.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x+387, y+190, -10.400f);
+		pos.Set(x - 20, y - 60, -10.400f);
 		UICharacterName.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(214, 214f, 0);
 		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);
@@ -1259,7 +1259,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 675, y + 315, -10.400f);
+				pos.Set(x + 540, y + 200, -10.400f);
 
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(x + 630, y + 200, -10.400f);
@@ -1323,7 +1323,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 725, y + 315, -10.400f);
+				pos.Set(x + 640, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(x + 725, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -1385,7 +1385,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 765, y + 315, -10.400f);
+				pos.Set(x + 725, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(0, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -1446,7 +1446,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 810, y + 315, -10.400f);
+				pos.Set(x + 810, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(x + 895, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -1507,7 +1507,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 850, y + 315, -10.400f);
+				pos.Set(x + 890, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 
 				pos.Set(x + 980, y + 200, -10.400f);
