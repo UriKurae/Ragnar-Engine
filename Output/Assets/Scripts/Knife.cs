@@ -24,7 +24,6 @@ public class Knife : RagnarComponent
         gameObject.transform.localPosition = pos;
 
         Vector3 direction = HitEnemy(agent, player);
-		direction.y = 0;
 
         Rigidbody goRB = gameObject.GetComponent<Rigidbody>();
         goRB.SetBodyPosition(pos);
