@@ -18,6 +18,7 @@ class Framebuffer;
 class TextureBuffer;
 class Material;
 class Shader;
+class Texture;
 class GameObject;
 class CameraComponent;
 
@@ -137,6 +138,8 @@ private:
 	IndexBuffer* distIbo;
 	std::shared_ptr<Shader> postProcessingShader;
 	
+	std::shared_ptr<Shader> textureShader;
+	std::shared_ptr<Texture> damageTexture;
 
 	VertexBuffer* vbo;
 	std::shared_ptr<Shader> coneShader;

@@ -22,6 +22,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "NavMeshBuilder.h"
 #include "GameView.h"
 #include "Viewport.h"
@@ -145,7 +146,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo = new Framebuffer(w, h, 0);
 	mainCameraFbo->Unbind();	
 
-#ifdef DIST
+//#ifdef DIST
 	distVao = new VertexArray();
 
 	float vertices[] =
@@ -169,11 +170,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	distIbo = new IndexBuffer(indices, 6);
 	distVao->SetIndexBuffer(*distIbo);
 
-#else
+//#else
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
 	grid.axis = true;
-#endif
+//#endif
 
 	dirLight = new DirectionalLight();
 	goDirLight = app->sceneManager->GetCurrentScene()->CreateGameObject(0);
@@ -199,6 +200,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowsDepthTexture, 0);
 
 
+	
 	return ret;
 }
 
@@ -206,7 +208,9 @@ bool ModuleRenderer3D::Start()
 {
 	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
 	coneShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/basic.shader")));
-	
+	textureShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/texture.shader")));
+	damageTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/damage.png")));
+
 	return true;
 }
 
@@ -412,9 +416,23 @@ bool ModuleRenderer3D::PostUpdate()
 
 	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
 	
+	postProcessingShader->Unbind();
+
+	textureShader->Bind();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, damageTexture->GetId());
+	textLoc1 = glGetUniformLocation(postProcessingShader->GetId(), "tex");
+	glUniform1i(textLoc1, 0);
+
+	textureShader->SetUniform1f("alpha", 0.5f);
+
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	
+	glBindTexture(GL_TEXTURE_2D, 0);
+	damageTexture->Unbind();
+
 	distIbo->Unbind();
 	distVao->Unbind();
-	postProcessingShader->Unbind();
 
 #else
 	app->editor->Draw(fbo, mainCameraFbo);
