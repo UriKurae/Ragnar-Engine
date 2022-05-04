@@ -74,7 +74,7 @@ public:
 	
 	bool LoadScene(const char* name, bool fromLibrary = false);
 	bool SaveScene(const char* name);
-	void SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::string playerName, float3 playerPos);
+	void SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::string playerName, float3 playerPos, float time);
 
 	void DuplicateGO(GameObject* go, GameObject* parent);
 

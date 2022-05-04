@@ -12,7 +12,8 @@ public class Level_3 : RagnarComponent
 	{
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(2.42f, 0f, 30.47f);
-        GameObject.Find("UI Timer").GetComponent<Transform2D>().position2D.y = 200;
+        GameObject.Find("UI Timer").GetComponent<Transform2D>().position2D = new Vector3(0, 250, 0);
+
         uiChrono = GameObject.Find("UI Timer").GetComponent<UIText>();
         timer = new Chronometer();
 

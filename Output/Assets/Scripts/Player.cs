@@ -165,10 +165,6 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        /*
-         * if (other.gameObject.name == "WinCondition")
-           SceneManager.LoadScene("WinScene");
-        */
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);

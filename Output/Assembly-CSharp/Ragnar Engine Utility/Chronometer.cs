@@ -3,7 +3,7 @@ using RagnarEngine;
 
 public class Chronometer
 {
-    private float timer = 0;
+    public float timer = 0;
     private float sec = 0;
     private float min = 0;
     private string text = "";
