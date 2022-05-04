@@ -206,7 +206,7 @@ public class Level_2 : RagnarComponent
 
         enemies[1] = new Enemies
         {
-            name = "Basic Enemy 1",
+            name = "Basic Enemy 2",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -217,7 +217,7 @@ public class Level_2 : RagnarComponent
 
         enemies[2] = new Enemies
         {
-            name = "Basic Enemy 2",
+            name = "Basic Enemy 3",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -228,7 +228,7 @@ public class Level_2 : RagnarComponent
 
         enemies[3] = new Enemies
         {
-            name = "Basic Enemy 3",
+            name = "Basic Enemy 4",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -239,7 +239,7 @@ public class Level_2 : RagnarComponent
 
         enemies[4] = new Enemies
         {
-            name = "Basic Enemy 4",
+            name = "Basic Enemy 5",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -250,7 +250,7 @@ public class Level_2 : RagnarComponent
 
         enemies[5] = new Enemies
         {
-            name = "Basic Enemy 5",
+            name = "Basic Enemy 6",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -261,7 +261,7 @@ public class Level_2 : RagnarComponent
 
         enemies[6] = new Enemies
         {
-            name = "Basic Enemy 6",
+            name = "Basic Enemy 7",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -272,7 +272,7 @@ public class Level_2 : RagnarComponent
 
         enemies[7] = new Enemies
         {
-            name = "Basic Enemy 7",
+            name = "Basic Enemy 8",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -283,7 +283,7 @@ public class Level_2 : RagnarComponent
 
         enemies[8] = new Enemies
         {
-            name = "Basic Enemy 8",
+            name = "Basic Enemy 9",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -294,7 +294,7 @@ public class Level_2 : RagnarComponent
 
         enemies[9] = new Enemies
         {
-            name = "Basic Enemy 9",
+            name = "Basic Enemy 10",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -305,7 +305,7 @@ public class Level_2 : RagnarComponent
 
         enemies[10] = new Enemies
         {
-            name = "Basic Enemy 10",
+            name = "Basic Enemy 11",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -316,7 +316,7 @@ public class Level_2 : RagnarComponent
 
         enemies[11] = new Enemies
         {
-            name = "Basic Enemy 11",
+            name = "Basic Enemy 12",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -514,7 +514,7 @@ public class Level_2 : RagnarComponent
 
         enemies[24] = new Enemies
         {
-            name = "Basic Enemy 24",
+            name = "Basic Enemy 25",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -525,7 +525,7 @@ public class Level_2 : RagnarComponent
 
         enemies[25] = new Enemies
         {
-            name = "Basic Enemy 25",
+            name = "Basic Enemy 26",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -536,7 +536,7 @@ public class Level_2 : RagnarComponent
 
         enemies[26] = new Enemies
         {
-            name = "Basic Enemy 26",
+            name = "Basic Enemy 27",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -547,7 +547,7 @@ public class Level_2 : RagnarComponent
 
         enemies[27] = new Enemies
         {
-            name = "Basic Enemy 27",
+            name = "Basic Enemy 28",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -558,7 +558,7 @@ public class Level_2 : RagnarComponent
 
         enemies[28] = new Enemies
         {
-            name = "Basic Enemy 28",
+            name = "Basic Enemy 29",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -569,7 +569,7 @@ public class Level_2 : RagnarComponent
 
         enemies[29] = new Enemies
         {
-            name = "Basic Enemy 29",
+            name = "Basic Enemy 30",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -580,7 +580,7 @@ public class Level_2 : RagnarComponent
 
         enemies[30] = new Enemies
         {
-            name = "Basic Enemy 30",
+            name = "Basic Enemy 31",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -591,7 +591,7 @@ public class Level_2 : RagnarComponent
 
         enemies[31] = new Enemies
         {
-            name = "Basic Enemy 31",
+            name = "Basic Enemy 32",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -602,7 +602,7 @@ public class Level_2 : RagnarComponent
 
         enemies[32] = new Enemies
         {
-            name = "Basic Enemy 32",
+            name = "Basic Enemy 33",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -613,7 +613,7 @@ public class Level_2 : RagnarComponent
 
         enemies[33] = new Enemies
         {
-            name = "Basic Enemy 33",
+            name = "Basic Enemy 34",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -624,7 +624,7 @@ public class Level_2 : RagnarComponent
 
         enemies[34] = new Enemies
         {
-            name = "Basic Enemy 34",
+            name = "Basic Enemy 35",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -668,7 +668,7 @@ public class Level_2 : RagnarComponent
 
         enemies[35] = new Enemies
         {
-            name = "Basic Enemy 35",
+            name = "Basic Enemy 36",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -679,7 +679,7 @@ public class Level_2 : RagnarComponent
 
         enemies[36] = new Enemies
         {
-            name = "Basic Enemy 36",
+            name = "Basic Enemy 37",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -690,7 +690,7 @@ public class Level_2 : RagnarComponent
 
         enemies[37] = new Enemies
         {
-            name = "Basic Enemy 37",
+            name = "Basic Enemy 38",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -701,7 +701,7 @@ public class Level_2 : RagnarComponent
 
         enemies[38] = new Enemies
         {
-            name = "Basic Enemy 38",
+            name = "Basic Enemy 39",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -712,7 +712,7 @@ public class Level_2 : RagnarComponent
 
         enemies[39] = new Enemies
         {
-            name = "Basic Enemy 39",
+            name = "Basic Enemy 40",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
@@ -749,7 +749,7 @@ public class Level_2 : RagnarComponent
 
         enemies[41] = new Enemies
         {
-            name = "Basic Enemy 40",
+            name = "Basic Enemy 41",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,

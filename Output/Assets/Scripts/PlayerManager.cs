@@ -54,8 +54,10 @@ public class PlayerManager : RagnarComponent
     {
         if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
         {
-            LoadPlayer();
-            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
+            SaveSystem.LoadScene();
+            //LoadPlayer();
+            //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
+            SaveSystem.fromContinue = true;
         }
         if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
         {
@@ -396,6 +398,7 @@ public class PlayerManager : RagnarComponent
 
     public void SavePlayer()
     {
+        SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
         for (int i = 0; i < players.Length; ++i)
         { 

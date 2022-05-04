@@ -11,6 +11,10 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = "Library/SavedGame/Scenes/SceneSaved.ragnar";
+
+        // Delete all files before saving, just in case there's some wrong order
+        DeleteDirectoryFiles("Library/SavedGame/Scenes");
+
         FileStream stream = new FileStream(path, FileMode.Create);
 
         string data = SceneManager.currentSceneName;
@@ -83,7 +87,6 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = "Library/SavedGame/Enemies/" + enemy.name + ".ragnar";
-        ///DeleteDirectoryFiles(path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         EnemyData data = new EnemyData(enemy);

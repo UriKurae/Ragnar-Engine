@@ -59,15 +59,6 @@ public class EnemyManager : RagnarComponent
     }
     public void Update()
     {
-        // TODO save system
-        if (Input.GetKey(KeyCode.N) == KeyState.KEY_UP)
-        {
-            for (int i = 0; i < enemies.Length; i++)
-            {
-                SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Enemies/" + "Basic Enemy 1" + ".ragnar");
-            }
-            
-        }
         // Death Control
         if(enemyGOs.Count > 0)
         {
@@ -81,8 +72,8 @@ public class EnemyManager : RagnarComponent
                         {
                             deadEnemies.Add(enemyGOs[i]);
 
-                            enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
-                            enemyGOs[i].ChangeMesh("Library/Meshes/dead");
+                           // enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                           // enemyGOs[i].ChangeMesh("Library/Meshes/dead");
 
                             ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                             enemyCount++;
@@ -116,6 +107,7 @@ public class EnemyManager : RagnarComponent
 
     public void SaveEnemies()
     {
+        SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Enemies");
         for (int i = 0; i < enemies.Length; ++i)
         {
             SaveSystem.SaveEnemy(enemies[i]);
