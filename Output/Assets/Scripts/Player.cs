@@ -114,7 +114,7 @@ public class Player : RagnarComponent
             if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
                 String name = "";
-                if (gameObject.name == "Player") name = "Paul Atrides";
+                if (gameObject.name == "Player") name = "Paul Atreides";
                 else if (gameObject.name == "Player_2") name = "Chani";
                 else if (gameObject.name == "Player_3") name = "Stilgar";
                 GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
@@ -144,9 +144,6 @@ public class Player : RagnarComponent
             Time.timeScale = 1.0f;
             
         }
-
-        // Pause menu
-
     }
 
     private void Die()
@@ -166,10 +163,6 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        /*
-         * if (other.gameObject.name == "WinCondition")
-           SceneManager.LoadScene("WinScene");
-        */
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);

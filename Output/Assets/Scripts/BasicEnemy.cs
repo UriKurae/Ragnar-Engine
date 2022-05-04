@@ -230,7 +230,7 @@ public class BasicEnemy : RagnarComponent
         if (coneRotate) enemyForward = RotateVector(enemyForward, 80, 2);
 
         index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 10, players, players.Length, colliders, colliders.Length);
-        if (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead) return false;
+        if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead)) return false;
         return (index == -1) ? false : true;
     }
     private Vector3 RotateVector(Vector3 vec, int angles, int time)
@@ -271,7 +271,6 @@ public class BasicEnemy : RagnarComponent
 
         if (canShoot)
         {
-            //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
             shootCooldown = 4f;
