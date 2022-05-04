@@ -97,14 +97,13 @@ void ImageComponent::Draw(CameraComponent* gameCam)
 	MaterialComponent* auxiliar;
 	auxiliar = principal;
 	for (int a = 0;a < animations.size();a++) {
-		if (animations[a]->isPlayng)
+		if (animations[a]->isPlayng) {
 			auxiliar =animations[a]->Draw();
+		}
+			
 	}
-
-	planeToDraw->DrawPlane2D(auxiliar->GetTexture().get());
-
 	glColor4f(actualColor.r, actualColor.g, actualColor.b, actualColor.a);
-	planeToDraw->DrawPlane2D(owner->GetComponent<MaterialComponent>()->GetTexture().get());
+	planeToDraw->DrawPlane2D(auxiliar->GetTexture().get());
 
 	glDisable(GL_ALPHA_TEST);
 	glColor3f(255, 255, 255);
