@@ -15,10 +15,12 @@ public:
 	float timeBetwen = 0;
 	void Update(float dt);
 	MaterialComponent* Draw();
+	bool isStatic = false;
 	int animatonState = -1;
 	void StartAnim();
 	void StopAnim();
 	void ChageVelocity(float velocity);
+	void SetStaticimage(int image);
 };
 class ImageComponent : public Component
 {

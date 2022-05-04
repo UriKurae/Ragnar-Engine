@@ -12,26 +12,33 @@
 #include "GL/glew.h"
 void UIAnimation::Update(float dt) 
 {
-	
-	currentDt += dt;
-	for (int a = 0;a < images.size();a++) {
-		
-		if (animatonState == a && currentDt >= timeBetwen) {
-			currentDt =0;
-			if (images.size() == a+1) {
-				if(loop)
-					animatonState = 0;
-				else
-					animatonState = -1;
-			}
-			else {
-				animatonState++;
+	if (!isStatic) {
+		currentDt += dt;
+		for (int a = 0; a < images.size(); a++) {
+
+			if (animatonState == a && currentDt >= timeBetwen) {
+				currentDt = 0;
+				if (images.size() == a + 1) {
+					if (loop)
+						animatonState = 0;
+					else
+						animatonState = -1;
+				}
+				else {
+					animatonState++;
+				}
 			}
 		}
+		if (animatonState == -1) {
+			StopAnim();
+		}
 	}
-	if (animatonState == -1) {
-		StopAnim();
-	}
+}
+void UIAnimation::SetStaticimage(int image) {
+
+	animatonState= image;
+	isPlayng = true;
+	isStatic = true;
 }
 MaterialComponent* UIAnimation::Draw() 
 {
