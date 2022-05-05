@@ -116,8 +116,18 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	// Inverse triangle
 	std::reverse(vertex.begin(), vertex.end());
 
-	// Add to enemyCones list
+	// Z fighting
 	int sizeCon = app->renderer3D->enemyCones.size();
+	if (sizeCon != 0)
+	{
+		int numCones = sizeCon / vertex.size();
+		for (int i = 0; i < vertex.size(); i++)
+		{
+			vertex[i].y += 0.01f * numCones;
+		}
+	}
+
+	// Add to enemyCones list
 	app->renderer3D->enemyCones.resize(sizeCon + vertex.size());
 	memcpy(&app->renderer3D->enemyCones[sizeCon], &vertex[0], vertex.size() * sizeof(float3));
 
