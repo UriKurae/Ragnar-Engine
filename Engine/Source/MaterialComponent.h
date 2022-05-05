@@ -47,6 +47,9 @@ public:
 	inline float3 GetInteractuableColor() { return interColor; }
 
 private:
+	void DisplayTexturesInfo();
+
+private:
 	bool checker = false;
 	bool showTexMenu = false;
 	bool showShaderEditor = false;
@@ -61,6 +64,7 @@ private:
 	std::shared_ptr<Shader> shadertoRecompily;
 	std::shared_ptr<Texture> diff = nullptr;
 	std::shared_ptr<Texture> normalMap = nullptr;
+	std::shared_ptr<Texture> emissive = nullptr;
 	std::shared_ptr<Shader> shader;
 	std::shared_ptr<Shader> outlineShader;
 	std::shared_ptr<Shader> shadowShader;
@@ -70,6 +74,7 @@ private:
 	float3 ambientColor;
 	float3 diffuseColor;
 	float3 specularColor;
+	float3 emissiveColor;
 
 	float shininess;
 	float refreshShaderTimer;

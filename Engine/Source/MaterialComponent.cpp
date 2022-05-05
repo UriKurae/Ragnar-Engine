@@ -53,6 +53,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	shader->SetUniforms(GetShaderUniforms());
 	diff = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 	normalMap = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
+	emissive = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	outlineShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/outlineStencil.shader")));
 	shadowShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/shadows.shader")));
@@ -61,6 +62,7 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	diffuseColor = ambientColor;
 	specularColor = { 0.5,0.5,0.5 };
 	shininess = 5.0f;
+	emissiveColor = float3::one;
 
 	refreshShaderTimer = 0.0f;
 }
@@ -72,7 +74,6 @@ MaterialComponent::MaterialComponent(MaterialComponent* mat)
 	normalMap = mat->normalMap;
 
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/default.shader")));
-	//shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->GetResource("Assets/Resources/Shaders/default.shader"));
 
 	ambientColor = { 0.4,0.4,0.4 };
 	diffuseColor = ambientColor;
@@ -107,106 +108,7 @@ void MaterialComponent::OnEditor()
 
 		ImGui::DragFloat("Opacity", &opacity, 0.01, 0, 1);
 
-		ImGui::PushID(diff->GetUID());
-		if (diff != nullptr)
-		{
-			ImGui::Text("Select Diffuse texture: ");
-			ImGui::SameLine();
-			if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
-			{
-				showTexMenu = true;
-				textureTypeToChange = TextureType::DIFFUSE;
-			}
-
-			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
-			ImGui::Indent();
-			if (ImGui::CollapsingHeader("Info##Diff"))
-			{
-				ImGui::Text("Path: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diff->GetAssetsPath().c_str());
-				ImGui::Text("Width: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetWidth());
-				ImGui::Text("Height: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
-				ImGui::Text("Reference Count: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
-			}
-			ImGui::Unindent();
-		}
-		else
-		{
-			ImGui::Text("Select Diffuse texture: ");
-			ImGui::SameLine();
-			if (ImGui::Button("No Texture"))
-			{
-				showTexMenu = true;
-				textureTypeToChange = TextureType::DIFFUSE;
-			}
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
-			ImGui::Text("Width: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-			ImGui::Text("Height: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-		}
-		ImGui::PopID();
-
-		ImGui::Separator();
-		
-		ImGui::PushID(normalMap->GetUID());
-		if (normalMap != nullptr)
-		{
-			ImGui::Text("Select Normal texture: ");
-			ImGui::SameLine();
-			if (ImGui::Button(((normalMap ? normalMap->GetName() : "") + "##Foo").c_str()))
-			{
-				showTexMenu = true;
-				textureTypeToChange = TextureType::NORMAL;
-			}
-			
-			ImGui::Image((ImTextureID)normalMap->GetId(), ImVec2(128, 128));
-			
-			ImGui::Indent();
-			if (ImGui::CollapsingHeader("Info##Normal"))
-			{
-				ImGui::Text("Path: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", normalMap->GetAssetsPath().c_str());
-				ImGui::Text("Width: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", normalMap->GetWidth());
-				ImGui::Text("Height: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", normalMap->GetHeight());
-				ImGui::Text("Reference Count: ");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", normalMap.use_count());
-			}
-			ImGui::Unindent();
-		}
-		else
-		{
-			ImGui::Text("Select Normal texture: ");
-			ImGui::SameLine();
-			if (ImGui::Button("No Texture"))
-			{
-				showTexMenu = true;
-				textureTypeToChange = TextureType::NORMAL;
-			}
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
-			ImGui::Text("Width: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-			ImGui::Text("Height: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-		}
-		ImGui::PopID();
+		DisplayTexturesInfo();
 
 		ImGui::Separator();
 
@@ -286,6 +188,8 @@ void MaterialComponent::MenuTextureList()
 				if (diff.use_count() - 1 == 1) diff->UnLoad();
 			else if(textureTypeToChange == TextureType::NORMAL)
 				if (normalMap.use_count() - 1 == 1) normalMap->UnLoad();
+			else if (textureTypeToChange == TextureType::EMISSIVE)
+					if (normalMap.use_count() - 1 == 1) emissive->UnLoad();
 
 			SetTexture((*it));
 		}
@@ -587,19 +491,28 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
-	GLuint textLoc3 = glGetUniformLocation(shader->GetId(), "depthTexture");
-	glUniform1i(textLoc3, 1);
+	GLuint texLoc = glGetUniformLocation(shader->GetId(), "depthTexture");
+	glUniform1i(texLoc, 1);
 	
 	if (normalMap != std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->GetResource("Assets/Resources/white.png")))
 	{
 		shader->SetUniform1i("hasNormalMap", 1);
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, normalMap->GetId());
-		textLoc3 = glGetUniformLocation(shader->GetId(), "normalMap");
-		glUniform1i(textLoc3, 2);
+		texLoc = glGetUniformLocation(shader->GetId(), "normalMap");
+		glUniform1i(texLoc, 2);
 	}
 	else
 		shader->SetUniform1i("hasNormalMap", 0);	
+
+	if (emissive != std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->GetResource("Assets/Resources/white.png")))
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
+		texLoc = glGetUniformLocation(shader->GetId(), "emissiveTexture");
+		glUniform1i(texLoc, 3);
+		shader->SetUniformVec3f("material.emissiveColor", emissiveColor);
+	}
 
 	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
@@ -698,9 +611,10 @@ void MaterialComponent::SetTexture(std::shared_ptr<Resource> tex)
 		diff = std::static_pointer_cast<Texture>(tex);
 	else if (textureTypeToChange == TextureType::NORMAL)
 		normalMap = std::static_pointer_cast<Texture>(tex);
+	else if(textureTypeToChange == TextureType::EMISSIVE)
+		emissive = std::static_pointer_cast<Texture>(tex);
 	else
 		diff = std::static_pointer_cast<Texture>(tex);
-
 }
 
 void MaterialComponent::EditorShader()
@@ -720,4 +634,161 @@ void MaterialComponent::EditorShader()
 	showShaderEditor = true;
 
 	shadertoRecompily = shader;
+}
+
+void MaterialComponent::DisplayTexturesInfo()
+{
+	ImGui::PushID(diff->GetUID());
+	if (diff != nullptr)
+	{
+		ImGui::Text("Select Diffuse texture: ");
+		ImGui::SameLine();
+		if (ImGui::Button(diff ? diff->GetName().c_str() : ""))
+		{
+			showTexMenu = true;
+			textureTypeToChange = TextureType::DIFFUSE;
+
+		}
+
+		ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
+		ImGui::Indent();
+		if (ImGui::CollapsingHeader("Info##Diff"))
+		{
+			ImGui::Text("Path: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", diff->GetAssetsPath().c_str());
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetWidth());
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", diff->GetHeight());
+			ImGui::Text("Reference Count: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", diff.use_count());
+		}
+		ImGui::Unindent();
+	}
+	else
+	{
+		ImGui::Text("Select Diffuse texture: ");
+		ImGui::SameLine();
+		if (ImGui::Button("No Texture"))
+		{
+			showTexMenu = true;
+			textureTypeToChange = TextureType::DIFFUSE;
+		}
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
+		ImGui::Text("Width: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+		ImGui::Text("Height: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+	}
+	ImGui::PopID();
+
+	ImGui::Separator();
+
+	ImGui::PushID(normalMap->GetUID());
+	if (normalMap != nullptr)
+	{
+		ImGui::Text("Select Normal texture: ");
+		ImGui::SameLine();
+		if (ImGui::Button(((normalMap ? normalMap->GetName() : "") + "##Foo").c_str()))
+		{
+			showTexMenu = true;
+			textureTypeToChange = TextureType::NORMAL;
+		}
+
+		ImGui::Image((ImTextureID)normalMap->GetId(), ImVec2(128, 128));
+
+		ImGui::Indent();
+		if (ImGui::CollapsingHeader("Info##Normal"))
+		{
+			ImGui::Text("Path: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", normalMap->GetAssetsPath().c_str());
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", normalMap->GetWidth());
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", normalMap->GetHeight());
+			ImGui::Text("Reference Count: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", normalMap.use_count());
+		}
+		ImGui::Unindent();
+	}
+	else
+	{
+		ImGui::Text("Select Normal texture: ");
+		ImGui::SameLine();
+		if (ImGui::Button("No Texture"))
+		{
+			showTexMenu = true;
+			textureTypeToChange = TextureType::NORMAL;
+		}
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
+		ImGui::Text("Width: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+		ImGui::Text("Height: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+	}
+	ImGui::PopID();
+
+	ImGui::PushID(emissive->GetUID());
+	if (emissive != nullptr)
+	{
+		ImGui::Text("Select Emissive texture: ");
+		ImGui::SameLine();
+		if (ImGui::Button(((emissive ? emissive->GetName() : "") + "##Foo2").c_str()))
+		{
+			showTexMenu = true;
+			textureTypeToChange = TextureType::EMISSIVE;
+		}
+
+		ImGui::Image((ImTextureID)emissive->GetId(), ImVec2(128, 128));
+		ImGui::ColorEdit3("Emissive Color", emissiveColor.ptr());
+
+		ImGui::Indent();
+		if (ImGui::CollapsingHeader("Info##Emissive"))
+		{
+			ImGui::Text("Path: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", emissive->GetAssetsPath().c_str());
+			ImGui::Text("Width: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", emissive->GetWidth());
+			ImGui::Text("Height: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", emissive->GetHeight());
+			ImGui::Text("Reference Count: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", emissive.use_count());
+		}
+		ImGui::Unindent();
+
+	}
+	else
+	{
+		ImGui::Text("Select Emissive texture: ");
+		ImGui::SameLine();
+		if (ImGui::Button("No Texture"))
+		{
+			showTexMenu = true;
+			textureTypeToChange = TextureType::EMISSIVE;
+		}
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
+		ImGui::Text("Width: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+		ImGui::Text("Height: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
+	}
+	ImGui::PopID();
 }

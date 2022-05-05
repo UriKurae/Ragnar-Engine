@@ -30,10 +30,7 @@ out vec3 vNormal;
 out float vTextureAlpha;
 out vec4 fragPosLightSpace;
 out mat3 tbnMatrix;
-
-out vec3 tangentLightDir;
-out vec3 tangentViewPos;
-out vec3 tangentFragPos;
+out mat4 vModel;
 
 void main()
 {
@@ -65,18 +62,12 @@ void main()
 	vAmbientColor = ambientColor;
 	fragPosLightSpace = lightSpaceMatrix * model * totalPosition;
 	vCamPos = camPos;
-	//vTextureAlpha = textureAlpha;
+	vModel = model;
 
-	mat3 normalMatrix = transpose(inverse(mat3(model)));
-	vec3 T = normalize(normalMatrix * tangents);
-	vec3 N = normalize(normalMatrix * normal);
-	T = normalize(T - dot(T, N) * N);
-	vec3 B = cross(N, T);
-	tbnMatrix = transpose(mat3(T, B, N));
-
-	//tangentLightDir = tbnMatrix * fragPosLightSpace.xyz;
-	tangentViewPos = tbnMatrix * camPos;
-	tangentFragPos = tbnMatrix * vec3(model * vec4(position, 1));
+	vec3 T = normalize(tangents);
+	vec3 B = normalize(biTangents);
+	vec3 N = normalize(normal);
+	tbnMatrix = mat3(T, B, N);
 }
 
 
@@ -91,6 +82,7 @@ in vec3 vAmbientColor;
 in float vTextureAlpha;
 in vec4 fragPosLightSpace;
 in mat3 tbnMatrix;
+in mat4 vModel;
 
 //out vec3 tangentLightPos;
 out vec3 tangentViewPos;
@@ -102,8 +94,11 @@ layout(location = 1) out vec4 fragNormals;
 layout(location = 0) uniform sampler2D tex;
 layout(location = 1) uniform sampler2D depthTexture;
 layout(location = 2) uniform sampler2D normalMap;
+layout(location = 3) uniform sampler2D emissiveTexture;
+
 uniform float normalsThickness;
-uniform bool hasNormalMap;
+uniform int hasNormalMap;
+
 uniform int isInteractuable; // Acts as a bool
 uniform vec3 interCol;
 uniform float interColIntensity;
@@ -117,8 +112,9 @@ struct Material
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+	vec3 emissiveColor;
 	float shininess;
-	bool gammaCorrection;
+	int gammaCorrection; // Acts as a bool
 	float gammaCorrectionAmount;
 };
 uniform Material material;
@@ -174,8 +170,11 @@ struct CelShadingProps
 	float b;
 	float c;
 	float d;
+	float e;
+	float f;
+
 };
-const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
+const CelShadingProps csp = {0.1f, 0.18f, 0.37f, 0.55f, 0.66f, 0.8f};
 
 
 vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
@@ -223,16 +222,19 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
 	//vec3 lightDir = normalize(tangentLightPos - tangentFragPos);
-	lightDir = tbnMatrix * lightDir;
-	viewDir = normalize(tangentViewPos - tangentFragPos);
+	//lightDir = tbnMatrix * lightDir;
+	//viewDir = normalize(tangentViewPos - tangentFragPos);
 
 	// Diffuse shading
 	float diff = max(dot(lightDir, normal), 0.0);
 	
-	if (diff < csp.a) diff = 0.25f;
+	if (diff < csp.a) diff = 0.1f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
-	else diff = csp.d;
+	else if (diff < csp.d) diff = csp.d;
+	else if (diff < csp.e) diff = csp.e;
+	else diff = csp.f;
+
 
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
@@ -323,10 +325,13 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 void main()
 {
 	vec3 norm = vec3(0);
-	if (hasNormalMap)
+	if (bool(hasNormalMap))
 	{
 		norm = texture(normalMap, vTexCoords).rgb;
-		norm = normalize(norm * 2.0 - 1.0);
+		norm = norm * 2.0 - vec3(1.0);
+		norm = tbnMatrix * norm;
+		vec4 a = transpose(inverse(vModel)) * vec4(norm, 1);
+		norm = a.xyz;
 	}
 	else
 	{
@@ -343,7 +348,7 @@ void main()
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
 	vec3 finalColor = result;
-	if (material.gammaCorrection)
+	if (material.gammaCorrection == 1)
 	{
 		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
 	}
@@ -351,7 +356,8 @@ void main()
 	fragColor = texture(tex , vTexCoords) /** vTextureAlpha */* vec4(finalColor, opacity);
 	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
-	fragNormals = vec4(vNormal, normalsThickness);
+	fragNormals = vec4(norm, normalsThickness);
+	//fragColor = fragNormals;
 
 	if (fragColor.a > 0 && fragColor.a <= 0.1)
 	{
