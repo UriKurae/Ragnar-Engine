@@ -287,6 +287,7 @@ bool ModuleRenderer3D::PostUpdate()
 
 	GameObject* objSelected = app->editor->GetGO();
 
+	glEnable(GL_BLEND);
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
@@ -297,6 +298,7 @@ bool ModuleRenderer3D::PostUpdate()
 	}
 	else app->sceneManager->GetCurrentScene()->Draw();
 	// Scene Pass ====================================
+	glDisable(GL_BLEND);
 
 	for (auto& p : gosToDrawOutline)
 	{

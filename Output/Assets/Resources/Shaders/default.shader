@@ -13,7 +13,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform mat3 normalMatrix;
-uniform float textureAlpha;
+//uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
 uniform mat4 lightSpaceMatrix;
@@ -65,7 +65,7 @@ void main()
 	vAmbientColor = ambientColor;
 	fragPosLightSpace = lightSpaceMatrix * model * totalPosition;
 	vCamPos = camPos;
-	vTextureAlpha = 1.0f;
+	//vTextureAlpha = textureAlpha;
 
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
 	vec3 T = normalize(normalMatrix * tangents);
@@ -107,6 +107,8 @@ uniform bool hasNormalMap;
 uniform int isInteractuable; // Acts as a bool
 uniform vec3 interCol;
 uniform float interColIntensity;
+
+uniform float opacity;
 
 float pi = 3.14159265359;
 
@@ -194,6 +196,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	float shadow = 0;
 	float dx = dFdx(texCoord.s);
 	float dy = dFdy(texCoord.t);
+	float bias = max(0.0000025 * (1.0 - dot(normal, lightDir) * 5), 0.00000025);
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 3; ++j)
@@ -202,7 +205,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 			colorSum += texture(tex, texCoord);
 
 			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
-			shadow += currentDepth > pcfDepth - 0.00005 ? 1 : 0;
+			shadow += currentDepth - bias > pcfDepth /*-0.00005*/ ? 1 : 0;
 		}
 	}
 	
@@ -329,8 +332,8 @@ void main()
 	{
 		norm = normalize(vNormal);
 	}
+
 	vec3 viewDir = normalize(vCamPos - vPosition);
-	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	
 	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
@@ -339,17 +342,13 @@ void main()
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
-	//pos.y = amplitude * 2 * pi * sin((time * 0.1) * speed * 0.1 - pos.x * frequency);
-
 	vec3 finalColor = result;
 	if (material.gammaCorrection)
 	{
 		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
 	}
 
-	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-
-	//float alpha = 5 * 2 * pi * sin((time * 0.1) * 5 * 0.1 - 1 * 1);
+	fragColor = texture(tex , vTexCoords) /** vTextureAlpha */* vec4(finalColor, opacity);
 	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
 	fragNormals = vec4(vNormal, normalsThickness);

@@ -105,6 +105,8 @@ void MaterialComponent::OnEditor()
 		if (owner->isInteractuable)
 			ImGui::ColorEdit3("Interactuable Color", interColor.ptr());
 
+		ImGui::DragFloat("Opacity", &opacity, 0.01, 0, 1);
+
 		ImGui::PushID(diff->GetUID());
 		if (diff != nullptr)
 		{
@@ -114,7 +116,6 @@ void MaterialComponent::OnEditor()
 			{
 				showTexMenu = true;
 				textureTypeToChange = TextureType::DIFFUSE;
-
 			}
 
 			ImGui::Image((ImTextureID)diff->GetId(), ImVec2(128, 128));
@@ -501,6 +502,7 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", shader->GetAssetsPath().c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Cast Shadows", owner->castShadows);
 	file.SetNewJson3Number(file, "Interactuable Color", interColor);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Opacity", opacity);
 
 	node.SetValueToArray(array, file.GetRootValue());
 
@@ -616,6 +618,7 @@ void MaterialComponent::ShaderSetUniforms()
 	shader->SetUniformVec3f("material.specular", specularColor);
 	shader->SetUniform1f("material.shininess", shininess);
 	shader->SetUniform1f("material.gammaCorrection", 0);
+	shader->SetUniform1f("opacity", opacity);
 
 	if (app->renderer3D->goDirLight)
 	{
