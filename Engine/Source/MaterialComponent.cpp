@@ -62,8 +62,9 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	diffuseColor = ambientColor;
 	specularColor = { 0.5,0.5,0.5 };
 	shininess = 5.0f;
-	emissiveColor = float3::one;
-
+	emissiveColor = float3::zero;
+	emissiveEnabled = false;
+	emissiveIntensity = 1.0f;
 	refreshShaderTimer = 0.0f;
 }
 
@@ -505,14 +506,15 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	else
 		shader->SetUniform1i("hasNormalMap", 0);	
 
-	if (emissive != std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->GetResource("Assets/Resources/white.png")))
-	{
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, app->renderer3D->shadowsDepthTexture);
-		texLoc = glGetUniformLocation(shader->GetId(), "emissiveTexture");
-		glUniform1i(texLoc, 3);
-		shader->SetUniformVec3f("material.emissiveColor", emissiveColor);
-	}
+	
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, emissive->GetId());
+	texLoc = glGetUniformLocation(shader->GetId(), "emissiveTexture");
+	glUniform1i(texLoc, 3);
+	shader->SetUniform1i("emissiveEnabled", emissiveEnabled);
+	shader->SetUniformVec3f("material.emissiveColor", emissiveColor);
+	shader->SetUniform1f("material.emissiveIntensity", emissiveIntensity);
+	
 
 	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
@@ -689,7 +691,7 @@ void MaterialComponent::DisplayTexturesInfo()
 	ImGui::PopID();
 
 	ImGui::Separator();
-
+	
 	ImGui::PushID(normalMap->GetUID());
 	if (normalMap != nullptr)
 	{
@@ -738,57 +740,66 @@ void MaterialComponent::DisplayTexturesInfo()
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 	}
+	
 	ImGui::PopID();
 
+	ImGui::Separator();
+
+	ImGui::Checkbox("Emissive", &emissiveEnabled);
+
 	ImGui::PushID(emissive->GetUID());
-	if (emissive != nullptr)
+	if (emissiveEnabled)
 	{
-		ImGui::Text("Select Emissive texture: ");
-		ImGui::SameLine();
-		if (ImGui::Button(((emissive ? emissive->GetName() : "") + "##Foo2").c_str()))
+		if (emissive != nullptr)
 		{
-			showTexMenu = true;
-			textureTypeToChange = TextureType::EMISSIVE;
-		}
-
-		ImGui::Image((ImTextureID)emissive->GetId(), ImVec2(128, 128));
-		ImGui::ColorEdit3("Emissive Color", emissiveColor.ptr());
-
-		ImGui::Indent();
-		if (ImGui::CollapsingHeader("Info##Emissive"))
-		{
-			ImGui::Text("Path: ");
+			ImGui::Text("Select Emissive texture: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", emissive->GetAssetsPath().c_str());
+			if (ImGui::Button(((emissive ? emissive->GetName() : "") + "##Foo2").c_str()))
+			{
+				showTexMenu = true;
+				textureTypeToChange = TextureType::EMISSIVE;
+			}
+
+			ImGui::Image((ImTextureID)emissive->GetId(), ImVec2(128, 128));
+			ImGui::ColorEdit3("Emissive Color", emissiveColor.ptr());
+			ImGui::DragFloat("Emissive Intensity", &emissiveIntensity, 0.01, 0, 1);
+
+			ImGui::Indent();
+			if (ImGui::CollapsingHeader("Info##Emissive"))
+			{
+				ImGui::Text("Path: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", emissive->GetAssetsPath().c_str());
+				ImGui::Text("Width: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", emissive->GetWidth());
+				ImGui::Text("Height: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", emissive->GetHeight());
+				ImGui::Text("Reference Count: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", emissive.use_count());
+			}
+			ImGui::Unindent();
+
+		}
+		else
+		{
+			ImGui::Text("Select Emissive texture: ");
+			ImGui::SameLine();
+			if (ImGui::Button("No Texture"))
+			{
+				showTexMenu = true;
+				textureTypeToChange = TextureType::EMISSIVE;
+			}
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
 			ImGui::Text("Width: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", emissive->GetWidth());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 			ImGui::Text("Height: ");
 			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", emissive->GetHeight());
-			ImGui::Text("Reference Count: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d (Warning: There's already one instance of it on the resources map)", emissive.use_count());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 		}
-		ImGui::Unindent();
-
-	}
-	else
-	{
-		ImGui::Text("Select Emissive texture: ");
-		ImGui::SameLine();
-		if (ImGui::Button("No Texture"))
-		{
-			showTexMenu = true;
-			textureTypeToChange = TextureType::EMISSIVE;
-		}
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "There's no texture");
-		ImGui::Text("Width: ");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
-		ImGui::Text("Height: ");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(1, 1, 0, 1), "%d", 0);
 	}
 	ImGui::PopID();
 }

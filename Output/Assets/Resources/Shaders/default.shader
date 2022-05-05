@@ -98,6 +98,7 @@ layout(location = 3) uniform sampler2D emissiveTexture;
 
 uniform float normalsThickness;
 uniform int hasNormalMap;
+uniform int emissiveEnabled;
 
 uniform int isInteractuable; // Acts as a bool
 uniform vec3 interCol;
@@ -113,6 +114,7 @@ struct Material
 	vec3 diffuse;
 	vec3 specular;
 	vec3 emissiveColor;
+	float emissiveIntensity;
 	float shininess;
 	int gammaCorrection; // Acts as a bool
 	float gammaCorrectionAmount;
@@ -356,8 +358,9 @@ void main()
 	fragColor = texture(tex , vTexCoords) /** vTextureAlpha */* vec4(finalColor, opacity);
 	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
+	fragColor += emissiveEnabled * vec4(material.emissiveColor, 1) * material.emissiveIntensity;
+
 	fragNormals = vec4(norm, normalsThickness);
-	//fragColor = fragNormals;
 
 	if (fragColor.a > 0 && fragColor.a <= 0.1)
 	{
