@@ -138,6 +138,15 @@ void SetPosition(MonoObject* go, MonoObject* position)
 	}
 }
 
+void SetGlobalPosition(MonoObject* go, MonoObject* position)
+{
+	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
+	{
+		tr->SetGlobalPosition(app->moduleMono->UnboxVector(position));
+		tr->UpdateTransform();
+	}
+}
+
 void SetRotation(MonoObject* go, MonoObject* rotation)
 {
 	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))

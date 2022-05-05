@@ -67,6 +67,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform::RotateY", RotateY);
 	
 	mono_add_internal_call("RagnarEngine.Transform::set_localPosition", SetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::set_globalPosition", SetGlobalPosition);
 	mono_add_internal_call("RagnarEngine.Transform::set_localRotation", SetRotation);
 	mono_add_internal_call("RagnarEngine.Transform::set_scale", SetScale);
 	// Transform =================
@@ -93,6 +94,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.RayCast::HitToTag", HitToTag);
 	mono_add_internal_call("RagnarEngine.RayCast::PerceptionCone", PerceptionCone);
+	mono_add_internal_call("RagnarEngine.RayCast::ReturnHitpoint", ReturnHitpoint);
 	// Internal Calls =============
 
 	// Utility ===================
@@ -174,6 +176,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	// NavAgent ==================
 	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::ValidDestination", ValidDestination);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_hitPosition", GetHitPosition);
 	mono_add_internal_call("RagnarEngine.NavAgent::set_hitPosition", SetHitPosition);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastA", GetRayCastA);
@@ -195,6 +198,7 @@ bool MonoManager::Init(JsonParsing& node)
 	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
+
 	// Camera ====================
 
 	// Scene Manager =============

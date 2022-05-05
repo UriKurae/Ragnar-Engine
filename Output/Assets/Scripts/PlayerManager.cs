@@ -164,7 +164,20 @@ public class PlayerManager : RagnarComponent
 
     private void DrawArea(int ability)
     {
-        area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
+        if ((playableCharacter == characters[0]) && (ability == (int)State.ABILITY_4))
+        {
+            Vector3 hit = RayCast.ReturnHitpoint();
+            if (NavAgent.ValidDestination(hit))
+            {
+                
+            }
+            hit.y += playableCharacter.abilities[ability - 1].transformY;
+            area[characterSelected].transform.globalPosition = hit;
+        }
+        else
+        {
+            area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
+        }
         area[characterSelected].GetComponent<Light>().intensity = playableCharacter.abilities[ability - 1].intensity;
         area[characterSelected].GetComponent<Light>().constant = playableCharacter.abilities[ability - 1].constant;
         area[characterSelected].GetComponent<Light>().linear = playableCharacter.abilities[ability - 1].linear;
