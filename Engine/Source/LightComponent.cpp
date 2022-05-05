@@ -1,6 +1,5 @@
 #include "LightComponent.h"
 #include "Application.h"
-#include "Globals.h"
 
 #include "ModuleRenderer3D.h"
 
@@ -17,25 +16,20 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
-	if (this)
+	if (this->owner->name == "Directional Light")
+		return;
+
+	switch (light->type)
 	{
-		switch (light->type)
-		{
-		case LightType::POINT:
-			app->renderer3D->RemovePointLight((PointLight*)light);
-			break;
-		case LightType::SPOT:
-			app->renderer3D->RemoveSpotLight((SpotLight*)light);
-			break;
-		default:
-			break;
-		}
+	case LightType::POINT:
+		app->renderer3D->RemovePointLight((PointLight*)light);
+		break;
+	case LightType::SPOT:
+		app->renderer3D->RemoveSpotLight((SpotLight*)light);
+		break;
+	default:
+		break;
 	}
-	else
-	{
-		DEBUG_LOG("Te calmas");
-	}
-	
 }
 
 bool ComponentLight::Update(float dt)
