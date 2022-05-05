@@ -71,10 +71,7 @@ public class EnemyManager : RagnarComponent
                         if (enemyGOs[i] == go)
                         {
                             deadEnemies.Add(enemyGOs[i]);
-
-                           // enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
-                           // enemyGOs[i].ChangeMesh("Library/Meshes/dead");
-
+                            enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
                             ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                             enemyCount++;
                             enemies[i].state = EnemyState.DEATH;
@@ -83,6 +80,9 @@ public class EnemyManager : RagnarComponent
                 }
             }
         }
+        //TODO
+        foreach (GameObject de in deadEnemies)
+            de.SetSizeAABB(de.GetMinAABB(), de.GetMaxAABB());
     }
 
     private void ChangeEnemyState(GameObject go, EnemyState newState)
