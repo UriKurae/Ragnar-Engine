@@ -46,6 +46,11 @@ public:
 	inline void SetInteractuableColor(const float3& color) { interColor = color; }
 	inline float3 GetInteractuableColor() { return interColor; }
 
+	inline bool IsEmissiveEnabled() { return emissiveEnabled; }
+	inline void SetEmissiveEnabled(bool value) { emissiveEnabled = value; }
+	inline float3& GetEmissiveColor() { return emissiveColor; }
+	inline void SetEmissiveColor(const float3& color) { emissiveColor = color; }
+
 private:
 	void DisplayTexturesInfo();
 

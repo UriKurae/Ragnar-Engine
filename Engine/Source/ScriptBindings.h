@@ -199,6 +199,30 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	SetTexture(res);*/
 }
 
+MonoBoolean GetEmissiveEnabled(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->GetComponent<MaterialComponent>()->IsEmissiveEnabled();
+}
+
+void SetEmissiveEnabled(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetEmissiveEnabled(value);
+}
+
+MonoObject* GetEmissiveColor(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetComponent<MaterialComponent>()->GetEmissiveColor());
+}
+
+void SetEmissiveColor(MonoObject* go, MonoObject* color)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetEmissiveColor(app->moduleMono->UnboxVector(color));
+}
+
 // Light ============================
 
 void SetDirectionalLightShadowsEnabled(MonoBoolean* value)
