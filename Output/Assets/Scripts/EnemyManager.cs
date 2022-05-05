@@ -80,9 +80,21 @@ public class EnemyManager : RagnarComponent
                 }
             }
         }
-        //TODO
+
         foreach (GameObject de in deadEnemies)
-            de.SetSizeAABB(de.GetMinAABB(), de.GetMaxAABB());
+        {
+            Vector3 maxPoint = de.GetMaxAABB();
+            maxPoint.x *= 1.08f;
+            maxPoint.y *= 0.25f;
+            maxPoint.z *= 1f;
+
+            Vector3 minPoint = de.GetMinAABB();
+            minPoint.x *= 0.98f;
+            minPoint.y *= 1f;
+            minPoint.z *= 1.015f;
+
+            de.SetSizeAABB(minPoint, maxPoint);
+        }
     }
 
     private void ChangeEnemyState(GameObject go, EnemyState newState)
