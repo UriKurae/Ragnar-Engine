@@ -1,5 +1,6 @@
 #include "LightComponent.h"
 #include "Application.h"
+#include "Globals.h"
 
 #include "ModuleRenderer3D.h"
 
@@ -16,17 +17,25 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
-	switch (light->type)
+	if (this)
 	{
-	case LightType::POINT:
-		app->renderer3D->RemovePointLight((PointLight*)light);
-		break;
-	case LightType::SPOT:
-		app->renderer3D->RemoveSpotLight((SpotLight*)light);
-		break;
-	default:
-		break;
+		switch (light->type)
+		{
+		case LightType::POINT:
+			app->renderer3D->RemovePointLight((PointLight*)light);
+			break;
+		case LightType::SPOT:
+			app->renderer3D->RemoveSpotLight((SpotLight*)light);
+			break;
+		default:
+			break;
+		}
 	}
+	else
+	{
+		DEBUG_LOG("Te calmas");
+	}
+	
 }
 
 bool ComponentLight::Update(float dt)

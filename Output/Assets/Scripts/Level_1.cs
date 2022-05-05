@@ -7,15 +7,15 @@ public class Level_1 : RagnarComponent
     public Enemies[] enemies;
     public Chronometer timer = null;
     public bool runGame = true;
-    private UIText uiChrono;
+    private UIButton chrono;
 
     public void Start()
 	{
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(-52.79f, 0f, 89.05f);
-        GameObject.Find("UI Timer").GetComponent<Transform2D>().position2D = new Vector3(0, 250, 0);
-
-        uiChrono = GameObject.Find("UI Timer").GetComponent<UIText>();
+        GameObject.Find("UI Counter").GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) -28, 0);
+        chrono = GameObject.Find("UI Counter").GetComponent<UIButton>();
+        chrono.SetTextPosition(-18, -4);
         timer = new Chronometer();
 
         // PLAYERS
@@ -452,6 +452,6 @@ public class Level_1 : RagnarComponent
 	public void Update()
 	{
         if(runGame) timer.Update();
-        uiChrono.text = timer.GetTimeToString();        
-	}
+        chrono.text = timer.GetTimeToString();
+    }
 }
