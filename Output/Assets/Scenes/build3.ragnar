@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 381500616,
+                    "pointer": 413670840,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1318,19 +1318,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -2.7362048625946045,
+                        -4.7657198905944824,
                         0,
-                        15.629526138305664
+                        20
                     ],
                     "Quaternion": [
                         0,
-                        0.96303534507751465,
+                        0.98219865560531616,
                         0,
-                        0.2693750262260437
+                        0.18784527480602264
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.54548805952072144,
+                        0.37793582677841187,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -1380,12 +1380,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.47992405295372009,
+                    "Vertical Fov": 0.4647042453289032,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -28.678651809692383,
+                        -23.216342926025391,
                         55,
-                        58.374351501464844
+                        66.472640991210938
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1394,14 +1394,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -2.7362048625946045,
+                        -4.7657198905944824,
                         0,
-                        15.629526138305664
+                        20
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 148.74583435058594,
+                    "Horizontal Angle": 158.34587097167969,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1520,13 +1520,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 158970704,
+                    "pointer": 423768064,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 216706952,
+                    "barrelLocations": 225619848,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -1683,7 +1683,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 334242248,
+                    "pointer": 423850288,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1721,7 +1721,7 @@
                     "buttonWidth": 914,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 775,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1771,7 +1771,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 775,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1826,7 +1826,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 775,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1881,7 +1881,7 @@
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 775,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1905,7 +1905,7 @@
             "Name": "UI Timer",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1915,7 +1915,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        0,
+                        2151.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1931,7 +1931,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 775,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },

@@ -1068,6 +1068,8 @@ public class pauseMenuButton : RagnarComponent
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
+					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 				break;
 		}
 	}

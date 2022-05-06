@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 354433992,
+                    "pointer": 386449680,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -2312,13 +2312,13 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.35584366321563721,
+                        0.24945488572120667,
                         0,
-                        -0.93454551696777344
+                        -0.96838641166687012
                     ],
                     "RotationEditor": [
                         -0,
-                        -0.72763335704803467,
+                        -0.50423461198806763,
                         -0
                     ],
                     "Scale": [
@@ -2368,12 +2368,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 176,
-                    "Vertical Fov": 0.49003934860229492,
+                    "Vertical Fov": 0.4647042453289032,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        54.294296264648438,
+                        45.195716857910156,
                         55,
-                        -194.75372314453125
+                        -201.19357299804688
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -2389,7 +2389,7 @@
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 318.3096923828125,
+                    "Horizontal Angle": 331.1094970703125,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -6045,7 +6045,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 353756880,
+                    "pointer": 339010248,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6083,7 +6083,7 @@
                     "buttonWidth": 914,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 792,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6133,7 +6133,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 792,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6188,7 +6188,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 792,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6243,7 +6243,7 @@
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 792,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6267,7 +6267,7 @@
             "Name": "UI Timer",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -6277,7 +6277,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        0,
+                        2151.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -6293,7 +6293,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 792,
+                    "lastButtonHeight": 749.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6422,7 +6422,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 383568776,
+                    "pointer": 413669688,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -6497,7 +6497,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 383567280,
+                    "pointer": 413670120,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -6572,7 +6572,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 383568096,
+                    "pointer": 413670984,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -6647,7 +6647,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 383567960,
+                    "pointer": 413670840,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
