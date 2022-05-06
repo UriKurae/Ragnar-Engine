@@ -46,8 +46,10 @@ public class SpiceGranade : RagnarComponent
 	}
 	public void OnCollisionEnter(Rigidbody other)
 	{
-		gameObject.GetComponent<ParticleSystem>().Play();
 		goRB.SetAsStatic();
+		
+		gameObject.GetComponent<ParticleSystem>().Play();
+
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
 		CreateSphereTrigger(area, explosionRadius, gameObject.transform.globalPosition);
 		cooldown = 1;
