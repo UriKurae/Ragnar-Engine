@@ -8,19 +8,19 @@ public class Level_2 : RagnarComponent
     private Chronometer timer = null;
     private GameObject SceneAudio;
     public bool runGame = true;
-    private UIText uiChrono;
+    private UIButton chrono;
     public void Start()
 	{
-        // Camera Starting Position
-        GameObject.Find("cameraController").transform.localPosition = new Vector3(-23.76f, 0f, -199.01f);
-        GameObject.Find("UI Timer").GetComponent<Transform2D>().position2D = new Vector3(0, 250, 0);
-
         //Play Level Soundtrack
         SceneAudio = GameObject.Find("AudioLevel1");
         SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
         SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
-
-        uiChrono = GameObject.Find("UI Timer").GetComponent<UIText>();
+        
+        // Camera Starting Position
+        GameObject.Find("cameraController").transform.localPosition = new Vector3(-23.76f, 0f, -199.01f);
+        GameObject.Find("UI Counter").GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 28, 0);
+        chrono = GameObject.Find("UI Counter").GetComponent<UIButton>();
+        chrono.SetTextPosition(-26, -4);
         timer = new Chronometer();
 
         // PLAYERS
@@ -780,7 +780,7 @@ public class Level_2 : RagnarComponent
     public void Update()
 	{
         if (runGame) timer.Update();
-        uiChrono.text = timer.GetTimeToString();
+        chrono.text = timer.GetTimeToString();
     }
 
 }
