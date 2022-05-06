@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 280012056,
+                    "pointer": 124928008,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1431,19 +1431,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        60,
+                        21.839679718017578,
                         0,
-                        -18.311305999755859
+                        -26.807065963745117
                     ],
                     "Quaternion": [
                         0,
-                        0.51856076717376709,
+                        0.64327621459960938,
                         0,
-                        -0.8550407886505127
+                        -0.76563417911529541
                     ],
                     "RotationEditor": [
                         -0,
-                        -1.0903337001800537,
+                        -1.3975392580032349,
                         -0
                     ],
                     "Scale": [
@@ -1497,25 +1497,25 @@
                     "Vertical Fov": 0.51462435722351074,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        99.568031311035156,
-                        49.080543518066406,
-                        -38.934158325195312
+                        71.092391967773438,
+                        55,
+                        -35.426864624023438
                     ],
                     "Type": 3,
-                    "Zoom": -12,
+                    "Zoom": -8,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        60,
+                        21.839679718017578,
                         0,
-                        -18.311305999755859
+                        -26.807065963745117
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 297.52847290039062,
+                    "Horizontal Angle": 279.9268798828125,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1600,9 +1600,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -54.331443786621094,
-                        1.7295724153518677,
-                        94.103294372558594
+                        -55.967201232910156,
+                        2.2085428237915039,
+                        99.144638061523438
                     ],
                     "Quaternion": [
                         0,
@@ -6577,7 +6577,7 @@
             "Active": true,
             "Static": false,
             "PrefabID": false,
-            "Prefab Path": "None",
+            "Prefab Path": "Assets\/Prefabs\/Arbusto_01.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Is Interactuable": false,
@@ -6629,13 +6629,80 @@
             ]
         },
         {
-            "UUID": 316188018,
+            "UUID": 1365597403,
+            "Parent UUID": 889819339,
+            "Name": "HiddeTrigger",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Hidde",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        2.7999999523162842,
+                        2.2999999523162842,
+                        3.5999999046325684
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 889819339,
             "Parent UUID": 421548493,
-            "Name": "Arbusto_02",
+            "Name": "Arbusto_03",
             "Active": true,
             "Static": false,
             "PrefabID": false,
-            "Prefab Path": "None",
+            "Prefab Path": "Assets\/Prefabs\/Arbusto_01.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Is Interactuable": false,
@@ -6644,9 +6711,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        24.902482986450195,
-                        1.3527688980102539,
-                        -54.617252349853516
+                        25.021335601806641,
+                        1.3527762889862061,
+                        -54.295173645019531
                     ],
                     "Quaternion": [
                         0,
@@ -6687,13 +6754,80 @@
             ]
         },
         {
-            "UUID": 1197868362,
+            "UUID": 1365597403,
+            "Parent UUID": 889819339,
+            "Name": "HiddeTrigger",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Hidde",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        2.7999999523162842,
+                        2.2999999523162842,
+                        3.5999999046325684
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 889819339,
             "Parent UUID": 421548493,
-            "Name": "Arbusto_03",
+            "Name": "Arbusto_02",
             "Active": true,
             "Static": false,
             "PrefabID": false,
-            "Prefab Path": "None",
+            "Prefab Path": "Assets\/Prefabs\/Arbusto_01.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
             "Is Interactuable": false,
@@ -6702,9 +6836,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        24.92979621887207,
-                        1.3527688980102539,
-                        -38.284381866455078
+                        24.953666687011719,
+                        1.3527541160583496,
+                        -38.557052612304688
                     ],
                     "Quaternion": [
                         0,
@@ -6741,6 +6875,73 @@
                         0
                     ],
                     "Opacity": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1365597403,
+            "Parent UUID": 889819339,
+            "Name": "HiddeTrigger",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Hidde",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        2.7999999523162842,
+                        2.2999999523162842,
+                        3.5999999046325684
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         },
@@ -6939,7 +7140,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 310565696,
+                    "pointer": 124931320,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7282,7 +7483,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 310568688,
+                    "pointer": 237024904,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9500,9 +9701,9 @@
             ]
         },
         {
-            "UUID": 40704203,
+            "UUID": 454068981,
             "Parent UUID": 1906815624,
-            "Name": "UI Timer",
+            "Name": "UI Counter",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -9516,12 +9717,12 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        0,
+                        389,
                         -10.399999618530273
                     ],
                     "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
+                        0.31083333492279053,
+                        0.091666668653488159,
                         1
                     ],
                     "rotationEuler": [
@@ -9529,8 +9730,8 @@
                         0,
                         0
                     ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
+                    "buttonWidth": 186.5,
+                    "buttonHeight": 55,
                     "lastButtonWidth": 1312,
                     "lastButtonHeight": 833.5,
                     "MoveOnResizeX": true,
@@ -9538,7 +9739,7 @@
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -9551,14 +9752,37 @@
                     "Opacity": 1
                 },
                 {
-                    "Type": 16,
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 12,
                     "buttonText": "Time",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
+                    "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
                     "textColor.b": 1,
-                    "TextFile": "-"
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
                 }
             ]
         },
@@ -9675,15 +9899,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        57.001476287841797,
-                        2.9792451858520508,
-                        -34.180351257324219
+                        57.214351654052734,
+                        3.0956478118896484,
+                        -34.910640716552734
                     ],
                     "Quaternion": [
                         0,
-                        0.014974283054471016,
+                        0.078297913074493408,
                         0,
-                        0.99988788366317749
+                        0.99693000316619873
                     ],
                     "RotationEditor": [
                         0,
@@ -9691,18 +9915,18 @@
                         0
                     ],
                     "Scale": [
-                        0.99999171495437622,
+                        0.9999922513961792,
                         1,
-                        0.99999171495437622
+                        0.9999922513961792
                     ]
                 },
                 {
                     "Type": 11,
                     "CollisionType": 0,
                     "Size": [
-                        7,
-                        5.5999999046325684,
-                        7.9000000953674316
+                        3.7999999523162842,
+                        5.5,
+                        4.3000001907348633
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -9728,7 +9952,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 333921560,
+                    "pointer": 237027208,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9751,9 +9975,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -50.938777923583984,
-                        2.979245662689209,
-                        90.648048400878906
+                        -50.762355804443359,
+                        3.0997099876403809,
+                        90.258979797363281
                     ],
                     "Quaternion": [
                         0,
@@ -9804,7 +10028,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 333922376,
+                    "pointer": 237025624,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0

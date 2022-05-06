@@ -36,6 +36,8 @@ public class Chronometer
         else
             text += sec.ToString().Substring(0, 2);
 
+        text += ":" + timer.ToString().Remove(0, timer.ToString().IndexOf(",") + 1).ToString().Substring(0,2);
+
         return text;
     }
 }

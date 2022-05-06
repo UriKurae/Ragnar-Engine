@@ -16,6 +16,9 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
+	if (this->owner->name == "Directional Light")
+		return;
+
 	switch (light->type)
 	{
 	case LightType::POINT:
