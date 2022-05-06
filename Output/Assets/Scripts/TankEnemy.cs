@@ -13,7 +13,6 @@ public class TankEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
-    private bool stay = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -223,7 +222,7 @@ public class TankEnemy : RagnarComponent
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
         index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 8, players, players.Length, colliders, colliders.Length);
-        if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead)) return false;
+        if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
 
@@ -269,18 +268,10 @@ public class TankEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        if (!stay)
-        {
-            if (waypoints.Length == 1)
-            {
-                stay = true;
-                gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            }
-            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
-            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-            agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
-            destPoint = (destPoint + 1) % waypoints.Length;
-        }
+        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+        destPoint = (destPoint + 1) % waypoints.Length;
     }
 
     public void Patrol()

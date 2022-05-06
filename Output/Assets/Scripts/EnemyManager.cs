@@ -113,6 +113,7 @@ public class EnemyManager : RagnarComponent
     public void SaveTest(String name, Vector3 pos)
     {
         // Change deadEnemies[] to a list, if not deadCount is not really
-        SceneManager.SaveTest(deadEnemies.Length, name, pos);
+        float time = GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer;
+        SceneManager.SaveTest(deadEnemies.Length, name, pos, time);
     }
 }
