@@ -20,18 +20,6 @@ public class PlayerManager : RagnarComponent
         foreach (Characters c in characters)
         {
             InternalCalls.InstancePrefab(c.prefabPath);
-            //c.abilities[4] = new Abilities
-            //{
-            //    name = "CorpseCarrier",
-            //    prefabPath = "",
-            //    transformY = 0.0f,
-            //    intensity = 4.0f,
-            //    constant = 0.0f,
-            //    linear = 0.0f,
-            //    quadratic = 0f,
-            //    charges = -1,
-            //    cooldown = 0f
-            //}; // Corpse Carrier Ability
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -125,11 +113,15 @@ public class PlayerManager : RagnarComponent
         }
 
         // Change Condition to all players
-        if ((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4))
+        if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
         {
+            float radius = 0f;
+            if (playableCharacter == characters[0]) radius = 11.5f;
+            if (playableCharacter == characters[1]) radius = 12.7f;
+
             lightHab.GetComponent<Light>().intensity = 6;
             Vector3 hit = RayCast.ReturnHitpoint();
-            if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < 11.5f)
+            if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
             {
                 hit.y += 0.2f;
                 lightHab.transform.globalPosition = hit;
