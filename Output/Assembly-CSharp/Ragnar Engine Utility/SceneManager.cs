@@ -15,7 +15,7 @@ namespace RagnarEngine
         static public extern void LoadScene(string name);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static public extern void SaveTest(int deadCount, string playerName, Vector3 playerPos);
+        static public extern void SaveTest(int deadCount, string playerName, Vector3 playerPos, float time);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static public extern void Exit();
