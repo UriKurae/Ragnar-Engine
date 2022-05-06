@@ -473,12 +473,13 @@ bool Scene::SaveScene(const char* name)
 	DEBUG_LOG("Saving Scene");
 
 	assetsPath = name;
-
+	
 	std::string rootName = name;
 	app->fs->GetFilenameWithoutExtension(rootName);
 	root->SetName(rootName.c_str());
 
 	JsonParsing sceneFile;
+	/*sceneFile.SetNewJsonString(sceneFile.ValueToObject(sceneFile.GetRootValue()), "SceneName", name);*/
 
 	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Scene");
 	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Game Objects");

@@ -46,7 +46,8 @@
       { "10": "Ground" },
       { "11": "Rocks" },
       { "12": "Collider" },
-      { "13": "Hidde" }
+      { "13": "Hidde" },
+      { "14": "CheckPoint" }
     ],
     "layers": [
       { "0": "Default" },

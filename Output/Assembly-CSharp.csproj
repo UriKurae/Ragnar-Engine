@@ -112,6 +112,9 @@
     <Compile Include="Assets\Scripts\Level_3.cs" />
     <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
     <Compile Include="Assets\Scripts\EnemyBoss.cs" />
+	<Compile Include="Assets\Scripts\PlayerData.cs" />
+	<Compile Include="Assets\Scripts\SaveSystem.cs" />
+	<Compile Include="Assets\Scripts\EnemyData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assembly-CSharp\App.config" />

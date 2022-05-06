@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class PlayerManager : RagnarComponent
@@ -19,7 +20,7 @@ public class PlayerManager : RagnarComponent
 	{
         foreach (Characters c in characters)
         {
-            InternalCalls.InstancePrefab(c.prefabPath);
+            InternalCalls.InstancePrefab(c.prefabPath);   
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -45,10 +46,26 @@ public class PlayerManager : RagnarComponent
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
         lightHab = GameObject.Find("ControllableLight");
+        if (SaveSystem.fromContinue)
+        {
+            LoadPlayer();
+        }
     }
 
 	public void Update()
     {
+        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
+        {
+            SaveSystem.LoadScene();
+            //LoadPlayer();
+            //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
+            SaveSystem.fromContinue = true;
+        }
+        if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
+        {
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+            SavePlayer();
+        }
         if (!dialogue.GetInDialogue())
         {
             if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
@@ -58,9 +75,9 @@ public class PlayerManager : RagnarComponent
 
             PlayerCases();
 
-            /*Cambiador de estados para saber qué habilidad estás o no casteando (Básicamente hace que el personaje entre en un estado donde si clickas una tecla
+            /*Cambiador de estados para saber quï¿½ habilidad estï¿½s o no casteando (Bï¿½sicamente hace que el personaje entre en un estado donde si clickas una tecla
             muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-            Aquí debería ir la zona de rango de cada habilidad.*/
+            Aquï¿½ deberï¿½a ir la zona de rango de cada habilidad.*/
             AbilityStateChanger();
 
             /*Contador de cooldown para cada habilidad
@@ -144,23 +161,23 @@ public class PlayerManager : RagnarComponent
             players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
         }
 
-        // Si el estado no es NONE, significa que la habilidad está lista para ser casteada, y entrará en esta función.
+        // Si el estado no es NONE, significa que la habilidad estï¿½ lista para ser casteada, y entrarï¿½ en esta funciï¿½n.
         if (playableCharacter.state != State.NONE) CastOrCancel();
     }
 
     private void SpawnArea(int ability)
     {
-        // Comprobador de cargas de habilidad. Si entra aquí, significa que la habilidad no tiene cargas
+        // Comprobador de cargas de habilidad. Si entra aquï¿½, significa que la habilidad no tiene cargas
         if (playableCharacter.abilities[ability - 1].charges == 0)
         {
             playableCharacter.state = State.NONE;
         }
-        // Entra aquí si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
+        // Entra aquï¿½ si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
         else if (!playableCharacter.abilities[ability - 1].onCooldown)
         {
             playableCharacter.state = (State)ability;
 
-            // Dibujado del área de rango.
+            // Dibujado del ï¿½rea de rango.
             if (!drawnArea)
             {
                 drawnArea = true;
@@ -169,7 +186,7 @@ public class PlayerManager : RagnarComponent
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
         }
-        // Si la habilidad está en cooldown y tiene cargas, entrará aquí y pondrá el state del player en NONE.
+        // Si la habilidad estï¿½ en cooldown y tiene cargas, entrarï¿½ aquï¿½ y pondrï¿½ el state del player en NONE.
         else
         {
             Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
@@ -284,7 +301,7 @@ public class PlayerManager : RagnarComponent
 
                             if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
-                                GameObject[] enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
+                                List<GameObject> enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
                                 foreach (GameObject g in enemiesDead)
                                 {
                                     if (g != null && obj.name == g.name)
@@ -309,7 +326,7 @@ public class PlayerManager : RagnarComponent
 
             if (playableCharacter.state != State.CARRYING)
             {
-                // Instancia la habilidad en cuestión. 
+                // Instancia la habilidad en cuestiï¿½n. 
                 InternalCalls.InstancePrefab(playableCharacter.abilities[(int)playableCharacter.state - 1].prefabPath);
 
                 // Al haberse instanciado una habilidad, comprueba si funciona por cargas. Si lo hace resta una carga a la habilidad.
@@ -323,14 +340,14 @@ public class PlayerManager : RagnarComponent
             }
             playableCharacter.state = State.NONE;
 
-            // Se cambia el estado a POSTCAST para evitar que se mueva directamente después de castear la habilidad. En el update de los players se cambiará a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
+            // Se cambia el estado a POSTCAST para evitar que se mueva directamente despuï¿½s de castear la habilidad. En el update de los players se cambiarï¿½ a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
             players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
-        // Se cancela el estado de la habilidad para que el área de rango deje de mostrarse.
+        // Se cancela el estado de la habilidad para que el ï¿½rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
             playableCharacter.state = State.NONE;
@@ -410,6 +427,32 @@ public class PlayerManager : RagnarComponent
         }
         players[id].GetComponent<Player>().SetControled(true);
         
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
+        SaveSystem.SaveScene();
+        for (int i = 0; i < players.Length; ++i)
+        { 
+            SaveSystem.SavePlayer(players[i].GetComponent<Player>());
+        }
+    }
+
+    public void LoadPlayer()
+    {
+        for (int i = 0; i < players.Length; ++i)
+        {
+            PlayerData data = SaveSystem.LoadPlayer(players[i].name);
+
+            players[i].GetComponent<Player>().hitPoints = data.hitPoints;
+
+            Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
+
+            Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+            players[i].GetComponent<Rigidbody>().SetBodyRotation(rot); 
+        }
     }
 }
 

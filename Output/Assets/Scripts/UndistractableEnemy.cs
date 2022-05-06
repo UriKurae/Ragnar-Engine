@@ -13,7 +13,7 @@ public class UndistractableEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
-    public bool controlled = false;
+    private bool stay = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -29,6 +29,7 @@ public class UndistractableEnemy : RagnarComponent
     // States
     public bool canShoot = true;
     public bool pendingToDelete = false;
+    public bool controlled = false;
 
     // Timers
     public float shootCooldown = 0f;
@@ -49,11 +50,16 @@ public class UndistractableEnemy : RagnarComponent
         offset = gameObject.GetSizeAABB();
 
         agents = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-        if (waypoints.Length != 0)
+
+
+        if (state != EnemyState.DEATH)
         {
-            GotoNextPoint();
-            patrol = false;
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            if (waypoints.Length != 0)
+            {
+                GotoNextPoint();
+                patrol = false;
+            } 
         }
 
         initialSpeed = agents.speed;
@@ -276,10 +282,18 @@ public class UndistractableEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
-        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-        agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
-        destPoint = (destPoint + 1) % waypoints.Length;
+        if (!stay)
+        {
+            if (waypoints.Length == 1)
+            {
+                stay = true;
+                gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            }
+            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+            destPoint = (destPoint + 1) % waypoints.Length;
+        }
     }
 
     public void Patrol()
