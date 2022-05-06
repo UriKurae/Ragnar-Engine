@@ -199,6 +199,7 @@ public class UndistractableEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 Stun(5f);
+                GameObject.Find("electricParticles").GetComponent<ParticleSystem>().Play();
             }
         }
     }
