@@ -41,6 +41,7 @@ public class TankEnemy : RagnarComponent
     bool stunned = false;
     float stunnedTimer = -1f;
 
+    GameObject[] childs;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -56,6 +57,8 @@ public class TankEnemy : RagnarComponent
         }
 
         initialSpeed = agents.speed;
+
+        childs = gameObject.childs;
     }
 
     public void Update()
@@ -198,6 +201,14 @@ public class TankEnemy : RagnarComponent
             if (other.gameObject.name == "SwordSlash")
             {
                 deathTimer = 2f;
+                for (int i = 0; i < childs.Length; ++i)
+                {
+                    if (childs[i].name == "SwordSlashParticles")
+                    {
+                        childs[i].GetComponent<ParticleSystem>().Play();
+                        break;
+                    }
+                }
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
             if (other.gameObject.name == "Whistle")
@@ -211,7 +222,7 @@ public class TankEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 Stun(5f);
-                GameObject.Find("electricParticles").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
             }
         }
     }

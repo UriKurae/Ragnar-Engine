@@ -46,6 +46,8 @@ public class BasicEnemy : RagnarComponent
     private bool toRight = true;
     private float angleOffset = 0;
 
+    GameObject[] childs;
+
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -61,6 +63,8 @@ public class BasicEnemy : RagnarComponent
         }
 
         initialSpeed = agents.speed;
+
+        childs = gameObject.childs;
     }
 
     public void Update()
@@ -148,8 +152,15 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "Knife")
             {
                 deathTimer = 4f;
+                for (int i = 0; i < childs.Length; ++i)
+                {
+                    if (childs[i].name == "KnifeParticles")
+                    {
+                        childs[i].GetComponent<ParticleSystem>().Play();
+                        break;
+                    }
+                }
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
-
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
@@ -201,6 +212,14 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "SwordSlash")
             {
                 deathTimer = 2f;
+                for (int i = 0; i < childs.Length; ++i)
+                {
+                    if (childs[i].name == "SwordSlashParticles")
+                    {
+                        childs[i].GetComponent<ParticleSystem>().Play();
+                        break;
+                    }
+                }
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
             if (other.gameObject.name == "Whistle")
@@ -217,7 +236,7 @@ public class BasicEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 Stun(5f);
-                GameObject.Find("electricParticles").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
             }
         }
     }
