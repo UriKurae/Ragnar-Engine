@@ -44,6 +44,15 @@ public class BackStab_2 : RagnarComponent
             {
 				selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
             }
+			GameObject[] childs = selectedEnemy.childs;
+			for (int i = 0; i < childs.Length; ++i)
+			{
+				if (childs[i].name == "StabParticles")
+				{
+					childs[i].GetComponent<ParticleSystem>().Play();
+					break;
+				}
+			}
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
 		}
 		if (boss != null)

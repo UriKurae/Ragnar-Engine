@@ -139,6 +139,15 @@ void SetPosition(MonoObject* go, MonoObject* position)
 	}
 }
 
+void SetGlobalPosition(MonoObject* go, MonoObject* position)
+{
+	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
+	{
+		tr->SetGlobalPosition(app->moduleMono->UnboxVector(position));
+		tr->UpdateTransform();
+	}
+}
+
 void SetRotation(MonoObject* go, MonoObject* rotation)
 {
 	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
@@ -288,6 +297,17 @@ void SetLightAmbient(MonoObject* go, MonoObject* ambient)
 {
 	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
 	lightComp->GetLight()->ambient = app->moduleMono->UnboxVector(ambient);
+}
+
+MonoObject* GetLightDiffuse(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return app->moduleMono->Float3ToCS(lightComp->GetLight()->diffuse);
+}
+void SetLightDiffuse(MonoObject* go, MonoObject* ambient)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->diffuse = app->moduleMono->UnboxVector(ambient);
 }
 
 // Light ============================
@@ -739,4 +759,20 @@ void SetVSync(bool newState)
 bool GetVSync()
 {
 	return app->renderer3D->GetVsync();
+}
+MonoObject* GetMousePosition()
+{
+	float2 fMousePos;
+	float2 mPos = float2::zero;
+	float4 viewport = float4::zero;
+#ifndef DIST
+	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+	viewport = app->editor->GetGameView()->GetBounds();
+#else
+	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+	fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
+	float3 ret(fMousePos.x- (viewport.z/2), -fMousePos.y+(viewport.w / 2), 0);
+	return app->moduleMono->Float3ToCS(ret);
 }
