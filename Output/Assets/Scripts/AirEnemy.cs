@@ -149,6 +149,7 @@ public class AirEnemy : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 pendingToDelete = true;
+                GameObject.Find("electricParticles").GetComponent<ParticleSystem>().Play();
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
         }

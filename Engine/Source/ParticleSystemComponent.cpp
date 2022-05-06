@@ -49,6 +49,7 @@ bool ParticleSystemComponent::Update(float dt)
     RG_PROFILING_FUNCTION("Particle System Update");
 
     offsetAABB = transform->GetGlobalPosition();
+    transform->ForceUpdateTransform();
 
     if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {

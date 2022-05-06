@@ -211,6 +211,7 @@ public class TankEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 Stun(5f);
+                GameObject.Find("electricParticles").GetComponent<ParticleSystem>().Play();
             }
         }
     }

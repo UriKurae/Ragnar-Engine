@@ -214,6 +214,7 @@ public class PlayerManager : RagnarComponent
                         else if (playableCharacter == characters[2])
                         {
                             players[characterSelected].GetComponent<AudioSource>().PlayClip("WEAPONSWORDHIT");
+                            GameObject.Find("SlashParticles").GetComponent<ParticleSystem>().Play();
                         }
                         break;
                     }
