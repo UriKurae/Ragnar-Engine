@@ -174,9 +174,10 @@ struct CelShadingProps
 	float d;
 	float e;
 	float f;
+	float g;
 
 };
-const CelShadingProps csp = {0.1f, 0.18f, 0.37f, 0.55f, 0.66f, 0.8f};
+const CelShadingProps csp = { 0.05f, 0.12f, 0.27f, 0.40f, 0.56f, 0.69f, 0.8f };
 
 
 vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
@@ -223,19 +224,17 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
-	//vec3 lightDir = normalize(tangentLightPos - tangentFragPos);
-	//lightDir = tbnMatrix * lightDir;
-	//viewDir = normalize(tangentViewPos - tangentFragPos);
 
 	// Diffuse shading
 	float diff = max(dot(lightDir, normal), 0.0);
 	
-	if (diff < csp.a) diff = 0.1f;
+	if (diff < csp.a) diff = 0.05f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
 	else if (diff < csp.d) diff = csp.d;
 	else if (diff < csp.e) diff = csp.e;
-	else diff = csp.f;
+	else if (diff < csp.f) diff = csp.f;
+	else diff = csp.g;
 
 
 	// Specular shading

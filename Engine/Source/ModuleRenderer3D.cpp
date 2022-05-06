@@ -797,7 +797,7 @@ void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
 	}
 }
 
-void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComponent* gameCam, AABB& shadAABB)
+void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, CameraComponent* gameCam, AABB& shadAABB)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -844,7 +844,7 @@ void ModuleRenderer3D::GenerateShadows(std::set<GameObject*> objects, CameraComp
 		}
 		
 		AABB camAABB = gameCam->GetFrustum()->MinimalEnclosingAABB();
-		camAABB.Scale(camAABB.CenterPoint(), 1.75f);
+		camAABB.Scale(camAABB.CenterPoint(), 2.f);
 		AABB intersectionAABB = shadowsAABB.Intersection(camAABB);
 
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
