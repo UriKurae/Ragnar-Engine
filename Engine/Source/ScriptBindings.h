@@ -12,6 +12,7 @@
 
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
+#include "MeshComponent.h"
 #include "Texture.h"
 #include "ParticleSystemComponent.h"
 #include "LightComponent.h"
@@ -134,6 +135,15 @@ void SetPosition(MonoObject* go, MonoObject* position)
 	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
 	{
 		tr->SetPosition(app->moduleMono->UnboxVector(position));
+		tr->UpdateTransform();
+	}
+}
+
+void SetGlobalPosition(MonoObject* go, MonoObject* position)
+{
+	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
+	{
+		tr->SetGlobalPosition(app->moduleMono->UnboxVector(position));
 		tr->UpdateTransform();
 	}
 }
@@ -274,7 +284,7 @@ void SetLightConstant(MonoObject* go, float constant)
 	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
 
 	PointLight* l = (PointLight*)lightComp->GetLight();
-	l->quadratic = constant;
+	l->constant = constant;
 }
 
 MonoObject* GetLightAmbient(MonoObject* go)
@@ -287,6 +297,17 @@ void SetLightAmbient(MonoObject* go, MonoObject* ambient)
 {
 	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
 	lightComp->GetLight()->ambient = app->moduleMono->UnboxVector(ambient);
+}
+
+MonoObject* GetLightDiffuse(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return app->moduleMono->Float3ToCS(lightComp->GetLight()->diffuse);
+}
+void SetLightDiffuse(MonoObject* go, MonoObject* ambient)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->diffuse = app->moduleMono->UnboxVector(ambient);
 }
 
 // Light ============================
@@ -526,6 +547,21 @@ void ReparentToRoot(MonoObject* go)
 	currentScene->ReparentGameObjects(parent, currentScene->GetRoot());
 }
 
+void ChangeMesh(MonoObject* go, std::string directory)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles(directory.c_str(), files);
+	std::vector<std::string>::iterator it = files.begin();
+	if ((*it).find(".rgmesh") != std::string::npos)
+	{
+		app->fs->GetFilenameWithoutExtension(*it);
+		*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+		parent->GetComponent<MeshComponent>()->SetMesh(ResourceManager::GetInstance()->LoadResource(std::stoll(*it)));
+	}
+}
+
 void AddChild(MonoObject* go, MonoObject* child)
 {
 	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
@@ -604,6 +640,12 @@ void SetDirectionParticle(MonoObject* go, MonoObject* direction)
 void NextScene()
 {
 	app->sceneManager->NextScene();
+}
+
+void SaveScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->SaveScene(name);
 }
 
 void LoadScene(MonoString* string)
@@ -717,4 +759,20 @@ void SetVSync(bool newState)
 bool GetVSync()
 {
 	return app->renderer3D->GetVsync();
+}
+MonoObject* GetMousePosition()
+{
+	float2 fMousePos;
+	float2 mPos = float2::zero;
+	float4 viewport = float4::zero;
+#ifndef DIST
+	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+	viewport = app->editor->GetGameView()->GetBounds();
+#else
+	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+	fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
+	float3 ret(fMousePos.x- (viewport.z/2), -fMousePos.y+(viewport.w / 2), 0);
+	return app->moduleMono->Float3ToCS(ret);
 }

@@ -146,7 +146,9 @@ public class mainMenuBackScreen : RagnarComponent
         if (!isOptions)
         {
             continueImage.isActive = true;
-            continueB.isActive = true;
+			
+
+			continueB.isActive = true;
             int a = continueB.GetComponent<UIButton>().GetButtonState();
             switch (a)
             {
@@ -156,7 +158,8 @@ public class mainMenuBackScreen : RagnarComponent
                 case 1:
                     if (!isFirstCont)
                     {
-                        pos.Set(continueB.GetComponent<Transform2D>().position2D.x - 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
+
+						pos.Set(continueB.GetComponent<Transform2D>().position2D.x - 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
                         continueB.GetComponent<Transform2D>().position2D = pos;
 
 
@@ -186,7 +189,8 @@ public class mainMenuBackScreen : RagnarComponent
                     SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 
 
-                    //cambiar de escena
+					//cambiar de escena
+					SaveSystem.LoadScene();
                     break;
             }
         }
@@ -351,6 +355,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // pressed mode
                     SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
 
+					SaveSystem.fromContinue = false;
                     SceneManager.LoadScene("build");
                     //cambiar de escena
                     break;
@@ -801,7 +806,7 @@ public class mainMenuBackScreen : RagnarComponent
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
 		{
 
-			InternalCalls.SetFullScreen(true);
+			InternalCalls.SetFullScreen(false);
 		}
 		else
 		{
@@ -842,7 +847,7 @@ public class mainMenuBackScreen : RagnarComponent
 			Light.shadowsEnabled = false;
 		}
 
-		pos.Set(0, y - 375, 36.1f);
+		pos.Set(0, y - 230, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(x - 550, y - 500, 36.1f);
@@ -868,7 +873,7 @@ public class mainMenuBackScreen : RagnarComponent
 		optionsGeneralSound.isActive = true;
 
 
-		pos.Set(0, y - 375, 36.1f);
+		pos.Set(0, y - 230, 36.1f);
 		optionsSoundText.GetComponent<Transform2D>().position2D = pos;
 
 		float generalSound;

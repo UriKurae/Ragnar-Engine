@@ -3,6 +3,9 @@
 #include "CameraComponent.h"
 #include "ModuleCamera3D.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleEditor.h"
+#include "ModuleNavMesh.h"
+#include "Viewport.h"
 
 #include "Math/float3x3.h"
 #include "Geometry/LineSegment.h"
@@ -132,4 +135,16 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	memcpy(&app->renderer3D->enemyCones[sizeCon], &vertex[0], vertex.size() * sizeof(float3));
 
 	return ret;
+}
+
+MonoObject* ReturnHitpoint()
+{
+	float4 size = app->editor->GetGameView()->GetBounds();
+	float2 mousePos = { (float)app->input->GetMouseX(), (float)app->input->GetMouseY() };
+
+	mousePos.x = 2 * ((mousePos.x - size.x) / (size.z)) - 1.0f;
+	mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
+
+	LineSegment picking = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum()->UnProjectLineSegment(mousePos.x, mousePos.y);
+	return app->moduleMono->Float3ToCS(app->navMesh->CalculateHitPosition(picking));
 }
