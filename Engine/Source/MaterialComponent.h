@@ -51,6 +51,9 @@ public:
 	inline float3& GetEmissiveColor() { return emissiveColor; }
 	inline void SetEmissiveColor(const float3& color) { emissiveColor = color; }
 
+	inline float GetDiffuseAlpha() { return opacity; }
+	inline void SetDiffuseAlpha(float value) { opacity = value; }
+
 private:
 	void DisplayTexturesInfo();
 

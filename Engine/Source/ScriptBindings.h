@@ -193,10 +193,20 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
 	matComp->SetTextureType(TextureType::DIFFUSE);
 	matComp->SetTexture(newTexture);
+}
 
-	/*res->Load();
-	if (diff.use_count() - 1 == 1) diff->UnLoad();
-	SetTexture(res);*/
+float GetDiffuseAlpha(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->GetComponent<MaterialComponent>()->GetDiffuseAlpha();
+}
+
+void SetDiffuseAlpha(MonoObject* go, float value)
+{
+	if (value > 1) value = 1;
+	else if (value < 0) value = 0;
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetDiffuseAlpha(value);
 }
 
 MonoBoolean GetEmissiveEnabled(MonoObject* go)

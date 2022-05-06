@@ -862,7 +862,7 @@ void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, Cam
 void ModuleRenderer3D::DrawDamageFeedback()
 {
 	static float alpha = 0.6;
-	alpha -= 5.f * app->sceneManager->GetGameDeltaTime();
+	alpha -= 0.5 * app->sceneManager->GetGameDeltaTime();
 	if (alpha < 0)
 	{
 		alpha = 0.6;

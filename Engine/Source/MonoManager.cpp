@@ -74,6 +74,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Material Comp =============
 	//mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
 	mono_add_internal_call("RagnarEngine.Material::SetTexturePath", SetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::get_diffuseAlpha", GetDiffuseAlpha);
+	mono_add_internal_call("RagnarEngine.Material::set_diffuseAlpha", SetDiffuseAlpha);
 	mono_add_internal_call("RagnarEngine.Material::get_emissiveEnabled", GetEmissiveEnabled);
 	mono_add_internal_call("RagnarEngine.Material::set_emissiveEnabled", SetEmissiveEnabled);
 	mono_add_internal_call("RagnarEngine.Material::get_emissiveColor", GetEmissiveColor);
