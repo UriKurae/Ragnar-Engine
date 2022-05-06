@@ -115,6 +115,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::ReparentToRoot", ReparentToRoot);
+	mono_add_internal_call("RagnarEngine.GameObject::ChangeMesh", ChangeMesh);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
 	// Utility ===================
@@ -200,6 +201,7 @@ bool MonoManager::Init(JsonParsing& node)
 	// Scene Manager =============
 	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::SaveScene", SaveScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::SaveTest", SaveTest);
 	mono_add_internal_call("RagnarEngine.SceneManager::get_lastSceneName", GetLastSceneName);
 	mono_add_internal_call("RagnarEngine.SceneManager::get_currentSceneName", GetCurrentSceneName);

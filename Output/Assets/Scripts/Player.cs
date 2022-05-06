@@ -38,7 +38,6 @@ public class Player : RagnarComponent
 
     public void Update()
     {
-
         if (!dialogue.GetInDialogue())
         {
             if (hitPoints <= 0 && !dead)
@@ -66,21 +65,29 @@ public class Player : RagnarComponent
                 }
 
                 // Crouch
-                if (!crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+                switch(Input.GetKey(KeyCode.LSHIFT))
                 {
-                    crouched = true;
-                    gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
-                    rb.SetHeight(0.6f); // 0.6 = 60%
-
-                    Vector3 maxPoint = gameObject.GetMaxAABB();
-                    maxPoint.y *= 0.6f;
-                    gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
-                }
-                if (crouched && Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
-                {
-                    crouched = false;
-                    gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-                    rb.SetHeight(1); // 1 = 100% = Reset
+                    case KeyState.KEY_DOWN:
+                        {
+                            crouched = true;
+                            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+                            rb.SetHeight(0.6f); // 0.6 = 60%
+                            break;
+                        }
+                    case KeyState.KEY_REPEAT:
+                        {
+                            Vector3 maxPoint = gameObject.GetMaxAABB();
+                            maxPoint.y *= 0.6f;
+                            gameObject.SetSizeAABB(gameObject.GetMinAABB(), maxPoint);
+                            break;
+                        }
+                    case KeyState.KEY_UP:
+                        {
+                            crouched = false;
+                            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+                            rb.SetHeight(1); // 1 = 100% = Reset
+                            break;
+                        }
                 }
             }
             if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3 || state == (int)State.ABILITY_4 || state == (int)State.CARRYING)
@@ -195,6 +202,12 @@ public class Player : RagnarComponent
 
     public void OnTriggerEnter(Rigidbody other)
     {
+        if (other.gameObject.tag == "CheckPoint")
+        {
+            SaveSystem.SaveScene();
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+        }
         if (other.gameObject.tag == "Hidde")
             isHidden = true;
     }

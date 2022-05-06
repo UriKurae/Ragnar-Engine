@@ -5375,7 +5375,7 @@
                     ],
                     "RotationEditor": [
                         0,
-                        0,
+                        -1.4835301637649536,
                         0
                     ],
                     "Scale": [
@@ -9372,6 +9372,73 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/colliders_lvl1__Collider_12.fbx",
                     "Active": false
+                }
+            ]
+        },
+        {
+            "UUID": 225247856,
+            "Parent UUID": 417171234,
+            "Name": "CheckPoint",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "CheckPoint",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -25.453733444213867,
+                        0,
+                        63.788906097412109
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.23461277782917023,
+                        0,
+                        0.97208893299102783
+                    ],
+                    "RotationEditor": [
+                        0,
+                        -0.47364041209220886,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 11,
+                    "CollisionType": 0,
+                    "Size": [
+                        20,
+                        20,
+                        7
+                    ],
+                    "Gravity": false,
+                    "Kinematic": false,
+                    "Trigger": true,
+                    "Mass": 0,
+                    "Friction": 1,
+                    "Restitution": 0.20000000298023224,
+                    "MovementConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "RotationConstraint": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "SizeConstraint": 0,
+                    "LinearDamping": 0,
+                    "AngularDamping": 0,
+                    "Active": true
                 }
             ]
         }

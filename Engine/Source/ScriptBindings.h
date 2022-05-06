@@ -12,6 +12,7 @@
 
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
+#include "MeshComponent.h"
 #include "Texture.h"
 #include "ParticleSystemComponent.h"
 #include "LightComponent.h"
@@ -526,6 +527,21 @@ void ReparentToRoot(MonoObject* go)
 	currentScene->ReparentGameObjects(parent, currentScene->GetRoot());
 }
 
+void ChangeMesh(MonoObject* go, std::string directory)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles(directory.c_str(), files);
+	std::vector<std::string>::iterator it = files.begin();
+	if ((*it).find(".rgmesh") != std::string::npos)
+	{
+		app->fs->GetFilenameWithoutExtension(*it);
+		*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+		parent->GetComponent<MeshComponent>()->SetMesh(ResourceManager::GetInstance()->LoadResource(std::stoll(*it)));
+	}
+}
+
 void AddChild(MonoObject* go, MonoObject* child)
 {
 	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
@@ -604,6 +620,12 @@ void SetDirectionParticle(MonoObject* go, MonoObject* direction)
 void NextScene()
 {
 	app->sceneManager->NextScene();
+}
+
+void SaveScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->SaveScene(name);
 }
 
 void LoadScene(MonoString* string)

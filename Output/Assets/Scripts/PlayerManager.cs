@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class PlayerManager : RagnarComponent
@@ -18,19 +19,7 @@ public class PlayerManager : RagnarComponent
 	{
         foreach (Characters c in characters)
         {
-            InternalCalls.InstancePrefab(c.prefabPath);
-            //c.abilities[4] = new Abilities
-            //{
-            //    name = "CorpseCarrier",
-            //    prefabPath = "",
-            //    transformY = 0.0f,
-            //    intensity = 4.0f,
-            //    constant = 0.0f,
-            //    linear = 0.0f,
-            //    quadratic = 0f,
-            //    charges = -1,
-            //    cooldown = 0f
-            //}; // Corpse Carrier Ability
+            InternalCalls.InstancePrefab(c.prefabPath);   
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -54,10 +43,27 @@ public class PlayerManager : RagnarComponent
         }
         area = aux;
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
+        if (SaveSystem.fromContinue)
+        {
+            LoadPlayer();
+        }
     }
 
 	public void Update()
     {
+        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
+        {
+            SaveSystem.LoadScene();
+            //LoadPlayer();
+            //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
+            SaveSystem.fromContinue = true;
+        }
+        if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
+        {
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+            SavePlayer();
+        }
         if (!dialogue.GetInDialogue())
         {
             if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
@@ -268,7 +274,7 @@ public class PlayerManager : RagnarComponent
 
                             if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
-                                GameObject[] enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
+                                List<GameObject> enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
                                 foreach (GameObject g in enemiesDead)
                                 {
                                     if (g != null && obj.name == g.name)
@@ -388,6 +394,32 @@ public class PlayerManager : RagnarComponent
         }
         players[id].GetComponent<Player>().SetControled(true);
         
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
+        SaveSystem.SaveScene();
+        for (int i = 0; i < players.Length; ++i)
+        { 
+            SaveSystem.SavePlayer(players[i].GetComponent<Player>());
+        }
+    }
+
+    public void LoadPlayer()
+    {
+        for (int i = 0; i < players.Length; ++i)
+        {
+            PlayerData data = SaveSystem.LoadPlayer(players[i].name);
+
+            players[i].GetComponent<Player>().hitPoints = data.hitPoints;
+
+            Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
+            players[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
+
+            Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+            players[i].GetComponent<Rigidbody>().SetBodyRotation(rot); 
+        }
     }
 }
 
