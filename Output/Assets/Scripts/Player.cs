@@ -12,6 +12,7 @@ public class Player : RagnarComponent
     private bool firstTime = false;
     public bool dead = false;
     public GameObject pickedEnemy = null;
+    public bool isHidden = false;
 
     Rigidbody rb;
     Material materialComponent;
@@ -181,10 +182,6 @@ public class Player : RagnarComponent
     }
     public void OnTrigger(Rigidbody other)
     {
-        /*
-         * if (other.gameObject.name == "WinCondition")
-           SceneManager.LoadScene("WinScene");
-        */
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
@@ -209,6 +206,18 @@ public class Player : RagnarComponent
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
         }
+    }
+
+    public void OnTriggerEnter(Rigidbody other)
+    {
+        if (other.gameObject.tag == "Hidde")
+            isHidden = true;
+    }
+
+    public void OnTriggerExit(Rigidbody other)
+    {
+        if (other.gameObject.tag == "Hidde")
+            isHidden = false;
     }
 
     public void SetControled(bool var)

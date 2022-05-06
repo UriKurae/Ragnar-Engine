@@ -167,12 +167,11 @@ void SetText(MonoObject* go, MonoString* text)
 	TextComponent* tr = GetComponentMono<TextComponent*>(go);
 	char* aux = mono_string_to_utf8(text);
 	tr->SetText(aux);
-
 }
-const char* GetText(MonoObject* go)
+MonoString* GetText(MonoObject* go)
 {
 	TextComponent* tr = GetComponentMono<TextComponent*>(go);
-	return tr->GetText();
+	return mono_string_new(app->moduleMono->domain, tr->GetText().c_str());
 }
 void SetTextTextColor(MonoObject* go, float Red,float Green,float Blue)
 {

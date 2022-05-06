@@ -51,11 +51,12 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 352590000,
+                    "pointer": 354433992,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
-                    "enemies": 0
+                    "enemies": 0,
+                    "runGame": true
                 }
             ]
         },
@@ -2311,13 +2312,13 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.66333270072937012,
+                        0.35584366321563721,
                         0,
-                        0.74832463264465332
+                        -0.93454551696777344
                     ],
                     "RotationEditor": [
                         -0,
-                        1.4505273103713989,
+                        -0.72763335704803467,
                         -0
                     ],
                     "Scale": [
@@ -2367,12 +2368,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 176,
-                    "Vertical Fov": 0.39154663681983948,
+                    "Vertical Fov": 0.49003934860229492,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -5.9849510192871094,
+                        54.294296264648438,
                         55,
-                        -173.5806884765625
+                        -194.75372314453125
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -2388,7 +2389,7 @@
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 83.109077453613281,
+                    "Horizontal Angle": 318.3096923828125,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -6044,7 +6045,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 352576808,
+                    "pointer": 353756880,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6081,8 +6082,8 @@
                     ],
                     "buttonWidth": 914,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1790,
-                    "lastButtonHeight": 857,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 792,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6131,8 +6132,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1790,
-                    "lastButtonHeight": 857,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 792,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6186,8 +6187,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1790,
-                    "lastButtonHeight": 857,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 792,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6241,8 +6242,8 @@
                     ],
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1790,
-                    "lastButtonHeight": 857,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 792,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6257,6 +6258,61 @@
                     "Type": 13,
                     "alpha": 1,
                     "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 2016517291,
+            "Parent UUID": 1906815624,
+            "Name": "UI Timer",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 792,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Time",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
                 }
             ]
         },
@@ -6366,7 +6422,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 311638672,
+                    "pointer": 383568776,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -6441,7 +6497,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 311636088,
+                    "pointer": 383567280,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -6516,7 +6572,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 311637312,
+                    "pointer": 383568096,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -6591,7 +6647,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 311637584,
+                    "pointer": 383567960,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
