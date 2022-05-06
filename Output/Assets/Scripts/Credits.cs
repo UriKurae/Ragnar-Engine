@@ -14,7 +14,7 @@ public class Credits : RagnarComponent
 	GameObject UPCLogo;
 	GameObject AudioManager;
 	float newDelta=0;
-	float velocity = 30;
+	float velocity = 60;
 	bool isFirstM = true;
 	public void Start()
 	{
@@ -58,27 +58,27 @@ public class Credits : RagnarComponent
     {
         if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_REPEAT)
         {
-			velocity = 60;
+			velocity = 100;
 
         }
         else
         {
-			velocity = 30;
+			velocity = 60;
 		}			
 		float vel = newDelta * velocity;
 		Pos.Set(-150, TextJob.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 		TextJob.GetComponent<Transform2D>().position2D = Pos;
 
-		Pos.Set(30, TextName.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
+		Pos.Set(130, TextName.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 		TextName.GetComponent<Transform2D>().position2D = Pos;
 
 		Pos.Set(-100, TextTitles.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 		TextTitles.GetComponent<Transform2D>().position2D = Pos;
 
-		Pos.Set(0, UPCLogo.GetComponent<Transform2D>().position2D.y + (vel*2), 36.1f);
+		Pos.Set(0, UPCLogo.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 		UPCLogo.GetComponent<Transform2D>().position2D = Pos;
 
-		Pos.Set(0, RagnarLogo.GetComponent<Transform2D>().position2D.y + (vel * 2), 36.1f);
+		Pos.Set(0, RagnarLogo.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 		RagnarLogo.GetComponent<Transform2D>().position2D = Pos;		
 	}
 	void BackgroundImageAction()

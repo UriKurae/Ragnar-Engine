@@ -682,7 +682,7 @@ public class pauseMenuButton : RagnarComponent
 			Light.shadowsEnabled = false;
 		}
 
-		pos.Set(0, y - 235, 36.1f);
+		pos.Set(0, y-230, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(x - 550, y - 500, 36.1f);
@@ -708,7 +708,7 @@ public class pauseMenuButton : RagnarComponent
         optionsGeneralSound.isActive = true;
 
 
-        pos.Set(0, y - 235, 36.1f);
+        pos.Set(0, y-230 , 36.1f);
 		optionsSoundText.GetComponent<Transform2D>().position2D = pos;
 
 		float generalSound;
