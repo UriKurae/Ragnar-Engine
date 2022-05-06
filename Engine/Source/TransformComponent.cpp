@@ -238,10 +238,13 @@ void TransformComponent::UpdateBoundingBox()
 		owner->SetAABB(newObb);
 		//owner->GetComponent<MeshComponent>()->CalculateCM();
 	}
+	else
+	{
+		ParticleSystemComponent* partComp = owner->GetComponent<ParticleSystemComponent>();
+		if (partComp)
+			partComp->UpdateAABB();
+	}
 
-	ParticleSystemComponent* partComp = owner->GetComponent<ParticleSystemComponent>();
-	if (partComp)
-		partComp->UpdateAABB();
 }
 
 bool TransformComponent::DrawVec3(std::string& name, float3& vec)

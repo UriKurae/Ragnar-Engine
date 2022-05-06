@@ -275,7 +275,7 @@ void SetLightConstant(MonoObject* go, float constant)
 	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
 
 	PointLight* l = (PointLight*)lightComp->GetLight();
-	l->quadratic = constant;
+	l->constant = constant;
 }
 
 MonoObject* GetLightAmbient(MonoObject* go)

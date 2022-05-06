@@ -21,8 +21,11 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
     saveConfig = false;
     loadConfig = false;
 
-    Sphere s(trans->GetPosition(), 5);
-    own->SetAABB(AABB(s));
+    if (own->GetComponent<MeshComponent>())
+    {
+        Sphere s(trans->GetPosition(), 5);
+        own->SetAABB(AABB(s));
+    }
     sizeAABB = { 10,10,10 };
     offsetAABB = { 0,0,0 };
 

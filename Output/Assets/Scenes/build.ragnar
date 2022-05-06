@@ -51,7 +51,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 124928008,
+                    "pointer": 164400320,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1394,19 +1394,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        21.839679718017578,
+                        30.073171615600586,
                         0,
-                        -26.807065963745117
+                        -42.502628326416016
                     ],
                     "Quaternion": [
                         0,
-                        0.64327621459960938,
+                        0.6106574535369873,
                         0,
-                        -0.76563417911529541
+                        -0.79189485311508179
                     ],
                     "RotationEditor": [
                         -0,
-                        -1.3975392580032349,
+                        -1.3137811422348022,
                         -0
                     ],
                     "Scale": [
@@ -1433,14 +1433,14 @@
                     "Active": true,
                     "Position": [
                         0,
-                        55,
-                        -50
+                        63.879196166992188,
+                        -58.071998596191406
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
+                        0.34202015399932861,
                         0,
                         0,
-                        0.93969261646270752
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1459,25 +1459,25 @@
                     "Vertical Fov": 0.51462435722351074,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        71.092391967773438,
-                        55,
-                        -35.426864624023438
+                        86.239151000976562,
+                        63.879196166992188,
+                        -57.264625549316406
                     ],
                     "Type": 3,
-                    "Zoom": -8,
+                    "Zoom": -20,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        21.839679718017578,
+                        30.073171615600586,
                         0,
-                        -26.807065963745117
+                        -42.502628326416016
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 279.9268798828125,
+                    "Horizontal Angle": 284.72589111328125,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -2742,7 +2742,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -2797,7 +2797,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -5444,7 +5444,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -5524,7 +5524,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -5574,7 +5574,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -5624,7 +5624,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -5674,7 +5674,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -5724,7 +5724,7 @@
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Untagged",
+            "tag": "Ground",
             "layer": "Default",
             "Components": [
                 {
@@ -6332,7 +6332,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 124931320,
+                    "pointer": 359271176,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -6634,7 +6634,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 237024904,
+                    "pointer": 370265848,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8655,7 +8655,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 237027208,
+                    "pointer": 394426448,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8730,7 +8730,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 237025624,
+                    "pointer": 394423856,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
