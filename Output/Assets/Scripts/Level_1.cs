@@ -8,6 +8,7 @@ public class Level_1 : RagnarComponent
     public Chronometer timer = null;
     public bool runGame = true;
     private UIButton chrono;
+    private GameObject SceneAudio;
 
     public void Start()
 	{
@@ -17,6 +18,11 @@ public class Level_1 : RagnarComponent
         chrono = GameObject.Find("UI Counter").GetComponent<UIButton>();
         chrono.SetTextPosition(-26, -4);
         timer = new Chronometer();
+
+        //Play Level Soundtrack
+        SceneAudio = GameObject.Find("AudioLevel1");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
 
         // PLAYERS
         characters = new Characters[2];

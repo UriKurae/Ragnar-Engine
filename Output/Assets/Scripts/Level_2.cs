@@ -6,6 +6,7 @@ public class Level_2 : RagnarComponent
 	public Characters[] characters;
 	public Enemies[] enemies;
     private Chronometer timer = null;
+    private GameObject SceneAudio;
     public bool runGame = true;
     private UIText uiChrono;
     public void Start()
@@ -13,6 +14,11 @@ public class Level_2 : RagnarComponent
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(-23.76f, 0f, -199.01f);
         GameObject.Find("UI Timer").GetComponent<Transform2D>().position2D = new Vector3(0, 250, 0);
+
+        //Play Level Soundtrack
+        SceneAudio = GameObject.Find("AudioLevel1");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
 
         uiChrono = GameObject.Find("UI Timer").GetComponent<UIText>();
         timer = new Chronometer();

@@ -57,7 +57,7 @@ public class Player : RagnarComponent
 
                     if (firstTime)
                     {
-                        gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
+                        //gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
                     }
                     else
                     {

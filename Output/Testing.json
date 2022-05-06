@@ -71,6 +71,54 @@
                 46.593765258789063
             ],
             "Time": 14.351872444152832
+        },
+        {
+            "Round": 6,
+            "Scene Name": "build",
+            "Dead Count": 25,
+            "Player Dead": "Paul Atrides",
+            "Last Pos": [
+                -51.213516235351563,
+                0.074391365051269531,
+                76.7896728515625
+            ],
+            "Time": 27.360382080078125
+        },
+        {
+            "Round": 7,
+            "Scene Name": "build",
+            "Dead Count": 25,
+            "Player Dead": "Paul Atrides",
+            "Last Pos": [
+                -54.598274230957031,
+                0.073497414588928223,
+                76.180397033691406
+            ],
+            "Time": 20.208047866821289
+        },
+        {
+            "Round": 8,
+            "Scene Name": "build",
+            "Dead Count": 25,
+            "Player Dead": "Paul Atrides",
+            "Last Pos": [
+                -53.873577117919922,
+                0.073497295379638672,
+                77.691734313964844
+            ],
+            "Time": 23.936222076416016
+        },
+        {
+            "Round": 9,
+            "Scene Name": "build",
+            "Dead Count": 25,
+            "Player Dead": "Paul Atrides",
+            "Last Pos": [
+                -32.951297760009766,
+                0.074426770210266113,
+                78.603790283203125
+            ],
+            "Time": 25.360288619995117
         }
     ]
 }

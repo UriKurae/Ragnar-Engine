@@ -5,6 +5,7 @@ public class DialogueManager : RagnarComponent
 {
 	//UIText toxt;
 	GameObject box;
+	private GameObject SceneAudio;
 	GameObject text;
 	GameObject image;
     GameObject name;
@@ -23,7 +24,8 @@ public class DialogueManager : RagnarComponent
 	public void Start()
 	{
 		Dialogue.LoadDialogueFile("");
-		box = GameObject.Find("DialogueBox");
+        SceneAudio = GameObject.Find("AudioLevel1");
+        box = GameObject.Find("DialogueBox");
 		text = GameObject.Find("DialogueText");
 		image = GameObject.Find("DialogueAuthImg");
         name = GameObject.Find("DialogueAuthName");
@@ -62,11 +64,13 @@ public class DialogueManager : RagnarComponent
         // Next Line
         if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_UP && gameObject.isActive)
         {
+            SceneAudio.GetComponent<AudioSource>().PlayClip("UI_DIALOGUEPASS");
             NextLine();
         }
         //End Dialogue
         if (Input.GetKey(KeyCode.P) == KeyState.KEY_UP)
         {
+            SceneAudio.GetComponent<AudioSource>().PlayClip("UI_DIALOGUEPASS");
             EndDialogue();
         }
         /*

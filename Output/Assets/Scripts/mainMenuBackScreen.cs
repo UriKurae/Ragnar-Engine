@@ -596,7 +596,7 @@ public class mainMenuBackScreen : RagnarComponent
 				// pressed mode
 				actualOption = "Controls";
 
-				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				//SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
@@ -649,7 +649,7 @@ public class mainMenuBackScreen : RagnarComponent
 				// pressed mode
 				actualOption = "Sound";
 
-				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				//SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
@@ -703,7 +703,7 @@ public class mainMenuBackScreen : RagnarComponent
 				// pressed mode
 				actualOption = "Screen";
 
-				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				//SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
@@ -762,7 +762,7 @@ public class mainMenuBackScreen : RagnarComponent
 				isFirstOControlsB = true;
 
 				//Quitar menu de pausa
-				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+				//SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
