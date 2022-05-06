@@ -29,9 +29,13 @@ public class Credits : RagnarComponent
 		TextTitles = GameObject.Find("Tiles List");
 		RagnarLogo = GameObject.Find("Ragnar Logo");
 		UPCLogo = GameObject.Find("UPC Logo");
+
 		AudioManager = GameObject.Find("AudioWinMenu");
-		
-		Pos = new Vector3(0, 0, 0);
+        AudioManager.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        //Credits music placeholder
+        AudioManager.GetComponent<AudioSource>().SetState("MUSIC", "MAINMENU");
+
+        Pos = new Vector3(0, 0, 0);
 
 		Pos.Set(-150, -(InternalCalls.GetRegionGame().y / 2)+210, 36.1f);
 		TextJob.GetComponent<Transform2D>().position2D = Pos;

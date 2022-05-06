@@ -10,10 +10,12 @@ public class BackStab_2 : RagnarComponent
 	public bool backstabed;
 	NavAgent agent;
 	public GameObject boss;
+    private GameObject sceneAudio;
 	public void Start()
 	{
 		Debug.Log("Start Knife");
-        gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFETHROW");
+        sceneAudio = GameObject.Find("AudioLevel1");
+        sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFETHROW");
         player = GameObject.Find("Player");
 		pos = player.transform.globalPosition;
 		pos.y += 1;
@@ -35,17 +37,17 @@ public class BackStab_2 : RagnarComponent
 			player.GetComponent<Rigidbody>().SetBodyPosition(behind);
 			if(selectedEnemy.GetComponent<BasicEnemy>().ToString() == "BasicEnemy")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
+                sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
                 selectedEnemy.GetComponent<BasicEnemy>().pendingToDelete = true;
             }
 			if(selectedEnemy.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHITSHIELD");
+                sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHITSHIELD");
                 selectedEnemy.GetComponent<UndistractableEnemy>().pendingToDelete = true;
             }
 			if(selectedEnemy.GetComponent<TankEnemy>().ToString() == "TankEnemy")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
+                sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
                 selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
             }
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
