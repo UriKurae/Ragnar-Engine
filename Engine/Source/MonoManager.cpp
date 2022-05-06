@@ -172,6 +172,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Light::set_constant", SetLightConstant);
 	mono_add_internal_call("RagnarEngine.Light::get_ambient", GetLightAmbient);
 	mono_add_internal_call("RagnarEngine.Light::set_ambient", SetLightAmbient);
+	mono_add_internal_call("RagnarEngine.Light::get_diffuse", GetLightDiffuse);
+	mono_add_internal_call("RagnarEngine.Light::set_diffuse", SetLightDiffuse);
 	// Light =====================
 
 	// NavAgent ==================

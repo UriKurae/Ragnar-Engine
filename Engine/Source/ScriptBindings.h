@@ -283,7 +283,7 @@ void SetLightConstant(MonoObject* go, float constant)
 	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
 
 	PointLight* l = (PointLight*)lightComp->GetLight();
-	l->quadratic = constant;
+	l->constant = constant;
 }
 
 MonoObject* GetLightAmbient(MonoObject* go)
@@ -296,6 +296,17 @@ void SetLightAmbient(MonoObject* go, MonoObject* ambient)
 {
 	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
 	lightComp->GetLight()->ambient = app->moduleMono->UnboxVector(ambient);
+}
+
+MonoObject* GetLightDiffuse(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return app->moduleMono->Float3ToCS(lightComp->GetLight()->diffuse);
+}
+void SetLightDiffuse(MonoObject* go, MonoObject* ambient)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->diffuse = app->moduleMono->UnboxVector(ambient);
 }
 
 // Light ============================

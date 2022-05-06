@@ -135,7 +135,5 @@ MonoObject* ReturnHitpoint()
 	mousePos.y = -(2 * ((mousePos.y - (size.y + 10.0f)) / (size.w)) - 1.0f);
 
 	LineSegment picking = app->sceneManager->GetCurrentScene()->mainCamera->GetFrustum()->UnProjectLineSegment(mousePos.x, mousePos.y);
-	app->navMesh->CheckNavMeshIntersection(picking, SDL_BUTTON_LEFT);
-
-	return app->moduleMono->Float3ToCS(app->navMesh->GetPathfinding()->hitPosition);
+	return app->moduleMono->Float3ToCS(app->navMesh->CalculateHitPosition(picking));
 }

@@ -10,6 +10,7 @@ public class PlayerManager : RagnarComponent
     public Characters playableCharacter;
 
     GameObject[] area = null;
+    GameObject lightHab = null;
     public bool drawnArea = false;
     bool crouched = false;
     DialogueManager dialogue;
@@ -54,6 +55,8 @@ public class PlayerManager : RagnarComponent
         }
         area = aux;
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
+        lightHab = GameObject.Find("ControllableLight");
     }
 
 	public void Update()
@@ -121,6 +124,18 @@ public class PlayerManager : RagnarComponent
             SpawnArea((int)State.ABILITY_4);
         }
 
+        // Change Condition to all players
+        if ((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4))
+        {
+            lightHab.GetComponent<Light>().intensity = 6;
+            Vector3 hit = RayCast.ReturnHitpoint();
+            if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < 11.5f)
+            {
+                hit.y += 0.2f;
+                lightHab.transform.globalPosition = hit;
+            }        
+        }
+
         // LETRA B --> ARRASTRAR CUERPOS
         if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
         {
@@ -164,20 +179,7 @@ public class PlayerManager : RagnarComponent
 
     private void DrawArea(int ability)
     {
-        if ((playableCharacter == characters[0]) && (ability == (int)State.ABILITY_4))
-        {
-            Vector3 hit = RayCast.ReturnHitpoint();
-            if (NavAgent.ValidDestination(hit))
-            {
-                
-            }
-            hit.y += playableCharacter.abilities[ability - 1].transformY;
-            area[characterSelected].transform.globalPosition = hit;
-        }
-        else
-        {
-            area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
-        }
+        area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
         area[characterSelected].GetComponent<Light>().intensity = playableCharacter.abilities[ability - 1].intensity;
         area[characterSelected].GetComponent<Light>().constant = playableCharacter.abilities[ability - 1].constant;
         area[characterSelected].GetComponent<Light>().linear = playableCharacter.abilities[ability - 1].linear;
@@ -324,6 +326,7 @@ public class PlayerManager : RagnarComponent
             players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
+            lightHab.GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
         // Se cancela el estado de la habilidad para que el área de rango deje de mostrarse.
@@ -333,6 +336,7 @@ public class PlayerManager : RagnarComponent
             players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
+            lightHab.GetComponent<Light>().intensity = 0f;
             drawnArea = false;
         }
     }
@@ -348,6 +352,7 @@ public class PlayerManager : RagnarComponent
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
+                    lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -360,6 +365,7 @@ public class PlayerManager : RagnarComponent
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
                     if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
+                    lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -372,6 +378,7 @@ public class PlayerManager : RagnarComponent
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
+                    lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
@@ -384,6 +391,7 @@ public class PlayerManager : RagnarComponent
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
+                    lightHab.GetComponent<Light>().intensity = 0f;
                     playableCharacter = characters[characterSelected];
                     ChangeCharacter(characterSelected);
                     Debug.Log("Character Changed");
