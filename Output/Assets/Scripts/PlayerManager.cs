@@ -133,7 +133,15 @@ public class PlayerManager : RagnarComponent
             {
                 hit.y += 0.2f;
                 lightHab.transform.globalPosition = hit;
-            }        
+            }
+            else
+            {
+                // No BORRAR
+                //Vector3 a = players[characterSelected].transform.globalPosition;
+                //Vector3 b = (hit - a).normalized * 11.5f + a;
+                //b.y = lightHab.transform.globalPosition.y;
+                //lightHab.transform.globalPosition = b;
+            }
         }
 
         // LETRA B --> ARRASTRAR CUERPOS
