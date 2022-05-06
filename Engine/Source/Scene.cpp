@@ -495,7 +495,7 @@ bool Scene::SaveScene(const char* name)
 	return true;
 }
 
-void Scene::SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::string playerName, float3 playerPos)
+void Scene::SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::string playerName, float3 playerPos, float time)
 {
 	//Load	
 	JsonParsing sceneFile = JsonParsing();
@@ -511,6 +511,7 @@ void Scene::SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::s
 		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Dead Count", go.GetJsonNumber("Dead Count"));
 		file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Player Dead", go.GetJsonString("Player Dead"));
 		file.SetNewJson3Number(file, "Last Pos", go.GetJson3Number(go, "Last Pos"));
+		file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Time", go.GetJsonNumber("Time"));
 		node.SetValueToArray(array, file.GetRootValue());
 	}
 	// Open
@@ -520,7 +521,7 @@ void Scene::SaveTest(JsonParsing& node, JSON_Array* array, int deadCount, std::s
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Dead Count", deadCount);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Player Dead", playerName.c_str());
 	file.SetNewJson3Number(file, "Last Pos", playerPos);
-	//file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Time", name.c_str()); // InProgress
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Time", time);
 
 	//Close
 	node.SetValueToArray(array, file.GetRootValue());
