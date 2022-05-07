@@ -218,7 +218,8 @@ public class PlayerManager : RagnarComponent
                 players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
             }
 
-            switch(playableCharacter.state)
+            GameObject obj = null;
+            switch (playableCharacter.state)
             {
                 case State.ABILITY_1:
                     {
@@ -300,7 +301,7 @@ public class PlayerManager : RagnarComponent
                         else
                         {
                             NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
-                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+                            obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
                             if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
@@ -315,7 +316,6 @@ public class PlayerManager : RagnarComponent
                                         players[characterSelected].GetComponent<Animation>().PlayAnimation("PickUp");
 
                                         Debug.Log("Carrying the corpse of" + obj.name.ToString());
-                                        playableCharacter.pickedEnemy = obj;
                                         break;
                                     }
                                 }
@@ -356,6 +356,7 @@ public class PlayerManager : RagnarComponent
                 {
                     playableCharacter.state = State.NONE;
                     players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
+                    playableCharacter.pickedEnemy = obj;
                 }
             }
         }
