@@ -7,7 +7,7 @@ public class Level_2 : RagnarComponent
 	public Enemies[] enemies;
     private Chronometer timer = null;
     public bool runGame = true;
-    private UIButton chrono;
+    public UIButton chrono;
     public Vector3 hitPoint;
 
     private GameObject preClick;

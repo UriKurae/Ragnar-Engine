@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "Globals.h"
 
 #include "ModuleEditor.h"
@@ -133,7 +134,7 @@ bool Scene::PostUpdate()
 	return true;
 }
 
-bool Scene::Draw()
+bool Scene::Draw(const AABB* shadowsIntersectionAABB)
 {
 	RG_PROFILING_FUNCTION("Scene PostUpdate");
 
@@ -149,7 +150,19 @@ bool Scene::Draw()
 
 		if (go->GetActive())
 		{
-			if (go != app->editor->GetGO()&& !go->isUI) go->Draw(nullptr);
+			if (go != app->editor->GetGO() && !go->isUI)
+			{
+				if (app->renderer3D->genShadows)
+				{
+					if(shadowsIntersectionAABB->Contains(go->GetAABB()))
+						go->Draw(nullptr);
+				}
+				else
+				{
+					go->Draw(nullptr);
+				}
+
+			}
 
 			for (int i = 0; i < go->GetChilds().size(); ++i)
 				stack.push(go->GetChilds()[i]);
