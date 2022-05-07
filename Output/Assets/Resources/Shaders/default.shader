@@ -13,7 +13,6 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform mat3 normalMatrix;
-//uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
 uniform mat4 lightSpaceMatrix;
@@ -84,10 +83,6 @@ in vec4 fragPosLightSpace;
 in mat3 tbnMatrix;
 in mat4 vModel;
 
-//out vec3 tangentLightPos;
-out vec3 tangentViewPos;
-out vec3 tangentFragPos;
-
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec4 fragNormals;
 
@@ -115,8 +110,6 @@ struct Material
 	vec3 specular;
 	vec3 emissiveColor;
 	float shininess;
-	int gammaCorrection; // Acts as a bool
-	float gammaCorrectionAmount;
 };
 uniform Material material;
 
@@ -146,7 +139,7 @@ struct PointLight
 	float lin;
 	float quadratic;
 };
-#define MAX_POINT_LIGHTS 4
+#define MAX_POINT_LIGHTS 6
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 
 struct SpotLight
@@ -258,10 +251,13 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 
-	if (diff < csp.a) diff = 0.25f;
+	if (diff < csp.a) diff = 0.05f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
-	else diff = csp.d;
+	else if (diff < csp.d) diff = csp.d;
+	else if (diff < csp.e) diff = csp.e;
+	else if (diff < csp.f) diff = csp.f;
+	else diff = csp.g;
 
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
@@ -291,40 +287,36 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	
 	float diff = max(dot(normal, lightDir), 0.0);
 	
-	if (diff < csp.a) diff = 0.25f;
+	if (diff < csp.a) diff = 0.05f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
-	else diff = csp.d;
+	else if (diff < csp.d) diff = csp.d;
+	else if (diff < csp.e) diff = csp.e;
+	else if (diff < csp.f) diff = csp.f;
+	else diff = csp.g;
 	
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 	spec = step(0.5f, spec);
 
-	//float distance = length(light.position - fragPos);
-	
 	float theta = dot(lightDir, normalize(-light.direction));
 	float epsilon = light.cutOff - light.outerCutOff;
 	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
-	
-	//vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
-	//vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
-	//vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
 
 	vec3 ambient = light.ambient * material.diffuse * material.diffuse;
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-
-	ambient *=  /*attenuation **/ intensity * light.intensity;
-	diffuse  *= /*attenuation **/ intensity * light.intensity;
-	specular *= /*attenuation **/ intensity * light.intensity;
+	ambient  *= intensity * light.intensity;
+	diffuse  *= intensity * light.intensity;
+	specular *= intensity * light.intensity;
 	
 	return (ambient + diffuse + specular);
 }
 
 void main()
 {
-	vec3 norm = vec3(0);
+	vec3 norm = normalize(vNormal);
 	if (bool(hasNormalMap))
 	{
 		norm = texture(normalMap, vTexCoords).rgb;
@@ -333,11 +325,7 @@ void main()
 		vec4 a = transpose(inverse(vModel)) * vec4(norm, 1);
 		norm = a.xyz;
 	}
-	else
-	{
-		norm = normalize(vNormal);
-	}
-
+	
 	vec3 viewDir = normalize(vCamPos - vPosition);
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	
@@ -347,13 +335,8 @@ void main()
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
-	vec3 finalColor = result;
-	if (material.gammaCorrection == 1)
-	{
-		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
-	}
 
-	fragColor = texture(tex , vTexCoords) * vec4(finalColor, opacity);
+	fragColor = texture(tex , vTexCoords) * vec4(result, opacity);
 	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
 	fragColor += emissiveEnabled * vec4(material.emissiveColor, 1);
