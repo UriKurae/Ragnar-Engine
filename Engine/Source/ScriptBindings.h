@@ -547,18 +547,28 @@ void ReparentToRoot(MonoObject* go)
 	currentScene->ReparentGameObjects(parent, currentScene->GetRoot());
 }
 
-void ChangeMesh(MonoObject* go, std::string directory)
+void ChangeMesh(MonoObject* go, MonoString* name)
 {
 	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	std::string fileName = mono_string_to_utf8(name);
 
 	std::vector<std::string> files;
-	app->fs->DiscoverFiles(directory.c_str(), files);
-	std::vector<std::string>::iterator it = files.begin();
-	if ((*it).find(".rgmesh") != std::string::npos)
+	app->fs->DiscoverFiles("Library/Meshes/", files);
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
 	{
-		app->fs->GetFilenameWithoutExtension(*it);
-		*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
-		parent->GetComponent<MeshComponent>()->SetMesh(ResourceManager::GetInstance()->LoadResource(std::stoll(*it)));
+		if ((*it).find(".rgmesh") != std::string::npos)
+		{
+			app->fs->GetFilenameWithoutExtension(*it);
+			*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+			std::shared_ptr<Resource> res = ResourceManager::GetInstance()->LoadResource(std::stoll(*it));
+	
+			if (res.get()->GetName().find(fileName) != std::string::npos)
+			{
+				MeshComponent* mesh = parent->GetComponent<MeshComponent>();
+				parent->GetComponent<MeshComponent>()->SetMesh(res);
+				return;
+			}
+		}
 	}
 }
 

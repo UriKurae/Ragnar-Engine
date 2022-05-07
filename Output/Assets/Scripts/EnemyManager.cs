@@ -8,7 +8,6 @@ public class EnemyManager : RagnarComponent
     public List<GameObject> enemyGOs = new List<GameObject>();
     public List<GameObject> deadEnemies = new List<GameObject>();
     public GameObject[] colliders;
-    public int enemyCount = 0;
 
     public void Start()
     {
@@ -62,38 +61,18 @@ public class EnemyManager : RagnarComponent
         // Death Control
         if(enemyGOs.Count > 0)
         {
-            foreach(GameObject go in enemyGOs)
+            for (int i = 0; i < enemyGOs.Count; i++)
             {
-                if((go.GetComponent<BasicEnemy>().pendingToDelete && go.GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (go.GetComponent<AirEnemy>().pendingToDelete && go.GetComponent<AirEnemy>().ToString() == "AirEnemy") || (go.GetComponent<TankEnemy>().pendingToDelete && go.GetComponent<TankEnemy>().ToString() == "TankEnemy") || (go.GetComponent<UndistractableEnemy>().pendingToDelete && go.GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
+                if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
                 {
-                    for (int i = 0; i < enemyGOs.Count; i++)
-                    {
-                        if (enemyGOs[i] == go)
-                        {
-                            deadEnemies.Add(enemyGOs[i]);
-                            enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
-                            ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
-                            enemyCount++;
-                            enemies[i].state = EnemyState.DEATH;
-                        }
-                    }
+                    deadEnemies.Add(enemyGOs[i]);
+                    enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                    enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+                    ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
+                    enemies[i].state = EnemyState.DEATH;
+                    enemyGOs.RemoveAt(i);
                 }
             }
-        }
-
-        foreach (GameObject de in deadEnemies)
-        {
-            Vector3 maxPoint = de.GetMaxAABB();
-            maxPoint.x *= 1.08f;
-            maxPoint.y *= 0.25f;
-            maxPoint.z *= 1f;
-
-            Vector3 minPoint = de.GetMinAABB();
-            minPoint.x *= 0.98f;
-            minPoint.y *= 1f;
-            minPoint.z *= 1.015f;
-
-            de.SetSizeAABB(minPoint, maxPoint);
         }
     }
 
