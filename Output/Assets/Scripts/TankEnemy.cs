@@ -9,7 +9,7 @@ public class TankEnemy : RagnarComponent
     public GameObject[] waypoints;
     private int destPoint = 0;
     public EnemyState state;
-    public EnemyType type;
+    public EnemyType enemyType;
 
     // States
     public bool patrol;

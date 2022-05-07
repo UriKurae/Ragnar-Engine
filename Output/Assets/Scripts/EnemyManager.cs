@@ -30,25 +30,25 @@ public class EnemyManager : RagnarComponent
                 case EnemyType.BASIC:
                     enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<BasicEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<BasicEnemy>().type = enemies[i].type;
+                    enemyGOs[i].GetComponent<BasicEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<BasicEnemy>().colliders = colliders;
                     break;
                 case EnemyType.TANK:
                     enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<TankEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<TankEnemy>().type = enemies[i].type;
+                    enemyGOs[i].GetComponent<TankEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<TankEnemy>().colliders = colliders;
                     break;
                 case EnemyType.UNDISTRACTABLE:
                     enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().type = enemies[i].type;
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().colliders = colliders;
                     break;
                 case EnemyType.AIR:
                     enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<AirEnemy>().state = enemies[i].state;
-                    enemyGOs[i].GetComponent<AirEnemy>().type = enemies[i].type;
+                    enemyGOs[i].GetComponent<AirEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<AirEnemy>().colliders = colliders;
                     break;
             }
