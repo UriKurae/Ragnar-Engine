@@ -340,8 +340,3 @@ HCURSOR ModuleInput::LoadCursorIcon(const char* iconPath, int width, int height)
 
 	return CreateIconIndirect(&icoInfo);
 }
-
-void ModuleInput::SetCursorIcon(HCURSOR icon)
-{
-	SetCursor(icon);
-}
