@@ -275,7 +275,7 @@ public class PlayerManager : RagnarComponent
                         }
                         else if (playableCharacter == characters[1])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("SMOKEGRENADE_ACTIVATE");
                         }
                         else if (playableCharacter == characters[2])
                         {

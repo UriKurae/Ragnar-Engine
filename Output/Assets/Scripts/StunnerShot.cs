@@ -5,10 +5,12 @@ public class StunnerShot : RagnarComponent
 {
     private float force = 2500;
     private bool pendingToDelete = false;
+    private GameObject sceneAudio;
 
     public void Start()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("BG_SANDHITROCK");
+        sceneAudio = GameObject.Find("AudioLevel1");
+        sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
         AimMethod();
     }
 
@@ -38,7 +40,7 @@ public class StunnerShot : RagnarComponent
 
     public void OnCollisionEnter(Rigidbody other)
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("WPN_STUNNERHIT");
+        sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_STUNNERHIT");
         pendingToDelete = true;
     }
 
