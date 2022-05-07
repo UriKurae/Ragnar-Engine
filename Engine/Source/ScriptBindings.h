@@ -203,10 +203,44 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
 	matComp->SetTextureType(TextureType::DIFFUSE);
 	matComp->SetTexture(newTexture);
+}
 
-	/*res->Load();
-	if (diff.use_count() - 1 == 1) diff->UnLoad();
-	SetTexture(res);*/
+float GetDiffuseAlpha(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->GetComponent<MaterialComponent>()->GetDiffuseAlpha();
+}
+
+void SetDiffuseAlpha(MonoObject* go, float value)
+{
+	if (value > 1) value = 1;
+	else if (value < 0) value = 0;
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetDiffuseAlpha(value);
+}
+
+MonoBoolean GetEmissiveEnabled(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->GetComponent<MaterialComponent>()->IsEmissiveEnabled();
+}
+
+void SetEmissiveEnabled(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetEmissiveEnabled(value);
+}
+
+MonoObject* GetEmissiveColor(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetComponent<MaterialComponent>()->GetEmissiveColor());
+}
+
+void SetEmissiveColor(MonoObject* go, MonoObject* color)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetEmissiveColor(app->moduleMono->UnboxVector(color));
 }
 
 // Light ============================
@@ -314,6 +348,15 @@ void SetLightDiffuse(MonoObject* go, MonoObject* ambient)
 
 
 // GameObject =======================
+
+void GameObjectDrawOutline(MonoObject* gameObject, MonoObject* color)
+{
+	GameObject* go = app->moduleMono->GameObjectFromCSGO(gameObject);
+	float3 col = app->moduleMono->UnboxVector(color);
+	std::pair<GameObject*, float3> p(go, col);
+	app->renderer3D->gosToDrawOutline.push_back(p);
+}
+
 MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
 	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
@@ -580,6 +623,31 @@ void EraseChild(MonoObject* go, MonoObject* child)
 	parent->RemoveChild(newChild);
 }
 
+bool GetGameObjectIsInteractuable(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->isInteractuable;
+}
+
+void SetGameObjectIsInteractuable(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->isInteractuable = value;
+}
+
+MonoObject* GetGameObjectInteractuableColor(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetComponent<MaterialComponent>()->GetInteractuableColor());
+}
+
+void SetGameObjectInteractuableColor(MonoObject* go, MonoObject* color)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	float3 col = app->moduleMono->UnboxVector(color);
+	gameObject->GetComponent<MaterialComponent>()->SetInteractuableColor(col);
+}
+
 // GameObject =======================
 
 // Particle System ==================
@@ -686,6 +754,11 @@ MonoObject* GetRegionGame()
 #endif
 	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
+}
+
+void RequestDamageFeedback()
+{
+	app->renderer3D->RequestDamageFeedback();
 }
 
 // Dialogue System ======================================

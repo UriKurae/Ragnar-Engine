@@ -75,6 +75,13 @@ bool MonoManager::Init(JsonParsing& node)
 	// Material Comp =============
 	//mono_add_internal_call("RagnarEngine.Material::get_texture", GetTexturePath);
 	mono_add_internal_call("RagnarEngine.Material::SetTexturePath", SetTexturePath);
+	mono_add_internal_call("RagnarEngine.Material::get_diffuseAlpha", GetDiffuseAlpha);
+	mono_add_internal_call("RagnarEngine.Material::set_diffuseAlpha", SetDiffuseAlpha);
+	mono_add_internal_call("RagnarEngine.Material::get_emissiveEnabled", GetEmissiveEnabled);
+	mono_add_internal_call("RagnarEngine.Material::set_emissiveEnabled", SetEmissiveEnabled);
+	mono_add_internal_call("RagnarEngine.Material::get_emissiveColor", GetEmissiveColor);
+	mono_add_internal_call("RagnarEngine.Material::set_emissiveColor", SetEmissiveColor);
+
 	// Material Comp =============
 	
 	// Internall Calls =============
@@ -86,6 +93,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::InstancePrefab", InstancePrefab);
 	mono_add_internal_call("RagnarEngine.InternalCalls::Destroy", Destroy);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetRegionGame", GetRegionGame);
+	mono_add_internal_call("RagnarEngine.InternalCalls::RequestDamageFeedback", RequestDamageFeedback);
 
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponent", TryGetComponentMono);
 	mono_add_internal_call("RagnarEngine.GameObject::TryGetComponents", TryGetComponentsMono);
@@ -120,6 +128,12 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::ChangeMesh", ChangeMesh);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
+	mono_add_internal_call("RagnarEngine.GameObject::DrawOutline", GameObjectDrawOutline);
+	mono_add_internal_call("RagnarEngine.GameObject::get_isInteractuable", GetGameObjectIsInteractuable);
+	mono_add_internal_call("RagnarEngine.GameObject::set_isInteractuable", SetGameObjectIsInteractuable);
+	mono_add_internal_call("RagnarEngine.GameObject::get_interactuableColor", GetGameObjectInteractuableColor);
+	mono_add_internal_call("RagnarEngine.GameObject::set_interactuableColor", SetGameObjectInteractuableColor);
+
 	// Utility ===================
 
 	// UI ========================

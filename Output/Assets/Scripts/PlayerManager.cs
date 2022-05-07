@@ -24,9 +24,11 @@ public class PlayerManager : RagnarComponent
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
-        for(int i = 0; i < players.Length; i++)
+        Vector3[] outlineColors = new Vector3[3] { new Vector3(1,0,0), new Vector3(0,1,0), new Vector3(0,0,1) };
+        for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+            players[i].DrawOutline(outlineColors[i]);
         }
 
         ChangeCharacter(characterSelected);
