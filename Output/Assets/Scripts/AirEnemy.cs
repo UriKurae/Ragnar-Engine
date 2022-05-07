@@ -125,16 +125,22 @@ public class AirEnemy : RagnarComponent
         {
             if (other.gameObject.name == "Knife")
             {
-                deathTimer = 4f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    deathTimer = 4f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
 
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    deathTimer = 2f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
@@ -152,9 +158,12 @@ public class AirEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "Trap")
             {
-                pendingToDelete = true;
-                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (pendingToDelete == false)
+                {
+                    pendingToDelete = true;
+                    GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
         }
     }
