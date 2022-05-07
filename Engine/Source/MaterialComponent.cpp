@@ -454,13 +454,15 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	float4x4 view = float4x4::identity;
 	float4x4 proj = float4x4::identity;
 	float3 camPos = float3::zero;
-	Framebuffer* fbo;
+	Framebuffer* fbo = nullptr;
+	float intColSpeed = 0.f;
 	if (gameCam)
 	{
 		view = gameCam->matrixViewFrustum;
 		proj = gameCam->matrixProjectionFrustum;
 		fbo = app->renderer3D->mainCameraFbo;
 		camPos = gameCam->GetFrustum()->pos;
+		intColSpeed = app->sceneManager->GetGameDeltaTime();
 	}
 	else
 	{
@@ -468,6 +470,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 		proj = app->camera->matrixProjectionFrustum;
 		fbo = app->renderer3D->fbo;
 		camPos = app->camera->cameraFrustum.pos;
+		intColSpeed = app->GetEngineDeltaTime();
 	}
 
 	shader->SetUniformMatrix4f("view", view.Transposed());
@@ -489,7 +492,7 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	{
 		shader->SetUniformVec3f("interCol", interColor);
 		static float intensity = 0.1;
-		PingPongFloat(intensity, 0.01, 1, 0, true);
+		PingPongFloat(intensity, 0.05 * intColSpeed, 1, 0, true);
 
 		shader->SetUniform1f("interColIntensity", intensity);
 	}

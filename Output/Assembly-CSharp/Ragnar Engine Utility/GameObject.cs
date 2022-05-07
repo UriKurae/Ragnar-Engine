@@ -153,7 +153,7 @@ namespace RagnarEngine
         extern public void SetSizeAABB(Vector3 min, Vector3 max);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public void DrawOutline(Vector3 color);
+        extern public void SubmitOutlineDrawing(Vector3 color);
 
         public extern bool isInteractuable
         {
