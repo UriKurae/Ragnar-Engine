@@ -199,7 +199,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 			colorSum += texture(tex, texCoord);
 
 			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
-			shadow += currentDepth + bias > pcfDepth /*-0.00005*/ ? 1 : 0;
+			shadow += currentDepth + bias > pcfDepth ? 1 : 0;
 		}
 	}
 	
