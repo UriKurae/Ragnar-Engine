@@ -34,6 +34,7 @@ public class EnemyBullet : RagnarComponent
 		{
 			Debug.Log(obj.name.ToString());
 			obj.GetComponent<Player>().hitPoints -= 1;
+			InternalCalls.RequestDamageFeedback();
 		}
 
 		bulletRb.linearVelocity = diff.normalized * vel;

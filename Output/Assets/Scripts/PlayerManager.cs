@@ -24,9 +24,11 @@ public class PlayerManager : RagnarComponent
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
-        for(int i = 0; i < players.Length; i++)
+        Vector3[] outlineColors = new Vector3[3] { new Vector3(0,1,0), new Vector3(0.5f,0,0.5f), new Vector3(0,0,1) };
+        for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<Rigidbody>().SetBodyPosition(characters[i].pos);
+            players[i].SubmitOutlineDrawing(outlineColors[i]);
         }
 
         ChangeCharacter(characterSelected);
@@ -137,7 +139,7 @@ public class PlayerManager : RagnarComponent
             if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
-            Vector3 hit = RayCast.ReturnHitpoint();
+            Vector3 hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
             if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
             {
                 hit.y += 0.2f;
