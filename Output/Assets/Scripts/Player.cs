@@ -103,15 +103,19 @@ public class Player : RagnarComponent
             if (state == (int)State.ABILITY_1 || state == (int)State.ABILITY_2 || state == (int)State.ABILITY_3 || state == (int)State.ABILITY_4 || state == (int)State.CARRYING)
             {
                 agent.CalculatePath(new Vector3(gameObject.transform.globalPosition.x, gameObject.transform.globalPosition.y, gameObject.transform.globalPosition.z));
-                agent.CalculatePath(agent.hitPosition);
-                if (crouched)
+                //agent.CalculatePath(agent.hitPosition);
+                if (!agent.MovePath())
                 {
-                    gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
-                    walkPartSys.Play();
+                    gameObject.GetComponent<Animation>().PlayAnimation("Idle");
                 }
                 else
                 {
-                    gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                    if (crouched)
+                    {
+                        gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+                        walkPartSys.Play();
+                    }
+                    gameObject.GetComponent<Animation>().PlayAnimation("Walking");
                     walkPartSys.Play();
                 }
                 //gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");

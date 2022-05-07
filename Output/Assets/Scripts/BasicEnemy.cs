@@ -133,9 +133,19 @@ public class BasicEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
                     agents.CalculatePath(agents.hitPosition);
-
                 }
                 agents.MovePath();
+                if (Input.GetKey(KeyCode.Z) == KeyState.KEY_UP)
+                {
+                    if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+                    {
+                        InternalCalls.InstancePrefab("BackStabEnemy");
+                    }
+                }
+                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_UP || Input.GetKey(KeyCode.F2) == KeyState.KEY_UP || Input.GetKey(KeyCode.F3) == KeyState.KEY_UP)
+                {
+                    controlled = false;
+                }
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
@@ -297,7 +307,7 @@ public class BasicEnemy : RagnarComponent
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
             canShoot = false;
-            shootCooldown = 4f;
+            shootCooldown = 1f;
             InternalCalls.InstancePrefab("EnemyBullet", true);
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;

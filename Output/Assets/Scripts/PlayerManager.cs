@@ -350,8 +350,8 @@ public class PlayerManager : RagnarComponent
         // Se cancela el estado de la habilidad para que el �rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
-            playableCharacter.state = State.NONE;
-            players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+            playableCharacter.state = State.POSTCAST;
+            players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
