@@ -927,7 +927,7 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(20, 20, 0);
 		UISelector.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x - 170, y - 60, -10.400f);
+		pos.Set(x + 120, y - 60, -10.400f);
 		UICharacterName.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(214, 214f, 0);
 		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);
