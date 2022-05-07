@@ -804,9 +804,6 @@ public class pauseMenuButton : RagnarComponent
 	void SetAllPositions()
 	{
 		//GET POSITION
-
-
-
 		if (isSowing||isOptions)
         {
 			pointAnimation.isActive = false;
@@ -823,7 +820,7 @@ public class pauseMenuButton : RagnarComponent
 			UIPaulImage.isActive = false;
 			UIChaniImage.isActive = false;
 			UIStilgarImage.isActive = false;
-        }
+		}
         else
         {
 			//pointAnimation.isActive = false;
@@ -841,6 +838,12 @@ public class pauseMenuButton : RagnarComponent
 			UIChaniImage.isActive = true;
 			UIStilgarImage.isActive = true;
 		}
+
+		if(isOptions)
+			GameObject.Find("UI Counter").isActive = false;
+		else
+			GameObject.Find("UI Counter").isActive = true;
+
 		float y = -(InternalCalls.GetRegionGame().y / 2) + 100.0f; 
 		float x = -(InternalCalls.GetRegionGame().x / 2) + 150;
 
