@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class UndistractableEnemy : RagnarComponent
@@ -6,14 +7,13 @@ public class UndistractableEnemy : RagnarComponent
     public int velocity = 1000;
 
     public NavAgent agents;
-    public GameObject[] waypoints;
+    public List<GameObject> waypoints;
     private int destPoint = 0;
     public EnemyState state;
 
     // States
     public bool patrol;
     public bool stopState = false;
-    private bool stay = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -55,7 +55,7 @@ public class UndistractableEnemy : RagnarComponent
         if (state != EnemyState.DEATH)
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            if (waypoints.Length != 0)
+            if (waypoints.Count != 0)
             {
                 GotoNextPoint();
                 patrol = false;
@@ -77,7 +77,7 @@ public class UndistractableEnemy : RagnarComponent
                 {
                     if (!stunned)
                     {
-                        if (!distracted)
+                        if (!distracted && waypoints.Count != 0)
                         {
                             Patrol();
                         }
@@ -282,18 +282,10 @@ public class UndistractableEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        if (!stay)
-        {
-            if (waypoints.Length == 1)
-            {
-                stay = true;
-                gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            }
-            gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
-            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-            agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
-            destPoint = (destPoint + 1) % waypoints.Length;
-        }
+        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+        destPoint = (destPoint + 1) % waypoints.Count;
     }
 
     public void Patrol()
@@ -313,7 +305,7 @@ public class UndistractableEnemy : RagnarComponent
                 {
                     stoppedTime = 0f;
                     stopState = false;
-                    if (waypoints.Length != 0)
+                    if (waypoints.Count != 0)
                     {
                         patrol = true;
                         GotoNextPoint();
@@ -322,7 +314,7 @@ public class UndistractableEnemy : RagnarComponent
             }
         }
 
-        if (agents.MovePath() && waypoints.Length != 0 && patrol && !stopState)
+        if (agents.MovePath() && waypoints.Count != 0 && patrol && !stopState)
         {
             GotoNextPoint();
         }

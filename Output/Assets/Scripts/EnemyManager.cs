@@ -49,7 +49,8 @@ public class EnemyManager : RagnarComponent
             }
             enemies[i].state = EnemyState.IDLE;
 
-            enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
+            enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].spawnPoint.transform.globalPosition);
+            SetEnemyPositionAndRotation(enemyGOs[i], enemies[i]);
         }
 
         if (SaveSystem.fromContinue)
@@ -97,6 +98,23 @@ public class EnemyManager : RagnarComponent
         }
     }
 
+    private void SetEnemyPositionAndRotation(GameObject e, Enemies data)
+    {
+        e.GetComponent<Rigidbody>().SetBodyPosition(data.spawnPoint.transform.globalPosition);
+
+        Quaternion rotation = GetFinalRotation(data);
+
+        e.GetComponent<Rigidbody>().SetBodyRotation(rotation);
+    }
+
+    private static Quaternion GetFinalRotation(Enemies data)
+    {
+        Vector3 newForward = data.spawnPoint.transform.forward;
+        double angle = Math.Atan2(newForward.x, newForward.z);
+        Quaternion rotation = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+        return rotation;
+    }
+
     private void ChangeEnemyState(GameObject go, EnemyState newState)
     {
         if (go.GetComponent<AirEnemy>().state != newState && go.GetComponent<AirEnemy>().ToString() == "AirEnemy")
@@ -131,13 +149,12 @@ public class EnemyManager : RagnarComponent
         for (int i = 0; i < enemies.Length; ++i)
         {
             EnemyData data = SaveSystem.LoadEnemy(enemies[i].name);
-
-            Vector3 pos = new Vector3(data.position[0], data.position[1], data.position[2]);
-            enemies[i].pos = pos;
+            
+            enemies[i].spawnPoint = data.spawnPoint;
             enemies[i].state = data.state;
             enemies[i].type = data.type;
 
-            enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
+            SetEnemyPositionAndRotation(enemyGOs[i], enemies[i]);
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:

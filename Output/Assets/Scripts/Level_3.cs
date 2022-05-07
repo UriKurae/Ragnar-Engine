@@ -205,10 +205,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Tank Enemy",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
-            pos = new Vector3(1.97f, 4.38f, 12.26f),
-            waypoints = new GameObject[1]
         };
-        enemies[0].waypoints[0] = GameObject.Find("1");
 
         enemies[1] = new Enemies
         {
@@ -216,10 +213,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-1.94f, 5.29f, 9.29f),
-            waypoints = new GameObject[1]
         };
-        enemies[1].waypoints[0] = GameObject.Find("2");
 
         enemies[2] = new Enemies
         {
@@ -227,10 +221,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-6.45f, 5.29f, 6.87f),
-            waypoints = new GameObject[1]
         };
-        enemies[2].waypoints[0] = GameObject.Find("3");
 
         enemies[3] = new Enemies
         {
@@ -238,10 +229,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-1.48f, 5.29f, 6.95f),
-            waypoints = new GameObject[1]
         };
-        enemies[3].waypoints[0] = GameObject.Find("4");
 
         enemies[4] = new Enemies
         {
@@ -249,10 +237,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(1.22f, 5.29f, 6.95f),
-            waypoints = new GameObject[1]
         };
-        enemies[4].waypoints[0] = GameObject.Find("5");
 
         enemies[5] = new Enemies
         {
@@ -260,10 +245,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-2.09f, 5.29f, 2.67f),
-            waypoints = new GameObject[1]
         };
-        enemies[5].waypoints[0] = GameObject.Find("6");
 
         enemies[6] = new Enemies
         {
@@ -271,10 +253,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-0.13f, 5.29f, 2.28f),
-            waypoints = new GameObject[1]
         };
-        enemies[6].waypoints[0] = GameObject.Find("7");
 
         enemies[7] = new Enemies
         {
@@ -282,10 +261,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(2.6f, 5.29f, 2.96f),
-            waypoints = new GameObject[1]
         };
-        enemies[7].waypoints[0] = GameObject.Find("8");
 
         enemies[8] = new Enemies
         {
@@ -293,10 +269,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(12.17f, 5.29f, 4.68f),
-            waypoints = new GameObject[1]
         };
-        enemies[8].waypoints[0] = GameObject.Find("9");
 
         enemies[9] = new Enemies
         {
@@ -304,10 +277,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Tank Enemy",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
-            pos = new Vector3(12.87f, 5.29f, 3.35f),
-            waypoints = new GameObject[1]
         };
-        enemies[9].waypoints[0] = GameObject.Find("10");
 
         //enemies[10] = new Enemies
         //{
@@ -326,10 +296,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(5.67f, 5.29f, -3.86f),
-            waypoints = new GameObject[1]
         };
-        enemies[10].waypoints[0] = GameObject.Find("12");
 
         enemies[11] = new Enemies
         {
@@ -337,10 +304,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(5.64f, 5.29f, -11.4f),
-            waypoints = new GameObject[1]
         };
-        enemies[11].waypoints[0] = GameObject.Find("13");
 
         enemies[12] = new Enemies
         {
@@ -348,10 +312,7 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = new Vector3(-1.37f, 5.29f, -16.74f),
-            waypoints = new GameObject[1]
         };
-        enemies[12].waypoints[0] = GameObject.Find("14");
 
         //enemies[13] = new Enemies
         //{
@@ -370,11 +331,9 @@ public class Level_3 : RagnarComponent
             prefabPath = "Tank Enemy",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
-            pos = GameObject.Find("16").transform.globalPosition,
-            waypoints = new GameObject[2]
         };
-        enemies[13].waypoints[0] = GameObject.Find("16");
-        enemies[13].waypoints[1] = GameObject.Find("17");
+        enemies[13].waypoints.Add(GameObject.Find("16"));
+        enemies[13].waypoints.Add(GameObject.Find("16"));
 
         enemies[14] = new Enemies
         {
@@ -382,12 +341,10 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = GameObject.Find("18").transform.globalPosition,
-            waypoints = new GameObject[3]
         };
-        enemies[14].waypoints[0] = GameObject.Find("18");
-        enemies[14].waypoints[1] = GameObject.Find("19");
-        enemies[14].waypoints[2] = GameObject.Find("20");
+        enemies[14].waypoints.Add(GameObject.Find("16")); 
+        enemies[14].waypoints.Add(GameObject.Find("16"));
+        enemies[14].waypoints.Add(GameObject.Find("16"));
 
         enemies[15] = new Enemies
         {
@@ -395,11 +352,9 @@ public class Level_3 : RagnarComponent
             prefabPath = "Tank Enemy",
             type = EnemyType.TANK,
             state = EnemyState.IDLE,
-            pos = GameObject.Find("21").transform.globalPosition,
-            waypoints = new GameObject[2]
         };
-        enemies[15].waypoints[0] = GameObject.Find("21");
-        enemies[15].waypoints[1] = GameObject.Find("22");
+        enemies[15].waypoints.Add(GameObject.Find("16")); 
+        enemies[15].waypoints.Add(GameObject.Find("16"));
 
         enemies[16] = new Enemies
         {
@@ -407,29 +362,25 @@ public class Level_3 : RagnarComponent
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = GameObject.Find("23").transform.globalPosition,
-            waypoints = new GameObject[5]
         };
-        enemies[16].waypoints[0] = GameObject.Find("23");
-        enemies[16].waypoints[1] = GameObject.Find("24");
-        enemies[16].waypoints[2] = GameObject.Find("25");
-        enemies[16].waypoints[3] = GameObject.Find("26");
-        enemies[16].waypoints[4] = GameObject.Find("27");
-        
+        enemies[16].waypoints.Add(GameObject.Find("16")); 
+        enemies[16].waypoints.Add(GameObject.Find("16")); 
+        enemies[16].waypoints.Add(GameObject.Find("16")); 
+        enemies[16].waypoints.Add(GameObject.Find("16")); 
+        enemies[16].waypoints.Add(GameObject.Find("16"));
+
         enemies[17] = new Enemies
         {
             name = "Basic Enemy 14",
             prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
-            pos = GameObject.Find("27").transform.globalPosition,
-            waypoints = new GameObject[5]
         };
-        enemies[17].waypoints[0] = GameObject.Find("23");
-        enemies[17].waypoints[1] = GameObject.Find("24");
-        enemies[17].waypoints[2] = GameObject.Find("25");
-        enemies[17].waypoints[3] = GameObject.Find("26");
-        enemies[17].waypoints[4] = GameObject.Find("27");
+        enemies[17].waypoints.Add(GameObject.Find("16")); 
+        enemies[17].waypoints.Add(GameObject.Find("16")); 
+        enemies[17].waypoints.Add(GameObject.Find("16")); 
+        enemies[17].waypoints.Add(GameObject.Find("16")); 
+        enemies[17].waypoints.Add(GameObject.Find("16"));
         ///////////////////////////////////////////////////////////////////
 
         InternalCalls.InstancePrefab("PlayerManager");
