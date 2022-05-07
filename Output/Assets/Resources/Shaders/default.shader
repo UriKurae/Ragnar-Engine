@@ -190,7 +190,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	float shadow = 0;
 	float dx = dFdx(texCoord.s);
 	float dy = dFdy(texCoord.t);
-	float bias = max(0.0000025 * (1.0 - dot(normal, lightDir) * 5), 0.00000025);
+	float bias = max(0.0000011 * (1.0 - dot(normal, lightDir)), 0.00000011);
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 3; ++j)
@@ -199,7 +199,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 			colorSum += texture(tex, texCoord);
 
 			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
-			shadow += currentDepth - bias > pcfDepth /*-0.00005*/ ? 1 : 0;
+			shadow += currentDepth + bias > pcfDepth /*-0.00005*/ ? 1 : 0;
 		}
 	}
 	
