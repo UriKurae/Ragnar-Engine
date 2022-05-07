@@ -71,7 +71,24 @@ public class EnemyManager : RagnarComponent
                 {
                     deadEnemies.Add(enemyGOs[i]);
                     enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
-                    enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+
+                    switch (enemyGOs[i].GetComponent<BasicEnemy>().type)
+                    {
+                        case EnemyType.BASIC:
+                            enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+                            break;
+                            //TODO: Check if drone destroyed
+                        case EnemyType.AIR:
+                            enemyGOs[i].ChangeMesh("enemy4_modeldeath");
+                            break;
+                        case EnemyType.TANK:
+                            enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                            break;
+                        case EnemyType.UNDISTRACTABLE:
+                            enemyGOs[i].ChangeMesh("enemy3_modeldeath");
+                            break;
+                    };
+
                     ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                     enemies[i].state = EnemyState.DEATH;
                     enemyGOs[i].isInteractuable = true;

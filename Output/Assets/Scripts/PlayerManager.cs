@@ -291,6 +291,7 @@ public class PlayerManager : RagnarComponent
                         {
                             GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
 
+                            players[characterSelected].GetComponent<Animation>().PlayAnimation("Drop");
                             playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
 
                             Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
@@ -310,8 +311,8 @@ public class PlayerManager : RagnarComponent
                                     {
                                         players[characterSelected].AddChild(obj);
 
-                                        //setear position, animation, whatever de obj
-                                        obj.transform.localPosition = new Vector3(0,2,0);
+                                        obj.transform.localPosition = new Vector3(0, 2, 0);
+                                        players[characterSelected].GetComponent<Animation>().PlayAnimation("PickUp");
 
                                         Debug.Log("Carrying the corpse of" + obj.name.ToString());
                                         playableCharacter.pickedEnemy = obj;
@@ -339,16 +340,26 @@ public class PlayerManager : RagnarComponent
 
                 // Pone la habilidad en cooldown y el player en estado de NONE
                 playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
+
+                playableCharacter.state = State.NONE;
+
+                // Se cambia el estado a POSTCAST para evitar que se mueva directamente despu�s de castear la habilidad. En el update de los players se cambiar� a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
+                players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
+
+                area[characterSelected].GetComponent<Light>().intensity = 0f;
+                lightHab.GetComponent<Light>().intensity = 0f;
+                drawnArea = false;
             }
-            playableCharacter.state = State.NONE;
-
-            // Se cambia el estado a POSTCAST para evitar que se mueva directamente despu�s de castear la habilidad. En el update de los players se cambiar� a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
-            players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
-
-            area[characterSelected].GetComponent<Light>().intensity = 0f;
-            lightHab.GetComponent<Light>().intensity = 0f;
-            drawnArea = false;
+            else
+            {
+                if (players[characterSelected].GetComponent<Animation>().HasFinished())
+                {
+                    playableCharacter.state = State.NONE;
+                    players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
+                }
+            }
         }
+
         // Se cancela el estado de la habilidad para que el �rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
