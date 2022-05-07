@@ -64,7 +64,6 @@ MaterialComponent::MaterialComponent(GameObject* own, bool defaultMat) : default
 	shininess = 5.0f;
 	emissiveColor = float3::zero;
 	emissiveEnabled = false;
-	emissiveIntensity = 1.0f;
 	refreshShaderTimer = 0.0f;
 }
 
@@ -518,8 +517,6 @@ void MaterialComponent::Bind(CameraComponent* gameCam)
 	glUniform1i(texLoc, 3);
 	shader->SetUniform1i("emissiveEnabled", emissiveEnabled);
 	shader->SetUniformVec3f("material.emissiveColor", emissiveColor);
-	shader->SetUniform1f("material.emissiveIntensity", emissiveIntensity);
-	
 
 	if (AnimationComponent* anim = owner->GetComponent<AnimationComponent>())
 	{
@@ -767,7 +764,6 @@ void MaterialComponent::DisplayTexturesInfo()
 
 			ImGui::Image((ImTextureID)emissive->GetId(), ImVec2(128, 128));
 			ImGui::ColorEdit3("Emissive Color", emissiveColor.ptr());
-			ImGui::DragFloat("Emissive Intensity", &emissiveIntensity, 0.01, 0, 1);
 
 			ImGui::Indent();
 			if (ImGui::CollapsingHeader("Info##Emissive"))

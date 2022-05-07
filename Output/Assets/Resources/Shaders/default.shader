@@ -114,7 +114,6 @@ struct Material
 	vec3 diffuse;
 	vec3 specular;
 	vec3 emissiveColor;
-	float emissiveIntensity;
 	float shininess;
 	int gammaCorrection; // Acts as a bool
 	float gammaCorrectionAmount;
@@ -354,10 +353,10 @@ void main()
 		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
 	}
 
-	fragColor = texture(tex , vTexCoords) /** vTextureAlpha */* vec4(finalColor, opacity);
+	fragColor = texture(tex , vTexCoords) * vec4(finalColor, opacity);
 	fragColor.rgb += interCol * isInteractuable * interColIntensity;
 
-	fragColor += emissiveEnabled * vec4(material.emissiveColor, 1) * material.emissiveIntensity;
+	fragColor += emissiveEnabled * vec4(material.emissiveColor, 1);
 
 	fragNormals = vec4(norm, normalsThickness);
 

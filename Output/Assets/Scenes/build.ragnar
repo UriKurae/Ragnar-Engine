@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 156916960,
+                    "pointer": 135054744,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1376,9 +1376,9 @@
                         -0.11009232699871063
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        2.6255867481231689,
+                        0.77178704738616943,
+                        1.6650934219360352
                     ],
                     "Scale": [
                         1.0000151395797729,
@@ -1431,19 +1431,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        60,
+                        -80,
                         0,
-                        90
+                        72.647354125976562
                     ],
                     "Quaternion": [
                         0,
-                        0.9221157431602478,
+                        0.95912665128707886,
                         0,
-                        -0.38691416382789612
+                        0.28297722339630127
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        -0.79456549882888794,
+                        0.57379359006881714,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -1470,15 +1470,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -3.0517578125e-05,
-                        49.080543518066406,
-                        -44.618682861328125
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        -2.3222614942142172e-09,
-                        7.9287421073104269e-09,
-                        0.93969273567199707
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1494,12 +1494,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.51462435722351074,
+                    "Vertical Fov": 0.45152917504310608,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        95.67889404296875,
+                        -107.14181518554688,
                         55,
-                        125.03066253662109
+                        114.64085388183594
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1508,14 +1508,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        60,
+                        -80,
                         0,
-                        90
+                        72.647354125976562
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 225.52525329589844,
+                    "Horizontal Angle": 147.12405395507812,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1901,7 +1901,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2350,
+                        2339.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1917,7 +1917,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1933,7 +1933,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -1975,7 +1981,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1991,7 +1997,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -2017,7 +2029,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2140,
+                        2129.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2033,7 +2045,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2049,7 +2061,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2063,7 +2081,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2077,7 +2101,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2091,7 +2121,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -2124,7 +2160,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2131.5,
+                        2121,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2140,7 +2176,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2156,7 +2192,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -2182,7 +2224,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2358.5,
+                        2348,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2198,7 +2240,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2214,7 +2256,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2228,7 +2276,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2242,7 +2296,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2256,7 +2316,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -2289,7 +2355,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2157,
+                        2146.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2305,7 +2371,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2321,7 +2387,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2335,7 +2407,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2349,7 +2427,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2363,7 +2447,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -2396,7 +2486,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2157,
+                        2146.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2412,7 +2502,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2428,7 +2518,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -2454,7 +2550,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2157,
+                        2146.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2470,7 +2566,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2486,7 +2582,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2500,7 +2602,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2514,7 +2622,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2528,7 +2642,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -2561,7 +2681,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2157,
+                        2146.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2577,7 +2697,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2593,7 +2713,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -2619,7 +2745,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2157,
+                        2146.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2635,7 +2761,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2651,7 +2777,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2665,7 +2797,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2679,7 +2817,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2693,7 +2837,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -2726,7 +2876,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2157,
+                        2146.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2742,7 +2892,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2758,7 +2908,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -2784,7 +2940,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2246.5,
+                        2236,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2800,7 +2956,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2816,7 +2972,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2830,7 +2992,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 14,
@@ -2856,7 +3024,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2246.5,
+                        2236,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2872,7 +3040,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2888,7 +3056,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2902,7 +3076,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 14,
@@ -2928,7 +3108,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2246.5,
+                        2236,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2944,7 +3124,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2960,7 +3140,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -2974,7 +3160,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 14,
@@ -3000,7 +3192,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2272,
+                        2261.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -3016,7 +3208,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3032,11 +3224,17 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -3063,7 +3261,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2272,
+                        2261.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -3079,7 +3277,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3095,11 +3293,17 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -3126,7 +3330,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3142,7 +3346,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3151,7 +3355,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3167,7 +3371,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3183,7 +3387,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3197,7 +3407,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 15,
@@ -3223,7 +3439,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3239,7 +3455,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3248,7 +3464,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3264,7 +3480,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3280,7 +3496,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3294,7 +3516,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 15,
@@ -3320,7 +3548,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3336,7 +3564,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3345,7 +3573,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3361,7 +3589,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3377,7 +3605,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3391,7 +3625,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 15,
@@ -3417,7 +3657,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3433,7 +3673,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3442,7 +3682,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2341.5,
+                        2331,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3458,7 +3698,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3474,7 +3714,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3488,7 +3734,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 15,
@@ -3514,7 +3766,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2350,
+                        2339.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3530,7 +3782,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3546,7 +3798,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3560,7 +3818,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3574,7 +3838,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -3588,7 +3858,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 18,
@@ -3718,7 +3994,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -3815,7 +4097,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -3873,7 +4161,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -3931,7 +4225,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -3989,7 +4289,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4047,7 +4353,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4144,7 +4456,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4202,7 +4520,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4260,7 +4584,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4318,7 +4648,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4376,7 +4712,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4434,7 +4776,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4492,7 +4840,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4550,7 +4904,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4608,7 +4968,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4666,7 +5032,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4724,7 +5096,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4782,7 +5160,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4840,7 +5224,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4898,7 +5288,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -4956,7 +5352,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5014,7 +5416,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5072,7 +5480,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5130,7 +5544,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5188,7 +5608,13 @@
                         0.15686275064945221,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5246,7 +5672,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5304,7 +5736,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5362,7 +5800,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5420,7 +5864,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5478,7 +5928,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5536,7 +5992,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5594,7 +6056,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5652,7 +6120,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5710,7 +6184,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5768,7 +6248,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5826,7 +6312,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5884,7 +6376,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -5942,7 +6440,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6000,7 +6504,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6058,7 +6568,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6116,7 +6632,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6213,7 +6735,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 11,
@@ -6301,7 +6829,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6359,7 +6893,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6417,7 +6957,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6475,7 +7021,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6533,7 +7085,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6630,7 +7188,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6644,6 +7208,7 @@
             "Prefab Path": "None",
             "tag": "Hidde",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -6755,7 +7320,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6769,6 +7340,7 @@
             "Prefab Path": "None",
             "tag": "Hidde",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -6880,7 +7452,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -6894,6 +7472,7 @@
             "Prefab Path": "None",
             "tag": "Hidde",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -7044,7 +7623,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -7102,7 +7687,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 }
             ]
         },
@@ -7146,7 +7737,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 326483136,
+                    "pointer": 305524448,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7169,7 +7760,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        361,
+                        350.5,
                         1
                     ],
                     "Scale": [
@@ -7185,7 +7776,7 @@
                     "buttonWidth": 914,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7201,7 +7792,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -7227,7 +7824,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        238,
+                        227.5,
                         5
                     ],
                     "Scale": [
@@ -7243,7 +7840,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7259,7 +7856,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 16,
@@ -7290,7 +7893,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        262,
+                        251.5,
                         15
                     ],
                     "Scale": [
@@ -7306,7 +7909,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7322,7 +7925,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 16,
@@ -7353,7 +7962,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        362.5,
+                        352,
                         15
                     ],
                     "Scale": [
@@ -7369,7 +7978,7 @@
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7385,7 +7994,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -7404,6 +8019,7 @@
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -7435,7 +8051,20 @@
                     "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_ornithopter_basecolor.png",
                     "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter_normal.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -7552,7 +8181,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 340690688,
+                    "pointer": 295608304,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7569,6 +8198,7 @@
             "Prefab Path": "Assets\/Prefabs\/DialogueTrigger.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -7627,7 +8257,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 340693424,
+                    "pointer": 295610320,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7683,6 +8313,7 @@
             "Prefab Path": "None",
             "tag": "Collider",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -7721,7 +8352,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -7740,6 +8377,7 @@
             "Prefab Path": "None",
             "tag": "Collider",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -7778,7 +8416,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -7836,7 +8480,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -7855,6 +8505,7 @@
             "Prefab Path": "None",
             "tag": "Collider",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -7893,7 +8544,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -7951,7 +8608,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -7970,6 +8633,7 @@
             "Prefab Path": "None",
             "tag": "Collider",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -8008,7 +8672,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8066,7 +8736,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8124,7 +8800,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8182,7 +8864,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8240,7 +8928,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8259,6 +8953,7 @@
             "Prefab Path": "None",
             "tag": "Collider",
             "layer": "Default",
+            "Is Interactuable": true,
             "Components": [
                 {
                     "Type": 0,
@@ -8297,7 +8992,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8355,7 +9056,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 1,
@@ -8420,7 +9127,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8436,7 +9143,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8452,7 +9159,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 16,
@@ -8483,7 +9196,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8499,7 +9212,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8515,7 +9228,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -8541,7 +9260,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8557,7 +9276,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8573,7 +9292,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -8599,7 +9324,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8615,7 +9340,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8631,7 +9356,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -8657,7 +9388,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8673,7 +9404,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8689,7 +9420,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8703,7 +9440,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8717,7 +9460,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8731,7 +9480,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -8764,7 +9519,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8780,7 +9535,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8796,7 +9551,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8810,7 +9571,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8824,7 +9591,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8838,7 +9611,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -8871,7 +9650,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8887,7 +9666,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8903,7 +9682,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8917,7 +9702,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8931,7 +9722,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -8945,7 +9742,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -8978,7 +9781,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8994,7 +9797,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9010,7 +9813,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -9024,7 +9833,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -9038,7 +9853,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -9052,7 +9873,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -9085,7 +9912,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1981.5,
+                        1971,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9101,7 +9928,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9117,7 +9944,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -9131,7 +9964,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -9145,7 +9984,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -9159,7 +10004,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -9192,7 +10043,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1973,
+                        1962.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9208,7 +10059,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9224,7 +10075,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9250,7 +10107,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1973,
+                        1962.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9266,7 +10123,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9282,7 +10139,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9308,7 +10171,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1973,
+                        1962.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9324,7 +10187,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9340,7 +10203,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9366,7 +10235,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1973,
+                        1962.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9382,7 +10251,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9398,7 +10267,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9424,7 +10299,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -274,
+                        -263.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9440,7 +10315,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9456,7 +10331,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9482,7 +10363,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -296,
+                        -285.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9498,7 +10379,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9514,7 +10395,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9540,7 +10427,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1973,
+                        1962.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9556,7 +10443,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9572,7 +10459,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9598,7 +10491,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1955.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9614,7 +10507,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9630,7 +10523,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9672,7 +10571,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9688,7 +10587,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9730,7 +10635,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9746,7 +10651,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 16,
@@ -9777,7 +10688,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9793,7 +10704,7 @@
                     "buttonWidth": 70,
                     "buttonHeight": 70,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9809,7 +10720,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9835,7 +10752,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9851,7 +10768,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9867,7 +10784,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9893,7 +10816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9909,7 +10832,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9925,7 +10848,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -9951,7 +10880,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        389,
+                        378.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9967,7 +10896,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9983,28 +10912,73 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_counter.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -10076,7 +11050,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1966,
+                        1955.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10092,7 +11066,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10101,7 +11075,20 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -10111,7 +11098,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 351156160,
+                    "pointer": 336587064,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -10134,7 +11121,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1842.5,
+                        1832,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10150,7 +11137,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10166,21 +11153,53 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -10194,7 +11213,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -10227,7 +11252,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1842.5,
+                        1832,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10243,7 +11268,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10259,21 +11284,53 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -10287,7 +11344,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -10320,7 +11383,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1842.5,
+                        1832,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10336,7 +11399,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10345,21 +11408,60 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -10373,7 +11475,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -10406,7 +11514,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10422,7 +11530,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10438,7 +11546,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -10464,7 +11578,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10480,7 +11594,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10496,7 +11610,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -10522,7 +11642,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10538,7 +11658,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10554,7 +11674,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
@@ -10580,7 +11706,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10596,7 +11722,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10605,21 +11731,60 @@
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader"
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 2,
@@ -10633,7 +11798,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 12,
@@ -10666,7 +11837,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        1964,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10682,7 +11853,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1312,
-                    "lastButtonHeight": 833.5,
+                    "lastButtonHeight": 727.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10698,7 +11869,13 @@
                         0,
                         0
                     ],
-                    "Opacity": 1
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
                 },
                 {
                     "Type": 13,
