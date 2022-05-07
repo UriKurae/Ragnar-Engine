@@ -48,6 +48,15 @@ public class BackStab : RagnarComponent
                 gameObject.GetComponent<AudioSource>().PlayClip("WPN_THORWINGKNIFEHIT");
                 selectedEnemy.GetComponent<TankEnemy>().pendingToDelete = true;
 			}
+			GameObject[] childs = selectedEnemy.childs;
+			for (int i = 0; i < childs.Length; ++i)
+			{
+				if (childs[i].name == "StabParticles")
+				{
+					childs[i].GetComponent<ParticleSystem>().Play();
+					break;
+				}
+			}
 			selectedEnemy.GetComponent<Animation>().PlayAnimation("Dying");
 		}
 		if (boss != null)
@@ -77,7 +86,9 @@ public class BackStab : RagnarComponent
 	public GameObject CalculateDistancePlayerEnemies()
     {
 		
-		return RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 3) return enemy;
+		return null;
 	}
 
 }

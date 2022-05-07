@@ -13,7 +13,7 @@ public class UndistractableEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
-    public bool controlled = false;
+    private bool stay = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -29,6 +29,7 @@ public class UndistractableEnemy : RagnarComponent
     // States
     public bool canShoot = true;
     public bool pendingToDelete = false;
+    public bool controlled = false;
 
     // Timers
     public float shootCooldown = 0f;
@@ -41,6 +42,7 @@ public class UndistractableEnemy : RagnarComponent
     bool stunned = false;
     float stunnedTimer = -1f;
 
+    GameObject[] childs;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -48,14 +50,21 @@ public class UndistractableEnemy : RagnarComponent
         offset = gameObject.GetSizeAABB();
 
         agents = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-        if (waypoints.Length != 0)
+
+
+        if (state != EnemyState.DEATH)
         {
-            GotoNextPoint();
-            patrol = false;
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            if (waypoints.Length != 0)
+            {
+                GotoNextPoint();
+                patrol = false;
+            } 
         }
 
         initialSpeed = agents.speed;
+
+        childs = gameObject.childs;
     }
 
     public void Update()
@@ -146,6 +155,14 @@ public class UndistractableEnemy : RagnarComponent
             if (other.gameObject.name == "Knife")
             {
                 deathTimer = 4f;
+                for (int i = 0; i < childs.Length; ++i)
+                {
+                    if (childs[i].name == "KnifeParticles")
+                    {
+                        childs[i].GetComponent<ParticleSystem>().Play();
+                        break;
+                    }
+                }
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
 
                 // WHEN RUNES FUNCTIONAL
@@ -183,6 +200,14 @@ public class UndistractableEnemy : RagnarComponent
             if (other.gameObject.name == "SwordSlash")
             {
                 deathTimer = 2f;
+                for (int i = 0; i < childs.Length; ++i)
+                {
+                    if (childs[i].name == "SwordSlashParticles")
+                    {
+                        childs[i].GetComponent<ParticleSystem>().Play();
+                        break;
+                    }
+                }
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
             if (other.gameObject.name == "Whistle")
@@ -199,6 +224,7 @@ public class UndistractableEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 Stun(5f);
+                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
             }
         }
     }
@@ -256,10 +282,17 @@ public class UndistractableEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        //gameObject.GetComponent<AudioSource>().PlayClip("ETANK_WALKSAND");
-        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-        agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
-        destPoint = (destPoint + 1) % waypoints.Length;
+        if (!stay)
+        {
+            if (waypoints.Length == 1)
+            {
+                stay = true;
+                gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            }
+            gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+            agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+            destPoint = (destPoint + 1) % waypoints.Length;
+        }
     }
 
     public void Patrol()

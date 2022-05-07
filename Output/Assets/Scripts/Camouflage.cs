@@ -12,11 +12,11 @@ public class Camouflage : RagnarComponent
     }
 	public void Update()
 	{
-		SetMaterialTransparent("Assets/Resources/UI/transparent_tex.png");
+		SetMaterialTransparent("Assets/Resources/UI/options_rect.png");
 		if(Timer())
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEDEACTIVATE");
-            SetMaterialTransparent("Assets/Resources/CharacterTex/char_chani_albedo.png");
+			gameObject.GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEDEACTIVATE");
+			SetMaterialTransparent("Assets/Resources/CharacterTex/char_chani_basecolor.png");
 			player.GetComponent<Player>().invisible = false;
 			InternalCalls.Destroy(gameObject);
 		}

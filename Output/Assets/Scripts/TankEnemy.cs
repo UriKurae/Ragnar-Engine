@@ -41,6 +41,7 @@ public class TankEnemy : RagnarComponent
     bool stunned = false;
     float stunnedTimer = -1f;
 
+    GameObject[] childs;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -48,14 +49,20 @@ public class TankEnemy : RagnarComponent
         offset = gameObject.GetSizeAABB();
 
         agents = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-        if (waypoints.Length != 0)
+
+        if (state != EnemyState.DEATH)
         {
-            GotoNextPoint();
-            patrol = false;
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            if (waypoints.Length != 0)
+            {
+                GotoNextPoint();
+                patrol = false;
+            } 
         }
 
         initialSpeed = agents.speed;
+
+        childs = gameObject.childs;
     }
 
     public void Update()
@@ -198,6 +205,14 @@ public class TankEnemy : RagnarComponent
             if (other.gameObject.name == "SwordSlash")
             {
                 deathTimer = 2f;
+                for (int i = 0; i < childs.Length; ++i)
+                {
+                    if (childs[i].name == "SwordSlashParticles")
+                    {
+                        childs[i].GetComponent<ParticleSystem>().Play();
+                        break;
+                    }
+                }
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
             if (other.gameObject.name == "Whistle")
@@ -211,6 +226,7 @@ public class TankEnemy : RagnarComponent
             {
                 // STUN (BLIND)
                 Stun(5f);
+                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
             }
         }
     }

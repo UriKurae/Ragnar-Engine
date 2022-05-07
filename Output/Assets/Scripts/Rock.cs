@@ -71,6 +71,7 @@ public class Rock : RagnarComponent
 		}
 
 		goRB.SetAsStatic();
+
 		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
 		CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);
 		cooldown = 2f;
