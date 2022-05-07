@@ -13,6 +13,7 @@ public class BasicEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
+    public bool backstab = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -135,12 +136,20 @@ public class BasicEnemy : RagnarComponent
                     agents.CalculatePath(agents.hitPosition);
                 }
                 agents.MovePath();
-                if (Input.GetKey(KeyCode.Z) == KeyState.KEY_UP)
+                if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
                 {
-                    if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
-                    {
-                        InternalCalls.InstancePrefab("BackStabEnemy");
-                    }
+                    backstab = true;
+                    //area de luz
+                }
+                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
+                {
+                    Debug.Log("BackStab enemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    backstab = false;
+                }
+                if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
+                {
+                    backstab = false;
                 }
                 if (Input.GetKey(KeyCode.F1) == KeyState.KEY_UP || Input.GetKey(KeyCode.F2) == KeyState.KEY_UP || Input.GetKey(KeyCode.F3) == KeyState.KEY_UP)
                 {

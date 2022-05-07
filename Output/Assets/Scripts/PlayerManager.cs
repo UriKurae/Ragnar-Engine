@@ -80,7 +80,7 @@ public class PlayerManager : RagnarComponent
             /*Cambiador de estados para saber qu� habilidad est�s o no casteando (B�sicamente hace que el personaje entre en un estado donde si clickas una tecla
             muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
             Aqu� deber�a ir la zona de rango de cada habilidad.*/
-            AbilityStateChanger();
+            if(players[characterSelected].GetComponent<Player>().controled)    AbilityStateChanger();
 
             /*Contador de cooldown para cada habilidad
             Funciona en todos los casos con todos los pjs.*/
