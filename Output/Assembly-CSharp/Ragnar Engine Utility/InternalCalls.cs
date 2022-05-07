@@ -55,15 +55,21 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void RequestDamageFeedback();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern Vector3 GetMousePosition();
     }
 
     public class RayCast
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern GameObject HitToTag(Vector3 initPos, Vector3 endPos, object tag);
-
+        
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius, GameObject[] players, int size, GameObject[] colliders, int size2);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern Vector3 ReturnHitpoint();
     }
     public class Input
     {

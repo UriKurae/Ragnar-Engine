@@ -365,10 +365,19 @@ bool ModuleRenderer3D::PostUpdate()
 	vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
 	vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
 	
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	float rcolor = 0;
+	float gcolor = 1;
+	float bcolor = 0;
+
 	glEnable(GL_BLEND);
 	coneShader->Bind();
 	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
 	coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
+	
+	coneShader->SetUniform1f("rcolor", rcolor);
+	coneShader->SetUniform1f("gcolor", gcolor);
+	coneShader->SetUniform1f("bcolor", bcolor);
 	
 	vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);

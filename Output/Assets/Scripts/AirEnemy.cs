@@ -45,11 +45,15 @@ public class AirEnemy : RagnarComponent
         offset = gameObject.GetSizeAABB();
 
         agents = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-        if (waypoints.Length != 0)
+
+        if (state != EnemyState.DEATH)
         {
-            GotoNextPoint();
-            patrol = false;
+            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            if (waypoints.Length != 0)
+            {
+                GotoNextPoint();
+                patrol = false;
+            } 
         }
 
         initialSpeed = agents.speed;
@@ -149,6 +153,7 @@ public class AirEnemy : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 pendingToDelete = true;
+                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 gameObject.GetComponent<Animation>().PlayAnimation("Dying");
             }
         }

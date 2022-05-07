@@ -67,6 +67,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Transform::RotateY", RotateY);
 	
 	mono_add_internal_call("RagnarEngine.Transform::set_localPosition", SetPosition);
+	mono_add_internal_call("RagnarEngine.Transform::set_globalPosition", SetGlobalPosition);
 	mono_add_internal_call("RagnarEngine.Transform::set_localRotation", SetRotation);
 	mono_add_internal_call("RagnarEngine.Transform::set_scale", SetScale);
 	// Transform =================
@@ -101,6 +102,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.RayCast::HitToTag", HitToTag);
 	mono_add_internal_call("RagnarEngine.RayCast::PerceptionCone", PerceptionCone);
+	mono_add_internal_call("RagnarEngine.RayCast::ReturnHitpoint", ReturnHitpoint);
 	// Internal Calls =============
 
 	// Utility ===================
@@ -123,6 +125,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::GetMaxAABB", GetMaxAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::SetSizeAABB", SetSizeAABB);
 	mono_add_internal_call("RagnarEngine.GameObject::ReparentToRoot", ReparentToRoot);
+	mono_add_internal_call("RagnarEngine.GameObject::ChangeMesh", ChangeMesh);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
 	mono_add_internal_call("RagnarEngine.GameObject::DrawOutline", GameObjectDrawOutline);
@@ -184,10 +187,13 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Light::set_constant", SetLightConstant);
 	mono_add_internal_call("RagnarEngine.Light::get_ambient", GetLightAmbient);
 	mono_add_internal_call("RagnarEngine.Light::set_ambient", SetLightAmbient);
+	mono_add_internal_call("RagnarEngine.Light::get_diffuse", GetLightDiffuse);
+	mono_add_internal_call("RagnarEngine.Light::set_diffuse", SetLightDiffuse);
 	// Light =====================
 
 	// NavAgent ==================
 	mono_add_internal_call("RagnarEngine.NavAgent::CalculatePath", CalculateAgentPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::ValidDestination", ValidDestination);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_hitPosition", GetHitPosition);
 	mono_add_internal_call("RagnarEngine.NavAgent::set_hitPosition", SetHitPosition);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastA", GetRayCastA);
@@ -209,11 +215,13 @@ bool MonoManager::Init(JsonParsing& node)
 	// Camera ====================
 	mono_add_internal_call("RagnarEngine.Camera::LookAt", LookAt);
 	mono_add_internal_call("RagnarEngine.Camera::ChangeFov", ChangeFov);
+
 	// Camera ====================
 
 	// Scene Manager =============
 	mono_add_internal_call("RagnarEngine.SceneManager::NextScene", NextScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::LoadScene", LoadScene);
+	mono_add_internal_call("RagnarEngine.SceneManager::SaveScene", SaveScene);
 	mono_add_internal_call("RagnarEngine.SceneManager::SaveTest", SaveTest);
 	mono_add_internal_call("RagnarEngine.SceneManager::get_lastSceneName", GetLastSceneName);
 	mono_add_internal_call("RagnarEngine.SceneManager::get_currentSceneName", GetCurrentSceneName);
@@ -231,6 +239,11 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIImage::LoadTexture", LoadTexture);
 	mono_add_internal_call("RagnarEngine.UIImage::UseTexture", UseTexture);
+
+	mono_add_internal_call("RagnarEngine.UIImage::StartAnimation", StartAnimation);
+	mono_add_internal_call("RagnarEngine.UIImage::StopAnimation", StopAnimation);
+	mono_add_internal_call("RagnarEngine.UIImage::StopAnimation", ChangeAnimationVelocity);
+	mono_add_internal_call("RagnarEngine.UIImage::SetStaticImage", SetStaticImage);
 
 	mono_add_internal_call("RagnarEngine.UIImage::SetImageGeneralColor", SetImageGeneralColor);
 	mono_add_internal_call("RagnarEngine.UIImage::GetImageGeneralColor", GetImageGeneralColor);
@@ -266,6 +279,8 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIText::SetTextTextColor", SetTextTextColor);
 	mono_add_internal_call("RagnarEngine.UIText::GetTextTextColor", GetTextTextColor);
+
+	mono_add_internal_call("RagnarEngine.UIDropDown::GetSelected", GetSelected);
 	// UI =======================
 
 	// Dialogue System =======================
@@ -283,6 +298,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetFullScreen", GetFullScreen);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetVSync", GetVSync);
 	mono_add_internal_call("RagnarEngine.InternalCalls::SetVSync", SetVSync);
+	mono_add_internal_call("RagnarEngine.InternalCalls::GetMousePosition", GetMousePosition);
 	// Configuration ===================
 
 

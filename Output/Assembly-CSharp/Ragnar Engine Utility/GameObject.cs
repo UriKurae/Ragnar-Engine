@@ -82,6 +82,9 @@ namespace RagnarEngine
         static extern public void ReparentToRoot(GameObject child);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void ChangeMesh(string directory);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern GameObject AddChild(GameObject child);
 		
 		[MethodImplAttribute(MethodImplOptions.InternalCall)]
