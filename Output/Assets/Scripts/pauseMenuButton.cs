@@ -64,9 +64,8 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
-	int animationState=-1;
-	float animationCounter=0;
 	GameObject selectedPlayer;
+	string lastPlayerSelected;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
 	bool isFirstA3 = true;
@@ -96,8 +95,6 @@ public class pauseMenuButton : RagnarComponent
 	GameObject UIStilgarImage;
 
 	GameObject AbilityImageApmliate;
-
-	GameObject pointAnimation;
 	GameObject abilityLeters;
 	public void Start()
 	{
@@ -162,7 +159,6 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
 		//////////////GAME//////////////
-		animationState = -1;
 		CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
@@ -192,9 +188,11 @@ public class pauseMenuButton : RagnarComponent
 		CharFocusedImage = GameObject.Find("CharFocusedImage");
 
 		AbilityImageApmliate = GameObject.Find("AbilityImageApmliate");
-
-		pointAnimation = GameObject.Find("pointAnimation");
 		abilityLeters = GameObject.Find("abilityLeters");
+
+		players = GameObject.FindGameObjectsWithTag("Player");
+		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+		lastPlayerSelected = selectedPlayer.name;
 	}
     public void Update()
 	{
@@ -203,9 +201,6 @@ public class pauseMenuButton : RagnarComponent
 		players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 		
-
-
-		UpdatePointAnimationAndPosition();
 		SetAllPositions();
 		UpdateMenu();
 		UpdateOptions();
@@ -215,52 +210,6 @@ public class pauseMenuButton : RagnarComponent
 			SceneManager.LoadScene("WinScene");
         }
 
-	}
-	void UpdatePointAnimationAndPosition()
-    {
-		
-		bounds.Set(50, 50, 0);
-		pointAnimation.GetComponent<Transform2D>().position2D = mouseLastposition;
-		pointAnimation.GetComponent<Transform2D>().SetSize(bounds);
-		pointAnimation.isActive = false;
-        if (animationState != -1)
-        {
-      
-			pointAnimation.isActive = true;
-			animationCounter +=Time.deltaTime;
-        }
-		if (!isOptions && !isSowing)
-        {
-			
-			if(Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
-            {
-				mouseLastposition = InternalCalls.GetMousePosition();
-				animationState = 0;
-				animationCounter = 0;
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_3.png");
-			}
-
-            if (animationState == 0 && animationCounter>=0.1f)
-            {
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_2.png");
-				animationState = 1;
-			}
-			else if(animationState == 1 && animationCounter >= 0.2f)
-			{
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_1.png");
-				animationState = 2;
-			}
-			else if (animationState == 2 && animationCounter >= 0.3f)
-			{
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_2.png");
-				animationState = 3;
-			}
-			else if (animationState == 3 && animationCounter >= 0.4f)
-			{
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_3.png");
-				animationState = -1;
-			}
-		}
 	}
 	void UpdatePlayerPause()
     {
@@ -806,7 +755,6 @@ public class pauseMenuButton : RagnarComponent
 		//GET POSITION
 		if (isSowing||isOptions)
         {
-			pointAnimation.isActive = false;
 			abilityLeters.isActive = false;
 			CharacterPhotoBord.isActive = false;
 			AbilityBord.isActive = false;
@@ -823,7 +771,6 @@ public class pauseMenuButton : RagnarComponent
 		}
         else
         {
-			//pointAnimation.isActive = false;
 			abilityLeters.isActive = true;
 			CharacterPhotoBord.isActive = true;
 			AbilityBord.isActive = true;
@@ -845,19 +792,19 @@ public class pauseMenuButton : RagnarComponent
 			GameObject.Find("UI Counter").isActive = true;
 
 		float y = -(InternalCalls.GetRegionGame().y / 2) + 100.0f; 
-		float x = -(InternalCalls.GetRegionGame().x / 2) + 150;
+		float x = -(InternalCalls.GetRegionGame().x / 2);
 
 		//UPDATE ABILITYS BUTTONS
 		
 		UpdateAbilityButton(x,y);
 
 		//UPDATE THE REST ELEMENTS
-		pos.Set(x+770, y-50, -10.400f);
+		pos.Set(-40, y-50, -10.400f);
 		bounds.Set(280, 30, 0);
 		abilityLeters.GetComponent<Transform2D>().position2D = pos;
 		abilityLeters.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x, y+30, -10.400f);
+		pos.Set(x+150, y+30, -10.400f);
 		CharacterPhotoBord.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(214, 214f, 0);
 		CharacterPhotoBord.GetComponent<Transform2D>().SetSize(bounds);
@@ -872,7 +819,7 @@ public class pauseMenuButton : RagnarComponent
 		
 		
 		
-		pos.Set(x, y+35 , -10.400f);
+		pos.Set(x+150, y+35 , -10.400f);
 		UICharPhoto.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(160, 160f, 0);
 		UICharPhoto.GetComponent<Transform2D>().SetSize(bounds);
@@ -882,31 +829,78 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(400, 45, 0);
 		UIAbilityArray.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x+150, y, -10.400f);
+		pos.Set(x+300, y, -10.400f);
 		UICharBor1.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(60, 60, 0);
 		UICharBor1.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x + 230, y, -10.400f);
+		pos.Set(x + 380, y, -10.400f);
 		UICharBor2.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(60, 60, 0);
 		UICharBor2.GetComponent<Transform2D>().SetSize(bounds);
 
-		pos.Set(x + 310, y, -10.400f);
+		pos.Set(x + 460, y, -10.400f);
 		UICharBor3.GetComponent<Transform2D>().position2D = pos;
 		bounds.Set(60, 60, 0);
 		UICharBor3.GetComponent<Transform2D>().SetSize(bounds);
 
+		if (selectedPlayer.name != lastPlayerSelected)
+		{
+			changePlayer(x, y);
+			lastPlayerSelected = selectedPlayer.name;
+        }
+        else
+        {
+			if (selectedPlayer.name == "Player")
+			{				
+				pos.Set(x + 300, y + 30, -10.400f);				
+			}
+			else if (selectedPlayer.name == "Player_2")
+			{				
+				pos.Set(x + 380, y + 30, -10.400f);				
+			}
+			else
+			{				
+				pos.Set(x + 460, y + 30, -10.400f);				
+			}
+		}
+
+		UISelector.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(20, 20, 0);
+		UISelector.GetComponent<Transform2D>().SetSize(bounds);
+
+		pos.Set(x + 120, y - 60, -10.400f);
+		UICharacterName.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(214, 214f, 0);
+		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);
+        
+		pos.Set(x+300 , y, -10.400f);
+		UIPaulImage.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(60, 60, 0);
+		UIPaulImage.GetComponent<Transform2D>().SetSize(bounds);
+
+		pos.Set(x+380, y , -10.400f);
+		UIChaniImage.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(60, 60, 0);
+		UIChaniImage.GetComponent<Transform2D>().SetSize(bounds);
+
+		pos.Set(x+460, y , -10.400f);
+		UIStilgarImage.GetComponent<Transform2D>().position2D = pos;
+		bounds.Set(60, 60, 0);
+		UIStilgarImage.GetComponent<Transform2D>().SetSize(bounds);
+	}
+	void changePlayer(float x, float y)
+    {
 		if (selectedPlayer.name == "Player")
 		{
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_paul_portrait.png");
-			pos.Set(x + 150, y+30, -10.400f);
+			pos.Set(x + 150, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Paul";
 		}
 		else if (selectedPlayer.name == "Player_2")
 		{
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_chani_portrait.png");
-			pos.Set(x +230, y + 30, -10.400f);
+			pos.Set(x + 230, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Chani";
 		}
 		else if (selectedPlayer.name == "Player_3")
@@ -915,32 +909,6 @@ public class pauseMenuButton : RagnarComponent
 			pos.Set(x + 310, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Stilgar";
 		}
-		
-		UISelector.GetComponent<Transform2D>().position2D = pos;
-		bounds.Set(20, 20, 0);
-		UISelector.GetComponent<Transform2D>().SetSize(bounds);
-
-		pos.Set(x - 20, y - 60, -10.400f);
-		UICharacterName.GetComponent<Transform2D>().position2D = pos;
-		bounds.Set(214, 214f, 0);
-		UICharacterName.GetComponent<Transform2D>().SetSize(bounds);
-
-
-
-		pos.Set(x+150 , y, -10.400f);
-		UIPaulImage.GetComponent<Transform2D>().position2D = pos;
-		bounds.Set(60, 60, 0);
-		UIPaulImage.GetComponent<Transform2D>().SetSize(bounds);
-
-		pos.Set(x+230, y , -10.400f);
-		UIChaniImage.GetComponent<Transform2D>().position2D = pos;
-		bounds.Set(60, 60, 0);
-		UIChaniImage.GetComponent<Transform2D>().SetSize(bounds);
-
-		pos.Set(x+310, y , -10.400f);
-		UIStilgarImage.GetComponent<Transform2D>().position2D = pos;
-		bounds.Set(60, 60, 0);
-		UIStilgarImage.GetComponent<Transform2D>().SetSize(bounds);
 	}
 	void ImageShow()
 	{
@@ -960,10 +928,6 @@ public class pauseMenuButton : RagnarComponent
 		restart.isActive = false;
 		restartImage.isActive = false;
 	}
-
-
-
-
 
 	void RestartButtonShow()
 	{
@@ -1244,7 +1208,8 @@ public class pauseMenuButton : RagnarComponent
 		/// ABILITY1 BUTTON
 		////////////////////////////////////////////////
 		int a = Ability1.GetComponent<UIButton>().GetButtonState();
-		pos.Set(x + 625, y, -10.400f);
+
+		pos.Set(-185, y, -10.400f);
 		Ability1.GetComponent<Transform2D>().position2D = pos;
 
 		switch (a)
@@ -1272,13 +1237,13 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 540, y + 200, -10.400f);
+				pos.Set(-270, y + 200, -10.400f);
 
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(x + 630, y + 200, -10.400f);
+				pos.Set(-180, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
 
-				pos.Set(x + 630, y + 300, -10.400f);
+				pos.Set(-180, y + 300, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				
 				if (selectedPlayer.name == "Player")//paul
@@ -1309,7 +1274,7 @@ public class pauseMenuButton : RagnarComponent
 		////////////////////////////////////////////////
 
 		a = Ability2.GetComponent<UIButton>().GetButtonState();
-		pos.Set(x + 725, y, -10.400f);
+		pos.Set(-85, y, -10.400f);
 		Ability2.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
@@ -1336,12 +1301,12 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 640, y + 200, -10.400f);
+				pos.Set(-170, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(x + 725, y + 200, -10.400f);
+				pos.Set(-85, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
 
-				pos.Set(x + 725, y + 300, -10.400f);
+				pos.Set(-85, y + 300, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
@@ -1398,7 +1363,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 725, y + 200, -10.400f);
+				pos.Set(-85, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(0, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -1432,7 +1397,7 @@ public class pauseMenuButton : RagnarComponent
 		////////////////////////////////////////////////
 
 		a = Ability4.GetComponent<UIButton>().GetButtonState();
-		pos.Set(x + 895, y, -10.400f);
+		pos.Set(85, y, -10.400f);
 		Ability4.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
@@ -1459,12 +1424,12 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 810, y + 200, -10.400f);
+				pos.Set(0, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
-				pos.Set(x + 895, y + 200, -10.400f);
+				pos.Set(85, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
 
-				pos.Set(x + 895, y + 300, -10.400f);
+				pos.Set(85, y + 300, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
@@ -1493,7 +1458,7 @@ public class pauseMenuButton : RagnarComponent
 		////////////////////////////////////////////////
 
 		a = Ability5.GetComponent<UIButton>().GetButtonState();
-		pos.Set(x + 980, y, -10.400f);
+		pos.Set(170, y, -10.400f);
 		Ability5.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
@@ -1520,13 +1485,13 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(x + 890, y + 200, -10.400f);
+				pos.Set(80, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 
-				pos.Set(x + 980, y + 200, -10.400f);
+				pos.Set(170, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
 
-				pos.Set(x + 980, y + 300, -10.400f);
+				pos.Set(170, y + 300, -10.400f);
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{

@@ -94,7 +94,6 @@ public:
 	bool GetAxis(int joystickId, JAxis axis);
 
 	HCURSOR LoadCursorIcon(const char* iconPath, int width, int height);
-	void SetCursorIcon(HCURSOR icon);
 
 	inline std::vector<std::string> GetInputList() const { return strings; }
 

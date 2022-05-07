@@ -139,7 +139,7 @@ public class PlayerManager : RagnarComponent
             if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
-            Vector3 hit = RayCast.ReturnHitpoint();
+            Vector3 hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
             if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
             {
                 hit.y += 0.2f;

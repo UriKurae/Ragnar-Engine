@@ -98,7 +98,8 @@ bool Scene::Update(float dt)
 	if (mainCamera != nullptr) mainCamera->Update(dt);
 
 	for (int i = 0; i < root->GetChilds().size(); ++i)
-		root->GetChilds()[i]->Update(dt);
+		if (root->GetChilds()[i]->active)
+			root->GetChilds()[i]->Update(dt);
 
 	if (resetQuadtree)
 	{
