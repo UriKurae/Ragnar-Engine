@@ -64,8 +64,6 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
-	int animationState=-1;
-	float animationCounter=0;
 	GameObject selectedPlayer;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
@@ -97,8 +95,6 @@ public class pauseMenuButton : RagnarComponent
 	GameObject UIStilgarImage;
 
 	GameObject AbilityImageApmliate;
-
-	GameObject pointAnimation;
 	GameObject abilityLeters;
 	public void Start()
 	{
@@ -163,7 +159,6 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
 		//////////////GAME//////////////
-		animationState = -1;
 		CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
 		Ability2 = GameObject.Find("ab2");
@@ -193,8 +188,6 @@ public class pauseMenuButton : RagnarComponent
 		CharFocusedImage = GameObject.Find("CharFocusedImage");
 
 		AbilityImageApmliate = GameObject.Find("AbilityImageApmliate");
-
-		pointAnimation = GameObject.Find("pointAnimation");
 		abilityLeters = GameObject.Find("abilityLeters");
 
 		players = GameObject.FindGameObjectsWithTag("Player");
@@ -208,9 +201,6 @@ public class pauseMenuButton : RagnarComponent
 		players = GameObject.FindGameObjectsWithTag("Player");
 		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
 		
-
-
-		UpdatePointAnimationAndPosition();
 		SetAllPositions();
 		UpdateMenu();
 		UpdateOptions();
@@ -220,52 +210,6 @@ public class pauseMenuButton : RagnarComponent
 			SceneManager.LoadScene("WinScene");
         }
 
-	}
-	void UpdatePointAnimationAndPosition()
-    {
-		
-		bounds.Set(50, 50, 0);
-		pointAnimation.GetComponent<Transform2D>().position2D = mouseLastposition;
-		pointAnimation.GetComponent<Transform2D>().SetSize(bounds);
-		pointAnimation.isActive = false;
-        if (animationState != -1)
-        {
-      
-			pointAnimation.isActive = true;
-			animationCounter +=Time.deltaTime;
-        }
-		if (!isOptions && !isSowing)
-        {
-			
-			if(Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
-            {
-				mouseLastposition = InternalCalls.GetMousePosition();
-				animationState = 0;
-				animationCounter = 0;
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_3.png");
-			}
-
-            if (animationState == 0 && animationCounter>=0.1f)
-            {
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_2.png");
-				animationState = 1;
-			}
-			else if(animationState == 1 && animationCounter >= 0.2f)
-			{
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_1.png");
-				animationState = 2;
-			}
-			else if (animationState == 2 && animationCounter >= 0.3f)
-			{
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_2.png");
-				animationState = 3;
-			}
-			else if (animationState == 3 && animationCounter >= 0.4f)
-			{
-				pointAnimation.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_pointclick_3.png");
-				animationState = -1;
-			}
-		}
 	}
 	void UpdatePlayerPause()
     {
@@ -811,7 +755,6 @@ public class pauseMenuButton : RagnarComponent
 		//GET POSITION
 		if (isSowing||isOptions)
         {
-			pointAnimation.isActive = false;
 			abilityLeters.isActive = false;
 			CharacterPhotoBord.isActive = false;
 			AbilityBord.isActive = false;
@@ -828,7 +771,6 @@ public class pauseMenuButton : RagnarComponent
 		}
         else
         {
-			//pointAnimation.isActive = false;
 			abilityLeters.isActive = true;
 			CharacterPhotoBord.isActive = true;
 			AbilityBord.isActive = true;
