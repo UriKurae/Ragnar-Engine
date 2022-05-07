@@ -54,6 +54,9 @@ namespace RagnarEngine
         public static extern bool GetVSync();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void RequestDamageFeedback();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Vector3 GetMousePosition();
     }
 

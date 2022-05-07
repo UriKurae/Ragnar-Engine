@@ -24,6 +24,7 @@ public class EnemyManager : RagnarComponent
         {
             enemyGOs[i].name = enemies[i].name;
             enemies[i].state = EnemyState.IDLE;
+            enemyGOs[i].SubmitOutlineDrawing(new Vector3(1, 0, 0));
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
@@ -73,6 +74,8 @@ public class EnemyManager : RagnarComponent
                     enemyGOs[i].ChangeMesh("enemy1_modeldeath");
                     ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                     enemies[i].state = EnemyState.DEATH;
+                    enemyGOs[i].isInteractuable = true;
+                    enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
                     enemyGOs.RemoveAt(i);
                 }
             }
