@@ -23,31 +23,34 @@ public class EnemyManager : RagnarComponent
         for(int i = 0; i < enemyGOs.Count; i++)
         {
             enemyGOs[i].name = enemies[i].name;
+            enemies[i].state = EnemyState.IDLE;
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
                     enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<BasicEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<BasicEnemy>().state = enemies[i].state;
+                    enemyGOs[i].GetComponent<BasicEnemy>().type = enemies[i].type;
                     enemyGOs[i].GetComponent<BasicEnemy>().colliders = colliders;
                     break;
                 case EnemyType.TANK:
                     enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<TankEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<TankEnemy>().state = enemies[i].state;
+                    enemyGOs[i].GetComponent<TankEnemy>().type = enemies[i].type;
                     enemyGOs[i].GetComponent<TankEnemy>().colliders = colliders;
                     break;
                 case EnemyType.UNDISTRACTABLE:
                     enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<UndistractableEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().state = enemies[i].state;
+                    enemyGOs[i].GetComponent<UndistractableEnemy>().type = enemies[i].type;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().colliders = colliders;
                     break;
                 case EnemyType.AIR:
                     enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
-                    enemyGOs[i].GetComponent<AirEnemy>().state = EnemyState.IDLE;
+                    enemyGOs[i].GetComponent<AirEnemy>().state = enemies[i].state;
+                    enemyGOs[i].GetComponent<AirEnemy>().type = enemies[i].type;
                     enemyGOs[i].GetComponent<AirEnemy>().colliders = colliders;
                     break;
             }
-            enemies[i].state = EnemyState.IDLE;
-
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].pos);
         }
 
