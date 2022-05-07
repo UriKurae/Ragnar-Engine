@@ -392,6 +392,9 @@ bool MaterialComponent::OnLoad(JsonParsing& node)
 	shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
 	owner->castShadows = node.GetJsonBool("Cast Shadows");
 	interColor = node.GetJson3Number(node, "Interactuable Color");
+	opacity = node.GetJsonNumber("Opacity");
+	emissiveEnabled = node.GetJsonBool("Emissive Enabled");
+	emissiveColor = node.GetJson3Number(node, "Emissive Color");
 
 	return true;
 }
@@ -408,6 +411,8 @@ bool MaterialComponent::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Cast Shadows", owner->castShadows);
 	file.SetNewJson3Number(file, "Interactuable Color", interColor);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Opacity", opacity);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Emissive Enabled", emissiveEnabled);
+	file.SetNewJson3Number(file, "Emissive Color", emissiveColor);
 
 	node.SetValueToArray(array, file.GetRootValue());
 

@@ -151,5 +151,5 @@ private:
 	unsigned int shadowsFbo;
 	
 	bool dmgFeedbackRequested;
-
+	
 };
