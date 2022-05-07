@@ -708,6 +708,7 @@ void SetDirectionParticle(MonoObject* go, MonoObject* direction)
 void NextScene()
 {
 	app->sceneManager->NextScene();
+	app->renderer3D->gosToDrawOutline.clear();
 }
 
 void SaveScene(MonoString* string)
@@ -720,6 +721,7 @@ void LoadScene(MonoString* string)
 {
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
+	app->renderer3D->gosToDrawOutline.clear();
 }
 
 void SaveTest(int deadCount, MonoString* playerName, MonoObject* playerPos, float time)
