@@ -13,48 +13,47 @@ public class EnemyManager : RagnarComponent
     {
         enemyGOs.Clear();
         deadEnemies.Clear();
-        foreach (Enemies e in enemies)
-        {
-            enemyGOs.Add(InternalCalls.InstancePrefab(e.prefabPath));
-        }
 
         colliders = GameObject.FindGameObjectsWithTag("Collider");
 
-        for(int i = 0; i < enemyGOs.Count; i++)
+        for(int i = 0; i < enemies.Length; i++)
         {
-            enemyGOs[i].name = enemies[i].name;
-            enemies[i].state = EnemyState.IDLE;
-            enemyGOs[i].SubmitOutlineDrawing(new Vector3(1, 0, 0));
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Basic Enemy"));
+                    enemyGOs[i].name = enemies[i].name;
                     enemyGOs[i].GetComponent<BasicEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<BasicEnemy>().state = enemies[i].state;
                     enemyGOs[i].GetComponent<BasicEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<BasicEnemy>().colliders = colliders;
                     break;
                 case EnemyType.TANK:
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Tank Enemy"));
+                    enemyGOs[i].name = enemies[i].name;
                     enemyGOs[i].GetComponent<TankEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<TankEnemy>().state = enemies[i].state;
                     enemyGOs[i].GetComponent<TankEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<TankEnemy>().colliders = colliders;
                     break;
                 case EnemyType.UNDISTRACTABLE:
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Undistractable Enemy"));
+                    enemyGOs[i].name = enemies[i].name;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().state = enemies[i].state;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<UndistractableEnemy>().colliders = colliders;
                     break;
                 case EnemyType.AIR:
+                    enemyGOs.Add(InternalCalls.InstancePrefab("Air Enemy"));
+                    enemyGOs[i].name = enemies[i].name;
                     enemyGOs[i].GetComponent<AirEnemy>().waypoints = enemies[i].waypoints;
                     enemyGOs[i].GetComponent<AirEnemy>().state = enemies[i].state;
                     enemyGOs[i].GetComponent<AirEnemy>().enemyType = enemies[i].type;
                     enemyGOs[i].GetComponent<AirEnemy>().colliders = colliders;
                     break;
             }
-            enemies[i].state = EnemyState.IDLE;
-
-            enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(enemies[i].spawnPoint.transform.globalPosition);
+            enemyGOs[i].SubmitOutlineDrawing(new Vector3(1, 0, 0));
             SetEnemyPositionAndRotation(enemyGOs[i], enemies[i]);
         }
 

@@ -157,7 +157,6 @@ public class Level_1 : RagnarComponent
         enemies[0] = new Enemies
         {
             name = "Basic Enemy 1",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_1")
@@ -166,7 +165,6 @@ public class Level_1 : RagnarComponent
         enemies[1] = new Enemies
         {
             name = "Basic Enemy 2",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_2")
@@ -175,7 +173,6 @@ public class Level_1 : RagnarComponent
         enemies[2] = new Enemies
         {
             name = "Basic Oficial Enemy 1",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_oficial_enemy_1_patrol")
@@ -186,7 +183,6 @@ public class Level_1 : RagnarComponent
         enemies[3] = new Enemies
         {
             name = "Basic Enemy 3",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_3")
@@ -195,7 +191,6 @@ public class Level_1 : RagnarComponent
         enemies[4] = new Enemies
         {
             name = "Basic Enemy 4",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_4")
@@ -204,7 +199,6 @@ public class Level_1 : RagnarComponent
         enemies[5] = new Enemies
         {
             name = "Basic Enemy 5",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_5")
@@ -213,7 +207,6 @@ public class Level_1 : RagnarComponent
         enemies[6] = new Enemies
         {
             name = "Basic Enemy 6",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_6")
@@ -222,7 +215,6 @@ public class Level_1 : RagnarComponent
         enemies[7] = new Enemies
         {
             name = "Basic Oficial Enemy 2",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_oficial_enemy_2")
@@ -231,7 +223,6 @@ public class Level_1 : RagnarComponent
         enemies[8] = new Enemies
         {
             name = "Basic Enemy 7",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_7")
@@ -240,7 +231,6 @@ public class Level_1 : RagnarComponent
         enemies[9] = new Enemies
         {
             name = "Basic Enemy 8",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_8")
@@ -249,7 +239,6 @@ public class Level_1 : RagnarComponent
         enemies[10] = new Enemies
         {
             name = "Basic Enemy 9",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_9")
@@ -258,7 +247,6 @@ public class Level_1 : RagnarComponent
         enemies[11] = new Enemies
         {
             name = "Basic Oficial Enemy 3",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_oficial_enemy_3_patrol")
@@ -271,7 +259,6 @@ public class Level_1 : RagnarComponent
         enemies[12] = new Enemies
         {
             name = "Basic Enemy 10",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_10")
@@ -280,8 +267,7 @@ public class Level_1 : RagnarComponent
         enemies[13] = new Enemies
         {
             name = "Undistractable Enemy 1",
-            prefabPath = "Basic Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_enemy_1")
         };
@@ -289,8 +275,7 @@ public class Level_1 : RagnarComponent
         enemies[14] = new Enemies
         {
             name = "Undistractable Enemy 2",
-            prefabPath = "Basic Enemy",
-            type = EnemyType.BASIC,
+            type = EnemyType.UNDISTRACTABLE,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("undistractable_enemy_2_patrol")
         };
@@ -300,7 +285,6 @@ public class Level_1 : RagnarComponent
         enemies[15] = new Enemies
         {
             name = "Basic Enemy 11",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_11")
@@ -309,7 +293,6 @@ public class Level_1 : RagnarComponent
         enemies[16] = new Enemies
         {
             name = "Basic Enemy 12",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_12")
@@ -318,7 +301,6 @@ public class Level_1 : RagnarComponent
         enemies[17] = new Enemies
         {
             name = "Basic Enemy 13",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_13")
@@ -327,7 +309,6 @@ public class Level_1 : RagnarComponent
         enemies[18] = new Enemies
         {
             name = "Basic Enemy 14",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_14")
@@ -336,7 +317,6 @@ public class Level_1 : RagnarComponent
         enemies[19] = new Enemies
         {
             name = "Basic Enemy 15",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_15")
@@ -345,7 +325,6 @@ public class Level_1 : RagnarComponent
         enemies[20] = new Enemies
         {
             name = "Basic Enemy 16",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_16")
@@ -354,7 +333,6 @@ public class Level_1 : RagnarComponent
         enemies[21] = new Enemies
         {
             name = "Basic Enemy 17",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_17")
@@ -363,7 +341,6 @@ public class Level_1 : RagnarComponent
         enemies[22] = new Enemies
         {
             name = "Basic Enemy 18",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_18")
@@ -372,7 +349,6 @@ public class Level_1 : RagnarComponent
         enemies[23] = new Enemies
         {
             name = "Basic Enemy 19",
-            prefabPath = "Basic Enemy",
             type = EnemyType.BASIC,
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_19")

@@ -24,7 +24,6 @@ public class Enemies
 {
     // Basic Enemy info
     public string name;
-    public string prefabPath;
     public EnemyType type;
     public EnemyState state;
 
