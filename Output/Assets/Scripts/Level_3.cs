@@ -7,9 +7,13 @@ public class Level_3 : RagnarComponent
 	public Enemies[] enemies;
     private Chronometer timer = null;
     public bool runGame = true;
-    private UIButton chrono;
-    private GameObject SceneAudio;
+    public UIButton chrono;
+    public Vector3 hitPoint;
 
+    private GameObject SceneAudio;
+    private GameObject preClick;
+    private GameObject preNonClick;
+    private Transform camera;
     public void Start()
 	{
         //Play Level Soundtrack
@@ -23,6 +27,10 @@ public class Level_3 : RagnarComponent
         chrono = GameObject.Find("UI Counter").GetComponent<UIButton>();
         chrono.SetTextPosition(-26, -4);
         timer = new Chronometer();
+
+        preClick = GameObject.Find("preClick");
+        preNonClick = GameObject.Find("preNonClick");
+        camera = GameObject.Find("Camera").transform;
 
         // PLAYERS
         characters = new Characters[3];
@@ -448,6 +456,24 @@ public class Level_3 : RagnarComponent
 	{
         if (runGame) timer.Update();
         chrono.text = timer.GetTimeToString();
+
+        hitPoint = RayCast.ReturnHitpoint();
+        hitPoint.y -= 0.5f;
+        GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
+        if (hittedGO != null)
+        {
+            preClick.isActive = true;
+            preNonClick.isActive = false;
+        }
+        else
+        {
+            preClick.isActive = false;
+            preNonClick.isActive = true;
+        }
+
+        hitPoint.y += 0.54f;
+        if (preClick.isActive) preClick.GetComponent<Transform>().globalPosition = hitPoint;
+        if (preNonClick.isActive) preNonClick.GetComponent<Transform>().globalPosition = hitPoint;
     }
 
 }
