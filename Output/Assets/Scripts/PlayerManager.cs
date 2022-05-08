@@ -102,32 +102,32 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        SpawnArea((int)State.ABILITY_1);
+        SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        SpawnArea((int)State.ABILITY_2);
+        SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        SpawnArea((int)State.ABILITY_3);
+        SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        SpawnArea((int)State.ABILITY_4);
+        SpawnArea(State.ABILITY_4);
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
     public void Carrying()
     {
         playableCharacter.state = State.CARRYING;
-        players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
+        players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
     }
 
     private void AbilityStateChanger()
