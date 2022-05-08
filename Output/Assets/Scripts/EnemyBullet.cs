@@ -3,37 +3,52 @@ using RagnarEngine;
 
 public class EnemyBullet : RagnarComponent
 {
-	public int vel = 40;
-	private bool pendingToDelete = false;
+	public int vel = 100;
 
-	public GameObject[] players = new GameObject[3];
+	public GameObject[] players;
 	public int index = 0;
+	public GameObject enemy;
+	public Vector3 offset;
 
 	public void Start()
 	{
 		players = GameObject.FindGameObjectsWithTag("Player");
 
-		GameObject enemy = GameObject.Find("Enemy");
 		Vector3 pos = enemy.transform.globalPosition;
-		pos.y += 1;
+		pos.y += 0.5f;
 		gameObject.transform.localPosition = pos;
 
-		Rigidbody knifeRb = gameObject.GetComponent<Rigidbody>();
-		knifeRb.SetBodyPosition(pos);
-		knifeRb.IgnoreCollision(enemy, true);
+		Rigidbody bulletRb = gameObject.GetComponent<Rigidbody>();
+		bulletRb.IgnoreCollision(enemy, true);
+		bulletRb.SetBodyPosition(pos);
 
-        float xDiff = players[index].transform.globalPosition.x - gameObject.transform.globalPosition.x;
-        float zDiff = players[index].transform.globalPosition.z - gameObject.transform.globalPosition.z;
-        Vector3 shotDirection = new Vector3(xDiff, pos.y, zDiff);
-        knifeRb.linearVelocity = shotDirection.normalized * vel;
-    }
+		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
+		diff.y = gameObject.transform.globalPosition.y;
+
+		pos.x += gameObject.transform.forward.x * offset.x * 0.6f;
+		pos.z += gameObject.transform.forward.z * offset.z * 0.6f;
+		Vector3 objectivePos = players[index].transform.globalPosition;
+		objectivePos.y += 1; 
+		GameObject obj = RayCast.HitToTag(pos, objectivePos, "Player");
+		if (obj != null)
+		{
+			//Debug.Log(obj.name.ToString());
+			obj.GetComponent<Player>().hitPoints -= 1;
+			InternalCalls.RequestDamageFeedback();
+		}
+
+		bulletRb.linearVelocity = diff.normalized * vel;
+
+		Vector3 dir = diff * -2;
+		gameObject.GetComponent<ParticleSystem>().SetDirectionParticle(dir);
+		gameObject.GetComponent<ParticleSystem>().Play();
+	}
     public void Update()
 	{
-		if (pendingToDelete) InternalCalls.Destroy(gameObject);
 	}
 
 	public void OnCollision()
 	{
-		pendingToDelete = true;
+		InternalCalls.Destroy(gameObject);
 	}
 }

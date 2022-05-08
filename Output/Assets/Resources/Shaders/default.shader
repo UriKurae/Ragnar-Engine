@@ -6,14 +6,16 @@ layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texCoords;
 layout(location = 3) in vec4 boneIds;
 layout(location = 4) in vec4 weights;
+layout(location = 5) in vec3 tangents;
+layout(location = 6) in vec3 biTangents;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform mat3 normalMatrix;
-uniform float textureAlpha;
 uniform vec3 ambientColor;
 uniform vec3 camPos;
+uniform mat4 lightSpaceMatrix;
 
 const int MAX_BONES = 100;
 const int MAX_BONE_INFLUENCE = 4;
@@ -25,7 +27,9 @@ out vec2 vTexCoords;
 out vec3 vCamPos;
 out vec3 vNormal;
 out float vTextureAlpha;
-out vec4 vb;
+out vec4 fragPosLightSpace;
+out mat3 tbnMatrix;
+out mat4 vModel;
 
 void main()
 {
@@ -53,13 +57,16 @@ void main()
 
 	vTexCoords = texCoords;
 	vPosition = vec3(model * vec4(position, 1));
-	//vNormal = normal * normal;
 	vNormal = normalize((model * vec4(normal, 0.0)).xyz);
 	vAmbientColor = ambientColor;
-	vTextureAlpha = 1.0f;
-
+	fragPosLightSpace = lightSpaceMatrix * model * totalPosition;
 	vCamPos = camPos;
-	vb = boneIds;
+	vModel = model;
+
+	vec3 T = normalize(tangents);
+	vec3 B = normalize(biTangents);
+	vec3 N = normalize(normal);
+	tbnMatrix = mat3(T, B, N);
 }
 
 
@@ -70,23 +77,39 @@ in vec3 vPosition;
 in vec3 vNormal;
 in vec2 vTexCoords;
 in vec3 vCamPos;
-
 in vec3 vAmbientColor;
 in float vTextureAlpha;
+in vec4 fragPosLightSpace;
+in mat3 tbnMatrix;
+in mat4 vModel;
 
 layout(location = 0) out vec4 fragColor;
-layout(location = 1) out vec3 fragNormals;
+layout(location = 1) out vec4 fragNormals;
 
-uniform sampler2D tex;
+layout(location = 0) uniform sampler2D tex;
+layout(location = 1) uniform sampler2D depthTexture;
+layout(location = 2) uniform sampler2D normalMap;
+layout(location = 3) uniform sampler2D emissiveTexture;
+
+uniform float normalsThickness;
+uniform int hasNormalMap;
+uniform int emissiveEnabled;
+
+uniform int isInteractuable; // Acts as a bool
+uniform vec3 interCol;
+uniform float interColIntensity;
+
+uniform float opacity;
+
+float pi = 3.14159265359;
 
 struct Material
 {
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+	vec3 emissiveColor;
 	float shininess;
-	bool gammaCorrection;
-	float gammaCorrectionAmount;
 };
 uniform Material material;
 
@@ -99,6 +122,7 @@ struct DirLight
 	vec3 specular;
 
 	float intensity;
+	bool genShadows;
 };
 uniform DirLight dirLight;
 
@@ -115,7 +139,7 @@ struct PointLight
 	float lin;
 	float quadratic;
 };
-#define MAX_POINT_LIGHTS 4
+#define MAX_POINT_LIGHTS 6
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 
 struct SpotLight
@@ -140,32 +164,84 @@ struct CelShadingProps
 	float b;
 	float c;
 	float d;
-};
-const CelShadingProps csp = {0.1f, 0.3f, 0.6f, 1.0f};
+	float e;
+	float f;
+	float g;
 
+};
+const CelShadingProps csp = { 0.05f, 0.12f, 0.27f, 0.40f, 0.56f, 0.69f, 0.8f };
+
+
+vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
+{
+	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+	projCoords = projCoords * 0.5 + 0.5;
+	
+	float closestDepth = texture(depthTexture, projCoords.xy).x;
+	float currentDepth = projCoords.z;
+
+	vec2 texSize = textureSize(tex, 0).xy;
+	vec2 depthTexSize = textureSize(depthTexture, 0).xy;
+
+	// Change the color and apply blur so it is not full black
+	// ========================
+	vec4 colorSum = vec4(0);
+	vec2 texCoord = gl_FragCoord.xy / texSize;
+	float shadow = 0;
+	float dx = dFdx(texCoord.s);
+	float dy = dFdy(texCoord.t);
+	float bias = max(0.0000011 * (1.0 - dot(normal, lightDir)), 0.00000011);
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			texCoord += vec2(dx * i, dy * j);
+			colorSum += texture(tex, texCoord);
+
+			float pcfDepth = texture(depthTexture, projCoords.xy + vec2(i * 0.5, j * 0.5) * depthTexSize).x;
+			shadow += currentDepth + bias > pcfDepth ? 1 : 0;
+		}
+	}
+	
+	colorSum = colorSum / 9;
+	shadow = shadow / 9;
+	shadow = smoothstep(0, 2, shadow);
+	// ========================
+
+	vec4 result = mix(vec4(1), normalize(colorSum), shadow);
+
+	return result;	
+}
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDir = normalize(-light.direction);
-	
+
 	// Diffuse shading
-	float diff = max(dot(normal, lightDir), 0.0);
+	float diff = max(dot(lightDir, normal), 0.0);
 	
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.05f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
-	else diff = csp.d;
+	else if (diff < csp.d) diff = csp.d;
+	else if (diff < csp.e) diff = csp.e;
+	else if (diff < csp.f) diff = csp.f;
+	else diff = csp.g;
+
 
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(normal, halfwayDir), 0.0), material.shininess);
 	spec = step(0.5f, spec);
 	
 	vec3 ambient = light.ambient * material.diffuse * vAmbientColor;
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-	return (ambient + diffuse + specular) * light.intensity;
+	vec4 shadow = light.genShadows ? CalculateShadow(fragPosLightSpace, normal, lightDir) : vec4(1);
+	
+	return ((ambient + shadow.rgb * shadow.a) * (diffuse + specular)) * light.intensity;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
@@ -175,10 +251,13 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	// Diffuse shading
 	float diff = max(dot(normal, lightDir), 0.0);
 
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.05f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
-	else diff = csp.d;
+	else if (diff < csp.d) diff = csp.d;
+	else if (diff < csp.e) diff = csp.e;
+	else if (diff < csp.f) diff = csp.f;
+	else diff = csp.g;
 
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDir, normal);
@@ -203,41 +282,34 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 }
 
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
-{
-	// TODO: Should anti-aliasing be revised when calulating cel shading?
-	// The camera is far enough and as far as i looked into it, i did not see any aliasing going on.
-	
+{	
 	vec3 lightDir = normalize(light.position - fragPos);
 	
 	float diff = max(dot(normal, lightDir), 0.0);
 	
-	if (diff < csp.a) diff = 0.0f;
+	if (diff < csp.a) diff = 0.05f;
 	else if (diff < csp.b) diff = csp.b;
 	else if (diff < csp.c) diff = csp.c;
-	else diff = csp.d;
+	else if (diff < csp.d) diff = csp.d;
+	else if (diff < csp.e) diff = csp.e;
+	else if (diff < csp.f) diff = csp.f;
+	else diff = csp.g;
 	
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 	spec = step(0.5f, spec);
 
-	//float distance = length(light.position - fragPos);
-	
 	float theta = dot(lightDir, normalize(-light.direction));
 	float epsilon = light.cutOff - light.outerCutOff;
 	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
-	
-	//vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
-	//vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
-	//vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
 
 	vec3 ambient = light.ambient * material.diffuse * material.diffuse;
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 	vec3 specular = light.specular * spec * material.specular;
 
-
-	ambient *=  /*attenuation **/ intensity * light.intensity;
-	diffuse  *= /*attenuation **/ intensity * light.intensity;
-	specular *= /*attenuation **/ intensity * light.intensity;
+	ambient  *= intensity * light.intensity;
+	diffuse  *= intensity * light.intensity;
+	specular *= intensity * light.intensity;
 	
 	return (ambient + diffuse + specular);
 }
@@ -245,8 +317,16 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 void main()
 {
 	vec3 norm = normalize(vNormal);
-	vec3 viewDir = normalize(vCamPos - vPosition);
+	if (bool(hasNormalMap))
+	{
+		norm = texture(normalMap, vTexCoords).rgb;
+		norm = norm * 2.0 - vec3(1.0);
+		norm = tbnMatrix * norm;
+		vec4 a = transpose(inverse(vModel)) * vec4(norm, 1);
+		norm = a.xyz;
+	}
 	
+	vec3 viewDir = normalize(vCamPos - vPosition);
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	
 	for (int i = 0; i < MAX_POINT_LIGHTS; ++i)
@@ -255,14 +335,23 @@ void main()
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		result += CalcSpotLight(spotLights[i], norm, vPosition, viewDir);
 
-	vec3 finalColor = result;
-	if (material.gammaCorrection)
-	{
-		finalColor = pow(result, vec3(1.0 / material.gammaCorrectionAmount));
-	}
 
-	fragColor = texture(tex , vTexCoords) * vTextureAlpha * vec4(finalColor, 1);
-	fragNormals = vNormal; // Is this correct ??
+	fragColor = texture(tex , vTexCoords) * vec4(result, opacity);
+	fragColor.rgb += interCol * isInteractuable * interColIntensity;
+
+	fragColor += emissiveEnabled * vec4(material.emissiveColor, 1);
+
+	fragNormals = vec4(norm, normalsThickness);
+
+	if (fragColor.a > 0 && fragColor.a <= 0.1)
+	{
+		fragColor = vec4(vec3(0.5), 0);
+		fragNormals.a = -1;
+	}
+	else if (fragColor.a == 0)
+	{
+		discard;
+	}
 }
 
 

@@ -6,7 +6,7 @@
 class MyPlane;
 class GameObject;
 class MaterialComponent;
-
+class ComponentTransform2D;
 class SliderComponent : public Component
 {
 public:
@@ -22,7 +22,6 @@ public:
 
 	float2 GetParentPosition();
 	inline Color GetActualColor() { return actualColor; };
-	inline Color GetTextColor() { return textColor; };
 	inline Text GetText() { return sliderText; };
 
 	inline float GetBarProgress() { return barProgres; };
@@ -45,17 +44,11 @@ private:
 	float barProgres;
 	float alpha = 1.0f;
 	State state;
-	Color actualColor;
-	Color disabledColor = white;
-	Color pressedColor = red;
-	Color focusedColor = blue;
-	Color normalColor = green;
-	Color selectedColor = black;
-	Color textColor = white;
-
+	Color actualColor = white;
+	bool isHolding = false;
 	bool firstDraw = false;
 	bool drawRect;
-
+	ComponentTransform2D* smallCuad;
 	MaterialComponent* secondMaterial;
 	Text sliderText;
 	char text[64] = "Camera FOV";

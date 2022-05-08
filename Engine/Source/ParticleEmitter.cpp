@@ -45,10 +45,13 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 
 	timer = 1.0f / particlesPerSecond;
 	currTimer = timer;
+	loopTimer = 0.0f;
+	loopTimerOnEditor = 1.0f;
 	particleReference.color = { 1,0,0,1 };
 	particleReference.size = 0.5f;
 	particleReference.lifeTime = 1.0f;
 	particleReference.velocity = { 0.0f, 0.1f, 0.0f };
+	particleReference.direccion = { 0.0f, 0.0f, 0.0f };
 	particleReference.acceleration = { 0.0f, 0.0f, 0.0f };
 	particleReference.position = { 0.0f, 0.0f, 0.0f };
 
@@ -67,6 +70,9 @@ ParticleEmitter::ParticleEmitter(GameObject* owner) :
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/white.png")));
 
 	data.drawCalls = 0;
+
+	tilesX = 1;
+	tilesY = 1;
 
 	showTexMenu = false;
 
@@ -111,7 +117,8 @@ void ParticleEmitter::Emit(float dt)
 			particle.position.y = particleReference.position.y + random.Float(-spreadDistanceY, spreadDistanceY);
 			particle.position.z = particleReference.position.z + random.Float(-spreadDistanceZ, spreadDistanceZ);
 		}
-		
+		particle.direccion = particleReference.direccion;
+
 		particle.rotation = particleReference.deltaRotation + random.Float() * 2 * pi;
 
 		particle.acceleration = particleReference.acceleration;
@@ -148,9 +155,29 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	if (data.indexCount >= data.maxIndices)
 		NextBatch();
 
-	const float2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+	float2 texCoords[] = { { 0.0f / tilesX, 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX) , 0.0f / tilesY }, { (1.0f / tilesX) + (0.0f / tilesX), (1.0f / tilesY) + (0.0f / tilesY) }, {0.0f / tilesX, (1.0f / tilesY) + (0.0f / tilesY) } };
+	if (loopTimer <= 0.0f)
+	{
+		loopTimer = loopTimerOnEditor;
+		iterTileX++;
+	}
 
-	Quat q = newRotation * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation);
+	if (iterTileX >= tilesX)
+	{
+		iterTileX = 0;
+		iterTileY++;
+	}
+	if (iterTileY >= tilesY)
+	{
+		iterTileY = 0;
+	}
+
+	texCoords[0] = { iterTileX / tilesX, iterTileY / tilesY };
+	texCoords[1] = { (1.0f / tilesX) + (iterTileX / tilesX) , iterTileY / tilesY };
+	texCoords[2] = { (1.0f / tilesX) + (iterTileX / tilesX), (1.0f / tilesY) + (iterTileY / tilesY) };
+	texCoords[3] = { iterTileX / tilesX, (1.0f / tilesY) + (iterTileY / tilesY) };
+
+	Quat q = newRotation /** Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, rotation)*/;
 	float4x4 transform = float4x4::FromTRS(pos, q, size);
 
 	const int quadVertexCount = 4;
@@ -158,11 +185,12 @@ void ParticleEmitter::DrawParticle(const float3& pos, float rotation, const floa
 	{
 		float4 p = transform * data.vertexPositions[i];
 		data.vertexBufferPtr->position = p.Float3Part();
+
 		data.vertexBufferPtr->texCoords = texCoords[i];
 		data.vertexBufferPtr->color = color;
-
 		data.vertexBufferPtr++;
 	}
+
 	data.indexCount += 6;
 }
 
@@ -297,8 +325,9 @@ void ParticleEmitter::UpdateParticle(float dt)
 					effects[j]->Update(particlePool[i], dt);
 				}
 			}
+			particlePool[i].direccion += particlePool[i].direccion * dt;
 			particlePool[i].velocity += particlePool[i].acceleration * dt;
-			particlePool[i].position += particlePool[i].velocity;
+			particlePool[i].position += particlePool[i].velocity + particlePool[i].direccion;
 		}
 	}
 }
@@ -306,7 +335,7 @@ void ParticleEmitter::UpdateParticle(float dt)
 void ParticleEmitter::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Particles Update");
-
+	loopTimer -= dt;
 	UpdateParticle(dt);
 	for (int i = 0; i < particlePool.size(); ++i)
 	{
@@ -324,6 +353,7 @@ void ParticleEmitter::Update(float dt)
 		particle.lifeRemaining -= dt;
 		//particle.position += particle.velocity * dt;
 		//particle.velocity += particleReference.acceleration * dt;
+		particle.acceleration += particleReference.acceleration;
 		particle.rotation += particleReference.deltaRotation * dt;
 	}
 }
@@ -374,12 +404,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::Spacing();
 		ImGui::Spacing();
 		ImGui::Separator();
-		/*ImGui::Indent();*/
-
-		//guiName = "Particle max lifetime" + suffixLabel;
-		//ImGui::DragFloat(guiName.c_str(), &maxLifeTime, 0.1f, 0.0f, 10.0f);
-
-		//particleReference->lifeTime = random.Float(minLifeTime, maxLifeTime);
 
 		guiName = "Particles per Second" + suffixLabel;
 		ImGui::PushItemWidth(200);
@@ -406,13 +430,14 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 		ImGui::PushItemWidth(200);
 		ImGui::DragFloat3("Acceleration", particleReference.acceleration.ptr(), 0.01f);
 		ImGui::PopItemWidth();
-	
-		/*guiName = "Color (RGBA)" + suffixLabel;
-		ImGui::ColorEdit4("Beginning Color", particleReference.colorBegin.ptr());
+		ImGui::PushItemWidth(200);
+		ImGui::DragFloat3("Direccion", particleReference.direccion.ptr(), 0.01f, -1.0f, 1.0f);
+		ImGui::PopItemWidth();
 
-		ImGui::ColorEdit4("Ending Color", particleReference.colorEnd.ptr());*/
+		ImGui::DragInt("Tiles: X", &tilesX, 1.0f, 1, 100);
+		ImGui::DragInt("Tiles: Y", &tilesY, 1.0f, 1, 100);
 
-		//ImGui::Indent();
+		ImGui::DragFloat("Loop Timer", &loopTimerOnEditor, 0.1f, 0.0f, 2.0f);
 
 		ImGui::Text("Texture");
 		if (ImGui::ImageButton((void*)texture->GetId(), { 150,150 }))
@@ -420,22 +445,6 @@ void ParticleEmitter::OnEditor(int emitterIndex)
 
 		if (showTexMenu)
 			ShowTextureMenu();
-
-		//if (particleReference->tex != nullptr)
-		//{
-		//	if (ImGui::IsItemHovered())
-		//	{
-		//		ImGui::BeginTooltip();
-		//		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.2f, 0.2f, 1.0f));
-		//		ImGui::Text("Click on the image to erase it");
-		//		ImGui::PopStyleColor();
-		//		ImGui::EndTooltip();
-		//	}
-		//}
-		//else
-		//{
-		//	ImGui::Image((ImTextureID)0, ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
-		//}
 
 		for (int i = (int)ParticleEffectType::NO_TYPE + 1; i <= (int)ParticleEffectType::ROTATION_OVER_LIFETIME; i++)
 		{
@@ -604,10 +613,15 @@ bool ParticleEmitter::OnLoad(JsonParsing& node)
 	particleReference.position = node.GetJson3Number(node, "Particle Reference Position");
 	particleReference.velocity = node.GetJson3Number(node, "Particle Reference Velocity");
 	particleReference.acceleration = node.GetJson3Number(node, "Particle Reference Acceleration");
+	particleReference.direccion = node.GetJson3Number(node, "Particle Reference Direction");
 	particleReference.color = node.GetJson4Number(node, "Particle Reference Color Begin");
 	particleReference.size = node.GetJsonNumber("Particle Reference Size Begin");
 	particleReference.lifeTime = node.GetJsonNumber ("Particle Reference Lifetime");
 	particleReference.deltaRotation = node.GetJsonNumber ("Particle Reference Rotation Amount");
+
+	loopTimerOnEditor = node.GetJsonNumber("Loop Timer");
+	tilesX = node.GetJsonNumber("Tiles: X");
+	tilesY = node.GetJsonNumber("Tiles: Y");
 
 	texture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Texture Assets Path"))));
 	data.shader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string(node.GetJsonString("Shader Assets Path"))));
@@ -655,10 +669,15 @@ bool ParticleEmitter::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJson3Number(file, "Particle Reference Position", particleReference.position);
 	file.SetNewJson3Number(file, "Particle Reference Velocity", particleReference.velocity);
 	file.SetNewJson3Number(file, "Particle Reference Acceleration", particleReference.acceleration);
+	file.SetNewJson3Number(file, "Particle Reference Direction", particleReference.direccion);
 	file.SetNewJson4Number(file, "Particle Reference Color Begin", particleReference.color);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Size Begin", particleReference.size);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Lifetime", particleReference.lifeTime);
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Particle Reference Rotation Amount", particleReference.deltaRotation);
+
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Loop Timer", loopTimerOnEditor);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Tiles: X", tilesX);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Tiles: Y", tilesY);
 
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Texture Assets Path", texture->GetAssetsPath().c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Shader Assets Path", data.shader->GetAssetsPath().c_str());
@@ -735,4 +754,15 @@ void ParticleEmitter::NextBatch()
 {
 	Render(0);
 	StartBatch();
+}
+
+void ParticleEmitter::RestartEmitter()
+{
+	particlePool.clear();
+	particlePool.resize(maxParticles);
+}
+
+void ParticleEmitter::SetDirection(float3 newDirection)
+{
+	particleReference.direccion = newDirection;
 }

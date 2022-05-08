@@ -43,9 +43,12 @@ public:
 	void DeleteScene(std::shared_ptr<Scene> scene);
 
 	void ChangeScene(const char* sceneName);
+	inline bool GetChangeScene() { return changeScene; };
 
 	void NextScene();
 	void NextScene(const char* name);
+	void SaveScene(const char* name);
+	void LoadScene(const char* name);
 
 	// Pop Up
 	void WarningWindow();
@@ -55,6 +58,9 @@ public:
 
 	GameState GetGameState() { return gameState; }
 	GameTimer& GetTimer() { return gameTimer; }
+
+	std::string GetLastSceneName() { return lastSceneName; }
+	std::string GetCurrentSceneName();
 
 	inline float GetGameDeltaTime() { return gameTimer.GetDeltaTime(); }
 	inline float GetTimeScale() { return gameTimer.GetTimeScale(); }
@@ -69,6 +75,8 @@ public:
 	std::vector<std::shared_ptr<Scene>>& GetScenes() { return scenes; }
 	void ShortCuts();
 
+	void SaveTesting(int deadCount, std::string playerName, float3 playerPos, float time);
+
 	std::multimap<uint, SerializedField*> referenceMap;
 	bool newSceneLoaded;
 
@@ -82,6 +90,9 @@ private:
 	int index = 0;
 	int lastIndex = 0;
 	bool changeScene = false;
+	bool pendingToBake = false;
+	std::string lastSceneName;
+
 	bool exit = false;
 	GameState gameState;
 	GameTimer gameTimer;

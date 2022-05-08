@@ -21,8 +21,11 @@ ParticleSystemComponent::ParticleSystemComponent(GameObject* own, TransformCompo
     saveConfig = false;
     loadConfig = false;
 
-    Sphere s(trans->GetPosition(), 5);
-    own->SetAABB(AABB(s));
+    if (own->GetComponent<MeshComponent>())
+    {
+        Sphere s(trans->GetPosition(), 5);
+        own->SetAABB(AABB(s));
+    }
     sizeAABB = { 10,10,10 };
     offsetAABB = { 0,0,0 };
 
@@ -47,6 +50,9 @@ void ParticleSystemComponent::SetEmitter(ParticleEmitter* emitter)
 bool ParticleSystemComponent::Update(float dt)
 {
     RG_PROFILING_FUNCTION("Particle System Update");
+
+    offsetAABB = transform->GetGlobalPosition();
+    transform->ForceUpdateTransform();
 
     if (isActive || app->sceneManager->GetGameState() != GameState::NOT_PLAYING)
     {
@@ -75,6 +81,10 @@ bool ParticleSystemComponent::Update(float dt)
         if ((float)timer.GetTime() / 1000.0f >= maxDuration && looping != true)
         {
             isActive = false;
+            for (std::vector<ParticleEmitter*>::iterator it = emitters.begin(); it != emitters.end(); ++it)
+            {
+                (*it)->RestartEmitter();
+            }
             timer.Stop();
         }
     }
@@ -186,6 +196,7 @@ void ParticleSystemComponent::Play()
     isActive = true;
     for (int i = 0; i < emitters.size(); ++i)
     {
+        emitters[i]->isActive = true;
         // TODO: emitters[i]->RestartEmitter();
     }
 }
@@ -194,6 +205,11 @@ void ParticleSystemComponent::Stop()
 {
     timer.Stop();
     isActive = false;
+    for (int i = 0; i < emitters.size(); ++i)
+    {
+        emitters[i]->isActive = false;
+        // TODO: emitters[i]->RestartEmitter();
+    }
 }
 
 void ParticleSystemComponent::SaveConfiguration()

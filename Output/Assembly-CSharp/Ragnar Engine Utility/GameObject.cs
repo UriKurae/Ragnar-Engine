@@ -13,10 +13,6 @@ namespace RagnarEngine
         List<RagnarComponent> components;
 
         private Transform trans;
-        //public AudioSource audioSource;
-        //public Rigidbody rigidBody;
-        //public Animation animation;
-        //public Camera camera;
 
         public GameObject()
         {
@@ -35,18 +31,6 @@ namespace RagnarEngine
 
             components = new List<RagnarComponent>();
             components.Add(trans);
-
-            //audioSource = new AudioSource();
-            //audioSource.pointer = audioPTR;
-            //
-            //rigidBody = new Rigidbody();
-            //rigidBody.pointer = rbPTR;
-            //
-            //animation = new Animation();
-            //animation.pointer = animPTR;
-            //
-            //camera = new Camera();
-            //camera.pointer = camPTR;
         }
 
         public T[] GetComponents<T>() where T : RagnarComponent
@@ -92,6 +76,15 @@ namespace RagnarEngine
         extern internal T AddComponent<T>(int componentType);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern internal T DeleteComponent<T>(object component);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern public void ReparentToRoot(GameObject child);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void ChangeMesh(string directory);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern GameObject AddChild(GameObject child);
 		
 		[MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -99,6 +92,12 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern public GameObject Find(string name);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern bool GetActiveComponent(object child);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetActiveComponent(object child, bool value);
 
         //[MethodImplAttribute(MethodImplOptions.InternalCall)]
         //static extern public GameObject FindGameObjectWithTag(string tag);
@@ -152,5 +151,24 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern public void SetSizeAABB(Vector3 min, Vector3 max);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern public void SubmitOutlineDrawing(Vector3 color);
+
+        public extern bool isInteractuable
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
+
+        public extern Vector3 interactuableColor
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
     }
 }

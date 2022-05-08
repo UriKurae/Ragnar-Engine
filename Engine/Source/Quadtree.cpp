@@ -111,7 +111,7 @@ void Quadtree::Intersect(std::set<GameObject*>& gos, CameraComponent* frustum)
 				for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
 				{
 					intersect = frustum->ContainsAaBox((*it)->GetAABB());
-					if (intersect == 1 || intersect == 2)
+					if ((*it)->active && (intersect == 1 || intersect == 2))
 						gos.insert(*it);
 				}
 
@@ -131,6 +131,18 @@ void Quadtree::CollectGo(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& 
 		QuadtreeNode* node = nodes.top();
 		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
 			gos.insert(*it);
+
+		nodes.pop();
+	}
+}
+
+void Quadtree::CollectGoOnlyStatic(std::set<GameObject*>& gos, std::stack<QuadtreeNode*>& nodes)
+{
+	while (!nodes.empty())
+	{
+		QuadtreeNode* node = nodes.top();
+		for (std::vector<GameObject*>::const_iterator it = node->GetObjects().begin(); it != node->GetObjects().end(); ++it)
+			if((*it)->staticObj) gos.insert(*it);
 
 		nodes.pop();
 	}

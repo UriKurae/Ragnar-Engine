@@ -17,5 +17,13 @@ namespace RagnarEngine
             get;
         }
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void Play();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void Pause();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetDirectionParticle(Vector3 direction);
     }
 }

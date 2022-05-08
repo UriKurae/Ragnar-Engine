@@ -81,6 +81,7 @@ public:
 	NavMeshBuilder* m_navMeshBuilder;
 
 	float3 hitPosition = float3::zero;
+	float3 rayCast[2] = { float3::zero, float3::zero };
 };
 
 struct BuildSettings
@@ -131,6 +132,7 @@ public:
 	bool SaveConfig(JsonParsing& node) override;
 
 	void CheckNavMeshIntersection(LineSegment raycast, int clickedMouseButton);
+	float3 CalculateHitPosition(LineSegment raycast);
 
 	void ClearNavMeshes();
 	bool IsWalkable(float x, float z, float3& hitPoint);

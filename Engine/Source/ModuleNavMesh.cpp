@@ -103,8 +103,17 @@ void ModuleNavMesh::CheckNavMeshIntersection(LineSegment raycast, int clickedMou
 	}
 
 	float hitTime;
+	pathfinder->rayCast[0]= raycast.a;
+	pathfinder->rayCast[1]= raycast.b;
 	if (geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime))
 		pathfinder->hitPosition = raycast.a + (raycast.b - raycast.a) * hitTime;
+}
+
+float3 ModuleNavMesh::CalculateHitPosition(LineSegment raycast)
+{
+	float hitTime;
+	geometry->raycastMesh(raycast.a.ptr(), raycast.b.ptr(), hitTime);
+	return raycast.a + (raycast.b - raycast.a) * hitTime;
 }
 
 void ModuleNavMesh::ClearNavMeshes()
@@ -149,11 +158,6 @@ void ModuleNavMesh::BakeNavMesh()
 		if (gameObjects[i]->staticObj)
 		{
 			AddGameObjectToNavMesh(gameObjects[i]);
-		}
-
-		for (size_t j = 0; j < gameObjects[i]->GetChilds().size(); j++)
-		{
-			gameObjects.push_back(gameObjects[i]->GetChilds()[j]);
 		}
 	}
 
@@ -691,7 +695,11 @@ bool Pathfinder::MovePath(NavAgentComponent* agent)
 		MoveTo(agent, agent->agentProperties->path[0]))
 	{
 		agent->agentProperties->path.erase(agent->agentProperties->path.begin());
-		if (agent->agentProperties->path.empty()) return true;
+		if (agent->agentProperties->path.empty())
+		{
+			agent->owner->GetComponent<RigidBodyComponent>()->GetBody()->setLinearVelocity({0,0,0});
+			return true;
+		}
 	}
 
 	return false;

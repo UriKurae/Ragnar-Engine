@@ -38,12 +38,10 @@ ComponentTransform2D::ComponentTransform2D(/*float3 pos, float3 sca, float3 rot,
 	transMatrix = aux.FromTRS(internalPosition, rotationQuat, scale);
 	transmat = transMatrix;
 	transMatrix = transMatrix.Transposed();
-	type = ComponentType::TRANFORM2D;	
 }
 
 ComponentTransform2D::~ComponentTransform2D()
 {
-	app->userInterface->DeleteUIGameObjects(owner);
 }
 void ComponentTransform2D::UpdateChilds(float3 newPosition, float2 newScale) {
 	std::vector<GameObject*> auxiliar;
@@ -219,7 +217,7 @@ bool ComponentTransform2D::OnSave(JsonParsing& node, JSON_Array* array)
 	JsonParsing file = JsonParsing();
 
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
-	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)18);
+	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Type", (int)type);
 	file.SetNewJson3Number(file, "Position", position);
 	file.SetNewJson3Number(file, "Scale", scale);
 	file.SetNewJson3Number(file, "rotationEuler", rotationEuler);

@@ -10,6 +10,7 @@
 #include "Physics3D.h"
 
 #include "LightComponent.h"
+#include "CameraComponent.h"
 #include "TransformComponent.h"
 #include "NavAgentComponent.h"
 
@@ -21,7 +22,10 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "NavMeshBuilder.h"
+#include "GameView.h"
+#include "Viewport.h"
 
 #include "GL/glew.h"
 #include "Imgui/imgui_impl_sdl.h"
@@ -80,8 +84,6 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 		}
 
 		DEBUG_LOG("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-
-		ilutRenderer(ILUT_OPENGL);
 
 		//Use Vsync
 		vsync = node.GetJsonBool("vsync");
@@ -144,7 +146,7 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	mainCameraFbo = new Framebuffer(w, h, 0);
 	mainCameraFbo->Unbind();	
 
-#ifdef DIST
+//#ifdef DIST
 	distVao = new VertexArray();
 
 	float vertices[] =
@@ -168,11 +170,11 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 	distIbo = new IndexBuffer(indices, 6);
 	distVao->SetIndexBuffer(*distIbo);
 
-#else
+//#else
 	grid.SetPos(0, 0, 0);
 	grid.constant = 0;
 	grid.axis = true;
-#endif
+//#endif
 
 	dirLight = new DirectionalLight();
 	goDirLight = app->sceneManager->GetCurrentScene()->CreateGameObject(0);
@@ -185,6 +187,20 @@ bool ModuleRenderer3D::Init(JsonParsing& node)
 
 	vbo = new VertexBuffer();
 	
+	genShadows = true;
+
+
+	glGenFramebuffers(1, &shadowsFbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	glGenTextures(1, &shadowsDepthTexture);
+	glBindTexture(GL_TEXTURE_2D, shadowsDepthTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowsDepthTexture, 0);
+
+	dmgFeedbackRequested = false;
+	
 	return ret;
 }
 
@@ -192,7 +208,9 @@ bool ModuleRenderer3D::Start()
 {
 	postProcessingShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/postProcessing.shader")));
 	coneShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/basic.shader")));
-	
+	textureShader = std::static_pointer_cast<Shader>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Shaders/texture.shader")));
+	damageTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/test.png")));
+
 	return true;
 }
 
@@ -228,6 +246,7 @@ bool ModuleRenderer3D::PostUpdate()
 	// TODO: wtf quadtree man.
 	app->sceneManager->GetCurrentScene()->GetQuadtree().Intersect(objects, app->sceneManager->GetCurrentScene()->mainCamera);
 	
+	AABB shadowsAABB;
 #ifndef DIST
 
 	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
@@ -247,78 +266,118 @@ bool ModuleRenderer3D::PostUpdate()
 		glEnd();
 		glLineWidth(1.0f);
 	}
+	PushCamera(float4x4::identity, float4x4::identity);
 
-	fbo->Bind();
+
+	// Shadow Pass ===================================
+	
+	if (dirLight->generateShadows)
+	{
+		GenerateShadows(objects, nullptr, shadowsAABB);
+	}
+
+	// Scene Pass ====================================
+	fbo->Bind();	
+
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	
+
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, drawBuffers);
+
 	GameObject* objSelected = app->editor->GetGO();
+
+	glEnable(GL_BLEND);
 	if (app->camera->visualizeFrustum)
 	{
 		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-			if ((*it) != objSelected)(*it)->Draw(nullptr);
+			if ((*it) != objSelected)
+				(*it)->Draw(nullptr);
 		}
 	}
 	else app->sceneManager->GetCurrentScene()->Draw();
+	// Scene Pass ====================================
+	glDisable(GL_BLEND);
 
-	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	for (auto& p : gosToDrawOutline)
 	{
-		app->navMesh->GetNavMeshBuilder()->DebugDraw();
-
-		if(objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
-			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
-	}
-
-	if (app->physics->GetDebugMode())
-	{
-		PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
-		app->physics->DebugDraw();
-		PushCamera(float4x4::identity, float4x4::identity);
-	}
-
-	
-	if (stencil && objSelected && objSelected->GetActive())
-	{
-		//glColor3f(0.25f, 0.87f, 0.81f);
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
-		objSelected->DrawOutline();
+		p.first->DrawOutline(nullptr, p.second);
 
 		glStencilMask(0xFF);
 		glStencilFunc(GL_ALWAYS, 0, 0xFF);
 		if (depthTest) glEnable(GL_DEPTH_TEST);
 		//glColor3f(1.0f, 1.0f, 1.0f);
-		objSelected->Draw(nullptr);
+		p.first->Draw(nullptr);
 	}
+
+	DebugDraw(objSelected);
 	
+	//glClear(GL_DEPTH_BUFFER_BIT);
 	fbo->Unbind();
 
 #endif
 
-	// Camera Component FBO
-	mainCameraFbo->Bind();
-	// Weird but it works like this
-	GLuint drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1/*, GL_DEPTH_ATTACHMENT */ };
-	glDrawBuffers(2, drawBuffers);
+	if (dirLight->generateShadows)
+	{
+		GenerateShadows(objects, app->sceneManager->GetCurrentScene()->mainCamera, shadowsAABB);
+	}
 
+
+	// Scene Pass ====================================
+	mainCameraFbo->Bind();
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+#ifdef DIST
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+#endif
+	glDrawBuffers(2, drawBuffers);
 
-	// TODO: To check if game cam works, uncomment the for loop, otherwise use the draw of the sceneManager
+	std::vector<GameObject*> gos;
+	gos.resize(gosToDrawOutline.size());
+	for (int i = 0; i < gosToDrawOutline.size(); ++i)
+		gos.push_back(gosToDrawOutline[i].first);
+
+	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
 	for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 	{
-		(*it)->Draw(app->sceneManager->GetCurrentScene()->mainCamera);
+		if (std::find(gos.begin(), gos.end(), *it) == gos.end())
+			(*it)->Draw(cam);
 	}
+
+	for (auto& p : gosToDrawOutline)
+	{
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		p.first->DrawOutline(cam, p.second);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		p.first->Draw(cam);
+	}
+
 
 	vbo->SetData(enemyCones.data(), sizeof(float3) * enemyCones.size());
 	vbo->SetLayout({ {ShaderDataType::VEC3F, "position"} });
 	
-	CameraComponent* cam = app->sceneManager->GetCurrentScene()->mainCamera;
+	float rcolor = 0;
+	float gcolor = 1;
+	float bcolor = 0;
+
+	glEnable(GL_BLEND);
 	coneShader->Bind();
 	coneShader->SetUniformMatrix4f("projection", cam->matrixProjectionFrustum.Transposed());
 	coneShader->SetUniformMatrix4f("view", cam->matrixViewFrustum.Transposed());
+	
+	coneShader->SetUniform1f("rcolor", rcolor);
+	coneShader->SetUniform1f("gcolor", gcolor);
+	coneShader->SetUniform1f("bcolor", bcolor);
+	
 	vbo->Bind();
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -326,6 +385,8 @@ bool ModuleRenderer3D::PostUpdate()
 	vbo->Unbind();
 
 	coneShader->Unbind();
+    enemyCones.clear();
+	glDisable(GL_BLEND);
 
 #ifndef DIST 
 	app->userInterface->Draw();
@@ -333,9 +394,8 @@ bool ModuleRenderer3D::PostUpdate()
 
 	mainCameraFbo->Unbind();
 
-
 #ifdef DIST
-	//app->camera->updateGameView = true;
+	
 	// Inside each function there is a comprobation so it does not get resized each frame
 	float2 size = { (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
 	mainCameraFbo->ResizeFramebuffer(size.x, size.y);
@@ -366,9 +426,15 @@ bool ModuleRenderer3D::PostUpdate()
 
 	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
 	
+	postProcessingShader->Unbind();
+
+	if (dmgFeedbackRequested)
+	{
+		DrawDamageFeedback();
+	}
+
 	distIbo->Unbind();
 	distVao->Unbind();
-	postProcessingShader->Unbind();
 
 #else
 	app->editor->Draw(fbo, mainCameraFbo);
@@ -399,8 +465,8 @@ bool ModuleRenderer3D::CleanUp()
 
 	RELEASE(fbo);
 	RELEASE(mainCameraFbo);
-	//RELEASE(defaultShader);
 	RELEASE(dirLight);
+	//RELEASE(defaultShader);
 
 	for(auto& pl : pointLights)
 	{
@@ -443,7 +509,7 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	navMesh = node.GetJsonBool("navmesh");
 	drawGrid = node.GetJsonBool("draw grid");
 
-	SetVsync();
+	SetVsync(vsync);
 	SetDepthTest();
 	SetCullFace();
 	SetLighting();
@@ -538,9 +604,9 @@ void ModuleRenderer3D::SetWireMode()
 	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void ModuleRenderer3D::SetVsync()
+void ModuleRenderer3D::SetVsync(bool newValue)
 {
-	SDL_GL_SetSwapInterval(vsync);
+	SDL_GL_SetSwapInterval(newValue);
 }
 
 void ModuleRenderer3D::DrawCubeDirectMode()
@@ -688,6 +754,11 @@ void ModuleRenderer3D::RemoveSpotLight(SpotLight* light)
 	}
 }
 
+void ModuleRenderer3D::RequestDamageFeedback()
+{
+	dmgFeedbackRequested = true;
+}
+
 void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 {
 	//glPushMatrix();
@@ -697,4 +768,127 @@ void ModuleRenderer3D::PushCamera(const float4x4& proj, const float4x4& view)
 	//glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(view.Transposed().ptr());
+}
+
+void ModuleRenderer3D::DebugDraw(GameObject* objSelected)
+{
+	PushCamera(app->camera->matrixProjectionFrustum, app->camera->matrixViewFrustum);
+
+	if (app->sceneManager->GetCurrentScene()->GetDebugDrawQuadtree())
+		app->sceneManager->GetCurrentScene()->GetQuadtree().DebugDraw();
+
+	if (navMesh && app->navMesh->GetNavMeshBuilder() != nullptr)
+	{
+		app->navMesh->GetNavMeshBuilder()->DebugDraw();
+
+		if (objSelected && objSelected->GetComponent<NavAgentComponent>() != nullptr)
+			app->navMesh->GetPathfinding()->RenderPath(objSelected->GetComponent<NavAgentComponent>());
+	}
+
+	if (app->physics->GetDebugMode())
+		app->physics->DebugDraw();
+
+	PushCamera(float4x4::identity, float4x4::identity);
+
+	if (stencil && objSelected && objSelected->GetActive())
+	{
+		//glColor3f(0.25f, 0.87f, 0.81f);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		objSelected->DrawOutline(nullptr, { 0.25, 0.87, 0.81, });
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		if (depthTest) glEnable(GL_DEPTH_TEST);
+		objSelected->Draw(nullptr);
+	}
+}
+
+void ModuleRenderer3D::GenerateShadows(const std::set<GameObject*>& objects, CameraComponent* gameCam, AABB& shadAABB)
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowsFbo);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glDrawBuffers(0, nullptr);
+
+	GameObject* objSelected = app->editor->GetGO();
+
+	glCullFace(GL_FRONT);
+	genShadows = true;
+
+	AABB shadowsAABB = shadAABB;
+	shadowsAABB.SetNegativeInfinity();
+
+	if (!gameCam)
+	{
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			OBB obb = (*it)->GetOOB();
+			obb.Scale(obb.CenterPoint(), 2);
+			shadowsAABB.Enclose(obb);
+		}
+		AABB camAABB = app->camera->cameraFrustum.MinimalEnclosingAABB();
+		camAABB.Scale(camAABB.CenterPoint(), 2);
+		AABB intersectionAABB = shadowsAABB.Intersection(camAABB);
+
+		if (app->camera->visualizeFrustum)
+		{
+			for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+			{
+				if ((*it) != objSelected && intersectionAABB.Contains((*it)->GetAABB()))
+					(*it)->Draw(nullptr);
+			}
+		}
+		else app->sceneManager->GetCurrentScene()->Draw(&intersectionAABB);
+	}
+	else
+	{		
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			OBB obb = (*it)->GetOOB();
+			obb.Scale(obb.CenterPoint(), 2);
+			shadowsAABB.Enclose(obb);
+		}
+		
+		AABB camAABB = gameCam->GetFrustum()->MinimalEnclosingAABB();
+		camAABB.Scale(camAABB.CenterPoint(), 2.f);
+		AABB intersectionAABB = shadowsAABB.Intersection(camAABB);
+
+		for (std::set<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+			if (intersectionAABB.Contains((*it)->GetAABB()))
+				(*it)->Draw(gameCam);
+		}
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glCullFace(GL_BACK);
+	genShadows = false;
+}
+
+void ModuleRenderer3D::DrawDamageFeedback()
+{
+	static float alpha = 0.6;
+	alpha -= 0.5 * app->sceneManager->GetGameDeltaTime();
+	if (alpha < 0)
+	{
+		alpha = 0.6;
+		dmgFeedbackRequested = false;
+		return;
+	}
+
+	textureShader->Bind();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, damageTexture->GetId());
+	GLuint textLoc1 = glGetUniformLocation(textureShader->GetId(), "tex");
+	glUniform1i(textLoc1, 0);
+
+	glEnable(GL_BLEND);
+	textureShader->SetUniform1f("alpha", alpha);
+	glDrawElements(GL_TRIANGLES, distIbo->GetCount(), GL_UNSIGNED_INT, 0);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	damageTexture->Unbind();
 }

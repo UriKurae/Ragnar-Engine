@@ -14,6 +14,9 @@ namespace RagnarEngine
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern Vector3[] CalculatePath(Vector3 destination);
+        
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool ValidDestination(Vector3 destination);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern bool MovePath();
@@ -25,12 +28,36 @@ namespace RagnarEngine
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+        }
+
+        public extern Vector3 rayCastA
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
+        }        
+
+        public extern Vector3 rayCastB
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
         }
 
         public extern Vector3 path
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             set;
+        }
+
+        public extern float speed
+        {
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            get;
         }
     }
 }

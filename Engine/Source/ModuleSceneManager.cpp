@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleEditor.h"
 #include "ResourceManager.h"
+#include "ModuleUI.h"
 
 #include "AudioManager.h"
 
@@ -27,7 +28,7 @@
 #include <fstream>
 #include "Profiling.h"
 
-ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled)
+ModuleSceneManager::ModuleSceneManager(bool startEnabled) : gameState(GameState::NOT_PLAYING), Module(startEnabled), lastSceneName("")
 {
 	uint uid = ResourceManager::GetInstance()->CreateResource(ResourceType::SCENE, std::string(""), std::string(""));
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->GetResource(uid));
@@ -47,7 +48,10 @@ bool ModuleSceneManager::Start()
 	ResourceManager::GetInstance()->ImportAllResources();
 
 	ImportPrimitives();
-
+#ifndef DIST
+	app->userInterface->ImportToLibrary();
+#endif
+	
 	ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
 	currentScene = nullptr;
 
@@ -66,6 +70,7 @@ bool ModuleSceneManager::Start()
 	PrefabManager::GetInstance()->ImportToLibrary();
 	DialogueSystem::GetInstance()->ImportToLibrary();
 	AudioManager::Get()->ImportToLibrary();
+	
 #endif
 
 	return true;
@@ -74,8 +79,9 @@ bool ModuleSceneManager::Start()
 bool ModuleSceneManager::PreUpdate(float dt)
 {
 	currentScene->PreUpdate(gameTimer.GetDeltaTime());
+#ifndef DISTRIBUTION
 	ShortCuts();
-
+#endif
 	if (gameState == GameState::PLAYING) gameTimer.Start();
 
 	return true;
@@ -87,6 +93,7 @@ bool ModuleSceneManager::Update(float dt)
 	
 	if (changeScene)
 	{
+		lastSceneName = currentScene->GetName();
 		currentScene->UnLoad();
 		currentScene = scenes[index];
 		currentScene->Load();
@@ -104,6 +111,12 @@ bool ModuleSceneManager::Update(float dt)
 
 bool ModuleSceneManager::PostUpdate()
 {
+	if (pendingToBake)
+	{
+		pendingToBake = false;
+		app->navMesh->BakeNavMesh();
+	}
+
 	if (saveScene) WarningWindow();
 	if (showBuildMenu) BuildWindow();
 	if (showCreateLightSensibleShaderWindow)
@@ -264,6 +277,8 @@ void ModuleSceneManager::ChangeScene(const char* sceneName)
 		ResourceManager::GetInstance()->DeleteResource(currentScene->GetUID());
 	}
 	currentScene = std::static_pointer_cast<Scene>(ResourceManager::GetInstance()->LoadResource(std::string(sceneName)));
+	
+	pendingToBake = true;
 }
 
 void ModuleSceneManager::NextScene()
@@ -283,8 +298,37 @@ void ModuleSceneManager::NextScene(const char* name)
 			AudioManager::Get()->StopAllAudioSources();
 			index = i;
 			changeScene = true;
+			pendingToBake = true;
 			break;
 		}
+	}
+}
+
+void ModuleSceneManager::SaveScene(const char* name)
+{
+	DEBUG_LOG("Saving Scene");
+
+	if (currentScene->SaveScene(name))
+	{
+		DEBUG_LOG("Succesfully Saved %s", name);
+	}
+	else
+	{
+		DEBUG_LOG("Couldn't save the scene %s", name);
+	}
+}
+
+void ModuleSceneManager::LoadScene(const char* name)
+{
+	DEBUG_LOG("Loading Scene");
+
+	if (currentScene->LoadScene(name))
+	{
+		DEBUG_LOG("Succesfully loaded %s", name);
+	}
+	else
+	{
+		DEBUG_LOG("Couldn't load the scene %s", name);
 	}
 }
 
@@ -593,4 +637,31 @@ void ModuleSceneManager::ShowCreateNotLigthSensibleShaderWindow()
 		}
 	}
 	ImGui::End();
+}
+
+std::string ModuleSceneManager::GetCurrentSceneName()
+{
+	return currentScene->GetName();
+}
+
+
+/////////////////////////
+
+
+void ModuleSceneManager::SaveTesting(int deadCount, std::string playerName, float3 playerPos, float time)
+{
+	DEBUG_LOG("Saving Testing");
+
+	JsonParsing sceneFile;
+
+	sceneFile = sceneFile.SetChild(sceneFile.GetRootValue(), "Testing");
+	JSON_Array* array = sceneFile.SetNewJsonArray(sceneFile.GetRootValue(), "Scenes");
+	currentScene.get()->SaveTest(sceneFile, array, deadCount, playerName, playerPos, time);
+
+	uint size = sceneFile.SaveFile("Testing.json");
+
+	if (size > 0)
+		DEBUG_LOG("Scene saved succesfully");
+	else
+		DEBUG_LOG("Scene couldn't be saved");
 }

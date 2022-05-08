@@ -37,21 +37,15 @@ public:
 
 	inline const std::string& GetName() const { return data.name; }
 
-	inline math::float4x4 GetTransform() { return localTransform; }
+	inline const float4x4& GetTransform() { return localTransform; }
 
-	int GetPositionIndex(float animationTime);
-	int GetRotationIndex(float animationTime);
-	int GetScalingIndex(float animationTime);
+	int GetIndex(float animationTime);
 private:
 	// Interpolations for normal animations
-	float4x4 InterpolatePosition(float animationTime);
-	float4x4 InterpolateRotation(float animationTime);
-	float4x4 InterpolateScaling(float animationTime);
+	const float4x4& Interpolate(float animationTime);
 
 	// Interpolations for between animations
-	float4x4 InterpolatePosition(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
-	float4x4 InterpolateRotation(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
-	float4x4 InterpolateScaling(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
+	float4x4 InterpolateBetweenLastAnim(Bone& bone, float animationTime, float lastAnimTime, bool& interpolating, float velocity);
 
 
 	float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime);

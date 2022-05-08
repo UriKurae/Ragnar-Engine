@@ -27,4 +27,6 @@ namespace MeshImporter
 	float4x4 FromAssimpMatrixToMathGeoLib(aiMatrix4x4& matrix);
 	void SetBoneData(Vertex& vertex, int boneID, float weight);
 	void SerializeBoneData(BoneInfo& info, JsonParsing &file);
+
+	void ComputeTangents(std::vector<Vertex>& vertices, unsigned int indicesSize);
 }

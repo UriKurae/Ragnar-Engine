@@ -19,6 +19,7 @@
 #include "AnimationComponent.h"
 #include "BillboardParticleComponent.h"
 #include "ButtonComponent.h"
+#include "DropDownComponent.h"
 #include "SliderComponent.h"
 #include "ImageComponent.h"
 #include "CheckBoxComponent.h"
@@ -35,6 +36,7 @@ GameObject::GameObject() : active(true), parent(nullptr), name("Game Object"), n
 	globalAabb.SetNegativeInfinity();
 	LCG lcg;
 	uuid = lcg.Int();
+	isInteractuable = false;
 }
 
 GameObject::~GameObject()
@@ -45,6 +47,9 @@ GameObject::~GameObject()
 		RELEASE(components[i]);		
 	}
 	components.clear();
+
+	if (isUI)
+		app->userInterface->DeleteUIGameObjects(this);
 
 	// Recursive Release, delete all childrens
 	for (int i = 0; i < children.size(); ++i)
@@ -58,7 +63,7 @@ bool GameObject::Update(float dt)
 {
 	RG_PROFILING_FUNCTION("Game Object Update");
 
-	for (int i = 0; i < components.size(); ++i)
+	for (int i = 0; i < components.size() && components[i]->active; ++i)
 		components[i]->Update(dt);
 
 	for (int i = 0; i < children.size(); ++i)
@@ -78,24 +83,65 @@ void GameObject::Draw(CameraComponent* gameCam)
 		}
 	}
 
-	// If showAABB are enable draw the his bounding boxes
-	if (showAABB == true) {
+	if (showAABB == true)
+	{
+		if (gameCam)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(gameCam->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(gameCam->matrixViewFrustum.Transposed().ptr());
+		}
+		else
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		}
+
 		float3 points[8];
 		globalAabb.GetCornerPoints(points);
 		DebugColliders(points, float3(0.2f, 1.f, 0.101f));
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 	}
-	// If showOBB are enable draw the his bounding boxes
-	if (showOBB == true) {
+
+	if (showOBB == true)
+	{
+		if (gameCam)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(gameCam->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(gameCam->matrixViewFrustum.Transposed().ptr());
+		}
+		else
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(app->camera->matrixProjectionFrustum.Transposed().ptr());
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(app->camera->matrixViewFrustum.Transposed().ptr());
+		}
+		
 		float3 points[8];
 		globalObb.GetCornerPoints(points);
 		DebugColliders(points);
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 	}
 }
 
-void GameObject::DrawOutline()
+void GameObject::DrawOutline(CameraComponent* gameCam, const float3& color)
 {
-	if(MeshComponent* border = GetComponent<MeshComponent>())
-		border->DrawOutline();
+	if (MeshComponent* border = GetComponent<MeshComponent>())
+		border->DrawOutline(gameCam, color);
 }
 
 void GameObject::DrawEditor()
@@ -242,6 +288,9 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::UI_CHECKBOX:
 		component = new CheckboxComponent(this);
+		break;
+	case ComponentType::UI_DROPDOWN:
+		component = new DropDownComponent(this);
 		break;
 	case ComponentType::UI_IMAGE:
 		component = new ImageComponent(this);
@@ -390,10 +439,11 @@ void GameObject::CopyComponent(Component* component)
 	}
 }
 
-void GameObject::AddChild(GameObject* object)
+void GameObject::AddChild(GameObject* object, bool begin)
 {
 	object->parent = this;
-	children.emplace_back(object);
+	if(!begin) children.emplace_back(object);
+	else children.insert(children.begin(), object);
 	TransformComponent* trans = object->GetComponent<TransformComponent>();
 	if (object->parent != nullptr && trans) trans->NewAttachment();
 }
@@ -493,6 +543,7 @@ void GameObject::OnLoad(JsonParsing& node)
 	prefabPath = node.GetJsonString("Prefab Path");
 	tag = node.GetJsonString("tag");
 	layer = node.GetJsonString("layer");
+	isInteractuable = node.GetJsonBool("Is Interactuable");
 
 	JSON_Array* jsonArray = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "Components");
 
@@ -518,6 +569,7 @@ void GameObject::OnSave(JsonParsing& node, JSON_Array* array)
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Is Interactuable", isInteractuable);
 
 	JSON_Array* newArray = file.SetNewJsonArray(file.GetRootValue(), "Components");
 
@@ -542,6 +594,7 @@ void GameObject::OnSavePrefab(JsonParsing& node, JSON_Array* array, int option)
 	file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Parent UUID", parent ? parent->GetUUID() : 0);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Name", name.c_str());
 	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Active", active);
+	file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Static", staticObj);
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "Prefab Path", prefabPath.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "tag", tag.c_str());
 	file.SetNewJsonString(file.ValueToObject(file.GetRootValue()), "layer", layer.c_str());
@@ -793,6 +846,24 @@ void GameObject::UpdateFromPrefab(JsonParsing& node, bool isParent)
 			RemoveComponent(GetComponent<TextComponent>());
 			break;
 		}
+	}
+}
+
+void GameObject::EnableDisableActive(bool ret)
+{
+	active = ret;
+	for (int i = 0; i < children.size(); i++)
+	{
+		children[i]->EnableDisableActive(ret);
+	}
+}
+
+void GameObject::EnableDisableStatic(bool ret)
+{
+	staticObj = ret;
+	for (int i = 0; i < children.size(); i++)
+	{
+		children[i]->EnableDisableStatic(ret);
 	}
 }
 

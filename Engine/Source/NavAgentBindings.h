@@ -22,6 +22,19 @@ MonoArray* CalculateAgentPath(MonoObject* go, MonoObject* dest)
 	return ret;
 }
 
+bool ValidDestination(MonoObject* dest)
+{
+	float3 destination = app->moduleMono->UnboxVector(dest);
+	dtStatus status;
+	const float m_polyPickExt[3] = { 2,4,2 };
+	Pathfinder* path = app->navMesh->GetPathfinding();
+	status = path->m_navQuery->findNearestPoly(destination.ptr(), m_polyPickExt, &path->m_filter, 0, nullptr);
+	if (dtStatusFailed(status) || (status & DT_STATUS_DETAIL_MASK))
+		return false;
+
+	return true;
+}
+
 bool MoveAgentPath(MonoObject* go)
 {
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
@@ -32,6 +45,25 @@ MonoObject* GetHitPosition(MonoObject* go)
 {
 	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
 	return app->moduleMono->Float3ToCS(agent->pathfinding->hitPosition);
+}
+
+void SetHitPosition(MonoObject* go, MonoObject* hitPos)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	float3 hit = app->moduleMono->UnboxVector(hitPos);
+	agent->pathfinding->hitPosition = hit;
+}
+
+MonoObject* GetRayCastA(MonoObject* go)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	return app->moduleMono->Float3ToCS(agent->pathfinding->rayCast[0]);
+}
+
+MonoObject* GetRayCastB(MonoObject* go)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	return app->moduleMono->Float3ToCS(agent->pathfinding->rayCast[1]);
 }
 
 bool MoveAgentTo(MonoObject* go, MonoObject* dest)
@@ -55,4 +87,16 @@ void SetAgentPath(MonoObject* go, MonoArray* path)
 
 	agent->agentProperties->path.clear();
 	agent->agentProperties->path = wayPoints;
+}
+
+void SetAgentSpeed(MonoObject* go, float speed)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	agent->agentProperties->speed = speed;
+}
+
+float GetAgentSpeed(MonoObject* go)
+{
+	NavAgentComponent* agent = GetComponentMono<NavAgentComponent*>(go);
+	return agent->agentProperties->speed;
 }

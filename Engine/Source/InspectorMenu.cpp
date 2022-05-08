@@ -55,7 +55,8 @@ bool InspectorMenu::Update(float dt)
 void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 {
 	ImGui::PushMultiItemsWidths(3, ImGui::GetWindowWidth());
-	ImGui::Checkbox("##Active", &obj->active);
+	if (ImGui::Checkbox("##Active", &obj->active))
+		obj->EnableDisableActive(obj->active);
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 	ImGui::Text("Name");
@@ -63,9 +64,8 @@ void InspectorMenu::DrawDefaultInspector(GameObject* obj)
 	ImGui::InputText("##Name", &obj->name[0], 30);
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
-	if (ImGui::Checkbox("Static", &obj->staticObj)) {
-		RecursiveSetStaticObjects(obj, obj->staticObj);
-	}
+	if (ImGui::Checkbox("Static", &obj->staticObj))
+		obj->EnableDisableStatic(obj->staticObj);
 	ImGui::PopItemWidth();
 
 	// Draw tagList and layerList
@@ -162,16 +162,6 @@ void InspectorMenu::DrawEditLists()
 	if (ImGui::CollapsingHeader("Layers", flag))
 	{
 		DrawListTagLayer("Layer", layers);
-	}
-}
-
-void InspectorMenu::RecursiveSetStaticObjects(GameObject* obj, bool ret)
-{
-	obj->staticObj = ret;
-
-	for (int i = 0; i < obj->GetChilds().size(); i++)
-	{
-		RecursiveSetStaticObjects(obj->GetChilds()[i], ret);
 	}
 }
 

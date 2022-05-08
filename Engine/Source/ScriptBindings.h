@@ -1,6 +1,7 @@
 #pragma once
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ModuleSceneManager.h"
 #include "ModuleEditor.h"
@@ -11,8 +12,11 @@
 
 #include "ButtonComponent.h"
 #include "MaterialComponent.h"
+#include "MeshComponent.h"
 #include "Texture.h"
 #include "ParticleSystemComponent.h"
+#include "LightComponent.h"
+#include "Lights.h"
 
 #include "Scene.h"
 #include "TransformBindings.h"
@@ -113,6 +117,12 @@ MonoObject* GetGlobalRotation(MonoObject* go)
 	return app->moduleMono->QuatToCS(rotation);
 }
 
+void SetGlobalRotation(MonoObject* go, MonoObject* newRot)
+{
+	TransformComponent* tr = GetComponentMono<TransformComponent*>(go);
+	tr->SetRotation(app->moduleMono->UnboxQuat(newRot));
+}
+
 MonoObject* GetScale(MonoObject* go)
 {
 	TransformComponent* tr = GetComponentMono<TransformComponent*>(go);
@@ -125,6 +135,15 @@ void SetPosition(MonoObject* go, MonoObject* position)
 	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
 	{
 		tr->SetPosition(app->moduleMono->UnboxVector(position));
+		tr->UpdateTransform();
+	}
+}
+
+void SetGlobalPosition(MonoObject* go, MonoObject* position)
+{
+	if (TransformComponent* tr = GetComponentMono<TransformComponent*>(go))
+	{
+		tr->SetGlobalPosition(app->moduleMono->UnboxVector(position));
 		tr->UpdateTransform();
 	}
 }
@@ -147,13 +166,19 @@ void SetScale(MonoObject* go, MonoObject* scale)
 		tr->UpdateTransform();
 	}
 }
-float GetAngleBetween(MonoObject* go, MonoObject* vector1, MonoObject* vector2)
+float GetAngleBetween(MonoObject* vector1, MonoObject* vector2) // In degrees
 {
 	float3 vec1 = app->moduleMono->UnboxVector(vector1);
 	float3 vec2 = app->moduleMono->UnboxVector(vector2);	
-	return vec1.AngleBetween(vec2);
+	return vec1.AngleBetween(vec2) * RADTODEG;
 }
-MonoObject* RotateY(MonoObject* go, MonoObject* vector, int anglesDegrees)
+float GetDistanceBetween(MonoObject* vector1, MonoObject* vector2)
+{
+	float3 vec1 = app->moduleMono->UnboxVector(vector1);
+	float3 vec2 = app->moduleMono->UnboxVector(vector2);
+	return vec1.Distance(vec2);
+}
+MonoObject* RotateY(MonoObject* vector, float anglesDegrees)
 {
 	float3 dirV = app->moduleMono->UnboxVector(vector);
 	return app->moduleMono->Float3ToCS(dirV * math::float3x3::RotateY(anglesDegrees * DEGTORAD));
@@ -176,15 +201,162 @@ void SetTexturePath(MonoObject* go, MonoString* texturePath)
 	std::string p = path;
 
 	std::shared_ptr<Texture> newTexture = std::static_pointer_cast<Texture>(ResourceManager::GetInstance()->LoadResource(p));
+	matComp->SetTextureType(TextureType::DIFFUSE);
 	matComp->SetTexture(newTexture);
-
-	/*res->Load();
-	if (diff.use_count() - 1 == 1) diff->UnLoad();
-	SetTexture(res);*/
 }
+
+float GetDiffuseAlpha(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->GetComponent<MaterialComponent>()->GetDiffuseAlpha();
+}
+
+void SetDiffuseAlpha(MonoObject* go, float value)
+{
+	if (value > 1) value = 1;
+	else if (value < 0) value = 0;
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetDiffuseAlpha(value);
+}
+
+MonoBoolean GetEmissiveEnabled(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->GetComponent<MaterialComponent>()->IsEmissiveEnabled();
+}
+
+void SetEmissiveEnabled(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetEmissiveEnabled(value);
+}
+
+MonoObject* GetEmissiveColor(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetComponent<MaterialComponent>()->GetEmissiveColor());
+}
+
+void SetEmissiveColor(MonoObject* go, MonoObject* color)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->GetComponent<MaterialComponent>()->SetEmissiveColor(app->moduleMono->UnboxVector(color));
+}
+
+// Light ============================
+
+void SetDirectionalLightShadowsEnabled(MonoBoolean* value)
+{
+	app->renderer3D->dirLight->generateShadows = value;
+}
+
+MonoBoolean GetDirectionalLightShadowsEnabled()
+{
+	return app->renderer3D->dirLight->generateShadows;
+}
+
+float GetLightIntensity(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return lightComp->GetLight()->intensity;
+}
+
+void SetLightIntensity(MonoObject* go, float intensity)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->intensity = intensity;
+}
+
+float GetLightLinear(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->lin;
+}
+
+void SetLightLinear(MonoObject* go, float lin)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->lin = lin;
+}
+
+float GetLightQuadratic(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->quadratic;
+}
+
+void SetLightQuadratic(MonoObject* go, float quadratic)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->quadratic = quadratic;
+}
+
+float GetLightConstant(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	if (PointLight* l = (PointLight*)lightComp->GetLight())
+		return l->constant;
+}
+
+void SetLightConstant(MonoObject* go, float constant)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	assert(lightComp->GetLight()->type == LightType::POINT && "The Light MUST be a Point Light");
+
+	PointLight* l = (PointLight*)lightComp->GetLight();
+	l->constant = constant;
+}
+
+MonoObject* GetLightAmbient(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return app->moduleMono->Float3ToCS(lightComp->GetLight()->ambient);
+}
+
+void SetLightAmbient(MonoObject* go, MonoObject* ambient)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->ambient = app->moduleMono->UnboxVector(ambient);
+}
+
+MonoObject* GetLightDiffuse(MonoObject* go)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	return app->moduleMono->Float3ToCS(lightComp->GetLight()->diffuse);
+}
+void SetLightDiffuse(MonoObject* go, MonoObject* ambient)
+{
+	ComponentLight* lightComp = GetComponentMono<ComponentLight*>(go);
+	lightComp->GetLight()->diffuse = app->moduleMono->UnboxVector(ambient);
+}
+
+// Light ============================
 
 
 // GameObject =======================
+
+void GameObjectDrawOutline(MonoObject* gameObject, MonoObject* color)
+{
+	GameObject* go = app->moduleMono->GameObjectFromCSGO(gameObject);
+	float3 col = app->moduleMono->UnboxVector(color);
+	std::pair<GameObject*, float3> p(go, col);
+	app->renderer3D->gosToDrawOutline.push_back(p);
+}
+
 MonoObject* InstantiateGameObject(MonoObject* name, MonoObject* position, MonoObject* rotation)
 {
 	GameObject* go = app->sceneManager->GetCurrentScene()->CreateGameObject(nullptr);
@@ -233,7 +405,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 	return app->moduleMono->GoToCSGO(go);
 }
 
-void InstancePrefab(MonoObject* name)
+MonoObject* InstancePrefab(MonoObject* name, bool begin = false)
 {
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
 
@@ -247,10 +419,11 @@ void InstancePrefab(MonoObject* name)
 
 	path += goName;
 	path += ".rgprefab";
-
-	PrefabManager::GetInstance()->LoadPrefab(path.c_str());
-
+	
 	mono_free(goName);
+
+	GameObject* go = PrefabManager::GetInstance()->LoadPrefab(path.c_str(), begin);
+	return app->moduleMono->GoToCSGO(go);
 }
 
 MonoObject* Destroy(MonoObject* go)
@@ -263,12 +436,16 @@ MonoObject* Destroy(MonoObject* go)
 
 MonoObject* AddComponentMono(MonoObject* go, int componentType)
 {
-	char* goName = mono_string_to_utf8(mono_object_to_string(go, 0));
-
 	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
 	Component* comp = owner->CreateComponent(static_cast<ComponentType>(componentType));
 
 	return app->moduleMono->ComponentToCS(comp);
+}
+
+void DeleteComponentMono(MonoObject* go, MonoObject* component)
+{
+	GameObject* owner = app->moduleMono->GameObjectFromCSGO(go);
+	owner->RemoveComponent(GetComponentMono<Component*>(component));
 }
 
 MonoObject* FindGameObjectWithName(MonoObject* name)
@@ -289,9 +466,6 @@ MonoObject* FindGameObjectWithName(MonoObject* name)
 			mono_free(goName);
 			return app->moduleMono->GoToCSGO(curr);
 		}
-
-		for (auto& child : curr->GetChilds())
-			q.push(child);
 	}
 
 	mono_free(goName);
@@ -371,7 +545,17 @@ MonoBoolean GetGameObjectIsActive(MonoObject* go)
 void SetGameObjectIsActive(MonoObject* go, MonoBoolean value)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
-	gameObject->active = value;
+	gameObject->EnableDisableActive(value);
+}
+MonoBoolean GetActiveComponent(MonoObject* go)
+{
+	Component* comp = GetComponentMono<Component*>(go);
+	return comp->active;
+}
+void SetActiveComponent(MonoObject* go, MonoBoolean value)
+{
+	Component* comp = GetComponentMono<Component*>(go);
+	comp->active = value;
 }
 MonoObject* GetSizeAABB(MonoObject* go)
 {
@@ -398,6 +582,29 @@ void SetSizeAABB(MonoObject* go, MonoObject* min, MonoObject* max)
 	gameObject->SetAABB(newObb);
 }
 
+void ReparentToRoot(MonoObject* go)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+	Scene* currentScene = app->sceneManager->GetCurrentScene();
+
+	currentScene->ReparentGameObjects(parent, currentScene->GetRoot());
+}
+
+void ChangeMesh(MonoObject* go, std::string directory)
+{
+	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
+
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles(directory.c_str(), files);
+	std::vector<std::string>::iterator it = files.begin();
+	if ((*it).find(".rgmesh") != std::string::npos)
+	{
+		app->fs->GetFilenameWithoutExtension(*it);
+		*it = (*it).substr((*it).find_last_of("_") + 1, (*it).length());
+		parent->GetComponent<MeshComponent>()->SetMesh(ResourceManager::GetInstance()->LoadResource(std::stoll(*it)));
+	}
+}
+
 void AddChild(MonoObject* go, MonoObject* child)
 {
 	GameObject* parent = app->moduleMono->GameObjectFromCSGO(go);
@@ -414,6 +621,31 @@ void EraseChild(MonoObject* go, MonoObject* child)
 	GameObject* newChild = app->moduleMono->GameObjectFromCSGO(child);
 
 	parent->RemoveChild(newChild);
+}
+
+bool GetGameObjectIsInteractuable(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return gameObject->isInteractuable;
+}
+
+void SetGameObjectIsInteractuable(MonoObject* go, MonoBoolean value)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	gameObject->isInteractuable = value;
+}
+
+MonoObject* GetGameObjectInteractuableColor(MonoObject* go)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->Float3ToCS(gameObject->GetComponent<MaterialComponent>()->GetInteractuableColor());
+}
+
+void SetGameObjectInteractuableColor(MonoObject* go, MonoObject* color)
+{
+	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);
+	float3 col = app->moduleMono->UnboxVector(color);
+	gameObject->GetComponent<MaterialComponent>()->SetInteractuableColor(col);
 }
 
 // GameObject =======================
@@ -437,16 +669,16 @@ MonoArray* GetEmitters(MonoObject* go)
 	return ret;
 }
 
-void PlayEmitter(MonoObject* emitter)
+void PlayEmitter(MonoObject* go)
 {
-	ParticleEmitter* e = GetEmitterFromCS(emitter);
-	e->isActive = true;
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	particleSystem->Play();
 }
 
-void PauseEmitter(MonoObject* emitter)
+void PauseEmitter(MonoObject* go)
 {
-	ParticleEmitter* e = GetEmitterFromCS(emitter);
-	e->isActive = false;
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	particleSystem->Stop();
 }
 // Particle System ==================
 
@@ -460,16 +692,53 @@ void SetTimeScale(float scale)
 	app->sceneManager->GetTimer().SetTimeScale(scale);
 }
 
+void SetDirectionParticle(MonoObject* go, MonoObject* direction)
+{
+	ParticleSystemComponent* particleSystem = GetComponentMono<ParticleSystemComponent*>(go);
+	std::vector<ParticleEmitter*> emmiters = particleSystem->GetEmitters();
+
+	for (std::vector<ParticleEmitter*>::iterator it = emmiters.begin(); it != emmiters.end(); ++it)
+	{
+		float3 dir = app->moduleMono->UnboxVector(direction);
+		(*it)->SetDirection(dir);
+	}
+}
+
 // Scene Manager
 void NextScene()
 {
 	app->sceneManager->NextScene();
+	app->renderer3D->gosToDrawOutline.clear();
+}
+
+void SaveScene(MonoString* string)
+{
+	char* name = mono_string_to_utf8(string);
+	app->sceneManager->SaveScene(name);
 }
 
 void LoadScene(MonoString* string)
 {
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
+	app->renderer3D->gosToDrawOutline.clear();
+}
+
+void SaveTest(int deadCount, MonoString* playerName, MonoObject* playerPos, float time)
+{
+	char* name = mono_string_to_utf8(playerName);
+	float3 pos = app->moduleMono->UnboxVector(playerPos);
+	app->sceneManager->SaveTesting(deadCount, name, pos, time);
+}
+
+MonoString* GetLastSceneName()
+{
+	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetLastSceneName().c_str());
+}
+
+MonoString* GetCurrentSceneName()
+{
+	return mono_string_new(app->moduleMono->domain, app->sceneManager->GetCurrentSceneName().c_str());
 }
 
 void Exit()
@@ -489,35 +758,96 @@ MonoObject* GetRegionGame()
 	return app->moduleMono->Float3ToCS(vec3);
 }
 
+void RequestDamageFeedback()
+{
+	app->renderer3D->RequestDamageFeedback();
+}
+
 // Dialogue System ======================================
 MonoString* GetDialogueLine()
 {
-	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLine().c_str());
+	//MHF
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetCurrentLineXML().c_str());
 }
 
 MonoString* GetDialogueLineAuthor()
 {
-	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+	
+	//return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLine().c_str());
+	//MHF
+	return mono_string_new(app->moduleMono->domain, DialogueSystem::GetInstance()->GetOwnerOfLineXML().c_str());
 }
 
-void NextLine()
+int GetDialogueLineAuthorId() {
+	return DialogueSystem::GetInstance()->GetOwnerIdOfLineXML();
+}
+
+bool NextLine()
 {
-	DialogueSystem::GetInstance()->NextLine();
+	//DialogueSystem::GetInstance()->NextLine();
+	//MHF
+	return DialogueSystem::GetInstance()->NextLineXML();
 }
 
 void StartDialogueById(int id)
 {
+	/*
 	DialogueSystem* sys = DialogueSystem::GetInstance();
 	Dialogue* aux = sys->GetDialogueById(id);
 	sys->SetDialogueAsCurrent(aux);
 	sys->StartDialogue();
+	*/
+	//MHF
+	DialogueSystem* sys = DialogueSystem::GetInstance();
+	sys->SetCurrentDialogueIdXML(id);
+	sys->StartDialogueXML();
 }
+
 
 void LoadDialogueFile(MonoString* name)
 {
-	char* fileName = mono_string_to_utf8(name);
-	std::string path = DIALOGUES_FOLDER;
-	path += fileName;
-	path += ".rgdialogue";
-	DialogueSystem::GetInstance()->LoadDialogue(path);
+	//char* fileName = mono_string_to_utf8(name);
+	//std::string path = DIALOGUES_FOLDER;
+	//path += fileName;
+	//path += ".rgdialogue";
+	//DialogueSystem::GetInstance()->LoadDialogue(path);
+	//MHF
+	DialogueSystem::GetInstance()->LoadDialogueXML();
+}
+
+//configuration
+
+void SetFullScreen(bool newState) 
+{
+	app->window->SetFullscreenDesktop(newState);
+}
+bool GetFullScreen()
+{
+	return app->window->GetWindowFullscreenDesktop();
+}
+
+void SetVSync(bool newState)
+{
+	app->renderer3D->SetVsync(newState);
+}
+bool GetVSync()
+{
+	return app->renderer3D->GetVsync();
+}
+MonoObject* GetMousePosition()
+{
+	float2 fMousePos;
+	float2 mPos = float2::zero;
+	float4 viewport = float4::zero;
+#ifndef DIST
+	mPos = { ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y };
+	viewport = app->editor->GetGameView()->GetBounds();
+#else
+	mPos = { (float)app->input->GetMouseX() ,(float)app->input->GetMouseY() };
+	viewport = { 0,0, (float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
+#endif
+	fMousePos = { mPos.x - viewport.x , mPos.y - viewport.y };
+	float3 ret(fMousePos.x- (viewport.z/2), -fMousePos.y+(viewport.w / 2), 0);
+	return app->moduleMono->Float3ToCS(ret);
 }

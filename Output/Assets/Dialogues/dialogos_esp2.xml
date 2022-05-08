@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+	<!-- 
+		<Dialogue Id="">
+		<node AuthorId="" Line=""> 
+		</node>
+	</Dialogue>
+	-->
+<dialogueTree>
+	<!-- AuthorId:  0=Paul / 1=Chani / 2=Rehen Fremen / 3=Rabban / 4=Soldado Harkonnen / 5=Soldado / 6=Lady Jessica / 7=Stilgar -->
+	<AuthorList name="Paul"></AuthorList> 
+	<AuthorList name="Chani"></AuthorList>
+	<AuthorList name="Rehen Fremen"></AuthorList>
+	<AuthorList name="Rabban"></AuthorList>
+	<AuthorList name="Soldado Harkonnen"></AuthorList>
+	<AuthorList name="Soldado"></AuthorList>
+	<AuthorList name="Lady Jessica"></AuthorList>
+	<AuthorList name="Stilgar"></AuthorList>
+	
+	<!-- AuthorId:  0=Paul / 1=Chani -->
+	<Dialogue Id="0">
+		<node AuthorId="1" Line="Rabban ha atacado dos asentamientos mas al oeste de aqui, te esta buscando Paul, esta pagando su frustracion con las demas tribus Fremen." >
+		</node>
+		<node AuthorId="1" Line="Antes ya tenia la capital y la especia, este juego vuestro esta diezmando a los mios."> 
+		</node>
+		<node AuthorId="0" Line="Ahora mismo solo se que nada de lo que he hecho ha servido para acabar con esto, no basta con sabotear alguna cadena de distribucion de especia. La muerte es el verdadero negocio de los Harkonnen."> 
+		</node>
+		<node AuthorId="1" Line="A cada dia que pasa les tengo mas rabia, son una lacra para esta tierra."> 
+		</node>
+		<node AuthorId="0" Line="Sus soldados tienen mas armas para atacar a los nuestros y Stilgar nos ha pedido paciencia, no eres la unica que tiene alguna cuenta pendiente con los Harkonnen y creo que el tiene un plan."> 
+		</node>
+		<node AuthorId="1" Line="No puede ser..."> 
+		</node>
+	</Dialogue>
+	
+	<!-- AuthorId:  2=Rehen Fremen / 3=Rabban / 4=Soldado Harkonnen  -->
+	<Dialogue Id="1">
+		<node AuthorId="2" Line="Llevo 2 semanas dando informacion a tus soldados, por favor dejame ir, te lo suplico."> 
+		</node>
+		<node AuthorId="3" Line="¿Estas seguro de que este es el lugar? ¿Un cañon vacio en medio del desierto? Pensaba que os gustaban mas las cuevas, quizas tendre que devolveros al lugar que mereceis ocupar."> 
+		</node>
+		<node AuthorId="3" Line="Pero tienes razon, me has sido de ayuda, y debo ser un hombre justo, adelante, eres libre."> 
+		</node>
+		<node AuthorId="3" Line="Sucio Gusano, ¿Acaso ha salido de mi boca la palabra disparar?"> 
+		</node>
+		<node AuthorId="4" Line="Pensaba que ya era inutil para nuestra casa, señor."> 
+		</node>
+		<node AuthorId="3" Line="Asi que pensar, ¿eh? Cuando he empezado a pagaros por pensar? Un rehen nunca deja de ser util."> 
+		</node>
+		<node AuthorId="3" Line="Me decepciona tu comportamiento, asi que espero que sirvas de ejemplo para el resto, creeme, no es nada personal."> 
+		</node>
+		<node AuthorId="3" Line="No quiero que salga nadie de aqui, mandad un par de unidades al otro lado del risco y que alcen un perimetro. El desierto parece haber favorecido a su suerte, pero esa suerte va a terminar hoy.">  
+		</node>
+		<node AuthorId="3" Line="Hoy es el dia en que muere el legado de los Atreides."> 
+		</node>
+	</Dialogue>
+	
+	<!-- AuthorId:  0=Paul / 1=Chani -->
+	<Dialogue Id="2">
+		<node AuthorId="1" Line="Los tenemos en nuestra propia puerta, la oportunidad ha venido hacia nosotros, hoy es el dia Paul, podemos acabar con esto de una vez."> 
+		</node>
+		<node AuthorId="0" Line="Espera, no podemos actuar asi sin mas."> 
+		</node>
+		<node AuthorId="1" Line="Creo que no nos queda otra."> 
+		</node>
+	</Dialogue>
+	
+	<!-- AuthorId:  0=Paul / 3=Rabban / 5=Soldado -->
+	<Dialogue Id="3">
+		<node AuthorId="3" Line="Creia que serias mas astuto que tu padre, pero tienes naries para venir ante mi. Yo le tendria mas respeto a la muerte chico."> 
+		</node>
+		<node AuthorId="0" Line="No tienes respeto por la vida de nadie, este desierto y su gente te lo haran pagar, tu actos no quedaran impunes Rabban."> 
+		</node>
+		<node AuthorId="3" Line="Vas a lamentar tu existencia perro Atreides, voy a acabar con todo lo que hamas y conoces, y despues, y solo despues terminare contigo cuando no te quede absolutamente nada alimaña de Caladan."> 
+		</node>
+		<node AuthorId="5" Line="Señor, nos comunican que tras su marcha para liquidar a los Fremen se estan generando disturbios para sabotear la produccion de especia de la ciudad."> 
+		</node>
+		<node AuthorId="3" Line="Es una pena que no pueda se aqui y ahora, pero tendre tiempo para ver tu caida Principe de la nada."> 
+		</node>
+		<node AuthorId="3" Line="Esperad que llegue otro carguero y llevadlo a Palacio, tengo asuntos que solucionar en la ciudad antes de poder disfrutar de este espectaculo."> 
+		</node>
+	</Dialogue>
+	
+	<!-- AuthorId:  0=Paul / 1=Chani / 5=Soldado / 6=Lady Jessica / 7=Stilgar -->
+	<Dialogue Id="4">
+		<node AuthorId="6" Line="¿Te das cuenta de lo que podria haber pasado?"> 
+		</node>
+		<node AuthorId="0" Line="Lo tenia delante, solo necesitaba algo mas de tiempo."> 
+		</node>
+		<node AuthorId="7" Line="¡¿Tiempo? ¿Eres siquiera consciente de las vidas que hay en juego? No todo gira en torno al honor de los Atreides, Paul, te has arriesgado demasiado."> 
+		</node>
+		<node AuthorId="0" Line="¿Y que habriais hecho vosotros?"> 
+		</node>
+		<node AuthorId="7" Line="No puedes ir solo contra ese malnacido!"> 
+		</node>
+		<node AuthorId="1" Line="Odio darle la razon, pero no puedes ir de cara a por el, al menos no sin su ayuda."> 
+		</node>
+		<node AuthorId="7" Line="Vale, hay un cambio de planes, al menos esta incursion tambien se ha llevado a unos cuantos de los suyos."> 
+		</node>
+		<node AuthorId="1" Line="¿Vas a ir a Arrakeen?"> 
+		</node>
+		<node AuthorId="7" Line="Esos soldados estaran tramando algo contra otros asentamientos, tenemos que hacer algo; Paul, Chani, vendreis conmigo y Lady Jessica, pero os mantendreis al margen."> 
+		</node>
+		<node AuthorId="7" Line="No quiero lios y menos lamentar bajas"> 
+		</node>
+		<node AuthorId="0" Line="Pero y si..."> 
+		</node>
+		<node AuthorId="7" Line="Ni una palabra mas chico, haras lo que se te ordena."> 
+		</node>
+	</Dialogue>
+	
+	<Dialogue Id="5">
+		<node AuthorId="6" Line="Soy la conversacion 5"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="6">
+		<node AuthorId="0" Line="Soy la conversacion 6"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="7">
+		<node AuthorId="6" Line="Soy la conversacion 7"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="8">
+		<node AuthorId="2" Line="Soy la conversacion 8"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="9">
+		<node AuthorId="6" Line="Soy la conversacion 9"> 
+		</node>
+		
+	</Dialogue>
+	
+	<Dialogue Id="10">
+		<node AuthorId="6" Line="Soy la conversacion que hace win condition"> 
+		</node>
+		
+	</Dialogue>
+	<!-- 
+	<Dialogue Id="">
+		<node AuthorId="" Line=""> 
+		</node>
+	</Dialogue>
+	-->
+<dialogueTree>

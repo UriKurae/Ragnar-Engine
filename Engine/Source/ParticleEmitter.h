@@ -44,6 +44,10 @@ public:
 	virtual bool OnLoad(JsonParsing& node);
 	virtual bool OnSave(JsonParsing& node, JSON_Array* array);
 
+	void RestartEmitter();
+
+	void SetDirection(float3 newDirection);
+
 protected:
 	void AddInstancedAttribute(unsigned int vao, unsigned int vbo, int attributeIndex, int dataSize, int instancedDataLength, int offset);
 	void ShowTextureMenu();
@@ -68,7 +72,13 @@ public:
 
 	float timer;
 	float currTimer;
+	float loopTimer;
+	float loopTimerOnEditor;
 
+	int tilesX;
+	int tilesY;
+
+	//float2 texCoords[4] = {};
 private:
 
 	struct EmitterData
@@ -115,4 +125,7 @@ private:
 	float spreadDistanceZ;
 
 	TransformComponent* transform;
+
+	float iterTileX = 0;
+	float iterTileY = 0;
 };

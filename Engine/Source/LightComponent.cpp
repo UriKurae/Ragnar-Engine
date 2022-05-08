@@ -16,6 +16,9 @@ ComponentLight::ComponentLight()
 
 ComponentLight::~ComponentLight()
 {
+	if (this->owner->name == "Directional Light")
+		return;
+
 	switch (light->type)
 	{
 	case LightType::POINT:
@@ -40,6 +43,28 @@ bool ComponentLight::Update(float dt)
 			DirectionalLight* l = (DirectionalLight*)light;
 			l->dir = tr->GetRotation().CastToFloat4().Float3Part();
 			l->dir.Normalize();
+			
+			Frustum frustum;
+			frustum.pos = tr->GetGlobalPosition();
+			//AABB shadowsAABB = app->renderer3D->shadowsAABB;
+			//frustum.pos = float3((shadowsAABB.MaxX() + shadowsAABB.MinX()) * 0.5f, (shadowsAABB.MaxY() + shadowsAABB.MinY()) * 0.5f, shadowsAABB.MaxZ());
+
+			frustum.front = app->renderer3D->dirLight->dir;
+			float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
+			frustum.up = right.Cross(frustum.front).Normalized();
+			frustum.type = FrustumType::OrthographicFrustum;
+
+			frustum.orthographicHeight = 512;
+			frustum.orthographicWidth = 512;
+			frustum.nearPlaneDistance = 0.001;
+			frustum.farPlaneDistance = 500000;
+
+			frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
+
+			float4x4 lightView = frustum.ViewMatrix();
+			float4x4 lightProjection = frustum.projectionMatrix;
+
+			l->lightSpace = lightProjection * lightView;
 		}
 	}
 	else if (light->type == LightType::POINT)
@@ -102,7 +127,9 @@ void ComponentLight::OnEditor()
 				ImGui::ColorEdit3("Diffuse Color", l->diffuse.ptr());
 				ImGui::ColorEdit3("Specular Color", l->specular.ptr());
 
-				ImGui::Text("%f %f %f", l->dir.x, l->dir.y, l->dir.z);
+				ImGui::Checkbox("Shadows", &l->generateShadows);
+
+				ImGui::Text("Direction: %f %f %f", l->dir.x, l->dir.y, l->dir.z);
 
 				ComponentOptions(this);
 				ImGui::Separator();
@@ -171,6 +198,28 @@ void ComponentLight::SetAsSpotLight()
 	app->renderer3D->AddSpotLight((SpotLight*)light);
 }
 
+Light* ComponentLight::GetLight()
+{
+	switch (light->type)
+	{
+		case LightType::DIRECTIONAL:
+		{
+			return (DirectionalLight*)light;
+		}
+
+		case LightType::POINT:
+		{
+			return (PointLight*)light;
+		}
+
+		case LightType::SPOT:
+		{
+			return (SpotLight*)light;
+		}
+	}
+	return nullptr;
+}
+
 bool ComponentLight::OnLoad(JsonParsing& node)
 {
 	active = node.GetJsonBool("Active");
@@ -188,6 +237,8 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->diffuse = node.GetJson3Number(node, "Diffuse");
 			l->specular = node.GetJson3Number(node, "Specular");
 			l->intensity = node.GetJsonNumber("Intensity");
+			l->generateShadows = node.GetJsonBool("Shadows");
+			l->type = LightType::DIRECTIONAL;
 
 			light = l;
 
@@ -208,6 +259,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->constant = node.GetJsonNumber("Constant");
 			l->lin = node.GetJsonNumber("Linear");
 			l->quadratic = node.GetJsonNumber("Quadratic");
+			l->type = LightType::POINT;
 
 			light = l;
 			app->renderer3D->AddPointLight(l);
@@ -225,6 +277,7 @@ bool ComponentLight::OnLoad(JsonParsing& node)
 			l->specular = node.GetJson3Number(node, "Specular");
 			l->cutOff = node.GetJsonNumber("CutOff");
 			l->outerCutOff = node.GetJsonNumber("Outer CutOff");
+			l->type = LightType::SPOT;
 
 			light = l;
 			app->renderer3D->AddSpotLight(l);
@@ -249,11 +302,13 @@ bool ComponentLight::OnSave(JsonParsing& node, JSON_Array* array)
 		{
 			DirectionalLight* l = (DirectionalLight*)light;
 
+			//file.SetNewJson3Number(file, "Position", l->position);
 			file.SetNewJson3Number(file, "Direction", l->dir);
 			file.SetNewJson3Number(file, "Ambient", l->ambient);
 			file.SetNewJson3Number(file, "Diffuse", l->diffuse);
 			file.SetNewJson3Number(file, "Specular", l->specular);
 			file.SetNewJsonNumber(file.ValueToObject(file.GetRootValue()), "Intensity", l->intensity);
+			file.SetNewJsonBool(file.ValueToObject(file.GetRootValue()), "Shadows", l->generateShadows);
 
 			break;
 		}

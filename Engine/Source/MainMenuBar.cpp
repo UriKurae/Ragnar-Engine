@@ -224,7 +224,9 @@ void MainMenuBar::ViewMenu()
 			app->renderer3D->SetWireMode();
 		if (ImGui::MenuItem("Show Raycast", NULL, app->renderer3D->GetRayCast()))
 			app->renderer3D->SetWireMode();
-		ImGui::MenuItem("Show Colliders", NULL, app->physics->GetDebugMode());
+		static bool showColliders = true;
+		if (ImGui::MenuItem("Show Colliders", NULL, &showColliders))
+			app->physics->SetDebugDrawing(showColliders);
 
 		ImGui::MenuItem("Show NavMesh", NULL, app->renderer3D->GetNavMesh());
 		ImGui::MenuItem("Show Grid", NULL, app->renderer3D->GetDrawGrid());
@@ -299,7 +301,7 @@ void MainMenuBar::CreateGameObjectMenu()
 	// UI Object
 	if (ImGui::BeginMenu(ICON_FA_CUBES" Create UI element"))
 	{
-		static std::vector<std::string> uiComponents = { "UI Button", "UI Image", "UI Check Box", "UI Slider", "UI Text" };
+		static std::vector<std::string> uiComponents = { "UI Button", "UI Image", "UI Check Box", "UI Slider", "UI Text","UI InputBox","UI DropDown"};
 		for (int i = 0; i < uiComponents.size(); i++)
 		{
 			if (ImGui::MenuItem(uiComponents.at(i).c_str()))

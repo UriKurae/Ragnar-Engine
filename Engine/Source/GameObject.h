@@ -1,21 +1,5 @@
 #pragma once
 
-//#include "Component.h"
-//
-//#include "TransformComponent.h"
-//#include "MeshComponent.h"
-//#include "MaterialComponent.h"
-//#include "CameraComponent.h"
-//#include "AudioSourceComponent.h"
-//#include "ListenerComponent.h"
-//#include "AudioReverbZoneComponent.h"
-////#include "ParticleSystemComponent.h"
-//#include "BillboardParticleComponent.h"
-//
-//#include "MathGeoLib/src/MathGeoLib.h"
-//#include <string>
-//#include <vector>
-
 #include <string>
 #include <vector>
 
@@ -38,7 +22,7 @@ public:
 
 	bool Update(float dt);
 	void Draw(CameraComponent* gameCam);
-	void DrawOutline();
+	void DrawOutline(CameraComponent* gameCam, const float3& color);
 	void DrawEditor();
 	void DebugColliders(float3* points, float3 color = float3::one);
 
@@ -50,7 +34,7 @@ public:
 	inline const std::vector<Component*> GetComponents() const { return components; }
 	Component* GetComponent(ComponentType type);
 	
-	void AddChild(GameObject* object);
+	void AddChild(GameObject* object, bool begin = false);
 	void RemoveChild(GameObject* object);
 	inline void RemoveChildren(std::vector<GameObject*>::const_iterator i) { children.erase(i); };
 
@@ -90,11 +74,11 @@ public:
 	inline float3 GetOffsetCM() { return offsetCM; };
 	inline void SetOffsetCM(float3 offset) { offsetCM = offset; };
 
+	void EnableDisableActive(bool ret);
+	void EnableDisableStatic(bool ret);
+
 	template<typename T>
 	T* GetComponent();
-
-	//Component* GetComponent(ComponentType type);
-
 	
 public:
 	std::string name;
@@ -111,6 +95,9 @@ public:
 
 	bool showAABB = false;
 	bool showOBB = false;
+	bool castShadows = true;
+	bool isInteractuable;
+
 private:
 
 	GameObject* parent;

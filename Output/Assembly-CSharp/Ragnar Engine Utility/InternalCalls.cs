@@ -33,22 +33,43 @@ namespace RagnarEngine
         public static extern GameObject Create3DObject(object name, int primitiveType, object position);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern GameObject InstancePrefab(object path);
+        public static extern GameObject InstancePrefab(object path, bool begin = false);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Destroy(object go);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Vector3 GetRegionGame();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetFullScreen(bool newState);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetFullScreen();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void SetVSync(bool newValue);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetVSync();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void RequestDamageFeedback();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern Vector3 GetMousePosition();
     }
 
     public class RayCast
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern bool HitToTag(Vector3 initPos, Vector3 endPos, object tag);
+        public static extern GameObject HitToTag(Vector3 initPos, Vector3 endPos, object tag);
+        
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius, GameObject[] players, int size, GameObject[] colliders, int size2);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern bool PerceptionCone(Vector3 initPos, Vector3 _forward, int _angle, int rays, int radius, GameObject[] arr, int size);
+        public static extern Vector3 ReturnHitpoint();
     }
     public class Input
     {
@@ -86,7 +107,10 @@ namespace RagnarEngine
         public static extern string GetDialogueLineAuthor();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void NextLine();
+        public static extern bool NextLine();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetDialogueLineAuthorId();
     }
 
         [StructLayout(LayoutKind.Sequential)]

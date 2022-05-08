@@ -24,6 +24,9 @@ namespace RagnarEngine
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
         }
 
         public extern Quaternion localRotation
@@ -39,6 +42,9 @@ namespace RagnarEngine
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
+
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            set;
         }
         
         public extern Vector3 scale
@@ -67,9 +73,12 @@ namespace RagnarEngine
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Vector3 RotateY(Vector3 vector, int anglesDegrees);
+        public static extern Vector3 RotateY(Vector3 vector, float anglesDegrees);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern float GetAngleBetween(Vector3 vec1, Vector3 vec2);
+        public static extern float GetAngleBetween(Vector3 vec1, Vector3 vec2);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern float GetDistanceBetween(Vector3 vec1, Vector3 vec2);
     }
 }

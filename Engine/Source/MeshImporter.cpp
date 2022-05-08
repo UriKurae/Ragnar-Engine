@@ -105,18 +105,8 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	unsigned int numBones = mesh->mNumBones;
 	std::vector<unsigned int> bonesUid;
 
-	//std::vector<float3> vertices;
-	//std::vector<float3> norms;
-	//std::vector<float2> texCoords;
-
 	int numVertices = mesh->mNumVertices;
 	int numFaces = mesh->mNumFaces;
-
-	//vertices.reserve(numVertices * 2);
-	//indices.reserve(numFaces * 3);
-	
-	//vertices.reserve(numVertices);
-	//texCoords.reserve(numVertices);
 
 	for (unsigned int i = 0; i < numVertices; ++i)
 	{
@@ -131,7 +121,6 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 			vertex.weights[i] = 0.0f;
 		}
 
-		//float3 normals;
 		if (mesh->HasNormals())
 		{
 			vertex.normal.x = mesh->mNormals[i].x;
@@ -139,16 +128,24 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 			vertex.normal.z = mesh->mNormals[i].z;
 		}
 
-		//float2 coords;
 		if (mesh->mTextureCoords[0])
 		{
 			vertex.texCoords.x = mesh->mTextureCoords[0][i].x;
 			vertex.texCoords.y = mesh->mTextureCoords[0][i].y;
 		}
 
+		if (mesh->HasTangentsAndBitangents())
+		{
+			vertex.tangents.x = mesh->mTangents[i].x;
+			vertex.tangents.y = mesh->mTangents[i].y;
+			vertex.tangents.z = mesh->mTangents[i].z;
+
+			vertex.biTangents.x = mesh->mBitangents[i].x;
+			vertex.biTangents.y = mesh->mBitangents[i].y;
+			vertex.biTangents.z = mesh->mBitangents[i].z;
+		}
+
 		vertices.push_back(vertex);
-		//norms.push_back(normals);
-		//texCoords.push_back(coords);
 	}
 
 	for (unsigned int i = 0; i < numFaces; ++i)
@@ -161,11 +158,9 @@ void MeshImporter::ImportMesh(const aiMesh* mesh, const aiScene* scene, JsonPars
 	}
 
 	ExtractBonesAndWeights(vertices, mesh, scene, bones);
-
-	//for (unsigned int i = 0; i < numBones; i++)
-	//{
-	//	AnimationImporter::ImportBones(path, mesh->mBones[i], json, uids, bonesUid);
-	//}
+	
+	if (!mesh->HasTangentsAndBitangents())
+		ComputeTangents(vertices, indices.size());
 
 	std::string meshName;
 	std::string assetsPath(path);
@@ -420,6 +415,33 @@ void MeshImporter::ExtractBonesAndWeights(std::vector<Vertex>& vertices, const a
 		}
 	}
 }
+
+void MeshImporter::ComputeTangents(std::vector<Vertex>& vertices, unsigned int indicesSize)
+{
+	for (int i = 0; i < indicesSize; i += 3)
+	{
+		float2 uv1 = { vertices[i].texCoords };
+		float2 uv2 = { vertices[i + 1].texCoords };
+		float2 uv3 = { vertices[i + 2].texCoords };
+
+		float2 deltaUv1 = uv2 - uv1;
+		float2 deltaUv2 = uv3 - uv1;
+
+		float3 edge1 = vertices[i + 1].position - vertices[i].position;
+		float3 edge2 = vertices[i + 2].position - vertices[i].position;
+
+		float f = 1.0f / (deltaUv1.x * deltaUv2.y - deltaUv2.x * deltaUv1.y);
+
+		vertices[i].tangents.x = f * (deltaUv2.y * edge1.x - deltaUv1.y * edge2.x);
+		vertices[i].tangents.y = f * (deltaUv2.y * edge1.y - deltaUv1.y * edge2.y);
+		vertices[i].tangents.z = f * (deltaUv2.y * edge1.z - deltaUv1.y * edge2.z);
+		vertices[i].tangents.Normalize();
+
+		if (i + 3 >= indicesSize)
+			break;
+	}
+}
+
 
 float4x4 MeshImporter::FromAssimpMatrixToMathGeoLib(aiMatrix4x4& matrix)
 {

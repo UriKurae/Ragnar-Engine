@@ -43,37 +43,37 @@ bool CheckboxComponent::Update(float dt)
 	RG_PROFILING_FUNCTION("Checkbox Update");
 
 	checkboxText.SetOnlyPosition(float2(GetParentPosition().x, GetParentPosition().y));
+	isFirstTime = false;
+	if (owner->active) {
 
-	if (!active)
-		state = State::DISABLED;
-	else
-		state = State::NORMAL;
 
-	if (state != State::DISABLED)
-	{
-		if (app->userInterface->focusedGameObject == owner)
-		{
-			state = State::FOCUSED;
-
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
-				state = State::PRESSED;
-
-			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+		
+			if (app->userInterface->focusedGameObject == owner)
 			{
-				if (actual == noSelectedMaterial)
-					actual = selectedMaterial;
-				checked = true;
+				state = State::FOCUSED;
+
+				// If mouse button pressed -> Generate event!
+				if (app->input->GetMouseButton(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+				{
+					if (checked == true) {
+						actual = noSelectedMaterial;
+						checked = false;
+						isFirstTime = true;
+					}
+					else {
+						actual = selectedMaterial;
+						checked = true;
+						isFirstTime = true;
+					}
+
+
+				}
 			}
-			else
-			{
-				checked = false;
-				actual = noSelectedMaterial;
-			}
-		}
 	}
-	else state = State::NORMAL;
-	
+	else 
+	{
+		state = State::DISABLED;
+	}
 	return true;
 }
 
@@ -81,32 +81,6 @@ void CheckboxComponent::Draw(CameraComponent* gameCam)
 {
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_ALPHA_TEST);
-
-	switch (state)
-	{
-	case State::DISABLED:
-		glColor4f(disabledColor.r, disabledColor.g, disabledColor.b, disabledColor.a);
-		actualColor = disabledColor;
-		break;
-	case State::NORMAL:
-		glColor4f(normalColor.r, normalColor.g, normalColor.b, normalColor.a);
-		actualColor = normalColor;
-		break;
-	case State::FOCUSED:
-		glColor4f(focusedColor.r, focusedColor.g, focusedColor.b, focusedColor.a);
-		actualColor = focusedColor;
-		break;
-	case State::PRESSED:
-		glColor4f(pressedColor.r, pressedColor.g, pressedColor.b, pressedColor.a);
-		actualColor = pressedColor;
-		break;
-	case State::SELECTED:
-		glColor4f(selectedColor.r, selectedColor.g, selectedColor.b, selectedColor.a);
-		actualColor = selectedColor;
-		break;
-	default:
-		break;
-	}
 
 	planeToDraw->DrawPlane2D(actual->GetTexture().get());
 

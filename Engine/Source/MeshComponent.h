@@ -17,7 +17,7 @@ public:
 	~MeshComponent();
 
 	void Draw(CameraComponent* gameCam = nullptr) override;
-	void DrawOutline() override;
+	void DrawOutline(CameraComponent* gameCam, const float3& color) override;
 	void OnEditor() override;
 
 	void MenuChangeMesh();
@@ -35,7 +35,7 @@ public:
 
 	inline AABB GetLocalAABB() { return localBoundingBox; }
 	const std::shared_ptr<Mesh> GetMesh() const { return mesh; }
-	const std::map<std::string, BoneInfo> GetBoneMap();
+	const std::map<std::string, BoneInfo>& GetBoneMap();
 
 private:
 	TransformComponent* transform;

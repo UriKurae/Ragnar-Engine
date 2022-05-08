@@ -3,7 +3,11 @@
 
 #include "Shapes.h"
 #include "SDL_video.h"
+#include "Geometry/AABB.h"
+
 #include <vector>
+#include <set>
+#include <utility>
 
 #define MAX_LIGHTS 8
 
@@ -14,7 +18,9 @@ class Framebuffer;
 class TextureBuffer;
 class Material;
 class Shader;
+class Texture;
 class GameObject;
+class CameraComponent;
 
 class PointLight;
 class SpotLight;
@@ -45,9 +51,7 @@ public:
 	void SetStencil();
 	void SetBlending();
 	void SetWireMode();
-	//TODO: Save/Load NavMesh
-	void SetNavMeshView();
-	void SetVsync();
+	void SetVsync(bool newValue);
 
 	inline bool* GetDepthTest() { return &depthTest; }
 	inline bool* GetCullFace() { return &cullFace; }
@@ -82,11 +86,19 @@ public:
 	void RemovePointLight(PointLight* light);
 	void RemoveSpotLight(SpotLight* light);
 
+	void RequestDamageFeedback();
+
 private:
 	void PushCamera(const float4x4& proj, const float4x4& view);
+	void DebugDraw(GameObject* objSelected);
+	void GenerateShadows(const std::set<GameObject*>& objects, CameraComponent* gameCam, AABB& shadowsAABB);
+
+	void DrawDamageFeedback();
 
 public:
 	PPlane grid;
+	unsigned int shadowsDepthTexture;
+	std::vector<std::pair<GameObject*, float3>> gosToDrawOutline;
 
 	//Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
@@ -115,6 +127,8 @@ public:
 	std::vector<SpotLight*> spotLights;
 
 	std::vector<float3> enemyCones;
+	
+	bool genShadows;
 
 private:
 	Material* defaultMaterial;
@@ -128,7 +142,14 @@ private:
 	IndexBuffer* distIbo;
 	std::shared_ptr<Shader> postProcessingShader;
 	
+	std::shared_ptr<Shader> textureShader;
+	std::shared_ptr<Texture> damageTexture;
 
 	VertexBuffer* vbo;
 	std::shared_ptr<Shader> coneShader;
+
+	unsigned int shadowsFbo;
+	
+	bool dmgFeedbackRequested;
+	
 };
