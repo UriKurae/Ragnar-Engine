@@ -93,7 +93,7 @@ public class EnemyManager : RagnarComponent
                     enemies[i].state = EnemyState.DEATH;
                     enemyGOs[i].isInteractuable = true;
                     enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
-                    enemyGOs.RemoveAt(i);
+                    enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete = false;
                 }
             }
         }

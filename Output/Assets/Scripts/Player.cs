@@ -21,7 +21,6 @@ public class Player : RagnarComponent
     public bool paused = false;
     public bool invisible = false;
     public bool dead = false;
-    public GameObject pickedEnemy = null;
     public bool isHidden = false;
     private float speedBase = 0;
 
@@ -113,6 +112,7 @@ public class Player : RagnarComponent
                                         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
                                         break;
                                     case Actions.CROUCH:
+                                        gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
                                         break;
                                     case Actions.CARRY:
                                         break;
@@ -286,6 +286,16 @@ public class Player : RagnarComponent
     public void SetState(State var)
     {
         abilityState = var;
+    }
+
+    public void SetAction(int act)
+    {
+        action = (Actions)act;
+    }
+
+    public int GetAction()
+    {
+        return (int)action;
     }
 
     public void GetHit(int dmg)
