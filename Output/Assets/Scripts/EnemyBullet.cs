@@ -32,7 +32,7 @@ public class EnemyBullet : RagnarComponent
 		GameObject obj = RayCast.HitToTag(pos, objectivePos, "Player");
 		if (obj != null)
 		{
-			Debug.Log(obj.name.ToString());
+			//Debug.Log(obj.name.ToString());
 			obj.GetComponent<Player>().hitPoints -= 1;
 			InternalCalls.RequestDamageFeedback();
 		}

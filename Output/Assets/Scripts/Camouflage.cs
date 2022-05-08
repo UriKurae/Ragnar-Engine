@@ -4,16 +4,20 @@ using RagnarEngine;
 public class Camouflage : RagnarComponent
 {
 	public GameObject player;
+    private GameObject SceneAudio;
 	float time1 = 5f;
 	public void Start()
 	{
 		player = GameObject.Find("Player_2");
-	}
+        SceneAudio = GameObject.Find("AudioLevel1");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEACTIVATE");
+    }
 	public void Update()
 	{
 		SetMaterialTransparent("Assets/Resources/UI/options_rect.png");
 		if(Timer())
         {
+            SceneAudio.GetComponent<AudioSource>().PlayClip("WPN_CAMOUFLAGEDEACTIVATE");
 			SetMaterialTransparent("Assets/Resources/CharacterTex/char_chani_basecolor.png");
 			player.GetComponent<Player>().invisible = false;
 			InternalCalls.Destroy(gameObject);
