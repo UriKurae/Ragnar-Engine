@@ -15,6 +15,7 @@ public class PlayerManager : RagnarComponent
     public bool drawnArea = false;
     DialogueManager dialogue;
 
+    public float radius;
     public void Start()
 	{
         foreach (Characters c in characters)
@@ -73,8 +74,9 @@ public class PlayerManager : RagnarComponent
 
             /*Cambiador de estados para saber que habilidad estas o no casteando (Basicamente hace que el personaje entre en un estado donde si clickas una tecla
             muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-            Aqui deberia ir la zona de rango de cada habilidad.*/
-            AbilityStateChanger();
+            Aqu� deber�a ir la zona de rango de cada habilidad.*/
+            if(players[characterSelected].GetComponent<Player>().controled)    
+                AbilityStateChanger();
 
             /*Contador de cooldown para cada habilidad
             Funciona en todos los casos con todos los pjs.*/
@@ -102,32 +104,39 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        SpawnArea(State.ABILITY_1);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        SpawnArea(State.ABILITY_2);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        SpawnArea(State.ABILITY_3);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        SpawnArea(State.ABILITY_4);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_4);
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
     public void Carrying()
     {
-        playableCharacter.state = State.CARRYING;
-        players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+        if (players[characterSelected].GetComponent<Player>().controled)
+        {
+            playableCharacter.state = State.CARRYING;
+            players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+        }
     }
 
     private void AbilityStateChanger()
@@ -137,9 +146,9 @@ public class PlayerManager : RagnarComponent
             // Change Condition to all players
             if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
             {
-                float radius = 0f;
+                radius = 0f;
                 if (playableCharacter == characters[0]) radius = 11.5f;
-                if (playableCharacter == characters[1]) radius = 12.7f;
+                else if (playableCharacter == characters[1]) radius = 12.7f;
 
                 lightHab.GetComponent<Light>().intensity = 6;
 
@@ -362,8 +371,8 @@ public class PlayerManager : RagnarComponent
         // Se cancela el estado de la habilidad para que el �rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
-            playableCharacter.state = State.NONE;
-            players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+            playableCharacter.state = State.POSTCAST;
+            players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;

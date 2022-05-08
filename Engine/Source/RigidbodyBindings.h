@@ -26,6 +26,15 @@ void ApplyCentralForce(MonoObject* go, MonoObject* force)
 	body->activate(true);
 	body->applyCentralForce(f);
 }
+void ApplyVelocity(MonoObject* go, MonoObject* velocity)
+{
+	float3 f = app->moduleMono->UnboxVector(velocity);
+
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	btRigidBody* body = rb->GetBody();
+	body->activate(true);
+	body->setLinearVelocity(f);
+}
 
 void ApplyCentralImpulse(MonoObject* go, MonoObject* impulse)
 {
