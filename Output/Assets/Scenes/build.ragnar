@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 348752472,
+                    "pointer": 166819280,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1431,19 +1431,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        8.2836904525756836,
+                        -51.354850769042969,
                         0,
-                        90
+                        88.27423095703125
                     ],
                     "Quaternion": [
                         0,
-                        0.95912659168243408,
+                        0.97652971744537354,
                         0,
-                        0.28297731280326843
+                        0.21538263559341431
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.57379376888275146,
+                        0.4341672956943512,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -1470,15 +1470,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.62939453125e-06,
-                        56.479866027832031,
-                        -51.345344543457031
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
+                        0.34202012419700623,
                         0,
-                        -7.9287412191320072e-09,
-                        0.93969273567199707
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1488,18 +1488,18 @@
                     "Scale": [
                         1.4142110347747803,
                         1.0000002384185791,
-                        1.0000004768371582
+                        1.0000005960464478
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.36628639698028564,
+                    "Vertical Fov": 0.43355777859687805,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -19.588420867919922,
-                        56.479866027832031,
-                        133.12339782714844
+                        -72.388153076171875,
+                        55,
+                        133.63644409179688
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1508,14 +1508,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        8.2836904525756836,
+                        -51.354850769042969,
                         0,
-                        90
+                        88.27423095703125
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 147.12403869628906,
+                    "Horizontal Angle": 155.12405395507813,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1676,7 +1676,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664062
+                        0.98471450805664063
                     ],
                     "RotationEditor": [
                         -0,
@@ -1901,7 +1901,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2339.5,
+                        2329,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1917,7 +1917,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1981,7 +1981,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2029,7 +2029,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2129.5,
+                        2119,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2045,7 +2045,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2160,7 +2160,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2121,
+                        2110.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2176,7 +2176,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2224,7 +2224,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2348,
+                        2337.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2240,7 +2240,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2355,7 +2355,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2146.5,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2371,7 +2371,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2486,7 +2486,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2146.5,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2502,7 +2502,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2550,7 +2550,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2146.5,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2566,7 +2566,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2681,7 +2681,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2146.5,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2697,7 +2697,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2745,7 +2745,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2146.5,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2761,7 +2761,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2876,7 +2876,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2146.5,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2892,7 +2892,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2940,7 +2940,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2236,
+                        2225.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2956,7 +2956,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3024,7 +3024,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2236,
+                        2225.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -3040,7 +3040,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3108,7 +3108,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2236,
+                        2225.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -3124,7 +3124,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3192,7 +3192,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2261.5,
+                        2251,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -3208,7 +3208,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3261,7 +3261,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2261.5,
+                        2251,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -3277,7 +3277,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3330,7 +3330,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3346,7 +3346,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3355,7 +3355,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3371,7 +3371,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3439,7 +3439,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3455,7 +3455,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3464,7 +3464,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3480,7 +3480,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3548,7 +3548,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3564,7 +3564,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3573,7 +3573,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3589,7 +3589,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3657,7 +3657,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3673,7 +3673,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3682,7 +3682,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2331,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3698,7 +3698,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3766,7 +3766,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2339.5,
+                        2329,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3782,7 +3782,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3958,7 +3958,7 @@
                     "Position": [
                         -15.136451721191406,
                         32.360797882080078,
-                        -2.4103469848632812
+                        -2.4103469848632813
                     ],
                     "Quaternion": [
                         0,
@@ -4123,7 +4123,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -47.173110961914062,
+                        -47.173110961914063,
                         1.1693505048751831,
                         26.811119079589844
                     ],
@@ -4932,7 +4932,7 @@
                     "Position": [
                         0.14367350935935974,
                         3.3142125606536865,
-                        -67.793533325195312
+                        -67.793533325195313
                     ],
                     "Quaternion": [
                         0,
@@ -5059,7 +5059,7 @@
                     "Active": true,
                     "Position": [
                         48.314388275146484,
-                        2.7870254516601562,
+                        2.7870254516601563,
                         -21.273065567016602
                     ],
                     "Quaternion": [
@@ -5890,7 +5890,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.3946304321289062,
+                        -7.3946304321289063,
                         5.3251314163208008,
                         85.330413818359375
                     ],
@@ -6082,7 +6082,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -68.188247680664062,
+                        -68.188247680664063,
                         6.4703893661499023,
                         90.2564697265625
                     ],
@@ -6985,7 +6985,7 @@
                     "Position": [
                         150.14437866210938,
                         -0.70813846588134766,
-                        -78.662551879882812
+                        -78.662551879882813
                     ],
                     "Quaternion": [
                         0,
@@ -7152,7 +7152,7 @@
                     "Position": [
                         -12.354125022888184,
                         1.3527688980102539,
-                        -52.897659301757812
+                        -52.897659301757813
                     ],
                     "Quaternion": [
                         0,
@@ -7737,7 +7737,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 333790960,
+                    "pointer": 431926632,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7760,7 +7760,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        350.5,
+                        340,
                         1
                     ],
                     "Scale": [
@@ -7776,7 +7776,7 @@
                     "buttonWidth": 914,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7824,7 +7824,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        227.5,
+                        217,
                         5
                     ],
                     "Scale": [
@@ -7840,7 +7840,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7893,7 +7893,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        251.5,
+                        241,
                         15
                     ],
                     "Scale": [
@@ -7909,7 +7909,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7962,7 +7962,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        352,
+                        341.5,
                         15
                     ],
                     "Scale": [
@@ -7978,7 +7978,7 @@
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8181,7 +8181,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 410930632,
+                    "pointer": 435365480,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8257,7 +8257,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 410930056,
+                    "pointer": 435368504,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8320,7 +8320,7 @@
                     "Active": true,
                     "Position": [
                         -5.7637338638305664,
-                        -0.70209121704101562,
+                        -0.70209121704101563,
                         0
                     ],
                     "Quaternion": [
@@ -8511,7 +8511,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        18.464736938476562,
+                        18.464736938476563,
                         0.2500002384185791,
                         -43.098320007324219
                     ],
@@ -8639,7 +8639,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -20.946060180664062,
+                        -20.946060180664063,
                         -0.45793700218200684,
                         14.809622764587402
                     ],
@@ -9072,896 +9072,6 @@
             ]
         },
         {
-            "UUID": 666385151,
-            "Parent UUID": 417171234,
-            "Name": "UIPause",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/UIPause.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 196072436,
-            "Parent UUID": 666385151,
-            "Name": "Background",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1955.5,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "pauseMenuButton",
-                    "pointer": 410934376,
-                    "type": 4,
-                    "componentTable": 0
-                }
-            ]
-        },
-        {
-            "UUID": 196579740,
-            "Parent UUID": 666385151,
-            "Name": "Button Options",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1832,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Options",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -30.200000762939453,
-                    "textPositionY": -3.7999999523162842,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1790159456,
-            "Parent UUID": 666385151,
-            "Name": "Button MainMenu",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1832,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Main Menu",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -30.200000762939453,
-                    "textPositionY": -3.7999999523162842,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1991803838,
-            "Parent UUID": 666385151,
-            "Name": "Button Resume",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1832,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Resume",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -30.200000762939453,
-                    "textPositionY": -3.7999999523162842,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 1598985928,
-            "Parent UUID": 666385151,
-            "Name": "optionsImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1964,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                }
-            ]
-        },
-        {
-            "UUID": 1524182425,
-            "Parent UUID": 666385151,
-            "Name": "MainMenuImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1964,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                }
-            ]
-        },
-        {
-            "UUID": 139098739,
-            "Parent UUID": 666385151,
-            "Name": "ResumeImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1964,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                }
-            ]
-        },
-        {
-            "UUID": 935956257,
-            "Parent UUID": 666385151,
-            "Name": "Button Restart",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1964,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 12,
-                    "buttonText": "Restart",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 1,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "textPositionX": -30.200000762939453,
-                    "textPositionY": -3.7999999523162842,
-                    "alpha": 1
-                }
-            ]
-        },
-        {
-            "UUID": 915597686,
-            "Parent UUID": 666385151,
-            "Name": "restartImage",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        1964,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.66666668653488159,
-                        0.075000002980232239,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 400,
-                    "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                }
-            ]
-        },
-        {
             "UUID": 1906815624,
             "Parent UUID": 417171234,
             "Name": "UIGame",
@@ -10017,7 +9127,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10033,7 +9143,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10086,7 +9196,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10102,7 +9212,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10150,7 +9260,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10166,7 +9276,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10214,7 +9324,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10230,7 +9340,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10278,7 +9388,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10294,7 +9404,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10409,7 +9519,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10425,7 +9535,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10540,7 +9650,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10556,7 +9666,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10671,7 +9781,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10687,7 +9797,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10802,7 +9912,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1971,
+                        1960.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10818,7 +9928,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10933,7 +10043,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962.5,
+                        1952,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10949,7 +10059,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10997,7 +10107,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962.5,
+                        1952,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11013,7 +10123,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11061,7 +10171,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962.5,
+                        1952,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11077,7 +10187,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11125,7 +10235,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962.5,
+                        1952,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11141,7 +10251,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11189,7 +10299,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -263.5,
+                        -253,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11205,7 +10315,7 @@
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11253,7 +10363,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -285.5,
+                        -275,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11269,7 +10379,7 @@
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11317,7 +10427,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962.5,
+                        1952,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11333,7 +10443,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11381,7 +10491,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1955.5,
+                        1945,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11397,7 +10507,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11461,7 +10571,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11525,7 +10635,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11578,7 +10688,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1964,
+                        1953.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11594,7 +10704,7 @@
                     "buttonWidth": 70,
                     "buttonHeight": 70,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11642,7 +10752,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1964,
+                        1953.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11658,7 +10768,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11706,7 +10816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        378.5,
+                        368,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11722,7 +10832,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonHeight": 729.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11817,6 +10927,896 @@
                     "textPositionX": 0,
                     "textPositionY": 0,
                     "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 666385151,
+            "Parent UUID": 417171234,
+            "Name": "UIPause",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "Assets\/Prefabs\/UIPause.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 196072436,
+            "Parent UUID": 666385151,
+            "Name": "Background",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1945,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/pauseMenuScreen.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "pauseMenuButton",
+                    "pointer": 447834080,
+                    "type": 4,
+                    "componentTable": 0
+                }
+            ]
+        },
+        {
+            "UUID": 196579740,
+            "Parent UUID": 666385151,
+            "Name": "Button Options",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1832,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Options",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1790159456,
+            "Parent UUID": 666385151,
+            "Name": "Button MainMenu",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1832,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Main Menu",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1991803838,
+            "Parent UUID": 666385151,
+            "Name": "Button Resume",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1832,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Resume",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1598985928,
+            "Parent UUID": 666385151,
+            "Name": "optionsImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1964,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1524182425,
+            "Parent UUID": 666385151,
+            "Name": "MainMenuImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1964,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 139098739,
+            "Parent UUID": 666385151,
+            "Name": "ResumeImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1964,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 935956257,
+            "Parent UUID": 666385151,
+            "Name": "Button Restart",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1964,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_button.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Restart",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -30.200000762939453,
+                    "textPositionY": -3.7999999523162842,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 915597686,
+            "Parent UUID": 666385151,
+            "Name": "restartImage",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1964,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.66666668653488159,
+                        0.075000002980232239,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 400,
+                    "buttonHeight": 45,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": false
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/lose_rectange_lines.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
                 }
             ]
         },
@@ -12081,124 +12081,6 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/preclick_non__pTorus2.fbx",
                     "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 862219102,
-            "Parent UUID": 417171234,
-            "Name": "Titulo",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        0,
-                        -10.399999618530273
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0.30000001192092896,
-                        0
-                    ],
-                    "Opacity": 1,
-                    "Emissive Enabled": false,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1896030008,
-            "Parent UUID": 417171234,
-            "Name": "Quest System",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "QuestSystem",
-                    "pointer": 435735920,
-                    "type": 4,
-                    "componentTable": 0,
-                    "questList": 0,
-                    "completedQuestList": 0,
-                    "activeQuestList": 0
                 }
             ]
         }
