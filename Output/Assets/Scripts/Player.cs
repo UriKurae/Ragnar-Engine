@@ -115,6 +115,7 @@ public class Player : RagnarComponent
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
                                         break;
                                     case Actions.CARRY:
+                                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseWalk");
                                         break;
                                 }
                                 break;
@@ -126,8 +127,10 @@ public class Player : RagnarComponent
                                         gameObject.GetComponent<Animation>().PlayAnimation("Run");
                                         break;
                                     case Actions.CROUCH:
+                                        gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
                                         break;
                                     case Actions.CARRY:
+                                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseRun");
                                         break;
                                 }
                                 break;
@@ -149,7 +152,7 @@ public class Player : RagnarComponent
                             gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
                             break;
                         case Actions.CARRY:
-                            gameObject.GetComponent<Animation>().PlayAnimation("CarryStop");
+                            gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
                             break;
                     }
                 }
@@ -165,7 +168,7 @@ public class Player : RagnarComponent
                         gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
                         break;
                     case Actions.CARRY:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CarryStop");
+                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
                         break;
                 }
 
