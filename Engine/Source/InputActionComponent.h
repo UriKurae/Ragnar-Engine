@@ -24,6 +24,7 @@ public:
 
 private:
 
+	std::shared_ptr<ActionMaps> currentPreset;
 	std::vector<std::shared_ptr<ActionMaps>> currentActionMaps;
 	std::string currentAssetName;
 	std::string currentAssetPath;
@@ -31,7 +32,7 @@ private:
 
 	std::vector<std::vector<std::string>> scriptsNameList;
 	std::vector<std::vector<int>> currentMethodList;
-	std::vector<std::vector<MonoMethod*>> monoMethodList;
+	std::vector<MonoMethod*> monoMethodList;
 	std::vector<std::vector<std::vector<std::string>>> scriptsMethodsList;
 
 	bool assetWindowActive;
