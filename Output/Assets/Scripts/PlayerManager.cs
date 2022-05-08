@@ -105,32 +105,32 @@ public class PlayerManager : RagnarComponent
         }
     }
 
+    // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
+    public void Ability1()
+    {
+        SpawnArea((int)State.ABILITY_1);
+    }
+
+    // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
+    public void Ability2()
+    {
+        SpawnArea((int)State.ABILITY_2);
+    }
+
+    // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
+    public void Ability3()
+    {
+        SpawnArea((int)State.ABILITY_3);
+    }
+
+    // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
+    public void Ability4()
+    {
+        SpawnArea((int)State.ABILITY_4);
+    }
+
     private void AbilityStateChanger()
     {
-        // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_1);
-        }
-
-        // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_2);
-        }
-
-        // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_3);
-        }
-
-        // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_4);
-        }
-
         // Change Condition to all players
         if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
         {
