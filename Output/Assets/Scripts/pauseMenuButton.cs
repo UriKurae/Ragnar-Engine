@@ -34,7 +34,7 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstOScreenB = true;
 	bool isFirstOSoundB = true;
 	bool isFirstOControlsB = true;
-
+	float lastWindowW = 0;
 	GameObject optionsBack;
 	GameObject optionsBackImage;
 	GameObject optionsBackButton;
@@ -116,6 +116,27 @@ public class pauseMenuButton : RagnarComponent
 		MainMImage = GameObject.Find("MainMenuImage");
 		OptImage = GameObject.Find("optionsImage");
 		restartImage = GameObject.Find("restartImage");
+
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+		restart.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+		restartImage.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+		Resume.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+		ResumeImage.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
+		MainM.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
+		MainMImage.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 480, 36.1f);
+		Opt.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 480, 36.1f);
+		OptImage.GetComponent<Transform2D>().position2D = pos;
+
 		ImageHide();
 		RestartButtonHide();
 		ResumeButtonHide();
@@ -150,14 +171,14 @@ public class pauseMenuButton : RagnarComponent
         optionsFXcSound = GameObject.Find("optionsFXcSound");
         optionsMusicSound = GameObject.Find("optionsMusicSound");
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
-
+		lastWindowW = (InternalCalls.GetRegionGame().x / 2);
 		//optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
-		OptionsBackHide();
+
 		optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
 		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
 		//InternalCalls.SetFullScreen(true);
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
-
+		OptionsBackHide();
 		//////////////GAME//////////////
 		CharacterPhotoBord = GameObject.Find("Char");
 		Ability1 = GameObject.Find("ab1");
@@ -341,7 +362,8 @@ public class pauseMenuButton : RagnarComponent
 		////////////////////////////////////////////////
 		/// CONTROLS BUTTON
 		////////////////////////////////////////////////
-
+		float X = (InternalCalls.GetRegionGame().x / 2);
+		float sum = (lastWindowW - X) / 2;
 		int a = optionsControlsButton.GetComponent<UIButton>().GetButtonState();
 		switch (a)
 		{
@@ -353,16 +375,17 @@ public class pauseMenuButton : RagnarComponent
 				{
 					
 					isFirstOControlsB = false;
-					pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
-					optionsControlsButton.GetComponent<Transform2D>().position2D = pos;
-					bounds.Set(275, 58.5f, 0);
-					optionsControlsButton.GetComponent<Transform2D>().SetSize(bounds);
-
-					pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
-					optionsControlsImage.GetComponent<Transform2D>().position2D = pos;
-					bounds.Set(273.5f, 48, 0);
-					optionsControlsImage.GetComponent<Transform2D>().SetSize(bounds);
+					
 				}
+				pos.Set(X - 1217 + sum, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+				optionsControlsButton.GetComponent<Transform2D>().position2D = pos;
+				bounds.Set(275, 58.5f, 0);
+				optionsControlsButton.GetComponent<Transform2D>().SetSize(bounds);
+
+				pos.Set(X - 1217 + sum, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+				optionsControlsImage.GetComponent<Transform2D>().position2D = pos;
+				bounds.Set(273.5f, 48, 0);
+				optionsControlsImage.GetComponent<Transform2D>().SetSize(bounds);
 				// normal Mode
 				break;
 			case 2:
@@ -370,15 +393,15 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstOControlsB)
 				{					
 					isFirstOControlsB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+				pos.Set(X - 1237 + sum, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
 				optionsControlsButton.GetComponent<Transform2D>().position2D = pos;
 				bounds.Set(275 + 40, 58.5f, 0);
 				optionsControlsButton.GetComponent<Transform2D>().SetSize(bounds);
 
-				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
+				pos.Set(X - 1237 + sum, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
 				optionsControlsImage.GetComponent<Transform2D>().position2D = pos;
 				bounds.Set(273.5f + 40, 48, 0);
 				optionsControlsImage.GetComponent<Transform2D>().SetSize(bounds);
@@ -388,7 +411,7 @@ public class pauseMenuButton : RagnarComponent
 				actualOption = "Controls";
 
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 		////////////////////////////////////////////////
@@ -406,16 +429,17 @@ public class pauseMenuButton : RagnarComponent
 				{
 					
 					isFirstOSoundB = false;
-					pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
-					optionsSoundButton.GetComponent<Transform2D>().position2D = pos;
-					bounds.Set(275, 58.5f, 0);
-					optionsSoundButton.GetComponent<Transform2D>().SetSize(bounds);
-
-					pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
-					optionsSoundImage.GetComponent<Transform2D>().position2D = pos;
-					bounds.Set(273.5f, 48, 0);
-					optionsSoundImage.GetComponent<Transform2D>().SetSize(bounds);
+					
 				}
+				pos.Set(X - 1217 + sum, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+				optionsSoundButton.GetComponent<Transform2D>().position2D = pos;
+				bounds.Set(275, 58.5f, 0);
+				optionsSoundButton.GetComponent<Transform2D>().SetSize(bounds);
+
+				pos.Set(X - 1217 + sum, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+				optionsSoundImage.GetComponent<Transform2D>().position2D = pos;
+				bounds.Set(273.5f, 48, 0);
+				optionsSoundImage.GetComponent<Transform2D>().SetSize(bounds);
 				// normal Mode
 				break;
 			case 2:
@@ -423,15 +447,15 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstOSoundB)
 				{					
 					isFirstOSoundB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+				pos.Set(X - 1237 + sum, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
 				optionsSoundButton.GetComponent<Transform2D>().position2D = pos;
 				bounds.Set(275 + 40, 58.5f, 0);
 				optionsSoundButton.GetComponent<Transform2D>().SetSize(bounds);
 
-				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
+				pos.Set(X - 1237 + sum, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
 				optionsSoundImage.GetComponent<Transform2D>().position2D = pos;
 				bounds.Set(273.5f + 40, 48, 0);
 				optionsSoundImage.GetComponent<Transform2D>().SetSize(bounds);
@@ -441,7 +465,7 @@ public class pauseMenuButton : RagnarComponent
 				actualOption = "Sound";
 
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 
@@ -460,16 +484,17 @@ public class pauseMenuButton : RagnarComponent
 				{
 					
 					isFirstOScreenB = false;
-					pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
-					optionsScreenButton.GetComponent<Transform2D>().position2D = pos;
-                    bounds.Set(275, 58.5f, 0);
-                    optionsScreenButton.GetComponent<Transform2D>().SetSize(bounds);
-
-                    pos.Set(-257, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
-					optionsScreenImage.GetComponent<Transform2D>().position2D = pos;
-                    bounds.Set(273.5f, 48, 0);
-					optionsScreenImage.GetComponent<Transform2D>().SetSize(bounds);
+					
                 }
+				pos.Set(X - 1217 + sum, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+				optionsScreenButton.GetComponent<Transform2D>().position2D = pos;
+				bounds.Set(275, 58.5f, 0);
+				optionsScreenButton.GetComponent<Transform2D>().SetSize(bounds);
+
+				pos.Set(X - 1217 + sum, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+				optionsScreenImage.GetComponent<Transform2D>().position2D = pos;
+				bounds.Set(273.5f, 48, 0);
+				optionsScreenImage.GetComponent<Transform2D>().SetSize(bounds);
 				// normal Mode
 				break;
 			case 2:
@@ -477,15 +502,15 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstOScreenB)
 				{				
 					isFirstOScreenB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
-				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+				pos.Set(X - 1237 + sum, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
 				optionsScreenButton.GetComponent<Transform2D>().position2D = pos;
 				bounds.Set(275 + 40, 58.5f, 0);
 				optionsScreenButton.GetComponent<Transform2D>().SetSize(bounds);
 
-				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
+				pos.Set(X - 1237 + sum, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
 				optionsScreenImage.GetComponent<Transform2D>().position2D = pos;
 				bounds.Set(273.5f + 40, 48, 0);
 				optionsScreenImage.GetComponent<Transform2D>().SetSize(bounds);
@@ -495,7 +520,7 @@ public class pauseMenuButton : RagnarComponent
 				actualOption = "Screen";
 
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 
@@ -536,7 +561,7 @@ public class pauseMenuButton : RagnarComponent
 					optionsBackImage.GetComponent<Transform2D>().position2D = pos;
 
 					isFirstOBackB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 
@@ -554,7 +579,7 @@ public class pauseMenuButton : RagnarComponent
 				
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 	}
@@ -576,6 +601,7 @@ public class pauseMenuButton : RagnarComponent
 	{
 		float y = (InternalCalls.GetRegionGame().y / 2);
 		float x = (InternalCalls.GetRegionGame().x / 2);
+		float sum = (lastWindowW - x);
 		optionsScreenFSCH.isActive = true;
 		optionsScreenVSCH.isActive = true;
 		optionsScreenSDCH.isActive = true;
@@ -590,13 +616,9 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(40, 40, 0);
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
-		{
-			InternalCalls.SetFullScreen(false);
-        }else
-        {
-			InternalCalls.SetFullScreen(false);
-		}
-		
+			InternalCalls.SetFullScreen(true);        
+		else
+			InternalCalls.SetFullScreen(false);		
 
 		////////////////////////////////////////////////
 		/// V-SYNC CHECKBOX
@@ -632,7 +654,7 @@ public class pauseMenuButton : RagnarComponent
 			Light.shadowsEnabled = false;
 		}
 
-		pos.Set(0, y-230, 36.1f);
+		pos.Set(-sum + 20, y-230, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(x - 550, y - 500, 36.1f);
@@ -650,6 +672,7 @@ public class pauseMenuButton : RagnarComponent
 	{
 		float y = (InternalCalls.GetRegionGame().y / 2);
 		float x = (InternalCalls.GetRegionGame().x / 2);
+		float sum = (lastWindowW - x);
 		optionsSoundText.isActive = true;
 
         optionsVoicesSound.isActive = true;
@@ -658,7 +681,7 @@ public class pauseMenuButton : RagnarComponent
         optionsGeneralSound.isActive = true;
 
 
-        pos.Set(0, y-230 , 36.1f);
+        pos.Set(-sum + 20, y-230 , 36.1f);
 		optionsSoundText.GetComponent<Transform2D>().position2D = pos;
 
 		float generalSound;
@@ -943,10 +966,10 @@ public class pauseMenuButton : RagnarComponent
 				if (isFirstR)
 				{
 					isFirstR = false;
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, restart.GetComponent<Transform2D>().position2D.y, 36.1f);
 
 					restart.GetComponent<Transform2D>().position2D = pos;
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, restartImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 
 					restartImage.GetComponent<Transform2D>().position2D = pos;
 				}
@@ -957,13 +980,13 @@ public class pauseMenuButton : RagnarComponent
 				// focused mode
 				if (!isFirstR)
 				{
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					isFirstR = true;
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, restart.GetComponent<Transform2D>().position2D.y, 36.1f);
 
 					restart.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, restartImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 
 					restartImage.GetComponent<Transform2D>().position2D = pos;
 					//poner sonido
@@ -972,7 +995,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				if (SceneManager.currentSceneName == "build")
 				{
 					SceneManager.LoadScene("build");
@@ -1004,10 +1027,10 @@ public class pauseMenuButton : RagnarComponent
                 {
 					isFirstS = false;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, Resume.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Resume.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, ResumeImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					ResumeImage.GetComponent<Transform2D>().position2D = pos;
 				}
 				
@@ -1019,12 +1042,12 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstS)
 				{
 					isFirstS = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, Resume.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Resume.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, ResumeImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					ResumeImage.GetComponent<Transform2D>().position2D = pos;
 					//poner sonido
 				}
@@ -1035,7 +1058,7 @@ public class pauseMenuButton : RagnarComponent
 				isSowing = false;
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null)
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 				break;
@@ -1061,10 +1084,10 @@ public class pauseMenuButton : RagnarComponent
                 if (isFirstE)
                 {
 					isFirstE = false;
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, MainM.GetComponent<Transform2D>().position2D.y, 36.1f);
 					MainM.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, MainMImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					MainMImage.GetComponent<Transform2D>().position2D = pos;
 				}
 				
@@ -1075,12 +1098,12 @@ public class pauseMenuButton : RagnarComponent
 				// focused mode
 				if (!isFirstE)
 				{
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					isFirstE = true;
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, MainM.GetComponent<Transform2D>().position2D.y, 36.1f);
 					MainM.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, MainMImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					MainMImage.GetComponent<Transform2D>().position2D = pos;
 					//poner sonido
 				}
@@ -1088,7 +1111,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				SceneManager.LoadScene("MainMenu");
 				//cambiar de escena
 				break;
@@ -1114,10 +1137,10 @@ public class pauseMenuButton : RagnarComponent
 			case 1:
                 if (isFirstO)
                 {
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 480, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, Opt.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Opt.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 480, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, OptImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					OptImage.GetComponent<Transform2D>().position2D = pos;
 					isFirstO = false;
 				} 
@@ -1129,12 +1152,12 @@ public class pauseMenuButton : RagnarComponent
 				// focused mode
 				if (!isFirstO)
 				{
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					isFirstO = true;
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 480, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, Opt.GetComponent<Transform2D>().position2D.y, 36.1f);
 					Opt.GetComponent<Transform2D>().position2D = pos;
 
-					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, -(InternalCalls.GetRegionGame().y / 2) + 480, 36.1f);
+					pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 200, OptImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 					OptImage.GetComponent<Transform2D>().position2D = pos;
 					//poner sonido
 				}
@@ -1142,7 +1165,7 @@ public class pauseMenuButton : RagnarComponent
 				break;
 			case 3:
 				// pressed mode
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				isOptions = true;
 				isSowing = false;
 				//cambiar de escena
@@ -1231,7 +1254,7 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstA1)
 				{
 					isFirstA1 = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				CharFocusedImage.isActive = true;
@@ -1295,7 +1318,7 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstA2)
 				{
 					isFirstA2 = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				CharFocusedImage.isActive = true;
@@ -1357,7 +1380,7 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstA3)
 				{
 					isFirstA3 = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				CharFocusedImage.isActive = true;
@@ -1418,7 +1441,7 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstA4)
 				{
 					isFirstA4 = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				CharFocusedImage.isActive = true;
@@ -1479,7 +1502,7 @@ public class pauseMenuButton : RagnarComponent
 				if (!isFirstA5)
 				{
 					isFirstA5 = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				CharFocusedImage.isActive = true;

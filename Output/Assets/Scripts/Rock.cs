@@ -63,7 +63,7 @@ public class Rock : RagnarComponent
 	{
 		if (other.gameObject.tag == "Ground" && !hitOnce)
         {
-			gameObject.GetComponent<AudioSource>().PlayClip("WEAPONROCKHITGROUND");
+			gameObject.GetComponent<AudioSource>().PlayClip("BG_SANDHITROCK");
 			hitOnce = true;
 		}
 

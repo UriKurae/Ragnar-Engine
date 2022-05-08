@@ -9,6 +9,7 @@ public class BasicEnemy : RagnarComponent
     public GameObject[] waypoints;
     private int destPoint = 0;
     public EnemyState state;
+    public EnemyType enemyType;
 
     // States
     public bool patrol;
@@ -48,6 +49,7 @@ public class BasicEnemy : RagnarComponent
     private float angleOffset = 0;
 
     GameObject[] childs;
+    ParticleSystem stunPartSys;
 
     public void Start()
     {
@@ -70,6 +72,17 @@ public class BasicEnemy : RagnarComponent
         initialSpeed = agents.speed;
 
         childs = gameObject.childs;
+
+        for (int i = 0; i < childs.Length; ++i)
+        {
+            if (childs[i].name == "StunParticles")
+            {
+                stunPartSys = childs[i].GetComponent<ParticleSystem>();
+                break;
+            }
+        }
+
+        stunPartSys.Pause();
     }
 
     public void Update()
@@ -103,7 +116,6 @@ public class BasicEnemy : RagnarComponent
                     deathTimer -= Time.deltaTime;
                     if (deathTimer < 0)
                     {
-                        gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
                         deathTimer = -1f;
                         pendingToDelete = true;
                     }
@@ -114,6 +126,7 @@ public class BasicEnemy : RagnarComponent
                     stunnedTimer -= Time.deltaTime;
                     if (stunnedTimer < 0)
                     {
+                        stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
                     }
@@ -172,30 +185,41 @@ public class BasicEnemy : RagnarComponent
     {
         if (state != EnemyState.DEATH)
         {
+            //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")
             {
-                deathTimer = 4f;
-                for (int i = 0; i < childs.Length; ++i)
+                if (deathTimer == -1f)
                 {
-                    if (childs[i].name == "KnifeParticles")
+                    deathTimer = 4f;
+                    for (int i = 0; i < childs.Length; ++i)
                     {
-                        childs[i].GetComponent<ParticleSystem>().Play();
-                        break;
+                        if (childs[i].name == "KnifeParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
                     }
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
+                    deathTimer = 2f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                deathTimer = 5f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    deathTimer = 5f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
 
                 // WHEN RUNES FUNCTIONAL
                 // EXPLOSION AREA
@@ -227,13 +251,16 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
+                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                 Stun(5f);
+                stunPartSys.Play();
             }
 
 
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_SWORDHIT");
                 deathTimer = 2f;
                 for (int i = 0; i < childs.Length; ++i)
                 {
@@ -258,8 +285,10 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
+                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
+                stunPartSys.Play();
             }
         }
     }
@@ -314,7 +343,7 @@ public class BasicEnemy : RagnarComponent
         if (canShoot)
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
+            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 1f;
             InternalCalls.InstancePrefab("EnemyBullet", true);
@@ -349,7 +378,7 @@ public class BasicEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;
@@ -366,7 +395,7 @@ public class BasicEnemy : RagnarComponent
         {
             if (stoppedTime >= 0)
             {
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("EBASIC_WALKSAND");
                 stoppedTime -= Time.deltaTime;
                 if (stoppedTime < 0)
                 {

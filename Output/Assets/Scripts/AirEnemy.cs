@@ -9,6 +9,7 @@ public class AirEnemy : RagnarComponent
     public GameObject[] waypoints;
     private int destPoint = 0;
     public EnemyState state;
+    public EnemyType enemyType;
 
     // States
     public bool patrol;
@@ -38,6 +39,9 @@ public class AirEnemy : RagnarComponent
     float distractedTimer = -1f;
     bool stunned = false;
     float stunnedTimer = -1f;
+
+    GameObject[] childs;
+    ParticleSystem deathPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -57,6 +61,17 @@ public class AirEnemy : RagnarComponent
         }
 
         initialSpeed = agents.speed;
+
+        childs = gameObject.childs;
+
+        for (int i = 0; i < childs.Length; ++i)
+        {
+            if (childs[i].name == "DronDestParticles")
+            {
+                deathPartSys = childs[i].GetComponent<ParticleSystem>();
+                break;
+            }
+        }
     }
 
     public void Update()
@@ -91,7 +106,7 @@ public class AirEnemy : RagnarComponent
                 deathTimer -= Time.deltaTime;
                 if (deathTimer < 0)
                 {
-                    gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1DEATH");
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_DESTROYED");
                     deathTimer = -1f;
                     pendingToDelete = true;
                 }
@@ -125,16 +140,26 @@ public class AirEnemy : RagnarComponent
         {
             if (other.gameObject.name == "Knife")
             {
-                deathTimer = 4f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
+                    deathTimer = 4f;
+                    deathPartSys.Play();
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
 
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
+                    deathTimer = 2f;
+                    deathPartSys.Play();
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
@@ -152,9 +177,14 @@ public class AirEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "Trap")
             {
-                pendingToDelete = true;
-                GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (pendingToDelete == false)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
+                    pendingToDelete = true;
+                    deathPartSys.Play();
+                    GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
         }
     }
@@ -177,7 +207,7 @@ public class AirEnemy : RagnarComponent
         if (canShoot)
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("ENEMY1SHOOT");
+            gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_SHOOT");
             canShoot = false;
             shootCooldown = 4f;
             //GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", true);
@@ -217,7 +247,7 @@ public class AirEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+        //gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_FLYING");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;
@@ -234,7 +264,7 @@ public class AirEnemy : RagnarComponent
         {
             if (stoppedTime >= 0)
             {
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("EDRONE_FLYING");
                 stoppedTime -= Time.deltaTime;
                 if (stoppedTime < 0)
                 {

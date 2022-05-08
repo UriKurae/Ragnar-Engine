@@ -11,9 +11,11 @@ public class SpiceGranade : RagnarComponent
 	private Vector3 relativePos;
 
 	public bool pendingToDelete = false;
+    private GameObject sceneAudio;
 	public void Start()
 	{
 		goRB = gameObject.GetComponent<Rigidbody>();
+        sceneAudio = GameObject.Find("AudioLevel1");
 		AimMethod();
 	}
 	public void Update()
@@ -54,6 +56,8 @@ public class SpiceGranade : RagnarComponent
 	}
 	public void OnCollisionEnter(Rigidbody other)
 	{
+        sceneAudio.GetComponent<AudioSource>().PlayClip("SMOKEGRENADE_EXPLOSION");
+
 		goRB.SetAsStatic();
 		
 		gameObject.GetComponent<ParticleSystem>().Play();
