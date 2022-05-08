@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="87917746" Language="SFX" Hash="586862394">
+		<SoundBank Id="87917746" Language="SFX" Hash="1970243560">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine</ObjectPath>
 			<ShortName>ragnarEngine</ShortName>
 			<Path>ragnarEngine.bnk</Path>
@@ -421,7 +421,7 @@
 					<IncludedMemoryFiles>
 						<File Id="292959931" Language="SFX">
 							<ShortName>char_paul_walk_sand.wav</ShortName>
-							<Path>SFX\char_paul_walk_sand_D79FB2B7.wem</Path>
+							<Path>SFX\char_paul_walk_sand_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
