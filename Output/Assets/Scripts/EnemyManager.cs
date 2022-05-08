@@ -82,12 +82,16 @@ public class EnemyManager : RagnarComponent
                             enemyGOs[i].ChangeMesh("enemy4_modeldeath");
                             break;
                         case EnemyType.TANK:
-                            enemyGOs[i].ChangeMesh("enemy2_modeldeath");
-                            break;
-                        case EnemyType.UNDISTRACTABLE:
                             enemyGOs[i].ChangeMesh("enemy3_modeldeath");
                             break;
+                        case EnemyType.UNDISTRACTABLE:
+                            enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                            break;
                     };
+
+                    GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
+                    sound.GetComponent<Transform>().globalPosition = enemyGOs[i].GetComponent<Transform>().globalPosition;
 
                     ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                     enemies[i].state = EnemyState.DEATH;

@@ -52,6 +52,9 @@ namespace RagnarEngine
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void SetBodyRotation(Quaternion rotation);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern void SetRadiusSphere(float rad);
+
         public void IgnoreCollision(GameObject other, bool value)
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
