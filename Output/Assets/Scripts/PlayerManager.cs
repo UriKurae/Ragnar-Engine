@@ -13,7 +13,6 @@ public class PlayerManager : RagnarComponent
     GameObject[] area = null;
     GameObject lightHab = null;
     public bool drawnArea = false;
-    bool crouched = false;
     DialogueManager dialogue;
 
     public void Start()
@@ -70,16 +69,11 @@ public class PlayerManager : RagnarComponent
         }
         if (!dialogue.GetInDialogue())
         {
-            if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
-            {
-                crouched = !crouched;
-            }
-
             PlayerCases();
 
-            /*Cambiador de estados para saber qu� habilidad est�s o no casteando (B�sicamente hace que el personaje entre en un estado donde si clickas una tecla
+            /*Cambiador de estados para saber que habilidad estas o no casteando (Basicamente hace que el personaje entre en un estado donde si clickas una tecla
             muestre el rango de habilidad, y entre en un estado de castear o cancelar la habilidad seleccionada (Click derecho cancel/click izquierdo casteo)).
-            Aqu� deber�a ir la zona de rango de cada habilidad.*/
+            Aqui deberia ir la zona de rango de cada habilidad.*/
             AbilityStateChanger();
 
             /*Contador de cooldown para cada habilidad
@@ -107,83 +101,85 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
+        if (playableCharacter.pickedEnemy == null)
         {
-            SpawnArea((int)State.ABILITY_1);
-        }
-
-        // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_2);
-        }
-
-        // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_3);
-        }
-
-        // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
-        if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
-        {
-            SpawnArea((int)State.ABILITY_4);
-        }
-
-        // Change Condition to all players
-        if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
-        {
-            float radius = 0f;
-            if (playableCharacter == characters[0]) radius = 11.5f;
-            if (playableCharacter == characters[1]) radius = 12.7f;
-
-            lightHab.GetComponent<Light>().intensity = 6;
-
-            Vector3 hit;
-            if (SceneManager.currentSceneName == "build")
-                hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
-            else if (SceneManager.currentSceneName == "build2")
-                hit = GameObject.Find("LevelManager").GetComponent<Level_2>().hitPoint;
-            else
-                hit = GameObject.Find("LevelManager").GetComponent<Level_3>().hitPoint;
-
-            if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
+            // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
+            if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
             {
-                hit.y += 0.2f;
-                lightHab.transform.globalPosition = hit;
+                SpawnArea(State.ABILITY_1);
             }
-            else
+
+            // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
+            if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
             {
-                // No BORRAR
-                //Vector3 a = players[characterSelected].transform.globalPosition;
-                //Vector3 b = (hit - a).normalized * 11.5f + a;
-                //b.y = lightHab.transform.globalPosition.y;
-                //lightHab.transform.globalPosition = b;
+                SpawnArea(State.ABILITY_2);
+            }
+
+            // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
+            if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
+            {
+                SpawnArea(State.ABILITY_3);
+            }
+
+            // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
+            if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
+            {
+                SpawnArea(State.ABILITY_4);
+            }
+
+            // Change Condition to all players
+            if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
+            {
+                float radius = 0f;
+                if (playableCharacter == characters[0]) radius = 11.5f;
+                if (playableCharacter == characters[1]) radius = 12.7f;
+
+                lightHab.GetComponent<Light>().intensity = 6;
+
+                Vector3 hit;
+                if (SceneManager.currentSceneName == "build")
+                    hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
+                else if (SceneManager.currentSceneName == "build2")
+                    hit = GameObject.Find("LevelManager").GetComponent<Level_2>().hitPoint;
+                else
+                    hit = GameObject.Find("LevelManager").GetComponent<Level_3>().hitPoint;
+                    
+                if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
+                {
+                    hit.y += 0.2f;
+                    lightHab.transform.globalPosition = hit;
+                }
+                else
+                {
+                    // No BORRAR
+                    //Vector3 a = players[characterSelected].transform.globalPosition;
+                    //Vector3 b = (hit - a).normalized * 11.5f + a;
+                    //b.y = lightHab.transform.globalPosition.y;
+                    //lightHab.transform.globalPosition = b;
+                }
             }
         }
+            // LETRA B --> ARRASTRAR CUERPOS
+            if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
+            {
+                //SpawnArea((int)State.CARRYING);
+                playableCharacter.state = State.CARRYING;
+                players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+            }
 
-        // LETRA B --> ARRASTRAR CUERPOS
-        if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
-        {
-            //SpawnArea((int)State.CARRYING);
-            playableCharacter.state = State.CARRYING;
-            players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
-        }
-
-        // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
-        if (playableCharacter.state != State.NONE) CastOrCancel();
+            // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
+            if (playableCharacter.state != State.NONE) CastOrCancel();
     }
 
-    private void SpawnArea(int ability)
+    private void SpawnArea(State ability)
     {
         // Comprobador de cargas de habilidad. Si entra aqu�, significa que la habilidad no tiene cargas
-        if (playableCharacter.abilities[ability - 1].charges == 0)
+        if (playableCharacter.abilities[(int)ability - 1].charges == 0)
         {
             playableCharacter.state = State.NONE;
         }
         // Entra aqu� si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
-        else if (!playableCharacter.abilities[ability - 1].onCooldown)
+        else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
             playableCharacter.state = (State)ability;
 
@@ -191,7 +187,7 @@ public class PlayerManager : RagnarComponent
             if (!drawnArea)
             {
                 drawnArea = true;
-                DrawArea(ability);
+                DrawArea((int)ability);
             }
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
@@ -199,7 +195,7 @@ public class PlayerManager : RagnarComponent
         // Si la habilidad est� en cooldown y tiene cargas, entrar� aqu� y pondr� el state del player en NONE.
         else
         {
-            //Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
+            //Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[(int)ability - 1].cooldown - playableCharacter.abilities[(int)ability - 1].counter) + "seconds left to use it again!");
             playableCharacter.state = State.NONE;
         }
     }
@@ -217,16 +213,23 @@ public class PlayerManager : RagnarComponent
     {
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
-            if (crouched)
+            switch (players[characterSelected].GetComponent<Player>().GetAction())
             {
-                players[characterSelected].GetComponent<Animation>().PlayAnimation("CrouchShoot");
-            }
-            else
-            {
-                players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
-            }
+                //NONE
+                case 0:
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
+                    break;
+                //CROUCH
+                case 1:
+                    players[characterSelected].GetComponent<Animation>().PlayAnimation("CrouchShoot");
+                    break;
+                //CARRY
+                case 2:
+                    break;
+            };
 
-            switch(playableCharacter.state)
+            GameObject obj = null;
+            switch (playableCharacter.state)
             {
                 case State.ABILITY_1:
                     {
@@ -295,10 +298,11 @@ public class PlayerManager : RagnarComponent
                     }
                 case State.CARRYING:
                     {
-                        if (playableCharacter.pickedEnemy != null)
+                        if (playableCharacter.pickedEnemy != null && players[characterSelected].GetComponent<Player>().GetAction() == 2)
                         {
                             GameObject.ReparentToRoot(playableCharacter.pickedEnemy);
 
+                            players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
                             playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
 
                             //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
@@ -307,7 +311,7 @@ public class PlayerManager : RagnarComponent
                         else
                         {
                             NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
-                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+                            obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
                             if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
@@ -318,11 +322,11 @@ public class PlayerManager : RagnarComponent
                                     {
                                         players[characterSelected].AddChild(obj);
 
-                                        //setear position, animation, whatever de obj
-                                        obj.transform.localPosition = new Vector3(0,2,0);
+                                        obj.transform.localPosition = new Vector3(0, 2, 0);
+                                        players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+                                        playableCharacter.pickedEnemy = obj;
 
                                         //Debug.Log("Carrying the corpse of" + obj.name.ToString());
-                                        playableCharacter.pickedEnemy = obj;
                                         break;
                                     }
                                 }
@@ -347,16 +351,30 @@ public class PlayerManager : RagnarComponent
 
                 // Pone la habilidad en cooldown y el player en estado de NONE
                 playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
+                playableCharacter.state = State.NONE;
+
+                // Se cambia el estado a POSTCAST para evitar que se mueva directamente despu�s de castear la habilidad. En el update de los players se cambiar� a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
+                players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
+
+                area[characterSelected].GetComponent<Light>().intensity = 0f;
+                lightHab.GetComponent<Light>().intensity = 0f;
+                drawnArea = false;
             }
-            playableCharacter.state = State.NONE;
+            else if (playableCharacter.state == State.CARRYING)
+            {
+                if (players[characterSelected].GetComponent<Animation>().HasFinished())
+                {
+                    playableCharacter.state = State.NONE;
+                    players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
-            // Se cambia el estado a POSTCAST para evitar que se mueva directamente despu�s de castear la habilidad. En el update de los players se cambiar� a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
-            players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
-
-            area[characterSelected].GetComponent<Light>().intensity = 0f;
-            lightHab.GetComponent<Light>().intensity = 0f;
-            drawnArea = false;
+                    if (playableCharacter.pickedEnemy != null)
+                        players[characterSelected].GetComponent<Player>().SetAction(2);
+                    else
+                        players[characterSelected].GetComponent<Player>().SetAction(0);
+                }
+            }
         }
+
         // Se cancela el estado de la habilidad para que el �rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
