@@ -38,6 +38,9 @@ public class AirEnemy : RagnarComponent
     float distractedTimer = -1f;
     bool stunned = false;
     float stunnedTimer = -1f;
+
+    GameObject[] childs;
+    ParticleSystem deathPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -57,6 +60,17 @@ public class AirEnemy : RagnarComponent
         }
 
         initialSpeed = agents.speed;
+
+        childs = gameObject.childs;
+
+        for (int i = 0; i < childs.Length; ++i)
+        {
+            if (childs[i].name == "DronDestParticles")
+            {
+                deathPartSys = childs[i].GetComponent<ParticleSystem>();
+                break;
+            }
+        }
     }
 
     public void Update()
@@ -123,12 +137,13 @@ public class AirEnemy : RagnarComponent
     {
         if (state != EnemyState.DEATH)
         {
-            gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
             if (other.gameObject.name == "Knife")
             {
                 if (deathTimer == -1f)
                 {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
                     deathTimer = 4f;
+                    deathPartSys.Play();
                     gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
 
@@ -139,7 +154,9 @@ public class AirEnemy : RagnarComponent
             {
                 if (deathTimer == -1f)
                 {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
                     deathTimer = 2f;
+                    deathPartSys.Play();
                     gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
             }
@@ -161,7 +178,9 @@ public class AirEnemy : RagnarComponent
             {
                 if (pendingToDelete == false)
                 {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_GETDAMAGE");
                     pendingToDelete = true;
+                    deathPartSys.Play();
                     GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                     gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
@@ -227,7 +246,7 @@ public class AirEnemy : RagnarComponent
 
     public void GotoNextPoint()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_FLYING");
+        //gameObject.GetComponent<AudioSource>().PlayClip("EDRONE_FLYING");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;
