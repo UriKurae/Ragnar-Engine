@@ -15,6 +15,7 @@ public class BasicEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
+    public bool backstab = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -147,9 +148,27 @@ public class BasicEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
                     agents.CalculatePath(agents.hitPosition);
-
                 }
                 agents.MovePath();
+                if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
+                {
+                    backstab = true;
+                    //area de luz
+                }
+                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
+                {
+                    Debug.Log("BackStab enemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    backstab = false;
+                }
+                if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
+                {
+                    backstab = false;
+                }
+                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_UP || Input.GetKey(KeyCode.F2) == KeyState.KEY_UP || Input.GetKey(KeyCode.F3) == KeyState.KEY_UP)
+                {
+                    controlled = false;
+                }
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
@@ -159,6 +178,11 @@ public class BasicEnemy : RagnarComponent
                     agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
                 }
 
+            }
+
+            if(Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
+            {
+                controlled = false;
             }
         }
     }
@@ -327,7 +351,7 @@ public class BasicEnemy : RagnarComponent
             //TODO_AUDIO
             gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
-            shootCooldown = 4f;
+            shootCooldown = 1f;
             InternalCalls.InstancePrefab("EnemyBullet", true);
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
             GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
