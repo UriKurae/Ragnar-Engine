@@ -30,8 +30,17 @@ public class Rock : RagnarComponent
 		goRB.SetBodyPosition(pos);
 		gameObject.transform.globalPosition = pos;
 
+		float radius = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().radius;
 		Vector3 hitPoint = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
 		relativePos = hitPoint - pos;
+		if (relativePos.magnitude > radius)
+        {
+			relativePos.y = hitPoint.y;
+			pos.y -= 1.5f;
+			Vector3 newPos = pos + relativePos.normalized * radius;
+			pos.y += 1.5f;
+			relativePos = newPos - pos;
+        }
 
 		goRB.IgnoreCollision(player, true);
 	}

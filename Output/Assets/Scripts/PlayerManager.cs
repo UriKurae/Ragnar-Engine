@@ -16,6 +16,7 @@ public class PlayerManager : RagnarComponent
     bool crouched = false;
     DialogueManager dialogue;
 
+    public float radius;
     public void Start()
 	{
         foreach (Characters c in characters)
@@ -134,9 +135,9 @@ public class PlayerManager : RagnarComponent
         // Change Condition to all players
         if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
         {
-            float radius = 0f;
+            radius = 0f;
             if (playableCharacter == characters[0]) radius = 11.5f;
-            if (playableCharacter == characters[1]) radius = 12.7f;
+            else if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
             Vector3 hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
