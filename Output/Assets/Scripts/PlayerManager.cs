@@ -239,7 +239,7 @@ public class PlayerManager : RagnarComponent
                     {
                         if (playableCharacter == characters[0])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBOSS_THROWOBJECT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                         }
                         else if (playableCharacter == characters[1])
                         {
@@ -263,7 +263,7 @@ public class PlayerManager : RagnarComponent
                         }
                         else if (playableCharacter == characters[2])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_TRAPACTIVE");
                         }
                         break;
                     }
@@ -279,7 +279,7 @@ public class PlayerManager : RagnarComponent
                         }
                         else if (playableCharacter == characters[2])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_STUNNERGUNSHOT");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_WHISTLE");
                         }
                         break;
                     }
