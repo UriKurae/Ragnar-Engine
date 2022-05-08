@@ -8,8 +8,10 @@ public class SpiceGranade : RagnarComponent
 	public float explosionRadius = 6f;
 	private float cooldown = 0f;
 	public bool pendingToDelete = false;
+    private GameObject sceneAudio;
 	public void Start()
 	{
+        sceneAudio = GameObject.Find("AudioLevel1");
 		AimMethod();
 	}
 	public void Update()
@@ -46,6 +48,8 @@ public class SpiceGranade : RagnarComponent
 	}
 	public void OnCollisionEnter(Rigidbody other)
 	{
+        sceneAudio.GetComponent<AudioSource>().PlayClip("SMOKEGRENADE_EXPLOSION");
+
 		goRB.SetAsStatic();
 		
 		gameObject.GetComponent<ParticleSystem>().Play();

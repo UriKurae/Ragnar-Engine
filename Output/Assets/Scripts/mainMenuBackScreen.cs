@@ -173,7 +173,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // focused mode
                     if (isFirstCont)
                     {
-                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
                         pos.Set(continueB.GetComponent<Transform2D>().position2D.x + 20, continueB.GetComponent<Transform2D>().position2D.y, 36.1f);
                         continueB.GetComponent<Transform2D>().position2D = pos;
 
@@ -186,7 +186,7 @@ public class mainMenuBackScreen : RagnarComponent
                     break;
                 case 3:
                     // pressed mode
-                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 
 
 					//cambiar de escena
@@ -229,7 +229,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // focused mode
                     if (isFirstOp)
                     {
-                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
                         pos.Set(options.GetComponent<Transform2D>().position2D.x + 20, options.GetComponent<Transform2D>().position2D.y, 36.1f);
                         options.GetComponent<Transform2D>().position2D = pos;
 
@@ -242,7 +242,7 @@ public class mainMenuBackScreen : RagnarComponent
                     break;
                 case 3:
                     // pressed mode
-                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
                     isOptions = true;
 
                     //cambiar de escena
@@ -284,7 +284,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // focused mode
                     if (isFirstCre)
                     {
-                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
                         pos.Set(credits.GetComponent<Transform2D>().position2D.x + 20, credits.GetComponent<Transform2D>().position2D.y, 36.1f);
                         credits.GetComponent<Transform2D>().position2D = pos;
 
@@ -297,7 +297,7 @@ public class mainMenuBackScreen : RagnarComponent
                     break;
                 case 3:
                     // pressed mode
-                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 
                     SceneManager.LoadScene("Credits");
                     //cambiar de escena
@@ -340,7 +340,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // focused mode
                     if (isFirstS)
                     {
-                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
                         pos.Set(start.GetComponent<Transform2D>().position2D.x + 20, start.GetComponent<Transform2D>().position2D.y, 36.1f);
                         start.GetComponent<Transform2D>().position2D = pos;
 
@@ -353,7 +353,7 @@ public class mainMenuBackScreen : RagnarComponent
                     break;
                 case 3:
                     // pressed mode
-                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 
 					SaveSystem.fromContinue = false;
                     SceneManager.LoadScene("build");
@@ -398,7 +398,7 @@ public class mainMenuBackScreen : RagnarComponent
                     // focused mode
                     if (isFirstE)
                     {
-                        SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+                        SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
                         pos.Set(exit.GetComponent<Transform2D>().position2D.x + 20, exit.GetComponent<Transform2D>().position2D.y, 36.1f);
                         exit.GetComponent<Transform2D>().position2D = pos;
 
@@ -411,7 +411,7 @@ public class mainMenuBackScreen : RagnarComponent
                     break;
                 case 3:
                     // pressed mode
-                    SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+                    SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 
                     SceneManager.Exit();
                     //salir del Juego
@@ -584,7 +584,7 @@ public class mainMenuBackScreen : RagnarComponent
 				if (!isFirstOControlsB)
 				{
 					isFirstOControlsB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 380, -10.4f);
@@ -602,7 +602,7 @@ public class mainMenuBackScreen : RagnarComponent
 				actualOption = "Controls";
 
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 		////////////////////////////////////////////////
@@ -637,7 +637,7 @@ public class mainMenuBackScreen : RagnarComponent
 				if (!isFirstOSoundB)
 				{
 					isFirstOSoundB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 280, -10.4f);
@@ -655,7 +655,7 @@ public class mainMenuBackScreen : RagnarComponent
 				actualOption = "Sound";
 
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 
@@ -691,7 +691,7 @@ public class mainMenuBackScreen : RagnarComponent
 				if (!isFirstOScreenB)
 				{
 					isFirstOScreenB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 				pos.Set(-277, (InternalCalls.GetRegionGame().y / 2) - 180, -10.4f);
@@ -709,7 +709,7 @@ public class mainMenuBackScreen : RagnarComponent
 				actualOption = "Screen";
 
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 
@@ -750,7 +750,7 @@ public class mainMenuBackScreen : RagnarComponent
 					optionsBackImage.GetComponent<Transform2D>().position2D = pos;
 
 					isFirstOBackB = true;
-					SceneAudio.GetComponent<AudioSource>().PlayClip("UIHOVER");
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 					//poner sonido
 				}
 
@@ -768,7 +768,7 @@ public class mainMenuBackScreen : RagnarComponent
 
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
-				SceneAudio.GetComponent<AudioSource>().PlayClip("UISELECT");
+				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 				break;
 		}
 	}
