@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 174539032,
+                    "pointer": 173435824,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -3234,7 +3234,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -3303,7 +3303,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -7737,7 +7737,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 442907784,
+                    "pointer": 422450048,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8181,7 +8181,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 442909368,
+                    "pointer": 435979648,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8257,7 +8257,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 442909512,
+                    "pointer": 435980512,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9175,7 +9175,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 464559144,
+                    "pointer": 435987280,
                     "type": 4,
                     "componentTable": 0
                 }
