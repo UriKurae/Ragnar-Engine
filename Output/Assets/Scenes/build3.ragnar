@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 542486088,
+                    "pointer": 422539048,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1170,7 +1170,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.8197708129882813,
+                        1.8197708129882812,
                         5.2899999618530273,
                         -4.1131281852722168
                     ],
@@ -1353,20 +1353,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -5.4975085258483887,
+                        20,
                         0,
-                        17.968986511230469
+                        14.61668586730957
                     ],
                     "Quaternion": [
                         0,
-                        0.96303534507751465,
+                        0.084157615900039673,
                         0,
-                        0.2693750262260437
+                        -0.9964524507522583
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        0.54548805952072144,
-                        -3.1415927410125732
+                        -0,
+                        -0.16851454973220825,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -1416,12 +1416,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.43355777859687805,
+                    "Vertical Fov": 0.48193970322608948,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -31.439956665039063,
+                        28.386127471923828,
                         55,
-                        60.713813781738281
+                        -34.676361083984375
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -1430,14 +1430,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -5.4975085258483887,
+                        20,
                         0,
-                        17.968986511230469
+                        14.61668586730957
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 148.74583435058594,
+                    "Horizontal Angle": 350.34481811523438,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1571,13 +1571,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 542485800,
+                    "pointer": 422536888,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 237579608,
+                    "barrelLocations": 173354552,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -1736,7 +1736,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 542486520,
+                    "pointer": 422539480,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1774,8 +1774,8 @@
                     ],
                     "buttonWidth": 914,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1838,8 +1838,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1907,8 +1907,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1976,8 +1976,8 @@
                     ],
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3416,8 +3416,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3480,8 +3480,8 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3544,8 +3544,8 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3675,8 +3675,8 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3739,8 +3739,8 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3870,8 +3870,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4001,8 +4001,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4065,8 +4065,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4196,8 +4196,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4260,8 +4260,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4391,8 +4391,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4455,8 +4455,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4539,8 +4539,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4623,8 +4623,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4707,8 +4707,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4776,8 +4776,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4845,8 +4845,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4870,8 +4870,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4954,8 +4954,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -4979,8 +4979,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5063,8 +5063,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5088,8 +5088,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5172,8 +5172,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5197,8 +5197,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5281,8 +5281,8 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5472,8 +5472,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5541,8 +5541,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5605,8 +5605,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5669,8 +5669,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5733,8 +5733,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5864,8 +5864,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5995,8 +5995,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6126,8 +6126,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6257,8 +6257,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6388,8 +6388,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6452,8 +6452,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6516,8 +6516,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6580,8 +6580,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6644,8 +6644,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6708,8 +6708,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6772,8 +6772,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6836,8 +6836,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6900,8 +6900,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -6964,8 +6964,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7033,8 +7033,8 @@
                     ],
                     "buttonWidth": 70,
                     "buttonHeight": 70,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7097,8 +7097,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7161,8 +7161,8 @@
                     ],
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7331,8 +7331,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7364,7 +7364,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 552903424,
+                    "pointer": 369477008,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7402,8 +7402,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -7533,8 +7533,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -7664,8 +7664,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -7795,8 +7795,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -7859,8 +7859,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -7923,8 +7923,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -7987,8 +7987,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8118,8 +8118,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1265,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8342,6 +8342,1414 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/Resources\/preclick_non__pTorus2.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1005805494,
+            "Parent UUID": 417171234,
+            "Name": "Enemies",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Enemies 3.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1598628309,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_15_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -16.930683135986328,
+                        26.21159553527832,
+                        -46.176548004150391
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.72671985626220703,
+                        0,
+                        0.68693405389785767
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2035291221,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_14_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        16.180088043212891,
+                        26.21159553527832,
+                        -46.176548004150391
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.6979023814201355,
+                        0,
+                        0.71619290113449097
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 337211129,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_13",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        22.4940185546875,
+                        26.21159553527832,
+                        -15.386799812316895
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.6979023814201355,
+                        0,
+                        0.71619290113449097
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 760994156,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_12",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -25.12000846862793,
+                        26.21159553527832,
+                        -15.386799812316895
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.70539861917495728,
+                        0,
+                        0.70881086587905884
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1216802843,
+            "Parent UUID": 1005805494,
+            "Name": "undistractable_enemy_3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.17625357210636139,
+                        26.21159553527832,
+                        -33.955524444580078
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.022704945877194405,
+                        0,
+                        0.99974220991134644
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1626940154,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_11_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -12.744681358337402,
+                        26.21159553527832,
+                        -25
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.022801481187343597,
+                        0,
+                        0.99974000453948975
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2055596651,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_10_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        12.618226051330566,
+                        26.21159553527832,
+                        -25
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.022801481187343597,
+                        0,
+                        0.99974000453948975
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 338927752,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_9_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        1.9759860038757324,
+                        26.21159553527832,
+                        40.203456878662109
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.72747451066970825,
+                        0,
+                        0.6861346960067749
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 724558471,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_8_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        4.2538547515869141,
+                        26.21159553527832,
+                        37.674373626708984
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.72747451066970825,
+                        0,
+                        0.6861346960067749
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1144721206,
+            "Parent UUID": 1005805494,
+            "Name": "tank_enemy_3_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -5.7300271987915039,
+                        26.21159553527832,
+                        75.148574829101562
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.034729562699794769,
+                        0,
+                        0.99939674139022827
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1577276479,
+            "Parent UUID": 1005805494,
+            "Name": "undistractable_enemy_2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -4.1393375396728516,
+                        26.21159553527832,
+                        28.782032012939453
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.066642060875892639,
+                        0,
+                        0.99777698516845703
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2025078751,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_7",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -2.3798537254333496,
+                        26.21159553527832,
+                        50.990745544433594
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.67579740285873413,
+                        0,
+                        0.7370874285697937
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 275339877,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.8028116226196289,
+                        26.21159553527832,
+                        60.8525390625
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.45830801129341125,
+                        0,
+                        0.88879340887069702
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 727389030,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        10.76373291015625,
+                        26.21159553527832,
+                        73.729415893554688
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.57865959405899048,
+                        0,
+                        0.81556916236877441
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1161684828,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        7.8201684951782227,
+                        26.21159553527832,
+                        89.734771728515625
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.68695187568664551,
+                        0,
+                        0.72670292854309082
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1618398588,
+            "Parent UUID": 1005805494,
+            "Name": "undistractable_enemy_1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        22.732639312744141,
+                        17.77070426940918,
+                        35.352313995361328
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.14470794796943665,
+                        0,
+                        0.98947441577911377
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2037725871,
+            "Parent UUID": 1005805494,
+            "Name": "tank_enemy_2_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        25.070199966430664,
+                        17.77070426940918,
+                        45.171516418457031
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.025741452351212502,
+                        0,
+                        0.9996686577796936
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 312493589,
+            "Parent UUID": 1005805494,
+            "Name": "tank_enemy_1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        24.583974838256836,
+                        17.77070426940918,
+                        89.611442565917969
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.14156299829483032,
+                        0,
+                        0.98992925882339478
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 840916979,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_3_patrol",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        23.173686981201172,
+                        17.77070426940918,
+                        105.92746734619141
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.71077477931976318,
+                        0,
+                        0.70341974496841431
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1244161811,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        22.730918884277344,
+                        17.77070426940918,
+                        92.012306213378906
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.44101858139038086,
+                        0,
+                        0.89749795198440552
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1627495037,
+            "Parent UUID": 1005805494,
+            "Name": "basic_enemy_1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -11.932492256164551,
+                        17.77070426940918,
+                        109.64449310302734
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.70159000158309937,
+                        0,
+                        0.71258091926574707
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Enemies.fbx",
                     "Active": true
                 }
             ]

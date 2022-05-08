@@ -381,8 +381,6 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_15_patrol")
         };
-
-        
         ///////////////////////////////////////////////////////////////////
 
         InternalCalls.InstancePrefab("PlayerManager");
