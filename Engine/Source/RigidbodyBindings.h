@@ -13,6 +13,7 @@
 #include <metadata/class.h>
 
 #include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "btBulletDynamicsCommon.h"
 #include "Math/float3.h"
 
 
@@ -123,4 +124,10 @@ void SetBodyRotation(MonoObject* go, MonoObject* pos)
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
 	Quat bRot = app->moduleMono->UnboxQuat(pos);
 	rb->GetBody()->getWorldTransform().setRotation(bRot);
+}
+
+void SetRadiusSphere(MonoObject* go, float rad)
+{
+	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
+	static_cast<btSphereShape*>(rb->GetBody()->getCollisionShape())->setUnscaledRadius(rad);
 }
