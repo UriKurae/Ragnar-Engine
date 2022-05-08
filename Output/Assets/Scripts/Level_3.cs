@@ -10,11 +10,17 @@ public class Level_3 : RagnarComponent
     public UIButton chrono;
     public Vector3 hitPoint;
 
+    private GameObject SceneAudio;
     private GameObject preClick;
     private GameObject preNonClick;
     private Transform camera;
     public void Start()
 	{
+        //Play Level Soundtrack
+        SceneAudio = GameObject.Find("AudioLevel1");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
+        
         // Camera Starting Position
         GameObject.Find("cameraController").transform.localPosition = new Vector3(2.42f, 0f, 30.47f);
         GameObject.Find("UI Counter").GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 28, 0);
