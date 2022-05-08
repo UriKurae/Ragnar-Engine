@@ -46,16 +46,18 @@ bool ComponentLight::Update(float dt)
 			
 			Frustum frustum;
 			frustum.pos = tr->GetGlobalPosition();
+			//AABB shadowsAABB = app->renderer3D->shadowsAABB;
+			//frustum.pos = float3((shadowsAABB.MaxX() + shadowsAABB.MinX()) * 0.5f, (shadowsAABB.MaxY() + shadowsAABB.MinY()) * 0.5f, shadowsAABB.MaxZ());
 
 			frustum.front = app->renderer3D->dirLight->dir;
 			float3 right = frustum.front.Cross({ 0,1,0 }).Normalized();
 			frustum.up = right.Cross(frustum.front).Normalized();
 			frustum.type = FrustumType::OrthographicFrustum;
 
-			frustum.orthographicHeight = 256;
-			frustum.orthographicWidth = 256;
+			frustum.orthographicHeight = 512;
+			frustum.orthographicWidth = 512;
 			frustum.nearPlaneDistance = 0.001;
-			frustum.farPlaneDistance = 10000;
+			frustum.farPlaneDistance = 500000;
 
 			frustum.SetKind(FrustumProjectiveSpace::FrustumSpaceGL, FrustumHandedness::FrustumRightHanded);
 

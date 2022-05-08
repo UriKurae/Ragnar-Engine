@@ -24,6 +24,7 @@ public class EnemyManager : RagnarComponent
         for(int i = 0; i < enemyGOs.Count; i++)
         {
             enemyGOs[i].name = enemies[i].name;
+            enemyGOs[i].SubmitOutlineDrawing(new Vector3(1, 0, 0));
             switch (enemies[i].type)
             {
                 case EnemyType.BASIC:
@@ -76,6 +77,8 @@ public class EnemyManager : RagnarComponent
                             ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                             enemyCount++;
                             enemies[i].state = EnemyState.DEATH;
+                            enemyGOs[i].isInteractuable = true;
+                            enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
                         }
                     }
                 }

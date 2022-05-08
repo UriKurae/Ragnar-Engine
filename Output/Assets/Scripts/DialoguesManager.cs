@@ -42,19 +42,24 @@ public class DialogueManager : RagnarComponent
     {
         if (firstTime)
         {
-            //text
-            pos.Set(192.0f, text.GetComponent<Transform2D>().position2D.y - 50, text.GetComponent<Transform2D>().position2D.z + 20);
-            text.GetComponent<Transform2D>().position2D = pos;
-            //face
-            pos.Set(0.0f, image.GetComponent<Transform2D>().position2D.y-2, image.GetComponent<Transform2D>().position2D.z + 20);
-            image.GetComponent<Transform2D>().position2D = pos;
-            //author
-            pos.Set(185.0f, name.GetComponent<Transform2D>().position2D.y - 50, image.GetComponent<Transform2D>().position2D.z + 20);
-            name.GetComponent<Transform2D>().position2D = pos;
+            float posY = InternalCalls.GetRegionGame().y , posX = InternalCalls.GetRegionGame().x;
+            posY *= 0.33f;
+            posX = 0;
             //box
-            pos.Set(box.GetComponent<Transform2D>().position2D.x, box.GetComponent<Transform2D>().position2D.y, box.GetComponent<Transform2D>().position2D.z - 10);
+            pos.Set(posX, posY, box.GetComponent<Transform2D>().position2D.z - 10);
             box.GetComponent<Transform2D>().position2D = pos;
 
+            posX = box.GetComponent<Transform2D>().position2D.x;
+            //face
+            pos.Set(posX, posY - 2, image.GetComponent<Transform2D>().position2D.z + 20);
+            image.GetComponent<Transform2D>().position2D = pos;
+
+            //author
+            pos.Set(posX - 195.0f, box.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
+            name.GetComponent<Transform2D>().position2D = pos;
+            //text
+            pos.Set(posX - 192.0f, box.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
+            text.GetComponent<Transform2D>().position2D = pos;
 
             firstTime = false;
         }
