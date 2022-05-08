@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 179441296,
+                    "pointer": 174539032,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1470,15 +1470,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.1444091796875e-05,
-                        56.479835510253906,
-                        -51.345352172851563
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        2.7070433006315398e-08,
-                        -2.3786224545574441e-08,
-                        0.93969273567199707
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1497,9 +1497,9 @@
                     "Vertical Fov": 0.44563493132591248,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -21.162879943847656,
-                        56.479835510253906,
-                        134.39186096191406
+                        -20.496772766113281,
+                        55,
+                        133.22294616699219
                     ],
                     "Type": 3,
                     "Zoom": -20,
@@ -3234,7 +3234,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -3303,7 +3303,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -7737,7 +7737,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 437971016,
+                    "pointer": 442907784,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8181,7 +8181,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 441285592,
+                    "pointer": 442909368,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8257,7 +8257,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 441285736,
+                    "pointer": 442909512,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9175,7 +9175,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 441291352,
+                    "pointer": 464559144,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -12081,120 +12081,6 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/preclick_non__pTorus2.fbx",
                     "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 2102177724,
-            "Parent UUID": 417171234,
-            "Name": "PlayerManager",
-            "Active": true,
-            "Static": true,
-            "PrefabID": true,
-            "Prefab Path": "Assets\/Prefabs\/PlayerManager.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "PlayerManager",
-                    "pointer": 475228984,
-                    "type": 4,
-                    "componentTable": 0,
-                    "players": 0,
-                    "characterSelected": 0,
-                    "characters": 0,
-                    "drawnArea": false
-                },
-                {
-                    "Type": 23,
-                    "Path": "Assets\/Resources\/\/InputAction.inputaction",
-                    "Action Maps List": [
-                        {
-                            "0": [
-                                {
-                                    "0": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 3
-                                        }
-                                    ],
-                                    "1": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 4
-                                        }
-                                    ],
-                                    "2": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 5
-                                        }
-                                    ],
-                                    "3": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 6
-                                        }
-                                    ]
-                                }
-                            ],
-                            "1": [
-                                {
-                                    "0": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 3
-                                        }
-                                    ],
-                                    "1": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 4
-                                        }
-                                    ],
-                                    "2": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 5
-                                        }
-                                    ],
-                                    "3": [
-                                        {
-                                            "Script": "PlayerManager",
-                                            "Method": 6
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
                 }
             ]
         }
