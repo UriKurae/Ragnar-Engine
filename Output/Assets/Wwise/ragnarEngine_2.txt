@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	44492136	UI_SandClick			\Default Work Unit\UI\UI_SandClick	
 	215689891	UI_Journal			\Default Work Unit\UI\UI_Journal	
 	251096294	WPN_CrysKnifeUnseathe			\Default Work Unit\Weapons\WPN_CrysKnifeUnseathe	
 	345518928	BG_SandFlying			\Default Work Unit\Environments\BG_SandFlying	
@@ -86,6 +87,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	699525885	wpn_voice	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_voice_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_voice		1718508
 	700097641	wpn_stunner_hitdrone	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_stunner_hitdrone_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_stunner_hitdrone		184212
 	723872585	wpn_throwingknife_hitshield	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_throwingknife_hitshield_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_throwingknife_hitshield		54880
+	739430350	ui_sandclick	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\ui_sandclick_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ui_sandclick		270628
 	739441257	wpn_stunner_hit	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_stunner_hit_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_stunner_hit		128312
 	755958127	wpn_trap_setup	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_trap_setup_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_trap_setup		190568
 	765016676	wpn_sword_hit	D:\Descargas\RagnarEngineSound\.cache\Windows\SFX\wpn_sword_hit_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\wpn_sword_hit		244408

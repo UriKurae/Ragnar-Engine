@@ -512,7 +512,7 @@
 				</StateGroup>
 			</StateGroups>
 		</SoundBank>
-		<SoundBank Id="534548857" Language="SFX" Hash="185069296">
+		<SoundBank Id="534548857" Language="SFX" Hash="3649993339">
 			<ObjectPath>\SoundBanks\Default Work Unit\ragnarEngine_2</ObjectPath>
 			<ShortName>ragnarEngine_2</ShortName>
 			<Path>ragnarEngine_2.bnk</Path>
@@ -682,6 +682,14 @@
 						<File Id="519084447" Language="SFX">
 							<ShortName>ui_openmenu.wav</ShortName>
 							<Path>SFX\ui_openmenu_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="44492136" Name="UI_SandClick" ObjectPath="\Events\Default Work Unit\UI\UI_SandClick">
+					<IncludedMemoryFiles>
+						<File Id="739430350" Language="SFX">
+							<ShortName>ui_sandclick.wav</ShortName>
+							<Path>SFX\ui_sandclick_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

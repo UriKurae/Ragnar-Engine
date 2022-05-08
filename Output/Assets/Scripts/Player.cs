@@ -46,7 +46,7 @@ public class Player : RagnarComponent
     public void Update()
     {
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
-            gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
+            gameObject.GetComponent<AudioSource>().PlayClip("UI_SANDCLICK");
 
         if (!dialogue.GetInDialogue())
         {

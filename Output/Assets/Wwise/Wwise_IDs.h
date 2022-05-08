@@ -91,6 +91,7 @@ namespace AK
         static const AkUniqueID UI_LOSESCREEN = 2190759753U;
         static const AkUniqueID UI_OPENMAP = 1187363912U;
         static const AkUniqueID UI_OPENMENU = 2672940587U;
+        static const AkUniqueID UI_SANDCLICK = 44492136U;
         static const AkUniqueID UI_SELECT = 2774129122U;
         static const AkUniqueID UI_SLIDER = 3987036369U;
         static const AkUniqueID UI_UNAVALIABLE = 1441383582U;
