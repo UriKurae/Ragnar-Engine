@@ -41,7 +41,7 @@ public class Rock : RagnarComponent
 
 		if (obj != null)
 		{
-			Debug.Log(obj.name.ToString());
+			//Debug.Log(obj.name.ToString());
 			return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
 		}
 

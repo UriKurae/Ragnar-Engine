@@ -144,7 +144,7 @@ public class DialogueManager : RagnarComponent
 		if (endDialogue == false)
 		{
             UpdateDialogue();
-            Debug.Log(authId.ToString());
+            //Debug.Log(authId.ToString());
         }
         else
 		{
@@ -175,7 +175,7 @@ public class DialogueManager : RagnarComponent
         inDialogue = true;
         Dialogue.StartDialogueById(id);
         UpdateDialogue();
-        Debug.Log(authId.ToString());
+        //Debug.Log(authId.ToString());
     }
 
     public void DisableDialogue()

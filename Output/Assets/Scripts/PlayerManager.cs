@@ -139,7 +139,15 @@ public class PlayerManager : RagnarComponent
             if (playableCharacter == characters[1]) radius = 12.7f;
 
             lightHab.GetComponent<Light>().intensity = 6;
-            Vector3 hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
+
+            Vector3 hit;
+            if (SceneManager.currentSceneName == "build")
+                hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
+            else if (SceneManager.currentSceneName == "build2")
+                hit = GameObject.Find("LevelManager").GetComponent<Level_2>().hitPoint;
+            else
+                hit = GameObject.Find("LevelManager").GetComponent<Level_3>().hitPoint;
+
             if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
             {
                 hit.y += 0.2f;
@@ -191,7 +199,7 @@ public class PlayerManager : RagnarComponent
         // Si la habilidad est� en cooldown y tiene cargas, entrar� aqu� y pondr� el state del player en NONE.
         else
         {
-            Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
+            //Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
             playableCharacter.state = State.NONE;
         }
     }
@@ -293,7 +301,7 @@ public class PlayerManager : RagnarComponent
 
                             playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
 
-                            Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
+                            //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
                             playableCharacter.pickedEnemy = null;
                         }
                         else
@@ -313,7 +321,7 @@ public class PlayerManager : RagnarComponent
                                         //setear position, animation, whatever de obj
                                         obj.transform.localPosition = new Vector3(0,2,0);
 
-                                        Debug.Log("Carrying the corpse of" + obj.name.ToString());
+                                        //Debug.Log("Carrying the corpse of" + obj.name.ToString());
                                         playableCharacter.pickedEnemy = obj;
                                         break;
                                     }
