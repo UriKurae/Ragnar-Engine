@@ -43,6 +43,9 @@ ModuleSceneManager::~ModuleSceneManager()
 
 bool ModuleSceneManager::Start()
 {
+
+	lenguage = 0;
+
 	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
 
 	ResourceManager::GetInstance()->ImportAllResources();

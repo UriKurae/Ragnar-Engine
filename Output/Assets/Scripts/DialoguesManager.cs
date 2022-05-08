@@ -20,8 +20,8 @@ public class DialogueManager : RagnarComponent
 
 	bool endDialogue;
     bool inDialogue;
-
-	public void Start()
+    public GameObject[] triggerColliders;
+    public void Start()
 	{
 		Dialogue.LoadDialogueFile("");
         SceneAudio = GameObject.Find("AudioLevel1");
@@ -37,14 +37,16 @@ public class DialogueManager : RagnarComponent
         firstTime = true;
         inDialogue = false;
         DisableDialogue();
-        
+        // Hay que actualizar todos los prefabs y hacer que se instancien por codigo
+        // en su levelManager por cada nivel
+        triggerColliders = GameObject.FindGameObjectsWithTag("DialogueTrigger");
     }
 
     public void Update()
     {
         if (firstTime)
         {
-            float posY = InternalCalls.GetRegionGame().y , posX = InternalCalls.GetRegionGame().x;
+            float posY = InternalCalls.GetRegionGame().y, posX = InternalCalls.GetRegionGame().x;
             posY *= 0.33f;
             posX = 0;
             //box
@@ -56,11 +58,15 @@ public class DialogueManager : RagnarComponent
             pos.Set(posX, posY - 2, image.GetComponent<Transform2D>().position2D.z + 20);
             image.GetComponent<Transform2D>().position2D = pos;
 
+            posX += 47.0f;
             //author
-            pos.Set(posX - 195.0f, box.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
+            //pos.Set(posX - 195.0f, box.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(posX, box.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
             name.GetComponent<Transform2D>().position2D = pos;
+            //posX -= 40.0f;
             //text
-            pos.Set(posX - 192.0f, box.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
+            //.Set(posX - 192.0f, box.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(posX, box.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
             text.GetComponent<Transform2D>().position2D = pos;
 
             firstTime = false;
@@ -185,9 +191,15 @@ public class DialogueManager : RagnarComponent
 
     public void ContinueDialogue()
     {
+        UpdateDialogue();
         gameObject.isActive = true;
     }
-
+    public void ContinueDialogueChangeLenguage()
+    {
+        Dialogue.LoadDialogueFile("");
+        UpdateDialogue();
+        gameObject.isActive = true;
+    }
     public bool GetInDialogue() { return inDialogue; }
 
     public bool GetEndDialogue() { return endDialogue; }

@@ -109,4 +109,6 @@ public class DialogueTrigger : RagnarComponent
             manager.GetComponent<DialogueManager>().StartNewDialogue(dialogueId);
         }
     }
+    public bool GetUsed() { return isUsed; }
+    public void SetUsed(bool used) { isUsed = used; }
 }

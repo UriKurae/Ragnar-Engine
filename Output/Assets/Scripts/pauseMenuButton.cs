@@ -657,8 +657,20 @@ public class pauseMenuButton : RagnarComponent
 		pos.Set(-sum + 20, y-230, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
+		////////////////////////////////////////////////
+		/// DROP DOWN
+		////////////////////////////////////////////////
+
 		pos.Set(x - 550, y - 500, 36.1f);
 		optionsLanguaje.GetComponent<Transform2D>().position2D = pos;
+		/*
+        if (optionsLanguaje.GetComponent<UIDropDown>().GetDropDownButtonChange())
+        {
+			int a = optionsLanguaje.GetComponent<UIDropDown>().GetDropDownSelected();
+			optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(a);
+		}
+		*/
+
 	}
 	void OptionsScreenHide()
 	{
@@ -1056,6 +1068,7 @@ public class pauseMenuButton : RagnarComponent
 			case 3:
 				// pressed mode
 				isSowing = false;
+				if (!dialogue.GetEndDialogue()) { dialogue.ContinueDialogue(); }
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
