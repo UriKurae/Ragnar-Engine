@@ -9,6 +9,7 @@ public class BasicEnemy : RagnarComponent
     public GameObject[] waypoints;
     private int destPoint = 0;
     public EnemyState state;
+    public EnemyType enemyType;
 
     // States
     public bool patrol;
