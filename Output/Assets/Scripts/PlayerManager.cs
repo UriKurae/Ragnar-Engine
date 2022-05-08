@@ -213,22 +213,6 @@ public class PlayerManager : RagnarComponent
     {
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
-            switch (players[characterSelected].GetComponent<Player>().GetAction())
-            {
-                //NONE
-                case 0:
-                    players[characterSelected].GetComponent<Animation>().PlayAnimation("Shoot");
-                    break;
-                //CROUCH
-                case 1:
-                    players[characterSelected].GetComponent<Animation>().PlayAnimation("CrouchShoot");
-                    break;
-                //CARRY
-                case 2:
-                    break;
-            };
-
-            GameObject obj = null;
             switch (playableCharacter.state)
             {
                 case State.ABILITY_1:
@@ -311,7 +295,7 @@ public class PlayerManager : RagnarComponent
                         else
                         {
                             NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
-                            obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
+                            GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
                             if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
