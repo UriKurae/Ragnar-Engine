@@ -59,6 +59,9 @@ public class Player : RagnarComponent
 
     public void Update()
     {
+        if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
+            gameObject.GetComponent<AudioSource>().PlayClip("UI_SANDCLICK");
+
         if (!dialogue.GetInDialogue())
         {
             if (hitPoints <= 0 && !dead)
@@ -78,6 +81,7 @@ public class Player : RagnarComponent
                         action = Actions.CROUCH;
                         rb.SetHeight(0.6f); // 0.6 = 60%
                         gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+                        gameObject.GetComponent<AudioSource>().PlayClip("PAUL_CROUCH");
                     }
                     else if (action == Actions.CROUCH)
                     {
@@ -136,7 +140,7 @@ public class Player : RagnarComponent
                                 break;
                         }
 
-                        gameObject.GetComponent<AudioSource>().PlayClip("FOOTSTEPS");
+                        gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
                         walkPartSys.Play();
                     }
                 }
@@ -173,7 +177,7 @@ public class Player : RagnarComponent
                 }
 
                 walkPartSys.Pause();
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+                gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
             }
             if (action == Actions.CROUCH)
             {
@@ -186,7 +190,7 @@ public class Player : RagnarComponent
             // Reload Sound
             if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("RELOAD");
+                gameObject.GetComponent<AudioSource>().PlayClip("WPN_RELOAD");
             }
             //////////////////////////
 
@@ -210,7 +214,7 @@ public class Player : RagnarComponent
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
             walkPartSys.Pause();
-            gameObject.GetComponent<AudioSource>().StopCurrentClip("FOOTSTEPS");
+            gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
         }
 
         if (paused)
@@ -221,7 +225,7 @@ public class Player : RagnarComponent
 
     private void Die()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("PLAYERDEATH");
+        gameObject.GetComponent<AudioSource>().PlayClip("PAUL_DEATH");
         gameObject.GetComponent<Animation>().PlayAnimation("Death");
         walkPartSys.Pause();
         pendingToDelete = true;
@@ -303,6 +307,7 @@ public class Player : RagnarComponent
 
     public void GetHit(int dmg)
     {
+        gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
         hitPoints -= dmg;
     }
 }

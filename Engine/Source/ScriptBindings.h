@@ -719,6 +719,7 @@ void NextScene()
 {
 	app->sceneManager->NextScene();
 	app->renderer3D->gosToDrawOutline.clear();
+	app->renderer3D->ClearPointLights();
 }
 
 void SaveScene(MonoString* string)
@@ -732,6 +733,7 @@ void LoadScene(MonoString* string)
 	char* name = mono_string_to_utf8(string);
 	app->sceneManager->NextScene(name);
 	app->renderer3D->gosToDrawOutline.clear();
+	app->renderer3D->ClearPointLights();
 }
 
 void SaveTest(int deadCount, MonoString* playerName, MonoObject* playerPos, float time)
@@ -758,12 +760,7 @@ void Exit()
 
 MonoObject* GetRegionGame()
 {
-	float4 vec4 = float4::zero;
-#ifdef DIST
-	vec4 = { 0,0,(float)*app->window->GetWindowWidth(), (float)*app->window->GetWindowHeight() };
-#else
-	vec4 = app->editor->GetGameView()->GetBounds();
-#endif
+	float4 vec4 = app->editor->GetGameView()->GetBounds();
 	float3 vec3 = { vec4.z, vec4.w, 0 };
 	return app->moduleMono->Float3ToCS(vec3);
 }

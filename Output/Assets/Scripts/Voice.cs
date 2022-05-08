@@ -17,7 +17,7 @@ public class Voice : RagnarComponent
 	}
 	public void Update()
 	{
-		Debug.Log(enemies.Length.ToString());
+		//Debug.Log(enemies.Length.ToString());
 		selectedEnemy = EnemyFound();
 		if (selectedEnemy != null)
 		{
