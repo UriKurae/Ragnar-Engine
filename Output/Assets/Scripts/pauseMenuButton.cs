@@ -616,13 +616,9 @@ public class pauseMenuButton : RagnarComponent
 		bounds.Set(40, 40, 0);
 		optionsScreenFSCH.GetComponent<Transform2D>().SetSize(bounds);
 		if (optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked())
-		{
-			InternalCalls.SetFullScreen(false);
-        }else
-        {
-			InternalCalls.SetFullScreen(false);
-		}
-		
+			InternalCalls.SetFullScreen(true);        
+		else
+			InternalCalls.SetFullScreen(false);		
 
 		////////////////////////////////////////////////
 		/// V-SYNC CHECKBOX
