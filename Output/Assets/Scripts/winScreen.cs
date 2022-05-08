@@ -71,12 +71,12 @@ public class winScren : RagnarComponent
 				isFirstM = false;
 				isFirst = false;
 				//poner sonido
-				AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
+				AudioManager.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 			}
 			break;
 		case 3:
 			// pressed mode
-			AudioManager.GetComponent<AudioSource>().PlayClip("UISELECT");
+			AudioManager.GetComponent<AudioSource>().PlayClip("UI_SELECT");
 			Menu.GetComponent<UIButton>().SetButtonAlpha(0.75f);
 			SceneManager.LoadScene("MainMenu");
 			//cambiar de escena
@@ -112,7 +112,7 @@ public class winScren : RagnarComponent
 				isFirst = false;
 				Pos.Set((InternalCalls.GetRegionGame().x / 2) - 120, NextImage.GetComponent<Transform2D>().position2D.y, 36.1f);
 				NextImage.GetComponent<Transform2D>().position2D = Pos;
-				AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
+				AudioManager.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 				isFirstA = false;
 				//poner sonido
 			}
@@ -165,7 +165,7 @@ public class winScren : RagnarComponent
 				isFirst = false;
 				isFirstR = false;
 				//poner sonido
-				AudioManager.GetComponent<AudioSource>().PlayClip("UIHOVER");
+				AudioManager.GetComponent<AudioSource>().PlayClip("UI_HOVER");
 			}
 			break;
 		case 3:

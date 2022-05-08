@@ -11,6 +11,7 @@ public class Level_1 : RagnarComponent
     public UIButton chrono;
     public Vector3 hitPoint;
 
+    private GameObject SceneAudio;
     private GameObject preClick;
     private GameObject preNonClick;
     private Transform camera;
@@ -23,6 +24,10 @@ public class Level_1 : RagnarComponent
         chrono.SetTextPosition(-26, -4);
         timer = new Chronometer();
 
+        //Play Level Soundtrack
+        SceneAudio = GameObject.Find("AudioLevel1");
+        SceneAudio.GetComponent<AudioSource>().PlayClip("MUSICPLAY");
+        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
         preClick = GameObject.Find("preClick");
         preNonClick = GameObject.Find("preNonClick");
         camera = GameObject.Find("Camera").transform;
