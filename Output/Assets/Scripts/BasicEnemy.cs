@@ -48,6 +48,7 @@ public class BasicEnemy : RagnarComponent
     private float angleOffset = 0;
 
     GameObject[] childs;
+    ParticleSystem stunPartSys;
 
     public void Start()
     {
@@ -70,6 +71,17 @@ public class BasicEnemy : RagnarComponent
         initialSpeed = agents.speed;
 
         childs = gameObject.childs;
+
+        for (int i = 0; i < childs.Length; ++i)
+        {
+            if (childs[i].name == "StunParticles")
+            {
+                stunPartSys = childs[i].GetComponent<ParticleSystem>();
+                break;
+            }
+        }
+
+        stunPartSys.Pause();
     }
 
     public void Update()
@@ -113,6 +125,7 @@ public class BasicEnemy : RagnarComponent
                     stunnedTimer -= Time.deltaTime;
                     if (stunnedTimer < 0)
                     {
+                        stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
                     }
@@ -156,29 +169,38 @@ public class BasicEnemy : RagnarComponent
             //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
             if (other.gameObject.name == "Knife")
             {
-                deathTimer = 4f;
-                for (int i = 0; i < childs.Length; ++i)
+                if (deathTimer == -1f)
                 {
-                    if (childs[i].name == "KnifeParticles")
+                    deathTimer = 4f;
+                    for (int i = 0; i < childs.Length; ++i)
                     {
-                        childs[i].GetComponent<ParticleSystem>().Play();
-                        break;
+                        if (childs[i].name == "KnifeParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
                     }
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
-                deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
+                    deathTimer = 2f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                deathTimer = 5f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    deathTimer = 5f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
 
                 // WHEN RUNES FUNCTIONAL
                 // EXPLOSION AREA
@@ -212,6 +234,7 @@ public class BasicEnemy : RagnarComponent
                 // STUN (BLIND)
                 gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                 Stun(5f);
+                stunPartSys.Play();
             }
 
 
@@ -246,6 +269,7 @@ public class BasicEnemy : RagnarComponent
                 gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
+                stunPartSys.Play();
             }
         }
     }

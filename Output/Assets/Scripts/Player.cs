@@ -30,6 +30,7 @@ public class Player : RagnarComponent
     DialogueManager dialogue;
 
     ParticleSystem walkPartSys;
+    ParticleSystem getHitPartSys;
 
     public bool controled = false;
     State abilityState = 0;
@@ -51,9 +52,22 @@ public class Player : RagnarComponent
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
-        if (gameObject.name == "Player") walkPartSys = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
-        else if (gameObject.name == "Player_2") walkPartSys = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
-        else if (gameObject.name == "Player_3") walkPartSys = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
+        // Asignation of particles depending of the character
+        if (gameObject.name == "Player")
+        {
+            walkPartSys = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
+            getHitPartSys = GameObject.Find("GetHitParticles").GetComponent<ParticleSystem>();
+        }
+        else if (gameObject.name == "Player_2")
+        {
+            walkPartSys = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
+            getHitPartSys = GameObject.Find("GetHitParticles_2").GetComponent<ParticleSystem>();
+        }
+        else if (gameObject.name == "Player_3")
+        {
+            walkPartSys = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
+            getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
+        }
         walkPartSys.Pause();
     }
 
@@ -309,6 +323,7 @@ public class Player : RagnarComponent
     {
         gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
         hitPoints -= dmg;
+        getHitPartSys.Play();
     }
 }
 
