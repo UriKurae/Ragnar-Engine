@@ -110,25 +110,25 @@ public class PlayerManager : RagnarComponent
         // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
         {
-            SpawnArea((int)State.ABILITY_1);
+            SpawnArea(State.ABILITY_1);
         }
 
         // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
         {
-            SpawnArea((int)State.ABILITY_2);
+            SpawnArea(State.ABILITY_2);
         }
 
         // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
         {
-            SpawnArea((int)State.ABILITY_3);
+            SpawnArea(State.ABILITY_3);
         }
 
         // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
         if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
         {
-            SpawnArea((int)State.ABILITY_4);
+            SpawnArea(State.ABILITY_4);
         }
 
         // Change Condition to all players
@@ -160,22 +160,22 @@ public class PlayerManager : RagnarComponent
         {
             //SpawnArea((int)State.CARRYING);
             playableCharacter.state = State.CARRYING;
-            players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
+            players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
         }
 
         // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
         if (playableCharacter.state != State.NONE) CastOrCancel();
     }
 
-    private void SpawnArea(int ability)
+    private void SpawnArea(State ability)
     {
         // Comprobador de cargas de habilidad. Si entra aqu�, significa que la habilidad no tiene cargas
-        if (playableCharacter.abilities[ability - 1].charges == 0)
+        if (playableCharacter.abilities[(int)ability - 1].charges == 0)
         {
             playableCharacter.state = State.NONE;
         }
         // Entra aqu� si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
-        else if (!playableCharacter.abilities[ability - 1].onCooldown)
+        else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
             playableCharacter.state = (State)ability;
 
@@ -183,7 +183,7 @@ public class PlayerManager : RagnarComponent
             if (!drawnArea)
             {
                 drawnArea = true;
-                DrawArea(ability);
+                DrawArea((int)ability);
             }
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
@@ -191,7 +191,7 @@ public class PlayerManager : RagnarComponent
         // Si la habilidad est� en cooldown y tiene cargas, entrar� aqu� y pondr� el state del player en NONE.
         else
         {
-            Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[ability - 1].cooldown - playableCharacter.abilities[ability - 1].counter) + "seconds left to use it again!");
+            Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[(int)ability - 1].cooldown - playableCharacter.abilities[(int)ability - 1].counter) + "seconds left to use it again!");
             playableCharacter.state = State.NONE;
         }
     }
@@ -340,24 +340,22 @@ public class PlayerManager : RagnarComponent
 
                 // Pone la habilidad en cooldown y el player en estado de NONE
                 playableCharacter.abilities[(int)playableCharacter.state - 1].onCooldown = true;
-
                 playableCharacter.state = State.NONE;
 
                 // Se cambia el estado a POSTCAST para evitar que se mueva directamente despu�s de castear la habilidad. En el update de los players se cambiar� a NONE nuevamente para que se pueda mover (Tras un ciclo de update). 
-                players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
+                players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
                 area[characterSelected].GetComponent<Light>().intensity = 0f;
                 lightHab.GetComponent<Light>().intensity = 0f;
                 drawnArea = false;
             }
-            else
+            else if (playableCharacter.state == State.CARRYING)
             {
+                playableCharacter.state = State.NONE;
+                players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
+
                 if (players[characterSelected].GetComponent<Animation>().HasFinished())
-                {
-                    playableCharacter.state = State.NONE;
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
                     playableCharacter.pickedEnemy = obj;
-                }
             }
         }
 

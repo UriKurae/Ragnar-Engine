@@ -72,7 +72,7 @@ public class EnemyManager : RagnarComponent
                     deadEnemies.Add(enemyGOs[i]);
                     enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
 
-                    switch (enemyGOs[i].GetComponent<BasicEnemy>().type)
+                    switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
                     {
                         case EnemyType.BASIC:
                             enemyGOs[i].ChangeMesh("enemy1_modeldeath");
