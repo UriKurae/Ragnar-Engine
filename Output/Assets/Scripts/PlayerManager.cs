@@ -55,14 +55,14 @@ public class PlayerManager : RagnarComponent
 
 	public void Update()
     {
-        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.F6) == KeyState.KEY_DOWN)
         {
             SaveSystem.LoadScene();
             //LoadPlayer();
             //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
             SaveSystem.fromContinue = true;
         }
-        if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.F5) == KeyState.KEY_DOWN)
         {
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
             SavePlayer();
@@ -99,34 +99,41 @@ public class PlayerManager : RagnarComponent
         }
     }
 
+    // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
+    public void Ability1()
+    {
+        SpawnArea(State.ABILITY_1);
+    }
+
+    // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
+    public void Ability2()
+    {
+        SpawnArea(State.ABILITY_2);
+    }
+
+    // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
+    public void Ability3()
+    {
+        SpawnArea(State.ABILITY_3);
+    }
+
+    // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
+    public void Ability4()
+    {
+        SpawnArea(State.ABILITY_4);
+    }
+
+    // LETRA B --> ARRASTRAR CUERPOS
+    public void Carrying()
+    {
+        playableCharacter.state = State.CARRYING;
+        players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+    }
+
     private void AbilityStateChanger()
     {
         if (playableCharacter.pickedEnemy == null)
         {
-            // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
-            if (Input.GetKey(KeyCode.Z) == KeyState.KEY_DOWN)
-            {
-                SpawnArea(State.ABILITY_1);
-            }
-
-            // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
-            if (Input.GetKey(KeyCode.X) == KeyState.KEY_DOWN)
-            {
-                SpawnArea(State.ABILITY_2);
-            }
-
-            // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
-            if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
-            {
-                SpawnArea(State.ABILITY_3);
-            }
-
-            // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
-            if (Input.GetKey(KeyCode.V) == KeyState.KEY_DOWN)
-            {
-                SpawnArea(State.ABILITY_4);
-            }
-
             // Change Condition to all players
             if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
             {
@@ -159,16 +166,9 @@ public class PlayerManager : RagnarComponent
                 }
             }
         }
-            // LETRA B --> ARRASTRAR CUERPOS
-            if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
-            {
-                //SpawnArea((int)State.CARRYING);
-                playableCharacter.state = State.CARRYING;
-                players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
-            }
 
-            // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
-            if (playableCharacter.state != State.NONE) CastOrCancel();
+        // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
+        if (playableCharacter.state != State.NONE) CastOrCancel();
     }
 
     private void SpawnArea(State ability)
@@ -392,7 +392,7 @@ public class PlayerManager : RagnarComponent
         switch (players.Length)
         {
             case 4:
-                if (Input.GetKey(KeyCode.F4) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA4) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 3;
@@ -405,7 +405,7 @@ public class PlayerManager : RagnarComponent
                 }
                 goto case 3;
             case 3:
-                if (Input.GetKey(KeyCode.F3) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 2;
@@ -418,7 +418,7 @@ public class PlayerManager : RagnarComponent
                 }
                 goto case 2;
             case 2:
-                if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 1;
@@ -431,7 +431,7 @@ public class PlayerManager : RagnarComponent
                 }
                 goto case 1;
             case 1:
-                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 0;
