@@ -44,6 +44,7 @@ public class TankEnemy : RagnarComponent
     float stunnedTimer = -1f;
 
     GameObject[] childs;
+    ParticleSystem stunPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -65,6 +66,17 @@ public class TankEnemy : RagnarComponent
         initialSpeed = agents.speed;
 
         childs = gameObject.childs;
+
+        for (int i = 0; i < childs.Length; ++i)
+        {
+            if (childs[i].name == "StunParticles")
+            {
+                stunPartSys = childs[i].GetComponent<ParticleSystem>();
+                break;
+            }
+        }
+
+        stunPartSys.Pause();
     }
 
     public void Update()
@@ -109,6 +121,7 @@ public class TankEnemy : RagnarComponent
                     stunnedTimer -= Time.deltaTime;
                     if (stunnedTimer < 0)
                     {
+                        stunPartSys.Pause();
                         stunned = false;
                         stunnedTimer = -1f;
                     }
@@ -159,13 +172,19 @@ public class TankEnemy : RagnarComponent
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    deathTimer = 2f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
             }
             if (other.gameObject.name == "HunterSeeker")
             {
-                deathTimer = 5f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                if (deathTimer == -1f)
+                {
+                    deathTimer = 5f;
+                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                }
 
                 // WHEN RUNES FUNCTIONAL
                 // STUN (BLIND) 3s
@@ -229,6 +248,7 @@ public class TankEnemy : RagnarComponent
                 // STUN (BLIND)
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
+                stunPartSys.Play();
             }
         }
     }
