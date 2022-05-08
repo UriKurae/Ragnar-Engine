@@ -49,13 +49,25 @@ public class QuestSystem : RagnarComponent
 	public List<Quest> completedQuestList;
 	public List<Quest> activeQuestList;
 
-	public GameObject questTitle;
+	public GameObject activeQuestNames;
+	public GameObject completedQuestNames;
 	public GameObject questDescription;
 	public GameObject questId;
 	public GameObject questType;
 	public GameObject questState;
 
+	public GameObject activeButton;
+	public GameObject completedButton;
+
+	public bool showJournal;
+	public bool showActive;
+	public bool showCompleted;
 	public Vector3 position;
+
+	private int captainsDefeated;
+
+	private string activeQuests;
+	private string completedQuests;
 	// Methods
 	public void CreateQuest(uint _id, string _name, string _description, QuestState _state, QuestType _type)
     {
@@ -85,6 +97,28 @@ public class QuestSystem : RagnarComponent
 		questToChange.ChangeQuestState(newState);
     }
 
+	public Quest GetQuestByID(int id)
+    {
+		Quest questToReturn = null;
+		for(int i = 0; i < questList.Count - 1; ++i)
+        {
+			if (questList[i].GetQuestId() == id)
+				return questList[i];
+        }
+		return questToReturn;
+    }
+
+	public Quest GetQuestByName(string name)
+	{
+		Quest questToReturn = null;
+		for (int i = 0; i < questList.Count - 1; ++i)
+		{
+			if (questList[i].GetQuestName() == name)
+				return questList[i];
+		}
+		return questToReturn;
+	}
+
 	public void Start()
 	{
 		// Initialize Lists
@@ -92,65 +126,121 @@ public class QuestSystem : RagnarComponent
 		completedQuestList = new List<Quest>();
 		activeQuestList = new List<Quest>();
 
-		questTitle = GameObject.Find("Titulo");
+		activeQuestNames = GameObject.Find("Titulo Activas");
+		completedQuestNames = GameObject.Find("Titulo Completadas");
 		questDescription = GameObject.Find("Descripcion");
 		questId = GameObject.Find("Id");
 		questState = GameObject.Find("Estado");
 		questType = GameObject.Find("Tipo");
 
+		activeButton = GameObject.Find("Boton Activas");
+		completedButton = GameObject.Find("Boton Completadas");
+
+		showJournal = true;
+		showActive = true;
+		showCompleted = false;
 		position = new Vector3(0.0f, 0.0f, 0.0f);
 
-		// Testing --------------------------------------------------------------------------------------------------
-		CreateQuest(0, "Quest de Prueba", "Soy una Quest de prueba", QuestState.ACTIVE, QuestType.UNKNOWN);
-		CreateQuest(1, "Quest de Prueba 2", "Soy una Quest de prueba 2", QuestState.ACTIVE, QuestType.MAIN);
-		CreateQuest(2, "Quest de Prueba 3", "Soy una Quest de prueba 3", QuestState.ACTIVE, QuestType.SECONDARY);
+		CreateQuest(0, "Elimina a los 3 capitanes", "Elimina a los 3 capitanes", QuestState.ACTIVE, QuestType.MAIN);
+		CreateQuest(1, "Sal de la cantera/cañon", "Sal de la cantera/cañon", QuestState.ACTIVE, QuestType.MAIN);
+		CreateQuest(2, "Consigue la llave para abrir el muro", "Consigue la llave para abrir el muro", QuestState.ACTIVE, QuestType.MAIN);
+		CreateQuest(3, "Reunete con Jessica y Stilgard en la plaza", "Reunete con Jessica y Stilgard en la plaza", QuestState.ACTIVE, QuestType.MAIN);
+		CreateQuest(4, "Llega al palacio", "Llega al palacio", QuestState.ACTIVE, QuestType.MAIN);
+		CreateQuest(5, "Busca como entrar", "Busca como entrar", QuestState.ACTIVE, QuestType.MAIN);
+		CreateQuest(6, "Derrota a Rabban", "Derrota a Rabban", QuestState.ACTIVE, QuestType.MAIN);
 
-		for (int i = 0; i < questList.Count; ++i)
-        {
-			Debug.Log("----------------");
-			Debug.Log(questList[i].GetQuestId().ToString());
-			Debug.Log(questList[i].GetQuestName());
-			Debug.Log(questList[i].GetQuestDescription());
-			Debug.Log(questList[i].GetQuestState().ToString());
-			Debug.Log(questList[i].GetQuestType().ToString());
-        }
-		// ----------------------------------------------------------------------------------------------------------
+		captainsDefeated = 0;
 	}
 	public void Update()
 	{
-		questTitle.GetComponent<UIText>().text = activeQuestList[4].GetQuestName().ToString();
-		position.Set(0.0f, 0.0f, 0.0f);
-		questTitle.GetComponent<Transform2D>().position2D = position;
-
-		questDescription.GetComponent<UIText>().text = activeQuestList[4].GetQuestDescription().ToString();
-		position.Set(0.0f, 10.0f, 0.0f);
-		questDescription.GetComponent<Transform2D>().position2D = position;
-
-		questId.GetComponent<UIText>().text = activeQuestList[4].GetQuestId().ToString();
-		position.Set(0.0f, 20.0f, 0.0f);
-		questId.GetComponent<Transform2D>().position2D = position;
-
-		questState.GetComponent<UIText>().text = activeQuestList[4].GetQuestState().ToString();
-		position.Set(0.0f, 30.0f, 0.0f);
-		questState.GetComponent<Transform2D>().position2D = position;
-
-		questType.GetComponent<UIText>().text = activeQuestList[4].GetQuestType().ToString();
-		position.Set(0.0f, 40.0f, 0.0f);
-		questType.GetComponent<Transform2D>().position2D = position;
-		// Testing --------------------------------------------------------------------------------------------------
-		if (Input.GetKey(KeyCode.C) == KeyState.KEY_DOWN)
-		{
-			ChangeQuestState(activeQuestList[0], QuestState.COMPLETED);
-		}
-
-		if (Input.GetKey(KeyCode.D) == KeyState.KEY_DOWN)
-		{
-			Debug.Log(questList.Count.ToString());
-			if (questList.Count > 0)
-			{
-				RemoveQuest(questList[questList.Count - 1]);
+		if (Input.GetKey(KeyCode.J) == KeyState.KEY_DOWN) showJournal = !showJournal;
+		if (showJournal)
+        {
+			activeButton.isActive = true;
+			completedButton.isActive = true;
+			if (showActive)
+            {
+				activeQuestNames.isActive = true;
+				completedQuestNames.isActive = false;
+				questDescription.isActive = false;
+				questId.isActive = false;
+				questState.isActive = false;
+				questType.isActive = false;
 			}
+			if (showCompleted)
+            {
+				activeQuestNames.isActive = false;
+				completedQuestNames.isActive = true;
+				questDescription.isActive = false;
+				questId.isActive = false;
+				questState.isActive = false;
+				questType.isActive = false;
+			}
+        }
+        else
+        {
+			activeButton.isActive = false;
+			completedButton.isActive = false;
+			activeQuestNames.isActive = false;
+			completedQuestNames.isActive = false;
+			questDescription.isActive = false;
+			questId.isActive = false;
+			questState.isActive = false;
+			questType.isActive = false;
 		}
-		// ----------------------------------------------------------------------------------------------------------
+
+		activeQuests = "";
+		completedQuests = "";
+
+		for (int i = 0; i < activeQuestList.Count; ++i)
+        {
+			activeQuests += activeQuestList[i].GetQuestName().ToString() + "\n\n";
+        }
+		for (int i = 0; i < completedQuestList.Count; ++i)
+		{
+			completedQuests += completedQuestList[i].GetQuestName().ToString() + "\n\n";
+		}
+
+		float xCorner = (InternalCalls.GetRegionGame().x / 2);
+		float yCorner = (InternalCalls.GetRegionGame().y / 2);
+
+		activeButton.GetComponent<UIButton>().text = "Active Quests";
+		position.Set(xCorner - 700, yCorner - 30, 1000000.0f);
+		activeButton.GetComponent<Transform2D>().position2D = position;
+
+		completedButton.GetComponent<UIButton>().text = "Completed Quests";
+		position.Set(xCorner - 450, yCorner - 30, 1000000.0f);
+		completedButton.GetComponent<Transform2D>().position2D = position;
+
+		activeQuestNames.GetComponent<UIText>().text = activeQuests;
+		position.Set(xCorner - 550, yCorner - 60, 1000000.0f);
+		activeQuestNames.GetComponent<Transform2D>().position2D = position;
+
+		completedQuestNames.GetComponent<UIText>().text = completedQuests;
+		position.Set(xCorner - 550, yCorner - 60, 1000000.0f);
+		completedQuestNames.GetComponent<Transform2D>().position2D = position;
+
+		int a = activeButton.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 3:
+				// pressed mode
+				showActive = true;
+				showCompleted = false;
+				break;
+		}
+
+		int b = completedButton.GetComponent<UIButton>().GetButtonState();
+		switch (b)
+		{
+			case 3:
+				// pressed mode
+				showActive = false;
+				showCompleted = true;
+				break;
+		}
+
+		if (Input.GetKey(KeyCode.M) == KeyState.KEY_DOWN && captainsDefeated < 3) ++captainsDefeated;
+		if (captainsDefeated == 3 && GetQuestByName("Elimina a los 3 capitanes").GetQuestState() == QuestState.ACTIVE) CompleteQuest(GetQuestByName("Elimina a los 3 capitanes"));
 	}
 }
