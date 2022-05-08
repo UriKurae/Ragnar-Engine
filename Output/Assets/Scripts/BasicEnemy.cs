@@ -178,6 +178,11 @@ public class BasicEnemy : RagnarComponent
                 }
 
             }
+
+            if(Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
+            {
+                controlled = false;
+            }
         }
     }
 

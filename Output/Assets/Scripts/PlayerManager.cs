@@ -104,32 +104,39 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        SpawnArea(State.ABILITY_1);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        SpawnArea(State.ABILITY_2);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        SpawnArea(State.ABILITY_3);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        SpawnArea(State.ABILITY_4);
+        if (players[characterSelected].GetComponent<Player>().controled)
+            SpawnArea(State.ABILITY_4);
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
     public void Carrying()
     {
-        playableCharacter.state = State.CARRYING;
-        players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+        if (players[characterSelected].GetComponent<Player>().controled)
+        {
+            playableCharacter.state = State.CARRYING;
+            players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
+        }
     }
 
     private void AbilityStateChanger()
@@ -365,7 +372,7 @@ public class PlayerManager : RagnarComponent
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
             playableCharacter.state = State.POSTCAST;
-            players[characterSelected].GetComponent<Player>().SetState((int)State.POSTCAST);
+            players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
