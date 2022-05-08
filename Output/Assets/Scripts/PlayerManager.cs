@@ -239,7 +239,7 @@ public class PlayerManager : RagnarComponent
                     {
                         if (playableCharacter == characters[0])
                         {
-                            players[characterSelected].GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+                            players[characterSelected].GetComponent<AudioSource>().PlayClip("WPN_VOICE");
                         }
                         else if (playableCharacter == characters[1])
                         {
