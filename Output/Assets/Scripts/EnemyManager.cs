@@ -152,8 +152,7 @@ public class EnemyManager : RagnarComponent
         for (int i = 0; i < enemies.Length; ++i)
         {
             EnemyData data = SaveSystem.LoadEnemy(enemies[i].name);
-            
-            enemies[i].spawnPoint = data.spawnPoint;
+
             enemies[i].state = data.state;
             enemies[i].type = data.type;
 
