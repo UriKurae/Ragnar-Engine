@@ -78,7 +78,7 @@ public class Player : RagnarComponent
                 }
 
                 // Crouch
-                switch(Input.GetKey(KeyCode.LSHIFT))
+                switch(Input.GetKey(KeyCode.SPACE))
                 {
                     case KeyState.KEY_DOWN:
                         {

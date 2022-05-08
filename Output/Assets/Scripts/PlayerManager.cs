@@ -56,21 +56,21 @@ public class PlayerManager : RagnarComponent
 
 	public void Update()
     {
-        if (Input.GetKey(KeyCode.Y) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.F6) == KeyState.KEY_DOWN)
         {
             SaveSystem.LoadScene();
             //LoadPlayer();
             //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().LoadEnemy();
             SaveSystem.fromContinue = true;
         }
-        if (Input.GetKey(KeyCode.L) == KeyState.KEY_DOWN)
+        if (Input.GetKey(KeyCode.F5) == KeyState.KEY_DOWN)
         {
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
             SavePlayer();
         }
         if (!dialogue.GetInDialogue())
         {
-            if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
+            if (Input.GetKey(KeyCode.SPACE) == KeyState.KEY_DOWN)
             {
                 crouched = !crouched;
             }
@@ -129,6 +129,13 @@ public class PlayerManager : RagnarComponent
         SpawnArea((int)State.ABILITY_4);
     }
 
+    // LETRA B --> ARRASTRAR CUERPOS
+    public void Carrying()
+    {
+        playableCharacter.state = State.CARRYING;
+        players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
+    }
+
     private void AbilityStateChanger()
     {
         // Change Condition to all players
@@ -161,14 +168,6 @@ public class PlayerManager : RagnarComponent
                 //b.y = lightHab.transform.globalPosition.y;
                 //lightHab.transform.globalPosition = b;
             }
-        }
-
-        // LETRA B --> ARRASTRAR CUERPOS
-        if (Input.GetKey(KeyCode.B) == KeyState.KEY_DOWN)
-        {
-            //SpawnArea((int)State.CARRYING);
-            playableCharacter.state = State.CARRYING;
-            players[characterSelected].GetComponent<Player>().SetState((int)State.CARRYING);
         }
 
         // Si el estado no es NONE, significa que la habilidad est� lista para ser casteada, y entrar� en esta funci�n.
@@ -374,7 +373,7 @@ public class PlayerManager : RagnarComponent
         switch (players.Length)
         {
             case 4:
-                if (Input.GetKey(KeyCode.F4) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA4) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 3;
@@ -387,7 +386,7 @@ public class PlayerManager : RagnarComponent
                 }
                 goto case 3;
             case 3:
-                if (Input.GetKey(KeyCode.F3) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 2;
@@ -400,7 +399,7 @@ public class PlayerManager : RagnarComponent
                 }
                 goto case 2;
             case 2:
-                if (Input.GetKey(KeyCode.F2) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 1;
@@ -413,7 +412,7 @@ public class PlayerManager : RagnarComponent
                 }
                 goto case 1;
             case 1:
-                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_DOWN)
+                if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN)
                 {
                     players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
                     characterSelected = 0;
