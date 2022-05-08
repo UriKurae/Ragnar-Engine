@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 167671536,
+                    "pointer": 159941960,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -102,286 +102,13 @@
             ]
         },
         {
-            "UUID": 279655738,
+            "UUID": 688286989,
             "Parent UUID": 1542806907,
             "Name": "1",
             "Active": true,
             "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -48.420703887939453,
-                        0,
-                        71.212753295898438
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1676813773,
-            "Parent UUID": 1542806907,
-            "Name": "2",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -42.394466400146484,
-                        0,
-                        77.226242065429688
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1245657567,
-            "Parent UUID": 1542806907,
-            "Name": "3",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -35.992015838623047,
-                        -2.0301918993936852e-05,
-                        78.968406677246094
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1256824484,
-            "Parent UUID": 1542806907,
-            "Name": "4",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -32.924800872802734,
-                        -2.1830472178407945e-05,
-                        83.107215881347656
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1058988841,
-            "Parent UUID": 1542806907,
-            "Name": "5",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -14.918759346008301,
-                        0,
-                        70.683586120605469
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 289008200,
-            "Parent UUID": 1542806907,
-            "Name": "6",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -15.325681686401367,
-                        0,
-                        66.516220092773438
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 401175470,
-            "Parent UUID": 1542806907,
-            "Name": "7",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Waypoints",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -23.69732666015625,
-                        -3.4666489227674901e-05,
-                        48.680919647216797
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 828843908,
-            "Parent UUID": 1542806907,
-            "Name": "8",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
             "Is Interactuable": false,
@@ -390,672 +117,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -0.68152225017547607,
-                        -3.3544638426974416e-05,
-                        55.098030090332031
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1466869427,
-            "Parent UUID": 1542806907,
-            "Name": "9",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -38.7542724609375,
-                        -3.3465257729403675e-05,
-                        57.39727783203125
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 453841059,
-            "Parent UUID": 1542806907,
-            "Name": "10",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -7.0307106971740723,
-                        -3.0019715268281288e-05,
-                        17.204414367675781
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1844276075,
-            "Parent UUID": 1542806907,
-            "Name": "11",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        11.058477401733398,
-                        -2.4856452000676654e-05,
-                        28.021379470825195
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1956945486,
-            "Parent UUID": 1542806907,
-            "Name": "12",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -36.600204467773438,
-                        -2.8616612326004542e-05,
-                        -0.83097743988037109
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 636428115,
-            "Parent UUID": 1542806907,
-            "Name": "13",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        10.213056564331055,
-                        -2.9309703677427024e-05,
-                        11.618998527526855
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 343093841,
-            "Parent UUID": 1542806907,
-            "Name": "14",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -2.7790260314941406,
-                        -3.0395112844416872e-05,
-                        -5.8840789794921875
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 222779144,
-            "Parent UUID": 1542806907,
-            "Name": "15",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        10.959814071655273,
-                        -2.876451617339626e-05,
-                        -5.7394475936889648
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 933576043,
-            "Parent UUID": 1542806907,
-            "Name": "16",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        7.7742137908935547,
-                        -2.7275076718069613e-05,
-                        -17.916675567626953
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 262363850,
-            "Parent UUID": 1542806907,
-            "Name": "17",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -16.985919952392578,
-                        -2.8884351195301861e-05,
-                        -36.682575225830078
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 842199478,
-            "Parent UUID": 1542806907,
-            "Name": "18",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.93288803100585938,
-                        -2.6951784093398601e-05,
-                        -38.266578674316406
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 994958075,
-            "Parent UUID": 1542806907,
-            "Name": "19",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        40.76885986328125,
-                        -2.7349216907168739e-05,
-                        -0.13099575042724609
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1190242593,
-            "Parent UUID": 1542806907,
-            "Name": "20",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        42.190109252929688,
-                        -2.7930058422498405e-05,
-                        -10.389925956726074
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 587925033,
-            "Parent UUID": 1542806907,
-            "Name": "21",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        42.74566650390625,
-                        -3.147330426145345e-05,
-                        -35.695499420166016
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        -0,
-                        0,
-                        -0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 907705359,
-            "Parent UUID": 1542806907,
-            "Name": "22",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -21.809062957763672,
-                        -3.3534946851432323e-05,
-                        31.397348403930664
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 1061739102,
-            "Parent UUID": 1542806907,
-            "Name": "23",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -42.987388610839844,
-                        -3.3378790249116719e-05,
-                        37.036338806152344
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 367290326,
-            "Parent UUID": 1542806907,
-            "Name": "24",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -40.310630798339844,
-                        -2.8522605134639889e-05,
-                        20.307588577270508
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 688286989,
-            "Parent UUID": 1542806907,
-            "Name": "25",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -56.733528137207031,
-                        -2.203402436862234e-05,
-                        65.798789978027344
+                        -53.470794677734375,
+                        -2.2920372430235147e-05,
+                        60.384670257568359
                     ],
                     "Quaternion": [
                         0,
@@ -1079,7 +143,7 @@
         {
             "UUID": 1321213132,
             "Parent UUID": 1542806907,
-            "Name": "26",
+            "Name": "2",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1092,9 +156,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -51.887252807617188,
-                        1.3270773706608452e-06,
-                        44.220951080322266
+                        -51.062248229980469,
+                        1.3248037475932506e-06,
+                        44.074966430664062
                     ],
                     "Quaternion": [
                         0,
@@ -1118,7 +182,7 @@
         {
             "UUID": 215745572,
             "Parent UUID": 1542806907,
-            "Name": "27",
+            "Name": "3",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1131,9 +195,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -48.4993896484375,
-                        -2.7152487746207044e-05,
-                        30.891208648681641
+                        -49.533950805664062,
+                        -2.6763427740661427e-05,
+                        31.715906143188477
                     ],
                     "Quaternion": [
                         0,
@@ -1157,7 +221,7 @@
         {
             "UUID": 1299701573,
             "Parent UUID": 1542806907,
-            "Name": "28",
+            "Name": "4",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1170,9 +234,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -37.939788818359375,
-                        -2.9634145903401077e-05,
-                        38.972476959228516
+                        -41.47637939453125,
+                        -2.8763019145117141e-05,
+                        39.187171936035156
                     ],
                     "Quaternion": [
                         0,
@@ -1196,7 +260,7 @@
         {
             "UUID": 504171143,
             "Parent UUID": 1542806907,
-            "Name": "29",
+            "Name": "5",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1209,9 +273,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -18.967842102050781,
-                        -3.2992102205753326e-05,
-                        34.984107971191406
+                        -21.7142333984375,
+                        -3.475284029264003e-05,
+                        38.732215881347656
                     ],
                     "Quaternion": [
                         0,
@@ -1235,7 +299,7 @@
         {
             "UUID": 557153389,
             "Parent UUID": 1542806907,
-            "Name": "30",
+            "Name": "6",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1274,7 +338,7 @@
         {
             "UUID": 1069376601,
             "Parent UUID": 1542806907,
-            "Name": "31",
+            "Name": "7",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1287,9 +351,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -15.462421417236328,
-                        -0.00010067423136206344,
-                        -42.989448547363281
+                        -0.027156352996826172,
+                        -0.00010536931222304702,
+                        -7.6510305404663086
                     ],
                     "Quaternion": [
                         0,
@@ -1313,7 +377,7 @@
         {
             "UUID": 20251195,
             "Parent UUID": 1542806907,
-            "Name": "32",
+            "Name": "8",
             "Active": true,
             "Static": true,
             "PrefabID": false,
@@ -1326,9 +390,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        24.3514404296875,
-                        -4.5766915718559176e-05,
-                        -46.944000244140625
+                        22.071952819824219,
+                        -7.2930306487251073e-05,
+                        -18.003519058227539
                     ],
                     "Quaternion": [
                         0,
@@ -1431,20 +495,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        8.2836904525756836,
+                        -79.924179077148438,
                         0,
-                        90
+                        81.402267456054688
                     ],
                     "Quaternion": [
                         0,
-                        0.95912659168243408,
+                        0.63255488872528076,
                         0,
-                        0.28297731280326843
+                        -0.77451550960540771
                     ],
                     "RotationEditor": [
-                        -3.1415927410125732,
-                        0.57379376888275146,
-                        -3.1415927410125732
+                        -0,
+                        -1.369694709777832,
+                        -0
                     ],
                     "Scale": [
                         1.0000262260437012,
@@ -1470,15 +534,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -3.0517578125e-05,
-                        62.399337768554688,
-                        -56.726692199707031
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
+                        0.34202012419700623,
                         0,
-                        -7.9287412191320072e-09,
-                        0.93969273567199707
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1494,12 +558,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.36628639698028564,
+                    "Vertical Fov": 0.47127649188041687,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -22.509593963623047,
-                        62.399337768554688,
-                        137.64305114746094
+                        -30.930538177490234,
+                        55,
+                        71.414573669433594
                     ],
                     "Type": 3,
                     "Zoom": -18,
@@ -1508,14 +572,14 @@
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        8.2836904525756836,
+                        -79.924179077148438,
                         0,
-                        90
+                        81.402267456054688
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 147.12403869628906,
+                    "Horizontal Angle": 281.52224731445312,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1916,8 +980,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1980,8 +1044,8 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2044,8 +1108,8 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2175,8 +1239,8 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2239,8 +1303,8 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2370,8 +1434,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2501,8 +1565,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2565,8 +1629,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2696,8 +1760,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2760,8 +1824,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2891,8 +1955,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2955,8 +2019,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3039,8 +2103,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3123,8 +2187,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3207,8 +2271,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3276,8 +2340,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3345,8 +2409,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3370,8 +2434,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3454,8 +2518,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3479,8 +2543,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3563,8 +2627,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3588,8 +2652,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3672,8 +2736,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3697,8 +2761,8 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3781,8 +2845,8 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7698,6 +6762,1606 @@
             ]
         },
         {
+            "UUID": 200610204,
+            "Parent UUID": 1179485366,
+            "Name": "Enemies",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 559506459,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_1",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -42.580799102783203,
+                        0,
+                        77.157722473144531
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.33797997236251831,
+                        0,
+                        0.94115334749221802
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1026732990,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_2",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -44.339458465576172,
+                        0,
+                        75.815322875976562
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.30639854073524475,
+                        0,
+                        0.95190334320068359
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1419534672,
+            "Parent UUID": 200610204,
+            "Name": "basic_oficial_enemy_1_patrol",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -53.544437408447266,
+                        0,
+                        58.793766021728516
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.061743952333927155,
+                        0,
+                        0.99809199571609497
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1847634201,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_3",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -37.501522064208984,
+                        0,
+                        55.921897888183594
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.52343916893005371,
+                        0,
+                        0.85206305980682373
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 35375669,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_4",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -23.060791015625,
+                        -1.2325951644078309e-32,
+                        58.702377319335938
+                    ],
+                    "Quaternion": [
+                        0.00964374840259552,
+                        -0.23985482752323151,
+                        -0.023090258240699768,
+                        0.97048622369766235
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 446278811,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_5",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -33.543804168701172,
+                        0,
+                        78.478050231933594
+                    ],
+                    "Quaternion": [
+                        0.016439326107501984,
+                        0.078750386834144592,
+                        -0.018865592777729034,
+                        0.99658024311065674
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 795219263,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_6",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -33.543804168701172,
+                        0,
+                        83.361549377441406
+                    ],
+                    "Quaternion": [
+                        0.018483085557818413,
+                        0.99450951814651489,
+                        0.016868147999048233,
+                        -0.1016106903553009
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1128425369,
+            "Parent UUID": 200610204,
+            "Name": "basic_oficial_enemy_2",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.24785612523555756,
+                        0,
+                        54.395206451416016
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.9670482873916626,
+                        0,
+                        0.25459316372871399
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1460447918,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_7",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -42.030029296875,
+                        0,
+                        35.872257232666016
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.30379614233970642,
+                        0,
+                        0.95273709297180176
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1824913853,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_8",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -23.739784240722656,
+                        0,
+                        35.872257232666016
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.11358091235160828,
+                        0,
+                        0.99352878332138062
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2136398207,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_9",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -41.025897979736328,
+                        0,
+                        14.939125061035156
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.21986658871173859,
+                        0,
+                        0.97552996873855591
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 324348538,
+            "Parent UUID": 200610204,
+            "Name": "basic_oficial_enemy_3_patrol",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -47.085926055908203,
+                        0,
+                        29.432792663574219
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.061743952333927155,
+                        0,
+                        0.99809199571609497
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 762751975,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_10",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.22437553107738495,
+                        0,
+                        16.628856658935547
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.30334383249282837,
+                        0,
+                        0.95288115739822388
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1162654999,
+            "Parent UUID": 200610204,
+            "Name": "undistractable_enemy_1",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -35.469654083251953,
+                        0,
+                        -4.3376779556274414
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.34989088773727417,
+                        0,
+                        0.93679046630859375
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1491196498,
+            "Parent UUID": 200610204,
+            "Name": "undistractable_enemy_2_patrol",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        8.5326480865478516,
+                        0,
+                        -10.847188949584961
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.011207951232790947,
+                        0,
+                        0.99993717670440674
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1800174496,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_11",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.1443138122558594,
+                        0,
+                        -1.2640893459320068
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.83447784185409546,
+                        0,
+                        0.55104142427444458
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2138393314,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_12",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -3.959754467010498,
+                        0,
+                        -7.5547952651977539
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.87176138162612915,
+                        0,
+                        0.48993074893951416
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 358647789,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_13",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.4362154006958008,
+                        0,
+                        -18.508296966552734
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.085460156202316284,
+                        0,
+                        0.99634158611297607
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 681758850,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_14",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        46.445144653320312,
+                        0,
+                        -37.480327606201172
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.47690218687057495,
+                        0,
+                        0.8789563775062561
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1019002974,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_15",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        43.574680328369141,
+                        0,
+                        -7.6495547294616699
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.10369780659675598,
+                        0,
+                        0.99460887908935547
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1387298064,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_16",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        43.574680328369141,
+                        0,
+                        -4.104792594909668
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.99999910593032837,
+                        0,
+                        -0.0013294970849528909
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1816929255,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_17",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -15.89747142791748,
+                        0,
+                        -30.629825592041016
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.68825137615203857,
+                        0,
+                        0.72547227144241333
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 28829210,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_18",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        3.6388733386993408,
+                        0,
+                        -37.741558074951172
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.99915462732315063,
+                        0,
+                        -0.041109882295131683
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 335231231,
+            "Parent UUID": 200610204,
+            "Name": "basic_enemy_19",
+            "Active": false,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        20.953550338745117,
+                        0,
+                        -45.548870086669922
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.64718341827392578,
+                        0,
+                        0.76233434677124023
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/lvl1__SmallRocks.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
             "UUID": 2068571281,
             "Parent UUID": 417171234,
             "Name": "Dialogue",
@@ -7737,7 +8401,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 344293064,
+                    "pointer": 296075776,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7775,8 +8439,8 @@
                     ],
                     "buttonWidth": 914,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7839,8 +8503,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7908,8 +8572,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -7977,8 +8641,8 @@
                     ],
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8181,7 +8845,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 360792312,
+                    "pointer": 284627824,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -8257,7 +8921,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 360793320,
+                    "pointer": 284627968,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -9142,8 +9806,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9175,7 +9839,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 371015184,
+                    "pointer": 284625808,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9213,8 +9877,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9344,8 +10008,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9475,8 +10139,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9606,8 +10270,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9670,8 +10334,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9734,8 +10398,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9798,8 +10462,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9929,8 +10593,8 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9967,7 +10631,7 @@
             "Name": "UIGame",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIGame.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -10006,7 +10670,7 @@
             "Name": "UICharacterName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10032,8 +10696,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10075,7 +10739,7 @@
             "Name": "UIStilgarImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10101,8 +10765,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10139,7 +10803,7 @@
             "Name": "UIChaniImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10165,8 +10829,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10203,7 +10867,7 @@
             "Name": "UIPaulImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10229,8 +10893,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10267,7 +10931,7 @@
             "Name": "ab5",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10293,8 +10957,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10398,7 +11062,7 @@
             "Name": "ab4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10424,8 +11088,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10529,7 +11193,7 @@
             "Name": "ab3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10555,8 +11219,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10660,7 +11324,7 @@
             "Name": "ab2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10686,8 +11350,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10791,7 +11455,7 @@
             "Name": "ab1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10817,8 +11481,8 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10922,7 +11586,7 @@
             "Name": "UICharBor3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10948,8 +11612,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10986,7 +11650,7 @@
             "Name": "UICharBor2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11012,8 +11676,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11050,7 +11714,7 @@
             "Name": "UICharBor1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11076,8 +11740,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11114,7 +11778,7 @@
             "Name": "UISelector",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11140,8 +11804,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11178,7 +11842,7 @@
             "Name": "Char",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11204,8 +11868,8 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11242,7 +11906,7 @@
             "Name": "AbilImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11268,8 +11932,8 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11306,7 +11970,7 @@
             "Name": "UICharPhoto",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11332,8 +11996,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11370,7 +12034,7 @@
             "Name": "UIAbilityArray",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11396,8 +12060,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11434,7 +12098,7 @@
             "Name": "CharFocusedImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11460,8 +12124,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11498,7 +12162,7 @@
             "Name": "CharFocusedText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11524,8 +12188,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11567,7 +12231,7 @@
             "Name": "AbilityImageApmliate",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11593,8 +12257,8 @@
                     ],
                     "buttonWidth": 70,
                     "buttonHeight": 70,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11631,7 +12295,7 @@
             "Name": "abilityLeters",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11657,8 +12321,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11695,7 +12359,7 @@
             "Name": "UI Counter",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11721,8 +12385,8 @@
                     ],
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 613.5,
+                    "lastButtonWidth": 1312,
+                    "lastButtonHeight": 760.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
