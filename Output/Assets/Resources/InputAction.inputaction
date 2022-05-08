@@ -34,14 +34,6 @@
                             "Path": 25
                         }
                     ]
-                },
-                {
-                    "Name": "Ability5",
-                    "Bindings": [
-                        {
-                            "Path": 5
-                        }
-                    ]
                 }
             ]
         },
@@ -77,14 +69,6 @@
                     "Bindings": [
                         {
                             "Path": 9
-                        }
-                    ]
-                },
-                {
-                    "Name": "Ability5",
-                    "Bindings": [
-                        {
-                            "Path": 10
                         }
                     ]
                 }
