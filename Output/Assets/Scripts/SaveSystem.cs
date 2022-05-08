@@ -42,7 +42,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
+            //Debug.Log("Save file not found in " + path);
         }
     }
     public static void SavePlayer(Player player)
@@ -76,7 +76,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
+            //Debug.Log("Save file not found in " + path);
             return null;
         }
     }
@@ -113,7 +113,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
+            //Debug.Log("Save file not found in " + path);
             return null;
         }
     }
