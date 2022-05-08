@@ -192,6 +192,8 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.NavAgent::set_hitPosition", SetHitPosition);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastA", GetRayCastA);
 	mono_add_internal_call("RagnarEngine.NavAgent::get_rayCastB", GetRayCastB);
+	mono_add_internal_call("RagnarEngine.NavAgent::ClearPath", ClearPath);
+	mono_add_internal_call("RagnarEngine.NavAgent::PathSize", PathSize);
 	mono_add_internal_call("RagnarEngine.NavAgent::MovePath", MoveAgentPath);
 	mono_add_internal_call("RagnarEngine.NavAgent::MoveTo", MoveAgentTo);
 	mono_add_internal_call("RagnarEngine.NavAgent::set_path", SetAgentPath);
