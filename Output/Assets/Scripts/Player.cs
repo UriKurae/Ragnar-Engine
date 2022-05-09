@@ -30,6 +30,7 @@ public class Player : RagnarComponent
     DialogueManager dialogue;
 
     ParticleSystem walkPartSys;
+    ParticleSystem runPartSys;
     ParticleSystem getHitPartSys;
 
     public bool controled = false;
@@ -56,19 +57,24 @@ public class Player : RagnarComponent
         if (gameObject.name == "Player")
         {
             walkPartSys = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_2")
         {
             walkPartSys = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles_2").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_2").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_3")
         {
             walkPartSys = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
         }
+        runPartSys.Pause();
         walkPartSys.Pause();
+        getHitPartSys.Pause();
     }
 
     public void Update()
@@ -116,8 +122,9 @@ public class Player : RagnarComponent
                     agent.speed *= 2;
                     move = Movement.RUN;
                 }
+                
 
-                if (abilityState == State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
+                if (!dead && abilityState == State.NONE && Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
                 {
                     if (agent.CalculatePath(agent.hitPosition).Length > 0)
                     {
@@ -128,12 +135,15 @@ public class Player : RagnarComponent
                                 {
                                     case Actions.NONE:
                                         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                                        walkPartSys.Play();
                                         break;
                                     case Actions.CROUCH:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+                                        walkPartSys.Play();
                                         break;
                                     case Actions.CARRY:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseWalk");
+                                        walkPartSys.Play();
                                         break;
                                 }
                                 break;
@@ -143,22 +153,24 @@ public class Player : RagnarComponent
                                 {
                                     case Actions.NONE:
                                         gameObject.GetComponent<Animation>().PlayAnimation("Run");
+                                        runPartSys.Play();
                                         break;
                                     case Actions.CROUCH:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
+                                        runPartSys.Play();
                                         break;
                                     case Actions.CARRY:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseRun");
+                                        runPartSys.Play();
                                         break;
                                 }
                                 break;
                         }
 
                         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
-                        walkPartSys.Play();
                     }
                 }
-                else if (abilityState != State.NONE && agent.PathSize() > 0)
+                else if (!dead && abilityState != State.NONE && agent.PathSize() > 0)
                 {
                     agent.ClearPath();
                     switch (action)
@@ -173,9 +185,11 @@ public class Player : RagnarComponent
                             gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
                             break;
                     }
+                    walkPartSys.Pause();
+                    runPartSys.Pause();
                 }
             }
-            if (agent.MovePath())
+            if (!dead && agent.MovePath())
             {
                 switch (action)
                 {
@@ -191,6 +205,7 @@ public class Player : RagnarComponent
                 }
 
                 walkPartSys.Pause();
+                runPartSys.Pause();
                 gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
             }
             if (action == Actions.CROUCH)
@@ -207,7 +222,7 @@ public class Player : RagnarComponent
                 gameObject.GetComponent<AudioSource>().PlayClip("WPN_RELOAD");
             }
             //////////////////////////
-
+            
             //SaveTest File for Debugging
             if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
@@ -217,6 +232,7 @@ public class Player : RagnarComponent
                 else if (gameObject.name == "Player_3") name = "Stilgar";
                 GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest(name, gameObject.transform.globalPosition);
                 SceneManager.LoadScene("LoseScene");
+                pendingToDelete = false;
                 //InternalCalls.Destroy(gameObject);
             }
 
@@ -228,6 +244,7 @@ public class Player : RagnarComponent
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
             walkPartSys.Pause();
+            runPartSys.Pause();
             gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
         }
 
@@ -241,7 +258,9 @@ public class Player : RagnarComponent
     {
         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_DEATH");
         gameObject.GetComponent<Animation>().PlayAnimation("Death");
+        agent.ClearPath();
         walkPartSys.Pause();
+        runPartSys.Pause();
         pendingToDelete = true;
         if (GameObject.Find("Knife") != null)
         {
@@ -253,8 +272,22 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "Rocks")
             GetHit(1);
     }
-    public void OnTrigger(Rigidbody other)
+    //public void OnTrigger(Rigidbody other)
+    //{
+    //}
+
+    public void OnTriggerEnter(Rigidbody other)
     {
+        if (other.gameObject.tag == "CheckPoint")
+        {
+            SaveSystem.SaveScene();
+            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
+            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
+        }
+        if (other.gameObject.tag == "Hidde")
+            isHidden = true;
+
+        // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
@@ -279,18 +312,7 @@ public class Player : RagnarComponent
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
         }
-    }
-
-    public void OnTriggerEnter(Rigidbody other)
-    {
-        if (other.gameObject.tag == "CheckPoint")
-        {
-            SaveSystem.SaveScene();
-            GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SavePlayer();
-            GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveEnemies();
-        }
-        if (other.gameObject.tag == "Hidde")
-            isHidden = true;
+        // ===================================================================
     }
 
     public void OnTriggerExit(Rigidbody other)

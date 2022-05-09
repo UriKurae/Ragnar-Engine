@@ -72,7 +72,18 @@ public class TankEnemy : RagnarComponent
             if (childs[i].name == "StunParticles")
             {
                 stunPartSys = childs[i].GetComponent<ParticleSystem>();
-                break;
+            }
+            else if (childs[i].name == "StabParticles")
+            {
+                childs[i].GetComponent<ParticleSystem>().Pause();
+            }
+            else if (childs[i].name == "KnifeParticles")
+            {
+                childs[i].GetComponent<ParticleSystem>().Pause();
+            }
+            else if (childs[i].name == "SwordSlashParticles")
+            {
+                childs[i].GetComponent<ParticleSystem>().Pause();
             }
         }
 

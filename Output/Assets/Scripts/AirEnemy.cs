@@ -73,6 +73,8 @@ public class AirEnemy : RagnarComponent
                 break;
             }
         }
+
+        deathPartSys.Pause();
     }
 
     public void Update()

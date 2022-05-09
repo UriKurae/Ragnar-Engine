@@ -20,7 +20,7 @@ public class Knife : RagnarComponent
         NavAgent agent = player.GetComponent<NavAgent>();
 
         Vector3 pos = player.transform.globalPosition;
-        pos.y += 3;
+        pos.y += 1;
         gameObject.transform.localPosition = pos;
 
         Vector3 direction = HitEnemy(agent, player);

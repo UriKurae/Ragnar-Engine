@@ -359,8 +359,12 @@ public class Level_1 : RagnarComponent
         GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
         InternalCalls.InstancePrefab("EnemyManager");
         GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemies = enemies;
-	}
-	public void Update()
+
+        InternalCalls.InstancePrefab("Dialogue");
+        //InternalCalls.InstancePrefab("DialogueLevel1");
+
+    }
+    public void Update()
 	{
         if (runGame) timer.Update();
         chrono.text = timer.GetTimeToString();
