@@ -469,6 +469,7 @@ public class PlayerManager : RagnarComponent
                 SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
                 break;
         }
+
         for (int i = 0; i < players.Length; ++i)
         { 
             SaveSystem.SavePlayer(players[i].GetComponent<Player>());
