@@ -34,6 +34,9 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstOScreenB = true;
 	bool isFirstOSoundB = true;
 	bool isFirstOControlsB = true;
+
+	bool isFirstOcontrolsL = true;
+	bool isFirstOcontrolsR = true;
 	float lastWindowW = 0;
 	GameObject optionsBack;
 	GameObject optionsBackImage;
@@ -84,6 +87,10 @@ public class pauseMenuButton : RagnarComponent
 	GameObject optionsControl20;
 	GameObject optionsControl21;
 	GameObject optionsControl22;
+
+	GameObject optionsControlR;
+	GameObject optionsControlL;
+	int actualControlOption = 0;
 	//////////////AUDIO//////////////
 	GameObject SceneAudio;
 	float currVolume = 0.0f;
@@ -230,6 +237,32 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl20 = GameObject.Find("optionsControl20");
 		optionsControl21 = GameObject.Find("optionsControl21");
 		optionsControl22 = GameObject.Find("optionsControl22");
+
+		optionsControlR = GameObject.Find("optionsControlR");
+		optionsControlL = GameObject.Find("optionsControlL");
+
+		optionsControl1.GetComponent<UIButton>().text = "Esc";
+		optionsControl2.GetComponent<UIButton>().text = "1";
+		optionsControl3.GetComponent<UIButton>().text = "2";
+		optionsControl4.GetComponent<UIButton>().text = "3";
+		optionsControl5.GetComponent<UIButton>().text = "R Click";
+		optionsControl6.GetComponent<UIButton>().text = "L Click";
+		optionsControl7.GetComponent<UIButton>().text = "Space";
+		optionsControl8.GetComponent<UIButton>().text = "Drag";
+		optionsControl9.GetComponent<UIButton>().text = "Crl L";
+		optionsControl10.GetComponent<UIButton>().text = "Drag";
+		optionsControl11.GetComponent<UIButton>().text = "F1";
+		optionsControl12.GetComponent<UIButton>().text = "F5";
+		optionsControl13.GetComponent<UIButton>().text = "F6";
+		optionsControl14.GetComponent<UIButton>().text = "A";
+		optionsControl15.GetComponent<UIButton>().text = "S";
+		optionsControl16.GetComponent<UIButton>().text = "D";
+		optionsControl17.GetComponent<UIButton>().text = "F";
+		optionsControl18.GetComponent<UIButton>().text = "G";
+		optionsControl19.GetComponent<UIButton>().text = "R Click";
+		optionsControl20.GetComponent<UIButton>().text = "L Click";
+		optionsControl21.GetComponent<UIButton>().text = "J";
+		optionsControl22.GetComponent<UIButton>().text = "Shift";
 		OptionsBackHide();
 		//////////////GAME//////////////
 		CharacterPhotoBord = GameObject.Find("Char");
@@ -336,13 +369,110 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl20.isActive = true;
 		optionsControl21.isActive = true;
 		optionsControl22.isActive = true;
+
+		pos.Set(-sum + 600, y - 780, 36.1f);
+		optionsControlL.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-sum + 800, y - 780, 36.1f);
+		optionsControlR.GetComponent<Transform2D>().position2D = pos;
+
+		int a = optionsControlL.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				isFirstOcontrolsL = true;
+				break;
+			case 3:
+                // pressed mode
+                if (isFirstOcontrolsL) { 
+					if (actualControlOption == 0)
+					{
+						actualControlOption = 1;
+
+					}
+					else
+					{
+						actualControlOption--;
+					}
+					//actualControlOption = 0;
+					SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
+				}
+				isFirstOcontrolsL = false;
+				
+				break;
+		}
+
+		a = optionsControlR.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				isFirstOcontrolsR = true;
+				break;
+			case 3:
+				// pressed mode
+				if (isFirstOcontrolsR)
+				{
+					if (actualControlOption == 1)
+					{
+						actualControlOption = 0;
+
+					}
+					else
+					{
+						actualControlOption++;
+					}
+					SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
+				}
+				//actualControlOption = 1;
+				isFirstOcontrolsR = false;
+				
+				break;
+		}
+		if (actualControlOption == 0)
+        {
+			optionsControl8.GetComponent<UIButton>().text = "Drag";
+			optionsControl9.GetComponent<UIButton>().text = "Crl L";
+			optionsControl14.GetComponent<UIButton>().text = "A";
+			optionsControl15.GetComponent<UIButton>().text = "S";
+			optionsControl16.GetComponent<UIButton>().text = "D";
+			optionsControl17.GetComponent<UIButton>().text = "F";
+			optionsControl18.GetComponent<UIButton>().text = "G";
+		}
+        else if(actualControlOption == 1)
+        {
+			optionsControl9.GetComponent<UIButton>().text = "Q E";
+			optionsControl8.GetComponent<UIButton>().text = "WASD";
+
+			optionsControl14.GetComponent<UIButton>().text = "Z";
+			optionsControl15.GetComponent<UIButton>().text = "X";
+			optionsControl16.GetComponent<UIButton>().text = "C";
+			optionsControl17.GetComponent<UIButton>().text = "V";
+			optionsControl18.GetComponent<UIButton>().text = "B";
+		}
 		pos.Set(-sum - 100, y - 230, 36.1f);
 		optionsControlText.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 270, y - 230, 36.1f);
+		pos.Set(-sum + 250, y - 230, 36.1f);
 		optionsControlText1.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 570, y - 230, 36.1f);
+		pos.Set(-sum + 550, y - 230, 36.1f);
 		optionsControlText2.GetComponent<Transform2D>().position2D = pos;
 
 
@@ -360,12 +490,15 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(-sum + 150, y - 480, 36.1f);
 		optionsControl5.GetComponent<Transform2D>().position2D = pos;
+		optionsControl5.GetComponent<UIButton>().SetTextPosition(-30,-3.2f);
 
 		pos.Set(-sum + 150, y - 540, 36.1f);
 		optionsControl6.GetComponent<Transform2D>().position2D = pos;
+		optionsControl6.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
 
 		pos.Set(-sum + 150, y - 585, 36.1f);
 		optionsControl7.GetComponent<Transform2D>().position2D = pos;
+		optionsControl7.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
 
 		pos.Set(-sum + 150, y - 640, 36.1f);
 		optionsControl8.GetComponent<Transform2D>().position2D = pos;
@@ -378,31 +511,31 @@ public class pauseMenuButton : RagnarComponent
 
 
 
-		pos.Set(-sum + 490, y - 230, 36.1f);
+		pos.Set(-sum + 470, y - 230, 36.1f);
 		optionsControl11.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 300, 36.1f);
+		pos.Set(-sum + 470, y - 300, 36.1f);
 		optionsControl12.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 370, 36.1f);
+		pos.Set(-sum + 470, y - 370, 36.1f);
 		optionsControl13.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 440, 36.1f);
+		pos.Set(-sum + 470, y - 440, 36.1f);
 		optionsControl14.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 510, 36.1f);
+		pos.Set(-sum + 470, y - 510, 36.1f);
 		optionsControl15.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 580, 36.1f);
+		pos.Set(-sum + 470, y - 580, 36.1f);
 		optionsControl16.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 650, 36.1f);
+		pos.Set(-sum + 470, y - 650, 36.1f);
 		optionsControl17.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 720, 36.1f);
+		pos.Set(-sum + 470, y - 720, 36.1f);
 		optionsControl18.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-sum + 490, y - 790, 36.1f);
+		pos.Set(-sum + 470, y - 790, 36.1f);
 		optionsControl19.GetComponent<Transform2D>().position2D = pos;
 
 
