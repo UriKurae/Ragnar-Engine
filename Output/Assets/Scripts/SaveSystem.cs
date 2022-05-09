@@ -131,4 +131,8 @@ public static class SaveSystem
             dir.Delete(true);
         }
     }
+    public static bool CheckExistingFile(string path)
+    {
+        return File.Exists(path);
+    }
 }

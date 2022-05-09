@@ -369,7 +369,8 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl20.isActive = true;
 		optionsControl21.isActive = true;
 		optionsControl22.isActive = true;
-
+		optionsControlR.isActive = true;
+		optionsControlL.isActive = true;
 		pos.Set(-sum + 600, y - 780, 36.1f);
 		optionsControlL.GetComponent<Transform2D>().position2D = pos;
 		pos.Set(-sum + 800, y - 780, 36.1f);
@@ -577,7 +578,8 @@ public class pauseMenuButton : RagnarComponent
 		optionsControl20.isActive = false;
 		optionsControl21.isActive = false;
 		optionsControl22.isActive = false;
-
+		optionsControlR.isActive = false;
+		optionsControlL.isActive = false;
 
 	}
 	void UpdateOptions()

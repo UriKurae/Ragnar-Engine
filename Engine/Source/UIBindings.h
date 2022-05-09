@@ -130,6 +130,17 @@ float3 GetTextPosition(MonoObject* go)
 
 	return tr->GetTextPosition();
 }
+
+void SetVisualDisabled(MonoObject* go,bool newDisabled)
+{
+	const char* name = mono_class_get_name(mono_object_get_class(go));
+	ButtonComponent* tr = GetComponentMono<ButtonComponent*>(go);
+	tr->SetVisualDisabled(newDisabled);
+	//float3 position = ;
+
+
+
+}
 // Checkbox =========================================
 const bool GetIsChecked(MonoObject* go)
 {
