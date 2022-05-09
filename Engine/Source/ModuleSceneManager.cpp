@@ -98,7 +98,11 @@ bool ModuleSceneManager::Update(float dt)
 	{
 		if (enteringFade)
 		{
-			transitionAlpha += dt;
+			float alpha = dt;
+			if (dt >= 0.3333)
+				alpha = 0.3333;
+
+			transitionAlpha += alpha;
 			if (transitionAlpha >= 1.0f)
 			{
 				transitionAlpha = 1.0f;
@@ -127,6 +131,7 @@ bool ModuleSceneManager::Update(float dt)
 			transitionAlpha -= alpha;
 			if (transitionAlpha <= 0.0f)
 			{
+				transitionAlpha = 0.0f;
 				exitingFade = false;
 				changeScene = false;
 			}
