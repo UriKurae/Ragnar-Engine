@@ -31,6 +31,12 @@ public class Level_1 : RagnarComponent
         preNonClick = GameObject.Find("preNonClick");
         camera = GameObject.Find("Camera").transform;
 
+        if (SaveSystem.fromContinue)
+        {
+            TimerData data = SaveSystem.LoadTimer();
+            timer.timer = data.timer;
+        }
+
         // PLAYERS
         characters = new Characters[2];
         // Player 1
@@ -464,29 +470,28 @@ public class Level_1 : RagnarComponent
 
         InternalCalls.InstancePrefab("Dialogue");
         //InternalCalls.InstancePrefab("DialogueLevel1");
-
     }
-    public void Update()
+	public void Update()
 	{
         if (runGame) timer.Update();
         chrono.text = timer.GetTimeToString();
 
-        hitPoint = RayCast.ReturnHitpoint();
-        hitPoint.y -= 0.5f;
-        GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
-        if (hittedGO != null)
-        {
-            preClick.isActive = true;
-            preNonClick.isActive = false;
-        }
-        else
-        {
-            preClick.isActive = false;
-            preNonClick.isActive = true;
-        }
+        //hitPoint = RayCast.ReturnHitpoint();
+        //hitPoint.y -= 0.5f;
+        //GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
+        //if (hittedGO != null)
+        //{
+        //    preClick.isActive = true;
+        //    preNonClick.isActive = false;
+        //}
+        //else
+        //{
+        //    preClick.isActive = false;
+        //    preNonClick.isActive = true;
+        //}
 
-        hitPoint.y += 0.54f;
-        if (preClick.isActive) preClick.GetComponent<Transform>().globalPosition = hitPoint;
-        if (preNonClick.isActive) preNonClick.GetComponent<Transform>().globalPosition = hitPoint;
+        //hitPoint.y += 0.54f;
+        //if (preClick.isActive) preClick.GetComponent<Transform>().globalPosition = hitPoint;
+        //if (preNonClick.isActive) preNonClick.GetComponent<Transform>().globalPosition = hitPoint;
     }
 }

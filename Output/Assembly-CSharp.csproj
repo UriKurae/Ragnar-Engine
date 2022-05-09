@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\SoundAreaManager.cs" />
     <Compile Include="Assets\Scripts\TankEnemy.cs" />
+    <Compile Include="Assets\Scripts\TimerData.cs" />
     <Compile Include="Assets\Scripts\UndistractableEnemy.cs" />
     <Compile Include="Assets\Scripts\WinScreen.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />

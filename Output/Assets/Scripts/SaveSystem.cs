@@ -135,4 +135,41 @@ public static class SaveSystem
     {
         return File.Exists(path);
     }
+
+    public static void SaveTimer(float timer)
+    {
+        // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = "Library/SavedGame/Scenes/" + "Timer" + ".ragnar";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        TimerData data = new TimerData(timer);
+
+        formatter.Serialize(stream, data);
+
+        stream.Close();
+    }
+
+    public static TimerData LoadTimer()
+    {
+        string path = "Library/SavedGame/Scenes/" + "Timer" + ".ragnar";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            TimerData data = formatter.Deserialize(stream) as TimerData;
+
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            //Debug.Log("Save file not found in " + path);
+            return null;
+        }
+    }
 }

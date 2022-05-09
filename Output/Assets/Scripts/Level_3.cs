@@ -5,7 +5,7 @@ public class Level_3 : RagnarComponent
 {
 	public Characters[] characters;
 	public Enemies[] enemies;
-    private Chronometer timer = null;
+    public Chronometer timer = null;
     public bool runGame = true;
     public UIButton chrono;
     public Vector3 hitPoint;
@@ -31,6 +31,12 @@ public class Level_3 : RagnarComponent
         preClick = GameObject.Find("preClick");
         preNonClick = GameObject.Find("preNonClick");
         camera = GameObject.Find("Camera").transform;
+
+        if (SaveSystem.fromContinue)
+        {
+            TimerData data = SaveSystem.LoadTimer();
+            timer.timer = data.timer;
+        }
 
         // PLAYERS
         characters = new Characters[3];
