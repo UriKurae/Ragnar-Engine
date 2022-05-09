@@ -28,6 +28,7 @@ public class Player : RagnarComponent
     Material materialComponent;
     NavAgent agent;
     DialogueManager dialogue;
+    GameObject sound;
 
     ParticleSystem walkPartSys;
     ParticleSystem runPartSys;
@@ -52,6 +53,8 @@ public class Player : RagnarComponent
         agent.ClearPath();
         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
+        sound = InternalCalls.InstancePrefab("SoundArea", true);
 
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
@@ -93,6 +96,8 @@ public class Player : RagnarComponent
             if (controled && hitPoints > 0)
             //if (controled && hitPoints > 0 && dialogue.GetInDialogue())
             {
+                sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
+
                 // Crouch
                 if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
                 {
@@ -100,6 +105,7 @@ public class Player : RagnarComponent
                     {
                         action = Actions.CROUCH;
                         rb.SetHeight(0.6f); // 0.6 = 60%
+                        sound.GetComponent<Rigidbody>().SetRadiusSphere(5f);
                         gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
                         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_CROUCH");
                     }
@@ -107,6 +113,7 @@ public class Player : RagnarComponent
                     {
                         action = Actions.NONE;
                         rb.SetHeight(1); // 1 = 100% = Reset
+                        sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
                     }
                 }
@@ -116,11 +123,13 @@ public class Player : RagnarComponent
                 {
                     agent.speed = speedBase;
                     move = Movement.WALK;
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                 }
                 else if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_TWICE)
                 {
                     agent.speed *= 2;
                     move = Movement.RUN;
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(8f);
                 }
                 
 
@@ -173,6 +182,7 @@ public class Player : RagnarComponent
                 else if (!dead && abilityState != State.NONE && agent.PathSize() > 0)
                 {
                     agent.ClearPath();
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                     switch (action)
                     {
                         case Actions.NONE:
@@ -189,25 +199,33 @@ public class Player : RagnarComponent
                     runPartSys.Pause();
                 }
             }
-            if (!dead && agent.MovePath())
-            {
-                switch (action)
-                {
-                    case Actions.NONE:
-                        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-                        break;
-                    case Actions.CROUCH:
-                        gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
-                        break;
-                    case Actions.CARRY:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
-                        break;
-                }
 
-                walkPartSys.Pause();
-                runPartSys.Pause();
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
+            if (!dead)
+            {
+                if (agent.MovePath())
+                {
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
+                    switch (action)
+                    {
+                        case Actions.NONE:
+                            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+                            break;
+                        case Actions.CROUCH:
+                            gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+                            break;
+                        case Actions.CARRY:
+                            gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
+                            break;
+                    }
+
+                    walkPartSys.Pause();
+                    runPartSys.Pause();
+                    gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
+                }
+                else if (agent.PathSize() > 0)
+                    sound.transform.globalPosition = gameObject.transform.globalPosition;
             }
+
             if (action == Actions.CROUCH)
             {
                 Vector3 maxPoint = gameObject.GetMaxAABB();

@@ -486,7 +486,7 @@ public class Level_1 : RagnarComponent
         }
 
         hitPoint.y += 0.54f;
-        if (preClick.isActive) preClick.GetComponent<Transform>().globalPosition = hitPoint;
-        if (preNonClick.isActive) preNonClick.GetComponent<Transform>().globalPosition = hitPoint;
+        if (preClick.isActive) preClick.transform.globalPosition = hitPoint;
+        if (preNonClick.isActive) preNonClick.transform.globalPosition = hitPoint;
     }
 }
