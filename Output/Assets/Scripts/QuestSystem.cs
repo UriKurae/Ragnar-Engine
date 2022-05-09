@@ -192,32 +192,55 @@ public class QuestSystem : RagnarComponent
 		activeQuests = "";
 		completedQuests = "";
 
-		for (int i = 0; i < activeQuestList.Count; ++i)
-        {
-			activeQuests += activeQuestList[i].GetQuestName().ToString() + "\n\n";
-        }
-		for (int i = 0; i < completedQuestList.Count; ++i)
+		if (activeQuestList.Count > 0)
 		{
-			completedQuests += completedQuestList[i].GetQuestName().ToString() + "\n\n";
+			for (int i = 0; i < activeQuestList.Count; ++i)
+			{
+				activeQuests += activeQuestList[i].GetQuestName().ToString() + "\n\n";
+			}
 		}
+        else
+        {
+			activeQuests = "No active quests available";
+        }
+		
+		if (completedQuestList.Count > 0)
+        {
+			for (int i = 0; i < completedQuestList.Count; ++i)
+			{
+				completedQuests += completedQuestList[i].GetQuestName().ToString() + "\n\n";
+			}
+		}
+		else
+        {
+			completedQuests = "No completed quests available";
+        }
 
 		float xCorner = (InternalCalls.GetRegionGame().x / 2);
 		float yCorner = (InternalCalls.GetRegionGame().y / 2);
 
+		position.Set(180, 30, 0);
+		activeButton.GetComponent<Transform2D>().SetSize(position);
+		activeButton.GetComponent<UIButton>().SetTextPosition(-45,-5);
+		activeButton.GetComponent<UIButton>().SetButtonGeneralColor(0, 0, 255);
 		activeButton.GetComponent<UIButton>().text = "Active Quests";
 		position.Set(xCorner - 700, yCorner - 30, 1000000.0f);
 		activeButton.GetComponent<Transform2D>().position2D = position;
 
+		position.Set(250, 30, 0);
+		completedButton.GetComponent<Transform2D>().SetSize(position);
+		completedButton.GetComponent<UIButton>().SetTextPosition(-55, -5);
+		completedButton.GetComponent<UIButton>().SetButtonGeneralColor(255,0,0);
 		completedButton.GetComponent<UIButton>().text = "Completed Quests";
-		position.Set(xCorner - 450, yCorner - 30, 1000000.0f);
+		position.Set(xCorner - 430, yCorner - 30, 1000000.0f);
 		completedButton.GetComponent<Transform2D>().position2D = position;
 
 		activeQuestNames.GetComponent<UIText>().text = activeQuests;
-		position.Set(xCorner - 550, yCorner - 60, 1000000.0f);
+		position.Set(xCorner - 750, yCorner - 80, 1000000.0f);
 		activeQuestNames.GetComponent<Transform2D>().position2D = position;
 
 		completedQuestNames.GetComponent<UIText>().text = completedQuests;
-		position.Set(xCorner - 550, yCorner - 60, 1000000.0f);
+		position.Set(xCorner - 750, yCorner - 80, 1000000.0f);
 		completedQuestNames.GetComponent<Transform2D>().position2D = position;
 
 		int a = activeButton.GetComponent<UIButton>().GetButtonState();
