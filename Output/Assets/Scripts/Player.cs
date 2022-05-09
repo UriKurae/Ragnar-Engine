@@ -74,6 +74,7 @@ public class Player : RagnarComponent
         }
         runPartSys.Pause();
         walkPartSys.Pause();
+        getHitPartSys.Pause();
     }
 
     public void Update()
