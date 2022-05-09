@@ -34,6 +34,9 @@ public class pauseMenuButton : RagnarComponent
 	bool isFirstOScreenB = true;
 	bool isFirstOSoundB = true;
 	bool isFirstOControlsB = true;
+
+	bool isFirstOcontrolsL = true;
+	bool isFirstOcontrolsR = true;
 	float lastWindowW = 0;
 	GameObject optionsBack;
 	GameObject optionsBackImage;
@@ -59,12 +62,42 @@ public class pauseMenuButton : RagnarComponent
     GameObject optionsMusicSound;
     GameObject optionsGeneralSound;
 
-    //////////////AUDIO//////////////
-    GameObject SceneAudio;
+	GameObject optionsControlText;
+	GameObject optionsControlText1;
+	GameObject optionsControlText2;
+	GameObject optionsControl1;
+	GameObject optionsControl2;
+	GameObject optionsControl3;
+	GameObject optionsControl4;
+	GameObject optionsControl5;
+	GameObject optionsControl6;
+	GameObject optionsControl7;
+	GameObject optionsControl8;
+	GameObject optionsControl9;
+	GameObject optionsControl10;
+	GameObject optionsControl11;
+	GameObject optionsControl12;
+	GameObject optionsControl13;
+	GameObject optionsControl14;
+	GameObject optionsControl15;
+	GameObject optionsControl16;
+	GameObject optionsControl17;
+	GameObject optionsControl18;
+	GameObject optionsControl19;
+	GameObject optionsControl20;
+	GameObject optionsControl21;
+	GameObject optionsControl22;
+
+	GameObject optionsControlR;
+	GameObject optionsControlL;
+	int actualControlOption = 0;
+	//////////////AUDIO//////////////
+	GameObject SceneAudio;
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
 	GameObject selectedPlayer;
+    GameObject playerManager;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
@@ -178,6 +211,59 @@ public class pauseMenuButton : RagnarComponent
 		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
 		//InternalCalls.SetFullScreen(true);
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
+
+		optionsControlText = GameObject.Find("optionsControlText");
+		optionsControlText1 = GameObject.Find("optionsControlText1");
+		optionsControlText2 = GameObject.Find("optionsControlText2");
+
+		optionsControl1 = GameObject.Find("optionsControl1");
+		optionsControl2 = GameObject.Find("optionsControl2");
+		optionsControl3 = GameObject.Find("optionsControl3");
+		optionsControl4 = GameObject.Find("optionsControl4");
+		optionsControl5 = GameObject.Find("optionsControl5");
+		optionsControl6 = GameObject.Find("optionsControl6");
+		optionsControl7 = GameObject.Find("optionsControl7");
+		optionsControl8 = GameObject.Find("optionsControl8");
+		optionsControl9 = GameObject.Find("optionsControl9");
+		optionsControl10 = GameObject.Find("optionsControl10");
+		optionsControl11 = GameObject.Find("optionsControl11");
+		optionsControl12 = GameObject.Find("optionsControl12");
+		optionsControl13 = GameObject.Find("optionsControl13");
+		optionsControl14 = GameObject.Find("optionsControl14");
+		optionsControl15 = GameObject.Find("optionsControl15");
+		optionsControl16 = GameObject.Find("optionsControl16");
+		optionsControl17 = GameObject.Find("optionsControl17");
+		optionsControl18 = GameObject.Find("optionsControl18");
+		optionsControl19 = GameObject.Find("optionsControl19");
+		optionsControl20 = GameObject.Find("optionsControl20");
+		optionsControl21 = GameObject.Find("optionsControl21");
+		optionsControl22 = GameObject.Find("optionsControl22");
+
+		optionsControlR = GameObject.Find("optionsControlR");
+		optionsControlL = GameObject.Find("optionsControlL");
+
+		optionsControl1.GetComponent<UIButton>().text = "Esc";
+		optionsControl2.GetComponent<UIButton>().text = "1";
+		optionsControl3.GetComponent<UIButton>().text = "2";
+		optionsControl4.GetComponent<UIButton>().text = "3";
+		optionsControl5.GetComponent<UIButton>().text = "R Click";
+		optionsControl6.GetComponent<UIButton>().text = "L Click";
+		optionsControl7.GetComponent<UIButton>().text = "Space";
+		optionsControl8.GetComponent<UIButton>().text = "Drag";
+		optionsControl9.GetComponent<UIButton>().text = "Crl L";
+		optionsControl10.GetComponent<UIButton>().text = "Drag";
+		optionsControl11.GetComponent<UIButton>().text = "F1";
+		optionsControl12.GetComponent<UIButton>().text = "F5";
+		optionsControl13.GetComponent<UIButton>().text = "F6";
+		optionsControl14.GetComponent<UIButton>().text = "A";
+		optionsControl15.GetComponent<UIButton>().text = "S";
+		optionsControl16.GetComponent<UIButton>().text = "D";
+		optionsControl17.GetComponent<UIButton>().text = "F";
+		optionsControl18.GetComponent<UIButton>().text = "G";
+		optionsControl19.GetComponent<UIButton>().text = "R Click";
+		optionsControl20.GetComponent<UIButton>().text = "L Click";
+		optionsControl21.GetComponent<UIButton>().text = "J";
+		optionsControl22.GetComponent<UIButton>().text = "Shift";
 		OptionsBackHide();
 		//////////////GAME//////////////
 		CharacterPhotoBord = GameObject.Find("Char");
@@ -212,15 +298,16 @@ public class pauseMenuButton : RagnarComponent
 		abilityLeters = GameObject.Find("abilityLeters");
 
 		players = GameObject.FindGameObjectsWithTag("Player");
-		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+        playerManager = GameObject.Find("PlayerManager");
+		selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
 		lastPlayerSelected = selectedPlayer.name;
 	}
     public void Update()
 	{
-		//para pillar el hitPoint del mouse Pick
-		//selectedPlayer.GetComponent<NavAgent>().hitPosition
-		players = GameObject.FindGameObjectsWithTag("Player");
-		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+        //para pillar el hitPoint del mouse Pick
+        //selectedPlayer.GetComponent<NavAgent>().hitPosition
+        players = GameObject.FindGameObjectsWithTag("Player");
+        selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
 		
 		SetAllPositions();
 		UpdateMenu();
@@ -252,10 +339,260 @@ public class pauseMenuButton : RagnarComponent
 		}
     }
 	//////////////OPTIONS//////////////
+	void OptionsControlShow()
+	{
+		float y = (InternalCalls.GetRegionGame().y / 2);
+		float x = (InternalCalls.GetRegionGame().x / 2);
+		float sum = (lastWindowW - x);
+
+		optionsControlText.isActive = true;
+		optionsControlText1.isActive = true;
+		optionsControlText2.isActive = true;
+
+		optionsControl1.isActive = true;
+		optionsControl2.isActive = true;
+		optionsControl3.isActive = true;
+		optionsControl4.isActive = true;
+		optionsControl5.isActive = true;
+		optionsControl6.isActive = true;
+		optionsControl7.isActive = true;
+		optionsControl8.isActive = true;
+		optionsControl9.isActive = true;
+		optionsControl10.isActive = true;
+		optionsControl11.isActive = true;
+		optionsControl12.isActive = true;
+		optionsControl13.isActive = true;
+		optionsControl14.isActive = true;
+		optionsControl15.isActive = true;
+		optionsControl16.isActive = true;
+		optionsControl17.isActive = true;
+		optionsControl18.isActive = true;
+		optionsControl19.isActive = true;
+		optionsControl20.isActive = true;
+		optionsControl21.isActive = true;
+		optionsControl22.isActive = true;
+		optionsControlR.isActive = true;
+		optionsControlL.isActive = true;
+		pos.Set(-sum + 600, y - 780, 36.1f);
+		optionsControlL.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-sum + 800, y - 780, 36.1f);
+		optionsControlR.GetComponent<Transform2D>().position2D = pos;
+
+		int a = optionsControlL.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				isFirstOcontrolsL = true;
+				break;
+			case 3:
+                // pressed mode
+                if (isFirstOcontrolsL) { 
+					if (actualControlOption == 0)
+					{
+						actualControlOption = 1;
+
+					}
+					else
+					{
+						actualControlOption--;
+					}
+					//actualControlOption = 0;
+					SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
+				}
+				isFirstOcontrolsL = false;
+				
+				break;
+		}
+
+		a = optionsControlR.GetComponent<UIButton>().GetButtonState();
+		switch (a)
+		{
+			case 0:
+				// disabled Mode
+				break;
+			case 1:
+				
+				// normal Mode
+				break;
+			case 2:
+				// focused mode
+				isFirstOcontrolsR = true;
+				break;
+			case 3:
+				// pressed mode
+				if (isFirstOcontrolsR)
+				{
+					if (actualControlOption == 1)
+					{
+						actualControlOption = 0;
+
+					}
+					else
+					{
+						actualControlOption++;
+					}
+					SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+					SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
+				}
+				//actualControlOption = 1;
+				isFirstOcontrolsR = false;
+				
+				break;
+		}
+		if (actualControlOption == 0)
+        {
+            playerManager.GetComponent<InputAction>().SetActionMap(1);
+
+			optionsControl8.GetComponent<UIButton>().text = "Drag";
+			optionsControl9.GetComponent<UIButton>().text = "Crl L";
+			optionsControl14.GetComponent<UIButton>().text = "A";
+			optionsControl15.GetComponent<UIButton>().text = "S";
+			optionsControl16.GetComponent<UIButton>().text = "D";
+			optionsControl17.GetComponent<UIButton>().text = "F";
+			optionsControl18.GetComponent<UIButton>().text = "G";
+		}
+        else if(actualControlOption == 1)
+        {
+            playerManager.GetComponent<InputAction>().SetActionMap(0);
+
+            optionsControl9.GetComponent<UIButton>().text = "Q E";
+			optionsControl8.GetComponent<UIButton>().text = "WASD";
+
+			optionsControl14.GetComponent<UIButton>().text = "Z";
+			optionsControl15.GetComponent<UIButton>().text = "X";
+			optionsControl16.GetComponent<UIButton>().text = "C";
+			optionsControl17.GetComponent<UIButton>().text = "V";
+			optionsControl18.GetComponent<UIButton>().text = "B";
+		}
+		pos.Set(-sum - 100, y - 230, 36.1f);
+		optionsControlText.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 250, y - 230, 36.1f);
+		optionsControlText1.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 550, y - 230, 36.1f);
+		optionsControlText2.GetComponent<Transform2D>().position2D = pos;
+
+
+		pos.Set(-sum + 150, y - 220, 36.1f);
+		optionsControl1.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 150, y - 280, 36.1f);
+		optionsControl2.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 150, y - 340, 36.1f);
+		optionsControl3.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 150, y - 410, 36.1f);
+		optionsControl4.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 150, y - 480, 36.1f);
+		optionsControl5.GetComponent<Transform2D>().position2D = pos;
+		optionsControl5.GetComponent<UIButton>().SetTextPosition(-30,-3.2f);
+
+		pos.Set(-sum + 150, y - 540, 36.1f);
+		optionsControl6.GetComponent<Transform2D>().position2D = pos;
+		optionsControl6.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
+
+		pos.Set(-sum + 150, y - 585, 36.1f);
+		optionsControl7.GetComponent<Transform2D>().position2D = pos;
+		optionsControl7.GetComponent<UIButton>().SetTextPosition(-30, -3.2f);
+
+		pos.Set(-sum + 150, y - 640, 36.1f);
+		optionsControl8.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 150, y - 710, 36.1f);
+		optionsControl9.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 150, y - 780, 36.1f);
+		optionsControl10.GetComponent<Transform2D>().position2D = pos;
+
+
+
+		pos.Set(-sum + 470, y - 230, 36.1f);
+		optionsControl11.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 300, 36.1f);
+		optionsControl12.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 370, 36.1f);
+		optionsControl13.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 440, 36.1f);
+		optionsControl14.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 510, 36.1f);
+		optionsControl15.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 580, 36.1f);
+		optionsControl16.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 650, 36.1f);
+		optionsControl17.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 720, 36.1f);
+		optionsControl18.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 470, y - 790, 36.1f);
+		optionsControl19.GetComponent<Transform2D>().position2D = pos;
+
+
+
+		pos.Set(-sum + 750, y - 230, 36.1f);
+		optionsControl20.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 300, 36.1f);
+		optionsControl21.GetComponent<Transform2D>().position2D = pos;
+
+		pos.Set(-sum + 750, y - 370, 36.1f);
+		optionsControl22.GetComponent<Transform2D>().position2D = pos;
+	}
+	void OptionsControlHide()
+	{
+		optionsControlText.isActive = false;
+		optionsControlText1.isActive = false;
+		optionsControlText2.isActive = false;
+
+		optionsControl1.isActive = false;
+		optionsControl2.isActive = false;
+		optionsControl3.isActive = false;
+		optionsControl4.isActive = false;
+		optionsControl5.isActive = false;
+		optionsControl6.isActive = false;
+		optionsControl7.isActive = false;
+		optionsControl8.isActive = false;
+		optionsControl9.isActive = false;
+		optionsControl10.isActive = false;
+		optionsControl11.isActive = false;		
+		optionsControl12.isActive = false;
+		optionsControl13.isActive = false;
+		optionsControl14.isActive = false;
+		optionsControl15.isActive = false;
+		optionsControl16.isActive = false;
+		optionsControl17.isActive = false;
+		optionsControl18.isActive = false;
+		optionsControl19.isActive = false;
+		optionsControl20.isActive = false;
+		optionsControl21.isActive = false;
+		optionsControl22.isActive = false;
+		optionsControlR.isActive = false;
+		optionsControlL.isActive = false;
+
+	}
 	void UpdateOptions()
     {
         if (isOptions)
         {
+			OptionsControlShow();
 			OptionsBackShow();
 			SelectedOptionShow();
 			OptionsAllButtonsShow();
@@ -263,6 +600,7 @@ public class pauseMenuButton : RagnarComponent
 		}
         else
         {
+			OptionsControlHide();
 			OptionsBackHide();
 			OptionsAllButtonsHide();
 			SelectedOptionHide();
@@ -277,7 +615,7 @@ public class pauseMenuButton : RagnarComponent
 		}
 		if (actualOption != "Controls")
 		{
-
+			OptionsControlHide();
 		}
 		if (actualOption != "Sound")
 		{
@@ -293,7 +631,7 @@ public class pauseMenuButton : RagnarComponent
 		else if (actualOption == "Controls")
 		{
 			optionsControlsButton.GetComponent<UIButton>().SetButtonState(2);
-
+			OptionsControlShow();
 		}
 		else if (actualOption == "Sound")
 		{
@@ -304,7 +642,7 @@ public class pauseMenuButton : RagnarComponent
 	}
 	void SelectedOptionHide()
 	{
-		
+		OptionsControlHide();
 		OptionsScreenHide();
 		OptionsSoundHide();
 
@@ -657,8 +995,20 @@ public class pauseMenuButton : RagnarComponent
 		pos.Set(-sum + 20, y-230, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
+		////////////////////////////////////////////////
+		/// DROP DOWN
+		////////////////////////////////////////////////
+
 		pos.Set(x - 550, y - 500, 36.1f);
 		optionsLanguaje.GetComponent<Transform2D>().position2D = pos;
+		/*
+        if (optionsLanguaje.GetComponent<UIDropDown>().GetDropDownButtonChange())
+        {
+			int a = optionsLanguaje.GetComponent<UIDropDown>().GetDropDownSelected();
+			optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(a);
+		}
+		*/
+
 	}
 	void OptionsScreenHide()
 	{
@@ -1056,6 +1406,7 @@ public class pauseMenuButton : RagnarComponent
 			case 3:
 				// pressed mode
 				isSowing = false;
+				if (!dialogue.GetEndDialogue()) { dialogue.ContinueDialogue(); }
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");

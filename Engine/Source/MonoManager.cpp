@@ -14,6 +14,7 @@
 
 #include "ScriptBindings.h"
 #include "AudioBindings.h"
+#include "InputActionBindings.h"
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
@@ -128,11 +129,13 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.GameObject::ChangeMesh", ChangeMesh);
 	mono_add_internal_call("RagnarEngine.GameObject::AddChild", AddChild);
 	mono_add_internal_call("RagnarEngine.GameObject::EraseChild", EraseChild);
+	mono_add_internal_call("RagnarEngine.GameObject::GetParent", GetItsParent);
 	mono_add_internal_call("RagnarEngine.GameObject::SubmitOutlineDrawing", GameObjectDrawOutline);
 	mono_add_internal_call("RagnarEngine.GameObject::get_isInteractuable", GetGameObjectIsInteractuable);
 	mono_add_internal_call("RagnarEngine.GameObject::set_isInteractuable", SetGameObjectIsInteractuable);
 	mono_add_internal_call("RagnarEngine.GameObject::get_interactuableColor", GetGameObjectInteractuableColor);
 	mono_add_internal_call("RagnarEngine.GameObject::set_interactuableColor", SetGameObjectInteractuableColor);
+
 	// Utility ===================
 
 
@@ -161,6 +164,7 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetHeight", SetHeight);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetBodyPosition", SetBodyPosition);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetBodyRotation", SetBodyRotation);
+	mono_add_internal_call("RagnarEngine.Rigidbody::ApplyVelocity", ApplyVelocity);
 	mono_add_internal_call("RagnarEngine.Rigidbody::SetRadiusSphere", SetRadiusSphere);
 	// Rigidbody =================
 
@@ -261,6 +265,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIButton::SetButtonGeneralColor", SetButtonGeneralColor);
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonGeneralColor", GetButtonGeneralColor);
+	mono_add_internal_call("RagnarEngine.UIButton::SetVisualDisabled", SetVisualDisabled);
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
@@ -297,6 +302,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::SetVSync", SetVSync);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetMousePosition", GetMousePosition);
 	// Configuration ===================
+	
+	
+	// Input Action ===================
+	mono_add_internal_call("RagnarEngine.InputAction::SetActionMap", SetActionMap);
+	// Input Action ===================
 
 
 	InitMono();

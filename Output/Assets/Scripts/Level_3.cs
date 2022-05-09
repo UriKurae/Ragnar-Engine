@@ -451,6 +451,8 @@ public class Level_3 : RagnarComponent
         GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters = characters;
         InternalCalls.InstancePrefab("EnemyManager");
         GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemies = enemies;
+
+        InternalCalls.InstancePrefab("Dialogue");
     }
     public void Update()
 	{
