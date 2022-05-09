@@ -7,7 +7,7 @@ public class SoundAreaManager : RagnarComponent
 	float timer = 0f;
 	public void Start()
 	{
-		if (gameObject.GetParent().name == "Root")
+		if (gameObject.GetParent().name == SceneManager.currentSceneName)
 			timerDestroy = true;
 	}
     public void Update()
