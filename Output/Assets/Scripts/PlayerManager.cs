@@ -390,7 +390,7 @@ public class PlayerManager : RagnarComponent
             case 4:
                 if (Input.GetKey(KeyCode.ALPHA4) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -403,7 +403,7 @@ public class PlayerManager : RagnarComponent
             case 3:
                 if (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
                     if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -416,7 +416,7 @@ public class PlayerManager : RagnarComponent
             case 2:
                 if (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -429,7 +429,7 @@ public class PlayerManager : RagnarComponent
             case 1:
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
