@@ -31,6 +31,12 @@ bool InputActionMenu::Start()
 {
 	bool ret = true;
 
+#ifdef DIST
+
+#else
+	ImportToLibrary();
+#endif
+
 	return ret;
 }
 
@@ -323,6 +329,25 @@ bool InputActionMenu::LoadInputActionFile(const char* path)
 		DEBUG_LOG("Input Asset couldn't be loaded");
 	}
 	return false;
+}
+
+void InputActionMenu::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Resources/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string ext = (*it).substr((*it).find_last_of("."), (*it).length());
+		if (ext == ".inputaction")
+		{
+			std::string assetsPath = "Assets/Resources/";
+			assetsPath += (*it);
+			std::string libraryPath = LIBRARY_FOLDER;
+			libraryPath += (*it);
+			CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+		}
+	}
 }
 
 Actions::Actions()

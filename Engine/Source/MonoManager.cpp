@@ -14,6 +14,7 @@
 
 #include "ScriptBindings.h"
 #include "AudioBindings.h"
+#include "InputActionBindings.h"
 #include "RigidbodyBindings.h"
 #include "AnimationBindings.h"
 #include "CameraBindings.h"
@@ -300,6 +301,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.InternalCalls::SetVSync", SetVSync);
 	mono_add_internal_call("RagnarEngine.InternalCalls::GetMousePosition", GetMousePosition);
 	// Configuration ===================
+	
+	
+	// Input Action ===================
+	mono_add_internal_call("RagnarEngine.InputAction::SetActionMap", SetActionMap);
+	// Input Action ===================
 
 
 	InitMono();
