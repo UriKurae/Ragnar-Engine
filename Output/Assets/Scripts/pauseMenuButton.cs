@@ -97,6 +97,7 @@ public class pauseMenuButton : RagnarComponent
 
 	//////////////GAME//////////////
 	GameObject selectedPlayer;
+    GameObject playerManager;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
@@ -297,15 +298,16 @@ public class pauseMenuButton : RagnarComponent
 		abilityLeters = GameObject.Find("abilityLeters");
 
 		players = GameObject.FindGameObjectsWithTag("Player");
-		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+        playerManager = GameObject.Find("PlayerManager");
+		selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
 		lastPlayerSelected = selectedPlayer.name;
 	}
     public void Update()
 	{
-		//para pillar el hitPoint del mouse Pick
-		//selectedPlayer.GetComponent<NavAgent>().hitPosition
-		players = GameObject.FindGameObjectsWithTag("Player");
-		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+        //para pillar el hitPoint del mouse Pick
+        //selectedPlayer.GetComponent<NavAgent>().hitPosition
+        players = GameObject.FindGameObjectsWithTag("Player");
+        selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
 		
 		SetAllPositions();
 		UpdateMenu();
@@ -448,6 +450,8 @@ public class pauseMenuButton : RagnarComponent
 		}
 		if (actualControlOption == 0)
         {
+            playerManager.GetComponent<InputAction>().SetActionMap(1);
+
 			optionsControl8.GetComponent<UIButton>().text = "Drag";
 			optionsControl9.GetComponent<UIButton>().text = "Crl L";
 			optionsControl14.GetComponent<UIButton>().text = "A";
@@ -458,7 +462,9 @@ public class pauseMenuButton : RagnarComponent
 		}
         else if(actualControlOption == 1)
         {
-			optionsControl9.GetComponent<UIButton>().text = "Q E";
+            playerManager.GetComponent<InputAction>().SetActionMap(0);
+
+            optionsControl9.GetComponent<UIButton>().text = "Q E";
 			optionsControl8.GetComponent<UIButton>().text = "WASD";
 
 			optionsControl14.GetComponent<UIButton>().text = "Z";
