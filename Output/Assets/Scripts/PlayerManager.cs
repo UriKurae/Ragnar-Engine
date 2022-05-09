@@ -104,35 +104,35 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_4);
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
     public void Carrying()
     {
-        if (players[characterSelected].GetComponent<Player>().controled && !players[characterSelected].GetComponent<Player>().dead)
+        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && !players[characterSelected].GetComponent<Player>().dead)
         {
             playableCharacter.state = State.CARRYING;
             players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
