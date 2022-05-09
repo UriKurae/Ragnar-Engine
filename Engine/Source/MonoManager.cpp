@@ -265,6 +265,7 @@ bool MonoManager::Init(JsonParsing& node)
 
 	mono_add_internal_call("RagnarEngine.UIButton::SetButtonGeneralColor", SetButtonGeneralColor);
 	mono_add_internal_call("RagnarEngine.UIButton::GetButtonGeneralColor", GetButtonGeneralColor);
+	mono_add_internal_call("RagnarEngine.UIButton::SetVisualDisabled", SetVisualDisabled);
 
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetIsChecked", GetIsChecked);
 	mono_add_internal_call("RagnarEngine.UICheckbox::GetCheckboxState", GetCheckboxState);
