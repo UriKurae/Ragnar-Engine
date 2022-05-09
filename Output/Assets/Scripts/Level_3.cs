@@ -237,6 +237,10 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_3_patrol")
         };
+        enemies[2].waypoints.Add(GameObject.Find("1"));
+        enemies[2].waypoints.Add(GameObject.Find("2"));
+        enemies[2].waypoints.Add(GameObject.Find("3"));
+        enemies[2].waypoints.Add(GameObject.Find("2"));
 
         enemies[3] = new Enemies
         {
@@ -253,6 +257,8 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("tank_enemy_2_patrol")
         };
+        enemies[4].waypoints.Add(GameObject.Find("4"));
+        enemies[4].waypoints.Add(GameObject.Find("5"));
 
         enemies[5] = new Enemies
         {
@@ -309,6 +315,8 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("tank_enemy_3_patrol")
         };
+        enemies[11].waypoints.Add(GameObject.Find("6"));
+        enemies[11].waypoints.Add(GameObject.Find("7"));
 
         enemies[12] = new Enemies
         {
@@ -317,6 +325,11 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_8_patrol")
         };
+        enemies[12].waypoints.Add(GameObject.Find("8"));
+        enemies[12].waypoints.Add(GameObject.Find("9"));
+        enemies[12].waypoints.Add(GameObject.Find("10"));
+        enemies[12].waypoints.Add(GameObject.Find("11"));
+        enemies[12].waypoints.Add(GameObject.Find("12"));
 
         enemies[13] = new Enemies
         {
@@ -325,6 +338,11 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_9_patrol")
         };
+        enemies[13].waypoints.Add(GameObject.Find("8"));
+        enemies[13].waypoints.Add(GameObject.Find("9"));
+        enemies[13].waypoints.Add(GameObject.Find("10"));
+        enemies[13].waypoints.Add(GameObject.Find("11"));
+        enemies[13].waypoints.Add(GameObject.Find("12"));
 
         enemies[14] = new Enemies
         {
@@ -333,6 +351,8 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_10_patrol")
         };
+        enemies[13].waypoints.Add(GameObject.Find("13"));
+        enemies[13].waypoints.Add(GameObject.Find("14"));
 
         enemies[15] = new Enemies
         {
@@ -341,6 +361,8 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_11_patrol")
         };
+        enemies[13].waypoints.Add(GameObject.Find("15"));
+        enemies[13].waypoints.Add(GameObject.Find("16"));
 
         enemies[16] = new Enemies
         {
@@ -373,6 +395,8 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_14_patrol")
         };
+        enemies[13].waypoints.Add(GameObject.Find("17"));
+        enemies[13].waypoints.Add(GameObject.Find("18"));
 
         enemies[20] = new Enemies
         {
@@ -381,6 +405,8 @@ public class Level_3 : RagnarComponent
             state = EnemyState.IDLE,
             spawnPoint = GameObject.Find("basic_enemy_15_patrol")
         };
+        enemies[13].waypoints.Add(GameObject.Find("19"));
+        enemies[13].waypoints.Add(GameObject.Find("20"));
         ///////////////////////////////////////////////////////////////////
 
         InternalCalls.InstancePrefab("PlayerManager");

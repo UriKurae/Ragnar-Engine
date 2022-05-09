@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 422539048,
+                    "pointer": 426879064,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -117,9 +117,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.9668055772781372,
-                        4.378267765045166,
-                        12.792196273803711
+                        13.911960601806641,
+                        17.770000457763672,
+                        108.33652496337891
                     ],
                     "Quaternion": [
                         0,
@@ -156,9 +156,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -1.5310128927230835,
-                        5.2899999618530273,
-                        9.2933406829833984
+                        28.444004058837891,
+                        17.770000457763672,
+                        108.32094573974609
                     ],
                     "Quaternion": [
                         0,
@@ -195,9 +195,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -6.0649356842041016,
-                        5.2899999618530273,
-                        6.8705759048461914
+                        30.848123550415039,
+                        17.770000457763672,
+                        90.373153686523438
                     ],
                     "Quaternion": [
                         0,
@@ -234,9 +234,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -1.4810855388641357,
-                        5.2899990081787109,
-                        6.59930419921875
+                        24.995975494384766,
+                        17.77000617980957,
+                        41.997734069824219
                     ],
                     "Quaternion": [
                         0,
@@ -273,9 +273,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        1.2214038372039795,
-                        5.2899994850158691,
-                        6.6181583404541016
+                        24.01622200012207,
+                        5.2899713516235352,
+                        62.55096435546875
                     ],
                     "Quaternion": [
                         0,
@@ -312,9 +312,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -2.0912933349609375,
-                        5.2899985313415527,
-                        3.0535449981689453
+                        -6.6531190872192383,
+                        17.770000457763672,
+                        81.506698608398438
                     ],
                     "Quaternion": [
                         0,
@@ -351,9 +351,9 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -0.13369691371917725,
-                        5.2899990081787109,
-                        2.6916055679321289
+                        -5.940434455871582,
+                        17.770025253295898,
+                        60.569755554199219
                     ],
                     "Quaternion": [
                         0,
@@ -1353,19 +1353,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        20,
+                        16.940158843994141,
                         0,
-                        14.61668586730957
+                        15.444336891174316
                     ],
                     "Quaternion": [
                         0,
-                        0.084157615900039673,
+                        0.35463288426399231,
                         0,
-                        -0.9964524507522583
+                        0.93500560522079468
                     ],
                     "RotationEditor": [
                         -0,
-                        -0.16851454973220825,
+                        0.72504281997680664,
                         -0
                     ],
                     "Scale": [
@@ -1392,15 +1392,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        -8.58306884765625e-06,
+                        47.600669860839844,
+                        -43.273307800292969
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
+                        0.34202015399932861,
+                        3.2841946939754507e-09,
+                        1.5857484214620854e-08,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -1410,34 +1410,34 @@
                     "Scale": [
                         1.4142131805419922,
                         1.0000001192092896,
-                        1.0000001192092896
+                        0.99999994039535522
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.48193970322608948,
+                    "Vertical Fov": 0.44563493132591248,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        28.386127471923828,
-                        55,
-                        -34.676361083984375
+                        -11.758050918579102,
+                        47.600669860839844,
+                        -16.945322036743164
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": -10,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        20,
+                        16.940158843994141,
                         0,
-                        14.61668586730957
+                        15.444336891174316
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 350.34481811523438,
+                    "Horizontal Angle": 41.541893005371094,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -1571,13 +1571,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 422536888,
+                    "pointer": 426878776,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 173354552,
+                    "barrelLocations": 178138680,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -1629,74 +1629,6 @@
             ]
         },
         {
-            "UUID": 781140199,
-            "Parent UUID": 417171234,
-            "Name": "CollisionStairs",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.15958952903747559,
-                        2.6556301116943359,
-                        15.899931907653809
-                    ],
-                    "Quaternion": [
-                        0.18909671902656555,
-                        0,
-                        0,
-                        0.98195850849151611
-                    ],
-                    "RotationEditor": [
-                        0.38048174977302551,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1.0000004768371582,
-                        1.0000004768371582
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        6.9000000953674316,
-                        0.20000000298023224,
-                        13.300000190734863
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
             "UUID": 2068571281,
             "Parent UUID": 417171234,
             "Name": "Dialogue",
@@ -1736,7 +1668,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 422539480,
+                    "pointer": 426879208,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -1774,7 +1706,7 @@
                     ],
                     "buttonWidth": 914,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -1838,7 +1770,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -1907,7 +1839,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -1976,7 +1908,7 @@
                     ],
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -2005,1343 +1937,6 @@
                     "Type": 13,
                     "alpha": 1,
                     "numOfAnimations": 0
-                }
-            ]
-        },
-        {
-            "UUID": 754358644,
-            "Parent UUID": 417171234,
-            "Name": "RootNode",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                }
-            ]
-        },
-        {
-            "UUID": 859834459,
-            "Parent UUID": 754358644,
-            "Name": "wall_01",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.18102176487445831,
-                        6.8560891151428223,
-                        -19.596662521362305
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__wall_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1313067169,
-            "Parent UUID": 754358644,
-            "Name": "wall_02",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.15803016722202301,
-                        7.4306154251098633,
-                        8.7629432678222656
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/win_replay_button_rect.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__wall_02.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1659918991,
-            "Parent UUID": 754358644,
-            "Name": "Stairs",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Ground",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.203884556889534,
-                        2.9634592533111572,
-                        15.819911956787109
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__Stairs.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 6,
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1976764162,
-            "Parent UUID": 754358644,
-            "Name": "rock_01",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -2.0453846454620361,
-                        4.287419319152832,
-                        14.427778244018555
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__rock_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 145707960,
-            "Parent UUID": 754358644,
-            "Name": "rock_02",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -8.7730855941772461,
-                        6.3298954963684082,
-                        6.9210567474365234
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__rock_02.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 480236865,
-            "Parent UUID": 754358644,
-            "Name": "rock_03",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        14.341971397399902,
-                        6.3117685317993164,
-                        -2.6217191219329834
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__rock_03.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 771183024,
-            "Parent UUID": 754358644,
-            "Name": "rock_04",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        10.361147880554199,
-                        5.9594097137451172,
-                        6.0690212249755859
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__rock_04.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1092623181,
-            "Parent UUID": 754358644,
-            "Name": "ground_01",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Ground",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.20616856217384338,
-                        0.37700003385543823,
-                        26.464227676391602
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__ground_01.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1412601297,
-            "Parent UUID": 754358644,
-            "Name": "ground_02",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Ground",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0.17980344593524933,
-                        5.2625927925109863,
-                        -16.435939788818359
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_plane_desert_albedo.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__ground_02.fbx",
-                    "Active": true
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1702155036,
-            "Parent UUID": 754358644,
-            "Name": "palm_01",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        6.312563419342041,
-                        7.4850187301635742,
-                        -2.7429816722869873
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 272533520,
-            "Parent UUID": 754358644,
-            "Name": "palm_02",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -5.1477456092834473,
-                        7.4850187301635742,
-                        -6.5509800910949707
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 661854152,
-            "Parent UUID": 754358644,
-            "Name": "palm_03",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -5.074892520904541,
-                        7.4850187301635742,
-                        -10.530731201171875
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1091624585,
-            "Parent UUID": 754358644,
-            "Name": "palm_04",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        4.119572639465332,
-                        6.113677978515625,
-                        -7.3453826904296875
-                    ],
-                    "Quaternion": [
-                        -0.10805103182792664,
-                        -0.10805059224367142,
-                        0.69880306720733643,
-                        0.69880205392837524
-                    ],
-                    "RotationEditor": [
-                        -4.2204058559036639e-07,
-                        -0.30681586265563965,
-                        1.5707976818084717
-                    ],
-                    "Scale": [
-                        0.99999886751174927,
-                        0.99999821186065674,
-                        0.99999946355819702
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_04.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1874582351,
-            "Parent UUID": 754358644,
-            "Name": "palm_05",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        7.783505916595459,
-                        6.1443815231323242,
-                        -12.004458427429199
-                    ],
-                    "Quaternion": [
-                        0.25316882133483887,
-                        0.25316882133483887,
-                        0.66023147106170654,
-                        0.66023141145706177
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        0.99999994039535522,
-                        0.99999994039535522
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_04.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 62393440,
-            "Parent UUID": 754358644,
-            "Name": "palm_06",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -2.9937088489532471,
-                        6.1402864456176758,
-                        -15.344991683959961
-                    ],
-                    "Quaternion": [
-                        0.12943980097770691,
-                        0.12943975627422333,
-                        0.69515860080718994,
-                        0.69515842199325562
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1.0000001192092896,
-                        0.99999964237213135,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_04.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 383903218,
-            "Parent UUID": 754358644,
-            "Name": "palm_07",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -5.0908875465393066,
-                        7.4850187301635742,
-                        -18.45756721496582
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 720729616,
-            "Parent UUID": 754358644,
-            "Name": "palm_08",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        6.2673487663269043,
-                        7.4850187301635742,
-                        -14.732863426208496
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1052961028,
-            "Parent UUID": 754358644,
-            "Name": "palm_09",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        6.3104820251464844,
-                        7.4850187301635742,
-                        -18.58979606628418
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_01.fbx",
-                    "Active": true
-                }
-            ]
-        },
-        {
-            "UUID": 1346204680,
-            "Parent UUID": 754358644,
-            "Name": "palm_10",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -5.1098198890686035,
-                        6.2712192535400391,
-                        -0.25721505284309387
-                    ],
-                    "Quaternion": [
-                        0.49669733643531799,
-                        0.49669733643531799,
-                        0.50328284502029419,
-                        0.50327920913696289
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1.0000003576278687,
-                        1.0000002384185791,
-                        1.0000002384185791
-                    ]
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 1,
-                    "Path": "Assets\/Resources\/Levels\/Level3\/lvl3_blockout__palm_04.fbx",
-                    "Active": true
                 }
             ]
         },
@@ -3416,7 +2011,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3480,7 +2075,7 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3544,7 +2139,7 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3675,7 +2270,7 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3739,7 +2334,7 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -3870,7 +2465,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4001,7 +2596,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4065,7 +2660,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4196,7 +2791,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4260,7 +2855,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4391,7 +2986,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4455,7 +3050,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4539,7 +3134,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4623,7 +3218,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4707,7 +3302,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4776,7 +3371,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4845,7 +3440,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4870,7 +3465,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4954,7 +3549,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -4979,7 +3574,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5063,7 +3658,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5088,7 +3683,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5172,7 +3767,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5197,7 +3792,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5281,7 +3876,7 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5472,7 +4067,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5541,7 +4136,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5605,7 +4200,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5669,7 +4264,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5733,7 +4328,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5864,7 +4459,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -5995,7 +4590,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6126,7 +4721,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6257,7 +4852,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6388,7 +4983,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6452,7 +5047,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6516,7 +5111,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6580,7 +5175,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6644,7 +5239,7 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6708,7 +5303,7 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6772,7 +5367,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6836,7 +5431,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6900,7 +5495,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -6964,7 +5559,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7033,7 +5628,7 @@
                     ],
                     "buttonWidth": 70,
                     "buttonHeight": 70,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7097,7 +5692,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7161,7 +5756,7 @@
                     ],
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7331,7 +5926,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7364,7 +5959,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 369477008,
+                    "pointer": 371070912,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7402,7 +5997,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -7533,7 +6128,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -7664,7 +6259,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -7795,7 +6390,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -7859,7 +6454,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -7923,7 +6518,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -7987,7 +6582,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -8118,7 +6713,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1265,
+                    "lastButtonWidth": 1372,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -8351,7 +6946,7 @@
             "Parent UUID": 417171234,
             "Name": "Enemies",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "Assets\/Prefabs\/Enemies 3.rgprefab",
             "tag": "Untagged",
@@ -8363,7 +6958,7 @@
                     "Active": true,
                     "Position": [
                         0,
-                        0,
+                        1,
                         0
                     ],
                     "Quaternion": [
@@ -8415,7 +7010,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_15_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8479,7 +7074,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_14_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8543,7 +7138,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_13",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8607,7 +7202,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_12",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8671,7 +7266,7 @@
             "Parent UUID": 1005805494,
             "Name": "undistractable_enemy_3",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8735,7 +7330,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_11_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8799,7 +7394,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_10_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8863,7 +7458,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_9_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8927,7 +7522,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_8_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -8991,7 +7586,7 @@
             "Parent UUID": 1005805494,
             "Name": "tank_enemy_3_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9055,7 +7650,7 @@
             "Parent UUID": 1005805494,
             "Name": "undistractable_enemy_2",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9119,7 +7714,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_7",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9183,7 +7778,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_6",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9247,7 +7842,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_5",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9311,7 +7906,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_4",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9375,7 +7970,7 @@
             "Parent UUID": 1005805494,
             "Name": "undistractable_enemy_1",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9439,7 +8034,7 @@
             "Parent UUID": 1005805494,
             "Name": "tank_enemy_2_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9503,7 +8098,7 @@
             "Parent UUID": 1005805494,
             "Name": "tank_enemy_1",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9567,7 +8162,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_3_patrol",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9631,7 +8226,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_2",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9695,7 +8290,7 @@
             "Parent UUID": 1005805494,
             "Name": "basic_enemy_1",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -9750,6 +8345,2477 @@
                 {
                     "Type": 1,
                     "Path": "Assets\/lvl3_blockout__Enemies.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1463571664,
+            "Parent UUID": 417171234,
+            "Name": "RootNode",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1547116864,
+            "Parent UUID": 1463571664,
+            "Name": "Stairs",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.71654891967773438,
+                        17.881000518798828,
+                        47.803836822509766
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 616917905,
+            "Parent UUID": 1547116864,
+            "Name": "Stairs_2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.30564498901367188,
+                        3.9095852375030518,
+                        51.864772796630859
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs_2.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 195722247,
+            "Parent UUID": 1547116864,
+            "Name": "Stairs_1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.305633544921875,
+                        -8.6839437484741211,
+                        84.990936279296875
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs_1.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1427589966,
+            "Parent UUID": 1547116864,
+            "Name": "Stairs_R_01",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        29.511604309082031,
+                        12.563615798950195,
+                        -92.651771545410156
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs_R_01.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 162174232,
+            "Parent UUID": 1547116864,
+            "Name": "Stairs_R_02",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        43.571598052978516,
+                        12.251996994018555,
+                        -54.215675354003906
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs_R_02.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1649348413,
+            "Parent UUID": 1547116864,
+            "Name": "Stairs_L_01",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -29.511604309082031,
+                        12.579834938049316,
+                        -92.659088134765625
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs_L_01.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 889570270,
+            "Parent UUID": 1547116864,
+            "Name": "Stairs_L_02",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -43.571598052978516,
+                        12.337765693664551,
+                        -54.215675354003906
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stairs_L_02.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 692031591,
+            "Parent UUID": 1463571664,
+            "Name": "Walls1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.71654891967773438,
+                        28.614999771118164,
+                        -0.45025396347045898
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Walls1.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 256038902,
+            "Parent UUID": 692031591,
+            "Name": "Walls",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        4.7785491943359375,
+                        -20.561929702758789
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Walls.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1320961718,
+            "Parent UUID": 692031591,
+            "Name": "Walls_First_Area",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.10754013061523438,
+                        -3.2422242164611816,
+                        71.345161437988281
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Walls_First_Area.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 120671776,
+            "Parent UUID": 692031591,
+            "Name": "Walls_Last_Hit",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        1.3165483474731445,
+                        3.499152660369873,
+                        -91.62628173828125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Walls_Last_Hit.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1231705511,
+            "Parent UUID": 1463571664,
+            "Name": "Floors",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -0.70458769798278809,
+                        17.635000228881836,
+                        60.571422576904297
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floors.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1957574057,
+            "Parent UUID": 1231705511,
+            "Name": "Floor_R",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        45.932601928710938,
+                        12.839463233947754,
+                        -93.69561767578125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floor_R.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1805796107,
+            "Parent UUID": 1231705511,
+            "Name": "Floor",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        1.6807122230529785,
+                        8.3547496795654297,
+                        -81.893447875976562
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floor.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 495713848,
+            "Parent UUID": 1231705511,
+            "Name": "Floor_Second_Area",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.095579624176025391,
+                        -0.25189816951751709,
+                        10.319917678833008
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floor_Second_Area.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1173752767,
+            "Parent UUID": 1231705511,
+            "Name": "Floor_First_Area",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.29367685317993164,
+                        -17.143999099731445,
+                        107.99599456787109
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floor_First_Area.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1826867368,
+            "Parent UUID": 1231705511,
+            "Name": "Floor_Second_Area_Up",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0.14871072769165039,
+                        2.8380370140075684,
+                        -1.7304825782775879
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floor_Second_Area_Up.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 316555113,
+            "Parent UUID": 1231705511,
+            "Name": "Floor_L",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -45.932601928710938,
+                        12.839463233947754,
+                        -93.69561767578125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Floor_L.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 938966853,
+            "Parent UUID": 1463571664,
+            "Name": "Trees",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        3.0553264617919922,
+                        24.783000946044922,
+                        43.54815673828125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Trees.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1616518425,
+            "Parent UUID": 938966853,
+            "Name": "Tree_10",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -9.4140472412109375,
+                        2.0149743556976318,
+                        11.601313591003418
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_10.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 45078932,
+            "Parent UUID": 938966853,
+            "Name": "Tree_9",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -13.362224578857422,
+                        2.0218446254730225,
+                        39.509082794189453
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_9.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 648971486,
+            "Parent UUID": 938966853,
+            "Name": "Tree_8",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        7.6456356048583984,
+                        4.6775646209716797,
+                        5.794550895690918
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_8.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1230306836,
+            "Parent UUID": 938966853,
+            "Name": "Tree_7",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        7.7065277099609375,
+                        4.6775646209716797,
+                        34.907958984375
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_7.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2097436391,
+            "Parent UUID": 938966853,
+            "Name": "Tree_6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        3.8312873840332031,
+                        2.0218398571014404,
+                        26.429195404052734
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_6.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 609890203,
+            "Parent UUID": 938966853,
+            "Name": "Tree_5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -13.344549179077148,
+                        4.6775617599487305,
+                        5.9039373397827148
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_8.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1077743323,
+            "Parent UUID": 938966853,
+            "Name": "Tree_4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -13.293556213378906,
+                        4.6775617599487305,
+                        20.576404571533203
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_8.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1417145698,
+            "Parent UUID": 938966853,
+            "Name": "Tree_3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        10.398338317871094,
+                        1.9965684413909912,
+                        17.838947296142578
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_3.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2036981461,
+            "Parent UUID": 938966853,
+            "Name": "Tree_2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -13.395523071289062,
+                        4.6775636672973633,
+                        27.808040618896484
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_8.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 237115467,
+            "Parent UUID": 938966853,
+            "Name": "Tree_1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        7.6151695251464844,
+                        4.6775646209716797,
+                        12.82779598236084
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Tree_8.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 556466994,
+            "Parent UUID": 1463571664,
+            "Name": "Stones",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        5.7535715103149414,
+                        14.899999618530273,
+                        68.563201904296875
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stones.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1134739020,
+            "Parent UUID": 556466994,
+            "Name": "Stone_9",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        25.208395004272461,
+                        3.4331603050231934,
+                        -10.957433700561523
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_9.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1706536293,
+            "Parent UUID": 556466994,
+            "Name": "Stone_8",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -4.1702919006347656,
+                        6.7038235664367676,
+                        31.986614227294922
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_8.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 143729804,
+            "Parent UUID": 556466994,
+            "Name": "Stone_7",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -24.916376113891602,
+                        2.9159488677978516,
+                        43.696704864501953
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_7.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 706545968,
+            "Parent UUID": 556466994,
+            "Name": "Stone_6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -14.097635269165039,
+                        -6.2545914649963379,
+                        64.854034423828125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_6.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1281058460,
+            "Parent UUID": 556466994,
+            "Name": "Stone_5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        13.134492874145508,
+                        3.4331536293029785,
+                        26.325927734375
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_5.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1885159877,
+            "Parent UUID": 556466994,
+            "Name": "Stone_4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8.88653564453125,
+                        6.7038240432739258,
+                        31.554443359375
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_4.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 318593854,
+            "Parent UUID": 556466994,
+            "Name": "Stone_2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -23.852092742919922,
+                        2.9159488677978516,
+                        36.291191101074219
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_2.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 891713926,
+            "Parent UUID": 556466994,
+            "Name": "Stone_1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -22.787851333618164,
+                        2.9159488677978516,
+                        27.510932922363281
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/lvl3_blockout__Stone_1.fbx",
                     "Active": true
                 }
             ]
