@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 787763488,
+                    "pointer": 14943728,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -2406,15 +2406,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.62939453125e-06,
+                        0,
                         55,
-                        -50.000015258789062
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
+                        0.34202012419700623,
                         0,
-                        7.9287412191320072e-09,
-                        0.93969273567199707
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -2422,7 +2422,7 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142130613327026,
+                        1.4142129421234131,
                         1.0000002384185791,
                         1.0000001192092896
                     ]
@@ -2430,7 +2430,7 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 176,
-                    "Vertical Fov": 0.44563493132591248,
+                    "Vertical Fov": 0.49203568696975708,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
                         41.246772766113281,
@@ -6981,7 +6981,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueManager",
-                    "pointer": 787763632,
+                    "pointer": 485203816,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7019,7 +7019,7 @@
                     ],
                     "buttonWidth": 914,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7083,7 +7083,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7152,7 +7152,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7221,7 +7221,7 @@
                     ],
                     "buttonWidth": 912.5,
                     "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7361,7 +7361,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 479663328,
+                    "pointer": 485201512,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7437,7 +7437,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 479663904,
+                    "pointer": 485200360,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7513,7 +7513,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 479666496,
+                    "pointer": 485200216,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7589,7 +7589,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 479662464,
+                    "pointer": 485202376,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7667,7 +7667,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7736,7 +7736,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7800,7 +7800,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7864,7 +7864,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -7928,7 +7928,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8059,7 +8059,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8190,7 +8190,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8321,7 +8321,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8452,7 +8452,7 @@
                     ],
                     "buttonWidth": 45,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8583,7 +8583,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8647,7 +8647,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8711,7 +8711,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8775,7 +8775,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8839,7 +8839,7 @@
                     ],
                     "buttonWidth": 270,
                     "buttonHeight": 134.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8903,7 +8903,7 @@
                     ],
                     "buttonWidth": 500.5,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -8967,7 +8967,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9031,7 +9031,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9095,7 +9095,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9159,7 +9159,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9228,7 +9228,7 @@
                     ],
                     "buttonWidth": 70,
                     "buttonHeight": 70,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9292,7 +9292,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9356,7 +9356,7 @@
                     ],
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9526,7 +9526,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -9559,7 +9559,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 787766800,
+                    "pointer": 485205832,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9597,7 +9597,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -9728,7 +9728,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -9859,7 +9859,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -9990,7 +9990,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -10054,7 +10054,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -10118,7 +10118,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -10182,7 +10182,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -10313,7 +10313,7 @@
                     ],
                     "buttonWidth": 400,
                     "buttonHeight": 45,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
@@ -10612,7 +10612,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -10676,7 +10676,7 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -10740,7 +10740,7 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -10871,7 +10871,7 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -10935,7 +10935,7 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11066,7 +11066,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11197,7 +11197,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11261,7 +11261,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11392,7 +11392,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11456,7 +11456,7 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11587,7 +11587,7 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11651,7 +11651,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11735,7 +11735,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11819,7 +11819,7 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11903,7 +11903,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -11972,7 +11972,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12041,7 +12041,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12066,7 +12066,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12150,7 +12150,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12175,7 +12175,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12259,7 +12259,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12284,7 +12284,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12368,7 +12368,7 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12393,7 +12393,7 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12477,7 +12477,7 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12629,7 +12629,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12657,7 +12657,7 @@
                 {
                     "Type": 16,
                     "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -12698,7 +12698,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12726,7 +12726,7 @@
                 {
                     "Type": 16,
                     "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -12767,7 +12767,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12795,7 +12795,7 @@
                 {
                     "Type": 16,
                     "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -12836,7 +12836,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -12924,7 +12924,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -12967,7 +12967,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13055,7 +13055,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13098,7 +13098,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13186,7 +13186,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13229,7 +13229,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13317,7 +13317,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13360,7 +13360,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13448,7 +13448,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13491,7 +13491,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13579,7 +13579,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13622,7 +13622,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13710,7 +13710,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13753,7 +13753,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13841,7 +13841,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -13884,7 +13884,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -13972,7 +13972,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14015,7 +14015,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14103,7 +14103,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14146,7 +14146,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14234,7 +14234,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14277,7 +14277,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14365,7 +14365,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14408,7 +14408,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14496,7 +14496,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14539,7 +14539,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14627,7 +14627,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14670,7 +14670,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14758,7 +14758,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14801,7 +14801,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -14889,7 +14889,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -14932,7 +14932,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15020,7 +15020,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -15063,7 +15063,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15151,7 +15151,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -15194,7 +15194,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15282,7 +15282,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -15325,7 +15325,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15413,7 +15413,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -15456,7 +15456,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15544,7 +15544,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -15587,7 +15587,7 @@
                     ],
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15675,7 +15675,7 @@
                 {
                     "Type": 12,
                     "buttonText": "Button",
-                    "fontPath": "Library\/Fonts\/Dune_Rise.otf",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
                     "textColor.g": 1,
@@ -15718,7 +15718,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
@@ -15849,7 +15849,7 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
+                    "lastButtonWidth": 1238,
                     "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
