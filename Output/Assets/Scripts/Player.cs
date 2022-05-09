@@ -258,6 +258,7 @@ public class Player : RagnarComponent
     {
         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_DEATH");
         gameObject.GetComponent<Animation>().PlayAnimation("Death");
+        agent.ClearPath();
         walkPartSys.Pause();
         runPartSys.Pause();
         pendingToDelete = true;
