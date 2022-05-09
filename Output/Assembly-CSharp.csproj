@@ -50,6 +50,7 @@
     <Compile Include="Assembly-CSharp\Default Components\AudioListener.cs" />
     <Compile Include="Assembly-CSharp\Default Components\AudioSource.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Camera.cs" />
+    <Compile Include="Assembly-CSharp\Default Components\InputAction.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Light.cs" />
     <Compile Include="Assembly-CSharp\Default Components\Material.cs" />
     <Compile Include="Assembly-CSharp\Default Components\NavAgent.cs" />

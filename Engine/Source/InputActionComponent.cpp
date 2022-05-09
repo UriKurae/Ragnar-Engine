@@ -301,3 +301,11 @@ void InputActionComponent::LoadAllInputAssets(const char* folder)
 		LoadAllInputAssets((*it).c_str());
 	}
 }
+
+void InputActionComponent::SetActionMap(int index)
+{
+	if (currentActionMaps[index] != nullptr)
+	{
+		currentPreset = currentActionMaps[index];
+	}
+}
