@@ -96,8 +96,6 @@ public class Player : RagnarComponent
             if (controled && hitPoints > 0)
             //if (controled && hitPoints > 0 && dialogue.GetInDialogue())
             {
-                sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
-
                 // Crouch
                 if (Input.GetKey(KeyCode.LSHIFT) == KeyState.KEY_DOWN)
                 {
@@ -105,7 +103,6 @@ public class Player : RagnarComponent
                     {
                         action = Actions.CROUCH;
                         rb.SetHeight(0.6f); // 0.6 = 60%
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(5f);
                         gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
                         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_CROUCH");
                     }
@@ -113,7 +110,6 @@ public class Player : RagnarComponent
                     {
                         action = Actions.NONE;
                         rb.SetHeight(1); // 1 = 100% = Reset
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                         gameObject.GetComponent<Animation>().PlayAnimation("Idle");
                     }
                 }
@@ -123,13 +119,11 @@ public class Player : RagnarComponent
                 {
                     agent.speed = speedBase;
                     move = Movement.WALK;
-                    sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                 }
                 else if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_TWICE)
                 {
                     agent.speed *= 2;
                     move = Movement.RUN;
-                    sound.GetComponent<Rigidbody>().SetRadiusSphere(8f);
                 }
                 
 
@@ -144,14 +138,17 @@ public class Player : RagnarComponent
                                 {
                                     case Actions.NONE:
                                         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                                        sound.GetComponent<Rigidbody>().SetRadiusSphere(4f);
                                         walkPartSys.Play();
                                         break;
                                     case Actions.CROUCH:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+                                        sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                                         walkPartSys.Play();
                                         break;
                                     case Actions.CARRY:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseWalk");
+                                        sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
                                         walkPartSys.Play();
                                         break;
                                 }
@@ -162,14 +159,17 @@ public class Player : RagnarComponent
                                 {
                                     case Actions.NONE:
                                         gameObject.GetComponent<Animation>().PlayAnimation("Run");
+                                        sound.GetComponent<Rigidbody>().SetRadiusSphere(8f);
                                         runPartSys.Play();
                                         break;
                                     case Actions.CROUCH:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
+                                        sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
                                         runPartSys.Play();
                                         break;
                                     case Actions.CARRY:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseRun");
+                                        sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
                                         runPartSys.Play();
                                         break;
                                 }
