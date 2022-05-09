@@ -77,6 +77,10 @@ public:
 
 	void SaveTesting(int deadCount, std::string playerName, float3 playerPos, float time);
 
+	inline float GetTransitionAlpha() { return transitionAlpha; }
+	inline bool IsSceneChanging() { return changeScene; }
+
+public:
 	std::multimap<uint, SerializedField*> referenceMap;
 	bool newSceneLoaded;
 
@@ -107,4 +111,8 @@ private:
 	std::vector<std::shared_ptr<Scene>> scenes;
 
 	int lenguage = 0;
+	bool enteringFade;
+	bool exitingFade;
+	bool fadeInCompleted;
+	float transitionAlpha;
 };
