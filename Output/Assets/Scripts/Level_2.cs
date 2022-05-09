@@ -642,6 +642,7 @@ public class Level_2 : RagnarComponent
         enemies[47].waypoints.Add(GameObject.Find("31"));
         enemies[47].waypoints.Add(GameObject.Find("32"));
         enemies[47].waypoints.Add(GameObject.Find("33"));
+        enemies[47].waypoints.Add(GameObject.Find("32"));
 
 
         enemies[48] = new Enemies
