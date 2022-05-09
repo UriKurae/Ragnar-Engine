@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_2",
-                    "pointer": 678138520,
+                    "pointer": 654876064,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -117,7 +117,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        26.249710083007812,
+                        26.249710083007813,
                         2.2120195353636518e-05,
                         -149.26237487792969
                     ],
@@ -236,7 +236,7 @@
                     "Position": [
                         -16.312864303588867,
                         0,
-                        -138.16616821289062
+                        -138.16616821289063
                     ],
                     "Quaternion": [
                         0,
@@ -587,7 +587,7 @@
                     "Position": [
                         -69.226913452148438,
                         0,
-                        -91.842300415039062
+                        -91.842300415039063
                     ],
                     "Quaternion": [
                         0,
@@ -1443,7 +1443,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        61.658218383789062,
+                        61.658218383789063,
                         0,
                         59.592388153076172
                     ],
@@ -2108,7 +2108,7 @@
                     "Position": [
                         -52.349472045898438,
                         0,
-                        -40.419387817382812
+                        -40.419387817382813
                     ],
                     "Quaternion": [
                         0,
@@ -2262,7 +2262,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        38.050125122070312,
+                        38.050125122070313,
                         0,
                         108.93590545654297
                     ],
@@ -2303,7 +2303,7 @@
                     "Position": [
                         -192.58009338378906,
                         -30.298473358154297,
-                        -86.941299438476562
+                        -86.941299438476563
                     ],
                     "Quaternion": [
                         0.67389911413192749,
@@ -2957,7 +2957,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        61.460647583007812,
+                        61.460647583007813,
                         3.8297224044799805,
                         75.788681030273438
                     ],
@@ -3215,7 +3215,7 @@
                     "Position": [
                         66.267524719238281,
                         3.8297228813171387,
-                        121.68753051757812
+                        121.68753051757813
                     ],
                     "Quaternion": [
                         0,
@@ -3341,7 +3341,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        83.684585571289062,
+                        83.684585571289063,
                         3.8297224044799805,
                         95.368309020996094
                     ],
@@ -4047,7 +4047,7 @@
                     "Position": [
                         16.979433059692383,
                         3.8297221660614014,
-                        120.05825805664062
+                        120.05825805664063
                     ],
                     "Quaternion": [
                         0,
@@ -4623,7 +4623,7 @@
                     "Position": [
                         12.312355041503906,
                         3.8297226428985596,
-                        55.624099731445312
+                        55.624099731445313
                     ],
                     "Quaternion": [
                         0,
@@ -5069,7 +5069,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -66.755081176757812,
+                        -66.755081176757813,
                         3.8297224044799805,
                         -25.707548141479492
                     ],
@@ -5583,7 +5583,7 @@
                     "Position": [
                         -94.628440856933594,
                         3.8297224044799805,
-                        -67.743667602539062
+                        -67.743667602539063
                     ],
                     "Quaternion": [
                         0,
@@ -5645,7 +5645,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -98.856399536132812,
+                        -98.856399536132813,
                         3.8297224044799805,
                         -85.790763854980469
                     ],
@@ -5942,7 +5942,7 @@
                     "Position": [
                         85.23846435546875,
                         5.8883380889892578,
-                        75.636550903320312
+                        75.636550903320313
                     ],
                     "Quaternion": [
                         0,
@@ -6942,318 +6942,6 @@
             ]
         },
         {
-            "UUID": 2068571281,
-            "Parent UUID": 417171234,
-            "Name": "Dialogue",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "Assets\/Prefabs\/Dialogue.rgprefab",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Quaternion": [
-                        0,
-                        0,
-                        0,
-                        1
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 4,
-                    "ScriptName": "DialogueManager",
-                    "pointer": 678136072,
-                    "type": 4,
-                    "componentTable": 0
-                }
-            ]
-        },
-        {
-            "UUID": 1396379022,
-            "Parent UUID": 2068571281,
-            "Name": "DialogueBox",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        363.5,
-                        1
-                    ],
-                    "Scale": [
-                        1.5233333110809326,
-                        0.37166666984558105,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 914,
-                    "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 750.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                }
-            ]
-        },
-        {
-            "UUID": 779138254,
-            "Parent UUID": 2068571281,
-            "Name": "DialogueText",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        240.5,
-                        5
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 750.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 280564851,
-            "Parent UUID": 2068571281,
-            "Name": "DialogueAuthName",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        264.5,
-                        15
-                    ],
-                    "Scale": [
-                        0.1666666716337204,
-                        0.1666666716337204,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 100,
-                    "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 750.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/white.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 16,
-                    "buttonText": "Text",
-                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
-                    "fontScale": 0.5,
-                    "textColor.r": 1,
-                    "textColor.g": 1,
-                    "textColor.b": 1,
-                    "TextFile": "-"
-                }
-            ]
-        },
-        {
-            "UUID": 1084092499,
-            "Parent UUID": 2068571281,
-            "Name": "DialogueAuthImg",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": true,
-            "Components": [
-                {
-                    "Active": true,
-                    "Type": 19,
-                    "Position": [
-                        0,
-                        365,
-                        15
-                    ],
-                    "Scale": [
-                        1.5208333730697632,
-                        0.37166666984558105,
-                        1
-                    ],
-                    "rotationEuler": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "buttonWidth": 912.5,
-                    "buttonHeight": 223,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 750.5,
-                    "MoveOnResizeX": true,
-                    "MoveOnResizeY": true
-                },
-                {
-                    "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_paul.png",
-                    "Normal Map Path": "Assets\/Resources\/white.png",
-                    "Active": true,
-                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
-                    "Cast Shadows": true,
-                    "Interactuable Color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
-                    "Emissive Color": [
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "Type": 13,
-                    "alpha": 1,
-                    "numOfAnimations": 0
-                }
-            ]
-        },
-        {
             "UUID": 256350042,
             "Parent UUID": 417171234,
             "Name": "DialoguesLevel2",
@@ -7361,7 +7049,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 678143704,
+                    "pointer": 654868864,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7411,7 +7099,7 @@
                     "Size": [
                         3.2000000476837158,
                         5.5999999046325684,
-                        78.300003051757812
+                        78.300003051757813
                     ],
                     "Gravity": false,
                     "Kinematic": false,
@@ -7437,7 +7125,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 678143848,
+                    "pointer": 654871312,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7462,7 +7150,7 @@
                     "Position": [
                         4.6584920883178711,
                         2.9792451858520508,
-                        -21.488906860351562
+                        -21.488906860351563
                     ],
                     "Quaternion": [
                         0,
@@ -7513,7 +7201,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 678141976,
+                    "pointer": 654869152,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
@@ -7589,10 +7277,387 @@
                 {
                     "Type": 4,
                     "ScriptName": "DialogueTrigger",
-                    "pointer": 678142120,
+                    "pointer": 654872752,
                     "type": 4,
                     "componentTable": 0,
                     "dialogueId": 0
+                }
+            ]
+        },
+        {
+            "UUID": 2068571281,
+            "Parent UUID": 417171234,
+            "Name": "Dialogue",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/Dialogue.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 4,
+                    "ScriptName": "DialogueManager",
+                    "pointer": 365638656,
+                    "type": 4,
+                    "componentTable": 0,
+                    "triggerColliders": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1396379022,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueBoxBall",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        216.5,
+                        1
+                    ],
+                    "Scale": [
+                        1.5233333110809326,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 914,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox_ball.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 779138254,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        93.5,
+                        5
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 280564851,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueAuthName",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        117.5,
+                        15
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Text",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1084092499,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueAuthImg",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        218,
+                        15
+                    ],
+                    "Scale": [
+                        1.5208333730697632,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 912.5,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialog_paul.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Opacity": 0,
+                    "Emissive Enabled": true,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1337554517,
+            "Parent UUID": 2068571281,
+            "Name": "DialogueBoxBox",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        1.5233333110809326,
+                        0.37166666984558105,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 914,
+                    "buttonHeight": 223,
+                    "lastButtonWidth": 1372,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_dialoguebox_box.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
                 }
             ]
         },
@@ -9559,7 +9624,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 678142840,
+                    "pointer": 365631600,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -10547,7 +10612,7 @@
             "Name": "UIOptions",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIOptions.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -10586,7 +10651,7 @@
             "Name": "optionsBack",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10650,7 +10715,7 @@
             "Name": "optionsBackImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10714,7 +10779,7 @@
             "Name": "optionsBackButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10845,7 +10910,7 @@
             "Name": "optionsTransCuad",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -10909,7 +10974,7 @@
             "Name": "optionsTitle",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11040,7 +11105,7 @@
             "Name": "optionsScreenButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11171,7 +11236,7 @@
             "Name": "optionsScreenImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11235,7 +11300,7 @@
             "Name": "optionsSoundButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11366,7 +11431,7 @@
             "Name": "optionsSoundImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11430,7 +11495,7 @@
             "Name": "optionsControlsButton",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11561,7 +11626,7 @@
             "Name": "optionsControlsImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11625,7 +11690,7 @@
             "Name": "optionsScreenFSCH",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11709,7 +11774,7 @@
             "Name": "optionsScreenVSCH",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11793,7 +11858,7 @@
             "Name": "optionsScreenSDCH",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11877,7 +11942,7 @@
             "Name": "optionsSreenText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -11946,7 +12011,7 @@
             "Name": "optionsSoundText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12015,7 +12080,7 @@
             "Name": "optionsGeneralSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12124,7 +12189,7 @@
             "Name": "optionsMusicSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12233,7 +12298,7 @@
             "Name": "optionsFXcSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12342,7 +12407,7 @@
             "Name": "optionsVoicesSound",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12451,7 +12516,7 @@
             "Name": "optionsLanguaje",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12603,7 +12668,7 @@
             "Name": "optionsControlText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12672,7 +12737,7 @@
             "Name": "optionsControlText1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12741,7 +12806,7 @@
             "Name": "optionsControlText2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -12810,7 +12875,7 @@
             "Name": "optionsControl22",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -12941,7 +13006,7 @@
             "Name": "optionsControl21",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13072,7 +13137,7 @@
             "Name": "optionsControl20",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13203,7 +13268,7 @@
             "Name": "optionsControl19",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13334,7 +13399,7 @@
             "Name": "optionsControl18",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13465,7 +13530,7 @@
             "Name": "optionsControl17",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13596,7 +13661,7 @@
             "Name": "optionsControl16",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13727,7 +13792,7 @@
             "Name": "optionsControl15",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13858,7 +13923,7 @@
             "Name": "optionsControl14",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -13989,7 +14054,7 @@
             "Name": "optionsControl13",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14120,7 +14185,7 @@
             "Name": "optionsControl12",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14251,7 +14316,7 @@
             "Name": "optionsControl11",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14382,7 +14447,7 @@
             "Name": "optionsControl10",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14513,7 +14578,7 @@
             "Name": "optionsControl9",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14644,7 +14709,7 @@
             "Name": "optionsControl8",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14775,7 +14840,7 @@
             "Name": "optionsControl7",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14906,7 +14971,7 @@
             "Name": "optionsControl6",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -15037,7 +15102,7 @@
             "Name": "optionsControl5",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -15168,7 +15233,7 @@
             "Name": "optionsControl4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -15299,7 +15364,7 @@
             "Name": "optionsControl3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -15430,7 +15495,7 @@
             "Name": "optionsControl2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -15561,7 +15626,7 @@
             "Name": "optionsControl1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
