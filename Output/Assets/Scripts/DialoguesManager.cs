@@ -3,9 +3,10 @@ using RagnarEngine;
 
 public class DialogueManager : RagnarComponent
 {
-	//UIText toxt;
-	GameObject box;
-	private GameObject SceneAudio;
+    //UIText toxt;
+    GameObject boxTextBall;
+    GameObject boxTextBox;
+    private GameObject SceneAudio;
 	GameObject text;
 	GameObject image;
     GameObject name;
@@ -25,8 +26,9 @@ public class DialogueManager : RagnarComponent
 	{
 		Dialogue.LoadDialogueFile("");
         SceneAudio = GameObject.Find("AudioLevel1");
-        box = GameObject.Find("DialogueBox");
-		text = GameObject.Find("DialogueText");
+        boxTextBall = GameObject.Find("DialogueBoxBall");
+        boxTextBox = GameObject.Find("DialogueBoxBox");
+        text = GameObject.Find("DialogueText");
 		image = GameObject.Find("DialogueAuthImg");
         name = GameObject.Find("DialogueAuthName");
 		auth = "";
@@ -49,24 +51,27 @@ public class DialogueManager : RagnarComponent
             float posY = InternalCalls.GetRegionGame().y, posX = InternalCalls.GetRegionGame().x;
             posY *= 0.33f;
             posX = 0;
-            //box
-            pos.Set(posX, posY, box.GetComponent<Transform2D>().position2D.z - 10);
-            box.GetComponent<Transform2D>().position2D = pos;
+            //boxTextBox
+            pos.Set(posX, posY, boxTextBox.GetComponent<Transform2D>().position2D.z - 10);
+            boxTextBox.GetComponent<Transform2D>().position2D = pos;
+            //boxTextBall
+            pos.Set(posX, posY, boxTextBox.GetComponent<Transform2D>().position2D.z - 10);
+            boxTextBall.GetComponent<Transform2D>().position2D = pos;
 
-            posX = box.GetComponent<Transform2D>().position2D.x;
+            posX = boxTextBox.GetComponent<Transform2D>().position2D.x;
             //face
             pos.Set(posX, posY - 2, image.GetComponent<Transform2D>().position2D.z + 20);
             image.GetComponent<Transform2D>().position2D = pos;
 
             posX += 47.0f;
             //author
-            //pos.Set(posX - 195.0f, box.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
-            pos.Set(posX, box.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
+            //pos.Set(posX - 195.0f, boxTextBox.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(posX, boxTextBox.GetComponent<Transform2D>().position2D.y + 60, name.GetComponent<Transform2D>().position2D.z + 20);
             name.GetComponent<Transform2D>().position2D = pos;
             //posX -= 40.0f;
             //text
-            //.Set(posX - 192.0f, box.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
-            pos.Set(posX, box.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
+            //.Set(posX - 192.0f, boxTextBox.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
+            pos.Set(posX, boxTextBox.GetComponent<Transform2D>().position2D.y + 10, text.GetComponent<Transform2D>().position2D.z + 20);
             text.GetComponent<Transform2D>().position2D = pos;
 
             firstTime = false;
