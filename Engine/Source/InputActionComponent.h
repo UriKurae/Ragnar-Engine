@@ -22,6 +22,8 @@ public:
 	bool LoadInputAsset(const char* path);
 	void LoadAllInputAssets(const char* folder);
 
+	void SetActionMap(int index);
+
 private:
 
 	std::shared_ptr<ActionMaps> currentPreset;

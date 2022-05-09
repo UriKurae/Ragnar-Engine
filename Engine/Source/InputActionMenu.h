@@ -62,6 +62,8 @@ public:
 	bool SaveInputActionFile(const char* path);
 	bool LoadInputActionFile(const char* path);
 
+	void ImportToLibrary();
+
 private:
 
 	std::vector<std::shared_ptr<ActionMaps>> actionMaps;

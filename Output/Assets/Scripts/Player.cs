@@ -30,6 +30,7 @@ public class Player : RagnarComponent
     DialogueManager dialogue;
 
     ParticleSystem walkPartSys;
+    ParticleSystem runPartSys;
     ParticleSystem getHitPartSys;
 
     public bool controled = false;
@@ -56,18 +57,22 @@ public class Player : RagnarComponent
         if (gameObject.name == "Player")
         {
             walkPartSys = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_2")
         {
             walkPartSys = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles_2").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_2").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_3")
         {
             walkPartSys = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
         }
+        runPartSys.Pause();
         walkPartSys.Pause();
     }
 
@@ -128,12 +133,15 @@ public class Player : RagnarComponent
                                 {
                                     case Actions.NONE:
                                         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                                        walkPartSys.Play();
                                         break;
                                     case Actions.CROUCH:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+                                        walkPartSys.Play();
                                         break;
                                     case Actions.CARRY:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseWalk");
+                                        walkPartSys.Play();
                                         break;
                                 }
                                 break;
@@ -143,19 +151,21 @@ public class Player : RagnarComponent
                                 {
                                     case Actions.NONE:
                                         gameObject.GetComponent<Animation>().PlayAnimation("Run");
+                                        runPartSys.Play();
                                         break;
                                     case Actions.CROUCH:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
+                                        runPartSys.Play();
                                         break;
                                     case Actions.CARRY:
                                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseRun");
+                                        runPartSys.Play();
                                         break;
                                 }
                                 break;
                         }
 
                         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
-                        walkPartSys.Play();
                     }
                 }
                 else if (abilityState != State.NONE && agent.PathSize() > 0)
@@ -173,6 +183,8 @@ public class Player : RagnarComponent
                             gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
                             break;
                     }
+                    walkPartSys.Pause();
+                    runPartSys.Pause();
                 }
             }
             if (agent.MovePath())
@@ -191,6 +203,7 @@ public class Player : RagnarComponent
                 }
 
                 walkPartSys.Pause();
+                runPartSys.Pause();
                 gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
             }
             if (action == Actions.CROUCH)
@@ -228,6 +241,7 @@ public class Player : RagnarComponent
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
             walkPartSys.Pause();
+            runPartSys.Pause();
             gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
         }
 
@@ -242,6 +256,7 @@ public class Player : RagnarComponent
         gameObject.GetComponent<AudioSource>().PlayClip("PAUL_DEATH");
         gameObject.GetComponent<Animation>().PlayAnimation("Death");
         walkPartSys.Pause();
+        runPartSys.Pause();
         pendingToDelete = true;
         if (GameObject.Find("Knife") != null)
         {
