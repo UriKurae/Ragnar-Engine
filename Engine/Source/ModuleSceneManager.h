@@ -90,7 +90,11 @@ public:
 	bool showCreateLightSensibleShaderWindow = false;
 	bool showCreateNotLightSensibleShaderWindow = false;
 
+	void SetLenguage(int lenguageID) { lenguage = lenguageID; }
+	int GetLenguage() { return lenguage; }
+
 private:
+
 	int index = 0;
 	int lastIndex = 0;
 	bool changeScene = false;
@@ -106,6 +110,7 @@ private:
 	std::shared_ptr<Scene> sceneSelected = nullptr;
 	std::vector<std::shared_ptr<Scene>> scenes;
 
+	int lenguage = 0;
 	bool enteringFade;
 	bool exitingFade;
 	bool fadeInCompleted;
