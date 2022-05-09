@@ -15,11 +15,10 @@ public class Eagle : RagnarComponent
     
     public void Start()
 	{
-        gameObject.GetComponent<AudioSource>().PlayClip("WPN_EAGLEORDER");
+        //gameObject.GetComponent<AudioSource>().PlayClip("WPN_EAGLEORDER");
         agent = gameObject.GetComponent<NavAgent>();
         controled = true;
         player = GameObject.Find("Player");
-        this.gameObject.GetComponent<Player>().SetControled(true);
         goRB = gameObject.GetComponent<Rigidbody>();
         goRB.SetBodyPosition(player.transform.globalPosition);
         goRB.IgnoreCollision(player, true);

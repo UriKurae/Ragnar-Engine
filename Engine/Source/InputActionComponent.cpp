@@ -45,7 +45,7 @@ void InputActionComponent::OnEditor()
 		{
 			assetWindowActive = true;
 			inputAssetsList.clear();
-			LoadAllInputAssets("Assets");
+			LoadAllInputAssets("Library");
 		}
 
 		if (currentActionMaps.size() > 0)
