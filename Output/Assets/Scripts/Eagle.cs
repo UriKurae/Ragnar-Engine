@@ -9,10 +9,8 @@ public class Eagle : RagnarComponent
     public float cooldown = 0;
     public float soundRadius = 6f;
     Rigidbody goRB;
-    ParticleSystem leftParticles;
-    ParticleSystem rightParticles;
+
     NavAgent agent;
-    
     public void Start()
 	{
         //gameObject.GetComponent<AudioSource>().PlayClip("WPN_EAGLEORDER");
@@ -23,11 +21,6 @@ public class Eagle : RagnarComponent
         goRB.SetBodyPosition(player.transform.globalPosition);
         goRB.IgnoreCollision(player, true);
         agent.CalculatePath(agent.hitPosition);
-        agent.MovePath();
-        leftParticles = GameObject.Find("LeftWingParticles").GetComponent<ParticleSystem>();
-        rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
-        leftParticles.Play();
-        rightParticles.Play();
     }
 	public void Update()
 	{
@@ -44,8 +37,6 @@ public class Eagle : RagnarComponent
             {
                 cooldown = 0f;
                 InternalCalls.Destroy(gameObject);
-                leftParticles.Pause();
-                rightParticles.Pause();
             }
         }
     }
