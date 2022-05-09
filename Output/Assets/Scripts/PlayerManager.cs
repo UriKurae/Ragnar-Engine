@@ -104,35 +104,35 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        if (players[characterSelected].GetComponent<Player>().controled)
+        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        if (players[characterSelected].GetComponent<Player>().controled)
+        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        if (players[characterSelected].GetComponent<Player>().controled)
+        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        if (players[characterSelected].GetComponent<Player>().controled)
+        if (players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
             SpawnArea(State.ABILITY_4);
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
     public void Carrying()
     {
-        if (players[characterSelected].GetComponent<Player>().controled)
+        if (players[characterSelected].GetComponent<Player>().controled && !players[characterSelected].GetComponent<Player>().dead)
         {
             playableCharacter.state = State.CARRYING;
             players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
@@ -141,38 +141,35 @@ public class PlayerManager : RagnarComponent
 
     private void AbilityStateChanger()
     {
-        if (playableCharacter.pickedEnemy == null)
+        // Change Condition to all players
+        if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
         {
-            // Change Condition to all players
-            if (((playableCharacter == characters[0]) && (playableCharacter.state == State.ABILITY_4)) || (playableCharacter == characters[1]) && (playableCharacter.state == State.ABILITY_4))
+            radius = 0f;
+            if (playableCharacter == characters[0]) radius = 11.5f;
+            else if (playableCharacter == characters[1]) radius = 12.7f;
+
+            lightHab.GetComponent<Light>().intensity = 6;
+
+            Vector3 hit;
+            if (SceneManager.currentSceneName == "build")
+                hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
+            else if (SceneManager.currentSceneName == "build2")
+                hit = GameObject.Find("LevelManager").GetComponent<Level_2>().hitPoint;
+            else
+                hit = GameObject.Find("LevelManager").GetComponent<Level_3>().hitPoint;
+
+            if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
             {
-                radius = 0f;
-                if (playableCharacter == characters[0]) radius = 11.5f;
-                else if (playableCharacter == characters[1]) radius = 12.7f;
-
-                lightHab.GetComponent<Light>().intensity = 6;
-
-                Vector3 hit;
-                if (SceneManager.currentSceneName == "build")
-                    hit = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
-                else if (SceneManager.currentSceneName == "build2")
-                    hit = GameObject.Find("LevelManager").GetComponent<Level_2>().hitPoint;
-                else
-                    hit = GameObject.Find("LevelManager").GetComponent<Level_3>().hitPoint;
-                    
-                if (Transform.GetDistanceBetween(players[characterSelected].transform.globalPosition, hit) < radius)
-                {
-                    hit.y += 0.2f;
-                    lightHab.transform.globalPosition = hit;
-                }
-                else
-                {
-                    // No BORRAR
-                    //Vector3 a = players[characterSelected].transform.globalPosition;
-                    //Vector3 b = (hit - a).normalized * 11.5f + a;
-                    //b.y = lightHab.transform.globalPosition.y;
-                    //lightHab.transform.globalPosition = b;
-                }
+                hit.y += 0.2f;
+                lightHab.transform.globalPosition = hit;
+            }
+            else
+            {
+                // No BORRAR
+                //Vector3 a = players[characterSelected].transform.globalPosition;
+                //Vector3 b = (hit - a).normalized * 11.5f + a;
+                //b.y = lightHab.transform.globalPosition.y;
+                //lightHab.transform.globalPosition = b;
             }
         }
 
