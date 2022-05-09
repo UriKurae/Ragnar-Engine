@@ -172,4 +172,42 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static void SaveDialogue(DialogueTrigger trigger)
+    {
+        // Cuidado, si no guarda los enemies, mirar aqui (hay un poltergeist aqui)
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string objectName = trigger.gameObject.name;
+        string path = "Library/SavedGame/Dialogues/" + objectName + ".ragnar";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        DialogueData data = new DialogueData(trigger);
+
+        formatter.Serialize(stream, data);
+
+        stream.Close();
+    }
+
+    public static DialogueData LoadDialogue(string dialogueName)
+    {
+        string path = "Library/SavedGame/Dialogues/" + dialogueName + ".ragnar";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            DialogueData data = formatter.Deserialize(stream) as DialogueData;
+
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            //Debug.Log("Save file not found in " + path);
+            return null;
+        }
+    }
 }

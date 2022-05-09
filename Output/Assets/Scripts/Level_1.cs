@@ -469,7 +469,7 @@ public class Level_1 : RagnarComponent
         GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemies = enemies;
 
         InternalCalls.InstancePrefab("Dialogue");
-        //InternalCalls.InstancePrefab("DialogueLevel1");
+        InternalCalls.InstancePrefab("DialogueLevel1");
     }
 	public void Update()
 	{

@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\EnemyAbilities.cs" />
     <Compile Include="Assets\Scripts\LoseScreen.cs" />
     <Compile Include="Assets\Scripts\MainMenuBackScreen.cs" />
+    <Compile Include="Assets\Scripts\DialogueData.cs" />
     <Compile Include="Assets\Scripts\PauseMenuButton.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Abilities.cs" />

@@ -461,12 +461,15 @@ public class PlayerManager : RagnarComponent
         {
             case "build":
                 SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build2":
                 SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
             case "build3":
                 SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
                 break;
         }
 

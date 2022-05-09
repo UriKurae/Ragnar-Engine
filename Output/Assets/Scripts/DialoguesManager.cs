@@ -42,6 +42,12 @@ public class DialogueManager : RagnarComponent
         // Hay que actualizar todos los prefabs y hacer que se instancien por codigo
         // en su levelManager por cada nivel
         triggerColliders = GameObject.FindGameObjectsWithTag("DialogueTrigger");
+
+        if (SaveSystem.fromContinue)
+        {
+            Debug.Log("Loading dialogues");
+            LoadDialogue();
+        }
     }
 
     public void Update()
@@ -208,4 +214,30 @@ public class DialogueManager : RagnarComponent
     public bool GetInDialogue() { return inDialogue; }
 
     public bool GetEndDialogue() { return endDialogue; }
+
+    public void SaveDialogue()
+    {
+        SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Dialogues");
+        for (int i = 0; i < triggerColliders.Length; ++i)
+        {
+            Debug.Log(triggerColliders[i].name);
+            SaveSystem.SaveDialogue(triggerColliders[i].GetComponent<DialogueTrigger>());
+        }
+    }
+
+    public void LoadDialogue()
+    {
+        for (int i = 0; i < triggerColliders.Length; ++i)
+        {
+            Debug.Log(triggerColliders[i].name);
+            DialogueData data = SaveSystem.LoadDialogue(triggerColliders[i].name);
+
+            triggerColliders[i].GetComponent<DialogueTrigger>().SetUsed(data.used);
+
+            if (data.used)
+            {
+                Debug.Log("Dialogo skippeado");
+            }
+        }
+    }
 }
