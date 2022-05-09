@@ -32,6 +32,7 @@ public class Player : RagnarComponent
     ParticleSystem walkPartSys;
     ParticleSystem runPartSys;
     ParticleSystem getHitPartSys;
+    ParticleSystem deadPartSys;
 
     public bool controled = false;
     State abilityState = 0;
@@ -59,21 +60,25 @@ public class Player : RagnarComponent
             walkPartSys = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
             runPartSys = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles").GetComponent<ParticleSystem>();
+            deadPartSys = GameObject.Find("FallDeadParticles_1").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_2")
         {
             walkPartSys = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
             runPartSys = GameObject.Find("RunParticles_2").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_2").GetComponent<ParticleSystem>();
+            deadPartSys = GameObject.Find("FallDeadParticles_2").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_3")
         {
             walkPartSys = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
             runPartSys = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
             getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
+            deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
         }
         runPartSys.Pause();
         walkPartSys.Pause();
+        deadPartSys.Pause();
     }
 
     public void Update()
@@ -225,6 +230,7 @@ public class Player : RagnarComponent
             //SaveTest File for Debugging
             if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
             {
+                deadPartSys.Play();
                 String name = "";
                 if (gameObject.name == "Player") name = "Paul Atreides";
                 else if (gameObject.name == "Player_2") name = "Chani";
