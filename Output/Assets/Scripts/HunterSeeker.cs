@@ -41,6 +41,13 @@ public class HunterSeeker : RagnarComponent
 		if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
 		{
 			agent.CalculatePath(agent.hitPosition);
+			leftParticles.Play();
+			rightParticles.Play();
+		}
+		if(agent.PathSize() == 0)
+        {
+			leftParticles.Pause();
+			rightParticles.Pause();
 		}
 		agent.MovePath();
 		if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_UP)
