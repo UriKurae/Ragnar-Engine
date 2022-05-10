@@ -34,6 +34,7 @@ public class Player : RagnarComponent
     ParticleSystem walkPartSys;
     ParticleSystem runPartSys;
     ParticleSystem getHitPartSys;
+    ParticleSystem deadPartSys;
 
     public bool controled = false;
     State abilityState = State.NONE;
@@ -61,21 +62,24 @@ public class Player : RagnarComponent
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
         {
-            walkPartSys     = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
-            runPartSys      = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
-            getHitPartSys   = GameObject.Find("GetHitParticles").GetComponent<ParticleSystem>();
+            walkPartSys = GameObject.Find("WalkParticles").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
+            getHitPartSys = GameObject.Find("GetHitParticles").GetComponent<ParticleSystem>();
+            deadPartSys = GameObject.Find("FallDeadParticles_1").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_2")
         {
-            walkPartSys     = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
-            runPartSys      = GameObject.Find("RunParticles_2").GetComponent<ParticleSystem>();
-            getHitPartSys   = GameObject.Find("GetHitParticles_2").GetComponent<ParticleSystem>();
+            walkPartSys = GameObject.Find("WalkParticles_2").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles_2").GetComponent<ParticleSystem>();
+            getHitPartSys = GameObject.Find("GetHitParticles_2").GetComponent<ParticleSystem>();
+            deadPartSys = GameObject.Find("FallDeadParticles_2").GetComponent<ParticleSystem>();
         }
         else if (gameObject.name == "Player_3")
         {
-            walkPartSys     = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
-            runPartSys      = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
-            getHitPartSys   = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
+            walkPartSys = GameObject.Find("WalkParticles_3").GetComponent<ParticleSystem>();
+            runPartSys = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
+            getHitPartSys = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
+            deadPartSys = GameObject.Find("FallDeadParticles_3").GetComponent<ParticleSystem>();
         }
         getHitPartSys.Pause();
 
@@ -169,10 +173,17 @@ public class Player : RagnarComponent
                 gameObject.GetComponent<AudioSource>().PlayClip("WPN_RELOAD");
             }
             //////////////////////////
-            
+
             //SaveTest File for Debugging
-            if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
+            if (pendingToDelete && (gameObject.GetComponent<Animation>().GetLoopTime() > gameObject.GetComponent<Animation>().GetDuration() - 1))
             {
+                Debug.Log(gameObject.GetComponent<Animation>().GetLoopTime().ToString());
+                Debug.Log(gameObject.GetComponent<Animation>().GetDuration().ToString());
+                deadPartSys.Play();
+            }
+
+            if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
+            {                
                 String name = "";
                 if (gameObject.name == "Player") name = "Paul Atreides";
                 else if (gameObject.name == "Player_2") name = "Chani";

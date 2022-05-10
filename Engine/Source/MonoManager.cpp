@@ -171,6 +171,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
 	mono_add_internal_call("RagnarEngine.Animation::HasFinished", HasFinished);
+	mono_add_internal_call("RagnarEngine.Animation::GetDuration", GetDuration);
+	mono_add_internal_call("RagnarEngine.Animation::GetLoopTime", GetLoopTime);
 	// Animation =================
 
 	// Light =====================

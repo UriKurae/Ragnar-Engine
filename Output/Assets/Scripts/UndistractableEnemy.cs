@@ -201,6 +201,14 @@ public class UndistractableEnemy : RagnarComponent
                 if (deathTimer == -1f)
                 {
                     deathTimer = 2f;
+                    for (int i = 0; i < childs.Length; ++i)
+                    {
+                        if (childs[i].name == "KnifeParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
+                    }
                     gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
             }
