@@ -39,8 +39,10 @@ public class UndistractableEnemy : RagnarComponent
     float initialSpeed;
 
     bool distracted = false;
-    float distractedTimer = -1f;
     bool stunned = false;
+    public bool backstab = false;
+    
+    float distractedTimer = -1f;
     float stunnedTimer = -1f;
 
     GameObject[] childs;
@@ -157,6 +159,25 @@ public class UndistractableEnemy : RagnarComponent
 
                 }
                 agents.MovePath();
+                if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
+                {
+                    backstab = true;
+                    //area de luz
+                }
+                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
+                {
+                    Debug.Log("BackStab enemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    backstab = false;
+                }
+                if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
+                {
+                    backstab = false;
+                }
+                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_UP || Input.GetKey(KeyCode.F2) == KeyState.KEY_UP || Input.GetKey(KeyCode.F3) == KeyState.KEY_UP)
+                {
+                    controlled = false;
+                }
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
