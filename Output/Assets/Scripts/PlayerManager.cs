@@ -12,7 +12,6 @@ public class PlayerManager : RagnarComponent
 
     GameObject[] area = null;
     GameObject lightHab = null;
-    public bool drawnArea = false;
     DialogueManager dialogue;
 
     public float radius;
@@ -188,13 +187,9 @@ public class PlayerManager : RagnarComponent
         else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
             playableCharacter.state = (State)ability;
-
+            lightHab.GetComponent<Light>().intensity = 0f;
             // Dibujado del �rea de rango.
-            if (!drawnArea)
-            {
-                drawnArea = true;
-                DrawArea((int)ability);
-            }
+            DrawArea((int)ability);
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
         }
@@ -351,7 +346,6 @@ public class PlayerManager : RagnarComponent
 
                 area[characterSelected].GetComponent<Light>().intensity = 0f;
                 lightHab.GetComponent<Light>().intensity = 0f;
-                drawnArea = false;
             }
             else if (playableCharacter.state == State.CARRYING)
             {
@@ -379,7 +373,6 @@ public class PlayerManager : RagnarComponent
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
-            drawnArea = false;
         }
     }
 
