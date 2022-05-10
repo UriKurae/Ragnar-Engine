@@ -171,6 +171,7 @@ public class Boss : RagnarComponent
 				GotoNextPoint();
 				break;
 			case BossState.PHASE3:
+				//GameObject.Find("BossShieldParticles").GetComponent<ParticleSystem>().Play();
 				rigidbody.linearVelocity = GameObject.Find("Player").GetComponent<Rigidbody>().linearVelocity * 0.75f;
 				barrelCooldown = 0.0f;
 				GenerateBarrels();
@@ -219,8 +220,8 @@ public class Boss : RagnarComponent
 			InternalCalls.InstancePrefab(rockPrefab);
 			GameObject rock = GameObject.Find(rockPrefab);
 
-			if (i % 2 == 0) rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x, 25.0f, bossPos.z + i));
-			else rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x + i, 25.0f, bossPos.z));
+			if (i % 2 == 0) rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x, 15.0f, bossPos.z + i));
+			else rock.GetComponent<Rigidbody>().SetBodyPosition(new Vector3(bossPos.x + i, 15.0f, bossPos.z));
 		}
 	}
 
@@ -318,6 +319,7 @@ public class Boss : RagnarComponent
 				{
 					shieldCooldown = 10.0f;
 					shieldInmunity = true;
+					//GameObject.Find("BossShieldParticles").GetComponent<ParticleSystem>().Play();
 					stunnedHits = 0;
 				}
 			}
@@ -346,7 +348,6 @@ public class Boss : RagnarComponent
 				gameObject.GetComponent<Animation>().PlayAnimation("Throw");
 				ThrowRock();
 				throwedRocks++;
-				rocksAvailable = false;
 			}
 			else if (tired == false && throwedRocks < 5 && rocksAvailable == false)
 			{
@@ -374,10 +375,13 @@ public class Boss : RagnarComponent
 					agent.MoveTo(dest);
 				}
 			}
+			else if (tired == false && throwedRocks == 5)
+            {
+				tired = true;
+				gameObject.GetComponent<Animation>().PlayAnimation("Exhausted");
+			}
 			else
 			{
-				gameObject.GetComponent<Animation>().PlayAnimation("Exhausted");
-				tired = true;
 				tiredCooldown -= Time.deltaTime;
 				if (tiredCooldown <= 0.0f)
 				{
@@ -568,7 +572,7 @@ public class Boss : RagnarComponent
 			state++;
 			NextState();
 		}
-		else if (other.gameObject.tag == "Rocks" && rocksAvailable == false /*&& other.gameObject == nextRock*/)
+		else if (other.gameObject.tag == "Rocks" && rocksAvailable == false && other.gameObject == nextRock)
 		{
 			rocksAvailable = true;
 			InternalCalls.Destroy(other.gameObject);
