@@ -186,18 +186,19 @@ public class Player : RagnarComponent
             if (abilityState == State.POSTCAST)
                 abilityState = State.NONE;
         }
-        else
-        {
-            agent.ClearPath();
-            move = Movement.IDLE;
-            action = Actions.NONE;
-            ReloadState();
-        }
 
         if (paused)
             Time.timeScale = 0.0f;
         else
             Time.timeScale = 1.0f;
+    }
+
+    private void PlayerPause()
+    {
+        agent.ClearPath();
+        move = Movement.IDLE;
+        action = Actions.NONE;
+        ReloadState();
     }
 
     private void ReloadState()
@@ -309,26 +310,32 @@ public class Player : RagnarComponent
         if (other.gameObject.name == "DialogueTrigger0")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
+            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
+            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger5")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(5);
+            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger6")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
+            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger9")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(9);
+            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger10")
         {
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
+            PlayerPause();
         }
         // ===================================================================
     }
