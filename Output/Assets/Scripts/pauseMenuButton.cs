@@ -231,13 +231,14 @@ public class pauseMenuButton : RagnarComponent
         optionsMusicSound = GameObject.Find("optionsMusicSound");
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 		lastWindowW = (InternalCalls.GetRegionGame().x / 2);
-        //optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
 
-		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
-		//InternalCalls.SetFullScreen(true);
-		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
+        GameData load = SaveSystem.LoadGameConfig();
+        if (load != null)
+        {
+            LoadOptions(load);
+        }
 
-		optionsControlText = GameObject.Find("optionsControlText");
+        optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
 		optionsControlText2 = GameObject.Find("optionsControlText2");
 
@@ -355,6 +356,23 @@ public class pauseMenuButton : RagnarComponent
 		lastPlayerSelected = selectedPlayer.name;
 		lastHitPoint= selectedPlayer.GetComponent<Player>().hitPoints;
 	}
+    void LoadOptions(GameData load)
+    {
+        optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(load.fullScreen);
+        optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(load.vsync);
+        optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(load.shadowsEnabled);
+        optionsLanguaje.GetComponent<UIDropDown>().SetSelected(load.language);
+    }
+    void SaveOptions()
+    {
+        GameData ej = new GameData(
+            optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked(),
+            optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked(),
+            optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked(),
+            optionsLanguaje.GetComponent<UIDropDown>().GetLenguaje());
+        SaveSystem.SaveGameConfig(ej);
+    }
+
     public void Update()
 	{
         //para pillar el hitPoint del mouse Pick
@@ -972,7 +990,9 @@ public class pauseMenuButton : RagnarComponent
 				isFirstOScreenB = true;
 				isFirstOSoundB = true;
 				isFirstOControlsB = true;
-				
+
+                SaveOptions();
+
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
 				SceneAudio.GetComponent<AudioSource>().PlayClip("UI_SELECT");
