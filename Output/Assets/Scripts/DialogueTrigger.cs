@@ -76,6 +76,15 @@ public class DialogueTrigger : RagnarComponent
                 if (isUsed)
                     LoadSceneWin();
                 break;
+
+            case 11:
+                // Gameplay
+                break;
+
+            case 12:
+                // Gameplay
+                break;
+
             default:
                 break;
         }
