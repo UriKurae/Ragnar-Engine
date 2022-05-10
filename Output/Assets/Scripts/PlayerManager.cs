@@ -98,34 +98,24 @@ public class PlayerManager : RagnarComponent
 
     private void CooldownCounter()
     {
-        for(int i = 0; i < playableCharacter.abilities.Length; i++)
+        for (int j = 0; j < characters.Length; j++)
         {
-            if (playableCharacter.abilities[i].onCooldown == true)
+            for (int i = 0; i < characters[j].abilities.Length; i++)
             {
-               
-                playableCharacter.abilities[i].counter += Time.deltaTime;
-                CooldownTimer(i);
-                if (playableCharacter.abilities[i].counter >= playableCharacter.abilities[i].cooldown)
+                if (characters[j].abilities[i].onCooldown == true)
                 {
-                    playableCharacter.abilities[i].onCooldown = false;
-                    playableCharacter.abilities[i].counter = 0f;
+
+                    characters[j].abilities[i].counter += Time.deltaTime;
+                    if(characters[j] == playableCharacter)
+                        CooldownTimer(i);
+                    if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
+                    {
+                        characters[j].abilities[i].onCooldown = false;
+                        characters[j].abilities[i].counter = 0f;
+                    }
                 }
             }
         }
-
-        /*foreach (Abilities a in playableCharacter.abilities)
-        {
-            if (a.onCooldown == true)
-            {          
-                CooldownTimer(a);
-                a.counter += Time.deltaTime;
-                if (a.counter >= a.cooldown)
-                {
-                    a.onCooldown = false;
-                    a.counter = 0f;
-                }
-            }
-        }*/
     }
 
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
@@ -407,7 +397,7 @@ public class PlayerManager : RagnarComponent
 
     private void PlayerCases()
     {
-        for(int i = 0; i < playableCharacter.abilities.Length;i++)
+        for (int i = 0; i < playableCharacter.abilities.Length; i++)
         {
             CooldownTimer(i);
         }
@@ -516,22 +506,22 @@ public class PlayerManager : RagnarComponent
         {
             case 0:
                 cd1.text = temp.ToString();
-                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd1.text = "";
                 break;
             case 1:
                 cd2.text = temp.ToString();
-                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd2.text = "";
                 break;
             case 2:
                 cd3.text = temp.ToString();
-                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd3.text = "";
                 break;
             case 3:
                 cd4.text = temp.ToString();
-                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd4.text = "";
                 break;
 
