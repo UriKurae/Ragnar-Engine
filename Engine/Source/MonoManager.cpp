@@ -171,6 +171,8 @@ bool MonoManager::Init(JsonParsing& node)
 	// Animation =================
 	mono_add_internal_call("RagnarEngine.Animation::PlayAnimation", PlayAnimation);
 	mono_add_internal_call("RagnarEngine.Animation::HasFinished", HasFinished);
+	mono_add_internal_call("RagnarEngine.Animation::GetDuration", GetDuration);
+	mono_add_internal_call("RagnarEngine.Animation::GetLoopTime", GetLoopTime);
 	// Animation =================
 
 	// Light =====================
@@ -282,7 +284,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIText::SetTextTextColor", SetTextTextColor);
 	mono_add_internal_call("RagnarEngine.UIText::GetTextTextColor", GetTextTextColor);
 
+	mono_add_internal_call("RagnarEngine.UIDropDown::SetDropDownLenguage", SetDropDownLenguage);
+	mono_add_internal_call("RagnarEngine.UIDropDown::SetDropDownLenguageInPause", SetDropDownLenguageInPause);
+	mono_add_internal_call("RagnarEngine.UIDropDown::GetDropDownSelected", GetDropDownSelected);
 	mono_add_internal_call("RagnarEngine.UIDropDown::GetSelected", GetSelected);
+	mono_add_internal_call("RagnarEngine.UIDropDown::GetDropDownButtonChange", GetDropDownButtonChange);
 	// UI =======================
 
 	// Dialogue System =======================

@@ -12,7 +12,6 @@ public class PlayerManager : RagnarComponent
 
     GameObject[] area = null;
     GameObject lightHab = null;
-    public bool drawnArea = false;
     DialogueManager dialogue;
 
     public float radius;
@@ -188,13 +187,9 @@ public class PlayerManager : RagnarComponent
         else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
             playableCharacter.state = (State)ability;
-
+            lightHab.GetComponent<Light>().intensity = 0f;
             // Dibujado del �rea de rango.
-            if (!drawnArea)
-            {
-                drawnArea = true;
-                DrawArea((int)ability);
-            }
+            DrawArea((int)ability);
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
         }
@@ -304,25 +299,17 @@ public class PlayerManager : RagnarComponent
                             NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
                             GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-                            if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                            if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
-                                List<GameObject> enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
-                                foreach (GameObject g in enemiesDead)
-                                {
-                                    if (g != null && obj.name == g.name)
-                                    {
-                                        players[characterSelected].AddChild(obj);
+                                players[characterSelected].AddChild(obj);
 
-                                        obj.transform.localPosition = new Vector3(0, 2, 0);
-                                        obj.transform.localRotation = Quaternion.identity;
+                                obj.transform.localPosition = new Vector3(0, 2, 0);
+                                obj.transform.localRotation = Quaternion.identity;
 
-                                        obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
-                                        players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+                                obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
+                                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
 
-                                        playableCharacter.pickedEnemy = obj;
-                                        break;
-                                    }
-                                }
+                                playableCharacter.pickedEnemy = obj;
                             }
                         }
                         break;
@@ -351,7 +338,6 @@ public class PlayerManager : RagnarComponent
 
                 area[characterSelected].GetComponent<Light>().intensity = 0f;
                 lightHab.GetComponent<Light>().intensity = 0f;
-                drawnArea = false;
             }
             else if (playableCharacter.state == State.CARRYING)
             {
@@ -379,7 +365,6 @@ public class PlayerManager : RagnarComponent
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
-            drawnArea = false;
         }
     }
 
@@ -390,7 +375,7 @@ public class PlayerManager : RagnarComponent
             case 4:
                 if (Input.GetKey(KeyCode.ALPHA4) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -403,7 +388,7 @@ public class PlayerManager : RagnarComponent
             case 3:
                 if (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
                     if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -416,7 +401,7 @@ public class PlayerManager : RagnarComponent
             case 2:
                 if (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -429,7 +414,7 @@ public class PlayerManager : RagnarComponent
             case 1:
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -457,6 +442,22 @@ public class PlayerManager : RagnarComponent
     {
         SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
+        switch (SceneManager.currentSceneName)
+        {
+            case "build":
+                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
+                break;
+            case "build2":
+                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
+                break;
+            case "build3":
+                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
+                break;
+        }
+
         for (int i = 0; i < players.Length; ++i)
         { 
             SaveSystem.SavePlayer(players[i].GetComponent<Player>());

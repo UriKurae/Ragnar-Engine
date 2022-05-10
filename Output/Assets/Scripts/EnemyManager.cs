@@ -92,8 +92,8 @@ public class EnemyManager : RagnarComponent
                     };
 
                     GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
-                    sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
-                    sound.GetComponent<Transform>().globalPosition = enemyGOs[i].GetComponent<Transform>().globalPosition;
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(8f);
+                    sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
 
                     ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);
                     enemies[i].state = EnemyState.DEATH;
@@ -179,8 +179,26 @@ public class EnemyManager : RagnarComponent
 
             if (enemies[i].state == EnemyState.DEATH)
             {
-                enemyGOs[i].GetComponent<Animation>().PlayAnimation("Dying");
                 deadEnemies.Add(enemyGOs[i]);
+                enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
+                {
+                    case EnemyType.BASIC:
+                        enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+                        break;
+                    //TODO: Check if drone destroyed
+                    case EnemyType.AIR:
+                        enemyGOs[i].ChangeMesh("enemy4_modeldeath");
+                        break;
+                    case EnemyType.TANK:
+                        enemyGOs[i].ChangeMesh("enemy3_modeldeath");
+                        break;
+                    case EnemyType.UNDISTRACTABLE:
+                        enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                        break;
+                };
+                enemyGOs[i].isInteractuable = true;
+                enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
             }
         }
     }
