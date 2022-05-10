@@ -15,7 +15,7 @@ public class HunterSeeker : RagnarComponent
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
 		player = GameObject.Find("Player_2");
 		player.GetComponent<Player>().SetControled(false);
-		Vector3 pos = player.transform.globalPosition + new Vector3(0, 4, 0);
+		Vector3 pos = player.transform.globalPosition + new Vector3(0, 0.5f, 0);
 		rb = gameObject.GetComponent<Rigidbody>();
 		rb.SetBodyPosition(pos);
 		rb.IgnoreCollision(player, true);
