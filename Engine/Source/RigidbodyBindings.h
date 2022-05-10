@@ -144,7 +144,7 @@ void SetBodyRotation(MonoObject* go, MonoObject* pos)
 MonoObject* GetBodyRotation(MonoObject* go)
 {
 	RigidBodyComponent* rb = GetComponentMono<RigidBodyComponent*>(go);
-	return app->moduleMono->QuatToCS((Quat)rb->GetBody()->getWorldTransform().getRotation());
+	return  app->moduleMono->QuatToCS(Quat(rb->GetBody()->getWorldTransform().getRotation()));
 }
 
 void SetRadiusSphere(MonoObject* go, float rad)
