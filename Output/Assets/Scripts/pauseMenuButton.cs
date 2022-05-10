@@ -96,7 +96,7 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
-	GameObject selectedPlayer;
+	public GameObject selectedPlayer;
     GameObject playerManager;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
@@ -351,7 +351,6 @@ public class pauseMenuButton : RagnarComponent
         {
 			SceneManager.LoadScene("WinScene");
         }
-
 	}
 	void UpdatePlayerPause()
     {
@@ -1257,17 +1256,13 @@ public class pauseMenuButton : RagnarComponent
 						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
 						break;
 				}
-            }else if(selectedPlayer.name == "Player_1")
+            }else if(selectedPlayer.name == "Player_3")
             {
 				switch (selectedPlayer.GetComponent<Player>().hitPoints)
 				{
-					case 5:
+					case 4:
 						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
 						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
-						break;
-					case 4:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit1.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit1.png");
 						break;
 					case 3:
 						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit2.png");
@@ -1476,10 +1471,10 @@ public class pauseMenuButton : RagnarComponent
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
 			pos.Set(x + 310, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Stilgar";
-			Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
-			Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
-			Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
-			Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
+			Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
 		}
 	}
 	void ImageShow()
