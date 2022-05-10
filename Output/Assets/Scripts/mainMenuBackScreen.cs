@@ -115,17 +115,21 @@ public class mainMenuBackScreen : RagnarComponent
 		back = GameObject.Find("Background");
 
 
-		continueB.GetComponent<UIButton>().SetButtonState(0);
-		continueB.GetComponent<UIButton>().SetButtonTextColor(121,121,121);
-		continueB.GetComponent<UIButton>().SetButtonGeneralColor(121, 121, 121);
+		//continueB.GetComponent<UIButton>().SetButtonState(0);
+		if (!SaveSystem.CheckExistingFile("Library/SavedGame/Scenes/SceneSaved.ragnar"))
+        {
+			continueB.GetComponent<UIButton>().SetVisualDisabled(true);
+			continueB.GetComponent<UIButton>().SetButtonTextColor(121, 121, 121);
+			continueB.GetComponent<UIButton>().SetButtonGeneralColor(121, 121, 121);
+		}
+		//Library / SavedGame / Scenes / SceneSaved.ragnar
+
+		//////////////OPTIONS//////////////
 
 
-        //////////////OPTIONS//////////////
 
 
-
-
-        optionsBack = GameObject.Find("optionsBack");
+		optionsBack = GameObject.Find("optionsBack");
         optionsBackImage = GameObject.Find("optionsBackImage");
         optionsBackButton = GameObject.Find("optionsBackButton");
         optionsTransCuad = GameObject.Find("optionsTransCuad");
@@ -154,7 +158,7 @@ public class mainMenuBackScreen : RagnarComponent
 		//optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
 		//optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
-		optionsControlText = GameObject.Find("optionsControlText");
+        optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
 		optionsControlText2 = GameObject.Find("optionsControlText2");
 
@@ -1191,9 +1195,22 @@ public class mainMenuBackScreen : RagnarComponent
 		pos.Set(-sum+20, y - 230, 36.1f);
 		optionsSreenText.GetComponent<Transform2D>().position2D = pos;
 
+		////////////////////////////////////////////////
+		/// DROP DOWN
+		////////////////////////////////////////////////
+
 		pos.Set(x - 550, y - 500, 36.1f);
 		optionsLanguaje.GetComponent<Transform2D>().position2D = pos;
-	}
+
+		
+		if (optionsLanguaje.GetComponent<UIDropDown>().GetDropDownButtonChange())
+		{
+			int a = optionsLanguaje.GetComponent<UIDropDown>().GetDropDownSelected();
+            optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(a);
+
+        }
+
+    }
 	void OptionsScreenHide()
 	{
 		optionsScreenFSCH.isActive = false;
