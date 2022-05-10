@@ -15,13 +15,21 @@ public class Eagle : RagnarComponent
     public void Start()
 	{
         //gameObject.GetComponent<AudioSource>().PlayClip("WPN_EAGLEORDER");
+        goRB = gameObject.GetComponent<Rigidbody>();
         agent = gameObject.GetComponent<NavAgent>();
         controled = true;
         player = GameObject.Find("Player");
-        goRB = gameObject.GetComponent<Rigidbody>();
-        goRB.SetBodyPosition(player.transform.globalPosition + new Vector3(0, 4, 0));
+        Vector3 pos = player.transform.globalPosition + new Vector3(0, 4, 0);
+        gameObject.transform.globalPosition = pos;
+
+        Vector3 newForward = agent.hitPosition - pos;
+        double angle = Math.Atan2(newForward.x, newForward.z);
+        Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+        goRB.SetBodyRotation(rot);
+        goRB.SetBodyPosition(pos);
         goRB.IgnoreCollision(player, true);
         agent.CalculatePath(agent.hitPosition);
+
         leftParticles = GameObject.Find("LeftWingParticles").GetComponent<ParticleSystem>();
         rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
         leftParticles.Play();
