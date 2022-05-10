@@ -56,9 +56,9 @@ public class Eagle : RagnarComponent
             cooldown -= Time.deltaTime;
             if (cooldown < 0)
             {
-                InternalCalls.Destroy(gameObject);
                 leftParticles.Pause();
                 rightParticles.Pause();
+                InternalCalls.Destroy(gameObject);
             }
         }
     }
