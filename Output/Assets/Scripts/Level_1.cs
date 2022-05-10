@@ -476,19 +476,19 @@ public class Level_1 : RagnarComponent
         if (runGame) timer.Update();
         chrono.text = timer.GetTimeToString();
 
-        //hitPoint = RayCast.ReturnHitpoint();
-        //hitPoint.y -= 0.5f;
-        //GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
-        //if (hittedGO != null)
-        //{
-        //    preClick.isActive = true;
-        //    preNonClick.isActive = false;
-        //}
-        //else
-        //{
-        //    preClick.isActive = false;
-        //    preNonClick.isActive = true;
-        //}
+        hitPoint = RayCast.ReturnHitpoint();
+        hitPoint.y -= 0.5f;
+        GameObject hittedGO = RayCast.HitToTag(camera.globalPosition, hitPoint, "Ground");
+        if (hittedGO != null)
+        {
+            preClick.isActive = true;
+            preNonClick.isActive = false;
+        }
+        else
+        {
+            preClick.isActive = false;
+            preNonClick.isActive = true;
+        }
 
         hitPoint.y += 0.54f;
         if (preClick.isActive) preClick.transform.globalPosition = hitPoint;
