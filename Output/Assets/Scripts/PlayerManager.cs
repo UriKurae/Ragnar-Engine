@@ -299,25 +299,17 @@ public class PlayerManager : RagnarComponent
                             NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
                             GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-                            if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                            if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
-                                List<GameObject> enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
-                                foreach (GameObject g in enemiesDead)
-                                {
-                                    if (g != null && obj.name == g.name)
-                                    {
-                                        players[characterSelected].AddChild(obj);
+                                players[characterSelected].AddChild(obj);
 
-                                        obj.transform.localPosition = new Vector3(0, 2, 0);
-                                        obj.transform.localRotation = Quaternion.identity;
+                                obj.transform.localPosition = new Vector3(0, 2, 0);
+                                obj.transform.localRotation = Quaternion.identity;
 
-                                        obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
-                                        players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+                                obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
+                                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
 
-                                        playableCharacter.pickedEnemy = obj;
-                                        break;
-                                    }
-                                }
+                                playableCharacter.pickedEnemy = obj;
                             }
                         }
                         break;

@@ -208,18 +208,11 @@ public class TankEnemy : RagnarComponent
         if (state != EnemyState.DEATH)
         {
             //// Paul ========================================
-            if (other.gameObject.name == "Rock")
+            if (other.gameObject.name == "SoundArea")
             {
                 // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
                 distracted = true;
                 distractedTimer = 5f;
-                Distraction(other.gameObject.transform.globalPosition);
-            }
-            if (other.gameObject.name == "Eagle")
-            {
-                // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-                distracted = true;
-                distractedTimer = 6f;
                 Distraction(other.gameObject.transform.globalPosition);
             }
 

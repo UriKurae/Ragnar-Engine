@@ -90,7 +90,7 @@ public class EnemyManager : RagnarComponent
                     };
 
                     GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
-                    sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
+                    sound.GetComponent<Rigidbody>().SetRadiusSphere(8f);
                     sound.transform.globalPosition = enemyGOs[i].transform.globalPosition;
 
                     ChangeEnemyState(enemyGOs[i], EnemyState.DEATH);

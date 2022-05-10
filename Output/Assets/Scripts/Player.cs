@@ -57,6 +57,7 @@ public class Player : RagnarComponent
 
         sound = InternalCalls.InstancePrefab("SoundArea");
         gameObject.AddChild(sound);
+        sound.transform.globalPosition = gameObject.transform.globalPosition;
 
         // Asignation of particles depending of the character
         if (gameObject.name == "Player")
@@ -229,7 +230,7 @@ public class Player : RagnarComponent
                 {
                     case Actions.NONE:
                         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(4f);
+                        sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
                         break;
                     case Actions.CROUCH:
                         gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
@@ -237,7 +238,7 @@ public class Player : RagnarComponent
                         break;
                     case Actions.CARRY:
                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseWalk");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+                        sound.GetComponent<Rigidbody>().SetRadiusSphere(3f);
                         break;
                 }
 
@@ -249,19 +250,19 @@ public class Player : RagnarComponent
                 {
                     case Actions.NONE:
                         gameObject.GetComponent<Animation>().PlayAnimation("Run");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(8f);
+                        sound.GetComponent<Rigidbody>().SetRadiusSphere(5f);
                         break;
                     case Actions.CROUCH:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
+                        //gameObject.GetComponent<Animation>().PlayAnimation("CrouchRun");
+                        //sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
 
-                        //move = Movement.Walk;
-                        //agent.speed = speedBase;
-                        //ReloadState();
+                        move = Movement.WALK;
+                        agent.speed = speedBase;
+                        ReloadState();
                         break;
                     case Actions.CARRY:
                         gameObject.GetComponent<Animation>().PlayAnimation("CorpseRun");
-                        sound.GetComponent<Rigidbody>().SetRadiusSphere(10f);
+                        sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
                         break;
                 }
 
