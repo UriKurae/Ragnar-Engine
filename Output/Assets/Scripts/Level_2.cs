@@ -22,7 +22,7 @@ public class Level_2 : RagnarComponent
         SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BASE");
         
         // Camera Starting Position
-        GameObject.Find("cameraController").transform.localPosition = new Vector3(-23.76f, 0f, -199.01f);
+        GameObject.Find("cameraController").transform.globalPosition = new Vector3(-13.87f, 0f, -376.10f);
         GameObject.Find("UI Counter").GetComponent<Transform2D>().position2D = new Vector3(0, (0.5f * InternalCalls.GetRegionGame().y) - 28, 0);
         chrono = GameObject.Find("UI Counter").GetComponent<UIButton>();
         chrono.SetTextPosition(-26, -4);
@@ -48,7 +48,7 @@ public class Level_2 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 3,
-            pos = new Vector3(21.70f, 0f, -160.8f)
+            pos = new Vector3(-0.25f, 1f, -345.38f)
         };
         characters[0].abilities[0] = new Abilities
         {
@@ -107,7 +107,7 @@ public class Level_2 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 2,
-            pos = new Vector3(29.58f, 0f, -164.22f)
+            pos = new Vector3(3.29f, 0f, -343.98f)
         };
         characters[1].abilities[0] = new Abilities
         {
@@ -166,7 +166,7 @@ public class Level_2 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 4,
-            pos = new Vector3(19.31f, 0f, -167.67f)
+            pos = new Vector3(-4.82f, 0f, -347.26f)
         };
         characters[2].abilities[0] = new Abilities
         {
