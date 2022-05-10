@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_3",
-                    "pointer": 679720808,
+                    "pointer": 728141648,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -1571,13 +1571,13 @@
                 {
                     "Type": 4,
                     "ScriptName": "Boss",
-                    "pointer": 679722104,
+                    "pointer": 728138768,
                     "type": 4,
                     "componentTable": 0,
                     "state": 0,
                     "index": 0,
                     "colliders": 0,
-                    "barrelLocations": 96808504,
+                    "barrelLocations": 109653560,
                     "barrelCount": 0,
                     "stunnedHits": 0
                 },
@@ -3137,7 +3137,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 679715768,
+                    "pointer": 728138624,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9582,7 +9582,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
+                        1888.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9651,8 +9651,8 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
-                        -10.399999618530273
+                        0,
+                        -4.9000000953674316
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -9715,8 +9715,8 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -22.5,
-                        -10.399999618530273
+                        -4.9000000953674316,
+                        -4.9000000953674316
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -9779,8 +9779,8 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
-                        -10.399999618530273
+                        0,
+                        -4.9000000953674316
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -9843,7 +9843,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
+                        1888.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9974,7 +9974,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
+                        1888.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10105,7 +10105,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
+                        1888.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10236,7 +10236,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1962,
+                        1888.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10367,7 +10367,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1953.5,
+                        1880,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10431,7 +10431,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1953.5,
+                        1880,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10495,7 +10495,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1953.5,
+                        1880,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10559,7 +10559,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1953.5,
+                        1880,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10687,8 +10687,8 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -276.5,
-                        -10.399999618530273
+                        -203,
+                        2.5999999046325684
                     ],
                     "Scale": [
                         0.91666668653488159,
@@ -10751,7 +10751,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1953.5,
+                        1880,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10815,7 +10815,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1946.5,
+                        1873,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10879,7 +10879,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2012,
+                        1938.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10943,7 +10943,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2012,
+                        1938.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11012,7 +11012,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1955,
+                        1881.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11076,8 +11076,8 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1955,
-                        -10.399999618530273
+                        0,
+                        4.5999999046325684
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -11140,7 +11140,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        369.5,
+                        296,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -11270,9 +11270,9 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
-                        5.5,
-                        -5
+                        0,
+                        0,
+                        0
                     ],
                     "Scale": [
                         0.060833334922790527,
@@ -11334,9 +11334,9 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
-                        -77,
-                        -5
+                        0,
+                        0,
+                        0
                     ],
                     "Scale": [
                         0.060833334922790527,
@@ -11399,7 +11399,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -81,
+                        -7.5,
                         -5
                     ],
                     "Scale": [
@@ -11462,8 +11462,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
-                        -4.8999996185302734,
+                        0,
+                        -1.3999996185302734,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -11527,7 +11527,7 @@
                     "Type": 19,
                     "Position": [
                         1.5816464369601856e+38,
-                        -4.8999996185302734,
+                        -11.899999618530273,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -11591,7 +11591,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -53,
+                        -0.5,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -11655,7 +11655,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -265,
+                        -191.5,
                         -15
                     ],
                     "Scale": [
@@ -11719,7 +11719,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2043.5,
+                        1970,
                         -15
                     ],
                     "Scale": [
@@ -11783,7 +11783,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2043.5,
+                        1970,
                         -15
                     ],
                     "Scale": [
@@ -11846,8 +11846,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        3.1632928739203712e+38,
-                        2043.5,
+                        0,
+                        6,
                         -15
                     ],
                     "Scale": [
@@ -11870,6 +11870,469 @@
                 {
                     "Type": 2,
                     "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_ability_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1009388530,
+            "Parent UUID": 1906815624,
+            "Name": "PaulName",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        42,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Paul",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 930392049,
+            "Parent UUID": 1906815624,
+            "Name": "ChaniName",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Chani",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1210381550,
+            "Parent UUID": 1906815624,
+            "Name": "StilgarName",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "Stilgar",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 1376145240,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityBG1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.14000000059604645,
+                        0.043333332985639572,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 84,
+                    "buttonHeight": 26,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_ability_key_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1324216222,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityBG2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.14000000059604645,
+                        0.043333332985639572,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 84,
+                    "buttonHeight": 26,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_ability_key_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 656736104,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityBG3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.14000000059604645,
+                        0.043333332985639572,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 84,
+                    "buttonHeight": 26,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_ability_key_bg.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1564876996,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityBG4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.14000000059604645,
+                        0.043333332985639572,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 84,
+                    "buttonHeight": 26,
+                    "lastButtonWidth": 1368,
+                    "lastButtonHeight": 729.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_hud_ability_key_bg.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
