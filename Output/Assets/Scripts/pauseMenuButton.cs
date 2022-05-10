@@ -171,14 +171,14 @@ public class pauseMenuButton : RagnarComponent
 		OptImage = GameObject.Find("optionsImage");
 		restartImage = GameObject.Find("restartImage");
 
-		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
 		restart.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
 		restartImage.GetComponent<Transform2D>().position2D = pos;
 
-		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
 		Resume.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 600, 36.1f);
+		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 660, 36.1f);
 		ResumeImage.GetComponent<Transform2D>().position2D = pos;
 
 		pos.Set(-(InternalCalls.GetRegionGame().x / 2) + 160, -(InternalCalls.GetRegionGame().y / 2) + 540, 36.1f);
@@ -1201,6 +1201,13 @@ public class pauseMenuButton : RagnarComponent
 			PaulBg.isActive = false;
 			ChaniBg.isActive = false;
 			StilgarBg.isActive = false;
+			StilgarName.isActive = false;
+			PaulName.isActive = false;
+			ChaniName.isActive = false;
+			AbilityBG1.isActive = false;
+			AbilityBG2.isActive = false;
+			AbilityBG3.isActive = false;
+			AbilityBG4.isActive = false;
 		}
         else
         {
@@ -1227,6 +1234,13 @@ public class pauseMenuButton : RagnarComponent
 			PaulBg.isActive = true;
 			ChaniBg.isActive = true;
 			StilgarBg.isActive = true;
+			StilgarName.isActive = true;
+			PaulName.isActive = true;
+			ChaniName.isActive = true;
+			AbilityBG1.isActive = true;
+			AbilityBG2.isActive = true;
+			AbilityBG3.isActive = true;
+			AbilityBG4.isActive = true;
 		}
 
 		if(isOptions)
@@ -1921,7 +1935,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-140, y + 200, -10.400f);
+				pos.Set(-145, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(-55, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
@@ -1983,7 +1997,7 @@ public class pauseMenuButton : RagnarComponent
 				CharFocusedImage.isActive = true;
 				CharFocusedText.isActive = true;
 				AbilityImageApmliate.isActive = true;
-				pos.Set(-75, y + 200, -10.400f);
+				pos.Set(-50, y + 200, -10.400f);
 				CharFocusedText.GetComponent<Transform2D>().position2D = pos;
 				pos.Set(40, y + 200, -10.400f);
 				CharFocusedImage.GetComponent<Transform2D>().position2D = pos;
