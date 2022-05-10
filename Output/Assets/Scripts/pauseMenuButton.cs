@@ -211,6 +211,10 @@ public class pauseMenuButton : RagnarComponent
 		//InternalCalls.SetFullScreen(true);
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
+		// TODO: EJEMPLO DE GUARDAR MARIO
+		//GameData ej = new GameData(true, false, false, 1);
+		//SaveSystem.SaveGameConfig(ej);
+
 		optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
 		optionsControlText2 = GameObject.Find("optionsControlText2");
