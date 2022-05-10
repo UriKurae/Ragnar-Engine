@@ -15,6 +15,12 @@ public class PlayerManager : RagnarComponent
     public bool drawnArea = false;
     DialogueManager dialogue;
 
+    UIText cd1;
+    UIText cd2;
+    UIText cd3;
+    UIText cd4;
+
+
     public float radius;
     public void Start()
 	{
@@ -46,6 +52,11 @@ public class PlayerManager : RagnarComponent
         }
         area = aux;
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
+        cd1 = GameObject.Find("cd1").GetComponent<UIText>();
+        cd2 = GameObject.Find("cd2").GetComponent<UIText>();
+        cd3 = GameObject.Find("cd3").GetComponent<UIText>();
+        cd4 = GameObject.Find("cd4").GetComponent<UIText>();
 
         lightHab = GameObject.Find("ControllableLight");
         if (SaveSystem.fromContinue)
@@ -87,10 +98,26 @@ public class PlayerManager : RagnarComponent
 
     private void CooldownCounter()
     {
-        foreach (Abilities a in playableCharacter.abilities)
+        for(int i = 0; i < playableCharacter.abilities.Length; i++)
+        {
+            if (playableCharacter.abilities[i].onCooldown == true)
+            {
+               
+                playableCharacter.abilities[i].counter += Time.deltaTime;
+                CooldownTimer(i);
+                if (playableCharacter.abilities[i].counter >= playableCharacter.abilities[i].cooldown)
+                {
+                    playableCharacter.abilities[i].onCooldown = false;
+                    playableCharacter.abilities[i].counter = 0f;
+                }
+            }
+        }
+
+        /*foreach (Abilities a in playableCharacter.abilities)
         {
             if (a.onCooldown == true)
-            {
+            {          
+                CooldownTimer(a);
                 a.counter += Time.deltaTime;
                 if (a.counter >= a.cooldown)
                 {
@@ -98,7 +125,7 @@ public class PlayerManager : RagnarComponent
                     a.counter = 0f;
                 }
             }
-        }
+        }*/
     }
 
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
@@ -202,6 +229,7 @@ public class PlayerManager : RagnarComponent
         else
         {
             //Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[(int)ability - 1].cooldown - playableCharacter.abilities[(int)ability - 1].counter) + "seconds left to use it again!");
+            
             playableCharacter.state = State.NONE;
         }
     }
@@ -379,6 +407,10 @@ public class PlayerManager : RagnarComponent
 
     private void PlayerCases()
     {
+        for(int i = 0; i < playableCharacter.abilities.Length;i++)
+        {
+            CooldownTimer(i);
+        }
         switch (players.Length)
         {
             case 4:
@@ -470,6 +502,39 @@ public class PlayerManager : RagnarComponent
 
             Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
             players[i].GetComponent<Rigidbody>().SetBodyRotation(rot); 
+        }
+    }
+
+    public void CooldownTimer(int abilityID)
+    {
+        float temp;
+        temp = playableCharacter.abilities[abilityID].cooldown - playableCharacter.abilities[abilityID].counter;
+
+        temp = (float)Math.Round((double)temp, 0);
+
+        switch(abilityID)
+        {
+            case 0:
+                cd1.text = temp.ToString();
+                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd1.text = "";
+                break;
+            case 1:
+                cd2.text = temp.ToString();
+                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd2.text = "";
+                break;
+            case 2:
+                cd3.text = temp.ToString();
+                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd3.text = "";
+                break;
+            case 3:
+                cd4.text = temp.ToString();
+                if (temp <= 0.0f && (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd4.text = "";
+                break;
+
         }
     }
 }

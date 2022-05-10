@@ -114,6 +114,11 @@ public class pauseMenuButton : RagnarComponent
 	GameObject Ability4;
 	GameObject Ability5;
 
+	GameObject cd1;
+	GameObject cd2;
+	GameObject cd3;
+	GameObject cd4;
+
 	GameObject UICharPhoto;
 	GameObject UIAbilityArray;
 	GameObject UICharBor1;
@@ -274,6 +279,11 @@ public class pauseMenuButton : RagnarComponent
 		Ability3 = GameObject.Find("ab3");
 		Ability4 = GameObject.Find("ab4");
 		Ability5 = GameObject.Find("ab5");
+
+		cd1 = GameObject.Find("cd1");
+		cd2 = GameObject.Find("cd2");
+		cd3 = GameObject.Find("cd3");
+		cd4 = GameObject.Find("cd4");
 
 		AbilityBord = GameObject.Find("AbilImage");
 
@@ -1566,6 +1576,8 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(-185, y, -10.400f);
 		Ability1.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-190, y - 7, -10.400f);
+		cd1.GetComponent<Transform2D>().position2D = pos;
 
 		switch (a)
 		{
@@ -1631,6 +1643,8 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability2.GetComponent<UIButton>().GetButtonState();
 		pos.Set(-85, y, -10.400f);
 		Ability2.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(90, y - 7, -10.400f);
+		cd2.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
 			case 0:
@@ -1693,6 +1707,8 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability3.GetComponent<UIButton>().GetButtonState();
 		pos.Set(0, y, -10.400f);
 		Ability3.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(0, y - 7, -10.400f);
+		cd3.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
 			case 0:
@@ -1754,6 +1770,8 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability4.GetComponent<UIButton>().GetButtonState();
 		pos.Set(85, y, -10.400f);
 		Ability4.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(80, y - 7, -10.400f);
+		cd4.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
 			case 0:
