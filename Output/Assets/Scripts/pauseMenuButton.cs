@@ -205,9 +205,8 @@ public class pauseMenuButton : RagnarComponent
         optionsMusicSound = GameObject.Find("optionsMusicSound");
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 		lastWindowW = (InternalCalls.GetRegionGame().x / 2);
-		//optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
+        //optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
 
-		optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
 		optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
 		//InternalCalls.SetFullScreen(true);
 		optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
@@ -1001,13 +1000,13 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(x - 550, y - 500, 36.1f);
 		optionsLanguaje.GetComponent<Transform2D>().position2D = pos;
-		/*
+		
         if (optionsLanguaje.GetComponent<UIDropDown>().GetDropDownButtonChange())
         {
 			int a = optionsLanguaje.GetComponent<UIDropDown>().GetDropDownSelected();
-			optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(a);
-		}
-		*/
+			optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguageInPause(a);
+        }
+		
 
 	}
 	void OptionsScreenHide()

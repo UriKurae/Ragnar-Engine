@@ -284,7 +284,11 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIText::SetTextTextColor", SetTextTextColor);
 	mono_add_internal_call("RagnarEngine.UIText::GetTextTextColor", GetTextTextColor);
 
+	mono_add_internal_call("RagnarEngine.UIDropDown::SetDropDownLenguage", SetDropDownLenguage);
+	mono_add_internal_call("RagnarEngine.UIDropDown::SetDropDownLenguageInPause", SetDropDownLenguageInPause);
+	mono_add_internal_call("RagnarEngine.UIDropDown::GetDropDownSelected", GetDropDownSelected);
 	mono_add_internal_call("RagnarEngine.UIDropDown::GetSelected", GetSelected);
+	mono_add_internal_call("RagnarEngine.UIDropDown::GetDropDownButtonChange", GetDropDownButtonChange);
 	// UI =======================
 
 	// Dialogue System =======================

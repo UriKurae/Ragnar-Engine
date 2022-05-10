@@ -158,7 +158,7 @@ public class mainMenuBackScreen : RagnarComponent
 		//optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
 		//optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
 
-		optionsControlText = GameObject.Find("optionsControlText");
+        optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
 		optionsControlText2 = GameObject.Find("optionsControlText2");
 
@@ -1202,14 +1202,15 @@ public class mainMenuBackScreen : RagnarComponent
 		pos.Set(x - 550, y - 500, 36.1f);
 		optionsLanguaje.GetComponent<Transform2D>().position2D = pos;
 
-		/*
+		
 		if (optionsLanguaje.GetComponent<UIDropDown>().GetDropDownButtonChange())
 		{
 			int a = optionsLanguaje.GetComponent<UIDropDown>().GetDropDownSelected();
-			optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(a);
-		}
-		*/
-	}
+            optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(a);
+
+        }
+
+    }
 	void OptionsScreenHide()
 	{
 		optionsScreenFSCH.isActive = false;

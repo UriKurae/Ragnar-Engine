@@ -11909,7 +11909,7 @@
                 },
                 {
                     "Type": 18,
-                    "buttonText": "English",
+                    "buttonText": "Castellano",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
