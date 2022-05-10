@@ -143,6 +143,7 @@ public class EnemyManager : RagnarComponent
             enemies[i].state = data.state;
             enemies[i].type = data.type;
 
+            enemyGOs[i].GetComponent<Transform>().globalPosition = pos;
             enemyGOs[i].GetComponent<Rigidbody>().SetBodyPosition(pos);
             switch (enemies[i].type)
             {
@@ -162,8 +163,26 @@ public class EnemyManager : RagnarComponent
 
             if (enemies[i].state == EnemyState.DEATH)
             {
-                enemyGOs[i].GetComponent<Animation>().PlayAnimation("Dying");
                 deadEnemies.Add(enemyGOs[i]);
+                enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
+                switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
+                {
+                    case EnemyType.BASIC:
+                        enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+                        break;
+                    //TODO: Check if drone destroyed
+                    case EnemyType.AIR:
+                        enemyGOs[i].ChangeMesh("enemy4_modeldeath");
+                        break;
+                    case EnemyType.TANK:
+                        enemyGOs[i].ChangeMesh("enemy3_modeldeath");
+                        break;
+                    case EnemyType.UNDISTRACTABLE:
+                        enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                        break;
+                };
+                enemyGOs[i].isInteractuable = true;
+                enemyGOs[i].interactuableColor = new Vector3(0, 0, 1);
             }
         }
     }

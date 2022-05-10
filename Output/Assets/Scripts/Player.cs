@@ -38,7 +38,7 @@ public class Player : RagnarComponent
     public bool controled = false;
     State abilityState = State.NONE;
     Actions action = Actions.NONE;
-    Movement move = Movement.WALK;
+    Movement move = Movement.IDLE;
 
     /*
     DialogueManager dialogue;
@@ -52,7 +52,6 @@ public class Player : RagnarComponent
         agent = gameObject.GetComponent<NavAgent>();
         speedBase = agent.speed;
         agent.ClearPath();
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
 
         sound = InternalCalls.InstancePrefab("SoundArea");
@@ -77,9 +76,9 @@ public class Player : RagnarComponent
             runPartSys      = GameObject.Find("RunParticles_3").GetComponent<ParticleSystem>();
             getHitPartSys   = GameObject.Find("GetHitParticles_3").GetComponent<ParticleSystem>();
         }
-        runPartSys.Pause();
-        walkPartSys.Pause();
         getHitPartSys.Pause();
+
+        ReloadState();
     }
 
     public void Update()
@@ -191,6 +190,7 @@ public class Player : RagnarComponent
         {
             agent.ClearPath();
             move = Movement.IDLE;
+            action = Actions.NONE;
             ReloadState();
         }
 
