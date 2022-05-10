@@ -6,8 +6,7 @@ public class Eagle : RagnarComponent
 	public GameObject player;
 	public PlayerManager playerManager;
     public bool controled = false;
-    public float cooldown = 0;
-    public float soundRadius = 6f;
+    private float cooldown = -1f;
     Rigidbody goRB;
 
     NavAgent agent;
@@ -17,36 +16,30 @@ public class Eagle : RagnarComponent
         agent = gameObject.GetComponent<NavAgent>();
         controled = true;
         player = GameObject.Find("Player");
-        this.gameObject.GetComponent<Player>().SetControled(true);
         goRB = gameObject.GetComponent<Rigidbody>();
         goRB.SetBodyPosition(player.transform.globalPosition + new Vector3(0, 4, 0));
         goRB.IgnoreCollision(player, true);
         agent.CalculatePath(agent.hitPosition);
-        agent.MovePath();
     }
 	public void Update()
 	{
-        if(!agent.MovePath() && cooldown == 0)
+        if (agent.MovePath())
         {
-            Rigidbody area = gameObject.CreateComponent<Rigidbody>();
-            CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);
+            GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
+            sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+            sound.transform.globalPosition = gameObject.transform.globalPosition;
+            sound.GetComponent<SoundAreaManager>().stablishedTimer = 6f;
+
             cooldown = 6f;
         }
-        if (cooldown > 0 && gameObject != null)
+        if (cooldown != -1f)
         {
             cooldown -= Time.deltaTime;
             if (cooldown < 0)
             {
-                cooldown = 0f;
                 InternalCalls.Destroy(gameObject);
             }
         }
-    }
-
-    private static void CreateSphereTrigger(Rigidbody rb, float radius, Vector3 pos)
-    {
-        rb.SetCollisionSphere(radius, pos.x, pos.y, pos.z);
-        rb.SetAsTrigger();
     }
 
 }

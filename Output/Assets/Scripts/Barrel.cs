@@ -7,10 +7,21 @@ public class Barrel : RagnarComponent
     GameObject boss;
     public int barrelIndex = 0;
 
+    float deathTimer = -1f;
+
     // Use this for initialization
     public void Start()
     {
         boss = GameObject.Find("Boss");
+
+        for (int i = 0; i < gameObject.childs.Length; ++i)
+        {
+            if (gameObject.childs[i].name == "BarrelExplosion")
+            {
+                gameObject.childs[i].GetComponent<ParticleSystem>().Pause();
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -19,6 +30,16 @@ public class Barrel : RagnarComponent
         if (Input.GetKey(KeyCode.H) == KeyState.KEY_DOWN)
         {
             NotifyBoss();
+        }
+
+        if (deathTimer >= 0)
+        {
+            deathTimer -= Time.deltaTime;
+            if (deathTimer < 0)
+            {
+                deathTimer = -1f;
+                InternalCalls.Destroy(gameObject);
+            }
         }
     }
 
@@ -32,7 +53,15 @@ public class Barrel : RagnarComponent
             }
             boss.GetComponent<Boss>().barrelCount--;
             boss.GetComponent<Boss>().barrelLocations[barrelIndex].isDestroyed = true;
-            InternalCalls.Destroy(gameObject);
+            for (int i = 0; i < gameObject.childs.Length; ++i)
+            {
+                if (gameObject.childs[i].name == "BarrelExplosion")
+                {
+                    gameObject.childs[i].GetComponent<ParticleSystem>().Play();
+                    break;
+                }
+            }
+            deathTimer = 0.4f;
         }
     }
     void NotifyBoss()
