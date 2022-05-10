@@ -1779,7 +1779,7 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(-175, y-20, -10.400f);
 		Ability1.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(-190, y - 7, -10.400f);
+		pos.Set(-190, y - 25, -10.400f);
 		cd1.GetComponent<Transform2D>().position2D = pos;
 
 		switch (a)
@@ -1846,7 +1846,7 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability2.GetComponent<UIButton>().GetButtonState();
 		pos.Set(-55, y-20, -10.400f);
 		Ability2.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(90, y - 7, -10.400f);
+		pos.Set(-75, y - 25, -10.400f);
 		cd2.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
@@ -1910,7 +1910,7 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability3.GetComponent<UIButton>().GetButtonState();
 		pos.Set(40, y - 20, -10.400f);
 		Ability3.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(0, y - 7, -10.400f);
+		pos.Set(35, y - 25, -10.400f);
 		cd3.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
@@ -1973,7 +1973,7 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability4.GetComponent<UIButton>().GetButtonState();
 		pos.Set(150, y-20, -10.400f);
 		Ability4.GetComponent<Transform2D>().position2D = pos;
-		pos.Set(80, y - 7, -10.400f);
+		pos.Set(145, y - 25, -10.400f);
 		cd4.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{

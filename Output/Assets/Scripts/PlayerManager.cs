@@ -19,6 +19,11 @@ public class PlayerManager : RagnarComponent
     UIText cd3;
     UIText cd4;
 
+    GameObject Ability1Bg;
+    GameObject Ability2Bg;
+    GameObject Ability3Bg;
+    GameObject Ability4Bg;
+
 
     public float radius;
     public void Start()
@@ -56,6 +61,11 @@ public class PlayerManager : RagnarComponent
         cd2 = GameObject.Find("cd2").GetComponent<UIText>();
         cd3 = GameObject.Find("cd3").GetComponent<UIText>();
         cd4 = GameObject.Find("cd4").GetComponent<UIText>();
+
+        Ability1Bg = GameObject.Find("Ability1Bg");
+        Ability2Bg = GameObject.Find("Ability2Bg");
+        Ability3Bg = GameObject.Find("Ability3Bg");
+        Ability4Bg = GameObject.Find("Ability4Bg");
 
         lightHab = GameObject.Find("ControllableLight");
         if (SaveSystem.fromContinue)
@@ -515,21 +525,25 @@ public class PlayerManager : RagnarComponent
                 cd1.text = temp.ToString();
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd1.text = "";
+                //Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
                 break;
             case 1:
                 cd2.text = temp.ToString();
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd2.text = "";
+                //Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
                 break;
             case 2:
                 cd3.text = temp.ToString();
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd3.text = "";
+                //Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
                 break;
             case 3:
                 cd4.text = temp.ToString();
                 if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
                     cd4.text = "";
+                //Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
                 break;
 
         }
