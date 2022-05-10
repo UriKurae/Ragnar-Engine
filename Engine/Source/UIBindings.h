@@ -254,10 +254,38 @@ void SetImageAlpha(MonoObject* go, float newAlpha)
 	tr->SetAlpha(newAlpha);
 }
 
+// DropDown ========================================
+void SetDropDownLenguage(MonoObject* go, int selected) {
+	app->sceneManager->SetLenguage(selected);
+	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
+	tr->SetChangeState(false);
+}
+
+void SetDropDownLenguageInPause(MonoObject* go, int selected) {
+	app->sceneManager->SetLenguage(selected);
+	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
+	tr->SetChangeState(false);
+	DialogueSystem* sys = DialogueSystem::GetInstance();
+	sys->LoadDialogueXML();
+	sys->UpdateDialogue();
+}
+
+int GetDropDownSelected(MonoObject* go)
+{
+	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
+	return (int)tr->GetSelectedID();
+}
+
 const char* GetSelected(MonoObject* go)
 {
 	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
 	return tr->GetSelect().c_str();
+}
+
+bool GetDropDownButtonChange(MonoObject* go)
+{
+	DropDownComponent* tr = GetComponentMono<DropDownComponent*>(go);
+	return tr->GetChangeState();
 }
 // Animation ========================================
 
