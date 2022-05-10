@@ -10,7 +10,7 @@ public class Eagle : RagnarComponent
     Rigidbody goRB;
     ParticleSystem leftParticles;
     ParticleSystem rightParticles;
-
+    bool hasArrived = false;
     NavAgent agent;
     public void Start()
 	{
@@ -37,8 +37,12 @@ public class Eagle : RagnarComponent
     }
 	public void Update()
 	{
-        if (agent.MovePath())
+        agent.MovePath();
+        if (((agent.hitPosition - gameObject.transform.globalPosition).magnitude < 4.0f) && !hasArrived)
         {
+            leftParticles.Pause();
+            rightParticles.Pause();
+            hasArrived = true;
             GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
             sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
             sound.transform.globalPosition = gameObject.transform.globalPosition;
@@ -46,14 +50,15 @@ public class Eagle : RagnarComponent
 
             cooldown = 6f;
         }
+
         if (cooldown != -1f)
         {
             cooldown -= Time.deltaTime;
             if (cooldown < 0)
             {
-                InternalCalls.Destroy(gameObject);
                 leftParticles.Pause();
                 rightParticles.Pause();
+                InternalCalls.Destroy(gameObject);
             }
         }
     }

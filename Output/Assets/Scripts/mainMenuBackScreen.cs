@@ -154,9 +154,12 @@ public class mainMenuBackScreen : RagnarComponent
         optionsMusicSound = GameObject.Find("optionsMusicSound");
         optionsGeneralSound = GameObject.Find("optionsGeneralSound");
 		lastWindowW= (InternalCalls.GetRegionGame().x / 2);
-		//optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(Light.shadowsEnabled);
-		//optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetFullScreen());
-		//optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(InternalCalls.GetVSync());
+
+        GameData load = SaveSystem.LoadGameConfig();
+        if (load != null)
+        {
+            LoadOptions(load);
+        }
 
         optionsControlText = GameObject.Find("optionsControlText");
 		optionsControlText1 = GameObject.Find("optionsControlText1");
@@ -214,7 +217,30 @@ public class mainMenuBackScreen : RagnarComponent
 		OptionsBackHide();
     }
 
-	public void Update()
+    void LoadOptions(GameData load)
+    {
+        optionsScreenFSCH.GetComponent<UICheckbox>().SetCheckboxState(load.fullScreen);
+        InternalCalls.SetFullScreen(load.fullScreen);
+        optionsScreenVSCH.GetComponent<UICheckbox>().SetCheckboxState(load.vsync);
+        optionsScreenSDCH.GetComponent<UICheckbox>().SetCheckboxState(load.shadowsEnabled);
+        Light.shadowsEnabled = load.shadowsEnabled;
+
+        optionsLanguaje.GetComponent<UIDropDown>().SetDropDownLenguage(load.language); 
+        optionsLanguaje.GetComponent<UIDropDown>().SetSelected(load.language);
+
+    }
+
+    void SaveOptions()
+    {
+        GameData ej = new GameData(
+            optionsScreenVSCH.GetComponent<UICheckbox>().GetIsChecked(),
+            optionsScreenSDCH.GetComponent<UICheckbox>().GetIsChecked(),
+            optionsScreenFSCH.GetComponent<UICheckbox>().GetIsChecked(),
+            optionsLanguaje.GetComponent<UIDropDown>().GetLenguaje());
+        SaveSystem.SaveGameConfig(ej);
+    }
+
+    public void Update()
 	{
 		// Button options
 		OptionsButtonAction();
@@ -1108,6 +1134,8 @@ public class mainMenuBackScreen : RagnarComponent
 				isFirstOScreenB = true;
 				isFirstOSoundB = true;
 				isFirstOControlsB = true;
+
+                SaveOptions();
 
 				//Quitar menu de pausa
 				SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
