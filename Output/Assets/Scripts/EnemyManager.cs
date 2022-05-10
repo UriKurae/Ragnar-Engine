@@ -78,17 +78,17 @@ public class EnemyManager : RagnarComponent
                     switch (enemyGOs[i].GetComponent<BasicEnemy>().enemyType)
                     {
                         case EnemyType.BASIC:
-                            enemyGOs[i].ChangeMesh("enemy1_modeldeath");
+                            enemyGOs[i].ChangeMesh("1_modeldeath");
                             break;
                             //TODO: Check if drone destroyed
                         case EnemyType.AIR:
-                            enemyGOs[i].ChangeMesh("enemy4_modeldeath");
+                            enemyGOs[i].ChangeMesh("4_modeldeath");
                             break;
                         case EnemyType.TANK:
-                            enemyGOs[i].ChangeMesh("enemy3_modeldeath");
+                            enemyGOs[i].ChangeMesh("3_modeldeath");
                             break;
                         case EnemyType.UNDISTRACTABLE:
-                            enemyGOs[i].ChangeMesh("enemy2_modeldeath");
+                            enemyGOs[i].ChangeMesh("2_modeldeath");
                             break;
                     };
 
