@@ -321,33 +321,39 @@ public class Player : RagnarComponent
         // Dialogues =========================================================
         if (other.gameObject.name == "DialogueTrigger0")
         {
+            if(!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(0);
-            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger3")
         {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(3);
-            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger5")
         {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(5);
-            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger6")
         {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(6);
-            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger9")
         {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(9);
-            PlayerPause();
         }
         if (other.gameObject.name == "DialogueTrigger10")
         {
+            if (!other.gameObject.GetComponent<DialogueTrigger>().isUsed)
+                PlayerPause();
             other.gameObject.GetComponent<DialogueTrigger>().ActiveDialoguebyID(10);
-            PlayerPause();
         }
         // ===================================================================
     }

@@ -5,7 +5,7 @@ public class DialogueTrigger : RagnarComponent
 {
     GameObject manager;
     public int dialogueId;
-    bool isUsed = false;
+    public bool isUsed = false;
 	public void Start()
 	{
         manager = GameObject.Find("Dialogue");
