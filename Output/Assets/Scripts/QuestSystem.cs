@@ -78,7 +78,6 @@ public class QuestSystem : RagnarComponent
 
 	public void AddQuest(Quest questToAdd)
     {
-		// PETA AL AÑADIR LISTAS
 		questList.Add(questToAdd);
 		activeQuestList.Add(questToAdd);
 	}
