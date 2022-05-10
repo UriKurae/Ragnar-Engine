@@ -434,8 +434,7 @@ public class mainMenuBackScreen : RagnarComponent
         if (!isOptions)
         {
             back.isActive = true;
-			// DESCOMENTAR ABAJO
-            //back.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame()); 
+            back.GetComponent<Transform2D>().SetSize(InternalCalls.GetRegionGame()); 
 
             pos = back.GetComponent<Transform2D>().position2D;
             pos.Set(0.0f, 0.0f, -8.5f);

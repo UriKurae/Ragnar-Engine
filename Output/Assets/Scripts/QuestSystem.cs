@@ -135,7 +135,7 @@ public class QuestSystem : RagnarComponent
 		activeButton = GameObject.Find("Boton Activas");
 		completedButton = GameObject.Find("Boton Completadas");
 
-		showJournal = true;
+		showJournal = false;
 		showActive = true;
 		showCompleted = false;
 		position = new Vector3(0.0f, 0.0f, 0.0f);
