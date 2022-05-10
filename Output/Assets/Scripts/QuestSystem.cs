@@ -223,7 +223,7 @@ public class QuestSystem : RagnarComponent
 		activeButton.GetComponent<UIButton>().SetTextPosition(-45,-5);
 		activeButton.GetComponent<UIButton>().SetButtonGeneralColor(0, 0, 255);
 		activeButton.GetComponent<UIButton>().text = "Active Quests";
-		position.Set(xCorner - 700, yCorner - 30, 1000000.0f);
+		position.Set(xCorner - 600, yCorner - 30, 1000000.0f);
 		activeButton.GetComponent<Transform2D>().position2D = position;
 
 		position.Set(250, 30, 0);
@@ -231,16 +231,24 @@ public class QuestSystem : RagnarComponent
 		completedButton.GetComponent<UIButton>().SetTextPosition(-55, -5);
 		completedButton.GetComponent<UIButton>().SetButtonGeneralColor(255,0,0);
 		completedButton.GetComponent<UIButton>().text = "Completed Quests";
-		position.Set(xCorner - 430, yCorner - 30, 1000000.0f);
+		position.Set(xCorner - 200, yCorner - 30, 1000000.0f);
 		completedButton.GetComponent<Transform2D>().position2D = position;
 
 		activeQuestNames.GetComponent<UIText>().text = activeQuests;
-		position.Set(xCorner - 750, yCorner - 80, 1000000.0f);
+		position.Set(xCorner - 550, yCorner - 80, 1000000.0f);
 		activeQuestNames.GetComponent<Transform2D>().position2D = position;
+		if (activeQuests == "No active quests available")
+			activeQuestNames.GetComponent<UIText>().SetTextTextColor(255, 0, 0);
+		else
+			activeQuestNames.GetComponent<UIText>().SetTextTextColor(255, 255, 255);
 
 		completedQuestNames.GetComponent<UIText>().text = completedQuests;
-		position.Set(xCorner - 750, yCorner - 80, 1000000.0f);
+		position.Set(xCorner - 550, yCorner - 80, 1000000.0f);
 		completedQuestNames.GetComponent<Transform2D>().position2D = position;
+		if (completedQuests == "No completed quests available")
+			completedQuestNames.GetComponent<UIText>().SetTextTextColor(255, 0, 0);
+		else
+			completedQuestNames.GetComponent<UIText>().SetTextTextColor(255, 255, 255);
 
 		int a = activeButton.GetComponent<UIButton>().GetButtonState();
 		switch (a)
