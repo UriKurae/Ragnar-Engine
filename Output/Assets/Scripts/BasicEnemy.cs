@@ -12,6 +12,9 @@ public class BasicEnemy : RagnarComponent
     public EnemyState state;
     public EnemyType enemyType;
 
+    public Vector3 initialPos;
+    public Quaternion initialRot;
+
     // States
     public bool patrol;
     public bool stopState = false;
@@ -31,6 +34,7 @@ public class BasicEnemy : RagnarComponent
     public bool canShoot = true;
     public bool pendingToDelete = false;
     public bool controlled = false;
+    public bool returning = false;
 
     // Timers
     public float shootCooldown = 0f;
@@ -108,6 +112,15 @@ public class BasicEnemy : RagnarComponent
                 {
                     if (!stunned)
                     {
+                        if(returning)
+                        {
+                            agents.CalculatePath(initialPos);
+                            if(agents.MovePath())
+                            {
+                                gameObject.GetComponent<Rigidbody>().SetBodyRotation(initialRot);
+                                returning = false;
+                            }
+                        }
                         if (!distracted && waypoints.Count != 0)
                         {
                             Patrol();
@@ -177,9 +190,10 @@ public class BasicEnemy : RagnarComponent
                 {
                     backstab = false;
                 }
-                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_UP || Input.GetKey(KeyCode.F2) == KeyState.KEY_UP || Input.GetKey(KeyCode.F3) == KeyState.KEY_UP)
+                if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
                     controlled = false;
+                    returning = true;
                 }
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
@@ -187,14 +201,9 @@ public class BasicEnemy : RagnarComponent
                     controlledCooldown = 0f;
                     controlled = false;
                     players[0].GetComponent<Player>().SetControled(true);
-                    agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+                    if (waypoints.Count != 0) agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
+                    else returning = true;
                 }
-
-            }
-
-            if(Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN || Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
-            {
-                controlled = false;
             }
         }
     }
