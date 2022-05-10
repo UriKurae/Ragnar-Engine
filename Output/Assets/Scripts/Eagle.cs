@@ -38,7 +38,7 @@ public class Eagle : RagnarComponent
 	public void Update()
 	{
         agent.MovePath();
-        if (((agent.hitPosition - gameObject.transform.globalPosition).magnitude < 3.0f) && !hasArrived)
+        if (((agent.hitPosition - gameObject.transform.globalPosition).magnitude < 4.0f) && !hasArrived)
         {
             leftParticles.Pause();
             rightParticles.Pause();
