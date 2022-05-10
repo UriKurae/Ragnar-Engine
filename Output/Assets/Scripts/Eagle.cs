@@ -8,6 +8,8 @@ public class Eagle : RagnarComponent
     public bool controled = false;
     private float cooldown = -1f;
     Rigidbody goRB;
+    ParticleSystem leftParticles;
+    ParticleSystem rightParticles;
 
     NavAgent agent;
     public void Start()
@@ -20,6 +22,10 @@ public class Eagle : RagnarComponent
         goRB.SetBodyPosition(player.transform.globalPosition + new Vector3(0, 4, 0));
         goRB.IgnoreCollision(player, true);
         agent.CalculatePath(agent.hitPosition);
+        leftParticles = GameObject.Find("LeftWingParticles").GetComponent<ParticleSystem>();
+        rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
+        leftParticles.Play();
+        rightParticles.Play();
     }
 	public void Update()
 	{
@@ -38,6 +44,8 @@ public class Eagle : RagnarComponent
             if (cooldown < 0)
             {
                 InternalCalls.Destroy(gameObject);
+                leftParticles.Pause();
+                rightParticles.Pause();
             }
         }
     }

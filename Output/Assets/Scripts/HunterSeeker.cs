@@ -23,8 +23,8 @@ public class HunterSeeker : RagnarComponent
 		rb.IgnoreCollision(player, true);
         sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
-		leftParticles = GameObject.Find("LeftWingParticles").GetComponent<ParticleSystem>();
-		rightParticles = GameObject.Find("RightWingParticles").GetComponent<ParticleSystem>();
+		leftParticles = GameObject.Find("LeftHunterParticles").GetComponent<ParticleSystem>();
+		rightParticles = GameObject.Find("RightHunterParticles").GetComponent<ParticleSystem>();
 		leftParticles.Play();
 		rightParticles.Play();
 	}
