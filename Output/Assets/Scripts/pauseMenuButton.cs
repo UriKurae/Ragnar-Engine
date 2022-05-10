@@ -90,13 +90,14 @@ public class pauseMenuButton : RagnarComponent
 
 	GameObject optionsControlR;
 	GameObject optionsControlL;
-	int actualControlOption = 0;
+	int actualControlOption = 1;
 	//////////////AUDIO//////////////
 	GameObject SceneAudio;
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
 	GameObject selectedPlayer;
+    GameObject playerManager;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
 	bool isFirstA2 = true;
@@ -296,15 +297,16 @@ public class pauseMenuButton : RagnarComponent
 		abilityLeters = GameObject.Find("abilityLeters");
 
 		players = GameObject.FindGameObjectsWithTag("Player");
-		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+        playerManager = GameObject.Find("PlayerManager");
+		selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
 		lastPlayerSelected = selectedPlayer.name;
 	}
     public void Update()
 	{
-		//para pillar el hitPoint del mouse Pick
-		//selectedPlayer.GetComponent<NavAgent>().hitPosition
-		players = GameObject.FindGameObjectsWithTag("Player");
-		selectedPlayer = players[GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characterSelected];
+        //para pillar el hitPoint del mouse Pick
+        //selectedPlayer.GetComponent<NavAgent>().hitPosition
+        players = GameObject.FindGameObjectsWithTag("Player");
+        selectedPlayer = players[playerManager.GetComponent<PlayerManager>().characterSelected];
 		
 		SetAllPositions();
 		UpdateMenu();
@@ -447,6 +449,8 @@ public class pauseMenuButton : RagnarComponent
 		}
 		if (actualControlOption == 0)
         {
+            playerManager.GetComponent<InputAction>().SetActionMap(1);
+
 			optionsControl8.GetComponent<UIButton>().text = "Drag";
 			optionsControl9.GetComponent<UIButton>().text = "Crl L";
 			optionsControl14.GetComponent<UIButton>().text = "A";
@@ -457,7 +461,9 @@ public class pauseMenuButton : RagnarComponent
 		}
         else if(actualControlOption == 1)
         {
-			optionsControl9.GetComponent<UIButton>().text = "Q E";
+            playerManager.GetComponent<InputAction>().SetActionMap(0);
+
+            optionsControl9.GetComponent<UIButton>().text = "Q E";
 			optionsControl8.GetComponent<UIButton>().text = "WASD";
 
 			optionsControl14.GetComponent<UIButton>().text = "Z";
@@ -1027,7 +1033,6 @@ public class pauseMenuButton : RagnarComponent
         pos.Set(-sum + 20, y-230 , 36.1f);
 		optionsSoundText.GetComponent<Transform2D>().position2D = pos;
 
-		float generalSound;
 		float VoicesSound;
 		float FXcSound;
 		float MusicSound;
@@ -1055,10 +1060,10 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(x - 650, y - 530, 36.1f);
         optionsGeneralSound.GetComponent<Transform2D>().position2D = pos;
-		generalSound = 100 * optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
+		currVolume = 100 * optionsVoicesSound.GetComponent<UISlider>().GetSliderActualValue();
 
 
-	}
+    }
 	void OptionsSoundHide()
 	{
 		optionsSoundText.isActive = false;
@@ -1100,8 +1105,10 @@ public class pauseMenuButton : RagnarComponent
 				OptionsButtonHide();
                 if (dialogue.GetInDialogue()) { dialogue.ContinueDialogue(); }
 
-				// Why is it not necessary to put "<Level_2>" and "<Level_3>"?, I don't know
-				if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null) 
+                SceneAudio.GetComponent<AudioSource>().SetClipVolume(currVolume);
+
+                // Why is it not necessary to put "<Level_2>" and "<Level_3>"?, I don't know
+                if (GameObject.Find("LevelManager").GetComponent<Level_1>() != null) 
 					GameObject.Find("LevelManager").GetComponent<Level_1>().runGame = true;
 			}
             else
