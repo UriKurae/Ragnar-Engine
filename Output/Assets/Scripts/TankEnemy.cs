@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class TankEnemy : RagnarComponent
@@ -6,7 +7,7 @@ public class TankEnemy : RagnarComponent
     public int velocity = 1000;
 
     public NavAgent agents;
-    public GameObject[] waypoints;
+    public List<GameObject> waypoints;
     private int destPoint = 0;
     public EnemyState state;
     public EnemyType enemyType;
@@ -14,6 +15,7 @@ public class TankEnemy : RagnarComponent
     // States
     public bool patrol;
     public bool stopState = false;
+    public bool backstab = false;
 
     // Timers
     public float stoppedTime = 0f;
@@ -55,7 +57,7 @@ public class TankEnemy : RagnarComponent
         if (state != EnemyState.DEATH)
         {
             gameObject.GetComponent<Animation>().PlayAnimation("Idle");
-            if (waypoints.Length != 0)
+            if (waypoints.Count != 0)
             {
                 GotoNextPoint();
                 patrol = false;
@@ -71,7 +73,18 @@ public class TankEnemy : RagnarComponent
             if (childs[i].name == "StunParticles")
             {
                 stunPartSys = childs[i].GetComponent<ParticleSystem>();
-                break;
+            }
+            else if (childs[i].name == "StabParticles")
+            {
+                childs[i].GetComponent<ParticleSystem>().Pause();
+            }
+            else if (childs[i].name == "KnifeParticles")
+            {
+                childs[i].GetComponent<ParticleSystem>().Pause();
+            }
+            else if (childs[i].name == "SwordSlashParticles")
+            {
+                childs[i].GetComponent<ParticleSystem>().Pause();
             }
         }
 
@@ -88,7 +101,7 @@ public class TankEnemy : RagnarComponent
                 {
                     if (!stunned)
                     {
-                        if (!distracted)
+                        if (!distracted && waypoints.Count != 0)
                         {
                             Patrol();
                         }
@@ -144,6 +157,25 @@ public class TankEnemy : RagnarComponent
 
                 }
                 agents.MovePath();
+                if (!backstab && Input.GetKey(KeyCode.Z) == KeyState.KEY_REPEAT)
+                {
+                    backstab = true;
+                    //area de luz
+                }
+                if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
+                {
+                    Debug.Log("BackStab enemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    backstab = false;
+                }
+                if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
+                {
+                    backstab = false;
+                }
+                if (Input.GetKey(KeyCode.F1) == KeyState.KEY_UP || Input.GetKey(KeyCode.F2) == KeyState.KEY_UP || Input.GetKey(KeyCode.F3) == KeyState.KEY_UP)
+                {
+                    controlled = false;
+                }
                 controlledCooldown -= Time.deltaTime;
                 if (controlledCooldown < 0)
                 {
@@ -174,6 +206,14 @@ public class TankEnemy : RagnarComponent
                 if (deathTimer == -1f)
                 {
                     deathTimer = 2f;
+                    for (int i = 0; i < childs.Length; ++i)
+                    {
+                        if (childs[i].name == "KnifeParticles")
+                        {
+                            childs[i].GetComponent<ParticleSystem>().Play();
+                            break;
+                        }
+                    }
                     gameObject.GetComponent<Animation>().PlayAnimation("Dying");
                 }
             }
@@ -197,18 +237,11 @@ public class TankEnemy : RagnarComponent
         if (state != EnemyState.DEATH)
         {
             //// Paul ========================================
-            if (other.gameObject.name == "Rock")
+            if (other.gameObject.name == "SoundArea")
             {
                 // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
                 distracted = true;
                 distractedTimer = 5f;
-                Distraction(other.gameObject.transform.globalPosition);
-            }
-            if (other.gameObject.name == "Eagle")
-            {
-                // DISTRACTION (ROTATE VISION, NO MOVEMENT TO THE DISTRACTION)
-                distracted = true;
-                distractedTimer = 6f;
                 Distraction(other.gameObject.transform.globalPosition);
             }
 
@@ -258,7 +291,7 @@ public class TankEnemy : RagnarComponent
         Vector3 enemyForward = gameObject.transform.forward;
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 8, players, players.Length, colliders, colliders.Length);
+        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 12, players, players.Length, colliders, colliders.Length);
         if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
@@ -308,7 +341,7 @@ public class TankEnemy : RagnarComponent
         gameObject.GetComponent<AudioSource>().PlayClip("ETANK_WALKSAND");
         gameObject.GetComponent<Animation>().PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
-        destPoint = (destPoint + 1) % waypoints.Length;
+        destPoint = (destPoint + 1) % waypoints.Count;
     }
 
     public void Patrol()
@@ -328,7 +361,7 @@ public class TankEnemy : RagnarComponent
                 {
                     stoppedTime = 0f;
                     stopState = false;
-                    if (waypoints.Length != 0)
+                    if (waypoints.Count != 0)
                     {
                         patrol = true;
                         GotoNextPoint();
@@ -337,7 +370,7 @@ public class TankEnemy : RagnarComponent
             }
         }
 
-        if (agents.MovePath() && waypoints.Length != 0 && patrol && !stopState)
+        if (agents.MovePath() && waypoints.Count != 0 && patrol && !stopState)
         {
             GotoNextPoint();
         }

@@ -790,6 +790,9 @@
     <ClInclude Include="Engine\Source\CheckBoxComponent.h">
       <Filter>Sources\GameObject\Components\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Source\InputActionBindings.h">
+      <Filter>Sources\Tools\Bindings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Source\C_RigidBody.h">

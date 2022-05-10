@@ -1,85 +1,71 @@
 using System;
+using System.Collections.Generic;
 using RagnarEngine;
 
 public class Rock : RagnarComponent
 {
-	private float force = 1050;
-	public float soundRadius = 6f;
-	private float cooldown = 0f;
-	private bool pendingToDelete = false;
-	private bool hitOnce = false;
+	private Vector3 relativePos;
+	private float cooldown = -1f;
+	GameObject player;
 	Rigidbody goRB;
 
 	public void Start()
 	{
+		goRB = gameObject.GetComponent<Rigidbody>();
 		AimMethod();
 		gameObject.GetComponent<ParticleSystem>().Play();
 	}
 
 	private void AimMethod()
 	{
-		GameObject player = GameObject.Find("Player");
-		NavAgent agent = player.GetComponent<NavAgent>();
+		player = GameObject.Find("Player");
 
 		Vector3 pos = player.transform.globalPosition;
-		pos.y += 1;
-		gameObject.transform.localPosition = pos;
-
-		Vector3 direction = HitEnemy(agent, player);
-		direction.y = 0;
-
-		goRB = gameObject.GetComponent<Rigidbody>();
+		pos.y += 1.5f;
 		goRB.SetBodyPosition(pos);
+		gameObject.transform.globalPosition = pos;
+
+		float radius = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().radius;
+		Vector3 hitPoint = GameObject.Find("LevelManager").GetComponent<Level_1>().hitPoint;
+		relativePos = hitPoint - pos;
+		if (relativePos.magnitude > radius)
+        {
+			relativePos.y = hitPoint.y;
+			pos.y -= 1.5f;
+			Vector3 newPos = pos + relativePos.normalized * radius;
+			pos.y += 1.5f;
+			relativePos = newPos - pos;
+        }
+
 		goRB.IgnoreCollision(player, true);
-		goRB.ApplyCentralForce(direction.normalized * force);
-
-		agent.hitPosition = player.transform.globalPosition;
 	}
-	private Vector3 HitEnemy(NavAgent agent, GameObject player)
-	{
-		GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
-
-		if (obj != null)
-		{
-			//Debug.Log(obj.name.ToString());
-			return obj.GetComponent<Transform>().globalPosition - player.transform.globalPosition;
-		}
-
-		return agent.hitPosition - player.transform.globalPosition;
-	}
-
 	public void Update()
 	{
-		if (cooldown > 0 && gameObject != null)
-		{
-			cooldown -= Time.deltaTime;
-			if (cooldown < 0)
-			{
-				cooldown = 0f;
-				pendingToDelete = true;
-			}
-		}
-		if (pendingToDelete) InternalCalls.Destroy(gameObject);
+		goRB.ApplyVelocity(relativePos.normalized * 25);
 	}
 
 	public void OnCollisionEnter(Rigidbody other)
 	{
-		if (other.gameObject.tag == "Ground" && !hitOnce)
-        {
+		if (other.gameObject.tag == "Ground")
+		{
 			gameObject.GetComponent<AudioSource>().PlayClip("BG_SANDHITROCK");
-			hitOnce = true;
+
+			goRB.SetAsStatic();
+
+			GameObject sound = InternalCalls.InstancePrefab("SoundArea", true);
+			sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
+			sound.transform.globalPosition = gameObject.transform.globalPosition;
+			sound.GetComponent<SoundAreaManager>().stablishedTimer = 2f;
+
+			cooldown = 2f;
 		}
-
-		goRB.SetAsStatic();
-
-		Rigidbody area = gameObject.CreateComponent<Rigidbody>();
-		CreateSphereTrigger(area, soundRadius, gameObject.transform.globalPosition);
-		cooldown = 2f;
-	}
-
-	private static void CreateSphereTrigger(Rigidbody rb, float radius, Vector3 pos)
-	{
-		rb.SetCollisionSphere(radius, pos.x, pos.y, pos.z);
-		rb.SetAsTrigger();
+		if (cooldown != -1f)
+		{
+			cooldown -= Time.deltaTime;
+			if (cooldown < 0)
+			{
+				InternalCalls.Destroy(gameObject);
+			}
+		}
 	}
 }

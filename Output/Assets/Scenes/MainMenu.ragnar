@@ -95,20 +95,20 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
+                        -4.9477472305297852,
                         0,
-                        0,
-                        0
+                        -2.2581052780151367
                     ],
                     "Quaternion": [
                         0,
-                        0.65342247486114502,
                         0,
-                        -0.75699341297149658
+                        0,
+                        1
                     ],
                     "RotationEditor": [
-                        -0,
-                        -1.424193263053894,
-                        -0
+                        0,
+                        0,
+                        0
                     ],
                     "Scale": [
                         1,
@@ -158,12 +158,12 @@
                 {
                     "Near Plane": 1,
                     "Far Plane": 100,
-                    "Vertical Fov": 0.97737836837768555,
+                    "Vertical Fov": 1.0899605751037598,
                     "Horizontal Fov": 1.5707963705062866,
                     "Camera Pos": [
-                        49.463649749755859,
+                        -4.9477472305297852,
                         55,
-                        -7.3039054870605469
+                        -52.258106231689453
                     ],
                     "Type": 3,
                     "Zoom": 0,
@@ -172,14 +172,14 @@
                     "Zoom Speed": 0,
                     "Free Movement": true,
                     "Default Target Pos": [
+                        -4.9477472305297852,
                         0,
-                        0,
-                        0
+                        -2.2581052780151367
                     ],
                     "Movement Speed": 0.5,
                     "Rotation Speed": 0.5,
                     "Radius": 20,
-                    "Horizontal Angle": 278.39971923828125,
+                    "Horizontal Angle": 257.39971923828125,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -224,8 +224,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -257,7 +257,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "mainMenuBackScreen",
-                    "pointer": 376680960,
+                    "pointer": 485200360,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -339,7 +339,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -661.5,
+                        -594.5,
                         -98.5,
                         36.099998474121094
                     ],
@@ -355,8 +355,8 @@
                     ],
                     "buttonWidth": 323,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -470,7 +470,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -554,
+                        -487,
                         27,
                         36.099998474121094
                     ],
@@ -486,8 +486,8 @@
                     ],
                     "buttonWidth": 345.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -601,7 +601,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -702.5,
+                        -635.5,
                         -157.5,
                         36.099998474121094
                     ],
@@ -617,8 +617,8 @@
                     ],
                     "buttonWidth": 302.5,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -732,7 +732,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -602,
+                        -535,
                         -36.5,
                         36.099998474121094
                     ],
@@ -748,8 +748,8 @@
                     ],
                     "buttonWidth": 316,
                     "buttonHeight": 47,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -863,7 +863,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -512.5,
+                        -445.5,
                         89.5,
                         36.099998474121094
                     ],
@@ -879,8 +879,8 @@
                     ],
                     "buttonWidth": 407.5,
                     "buttonHeight": 47.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -994,7 +994,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -516,
+                        -449,
                         88,
                         36.099998474121094
                     ],
@@ -1010,8 +1010,8 @@
                     ],
                     "buttonWidth": 410,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1058,7 +1058,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -572.5,
+                        -505.5,
                         25,
                         36.099998474121094
                     ],
@@ -1074,8 +1074,8 @@
                     ],
                     "buttonWidth": 387,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1122,7 +1122,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -629,
+                        -562,
                         -40,
                         36.099998474121094
                     ],
@@ -1138,8 +1138,8 @@
                     ],
                     "buttonWidth": 372.5,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1186,7 +1186,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -658.5,
+                        -591.5,
                         -102,
                         36.099998474121094
                     ],
@@ -1202,8 +1202,8 @@
                     ],
                     "buttonWidth": 309,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1250,7 +1250,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -702,
+                        -635,
                         -160,
                         36.099998474121094
                     ],
@@ -1266,8 +1266,8 @@
                     ],
                     "buttonWidth": 295,
                     "buttonHeight": 44,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -1304,7 +1304,7 @@
             "Name": "UIOptions",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "Assets\/Prefabs\/UIOptions.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -1343,7 +1343,7 @@
             "Name": "optionsBack",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1354,7 +1354,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        2329,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1369,8 +1369,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1386,8 +1386,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1407,7 +1407,7 @@
             "Name": "optionsBackImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1433,8 +1433,8 @@
                     ],
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1450,8 +1450,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1471,7 +1471,7 @@
             "Name": "optionsBackButton",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1482,7 +1482,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1773,
+                        2119,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1497,8 +1497,8 @@
                     ],
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1514,8 +1514,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1534,8 +1534,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1554,8 +1554,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1574,8 +1574,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1602,7 +1602,7 @@
             "Name": "optionsTransCuad",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1613,7 +1613,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1764.5,
+                        2110.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1628,8 +1628,8 @@
                     ],
                     "buttonWidth": 650,
                     "buttonHeight": 650,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1645,8 +1645,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1666,7 +1666,7 @@
             "Name": "optionsTitle",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1677,7 +1677,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1991.5,
+                        2337.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1692,8 +1692,8 @@
                     ],
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1709,8 +1709,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1729,8 +1729,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1749,8 +1749,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1769,8 +1769,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1797,7 +1797,7 @@
             "Name": "optionsScreenButton",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1808,7 +1808,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1790,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1823,8 +1823,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1840,8 +1840,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1860,8 +1860,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1880,8 +1880,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1900,8 +1900,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1928,7 +1928,7 @@
             "Name": "optionsScreenImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -1939,7 +1939,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1790,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -1954,8 +1954,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -1971,8 +1971,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -1992,7 +1992,7 @@
             "Name": "optionsSoundButton",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2003,7 +2003,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1790,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2018,8 +2018,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2035,8 +2035,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2055,8 +2055,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2075,8 +2075,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2095,8 +2095,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2123,7 +2123,7 @@
             "Name": "optionsSoundImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2134,7 +2134,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1790,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2149,8 +2149,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2166,8 +2166,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2187,7 +2187,7 @@
             "Name": "optionsControlsButton",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2198,7 +2198,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1790,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2213,8 +2213,8 @@
                     ],
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2230,8 +2230,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2250,8 +2250,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2270,8 +2270,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2290,8 +2290,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2318,7 +2318,7 @@
             "Name": "optionsControlsImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2329,7 +2329,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1790,
+                        2136,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2344,8 +2344,8 @@
                     ],
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2361,8 +2361,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2382,7 +2382,7 @@
             "Name": "optionsScreenFSCH",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2393,7 +2393,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1879.5,
+                        2225.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2408,8 +2408,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2425,8 +2425,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2445,8 +2445,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2466,7 +2466,7 @@
             "Name": "optionsScreenVSCH",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2477,7 +2477,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1879.5,
+                        2225.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2492,8 +2492,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2509,8 +2509,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2529,8 +2529,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2550,7 +2550,7 @@
             "Name": "optionsScreenSDCH",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2561,7 +2561,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1879.5,
+                        2225.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2576,8 +2576,8 @@
                     ],
                     "buttonWidth": 50,
                     "buttonHeight": 50,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2593,8 +2593,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2613,8 +2613,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2634,7 +2634,7 @@
             "Name": "optionsSreenText",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2645,7 +2645,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1905,
+                        2251,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2660,8 +2660,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2677,8 +2677,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2703,7 +2703,7 @@
             "Name": "optionsSoundText",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2714,7 +2714,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1905,
+                        2251,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -2729,8 +2729,8 @@
                     ],
                     "buttonWidth": 100,
                     "buttonHeight": 100,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2746,8 +2746,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2772,7 +2772,7 @@
             "Name": "optionsGeneralSound",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2783,7 +2783,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2798,8 +2798,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2808,7 +2808,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2823,14 +2823,14 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -2840,8 +2840,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2860,8 +2860,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2881,7 +2881,7 @@
             "Name": "optionsMusicSound",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -2892,7 +2892,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2907,8 +2907,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -2917,7 +2917,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -2932,14 +2932,14 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -2949,8 +2949,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2969,8 +2969,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -2990,7 +2990,7 @@
             "Name": "optionsFXcSound",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3001,7 +3001,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3016,8 +3016,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3026,7 +3026,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3041,14 +3041,14 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -3058,8 +3058,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3078,8 +3078,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3099,7 +3099,7 @@
             "Name": "optionsVoicesSound",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3110,7 +3110,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3125,8 +3125,8 @@
                     ],
                     "buttonWidth": 550,
                     "buttonHeight": 16,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3135,7 +3135,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        1974.5,
+                        2320.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3150,14 +3150,14 @@
                     ],
                     "buttonWidth": 20,
                     "buttonHeight": 36,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
                 {
                     "Type": 2,
-                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider.png",
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_sound_slider_arrow.png",
                     "Normal Map Path": "Assets\/Resources\/white.png",
                     "Active": true,
                     "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
@@ -3167,8 +3167,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3187,8 +3187,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3208,7 +3208,7 @@
             "Name": "optionsLanguaje",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -3219,7 +3219,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1983,
+                        2329,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -3234,8 +3234,8 @@
                     ],
                     "buttonWidth": 250,
                     "buttonHeight": 60,
-                    "lastButtonWidth": 1372,
-                    "lastButtonHeight": 729.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -3251,8 +3251,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3271,8 +3271,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3291,8 +3291,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3311,8 +3311,8 @@
                         0,
                         0
                     ],
-                    "Opacity": 0,
-                    "Emissive Enabled": true,
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
                     "Emissive Color": [
                         0,
                         0,
@@ -3321,7 +3321,7 @@
                 },
                 {
                     "Type": 18,
-                    "buttonText": "English",
+                    "buttonText": "Castellano",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 1,
                     "textColor.r": 1,
@@ -3351,6 +3351,3357 @@
                     "textPositionY1": -5,
                     "alpha1": 1,
                     "text1": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png"
+                }
+            ]
+        },
+        {
+            "UUID": 1731513998,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlText",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1989.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/optionsControl.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 1433552947,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlText1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1989.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/optionsControl1.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 407286432,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlText2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        1989.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 16,
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 0.5,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "TextFile": "Library\/Dialogues\/optionsControl2.rgdialogue"
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl22",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl21",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl20",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl19",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl18",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl17",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl16",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl15",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl14",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl13",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl12",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl11",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl10",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl9",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl8",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl7",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl6",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl5",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl4",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl3",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1889624971,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl2",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "Assets\/Prefabs\/optionsControl1.rgprefab",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        -10.399999618530273,
+                        0
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1975572680,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControl1",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.25,
+                        0.074166662991046906,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 150,
+                    "buttonHeight": 44.5,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/options_screen_dropdown_no_arrow.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "Button",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": -17.600000381469727,
+                    "textPositionY": -3.2000000476837158,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 1036898184,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlR",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
+                }
+            ]
+        },
+        {
+            "UUID": 2127571681,
+            "Parent UUID": 1058993489,
+            "Name": "optionsControlL",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        0,
+                        0,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.1666666716337204,
+                        0.1666666716337204,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 100,
+                    "buttonHeight": 100,
+                    "lastButtonWidth": 1238,
+                    "lastButtonHeight": 750.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/white.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 12,
+                    "buttonText": "",
+                    "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
+                    "fontScale": 1,
+                    "textColor.r": 1,
+                    "textColor.g": 1,
+                    "textColor.b": 1,
+                    "textPositionX": 0,
+                    "textPositionY": 0,
+                    "alpha": 1
                 }
             ]
         }

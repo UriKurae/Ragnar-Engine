@@ -633,6 +633,12 @@ void EraseChild(MonoObject* go, MonoObject* child)
 	parent->RemoveChild(newChild);
 }
 
+MonoObject* GetItsParent(MonoObject* go)
+{
+	GameObject* object = app->moduleMono->GameObjectFromCSGO(go);
+	return app->moduleMono->GoToCSGO(object->GetParent());
+}
+
 bool GetGameObjectIsInteractuable(MonoObject* go)
 {
 	GameObject* gameObject = app->moduleMono->GameObjectFromCSGO(go);

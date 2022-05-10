@@ -8,20 +8,34 @@ public class HunterSeeker : RagnarComponent
 	Rigidbody rb;
 	GameObject player;
     public GameObject sceneAudio;
+	ParticleSystem leftParticles;
+	ParticleSystem rightParticles;
 
 	public void Start()
 	{
+		rb = gameObject.GetComponent<Rigidbody>();
         agent = gameObject.GetComponent<NavAgent>();
 		enemies = GameObject.FindGameObjectsWithTag("Enemies");
 		player = GameObject.Find("Player_2");
 		player.GetComponent<Player>().SetControled(false);
-		Vector3 pos = player.transform.globalPosition + new Vector3(0, 1, 0);
-		rb = gameObject.GetComponent<Rigidbody>();
+		Vector3 pos = player.transform.globalPosition + new Vector3(0, 0.5f, 0);
+		gameObject.transform.globalPosition = pos;
+
+		Vector3 newForward = agent.hitPosition - pos;
+		double angle = Math.Atan2(newForward.x, newForward.z);
+		Quaternion rot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
+		rb.SetBodyRotation(rot);
 		rb.SetBodyPosition(pos);
 		rb.IgnoreCollision(player, true);
+
         sceneAudio = GameObject.Find("AudioLevel1");
         sceneAudio.GetComponent<AudioSource>().PlayClip("WPN_HUNTERSEEKERNEEDLE");
-    }
+
+		leftParticles = GameObject.Find("LeftHunterParticles").GetComponent<ParticleSystem>();
+		rightParticles = GameObject.Find("RightHunterParticles").GetComponent<ParticleSystem>();
+		leftParticles.Play();
+		rightParticles.Play();
+	}
 	public void Update()
 	{
 		if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
@@ -37,6 +51,8 @@ public class HunterSeeker : RagnarComponent
                 GameObject player = GameObject.Find("Player_2");
 				player.GetComponent<Player>().SetControled(true);
 				InternalCalls.Destroy(gameObject);
+				leftParticles.Pause();
+				rightParticles.Pause();
 			}
 		}
 	}
@@ -71,7 +87,8 @@ public class HunterSeeker : RagnarComponent
         {
 			player.GetComponent<Player>().SetControled(true);
 			InternalCalls.Destroy(gameObject);
-			
-        }
+			leftParticles.Pause();
+			rightParticles.Pause();
+		}
 	}
 }

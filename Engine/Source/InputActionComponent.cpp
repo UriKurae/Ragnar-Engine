@@ -45,7 +45,7 @@ void InputActionComponent::OnEditor()
 		{
 			assetWindowActive = true;
 			inputAssetsList.clear();
-			LoadAllInputAssets("Assets");
+			LoadAllInputAssets("Library");
 		}
 
 		if (currentActionMaps.size() > 0)
@@ -299,5 +299,13 @@ void InputActionComponent::LoadAllInputAssets(const char* folder)
 	for (std::vector<std::string>::iterator it = dirs.begin(); it != dirs.end(); ++it)
 	{
 		LoadAllInputAssets((*it).c_str());
+	}
+}
+
+void InputActionComponent::SetActionMap(int index)
+{
+	if (currentActionMaps[index] != nullptr)
+	{
+		currentPreset = currentActionMaps[index];
 	}
 }
