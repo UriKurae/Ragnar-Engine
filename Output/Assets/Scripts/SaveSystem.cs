@@ -151,17 +151,16 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static TimerData LoadGameConfig()
+    public static GameData LoadGameConfig()
     {
-        // TODO: LOAD CONFIG FOR GAME MARIO
-        string path = "Library/SavedGame/Scenes/" + "Timer" + ".ragnar";
+        string path = "Library/SavedGame/GameConfig/" + "Config" + ".ragnar";
 
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            TimerData data = formatter.Deserialize(stream) as TimerData;
+            GameData data = formatter.Deserialize(stream) as GameData;
 
             stream.Close();
 
@@ -173,7 +172,6 @@ public static class SaveSystem
             return null;
         }
     }
-
 
     public static void SaveGameConfig(GameData dataGame)
     {

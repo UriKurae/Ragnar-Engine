@@ -288,6 +288,9 @@ bool MonoManager::Init(JsonParsing& node)
 	mono_add_internal_call("RagnarEngine.UIDropDown::SetDropDownLenguageInPause", SetDropDownLenguageInPause);
 	mono_add_internal_call("RagnarEngine.UIDropDown::GetDropDownSelected", GetDropDownSelected);
 	mono_add_internal_call("RagnarEngine.UIDropDown::GetSelected", GetSelected);
+	mono_add_internal_call("RagnarEngine.UIDropDown::SetSelected", SetSelected);
+	mono_add_internal_call("RagnarEngine.UIDropDown::GetLenguaje", GetLenguaje);
+	mono_add_internal_call("RagnarEngine.UIDropDown::SetLenguaje", SetLenguaje);
 	mono_add_internal_call("RagnarEngine.UIDropDown::GetDropDownButtonChange", GetDropDownButtonChange);
 	// UI =======================
 
