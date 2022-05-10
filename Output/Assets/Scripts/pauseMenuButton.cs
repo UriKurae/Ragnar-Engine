@@ -96,7 +96,7 @@ public class pauseMenuButton : RagnarComponent
 	float currVolume = 0.0f;
 
 	//////////////GAME//////////////
-	GameObject selectedPlayer;
+	public GameObject selectedPlayer;
     GameObject playerManager;
 	string lastPlayerSelected;
 	bool isFirstA1 = true;
@@ -113,6 +113,11 @@ public class pauseMenuButton : RagnarComponent
 	GameObject Ability2;
 	GameObject Ability3;
 	GameObject Ability4;
+
+	GameObject cd1;
+	GameObject cd2;
+	GameObject cd3;
+	GameObject cd4;
 
 	GameObject UICharPhoto;
 	GameObject UIAbilityArray;
@@ -295,6 +300,11 @@ public class pauseMenuButton : RagnarComponent
 		Ability3 = GameObject.Find("ab3");
 		Ability4 = GameObject.Find("ab4");
 
+		cd1 = GameObject.Find("cd1");
+		cd2 = GameObject.Find("cd2");
+		cd3 = GameObject.Find("cd3");
+		cd4 = GameObject.Find("cd4");
+
 		AbilityBord = GameObject.Find("AbilImage");
 
 		UICharPhoto = GameObject.Find("UICharPhoto");
@@ -360,7 +370,6 @@ public class pauseMenuButton : RagnarComponent
         {
 			SceneManager.LoadScene("WinScene");
         }
-
 	}
 	void UpdatePlayerPause()
     {
@@ -1286,17 +1295,13 @@ public class pauseMenuButton : RagnarComponent
 						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/transparent_tex.png");
 						break;
 				}
-            }else if(selectedPlayer.name == "Player_1")
+            }else if(selectedPlayer.name == "Player_3")
             {
 				switch (selectedPlayer.GetComponent<Player>().hitPoints)
 				{
-					case 5:
+					case 4:
 						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_slots_life_full.png");
 						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_slot_life_full.png");
-						break;
-					case 4:
-						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit1.png");
-						UICharBor1.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_main_stilgar_life_hit1.png");
 						break;
 					case 3:
 						litleLive3.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_hud_sub_stilgar_life_hit2.png");
@@ -1534,10 +1539,10 @@ public class pauseMenuButton : RagnarComponent
 			UICharPhoto.GetComponent<UIImage>().LoadTexture("Assets/Resources/UI/ui_stilgar_portrait.png");
 			pos.Set(x + 310, y + 30, -10.400f);
 			UICharacterName.GetComponent<UIText>().text = "Stilgar";
-			Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
-			Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
-			Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
-			Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(106, 166, 255);
+			Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+			Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
 		}
 	}
 	void ImageShow()
@@ -1845,6 +1850,8 @@ public class pauseMenuButton : RagnarComponent
 
 		pos.Set(-175, y-20, -10.400f);
 		Ability1.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-190, y - 25, -10.400f);
+		cd1.GetComponent<Transform2D>().position2D = pos;
 
 		switch (a)
 		{
@@ -1910,6 +1917,8 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability2.GetComponent<UIButton>().GetButtonState();
 		pos.Set(-55, y-20, -10.400f);
 		Ability2.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(-75, y - 25, -10.400f);
+		cd2.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
 			case 0:
@@ -1972,6 +1981,8 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability3.GetComponent<UIButton>().GetButtonState();
 		pos.Set(40, y - 20, -10.400f);
 		Ability3.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(35, y - 25, -10.400f);
+		cd3.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
 			case 0:
@@ -2033,6 +2044,8 @@ public class pauseMenuButton : RagnarComponent
 		a = Ability4.GetComponent<UIButton>().GetButtonState();
 		pos.Set(150, y-20, -10.400f);
 		Ability4.GetComponent<Transform2D>().position2D = pos;
+		pos.Set(145, y - 25, -10.400f);
+		cd4.GetComponent<Transform2D>().position2D = pos;
 		switch (a)
 		{
 			case 0:
