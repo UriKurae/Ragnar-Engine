@@ -23,8 +23,7 @@ public class DialogueTrigger : RagnarComponent
                     }
                     break;
             case 1:
-                if (isUsed)
-                    LoadSceneWin();
+                // Gameplay
                 break;
             case 2:
                 // Gameplay
@@ -95,7 +94,7 @@ public class DialogueTrigger : RagnarComponent
     {
         if (manager.GetComponent<DialogueManager>().GetEndDialogue())
         {
-            isUsed = false;
+            //isUsed = false;
             GameObject.Find("EnemyManager").GetComponent<EnemyManager>().SaveTest("WIIIIIN", gameObject.transform.globalPosition);
             SceneManager.LoadScene("WinScene");
         }
