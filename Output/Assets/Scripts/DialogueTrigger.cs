@@ -5,11 +5,10 @@ public class DialogueTrigger : RagnarComponent
 {
     GameObject manager;
     public int dialogueId;
-    bool isUsed;
+    public bool isUsed = false;
 	public void Start()
 	{
         manager = GameObject.Find("Dialogue");
-        isUsed = false;
     }
     public void Update()
 	{
@@ -110,4 +109,6 @@ public class DialogueTrigger : RagnarComponent
             manager.GetComponent<DialogueManager>().StartNewDialogue(dialogueId);
         }
     }
+    public bool GetUsed() { return isUsed; }
+    public void SetUsed(bool used) { isUsed = used; }
 }

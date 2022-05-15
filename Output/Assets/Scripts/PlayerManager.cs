@@ -12,8 +12,18 @@ public class PlayerManager : RagnarComponent
 
     GameObject[] area = null;
     GameObject lightHab = null;
-    public bool drawnArea = false;
     DialogueManager dialogue;
+
+    UIText cd1;
+    UIText cd2;
+    UIText cd3;
+    UIText cd4;
+
+    GameObject Ability1Bg;
+    GameObject Ability2Bg;
+    GameObject Ability3Bg;
+    GameObject Ability4Bg;
+
 
     public float radius;
     public void Start()
@@ -46,6 +56,16 @@ public class PlayerManager : RagnarComponent
         }
         area = aux;
         dialogue = GameObject.Find("Dialogue").GetComponent<DialogueManager>();
+
+        cd1 = GameObject.Find("cd1").GetComponent<UIText>();
+        cd2 = GameObject.Find("cd2").GetComponent<UIText>();
+        cd3 = GameObject.Find("cd3").GetComponent<UIText>();
+        cd4 = GameObject.Find("cd4").GetComponent<UIText>();
+
+        Ability1Bg = GameObject.Find("Ability1Bg");
+        Ability2Bg = GameObject.Find("Ability2Bg");
+        Ability3Bg = GameObject.Find("Ability3Bg");
+        Ability4Bg = GameObject.Find("Ability4Bg");
 
         lightHab = GameObject.Find("ControllableLight");
         if (SaveSystem.fromContinue)
@@ -87,15 +107,21 @@ public class PlayerManager : RagnarComponent
 
     private void CooldownCounter()
     {
-        foreach (Abilities a in playableCharacter.abilities)
+        for (int j = 0; j < characters.Length; j++)
         {
-            if (a.onCooldown == true)
+            for (int i = 0; i < characters[j].abilities.Length; i++)
             {
-                a.counter += Time.deltaTime;
-                if (a.counter >= a.cooldown)
+                if (characters[j].abilities[i].onCooldown == true)
                 {
-                    a.onCooldown = false;
-                    a.counter = 0f;
+
+                    characters[j].abilities[i].counter += Time.deltaTime;
+                    if(characters[j] == playableCharacter)
+                        CooldownTimer(i);
+                    if (characters[j].abilities[i].counter >= characters[j].abilities[i].cooldown)
+                    {
+                        characters[j].abilities[i].onCooldown = false;
+                        characters[j].abilities[i].counter = 0f;
+                    }
                 }
             }
         }
@@ -104,35 +130,35 @@ public class PlayerManager : RagnarComponent
     // LETRA Z --> HABILIDAD 1 DE TODOS LOS PJS
     public void Ability1()
     {
-        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
             SpawnArea(State.ABILITY_1);
     }
 
     // LETRA X --> HABILIDAD 2 DE TODOS LOS PJS
     public void Ability2()
     {
-        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
             SpawnArea(State.ABILITY_2);
     }
 
     // LETRA C --> HABILIDAD 3 DE TODOS LOS PJS
     public void Ability3()
     {
-        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
             SpawnArea(State.ABILITY_3);
     }
 
     // LETRA V --> HABILIDAD 4 DE TODOS LOS PJS
     public void Ability4()
     {
-        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && (playableCharacter.pickedEnemy == null || !players[characterSelected].GetComponent<Player>().dead))
+        if (players[characterSelected].GetComponent<Player>().controled && playableCharacter.pickedEnemy == null && !players[characterSelected].GetComponent<Player>().dead)
             SpawnArea(State.ABILITY_4);
     }
 
     // LETRA B --> ARRASTRAR CUERPOS
     public void Carrying()
     {
-        if (!players[characterSelected].GetComponent<Player>().dead && players[characterSelected].GetComponent<Player>().controled && !players[characterSelected].GetComponent<Player>().dead)
+        if (players[characterSelected].GetComponent<Player>().controled && !players[characterSelected].GetComponent<Player>().dead)
         {
             playableCharacter.state = State.CARRYING;
             players[characterSelected].GetComponent<Player>().SetState(State.CARRYING);
@@ -188,13 +214,9 @@ public class PlayerManager : RagnarComponent
         else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
             playableCharacter.state = (State)ability;
-
+            lightHab.GetComponent<Light>().intensity = 0f;
             // Dibujado del �rea de rango.
-            if (!drawnArea)
-            {
-                drawnArea = true;
-                DrawArea((int)ability);
-            }
+            DrawArea((int)ability);
 
             players[characterSelected].GetComponent<Player>().SetState(ability);
         }
@@ -202,6 +224,7 @@ public class PlayerManager : RagnarComponent
         else
         {
             //Debug.Log("Ability on Cooldown! You have" + (playableCharacter.abilities[(int)ability - 1].cooldown - playableCharacter.abilities[(int)ability - 1].counter) + "seconds left to use it again!");
+            
             playableCharacter.state = State.NONE;
         }
     }
@@ -294,6 +317,7 @@ public class PlayerManager : RagnarComponent
 
                             players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpseDrop");
                             playableCharacter.pickedEnemy.transform.localPosition = players[characterSelected].transform.globalPosition;
+                            playableCharacter.pickedEnemy.transform.localRotation = players[characterSelected].transform.globalRotation;
 
                             //Debug.Log("Dropping the corpse of" + playableCharacter.pickedEnemy.name.ToString());
                             playableCharacter.pickedEnemy = null;
@@ -303,23 +327,17 @@ public class PlayerManager : RagnarComponent
                             NavAgent agent = players[characterSelected].GetComponent<NavAgent>();
                             GameObject obj = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
 
-                            if (obj != null && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
+                            if (obj != null && obj.GetComponent<BasicEnemy>().state == EnemyState.DEATH && Transform.GetDistanceBetween(obj.transform.globalPosition, players[characterSelected].transform.globalPosition) < 3)
                             {
-                                List<GameObject> enemiesDead = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().deadEnemies;
-                                foreach (GameObject g in enemiesDead)
-                                {
-                                    if (g != null && obj.name == g.name)
-                                    {
-                                        players[characterSelected].AddChild(obj);
+                                players[characterSelected].AddChild(obj);
 
-                                        obj.transform.localPosition = new Vector3(0, 2, 0);
-                                        players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
-                                        playableCharacter.pickedEnemy = obj;
+                                obj.transform.localPosition = new Vector3(0, 2, 0);
+                                obj.transform.localRotation = Quaternion.identity;
 
-                                        //Debug.Log("Carrying the corpse of" + obj.name.ToString());
-                                        break;
-                                    }
-                                }
+                                obj.GetComponent<Animation>().PlayAnimation("CorpsePicked");
+                                players[characterSelected].GetComponent<Animation>().PlayAnimation("CorpsePick");
+
+                                playableCharacter.pickedEnemy = obj;
                             }
                         }
                         break;
@@ -348,7 +366,6 @@ public class PlayerManager : RagnarComponent
 
                 area[characterSelected].GetComponent<Light>().intensity = 0f;
                 lightHab.GetComponent<Light>().intensity = 0f;
-                drawnArea = false;
             }
             else if (playableCharacter.state == State.CARRYING)
             {
@@ -358,7 +375,10 @@ public class PlayerManager : RagnarComponent
                     players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
                     if (playableCharacter.pickedEnemy != null)
+                    {
+                        playableCharacter.pickedEnemy.GetComponent<Animation>().PlayAnimation("CorpseCarry");
                         players[characterSelected].GetComponent<Player>().SetAction(2);
+                    }
                     else
                         players[characterSelected].GetComponent<Player>().SetAction(0);
                 }
@@ -373,18 +393,21 @@ public class PlayerManager : RagnarComponent
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
-            drawnArea = false;
         }
     }
 
     private void PlayerCases()
     {
+        for (int i = 0; i < playableCharacter.abilities.Length; i++)
+        {
+            CooldownTimer(i);
+        }
         switch (players.Length)
         {
             case 4:
                 if (Input.GetKey(KeyCode.ALPHA4) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 3;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -397,7 +420,7 @@ public class PlayerManager : RagnarComponent
             case 3:
                 if (Input.GetKey(KeyCode.ALPHA3) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 2;
                     playableCharacter.state = State.NONE;
                     if(area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -410,7 +433,7 @@ public class PlayerManager : RagnarComponent
             case 2:
                 if (Input.GetKey(KeyCode.ALPHA2) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 1;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -423,7 +446,7 @@ public class PlayerManager : RagnarComponent
             case 1:
                 if (Input.GetKey(KeyCode.ALPHA1) == KeyState.KEY_DOWN)
                 {
-                    players[characterSelected].GetComponent<Player>().SetState((int)State.NONE);
+                    players[characterSelected].GetComponent<Player>().SetState(State.NONE);
                     characterSelected = 0;
                     playableCharacter.state = State.NONE;
                     if (area != null) area[characterSelected].GetComponent<Light>().intensity = 0f;
@@ -451,6 +474,22 @@ public class PlayerManager : RagnarComponent
     {
         SaveSystem.DeleteDirectoryFiles("Library/SavedGame/Players");
         SaveSystem.SaveScene();
+        switch (SceneManager.currentSceneName)
+        {
+            case "build":
+                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_1>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
+                break;
+            case "build2":
+                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_2>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
+                break;
+            case "build3":
+                SaveSystem.SaveTimer(GameObject.Find("LevelManager").GetComponent<Level_3>().timer.timer);
+                GameObject.Find("Dialogue").GetComponent<DialogueManager>().SaveDialogue();
+                break;
+        }
+
         for (int i = 0; i < players.Length; ++i)
         { 
             SaveSystem.SavePlayer(players[i].GetComponent<Player>());
@@ -470,6 +509,120 @@ public class PlayerManager : RagnarComponent
 
             Quaternion rot = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
             players[i].GetComponent<Rigidbody>().SetBodyRotation(rot); 
+        }
+    }
+
+    public void CooldownTimer(int abilityID)
+    {
+        float temp;
+        temp = playableCharacter.abilities[abilityID].cooldown - playableCharacter.abilities[abilityID].counter;
+
+        temp = (float)Math.Round((double)temp, 0);
+
+        switch(abilityID)
+        {
+            case 0:
+                cd1.text = temp.ToString();
+
+                if (playableCharacter.abilities[abilityID].onCooldown)
+                    Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
+
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd1.text = "";
+
+                if (!playableCharacter.abilities[abilityID].onCooldown)
+                {
+                    if (playableCharacter.name == "Paul Atreides")
+                    {
+                        Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+                    }
+                    else if (playableCharacter.name == "Chani")
+                    {
+                        Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+                    }
+                    else if (playableCharacter.name == "Stilgar")
+                    {
+                        Ability1Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+                    }
+                }
+                break;
+            case 1:
+                cd2.text = temp.ToString();
+
+                if (playableCharacter.abilities[abilityID].onCooldown)
+                    Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
+
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd2.text = "";
+
+                if (!playableCharacter.abilities[abilityID].onCooldown)
+                {
+                    if (playableCharacter.name == "Paul Atreides")
+                    {
+                        Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+                    }
+                    else if (playableCharacter.name == "Chani")
+                    {
+                        Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+                    }
+                    else if (playableCharacter.name == "Stilgar")
+                    {
+                        Ability2Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+                    }
+                }
+                break;
+            case 2:
+                cd3.text = temp.ToString();
+
+                if (playableCharacter.abilities[abilityID].onCooldown)
+                    Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
+
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                    cd3.text = "";
+
+                if (!playableCharacter.abilities[abilityID].onCooldown)
+                {
+                    if (playableCharacter.name == "Paul Atreides")
+                    {
+                        Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+                    }
+                    else if (playableCharacter.name == "Chani")
+                    {
+                        Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+                    }
+                    else if (playableCharacter.name == "Stilgar")
+                    {
+                        Ability3Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+                    }
+                }
+                break;
+            case 3:
+                cd4.text = temp.ToString();
+                if (playableCharacter.abilities[abilityID].onCooldown)
+                    Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(128, 128, 128);
+
+                if (temp <= 0.0f || (playableCharacter.abilities[abilityID].counter <= 0.0f))
+                {
+                    cd4.text = "";
+                }
+
+                if (!playableCharacter.abilities[abilityID].onCooldown)
+                {
+                    if (playableCharacter.name == "Paul Atreides")
+                    {
+                        Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(11, 212, 0);
+                    }
+                    else if (playableCharacter.name == "Chani")
+                    {
+                        Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(244, 60, 255);
+                    }
+                   else if (playableCharacter.name == "Stilgar")
+                   {
+                        Ability4Bg.GetComponent<UIImage>().SetImageGeneralColor(0, 40, 255);
+                   }
+                }
+                break;
+
         }
     }
 }
