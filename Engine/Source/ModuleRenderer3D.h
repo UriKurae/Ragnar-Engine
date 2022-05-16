@@ -5,6 +5,8 @@
 #include "SDL_video.h"
 #include "Geometry/AABB.h"
 
+#include "ConeTriangle.h"
+
 #include <vector>
 #include <set>
 #include <utility>
@@ -126,7 +128,7 @@ public:
 	std::vector<PointLight*> pointLights;
 	std::vector<SpotLight*> spotLights;
 
-	std::vector<float3> enemyCones;
+	std::vector<ConeTriangle> enemyCones;
 	
 	bool genShadows;
 
