@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 373768952,
+                    "pointer": 125511920,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,19 +144,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -38.206695556640625,
+                        1.7022964954376221,
                         0,
-                        83.746002197265625
+                        45.9605712890625
                     ],
                     "Quaternion": [
                         0,
-                        0.71400725841522217,
+                        0.73327791690826416,
                         0,
-                        0.70013833045959473
+                        0.67992901802062988
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        1.5511856079101562,
+                        1.4953314065933228,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -199,36 +199,36 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142107963562012,
+                        1.4142104387283325,
                         1.0000002384185791,
-                        1.0000005960464478
+                        1.0000007152557373
                     ]
                 },
                 {
                     "Near Plane": 1,
                     "Far Plane": 155,
-                    "Vertical Fov": 0.41453227400779724,
+                    "Vertical Fov": 0.34328067302703857,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -88.198394775390625,
+                        -48.156703948974609,
                         55,
-                        84.726669311523438
+                        49.730316162109375
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": 8,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -38.206695556640625,
+                        1.7022964954376221,
                         0,
-                        83.746002197265625
+                        45.9605712890625
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 91.123794555664062,
+                    "Horizontal Angle": 94.323806762695312,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
@@ -4381,9 +4381,9 @@
                         0.59178507328033447
                     ],
                     "RotationEditor": [
-                        0,
-                        0,
-                        0
+                        2.2736437320709229,
+                        -1.3265209197998047,
+                        2.9203081130981445
                     ],
                     "Scale": [
                         1,
@@ -4415,6 +4415,225 @@
                     "Type": 1,
                     "Path": "Assets\/Resources\/Levels\/Level1\/Ornithopter\/prop_ornithopter__prop_ornithopter.fbx",
                     "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 677600294,
+            "Parent UUID": 2052262109,
+            "Name": "Fire&Smoke",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -8.2231903076171875,
+                        -0.64049720764160156,
+                        -4.1796951293945312
+                    ],
+                    "Quaternion": [
+                        -0.0024560873862355947,
+                        0.001053125481121242,
+                        -0.39368203282356262,
+                        0.91924279928207397
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        3.940000057220459,
+                        3.9399943351745605,
+                        3.9400391578674316
+                    ]
+                },
+                {
+                    "Type": 21,
+                    "Active": true,
+                    "Size": [
+                        30,
+                        10,
+                        20
+                    ],
+                    "Offset": [
+                        64.124542236328125,
+                        28.280025482177734,
+                        29.446800231933594
+                    ],
+                    "MaxDuration": 0,
+                    "Looping": true,
+                    "Emitters": [
+                        {
+                            "Emitter: Max Particles": 200,
+                            "Emitter: Particles Per Second": 50,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.019999999552965164,
+                            "Emitter: Current Timer": 0.0039999987930059433,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.070000000298023224,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 0.2199999988079071,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_explosion_single.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PEV: Min Velocity": [
+                                        -0.019999999552965164,
+                                        0,
+                                        -0.05000000074505806
+                                    ],
+                                    "PEV: Max Velocity": [
+                                        0.019999999552965164,
+                                        0.10999999940395355,
+                                        0.05000000074505806
+                                    ],
+                                    "Effect Type": 0
+                                },
+                                {
+                                    "PES: Start size": 1.7000000476837158,
+                                    "PES: End size": 0.80000001192092896,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        1,
+                                        0.52173912525177002,
+                                        0,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        1,
+                                        0.87871849536895752,
+                                        0,
+                                        1
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        },
+                        {
+                            "Emitter: Max Particles": 400,
+                            "Emitter: Particles Per Second": 500,
+                            "Emitter: Is Active": true,
+                            "Emitter: To Delete": false,
+                            "Emitter: Timer": 0.0020000000949949026,
+                            "Emitter: Current Timer": 0.0020000000949949026,
+                            "Emitter: Is Cubical": false,
+                            "Cubical: Spread on X": 2,
+                            "Cubical: Spread on Y": 2,
+                            "Cubical: Spread on Z": 2,
+                            "Particle Reference Position": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Velocity": [
+                                0,
+                                0.20000000298023224,
+                                0
+                            ],
+                            "Particle Reference Acceleration": [
+                                0.019999999552965164,
+                                0,
+                                -0.090000003576278687
+                            ],
+                            "Particle Reference Direction": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Particle Reference Color Begin": [
+                                1,
+                                0,
+                                0,
+                                1
+                            ],
+                            "Particle Reference Size Begin": 0.5,
+                            "Particle Reference Lifetime": 1.1000000238418579,
+                            "Particle Reference Rotation Amount": 0,
+                            "Loop Timer": 1,
+                            "Tiles: X": 1,
+                            "Tiles: Y": 1,
+                            "Texture Assets Path": "Assets\/Resources\/ParticlesTexture\/part_smoke&sand.png",
+                            "Shader Assets Path": "Assets\/Resources\/Shaders\/particlesBehaviour.shader",
+                            "Effects": [
+                                {
+                                    "PEV: Min Velocity": [
+                                        -0.05000000074505806,
+                                        0,
+                                        -0.0099999997764825821
+                                    ],
+                                    "PEV: Max Velocity": [
+                                        -0.0099999997764825821,
+                                        0.20000000298023224,
+                                        0.039999999105930328
+                                    ],
+                                    "Effect Type": 0
+                                },
+                                {
+                                    "PES: Start size": 0.89999997615814209,
+                                    "PES: End size": 0.80000001192092896,
+                                    "Effect Type": 2
+                                },
+                                {
+                                    "PEC: Start color": [
+                                        0.38215100765228271,
+                                        0.38215100765228271,
+                                        0.38215100765228271,
+                                        1
+                                    ],
+                                    "PEC: End color": [
+                                        0.6247139573097229,
+                                        0.6247139573097229,
+                                        0.6247139573097229,
+                                        0
+                                    ],
+                                    "Effect Type": 3
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
@@ -5297,7 +5516,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -5329,7 +5548,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 396501144,
+                    "pointer": 125513504,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -5368,7 +5587,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -5499,7 +5718,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -5630,7 +5849,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -5761,7 +5980,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -5825,7 +6044,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -5889,7 +6108,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -5953,7 +6172,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -6084,7 +6303,7 @@
                     "buttonWidth": 400,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": false
                 },
@@ -8402,7 +8621,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8471,7 +8690,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8535,7 +8754,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8599,7 +8818,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8663,7 +8882,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8794,7 +9013,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -8925,7 +9144,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9056,7 +9275,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9187,7 +9406,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9251,7 +9470,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9315,7 +9534,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9379,7 +9598,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9443,7 +9662,7 @@
                     "buttonWidth": 513,
                     "buttonHeight": 214,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9507,7 +9726,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 90,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9571,7 +9790,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9635,7 +9854,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9699,7 +9918,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9763,7 +9982,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9832,7 +10051,7 @@
                     "buttonWidth": 70,
                     "buttonHeight": 70,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9896,7 +10115,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -9960,7 +10179,7 @@
                     "buttonWidth": 186.5,
                     "buttonHeight": 55,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10091,7 +10310,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10155,7 +10374,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10219,7 +10438,7 @@
                     "buttonWidth": 36.5,
                     "buttonHeight": 81,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10283,7 +10502,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10331,7 +10550,7 @@
                     "Type": 19,
                     "Position": [
                         -11.899999618530273,
-                        -11.899999618530273
+                        0
                     ],
                     "Scale": [
                         0.20333333313465118,
@@ -10346,7 +10565,7 @@
                     "buttonWidth": 122,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10410,7 +10629,7 @@
                     "buttonWidth": 123,
                     "buttonHeight": 83,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10474,7 +10693,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10538,7 +10757,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10602,7 +10821,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10666,7 +10885,7 @@
                     "buttonWidth": 80.5,
                     "buttonHeight": 63,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10730,7 +10949,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10799,7 +11018,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10868,7 +11087,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -10937,7 +11156,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11001,7 +11220,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11065,7 +11284,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11129,7 +11348,7 @@
                     "buttonWidth": 84,
                     "buttonHeight": 26,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11232,7 +11451,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11301,7 +11520,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11370,7 +11589,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11439,7 +11658,7 @@
                     "buttonWidth": 45,
                     "buttonHeight": 45,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11547,7 +11766,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11611,7 +11830,7 @@
                     "buttonWidth": 263,
                     "buttonHeight": 52.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11675,7 +11894,7 @@
                     "buttonWidth": 254.5,
                     "buttonHeight": 46,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11806,7 +12025,7 @@
                     "buttonWidth": 650,
                     "buttonHeight": 650,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -11870,7 +12089,7 @@
                     "buttonWidth": 376.5,
                     "buttonHeight": 42.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12001,7 +12220,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12132,7 +12351,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12196,7 +12415,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12327,7 +12546,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12391,7 +12610,7 @@
                     "buttonWidth": 275,
                     "buttonHeight": 58.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12522,7 +12741,7 @@
                     "buttonWidth": 273.5,
                     "buttonHeight": 48,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12586,7 +12805,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12670,7 +12889,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12754,7 +12973,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12838,7 +13057,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12864,7 +13083,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -12907,7 +13126,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -12933,7 +13152,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -12976,7 +13195,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13001,7 +13220,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13085,7 +13304,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13110,7 +13329,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13194,7 +13413,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13219,7 +13438,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13303,7 +13522,7 @@
                     "buttonWidth": 550,
                     "buttonHeight": 16,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13328,7 +13547,7 @@
                     "buttonWidth": 20,
                     "buttonHeight": 36,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13412,7 +13631,7 @@
                     "buttonWidth": 250,
                     "buttonHeight": 60,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13564,7 +13783,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13590,7 +13809,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -13633,7 +13852,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13659,7 +13878,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -13702,7 +13921,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13728,7 +13947,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -13771,7 +13990,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -13902,7 +14121,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14033,7 +14252,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14164,7 +14383,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14295,7 +14514,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14426,7 +14645,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14557,7 +14776,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14688,7 +14907,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14819,7 +15038,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -14950,7 +15169,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15081,7 +15300,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15212,7 +15431,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15343,7 +15562,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15474,7 +15693,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15605,7 +15824,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15736,7 +15955,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15867,7 +16086,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -15998,7 +16217,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16129,7 +16348,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16260,7 +16479,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16391,7 +16610,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16522,7 +16741,7 @@
                     "buttonWidth": 150,
                     "buttonHeight": 44.5,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16653,7 +16872,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16784,7 +17003,7 @@
                     "buttonWidth": 50,
                     "buttonHeight": 50,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -16888,7 +17107,7 @@
             "Name": "Quest System",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/Quest System.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -16922,7 +17141,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 515828856,
+                    "pointer": 710455896,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -16940,7 +17159,7 @@
             "Name": "Boton Activas",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16967,7 +17186,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17071,7 +17290,7 @@
             "Name": "Boton Completadas",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17098,7 +17317,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17202,7 +17421,7 @@
             "Name": "Titulo Activas",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17229,7 +17448,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17271,7 +17490,7 @@
             "Name": "Titulo Completadas",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17298,7 +17517,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17340,7 +17559,7 @@
             "Name": "Descripcion",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17367,7 +17586,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17409,7 +17628,7 @@
             "Name": "Id",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17436,7 +17655,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17478,7 +17697,7 @@
             "Name": "Estado",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17505,7 +17724,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
@@ -17547,7 +17766,7 @@
             "Name": "Tipo",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17574,7 +17793,7 @@
                     "buttonWidth": 100,
                     "buttonHeight": 100,
                     "lastButtonWidth": 1368,
-                    "lastButtonHeight": 694.5,
+                    "lastButtonHeight": 572.5,
                     "MoveOnResizeX": true,
                     "MoveOnResizeY": true
                 },
