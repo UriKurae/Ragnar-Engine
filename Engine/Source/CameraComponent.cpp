@@ -460,7 +460,7 @@ bool CameraComponent::OnLoad(JsonParsing& node)
 	zoomMin = node.GetJsonNumber("Zoom Min");
 	zoomMax = node.GetJsonNumber("Zoom Max");
 	zoomSpeed = node.GetJsonNumber("Zoom Speed");
-	lock = node.GetJsonNumber("Lock");
+	lock = node.GetJsonBool("Lock");
 
 	// MOVEMENT
 	freeMovement = node.GetJsonBool("Free Movement");
