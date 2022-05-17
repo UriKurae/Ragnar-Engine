@@ -16,6 +16,11 @@ public class Player : RagnarComponent
         CARRY
     }
 
+    // Components
+    private AudioSource audioSourceComponent;
+    private Animation animationComponent;
+
+
     public int hitPoints;
     public float force = 100;
     private bool pendingToDelete = false;
@@ -48,6 +53,10 @@ public class Player : RagnarComponent
     */
     public void Start()
     {
+        // Get components
+        audioSourceComponent = gameObject.GetComponent<AudioSource>();
+        animationComponent = gameObject.GetComponent<Animation>();
+
         rb = gameObject.GetComponent<Rigidbody>();
         materialComponent = gameObject.GetComponent<Material>();
         agent = gameObject.GetComponent<NavAgent>();
@@ -89,7 +98,7 @@ public class Player : RagnarComponent
     public void Update()
     {
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN)
-            gameObject.GetComponent<AudioSource>().PlayClip("UI_SANDCLICK");
+            audioSourceComponent.PlayClip("UI_SANDCLICK");
 
         if (!dialogue.GetInDialogue())
         {
@@ -140,7 +149,7 @@ public class Player : RagnarComponent
                         {
                             ReloadState();
                             //Play audio when calculating movement to not repeat the same audio
-                            gameObject.GetComponent<AudioSource>().PlayClip("PAUL_WALKSAND");
+                            audioSourceComponent.PlayClip("PAUL_WALKSAND");
                         }
                     }
                     else if (abilityState != State.NONE && agent.PathSize() > 0)
@@ -170,19 +179,19 @@ public class Player : RagnarComponent
             // Reload Sound
             if (Input.GetKey(KeyCode.R) == KeyState.KEY_DOWN)
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("WPN_RELOAD");
+                audioSourceComponent.PlayClip("WPN_RELOAD");
             }
             //////////////////////////
 
             //SaveTest File for Debugging
-            if (pendingToDelete && (gameObject.GetComponent<Animation>().GetLoopTime() > gameObject.GetComponent<Animation>().GetDuration() - 1))
+            if (pendingToDelete && (animationComponent.GetLoopTime() > animationComponent.GetDuration() - 1))
             {
-                Debug.Log(gameObject.GetComponent<Animation>().GetLoopTime().ToString());
-                Debug.Log(gameObject.GetComponent<Animation>().GetDuration().ToString());
+                Debug.Log(animationComponent.GetLoopTime().ToString());
+                Debug.Log(animationComponent.GetDuration().ToString());
                 deadPartSys.Play();
             }
 
-            if (pendingToDelete && gameObject.GetComponent<Animation>().HasFinished())
+            if (pendingToDelete && animationComponent.HasFinished())
             {                
                 String name = "";
                 if (gameObject.name == "Player") name = "Paul Atreides";
@@ -220,35 +229,35 @@ public class Player : RagnarComponent
                 switch (action)
                 {
                     case Actions.NONE:
-                        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+                        animationComponent.PlayAnimation("Idle");
                         break;
                     case Actions.CROUCH:
-                        gameObject.GetComponent<Animation>().PlayAnimation("Crouch");
+                        animationComponent.PlayAnimation("Crouch");
                         break;
                     case Actions.CARRY:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseCarry");
+                        animationComponent.PlayAnimation("CorpseCarry");
                         break;
                 }
 
                 walkPartSys.Pause();
                 runPartSys.Pause();
                 sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("PAUL_WALKSAND");
+                audioSourceComponent.StopCurrentClip("PAUL_WALKSAND");
                 break;
 
             case Movement.WALK:
                 switch (action)
                 {
                     case Actions.NONE:
-                        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+                        animationComponent.PlayAnimation("Walk");
                         sound.GetComponent<Rigidbody>().SetRadiusSphere(2f);
                         break;
                     case Actions.CROUCH:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CrouchWalk");
+                        animationComponent.PlayAnimation("CrouchWalk");
                         sound.GetComponent<Rigidbody>().SetRadiusSphere(0f);
                         break;
                     case Actions.CARRY:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseWalk");
+                        animationComponent.PlayAnimation("CorpseWalk");
                         sound.GetComponent<Rigidbody>().SetRadiusSphere(3f);
                         break;
                 }
@@ -260,7 +269,7 @@ public class Player : RagnarComponent
                 switch (action)
                 {
                     case Actions.NONE:
-                        gameObject.GetComponent<Animation>().PlayAnimation("Run");
+                        animationComponent.PlayAnimation("Run");
                         sound.GetComponent<Rigidbody>().SetRadiusSphere(5f);
                         break;
                     case Actions.CROUCH:
@@ -272,7 +281,7 @@ public class Player : RagnarComponent
                         ReloadState();
                         break;
                     case Actions.CARRY:
-                        gameObject.GetComponent<Animation>().PlayAnimation("CorpseRun");
+                        animationComponent.PlayAnimation("CorpseRun");
                         sound.GetComponent<Rigidbody>().SetRadiusSphere(6f);
                         break;
                 }
@@ -284,8 +293,8 @@ public class Player : RagnarComponent
 
     private void Die()
     {
-        gameObject.GetComponent<AudioSource>().PlayClip("PAUL_DEATH");
-        gameObject.GetComponent<Animation>().PlayAnimation("Death");
+        audioSourceComponent.PlayClip("PAUL_DEATH");
+        animationComponent.PlayAnimation("Death");
         agent.ClearPath();
         walkPartSys.Pause();
         runPartSys.Pause();
