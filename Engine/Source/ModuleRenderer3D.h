@@ -148,7 +148,8 @@ private:
 	std::shared_ptr<Texture> damageTexture;
 	std::shared_ptr<Texture> whiteTexture;
 
-	VertexBuffer* vbo;
+	VertexArray* conesVao;
+	VertexBuffer* conesVbo;
 	std::shared_ptr<Shader> coneShader;
 
 	unsigned int shadowsFbo;
