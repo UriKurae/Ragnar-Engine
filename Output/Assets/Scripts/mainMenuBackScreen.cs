@@ -101,6 +101,7 @@ public class mainMenuBackScreen : RagnarComponent
         {
 			item.GetComponent<Animation>().PlayAnimation("Idle");
         }
+		GameObject.Find("stilgar_sword").GetComponent<Animation>().PlayAnimation("Idle");
 
 		pos = new Vector3(0.0f, 0.0f, 0.0f);
         bounds = new Vector3(0.0f, 0.0f, 0.0f);
