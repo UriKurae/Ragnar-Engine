@@ -233,6 +233,13 @@ void RigidBodyComponent::OnEditor()
 			else
 				CreateBody();
 		}
+		if (ImGui::Checkbox("Force Activation", &fActivation))
+		{
+			if (fActivation)
+				body->activate(true);
+			else
+				body->activate();
+		}
 		ImGui::Text("OnCollision: %s", onCollision ? "true" : "false");
 		Combos();
 
