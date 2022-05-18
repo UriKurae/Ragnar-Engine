@@ -134,6 +134,7 @@ public class BasicEnemy : RagnarComponent
 
                             if (coneTimer >= coneMaxTime)
                             {
+                                coneTimer = 0;
                                 agents.speed = initialSpeed * 1.2f;
                                 Shoot();
                             }
@@ -141,7 +142,7 @@ public class BasicEnemy : RagnarComponent
                         else
                         {
                             agents.speed = initialSpeed;
-                            coneTimer -= Time.deltaTime;
+                            
                         }
                     }
                 }
