@@ -107,7 +107,7 @@ public class Level_1 : RagnarComponent
             state = State.NONE,
             abilities = new Abilities[4],
             hitPoints = 2,
-            pos = new Vector3(-55.30f, 0f, 107.76f)
+            pos = new Vector3(-57.10f, 0f, 106.17f)
         };
         characters[1].abilities[0] = new Abilities
         {
