@@ -192,7 +192,7 @@ vec4 CalculateShadow(vec4 fragPosLightSpace, vec3 normal, vec3 lightDir)
 	float dy = dFdy(texCoord.t);
 	float bias = max(0.000011 * (1.0 - dot(normal, lightDir)), 0.0000011);
 
-	int sampleRadius = 3;
+	int sampleRadius = 1;
 	vec2 pixelSize = 1.0 / textureSize(depthTexture, 0);
 	for (int y = -sampleRadius; y <= sampleRadius; y++)
 	{
