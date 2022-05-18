@@ -22,7 +22,7 @@ public class Voice : RagnarComponent
 		selectedEnemy = EnemyFound();
 		if (selectedEnemy != null)
 		{
-			AddNewEnemyToPlayer();
+			ActivateVoice();
 			selectedEnemy.GetComponent<BasicEnemy>().initialPos = selectedEnemy.transform.globalPosition;
 			selectedEnemy.GetComponent<BasicEnemy>().initialRot = selectedEnemy.transform.globalRotation;
 		}
@@ -31,12 +31,12 @@ public class Voice : RagnarComponent
 	public GameObject EnemyFound()
 	{
 		GameObject enemy = RayCast.HitToTag(agent.rayCastA, agent.rayCastB, "Enemies");
-		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 15) return enemy;
+		if (enemy != null && Transform.GetDistanceBetween(player.transform.globalPosition, enemy.transform.globalPosition) < 15 && (enemy.GetComponent<BasicEnemy>().state != EnemyState.DEATH || enemy.GetComponent<BasicEnemy>().state != EnemyState.IS_DYING)) return enemy;
 		GameObject.Find("PlayerManager").GetComponent<PlayerManager>().characters[0].abilities[1].cooldown = 0;
 		return null;
 
 	}
-	public void AddNewEnemyToPlayer()
+	public void ActivateVoice()
     {
 		Debug.Log("Is Changing");
 		playerManager.players[playerManager.characterSelected].GetComponent<Player>().SetControled(false);

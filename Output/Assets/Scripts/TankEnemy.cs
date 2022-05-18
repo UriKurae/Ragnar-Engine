@@ -204,7 +204,7 @@ public class TankEnemy : RagnarComponent
             }
         }        
     }
-        public void SetControled(bool flag)
+    public void SetControled(bool flag)
     {
         controlled = flag;
         if (flag) controlledCooldown = 10;
@@ -251,7 +251,7 @@ public class TankEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
             if (other.gameObject.name == "SoundArea")

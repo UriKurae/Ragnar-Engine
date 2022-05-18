@@ -175,7 +175,7 @@ public class AirEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
         {
             //// Stilgar =====================================
             if (other.gameObject.name == "Trap")

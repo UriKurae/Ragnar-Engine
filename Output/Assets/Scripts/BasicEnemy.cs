@@ -264,7 +264,7 @@ public class BasicEnemy : RagnarComponent
 
     public void OnTrigger(Rigidbody other)
     {
-        if (state != EnemyState.DEATH)
+        if (state != EnemyState.DEATH || state != EnemyState.IS_DYING)
         {
             //// Paul ========================================
             if (other.gameObject.name == "SoundArea")
