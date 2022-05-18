@@ -36,9 +36,9 @@ public class Credits : RagnarComponent
 
         Pos = new Vector3(0, 0, 0);
 
-		Pos.Set(-150, -(InternalCalls.GetRegionGame().y / 2)-90, 36.1f);
+		Pos.Set(-170, -(InternalCalls.GetRegionGame().y / 2)- 100, 36.1f);
 		TextJob.GetComponent<Transform2D>().position2D = Pos;
-		Pos.Set(-40, -(InternalCalls.GetRegionGame().y / 2)-90, 36.1f);
+		Pos.Set(-40, -(InternalCalls.GetRegionGame().y / 2)-100, 36.1f);
 		TextName.GetComponent<Transform2D>().position2D = Pos;
 		Pos.Set(-140, -(InternalCalls.GetRegionGame().y / 2) -70, 36.1f);
 		TextTitles.GetComponent<Transform2D>().position2D = Pos;
@@ -74,7 +74,7 @@ public class Credits : RagnarComponent
 			SceneManager.LoadScene("MainMenu");
         }
 		float vel = newDelta * velocity;
-		Pos.Set(-150, TextJob.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
+		Pos.Set(-170, TextJob.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
 		TextJob.GetComponent<Transform2D>().position2D = Pos;
 
 		Pos.Set(130, TextName.GetComponent<Transform2D>().position2D.y + vel, 36.1f);
