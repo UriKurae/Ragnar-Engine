@@ -476,7 +476,7 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	glBindVertexArray(VAO);
 
 	CleanText(text);
-	CleanText(text);
+	//CleanText(text);
 
 	// iterate through all characters
 	DrawCharacters(text, x, scale, y, characters,  VAO, VBO);
@@ -487,30 +487,45 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 
 void ModuleUI::CleanText(std::string& text)
 {
-	std::size_t found = text.find("Ã±");
-	if (found != std::string::npos)
-		text.replace(found, 2, "ñ");
-	found = text.find("Ã‘");
-	if (found != std::string::npos)
-		text.replace(found, 2, "Ñ");
-	found = text.find("Ã¡");
-	if (found != std::string::npos)
-		text.replace(found, 2, "á");
-	found = text.find("Ã©");
-	if (found != std::string::npos)
-		text.replace(found, 2, "é");
-	found = text.find("Ã");
-	if (found != std::string::npos)
-		text.replace(found, 2, "í");
-	found = text.find("Ã³");
-	if (found != std::string::npos)
-		text.replace(found, 2, "ó");
-	found = text.find("Ãº");
-	if (found != std::string::npos)
-		text.replace(found, 2, "ú");
-	found = text.find("Ã¼");
-	if (found != std::string::npos)
-		text.replace(found, 2, "ü");
+
+	for (int i = 0; i < text.length(); i++)
+	{
+		if ((text[i + 1]) == '±') {
+			text.replace(i, 2, "ñ");
+			continue;
+		}
+		if ((text[i + 1]) == '‘'){
+			text.replace(i, 2, "Ñ");
+			continue;
+		}
+		if ((text[i + 1]) == '¡'){
+			text.replace(i, 2, "á");
+			continue;
+		}
+		if ((text[i + 1]) == '©'){
+			text.replace(i, 2, "é");
+			continue;
+		}
+
+		if ((text[i + 1]) == '³'){
+			text.replace(i, 2, "ó");
+			continue;
+		}
+		if ((text[i + 1]) == 'º'){
+			text.replace(i, 2, "ú");
+			continue;
+		}
+		if ((text[i + 1]) == '¼'){
+			text.replace(i, 2, "ü");
+			continue;
+		}
+		if ((text[i]) == 'Ã'){
+			text.replace(i, 2, "í");
+			continue;
+		}
+	}
+
+	
 }
 // Draw all text letters
 void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO)
