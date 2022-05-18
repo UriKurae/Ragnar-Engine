@@ -62,7 +62,7 @@ MonoObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	return nullptr;
 }
 
-int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* _players, int playersSize, MonoArray* _colliders, int collidersSize)
+int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* _players, int playersSize, MonoArray* _colliders, int collidersSize, float time)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 forward = app->moduleMono->UnboxVector(_forward);
@@ -77,22 +77,22 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	std::map<float, GameObject*> triangleMap;
 	float3 hit = float3::zero;
 
-	ConeTriangle coneTri;
+	ConeTriangle coneTriangle;
 	for (int i = 0; i < rays; i++)
 	{
 		LineSegment ray(pointA, pointA + (forward * float3x3::RotateY(angle/rays * i) * radius));
 		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
 		
-		coneTri.conePosition = pointA;
-		coneTri.coneColor = { 0, 1, 0, 0.3 };
+		coneTriangle.conePosition = pointA;
+		coneTriangle.coneColor = { time, 1-time, 0, 0.3 };
 
-		vertex.push_back(coneTri); // origin
+		vertex.push_back(coneTriangle); // origin
 		if (i != 0) vertex.push_back(vertex.at(vertex.size() - 2)); // previous 
 
-		coneTri.conePosition = hit;
-		coneTri.coneColor = { 0, 1, 0, 0.3 };
+		coneTriangle.conePosition = hit;
+		coneTriangle.coneColor = { time, 1 - time, 0, 0.3 };
 
-		vertex.push_back(coneTri); // this
+		vertex.push_back(coneTriangle); // this
 
 		if (i == 1)
 		{

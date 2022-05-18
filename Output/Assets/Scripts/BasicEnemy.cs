@@ -48,6 +48,9 @@ public class BasicEnemy : RagnarComponent
     bool stunned = false;
     float stunnedTimer = -1f;
 
+    float coneTimer = 0.0f;
+    int coneMaxTime = 1;
+
     // Cone
     public bool coneRotate = true;
     private bool toRight = true;
@@ -127,12 +130,18 @@ public class BasicEnemy : RagnarComponent
                         }
                         if (PerceptionCone())
                         {
-                            agents.speed = initialSpeed * 1.2f;
-                            Shoot();
+                            coneTimer += Time.deltaTime;
+
+                            if (coneTimer >= coneMaxTime)
+                            {
+                                agents.speed = initialSpeed * 1.2f;
+                                Shoot();
+                            }
                         }
                         else
                         {
                             agents.speed = initialSpeed;
+                            coneTimer -= Time.deltaTime;
                         }
                     }
                 }
@@ -328,7 +337,7 @@ public class BasicEnemy : RagnarComponent
 
         if (coneRotate) enemyForward = RotateVector(enemyForward, 80, 2);
 
-        index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 12, players, players.Length, colliders, colliders.Length);
+        index = RayCast.PerceptionCone(enemyPos, enemyForward, 60, 10, 12, players, players.Length, colliders, colliders.Length, coneTimer/coneMaxTime);
         if (index != -1 && (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead || players[index].GetComponent<Player>().isHidden)) return false;
         return (index == -1) ? false : true;
     }
