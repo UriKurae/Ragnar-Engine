@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\Scripts\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\EnemyData.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem.cs" />
     <Compile Include="Assets\Scripts\BackStabEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
