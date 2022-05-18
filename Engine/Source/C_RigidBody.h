@@ -4,6 +4,7 @@
 
 class GameObject;
 class btRigidBody;
+class TransformComponent;
 enum class Axis;
 
 enum class CollisionType
@@ -96,6 +97,8 @@ private:
 	PCylinder cylinder;
 	PPyramid cone;
 	PPlane plane;
+
+	TransformComponent* ownerTransform;
 
 	int cylinderAxis = 3;
 
