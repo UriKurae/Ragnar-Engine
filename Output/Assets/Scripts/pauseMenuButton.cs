@@ -1907,16 +1907,15 @@ public class pauseMenuButton : RagnarComponent
 				
 				if (selectedPlayer.name == "Player")//paul
 				{
-
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be killed.";
+					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be killed.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Crysknife\n\nKill an enemy\nat a melee\nrange. Drones\ncan�t be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nKill enemies with\na slash in front\nof you.";
+					CharFocusedText.GetComponent<UIText>().text = "Sword\n\nKill enemies with\na slash in front\nof you.";
 				}
 				break;
 			case 3:
@@ -1966,15 +1965,15 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nMind control\nan enemy.\nDrones can�t\nbe affected.";
+					CharFocusedText.GetComponent<UIText>().text = "The voice\n\nMind control\nan enemy.\nDrones can�t\nbe affected.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nActivate it\nto disappear\nfrom enemy\nvision.\nDrones can\ndetect you.";
+					CharFocusedText.GetComponent<UIText>().text = "Camouflage\n\nActivate it\nto disappear\nfrom enemy\nvision.\nDrones can\ndetect you.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nFire weapon\nthat can\npierce\nenemie�s\nshields.";
+					CharFocusedText.GetComponent<UIText>().text = "Stunner\n\nFire weapon\nthat can\npierce\nenemie�s\nshields.";
 				}
 
 				break;
@@ -2025,15 +2024,15 @@ public class pauseMenuButton : RagnarComponent
 				AbilityImageApmliate.GetComponent<Transform2D>().position2D = pos;
 				if (selectedPlayer.name == "Player")//paul
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nThrow a knife\nto an enemy\nwithin range.\nIt doesn�t\naffect\nshielded\nenemies.";
+					CharFocusedText.GetComponent<UIText>().text = "Throwing Knife\n\nThrow a knife\nto an enemy\nwithin range.\nIt doesn�t\naffect\nshielded\nenemies.";
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nSend a little\nflying drone\nto kill an\nenemy. Drones\ncan�t be\nkilled.";
+					CharFocusedText.GetComponent<UIText>().text = "Hunter-Seeker\n\nSend a little\nflying drone\nto kill an\nenemy. Drones\ncan�t be\nkilled.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nSet a trap to\nstun enemies\nand destroy\ndrones.";
+					CharFocusedText.GetComponent<UIText>().text = "Trap\n\nSet a trap to\nstun enemies\nand destroy\ndrones.";
 				}
 				break;
 			case 3:
@@ -2086,21 +2085,21 @@ public class pauseMenuButton : RagnarComponent
 				{
                     if (players.Length == 2)
                     {
-						CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nThrow a stone\nto make noise\nwithin the\narea.";
+						CharFocusedText.GetComponent<UIText>().text = "Stone\n\nThrow a stone\nto make noise\nwithin the\narea.";
                     }
                     else
                     {
-						CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nThrow a eagle\nto make noise\nwithin the\narea.";
+						CharFocusedText.GetComponent<UIText>().text = "Eagle\n\nThrow a eagle\nto make noise\nwithin the\narea.";
 					}
 					
 				}
 				else if (selectedPlayer.name == "Player_2")//chani
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nThrow a grenade\nthat stuns\nenemies in an\narea. It\ndoesn�t affect\nshielded enemies\nnor drones.";
+					CharFocusedText.GetComponent<UIText>().text = "Spice Grenade\n\nThrow a grenade\nthat stuns\nenemies in an\narea. It\ndoesn�t affect\nshielded enemies\nnor drones.";
 				}
 				else if (selectedPlayer.name == "Player_3")//stilgar
 				{
-					CharFocusedText.GetComponent<UIText>().text = "Titulo\n\nWhistle that\nproduces\nsound around\nthe player to\nattract enemies.";
+					CharFocusedText.GetComponent<UIText>().text = "Whistle\n\nWhistle that\nproduces\nsound around\nthe player to\nattract enemies.";
 				}
 				break;
 			case 3:
