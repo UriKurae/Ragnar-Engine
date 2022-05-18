@@ -24,6 +24,7 @@
 
 #include "GL/glew.h"
 #include "Profiling.h"
+#include <locale.h>
 
 #include FT_FREETYPE_H 
 
@@ -345,6 +346,7 @@ ModuleUI::~ModuleUI()
 
 bool ModuleUI::Start()
 {
+	setlocale(LC_CTYPE, "Spanish");
 
 	return true;
 }
@@ -374,7 +376,7 @@ void ModuleUI::loadFont(std::string path, std::map<char, Character>* chara, Shad
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		// load first 128 characters of ASCII set
-		for (unsigned char c = 0; c < 128; c++)
+		for (unsigned char c = 0; c < 255; c++)
 		{
 			// Load character glyph 
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
@@ -473,13 +475,44 @@ void ModuleUI::RenderText(std::string text, float x, float y, float scale, float
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 
+	CleanText(text);
+	CleanText(text);
+
 	// iterate through all characters
 	DrawCharacters(text, x, scale, y, characters,  VAO, VBO);
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	shader->StopUse();
 }
-// Draw all text letters 
+
+void ModuleUI::CleanText(std::string& text)
+{
+	std::size_t found = text.find("Ã±");
+	if (found != std::string::npos)
+		text.replace(found, 2, "ñ");
+	found = text.find("Ã‘");
+	if (found != std::string::npos)
+		text.replace(found, 2, "Ñ");
+	found = text.find("Ã¡");
+	if (found != std::string::npos)
+		text.replace(found, 2, "á");
+	found = text.find("Ã©");
+	if (found != std::string::npos)
+		text.replace(found, 2, "é");
+	found = text.find("Ã");
+	if (found != std::string::npos)
+		text.replace(found, 2, "í");
+	found = text.find("Ã³");
+	if (found != std::string::npos)
+		text.replace(found, 2, "ó");
+	found = text.find("Ãº");
+	if (found != std::string::npos)
+		text.replace(found, 2, "ú");
+	found = text.find("Ã¼");
+	if (found != std::string::npos)
+		text.replace(found, 2, "ü");
+}
+// Draw all text letters
 void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y, std::map<char, Character>* characters, uint VAO, uint VBO)
 {
 	float auxX = x;
@@ -492,6 +525,7 @@ void ModuleUI::DrawCharacters(std::string& text, float& x, float scale, float y,
 
 		bool newLine = false;
 		u = (*c);
+
 		if (u == "\n")
 		{
 			line++;
