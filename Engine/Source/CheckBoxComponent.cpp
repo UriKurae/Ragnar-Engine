@@ -190,7 +190,6 @@ bool CheckboxComponent::OnLoad(JsonParsing& node)
 		actual = selectedMaterial;	
 		checked = true;
 	}
-	
 	return true;
 }
 

@@ -155,6 +155,8 @@ void InputActionComponent::OnEditor()
 
 bool InputActionComponent::Update(float dt)
 {
+	RG_PROFILING_FUNCTION("Input Action Component Update");
+
 	bool ret = true;
 
 	//Check if bindings have been pressed
