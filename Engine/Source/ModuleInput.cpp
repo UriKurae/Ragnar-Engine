@@ -46,7 +46,36 @@ bool ModuleInput::Init(JsonParsing& node)
 
 	FillScancodeNameList();
 
+	defaultCursor = CopyCursor(LoadCursor(0, IDC_ARROW));
+	LoadCursors();
+	currentCursor = CursorState::NORMAL;
+
 	return ret;
+}
+
+void ModuleInput::LoadCursors()
+{
+	std::string path;
+#ifdef DIST
+	ImportToLibrary();
+	path = "Library/Cursors/";
+#else
+	path = "Assets/Resources/Cursor/";
+#endif
+
+	cursors.push_back(defaultCursor);
+	cursors.push_back(LoadCursorIcon(std::string(path + "paul_crysknife.ico").c_str(), 32, 32));
+	cursors.push_back(LoadCursorIcon(std::string(path + "paul_throwing_knife.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "paul_throw_stone.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "paul_voice.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "chani_crysknife.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "chani_hunter_seeker.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "chani_spice_grenade.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "chani_camouflage.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_sword.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_stunner.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_whistle.ico").c_str(), 64, 64));
+	cursors.push_back(LoadCursorIcon(std::string(path + "stilgar_trap.ico").c_str(), 64, 64));
 }
 
 // Called every draw update
@@ -224,11 +253,18 @@ bool ModuleInput::PreUpdate(float dt)
 bool ModuleInput::CleanUp()
 {
 	DEBUG_LOG("Quitting SDL input event subsystem");
+
+	HCURSOR hCurDef = CopyCursor(defaultCursor);
+	SetSystemCursor(hCurDef, OCR_NORMAL);
+	DestroyCursor(hCurDef);
+
+	cursors.clear();
 	if (pad != NULL)
 	{
 		SDL_GameControllerClose(pad);
 		pad = nullptr;
 	}
+
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
@@ -362,4 +398,30 @@ HCURSOR ModuleInput::LoadCursorIcon(const char* iconPath, int width, int height)
 	icoInfo.yHotspot = 0;
 
 	return CreateIconIndirect(&icoInfo);
+}
+
+void ModuleInput::SetCursorState(int state)
+{
+	HCURSOR hCurDef = CopyCursor(cursors[state]);
+	SetSystemCursor(hCurDef, OCR_NORMAL);
+	DestroyCursor(hCurDef);
+}
+
+void ModuleInput::ImportToLibrary()
+{
+	std::vector<std::string> files;
+	app->fs->DiscoverFiles("Assets/Resources/Cursor/", files);
+
+	for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); ++it)
+	{
+		std::string ext = (*it).substr((*it).find_last_of("."), (*it).length());
+		if (ext == ".ico")
+		{
+			std::string assetsPath = "Assets/Resources/Cursor/";
+			assetsPath += (*it);
+			std::string libraryPath = "Library/Cursors/";
+			libraryPath += (*it);
+			CopyFileA(assetsPath.c_str(), libraryPath.c_str(), false);
+		}
+	}
 }

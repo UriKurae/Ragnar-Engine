@@ -213,6 +213,9 @@ public class PlayerManager : RagnarComponent
         // Entra aqu� si la habilidad tiene cargas o las cargas son -1 (Habilidad infinita (Solo cooldown)). Cambia el estado del player al de la habilidad que haya marcado.
         else if (!playableCharacter.abilities[(int)ability - 1].onCooldown)
         {
+
+            SetCursor(ability);
+
             playableCharacter.state = (State)ability;
             lightHab.GetComponent<Light>().intensity = 0f;
             // Dibujado del �rea de rango.
@@ -229,6 +232,69 @@ public class PlayerManager : RagnarComponent
         }
     }
 
+    private void SetCursor(State ability)
+    {
+        switch (characterSelected)
+        {
+            case 0:
+                if (ability == State.ABILITY_1)
+                {
+                    Input.SetCursorState(CursorState.PAUL_1);
+                }
+                else if (ability == State.ABILITY_2)
+                {
+                    Input.SetCursorState(CursorState.PAUL_2);
+                }
+                else if (ability == State.ABILITY_3)
+                {
+                    Input.SetCursorState(CursorState.PAUL_3);
+                }
+                else if (ability == State.ABILITY_4)
+                {
+                    Input.SetCursorState(CursorState.PAUL_4);
+                }
+                break;
+            case 1:
+                if (ability == State.ABILITY_1)
+                {
+                    Input.SetCursorState(CursorState.CHANI_1);
+                }
+                else if (ability == State.ABILITY_2)
+                {
+                    Input.SetCursorState(CursorState.CHANI_2);
+                }
+                else if (ability == State.ABILITY_3)
+                {
+                    Input.SetCursorState(CursorState.CHANI_3);
+                }
+                else if (ability == State.ABILITY_4)
+                {
+                    Input.SetCursorState(CursorState.CHANI_4);
+                }
+                break;
+            case 2:
+                if (ability == State.ABILITY_1)
+                {
+                    Input.SetCursorState(CursorState.STILGAR_1);
+                }
+                else if (ability == State.ABILITY_2)
+                {
+                    Input.SetCursorState(CursorState.STILGAR_2);
+                }
+                else if (ability == State.ABILITY_3)
+                {
+                    Input.SetCursorState(CursorState.STILGAR_3);
+                }
+                else if (ability == State.ABILITY_4)
+                {
+                    Input.SetCursorState(CursorState.STILGAR_4);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     private void DrawArea(int ability)
     {
         area[characterSelected].transform.localPosition = new Vector3(0, playableCharacter.abilities[ability - 1].transformY, 0);
@@ -240,8 +306,11 @@ public class PlayerManager : RagnarComponent
 
     private void CastOrCancel()
     {
+
         if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_UP)
         {
+            Input.SetCursorState(CursorState.NORMAL);
+
             switch (playableCharacter.state)
             {
                 case State.ABILITY_1:
@@ -388,11 +457,14 @@ public class PlayerManager : RagnarComponent
         // Se cancela el estado de la habilidad para que el �rea de rango deje de mostrarse.
         if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN)
         {
+            Input.SetCursorState(CursorState.NORMAL);
             playableCharacter.state = State.POSTCAST;
             players[characterSelected].GetComponent<Player>().SetState(State.POSTCAST);
 
             area[characterSelected].GetComponent<Light>().intensity = 0f;
             lightHab.GetComponent<Light>().intensity = 0f;
+
+            
         }
     }
 
