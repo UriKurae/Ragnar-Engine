@@ -490,6 +490,8 @@ void ModuleUI::CleanText(std::string& text)
 
 	for (int i = 0; i < text.length(); i++)
 	{
+		if ((text[i]) != 'Ã') continue;
+
 		if ((text[i + 1]) == '±') {
 			text.replace(i, 2, "ñ");
 			continue;
@@ -506,7 +508,6 @@ void ModuleUI::CleanText(std::string& text)
 			text.replace(i, 2, "é");
 			continue;
 		}
-
 		if ((text[i + 1]) == '³'){
 			text.replace(i, 2, "ó");
 			continue;
@@ -519,10 +520,8 @@ void ModuleUI::CleanText(std::string& text)
 			text.replace(i, 2, "ü");
 			continue;
 		}
-		if ((text[i]) == 'Ã'){
-			text.replace(i, 2, "í");
-			continue;
-		}
+		text.replace(i, 2, "í");
+
 	}
 
 	
