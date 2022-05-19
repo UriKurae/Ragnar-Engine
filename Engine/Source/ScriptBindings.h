@@ -408,6 +408,7 @@ MonoObject* Instantiate3DGameObject(MonoObject* name, int primitiveType, MonoObj
 MonoObject* InstancePrefab(MonoObject* name, bool begin = false)
 {
 	char* goName = mono_string_to_utf8(mono_object_to_string(name, 0));
+	DEBUG_LOG("Instantiating prefab %s", goName);
 
 	std::string	path;
 
@@ -423,6 +424,9 @@ MonoObject* InstancePrefab(MonoObject* name, bool begin = false)
 	mono_free(goName);
 
 	GameObject* go = PrefabManager::GetInstance()->LoadPrefab(path.c_str(), begin);
+	if (ScriptComponent* script = go->GetComponent<ScriptComponent>())
+		script->CallOnCreation();
+
 	return app->moduleMono->GoToCSGO(go);
 }
 

@@ -28,10 +28,7 @@ public class PlayerManager : RagnarComponent
     public float radius;
     public void Start()
 	{
-        foreach (Characters c in characters)
-        {
-            InternalCalls.InstancePrefab(c.prefabPath);   
-        }
+        // Characters instantiation done in level_x.cs
 
         players = GameObject.FindGameObjectsWithTag("Player");
         Vector3[] outlineColors = new Vector3[3] { new Vector3(0,1,0), new Vector3(0.5f,0,0.5f), new Vector3(0,0,1) };
@@ -623,6 +620,15 @@ public class PlayerManager : RagnarComponent
                 }
                 break;
 
+        }
+    }
+
+    public void SetCharacters(Characters[] chars)
+    {
+        characters = chars;
+        foreach (Characters c in characters)
+        {
+            InternalCalls.InstancePrefab(c.prefabPath);
         }
     }
 }

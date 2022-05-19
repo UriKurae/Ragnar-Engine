@@ -674,24 +674,3 @@ public enum MouseButton
     MIDDLE,
     RIGHT,
 }
-
-public enum DEControllerButton
-{
-    INVALID = -1,
-    A,
-    B,
-    X,
-    Y,
-    BACK,
-    GUIDE,
-    START,
-    LEFTSTICK,
-    RIGHTSTICK,
-    LEFTSHOULDER,
-    RIGHTSHOULDER,
-    DPAD_UP,
-    DPAD_DOWN,
-    DPAD_LEFT,
-    DPAD_RIGHT,
-    MAX
-}
