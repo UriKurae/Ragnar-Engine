@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 59501448,
+                    "pointer": 217544944,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -7090,7 +7090,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 59500440,
+                    "pointer": 217545088,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9530,7 +9530,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -9599,7 +9599,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10256,7 +10256,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10325,7 +10325,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10394,7 +10394,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
+                    "buttonText": "Text",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -13588,7 +13588,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 444731392,
+                    "pointer": 217548112,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -14789,7 +14789,7 @@
             "Name": "UIGame",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "Assets\/Prefabs\/UIGame.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14828,7 +14828,7 @@
             "Name": "UICharacterName",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14839,7 +14839,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14897,7 +14897,7 @@
             "Name": "UIStilgarImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14961,7 +14961,7 @@
             "Name": "UIChaniImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14972,7 +14972,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        5.5999999046325684,
+                        -35.400001525878906,
                         -4.9000000953674316
                     ],
                     "Scale": [
@@ -15025,7 +15025,7 @@
             "Name": "UIPaulImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15089,7 +15089,7 @@
             "Name": "ab4",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15100,7 +15100,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15220,7 +15220,7 @@
             "Name": "ab3",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15231,7 +15231,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15351,7 +15351,7 @@
             "Name": "ab2",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15362,7 +15362,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15482,7 +15482,7 @@
             "Name": "ab1",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15493,7 +15493,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15613,7 +15613,7 @@
             "Name": "UICharBor3",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15624,7 +15624,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15677,7 +15677,7 @@
             "Name": "UICharBor2",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15688,7 +15688,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15741,7 +15741,7 @@
             "Name": "UICharBor1",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15752,7 +15752,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15805,7 +15805,7 @@
             "Name": "UISelector",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15816,7 +15816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15869,7 +15869,7 @@
             "Name": "Char",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15933,7 +15933,7 @@
             "Name": "AbilImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15944,7 +15944,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -171.5,
+                        -191.5,
                         2.5999999046325684
                     ],
                     "Scale": [
@@ -15997,7 +15997,7 @@
             "Name": "UICharPhoto",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16008,7 +16008,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16061,7 +16061,7 @@
             "Name": "UIAbilityArray",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16072,7 +16072,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1841.5,
+                        1861.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16125,7 +16125,7 @@
             "Name": "CharFocusedImage",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16189,7 +16189,7 @@
             "Name": "CharFocusedText",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16200,7 +16200,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1907,
+                        1927,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16258,7 +16258,7 @@
             "Name": "AbilityImageApmliate",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16322,7 +16322,7 @@
             "Name": "abilityLeters",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16386,7 +16386,7 @@
             "Name": "UI Counter",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16397,7 +16397,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        264.5,
+                        284.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16517,7 +16517,7 @@
             "Name": "litleLive2",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16581,7 +16581,7 @@
             "Name": "litleLive1",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16645,7 +16645,7 @@
             "Name": "litleLive3",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16656,7 +16656,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        3,
+                        -38,
                         -5
                     ],
                     "Scale": [
@@ -16709,7 +16709,7 @@
             "Name": "PaulBg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16720,7 +16720,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.1000003814697266,
+                        -31.899999618530273,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -16773,7 +16773,7 @@
             "Name": "ChaniBg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16837,7 +16837,7 @@
             "Name": "StilgarBg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16848,7 +16848,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        10,
+                        -31,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -16901,7 +16901,7 @@
             "Name": "Ability1Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16912,7 +16912,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -160,
+                        -180,
                         -15
                     ],
                     "Scale": [
@@ -16965,7 +16965,7 @@
             "Name": "Ability2Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16976,7 +16976,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1938.5,
+                        1958.5,
                         -15
                     ],
                     "Scale": [
@@ -17029,7 +17029,7 @@
             "Name": "Ability3Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17040,7 +17040,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1938.5,
+                        1958.5,
                         -15
                     ],
                     "Scale": [
@@ -17093,7 +17093,7 @@
             "Name": "Ability4Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17104,7 +17104,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -4.5,
+                        36.5,
                         -15
                     ],
                     "Scale": [
@@ -17157,7 +17157,7 @@
             "Name": "PaulName",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17168,7 +17168,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        10.5,
+                        0,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17226,7 +17226,7 @@
             "Name": "ChaniName",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17295,7 +17295,7 @@
             "Name": "StilgarName",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17364,7 +17364,7 @@
             "Name": "AbilityBG1",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17428,7 +17428,7 @@
             "Name": "AbilityBG2",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17492,7 +17492,7 @@
             "Name": "AbilityBG3",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17556,7 +17556,7 @@
             "Name": "AbilityBG4",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17620,7 +17620,7 @@
             "Name": "UICooldowns",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "Assets\/Prefabs\/UICooldowns.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17659,7 +17659,7 @@
             "Name": "cd1",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17670,7 +17670,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        258,
+                        278,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17728,7 +17728,7 @@
             "Name": "cd2",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17739,7 +17739,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        108,
+                        128,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17797,7 +17797,7 @@
             "Name": "cd3",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17808,7 +17808,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -108,
+                        -128,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17866,7 +17866,7 @@
             "Name": "cd4",
             "Active": true,
             "Static": true,
-            "PrefabID": false,
+            "PrefabID": true,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17877,7 +17877,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -258,
+                        -278,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17926,6 +17926,134 @@
                     "textColor.g": 1,
                     "textColor.b": 1,
                     "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 794179230,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityLeft",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        -246,
+                        -192.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.15000000596046448,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 90,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_Left.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 720454653,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityRight",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        240.5,
+                        -193,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.15000000596046448,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 90,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_Right.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
                 }
             ]
         }
