@@ -566,7 +566,6 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	isKinematic = node.GetJsonBool("Kinematic");
 	trigger = node.GetJsonBool("Trigger");
 	fActivation = node.GetJsonBool("fActivation");
-	if (fActivation) body->setActivationState(DISABLE_DEACTIVATION);
 	mass = node.GetJsonNumber("Mass");
 	friction = node.GetJsonNumber("Friction");
 	restitution = node.GetJsonNumber("Restitution");
@@ -612,6 +611,8 @@ bool RigidBodyComponent::OnLoad(JsonParsing& node)
 	}
 	UpdateCollisionMesh();
 	SetPhysicsProperties();
+
+	if (fActivation) body->setActivationState(DISABLE_DEACTIVATION);
 
 	uint size = node.GetJsonNumber("SizeConstraint");
 	if (size > 0)
