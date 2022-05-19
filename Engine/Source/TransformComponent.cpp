@@ -25,15 +25,6 @@ TransformComponent::TransformComponent(GameObject* own)
 	owner = own;
 	localMatrix = float4x4::FromTRS(position, rotation, scale);
 
-	// Get components from owner
-	if (owner)
-	{
-		ownerMesh = owner->GetComponent<MeshComponent>();
-		ownerListener = owner->GetComponent<ListenerComponent>();
-		ownerAudioSource = owner->GetComponent<AudioSourceComponent>();
-		ownerReverbZone = owner->GetComponent<AudioReverbZoneComponent>();
-	}
-
 	if (owner->GetParent() != nullptr)
 	{
 		TransformComponent* tr = owner->GetParent()->GetComponent<TransformComponent>();
@@ -98,14 +89,17 @@ bool TransformComponent::Update(float dt)
 
 		SetAABB();
 
-		if (ownerListener != nullptr)
-			ownerListener->ChangePosition();
+		ListenerComponent* listener = owner->GetComponent<ListenerComponent>();
+		if (listener != nullptr)
+			listener->ChangePosition();
 
-		if (ownerAudioSource != nullptr)
-			ownerAudioSource->ChangePosition();
+		AudioSourceComponent* audioSource = owner->GetComponent<AudioSourceComponent>();
+		if (audioSource != nullptr)
+			audioSource->ChangePosition();
 
-		if (ownerReverbZone != nullptr)
-			ownerReverbZone->ChangePosition();
+		AudioReverbZoneComponent* reverb = owner->GetComponent<AudioReverbZoneComponent>();
+		if (reverb != nullptr)
+			reverb->ChangePosition();
 
 		changeTransform = false;
 	}
@@ -237,9 +231,9 @@ void TransformComponent::SetAABB()
 
 void TransformComponent::UpdateBoundingBox()
 {
-	if (ownerMesh)
+	if (owner->GetComponent<MeshComponent>())
 	{
-		OBB newObb = ownerMesh->GetLocalAABB().ToOBB();
+		OBB newObb = owner->GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
 		newObb.Transform(globalMatrix);
 		owner->SetAABB(newObb);
 		//owner->GetComponent<MeshComponent>()->CalculateCM();

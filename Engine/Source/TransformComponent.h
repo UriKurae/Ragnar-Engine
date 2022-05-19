@@ -17,11 +17,6 @@ enum class Mode
 	WORLD
 };
 
-class MeshComponent;
-class ListenerComponent;
-class AudioSourceComponent;
-class AudioReverbZoneComponent;
-
 class TransformComponent : public Component
 {
 public:
@@ -83,12 +78,6 @@ private:
 
 	float4x4 globalMatrix;
 	float4x4 localMatrix;
-
-	// Owner components
-	MeshComponent* ownerMesh;
-	ListenerComponent* ownerListener;
-	AudioSourceComponent* ownerAudioSource;
-	AudioReverbZoneComponent* ownerReverbZone;
 
 	bool changeTransform = false;
 };

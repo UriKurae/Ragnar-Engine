@@ -45,7 +45,7 @@ void AudioReverbZoneComponent::CompileBuffers()
 	// Configure buffers
 	float3 corners[8];
 	reverbBoxZone.GetCornerPoints(corners);
-	constexpr unsigned int indices[24] =
+	static unsigned int indices[24] =
 	{
 		0,1,
 		1,3,
