@@ -1845,7 +1845,7 @@ public class pauseMenuButton : RagnarComponent
         {
             if (actualDT < 1)
             {
-				actualDT+=Time.deltaTime;
+				actualDT+=(Time.deltaTime*2);
 
 				if (actualDT < 0.5f)
                 {
