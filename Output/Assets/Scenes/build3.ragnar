@@ -219,7 +219,7 @@
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
-                    "Lock": true,
+                    "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
                         -0.65934783220291138,
