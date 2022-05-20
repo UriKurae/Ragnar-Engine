@@ -83,6 +83,7 @@ public class EnemyManager : RagnarComponent
                     {
                         case EnemyType.BASIC:
                             enemyGOs[i].ChangeMesh("1_modeldeath");
+                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
                             break;
                         //TODO: Check if drone destroyed
                         case EnemyType.AIR:
@@ -90,9 +91,11 @@ public class EnemyManager : RagnarComponent
                             break;
                         case EnemyType.TANK:
                             enemyGOs[i].ChangeMesh("3_modeldeath");
+                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
                             break;
                         case EnemyType.UNDISTRACTABLE:
                             enemyGOs[i].ChangeMesh("2_modeldeath");
+                            enemyGOs[i].GetComponent<BasicEnemy>().stunPartSys.Pause();
                             break;
                     };
 

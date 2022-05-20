@@ -55,7 +55,7 @@ public class TankEnemy : RagnarComponent
     AudioSource sceneAudioSource;
 
     GameObject[] childs;
-    ParticleSystem stunPartSys;
+    public ParticleSystem stunPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");

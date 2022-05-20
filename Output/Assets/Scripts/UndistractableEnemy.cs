@@ -54,7 +54,7 @@ public class UndistractableEnemy : RagnarComponent
     AudioSource audioSource;
 
     GameObject[] childs;
-    ParticleSystem stunPartSys;
+    public ParticleSystem stunPartSys;
     public void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");

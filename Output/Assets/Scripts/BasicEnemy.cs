@@ -62,7 +62,7 @@ public class BasicEnemy : RagnarComponent
     private float angleOffset = 0;
 
     GameObject[] childs;
-    ParticleSystem stunPartSys;
+    public ParticleSystem stunPartSys;
 
     public void Start()
     {
