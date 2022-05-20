@@ -144,7 +144,8 @@ void TextComponent::OnEditor()
 float2 TextComponent::GetParentPosition()
 {
 	float3 position = ownerTransform2DComponent->GetPosition();
-	return { position.x/* - (textToShow.textt.size() * 12 * textToShow.Scale)*/, position.y/* - 5*/ };
+	return { position.x/2, position.y/2 };
+	
 }
 bool TextComponent::OnLoad(JsonParsing& node)
 {
