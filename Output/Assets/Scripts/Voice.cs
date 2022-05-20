@@ -22,9 +22,10 @@ public class Voice : RagnarComponent
 		selectedEnemy = EnemyFound();
 		if (selectedEnemy != null)
 		{
-			ActivateVoice();
-			selectedEnemy.GetComponent<BasicEnemy>().initialPos = selectedEnemy.transform.globalPosition;
-			selectedEnemy.GetComponent<BasicEnemy>().initialRot = selectedEnemy.transform.globalRotation;
+			BasicEnemy enemyScript = selectedEnemy.GetComponent<BasicEnemy>();
+			AddNewEnemyToPlayer();
+			enemyScript.initialPos = selectedEnemy.transform.globalPosition;
+			enemyScript.initialRot = selectedEnemy.transform.globalRotation;
 		}
 		InternalCalls.Destroy(gameObject);
 	}

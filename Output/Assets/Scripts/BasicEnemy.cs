@@ -4,6 +4,14 @@ using RagnarEngine;
 
 public class BasicEnemy : RagnarComponent
 {
+
+    // Components
+
+    private Animation animationComponent;
+    private Rigidbody rb;
+    private AudioSource audioComponent;
+
+    /////////////
     public int velocity = 1000;
 
     public NavAgent agents;
@@ -58,6 +66,12 @@ public class BasicEnemy : RagnarComponent
 
     public void Start()
     {
+        // Get all Components
+        animationComponent = gameObject.GetComponent<Animation>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        audioComponent = gameObject.GetComponent<AudioSource>();
+
+
         players = GameObject.FindGameObjectsWithTag("Player");
         SceneAudio = GameObject.Find("AudioLevel1");
         offset = gameObject.GetSizeAABB();
@@ -66,7 +80,7 @@ public class BasicEnemy : RagnarComponent
 
         if (state != EnemyState.DEATH)
         {
-            gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+            animationComponent.PlayAnimation("Idle");
             if (waypoints.Count != 0)
             {
                 GotoNextPoint();
@@ -117,7 +131,7 @@ public class BasicEnemy : RagnarComponent
                             agents.CalculatePath(initialPos);
                             if(agents.MovePath())
                             {
-                                gameObject.GetComponent<Rigidbody>().SetBodyRotation(initialRot);
+                                rb.SetBodyRotation(initialRot);
                                 returning = false;
                             }
                         }
@@ -227,7 +241,7 @@ public class BasicEnemy : RagnarComponent
                             break;
                         }
                     }
-                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                    animationComponent.PlayAnimation("Dying");
                 }
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
@@ -236,7 +250,7 @@ public class BasicEnemy : RagnarComponent
             {
                 if (deathTimer == -1f)
                 {
-                    gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
+                    audioComponent.PlayClip("EBASIC_BULLETHIT");
                     deathTimer = 2f;
                     for (int i = 0; i < childs.Length; ++i)
                     {
@@ -246,7 +260,7 @@ public class BasicEnemy : RagnarComponent
                             break;
                         }
                     }
-                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                    animationComponent.PlayAnimation("Dying");
                 }
             }
             if (other.gameObject.name == "HunterSeeker")
@@ -254,7 +268,7 @@ public class BasicEnemy : RagnarComponent
                 if (deathTimer == -1f)
                 {
                     deathTimer = 5f;
-                    gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                    animationComponent.PlayAnimation("Dying");
                 }
 
                 // WHEN RUNES FUNCTIONAL
@@ -280,7 +294,7 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
-                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+                audioComponent.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 stunPartSys.Play();
             }
@@ -289,7 +303,7 @@ public class BasicEnemy : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("WPN_SWORDHIT");
+                audioComponent.PlayClip("WPN_SWORDHIT");
                 deathTimer = 2f;
                 for (int i = 0; i < childs.Length; ++i)
                 {
@@ -299,7 +313,7 @@ public class BasicEnemy : RagnarComponent
                         break;
                     }
                 }
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                animationComponent.PlayAnimation("Dying");
             }
             if (other.gameObject.name == "Whistle")
             {
@@ -314,7 +328,7 @@ public class BasicEnemy : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
-                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+                audioComponent.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
                 GameObject.Find("ElectricParticles").GetComponent<ParticleSystem>().Play();
                 stunPartSys.Play();
@@ -367,18 +381,19 @@ public class BasicEnemy : RagnarComponent
 
     private void Shoot()
     {
-        SceneAudio.GetComponent<AudioSource>().SetState("MUSIC", "LEVEL1_BATTLE");
+        audioComponent.SetState("MUSIC", "LEVEL1_BATTLE");
 
         if (canShoot)
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SHOTGUN");
+            audioComponent.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 1f;
             InternalCalls.InstancePrefab("EnemyBullet", true);
-            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
-            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
-            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().offset = offset;
+            EnemyBullet enemyBullet = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+            enemyBullet.enemy = gameObject;
+            enemyBullet.index = index;
+            enemyBullet.offset = offset;
         }
 
         if (!canShoot)
@@ -408,7 +423,7 @@ public class BasicEnemy : RagnarComponent
     public void GotoNextPoint()
     {
         //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
-        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        animationComponent.PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Count;
     }
@@ -424,7 +439,7 @@ public class BasicEnemy : RagnarComponent
         {
             if (stoppedTime >= 0)
             {
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("EBASIC_WALKSAND");
+                audioComponent.StopCurrentClip("EBASIC_WALKSAND");
                 stoppedTime -= Time.deltaTime;
                 if (stoppedTime < 0)
                 {
@@ -453,15 +468,15 @@ public class BasicEnemy : RagnarComponent
 
         Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 
-        gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
+        rb.SetBodyRotation(newRot);
 
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        animationComponent.PlayAnimation("Idle");
     }
 
     public void Stun(float timeStunned)
     {
         stunned = true;
         stunnedTimer = timeStunned;
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        animationComponent.PlayAnimation("Idle");
     }
 }
