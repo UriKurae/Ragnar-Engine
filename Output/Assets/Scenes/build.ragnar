@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 33595360,
+                    "pointer": 164095192,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -144,19 +144,19 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -57.19189453125,
+                        -52.285701751708984,
                         0,
-                        100
+                        190.0616455078125
                     ],
                     "Quaternion": [
                         0,
-                        0.94183731079101562,
+                        0.89908689260482788,
                         0,
-                        0.33606910705566406
+                        -0.43777015805244446
                     ],
                     "RotationEditor": [
                         -3.1415927410125732,
-                        0.68548023700714111,
+                        -0.9062340259552002,
                         -3.1415927410125732
                     ],
                     "Scale": [
@@ -183,15 +183,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        3.814697265625e-05,
-                        46.120803833007812,
-                        -41.927986145019531
+                        0,
+                        55,
+                        -50
                     ],
                     "Quaternion": [
-                        0.34202015399932861,
-                        -2.7070434782672237e-08,
-                        1.5857482438264014e-08,
-                        0.93969273567199707
+                        0.34202012419700623,
+                        0,
+                        0,
+                        0.93969261646270752
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -199,9 +199,9 @@
                         -0
                     ],
                     "Scale": [
-                        1.4142104387283325,
+                        1.4142105579376221,
                         1.0000002384185791,
-                        1.0000007152557373
+                        1.0000004768371582
                     ]
                 },
                 {
@@ -210,34 +210,34 @@
                     "Vertical Fov": 0.42143398523330688,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -83.734916687011719,
-                        46.120803833007812,
-                        132.45793151855469
+                        -12.925331115722656,
+                        55,
+                        220.89817810058594
                     ],
                     "Type": 3,
-                    "Zoom": -8,
+                    "Zoom": -18,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
                     "Lock": false,
                     "Free Movement": true,
                     "Default Target Pos": [
-                        -57.19189453125,
+                        -52.285701751708984,
                         0,
-                        100
+                        190.0616455078125
                     ],
                     "Movement Speed": 0.25,
                     "Rotation Speed": 0.80000001192092896,
                     "Radius": 20,
-                    "Horizontal Angle": 140.72486877441406,
+                    "Horizontal Angle": 231.92340087890625,
                     "Shake Strength": 0.60000002384185791,
                     "Shake Duration": 1,
                     "Shake Smooth": 0,
                     "Limits": [
-                        -80,
+                        -90,
                         -50,
                         60,
-                        100
+                        195
                     ]
                 }
             ]
@@ -295,75 +295,6 @@
                             "2": "UISELECT"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "UUID": 1651812048,
-            "Parent UUID": 417171234,
-            "Name": "CollisionMap",
-            "Active": true,
-            "Static": true,
-            "PrefabID": false,
-            "Prefab Path": "None",
-            "tag": "Untagged",
-            "layer": "Default",
-            "Is Interactuable": false,
-            "Components": [
-                {
-                    "Type": 0,
-                    "Active": true,
-                    "Position": [
-                        -60.124015808105469,
-                        2.2085428237915039,
-                        110.69400024414062
-                    ],
-                    "Quaternion": [
-                        0,
-                        -0.21454648673534393,
-                        0,
-                        0.97671377658843994
-                    ],
-                    "RotationEditor": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "Scale": [
-                        1,
-                        1,
-                        1
-                    ]
-                },
-                {
-                    "Type": 11,
-                    "CollisionType": 0,
-                    "Size": [
-                        7.9000000953674316,
-                        3.2999999523162842,
-                        3.4000000953674316
-                    ],
-                    "Gravity": false,
-                    "Kinematic": false,
-                    "Trigger": false,
-                    "fActivation": false,
-                    "Mass": 0,
-                    "Friction": 1,
-                    "Restitution": 0.20000000298023224,
-                    "MovementConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "RotationConstraint": [
-                        1,
-                        1,
-                        1
-                    ],
-                    "SizeConstraint": 0,
-                    "LinearDamping": 0,
-                    "AngularDamping": 0,
-                    "Active": true
                 }
             ]
         },
@@ -604,7 +535,7 @@
             "Parent UUID": 1179485366,
             "Name": "Decoration",
             "Active": true,
-            "Static": false,
+            "Static": true,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
@@ -3632,7 +3563,7 @@
             "Parent UUID": 2111321869,
             "Name": "Floor_05",
             "Active": true,
-            "Static": true,
+            "Static": false,
             "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Ground",
@@ -3644,7 +3575,7 @@
                     "Active": true,
                     "Position": [
                         150.14437866210938,
-                        -0.70813846588134766,
+                        0,
                         -78.662551879882812
                     ],
                     "Quaternion": [
@@ -3707,8 +3638,8 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -91.523597717285156,
-                        -0.16233444213867188,
+                        -83.747962951660156,
+                        0,
                         170.53871154785156
                     ],
                     "Quaternion": [
@@ -3718,9 +3649,9 @@
                         1
                     ],
                     "RotationEditor": [
+                        -0,
                         0,
-                        0,
-                        0
+                        -0
                     ],
                     "Scale": [
                         1,
@@ -7042,7 +6973,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1997.5,
+                        1987,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -7090,7 +7021,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 33598240,
+                    "pointer": 396817808,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -8197,7 +8128,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2308,
+                        2297.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8325,7 +8256,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2098,
+                        2087.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8456,7 +8387,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2089.5,
+                        2079,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8520,7 +8451,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2316.5,
+                        2306,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8651,7 +8582,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2115,
+                        2104.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8782,7 +8713,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2115,
+                        2104.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8846,7 +8777,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2115,
+                        2104.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -8977,7 +8908,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2115,
+                        2104.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9041,7 +8972,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2115,
+                        2104.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9172,7 +9103,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2115,
+                        2104.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9236,7 +9167,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2204.5,
+                        2194,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -9320,7 +9251,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2204.5,
+                        2194,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -9404,7 +9335,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2204.5,
+                        2194,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -9488,7 +9419,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2230,
+                        2219.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -9557,7 +9488,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2230,
+                        2219.5,
                         36.099998474121094
                     ],
                     "Scale": [
@@ -9626,7 +9557,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9651,7 +9582,7 @@
                     "Type": 19,
                     "Position": [
                         -0.727996826171875,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9735,7 +9666,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9760,7 +9691,7 @@
                     "Type": 19,
                     "Position": [
                         -5.5,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9844,7 +9775,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9869,7 +9800,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9953,7 +9884,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -9978,7 +9909,7 @@
                     "Type": 19,
                     "Position": [
                         -275,
-                        2299.5,
+                        2289,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10062,7 +9993,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        2308,
+                        2297.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10214,7 +10145,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1968.5,
+                        1958,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10283,7 +10214,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1968.5,
+                        1958,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10352,7 +10283,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1968.5,
+                        1958,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -10421,7 +10352,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -10552,7 +10483,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -10683,7 +10614,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -10814,7 +10745,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -10945,7 +10876,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11076,7 +11007,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11207,7 +11138,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11338,7 +11269,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11469,7 +11400,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11600,7 +11531,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11731,7 +11662,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11862,7 +11793,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -11993,7 +11924,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12124,7 +12055,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12255,7 +12186,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12386,7 +12317,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12517,7 +12448,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12648,7 +12579,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12779,7 +12710,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -12910,7 +12841,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -13041,7 +12972,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        52.599998474121094,
+                        42.099998474121094,
                         0
                     ],
                     "Scale": [
@@ -13588,7 +13519,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 492501368,
+                    "pointer": 474791128,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -14789,7 +14720,7 @@
             "Name": "UIGame",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UIGame.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -14828,7 +14759,7 @@
             "Name": "UICharacterName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14839,7 +14770,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1877,
+                        1866.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14897,7 +14828,7 @@
             "Name": "UIStilgarImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14961,7 +14892,7 @@
             "Name": "UIChaniImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -14972,7 +14903,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -35.400001525878906,
+                        -24.900001525878906,
                         -4.9000000953674316
                     ],
                     "Scale": [
@@ -15025,7 +14956,7 @@
             "Name": "UIPaulImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15089,7 +15020,7 @@
             "Name": "ab4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15100,7 +15031,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1877,
+                        1866.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15220,7 +15151,7 @@
             "Name": "ab3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15231,7 +15162,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1877,
+                        1866.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15351,7 +15282,7 @@
             "Name": "ab2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15362,7 +15293,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1877,
+                        1866.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15482,7 +15413,7 @@
             "Name": "ab1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15493,7 +15424,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1877,
+                        1866.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15613,7 +15544,7 @@
             "Name": "UICharBor3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15624,7 +15555,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1868.5,
+                        1858,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15677,7 +15608,7 @@
             "Name": "UICharBor2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15688,7 +15619,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1868.5,
+                        1858,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15741,7 +15672,7 @@
             "Name": "UICharBor1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15752,7 +15683,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1868.5,
+                        1858,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15805,7 +15736,7 @@
             "Name": "UISelector",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15816,7 +15747,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1868.5,
+                        1858,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15869,7 +15800,7 @@
             "Name": "Char",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15933,7 +15864,7 @@
             "Name": "AbilImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -15944,7 +15875,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -191.5,
+                        -181,
                         2.5999999046325684
                     ],
                     "Scale": [
@@ -15997,7 +15928,7 @@
             "Name": "UICharPhoto",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16008,7 +15939,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1868.5,
+                        1858,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16061,7 +15992,7 @@
             "Name": "UIAbilityArray",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16072,7 +16003,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1861.5,
+                        1851,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16125,7 +16056,7 @@
             "Name": "CharFocusedImage",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16135,9 +16066,9 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        3.1632928739203712e+38,
                         0,
-                        -11.899999618530273
+                        -1.3999996185302734,
+                        0
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -16189,7 +16120,7 @@
             "Name": "CharFocusedText",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16200,7 +16131,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1927,
+                        1916.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16258,7 +16189,7 @@
             "Name": "AbilityImageApmliate",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16268,9 +16199,9 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        3.1632928739203712e+38,
                         0,
-                        -26.399999618530273
+                        -15.899999618530273,
+                        0
                     ],
                     "Scale": [
                         0.1666666716337204,
@@ -16322,7 +16253,7 @@
             "Name": "abilityLeters",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16386,7 +16317,7 @@
             "Name": "UI Counter",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16397,7 +16328,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        284.5,
+                        274,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16517,7 +16448,7 @@
             "Name": "litleLive2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16581,7 +16512,7 @@
             "Name": "litleLive1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16645,7 +16576,7 @@
             "Name": "litleLive3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16656,7 +16587,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -38,
+                        -27.5,
                         -5
                     ],
                     "Scale": [
@@ -16709,7 +16640,7 @@
             "Name": "PaulBg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16720,7 +16651,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -31.899999618530273,
+                        -21.399999618530273,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -16773,7 +16704,7 @@
             "Name": "ChaniBg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16837,7 +16768,7 @@
             "Name": "StilgarBg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16848,7 +16779,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -31,
+                        -20.5,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -16901,7 +16832,7 @@
             "Name": "Ability1Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16912,7 +16843,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -180,
+                        -169.5,
                         -15
                     ],
                     "Scale": [
@@ -16965,7 +16896,7 @@
             "Name": "Ability2Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -16976,7 +16907,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1958.5,
+                        1948,
                         -15
                     ],
                     "Scale": [
@@ -17029,7 +16960,7 @@
             "Name": "Ability3Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17040,7 +16971,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1958.5,
+                        1948,
                         -15
                     ],
                     "Scale": [
@@ -17093,7 +17024,7 @@
             "Name": "Ability4Bg",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17104,7 +17035,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        36.5,
+                        26,
                         -15
                     ],
                     "Scale": [
@@ -17157,7 +17088,7 @@
             "Name": "PaulName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17226,7 +17157,7 @@
             "Name": "ChaniName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17295,7 +17226,7 @@
             "Name": "StilgarName",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17364,7 +17295,7 @@
             "Name": "AbilityBG1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17428,7 +17359,7 @@
             "Name": "AbilityBG2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17492,7 +17423,7 @@
             "Name": "AbilityBG3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17556,7 +17487,7 @@
             "Name": "AbilityBG4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17620,7 +17551,7 @@
             "Name": "UICooldowns",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "Assets\/Prefabs\/UICooldowns.rgprefab",
             "tag": "Untagged",
             "layer": "Default",
@@ -17659,7 +17590,7 @@
             "Name": "cd1",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17670,7 +17601,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        278,
+                        267.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17728,7 +17659,7 @@
             "Name": "cd2",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17739,7 +17670,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        128,
+                        117.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17797,7 +17728,7 @@
             "Name": "cd3",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17808,7 +17739,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -128,
+                        -117.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17866,7 +17797,7 @@
             "Name": "cd4",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17877,7 +17808,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -278,
+                        -267.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17935,7 +17866,7 @@
             "Name": "AbilityLeft",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -17945,9 +17876,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
-                        -192.5,
-                        -10.399999618530273
+                        0.10000038146972656,
+                        0
                     ],
                     "Scale": [
                         0.083333335816860199,
@@ -17999,7 +17929,7 @@
             "Name": "AbilityRight",
             "Active": true,
             "Static": true,
-            "PrefabID": true,
+            "PrefabID": false,
             "Prefab Path": "None",
             "tag": "Untagged",
             "layer": "Default",
@@ -18009,9 +17939,8 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
-                        -193,
-                        -10.399999618530273
+                        0.10000038146972656,
+                        0
                     ],
                     "Scale": [
                         0.083333335816860199,
@@ -18054,6 +17983,1236 @@
                     "Type": 13,
                     "alpha": 1,
                     "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 1127960407,
+            "Parent UUID": 417171234,
+            "Name": "RootNode",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1205518201,
+            "Parent UUID": 1127960407,
+            "Name": "Tutorial",
+            "Active": true,
+            "Static": false,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "UUID": 1709086894,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low46",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        9.9097919464111328,
+                        23.334480285644531,
+                        170.61215209960938
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low46.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 2136629455,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low44",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        31.752336502075195,
+                        21.330528259277344,
+                        218.28025817871094
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.89591753482818604,
+                        0,
+                        -0.44422045350074768
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low44.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 390719736,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low45",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -111.17425537109375,
+                        16.823905944824219,
+                        223.42866516113281
+                    ],
+                    "Quaternion": [
+                        -0.0093520944938063622,
+                        -0.46051257848739624,
+                        -0.018021753057837486,
+                        0.88742095232009888
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        0.99999994039535522,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low45.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 805034307,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low44",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -163.31150817871094,
+                        10.673864364624023,
+                        171.93601989746094
+                    ],
+                    "Quaternion": [
+                        0.88745391368865967,
+                        -0.010372285731136799,
+                        0.46074831485748291,
+                        -0.0053851520642638206
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low44.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1218165321,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low40",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -79.336990356445312,
+                        1.4033336639404297,
+                        152.34800720214844
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.2796865701675415,
+                        0,
+                        0.96009135246276855
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low40.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1698619842,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low39",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -46.845001220703125,
+                        1.4033336639404297,
+                        192.07598876953125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.99957472085952759,
+                        0,
+                        0.029160257428884506
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low40.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1956287163,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low38",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -50.264686584472656,
+                        1.1715333461761475,
+                        94.217140197753906
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.98829638957977295,
+                        0,
+                        0.15254592895507812
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/prop_smallrocks_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_smallrocks_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low38.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 263498267,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low37",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -70.791511535644531,
+                        4.1243362426757812,
+                        189.56086730957031
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.92880630493164062,
+                        0,
+                        0.37056559324264526
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low37.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 645647936,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low36",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -66.606170654296875,
+                        7.568537712097168,
+                        203.38458251953125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low36.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1073608223,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low36",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -95.546318054199219,
+                        4.2315406799316406,
+                        154.49053955078125
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.92880630493164062,
+                        0,
+                        0.37056559324264526
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low36.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1472745416,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low35",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -49.652641296386719,
+                        3.3293666839599609,
+                        160.73597717285156
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0.70710676908493042,
+                        0.70710676908493042
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low35.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1868819285,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low34",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -47.973148345947266,
+                        11.504787445068359,
+                        231.89207458496094
+                    ],
+                    "Quaternion": [
+                        0.70705622434616089,
+                        0.69778245687484741,
+                        -0.11445387452840805,
+                        0.0084536029025912285
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low34.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 114763909,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low33",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -12.242474555969238,
+                        15.404747009277344,
+                        176.64802551269531
+                    ],
+                    "Quaternion": [
+                        0.54711335897445679,
+                        0.54711335897445679,
+                        0.44795867800712585,
+                        0.44795864820480347
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low33.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 556926880,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low35",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -93.549522399902344,
+                        11.499602317810059,
+                        189.0767822265625
+                    ],
+                    "Quaternion": [
+                        0,
+                        -0.65507060289382935,
+                        0,
+                        0.75556772947311401
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        0.99999994039535522,
+                        1,
+                        0.99999994039535522
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low35.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 945829786,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low32",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -94.72674560546875,
+                        1.1837563514709473,
+                        112.66297912597656
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low32.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1383606634,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium2_low43",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -123.31308746337891,
+                        8.7116622924804688,
+                        132.40251159667969
+                    ],
+                    "Quaternion": [
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium2_low43.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1751623240,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low42",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -54.302284240722656,
+                        11.67298412322998,
+                        136.85287475585938
+                    ],
+                    "Quaternion": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low42.fbx",
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "UUID": 1675503,
+            "Parent UUID": 1205518201,
+            "Name": "RockMedium1_low43",
+            "Active": true,
+            "Static": true,
+            "PrefabID": false,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": false,
+            "Components": [
+                {
+                    "Type": 0,
+                    "Active": true,
+                    "Position": [
+                        -41.525657653808594,
+                        3.7503335475921631,
+                        170.70979309082031
+                    ],
+                    "Quaternion": [
+                        0,
+                        0.92880630493164062,
+                        0,
+                        0.37056559324264526
+                    ],
+                    "RotationEditor": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "Scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_color.png",
+                    "Normal Map Path": "Assets\/Resources\/Levels\/Level1\/Textures\/prop_mediumrock_normal.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 1,
+                    "Path": "Assets\/Resources\/Levels\/Level1\/tutorial_lvl1__RockMedium1_low43.fbx",
+                    "Active": true
                 }
             ]
         }
