@@ -197,7 +197,7 @@ public class BasicEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
                 {
                     Debug.Log("BackStab enemy");
-                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy", gameObject.transform.globalPosition);
                     backstab = false;
                 }
                 if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
@@ -388,8 +388,9 @@ public class BasicEnemy : RagnarComponent
             audioComponent.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 1f;
-            InternalCalls.InstancePrefab("EnemyBullet", true);
-            EnemyBullet enemyBullet = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 0.5f;
+            EnemyBullet enemyBullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true).GetComponent<EnemyBullet>();
             enemyBullet.enemy = gameObject;
             enemyBullet.index = index;
             enemyBullet.offset = offset;

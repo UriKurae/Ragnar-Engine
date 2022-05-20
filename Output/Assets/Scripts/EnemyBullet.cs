@@ -16,11 +16,13 @@ public class EnemyBullet : RagnarComponent
 
 		Vector3 pos = enemy.transform.globalPosition;
 		pos.y += 0.5f;
-		gameObject.transform.localPosition = pos;
+		// Done when instancing prefab
+		//gameObject.transform.localPosition = pos;
 
 		Rigidbody bulletRb = gameObject.GetComponent<Rigidbody>();
 		bulletRb.IgnoreCollision(enemy, true);
-		bulletRb.SetBodyPosition(pos);
+		// Done when instancing prefab
+		//bulletRb.SetBodyPosition(pos);
 
 		Vector3 diff = players[index].transform.globalPosition - gameObject.transform.globalPosition;
 		diff.y = gameObject.transform.globalPosition.y;

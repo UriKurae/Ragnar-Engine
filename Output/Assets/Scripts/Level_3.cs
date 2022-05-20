@@ -415,12 +415,12 @@ public class Level_3 : RagnarComponent
         enemies[13].waypoints.Add(GameObject.Find("20"));
         ///////////////////////////////////////////////////////////////////
 
-        GameObject pm = InternalCalls.InstancePrefab("PlayerManager");
+        GameObject pm = InternalCalls.InstancePrefab("PlayerManager", Vector3.zero);
         pm.GetComponent<PlayerManager>().characters = characters;
-        GameObject em = InternalCalls.InstancePrefab("EnemyManager");
+        GameObject em = InternalCalls.InstancePrefab("EnemyManager", Vector3.zero);
         em.GetComponent<EnemyManager>().enemies = enemies;
 
-        InternalCalls.InstancePrefab("Dialogue");
+        InternalCalls.InstancePrefab("Dialogue", Vector3.zero);
     }
     public void Update()
 	{

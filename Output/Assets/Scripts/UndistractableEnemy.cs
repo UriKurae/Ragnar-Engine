@@ -187,7 +187,7 @@ public class UndistractableEnemy : RagnarComponent
                 if (Input.GetMouseClick(MouseButton.LEFT) == KeyState.KEY_DOWN && backstab)
                 {
                     Debug.Log("BackStab enemy");
-                    InternalCalls.InstancePrefab("BackStabEnemy");
+                    InternalCalls.InstancePrefab("BackStabEnemy", gameObject.transform.globalPosition);
                     backstab = false;
                 }
                 if (Input.GetMouseClick(MouseButton.RIGHT) == KeyState.KEY_DOWN && backstab)
@@ -338,8 +338,9 @@ public class UndistractableEnemy : RagnarComponent
             audioSource.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 4f;
-            InternalCalls.InstancePrefab("EnemyBullet", true);
-            EnemyBullet bulletScript = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+            Vector3 pos = gameObject.transform.globalPosition;
+            pos.y += 0.5f;
+            EnemyBullet bulletScript = InternalCalls.InstancePrefab("EnemyBullet", pos, true).GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
             bulletScript.index = index;
             bulletScript.offset = offset;

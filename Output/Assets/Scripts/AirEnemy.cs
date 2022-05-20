@@ -234,7 +234,8 @@ public class AirEnemy : RagnarComponent
             //bullet.GetComponent<EnemyBullet>().index = index;
             //bullet.GetComponent<EnemyBullet>().offset = offset;
 
-            InternalCalls.InstancePrefab("EnemyBullet", true);
+            
+            InternalCalls.InstancePrefab("EnemyBullet", gameObject.transform.globalPosition, true);
             bulletScript = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
             bulletScript.index = index;
