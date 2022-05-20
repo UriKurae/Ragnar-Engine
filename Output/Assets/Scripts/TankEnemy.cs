@@ -133,6 +133,7 @@ public class TankEnemy : RagnarComponent
 
                 if (deathTimer >= 0)
                 {
+                    state = EnemyState.IS_DYING;
                     deathTimer -= Time.deltaTime;
                     if (deathTimer < 0)
                     {

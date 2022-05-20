@@ -71,10 +71,6 @@ public class EnemyManager : RagnarComponent
             {
                 if ((enemyGOs[i].GetComponent<BasicEnemy>().pendingToDelete && enemyGOs[i].GetComponent<BasicEnemy>().ToString() == "BasicEnemy") || (enemyGOs[i].GetComponent<AirEnemy>().pendingToDelete && enemyGOs[i].GetComponent<AirEnemy>().ToString() == "AirEnemy") || (enemyGOs[i].GetComponent<TankEnemy>().pendingToDelete && enemyGOs[i].GetComponent<TankEnemy>().ToString() == "TankEnemy") || (enemyGOs[i].GetComponent<UndistractableEnemy>().pendingToDelete && enemyGOs[i].GetComponent<UndistractableEnemy>().ToString() == "UndistractableEnemy"))
                 {
-                    
-                    Debug.Log(enemyGOs[i].name.ToString());
-                    ChangeEnemyState(enemyGOs[i], EnemyState.IS_DYING);
-                    enemies[i].state = EnemyState.IS_DYING;
                     deadEnemies.Add(enemyGOs[i]);
                     enemyGOs[i].transform.globalRotation = enemyGOs[i].GetComponent<Rigidbody>().GetBodyRotation();
                     enemyGOs[i].DeleteComponent<Rigidbody>(enemyGOs[i].GetComponent<Rigidbody>());
