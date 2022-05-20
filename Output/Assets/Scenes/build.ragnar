@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 394037360,
+                    "pointer": 33595360,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -150,7 +150,7 @@
                     ],
                     "Quaternion": [
                         0,
-                        0.94183731079101563,
+                        0.94183731079101562,
                         0,
                         0.33606910705566406
                     ],
@@ -183,13 +183,13 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.62939453125e-06,
-                        57.959732055664063,
-                        -52.690650939941406
+                        3.814697265625e-05,
+                        46.120803833007812,
+                        -41.927986145019531
                     ],
                     "Quaternion": [
                         0.34202015399932861,
-                        -1.5857475332836657e-08,
+                        -2.7070434782672237e-08,
                         1.5857482438264014e-08,
                         0.93969273567199707
                     ],
@@ -210,12 +210,12 @@
                     "Vertical Fov": 0.42143398523330688,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -90.548309326171875,
-                        57.959732055664063,
-                        140.78971862792969
+                        -83.734916687011719,
+                        46.120803833007812,
+                        132.45793151855469
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": -8,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -316,7 +316,7 @@
                     "Position": [
                         -60.124015808105469,
                         2.2085428237915039,
-                        110.69400024414063
+                        110.69400024414062
                     ],
                     "Quaternion": [
                         0,
@@ -346,6 +346,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
+                    "fActivation": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -390,7 +391,7 @@
                         0,
                         -0.17417608201503754,
                         0,
-                        0.98471450805664063
+                        0.98471450805664062
                     ],
                     "RotationEditor": [
                         -0,
@@ -616,7 +617,7 @@
                     "Position": [
                         -15.136451721191406,
                         32.360797882080078,
-                        -2.4103469848632813
+                        -2.4103469848632812
                     ],
                     "Quaternion": [
                         0,
@@ -781,7 +782,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -47.173110961914063,
+                        -47.173110961914062,
                         1.1693505048751831,
                         26.811119079589844
                     ],
@@ -1590,7 +1591,7 @@
                     "Position": [
                         0.14367350935935974,
                         3.3142125606536865,
-                        -67.793533325195313
+                        -67.793533325195312
                     ],
                     "Quaternion": [
                         0,
@@ -1717,7 +1718,7 @@
                     "Active": true,
                     "Position": [
                         48.314388275146484,
-                        2.7870254516601563,
+                        2.7870254516601562,
                         -21.273065567016602
                     ],
                     "Quaternion": [
@@ -2548,7 +2549,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -7.3946304321289063,
+                        -7.3946304321289062,
                         5.3251314163208008,
                         85.330413818359375
                     ],
@@ -2740,7 +2741,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -68.188247680664063,
+                        -68.188247680664062,
                         6.4703893661499023,
                         90.2564697265625
                     ],
@@ -3413,6 +3414,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": false,
+                    "fActivation": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -3643,7 +3645,7 @@
                     "Position": [
                         150.14437866210938,
                         -0.70813846588134766,
-                        -78.662551879882813
+                        -78.662551879882812
                     ],
                     "Quaternion": [
                         0,
@@ -3810,7 +3812,7 @@
                     "Position": [
                         -12.354125022888184,
                         1.3527688980102539,
-                        -52.897659301757813
+                        -52.897659301757812
                     ],
                     "Quaternion": [
                         0,
@@ -3904,6 +3906,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
+                    "fActivation": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -4036,6 +4039,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
+                    "fActivation": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -4168,6 +4172,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
+                    "fActivation": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -5717,7 +5722,7 @@
                     "Position": [
                         -1.9580674171447754,
                         0,
-                        -54.288284301757813
+                        -54.288284301757812
                     ],
                     "Quaternion": [
                         0,
@@ -5973,7 +5978,7 @@
                     "Position": [
                         -8.2231903076171875,
                         -0.64049720764160156,
-                        -4.1796951293945313
+                        -4.1796951293945312
                     ],
                     "Quaternion": [
                         -0.0024560873862355947,
@@ -6230,7 +6235,7 @@
                     "Active": true,
                     "Position": [
                         -5.7637338638305664,
-                        -0.70209121704101563,
+                        -0.70209121704101562,
                         0
                     ],
                     "Quaternion": [
@@ -6421,7 +6426,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        18.464736938476563,
+                        18.464736938476562,
                         0.2500002384185791,
                         -43.098320007324219
                     ],
@@ -6549,7 +6554,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -20.946060180664063,
+                        -20.946060180664062,
                         -0.45793700218200684,
                         14.809622764587402
                     ],
@@ -7085,7 +7090,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 383220592,
+                    "pointer": 33598240,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -7987,6 +7992,7 @@
                     "Gravity": false,
                     "Kinematic": false,
                     "Trigger": true,
+                    "fActivation": false,
                     "Mass": 0,
                     "Friction": 1,
                     "Restitution": 0.20000000298023224,
@@ -9524,7 +9530,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -9593,7 +9599,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10250,7 +10256,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10319,7 +10325,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10388,7 +10394,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -13582,7 +13588,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 548449232,
+                    "pointer": 492501368,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -14481,7 +14487,7 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        -41.492507934570313,
+                        -41.492507934570312,
                         -3.608570114010945e-05,
                         56.977767944335938
                     ],
@@ -14678,7 +14684,7 @@
                     "Position": [
                         12.414186477661133,
                         0,
-                        -17.509658813476563
+                        -17.509658813476562
                     ],
                     "Quaternion": [
                         0,
@@ -14833,7 +14839,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -14966,7 +14972,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        5.5999999046325684,
+                        -35.400001525878906,
                         -4.9000000953674316
                     ],
                     "Scale": [
@@ -15094,7 +15100,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15225,7 +15231,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15356,7 +15362,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15487,7 +15493,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1857,
+                        1877,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15618,7 +15624,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15682,7 +15688,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15746,7 +15752,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15810,7 +15816,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -15938,7 +15944,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -171.5,
+                        -191.5,
                         2.5999999046325684
                     ],
                     "Scale": [
@@ -16002,7 +16008,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1848.5,
+                        1868.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16066,7 +16072,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1841.5,
+                        1861.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16129,7 +16135,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -377.5,
+                        3.1632928739203712e+38,
                         0,
                         -11.899999618530273
                     ],
@@ -16194,7 +16200,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1907,
+                        1927,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16262,7 +16268,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -378,
+                        3.1632928739203712e+38,
                         0,
                         -26.399999618530273
                     ],
@@ -16391,7 +16397,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        264.5,
+                        284.5,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -16650,7 +16656,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        3,
+                        -38,
                         -5
                     ],
                     "Scale": [
@@ -16714,7 +16720,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        9.1000003814697266,
+                        -31.899999618530273,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -16779,7 +16785,7 @@
                     "Position": [
                         0,
                         0,
-                        0
+                        -11.899999618530273
                     ],
                     "Scale": [
                         0.20333333313465118,
@@ -16842,7 +16848,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        10,
+                        -31,
                         -11.899999618530273
                     ],
                     "Scale": [
@@ -16906,7 +16912,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -160,
+                        -180,
                         -15
                     ],
                     "Scale": [
@@ -16970,7 +16976,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1938.5,
+                        1958.5,
                         -15
                     ],
                     "Scale": [
@@ -17034,7 +17040,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        1938.5,
+                        1958.5,
                         -15
                     ],
                     "Scale": [
@@ -17098,7 +17104,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -4.5,
+                        36.5,
                         -15
                     ],
                     "Scale": [
@@ -17162,7 +17168,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        10.5,
+                        0,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17664,7 +17670,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        258,
+                        278,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17733,7 +17739,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        108,
+                        128,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17802,7 +17808,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -108,
+                        -128,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17871,7 +17877,7 @@
                     "Type": 19,
                     "Position": [
                         0,
-                        -258,
+                        -278,
                         -10.399999618530273
                     ],
                     "Scale": [
@@ -17920,6 +17926,134 @@
                     "textColor.g": 1,
                     "textColor.b": 1,
                     "TextFile": "-"
+                }
+            ]
+        },
+        {
+            "UUID": 794179230,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityLeft",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        1.5816464369601856e+38,
+                        -192.5,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.15000000596046448,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 90,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_Left.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
+                }
+            ]
+        },
+        {
+            "UUID": 720454653,
+            "Parent UUID": 1906815624,
+            "Name": "AbilityRight",
+            "Active": true,
+            "Static": true,
+            "PrefabID": true,
+            "Prefab Path": "None",
+            "tag": "Untagged",
+            "layer": "Default",
+            "Is Interactuable": true,
+            "Components": [
+                {
+                    "Active": true,
+                    "Type": 19,
+                    "Position": [
+                        1.5816464369601856e+38,
+                        -193,
+                        -10.399999618530273
+                    ],
+                    "Scale": [
+                        0.083333335816860199,
+                        0.15000000596046448,
+                        1
+                    ],
+                    "rotationEuler": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "buttonWidth": 50,
+                    "buttonHeight": 90,
+                    "lastButtonWidth": 1343,
+                    "lastButtonHeight": 693.5,
+                    "MoveOnResizeX": true,
+                    "MoveOnResizeY": true
+                },
+                {
+                    "Type": 2,
+                    "Diffuse Path": "Assets\/Resources\/UI\/ui_Right.png",
+                    "Normal Map Path": "Assets\/Resources\/white.png",
+                    "Active": true,
+                    "Shader Assets Path": "Assets\/Resources\/Shaders\/default.shader",
+                    "Cast Shadows": true,
+                    "Interactuable Color": [
+                        0,
+                        0.30000001192092896,
+                        0
+                    ],
+                    "Opacity": 1,
+                    "Emissive Enabled": false,
+                    "Emissive Color": [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "Type": 13,
+                    "alpha": 1,
+                    "numOfAnimations": 0
                 }
             ]
         }

@@ -101,28 +101,28 @@ bool Scene::Update(float dt)
 		if (root->GetChilds()[i]->active)
 			root->GetChilds()[i]->Update(dt);
 
-	if (resetQuadtree)
-	{
-		qTree.Clear();
-		qTree.Create(AABB(float3(-400, -50, -400), float3(400, 50, 400)));
-		std::stack<GameObject*> objects;
+	//if (resetQuadtree)
+	//{
+	//	qTree.Clear();
+	//	qTree.Create(AABB(float3(-400, -50, -400), float3(400, 50, 400)));
+	//	std::stack<GameObject*> objects;
 
-		for (int i = 0; i < root->GetChilds().size(); ++i)
-			objects.push(root->GetChilds()[i]);
+	//	for (int i = 0; i < root->GetChilds().size(); ++i)
+	//		objects.push(root->GetChilds()[i]);
 
-		while (!objects.empty())
-		{
-			GameObject* go = objects.top();
-			objects.pop();
+	//	while (!objects.empty())
+	//	{
+	//		GameObject* go = objects.top();
+	//		objects.pop();
 
-			qTree.Insert(go);
+	//		qTree.Insert(go);
 
-			for (int i = 0; i < go->GetChilds().size(); ++i)
-				objects.push(go->GetChilds()[i]);
-		}
+	//		for (int i = 0; i < go->GetChilds().size(); ++i)
+	//			objects.push(go->GetChilds()[i]);
+	//	}
 
-		resetQuadtree = false;
-	}
+	//	resetQuadtree = false;
+	//}
 
 	return true;
 }
@@ -559,4 +559,10 @@ void Scene::DuplicateGO(GameObject* go, GameObject* parent)
 		DuplicateGO(go->GetChilds()[i], gameObject);
 	}
 	//gameObject->SetAABB(go->GetAABB());
+}
+
+void Scene::RedistributeQuadtree(GameObject* go)
+{
+	qTree.Remove(go);
+	qTree.Insert(go);
 }
