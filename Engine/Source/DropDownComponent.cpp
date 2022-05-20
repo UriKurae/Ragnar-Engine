@@ -168,7 +168,6 @@ bool DropDownComponent::Update(float dt)
 			SetFocusedButtons();
 			for (int a = 0; a < buttonsArray.size(); a++)
 			{
-
 				ButtonComponent* auxiliarButton = (ButtonComponent*)buttonsArray[a]->GetComponent<ButtonComponent>();
 				ComponentTransform2D* auxiliarTransform = (ComponentTransform2D*)buttonsArray[a]->GetComponent<ComponentTransform2D>();
 

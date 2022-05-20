@@ -252,7 +252,7 @@ void GameObject::DrawEditor()
 Component* GameObject::CreateComponent(ComponentType type, const char* name)
 {
 	Component* component = nullptr;
-	TransformComponent* transform = nullptr;
+	TransformComponent* transform = GetComponent<TransformComponent>();
 	
 	switch (type)
 	{
@@ -261,7 +261,7 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		break;
 	case ComponentType::MESH_RENDERER:
 	{ // {} are necessary if you want declare variables into the case
-		component = new MeshComponent(this, GetComponent<TransformComponent>());
+		component = new MeshComponent(this, transform);
 
 		MeshComponent* meshComp = (MeshComponent*)component;
 		MaterialComponent* matComp = GetComponent<MaterialComponent>();
@@ -299,17 +299,17 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 		component = new TextComponent(this);
 		break;
 	case ComponentType::CAMERA:
-		component = new CameraComponent(this, GetComponent<TransformComponent>());
+		component = new CameraComponent(this, transform);
 		app->sceneManager->GetCurrentScene()->SetMainCamera((CameraComponent*)component);
 		break;
 	case ComponentType::AUDIO_SOURCE:
-		component = new AudioSourceComponent(this, GetComponent<TransformComponent>());
+		component = new AudioSourceComponent(this, transform);
 		break;
 	case ComponentType::AUDIO_LISTENER:
-		component = new ListenerComponent(this, GetComponent<TransformComponent>());
+		component = new ListenerComponent(this, transform);
 		break;
 	case ComponentType::AUDIO_REVERB_ZONE:
-		component = new AudioReverbZoneComponent(this, GetComponent<TransformComponent>());
+		component = new AudioReverbZoneComponent(this, transform);
 		break;
 	case ComponentType::INPUT_ACTION:
 		component = new InputActionComponent(this);
@@ -352,14 +352,12 @@ Component* GameObject::CreateComponent(ComponentType type, const char* name)
 	}		
 		break;
 	case ComponentType::LIGHT:
-		component = new ComponentLight();
+		component = new ComponentLight(this);
 		break;
 	case ComponentType::PARTICLE_SYSTEM:
-		transform = (TransformComponent*)GetComponent<TransformComponent>();
 		component = new ParticleSystemComponent(this, transform);
 		break;
 	case ComponentType::BILLBOARD:
-		transform = (TransformComponent*)GetComponent<TransformComponent>();
 		component = new BillboardParticleComponent(this, transform);
 		break;
 	case ComponentType::TRANFORM2D:
@@ -483,9 +481,11 @@ void GameObject::SetNewAABB()
 		OBB newObb = children[i]->GetAABB().ToOBB();
 		globalAabb.Enclose(newObb);
 	}
-	if (GetComponent<MeshComponent>() && GetComponent<MeshComponent>()->GetMesh())
+
+	MeshComponent* mesh = GetComponent<MeshComponent>();
+	if (mesh && mesh->GetMesh())
 	{
-		OBB newObb = GetComponent<MeshComponent>()->GetLocalAABB().ToOBB();
+		OBB newObb = mesh->GetLocalAABB().ToOBB();
 		newObb.Transform(GetComponent<TransformComponent>()->GetGlobalTransform());
 		globalAabb.Enclose(newObb);
 	}
