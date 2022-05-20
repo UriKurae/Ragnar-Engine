@@ -65,6 +65,11 @@ bool GameObject::Update(float dt)
 
 	for (int i = 0; i < components.size() && components[i]->active; ++i)
 	{
+		if (app->sceneManager->newSceneLoaded && components[i]->type == ComponentType::SCRIPT)
+		{
+			components[i]->Update(dt);
+		}
+
 		if (components[i]->type != ComponentType::SCRIPT)
 		{
 			components[i]->Update(dt);

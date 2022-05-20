@@ -358,7 +358,7 @@ public class Level_1 : RagnarComponent
         /////////////////////////////////////////////////
 
         GameObject pm = InternalCalls.InstancePrefab("PlayerManager");
-        pm.GetComponent<PlayerManager>().SetCharacters(characters);
+        pm.GetComponent<PlayerManager>().characters = characters;
         GameObject em = InternalCalls.InstancePrefab("EnemyManager");
         em.GetComponent<EnemyManager>().enemies = enemies;
 
