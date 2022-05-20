@@ -53,7 +53,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "Level_1",
-                    "pointer": 217544944,
+                    "pointer": 33595360,
                     "type": 4,
                     "componentTable": 0,
                     "characters": 0,
@@ -183,15 +183,15 @@
                     "Type": 0,
                     "Active": true,
                     "Position": [
-                        0,
-                        55,
-                        -50
+                        3.814697265625e-05,
+                        46.120803833007812,
+                        -41.927986145019531
                     ],
                     "Quaternion": [
-                        0.34202012419700623,
-                        0,
-                        0,
-                        0.93969261646270752
+                        0.34202015399932861,
+                        -2.7070434782672237e-08,
+                        1.5857482438264014e-08,
+                        0.93969273567199707
                     ],
                     "RotationEditor": [
                         0.78539824485778809,
@@ -210,12 +210,12 @@
                     "Vertical Fov": 0.42143398523330688,
                     "Horizontal Fov": 0.78539818525314331,
                     "Camera Pos": [
-                        -88.844970703125,
-                        55,
-                        138.70677185058594
+                        -83.734916687011719,
+                        46.120803833007812,
+                        132.45793151855469
                     ],
                     "Type": 3,
-                    "Zoom": -20,
+                    "Zoom": -8,
                     "Zoom Min": -20,
                     "Zoom Max": 30,
                     "Zoom Speed": 1,
@@ -7090,7 +7090,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "pauseMenuButton",
-                    "pointer": 217545088,
+                    "pointer": 33598240,
                     "type": 4,
                     "componentTable": 0
                 }
@@ -9530,7 +9530,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESOLUTION\n\n\nFULLSCREEN\n\n\nV SYNC\n\n\nSHADOWS\n\n\nLANGUAGE",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -9599,7 +9599,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "GENERAL SOUND\n\n\n\nMUSIC SOUND\n\n\n\nFX SOUND\n\n\n\nVOICES SOUND",
                     "fontPath": "Library\/Fonts\/Dune_Rise.otf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10256,7 +10256,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "PAUSE\n\nSELECT\nCHAR1\n\nSELECT\nCHAR2\n\nSELECT\nCHAR3\n\nMOVE\nCHAR\n\nINTERACT\n\nCROUCH\n\nMOVE\nCAMERA\n\nROTATE\nCAMERA\n\nZOOM\nCAMERA",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10325,7 +10325,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "RESET\nCAMERA\n\nSAVE\nPOINT\n\nLOAD\nPOINT\n\nSELECT\nSKILL 1\n\nSELECT\nSKILL 2\n\nSELECT\nSKILL3\n\nSELECT\nSKILL4\n\nSELECT\nSKILL5\n\nCANCEL\nSKILL",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -10394,7 +10394,7 @@
                 },
                 {
                     "Type": 16,
-                    "buttonText": "Text",
+                    "buttonText": "USE\nSKILL\n\nACTIVE\nQUESTS\n\nSHOW\nCONE",
                     "fontPath": "Library\/Fonts\/Montserrat-Bold.ttf",
                     "fontScale": 0.5,
                     "textColor.r": 1,
@@ -13588,7 +13588,7 @@
                 {
                     "Type": 4,
                     "ScriptName": "QuestSystem",
-                    "pointer": 217548112,
+                    "pointer": 492501368,
                     "type": 4,
                     "componentTable": 0,
                     "questList": 0,
@@ -16135,7 +16135,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
+                        3.1632928739203712e+38,
                         0,
                         -11.899999618530273
                     ],
@@ -16268,7 +16268,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        1.5816464369601856e+38,
+                        3.1632928739203712e+38,
                         0,
                         -26.399999618530273
                     ],
@@ -16785,7 +16785,7 @@
                     "Position": [
                         0,
                         0,
-                        0
+                        -11.899999618530273
                     ],
                     "Scale": [
                         0.20333333313465118,
@@ -17945,7 +17945,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        -246,
+                        1.5816464369601856e+38,
                         -192.5,
                         -10.399999618530273
                     ],
@@ -18009,7 +18009,7 @@
                     "Active": true,
                     "Type": 19,
                     "Position": [
-                        240.5,
+                        1.5816464369601856e+38,
                         -193,
                         -10.399999618530273
                     ],
