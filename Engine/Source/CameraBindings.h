@@ -62,13 +62,14 @@ MonoObject* HitToTag(MonoObject* initPos, MonoObject* endPos, MonoObject* tag)
 	return nullptr;
 }
 
-int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* _players, int playersSize, MonoArray* _colliders, int collidersSize, float time)
+int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int rays, int radius, MonoArray* _players, int playersSize, MonoString* tagName, float time)
 {
 	float3 pointA = app->moduleMono->UnboxVector(initPos);
 	float3 forward = app->moduleMono->UnboxVector(_forward);
+	float3 forwardAux = forward;
 	std::vector<GameObject*> players = app->moduleMono->UnboxArray(_players, playersSize);
-	std::vector<GameObject*> colliders = app->moduleMono->UnboxArray(_colliders, collidersSize);
-	std::set<GameObject*> gameObjects(colliders.begin(), colliders.end());
+	char* monoToChar = mono_string_to_utf8(tagName);
+	std::string tag = monoToChar;
 
 	float angle = _angle * DEGTORAD;
 	forward = forward * float3x3::RotateY((360-(_angle/2)) * DEGTORAD);
@@ -78,10 +79,25 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 	float3 hit = float3::zero;
 
 	ConeTriangle coneTriangle;
+	
+	std::stack<QuadtreeNode*> nodes;
+	std::set<GameObject*> gameObjects;
+	float3 arrayPos[] = { forward * radius, forwardAux * float3x3::RotateY(angle / 2) * radius };
+
+	for (size_t i = 0; i < 2; i++)
+	{
+		LineSegment ray(pointA, pointA + arrayPos[i]);
+		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectNodes(nodes, ray);
+		app->sceneManager->GetCurrentScene()->GetQuadtree().CollectGoByTag(gameObjects, nodes, tag);
+		std::stack<QuadtreeNode*>().swap(nodes);
+	}
+
 	for (int i = 0; i < rays; i++)
 	{
 		LineSegment ray(pointA, pointA + (forward * float3x3::RotateY(angle/rays * i) * radius));
-		app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
+		if (!gameObjects.empty())
+			app->camera->ThrowRayCast(gameObjects, ray, triangleMap, hit);
+		else hit = ray.b;
 		
 		coneTriangle.conePosition = pointA;
 		coneTriangle.coneColor = { time, 1-time, 0, 0.3 };
@@ -109,13 +125,16 @@ int PerceptionCone(MonoObject* initPos, MonoObject* _forward, int _angle, int ra
 		Triangle t(vertex[i].conePosition, vertex[i+1].conePosition, vertex[i+2].conePosition);
 		for (size_t j = 0; j < players.size(); j++)
 		{
-			if (players.at(j)->GetComponent<TransformComponent>()->GetGlobalPosition().Distance(pointA) < radius + 0.5) {
+			TransformComponent* transform = players.at(j)->GetComponent<TransformComponent>();
+			if (transform->GetGlobalPosition().Distance(pointA) < radius + 0.5) 
+			{
 				if (t.Intersects(players.at(j)->GetOOB()))
 				{
-					vec bottomPoint = players.at(j)->GetComponent<TransformComponent>()->GetGlobalPosition();
+					vec bottomPoint = transform->GetGlobalPosition();
 					vec topPoint = bottomPoint;
 					topPoint.y += 1;
-					if (t.Intersects(Capsule(bottomPoint, topPoint, 0.60f))) {
+					if (t.Intersects(Capsule(bottomPoint, topPoint, 0.60f))) 
+					{
 						ret = j;
 						break;
 					}

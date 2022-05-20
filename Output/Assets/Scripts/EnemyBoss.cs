@@ -3,6 +3,13 @@ using RagnarEngine;
 
 public class EnemyBoss : RagnarComponent
 {
+    // Components
+    private Animation animationComponent;
+    private AudioSource audioComponent;
+    private Rigidbody rb;
+
+    ////////
+    
     public int velocity = 1000;
 
     public NavAgent agents;
@@ -51,7 +58,13 @@ public class EnemyBoss : RagnarComponent
         offset = gameObject.GetSizeAABB();
 
         agents = gameObject.GetComponent<NavAgent>();
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+
+        // Get components
+        animationComponent = gameObject.GetComponent<Animation>();
+        audioComponent = gameObject.GetComponent<AudioSource>();
+        rb = gameObject.GetComponent<Rigidbody>();
+
+        animationComponent.PlayAnimation("Idle");
 
         waypoints[0] = GameObject.Find("23");
         waypoints[1] = GameObject.Find("24");
@@ -104,7 +117,7 @@ public class EnemyBoss : RagnarComponent
                     deathTimer -= Time.deltaTime;
                     if (deathTimer < 0)
                     {
-                        gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+                        audioComponent.PlayClip("EBASIC_SCREAM");
                         deathTimer = -1f;
                         pendingToDelete = true;
                     }
@@ -159,21 +172,21 @@ public class EnemyBoss : RagnarComponent
             if (other.gameObject.name == "Knife")
             {
                 deathTimer = 4f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                animationComponent.PlayAnimation("Dying");
 
                 // WHEN RUNES FUNCTIONAL
                 // deathTimer = 0f;
             }
             if (other.gameObject.name == "StunnerShot")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_BULLETHIT");
+                audioComponent.PlayClip("EBASIC_BULLETHIT");
                 deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                animationComponent.PlayAnimation("Dying");
             }
             if (other.gameObject.name == "HunterSeeker")
             {
                 deathTimer = 5f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                animationComponent.PlayAnimation("Dying");
 
                 // WHEN RUNES FUNCTIONAL
                 // EXPLOSION AREA
@@ -205,7 +218,7 @@ public class EnemyBoss : RagnarComponent
             if (other.gameObject.name == "SpiceGrenade")
             {
                 // STUN (BLIND)
-                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+                audioComponent.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
             }
 
@@ -213,9 +226,9 @@ public class EnemyBoss : RagnarComponent
             //// Stilgar =====================================
             if (other.gameObject.name == "SwordSlash")
             {
-                gameObject.GetComponent<AudioSource>().PlayClip("WPN_SWORDHIT");
+                audioComponent.PlayClip("WPN_SWORDHIT");
                 deathTimer = 2f;
-                gameObject.GetComponent<Animation>().PlayAnimation("Dying");
+                animationComponent.PlayAnimation("Dying");
             }
             if (other.gameObject.name == "Whistle")
             {
@@ -230,7 +243,7 @@ public class EnemyBoss : RagnarComponent
             if (other.gameObject.name == "Trap")
             {
                 // STUN (BLIND)
-                gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SCREAM");
+                audioComponent.PlayClip("EBASIC_SCREAM");
                 Stun(5f);
             }
         }
@@ -242,7 +255,7 @@ public class EnemyBoss : RagnarComponent
         Vector3 enemyForward = gameObject.transform.forward;
         Vector3 initPos = new Vector3(enemyPos.x + (enemyForward.x * offset.x * 0.6f), enemyPos.y + 0.1f, enemyPos.z + (enemyForward.z * offset.z * 0.6f));
 
-        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 8, players, players.Length, colliders, colliders.Length, Time.deltaTime);
+        index = RayCast.PerceptionCone(initPos, enemyForward, 60, 10, 8, players, players.Length, "Collider", Time.deltaTime);
         if (players[index].GetComponent<Player>().invisible || players[index].GetComponent<Player>().dead) return false;
         return (index == -1) ? false : true;
     }
@@ -259,13 +272,14 @@ public class EnemyBoss : RagnarComponent
         if (canShoot)
         {
             //TODO_AUDIO
-            gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_SHOTGUN");
+            audioComponent.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 4f;
             InternalCalls.InstancePrefab("EnemyBullet", true);
-            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().enemy = gameObject;
-            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().index = index;
-            GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>().offset = offset;
+            EnemyBullet bulletScript = GameObject.Find("EnemyBullet").GetComponent<EnemyBullet>();
+            bulletScript.enemy = gameObject;
+            bulletScript.index = index;
+            bulletScript.offset = offset;
         }
 
         if (!canShoot)
@@ -295,7 +309,7 @@ public class EnemyBoss : RagnarComponent
     public void GotoNextPoint()
     {
         //gameObject.GetComponent<AudioSource>().PlayClip("EBASIC_WALKSAND");
-        gameObject.GetComponent<Animation>().PlayAnimation("Walk");
+        animationComponent.PlayAnimation("Walk");
         agents.CalculatePath(waypoints[destPoint].transform.globalPosition);
         destPoint = (destPoint + 1) % waypoints.Length;
     }
@@ -311,7 +325,7 @@ public class EnemyBoss : RagnarComponent
         {
             if (stoppedTime >= 0)
             {
-                gameObject.GetComponent<AudioSource>().StopCurrentClip("EBASIC_WALKSAND");
+               audioComponent.StopCurrentClip("EBASIC_WALKSAND");
                 stoppedTime -= Time.deltaTime;
                 if (stoppedTime < 0)
                 {
@@ -340,15 +354,15 @@ public class EnemyBoss : RagnarComponent
 
         Quaternion newRot = new Quaternion(0, (float)(1 * Math.Sin(angle / 2)), 0, (float)Math.Cos(angle / 2));
 
-        gameObject.GetComponent<Rigidbody>().SetBodyRotation(newRot);
+        rb.SetBodyRotation(newRot);
 
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        animationComponent.PlayAnimation("Idle");
     }
 
     public void Stun(float timeStunned)
     {
         stunned = true;
         stunnedTimer = timeStunned;
-        gameObject.GetComponent<Animation>().PlayAnimation("Idle");
+        animationComponent.PlayAnimation("Idle");
     }
 }
