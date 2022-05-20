@@ -429,7 +429,7 @@ MonoObject* InstancePrefab(MonoObject* name, MonoObject* position, bool begin = 
 	GameObject* go = PrefabManager::GetInstance()->LoadPrefab(path.c_str(), begin);
 
 	float3 pos = app->moduleMono->UnboxVector(position);
-	go->GetComponent<TransformComponent>()->SetPosition(pos);
+	go->GetComponent<TransformComponent>()->SetGlobalPosition(pos);
 	if (RigidBodyComponent* rb = go->GetComponent<RigidBodyComponent>())
 		rb->GetBody()->getWorldTransform().setOrigin(pos);
 

@@ -388,9 +388,13 @@ public class BasicEnemy : RagnarComponent
             audioComponent.PlayClip("EBASIC_SHOTGUN");
             canShoot = false;
             shootCooldown = 1f;
+
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
-            EnemyBullet enemyBullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true).GetComponent<EnemyBullet>();
+            
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
             enemyBullet.enemy = gameObject;
             enemyBullet.index = index;
             enemyBullet.offset = offset;

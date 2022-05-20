@@ -340,7 +340,10 @@ public class UndistractableEnemy : RagnarComponent
             shootCooldown = 4f;
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
-            EnemyBullet bulletScript = InternalCalls.InstancePrefab("EnemyBullet", pos, true).GetComponent<EnemyBullet>();
+
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.enemy = gameObject;
             bulletScript.index = index;
             bulletScript.offset = offset;

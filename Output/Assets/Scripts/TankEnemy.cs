@@ -334,10 +334,13 @@ public class TankEnemy : RagnarComponent
             shootCooldown = 4f;
             Vector3 pos = gameObject.transform.globalPosition;
             pos.y += 0.5f;
-            EnemyBullet enemyBullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true).GetComponent<EnemyBullet>();
-            bulletScript.enemy = gameObject;
-            bulletScript.index = index;
-            bulletScript.offset = offset;
+
+            GameObject bullet = InternalCalls.InstancePrefab("EnemyBullet", pos, true);            
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
+            bullet.GetComponent<Rigidbody>().IgnoreCollision(gameObject, true);
+            enemyBullet.enemy = gameObject;
+            enemyBullet.index = index;
+            enemyBullet.offset = offset;
         }
 
         if (!canShoot)
